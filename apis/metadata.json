@@ -26,7 +26,10 @@
     "name": "Budgets"
   },
   "clouddirectory": {
-    "name": "CloudDirectory"
+    "name": "CloudDirectory",
+    "versions": [
+      "2016-05-10*"
+    ]
   },
   "cloudformation": {
     "name": "CloudFormation",
@@ -49,7 +52,10 @@
       "2016-08-20*",
       "2016-09-07*",
       "2016-09-29*",
-      "2016-11-25*"
+      "2016-11-25*",
+      "2017-03-25*",
+      "2017-10-30*",
+      "2018-06-18*"
     ],
     "cors": true
   },
@@ -86,7 +92,8 @@
     "cors": true
   },
   "codebuild": {
-    "name": "CodeBuild"
+    "name": "CodeBuild",
+    "cors": true
   },
   "codecommit": {
     "name": "CodeCommit",
@@ -349,6 +356,10 @@
     "dualstackAvailable": true,
     "cors": true
   },
+  "s3control": {
+    "name": "S3Control",
+    "dualstackAvailable": true
+  },
   "servicecatalog": {
     "name": "ServiceCatalog",
     "cors": true
@@ -424,7 +435,8 @@
   },
   "lexmodelbuildingservice": {
     "prefix": "lex-models",
-    "name": "LexModelBuildingService"
+    "name": "LexModelBuildingService",
+    "cors": true
   },
   "marketplaceentitlementservice": {
     "prefix": "entitlement.marketplace",
@@ -438,5 +450,229 @@
   },
   "dax": {
     "name": "DAX"
+  },
+  "migrationhub": {
+    "prefix": "AWSMigrationHub",
+    "name": "MigrationHub"
+  },
+  "cloudhsmv2": {
+    "name": "CloudHSMV2"
+  },
+  "glue": {
+    "name": "Glue"
+  },
+  "mobile": {
+    "name": "Mobile"
+  },
+  "pricing": {
+    "name": "Pricing",
+    "cors": true
+  },
+  "costexplorer": {
+    "prefix": "ce",
+    "name": "CostExplorer"
+  },
+  "mediaconvert": {
+    "name": "MediaConvert"
+  },
+  "medialive": {
+    "name": "MediaLive"
+  },
+  "mediapackage": {
+    "name": "MediaPackage"
+  },
+  "mediastore": {
+    "name": "MediaStore"
+  },
+  "mediastoredata": {
+    "prefix": "mediastore-data",
+    "name": "MediaStoreData",
+    "cors": true
+  },
+  "appsync": {
+    "name": "AppSync"
+  },
+  "guardduty": {
+    "name": "GuardDuty"
+  },
+  "mq": {
+    "name": "MQ"
+  },
+  "comprehend": {
+    "name": "Comprehend",
+    "cors": true
+  },
+  "iotjobsdataplane": {
+    "prefix": "iot-jobs-data",
+    "name": "IoTJobsDataPlane"
+  },
+  "kinesisvideoarchivedmedia": {
+    "prefix": "kinesis-video-archived-media",
+    "name": "KinesisVideoArchivedMedia",
+    "cors": true
+  },
+  "kinesisvideomedia": {
+    "prefix": "kinesis-video-media",
+    "name": "KinesisVideoMedia",
+    "cors": true
+  },
+  "kinesisvideo": {
+    "name": "KinesisVideo",
+    "cors": true
+  },
+  "sagemakerruntime": {
+    "prefix": "runtime.sagemaker",
+    "name": "SageMakerRuntime"
+  },
+  "sagemaker": {
+    "name": "SageMaker"
+  },
+  "translate": {
+    "name": "Translate",
+    "cors": true
+  },
+  "resourcegroups": {
+    "prefix": "resource-groups",
+    "name": "ResourceGroups"
+  },
+  "alexaforbusiness": {
+    "name": "AlexaForBusiness"
+  },
+  "cloud9": {
+    "name": "Cloud9"
+  },
+  "serverlessapplicationrepository": {
+    "prefix": "serverlessrepo",
+    "name": "ServerlessApplicationRepository"
+  },
+  "servicediscovery": {
+    "name": "ServiceDiscovery"
+  },
+  "workmail": {
+    "name": "WorkMail"
+  },
+  "autoscalingplans": {
+    "prefix": "autoscaling-plans",
+    "name": "AutoScalingPlans"
+  },
+  "transcribeservice": {
+    "prefix": "transcribe",
+    "name": "TranscribeService"
+  },
+  "connect": {
+    "name": "Connect"
+  },
+  "acmpca": {
+    "prefix": "acm-pca",
+    "name": "ACMPCA"
+  },
+  "fms": {
+    "name": "FMS"
+  },
+  "secretsmanager": {
+    "name": "SecretsManager",
+    "cors": true
+  },
+  "iotanalytics": {
+    "name": "IoTAnalytics"
+  },
+  "iot1clickdevicesservice": {
+    "prefix": "iot1click-devices",
+    "name": "IoT1ClickDevicesService"
+  },
+  "iot1clickprojects": {
+    "prefix": "iot1click-projects",
+    "name": "IoT1ClickProjects"
+  },
+  "pi": {
+    "name": "PI"
+  },
+  "neptune": {
+    "name": "Neptune"
+  },
+  "mediatailor": {
+    "name": "MediaTailor"
+  },
+  "eks": {
+    "name": "EKS"
+  },
+  "macie": {
+    "name": "Macie"
+  },
+  "dlm": {
+    "name": "DLM"
+  },
+  "signer": {
+    "name": "Signer"
+  },
+  "chime": {
+    "name": "Chime"
+  },
+  "pinpointemail": {
+    "prefix": "pinpoint-email",
+    "name": "PinpointEmail"
+  },
+  "ram": {
+    "name": "RAM"
+  },
+  "route53resolver": {
+    "name": "Route53Resolver"
+  },
+  "pinpointsmsvoice": {
+    "prefix": "sms-voice",
+    "name": "PinpointSMSVoice"
+  },
+  "quicksight": {
+    "name": "QuickSight"
+  },
+  "rdsdataservice": {
+    "prefix": "rds-data",
+    "name": "RDSDataService"
+  },
+  "amplify": {
+    "name": "Amplify"
+  },
+  "datasync": {
+    "name": "DataSync"
+  },
+  "robomaker": {
+    "name": "RoboMaker"
+  },
+  "transfer": {
+    "name": "Transfer"
+  },
+  "globalaccelerator": {
+    "name": "GlobalAccelerator"
+  },
+  "comprehendmedical": {
+    "name": "ComprehendMedical"
+  },
+  "kinesisanalyticsv2": {
+    "name": "KinesisAnalyticsV2"
+  },
+  "mediaconnect": {
+    "name": "MediaConnect"
+  },
+  "fsx": {
+    "name": "FSx"
+  },
+  "securityhub": {
+    "name": "SecurityHub"
+  },
+  "appmesh": {
+    "name": "AppMesh"
+  },
+  "licensemanager": {
+    "prefix": "license-manager",
+    "name": "LicenseManager"
+  },
+  "kafka": {
+    "name": "Kafka"
+  },
+  "apigatewaymanagementapi": {
+    "name": "ApiGatewayManagementApi"
+  },
+  "apigatewayv2": {
+    "name": "ApiGatewayV2"
   }
 }

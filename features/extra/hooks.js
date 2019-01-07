@@ -13,17 +13,28 @@ module.exports = function () {
   this.Given(/^I create a shared bucket$/, function(callback) {
     if (this.sharedBucket) return callback();
 
-    this.sharedBucket = this.uniqueName('aws-sdk-js-shared-integration');
+    var bucket = this.sharedBucket = this.uniqueName('aws-sdk-js-shared-integration');
     this.request('s3', 'createBucket', {Bucket: this.sharedBucket}, function(err) {
       this.cacheBucketName(this.sharedBucket);
-      if (err) callback.fail(err);
-      else callback();
+      if (err) {
+        callback.fail(err);
+      } else {
+        if (err) {
+          return callback(err);
+        }
+        this.s3.waitFor('bucketExists', {Bucket: bucket}, callback);
+      }
     });
   });
 
   this.Given(/^I create a bucket$/, function(callback) {
-    this.bucket = this.uniqueName('aws-sdk-js-integration');
-    this.request('s3', 'createBucket', {Bucket: this.bucket}, callback);
+    var bucket = this.bucket = this.uniqueName('aws-sdk-js-integration');
+    this.request('s3', 'createBucket', {Bucket: this.bucket}, function(err, data) {
+      if (err) {
+        return callback(err);
+      }
+      this.s3.waitFor('bucketExists', {Bucket: bucket}, callback);
+    });
   });
 
   this.When(/^I delete the bucket$/, function(callback) {

@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -36,11 +37,11 @@ declare class EMR extends Service {
    */
   addJobFlowSteps(callback?: (err: AWSError, data: EMR.Types.AddJobFlowStepsOutput) => void): Request<EMR.Types.AddJobFlowStepsOutput, AWSError>;
   /**
-   * Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tagging Amazon EMR Resources. 
+   * Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tag Clusters. 
    */
   addTags(params: EMR.Types.AddTagsInput, callback?: (err: AWSError, data: EMR.Types.AddTagsOutput) => void): Request<EMR.Types.AddTagsOutput, AWSError>;
   /**
-   * Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tagging Amazon EMR Resources. 
+   * Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tag Clusters. 
    */
   addTags(callback?: (err: AWSError, data: EMR.Types.AddTagsOutput) => void): Request<EMR.Types.AddTagsOutput, AWSError>;
   /**
@@ -68,11 +69,11 @@ declare class EMR extends Service {
    */
   deleteSecurityConfiguration(callback?: (err: AWSError, data: EMR.Types.DeleteSecurityConfigurationOutput) => void): Request<EMR.Types.DeleteSecurityConfigurationOutput, AWSError>;
   /**
-   * Provides cluster-level details including status, hardware and software configuration, VPC settings, and so on. For information about the cluster steps, see ListSteps.
+   * Provides cluster-level details including status, hardware and software configuration, VPC settings, and so on. 
    */
   describeCluster(params: EMR.Types.DescribeClusterInput, callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
   /**
-   * Provides cluster-level details including status, hardware and software configuration, VPC settings, and so on. For information about the cluster steps, see ListSteps.
+   * Provides cluster-level details including status, hardware and software configuration, VPC settings, and so on. 
    */
   describeCluster(callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
   /**
@@ -132,11 +133,11 @@ declare class EMR extends Service {
    */
   listInstanceGroups(callback?: (err: AWSError, data: EMR.Types.ListInstanceGroupsOutput) => void): Request<EMR.Types.ListInstanceGroupsOutput, AWSError>;
   /**
-   * Provides information about the cluster instances that Amazon EMR provisions on behalf of a user when it creates the cluster. For example, this operation indicates when the EC2 instances reach the Ready state, when instances become available to Amazon EMR to use for jobs, and the IP addresses for cluster instances, etc.
+   * Provides information for all active EC2 instances and EC2 instances terminated in the last 30 days, up to a maximum of 2,000. EC2 instances in any of the following states are considered active: AWAITING_FULFILLMENT, PROVISIONING, BOOTSTRAPPING, RUNNING.
    */
   listInstances(params: EMR.Types.ListInstancesInput, callback?: (err: AWSError, data: EMR.Types.ListInstancesOutput) => void): Request<EMR.Types.ListInstancesOutput, AWSError>;
   /**
-   * Provides information about the cluster instances that Amazon EMR provisions on behalf of a user when it creates the cluster. For example, this operation indicates when the EC2 instances reach the Ready state, when instances become available to Amazon EMR to use for jobs, and the IP addresses for cluster instances, etc.
+   * Provides information for all active EC2 instances and EC2 instances terminated in the last 30 days, up to a maximum of 2,000. EC2 instances in any of the following states are considered active: AWAITING_FULFILLMENT, PROVISIONING, BOOTSTRAPPING, RUNNING.
    */
   listInstances(callback?: (err: AWSError, data: EMR.Types.ListInstancesOutput) => void): Request<EMR.Types.ListInstancesOutput, AWSError>;
   /**
@@ -188,11 +189,11 @@ declare class EMR extends Service {
    */
   removeAutoScalingPolicy(callback?: (err: AWSError, data: EMR.Types.RemoveAutoScalingPolicyOutput) => void): Request<EMR.Types.RemoveAutoScalingPolicyOutput, AWSError>;
   /**
-   * Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tagging Amazon EMR Resources.  The following example removes the stack tag with value Prod from a cluster:
+   * Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tag Clusters.  The following example removes the stack tag with value Prod from a cluster:
    */
   removeTags(params: EMR.Types.RemoveTagsInput, callback?: (err: AWSError, data: EMR.Types.RemoveTagsOutput) => void): Request<EMR.Types.RemoveTagsOutput, AWSError>;
   /**
-   * Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tagging Amazon EMR Resources.  The following example removes the stack tag with value Prod from a cluster:
+   * Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tag Clusters.  The following example removes the stack tag with value Prod from a cluster:
    */
   removeTags(callback?: (err: AWSError, data: EMR.Types.RemoveTagsOutput) => void): Request<EMR.Types.RemoveTagsOutput, AWSError>;
   /**
@@ -230,7 +231,7 @@ declare class EMR extends Service {
   /**
    * Waits for the clusterRunning state by periodically calling the underlying EMR.describeClusteroperation every 30 seconds (at most 60 times).
    */
-  waitFor(state: "clusterRunning", params: EMR.Types.DescribeClusterInput, callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
+  waitFor(state: "clusterRunning", params: EMR.Types.DescribeClusterInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
   /**
    * Waits for the clusterRunning state by periodically calling the underlying EMR.describeClusteroperation every 30 seconds (at most 60 times).
    */
@@ -238,7 +239,7 @@ declare class EMR extends Service {
   /**
    * Waits for the stepComplete state by periodically calling the underlying EMR.describeStepoperation every 30 seconds (at most 60 times).
    */
-  waitFor(state: "stepComplete", params: EMR.Types.DescribeStepInput, callback?: (err: AWSError, data: EMR.Types.DescribeStepOutput) => void): Request<EMR.Types.DescribeStepOutput, AWSError>;
+  waitFor(state: "stepComplete", params: EMR.Types.DescribeStepInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EMR.Types.DescribeStepOutput) => void): Request<EMR.Types.DescribeStepOutput, AWSError>;
   /**
    * Waits for the stepComplete state by periodically calling the underlying EMR.describeStepoperation every 30 seconds (at most 60 times).
    */
@@ -246,7 +247,7 @@ declare class EMR extends Service {
   /**
    * Waits for the clusterTerminated state by periodically calling the underlying EMR.describeClusteroperation every 30 seconds (at most 60 times).
    */
-  waitFor(state: "clusterTerminated", params: EMR.Types.DescribeClusterInput, callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
+  waitFor(state: "clusterTerminated", params: EMR.Types.DescribeClusterInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
   /**
    * Waits for the clusterTerminated state by periodically calling the underlying EMR.describeClusteroperation every 30 seconds (at most 60 times).
    */
@@ -512,7 +513,7 @@ declare namespace EMR {
      */
     RunningAmiVersion?: String;
     /**
-     * The release label for the Amazon EMR release. For Amazon EMR 3.x and 2.x AMIs, use amiVersion instead instead of ReleaseLabel.
+     * The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form emr-x.x.x, where x.x.x is an Amazon EMR release version, for example, emr-5.14.0. For more information about Amazon EMR release versions and included application versions and features, see http://docs.aws.amazon.com/emr/latest/ReleaseGuide/. The release label applies only to Amazon EMR releases versions 4.x and later. Earlier versions use AmiVersion.
      */
     ReleaseLabel?: String;
     /**
@@ -544,11 +545,11 @@ declare namespace EMR {
      */
     NormalizedInstanceHours?: Integer;
     /**
-     * The public DNS name of the master EC2 instance.
+     * The DNS name of the master node. If the cluster is on a private subnet, this is the private DNS name. On a public subnet, this is the public DNS name.
      */
     MasterPublicDnsName?: String;
     /**
-     *  Amazon EMR releases 4.x or later.  The list of Configurations supplied to the EMR cluster.
+     * Applies only to Amazon EMR releases 4.x and later. The list of Configurations supplied to the EMR cluster.
      */
     Configurations?: ConfigurationList;
     /**
@@ -563,6 +564,22 @@ declare namespace EMR {
      * The way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. TERMINATE_AT_INSTANCE_HOUR indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. TERMINATE_AT_TASK_COMPLETION indicates that Amazon EMR blacklists and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. TERMINATE_AT_TASK_COMPLETION is available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.
      */
     ScaleDownBehavior?: ScaleDownBehavior;
+    /**
+     * Available only in Amazon EMR version 5.7.0 and later. The ID of a custom Amazon EBS-backed Linux AMI if the cluster uses a custom AMI.
+     */
+    CustomAmiId?: XmlStringMaxLen256;
+    /**
+     * The size, in GiB, of the EBS root device volume of the Linux AMI that is used for each EC2 instance. Available in Amazon EMR version 4.x and later.
+     */
+    EbsRootVolumeSize?: Integer;
+    /**
+     * Applies only when CustomAmiID is used. Specifies the type of updates that are applied from the Amazon Linux AMI package repositories when an instance boots using the AMI.
+     */
+    RepoUpgradeOnBoot?: RepoUpgradeOnBoot;
+    /**
+     * Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see Use Kerberos Authentication in the EMR Management Guide.
+     */
+    KerberosAttributes?: KerberosAttributes;
   }
   export type ClusterId = string;
   export type ClusterState = "STARTING"|"BOOTSTRAPPING"|"RUNNING"|"WAITING"|"TERMINATING"|"TERMINATED"|"TERMINATED_WITH_ERRORS"|string;
@@ -576,7 +593,7 @@ declare namespace EMR {
      */
     Message?: String;
   }
-  export type ClusterStateChangeReasonCode = "INTERNAL_ERROR"|"VALIDATION_ERROR"|"INSTANCE_FAILURE"|"BOOTSTRAP_FAILURE"|"USER_REQUEST"|"STEP_FAILURE"|"ALL_STEPS_COMPLETED"|string;
+  export type ClusterStateChangeReasonCode = "INTERNAL_ERROR"|"VALIDATION_ERROR"|"INSTANCE_FAILURE"|"INSTANCE_FLEET_TIMEOUT"|"BOOTSTRAP_FAILURE"|"USER_REQUEST"|"STEP_FAILURE"|"ALL_STEPS_COMPLETED"|string;
   export type ClusterStateList = ClusterState[];
   export interface ClusterStatus {
     /**
@@ -662,7 +679,7 @@ declare namespace EMR {
      */
     Name: XmlString;
     /**
-     * The security configuration details in JSON format.
+     * The security configuration details in JSON format. For JSON parameters and examples, see Use Security Configurations to Set Up Cluster Security in the Amazon EMR Management Guide.
      */
     SecurityConfiguration: String;
   }
@@ -812,7 +829,7 @@ declare namespace EMR {
      */
     Ec2SubnetId?: String;
     /**
-     * Applies to clusters configured with the instance fleets option. Specifies the unique identifier of one or more Amazon EC2 subnets in which to launch EC2 cluster instances. Amazon EMR chooses the EC2 subnet with the best performance and cost characteristics from among the list of RequestedEc2SubnetIds and launches all cluster instances within that subnet. If this value is not specified, and the account supports EC2-Classic networks, the cluster launches instances in the EC2-Classic network and uses Requested
+     * Applies to clusters configured with the instance fleets option. Specifies the unique identifier of one or more Amazon EC2 subnets in which to launch EC2 cluster instances. Subnets must exist within the same VPC. Amazon EMR chooses the EC2 subnet with the best fit from among the list of RequestedEc2SubnetIds, and then launches all cluster instances within that Subnet. If this value is not specified, and the account and region support EC2-Classic networks, the cluster launches instances in the EC2-Classic network and uses RequestedEc2AvailabilityZones instead of this setting. If EC2-Classic is not supported, and no Subnet is specified, Amazon EMR chooses the subnet for you. RequestedEc2SubnetIDs and RequestedEc2AvailabilityZones cannot be specified together.
      */
     RequestedEc2SubnetIds?: XmlStringMaxLen256List;
     /**
@@ -820,7 +837,7 @@ declare namespace EMR {
      */
     Ec2AvailabilityZone?: String;
     /**
-     * Applies to clusters configured with the The list of availability zones to choose from. The service will choose the availability zone with the best mix of available capacity and lowest cost to launch the cluster. If you do not specify this value, the cluster is launched in any availability zone that the customer account has access to.
+     * Applies to clusters configured with the instance fleets option. Specifies one or more Availability Zones in which to launch EC2 cluster instances when the EC2-Classic network configuration is supported. Amazon EMR chooses the Availability Zone with the best fit from among the list of RequestedEc2AvailabilityZones, and then launches all cluster instances within that Availability Zone. If you do not specify this value, Amazon EMR chooses the Availability Zone for you. RequestedEc2SubnetIDs and RequestedEc2AvailabilityZones cannot be specified together.
      */
     RequestedEc2AvailabilityZones?: XmlStringMaxLen256List;
     /**
@@ -848,8 +865,6 @@ declare namespace EMR {
      */
     AdditionalSlaveSecurityGroups?: StringList;
   }
-  export type ErrorCode = string;
-  export type ErrorMessage = string;
   export interface FailureDetails {
     /**
      * The reason for the step failure. In the case where the service cannot successfully determine the root cause of the failure, it returns "Unknown Error" as a reason.
@@ -1056,7 +1071,7 @@ declare namespace EMR {
   export type InstanceFleetStateChangeReasonCode = "INTERNAL_ERROR"|"VALIDATION_ERROR"|"INSTANCE_FAILURE"|"CLUSTER_TERMINATED"|string;
   export interface InstanceFleetStatus {
     /**
-     * A code representing the instance fleet status.
+     * A code representing the instance fleet status.    PROVISIONING—The instance fleet is provisioning EC2 resources and is not yet ready to run jobs.    BOOTSTRAPPING—EC2 instances and other resources have been provisioned and the bootstrap actions specified for the instances are underway.    RUNNING—EC2 instances and other resources are running. They are either executing jobs or waiting to execute jobs.    RESIZING—A resize operation is underway. EC2 instances are either being added or removed.    SUSPENDED—A resize operation could not complete. Existing EC2 instances are running, but instances can't be added or removed.    TERMINATING—The instance fleet is terminating EC2 instances.    TERMINATED—The instance fleet is no longer active, and all EC2 instances have been terminated.  
      */
     State?: InstanceFleetState;
     /**
@@ -1101,7 +1116,7 @@ declare namespace EMR {
      */
     InstanceGroupType?: InstanceGroupType;
     /**
-     * The bid price for each EC2 instance in the instance group when launching nodes as Spot Instances, expressed in USD.
+     * The maximum Spot price your are willing to pay for EC2 instances. An optional, nullable field that applies if the MarketType for the instance group is specified as SPOT. Specify the maximum spot price in USD. If the value is NULL and SPOT is specified, the maximum Spot price is set equal to the On-Demand price.
      */
     BidPrice?: String;
     /**
@@ -1155,7 +1170,7 @@ declare namespace EMR {
      */
     InstanceRole: InstanceRoleType;
     /**
-     * Bid price for each EC2 instance in the instance group when launching nodes as Spot Instances, expressed in USD.
+     * The maximum Spot price your are willing to pay for EC2 instances. An optional, nullable field that applies if the MarketType for the instance group is specified as SPOT. Specify the maximum spot price in USD. If the value is NULL and SPOT is specified, the maximum Spot price is set equal to the On-Demand price.
      */
     BidPrice?: XmlStringMaxLen256;
     /**
@@ -1198,7 +1213,7 @@ declare namespace EMR {
      */
     InstanceRole: InstanceRoleType;
     /**
-     * Bid price for EC2 Instances when launching nodes as Spot Instances, expressed in USD.
+     * The maximum Spot price your are willing to pay for EC2 instances. An optional, nullable field that applies if the MarketType for the instance group is specified as SPOT. Specified in USD. If the value is NULL and SPOT is specified, the maximum Spot price is set equal to the On-Demand price.
      */
     BidPrice?: XmlStringMaxLen256;
     /**
@@ -1368,7 +1383,7 @@ declare namespace EMR {
      */
     InstanceType: InstanceType;
     /**
-     * The number of units that a provisioned instance of this type provides toward fulfilling the target capacities defined in InstanceFleetConfig. This value is 1 for a master instance fleet, and must be greater than 0 for core and task instance fleets. 
+     * The number of units that a provisioned instance of this type provides toward fulfilling the target capacities defined in InstanceFleetConfig. This value is 1 for a master instance fleet, and must be 1 or greater for core and task instance fleets. Defaults to 1 if not specified. 
      */
     WeightedCapacity?: WholeNumber;
     /**
@@ -1376,7 +1391,7 @@ declare namespace EMR {
      */
     BidPrice?: XmlStringMaxLen256;
     /**
-     * The bid price, as a percentage of On-Demand price, for each EC2 Spot instance as defined by InstanceType. Expressed as a number between 0 and 1000 (for example, 20 specifies 20%). If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
+     * The bid price, as a percentage of On-Demand price, for each EC2 Spot instance as defined by InstanceType. Expressed as a number (for example, 20 specifies 20%). If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
      */
     BidPriceAsPercentageOfOnDemandPrice?: NonNegativeDouble;
     /**
@@ -1435,7 +1450,7 @@ declare namespace EMR {
      */
     LogUri?: XmlString;
     /**
-     * The version of the AMI used to initialize Amazon EC2 instances in the job flow. For a list of AMI versions currently supported by Amazon EMR, see AMI Versions Supported in EMR in the Amazon EMR Developer Guide. 
+     * Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR releases 4.0 and later, ReleaseLabel is used. To specify a custom AMI, use CustomAmiID.
      */
     AmiVersion?: XmlStringMaxLen256;
     /**
@@ -1546,7 +1561,7 @@ declare namespace EMR {
      */
     TerminationProtected?: Boolean;
     /**
-     * The Hadoop version for the cluster. Valid inputs are "0.18" (deprecated), "0.20" (deprecated), "0.20.205" (deprecated), "1.0.3", "2.2.0", or "2.4.0". If you do not set this value, the default of 0.18 is used, unless the AmiVersion parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.
+     * Applies only to Amazon EMR release versions earlier than 4.0. The Hadoop version for the cluster. Valid inputs are "0.18" (deprecated), "0.20" (deprecated), "0.20.205" (deprecated), "1.0.3", "2.2.0", or "2.4.0". If you do not set this value, the default of 0.18 is used, unless the AmiVersion parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.
      */
     HadoopVersion?: XmlStringMaxLen256;
     /**
@@ -1584,7 +1599,7 @@ declare namespace EMR {
      */
     MasterInstanceType: InstanceType;
     /**
-     * The DNS name of the master node.
+     * The DNS name of the master node. If the cluster is on a private subnet, this is the private DNS name. On a public subnet, this is the public DNS name.
      */
     MasterPublicDnsName?: XmlString;
     /**
@@ -1631,6 +1646,28 @@ declare namespace EMR {
      * The Hadoop version for the cluster.
      */
     HadoopVersion?: XmlStringMaxLen256;
+  }
+  export interface KerberosAttributes {
+    /**
+     * The name of the Kerberos realm to which all nodes in a cluster belong. For example, EC2.INTERNAL. 
+     */
+    Realm: XmlStringMaxLen256;
+    /**
+     * The password used within the cluster for the kadmin service on the cluster-dedicated KDC, which maintains Kerberos principals, password policies, and keytabs for the cluster.
+     */
+    KdcAdminPassword: XmlStringMaxLen256;
+    /**
+     * Required only when establishing a cross-realm trust with a KDC in a different realm. The cross-realm principal password, which must be identical across realms.
+     */
+    CrossRealmTrustPrincipalPassword?: XmlStringMaxLen256;
+    /**
+     * Required only when establishing a cross-realm trust with an Active Directory domain. A user with sufficient privileges to join resources to the domain.
+     */
+    ADDomainJoinUser?: XmlStringMaxLen256;
+    /**
+     * The Active Directory password for ADDomainJoinUser.
+     */
+    ADDomainJoinPassword?: XmlStringMaxLen256;
   }
   export interface KeyValue {
     /**
@@ -1912,6 +1949,7 @@ declare namespace EMR {
   }
   export interface RemoveTagsOutput {
   }
+  export type RepoUpgradeOnBoot = "SECURITY"|"NONE"|string;
   export type ResourceId = string;
   export interface RunJobFlowInput {
     /**
@@ -1927,11 +1965,11 @@ declare namespace EMR {
      */
     AdditionalInfo?: XmlString;
     /**
-     *  For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use ReleaseLabel.  The version of the Amazon Machine Image (AMI) to use when launching Amazon EC2 instances in the job flow. The following values are valid:   The version number of the AMI to use, for example, "2.0."   If the AMI supports multiple versions of Hadoop (for example, AMI 1.0 supports both Hadoop 0.18 and 0.20) you can use the JobFlowInstancesConfig HadoopVersion parameter to modify the version of Hadoop from the defaults shown above. For details about the AMI versions currently supported by Amazon Elastic MapReduce, see AMI Versions Supported in Elastic MapReduce in the Amazon Elastic MapReduce Developer Guide.   Previously, the EMR AMI version API parameter options allowed you to use latest for the latest AMI version rather than specify a numerical value. Some regions no longer support this deprecated option as they only have a newer release label version of EMR, which requires you to specify an EMR release label release (EMR 4.x or later). 
+     * Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR releases 4.0 and later, ReleaseLabel is used. To specify a custom AMI, use CustomAmiID.
      */
     AmiVersion?: XmlStringMaxLen256;
     /**
-     *  Amazon EMR releases 4.x or later.  The release label for the Amazon EMR release. For Amazon EMR 3.x and 2.x AMIs, use amiVersion instead instead of ReleaseLabel.
+     * The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form emr-x.x.x, where x.x.x is an Amazon EMR release version, for example, emr-5.14.0. For more information about Amazon EMR release versions and included application versions and features, see http://docs.aws.amazon.com/emr/latest/ReleaseGuide/. The release label applies only to Amazon EMR releases versions 4.x and later. Earlier versions use AmiVersion.
      */
     ReleaseLabel?: XmlStringMaxLen256;
     /**
@@ -1947,19 +1985,19 @@ declare namespace EMR {
      */
     BootstrapActions?: BootstrapActionConfigList;
     /**
-     *  For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use Applications.  A list of strings that indicates third-party software to use. For more information, see Use Third Party Applications with Amazon EMR. Currently supported values are:   "mapr-m3" - launch the job flow using MapR M3 Edition.   "mapr-m5" - launch the job flow using MapR M5 Edition.  
+     *  For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use Applications.  A list of strings that indicates third-party software to use. For more information, see the Amazon EMR Developer Guide. Currently supported values are:   "mapr-m3" - launch the job flow using MapR M3 Edition.   "mapr-m5" - launch the job flow using MapR M5 Edition.  
      */
     SupportedProducts?: SupportedProductsList;
     /**
-     *  For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use Applications.  A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action arguments. For more information, see "Launch a Job Flow on the MapR Distribution for Hadoop" in the Amazon EMR Developer Guide. Supported values are:   "mapr-m3" - launch the cluster using MapR M3 Edition.   "mapr-m5" - launch the cluster using MapR M5 Edition.   "mapr" with the user arguments specifying "--edition,m3" or "--edition,m5" - launch the job flow using MapR M3 or M5 Edition respectively.   "mapr-m7" - launch the cluster using MapR M7 Edition.   "hunk" - launch the cluster with the Hunk Big Data Analtics Platform.   "hue"- launch the cluster with Hue installed.   "spark" - launch the cluster with Apache Spark installed.   "ganglia" - launch the cluster with the Ganglia Monitoring System installed.  
+     *  For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use Applications.  A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action arguments. For more information, see "Launch a Job Flow on the MapR Distribution for Hadoop" in the Amazon EMR Developer Guide. Supported values are:   "mapr-m3" - launch the cluster using MapR M3 Edition.   "mapr-m5" - launch the cluster using MapR M5 Edition.   "mapr" with the user arguments specifying "--edition,m3" or "--edition,m5" - launch the job flow using MapR M3 or M5 Edition respectively.   "mapr-m7" - launch the cluster using MapR M7 Edition.   "hunk" - launch the cluster with the Hunk Big Data Analtics Platform.   "hue"- launch the cluster with Hue installed.   "spark" - launch the cluster with Apache Spark installed.   "ganglia" - launch the cluster with the Ganglia Monitoring System installed.  
      */
     NewSupportedProducts?: NewSupportedProductsList;
     /**
-     *  Amazon EMR releases 4.x or later.  A list of applications for the cluster. Valid values are: "Hadoop", "Hive", "Mahout", "Pig", and "Spark." They are case insensitive.
+     * For Amazon EMR releases 4.0 and later. A list of applications for the cluster. Valid values are: "Hadoop", "Hive", "Mahout", "Pig", and "Spark." They are case insensitive.
      */
     Applications?: ApplicationList;
     /**
-     *  Amazon EMR releases 4.x or later.  The list of configurations supplied for the EMR cluster you are creating.
+     * For Amazon EMR releases 4.0 and later. The list of configurations supplied for the EMR cluster you are creating.
      */
     Configurations?: ConfigurationList;
     /**
@@ -1990,6 +2028,22 @@ declare namespace EMR {
      * Specifies the way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. TERMINATE_AT_INSTANCE_HOUR indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. TERMINATE_AT_TASK_COMPLETION indicates that Amazon EMR blacklists and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. TERMINATE_AT_TASK_COMPLETION available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.
      */
     ScaleDownBehavior?: ScaleDownBehavior;
+    /**
+     * Available only in Amazon EMR version 5.7.0 and later. The ID of a custom Amazon EBS-backed Linux AMI. If specified, Amazon EMR uses this AMI when it launches cluster EC2 instances. For more information about custom AMIs in Amazon EMR, see Using a Custom AMI in the Amazon EMR Management Guide. If omitted, the cluster uses the base Linux AMI for the ReleaseLabel specified. For Amazon EMR versions 2.x and 3.x, use AmiVersion instead. For information about creating a custom AMI, see Creating an Amazon EBS-Backed Linux AMI in the Amazon Elastic Compute Cloud User Guide for Linux Instances. For information about finding an AMI ID, see Finding a Linux AMI. 
+     */
+    CustomAmiId?: XmlStringMaxLen256;
+    /**
+     * The size, in GiB, of the EBS root device volume of the Linux AMI that is used for each EC2 instance. Available in Amazon EMR version 4.x and later.
+     */
+    EbsRootVolumeSize?: Integer;
+    /**
+     * Applies only when CustomAmiID is used. Specifies which updates from the Amazon Linux AMI package repositories to apply automatically when the instance boots using the AMI. If omitted, the default is SECURITY, which indicates that only security updates are applied. If NONE is specified, no updates are applied, and all updates must be applied manually.
+     */
+    RepoUpgradeOnBoot?: RepoUpgradeOnBoot;
+    /**
+     * Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see Use Kerberos Authentication in the EMR Management Guide.
+     */
+    KerberosAttributes?: KerberosAttributes;
   }
   export interface RunJobFlowOutput {
     /**
@@ -2097,11 +2151,11 @@ declare namespace EMR {
   }
   export interface SimpleScalingPolicyConfiguration {
     /**
-     * The way in which EC2 instances are added (if ScalingAdjustment is a positive number) or terminated (if ScalingAdjustment is a negative number) each time the scaling activity is triggered. CHANGE_IN_CAPACITY is the default. CHANGE_IN_CAPACITY indicates that the EC2 instance count increments or decrements by ScalingAdjustment, which should be expressed as an integer. PERCENT_CHANGE_IN_CAPACITY indicates the instance count increments or decrements by the percentage specified by ScalingAdjustment, which should be expressed as a decimal. For example, 0.20 indicates an increase in 20% increments of cluster capacity. EXACT_CAPACITY indicates the scaling activity results in an instance group with the number of EC2 instances specified by ScalingAdjustment, which should be expressed as a positive integer.
+     * The way in which EC2 instances are added (if ScalingAdjustment is a positive number) or terminated (if ScalingAdjustment is a negative number) each time the scaling activity is triggered. CHANGE_IN_CAPACITY is the default. CHANGE_IN_CAPACITY indicates that the EC2 instance count increments or decrements by ScalingAdjustment, which should be expressed as an integer. PERCENT_CHANGE_IN_CAPACITY indicates the instance count increments or decrements by the percentage specified by ScalingAdjustment, which should be expressed as an integer. For example, 20 indicates an increase in 20% increments of cluster capacity. EXACT_CAPACITY indicates the scaling activity results in an instance group with the number of EC2 instances specified by ScalingAdjustment, which should be expressed as a positive integer.
      */
     AdjustmentType?: AdjustmentType;
     /**
-     * The amount by which to scale in or scale out, based on the specified AdjustmentType. A positive value adds to the instance group's EC2 instance count while a negative number removes instances. If AdjustmentType is set to EXACT_CAPACITY, the number should only be a positive integer. If AdjustmentType is set to PERCENT_CHANGE_IN_CAPACITY, the value should express the percentage as a decimal. For example, -0.20 indicates a decrease in 20% increments of cluster capacity.
+     * The amount by which to scale in or scale out, based on the specified AdjustmentType. A positive value adds to the instance group's EC2 instance count while a negative number removes instances. If AdjustmentType is set to EXACT_CAPACITY, the number should only be a positive integer. If AdjustmentType is set to PERCENT_CHANGE_IN_CAPACITY, the value should express the percentage as an integer. For example, -20 indicates a decrease in 20% increments of cluster capacity.
      */
     ScalingAdjustment: Integer;
     /**
@@ -2115,7 +2169,7 @@ declare namespace EMR {
      */
     TimeoutDurationMinutes: WholeNumber;
     /**
-     * The action to take when TargetSpotCapacity has not been fulfilled when the TimeoutDurationMinutes has expired. Spot instances are not uprovisioned within the Spot provisioining timeout. Valid values are TERMINATE_CLUSTER and SWITCH_TO_ON_DEMAND to fulfill the remaining capacity.
+     * The action to take when TargetSpotCapacity has not been fulfilled when the TimeoutDurationMinutes has expired. Spot instances are not uprovisioned within the Spot provisioining timeout. Valid values are TERMINATE_CLUSTER and SWITCH_TO_ON_DEMAND. SWITCH_TO_ON_DEMAND specifies that if no Spot instances are available, On-Demand Instances should be provisioned to fulfill any remaining Spot capacity.
      */
     TimeoutAction: SpotProvisioningTimeoutAction;
     /**
@@ -2282,11 +2336,11 @@ declare namespace EMR {
   export type SupportedProductsList = XmlStringMaxLen256[];
   export interface Tag {
     /**
-     * A user-defined key, which is the minimum required information for a valid tag. For more information, see Tagging Amazon EMR Resources. 
+     * A user-defined key, which is the minimum required information for a valid tag. For more information, see Tag . 
      */
     Key?: String;
     /**
-     * A user-defined value, which is optional in a tag. For more information, see Tagging Amazon EMR Resources. 
+     * A user-defined value, which is optional in a tag. For more information, see Tag Clusters. 
      */
     Value?: String;
   }

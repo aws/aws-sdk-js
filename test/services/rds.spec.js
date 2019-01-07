@@ -51,7 +51,8 @@
           paramValidation: true
         });
         spy = helpers.spyOn(rds, 'buildCrossRegionPresignedUrl').andCallThrough();
-        return helpers.spyOn(AWS.util.date, 'getDate').andReturn(new Date(0));
+        helpers.spyOn(AWS.RDS.prototype, 'getSkewCorrectedDate').andReturn(new Date(0));
+        return helpers.spyOn(rds, 'getSkewCorrectedDate').andReturn(new Date(0));
       });
       it('builds presigned url for copyDBSnapshot', function() {
         var req;

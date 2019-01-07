@@ -1,7 +1,7 @@
 require('../lib/node_loader');
 var AWS = require('../lib/core');
-var Service = require('../lib/service');
-var apiLoader = require('../lib/api_loader');
+var Service = AWS.Service;
+var apiLoader = AWS.apiLoader;
 
 apiLoader.services['es'] = {};
 AWS.ES = Service.defineService('es', ['2015-01-01']);

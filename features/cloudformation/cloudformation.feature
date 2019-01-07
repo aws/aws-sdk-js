@@ -4,11 +4,10 @@ Feature: AWS CloudFormation
 
   I want to use AWS CloudFormation
 
-  Scenario: Creating and deleting stacks
-    Given I create a CloudFormation stack with name prefix "aws-js-sdk"
-    And I get a CloudFormation template for the stack
-    Then the result should contain the CloudFormation template body
-    And I delete the CloudFormation stack
+  Scenario: Describing stacks
+    Given I run the "describeStacks" operation
+    Then the request should be successful
+    And the value at "Stacks" should be a list
 
   Scenario: Error handling
     Given I create a CloudFormation stack with name prefix ""

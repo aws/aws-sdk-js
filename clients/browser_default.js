@@ -1,6 +1,4 @@
 require('../lib/node_loader');
-var AWS = require('../lib/core');
-
 module.exports = {
   ACM: require('./acm'),
   APIGateway: require('./apigateway'),
@@ -13,6 +11,7 @@ module.exports = {
   CloudWatch: require('./cloudwatch'),
   CloudWatchEvents: require('./cloudwatchevents'),
   CloudWatchLogs: require('./cloudwatchlogs'),
+  CodeBuild: require('./codebuild'),
   CodeCommit: require('./codecommit'),
   CodeDeploy: require('./codedeploy'),
   CodePipeline: require('./codepipeline'),
@@ -64,5 +63,14 @@ module.exports = {
   StorageGateway: require('./storagegateway'),
   STS: require('./sts'),
   WAF: require('./waf'),
-  WorkDocs: require('./workdocs')
+  WorkDocs: require('./workdocs'),
+  LexModelBuildingService: require('./lexmodelbuildingservice'),
+  Pricing: require('./pricing'),
+  MediaStoreData: require('./mediastoredata'),
+  Comprehend: require('./comprehend'),
+  KinesisVideoArchivedMedia: require('./kinesisvideoarchivedmedia'),
+  KinesisVideoMedia: require('./kinesisvideomedia'),
+  KinesisVideo: require('./kinesisvideo'),
+  Translate: require('./translate'),
+  SecretsManager: require('./secretsmanager')
 };

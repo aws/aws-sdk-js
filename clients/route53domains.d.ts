@@ -20,11 +20,19 @@ declare class Route53Domains extends Service {
    */
   checkDomainAvailability(callback?: (err: AWSError, data: Route53Domains.Types.CheckDomainAvailabilityResponse) => void): Request<Route53Domains.Types.CheckDomainAvailabilityResponse, AWSError>;
   /**
-   * This operation deletes the specified tags for a domain. All tag operations are eventually consistent; subsequent operations may not immediately represent all issued operations.
+   * Checks whether a domain name can be transferred to Amazon Route 53. 
+   */
+  checkDomainTransferability(params: Route53Domains.Types.CheckDomainTransferabilityRequest, callback?: (err: AWSError, data: Route53Domains.Types.CheckDomainTransferabilityResponse) => void): Request<Route53Domains.Types.CheckDomainTransferabilityResponse, AWSError>;
+  /**
+   * Checks whether a domain name can be transferred to Amazon Route 53. 
+   */
+  checkDomainTransferability(callback?: (err: AWSError, data: Route53Domains.Types.CheckDomainTransferabilityResponse) => void): Request<Route53Domains.Types.CheckDomainTransferabilityResponse, AWSError>;
+  /**
+   * This operation deletes the specified tags for a domain. All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.
    */
   deleteTagsForDomain(params: Route53Domains.Types.DeleteTagsForDomainRequest, callback?: (err: AWSError, data: Route53Domains.Types.DeleteTagsForDomainResponse) => void): Request<Route53Domains.Types.DeleteTagsForDomainResponse, AWSError>;
   /**
-   * This operation deletes the specified tags for a domain. All tag operations are eventually consistent; subsequent operations may not immediately represent all issued operations.
+   * This operation deletes the specified tags for a domain. All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.
    */
   deleteTagsForDomain(callback?: (err: AWSError, data: Route53Domains.Types.DeleteTagsForDomainResponse) => void): Request<Route53Domains.Types.DeleteTagsForDomainResponse, AWSError>;
   /**
@@ -44,11 +52,11 @@ declare class Route53Domains extends Service {
    */
   disableDomainTransferLock(callback?: (err: AWSError, data: Route53Domains.Types.DisableDomainTransferLockResponse) => void): Request<Route53Domains.Types.DisableDomainTransferLockResponse, AWSError>;
   /**
-   * This operation configures Amazon Route 53 to automatically renew the specified domain before the domain registration expires. The cost of renewing your domain registration is billed to your AWS account. The period during which you can renew a domain name varies by TLD. For a list of TLDs and their renewal policies, see "Renewal, restoration, and deletion times" on the website for our registrar partner, Gandi. Route 53 requires that you renew before the end of the renewal period that is listed on the Gandi website so we can complete processing before the deadline.
+   * This operation configures Amazon Route 53 to automatically renew the specified domain before the domain registration expires. The cost of renewing your domain registration is billed to your AWS account. The period during which you can renew a domain name varies by TLD. For a list of TLDs and their renewal policies, see "Renewal, restoration, and deletion times" on the website for our registrar associate, Gandi. Amazon Route 53 requires that you renew before the end of the renewal period that is listed on the Gandi website so we can complete processing before the deadline.
    */
   enableDomainAutoRenew(params: Route53Domains.Types.EnableDomainAutoRenewRequest, callback?: (err: AWSError, data: Route53Domains.Types.EnableDomainAutoRenewResponse) => void): Request<Route53Domains.Types.EnableDomainAutoRenewResponse, AWSError>;
   /**
-   * This operation configures Amazon Route 53 to automatically renew the specified domain before the domain registration expires. The cost of renewing your domain registration is billed to your AWS account. The period during which you can renew a domain name varies by TLD. For a list of TLDs and their renewal policies, see "Renewal, restoration, and deletion times" on the website for our registrar partner, Gandi. Route 53 requires that you renew before the end of the renewal period that is listed on the Gandi website so we can complete processing before the deadline.
+   * This operation configures Amazon Route 53 to automatically renew the specified domain before the domain registration expires. The cost of renewing your domain registration is billed to your AWS account. The period during which you can renew a domain name varies by TLD. For a list of TLDs and their renewal policies, see "Renewal, restoration, and deletion times" on the website for our registrar associate, Gandi. Amazon Route 53 requires that you renew before the end of the renewal period that is listed on the Gandi website so we can complete processing before the deadline.
    */
   enableDomainAutoRenew(callback?: (err: AWSError, data: Route53Domains.Types.EnableDomainAutoRenewResponse) => void): Request<Route53Domains.Types.EnableDomainAutoRenewResponse, AWSError>;
   /**
@@ -108,19 +116,19 @@ declare class Route53Domains extends Service {
    */
   listOperations(callback?: (err: AWSError, data: Route53Domains.Types.ListOperationsResponse) => void): Request<Route53Domains.Types.ListOperationsResponse, AWSError>;
   /**
-   * This operation returns all of the tags that are associated with the specified domain. All tag operations are eventually consistent; subsequent operations may not immediately represent all issued operations.
+   * This operation returns all of the tags that are associated with the specified domain. All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.
    */
   listTagsForDomain(params: Route53Domains.Types.ListTagsForDomainRequest, callback?: (err: AWSError, data: Route53Domains.Types.ListTagsForDomainResponse) => void): Request<Route53Domains.Types.ListTagsForDomainResponse, AWSError>;
   /**
-   * This operation returns all of the tags that are associated with the specified domain. All tag operations are eventually consistent; subsequent operations may not immediately represent all issued operations.
+   * This operation returns all of the tags that are associated with the specified domain. All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.
    */
   listTagsForDomain(callback?: (err: AWSError, data: Route53Domains.Types.ListTagsForDomainResponse) => void): Request<Route53Domains.Types.ListTagsForDomainResponse, AWSError>;
   /**
-   * This operation registers a domain. Domains are registered by the AWS registrar partner, Gandi. For some top-level domains (TLDs), this operation requires extra parameters. When you register a domain, Amazon Route 53 does the following:   Creates a Amazon Route 53 hosted zone that has the same name as the domain. Amazon Route 53 assigns four name servers to your hosted zone and automatically updates your domain registration with the names of these name servers.   Enables autorenew, so your domain registration will renew automatically each year. We'll notify you in advance of the renewal date so you can choose whether to renew the registration.   Optionally enables privacy protection, so WHOIS queries return contact information for our registrar partner, Gandi, instead of the information you entered for registrant, admin, and tech contacts.   If registration is successful, returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant is notified by email.   Charges your AWS account an amount based on the top-level domain. For more information, see Amazon Route 53 Pricing.  
+   * This operation registers a domain. Domains are registered either by Amazon Registrar (for .com, .net, and .org domains) or by our registrar associate, Gandi (for all other domains). For some top-level domains (TLDs), this operation requires extra parameters. When you register a domain, Amazon Route 53 does the following:   Creates a Amazon Route 53 hosted zone that has the same name as the domain. Amazon Route 53 assigns four name servers to your hosted zone and automatically updates your domain registration with the names of these name servers.   Enables autorenew, so your domain registration will renew automatically each year. We'll notify you in advance of the renewal date so you can choose whether to renew the registration.   Optionally enables privacy protection, so WHOIS queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) or for our registrar associate, Gandi (for all other TLDs). If you don't enable privacy protection, WHOIS queries return the information that you entered for the registrant, admin, and tech contacts.   If registration is successful, returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant is notified by email.   Charges your AWS account an amount based on the top-level domain. For more information, see Amazon Route 53 Pricing.  
    */
   registerDomain(params: Route53Domains.Types.RegisterDomainRequest, callback?: (err: AWSError, data: Route53Domains.Types.RegisterDomainResponse) => void): Request<Route53Domains.Types.RegisterDomainResponse, AWSError>;
   /**
-   * This operation registers a domain. Domains are registered by the AWS registrar partner, Gandi. For some top-level domains (TLDs), this operation requires extra parameters. When you register a domain, Amazon Route 53 does the following:   Creates a Amazon Route 53 hosted zone that has the same name as the domain. Amazon Route 53 assigns four name servers to your hosted zone and automatically updates your domain registration with the names of these name servers.   Enables autorenew, so your domain registration will renew automatically each year. We'll notify you in advance of the renewal date so you can choose whether to renew the registration.   Optionally enables privacy protection, so WHOIS queries return contact information for our registrar partner, Gandi, instead of the information you entered for registrant, admin, and tech contacts.   If registration is successful, returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant is notified by email.   Charges your AWS account an amount based on the top-level domain. For more information, see Amazon Route 53 Pricing.  
+   * This operation registers a domain. Domains are registered either by Amazon Registrar (for .com, .net, and .org domains) or by our registrar associate, Gandi (for all other domains). For some top-level domains (TLDs), this operation requires extra parameters. When you register a domain, Amazon Route 53 does the following:   Creates a Amazon Route 53 hosted zone that has the same name as the domain. Amazon Route 53 assigns four name servers to your hosted zone and automatically updates your domain registration with the names of these name servers.   Enables autorenew, so your domain registration will renew automatically each year. We'll notify you in advance of the renewal date so you can choose whether to renew the registration.   Optionally enables privacy protection, so WHOIS queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) or for our registrar associate, Gandi (for all other TLDs). If you don't enable privacy protection, WHOIS queries return the information that you entered for the registrant, admin, and tech contacts.   If registration is successful, returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant is notified by email.   Charges your AWS account an amount based on the top-level domain. For more information, see Amazon Route 53 Pricing.  
    */
   registerDomain(callback?: (err: AWSError, data: Route53Domains.Types.RegisterDomainResponse) => void): Request<Route53Domains.Types.RegisterDomainResponse, AWSError>;
   /**
@@ -148,27 +156,27 @@ declare class Route53Domains extends Service {
    */
   retrieveDomainAuthCode(callback?: (err: AWSError, data: Route53Domains.Types.RetrieveDomainAuthCodeResponse) => void): Request<Route53Domains.Types.RetrieveDomainAuthCodeResponse, AWSError>;
   /**
-   * This operation transfers a domain from another registrar to Amazon Route 53. When the transfer is complete, the domain is registered with the AWS registrar partner, Gandi. For transfer requirements, a detailed procedure, and information about viewing the status of a domain transfer, see Transferring Registration for a Domain to Amazon Route 53 in the Amazon Route 53 Developer Guide. If the registrar for your domain is also the DNS service provider for the domain, we highly recommend that you consider transferring your DNS service to Amazon Route 53 or to another DNS service provider before you transfer your registration. Some registrars provide free DNS service when you purchase a domain registration. When you transfer the registration, the previous registrar will not renew your domain registration and could end your DNS service at any time.  If the registrar for your domain is also the DNS service provider for the domain and you don't transfer DNS service to another provider, your website, email, and the web applications associated with the domain might become unavailable.  If the transfer is successful, this method returns an operation ID that you can use to track the progress and completion of the action. If the transfer doesn't complete successfully, the domain registrant will be notified by email.
+   * This operation transfers a domain from another registrar to Amazon Route 53. When the transfer is complete, the domain is registered either with Amazon Registrar (for .com, .net, and .org domains) or with our registrar associate, Gandi (for all other TLDs). For transfer requirements, a detailed procedure, and information about viewing the status of a domain transfer, see Transferring Registration for a Domain to Amazon Route 53 in the Amazon Route 53 Developer Guide. If the registrar for your domain is also the DNS service provider for the domain, we highly recommend that you consider transferring your DNS service to Amazon Route 53 or to another DNS service provider before you transfer your registration. Some registrars provide free DNS service when you purchase a domain registration. When you transfer the registration, the previous registrar will not renew your domain registration and could end your DNS service at any time.  If the registrar for your domain is also the DNS service provider for the domain and you don't transfer DNS service to another provider, your website, email, and the web applications associated with the domain might become unavailable.  If the transfer is successful, this method returns an operation ID that you can use to track the progress and completion of the action. If the transfer doesn't complete successfully, the domain registrant will be notified by email.
    */
   transferDomain(params: Route53Domains.Types.TransferDomainRequest, callback?: (err: AWSError, data: Route53Domains.Types.TransferDomainResponse) => void): Request<Route53Domains.Types.TransferDomainResponse, AWSError>;
   /**
-   * This operation transfers a domain from another registrar to Amazon Route 53. When the transfer is complete, the domain is registered with the AWS registrar partner, Gandi. For transfer requirements, a detailed procedure, and information about viewing the status of a domain transfer, see Transferring Registration for a Domain to Amazon Route 53 in the Amazon Route 53 Developer Guide. If the registrar for your domain is also the DNS service provider for the domain, we highly recommend that you consider transferring your DNS service to Amazon Route 53 or to another DNS service provider before you transfer your registration. Some registrars provide free DNS service when you purchase a domain registration. When you transfer the registration, the previous registrar will not renew your domain registration and could end your DNS service at any time.  If the registrar for your domain is also the DNS service provider for the domain and you don't transfer DNS service to another provider, your website, email, and the web applications associated with the domain might become unavailable.  If the transfer is successful, this method returns an operation ID that you can use to track the progress and completion of the action. If the transfer doesn't complete successfully, the domain registrant will be notified by email.
+   * This operation transfers a domain from another registrar to Amazon Route 53. When the transfer is complete, the domain is registered either with Amazon Registrar (for .com, .net, and .org domains) or with our registrar associate, Gandi (for all other TLDs). For transfer requirements, a detailed procedure, and information about viewing the status of a domain transfer, see Transferring Registration for a Domain to Amazon Route 53 in the Amazon Route 53 Developer Guide. If the registrar for your domain is also the DNS service provider for the domain, we highly recommend that you consider transferring your DNS service to Amazon Route 53 or to another DNS service provider before you transfer your registration. Some registrars provide free DNS service when you purchase a domain registration. When you transfer the registration, the previous registrar will not renew your domain registration and could end your DNS service at any time.  If the registrar for your domain is also the DNS service provider for the domain and you don't transfer DNS service to another provider, your website, email, and the web applications associated with the domain might become unavailable.  If the transfer is successful, this method returns an operation ID that you can use to track the progress and completion of the action. If the transfer doesn't complete successfully, the domain registrant will be notified by email.
    */
   transferDomain(callback?: (err: AWSError, data: Route53Domains.Types.TransferDomainResponse) => void): Request<Route53Domains.Types.TransferDomainResponse, AWSError>;
   /**
-   * This operation updates the contact information for a particular domain. Information for at least one contact (registrant, administrator, or technical) must be supplied for update. If the update is successful, this method returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.
+   * This operation updates the contact information for a particular domain. You must specify information for at least one contact: registrant, administrator, or technical. If the update is successful, this method returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.
    */
   updateDomainContact(params: Route53Domains.Types.UpdateDomainContactRequest, callback?: (err: AWSError, data: Route53Domains.Types.UpdateDomainContactResponse) => void): Request<Route53Domains.Types.UpdateDomainContactResponse, AWSError>;
   /**
-   * This operation updates the contact information for a particular domain. Information for at least one contact (registrant, administrator, or technical) must be supplied for update. If the update is successful, this method returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.
+   * This operation updates the contact information for a particular domain. You must specify information for at least one contact: registrant, administrator, or technical. If the update is successful, this method returns an operation ID that you can use to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.
    */
   updateDomainContact(callback?: (err: AWSError, data: Route53Domains.Types.UpdateDomainContactResponse) => void): Request<Route53Domains.Types.UpdateDomainContactResponse, AWSError>;
   /**
-   * This operation updates the specified domain contact's privacy setting. When the privacy option is enabled, personal information such as postal or email address is hidden from the results of a public WHOIS query. The privacy services are provided by the AWS registrar, Gandi. For more information, see the Gandi privacy features. This operation only affects the privacy of the specified contact type (registrant, administrator, or tech). Successful acceptance returns an operation ID that you can use with GetOperationDetail to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.
+   * This operation updates the specified domain contact's privacy setting. When privacy protection is enabled, contact information such as email address is replaced either with contact information for Amazon Registrar (for .com, .net, and .org domains) or with contact information for our registrar associate, Gandi. This operation affects only the contact information for the specified contact type (registrant, administrator, or tech). If the request succeeds, Amazon Route 53 returns an operation ID that you can use with GetOperationDetail to track the progress and completion of the action. If the request doesn't complete successfully, the domain registrant will be notified by email.
    */
   updateDomainContactPrivacy(params: Route53Domains.Types.UpdateDomainContactPrivacyRequest, callback?: (err: AWSError, data: Route53Domains.Types.UpdateDomainContactPrivacyResponse) => void): Request<Route53Domains.Types.UpdateDomainContactPrivacyResponse, AWSError>;
   /**
-   * This operation updates the specified domain contact's privacy setting. When the privacy option is enabled, personal information such as postal or email address is hidden from the results of a public WHOIS query. The privacy services are provided by the AWS registrar, Gandi. For more information, see the Gandi privacy features. This operation only affects the privacy of the specified contact type (registrant, administrator, or tech). Successful acceptance returns an operation ID that you can use with GetOperationDetail to track the progress and completion of the action. If the request is not completed successfully, the domain registrant will be notified by email.
+   * This operation updates the specified domain contact's privacy setting. When privacy protection is enabled, contact information such as email address is replaced either with contact information for Amazon Registrar (for .com, .net, and .org domains) or with contact information for our registrar associate, Gandi. This operation affects only the contact information for the specified contact type (registrant, administrator, or tech). If the request succeeds, Amazon Route 53 returns an operation ID that you can use with GetOperationDetail to track the progress and completion of the action. If the request doesn't complete successfully, the domain registrant will be notified by email.
    */
   updateDomainContactPrivacy(callback?: (err: AWSError, data: Route53Domains.Types.UpdateDomainContactPrivacyResponse) => void): Request<Route53Domains.Types.UpdateDomainContactPrivacyResponse, AWSError>;
   /**
@@ -180,11 +188,11 @@ declare class Route53Domains extends Service {
    */
   updateDomainNameservers(callback?: (err: AWSError, data: Route53Domains.Types.UpdateDomainNameserversResponse) => void): Request<Route53Domains.Types.UpdateDomainNameserversResponse, AWSError>;
   /**
-   * This operation adds or updates tags for a specified domain. All tag operations are eventually consistent; subsequent operations may not immediately represent all issued operations.
+   * This operation adds or updates tags for a specified domain. All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.
    */
   updateTagsForDomain(params: Route53Domains.Types.UpdateTagsForDomainRequest, callback?: (err: AWSError, data: Route53Domains.Types.UpdateTagsForDomainResponse) => void): Request<Route53Domains.Types.UpdateTagsForDomainResponse, AWSError>;
   /**
-   * This operation adds or updates tags for a specified domain. All tag operations are eventually consistent; subsequent operations may not immediately represent all issued operations.
+   * This operation adds or updates tags for a specified domain. All tag operations are eventually consistent; subsequent operations might not immediately represent all issued operations.
    */
   updateTagsForDomain(callback?: (err: AWSError, data: Route53Domains.Types.UpdateTagsForDomainResponse) => void): Request<Route53Domains.Types.UpdateTagsForDomainResponse, AWSError>;
   /**
@@ -234,9 +242,25 @@ declare namespace Route53Domains {
   }
   export interface CheckDomainAvailabilityResponse {
     /**
-     * Whether the domain name is available for registering.  You can only register domains designated as AVAILABLE.  Valid values:  AVAILABLE  The domain name is available.  AVAILABLE_RESERVED  The domain name is reserved under specific conditions.  AVAILABLE_PREORDER  The domain name is available and can be preordered.  DONT_KNOW  The TLD registry didn't reply with a definitive answer about whether the domain name is available. Amazon Route 53 can return this response for a variety of reasons, for example, the registry is performing maintenance. Try again later.  PENDING  The TLD registry didn't return a response in the expected amount of time. When the response is delayed, it usually takes just a few extra seconds. You can resubmit the request immediately.  RESERVED  The domain name has been reserved for another person or organization.  UNAVAILABLE  The domain name is not available.  UNAVAILABLE_PREMIUM  The domain name is not available.  UNAVAILABLE_RESTRICTED  The domain name is forbidden.  
+     * Whether the domain name is available for registering.  You can register only domains designated as AVAILABLE.  Valid values:  AVAILABLE  The domain name is available.  AVAILABLE_RESERVED  The domain name is reserved under specific conditions.  AVAILABLE_PREORDER  The domain name is available and can be preordered.  DONT_KNOW  The TLD registry didn't reply with a definitive answer about whether the domain name is available. Amazon Route 53 can return this response for a variety of reasons, for example, the registry is performing maintenance. Try again later.  PENDING  The TLD registry didn't return a response in the expected amount of time. When the response is delayed, it usually takes just a few extra seconds. You can resubmit the request immediately.  RESERVED  The domain name has been reserved for another person or organization.  UNAVAILABLE  The domain name is not available.  UNAVAILABLE_PREMIUM  The domain name is not available.  UNAVAILABLE_RESTRICTED  The domain name is forbidden.  
      */
     Availability: DomainAvailability;
+  }
+  export interface CheckDomainTransferabilityRequest {
+    /**
+     * The name of the domain that you want to transfer to Amazon Route 53. Constraints: The domain name can contain only the letters a through z, the numbers 0 through 9, and hyphen (-). Internationalized Domain Names are not supported.
+     */
+    DomainName: DomainName;
+    /**
+     * If the registrar for the top-level domain (TLD) requires an authorization code to transfer the domain, the code that you got from the current registrar for the domain.
+     */
+    AuthCode?: DomainAuthCode;
+  }
+  export interface CheckDomainTransferabilityResponse {
+    /**
+     * A complex type that contains information about whether the specified domain can be transferred to Amazon Route 53.
+     */
+    Transferability: DomainTransferability;
   }
   export type City = string;
   export interface ContactDetail {
@@ -370,6 +394,9 @@ declare namespace Route53Domains {
     Expiry?: Timestamp;
   }
   export type DomainSummaryList = DomainSummary[];
+  export interface DomainTransferability {
+    Transferable?: Transferable;
+  }
   export type DurationInYears = number;
   export type Email = string;
   export interface EnableDomainAutoRenewRequest {
@@ -395,7 +422,7 @@ declare namespace Route53Domains {
   export type ErrorMessage = string;
   export interface ExtraParam {
     /**
-     * Name of the additional parameter required by the top-level domain.
+     * Name of the additional parameter required by the top-level domain. Here are the top-level domains that require additional parameters and which parameters they require:    .com.au and .net.au: AU_ID_NUMBER and AU_ID_TYPE     .ca: BRAND_NUMBER, CA_LEGAL_TYPE, and CA_BUSINESS_ENTITY_TYPE     .es: ES_IDENTIFICATION, ES_IDENTIFICATION_TYPE, and ES_LEGAL_FORM     .fi: BIRTH_DATE_IN_YYYY_MM_DD, FI_BUSINESS_NUMBER, FI_ID_NUMBER, FI_NATIONALITY, and FI_ORGANIZATION_TYPE     .fr: BRAND_NUMBER, BIRTH_DEPARTMENT, BIRTH_DATE_IN_YYYY_MM_DD, BIRTH_COUNTRY, and BIRTH_CITY     .it: BIRTH_COUNTRY, IT_PIN, and IT_REGISTRANT_ENTITY_TYPE     .ru: BIRTH_DATE_IN_YYYY_MM_DD and RU_PASSPORT_DATA     .se: BIRTH_COUNTRY and SE_ID_NUMBER     .sg: SG_ID_NUMBER     .co.uk, .me.uk, and .org.uk: UK_CONTACT_TYPE and UK_COMPANY_NUMBER    In addition, many TLDs require VAT_NUMBER.
      */
     Name: ExtraParamName;
     /**
@@ -404,7 +431,7 @@ declare namespace Route53Domains {
     Value: ExtraParamValue;
   }
   export type ExtraParamList = ExtraParam[];
-  export type ExtraParamName = "DUNS_NUMBER"|"BRAND_NUMBER"|"BIRTH_DEPARTMENT"|"BIRTH_DATE_IN_YYYY_MM_DD"|"BIRTH_COUNTRY"|"BIRTH_CITY"|"DOCUMENT_NUMBER"|"AU_ID_NUMBER"|"AU_ID_TYPE"|"CA_LEGAL_TYPE"|"CA_BUSINESS_ENTITY_TYPE"|"ES_IDENTIFICATION"|"ES_IDENTIFICATION_TYPE"|"ES_LEGAL_FORM"|"FI_BUSINESS_NUMBER"|"FI_ID_NUMBER"|"IT_PIN"|"RU_PASSPORT_DATA"|"SE_ID_NUMBER"|"SG_ID_NUMBER"|"VAT_NUMBER"|string;
+  export type ExtraParamName = "DUNS_NUMBER"|"BRAND_NUMBER"|"BIRTH_DEPARTMENT"|"BIRTH_DATE_IN_YYYY_MM_DD"|"BIRTH_COUNTRY"|"BIRTH_CITY"|"DOCUMENT_NUMBER"|"AU_ID_NUMBER"|"AU_ID_TYPE"|"CA_LEGAL_TYPE"|"CA_BUSINESS_ENTITY_TYPE"|"ES_IDENTIFICATION"|"ES_IDENTIFICATION_TYPE"|"ES_LEGAL_FORM"|"FI_BUSINESS_NUMBER"|"FI_ID_NUMBER"|"FI_NATIONALITY"|"FI_ORGANIZATION_TYPE"|"IT_PIN"|"IT_REGISTRANT_ENTITY_TYPE"|"RU_PASSPORT_DATA"|"SE_ID_NUMBER"|"SG_ID_NUMBER"|"VAT_NUMBER"|"UK_CONTACT_TYPE"|"UK_COMPANY_NUMBER"|string;
   export type ExtraParamValue = string;
   export type FIAuthKey = string;
   export interface GetContactReachabilityStatusRequest {
@@ -455,19 +482,19 @@ declare namespace Route53Domains {
      */
     TechContact: ContactDetail;
     /**
-     * Specifies whether contact information for the admin contact is concealed from WHOIS queries. If the value is true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter.
+     * Specifies whether contact information is concealed from WHOIS queries. If the value is true, WHOIS ("who is") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) or for our registrar associate, Gandi (for all other TLDs). If the value is false, WHOIS queries return the information that you entered for the admin contact.
      */
     AdminPrivacy?: Boolean;
     /**
-     * Specifies whether contact information for the registrant contact is concealed from WHOIS queries. If the value is true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter.
+     * Specifies whether contact information is concealed from WHOIS queries. If the value is true, WHOIS ("who is") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) or for our registrar associate, Gandi (for all other TLDs). If the value is false, WHOIS queries return the information that you entered for the registrant contact (domain owner).
      */
     RegistrantPrivacy?: Boolean;
     /**
-     * Specifies whether contact information for the tech contact is concealed from WHOIS queries. If the value is true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter.
+     * Specifies whether contact information is concealed from WHOIS queries. If the value is true, WHOIS ("who is") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) or for our registrar associate, Gandi (for all other TLDs). If the value is false, WHOIS queries return the information that you entered for the technical contact.
      */
     TechPrivacy?: Boolean;
     /**
-     * Name of the registrar of the domain as identified in the registry. Amazon Route 53 domains are registered by registrar Gandi. The value is "GANDI SAS". 
+     * Name of the registrar of the domain as identified in the registry. Domains with a .com, .net, or .org TLD are registered by Amazon Registrar. All other domains are registered by our registrar associate, Gandi. The value for domains that are registered by Gandi is "GANDI SAS". 
      */
     RegistrarName?: RegistrarName;
     /**
@@ -491,15 +518,15 @@ declare namespace Route53Domains {
      */
     RegistryDomainId?: RegistryDomainId;
     /**
-     * The date when the domain was created as found in the response to a WHOIS query. The date format is Unix time.
+     * The date when the domain was created as found in the response to a WHOIS query. The date and time is in Coordinated Universal time (UTC).
      */
     CreationDate?: Timestamp;
     /**
-     * The last updated date of the domain as found in the response to a WHOIS query. The date format is Unix time.
+     * The last updated date of the domain as found in the response to a WHOIS query. The date and time is in Coordinated Universal time (UTC).
      */
     UpdatedDate?: Timestamp;
     /**
-     * The date when the registration for the domain is set to expire. The date format is Unix time.
+     * The date when the registration for the domain is set to expire. The date and time is in Coordinated Universal time (UTC).
      */
     ExpirationDate?: Timestamp;
     /**
@@ -595,6 +622,10 @@ declare namespace Route53Domains {
   }
   export interface ListOperationsRequest {
     /**
+     * An optional parameter that lets you get information about all the operations that you submitted after a specified date and time. Specify the date and time in Coordinated Universal time (UTC).
+     */
+    SubmittedSince?: Timestamp;
+    /**
      * For an initial request for a list of operations, omit this element. If the number of operations that are not yet complete is greater than the value that you specified for MaxItems, you can use Marker to return additional operations. Get the value of NextPageMarker from the previous response, and submit another request that includes the value of NextPageMarker in the Marker element.
      */
     Marker?: PageMarker;
@@ -657,7 +688,7 @@ declare namespace Route53Domains {
     SubmittedDate: Timestamp;
   }
   export type OperationSummaryList = OperationSummary[];
-  export type OperationType = "REGISTER_DOMAIN"|"DELETE_DOMAIN"|"TRANSFER_IN_DOMAIN"|"UPDATE_DOMAIN_CONTACT"|"UPDATE_NAMESERVER"|"CHANGE_PRIVACY_PROTECTION"|"DOMAIN_LOCK"|string;
+  export type OperationType = "REGISTER_DOMAIN"|"DELETE_DOMAIN"|"TRANSFER_IN_DOMAIN"|"UPDATE_DOMAIN_CONTACT"|"UPDATE_NAMESERVER"|"CHANGE_PRIVACY_PROTECTION"|"DOMAIN_LOCK"|"ENABLE_AUTORENEW"|"DISABLE_AUTORENEW"|"ADD_DNSSEC"|"REMOVE_DNSSEC"|"EXPIRE_DOMAIN"|"TRANSFER_OUT_DOMAIN"|"CHANGE_DOMAIN_OWNER"|"RENEW_DOMAIN"|"PUSH_DOMAIN"|string;
   export type PageMarker = string;
   export type PageMaxItems = number;
   export type Price = number;
@@ -692,15 +723,15 @@ declare namespace Route53Domains {
      */
     TechContact: ContactDetail;
     /**
-     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Default: true 
+     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) or for our registrar associate, Gandi (for all other TLDs). If you specify false, WHOIS queries return the information that you entered for the admin contact. Default: true 
      */
     PrivacyProtectAdminContact?: Boolean;
     /**
-     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Default: true 
+     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) or for our registrar associate, Gandi (for all other TLDs). If you specify false, WHOIS queries return the information that you entered for the registrant contact (the domain owner). Default: true 
      */
     PrivacyProtectRegistrantContact?: Boolean;
     /**
-     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Default: true 
+     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) or for our registrar associate, Gandi (for all other TLDs). If you specify false, WHOIS queries return the information that you entered for the technical contact. Default: true 
      */
     PrivacyProtectTechContact?: Boolean;
   }
@@ -822,15 +853,15 @@ declare namespace Route53Domains {
      */
     TechContact: ContactDetail;
     /**
-     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Default: true 
+     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) or for our registrar associate, Gandi (for all other TLDs). If you specify false, WHOIS queries return the information that you entered for the admin contact. Default: true 
      */
     PrivacyProtectAdminContact?: Boolean;
     /**
-     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Default: true 
+     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) or for our registrar associate, Gandi (for all other TLDs). If you specify false, WHOIS queries return the information that you entered for the registrant contact (domain owner). Default: true 
      */
     PrivacyProtectRegistrantContact?: Boolean;
     /**
-     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter. Default: true 
+     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) or for our registrar associate, Gandi (for all other TLDs). If you specify false, WHOIS queries return the information that you entered for the technical contact. Default: true 
      */
     PrivacyProtectTechContact?: Boolean;
   }
@@ -840,21 +871,22 @@ declare namespace Route53Domains {
      */
     OperationId: OperationId;
   }
+  export type Transferable = "TRANSFERABLE"|"UNTRANSFERABLE"|"DONT_KNOW"|string;
   export interface UpdateDomainContactPrivacyRequest {
     /**
      * The name of the domain that you want to update the privacy setting for.
      */
     DomainName: DomainName;
     /**
-     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter.
+     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) or for our registrar associate, Gandi (for all other TLDs). If you specify false, WHOIS queries return the information that you entered for the admin contact.
      */
     AdminPrivacy?: Boolean;
     /**
-     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter.
+     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) or for our registrar associate, Gandi (for all other TLDs). If you specify false, WHOIS queries return the information that you entered for the registrant contact (domain owner).
      */
     RegistrantPrivacy?: Boolean;
     /**
-     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries will return contact information for our registrar partner, Gandi, instead of the contact information that you enter.
+     * Whether you want to conceal contact information from WHOIS queries. If you specify true, WHOIS ("who is") queries return contact information either for Amazon Registrar (for .com, .net, and .org domains) or for our registrar associate, Gandi (for all other TLDs). If you specify false, WHOIS queries return the information that you entered for the technical contact.
      */
     TechPrivacy?: Boolean;
   }
@@ -922,11 +954,11 @@ declare namespace Route53Domains {
   }
   export interface ViewBillingRequest {
     /**
-     * The beginning date and time for the time period for which you want a list of billing records. Specify the date in Unix time format.
+     * The beginning date and time for the time period for which you want a list of billing records. Specify the date and time in Coordinated Universal time (UTC).
      */
     Start?: Timestamp;
     /**
-     * The end date and time for the time period for which you want a list of billing records. Specify the date in Unix time format.
+     * The end date and time for the time period for which you want a list of billing records. Specify the date and time in Coordinated Universal time (UTC).
      */
     End?: Timestamp;
     /**

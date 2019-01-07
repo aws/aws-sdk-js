@@ -276,4 +276,19 @@ export abstract class ConfigurationOptions {
      * by DynamoDB.
      */
     dynamoDbCrc32?: boolean;
+    /**
+     * Whether to enable endpoint discovery for operations that allow optionally using an endpoint returned by 
+     * the service.
+     */
+    endpointDiscoveryEnabled?: boolean;
+    /**
+     * The size of the global cache storing endpoints from endpoint
+     * discovery operations. Once endpoint cache is created, updating this setting
+     * cannot change existing cache size.
+     */
+    endpointCacheSize?: number;
+    /**
+     *  whether to marshal request parameters to the prefix of hostname.
+     */
+    hostPrefixEnabled?: boolean;
 }

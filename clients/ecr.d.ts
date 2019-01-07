@@ -36,11 +36,11 @@ declare class ECR extends Service {
    */
   batchGetImage(callback?: (err: AWSError, data: ECR.Types.BatchGetImageResponse) => void): Request<ECR.Types.BatchGetImageResponse, AWSError>;
   /**
-   * Inform Amazon ECR that the image layer upload for a specified registry, repository name, and upload ID, has completed. You can optionally provide a sha256 digest of the image layer for data validation purposes.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
+   * Informs Amazon ECR that the image layer upload has completed for a specified registry, repository name, and upload ID. You can optionally provide a sha256 digest of the image layer for data validation purposes.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   completeLayerUpload(params: ECR.Types.CompleteLayerUploadRequest, callback?: (err: AWSError, data: ECR.Types.CompleteLayerUploadResponse) => void): Request<ECR.Types.CompleteLayerUploadResponse, AWSError>;
   /**
-   * Inform Amazon ECR that the image layer upload for a specified registry, repository name, and upload ID, has completed. You can optionally provide a sha256 digest of the image layer for data validation purposes.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
+   * Informs Amazon ECR that the image layer upload has completed for a specified registry, repository name, and upload ID. You can optionally provide a sha256 digest of the image layer for data validation purposes.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   completeLayerUpload(callback?: (err: AWSError, data: ECR.Types.CompleteLayerUploadResponse) => void): Request<ECR.Types.CompleteLayerUploadResponse, AWSError>;
   /**
@@ -51,6 +51,14 @@ declare class ECR extends Service {
    * Creates an image repository.
    */
   createRepository(callback?: (err: AWSError, data: ECR.Types.CreateRepositoryResponse) => void): Request<ECR.Types.CreateRepositoryResponse, AWSError>;
+  /**
+   * Deletes the specified lifecycle policy.
+   */
+  deleteLifecyclePolicy(params: ECR.Types.DeleteLifecyclePolicyRequest, callback?: (err: AWSError, data: ECR.Types.DeleteLifecyclePolicyResponse) => void): Request<ECR.Types.DeleteLifecyclePolicyResponse, AWSError>;
+  /**
+   * Deletes the specified lifecycle policy.
+   */
+  deleteLifecyclePolicy(callback?: (err: AWSError, data: ECR.Types.DeleteLifecyclePolicyResponse) => void): Request<ECR.Types.DeleteLifecyclePolicyResponse, AWSError>;
   /**
    * Deletes an existing image repository. If a repository contains images, you must use the force option to delete it.
    */
@@ -100,6 +108,22 @@ declare class ECR extends Service {
    */
   getDownloadUrlForLayer(callback?: (err: AWSError, data: ECR.Types.GetDownloadUrlForLayerResponse) => void): Request<ECR.Types.GetDownloadUrlForLayerResponse, AWSError>;
   /**
+   * Retrieves the specified lifecycle policy.
+   */
+  getLifecyclePolicy(params: ECR.Types.GetLifecyclePolicyRequest, callback?: (err: AWSError, data: ECR.Types.GetLifecyclePolicyResponse) => void): Request<ECR.Types.GetLifecyclePolicyResponse, AWSError>;
+  /**
+   * Retrieves the specified lifecycle policy.
+   */
+  getLifecyclePolicy(callback?: (err: AWSError, data: ECR.Types.GetLifecyclePolicyResponse) => void): Request<ECR.Types.GetLifecyclePolicyResponse, AWSError>;
+  /**
+   * Retrieves the results of the specified lifecycle policy preview request.
+   */
+  getLifecyclePolicyPreview(params: ECR.Types.GetLifecyclePolicyPreviewRequest, callback?: (err: AWSError, data: ECR.Types.GetLifecyclePolicyPreviewResponse) => void): Request<ECR.Types.GetLifecyclePolicyPreviewResponse, AWSError>;
+  /**
+   * Retrieves the results of the specified lifecycle policy preview request.
+   */
+  getLifecyclePolicyPreview(callback?: (err: AWSError, data: ECR.Types.GetLifecyclePolicyPreviewResponse) => void): Request<ECR.Types.GetLifecyclePolicyPreviewResponse, AWSError>;
+  /**
    * Retrieves the repository policy for a specified repository.
    */
   getRepositoryPolicy(params: ECR.Types.GetRepositoryPolicyRequest, callback?: (err: AWSError, data: ECR.Types.GetRepositoryPolicyResponse) => void): Request<ECR.Types.GetRepositoryPolicyResponse, AWSError>;
@@ -124,6 +148,14 @@ declare class ECR extends Service {
    */
   listImages(callback?: (err: AWSError, data: ECR.Types.ListImagesResponse) => void): Request<ECR.Types.ListImagesResponse, AWSError>;
   /**
+   * List the tags for an Amazon ECR resource.
+   */
+  listTagsForResource(params: ECR.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: ECR.Types.ListTagsForResourceResponse) => void): Request<ECR.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * List the tags for an Amazon ECR resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: ECR.Types.ListTagsForResourceResponse) => void): Request<ECR.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Creates or updates the image manifest and tags associated with an image.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   putImage(params: ECR.Types.PutImageRequest, callback?: (err: AWSError, data: ECR.Types.PutImageResponse) => void): Request<ECR.Types.PutImageResponse, AWSError>;
@@ -132,6 +164,14 @@ declare class ECR extends Service {
    */
   putImage(callback?: (err: AWSError, data: ECR.Types.PutImageResponse) => void): Request<ECR.Types.PutImageResponse, AWSError>;
   /**
+   * Creates or updates a lifecycle policy. For information about lifecycle policy syntax, see Lifecycle Policy Template.
+   */
+  putLifecyclePolicy(params: ECR.Types.PutLifecyclePolicyRequest, callback?: (err: AWSError, data: ECR.Types.PutLifecyclePolicyResponse) => void): Request<ECR.Types.PutLifecyclePolicyResponse, AWSError>;
+  /**
+   * Creates or updates a lifecycle policy. For information about lifecycle policy syntax, see Lifecycle Policy Template.
+   */
+  putLifecyclePolicy(callback?: (err: AWSError, data: ECR.Types.PutLifecyclePolicyResponse) => void): Request<ECR.Types.PutLifecyclePolicyResponse, AWSError>;
+  /**
    * Applies a repository policy on a specified repository to control access permissions.
    */
   setRepositoryPolicy(params: ECR.Types.SetRepositoryPolicyRequest, callback?: (err: AWSError, data: ECR.Types.SetRepositoryPolicyResponse) => void): Request<ECR.Types.SetRepositoryPolicyResponse, AWSError>;
@@ -139,6 +179,30 @@ declare class ECR extends Service {
    * Applies a repository policy on a specified repository to control access permissions.
    */
   setRepositoryPolicy(callback?: (err: AWSError, data: ECR.Types.SetRepositoryPolicyResponse) => void): Request<ECR.Types.SetRepositoryPolicyResponse, AWSError>;
+  /**
+   * Starts a preview of the specified lifecycle policy. This allows you to see the results before creating the lifecycle policy.
+   */
+  startLifecyclePolicyPreview(params: ECR.Types.StartLifecyclePolicyPreviewRequest, callback?: (err: AWSError, data: ECR.Types.StartLifecyclePolicyPreviewResponse) => void): Request<ECR.Types.StartLifecyclePolicyPreviewResponse, AWSError>;
+  /**
+   * Starts a preview of the specified lifecycle policy. This allows you to see the results before creating the lifecycle policy.
+   */
+  startLifecyclePolicyPreview(callback?: (err: AWSError, data: ECR.Types.StartLifecyclePolicyPreviewResponse) => void): Request<ECR.Types.StartLifecyclePolicyPreviewResponse, AWSError>;
+  /**
+   * Adds specified tags to a resource with the specified ARN. Existing tags on a resource are not changed if they are not specified in the request parameters.
+   */
+  tagResource(params: ECR.Types.TagResourceRequest, callback?: (err: AWSError, data: ECR.Types.TagResourceResponse) => void): Request<ECR.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds specified tags to a resource with the specified ARN. Existing tags on a resource are not changed if they are not specified in the request parameters.
+   */
+  tagResource(callback?: (err: AWSError, data: ECR.Types.TagResourceResponse) => void): Request<ECR.Types.TagResourceResponse, AWSError>;
+  /**
+   * Deletes specified tags from a resource.
+   */
+  untagResource(params: ECR.Types.UntagResourceRequest, callback?: (err: AWSError, data: ECR.Types.UntagResourceResponse) => void): Request<ECR.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Deletes specified tags from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: ECR.Types.UntagResourceResponse) => void): Request<ECR.Types.UntagResourceResponse, AWSError>;
   /**
    * Uploads an image layer part to Amazon ECR.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
@@ -285,6 +349,10 @@ declare namespace ECR {
      * The name to use for the repository. The repository name may be specified on its own (such as nginx-web-app) or it can be prepended with a namespace to group the repository into a category (such as project-a/nginx-web-app).
      */
     repositoryName: RepositoryName;
+    /**
+     * 
+     */
+    tags?: TagList;
   }
   export interface CreateRepositoryResponse {
     /**
@@ -293,6 +361,34 @@ declare namespace ECR {
     repository?: Repository;
   }
   export type CreationTimestamp = Date;
+  export interface DeleteLifecyclePolicyRequest {
+    /**
+     * The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
+     */
+    registryId?: RegistryId;
+    /**
+     * The name of the repository.
+     */
+    repositoryName: RepositoryName;
+  }
+  export interface DeleteLifecyclePolicyResponse {
+    /**
+     * The registry ID associated with the request.
+     */
+    registryId?: RegistryId;
+    /**
+     * The repository name associated with the request.
+     */
+    repositoryName?: RepositoryName;
+    /**
+     * The JSON lifecycle policy text.
+     */
+    lifecyclePolicyText?: LifecyclePolicyText;
+    /**
+     * The time stamp of the last time that the lifecycle policy was run.
+     */
+    lastEvaluatedAt?: EvaluationTimestamp;
+  }
   export interface DeleteRepositoryPolicyRequest {
     /**
      * The AWS account ID associated with the registry that contains the repository policy to delete. If you do not specify a registry, the default registry is assumed.
@@ -327,7 +423,7 @@ declare namespace ECR {
      */
     repositoryName: RepositoryName;
     /**
-     * Force the deletion of the repository if it contains images.
+     *  If a repository contains images, forces the deletion.
      */
     force?: ForceFlag;
   }
@@ -349,7 +445,7 @@ declare namespace ECR {
      */
     registryId?: RegistryId;
     /**
-     * A list of repositories to describe. If this parameter is omitted, then all repositories in a registry are described.
+     * A list of repositories to describe.
      */
     repositoryName: RepositoryName;
     /**
@@ -357,11 +453,11 @@ declare namespace ECR {
      */
     imageIds?: ImageIdentifierList;
     /**
-     * The nextToken value returned from a previous paginated DescribeImages request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.
+     * The nextToken value returned from a previous paginated DescribeImages request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return. This option cannot be used when you specify images with imageIds.
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of repository results returned by DescribeImages in paginated output. When this parameter is used, DescribeImages only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribeImages request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then DescribeImages returns up to 100 results and a nextToken value, if applicable.
+     * The maximum number of repository results returned by DescribeImages in paginated output. When this parameter is used, DescribeImages only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribeImages request with the returned nextToken value. This value can be between 1 and 1000. If this parameter is not used, then DescribeImages returns up to 100 results and a nextToken value, if applicable. This option cannot be used when you specify images with imageIds.
      */
     maxResults?: MaxResults;
     /**
@@ -389,11 +485,11 @@ declare namespace ECR {
      */
     repositoryNames?: RepositoryNameList;
     /**
-     * The nextToken value returned from a previous paginated DescribeRepositories request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. 
+     * The nextToken value returned from a previous paginated DescribeRepositories request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return. This option cannot be used when you specify repositories with repositoryNames.  This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. 
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of repository results returned by DescribeRepositories in paginated output. When this parameter is used, DescribeRepositories only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribeRepositories request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then DescribeRepositories returns up to 100 results and a nextToken value, if applicable.
+     * The maximum number of repository results returned by DescribeRepositories in paginated output. When this parameter is used, DescribeRepositories only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribeRepositories request with the returned nextToken value. This value can be between 1 and 1000. If this parameter is not used, then DescribeRepositories returns up to 100 results and a nextToken value, if applicable. This option cannot be used when you specify repositories with repositoryNames.
      */
     maxResults?: MaxResults;
   }
@@ -407,7 +503,7 @@ declare namespace ECR {
      */
     nextToken?: NextToken;
   }
-  export type ExceptionMessage = string;
+  export type EvaluationTimestamp = Date;
   export type ExpirationTimestamp = Date;
   export type ForceFlag = boolean;
   export type GetAuthorizationTokenRegistryIdList = RegistryId[];
@@ -447,13 +543,97 @@ declare namespace ECR {
      */
     layerDigest?: LayerDigest;
   }
+  export interface GetLifecyclePolicyPreviewRequest {
+    /**
+     * The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
+     */
+    registryId?: RegistryId;
+    /**
+     * The name of the repository.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The list of imageIDs to be included.
+     */
+    imageIds?: ImageIdentifierList;
+    /**
+     * The nextToken value returned from a previous paginated&#x2028; GetLifecyclePolicyPreviewRequest request where maxResults was used and the&#x2028; results exceeded the value of that parameter. Pagination continues from the end of the&#x2028; previous results that returned the nextToken value. This value is&#x2028; null when there are no more results to return. This option cannot be used when you specify images with imageIds.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of repository results returned by GetLifecyclePolicyPreviewRequest in&#x2028; paginated output. When this parameter is used, GetLifecyclePolicyPreviewRequest only returns&#x2028; maxResults results in a single page along with a nextToken&#x2028; response element. The remaining results of the initial request can be seen by sending&#x2028; another GetLifecyclePolicyPreviewRequest request with the returned nextToken&#x2028; value. This value can be between 1 and 1000. If this&#x2028; parameter is not used, then GetLifecyclePolicyPreviewRequest returns up to&#x2028; 100 results and a nextToken value, if&#x2028; applicable. This option cannot be used when you specify images with imageIds.
+     */
+    maxResults?: LifecyclePreviewMaxResults;
+    /**
+     * An optional parameter that filters results based on image tag status and all tags, if tagged.
+     */
+    filter?: LifecyclePolicyPreviewFilter;
+  }
+  export interface GetLifecyclePolicyPreviewResponse {
+    /**
+     * The registry ID associated with the request.
+     */
+    registryId?: RegistryId;
+    /**
+     * The repository name associated with the request.
+     */
+    repositoryName?: RepositoryName;
+    /**
+     * The JSON lifecycle policy text.
+     */
+    lifecyclePolicyText?: LifecyclePolicyText;
+    /**
+     * The status of the lifecycle policy preview request.
+     */
+    status?: LifecyclePolicyPreviewStatus;
+    /**
+     * The nextToken value to include in a future GetLifecyclePolicyPreview request. When the results of a GetLifecyclePolicyPreview request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    nextToken?: NextToken;
+    /**
+     * The results of the lifecycle policy preview request.
+     */
+    previewResults?: LifecyclePolicyPreviewResultList;
+    /**
+     * The list of images that is returned as a result of the action.
+     */
+    summary?: LifecyclePolicyPreviewSummary;
+  }
+  export interface GetLifecyclePolicyRequest {
+    /**
+     * The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
+     */
+    registryId?: RegistryId;
+    /**
+     * The name of the repository.
+     */
+    repositoryName: RepositoryName;
+  }
+  export interface GetLifecyclePolicyResponse {
+    /**
+     * The registry ID associated with the request.
+     */
+    registryId?: RegistryId;
+    /**
+     * The repository name associated with the request.
+     */
+    repositoryName?: RepositoryName;
+    /**
+     * The JSON lifecycle policy text.
+     */
+    lifecyclePolicyText?: LifecyclePolicyText;
+    /**
+     * The time stamp of the last time that the lifecycle policy was run.
+     */
+    lastEvaluatedAt?: EvaluationTimestamp;
+  }
   export interface GetRepositoryPolicyRequest {
     /**
      * The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
-     * The name of the repository whose policy you want to retrieve.
+     * The name of the repository with the policy to retrieve.
      */
     repositoryName: RepositoryName;
   }
@@ -489,6 +669,8 @@ declare namespace ECR {
      */
     imageManifest?: ImageManifest;
   }
+  export type ImageActionType = "EXPIRE"|string;
+  export type ImageCount = number;
   export interface ImageDetail {
     /**
      * The AWS account ID associated with the registry to which this image belongs.
@@ -552,11 +734,11 @@ declare namespace ECR {
   export type ImageTagList = ImageTag[];
   export interface InitiateLayerUploadRequest {
     /**
-     * The AWS account ID associated with the registry that you intend to upload layers to. If you do not specify a registry, the default registry is assumed.
+     * The AWS account ID associated with the registry to which you intend to upload layers. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
-     * The name of the repository that you intend to upload layers to.
+     * The name of the repository to which you intend to upload layers.
      */
     repositoryName: RepositoryName;
   }
@@ -611,6 +793,51 @@ declare namespace ECR {
   export type LayerList = Layer[];
   export type LayerPartBlob = Buffer|Uint8Array|Blob|string;
   export type LayerSizeInBytes = number;
+  export interface LifecyclePolicyPreviewFilter {
+    /**
+     * The tag status of the image.
+     */
+    tagStatus?: TagStatus;
+  }
+  export interface LifecyclePolicyPreviewResult {
+    /**
+     * The list of tags associated with this image.
+     */
+    imageTags?: ImageTagList;
+    /**
+     * The sha256 digest of the image manifest.
+     */
+    imageDigest?: ImageDigest;
+    /**
+     * The date and time, expressed in standard JavaScript date format, at which the current image was pushed to the repository.
+     */
+    imagePushedAt?: PushTimestamp;
+    /**
+     * The type of action to be taken.
+     */
+    action?: LifecyclePolicyRuleAction;
+    /**
+     * The priority of the applied rule.
+     */
+    appliedRulePriority?: LifecyclePolicyRulePriority;
+  }
+  export type LifecyclePolicyPreviewResultList = LifecyclePolicyPreviewResult[];
+  export type LifecyclePolicyPreviewStatus = "IN_PROGRESS"|"COMPLETE"|"EXPIRED"|"FAILED"|string;
+  export interface LifecyclePolicyPreviewSummary {
+    /**
+     * The number of expiring images.
+     */
+    expiringImageTotalCount?: ImageCount;
+  }
+  export interface LifecyclePolicyRuleAction {
+    /**
+     * The type of action to be taken.
+     */
+    type?: ImageActionType;
+  }
+  export type LifecyclePolicyRulePriority = number;
+  export type LifecyclePolicyText = string;
+  export type LifecyclePreviewMaxResults = number;
   export interface ListImagesFilter {
     /**
      * The tag status with which to filter your ListImages results. You can filter results based on whether they are TAGGED or UNTAGGED.
@@ -619,11 +846,11 @@ declare namespace ECR {
   }
   export interface ListImagesRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repository to list images in. If you do not specify a registry, the default registry is assumed.
+     * The AWS account ID associated with the registry that contains the repository in which to list images. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
-     * The repository whose image IDs are to be listed.
+     * The repository with image IDs to be listed.
      */
     repositoryName: RepositoryName;
     /**
@@ -631,7 +858,7 @@ declare namespace ECR {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of image results returned by ListImages in paginated output. When this parameter is used, ListImages only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListImages request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListImages returns up to 100 results and a nextToken value, if applicable.
+     * The maximum number of image results returned by ListImages in paginated output. When this parameter is used, ListImages only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListImages request with the returned nextToken value. This value can be between 1 and 1000. If this parameter is not used, then ListImages returns up to 100 results and a nextToken value, if applicable.
      */
     maxResults?: MaxResults;
     /**
@@ -648,6 +875,18 @@ declare namespace ECR {
      * The nextToken value to include in a future ListImages request. When the results of a ListImages request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.
      */
     nextToken?: NextToken;
+  }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the only supported resource is an Amazon ECR repository.
+     */
+    resourceArn: Arn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags for the resource.
+     */
+    tags?: TagList;
   }
   export type MaxResults = number;
   export type MediaType = string;
@@ -680,10 +919,38 @@ declare namespace ECR {
      */
     image?: Image;
   }
+  export interface PutLifecyclePolicyRequest {
+    /**
+     * The AWS account ID associated with the registry that contains the repository. If you do&#x2028; not specify a registry, the default registry is assumed.
+     */
+    registryId?: RegistryId;
+    /**
+     * The name of the repository to receive the policy.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The JSON repository policy text to apply to the repository.
+     */
+    lifecyclePolicyText: LifecyclePolicyText;
+  }
+  export interface PutLifecyclePolicyResponse {
+    /**
+     * The registry ID associated with the request.
+     */
+    registryId?: RegistryId;
+    /**
+     * The repository name associated with the request.
+     */
+    repositoryName?: RepositoryName;
+    /**
+     * The JSON repository policy text.
+     */
+    lifecyclePolicyText?: LifecyclePolicyText;
+  }
   export type RegistryId = string;
   export interface Repository {
     /**
-     * The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the arn:aws:ecr namespace, followed by the region of the repository, the AWS account ID of the repository owner, the repository namespace, and then the repository name. For example, arn:aws:ecr:region:012345678910:repository/test.
+     * The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the arn:aws:ecr namespace, followed by the region of the repository, AWS account ID of the repository owner, repository namespace, and repository name. For example, arn:aws:ecr:region:012345678910:repository/test.
      */
     repositoryArn?: Arn;
     /**
@@ -695,11 +962,11 @@ declare namespace ECR {
      */
     repositoryName?: RepositoryName;
     /**
-     * The URI for the repository. You can use this URI for Docker push and pull operations.
+     * The URI for the repository. You can use this URI for Docker push or pull operations.
      */
     repositoryUri?: Url;
     /**
-     * The date and time, in JavaScript date/time format, when the repository was created.
+     * The date and time, in JavaScript date format, when the repository was created.
      */
     createdAt?: CreationTimestamp;
   }
@@ -739,15 +1006,85 @@ declare namespace ECR {
      */
     policyText?: RepositoryPolicyText;
   }
-  export type TagStatus = "TAGGED"|"UNTAGGED"|string;
-  export type UploadId = string;
-  export interface UploadLayerPartRequest {
+  export interface StartLifecyclePolicyPreviewRequest {
     /**
-     * The AWS account ID associated with the registry that you are uploading layer parts to. If you do not specify a registry, the default registry is assumed.
+     * The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
-     * The name of the repository that you are uploading layer parts to.
+     * The name of the repository to be evaluated.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The policy to be evaluated against. If you do not specify a policy, the current policy for the repository is used.
+     */
+    lifecyclePolicyText?: LifecyclePolicyText;
+  }
+  export interface StartLifecyclePolicyPreviewResponse {
+    /**
+     * The registry ID associated with the request.
+     */
+    registryId?: RegistryId;
+    /**
+     * The repository name associated with the request.
+     */
+    repositoryName?: RepositoryName;
+    /**
+     * The JSON repository policy text.
+     */
+    lifecyclePolicyText?: LifecyclePolicyText;
+    /**
+     * The status of the lifecycle policy preview request.
+     */
+    status?: LifecyclePolicyPreviewStatus;
+  }
+  export interface Tag {
+    /**
+     * One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values.
+     */
+    Key?: TagKey;
+    /**
+     * The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).
+     */
+    Value?: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the the resource to which to add tags. Currently, the only supported resource is an Amazon ECR repository.
+     */
+    resourceArn: Arn;
+    /**
+     * The tags to add to the resource. A tag is an array of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
+     */
+    tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagStatus = "TAGGED"|"UNTAGGED"|"ANY"|string;
+  export type TagValue = string;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource from which to remove tags. Currently, the only supported resource is an Amazon ECR repository.
+     */
+    resourceArn: Arn;
+    /**
+     * The keys of the tags to be removed.
+     */
+    tagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
+  export type UploadId = string;
+  export interface UploadLayerPartRequest {
+    /**
+     * The AWS account ID associated with the registry to which you are uploading layer parts. If you do not specify a registry, the default registry is assumed.
+     */
+    registryId?: RegistryId;
+    /**
+     * The name of the repository to which you are uploading layer parts.
      */
     repositoryName: RepositoryName;
     /**

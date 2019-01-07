@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "Support personal access tokens for GitHub source and app passwords for Bitbucket source"
+    },
+    {
+        "type": "feature",
+        "category": "ELBv2",
+        "description": "This release allows Application Load Balancers to route traffic to Lambda functions, in addition to instances and IP addresses."
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "This release enables the AWS Elemental MediaConnect input type in AWS Elemental MediaLive. This can then be used to automatically create and manage AWS Elemental MediaConnect Flow Outputs when you create a channel using those inputs."
+    }
+]

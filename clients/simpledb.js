@@ -1,7 +1,7 @@
 require('../lib/node_loader');
 var AWS = require('../lib/core');
-var Service = require('../lib/service');
-var apiLoader = require('../lib/api_loader');
+var Service = AWS.Service;
+var apiLoader = AWS.apiLoader;
 
 apiLoader.services['simpledb'] = {};
 AWS.SimpleDB = Service.defineService('simpledb', ['2009-04-15']);

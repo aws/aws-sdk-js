@@ -12,51 +12,67 @@ declare class Greengrass extends Service {
   constructor(options?: Greengrass.Types.ClientConfiguration)
   config: Config & Greengrass.Types.ClientConfiguration;
   /**
-   * Associates a role with a group. The role will be used by the AWS Greengrass core in order to access AWS cloud services. The role's permissions will allow Greengrass core Lambda functions to perform actions against the cloud.
+   * Associates a role with a group. Your Greengrass core will use the role to access AWS cloud services. The role's permissions should allow Greengrass core Lambda functions to perform actions against the cloud.
    */
   associateRoleToGroup(params: Greengrass.Types.AssociateRoleToGroupRequest, callback?: (err: AWSError, data: Greengrass.Types.AssociateRoleToGroupResponse) => void): Request<Greengrass.Types.AssociateRoleToGroupResponse, AWSError>;
   /**
-   * Associates a role with a group. The role will be used by the AWS Greengrass core in order to access AWS cloud services. The role's permissions will allow Greengrass core Lambda functions to perform actions against the cloud.
+   * Associates a role with a group. Your Greengrass core will use the role to access AWS cloud services. The role's permissions should allow Greengrass core Lambda functions to perform actions against the cloud.
    */
   associateRoleToGroup(callback?: (err: AWSError, data: Greengrass.Types.AssociateRoleToGroupResponse) => void): Request<Greengrass.Types.AssociateRoleToGroupResponse, AWSError>;
   /**
-   * Associates a role which is used by AWS Greengrass. AWS Greengrass uses the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. It needs to have minimum permissions in policy ``AWSGreengrassResourceAccessRolePolicy``
+   * Associates a role with your account. AWS IoT Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ''AWSGreengrassResourceAccessRolePolicy''.
    */
   associateServiceRoleToAccount(params: Greengrass.Types.AssociateServiceRoleToAccountRequest, callback?: (err: AWSError, data: Greengrass.Types.AssociateServiceRoleToAccountResponse) => void): Request<Greengrass.Types.AssociateServiceRoleToAccountResponse, AWSError>;
   /**
-   * Associates a role which is used by AWS Greengrass. AWS Greengrass uses the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. It needs to have minimum permissions in policy ``AWSGreengrassResourceAccessRolePolicy``
+   * Associates a role with your account. AWS IoT Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ''AWSGreengrassResourceAccessRolePolicy''.
    */
   associateServiceRoleToAccount(callback?: (err: AWSError, data: Greengrass.Types.AssociateServiceRoleToAccountResponse) => void): Request<Greengrass.Types.AssociateServiceRoleToAccountResponse, AWSError>;
   /**
-   * Creates a core definition. You may optionally provide the initial version of the core definition or use ''CreateCoreDefinitionVersion'' at a later time. AWS Greengrass Groups must each contain exactly 1 AWS Greengrass Core.
+   * Creates a connector definition. You may provide the initial version of the connector definition now or use ''CreateConnectorDefinitionVersion'' at a later time.
+   */
+  createConnectorDefinition(params: Greengrass.Types.CreateConnectorDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateConnectorDefinitionResponse) => void): Request<Greengrass.Types.CreateConnectorDefinitionResponse, AWSError>;
+  /**
+   * Creates a connector definition. You may provide the initial version of the connector definition now or use ''CreateConnectorDefinitionVersion'' at a later time.
+   */
+  createConnectorDefinition(callback?: (err: AWSError, data: Greengrass.Types.CreateConnectorDefinitionResponse) => void): Request<Greengrass.Types.CreateConnectorDefinitionResponse, AWSError>;
+  /**
+   * Creates a version of a connector definition which has already been defined.
+   */
+  createConnectorDefinitionVersion(params: Greengrass.Types.CreateConnectorDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateConnectorDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateConnectorDefinitionVersionResponse, AWSError>;
+  /**
+   * Creates a version of a connector definition which has already been defined.
+   */
+  createConnectorDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateConnectorDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateConnectorDefinitionVersionResponse, AWSError>;
+  /**
+   * Creates a core definition. You may provide the initial version of the core definition now or use ''CreateCoreDefinitionVersion'' at a later time. Greengrass groups must each contain exactly one Greengrass core.
    */
   createCoreDefinition(params: Greengrass.Types.CreateCoreDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateCoreDefinitionResponse) => void): Request<Greengrass.Types.CreateCoreDefinitionResponse, AWSError>;
   /**
-   * Creates a core definition. You may optionally provide the initial version of the core definition or use ''CreateCoreDefinitionVersion'' at a later time. AWS Greengrass Groups must each contain exactly 1 AWS Greengrass Core.
+   * Creates a core definition. You may provide the initial version of the core definition now or use ''CreateCoreDefinitionVersion'' at a later time. Greengrass groups must each contain exactly one Greengrass core.
    */
   createCoreDefinition(callback?: (err: AWSError, data: Greengrass.Types.CreateCoreDefinitionResponse) => void): Request<Greengrass.Types.CreateCoreDefinitionResponse, AWSError>;
   /**
-   * Creates a version of a core definition that has already been defined. AWS Greengrass Groups must each contain exactly 1 AWS Greengrass Core.
+   * Creates a version of a core definition that has already been defined. Greengrass groups must each contain exactly one Greengrass core.
    */
   createCoreDefinitionVersion(params: Greengrass.Types.CreateCoreDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateCoreDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateCoreDefinitionVersionResponse, AWSError>;
   /**
-   * Creates a version of a core definition that has already been defined. AWS Greengrass Groups must each contain exactly 1 AWS Greengrass Core.
+   * Creates a version of a core definition that has already been defined. Greengrass groups must each contain exactly one Greengrass core.
    */
   createCoreDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateCoreDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateCoreDefinitionVersionResponse, AWSError>;
   /**
-   * Creates a deployment.
+   * Creates a deployment. ''CreateDeployment'' requests are idempotent with respect to the ''X-Amzn-Client-Token'' token and the request parameters.
    */
   createDeployment(params: Greengrass.Types.CreateDeploymentRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateDeploymentResponse) => void): Request<Greengrass.Types.CreateDeploymentResponse, AWSError>;
   /**
-   * Creates a deployment.
+   * Creates a deployment. ''CreateDeployment'' requests are idempotent with respect to the ''X-Amzn-Client-Token'' token and the request parameters.
    */
   createDeployment(callback?: (err: AWSError, data: Greengrass.Types.CreateDeploymentResponse) => void): Request<Greengrass.Types.CreateDeploymentResponse, AWSError>;
   /**
-   * Creates a device definition. You may optinally provide the initial version of the device definition or use ``CreateDeviceDefinitionVersion`` at a later time.
+   * Creates a device definition. You may provide the initial version of the device definition now or use ''CreateDeviceDefinitionVersion'' at a later time.
    */
   createDeviceDefinition(params: Greengrass.Types.CreateDeviceDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateDeviceDefinitionResponse) => void): Request<Greengrass.Types.CreateDeviceDefinitionResponse, AWSError>;
   /**
-   * Creates a device definition. You may optinally provide the initial version of the device definition or use ``CreateDeviceDefinitionVersion`` at a later time.
+   * Creates a device definition. You may provide the initial version of the device definition now or use ''CreateDeviceDefinitionVersion'' at a later time.
    */
   createDeviceDefinition(callback?: (err: AWSError, data: Greengrass.Types.CreateDeviceDefinitionResponse) => void): Request<Greengrass.Types.CreateDeviceDefinitionResponse, AWSError>;
   /**
@@ -68,27 +84,27 @@ declare class Greengrass extends Service {
    */
   createDeviceDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateDeviceDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateDeviceDefinitionVersionResponse, AWSError>;
   /**
-   * Creates a Lambda function definition which contains a list of Lambda functions and their configurations to be used in a group. You can create an initial version of the definition by providing a list of Lambda functions and their configurations now, or use ``CreateFunctionDefinitionVersion`` later.
+   * Creates a Lambda function definition which contains a list of Lambda functions and their configurations to be used in a group. You can create an initial version of the definition by providing a list of Lambda functions and their configurations now, or use ''CreateFunctionDefinitionVersion'' later.
    */
   createFunctionDefinition(params: Greengrass.Types.CreateFunctionDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateFunctionDefinitionResponse) => void): Request<Greengrass.Types.CreateFunctionDefinitionResponse, AWSError>;
   /**
-   * Creates a Lambda function definition which contains a list of Lambda functions and their configurations to be used in a group. You can create an initial version of the definition by providing a list of Lambda functions and their configurations now, or use ``CreateFunctionDefinitionVersion`` later.
+   * Creates a Lambda function definition which contains a list of Lambda functions and their configurations to be used in a group. You can create an initial version of the definition by providing a list of Lambda functions and their configurations now, or use ''CreateFunctionDefinitionVersion'' later.
    */
   createFunctionDefinition(callback?: (err: AWSError, data: Greengrass.Types.CreateFunctionDefinitionResponse) => void): Request<Greengrass.Types.CreateFunctionDefinitionResponse, AWSError>;
   /**
-   * Create a version of a Lambda function definition that has already been defined.
+   * Creates a version of a Lambda function definition that has already been defined.
    */
   createFunctionDefinitionVersion(params: Greengrass.Types.CreateFunctionDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateFunctionDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateFunctionDefinitionVersionResponse, AWSError>;
   /**
-   * Create a version of a Lambda function definition that has already been defined.
+   * Creates a version of a Lambda function definition that has already been defined.
    */
   createFunctionDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateFunctionDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateFunctionDefinitionVersionResponse, AWSError>;
   /**
-   * Creates a group. You may optionally provide the initial version of the group or use ''CreateGroupVersion'' at a later time.
+   * Creates a group. You may provide the initial version of the group or use ''CreateGroupVersion'' at a later time. Tip: You can use the ''gg_group_setup'' package (https://github.com/awslabs/aws-greengrass-group-setup) as a library or command-line application to create and deploy Greengrass groups.
    */
   createGroup(params: Greengrass.Types.CreateGroupRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateGroupResponse) => void): Request<Greengrass.Types.CreateGroupResponse, AWSError>;
   /**
-   * Creates a group. You may optionally provide the initial version of the group or use ''CreateGroupVersion'' at a later time.
+   * Creates a group. You may provide the initial version of the group or use ''CreateGroupVersion'' at a later time. Tip: You can use the ''gg_group_setup'' package (https://github.com/awslabs/aws-greengrass-group-setup) as a library or command-line application to create and deploy Greengrass groups.
    */
   createGroup(callback?: (err: AWSError, data: Greengrass.Types.CreateGroupResponse) => void): Request<Greengrass.Types.CreateGroupResponse, AWSError>;
   /**
@@ -108,11 +124,11 @@ declare class Greengrass extends Service {
    */
   createGroupVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateGroupVersionResponse) => void): Request<Greengrass.Types.CreateGroupVersionResponse, AWSError>;
   /**
-   * Creates a logger definition. You may optionally provide the initial version of the logger definition or use ``CreateLoggerDefinitionVersion`` at a later time.
+   * Creates a logger definition. You may provide the initial version of the logger definition now or use ''CreateLoggerDefinitionVersion'' at a later time.
    */
   createLoggerDefinition(params: Greengrass.Types.CreateLoggerDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateLoggerDefinitionResponse) => void): Request<Greengrass.Types.CreateLoggerDefinitionResponse, AWSError>;
   /**
-   * Creates a logger definition. You may optionally provide the initial version of the logger definition or use ``CreateLoggerDefinitionVersion`` at a later time.
+   * Creates a logger definition. You may provide the initial version of the logger definition now or use ''CreateLoggerDefinitionVersion'' at a later time.
    */
   createLoggerDefinition(callback?: (err: AWSError, data: Greengrass.Types.CreateLoggerDefinitionResponse) => void): Request<Greengrass.Types.CreateLoggerDefinitionResponse, AWSError>;
   /**
@@ -124,11 +140,35 @@ declare class Greengrass extends Service {
    */
   createLoggerDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateLoggerDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateLoggerDefinitionVersionResponse, AWSError>;
   /**
-   * Creates a subscription definition. You may optionally provide the initial version of the subscription definition or use ``CreateSubscriptionDefinitionVersion`` at a later time.
+   * Creates a resource definition which contains a list of resources to be used in a group. You can create an initial version of the definition by providing a list of resources now, or use ''CreateResourceDefinitionVersion'' later.
+   */
+  createResourceDefinition(params: Greengrass.Types.CreateResourceDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateResourceDefinitionResponse) => void): Request<Greengrass.Types.CreateResourceDefinitionResponse, AWSError>;
+  /**
+   * Creates a resource definition which contains a list of resources to be used in a group. You can create an initial version of the definition by providing a list of resources now, or use ''CreateResourceDefinitionVersion'' later.
+   */
+  createResourceDefinition(callback?: (err: AWSError, data: Greengrass.Types.CreateResourceDefinitionResponse) => void): Request<Greengrass.Types.CreateResourceDefinitionResponse, AWSError>;
+  /**
+   * Creates a version of a resource definition that has already been defined.
+   */
+  createResourceDefinitionVersion(params: Greengrass.Types.CreateResourceDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateResourceDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateResourceDefinitionVersionResponse, AWSError>;
+  /**
+   * Creates a version of a resource definition that has already been defined.
+   */
+  createResourceDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateResourceDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateResourceDefinitionVersionResponse, AWSError>;
+  /**
+   * Creates a software update for a core or group of cores (specified as an IoT thing group.) Use this to update the OTA Agent as well as the Greengrass core software. It makes use of the IoT Jobs feature which provides additional commands to manage a Greengrass core software update job.
+   */
+  createSoftwareUpdateJob(params: Greengrass.Types.CreateSoftwareUpdateJobRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateSoftwareUpdateJobResponse) => void): Request<Greengrass.Types.CreateSoftwareUpdateJobResponse, AWSError>;
+  /**
+   * Creates a software update for a core or group of cores (specified as an IoT thing group.) Use this to update the OTA Agent as well as the Greengrass core software. It makes use of the IoT Jobs feature which provides additional commands to manage a Greengrass core software update job.
+   */
+  createSoftwareUpdateJob(callback?: (err: AWSError, data: Greengrass.Types.CreateSoftwareUpdateJobResponse) => void): Request<Greengrass.Types.CreateSoftwareUpdateJobResponse, AWSError>;
+  /**
+   * Creates a subscription definition. You may provide the initial version of the subscription definition now or use ''CreateSubscriptionDefinitionVersion'' at a later time.
    */
   createSubscriptionDefinition(params: Greengrass.Types.CreateSubscriptionDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateSubscriptionDefinitionResponse) => void): Request<Greengrass.Types.CreateSubscriptionDefinitionResponse, AWSError>;
   /**
-   * Creates a subscription definition. You may optionally provide the initial version of the subscription definition or use ``CreateSubscriptionDefinitionVersion`` at a later time.
+   * Creates a subscription definition. You may provide the initial version of the subscription definition now or use ''CreateSubscriptionDefinitionVersion'' at a later time.
    */
   createSubscriptionDefinition(callback?: (err: AWSError, data: Greengrass.Types.CreateSubscriptionDefinitionResponse) => void): Request<Greengrass.Types.CreateSubscriptionDefinitionResponse, AWSError>;
   /**
@@ -140,51 +180,67 @@ declare class Greengrass extends Service {
    */
   createSubscriptionDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateSubscriptionDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateSubscriptionDefinitionVersionResponse, AWSError>;
   /**
-   * Deletes a core definition. The core definition must not have been used in a deployment.
+   * Deletes a connector definition.
+   */
+  deleteConnectorDefinition(params: Greengrass.Types.DeleteConnectorDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteConnectorDefinitionResponse) => void): Request<Greengrass.Types.DeleteConnectorDefinitionResponse, AWSError>;
+  /**
+   * Deletes a connector definition.
+   */
+  deleteConnectorDefinition(callback?: (err: AWSError, data: Greengrass.Types.DeleteConnectorDefinitionResponse) => void): Request<Greengrass.Types.DeleteConnectorDefinitionResponse, AWSError>;
+  /**
+   * Deletes a core definition.
    */
   deleteCoreDefinition(params: Greengrass.Types.DeleteCoreDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteCoreDefinitionResponse) => void): Request<Greengrass.Types.DeleteCoreDefinitionResponse, AWSError>;
   /**
-   * Deletes a core definition. The core definition must not have been used in a deployment.
+   * Deletes a core definition.
    */
   deleteCoreDefinition(callback?: (err: AWSError, data: Greengrass.Types.DeleteCoreDefinitionResponse) => void): Request<Greengrass.Types.DeleteCoreDefinitionResponse, AWSError>;
   /**
-   * Deletes a device definition. The device definition must not have been used in a deployment.
+   * Deletes a device definition.
    */
   deleteDeviceDefinition(params: Greengrass.Types.DeleteDeviceDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteDeviceDefinitionResponse) => void): Request<Greengrass.Types.DeleteDeviceDefinitionResponse, AWSError>;
   /**
-   * Deletes a device definition. The device definition must not have been used in a deployment.
+   * Deletes a device definition.
    */
   deleteDeviceDefinition(callback?: (err: AWSError, data: Greengrass.Types.DeleteDeviceDefinitionResponse) => void): Request<Greengrass.Types.DeleteDeviceDefinitionResponse, AWSError>;
   /**
-   * Deletes a Lambda function definition. The Lambda function definition must not have been used in a deployment.
+   * Deletes a Lambda function definition.
    */
   deleteFunctionDefinition(params: Greengrass.Types.DeleteFunctionDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteFunctionDefinitionResponse) => void): Request<Greengrass.Types.DeleteFunctionDefinitionResponse, AWSError>;
   /**
-   * Deletes a Lambda function definition. The Lambda function definition must not have been used in a deployment.
+   * Deletes a Lambda function definition.
    */
   deleteFunctionDefinition(callback?: (err: AWSError, data: Greengrass.Types.DeleteFunctionDefinitionResponse) => void): Request<Greengrass.Types.DeleteFunctionDefinitionResponse, AWSError>;
   /**
-   * Deletes a group. The group must not have been used in deployment.
+   * Deletes a group.
    */
   deleteGroup(params: Greengrass.Types.DeleteGroupRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteGroupResponse) => void): Request<Greengrass.Types.DeleteGroupResponse, AWSError>;
   /**
-   * Deletes a group. The group must not have been used in deployment.
+   * Deletes a group.
    */
   deleteGroup(callback?: (err: AWSError, data: Greengrass.Types.DeleteGroupResponse) => void): Request<Greengrass.Types.DeleteGroupResponse, AWSError>;
   /**
-   * Deletes a logger definition. The logger definition must not have been used in a deployment.
+   * Deletes a logger definition.
    */
   deleteLoggerDefinition(params: Greengrass.Types.DeleteLoggerDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteLoggerDefinitionResponse) => void): Request<Greengrass.Types.DeleteLoggerDefinitionResponse, AWSError>;
   /**
-   * Deletes a logger definition. The logger definition must not have been used in a deployment.
+   * Deletes a logger definition.
    */
   deleteLoggerDefinition(callback?: (err: AWSError, data: Greengrass.Types.DeleteLoggerDefinitionResponse) => void): Request<Greengrass.Types.DeleteLoggerDefinitionResponse, AWSError>;
   /**
-   * Deletes a subscription definition. The subscription definition must not have been used in a deployment.
+   * Deletes a resource definition.
+   */
+  deleteResourceDefinition(params: Greengrass.Types.DeleteResourceDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteResourceDefinitionResponse) => void): Request<Greengrass.Types.DeleteResourceDefinitionResponse, AWSError>;
+  /**
+   * Deletes a resource definition.
+   */
+  deleteResourceDefinition(callback?: (err: AWSError, data: Greengrass.Types.DeleteResourceDefinitionResponse) => void): Request<Greengrass.Types.DeleteResourceDefinitionResponse, AWSError>;
+  /**
+   * Deletes a subscription definition.
    */
   deleteSubscriptionDefinition(params: Greengrass.Types.DeleteSubscriptionDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteSubscriptionDefinitionResponse) => void): Request<Greengrass.Types.DeleteSubscriptionDefinitionResponse, AWSError>;
   /**
-   * Deletes a subscription definition. The subscription definition must not have been used in a deployment.
+   * Deletes a subscription definition.
    */
   deleteSubscriptionDefinition(callback?: (err: AWSError, data: Greengrass.Types.DeleteSubscriptionDefinitionResponse) => void): Request<Greengrass.Types.DeleteSubscriptionDefinitionResponse, AWSError>;
   /**
@@ -196,11 +252,11 @@ declare class Greengrass extends Service {
    */
   disassociateRoleFromGroup(callback?: (err: AWSError, data: Greengrass.Types.DisassociateRoleFromGroupResponse) => void): Request<Greengrass.Types.DisassociateRoleFromGroupResponse, AWSError>;
   /**
-   * Disassociates the service role from the account. Without a service role, deployments will not work.
+   * Disassociates the service role from your account. Without a service role, deployments will not work.
    */
   disassociateServiceRoleFromAccount(params: Greengrass.Types.DisassociateServiceRoleFromAccountRequest, callback?: (err: AWSError, data: Greengrass.Types.DisassociateServiceRoleFromAccountResponse) => void): Request<Greengrass.Types.DisassociateServiceRoleFromAccountResponse, AWSError>;
   /**
-   * Disassociates the service role from the account. Without a service role, deployments will not work.
+   * Disassociates the service role from your account. Without a service role, deployments will not work.
    */
   disassociateServiceRoleFromAccount(callback?: (err: AWSError, data: Greengrass.Types.DisassociateServiceRoleFromAccountResponse) => void): Request<Greengrass.Types.DisassociateServiceRoleFromAccountResponse, AWSError>;
   /**
@@ -212,6 +268,14 @@ declare class Greengrass extends Service {
    */
   getAssociatedRole(callback?: (err: AWSError, data: Greengrass.Types.GetAssociatedRoleResponse) => void): Request<Greengrass.Types.GetAssociatedRoleResponse, AWSError>;
   /**
+   * Returns the status of a bulk deployment.
+   */
+  getBulkDeploymentStatus(params: Greengrass.Types.GetBulkDeploymentStatusRequest, callback?: (err: AWSError, data: Greengrass.Types.GetBulkDeploymentStatusResponse) => void): Request<Greengrass.Types.GetBulkDeploymentStatusResponse, AWSError>;
+  /**
+   * Returns the status of a bulk deployment.
+   */
+  getBulkDeploymentStatus(callback?: (err: AWSError, data: Greengrass.Types.GetBulkDeploymentStatusResponse) => void): Request<Greengrass.Types.GetBulkDeploymentStatusResponse, AWSError>;
+  /**
    * Retrieves the connectivity information for a core.
    */
   getConnectivityInfo(params: Greengrass.Types.GetConnectivityInfoRequest, callback?: (err: AWSError, data: Greengrass.Types.GetConnectivityInfoResponse) => void): Request<Greengrass.Types.GetConnectivityInfoResponse, AWSError>;
@@ -219,6 +283,22 @@ declare class Greengrass extends Service {
    * Retrieves the connectivity information for a core.
    */
   getConnectivityInfo(callback?: (err: AWSError, data: Greengrass.Types.GetConnectivityInfoResponse) => void): Request<Greengrass.Types.GetConnectivityInfoResponse, AWSError>;
+  /**
+   * Retrieves information about a connector definition.
+   */
+  getConnectorDefinition(params: Greengrass.Types.GetConnectorDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetConnectorDefinitionResponse) => void): Request<Greengrass.Types.GetConnectorDefinitionResponse, AWSError>;
+  /**
+   * Retrieves information about a connector definition.
+   */
+  getConnectorDefinition(callback?: (err: AWSError, data: Greengrass.Types.GetConnectorDefinitionResponse) => void): Request<Greengrass.Types.GetConnectorDefinitionResponse, AWSError>;
+  /**
+   * Retrieves information about a connector definition version, including the connectors that the version contains. Connectors are prebuilt modules that interact with local infrastructure, device protocols, AWS, and other cloud services.
+   */
+  getConnectorDefinitionVersion(params: Greengrass.Types.GetConnectorDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetConnectorDefinitionVersionResponse) => void): Request<Greengrass.Types.GetConnectorDefinitionVersionResponse, AWSError>;
+  /**
+   * Retrieves information about a connector definition version, including the connectors that the version contains. Connectors are prebuilt modules that interact with local infrastructure, device protocols, AWS, and other cloud services.
+   */
+  getConnectorDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.GetConnectorDefinitionVersionResponse) => void): Request<Greengrass.Types.GetConnectorDefinitionVersionResponse, AWSError>;
   /**
    * Retrieves information about a core definition version.
    */
@@ -260,19 +340,19 @@ declare class Greengrass extends Service {
    */
   getDeviceDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.GetDeviceDefinitionVersionResponse) => void): Request<Greengrass.Types.GetDeviceDefinitionVersionResponse, AWSError>;
   /**
-   * Retrieves information about a Lambda function definition, such as its creation time and latest version.
+   * Retrieves information about a Lambda function definition, including its creation time and latest version.
    */
   getFunctionDefinition(params: Greengrass.Types.GetFunctionDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetFunctionDefinitionResponse) => void): Request<Greengrass.Types.GetFunctionDefinitionResponse, AWSError>;
   /**
-   * Retrieves information about a Lambda function definition, such as its creation time and latest version.
+   * Retrieves information about a Lambda function definition, including its creation time and latest version.
    */
   getFunctionDefinition(callback?: (err: AWSError, data: Greengrass.Types.GetFunctionDefinitionResponse) => void): Request<Greengrass.Types.GetFunctionDefinitionResponse, AWSError>;
   /**
-   * Retrieves information about a Lambda function definition version, such as which Lambda functions are included in the version and their configurations.
+   * Retrieves information about a Lambda function definition version, including which Lambda functions are included in the version and their configurations.
    */
   getFunctionDefinitionVersion(params: Greengrass.Types.GetFunctionDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetFunctionDefinitionVersionResponse) => void): Request<Greengrass.Types.GetFunctionDefinitionVersionResponse, AWSError>;
   /**
-   * Retrieves information about a Lambda function definition version, such as which Lambda functions are included in the version and their configurations.
+   * Retrieves information about a Lambda function definition version, including which Lambda functions are included in the version and their configurations.
    */
   getFunctionDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.GetFunctionDefinitionVersionResponse) => void): Request<Greengrass.Types.GetFunctionDefinitionVersionResponse, AWSError>;
   /**
@@ -324,11 +404,27 @@ declare class Greengrass extends Service {
    */
   getLoggerDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.GetLoggerDefinitionVersionResponse) => void): Request<Greengrass.Types.GetLoggerDefinitionVersionResponse, AWSError>;
   /**
-   * Retrieves the service role that is attached to the account.
+   * Retrieves information about a resource definition, including its creation time and latest version.
+   */
+  getResourceDefinition(params: Greengrass.Types.GetResourceDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetResourceDefinitionResponse) => void): Request<Greengrass.Types.GetResourceDefinitionResponse, AWSError>;
+  /**
+   * Retrieves information about a resource definition, including its creation time and latest version.
+   */
+  getResourceDefinition(callback?: (err: AWSError, data: Greengrass.Types.GetResourceDefinitionResponse) => void): Request<Greengrass.Types.GetResourceDefinitionResponse, AWSError>;
+  /**
+   * Retrieves information about a resource definition version, including which resources are included in the version.
+   */
+  getResourceDefinitionVersion(params: Greengrass.Types.GetResourceDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetResourceDefinitionVersionResponse) => void): Request<Greengrass.Types.GetResourceDefinitionVersionResponse, AWSError>;
+  /**
+   * Retrieves information about a resource definition version, including which resources are included in the version.
+   */
+  getResourceDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.GetResourceDefinitionVersionResponse) => void): Request<Greengrass.Types.GetResourceDefinitionVersionResponse, AWSError>;
+  /**
+   * Retrieves the service role that is attached to your account.
    */
   getServiceRoleForAccount(params: Greengrass.Types.GetServiceRoleForAccountRequest, callback?: (err: AWSError, data: Greengrass.Types.GetServiceRoleForAccountResponse) => void): Request<Greengrass.Types.GetServiceRoleForAccountResponse, AWSError>;
   /**
-   * Retrieves the service role that is attached to the account.
+   * Retrieves the service role that is attached to your account.
    */
   getServiceRoleForAccount(callback?: (err: AWSError, data: Greengrass.Types.GetServiceRoleForAccountResponse) => void): Request<Greengrass.Types.GetServiceRoleForAccountResponse, AWSError>;
   /**
@@ -348,11 +444,43 @@ declare class Greengrass extends Service {
    */
   getSubscriptionDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.GetSubscriptionDefinitionVersionResponse) => void): Request<Greengrass.Types.GetSubscriptionDefinitionVersionResponse, AWSError>;
   /**
-   * Lists versions of a core definition.
+   * Gets a paginated list of the deployments that have been started in a bulk deployment operation, and their current deployment status.
+   */
+  listBulkDeploymentDetailedReports(params: Greengrass.Types.ListBulkDeploymentDetailedReportsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListBulkDeploymentDetailedReportsResponse) => void): Request<Greengrass.Types.ListBulkDeploymentDetailedReportsResponse, AWSError>;
+  /**
+   * Gets a paginated list of the deployments that have been started in a bulk deployment operation, and their current deployment status.
+   */
+  listBulkDeploymentDetailedReports(callback?: (err: AWSError, data: Greengrass.Types.ListBulkDeploymentDetailedReportsResponse) => void): Request<Greengrass.Types.ListBulkDeploymentDetailedReportsResponse, AWSError>;
+  /**
+   * Returns a list of bulk deployments.
+   */
+  listBulkDeployments(params: Greengrass.Types.ListBulkDeploymentsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListBulkDeploymentsResponse) => void): Request<Greengrass.Types.ListBulkDeploymentsResponse, AWSError>;
+  /**
+   * Returns a list of bulk deployments.
+   */
+  listBulkDeployments(callback?: (err: AWSError, data: Greengrass.Types.ListBulkDeploymentsResponse) => void): Request<Greengrass.Types.ListBulkDeploymentsResponse, AWSError>;
+  /**
+   * Lists the versions of a connector definition, which are containers for connectors. Connectors run on the Greengrass core and contain built-in integration with local infrastructure, device protocols, AWS, and other cloud services.
+   */
+  listConnectorDefinitionVersions(params: Greengrass.Types.ListConnectorDefinitionVersionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListConnectorDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListConnectorDefinitionVersionsResponse, AWSError>;
+  /**
+   * Lists the versions of a connector definition, which are containers for connectors. Connectors run on the Greengrass core and contain built-in integration with local infrastructure, device protocols, AWS, and other cloud services.
+   */
+  listConnectorDefinitionVersions(callback?: (err: AWSError, data: Greengrass.Types.ListConnectorDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListConnectorDefinitionVersionsResponse, AWSError>;
+  /**
+   * Retrieves a list of connector definitions.
+   */
+  listConnectorDefinitions(params: Greengrass.Types.ListConnectorDefinitionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListConnectorDefinitionsResponse) => void): Request<Greengrass.Types.ListConnectorDefinitionsResponse, AWSError>;
+  /**
+   * Retrieves a list of connector definitions.
+   */
+  listConnectorDefinitions(callback?: (err: AWSError, data: Greengrass.Types.ListConnectorDefinitionsResponse) => void): Request<Greengrass.Types.ListConnectorDefinitionsResponse, AWSError>;
+  /**
+   * Lists the versions of a core definition.
    */
   listCoreDefinitionVersions(params: Greengrass.Types.ListCoreDefinitionVersionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListCoreDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListCoreDefinitionVersionsResponse, AWSError>;
   /**
-   * Lists versions of a core definition.
+   * Lists the versions of a core definition.
    */
   listCoreDefinitionVersions(callback?: (err: AWSError, data: Greengrass.Types.ListCoreDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListCoreDefinitionVersionsResponse, AWSError>;
   /**
@@ -412,11 +540,11 @@ declare class Greengrass extends Service {
    */
   listGroupCertificateAuthorities(callback?: (err: AWSError, data: Greengrass.Types.ListGroupCertificateAuthoritiesResponse) => void): Request<Greengrass.Types.ListGroupCertificateAuthoritiesResponse, AWSError>;
   /**
-   * List the versions of a group.
+   * Lists the versions of a group.
    */
   listGroupVersions(params: Greengrass.Types.ListGroupVersionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListGroupVersionsResponse) => void): Request<Greengrass.Types.ListGroupVersionsResponse, AWSError>;
   /**
-   * List the versions of a group.
+   * Lists the versions of a group.
    */
   listGroupVersions(callback?: (err: AWSError, data: Greengrass.Types.ListGroupVersionsResponse) => void): Request<Greengrass.Types.ListGroupVersionsResponse, AWSError>;
   /**
@@ -444,6 +572,22 @@ declare class Greengrass extends Service {
    */
   listLoggerDefinitions(callback?: (err: AWSError, data: Greengrass.Types.ListLoggerDefinitionsResponse) => void): Request<Greengrass.Types.ListLoggerDefinitionsResponse, AWSError>;
   /**
+   * Lists the versions of a resource definition.
+   */
+  listResourceDefinitionVersions(params: Greengrass.Types.ListResourceDefinitionVersionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListResourceDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListResourceDefinitionVersionsResponse, AWSError>;
+  /**
+   * Lists the versions of a resource definition.
+   */
+  listResourceDefinitionVersions(callback?: (err: AWSError, data: Greengrass.Types.ListResourceDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListResourceDefinitionVersionsResponse, AWSError>;
+  /**
+   * Retrieves a list of resource definitions.
+   */
+  listResourceDefinitions(params: Greengrass.Types.ListResourceDefinitionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListResourceDefinitionsResponse) => void): Request<Greengrass.Types.ListResourceDefinitionsResponse, AWSError>;
+  /**
+   * Retrieves a list of resource definitions.
+   */
+  listResourceDefinitions(callback?: (err: AWSError, data: Greengrass.Types.ListResourceDefinitionsResponse) => void): Request<Greengrass.Types.ListResourceDefinitionsResponse, AWSError>;
+  /**
    * Lists the versions of a subscription definition.
    */
   listSubscriptionDefinitionVersions(params: Greengrass.Types.ListSubscriptionDefinitionVersionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListSubscriptionDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListSubscriptionDefinitionVersionsResponse, AWSError>;
@@ -460,6 +604,30 @@ declare class Greengrass extends Service {
    */
   listSubscriptionDefinitions(callback?: (err: AWSError, data: Greengrass.Types.ListSubscriptionDefinitionsResponse) => void): Request<Greengrass.Types.ListSubscriptionDefinitionsResponse, AWSError>;
   /**
+   * Resets a group's deployments.
+   */
+  resetDeployments(params: Greengrass.Types.ResetDeploymentsRequest, callback?: (err: AWSError, data: Greengrass.Types.ResetDeploymentsResponse) => void): Request<Greengrass.Types.ResetDeploymentsResponse, AWSError>;
+  /**
+   * Resets a group's deployments.
+   */
+  resetDeployments(callback?: (err: AWSError, data: Greengrass.Types.ResetDeploymentsResponse) => void): Request<Greengrass.Types.ResetDeploymentsResponse, AWSError>;
+  /**
+   * Deploys multiple groups in one operation. This action starts the bulk deployment of a specified set of group versions. Each group version deployment will be triggered with an adaptive rate that has a fixed upper limit. We recommend that you include an ''X-Amzn-Client-Token'' token in every ''StartBulkDeployment'' request. These requests are idempotent with respect to the token and the request parameters.
+   */
+  startBulkDeployment(params: Greengrass.Types.StartBulkDeploymentRequest, callback?: (err: AWSError, data: Greengrass.Types.StartBulkDeploymentResponse) => void): Request<Greengrass.Types.StartBulkDeploymentResponse, AWSError>;
+  /**
+   * Deploys multiple groups in one operation. This action starts the bulk deployment of a specified set of group versions. Each group version deployment will be triggered with an adaptive rate that has a fixed upper limit. We recommend that you include an ''X-Amzn-Client-Token'' token in every ''StartBulkDeployment'' request. These requests are idempotent with respect to the token and the request parameters.
+   */
+  startBulkDeployment(callback?: (err: AWSError, data: Greengrass.Types.StartBulkDeploymentResponse) => void): Request<Greengrass.Types.StartBulkDeploymentResponse, AWSError>;
+  /**
+   * Stops the execution of a bulk deployment. This action returns a status of ''Stopping'' until the deployment is stopped. You cannot start a new bulk deployment while a previous deployment is in the ''Stopping'' state. This action doesn't rollback completed deployments or cancel pending deployments.
+   */
+  stopBulkDeployment(params: Greengrass.Types.StopBulkDeploymentRequest, callback?: (err: AWSError, data: Greengrass.Types.StopBulkDeploymentResponse) => void): Request<Greengrass.Types.StopBulkDeploymentResponse, AWSError>;
+  /**
+   * Stops the execution of a bulk deployment. This action returns a status of ''Stopping'' until the deployment is stopped. You cannot start a new bulk deployment while a previous deployment is in the ''Stopping'' state. This action doesn't rollback completed deployments or cancel pending deployments.
+   */
+  stopBulkDeployment(callback?: (err: AWSError, data: Greengrass.Types.StopBulkDeploymentResponse) => void): Request<Greengrass.Types.StopBulkDeploymentResponse, AWSError>;
+  /**
    * Updates the connectivity information for the core. Any devices that belong to the group which has this core will receive this information in order to find the location of the core and connect to it.
    */
   updateConnectivityInfo(params: Greengrass.Types.UpdateConnectivityInfoRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateConnectivityInfoResponse) => void): Request<Greengrass.Types.UpdateConnectivityInfoResponse, AWSError>;
@@ -467,6 +635,14 @@ declare class Greengrass extends Service {
    * Updates the connectivity information for the core. Any devices that belong to the group which has this core will receive this information in order to find the location of the core and connect to it.
    */
   updateConnectivityInfo(callback?: (err: AWSError, data: Greengrass.Types.UpdateConnectivityInfoResponse) => void): Request<Greengrass.Types.UpdateConnectivityInfoResponse, AWSError>;
+  /**
+   * Updates a connector definition.
+   */
+  updateConnectorDefinition(params: Greengrass.Types.UpdateConnectorDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateConnectorDefinitionResponse) => void): Request<Greengrass.Types.UpdateConnectorDefinitionResponse, AWSError>;
+  /**
+   * Updates a connector definition.
+   */
+  updateConnectorDefinition(callback?: (err: AWSError, data: Greengrass.Types.UpdateConnectorDefinitionResponse) => void): Request<Greengrass.Types.UpdateConnectorDefinitionResponse, AWSError>;
   /**
    * Updates a core definition.
    */
@@ -500,11 +676,11 @@ declare class Greengrass extends Service {
    */
   updateGroup(callback?: (err: AWSError, data: Greengrass.Types.UpdateGroupResponse) => void): Request<Greengrass.Types.UpdateGroupResponse, AWSError>;
   /**
-   * Updates the Cert expiry time for a group.
+   * Updates the Certificate expiry time for a group.
    */
   updateGroupCertificateConfiguration(params: Greengrass.Types.UpdateGroupCertificateConfigurationRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateGroupCertificateConfigurationResponse) => void): Request<Greengrass.Types.UpdateGroupCertificateConfigurationResponse, AWSError>;
   /**
-   * Updates the Cert expiry time for a group.
+   * Updates the Certificate expiry time for a group.
    */
   updateGroupCertificateConfiguration(callback?: (err: AWSError, data: Greengrass.Types.UpdateGroupCertificateConfigurationResponse) => void): Request<Greengrass.Types.UpdateGroupCertificateConfigurationResponse, AWSError>;
   /**
@@ -515,6 +691,14 @@ declare class Greengrass extends Service {
    * Updates a logger definition.
    */
   updateLoggerDefinition(callback?: (err: AWSError, data: Greengrass.Types.UpdateLoggerDefinitionResponse) => void): Request<Greengrass.Types.UpdateLoggerDefinitionResponse, AWSError>;
+  /**
+   * Updates a resource definition.
+   */
+  updateResourceDefinition(params: Greengrass.Types.UpdateResourceDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateResourceDefinitionResponse) => void): Request<Greengrass.Types.UpdateResourceDefinitionResponse, AWSError>;
+  /**
+   * Updates a resource definition.
+   */
+  updateResourceDefinition(callback?: (err: AWSError, data: Greengrass.Types.UpdateResourceDefinitionResponse) => void): Request<Greengrass.Types.UpdateResourceDefinitionResponse, AWSError>;
   /**
    * Updates a subscription definition.
    */
@@ -527,39 +711,104 @@ declare class Greengrass extends Service {
 declare namespace Greengrass {
   export interface AssociateRoleToGroupRequest {
     /**
-     * The unique Id of the AWS Greengrass Group
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
-     * Role arn you wish to associate with this group.
+     * The ARN of the role you wish to associate with this group.
      */
     RoleArn?: __string;
   }
   export interface AssociateRoleToGroupResponse {
     /**
-     * Time the role arn was associated to your group.
+     * The time, in milliseconds since the epoch, when the role ARN was associated with the group.
      */
     AssociatedAt?: __string;
   }
   export interface AssociateServiceRoleToAccountRequest {
     /**
-     * Role arn you wish to associate with this account.
+     * The ARN of the service role you wish to associate with your account.
      */
     RoleArn?: __string;
   }
   export interface AssociateServiceRoleToAccountResponse {
     /**
-     * Time when the service role was associated to the account.
+     * The time when the service role was associated with the account.
      */
     AssociatedAt?: __string;
   }
+  export interface BulkDeployment {
+    /**
+     * The ARN of the bulk deployment.
+     */
+    BulkDeploymentArn?: __string;
+    /**
+     * The ID of the bulk deployment.
+     */
+    BulkDeploymentId?: __string;
+    /**
+     * The time, in ISO format, when the deployment was created.
+     */
+    CreatedAt?: __string;
+  }
+  export interface BulkDeploymentMetrics {
+    /**
+     * The total number of records that returned a non-retryable error. For example, this can occur if a group record from the input file uses an invalid format or specifies a nonexistent group version, or if the execution role doesn't grant permission to deploy a group or group version.
+     */
+    InvalidInputRecords?: __integer;
+    /**
+     * The total number of group records from the input file that have been processed so far, or attempted.
+     */
+    RecordsProcessed?: __integer;
+    /**
+     * The total number of deployment attempts that returned a retryable error. For example, a retry is triggered if the attempt to deploy a group returns a throttling error. ''StartBulkDeployment'' retries a group deployment up to five times.
+     */
+    RetryAttempts?: __integer;
+  }
+  export interface BulkDeploymentResult {
+    /**
+     * The time, in ISO format, when the deployment was created.
+     */
+    CreatedAt?: __string;
+    /**
+     * The ARN of the group deployment.
+     */
+    DeploymentArn?: __string;
+    /**
+     * The ID of the group deployment.
+     */
+    DeploymentId?: __string;
+    /**
+     * The current status of the group deployment: ''Pending'', ''InProgress'', ''Success'', or ''Failure''.
+     */
+    DeploymentStatus?: __string;
+    /**
+     * The type of the deployment.
+     */
+    DeploymentType?: DeploymentType;
+    /**
+     * Details about the error.
+     */
+    ErrorDetails?: ErrorDetails;
+    /**
+     * The error message for a failed deployment
+     */
+    ErrorMessage?: __string;
+    /**
+     * The ARN of the Greengrass group.
+     */
+    GroupArn?: __string;
+  }
+  export type BulkDeploymentResults = BulkDeploymentResult[];
+  export type BulkDeploymentStatus = "Initializing"|"Running"|"Completed"|"Stopping"|"Stopped"|"Failed"|string;
+  export type BulkDeployments = BulkDeployment[];
   export interface ConnectivityInfo {
     /**
-     * Endpoint for the GGC. Can be an IP address or DNS.
+     * The endpoint for the Greengrass core. Can be an IP address or DNS.
      */
     HostAddress?: __string;
     /**
-     * Element Id for this entry in the list.
+     * The ID of the connectivity information.
      */
     Id?: __string;
     /**
@@ -567,587 +816,801 @@ declare namespace Greengrass {
      */
     Metadata?: __string;
     /**
-     * Port of the GGC. Usually 8883.
+     * The port of the Greengrass core. Usually 8883.
      */
     PortNumber?: __integer;
   }
-  export interface Core {
+  export interface Connector {
     /**
-     * Certificate arn of the core.
+     * The ARN of the connector.
      */
-    CertificateArn?: __string;
+    ConnectorArn?: __string;
     /**
-     * Element Id for this entry in the list.
+     * A descriptive or arbitrary ID for the connector. This value must be unique within the connector definition version. Max length is 128 characters with pattern [a-zA-Z0-9:_-]+.
      */
     Id?: __string;
     /**
-     * If true, the local shadow value automatically syncs with the cloud's shadow state.
+     * The parameters or configuration that the connector uses.
+     */
+    Parameters?: __mapOf__string;
+  }
+  export interface ConnectorDefinitionVersion {
+    /**
+     * A list of references to connectors in this version, with their corresponding configuration settings.
+     */
+    Connectors?: __listOfConnector;
+  }
+  export interface Core {
+    /**
+     * The ARN of the certificate associated with the core.
+     */
+    CertificateArn?: __string;
+    /**
+     * A descriptive or arbitrary ID for the core. This value must be unique within the core definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
+     */
+    Id?: __string;
+    /**
+     * If true, the core's local shadow is automatically synced with the cloud.
      */
     SyncShadow?: __boolean;
     /**
-     * Thing arn of the core.
+     * The ARN of the thing which is the core.
      */
     ThingArn?: __string;
   }
   export interface CoreDefinitionVersion {
     /**
-     * Cores in the definition version.
+     * A list of cores in the core definition version.
      */
-    Cores?: ListOfCore;
+    Cores?: __listOfCore;
   }
-  export interface CreateCoreDefinitionRequest {
+  export interface CreateConnectorDefinitionRequest {
     /**
-     * The client token used to request idempotent operations.
+     * A client token used to correlate requests and responses.
      */
     AmznClientToken?: __string;
     /**
-     * Information on the initial version
+     * Information about the initial version of the connector definition.
+     */
+    InitialVersion?: ConnectorDefinitionVersion;
+    /**
+     * The name of the connector definition.
+     */
+    Name?: __string;
+  }
+  export interface CreateConnectorDefinitionResponse {
+    /**
+     * The ARN of the definition.
+     */
+    Arn?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the definition was created.
+     */
+    CreationTimestamp?: __string;
+    /**
+     * The ID of the definition.
+     */
+    Id?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the definition was last updated.
+     */
+    LastUpdatedTimestamp?: __string;
+    /**
+     * The latest version of the definition.
+     */
+    LatestVersion?: __string;
+    /**
+     * The ARN of the latest version of the definition.
+     */
+    LatestVersionArn?: __string;
+    /**
+     * The name of the definition.
+     */
+    Name?: __string;
+  }
+  export interface CreateConnectorDefinitionVersionRequest {
+    /**
+     * A client token used to correlate requests and responses.
+     */
+    AmznClientToken?: __string;
+    /**
+     * The ID of the connector definition.
+     */
+    ConnectorDefinitionId: __string;
+    /**
+     * A list of references to connectors in this version, with their corresponding configuration settings.
+     */
+    Connectors?: __listOfConnector;
+  }
+  export interface CreateConnectorDefinitionVersionResponse {
+    /**
+     * The ARN of the version.
+     */
+    Arn?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the version was created.
+     */
+    CreationTimestamp?: __string;
+    /**
+     * The ID of the version.
+     */
+    Id?: __string;
+    /**
+     * The unique ID of the version.
+     */
+    Version?: __string;
+  }
+  export interface CreateCoreDefinitionRequest {
+    /**
+     * A client token used to correlate requests and responses.
+     */
+    AmznClientToken?: __string;
+    /**
+     * Information about the initial version of the core definition.
      */
     InitialVersion?: CoreDefinitionVersion;
     /**
-     * name of the core definition
+     * The name of the core definition.
      */
     Name?: __string;
   }
   export interface CreateCoreDefinitionResponse {
     /**
-     * Arn of the definition.
+     * The ARN of the definition.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the definition was created.
+     * The time, in milliseconds since the epoch, when the definition was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of the definition.
+     * The ID of the definition.
      */
     Id?: __string;
     /**
-     * Last updated timestamp of the definition.
+     * The time, in milliseconds since the epoch, when the definition was last updated.
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * Last version of the definition.
+     * The latest version of the definition.
      */
     LatestVersion?: __string;
     /**
-     * Latest version arn of the definition.
+     * The ARN of the latest version of the definition.
      */
     LatestVersionArn?: __string;
     /**
-     * Name of the definition.
+     * The name of the definition.
      */
     Name?: __string;
   }
   export interface CreateCoreDefinitionVersionRequest {
     /**
-     * The client token used to request idempotent operations.
+     * A client token used to correlate requests and responses.
      */
     AmznClientToken?: __string;
     /**
-     * core definition Id
+     * The ID of the core definition.
      */
     CoreDefinitionId: __string;
     /**
-     * Cores in the definition version.
+     * A list of cores in the core definition version.
      */
-    Cores?: ListOfCore;
+    Cores?: __listOfCore;
   }
   export interface CreateCoreDefinitionVersionResponse {
     /**
-     * Arn of the version.
+     * The ARN of the version.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the version was created.
+     * The time, in milliseconds since the epoch, when the version was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of the resource container.
+     * The ID of the version.
      */
     Id?: __string;
     /**
-     * Unique Id of a version.
+     * The unique ID of the version.
      */
     Version?: __string;
   }
   export interface CreateDeploymentRequest {
     /**
-     * The client token used to request idempotent operations.
+     * A client token used to correlate requests and responses.
      */
     AmznClientToken?: __string;
     /**
-     * Id of the deployment if you wish to redeploy a previous deployment.
+     * The ID of the deployment if you wish to redeploy a previous deployment.
      */
     DeploymentId?: __string;
     /**
-     * Type of deployment
+     * The type of deployment. When used in ''CreateDeployment'', only ''NewDeployment'' and ''Redeployment'' are valid.
      */
     DeploymentType?: DeploymentType;
     /**
-     * The unique Id of the AWS Greengrass Group
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
-     * Group Version you wish to deploy.
+     * The ID of the group version to be deployed.
      */
     GroupVersionId?: __string;
   }
   export interface CreateDeploymentResponse {
     /**
-     * Arn of the deployment.
+     * The ARN of the deployment.
      */
     DeploymentArn?: __string;
     /**
-     * Id of the deployment.
+     * The ID of the deployment.
      */
     DeploymentId?: __string;
   }
   export interface CreateDeviceDefinitionRequest {
     /**
-     * The client token used to request idempotent operations.
+     * A client token used to correlate requests and responses.
      */
     AmznClientToken?: __string;
     /**
-     * Information on the initial version
+     * Information about the initial version of the device definition.
      */
     InitialVersion?: DeviceDefinitionVersion;
     /**
-     * name of the device definition
+     * The name of the device definition.
      */
     Name?: __string;
   }
   export interface CreateDeviceDefinitionResponse {
     /**
-     * Arn of the definition.
+     * The ARN of the definition.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the definition was created.
+     * The time, in milliseconds since the epoch, when the definition was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of the definition.
+     * The ID of the definition.
      */
     Id?: __string;
     /**
-     * Last updated timestamp of the definition.
+     * The time, in milliseconds since the epoch, when the definition was last updated.
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * Last version of the definition.
+     * The latest version of the definition.
      */
     LatestVersion?: __string;
     /**
-     * Latest version arn of the definition.
+     * The ARN of the latest version of the definition.
      */
     LatestVersionArn?: __string;
     /**
-     * Name of the definition.
+     * The name of the definition.
      */
     Name?: __string;
   }
   export interface CreateDeviceDefinitionVersionRequest {
     /**
-     * The client token used to request idempotent operations.
+     * A client token used to correlate requests and responses.
      */
     AmznClientToken?: __string;
     /**
-     * device definition Id
+     * The ID of the device definition.
      */
     DeviceDefinitionId: __string;
     /**
-     * Devices in the definition version.
+     * A list of devices in the definition version.
      */
-    Devices?: ListOfDevice;
+    Devices?: __listOfDevice;
   }
   export interface CreateDeviceDefinitionVersionResponse {
     /**
-     * Arn of the version.
+     * The ARN of the version.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the version was created.
+     * The time, in milliseconds since the epoch, when the version was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of the resource container.
+     * The ID of the version.
      */
     Id?: __string;
     /**
-     * Unique Id of a version.
+     * The unique ID of the version.
      */
     Version?: __string;
   }
   export interface CreateFunctionDefinitionRequest {
     /**
-     * The client token used to request idempotent operations.
+     * A client token used to correlate requests and responses.
      */
     AmznClientToken?: __string;
     /**
-     * Information on the initial version
+     * Information about the initial version of the function definition.
      */
     InitialVersion?: FunctionDefinitionVersion;
     /**
-     * name of the function definition
+     * The name of the function definition.
      */
     Name?: __string;
   }
   export interface CreateFunctionDefinitionResponse {
     /**
-     * Arn of the definition.
+     * The ARN of the definition.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the definition was created.
+     * The time, in milliseconds since the epoch, when the definition was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of the definition.
+     * The ID of the definition.
      */
     Id?: __string;
     /**
-     * Last updated timestamp of the definition.
+     * The time, in milliseconds since the epoch, when the definition was last updated.
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * Last version of the definition.
+     * The latest version of the definition.
      */
     LatestVersion?: __string;
     /**
-     * Latest version arn of the definition.
+     * The ARN of the latest version of the definition.
      */
     LatestVersionArn?: __string;
     /**
-     * Name of the definition.
+     * The name of the definition.
      */
     Name?: __string;
   }
   export interface CreateFunctionDefinitionVersionRequest {
     /**
-     * The client token used to request idempotent operations.
+     * A client token used to correlate requests and responses.
      */
     AmznClientToken?: __string;
     /**
-     * the unique Id of the lambda definition
+     * Default configuration that will apply to all Lambda functions in this function definition version
+     */
+    DefaultConfig?: FunctionDefaultConfig;
+    /**
+     * The ID of the Lambda function definition.
      */
     FunctionDefinitionId: __string;
     /**
-     * Lambda functions in this function definition version.
+     * A list of Lambda functions in this function definition version.
      */
-    Functions?: ListOfFunction;
+    Functions?: __listOfFunction;
   }
   export interface CreateFunctionDefinitionVersionResponse {
     /**
-     * Arn of the version.
+     * The ARN of the version.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the version was created.
+     * The time, in milliseconds since the epoch, when the version was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of the resource container.
+     * The ID of the version.
      */
     Id?: __string;
     /**
-     * Unique Id of a version.
+     * The unique ID of the version.
      */
     Version?: __string;
   }
   export interface CreateGroupCertificateAuthorityRequest {
     /**
-     * The client token used to request idempotent operations.
+     * A client token used to correlate requests and responses.
      */
     AmznClientToken?: __string;
     /**
-     * The unique Id of the AWS Greengrass Group
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
   export interface CreateGroupCertificateAuthorityResponse {
     /**
-     * Arn of the group certificate authority.
+     * The ARN of the group certificate authority.
      */
     GroupCertificateAuthorityArn?: __string;
   }
   export interface CreateGroupRequest {
     /**
-     * The client token used to request idempotent operations.
+     * A client token used to correlate requests and responses.
      */
     AmznClientToken?: __string;
     /**
-     * Information on the initial version
+     * Information about the initial version of the group.
      */
     InitialVersion?: GroupVersion;
     /**
-     * name of the group
+     * The name of the group.
      */
     Name?: __string;
   }
   export interface CreateGroupResponse {
     /**
-     * Arn of the definition.
+     * The ARN of the definition.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the definition was created.
+     * The time, in milliseconds since the epoch, when the definition was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of the definition.
+     * The ID of the definition.
      */
     Id?: __string;
     /**
-     * Last updated timestamp of the definition.
+     * The time, in milliseconds since the epoch, when the definition was last updated.
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * Last version of the definition.
+     * The latest version of the definition.
      */
     LatestVersion?: __string;
     /**
-     * Latest version arn of the definition.
+     * The ARN of the latest version of the definition.
      */
     LatestVersionArn?: __string;
     /**
-     * Name of the definition.
+     * The name of the definition.
      */
     Name?: __string;
   }
   export interface CreateGroupVersionRequest {
     /**
-     * The client token used to request idempotent operations.
+     * A client token used to correlate requests and responses.
      */
     AmznClientToken?: __string;
     /**
-     * Core definition version arn for this group.
+     * The ARN of the connector definition version for this group.
+     */
+    ConnectorDefinitionVersionArn?: __string;
+    /**
+     * The ARN of the core definition version for this group.
      */
     CoreDefinitionVersionArn?: __string;
     /**
-     * Device definition version arn for this group.
+     * The ARN of the device definition version for this group.
      */
     DeviceDefinitionVersionArn?: __string;
     /**
-     * Function definition version arn for this group.
+     * The ARN of the function definition version for this group.
      */
     FunctionDefinitionVersionArn?: __string;
     /**
-     * The unique Id of the AWS Greengrass Group
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
-     * Logger definitionv ersion arn for this group.
+     * The ARN of the logger definition version for this group.
      */
     LoggerDefinitionVersionArn?: __string;
     /**
-     * Subscription definition version arn for this group.
+     * The ARN of the resource definition version for this group.
+     */
+    ResourceDefinitionVersionArn?: __string;
+    /**
+     * The ARN of the subscription definition version for this group.
      */
     SubscriptionDefinitionVersionArn?: __string;
   }
   export interface CreateGroupVersionResponse {
     /**
-     * Arn of the version.
+     * The ARN of the version.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the version was created.
+     * The time, in milliseconds since the epoch, when the version was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of the resource container.
+     * The ID of the version.
      */
     Id?: __string;
     /**
-     * Unique Id of a version.
+     * The unique ID of the version.
      */
     Version?: __string;
   }
   export interface CreateLoggerDefinitionRequest {
     /**
-     * The client token used to request idempotent operations.
+     * A client token used to correlate requests and responses.
      */
     AmznClientToken?: __string;
     /**
-     * Information on the initial version
+     * Information about the initial version of the logger definition.
      */
     InitialVersion?: LoggerDefinitionVersion;
     /**
-     * name of the logger definition
+     * The name of the logger definition.
      */
     Name?: __string;
   }
   export interface CreateLoggerDefinitionResponse {
     /**
-     * Arn of the definition.
+     * The ARN of the definition.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the definition was created.
+     * The time, in milliseconds since the epoch, when the definition was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of the definition.
+     * The ID of the definition.
      */
     Id?: __string;
     /**
-     * Last updated timestamp of the definition.
+     * The time, in milliseconds since the epoch, when the definition was last updated.
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * Last version of the definition.
+     * The latest version of the definition.
      */
     LatestVersion?: __string;
     /**
-     * Latest version arn of the definition.
+     * The ARN of the latest version of the definition.
      */
     LatestVersionArn?: __string;
     /**
-     * Name of the definition.
+     * The name of the definition.
      */
     Name?: __string;
   }
   export interface CreateLoggerDefinitionVersionRequest {
     /**
-     * The client token used to request idempotent operations.
+     * A client token used to correlate requests and responses.
      */
     AmznClientToken?: __string;
     /**
-     * logger definition Id
+     * The ID of the logger definition.
      */
     LoggerDefinitionId: __string;
     /**
-     * List of loggers.
+     * A list of loggers.
      */
-    Loggers?: ListOfLogger;
+    Loggers?: __listOfLogger;
   }
   export interface CreateLoggerDefinitionVersionResponse {
     /**
-     * Arn of the version.
+     * The ARN of the version.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the version was created.
+     * The time, in milliseconds since the epoch, when the version was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of the resource container.
+     * The ID of the version.
      */
     Id?: __string;
     /**
-     * Unique Id of a version.
+     * The unique ID of the version.
      */
     Version?: __string;
   }
-  export interface CreateSubscriptionDefinitionRequest {
+  export interface CreateResourceDefinitionRequest {
     /**
-     * The client token used to request idempotent operations.
+     * A client token used to correlate requests and responses.
      */
     AmznClientToken?: __string;
     /**
-     * Information on the initial version
+     * Information about the initial version of the resource definition.
+     */
+    InitialVersion?: ResourceDefinitionVersion;
+    /**
+     * The name of the resource definition.
+     */
+    Name?: __string;
+  }
+  export interface CreateResourceDefinitionResponse {
+    /**
+     * The ARN of the definition.
+     */
+    Arn?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the definition was created.
+     */
+    CreationTimestamp?: __string;
+    /**
+     * The ID of the definition.
+     */
+    Id?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the definition was last updated.
+     */
+    LastUpdatedTimestamp?: __string;
+    /**
+     * The latest version of the definition.
+     */
+    LatestVersion?: __string;
+    /**
+     * The ARN of the latest version of the definition.
+     */
+    LatestVersionArn?: __string;
+    /**
+     * The name of the definition.
+     */
+    Name?: __string;
+  }
+  export interface CreateResourceDefinitionVersionRequest {
+    /**
+     * A client token used to correlate requests and responses.
+     */
+    AmznClientToken?: __string;
+    /**
+     * The ID of the resource definition.
+     */
+    ResourceDefinitionId: __string;
+    /**
+     * A list of resources.
+     */
+    Resources?: __listOfResource;
+  }
+  export interface CreateResourceDefinitionVersionResponse {
+    /**
+     * The ARN of the version.
+     */
+    Arn?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the version was created.
+     */
+    CreationTimestamp?: __string;
+    /**
+     * The ID of the version.
+     */
+    Id?: __string;
+    /**
+     * The unique ID of the version.
+     */
+    Version?: __string;
+  }
+  export interface CreateSoftwareUpdateJobRequest {
+    /**
+     * A client token used to correlate requests and responses.
+     */
+    AmznClientToken?: __string;
+    S3UrlSignerRole?: S3UrlSignerRole;
+    SoftwareToUpdate?: SoftwareToUpdate;
+    UpdateAgentLogLevel?: UpdateAgentLogLevel;
+    UpdateTargets?: UpdateTargets;
+    UpdateTargetsArchitecture?: UpdateTargetsArchitecture;
+    UpdateTargetsOperatingSystem?: UpdateTargetsOperatingSystem;
+  }
+  export interface CreateSoftwareUpdateJobResponse {
+    /**
+     * The IoT Job ARN corresponding to this update.
+     */
+    IotJobArn?: __string;
+    /**
+     * The IoT Job Id corresponding to this update.
+     */
+    IotJobId?: __string;
+  }
+  export interface CreateSubscriptionDefinitionRequest {
+    /**
+     * A client token used to correlate requests and responses.
+     */
+    AmznClientToken?: __string;
+    /**
+     * Information about the initial version of the subscription definition.
      */
     InitialVersion?: SubscriptionDefinitionVersion;
     /**
-     * name of the subscription definition
+     * The name of the subscription definition.
      */
     Name?: __string;
   }
   export interface CreateSubscriptionDefinitionResponse {
     /**
-     * Arn of the definition.
+     * The ARN of the definition.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the definition was created.
+     * The time, in milliseconds since the epoch, when the definition was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of the definition.
+     * The ID of the definition.
      */
     Id?: __string;
     /**
-     * Last updated timestamp of the definition.
+     * The time, in milliseconds since the epoch, when the definition was last updated.
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * Last version of the definition.
+     * The latest version of the definition.
      */
     LatestVersion?: __string;
     /**
-     * Latest version arn of the definition.
+     * The ARN of the latest version of the definition.
      */
     LatestVersionArn?: __string;
     /**
-     * Name of the definition.
+     * The name of the definition.
      */
     Name?: __string;
   }
   export interface CreateSubscriptionDefinitionVersionRequest {
     /**
-     * The client token used to request idempotent operations.
+     * A client token used to correlate requests and responses.
      */
     AmznClientToken?: __string;
     /**
-     * subscription definition Id
+     * The ID of the subscription definition.
      */
     SubscriptionDefinitionId: __string;
     /**
-     * Subscriptions in the version.
+     * A list of subscriptions.
      */
-    Subscriptions?: ListOfSubscription;
+    Subscriptions?: __listOfSubscription;
   }
   export interface CreateSubscriptionDefinitionVersionResponse {
     /**
-     * Arn of the version.
+     * The ARN of the version.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the version was created.
+     * The time, in milliseconds since the epoch, when the version was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of the resource container.
+     * The ID of the version.
      */
     Id?: __string;
     /**
-     * Unique Id of a version.
+     * The unique ID of the version.
      */
     Version?: __string;
   }
   export interface DefinitionInformation {
     /**
-     * Arn of the definition.
+     * The ARN of the definition.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the definition was created.
+     * The time, in milliseconds since the epoch, when the definition was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of the definition.
+     * The ID of the definition.
      */
     Id?: __string;
     /**
-     * Last updated timestamp of the definition.
+     * The time, in milliseconds since the epoch, when the definition was last updated.
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * Last version of the definition.
+     * The latest version of the definition.
      */
     LatestVersion?: __string;
     /**
-     * Latest version arn of the definition.
+     * The ARN of the latest version of the definition.
      */
     LatestVersionArn?: __string;
     /**
-     * Name of the definition.
+     * The name of the definition.
      */
     Name?: __string;
   }
+  export interface DeleteConnectorDefinitionRequest {
+    /**
+     * The ID of the connector definition.
+     */
+    ConnectorDefinitionId: __string;
+  }
+  export interface DeleteConnectorDefinitionResponse {
+  }
   export interface DeleteCoreDefinitionRequest {
     /**
-     * core definition Id
+     * The ID of the core definition.
      */
     CoreDefinitionId: __string;
   }
@@ -1155,7 +1618,7 @@ declare namespace Greengrass {
   }
   export interface DeleteDeviceDefinitionRequest {
     /**
-     * device definition Id
+     * The ID of the device definition.
      */
     DeviceDefinitionId: __string;
   }
@@ -1163,7 +1626,7 @@ declare namespace Greengrass {
   }
   export interface DeleteFunctionDefinitionRequest {
     /**
-     * the unique Id of the lambda definition
+     * The ID of the Lambda function definition.
      */
     FunctionDefinitionId: __string;
   }
@@ -1171,7 +1634,7 @@ declare namespace Greengrass {
   }
   export interface DeleteGroupRequest {
     /**
-     * The unique Id of the AWS Greengrass Group
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
@@ -1179,15 +1642,23 @@ declare namespace Greengrass {
   }
   export interface DeleteLoggerDefinitionRequest {
     /**
-     * logger definition Id
+     * The ID of the logger definition.
      */
     LoggerDefinitionId: __string;
   }
   export interface DeleteLoggerDefinitionResponse {
   }
+  export interface DeleteResourceDefinitionRequest {
+    /**
+     * The ID of the resource definition.
+     */
+    ResourceDefinitionId: __string;
+  }
+  export interface DeleteResourceDefinitionResponse {
+  }
   export interface DeleteSubscriptionDefinitionRequest {
     /**
-     * subscription definition Id
+     * The ID of the subscription definition.
      */
     SubscriptionDefinitionId: __string;
   }
@@ -1195,57 +1666,61 @@ declare namespace Greengrass {
   }
   export interface Deployment {
     /**
-     * Timestamp when the deployment was created.
+     * The time, in milliseconds since the epoch, when the deployment was created.
      */
     CreatedAt?: __string;
     /**
-     * Arn of the deployment.
+     * The ARN of the deployment.
      */
     DeploymentArn?: __string;
     /**
-     * Id of the deployment.
+     * The ID of the deployment.
      */
     DeploymentId?: __string;
     /**
-     * Arn of the group for this deployment.
+     * The type of the deployment.
+     */
+    DeploymentType?: DeploymentType;
+    /**
+     * The ARN of the group for this deployment.
      */
     GroupArn?: __string;
   }
-  export type DeploymentType = "NewDeployment"|"Redeployment"|string;
+  export type DeploymentType = "NewDeployment"|"Redeployment"|"ResetDeployment"|"ForceResetDeployment"|string;
   export type Deployments = Deployment[];
   export interface Device {
     /**
-     * Certificate arn of the device.
+     * The ARN of the certificate associated with the device.
      */
     CertificateArn?: __string;
     /**
-     * Element Id for this entry in the list.
+     * A descriptive or arbitrary ID for the device. This value must be unique within the device definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
      */
     Id?: __string;
     /**
-     * If true, the local shadow value automatically syncs with the cloud's shadow state.
+     * If true, the device's local shadow will be automatically synced with the cloud.
      */
     SyncShadow?: __boolean;
     /**
-     * Thing arn of the device.
+     * The thing ARN of the device.
      */
     ThingArn?: __string;
   }
   export interface DeviceDefinitionVersion {
     /**
-     * Devices in the definition version.
+     * A list of devices in the definition version.
      */
-    Devices?: ListOfDevice;
+    Devices?: __listOfDevice;
   }
   export interface DisassociateRoleFromGroupRequest {
     /**
-     * The unique Id of the AWS Greengrass Group
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
   export interface DisassociateRoleFromGroupResponse {
     /**
-     * Time when the role was disassociated from the group.
+     * The time, in milliseconds since the epoch, when the role was disassociated from the group.
      */
     DisassociatedAt?: __string;
   }
@@ -1253,519 +1728,756 @@ declare namespace Greengrass {
   }
   export interface DisassociateServiceRoleFromAccountResponse {
     /**
-     * Time when the service role was disassociated from the account.
+     * The time when the service role was disassociated from the account.
      */
     DisassociatedAt?: __string;
   }
-  export interface Empty {
-  }
+  export type EncodingType = "binary"|"json"|string;
   export interface ErrorDetail {
     /**
-     * Detailed Error Code
+     * A detailed error code.
      */
     DetailedErrorCode?: __string;
     /**
-     * Detailed Error Message
+     * A detailed error message.
      */
     DetailedErrorMessage?: __string;
   }
   export type ErrorDetails = ErrorDetail[];
   export interface Function {
     /**
-     * Arn of the Lambda function.
+     * The ARN of the Lambda function.
      */
     FunctionArn?: __string;
     /**
-     * Configuration of the function
+     * The configuration of the Lambda function.
      */
     FunctionConfiguration?: FunctionConfiguration;
     /**
-     * Id of the function in this version.
+     * A descriptive or arbitrary ID for the function. This value must be unique within the function definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
      */
     Id?: __string;
   }
   export interface FunctionConfiguration {
     /**
-     * Environment of the function configuration
+     * The expected encoding type of the input payload for the function. The default is ''json''.
+     */
+    EncodingType?: EncodingType;
+    /**
+     * The environment configuration of the function.
      */
     Environment?: FunctionConfigurationEnvironment;
     /**
-     * Execution Arguments
+     * The execution arguments.
      */
     ExecArgs?: __string;
     /**
-     * Executable
+     * The name of the function executable.
      */
     Executable?: __string;
     /**
-     * The memory size, in KB, you configured for the function.
+     * The memory size, in KB, which the function requires. This setting is not applicable and should be cleared when you run the Lambda function without containerization.
      */
     MemorySize?: __integer;
     /**
-     * Whether the function is pinned or not. Pinned means the function is long-lived and starts when the core starts.
+     * True if the function is pinned. Pinned means the function is long-lived and starts when the core starts.
      */
     Pinned?: __boolean;
     /**
-     * The function execution time at which Lambda should terminate the function. This timeout still applies to pinned lambdas for each request.
+     * The allowed function execution time, after which Lambda should terminate the function. This timeout still applies to pinned Lambda functions for each request.
      */
     Timeout?: __integer;
   }
   export interface FunctionConfigurationEnvironment {
     /**
-     * Environment variables for the lambda function.
+     * If true, the Lambda function is allowed to access the host's /sys folder. Use this when the Lambda function needs to read device information from /sys. This setting applies only when you run the Lambda function in a Greengrass container.
      */
-    Variables?: MapOf__string;
+    AccessSysfs?: __boolean;
+    /**
+     * Configuration related to executing the Lambda function
+     */
+    Execution?: FunctionExecutionConfig;
+    /**
+     * A list of the resources, with their permissions, to which the Lambda function will be granted access. A Lambda function can have at most 10 resources. ResourceAccessPolicies apply only when you run the Lambda function in a Greengrass container.
+     */
+    ResourceAccessPolicies?: __listOfResourceAccessPolicy;
+    /**
+     * Environment variables for the Lambda function's configuration.
+     */
+    Variables?: __mapOf__string;
+  }
+  export interface FunctionDefaultConfig {
+    Execution?: FunctionDefaultExecutionConfig;
+  }
+  export interface FunctionDefaultExecutionConfig {
+    IsolationMode?: FunctionIsolationMode;
   }
   export interface FunctionDefinitionVersion {
     /**
-     * Lambda functions in this function definition version.
+     * Default configuration that will apply to all Lambda functions in this function definition version
      */
-    Functions?: ListOfFunction;
+    DefaultConfig?: FunctionDefaultConfig;
+    /**
+     * A list of Lambda functions in this function definition version.
+     */
+    Functions?: __listOfFunction;
   }
-  export interface GeneralError {
+  export interface FunctionExecutionConfig {
+    IsolationMode?: FunctionIsolationMode;
+    RunAs?: FunctionRunAsConfig;
+  }
+  export type FunctionIsolationMode = "GreengrassContainer"|"NoContainer"|string;
+  export interface FunctionRunAsConfig {
     /**
-     * Error Details
+     * The Group ID whose permissions are used to run a Lambda function.
      */
-    ErrorDetails?: ErrorDetails;
+    Gid?: __integer;
     /**
-     * Message
+     * The User ID whose permissions are used to run a Lambda function.
      */
-    Message?: __string;
+    Uid?: __integer;
   }
   export interface GetAssociatedRoleRequest {
     /**
-     * The unique Id of the AWS Greengrass Group
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
   export interface GetAssociatedRoleResponse {
     /**
-     * Time when the role was associated for the group.
+     * The time when the role was associated with the group.
      */
     AssociatedAt?: __string;
     /**
-     * Arn of the role that is associated with the group.
+     * The ARN of the role that is associated with the group.
      */
     RoleArn?: __string;
   }
+  export interface GetBulkDeploymentStatusRequest {
+    /**
+     * The ID of the bulk deployment.
+     */
+    BulkDeploymentId: __string;
+  }
+  export interface GetBulkDeploymentStatusResponse {
+    /**
+     * Relevant metrics on input records processed during bulk deployment.
+     */
+    BulkDeploymentMetrics?: BulkDeploymentMetrics;
+    /**
+     * The status of the bulk deployment.
+     */
+    BulkDeploymentStatus?: BulkDeploymentStatus;
+    /**
+     * The time, in ISO format, when the deployment was created.
+     */
+    CreatedAt?: __string;
+    /**
+     * Error details
+     */
+    ErrorDetails?: ErrorDetails;
+    /**
+     * Error message
+     */
+    ErrorMessage?: __string;
+  }
   export interface GetConnectivityInfoRequest {
     /**
-     * Thing Name
+     * The thing name.
      */
     ThingName: __string;
   }
   export interface GetConnectivityInfoResponse {
     /**
-     * Connectivity info array
+     * Connectivity info list.
      */
-    ConnectivityInfo?: ListOfConnectivityInfo;
+    ConnectivityInfo?: __listOfConnectivityInfo;
     /**
-     * Response Text
+     * A message about the connectivity info request.
      */
     Message?: __string;
   }
+  export interface GetConnectorDefinitionRequest {
+    /**
+     * The ID of the connector definition.
+     */
+    ConnectorDefinitionId: __string;
+  }
+  export interface GetConnectorDefinitionResponse {
+    /**
+     * The ARN of the definition.
+     */
+    Arn?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the definition was created.
+     */
+    CreationTimestamp?: __string;
+    /**
+     * The ID of the definition.
+     */
+    Id?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the definition was last updated.
+     */
+    LastUpdatedTimestamp?: __string;
+    /**
+     * The latest version of the definition.
+     */
+    LatestVersion?: __string;
+    /**
+     * The ARN of the latest version of the definition.
+     */
+    LatestVersionArn?: __string;
+    /**
+     * The name of the definition.
+     */
+    Name?: __string;
+  }
+  export interface GetConnectorDefinitionVersionRequest {
+    /**
+     * The ID of the connector definition.
+     */
+    ConnectorDefinitionId: __string;
+    /**
+     * The ID of the connector definition version.
+     */
+    ConnectorDefinitionVersionId: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface GetConnectorDefinitionVersionResponse {
+    /**
+     * The ARN of the connector definition version.
+     */
+    Arn?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the connector definition version was created.
+     */
+    CreationTimestamp?: __string;
+    /**
+     * Information about the connector definition version.
+     */
+    Definition?: ConnectorDefinitionVersion;
+    /**
+     * The ID of the connector definition version.
+     */
+    Id?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+    /**
+     * The version of the connector definition version.
+     */
+    Version?: __string;
+  }
   export interface GetCoreDefinitionRequest {
     /**
-     * core definition Id
+     * The ID of the core definition.
      */
     CoreDefinitionId: __string;
   }
   export interface GetCoreDefinitionResponse {
     /**
-     * Arn of the definition.
+     * The ARN of the definition.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the definition was created.
+     * The time, in milliseconds since the epoch, when the definition was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of the definition.
+     * The ID of the definition.
      */
     Id?: __string;
     /**
-     * Last updated timestamp of the definition.
+     * The time, in milliseconds since the epoch, when the definition was last updated.
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * Last version of the definition.
+     * The latest version of the definition.
      */
     LatestVersion?: __string;
     /**
-     * Latest version arn of the definition.
+     * The ARN of the latest version of the definition.
      */
     LatestVersionArn?: __string;
     /**
-     * Name of the definition.
+     * The name of the definition.
      */
     Name?: __string;
   }
   export interface GetCoreDefinitionVersionRequest {
     /**
-     * core definition Id
+     * The ID of the core definition.
      */
     CoreDefinitionId: __string;
     /**
-     * core definition version Id
+     * The ID of the core definition version.
      */
     CoreDefinitionVersionId: __string;
   }
   export interface GetCoreDefinitionVersionResponse {
     /**
-     * Arn of the core definition version.
+     * The ARN of the core definition version.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the core definition version was created.
+     * The time, in milliseconds since the epoch, when the core definition version was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Information on definition
+     * Information about the core definition version.
      */
     Definition?: CoreDefinitionVersion;
     /**
-     * Id of the core definition the version belongs to.
+     * The ID of the core definition version.
      */
     Id?: __string;
     /**
-     * Version of the core definition version.
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+    /**
+     * The version of the core definition version.
      */
     Version?: __string;
   }
   export interface GetDeploymentStatusRequest {
     /**
-     * the deployment Id
+     * The ID of the deployment.
      */
     DeploymentId: __string;
     /**
-     * The unique Id of the AWS Greengrass Group
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
   export interface GetDeploymentStatusResponse {
     /**
-     * Status of the deployment.
+     * The status of the deployment: ''Pending'', ''InProgress'', ''Success'', or ''Failure''.
      */
     DeploymentStatus?: __string;
     /**
-     * Error Message
+     * The type of the deployment.
+     */
+    DeploymentType?: DeploymentType;
+    /**
+     * Error details
+     */
+    ErrorDetails?: ErrorDetails;
+    /**
+     * Error message
      */
     ErrorMessage?: __string;
     /**
-     * Last time the deployment status was updated.
+     * The time, in milliseconds since the epoch, when the deployment status was updated.
      */
     UpdatedAt?: __string;
   }
   export interface GetDeviceDefinitionRequest {
     /**
-     * device definition Id
+     * The ID of the device definition.
      */
     DeviceDefinitionId: __string;
   }
   export interface GetDeviceDefinitionResponse {
     /**
-     * Arn of the definition.
+     * The ARN of the definition.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the definition was created.
+     * The time, in milliseconds since the epoch, when the definition was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of the definition.
+     * The ID of the definition.
      */
     Id?: __string;
     /**
-     * Last updated timestamp of the definition.
+     * The time, in milliseconds since the epoch, when the definition was last updated.
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * Last version of the definition.
+     * The latest version of the definition.
      */
     LatestVersion?: __string;
     /**
-     * Latest version arn of the definition.
+     * The ARN of the latest version of the definition.
      */
     LatestVersionArn?: __string;
     /**
-     * Name of the definition.
+     * The name of the definition.
      */
     Name?: __string;
   }
   export interface GetDeviceDefinitionVersionRequest {
     /**
-     * device definition Id
+     * The ID of the device definition.
      */
     DeviceDefinitionId: __string;
     /**
-     * device definition version Id
+     * The ID of the device definition version.
      */
     DeviceDefinitionVersionId: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
   }
   export interface GetDeviceDefinitionVersionResponse {
     /**
-     * Arn of the device definition version.
+     * The ARN of the device definition version.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the device definition version was created.
+     * The time, in milliseconds since the epoch, when the device definition version was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Device definition version
+     * Information about the device definition version.
      */
     Definition?: DeviceDefinitionVersion;
     /**
-     * Id of the device definition the version belongs to.
+     * The ID of the device definition version.
      */
     Id?: __string;
     /**
-     * Version of the device definition version.
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+    /**
+     * The version of the device definition version.
      */
     Version?: __string;
   }
   export interface GetFunctionDefinitionRequest {
     /**
-     * the unique Id of the lambda definition
+     * The ID of the Lambda function definition.
      */
     FunctionDefinitionId: __string;
   }
   export interface GetFunctionDefinitionResponse {
     /**
-     * Arn of the definition.
+     * The ARN of the definition.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the definition was created.
+     * The time, in milliseconds since the epoch, when the definition was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of the definition.
+     * The ID of the definition.
      */
     Id?: __string;
     /**
-     * Last updated timestamp of the definition.
+     * The time, in milliseconds since the epoch, when the definition was last updated.
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * Last version of the definition.
+     * The latest version of the definition.
      */
     LatestVersion?: __string;
     /**
-     * Latest version arn of the definition.
+     * The ARN of the latest version of the definition.
      */
     LatestVersionArn?: __string;
     /**
-     * Name of the definition.
+     * The name of the definition.
      */
     Name?: __string;
   }
   export interface GetFunctionDefinitionVersionRequest {
     /**
-     * the unique Id of the lambda definition
+     * The ID of the Lambda function definition.
      */
     FunctionDefinitionId: __string;
     /**
-     * Function definition version Id
+     * The ID of the function definition version.
      */
     FunctionDefinitionVersionId: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
   }
   export interface GetFunctionDefinitionVersionResponse {
     /**
-     * Arn of the function definition version.
+     * The ARN of the function definition version.
      */
     Arn?: __string;
     /**
-     * Timestamp when the funtion definition version was created.
+     * The time, in milliseconds since the epoch, when the function definition version was created.
      */
     CreationTimestamp?: __string;
+    /**
+     * Information on the definition.
+     */
     Definition?: FunctionDefinitionVersion;
     /**
-     * Id of the function definition the version belongs to.
+     * The ID of the function definition version.
      */
     Id?: __string;
     /**
-     * Version of the function definition version.
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+    /**
+     * The version of the function definition version.
      */
     Version?: __string;
   }
   export interface GetGroupCertificateAuthorityRequest {
     /**
-     * certificate authority Id
+     * The ID of the certificate authority.
      */
     CertificateAuthorityId: __string;
     /**
-     * The unique Id of the AWS Greengrass Group
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
   export interface GetGroupCertificateAuthorityResponse {
     /**
-     * Arn of the certificate authority for the group.
+     * The ARN of the certificate authority for the group.
      */
     GroupCertificateAuthorityArn?: __string;
     /**
-     * Id of the certificate authority for the group.
+     * The ID of the certificate authority for the group.
      */
     GroupCertificateAuthorityId?: __string;
     /**
-     * PEM encoded certificate for the group.
+     * The PEM encoded certificate for the group.
      */
     PemEncodedCertificate?: __string;
   }
   export interface GetGroupCertificateConfigurationRequest {
     /**
-     * The unique Id of the AWS Greengrass Group
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
   export interface GetGroupCertificateConfigurationResponse {
     /**
-     * Amount of time when the certificate authority expires in milliseconds.
+     * The amount of time remaining before the certificate authority expires, in milliseconds.
      */
     CertificateAuthorityExpiryInMilliseconds?: __string;
     /**
-     * Amount of time when the certificate expires in milliseconds.
+     * The amount of time remaining before the certificate expires, in milliseconds.
      */
     CertificateExpiryInMilliseconds?: __string;
     /**
-     * Id of the group the certificate configuration belongs to.
+     * The ID of the group certificate configuration.
      */
     GroupId?: __string;
   }
   export interface GetGroupRequest {
     /**
-     * The unique Id of the AWS Greengrass Group
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
   export interface GetGroupResponse {
     /**
-     * Arn of the definition.
+     * The ARN of the definition.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the definition was created.
+     * The time, in milliseconds since the epoch, when the definition was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of the definition.
+     * The ID of the definition.
      */
     Id?: __string;
     /**
-     * Last updated timestamp of the definition.
+     * The time, in milliseconds since the epoch, when the definition was last updated.
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * Last version of the definition.
+     * The latest version of the definition.
      */
     LatestVersion?: __string;
     /**
-     * Latest version arn of the definition.
+     * The ARN of the latest version of the definition.
      */
     LatestVersionArn?: __string;
     /**
-     * Name of the definition.
+     * The name of the definition.
      */
     Name?: __string;
   }
   export interface GetGroupVersionRequest {
     /**
-     * The unique Id of the AWS Greengrass Group
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
-     * Group version Id
+     * The ID of the group version.
      */
     GroupVersionId: __string;
   }
   export interface GetGroupVersionResponse {
     /**
-     * Arn of the group version.
+     * The ARN of the group version.
      */
     Arn?: __string;
     /**
-     * Timestamp when the group version was created.
+     * The time, in milliseconds since the epoch, when the group version was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Information on the definition
+     * Information about the group version definition.
      */
     Definition?: GroupVersion;
     /**
-     * Id of the group version.
+     * The ID of the group version.
      */
     Id?: __string;
     /**
-     * Unique Id for a version of the Group.
+     * The unique ID for the version of the group.
      */
     Version?: __string;
   }
   export interface GetLoggerDefinitionRequest {
     /**
-     * logger definition Id
+     * The ID of the logger definition.
      */
     LoggerDefinitionId: __string;
   }
   export interface GetLoggerDefinitionResponse {
     /**
-     * Arn of the definition.
+     * The ARN of the definition.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the definition was created.
+     * The time, in milliseconds since the epoch, when the definition was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of the definition.
+     * The ID of the definition.
      */
     Id?: __string;
     /**
-     * Last updated timestamp of the definition.
+     * The time, in milliseconds since the epoch, when the definition was last updated.
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * Last version of the definition.
+     * The latest version of the definition.
      */
     LatestVersion?: __string;
     /**
-     * Latest version arn of the definition.
+     * The ARN of the latest version of the definition.
      */
     LatestVersionArn?: __string;
     /**
-     * Name of the definition.
+     * The name of the definition.
      */
     Name?: __string;
   }
   export interface GetLoggerDefinitionVersionRequest {
     /**
-     * logger definition Id
+     * The ID of the logger definition.
      */
     LoggerDefinitionId: __string;
     /**
-     * logger definition version Id
+     * The ID of the logger definition version.
      */
     LoggerDefinitionVersionId: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
   }
   export interface GetLoggerDefinitionVersionResponse {
     /**
-     * Arn of the logger definition version.
+     * The ARN of the logger definition version.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the logger definition version was created.
+     * The time, in milliseconds since the epoch, when the logger definition version was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Information on definition
+     * Information about the logger definition version.
      */
     Definition?: LoggerDefinitionVersion;
     /**
-     * Id of the logger definition the version belongs to.
+     * The ID of the logger definition version.
      */
     Id?: __string;
     /**
-     * Version of the logger definition version.
+     * The version of the logger definition version.
+     */
+    Version?: __string;
+  }
+  export interface GetResourceDefinitionRequest {
+    /**
+     * The ID of the resource definition.
+     */
+    ResourceDefinitionId: __string;
+  }
+  export interface GetResourceDefinitionResponse {
+    /**
+     * The ARN of the definition.
+     */
+    Arn?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the definition was created.
+     */
+    CreationTimestamp?: __string;
+    /**
+     * The ID of the definition.
+     */
+    Id?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the definition was last updated.
+     */
+    LastUpdatedTimestamp?: __string;
+    /**
+     * The latest version of the definition.
+     */
+    LatestVersion?: __string;
+    /**
+     * The ARN of the latest version of the definition.
+     */
+    LatestVersionArn?: __string;
+    /**
+     * The name of the definition.
+     */
+    Name?: __string;
+  }
+  export interface GetResourceDefinitionVersionRequest {
+    /**
+     * The ID of the resource definition.
+     */
+    ResourceDefinitionId: __string;
+    /**
+     * The ID of the resource definition version.
+     */
+    ResourceDefinitionVersionId: __string;
+  }
+  export interface GetResourceDefinitionVersionResponse {
+    /**
+     * Arn of the resource definition version.
+     */
+    Arn?: __string;
+    /**
+     * The time, in milliseconds since the epoch, when the resource definition version was created.
+     */
+    CreationTimestamp?: __string;
+    /**
+     * Information about the definition.
+     */
+    Definition?: ResourceDefinitionVersion;
+    /**
+     * The ID of the resource definition version.
+     */
+    Id?: __string;
+    /**
+     * The version of the resource definition version.
      */
     Version?: __string;
   }
@@ -1773,169 +2485,269 @@ declare namespace Greengrass {
   }
   export interface GetServiceRoleForAccountResponse {
     /**
-     * Time when the service role was associated to the account.
+     * The time when the service role was associated with the account.
      */
     AssociatedAt?: __string;
     /**
-     * Role arn which is associated to the account.
+     * The ARN of the role which is associated with the account.
      */
     RoleArn?: __string;
   }
   export interface GetSubscriptionDefinitionRequest {
     /**
-     * subscription definition Id
+     * The ID of the subscription definition.
      */
     SubscriptionDefinitionId: __string;
   }
   export interface GetSubscriptionDefinitionResponse {
     /**
-     * Arn of the definition.
+     * The ARN of the definition.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the definition was created.
+     * The time, in milliseconds since the epoch, when the definition was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of the definition.
+     * The ID of the definition.
      */
     Id?: __string;
     /**
-     * Last updated timestamp of the definition.
+     * The time, in milliseconds since the epoch, when the definition was last updated.
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * Last version of the definition.
+     * The latest version of the definition.
      */
     LatestVersion?: __string;
     /**
-     * Latest version arn of the definition.
+     * The ARN of the latest version of the definition.
      */
     LatestVersionArn?: __string;
     /**
-     * Name of the definition.
+     * The name of the definition.
      */
     Name?: __string;
   }
   export interface GetSubscriptionDefinitionVersionRequest {
     /**
-     * subscription definition Id
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+    /**
+     * The ID of the subscription definition.
      */
     SubscriptionDefinitionId: __string;
     /**
-     * subscription definition version Id
+     * The ID of the subscription definition version.
      */
     SubscriptionDefinitionVersionId: __string;
   }
   export interface GetSubscriptionDefinitionVersionResponse {
     /**
-     * Arn of the subscription definition version.
+     * The ARN of the subscription definition version.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the subscription definition version was created.
+     * The time, in milliseconds since the epoch, when the subscription definition version was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Information on the definition
+     * Information about the subscription definition version.
      */
     Definition?: SubscriptionDefinitionVersion;
     /**
-     * Id of the subscription definition the version belongs to.
+     * The ID of the subscription definition version.
      */
     Id?: __string;
     /**
-     * Version of the subscription definition version.
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+    /**
+     * The version of the subscription definition version.
      */
     Version?: __string;
   }
   export interface GroupCertificateAuthorityProperties {
     /**
-     * Arn of the certificate authority for the group.
+     * The ARN of the certificate authority for the group.
      */
     GroupCertificateAuthorityArn?: __string;
     /**
-     * Id of the certificate authority for the group.
+     * The ID of the certificate authority for the group.
      */
     GroupCertificateAuthorityId?: __string;
   }
-  export interface GroupCertificateConfiguration {
-    /**
-     * Amount of time when the certificate authority expires in milliseconds.
-     */
-    CertificateAuthorityExpiryInMilliseconds?: __string;
-    /**
-     * Amount of time when the certificate expires in milliseconds.
-     */
-    CertificateExpiryInMilliseconds?: __string;
-    /**
-     * Id of the group the certificate configuration belongs to.
-     */
-    GroupId?: __string;
-  }
   export interface GroupInformation {
     /**
-     * Arn of a group.
+     * The ARN of the group.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the group was created.
+     * The time, in milliseconds since the epoch, when the group was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of a group.
+     * The ID of the group.
      */
     Id?: __string;
     /**
-     * Last updated timestamp of the group.
+     * The time, in milliseconds since the epoch, when the group was last updated.
      */
     LastUpdatedTimestamp?: __string;
     /**
-     * Last version of the group.
+     * The latest version of the group.
      */
     LatestVersion?: __string;
     /**
-     * Latest version arn of the group.
+     * The ARN of the latest version of the group.
      */
     LatestVersionArn?: __string;
     /**
-     * Name of a group.
+     * The name of the group.
      */
     Name?: __string;
   }
+  export interface GroupOwnerSetting {
+    /**
+     * If true, AWS IoT Greengrass automatically adds the specified Linux OS group owner of the resource to the Lambda process privileges. Thus the Lambda process will have the file access permissions of the added Linux group.
+     */
+    AutoAddGroupOwner?: __boolean;
+    /**
+     * The name of the Linux OS group whose privileges will be added to the Lambda process. This field is optional.
+     */
+    GroupOwner?: __string;
+  }
   export interface GroupVersion {
     /**
-     * Core definition version arn for this group.
+     * The ARN of the connector definition version for this group.
+     */
+    ConnectorDefinitionVersionArn?: __string;
+    /**
+     * The ARN of the core definition version for this group.
      */
     CoreDefinitionVersionArn?: __string;
     /**
-     * Device definition version arn for this group.
+     * The ARN of the device definition version for this group.
      */
     DeviceDefinitionVersionArn?: __string;
     /**
-     * Function definition version arn for this group.
+     * The ARN of the function definition version for this group.
      */
     FunctionDefinitionVersionArn?: __string;
     /**
-     * Logger definitionv ersion arn for this group.
+     * The ARN of the logger definition version for this group.
      */
     LoggerDefinitionVersionArn?: __string;
     /**
-     * Subscription definition version arn for this group.
+     * The ARN of the resource definition version for this group.
+     */
+    ResourceDefinitionVersionArn?: __string;
+    /**
+     * The ARN of the subscription definition version for this group.
      */
     SubscriptionDefinitionVersionArn?: __string;
   }
-  export interface ListCoreDefinitionVersionsRequest {
+  export interface ListBulkDeploymentDetailedReportsRequest {
     /**
-     * core definition Id
+     * The ID of the bulk deployment.
      */
-    CoreDefinitionId: __string;
+    BulkDeploymentId: __string;
     /**
-     * Specifies the maximum number of list results to be returned in this page
+     * The maximum number of results to be returned per request.
      */
     MaxResults?: __string;
     /**
-     * Specifies the pagination token used when iterating through a paginated request
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListBulkDeploymentDetailedReportsResponse {
+    /**
+     * A list of the individual group deployments in the bulk deployment operation.
+     */
+    Deployments?: BulkDeploymentResults;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListBulkDeploymentsRequest {
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListBulkDeploymentsResponse {
+    /**
+     * A list of bulk deployments.
+     */
+    BulkDeployments?: BulkDeployments;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListConnectorDefinitionVersionsRequest {
+    /**
+     * The ID of the connector definition.
+     */
+    ConnectorDefinitionId: __string;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListConnectorDefinitionVersionsResponse {
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+    /**
+     * Information about a version.
+     */
+    Versions?: __listOfVersionInformation;
+  }
+  export interface ListConnectorDefinitionsRequest {
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListConnectorDefinitionsResponse {
+    /**
+     * Information about a definition.
+     */
+    Definitions?: __listOfDefinitionInformation;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListCoreDefinitionVersionsRequest {
+    /**
+     * The ID of the core definition.
+     */
+    CoreDefinitionId: __string;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
      */
     NextToken?: __string;
   }
@@ -1945,35 +2757,25 @@ declare namespace Greengrass {
      */
     NextToken?: __string;
     /**
-     * Versions
+     * Information about a version.
      */
-    Versions?: ListOfVersionInformation;
+    Versions?: __listOfVersionInformation;
   }
   export interface ListCoreDefinitionsRequest {
     /**
-     * Specifies the maximum number of list results to be returned in this page
+     * The maximum number of results to be returned per request.
      */
     MaxResults?: __string;
-    /**
-     * Specifies the pagination token used when iterating through a paginated request
-     */
-    NextToken?: __string;
-  }
-  export interface ListCoreDefinitionsResponse {
-    /**
-     * Definitions
-     */
-    Definitions?: ListOfDefinitionInformation;
     /**
      * The token for the next set of results, or ''null'' if there are no additional results.
      */
     NextToken?: __string;
   }
-  export interface ListDefinitionsResponse {
+  export interface ListCoreDefinitionsResponse {
     /**
-     * Definitions
+     * Information about a definition.
      */
-    Definitions?: ListOfDefinitionInformation;
+    Definitions?: __listOfDefinitionInformation;
     /**
      * The token for the next set of results, or ''null'' if there are no additional results.
      */
@@ -1981,21 +2783,21 @@ declare namespace Greengrass {
   }
   export interface ListDeploymentsRequest {
     /**
-     * The unique Id of the AWS Greengrass Group
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
-     * Specifies the maximum number of list results to be returned in this page
+     * The maximum number of results to be returned per request.
      */
     MaxResults?: __string;
     /**
-     * Specifies the pagination token used when iterating through a paginated request
+     * The token for the next set of results, or ''null'' if there are no additional results.
      */
     NextToken?: __string;
   }
   export interface ListDeploymentsResponse {
     /**
-     * Information on deployments
+     * A list of deployments for the requested groups.
      */
     Deployments?: Deployments;
     /**
@@ -2005,15 +2807,15 @@ declare namespace Greengrass {
   }
   export interface ListDeviceDefinitionVersionsRequest {
     /**
-     * device definition Id
+     * The ID of the device definition.
      */
     DeviceDefinitionId: __string;
     /**
-     * Specifies the maximum number of list results to be returned in this page
+     * The maximum number of results to be returned per request.
      */
     MaxResults?: __string;
     /**
-     * Specifies the pagination token used when iterating through a paginated request
+     * The token for the next set of results, or ''null'' if there are no additional results.
      */
     NextToken?: __string;
   }
@@ -2023,25 +2825,25 @@ declare namespace Greengrass {
      */
     NextToken?: __string;
     /**
-     * Versions
+     * Information about a version.
      */
-    Versions?: ListOfVersionInformation;
+    Versions?: __listOfVersionInformation;
   }
   export interface ListDeviceDefinitionsRequest {
     /**
-     * Specifies the maximum number of list results to be returned in this page
+     * The maximum number of results to be returned per request.
      */
     MaxResults?: __string;
     /**
-     * Specifies the pagination token used when iterating through a paginated request
+     * The token for the next set of results, or ''null'' if there are no additional results.
      */
     NextToken?: __string;
   }
   export interface ListDeviceDefinitionsResponse {
     /**
-     * Definitions
+     * Information about a definition.
      */
-    Definitions?: ListOfDefinitionInformation;
+    Definitions?: __listOfDefinitionInformation;
     /**
      * The token for the next set of results, or ''null'' if there are no additional results.
      */
@@ -2049,15 +2851,15 @@ declare namespace Greengrass {
   }
   export interface ListFunctionDefinitionVersionsRequest {
     /**
-     * the unique Id of the lambda definition
+     * The ID of the Lambda function definition.
      */
     FunctionDefinitionId: __string;
     /**
-     * Specifies the maximum number of list results to be returned in this page
+     * The maximum number of results to be returned per request.
      */
     MaxResults?: __string;
     /**
-     * Specifies the pagination token used when iterating through a paginated request
+     * The token for the next set of results, or ''null'' if there are no additional results.
      */
     NextToken?: __string;
   }
@@ -2067,25 +2869,25 @@ declare namespace Greengrass {
      */
     NextToken?: __string;
     /**
-     * Versions
+     * Information about a version.
      */
-    Versions?: ListOfVersionInformation;
+    Versions?: __listOfVersionInformation;
   }
   export interface ListFunctionDefinitionsRequest {
     /**
-     * Specifies the maximum number of list results to be returned in this page
+     * The maximum number of results to be returned per request.
      */
     MaxResults?: __string;
     /**
-     * Specifies the pagination token used when iterating through a paginated request
+     * The token for the next set of results, or ''null'' if there are no additional results.
      */
     NextToken?: __string;
   }
   export interface ListFunctionDefinitionsResponse {
     /**
-     * Definitions
+     * Information about a definition.
      */
-    Definitions?: ListOfDefinitionInformation;
+    Definitions?: __listOfDefinitionInformation;
     /**
      * The token for the next set of results, or ''null'' if there are no additional results.
      */
@@ -2093,27 +2895,27 @@ declare namespace Greengrass {
   }
   export interface ListGroupCertificateAuthoritiesRequest {
     /**
-     * The unique Id of the AWS Greengrass Group
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
   export interface ListGroupCertificateAuthoritiesResponse {
     /**
-     * List of certificate authorities associated with the group.
+     * A list of certificate authorities associated with the group.
      */
-    GroupCertificateAuthorities?: ListOfGroupCertificateAuthorityProperties;
+    GroupCertificateAuthorities?: __listOfGroupCertificateAuthorityProperties;
   }
   export interface ListGroupVersionsRequest {
     /**
-     * The unique Id of the AWS Greengrass Group
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
-     * Specifies the maximum number of list results to be returned in this page
+     * The maximum number of results to be returned per request.
      */
     MaxResults?: __string;
     /**
-     * Specifies the pagination token used when iterating through a paginated request
+     * The token for the next set of results, or ''null'' if there are no additional results.
      */
     NextToken?: __string;
   }
@@ -2123,25 +2925,25 @@ declare namespace Greengrass {
      */
     NextToken?: __string;
     /**
-     * Versions
+     * Information about a version.
      */
-    Versions?: ListOfVersionInformation;
+    Versions?: __listOfVersionInformation;
   }
   export interface ListGroupsRequest {
     /**
-     * Specifies the maximum number of list results to be returned in this page
+     * The maximum number of results to be returned per request.
      */
     MaxResults?: __string;
     /**
-     * Specifies the pagination token used when iterating through a paginated request
+     * The token for the next set of results, or ''null'' if there are no additional results.
      */
     NextToken?: __string;
   }
   export interface ListGroupsResponse {
     /**
-     * Groups
+     * Information about a group.
      */
-    Groups?: ListOfGroupInformation;
+    Groups?: __listOfGroupInformation;
     /**
      * The token for the next set of results, or ''null'' if there are no additional results.
      */
@@ -2149,15 +2951,15 @@ declare namespace Greengrass {
   }
   export interface ListLoggerDefinitionVersionsRequest {
     /**
-     * logger definition Id
+     * The ID of the logger definition.
      */
     LoggerDefinitionId: __string;
     /**
-     * Specifies the maximum number of list results to be returned in this page
+     * The maximum number of results to be returned per request.
      */
     MaxResults?: __string;
     /**
-     * Specifies the pagination token used when iterating through a paginated request
+     * The token for the next set of results, or ''null'' if there are no additional results.
      */
     NextToken?: __string;
   }
@@ -2167,51 +2969,85 @@ declare namespace Greengrass {
      */
     NextToken?: __string;
     /**
-     * Versions
+     * Information about a version.
      */
-    Versions?: ListOfVersionInformation;
+    Versions?: __listOfVersionInformation;
   }
   export interface ListLoggerDefinitionsRequest {
     /**
-     * Specifies the maximum number of list results to be returned in this page
+     * The maximum number of results to be returned per request.
      */
     MaxResults?: __string;
-    /**
-     * Specifies the pagination token used when iterating through a paginated request
-     */
-    NextToken?: __string;
-  }
-  export interface ListLoggerDefinitionsResponse {
-    /**
-     * Definitions
-     */
-    Definitions?: ListOfDefinitionInformation;
     /**
      * The token for the next set of results, or ''null'' if there are no additional results.
      */
     NextToken?: __string;
   }
-  export type ListOfConnectivityInfo = ConnectivityInfo[];
-  export type ListOfCore = Core[];
-  export type ListOfDefinitionInformation = DefinitionInformation[];
-  export type ListOfDevice = Device[];
-  export type ListOfFunction = Function[];
-  export type ListOfGroupCertificateAuthorityProperties = GroupCertificateAuthorityProperties[];
-  export type ListOfGroupInformation = GroupInformation[];
-  export type ListOfLogger = Logger[];
-  export type ListOfSubscription = Subscription[];
-  export type ListOfVersionInformation = VersionInformation[];
-  export interface ListSubscriptionDefinitionVersionsRequest {
+  export interface ListLoggerDefinitionsResponse {
     /**
-     * Specifies the maximum number of list results to be returned in this page
+     * Information about a definition.
+     */
+    Definitions?: __listOfDefinitionInformation;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListResourceDefinitionVersionsRequest {
+    /**
+     * The maximum number of results to be returned per request.
      */
     MaxResults?: __string;
     /**
-     * Specifies the pagination token used when iterating through a paginated request
+     * The token for the next set of results, or ''null'' if there are no additional results.
      */
     NextToken?: __string;
     /**
-     * subscription definition Id
+     * The ID of the resource definition.
+     */
+    ResourceDefinitionId: __string;
+  }
+  export interface ListResourceDefinitionVersionsResponse {
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+    /**
+     * Information about a version.
+     */
+    Versions?: __listOfVersionInformation;
+  }
+  export interface ListResourceDefinitionsRequest {
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListResourceDefinitionsResponse {
+    /**
+     * Information about a definition.
+     */
+    Definitions?: __listOfDefinitionInformation;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListSubscriptionDefinitionVersionsRequest {
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: __string;
+    /**
+     * The token for the next set of results, or ''null'' if there are no additional results.
+     */
+    NextToken?: __string;
+    /**
+     * The ID of the subscription definition.
      */
     SubscriptionDefinitionId: __string;
   }
@@ -2221,123 +3057,290 @@ declare namespace Greengrass {
      */
     NextToken?: __string;
     /**
-     * Versions
+     * Information about a version.
      */
-    Versions?: ListOfVersionInformation;
+    Versions?: __listOfVersionInformation;
   }
   export interface ListSubscriptionDefinitionsRequest {
     /**
-     * Specifies the maximum number of list results to be returned in this page
+     * The maximum number of results to be returned per request.
      */
     MaxResults?: __string;
     /**
-     * Specifies the pagination token used when iterating through a paginated request
+     * The token for the next set of results, or ''null'' if there are no additional results.
      */
     NextToken?: __string;
   }
   export interface ListSubscriptionDefinitionsResponse {
     /**
-     * Definitions
+     * Information about a definition.
      */
-    Definitions?: ListOfDefinitionInformation;
+    Definitions?: __listOfDefinitionInformation;
     /**
      * The token for the next set of results, or ''null'' if there are no additional results.
      */
     NextToken?: __string;
   }
-  export interface ListVersionsResponse {
+  export interface LocalDeviceResourceData {
     /**
-     * The token for the next set of results, or ''null'' if there are no additional results.
+     * Group/owner related settings for local resources.
      */
-    NextToken?: __string;
+    GroupOwnerSetting?: GroupOwnerSetting;
     /**
-     * Versions
+     * The local absolute path of the device resource. The source path for a device resource can refer only to a character device or block device under ''/dev''.
      */
-    Versions?: ListOfVersionInformation;
+    SourcePath?: __string;
+  }
+  export interface LocalVolumeResourceData {
+    /**
+     * The absolute local path of the resource inside the Lambda environment.
+     */
+    DestinationPath?: __string;
+    /**
+     * Allows you to configure additional group privileges for the Lambda process. This field is optional.
+     */
+    GroupOwnerSetting?: GroupOwnerSetting;
+    /**
+     * The local absolute path of the volume resource on the host. The source path for a volume resource type cannot start with ''/sys''.
+     */
+    SourcePath?: __string;
   }
   export interface Logger {
     /**
-     * The component that will be subject to logs
+     * The component that will be subject to logging.
      */
     Component?: LoggerComponent;
     /**
-     * Element Id for this entry in the list.
+     * A descriptive or arbitrary ID for the logger. This value must be unique within the logger definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
      */
     Id?: __string;
     /**
-     * The level of the logs
+     * The level of the logs.
      */
     Level?: LoggerLevel;
     /**
-     * Amount of hardware space, in KB, to use if file system is used for logging purposes.
+     * The amount of file space, in KB, to use if the local file system is used for logging purposes.
      */
     Space?: __integer;
     /**
-     * The type which will be use for log output
+     * The type of log output which will be used.
      */
     Type?: LoggerType;
   }
   export type LoggerComponent = "GreengrassSystem"|"Lambda"|string;
   export interface LoggerDefinitionVersion {
     /**
-     * List of loggers.
+     * A list of loggers.
      */
-    Loggers?: ListOfLogger;
+    Loggers?: __listOfLogger;
   }
   export type LoggerLevel = "DEBUG"|"INFO"|"WARN"|"ERROR"|"FATAL"|string;
   export type LoggerType = "FileSystem"|"AWSCloudWatch"|string;
-  export type MapOf__string = {[key: string]: __string};
-  export interface Subscription {
+  export type Permission = "ro"|"rw"|string;
+  export interface ResetDeploymentsRequest {
     /**
-     * Element Id for this entry in the list.
+     * A client token used to correlate requests and responses.
+     */
+    AmznClientToken?: __string;
+    /**
+     * If true, performs a best-effort only core reset.
+     */
+    Force?: __boolean;
+    /**
+     * The ID of the Greengrass group.
+     */
+    GroupId: __string;
+  }
+  export interface ResetDeploymentsResponse {
+    /**
+     * The ARN of the deployment.
+     */
+    DeploymentArn?: __string;
+    /**
+     * The ID of the deployment.
+     */
+    DeploymentId?: __string;
+  }
+  export interface Resource {
+    /**
+     * The resource ID, used to refer to a resource in the Lambda function configuration. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''. This must be unique within a Greengrass group.
      */
     Id?: __string;
     /**
-     * Source of the subscription. Can be a thing arn, lambda arn or word 'cloud'
+     * The descriptive resource name, which is displayed on the AWS IoT Greengrass console. Max length 128 characters with pattern ''[a-zA-Z0-9:_-]+''. This must be unique within a Greengrass group.
+     */
+    Name?: __string;
+    /**
+     * A container of data for all resource types.
+     */
+    ResourceDataContainer?: ResourceDataContainer;
+  }
+  export interface ResourceAccessPolicy {
+    /**
+     * The permissions that the Lambda function has to the resource. Can be one of ''rw'' (read/write) or ''ro'' (read-only).
+     */
+    Permission?: Permission;
+    /**
+     * The ID of the resource. (This ID is assigned to the resource when you create the resource definiton.)
+     */
+    ResourceId?: __string;
+  }
+  export interface ResourceDataContainer {
+    /**
+     * Attributes that define the local device resource.
+     */
+    LocalDeviceResourceData?: LocalDeviceResourceData;
+    /**
+     * Attributes that define the local volume resource.
+     */
+    LocalVolumeResourceData?: LocalVolumeResourceData;
+    /**
+     * Attributes that define an Amazon S3 machine learning resource.
+     */
+    S3MachineLearningModelResourceData?: S3MachineLearningModelResourceData;
+    /**
+     * Attributes that define an Amazon SageMaker machine learning resource.
+     */
+    SageMakerMachineLearningModelResourceData?: SageMakerMachineLearningModelResourceData;
+    /**
+     * Attributes that define a secret resource, which references a secret from AWS Secrets Manager.
+     */
+    SecretsManagerSecretResourceData?: SecretsManagerSecretResourceData;
+  }
+  export interface ResourceDefinitionVersion {
+    /**
+     * A list of resources.
+     */
+    Resources?: __listOfResource;
+  }
+  export interface S3MachineLearningModelResourceData {
+    /**
+     * The absolute local path of the resource inside the Lambda environment.
+     */
+    DestinationPath?: __string;
+    /**
+     * The URI of the source model in an S3 bucket. The model package must be in tar.gz or .zip format.
+     */
+    S3Uri?: __string;
+  }
+  export type S3UrlSignerRole = string;
+  export interface SageMakerMachineLearningModelResourceData {
+    /**
+     * The absolute local path of the resource inside the Lambda environment.
+     */
+    DestinationPath?: __string;
+    /**
+     * The ARN of the Amazon SageMaker training job that represents the source model.
+     */
+    SageMakerJobArn?: __string;
+  }
+  export interface SecretsManagerSecretResourceData {
+    /**
+     * The ARN of the Secrets Manager secret to make available on the core. The value of the secret's latest version (represented by the ''AWSCURRENT'' staging label) is included by default.
+     */
+    ARN?: __string;
+    /**
+     * Optional. The staging labels whose values you want to make available on the core, in addition to ''AWSCURRENT''.
+     */
+    AdditionalStagingLabelsToDownload?: __listOf__string;
+  }
+  export type SoftwareToUpdate = "core"|"ota_agent"|string;
+  export interface StartBulkDeploymentRequest {
+    /**
+     * A client token used to correlate requests and responses.
+     */
+    AmznClientToken?: __string;
+    /**
+     * The ARN of the execution role to associate with the bulk deployment operation. This IAM role must allow the ''greengrass:CreateDeployment'' action for all group versions that are listed in the input file. This IAM role must have access to the S3 bucket containing the input file.
+     */
+    ExecutionRoleArn?: __string;
+    /**
+     * The URI of the input file contained in the S3 bucket. The execution role must have ''getObject'' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100 MB. Currently, AWS IoT Greengrass supports only ''NewDeployment'' deployment types.
+     */
+    InputFileUri?: __string;
+  }
+  export interface StartBulkDeploymentResponse {
+    /**
+     * The ARN of the bulk deployment.
+     */
+    BulkDeploymentArn?: __string;
+    /**
+     * The ID of the bulk deployment.
+     */
+    BulkDeploymentId?: __string;
+  }
+  export interface StopBulkDeploymentRequest {
+    /**
+     * The ID of the bulk deployment.
+     */
+    BulkDeploymentId: __string;
+  }
+  export interface StopBulkDeploymentResponse {
+  }
+  export interface Subscription {
+    /**
+     * A descriptive or arbitrary ID for the subscription. This value must be unique within the subscription definition version. Max length is 128 characters with pattern ''[a-zA-Z0-9:_-]+''.
+     */
+    Id?: __string;
+    /**
+     * The source of the subscription. Can be a thing ARN, a Lambda function ARN, a connector ARN, 'cloud' (which represents the AWS IoT cloud), or 'GGShadowService'.
      */
     Source?: __string;
     /**
-     * Subject of the message.
+     * The subject of the message.
      */
     Subject?: __string;
     /**
-     * Where the message is sent to. Can be a thing arn, lambda arn or word 'cloud'.
+     * Where the message is sent to. Can be a thing ARN, a Lambda function ARN, a connector ARN, 'cloud' (which represents the AWS IoT cloud), or 'GGShadowService'.
      */
     Target?: __string;
   }
   export interface SubscriptionDefinitionVersion {
     /**
-     * Subscriptions in the version.
+     * A list of subscriptions.
      */
-    Subscriptions?: ListOfSubscription;
+    Subscriptions?: __listOfSubscription;
   }
+  export type UpdateAgentLogLevel = "NONE"|"TRACE"|"DEBUG"|"VERBOSE"|"INFO"|"WARN"|"ERROR"|"FATAL"|string;
   export interface UpdateConnectivityInfoRequest {
     /**
-     * Connectivity info array
+     * A list of connectivity info.
      */
-    ConnectivityInfo?: ListOfConnectivityInfo;
+    ConnectivityInfo?: __listOfConnectivityInfo;
     /**
-     * Thing Name
+     * The thing name.
      */
     ThingName: __string;
   }
   export interface UpdateConnectivityInfoResponse {
     /**
-     * Response Text
+     * A message about the connectivity info update request.
      */
     Message?: __string;
     /**
-     * New Version
+     * The new version of the connectivity info.
      */
     Version?: __string;
   }
+  export interface UpdateConnectorDefinitionRequest {
+    /**
+     * The ID of the connector definition.
+     */
+    ConnectorDefinitionId: __string;
+    /**
+     * The name of the definition.
+     */
+    Name?: __string;
+  }
+  export interface UpdateConnectorDefinitionResponse {
+  }
   export interface UpdateCoreDefinitionRequest {
     /**
-     * core definition Id
+     * The ID of the core definition.
      */
     CoreDefinitionId: __string;
     /**
-     * name of the definition
+     * The name of the definition.
      */
     Name?: __string;
   }
@@ -2345,11 +3348,11 @@ declare namespace Greengrass {
   }
   export interface UpdateDeviceDefinitionRequest {
     /**
-     * device definition Id
+     * The ID of the device definition.
      */
     DeviceDefinitionId: __string;
     /**
-     * name of the definition
+     * The name of the definition.
      */
     Name?: __string;
   }
@@ -2357,11 +3360,11 @@ declare namespace Greengrass {
   }
   export interface UpdateFunctionDefinitionRequest {
     /**
-     * the unique Id of the lambda definition
+     * The ID of the Lambda function definition.
      */
     FunctionDefinitionId: __string;
     /**
-     * name of the definition
+     * The name of the definition.
      */
     Name?: __string;
   }
@@ -2369,35 +3372,35 @@ declare namespace Greengrass {
   }
   export interface UpdateGroupCertificateConfigurationRequest {
     /**
-     * Amount of time when the certificate expires in milliseconds.
+     * The amount of time remaining before the certificate expires, in milliseconds.
      */
     CertificateExpiryInMilliseconds?: __string;
     /**
-     * The unique Id of the AWS Greengrass Group
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
   }
   export interface UpdateGroupCertificateConfigurationResponse {
     /**
-     * Amount of time when the certificate authority expires in milliseconds.
+     * The amount of time remaining before the certificate authority expires, in milliseconds.
      */
     CertificateAuthorityExpiryInMilliseconds?: __string;
     /**
-     * Amount of time when the certificate expires in milliseconds.
+     * The amount of time remaining before the certificate expires, in milliseconds.
      */
     CertificateExpiryInMilliseconds?: __string;
     /**
-     * Id of the group the certificate configuration belongs to.
+     * The ID of the group certificate configuration.
      */
     GroupId?: __string;
   }
   export interface UpdateGroupRequest {
     /**
-     * The unique Id of the AWS Greengrass Group
+     * The ID of the Greengrass group.
      */
     GroupId: __string;
     /**
-     * name of the definition
+     * The name of the definition.
      */
     Name?: __string;
   }
@@ -2405,51 +3408,79 @@ declare namespace Greengrass {
   }
   export interface UpdateLoggerDefinitionRequest {
     /**
-     * logger definition Id
+     * The ID of the logger definition.
      */
     LoggerDefinitionId: __string;
     /**
-     * name of the definition
+     * The name of the definition.
      */
     Name?: __string;
   }
   export interface UpdateLoggerDefinitionResponse {
   }
-  export interface UpdateSubscriptionDefinitionRequest {
+  export interface UpdateResourceDefinitionRequest {
     /**
-     * name of the definition
+     * The name of the definition.
      */
     Name?: __string;
     /**
-     * subscription definition Id
+     * The ID of the resource definition.
+     */
+    ResourceDefinitionId: __string;
+  }
+  export interface UpdateResourceDefinitionResponse {
+  }
+  export interface UpdateSubscriptionDefinitionRequest {
+    /**
+     * The name of the definition.
+     */
+    Name?: __string;
+    /**
+     * The ID of the subscription definition.
      */
     SubscriptionDefinitionId: __string;
   }
   export interface UpdateSubscriptionDefinitionResponse {
   }
+  export type UpdateTargets = __string[];
+  export type UpdateTargetsArchitecture = "armv7l"|"x86_64"|"aarch64"|string;
+  export type UpdateTargetsOperatingSystem = "ubuntu"|"raspbian"|"amazon_linux"|string;
   export interface VersionInformation {
     /**
-     * Arn of the version.
+     * The ARN of the version.
      */
     Arn?: __string;
     /**
-     * Timestamp of when the version was created.
+     * The time, in milliseconds since the epoch, when the version was created.
      */
     CreationTimestamp?: __string;
     /**
-     * Id of the resource container.
+     * The ID of the version.
      */
     Id?: __string;
     /**
-     * Unique Id of a version.
+     * The unique ID of the version.
      */
     Version?: __string;
   }
   export type __boolean = boolean;
-  export type __double = number;
   export type __integer = number;
+  export type __listOfConnectivityInfo = ConnectivityInfo[];
+  export type __listOfConnector = Connector[];
+  export type __listOfCore = Core[];
+  export type __listOfDefinitionInformation = DefinitionInformation[];
+  export type __listOfDevice = Device[];
+  export type __listOfFunction = Function[];
+  export type __listOfGroupCertificateAuthorityProperties = GroupCertificateAuthorityProperties[];
+  export type __listOfGroupInformation = GroupInformation[];
+  export type __listOfLogger = Logger[];
+  export type __listOfResource = Resource[];
+  export type __listOfResourceAccessPolicy = ResourceAccessPolicy[];
+  export type __listOfSubscription = Subscription[];
+  export type __listOfVersionInformation = VersionInformation[];
+  export type __listOf__string = __string[];
+  export type __mapOf__string = {[key: string]: __string};
   export type __string = string;
-  export type __timestamp = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

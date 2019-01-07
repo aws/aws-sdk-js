@@ -17,8 +17,11 @@ Amazon AppStream | AWS.AppStream | 2016-12-01 |  |
 Auto Scaling | AWS.AutoScaling | 2011-01-01 | :tada: |
 AWS Batch | AWS.Batch | 2016-08-10 |  |
 AWS Budgets | AWS.Budgets | 2016-10-20 |  |
+Amazon CloudDirectory | AWS.CloudDirectory | 2017-01-11 |  |
 Amazon CloudDirectory | AWS.CloudDirectory | 2016-05-10 |  |
 AWS CloudFormation | AWS.CloudFormation | 2010-05-15 | :tada: |
+Amazon CloudFront | AWS.CloudFront | 2017-10-30 | :tada: |
+Amazon CloudFront | AWS.CloudFront | 2017-03-25 | :tada: |
 Amazon CloudFront | AWS.CloudFront | 2016-11-25 | :tada: |
 Amazon CloudHSM | AWS.CloudHSM | 2014-05-30 | :tada: |
 Amazon CloudSearch | AWS.CloudSearch | 2013-01-01 |  |
@@ -28,7 +31,7 @@ AWS CloudTrail | AWS.CloudTrail | 2013-11-01 | :tada: |
 Amazon CloudWatch | AWS.CloudWatch | 2010-08-01 | :tada: |
 Amazon CloudWatch Events | AWS.CloudWatchEvents | 2015-10-07 | :tada: |
 Amazon CloudWatch Logs | AWS.CloudWatchLogs | 2014-03-28 | :tada: |
-AWS CodeBuild | AWS.CodeBuild | 2016-10-06 |  |
+AWS CodeBuild | AWS.CodeBuild | 2016-10-06 | :tada: |
 AWS CodeCommit | AWS.CodeCommit | 2015-04-13 | :tada: |
 AWS CodeDeploy | AWS.CodeDeploy | 2014-10-06 | :tada: |
 AWS CodePipeline | AWS.CodePipeline | 2015-07-09 | :tada: |
@@ -49,7 +52,7 @@ Amazon DynamoDB Streams | AWS.DynamoDBStreams | 2012-08-10 | :tada: |
 Amazon Elastic Compute Cloud | AWS.EC2 | 2016-11-15 | :tada: |
 Amazon EC2 Container Registry | AWS.ECR | 2015-09-21 | :tada: |
 Amazon EC2 Container Service | AWS.ECS | 2014-11-13 | :tada: |
-Amazon Elastic File System | AWS.EFS | 2015-02-01 |  |
+Amazon Elastic File System | AWS.EFS | 2015-02-01 | :tada: |
 Amazon ElastiCache | AWS.ElastiCache | 2015-02-02 | :tada: |
 AWS Elastic Beanstalk | AWS.ElasticBeanstalk | 2010-12-01 | :tada: |
 Elastic Load Balancing | AWS.ELB | 2012-06-01 | :tada: |
@@ -84,11 +87,13 @@ AWS Organizations | AWS.Organizations | 2016-11-28 |  |
 Amazon Pinpoint | AWS.Pinpoint | 2016-12-01 |  |
 Amazon Polly | AWS.Polly | 2016-06-10 | :tada: |
 Amazon Relational Database Service | AWS.RDS | 2014-10-31 | :tada: |
+Amazon Relational Database Service | AWS.RDS | 2014-09-01 | :tada: |
 Amazon Relational Database Service | AWS.RDS | 2013-09-09 | :tada: |
 Amazon Relational Database Service | AWS.RDS | 2013-02-12 | :tada: |
 Amazon Relational Database Service | AWS.RDS | 2013-01-10 | :tada: |
 Amazon Redshift | AWS.Redshift | 2012-12-01 | :tada: |
 Amazon Rekognition | AWS.Rekognition | 2016-06-27 | :tada: |
+AWS Resource Groups Tagging API | AWS.ResourceGroupsTaggingAPI | 2017-01-26 |  |
 Amazon Route 53 | AWS.Route53 | 2013-04-01 | :tada: |
 Amazon Route 53 Domains | AWS.Route53Domains | 2014-05-15 | :tada: |
 Amazon Simple Storage Service | AWS.S3 | 2006-03-01 | :tada: |
@@ -109,4 +114,53 @@ Amazon Simple Workflow Service | AWS.SWF | 2012-01-25 |  |
 AWS X-Ray | AWS.XRay | 2016-04-12 |  |
 AWS WAF | AWS.WAF | 2015-08-24 | :tada: |
 AWS WAF Regional | AWS.WAFRegional | 2016-11-28 |  |
+Amazon WorkDocs | AWS.WorkDocs | 2016-05-01 | :tada: |
 Amazon WorkSpaces | AWS.WorkSpaces | 2015-04-08 |  |
+AWS CodeStar | AWS.CodeStar | 2017-04-19 |  |
+Amazon Lex Model Building Service | AWS.LexModelBuildingService | 2017-04-19 | :tada: |
+AWS Marketplace Entitlement Service | AWS.MarketplaceEntitlementService | 2017-01-11 |  |
+Amazon Athena | AWS.Athena | 2017-05-18 |  |
+AWS Greengrass | AWS.Greengrass | 2017-06-07 |  |
+Amazon DynamoDB Accelerator (DAX) | AWS.DAX | 2017-04-19 |  |
+AWS Migration Hub | AWS.MigrationHub | 2017-05-31 |  |
+AWS CloudHSM V2 | AWS.CloudHSMV2 | 2017-04-28 |  |
+AWS Glue | AWS.Glue | 2017-03-31 |  |
+AWS Mobile | AWS.Mobile | 2017-07-01 |  |
+AWS Price List Service | AWS.Pricing | 2017-10-15 |  |
+AWS Cost Explorer Service | AWS.CostExplorer | 2017-10-25 |  |
+AWS Elemental MediaConvert | AWS.MediaConvert | 2017-08-29 |  |
+AWS Elemental MediaLive | AWS.MediaLive | 2017-10-14 |  |
+AWS Elemental MediaPackage | AWS.MediaPackage | 2017-10-12 |  |
+AWS Elemental MediaStore | AWS.MediaStore | 2017-09-01 |  |
+AWS Elemental MediaStore Data Plane | AWS.MediaStoreData | 2017-09-01 |  |
+AWS AppSync | AWS.AppSync | 2017-07-25 |  |
+Amazon GuardDuty | AWS.GuardDuty | 2017-11-28 |  |
+AmazonMQ | AWS.MQ | 2017-11-27 |  |
+Amazon Comprehend | AWS.Comprehend | 2017-11-27 |  |
+AWS IoT Jobs Data Plane | AWS.IoTJobsDataPlane | 2017-09-29 |  |
+Amazon Kinesis Video Streams Archived Media | AWS.KinesisVideoArchivedMedia | 2017-09-30 |  |
+Amazon Kinesis Video Streams Media | AWS.KinesisVideoMedia | 2017-09-30 |  |
+Amazon Kinesis Video Streams | AWS.KinesisVideo | 2017-09-30 |  |
+Amazon SageMaker Runtime | AWS.SageMakerRuntime | 2017-05-13 |  |
+Amazon SageMaker Service | AWS.SageMaker | 2017-07-24 |  |
+Amazon Translate | AWS.Translate | 2017-07-01 |  |
+AWS Resource Groups | AWS.ResourceGroups | 2017-11-27 |  |
+Alexa For Business | AWS.AlexaForBusiness | 2017-11-09 |  |
+AWS Cloud9 | AWS.Cloud9 | 2017-09-23 |  |
+AWSServerlessApplicationRepository | AWS.ServerlessApplicationRepository | 2017-09-08 |  |
+Amazon Route 53 Auto Naming | AWS.ServiceDiscovery | 2017-03-14 |  |
+Amazon WorkMail | AWS.WorkMail | 2017-10-01 |  |
+AWS Auto Scaling Plans | AWS.AutoScalingPlans | 2018-01-06 |  |
+Amazon Transcribe Service | AWS.TranscribeService | 2017-10-26 |  |
+Amazon Connect Service | AWS.Connect | 2017-08-08 |  |
+AWS Certificate Manager Private Certificate Authority | AWS.ACMPCA | 2017-08-22 |  |
+Firewall Management Service | AWS.FMS | 2018-01-01 |  |
+AWS Secrets Manager | AWS.SecretsManager | 2017-10-17 | :tada: |
+AWS IoT Analytics | AWS.IoTAnalytics | 2017-11-27 |  |
+AWS IoT 1-Click Devices Service | AWS.IoT1ClickDevicesService | 2018-05-14 |  |
+AWS IoT 1-Click Projects Service | AWS.IoT1ClickProjects | 2018-05-14 |  |
+AWS Performance Insights | AWS.PI | 2018-02-27 |  |
+Amazon Neptune | AWS.Neptune | 2014-10-31 |  |
+AWS MediaTailor | AWS.MediaTailor | 2018-04-23 |  |
+Amazon Elastic Container Service for Kubernetes | AWS.EKS | 2017-11-01 |  |
+Amazon Macie | AWS.Macie | 2017-12-19 |  |

@@ -80,7 +80,6 @@
     apigateway = new AWS.APIGateway(AWS.util.merge(config, config.apigateway));
     cloudformation = new AWS.CloudFormation(AWS.util.merge(config, config.cloudformation));
     cloudfront = new AWS.CloudFront(AWS.util.merge(config, config.cloudfront));
-    cloudhsm = new AWS.CloudHSM(AWS.util.merge(config, config.cloudhsm));
     cloudtrail = new AWS.CloudTrail(AWS.util.merge(config, config.cloudtrail));
     cloudwatch = new AWS.CloudWatch(AWS.util.merge(config, config.cloudwatch));
     cloudwatchlogs = new AWS.CloudWatchLogs(AWS.util.merge(config, config.cloudwatchlogs));
@@ -114,6 +113,7 @@
     mobileanalytics = new AWS.MobileAnalytics(AWS.util.merge(config, config.mobileanalytics));
     machinelearning = new AWS.MachineLearning(AWS.util.merge(config, config.machinelearning));
     opsworks = new AWS.OpsWorks(AWS.util.merge(config, config.opsworks));
+    var pinpoint = new AWS.Pinpoint(AWS.util.merge(config, config.pinpoint));
     rds = new AWS.RDS(AWS.util.merge(config, config.rds));
     redshift = new AWS.Redshift(AWS.util.merge(config, config.redshift));
     route53 = new AWS.Route53(AWS.util.merge(config, config.route53));
@@ -136,12 +136,13 @@
         req.on('httpHeaders', function() {
           return this.abort();
         });
-        return req.send(function(err) {
+        req.send(function(err) {
           expect(err.name).to.equal('RequestAbortedError');
           return done();
         });
       });
     });
+
     describe('XHR', function() {
       it('does not emit http events if networking issue occurs', function(done) {
         var date, err, httpData, httpDone, httpError, httpHeaders, req, svc;
@@ -309,22 +310,7 @@
         });
       });
     });
-    describe('AWS.CloudHSM', function() {
-      it('makes a request', function(done) {
-        return cloudhsm.listHsms({}, function(err, data) {
-          noError(err);
-          expect(Array.isArray(data.HsmList)).to.equal(true);
-          return done();
-        });
-      });
-      return it('handles errors', function(done) {
-        return cloudhsm.describeHsm({}, function(err, data) {
-          assertError(err, 'InvalidRequestException');
-          noData(data);
-          return done();
-        });
-      });
-    });
+
     describe('AWS.CloudTrail', function() {
       it('makes a request', function(done) {
         return cloudtrail.listPublicKeys(function(err, data) {
@@ -972,6 +958,7 @@
         });
       });
     });
+
     describe('AWS.RDS', function() {
       it('makes a request', function(done) {
         return rds.describeCertificates(function(err, data) {
@@ -1125,8 +1112,106 @@
           });
         });
       });
+
+      it('won\'t attempt to update bucket region if request is aborted', function(done) {
+        var req;
+        var s3Config = AWS.util.merge(config, config.s3);
+        s3Config.params = AWS.util.copy(s3Config.params);
+        s3Config.region = 'us-west-2';
+        s3Config.params.Bucket += '-us-west-2';
+        var s3 = new AWS.S3(s3Config);
+        req = s3.putObject({
+          Key: 'key',
+          Body: 'body'
+        });
+        req.on('httpHeaders', function() {
+          return this.abort();
+        });
+        var spy = helpers.spyOn(s3, 'updateReqBucketRegion').andCallThrough();
+        req.send(function(err) {
+          expect(err.name).to.equal('RequestAbortedError');
+          expect(spy.calls.length).to.equal(0);
+          return done();
+        });
+      });
+
+      it('won\'t attempt to update bucket region if request times out', function(done) {
+        var req;
+        var s3Config = AWS.util.merge(config, config.s3);
+        s3Config.params = AWS.util.copy(s3Config.params);
+        s3Config.httpOptions = {
+          timeout: 1
+        };
+        s3Config.region = 'us-west-2';
+        s3Config.params.Bucket += '-us-west-2';
+        var s3 = new AWS.S3(s3Config);
+        req = s3.putObject({
+          Key: 'key',
+          Body: 'body'
+        });
+        req.on('httpHeaders', function() {
+          throw AWS.util.error(new Error('TimeoutError'), {code: 'TimeoutError'});
+        });
+        var spy = helpers.spyOn(s3, 'updateReqBucketRegion').andCallThrough();
+        req.send(function(err) {
+          expect(err.name).to.equal('TimeoutError');
+          expect(spy.calls.length).to.equal(0);
+          return done();
+        });
+      });
+
+      describe('selectObjectContent', function() {
+        beforeEach(function(done) {
+          s3.putObject({
+            Key: 'test.csv',
+            Body: 'user_name,age\nfoo,10\nbar,20\nfizz,30\nbuzz,40'
+          }, done);
+        });
+
+        afterEach(function(done) {
+          s3.deleteObject({
+            Key: 'test.csv'
+          }, done);
+        });
+
+        it('supports reading events from list of events', function(done) {
+          var key = 'test.csv';
+
+          s3.selectObjectContent({
+            Key: 'test.csv',
+            Expression: 'SELECT user_name FROM S3Object WHERE cast(age as int) > 20',
+            ExpressionType: 'SQL',
+            InputSerialization: {
+              CompressionType: 'NONE',
+              CSV: {
+                FileHeaderInfo: 'USE',
+                RecordDelimiter: '\n',
+                FieldDelimiter: ','
+              }
+            },
+            OutputSerialization: {
+              CSV: {}
+            }
+          }, function(err, data) {
+            noError(err);
+            var records = []
+            for (var i = 0; i < data.Payload.length; i++) {
+              var event = data.Payload[i];
+              if (event.Records) {
+                records.push(event.Records.Payload);
+              }
+            }
+
+            expect(Buffer.concat(records).toString()).to.equal(
+              'fizz\nbuzz\n'
+            );
+            done();
+          });
+        })
+      });
+
       describe('upload()', function() {
-        return it('supports blobs using upload()', function(done) {
+        it('supports blobs using upload()', function(done) {
           var key, size, u;
           key = uniqueName('test');
           size = 100;
@@ -1134,7 +1219,7 @@
             Key: key,
             Body: new Blob([new Uint8Array(size)])
           });
-          return u.send(function(err, data) {
+          u.send(function(err, data) {
             expect(err).not.to.exist;
             expect(typeof data.ETag).to.equal('string');
             expect(typeof data.Location).to.equal('string');

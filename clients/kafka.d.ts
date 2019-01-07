@@ -1,0 +1,406 @@
+import {Request} from '../lib/request';
+import {Response} from '../lib/response';
+import {AWSError} from '../lib/error';
+import {Service} from '../lib/service';
+import {ServiceConfigurationOptions} from '../lib/service';
+import {ConfigBase as Config} from '../lib/config';
+interface Blob {}
+declare class Kafka extends Service {
+  /**
+   * Constructs a service object. This object has one method for each API operation.
+   */
+  constructor(options?: Kafka.Types.ClientConfiguration)
+  config: Config & Kafka.Types.ClientConfiguration;
+  /**
+   * Creates a new MSK cluster.
+   */
+  createCluster(params: Kafka.Types.CreateClusterRequest, callback?: (err: AWSError, data: Kafka.Types.CreateClusterResponse) => void): Request<Kafka.Types.CreateClusterResponse, AWSError>;
+  /**
+   * Creates a new MSK cluster.
+   */
+  createCluster(callback?: (err: AWSError, data: Kafka.Types.CreateClusterResponse) => void): Request<Kafka.Types.CreateClusterResponse, AWSError>;
+  /**
+   * Deletes the MSK cluster specified by the Amazon Resource Name (ARN) in the request.
+   */
+  deleteCluster(params: Kafka.Types.DeleteClusterRequest, callback?: (err: AWSError, data: Kafka.Types.DeleteClusterResponse) => void): Request<Kafka.Types.DeleteClusterResponse, AWSError>;
+  /**
+   * Deletes the MSK cluster specified by the Amazon Resource Name (ARN) in the request.
+   */
+  deleteCluster(callback?: (err: AWSError, data: Kafka.Types.DeleteClusterResponse) => void): Request<Kafka.Types.DeleteClusterResponse, AWSError>;
+  /**
+   * Returns a description of the MSK cluster whose Amazon Resource Name (ARN) is specified in the request.
+   */
+  describeCluster(params: Kafka.Types.DescribeClusterRequest, callback?: (err: AWSError, data: Kafka.Types.DescribeClusterResponse) => void): Request<Kafka.Types.DescribeClusterResponse, AWSError>;
+  /**
+   * Returns a description of the MSK cluster whose Amazon Resource Name (ARN) is specified in the request.
+   */
+  describeCluster(callback?: (err: AWSError, data: Kafka.Types.DescribeClusterResponse) => void): Request<Kafka.Types.DescribeClusterResponse, AWSError>;
+  /**
+   * A list of brokers that a client application can use to bootstrap.
+   */
+  getBootstrapBrokers(params: Kafka.Types.GetBootstrapBrokersRequest, callback?: (err: AWSError, data: Kafka.Types.GetBootstrapBrokersResponse) => void): Request<Kafka.Types.GetBootstrapBrokersResponse, AWSError>;
+  /**
+   * A list of brokers that a client application can use to bootstrap.
+   */
+  getBootstrapBrokers(callback?: (err: AWSError, data: Kafka.Types.GetBootstrapBrokersResponse) => void): Request<Kafka.Types.GetBootstrapBrokersResponse, AWSError>;
+  /**
+   * Returns a list of clusters in an account.
+   */
+  listClusters(params: Kafka.Types.ListClustersRequest, callback?: (err: AWSError, data: Kafka.Types.ListClustersResponse) => void): Request<Kafka.Types.ListClustersResponse, AWSError>;
+  /**
+   * Returns a list of clusters in an account.
+   */
+  listClusters(callback?: (err: AWSError, data: Kafka.Types.ListClustersResponse) => void): Request<Kafka.Types.ListClustersResponse, AWSError>;
+  /**
+   * Returns a list of the broker nodes in the cluster.
+   */
+  listNodes(params: Kafka.Types.ListNodesRequest, callback?: (err: AWSError, data: Kafka.Types.ListNodesResponse) => void): Request<Kafka.Types.ListNodesResponse, AWSError>;
+  /**
+   * Returns a list of the broker nodes in the cluster.
+   */
+  listNodes(callback?: (err: AWSError, data: Kafka.Types.ListNodesResponse) => void): Request<Kafka.Types.ListNodesResponse, AWSError>;
+}
+declare namespace Kafka {
+  export type BrokerAZDistribution = "DEFAULT"|string;
+  export interface BrokerNodeGroupInfo {
+    /**
+     * The distribution of broker nodes across Availability Zones.
+     */
+    BrokerAZDistribution?: BrokerAZDistribution;
+    /**
+     * The list of subnets to connect to in the client virtual private cloud (VPC). AWS creates elastic network interfaces inside these subnets. Client applications use elastic network interfaces to produce and consume data. Client subnets can't be in Availability Zone us-east-1e.
+     */
+    ClientSubnets: __listOf__string;
+    /**
+     * The type of Amazon EC2 instances to use for Kafka brokers. The following instance types are allowed: kafka.m5.large, kafka.m5.xlarge, kafka.m5.2xlarge,
+kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
+     */
+    InstanceType: __stringMin5Max32;
+    /**
+     * The AWS security groups to associate with the elastic network interfaces in order to specify who can connect to and communicate with the Amazon MSK cluster.
+     */
+    SecurityGroups?: __listOf__string;
+    /**
+     * Contains information about storage volumes attached to MSK broker nodes.
+     */
+    StorageInfo?: StorageInfo;
+  }
+  export interface BrokerNodeInfo {
+    /**
+     * The attached elastic network interface of the broker.
+     */
+    AttachedENIId?: __string;
+    /**
+     * The ID of the broker.
+     */
+    BrokerId?: __double;
+    /**
+     * The client subnet to which this broker node belongs.
+     */
+    ClientSubnet?: __string;
+    /**
+     * The virtual private cloud (VPC) of the client.
+     */
+    ClientVpcIpAddress?: __string;
+    /**
+     * Information about the version of software currently deployed on the Kafka brokers in the cluster.
+     */
+    CurrentBrokerSoftwareInfo?: BrokerSoftwareInfo;
+  }
+  export interface BrokerSoftwareInfo {
+    /**
+     * The Amazon Resource Name (ARN) of the configuration used for the cluster.
+     */
+    ConfigurationArn?: __string;
+    /**
+     * The revision of the configuration to use.
+     */
+    ConfigurationRevision?: __string;
+    /**
+     * The version of Apache Kafka.
+     */
+    KafkaVersion?: __string;
+  }
+  export interface ClusterInfo {
+    /**
+     * Information about the broker nodes.
+     */
+    BrokerNodeGroupInfo?: BrokerNodeGroupInfo;
+    /**
+     * The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+     */
+    ClusterArn?: __string;
+    /**
+     * The name of the cluster.
+     */
+    ClusterName?: __string;
+    /**
+     * The time when the cluster was created.
+     */
+    CreationTime?: __timestampIso8601;
+    /**
+     * Information about the version of software currently deployed on the Kafka brokers in the cluster.
+     */
+    CurrentBrokerSoftwareInfo?: BrokerSoftwareInfo;
+    /**
+     * The current version of the MSK cluster.
+     */
+    CurrentVersion?: __string;
+    /**
+     * Includes all encryption-related information.
+     */
+    EncryptionInfo?: EncryptionInfo;
+    /**
+     * Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.
+     */
+    EnhancedMonitoring?: EnhancedMonitoring;
+    /**
+     * The number of Kafka broker nodes in the cluster.
+     */
+    NumberOfBrokerNodes?: __integer;
+    /**
+     * The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.
+     */
+    State?: ClusterState;
+    /**
+     * The connection string to use to connect to the Apache ZooKeeper cluster.
+     */
+    ZookeeperConnectString?: __string;
+  }
+  export type ClusterState = "ACTIVE"|"CREATING"|"DELETING"|"FAILED"|string;
+  export interface CreateClusterRequest {
+    /**
+     * Information about the broker nodes in the cluster.
+     */
+    BrokerNodeGroupInfo: BrokerNodeGroupInfo;
+    /**
+     * The name of the cluster.
+     */
+    ClusterName: __stringMin1Max64;
+    /**
+     * Includes all encryption-related information.
+     */
+    EncryptionInfo?: EncryptionInfo;
+    /**
+     * Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.
+     */
+    EnhancedMonitoring?: EnhancedMonitoring;
+    /**
+     * The version of Apache Kafka.
+     */
+    KafkaVersion: __stringMin1Max128;
+    /**
+     * The number of Kafka broker nodes in the Amazon MSK cluster.
+     */
+    NumberOfBrokerNodes: __integerMin1Max15;
+  }
+  export interface CreateClusterResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the cluster.
+     */
+    ClusterArn?: __string;
+    /**
+     * The name of the MSK cluster.
+     */
+    ClusterName?: __string;
+    /**
+     * The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.
+     */
+    State?: ClusterState;
+  }
+  export interface DeleteClusterRequest {
+    /**
+     * The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+     */
+    ClusterArn: __string;
+    /**
+     * The current version of the MSK cluster.
+     */
+    CurrentVersion?: __string;
+  }
+  export interface DeleteClusterResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the cluster.
+     */
+    ClusterArn?: __string;
+    /**
+     * The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.
+     */
+    State?: ClusterState;
+  }
+  export interface DescribeClusterRequest {
+    /**
+     * The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+     */
+    ClusterArn: __string;
+  }
+  export interface DescribeClusterResponse {
+    /**
+     * The cluster information.
+     */
+    ClusterInfo?: ClusterInfo;
+  }
+  export interface EBSStorageInfo {
+    /**
+     * The size in GiB of the EBS volume for the data drive on each broker node.
+     */
+    VolumeSize?: __integerMin1Max16384;
+  }
+  export interface EncryptionAtRest {
+    /**
+     * The AWS KMS key used for data encryption.
+     */
+    DataVolumeKMSKeyId: __string;
+  }
+  export interface EncryptionInfo {
+    /**
+     * The data volume encryption details.
+     */
+    EncryptionAtRest?: EncryptionAtRest;
+  }
+  export type EnhancedMonitoring = "DEFAULT"|"PER_BROKER"|"PER_TOPIC_PER_BROKER"|string;
+  export interface GetBootstrapBrokersRequest {
+    /**
+     * The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+     */
+    ClusterArn: __string;
+  }
+  export interface GetBootstrapBrokersResponse {
+    /**
+     * A string containing one or more hostname:port pairs.
+     */
+    BootstrapBrokerString?: __string;
+  }
+  export interface ListClustersRequest {
+    /**
+     * Specify a prefix of the name of the clusters that you want to list. The service lists all the clusters whose names start with this prefix.
+     */
+    ClusterNameFilter?: __string;
+    /**
+     * The maximum number of clusters to return in the response. If there are more clusters, the response includes a NextToken parameter.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response. 
+ To get another batch of clusters, provide this token in your next request.
+     */
+    NextToken?: __string;
+  }
+  export interface ListClustersResponse {
+    /**
+     * Information on each of the MSK clusters in the response.
+     */
+    ClusterInfoList?: __listOfClusterInfo;
+    /**
+     * The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response. 
+ To get another batch of clusters, provide this token in your next request.
+     */
+    NextToken?: __string;
+  }
+  export interface ListNodesRequest {
+    /**
+     * The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+     */
+    ClusterArn: __string;
+    /**
+     * The maximum number of clusters to return in the response. If there are more clusters, the response includes a NextToken parameter.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response. 
+ To get another batch of clusters, provide this token in your next request.
+     */
+    NextToken?: __string;
+  }
+  export interface ListNodesResponse {
+    /**
+     * The paginated results marker. When the result of a ListNodes operation is truncated, the call returns NextToken in the response. 
+ To get another batch of nodes, provide this token in your next request.
+     */
+    NextToken?: __string;
+    /**
+     * List containing a NodeInfo object.
+     */
+    NodeInfoList?: __listOfNodeInfo;
+  }
+  export type MaxResults = number;
+  export interface NodeInfo {
+    /**
+     * The start time.
+     */
+    AddedToClusterTime?: __string;
+    /**
+     * The broker node info.
+     */
+    BrokerNodeInfo?: BrokerNodeInfo;
+    /**
+     * The instance type.
+     */
+    InstanceType?: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the node.
+     */
+    NodeARN?: __string;
+    /**
+     * The node type.
+     */
+    NodeType?: NodeType;
+    /**
+     * The ZookeeperNodeInfo.
+     */
+    ZookeeperNodeInfo?: ZookeeperNodeInfo;
+  }
+  export type NodeType = "BROKER"|string;
+  export interface StorageInfo {
+    /**
+     * EBS volume information.
+     */
+    EbsStorageInfo?: EBSStorageInfo;
+  }
+  export interface ZookeeperNodeInfo {
+    /**
+     * The attached elastic network interface of the broker.
+     */
+    AttachedENIId?: __string;
+    /**
+     * The virtual private cloud (VPC) IP address of the client.
+     */
+    ClientVpcIpAddress?: __string;
+    /**
+     * The role-specific ID for Zookeeper.
+     */
+    ZookeeperId?: __double;
+    /**
+     * The version of Zookeeper.
+     */
+    ZookeeperVersion?: __string;
+  }
+  export type __double = number;
+  export type __integer = number;
+  export type __integerMin1Max15 = number;
+  export type __integerMin1Max16384 = number;
+  export type __listOfClusterInfo = ClusterInfo[];
+  export type __listOfNodeInfo = NodeInfo[];
+  export type __listOf__string = __string[];
+  export type __string = string;
+  export type __stringMin1Max128 = string;
+  export type __stringMin1Max64 = string;
+  export type __stringMin5Max32 = string;
+  export type __timestampIso8601 = Date;
+  /**
+   * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
+   */
+  export type apiVersion = "2018-11-14"|"latest"|string;
+  export interface ClientApiVersions {
+    /**
+     * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
+     */
+    apiVersion?: apiVersion;
+  }
+  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  /**
+   * Contains interfaces for use with the Kafka client.
+   */
+  export import Types = Kafka;
+}
+export = Kafka;

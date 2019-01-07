@@ -161,7 +161,7 @@
         str = '{"Items":{"MyKey":5,"MyOtherKey":10}}';
         return expect(build(rules, params)).to.equal(str);
       });
-      it('traslates nested timestamps', function() {
+      it('traslates nested timestamps and ignore the metadata timestampFormat', function() {
         var formatted, now, params, rules;
         rules = {
           type: 'structure',
@@ -183,8 +183,8 @@
             When: now
           }
         };
-        formatted = AWS.util.date.iso8601(now).replace(/\.\d+Z$/, '');
-        return expect(build(rules, params)).to.match(new RegExp('\\{"Build":\\{"When":"' + formatted + '"\\}\\}'));
+        formatted = AWS.util.date.unixTimestamp(now);
+        return expect(build(rules, params)).to.match(new RegExp('\\{"Build":\\{"When":' + formatted + '\\}\\}'));
       });
       it('translates integers formatted as strings', function() {
         var rules;

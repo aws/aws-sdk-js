@@ -1,0 +1,215 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2017-07-01",
+    "endpointPrefix": "translate",
+    "jsonVersion": "1.1",
+    "protocol": "json",
+    "serviceFullName": "Amazon Translate",
+    "serviceId": "Translate",
+    "signatureVersion": "v4",
+    "signingName": "translate",
+    "targetPrefix": "AWSShineFrontendService_20170701",
+    "uid": "translate-2017-07-01"
+  },
+  "operations": {
+    "DeleteTerminology": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Name"
+        ],
+        "members": {
+          "Name": {}
+        }
+      }
+    },
+    "GetTerminology": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Name",
+          "TerminologyDataFormat"
+        ],
+        "members": {
+          "Name": {},
+          "TerminologyDataFormat": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TerminologyProperties": {
+            "shape": "S6"
+          },
+          "TerminologyDataLocation": {
+            "type": "structure",
+            "required": [
+              "RepositoryType",
+              "Location"
+            ],
+            "members": {
+              "RepositoryType": {},
+              "Location": {}
+            }
+          }
+        }
+      }
+    },
+    "ImportTerminology": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Name",
+          "MergeStrategy",
+          "TerminologyData"
+        ],
+        "members": {
+          "Name": {},
+          "MergeStrategy": {},
+          "Description": {},
+          "TerminologyData": {
+            "type": "structure",
+            "required": [
+              "File",
+              "Format"
+            ],
+            "members": {
+              "File": {
+                "type": "blob",
+                "sensitive": true
+              },
+              "Format": {}
+            }
+          },
+          "EncryptionKey": {
+            "shape": "Sb"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TerminologyProperties": {
+            "shape": "S6"
+          }
+        }
+      }
+    },
+    "ListTerminologies": {
+      "input": {
+        "type": "structure",
+        "members": {
+          "NextToken": {},
+          "MaxResults": {
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "TerminologyPropertiesList": {
+            "type": "list",
+            "member": {
+              "shape": "S6"
+            }
+          },
+          "NextToken": {}
+        }
+      }
+    },
+    "TranslateText": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Text",
+          "SourceLanguageCode",
+          "TargetLanguageCode"
+        ],
+        "members": {
+          "Text": {},
+          "TerminologyNames": {
+            "type": "list",
+            "member": {}
+          },
+          "SourceLanguageCode": {},
+          "TargetLanguageCode": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "TranslatedText",
+          "SourceLanguageCode",
+          "TargetLanguageCode"
+        ],
+        "members": {
+          "TranslatedText": {},
+          "SourceLanguageCode": {},
+          "TargetLanguageCode": {},
+          "AppliedTerminologies": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Name": {},
+                "Terms": {
+                  "type": "list",
+                  "member": {
+                    "type": "structure",
+                    "members": {
+                      "SourceText": {},
+                      "TargetText": {}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "shapes": {
+    "S6": {
+      "type": "structure",
+      "members": {
+        "Name": {},
+        "Description": {},
+        "Arn": {},
+        "SourceLanguageCode": {},
+        "TargetLanguageCodes": {
+          "type": "list",
+          "member": {}
+        },
+        "EncryptionKey": {
+          "shape": "Sb"
+        },
+        "SizeBytes": {
+          "type": "integer"
+        },
+        "TermCount": {
+          "type": "integer"
+        },
+        "CreatedAt": {
+          "type": "timestamp"
+        },
+        "LastUpdatedAt": {
+          "type": "timestamp"
+        }
+      }
+    },
+    "Sb": {
+      "type": "structure",
+      "required": [
+        "Type",
+        "Id"
+      ],
+      "members": {
+        "Type": {},
+        "Id": {}
+      }
+    }
+  }
+}

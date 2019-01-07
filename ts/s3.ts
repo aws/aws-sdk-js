@@ -10,6 +10,15 @@ new S3({
     credentials: null
 });
 
+// test waiters
+s3.waitFor('bucketExists', {
+    Bucket: 'test',
+    $waiter: {
+        maxAttempts: 100,
+        delay: 30
+    }
+});
+
 // Instantiate S3 with config
 var s3Config: S3.Types.ClientConfiguration = {
     apiVersion: '2006-03-01',
@@ -30,7 +39,7 @@ s3.listObjects({
     Bucket: 'BUCKET2'
 }, function(err, data) {
     if (err) {
-        console.log(err.extendedRequstId);
+        console.log(err.extendedRequestId);
     } else if (data && data.Contents) {
         data.Contents.forEach(function(content) {
             console.log(content.Key);

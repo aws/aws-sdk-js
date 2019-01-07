@@ -12,6 +12,14 @@ declare class CloudWatchLogs extends Service {
   constructor(options?: CloudWatchLogs.Types.ClientConfiguration)
   config: Config & CloudWatchLogs.Types.ClientConfiguration;
   /**
+   * Associates the specified AWS Key Management Service (AWS KMS) customer master key (CMK) with the specified log group. Associating an AWS KMS CMK with a log group overrides any existing associations between the log group and a CMK. After a CMK is associated with a log group, all newly ingested data for the log group is encrypted using the CMK. This association is stored as long as the data encrypted with the CMK is still within Amazon CloudWatch Logs. This enables Amazon CloudWatch Logs to decrypt this data whenever it is requested. Note that it can take up to 5 minutes for this operation to take effect. If you attempt to associate a CMK with a log group but the CMK does not exist or the CMK is disabled, you will receive an InvalidParameterException error. 
+   */
+  associateKmsKey(params: CloudWatchLogs.Types.AssociateKmsKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Associates the specified AWS Key Management Service (AWS KMS) customer master key (CMK) with the specified log group. Associating an AWS KMS CMK with a log group overrides any existing associations between the log group and a CMK. After a CMK is associated with a log group, all newly ingested data for the log group is encrypted using the CMK. This association is stored as long as the data encrypted with the CMK is still within Amazon CloudWatch Logs. This enables Amazon CloudWatch Logs to decrypt this data whenever it is requested. Note that it can take up to 5 minutes for this operation to take effect. If you attempt to associate a CMK with a log group but the CMK does not exist or the CMK is disabled, you will receive an InvalidParameterException error. 
+   */
+  associateKmsKey(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Cancels the specified export task. The task must be in the PENDING or RUNNING state.
    */
   cancelExportTask(params: CloudWatchLogs.Types.CancelExportTaskRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -20,19 +28,19 @@ declare class CloudWatchLogs extends Service {
    */
   cancelExportTask(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates an export task, which allows you to efficiently export data from a log group to an Amazon S3 bucket. This is an asynchronous call. If all the required information is provided, this operation initiates an export task and responds with the ID of the task. After the task has started, you can use DescribeExportTasks to get the status of the export task. Each account can only have one active (RUNNING or PENDING) export task at a time. To cancel an export task, use CancelExportTask. You can export logs from multiple log groups or multiple time ranges to the same S3 bucket. To separate out log data for each export task, you can specify a prefix that will be used as the Amazon S3 key prefix for all exported objects.
+   * Creates an export task, which allows you to efficiently export data from a log group to an Amazon S3 bucket. This is an asynchronous call. If all the required information is provided, this operation initiates an export task and responds with the ID of the task. After the task has started, you can use DescribeExportTasks to get the status of the export task. Each account can only have one active (RUNNING or PENDING) export task at a time. To cancel an export task, use CancelExportTask. You can export logs from multiple log groups or multiple time ranges to the same S3 bucket. To separate out log data for each export task, you can specify a prefix to be used as the Amazon S3 key prefix for all exported objects.
    */
   createExportTask(params: CloudWatchLogs.Types.CreateExportTaskRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.CreateExportTaskResponse) => void): Request<CloudWatchLogs.Types.CreateExportTaskResponse, AWSError>;
   /**
-   * Creates an export task, which allows you to efficiently export data from a log group to an Amazon S3 bucket. This is an asynchronous call. If all the required information is provided, this operation initiates an export task and responds with the ID of the task. After the task has started, you can use DescribeExportTasks to get the status of the export task. Each account can only have one active (RUNNING or PENDING) export task at a time. To cancel an export task, use CancelExportTask. You can export logs from multiple log groups or multiple time ranges to the same S3 bucket. To separate out log data for each export task, you can specify a prefix that will be used as the Amazon S3 key prefix for all exported objects.
+   * Creates an export task, which allows you to efficiently export data from a log group to an Amazon S3 bucket. This is an asynchronous call. If all the required information is provided, this operation initiates an export task and responds with the ID of the task. After the task has started, you can use DescribeExportTasks to get the status of the export task. Each account can only have one active (RUNNING or PENDING) export task at a time. To cancel an export task, use CancelExportTask. You can export logs from multiple log groups or multiple time ranges to the same S3 bucket. To separate out log data for each export task, you can specify a prefix to be used as the Amazon S3 key prefix for all exported objects.
    */
   createExportTask(callback?: (err: AWSError, data: CloudWatchLogs.Types.CreateExportTaskResponse) => void): Request<CloudWatchLogs.Types.CreateExportTaskResponse, AWSError>;
   /**
-   * Creates a log group with the specified name. You can create up to 5000 log groups per account. You must use the following guidelines when naming a log group:   Log group names must be unique within a region for an AWS account.   Log group names can be between 1 and 512 characters long.   Log group names consist of the following characters: a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/' (forward slash), and '.' (period).  
+   * Creates a log group with the specified name. You can create up to 5000 log groups per account. You must use the following guidelines when naming a log group:   Log group names must be unique within a region for an AWS account.   Log group names can be between 1 and 512 characters long.   Log group names consist of the following characters: a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/' (forward slash), and '.' (period).   If you associate a AWS Key Management Service (AWS KMS) customer master key (CMK) with the log group, ingested data is encrypted using the CMK. This association is stored as long as the data encrypted with the CMK is still within Amazon CloudWatch Logs. This enables Amazon CloudWatch Logs to decrypt this data whenever it is requested. If you attempt to associate a CMK with the log group but the CMK does not exist or the CMK is disabled, you will receive an InvalidParameterException error. 
    */
   createLogGroup(params: CloudWatchLogs.Types.CreateLogGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a log group with the specified name. You can create up to 5000 log groups per account. You must use the following guidelines when naming a log group:   Log group names must be unique within a region for an AWS account.   Log group names can be between 1 and 512 characters long.   Log group names consist of the following characters: a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/' (forward slash), and '.' (period).  
+   * Creates a log group with the specified name. You can create up to 5000 log groups per account. You must use the following guidelines when naming a log group:   Log group names must be unique within a region for an AWS account.   Log group names can be between 1 and 512 characters long.   Log group names consist of the following characters: a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/' (forward slash), and '.' (period).   If you associate a AWS Key Management Service (AWS KMS) customer master key (CMK) with the log group, ingested data is encrypted using the CMK. This association is stored as long as the data encrypted with the CMK is still within Amazon CloudWatch Logs. This enables Amazon CloudWatch Logs to decrypt this data whenever it is requested. If you attempt to associate a CMK with the log group but the CMK does not exist or the CMK is disabled, you will receive an InvalidParameterException error. 
    */
   createLogGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -75,6 +83,14 @@ declare class CloudWatchLogs extends Service {
    * Deletes the specified metric filter.
    */
   deleteMetricFilter(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a resource policy from this account. This revokes the access of the identities in that policy to put log events to this account.
+   */
+  deleteResourcePolicy(params: CloudWatchLogs.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a resource policy from this account. This revokes the access of the identities in that policy to put log events to this account.
+   */
+  deleteResourcePolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified retention policy. Log events do not expire if they belong to log groups without a retention policy.
    */
@@ -124,13 +140,29 @@ declare class CloudWatchLogs extends Service {
    */
   describeLogStreams(callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeLogStreamsResponse) => void): Request<CloudWatchLogs.Types.DescribeLogStreamsResponse, AWSError>;
   /**
-   * Lists the specified metric filters. You can list all the metric filters or filter the results by log name, prefix, metric name, and metric namespace. The results are ASCII-sorted by filter name.
+   * Lists the specified metric filters. You can list all the metric filters or filter the results by log name, prefix, metric name, or metric namespace. The results are ASCII-sorted by filter name.
    */
   describeMetricFilters(params: CloudWatchLogs.Types.DescribeMetricFiltersRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeMetricFiltersResponse) => void): Request<CloudWatchLogs.Types.DescribeMetricFiltersResponse, AWSError>;
   /**
-   * Lists the specified metric filters. You can list all the metric filters or filter the results by log name, prefix, metric name, and metric namespace. The results are ASCII-sorted by filter name.
+   * Lists the specified metric filters. You can list all the metric filters or filter the results by log name, prefix, metric name, or metric namespace. The results are ASCII-sorted by filter name.
    */
   describeMetricFilters(callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeMetricFiltersResponse) => void): Request<CloudWatchLogs.Types.DescribeMetricFiltersResponse, AWSError>;
+  /**
+   * Returns a list of CloudWatch Logs Insights queries that are scheduled, executing, or have been executed recently in this account. You can request all queries, or limit it to queries of a specific log group or queries with a certain status.
+   */
+  describeQueries(params: CloudWatchLogs.Types.DescribeQueriesRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeQueriesResponse) => void): Request<CloudWatchLogs.Types.DescribeQueriesResponse, AWSError>;
+  /**
+   * Returns a list of CloudWatch Logs Insights queries that are scheduled, executing, or have been executed recently in this account. You can request all queries, or limit it to queries of a specific log group or queries with a certain status.
+   */
+  describeQueries(callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeQueriesResponse) => void): Request<CloudWatchLogs.Types.DescribeQueriesResponse, AWSError>;
+  /**
+   * Lists the resource policies in this account.
+   */
+  describeResourcePolicies(params: CloudWatchLogs.Types.DescribeResourcePoliciesRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeResourcePoliciesResponse) => void): Request<CloudWatchLogs.Types.DescribeResourcePoliciesResponse, AWSError>;
+  /**
+   * Lists the resource policies in this account.
+   */
+  describeResourcePolicies(callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeResourcePoliciesResponse) => void): Request<CloudWatchLogs.Types.DescribeResourcePoliciesResponse, AWSError>;
   /**
    * Lists the subscription filters for the specified log group. You can list all the subscription filters or filter the results by prefix. The results are ASCII-sorted by filter name.
    */
@@ -140,35 +172,67 @@ declare class CloudWatchLogs extends Service {
    */
   describeSubscriptionFilters(callback?: (err: AWSError, data: CloudWatchLogs.Types.DescribeSubscriptionFiltersResponse) => void): Request<CloudWatchLogs.Types.DescribeSubscriptionFiltersResponse, AWSError>;
   /**
-   * Lists log events from the specified log group. You can list all the log events or filter the results using a filter pattern, a time range, and the name of the log stream. By default, this operation returns as many log events as can fit in 1MB (up to 10,000 log events), or all the events found within the time range that you specify. If the results include a token, then there are more log events available, and you can get additional results by specifying the token in a subsequent call.
+   * Disassociates the associated AWS Key Management Service (AWS KMS) customer master key (CMK) from the specified log group. After the AWS KMS CMK is disassociated from the log group, AWS CloudWatch Logs stops encrypting newly ingested data for the log group. All previously ingested data remains encrypted, and AWS CloudWatch Logs requires permissions for the CMK whenever the encrypted data is requested. Note that it can take up to 5 minutes for this operation to take effect.
+   */
+  disassociateKmsKey(params: CloudWatchLogs.Types.DisassociateKmsKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Disassociates the associated AWS Key Management Service (AWS KMS) customer master key (CMK) from the specified log group. After the AWS KMS CMK is disassociated from the log group, AWS CloudWatch Logs stops encrypting newly ingested data for the log group. All previously ingested data remains encrypted, and AWS CloudWatch Logs requires permissions for the CMK whenever the encrypted data is requested. Note that it can take up to 5 minutes for this operation to take effect.
+   */
+  disassociateKmsKey(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Lists log events from the specified log group. You can list all the log events or filter the results using a filter pattern, a time range, and the name of the log stream. By default, this operation returns as many log events as can fit in 1 MB (up to 10,000 log events), or all the events found within the time range that you specify. If the results include a token, then there are more log events available, and you can get additional results by specifying the token in a subsequent call.
    */
   filterLogEvents(params: CloudWatchLogs.Types.FilterLogEventsRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.FilterLogEventsResponse) => void): Request<CloudWatchLogs.Types.FilterLogEventsResponse, AWSError>;
   /**
-   * Lists log events from the specified log group. You can list all the log events or filter the results using a filter pattern, a time range, and the name of the log stream. By default, this operation returns as many log events as can fit in 1MB (up to 10,000 log events), or all the events found within the time range that you specify. If the results include a token, then there are more log events available, and you can get additional results by specifying the token in a subsequent call.
+   * Lists log events from the specified log group. You can list all the log events or filter the results using a filter pattern, a time range, and the name of the log stream. By default, this operation returns as many log events as can fit in 1 MB (up to 10,000 log events), or all the events found within the time range that you specify. If the results include a token, then there are more log events available, and you can get additional results by specifying the token in a subsequent call.
    */
   filterLogEvents(callback?: (err: AWSError, data: CloudWatchLogs.Types.FilterLogEventsResponse) => void): Request<CloudWatchLogs.Types.FilterLogEventsResponse, AWSError>;
   /**
-   * Lists log events from the specified log stream. You can list all the log events or filter using a time range. By default, this operation returns as many log events as can fit in a response size of 1MB (up to 10,000 log events). If the results include tokens, there are more log events available. You can get additional log events by specifying one of the tokens in a subsequent call.
+   * Lists log events from the specified log stream. You can list all the log events or filter using a time range. By default, this operation returns as many log events as can fit in a response size of 1MB (up to 10,000 log events). You can get additional log events by specifying one of the tokens in a subsequent call.
    */
   getLogEvents(params: CloudWatchLogs.Types.GetLogEventsRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.GetLogEventsResponse) => void): Request<CloudWatchLogs.Types.GetLogEventsResponse, AWSError>;
   /**
-   * Lists log events from the specified log stream. You can list all the log events or filter using a time range. By default, this operation returns as many log events as can fit in a response size of 1MB (up to 10,000 log events). If the results include tokens, there are more log events available. You can get additional log events by specifying one of the tokens in a subsequent call.
+   * Lists log events from the specified log stream. You can list all the log events or filter using a time range. By default, this operation returns as many log events as can fit in a response size of 1MB (up to 10,000 log events). You can get additional log events by specifying one of the tokens in a subsequent call.
    */
   getLogEvents(callback?: (err: AWSError, data: CloudWatchLogs.Types.GetLogEventsResponse) => void): Request<CloudWatchLogs.Types.GetLogEventsResponse, AWSError>;
   /**
-   * Lists the tags for the specified log group. To add tags, use TagLogGroup. To remove tags, use UntagLogGroup.
+   * Returns a list of the fields that are included in log events in the specified log group, along with the percentage of log events that contain each field. The search is limited to a time period that you specify. In the results, fields that start with @ are fields generated by CloudWatch Logs. For example, @timestamp is the timestamp of each log event. The response results are sorted by the frequency percentage, starting with the highest percentage.
+   */
+  getLogGroupFields(params: CloudWatchLogs.Types.GetLogGroupFieldsRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.GetLogGroupFieldsResponse) => void): Request<CloudWatchLogs.Types.GetLogGroupFieldsResponse, AWSError>;
+  /**
+   * Returns a list of the fields that are included in log events in the specified log group, along with the percentage of log events that contain each field. The search is limited to a time period that you specify. In the results, fields that start with @ are fields generated by CloudWatch Logs. For example, @timestamp is the timestamp of each log event. The response results are sorted by the frequency percentage, starting with the highest percentage.
+   */
+  getLogGroupFields(callback?: (err: AWSError, data: CloudWatchLogs.Types.GetLogGroupFieldsResponse) => void): Request<CloudWatchLogs.Types.GetLogGroupFieldsResponse, AWSError>;
+  /**
+   * Retrieves all the fields and values of a single log event. All fields are retrieved, even if the original query that produced the logRecordPointer retrieved only a subset of fields. Fields are returned as field name/field value pairs. Additionally, the entire unparsed log event is returned within @message.
+   */
+  getLogRecord(params: CloudWatchLogs.Types.GetLogRecordRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.GetLogRecordResponse) => void): Request<CloudWatchLogs.Types.GetLogRecordResponse, AWSError>;
+  /**
+   * Retrieves all the fields and values of a single log event. All fields are retrieved, even if the original query that produced the logRecordPointer retrieved only a subset of fields. Fields are returned as field name/field value pairs. Additionally, the entire unparsed log event is returned within @message.
+   */
+  getLogRecord(callback?: (err: AWSError, data: CloudWatchLogs.Types.GetLogRecordResponse) => void): Request<CloudWatchLogs.Types.GetLogRecordResponse, AWSError>;
+  /**
+   * Returns the results from the specified query. If the query is in progress, partial results of that current execution are returned. Only the fields requested in the query are returned.  GetQueryResults does not start a query execution. To run a query, use .
+   */
+  getQueryResults(params: CloudWatchLogs.Types.GetQueryResultsRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.GetQueryResultsResponse) => void): Request<CloudWatchLogs.Types.GetQueryResultsResponse, AWSError>;
+  /**
+   * Returns the results from the specified query. If the query is in progress, partial results of that current execution are returned. Only the fields requested in the query are returned.  GetQueryResults does not start a query execution. To run a query, use .
+   */
+  getQueryResults(callback?: (err: AWSError, data: CloudWatchLogs.Types.GetQueryResultsResponse) => void): Request<CloudWatchLogs.Types.GetQueryResultsResponse, AWSError>;
+  /**
+   * Lists the tags for the specified log group.
    */
   listTagsLogGroup(params: CloudWatchLogs.Types.ListTagsLogGroupRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.ListTagsLogGroupResponse) => void): Request<CloudWatchLogs.Types.ListTagsLogGroupResponse, AWSError>;
   /**
-   * Lists the tags for the specified log group. To add tags, use TagLogGroup. To remove tags, use UntagLogGroup.
+   * Lists the tags for the specified log group.
    */
   listTagsLogGroup(callback?: (err: AWSError, data: CloudWatchLogs.Types.ListTagsLogGroupResponse) => void): Request<CloudWatchLogs.Types.ListTagsLogGroupResponse, AWSError>;
   /**
-   * Creates or updates a destination. A destination encapsulates a physical resource (such as a Kinesis stream) and enables you to subscribe to a real-time stream of log events of a different account, ingested using PutLogEvents. Currently, the only supported physical resource is a Amazon Kinesis stream belonging to the same account as the destination. A destination controls what is written to its Amazon Kinesis stream through an access policy. By default, PutDestination does not set any access policy with the destination, which means a cross-account user cannot call PutSubscriptionFilter against this destination. To enable this, the destination owner must call PutDestinationPolicy after PutDestination.
+   * Creates or updates a destination. A destination encapsulates a physical resource (such as an Amazon Kinesis stream) and enables you to subscribe to a real-time stream of log events for a different account, ingested using PutLogEvents. Currently, the only supported physical resource is a Kinesis stream belonging to the same account as the destination. Through an access policy, a destination controls what is written to its Kinesis stream. By default, PutDestination does not set any access policy with the destination, which means a cross-account user cannot call PutSubscriptionFilter against this destination. To enable this, the destination owner must call PutDestinationPolicy after PutDestination.
    */
   putDestination(params: CloudWatchLogs.Types.PutDestinationRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.PutDestinationResponse) => void): Request<CloudWatchLogs.Types.PutDestinationResponse, AWSError>;
   /**
-   * Creates or updates a destination. A destination encapsulates a physical resource (such as a Kinesis stream) and enables you to subscribe to a real-time stream of log events of a different account, ingested using PutLogEvents. Currently, the only supported physical resource is a Amazon Kinesis stream belonging to the same account as the destination. A destination controls what is written to its Amazon Kinesis stream through an access policy. By default, PutDestination does not set any access policy with the destination, which means a cross-account user cannot call PutSubscriptionFilter against this destination. To enable this, the destination owner must call PutDestinationPolicy after PutDestination.
+   * Creates or updates a destination. A destination encapsulates a physical resource (such as an Amazon Kinesis stream) and enables you to subscribe to a real-time stream of log events for a different account, ingested using PutLogEvents. Currently, the only supported physical resource is a Kinesis stream belonging to the same account as the destination. Through an access policy, a destination controls what is written to its Kinesis stream. By default, PutDestination does not set any access policy with the destination, which means a cross-account user cannot call PutSubscriptionFilter against this destination. To enable this, the destination owner must call PutDestinationPolicy after PutDestination.
    */
   putDestination(callback?: (err: AWSError, data: CloudWatchLogs.Types.PutDestinationResponse) => void): Request<CloudWatchLogs.Types.PutDestinationResponse, AWSError>;
   /**
@@ -180,11 +244,11 @@ declare class CloudWatchLogs extends Service {
    */
   putDestinationPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Uploads a batch of log events to the specified log stream. You must include the sequence token obtained from the response of the previous call. An upload in a newly created log stream does not require a sequence token. You can also get the sequence token using DescribeLogStreams. The batch of events must satisfy the following constraints:   The maximum batch size is 1,048,576 bytes, and this size is calculated as the sum of all event messages in UTF-8, plus 26 bytes for each log event.   None of the log events in the batch can be more than 2 hours in the future.   None of the log events in the batch can be older than 14 days or the retention period of the log group.   The log events in the batch must be in chronological ordered by their timestamp (the time the event occurred, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC).   The maximum number of log events in a batch is 10,000.   A batch of log events in a single request cannot span more than 24 hours. Otherwise, the operation fails.  
+   * Uploads a batch of log events to the specified log stream. You must include the sequence token obtained from the response of the previous call. An upload in a newly created log stream does not require a sequence token. You can also get the sequence token using DescribeLogStreams. If you call PutLogEvents twice within a narrow time period using the same value for sequenceToken, both calls may be successful, or one may be rejected. The batch of events must satisfy the following constraints:   The maximum batch size is 1,048,576 bytes, and this size is calculated as the sum of all event messages in UTF-8, plus 26 bytes for each log event.   None of the log events in the batch can be more than 2 hours in the future.   None of the log events in the batch can be older than 14 days or the retention period of the log group.   The log events in the batch must be in chronological ordered by their timestamp. The timestamp is the time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. (In AWS Tools for PowerShell and the AWS SDK for .NET, the timestamp is specified in .NET format: yyyy-mm-ddThh:mm:ss. For example, 2017-09-15T13:45:30.)    The maximum number of log events in a batch is 10,000.   A batch of log events in a single request cannot span more than 24 hours. Otherwise, the operation fails.   If a call to PutLogEvents returns "UnrecognizedClientException" the most likely cause is an invalid AWS access key ID or secret key. 
    */
   putLogEvents(params: CloudWatchLogs.Types.PutLogEventsRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.PutLogEventsResponse) => void): Request<CloudWatchLogs.Types.PutLogEventsResponse, AWSError>;
   /**
-   * Uploads a batch of log events to the specified log stream. You must include the sequence token obtained from the response of the previous call. An upload in a newly created log stream does not require a sequence token. You can also get the sequence token using DescribeLogStreams. The batch of events must satisfy the following constraints:   The maximum batch size is 1,048,576 bytes, and this size is calculated as the sum of all event messages in UTF-8, plus 26 bytes for each log event.   None of the log events in the batch can be more than 2 hours in the future.   None of the log events in the batch can be older than 14 days or the retention period of the log group.   The log events in the batch must be in chronological ordered by their timestamp (the time the event occurred, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC).   The maximum number of log events in a batch is 10,000.   A batch of log events in a single request cannot span more than 24 hours. Otherwise, the operation fails.  
+   * Uploads a batch of log events to the specified log stream. You must include the sequence token obtained from the response of the previous call. An upload in a newly created log stream does not require a sequence token. You can also get the sequence token using DescribeLogStreams. If you call PutLogEvents twice within a narrow time period using the same value for sequenceToken, both calls may be successful, or one may be rejected. The batch of events must satisfy the following constraints:   The maximum batch size is 1,048,576 bytes, and this size is calculated as the sum of all event messages in UTF-8, plus 26 bytes for each log event.   None of the log events in the batch can be more than 2 hours in the future.   None of the log events in the batch can be older than 14 days or the retention period of the log group.   The log events in the batch must be in chronological ordered by their timestamp. The timestamp is the time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. (In AWS Tools for PowerShell and the AWS SDK for .NET, the timestamp is specified in .NET format: yyyy-mm-ddThh:mm:ss. For example, 2017-09-15T13:45:30.)    The maximum number of log events in a batch is 10,000.   A batch of log events in a single request cannot span more than 24 hours. Otherwise, the operation fails.   If a call to PutLogEvents returns "UnrecognizedClientException" the most likely cause is an invalid AWS access key ID or secret key. 
    */
   putLogEvents(callback?: (err: AWSError, data: CloudWatchLogs.Types.PutLogEventsResponse) => void): Request<CloudWatchLogs.Types.PutLogEventsResponse, AWSError>;
   /**
@@ -196,21 +260,45 @@ declare class CloudWatchLogs extends Service {
    */
   putMetricFilter(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the retention of the specified log group. A retention policy allows you to configure the number of days you want to retain log events in the specified log group.
+   * Creates or updates a resource policy allowing other AWS services to put log events to this account, such as Amazon Route 53. An account can have up to 10 resource policies per region.
+   */
+  putResourcePolicy(params: CloudWatchLogs.Types.PutResourcePolicyRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.PutResourcePolicyResponse) => void): Request<CloudWatchLogs.Types.PutResourcePolicyResponse, AWSError>;
+  /**
+   * Creates or updates a resource policy allowing other AWS services to put log events to this account, such as Amazon Route 53. An account can have up to 10 resource policies per region.
+   */
+  putResourcePolicy(callback?: (err: AWSError, data: CloudWatchLogs.Types.PutResourcePolicyResponse) => void): Request<CloudWatchLogs.Types.PutResourcePolicyResponse, AWSError>;
+  /**
+   * Sets the retention of the specified log group. A retention policy allows you to configure the number of days for which to retain log events in the specified log group.
    */
   putRetentionPolicy(params: CloudWatchLogs.Types.PutRetentionPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the retention of the specified log group. A retention policy allows you to configure the number of days you want to retain log events in the specified log group.
+   * Sets the retention of the specified log group. A retention policy allows you to configure the number of days for which to retain log events in the specified log group.
    */
   putRetentionPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates a subscription filter and associates it with the specified log group. Subscription filters allow you to subscribe to a real-time stream of log events ingested through PutLogEvents and have them delivered to a specific destination. Currently, the supported destinations are:   An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.   A logical destination that belongs to a different account, for cross-account delivery.   An Amazon Kinesis Firehose stream that belongs to the same account as the subscription filter, for same-account delivery.   An AWS Lambda function that belongs to the same account as the subscription filter, for same-account delivery.   There can only be one subscription filter associated with a log group. If you are updating an existing filter, you must specify the correct name in filterName. Otherwise, the call will fail because you cannot associate a second filter with a log group.
+   * Creates or updates a subscription filter and associates it with the specified log group. Subscription filters allow you to subscribe to a real-time stream of log events ingested through PutLogEvents and have them delivered to a specific destination. Currently, the supported destinations are:   An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.   A logical destination that belongs to a different account, for cross-account delivery.   An Amazon Kinesis Firehose delivery stream that belongs to the same account as the subscription filter, for same-account delivery.   An AWS Lambda function that belongs to the same account as the subscription filter, for same-account delivery.   There can only be one subscription filter associated with a log group. If you are updating an existing filter, you must specify the correct name in filterName. Otherwise, the call fails because you cannot associate a second filter with a log group.
    */
   putSubscriptionFilter(params: CloudWatchLogs.Types.PutSubscriptionFilterRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates a subscription filter and associates it with the specified log group. Subscription filters allow you to subscribe to a real-time stream of log events ingested through PutLogEvents and have them delivered to a specific destination. Currently, the supported destinations are:   An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.   A logical destination that belongs to a different account, for cross-account delivery.   An Amazon Kinesis Firehose stream that belongs to the same account as the subscription filter, for same-account delivery.   An AWS Lambda function that belongs to the same account as the subscription filter, for same-account delivery.   There can only be one subscription filter associated with a log group. If you are updating an existing filter, you must specify the correct name in filterName. Otherwise, the call will fail because you cannot associate a second filter with a log group.
+   * Creates or updates a subscription filter and associates it with the specified log group. Subscription filters allow you to subscribe to a real-time stream of log events ingested through PutLogEvents and have them delivered to a specific destination. Currently, the supported destinations are:   An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.   A logical destination that belongs to a different account, for cross-account delivery.   An Amazon Kinesis Firehose delivery stream that belongs to the same account as the subscription filter, for same-account delivery.   An AWS Lambda function that belongs to the same account as the subscription filter, for same-account delivery.   There can only be one subscription filter associated with a log group. If you are updating an existing filter, you must specify the correct name in filterName. Otherwise, the call fails because you cannot associate a second filter with a log group.
    */
   putSubscriptionFilter(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Schedules a query of a log group using CloudWatch Logs Insights. You specify the log group to query, the query string to use, and the time to query. For more information, see CloudWatch Logs Insights Query Syntax.
+   */
+  startQuery(params: CloudWatchLogs.Types.StartQueryRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.StartQueryResponse) => void): Request<CloudWatchLogs.Types.StartQueryResponse, AWSError>;
+  /**
+   * Schedules a query of a log group using CloudWatch Logs Insights. You specify the log group to query, the query string to use, and the time to query. For more information, see CloudWatch Logs Insights Query Syntax.
+   */
+  startQuery(callback?: (err: AWSError, data: CloudWatchLogs.Types.StartQueryResponse) => void): Request<CloudWatchLogs.Types.StartQueryResponse, AWSError>;
+  /**
+   * Stops a CloudWatch Logs Insights query that is in progress. If the query has already ended, the operation returns an error indicating that the specified query is not running.
+   */
+  stopQuery(params: CloudWatchLogs.Types.StopQueryRequest, callback?: (err: AWSError, data: CloudWatchLogs.Types.StopQueryResponse) => void): Request<CloudWatchLogs.Types.StopQueryResponse, AWSError>;
+  /**
+   * Stops a CloudWatch Logs Insights query that is in progress. If the query has already ended, the operation returns an error indicating that the specified query is not running.
+   */
+  stopQuery(callback?: (err: AWSError, data: CloudWatchLogs.Types.StopQueryResponse) => void): Request<CloudWatchLogs.Types.StopQueryResponse, AWSError>;
   /**
    * Adds or updates the specified tags for the specified log group. To list the tags for a log group, use ListTagsLogGroup. To remove tags, use UntagLogGroup. For more information about tags, see Tag Log Groups in Amazon CloudWatch Logs in the Amazon CloudWatch Logs User Guide.
    */
@@ -239,6 +327,16 @@ declare class CloudWatchLogs extends Service {
 declare namespace CloudWatchLogs {
   export type AccessPolicy = string;
   export type Arn = string;
+  export interface AssociateKmsKeyRequest {
+    /**
+     * The name of the log group.
+     */
+    logGroupName: LogGroupName;
+    /**
+     * The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. For more information, see Amazon Resource Names - AWS Key Management Service (AWS KMS).
+     */
+    kmsKeyId: KmsKeyId;
+  }
   export interface CancelExportTaskRequest {
     /**
      * The ID of the export task.
@@ -259,11 +357,11 @@ declare namespace CloudWatchLogs {
      */
     logStreamNamePrefix?: LogStreamName;
     /**
-     * The start time of the range for the request, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp earlier than this time are not exported.
+     * The start time of the range for the request, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp earlier than this time are not exported.
      */
     from: Timestamp;
     /**
-     * The end time of the range for the request, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not exported.
+     * The end time of the range for the request, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not exported.
      */
     to: Timestamp;
     /**
@@ -286,6 +384,10 @@ declare namespace CloudWatchLogs {
      * The name of the log group.
      */
     logGroupName: LogGroupName;
+    /**
+     * The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. For more information, see Amazon Resource Names - AWS Key Management Service (AWS KMS).
+     */
+    kmsKeyId?: KmsKeyId;
     /**
      * The key-value pairs to use for the tags.
      */
@@ -334,6 +436,12 @@ declare namespace CloudWatchLogs {
      * The name of the metric filter.
      */
     filterName: FilterName;
+  }
+  export interface DeleteResourcePolicyRequest {
+    /**
+     * The name of the policy to be revoked. This parameter is required.
+     */
+    policyName?: PolicyName;
   }
   export interface DeleteRetentionPolicyRequest {
     /**
@@ -426,11 +534,11 @@ declare namespace CloudWatchLogs {
      */
     logGroupName: LogGroupName;
     /**
-     * The prefix to match. You cannot specify this parameter if orderBy is LastEventTime.
+     * The prefix to match. If orderBy is LastEventTime,you cannot specify this parameter.
      */
     logStreamNamePrefix?: LogStreamName;
     /**
-     * If the value is LogStreamName, the results are ordered by log stream name. If the value is LastEventTime, the results are ordered by the event time. The default value is LogStreamName. If you order the results by event time, you cannot specify the logStreamNamePrefix parameter. lastEventTimestamp represents the time of the most recent log event in the log stream in CloudWatch Logs. This number is expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. lastEventTimeStamp updates on an eventual consistency basis. It typically updates in less than an hour from ingestion, but may take longer in some rare situations.
+     * If the value is LogStreamName, the results are ordered by log stream name. If the value is LastEventTime, the results are ordered by the event time. The default value is LogStreamName. If you order the results by event time, you cannot specify the logStreamNamePrefix parameter. lastEventTimestamp represents the time of the most recent log event in the log stream in CloudWatch Logs. This number is expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. lastEventTimeStamp updates on an eventual consistency basis. It typically updates in less than an hour from ingestion, but may take longer in some rare situations.
      */
     orderBy?: OrderBy;
     /**
@@ -471,11 +579,11 @@ declare namespace CloudWatchLogs {
      */
     limit?: DescribeLimit;
     /**
-     * The name of the CloudWatch metric.
+     * Filters results to include only those with the specified metric name. If you include this parameter in your request, you must also include the metricNamespace parameter.
      */
     metricName?: MetricName;
     /**
-     * The namespace of the CloudWatch metric.
+     * Filters results to include only those in the specified namespace. If you include this parameter in your request, you must also include the metricName parameter.
      */
     metricNamespace?: MetricNamespace;
   }
@@ -484,6 +592,43 @@ declare namespace CloudWatchLogs {
      * The metric filters.
      */
     metricFilters?: MetricFilters;
+    nextToken?: NextToken;
+  }
+  export type DescribeQueriesMaxResults = number;
+  export interface DescribeQueriesRequest {
+    /**
+     * Limits the returned queries to only those for the specified log group.
+     */
+    logGroupName?: LogGroupName;
+    /**
+     * Limits the returned queries to only those that have the specified status. Valid values are Cancelled, Complete, Failed, Running, and Scheduled.
+     */
+    status?: QueryStatus;
+    /**
+     * Limits the number of returned queries to the specified number.
+     */
+    maxResults?: DescribeQueriesMaxResults;
+    nextToken?: NextToken;
+  }
+  export interface DescribeQueriesResponse {
+    /**
+     * The list of queries that match the request.
+     */
+    queries?: QueryInfoList;
+    nextToken?: NextToken;
+  }
+  export interface DescribeResourcePoliciesRequest {
+    nextToken?: NextToken;
+    /**
+     * The maximum number of resource policies to be displayed with one call of this API.
+     */
+    limit?: DescribeLimit;
+  }
+  export interface DescribeResourcePoliciesResponse {
+    /**
+     * The resource policies that exist in this account.
+     */
+    resourcePolicies?: ResourcePolicies;
     nextToken?: NextToken;
   }
   export interface DescribeSubscriptionFiltersRequest {
@@ -517,7 +662,7 @@ declare namespace CloudWatchLogs {
      */
     destinationName?: DestinationName;
     /**
-     * The Amazon Resource Name (ARN) of the physical target where the log events will be delivered (for example, a Kinesis stream).
+     * The Amazon Resource Name (ARN) of the physical target to where the log events are delivered (for example, a Kinesis stream).
      */
     targetArn?: TargetArn;
     /**
@@ -533,13 +678,19 @@ declare namespace CloudWatchLogs {
      */
     arn?: Arn;
     /**
-     * The creation time of the destination, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+     * The creation time of the destination, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
      */
     creationTime?: Timestamp;
   }
   export type DestinationArn = string;
   export type DestinationName = string;
   export type Destinations = Destination[];
+  export interface DisassociateKmsKeyRequest {
+    /**
+     * The name of the log group.
+     */
+    logGroupName: LogGroupName;
+  }
   export type Distribution = "Random"|"ByLogStream"|string;
   export type EventId = string;
   export type EventMessage = string;
@@ -561,11 +712,11 @@ declare namespace CloudWatchLogs {
      */
     logGroupName?: LogGroupName;
     /**
-     * The start time, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp prior to this time are not exported.
+     * The start time, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp before this time are not exported.
      */
     from?: Timestamp;
     /**
-     * The end time, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not exported.
+     * The end time, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not exported.
      */
     to?: Timestamp;
     /**
@@ -587,11 +738,11 @@ declare namespace CloudWatchLogs {
   }
   export interface ExportTaskExecutionInfo {
     /**
-     * The creation time of the export task, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+     * The creation time of the export task, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
      */
     creationTime?: Timestamp;
     /**
-     * The completion time of the export task, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+     * The completion time of the export task, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
      */
     completionTime?: Timestamp;
   }
@@ -611,26 +762,31 @@ declare namespace CloudWatchLogs {
   export type ExportTaskStatusMessage = string;
   export type ExportTasks = ExportTask[];
   export type ExtractedValues = {[key: string]: Value};
+  export type Field = string;
   export type FilterCount = number;
   export interface FilterLogEventsRequest {
     /**
-     * The name of the log group.
+     * The name of the log group to search.
      */
     logGroupName: LogGroupName;
     /**
-     * Optional list of log stream names.
+     * Filters the results to only logs from the log streams in this list. If you specify a value for both logStreamNamePrefix and logStreamNames, the action returns an InvalidParameterException error.
      */
     logStreamNames?: InputLogStreamNames;
     /**
-     * The start of the time range, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp prior to this time are not returned.
+     * Filters the results to include only events from log streams that have names starting with this prefix. If you specify a value for both logStreamNamePrefix and logStreamNames, but the value for logStreamNamePrefix does not match any log stream names specified in logStreamNames, the action returns an InvalidParameterException error.
+     */
+    logStreamNamePrefix?: LogStreamName;
+    /**
+     * The start of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp before this time are not returned.
      */
     startTime?: Timestamp;
     /**
-     * The end of the time range, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not returned.
+     * The end of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not returned.
      */
     endTime?: Timestamp;
     /**
-     * The filter pattern to use. If not provided, all the events are matched.
+     * The filter pattern to use. For more information, see Filter and Pattern Syntax. If not provided, all the events are matched.
      */
     filterPattern?: FilterPattern;
     /**
@@ -642,7 +798,7 @@ declare namespace CloudWatchLogs {
      */
     limit?: EventsLimit;
     /**
-     * If the value is true, the operation makes a best effort to provide responses that contain events from multiple log streams within the log group interleaved in a single response. If the value is false all the matched log events in the first log stream are searched first, then those in the next log stream, and so on. The default is false.
+     * If the value is true, the operation makes a best effort to provide responses that contain events from multiple log streams within the log group, interleaved in a single response. If the value is false, all the matched log events in the first log stream are searched first, then those in the next log stream, and so on. The default is false.
      */
     interleaved?: Interleaved;
   }
@@ -664,11 +820,11 @@ declare namespace CloudWatchLogs {
   export type FilterPattern = string;
   export interface FilteredLogEvent {
     /**
-     * The name of the log stream this event belongs to.
+     * The name of the log stream to which this event belongs.
      */
     logStreamName?: LogStreamName;
     /**
-     * The time the event occurred, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+     * The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
      */
     timestamp?: Timestamp;
     /**
@@ -676,7 +832,7 @@ declare namespace CloudWatchLogs {
      */
     message?: EventMessage;
     /**
-     * The time the event was ingested, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+     * The time the event was ingested, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
      */
     ingestionTime?: Timestamp;
     /**
@@ -695,11 +851,11 @@ declare namespace CloudWatchLogs {
      */
     logStreamName: LogStreamName;
     /**
-     * The start of the time range, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp earlier than this time are not included.
+     * The start of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp equal to this time or later than this time are included. Events with a timestamp earlier than this time are not included.
      */
     startTime?: Timestamp;
     /**
-     * The end of the time range, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not included.
+     * The end of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp equal to or later than this time are not included.
      */
     endTime?: Timestamp;
     /**
@@ -707,7 +863,7 @@ declare namespace CloudWatchLogs {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of log events returned. If you don't specify a value, the maximum is as many log events as can fit in a response size of 1MB, up to 10,000 log events.
+     * The maximum number of log events returned. If you don't specify a value, the maximum is as many log events as can fit in a response size of 1 MB, up to 10,000 log events.
      */
     limit?: EventsLimit;
     /**
@@ -721,17 +877,65 @@ declare namespace CloudWatchLogs {
      */
     events?: OutputLogEvents;
     /**
-     * The token for the next set of items in the forward direction. The token expires after 24 hours.
+     * The token for the next set of items in the forward direction. The token expires after 24 hours. If you have reached the end of the stream, it will return the same token you passed in.
      */
     nextForwardToken?: NextToken;
     /**
-     * The token for the next set of items in the backward direction. The token expires after 24 hours.
+     * The token for the next set of items in the backward direction. The token expires after 24 hours. This token will never be null. If you have reached the end of the stream, it will return the same token you passed in.
      */
     nextBackwardToken?: NextToken;
   }
+  export interface GetLogGroupFieldsRequest {
+    /**
+     * The name of the log group to search.
+     */
+    logGroupName: LogGroupName;
+    /**
+     * The time to set as the center of the query. If you specify time, the 8 minutes before and 8 minutes after this time are searched. If you omit time, the past 15 minutes are queried. The time value is specified as epoch time, the number of seconds since January 1, 1970, 00:00:00 UTC.
+     */
+    time?: Timestamp;
+  }
+  export interface GetLogGroupFieldsResponse {
+    /**
+     * The array of fields found in the query. Each object in the array contains the name of the field, along with the percentage of time it appeared in the log events that were queried.
+     */
+    logGroupFields?: LogGroupFieldList;
+  }
+  export interface GetLogRecordRequest {
+    /**
+     * The pointer corresponding to the log event record you want to retrieve. You get this from the response of a GetQueryResults operation. In that response, the value of the @ptr field for a log event is the value to use as logRecordPointer to retrieve that complete log event record.
+     */
+    logRecordPointer: LogRecordPointer;
+  }
+  export interface GetLogRecordResponse {
+    /**
+     * The requested log event, as a JSON string.
+     */
+    logRecord?: LogRecord;
+  }
+  export interface GetQueryResultsRequest {
+    /**
+     * The ID number of the query.
+     */
+    queryId: QueryId;
+  }
+  export interface GetQueryResultsResponse {
+    /**
+     * The log events that matched the query criteria during the most recent time it ran. The results value is an array of arrays. Each log event is one object in the top-level array. Each of these log event objects is an array of field/value pairs.
+     */
+    results?: QueryResults;
+    /**
+     * Includes the number of log events scanned by the query, the number of log events that matched the query criteria, and the total number of bytes in the log events that were scanned.
+     */
+    statistics?: QueryStatistics;
+    /**
+     * The status of the most recent running of the query. Possible values are Cancelled, Complete, Failed, Running, Scheduled, and Unknown.
+     */
+    status?: QueryStatus;
+  }
   export interface InputLogEvent {
     /**
-     * The time the event occurred, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+     * The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
      */
     timestamp: Timestamp;
     /**
@@ -742,6 +946,7 @@ declare namespace CloudWatchLogs {
   export type InputLogEvents = InputLogEvent[];
   export type InputLogStreamNames = LogStreamName[];
   export type Interleaved = boolean;
+  export type KmsKeyId = string;
   export interface ListTagsLogGroupRequest {
     /**
      * The name of the log group.
@@ -750,7 +955,7 @@ declare namespace CloudWatchLogs {
   }
   export interface ListTagsLogGroupResponse {
     /**
-     * The tags.
+     * The tags for the log group.
      */
     tags?: Tags;
   }
@@ -761,7 +966,7 @@ declare namespace CloudWatchLogs {
      */
     logGroupName?: LogGroupName;
     /**
-     * The creation time of the log group, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+     * The creation time of the log group, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
      */
     creationTime?: Timestamp;
     retentionInDays?: Days;
@@ -777,28 +982,45 @@ declare namespace CloudWatchLogs {
      * The number of bytes stored.
      */
     storedBytes?: StoredBytes;
+    /**
+     * The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.
+     */
+    kmsKeyId?: KmsKeyId;
   }
+  export interface LogGroupField {
+    /**
+     * The name of a log field.
+     */
+    name?: Field;
+    /**
+     * The percentage of log events queried that contained the field.
+     */
+    percent?: Percentage;
+  }
+  export type LogGroupFieldList = LogGroupField[];
   export type LogGroupName = string;
   export type LogGroups = LogGroup[];
+  export type LogRecord = {[key: string]: Value};
+  export type LogRecordPointer = string;
   export interface LogStream {
     /**
      * The name of the log stream.
      */
     logStreamName?: LogStreamName;
     /**
-     * The creation time of the stream, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+     * The creation time of the stream, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
      */
     creationTime?: Timestamp;
     /**
-     * The time of the first event, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+     * The time of the first event, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
      */
     firstEventTimestamp?: Timestamp;
     /**
-     *  the time of the most recent log event in the log stream in CloudWatch Logs. This number is expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC. lastEventTime updates on an eventual consistency basis. It typically updates in less than an hour from ingestion, but may take longer in some rare situations.
+     * The time of the most recent log event in the log stream in CloudWatch Logs. This number is expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. The lastEventTime value updates on an eventual consistency basis. It typically updates in less than an hour from ingestion, but may take longer in some rare situations.
      */
     lastEventTimestamp?: Timestamp;
     /**
-     * The ingestion time, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+     * The ingestion time, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
      */
     lastIngestionTime?: Timestamp;
     /**
@@ -828,7 +1050,7 @@ declare namespace CloudWatchLogs {
      */
     metricTransformations?: MetricTransformations;
     /**
-     * The creation time of the metric filter, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+     * The creation time of the metric filter, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
      */
     creationTime?: Timestamp;
     /**
@@ -878,7 +1100,7 @@ declare namespace CloudWatchLogs {
   export type OrderBy = "LogStreamName"|"LastEventTime"|string;
   export interface OutputLogEvent {
     /**
-     * The time the event occurred, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+     * The time the event occurred, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
      */
     timestamp?: Timestamp;
     /**
@@ -886,11 +1108,14 @@ declare namespace CloudWatchLogs {
      */
     message?: EventMessage;
     /**
-     * The time the event was ingested, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+     * The time the event was ingested, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
      */
     ingestionTime?: Timestamp;
   }
   export type OutputLogEvents = OutputLogEvent[];
+  export type Percentage = number;
+  export type PolicyDocument = string;
+  export type PolicyName = string;
   export interface PutDestinationPolicyRequest {
     /**
      * A name for an existing destination.
@@ -907,11 +1132,11 @@ declare namespace CloudWatchLogs {
      */
     destinationName: DestinationName;
     /**
-     * The ARN of an Amazon Kinesis stream to deliver matching log events to.
+     * The ARN of an Amazon Kinesis stream to which to deliver matching log events.
      */
     targetArn: TargetArn;
     /**
-     * The ARN of an IAM role that grants CloudWatch Logs permissions to call Amazon Kinesis PutRecord on the destination stream.
+     * The ARN of an IAM role that grants CloudWatch Logs permissions to call the Amazon Kinesis PutRecord operation on the destination stream.
      */
     roleArn: RoleArn;
   }
@@ -935,7 +1160,7 @@ declare namespace CloudWatchLogs {
      */
     logEvents: InputLogEvents;
     /**
-     * The sequence token.
+     * The sequence token obtained from the response of the previous PutLogEvents call. An upload in a newly created log stream does not require a sequence token. You can also get the sequence token using DescribeLogStreams. If you call PutLogEvents twice within a narrow time period using the same value for sequenceToken, both calls may be successful, or one may be rejected.
      */
     sequenceToken?: SequenceToken;
   }
@@ -963,9 +1188,25 @@ declare namespace CloudWatchLogs {
      */
     filterPattern: FilterPattern;
     /**
-     * A collection of information needed to define how metric data gets emitted.
+     * A collection of information that defines how metric data gets emitted.
      */
     metricTransformations: MetricTransformations;
+  }
+  export interface PutResourcePolicyRequest {
+    /**
+     * Name of the new policy. This parameter is required.
+     */
+    policyName?: PolicyName;
+    /**
+     * Details of the new policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string. The following example creates a resource policy enabling the Route 53 service to put DNS query logs in to the specified log group. Replace "logArn" with the ARN of your CloudWatch Logs resource, such as a log group or log stream.  { "Version": "2012-10-17", "Statement": [ { "Sid": "Route53LogsToCloudWatchLogs", "Effect": "Allow", "Principal": { "Service": [ "route53.amazonaws.com" ] }, "Action":"logs:PutLogEvents", "Resource": "logArn" } ] }  
+     */
+    policyDocument?: PolicyDocument;
+  }
+  export interface PutResourcePolicyResponse {
+    /**
+     * The new policy.
+     */
+    resourcePolicy?: ResourcePolicy;
   }
   export interface PutRetentionPolicyRequest {
     /**
@@ -980,7 +1221,7 @@ declare namespace CloudWatchLogs {
      */
     logGroupName: LogGroupName;
     /**
-     * A name for the subscription filter. If you are updating an existing filter, you must specify the correct name in filterName. Otherwise, the call will fail because you cannot associate a second filter with a log group. To find the name of the filter currently associated with a log group, use DescribeSubscriptionFilters.
+     * A name for the subscription filter. If you are updating an existing filter, you must specify the correct name in filterName. Otherwise, the call fails because you cannot associate a second filter with a log group. To find the name of the filter currently associated with a log group, use DescribeSubscriptionFilters.
      */
     filterName: FilterName;
     /**
@@ -988,7 +1229,7 @@ declare namespace CloudWatchLogs {
      */
     filterPattern: FilterPattern;
     /**
-     * The ARN of the destination to deliver matching log events to. Currently, the supported destinations are:   An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.   A logical destination (specified using an ARN) belonging to a different account, for cross-account delivery.   An Amazon Kinesis Firehose stream belonging to the same account as the subscription filter, for same-account delivery.   An AWS Lambda function belonging to the same account as the subscription filter, for same-account delivery.  
+     * The ARN of the destination to deliver matching log events to. Currently, the supported destinations are:   An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.   A logical destination (specified using an ARN) belonging to a different account, for cross-account delivery.   An Amazon Kinesis Firehose delivery stream belonging to the same account as the subscription filter, for same-account delivery.   An AWS Lambda function belonging to the same account as the subscription filter, for same-account delivery.  
      */
     destinationArn: DestinationArn;
     /**
@@ -996,10 +1237,51 @@ declare namespace CloudWatchLogs {
      */
     roleArn?: RoleArn;
     /**
-     * The method used to distribute log data to the destination, when the destination is an Amazon Kinesis stream. By default, log data is grouped by log stream. For a more even distribution, you can group log data randomly.
+     * The method used to distribute log data to the destination. By default log data is grouped by log stream, but the grouping can be set to random for a more even distribution. This property is only applicable when the destination is an Amazon Kinesis stream. 
      */
     distribution?: Distribution;
   }
+  export type QueryId = string;
+  export interface QueryInfo {
+    /**
+     * The unique ID number of this query.
+     */
+    queryId?: QueryId;
+    /**
+     * The query string used in this query.
+     */
+    queryString?: QueryString;
+    /**
+     * The status of this query. Possible values are Cancelled, Complete, Failed, Running, Scheduled, and Unknown.
+     */
+    status?: QueryStatus;
+    /**
+     * The date and time that this query was created.
+     */
+    createTime?: Timestamp;
+    /**
+     * The name of the log group scanned by this query.
+     */
+    logGroupName?: LogGroupName;
+  }
+  export type QueryInfoList = QueryInfo[];
+  export type QueryResults = ResultRows[];
+  export interface QueryStatistics {
+    /**
+     * The number of log events that matched the query string.
+     */
+    recordsMatched?: StatsValue;
+    /**
+     * The total number of log events scanned during the query.
+     */
+    recordsScanned?: StatsValue;
+    /**
+     * The total number of bytes in the log events scanned during the query.
+     */
+    bytesScanned?: StatsValue;
+  }
+  export type QueryStatus = "Scheduled"|"Running"|"Complete"|"Failed"|"Cancelled"|string;
+  export type QueryString = string;
   export interface RejectedLogEventsInfo {
     /**
      * The log events that are too new.
@@ -1014,6 +1296,32 @@ declare namespace CloudWatchLogs {
      */
     expiredLogEventEndIndex?: LogEventIndex;
   }
+  export type ResourcePolicies = ResourcePolicy[];
+  export interface ResourcePolicy {
+    /**
+     * The name of the resource policy.
+     */
+    policyName?: PolicyName;
+    /**
+     * The details of the policy.
+     */
+    policyDocument?: PolicyDocument;
+    /**
+     * Timestamp showing when this policy was last updated, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
+     */
+    lastUpdatedTime?: Timestamp;
+  }
+  export interface ResultField {
+    /**
+     * The log event field.
+     */
+    field?: Field;
+    /**
+     * The value of this field.
+     */
+    value?: Value;
+  }
+  export type ResultRows = ResultField[];
   export type RoleArn = string;
   export interface SearchedLogStream {
     /**
@@ -1028,6 +1336,47 @@ declare namespace CloudWatchLogs {
   export type SearchedLogStreams = SearchedLogStream[];
   export type SequenceToken = string;
   export type StartFromHead = boolean;
+  export interface StartQueryRequest {
+    /**
+     * The log group on which to perform the query.
+     */
+    logGroupName: LogGroupName;
+    /**
+     * The time to start the query. Specified as epoch time, the number of seconds since January 1, 1970, 00:00:00 UTC.
+     */
+    startTime: Timestamp;
+    /**
+     * The time to end this query, if it is still running. Specified as epoch time, the number of seconds since January 1, 1970, 00:00:00 UTC.
+     */
+    endTime: Timestamp;
+    /**
+     * The query string to use. For more information, see CloudWatch Logs Insights Query Syntax.
+     */
+    queryString: QueryString;
+    /**
+     * The maximum number of log events to return in the query. If the query string uses the fields command, only the specified fields and their values are returned.
+     */
+    limit?: EventsLimit;
+  }
+  export interface StartQueryResponse {
+    /**
+     * The unique ID of the query. 
+     */
+    queryId?: QueryId;
+  }
+  export type StatsValue = number;
+  export interface StopQueryRequest {
+    /**
+     * The ID number of the query to stop. If necessary, you can use DescribeQueries to find this ID number.
+     */
+    queryId: QueryId;
+  }
+  export interface StopQueryResponse {
+    /**
+     * This is true if the query was stopped by the StopQuery operation.
+     */
+    success?: Success;
+  }
   export type StoredBytes = number;
   export interface SubscriptionFilter {
     /**
@@ -1047,16 +1396,14 @@ declare namespace CloudWatchLogs {
      * 
      */
     roleArn?: RoleArn;
-    /**
-     * The method used to distribute log data to the destination, when the destination is an Amazon Kinesis stream.
-     */
     distribution?: Distribution;
     /**
-     * The creation time of the subscription filter, expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
+     * The creation time of the subscription filter, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC.
      */
     creationTime?: Timestamp;
   }
   export type SubscriptionFilters = SubscriptionFilter[];
+  export type Success = boolean;
   export type TagKey = string;
   export type TagList = TagKey[];
   export interface TagLogGroupRequest {

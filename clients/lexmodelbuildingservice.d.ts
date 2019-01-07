@@ -36,11 +36,11 @@ declare class LexModelBuildingService extends Service {
    */
   createSlotTypeVersion(callback?: (err: AWSError, data: LexModelBuildingService.Types.CreateSlotTypeVersionResponse) => void): Request<LexModelBuildingService.Types.CreateSlotTypeVersionResponse, AWSError>;
   /**
-   * Deletes all versions of the bot, including the $LATEST version. To delete a specific version of the bot, use the operation. If a bot has an alias, you can't delete it. Instead, the DeleteBot operation returns a ResourceInUseException exception that includes a reference to the alias that refers to the bot. To remove the reference to the bot, delete the alias. If you get the same exception again, delete the referring alias until the DeleteBot operation is successful. This operation requires permissions for the lex:DeleteBot action.
+   * Deletes all versions of the bot, including the $LATEST version. To delete a specific version of the bot, use the DeleteBotVersion operation. If a bot has an alias, you can't delete it. Instead, the DeleteBot operation returns a ResourceInUseException exception that includes a reference to the alias that refers to the bot. To remove the reference to the bot, delete the alias. If you get the same exception again, delete the referring alias until the DeleteBot operation is successful. This operation requires permissions for the lex:DeleteBot action.
    */
   deleteBot(params: LexModelBuildingService.Types.DeleteBotRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes all versions of the bot, including the $LATEST version. To delete a specific version of the bot, use the operation. If a bot has an alias, you can't delete it. Instead, the DeleteBot operation returns a ResourceInUseException exception that includes a reference to the alias that refers to the bot. To remove the reference to the bot, delete the alias. If you get the same exception again, delete the referring alias until the DeleteBot operation is successful. This operation requires permissions for the lex:DeleteBot action.
+   * Deletes all versions of the bot, including the $LATEST version. To delete a specific version of the bot, use the DeleteBotVersion operation. If a bot has an alias, you can't delete it. Instead, the DeleteBot operation returns a ResourceInUseException exception that includes a reference to the alias that refers to the bot. To remove the reference to the bot, delete the alias. If you get the same exception again, delete the referring alias until the DeleteBot operation is successful. This operation requires permissions for the lex:DeleteBot action.
    */
   deleteBot(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -60,59 +60,59 @@ declare class LexModelBuildingService extends Service {
    */
   deleteBotChannelAssociation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a specific version of a bot. To delete all versions of a bot, use the operation.  This operation requires permissions for the lex:DeleteBotVersion action.
+   * Deletes a specific version of a bot. To delete all versions of a bot, use the DeleteBot operation.  This operation requires permissions for the lex:DeleteBotVersion action.
    */
   deleteBotVersion(params: LexModelBuildingService.Types.DeleteBotVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a specific version of a bot. To delete all versions of a bot, use the operation.  This operation requires permissions for the lex:DeleteBotVersion action.
+   * Deletes a specific version of a bot. To delete all versions of a bot, use the DeleteBot operation.  This operation requires permissions for the lex:DeleteBotVersion action.
    */
   deleteBotVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes all versions of the intent, including the $LATEST version. To delete a specific version of the intent, use the operation.  You can delete a version of an intent only if it is not referenced. To delete an intent that is referred to in one or more bots (see how-it-works), you must remove those references first.    If you get the ResourceInUseException exception, it provides an example reference that shows where the intent is referenced. To remove the reference to the intent, either update the bot or delete it. If you get the same exception when you attempt to delete the intent again, repeat until the intent has no references and the call to DeleteIntent is successful.    This operation requires permission for the lex:DeleteIntent action. 
+   * Deletes all versions of the intent, including the $LATEST version. To delete a specific version of the intent, use the DeleteIntentVersion operation.  You can delete a version of an intent only if it is not referenced. To delete an intent that is referred to in one or more bots (see how-it-works), you must remove those references first.    If you get the ResourceInUseException exception, it provides an example reference that shows where the intent is referenced. To remove the reference to the intent, either update the bot or delete it. If you get the same exception when you attempt to delete the intent again, repeat until the intent has no references and the call to DeleteIntent is successful.    This operation requires permission for the lex:DeleteIntent action. 
    */
   deleteIntent(params: LexModelBuildingService.Types.DeleteIntentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes all versions of the intent, including the $LATEST version. To delete a specific version of the intent, use the operation.  You can delete a version of an intent only if it is not referenced. To delete an intent that is referred to in one or more bots (see how-it-works), you must remove those references first.    If you get the ResourceInUseException exception, it provides an example reference that shows where the intent is referenced. To remove the reference to the intent, either update the bot or delete it. If you get the same exception when you attempt to delete the intent again, repeat until the intent has no references and the call to DeleteIntent is successful.    This operation requires permission for the lex:DeleteIntent action. 
+   * Deletes all versions of the intent, including the $LATEST version. To delete a specific version of the intent, use the DeleteIntentVersion operation.  You can delete a version of an intent only if it is not referenced. To delete an intent that is referred to in one or more bots (see how-it-works), you must remove those references first.    If you get the ResourceInUseException exception, it provides an example reference that shows where the intent is referenced. To remove the reference to the intent, either update the bot or delete it. If you get the same exception when you attempt to delete the intent again, repeat until the intent has no references and the call to DeleteIntent is successful.    This operation requires permission for the lex:DeleteIntent action. 
    */
   deleteIntent(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a specific version of an intent. To delete all versions of a intent, use the operation.  This operation requires permissions for the lex:DeleteIntentVersion action.
+   * Deletes a specific version of an intent. To delete all versions of a intent, use the DeleteIntent operation.  This operation requires permissions for the lex:DeleteIntentVersion action.
    */
   deleteIntentVersion(params: LexModelBuildingService.Types.DeleteIntentVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a specific version of an intent. To delete all versions of a intent, use the operation.  This operation requires permissions for the lex:DeleteIntentVersion action.
+   * Deletes a specific version of an intent. To delete all versions of a intent, use the DeleteIntent operation.  This operation requires permissions for the lex:DeleteIntentVersion action.
    */
   deleteIntentVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes all versions of the slot type, including the $LATEST version. To delete a specific version of the slot type, use the operation.  You can delete a version of a slot type only if it is not referenced. To delete a slot type that is referred to in one or more intents, you must remove those references first.    If you get the ResourceInUseException exception, the exception provides an example reference that shows the intent where the slot type is referenced. To remove the reference to the slot type, either update the intent or delete it. If you get the same exception when you attempt to delete the slot type again, repeat until the slot type has no references and the DeleteSlotType call is successful.   This operation requires permission for the lex:DeleteSlotType action.
+   * Deletes all versions of the slot type, including the $LATEST version. To delete a specific version of the slot type, use the DeleteSlotTypeVersion operation.  You can delete a version of a slot type only if it is not referenced. To delete a slot type that is referred to in one or more intents, you must remove those references first.    If you get the ResourceInUseException exception, the exception provides an example reference that shows the intent where the slot type is referenced. To remove the reference to the slot type, either update the intent or delete it. If you get the same exception when you attempt to delete the slot type again, repeat until the slot type has no references and the DeleteSlotType call is successful.   This operation requires permission for the lex:DeleteSlotType action.
    */
   deleteSlotType(params: LexModelBuildingService.Types.DeleteSlotTypeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes all versions of the slot type, including the $LATEST version. To delete a specific version of the slot type, use the operation.  You can delete a version of a slot type only if it is not referenced. To delete a slot type that is referred to in one or more intents, you must remove those references first.    If you get the ResourceInUseException exception, the exception provides an example reference that shows the intent where the slot type is referenced. To remove the reference to the slot type, either update the intent or delete it. If you get the same exception when you attempt to delete the slot type again, repeat until the slot type has no references and the DeleteSlotType call is successful.   This operation requires permission for the lex:DeleteSlotType action.
+   * Deletes all versions of the slot type, including the $LATEST version. To delete a specific version of the slot type, use the DeleteSlotTypeVersion operation.  You can delete a version of a slot type only if it is not referenced. To delete a slot type that is referred to in one or more intents, you must remove those references first.    If you get the ResourceInUseException exception, the exception provides an example reference that shows the intent where the slot type is referenced. To remove the reference to the slot type, either update the intent or delete it. If you get the same exception when you attempt to delete the slot type again, repeat until the slot type has no references and the DeleteSlotType call is successful.   This operation requires permission for the lex:DeleteSlotType action.
    */
   deleteSlotType(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a specific version of a slot type. To delete all versions of a slot type, use the operation.  This operation requires permissions for the lex:DeleteSlotTypeVersion action.
+   * Deletes a specific version of a slot type. To delete all versions of a slot type, use the DeleteSlotType operation.  This operation requires permissions for the lex:DeleteSlotTypeVersion action.
    */
   deleteSlotTypeVersion(params: LexModelBuildingService.Types.DeleteSlotTypeVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a specific version of a slot type. To delete all versions of a slot type, use the operation.  This operation requires permissions for the lex:DeleteSlotTypeVersion action.
+   * Deletes a specific version of a slot type. To delete all versions of a slot type, use the DeleteSlotType operation.  This operation requires permissions for the lex:DeleteSlotTypeVersion action.
    */
   deleteSlotTypeVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes stored utterances. Amazon Lex stores the utterances that users send to your bot unless the childDirected field in the bot is set to true. Utterances are stored for 15 days for use with the operation, and then stored indefinately for use in improving the ability of your bot to respond to user input. Use the DeleteStoredUtterances operation to manually delete stored utterances for a specific user. This operation requires permissions for the lex:DeleteUtterances action.
+   * Deletes stored utterances. Amazon Lex stores the utterances that users send to your bot. Utterances are stored for 15 days for use with the GetUtterancesView operation, and then stored indefinitely for use in improving the ability of your bot to respond to user input. Use the DeleteStoredUtterances operation to manually delete stored utterances for a specific user. This operation requires permissions for the lex:DeleteUtterances action.
    */
   deleteUtterances(params: LexModelBuildingService.Types.DeleteUtterancesRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes stored utterances. Amazon Lex stores the utterances that users send to your bot unless the childDirected field in the bot is set to true. Utterances are stored for 15 days for use with the operation, and then stored indefinately for use in improving the ability of your bot to respond to user input. Use the DeleteStoredUtterances operation to manually delete stored utterances for a specific user. This operation requires permissions for the lex:DeleteUtterances action.
+   * Deletes stored utterances. Amazon Lex stores the utterances that users send to your bot. Utterances are stored for 15 days for use with the GetUtterancesView operation, and then stored indefinitely for use in improving the ability of your bot to respond to user input. Use the DeleteStoredUtterances operation to manually delete stored utterances for a specific user. This operation requires permissions for the lex:DeleteUtterances action.
    */
   deleteUtterances(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Returns metadata information for a specific bot. You must provide the bot name and the bot version or alias.   The GetBot operation requires permissions for the lex:GetBot action. 
+   * Returns metadata information for a specific bot. You must provide the bot name and the bot version or alias.   This operation requires permissions for the lex:GetBot action. 
    */
   getBot(params: LexModelBuildingService.Types.GetBotRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetBotResponse) => void): Request<LexModelBuildingService.Types.GetBotResponse, AWSError>;
   /**
-   * Returns metadata information for a specific bot. You must provide the bot name and the bot version or alias.   The GetBot operation requires permissions for the lex:GetBot action. 
+   * Returns metadata information for a specific bot. You must provide the bot name and the bot version or alias.   This operation requires permissions for the lex:GetBot action. 
    */
   getBot(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetBotResponse) => void): Request<LexModelBuildingService.Types.GetBotResponse, AWSError>;
   /**
@@ -188,6 +188,22 @@ declare class LexModelBuildingService extends Service {
    */
   getBuiltinSlotTypes(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetBuiltinSlotTypesResponse) => void): Request<LexModelBuildingService.Types.GetBuiltinSlotTypesResponse, AWSError>;
   /**
+   * Exports the contents of a Amazon Lex resource in a specified format. 
+   */
+  getExport(params: LexModelBuildingService.Types.GetExportRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetExportResponse) => void): Request<LexModelBuildingService.Types.GetExportResponse, AWSError>;
+  /**
+   * Exports the contents of a Amazon Lex resource in a specified format. 
+   */
+  getExport(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetExportResponse) => void): Request<LexModelBuildingService.Types.GetExportResponse, AWSError>;
+  /**
+   * Gets information about an import job started with the StartImport operation.
+   */
+  getImport(params: LexModelBuildingService.Types.GetImportRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetImportResponse) => void): Request<LexModelBuildingService.Types.GetImportResponse, AWSError>;
+  /**
+   * Gets information about an import job started with the StartImport operation.
+   */
+  getImport(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetImportResponse) => void): Request<LexModelBuildingService.Types.GetImportResponse, AWSError>;
+  /**
    *  Returns information about an intent. In addition to the intent name, you must specify the intent version.   This operation requires permissions to perform the lex:GetIntent action. 
    */
   getIntent(params: LexModelBuildingService.Types.GetIntentRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetIntentResponse) => void): Request<LexModelBuildingService.Types.GetIntentResponse, AWSError>;
@@ -236,19 +252,19 @@ declare class LexModelBuildingService extends Service {
    */
   getSlotTypes(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetSlotTypesResponse) => void): Request<LexModelBuildingService.Types.GetSlotTypesResponse, AWSError>;
   /**
-   * Use the GetUtterancesView operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to. For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the GetUtterancesView operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the OrderFlowers intent so that your bot recognizes that utterance. After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions.  Data is available for the last 15 days. You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version. If the bot's childDirected field is set to true, utterances for the bot are not stored and cannot be retrieved with the GetUtterancesView operation. For more information, see . This operation requires permissions for the lex:GetUtterancesView action.
+   * Use the GetUtterancesView operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to. For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the GetUtterancesView operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the OrderFlowers intent so that your bot recognizes that utterance. After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions.   Utterance statistics are generated once a day. Data is available for the last 15 days. You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version.  This operation requires permissions for the lex:GetUtterancesView action.
    */
   getUtterancesView(params: LexModelBuildingService.Types.GetUtterancesViewRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetUtterancesViewResponse) => void): Request<LexModelBuildingService.Types.GetUtterancesViewResponse, AWSError>;
   /**
-   * Use the GetUtterancesView operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to. For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the GetUtterancesView operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the OrderFlowers intent so that your bot recognizes that utterance. After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions.  Data is available for the last 15 days. You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version. If the bot's childDirected field is set to true, utterances for the bot are not stored and cannot be retrieved with the GetUtterancesView operation. For more information, see . This operation requires permissions for the lex:GetUtterancesView action.
+   * Use the GetUtterancesView operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to. For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the GetUtterancesView operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the OrderFlowers intent so that your bot recognizes that utterance. After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions.   Utterance statistics are generated once a day. Data is available for the last 15 days. You can request information for up to 5 versions in each request. The response contains information about a maximum of 100 utterances for each version.  This operation requires permissions for the lex:GetUtterancesView action.
    */
   getUtterancesView(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetUtterancesViewResponse) => void): Request<LexModelBuildingService.Types.GetUtterancesViewResponse, AWSError>;
   /**
-   * Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update a bot you only required to specify a name. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with a name only, the bot is created or updated but Amazon Lex returns the  response FAILED. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see how-it-works.  If you specify the name of an existing bot, the fields in the request replace the existing values in the $LATEST version of the bot. Amazon Lex removes any fields that you don't provide values for in the request, except for the idleTTLInSeconds and privacySettings fields, which are set to their default values. If you don't specify values for required fields, Amazon Lex throws an exception. This operation requires permissions for the lex:PutBot action. For more information, see auth-and-access-control.
+   * Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update a bot you are only required to specify a name, a locale, and whether the bot is directed toward children under age 13. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with the minimum information, the bot is created or updated but Amazon Lex returns the  response FAILED. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see how-it-works.  If you specify the name of an existing bot, the fields in the request replace the existing values in the $LATEST version of the bot. Amazon Lex removes any fields that you don't provide values for in the request, except for the idleTTLInSeconds and privacySettings fields, which are set to their default values. If you don't specify values for required fields, Amazon Lex throws an exception. This operation requires permissions for the lex:PutBot action. For more information, see auth-and-access-control.
    */
   putBot(params: LexModelBuildingService.Types.PutBotRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.PutBotResponse) => void): Request<LexModelBuildingService.Types.PutBotResponse, AWSError>;
   /**
-   * Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update a bot you only required to specify a name. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with a name only, the bot is created or updated but Amazon Lex returns the  response FAILED. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see how-it-works.  If you specify the name of an existing bot, the fields in the request replace the existing values in the $LATEST version of the bot. Amazon Lex removes any fields that you don't provide values for in the request, except for the idleTTLInSeconds and privacySettings fields, which are set to their default values. If you don't specify values for required fields, Amazon Lex throws an exception. This operation requires permissions for the lex:PutBot action. For more information, see auth-and-access-control.
+   * Creates an Amazon Lex conversational bot or replaces an existing bot. When you create or update a bot you are only required to specify a name, a locale, and whether the bot is directed toward children under age 13. You can use this to add intents later, or to remove intents from an existing bot. When you create a bot with the minimum information, the bot is created or updated but Amazon Lex returns the  response FAILED. You can build the bot after you add one or more intents. For more information about Amazon Lex bots, see how-it-works.  If you specify the name of an existing bot, the fields in the request replace the existing values in the $LATEST version of the bot. Amazon Lex removes any fields that you don't provide values for in the request, except for the idleTTLInSeconds and privacySettings fields, which are set to their default values. If you don't specify values for required fields, Amazon Lex throws an exception. This operation requires permissions for the lex:PutBot action. For more information, see auth-and-access-control.
    */
   putBot(callback?: (err: AWSError, data: LexModelBuildingService.Types.PutBotResponse) => void): Request<LexModelBuildingService.Types.PutBotResponse, AWSError>;
   /**
@@ -260,25 +276,34 @@ declare class LexModelBuildingService extends Service {
    */
   putBotAlias(callback?: (err: AWSError, data: LexModelBuildingService.Types.PutBotAliasResponse) => void): Request<LexModelBuildingService.Types.PutBotAliasResponse, AWSError>;
   /**
-   * Creates an intent or replaces an existing intent. To define the interaction between the user and your bot, you use one or more intents. For a pizza ordering bot, for example, you would create an OrderPizza intent.  To create an intent or replace an existing intent, you must provide the following:   Intent name. For example, OrderPizza.   Sample utterances. For example, "Can I order a pizza, please." and "I want to order a pizza."   Information to be gathered. You specify slot types for the information that your bot will request from the user. You can specify standard slot types, such as a date or a time, or custom slot types such as the size and crust of a pizza.   How the intent will be fulfilled. You can provide a Lambda function or configure the intent to return the intent information to the client application. If you use a Lambda function, when all of the intent information is available, Amazon Lex invokes your Lambda function. If you configure your intent to return the intent information to the client application.    You can specify other optional information in the request, such as:   A confirmation prompt to ask the user to confirm an intent. For example, "Shall I order your pizza?"   A conclusion statement to send to the user after the intent has been fulfilled. For example, "I placed your pizza order."   A follow-up prompt that asks the user for additional activity. For example, asking "Do you want to order a drink with your pizza?"   If you specify an existing intent name to update the intent, Amazon Lex replaces the values in the $LATEST version of the slot type with the values in the request. Amazon Lex removes fields that you don't provide in the request. If you don't specify the required fields, Amazon Lex throws an exception. For more information, see how-it-works. This operation requires permissions for the lex:PutIntent action.
+   * Creates an intent or replaces an existing intent. To define the interaction between the user and your bot, you use one or more intents. For a pizza ordering bot, for example, you would create an OrderPizza intent.  To create an intent or replace an existing intent, you must provide the following:   Intent name. For example, OrderPizza.   Sample utterances. For example, "Can I order a pizza, please." and "I want to order a pizza."   Information to be gathered. You specify slot types for the information that your bot will request from the user. You can specify standard slot types, such as a date or a time, or custom slot types such as the size and crust of a pizza.   How the intent will be fulfilled. You can provide a Lambda function or configure the intent to return the intent information to the client application. If you use a Lambda function, when all of the intent information is available, Amazon Lex invokes your Lambda function. If you configure your intent to return the intent information to the client application.    You can specify other optional information in the request, such as:   A confirmation prompt to ask the user to confirm an intent. For example, "Shall I order your pizza?"   A conclusion statement to send to the user after the intent has been fulfilled. For example, "I placed your pizza order."   A follow-up prompt that asks the user for additional activity. For example, asking "Do you want to order a drink with your pizza?"   If you specify an existing intent name to update the intent, Amazon Lex replaces the values in the $LATEST version of the intent with the values in the request. Amazon Lex removes fields that you don't provide in the request. If you don't specify the required fields, Amazon Lex throws an exception. When you update the $LATEST version of an intent, the status field of any bot that uses the $LATEST version of the intent is set to NOT_BUILT. For more information, see how-it-works. This operation requires permissions for the lex:PutIntent action.
    */
   putIntent(params: LexModelBuildingService.Types.PutIntentRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.PutIntentResponse) => void): Request<LexModelBuildingService.Types.PutIntentResponse, AWSError>;
   /**
-   * Creates an intent or replaces an existing intent. To define the interaction between the user and your bot, you use one or more intents. For a pizza ordering bot, for example, you would create an OrderPizza intent.  To create an intent or replace an existing intent, you must provide the following:   Intent name. For example, OrderPizza.   Sample utterances. For example, "Can I order a pizza, please." and "I want to order a pizza."   Information to be gathered. You specify slot types for the information that your bot will request from the user. You can specify standard slot types, such as a date or a time, or custom slot types such as the size and crust of a pizza.   How the intent will be fulfilled. You can provide a Lambda function or configure the intent to return the intent information to the client application. If you use a Lambda function, when all of the intent information is available, Amazon Lex invokes your Lambda function. If you configure your intent to return the intent information to the client application.    You can specify other optional information in the request, such as:   A confirmation prompt to ask the user to confirm an intent. For example, "Shall I order your pizza?"   A conclusion statement to send to the user after the intent has been fulfilled. For example, "I placed your pizza order."   A follow-up prompt that asks the user for additional activity. For example, asking "Do you want to order a drink with your pizza?"   If you specify an existing intent name to update the intent, Amazon Lex replaces the values in the $LATEST version of the slot type with the values in the request. Amazon Lex removes fields that you don't provide in the request. If you don't specify the required fields, Amazon Lex throws an exception. For more information, see how-it-works. This operation requires permissions for the lex:PutIntent action.
+   * Creates an intent or replaces an existing intent. To define the interaction between the user and your bot, you use one or more intents. For a pizza ordering bot, for example, you would create an OrderPizza intent.  To create an intent or replace an existing intent, you must provide the following:   Intent name. For example, OrderPizza.   Sample utterances. For example, "Can I order a pizza, please." and "I want to order a pizza."   Information to be gathered. You specify slot types for the information that your bot will request from the user. You can specify standard slot types, such as a date or a time, or custom slot types such as the size and crust of a pizza.   How the intent will be fulfilled. You can provide a Lambda function or configure the intent to return the intent information to the client application. If you use a Lambda function, when all of the intent information is available, Amazon Lex invokes your Lambda function. If you configure your intent to return the intent information to the client application.    You can specify other optional information in the request, such as:   A confirmation prompt to ask the user to confirm an intent. For example, "Shall I order your pizza?"   A conclusion statement to send to the user after the intent has been fulfilled. For example, "I placed your pizza order."   A follow-up prompt that asks the user for additional activity. For example, asking "Do you want to order a drink with your pizza?"   If you specify an existing intent name to update the intent, Amazon Lex replaces the values in the $LATEST version of the intent with the values in the request. Amazon Lex removes fields that you don't provide in the request. If you don't specify the required fields, Amazon Lex throws an exception. When you update the $LATEST version of an intent, the status field of any bot that uses the $LATEST version of the intent is set to NOT_BUILT. For more information, see how-it-works. This operation requires permissions for the lex:PutIntent action.
    */
   putIntent(callback?: (err: AWSError, data: LexModelBuildingService.Types.PutIntentResponse) => void): Request<LexModelBuildingService.Types.PutIntentResponse, AWSError>;
   /**
-   * Creates a custom slot type or replaces an existing custom slot type. To create a custom slot type, specify a name for the slot type and a set of enumeration values, which are the values that a slot of this type can assume. For more information, see how-it-works. If you specify the name of an existing slot type, the fields in the request replace the existing values in the $LATEST version of the slot type. Amazon Lex removes the fields that you don't provide in the request. If you don't specify required fields, Amazon Lex throws an exception. This operation requires permissions for the lex:PutSlotType action.
+   * Creates a custom slot type or replaces an existing custom slot type. To create a custom slot type, specify a name for the slot type and a set of enumeration values, which are the values that a slot of this type can assume. For more information, see how-it-works. If you specify the name of an existing slot type, the fields in the request replace the existing values in the $LATEST version of the slot type. Amazon Lex removes the fields that you don't provide in the request. If you don't specify required fields, Amazon Lex throws an exception. When you update the $LATEST version of a slot type, if a bot uses the $LATEST version of an intent that contains the slot type, the bot's status field is set to NOT_BUILT. This operation requires permissions for the lex:PutSlotType action.
    */
   putSlotType(params: LexModelBuildingService.Types.PutSlotTypeRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.PutSlotTypeResponse) => void): Request<LexModelBuildingService.Types.PutSlotTypeResponse, AWSError>;
   /**
-   * Creates a custom slot type or replaces an existing custom slot type. To create a custom slot type, specify a name for the slot type and a set of enumeration values, which are the values that a slot of this type can assume. For more information, see how-it-works. If you specify the name of an existing slot type, the fields in the request replace the existing values in the $LATEST version of the slot type. Amazon Lex removes the fields that you don't provide in the request. If you don't specify required fields, Amazon Lex throws an exception. This operation requires permissions for the lex:PutSlotType action.
+   * Creates a custom slot type or replaces an existing custom slot type. To create a custom slot type, specify a name for the slot type and a set of enumeration values, which are the values that a slot of this type can assume. For more information, see how-it-works. If you specify the name of an existing slot type, the fields in the request replace the existing values in the $LATEST version of the slot type. Amazon Lex removes the fields that you don't provide in the request. If you don't specify required fields, Amazon Lex throws an exception. When you update the $LATEST version of a slot type, if a bot uses the $LATEST version of an intent that contains the slot type, the bot's status field is set to NOT_BUILT. This operation requires permissions for the lex:PutSlotType action.
    */
   putSlotType(callback?: (err: AWSError, data: LexModelBuildingService.Types.PutSlotTypeResponse) => void): Request<LexModelBuildingService.Types.PutSlotTypeResponse, AWSError>;
+  /**
+   * Starts a job to import a resource to Amazon Lex.
+   */
+  startImport(params: LexModelBuildingService.Types.StartImportRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.StartImportResponse) => void): Request<LexModelBuildingService.Types.StartImportResponse, AWSError>;
+  /**
+   * Starts a job to import a resource to Amazon Lex.
+   */
+  startImport(callback?: (err: AWSError, data: LexModelBuildingService.Types.StartImportResponse) => void): Request<LexModelBuildingService.Types.StartImportResponse, AWSError>;
 }
 declare namespace LexModelBuildingService {
   export type AliasName = string;
   export type AliasNameOrListAll = string;
+  export type _Blob = Buffer|Uint8Array|Blob|string;
   export type Boolean = boolean;
   export interface BotAliasMetadata {
     /**
@@ -340,6 +365,14 @@ declare namespace LexModelBuildingService {
      * Provides information necessary to communicate with the messaging platform. 
      */
     botConfiguration?: ChannelConfigurationMap;
+    /**
+     * The status of the bot channel.     CREATED - The channel has been created and is ready for use.    IN_PROGRESS - Channel creation is in progress.    FAILED - There was an error creating the channel. For information about the reason for the failure, see the failureReason field.  
+     */
+    status?: ChannelStatus;
+    /**
+     * If status is FAILED, Amazon Lex provides the reason that it failed to create the association.
+     */
+    failureReason?: String;
   }
   export type BotChannelAssociationList = BotChannelAssociation[];
   export type BotChannelName = string;
@@ -404,7 +437,8 @@ declare namespace LexModelBuildingService {
   export type BuiltinSlotTypeMetadataList = BuiltinSlotTypeMetadata[];
   export type BuiltinSlotTypeSignature = string;
   export type ChannelConfigurationMap = {[key: string]: String};
-  export type ChannelType = "Facebook"|"Slack"|"Twilio-Sms"|string;
+  export type ChannelStatus = "IN_PROGRESS"|"CREATED"|"FAILED"|string;
+  export type ChannelType = "Facebook"|"Slack"|"Twilio-Sms"|"Kik"|string;
   export interface CodeHook {
     /**
      * The Amazon Resource Name (ARN) of the Lambda function.
@@ -416,7 +450,7 @@ declare namespace LexModelBuildingService {
     messageVersion: MessageVersion;
   }
   export type ContentString = string;
-  export type ContentType = "PlainText"|"SSML"|string;
+  export type ContentType = "PlainText"|"SSML"|"CustomPayload"|string;
   export type Count = number;
   export interface CreateBotVersionRequest {
     /**
@@ -438,15 +472,15 @@ declare namespace LexModelBuildingService {
      */
     description?: Description;
     /**
-     * An array of Intent objects. For more information, see .
+     * An array of Intent objects. For more information, see PutBot.
      */
     intents?: IntentList;
     /**
-     * The message that Amazon Lex uses when it doesn't understand the user's request. For more information, see . 
+     * The message that Amazon Lex uses when it doesn't understand the user's request. For more information, see PutBot. 
      */
     clarificationPrompt?: Prompt;
     /**
-     * The message that Amazon Lex uses to abort a conversation. For more information, see .
+     * The message that Amazon Lex uses to abort a conversation. For more information, see PutBot.
      */
     abortStatement?: Statement;
     /**
@@ -466,7 +500,7 @@ declare namespace LexModelBuildingService {
      */
     createdDate?: Timestamp;
     /**
-     * The maximum time in seconds that Amazon Lex retains the data gathered in a conversation. For more information, see .
+     * The maximum time in seconds that Amazon Lex retains the data gathered in a conversation. For more information, see PutBot.
      */
     idleSessionTTLInSeconds?: SessionTTL;
     /**
@@ -601,6 +635,10 @@ declare namespace LexModelBuildingService {
      * Checksum of the $LATEST version of the slot type.
      */
     checksum?: String;
+    /**
+     * The strategy that Amazon Lex uses to determine the value of the slot. For more information, see PutSlotType.
+     */
+    valueSelectionStrategy?: SlotValueSelectionStrategy;
   }
   export type CustomOrBuiltinSlotTypeName = string;
   export interface DeleteBotAliasRequest {
@@ -639,7 +677,7 @@ declare namespace LexModelBuildingService {
      */
     name: BotName;
     /**
-     * The version of the bot to delete. You cannot delete the $LATEST version of the bot. To delete the $LATEST version, use the operation.
+     * The version of the bot to delete. You cannot delete the $LATEST version of the bot. To delete the $LATEST version, use the DeleteBot operation.
      */
     version: NumericalVersion;
   }
@@ -655,7 +693,7 @@ declare namespace LexModelBuildingService {
      */
     name: IntentName;
     /**
-     * The version of the intent to delete. You cannot delete the $LATEST version of the intent. To delete the $LATEST version, use the operation.
+     * The version of the intent to delete. You cannot delete the $LATEST version of the intent. To delete the $LATEST version, use the DeleteIntent operation.
      */
     version: NumericalVersion;
   }
@@ -671,7 +709,7 @@ declare namespace LexModelBuildingService {
      */
     name: SlotTypeName;
     /**
-     * The version of the slot type to delete. You cannot delete the $LATEST version of the slot type. To delete the $LATEST version, use the operation.
+     * The version of the slot type to delete. You cannot delete the $LATEST version of the slot type. To delete the $LATEST version, use the DeleteSlotType operation.
      */
     version: NumericalVersion;
   }
@@ -681,7 +719,7 @@ declare namespace LexModelBuildingService {
      */
     botName: BotName;
     /**
-     *  The unique identifier for the user that made the utterances. This is the user ID that was sent in the or operation request that contained the utterance.
+     *  The unique identifier for the user that made the utterances. This is the user ID that was sent in the PostContent or PostText operation request that contained the utterance.
      */
     userId: UserId;
   }
@@ -691,15 +729,21 @@ declare namespace LexModelBuildingService {
      * The value of the slot type.
      */
     value: Value;
+    /**
+     * Additional values related to the slot type value.
+     */
+    synonyms?: SynonymList;
   }
   export type EnumerationValues = EnumerationValue[];
+  export type ExportStatus = "IN_PROGRESS"|"READY"|"FAILED"|string;
+  export type ExportType = "ALEXA_SKILLS_KIT"|"LEX"|string;
   export interface FollowUpPrompt {
     /**
-     * Obtains information from the user. 
+     * Prompts for information from the user. 
      */
     prompt: Prompt;
     /**
-     * If the user answers "no" to the question defined in confirmationPrompt, Amazon Lex responds with this statement to acknowledge that the intent was canceled. 
+     * If the user answers "no" to the question defined in the prompt field, Amazon Lex responds with this statement to acknowledge that the intent was canceled. 
      */
     rejectionStatement: Statement;
   }
@@ -825,6 +869,14 @@ declare namespace LexModelBuildingService {
      * Provides information that the messaging platform needs to communicate with the Amazon Lex bot.
      */
     botConfiguration?: ChannelConfigurationMap;
+    /**
+     * The status of the bot channel.     CREATED - The channel has been created and is ready for use.    IN_PROGRESS - Channel creation is in progress.    FAILED - There was an error creating the channel. For information about the reason for the failure, see the failureReason field.  
+     */
+    status?: ChannelStatus;
+    /**
+     * If status is FAILED, Amazon Lex provides the reason that it failed to create the association.
+     */
+    failureReason?: String;
   }
   export interface GetBotChannelAssociationsRequest {
     /**
@@ -878,15 +930,15 @@ declare namespace LexModelBuildingService {
      */
     description?: Description;
     /**
-     * An array of intent objects. For more information, see .
+     * An array of intent objects. For more information, see PutBot.
      */
     intents?: IntentList;
     /**
-     * The message Amazon Lex uses when it doesn't understand the user's request. For more information, see . 
+     * The message Amazon Lex uses when it doesn't understand the user's request. For more information, see PutBot. 
      */
     clarificationPrompt?: Prompt;
     /**
-     * The message that Amazon Lex returns when the user elects to end the conversation without completing it. For more information, see .
+     * The message that Amazon Lex returns when the user elects to end the conversation without completing it. For more information, see PutBot.
      */
     abortStatement?: Statement;
     /**
@@ -906,11 +958,11 @@ declare namespace LexModelBuildingService {
      */
     createdDate?: Timestamp;
     /**
-     * The maximum time in seconds that Amazon Lex retains the data gathered in a conversation. For more information, see .
+     * The maximum time in seconds that Amazon Lex retains the data gathered in a conversation. For more information, see PutBot.
      */
     idleSessionTTLInSeconds?: SessionTTL;
     /**
-     * The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user. For more information, see .
+     * The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user. For more information, see PutBot.
      */
     voiceId?: String;
     /**
@@ -1054,6 +1106,90 @@ declare namespace LexModelBuildingService {
      */
     nextToken?: NextToken;
   }
+  export interface GetExportRequest {
+    /**
+     * The name of the bot to export.
+     */
+    name: Name;
+    /**
+     * The version of the bot to export.
+     */
+    version: NumericalVersion;
+    /**
+     * The type of resource to export. 
+     */
+    resourceType: ResourceType;
+    /**
+     * The format of the exported data.
+     */
+    exportType: ExportType;
+  }
+  export interface GetExportResponse {
+    /**
+     * The name of the bot being exported.
+     */
+    name?: Name;
+    /**
+     * The version of the bot being exported.
+     */
+    version?: NumericalVersion;
+    /**
+     * The type of the exported resource.
+     */
+    resourceType?: ResourceType;
+    /**
+     * The format of the exported data.
+     */
+    exportType?: ExportType;
+    /**
+     * The status of the export.     IN_PROGRESS - The export is in progress.    READY - The export is complete.    FAILED - The export could not be completed.  
+     */
+    exportStatus?: ExportStatus;
+    /**
+     * If status is FAILED, Amazon Lex provides the reason that it failed to export the resource.
+     */
+    failureReason?: String;
+    /**
+     * An S3 pre-signed URL that provides the location of the exported resource. The exported resource is a ZIP archive that contains the exported resource in JSON format. The structure of the archive may change. Your code should not rely on the archive structure.
+     */
+    url?: String;
+  }
+  export interface GetImportRequest {
+    /**
+     * The identifier of the import job information to return.
+     */
+    importId: String;
+  }
+  export interface GetImportResponse {
+    /**
+     * The name given to the import job.
+     */
+    name?: Name;
+    /**
+     * The type of resource imported.
+     */
+    resourceType?: ResourceType;
+    /**
+     * The action taken when there was a conflict between an existing resource and a resource in the import file.
+     */
+    mergeStrategy?: MergeStrategy;
+    /**
+     * The identifier for the specific import job.
+     */
+    importId?: String;
+    /**
+     * The status of the import job. If the status is FAILED, you can get the reason for the failure from the failureReason field.
+     */
+    importStatus?: ImportStatus;
+    /**
+     * A string that describes why an import job failed to complete.
+     */
+    failureReason?: StringList;
+    /**
+     * A timestamp for the date and time that the import job was created.
+     */
+    createdDate?: Timestamp;
+  }
   export interface GetIntentRequest {
     /**
      * The name of the intent. The name is case sensitive. 
@@ -1082,7 +1218,7 @@ declare namespace LexModelBuildingService {
      */
     sampleUtterances?: IntentUtteranceList;
     /**
-     * If defined in the bot, Amazon Lex uses prompt to confirm the intent before fulfilling the user's request. For more information, see . 
+     * If defined in the bot, Amazon Lex uses prompt to confirm the intent before fulfilling the user's request. For more information, see PutIntent. 
      */
     confirmationPrompt?: Prompt;
     /**
@@ -1090,7 +1226,7 @@ declare namespace LexModelBuildingService {
      */
     rejectionStatement?: Statement;
     /**
-     * If defined in the bot, Amazon Lex uses this prompt to solicit additional user activity after the intent is fulfilled. For more information, see .
+     * If defined in the bot, Amazon Lex uses this prompt to solicit additional user activity after the intent is fulfilled. For more information, see PutIntent.
      */
     followUpPrompt?: FollowUpPrompt;
     /**
@@ -1098,11 +1234,11 @@ declare namespace LexModelBuildingService {
      */
     conclusionStatement?: Statement;
     /**
-     * If defined in the bot, Amazon Amazon Lex invokes this Lambda function for each user input. For more information, see . 
+     * If defined in the bot, Amazon Amazon Lex invokes this Lambda function for each user input. For more information, see PutIntent. 
      */
     dialogCodeHook?: CodeHook;
     /**
-     * Describes how the intent is fulfilled. For more information, see . 
+     * Describes how the intent is fulfilled. For more information, see PutIntent. 
      */
     fulfillmentActivity?: FulfillmentActivity;
     /**
@@ -1166,7 +1302,7 @@ declare namespace LexModelBuildingService {
   }
   export interface GetIntentsResponse {
     /**
-     * An array of Intent objects. For more information, see .
+     * An array of Intent objects. For more information, see PutBot.
      */
     intents?: IntentMetadataList;
     /**
@@ -1213,6 +1349,10 @@ declare namespace LexModelBuildingService {
      * Checksum of the $LATEST version of the slot type.
      */
     checksum?: String;
+    /**
+     * The strategy that Amazon Lex uses to determine the value of the slot. For more information, see PutSlotType.
+     */
+    valueSelectionStrategy?: SlotValueSelectionStrategy;
   }
   export interface GetSlotTypeVersionsRequest {
     /**
@@ -1282,10 +1422,12 @@ declare namespace LexModelBuildingService {
      */
     botName?: BotName;
     /**
-     * An array of objects, each containing a list of objects describing the utterances that were processed by your bot. The response contains a maximum of 100 UtteranceData objects for each version.
+     * An array of UtteranceList objects, each containing a list of UtteranceData objects describing the utterances that were processed by your bot. The response contains a maximum of 100 UtteranceData objects for each version.
      */
     utterances?: ListsOfUtterances;
   }
+  export type GroupNumber = number;
+  export type ImportStatus = "IN_PROGRESS"|"COMPLETE"|"FAILED"|string;
   export interface Intent {
     /**
      * The name of the intent.
@@ -1325,9 +1467,10 @@ declare namespace LexModelBuildingService {
   export type LambdaARN = string;
   export type ListOfUtterance = UtteranceData[];
   export type ListsOfUtterances = UtteranceList[];
-  export type Locale = "en-US"|string;
+  export type Locale = "en-US"|"en-GB"|"de-DE"|string;
   export type LocaleList = Locale[];
   export type MaxResults = number;
+  export type MergeStrategy = "OVERWRITE_LATEST"|"FAIL_ON_CONFLICT"|string;
   export interface Message {
     /**
      * The content type of the message string.
@@ -1337,6 +1480,10 @@ declare namespace LexModelBuildingService {
      * The text of the message.
      */
     content: ContentString;
+    /**
+     * Identifies the message group that the message belongs to. When a group is assigned to a message, Amazon Lex returns one message from each group in the response.
+     */
+    groupNumber?: GroupNumber;
   }
   export type MessageList = Message[];
   export type MessageVersion = string;
@@ -1426,7 +1573,7 @@ declare namespace LexModelBuildingService {
      */
     intents?: IntentList;
     /**
-     * When Amazon Lex doesn't understand the user's intent, it uses one of these messages to get clarification. For example, "Sorry, I didn't understand. Please repeat." Amazon Lex repeats the clarification prompt the number of times specified in maxAttempts. If Amazon Lex still can't understand, it sends the message specified in abortStatement. 
+     * When Amazon Lex doesn't understand the user's intent, it uses this message to get clarification. To specify how many times Amazon Lex should repeate the clarification prompt, use the maxAttempts field. If Amazon Lex still doesn't understand, it sends the message in the abortStatement field.  When you create a clarification prompt, make sure that it suggests the correct response from the user. for example, for a bot that orders pizza and drinks, you might create this clarification prompt: "What would you like to do? You can say 'Order a pizza' or 'Order a drink.'"
      */
     clarificationPrompt?: Prompt;
     /**
@@ -1438,7 +1585,7 @@ declare namespace LexModelBuildingService {
      */
     idleSessionTTLInSeconds?: SessionTTL;
     /**
-     * The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions with the user. The locale configured for the voice must match the locale of the bot. For more information, see Voice in the Amazon Polly Developer Guide.
+     * The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions with the user. The locale configured for the voice must match the locale of the bot. For more information, see Available Voices in the Amazon Polly Developer Guide.
      */
     voiceId?: String;
     /**
@@ -1446,7 +1593,7 @@ declare namespace LexModelBuildingService {
      */
     checksum?: String;
     /**
-     * If you set the processBehavior element to Build, Amazon Lex builds the bot so that it can be run. If you set the element to SaveAmazon Lex saves the bot, but doesn't build it.  If you don't specify this value, the default value is Save.
+     * If you set the processBehavior element to BUILD, Amazon Lex builds the bot so that it can be run. If you set the element to SAVE Amazon Lex saves the bot, but doesn't build it.  If you don't specify this value, the default value is BUILD.
      */
     processBehavior?: ProcessBehavior;
     /**
@@ -1457,6 +1604,7 @@ declare namespace LexModelBuildingService {
      * For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children's Online Privacy Protection Act (COPPA) by specifying true or false in the childDirected field. By specifying true in the childDirected field, you confirm that your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying false in the childDirected field, you confirm that your use of Amazon Lex is not related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the childDirected field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the Amazon Lex FAQ. 
      */
     childDirected: Boolean;
+    createVersion?: Boolean;
   }
   export interface PutBotResponse {
     /**
@@ -1468,15 +1616,15 @@ declare namespace LexModelBuildingService {
      */
     description?: Description;
     /**
-     * An array of Intent objects. For more information, see .
+     * An array of Intent objects. For more information, see PutBot.
      */
     intents?: IntentList;
     /**
-     *  The prompts that Amazon Lex uses when it doesn't understand the user's intent. For more information, see . 
+     *  The prompts that Amazon Lex uses when it doesn't understand the user's intent. For more information, see PutBot. 
      */
     clarificationPrompt?: Prompt;
     /**
-     * The message that Amazon Lex uses to abort a conversation. For more information, see .
+     * The message that Amazon Lex uses to abort a conversation. For more information, see PutBot.
      */
     abortStatement?: Statement;
     /**
@@ -1496,11 +1644,11 @@ declare namespace LexModelBuildingService {
      */
     createdDate?: Timestamp;
     /**
-     * The maximum length of time that Amazon Lex retains the data gathered in a conversation. For more information, see .
+     * The maximum length of time that Amazon Lex retains the data gathered in a conversation. For more information, see PutBot.
      */
     idleSessionTTLInSeconds?: SessionTTL;
     /**
-     * The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user. For more information, see .
+     * The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user. For more information, see PutBot.
      */
     voiceId?: String;
     /**
@@ -1519,6 +1667,7 @@ declare namespace LexModelBuildingService {
      * For each Amazon Lex bot created with the Amazon Lex Model Building Service, you must specify whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to the Children's Online Privacy Protection Act (COPPA) by specifying true or false in the childDirected field. By specifying true in the childDirected field, you confirm that your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. By specifying false in the childDirected field, you confirm that your use of Amazon Lex is not related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. You may not specify a default value for the childDirected field that does not accurately reflect whether your use of Amazon Lex is related to a website, program, or other application that is directed or targeted, in whole or in part, to children under age 13 and subject to COPPA. If your use of Amazon Lex relates to a website, program, or other application that is directed in whole or in part, to children under age 13, you must obtain any required verifiable parental consent under COPPA. For information regarding the use of Amazon Lex in connection with websites, programs, or other applications that are directed or targeted, in whole or in part, to children under age 13, see the Amazon Lex FAQ. 
      */
     childDirected?: Boolean;
+    createVersion?: Boolean;
   }
   export interface PutIntentRequest {
     /**
@@ -1530,7 +1679,7 @@ declare namespace LexModelBuildingService {
      */
     description?: Description;
     /**
-     * An array of intent slots. At runtime, Amazon Lex elicits required slot values from the user using prompts defined in the slots. For more information, see &lt;xref linkend="how-it-works"/&gt;. 
+     * An array of intent slots. At runtime, Amazon Lex elicits required slot values from the user using prompts defined in the slots. For more information, see how-it-works. 
      */
     slots?: SlotList;
     /**
@@ -1546,7 +1695,7 @@ declare namespace LexModelBuildingService {
      */
     rejectionStatement?: Statement;
     /**
-     * A user prompt for additional activity after an intent is fulfilled. For example, after the OrderPizza intent is fulfilled (your Lambda function placed an order with a pizzeria), you might prompt the user to find if they want to order a drink (assuming that you have defined an OrderDrink intent in your bot).  The followUpPrompt and conclusionStatement are mutually exclusive. You can specify only one. For example, your bot may not solicit both the following:   Follow up prompt - "$session.FirstName, your pizza order has been placed. Would you like to order a drink or a dessert?"   Conclusion statement - "$session.FirstName, your pizza order has been placed."  
+     * Amazon Lex uses this prompt to solicit additional activity after fulfilling an intent. For example, after the OrderPizza intent is fulfilled, you might prompt the user to order a drink. The action that Amazon Lex takes depends on the user's response, as follows:   If the user says "Yes" it responds with the clarification prompt that is configured for the bot.   if the user says "Yes" and continues with an utterance that triggers an intent it starts a conversation for the intent.   If the user says "No" it responds with the rejection statement configured for the the follow-up prompt.   If it doesn't recognize the utterance it repeats the follow-up prompt again.   The followUpPrompt field and the conclusionStatement field are mutually exclusive. You can specify only one. 
      */
     followUpPrompt?: FollowUpPrompt;
     /**
@@ -1558,7 +1707,7 @@ declare namespace LexModelBuildingService {
      */
     dialogCodeHook?: CodeHook;
     /**
-     *  Describes how the intent is fulfilled. For example, after a user provides all of the information for a pizza order, fulfillmentActivity defines how the bot places an order with a local pizza store.   You might configure Amazon Lex to return all of the intent information to the client application, or direct it to invoke a Lambda function that can process the intent (for example, place an order with a pizzeria). 
+     * Required. Describes how the intent is fulfilled. For example, after a user provides all of the information for a pizza order, fulfillmentActivity defines how the bot places an order with a local pizza store.   You might configure Amazon Lex to return all of the intent information to the client application, or direct it to invoke a Lambda function that can process the intent (for example, place an order with a pizzeria). 
      */
     fulfillmentActivity?: FulfillmentActivity;
     /**
@@ -1569,6 +1718,7 @@ declare namespace LexModelBuildingService {
      * Identifies a specific revision of the $LATEST version. When you create a new intent, leave the checksum field blank. If you specify a checksum you get a BadRequestException exception. When you want to update a intent, set the checksum field to the checksum of the most recent revision of the $LATEST version. If you don't specify the  checksum field, or if the checksum does not match the $LATEST version, you get a PreconditionFailedException exception.
      */
     checksum?: String;
+    createVersion?: Boolean;
   }
   export interface PutIntentResponse {
     /**
@@ -1631,6 +1781,7 @@ declare namespace LexModelBuildingService {
      * Checksum of the $LATESTversion of the intent created or updated.
      */
     checksum?: String;
+    createVersion?: Boolean;
   }
   export interface PutSlotTypeRequest {
     /**
@@ -1642,13 +1793,18 @@ declare namespace LexModelBuildingService {
      */
     description?: Description;
     /**
-     * A list of EnumerationValue objects that defines the values that the slot type can take.
+     * A list of EnumerationValue objects that defines the values that the slot type can take. Each value can have a list of synonyms, which are additional values that help train the machine learning model about the values that it resolves for a slot.  When Amazon Lex resolves a slot value, it generates a resolution list that contains up to five possible values for the slot. If you are using a Lambda function, this resolution list is passed to the function. If you are not using a Lambda function you can choose to return the value that the user entered or the first value in the resolution list as the slot value. The valueSelectionStrategy field indicates the option to use. 
      */
     enumerationValues?: EnumerationValues;
     /**
      * Identifies a specific revision of the $LATEST version. When you create a new slot type, leave the checksum field blank. If you specify a checksum you get a BadRequestException exception. When you want to update a slot type, set the checksum field to the checksum of the most recent revision of the $LATEST version. If you don't specify the  checksum field, or if the checksum does not match the $LATEST version, you get a PreconditionFailedException exception.
      */
     checksum?: String;
+    /**
+     * Determines the slot resolution strategy that Amazon Lex uses to return slot type values. The field can be set to one of the following values:    ORIGINAL_VALUE - Returns the value entered by the user, if the user value is similar to the slot value.    TOP_RESOLUTION - If there is a resolution list for the slot, return the first value in the resolution list as the slot type value. If there is no resolution list, null is returned.   If you don't specify the valueSelectionStrategy, the default is ORIGINAL_VALUE.
+     */
+    valueSelectionStrategy?: SlotValueSelectionStrategy;
+    createVersion?: Boolean;
   }
   export interface PutSlotTypeResponse {
     /**
@@ -1679,18 +1835,13 @@ declare namespace LexModelBuildingService {
      * Checksum of the $LATEST version of the slot type.
      */
     checksum?: String;
-  }
-  export type ReferenceType = "Intent"|"Bot"|"BotAlias"|"BotChannel"|string;
-  export interface ResourceReference {
     /**
-     * The name of the resource that is using the resource that you are trying to delete.
+     * The slot resolution strategy that Amazon Lex uses to determine the value of the slot. For more information, see PutSlotType.
      */
-    name?: Name;
-    /**
-     * The version of the resource that is using the resource that you are trying to delete.
-     */
-    version?: Version;
+    valueSelectionStrategy?: SlotValueSelectionStrategy;
+    createVersion?: Boolean;
   }
+  export type ResourceType = "BOT"|"INTENT"|"SLOT_TYPE"|string;
   export type ResponseCard = string;
   export type SessionTTL = number;
   export interface Slot {
@@ -1759,19 +1910,62 @@ declare namespace LexModelBuildingService {
   export type SlotTypeMetadataList = SlotTypeMetadata[];
   export type SlotTypeName = string;
   export type SlotUtteranceList = Utterance[];
+  export type SlotValueSelectionStrategy = "ORIGINAL_VALUE"|"TOP_RESOLUTION"|string;
+  export interface StartImportRequest {
+    /**
+     * A zip archive in binary format. The archive should contain one file, a JSON file containing the resource to import. The resource should match the type specified in the resourceType field.
+     */
+    payload: _Blob;
+    /**
+     * Specifies the type of resource to export. Each resource also exports any resources that it depends on.    A bot exports dependent intents.   An intent exports dependent slot types.  
+     */
+    resourceType: ResourceType;
+    /**
+     * Specifies the action that the StartImport operation should take when there is an existing resource with the same name.   FAIL_ON_CONFLICT - The import operation is stopped on the first conflict between a resource in the import file and an existing resource. The name of the resource causing the conflict is in the failureReason field of the response to the GetImport operation. OVERWRITE_LATEST - The import operation proceeds even if there is a conflict with an existing resource. The $LASTEST version of the existing resource is overwritten with the data from the import file.  
+     */
+    mergeStrategy: MergeStrategy;
+  }
+  export interface StartImportResponse {
+    /**
+     * The name given to the import job.
+     */
+    name?: Name;
+    /**
+     * The type of resource to import.
+     */
+    resourceType?: ResourceType;
+    /**
+     * The action to take when there is a merge conflict.
+     */
+    mergeStrategy?: MergeStrategy;
+    /**
+     * The identifier for the specific import job.
+     */
+    importId?: String;
+    /**
+     * The status of the import job. If the status is FAILED, you can get the reason for the failure using the GetImport operation.
+     */
+    importStatus?: ImportStatus;
+    /**
+     * A timestamp for the date and time that the import job was requested.
+     */
+    createdDate?: Timestamp;
+  }
   export interface Statement {
     /**
      * A collection of message objects.
      */
     messages: MessageList;
     /**
-     *  At runtime, if the client is using the API, Amazon Lex includes the response card in the response. It substitutes all of the session attributes and slot values for placeholders in the response card. 
+     *  At runtime, if the client is using the PostText API, Amazon Lex includes the response card in the response. It substitutes all of the session attributes and slot values for placeholders in the response card. 
      */
     responseCard?: ResponseCard;
   }
-  export type Status = "BUILDING"|"READY"|"FAILED"|"NOT_BUILT"|string;
+  export type Status = "BUILDING"|"READY"|"READY_BASIC_TESTING"|"FAILED"|"NOT_BUILT"|string;
   export type StatusType = "Detected"|"Missed"|string;
   export type String = string;
+  export type StringList = String[];
+  export type SynonymList = Value[];
   export type Timestamp = Date;
   export type UserId = string;
   export type Utterance = string;
@@ -1803,7 +1997,7 @@ declare namespace LexModelBuildingService {
      */
     botVersion?: Version;
     /**
-     * One or more objects that contain information about the utterances that have been made to a bot. The maximum number of object is 100.
+     * One or more UtteranceData objects that contain information about the utterances that have been made to a bot. The maximum number of object is 100.
      */
     utterances?: ListOfUtterance;
   }

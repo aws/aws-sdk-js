@@ -605,7 +605,7 @@ describe('AWS.Request', function() {
     if (typeof Promise !== 'undefined') {
       it('binds response object to value with which the promise is resolved', function() {
         AWS.config.setPromisesDependency();
-        helpers.mockHttpResponse(200, {}, ['FOO', 'BAR', 'BAZ', 'QUX']);
+        helpers.mockHttpResponse(200, {}, '');
         return service.makeRequest('mockMethod').promise().then(function(data) {
           expect(data.$response.httpResponse.statusCode).to.equal(200);
           expect(JSON.stringify(data)).to.be.ok;
@@ -1146,6 +1146,25 @@ describe('AWS.Request', function() {
         });
 
         // s.resume();
+      });
+
+      it('successfully handles connection timeout', function (done) {
+        var request, s;
+        app = function (req, resp) {
+          resp.writeHead(200, {
+            'content-length': 512 * 1024
+          });
+          resp.write(new Buffer(512 * 1024));
+          resp.end();
+        };
+        service.config.httpOptions.timeout = 5;
+        request = service.makeRequest('mockMethod');
+        s = request.createReadStream();
+        s.on('error', function (e) {
+          setImmediate(function () {
+            done();
+          });
+        });
       });
     });
   }

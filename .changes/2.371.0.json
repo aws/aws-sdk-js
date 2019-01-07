@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "Add normalized unit support for both GetReservationUtilization and GetReservationCoverage API."
+    },
+    {
+        "type": "feature",
+        "category": "MQ",
+        "description": "This release adds support for cost allocation tagging. You can now create, delete, and list tags for AmazonMQ resources. For more information about tagging, see AWS Tagging Strategies."
+    },
+    {
+        "type": "feature",
+        "category": "MediaTailor",
+        "description": "AWS Elemental MediaTailor SDK now includes a new parameter to control the Location tag of DASH manifests."
+    }
+]

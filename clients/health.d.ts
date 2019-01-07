@@ -67,13 +67,14 @@ declare namespace Health {
      */
     entityArn?: entityArn;
     /**
-     * The unique identifier for the event. Format: arn:aws:health:event-region::event/EVENT_TYPE_PLUS_ID . Example: arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331 
+     * The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
      */
     eventArn?: eventArn;
     /**
      * The ID of the affected entity.
      */
     entityValue?: entityValue;
+    entityUrl?: entityUrl;
     /**
      * The 12-digit AWS account number that contains the affected entity.
      */
@@ -131,7 +132,7 @@ declare namespace Health {
   }
   export interface DescribeEntityAggregatesRequest {
     /**
-     * A list of event ARNs (unique identifiers). For example: "arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331", "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz" 
+     * A list of event ARNs (unique identifiers). For example: "arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101" 
      */
     eventArns?: EventArnsList;
   }
@@ -172,7 +173,7 @@ declare namespace Health {
   export type DescribeEventDetailsFailedSet = EventDetailsErrorItem[];
   export interface DescribeEventDetailsRequest {
     /**
-     * A list of event ARNs (unique identifiers). For example: "arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331", "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz" 
+     * A list of event ARNs (unique identifiers). For example: "arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101" 
      */
     eventArns: eventArnList;
     /**
@@ -249,7 +250,7 @@ declare namespace Health {
   }
   export interface EntityAggregate {
     /**
-     * The unique identifier for the event. Format: arn:aws:health:event-region::event/EVENT_TYPE_PLUS_ID . Example: arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331 
+     * The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
      */
     eventArn?: eventArn;
     /**
@@ -260,7 +261,7 @@ declare namespace Health {
   export type EntityAggregateList = EntityAggregate[];
   export interface EntityFilter {
     /**
-     * A list of event ARNs (unique identifiers). For example: "arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331", "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz" 
+     * A list of event ARNs (unique identifiers). For example: "arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101" 
      */
     eventArns: eventArnList;
     /**
@@ -287,7 +288,7 @@ declare namespace Health {
   export type EntityList = AffectedEntity[];
   export interface Event {
     /**
-     * The unique identifier for the event. Format: arn:aws:health:event-region::event/EVENT_TYPE_PLUS_ID . Example: arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331 
+     * The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
      */
     arn?: eventArn;
     /**
@@ -299,7 +300,7 @@ declare namespace Health {
      */
     eventTypeCode?: eventTypeCode;
     /**
-     * The 
+     * The category of the event. Possible values are issue, scheduledChange, and accountNotification.
      */
     eventTypeCategory?: eventTypeCategory;
     /**
@@ -361,7 +362,7 @@ declare namespace Health {
   }
   export interface EventDetailsErrorItem {
     /**
-     * The unique identifier for the event. Format: arn:aws:health:event-region::event/EVENT_TYPE_PLUS_ID . Example: arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331 
+     * The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
      */
     eventArn?: eventArn;
     /**
@@ -375,7 +376,7 @@ declare namespace Health {
   }
   export interface EventFilter {
     /**
-     * A list of event ARNs (unique identifiers). For example: "arn:aws:health:us-east-1::event/AWS_EC2_MAINTENANCE_5331", "arn:aws:health:us-west-1::event/AWS_EBS_LOST_VOLUME_xyz" 
+     * A list of event ARNs (unique identifiers). For example: "arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-CDE456", "arn:aws:health:us-west-1::event/EBS/AWS_EBS_LOST_VOLUME/AWS_EBS_LOST_VOLUME_CHI789_JKL101" 
      */
     eventArns?: eventArnList;
     /**
@@ -469,6 +470,7 @@ declare namespace Health {
   export type entityArnList = entityArn[];
   export type entityStatusCode = "IMPAIRED"|"UNIMPAIRED"|"UNKNOWN"|string;
   export type entityStatusCodeList = entityStatusCode[];
+  export type entityUrl = string;
   export type entityValue = string;
   export type entityValueList = entityValue[];
   export type eventAggregateField = "eventTypeCategory"|string;

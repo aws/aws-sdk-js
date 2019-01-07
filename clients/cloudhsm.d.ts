@@ -12,163 +12,163 @@ declare class CloudHSM extends Service {
   constructor(options?: CloudHSM.Types.ClientConfiguration)
   config: Config & CloudHSM.Types.ClientConfiguration;
   /**
-   * Adds or overwrites one or more tags for the specified AWS CloudHSM resource. Each tag consists of a key and a value. Tag keys must be unique to each resource.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Adds or overwrites one or more tags for the specified AWS CloudHSM resource. Each tag consists of a key and a value. Tag keys must be unique to each resource.
    */
   addTagsToResource(params: CloudHSM.Types.AddTagsToResourceRequest, callback?: (err: AWSError, data: CloudHSM.Types.AddTagsToResourceResponse) => void): Request<CloudHSM.Types.AddTagsToResourceResponse, AWSError>;
   /**
-   * Adds or overwrites one or more tags for the specified AWS CloudHSM resource. Each tag consists of a key and a value. Tag keys must be unique to each resource.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Adds or overwrites one or more tags for the specified AWS CloudHSM resource. Each tag consists of a key and a value. Tag keys must be unique to each resource.
    */
   addTagsToResource(callback?: (err: AWSError, data: CloudHSM.Types.AddTagsToResourceResponse) => void): Request<CloudHSM.Types.AddTagsToResourceResponse, AWSError>;
   /**
-   * Creates a high-availability partition group. A high-availability partition group is a group of partitions that spans multiple physical HSMs.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Creates a high-availability partition group. A high-availability partition group is a group of partitions that spans multiple physical HSMs.
    */
   createHapg(params: CloudHSM.Types.CreateHapgRequest, callback?: (err: AWSError, data: CloudHSM.Types.CreateHapgResponse) => void): Request<CloudHSM.Types.CreateHapgResponse, AWSError>;
   /**
-   * Creates a high-availability partition group. A high-availability partition group is a group of partitions that spans multiple physical HSMs.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Creates a high-availability partition group. A high-availability partition group is a group of partitions that spans multiple physical HSMs.
    */
   createHapg(callback?: (err: AWSError, data: CloudHSM.Types.CreateHapgResponse) => void): Request<CloudHSM.Types.CreateHapgResponse, AWSError>;
   /**
-   * Creates an uninitialized HSM instance. There is an upfront fee charged for each HSM instance that you create with the CreateHsm operation. If you accidentally provision an HSM and want to request a refund, delete the instance using the DeleteHsm operation, go to the AWS Support Center, create a new case, and select Account and Billing Support.  It can take up to 20 minutes to create and provision an HSM. You can monitor the status of the HSM with the DescribeHsm operation. The HSM is ready to be initialized when the status changes to RUNNING. 
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Creates an uninitialized HSM instance. There is an upfront fee charged for each HSM instance that you create with the CreateHsm operation. If you accidentally provision an HSM and want to request a refund, delete the instance using the DeleteHsm operation, go to the AWS Support Center, create a new case, and select Account and Billing Support.  It can take up to 20 minutes to create and provision an HSM. You can monitor the status of the HSM with the DescribeHsm operation. The HSM is ready to be initialized when the status changes to RUNNING. 
    */
   createHsm(params: CloudHSM.Types.CreateHsmRequest, callback?: (err: AWSError, data: CloudHSM.Types.CreateHsmResponse) => void): Request<CloudHSM.Types.CreateHsmResponse, AWSError>;
   /**
-   * Creates an uninitialized HSM instance. There is an upfront fee charged for each HSM instance that you create with the CreateHsm operation. If you accidentally provision an HSM and want to request a refund, delete the instance using the DeleteHsm operation, go to the AWS Support Center, create a new case, and select Account and Billing Support.  It can take up to 20 minutes to create and provision an HSM. You can monitor the status of the HSM with the DescribeHsm operation. The HSM is ready to be initialized when the status changes to RUNNING. 
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Creates an uninitialized HSM instance. There is an upfront fee charged for each HSM instance that you create with the CreateHsm operation. If you accidentally provision an HSM and want to request a refund, delete the instance using the DeleteHsm operation, go to the AWS Support Center, create a new case, and select Account and Billing Support.  It can take up to 20 minutes to create and provision an HSM. You can monitor the status of the HSM with the DescribeHsm operation. The HSM is ready to be initialized when the status changes to RUNNING. 
    */
   createHsm(callback?: (err: AWSError, data: CloudHSM.Types.CreateHsmResponse) => void): Request<CloudHSM.Types.CreateHsmResponse, AWSError>;
   /**
-   * Creates an HSM client.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Creates an HSM client.
    */
   createLunaClient(params: CloudHSM.Types.CreateLunaClientRequest, callback?: (err: AWSError, data: CloudHSM.Types.CreateLunaClientResponse) => void): Request<CloudHSM.Types.CreateLunaClientResponse, AWSError>;
   /**
-   * Creates an HSM client.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Creates an HSM client.
    */
   createLunaClient(callback?: (err: AWSError, data: CloudHSM.Types.CreateLunaClientResponse) => void): Request<CloudHSM.Types.CreateLunaClientResponse, AWSError>;
   /**
-   * Deletes a high-availability partition group.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Deletes a high-availability partition group.
    */
   deleteHapg(params: CloudHSM.Types.DeleteHapgRequest, callback?: (err: AWSError, data: CloudHSM.Types.DeleteHapgResponse) => void): Request<CloudHSM.Types.DeleteHapgResponse, AWSError>;
   /**
-   * Deletes a high-availability partition group.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Deletes a high-availability partition group.
    */
   deleteHapg(callback?: (err: AWSError, data: CloudHSM.Types.DeleteHapgResponse) => void): Request<CloudHSM.Types.DeleteHapgResponse, AWSError>;
   /**
-   * Deletes an HSM. After completion, this operation cannot be undone and your key material cannot be recovered.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Deletes an HSM. After completion, this operation cannot be undone and your key material cannot be recovered.
    */
   deleteHsm(params: CloudHSM.Types.DeleteHsmRequest, callback?: (err: AWSError, data: CloudHSM.Types.DeleteHsmResponse) => void): Request<CloudHSM.Types.DeleteHsmResponse, AWSError>;
   /**
-   * Deletes an HSM. After completion, this operation cannot be undone and your key material cannot be recovered.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Deletes an HSM. After completion, this operation cannot be undone and your key material cannot be recovered.
    */
   deleteHsm(callback?: (err: AWSError, data: CloudHSM.Types.DeleteHsmResponse) => void): Request<CloudHSM.Types.DeleteHsmResponse, AWSError>;
   /**
-   * Deletes a client.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Deletes a client.
    */
   deleteLunaClient(params: CloudHSM.Types.DeleteLunaClientRequest, callback?: (err: AWSError, data: CloudHSM.Types.DeleteLunaClientResponse) => void): Request<CloudHSM.Types.DeleteLunaClientResponse, AWSError>;
   /**
-   * Deletes a client.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Deletes a client.
    */
   deleteLunaClient(callback?: (err: AWSError, data: CloudHSM.Types.DeleteLunaClientResponse) => void): Request<CloudHSM.Types.DeleteLunaClientResponse, AWSError>;
   /**
-   * Retrieves information about a high-availability partition group.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Retrieves information about a high-availability partition group.
    */
   describeHapg(params: CloudHSM.Types.DescribeHapgRequest, callback?: (err: AWSError, data: CloudHSM.Types.DescribeHapgResponse) => void): Request<CloudHSM.Types.DescribeHapgResponse, AWSError>;
   /**
-   * Retrieves information about a high-availability partition group.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Retrieves information about a high-availability partition group.
    */
   describeHapg(callback?: (err: AWSError, data: CloudHSM.Types.DescribeHapgResponse) => void): Request<CloudHSM.Types.DescribeHapgResponse, AWSError>;
   /**
-   * Retrieves information about an HSM. You can identify the HSM by its ARN or its serial number.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Retrieves information about an HSM. You can identify the HSM by its ARN or its serial number.
    */
   describeHsm(params: CloudHSM.Types.DescribeHsmRequest, callback?: (err: AWSError, data: CloudHSM.Types.DescribeHsmResponse) => void): Request<CloudHSM.Types.DescribeHsmResponse, AWSError>;
   /**
-   * Retrieves information about an HSM. You can identify the HSM by its ARN or its serial number.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Retrieves information about an HSM. You can identify the HSM by its ARN or its serial number.
    */
   describeHsm(callback?: (err: AWSError, data: CloudHSM.Types.DescribeHsmResponse) => void): Request<CloudHSM.Types.DescribeHsmResponse, AWSError>;
   /**
-   * Retrieves information about an HSM client.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Retrieves information about an HSM client.
    */
   describeLunaClient(params: CloudHSM.Types.DescribeLunaClientRequest, callback?: (err: AWSError, data: CloudHSM.Types.DescribeLunaClientResponse) => void): Request<CloudHSM.Types.DescribeLunaClientResponse, AWSError>;
   /**
-   * Retrieves information about an HSM client.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Retrieves information about an HSM client.
    */
   describeLunaClient(callback?: (err: AWSError, data: CloudHSM.Types.DescribeLunaClientResponse) => void): Request<CloudHSM.Types.DescribeLunaClientResponse, AWSError>;
   /**
-   * Gets the configuration files necessary to connect to all high availability partition groups the client is associated with.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Gets the configuration files necessary to connect to all high availability partition groups the client is associated with.
    */
   getConfig(params: CloudHSM.Types.GetConfigRequest, callback?: (err: AWSError, data: CloudHSM.Types.GetConfigResponse) => void): Request<CloudHSM.Types.GetConfigResponse, AWSError>;
   /**
-   * Gets the configuration files necessary to connect to all high availability partition groups the client is associated with.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Gets the configuration files necessary to connect to all high availability partition groups the client is associated with.
    */
   getConfig(callback?: (err: AWSError, data: CloudHSM.Types.GetConfigResponse) => void): Request<CloudHSM.Types.GetConfigResponse, AWSError>;
   /**
-   * Lists the Availability Zones that have available AWS CloudHSM capacity.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Lists the Availability Zones that have available AWS CloudHSM capacity.
    */
   listAvailableZones(params: CloudHSM.Types.ListAvailableZonesRequest, callback?: (err: AWSError, data: CloudHSM.Types.ListAvailableZonesResponse) => void): Request<CloudHSM.Types.ListAvailableZonesResponse, AWSError>;
   /**
-   * Lists the Availability Zones that have available AWS CloudHSM capacity.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Lists the Availability Zones that have available AWS CloudHSM capacity.
    */
   listAvailableZones(callback?: (err: AWSError, data: CloudHSM.Types.ListAvailableZonesResponse) => void): Request<CloudHSM.Types.ListAvailableZonesResponse, AWSError>;
   /**
-   * Lists the high-availability partition groups for the account. This operation supports pagination with the use of the NextToken member. If more results are available, the NextToken member of the response contains a token that you pass in the next call to ListHapgs to retrieve the next set of items.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Lists the high-availability partition groups for the account. This operation supports pagination with the use of the NextToken member. If more results are available, the NextToken member of the response contains a token that you pass in the next call to ListHapgs to retrieve the next set of items.
    */
   listHapgs(params: CloudHSM.Types.ListHapgsRequest, callback?: (err: AWSError, data: CloudHSM.Types.ListHapgsResponse) => void): Request<CloudHSM.Types.ListHapgsResponse, AWSError>;
   /**
-   * Lists the high-availability partition groups for the account. This operation supports pagination with the use of the NextToken member. If more results are available, the NextToken member of the response contains a token that you pass in the next call to ListHapgs to retrieve the next set of items.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Lists the high-availability partition groups for the account. This operation supports pagination with the use of the NextToken member. If more results are available, the NextToken member of the response contains a token that you pass in the next call to ListHapgs to retrieve the next set of items.
    */
   listHapgs(callback?: (err: AWSError, data: CloudHSM.Types.ListHapgsResponse) => void): Request<CloudHSM.Types.ListHapgsResponse, AWSError>;
   /**
-   * Retrieves the identifiers of all of the HSMs provisioned for the current customer. This operation supports pagination with the use of the NextToken member. If more results are available, the NextToken member of the response contains a token that you pass in the next call to ListHsms to retrieve the next set of items.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Retrieves the identifiers of all of the HSMs provisioned for the current customer. This operation supports pagination with the use of the NextToken member. If more results are available, the NextToken member of the response contains a token that you pass in the next call to ListHsms to retrieve the next set of items.
    */
   listHsms(params: CloudHSM.Types.ListHsmsRequest, callback?: (err: AWSError, data: CloudHSM.Types.ListHsmsResponse) => void): Request<CloudHSM.Types.ListHsmsResponse, AWSError>;
   /**
-   * Retrieves the identifiers of all of the HSMs provisioned for the current customer. This operation supports pagination with the use of the NextToken member. If more results are available, the NextToken member of the response contains a token that you pass in the next call to ListHsms to retrieve the next set of items.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Retrieves the identifiers of all of the HSMs provisioned for the current customer. This operation supports pagination with the use of the NextToken member. If more results are available, the NextToken member of the response contains a token that you pass in the next call to ListHsms to retrieve the next set of items.
    */
   listHsms(callback?: (err: AWSError, data: CloudHSM.Types.ListHsmsResponse) => void): Request<CloudHSM.Types.ListHsmsResponse, AWSError>;
   /**
-   * Lists all of the clients. This operation supports pagination with the use of the NextToken member. If more results are available, the NextToken member of the response contains a token that you pass in the next call to ListLunaClients to retrieve the next set of items.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Lists all of the clients. This operation supports pagination with the use of the NextToken member. If more results are available, the NextToken member of the response contains a token that you pass in the next call to ListLunaClients to retrieve the next set of items.
    */
   listLunaClients(params: CloudHSM.Types.ListLunaClientsRequest, callback?: (err: AWSError, data: CloudHSM.Types.ListLunaClientsResponse) => void): Request<CloudHSM.Types.ListLunaClientsResponse, AWSError>;
   /**
-   * Lists all of the clients. This operation supports pagination with the use of the NextToken member. If more results are available, the NextToken member of the response contains a token that you pass in the next call to ListLunaClients to retrieve the next set of items.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Lists all of the clients. This operation supports pagination with the use of the NextToken member. If more results are available, the NextToken member of the response contains a token that you pass in the next call to ListLunaClients to retrieve the next set of items.
    */
   listLunaClients(callback?: (err: AWSError, data: CloudHSM.Types.ListLunaClientsResponse) => void): Request<CloudHSM.Types.ListLunaClientsResponse, AWSError>;
   /**
-   * Returns a list of all tags for the specified AWS CloudHSM resource.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Returns a list of all tags for the specified AWS CloudHSM resource.
    */
   listTagsForResource(params: CloudHSM.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: CloudHSM.Types.ListTagsForResourceResponse) => void): Request<CloudHSM.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Returns a list of all tags for the specified AWS CloudHSM resource.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Returns a list of all tags for the specified AWS CloudHSM resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: CloudHSM.Types.ListTagsForResourceResponse) => void): Request<CloudHSM.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Modifies an existing high-availability partition group.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Modifies an existing high-availability partition group.
    */
   modifyHapg(params: CloudHSM.Types.ModifyHapgRequest, callback?: (err: AWSError, data: CloudHSM.Types.ModifyHapgResponse) => void): Request<CloudHSM.Types.ModifyHapgResponse, AWSError>;
   /**
-   * Modifies an existing high-availability partition group.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Modifies an existing high-availability partition group.
    */
   modifyHapg(callback?: (err: AWSError, data: CloudHSM.Types.ModifyHapgResponse) => void): Request<CloudHSM.Types.ModifyHapgResponse, AWSError>;
   /**
-   * Modifies an HSM.  This operation can result in the HSM being offline for up to 15 minutes while the AWS CloudHSM service is reconfigured. If you are modifying a production HSM, you should ensure that your AWS CloudHSM service is configured for high availability, and consider executing this operation during a maintenance window. 
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Modifies an HSM.  This operation can result in the HSM being offline for up to 15 minutes while the AWS CloudHSM service is reconfigured. If you are modifying a production HSM, you should ensure that your AWS CloudHSM service is configured for high availability, and consider executing this operation during a maintenance window. 
    */
   modifyHsm(params: CloudHSM.Types.ModifyHsmRequest, callback?: (err: AWSError, data: CloudHSM.Types.ModifyHsmResponse) => void): Request<CloudHSM.Types.ModifyHsmResponse, AWSError>;
   /**
-   * Modifies an HSM.  This operation can result in the HSM being offline for up to 15 minutes while the AWS CloudHSM service is reconfigured. If you are modifying a production HSM, you should ensure that your AWS CloudHSM service is configured for high availability, and consider executing this operation during a maintenance window. 
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Modifies an HSM.  This operation can result in the HSM being offline for up to 15 minutes while the AWS CloudHSM service is reconfigured. If you are modifying a production HSM, you should ensure that your AWS CloudHSM service is configured for high availability, and consider executing this operation during a maintenance window. 
    */
   modifyHsm(callback?: (err: AWSError, data: CloudHSM.Types.ModifyHsmResponse) => void): Request<CloudHSM.Types.ModifyHsmResponse, AWSError>;
   /**
-   * Modifies the certificate used by the client. This action can potentially start a workflow to install the new certificate on the client's HSMs.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Modifies the certificate used by the client. This action can potentially start a workflow to install the new certificate on the client's HSMs.
    */
   modifyLunaClient(params: CloudHSM.Types.ModifyLunaClientRequest, callback?: (err: AWSError, data: CloudHSM.Types.ModifyLunaClientResponse) => void): Request<CloudHSM.Types.ModifyLunaClientResponse, AWSError>;
   /**
-   * Modifies the certificate used by the client. This action can potentially start a workflow to install the new certificate on the client's HSMs.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Modifies the certificate used by the client. This action can potentially start a workflow to install the new certificate on the client's HSMs.
    */
   modifyLunaClient(callback?: (err: AWSError, data: CloudHSM.Types.ModifyLunaClientResponse) => void): Request<CloudHSM.Types.ModifyLunaClientResponse, AWSError>;
   /**
-   * Removes one or more tags from the specified AWS CloudHSM resource. To remove a tag, specify only the tag key to remove (not the value). To overwrite the value for an existing tag, use AddTagsToResource.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Removes one or more tags from the specified AWS CloudHSM resource. To remove a tag, specify only the tag key to remove (not the value). To overwrite the value for an existing tag, use AddTagsToResource.
    */
   removeTagsFromResource(params: CloudHSM.Types.RemoveTagsFromResourceRequest, callback?: (err: AWSError, data: CloudHSM.Types.RemoveTagsFromResourceResponse) => void): Request<CloudHSM.Types.RemoveTagsFromResourceResponse, AWSError>;
   /**
-   * Removes one or more tags from the specified AWS CloudHSM resource. To remove a tag, specify only the tag key to remove (not the value). To overwrite the value for an existing tag, use AddTagsToResource.
+   * This is documentation for AWS CloudHSM Classic. For more information, see AWS CloudHSM Classic FAQs, the AWS CloudHSM Classic User Guide, and the AWS CloudHSM Classic API Reference.  For information about the current version of AWS CloudHSM, see AWS CloudHSM, the AWS CloudHSM User Guide, and the AWS CloudHSM API Reference. Removes one or more tags from the specified AWS CloudHSM resource. To remove a tag, specify only the tag key to remove (not the value). To overwrite the value for an existing tag, use AddTagsToResource.
    */
   removeTagsFromResource(callback?: (err: AWSError, data: CloudHSM.Types.RemoveTagsFromResourceResponse) => void): Request<CloudHSM.Types.RemoveTagsFromResourceResponse, AWSError>;
 }
@@ -191,7 +191,6 @@ declare namespace CloudHSM {
      */
     Status: String;
   }
-  export type Boolean = boolean;
   export type Certificate = string;
   export type CertificateFingerprint = string;
   export type ClientArn = string;
@@ -316,8 +315,17 @@ declare namespace CloudHSM {
      * The serial number of the high-availability partition group.
      */
     HapgSerial?: String;
+    /**
+     * 
+     */
     HsmsLastActionFailed?: HsmList;
+    /**
+     * 
+     */
     HsmsPendingDeletion?: HsmList;
+    /**
+     * 
+     */
     HsmsPendingRegistration?: HsmList;
     /**
      * The label for the high-availability partition group.

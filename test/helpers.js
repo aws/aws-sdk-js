@@ -8,6 +8,9 @@
 
   ignoreRequire = require;
 
+  // import SDK for tests that do not access the AWS namespace
+  require('../index');
+
   if (typeof window === 'undefined') {
     AWS = ignoreRequire('../lib/aws');
     topLevelScope = global;
@@ -166,6 +169,26 @@
       }
     })
   });
+
+  MockServiceFromApi = function(customApi) {
+    if (!customApi.metadata) {
+      customApi.metadata = {};
+      customApi.metadata.endpointPrefix = 'mockservice';
+      customApi.metadata.signatureVersion = 'v4';
+    }
+    return AWS.Service.defineService('mock', {
+      serviceIdentifier: 'mock',
+      initialize: function(config) {
+        AWS.Service.prototype.initialize.call(this, config);
+        this.config.credentials = {
+          accessKeyId: 'akid',
+          secretAccessKey: 'secret'
+        };
+        this.config.region = this.config.region || 'mock-region';
+      },
+      api: new AWS.Model.Api(customApi)
+    });
+  }
 
   mockHttpSuccessfulResponse = function(status, headers, data, cb) {
     var httpResp;
@@ -351,6 +374,7 @@
     mockResponses: mockResponses,
     operationsForRequests: operationsForRequests,
     MockService: MockService,
+    MockServiceFromApi: MockServiceFromApi,
     MockCredentialsProvider: MockCredentialsProvider
   };
 

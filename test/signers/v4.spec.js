@@ -141,6 +141,7 @@
         signer = new AWS.Signers.V4(req.httpRequest, 'cloudsearchdomain');
         return expect(signer.canonicalString().split('\n')[2]).to.equal('cursor=initial&format=sdk&pretty=true&q=foo&q.options=%7B%7D');
       });
+
       it('double URI encodes paths for non S3 services', function() {
         var req;
         req = new AWS.CognitoSync().listDatasets({
@@ -150,7 +151,8 @@
         signer = new AWS.Signers.V4(req.httpRequest, 'cognito-identity');
         return expect(signer.canonicalString().split('\n')[1]).to.equal('/identitypools/id/identities/a%253Ab%253Ac/datasets');
       });
-      return it('does not double encode path for S3', function() {
+
+      it('does not double encode path for S3', function() {
         var req;
         req = new AWS.S3().getObject({
           Bucket: 'bucket',
@@ -159,29 +161,66 @@
         signer = new AWS.Signers.V4(req.httpRequest, 's3');
         return expect(signer.canonicalString().split('\n')[1]).to.equal('/a%3Ab%3Ac');
       });
+    
+      it('does not double encode path for signature version s3v4', function() {
+        var api = {
+          metadata: {
+            protocol: "rest-xml",
+            signatureVersion: "s3v4",
+          },
+          operations: {
+            AnOperation: {
+              name: 'anOperation',
+              http: {
+                requestUri: '/fakepath/{Entry}'
+              },
+              input: {
+                type: 'structure',
+                members: {
+                  Entry: {
+                    location: 'uri'
+                  }
+                }
+              }
+            }
+          }
+        };
+        var Mockservice = helpers.MockServiceFromApi(api);
+        var client = new Mockservice();
+        req = client.makeRequest('anOperation', {Entry: 'test:test'}).build();
+        signer = new AWS.Signers.V4(req.httpRequest, 'fake-service', {
+          signatureVersion: req.service.api.signatureVersion
+        });
+        expect(signer.canonicalString().split('\n')[1]).to.equal('/fakepath/test%3Atest');
+      })
     });
+
     describe('canonicalHeaders', function() {
       it('should return headers', function() {
         return expect(signer.canonicalHeaders()).to.eql(['host:localhost', 'x-amz-content-sha256:3128b8d4f3108b3e1677a38eb468d1c6dec926a58eaea235d034b9c71c3864d4', 'x-amz-date:' + datetime, 'x-amz-security-token:session', 'x-amz-target:DynamoDB_20111205.ListTables', 'x-amz-user-agent:aws-sdk-js/0.1'].join('\n'));
       });
+
       it('should ignore Authorization header', function() {
         signer.request.headers = {
           'Authorization': 'foo'
         };
         return expect(signer.canonicalHeaders()).to.equal('');
       });
+
       it('should ignore X-Amzn-Trace-Id header', function() {
         signer.request.headers = {
           'X-Amzn-Trace-Id': 'foo'
         };
         return expect(signer.canonicalHeaders()).to.equal('');
       });
+
       it('should lowercase all header names (not values)', function() {
         signer.request.headers = {
           'FOO': 'BAR'
         };
         return expect(signer.canonicalHeaders()).to.equal('foo:BAR');
       });
+
       it('should sort headers by key', function() {
         signer.request.headers = {
           abc: 'a',
@@ -191,18 +230,66 @@
         };
         return expect(signer.canonicalHeaders()).to.equal('abc:a\nbar:d\nbca:b\nqux:c');
       });
+
       it('should compact multiple spaces in keys/values to a single space', function() {
         signer.request.headers = {
           'Header': 'Value     with  Multiple   \t spaces'
         };
         return expect(signer.canonicalHeaders()).to.equal('header:Value with Multiple spaces');
       });
-      return it('should strip starting and end of line spaces', function() {
+
+      it('should strip starting and end of line spaces', function() {
         signer.request.headers = {
           'Header': ' \t   Value  \t  '
         };
         return expect(signer.canonicalHeaders()).to.equal('header:Value');
       });
+
+      it('should throw an error when header value is null', function() {
+        signer.request.headers = {
+          foo: null,
+          bar: 'd'
+        };
+        var err;
+        try {
+          signer.canonicalHeaders();
+        } catch (e) {
+          err = e;
+        }
+        expect(typeof err).to.equal('object');
+        expect(err.code).to.equal('InvalidHeader');
+      });
+
+      it('should throw an error when header value is undefined', function() {
+        signer.request.headers = {
+          foo: undefined,
+          bar: 'd'
+        };
+        var err;
+        try {
+          signer.canonicalHeaders();
+        } catch (e) {
+          err = e;
+        }
+        expect(typeof err).to.equal('object');
+        expect(err.code).to.equal('InvalidHeader');
+      });
+
+      it('should throw an error when header value does not have toString', function() {
+        signer.request.headers = {
+          foo: Object.create(null),
+          bar: 'd'
+        };
+        var err;
+        try {
+          signer.canonicalHeaders();
+        } catch (e) {
+          err = e;
+        }
+        expect(typeof err).to.equal('object');
+        expect(err.code).to.equal('InvalidHeader');
+      });
+
     });
     return describe('presigned urls', function() {
       it('hoists content-type to the query string', function() {

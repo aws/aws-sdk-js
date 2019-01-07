@@ -391,6 +391,12 @@
           "expected": "fulfilled"
         },
         {
+          "state": "success",
+          "matcher": "pathAll",
+          "argument": "SpotInstanceRequests[].Status.Code",
+          "expected": "request-canceled-and-instance-running"
+        },
+        {
           "state": "failure",
           "matcher": "pathAny",
           "argument": "SpotInstanceRequests[].Status.Code",
@@ -413,6 +419,11 @@
           "matcher": "pathAny",
           "argument": "SpotInstanceRequests[].Status.Code",
           "expected": "system-error"
+        },
+        {
+          "state": "retry",
+          "matcher": "error",
+          "expected": "InvalidSpotInstanceRequestID.NotFound"
         }
       ]
     },

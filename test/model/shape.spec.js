@@ -8,6 +8,27 @@
 
   describe('AWS.Model.Shape', function() {
     describe('Traits', function() {
+      it('inherits sensitive trait', function() {
+        var api, shape;
+        api = new AWS.Model.Api({
+          shapes: {
+            S2: {
+              'type': 'blob',
+              'sensitive': true
+            }
+          }
+        });
+        shape = AWS.Model.Shape.create({
+          members: {
+            body: {
+              shape: 'S2'
+            }
+          }
+        }, {
+          api: api
+        });
+        return expect(shape.members.body.isSensitive).to.eql(true);
+      });
       return it('inherits streaming trait', function() {
         var api, shape;
         api = new AWS.Model.Api({
@@ -101,28 +122,6 @@
             api: api
           });
           expect(shape.members.Date.timestampFormat).to.eql('iso8601');
-        });
-        it('will use api metadata timestampFormat if not found elsewhere', function() {
-          var api = new AWS.Model.Api({
-            metadata: {
-              timestampFormat: 'unixTimestamp'
-            },
-            shapes: {
-              S1: {
-                type: 'timestamp'
-              }
-            }
-          });
-          var shape = AWS.Model.Shape.create({
-            members: {
-              Date: {
-                shape: 'S1',
-              }
-            }
-          }, {
-            api: api
-          });
-          expect(shape.members.Date.timestampFormat).to.eql('unixTimestamp');
         });
         it('will default to unixTimestamp when if not specified and protocol is json', function() {
           var api = new AWS.Model.Api({

@@ -7,6 +7,7 @@
     "protocol":"json",
     "serviceAbbreviation":"Amazon EMR",
     "serviceFullName":"Amazon Elastic MapReduce",
+    "serviceId":"EMR",
     "signatureVersion":"v4",
     "targetPrefix":"ElasticMapReduce",
     "timestampFormat":"unixTimestamp",
@@ -51,7 +52,7 @@
       "errors":[
         {"shape":"InternalServerError"}
       ],
-      "documentation":"<p>AddJobFlowSteps adds new steps to a running cluster. A maximum of 256 steps are allowed in each job flow.</p> <p>If your cluster is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using SSH to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/ManagementGuide/AddMoreThan256Steps.html\">Add More than 256 Steps to a Cluster</a> in the <i>Amazon EMR Management Guide</i>.</p> <p>A step specifies the location of a JAR file stored either on the master node of the cluster or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step.</p> <p>Amazon EMR executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully.</p> <p>You can only add steps to a cluster that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.</p>"
+      "documentation":"<p>AddJobFlowSteps adds new steps to a running cluster. A maximum of 256 steps are allowed in each job flow.</p> <p>If your cluster is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using SSH to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see <a href=\"http://docs.aws.amazon.com/emr/latest/ManagementGuide/AddMoreThan256Steps.html\">Add More than 256 Steps to a Cluster</a> in the <i>Amazon EMR Management Guide</i>.</p> <p>A step specifies the location of a JAR file stored either on the master node of the cluster or in Amazon S3. Each step is performed by the main function of the main class of the JAR file. The main class can be specified either in the manifest of the JAR or by using the MainFunction parameter of the step.</p> <p>Amazon EMR executes each step in the order listed. For a step to be considered complete, the main function must exit with a zero exit code and all Hadoop jobs started while the step was running must have completed and run successfully.</p> <p>You can only add steps to a cluster that is in one of the following states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.</p>"
     },
     "AddTags":{
       "name":"AddTags",
@@ -65,7 +66,7 @@
         {"shape":"InternalServerException"},
         {"shape":"InvalidRequestException"}
       ],
-      "documentation":"<p>Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>. </p>"
+      "documentation":"<p>Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href=\"http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html\">Tag Clusters</a>. </p>"
     },
     "CancelSteps":{
       "name":"CancelSteps",
@@ -121,7 +122,7 @@
         {"shape":"InternalServerException"},
         {"shape":"InvalidRequestException"}
       ],
-      "documentation":"<p>Provides cluster-level details including status, hardware and software configuration, VPC settings, and so on. For information about the cluster steps, see <a>ListSteps</a>.</p>"
+      "documentation":"<p>Provides cluster-level details including status, hardware and software configuration, VPC settings, and so on. </p>"
     },
     "DescribeJobFlows":{
       "name":"DescribeJobFlows",
@@ -233,7 +234,7 @@
         {"shape":"InternalServerException"},
         {"shape":"InvalidRequestException"}
       ],
-      "documentation":"<p>Provides information about the cluster instances that Amazon EMR provisions on behalf of a user when it creates the cluster. For example, this operation indicates when the EC2 instances reach the Ready state, when instances become available to Amazon EMR to use for jobs, and the IP addresses for cluster instances, etc.</p>"
+      "documentation":"<p>Provides information for all active EC2 instances and EC2 instances terminated in the last 30 days, up to a maximum of 2,000. EC2 instances in any of the following states are considered active: AWAITING_FULFILLMENT, PROVISIONING, BOOTSTRAPPING, RUNNING.</p>"
     },
     "ListSecurityConfigurations":{
       "name":"ListSecurityConfigurations",
@@ -320,7 +321,7 @@
         {"shape":"InternalServerException"},
         {"shape":"InvalidRequestException"}
       ],
-      "documentation":"<p>Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>. </p> <p>The following example removes the stack tag with value Prod from a cluster:</p>"
+      "documentation":"<p>Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href=\"http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html\">Tag Clusters</a>. </p> <p>The following example removes the stack tag with value Prod from a cluster:</p>"
     },
     "RunJobFlow":{
       "name":"RunJobFlow",
@@ -333,7 +334,7 @@
       "errors":[
         {"shape":"InternalServerError"}
       ],
-      "documentation":"<p>RunJobFlow creates and starts running a new cluster (job flow). The cluster runs the steps specified. After the steps complete, the cluster stops and the HDFS partition is lost. To prevent loss of data, configure the last step of the job flow to store results in Amazon S3. If the <a>JobFlowInstancesConfig</a> <code>KeepJobFlowAliveWhenNoSteps</code> parameter is set to <code>TRUE</code>, the cluster transitions to the WAITING state rather than shutting down after the steps have completed. </p> <p>For additional protection, you can set the <a>JobFlowInstancesConfig</a> <code>TerminationProtected</code> parameter to <code>TRUE</code> to lock the cluster and prevent it from being terminated by API call, user intervention, or in the event of a job flow error.</p> <p>A maximum of 256 steps are allowed in each job flow.</p> <p>If your cluster is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/Management/Guide/AddMoreThan256Steps.html\">Add More than 256 Steps to a Cluster</a> in the <i>Amazon EMR Management Guide</i>.</p> <p>For long running clusters, we recommend that you periodically store your results.</p> <note> <p>The instance fleets configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. The RunJobFlow request can contain InstanceFleets parameters or InstanceGroups parameters, but not both.</p> </note>"
+      "documentation":"<p>RunJobFlow creates and starts running a new cluster (job flow). The cluster runs the steps specified. After the steps complete, the cluster stops and the HDFS partition is lost. To prevent loss of data, configure the last step of the job flow to store results in Amazon S3. If the <a>JobFlowInstancesConfig</a> <code>KeepJobFlowAliveWhenNoSteps</code> parameter is set to <code>TRUE</code>, the cluster transitions to the WAITING state rather than shutting down after the steps have completed. </p> <p>For additional protection, you can set the <a>JobFlowInstancesConfig</a> <code>TerminationProtected</code> parameter to <code>TRUE</code> to lock the cluster and prevent it from being terminated by API call, user intervention, or in the event of a job flow error.</p> <p>A maximum of 256 steps are allowed in each job flow.</p> <p>If your cluster is long-running (such as a Hive data warehouse) or complex, you may require more than 256 steps to process your data. You can bypass the 256-step limitation in various ways, including using the SSH shell to connect to the master node and submitting queries directly to the software running on the master node, such as Hive and Hadoop. For more information on how to do this, see <a href=\"http://docs.aws.amazon.com/emr/latest/ManagementGuide/AddMoreThan256Steps.html\">Add More than 256 Steps to a Cluster</a> in the <i>Amazon EMR Management Guide</i>.</p> <p>For long running clusters, we recommend that you periodically store your results.</p> <note> <p>The instance fleets configuration is available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions. The RunJobFlow request can contain InstanceFleets parameters or InstanceGroups parameters, but not both.</p> </note>"
     },
     "SetTerminationProtection":{
       "name":"SetTerminationProtection",
@@ -524,7 +525,7 @@
           "documentation":"<p>This option is for advanced users only. This is meta information about third-party applications that third-party vendors use for testing purposes.</p>"
         }
       },
-      "documentation":"<p>An application is any Amazon or third-party software that you can add to the cluster. This structure contains a list of strings that indicates the software to use with the cluster and accepts a user argument list. Amazon EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action argument. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/ManagementGuide/emr-mapr.html\">Using the MapR Distribution for Hadoop</a>. Currently supported values are:</p> <ul> <li> <p>\"mapr-m3\" - launch the cluster using MapR M3 Edition.</p> </li> <li> <p>\"mapr-m5\" - launch the cluster using MapR M5 Edition.</p> </li> <li> <p>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" - launch the cluster using MapR M3 or M5 Edition, respectively.</p> </li> </ul> <note> <p>In Amazon EMR releases 4.0 and greater, the only accepted parameter is the application name. To pass arguments to applications, you supply a configuration for each application.</p> </note>"
+      "documentation":"<p>An application is any Amazon or third-party software that you can add to the cluster. This structure contains a list of strings that indicates the software to use with the cluster and accepts a user argument list. Amazon EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action argument. For more information, see <a href=\"http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-mapr.html\">Using the MapR Distribution for Hadoop</a>. Currently supported values are:</p> <ul> <li> <p>\"mapr-m3\" - launch the cluster using MapR M3 Edition.</p> </li> <li> <p>\"mapr-m5\" - launch the cluster using MapR M5 Edition.</p> </li> <li> <p>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" - launch the cluster using MapR M3 or M5 Edition, respectively.</p> </li> </ul> <note> <p>In Amazon EMR releases 4.x and later, the only accepted parameter is the application name. To pass arguments to applications, you supply a configuration for each application.</p> </note>"
     },
     "ApplicationList":{
       "type":"list",
@@ -789,7 +790,7 @@
         },
         "ReleaseLabel":{
           "shape":"String",
-          "documentation":"<p>The release label for the Amazon EMR release. For Amazon EMR 3.x and 2.x AMIs, use amiVersion instead instead of ReleaseLabel.</p>"
+          "documentation":"<p>The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release version, for example, <code>emr-5.14.0</code>. For more information about Amazon EMR release versions and included application versions and features, see <a href=\"http://docs.aws.amazon.com/emr/latest/ReleaseGuide/\">http://docs.aws.amazon.com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR releases versions 4.x and later. Earlier versions use <code>AmiVersion</code>.</p>"
         },
         "AutoTerminate":{
           "shape":"Boolean",
@@ -821,11 +822,11 @@
         },
         "MasterPublicDnsName":{
           "shape":"String",
-          "documentation":"<p>The public DNS name of the master EC2 instance.</p>"
+          "documentation":"<p>The DNS name of the master node. If the cluster is on a private subnet, this is the private DNS name. On a public subnet, this is the public DNS name.</p>"
         },
         "Configurations":{
           "shape":"ConfigurationList",
-          "documentation":"<note> <p>Amazon EMR releases 4.x or later.</p> </note> <p>The list of Configurations supplied to the EMR cluster.</p>"
+          "documentation":"<p>Applies only to Amazon EMR releases 4.x and later. The list of Configurations supplied to the EMR cluster.</p>"
         },
         "SecurityConfiguration":{
           "shape":"XmlString",
@@ -838,6 +839,22 @@
         "ScaleDownBehavior":{
           "shape":"ScaleDownBehavior",
           "documentation":"<p>The way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR blacklists and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> is available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.</p>"
+        },
+        "CustomAmiId":{
+          "shape":"XmlStringMaxLen256",
+          "documentation":"<p>Available only in Amazon EMR version 5.7.0 and later. The ID of a custom Amazon EBS-backed Linux AMI if the cluster uses a custom AMI.</p>"
+        },
+        "EbsRootVolumeSize":{
+          "shape":"Integer",
+          "documentation":"<p>The size, in GiB, of the EBS root device volume of the Linux AMI that is used for each EC2 instance. Available in Amazon EMR version 4.x and later.</p>"
+        },
+        "RepoUpgradeOnBoot":{
+          "shape":"RepoUpgradeOnBoot",
+          "documentation":"<p>Applies only when <code>CustomAmiID</code> is used. Specifies the type of updates that are applied from the Amazon Linux AMI package repositories when an instance boots using the AMI.</p>"
+        },
+        "KerberosAttributes":{
+          "shape":"KerberosAttributes",
+          "documentation":"<p>Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href=\"http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html\">Use Kerberos Authentication</a> in the <i>EMR Management Guide</i>.</p>"
         }
       },
       "documentation":"<p>The detailed description of the cluster.</p>"
@@ -875,6 +892,7 @@
         "INTERNAL_ERROR",
         "VALIDATION_ERROR",
         "INSTANCE_FAILURE",
+        "INSTANCE_FLEET_TIMEOUT",
         "BOOTSTRAP_FAILURE",
         "USER_REQUEST",
         "STEP_FAILURE",
@@ -1013,7 +1031,7 @@
         },
         "SecurityConfiguration":{
           "shape":"String",
-          "documentation":"<p>The security configuration details in JSON format.</p>"
+          "documentation":"<p>The security configuration details in JSON format. For JSON parameters and examples, see <a href=\"http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-security-configurations.html\">Use Security Configurations to Set Up Cluster Security</a> in the <i>Amazon EMR Management Guide</i>.</p>"
         }
       }
     },
@@ -1248,7 +1266,7 @@
         },
         "RequestedEc2SubnetIds":{
           "shape":"XmlStringMaxLen256List",
-          "documentation":"<p>Applies to clusters configured with the instance fleets option. Specifies the unique identifier of one or more Amazon EC2 subnets in which to launch EC2 cluster instances. Amazon EMR chooses the EC2 subnet with the best performance and cost characteristics from among the list of RequestedEc2SubnetIds and launches all cluster instances within that subnet. If this value is not specified, and the account supports EC2-Classic networks, the cluster launches instances in the EC2-Classic network and uses Requested</p>"
+          "documentation":"<p>Applies to clusters configured with the instance fleets option. Specifies the unique identifier of one or more Amazon EC2 subnets in which to launch EC2 cluster instances. Subnets must exist within the same VPC. Amazon EMR chooses the EC2 subnet with the best fit from among the list of <code>RequestedEc2SubnetIds</code>, and then launches all cluster instances within that Subnet. If this value is not specified, and the account and region support EC2-Classic networks, the cluster launches instances in the EC2-Classic network and uses <code>RequestedEc2AvailabilityZones</code> instead of this setting. If EC2-Classic is not supported, and no Subnet is specified, Amazon EMR chooses the subnet for you. <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot be specified together.</p>"
         },
         "Ec2AvailabilityZone":{
           "shape":"String",
@@ -1256,7 +1274,7 @@
         },
         "RequestedEc2AvailabilityZones":{
           "shape":"XmlStringMaxLen256List",
-          "documentation":"<p>Applies to clusters configured with the The list of availability zones to choose from. The service will choose the availability zone with the best mix of available capacity and lowest cost to launch the cluster. If you do not specify this value, the cluster is launched in any availability zone that the customer account has access to.</p>"
+          "documentation":"<p>Applies to clusters configured with the instance fleets option. Specifies one or more Availability Zones in which to launch EC2 cluster instances when the EC2-Classic network configuration is supported. Amazon EMR chooses the Availability Zone with the best fit from among the list of <code>RequestedEc2AvailabilityZones</code>, and then launches all cluster instances within that Availability Zone. If you do not specify this value, Amazon EMR chooses the Availability Zone for you. <code>RequestedEc2SubnetIDs</code> and <code>RequestedEc2AvailabilityZones</code> cannot be specified together.</p>"
         },
         "IamInstanceProfile":{
           "shape":"String",
@@ -1571,7 +1589,7 @@
       "members":{
         "State":{
           "shape":"InstanceFleetState",
-          "documentation":"<p>A code representing the instance fleet status.</p>"
+          "documentation":"<p>A code representing the instance fleet status.</p> <ul> <li> <p> <code>PROVISIONING</code>—The instance fleet is provisioning EC2 resources and is not yet ready to run jobs.</p> </li> <li> <p> <code>BOOTSTRAPPING</code>—EC2 instances and other resources have been provisioned and the bootstrap actions specified for the instances are underway.</p> </li> <li> <p> <code>RUNNING</code>—EC2 instances and other resources are running. They are either executing jobs or waiting to execute jobs.</p> </li> <li> <p> <code>RESIZING</code>—A resize operation is underway. EC2 instances are either being added or removed.</p> </li> <li> <p> <code>SUSPENDED</code>—A resize operation could not complete. Existing EC2 instances are running, but instances can't be added or removed.</p> </li> <li> <p> <code>TERMINATING</code>—The instance fleet is terminating EC2 instances.</p> </li> <li> <p> <code>TERMINATED</code>—The instance fleet is no longer active, and all EC2 instances have been terminated.</p> </li> </ul>"
         },
         "StateChangeReason":{
           "shape":"InstanceFleetStateChangeReason",
@@ -1631,7 +1649,7 @@
         },
         "BidPrice":{
           "shape":"String",
-          "documentation":"<p>The bid price for each EC2 instance in the instance group when launching nodes as Spot Instances, expressed in USD.</p>"
+          "documentation":"<p>The maximum Spot price your are willing to pay for EC2 instances.</p> <p>An optional, nullable field that applies if the <code>MarketType</code> for the instance group is specified as <code>SPOT</code>. Specify the maximum spot price in USD. If the value is NULL and <code>SPOT</code> is specified, the maximum Spot price is set equal to the On-Demand price.</p>"
         },
         "InstanceType":{
           "shape":"InstanceType",
@@ -1694,7 +1712,7 @@
         },
         "BidPrice":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<p>Bid price for each EC2 instance in the instance group when launching nodes as Spot Instances, expressed in USD.</p>"
+          "documentation":"<p>The maximum Spot price your are willing to pay for EC2 instances.</p> <p>An optional, nullable field that applies if the <code>MarketType</code> for the instance group is specified as <code>SPOT</code>. Specify the maximum spot price in USD. If the value is NULL and <code>SPOT</code> is specified, the maximum Spot price is set equal to the On-Demand price.</p>"
         },
         "InstanceType":{
           "shape":"InstanceType",
@@ -1753,7 +1771,7 @@
         },
         "BidPrice":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<p>Bid price for EC2 Instances when launching nodes as Spot Instances, expressed in USD.</p>"
+          "documentation":"<p>The maximum Spot price your are willing to pay for EC2 instances.</p> <p>An optional, nullable field that applies if the <code>MarketType</code> for the instance group is specified as <code>SPOT</code>. Specified in USD. If the value is NULL and <code>SPOT</code> is specified, the maximum Spot price is set equal to the On-Demand price.</p>"
         },
         "InstanceType":{
           "shape":"InstanceType",
@@ -2041,7 +2059,7 @@
         },
         "WeightedCapacity":{
           "shape":"WholeNumber",
-          "documentation":"<p>The number of units that a provisioned instance of this type provides toward fulfilling the target capacities defined in <a>InstanceFleetConfig</a>. This value is 1 for a master instance fleet, and must be greater than 0 for core and task instance fleets. </p>"
+          "documentation":"<p>The number of units that a provisioned instance of this type provides toward fulfilling the target capacities defined in <a>InstanceFleetConfig</a>. This value is 1 for a master instance fleet, and must be 1 or greater for core and task instance fleets. Defaults to 1 if not specified. </p>"
         },
         "BidPrice":{
           "shape":"XmlStringMaxLen256",
@@ -2049,7 +2067,7 @@
         },
         "BidPriceAsPercentageOfOnDemandPrice":{
           "shape":"NonNegativeDouble",
-          "documentation":"<p>The bid price, as a percentage of On-Demand price, for each EC2 Spot instance as defined by <code>InstanceType</code>. Expressed as a number between 0 and 1000 (for example, 20 specifies 20%). If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.</p>"
+          "documentation":"<p>The bid price, as a percentage of On-Demand price, for each EC2 Spot instance as defined by <code>InstanceType</code>. Expressed as a number (for example, 20 specifies 20%). If neither <code>BidPrice</code> nor <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided, <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.</p>"
         },
         "EbsConfiguration":{
           "shape":"EbsConfiguration",
@@ -2162,7 +2180,7 @@
         },
         "AmiVersion":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<p>The version of the AMI used to initialize Amazon EC2 instances in the job flow. For a list of AMI versions currently supported by Amazon EMR, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported\">AMI Versions Supported in EMR</a> in the <i>Amazon EMR Developer Guide.</i> </p>"
+          "documentation":"<p>Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR releases 4.0 and later, <code>ReleaseLabel</code> is used. To specify a custom AMI, use <code>CustomAmiID</code>.</p>"
         },
         "ExecutionStatusDetail":{
           "shape":"JobFlowExecutionStatusDetail",
@@ -2304,7 +2322,7 @@
         },
         "HadoopVersion":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<p>The Hadoop version for the cluster. Valid inputs are \"0.18\" (deprecated), \"0.20\" (deprecated), \"0.20.205\" (deprecated), \"1.0.3\", \"2.2.0\", or \"2.4.0\". If you do not set this value, the default of 0.18 is used, unless the AmiVersion parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.</p>"
+          "documentation":"<p>Applies only to Amazon EMR release versions earlier than 4.0. The Hadoop version for the cluster. Valid inputs are \"0.18\" (deprecated), \"0.20\" (deprecated), \"0.20.205\" (deprecated), \"1.0.3\", \"2.2.0\", or \"2.4.0\". If you do not set this value, the default of 0.18 is used, unless the <code>AmiVersion</code> parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.</p>"
         },
         "Ec2SubnetId":{
           "shape":"XmlStringMaxLen256",
@@ -2351,7 +2369,7 @@
         },
         "MasterPublicDnsName":{
           "shape":"XmlString",
-          "documentation":"<p>The DNS name of the master node.</p>"
+          "documentation":"<p>The DNS name of the master node. If the cluster is on a private subnet, this is the private DNS name. On a public subnet, this is the public DNS name.</p>"
         },
         "MasterInstanceId":{
           "shape":"XmlString",
@@ -2399,6 +2417,36 @@
         }
       },
       "documentation":"<p>Specify the type of Amazon EC2 instances that the cluster (job flow) runs on.</p>"
+    },
+    "KerberosAttributes":{
+      "type":"structure",
+      "required":[
+        "Realm",
+        "KdcAdminPassword"
+      ],
+      "members":{
+        "Realm":{
+          "shape":"XmlStringMaxLen256",
+          "documentation":"<p>The name of the Kerberos realm to which all nodes in a cluster belong. For example, <code>EC2.INTERNAL</code>. </p>"
+        },
+        "KdcAdminPassword":{
+          "shape":"XmlStringMaxLen256",
+          "documentation":"<p>The password used within the cluster for the kadmin service on the cluster-dedicated KDC, which maintains Kerberos principals, password policies, and keytabs for the cluster.</p>"
+        },
+        "CrossRealmTrustPrincipalPassword":{
+          "shape":"XmlStringMaxLen256",
+          "documentation":"<p>Required only when establishing a cross-realm trust with a KDC in a different realm. The cross-realm principal password, which must be identical across realms.</p>"
+        },
+        "ADDomainJoinUser":{
+          "shape":"XmlStringMaxLen256",
+          "documentation":"<p>Required only when establishing a cross-realm trust with an Active Directory domain. A user with sufficient privileges to join resources to the domain.</p>"
+        },
+        "ADDomainJoinPassword":{
+          "shape":"XmlStringMaxLen256",
+          "documentation":"<p>The Active Directory password for <code>ADDomainJoinUser</code>.</p>"
+        }
+      },
+      "documentation":"<p>Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href=\"http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html\">Use Kerberos Authentication</a> in the <i>EMR Management Guide</i>.</p>"
     },
     "KeyValue":{
       "type":"structure",
@@ -2811,6 +2859,13 @@
       },
       "documentation":"<p>This output indicates the result of removing tags from a resource.</p>"
     },
+    "RepoUpgradeOnBoot":{
+      "type":"string",
+      "enum":[
+        "SECURITY",
+        "NONE"
+      ]
+    },
     "ResourceId":{"type":"string"},
     "RunJobFlowInput":{
       "type":"structure",
@@ -2833,11 +2888,11 @@
         },
         "AmiVersion":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<note> <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use ReleaseLabel.</p> </note> <p>The version of the Amazon Machine Image (AMI) to use when launching Amazon EC2 instances in the job flow. The following values are valid:</p> <ul> <li> <p>The version number of the AMI to use, for example, \"2.0.\"</p> </li> </ul> <p>If the AMI supports multiple versions of Hadoop (for example, AMI 1.0 supports both Hadoop 0.18 and 0.20) you can use the <a>JobFlowInstancesConfig</a> <code>HadoopVersion</code> parameter to modify the version of Hadoop from the defaults shown above.</p> <p>For details about the AMI versions currently supported by Amazon Elastic MapReduce, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/EnvironmentConfig_AMIVersion.html#ami-versions-supported\">AMI Versions Supported in Elastic MapReduce</a> in the <i>Amazon Elastic MapReduce Developer Guide.</i> </p> <note> <p>Previously, the EMR AMI version API parameter options allowed you to use latest for the latest AMI version rather than specify a numerical value. Some regions no longer support this deprecated option as they only have a newer release label version of EMR, which requires you to specify an EMR release label release (EMR 4.x or later).</p> </note>"
+          "documentation":"<p>Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR releases 4.0 and later, <code>ReleaseLabel</code> is used. To specify a custom AMI, use <code>CustomAmiID</code>.</p>"
         },
         "ReleaseLabel":{
           "shape":"XmlStringMaxLen256",
-          "documentation":"<note> <p>Amazon EMR releases 4.x or later.</p> </note> <p>The release label for the Amazon EMR release. For Amazon EMR 3.x and 2.x AMIs, use amiVersion instead instead of ReleaseLabel.</p>"
+          "documentation":"<p>The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form <code>emr-x.x.x</code>, where x.x.x is an Amazon EMR release version, for example, <code>emr-5.14.0</code>. For more information about Amazon EMR release versions and included application versions and features, see <a href=\"http://docs.aws.amazon.com/emr/latest/ReleaseGuide/\">http://docs.aws.amazon.com/emr/latest/ReleaseGuide/</a>. The release label applies only to Amazon EMR releases versions 4.x and later. Earlier versions use <code>AmiVersion</code>.</p>"
         },
         "Instances":{
           "shape":"JobFlowInstancesConfig",
@@ -2853,19 +2908,19 @@
         },
         "SupportedProducts":{
           "shape":"SupportedProductsList",
-          "documentation":"<note> <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use Applications.</p> </note> <p>A list of strings that indicates third-party software to use. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-supported-products.html\">Use Third Party Applications with Amazon EMR</a>. Currently supported values are:</p> <ul> <li> <p>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</p> </li> <li> <p>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</p> </li> </ul>"
+          "documentation":"<note> <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use Applications.</p> </note> <p>A list of strings that indicates third-party software to use. For more information, see the <a href=\"http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf\">Amazon EMR Developer Guide</a>. Currently supported values are:</p> <ul> <li> <p>\"mapr-m3\" - launch the job flow using MapR M3 Edition.</p> </li> <li> <p>\"mapr-m5\" - launch the job flow using MapR M5 Edition.</p> </li> </ul>"
         },
         "NewSupportedProducts":{
           "shape":"NewSupportedProductsList",
-          "documentation":"<note> <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and greater, use Applications.</p> </note> <p>A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action arguments. For more information, see \"Launch a Job Flow on the MapR Distribution for Hadoop\" in the <a href=\"http://docs.aws.amazon.com/http:/docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf\">Amazon EMR Developer Guide</a>. Supported values are:</p> <ul> <li> <p>\"mapr-m3\" - launch the cluster using MapR M3 Edition.</p> </li> <li> <p>\"mapr-m5\" - launch the cluster using MapR M5 Edition.</p> </li> <li> <p>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition respectively.</p> </li> <li> <p>\"mapr-m7\" - launch the cluster using MapR M7 Edition.</p> </li> <li> <p>\"hunk\" - launch the cluster with the Hunk Big Data Analtics Platform.</p> </li> <li> <p>\"hue\"- launch the cluster with Hue installed.</p> </li> <li> <p>\"spark\" - launch the cluster with Apache Spark installed.</p> </li> <li> <p>\"ganglia\" - launch the cluster with the Ganglia Monitoring System installed.</p> </li> </ul>"
+          "documentation":"<note> <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use Applications.</p> </note> <p>A list of strings that indicates third-party software to use with the job flow that accepts a user argument list. EMR accepts and forwards the argument list to the corresponding installation script as bootstrap action arguments. For more information, see \"Launch a Job Flow on the MapR Distribution for Hadoop\" in the <a href=\"http://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf\">Amazon EMR Developer Guide</a>. Supported values are:</p> <ul> <li> <p>\"mapr-m3\" - launch the cluster using MapR M3 Edition.</p> </li> <li> <p>\"mapr-m5\" - launch the cluster using MapR M5 Edition.</p> </li> <li> <p>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition respectively.</p> </li> <li> <p>\"mapr-m7\" - launch the cluster using MapR M7 Edition.</p> </li> <li> <p>\"hunk\" - launch the cluster with the Hunk Big Data Analtics Platform.</p> </li> <li> <p>\"hue\"- launch the cluster with Hue installed.</p> </li> <li> <p>\"spark\" - launch the cluster with Apache Spark installed.</p> </li> <li> <p>\"ganglia\" - launch the cluster with the Ganglia Monitoring System installed.</p> </li> </ul>"
         },
         "Applications":{
           "shape":"ApplicationList",
-          "documentation":"<note> <p>Amazon EMR releases 4.x or later.</p> </note> <p>A list of applications for the cluster. Valid values are: \"Hadoop\", \"Hive\", \"Mahout\", \"Pig\", and \"Spark.\" They are case insensitive.</p>"
+          "documentation":"<p>For Amazon EMR releases 4.0 and later. A list of applications for the cluster. Valid values are: \"Hadoop\", \"Hive\", \"Mahout\", \"Pig\", and \"Spark.\" They are case insensitive.</p>"
         },
         "Configurations":{
           "shape":"ConfigurationList",
-          "documentation":"<note> <p>Amazon EMR releases 4.x or later.</p> </note> <p>The list of configurations supplied for the EMR cluster you are creating.</p>"
+          "documentation":"<p>For Amazon EMR releases 4.0 and later. The list of configurations supplied for the EMR cluster you are creating.</p>"
         },
         "VisibleToAllUsers":{
           "shape":"Boolean",
@@ -2894,6 +2949,22 @@
         "ScaleDownBehavior":{
           "shape":"ScaleDownBehavior",
           "documentation":"<p>Specifies the way that individual Amazon EC2 instances terminate when an automatic scale-in activity occurs or an instance group is resized. <code>TERMINATE_AT_INSTANCE_HOUR</code> indicates that Amazon EMR terminates nodes at the instance-hour boundary, regardless of when the request to terminate the instance was submitted. This option is only available with Amazon EMR 5.1.0 and later and is the default for clusters created using that version. <code>TERMINATE_AT_TASK_COMPLETION</code> indicates that Amazon EMR blacklists and drains tasks from nodes before terminating the Amazon EC2 instances, regardless of the instance-hour boundary. With either behavior, Amazon EMR removes the least active nodes first and blocks instance termination if it could lead to HDFS corruption. <code>TERMINATE_AT_TASK_COMPLETION</code> available only in Amazon EMR version 4.1.0 and later, and is the default for versions of Amazon EMR earlier than 5.1.0.</p>"
+        },
+        "CustomAmiId":{
+          "shape":"XmlStringMaxLen256",
+          "documentation":"<p>Available only in Amazon EMR version 5.7.0 and later. The ID of a custom Amazon EBS-backed Linux AMI. If specified, Amazon EMR uses this AMI when it launches cluster EC2 instances. For more information about custom AMIs in Amazon EMR, see <a href=\"http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-custom-ami.html\">Using a Custom AMI</a> in the <i>Amazon EMR Management Guide</i>. If omitted, the cluster uses the base Linux AMI for the <code>ReleaseLabel</code> specified. For Amazon EMR versions 2.x and 3.x, use <code>AmiVersion</code> instead.</p> <p>For information about creating a custom AMI, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html\">Creating an Amazon EBS-Backed Linux AMI</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>. For information about finding an AMI ID, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/finding-an-ami.html\">Finding a Linux AMI</a>. </p>"
+        },
+        "EbsRootVolumeSize":{
+          "shape":"Integer",
+          "documentation":"<p>The size, in GiB, of the EBS root device volume of the Linux AMI that is used for each EC2 instance. Available in Amazon EMR version 4.x and later.</p>"
+        },
+        "RepoUpgradeOnBoot":{
+          "shape":"RepoUpgradeOnBoot",
+          "documentation":"<p>Applies only when <code>CustomAmiID</code> is used. Specifies which updates from the Amazon Linux AMI package repositories to apply automatically when the instance boots using the AMI. If omitted, the default is <code>SECURITY</code>, which indicates that only security updates are applied. If <code>NONE</code> is specified, no updates are applied, and all updates must be applied manually.</p>"
+        },
+        "KerberosAttributes":{
+          "shape":"KerberosAttributes",
+          "documentation":"<p>Attributes for Kerberos configuration when Kerberos authentication is enabled using a security configuration. For more information see <a href=\"http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-kerberos.html\">Use Kerberos Authentication</a> in the <i>EMR Management Guide</i>.</p>"
         }
       },
       "documentation":"<p> Input to the <a>RunJobFlow</a> operation. </p>"
@@ -3083,11 +3154,11 @@
       "members":{
         "AdjustmentType":{
           "shape":"AdjustmentType",
-          "documentation":"<p>The way in which EC2 instances are added (if <code>ScalingAdjustment</code> is a positive number) or terminated (if <code>ScalingAdjustment</code> is a negative number) each time the scaling activity is triggered. <code>CHANGE_IN_CAPACITY</code> is the default. <code>CHANGE_IN_CAPACITY</code> indicates that the EC2 instance count increments or decrements by <code>ScalingAdjustment</code>, which should be expressed as an integer. <code>PERCENT_CHANGE_IN_CAPACITY</code> indicates the instance count increments or decrements by the percentage specified by <code>ScalingAdjustment</code>, which should be expressed as a decimal. For example, 0.20 indicates an increase in 20% increments of cluster capacity. <code>EXACT_CAPACITY</code> indicates the scaling activity results in an instance group with the number of EC2 instances specified by <code>ScalingAdjustment</code>, which should be expressed as a positive integer.</p>"
+          "documentation":"<p>The way in which EC2 instances are added (if <code>ScalingAdjustment</code> is a positive number) or terminated (if <code>ScalingAdjustment</code> is a negative number) each time the scaling activity is triggered. <code>CHANGE_IN_CAPACITY</code> is the default. <code>CHANGE_IN_CAPACITY</code> indicates that the EC2 instance count increments or decrements by <code>ScalingAdjustment</code>, which should be expressed as an integer. <code>PERCENT_CHANGE_IN_CAPACITY</code> indicates the instance count increments or decrements by the percentage specified by <code>ScalingAdjustment</code>, which should be expressed as an integer. For example, 20 indicates an increase in 20% increments of cluster capacity. <code>EXACT_CAPACITY</code> indicates the scaling activity results in an instance group with the number of EC2 instances specified by <code>ScalingAdjustment</code>, which should be expressed as a positive integer.</p>"
         },
         "ScalingAdjustment":{
           "shape":"Integer",
-          "documentation":"<p>The amount by which to scale in or scale out, based on the specified <code>AdjustmentType</code>. A positive value adds to the instance group's EC2 instance count while a negative number removes instances. If <code>AdjustmentType</code> is set to <code>EXACT_CAPACITY</code>, the number should only be a positive integer. If <code>AdjustmentType</code> is set to <code>PERCENT_CHANGE_IN_CAPACITY</code>, the value should express the percentage as a decimal. For example, -0.20 indicates a decrease in 20% increments of cluster capacity.</p>"
+          "documentation":"<p>The amount by which to scale in or scale out, based on the specified <code>AdjustmentType</code>. A positive value adds to the instance group's EC2 instance count while a negative number removes instances. If <code>AdjustmentType</code> is set to <code>EXACT_CAPACITY</code>, the number should only be a positive integer. If <code>AdjustmentType</code> is set to <code>PERCENT_CHANGE_IN_CAPACITY</code>, the value should express the percentage as an integer. For example, -20 indicates a decrease in 20% increments of cluster capacity.</p>"
         },
         "CoolDown":{
           "shape":"Integer",
@@ -3109,7 +3180,7 @@
         },
         "TimeoutAction":{
           "shape":"SpotProvisioningTimeoutAction",
-          "documentation":"<p>The action to take when <code>TargetSpotCapacity</code> has not been fulfilled when the <code>TimeoutDurationMinutes</code> has expired. Spot instances are not uprovisioned within the Spot provisioining timeout. Valid values are <code>TERMINATE_CLUSTER</code> and <code>SWITCH_TO_ON_DEMAND</code> to fulfill the remaining capacity.</p>"
+          "documentation":"<p>The action to take when <code>TargetSpotCapacity</code> has not been fulfilled when the <code>TimeoutDurationMinutes</code> has expired. Spot instances are not uprovisioned within the Spot provisioining timeout. Valid values are <code>TERMINATE_CLUSTER</code> and <code>SWITCH_TO_ON_DEMAND</code>. SWITCH_TO_ON_DEMAND specifies that if no Spot instances are available, On-Demand Instances should be provisioned to fulfill any remaining Spot capacity.</p>"
         },
         "BlockDurationMinutes":{
           "shape":"WholeNumber",
@@ -3393,14 +3464,14 @@
       "members":{
         "Key":{
           "shape":"String",
-          "documentation":"<p>A user-defined key, which is the minimum required information for a valid tag. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>. </p>"
+          "documentation":"<p>A user-defined key, which is the minimum required information for a valid tag. For more information, see <a href=\"http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html\">Tag </a>. </p>"
         },
         "Value":{
           "shape":"String",
-          "documentation":"<p>A user-defined value, which is optional in a tag. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>. </p>"
+          "documentation":"<p>A user-defined value, which is optional in a tag. For more information, see <a href=\"http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html\">Tag Clusters</a>. </p>"
         }
       },
-      "documentation":"<p>A key/value pair containing user-defined metadata that you can associate with an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href=\"http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-plan-tags.html\">Tagging Amazon EMR Resources</a>. </p>"
+      "documentation":"<p>A key/value pair containing user-defined metadata that you can associate with an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href=\"http://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html\">Tag Clusters</a>. </p>"
     },
     "TagList":{
       "type":"list",

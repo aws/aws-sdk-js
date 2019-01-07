@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "ApplicationAutoScaling",
+        "description": "Application Auto Scaling is adding support for Target Tracking Scaling for ECS services."
+    },
+    {
+        "type": "feature",
+        "category": "AutoScalingPlans",
+        "description": "AWS Auto Scaling enables you to quickly discover all of the scalable resources underlying your application and set up application scaling in minutes using built-in scaling recommendations."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "With this release you can now integrate RDS DB instances with CloudWatch Logs. We have added parameters to the operations for creating and modifying DB instances (for example CreateDBInstance) to allow you to take advantage of this capability through the CLI and API. Once you enable this feature, a stream of log events will publish to CloudWatch Logs for each log type you enable."
+    }
+]

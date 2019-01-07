@@ -276,6 +276,10 @@ declare namespace Athena {
   }
   export interface GetQueryResultsOutput {
     /**
+     * The number of rows inserted with a CREATE TABLE AS SELECT statement. 
+     */
+    UpdateCount?: Long;
+    /**
      * The results of the query execution.
      */
     ResultSet?: ResultSet;
@@ -366,6 +370,10 @@ declare namespace Athena {
      */
     Query?: QueryString;
     /**
+     * The type of query statement that was run. DDL indicates DDL query statements. DML indicates DML (Data Manipulation Language) query statements, such as CREATE TABLE AS SELECT. UTILITY indicates query statements other than DDL and DML, such as SHOW CREATE TABLE, or DESCRIBE &lt;table&gt;.
+     */
+    StatementType?: StatementType;
+    /**
      * The location in Amazon S3 where query results were stored and the encryption option, if any, used for query results.
      */
     ResultConfiguration?: ResultConfiguration;
@@ -378,7 +386,7 @@ declare namespace Athena {
      */
     Status?: QueryExecutionStatus;
     /**
-     * The amount of data scanned during the query execution and the amount of time that it took to execute.
+     * The amount of data scanned during the query execution and the amount of time that it took to execute, and the type of statement that was run.
      */
     Statistics?: QueryExecutionStatistics;
   }
@@ -404,7 +412,7 @@ declare namespace Athena {
   }
   export interface QueryExecutionStatus {
     /**
-     * The state of query execution. SUBMITTED indicates that the query is queued for execution. RUNNING indicates that the query is scanning data and returning results. SUCCEEDED indicates that the query completed without error. FAILED indicates that the query experienced an error and did not complete processing. CANCELLED indicates that user input interrupted query execution.
+     * The state of query execution. QUEUED state is listed but is not used by Athena and is reserved for future use. RUNNING indicates that the query has been submitted to the service, and Athena will execute the query as soon as resources are available. SUCCEEDED indicates that the query completed without error. FAILED indicates that the query experienced an error and did not complete processing.CANCELLED indicates that user input interrupted query execution. 
      */
     State?: QueryExecutionState;
     /**
@@ -423,11 +431,11 @@ declare namespace Athena {
   export type QueryString = string;
   export interface ResultConfiguration {
     /**
-     * The location in S3 where query results are stored.
+     * The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. For more information, see Queries and Query Result Files.  
      */
     OutputLocation: String;
     /**
-     * If query results are encrypted in S3, indicates the S3 encryption option used (for example, SSE-KMS or CSE-KMS and key information.
+     * If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information.
      */
     EncryptionConfiguration?: EncryptionConfiguration;
   }
@@ -443,7 +451,7 @@ declare namespace Athena {
   }
   export interface ResultSetMetadata {
     /**
-     * Information about the columns in a query execution result.
+     * Information about the columns returned in a query result metadata.
      */
     ColumnInfo?: ColumnInfoList;
   }
@@ -478,6 +486,7 @@ declare namespace Athena {
      */
     QueryExecutionId?: QueryExecutionId;
   }
+  export type StatementType = "DDL"|"DML"|"UTILITY"|string;
   export interface StopQueryExecutionInput {
     /**
      * The unique ID of the query execution to stop.
@@ -487,7 +496,6 @@ declare namespace Athena {
   export interface StopQueryExecutionOutput {
   }
   export type String = string;
-  export type ThrottleReason = "CONCURRENT_QUERY_LIMIT_EXCEEDED"|string;
   export type Token = string;
   export interface UnprocessedNamedQueryId {
     /**

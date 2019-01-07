@@ -56,6 +56,7 @@
             'X-Amz-Content-Sha256': 'fcde2b2edba56bf408601fb721fe9b5c338d10ee429ea04fae5511b68fbf8fb9',
             'x-amz-sha256-tree-hash': 'fcde2b2edba56bf408601fb721fe9b5c338d10ee429ea04fae5511b68fbf8fb9',
             'Content-Length': 3,
+            'Content-Type': 'binary/octet-stream',
             Host: 'glacier.mock-region.amazonaws.com'
           };
           headers[agentHeader] = AWS.util.userAgent();

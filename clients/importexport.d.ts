@@ -94,7 +94,6 @@ declare namespace ImportExport {
   export type CurrentManifest = string;
   export type Description = string;
   export type ErrorCount = number;
-  export type ErrorMessage = string;
   export type GenericString = string;
   export interface GetShippingLabelInput {
     jobIds: JobIdList;

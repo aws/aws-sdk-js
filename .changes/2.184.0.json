@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "CreateTrainingJob and CreateEndpointConfig now supports KMS Key for volume encryption. "
+    }
+]

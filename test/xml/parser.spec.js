@@ -108,7 +108,8 @@
           });
         });
       });
-      return it('parses attributes from tags', function() {
+
+      it('parses attributes from tags', function() {
         var rules, xml;
         xml = '<xml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"> <Item xsi:name="name"></Item></xml>';
         rules = {
@@ -130,6 +131,42 @@
           return expect(data).to.eql({
             Item: {
               Name: 'name'
+            }
+          });
+        });
+      });
+
+      it('resolves nested duplicate fields by choosing direct children', function() {
+        var xml = '<xml><Item><Nested><Enabled>false</Enabled></Nested><Enabled>true</Enabled></Item></xml>';
+        var rules = {
+          type: 'structure',
+          members: {
+            Item: {
+              type: 'structure',
+              members: {
+                Enabled: {
+                  type: 'boolean'
+                },
+                Nested: {
+                  type: 'structure',
+                  members: {
+                    Enabled: {
+                      type: 'boolean'
+                    }
+                  }
+                }
+              }
+            }
+          }
+        };
+
+        parse(xml, rules, function(data) {
+          expect(data).to.eql({
+            Item: {
+              Enabled: true,
+              Nested: {
+                Enabled: false
+              }
             }
           });
         });
@@ -411,6 +448,55 @@
             });
           });
         });
+
+        it('resolves nested duplicate fields by choosing direct children', function() {
+          var xml = '';
+          xml += '<xml>';
+          xml +=   '<FooMap>';
+          xml +=     '<entry>';
+          xml +=       '<value>';
+          xml +=         '<Nested>';
+          xml +=           '<key>Foo</key>';
+          xml +=         '</Nested>';
+          xml +=       '</value>';
+          xml +=       '<key>Count</key>';
+          xml +=     '</entry>';
+          xml +=   '</FooMap>';
+          xml += '</xml>';
+
+          var rules = {
+            type: 'structure',
+            members: {
+              FooMap: {
+                type: 'map',
+                value: {
+                  type: 'structure',
+                  members: {
+                    Nested: {
+                      type: 'structure',
+                      members: {
+                        key: {}
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          };
+
+          parse(xml, rules, function(data) {
+            expect(data).to.eql({
+              FooMap: {
+                Count: {
+                  Nested: {
+                    key: 'Foo'
+                  }
+                }
+              }
+            });
+          });
+        });
+
         it('expects entry, key, and value elements by default', function() {
           var rules, xml;
           xml = "<xml>\n  <SummaryMap>\n    <entry>\n      <key>Groups</key>\n      <value>31</value>\n    </entry>\n    <entry>\n      <key>GroupsQuota</key>\n      <value>50</value>\n    </entry>\n    <entry>\n      <key>UsersQuota</key>\n      <value>150</value>\n    </entry>\n  </SummaryMap>\n</xml>";
@@ -807,7 +893,7 @@
         });
       });
     });
-    return describe('parsing errors', function() {
+    describe('parsing errors', function() {
       it('throws an error when unable to parse the xml', function() {
         var e, error, rules, xml;
         xml = 'asdf';
@@ -846,6 +932,48 @@
           error = e;
         }
         return expect(error.retryable).to.be["true"];
+      });
+    });
+
+    describe('response metadata', function() {
+      it('resolves nested duplicate fields by choosing direct children', function() {
+        var xml = '';
+        xml += '<xml>';
+        xml +=   '<Item>';
+        xml +=     '<ResponseMetadata><Foo>foo</Foo></ResponseMetadata>';
+        xml +=   '</Item>';
+        xml +=   '<ResponseMetadata><RequestId>request-id</RequestId></ResponseMetadata>';
+        xml += '</xml>';
+
+        var rules = {
+          type: 'structure',
+          members: {
+            Item: {
+              type: 'structure',
+              members: {
+                ResponseMetadata: {
+                  type: 'structure',
+                  members: {
+                    Foo: {}
+                  }
+                }
+              }
+            }
+          }
+        };
+
+        parse(xml, rules, function(data) {
+          expect(data).to.eql({
+            Item: {
+              ResponseMetadata: {
+                Foo: 'foo'
+              }
+            },
+            ResponseMetadata: {
+              RequestId: 'request-id'
+            }
+          });
+        });
       });
     });
   });

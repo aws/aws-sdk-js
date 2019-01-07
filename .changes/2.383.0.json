@@ -1,0 +1,22 @@
+[
+    {
+        "type": "bugfix",
+        "category": "credentials",
+        "description": "Make CredentialProviderChain coalesce resolvation synchronous"
+    },
+    {
+        "type": "bugfix",
+        "category": "typings",
+        "description": "update Attribute value to any for transaction operations input and output"
+    },
+    {
+        "type": "feature",
+        "category": "IoTAnalytics",
+        "description": "ListDatasetContents now has a filter to limit results by date scheduled."
+    },
+    {
+        "type": "feature",
+        "category": "MediaStoreData",
+        "description": "enable cors to make MediaStoreData available in default browser build"
+    }
+]

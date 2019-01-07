@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "AppStream",
+        "description": "This API update is to enable customers to add tags to their Amazon AppStream 2.0 resources"
+    }
+]

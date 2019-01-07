@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "DeviceFarm",
+        "description": "\"This release provides support for running Appium Node.js and Appium Ruby tests on AWS Device Farm."
+    }
+]

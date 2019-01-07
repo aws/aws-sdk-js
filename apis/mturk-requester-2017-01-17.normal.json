@@ -7,6 +7,7 @@
     "protocol":"json",
     "serviceAbbreviation":"Amazon MTurk",
     "serviceFullName":"Amazon Mechanical Turk",
+    "serviceId":"MTurk",
     "signatureVersion":"v4",
     "targetPrefix":"MTurkRequesterServiceV20170117",
     "uid":"mturk-requester-2017-01-17"
@@ -241,7 +242,7 @@
         {"shape":"ServiceFault"},
         {"shape":"RequestError"}
       ],
-      "documentation":"<p> The <code>GetFileUploadURL</code> operation generates and returns a temporary URL. You use the temporary URL to retrieve a file uploaded by a Worker as an answer to a FileUploadAnswer question for a HIT. The temporary URL is generated the instant the GetFileUploadURL operation is called, and is valid for 60 seconds. You can get a temporary file upload URL any time until the HIT is disposed. After the HIT is disposed, any uploaded files are deleted, and cannot be retrieved. </p>",
+      "documentation":"<p> The <code>GetFileUploadURL</code> operation generates and returns a temporary URL. You use the temporary URL to retrieve a file uploaded by a Worker as an answer to a FileUploadAnswer question for a HIT. The temporary URL is generated the instant the GetFileUploadURL operation is called, and is valid for 60 seconds. You can get a temporary file upload URL any time until the HIT is disposed. After the HIT is disposed, any uploaded files are deleted, and cannot be retrieved. Pending Deprecation on December 12, 2017. The Answer Specification structure will no longer support the <code>FileUploadAnswer</code> element to be used for the QuestionForm data structure. Instead, we recommend that Requesters who want to create HITs asking Workers to upload files to use Amazon S3. </p>",
       "idempotent":true
     },
     "GetHIT":{
@@ -376,7 +377,7 @@
         {"shape":"ServiceFault"},
         {"shape":"RequestError"}
       ],
-      "documentation":"<p> The <code>ListQualificationRequests</code> operation retrieves requests for Qualifications of a particular Qualification type. The owner of the Qualification type calls this operation to poll for pending requests, and accepts them using the AcceptQualification operation. </p>",
+      "documentation":"<p> The <code>ListQualificationTypes</code> operation returns a list of Qualification types, filtered by an optional search term. </p>",
       "idempotent":true
     },
     "ListReviewPolicyResultsForHIT":{
@@ -735,7 +736,7 @@
           "shape":"CustomerId",
           "documentation":"<p>The ID of the Worker to whom the bonus was paid.</p>"
         },
-        "BonusAmount":{"shape":"NumericValue"},
+        "BonusAmount":{"shape":"CurrencyAmount"},
         "AssignmentId":{
           "shape":"EntityId",
           "documentation":"<p>The ID of the assignment associated with this bonus payment.</p>"
@@ -778,7 +779,10 @@
     },
     "CreateAdditionalAssignmentsForHITRequest":{
       "type":"structure",
-      "required":["HITId"],
+      "required":[
+        "HITId",
+        "NumberOfAdditionalAssignments"
+      ],
       "members":{
         "HITId":{
           "shape":"EntityId",
@@ -826,7 +830,7 @@
           "documentation":"<p> The amount of time, in seconds, that a Worker has to complete the HIT after accepting it. If a Worker does not complete the assignment within the specified duration, the assignment is considered abandoned. If the HIT is still active (that is, its lifetime has not elapsed), the assignment becomes available for other users to find and accept. </p>"
         },
         "Reward":{
-          "shape":"NumericValue",
+          "shape":"CurrencyAmount",
           "documentation":"<p> The amount of money the Requester will pay a Worker for successfully completing the HIT. </p>"
         },
         "Title":{
@@ -851,7 +855,7 @@
         },
         "QualificationRequirements":{
           "shape":"QualificationRequirementList",
-          "documentation":"<p> A condition that a Worker's Qualifications must meet before the Worker is allowed to accept and complete the HIT. </p>"
+          "documentation":"<p> Conditions that a Worker's Qualifications must meet in order to accept the HIT. A HIT can have between zero and ten Qualification requirements. All requirements must be met in order for a Worker to accept the HIT. Additionally, other actions can be restricted using the <code>ActionsGuarded</code> field on each <code>QualificationRequirement</code> structure. </p>"
         },
         "UniqueRequestToken":{
           "shape":"IdempotencyToken",
@@ -902,7 +906,7 @@
           "documentation":"<p> The amount of time, in seconds, that a Worker has to complete the HIT after accepting it. If a Worker does not complete the assignment within the specified duration, the assignment is considered abandoned. If the HIT is still active (that is, its lifetime has not elapsed), the assignment becomes available for other users to find and accept. </p>"
         },
         "Reward":{
-          "shape":"NumericValue",
+          "shape":"CurrencyAmount",
           "documentation":"<p> The amount of money the Requester will pay a Worker for successfully completing the HIT. </p>"
         },
         "Title":{
@@ -919,7 +923,7 @@
         },
         "QualificationRequirements":{
           "shape":"QualificationRequirementList",
-          "documentation":"<p> A condition that a Worker's Qualifications must meet before the Worker is allowed to accept and complete the HIT. </p>"
+          "documentation":"<p> Conditions that a Worker's Qualifications must meet in order to accept the HIT. A HIT can have between zero and ten Qualification requirements. All requirements must be met in order for a Worker to accept the HIT. Additionally, other actions can be restricted using the <code>ActionsGuarded</code> field on each <code>QualificationRequirement</code> structure. </p>"
         }
       }
     },
@@ -1071,6 +1075,11 @@
       "members":{
       }
     },
+    "CurrencyAmount":{
+      "type":"string",
+      "documentation":"<p>A string representing a currency amount.</p>",
+      "pattern":"^[0-9]+(\\.)?[0-9]{0,2}$"
+    },
     "CustomerId":{
       "type":"string",
       "max":64,
@@ -1192,8 +1201,8 @@
     "GetAccountBalanceResponse":{
       "type":"structure",
       "members":{
-        "AvailableBalance":{"shape":"NumericValue"},
-        "OnHoldBalance":{"shape":"NumericValue"}
+        "AvailableBalance":{"shape":"CurrencyAmount"},
+        "OnHoldBalance":{"shape":"CurrencyAmount"}
       }
     },
     "GetAssignmentRequest":{
@@ -1356,7 +1365,7 @@
           "shape":"Integer",
           "documentation":"<p>The number of times the HIT can be accepted and completed before the HIT becomes unavailable. </p>"
         },
-        "Reward":{"shape":"NumericValue"},
+        "Reward":{"shape":"CurrencyAmount"},
         "AutoApprovalDelayInSeconds":{
           "shape":"Long",
           "documentation":"<p>The amount of time, in seconds, after the Worker submits an assignment for the HIT that the results are automatically approved by Amazon Mechanical Turk. This is the amount of time the Requester has to reject an assignment submitted by a Worker before the assignment is auto-approved and the Worker is paid. </p>"
@@ -1375,7 +1384,7 @@
         },
         "QualificationRequirements":{
           "shape":"QualificationRequirementList",
-          "documentation":"<p> A condition that a Worker's Qualifications must meet in order to accept the HIT. A HIT can have between zero and ten Qualification requirements. All requirements must be met by a Worker's Qualifications for the Worker to accept the HIT.</p>"
+          "documentation":"<p> Conditions that a Worker's Qualifications must meet in order to accept the HIT. A HIT can have between zero and ten Qualification requirements. All requirements must be met in order for a Worker to accept the HIT. Additionally, other actions can be restricted using the <code>ActionsGuarded</code> field on each <code>QualificationRequirement</code> structure. </p>"
         },
         "HITReviewStatus":{
           "shape":"HITReviewStatus",
@@ -1396,8 +1405,20 @@
       },
       "documentation":"<p> The HIT data structure represents a single HIT, including all the information necessary for a Worker to accept and complete the HIT.</p>"
     },
+    "HITAccessActions":{
+      "type":"string",
+      "enum":[
+        "Accept",
+        "PreviewAndAccept",
+        "DiscoverPreviewAndAccept"
+      ]
+    },
     "HITLayoutParameter":{
       "type":"structure",
+      "required":[
+        "Name",
+        "Value"
+      ],
       "members":{
         "Name":{
           "shape":"String",
@@ -1808,16 +1829,18 @@
       "type":"structure",
       "required":[
         "Destination",
-        "Transport"
+        "Transport",
+        "Version",
+        "EventTypes"
       ],
       "members":{
         "Destination":{
           "shape":"String",
-          "documentation":"<p> The destination for notification messages. or email notifications (if Transport is Email), this is an email address. For Amazon Simple Queue Service (Amazon SQS) notifications (if Transport is SQS), this is the URL for your Amazon SQS queue. </p>"
+          "documentation":"<p> The target for notification messages. The Destination’s format is determined by the specified Transport: </p> <ul> <li> <p>When Transport is Email, the Destination is your email address.</p> </li> <li> <p>When Transport is SQS, the Destination is your queue URL.</p> </li> <li> <p>When Transport is SNS, the Destination is the ARN of your topic.</p> </li> </ul>"
         },
         "Transport":{
           "shape":"NotificationTransport",
-          "documentation":"<p> The method Amazon Mechanical Turk uses to send the notification. Valid Values: Email | SQS. </p>"
+          "documentation":"<p> The method Amazon Mechanical Turk uses to send the notification. Valid Values: Email | SQS | SNS. </p>"
         },
         "Version":{
           "shape":"String",
@@ -1834,7 +1857,8 @@
       "type":"string",
       "enum":[
         "Email",
-        "SQS"
+        "SQS",
+        "SNS"
       ]
     },
     "NotifyWorkersFailureCode":{
@@ -1896,11 +1920,6 @@
           "documentation":"<p> When MTurk sends notifications to the list of Workers, it returns back any failures it encounters in this list of NotifyWorkersFailureStatus objects. </p>"
         }
       }
-    },
-    "NumericValue":{
-      "type":"string",
-      "documentation":"<p>A string representing a numeric value.</p>",
-      "pattern":"^[0-9]+(\\.)?[0-9]*$"
     },
     "PaginationToken":{
       "type":"string",
@@ -2038,10 +2057,15 @@
         },
         "RequiredToPreview":{
           "shape":"Boolean",
-          "documentation":"<p> If true, the question data for the HIT will not be shown when a Worker whose Qualifications do not meet this requirement tries to preview the HIT. That is, a Worker's Qualifications must meet all of the requirements for which RequiredToPreview is true in order to preview the HIT. If a Worker meets all of the requirements where RequiredToPreview is true (or if there are no such requirements), but does not meet all of the requirements for the HIT, the Worker will be allowed to preview the HIT's question data, but will not be allowed to accept and complete the HIT. The default is false. </p>"
+          "documentation":"<p> DEPRECATED: Use the <code>ActionsGuarded</code> field instead. If RequiredToPreview is true, the question data for the HIT will not be shown when a Worker whose Qualifications do not meet this requirement tries to preview the HIT. That is, a Worker's Qualifications must meet all of the requirements for which RequiredToPreview is true in order to preview the HIT. If a Worker meets all of the requirements where RequiredToPreview is true (or if there are no such requirements), but does not meet all of the requirements for the HIT, the Worker will be allowed to preview the HIT's question data, but will not be allowed to accept and complete the HIT. The default is false. This should not be used in combination with the <code>ActionsGuarded</code> field. </p>",
+          "deprecated":true
+        },
+        "ActionsGuarded":{
+          "shape":"HITAccessActions",
+          "documentation":"<p> Setting this attribute prevents Workers whose Qualifications do not meet this QualificationRequirement from taking the specified action. Valid arguments include \"Accept\" (Worker cannot accept the HIT, but can preview the HIT and see it in their search results), \"PreviewAndAccept\" (Worker cannot accept or preview the HIT, but can see the HIT in their search results), and \"DiscoverPreviewAndAccept\" (Worker cannot accept, preview, or see the HIT in their search results). It's possible for you to create a HIT with multiple QualificationRequirements (which can have different values for the ActionGuarded attribute). In this case, the Worker is only permitted to perform an action when they have met all QualificationRequirements guarding the action. The actions in the order of least restrictive to most restrictive are Discover, Preview and Accept. For example, if a Worker meets all QualificationRequirements that are set to DiscoverPreviewAndAccept, but do not meet all requirements that are set with PreviewAndAccept, then the Worker will be able to Discover, i.e. see the HIT in their search result, but will not be able to Preview or Accept the HIT. ActionsGuarded should not be used in combination with the <code>RequiredToPreview</code> field. </p>"
         }
       },
-      "documentation":"<p> The QualificationRequirement data structure describes a Qualification that a Worker must have before the Worker is allowed to accept a HIT. A requirement may optionally state that a Worker must have the Qualification in order to preview the HIT. </p>"
+      "documentation":"<p> The QualificationRequirement data structure describes a Qualification that a Worker must have before the Worker is allowed to accept a HIT. A requirement may optionally state that a Worker must have the Qualification in order to preview the HIT, or see the HIT in search results. </p>"
     },
     "QualificationRequirementList":{
       "type":"list",
@@ -2125,7 +2149,10 @@
     },
     "RejectAssignmentRequest":{
       "type":"structure",
-      "required":["AssignmentId"],
+      "required":[
+        "AssignmentId",
+        "RequesterFeedback"
+      ],
       "members":{
         "AssignmentId":{
           "shape":"EntityId",
@@ -2228,6 +2255,7 @@
     },
     "ReviewPolicy":{
       "type":"structure",
+      "required":["PolicyName"],
       "members":{
         "PolicyName":{
           "shape":"String",
@@ -2311,7 +2339,8 @@
       "required":[
         "WorkerId",
         "BonusAmount",
-        "AssignmentId"
+        "AssignmentId",
+        "Reason"
       ],
       "members":{
         "WorkerId":{
@@ -2319,7 +2348,7 @@
           "documentation":"<p>The ID of the Worker being paid the bonus.</p>"
         },
         "BonusAmount":{
-          "shape":"NumericValue",
+          "shape":"CurrencyAmount",
           "documentation":"<p> The Bonus amount is a US Dollar amount specified using a string (for example, \"5\" represents $5.00 USD and \"101.42\" represents $101.42 USD). Do not include currency symbols or currency codes. </p>"
         },
         "AssignmentId":{
@@ -2382,7 +2411,10 @@
     "TurkErrorCode":{"type":"string"},
     "UpdateExpirationForHITRequest":{
       "type":"structure",
-      "required":["HITId"],
+      "required":[
+        "HITId",
+        "ExpireAt"
+      ],
       "members":{
         "HITId":{
           "shape":"EntityId",

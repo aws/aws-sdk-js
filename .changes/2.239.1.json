@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeBuild",
+        "description": "Adding support for more override fields for StartBuild API, add support for idempotency token field  for StartBuild API in AWS CodeBuild."
+    },
+    {
+        "type": "feature",
+        "category": "IoT1ClickDevicesService",
+        "description": "AWS IoT 1-Click makes it easy for customers to incorporate simple ready-to-use IoT devices into their workflows. These devices can trigger AWS Lambda functions that implement business logic. In order to build applications using AWS IoT 1-Click devices, programmers can use the AWS IoT 1-Click Devices API and the AWS IoT 1-Click Projects API. Learn more at https://aws.amazon.com/documentation/iot-1-click/"
+    },
+    {
+        "type": "feature",
+        "category": "IoT1ClickProjects",
+        "description": "AWS IoT 1-Click makes it easy for customers to incorporate simple ready-to-use IoT devices into their workflows. These devices can trigger AWS Lambda functions that implement business logic. In order to build applications using AWS IoT 1-Click devices, programmers can use the AWS IoT 1-Click Devices API and the AWS IoT 1-Click Projects API. Learn more at https://aws.amazon.com/documentation/iot-1-click/."
+    },
+    {
+        "type": "feature",
+        "category": "XML",
+        "description": "Replaces XMLBuilder dependency with a light-weight XML builder."
+    }
+]

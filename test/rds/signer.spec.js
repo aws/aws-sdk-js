@@ -2,18 +2,6 @@ var helpers = require('../helpers');
 var AWS = helpers.AWS;
  
 describe('AWS.RDS.Signer', function() {
-    var getDate = null;
-    beforeEach(function() {
-        getDate = AWS.util.date.getDate;
-        AWS.util.date.getDate = function() {
-            return new Date(0);
-        };
-    });
- 
-    afterEach(function() {
-        AWS.util.date.getDate = getDate;
-    })
- 
     describe('constructor', function() {
         it('can be instantiated without parameters', function() {
             var signer = new AWS.RDS.Signer();
@@ -39,6 +27,9 @@ describe('AWS.RDS.Signer', function() {
         };
         var requiredOptions = Object.keys(testOptions);
         var rdsSigner = new AWS.RDS.Signer();
+        beforeEach(function() {
+            helpers.spyOn(AWS.Service.prototype, 'getSkewCorrectedDate').andReturn(new Date(0));
+        });
         requiredOptions.forEach(function(field) {
             it('will error if ' + field + 'is not accessible', function() {
                 var options = AWS.util.copy(testOptions);

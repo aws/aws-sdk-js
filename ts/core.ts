@@ -11,6 +11,8 @@ if (core.CognitoIdentityCredentials) {
 
 } else if (core.EC2MetadataCredentials) {
 
+} else if (core.RemoteCredentials) {
+
 } else if (core.ECSCredentials) {
 
 } else if (core.Endpoint) {
@@ -33,4 +35,6 @@ if (core.CognitoIdentityCredentials) {
 
 } else if (core.SAMLCredentials) {
     
+} else if (core.IniLoader) {
+  
 }

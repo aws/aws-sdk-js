@@ -124,11 +124,11 @@ declare class SNS extends Service {
    */
   getTopicAttributes(callback?: (err: AWSError, data: SNS.Types.GetTopicAttributesResponse) => void): Request<SNS.Types.GetTopicAttributesResponse, AWSError>;
   /**
-   * Lists the endpoints and endpoint attributes for devices in a supported push notification service, such as GCM and APNS. The results for ListEndpointsByPlatformApplication are paginated and return a limited list of endpoints, up to 100. If additional records are available after the first page results, then a NextToken string will be returned. To receive the next page, you call ListEndpointsByPlatformApplication again using the NextToken string received from the previous call. When there are no more records to return, NextToken will be null. For more information, see Using Amazon SNS Mobile Push Notifications. 
+   * Lists the endpoints and endpoint attributes for devices in a supported push notification service, such as GCM and APNS. The results for ListEndpointsByPlatformApplication are paginated and return a limited list of endpoints, up to 100. If additional records are available after the first page results, then a NextToken string will be returned. To receive the next page, you call ListEndpointsByPlatformApplication again using the NextToken string received from the previous call. When there are no more records to return, NextToken will be null. For more information, see Using Amazon SNS Mobile Push Notifications.  This action is throttled at 30 transactions per second (TPS).
    */
   listEndpointsByPlatformApplication(params: SNS.Types.ListEndpointsByPlatformApplicationInput, callback?: (err: AWSError, data: SNS.Types.ListEndpointsByPlatformApplicationResponse) => void): Request<SNS.Types.ListEndpointsByPlatformApplicationResponse, AWSError>;
   /**
-   * Lists the endpoints and endpoint attributes for devices in a supported push notification service, such as GCM and APNS. The results for ListEndpointsByPlatformApplication are paginated and return a limited list of endpoints, up to 100. If additional records are available after the first page results, then a NextToken string will be returned. To receive the next page, you call ListEndpointsByPlatformApplication again using the NextToken string received from the previous call. When there are no more records to return, NextToken will be null. For more information, see Using Amazon SNS Mobile Push Notifications. 
+   * Lists the endpoints and endpoint attributes for devices in a supported push notification service, such as GCM and APNS. The results for ListEndpointsByPlatformApplication are paginated and return a limited list of endpoints, up to 100. If additional records are available after the first page results, then a NextToken string will be returned. To receive the next page, you call ListEndpointsByPlatformApplication again using the NextToken string received from the previous call. When there are no more records to return, NextToken will be null. For more information, see Using Amazon SNS Mobile Push Notifications.  This action is throttled at 30 transactions per second (TPS).
    */
   listEndpointsByPlatformApplication(callback?: (err: AWSError, data: SNS.Types.ListEndpointsByPlatformApplicationResponse) => void): Request<SNS.Types.ListEndpointsByPlatformApplicationResponse, AWSError>;
   /**
@@ -140,35 +140,35 @@ declare class SNS extends Service {
    */
   listPhoneNumbersOptedOut(callback?: (err: AWSError, data: SNS.Types.ListPhoneNumbersOptedOutResponse) => void): Request<SNS.Types.ListPhoneNumbersOptedOutResponse, AWSError>;
   /**
-   * Lists the platform application objects for the supported push notification services, such as APNS and GCM. The results for ListPlatformApplications are paginated and return a limited list of applications, up to 100. If additional records are available after the first page results, then a NextToken string will be returned. To receive the next page, you call ListPlatformApplications using the NextToken string received from the previous call. When there are no more records to return, NextToken will be null. For more information, see Using Amazon SNS Mobile Push Notifications. 
+   * Lists the platform application objects for the supported push notification services, such as APNS and GCM. The results for ListPlatformApplications are paginated and return a limited list of applications, up to 100. If additional records are available after the first page results, then a NextToken string will be returned. To receive the next page, you call ListPlatformApplications using the NextToken string received from the previous call. When there are no more records to return, NextToken will be null. For more information, see Using Amazon SNS Mobile Push Notifications.  This action is throttled at 15 transactions per second (TPS).
    */
   listPlatformApplications(params: SNS.Types.ListPlatformApplicationsInput, callback?: (err: AWSError, data: SNS.Types.ListPlatformApplicationsResponse) => void): Request<SNS.Types.ListPlatformApplicationsResponse, AWSError>;
   /**
-   * Lists the platform application objects for the supported push notification services, such as APNS and GCM. The results for ListPlatformApplications are paginated and return a limited list of applications, up to 100. If additional records are available after the first page results, then a NextToken string will be returned. To receive the next page, you call ListPlatformApplications using the NextToken string received from the previous call. When there are no more records to return, NextToken will be null. For more information, see Using Amazon SNS Mobile Push Notifications. 
+   * Lists the platform application objects for the supported push notification services, such as APNS and GCM. The results for ListPlatformApplications are paginated and return a limited list of applications, up to 100. If additional records are available after the first page results, then a NextToken string will be returned. To receive the next page, you call ListPlatformApplications using the NextToken string received from the previous call. When there are no more records to return, NextToken will be null. For more information, see Using Amazon SNS Mobile Push Notifications.  This action is throttled at 15 transactions per second (TPS).
    */
   listPlatformApplications(callback?: (err: AWSError, data: SNS.Types.ListPlatformApplicationsResponse) => void): Request<SNS.Types.ListPlatformApplicationsResponse, AWSError>;
   /**
-   * Returns a list of the requester's subscriptions. Each call returns a limited list of subscriptions, up to 100. If there are more subscriptions, a NextToken is also returned. Use the NextToken parameter in a new ListSubscriptions call to get further results.
+   * Returns a list of the requester's subscriptions. Each call returns a limited list of subscriptions, up to 100. If there are more subscriptions, a NextToken is also returned. Use the NextToken parameter in a new ListSubscriptions call to get further results. This action is throttled at 30 transactions per second (TPS).
    */
   listSubscriptions(params: SNS.Types.ListSubscriptionsInput, callback?: (err: AWSError, data: SNS.Types.ListSubscriptionsResponse) => void): Request<SNS.Types.ListSubscriptionsResponse, AWSError>;
   /**
-   * Returns a list of the requester's subscriptions. Each call returns a limited list of subscriptions, up to 100. If there are more subscriptions, a NextToken is also returned. Use the NextToken parameter in a new ListSubscriptions call to get further results.
+   * Returns a list of the requester's subscriptions. Each call returns a limited list of subscriptions, up to 100. If there are more subscriptions, a NextToken is also returned. Use the NextToken parameter in a new ListSubscriptions call to get further results. This action is throttled at 30 transactions per second (TPS).
    */
   listSubscriptions(callback?: (err: AWSError, data: SNS.Types.ListSubscriptionsResponse) => void): Request<SNS.Types.ListSubscriptionsResponse, AWSError>;
   /**
-   * Returns a list of the subscriptions to a specific topic. Each call returns a limited list of subscriptions, up to 100. If there are more subscriptions, a NextToken is also returned. Use the NextToken parameter in a new ListSubscriptionsByTopic call to get further results.
+   * Returns a list of the subscriptions to a specific topic. Each call returns a limited list of subscriptions, up to 100. If there are more subscriptions, a NextToken is also returned. Use the NextToken parameter in a new ListSubscriptionsByTopic call to get further results. This action is throttled at 30 transactions per second (TPS).
    */
   listSubscriptionsByTopic(params: SNS.Types.ListSubscriptionsByTopicInput, callback?: (err: AWSError, data: SNS.Types.ListSubscriptionsByTopicResponse) => void): Request<SNS.Types.ListSubscriptionsByTopicResponse, AWSError>;
   /**
-   * Returns a list of the subscriptions to a specific topic. Each call returns a limited list of subscriptions, up to 100. If there are more subscriptions, a NextToken is also returned. Use the NextToken parameter in a new ListSubscriptionsByTopic call to get further results.
+   * Returns a list of the subscriptions to a specific topic. Each call returns a limited list of subscriptions, up to 100. If there are more subscriptions, a NextToken is also returned. Use the NextToken parameter in a new ListSubscriptionsByTopic call to get further results. This action is throttled at 30 transactions per second (TPS).
    */
   listSubscriptionsByTopic(callback?: (err: AWSError, data: SNS.Types.ListSubscriptionsByTopicResponse) => void): Request<SNS.Types.ListSubscriptionsByTopicResponse, AWSError>;
   /**
-   * Returns a list of the requester's topics. Each call returns a limited list of topics, up to 100. If there are more topics, a NextToken is also returned. Use the NextToken parameter in a new ListTopics call to get further results.
+   * Returns a list of the requester's topics. Each call returns a limited list of topics, up to 100. If there are more topics, a NextToken is also returned. Use the NextToken parameter in a new ListTopics call to get further results. This action is throttled at 30 transactions per second (TPS).
    */
   listTopics(params: SNS.Types.ListTopicsInput, callback?: (err: AWSError, data: SNS.Types.ListTopicsResponse) => void): Request<SNS.Types.ListTopicsResponse, AWSError>;
   /**
-   * Returns a list of the requester's topics. Each call returns a limited list of topics, up to 100. If there are more topics, a NextToken is also returned. Use the NextToken parameter in a new ListTopics call to get further results.
+   * Returns a list of the requester's topics. Each call returns a limited list of topics, up to 100. If there are more topics, a NextToken is also returned. Use the NextToken parameter in a new ListTopics call to get further results. This action is throttled at 30 transactions per second (TPS).
    */
   listTopics(callback?: (err: AWSError, data: SNS.Types.ListTopicsResponse) => void): Request<SNS.Types.ListTopicsResponse, AWSError>;
   /**
@@ -180,11 +180,11 @@ declare class SNS extends Service {
    */
   optInPhoneNumber(callback?: (err: AWSError, data: SNS.Types.OptInPhoneNumberResponse) => void): Request<SNS.Types.OptInPhoneNumberResponse, AWSError>;
   /**
-   * Sends a message to all of a topic's subscribed endpoints. When a messageId is returned, the message has been saved and Amazon SNS will attempt to deliver it to the topic's subscribers shortly. The format of the outgoing message to each subscribed endpoint depends on the notification protocol. To use the Publish action for sending a message to a mobile endpoint, such as an app on a Kindle device or mobile phone, you must specify the EndpointArn for the TargetArn parameter. The EndpointArn is returned when making a call with the CreatePlatformEndpoint action.  For more information about formatting messages, see Send Custom Platform-Specific Payloads in Messages to Mobile Devices. 
+   * Sends a message to an Amazon SNS topic or sends a text message (SMS message) directly to a phone number.  If you send a message to a topic, Amazon SNS delivers the message to each endpoint that is subscribed to the topic. The format of the message depends on the notification protocol for each subscribed endpoint. When a messageId is returned, the message has been saved and Amazon SNS will attempt to deliver it shortly. To use the Publish action for sending a message to a mobile endpoint, such as an app on a Kindle device or mobile phone, you must specify the EndpointArn for the TargetArn parameter. The EndpointArn is returned when making a call with the CreatePlatformEndpoint action.  For more information about formatting messages, see Send Custom Platform-Specific Payloads in Messages to Mobile Devices. 
    */
   publish(params: SNS.Types.PublishInput, callback?: (err: AWSError, data: SNS.Types.PublishResponse) => void): Request<SNS.Types.PublishResponse, AWSError>;
   /**
-   * Sends a message to all of a topic's subscribed endpoints. When a messageId is returned, the message has been saved and Amazon SNS will attempt to deliver it to the topic's subscribers shortly. The format of the outgoing message to each subscribed endpoint depends on the notification protocol. To use the Publish action for sending a message to a mobile endpoint, such as an app on a Kindle device or mobile phone, you must specify the EndpointArn for the TargetArn parameter. The EndpointArn is returned when making a call with the CreatePlatformEndpoint action.  For more information about formatting messages, see Send Custom Platform-Specific Payloads in Messages to Mobile Devices. 
+   * Sends a message to an Amazon SNS topic or sends a text message (SMS message) directly to a phone number.  If you send a message to a topic, Amazon SNS delivers the message to each endpoint that is subscribed to the topic. The format of the message depends on the notification protocol for each subscribed endpoint. When a messageId is returned, the message has been saved and Amazon SNS will attempt to deliver it shortly. To use the Publish action for sending a message to a mobile endpoint, such as an app on a Kindle device or mobile phone, you must specify the EndpointArn for the TargetArn parameter. The EndpointArn is returned when making a call with the CreatePlatformEndpoint action.  For more information about formatting messages, see Send Custom Platform-Specific Payloads in Messages to Mobile Devices. 
    */
   publish(callback?: (err: AWSError, data: SNS.Types.PublishResponse) => void): Request<SNS.Types.PublishResponse, AWSError>;
   /**
@@ -220,11 +220,11 @@ declare class SNS extends Service {
    */
   setSMSAttributes(callback?: (err: AWSError, data: SNS.Types.SetSMSAttributesResponse) => void): Request<SNS.Types.SetSMSAttributesResponse, AWSError>;
   /**
-   * Allows a subscription owner to set an attribute of the topic to a new value.
+   * Allows a subscription owner to set an attribute of the subscription to a new value.
    */
   setSubscriptionAttributes(params: SNS.Types.SetSubscriptionAttributesInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Allows a subscription owner to set an attribute of the topic to a new value.
+   * Allows a subscription owner to set an attribute of the subscription to a new value.
    */
   setSubscriptionAttributes(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -236,19 +236,19 @@ declare class SNS extends Service {
    */
   setTopicAttributes(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Prepares to subscribe an endpoint by sending the endpoint a confirmation message. To actually create a subscription, the endpoint owner must call the ConfirmSubscription action with the token from the confirmation message. Confirmation tokens are valid for three days.
+   * Prepares to subscribe an endpoint by sending the endpoint a confirmation message. To actually create a subscription, the endpoint owner must call the ConfirmSubscription action with the token from the confirmation message. Confirmation tokens are valid for three days. This action is throttled at 100 transactions per second (TPS).
    */
   subscribe(params: SNS.Types.SubscribeInput, callback?: (err: AWSError, data: SNS.Types.SubscribeResponse) => void): Request<SNS.Types.SubscribeResponse, AWSError>;
   /**
-   * Prepares to subscribe an endpoint by sending the endpoint a confirmation message. To actually create a subscription, the endpoint owner must call the ConfirmSubscription action with the token from the confirmation message. Confirmation tokens are valid for three days.
+   * Prepares to subscribe an endpoint by sending the endpoint a confirmation message. To actually create a subscription, the endpoint owner must call the ConfirmSubscription action with the token from the confirmation message. Confirmation tokens are valid for three days. This action is throttled at 100 transactions per second (TPS).
    */
   subscribe(callback?: (err: AWSError, data: SNS.Types.SubscribeResponse) => void): Request<SNS.Types.SubscribeResponse, AWSError>;
   /**
-   * Deletes a subscription. If the subscription requires authentication for deletion, only the owner of the subscription or the topic's owner can unsubscribe, and an AWS signature is required. If the Unsubscribe call does not require authentication and the requester is not the subscription owner, a final cancellation message is delivered to the endpoint, so that the endpoint owner can easily resubscribe to the topic if the Unsubscribe request was unintended.
+   * Deletes a subscription. If the subscription requires authentication for deletion, only the owner of the subscription or the topic's owner can unsubscribe, and an AWS signature is required. If the Unsubscribe call does not require authentication and the requester is not the subscription owner, a final cancellation message is delivered to the endpoint, so that the endpoint owner can easily resubscribe to the topic if the Unsubscribe request was unintended. This action is throttled at 100 transactions per second (TPS).
    */
   unsubscribe(params: SNS.Types.UnsubscribeInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a subscription. If the subscription requires authentication for deletion, only the owner of the subscription or the topic's owner can unsubscribe, and an AWS signature is required. If the Unsubscribe call does not require authentication and the requester is not the subscription owner, a final cancellation message is delivered to the endpoint, so that the endpoint owner can easily resubscribe to the topic if the Unsubscribe request was unintended.
+   * Deletes a subscription. If the subscription requires authentication for deletion, only the owner of the subscription or the topic's owner can unsubscribe, and an AWS signature is required. If the Unsubscribe call does not require authentication and the requester is not the subscription owner, a final cancellation message is delivered to the endpoint, so that the endpoint owner can easily resubscribe to the topic if the Unsubscribe request was unintended. This action is throttled at 100 transactions per second (TPS).
    */
   unsubscribe(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
@@ -354,6 +354,10 @@ declare namespace SNS {
      * The name of the topic you want to create. Constraints: Topic names must be made up of only uppercase and lowercase ASCII letters, numbers, underscores, and hyphens, and must be between 1 and 256 characters long.
      */
     Name: topicName;
+    /**
+     * A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that the CreateTopic action uses:    DeliveryPolicy – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.    DisplayName – The display name to use for a topic with SMS subscriptions.    Policy – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.  
+     */
+    Attributes?: TopicAttributesMap;
   }
   export interface CreateTopicResponse {
     /**
@@ -398,7 +402,7 @@ declare namespace SNS {
   }
   export interface GetEndpointAttributesResponse {
     /**
-     * Attributes include the following:    CustomUserData -- arbitrary user data to associate with the endpoint. Amazon SNS does not use this data. The data must be in UTF-8 format and less than 2KB.    Enabled -- flag that enables/disables delivery to the endpoint. Amazon SNS will set this to false when a notification service indicates to Amazon SNS that the endpoint is invalid. Users can set it back to true, typically after updating Token.    Token -- device token, also referred to as a registration id, for an app and mobile device. This is returned from the notification service when an app and mobile device are registered with the notification service.  
+     * Attributes include the following:    CustomUserData – arbitrary user data to associate with the endpoint. Amazon SNS does not use this data. The data must be in UTF-8 format and less than 2KB.    Enabled – flag that enables/disables delivery to the endpoint. Amazon SNS will set this to false when a notification service indicates to Amazon SNS that the endpoint is invalid. Users can set it back to true, typically after updating Token.    Token – device token, also referred to as a registration id, for an app and mobile device. This is returned from the notification service when an app and mobile device are registered with the notification service.  
      */
     Attributes?: MapStringToString;
   }
@@ -410,7 +414,7 @@ declare namespace SNS {
   }
   export interface GetPlatformApplicationAttributesResponse {
     /**
-     * Attributes include the following:    EventEndpointCreated -- Topic ARN to which EndpointCreated event notifications should be sent.    EventEndpointDeleted -- Topic ARN to which EndpointDeleted event notifications should be sent.    EventEndpointUpdated -- Topic ARN to which EndpointUpdate event notifications should be sent.    EventDeliveryFailure -- Topic ARN to which DeliveryFailure event notifications should be sent upon Direct Publish delivery failure (permanent) to one of the application's endpoints.  
+     * Attributes include the following:    EventEndpointCreated – Topic ARN to which EndpointCreated event notifications should be sent.    EventEndpointDeleted – Topic ARN to which EndpointDeleted event notifications should be sent.    EventEndpointUpdated – Topic ARN to which EndpointUpdate event notifications should be sent.    EventDeliveryFailure – Topic ARN to which DeliveryFailure event notifications should be sent upon Direct Publish delivery failure (permanent) to one of the application's endpoints.  
      */
     Attributes?: MapStringToString;
   }
@@ -434,7 +438,7 @@ declare namespace SNS {
   }
   export interface GetSubscriptionAttributesResponse {
     /**
-     * A map of the subscription's attributes. Attributes in this map include the following:    SubscriptionArn -- the subscription's ARN    TopicArn -- the topic ARN that the subscription is associated with    Owner -- the AWS account ID of the subscription's owner    ConfirmationWasAuthenticated -- true if the subscription confirmation request was authenticated    DeliveryPolicy -- the JSON serialization of the subscription's delivery policy    EffectiveDeliveryPolicy -- the JSON serialization of the effective delivery policy that takes into account the topic delivery policy and account system defaults  
+     * A map of the subscription's attributes. Attributes in this map include the following:    ConfirmationWasAuthenticated – true if the subscription confirmation request was authenticated.    DeliveryPolicy – The JSON serialization of the subscription's delivery policy.    EffectiveDeliveryPolicy – The JSON serialization of the effective delivery policy that takes into account the topic delivery policy and account system defaults.    FilterPolicy – The filter policy JSON that is assigned to the subscription.    Owner – The AWS account ID of the subscription's owner.    PendingConfirmation – true if the subscription hasn't been confirmed. To confirm a pending subscription, call the ConfirmSubscription action with a confirmation token.    RawMessageDelivery – true if raw message delivery is enabled for the subscription. Raw messages are free of JSON formatting and can be sent to HTTP/S and Amazon SQS endpoints.    SubscriptionArn – The subscription's ARN.    TopicArn – The topic ARN that the subscription is associated with.  
      */
     Attributes?: SubscriptionAttributesMap;
   }
@@ -446,7 +450,7 @@ declare namespace SNS {
   }
   export interface GetTopicAttributesResponse {
     /**
-     * A map of the topic's attributes. Attributes in this map include the following:    TopicArn -- the topic's ARN    Owner -- the AWS account ID of the topic's owner    Policy -- the JSON serialization of the topic's access control policy    DisplayName -- the human-readable name used in the "From" field for notifications to email and email-json endpoints    SubscriptionsPending -- the number of subscriptions pending confirmation on this topic    SubscriptionsConfirmed -- the number of confirmed subscriptions on this topic    SubscriptionsDeleted -- the number of deleted subscriptions on this topic    DeliveryPolicy -- the JSON serialization of the topic's delivery policy    EffectiveDeliveryPolicy -- the JSON serialization of the effective delivery policy that takes into account system defaults  
+     * A map of the topic's attributes. Attributes in this map include the following:    TopicArn – the topic's ARN    Owner – the AWS account ID of the topic's owner    Policy – the JSON serialization of the topic's access control policy    DisplayName – the human-readable name used in the "From" field for notifications to email and email-json endpoints    SubscriptionsPending – the number of subscriptions pending confirmation on this topic    SubscriptionsConfirmed – the number of confirmed subscriptions on this topic    SubscriptionsDeleted – the number of deleted subscriptions on this topic    DeliveryPolicy – the JSON serialization of the topic's delivery policy    EffectiveDeliveryPolicy – the JSON serialization of the effective delivery policy that takes into account system defaults  
      */
     Attributes?: TopicAttributesMap;
   }
@@ -561,7 +565,7 @@ declare namespace SNS {
   export type MessageAttributeMap = {[key: string]: MessageAttributeValue};
   export interface MessageAttributeValue {
     /**
-     * Amazon SNS supports the following logical data types: String, Number, and Binary. For more information, see Message Attribute Data Types.
+     * Amazon SNS supports the following logical data types: String, String.Array, Number, and Binary. For more information, see Message Attribute Data Types.
      */
     DataType: String;
     /**
@@ -607,7 +611,7 @@ declare namespace SNS {
      */
     PhoneNumber?: String;
     /**
-     * The message you want to send to the topic. If you want to send the same message to all transport protocols, include the text of the message as a String value. If you want to send different messages for each transport protocol, set the value of the MessageStructure parameter to json and use a JSON object for the Message parameter.  Constraints: Messages must be UTF-8 encoded strings at most 256 KB in size (262144 bytes, not 262144 characters). JSON-specific constraints:   Keys in the JSON object that correspond to supported transport protocols must have simple JSON string values.   The values will be parsed (unescaped) before they are used in outgoing messages.   Outbound notifications are JSON encoded (meaning that the characters will be reescaped for sending).   Values have a minimum length of 0 (the empty string, "", is allowed).   Values have a maximum length bounded by the overall message size (so, including multiple protocols may limit message sizes).   Non-string values will cause the key to be ignored.   Keys that do not correspond to supported transport protocols are ignored.   Duplicate keys are not allowed.   Failure to parse or validate any key or value in the message will cause the Publish call to return an error (no partial delivery).  
+     * The message you want to send.  The Message parameter is always a string. If you set MessageStructure to json, you must string-encode the Message parameter.  If you are publishing to a topic and you want to send the same message to all transport protocols, include the text of the message as a String value. If you want to send different messages for each transport protocol, set the value of the MessageStructure parameter to json and use a JSON object for the Message parameter.   Constraints:   With the exception of SMS, messages must be UTF-8 encoded strings and at most 256 KB in size (262,144 bytes, not 262,144 characters).   For SMS, each message can contain up to 140 characters. This character limit depends on the encoding schema. For example, an SMS message can contain 160 GSM characters, 140 ASCII characters, or 70 UCS-2 characters. If you publish a message that exceeds this size limit, Amazon SNS sends the message as multiple messages, each fitting within the size limit. Messages aren't truncated mid-word but are cut off at whole-word boundaries. The total size limit for a single SMS Publish action is 1,600 characters.   JSON-specific constraints:   Keys in the JSON object that correspond to supported transport protocols must have simple JSON string values.   The values will be parsed (unescaped) before they are used in outgoing messages.   Outbound notifications are JSON encoded (meaning that the characters will be reescaped for sending).   Values have a minimum length of 0 (the empty string, "", is allowed).   Values have a maximum length bounded by the overall message size (so, including multiple protocols may limit message sizes).   Non-string values will cause the key to be ignored.   Keys that do not correspond to supported transport protocols are ignored.   Duplicate keys are not allowed.   Failure to parse or validate any key or value in the message will cause the Publish call to return an error (no partial delivery).  
      */
     Message: message;
     /**
@@ -645,7 +649,7 @@ declare namespace SNS {
      */
     EndpointArn: String;
     /**
-     * A map of the endpoint attributes. Attributes in this map include the following:    CustomUserData -- arbitrary user data to associate with the endpoint. Amazon SNS does not use this data. The data must be in UTF-8 format and less than 2KB.    Enabled -- flag that enables/disables delivery to the endpoint. Amazon SNS will set this to false when a notification service indicates to Amazon SNS that the endpoint is invalid. Users can set it back to true, typically after updating Token.    Token -- device token, also referred to as a registration id, for an app and mobile device. This is returned from the notification service when an app and mobile device are registered with the notification service.  
+     * A map of the endpoint attributes. Attributes in this map include the following:    CustomUserData – arbitrary user data to associate with the endpoint. Amazon SNS does not use this data. The data must be in UTF-8 format and less than 2KB.    Enabled – flag that enables/disables delivery to the endpoint. Amazon SNS will set this to false when a notification service indicates to Amazon SNS that the endpoint is invalid. Users can set it back to true, typically after updating Token.    Token – device token, also referred to as a registration id, for an app and mobile device. This is returned from the notification service when an app and mobile device are registered with the notification service.  
      */
     Attributes: MapStringToString;
   }
@@ -655,13 +659,13 @@ declare namespace SNS {
      */
     PlatformApplicationArn: String;
     /**
-     * A map of the platform application attributes. Attributes in this map include the following:    PlatformCredential -- The credential received from the notification service. For APNS/APNS_SANDBOX, PlatformCredential is private key. For GCM, PlatformCredential is "API key". For ADM, PlatformCredential is "client secret".    PlatformPrincipal -- The principal received from the notification service. For APNS/APNS_SANDBOX, PlatformPrincipal is SSL certificate. For GCM, PlatformPrincipal is not applicable. For ADM, PlatformPrincipal is "client id".    EventEndpointCreated -- Topic ARN to which EndpointCreated event notifications should be sent.    EventEndpointDeleted -- Topic ARN to which EndpointDeleted event notifications should be sent.    EventEndpointUpdated -- Topic ARN to which EndpointUpdate event notifications should be sent.    EventDeliveryFailure -- Topic ARN to which DeliveryFailure event notifications should be sent upon Direct Publish delivery failure (permanent) to one of the application's endpoints.    SuccessFeedbackRoleArn -- IAM role ARN used to give Amazon SNS write access to use CloudWatch Logs on your behalf.    FailureFeedbackRoleArn -- IAM role ARN used to give Amazon SNS write access to use CloudWatch Logs on your behalf.    SuccessFeedbackSampleRate -- Sample rate percentage (0-100) of successfully delivered messages.  
+     * A map of the platform application attributes. Attributes in this map include the following:    PlatformCredential – The credential received from the notification service. For APNS/APNS_SANDBOX, PlatformCredential is private key. For GCM, PlatformCredential is "API key". For ADM, PlatformCredential is "client secret".    PlatformPrincipal – The principal received from the notification service. For APNS/APNS_SANDBOX, PlatformPrincipal is SSL certificate. For GCM, PlatformPrincipal is not applicable. For ADM, PlatformPrincipal is "client id".    EventEndpointCreated – Topic ARN to which EndpointCreated event notifications should be sent.    EventEndpointDeleted – Topic ARN to which EndpointDeleted event notifications should be sent.    EventEndpointUpdated – Topic ARN to which EndpointUpdate event notifications should be sent.    EventDeliveryFailure – Topic ARN to which DeliveryFailure event notifications should be sent upon Direct Publish delivery failure (permanent) to one of the application's endpoints.    SuccessFeedbackRoleArn – IAM role ARN used to give Amazon SNS write access to use CloudWatch Logs on your behalf.    FailureFeedbackRoleArn – IAM role ARN used to give Amazon SNS write access to use CloudWatch Logs on your behalf.    SuccessFeedbackSampleRate – Sample rate percentage (0-100) of successfully delivered messages.  
      */
     Attributes: MapStringToString;
   }
   export interface SetSMSAttributesInput {
     /**
-     * The default settings for sending SMS messages from your account. You can set values for the following attribute names:  MonthlySpendLimit – The maximum amount in USD that you are willing to spend each month to send SMS messages. When Amazon SNS determines that sending an SMS message would incur a cost that exceeds this limit, it stops sending SMS messages within minutes.  Amazon SNS stops sending SMS messages within minutes of the limit being crossed. During that interval, if you continue to send SMS messages, you will incur costs that exceed your limit.  By default, the spend limit is set to the maximum allowed by Amazon SNS. If you want to exceed the maximum, contact AWS Support or your AWS sales representative for a service limit increase.  DeliveryStatusIAMRole – The ARN of the IAM role that allows Amazon SNS to write logs about SMS deliveries in CloudWatch Logs. For each SMS message that you send, Amazon SNS writes a log that includes the message price, the success or failure status, the reason for failure (if the message failed), the message dwell time, and other information.  DeliveryStatusSuccessSamplingRate – The percentage of successful SMS deliveries for which Amazon SNS will write logs in CloudWatch Logs. The value can be an integer from 0 - 100. For example, to write logs only for failed deliveries, set this value to 0. To write logs for 10% of your successful deliveries, set it to 10.  DefaultSenderID – A string, such as your business brand, that is displayed as the sender on the receiving device. Support for sender IDs varies by country. The sender ID can be 1 - 11 alphanumeric characters, and it must contain at least one letter.  DefaultSMSType – The type of SMS message that you will send by default. You can assign the following values:    Promotional – (Default) Noncritical messages, such as marketing messages. Amazon SNS optimizes the message delivery to incur the lowest cost.    Transactional – Critical messages that support customer transactions, such as one-time passcodes for multi-factor authentication. Amazon SNS optimizes the message delivery to achieve the highest reliability.    UsageReportS3Bucket – The name of the Amazon S3 bucket to receive daily SMS usage reports from Amazon SNS. Each day, Amazon SNS will deliver a usage report as a CSV file to the bucket. The report includes the following information for each SMS message that was successfully delivered by your account:   Time that the message was published (in UTC)   Message ID   Destination phone number   Message type   Delivery status   Message price (in USD)   Part number (a message is split into multiple parts if it is too long for a single message)   Total number of parts   To receive the report, the bucket must have a policy that allows the Amazon SNS service principle to perform the s3:PutObject and s3:GetBucketLocation actions. For an example bucket policy and usage report, see Monitoring SMS Activity in the Amazon SNS Developer Guide.
+     * The default settings for sending SMS messages from your account. You can set values for the following attribute names:  MonthlySpendLimit – The maximum amount in USD that you are willing to spend each month to send SMS messages. When Amazon SNS determines that sending an SMS message would incur a cost that exceeds this limit, it stops sending SMS messages within minutes.  Amazon SNS stops sending SMS messages within minutes of the limit being crossed. During that interval, if you continue to send SMS messages, you will incur costs that exceed your limit.  By default, the spend limit is set to the maximum allowed by Amazon SNS. If you want to raise the limit, submit an SNS Limit Increase case. For New limit value, enter your desired monthly spend limit. In the Use Case Description field, explain that you are requesting an SMS monthly spend limit increase.  DeliveryStatusIAMRole – The ARN of the IAM role that allows Amazon SNS to write logs about SMS deliveries in CloudWatch Logs. For each SMS message that you send, Amazon SNS writes a log that includes the message price, the success or failure status, the reason for failure (if the message failed), the message dwell time, and other information.  DeliveryStatusSuccessSamplingRate – The percentage of successful SMS deliveries for which Amazon SNS will write logs in CloudWatch Logs. The value can be an integer from 0 - 100. For example, to write logs only for failed deliveries, set this value to 0. To write logs for 10% of your successful deliveries, set it to 10.  DefaultSenderID – A string, such as your business brand, that is displayed as the sender on the receiving device. Support for sender IDs varies by country. The sender ID can be 1 - 11 alphanumeric characters, and it must contain at least one letter.  DefaultSMSType – The type of SMS message that you will send by default. You can assign the following values:    Promotional – (Default) Noncritical messages, such as marketing messages. Amazon SNS optimizes the message delivery to incur the lowest cost.    Transactional – Critical messages that support customer transactions, such as one-time passcodes for multi-factor authentication. Amazon SNS optimizes the message delivery to achieve the highest reliability.    UsageReportS3Bucket – The name of the Amazon S3 bucket to receive daily SMS usage reports from Amazon SNS. Each day, Amazon SNS will deliver a usage report as a CSV file to the bucket. The report includes the following information for each SMS message that was successfully delivered by your account:   Time that the message was published (in UTC)   Message ID   Destination phone number   Message type   Delivery status   Message price (in USD)   Part number (a message is split into multiple parts if it is too long for a single message)   Total number of parts   To receive the report, the bucket must have a policy that allows the Amazon SNS service principle to perform the s3:PutObject and s3:GetBucketLocation actions. For an example bucket policy and usage report, see Monitoring SMS Activity in the Amazon SNS Developer Guide.
      */
     attributes: MapStringToString;
   }
@@ -673,7 +677,7 @@ declare namespace SNS {
      */
     SubscriptionArn: subscriptionARN;
     /**
-     * The name of the attribute you want to set. Only a subset of the subscriptions attributes are mutable. Valid values: DeliveryPolicy | RawMessageDelivery 
+     * A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that the SetTopicAttributes action uses:    DeliveryPolicy – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.    FilterPolicy – The simple JSON object that lets your subscriber receive only a subset of messages, rather than receiving every message published to the topic.    RawMessageDelivery – When set to true, enables raw message delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need for the endpoints to process JSON formatting, which is otherwise created for Amazon SNS metadata.  
      */
     AttributeName: attributeName;
     /**
@@ -687,7 +691,7 @@ declare namespace SNS {
      */
     TopicArn: topicARN;
     /**
-     * The name of the attribute you want to set. Only a subset of the topic's attributes are mutable. Valid values: Policy | DisplayName | DeliveryPolicy 
+     * A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that the SetTopicAttributes action uses:    DeliveryPolicy – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.    DisplayName – The display name to use for a topic with SMS subscriptions.    Policy – The policy that defines who can access your topic. By default, only the topic owner can publish or subscribe to the topic.  
      */
     AttributeName: attributeName;
     /**
@@ -702,17 +706,25 @@ declare namespace SNS {
      */
     TopicArn: topicARN;
     /**
-     * The protocol you want to use. Supported protocols include:    http -- delivery of JSON-encoded message via HTTP POST    https -- delivery of JSON-encoded message via HTTPS POST    email -- delivery of message via SMTP    email-json -- delivery of JSON-encoded message via SMTP    sms -- delivery of message via SMS    sqs -- delivery of JSON-encoded message to an Amazon SQS queue    application -- delivery of JSON-encoded message to an EndpointArn for a mobile app and device.    lambda -- delivery of JSON-encoded message to an AWS Lambda function.  
+     * The protocol you want to use. Supported protocols include:    http – delivery of JSON-encoded message via HTTP POST    https – delivery of JSON-encoded message via HTTPS POST    email – delivery of message via SMTP    email-json – delivery of JSON-encoded message via SMTP    sms – delivery of message via SMS    sqs – delivery of JSON-encoded message to an Amazon SQS queue    application – delivery of JSON-encoded message to an EndpointArn for a mobile app and device.    lambda – delivery of JSON-encoded message to an AWS Lambda function.  
      */
     Protocol: protocol;
     /**
      * The endpoint that you want to receive notifications. Endpoints vary by protocol:   For the http protocol, the endpoint is an URL beginning with "http://"   For the https protocol, the endpoint is a URL beginning with "https://"   For the email protocol, the endpoint is an email address   For the email-json protocol, the endpoint is an email address   For the sms protocol, the endpoint is a phone number of an SMS-enabled device   For the sqs protocol, the endpoint is the ARN of an Amazon SQS queue   For the application protocol, the endpoint is the EndpointArn of a mobile app and device.   For the lambda protocol, the endpoint is the ARN of an AWS Lambda function.  
      */
     Endpoint?: endpoint;
+    /**
+     * A map of attributes with their corresponding values. The following lists the names, descriptions, and values of the special request parameters that the SetTopicAttributes action uses:    DeliveryPolicy – The policy that defines how Amazon SNS retries failed deliveries to HTTP/S endpoints.    FilterPolicy – The simple JSON object that lets your subscriber receive only a subset of messages, rather than receiving every message published to the topic.    RawMessageDelivery – When set to true, enables raw message delivery to Amazon SQS or HTTP/S endpoints. This eliminates the need for the endpoints to process JSON formatting, which is otherwise created for Amazon SNS metadata.  
+     */
+    Attributes?: SubscriptionAttributesMap;
+    /**
+     * Sets whether the response from the Subscribe request includes the subscription ARN, even if the subscription is not yet confirmed. If you set this parameter to false, the response includes the ARN for confirmed subscriptions, but it includes an ARN value of "pending subscription" for subscriptions that are not yet confirmed. A subscription becomes confirmed when the subscriber calls the ConfirmSubscription action with a confirmation token. If you set this parameter to true, the response includes the ARN in all cases, even if the subscription is not yet confirmed. The default value is false.
+     */
+    ReturnSubscriptionArn?: boolean;
   }
   export interface SubscribeResponse {
     /**
-     * The ARN of the subscription, if the service was able to create a subscription immediately (without requiring endpoint owner confirmation).
+     * The ARN of the subscription if it is confirmed, or the string "pending confirmation" if the subscription requires confirmation. However, if the API request parameter ReturnSubscriptionArn is true, then the value is always the subscription ARN, even if the subscription requires confirmation.
      */
     SubscriptionArn?: subscriptionARN;
   }

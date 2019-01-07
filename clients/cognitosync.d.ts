@@ -285,7 +285,6 @@ declare namespace CognitoSync {
   }
   export type DeviceId = string;
   export type Events = {[key: string]: LambdaFunctionArn};
-  export type ExceptionMessage = string;
   export interface GetBulkPublishDetailsRequest {
     /**
      * A name-spaced GUID (for example, us-east-1:23EC4050-6AEA-7089-A2DD-08002EXAMPLE) created by Amazon Cognito. GUID generation is unique within a region.

@@ -126,7 +126,7 @@
     describe('getDate', function() {
       it('should return current date by default', function() {
         var now, obj;
-        now = {};
+        now = new Date(0);
         obj = AWS.util.isNode() ? global : window;
         helpers.spyOn(obj, 'Date').andCallFake(function() {
           return now;
@@ -170,6 +170,30 @@
         });
       });
     });
+
+    describe('applyClockOffset', function() {
+      it('should apply new clock offset to AWS.config given new service time', function() {
+        var now = new Date().getTime();
+        AWS.config.systemClockOffset = 0;
+        AWS.util.applyClockOffset(now + 30000);
+        var updatedOffset = AWS.config.systemClockOffset;
+        expect(29900 < updatedOffset && 30100 > updatedOffset).to.equal(true);
+      });
+    });
+
+    describe('isClockSkewed', function() {
+      it('should apply new clock offset to AWS.config given new service time', function() {
+        var util = AWS.util;
+        var now = new Date();
+        obj = AWS.util.isNode() ? global : window;
+        helpers.spyOn(obj, 'Date').andCallFake(function() {
+          return now;
+        });
+        expect(util.isClockSkewed(now.getTime() + 300100)).to.equal(true);
+        expect(util.isClockSkewed(now.getTime() + 299900)).to.equal(false);
+      });
+    });
+
     describe('iso8601', function() {
       it('should return date formatted as YYYYMMDDTHHmmssZ', function() {
         var date;
@@ -187,6 +211,7 @@
         return expect(util.iso8601(date)).to.equal('1970-01-01T00:11:00Z');
       });
     });
+
     describe('rfc822', function() {
       it('should return date formatted as YYYYMMDDTHHmmssZ', function() {
         var date;
@@ -615,7 +640,7 @@
   });
 
   describe('AWS.util.merge', function() {
-    return it('should merge an object into another and return new object', function() {
+    it('should merge an object into another and return new object', function() {
       var newObj, obj;
       obj = {
         a: 1,
@@ -663,7 +688,7 @@
         e: 5
       });
     });
-    return it('should return the merged object', function() {
+    it('should return the merged object', function() {
       var obj;
       obj = {
         a: 1,
@@ -671,7 +696,7 @@
       };
       return expect(AWS.util.update(obj, {
         c: 3
-      })).to.equal(obj);
+      })).to.eql({a: 1, b: 2, c: 3});
     });
   });
 
@@ -1316,6 +1341,115 @@
   });
 
   if (AWS.util.isNode()) {
+    // These tests cannot run in the SDK's browser test runner due to the way in
+    // which browserify exposes the `process` object. The AWS.util module gets
+    // its own `process` object, which means the `process.nextTick` accessible
+    // in this test's scope will not be called by `AWS.util.defer`.
+    describe('AWS.util.defer', function() {
+      var processNextTickDupe = typeof process === 'object' && typeof process.nextTick === 'function' ?
+        process.nextTick : void 0;
+      var setImmediateDupe = typeof setImmediate === 'function' ? setImmediate : void 0;
+
+      afterEach(function() {
+        if (typeof process === 'object') {
+          process.nextTick = processNextTickDupe;
+        }
+
+        setImmediate = setImmediateDupe;
+      });
+
+      it('should use process.nextTick if available', function() {
+        if (!processNextTickDupe) {
+          this.skip();
+        }
+
+        var spy = helpers.spyOn(process, 'nextTick').andCallThrough();
+
+        AWS.util.defer(function() {});
+
+        expect(spy.calls.length).to.equal(1);
+      });
+
+      it('should fall back to setImmediate', function() {
+        if (typeof process === 'object') {
+          delete process.nextTick;
+          process.nextTick = void 0;
+        }
+        var called = false;
+        setImmediate = function() { called = true; };
+
+        AWS.util.defer(function() {});
+        if (typeof process === 'object') {
+          process.nextTick = processNextTickDupe;
+        }
+
+        expect(called).to.be.true;
+      });
+
+      it('should prefer process.nextTick to setImmediate', function() {
+        var spy = helpers.spyOn(process, 'nextTick').andCallThrough();
+        var setImmediateCalled = false;
+        setImmediate = function() { setImmediateCalled = true; };
+
+        AWS.util.defer(function() {});
+
+        expect(spy.calls.length).to.equal(1);
+        expect(setImmediateCalled).to.be.false;
+      });
+
+      it('should fall back to setTimeout', function() {
+        if (typeof process === 'object') {
+          delete process.nextTick;
+        }
+        setImmediate = void 0;
+
+        var topLevelScope = null;
+        if (typeof global === 'object') {
+          topLevelScope = global;
+        } else if (typeof self === 'object') {
+          topLevelScope = self;
+        } else {
+          topLevelScope = window;
+        }
+        var spy = helpers.spyOn(topLevelScope, 'setTimeout').andCallThrough();
+
+        AWS.util.defer(function() {});
+        if (typeof process === 'object') {
+          process.nextTick = processNextTickDupe;
+        }
+
+        expect(spy.calls.length).to.equal(1);
+      });
+
+      it('should prefer setImmediate to setTimeout', function() {
+        if (typeof process === 'object') {
+          delete process.nextTick;
+        }
+
+        var setImmediateCalled = false;
+        setImmediate = function() { setImmediateCalled = true; };
+        var topLevelScope = null;
+        if (typeof global === 'object') {
+          topLevelScope = global;
+        } else if (typeof self === 'object') {
+          topLevelScope = self;
+        } else {
+          topLevelScope = window;
+        }
+        var spy = helpers.spyOn(topLevelScope, 'setTimeout').andCallThrough();
+
+        AWS.util.defer(function() {});
+        if (typeof process === 'object') {
+          process.nextTick = processNextTickDupe;
+        }
+
+        expect(setImmediateCalled).to.be.true;
+        expect(spy.calls.length).to.equal(0);
+      });
+    });
+  }
+
+  if (AWS.util.isNode()) {
     describe('AWS.util.engine', function() {
       it('should include the platform and version supplied by the global process variable', function() {
         var engine;
@@ -1334,6 +1468,7 @@
         }
       });
     });
+
     describe('AWS.util.handleRequestWithRetries', function() {
       var app, getport, http, httpClient, httpRequest, options, sendRequest, server, spy;
       http = require('http');
@@ -1484,7 +1619,8 @@
           return done();
         });
       });
-      return it('defaults to not retrying if maxRetries not specified', function(done) {
+
+      it('defaults to not retrying if maxRetries not specified', function(done) {
         helpers.spyOn(AWS.util, 'error').andReturn({
           retryable: true
         });
