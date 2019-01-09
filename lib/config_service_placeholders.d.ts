@@ -169,6 +169,7 @@ export abstract class ConfigurationServicePlaceholders {
   kafka?: AWS.Kafka.Types.ClientConfiguration;
   apigatewaymanagementapi?: AWS.ApiGatewayManagementApi.Types.ClientConfiguration;
   apigatewayv2?: AWS.ApiGatewayV2.Types.ClientConfiguration;
+  docdb?: AWS.DocDB.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -340,4 +341,5 @@ export interface ConfigurationServiceApiVersions {
   kafka?: AWS.Kafka.Types.apiVersion;
   apigatewaymanagementapi?: AWS.ApiGatewayManagementApi.Types.apiVersion;
   apigatewayv2?: AWS.ApiGatewayV2.Types.apiVersion;
+  docdb?: AWS.DocDB.Types.apiVersion;
 }

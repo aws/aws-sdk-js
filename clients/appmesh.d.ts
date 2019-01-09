@@ -146,11 +146,11 @@ declare class AppMesh extends Service {
    */
   deleteVirtualRouter(callback?: (err: AWSError, data: AppMesh.Types.DeleteVirtualRouterOutput) => void): Request<AppMesh.Types.DeleteVirtualRouterOutput, AWSError>;
   /**
-   * Describes an existing cluster.
+   * Describes an existing service mesh.
    */
   describeMesh(params: AppMesh.Types.DescribeMeshInput, callback?: (err: AWSError, data: AppMesh.Types.DescribeMeshOutput) => void): Request<AppMesh.Types.DescribeMeshOutput, AWSError>;
   /**
-   * Describes an existing cluster.
+   * Describes an existing service mesh.
    */
   describeMesh(callback?: (err: AWSError, data: AppMesh.Types.DescribeMeshOutput) => void): Request<AppMesh.Types.DescribeMeshOutput, AWSError>;
   /**
@@ -236,6 +236,7 @@ declare class AppMesh extends Service {
 }
 declare namespace AppMesh {
   export type ServiceName = string;
+  export type HealthCheckThreshold = number;
   export interface DeleteMeshOutput {
     /**
      * The service mesh that was deleted.
@@ -286,6 +287,7 @@ declare namespace AppMesh {
      */
     serviceName?: ServiceName;
   }
+  export type HealthCheckIntervalMillis = number;
   export interface VirtualNodeRef {
     /**
      * The full Amazon Resource Name (ARN) for the virtual node.
@@ -355,8 +357,6 @@ declare namespace AppMesh {
     serviceDiscovery?: ServiceDiscovery;
   }
   export type ServiceNames = ServiceName[];
-  export type DurationMillis = number;
-  export type NonNegativeInt = number;
   export interface MeshRef {
     /**
      * The full Amazon Resource Name (ARN) of the service mesh.
@@ -402,6 +402,7 @@ declare namespace AppMesh {
      */
     virtualRouter?: VirtualRouterData;
   }
+  export type HealthCheckTimeoutMillis = number;
   export interface CreateVirtualRouterInput {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
@@ -728,11 +729,11 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     arn?: Arn;
     /**
-     * The Unix epoch timestamp in seconds for when the cluster was created.
+     * The Unix epoch timestamp in seconds for when the resource was created.
      */
     createdAt?: Timestamp;
     /**
-     * The Unix epoch timestamp in seconds for when the cluster was last updated.
+     * The Unix epoch timestamp in seconds for when the resource was last updated.
      */
     lastUpdatedAt?: Timestamp;
     /**
@@ -846,9 +847,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   export interface Listener {
     /**
      * The health check information for the listener.
-         
-            Listener health checks are not available during the App Mesh preview.
-         
      */
     healthCheck?: HealthCheckPolicy;
     /**
@@ -862,33 +860,35 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The number of consecutive successful health checks that must occur before declaring
          listener healthy.
      */
-    healthyThreshold?: NonNegativeInt;
+    healthyThreshold: HealthCheckThreshold;
     /**
      * The time period in milliseconds between each health check execution.
      */
-    intervalMillis?: DurationMillis;
+    intervalMillis: HealthCheckIntervalMillis;
     /**
-     * The destination path for the health check request.
+     * The destination path for the health check request. This is only required if the
+         specified protocol is HTTP; if the protocol is TCP, then this parameter is ignored.
      */
     path?: String;
     /**
-     * The destination port for the health check request.
+     * The destination port for the health check request. This port must match the port defined
+         in the PortMapping for the listener.
      */
     port?: PortNumber;
     /**
      * The protocol for the health check request.
      */
-    protocol?: PortProtocol;
+    protocol: PortProtocol;
     /**
      * The amount of time to wait when receiving a response from the health check, in
          milliseconds.
      */
-    timeoutMillis?: DurationMillis;
+    timeoutMillis: HealthCheckTimeoutMillis;
     /**
      * The number of consecutive failed health checks that must occur before declaring a
          virtual node unhealthy. 
      */
-    unhealthyThreshold?: NonNegativeInt;
+    unhealthyThreshold: HealthCheckThreshold;
   }
   export interface ListVirtualRoutersInput {
     /**

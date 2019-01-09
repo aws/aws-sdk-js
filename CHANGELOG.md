@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.384.0-->
+<!--LATEST=2.385.0-->
 <!--ENTRYINSERT-->
+
+## 2.385.0
+* feature: DocDB: Amazon DocumentDB (with MongoDB compatibility) is a fast, reliable, and fully-managed database service. Amazon DocumentDB makes it easy for developers to set up, run, and scale MongoDB-compatible databases in the cloud.
+* feature: Redshift: DescribeSnapshotSchedules returns a list of snapshot schedules. With this release, this API will have a list of clusters and number of clusters associated with the schedule.
+* feature: s3: Improved sigv4 documentation on getSignedUrl operation
 
 ## 2.384.0
 * feature: DeviceFarm: "This release provides support for running Appium Node.js and Appium Ruby tests on AWS Device Farm.

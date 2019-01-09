@@ -168,5 +168,6 @@ module.exports = {
   LicenseManager: require('./licensemanager'),
   Kafka: require('./kafka'),
   ApiGatewayManagementApi: require('./apigatewaymanagementapi'),
-  ApiGatewayV2: require('./apigatewayv2')
+  ApiGatewayV2: require('./apigatewayv2'),
+  DocDB: require('./docdb')
 };

@@ -730,6 +730,7 @@ declare namespace Redshift {
     AccountAlias?: String;
   }
   export type AccountsWithRestoreAccessList = AccountWithRestoreAccess[];
+  export type AssociatedClusterList = ClusterAssociatedToSchedule[];
   export type AttributeList = AccountAttribute[];
   export type AttributeNameList = String[];
   export type AttributeValueList = AttributeValueTarget[];
@@ -1001,6 +1002,10 @@ declare namespace Redshift {
      * Returns the following:   AllowCancelResize: a boolean value indicating if the resize operation can be cancelled.   ResizeType: Returns ClassicResize  
      */
     ResizeInfo?: ResizeInfo;
+  }
+  export interface ClusterAssociatedToSchedule {
+    ClusterIdentifier?: String;
+    ScheduleAssociationState?: ScheduleState;
   }
   export interface ClusterCredentials {
     /**
@@ -1921,7 +1926,7 @@ declare namespace Redshift {
      */
     TagValues?: TagValueList;
     /**
-     * A value that indicates whether to return snapshots only for an existing cluster. Table-level restore can be performed only using a snapshot of an existing cluster, that is, a cluster that has not been deleted.    If ClusterExists is set to true, ClusterIdentifier is required.   If ClusterExists is set to false and ClusterIdentifier is not specified, all snapshots associated with deleted clusters (orphaned snapshots) are returned.    If ClusterExists is set to false and ClusterIdentifier is specified for a deleted cluster, snapshots associated with that cluster are returned.   If ClusterExists is set to false and ClusterIdentifier is specified for an existing cluster, no snapshots are returned.   
+     * A value that indicates whether to return snapshots only for an existing cluster. Table-level restore can be performed only using a snapshot of an existing cluster, that is, a cluster that has not been deleted. If ClusterExists is set to true, ClusterIdentifier is required.
      */
     ClusterExists?: BooleanOptional;
     SortingEntities?: SnapshotSortingEntityList;
@@ -3777,6 +3782,8 @@ declare namespace Redshift {
      */
     Tags?: TagList;
     NextInvocations?: ScheduledSnapshotTimeList;
+    AssociatedClusterCount?: IntegerOptional;
+    AssociatedClusters?: AssociatedClusterList;
   }
   export type SnapshotScheduleList = SnapshotSchedule[];
   export interface SnapshotSortingEntity {

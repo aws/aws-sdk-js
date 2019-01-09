@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "s3",
-  "description": "Improved sigv4 documentation on getSignedUrl operation"
-}

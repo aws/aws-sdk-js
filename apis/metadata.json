@@ -674,5 +674,8 @@
   },
   "apigatewayv2": {
     "name": "ApiGatewayV2"
+  },
+  "docdb": {
+    "name": "DocDB"
   }
 }

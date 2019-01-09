@@ -167,3 +167,4 @@ export import LicenseManager = require('./licensemanager');
 export import Kafka = require('./kafka');
 export import ApiGatewayManagementApi = require('./apigatewaymanagementapi');
 export import ApiGatewayV2 = require('./apigatewayv2');
+export import DocDB = require('./docdb');
