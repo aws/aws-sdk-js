@@ -7485,6 +7485,12 @@
         "topicRulePayload": {
           "shape": "TopicRulePayload",
           "documentation": "<p>The rule payload.</p>"
+        },
+        "tags": {
+          "shape": "String",
+          "documentation": "<p>Metadata which can be used to manage the topic rule.</p> <note> <p>For URI Request parameters use format: ...key1=value1&amp;key2=value2...</p> <p>For the CLI command-line parameter use format: --tags \"key1=value1&amp;key2=value2...\"</p> <p>For the cli-input-json file use format: \"tags\": \"key1=value1&amp;key2=value2...\"</p> </note>",
+          "location": "header",
+          "locationName": "x-amz-tagging"
         }
       },
       "documentation": "<p>The input for the CreateTopicRule operation.</p>",
@@ -8937,6 +8943,10 @@
     },
     "DynamoDBv2Action": {
       "type": "structure",
+      "required": [
+        "roleArn",
+        "putItem"
+      ],
       "members": {
         "roleArn": {
           "shape": "AwsArn",

@@ -2769,6 +2769,10 @@ declare namespace Iot {
      * The rule payload.
      */
     topicRulePayload: TopicRulePayload;
+    /**
+     * Metadata which can be used to manage the topic rule.  For URI Request parameters use format: ...key1=value1&amp;key2=value2... For the CLI command-line parameter use format: --tags "key1=value1&amp;key2=value2..." For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..." 
+     */
+    tags?: String;
   }
   export type CreatedAtDate = Date;
   export type CreationDate = Date;
@@ -3616,11 +3620,11 @@ declare namespace Iot {
     /**
      * The ARN of the IAM role that grants access to the DynamoDB table.
      */
-    roleArn?: AwsArn;
+    roleArn: AwsArn;
     /**
      * Specifies the DynamoDB table to which the message data will be written. For example:  { "dynamoDBv2": { "roleArn": "aws:iam:12341251:my-role" "putItem": { "tableName": "my-table" } } }  Each attribute in the message payload will be written to a separate column in the DynamoDB database.
      */
-    putItem?: PutItemInput;
+    putItem: PutItemInput;
   }
   export type DynamoKeyType = "STRING"|"NUMBER"|string;
   export type DynamoOperation = string;
