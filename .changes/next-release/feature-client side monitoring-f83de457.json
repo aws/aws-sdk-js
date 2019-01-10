@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "client side monitoring",
+  "description": "CSM now can be enabled globally only from environment without code change"
+}

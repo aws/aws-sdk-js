@@ -14,7 +14,6 @@ describe('run functional test', () => {
   let defaultConfiguration;
   let processEnvBackup;
   before(() => {
-    AWS.config.clientSideMonitoring = true;
     processEnvBackup = Object.assign({}, process.env);
   });
 
