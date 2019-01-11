@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "client side monitoring",
+  "description": "Add a new environmental variable AWS_ENDPOINT_DISCOVERY_ENABLED to work along with AWS_ENABLE_ENDPOINT_DISCOVERY"
+}
