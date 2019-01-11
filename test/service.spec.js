@@ -990,28 +990,6 @@
         done();
       });
     });
-
-    if(AWS.util.isNode()) {
-      it('should enable client-side monitoring globally if corresponding environment is set', function(done) {
-          var originEnv = process.env.AWS_CSM_ENABLED;
-          process.env.AWS_CSM_ENABLED = true;
-          AWS.Service.prototype.publisher = undefined;
-          AWS.Service.defineService('acm', ['2015-12-08']);
-          expect(AWS.Service.prototype.publisher).not.equal(undefined);
-          var publisherInvoked = false
-          AWS.Service.prototype.publisher = {
-            eventHandler: function(event){
-              if (!publisherInvoked) {
-                publisherInvoked = true;
-                done() //make sure publisher is invoked
-              }
-            }
-          }
-          var client = new MockService({});
-          client.makeRequest('operationName', function(err, data) {});
-          process.env.AWS_CSM_ENABLED = originEnv;
-      });
-    }
   });
 
 }).call(this);

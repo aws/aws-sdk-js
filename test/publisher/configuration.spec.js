@@ -1,6 +1,7 @@
 var helpers = require('../helpers');
 var AWS = helpers.AWS;
 var spyOn = helpers.spyOn;
+var MockService = helpers.MockService;
 var monitoringConfig = require('../../lib/publisher/configuration');
 var iniLoader = AWS.util.iniLoader;
 
@@ -151,6 +152,42 @@ if (AWS.util.isNode()) {
         expect(monitoringConfig().enabled).to.equal(false);
         expect(ReadFileCalled).to.equal(0)
       })
-    })
+    });
+
+    it('should enable client-side monitoring globally if corresponding environment is set', function(done) {
+      process.env.AWS_CSM_ENABLED = "true";
+      AWS.Service.prototype.publisher = undefined;
+      AWS.Service.defineService('acm', ['2015-12-08']);
+      expect(AWS.Service.prototype.publisher).not.equal(undefined);
+      var publisherInvoked = false
+      AWS.Service.prototype.publisher = {
+        eventHandler: function(event){
+          if (!publisherInvoked) {
+            publisherInvoked = true;
+            done() //make sure publisher is invoked
+          }
+        }
+      }
+      var client = new MockService({});
+      client.makeRequest('operationName', function(err, data) {});
+    });
+
+    it('should enable client-side monitoring globally if corresponding config is set', function(done) {
+      helpers.spyOn(AWS.util, 'readFileSync').andReturn('[default]\ncsm_enabled=true');
+      AWS.Service.prototype.publisher = undefined;
+      AWS.Service.defineService('acm', ['2015-12-08']);
+      expect(AWS.Service.prototype.publisher).not.equal(undefined);
+      var publisherInvoked = false
+      AWS.Service.prototype.publisher = {
+        eventHandler: function(event){
+          if (!publisherInvoked) {
+            publisherInvoked = true;
+            done() //make sure publisher is invoked
+          }
+        }
+      }
+      var client = new MockService({});
+      client.makeRequest('operationName', function(err, data) {});
+    });
   })  
 }
