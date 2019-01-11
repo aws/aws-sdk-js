@@ -14,7 +14,6 @@ describe('run functional test', () => {
   let defaultConfiguration;
   let processEnvBackup;
   before(() => {
-    AWS.config.clientSideMonitoring = true;
     processEnvBackup = Object.assign({}, process.env);
   });
 
@@ -25,6 +24,7 @@ describe('run functional test', () => {
 
   afterEach(async () => {
     process.env = processEnvBackup;
+    AWS.Service.prototype.publisher = undefined;
   });
 
   for (const scenario of schemes.cases) {
@@ -40,7 +40,6 @@ describe('run functional test', () => {
       process.env = Object.assign({}, process.env, scenarioConfiguration.environmentVariables);
 
       const resolvedCSMConfig = csmConfigProvider();
-      AWS.Service.prototype.publisher = new Publisher(resolvedCSMConfig);
 
       //start a subprocess to echo back the udp datagrams
       let fakeAgent = await agentStart(resolvedCSMConfig.port || 31000);

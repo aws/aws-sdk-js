@@ -988,8 +988,8 @@
         expect(events[0].Type).to.equal('ApiCallAttempt');
         expect(events[1].Type).to.equal('ApiCall');
         done();
-      })
-    })
+      });
+    });
   });
 
 }).call(this);
