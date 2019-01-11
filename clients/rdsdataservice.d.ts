@@ -22,16 +22,6 @@ declare class RDSDataService extends Service {
 }
 declare namespace RDSDataService {
   export type Boolean = boolean;
-  export interface SqlStatementResult {
-    /**
-     * Number of rows updated.
-     */
-    numberOfRecordsUpdated?: Long;
-    /**
-     * ResultFrame returned by executing the sql statement
-     */
-    resultFrame?: ResultFrame;
-  }
   export interface Value {
     /**
      * Arbitrarily nested arrays
@@ -76,6 +66,37 @@ declare namespace RDSDataService {
   }
   export type SqlStatementResults = SqlStatementResult[];
   export type ColumnMetadataList = ColumnMetadata[];
+  export interface ResultFrame {
+    /**
+     * ResultSet Metadata.
+     */
+    records?: Records;
+    /**
+     * ResultSet Metadata.
+     */
+    resultSetMetadata?: ResultSetMetadata;
+  }
+  export type Long = number;
+  export type Row = Value[];
+  export type String = string;
+  export type ArrayValues = Value[];
+  export type Float = number;
+  export interface ExecuteSqlResponse {
+    /**
+     * Results returned by executing the sql statement(s)
+     */
+    sqlStatementResults: SqlStatementResults;
+  }
+  export interface SqlStatementResult {
+    /**
+     * Number of rows updated.
+     */
+    numberOfRecordsUpdated?: Long;
+    /**
+     * ResultFrame returned by executing the sql statement
+     */
+    resultFrame?: ResultFrame;
+  }
   export interface ResultSetMetadata {
     /**
      * Number of columns
@@ -87,39 +108,29 @@ declare namespace RDSDataService {
     columnMetadata?: ColumnMetadataList;
   }
   export type Records = Record[];
-  export interface ResultFrame {
-    /**
-     * ResultSet Metadata.
-     */
-    records?: Records;
-    /**
-     * ResultSet Metadata.
-     */
-    resultSetMetadata?: ResultSetMetadata;
-  }
   export interface ExecuteSqlRequest {
     /**
      * ARN of the db credentials in AWS Secret Store or the friendly secret name
      */
-    awsSecretStoreArn: String;
+    awsSecretStoreArn: Arn;
     /**
      * Target DB name
      */
-    database?: String;
+    database?: DbName;
     /**
      * ARN of the target db cluster or instance
      */
-    dbClusterOrInstanceArn: String;
+    dbClusterOrInstanceArn: Arn;
     /**
      * Target Schema name
      */
-    schema?: String;
+    schema?: DbName;
     /**
      * SQL statement(s) to be executed. Statements can be chained by using semicolons
      */
-    sqlStatements: String;
+    sqlStatements: SqlStatement;
   }
-  export type Long = number;
+  export type Arn = string;
   export interface StructValue {
     /**
      * Struct or UDT
@@ -127,9 +138,7 @@ declare namespace RDSDataService {
     attributes?: ArrayValues;
   }
   export type _Blob = Buffer|Uint8Array|Blob|string;
-  export type Row = Value[];
-  export type String = string;
-  export type ArrayValues = Value[];
+  export type SqlStatement = string;
   export type Double = number;
   export interface ColumnMetadata {
     /**
@@ -190,18 +199,12 @@ declare namespace RDSDataService {
     typeName?: String;
   }
   export type Integer = number;
-  export type Float = number;
+  export type DbName = string;
   export interface Record {
     /**
      * Record
      */
     values?: Row;
-  }
-  export interface ExecuteSqlResponse {
-    /**
-     * Results returned by executing the sql statement(s)
-     */
-    sqlStatementResults: SqlStatementResults;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

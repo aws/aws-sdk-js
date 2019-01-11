@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.386.0-->
+<!--LATEST=2.387.0-->
 <!--ENTRYINSERT-->
+
+## 2.387.0
+* feature: RDSDataService: Documentation updates for RDS Data API.
+* feature: client side monitoring: Add a new environmental variable AWS_ENDPOINT_DISCOVERY_ENABLED to work along with AWS_ENABLE_ENDPOINT_DISCOVERY
+* feature: client side monitoring: CSM now can be enabled globally only from environment without code change
 
 ## 2.386.0
 * feature: EC2: EC2 Spot: a) CreateFleet support for Single AvailabilityZone requests and b) support for paginated DescribeSpotInstanceRequests.

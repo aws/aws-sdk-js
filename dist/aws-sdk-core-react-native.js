@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.386.0',
+	  VERSION: '2.387.0',
 
 	  /**
 	   * @api private
@@ -4123,7 +4123,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    //enable attaching listeners to service client
 	    AWS.SequentialExecutor.call(this);
 	    AWS.Service.addDefaultMonitoringListeners(this);
-	    if (this.config.clientSideMonitoring && this.publisher) {
+	    if ((this.config.clientSideMonitoring || AWS.Service._clientSideMonitoring) && this.publisher) {
 	      var publisher = this.publisher;
 	      this.addNamedListener('PUBLISH_API_CALL', 'apiCall', function PUBLISH_API_CALL(event) {
 	        process.nextTick(function() {publisher.eventHandler(event);});
@@ -4775,7 +4775,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (!this.prototype.publisher && AWS.util.clientSideMonitoring) {
 	      var Publisher = AWS.util.clientSideMonitoring.Publisher;
 	      var configProvider = AWS.util.clientSideMonitoring.configProvider;
-	      this.prototype.publisher = new Publisher(configProvider());
+	      var publisherConfig = configProvider();
+	      this.prototype.publisher = new Publisher(publisherConfig);
+	      if (publisherConfig.enabled) {
+	        //if csm is enabled in environment, SDK should send all metrics
+	        AWS.Service._clientSideMonitoring = true;
+	      }
 	    }
 	    AWS.SequentialExecutor.call(svc.prototype);
 	    AWS.Service.addDefaultMonitoringListeners(svc.prototype);
@@ -6843,7 +6848,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	/* WEBPACK VAR INJECTION */(function(process) {var AWS = __webpack_require__(1);
 	var util = __webpack_require__(2);
-	var endpointDiscoveryEnabledEnv = 'AWS_ENABLE_ENDPOINT_DISCOVERY';
+	var endpointDiscoveryEnabledEnvs = ['AWS_ENABLE_ENDPOINT_DISCOVERY', 'AWS_ENDPOINT_DISCOVERY_ENABLED'];
 
 	/**
 	 * Generate key (except resources and operation part) to index the endpoints in the cache
@@ -7124,14 +7129,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  //not to check env in browser
 	  if (util.isBrowser()) return false;
 
-	  if (Object.prototype.hasOwnProperty.call(process.env, endpointDiscoveryEnabledEnv)) {
-	    if (process.env[endpointDiscoveryEnabledEnv] === '' || process.env[endpointDiscoveryEnabledEnv] === undefined) {
-	      throw util.error(new Error(), {
-	        code: 'ConfigurationException',
-	        message: 'environmental variable AWS_ENABLE_ENDPOINT_DISCOVERY cannot be set to nothing'
-	      });
+	  for (var i = 0; i < endpointDiscoveryEnabledEnvs.length; i++) {
+	    var env = endpointDiscoveryEnabledEnvs[i];
+	    if (Object.prototype.hasOwnProperty.call(process.env, env)) {
+	      if (process.env[env] === '' || process.env[env] === undefined) {
+	        throw util.error(new Error(), {
+	          code: 'ConfigurationException',
+	          message: 'environmental variable ' + env + ' cannot be set to nothing'
+	        });
+	      }
+	      if (!isFalsy(process.env[env])) return true;
 	    }
-	    if (!isFalsy(process.env[endpointDiscoveryEnabledEnv])) return true;
 	  }
 
 	  var configFile = {};

@@ -48,20 +48,6 @@
       "type": "boolean",
       "box": true
     },
-    "SqlStatementResult": {
-      "type": "structure",
-      "members": {
-        "numberOfRecordsUpdated": {
-          "shape": "Long",
-          "documentation": "Number of rows updated."
-        },
-        "resultFrame": {
-          "shape": "ResultFrame",
-          "documentation": "ResultFrame returned by executing the sql statement"
-        }
-      },
-      "documentation": "SQL statement execution result"
-    },
     "Value": {
       "type": "structure",
       "members": {
@@ -122,6 +108,72 @@
       },
       "documentation": "List of Column metadata"
     },
+    "ResultFrame": {
+      "type": "structure",
+      "members": {
+        "records": {
+          "shape": "Records",
+          "documentation": "ResultSet Metadata."
+        },
+        "resultSetMetadata": {
+          "shape": "ResultSetMetadata",
+          "documentation": "ResultSet Metadata."
+        }
+      },
+      "documentation": "Result Frame"
+    },
+    "Long": {
+      "type": "long",
+      "box": true
+    },
+    "Row": {
+      "type": "list",
+      "member": {
+        "shape": "Value"
+      },
+      "documentation": "List of column values"
+    },
+    "String": {
+      "type": "string"
+    },
+    "ArrayValues": {
+      "type": "list",
+      "member": {
+        "shape": "Value"
+      },
+      "documentation": "Array value"
+    },
+    "Float": {
+      "type": "float",
+      "box": true
+    },
+    "ExecuteSqlResponse": {
+      "type": "structure",
+      "required": [
+        "sqlStatementResults"
+      ],
+      "members": {
+        "sqlStatementResults": {
+          "shape": "SqlStatementResults",
+          "documentation": "Results returned by executing the sql statement(s)"
+        }
+      },
+      "documentation": "Execute SQL response"
+    },
+    "SqlStatementResult": {
+      "type": "structure",
+      "members": {
+        "numberOfRecordsUpdated": {
+          "shape": "Long",
+          "documentation": "Number of rows updated."
+        },
+        "resultFrame": {
+          "shape": "ResultFrame",
+          "documentation": "ResultFrame returned by executing the sql statement"
+        }
+      },
+      "documentation": "SQL statement execution result"
+    },
     "ResultSetMetadata": {
       "type": "structure",
       "members": {
@@ -143,20 +195,6 @@
       },
       "documentation": "List of records"
     },
-    "ResultFrame": {
-      "type": "structure",
-      "members": {
-        "records": {
-          "shape": "Records",
-          "documentation": "ResultSet Metadata."
-        },
-        "resultSetMetadata": {
-          "shape": "ResultSetMetadata",
-          "documentation": "ResultSet Metadata."
-        }
-      },
-      "documentation": "Result Frame"
-    },
     "ExecuteSqlRequest": {
       "type": "structure",
       "required": [
@@ -166,31 +204,31 @@
       ],
       "members": {
         "awsSecretStoreArn": {
-          "shape": "String",
+          "shape": "Arn",
           "documentation": "ARN of the db credentials in AWS Secret Store or the friendly secret name"
         },
         "database": {
-          "shape": "String",
+          "shape": "DbName",
           "documentation": "Target DB name"
         },
         "dbClusterOrInstanceArn": {
-          "shape": "String",
+          "shape": "Arn",
           "documentation": "ARN of the target db cluster or instance"
         },
         "schema": {
-          "shape": "String",
+          "shape": "DbName",
           "documentation": "Target Schema name"
         },
         "sqlStatements": {
-          "shape": "String",
+          "shape": "SqlStatement",
           "documentation": "SQL statement(s) to be executed. Statements can be chained by using semicolons"
         }
       },
       "documentation": "Execute SQL Request"
     },
-    "Long": {
-      "type": "long",
-      "box": true
+    "Arn": {
+      "type": "string",
+      "max": 1024
     },
     "StructValue": {
       "type": "structure",
@@ -205,22 +243,9 @@
     "Blob": {
       "type": "blob"
     },
-    "Row": {
-      "type": "list",
-      "member": {
-        "shape": "Value"
-      },
-      "documentation": "List of column values"
-    },
-    "String": {
-      "type": "string"
-    },
-    "ArrayValues": {
-      "type": "list",
-      "member": {
-        "shape": "Value"
-      },
-      "documentation": "Array value"
+    "SqlStatement": {
+      "type": "string",
+      "max": 65536
     },
     "Double": {
       "type": "double",
@@ -292,9 +317,9 @@
       "type": "integer",
       "box": true
     },
-    "Float": {
-      "type": "float",
-      "box": true
+    "DbName": {
+      "type": "string",
+      "max": 64
     },
     "Record": {
       "type": "structure",
@@ -305,19 +330,6 @@
         }
       },
       "documentation": "Row or Record"
-    },
-    "ExecuteSqlResponse": {
-      "type": "structure",
-      "required": [
-        "sqlStatementResults"
-      ],
-      "members": {
-        "sqlStatementResults": {
-          "shape": "SqlStatementResults",
-          "documentation": "Results returned by executing the sql statement(s)"
-        }
-      },
-      "documentation": "Execute SQL response"
     }
   }
 }

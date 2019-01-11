@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "RDSDataService",
+        "description": "Documentation updates for RDS Data API."
+    },
+    {
+        "type": "feature",
+        "category": "client side monitoring",
+        "description": "Add a new environmental variable AWS_ENDPOINT_DISCOVERY_ENABLED to work along with AWS_ENABLE_ENDPOINT_DISCOVERY"
+    },
+    {
+        "type": "feature",
+        "category": "client side monitoring",
+        "description": "CSM now can be enabled globally only from environment without code change"
+    }
+]
