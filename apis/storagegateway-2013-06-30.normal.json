@@ -122,6 +122,28 @@
       ],
       "documentation": "<p>Configures one or more gateway local disks as working storage for a gateway. This operation is only supported in the stored volume gateway type. This operation is deprecated in cached volume API version 20120630. Use <a>AddUploadBuffer</a> instead.</p> <note> <p>Working storage is also referred to as upload buffer. You can also use the <a>AddUploadBuffer</a> operation to add upload buffer to a stored volume gateway.</p> </note> <p>In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add working storage, and one or more disk IDs that you want to configure as working storage.</p>"
     },
+    "AttachVolume": {
+      "name": "AttachVolume",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AttachVolumeInput"
+      },
+      "output": {
+        "shape": "AttachVolumeOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidGatewayRequestException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Connects a volume to an iSCSI connection and then attaches the volume to the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance.</p>"
+    },
     "CancelArchival": {
       "name": "CancelArchival",
       "http": {
@@ -897,6 +919,28 @@
         }
       ],
       "documentation": "<p>Returns information about the working storage of a gateway. This operation is only supported in the stored volumes gateway type. This operation is deprecated in cached volumes API version (20120630). Use DescribeUploadBuffer instead.</p> <note> <p>Working storage is also referred to as upload buffer. You can also use the DescribeUploadBuffer operation to add upload buffer to a stored volume gateway.</p> </note> <p>The response includes disk IDs that are configured as working storage, and it includes the amount of working storage allocated and used.</p>"
+    },
+    "DetachVolume": {
+      "name": "DetachVolume",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DetachVolumeInput"
+      },
+      "output": {
+        "shape": "DetachVolumeOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidGatewayRequestException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Disconnects a volume from an iSCSI connection and then detaches the volume from the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance.</p>"
     },
     "DisableGateway": {
       "name": "DisableGateway",
@@ -1692,6 +1736,51 @@
       },
       "documentation": "<p>A JSON object containing the of the gateway for which working storage was configured.</p>"
     },
+    "AttachVolumeInput": {
+      "type": "structure",
+      "required": [
+        "GatewayARN",
+        "VolumeARN",
+        "NetworkInterfaceId"
+      ],
+      "members": {
+        "GatewayARN": {
+          "shape": "GatewayARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the gateway that you want to attach the volume to.</p>"
+        },
+        "TargetName": {
+          "shape": "TargetName",
+          "documentation": "<p>The name of the iSCSI target used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying <code>TargetName</code> as <i>myvolume</i> results in the target ARN of <code>arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume</code>. The target name must be unique across all volumes on a gateway.</p> <p>If you don't specify a value, Storage Gateway uses the value that was previously used for this volume as the new target name.</p>"
+        },
+        "VolumeARN": {
+          "shape": "VolumeARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the volume to attach to the specified gateway.</p>"
+        },
+        "NetworkInterfaceId": {
+          "shape": "NetworkInterfaceId",
+          "documentation": "<p>The network interface of the gateway on which to expose the iSCSI target. Only IPv4 addresses are accepted. Use <a>DescribeGatewayInformation</a> to get a list of the network interfaces available on a gateway.</p> <p> Valid Values: A valid IP address.</p>"
+        },
+        "DiskId": {
+          "shape": "DiskId",
+          "documentation": "<p>The unique device ID or other distinguishing data that identifies the local disk used to create the volume. This value is only required when you are attaching a stored volume.</p>"
+        }
+      },
+      "documentation": "<p>AttachVolumeInput</p>"
+    },
+    "AttachVolumeOutput": {
+      "type": "structure",
+      "members": {
+        "VolumeARN": {
+          "shape": "VolumeARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the volume that was attached to the gateway.</p>"
+        },
+        "TargetARN": {
+          "shape": "TargetARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI name for the initiator that was used to connect to the target.</p>"
+        }
+      },
+      "documentation": "<p>AttachVolumeOutput</p>"
+    },
     "Authentication": {
       "type": "string",
       "documentation": "<p>The authentication method of the file share.</p> <p>Valid values are <code>ActiveDirectory</code> or <code>GuestAccess</code>. The default is <code>ActiveDirectory</code>.</p>",
@@ -1733,6 +1822,10 @@
           "shape": "VolumeStatus",
           "documentation": "<p>One of the VolumeStatus values that indicates the state of the storage volume.</p>"
         },
+        "VolumeAttachmentStatus": {
+          "shape": "VolumeAttachmentStatus",
+          "documentation": "<p>A value that indicates whether a storage volume is attached to or detached from a gateway.</p>"
+        },
         "VolumeSizeInBytes": {
           "shape": "long",
           "documentation": "<p>The size, in bytes, of the volume capacity.</p>"
@@ -1759,6 +1852,10 @@
         },
         "KMSKey": {
           "shape": "KMSKey"
+        },
+        "TargetName": {
+          "shape": "TargetName",
+          "documentation": "<p>The name of the iSCSI target that is used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying <code>TargetName</code> as <i>myvolume</i> results in the target ARN of <code>arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume</code>.</p>"
         }
       },
       "documentation": "<p>Describes an iSCSI cached volume.</p>"
@@ -1917,7 +2014,7 @@
         },
         "TargetARN": {
           "shape": "TargetARN",
-          "documentation": "<p>he Amazon Resource Name (ARN) of the volume target that includes the iSCSI name that initiators can use to connect to the target.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI name that initiators can use to connect to the target.</p>"
         }
       }
     },
@@ -2195,7 +2292,7 @@
         },
         "TargetARN": {
           "shape": "TargetARN",
-          "documentation": "<p>he Amazon Resource Name (ARN) of the volume target that includes the iSCSI name that initiators can use to connect to the target.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI name that initiators can use to connect to the target.</p>"
         }
       },
       "documentation": "<p>A JSON object containing the following fields:</p>"
@@ -3039,6 +3136,33 @@
       "max": 255,
       "min": 1
     },
+    "DetachVolumeInput": {
+      "type": "structure",
+      "required": [
+        "VolumeARN"
+      ],
+      "members": {
+        "VolumeARN": {
+          "shape": "VolumeARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the volume to detach from the gateway.</p>"
+        },
+        "ForceDetach": {
+          "shape": "Boolean",
+          "documentation": "<p>Set to <code>true</code> to forcibly remove the iSCSI connection of the target volume and detach the volume. The default is <code>false</code>. If this value is set to <code>false</code>, you must manually disconnect the iSCSI connection from the target volume.</p>"
+        }
+      },
+      "documentation": "<p>AttachVolumeInput</p>"
+    },
+    "DetachVolumeOutput": {
+      "type": "structure",
+      "members": {
+        "VolumeARN": {
+          "shape": "VolumeARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the volume that was detached.</p>"
+        }
+      },
+      "documentation": "<p>AttachVolumeOutput</p>"
+    },
     "DeviceType": {
       "type": "string",
       "max": 50,
@@ -3116,7 +3240,7 @@
         },
         "DiskAllocationResource": {
           "shape": "string",
-          "documentation": "<p>The iSCSI Qualified Name (IQN) that is defined for a disk. This field is not included in the response if the local disk is not defined as an iSCSI target. The format of this field is <i>targetIqn::LUNNumber::region-volumeId</i>. </p>"
+          "documentation": "<p>The iSCSI qualified name (IQN) that is defined for a disk. This field is not included in the response if the local disk is not defined as an iSCSI target. The format of this field is <i>targetIqn::LUNNumber::region-volumeId</i>. </p>"
         },
         "DiskAttributeList": {
           "shape": "DiskAttributeList"
@@ -3126,7 +3250,7 @@
     },
     "DiskAllocationType": {
       "type": "string",
-      "documentation": "<p>One of the <code>DiskAllocationType</code> enumeration values that identifies how a local disk is used. Valid values: \"UPLOAD_BUFFER\", \"CACHE_STORAGE\".</p>",
+      "documentation": "<p>One of the <code>DiskAllocationType</code> enumeration values that identifies how a local disk is used. Valid values: <code>UPLOAD_BUFFER</code>, <code>CACHE_STORAGE</code> </p>",
       "max": 100,
       "min": 3
     },
@@ -3163,14 +3287,20 @@
     },
     "DomainName": {
       "type": "string",
+      "max": 1024,
+      "min": 1,
       "pattern": "^([a-z0-9]+(-[a-z0-9]+)*\\.)+[a-z]{2,}$"
     },
     "DomainUserName": {
       "type": "string",
+      "max": 1024,
+      "min": 1,
       "pattern": "^\\w[\\w\\.\\- ]*$"
     },
     "DomainUserPassword": {
       "type": "string",
+      "max": 1024,
+      "min": 1,
       "pattern": "^[ -~]+$",
       "sensitive": true
     },
@@ -3270,7 +3400,6 @@
       "member": {
         "shape": "Folder"
       },
-      "documentation": "<p>A comma-separated list of the paths of folders to refresh in the cache. The default is [<code>\"/\"</code>]. The default refreshes objects and folders at the root of the Amazon S3 bucket. If <code>Recursive</code> is set to \"true\", the entire S3 bucket that the file share has access to is refreshed.</p>",
       "max": 50,
       "min": 1
     },
@@ -3350,6 +3479,16 @@
         "shape": "GatewayInfo"
       }
     },
+    "Host": {
+      "type": "string",
+      "pattern": "^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])(:(\\d+))?$"
+    },
+    "Hosts": {
+      "type": "list",
+      "member": {
+        "shape": "Host"
+      }
+    },
     "HourOfDay": {
       "type": "integer",
       "max": 23,
@@ -3387,11 +3526,19 @@
       "members": {
         "GatewayARN": {
           "shape": "GatewayARN",
-          "documentation": "<p>The unique Amazon Resource Name (ARN) of the file gateway you want to add to the Active Directory domain. </p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the gateway. Use the <code>ListGateways</code> operation to return a list of gateways for your account and region.</p>"
         },
         "DomainName": {
           "shape": "DomainName",
           "documentation": "<p>The name of the domain that you want the gateway to join.</p>"
+        },
+        "OrganizationalUnit": {
+          "shape": "OrganizationalUnit",
+          "documentation": "<p>The organizational unit (OU) is a container with an Active Directory that can hold users, groups, computers, and other OUs and this parameter specifies the OU that the gateway will join within the AD domain.</p>"
+        },
+        "DomainControllers": {
+          "shape": "Hosts",
+          "documentation": "<p>List of IPv4 addresses, NetBIOS names, or host names of your domain server. If you need to specify the port number include it after the colon (“:”). For example, <code>mydc.mydomain.com:389</code>.</p>"
         },
         "UserName": {
           "shape": "DomainUserName",
@@ -3845,6 +3992,11 @@
         "aws-exec-read"
       ]
     },
+    "OrganizationalUnit": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
+    },
     "Path": {
       "type": "string",
       "documentation": "<p>The file share path used by the NFS client to identify the mount point. </p>"
@@ -3876,16 +4028,19 @@
       ],
       "members": {
         "FileShareARN": {
-          "shape": "FileShareARN"
+          "shape": "FileShareARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the file share you want to refresh.</p>"
         },
         "FolderList": {
-          "shape": "FolderList"
+          "shape": "FolderList",
+          "documentation": "<p>A comma-separated list of the paths of folders to refresh in the cache. The default is [<code>\"/\"</code>]. The default refreshes objects and folders at the root of the Amazon S3 bucket. If <code>Recursive</code> is set to \"true\", the entire S3 bucket that the file share has access to is refreshed.</p>"
         },
         "Recursive": {
           "shape": "Boolean",
           "documentation": "<p>A value that specifies whether to recursively refresh folders in the cache. The refresh includes folders that were in the cache the last time the gateway listed the folder's contents. If this value set to \"true\", each folder that is listed in <code>FolderList</code> is recursively updated. Otherwise, subfolders listed in <code>FolderList</code> are not refreshed. Only objects that are in folders listed directly under <code>FolderList</code> are found and used for the update. The default is \"true\".</p>"
         }
-      }
+      },
+      "documentation": "<p>RefreshCacheInput</p>"
     },
     "RefreshCacheOutput": {
       "type": "structure",
@@ -4228,6 +4383,10 @@
           "shape": "VolumeStatus",
           "documentation": "<p>One of the VolumeStatus values that indicates the state of the storage volume.</p>"
         },
+        "VolumeAttachmentStatus": {
+          "shape": "VolumeAttachmentStatus",
+          "documentation": "<p>A value that indicates whether a storage volume is attached to, detached from, or is in the process of detaching from a gateway.</p>"
+        },
         "VolumeSizeInBytes": {
           "shape": "long",
           "documentation": "<p>The size of the volume in bytes.</p>"
@@ -4262,6 +4421,10 @@
         },
         "KMSKey": {
           "shape": "KMSKey"
+        },
+        "TargetName": {
+          "shape": "TargetName",
+          "documentation": "<p>The name of the iSCSI target that is used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying <code>TargetName</code> as <i>myvolume</i> results in the target ARN of <code>arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume</code>.</p>"
         }
       },
       "documentation": "<p>Describes an iSCSI stored volume.</p>"
@@ -4924,6 +5087,11 @@
         "shape": "VolumeARN"
       }
     },
+    "VolumeAttachmentStatus": {
+      "type": "string",
+      "max": 50,
+      "min": 3
+    },
     "VolumeId": {
       "type": "string",
       "max": 30,
@@ -4953,6 +5121,9 @@
         "VolumeSizeInBytes": {
           "shape": "long",
           "documentation": "<p>The size of the volume in bytes.</p> <p>Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and hyphens (-).</p>"
+        },
+        "VolumeAttachmentStatus": {
+          "shape": "VolumeAttachmentStatus"
         }
       },
       "documentation": "<p>Describes a storage volume object.</p>"

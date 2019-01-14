@@ -221,7 +221,7 @@ declare namespace MediaConvert {
   export interface AacSettings {
     AudioDescriptionBroadcasterMix?: AacAudioDescriptionBroadcasterMix;
     /**
-     * Average bitrate in bits/second. Defaults and valid values depend on rate control mode and profile.
+     * Average bitrate in bits/second. The set of valid values for this setting is: 6000, 8000, 10000, 12000, 14000, 16000, 20000, 24000, 28000, 32000, 40000, 48000, 56000, 64000, 80000, 96000, 112000, 128000, 160000, 192000, 224000, 256000, 288000, 320000, 384000, 448000, 512000, 576000, 640000, 768000, 896000, 1024000. The value you set is also constrained by the values you choose for Profile (codecProfile), Bitrate control mode (codingMode), and Sample rate (sampleRate). Default values depend on Bitrate control mode and Profile.
      */
     Bitrate?: __integerMin6000Max1024000;
     CodecProfile?: AacCodecProfile;
@@ -260,6 +260,13 @@ declare namespace MediaConvert {
      * Sample rate in hz. Sample rate is always 48000.
      */
     SampleRate?: __integerMin48000Max48000;
+  }
+  export type AccelerationMode = "DISABLED"|"ENABLED"|string;
+  export interface AccelerationSettings {
+    /**
+     * Acceleration configuration for the job.
+     */
+    Mode: AccelerationMode;
   }
   export type AfdSignaling = "NONE"|"AUTO"|"FIXED"|string;
   export interface AiffSettings {
@@ -421,6 +428,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     FontResolution?: __integerMin96Max600;
     /**
+     * Provide the font script, using an ISO 15924 script code, if the LanguageCode is not sufficient for determining the script type. Where LanguageCode or CustomLanguageCode is sufficient, use "AUTOMATIC" or leave unset. This is used to help determine the appropriate font for rendering burn-in captions.
+     */
+    FontScript?: FontScript;
+    /**
      * A positive integer indicates the exact font size in points. Set to 0 for automatic font size selection. All burn-in and DVB-Sub font settings must match.
      */
     FontSize?: __integerMin0Max96;
@@ -472,12 +483,12 @@ All burn-in and DVB-Sub font settings must match.
      */
     CaptionSelectorName?: __stringMin1;
     /**
-     * Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code
+     * Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information to choose the font language for rendering the captions text.
      */
     CustomLanguageCode?: __stringMin3Max3PatternAZaZ3;
     DestinationSettings?: CaptionDestinationSettings;
     /**
-     * Indicates the language of the caption output track.
+     * Specify the language of this captions output track. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information to choose the font language for rendering the captions text.
      */
     LanguageCode?: LanguageCode;
     /**
@@ -487,12 +498,12 @@ All burn-in and DVB-Sub font settings must match.
   }
   export interface CaptionDescriptionPreset {
     /**
-     * Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code
+     * Indicates the language of the caption output track, using the ISO 639-2 or ISO 639-3 three-letter language code. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information to choose the font language for rendering the captions text.
      */
     CustomLanguageCode?: __stringMin3Max3PatternAZaZ3;
     DestinationSettings?: CaptionDestinationSettings;
     /**
-     * Indicates the language of the caption output track.
+     * Specify the language of this captions output track. For most captions output formats, the encoder puts this language information in the output captions metadata. If your output captions format is DVB-Sub or Burn in, the encoder uses this language information to choose the font language for rendering the captions text.
      */
     LanguageCode?: LanguageCode;
     /**
@@ -504,6 +515,7 @@ All burn-in and DVB-Sub font settings must match.
     BurninDestinationSettings?: BurninDestinationSettings;
     DestinationType?: CaptionDestinationType;
     DvbSubDestinationSettings?: DvbSubDestinationSettings;
+    EmbeddedDestinationSettings?: EmbeddedDestinationSettings;
     SccDestinationSettings?: SccDestinationSettings;
     TeletextDestinationSettings?: TeletextDestinationSettings;
     TtmlDestinationSettings?: TtmlDestinationSettings;
@@ -527,8 +539,9 @@ All burn-in and DVB-Sub font settings must match.
     FileSourceSettings?: FileSourceSettings;
     SourceType?: CaptionSourceType;
     TeletextSourceSettings?: TeletextSourceSettings;
+    TrackSourceSettings?: TrackSourceSettings;
   }
-  export type CaptionSourceType = "ANCILLARY"|"DVB_SUB"|"EMBEDDED"|"SCTE20"|"SCC"|"TTML"|"STL"|"SRT"|"SMI"|"TELETEXT"|"NULL_SOURCE"|string;
+  export type CaptionSourceType = "ANCILLARY"|"DVB_SUB"|"EMBEDDED"|"SCTE20"|"SCC"|"TTML"|"STL"|"SRT"|"SMI"|"TELETEXT"|"NULL_SOURCE"|"IMSC"|string;
   export interface ChannelMapping {
     /**
      * List of output channels
@@ -604,6 +617,9 @@ All burn-in and DVB-Sub font settings must match.
      * Contrast level.
      */
     Contrast?: __integerMin1Max100;
+    /**
+     * Use the HDR master display (Hdr10Metadata) settings to correct HDR metadata or to provide missing metadata. Note that these settings are not color correction.
+     */
     Hdr10Metadata?: Hdr10Metadata;
     /**
      * Hue in degrees.
@@ -629,6 +645,10 @@ All burn-in and DVB-Sub font settings must match.
   }
   export type ContainerType = "F4V"|"ISMV"|"M2TS"|"M3U8"|"CMFC"|"MOV"|"MP4"|"MPD"|"MXF"|"RAW"|string;
   export interface CreateJobRequest {
+    /**
+     * This is a beta feature. If you are interested in using this feature, please contact AWS customer support.
+     */
+    AccelerationSettings?: AccelerationSettings;
     BillingTagsSource?: BillingTagsSource;
     /**
      * Idempotency token for CreateJob operation.
@@ -656,6 +676,10 @@ All burn-in and DVB-Sub font settings must match.
     Job?: Job;
   }
   export interface CreateJobTemplateRequest {
+    /**
+     * This is a beta feature. If you are interested in using this feature please contact AWS customer support.
+     */
+    AccelerationSettings?: AccelerationSettings;
     /**
      * Optional. A category for the job template you are creating
      */
@@ -878,6 +902,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     FontResolution?: __integerMin96Max600;
     /**
+     * Provide the font script, using an ISO 15924 script code, if the LanguageCode is not sufficient for determining the script type. Where LanguageCode or CustomLanguageCode is sufficient, use "AUTOMATIC" or leave unset. This is used to help determine the appropriate font for rendering DVB-Sub captions.
+     */
+    FontScript?: FontScript;
+    /**
      * A positive integer indicates the exact font size in points. Set to 0 for automatic font size selection. All burn-in and DVB-Sub font settings must match.
      */
     FontSize?: __integerMin0Max96;
@@ -990,6 +1018,12 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type Eac3SurroundExMode = "NOT_INDICATED"|"ENABLED"|"DISABLED"|string;
   export type Eac3SurroundMode = "NOT_INDICATED"|"ENABLED"|"DISABLED"|string;
   export type EmbeddedConvert608To708 = "UPCONVERT"|"DISABLED"|string;
+  export interface EmbeddedDestinationSettings {
+    /**
+     * Ignore this setting unless your input captions are SCC format and your output container is MXF. With this combination of input captions format and output container, you can optionally use this setting to replace the input channel number with the track number that you specify. If you don't specify an output track number, the system uses the input channel number for the output channel number. This setting applies to each output individually. Channels must be unique and may only be combined in the following combinations: (1+3, 2+4, 1+4, 2+3).
+     */
+    Destination608ChannelNumber?: __integerMin1Max4;
+  }
   export interface EmbeddedSourceSettings {
     Convert608To708?: EmbeddedConvert608To708;
     /**
@@ -1029,6 +1063,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     TimeDelta?: __integerMinNegative2147483648Max2147483647;
   }
+  export type FontScript = "AUTOMATIC"|"HANS"|"HANT"|string;
   export interface FrameCaptureSettings {
     /**
      * Frame capture will encode the first frame of the output stream, then one frame every framerateDenominator/framerateNumerator seconds. For example, settings of framerateNumerator = 1 and framerateDenominator = 3 (a rate of 1/3 frame per second) will capture the first frame, then 1 frame every 3s. Files will be named as filename.n.jpg where n is the 0-based sequence number of each Capture.
@@ -1128,11 +1163,11 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     FramerateControl?: H264FramerateControl;
     FramerateConversionAlgorithm?: H264FramerateConversionAlgorithm;
     /**
-     * When you use the API for transcode jobs that use framerate conversion, specify the framerate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use framerate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.
+     * When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateDenominator to specify the denominator of this fraction. In this example, use 1001 for the value of FramerateDenominator. When you use the console for transcode jobs that use frame rate conversion, provide the value as a decimal number for Framerate. In this example, specify 23.976.
      */
     FramerateDenominator?: __integerMin1Max2147483647;
     /**
-     * Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps.
+     * Frame rate numerator - frame rate is a fraction, e.g. 24000 / 1001 = 23.976 fps.
      */
     FramerateNumerator?: __integerMin1Max2147483647;
     GopBReference?: H264GopBReference;
@@ -1251,11 +1286,11 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     FramerateControl?: H265FramerateControl;
     FramerateConversionAlgorithm?: H265FramerateConversionAlgorithm;
     /**
-     * Framerate denominator.
+     * Frame rate denominator.
      */
     FramerateDenominator?: __integerMin1Max2147483647;
     /**
-     * Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps.
+     * Frame rate numerator - frame rate is a fraction, e.g. 24000 / 1001 = 23.976 fps.
      */
     FramerateNumerator?: __integerMin1Max2147483647;
     GopBReference?: H265GopBReference;
@@ -1532,21 +1567,21 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     CaptionSelectors?: __mapOfCaptionSelector;
     DeblockFilter?: InputDeblockFilter;
     /**
-     * If the input file is encrypted, decryption settings to decrypt the media file
+     * Settings for decrypting any input files that are encrypted.
      */
     DecryptionSettings?: InputDecryptionSettings;
     DenoiseFilter?: InputDenoiseFilter;
     /**
-     * Use Input (fileInput) to define the source file used in the transcode job. There can be multiple inputs in a job. These inputs are concantenated, in the order they are specified in the job, to create the output.
+     * Specify the source file for your transcoding job. You can use multiple inputs in a single job. The service concatenates these inputs, in the order that you specify them in the job, to create the outputs. If your input format is IMF, specify your input by providing the path to your CPL. For example, "s3://bucket/vf/cpl.xml". If the CPL is in an incomplete IMP, make sure to use *Supplemental IMPs* (SupplementalImps) to specify any supplemental IMPs that contain assets referenced by the CPL.
      */
-    FileInput?: __stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MM;
+    FileInput?: __stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL;
     FilterEnable?: InputFilterEnable;
     /**
      * Use Filter strength (FilterStrength) to adjust the magnitude the input filter settings (Deblock and Denoise). The range is -5 to 5. Default is 0.
      */
     FilterStrength?: __integerMinNegative5Max5;
     /**
-     * Enable the Image inserter (ImageInserter) feature to include a graphic overlay on your video. Enable or disable this feature for each input individually. This setting is disabled by default.
+     * Enable the image inserter feature to include a graphic overlay on your video. Enable or disable this feature for each input individually. This setting is disabled by default.
      */
     ImageInserter?: ImageInserter;
     /**
@@ -1558,6 +1593,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     ProgramNumber?: __integerMin1Max2147483647;
     PsiControl?: InputPsiControl;
+    /**
+     * Provide a list of any necessary supplemental IMPs. You need supplemental IMPs if the CPL that you're using for your input is in an incomplete IMP. Specify either the supplemental IMP directories with a trailing slash or the ASSETMAP.xml files. For example ["s3://bucket/ov/", "s3://bucket/vf2/ASSETMAP.xml"]. You don't need to specify the IMP that contains your input CPL, because the service automatically detects it.
+     */
+    SupplementalImps?: __listOf__stringPatternS3ASSETMAPXml;
     TimecodeSource?: InputTimecodeSource;
     VideoSelector?: VideoSelector;
   }
@@ -1611,7 +1650,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     FilterStrength?: __integerMinNegative5Max5;
     /**
-     * Enable the Image inserter (ImageInserter) feature to include a graphic overlay on your video. Enable or disable this feature for each input individually. This setting is disabled by default.
+     * Enable the image inserter feature to include a graphic overlay on your video. Enable or disable this feature for each input individually. This setting is disabled by default.
      */
     ImageInserter?: ImageInserter;
     /**
@@ -1629,11 +1668,11 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type InputTimecodeSource = "EMBEDDED"|"ZEROBASED"|"SPECIFIEDSTART"|string;
   export interface InsertableImage {
     /**
-     * Set the time, in milliseconds, for the image to remain on the output video.
+     * Specify the time, in milliseconds, for the image to remain on the output video. This duration includes fade-in time but not fade-out time.
      */
     Duration?: __integerMin0Max2147483647;
     /**
-     * Set the length of time, in milliseconds, between the Start time that you specify for the image insertion and the time that the image appears at full opacity. Full opacity is the level that you specify for the opacity setting. If you don't specify a value for Fade-in, the image will appear abruptly at the overlay start time.
+     * Specify the length of time, in milliseconds, between the Start time that you specify for the image insertion and the time that the image appears at full opacity. Full opacity is the level that you specify for the opacity setting. If you don't specify a value for Fade-in, the image will appear abruptly at the overlay start time.
      */
     FadeIn?: __integerMin0Max2147483647;
     /**
@@ -1645,15 +1684,15 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     Height?: __integerMin0Max2147483647;
     /**
-     * Use Image location (imageInserterInput) to specify the Amazon S3 location of the image to be inserted into the output. Use a PNG or TGA file that fits inside the video frame.
+     * Specify the Amazon S3 location of the image that you want to overlay on the video. Use a PNG or TGA file.
      */
     ImageInserterInput?: __stringMin14PatternS3BmpBMPPngPNGTgaTGA;
     /**
-     * Use Left (ImageX) to set the distance, in pixels, between the inserted image and the left edge of the video frame. Required for any image overlay that you specify.
+     * Specify the distance, in pixels, between the inserted image and the left edge of the video frame. Required for any image overlay that you specify.
      */
     ImageX?: __integerMin0Max2147483647;
     /**
-     * Use Top (ImageY) to set the distance, in pixels, between the overlaid image and the top edge of the video frame. Required for any image overlay that you specify.
+     * Specify the distance, in pixels, between the overlaid image and the top edge of the video frame. Required for any image overlay that you specify.
      */
     ImageY?: __integerMin0Max2147483647;
     /**
@@ -1665,7 +1704,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     Opacity?: __integerMin0Max100;
     /**
-     * Use Start time (StartTime) to specify the video timecode when the image is inserted in the output. This must be in timecode (HH:MM:SS:FF or HH:MM:SS;FF) format.
+     * Specify the timecode of the frame that you want the overlay to first appear on. This must be in timecode (HH:MM:SS:FF or HH:MM:SS;FF) format. Remember to take into account your timecode source settings.
      */
     StartTime?: __stringPattern01D20305D205D;
     /**
@@ -1674,6 +1713,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     Width?: __integerMin0Max2147483647;
   }
   export interface Job {
+    /**
+     * Acceleration settings for job execution.
+     */
+    AccelerationSettings?: AccelerationSettings;
     /**
      * An identifier for this resource that is unique within all of AWS.
      */
@@ -1749,6 +1792,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   }
   export type JobStatus = "SUBMITTED"|"PROGRESSING"|"COMPLETE"|"CANCELED"|"ERROR"|string;
   export interface JobTemplate {
+    /**
+     * Acceleration settings for job execution.
+     */
+    AccelerationSettings?: AccelerationSettings;
     /**
      * An identifier for this resource that is unique within all of AWS.
      */
@@ -1927,6 +1974,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type M2tsEbpAudioInterval = "VIDEO_AND_FIXED_INTERVALS"|"VIDEO_INTERVAL"|string;
   export type M2tsEbpPlacement = "VIDEO_AND_AUDIO_PIDS"|"VIDEO_PID"|string;
   export type M2tsEsRateInPes = "INCLUDE"|"EXCLUDE"|string;
+  export type M2tsForceTsVideoEbpOrder = "FORCE"|"DEFAULT"|string;
   export type M2tsNielsenId3 = "INSERT"|"NONE"|string;
   export type M2tsPcrControl = "PCR_EVERY_PES_PACKET"|"CONFIGURED_PCR_PERIOD"|string;
   export type M2tsRateMode = "VBR"|"CBR"|string;
@@ -1962,6 +2010,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     EbpAudioInterval?: M2tsEbpAudioInterval;
     EbpPlacement?: M2tsEbpPlacement;
     EsRateInPes?: M2tsEsRateInPes;
+    ForceTsVideoEbpOrder?: M2tsForceTsVideoEbpOrder;
     /**
      * The length in seconds of each fragment. Only used with EBP markers.
      */
@@ -2088,7 +2137,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   }
   export interface MotionImageInserter {
     /**
-     * If your motion graphic asset is a .mov file, keep this setting unspecified. If your motion graphic asset is a series of .png files, specify the framerate of the overlay in frames per second, as a fraction. For example, specify 24 fps as 24/1. Make sure that the number of images in your series matches the framerate and your intended overlay duration. For example, if you want a 30-second overlay at 30 fps, you should have 900 .png images. This overlay framerate doesn't need to match the framerate of the underlying video.
+     * If your motion graphic asset is a .mov file, keep this setting unspecified. If your motion graphic asset is a series of .png files, specify the frame rate of the overlay in frames per second, as a fraction. For example, specify 24 fps as 24/1. Make sure that the number of images in your series matches the frame rate and your intended overlay duration. For example, if you want a 30-second overlay at 30 fps, you should have 900 .png images. This overlay frame rate doesn't need to match the frame rate of the underlying video.
      */
     Framerate?: MotionImageInsertionFramerate;
     /**
@@ -2114,11 +2163,11 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   }
   export interface MotionImageInsertionFramerate {
     /**
-     * The bottom of the fraction that expresses your overlay framerate. For example, if your framerate is 24 fps, set this value to 1.
+     * The bottom of the fraction that expresses your overlay frame rate. For example, if your frame rate is 24 fps, set this value to 1.
      */
     FramerateDenominator?: __integerMin1Max17895697;
     /**
-     * The top of the fraction that expresses your overlay framerate. For example, if your framerate is 24 fps, set this value to 24.
+     * The top of the fraction that expresses your overlay frame rate. For example, if your frame rate is 24 fps, set this value to 24.
      */
     FramerateNumerator?: __integerMin1Max2147483640;
   }
@@ -2200,11 +2249,11 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     FramerateControl?: Mpeg2FramerateControl;
     FramerateConversionAlgorithm?: Mpeg2FramerateConversionAlgorithm;
     /**
-     * Framerate denominator.
+     * Frame rate denominator.
      */
     FramerateDenominator?: __integerMin1Max1001;
     /**
-     * Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps.
+     * Frame rate numerator - frame rate is a fraction, e.g. 24000 / 1001 = 23.976 fps.
      */
     FramerateNumerator?: __integerMin24Max60000;
     /**
@@ -2277,7 +2326,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     Destination?: __stringPatternS3;
     Encryption?: MsSmoothEncryptionSettings;
     /**
-     * Use Fragment length (FragmentLength) to specify the mp4 fragment sizes in seconds. Fragment length must be compatible with GOP size and framerate.
+     * Use Fragment length (FragmentLength) to specify the mp4 fragment sizes in seconds. Fragment length must be compatible with GOP size and frame rate.
      */
     FragmentLength?: __integerMin1Max2147483647;
     ManifestEncoding?: MsSmoothManifestEncoding;
@@ -2453,11 +2502,11 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     FramerateControl?: ProresFramerateControl;
     FramerateConversionAlgorithm?: ProresFramerateConversionAlgorithm;
     /**
-     * Framerate denominator.
+     * Frame rate denominator.
      */
     FramerateDenominator?: __integerMin1Max2147483647;
     /**
-     * When you use the API for transcode jobs that use framerate conversion, specify the framerate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator.
+     * When you use the API for transcode jobs that use frame rate conversion, specify the frame rate as a fraction. For example,  24000 / 1001 = 23.976 fps. Use FramerateNumerator to specify the numerator of this fraction. In this example, use 24000 for the value of FramerateNumerator.
      */
     FramerateNumerator?: __integerMin1Max2147483647;
     InterlaceMode?: ProresInterlaceMode;
@@ -2614,7 +2663,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     /**
      * Optional AWS Certificate Manager ARN for a certificate to send to the keyprovider. The certificate holds a key used by the keyprovider to encrypt the keys in its response.
      */
-    CertificateArn?: __stringPatternArnAwsAcm;
+    CertificateArn?: __stringPatternArnAwsUsGovAcm;
     /**
      * The SPEKE-compliant server uses Resource ID (ResourceId) to identify content.
      */
@@ -2684,7 +2733,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type TimecodeBurninPosition = "TOP_CENTER"|"TOP_LEFT"|"TOP_RIGHT"|"MIDDLE_LEFT"|"MIDDLE_CENTER"|"MIDDLE_RIGHT"|"BOTTOM_LEFT"|"BOTTOM_CENTER"|"BOTTOM_RIGHT"|string;
   export interface TimecodeConfig {
     /**
-     * If you use an editing platform that relies on an anchor timecode, use Anchor Timecode (Anchor) to specify a timecode that will match the input video frame to the output video frame. Use 24-hour format with frame number, (HH:MM:SS:FF) or (HH:MM:SS;FF). This setting ignores framerate conversion. System behavior for Anchor Timecode varies depending on your setting for Source (TimecodeSource). * If Source (TimecodeSource) is set to Specified Start (SPECIFIEDSTART), the first input frame is the specified value in Start Timecode (Start). Anchor Timecode (Anchor) and Start Timecode (Start) are used calculate output timecode. * If Source (TimecodeSource) is set to Start at 0 (ZEROBASED)  the  first frame is 00:00:00:00. * If Source (TimecodeSource) is set to Embedded (EMBEDDED), the  first frame is the timecode value on the first input frame of the input.
+     * If you use an editing platform that relies on an anchor timecode, use Anchor Timecode (Anchor) to specify a timecode that will match the input video frame to the output video frame. Use 24-hour format with frame number, (HH:MM:SS:FF) or (HH:MM:SS;FF). This setting ignores frame rate conversion. System behavior for Anchor Timecode varies depending on your setting for Source (TimecodeSource). * If Source (TimecodeSource) is set to Specified Start (SPECIFIEDSTART), the first input frame is the specified value in Start Timecode (Start). Anchor Timecode (Anchor) and Start Timecode (Start) are used calculate output timecode. * If Source (TimecodeSource) is set to Start at 0 (ZEROBASED)  the  first frame is 00:00:00:00. * If Source (TimecodeSource) is set to Embedded (EMBEDDED), the  first frame is the timecode value on the first input frame of the input.
      */
     Anchor?: __stringPattern010920405090509092;
     Source?: TimecodeSource;
@@ -2719,6 +2768,12 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     SubmitTime?: __timestampUnix;
   }
+  export interface TrackSourceSettings {
+    /**
+     * Use this setting to select a single captions track from a source. Track numbers correspond to the order in the captions source file. For IMF sources, track numbering is based on the order that the captions appear in the CPL. For example, use 1 to select the captions asset that is listed first in the CPL. To include more than one captions track in your job outputs, create multiple input captions selectors. Specify one track per selector.
+     */
+    TrackNumber?: __integerMin1Max2147483647;
+  }
   export interface TtmlDestinationSettings {
     StylePassthrough?: TtmlStylePassthrough;
   }
@@ -2737,6 +2792,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export interface UntagResourceResponse {
   }
   export interface UpdateJobTemplateRequest {
+    /**
+     * This is a beta feature. If you are interested in using this feature, please contact AWS customer support.
+     */
+    AccelerationSettings?: AccelerationSettings;
     /**
      * The new category for the job template, if you are changing it.
      */
@@ -2815,7 +2874,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     CodecSettings?: VideoCodecSettings;
     ColorMetadata?: ColorMetadata;
     /**
-     * Applies only if your input aspect ratio is different from your output aspect ratio. Use Input cropping rectangle (Crop) to specify the  video area the service will include in the output. This will crop the input source, causing video pixels to be removed on encode. Do not use this setting if you have enabled Stretch to output (stretchToOutput) in your output settings.
+     * Applies only if your input aspect ratio is different from your output aspect ratio. Use Input cropping rectangle (Crop) to specify the  video area the service will include in the output. This will crop the input source, causing video pixels to be removed on encode. If you crop your input frame size to smaller than your output frame size, make sure to specify the behavior you want in your output setting "Scaling behavior".
      */
     Crop?: Rectangle;
     DropFrameTimecode?: DropFrameTimecode;
@@ -3009,6 +3068,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __listOf__string = __string[];
   export type __listOf__stringMin1 = __stringMin1[];
   export type __listOf__stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12 = __stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12[];
+  export type __listOf__stringPatternS3ASSETMAPXml = __stringPatternS3ASSETMAPXml[];
   export type __mapOfAudioSelector = {[key: string]: AudioSelector};
   export type __mapOfAudioSelectorGroup = {[key: string]: AudioSelectorGroup};
   export type __mapOfCaptionSelector = {[key: string]: CaptionSelector};
@@ -3035,13 +3095,14 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __stringPattern09aFAF809aFAF409aFAF409aFAF409aFAF12 = string;
   export type __stringPatternAZaZ0902 = string;
   export type __stringPatternAZaZ0932 = string;
-  export type __stringPatternArnAwsAcm = string;
+  export type __stringPatternArnAwsUsGovAcm = string;
   export type __stringPatternDD = string;
   export type __stringPatternHttps = string;
   export type __stringPatternIdentityAZaZ26AZaZ09163 = string;
   export type __stringPatternS3 = string;
-  export type __stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MM = string;
+  export type __stringPatternS3ASSETMAPXml = string;
   export type __stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE = string;
+  export type __stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL = string;
   export type __stringPatternWS = string;
   export type __timestampUnix = Date;
   /**

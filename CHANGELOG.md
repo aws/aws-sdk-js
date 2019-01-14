@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.387.0-->
+<!--LATEST=2.388.0-->
 <!--ENTRYINSERT-->
+
+## 2.388.0
+* feature: MediaConvert: IMF decode from a Composition Playlist for IMF specializations App #2 and App #2e; up to 99 input clippings; caption channel selection for MXF; and updated rate control for CBR jobs. Added support for acceleration in preview
+* feature: StorageGateway: JoinDomain API supports two more  parameters: organizational unit(OU) and domain controllers.  Two new APIs are introduced: DetachVolume and AttachVolume.
 
 ## 2.387.0
 * feature: RDSDataService: Documentation updates for RDS Data API.

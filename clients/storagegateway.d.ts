@@ -52,6 +52,14 @@ declare class StorageGateway extends Service {
    */
   addWorkingStorage(callback?: (err: AWSError, data: StorageGateway.Types.AddWorkingStorageOutput) => void): Request<StorageGateway.Types.AddWorkingStorageOutput, AWSError>;
   /**
+   * Connects a volume to an iSCSI connection and then attaches the volume to the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance.
+   */
+  attachVolume(params: StorageGateway.Types.AttachVolumeInput, callback?: (err: AWSError, data: StorageGateway.Types.AttachVolumeOutput) => void): Request<StorageGateway.Types.AttachVolumeOutput, AWSError>;
+  /**
+   * Connects a volume to an iSCSI connection and then attaches the volume to the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance.
+   */
+  attachVolume(callback?: (err: AWSError, data: StorageGateway.Types.AttachVolumeOutput) => void): Request<StorageGateway.Types.AttachVolumeOutput, AWSError>;
+  /**
    * Cancels archiving of a virtual tape to the virtual tape shelf (VTS) after the archiving process is initiated. This operation is only supported in the tape gateway type.
    */
   cancelArchival(params: StorageGateway.Types.CancelArchivalInput, callback?: (err: AWSError, data: StorageGateway.Types.CancelArchivalOutput) => void): Request<StorageGateway.Types.CancelArchivalOutput, AWSError>;
@@ -331,6 +339,14 @@ declare class StorageGateway extends Service {
    * Returns information about the working storage of a gateway. This operation is only supported in the stored volumes gateway type. This operation is deprecated in cached volumes API version (20120630). Use DescribeUploadBuffer instead.  Working storage is also referred to as upload buffer. You can also use the DescribeUploadBuffer operation to add upload buffer to a stored volume gateway.  The response includes disk IDs that are configured as working storage, and it includes the amount of working storage allocated and used.
    */
   describeWorkingStorage(callback?: (err: AWSError, data: StorageGateway.Types.DescribeWorkingStorageOutput) => void): Request<StorageGateway.Types.DescribeWorkingStorageOutput, AWSError>;
+  /**
+   * Disconnects a volume from an iSCSI connection and then detaches the volume from the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance.
+   */
+  detachVolume(params: StorageGateway.Types.DetachVolumeInput, callback?: (err: AWSError, data: StorageGateway.Types.DetachVolumeOutput) => void): Request<StorageGateway.Types.DetachVolumeOutput, AWSError>;
+  /**
+   * Disconnects a volume from an iSCSI connection and then detaches the volume from the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance.
+   */
+  detachVolume(callback?: (err: AWSError, data: StorageGateway.Types.DetachVolumeOutput) => void): Request<StorageGateway.Types.DetachVolumeOutput, AWSError>;
   /**
    * Disables a tape gateway when the gateway is no longer functioning. For example, if your gateway VM is damaged, you can disable the gateway so you can recover virtual tapes. Use this operation for a tape gateway that is not reachable or not functioning. This operation is only supported in the tape gateway type.  Once a gateway is disabled it cannot be enabled. 
    */
@@ -639,6 +655,38 @@ declare namespace StorageGateway {
   export interface AddWorkingStorageOutput {
     GatewayARN?: GatewayARN;
   }
+  export interface AttachVolumeInput {
+    /**
+     * The Amazon Resource Name (ARN) of the gateway that you want to attach the volume to.
+     */
+    GatewayARN: GatewayARN;
+    /**
+     * The name of the iSCSI target used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying TargetName as myvolume results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume. The target name must be unique across all volumes on a gateway. If you don't specify a value, Storage Gateway uses the value that was previously used for this volume as the new target name.
+     */
+    TargetName?: TargetName;
+    /**
+     * The Amazon Resource Name (ARN) of the volume to attach to the specified gateway.
+     */
+    VolumeARN: VolumeARN;
+    /**
+     * The network interface of the gateway on which to expose the iSCSI target. Only IPv4 addresses are accepted. Use DescribeGatewayInformation to get a list of the network interfaces available on a gateway.  Valid Values: A valid IP address.
+     */
+    NetworkInterfaceId: NetworkInterfaceId;
+    /**
+     * The unique device ID or other distinguishing data that identifies the local disk used to create the volume. This value is only required when you are attaching a stored volume.
+     */
+    DiskId?: DiskId;
+  }
+  export interface AttachVolumeOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the volume that was attached to the gateway.
+     */
+    VolumeARN?: VolumeARN;
+    /**
+     * The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI name for the initiator that was used to connect to the target.
+     */
+    TargetARN?: TargetARN;
+  }
   export type Authentication = string;
   export type BandwidthDownloadRateLimit = number;
   export type BandwidthType = string;
@@ -661,6 +709,10 @@ declare namespace StorageGateway {
      * One of the VolumeStatus values that indicates the state of the storage volume.
      */
     VolumeStatus?: VolumeStatus;
+    /**
+     * A value that indicates whether a storage volume is attached to or detached from a gateway.
+     */
+    VolumeAttachmentStatus?: VolumeAttachmentStatus;
     /**
      * The size, in bytes, of the volume capacity.
      */
@@ -686,6 +738,10 @@ declare namespace StorageGateway {
      */
     VolumeUsedInBytes?: VolumeUsedInBytes;
     KMSKey?: KMSKey;
+    /**
+     * The name of the iSCSI target that is used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying TargetName as myvolume results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume.
+     */
+    TargetName?: TargetName;
   }
   export type CachediSCSIVolumes = CachediSCSIVolume[];
   export interface CancelArchivalInput {
@@ -776,7 +832,7 @@ declare namespace StorageGateway {
      */
     VolumeARN?: VolumeARN;
     /**
-     * he Amazon Resource Name (ARN) of the volume target that includes the iSCSI name that initiators can use to connect to the target.
+     * The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI name that initiators can use to connect to the target.
      */
     TargetARN?: TargetARN;
   }
@@ -978,7 +1034,7 @@ declare namespace StorageGateway {
      */
     VolumeSizeInBytes?: long;
     /**
-     * he Amazon Resource Name (ARN) of the volume target that includes the iSCSI name that initiators can use to connect to the target.
+     * The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI name that initiators can use to connect to the target.
      */
     TargetARN?: TargetARN;
   }
@@ -1435,6 +1491,22 @@ declare namespace StorageGateway {
     WorkingStorageAllocatedInBytes?: long;
   }
   export type Description = string;
+  export interface DetachVolumeInput {
+    /**
+     * The Amazon Resource Name (ARN) of the volume to detach from the gateway.
+     */
+    VolumeARN: VolumeARN;
+    /**
+     * Set to true to forcibly remove the iSCSI connection of the target volume and detach the volume. The default is false. If this value is set to false, you must manually disconnect the iSCSI connection from the target volume.
+     */
+    ForceDetach?: Boolean;
+  }
+  export interface DetachVolumeOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the volume that was detached.
+     */
+    VolumeARN?: VolumeARN;
+  }
   export type DeviceType = string;
   export interface DeviceiSCSIAttributes {
     /**
@@ -1486,7 +1558,7 @@ declare namespace StorageGateway {
     DiskSizeInBytes?: long;
     DiskAllocationType?: DiskAllocationType;
     /**
-     * The iSCSI Qualified Name (IQN) that is defined for a disk. This field is not included in the response if the local disk is not defined as an iSCSI target. The format of this field is targetIqn::LUNNumber::region-volumeId. 
+     * The iSCSI qualified name (IQN) that is defined for a disk. This field is not included in the response if the local disk is not defined as an iSCSI target. The format of this field is targetIqn::LUNNumber::region-volumeId. 
      */
     DiskAllocationResource?: string;
     DiskAttributeList?: DiskAttributeList;
@@ -1550,6 +1622,8 @@ declare namespace StorageGateway {
   export type GatewayTimezone = string;
   export type GatewayType = string;
   export type Gateways = GatewayInfo[];
+  export type Host = string;
+  export type Hosts = Host[];
   export type HourOfDay = number;
   export type IPV4AddressCIDR = string;
   export type Initiator = string;
@@ -1557,13 +1631,21 @@ declare namespace StorageGateway {
   export type IqnName = string;
   export interface JoinDomainInput {
     /**
-     * The unique Amazon Resource Name (ARN) of the file gateway you want to add to the Active Directory domain. 
+     * The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.
      */
     GatewayARN: GatewayARN;
     /**
      * The name of the domain that you want the gateway to join.
      */
     DomainName: DomainName;
+    /**
+     * The organizational unit (OU) is a container with an Active Directory that can hold users, groups, computers, and other OUs and this parameter specifies the OU that the gateway will join within the AD domain.
+     */
+    OrganizationalUnit?: OrganizationalUnit;
+    /**
+     * List of IPv4 addresses, NetBIOS names, or host names of your domain server. If you need to specify the port number include it after the colon (“:”). For example, mydc.mydomain.com:389.
+     */
+    DomainControllers?: Hosts;
     /**
      * Sets the user name of user who has permission to add the gateway to the Active Directory domain.
      */
@@ -1795,13 +1877,20 @@ declare namespace StorageGateway {
   }
   export type NumTapesToCreate = number;
   export type ObjectACL = "private"|"public-read"|"public-read-write"|"authenticated-read"|"bucket-owner-read"|"bucket-owner-full-control"|"aws-exec-read"|string;
+  export type OrganizationalUnit = string;
   export type Path = string;
   export type PermissionId = number;
   export type PermissionMode = string;
   export type PositiveIntObject = number;
   export type RecurrenceInHours = number;
   export interface RefreshCacheInput {
+    /**
+     * The Amazon Resource Name (ARN) of the file share you want to refresh.
+     */
     FileShareARN: FileShareARN;
+    /**
+     * A comma-separated list of the paths of folders to refresh in the cache. The default is ["/"]. The default refreshes objects and folders at the root of the Amazon S3 bucket. If Recursive is set to "true", the entire S3 bucket that the file share has access to is refreshed.
+     */
     FolderList?: FolderList;
     /**
      * A value that specifies whether to recursively refresh folders in the cache. The refresh includes folders that were in the cache the last time the gateway listed the folder's contents. If this value set to "true", each folder that is listed in FolderList is recursively updated. Otherwise, subfolders listed in FolderList are not refreshed. Only objects that are in folders listed directly under FolderList are found and used for the update. The default is "true".
@@ -1968,6 +2057,10 @@ declare namespace StorageGateway {
      */
     VolumeStatus?: VolumeStatus;
     /**
+     * A value that indicates whether a storage volume is attached to, detached from, or is in the process of detaching from a gateway.
+     */
+    VolumeAttachmentStatus?: VolumeAttachmentStatus;
+    /**
      * The size of the volume in bytes.
      */
     VolumeSizeInBytes?: long;
@@ -2000,6 +2093,10 @@ declare namespace StorageGateway {
      */
     VolumeUsedInBytes?: VolumeUsedInBytes;
     KMSKey?: KMSKey;
+    /**
+     * The name of the iSCSI target that is used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying TargetName as myvolume results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume.
+     */
+    TargetName?: TargetName;
   }
   export type StorediSCSIVolumes = StorediSCSIVolume[];
   export interface Tag {
@@ -2370,6 +2467,7 @@ declare namespace StorageGateway {
   export type VTLDevices = VTLDevice[];
   export type VolumeARN = string;
   export type VolumeARNs = VolumeARN[];
+  export type VolumeAttachmentStatus = string;
   export type VolumeId = string;
   export interface VolumeInfo {
     /**
@@ -2390,6 +2488,7 @@ declare namespace StorageGateway {
      * The size of the volume in bytes. Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and hyphens (-).
      */
     VolumeSizeInBytes?: long;
+    VolumeAttachmentStatus?: VolumeAttachmentStatus;
   }
   export type VolumeInfos = VolumeInfo[];
   export interface VolumeRecoveryPointInfo {
