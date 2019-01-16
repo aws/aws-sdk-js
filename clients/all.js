@@ -169,5 +169,6 @@ module.exports = {
   Kafka: require('./kafka'),
   ApiGatewayManagementApi: require('./apigatewaymanagementapi'),
   ApiGatewayV2: require('./apigatewayv2'),
-  DocDB: require('./docdb')
+  DocDB: require('./docdb'),
+  Backup: require('./backup')
 };

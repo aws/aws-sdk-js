@@ -677,5 +677,8 @@
   },
   "docdb": {
     "name": "DocDB"
+  },
+  "backup": {
+    "name": "Backup"
   }
 }
