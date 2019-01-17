@@ -2422,6 +2422,18 @@ The Amazon Pinpoint console can't display attribute names that include the follo
   }
   export interface Event {
     /**
+     * The package name associated with the app that's recording the event.
+     */
+    AppPackageName?: __string;
+    /**
+     * The title of the app that's recording the event.
+     */
+    AppTitle?: __string;
+    /**
+     * The version number of the app that's recording the event.
+     */
+    AppVersionCode?: __string;
+    /**
      * Custom attributes that are associated with the event you're adding or updating.
      */
     Attributes?: MapOf__string;
@@ -2437,6 +2449,10 @@ The Amazon Pinpoint console can't display attribute names that include the follo
      * Custom metrics related to the event.
      */
     Metrics?: MapOf__double;
+    /**
+     * The name of the SDK that's being used to record the event.
+     */
+    SdkName?: __string;
     /**
      * Information about the session in which the event occurred.
      */
