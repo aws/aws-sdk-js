@@ -63,7 +63,7 @@ if (AWS.util.isNode()) {
               'aws_secret_access_key': 'asak'
             }
           }
-        })
+        });
       });
   
       it('load default profiles filename is not supplied', function() {
@@ -144,6 +144,61 @@ if (AWS.util.isNode()) {
         iniFile.loadFrom();
         expect(AWS.util.readFileSync.calls.length).to.eql(1);
       })
+    });
+
+    describe('resolvedProfiles', function() {
+      var iniFile;
+      beforeEach(function() {
+        process.env.HOME = '/foo';
+        helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function(path) {
+          if (path === '/foo/.aws/config') return '[default]\naws_access_key_id = akid\naws_secret_access_key = secret';
+          else return '[default]\naws_access_key_id = akid2\naws_secret_access_key = secret2'
+        });
+        iniFile = new IniLoader();
+        iniFile.loadFrom({isConfig: true});
+        iniFile.loadFrom({});
+      });
+
+      afterEach(function() {
+        iniFile.clearCachedFiles();
+      });
+
+      it('is un-enumerable', function() {
+        expect(iniFile.resolvedProfiles).to.eql({});
+        validateCachedFiles(iniFile, {
+          '/foo/.aws/config': {
+            'default': {
+              'aws_access_key_id': 'akid',
+              'aws_secret_access_key': 'secret'
+            }
+          },
+          '/foo/.aws/credentials': {
+            'default': {
+              'aws_access_key_id': 'akid2',
+              'aws_secret_access_key': 'secret2'
+            }
+          },
+        });
+      });
+
+      it('profile config/credentials is not configurable', function() {
+        delete iniFile.resolvedProfiles['/foo/.aws/config'];
+        iniFile.resolvedProfiles['/foo/.aws/credentials'].default = {};
+        validateCachedFiles(iniFile, {
+          '/foo/.aws/config': {
+            'default': {
+              'aws_access_key_id': 'akid',
+              'aws_secret_access_key': 'secret'
+            }
+          },
+          '/foo/.aws/credentials': {
+            'default': {
+              'aws_access_key_id': 'akid2',
+              'aws_secret_access_key': 'secret2'
+            }
+          },
+        });
+      });
     });
   });
 }
