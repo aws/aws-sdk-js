@@ -1,6 +1,6 @@
 import {Service} from '../service';
 import {ManagedUpload} from '../s3/managed_upload';
-import {AWSError} from '../lib/error';
+import {AWSError} from '../error';
 import S3 = require('../../clients/s3');
 
 export class S3Customizations extends Service {
