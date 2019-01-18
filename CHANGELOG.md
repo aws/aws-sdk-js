@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.390.0-->
+<!--LATEST=2.391.0-->
 <!--ENTRYINSERT-->
+
+## 2.391.0
+* feature: EC2: Adjust EC2's available instance types.
+* feature: Glue: AllocatedCapacity field is being deprecated and replaced with MaxCapacity field
 
 ## 2.390.0
 * feature: Lightsail: This release adds functionality to the CreateDiskSnapshot API that allows users to snapshot instance root volumes. It also adds various documentation updates.

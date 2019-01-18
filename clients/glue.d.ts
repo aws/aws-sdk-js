@@ -1525,13 +1525,17 @@ declare namespace Glue {
      */
     MaxRetries?: MaxRetries;
     /**
-     * The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This parameter is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
     /**
      * The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
      */
     Timeout?: Timeout;
+    /**
+     * AWS Glue supports running jobs on a JobCommand.Name="pythonshell" with allocated processing as low as 0.0625 DPU, which can be specified using MaxCapacity. Glue ETL jobs running in any other way cannot have fractional DPU allocations.
+     */
+    MaxCapacity?: NullableDouble;
     /**
      * Specifies configuration properties of a job notification.
      */
@@ -2884,13 +2888,17 @@ declare namespace Glue {
      */
     MaxRetries?: MaxRetries;
     /**
-     * The number of AWS Glue data processing units (DPUs) allocated to runs of this job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This field is deprecated, use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) allocated to runs of this job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. 
      */
     AllocatedCapacity?: IntegerValue;
     /**
      * The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
      */
     Timeout?: Timeout;
+    /**
+     * AWS Glue supports running jobs on a JobCommand.Name="pythonshell" with allocated processing as low as 0.0625 DPU, which can be specified using MaxCapacity. Glue ETL jobs running in any other way cannot have fractional DPU allocations.
+     */
+    MaxCapacity?: NullableDouble;
     /**
      * Specifies configuration properties of a job notification.
      */
@@ -2935,7 +2943,7 @@ declare namespace Glue {
   export type JobBookmarksEncryptionMode = "DISABLED"|"CSE-KMS"|string;
   export interface JobCommand {
     /**
-     * The name of the job command: this must be glueetl.
+     * The name of the job command: this must be glueetl, for an Apache Spark ETL job, or pythonshell, for a Python shell job.
      */
     Name?: GenericString;
     /**
@@ -2995,7 +3003,7 @@ declare namespace Glue {
      */
     PredecessorRuns?: PredecessorList;
     /**
-     * The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This field is deprecated, use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
     /**
@@ -3006,6 +3014,10 @@ declare namespace Glue {
      * The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.
      */
     Timeout?: Timeout;
+    /**
+     * AWS Glue supports running jobs on a JobCommand.Name="pythonshell" with allocated processing as low as 0.0625 DPU, which can be specified using MaxCapacity. Glue ETL jobs running in any other way cannot have fractional DPU allocations.
+     */
+    MaxCapacity?: NullableDouble;
     /**
      * Specifies configuration properties of a job run notification.
      */
@@ -3055,13 +3067,17 @@ declare namespace Glue {
      */
     MaxRetries?: MaxRetries;
     /**
-     * The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
     /**
      * The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
      */
     Timeout?: Timeout;
+    /**
+     * AWS Glue supports running jobs on a JobCommand.Name="pythonshell" with allocated processing as low as 0.0625 DPU, which can be specified using MaxCapacity. Glue ETL jobs running in any other way cannot have fractional DPU allocations.
+     */
+    MaxCapacity?: NullableDouble;
     /**
      * Specifies configuration properties of a job notification.
      */
@@ -3188,6 +3204,7 @@ declare namespace Glue {
     NotifyDelayAfter?: NotifyDelayAfter;
   }
   export type NotifyDelayAfter = number;
+  export type NullableDouble = number;
   export interface Order {
     /**
      * The name of the column.
@@ -3510,13 +3527,17 @@ declare namespace Glue {
      */
     Arguments?: GenericMap;
     /**
-     * The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This field is deprecated, use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
     /**
      * The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.
      */
     Timeout?: Timeout;
+    /**
+     * AWS Glue supports running jobs on a JobCommand.Name="pythonshell" with allocated processing as low as 0.0625 DPU, which can be specified using MaxCapacity. Glue ETL jobs running in any other way cannot have fractional DPU allocations.
+     */
+    MaxCapacity?: NullableDouble;
     /**
      * Specifies configuration properties of a job run notification.
      */
