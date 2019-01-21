@@ -3212,6 +3212,10 @@
           "shape": "DocumentVersion",
           "documentation": "<p>The document version.</p>"
         },
+        "AutomationTargetParameterName": {
+          "shape": "AutomationTargetParameterName",
+          "documentation": "<p>Specify the target for the association. This target is required for associations that use an Automation document and target resources by using rate controls.</p>"
+        },
         "Parameters": {
           "shape": "Parameters",
           "documentation": "<p>A description of the parameters for a document. </p>"
@@ -3698,10 +3702,11 @@
       "type": "structure",
       "members": {
         "Name": {
-          "shape": "AttachmentName"
+          "shape": "AttachmentName",
+          "documentation": "<p>The name of the attachment.</p>"
         }
       },
-      "documentation": "<p>An attribute of an attachment, such as the attachment name or size.</p>"
+      "documentation": "<p>An attribute of an attachment, such as the attachment name.</p>"
     },
     "AttachmentInformationList": {
       "type": "list",
@@ -4024,7 +4029,7 @@
         },
         "AutomationType": {
           "shape": "AutomationType",
-          "documentation": "<p>Use this filter with <a>DescribeAutomationExecution</a>. Specify either Local of CrossAccount. CrossAccount is an Automation that executes in multiple AWS Regions and accounts. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html\">Concurrently Executing Automations in Multiple AWS Regions and Accounts</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
+          "documentation": "<p>Use this filter with <a>DescribeAutomationExecutions</a>. Specify either Local or CrossAccount. CrossAccount is an Automation that executes in multiple AWS Regions and accounts. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html\">Concurrently Executing Automations in Multiple AWS Regions and Accounts</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
         }
       },
       "documentation": "<p>Details about a specific Automation execution.</p>"
@@ -4076,6 +4081,11 @@
       },
       "max": 10,
       "min": 0
+    },
+    "AutomationTargetParameterName": {
+      "type": "string",
+      "max": 50,
+      "min": 1
     },
     "AutomationType": {
       "type": "string",
@@ -4889,6 +4899,10 @@
           "shape": "Parameters",
           "documentation": "<p>A description of the parameters for a document. </p>"
         },
+        "AutomationTargetParameterName": {
+          "shape": "AutomationTargetParameterName",
+          "documentation": "<p>Specify the target for the association. This target is required for associations that use an Automation document and target resources by using rate controls.</p>"
+        },
         "DocumentVersion": {
           "shape": "DocumentVersion",
           "documentation": "<p>The document version.</p>"
@@ -4974,6 +4988,10 @@
         "AssociationName": {
           "shape": "AssociationName",
           "documentation": "<p>Specify a descriptive name for the association.</p>"
+        },
+        "AutomationTargetParameterName": {
+          "shape": "AutomationTargetParameterName",
+          "documentation": "<p>Specify the target for the association. This target is required for associations that use an Automation document and target resources by using rate controls.</p>"
         },
         "MaxErrors": {
           "shape": "MaxErrors",
@@ -11162,7 +11180,7 @@
         },
         "Configuration": {
           "shape": "PatchSourceConfiguration",
-          "documentation": "<p>The value of the yum repo configuration. For example:</p> <p> <code>cachedir=/var/cache/yum/$basesearch</code> </p> <p> <code>$releasever</code> </p> <p> <code>keepcache=0</code> </p> <p> <code>debuglevel=2</code> </p>"
+          "documentation": "<p>The value of the yum repo configuration. For example:</p> <p> <code>[main]</code> </p> <p> <code>cachedir=/var/cache/yum/$basesearch$releasever</code> </p> <p> <code>keepcache=0</code> </p> <p> <code>debuglevel=2</code> </p>"
         }
       },
       "documentation": "<p>Information about the patches to use to update the instances, including target operating systems and source repository. Applies to Linux instances only.</p>"
@@ -12856,6 +12874,10 @@
         "AssociationVersion": {
           "shape": "AssociationVersion",
           "documentation": "<p>This parameter is provided for concurrency control purposes. You must specify the latest association version in the service. If you want to ensure that this request succeeds, either specify <code>$LATEST</code>, or omit this parameter.</p>"
+        },
+        "AutomationTargetParameterName": {
+          "shape": "AutomationTargetParameterName",
+          "documentation": "<p>Specify the target for the association. This target is required for associations that use an Automation document and target resources by using rate controls.</p>"
         },
         "MaxErrors": {
           "shape": "MaxErrors",

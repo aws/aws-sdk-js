@@ -630,7 +630,7 @@
           "shape": "InvalidParameterCombinationException"
         }
       ],
-      "documentation": "<p>Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a user ID is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.</p>"
+      "documentation": "<p>Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a UserId is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.</p>"
     },
     "DescribeStacks": {
       "name": "DescribeStacks",
@@ -690,7 +690,7 @@
           "shape": "InvalidParameterCombinationException"
         }
       ],
-      "documentation": "<p>Retrieves a list that describes one or more specified users in the user pool, if user names are provided. Otherwise, all users in the user pool are described.</p>"
+      "documentation": "<p>Retrieves a list that describes one or more specified users in the user pool.</p>"
     },
     "DisableUser": {
       "name": "DisableUser",
@@ -1140,7 +1140,7 @@
         },
         "DisplayName": {
           "shape": "String",
-          "documentation": "<p>The application name for display.</p>"
+          "documentation": "<p>The application name to display.</p>"
         },
         "IconURL": {
           "shape": "String",
@@ -1460,11 +1460,11 @@
         },
         "Description": {
           "shape": "Description",
-          "documentation": "<p>The description for display.</p>"
+          "documentation": "<p>The description to display.</p>"
         },
         "DisplayName": {
           "shape": "DisplayName",
-          "documentation": "<p>The fleet name for display.</p>"
+          "documentation": "<p>The fleet name to display.</p>"
         },
         "EnableDefaultInternetAccess": {
           "shape": "BooleanObject",
@@ -1472,7 +1472,11 @@
         },
         "DomainJoinInfo": {
           "shape": "DomainJoinInfo",
-          "documentation": "<p>The information needed to join a Microsoft Active Directory domain.</p>"
+          "documentation": "<p>The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. </p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>The tags to associate with the fleet. A tag is a key-value pair (the value is optional). For example, Environment=Test, or, if you do not specify a value, Environment=. </p> <p>If you do not specify a value, we set the value to an empty string.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
         }
       }
     },
@@ -1498,7 +1502,7 @@
         },
         "ImageName": {
           "shape": "String",
-          "documentation": "<p>The name of the image used to create the builder.</p>"
+          "documentation": "<p>The name of the image used to create the image builder.</p>"
         },
         "ImageArn": {
           "shape": "Arn",
@@ -1510,11 +1514,11 @@
         },
         "Description": {
           "shape": "Description",
-          "documentation": "<p>The description for display.</p>"
+          "documentation": "<p>The description to display.</p>"
         },
         "DisplayName": {
           "shape": "DisplayName",
-          "documentation": "<p>The image builder name for display.</p>"
+          "documentation": "<p>The image builder name to display.</p>"
         },
         "VpcConfig": {
           "shape": "VpcConfig",
@@ -1526,11 +1530,15 @@
         },
         "DomainJoinInfo": {
           "shape": "DomainJoinInfo",
-          "documentation": "<p>The information needed to join a Microsoft Active Directory domain.</p>"
+          "documentation": "<p>The name of the directory and organizational unit (OU) to use to join the image builder to a Microsoft Active Directory domain. </p>"
         },
         "AppstreamAgentVersion": {
           "shape": "AppstreamAgentVersion",
           "documentation": "<p>The version of the AppStream 2.0 agent to use for this image builder. To use the latest version of the AppStream 2.0 agent, specify [LATEST]. </p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>The tags to associate with the image builder. A tag is a key-value pair (the value is optional). For example, Environment=Test, or, if you do not specify a value, Environment=. </p> <p>If you do not specify a value, we set the value to an empty string.</p> <p>For more information about tags, see <a href=\"http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
         }
       }
     },
@@ -1584,11 +1592,11 @@
         },
         "Description": {
           "shape": "Description",
-          "documentation": "<p>The description for display.</p>"
+          "documentation": "<p>The description to display.</p>"
         },
         "DisplayName": {
           "shape": "DisplayName",
-          "documentation": "<p>The stack name for display.</p>"
+          "documentation": "<p>The stack name to display.</p>"
         },
         "StorageConnectors": {
           "shape": "StorageConnectorList",
@@ -1609,6 +1617,10 @@
         "ApplicationSettings": {
           "shape": "ApplicationSettings",
           "documentation": "<p>The persistent application settings for users of a stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>The tags to associate with the stack. A tag is a key-value pair (the value is optional). For example, Environment=Test, or, if you do not specify a value, Environment=. </p> <p>If you do not specify a value, we set the value to an empty string.</p> <p>For more information about tags, see <a href=\"http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
         }
       }
     },
@@ -1639,7 +1651,7 @@
         },
         "UserId": {
           "shape": "StreamingUrlUserId",
-          "documentation": "<p>The ID of the user.</p>"
+          "documentation": "<p>The identifier of the user.</p>"
         },
         "ApplicationId": {
           "shape": "String",
@@ -1767,7 +1779,7 @@
         },
         "SharedAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The 12-digit ID of the AWS account for which to delete image permissions.</p>"
+          "documentation": "<p>The 12-digit identifier of the AWS account for which to delete image permissions.</p>"
         }
       }
     },
@@ -1935,7 +1947,7 @@
         },
         "SharedAwsAccountIds": {
           "shape": "AwsAccountIdList",
-          "documentation": "<p>The 12-digit ID of one or more AWS accounts with which the image is shared.</p>"
+          "documentation": "<p>The 12-digit identifier of one or more AWS accounts with which the image is shared.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -2021,7 +2033,7 @@
         },
         "UserId": {
           "shape": "UserId",
-          "documentation": "<p>The user ID.</p>"
+          "documentation": "<p>The user identifier.</p>"
         },
         "NextToken": {
           "shape": "String",
@@ -2174,7 +2186,7 @@
           "documentation": "<p>The time the directory configuration was created.</p>"
         }
       },
-      "documentation": "<p>Configuration information for the directory used to join domains.</p>"
+      "documentation": "<p>Describes the configuration information for the directory used to join a streaming instance to a Microsoft Active Directory domain.</p>"
     },
     "DirectoryConfigList": {
       "type": "list",
@@ -2254,7 +2266,7 @@
           "documentation": "<p>The distinguished name of the organizational unit for computer accounts.</p>"
         }
       },
-      "documentation": "<p>Contains the information needed to join a Microsoft Active Directory domain.</p>"
+      "documentation": "<p>Describes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.</p>"
     },
     "DomainList": {
       "type": "list",
@@ -2292,7 +2304,7 @@
       "members": {
         "SessionId": {
           "shape": "String",
-          "documentation": "<p>The ID of the streaming session.</p>"
+          "documentation": "<p>The identifier of the streaming session.</p>"
         }
       }
     },
@@ -2324,11 +2336,11 @@
         },
         "DisplayName": {
           "shape": "String",
-          "documentation": "<p>The fleet name for display.</p>"
+          "documentation": "<p>The fleet name to display.</p>"
         },
         "Description": {
           "shape": "String",
-          "documentation": "<p>The description for display.</p>"
+          "documentation": "<p>The description to display.</p>"
         },
         "ImageName": {
           "shape": "String",
@@ -2380,10 +2392,10 @@
         },
         "DomainJoinInfo": {
           "shape": "DomainJoinInfo",
-          "documentation": "<p>The information needed to join a Microsoft Active Directory domain.</p>"
+          "documentation": "<p>The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. </p>"
         }
       },
-      "documentation": "<p>Contains the parameters for a fleet.</p>"
+      "documentation": "<p>Describes the parameters for a fleet.</p>"
     },
     "FleetAttribute": {
       "type": "string",
@@ -2495,7 +2507,7 @@
         },
         "DisplayName": {
           "shape": "String",
-          "documentation": "<p>The image name for display.</p>"
+          "documentation": "<p>The image name to display.</p>"
         },
         "State": {
           "shape": "ImageState",
@@ -2515,7 +2527,7 @@
         },
         "Description": {
           "shape": "String",
-          "documentation": "<p>The description for display.</p>"
+          "documentation": "<p>The description to display.</p>"
         },
         "StateChangeReason": {
           "shape": "ImageStateChangeReason",
@@ -2564,11 +2576,11 @@
         },
         "Description": {
           "shape": "String",
-          "documentation": "<p>The description for display.</p>"
+          "documentation": "<p>The description to display.</p>"
         },
         "DisplayName": {
           "shape": "String",
-          "documentation": "<p>The image builder name for display.</p>"
+          "documentation": "<p>The image builder name to display.</p>"
         },
         "VpcConfig": {
           "shape": "VpcConfig",
@@ -2600,7 +2612,7 @@
         },
         "DomainJoinInfo": {
           "shape": "DomainJoinInfo",
-          "documentation": "<p>The information needed to join a Microsoft Active Directory domain.</p>"
+          "documentation": "<p>The name of the directory and organizational unit (OU) to use to join the image builder to a Microsoft Active Directory domain. </p>"
         },
         "ImageBuilderErrors": {
           "shape": "ResourceErrors",
@@ -2608,10 +2620,10 @@
         },
         "AppstreamAgentVersion": {
           "shape": "AppstreamAgentVersion",
-          "documentation": "<p>The version of the AppStream 2.0 agent that is currently being used by this image builder. </p>"
+          "documentation": "<p>The version of the AppStream 2.0 agent that is currently being used by the image builder. </p>"
         }
       },
-      "documentation": "<p>Describes a streaming instance used for editing an image. New images are created from a snapshot through an image builder.</p>"
+      "documentation": "<p>Describes a virtual machine that is used to create an image. </p>"
     },
     "ImageBuilderList": {
       "type": "list",
@@ -2829,7 +2841,7 @@
           "documentation": "<p>The resource identifier of the elastic network interface that is attached to instances in your VPC. All network interfaces have the eni-xxxxxxxx resource identifier.</p>"
         }
       },
-      "documentation": "<p>The network details of the fleet instance for the streaming session.</p>"
+      "documentation": "<p>Describes the network details of the fleet instance for the streaming session.</p>"
     },
     "OrganizationalUnitDistinguishedName": {
       "type": "string",
@@ -2897,7 +2909,7 @@
       "member": {
         "shape": "String"
       },
-      "documentation": "<p>The security group IDs.</p>",
+      "documentation": "<p>The security group identifiers.</p>",
       "max": 5
     },
     "ServiceAccountCredentials": {
@@ -2930,7 +2942,7 @@
       "members": {
         "Id": {
           "shape": "String",
-          "documentation": "<p>The ID of the streaming session.</p>"
+          "documentation": "<p>The identifier of the streaming session.</p>"
         },
         "UserId": {
           "shape": "UserId",
@@ -2988,7 +3000,7 @@
       "members": {
         "sharedAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The 12-digit ID of the AWS account with which the image is shared.</p>"
+          "documentation": "<p>The 12-digit identifier of the AWS account with which the image is shared.</p>"
         },
         "imagePermissions": {
           "shape": "ImagePermissions",
@@ -3019,11 +3031,11 @@
         },
         "Description": {
           "shape": "String",
-          "documentation": "<p>The description for display.</p>"
+          "documentation": "<p>The description to display.</p>"
         },
         "DisplayName": {
           "shape": "String",
-          "documentation": "<p>The stack name for display.</p>"
+          "documentation": "<p>The stack name to display.</p>"
         },
         "CreatedTime": {
           "shape": "Timestamp",
@@ -3204,7 +3216,7 @@
         },
         "Domains": {
           "shape": "DomainList",
-          "documentation": "<p>The names of the domains for the G Suite account.</p>"
+          "documentation": "<p>The names of the domains for the account.</p>"
         }
       },
       "documentation": "<p>Describes a connector to enable persistent storage for users.</p>"
@@ -3246,7 +3258,7 @@
       "member": {
         "shape": "String"
       },
-      "documentation": "<p>The subnet IDs.</p>"
+      "documentation": "<p>The subnet identifiers.</p>"
     },
     "TagKey": {
       "type": "string",
@@ -3395,11 +3407,11 @@
         },
         "Description": {
           "shape": "Description",
-          "documentation": "<p>The description for display.</p>"
+          "documentation": "<p>The description to display.</p>"
         },
         "DisplayName": {
           "shape": "DisplayName",
-          "documentation": "<p>The fleet name for display.</p>"
+          "documentation": "<p>The fleet name to display.</p>"
         },
         "EnableDefaultInternetAccess": {
           "shape": "BooleanObject",
@@ -3407,7 +3419,7 @@
         },
         "DomainJoinInfo": {
           "shape": "DomainJoinInfo",
-          "documentation": "<p>The information needed to join a Microsoft Active Directory domain.</p>"
+          "documentation": "<p>The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. </p>"
         },
         "AttributesToDelete": {
           "shape": "FleetAttributes",
@@ -3438,7 +3450,7 @@
         },
         "SharedAccountId": {
           "shape": "AwsAccountId",
-          "documentation": "<p>The 12-digit ID of the AWS account for which you want add or update image permissions.</p>"
+          "documentation": "<p>The 12-digit identifier of the AWS account for which you want add or update image permissions.</p>"
         },
         "ImagePermissions": {
           "shape": "ImagePermissions",
@@ -3458,11 +3470,11 @@
       "members": {
         "DisplayName": {
           "shape": "DisplayName",
-          "documentation": "<p>The stack name for display.</p>"
+          "documentation": "<p>The stack name to display.</p>"
         },
         "Description": {
           "shape": "Description",
-          "documentation": "<p>The description for display.</p>"
+          "documentation": "<p>The description to display.</p>"
         },
         "Name": {
           "shape": "String",
@@ -3483,7 +3495,7 @@
         },
         "FeedbackURL": {
           "shape": "FeedbackURL",
-          "documentation": "<p>The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.</p>"
+          "documentation": "<p>The URL that users are redirected to after they choose the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.</p>"
         },
         "AttributesToDelete": {
           "shape": "StackAttributes",
@@ -3676,15 +3688,15 @@
       "members": {
         "SubnetIds": {
           "shape": "SubnetIdList",
-          "documentation": "<p>The subnets to which a network interface is established from the fleet instance.</p>"
+          "documentation": "<p>The identifiers of the subnets to which a network interface is attached from the fleet instance or image builder instance. Fleet instances use one or two subnets. Image builder instances use one subnet.</p>"
         },
         "SecurityGroupIds": {
           "shape": "SecurityGroupIdList",
-          "documentation": "<p>The security groups for the fleet.</p>"
+          "documentation": "<p>The identifiers of the security groups for the fleet or image builder.</p>"
         }
       },
-      "documentation": "<p>Describes VPC configuration information.</p>"
+      "documentation": "<p>Describes VPC configuration information for fleets and image builders.</p>"
     }
   },
-  "documentation": "<fullname>Amazon AppStream 2.0</fullname> <p>You can use Amazon AppStream 2.0 to stream desktop applications to any device running a web browser, without rewriting them.</p>"
+  "documentation": "<fullname>Amazon AppStream 2.0</fullname> <p>This is the <i>Amazon AppStream 2.0 API Reference</i>. It provides descriptions and syntax for each of the actions and data types in AppStream 2.0. AppStream 2.0 is a fully managed application streaming service. You centrally manage your desktop applications on AppStream 2.0 and securely deliver them to any computer. AppStream 2.0 manages the AWS resources required to host and run your applications, scales automatically, and provides access to your users on demand.</p> <p>To learn more about AppStream 2.0, see the following resources:</p> <ul> <li> <p> <a href=\"http://aws.amazon.com/appstream2\">Amazon AppStream 2.0 product page</a> </p> </li> <li> <p> <a href=\"http://aws.amazon.com/documentation/appstream2\">Amazon AppStream 2.0 documentation</a> </p> </li> </ul>"
 }

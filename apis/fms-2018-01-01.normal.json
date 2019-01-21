@@ -102,7 +102,7 @@
           "shape": "InternalErrorException"
         }
       ],
-      "documentation": "<p>Disassociates the account that has been set as the AWS Firewall Manager administrator account. You will need to submit an <code>AssociateAdminAccount</code> request to set a new account as the AWS Firewall administrator.</p>"
+      "documentation": "<p>Disassociates the account that has been set as the AWS Firewall Manager administrator account. To set a different account as the administrator account, you must submit an <code>AssociateAdminAccount</code> request .</p>"
     },
     "GetAdminAccount": {
       "name": "GetAdminAccount",
@@ -427,6 +427,10 @@
         "PolicyId": {
           "shape": "PolicyId",
           "documentation": "<p>The ID of the policy that you want to delete. <code>PolicyId</code> is returned by <code>PutPolicy</code> and by <code>ListPolicies</code>.</p>"
+        },
+        "DeleteAllPolicyResources": {
+          "shape": "Boolean",
+          "documentation": "<p>If <code>True</code>, the request will also delete all web ACLs in this policy. Associated resources will no longer be protected by web ACLs in this policy.</p>"
         }
       }
     },
@@ -606,7 +610,7 @@
         },
         "MaxResults": {
           "shape": "PaginationMaxResults",
-          "documentation": "<p>Specifies the number of member account IDs that you want AWS Firewall Manager to return for this request. If you have more IDs than the number that you specify for <code>MaxResults</code>, the response includes a <code>NextToken</code> value that you can use to get another batch of member account IDs. The maximum value for <code>MaxResults</code> is 100.</p>"
+          "documentation": "<p>Specifies the number of member account IDs that you want AWS Firewall Manager to return for this request. If you have more IDs than the number that you specify for <code>MaxResults</code>, the response includes a <code>NextToken</code> value that you can use to get another batch of member account IDs.</p>"
         }
       }
     },
@@ -713,11 +717,11 @@
         },
         "IncludeMap": {
           "shape": "CustomerPolicyScopeMap",
-          "documentation": "<p>Specifies the AWS account IDs to include in the policy. If <code>IncludeMap</code> is null, all accounts in the AWS Organization are included in the policy. If <code>IncludeMap</code> is not null, only values listed in <code>IncludeMap</code> will be included in the policy.</p> <p>The key to the map is <code>ACCOUNT</code>. For example, a valid <code>IncludeMap</code> would be <code>{“ACCOUNT” : [“accountID1”, “accountID2”]}</code>.</p>"
+          "documentation": "<p>Specifies the AWS account IDs to include in the policy. If <code>IncludeMap</code> is null, all accounts in the organization in AWS Organizations are included in the policy. If <code>IncludeMap</code> is not null, only values listed in <code>IncludeMap</code> are included in the policy.</p> <p>The key to the map is <code>ACCOUNT</code>. For example, a valid <code>IncludeMap</code> would be <code>{“ACCOUNT” : [“accountID1”, “accountID2”]}</code>.</p>"
         },
         "ExcludeMap": {
           "shape": "CustomerPolicyScopeMap",
-          "documentation": "<p>Specifies the AWS account IDs to exclude from the policy. The <code>IncludeMap</code> values are evaluated first, with all of the appropriate account IDs added to the policy. Then the accounts listed in <code>ExcludeMap</code> are removed, resulting in the final list of accounts to add to the policy.</p> <p>The key to the map is <code>ACCOUNT</code>. For example, a valid <code>ExcludeMap</code> would be <code>{“ACCOUNT” : [“accountID1”, “accountID2”]}</code>.</p>"
+          "documentation": "<p>Specifies the AWS account IDs to exclude from the policy. The <code>IncludeMap</code> values are evaluated first, with all the appropriate account IDs added to the policy. Then the accounts listed in <code>ExcludeMap</code> are removed, resulting in the final list of accounts to add to the policy.</p> <p>The key to the map is <code>ACCOUNT</code>. For example, a valid <code>ExcludeMap</code> would be <code>{“ACCOUNT” : [“accountID1”, “accountID2”]}</code>.</p>"
         }
       },
       "documentation": "<p>An AWS Firewall Manager policy.</p>"
@@ -751,7 +755,7 @@
         },
         "IssueInfoMap": {
           "shape": "IssueInfoMap",
-          "documentation": "<p>Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message recieved indicating the problem with the service.</p>"
+          "documentation": "<p>Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message received that indicates the problem with the service.</p>"
         }
       },
       "documentation": "<p>Describes the non-compliant resources in a member account for a specific AWS Firewall Manager policy. A maximum of 100 entries are displayed. If more than 100 resources are non-compliant, <code>EvaluationLimitExceeded</code> is set to <code>True</code>.</p>"
@@ -785,7 +789,7 @@
         },
         "IssueInfoMap": {
           "shape": "IssueInfoMap",
-          "documentation": "<p>Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message recieved indicating the problem with the service.</p>"
+          "documentation": "<p>Details about problems with dependent services, such as AWS WAF or AWS Config, that are causing a resource to be non-compliant. The details include the name of the dependent service and the error message received that indicates the problem with the service.</p>"
         }
       },
       "documentation": "<p>Indicates whether the account is compliant with the specified policy. An account is considered non-compliant if it includes resources that are not protected by the policy.</p>"

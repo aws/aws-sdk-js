@@ -20,6 +20,14 @@ declare class Discovery extends Service {
    */
   associateConfigurationItemsToApplication(callback?: (err: AWSError, data: Discovery.Types.AssociateConfigurationItemsToApplicationResponse) => void): Request<Discovery.Types.AssociateConfigurationItemsToApplicationResponse, AWSError>;
   /**
+   * Deletes one or more import tasks, each identified by their import ID. Each import task has a number of records that can identify servers or applications.  AWS Application Discovery Service has built-in matching logic that will identify when discovered servers match existing entries that you've previously discovered, the information for the already-existing discovered server is updated. When you delete an import task that contains records that were used to match, the information in those matched records that comes from the deleted records will also be deleted.
+   */
+  batchDeleteImportData(params: Discovery.Types.BatchDeleteImportDataRequest, callback?: (err: AWSError, data: Discovery.Types.BatchDeleteImportDataResponse) => void): Request<Discovery.Types.BatchDeleteImportDataResponse, AWSError>;
+  /**
+   * Deletes one or more import tasks, each identified by their import ID. Each import task has a number of records that can identify servers or applications.  AWS Application Discovery Service has built-in matching logic that will identify when discovered servers match existing entries that you've previously discovered, the information for the already-existing discovered server is updated. When you delete an import task that contains records that were used to match, the information in those matched records that comes from the deleted records will also be deleted.
+   */
+  batchDeleteImportData(callback?: (err: AWSError, data: Discovery.Types.BatchDeleteImportDataResponse) => void): Request<Discovery.Types.BatchDeleteImportDataResponse, AWSError>;
+  /**
    * Creates an application with the given name and description.
    */
   createApplication(params: Discovery.Types.CreateApplicationRequest, callback?: (err: AWSError, data: Discovery.Types.CreateApplicationResponse) => void): Request<Discovery.Types.CreateApplicationResponse, AWSError>;
@@ -60,11 +68,11 @@ declare class Discovery extends Service {
    */
   describeAgents(callback?: (err: AWSError, data: Discovery.Types.DescribeAgentsResponse) => void): Request<Discovery.Types.DescribeAgentsResponse, AWSError>;
   /**
-   * Retrieves attributes for a list of configuration item IDs.  All of the supplied IDs must be for the same asset type from one of the follwoing:   server   application   process   connection   Output fields are specific to the asset type specified. For example, the output for a server configuration item includes a list of attributes about the server, such as host name, operating system, number of network cards, etc. For a complete list of outputs for each asset type, see Using the DescribeConfigurations Action. 
+   * Retrieves attributes for a list of configuration item IDs.  All of the supplied IDs must be for the same asset type from one of the following:   server   application   process   connection   Output fields are specific to the asset type specified. For example, the output for a server configuration item includes a list of attributes about the server, such as host name, operating system, number of network cards, etc. For a complete list of outputs for each asset type, see Using the DescribeConfigurations Action. 
    */
   describeConfigurations(params: Discovery.Types.DescribeConfigurationsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeConfigurationsResponse) => void): Request<Discovery.Types.DescribeConfigurationsResponse, AWSError>;
   /**
-   * Retrieves attributes for a list of configuration item IDs.  All of the supplied IDs must be for the same asset type from one of the follwoing:   server   application   process   connection   Output fields are specific to the asset type specified. For example, the output for a server configuration item includes a list of attributes about the server, such as host name, operating system, number of network cards, etc. For a complete list of outputs for each asset type, see Using the DescribeConfigurations Action. 
+   * Retrieves attributes for a list of configuration item IDs.  All of the supplied IDs must be for the same asset type from one of the following:   server   application   process   connection   Output fields are specific to the asset type specified. For example, the output for a server configuration item includes a list of attributes about the server, such as host name, operating system, number of network cards, etc. For a complete list of outputs for each asset type, see Using the DescribeConfigurations Action. 
    */
   describeConfigurations(callback?: (err: AWSError, data: Discovery.Types.DescribeConfigurationsResponse) => void): Request<Discovery.Types.DescribeConfigurationsResponse, AWSError>;
   /**
@@ -91,6 +99,14 @@ declare class Discovery extends Service {
    * Retrieve status of one or more export tasks. You can retrieve the status of up to 100 export tasks.
    */
   describeExportTasks(callback?: (err: AWSError, data: Discovery.Types.DescribeExportTasksResponse) => void): Request<Discovery.Types.DescribeExportTasksResponse, AWSError>;
+  /**
+   * Returns an array of import tasks for your account, including status information, times, IDs, the Amazon S3 Object URL for the import file, and more.
+   */
+  describeImportTasks(params: Discovery.Types.DescribeImportTasksRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeImportTasksResponse) => void): Request<Discovery.Types.DescribeImportTasksResponse, AWSError>;
+  /**
+   * Returns an array of import tasks for your account, including status information, times, IDs, the Amazon S3 Object URL for the import file, and more.
+   */
+  describeImportTasks(callback?: (err: AWSError, data: Discovery.Types.DescribeImportTasksResponse) => void): Request<Discovery.Types.DescribeImportTasksResponse, AWSError>;
   /**
    * Retrieves a list of configuration items that have tags as specified by the key-value pairs, name and value, passed to the optional parameter filters. There are three valid tag filter names:   tagKey   tagValue   configurationId   Also, all configuration items associated with your user account that have tags can be listed if you call DescribeTags as is without passing any parameters.
    */
@@ -159,6 +175,14 @@ declare class Discovery extends Service {
    *  Begins the export of discovered data to an S3 bucket.  If you specify agentIds in a filter, the task exports up to 72 hours of detailed data collected by the identified Application Discovery Agent, including network, process, and performance details. A time range for exported agent data may be set by using startTime and endTime. Export of detailed agent data is limited to five concurrently running exports.   If you do not include an agentIds filter, summary data is exported that includes both AWS Agentless Discovery Connector data and summary data from AWS Discovery Agents. Export of summary data is limited to two exports per day. 
    */
   startExportTask(callback?: (err: AWSError, data: Discovery.Types.StartExportTaskResponse) => void): Request<Discovery.Types.StartExportTaskResponse, AWSError>;
+  /**
+   * Starts an import task, which allows you to import details of your on-premises environment directly into AWS without having to use the Application Discovery Service (ADS) tools such as the Discovery Connector or Discovery Agent. This gives you the option to perform migration assessment and planning directly from your imported data, including the ability to group your devices as applications and track their migration status. To start an import request, do this:   Download the specially formatted comma separated value (CSV) import template, which you can find here: https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv.   Fill out the template with your server and application data.   Upload your import file to an Amazon S3 bucket, and make a note of it's Object URL. Your import file must be in the CSV format.   Use the console or the StartImportTask command with the AWS CLI or one of the AWS SDKs to import the records from your file.   For more information, including step-by-step procedures, see Migration Hub Import in the AWS Application Discovery Service User Guide.  There are limits to the number of import tasks you can create (and delete) in an AWS account. For more information, see AWS Application Discovery Service Limits in the AWS Application Discovery Service User Guide. 
+   */
+  startImportTask(params: Discovery.Types.StartImportTaskRequest, callback?: (err: AWSError, data: Discovery.Types.StartImportTaskResponse) => void): Request<Discovery.Types.StartImportTaskResponse, AWSError>;
+  /**
+   * Starts an import task, which allows you to import details of your on-premises environment directly into AWS without having to use the Application Discovery Service (ADS) tools such as the Discovery Connector or Discovery Agent. This gives you the option to perform migration assessment and planning directly from your imported data, including the ability to group your devices as applications and track their migration status. To start an import request, do this:   Download the specially formatted comma separated value (CSV) import template, which you can find here: https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv.   Fill out the template with your server and application data.   Upload your import file to an Amazon S3 bucket, and make a note of it's Object URL. Your import file must be in the CSV format.   Use the console or the StartImportTask command with the AWS CLI or one of the AWS SDKs to import the records from your file.   For more information, including step-by-step procedures, see Migration Hub Import in the AWS Application Discovery Service User Guide.  There are limits to the number of import tasks you can create (and delete) in an AWS account. For more information, see AWS Application Discovery Service Limits in the AWS Application Discovery Service User Guide. 
+   */
+  startImportTask(callback?: (err: AWSError, data: Discovery.Types.StartImportTaskResponse) => void): Request<Discovery.Types.StartImportTaskResponse, AWSError>;
   /**
    * Stop the continuous flow of agent's discovered data into Amazon Athena.
    */
@@ -271,8 +295,38 @@ declare namespace Discovery {
   }
   export interface AssociateConfigurationItemsToApplicationResponse {
   }
+  export interface BatchDeleteImportDataError {
+    /**
+     * The unique import ID associated with the error that occurred.
+     */
+    importTaskId?: ImportTaskIdentifier;
+    /**
+     * The type of error that occurred for a specific import task.
+     */
+    errorCode?: BatchDeleteImportDataErrorCode;
+    /**
+     * The description of the error that occurred for a specific import task.
+     */
+    errorDescription?: BatchDeleteImportDataErrorDescription;
+  }
+  export type BatchDeleteImportDataErrorCode = "NOT_FOUND"|"INTERNAL_SERVER_ERROR"|string;
+  export type BatchDeleteImportDataErrorDescription = string;
+  export type BatchDeleteImportDataErrorList = BatchDeleteImportDataError[];
+  export interface BatchDeleteImportDataRequest {
+    /**
+     * The IDs for the import tasks that you want to delete.
+     */
+    importTaskIds: ToDeleteIdentifierList;
+  }
+  export interface BatchDeleteImportDataResponse {
+    /**
+     * Error messages returned for each import task that you deleted as a response for this command.
+     */
+    errors?: BatchDeleteImportDataErrorList;
+  }
   export type Boolean = boolean;
   export type BoxedInteger = number;
+  export type ClientRequestToken = string;
   export type Condition = string;
   export type Configuration = {[key: string]: String};
   export type ConfigurationId = string;
@@ -314,7 +368,7 @@ declare namespace Discovery {
      */
     status?: ContinuousExportStatus;
     /**
-     * Contains information about any errors that may have occurred.
+     * Contains information about any errors that have occurred. This data type can have the following values:   ACCESS_DENIED - You don’t have permission to start Data Exploration in Amazon Athena. Contact your AWS administrator for help. For more information, see Setting Up AWS Application Discovery Service in the Application Discovery Service User Guide.   DELIVERY_STREAM_LIMIT_FAILURE - You reached the limit for Amazon Kinesis Data Firehose delivery streams. Reduce the number of streams or request a limit increase and try again. For more information, see Kinesis Data Streams Limits in the Amazon Kinesis Data Streams Developer Guide.   FIREHOSE_ROLE_MISSING - The Data Exploration feature is in an error state because your IAM User is missing the AWSApplicationDiscoveryServiceFirehose role. Turn on Data Exploration in Amazon Athena and try again. For more information, see Step 3: Provide Application Discovery Service Access to Non-Administrator Users by Attaching Policies in the Application Discovery Service User Guide.   FIREHOSE_STREAM_DOES_NOT_EXIST - The Data Exploration feature is in an error state because your IAM User is missing one or more of the Kinesis data delivery streams.   INTERNAL_FAILURE - The Data Exploration feature is in an error state because of an internal failure. Try again later. If this problem persists, contact AWS Support.   S3_BUCKET_LIMIT_FAILURE - You reached the limit for Amazon S3 buckets. Reduce the number of Amazon S3 buckets or request a limit increase and try again. For more information, see Bucket Restrictions and Limitations in the Amazon Simple Storage Service Developer Guide.  
      */
     statusDetail?: StringMax255;
     /**
@@ -570,6 +624,32 @@ declare namespace Discovery {
      */
     nextToken?: NextToken;
   }
+  export type DescribeImportTasksFilterList = ImportTaskFilter[];
+  export type DescribeImportTasksMaxResults = number;
+  export interface DescribeImportTasksRequest {
+    /**
+     * An array of name-value pairs that you provide to filter the results for the DescribeImportTask request to a specific subset of results. Currently, wildcard values aren't supported for filters.
+     */
+    filters?: DescribeImportTasksFilterList;
+    /**
+     * The maximum number of results that you want this request to return, up to 100.
+     */
+    maxResults?: DescribeImportTasksMaxResults;
+    /**
+     * The token to request a specific page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface DescribeImportTasksResponse {
+    /**
+     * The token to request the next page of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * A returned array of import tasks that match any applied filters, up to the specified number of maximum results.
+     */
+    tasks?: ImportTaskList;
+  }
   export interface DescribeTagsRequest {
     /**
      * You can filter the list using a key-value format. You can separate these items by using logical operators. Allowed filters include tagKey, tagValue, and configurationId. 
@@ -714,6 +794,78 @@ declare namespace Discovery {
      */
     connectorSummary?: CustomerConnectorInfo;
   }
+  export type ImportStatus = "IMPORT_IN_PROGRESS"|"IMPORT_COMPLETE"|"IMPORT_FAILED"|"IMPORT_FAILED_SERVER_LIMIT_EXCEEDED"|"IMPORT_FAILED_RECORD_LIMIT_EXCEEDED"|"DELETE_IN_PROGRESS"|"DELETE_COMPLETE"|"DELETE_FAILED"|"DELETE_FAILED_LIMIT_EXCEEDED"|string;
+  export interface ImportTask {
+    /**
+     * The unique ID for a specific import task. These IDs aren't globally unique, but they are unique within an AWS account.
+     */
+    importTaskId?: ImportTaskIdentifier;
+    /**
+     * A unique token used to prevent the same import request from occurring more than once. If you didn't provide a token, a token was automatically generated when the import task request was sent.
+     */
+    clientRequestToken?: ClientRequestToken;
+    /**
+     * A descriptive name for an import task. You can use this name to filter future requests related to this import task, such as identifying applications and servers that were included in this import task. We recommend that you use a meaningful name for each import task.
+     */
+    name?: ImportTaskName;
+    /**
+     * The URL for your import file that you've uploaded to Amazon S3.
+     */
+    importUrl?: ImportURL;
+    /**
+     * The status of the import task. An import can have the status of IMPORT_COMPLETE and still have some records fail to import from the overall request. More information can be found in the downloadable archive defined in the errorsAndFailedEntriesZip field, or in the Migration Hub management console.
+     */
+    status?: ImportStatus;
+    /**
+     * The time that the import task request was made, presented in the Unix time stamp format.
+     */
+    importRequestTime?: TimeStamp;
+    /**
+     * The time that the import task request finished, presented in the Unix time stamp format.
+     */
+    importCompletionTime?: TimeStamp;
+    /**
+     * The time that the import task request was deleted, presented in the Unix time stamp format.
+     */
+    importDeletedTime?: TimeStamp;
+    /**
+     * The total number of server records in the import file that were successfully imported.
+     */
+    serverImportSuccess?: Integer;
+    /**
+     * The total number of server records in the import file that failed to be imported.
+     */
+    serverImportFailure?: Integer;
+    /**
+     * The total number of application records in the import file that were successfully imported.
+     */
+    applicationImportSuccess?: Integer;
+    /**
+     * The total number of application records in the import file that failed to be imported.
+     */
+    applicationImportFailure?: Integer;
+    /**
+     * A link to a compressed archive folder (in the ZIP format) that contains an error log and a file of failed records. You can use these two files to quickly identify records that failed, why they failed, and correct those records. Afterward, you can upload the corrected file to your Amazon S3 bucket and create another import task request. This field also includes authorization information so you can confirm the authenticity of the compressed archive before you download it. If some records failed to be imported we recommend that you correct the records in the failed entries file and then imports that failed entries file. This prevents you frmo having to correct and update the larger original file and attempt importing it again.
+     */
+    errorsAndFailedEntriesZip?: S3PresignedUrl;
+  }
+  export interface ImportTaskFilter {
+    /**
+     * The name, status, or import task ID for a specific import task.
+     */
+    name?: ImportTaskFilterName;
+    /**
+     * An array of strings that you can provide to match against a specific name, status, or import task ID to filter the results for your import task queries.
+     */
+    values?: ImportTaskFilterValueList;
+  }
+  export type ImportTaskFilterName = "IMPORT_TASK_ID"|"STATUS"|"NAME"|string;
+  export type ImportTaskFilterValue = string;
+  export type ImportTaskFilterValueList = ImportTaskFilterValue[];
+  export type ImportTaskIdentifier = string;
+  export type ImportTaskList = ImportTask[];
+  export type ImportTaskName = string;
+  export type ImportURL = string;
   export type Integer = number;
   export interface ListConfigurationsRequest {
     /**
@@ -820,6 +972,7 @@ declare namespace Discovery {
   }
   export type OrderByList = OrderByElement[];
   export type S3Bucket = string;
+  export type S3PresignedUrl = string;
   export type SchemaStorageConfig = {[key: string]: String};
   export interface StartContinuousExportRequest {
   }
@@ -881,6 +1034,26 @@ declare namespace Discovery {
      */
     exportId?: ConfigurationsExportId;
   }
+  export interface StartImportTaskRequest {
+    /**
+     * Optional. A unique token that you can provide to prevent the same import request from occurring more than once. If you don't provide a token, a token is automatically generated. Sending more than one StartImportTask request with the same client request token will return information about the original import task with that client request token.
+     */
+    clientRequestToken?: ClientRequestToken;
+    /**
+     * A descriptive name for this request. You can use this name to filter future requests related to this import task, such as identifying applications and servers that were included in this import task. We recommend that you use a meaningful name for each import task.
+     */
+    name: ImportTaskName;
+    /**
+     * The URL for your import file that you've uploaded to Amazon S3.  If you're using the AWS CLI, this URL is structured as follows: s3://BucketName/ImportFileName.CSV  
+     */
+    importUrl: ImportURL;
+  }
+  export interface StartImportTaskResponse {
+    /**
+     * An array of information related to the import task request including status information, times, IDs, the Amazon S3 Object URL for the import file, and more. 
+     */
+    task?: ImportTask;
+  }
   export interface StopContinuousExportRequest {
     /**
      * The unique ID assigned to this export.
@@ -936,6 +1109,7 @@ declare namespace Discovery {
   export type TagSet = Tag[];
   export type TagValue = string;
   export type TimeStamp = Date;
+  export type ToDeleteIdentifierList = ImportTaskIdentifier[];
   export interface UpdateApplicationRequest {
     /**
      * Configuration ID of the application to be updated.

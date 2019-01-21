@@ -1044,6 +1044,10 @@ declare namespace SSM {
      */
     DocumentVersion?: DocumentVersion;
     /**
+     * Specify the target for the association. This target is required for associations that use an Automation document and target resources by using rate controls.
+     */
+    AutomationTargetParameterName?: AutomationTargetParameterName;
+    /**
      * A description of the parameters for a document. 
      */
     Parameters?: Parameters;
@@ -1330,6 +1334,9 @@ declare namespace SSM {
   export type AttachmentHash = string;
   export type AttachmentHashType = "Sha256"|string;
   export interface AttachmentInformation {
+    /**
+     * The name of the attachment.
+     */
     Name?: AttachmentName;
   }
   export type AttachmentInformationList = AttachmentInformation[];
@@ -1555,7 +1562,7 @@ declare namespace SSM {
      */
     Target?: String;
     /**
-     * Use this filter with DescribeAutomationExecution. Specify either Local of CrossAccount. CrossAccount is an Automation that executes in multiple AWS Regions and accounts. For more information, see Concurrently Executing Automations in Multiple AWS Regions and Accounts in the AWS Systems Manager User Guide. 
+     * Use this filter with DescribeAutomationExecutions. Specify either Local or CrossAccount. CrossAccount is an Automation that executes in multiple AWS Regions and accounts. For more information, see Concurrently Executing Automations in Multiple AWS Regions and Accounts in the AWS Systems Manager User Guide. 
      */
     AutomationType?: AutomationType;
   }
@@ -1565,6 +1572,7 @@ declare namespace SSM {
   export type AutomationParameterMap = {[key: string]: AutomationParameterValueList};
   export type AutomationParameterValue = string;
   export type AutomationParameterValueList = AutomationParameterValue[];
+  export type AutomationTargetParameterName = string;
   export type AutomationType = "CrossAccount"|"Local"|string;
   export type BaselineDescription = string;
   export type BaselineId = string;
@@ -2030,6 +2038,10 @@ declare namespace SSM {
      */
     Parameters?: Parameters;
     /**
+     * Specify the target for the association. This target is required for associations that use an Automation document and target resources by using rate controls.
+     */
+    AutomationTargetParameterName?: AutomationTargetParameterName;
+    /**
      * The document version.
      */
     DocumentVersion?: DocumentVersion;
@@ -2105,6 +2117,10 @@ declare namespace SSM {
      * Specify a descriptive name for the association.
      */
     AssociationName?: AssociationName;
+    /**
+     * Specify the target for the association. This target is required for associations that use an Automation document and target resources by using rate controls.
+     */
+    AutomationTargetParameterName?: AutomationTargetParameterName;
     /**
      * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
      */
@@ -6067,7 +6083,7 @@ declare namespace SSM {
      */
     Products: PatchSourceProductList;
     /**
-     * The value of the yum repo configuration. For example:  cachedir=/var/cache/yum/$basesearch   $releasever   keepcache=0   debuglevel=2 
+     * The value of the yum repo configuration. For example:  [main]   cachedir=/var/cache/yum/$basesearch$releasever   keepcache=0   debuglevel=2 
      */
     Configuration: PatchSourceConfiguration;
   }
@@ -7052,6 +7068,10 @@ declare namespace SSM {
      * This parameter is provided for concurrency control purposes. You must specify the latest association version in the service. If you want to ensure that this request succeeds, either specify $LATEST, or omit this parameter.
      */
     AssociationVersion?: AssociationVersion;
+    /**
+     * Specify the target for the association. This target is required for associations that use an Automation document and target resources by using rate controls.
+     */
+    AutomationTargetParameterName?: AutomationTargetParameterName;
     /**
      * The number of errors that are allowed before the system stops sending requests to run the association on additional targets. You can specify either an absolute number of errors, for example 10, or a percentage of the target set, for example 10%. If you specify 3, for example, the system stops sending requests when the fourth error is received. If you specify 0, then the system stops sending requests after the first error is returned. If you run an association on 50 instances and set MaxError to 10%, then the system stops sending the request when the sixth error is received. Executions that are already running an association when MaxErrors is reached are allowed to complete, but some of these executions may fail as well. If you need to ensure that there won't be more than max-errors failed executions, set MaxConcurrency to 1 so that executions proceed one at a time.
      */

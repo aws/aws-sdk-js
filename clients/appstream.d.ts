@@ -197,11 +197,11 @@ declare class AppStream extends Service {
    */
   describeImages(callback?: (err: AWSError, data: AppStream.Types.DescribeImagesResult) => void): Request<AppStream.Types.DescribeImagesResult, AWSError>;
   /**
-   * Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a user ID is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.
+   * Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a UserId is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.
    */
   describeSessions(params: AppStream.Types.DescribeSessionsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeSessionsResult) => void): Request<AppStream.Types.DescribeSessionsResult, AWSError>;
   /**
-   * Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a user ID is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.
+   * Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a UserId is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.
    */
   describeSessions(callback?: (err: AWSError, data: AppStream.Types.DescribeSessionsResult) => void): Request<AppStream.Types.DescribeSessionsResult, AWSError>;
   /**
@@ -221,11 +221,11 @@ declare class AppStream extends Service {
    */
   describeUserStackAssociations(callback?: (err: AWSError, data: AppStream.Types.DescribeUserStackAssociationsResult) => void): Request<AppStream.Types.DescribeUserStackAssociationsResult, AWSError>;
   /**
-   * Retrieves a list that describes one or more specified users in the user pool, if user names are provided. Otherwise, all users in the user pool are described.
+   * Retrieves a list that describes one or more specified users in the user pool.
    */
   describeUsers(params: AppStream.Types.DescribeUsersRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeUsersResult) => void): Request<AppStream.Types.DescribeUsersResult, AWSError>;
   /**
-   * Retrieves a list that describes one or more specified users in the user pool, if user names are provided. Otherwise, all users in the user pool are described.
+   * Retrieves a list that describes one or more specified users in the user pool.
    */
   describeUsers(callback?: (err: AWSError, data: AppStream.Types.DescribeUsersResult) => void): Request<AppStream.Types.DescribeUsersResult, AWSError>;
   /**
@@ -391,7 +391,7 @@ declare namespace AppStream {
      */
     Name?: String;
     /**
-     * The application name for display.
+     * The application name to display.
      */
     DisplayName?: String;
     /**
@@ -590,11 +590,11 @@ declare namespace AppStream {
      */
     DisconnectTimeoutInSeconds?: Integer;
     /**
-     * The description for display.
+     * The description to display.
      */
     Description?: Description;
     /**
-     * The fleet name for display.
+     * The fleet name to display.
      */
     DisplayName?: DisplayName;
     /**
@@ -602,9 +602,13 @@ declare namespace AppStream {
      */
     EnableDefaultInternetAccess?: BooleanObject;
     /**
-     * The information needed to join a Microsoft Active Directory domain.
+     * The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. 
      */
     DomainJoinInfo?: DomainJoinInfo;
+    /**
+     * The tags to associate with the fleet. A tag is a key-value pair (the value is optional). For example, Environment=Test, or, if you do not specify a value, Environment=.  If you do not specify a value, we set the value to an empty string. For more information, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+     */
+    Tags?: Tags;
   }
   export interface CreateFleetResult {
     /**
@@ -618,7 +622,7 @@ declare namespace AppStream {
      */
     Name: Name;
     /**
-     * The name of the image used to create the builder.
+     * The name of the image used to create the image builder.
      */
     ImageName?: String;
     /**
@@ -630,11 +634,11 @@ declare namespace AppStream {
      */
     InstanceType: String;
     /**
-     * The description for display.
+     * The description to display.
      */
     Description?: Description;
     /**
-     * The image builder name for display.
+     * The image builder name to display.
      */
     DisplayName?: DisplayName;
     /**
@@ -646,13 +650,17 @@ declare namespace AppStream {
      */
     EnableDefaultInternetAccess?: BooleanObject;
     /**
-     * The information needed to join a Microsoft Active Directory domain.
+     * The name of the directory and organizational unit (OU) to use to join the image builder to a Microsoft Active Directory domain. 
      */
     DomainJoinInfo?: DomainJoinInfo;
     /**
      * The version of the AppStream 2.0 agent to use for this image builder. To use the latest version of the AppStream 2.0 agent, specify [LATEST]. 
      */
     AppstreamAgentVersion?: AppstreamAgentVersion;
+    /**
+     * The tags to associate with the image builder. A tag is a key-value pair (the value is optional). For example, Environment=Test, or, if you do not specify a value, Environment=.  If you do not specify a value, we set the value to an empty string. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+     */
+    Tags?: Tags;
   }
   export interface CreateImageBuilderResult {
     /**
@@ -686,11 +694,11 @@ declare namespace AppStream {
      */
     Name: Name;
     /**
-     * The description for display.
+     * The description to display.
      */
     Description?: Description;
     /**
-     * The stack name for display.
+     * The stack name to display.
      */
     DisplayName?: DisplayName;
     /**
@@ -713,6 +721,10 @@ declare namespace AppStream {
      * The persistent application settings for users of a stack. When these settings are enabled, changes that users make to applications and Windows settings are automatically saved after each session and applied to the next session.
      */
     ApplicationSettings?: ApplicationSettings;
+    /**
+     * The tags to associate with the stack. A tag is a key-value pair (the value is optional). For example, Environment=Test, or, if you do not specify a value, Environment=.  If you do not specify a value, we set the value to an empty string. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+     */
+    Tags?: Tags;
   }
   export interface CreateStackResult {
     /**
@@ -730,7 +742,7 @@ declare namespace AppStream {
      */
     FleetName: String;
     /**
-     * The ID of the user.
+     * The identifier of the user.
      */
     UserId: StreamingUrlUserId;
     /**
@@ -814,7 +826,7 @@ declare namespace AppStream {
      */
     Name: Name;
     /**
-     * The 12-digit ID of the AWS account for which to delete image permissions.
+     * The 12-digit identifier of the AWS account for which to delete image permissions.
      */
     SharedAccountId: AwsAccountId;
   }
@@ -930,7 +942,7 @@ declare namespace AppStream {
      */
     MaxResults?: MaxResults;
     /**
-     * The 12-digit ID of one or more AWS accounts with which the image is shared.
+     * The 12-digit identifier of one or more AWS accounts with which the image is shared.
      */
     SharedAwsAccountIds?: AwsAccountIdList;
     /**
@@ -995,7 +1007,7 @@ declare namespace AppStream {
      */
     FleetName: String;
     /**
-     * The user ID.
+     * The user identifier.
      */
     UserId?: UserId;
     /**
@@ -1170,7 +1182,7 @@ declare namespace AppStream {
   }
   export interface ExpireSessionRequest {
     /**
-     * The ID of the streaming session.
+     * The identifier of the streaming session.
      */
     SessionId: String;
   }
@@ -1187,11 +1199,11 @@ declare namespace AppStream {
      */
     Name: String;
     /**
-     * The fleet name for display.
+     * The fleet name to display.
      */
     DisplayName?: String;
     /**
-     * The description for display.
+     * The description to display.
      */
     Description?: String;
     /**
@@ -1243,7 +1255,7 @@ declare namespace AppStream {
      */
     EnableDefaultInternetAccess?: BooleanObject;
     /**
-     * The information needed to join a Microsoft Active Directory domain.
+     * The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. 
      */
     DomainJoinInfo?: DomainJoinInfo;
   }
@@ -1278,7 +1290,7 @@ declare namespace AppStream {
      */
     BaseImageArn?: Arn;
     /**
-     * The image name for display.
+     * The image name to display.
      */
     DisplayName?: String;
     /**
@@ -1298,7 +1310,7 @@ declare namespace AppStream {
      */
     Platform?: PlatformType;
     /**
-     * The description for display.
+     * The description to display.
      */
     Description?: String;
     /**
@@ -1340,11 +1352,11 @@ declare namespace AppStream {
      */
     ImageArn?: Arn;
     /**
-     * The description for display.
+     * The description to display.
      */
     Description?: String;
     /**
-     * The image builder name for display.
+     * The image builder name to display.
      */
     DisplayName?: String;
     /**
@@ -1376,7 +1388,7 @@ declare namespace AppStream {
      */
     EnableDefaultInternetAccess?: BooleanObject;
     /**
-     * The information needed to join a Microsoft Active Directory domain.
+     * The name of the directory and organizational unit (OU) to use to join the image builder to a Microsoft Active Directory domain. 
      */
     DomainJoinInfo?: DomainJoinInfo;
     /**
@@ -1384,7 +1396,7 @@ declare namespace AppStream {
      */
     ImageBuilderErrors?: ResourceErrors;
     /**
-     * The version of the AppStream 2.0 agent that is currently being used by this image builder. 
+     * The version of the AppStream 2.0 agent that is currently being used by the image builder. 
      */
     AppstreamAgentVersion?: AppstreamAgentVersion;
   }
@@ -1527,7 +1539,7 @@ declare namespace AppStream {
   }
   export interface Session {
     /**
-     * The ID of the streaming session.
+     * The identifier of the streaming session.
      */
     Id: String;
     /**
@@ -1560,7 +1572,7 @@ declare namespace AppStream {
   export type SettingsGroup = string;
   export interface SharedImagePermissions {
     /**
-     * The 12-digit ID of the AWS account with which the image is shared.
+     * The 12-digit identifier of the AWS account with which the image is shared.
      */
     sharedAccountId: AwsAccountId;
     /**
@@ -1579,11 +1591,11 @@ declare namespace AppStream {
      */
     Name: String;
     /**
-     * The description for display.
+     * The description to display.
      */
     Description?: String;
     /**
-     * The stack name for display.
+     * The stack name to display.
      */
     DisplayName?: String;
     /**
@@ -1684,7 +1696,7 @@ declare namespace AppStream {
      */
     ResourceIdentifier?: ResourceIdentifier;
     /**
-     * The names of the domains for the G Suite account.
+     * The names of the domains for the account.
      */
     Domains?: DomainList;
   }
@@ -1781,11 +1793,11 @@ declare namespace AppStream {
      */
     DeleteVpcConfig?: Boolean;
     /**
-     * The description for display.
+     * The description to display.
      */
     Description?: Description;
     /**
-     * The fleet name for display.
+     * The fleet name to display.
      */
     DisplayName?: DisplayName;
     /**
@@ -1793,7 +1805,7 @@ declare namespace AppStream {
      */
     EnableDefaultInternetAccess?: BooleanObject;
     /**
-     * The information needed to join a Microsoft Active Directory domain.
+     * The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. 
      */
     DomainJoinInfo?: DomainJoinInfo;
     /**
@@ -1813,7 +1825,7 @@ declare namespace AppStream {
      */
     Name: Name;
     /**
-     * The 12-digit ID of the AWS account for which you want add or update image permissions.
+     * The 12-digit identifier of the AWS account for which you want add or update image permissions.
      */
     SharedAccountId: AwsAccountId;
     /**
@@ -1825,11 +1837,11 @@ declare namespace AppStream {
   }
   export interface UpdateStackRequest {
     /**
-     * The stack name for display.
+     * The stack name to display.
      */
     DisplayName?: DisplayName;
     /**
-     * The description for display.
+     * The description to display.
      */
     Description?: Description;
     /**
@@ -1849,7 +1861,7 @@ declare namespace AppStream {
      */
     RedirectURL?: RedirectURL;
     /**
-     * The URL that users are redirected to after they click the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.
+     * The URL that users are redirected to after they choose the Send Feedback link. If no URL is specified, no Send Feedback link is displayed.
      */
     FeedbackURL?: FeedbackURL;
     /**
@@ -1958,11 +1970,11 @@ declare namespace AppStream {
   export type VisibilityType = "PUBLIC"|"PRIVATE"|"SHARED"|string;
   export interface VpcConfig {
     /**
-     * The subnets to which a network interface is established from the fleet instance.
+     * The identifiers of the subnets to which a network interface is attached from the fleet instance or image builder instance. Fleet instances use one or two subnets. Image builder instances use one subnet.
      */
     SubnetIds?: SubnetIdList;
     /**
-     * The security groups for the fleet.
+     * The identifiers of the security groups for the fleet or image builder.
      */
     SecurityGroupIds?: SecurityGroupIdList;
   }
