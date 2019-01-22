@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "S3 managed uploader",
+  "description": "S3 managed uploader will not uriEscape tags when doing a multi-part upload."
+}
