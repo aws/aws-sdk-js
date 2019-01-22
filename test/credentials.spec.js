@@ -703,7 +703,7 @@
         var fs = require('fs');
         // rm -r
         if (fs.existsSync(cachedir)) {
-          fs.readdirSync(cachedir).forEach(function(file){
+          fs.readdirSync(cachedir).forEach(function(file) {
             fs.unlinkSync(path.join(cachedir, file));
           });
           fs.rmdirSync(cachedir);
