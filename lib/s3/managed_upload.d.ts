@@ -57,6 +57,10 @@ export namespace ManagedUpload {
          * Key to which the object was uploaded.
          */
         Key: string;
+        /**
+         * Key to which the object was uploaded.
+         */
+        UploadedViaMultipart: boolean | false;
     }
     export interface ManagedUploadOptions {
         /**
