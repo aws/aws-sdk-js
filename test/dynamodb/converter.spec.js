@@ -537,6 +537,6 @@ describe('AWS.DynamoDB.Converter', function() {
 
         expect(unmarshalled.map.nestedMap.numberKey.toString())
             .to.equal('9007199254740991000');
-    })
+    });
   });
 });

@@ -75,7 +75,7 @@
     spy = function() {
       spy.calls.push({
         object: this,
-        "arguments": Array.prototype.slice.call(arguments)
+        'arguments': Array.prototype.slice.call(arguments)
       });
       if (spy.callFn) {
         return spy.callFn.apply(spy.object, arguments);
@@ -188,7 +188,7 @@
       },
       api: new AWS.Model.Api(customApi)
     });
-  }
+  };
 
   mockHttpSuccessfulResponse = function(status, headers, data, cb) {
     var httpResp;

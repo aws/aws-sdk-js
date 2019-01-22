@@ -170,7 +170,7 @@
             expect(setTimeoutSpy.calls.length).to.equal(1);
             mockSocket.emit('connect');
             expect(clearTimeoutSpy.calls.length).to.equal(1);
-            expect(clearTimeoutSpy.calls[0]["arguments"][0]).to.equal(timeoutId);
+            expect(clearTimeoutSpy.calls[0]['arguments'][0]).to.equal(timeoutId);
           });
 
           it('clears timeouts if an error is encountered', function() {
@@ -188,8 +188,8 @@
             expect(setTimeoutSpy.calls.length).to.equal(1);
             mockClientRequest.emit('error', new Error('Something happened!'));
             expect(clearTimeoutSpy.calls.length).to.equal(1);
-            expect(clearTimeoutSpy.calls[0]["arguments"][0]).to.equal(timeoutId);
-          })
+            expect(clearTimeoutSpy.calls[0]['arguments'][0]).to.equal(timeoutId);
+          });
         });
       });
     });

@@ -12,67 +12,67 @@ describe('populateHostPrefix', function() {
     },
     operations: {
       GetObject: {
-        name: "GetObject",
+        name: 'GetObject',
         http: {
-          method: "GET",
-          requestUri: "/{Key +}",
+          method: 'GET',
+          requestUri: '/{Key +}',
           responseCode: 200
         },
         endpoint: {
-          hostPrefix: "{Bucket}-{AccountId}-{Bucket}."
+          hostPrefix: '{Bucket}-{AccountId}-{Bucket}.'
         },
-        input: {"shape": "GetObjectInput"},
-        output: {"shape": "GetObjectOutput"}
+        input: {'shape': 'GetObjectInput'},
+        output: {'shape': 'GetObjectOutput'}
       },
       GetObjectV2: {
-        name: "GetObjectV2",
+        name: 'GetObjectV2',
         http: {
-          method: "GET",
-          requestUri: "/{Key +}",
+          method: 'GET',
+          requestUri: '/{Key +}',
           responseCode: 200
         },
         endpoint: {
-          hostPrefix: "service-"
+          hostPrefix: 'service-'
         },
-        input: {"shape": "GetObjectV2Input"},
-        output: {"shape": "GetObjectOutput"}
+        input: {'shape': 'GetObjectV2Input'},
+        output: {'shape': 'GetObjectOutput'}
       },
     },
     shapes: {
       GetObjectInput: {
-        type: "structure",
-        required: ["AccountId", "Bucket", "Key"],
+        type: 'structure',
+        required: ['AccountId', 'Bucket', 'Key'],
         members: {
           AccountId: {
-            type: "string",
+            type: 'string',
             hostLabel: true,
-            locationName: "x-amz-account-id",
-            location: "header"
+            locationName: 'x-amz-account-id',
+            location: 'header'
           },
           Bucket: {
-            type: "string",
+            type: 'string',
             hostLabel: true,
-            locationName: "x-amz-bucket",
-            location: "header"
+            locationName: 'x-amz-bucket',
+            location: 'header'
           },
           Key: {
-            type: "string",
-            location: "uri"
+            type: 'string',
+            location: 'uri'
           }
         }
       },
       GetObjectV2Input: {
-        type: "structure",
+        type: 'structure',
         required: [],
         members: {}
       },
       GetObjectOutput: {
-        type: "structure",
+        type: 'structure',
         required: [],
         members: {}
       }
     }
-  }
+  };
   it('should not apply host prefix if it\'s disabled', function() {
     var client = new AWS.Service({
       apiConfig: new AWS.Model.Api(api),
@@ -142,7 +142,7 @@ describe('populateHostPrefix', function() {
         Bucket: 'bucket',
         Key: 'key'
       }));
-    } catch(e) {
+    } catch (e) {
       error = e;
     }
     expect(error).not.to.equal(undefined);
@@ -161,7 +161,7 @@ describe('populateHostPrefix', function() {
         Key: 'key',
         AccountId: '{abc}'
       }));
-    } catch(e) {
+    } catch (e) {
       error = e;
     }
     expect(error).not.to.equal(undefined);
@@ -176,11 +176,11 @@ describe('populateHostPrefix', function() {
         Key: 'key',
         AccountId: stringTooLong
       }));
-    } catch(e) {
+    } catch (e) {
       error = e;
     }
     expect(error).not.to.equal(undefined);
     expect(error.code).to.equal('ValidationError');
     expect(error.message).to.equal('Hostname label length should be between 1 to 63 characters, inclusive.');
   });
-})
+});

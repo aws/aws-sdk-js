@@ -85,7 +85,7 @@
       };
       return describe('with error', function() {
         beforeEach(function() {
-          return body = "<Response>\n  <Errors>\n    <Error>\n      <Code>InvalidInstanceID.Malformed</Code>\n      <Message>Invalid id: \"i-12345678\"</Message>\n    </Error>\n  </Errors>\n  <RequestID>ab123mno-6432-dceb-asdf-123mno543123</RequestID>\n</Response>";
+          return body = '<Response>\n  <Errors>\n    <Error>\n      <Code>InvalidInstanceID.Malformed</Code>\n      <Message>Invalid id: "i-12345678"</Message>\n    </Error>\n  </Errors>\n  <RequestID>ab123mno-6432-dceb-asdf-123mno543123</RequestID>\n</Response>';
         });
         it('extracts the error code', function() {
           return parse(function(error, data) {

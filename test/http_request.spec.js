@@ -78,9 +78,9 @@
           host: 'another.com:5678',
           protocol: 'https:',
           href: 'https://another.com:5678/path/service?foo=3&foo.options=5'
-        })
-      })
-    })
+        });
+      });
+    });
     describe('getUserAgentHeaderName', function() {
       it('provides the correct header for browser environments', function() {
         helpers.spyOn(AWS.util, 'isBrowser').andReturn(true);

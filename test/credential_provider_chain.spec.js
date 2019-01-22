@@ -123,8 +123,8 @@
             get: function get(callback) {
               getCalls++;
               setImmediate(function () {
-                this.accessKeyId = 'abc'
-                this.secretAccessKey = 'xyz'
+                this.accessKeyId = 'abc';
+                this.secretAccessKey = 'xyz';
                 callback();
               });
             }
@@ -176,19 +176,19 @@
           });
           it('resolves when creds successfully retrieved from a provider in the chain', function() {
             forceError = false;
-            return chain.resolvePromise().then(thenFunction)["catch"](catchFunction).then(function() {
-              expect(err).to.be["null"];
-              expect(creds).to.not.be["null"];
+            return chain.resolvePromise().then(thenFunction)['catch'](catchFunction).then(function() {
+              expect(err).to.be['null'];
+              expect(creds).to.not.be['null'];
               expect(creds.accessKeyId).to.equal('akid');
               return expect(creds.secretAccessKey).to.equal('secret');
             });
           });
           return it('rejects when all providers in chain return an error', function() {
             forceError = true;
-            return chain.resolvePromise().then(thenFunction)["catch"](catchFunction).then(function() {
-              expect(err).to.not.be["null"];
+            return chain.resolvePromise().then(thenFunction)['catch'](catchFunction).then(function() {
+              expect(err).to.not.be['null'];
               expect(err.code).to.equal('MockCredentialsProviderFailure');
-              return expect(creds).to.be["null"];
+              return expect(creds).to.be['null'];
             });
           });
         });

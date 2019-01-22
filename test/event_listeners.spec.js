@@ -68,17 +68,17 @@
         return request;
       }
     };
-    
+
     describe('validate', function() {
       it('takes the request object as a parameter', function() {
         var request, response;
         request = makeRequest();
         request.on('validate', function(req) {
           expect(req).to.equal(request);
-          throw "ERROR";
+          throw 'ERROR';
         });
         response = request.send(function() {});
-        return expect(response.error.message).to.equal("ERROR");
+        return expect(response.error.message).to.equal('ERROR');
       });
       it('sends error event if credentials are not set', function() {
         service.config.credentialProvider = null;
@@ -86,10 +86,10 @@
         makeRequest(function() {});
         expect(errorHandler.calls.length).not.to.equal(0);
         return AWS.util.arrayEach(errorHandler.calls, function(call) {
-          expect(call["arguments"][0]).to.be.instanceOf(Error);
-          expect(call["arguments"][0].code).to.equal('CredentialsError');
-          expect(call["arguments"][0].name).to.equal('CredentialsError');
-          return expect(call["arguments"][0].message).to.match(/Missing credentials/);
+          expect(call['arguments'][0]).to.be.instanceOf(Error);
+          expect(call['arguments'][0].code).to.equal('CredentialsError');
+          expect(call['arguments'][0].name).to.equal('CredentialsError');
+          return expect(call['arguments'][0].message).to.match(/Missing credentials/);
         });
       });
       it('sends error event if credentials are not set', function() {
@@ -98,10 +98,10 @@
         makeRequest(function() {});
         expect(errorHandler.calls.length).not.to.equal(0);
         return AWS.util.arrayEach(errorHandler.calls, function(call) {
-          expect(call["arguments"][0]).to.be.instanceOf(Error);
-          expect(call["arguments"][0].code).to.equal('CredentialsError');
-          expect(call["arguments"][0].name).to.equal('CredentialsError');
-          return expect(call["arguments"][0].message).to.match(/Missing credentials/);
+          expect(call['arguments'][0]).to.be.instanceOf(Error);
+          expect(call['arguments'][0].code).to.equal('CredentialsError');
+          expect(call['arguments'][0].name).to.equal('CredentialsError');
+          return expect(call['arguments'][0].message).to.match(/Missing credentials/);
         });
       });
       it('does not validate credentials if request is not signed', function() {
@@ -125,9 +125,9 @@
         request = makeRequest(function() {});
         call = errorHandler.calls[0];
         expect(errorHandler.calls.length).not.to.equal(0);
-        expect(call["arguments"][0]).to.be.instanceOf(Error);
-        expect(call["arguments"][0].code).to.equal('ConfigError');
-        return expect(call["arguments"][0].message).to.match(/Missing region in config/);
+        expect(call['arguments'][0]).to.be.instanceOf(Error);
+        expect(call['arguments'][0].code).to.equal('ConfigError');
+        return expect(call['arguments'][0].message).to.match(/Missing region in config/);
       });
       return it('ignores region validation if service has global endpoint', function() {
         helpers.mockHttpResponse(200, {}, '');
@@ -146,10 +146,10 @@
         request = makeRequest();
         request.on('build', function(req) {
           expect(req).to.equal(request);
-          throw "ERROR";
+          throw 'ERROR';
         });
         response = request.send(function() {});
-        return expect(response.error.message).to.equal("ERROR");
+        return expect(response.error.message).to.equal('ERROR');
       });
     });
 
@@ -208,7 +208,7 @@
               var req = service.putStream({
                 Body: require('fs').createReadStream(__filename)
               });
-  
+
               req.runTo('sign', function(err) {
                 expect(req.httpRequest.headers['Content-Length'] > 0).to.equal(true);
                 expect(!err).to.equal(true);
@@ -220,7 +220,7 @@
               var req = service.putStream({
                 Body: new AWS.util.stream.Readable()
               });
-  
+
               req.runTo('sign', function(err) {
                 expect(typeof req.httpRequest.headers['Content-Length']).to.equal('undefined');
                 expect(!err).to.equal(true);
@@ -294,10 +294,10 @@
         request = makeRequest();
         request.on('sign', function(req) {
           expect(req).to.equal(request);
-          throw "ERROR";
+          throw 'ERROR';
         });
         response = request.send(function() {});
-        return expect(response.error.message).to.equal("ERROR");
+        return expect(response.error.message).to.equal('ERROR');
       });
       it('uses the api.signingName if provided', function() {
         var request, response;
@@ -865,10 +865,10 @@
           operations: {
             mockMethod: {
               input: {
-                type: "structure",
+                type: 'structure',
                 members: {
                   foo: {
-                    type: "string",
+                    type: 'string',
                     sensitive: true
                   }
                 }
@@ -876,8 +876,8 @@
               output: {}
             }
           }
-        }
-      })
+        };
+      });
 
       it('with sensitive trait in shape\'s own property', function() {
         var api = new AWS.Model.Api(apiJSON);
@@ -898,10 +898,10 @@
           operations: {
             mockMethod: {
               input: {
-                type: "structure",
+                type: 'structure',
                 members: {
                   foo: {
-                    shape: "S1"
+                    shape: 'S1'
                   },
                   baz: {
                     type: 'structure',
@@ -920,7 +920,7 @@
               sensitive: true
             }
           }
-        })
+        });
         var CustomMockService = MockServiceFromApi(api);
         service = new CustomMockService({logger: logger});
         helpers.mockHttpResponse(200, {}, []);
@@ -943,7 +943,7 @@
           member: {
             sensitive: true
           }
-        }
+        };
         var api = new AWS.Model.Api(apiJSON);
         var CustomMockService = MockServiceFromApi(api);
         service = new CustomMockService({logger: logger});
@@ -966,7 +966,7 @@
             type: 'string',
             sensitive: true
           }
-        }
+        };
         var api = new AWS.Model.Api(apiJSON);
         var CustomMockService = MockServiceFromApi(api);
         service = new CustomMockService({logger: logger});
@@ -996,7 +996,7 @@
               }
             }
           }
-        }
+        };
         var api = new AWS.Model.Api(apiJSON);
         var CustomMockService = MockServiceFromApi(api);
         service = new CustomMockService({logger: logger});
@@ -1009,11 +1009,11 @@
         }).send();
         expect(data.indexOf('secret_key_id')).to.equal(-1);
         expect(data.indexOf('secret_access_key')).to.equal(-1);
-      })
+      });
 
       it('from input shape of scalars', function() {
         var allShapeTypes = ['boolean', 'timestamp', 'float','integer', 'string', 'base64', 'binary'];
-        Array.prototype.forEach.call(allShapeTypes, function(shapeType){
+        Array.prototype.forEach.call(allShapeTypes, function(shapeType) {
           apiJSON.operations.mockMethod.input.members.foo = {
             type: shapeType,
             sensitive: true
@@ -1027,7 +1027,7 @@
             foo: '1234567'
           }).send();
           expect(data.indexOf('1234567')).to.equal(-1);
-        })
+        });
       });
 
       it('from input of undefined', function() {
@@ -1052,7 +1052,7 @@
         expect(data.indexOf('bar: \'bar\'') >= 0).to.equal(true);
         expect(data.indexOf('undefined') >= 0).to.equal(true);
         expect(data.indexOf('{}')).to.equal(-1);
-      })
+      });
     });
 
     describe('terminal callback error handling', function() {
@@ -1065,7 +1065,7 @@
             return makeRequest(function() {
               return invalidCode;
             });
-          }).to["throw"]();
+          }).to['throw']();
           expect(completeHandler.calls.length).to.equal(1);
           expect(errorHandler.calls.length).to.equal(0);
           return expect(retryHandler.calls.length).to.equal(0);
@@ -1079,7 +1079,7 @@
               return request.send(function() {
                 return invalidCode;
               });
-            }).to["throw"]();
+            }).to['throw']();
             return expect(completeHandler.calls.length).not.to.equal(0);
           });
         });
@@ -1123,7 +1123,7 @@
 
               expect(function() {
                 request.send();
-              }).not.to["throw"]();
+              }).not.to['throw']();
 
               expect(completeHandler.calls.length).not.to.equal(0);
               expect(retryHandler.calls.length).to.equal(0);

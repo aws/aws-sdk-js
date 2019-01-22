@@ -14,7 +14,7 @@ function mockDefinedResponses(resps, request) {
       });
       index ++;
     }
-    done()
+    done();
   });
   //mock aws exceptions
   var stream = new EventEmitter();
@@ -67,7 +67,7 @@ function mockFailedResponse(resp, request) {
     body: body,
     headers: headers,
     statusCode: resp.httpStatus,
-  }
+  };
 }
 
 function faildResponseBody(protocol, resp) {
@@ -85,12 +85,12 @@ function faildResponseBody(protocol, resp) {
     </Error>
   </Errors>
 </Response>
-`
+`;
       break;
     case 'json':
     case 'rest-json':
     //error code should be set in x-amzn-errortype header
-      return `{"Message": "${resp.errorMessage}"}`
+      return `{"Message": "${resp.errorMessage}"}`;
     default:
       break;
   }
@@ -98,4 +98,4 @@ function faildResponseBody(protocol, resp) {
 
 module.exports = {
   mockResponses: mockDefinedResponses,
-}
+};

@@ -421,7 +421,7 @@ describe('AWS.Config', function() {
       }
       config.getCredentials(spy);
       expect(spy.calls.length).not.to.equal(0);
-      expect(spy.calls[0]["arguments"][0]).not.to.exist;
+      expect(spy.calls[0]['arguments'][0]).not.to.exist;
       if (key) {
         expect(config.credentials.accessKeyId).to.equal(key);
       }
@@ -435,9 +435,9 @@ describe('AWS.Config', function() {
       }
       config.getCredentials(spy);
       expect(spy.calls.length).not.to.equal(0);
-      expect(spy.calls[0]["arguments"][0].code).to.equal('CredentialsError');
-      expect(spy.calls[0]["arguments"][0].name).to.equal('CredentialsError');
-      expect(spy.calls[0]["arguments"][0].message).to.equal(message);
+      expect(spy.calls[0]['arguments'][0].code).to.equal('CredentialsError');
+      expect(spy.calls[0]['arguments'][0].name).to.equal('CredentialsError');
+      expect(spy.calls[0]['arguments'][0].message).to.equal(message);
     };
 
     it('should check credentials for static object first', function() {
@@ -539,8 +539,8 @@ describe('AWS.config', function() {
       var utilSpy = helpers.spyOn(AWS.util, 'addPromises');
       AWS.config.setPromisesDependency(function() {});
       expect(utilSpy.calls.length).to.equal(1);
-      expect(Array.isArray(utilSpy.calls[0]["arguments"][0])).to.be["true"];
-      expect(utilSpy.calls[0]["arguments"][0].length).to.equal(4);
+      expect(Array.isArray(utilSpy.calls[0]['arguments'][0])).to.be['true'];
+      expect(utilSpy.calls[0]['arguments'][0].length).to.equal(4);
     });
 
     if (typeof Promise !== 'undefined') {
@@ -548,10 +548,10 @@ describe('AWS.config', function() {
         var P = function() {};
         var utilSpy = helpers.spyOn(AWS.util, 'addPromises');
         AWS.config.setPromisesDependency(P);
-        expect(utilSpy.calls[0]["arguments"][1] === P).to.be["true"];
+        expect(utilSpy.calls[0]['arguments'][1] === P).to.be['true'];
         AWS.config.setPromisesDependency(null);
-        expect(utilSpy.calls[1]["arguments"][1] === Promise).to.be["true"];
-        expect(utilSpy.calls[1]["arguments"][1] === P).to.be["false"];
+        expect(utilSpy.calls[1]['arguments'][1] === Promise).to.be['true'];
+        expect(utilSpy.calls[1]['arguments'][1] === P).to.be['false'];
       });
     }
   });

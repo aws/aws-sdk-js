@@ -24,7 +24,7 @@ for (var serviceAbbreviation in metadata) {
             })(clientName, version)
           );
         }
-      }
+      };
     })(clientName, serviceAbbreviation)
   );
 }

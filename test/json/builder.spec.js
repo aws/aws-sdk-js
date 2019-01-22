@@ -28,7 +28,7 @@
     };
     return describe('build', function() {
       it('returns an empty document when there are no params', function() {
-        return expect(build({}, {})).to.equal("{}");
+        return expect(build({}, {})).to.equal('{}');
       });
       describe('structures', function() {
         var rules;
@@ -154,8 +154,8 @@
         now.setMilliseconds(100);
         params = {
           Items: {
-            MyKey: "5",
-            MyOtherKey: "10"
+            MyKey: '5',
+            MyOtherKey: '10'
           }
         };
         str = '{"Items":{"MyKey":5,"MyOtherKey":10}}';

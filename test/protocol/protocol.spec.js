@@ -57,7 +57,7 @@
               shapes: group.shapes
             };
             group.cases.forEach(function(_case, i) {
-              _case.op = "case" + (i + 1);
+              _case.op = 'case' + (i + 1);
               return api.operations[_case.op] = _case.given;
             });
             svc = new AWS.Service({
@@ -112,7 +112,7 @@
       return results;
     }
     if (data.host) {
-      expect(req.httpRequest.endpoint.hostname).to.equal(data.host)
+      expect(req.httpRequest.endpoint.hostname).to.equal(data.host);
     }
   };
 

@@ -27,7 +27,7 @@
         var api, params, xml;
         helpers.mockHttpResponse(200, {}, '');
         api = cf.api.apiVersion;
-        xml = "<InvalidationBatch xmlns=\"http://cloudfront.amazonaws.com/doc/" + api + "/\">\n  <Paths>\n    <Quantity>2</Quantity>\n    <Items>\n      <Path>path1</Path>\n      <Path>path2</Path>\n    </Items>\n  </Paths>\n  <CallerReference>abc</CallerReference>\n</InvalidationBatch>";
+        xml = '<InvalidationBatch xmlns="http://cloudfront.amazonaws.com/doc/' + api + '/">\n  <Paths>\n    <Quantity>2</Quantity>\n    <Items>\n      <Path>path1</Path>\n      <Path>path2</Path>\n    </Items>\n  </Paths>\n  <CallerReference>abc</CallerReference>\n</InvalidationBatch>';
         params = {
           DistributionId: 'ID',
           InvalidationBatch: {
@@ -41,7 +41,7 @@
         return cf.createInvalidation(params, function(err, data) {
           var req;
           req = this.request.httpRequest;
-          expect(req.path).to.equal("/" + api + "/distribution/ID/invalidation");
+          expect(req.path).to.equal('/' + api + '/distribution/ID/invalidation');
           return helpers.matchXML(req.body, xml);
         });
       });

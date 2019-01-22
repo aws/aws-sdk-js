@@ -56,9 +56,9 @@
           var params;
           params = '{ "Items": { "A": "a", "B": "b" } }';
           return expect(parse(rules, params)).to.eql({
-            "Items": {
-              "A": "a",
-              "B": "b"
+            'Items': {
+              'A': 'a',
+              'B': 'b'
             }
           });
         });

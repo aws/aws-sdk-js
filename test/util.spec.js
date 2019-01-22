@@ -538,7 +538,7 @@
     it('callback should not change "this" scope', function() {
       return new function() {
         var self;
-        this["class"] = 'MyClass';
+        this['class'] = 'MyClass';
         self = this;
         return AWS.util.each.apply(this, [
           [1, 2, 3], function() {
@@ -741,7 +741,7 @@
       });
       derived = new Derived(1, 2, 'three');
       expect(derived.other).to.equal(true);
-      return expect(Base.prototype.constructor.calls[0]["arguments"]).to.eql([1, 2, 'three']);
+      return expect(Base.prototype.constructor.calls[0]['arguments']).to.eql([1, 2, 'three']);
     });
   });
 
@@ -1246,27 +1246,27 @@
     });
     if (AWS.util.isNode()) {
       it('accepts service identifier string as argument', function() {
-        expect(AWS.util.isDualstackAvailable('mock')).to.be["false"];
+        expect(AWS.util.isDualstackAvailable('mock')).to.be['false'];
         metadata.mock.dualstackAvailable = true;
-        return expect(AWS.util.isDualstackAvailable('mock')).to.be["true"];
+        return expect(AWS.util.isDualstackAvailable('mock')).to.be['true'];
       });
       it('accepts service client instance as argument', function() {
         var service;
         service = new helpers.MockService();
-        expect(AWS.util.isDualstackAvailable(service)).to.be["false"];
+        expect(AWS.util.isDualstackAvailable(service)).to.be['false'];
         metadata.mock.dualstackAvailable = true;
-        return expect(AWS.util.isDualstackAvailable(service)).to.be["true"];
+        return expect(AWS.util.isDualstackAvailable(service)).to.be['true'];
       });
       it('accepts service constructor as argument', function() {
-        expect(AWS.util.isDualstackAvailable(helpers.MockService)).to.be["false"];
+        expect(AWS.util.isDualstackAvailable(helpers.MockService)).to.be['false'];
         metadata.mock.dualstackAvailable = true;
-        return expect(AWS.util.isDualstackAvailable(helpers.MockService)).to.be["true"];
+        return expect(AWS.util.isDualstackAvailable(helpers.MockService)).to.be['true'];
       });
     }
     return it('returns false if invalid service is given as argument', function() {
-      expect(AWS.util.isDualstackAvailable(null)).to.be["false"];
-      expect(AWS.util.isDualstackAvailable('invalid')).to.be["false"];
-      return expect(AWS.util.isDualstackAvailable({})).to.be["false"];
+      expect(AWS.util.isDualstackAvailable(null)).to.be['false'];
+      expect(AWS.util.isDualstackAvailable('invalid')).to.be['false'];
+      return expect(AWS.util.isDualstackAvailable({})).to.be['false'];
     });
   });
 
@@ -1517,7 +1517,7 @@
           return resp.end();
         };
         return sendRequest(function(err, data) {
-          expect(err).to.be["null"];
+          expect(err).to.be['null'];
           expect(data).to.equal('FOOBAR');
           expect(spy.calls.length).to.equal(1);
           return done();
@@ -1537,7 +1537,7 @@
           return resp.end();
         };
         return sendRequest(function(err, data) {
-          expect(err).to.be["null"];
+          expect(err).to.be['null'];
           expect(data).to.equal('FOOBAR');
           expect(spy.calls.length).to.equal(2);
           return done();
@@ -1553,9 +1553,9 @@
         };
         return sendRequest(function(err, data) {
           expect(data).to.be.undefined;
-          expect(err).to.not.be["null"];
+          expect(err).to.not.be['null'];
           expect(err.code).to.equal('TimeoutError');
-          expect(err.retryable).to.be["true"];
+          expect(err.retryable).to.be['true'];
           expect(spy.calls.length).to.equal(options.maxRetries + 1);
           return done();
         });
@@ -1568,8 +1568,8 @@
         };
         return sendRequest(function(err, data) {
           expect(data).to.be.undefined;
-          expect(err).to.not.be["null"];
-          expect(err.retryable).to.be["true"];
+          expect(err).to.not.be['null'];
+          expect(err.retryable).to.be['true'];
           expect(spy.calls.length).to.equal(options.maxRetries + 1);
           return done();
         });
@@ -1582,8 +1582,8 @@
         };
         return sendRequest(function(err, data) {
           expect(data).to.be.undefined;
-          expect(err).to.not.be["null"];
-          expect(err.retryable).to.be["true"];
+          expect(err).to.not.be['null'];
+          expect(err.retryable).to.be['true'];
           expect(spy.calls.length).to.equal(options.maxRetries + 1);
           return done();
         });
@@ -1596,8 +1596,8 @@
         };
         return sendRequest(function(err, data) {
           expect(data).to.be.undefined;
-          expect(err).to.not.be["null"];
-          expect(err.retryable).to.be["false"];
+          expect(err).to.not.be['null'];
+          expect(err.retryable).to.be['false'];
           expect(spy.calls.length).to.equal(1);
           return done();
         });
@@ -1613,8 +1613,8 @@
         };
         return sendRequest(function(err, data) {
           expect(data).to.be.undefined;
-          expect(err).to.not.be["null"];
-          expect(err.retryable).to.be["true"];
+          expect(err).to.not.be['null'];
+          expect(err.retryable).to.be['true'];
           expect(spy.calls.length).to.equal(options.maxRetries + 1);
           return done();
         });
@@ -1632,7 +1632,7 @@
         options = {};
         return sendRequest(function(err, data) {
           expect(data).to.be.undefined;
-          expect(err).to.not.be["null"];
+          expect(err).to.not.be['null'];
           expect(spy.calls.length).to.equal(1);
           return done();
         });
