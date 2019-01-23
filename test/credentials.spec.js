@@ -710,7 +710,7 @@
         }
         delete process.env.AWS_CREDENTIAL_CACHE_DIRECTORY;
       });
-      it('will fail if assume role is disabled', function() {
+      it('will fail if assume role is disabled', function(done) {
         var creds, mock;
         mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\nrole_arn = arn';
         helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
