@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.392.0-->
+<!--LATEST=2.393.0-->
 <!--ENTRYINSERT-->
+
+## 2.393.0
+* bugfix: S3 managed uploader: S3 managed uploader will not uriEscape tags when doing a multi-part upload.
+* feature: ACMPCA: Added TagOnCreate parameter to the CreateCertificateAuthority operation, updated the Tag regex pattern to align with AWS tagging APIs, and added RevokeCertificate limit.
+* feature: ApiGatewayManagementApi: Fixes a typo in the 'max' constraint.
+* feature: WorkLink: This is the initial SDK release for Amazon WorkLink. Amazon WorkLink is a fully managed, cloud-based service that enables secure, one-click access to internal websites and web apps from mobile phones. With Amazon WorkLink, employees can access internal websites as seamlessly as they access any other website. IT administrators can manage users, devices, and domains by enforcing their own security and access policies via the AWS Console or the AWS SDK.
 
 ## 2.392.0
 * feature: AppStream: This API update includes support for tagging Stack, Fleet, and ImageBuilder resources at creation time.

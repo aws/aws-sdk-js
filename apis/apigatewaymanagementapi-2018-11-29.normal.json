@@ -45,7 +45,7 @@
   "shapes": {
     "Data": {
       "type": "blob",
-      "max": "131072",
+      "max": 131072,
       "documentation": "<p>The data to be sent to the client specified by its connection id.</p>"
     },
     "PostToConnectionRequest": {

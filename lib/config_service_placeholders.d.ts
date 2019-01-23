@@ -171,6 +171,7 @@ export abstract class ConfigurationServicePlaceholders {
   apigatewayv2?: AWS.ApiGatewayV2.Types.ClientConfiguration;
   docdb?: AWS.DocDB.Types.ClientConfiguration;
   backup?: AWS.Backup.Types.ClientConfiguration;
+  worklink?: AWS.WorkLink.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -344,4 +345,5 @@ export interface ConfigurationServiceApiVersions {
   apigatewayv2?: AWS.ApiGatewayV2.Types.apiVersion;
   docdb?: AWS.DocDB.Types.apiVersion;
   backup?: AWS.Backup.Types.apiVersion;
+  worklink?: AWS.WorkLink.Types.apiVersion;
 }

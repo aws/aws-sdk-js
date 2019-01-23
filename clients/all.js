@@ -170,5 +170,6 @@ module.exports = {
   ApiGatewayManagementApi: require('./apigatewaymanagementapi'),
   ApiGatewayV2: require('./apigatewayv2'),
   DocDB: require('./docdb'),
-  Backup: require('./backup')
+  Backup: require('./backup'),
+  WorkLink: require('./worklink')
 };

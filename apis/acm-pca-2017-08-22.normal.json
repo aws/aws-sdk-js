@@ -33,6 +33,9 @@
           "shape": "InvalidPolicyException"
         },
         {
+          "shape": "InvalidTagException"
+        },
+        {
           "shape": "LimitExceededException"
         }
       ],
@@ -386,6 +389,9 @@
         },
         {
           "shape": "InvalidStateException"
+        },
+        {
+          "shape": "LimitExceededException"
         },
         {
           "shape": "ResourceNotFoundException"
@@ -758,6 +764,10 @@
         "IdempotencyToken": {
           "shape": "IdempotencyToken",
           "documentation": "<p>Alphanumeric string that can be used to distinguish between calls to <b>CreateCertificateAuthority</b>. Idempotency tokens time out after five minutes. Therefore, if you call <b>CreateCertificateAuthority</b> multiple times with the same idempotency token within a five minute period, ACM PCA recognizes that you are requesting only one certificate. As a result, ACM PCA issues only one. If you change the idempotency token for each call, however, ACM PCA recognizes that you are requesting multiple certificates.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Key-value pairs that will be attached to the new private CA. You can associate up to 50 tags with a private CA.</p>"
         }
       }
     },
@@ -1282,7 +1292,7 @@
       "type": "string",
       "max": 128,
       "min": 1,
-      "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*"
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
     },
     "TagList": {
       "type": "list",
@@ -1296,7 +1306,7 @@
       "type": "string",
       "max": 256,
       "min": 0,
-      "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*"
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
     },
     "UntagCertificateAuthorityRequest": {
       "type": "structure",
@@ -1365,5 +1375,5 @@
       ]
     }
   },
-  "documentation": "<p>You can use the ACM PCA API to create a private certificate authority (CA). You must first call the <a>CreateCertificateAuthority</a> operation. If successful, the operation returns an Amazon Resource Name (ARN) for your private CA. Use this ARN as input to the <a>GetCertificateAuthorityCsr</a> operation to retrieve the certificate signing request (CSR) for your private CA certificate. Sign the CSR using the root or an intermediate CA in your on-premises PKI hierarchy, and call the <a>ImportCertificateAuthorityCertificate</a> to import your signed private CA certificate into ACM PCA. </p> <p>Use your private CA to issue and revoke certificates. These are private certificates that identify and secure client computers, servers, applications, services, devices, and users over SSLS/TLS connections within your organization. Call the <a>IssueCertificate</a> operation to issue a certificate. Call the <a>RevokeCertificate</a> operation to revoke a certificate. </p> <note> <p>Certificates issued by your private CA can be trusted only within your organization, not publicly.</p> </note> <p>Your private CA can optionally create a certificate revocation list (CRL) to track the certificates you revoke. To create a CRL, you must specify a <a>RevocationConfiguration</a> object when you call the <a>CreateCertificateAuthority</a> operation. ACM PCA writes the CRL to an S3 bucket that you specify. You must specify a bucket policy that grants ACM PCA write permission. </p> <p>You can also call the <a>CreateCertificateAuthorityAuditReport</a> to create an optional audit report that lists every time the CA private key is used. The private key is used for signing when the <b>IssueCertificate</b> or <b>RevokeCertificate</b> operation is called. </p>"
+  "documentation": "<p>You can use the ACM PCA API to create a private certificate authority (CA). You must first call the <a>CreateCertificateAuthority</a> operation. If successful, the operation returns an Amazon Resource Name (ARN) for your private CA. Use this ARN as input to the <a>GetCertificateAuthorityCsr</a> operation to retrieve the certificate signing request (CSR) for your private CA certificate. Sign the CSR using the root or an intermediate CA in your on-premises PKI hierarchy, and call the <a>ImportCertificateAuthorityCertificate</a> to import your signed private CA certificate into ACM PCA. </p> <p>Use your private CA to issue and revoke certificates. These are private certificates that identify and secure client computers, servers, applications, services, devices, and users over SSLS/TLS connections within your organization. Call the <a>IssueCertificate</a> operation to issue a certificate. Call the <a>RevokeCertificate</a> operation to revoke a certificate. </p> <note> <p>Certificates issued by your private CA can be trusted only within your organization, not publicly.</p> </note> <p>Your private CA can optionally create a certificate revocation list (CRL) to track the certificates you revoke. To create a CRL, you must specify a <a>RevocationConfiguration</a> object when you call the <a>CreateCertificateAuthority</a> operation. ACM PCA writes the CRL to an S3 bucket that you specify. You must specify a bucket policy that grants ACM PCA write permission. </p> <p>You can also call the <a>CreateCertificateAuthorityAuditReport</a> to create an optional audit report, which enumerates all of the issued, valid, expired, and revoked certificates from the CA.</p> <note> <p>Each ACM PCA API operation has a throttling limit which determines the number of times the operation can be called per second. For more information, see <a href=\"acm-pca/latest/userguide/PcaLimits.html#PcaLimits-api\">API Rate Limits in ACM PCA</a> in the ACM PCA user guide.</p> </note>"
 }

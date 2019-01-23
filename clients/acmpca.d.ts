@@ -350,6 +350,10 @@ declare namespace ACMPCA {
      * Alphanumeric string that can be used to distinguish between calls to CreateCertificateAuthority. Idempotency tokens time out after five minutes. Therefore, if you call CreateCertificateAuthority multiple times with the same idempotency token within a five minute period, ACM PCA recognizes that you are requesting only one certificate. As a result, ACM PCA issues only one. If you change the idempotency token for each call, however, ACM PCA recognizes that you are requesting multiple certificates.
      */
     IdempotencyToken?: IdempotencyToken;
+    /**
+     * Key-value pairs that will be attached to the new private CA. You can associate up to 50 tags with a private CA.
+     */
+    Tags?: TagList;
   }
   export interface CreateCertificateAuthorityResponse {
     /**
