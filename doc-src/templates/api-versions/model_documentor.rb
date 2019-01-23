@@ -249,7 +249,7 @@ class MethodDocumentor
     ## @param tags
 
     @lines << "@param params [Object]"
-    @lines += shapes(api, operation['input'], options).map {|line| "  " + line }
+    @lines += shapes(api, operation['input'], {:in_output => false}.merge(options)).map {|line| "  " + line }
     if examples
       examples.each do |example|
         begin
@@ -288,7 +288,7 @@ class MethodDocumentor
     @lines << "  @param data [Object] the de-serialized data returned from"
     @lines << "    the request. Set to `null` if a request error occurs."
 
-    output = shapes(api, operation['output'], options)
+    output = shapes(api, operation['output'], {:in_output => true}.merge(options))
     output = output.map {|line| "    " + line }
     if output.size > 0
       @lines << "    The `data` object has the following properties:"
@@ -617,7 +617,7 @@ class ShapeDocumentor
   attr_reader :prefix
   attr_reader :type
 
-  def self.type_for(rules)
+  def self.type_for(rules, options={})
     type = rules['type']
     normalizedType = type
 
@@ -646,9 +646,13 @@ class ShapeDocumentor
     elsif type == 'boolean'
       normalizedType = 'Boolean'
     elsif type == 'binary' || type == 'blob'
-      normalizedType = 'Buffer'
+      normalizedType = "Buffer"
       unless rules['eventpayload']
-        normalizedType += ', Typed Array, Blob, String'
+        if !!options[:in_output]
+          normalizedType += "(Node.js), Typed Array(Browser)"
+        else
+          normalizedType += ", Typed Array, Blob, String"
+        end
       end
     elsif type == 'timestamp'
       normalizedType = 'Date'
@@ -671,7 +675,7 @@ class ShapeDocumentor
     @prefix = options[:prefix] || ''
     @required = !!options[:required]
     @visited = options[:visited] || Hash.new { 0 }
-    @type = self.class.type_for(rules)
+    @type = self.class.type_for(rules, options)
     @isEventStream = rules['eventstream']
     @lines = []
     @nested_lines = []
