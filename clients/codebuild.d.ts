@@ -496,6 +496,7 @@ declare namespace CodeBuild {
      */
     webhook?: Webhook;
   }
+  export type CredentialProviderType = "SECRETS_MANAGER"|string;
   export interface DeleteProjectInput {
     /**
      * The name of the build project.
@@ -579,6 +580,7 @@ declare namespace CodeBuild {
   export type EnvironmentVariableType = "PLAINTEXT"|"PARAMETER_STORE"|string;
   export type EnvironmentVariables = EnvironmentVariable[];
   export type GitCloneDepth = number;
+  export type ImagePullCredentialsType = "CODEBUILD"|"SERVICE_ROLE"|string;
   export type ImageVersions = String[];
   export interface ImportSourceCredentialsInput {
     /**
@@ -906,7 +908,7 @@ declare namespace CodeBuild {
      */
     type: EnvironmentType;
     /**
-     * The ID of the Docker image to use for this build project.
+     * The image tag or image digest that identifies the Docker image to use for this build project. Use the following formats:   For an image tag: registry/repository:tag. For example, to specify an image with the tag "latest," use registry/repository:latest.   For an image digest: registry/repository@digest. For example, to specify an image with the digest "sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf," use registry/repository@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf.  
      */
     image: NonEmptyString;
     /**
@@ -925,6 +927,14 @@ declare namespace CodeBuild {
      * The certificate to use with this build project.
      */
     certificate?: String;
+    /**
+     *  The credentials for access to a private registry.
+     */
+    registryCredential?: RegistryCredential;
+    /**
+     *  The type of credentials AWS CodeBuild uses to pull images in your build. There are two valid values:     CODEBUILD specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust AWS CodeBuild's service principal.     SERVICE_ROLE specifies that AWS CodeBuild uses your build project's service role.     When you use a cross-account or private registry image, you must use SERVICE_ROLE credentials. When you use an AWS CodeBuild curated image, you must use CODEBUILD credentials. 
+     */
+    imagePullCredentialsType?: ImagePullCredentialsType;
   }
   export type ProjectName = string;
   export type ProjectNames = NonEmptyString[];
@@ -976,6 +986,16 @@ declare namespace CodeBuild {
   }
   export type ProjectSources = ProjectSource[];
   export type Projects = Project[];
+  export interface RegistryCredential {
+    /**
+     *  The Amazon Resource Name (ARN) or name of credentials created using AWS Secrets Manager.    The credential can use the name of the credentials only if they exist in your current region.  
+     */
+    credential: NonEmptyString;
+    /**
+     *  The service that created the credentials to access a private Docker registry. The valid value, SECRETS_MANAGER, is for AWS Secrets Manager. 
+     */
+    credentialProvider: CredentialProviderType;
+  }
   export interface S3LogsConfig {
     /**
      * The current status of the S3 build logs. Valid values are:    ENABLED: S3 build logs are enabled for this build project.    DISABLED: S3 build logs are not enabled for this build project.  
@@ -1118,6 +1138,14 @@ declare namespace CodeBuild {
      *  Log settings for this build that override the log settings defined in the build project. 
      */
     logsConfigOverride?: LogsConfig;
+    /**
+     *  The credentials for access to a private registry. 
+     */
+    registryCredentialOverride?: RegistryCredential;
+    /**
+     *  The type of credentials AWS CodeBuild uses to pull images in your build. There are two valid values:     CODEBUILD specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust AWS CodeBuild's service principal.    SERVICE_ROLE specifies that AWS CodeBuild uses your build project's service role.     When using a cross-account or private registry image, you must use SERVICE_ROLE credentials. When using an AWS CodeBuild curated image, you must use CODEBUILD credentials. 
+     */
+    imagePullCredentialsTypeOverride?: ImagePullCredentialsType;
   }
   export interface StartBuildOutput {
     /**

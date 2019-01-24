@@ -194,6 +194,36 @@
       ],
       "documentation": "Obtain information about an event destination, including the types of events it reports, the Amazon Resource Name (ARN) of the destination, and the name of the event destination."
     },
+    "ListConfigurationSets": {
+      "name": "ListConfigurationSets",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/sms-voice/configuration-sets",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListConfigurationSetsRequest"
+      },
+      "output": {
+        "shape": "ListConfigurationSetsResponse",
+        "documentation": "ListConfigurationSetsResponse"
+      },
+      "errors": [
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "TooManyRequestsException"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "BadRequestException"
+        },
+        {
+          "shape": "InternalServiceErrorException",
+          "documentation": "InternalServiceErrorException"
+        }
+      ],
+      "documentation": "List all of the configuration sets associated with your Amazon Pinpoint account in the current region."
+    },
     "SendVoiceMessage": {
       "name": "SendVoiceMessage",
       "http": {
@@ -288,6 +318,13 @@
       },
       "documentation": "An object that contains information about an event destination that sends data to Amazon CloudWatch Logs.",
       "required": []
+    },
+    "ConfigurationSets": {
+      "type": "list",
+      "documentation": "An array that contains all of the configuration sets in your Amazon Pinpoint account in the current AWS Region.",
+      "member": {
+        "shape": "WordCharactersWithDelimiters"
+      }
     },
     "CreateConfigurationSetEventDestinationRequest": {
       "type": "structure",
@@ -489,6 +526,40 @@
       },
       "documentation": "An object that contains information about an event destination that sends data to Amazon Kinesis Data Firehose.",
       "required": []
+    },
+    "ListConfigurationSetsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "NextToken",
+          "documentation": "A token returned from a previous call to the API that indicates the position in the list of results."
+        },
+        "PageSize": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "PageSize",
+          "documentation": "Used to specify the number of items that should be returned in the response."
+        }
+      }
+    },
+    "ListConfigurationSetsResponse": {
+      "type": "structure",
+      "members": {
+        "ConfigurationSets": {
+          "shape": "ConfigurationSets",
+          "documentation": "An object that contains a list of configuration sets for your account in the current region."
+        },
+        "NextToken": {
+          "shape": "NextTokenString",
+          "documentation": "A token returned from a previous call to ListConfigurationSets to indicate the position in the list of configuration sets."
+        }
+      },
+      "documentation": "An object that contains information about the configuration sets for your account in the current region."
+    },
+    "NextTokenString": {
+      "type": "string"
     },
     "NonEmptyString": {
       "type": "string"

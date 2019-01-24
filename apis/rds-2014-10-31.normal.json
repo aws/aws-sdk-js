@@ -35,7 +35,32 @@
           "shape": "DBClusterRoleQuotaExceededFault"
         }
       ],
-      "documentation": "<p>Associates an Identity and Access Management (IAM) role from an Aurora DB cluster. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.Authorizing.html\">Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf</a> in the <i>Amazon Aurora User Guide</i>.</p>"
+      "documentation": "<p>Associates an Identity and Access Management (IAM) role from an Amazon Aurora DB cluster. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.Authorizing.html\">Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf</a> in the <i>Amazon Aurora User Guide</i>.</p>"
+    },
+    "AddRoleToDBInstance": {
+      "name": "AddRoleToDBInstance",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AddRoleToDBInstanceMessage"
+      },
+      "errors": [
+        {
+          "shape": "DBInstanceNotFoundFault"
+        },
+        {
+          "shape": "DBInstanceRoleAlreadyExistsFault"
+        },
+        {
+          "shape": "InvalidDBInstanceStateFault"
+        },
+        {
+          "shape": "DBInstanceRoleQuotaExceededFault"
+        }
+      ],
+      "documentation": "<p>Associates an AWS Identity and Access Management (IAM) role with a DB instance.</p>"
     },
     "AddSourceIdentifierToSubscription": {
       "name": "AddSourceIdentifierToSubscription",
@@ -2358,7 +2383,29 @@
           "shape": "InvalidDBClusterStateFault"
         }
       ],
-      "documentation": "<p>Disassociates an Identity and Access Management (IAM) role from an Aurora DB cluster. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.Authorizing.html\">Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf </a> in the <i>Amazon Aurora User Guide</i>.</p>"
+      "documentation": "<p>Disassociates an AWS Identity and Access Management (IAM) role from an Amazon Aurora DB cluster. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Integrating.Authorizing.html\">Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf </a> in the <i>Amazon Aurora User Guide</i>.</p>"
+    },
+    "RemoveRoleFromDBInstance": {
+      "name": "RemoveRoleFromDBInstance",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RemoveRoleFromDBInstanceMessage"
+      },
+      "errors": [
+        {
+          "shape": "DBInstanceNotFoundFault"
+        },
+        {
+          "shape": "DBInstanceRoleNotFoundFault"
+        },
+        {
+          "shape": "InvalidDBInstanceStateFault"
+        }
+      ],
+      "documentation": "<p>Disassociates an AWS Identity and Access Management (IAM) role from a DB instance.</p>"
     },
     "RemoveSourceIdentifierFromSubscription": {
       "name": "RemoveSourceIdentifierFromSubscription",
@@ -3086,6 +3133,28 @@
         "RoleArn": {
           "shape": "String",
           "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to associate with the Aurora DB cluster, for example <code>arn:aws:iam::123456789012:role/AuroraAccessRole</code>.</p>"
+        }
+      }
+    },
+    "AddRoleToDBInstanceMessage": {
+      "type": "structure",
+      "required": [
+        "DBInstanceIdentifier",
+        "RoleArn",
+        "FeatureName"
+      ],
+      "members": {
+        "DBInstanceIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The name of the DB instance to associate the IAM role with.</p>"
+        },
+        "RoleArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to associate with the DB instance, for example <code>arn:aws:iam::123456789012:role/AccessRole</code>. </p>"
+        },
+        "FeatureName": {
+          "shape": "String",
+          "documentation": "<p>The name of the feature for the DB instance that the IAM role is to be associated with. For the list of supported feature names, see <a>DBEngineVersion</a>. </p>"
         }
       }
     },
@@ -5066,6 +5135,10 @@
         "SupportedEngineModes": {
           "shape": "EngineModeList",
           "documentation": "<p>A list of the supported DB engine modes.</p>"
+        },
+        "SupportedFeatureNames": {
+          "shape": "FeatureNameList",
+          "documentation": "<p> A list of features supported by the DB engine. Supported feature names include the following. </p> <ul> <li> <p>s3Import</p> </li> </ul>"
         }
       },
       "documentation": "<p> This data type is used as a response element in the action <a>DescribeDBEngineVersions</a>. </p>"
@@ -5314,6 +5387,10 @@
           "shape": "Boolean",
           "documentation": "<p>Indicates if the DB instance has deletion protection enabled. The database can't be deleted when this value is set to true. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html\"> Deleting a DB Instance</a>. </p>"
         },
+        "AssociatedRoles": {
+          "shape": "DBInstanceRoles",
+          "documentation": "<p> The AWS Identity and Access Management (IAM) roles associated with the DB instance. </p>"
+        },
         "ListenerEndpoint": {
           "shape": "Endpoint",
           "documentation": "<p>Specifies the listener connection endpoint for SQL Server Always On.</p>"
@@ -5462,6 +5539,31 @@
         }
       },
       "documentation": "<p> Contains the result of a successful invocation of the <a>DescribeDBInstances</a> action. </p>"
+    },
+    "DBInstanceRole": {
+      "type": "structure",
+      "members": {
+        "RoleArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that is associated with the DB instance.</p>"
+        },
+        "FeatureName": {
+          "shape": "String",
+          "documentation": "<p>The name of the feature associated with the AWS Identity and Access Management (IAM) role. For the list of supported feature names, see <a>DBEngineVersion</a>. </p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>Describes the state of association between the IAM role and the DB instance. The Status property returns one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - the IAM role ARN is associated with the DB instance and can be used to access other AWS services on your behalf.</p> </li> <li> <p> <code>PENDING</code> - the IAM role ARN is being associated with the DB instance.</p> </li> <li> <p> <code>INVALID</code> - the IAM role ARN is associated with the DB instance, but the DB instance is unable to assume the IAM role in order to access other AWS services on your behalf.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Describes an AWS Identity and Access Management (IAM) role that is associated with a DB instance.</p>"
+    },
+    "DBInstanceRoles": {
+      "type": "list",
+      "member": {
+        "shape": "DBInstanceRole",
+        "locationName": "DBInstanceRole"
+      }
     },
     "DBInstanceStatusInfo": {
       "type": "structure",
@@ -7446,6 +7548,12 @@
         }
       }
     },
+    "FeatureNameList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
     "Filter": {
       "type": "structure",
       "required": [
@@ -7995,7 +8103,7 @@
         },
         "CloudwatchLogsExportConfiguration": {
           "shape": "CloudwatchLogsExportConfiguration",
-          "documentation": "<p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance.</p>"
+          "documentation": "<p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance.</p> <p>A change to the <code>CloudwatchLogsExportConfiguration</code> parameter is always applied to the DB instance immediately. Therefore, the <code>ApplyImmediately</code> parameter has no effect.</p>"
         },
         "ProcessorFeatures": {
           "shape": "ProcessorFeatureList",
@@ -9175,6 +9283,28 @@
         "RoleArn": {
           "shape": "String",
           "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to disassociate from the Aurora DB cluster, for example <code>arn:aws:iam::123456789012:role/AuroraAccessRole</code>.</p>"
+        }
+      }
+    },
+    "RemoveRoleFromDBInstanceMessage": {
+      "type": "structure",
+      "required": [
+        "DBInstanceIdentifier",
+        "RoleArn",
+        "FeatureName"
+      ],
+      "members": {
+        "DBInstanceIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The name of the DB instance to disassociate the IAM role from.</p>"
+        },
+        "RoleArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to disassociate from the DB instance, for example <code>arn:aws:iam::123456789012:role/AccessRole</code>.</p>"
+        },
+        "FeatureName": {
+          "shape": "String",
+          "documentation": "<p>The name of the feature for the DB instance that the IAM role is to be disassociated from. For the list of supported feature names, see <a>DBEngineVersion</a>. </p>"
         }
       }
     },

@@ -52,6 +52,14 @@ declare class PinpointSMSVoice extends Service {
    */
   getConfigurationSetEventDestinations(callback?: (err: AWSError, data: PinpointSMSVoice.Types.GetConfigurationSetEventDestinationsResponse) => void): Request<PinpointSMSVoice.Types.GetConfigurationSetEventDestinationsResponse, AWSError>;
   /**
+   * List all of the configuration sets associated with your Amazon Pinpoint account in the current region.
+   */
+  listConfigurationSets(params: PinpointSMSVoice.Types.ListConfigurationSetsRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.ListConfigurationSetsResponse) => void): Request<PinpointSMSVoice.Types.ListConfigurationSetsResponse, AWSError>;
+  /**
+   * List all of the configuration sets associated with your Amazon Pinpoint account in the current region.
+   */
+  listConfigurationSets(callback?: (err: AWSError, data: PinpointSMSVoice.Types.ListConfigurationSetsResponse) => void): Request<PinpointSMSVoice.Types.ListConfigurationSetsResponse, AWSError>;
+  /**
    * Create a new voice message and send it to a recipient's phone number.
    */
   sendVoiceMessage(params: PinpointSMSVoice.Types.SendVoiceMessageRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.SendVoiceMessageResponse) => void): Request<PinpointSMSVoice.Types.SendVoiceMessageResponse, AWSError>;
@@ -86,6 +94,7 @@ declare namespace PinpointSMSVoice {
      */
     LogGroupArn?: String;
   }
+  export type ConfigurationSets = WordCharactersWithDelimiters[];
   export interface CreateConfigurationSetEventDestinationRequest {
     /**
      * ConfigurationSetName
@@ -173,6 +182,27 @@ declare namespace PinpointSMSVoice {
      */
     IamRoleArn?: String;
   }
+  export interface ListConfigurationSetsRequest {
+    /**
+     * A token returned from a previous call to the API that indicates the position in the list of results.
+     */
+    NextToken?: __string;
+    /**
+     * Used to specify the number of items that should be returned in the response.
+     */
+    PageSize?: __string;
+  }
+  export interface ListConfigurationSetsResponse {
+    /**
+     * An object that contains a list of configuration sets for your account in the current region.
+     */
+    ConfigurationSets?: ConfigurationSets;
+    /**
+     * A token returned from a previous call to ListConfigurationSets to indicate the position in the list of configuration sets.
+     */
+    NextToken?: NextTokenString;
+  }
+  export type NextTokenString = string;
   export type NonEmptyString = string;
   export interface PlainTextMessageType {
     /**

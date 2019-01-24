@@ -14,13 +14,21 @@ declare class RDS extends Service {
   constructor(options?: RDS.Types.ClientConfiguration)
   config: Config & RDS.Types.ClientConfiguration;
   /**
-   * Associates an Identity and Access Management (IAM) role from an Aurora DB cluster. For more information, see Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf in the Amazon Aurora User Guide.
+   * Associates an Identity and Access Management (IAM) role from an Amazon Aurora DB cluster. For more information, see Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf in the Amazon Aurora User Guide.
    */
   addRoleToDBCluster(params: RDS.Types.AddRoleToDBClusterMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Associates an Identity and Access Management (IAM) role from an Aurora DB cluster. For more information, see Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf in the Amazon Aurora User Guide.
+   * Associates an Identity and Access Management (IAM) role from an Amazon Aurora DB cluster. For more information, see Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf in the Amazon Aurora User Guide.
    */
   addRoleToDBCluster(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Associates an AWS Identity and Access Management (IAM) role with a DB instance.
+   */
+  addRoleToDBInstance(params: RDS.Types.AddRoleToDBInstanceMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Associates an AWS Identity and Access Management (IAM) role with a DB instance.
+   */
+  addRoleToDBInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Adds a source identifier to an existing RDS event notification subscription.
    */
@@ -742,13 +750,21 @@ declare class RDS extends Service {
    */
   removeFromGlobalCluster(callback?: (err: AWSError, data: RDS.Types.RemoveFromGlobalClusterResult) => void): Request<RDS.Types.RemoveFromGlobalClusterResult, AWSError>;
   /**
-   * Disassociates an Identity and Access Management (IAM) role from an Aurora DB cluster. For more information, see Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf  in the Amazon Aurora User Guide.
+   * Disassociates an AWS Identity and Access Management (IAM) role from an Amazon Aurora DB cluster. For more information, see Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf  in the Amazon Aurora User Guide.
    */
   removeRoleFromDBCluster(params: RDS.Types.RemoveRoleFromDBClusterMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Disassociates an Identity and Access Management (IAM) role from an Aurora DB cluster. For more information, see Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf  in the Amazon Aurora User Guide.
+   * Disassociates an AWS Identity and Access Management (IAM) role from an Amazon Aurora DB cluster. For more information, see Authorizing Amazon Aurora MySQL to Access Other AWS Services on Your Behalf  in the Amazon Aurora User Guide.
    */
   removeRoleFromDBCluster(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Disassociates an AWS Identity and Access Management (IAM) role from a DB instance.
+   */
+  removeRoleFromDBInstance(params: RDS.Types.RemoveRoleFromDBInstanceMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Disassociates an AWS Identity and Access Management (IAM) role from a DB instance.
+   */
+  removeRoleFromDBInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes a source identifier from an existing RDS event notification subscription.
    */
@@ -936,6 +952,20 @@ declare namespace RDS {
      * The Amazon Resource Name (ARN) of the IAM role to associate with the Aurora DB cluster, for example arn:aws:iam::123456789012:role/AuroraAccessRole.
      */
     RoleArn: String;
+  }
+  export interface AddRoleToDBInstanceMessage {
+    /**
+     * The name of the DB instance to associate the IAM role with.
+     */
+    DBInstanceIdentifier: String;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role to associate with the DB instance, for example arn:aws:iam::123456789012:role/AccessRole. 
+     */
+    RoleArn: String;
+    /**
+     * The name of the feature for the DB instance that the IAM role is to be associated with. For the list of supported feature names, see DBEngineVersion. 
+     */
+    FeatureName: String;
   }
   export interface AddSourceIdentifierToSubscriptionMessage {
     /**
@@ -2398,6 +2428,10 @@ declare namespace RDS {
      * A list of the supported DB engine modes.
      */
     SupportedEngineModes?: EngineModeList;
+    /**
+     *  A list of features supported by the DB engine. Supported feature names include the following.    s3Import  
+     */
+    SupportedFeatureNames?: FeatureNameList;
   }
   export type DBEngineVersionList = DBEngineVersion[];
   export interface DBEngineVersionMessage {
@@ -2632,6 +2666,10 @@ declare namespace RDS {
      */
     DeletionProtection?: Boolean;
     /**
+     *  The AWS Identity and Access Management (IAM) roles associated with the DB instance. 
+     */
+    AssociatedRoles?: DBInstanceRoles;
+    /**
      * Specifies the listener connection endpoint for SQL Server Always On.
      */
     ListenerEndpoint?: Endpoint;
@@ -2752,6 +2790,21 @@ declare namespace RDS {
      */
     DBInstances?: DBInstanceList;
   }
+  export interface DBInstanceRole {
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role that is associated with the DB instance.
+     */
+    RoleArn?: String;
+    /**
+     * The name of the feature associated with the AWS Identity and Access Management (IAM) role. For the list of supported feature names, see DBEngineVersion. 
+     */
+    FeatureName?: String;
+    /**
+     * Describes the state of association between the IAM role and the DB instance. The Status property returns one of the following values:    ACTIVE - the IAM role ARN is associated with the DB instance and can be used to access other AWS services on your behalf.    PENDING - the IAM role ARN is being associated with the DB instance.    INVALID - the IAM role ARN is associated with the DB instance, but the DB instance is unable to assume the IAM role in order to access other AWS services on your behalf.  
+     */
+    Status?: String;
+  }
+  export type DBInstanceRoles = DBInstanceRole[];
   export interface DBInstanceStatusInfo {
     /**
      * This value is currently "read replication."
@@ -4169,6 +4222,7 @@ declare namespace RDS {
   export interface FailoverDBClusterResult {
     DBCluster?: DBCluster;
   }
+  export type FeatureNameList = String[];
   export interface Filter {
     /**
      * The name of the filter. Filter names are case-sensitive.
@@ -4577,7 +4631,7 @@ declare namespace RDS {
      */
     PerformanceInsightsRetentionPeriod?: IntegerOptional;
     /**
-     * The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance.
+     * The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance. A change to the CloudwatchLogsExportConfiguration parameter is always applied to the DB instance immediately. Therefore, the ApplyImmediately parameter has no effect.
      */
     CloudwatchLogsExportConfiguration?: CloudwatchLogsExportConfiguration;
     /**
@@ -5384,6 +5438,20 @@ declare namespace RDS {
      * The Amazon Resource Name (ARN) of the IAM role to disassociate from the Aurora DB cluster, for example arn:aws:iam::123456789012:role/AuroraAccessRole.
      */
     RoleArn: String;
+  }
+  export interface RemoveRoleFromDBInstanceMessage {
+    /**
+     * The name of the DB instance to disassociate the IAM role from.
+     */
+    DBInstanceIdentifier: String;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role to disassociate from the DB instance, for example arn:aws:iam::123456789012:role/AccessRole.
+     */
+    RoleArn: String;
+    /**
+     * The name of the feature for the DB instance that the IAM role is to be disassociated from. For the list of supported feature names, see DBEngineVersion. 
+     */
+    FeatureName: String;
   }
   export interface RemoveSourceIdentifierFromSubscriptionMessage {
     /**

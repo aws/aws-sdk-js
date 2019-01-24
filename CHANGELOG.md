@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.393.0-->
+<!--LATEST=2.394.0-->
 <!--ENTRYINSERT-->
+
+## 2.394.0
+* feature: CodeBuild: This release adds support for cross-account ECR images and private registry authentication. 
+* feature: ECR: Amazon ECR updated the default endpoint URL to support AWS Private Link.
+* feature: ELBv2: Elastic Load Balancing now supports TLS termination on Network Load Balancers. With this launch, you can offload the decryption/encryption of TLS traffic from your application servers to the Network Load Balancer. This enables you to run your backend servers optimally and keep your workloads secure. Additionally, Network Load Balancers preserve the source IP of the clients to the back-end applications, while terminating TLS on the load balancer.  When TLS is enabled on an NLB, Access Logs can be enabled for the load balancer, and log entries will be emitted for all TLS connections.
+* feature: PinpointSMSVoice: Added the ListConfigurationSets operation, which returns a list of the configuration sets that are associated with your account.
+* feature: RDS: The Amazon RDS API allows you to add or remove Identity and Access Management (IAM) role associated with a specific feature name with an RDS database instance. This helps with capabilities such as invoking Lambda functions from within a trigger in the database, load data from Amazon S3 and so on
 
 ## 2.393.0
 * bugfix: S3 managed uploader: S3 managed uploader will not uriEscape tags when doing a multi-part upload.
