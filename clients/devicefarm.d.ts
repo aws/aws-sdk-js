@@ -655,6 +655,10 @@ declare namespace DeviceFarm {
      * The device pool's rules.
      */
     rules: Rules;
+    /**
+     * The number of devices that Device Farm can add to your device pool. Device Farm adds devices that are available and that meet the criteria that you assign for the rules parameter. Depending on how many devices meet these constraints, your device pool might contain fewer devices than the value for this parameter. By specifying the maximum number of devices, you can control the costs that you incur by running tests.
+     */
+    maxDevices?: Integer;
   }
   export interface CreateDevicePoolResult {
     /**
@@ -1042,24 +1046,23 @@ declare namespace DeviceFarm {
      */
     availability?: DeviceAvailability;
   }
-  export type DeviceAttribute = "ARN"|"PLATFORM"|"FORM_FACTOR"|"MANUFACTURER"|"REMOTE_ACCESS_ENABLED"|"REMOTE_DEBUG_ENABLED"|"APPIUM_VERSION"|"INSTANCE_ARN"|"INSTANCE_LABELS"|"FLEET_TYPE"|string;
+  export type DeviceAttribute = "ARN"|"PLATFORM"|"FORM_FACTOR"|"MANUFACTURER"|"REMOTE_ACCESS_ENABLED"|"REMOTE_DEBUG_ENABLED"|"APPIUM_VERSION"|"INSTANCE_ARN"|"INSTANCE_LABELS"|"FLEET_TYPE"|"OS_VERSION"|"MODEL"|"AVAILABILITY"|string;
   export type DeviceAvailability = "TEMPORARY_NOT_AVAILABLE"|"BUSY"|"AVAILABLE"|"HIGHLY_AVAILABLE"|string;
   export interface DeviceFilter {
     /**
-     * The aspect of a device such as platform or model used as the selection criteria in a device filter. Allowed values include:   ARN: The Amazon Resource Name (ARN) of the device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".   PLATFORM: The device platform. Valid values are "ANDROID" or "IOS".   OS_VERSION: The operating system version. For example, "10.3.2".   MODEL: The device model. For example, "iPad 5th Gen".   AVAILABILITY: The current availability of the device. Valid values are "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".   FORM_FACTOR: The device form factor. Valid values are "PHONE" or "TABLET".   MANUFACTURER: The device manufacturer. For example, "Apple".   REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access. Valid values are "TRUE" or "FALSE".   REMOTE_DEBUG_ENABLED: Whether the device is enabled for remote debugging. Valid values are "TRUE" or "FALSE".   INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.   INSTANCE_LABELS: The label of the device instance.   FLEET_TYPE: The fleet type. Valid values are "PUBLIC" or "PRIVATE".  
+     * The aspect of a device such as platform or model used as the selection criteria in a device filter. The supported operators for each attribute are provided in the following list.  ARN  The Amazon Resource Name (ARN) of the device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".  Supported operators: EQUALS, IN, NOT_IN   PLATFORM  The device platform. Valid values are "ANDROID" or "IOS".  Supported operators: EQUALS   OS_VERSION  The operating system version. For example, "10.3.2".  Supported operators: EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, LESS_THAN, LESS_THAN_OR_EQUALS, NOT_IN   MODEL  The device model. For example, "iPad 5th Gen".  Supported operators: CONTAINS, EQUALS, IN, NOT_IN   AVAILABILITY  The current availability of the device. Valid values are "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".  Supported operators: EQUALS   FORM_FACTOR  The device form factor. Valid values are "PHONE" or "TABLET".  Supported operators: EQUALS   MANUFACTURER  The device manufacturer. For example, "Apple".  Supported operators: EQUALS, IN, NOT_IN   REMOTE_ACCESS_ENABLED  Whether the device is enabled for remote access. Valid values are "TRUE" or "FALSE".  Supported operators: EQUALS   REMOTE_DEBUG_ENABLED  Whether the device is enabled for remote debugging. Valid values are "TRUE" or "FALSE".  Supported operators: EQUALS   INSTANCE_ARN  The Amazon Resource Name (ARN) of the device instance.  Supported operators: EQUALS, IN, NOT_IN   INSTANCE_LABELS  The label of the device instance.  Supported operators: CONTAINS   FLEET_TYPE  The fleet type. Valid values are "PUBLIC" or "PRIVATE".  Supported operators: EQUALS   
      */
     attribute?: DeviceFilterAttribute;
     /**
-     * The filter operator.   The EQUALS operator is available for every attribute except INSTANCE_LABELS.   The CONTAINS operator is available for the INSTANCE_LABELS and MODEL attributes.   The IN and NOT_IN operators are available for the ARN, OS_VERSION, MODEL, MANUFACTURER, and INSTANCE_ARN attributes.   The LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUALS, and GREATER_THAN_OR_EQUALS operators are also available for the OS_VERSION attribute.  
+     * Specifies how Device Farm compares the filter's attribute to the value. For the operators that are supported by each attribute, see the attribute descriptions.
      */
-    operator?: DeviceFilterOperator;
+    operator?: RuleOperator;
     /**
      * An array of one or more filter values used in a device filter.  Operator Values    The IN and NOT_IN operators can take a values array that has more than one element.   The other operators require an array with a single element.    Attribute Values    The PLATFORM attribute can be set to "ANDROID" or "IOS".   The AVAILABILITY attribute can be set to "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".   The FORM_FACTOR attribute can be set to "PHONE" or "TABLET".   The FLEET_TYPE attribute can be set to "PUBLIC" or "PRIVATE".  
      */
     values?: DeviceFilterValues;
   }
   export type DeviceFilterAttribute = "ARN"|"PLATFORM"|"OS_VERSION"|"MODEL"|"AVAILABILITY"|"FORM_FACTOR"|"MANUFACTURER"|"REMOTE_ACCESS_ENABLED"|"REMOTE_DEBUG_ENABLED"|"INSTANCE_ARN"|"INSTANCE_LABELS"|"FLEET_TYPE"|string;
-  export type DeviceFilterOperator = "EQUALS"|"LESS_THAN"|"LESS_THAN_OR_EQUALS"|"GREATER_THAN"|"GREATER_THAN_OR_EQUALS"|"IN"|"NOT_IN"|"CONTAINS"|string;
   export type DeviceFilterValues = String[];
   export type DeviceFilters = DeviceFilter[];
   export type DeviceFormFactor = "PHONE"|"TABLET"|string;
@@ -1127,6 +1130,10 @@ declare namespace DeviceFarm {
      * Information about the device pool's rules.
      */
     rules?: Rules;
+    /**
+     * The number of devices that Device Farm can add to your device pool. Device Farm adds devices that are available and that meet the criteria that you assign for the rules parameter. Depending on how many devices meet these constraints, your device pool might contain fewer devices than the value for this parameter. By specifying the maximum number of devices, you can control the costs that you incur by running tests.
+     */
+    maxDevices?: Integer;
   }
   export interface DevicePoolCompatibilityResult {
     /**
@@ -2311,19 +2318,19 @@ declare namespace DeviceFarm {
   }
   export interface Rule {
     /**
-     * The rule's attribute. It is the aspect of a device such as platform or model used as selection criteria to create or update a device pool. Allowed values include:   ARN: The Amazon Resource Name (ARN) of a device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".   PLATFORM: The device platform. Valid values are "ANDROID" or "IOS".   FORM_FACTOR: The device form factor. Valid values are "PHONE" or "TABLET".   MANUFACTURER: The device manufacturer. For example, "Apple".   REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access. Valid values are "TRUE" or "FALSE".   REMOTE_DEBUG_ENABLED: Whether the device is enabled for remote debugging. Valid values are "TRUE" or "FALSE".   APPIUM_VERSION: The Appium version for the test.   INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.   INSTANCE_LABELS: The label of the device instance.   FLEET_TYPE: The fleet type. Valid values are "PUBLIC" or "PRIVATE".  
+     * The rule's stringified attribute. For example, specify the value as "\"abc\"". The supported operators for each attribute are provided in the following list.  APPIUM_VERSION  The Appium version for the test.  Supported operators: CONTAINS   ARN  The Amazon Resource Name (ARN) of the device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".  Supported operators: EQUALS, IN, NOT_IN   AVAILABILITY  The current availability of the device. Valid values are "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".  Supported operators: EQUALS   FLEET_TYPE  The fleet type. Valid values are "PUBLIC" or "PRIVATE".  Supported operators: EQUALS   FORM_FACTOR  The device form factor. Valid values are "PHONE" or "TABLET".  Supported operators: EQUALS, IN, NOT_IN   INSTANCE_ARN  The Amazon Resource Name (ARN) of the device instance.  Supported operators: IN, NOT_IN   INSTANCE_LABELS  The label of the device instance.  Supported operators: CONTAINS   MANUFACTURER  The device manufacturer. For example, "Apple".  Supported operators: EQUALS, IN, NOT_IN   MODEL  The device model, such as "Apple iPad Air 2" or "Google Pixel".  Supported operators: CONTAINS, EQUALS, IN, NOT_IN   OS_VERSION  The operating system version. For example, "10.3.2".  Supported operators: EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, LESS_THAN, LESS_THAN_OR_EQUALS, NOT_IN   PLATFORM  The device platform. Valid values are "ANDROID" or "IOS".  Supported operators: EQUALS, IN, NOT_IN   REMOTE_ACCESS_ENABLED  Whether the device is enabled for remote access. Valid values are "TRUE" or "FALSE".  Supported operators: EQUALS   REMOTE_DEBUG_ENABLED  Whether the device is enabled for remote debugging. Valid values are "TRUE" or "FALSE".  Supported operators: EQUALS   
      */
     attribute?: DeviceAttribute;
     /**
-     * The rule's operator.   EQUALS: The equals operator.   GREATER_THAN: The greater-than operator.   IN: The in operator.   LESS_THAN: The less-than operator.   NOT_IN: The not-in operator.   CONTAINS: The contains operator.  
+     * Specifies how Device Farm compares the rule's attribute to the value. For the operators that are supported by each attribute, see the attribute descriptions.
      */
     operator?: RuleOperator;
     /**
-     * The rule's value. The value must be passed in as a string using escaped quotes. For example: "value": "\"ANDROID\""
+     * The rule's value.
      */
     value?: String;
   }
-  export type RuleOperator = "EQUALS"|"LESS_THAN"|"GREATER_THAN"|"IN"|"NOT_IN"|"CONTAINS"|string;
+  export type RuleOperator = "EQUALS"|"LESS_THAN"|"LESS_THAN_OR_EQUALS"|"GREATER_THAN"|"GREATER_THAN_OR_EQUALS"|"IN"|"NOT_IN"|"CONTAINS"|string;
   export type Rules = Rule[];
   export interface Run {
     /**
@@ -2516,7 +2523,7 @@ declare namespace DeviceFarm {
      */
     appArn?: AmazonResourceName;
     /**
-     * The ARN of the device pool for the run to be scheduled. Either  devicePoolArn  or  deviceSelectionConfiguration  is required in a request.
+     * The ARN of the device pool for the run to be scheduled.
      */
     devicePoolArn?: AmazonResourceName;
     /**
@@ -2765,6 +2772,14 @@ declare namespace DeviceFarm {
      * Represents the rules you wish to modify for the device pool. Updating rules is optional; however, if you choose to update rules for your request, the update will replace the existing rules.
      */
     rules?: Rules;
+    /**
+     * The number of devices that Device Farm can add to your device pool. Device Farm adds devices that are available and that meet the criteria that you assign for the rules parameter. Depending on how many devices meet these constraints, your device pool might contain fewer devices than the value for this parameter. By specifying the maximum number of devices, you can control the costs that you incur by running tests. If you use this parameter in your request, you cannot use the clearMaxDevices parameter in the same request.
+     */
+    maxDevices?: Integer;
+    /**
+     * Sets whether the maxDevices parameter applies to your device pool. If you set this parameter to true, the maxDevices parameter does not apply, and Device Farm does not limit the number of devices that it adds to your device pool. In this case, Device Farm adds all available devices that meet the criteria that are specified for the rules parameter. If you use this parameter in your request, you cannot use the maxDevices parameter in the same request.
+     */
+    clearMaxDevices?: Boolean;
   }
   export interface UpdateDevicePoolResult {
     /**

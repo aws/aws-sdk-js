@@ -297,6 +297,36 @@
       ],
       "documentation": "Displays a list of flows that are associated with this account. This request returns a paginated result."
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse",
+        "documentation": "AWS Elemental MediaConnect listed the tags associated with the resource."
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "The requested resource was not found"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "The client performed an invalid request"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Internal service error"
+        }
+      ],
+      "documentation": "Lists all tags associated with the resource."
+    },
     "RemoveFlowOutput": {
       "name": "RemoveFlowOutput",
       "http": {
@@ -464,6 +494,58 @@
         }
       ],
       "documentation": "Stops a flow."
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "The requested resource was not found"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "The client performed an invalid request"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Internal service error"
+        }
+      ],
+      "documentation": "Associates the specified tags to a resource. If the request does not mention an existing tag associated with the resource, that tag is not changed."
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "The requested resource was not found"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "The client performed an invalid request"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Internal service error"
+        }
+      ],
+      "documentation": "Deletes the specified tags from a resource."
     },
     "UpdateFlowEntitlement": {
       "name": "UpdateFlowEntitlement",
@@ -1053,6 +1135,30 @@
         }
       }
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "resourceArn",
+          "documentation": "The Amazon Resource Name (ARN) of the resource that you want to view tags for."
+        }
+      },
+      "required": [
+        "ResourceArn"
+      ]
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "__mapOf__string",
+          "locationName": "tags",
+          "documentation": "A map from tag keys to values. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters."
+        }
+      }
+    },
     "ListedEntitlement": {
       "type": "structure",
       "members": {
@@ -1459,6 +1565,27 @@
         }
       }
     },
+    "TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "resourceArn",
+          "documentation": "The Amazon Resource Name (ARN) of the resource that you want to add tags to."
+        },
+        "Tags": {
+          "shape": "__mapOf__string",
+          "locationName": "tags",
+          "documentation": "A map from tag keys to values. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters."
+        }
+      },
+      "documentation": "The tags to add to the resource. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.",
+      "required": [
+        "ResourceArn",
+        "Tags"
+      ]
+    },
     "Transport": {
       "type": "structure",
       "members": {
@@ -1491,6 +1618,27 @@
       "documentation": "Attributes related to the transport stream that are used in a source or output.",
       "required": [
         "Protocol"
+      ]
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "resourceArn",
+          "documentation": "The Amazon Resource Name (ARN) of the resource that you want to remove tags from."
+        },
+        "TagKeys": {
+          "shape": "__listOf__string",
+          "location": "querystring",
+          "locationName": "tagKeys",
+          "documentation": "The keys of the tags to be removed."
+        }
+      },
+      "required": [
+        "TagKeys",
+        "ResourceArn"
       ]
     },
     "UpdateEncryption": {
@@ -1770,6 +1918,15 @@
     "__listOf__string": {
       "type": "list",
       "member": {
+        "shape": "__string"
+      }
+    },
+    "__mapOf__string": {
+      "type": "map",
+      "key": {
+        "shape": "__string"
+      },
+      "value": {
         "shape": "__string"
       }
     },

@@ -1395,7 +1395,7 @@
         "Destination": {
           "shape": "OutputLocationRef",
           "locationName": "destination",
-          "documentation": "A directory and base filename where archive files should be written.  If the base filename portion of the URI is left blank, the base filename of the first input will be automatically inserted."
+          "documentation": "A directory and base filename where archive files should be written."
         },
         "RolloverInterval": {
           "shape": "__integerMin1",
@@ -3827,6 +3827,45 @@
         "START"
       ]
     },
+    "FrameCaptureGroupSettings": {
+      "type": "structure",
+      "members": {
+        "Destination": {
+          "shape": "OutputLocationRef",
+          "locationName": "destination",
+          "documentation": "The destination for the frame capture files. Either the URI for an Amazon S3 bucket and object, plus a file name prefix (for example, s3ssl://sportsDelivery/highlights/20180820/curling_) or the URI for a MediaStore container, plus a file name prefix (for example, mediastoressl://sportsDelivery/20180820/curling_). The final file names consist of the prefix from the destination field (for example, \"curling_\") + name modifier + the counter (5 digits, starting from 00001) + extension (which is always .jpg).  For example, curlingLow.00001.jpg"
+        }
+      },
+      "documentation": "Frame Capture Group Settings",
+      "required": [
+        "Destination"
+      ]
+    },
+    "FrameCaptureOutputSettings": {
+      "type": "structure",
+      "members": {
+        "NameModifier": {
+          "shape": "__string",
+          "locationName": "nameModifier",
+          "documentation": "Required if the output group contains more than one output. This modifier forms part of the output file name."
+        }
+      },
+      "documentation": "Frame Capture Output Settings"
+    },
+    "FrameCaptureSettings": {
+      "type": "structure",
+      "members": {
+        "CaptureInterval": {
+          "shape": "__integerMin1Max3600",
+          "locationName": "captureInterval",
+          "documentation": "The frequency, in seconds, for capturing frames for inclusion in the output.  For example, \"10\" means capture a frame every 10 seconds."
+        }
+      },
+      "documentation": "Frame Capture Settings",
+      "required": [
+        "CaptureInterval"
+      ]
+    },
     "GlobalConfiguration": {
       "type": "structure",
       "members": {
@@ -4073,12 +4112,12 @@
           "documentation": "This field indicates how the output video frame rate is specified.  If \"specified\" is selected then the output video frame rate is determined by framerateNumerator and framerateDenominator, else if \"initializeFromSource\" is selected then the output video frame rate will be set equal to the input video frame rate of the first input."
         },
         "FramerateDenominator": {
-          "shape": "__integer",
+          "shape": "__integerMin1",
           "locationName": "framerateDenominator",
           "documentation": "Framerate denominator."
         },
         "FramerateNumerator": {
-          "shape": "__integer",
+          "shape": "__integerMin1",
           "locationName": "framerateNumerator",
           "documentation": "Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps."
         },
@@ -4460,6 +4499,11 @@
           "locationName": "hlsCdnSettings",
           "documentation": "Parameters that control interactions with the CDN."
         },
+        "IFrameOnlyPlaylists": {
+          "shape": "IFrameOnlyPlaylistType",
+          "locationName": "iFrameOnlyPlaylists",
+          "documentation": "If enabled, writes out I-Frame only playlists in addition to media playlists."
+        },
         "IndexNSegments": {
           "shape": "__integerMin3",
           "locationName": "indexNSegments",
@@ -4837,6 +4881,14 @@
         }
       },
       "documentation": "Placeholder documentation for HlsWebdavSettings"
+    },
+    "IFrameOnlyPlaylistType": {
+      "type": "string",
+      "documentation": "When set to \"standard\", an I-Frame only playlist will be written out for each video output in the output group. This I-Frame only playlist will contain byte range offsets pointing to the I-frame(s) in each segment.",
+      "enum": [
+        "DISABLED",
+        "STANDARD"
+      ]
     },
     "Input": {
       "type": "structure",
@@ -6479,6 +6531,10 @@
           "shape": "ArchiveGroupSettings",
           "locationName": "archiveGroupSettings"
         },
+        "FrameCaptureGroupSettings": {
+          "shape": "FrameCaptureGroupSettings",
+          "locationName": "frameCaptureGroupSettings"
+        },
         "HlsGroupSettings": {
           "shape": "HlsGroupSettings",
           "locationName": "hlsGroupSettings"
@@ -6514,6 +6570,10 @@
         "ArchiveOutputSettings": {
           "shape": "ArchiveOutputSettings",
           "locationName": "archiveOutputSettings"
+        },
+        "FrameCaptureOutputSettings": {
+          "shape": "FrameCaptureOutputSettings",
+          "locationName": "frameCaptureOutputSettings"
         },
         "HlsOutputSettings": {
           "shape": "HlsOutputSettings",
@@ -7942,6 +8002,10 @@
     "VideoCodecSettings": {
       "type": "structure",
       "members": {
+        "FrameCaptureSettings": {
+          "shape": "FrameCaptureSettings",
+          "locationName": "frameCaptureSettings"
+        },
         "H264Settings": {
           "shape": "H264Settings",
           "locationName": "h264Settings"
@@ -7960,7 +8024,7 @@
         "Height": {
           "shape": "__integer",
           "locationName": "height",
-          "documentation": "Output video height (in pixels). Leave blank to use source video height. If left blank, width must also be unspecified."
+          "documentation": "Output video height, in pixels. Must be an even number. For most codecs, you can leave this field and width blank in order to use the height and width (resolution) from the source. Note, however, that leaving blank is not recommended. For the Frame Capture codec, height and width are required."
         },
         "Name": {
           "shape": "__string",
@@ -7970,22 +8034,22 @@
         "RespondToAfd": {
           "shape": "VideoDescriptionRespondToAfd",
           "locationName": "respondToAfd",
-          "documentation": "Indicates how to respond to the AFD values in the input stream. Setting to \"respond\" causes input video to be clipped, depending on AFD value, input display aspect ratio and output display aspect ratio."
+          "documentation": "Indicates how to respond to the AFD values in the input stream. RESPOND causes input video to be clipped, depending on the AFD value, input display aspect ratio, and output display aspect ratio, and (except for FRAMECAPTURE codec) includes the values in the output. PASSTHROUGH (does not apply to FRAMECAPTURE codec) ignores the AFD values and includes the values in the output, so input video is not clipped. NONE ignores the AFD values and does not include the values through to the output, so input video is not clipped."
         },
         "ScalingBehavior": {
           "shape": "VideoDescriptionScalingBehavior",
           "locationName": "scalingBehavior",
-          "documentation": "When set to \"stretchToOutput\", automatically configures the output position to stretch the video to the specified output resolution. This option will override any position value."
+          "documentation": "STRETCHTOOUTPUT configures the output position to stretch the video to the specified output resolution (height and width). This option will override any position value. DEFAULT may insert black boxes (pillar boxes or letter boxes) around the video to provide the specified output resolution."
         },
         "Sharpness": {
           "shape": "__integerMin0Max100",
           "locationName": "sharpness",
-          "documentation": "Changes the width of the anti-alias filter kernel used for scaling. Only applies if scaling is being performed and antiAlias is set to true. 0 is the softest setting, 100 the sharpest, and 50 recommended for most content."
+          "documentation": "Changes the strength of the anti-alias filter used for scaling. 0 is the softest setting, 100 is the sharpest. A setting of 50 is recommended for most content."
         },
         "Width": {
           "shape": "__integer",
           "locationName": "width",
-          "documentation": "Output video width (in pixels). Leave out to use source video width.  If left out, height must also be left out. Display aspect ratio is always preserved by letterboxing or pillarboxing when necessary."
+          "documentation": "Output video width, in pixels. Must be an even number. For most codecs, you can leave this field and height blank in order to use the height and width (resolution) from the source. Note, however, that leaving blank is not recommended. For the Frame Capture codec, height and width are required."
         }
       },
       "documentation": "Video settings for this stream.",
@@ -8279,6 +8343,11 @@
       "min": 1,
       "max": 32,
       "documentation": "Placeholder documentation for __integerMin1Max32"
+    },
+    "__integerMin1Max3600": {
+      "type": "integer",
+      "min": 1,
+      "max": 3600
     },
     "__integerMin1Max4": {
       "type": "integer",

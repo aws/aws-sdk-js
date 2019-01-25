@@ -301,7 +301,7 @@ Leave set to "normal" when input does not contain pre-mixed audio + AD.
   }
   export interface ArchiveGroupSettings {
     /**
-     * A directory and base filename where archive files should be written.  If the base filename portion of the URI is left blank, the base filename of the first input will be automatically inserted.
+     * A directory and base filename where archive files should be written.
      */
     Destination: OutputLocationRef;
     /**
@@ -1605,6 +1605,24 @@ one destination per packager.
     ReferenceActionName: __string;
   }
   export type FollowPoint = "END"|"START"|string;
+  export interface FrameCaptureGroupSettings {
+    /**
+     * The destination for the frame capture files. Either the URI for an Amazon S3 bucket and object, plus a file name prefix (for example, s3ssl://sportsDelivery/highlights/20180820/curling_) or the URI for a MediaStore container, plus a file name prefix (for example, mediastoressl://sportsDelivery/20180820/curling_). The final file names consist of the prefix from the destination field (for example, "curling_") + name modifier + the counter (5 digits, starting from 00001) + extension (which is always .jpg).  For example, curlingLow.00001.jpg
+     */
+    Destination: OutputLocationRef;
+  }
+  export interface FrameCaptureOutputSettings {
+    /**
+     * Required if the output group contains more than one output. This modifier forms part of the output file name.
+     */
+    NameModifier?: __string;
+  }
+  export interface FrameCaptureSettings {
+    /**
+     * The frequency, in seconds, for capturing frames for inclusion in the output.  For example, "10" means capture a frame every 10 seconds.
+     */
+    CaptureInterval: __integerMin1Max3600;
+  }
   export interface GlobalConfiguration {
     /**
      * Value to set the initial audio gain for the Live Event.
@@ -1688,11 +1706,11 @@ one destination per packager.
     /**
      * Framerate denominator.
      */
-    FramerateDenominator?: __integer;
+    FramerateDenominator?: __integerMin1;
     /**
      * Framerate numerator - framerate is a fraction, e.g. 24000 / 1001 = 23.976 fps.
      */
-    FramerateNumerator?: __integer;
+    FramerateNumerator?: __integerMin1;
     /**
      * Documentation update needed
      */
@@ -1933,6 +1951,10 @@ omit: Omit any CLOSED-CAPTIONS line from the manifest.
      */
     HlsCdnSettings?: HlsCdnSettings;
     /**
+     * If enabled, writes out I-Frame only playlists in addition to media playlists.
+     */
+    IFrameOnlyPlaylists?: IFrameOnlyPlaylistType;
+    /**
      * If mode is "live", the number of segments to retain in the manifest (.m3u8) file. This number must be less than or equal to keepSegments. If mode is "vod", this parameter has no effect.
      */
     IndexNSegments?: __integerMin3;
@@ -2131,6 +2153,7 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
      */
     RestartDelay?: __integerMin0Max15;
   }
+  export type IFrameOnlyPlaylistType = "DISABLED"|"STANDARD"|string;
   export interface Input {
     /**
      * The Unique ARN of the input (generated, immutable).
@@ -3045,6 +3068,7 @@ Options:
   }
   export interface OutputGroupSettings {
     ArchiveGroupSettings?: ArchiveGroupSettings;
+    FrameCaptureGroupSettings?: FrameCaptureGroupSettings;
     HlsGroupSettings?: HlsGroupSettings;
     MsSmoothGroupSettings?: MsSmoothGroupSettings;
     RtmpGroupSettings?: RtmpGroupSettings;
@@ -3055,6 +3079,7 @@ Options:
   }
   export interface OutputSettings {
     ArchiveOutputSettings?: ArchiveOutputSettings;
+    FrameCaptureOutputSettings?: FrameCaptureOutputSettings;
     HlsOutputSettings?: HlsOutputSettings;
     MsSmoothOutputSettings?: MsSmoothOutputSettings;
     RtmpOutputSettings?: RtmpOutputSettings;
@@ -3804,6 +3829,7 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
     SecurityGroup?: InputSecurityGroup;
   }
   export interface VideoCodecSettings {
+    FrameCaptureSettings?: FrameCaptureSettings;
     H264Settings?: H264Settings;
   }
   export interface VideoDescription {
@@ -3812,7 +3838,7 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
      */
     CodecSettings?: VideoCodecSettings;
     /**
-     * Output video height (in pixels). Leave blank to use source video height. If left blank, width must also be unspecified.
+     * Output video height, in pixels. Must be an even number. For most codecs, you can leave this field and width blank in order to use the height and width (resolution) from the source. Note, however, that leaving blank is not recommended. For the Frame Capture codec, height and width are required.
      */
     Height?: __integer;
     /**
@@ -3820,19 +3846,19 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
      */
     Name: __string;
     /**
-     * Indicates how to respond to the AFD values in the input stream. Setting to "respond" causes input video to be clipped, depending on AFD value, input display aspect ratio and output display aspect ratio.
+     * Indicates how to respond to the AFD values in the input stream. RESPOND causes input video to be clipped, depending on the AFD value, input display aspect ratio, and output display aspect ratio, and (except for FRAMECAPTURE codec) includes the values in the output. PASSTHROUGH (does not apply to FRAMECAPTURE codec) ignores the AFD values and includes the values in the output, so input video is not clipped. NONE ignores the AFD values and does not include the values through to the output, so input video is not clipped.
      */
     RespondToAfd?: VideoDescriptionRespondToAfd;
     /**
-     * When set to "stretchToOutput", automatically configures the output position to stretch the video to the specified output resolution. This option will override any position value.
+     * STRETCHTOOUTPUT configures the output position to stretch the video to the specified output resolution (height and width). This option will override any position value. DEFAULT may insert black boxes (pillar boxes or letter boxes) around the video to provide the specified output resolution.
      */
     ScalingBehavior?: VideoDescriptionScalingBehavior;
     /**
-     * Changes the width of the anti-alias filter kernel used for scaling. Only applies if scaling is being performed and antiAlias is set to true. 0 is the softest setting, 100 the sharpest, and 50 recommended for most content.
+     * Changes the strength of the anti-alias filter used for scaling. 0 is the softest setting, 100 is the sharpest. A setting of 50 is recommended for most content.
      */
     Sharpness?: __integerMin0Max100;
     /**
-     * Output video width (in pixels). Leave out to use source video width.  If left out, height must also be left out. Display aspect ratio is always preserved by letterboxing or pillarboxing when necessary.
+     * Output video width, in pixels. Must be an even number. For most codecs, you can leave this field and height blank in order to use the height and width (resolution) from the source. Note, however, that leaving blank is not recommended. For the Frame Capture codec, height and width are required.
      */
     Width?: __integer;
   }
@@ -3906,6 +3932,7 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __integerMin1Max20 = number;
   export type __integerMin1Max31 = number;
   export type __integerMin1Max32 = number;
+  export type __integerMin1Max3600 = number;
   export type __integerMin1Max4 = number;
   export type __integerMin1Max5 = number;
   export type __integerMin1Max6 = number;

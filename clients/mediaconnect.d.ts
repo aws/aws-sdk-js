@@ -68,6 +68,14 @@ declare class MediaConnect extends Service {
    */
   listFlows(callback?: (err: AWSError, data: MediaConnect.Types.ListFlowsResponse) => void): Request<MediaConnect.Types.ListFlowsResponse, AWSError>;
   /**
+   * Lists all tags associated with the resource.
+   */
+  listTagsForResource(params: MediaConnect.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListTagsForResourceResponse) => void): Request<MediaConnect.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists all tags associated with the resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: MediaConnect.Types.ListTagsForResourceResponse) => void): Request<MediaConnect.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Removes an output from an existing flow. This request can be made only on an output that does not have an entitlement associated with it. If the output has an entitlement, you must revoke the entitlement instead. When an entitlement is revoked from a flow, the service automatically removes the associated output.
    */
   removeFlowOutput(params: MediaConnect.Types.RemoveFlowOutputRequest, callback?: (err: AWSError, data: MediaConnect.Types.RemoveFlowOutputResponse) => void): Request<MediaConnect.Types.RemoveFlowOutputResponse, AWSError>;
@@ -99,6 +107,22 @@ declare class MediaConnect extends Service {
    * Stops a flow.
    */
   stopFlow(callback?: (err: AWSError, data: MediaConnect.Types.StopFlowResponse) => void): Request<MediaConnect.Types.StopFlowResponse, AWSError>;
+  /**
+   * Associates the specified tags to a resource. If the request does not mention an existing tag associated with the resource, that tag is not changed.
+   */
+  tagResource(params: MediaConnect.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Associates the specified tags to a resource. If the request does not mention an existing tag associated with the resource, that tag is not changed.
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified tags from a resource.
+   */
+  untagResource(params: MediaConnect.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified tags from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * You can change an entitlement's description, subscribers, and encryption. If you change the subscribers, the service will remove the outputs that are are used by the subscribers that are removed.
    */
@@ -386,6 +410,18 @@ declare namespace MediaConnect {
      */
     NextToken?: __string;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource that you want to view tags for.
+     */
+    ResourceArn: __string;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * A map from tag keys to values. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
+     */
+    Tags?: __mapOf__string;
+  }
   export interface ListedEntitlement {
     /**
      * The ARN of the entitlement.
@@ -622,6 +658,16 @@ declare namespace MediaConnect {
      */
     Status?: Status;
   }
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource that you want to add tags to.
+     */
+    ResourceArn: __string;
+    /**
+     * A map from tag keys to values. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
+     */
+    Tags: __mapOf__string;
+  }
   export interface Transport {
     /**
      * The smoothing max bitrate for RTP and RTP-FEC streams.
@@ -643,6 +689,16 @@ declare namespace MediaConnect {
      * The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
      */
     StreamId?: __string;
+  }
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource that you want to remove tags from.
+     */
+    ResourceArn: __string;
+    /**
+     * The keys of the tags to be removed.
+     */
+    TagKeys: __listOf__string;
   }
   export interface UpdateEncryption {
     /**
@@ -804,6 +860,7 @@ declare namespace MediaConnect {
   export type __listOfListedFlow = ListedFlow[];
   export type __listOfOutput = Output[];
   export type __listOf__string = __string[];
+  export type __mapOf__string = {[key: string]: __string};
   export type __string = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

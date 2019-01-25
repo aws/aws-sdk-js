@@ -2048,6 +2048,10 @@
         "rules": {
           "shape": "Rules",
           "documentation": "<p>The device pool's rules.</p>"
+        },
+        "maxDevices": {
+          "shape": "Integer",
+          "documentation": "<p>The number of devices that Device Farm can add to your device pool. Device Farm adds devices that are available and that meet the criteria that you assign for the <code>rules</code> parameter. Depending on how many devices meet these constraints, your device pool might contain fewer devices than the value for this parameter.</p> <p>By specifying the maximum number of devices, you can control the costs that you incur by running tests.</p>"
         }
       },
       "documentation": "<p>Represents a request to the create device pool operation.</p>"
@@ -2613,7 +2617,10 @@
         "APPIUM_VERSION",
         "INSTANCE_ARN",
         "INSTANCE_LABELS",
-        "FLEET_TYPE"
+        "FLEET_TYPE",
+        "OS_VERSION",
+        "MODEL",
+        "AVAILABILITY"
       ]
     },
     "DeviceAvailability": {
@@ -2630,11 +2637,11 @@
       "members": {
         "attribute": {
           "shape": "DeviceFilterAttribute",
-          "documentation": "<p>The aspect of a device such as platform or model used as the selection criteria in a device filter.</p> <p>Allowed values include:</p> <ul> <li> <p>ARN: The Amazon Resource Name (ARN) of the device. For example, \"arn:aws:devicefarm:us-west-2::device:12345Example\".</p> </li> <li> <p>PLATFORM: The device platform. Valid values are \"ANDROID\" or \"IOS\".</p> </li> <li> <p>OS_VERSION: The operating system version. For example, \"10.3.2\".</p> </li> <li> <p>MODEL: The device model. For example, \"iPad 5th Gen\".</p> </li> <li> <p>AVAILABILITY: The current availability of the device. Valid values are \"AVAILABLE\", \"HIGHLY_AVAILABLE\", \"BUSY\", or \"TEMPORARY_NOT_AVAILABLE\".</p> </li> <li> <p>FORM_FACTOR: The device form factor. Valid values are \"PHONE\" or \"TABLET\".</p> </li> <li> <p>MANUFACTURER: The device manufacturer. For example, \"Apple\".</p> </li> <li> <p>REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access. Valid values are \"TRUE\" or \"FALSE\".</p> </li> <li> <p>REMOTE_DEBUG_ENABLED: Whether the device is enabled for remote debugging. Valid values are \"TRUE\" or \"FALSE\".</p> </li> <li> <p>INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.</p> </li> <li> <p>INSTANCE_LABELS: The label of the device instance.</p> </li> <li> <p>FLEET_TYPE: The fleet type. Valid values are \"PUBLIC\" or \"PRIVATE\".</p> </li> </ul>"
+          "documentation": "<p>The aspect of a device such as platform or model used as the selection criteria in a device filter.</p> <p>The supported operators for each attribute are provided in the following list.</p> <dl> <dt>ARN</dt> <dd> <p>The Amazon Resource Name (ARN) of the device. For example, \"arn:aws:devicefarm:us-west-2::device:12345Example\".</p> <p> <i>Supported operators</i>: <code>EQUALS</code>, <code>IN</code>, <code>NOT_IN</code> </p> </dd> <dt>PLATFORM</dt> <dd> <p>The device platform. Valid values are \"ANDROID\" or \"IOS\".</p> <p> <i>Supported operators</i>: <code>EQUALS</code> </p> </dd> <dt>OS_VERSION</dt> <dd> <p>The operating system version. For example, \"10.3.2\".</p> <p> <i>Supported operators</i>: <code>EQUALS</code>, <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUALS</code>, <code>IN</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUALS</code>, <code>NOT_IN</code> </p> </dd> <dt>MODEL</dt> <dd> <p>The device model. For example, \"iPad 5th Gen\".</p> <p> <i>Supported operators</i>: <code>CONTAINS</code>, <code>EQUALS</code>, <code>IN</code>, <code>NOT_IN</code> </p> </dd> <dt>AVAILABILITY</dt> <dd> <p>The current availability of the device. Valid values are \"AVAILABLE\", \"HIGHLY_AVAILABLE\", \"BUSY\", or \"TEMPORARY_NOT_AVAILABLE\".</p> <p> <i>Supported operators</i>: <code>EQUALS</code> </p> </dd> <dt>FORM_FACTOR</dt> <dd> <p>The device form factor. Valid values are \"PHONE\" or \"TABLET\".</p> <p> <i>Supported operators</i>: <code>EQUALS</code> </p> </dd> <dt>MANUFACTURER</dt> <dd> <p>The device manufacturer. For example, \"Apple\".</p> <p> <i>Supported operators</i>: <code>EQUALS</code>, <code>IN</code>, <code>NOT_IN</code> </p> </dd> <dt>REMOTE_ACCESS_ENABLED</dt> <dd> <p>Whether the device is enabled for remote access. Valid values are \"TRUE\" or \"FALSE\".</p> <p> <i>Supported operators</i>: <code>EQUALS</code> </p> </dd> <dt>REMOTE_DEBUG_ENABLED</dt> <dd> <p>Whether the device is enabled for remote debugging. Valid values are \"TRUE\" or \"FALSE\".</p> <p> <i>Supported operators</i>: <code>EQUALS</code> </p> </dd> <dt>INSTANCE_ARN</dt> <dd> <p>The Amazon Resource Name (ARN) of the device instance.</p> <p> <i>Supported operators</i>: <code>EQUALS</code>, <code>IN</code>, <code>NOT_IN</code> </p> </dd> <dt>INSTANCE_LABELS</dt> <dd> <p>The label of the device instance.</p> <p> <i>Supported operators</i>: <code>CONTAINS</code> </p> </dd> <dt>FLEET_TYPE</dt> <dd> <p>The fleet type. Valid values are \"PUBLIC\" or \"PRIVATE\".</p> <p> <i>Supported operators</i>: <code>EQUALS</code> </p> </dd> </dl>"
         },
         "operator": {
-          "shape": "DeviceFilterOperator",
-          "documentation": "<p>The filter operator.</p> <ul> <li> <p>The EQUALS operator is available for every attribute except INSTANCE_LABELS.</p> </li> <li> <p>The CONTAINS operator is available for the INSTANCE_LABELS and MODEL attributes.</p> </li> <li> <p>The IN and NOT_IN operators are available for the ARN, OS_VERSION, MODEL, MANUFACTURER, and INSTANCE_ARN attributes.</p> </li> <li> <p>The LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUALS, and GREATER_THAN_OR_EQUALS operators are also available for the OS_VERSION attribute.</p> </li> </ul>"
+          "shape": "RuleOperator",
+          "documentation": "<p>Specifies how Device Farm compares the filter's attribute to the value. For the operators that are supported by each attribute, see the attribute descriptions.</p>"
         },
         "values": {
           "shape": "DeviceFilterValues",
@@ -2658,19 +2665,6 @@
         "INSTANCE_ARN",
         "INSTANCE_LABELS",
         "FLEET_TYPE"
-      ]
-    },
-    "DeviceFilterOperator": {
-      "type": "string",
-      "enum": [
-        "EQUALS",
-        "LESS_THAN",
-        "LESS_THAN_OR_EQUALS",
-        "GREATER_THAN",
-        "GREATER_THAN_OR_EQUALS",
-        "IN",
-        "NOT_IN",
-        "CONTAINS"
       ]
     },
     "DeviceFilterValues": {
@@ -2781,6 +2775,10 @@
         "rules": {
           "shape": "Rules",
           "documentation": "<p>Information about the device pool's rules.</p>"
+        },
+        "maxDevices": {
+          "shape": "Integer",
+          "documentation": "<p>The number of devices that Device Farm can add to your device pool. Device Farm adds devices that are available and that meet the criteria that you assign for the <code>rules</code> parameter. Depending on how many devices meet these constraints, your device pool might contain fewer devices than the value for this parameter.</p> <p>By specifying the maximum number of devices, you can control the costs that you incur by running tests.</p>"
         }
       },
       "documentation": "<p>Represents a collection of device types.</p>"
@@ -4580,7 +4578,7 @@
         },
         "billingMethod": {
           "shape": "BillingMethod",
-          "documentation": "<p>The billing method of the remote access session. Possible values include <code>METERED</code> or <code>UNMETERED</code>. For more information about metered devices, see <a href=\"http://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html#welcome-terminology\">AWS Device Farm terminology</a>.\"</p>"
+          "documentation": "<p>The billing method of the remote access session. Possible values include <code>METERED</code> or <code>UNMETERED</code>. For more information about metered devices, see <a href=\"https://docs.aws.amazon.com/devicefarm/latest/developerguide/welcome.html#welcome-terminology\">AWS Device Farm terminology</a>.\"</p>"
         },
         "deviceMinutes": {
           "shape": "DeviceMinutes",
@@ -4654,25 +4652,27 @@
       "members": {
         "attribute": {
           "shape": "DeviceAttribute",
-          "documentation": "<p>The rule's attribute. It is the aspect of a device such as platform or model used as selection criteria to create or update a device pool.</p> <p>Allowed values include:</p> <ul> <li> <p>ARN: The Amazon Resource Name (ARN) of a device. For example, \"arn:aws:devicefarm:us-west-2::device:12345Example\".</p> </li> <li> <p>PLATFORM: The device platform. Valid values are \"ANDROID\" or \"IOS\".</p> </li> <li> <p>FORM_FACTOR: The device form factor. Valid values are \"PHONE\" or \"TABLET\".</p> </li> <li> <p>MANUFACTURER: The device manufacturer. For example, \"Apple\".</p> </li> <li> <p>REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access. Valid values are \"TRUE\" or \"FALSE\".</p> </li> <li> <p>REMOTE_DEBUG_ENABLED: Whether the device is enabled for remote debugging. Valid values are \"TRUE\" or \"FALSE\".</p> </li> <li> <p>APPIUM_VERSION: The Appium version for the test.</p> </li> <li> <p>INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.</p> </li> <li> <p>INSTANCE_LABELS: The label of the device instance.</p> </li> <li> <p>FLEET_TYPE: The fleet type. Valid values are \"PUBLIC\" or \"PRIVATE\".</p> </li> </ul>"
+          "documentation": "<p>The rule's stringified attribute. For example, specify the value as <code>\"\\\"abc\\\"\"</code>.</p> <p>The supported operators for each attribute are provided in the following list.</p> <dl> <dt>APPIUM_VERSION</dt> <dd> <p>The Appium version for the test.</p> <p> <i>Supported operators</i>: <code>CONTAINS</code> </p> </dd> <dt>ARN</dt> <dd> <p>The Amazon Resource Name (ARN) of the device. For example, \"arn:aws:devicefarm:us-west-2::device:12345Example\".</p> <p> <i>Supported operators</i>: <code>EQUALS</code>, <code>IN</code>, <code>NOT_IN</code> </p> </dd> <dt>AVAILABILITY</dt> <dd> <p>The current availability of the device. Valid values are \"AVAILABLE\", \"HIGHLY_AVAILABLE\", \"BUSY\", or \"TEMPORARY_NOT_AVAILABLE\".</p> <p> <i>Supported operators</i>: <code>EQUALS</code> </p> </dd> <dt>FLEET_TYPE</dt> <dd> <p>The fleet type. Valid values are \"PUBLIC\" or \"PRIVATE\".</p> <p> <i>Supported operators</i>: <code>EQUALS</code> </p> </dd> <dt>FORM_FACTOR</dt> <dd> <p>The device form factor. Valid values are \"PHONE\" or \"TABLET\".</p> <p> <i>Supported operators</i>: <code>EQUALS</code>, <code>IN</code>, <code>NOT_IN</code> </p> </dd> <dt>INSTANCE_ARN</dt> <dd> <p>The Amazon Resource Name (ARN) of the device instance.</p> <p> <i>Supported operators</i>: <code>IN</code>, <code>NOT_IN</code> </p> </dd> <dt>INSTANCE_LABELS</dt> <dd> <p>The label of the device instance.</p> <p> <i>Supported operators</i>: <code>CONTAINS</code> </p> </dd> <dt>MANUFACTURER</dt> <dd> <p>The device manufacturer. For example, \"Apple\".</p> <p> <i>Supported operators</i>: <code>EQUALS</code>, <code>IN</code>, <code>NOT_IN</code> </p> </dd> <dt>MODEL</dt> <dd> <p>The device model, such as \"Apple iPad Air 2\" or \"Google Pixel\".</p> <p> <i>Supported operators</i>: <code>CONTAINS</code>, <code>EQUALS</code>, <code>IN</code>, <code>NOT_IN</code> </p> </dd> <dt>OS_VERSION</dt> <dd> <p>The operating system version. For example, \"10.3.2\".</p> <p> <i>Supported operators</i>: <code>EQUALS</code>, <code>GREATER_THAN</code>, <code>GREATER_THAN_OR_EQUALS</code>, <code>IN</code>, <code>LESS_THAN</code>, <code>LESS_THAN_OR_EQUALS</code>, <code>NOT_IN</code> </p> </dd> <dt>PLATFORM</dt> <dd> <p>The device platform. Valid values are \"ANDROID\" or \"IOS\".</p> <p> <i>Supported operators</i>: <code>EQUALS</code>, <code>IN</code>, <code>NOT_IN</code> </p> </dd> <dt>REMOTE_ACCESS_ENABLED</dt> <dd> <p>Whether the device is enabled for remote access. Valid values are \"TRUE\" or \"FALSE\".</p> <p> <i>Supported operators</i>: <code>EQUALS</code> </p> </dd> <dt>REMOTE_DEBUG_ENABLED</dt> <dd> <p>Whether the device is enabled for remote debugging. Valid values are \"TRUE\" or \"FALSE\".</p> <p> <i>Supported operators</i>: <code>EQUALS</code> </p> </dd> </dl>"
         },
         "operator": {
           "shape": "RuleOperator",
-          "documentation": "<p>The rule's operator.</p> <ul> <li> <p>EQUALS: The equals operator.</p> </li> <li> <p>GREATER_THAN: The greater-than operator.</p> </li> <li> <p>IN: The in operator.</p> </li> <li> <p>LESS_THAN: The less-than operator.</p> </li> <li> <p>NOT_IN: The not-in operator.</p> </li> <li> <p>CONTAINS: The contains operator.</p> </li> </ul>"
+          "documentation": "<p>Specifies how Device Farm compares the rule's attribute to the value. For the operators that are supported by each attribute, see the attribute descriptions.</p>"
         },
         "value": {
           "shape": "String",
-          "documentation": "<p>The rule's value.</p> <p>The value must be passed in as a string using escaped quotes.</p> <p>For example:</p> <p>\"value\": \"\\\"ANDROID\\\"\"</p>"
+          "documentation": "<p>The rule's value.</p>"
         }
       },
-      "documentation": "<p>Represents a condition for a device pool. It is passed in as the <code>rules</code> parameter to <a>CreateDevicePool</a> and <a>UpdateDevicePool</a>.</p>"
+      "documentation": "<p>Represents a condition for a device pool.</p>"
     },
     "RuleOperator": {
       "type": "string",
       "enum": [
         "EQUALS",
         "LESS_THAN",
+        "LESS_THAN_OR_EQUALS",
         "GREATER_THAN",
+        "GREATER_THAN_OR_EQUALS",
         "IN",
         "NOT_IN",
         "CONTAINS"
@@ -4925,7 +4925,7 @@
         },
         "devicePoolArn": {
           "shape": "AmazonResourceName",
-          "documentation": "<p>The ARN of the device pool for the run to be scheduled.</p> <p>Either <b> <code>devicePoolArn</code> </b> or <b> <code>deviceSelectionConfiguration</code> </b> is required in a request.</p>"
+          "documentation": "<p>The ARN of the device pool for the run to be scheduled.</p>"
         },
         "deviceSelectionConfiguration": {
           "shape": "DeviceSelectionConfiguration",
@@ -4987,7 +4987,7 @@
           "documentation": "<p>The test's parameters, such as test framework parameters and fixture settings. Parameters are represented by name-value pairs of strings.</p> <p>For all tests:</p> <ul> <li> <p>app_performance_monitoring: Performance monitoring is enabled by default. Set this parameter to \"false\" to disable it.</p> </li> </ul> <p>For Calabash tests:</p> <ul> <li> <p>profile: A cucumber profile, for example, \"my_profile_name\".</p> </li> <li> <p>tags: You can limit execution to features or scenarios that have (or don't have) certain tags, for example, \"@smoke\" or \"@smoke,~@wip\".</p> </li> </ul> <p>For Appium tests (all types):</p> <ul> <li> <p>appium_version: The Appium version. Currently supported values are \"1.6.5\" (and higher), \"latest\", and \"default\".</p> <ul> <li> <p>“latest” will run the latest Appium version supported by Device Farm (1.9.1).</p> </li> <li> <p>For “default”, Device Farm will choose a compatible version of Appium for the device. The current behavior is to run 1.7.2 on Android devices and iOS 9 and earlier, 1.7.2 for iOS 10 and later.</p> </li> <li> <p>This behavior is subject to change.</p> </li> </ul> </li> </ul> <p>For Fuzz tests (Android only):</p> <ul> <li> <p>event_count: The number of events, between 1 and 10000, that the UI fuzz test should perform.</p> </li> <li> <p>throttle: The time, in ms, between 0 and 1000, that the UI fuzz test should wait between events.</p> </li> <li> <p>seed: A seed to use for randomizing the UI fuzz test. Using the same seed value between tests ensures identical event sequences.</p> </li> </ul> <p>For Explorer tests:</p> <ul> <li> <p>username: A username to use if the Explorer encounters a login form. If not supplied, no username will be inserted.</p> </li> <li> <p>password: A password to use if the Explorer encounters a login form. If not supplied, no password will be inserted.</p> </li> </ul> <p>For Instrumentation:</p> <ul> <li> <p>filter: A test filter string. Examples:</p> <ul> <li> <p>Running a single test case: \"com.android.abc.Test1\"</p> </li> <li> <p>Running a single test: \"com.android.abc.Test1#smoke\"</p> </li> <li> <p>Running multiple tests: \"com.android.abc.Test1,com.android.abc.Test2\"</p> </li> </ul> </li> </ul> <p>For XCTest and XCTestUI:</p> <ul> <li> <p>filter: A test filter string. Examples:</p> <ul> <li> <p>Running a single test class: \"LoginTests\"</p> </li> <li> <p>Running a multiple test classes: \"LoginTests,SmokeTests\"</p> </li> <li> <p>Running a single test: \"LoginTests/testValid\"</p> </li> <li> <p>Running multiple tests: \"LoginTests/testValid,LoginTests/testInvalid\"</p> </li> </ul> </li> </ul> <p>For UIAutomator:</p> <ul> <li> <p>filter: A test filter string. Examples:</p> <ul> <li> <p>Running a single test case: \"com.android.abc.Test1\"</p> </li> <li> <p>Running a single test: \"com.android.abc.Test1#smoke\"</p> </li> <li> <p>Running multiple tests: \"com.android.abc.Test1,com.android.abc.Test2\"</p> </li> </ul> </li> </ul>"
         }
       },
-      "documentation": "<p>Represents test settings. This data structure is passed in as the <code>test</code> parameter to ScheduleRun. For an example of the JSON request syntax, see <a>ScheduleRun</a>.</p>"
+      "documentation": "<p>Represents test settings. This data structure is passed in as the \"test\" parameter to ScheduleRun. For an example of the JSON request syntax, see <a>ScheduleRun</a>.</p>"
     },
     "ServiceDnsName": {
       "type": "string",
@@ -5321,6 +5321,14 @@
         "rules": {
           "shape": "Rules",
           "documentation": "<p>Represents the rules you wish to modify for the device pool. Updating rules is optional; however, if you choose to update rules for your request, the update will replace the existing rules.</p>"
+        },
+        "maxDevices": {
+          "shape": "Integer",
+          "documentation": "<p>The number of devices that Device Farm can add to your device pool. Device Farm adds devices that are available and that meet the criteria that you assign for the <code>rules</code> parameter. Depending on how many devices meet these constraints, your device pool might contain fewer devices than the value for this parameter.</p> <p>By specifying the maximum number of devices, you can control the costs that you incur by running tests.</p> <p>If you use this parameter in your request, you cannot use the <code>clearMaxDevices</code> parameter in the same request.</p>"
+        },
+        "clearMaxDevices": {
+          "shape": "Boolean",
+          "documentation": "<p>Sets whether the <code>maxDevices</code> parameter applies to your device pool. If you set this parameter to <code>true</code>, the <code>maxDevices</code> parameter does not apply, and Device Farm does not limit the number of devices that it adds to your device pool. In this case, Device Farm adds all available devices that meet the criteria that are specified for the <code>rules</code> parameter.</p> <p>If you use this parameter in your request, you cannot use the <code>maxDevices</code> parameter in the same request.</p>"
         }
       },
       "documentation": "<p>Represents a request to the update device pool operation.</p>"
