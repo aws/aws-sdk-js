@@ -1706,7 +1706,8 @@
     "ModifyClientPropertiesRequest": {
       "type": "structure",
       "required": [
-        "ResourceId"
+        "ResourceId",
+        "ClientProperties"
       ],
       "members": {
         "ResourceId": {

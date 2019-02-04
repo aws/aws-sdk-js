@@ -492,6 +492,22 @@ declare namespace ECS {
      * The health status of the container. If health checks are not configured for this container in its task definition, then it reports the health status as UNKNOWN.
      */
     healthStatus?: HealthStatus;
+    /**
+     * The number of CPU units set for the container. The value will be 0 if no value was specified in the container definition when the task definition was registered.
+     */
+    cpu?: String;
+    /**
+     * The hard limit (in MiB) of memory set for the container.
+     */
+    memory?: String;
+    /**
+     * The soft limit (in MiB) of memory set for the container.
+     */
+    memoryReservation?: String;
+    /**
+     * The IDs of each GPU assigned to the container.
+     */
+    gpuIds?: GpuIds;
   }
   export interface ContainerDefinition {
     /**
@@ -626,6 +642,10 @@ declare namespace ECS {
      * A list of namespaced kernel parameters to set in the container. This parameter maps to Sysctls in the Create a container section of the Docker Remote API and the --sysctl option to docker run.  It is not recommended that you specify network-related systemControls parameters for multiple containers in a single task that also uses either the awsvpc or host network modes. For tasks that use the awsvpc network mode, the container that is started last determines which systemControls parameters take effect. For tasks that use the host network mode, it changes the container instance's namespaced kernel parameters as well as the containers. 
      */
     systemControls?: SystemControls;
+    /**
+     * The type and amount of a resource to assign to a container. The only supported resource is a GPU.
+     */
+    resourceRequirements?: ResourceRequirements;
   }
   export type ContainerDefinitions = ContainerDefinition[];
   export interface ContainerInstance {
@@ -719,6 +739,10 @@ declare namespace ECS {
      * The soft limit (in MiB) of memory to reserve for the container, instead of the default value from the task definition. You must also specify a container name.
      */
     memoryReservation?: BoxedInteger;
+    /**
+     * The type and amount of a resource to assign to a container, instead of the default value from the task definition. The only supported resource is a GPU.
+     */
+    resourceRequirements?: ResourceRequirements;
   }
   export type ContainerOverrides = ContainerOverride[];
   export interface ContainerStateChange {
@@ -839,7 +863,7 @@ declare namespace ECS {
      */
     enableECSManagedTags?: Boolean;
     /**
-     * Specifies whether to propagate the tags from the task definition or the service to the tasks. If no value is specified, the tags are not propagated. Tags can only be propagated to the tasks within the service during service creation. To add tags to a task after service creation, use the TagResource API action.
+     * Specifies whether to propagate the tags from the task definition or the service to the tasks in the service. If no value is specified, the tags are not propagated. Tags can only be propagated to the tasks within the service during service creation. To add tags to a task after service creation, use the TagResource API action.
      */
     propagateTags?: PropagateTags;
   }
@@ -1195,6 +1219,7 @@ declare namespace ECS {
     reason?: String;
   }
   export type Failures = Failure[];
+  export type GpuIds = String[];
   export interface HealthCheck {
     /**
      * A string array representing the command that the container runs to determine if it is healthy. The string array must start with CMD to execute the command arguments directly, or CMD-SHELL to run the command with the container's default shell. For example:  [ "CMD-SHELL", "curl -f http://localhost/ || exit 1" ]  An exit code of 0 indicates success, and non-zero exit code indicates failure. For more information, see HealthCheck in the Create a container section of the Docker Remote API.
@@ -1669,6 +1694,18 @@ declare namespace ECS {
     field?: String;
   }
   export type PlacementStrategyType = "random"|"spread"|"binpack"|string;
+  export interface PlatformDevice {
+    /**
+     * The ID for the GPU(s) on the container instance. The available GPU IDs can also be obtained on the container instance in the /var/lib/ecs/gpu/nvidia_gpu_info.json file.
+     */
+    id: String;
+    /**
+     * The type of device that is available on the container instance. The only supported value is GPU.
+     */
+    type: PlatformDeviceType;
+  }
+  export type PlatformDeviceType = "GPU"|string;
+  export type PlatformDevices = PlatformDevice[];
   export interface PortMapping {
     /**
      * The port number on the container that is bound to the user-specified or automatically assigned host port. If you are using containers in a task with the awsvpc or host network mode, exposed ports should be specified using containerPort. If you are using containers in a task with the bridge network mode and you specify a container port and not a host port, your container automatically receives a host port in the ephemeral port range. For more information, see hostPort. Port mappings that are automatically assigned in this way do not count toward the 100 reserved ports limit of a container instance.
@@ -1750,6 +1787,10 @@ declare namespace ECS {
      * The container instance attributes that this container instance supports.
      */
     attributes?: Attributes;
+    /**
+     * The devices that are available on the container instance. The only supported device type is a GPU.
+     */
+    platformDevices?: PlatformDevices;
     /**
      * The metadata that you apply to the container instance to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
      */
@@ -1858,6 +1899,18 @@ declare namespace ECS {
      */
     stringSetValue?: StringList;
   }
+  export interface ResourceRequirement {
+    /**
+     * The number of GPUs to assign to a container.
+     */
+    value: String;
+    /**
+     * The type of resource a container desires. The only supported value is GPU.
+     */
+    type: ResourceType;
+  }
+  export type ResourceRequirements = ResourceRequirement[];
+  export type ResourceType = "GPU"|string;
   export type Resources = Resource[];
   export interface RunTaskRequest {
     /**
@@ -1913,7 +1966,7 @@ declare namespace ECS {
      */
     enableECSManagedTags?: Boolean;
     /**
-     * Specifies whether to propagate the tags from the task definition or the service to the task. If no value is specified, the tags are not propagated.
+     * Specifies whether to propagate the tags from the task definition to the task. If no value is specified, the tags are not propagated. Tags can only be propagated to the task during task creation. To add tags to a task after task creation, use the TagResource API action.  An error will be received if you specify the SERVICE option when running a task. 
      */
     propagateTags?: PropagateTags;
   }

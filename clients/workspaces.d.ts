@@ -814,7 +814,7 @@ declare namespace WorkSpaces {
     /**
      * Information about the Amazon WorkSpaces client.
      */
-    ClientProperties?: ClientProperties;
+    ClientProperties: ClientProperties;
   }
   export interface ModifyClientPropertiesResult {
   }

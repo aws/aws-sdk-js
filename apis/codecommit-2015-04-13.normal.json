@@ -1318,6 +1318,9 @@
           "shape": "InvalidCommitIdException"
         },
         {
+          "shape": "RepositoryNotAssociatedWithPullRequestException"
+        },
+        {
           "shape": "RepositoryNameRequiredException"
         },
         {

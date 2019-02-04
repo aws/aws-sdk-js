@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.395.0-->
+<!--LATEST=2.396.0-->
 <!--ENTRYINSERT-->
+
+## 2.396.0
+* feature: CodeCommit: This release supports a more graceful handling of the error case when a repository is not associated with a pull request ID in a merge request in AWS CodeCommit.
+* feature: ECS: This release of Amazon Elastic Container Service (Amazon ECS) introduces support for GPU workloads by enabling you to create clusters with GPU-enabled container instances.
+* feature: WorkSpaces: This release sets ClientProperties as a required parameter.
 
 ## 2.395.0
 * feature: CodeCommit: The PutFile API will now throw new exception FilePathConflictsWithSubmodulePathException when a submodule exists at the input file path; PutFile API will also throw FolderContentSizeLimitExceededException when the total size of any folder on the path exceeds the limit as a result of the operation.
