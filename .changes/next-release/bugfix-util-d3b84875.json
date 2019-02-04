@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "util",
+  "description": "event_listener.js uses a relative import for util.js"
+}
