@@ -323,7 +323,7 @@
       "output": {
         "shape": "AttachVpnGatewayResult"
       },
-      "documentation": "<p>Attaches a virtual private gateway to a VPC. You can attach one virtual private gateway to one VPC at a time.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html\">AWS Managed VPN Connections</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Attaches a virtual private gateway to a VPC. You can attach one virtual private gateway to one VPC at a time.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
     },
     "AuthorizeClientVpnIngress": {
       "name": "AuthorizeClientVpnIngress",
@@ -591,7 +591,7 @@
       "output": {
         "shape": "CreateCustomerGatewayResult"
       },
-      "documentation": "<p>Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway's external interface. The IP address must be static and may be behind a device performing network address translation (NAT).</p> <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).</p> <note> <p>Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the <code>us-east-1</code> region, and 9059, which is reserved in the <code>eu-west-1</code> region.</p> </note> <p>For more information about VPN customer gateways, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html\">AWS Managed VPN Connections</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <important> <p>You cannot create more than one customer gateway with the same VPN type, IP address, and BGP ASN parameter values. If you run an identical request more than one time, the first request creates the customer gateway, and subsequent requests return information about the existing customer gateway. The subsequent requests do not create new customer gateway resources.</p> </important>"
+      "documentation": "<p>Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the Internet-routable IP address of the customer gateway's external interface. The IP address must be static and may be behind a device performing network address translation (NAT).</p> <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).</p> <note> <p>Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534, with the exception of 7224, which is reserved in the <code>us-east-1</code> region, and 9059, which is reserved in the <code>eu-west-1</code> region.</p> </note> <p>For more information, see <a href=\"http://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <important> <p>You cannot create more than one customer gateway with the same VPN type, IP address, and BGP ASN parameter values. If you run an identical request more than one time, the first request creates the customer gateway, and subsequent requests return information about the existing customer gateway. The subsequent requests do not create new customer gateway resources.</p> </important>"
     },
     "CreateDefaultSubnet": {
       "name": "CreateDefaultSubnet",
@@ -1114,7 +1114,7 @@
       "output": {
         "shape": "CreateVpnConnectionResult"
       },
-      "documentation": "<p>Creates a VPN connection between an existing virtual private gateway and a VPN customer gateway. The only supported connection type is <code>ipsec.1</code>.</p> <p>The response includes information that you need to give to your network administrator to configure your customer gateway.</p> <important> <p>We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway.</p> </important> <p>If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call.</p> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html\">AWS Managed VPN Connections</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Creates a VPN connection between an existing virtual private gateway and a VPN customer gateway. The only supported connection type is <code>ipsec.1</code>.</p> <p>The response includes information that you need to give to your network administrator to configure your customer gateway.</p> <important> <p>We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway.</p> </important> <p>If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call.</p> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
     },
     "CreateVpnConnectionRoute": {
       "name": "CreateVpnConnectionRoute",
@@ -1125,7 +1125,7 @@
       "input": {
         "shape": "CreateVpnConnectionRouteRequest"
       },
-      "documentation": "<p>Creates a static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway.</p> <p>For more information about VPN connections, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html\">AWS Managed VPN Connections</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Creates a static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
     },
     "CreateVpnGateway": {
       "name": "CreateVpnGateway",
@@ -1139,7 +1139,7 @@
       "output": {
         "shape": "CreateVpnGatewayResult"
       },
-      "documentation": "<p>Creates a virtual private gateway. A virtual private gateway is the endpoint on the VPC side of your VPN connection. You can create a virtual private gateway before creating the VPC itself.</p> <p>For more information about virtual private gateways, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html\">AWS Managed VPN Connections</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Creates a virtual private gateway. A virtual private gateway is the endpoint on the VPC side of your VPN connection. You can create a virtual private gateway before creating the VPC itself.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
     },
     "DeleteClientVpnEndpoint": {
       "name": "DeleteClientVpnEndpoint",
@@ -1846,7 +1846,7 @@
       "output": {
         "shape": "DescribeCustomerGatewaysResult"
       },
-      "documentation": "<p>Describes one or more of your VPN customer gateways.</p> <p>For more information about VPN customer gateways, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html\">AWS Managed VPN Connections</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Describes one or more of your VPN customer gateways.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
     },
     "DescribeDhcpOptions": {
       "name": "DescribeDhcpOptions",
@@ -2952,7 +2952,7 @@
       "output": {
         "shape": "DescribeVpnConnectionsResult"
       },
-      "documentation": "<p>Describes one or more of your VPN connections.</p> <p>For more information about VPN connections, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html\">AWS Managed VPN Connections</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Describes one or more of your VPN connections.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
     },
     "DescribeVpnGateways": {
       "name": "DescribeVpnGateways",
@@ -2966,7 +2966,7 @@
       "output": {
         "shape": "DescribeVpnGatewaysResult"
       },
-      "documentation": "<p>Describes one or more of your virtual private gateways.</p> <p>For more information about virtual private gateways, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html\">AWS Managed VPN Connections</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Describes one or more of your virtual private gateways.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
     },
     "DetachClassicLinkVpc": {
       "name": "DetachClassicLinkVpc",
@@ -4722,7 +4722,7 @@
       "members": {
         "Cidr": {
           "shape": "String",
-          "documentation": "<p>The IPv4 address range, in CIDR notation.</p>"
+          "documentation": "<p>The IPv4 address range, in CIDR notation. This must be the exact range that you provisioned. You can't advertise only a portion of the provisioned range.</p>"
         },
         "DryRun": {
           "shape": "Boolean",
@@ -5710,7 +5710,7 @@
         },
         "SourceSecurityGroupOwnerId": {
           "shape": "String",
-          "documentation": "<p>[EC2-Classic] The AWS account ID for the source security group, if the source security group is in a different account. You can't specify this parameter in combination with the following parameters: the CIDR IP address range, the IP protocol, the start of the port range, and the end of the port range. Creates rules that grant full ICMP, UDP, and TCP access. To create a rule with a specific IP protocol and port range, use a set of IP permissions instead.</p>"
+          "documentation": "<p>[nondefault VPC] The AWS account ID for the source security group, if the source security group is in a different account. You can't specify this parameter in combination with the following parameters: the CIDR IP address range, the IP protocol, the start of the port range, and the end of the port range. Creates rules that grant full ICMP, UDP, and TCP access. To create a rule with a specific IP protocol and port range, use a set of IP permissions instead.</p>"
         },
         "ToPort": {
           "shape": "Integer",
@@ -6530,7 +6530,7 @@
           "documentation": "<p>Information about the target Capacity Reservation.</p>"
         }
       },
-      "documentation": "<p>Describes an instance's Capacity Reservation targeting option. You can specify only one option at a time. Use the <code>CapacityReservationPreference</code> parameter to configure the instance to run as an On-Demand Instance or to run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). Use the <code>CapacityReservationTarget</code> parameter to explicitly target a specific Capacity Reservation.</p>"
+      "documentation": "<p>Describes an instance's Capacity Reservation targeting option. You can specify only one parameter at a time. If you specify <code>CapacityReservationPreference</code> and <code>CapacityReservationTarget</code>, the request fails.</p> <p>Use the <code>CapacityReservationPreference</code> parameter to configure the instance to run as an On-Demand Instance or to run in any <code>open</code> Capacity Reservation that has matching attributes (instance type, platform, Availability Zone). Use the <code>CapacityReservationTarget</code> parameter to explicitly target a specific Capacity Reservation.</p>"
     },
     "CapacityReservationSpecificationResponse": {
       "type": "structure",
@@ -9125,11 +9125,11 @@
         },
         "Size": {
           "shape": "Integer",
-          "documentation": "<p>The size of the volume, in GiBs.</p> <p>Constraints: 1-16,384 for <code>gp2</code>, 4-16,384 for <code>io1</code>, 500-16,384 for <code>st1</code>, 500-16,384 for <code>sc1</code>, and 1-1,024 for <code>standard</code>. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size.</p> <p>Default: If you're creating the volume from a snapshot and don't specify a volume size, the default is the snapshot size.</p>"
+          "documentation": "<p>The size of the volume, in GiBs.</p> <p>Constraints: 1-16,384 for <code>gp2</code>, 4-16,384 for <code>io1</code>, 500-16,384 for <code>st1</code>, 500-16,384 for <code>sc1</code>, and 1-1,024 for <code>standard</code>. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size.</p> <p>Default: If you're creating the volume from a snapshot and don't specify a volume size, the default is the snapshot size.</p> <note> <p>At least one of Size or SnapshotId are required.</p> </note>"
         },
         "SnapshotId": {
           "shape": "String",
-          "documentation": "<p>The snapshot from which to create the volume.</p>"
+          "documentation": "<p>The snapshot from which to create the volume.</p> <note> <p>At least one of Size or SnapshotId are required.</p> </note>"
         },
         "VolumeType": {
           "shape": "VolumeType",
@@ -10705,7 +10705,7 @@
         },
         "PublicIps": {
           "shape": "PublicIpStringList",
-          "documentation": "<p>[EC2-Classic] One or more Elastic IP addresses.</p> <p>Default: Describes all your Elastic IP addresses.</p>",
+          "documentation": "<p>One or more Elastic IP addresses.</p> <p>Default: Describes all your Elastic IP addresses.</p>",
           "locationName": "PublicIp"
         },
         "AllocationIds": {
@@ -13753,7 +13753,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>association.transit-gateway-route-table-id</code> - The ID of the route table for the transit gateway.</p> </li> <li> <p> <code>association.state</code> - The state of the association (<code>associating</code> | <code>associated</code> | <code>disassociating</code>).</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-owner</code> - The ID of the AWS account that owns the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type (<code>vpc</code> | <code>vpn</code>).</p> </li> <li> <p> <code>state</code> - The state of the attachment (<code>pendingAcceptance</code> | <code>pending</code> | <code>available</code> | <code>modifying</code> | <code>deleting</code> | <code>deleted</code> | <code>failed</code> | <code>rejected</code>).</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>transit-gateway-owner</code> - The ID of the AWS account that owns the transit gateway.</p> </li> </ul>",
+          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>association.state</code> - The state of the association (<code>associating</code> | <code>associated</code> | <code>disassociating</code>).</p> </li> <li> <p> <code>association.transit-gateway-route-table-id</code> - The ID of the route table for the transit gateway.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-owner-id</code> - The ID of the AWS account that owns the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type (<code>vpc</code> | <code>vpn</code>).</p> </li> <li> <p> <code>state</code> - The state of the attachment (<code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>).</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>transit-gateway-owner-id</code> - The ID of the AWS account that owns the transit gateway.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -13794,7 +13794,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>default-association-route-table</code> - Indicates whether this is the default association route table for the transit gateway (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>default-propagation-route-table</code> - Indicates whether this is the default propagation route table for the transit gateway (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>state</code> - The state of the attachment (<code>pendingAcceptance</code> | <code>pending</code> | <code>available</code> | <code>modifying</code> | <code>deleting</code> | <code>deleted</code> | <code>failed</code> | <code>rejected</code>).</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>transit-gateway-route-table-id</code> - The ID of the transit gateway route table.</p> </li> </ul>",
+          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>default-association-route-table</code> - Indicates whether this is the default association route table for the transit gateway (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>default-propagation-route-table</code> - Indicates whether this is the default propagation route table for the transit gateway (<code>true</code> | <code>false</code>).</p> </li> <li> <p> <code>state</code> - The state of the attachment (<code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>).</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>transit-gateway-route-table-id</code> - The ID of the transit gateway route table.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -13835,7 +13835,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>state</code> - The state of the attachment (<code>pendingAcceptance</code> | <code>pending</code> | <code>available</code> | <code>modifying</code> | <code>deleting</code> | <code>deleted</code> | <code>failed</code> | <code>rejected</code>).</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC.</p> </li> </ul>",
+          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>state</code> - The state of the attachment (<code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>).</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>vpc-id</code> - The ID of the VPC.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -13876,7 +13876,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the transit gateway.</p> </li> <li> <p> <code>options.propagation-default-route-table-id</code> - The ID of the default propagation route table.</p> </li> <li> <p> <code>options.amazon-side-asn</code> - The private ASN for the Amazon side of a BGP session.</p> </li> <li> <p> <code>options.association-default-route-table-id</code> - The ID of the default association route table.</p> </li> <li> <p> <code>options.auto-accept-shared-attachments</code> - Indicates whether there is automatic acceptance of attachment requests (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>options.default-route-table-association</code> - Indicates whether resource attachments are automatically associated with the default association route table (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>options.default-route-table-propagation</code> - Indicates whether resource attachments automatically propagate routes to the default propagation route table (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>options.dns-support</code> - Indicates whether DNS support is enabled (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>options.vpn-ecmp-support</code> - Indicates whether Equal Cost Multipath Protocol support is enabled (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>state</code> - The state of the attachment (<code>pendingAcceptance</code> | <code>pending</code> | <code>available</code> | <code>modifying</code> | <code>deleting</code> | <code>deleted</code> | <code>failed</code> | <code>rejected</code>).</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>transit-gateway-state</code> - The state of the transit gateway (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>).</p> </li> </ul>",
+          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>options.propagation-default-route-table-id</code> - The ID of the default propagation route table.</p> </li> <li> <p> <code>options.amazon-side-asn</code> - The private ASN for the Amazon side of a BGP session.</p> </li> <li> <p> <code>options.association-default-route-table-id</code> - The ID of the default association route table.</p> </li> <li> <p> <code>options.auto-accept-shared-attachments</code> - Indicates whether there is automatic acceptance of attachment requests (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>options.default-route-table-association</code> - Indicates whether resource attachments are automatically associated with the default association route table (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>options.default-route-table-propagation</code> - Indicates whether resource attachments automatically propagate routes to the default propagation route table (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>options.dns-support</code> - Indicates whether DNS support is enabled (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>options.vpn-ecmp-support</code> - Indicates whether Equal Cost Multipath Protocol support is enabled (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the transit gateway.</p> </li> <li> <p> <code>state</code> - The state of the attachment (<code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>).</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -14449,6 +14449,11 @@
       },
       "documentation": "<p>Contains the output of DescribeVpcEndpoints.</p>"
     },
+    "DescribeVpcPeeringConnectionsMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 5
+    },
     "DescribeVpcPeeringConnectionsRequest": {
       "type": "structure",
       "members": {
@@ -14466,6 +14471,14 @@
           "shape": "ValueStringList",
           "documentation": "<p>One or more VPC peering connection IDs.</p> <p>Default: Describes all your VPC peering connections.</p>",
           "locationName": "VpcPeeringConnectionId"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to request the next page of results. (You received this token from a prior call.)</p>"
+        },
+        "MaxResults": {
+          "shape": "DescribeVpcPeeringConnectionsMaxResults",
+          "documentation": "<p>The maximum number of results to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.</p>"
         }
       }
     },
@@ -14476,6 +14489,11 @@
           "shape": "VpcPeeringConnectionList",
           "documentation": "<p>Information about the VPC peering connections.</p>",
           "locationName": "vpcPeeringConnectionSet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
         }
       }
     },
@@ -15933,7 +15951,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>transit-gateway-route-destination-cidr-block</code> - The CIDR range.</p> </li> <li> <p> <code>transit-gateway-route-state</code> - The state of the route (<code>active</code> | <code>blackhole</code>).</p> </li> <li> <p> <code>transit-gateway-route-transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-route-type</code> - The route type (<code>static</code> | <code>propagated</code>).</p> </li> <li> <p> <code>transit-gateway-route-vpn-connection-id</code> - The ID of the VPN connection.</p> </li> </ul>",
+          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>attachment.transit-gateway-attachment-id</code>- The id of the transit gateway attachment.</p> </li> <li> <p> <code>attachment.resource-id</code> - The resource id of the transit gateway attachment.</p> </li> <li> <p> <code>route-search.exact-match</code> - The exact match of the specified filter.</p> </li> <li> <p> <code>route-search.longest-prefix-match</code> - The longest prefix that matches the route.</p> </li> <li> <p> <code>route-search.subnet-of-match</code> - The routes with a subnet that match the specified CIDR filter.</p> </li> <li> <p> <code>route-search.supernet-of-match</code> - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.</p> </li> <li> <p> <code>state</code> - The state of the attachment (<code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>).</p> </li> <li> <p> <code>transit-gateway-route-destination-cidr-block</code> - The CIDR range.</p> </li> <li> <p> <code>type</code> - The type of roue (<code>active</code> | <code>blackhole</code>).</p> </li> </ul>",
           "locationName": "Filter"
         },
         "S3Bucket": {
@@ -24536,7 +24554,7 @@
         },
         "CapacityReservationSpecification": {
           "shape": "LaunchTemplateCapacityReservationSpecificationRequest",
-          "documentation": "<p>The Capacity Reservation targeting option.</p>"
+          "documentation": "<p>The Capacity Reservation targeting option. If you do not specify this parameter, the instance's Capacity Reservation preference defaults to <code>open</code>, which enables it to run in any open Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p>"
         },
         "HibernationOptions": {
           "shape": "LaunchTemplateHibernationOptionsRequest",
@@ -24970,7 +24988,7 @@
         },
         "InstanceCount": {
           "shape": "Integer",
-          "documentation": "<p>The number of modified Reserved Instances.</p>",
+          "documentation": "<p>The number of modified Reserved Instances.</p> <note> <p>This is a required field for a request.</p> </note>",
           "locationName": "instanceCount"
         },
         "InstanceType": {
@@ -26141,7 +26159,7 @@
         },
         "CapacityReservationSpecification": {
           "shape": "CapacityReservationSpecification",
-          "documentation": "<p>Information about the Capacity Reservation targeting option.</p>"
+          "documentation": "<p>Information about the Capacity Reservation targeting option. If you do not specify this parameter, the instance's Capacity Reservation preference defaults to <code>open</code>, which enables it to run in any open Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p>"
         },
         "HibernationOptions": {
           "shape": "HibernationOptionsRequest",
@@ -26737,7 +26755,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>transit-gateway-route-destination-cidr-block</code> - The CIDR range.</p> </li> <li> <p> <code>transit-gateway-route-state</code> - The state of the route (<code>active</code> | <code>blackhole</code>).</p> </li> <li> <p> <code>transit-gateway-route-transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-route-type</code> - The route type (<code>static</code> | <code>propagated</code>).</p> </li> </ul>",
+          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>attachment.transit-gateway-attachment-id</code>- The id of the transit gateway attachment.</p> </li> <li> <p> <code>attachment.resource-id</code> - The resource id of the transit gateway attachment.</p> </li> <li> <p> <code>attachment.resource-type</code> - The attachment resource type (<code>vpc</code> | <code>vpn</code>).</p> </li> <li> <p> <code>route-search.exact-match</code> - The exact match of the specified filter.</p> </li> <li> <p> <code>route-search.longest-prefix-match</code> - The longest prefix that matches the route.</p> </li> <li> <p> <code>route-search.subnet-of-match</code> - The routes with a subnet that match the specified CIDR filter.</p> </li> <li> <p> <code>route-search.supernet-of-match</code> - The routes with a CIDR that encompass the CIDR filter. For example, if you have 10.0.1.0/29 and 10.0.1.0/31 routes in your route table and you specify supernet-of-match as 10.0.1.0/30, then the result returns 10.0.1.0/29.</p> </li> <li> <p> <code>state</code> - The state of the attachment (<code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>).</p> </li> <li> <p> <code>type</code> - The type of roue (<code>active</code> | <code>blackhole</code>).</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -30760,7 +30778,7 @@
         },
         "Category": {
           "shape": "String",
-          "documentation": "<p>The category of the VPN connection. A value of <code>VPN</code> indicates an AWS VPN connection. A value of <code>VPN-Classic</code> indicates an AWS Classic VPN connection. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_VPN.html#vpn-categories\">AWS Managed VPN Categories</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>",
+          "documentation": "<p>The category of the VPN connection. A value of <code>VPN</code> indicates an AWS VPN connection. A value of <code>VPN-Classic</code> indicates an AWS Classic VPN connection.</p>",
           "locationName": "category"
         },
         "State": {

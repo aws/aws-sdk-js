@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.396.0-->
+<!--LATEST=2.397.0-->
 <!--ENTRYINSERT-->
+
+## 2.397.0
+* feature: EC2: ec2.DescribeVpcPeeringConnections pagination support
+* feature: Shield: The DescribeProtection request now accepts resource ARN as valid parameter.
 
 ## 2.396.0
 * feature: CodeCommit: This release supports a more graceful handling of the error case when a repository is not associated with a pull request ID in a merge request in AWS CodeCommit.
