@@ -260,6 +260,11 @@
         return expect(service.config.endpoint).to.equal('http://mockservice.mock-region.domain.tld');
       });
 
+      it('copies the service identifier onto the constructed instance', function() {
+        var service = new MockService();
+        expect(service.serviceIdentifier).to.equal('mock');
+      });
+
       describe('will work with', function() {
         var allServices, className, ctor, obsoleteVersions, results, serviceIdentifier, version;
         allServices = require('../clients/all');
