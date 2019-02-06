@@ -4071,7 +4071,7 @@ declare namespace EC2 {
     Tags?: TagList;
   }
   export type CapacityReservationIdSet = String[];
-  export type CapacityReservationInstancePlatform = "Linux/UNIX"|"Red Hat Enterprise Linux"|"SUSE Linux"|"Windows"|"Windows with SQL Server"|"Windows with SQL Server Enterprise"|"Windows with SQL Server Standard"|"Windows with SQL Server Web"|string;
+  export type CapacityReservationInstancePlatform = "Linux/UNIX"|"Red Hat Enterprise Linux"|"SUSE Linux"|"Windows"|"Windows with SQL Server"|"Windows with SQL Server Enterprise"|"Windows with SQL Server Standard"|"Windows with SQL Server Web"|"Linux with SQL Server Standard"|"Linux with SQL Server Web"|"Linux with SQL Server Enterprise"|string;
   export type CapacityReservationPreference = "open"|"none"|string;
   export type CapacityReservationSet = CapacityReservation[];
   export interface CapacityReservationSpecification {
