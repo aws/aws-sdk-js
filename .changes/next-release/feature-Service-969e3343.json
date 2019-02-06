@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "Service",
+  "description": "Expose service identifier on service instances."
+}
