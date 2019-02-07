@@ -28,11 +28,11 @@ declare class RoboMaker extends Service {
    */
   cancelSimulationJob(callback?: (err: AWSError, data: RoboMaker.Types.CancelSimulationJobResponse) => void): Request<RoboMaker.Types.CancelSimulationJobResponse, AWSError>;
   /**
-   * Creates a deployment job.
+   * Deploys a specific version of a robot application to robots in a fleet. The robot application must have a numbered applicationVersion for consistency reasons. To create a new version, use CreateRobotApplicationVersion or see Creating a Robot Application Version. 
    */
   createDeploymentJob(params: RoboMaker.Types.CreateDeploymentJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateDeploymentJobResponse) => void): Request<RoboMaker.Types.CreateDeploymentJobResponse, AWSError>;
   /**
-   * Creates a deployment job.
+   * Deploys a specific version of a robot application to robots in a fleet. The robot application must have a numbered applicationVersion for consistency reasons. To create a new version, use CreateRobotApplicationVersion or see Creating a Robot Application Version. 
    */
   createDeploymentJob(callback?: (err: AWSError, data: RoboMaker.Types.CreateDeploymentJobResponse) => void): Request<RoboMaker.Types.CreateDeploymentJobResponse, AWSError>;
   /**
@@ -228,6 +228,14 @@ declare class RoboMaker extends Service {
    */
   listSimulationJobs(callback?: (err: AWSError, data: RoboMaker.Types.ListSimulationJobsResponse) => void): Request<RoboMaker.Types.ListSimulationJobsResponse, AWSError>;
   /**
+   * Lists all tags on a AWS RoboMaker resource.
+   */
+  listTagsForResource(params: RoboMaker.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListTagsForResourceResponse) => void): Request<RoboMaker.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists all tags on a AWS RoboMaker resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: RoboMaker.Types.ListTagsForResourceResponse) => void): Request<RoboMaker.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Registers a robot with a fleet.
    */
   registerRobot(params: RoboMaker.Types.RegisterRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.RegisterRobotResponse) => void): Request<RoboMaker.Types.RegisterRobotResponse, AWSError>;
@@ -251,6 +259,22 @@ declare class RoboMaker extends Service {
    * Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.
    */
   syncDeploymentJob(callback?: (err: AWSError, data: RoboMaker.Types.SyncDeploymentJobResponse) => void): Request<RoboMaker.Types.SyncDeploymentJobResponse, AWSError>;
+  /**
+   * Adds or edits tags for a AWS RoboMaker resource. Each tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty strings.  For information about the rules that apply to tag keys and tag values, see User-Defined Tag Restrictions in the AWS Billing and Cost Management User Guide. 
+   */
+  tagResource(params: RoboMaker.Types.TagResourceRequest, callback?: (err: AWSError, data: RoboMaker.Types.TagResourceResponse) => void): Request<RoboMaker.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds or edits tags for a AWS RoboMaker resource. Each tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty strings.  For information about the rules that apply to tag keys and tag values, see User-Defined Tag Restrictions in the AWS Billing and Cost Management User Guide. 
+   */
+  tagResource(callback?: (err: AWSError, data: RoboMaker.Types.TagResourceResponse) => void): Request<RoboMaker.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes the specified tags from the specified AWS RoboMaker resource. To remove a tag, specify the tag key. To change the tag value of an existing tag key, use  TagResource . 
+   */
+  untagResource(params: RoboMaker.Types.UntagResourceRequest, callback?: (err: AWSError, data: RoboMaker.Types.UntagResourceResponse) => void): Request<RoboMaker.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes the specified tags from the specified AWS RoboMaker resource. To remove a tag, specify the tag key. To change the tag value of an existing tag key, use  TagResource . 
+   */
+  untagResource(callback?: (err: AWSError, data: RoboMaker.Types.UntagResourceResponse) => void): Request<RoboMaker.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates a robot application.
    */
@@ -315,6 +339,10 @@ declare namespace RoboMaker {
      * The deployment application configuration.
      */
     deploymentApplicationConfigs: DeploymentApplicationConfigs;
+    /**
+     * A map that contains tag keys and tag values that are attached to the deployment job.
+     */
+    tags?: TagMap;
   }
   export interface CreateDeploymentJobResponse {
     /**
@@ -338,7 +366,7 @@ declare namespace RoboMaker {
      */
     failureReason?: GenericString;
     /**
-     * The failure code of the deployment job if it failed.
+     * The failure code of the simulation job if it failed:  BadPermissionError  AWS Greengrass requires a service-level role permission to access other services. The role must include the  AWSGreengrassResourceAccessRolePolicy managed policy.   ExtractingBundleFailure  The robot application could not be extracted from the bundle.  FailureThresholdBreached  The percentage of robots that could not be updated exceeded the percentage set for the deployment.  GreengrassDeploymentFailed  The robot application could not be deployed to the robot.  GreengrassGroupVersionDoesNotExist  The AWS Greengrass group or version associated with a robot is missing.  InternalServerError  An internal error has occurred. Retry your request, but if the problem persists, contact us with details.  MissingRobotApplicationArchitecture  The robot application does not have a source that matches the architecture of the robot.  MissingRobotDeploymentResource  One or more of the resources specified for the robot application are missing. For example, does the robot application have the correct launch package and launch file?  PostLaunchFileFailure  The post-launch script failed.  PreLaunchFileFailure  The pre-launch script failed.  ResourceNotFound  One or more deployment resources are missing. For example, do robot application source bundles still exist?   RobotDeploymentNoResponse  There is no response from the robot. It might not be powered on or connected to the internet.  
      */
     failureCode?: DeploymentJobErrorCode;
     /**
@@ -349,12 +377,20 @@ declare namespace RoboMaker {
      * The deployment configuration.
      */
     deploymentConfig?: DeploymentConfig;
+    /**
+     * The list of all tags added to the deployment job.
+     */
+    tags?: TagMap;
   }
   export interface CreateFleetRequest {
     /**
      * The name of the fleet.
      */
     name: Name;
+    /**
+     * A map that contains tag keys and tag values that are attached to the fleet.
+     */
+    tags?: TagMap;
   }
   export interface CreateFleetResponse {
     /**
@@ -369,6 +405,10 @@ declare namespace RoboMaker {
      * The time, in milliseconds since the epoch, when the fleet was created.
      */
     createdAt?: CreatedAt;
+    /**
+     * The list of all tags added to the fleet.
+     */
+    tags?: TagMap;
   }
   export interface CreateRobotApplicationRequest {
     /**
@@ -383,6 +423,10 @@ declare namespace RoboMaker {
      * The robot software suite used by the robot application.
      */
     robotSoftwareSuite: RobotSoftwareSuite;
+    /**
+     * A map that contains tag keys and tag values that are attached to the robot application.
+     */
+    tags?: TagMap;
   }
   export interface CreateRobotApplicationResponse {
     /**
@@ -413,6 +457,10 @@ declare namespace RoboMaker {
      * The revision id of the robot application.
      */
     revisionId?: RevisionId;
+    /**
+     * The list of all tags added to the robot application.
+     */
+    tags?: TagMap;
   }
   export interface CreateRobotApplicationVersionRequest {
     /**
@@ -467,6 +515,10 @@ declare namespace RoboMaker {
      * The Greengrass group id.
      */
     greengrassGroupId: Id;
+    /**
+     * A map that contains tag keys and tag values that are attached to the robot.
+     */
+    tags?: TagMap;
   }
   export interface CreateRobotResponse {
     /**
@@ -489,6 +541,10 @@ declare namespace RoboMaker {
      * The target architecture of the robot.
      */
     architecture?: Architecture;
+    /**
+     * The list of all tags added to the robot.
+     */
+    tags?: TagMap;
   }
   export interface CreateSimulationApplicationRequest {
     /**
@@ -511,6 +567,10 @@ declare namespace RoboMaker {
      * The rendering engine for the simulation application.
      */
     renderingEngine: RenderingEngine;
+    /**
+     * A map that contains tag keys and tag values that are attached to the simulation application.
+     */
+    tags?: TagMap;
   }
   export interface CreateSimulationApplicationResponse {
     /**
@@ -549,6 +609,10 @@ declare namespace RoboMaker {
      * The revision id of the simulation application.
      */
     revisionId?: RevisionId;
+    /**
+     * The list of all tags added to the simulation application.
+     */
+    tags?: TagMap;
   }
   export interface CreateSimulationApplicationVersionRequest {
     /**
@@ -612,7 +676,7 @@ declare namespace RoboMaker {
      */
     maxJobDurationInSeconds: JobDuration;
     /**
-     * The IAM role that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. See how to specify AWS security credentials for your application. 
+     * The IAM role name that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. 
      */
     iamRole: IamRole;
     /**
@@ -627,6 +691,10 @@ declare namespace RoboMaker {
      * The simulation application to use in the simulation job.
      */
     simulationApplications?: SimulationApplicationConfigs;
+    /**
+     * A map that contains tag keys and tag values that are attached to the simulation job.
+     */
+    tags?: TagMap;
     /**
      * If your simulation job accesses resources in a VPC, you provide this parameter identifying the list of security group IDs and subnet IDs. These must belong to the same VPC. You must provide at least one security group and one subnet ID. 
      */
@@ -650,7 +718,7 @@ declare namespace RoboMaker {
      */
     failureBehavior?: FailureBehavior;
     /**
-     * The failure code of the simulation job if it failed.
+     * The failure code of the simulation job if it failed:  InternalServiceError  Internal service error.  RobotApplicationCrash  Robot application exited abnormally.  SimulationApplicationCrash   Simulation application exited abnormally.  BadPermissionsRobotApplication  Robot application bundle could not be downloaded.  BadPermissionsSimulationApplication  Simulation application bundle could not be downloaded.  BadPermissionsS3Output  Unable to publish outputs to customer-provided S3 bucket.  BadPermissionsCloudwatchLogs  Unable to publish logs to customer-provided CloudWatch Logs resource.  SubnetIpLimitExceeded  Subnet IP limit exceeded.  ENILimitExceeded  ENI limit exceeded.  BadPermissionsUserCredentials  Unable to use the Role provided.  InvalidBundleRobotApplication  Robot bundle cannot be extracted (invalid format, bundling error, or other issue).  InvalidBundleSimulationApplication  Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).  RobotApplicationVersionMismatchedEtag  Etag for RobotApplication does not match value during version creation.  SimulationApplicationVersionMismatchedEtag  Etag for SimulationApplication does not match value during version creation.  
      */
     failureCode?: SimulationJobErrorCode;
     /**
@@ -681,6 +749,10 @@ declare namespace RoboMaker {
      * The simulation application used by the simulation job.
      */
     simulationApplications?: SimulationApplicationConfigs;
+    /**
+     * The list of all tags added to the simulation job.
+     */
+    tags?: TagMap;
     /**
      * Information about the vpc configuration.
      */
@@ -729,15 +801,15 @@ declare namespace RoboMaker {
   }
   export interface DeploymentApplicationConfig {
     /**
-     * The application.
+     * The Amazon Resource Name (ARN) of the robot application.
      */
     application: Arn;
     /**
      * The version of the application.
      */
-    applicationVersion: Version;
+    applicationVersion: DeploymentVersion;
     /**
-     * The launch configuration, usually roslaunch.
+     * The launch configuration.
      */
     launchConfig: DeploymentLaunchConfig;
   }
@@ -794,23 +866,24 @@ declare namespace RoboMaker {
      */
     packageName: GenericString;
     /**
-     * The deployment pre-launch file. This file will be executed prior to the deployment launch file.
+     * The deployment pre-launch file. This file will be executed prior to the launch file.
      */
     preLaunchFile?: GenericString;
     /**
-     * The deployment launch file.
+     * The launch file name.
      */
     launchFile: GenericString;
     /**
-     * The deployment post-launch file. This file will be executed after the deployment launch file.
+     * The deployment post-launch file. This file will be executed after the launch file.
      */
     postLaunchFile?: GenericString;
     /**
-     * An array of key/value pairs specifying environment variables for the deployment application.
+     * An array of key/value pairs specifying environment variables for the robot application
      */
     environmentVariables?: EnvironmentVariableMap;
   }
   export type DeploymentStatus = "Pending"|"Preparing"|"InProgress"|"Failed"|"Succeeded"|string;
+  export type DeploymentVersion = string;
   export interface DeregisterRobotRequest {
     /**
      * The Amazon Resource Name (ARN) of the fleet.
@@ -874,6 +947,10 @@ declare namespace RoboMaker {
      * A list of robot deployment summaries.
      */
     robotDeploymentSummary?: RobotDeploymentSummary;
+    /**
+     * The list of all tags added to the specified deployment job.
+     */
+    tags?: TagMap;
   }
   export interface DescribeFleetRequest {
     /**
@@ -910,6 +987,10 @@ declare namespace RoboMaker {
      * The time of the last deployment.
      */
     lastDeploymentTime?: CreatedAt;
+    /**
+     * The list of all tags added to the specified fleet.
+     */
+    tags?: TagMap;
   }
   export interface DescribeRobotApplicationRequest {
     /**
@@ -950,6 +1031,10 @@ declare namespace RoboMaker {
      * The time, in milliseconds since the epoch, when the robot application was last updated.
      */
     lastUpdatedAt?: LastUpdatedAt;
+    /**
+     * The list of all tags added to the specified robot application.
+     */
+    tags?: TagMap;
   }
   export interface DescribeRobotRequest {
     /**
@@ -994,6 +1079,10 @@ declare namespace RoboMaker {
      * The time of the last deployment job.
      */
     lastDeploymentTime?: CreatedAt;
+    /**
+     * The list of all tags added to the specified robot.
+     */
+    tags?: TagMap;
   }
   export interface DescribeSimulationApplicationRequest {
     /**
@@ -1042,6 +1131,10 @@ declare namespace RoboMaker {
      * The time, in milliseconds since the epoch, when the simulation application was last updated.
      */
     lastUpdatedAt?: LastUpdatedAt;
+    /**
+     * The list of all tags added to the specified simulation application.
+     */
+    tags?: TagMap;
   }
   export interface DescribeSimulationJobRequest {
     /**
@@ -1071,9 +1164,13 @@ declare namespace RoboMaker {
      */
     failureBehavior?: FailureBehavior;
     /**
-     * The failure code of the simulation job if it failed:  InternalServiceError  Internal service error  RobotApplicationCrash  Robot application exited abnormally (segfault, etc.)  SimulationApplicationCrash   Simulation application exited abnormally (segfault, etc.)  BadPermissionsRobotApplication  Robot application bundle could not be downloaded  BadPermissionsSimulationApplication  Simulation application bundle could not be downloaded  BadPermissionsS3Output  Unable to publish outputs to customer-provided S3 bucket  BadPermissionsCloudwatchLogs  Unable to publish logs to customer-provided CloudWatch Logs resource  SubnetIpLimitExceeded  Subnet IP limit exceeded  ENILimitExceeded  ENI limit exceeded  BadPermissionsUserCredentials  Unable to use the Role provided  InvalidBundleRobotApplication  Robot bundle cannot be extracted (invalid format, bundling error, etc.)  InvalidBundleSimulationApplication  Simulation bundle cannot be extracted (invalid format, bundling error, etc.)  RobotApplicationVersionMismatchedEtag  Etag for RobotApplication does not match value during version creation  SimulationApplicationVersionMismatchedEtag  Etag for SimulationApplication does not match value during version creation  
+     * The failure code of the simulation job if it failed:  InternalServiceError  Internal service error.  RobotApplicationCrash  Robot application exited abnormally.  SimulationApplicationCrash   Simulation application exited abnormally.  BadPermissionsRobotApplication  Robot application bundle could not be downloaded.  BadPermissionsSimulationApplication  Simulation application bundle could not be downloaded.  BadPermissionsS3Output  Unable to publish outputs to customer-provided S3 bucket.  BadPermissionsCloudwatchLogs  Unable to publish logs to customer-provided CloudWatch Logs resource.  SubnetIpLimitExceeded  Subnet IP limit exceeded.  ENILimitExceeded  ENI limit exceeded.  BadPermissionsUserCredentials  Unable to use the Role provided.  InvalidBundleRobotApplication  Robot bundle cannot be extracted (invalid format, bundling error, or other issue).  InvalidBundleSimulationApplication  Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).  RobotApplicationVersionMismatchedEtag  Etag for RobotApplication does not match value during version creation.  SimulationApplicationVersionMismatchedEtag  Etag for SimulationApplication does not match value during version creation.  
      */
     failureCode?: SimulationJobErrorCode;
+    /**
+     * Details about why the simulation job failed. For more information about troubleshooting, see Troubleshooting.
+     */
+    failureReason?: GenericString;
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
@@ -1102,6 +1199,10 @@ declare namespace RoboMaker {
      * A list of simulation applications.
      */
     simulationApplications?: SimulationApplicationConfigs;
+    /**
+     * The list of all tags added to the specified simulation job.
+     */
+    tags?: TagMap;
     /**
      * The VPC configuration.
      */
@@ -1161,7 +1262,7 @@ declare namespace RoboMaker {
      */
     packageName: GenericString;
     /**
-     * The launch file.
+     * The launch file name.
      */
     launchFile: GenericString;
     /**
@@ -1320,6 +1421,18 @@ declare namespace RoboMaker {
      * The nextToken value to include in a future ListSimulationJobs request. When the results of a ListRobot request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     nextToken?: PaginationToken;
+  }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The AWS RoboMaker Amazon Resource Name (ARN) with tags to be listed.
+     */
+    resourceArn: Arn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The list of all tags added to the specified resource.
+     */
+    tags?: TagMap;
   }
   export type MaxResults = number;
   export type Name = string;
@@ -1569,6 +1682,10 @@ declare namespace RoboMaker {
      */
     failureCode?: SimulationJobErrorCode;
     /**
+     * The reason why the simulation job failed.
+     */
+    failureReason?: GenericString;
+    /**
      * A unique identifier for this SimulationJob request.
      */
     clientRequestToken?: ClientRequestToken;
@@ -1597,11 +1714,15 @@ declare namespace RoboMaker {
      */
     simulationApplications?: SimulationApplicationConfigs;
     /**
+     * A map that contains tag keys and tag values that are attached to the simulation job.
+     */
+    tags?: TagMap;
+    /**
      * VPC configuration information.
      */
     vpcConfig?: VPCConfigResponse;
   }
-  export type SimulationJobErrorCode = "InternalServiceError"|"RobotApplicationCrash"|"SimulationApplicationCrash"|"BadPermissionsRobotApplication"|"BadPermissionsSimulationApplication"|"BadPermissionsS3Output"|"BadPermissionsCloudwatchLogs"|"SubnetIpLimitExceeded"|"ENILimitExceeded"|"BadPermissionsUserCredentials"|"InvalidBundleRobotApplication"|"InvalidBundleSimulationApplication"|"RobotApplicationVersionMismatchedEtag"|"SimulationApplicationVersionMismatchedEtag"|string;
+  export type SimulationJobErrorCode = "InternalServiceError"|"RobotApplicationCrash"|"SimulationApplicationCrash"|"BadPermissionsRobotApplication"|"BadPermissionsSimulationApplication"|"BadPermissionsS3Output"|"BadPermissionsCloudwatchLogs"|"SubnetIpLimitExceeded"|"ENILimitExceeded"|"BadPermissionsUserCredentials"|"InvalidBundleRobotApplication"|"InvalidBundleSimulationApplication"|"RobotApplicationVersionMismatchedEtag"|"SimulationApplicationVersionMismatchedEtag"|"WrongRegionS3Output"|"WrongRegionRobotApplication"|"WrongRegionSimulationApplication"|string;
   export type SimulationJobStatus = "Pending"|"Preparing"|"Running"|"Restarting"|"Completed"|"Failed"|"RunningFailed"|"Terminating"|"Terminated"|"Canceled"|string;
   export type SimulationJobSummaries = SimulationJobSummary[];
   export interface SimulationJobSummary {
@@ -1715,13 +1836,41 @@ declare namespace RoboMaker {
      */
     failureReason?: GenericString;
     /**
-     * The failure code if the job fails.
+     * The failure code if the job fails:  InternalServiceError  Internal service error.  RobotApplicationCrash  Robot application exited abnormally.  SimulationApplicationCrash   Simulation application exited abnormally.  BadPermissionsRobotApplication  Robot application bundle could not be downloaded.  BadPermissionsSimulationApplication  Simulation application bundle could not be downloaded.  BadPermissionsS3Output  Unable to publish outputs to customer-provided S3 bucket.  BadPermissionsCloudwatchLogs  Unable to publish logs to customer-provided CloudWatch Logs resource.  SubnetIpLimitExceeded  Subnet IP limit exceeded.  ENILimitExceeded  ENI limit exceeded.  BadPermissionsUserCredentials  Unable to use the Role provided.  InvalidBundleRobotApplication  Robot bundle cannot be extracted (invalid format, bundling error, or other issue).  InvalidBundleSimulationApplication  Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).  RobotApplicationVersionMismatchedEtag  Etag for RobotApplication does not match value during version creation.  SimulationApplicationVersionMismatchedEtag  Etag for SimulationApplication does not match value during version creation.  
      */
     failureCode?: DeploymentJobErrorCode;
     /**
      * The time, in milliseconds since the epoch, when the fleet was created.
      */
     createdAt?: CreatedAt;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are tagging.
+     */
+    resourceArn: Arn;
+    /**
+     * A map that contains tag keys and tag values that are attached to the resource.
+     */
+    tags: TagMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are removing tags.
+     */
+    resourceArn: Arn;
+    /**
+     * A map that contains tag keys and tag values that will be unattached from the resource.
+     */
+    tagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
   }
   export interface UpdateRobotApplicationRequest {
     /**

@@ -44,6 +44,14 @@ declare class MediaLive extends Service {
    */
   createInputSecurityGroup(callback?: (err: AWSError, data: MediaLive.Types.CreateInputSecurityGroupResponse) => void): Request<MediaLive.Types.CreateInputSecurityGroupResponse, AWSError>;
   /**
+   * Create tags for a resource
+   */
+  createTags(params: MediaLive.Types.CreateTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Create tags for a resource
+   */
+  createTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Starts deletion of channel. The associated outputs are also deleted.
    */
   deleteChannel(params: MediaLive.Types.DeleteChannelRequest, callback?: (err: AWSError, data: MediaLive.Types.DeleteChannelResponse) => void): Request<MediaLive.Types.DeleteChannelResponse, AWSError>;
@@ -75,6 +83,14 @@ declare class MediaLive extends Service {
    * Delete an expired reservation.
    */
   deleteReservation(callback?: (err: AWSError, data: MediaLive.Types.DeleteReservationResponse) => void): Request<MediaLive.Types.DeleteReservationResponse, AWSError>;
+  /**
+   * Removes tags for a resource
+   */
+  deleteTags(params: MediaLive.Types.DeleteTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes tags for a resource
+   */
+  deleteTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Gets details about a channel
    */
@@ -163,6 +179,14 @@ declare class MediaLive extends Service {
    * List purchased reservations.
    */
   listReservations(callback?: (err: AWSError, data: MediaLive.Types.ListReservationsResponse) => void): Request<MediaLive.Types.ListReservationsResponse, AWSError>;
+  /**
+   * Produces list of tags that have been created for a resource
+   */
+  listTagsForResource(params: MediaLive.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaLive.Types.ListTagsForResourceResponse) => void): Request<MediaLive.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Produces list of tags that have been created for a resource
+   */
+  listTagsForResource(callback?: (err: AWSError, data: MediaLive.Types.ListTagsForResourceResponse) => void): Request<MediaLive.Types.ListTagsForResourceResponse, AWSError>;
   /**
    * Purchase an offering and create a reservation.
    */
@@ -751,6 +775,10 @@ one destination per packager.
      */
     RoleArn?: __string;
     State?: ChannelState;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
   }
   export interface ChannelEgressEndpoint {
     /**
@@ -835,6 +863,10 @@ creating multiple resources.
      * An optional Amazon Resource Name (ARN) of the role to assume when running the Channel.
      */
     RoleArn?: __string;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
   }
   export interface CreateChannelResponse {
     Channel?: Channel;
@@ -876,6 +908,10 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
 
      */
     Sources?: __listOfInputSourceRequest;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
     Type?: InputType;
   }
   export interface CreateInputResponse {
@@ -883,12 +919,20 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   }
   export interface CreateInputSecurityGroupRequest {
     /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
+    /**
      * List of IPv4 CIDR addresses to whitelist
      */
     WhitelistRules?: __listOfInputWhitelistRuleCidr;
   }
   export interface CreateInputSecurityGroupResponse {
     SecurityGroup?: InputSecurityGroup;
+  }
+  export interface CreateTagsRequest {
+    ResourceArn: __string;
+    Tags?: Tags;
   }
   export interface DeleteChannelRequest {
     /**
@@ -939,6 +983,10 @@ one destination per packager.
      */
     RoleArn?: __string;
     State?: ChannelState;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
   }
   export interface DeleteInputRequest {
     /**
@@ -1032,6 +1080,13 @@ one destination per packager.
      */
     UsagePrice?: __double;
   }
+  export interface DeleteTagsRequest {
+    ResourceArn: __string;
+    /**
+     * An array of tag keys to delete
+     */
+    TagKeys: __listOf__string;
+  }
   export interface DescribeChannelRequest {
     /**
      * channel ID
@@ -1081,6 +1136,10 @@ one destination per packager.
      */
     RoleArn?: __string;
     State?: ChannelState;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
   }
   export interface DescribeInputRequest {
     /**
@@ -1126,6 +1185,10 @@ one destination per packager.
      */
     Sources?: __listOfInputSource;
     State?: InputState;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
     Type?: InputType;
   }
   export interface DescribeInputSecurityGroupRequest {
@@ -1151,6 +1214,10 @@ one destination per packager.
      * The current state of the Input Security Group.
      */
     State?: InputSecurityGroupState;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
     /**
      * Whitelist rules and their sync status
      */
@@ -2192,6 +2259,10 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
      */
     Sources?: __listOfInputSource;
     State?: InputState;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
     Type?: InputType;
   }
   export interface InputAttachment {
@@ -2308,6 +2379,10 @@ to.
      * The current state of the Input Security Group.
      */
     State?: InputSecurityGroupState;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
     /**
      * Whitelist rules and their sync status
      */
@@ -2546,6 +2621,12 @@ pulled from.
      * List of reservations
      */
     Reservations?: __listOfReservation;
+  }
+  export interface ListTagsForResourceRequest {
+    ResourceArn: __string;
+  }
+  export interface ListTagsForResourceResponse {
+    Tags?: Tags;
   }
   export type LogLevel = "ERROR"|"WARNING"|"INFO"|"DEBUG"|"DISABLED"|string;
   export type M2tsAbsentInputAudioBehavior = "DROP"|"ENCODE_SILENCE"|string;
@@ -3567,6 +3648,10 @@ one destination per packager.
      */
     RoleArn?: __string;
     State?: ChannelState;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
   }
   export interface StaticImageActivateScheduleActionSettings {
     /**
@@ -3679,7 +3764,12 @@ one destination per packager.
      */
     RoleArn?: __string;
     State?: ChannelState;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
   }
+  export type Tags = {[key: string]: __string};
   export interface TeletextDestinationSettings {
   }
   export interface TeletextSourceSettings {
@@ -3820,6 +3910,10 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
      * The id of the Input Security Group to update.
      */
     InputSecurityGroupId: __string;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
     /**
      * List of IPv4 CIDR addresses to whitelist
      */

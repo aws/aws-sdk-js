@@ -511,6 +511,10 @@ declare namespace ES {
      */
     ZoneAwarenessEnabled?: Boolean;
     /**
+     * Specifies the zone awareness configuration for a domain when zone awareness is enabled.
+     */
+    ZoneAwarenessConfig?: ZoneAwarenessConfig;
+    /**
      * The instance type for a dedicated master node.
      */
     DedicatedMasterType?: ESPartitionInstanceType;
@@ -1269,6 +1273,12 @@ declare namespace ES {
     SecurityGroupIds?: StringList;
   }
   export type VolumeType = "standard"|"gp2"|"io1"|string;
+  export interface ZoneAwarenessConfig {
+    /**
+     * An integer value to indicate the number of availability zones for a domain when zone awareness is enabled. This should be equal to number of subnets if VPC endpoints is enabled
+     */
+    AvailabilityZoneCount?: IntegerClass;
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

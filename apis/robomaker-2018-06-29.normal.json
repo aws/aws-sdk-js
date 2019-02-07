@@ -104,7 +104,7 @@
           "shape": "IdempotentParameterMismatchException"
         }
       ],
-      "documentation": "<p>Creates a deployment job.</p>"
+      "documentation": "<p>Deploys a specific version of a robot application to robots in a fleet.</p> <p>The robot application must have a numbered <code>applicationVersion</code> for consistency reasons. To create a new version, use <code>CreateRobotApplicationVersion</code> or see <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html\">Creating a Robot Application Version</a>. </p>"
     },
     "CreateFleet": {
       "name": "CreateFleet",
@@ -784,6 +784,34 @@
       ],
       "documentation": "<p>Returns a list of simulation jobs. You can optionally provide filters to retrieve specific simulation jobs.</p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Lists all tags on a AWS RoboMaker resource.</p>"
+    },
     "RegisterRobot": {
       "name": "RegisterRobot",
       "http": {
@@ -882,6 +910,62 @@
         }
       ],
       "documentation": "<p>Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/tags/{resourceArn}"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Adds or edits tags for a AWS RoboMaker resource.</p> <p>Each tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty strings. </p> <p>For information about the rules that apply to tag keys and tag values, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html\">User-Defined Tag Restrictions</a> in the <i>AWS Billing and Cost Management User Guide</i>. </p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Removes the specified tags from the specified AWS RoboMaker resource.</p> <p>To remove a tag, specify the tag key. To change the tag value of an existing tag key, use <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg//API_Reference.htmlAPI_TagResource.html\"> <code>TagResource</code> </a>. </p>"
     },
     "UpdateRobotApplication": {
       "name": "UpdateRobotApplication",
@@ -1043,6 +1127,10 @@
         "deploymentApplicationConfigs": {
           "shape": "DeploymentApplicationConfigs",
           "documentation": "<p>The deployment application configuration.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the deployment job.</p>"
         }
       }
     },
@@ -1071,7 +1159,7 @@
         },
         "failureCode": {
           "shape": "DeploymentJobErrorCode",
-          "documentation": "<p>The failure code of the deployment job if it failed.</p>"
+          "documentation": "<p>The failure code of the simulation job if it failed:</p> <dl> <dt>BadPermissionError</dt> <dd> <p>AWS Greengrass requires a service-level role permission to access other services. The role must include the <a href=\"https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy$jsonEditor\"> <code>AWSGreengrassResourceAccessRolePolicy</code> managed policy</a>. </p> </dd> <dt>ExtractingBundleFailure</dt> <dd> <p>The robot application could not be extracted from the bundle.</p> </dd> <dt>FailureThresholdBreached</dt> <dd> <p>The percentage of robots that could not be updated exceeded the percentage set for the deployment.</p> </dd> <dt>GreengrassDeploymentFailed</dt> <dd> <p>The robot application could not be deployed to the robot.</p> </dd> <dt>GreengrassGroupVersionDoesNotExist</dt> <dd> <p>The AWS Greengrass group or version associated with a robot is missing.</p> </dd> <dt>InternalServerError</dt> <dd> <p>An internal error has occurred. Retry your request, but if the problem persists, contact us with details.</p> </dd> <dt>MissingRobotApplicationArchitecture</dt> <dd> <p>The robot application does not have a source that matches the architecture of the robot.</p> </dd> <dt>MissingRobotDeploymentResource</dt> <dd> <p>One or more of the resources specified for the robot application are missing. For example, does the robot application have the correct launch package and launch file?</p> </dd> <dt>PostLaunchFileFailure</dt> <dd> <p>The post-launch script failed.</p> </dd> <dt>PreLaunchFileFailure</dt> <dd> <p>The pre-launch script failed.</p> </dd> <dt>ResourceNotFound</dt> <dd> <p>One or more deployment resources are missing. For example, do robot application source bundles still exist? </p> </dd> <dt>RobotDeploymentNoResponse</dt> <dd> <p>There is no response from the robot. It might not be powered on or connected to the internet.</p> </dd> </dl>"
         },
         "createdAt": {
           "shape": "CreatedAt",
@@ -1080,6 +1168,10 @@
         "deploymentConfig": {
           "shape": "DeploymentConfig",
           "documentation": "<p>The deployment configuration.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The list of all tags added to the deployment job.</p>"
         }
       }
     },
@@ -1092,6 +1184,10 @@
         "name": {
           "shape": "Name",
           "documentation": "<p>The name of the fleet.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the fleet.</p>"
         }
       }
     },
@@ -1109,6 +1205,10 @@
         "createdAt": {
           "shape": "CreatedAt",
           "documentation": "<p>The time, in milliseconds since the epoch, when the fleet was created.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The list of all tags added to the fleet.</p>"
         }
       }
     },
@@ -1131,6 +1231,10 @@
         "robotSoftwareSuite": {
           "shape": "RobotSoftwareSuite",
           "documentation": "<p>The robot software suite used by the robot application.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the robot application.</p>"
         }
       }
     },
@@ -1164,6 +1268,10 @@
         "revisionId": {
           "shape": "RevisionId",
           "documentation": "<p>The revision id of the robot application.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The list of all tags added to the robot application.</p>"
         }
       }
     },
@@ -1235,6 +1343,10 @@
         "greengrassGroupId": {
           "shape": "Id",
           "documentation": "<p>The Greengrass group id.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the robot.</p>"
         }
       }
     },
@@ -1260,6 +1372,10 @@
         "architecture": {
           "shape": "Architecture",
           "documentation": "<p>The target architecture of the robot.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The list of all tags added to the robot.</p>"
         }
       }
     },
@@ -1292,6 +1408,10 @@
         "renderingEngine": {
           "shape": "RenderingEngine",
           "documentation": "<p>The rendering engine for the simulation application.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the simulation application.</p>"
         }
       }
     },
@@ -1333,6 +1453,10 @@
         "revisionId": {
           "shape": "RevisionId",
           "documentation": "<p>The revision id of the simulation application.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The list of all tags added to the simulation application.</p>"
         }
       }
     },
@@ -1415,7 +1539,7 @@
         },
         "iamRole": {
           "shape": "IamRole",
-          "documentation": "<p>The IAM role that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. See how to <a href=\"https://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/deployment-ecs-specify-credentials\">specify AWS security credentials for your application</a>. </p>"
+          "documentation": "<p>The IAM role name that allows the simulation instance to call the AWS APIs that are specified in its associated policies on your behalf. This is how credentials are passed in to your simulation job. </p>"
         },
         "failureBehavior": {
           "shape": "FailureBehavior",
@@ -1428,6 +1552,10 @@
         "simulationApplications": {
           "shape": "SimulationApplicationConfigs",
           "documentation": "<p>The simulation application to use in the simulation job.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the simulation job.</p>"
         },
         "vpcConfig": {
           "shape": "VPCConfig",
@@ -1456,7 +1584,7 @@
         },
         "failureCode": {
           "shape": "SimulationJobErrorCode",
-          "documentation": "<p>The failure code of the simulation job if it failed.</p>"
+          "documentation": "<p>The failure code of the simulation job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>RobotApplicationCrash</dt> <dd> <p>Robot application exited abnormally.</p> </dd> <dt>SimulationApplicationCrash</dt> <dd> <p> Simulation application exited abnormally.</p> </dd> <dt>BadPermissionsRobotApplication</dt> <dd> <p>Robot application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsSimulationApplication</dt> <dd> <p>Simulation application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsS3Output</dt> <dd> <p>Unable to publish outputs to customer-provided S3 bucket.</p> </dd> <dt>BadPermissionsCloudwatchLogs</dt> <dd> <p>Unable to publish logs to customer-provided CloudWatch Logs resource.</p> </dd> <dt>SubnetIpLimitExceeded</dt> <dd> <p>Subnet IP limit exceeded.</p> </dd> <dt>ENILimitExceeded</dt> <dd> <p>ENI limit exceeded.</p> </dd> <dt>BadPermissionsUserCredentials</dt> <dd> <p>Unable to use the Role provided.</p> </dd> <dt>InvalidBundleRobotApplication</dt> <dd> <p>Robot bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>InvalidBundleSimulationApplication</dt> <dd> <p>Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>RobotApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for RobotApplication does not match value during version creation.</p> </dd> <dt>SimulationApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for SimulationApplication does not match value during version creation.</p> </dd> </dl>"
         },
         "clientRequestToken": {
           "shape": "ClientRequestToken",
@@ -1485,6 +1613,10 @@
         "simulationApplications": {
           "shape": "SimulationApplicationConfigs",
           "documentation": "<p>The simulation application used by the simulation job.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The list of all tags added to the simulation job.</p>"
         },
         "vpcConfig": {
           "shape": "VPCConfigResponse",
@@ -1577,15 +1709,15 @@
       "members": {
         "application": {
           "shape": "Arn",
-          "documentation": "<p>The application.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the robot application.</p>"
         },
         "applicationVersion": {
-          "shape": "Version",
+          "shape": "DeploymentVersion",
           "documentation": "<p>The version of the application.</p>"
         },
         "launchConfig": {
           "shape": "DeploymentLaunchConfig",
-          "documentation": "<p>The launch configuration, usually <code>roslaunch</code>.</p>"
+          "documentation": "<p>The launch configuration.</p>"
         }
       },
       "documentation": "<p>Information about a deployment application configuration.</p>"
@@ -1689,19 +1821,19 @@
         },
         "preLaunchFile": {
           "shape": "GenericString",
-          "documentation": "<p>The deployment pre-launch file. This file will be executed prior to the deployment launch file.</p>"
+          "documentation": "<p>The deployment pre-launch file. This file will be executed prior to the launch file.</p>"
         },
         "launchFile": {
           "shape": "GenericString",
-          "documentation": "<p>The deployment launch file.</p>"
+          "documentation": "<p>The launch file name.</p>"
         },
         "postLaunchFile": {
           "shape": "GenericString",
-          "documentation": "<p>The deployment post-launch file. This file will be executed after the deployment launch file.</p>"
+          "documentation": "<p>The deployment post-launch file. This file will be executed after the launch file.</p>"
         },
         "environmentVariables": {
           "shape": "EnvironmentVariableMap",
-          "documentation": "<p>An array of key/value pairs specifying environment variables for the deployment application.</p>"
+          "documentation": "<p>An array of key/value pairs specifying environment variables for the robot application</p>"
         }
       },
       "documentation": "<p>Configuration information for a deployment launch.</p>"
@@ -1715,6 +1847,12 @@
         "Failed",
         "Succeeded"
       ]
+    },
+    "DeploymentVersion": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "[0-9]*"
     },
     "DeregisterRobotRequest": {
       "type": "structure",
@@ -1796,6 +1934,10 @@
         "robotDeploymentSummary": {
           "shape": "RobotDeploymentSummary",
           "documentation": "<p>A list of robot deployment summaries.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The list of all tags added to the specified deployment job.</p>"
         }
       }
     },
@@ -1841,6 +1983,10 @@
         "lastDeploymentTime": {
           "shape": "CreatedAt",
           "documentation": "<p>The time of the last deployment.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The list of all tags added to the specified fleet.</p>"
         }
       }
     },
@@ -1890,6 +2036,10 @@
         "lastUpdatedAt": {
           "shape": "LastUpdatedAt",
           "documentation": "<p>The time, in milliseconds since the epoch, when the robot application was last updated.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The list of all tags added to the specified robot application.</p>"
         }
       }
     },
@@ -1943,6 +2093,10 @@
         "lastDeploymentTime": {
           "shape": "CreatedAt",
           "documentation": "<p>The time of the last deployment job.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The list of all tags added to the specified robot.</p>"
         }
       }
     },
@@ -2000,6 +2154,10 @@
         "lastUpdatedAt": {
           "shape": "LastUpdatedAt",
           "documentation": "<p>The time, in milliseconds since the epoch, when the simulation application was last updated.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The list of all tags added to the specified simulation application.</p>"
         }
       }
     },
@@ -2040,7 +2198,11 @@
         },
         "failureCode": {
           "shape": "SimulationJobErrorCode",
-          "documentation": "<p>The failure code of the simulation job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error</p> </dd> <dt>RobotApplicationCrash</dt> <dd> <p>Robot application exited abnormally (segfault, etc.)</p> </dd> <dt>SimulationApplicationCrash</dt> <dd> <p> Simulation application exited abnormally (segfault, etc.)</p> </dd> <dt>BadPermissionsRobotApplication</dt> <dd> <p>Robot application bundle could not be downloaded</p> </dd> <dt>BadPermissionsSimulationApplication</dt> <dd> <p>Simulation application bundle could not be downloaded</p> </dd> <dt>BadPermissionsS3Output</dt> <dd> <p>Unable to publish outputs to customer-provided S3 bucket</p> </dd> <dt>BadPermissionsCloudwatchLogs</dt> <dd> <p>Unable to publish logs to customer-provided CloudWatch Logs resource</p> </dd> <dt>SubnetIpLimitExceeded</dt> <dd> <p>Subnet IP limit exceeded</p> </dd> <dt>ENILimitExceeded</dt> <dd> <p>ENI limit exceeded</p> </dd> <dt>BadPermissionsUserCredentials</dt> <dd> <p>Unable to use the Role provided</p> </dd> <dt>InvalidBundleRobotApplication</dt> <dd> <p>Robot bundle cannot be extracted (invalid format, bundling error, etc.)</p> </dd> <dt>InvalidBundleSimulationApplication</dt> <dd> <p>Simulation bundle cannot be extracted (invalid format, bundling error, etc.)</p> </dd> <dt>RobotApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for RobotApplication does not match value during version creation</p> </dd> <dt>SimulationApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for SimulationApplication does not match value during version creation</p> </dd> </dl>"
+          "documentation": "<p>The failure code of the simulation job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>RobotApplicationCrash</dt> <dd> <p>Robot application exited abnormally.</p> </dd> <dt>SimulationApplicationCrash</dt> <dd> <p> Simulation application exited abnormally.</p> </dd> <dt>BadPermissionsRobotApplication</dt> <dd> <p>Robot application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsSimulationApplication</dt> <dd> <p>Simulation application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsS3Output</dt> <dd> <p>Unable to publish outputs to customer-provided S3 bucket.</p> </dd> <dt>BadPermissionsCloudwatchLogs</dt> <dd> <p>Unable to publish logs to customer-provided CloudWatch Logs resource.</p> </dd> <dt>SubnetIpLimitExceeded</dt> <dd> <p>Subnet IP limit exceeded.</p> </dd> <dt>ENILimitExceeded</dt> <dd> <p>ENI limit exceeded.</p> </dd> <dt>BadPermissionsUserCredentials</dt> <dd> <p>Unable to use the Role provided.</p> </dd> <dt>InvalidBundleRobotApplication</dt> <dd> <p>Robot bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>InvalidBundleSimulationApplication</dt> <dd> <p>Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>RobotApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for RobotApplication does not match value during version creation.</p> </dd> <dt>SimulationApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for SimulationApplication does not match value during version creation.</p> </dd> </dl>"
+        },
+        "failureReason": {
+          "shape": "GenericString",
+          "documentation": "<p>Details about why the simulation job failed. For more information about troubleshooting, see <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting.html\">Troubleshooting</a>.</p>"
         },
         "clientRequestToken": {
           "shape": "ClientRequestToken",
@@ -2069,6 +2231,10 @@
         "simulationApplications": {
           "shape": "SimulationApplicationConfigs",
           "documentation": "<p>A list of simulation applications.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The list of all tags added to the specified simulation job.</p>"
         },
         "vpcConfig": {
           "shape": "VPCConfigResponse",
@@ -2206,7 +2372,7 @@
         },
         "launchFile": {
           "shape": "GenericString",
-          "documentation": "<p>The launch file.</p>"
+          "documentation": "<p>The launch file name.</p>"
         },
         "environmentVariables": {
           "shape": "EnvironmentVariableMap",
@@ -2403,6 +2569,29 @@
         "nextToken": {
           "shape": "PaginationToken",
           "documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListSimulationJobs</code> request. When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. </p>"
+        }
+      }
+    },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The AWS RoboMaker Amazon Resource Name (ARN) with tags to be listed.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The list of all tags added to the specified resource.</p>"
         }
       }
     },
@@ -2844,6 +3033,10 @@
           "shape": "SimulationJobErrorCode",
           "documentation": "<p>The failure code of the simulation job if it failed.</p>"
         },
+        "failureReason": {
+          "shape": "GenericString",
+          "documentation": "<p>The reason why the simulation job failed.</p>"
+        },
         "clientRequestToken": {
           "shape": "ClientRequestToken",
           "documentation": "<p>A unique identifier for this <code>SimulationJob</code> request.</p>"
@@ -2872,6 +3065,10 @@
           "shape": "SimulationApplicationConfigs",
           "documentation": "<p>A list of simulation applications.</p>"
         },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the simulation job.</p>"
+        },
         "vpcConfig": {
           "shape": "VPCConfigResponse",
           "documentation": "<p>VPC configuration information.</p>"
@@ -2895,7 +3092,10 @@
         "InvalidBundleRobotApplication",
         "InvalidBundleSimulationApplication",
         "RobotApplicationVersionMismatchedEtag",
-        "SimulationApplicationVersionMismatchedEtag"
+        "SimulationApplicationVersionMismatchedEtag",
+        "WrongRegionS3Output",
+        "WrongRegionRobotApplication",
+        "WrongRegionSimulationApplication"
       ]
     },
     "SimulationJobStatus": {
@@ -3091,13 +3291,90 @@
         },
         "failureCode": {
           "shape": "DeploymentJobErrorCode",
-          "documentation": "<p>The failure code if the job fails.</p>"
+          "documentation": "<p>The failure code if the job fails:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>RobotApplicationCrash</dt> <dd> <p>Robot application exited abnormally.</p> </dd> <dt>SimulationApplicationCrash</dt> <dd> <p> Simulation application exited abnormally.</p> </dd> <dt>BadPermissionsRobotApplication</dt> <dd> <p>Robot application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsSimulationApplication</dt> <dd> <p>Simulation application bundle could not be downloaded.</p> </dd> <dt>BadPermissionsS3Output</dt> <dd> <p>Unable to publish outputs to customer-provided S3 bucket.</p> </dd> <dt>BadPermissionsCloudwatchLogs</dt> <dd> <p>Unable to publish logs to customer-provided CloudWatch Logs resource.</p> </dd> <dt>SubnetIpLimitExceeded</dt> <dd> <p>Subnet IP limit exceeded.</p> </dd> <dt>ENILimitExceeded</dt> <dd> <p>ENI limit exceeded.</p> </dd> <dt>BadPermissionsUserCredentials</dt> <dd> <p>Unable to use the Role provided.</p> </dd> <dt>InvalidBundleRobotApplication</dt> <dd> <p>Robot bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>InvalidBundleSimulationApplication</dt> <dd> <p>Simulation bundle cannot be extracted (invalid format, bundling error, or other issue).</p> </dd> <dt>RobotApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for RobotApplication does not match value during version creation.</p> </dd> <dt>SimulationApplicationVersionMismatchedEtag</dt> <dd> <p>Etag for SimulationApplication does not match value during version creation.</p> </dd> </dl>"
         },
         "createdAt": {
           "shape": "CreatedAt",
           "documentation": "<p>The time, in milliseconds since the epoch, when the fleet was created.</p>"
         }
       }
+    },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9 _.\\-\\/+=:]*"
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      }
+    },
+    "TagMap": {
+      "type": "map",
+      "key": {
+        "shape": "TagKey"
+      },
+      "value": {
+        "shape": "TagValue"
+      },
+      "max": 50,
+      "min": 0
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tags"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are tagging.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the resource.</p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0,
+      "pattern": "[a-zA-Z0-9 _.\\-\\/+=:]*"
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tagKeys"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are removing tags.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "tagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>A map that contains tag keys and tag values that will be unattached from the resource.</p>",
+          "location": "querystring",
+          "locationName": "tagKeys"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateRobotApplicationRequest": {
       "type": "structure",
