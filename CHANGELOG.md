@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.399.0-->
+<!--LATEST=2.400.0-->
 <!--ENTRYINSERT-->
+
+## 2.400.0
+* feature: DLM: This release is to correct the timestamp format to ISO8601 for the DateCreated and DateModified files in the GetLifecyclePolicy response object.
+* feature: ECS: Amazon ECS introduces the PutAccountSettingDefault API, an API that allows a user to set the default ARN/ID format opt-in status for all the roles and users in the account. Previously, setting the account's default opt-in status required the use of the root user with the PutAccountSetting API.
 
 ## 2.399.0
 * feature: ES: Feature: Support for three Availability Zone deployments
