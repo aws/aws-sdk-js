@@ -293,6 +293,10 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
   export interface DashPackage {
     Encryption?: DashEncryption;
     /**
+     * Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.
+     */
+    ManifestLayout?: ManifestLayout;
+    /**
      * Time window (in seconds) contained in each manifest.
      */
     ManifestWindowSeconds?: __integer;
@@ -322,6 +326,10 @@ rounded to the nearest multiple of the source segment duration.
 
      */
     SegmentDurationSeconds?: __integer;
+    /**
+     * Determines the type of SegmentTimeline included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs.
+     */
+    SegmentTemplateFormat?: SegmentTemplateFormat;
     StreamSelection?: StreamSelection;
     /**
      * Duration (in seconds) to delay live content before presentation.
@@ -659,6 +667,7 @@ rounded to the nearest multiple of the source fragment duration.
      */
     OriginEndpoints?: __listOfOriginEndpoint;
   }
+  export type ManifestLayout = "FULL"|"COMPACT"|string;
   export type MaxResults = number;
   export interface MssEncryption {
     SpekeKeyProvider: SpekeKeyProvider;
@@ -769,6 +778,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     Id?: __string;
   }
+  export type SegmentTemplateFormat = "NUMBER_WITH_TIMELINE"|"TIME_WITH_TIMELINE"|string;
   export interface SpekeKeyProvider {
     /**
      * An Amazon Resource Name (ARN) of a Certificate Manager certificate

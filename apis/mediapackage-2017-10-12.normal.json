@@ -753,6 +753,11 @@
           "locationName": "encryption",
           "shape": "DashEncryption"
         },
+        "ManifestLayout": {
+          "documentation": "Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
+          "locationName": "manifestLayout",
+          "shape": "ManifestLayout"
+        },
         "ManifestWindowSeconds": {
           "documentation": "Time window (in seconds) contained in each manifest.",
           "locationName": "manifestWindowSeconds",
@@ -782,6 +787,11 @@
           "documentation": "Duration (in seconds) of each segment. Actual segments will be\nrounded to the nearest multiple of the source segment duration.\n",
           "locationName": "segmentDurationSeconds",
           "shape": "__integer"
+        },
+        "SegmentTemplateFormat": {
+          "documentation": "Determines the type of SegmentTimeline included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs.",
+          "locationName": "segmentTemplateFormat",
+          "shape": "SegmentTemplateFormat"
         },
         "StreamSelection": {
           "locationName": "streamSelection",
@@ -1238,6 +1248,13 @@
       },
       "type": "structure"
     },
+    "ManifestLayout": {
+      "enum": [
+        "FULL",
+        "COMPACT"
+      ],
+      "type": "string"
+    },
     "MaxResults": {
       "max": 1000,
       "min": 1,
@@ -1446,6 +1463,13 @@
         }
       },
       "type": "structure"
+    },
+    "SegmentTemplateFormat": {
+      "enum": [
+        "NUMBER_WITH_TIMELINE",
+        "TIME_WITH_TIMELINE"
+      ],
+      "type": "string"
     },
     "SpekeKeyProvider": {
       "documentation": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",

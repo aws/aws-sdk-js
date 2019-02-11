@@ -320,7 +320,7 @@ declare namespace CodeBuild {
      */
     networkInterface?: NetworkInterface;
     /**
-     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts. This is expressed either as the Amazon Resource Name (ARN) of the CMK or, if specified, the CMK's alias (using the format alias/alias-name ).
+     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.   You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/alias-name ).
      */
     encryptionKey?: NonEmptyString;
   }
@@ -454,7 +454,7 @@ declare namespace CodeBuild {
      */
     queuedTimeoutInMinutes?: TimeOut;
     /**
-     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts. You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/alias-name ).
+     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.   You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/alias-name ).
      */
     encryptionKey?: NonEmptyString;
     /**
@@ -486,9 +486,13 @@ declare namespace CodeBuild {
      */
     projectName: ProjectName;
     /**
-     * A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If branchFilter is empty, then all branches are built.
+     * A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If branchFilter is empty, then all branches are built.   It is recommended that you use filterGroups instead of branchFilter.  
      */
     branchFilter?: String;
+    /**
+     *  An array of arrays of WebhookFilter objects used to determine which webhooks are triggered. At least one WebhookFilter in the array must specify EVENT as its type.   For a build to be triggered, at least one filter group in the filterGroups array must pass. For a filter group to pass, each of its filters must pass. 
+     */
+    filterGroups?: FilterGroups;
   }
   export interface CreateWebhookOutput {
     /**
@@ -579,6 +583,8 @@ declare namespace CodeBuild {
   }
   export type EnvironmentVariableType = "PLAINTEXT"|"PARAMETER_STORE"|string;
   export type EnvironmentVariables = EnvironmentVariable[];
+  export type FilterGroup = WebhookFilter[];
+  export type FilterGroups = FilterGroup[];
   export type GitCloneDepth = number;
   export type ImagePullCredentialsType = "CODEBUILD"|"SERVICE_ROLE"|string;
   export type ImageVersions = String[];
@@ -810,7 +816,7 @@ declare namespace CodeBuild {
      */
     queuedTimeoutInMinutes?: TimeOut;
     /**
-     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts. This is expressed either as the Amazon Resource Name (ARN) of the CMK or, if specified, the CMK's alias (using the format alias/alias-name ).
+     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.   You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/alias-name ).
      */
     encryptionKey?: NonEmptyString;
     /**
@@ -1227,7 +1233,7 @@ declare namespace CodeBuild {
      */
     queuedTimeoutInMinutes?: TimeOut;
     /**
-     * The replacement AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts. You can specify either the Amazon Resource Name (ARN)of the CMK or, if available, the CMK's alias (using the format alias/alias-name ).
+     * The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.   You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key.   You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format alias/alias-name ).
      */
     encryptionKey?: NonEmptyString;
     /**
@@ -1259,9 +1265,13 @@ declare namespace CodeBuild {
      */
     projectName: ProjectName;
     /**
-     * A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If branchFilter is empty, then all branches are built.
+     * A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If branchFilter is empty, then all branches are built.   It is recommended that you use filterGroups instead of branchFilter.  
      */
     branchFilter?: String;
+    /**
+     *  An array of arrays of WebhookFilter objects used to determine if a webhook event can trigger a build. A filter group must pcontain at least one EVENT WebhookFilter. 
+     */
+    filterGroups?: FilterGroups;
     /**
      *  A boolean value that specifies whether the associated GitHub repository's secret token should be updated. If you use Bitbucket for your repository, rotateSecret is ignored. 
      */
@@ -1302,14 +1312,33 @@ declare namespace CodeBuild {
      */
     secret?: NonEmptyString;
     /**
-     * A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If branchFilter is empty, then all branches are built.
+     * A regular expression used to determine which repository branches are built when a webhook is triggered. If the name of a branch matches the regular expression, then it is built. If branchFilter is empty, then all branches are built.   It is recommended that you use filterGroups instead of branchFilter.  
      */
     branchFilter?: String;
+    /**
+     *  An array of arrays of WebhookFilter objects used to determine which webhooks are triggered. At least one WebhookFilter in the array must specify EVENT as its type.   For a build to be triggered, at least one filter group in the filterGroups array must pass. For a filter group to pass, each of its filters must pass. 
+     */
+    filterGroups?: FilterGroups;
     /**
      *  A timestamp that indicates the last time a repository's secret token was modified. 
      */
     lastModifiedSecret?: Timestamp;
   }
+  export interface WebhookFilter {
+    /**
+     *  The type of webhook filter. There are five webhook filter types: EVENT, ACTOR_ACCOUNT_ID, HEAD_REF, BASE_REF, and FILE_PATH.    EVENT    A webhook event triggers a build when the provided pattern matches one of four event types: PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED, and PULL_REQUEST_REOPENED. The EVENT patterns are specified as a comma-separated string. For example, PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED filters all push, pull request created, and pull request updated events.    The PULL_REQUEST_REOPENED works with GitHub and GitHub Enterprise only.     ACTOR_ACCOUNT_ID    A webhook event triggers a build when a GitHub, GitHub Enterprise, or Bitbucket account ID matches the regular expression pattern.    HEAD_REF    A webhook event triggers a build when the head reference matches the regular expression pattern. For example, refs/heads/branch-name and refs/tags/tag-name.   Works with GitHub and GitHub Enterprise push, GitHub and GitHub Enterprise pull request, Bitbucket push, and Bitbucket pull request events.    BASE_REF    A webhook event triggers a build when the base reference matches the regular expression pattern. For example, refs/heads/branch-name.    Works with pull request events only.     FILE_PATH    A webhook triggers a build when the path of a changed file matches the regular expression pattern.    Works with GitHub and GitHub Enterprise push events only.    
+     */
+    type: WebhookFilterType;
+    /**
+     *  For a WebHookFilter that uses EVENT type, a comma-separated string that specifies one or more events. For example, the webhook filter PUSH, PULL_REQUEST_CREATED, PULL_REQUEST_UPDATED allows all push, pull request created, and pull request updated events to trigger a build.   For a WebHookFilter that uses any of the other filter types, a regular expression pattern. For example, a WebHookFilter that uses HEAD_REF for its type and the pattern ^refs/heads/ triggers a build when the head reference is a branch with a reference name refs/heads/branch-name. 
+     */
+    pattern: String;
+    /**
+     *  Used to indicate that the pattern determines which webhook events do not trigger a build. If true, then a webhook event that does not match the pattern triggers a build. If false, then a webhook event that matches the pattern triggers a build. 
+     */
+    excludeMatchedPattern?: WrapperBoolean;
+  }
+  export type WebhookFilterType = "EVENT"|"BASE_REF"|"HEAD_REF"|"ACTOR_ACCOUNT_ID"|"FILE_PATH"|string;
   export type WrapperBoolean = boolean;
   export type WrapperInt = number;
   export type WrapperLong = number;

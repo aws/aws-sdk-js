@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.400.0-->
+<!--LATEST=2.401.0-->
 <!--ENTRYINSERT-->
+
+## 2.401.0
+* feature: AppStream: This update enables customers to find the start time, max expiration time, and connection status associated with AppStream streaming session.
+* feature: CodeBuild: Add customized webhook filter support
+* feature: MediaPackage: Adds optional configuration for DASH to compact the manifest by combining duplicate SegmentTemplate tags. Adds optional configuration for DASH SegmentTemplate format to refer to segments by "Number" (default) or by "Time".
 
 ## 2.400.0
 * feature: DLM: This release is to correct the timestamp format to ISO8601 for the DateCreated and DateModified files in the GetLifecyclePolicy response object.

@@ -630,7 +630,7 @@
           "shape": "InvalidParameterCombinationException"
         }
       ],
-      "documentation": "<p>Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a UserId is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.</p>"
+      "documentation": "<p>Retrieves a list that describes the active streaming sessions for a specified stack and fleet. If a value for <code>UserId</code> is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.</p>"
     },
     "DescribeStacks": {
       "name": "DescribeStacks",
@@ -817,7 +817,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p> <p>For more information about tags, see <a href=\"http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
+      "documentation": "<p>Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
     },
     "StartFleet": {
       "name": "StartFleet",
@@ -951,7 +951,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p> <p>Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value.</p> <p>To list the current tags for your resources, use <a>ListTagsForResource</a>. To disassociate tags from your resources, use <a>UntagResource</a>.</p> <p>For more information about tags, see <a href=\"http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
+      "documentation": "<p>Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks.</p> <p>Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value.</p> <p>To list the current tags for your resources, use <a>ListTagsForResource</a>. To disassociate tags from your resources, use <a>UntagResource</a>.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -970,7 +970,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Disassociates one or more specified tags from the specified AppStream 2.0 resource.</p> <p>To list the current tags for your resources, use <a>ListTagsForResource</a>.</p> <p>For more information about tags, see <a href=\"http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
+      "documentation": "<p>Disassociates one or more specified tags from the specified AppStream 2.0 resource.</p> <p>To list the current tags for your resources, use <a>ListTagsForResource</a>.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
     },
     "UpdateDirectoryConfig": {
       "name": "UpdateDirectoryConfig",
@@ -1452,11 +1452,11 @@
         },
         "MaxUserDurationInSeconds": {
           "shape": "Integer",
-          "documentation": "<p>The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 57600.</p>"
+          "documentation": "<p>The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 360000.</p>"
         },
         "DisconnectTimeoutInSeconds": {
           "shape": "Integer",
-          "documentation": "<p>The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 57600.</p>"
+          "documentation": "<p>The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 360000.</p>"
         },
         "Description": {
           "shape": "Description",
@@ -1476,7 +1476,7 @@
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p>The tags to associate with the fleet. A tag is a key-value pair (the value is optional). For example, Environment=Test, or, if you do not specify a value, Environment=. </p> <p>If you do not specify a value, we set the value to an empty string.</p> <p>For more information, see <a href=\"http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
+          "documentation": "<p>The tags to associate with the fleet. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
         }
       }
     },
@@ -1538,7 +1538,7 @@
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p>The tags to associate with the image builder. A tag is a key-value pair (the value is optional). For example, Environment=Test, or, if you do not specify a value, Environment=. </p> <p>If you do not specify a value, we set the value to an empty string.</p> <p>For more information about tags, see <a href=\"http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
+          "documentation": "<p>The tags to associate with the image builder. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
         }
       }
     },
@@ -1620,7 +1620,7 @@
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p>The tags to associate with the stack. A tag is a key-value pair (the value is optional). For example, Environment=Test, or, if you do not specify a value, Environment=. </p> <p>If you do not specify a value, we set the value to an empty string.</p> <p>For more information about tags, see <a href=\"http://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
+          "documentation": "<p>The tags to associate with the stack. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
         }
       }
     },
@@ -1663,7 +1663,7 @@
         },
         "SessionContext": {
           "shape": "String",
-          "documentation": "<p>The session context. For more information, see <a href=\"http://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters\">Session Context</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
+          "documentation": "<p>The session context. For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/managing-stacks-fleets.html#managing-stacks-fleets-parameters\">Session Context</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
         }
       }
     },
@@ -2045,7 +2045,7 @@
         },
         "AuthenticationType": {
           "shape": "AuthenticationType",
-          "documentation": "<p>The authentication method. Specify <code>API</code> for a user authenticated using a streaming URL or <code>SAML</code> for a SAML federated user. The default is to authenticate users using a streaming URL.</p>"
+          "documentation": "<p>The authentication method. Specify <code>API</code> for a user authenticated using a streaming URL, <code>SAML</code> for a SAML 2.0-federated user, or <code>USERPOOL</code> for a user in the AppStream 2.0 user pool. The default is to authenticate users using a streaming URL.</p>"
         }
       }
     },
@@ -2364,11 +2364,11 @@
         },
         "MaxUserDurationInSeconds": {
           "shape": "Integer",
-          "documentation": "<p>The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 57600.</p>"
+          "documentation": "<p>The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 360000.</p>"
         },
         "DisconnectTimeoutInSeconds": {
           "shape": "Integer",
-          "documentation": "<p>The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 57600.</p>"
+          "documentation": "<p>The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 360000. By default, this value is 900 seconds (15 minutes).</p>"
         },
         "State": {
           "shape": "FleetState",
@@ -2960,9 +2960,21 @@
           "shape": "SessionState",
           "documentation": "<p>The current state of the streaming session.</p>"
         },
+        "ConnectionState": {
+          "shape": "SessionConnectionState",
+          "documentation": "<p>Specifies whether a user is connected to the streaming session. </p>"
+        },
+        "StartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time when a streaming instance is dedicated for the user. </p>"
+        },
+        "MaxExpirationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time when the streaming session is set to expire. This time is based on the <code>MaxUserDurationinSeconds</code> value, which determines the maximum length of time that a streaming session can run. A streaming session might end earlier than the time specified in <code>SessionMaxExpirationTime</code>, when the <code>DisconnectTimeOutInSeconds</code> elapses or the user chooses to end his or her session. If the <code>DisconnectTimeOutInSeconds</code> elapses, or the user chooses to end his or her session, the streaming instance is terminated and the streaming session ends.</p>"
+        },
         "AuthenticationType": {
           "shape": "AuthenticationType",
-          "documentation": "<p>The authentication method. The user is authenticated using a streaming URL (<code>API</code>) or SAML federation (<code>SAML</code>).</p>"
+          "documentation": "<p>The authentication method. The user is authenticated using a streaming URL (<code>API</code>), SAML 2.0 federation (<code>SAML</code>), or the AppStream 2.0 user pool (<code>USERPOOL</code>). The default is to authenticate users using a streaming URL. </p>"
         },
         "NetworkAccessConfiguration": {
           "shape": "NetworkAccessConfiguration",
@@ -2970,6 +2982,13 @@
         }
       },
       "documentation": "<p>Describes a streaming session.</p>"
+    },
+    "SessionConnectionState": {
+      "type": "string",
+      "enum": [
+        "CONNECTED",
+        "NOT_CONNECTED"
+      ]
     },
     "SessionList": {
       "type": "list",
@@ -2980,7 +2999,6 @@
     },
     "SessionState": {
       "type": "string",
-      "documentation": "<p>Possible values for the state of a streaming session.</p>",
       "enum": [
         "ACTIVE",
         "PENDING",
@@ -3287,7 +3305,7 @@
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p>The tags to associate. A tag is a key-value pair (the value is optional). For example, <code>Environment=Test</code>, or, if you do not specify a value, <code>Environment=</code>. </p> <p>If you do not specify a value, we set the value to an empty string.</p>"
+          "documentation": "<p>The tags to associate. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>If you do not specify a value, the value is set to an empty string.</p>"
         }
       }
     },
@@ -3394,11 +3412,11 @@
         },
         "MaxUserDurationInSeconds": {
           "shape": "Integer",
-          "documentation": "<p>The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 57600.</p>"
+          "documentation": "<p>The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 360000. By default, the value is 900 seconds (15 minutes).</p>"
         },
         "DisconnectTimeoutInSeconds": {
           "shape": "Integer",
-          "documentation": "<p>The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 57600.</p>"
+          "documentation": "<p>The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 360000. By default, the value is 900 seconds (15 minutes).</p>"
         },
         "DeleteVpcConfig": {
           "shape": "Boolean",
@@ -3698,5 +3716,5 @@
       "documentation": "<p>Describes VPC configuration information for fleets and image builders.</p>"
     }
   },
-  "documentation": "<fullname>Amazon AppStream 2.0</fullname> <p>This is the <i>Amazon AppStream 2.0 API Reference</i>. It provides descriptions and syntax for each of the actions and data types in AppStream 2.0. AppStream 2.0 is a fully managed application streaming service. You centrally manage your desktop applications on AppStream 2.0 and securely deliver them to any computer. AppStream 2.0 manages the AWS resources required to host and run your applications, scales automatically, and provides access to your users on demand.</p> <p>To learn more about AppStream 2.0, see the following resources:</p> <ul> <li> <p> <a href=\"http://aws.amazon.com/appstream2\">Amazon AppStream 2.0 product page</a> </p> </li> <li> <p> <a href=\"http://aws.amazon.com/documentation/appstream2\">Amazon AppStream 2.0 documentation</a> </p> </li> </ul>"
+  "documentation": "<fullname>Amazon AppStream 2.0</fullname> <p>This is the <i>Amazon AppStream 2.0 API Reference</i>. This reference provides descriptions and syntax for each of the actions and data types in AppStream 2.0. AppStream 2.0 is a fully managed application streaming service. You centrally manage your desktop applications on AppStream 2.0 and securely deliver them to any computer. AppStream 2.0 manages the AWS resources required to host and run your applications, scales automatically, and provides access to your users on demand.</p> <p>To learn more about AppStream 2.0, see the following resources:</p> <ul> <li> <p> <a href=\"http://aws.amazon.com/appstream2\">Amazon AppStream 2.0 product page</a> </p> </li> <li> <p> <a href=\"http://aws.amazon.com/documentation/appstream2\">Amazon AppStream 2.0 documentation</a> </p> </li> </ul>"
 }
