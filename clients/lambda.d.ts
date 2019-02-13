@@ -45,11 +45,11 @@ declare class Lambda extends Service {
    */
   createEventSourceMapping(callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
-   * Creates a Lambda function. To create a function, you need a deployment package and an execution role. The deployment package contains your function code. The execution role grants the function permission to use AWS services such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing. A function has an unpublished version, and can have published versions and aliases. A published version is a snapshot of your function code and configuration that can not be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the Publish parameter to create version 1 of your function from its initial configuration. The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with UpdateFunctionConfiguration. Function-level settings apply to both the unpublished and published versions of the function and include tags (TagResource) and per-function concurrency limits (PutFunctionConcurrency). If another account or a AWS service invokes your function, use AddPermission to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias. To invoke your function directly, use Invoke. To invoke your function in response to events in other AWS services, create an event source mapping (CreateEventSourceMapping), or configure a function trigger in the other service. For more information, see Invoking Functions.
+   * Creates a Lambda function. To create a function, you need a deployment package and an execution role. The deployment package contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing. A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function's code and configuration. A published version is a snapshot of your function code and configuration that can't be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the Publish parameter to create version 1 of your function from its initial configuration. The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with UpdateFunctionConfiguration. Function-level settings apply to both the unpublished and published versions of the function, and include tags (TagResource) and per-function concurrency limits (PutFunctionConcurrency). If another account or an AWS service invokes your function, use AddPermission to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias. To invoke your function directly, use Invoke. To invoke your function in response to events in other AWS services, create an event source mapping (CreateEventSourceMapping), or configure a function trigger in the other service. For more information, see Invoking Functions.
    */
   createFunction(params: Lambda.Types.CreateFunctionRequest, callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
-   * Creates a Lambda function. To create a function, you need a deployment package and an execution role. The deployment package contains your function code. The execution role grants the function permission to use AWS services such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing. A function has an unpublished version, and can have published versions and aliases. A published version is a snapshot of your function code and configuration that can not be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the Publish parameter to create version 1 of your function from its initial configuration. The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with UpdateFunctionConfiguration. Function-level settings apply to both the unpublished and published versions of the function and include tags (TagResource) and per-function concurrency limits (PutFunctionConcurrency). If another account or a AWS service invokes your function, use AddPermission to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias. To invoke your function directly, use Invoke. To invoke your function in response to events in other AWS services, create an event source mapping (CreateEventSourceMapping), or configure a function trigger in the other service. For more information, see Invoking Functions.
+   * Creates a Lambda function. To create a function, you need a deployment package and an execution role. The deployment package contains your function code. The execution role grants the function permission to use AWS services, such as Amazon CloudWatch Logs for log streaming and AWS X-Ray for request tracing. A function has an unpublished version, and can have published versions and aliases. The unpublished version changes when you update your function's code and configuration. A published version is a snapshot of your function code and configuration that can't be changed. An alias is a named resource that maps to a version, and can be changed to map to a different version. Use the Publish parameter to create version 1 of your function from its initial configuration. The other parameters let you configure version-specific and function-level settings. You can modify version-specific settings later with UpdateFunctionConfiguration. Function-level settings apply to both the unpublished and published versions of the function, and include tags (TagResource) and per-function concurrency limits (PutFunctionConcurrency). If another account or an AWS service invokes your function, use AddPermission to grant permission by creating a resource-based IAM policy. You can grant permissions at the function level, on a version, or on an alias. To invoke your function directly, use Invoke. To invoke your function in response to events in other AWS services, create an event source mapping (CreateEventSourceMapping), or configure a function trigger in the other service. For more information, see Invoking Functions.
    */
   createFunction(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
@@ -93,11 +93,11 @@ declare class Lambda extends Service {
    */
   deleteLayerVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Retrieves details about your account's limits and usage in a region.
+   * Retrieves details about your account's limits and usage in an AWS Region.
    */
   getAccountSettings(params: Lambda.Types.GetAccountSettingsRequest, callback?: (err: AWSError, data: Lambda.Types.GetAccountSettingsResponse) => void): Request<Lambda.Types.GetAccountSettingsResponse, AWSError>;
   /**
-   * Retrieves details about your account's limits and usage in a region.
+   * Retrieves details about your account's limits and usage in an AWS Region.
    */
   getAccountSettings(callback?: (err: AWSError, data: Lambda.Types.GetAccountSettingsResponse) => void): Request<Lambda.Types.GetAccountSettingsResponse, AWSError>;
   /**
@@ -117,19 +117,19 @@ declare class Lambda extends Service {
    */
   getEventSourceMapping(callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
-   * Returns information about function or function version, with a link to download the deployment package that's valid for 10 minutes. If you specify a function version, only details specific to that version are returned.
+   * Returns information about the function or function version, with a link to download the deployment package that's valid for 10 minutes. If you specify a function version, only details that are specific to that version are returned.
    */
   getFunction(params: Lambda.Types.GetFunctionRequest, callback?: (err: AWSError, data: Lambda.Types.GetFunctionResponse) => void): Request<Lambda.Types.GetFunctionResponse, AWSError>;
   /**
-   * Returns information about function or function version, with a link to download the deployment package that's valid for 10 minutes. If you specify a function version, only details specific to that version are returned.
+   * Returns information about the function or function version, with a link to download the deployment package that's valid for 10 minutes. If you specify a function version, only details that are specific to that version are returned.
    */
   getFunction(callback?: (err: AWSError, data: Lambda.Types.GetFunctionResponse) => void): Request<Lambda.Types.GetFunctionResponse, AWSError>;
   /**
-   * Returns a the version-specific settings of a Lambda function or version. The output includes only options that can vary between versions of a function. To modify these settings, use UpdateFunctionConfiguration. To get all of a function's details, including function-level settings, use GetFunction.
+   * Returns the version-specific settings of a Lambda function or version. The output includes only options that can vary between versions of a function. To modify these settings, use UpdateFunctionConfiguration. To get all of a function's details, including function-level settings, use GetFunction.
    */
   getFunctionConfiguration(params: Lambda.Types.GetFunctionConfigurationRequest, callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
-   * Returns a the version-specific settings of a Lambda function or version. The output includes only options that can vary between versions of a function. To modify these settings, use UpdateFunctionConfiguration. To get all of a function's details, including function-level settings, use GetFunction.
+   * Returns the version-specific settings of a Lambda function or version. The output includes only options that can vary between versions of a function. To modify these settings, use UpdateFunctionConfiguration. To get all of a function's details, including function-level settings, use GetFunction.
    */
   getFunctionConfiguration(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
@@ -157,11 +157,11 @@ declare class Lambda extends Service {
    */
   getPolicy(callback?: (err: AWSError, data: Lambda.Types.GetPolicyResponse) => void): Request<Lambda.Types.GetPolicyResponse, AWSError>;
   /**
-   * Invokes a Lambda function. You can invoke a function synchronously and wait for the response, or asynchronously. To invoke a function asynchronously, set InvocationType to Event. For synchronous invocation, details about the function response, including errors, are included in the response body and headers. For either invocation type, you can find more information in the execution log and trace. To record function errors for asynchronous invocations, configure your function with a dead letter queue. The status code in the API response does not reflect function errors. Error codes are reserved for errors that prevent your function from executing, such as permissions errors, limit errors, or issues with your function's code and configuration. For example, Lambda returns TooManyRequestsException if executing the function would cause you to exceed a concurrency limit at either the account level (ConcurrentInvocationLimitExceeded) or function level (ReservedFunctionConcurrentInvocationLimitExceeded). For functions with a long timeout, your client may be disconnected during synchronous invocation while it waits for a response. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long connections with timeout or keep-alive settings. This operation requires permission for the lambda:InvokeFunction action.
+   * Invokes a Lambda function. You can invoke a function synchronously (and wait for the response), or asynchronously. To invoke a function asynchronously, set InvocationType to Event. For synchronous invocation, details about the function response, including errors, are included in the response body and headers. For either invocation type, you can find more information in the execution log and trace. To record function errors for asynchronous invocations, configure your function with a dead letter queue. The status code in the API response doesn't reflect function errors. Error codes are reserved for errors that prevent your function from executing, such as permissions errors, limit errors, or issues with your function's code and configuration. For example, Lambda returns TooManyRequestsException if executing the function would cause you to exceed a concurrency limit at either the account level (ConcurrentInvocationLimitExceeded) or function level (ReservedFunctionConcurrentInvocationLimitExceeded). For functions with a long timeout, your client might be disconnected during synchronous invocation while it waits for a response. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long connections with timeout or keep-alive settings. This operation requires permission for the lambda:InvokeFunction action.
    */
   invoke(params: Lambda.Types.InvocationRequest, callback?: (err: AWSError, data: Lambda.Types.InvocationResponse) => void): Request<Lambda.Types.InvocationResponse, AWSError>;
   /**
-   * Invokes a Lambda function. You can invoke a function synchronously and wait for the response, or asynchronously. To invoke a function asynchronously, set InvocationType to Event. For synchronous invocation, details about the function response, including errors, are included in the response body and headers. For either invocation type, you can find more information in the execution log and trace. To record function errors for asynchronous invocations, configure your function with a dead letter queue. The status code in the API response does not reflect function errors. Error codes are reserved for errors that prevent your function from executing, such as permissions errors, limit errors, or issues with your function's code and configuration. For example, Lambda returns TooManyRequestsException if executing the function would cause you to exceed a concurrency limit at either the account level (ConcurrentInvocationLimitExceeded) or function level (ReservedFunctionConcurrentInvocationLimitExceeded). For functions with a long timeout, your client may be disconnected during synchronous invocation while it waits for a response. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long connections with timeout or keep-alive settings. This operation requires permission for the lambda:InvokeFunction action.
+   * Invokes a Lambda function. You can invoke a function synchronously (and wait for the response), or asynchronously. To invoke a function asynchronously, set InvocationType to Event. For synchronous invocation, details about the function response, including errors, are included in the response body and headers. For either invocation type, you can find more information in the execution log and trace. To record function errors for asynchronous invocations, configure your function with a dead letter queue. The status code in the API response doesn't reflect function errors. Error codes are reserved for errors that prevent your function from executing, such as permissions errors, limit errors, or issues with your function's code and configuration. For example, Lambda returns TooManyRequestsException if executing the function would cause you to exceed a concurrency limit at either the account level (ConcurrentInvocationLimitExceeded) or function level (ReservedFunctionConcurrentInvocationLimitExceeded). For functions with a long timeout, your client might be disconnected during synchronous invocation while it waits for a response. Configure your HTTP client, SDK, firewall, proxy, or operating system to allow for long connections with timeout or keep-alive settings. This operation requires permission for the lambda:InvokeFunction action.
    */
   invoke(callback?: (err: AWSError, data: Lambda.Types.InvocationResponse) => void): Request<Lambda.Types.InvocationResponse, AWSError>;
   /**
@@ -237,19 +237,19 @@ declare class Lambda extends Service {
    */
   publishLayerVersion(callback?: (err: AWSError, data: Lambda.Types.PublishLayerVersionResponse) => void): Request<Lambda.Types.PublishLayerVersionResponse, AWSError>;
   /**
-   * Creates a version from the current code and configuration of a function. Use versions to create a snapshot of your function code and configuration that doesn't change. AWS Lambda does not publish a version if the function's configuration and code hasn't changed since the last version. Use UpdateFunctionCode or UpdateFunctionConfiguration to update the function prior to publishing a version. Clients can invoke versions directly or with an alias. To create an alias, use CreateAlias.
+   * Creates a version from the current code and configuration of a function. Use versions to create a snapshot of your function code and configuration that doesn't change. AWS Lambda doesn't publish a version if the function's configuration and code haven't changed since the last version. Use UpdateFunctionCode or UpdateFunctionConfiguration to update the function before publishing a version. Clients can invoke versions directly or with an alias. To create an alias, use CreateAlias.
    */
   publishVersion(params: Lambda.Types.PublishVersionRequest, callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
-   * Creates a version from the current code and configuration of a function. Use versions to create a snapshot of your function code and configuration that doesn't change. AWS Lambda does not publish a version if the function's configuration and code hasn't changed since the last version. Use UpdateFunctionCode or UpdateFunctionConfiguration to update the function prior to publishing a version. Clients can invoke versions directly or with an alias. To create an alias, use CreateAlias.
+   * Creates a version from the current code and configuration of a function. Use versions to create a snapshot of your function code and configuration that doesn't change. AWS Lambda doesn't publish a version if the function's configuration and code haven't changed since the last version. Use UpdateFunctionCode or UpdateFunctionConfiguration to update the function before publishing a version. Clients can invoke versions directly or with an alias. To create an alias, use CreateAlias.
    */
   publishVersion(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
-   * Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency level. Concurrency settings apply to the function as a whole, including all published versions and the unpublished version. Reserving concurrency both guarantees that your function has capacity to process the specified number of events simultaneously, and prevents it from scaling beyond that level. Use GetFunction to see the current setting for a function. Use GetAccountSettings to see your regional concurrency limit. You can reserve concurrency for as many functions as you like, as long as you leave at least 100 simultaneous executions unreserved for functions that aren't configured with a per-function limit. For more information, see Managing Concurrency.
+   * Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency level. Concurrency settings apply to the function as a whole, including all published versions and the unpublished version. Reserving concurrency both ensures that your function has capacity to process the specified number of events simultaneously, and prevents it from scaling beyond that level. Use GetFunction to see the current setting for a function. Use GetAccountSettings to see your regional concurrency limit. You can reserve concurrency for as many functions as you like, as long as you leave at least 100 simultaneous executions unreserved for functions that aren't configured with a per-function limit. For more information, see Managing Concurrency.
    */
   putFunctionConcurrency(params: Lambda.Types.PutFunctionConcurrencyRequest, callback?: (err: AWSError, data: Lambda.Types.Concurrency) => void): Request<Lambda.Types.Concurrency, AWSError>;
   /**
-   * Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency level. Concurrency settings apply to the function as a whole, including all published versions and the unpublished version. Reserving concurrency both guarantees that your function has capacity to process the specified number of events simultaneously, and prevents it from scaling beyond that level. Use GetFunction to see the current setting for a function. Use GetAccountSettings to see your regional concurrency limit. You can reserve concurrency for as many functions as you like, as long as you leave at least 100 simultaneous executions unreserved for functions that aren't configured with a per-function limit. For more information, see Managing Concurrency.
+   * Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency level. Concurrency settings apply to the function as a whole, including all published versions and the unpublished version. Reserving concurrency both ensures that your function has capacity to process the specified number of events simultaneously, and prevents it from scaling beyond that level. Use GetFunction to see the current setting for a function. Use GetAccountSettings to see your regional concurrency limit. You can reserve concurrency for as many functions as you like, as long as you leave at least 100 simultaneous executions unreserved for functions that aren't configured with a per-function limit. For more information, see Managing Concurrency.
    */
   putFunctionConcurrency(callback?: (err: AWSError, data: Lambda.Types.Concurrency) => void): Request<Lambda.Types.Concurrency, AWSError>;
   /**
@@ -261,11 +261,11 @@ declare class Lambda extends Service {
    */
   removeLayerVersionPermission(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Revokes function use permission from an AWS service or another account. You can get the ID of the statement from the output of GetPolicy.
+   * Revokes function-use permission from an AWS service or another account. You can get the ID of the statement from the output of GetPolicy.
    */
   removePermission(params: Lambda.Types.RemovePermissionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Revokes function use permission from an AWS service or another account. You can get the ID of the statement from the output of GetPolicy.
+   * Revokes function-use permission from an AWS service or another account. You can get the ID of the statement from the output of GetPolicy.
    */
   removePermission(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -301,19 +301,19 @@ declare class Lambda extends Service {
    */
   updateEventSourceMapping(callback?: (err: AWSError, data: Lambda.Types.EventSourceMappingConfiguration) => void): Request<Lambda.Types.EventSourceMappingConfiguration, AWSError>;
   /**
-   * Updates a Lambda function's code. The function's code is locked when you publish a version. You cannot modify the code of a published version, only the unpublished version.
+   * Updates a Lambda function's code. The function's code is locked when you publish a version. You can't modify the code of a published version, only the unpublished version.
    */
   updateFunctionCode(params: Lambda.Types.UpdateFunctionCodeRequest, callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
-   * Updates a Lambda function's code. The function's code is locked when you publish a version. You cannot modify the code of a published version, only the unpublished version.
+   * Updates a Lambda function's code. The function's code is locked when you publish a version. You can't modify the code of a published version, only the unpublished version.
    */
   updateFunctionCode(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
-   * Modify the version-specifc settings of a Lambda function. These settings can vary between versions of a function and are locked when you publish a version. You cannot modify the configuration of a published version, only the unpublished version. To configure function concurrency, use PutFunctionConcurrency. To grant invoke permissions to an account or AWS service, use AddPermission.
+   * Modify the version-specifc settings of a Lambda function. These settings can vary between versions of a function and are locked when you publish a version. You can't modify the configuration of a published version, only the unpublished version. To configure function concurrency, use PutFunctionConcurrency. To grant invoke permissions to an account or AWS service, use AddPermission.
    */
   updateFunctionConfiguration(params: Lambda.Types.UpdateFunctionConfigurationRequest, callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
   /**
-   * Modify the version-specifc settings of a Lambda function. These settings can vary between versions of a function and are locked when you publish a version. You cannot modify the configuration of a published version, only the unpublished version. To configure function concurrency, use PutFunctionConcurrency. To grant invoke permissions to an account or AWS service, use AddPermission.
+   * Modify the version-specifc settings of a Lambda function. These settings can vary between versions of a function and are locked when you publish a version. You can't modify the configuration of a published version, only the unpublished version. To configure function concurrency, use PutFunctionConcurrency. To grant invoke permissions to an account or AWS service, use AddPermission.
    */
   updateFunctionConfiguration(callback?: (err: AWSError, data: Lambda.Types.FunctionConfiguration) => void): Request<Lambda.Types.FunctionConfiguration, AWSError>;
 }
@@ -324,11 +324,11 @@ declare namespace Lambda {
      */
     TotalCodeSize?: Long;
     /**
-     * The maximum size of your function's code and layers when extracted.
+     * The maximum size of your function's code and layers when they're extracted.
      */
     CodeSizeUnzipped?: Long;
     /**
-     * The maximum size of a deployment package when uploaded direcly to AWS Lambda. Use Amazon S3 for larger files.
+     * The maximum size of a deployment package when it's uploaded directly to AWS Lambda. Use Amazon S3 for larger files.
      */
     CodeSizeZipped?: Long;
     /**
@@ -336,13 +336,13 @@ declare namespace Lambda {
      */
     ConcurrentExecutions?: Integer;
     /**
-     * The maximum number of simultaneous function executions, less the concurrency reserved for individual functions with PutFunctionConcurrency.
+     * The maximum number of simultaneous function executions, minus the capacity that's reserved for individual functions with PutFunctionConcurrency.
      */
     UnreservedConcurrentExecutions?: UnreservedConcurrentExecutions;
   }
   export interface AccountUsage {
     /**
-     * The amount of storage space, in bytes, in use by deployment packages and layer archives.
+     * The amount of storage space, in bytes, that's being used by deployment packages and layer archives.
      */
     TotalCodeSize?: Long;
     /**
@@ -413,7 +413,7 @@ declare namespace Lambda {
      */
     SourceArn?: Arn;
     /**
-     * For AWS services, the ID of the account that owns the resource. Use instead of SourceArn to grant permission to resources owned by another account (e.g. all of an account's Amazon S3 buckets). Or use together with SourceArn to ensure that the resource is owned by the specified account. For example, an Amazon S3 bucket could be deleted by its owner and recreated by another account.
+     * For AWS services, the ID of the account that owns the resource. Use this instead of SourceArn to grant permission to resources that are owned by another account (for example, all of an account's Amazon S3 buckets). Or use it together with SourceArn to ensure that the resource is owned by the specified account. For example, an Amazon S3 bucket could be deleted by its owner and recreated by another account.
      */
     SourceAccount?: SourceOwner;
     /**
@@ -425,13 +425,13 @@ declare namespace Lambda {
      */
     Qualifier?: Qualifier;
     /**
-     * Only update the policy if the revision ID matches the ID specified. Use this option to avoid modifying a policy that has changed since you last read it.
+     * Only update the policy if the revision ID matches the ID that's specified. Use this option to avoid modifying a policy that has changed since you last read it.
      */
     RevisionId?: String;
   }
   export interface AddPermissionResponse {
     /**
-     * The permission statement added to the function policy.
+     * The permission statement that's added to the function policy.
      */
     Statement?: String;
   }
@@ -467,7 +467,7 @@ declare namespace Lambda {
   export type AliasList = AliasConfiguration[];
   export interface AliasRoutingConfiguration {
     /**
-     * The name of the second alias, and the percentage of traffic that is routed to it.
+     * The name of the second alias, and the percentage of traffic that's routed to it.
      */
     AdditionalVersionWeights?: AdditionalVersionWeights;
   }
@@ -479,13 +479,13 @@ declare namespace Lambda {
   export type CompatibleRuntimes = Runtime[];
   export interface Concurrency {
     /**
-     * The number of concurrent executions reserved for this function. For more information, see Managing Concurrency.
+     * The number of concurrent executions that are reserved for this function. For more information, see Managing Concurrency.
      */
     ReservedConcurrentExecutions?: ReservedConcurrentExecutions;
   }
   export interface CreateAliasRequest {
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
     FunctionName: FunctionName;
     /**
@@ -545,7 +545,7 @@ declare namespace Lambda {
      */
     Role: RoleArn;
     /**
-     * The name of the method within your code that Lambda calls to execute your function. The format includes the filename and can also include namespaces and other qualifiers, depending on the runtime. For more information, see Programming Model.
+     * The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information, see Programming Model.
      */
     Handler: Handler;
     /**
@@ -557,11 +557,11 @@ declare namespace Lambda {
      */
     Description?: Description;
     /**
-     * The amount of time that Lambda allows a function to run before terminating it. The default is 3 seconds. The maximum allowed value is 900 seconds.
+     * The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
      */
     Timeout?: Timeout;
     /**
-     * The amount of memory that your function has access to. Increasing the function's memory also increases it's CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
+     * The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
      */
     MemorySize?: MemorySize;
     /**
@@ -581,7 +581,7 @@ declare namespace Lambda {
      */
     Environment?: Environment;
     /**
-     * The ARN of the AWS Key Management Service key used to encrypt your function's environment variables. If not provided, AWS Lambda uses a default service key.
+     * The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.
      */
     KMSKeyArn?: KMSKeyArn;
     /**
@@ -593,7 +593,7 @@ declare namespace Lambda {
      */
     Tags?: Tags;
     /**
-     * A list of function layers to add to the function's execution environment. Specify each layer by ARN, including the version.
+     * A list of function layers to add to the function's execution environment. Specify each layer by its ARN, including the version.
      */
     Layers?: LayerList;
   }
@@ -606,7 +606,7 @@ declare namespace Lambda {
   }
   export interface DeleteAliasRequest {
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
     FunctionName: FunctionName;
     /**
@@ -632,7 +632,7 @@ declare namespace Lambda {
      */
     FunctionName: FunctionName;
     /**
-     * Specify a version to delete. You cannot delete a version that is referenced by an alias.
+     * Specify a version to delete. You can't delete a version that's referenced by an alias.
      */
     Qualifier?: Qualifier;
   }
@@ -670,7 +670,7 @@ declare namespace Lambda {
      */
     Variables?: EnvironmentVariables;
     /**
-     * Error messages for environment variables that could not be applied.
+     * Error messages for environment variables that couldn't be applied.
      */
     Error?: EnvironmentError;
   }
@@ -721,7 +721,7 @@ declare namespace Lambda {
      */
     ZipFile?: _Blob;
     /**
-     * An Amazon S3 bucket in the same region as your function. The bucket can be in a different AWS account.
+     * An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.
      */
     S3Bucket?: S3Bucket;
     /**
@@ -735,11 +735,11 @@ declare namespace Lambda {
   }
   export interface FunctionCodeLocation {
     /**
-     * The service hosting the file.
+     * The service that's hosting the file.
      */
     RepositoryType?: String;
     /**
-     * A pre-signed URL that you can use to download the deployment package.
+     * A presigned URL that you can use to download the deployment package.
      */
     Location?: String;
   }
@@ -761,11 +761,11 @@ declare namespace Lambda {
      */
     Role?: RoleArn;
     /**
-     * The function Lambda calls to begin executing your function.
+     * The function that Lambda calls to begin executing your function.
      */
     Handler?: Handler;
     /**
-     * The size of the function's deployment package in bytes.
+     * The size of the function's deployment package, in bytes.
      */
     CodeSize?: Long;
     /**
@@ -773,11 +773,11 @@ declare namespace Lambda {
      */
     Description?: Description;
     /**
-     * The amount of time that Lambda allows a function to run before terminating it.
+     * The amount of time that Lambda allows a function to run before stopping it.
      */
     Timeout?: Timeout;
     /**
-     * The memory allocated to the function
+     * The memory that's allocated to the function.
      */
     MemorySize?: MemorySize;
     /**
@@ -805,7 +805,7 @@ declare namespace Lambda {
      */
     Environment?: EnvironmentResponse;
     /**
-     * The KMS key used to encrypt the function's environment variables. Only returned if you've configured a customer managed CMK.
+     * The KMS key that's used to encrypt the function's environment variables. This key is only returned if you've configured a customer-managed CMK.
      */
     KMSKeyArn?: KMSKeyArn;
     /**
@@ -817,11 +817,11 @@ declare namespace Lambda {
      */
     MasterArn?: FunctionArn;
     /**
-     * Represents the latest updated revision of the function or alias.
+     * The latest updated revision of the function or alias.
      */
     RevisionId?: String;
     /**
-     * The function's  layers 
+     * The function's  layers.
      */
     Layers?: LayersReferenceList;
   }
@@ -832,7 +832,7 @@ declare namespace Lambda {
   }
   export interface GetAccountSettingsResponse {
     /**
-     * Limits related to concurrency and code storage.
+     * Limits that are related to concurrency and code storage.
      */
     AccountLimit?: AccountLimit;
     /**
@@ -842,7 +842,7 @@ declare namespace Lambda {
   }
   export interface GetAliasRequest {
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
     FunctionName: FunctionName;
     /**
@@ -987,7 +987,7 @@ declare namespace Lambda {
      */
     FunctionName: NamespacedFunctionName;
     /**
-     * Choose from the following options.    RequestResponse (default) - Invoke the function synchronously. Keep the connection open until the function returns a response or times out. The API response includes the function response and additional data.    Event - Invoke the function asynchronously. Send events that fail multiple times to the function's dead-letter queue (if configured). The API response only includes a status code.    DryRun - Validate parameter values and verify that the user or role has permission to invoke the function.  
+     * Choose from the following options.    RequestResponse (default) - Invoke the function synchronously. Keep the connection open until the function returns a response or times out. The API response includes the function response and additional data.    Event - Invoke the function asynchronously. Send events that fail multiple times to the function's dead-letter queue (if it's configured). The API response only includes a status code.    DryRun - Validate parameter values and verify that the user or role has permission to invoke the function.  
      */
     InvocationType?: InvocationType;
     /**
@@ -999,7 +999,7 @@ declare namespace Lambda {
      */
     ClientContext?: String;
     /**
-     * JSON that you want to provide to your Lambda function as input.
+     * The JSON that you want to provide to your Lambda function as input.
      */
     Payload?: _Blob;
     /**
@@ -1009,15 +1009,15 @@ declare namespace Lambda {
   }
   export interface InvocationResponse {
     /**
-     * The HTTP status code will be in the 200 range for successful request. For the RequestResponse invocation type this status code will be 200. For the Event invocation type this status code will be 202. For the DryRun invocation type the status code will be 204.
+     * The HTTP status code is in the 200 range for a successful request. For the RequestResponse invocation type, this status code is 200. For the Event invocation type, this status code is 202. For the DryRun invocation type, the status code is 204.
      */
     StatusCode?: Integer;
     /**
-     * If present, indicates that an error occured during function execution. Details about the error are included in the response payload.    Handled - The runtime caught an error thrown by the function and formatted it into a JSON document.    Unhandled - The runtime did not handle the error. For example, the function ran out of memory or timed out.  
+     * If present, indicates that an error occurred during function execution. Details about the error are included in the response payload.    Handled - The runtime caught an error thrown by the function and formatted it into a JSON document.    Unhandled - The runtime didn't handle the error. For example, the function ran out of memory or timed out.  
      */
     FunctionError?: String;
     /**
-     * The last 4 KB of the execution log, base64 encoded.
+     * The last 4 KB of the execution log, which is base64 encoded.
      */
     LogResult?: String;
     /**
@@ -1025,7 +1025,7 @@ declare namespace Lambda {
      */
     Payload?: _Blob;
     /**
-     * The version of the function that executed. When you invoke a function with an alias, indicates which version the alias resolved to.
+     * The version of the function that executed. When you invoke a function with an alias, this indicates which version the alias resolved to.
      */
     ExecutedVersion?: Version;
   }
@@ -1036,13 +1036,13 @@ declare namespace Lambda {
      */
     FunctionName: NamespacedFunctionName;
     /**
-     * JSON that you want to provide to your Lambda function as input.
+     * The JSON that you want to provide to your Lambda function as input.
      */
     InvokeArgs: BlobStream;
   }
   export interface InvokeAsyncResponse {
     /**
-     * It will be 202 upon success.
+     * The status code.
      */
     Status?: HttpStatus;
   }
@@ -1142,7 +1142,7 @@ declare namespace Lambda {
   export type LicenseInfo = string;
   export interface ListAliasesRequest {
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
     FunctionName: FunctionName;
     /**
@@ -1150,7 +1150,7 @@ declare namespace Lambda {
      */
     FunctionVersion?: Version;
     /**
-     * Specify the pagination token returned by a previous request to retrieve the next page of results.
+     * Specify the pagination token that's returned by a previous request to retrieve the next page of results.
      */
     Marker?: String;
     /**
@@ -1160,7 +1160,7 @@ declare namespace Lambda {
   }
   export interface ListAliasesResponse {
     /**
-     * Pagination token included if more results are available.
+     * The pagination token that's included if more results are available.
      */
     NextMarker?: String;
     /**
@@ -1198,7 +1198,7 @@ declare namespace Lambda {
   }
   export interface ListFunctionsRequest {
     /**
-     * For Lambda@Edge functions, the region of the master function. For example, us-east-2 or ALL. If specified, you must set FunctionVersion to ALL.
+     * For Lambda@Edge functions, the AWS Region of the master function. For example, us-east-2 or ALL. If specified, you must set FunctionVersion to ALL.
      */
     MasterRegion?: MasterRegion;
     /**
@@ -1206,7 +1206,7 @@ declare namespace Lambda {
      */
     FunctionVersion?: FunctionVersion;
     /**
-     * Specify the pagination token returned by a previous request to retrieve the next page of results.
+     * Specify the pagination token that's returned by a previous request to retrieve the next page of results.
      */
     Marker?: String;
     /**
@@ -1216,7 +1216,7 @@ declare namespace Lambda {
   }
   export interface ListFunctionsResponse {
     /**
-     * Pagination token included if more results are available.
+     * The pagination token that's included if more results are available.
      */
     NextMarker?: String;
     /**
@@ -1290,21 +1290,21 @@ declare namespace Lambda {
   }
   export interface ListVersionsByFunctionRequest {
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
     FunctionName: NamespacedFunctionName;
     /**
-     * Specify the pagination token returned by a previous request to retrieve the next page of results.
+     * Specify the pagination token that's returned by a previous request to retrieve the next page of results.
      */
     Marker?: String;
     /**
-     * Limit the number of versions returned.
+     * Limit the number of versions that are returned.
      */
     MaxItems?: MaxListItems;
   }
   export interface ListVersionsByFunctionResponse {
     /**
-     * Pagination token included if more results are available.
+     * The pagination token that's included if more results are available.
      */
     NextMarker?: String;
     /**
@@ -1381,19 +1381,19 @@ declare namespace Lambda {
   }
   export interface PublishVersionRequest {
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
     FunctionName: FunctionName;
     /**
-     * Only publish a version if the hash matches the value specified. Use this option to avoid publishing a version if the function code has changed since you last updated it. You can get the hash for the version you uploaded from the output of UpdateFunctionCode.
+     * Only publish a version if the hash value matches the value that's specified. Use this option to avoid publishing a version if the function code has changed since you last updated it. You can get the hash for the version that you uploaded from the output of UpdateFunctionCode.
      */
     CodeSha256?: String;
     /**
-     * Specify a description for the version to override the description in the function configuration.
+     * A description for the version to override the description in the function configuration.
      */
     Description?: Description;
     /**
-     * Only update the function if the revision ID matches the ID specified. Use this option to avoid publishing a version if the function configuration has changed since you last updated it.
+     * Only update the function if the revision ID matches the ID that's specified. Use this option to avoid publishing a version if the function configuration has changed since you last updated it.
      */
     RevisionId?: String;
   }
@@ -1440,7 +1440,7 @@ declare namespace Lambda {
      */
     Qualifier?: Qualifier;
     /**
-     * Only update the policy if the revision ID matches the ID specified. Use this option to avoid modifying a policy that has changed since you last read it.
+     * Only update the policy if the revision ID matches the ID that's specified. Use this option to avoid modifying a policy that has changed since you last read it.
      */
     RevisionId?: String;
   }
@@ -1501,7 +1501,7 @@ declare namespace Lambda {
   }
   export interface UpdateAliasRequest {
     /**
-     * The name of the lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
+     * The name of the Lambda function.  Name formats     Function name - MyFunction.    Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction.    Partial ARN - 123456789012:function:MyFunction.   The length constraint applies only to the full ARN. If you specify only the function name, it is limited to 64 characters in length.
      */
     FunctionName: FunctionName;
     /**
@@ -1521,7 +1521,7 @@ declare namespace Lambda {
      */
     RoutingConfig?: AliasRoutingConfiguration;
     /**
-     * Only update the alias if the revision ID matches the ID specified. Use this option to avoid modifying an alias that has changed since you last read it.
+     * Only update the alias if the revision ID matches the ID that's specified. Use this option to avoid modifying an alias that has changed since you last read it.
      */
     RevisionId?: String;
   }
@@ -1553,7 +1553,7 @@ declare namespace Lambda {
      */
     ZipFile?: _Blob;
     /**
-     * An Amazon S3 bucket in the same region as your function. The bucket can be in a different AWS account.
+     * An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.
      */
     S3Bucket?: S3Bucket;
     /**
@@ -1573,7 +1573,7 @@ declare namespace Lambda {
      */
     DryRun?: Boolean;
     /**
-     * Only update the function if the revision ID matches the ID specified. Use this option to avoid modifying a function that has changed since you last read it.
+     * Only update the function if the revision ID matches the ID that's specified. Use this option to avoid modifying a function that has changed since you last read it.
      */
     RevisionId?: String;
   }
@@ -1583,35 +1583,35 @@ declare namespace Lambda {
      */
     FunctionName: FunctionName;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role that Lambda will assume when it executes your function.
+     * The Amazon Resource Name (ARN) of the function's execution role.
      */
     Role?: RoleArn;
     /**
-     * The function that Lambda calls to begin executing your function. For Node.js, it is the module-name.export value in your function. 
+     * The name of the method within your code that Lambda calls to execute your function. The format includes the file name. It can also include namespaces and other qualifiers, depending on the runtime. For more information, see Programming Model.
      */
     Handler?: Handler;
     /**
-     * A short user-defined function description. AWS Lambda does not use this value. Assign a meaningful description as you see fit.
+     * A description of the function.
      */
     Description?: Description;
     /**
-     * The amount of time that Lambda allows a function to run before terminating it. The default is 3 seconds. The maximum allowed value is 900 seconds.
+     * The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
      */
     Timeout?: Timeout;
     /**
-     * The amount of memory, in MB, your Lambda function is given. AWS Lambda uses this memory size to infer the amount of CPU allocated to your function. Your function use-case determines your CPU and memory requirements. For example, a database operation might need less memory compared to an image processing function. The default value is 128 MB. The value must be a multiple of 64 MB.
+     * The amount of memory that your function has access to. Increasing the function's memory also increases its CPU allocation. The default value is 128 MB. The value must be a multiple of 64 MB.
      */
     MemorySize?: MemorySize;
     /**
-     * Specify security groups and subnets in a VPC to which your Lambda function needs access.
+     * For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC. When you connect a function to a VPC, it can only access resources and the internet through that VPC. For more information, see VPC Settings.
      */
     VpcConfig?: VpcConfig;
     /**
-     * The parent object that contains your environment's configuration settings.
+     * Environment variables that are accessible from function code during execution.
      */
     Environment?: Environment;
     /**
-     * The runtime version for the function.
+     * The identifier of the function's runtime.
      */
     Runtime?: Runtime;
     /**
@@ -1619,7 +1619,7 @@ declare namespace Lambda {
      */
     DeadLetterConfig?: DeadLetterConfig;
     /**
-     * The Amazon Resource Name (ARN) of the KMS key used to encrypt your function's environment variables. If you elect to use the AWS Lambda default service key, pass in an empty string ("") for this parameter.
+     * The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.
      */
     KMSKeyArn?: KMSKeyArn;
     /**
@@ -1627,11 +1627,11 @@ declare namespace Lambda {
      */
     TracingConfig?: TracingConfig;
     /**
-     * Only update the function if the revision ID matches the ID specified. Use this option to avoid modifying a function that has changed since you last read it.
+     * Only update the function if the revision ID matches the ID that's specified. Use this option to avoid modifying a function that has changed since you last read it.
      */
     RevisionId?: String;
     /**
-     * A list of function layers to add to the function's execution environment.
+     * A list of function layers to add to the function's execution environment. Specify each layer by its ARN, including the version.
      */
     Layers?: LayerList;
   }

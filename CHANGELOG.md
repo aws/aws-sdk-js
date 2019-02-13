@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.401.0-->
+<!--LATEST=2.402.0-->
 <!--ENTRYINSERT-->
+
+## 2.402.0
+* feature: EFS: Customers can now use the EFS Infrequent Access (IA) storage class to more cost-effectively store larger amounts of data in their file systems. EFS IA is cost-optimized storage for files that are not accessed every day. You can create a new file system and enable Lifecycle Management to automatically move files that have not been accessed for 30 days from the Standard storage class to the IA storage class.
+* feature: MediaTailor: This release adds support for tagging AWS Elemental MediaTailor resources.
+* feature: Rekognition: GetContentModeration now returns the version of the moderation detection model used to detect unsafe content.
 
 ## 2.401.0
 * feature: AppStream: This update enables customers to find the start time, max expiration time, and connection status associated with AppStream streaming session.
