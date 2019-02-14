@@ -105,7 +105,7 @@ declare namespace KinesisVideo {
      */
     StreamName: StreamName;
     /**
-     * The media type of the stream. Consumers of the stream can use this information when processing the stream. For more information about media types, see Media Types. If you choose to specify the MediaType, see Naming Requirements for guidelines. To play video on the console, the media must be H.264 encoded, and you need to specify this video type in this parameter as video/h264.  This parameter is optional; the default value is null (or empty in JSON).
+     * The media type of the stream. Consumers of the stream can use this information when processing the stream. For more information about media types, see Media Types. If you choose to specify the MediaType, see Naming Requirements for guidelines. Example valid values include "video/h264" and "video/h264,audio/aac". This parameter is optional; the default value is null (or empty in JSON).
      */
     MediaType?: MediaType;
     /**
@@ -116,6 +116,10 @@ declare namespace KinesisVideo {
      * The number of hours that you want to retain the data in the stream. Kinesis Video Streams retains the data in a data store that is associated with the stream. The default value is 0, indicating that the stream does not persist data. When the DataRetentionInHours value is 0, consumers can still consume the fragments that remain in the service host buffer, which has a retention time limit of 5 minutes and a retention memory limit of 200 MB. Fragments are removed from the buffer when either limit is reached.
      */
     DataRetentionInHours?: DataRetentionInHours;
+    /**
+     * A list of tags to associate with the specified stream. Each tag is a key-value pair (the value is optional).
+     */
+    Tags?: ResourceTags;
   }
   export interface CreateStreamOutput {
     /**
@@ -334,7 +338,7 @@ declare namespace KinesisVideo {
      */
     Operation: UpdateDataRetentionOperation;
     /**
-     * The retention period, in hours. The value you specify replaces the current value.
+     * The retention period, in hours. The value you specify replaces the current value. The maximum value for this parameter is 87600 (ten years).
      */
     DataRetentionChangeInHours: DataRetentionChangeInHours;
   }

@@ -6990,12 +6990,12 @@
         },
         "DeletionTime": {
           "shape": "String",
-          "documentation": "<p>The date and time the Client VPN endpoint was deleted, if applicable. Information about deleted Client VPN endpoints is retained for 24 hours, unless a new Client VPN is created with the same name.</p>",
+          "documentation": "<p>The date and time the Client VPN endpoint was deleted, if applicable.</p>",
           "locationName": "deletionTime"
         },
         "DnsName": {
           "shape": "String",
-          "documentation": "<p>The DNS name to be used by clients when establishing a connection.</p>",
+          "documentation": "<p>The DNS name to be used by clients when connecting to the Client VPN endpoint.</p>",
           "locationName": "dnsName"
         },
         "ClientCidrBlock": {
@@ -7003,9 +7003,14 @@
           "documentation": "<p>The IPv4 address range, in CIDR notation, from which client IP addresses are assigned.</p>",
           "locationName": "clientCidrBlock"
         },
+        "DnsServers": {
+          "shape": "ValueStringList",
+          "documentation": "<p>Information about the DNS servers to be used for DNS resolution. </p>",
+          "locationName": "dnsServer"
+        },
         "SplitTunnel": {
           "shape": "Boolean",
-          "documentation": "<p> <b>Indicates whether VPN split tunneling is supported.</b> </p>",
+          "documentation": "<p>Indicates whether VPN split tunneling is supported.</p>",
           "locationName": "splitTunnel"
         },
         "VpnProtocol": {
@@ -7021,6 +7026,8 @@
         "AssociatedTargetNetworks": {
           "shape": "AssociatedTargetNetworkSet",
           "documentation": "<p>Information about the associated target networks. A target network is a subnet in a VPC.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "This property is deprecated. To view the target networks associated with a Client VPN endpoint, call DescribeClientVpnTargetNetworks and inspect the clientVpnTargetNetworks response element.",
           "locationName": "associatedTargetNetwork"
         },
         "ServerCertificateArn": {
@@ -7037,6 +7044,11 @@
           "shape": "ConnectionLogResponseOptions",
           "documentation": "<p>Information about the client connection logging options for the Client VPN endpoint.</p>",
           "locationName": "connectionLogOptions"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Any tags assigned to the Client VPN endpoint.</p>",
+          "locationName": "tagSet"
         }
       },
       "documentation": "<p>Describes a Client VPN endpoint.</p>"
@@ -7650,6 +7662,11 @@
           "shape": "String",
           "documentation": "<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\"> How to Ensure Idempotency</a>.</p>",
           "idempotencyToken": true
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to apply to the Client VPN endpoint during creation.</p>",
+          "locationName": "TagSpecification"
         }
       }
     },
@@ -8269,7 +8286,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring Idempotency</a>.</p>"
+          "documentation": "<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring Idempotency</a>.</p> <p>Constraint: Maximum 128 ASCII characters.</p>"
         },
         "LaunchTemplateName": {
           "shape": "LaunchTemplateName",
@@ -8307,7 +8324,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring Idempotency</a>.</p>"
+          "documentation": "<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring Idempotency</a>.</p> <p>Constraint: Maximum 128 ASCII characters.</p>"
         },
         "LaunchTemplateId": {
           "shape": "String",
@@ -11952,7 +11969,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>architecture</code> - The image architecture (<code>i386</code> | <code>x86_64</code>).</p> </li> <li> <p> <code>block-device-mapping.delete-on-termination</code> - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.</p> </li> <li> <p> <code>block-device-mapping.device-name</code> - The device name specified in the block device mapping (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p> </li> <li> <p> <code>block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the EBS volume.</p> </li> <li> <p> <code>block-device-mapping.volume-size</code> - The volume size of the EBS volume, in GiB.</p> </li> <li> <p> <code>block-device-mapping.volume-type</code> - The volume type of the EBS volume (<code>gp2</code> | <code>io1</code> | <code>st1 </code>| <code>sc1</code> | <code>standard</code>).</p> </li> <li> <p> <code>description</code> - The description of the image (provided during image creation).</p> </li> <li> <p> <code>ena-support</code> - A Boolean that indicates whether enhanced networking with ENA is enabled.</p> </li> <li> <p> <code>hypervisor</code> - The hypervisor type (<code>ovm</code> | <code>xen</code>).</p> </li> <li> <p> <code>image-id</code> - The ID of the image.</p> </li> <li> <p> <code>image-type</code> - The image type (<code>machine</code> | <code>kernel</code> | <code>ramdisk</code>).</p> </li> <li> <p> <code>is-public</code> - A Boolean that indicates whether the image is public.</p> </li> <li> <p> <code>kernel-id</code> - The kernel ID.</p> </li> <li> <p> <code>manifest-location</code> - The location of the image manifest.</p> </li> <li> <p> <code>name</code> - The name of the AMI (provided during image creation).</p> </li> <li> <p> <code>owner-alias</code> - String value from an Amazon-maintained list (<code>amazon</code> | <code>aws-marketplace</code> | <code>microsoft</code>) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the image owner.</p> </li> <li> <p> <code>platform</code> - The platform. To only list Windows-based AMIs, use <code>windows</code>.</p> </li> <li> <p> <code>product-code</code> - The product code.</p> </li> <li> <p> <code>product-code.type</code> - The type of the product code (<code>devpay</code> | <code>marketplace</code>).</p> </li> <li> <p> <code>ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p> <code>root-device-name</code> - The device name of the root device volume (for example, <code>/dev/sda1</code>).</p> </li> <li> <p> <code>root-device-type</code> - The type of the root device volume (<code>ebs</code> | <code>instance-store</code>).</p> </li> <li> <p> <code>state</code> - The state of the image (<code>available</code> | <code>pending</code> | <code>failed</code>).</p> </li> <li> <p> <code>state-reason-code</code> - The reason code for the state change.</p> </li> <li> <p> <code>state-reason-message</code> - The message for the state change.</p> </li> <li> <p> <code>sriov-net-support</code> - A value of <code>simple</code> indicates that enhanced networking with the Intel 82599 VF interface is enabled.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>virtualization-type</code> - The virtualization type (<code>paravirtual</code> | <code>hvm</code>).</p> </li> </ul>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>architecture</code> - The image architecture (<code>i386</code> | <code>x86_64</code>).</p> </li> <li> <p> <code>block-device-mapping.delete-on-termination</code> - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.</p> </li> <li> <p> <code>block-device-mapping.device-name</code> - The device name specified in the block device mapping (for example, <code>/dev/sdh</code> or <code>xvdh</code>).</p> </li> <li> <p> <code>block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the EBS volume.</p> </li> <li> <p> <code>block-device-mapping.volume-size</code> - The volume size of the EBS volume, in GiB.</p> </li> <li> <p> <code>block-device-mapping.volume-type</code> - The volume type of the EBS volume (<code>gp2</code> | <code>io1</code> | <code>st1 </code>| <code>sc1</code> | <code>standard</code>).</p> </li> <li> <p> <code>block-device-mapping.encrypted</code> - A Boolean that indicates whether the EBS volume is encrypted.</p> </li> <li> <p> <code>description</code> - The description of the image (provided during image creation).</p> </li> <li> <p> <code>ena-support</code> - A Boolean that indicates whether enhanced networking with ENA is enabled.</p> </li> <li> <p> <code>hypervisor</code> - The hypervisor type (<code>ovm</code> | <code>xen</code>).</p> </li> <li> <p> <code>image-id</code> - The ID of the image.</p> </li> <li> <p> <code>image-type</code> - The image type (<code>machine</code> | <code>kernel</code> | <code>ramdisk</code>).</p> </li> <li> <p> <code>is-public</code> - A Boolean that indicates whether the image is public.</p> </li> <li> <p> <code>kernel-id</code> - The kernel ID.</p> </li> <li> <p> <code>manifest-location</code> - The location of the image manifest.</p> </li> <li> <p> <code>name</code> - The name of the AMI (provided during image creation).</p> </li> <li> <p> <code>owner-alias</code> - String value from an Amazon-maintained list (<code>amazon</code> | <code>aws-marketplace</code> | <code>microsoft</code>) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console.</p> </li> <li> <p> <code>owner-id</code> - The AWS account ID of the image owner.</p> </li> <li> <p> <code>platform</code> - The platform. To only list Windows-based AMIs, use <code>windows</code>.</p> </li> <li> <p> <code>product-code</code> - The product code.</p> </li> <li> <p> <code>product-code.type</code> - The type of the product code (<code>devpay</code> | <code>marketplace</code>).</p> </li> <li> <p> <code>ramdisk-id</code> - The RAM disk ID.</p> </li> <li> <p> <code>root-device-name</code> - The device name of the root device volume (for example, <code>/dev/sda1</code>).</p> </li> <li> <p> <code>root-device-type</code> - The type of the root device volume (<code>ebs</code> | <code>instance-store</code>).</p> </li> <li> <p> <code>state</code> - The state of the image (<code>available</code> | <code>pending</code> | <code>failed</code>).</p> </li> <li> <p> <code>state-reason-code</code> - The reason code for the state change.</p> </li> <li> <p> <code>state-reason-message</code> - The message for the state change.</p> </li> <li> <p> <code>sriov-net-support</code> - A value of <code>simple</code> indicates that enhanced networking with the Intel 82599 VF interface is enabled.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>virtualization-type</code> - The virtualization type (<code>paravirtual</code> | <code>hvm</code>).</p> </li> </ul>",
           "locationName": "Filter"
         },
         "ImageIds": {
@@ -17821,7 +17838,7 @@
         },
         "LicenseType": {
           "shape": "String",
-          "documentation": "<p>The license type to be used for the Amazon Machine Image (AMI) after importing.</p> <p> <b>Note:</b> You may only use BYOL if you have existing licenses with rights to use these licenses in a third party cloud like AWS. For more information, see <a href=\"https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#prerequisites-image\">Prerequisites</a> in the VM Import/Export User Guide.</p> <p>Valid values: <code>AWS</code> | <code>BYOL</code> </p>"
+          "documentation": "<p>The license type to be used for the Amazon Machine Image (AMI) after importing.</p> <p> <b>Note:</b> You may only use BYOL if you have existing licenses with rights to use these licenses in a third party cloud like AWS. For more information, see <a href=\"https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#prerequisites-image\">Prerequisites</a> in the VM Import/Export User Guide.</p> <p>Valid values include:</p> <ul> <li> <p> <code>Auto</code> - Detects the source-system operating system (OS) and applies the appropriate license.</p> </li> <li> <p> <code>AWS</code> - Replaces the source-system license with an AWS license, if appropriate.</p> </li> <li> <p> <code>BYOL</code> - Retains the source-system license, if appropriate.</p> </li> </ul> <p>Default value: <code>Auto</code> </p>"
         },
         "Platform": {
           "shape": "String",
@@ -19574,6 +19591,7 @@
         "m5.4xlarge",
         "m5.12xlarge",
         "m5.24xlarge",
+        "m5.metal",
         "m5a.large",
         "m5a.xlarge",
         "m5a.2xlarge",
@@ -19586,6 +19604,7 @@
         "m5d.4xlarge",
         "m5d.12xlarge",
         "m5d.24xlarge",
+        "m5d.metal",
         "h1.2xlarge",
         "h1.4xlarge",
         "h1.8xlarge",
@@ -19596,6 +19615,7 @@
         "z1d.3xlarge",
         "z1d.6xlarge",
         "z1d.12xlarge",
+        "z1d.metal",
         "u-6tb1.metal",
         "u-9tb1.metal",
         "u-12tb1.metal",
@@ -21551,7 +21571,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring Idempotency</a>.</p>"
+          "documentation": "<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring Idempotency</a>.</p> <p>Constraint: Maximum 128 ASCII characters.</p>"
         },
         "LaunchTemplateId": {
           "shape": "String",
@@ -25448,6 +25468,7 @@
     "ResourceType": {
       "type": "string",
       "enum": [
+        "client-vpn-endpoint",
         "customer-gateway",
         "dedicated-host",
         "dhcp-options",
@@ -26032,11 +26053,11 @@
         },
         "Ipv6AddressCount": {
           "shape": "Integer",
-          "documentation": "<p>[EC2-VPC] A number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet. You cannot specify this option and the option to assign specific IPv6 addresses in the same request. You can specify this option if you've specified a minimum number of instances to launch.</p>"
+          "documentation": "<p>[EC2-VPC] A number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet. You cannot specify this option and the option to assign specific IPv6 addresses in the same request. You can specify this option if you've specified a minimum number of instances to launch.</p> <p>You cannot specify this option and the network interfaces option in the same request.</p>"
         },
         "Ipv6Addresses": {
           "shape": "InstanceIpv6AddressList",
-          "documentation": "<p>[EC2-VPC] Specify one or more IPv6 addresses from the range of the subnet to associate with the primary network interface. You cannot specify this option and the option to assign a number of IPv6 addresses in the same request. You cannot specify this option if you've specified a minimum number of instances to launch.</p>",
+          "documentation": "<p>[EC2-VPC] Specify one or more IPv6 addresses from the range of the subnet to associate with the primary network interface. You cannot specify this option and the option to assign a number of IPv6 addresses in the same request. You cannot specify this option if you've specified a minimum number of instances to launch.</p> <p>You cannot specify this option and the network interfaces option in the same request.</p>",
           "locationName": "Ipv6Address"
         },
         "KernelId": {
@@ -26069,17 +26090,17 @@
         },
         "SecurityGroupIds": {
           "shape": "SecurityGroupIdStringList",
-          "documentation": "<p>One or more security group IDs. You can create a security group using <a>CreateSecurityGroup</a>.</p> <p>Default: Amazon EC2 uses the default security group.</p>",
+          "documentation": "<p>One or more security group IDs. You can create a security group using <a>CreateSecurityGroup</a>.</p> <p>Default: Amazon EC2 uses the default security group.</p> <p>You cannot specify this option and the network interfaces option in the same request.</p>",
           "locationName": "SecurityGroupId"
         },
         "SecurityGroups": {
           "shape": "SecurityGroupStringList",
-          "documentation": "<p>[EC2-Classic, default VPC] One or more security group names. For a nondefault VPC, you must use security group IDs instead.</p> <p>Default: Amazon EC2 uses the default security group.</p>",
+          "documentation": "<p>[EC2-Classic, default VPC] One or more security group names. For a nondefault VPC, you must use security group IDs instead.</p> <p>You cannot specify this option and the network interfaces option in the same request.</p> <p>Default: Amazon EC2 uses the default security group.</p>",
           "locationName": "SecurityGroup"
         },
         "SubnetId": {
           "shape": "String",
-          "documentation": "<p>[EC2-VPC] The ID of the subnet to launch the instance into.</p>"
+          "documentation": "<p>[EC2-VPC] The ID of the subnet to launch the instance into.</p> <p>You cannot specify this option and the network interfaces option in the same request.</p>"
         },
         "UserData": {
           "shape": "String",
@@ -26122,12 +26143,12 @@
         },
         "NetworkInterfaces": {
           "shape": "InstanceNetworkInterfaceSpecificationList",
-          "documentation": "<p>One or more network interfaces.</p>",
+          "documentation": "<p>One or more network interfaces.</p> <p>You cannot specify this option and the network interfaces option in the same request.</p>",
           "locationName": "networkInterface"
         },
         "PrivateIpAddress": {
           "shape": "String",
-          "documentation": "<p>[EC2-VPC] The primary IPv4 address. You must specify a value from the IPv4 address range of the subnet.</p> <p>Only one private IP address can be designated as primary. You can't specify this option if you've specified the option to designate a private IP address as the primary IP address in a network interface specification. You cannot specify this option if you're launching more than one instance in the request.</p>",
+          "documentation": "<p>[EC2-VPC] The primary IPv4 address. You must specify a value from the IPv4 address range of the subnet.</p> <p>Only one private IP address can be designated as primary. You can't specify this option if you've specified the option to designate a private IP address as the primary IP address in a network interface specification. You cannot specify this option if you're launching more than one instance in the request.</p> <p>You cannot specify this option and the network interfaces option in the same request.</p>",
           "locationName": "privateIpAddress"
         },
         "ElasticGpuSpecification": {
