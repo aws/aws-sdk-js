@@ -907,7 +907,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Creates a thing record in the registry.</p> <note> <p>This is a control plane operation. See <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html\">Authorization</a> for information about authorizing control plane actions.</p> </note>"
+      "documentation": "<p>Creates a thing record in the registry.</p> <note> <p>This is a control plane operation. See <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/authorization.html\">Authorization</a> for information about authorizing control plane actions.</p> </note>"
     },
     "CreateThingGroup": {
       "name": "CreateThingGroup",
@@ -935,7 +935,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Create a thing group.</p> <note> <p>This is a control plane operation. See <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/authorization.html\">Authorization</a> for information about authorizing control plane actions.</p> </note>"
+      "documentation": "<p>Create a thing group.</p> <note> <p>This is a control plane operation. See <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/authorization.html\">Authorization</a> for information about authorizing control plane actions.</p> </note>"
     },
     "CreateThingType": {
       "name": "CreateThingType",
@@ -3374,7 +3374,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Lists the policies attached to the specified principal. If you use an Cognito identity, the ID must be in <a href=\"http://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax\">AmazonCognito Identity format</a>.</p> <p> <b>Note:</b> This API is deprecated. Please use <a>ListAttachedPolicies</a> instead.</p>",
+      "documentation": "<p>Lists the policies attached to the specified principal. If you use an Cognito identity, the ID must be in <a href=\"https://docs.aws.amazon.com/cognitoidentity/latest/APIReference/API_GetCredentialsForIdentity.html#API_GetCredentialsForIdentity_RequestSyntax\">AmazonCognito Identity format</a>.</p> <p> <b>Note:</b> This API is deprecated. Please use <a>ListAttachedPolicies</a> instead.</p>",
       "deprecated": true
     },
     "ListPrincipalThings": {
@@ -6105,7 +6105,7 @@
       "members": {
         "comparisonOperator": {
           "shape": "ComparisonOperator",
-          "documentation": "<p>The operator that relates the thing measured (<code>metric</code>) to the criteria (<code>value</code>).</p>"
+          "documentation": "<p>The operator that relates the thing measured (<code>metric</code>) to the criteria (containing a <code>value</code>.</p>"
         },
         "value": {
           "shape": "MetricValue",
@@ -6113,7 +6113,7 @@
         },
         "durationSeconds": {
           "shape": "DurationSeconds",
-          "documentation": "<p>Use this to specify the period of time over which the behavior is evaluated, for those criteria which have a time dimension (for example, <code>NUM_MESSAGES_SENT</code>).</p>"
+          "documentation": "<p>Use this to specify the time duration over which the behavior is evaluated, for those criteria which have a time dimension (for example, <code>NUM_MESSAGES_SENT</code>). </p>"
         }
       },
       "documentation": "<p>The criteria by which the behavior is determined to be normal.</p>"
@@ -6624,11 +6624,11 @@
         },
         "metricUnit": {
           "shape": "String",
-          "documentation": "<p>The <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit\">metric unit</a> supported by CloudWatch.</p>"
+          "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Unit\">metric unit</a> supported by CloudWatch.</p>"
         },
         "metricTimestamp": {
           "shape": "String",
-          "documentation": "<p>An optional <a href=\"http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp\">Unix timestamp</a>.</p>"
+          "documentation": "<p>An optional <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp\">Unix timestamp</a>.</p>"
         }
       },
       "documentation": "<p>Describes an action that captures a CloudWatch metric.</p>"
@@ -6863,7 +6863,7 @@
         },
         "queryString": {
           "shape": "QueryString",
-          "documentation": "<p>The dynamic thing group search query string.</p> <p>See <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html\">Query Syntax</a> for information about query string syntax.</p>"
+          "documentation": "<p>The dynamic thing group search query string.</p> <p>See <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html\">Query Syntax</a> for information about query string syntax.</p>"
         },
         "queryVersion": {
           "shape": "QueryVersion",
@@ -7235,6 +7235,10 @@
           "documentation": "<p>The name you want to give to the scheduled audit. (Max. 128 chars)</p>",
           "location": "uri",
           "locationName": "scheduledAuditName"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Metadata which can be used to manage the scheduled audit.</p>"
         }
       }
     },
@@ -9700,15 +9704,15 @@
         },
         "createdAt": {
           "shape": "DateType",
-          "documentation": "<p>The time, in milliseconds since the epoch, when the job was created.</p>"
+          "documentation": "<p>The time, in seconds since the epoch, when the job was created.</p>"
         },
         "lastUpdatedAt": {
           "shape": "DateType",
-          "documentation": "<p>The time, in milliseconds since the epoch, when the job was last updated.</p>"
+          "documentation": "<p>The time, in seconds since the epoch, when the job was last updated.</p>"
         },
         "completedAt": {
           "shape": "DateType",
-          "documentation": "<p>The time, in milliseconds since the epoch, when the job was completed.</p>"
+          "documentation": "<p>The time, in seconds since the epoch, when the job was completed.</p>"
         },
         "jobProcessDetails": {
           "shape": "JobProcessDetails",
@@ -9763,15 +9767,15 @@
         },
         "queuedAt": {
           "shape": "DateType",
-          "documentation": "<p>The time, in milliseconds since the epoch, when the job execution was queued.</p>"
+          "documentation": "<p>The time, in seconds since the epoch, when the job execution was queued.</p>"
         },
         "startedAt": {
           "shape": "DateType",
-          "documentation": "<p>The time, in milliseconds since the epoch, when the job execution started.</p>"
+          "documentation": "<p>The time, in seconds since the epoch, when the job execution started.</p>"
         },
         "lastUpdatedAt": {
           "shape": "DateType",
-          "documentation": "<p>The time, in milliseconds since the epoch, when the job execution was last updated.</p>"
+          "documentation": "<p>The time, in seconds since the epoch, when the job execution was last updated.</p>"
         },
         "executionNumber": {
           "shape": "ExecutionNumber",
@@ -9829,15 +9833,15 @@
         },
         "queuedAt": {
           "shape": "DateType",
-          "documentation": "<p>The time, in milliseconds since the epoch, when the job execution was queued.</p>"
+          "documentation": "<p>The time, in seconds since the epoch, when the job execution was queued.</p>"
         },
         "startedAt": {
           "shape": "DateType",
-          "documentation": "<p>The time, in milliseconds since the epoch, when the job execution started.</p>"
+          "documentation": "<p>The time, in seconds since the epoch, when the job execution started.</p>"
         },
         "lastUpdatedAt": {
           "shape": "DateType",
-          "documentation": "<p>The time, in milliseconds since the epoch, when the job execution was last updated.</p>"
+          "documentation": "<p>The time, in seconds since the epoch, when the job execution was last updated.</p>"
         },
         "executionNumber": {
           "shape": "ExecutionNumber",
@@ -9982,15 +9986,15 @@
         },
         "createdAt": {
           "shape": "DateType",
-          "documentation": "<p>The time, in milliseconds since the epoch, when the job was created.</p>"
+          "documentation": "<p>The time, in seconds since the epoch, when the job was created.</p>"
         },
         "lastUpdatedAt": {
           "shape": "DateType",
-          "documentation": "<p>The time, in milliseconds since the epoch, when the job was last updated.</p>"
+          "documentation": "<p>The time, in seconds since the epoch, when the job was last updated.</p>"
         },
         "completedAt": {
           "shape": "DateType",
-          "documentation": "<p>The time, in milliseconds since the epoch, when the job completed.</p>"
+          "documentation": "<p>The time, in seconds since the epoch, when the job completed.</p>"
         }
       },
       "documentation": "<p>The job summary.</p>"
@@ -12440,11 +12444,11 @@
       "members": {
         "templateBody": {
           "shape": "TemplateBody",
-          "documentation": "<p>The provisioning template. See <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html\">Programmatic Provisioning</a> for more information.</p>"
+          "documentation": "<p>The provisioning template. See <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html\">Programmatic Provisioning</a> for more information.</p>"
         },
         "parameters": {
           "shape": "Parameters",
-          "documentation": "<p>The parameters for provisioning a thing. See <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html\">Programmatic Provisioning</a> for more information.</p>"
+          "documentation": "<p>The parameters for provisioning a thing. See <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/programmatic-provisioning.html\">Programmatic Provisioning</a> for more information.</p>"
         }
       }
     },
@@ -12804,7 +12808,7 @@
         },
         "cannedAcl": {
           "shape": "CannedAccessControlList",
-          "documentation": "<p>The Amazon S3 canned ACL that controls access to the object identified by the object key. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl\">S3 canned ACLs</a>.</p>"
+          "documentation": "<p>The Amazon S3 canned ACL that controls access to the object identified by the object key. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl\">S3 canned ACLs</a>.</p>"
         }
       },
       "documentation": "<p>Describes an action to write data to an Amazon S3 bucket.</p>"
@@ -13223,7 +13227,7 @@
         },
         "messageFormat": {
           "shape": "MessageFormat",
-          "documentation": "<p>(Optional) The message format of the message to publish. Accepted values are \"JSON\" and \"RAW\". The default value of the attribute is \"RAW\". SNS uses this setting to determine if the payload should be parsed and relevant platform-specific bits of the payload should be extracted. To read more about SNS message formats, see <a href=\"http://docs.aws.amazon.com/sns/latest/dg/json-formats.html\">http://docs.aws.amazon.com/sns/latest/dg/json-formats.html</a> refer to their official documentation.</p>"
+          "documentation": "<p>(Optional) The message format of the message to publish. Accepted values are \"JSON\" and \"RAW\". The default value of the attribute is \"RAW\". SNS uses this setting to determine if the payload should be parsed and relevant platform-specific bits of the payload should be extracted. To read more about SNS message formats, see <a href=\"https://docs.aws.amazon.com/sns/latest/dg/json-formats.html\">https://docs.aws.amazon.com/sns/latest/dg/json-formats.html</a> refer to their official documentation.</p>"
         }
       },
       "documentation": "<p>Describes an action to publish to an Amazon SNS topic.</p>"
@@ -14197,7 +14201,7 @@
       "members": {
         "sql": {
           "shape": "SQL",
-          "documentation": "<p>The SQL statement used to query the topic. For more information, see <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference\">AWS IoT SQL Reference</a> in the <i>AWS IoT Developer Guide</i>.</p>"
+          "documentation": "<p>The SQL statement used to query the topic. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/iot-rules.html#aws-iot-sql-reference\">AWS IoT SQL Reference</a> in the <i>AWS IoT Developer Guide</i>.</p>"
         },
         "description": {
           "shape": "Description",
@@ -14976,5 +14980,5 @@
       "type": "integer"
     }
   },
-  "documentation": "<fullname>AWS IoT</fullname> <p>AWS IoT provides secure, bi-directional communication between Internet-connected devices (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. You can discover your custom IoT-Data endpoint to communicate with, configure rules for data processing and integration with other services, organize resources associated with each device (Registry), configure logging, and create and manage policies and credentials to authenticate devices.</p> <p>For more information about how AWS IoT works, see the <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html\">Developer Guide</a>.</p> <p>For information about how to use the credentials provider for AWS IoT, see <a href=\"http://docs.aws.amazon.com/iot/latest/developerguide/authorizing-direct-aws.html\">Authorizing Direct Calls to AWS Services</a>.</p>"
+  "documentation": "<fullname>AWS IoT</fullname> <p>AWS IoT provides secure, bi-directional communication between Internet-connected devices (such as sensors, actuators, embedded devices, or smart appliances) and the AWS cloud. You can discover your custom IoT-Data endpoint to communicate with, configure rules for data processing and integration with other services, organize resources associated with each device (Registry), configure logging, and create and manage policies and credentials to authenticate devices.</p> <p>For more information about how AWS IoT works, see the <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/aws-iot-how-it-works.html\">Developer Guide</a>.</p> <p>For information about how to use the credentials provider for AWS IoT, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/authorizing-direct-aws.html\">Authorizing Direct Calls to AWS Services</a>.</p>"
 }

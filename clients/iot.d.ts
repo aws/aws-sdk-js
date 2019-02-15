@@ -1855,7 +1855,7 @@ declare namespace Iot {
   }
   export interface BehaviorCriteria {
     /**
-     * The operator that relates the thing measured (metric) to the criteria (value).
+     * The operator that relates the thing measured (metric) to the criteria (containing a value.
      */
     comparisonOperator?: ComparisonOperator;
     /**
@@ -1863,7 +1863,7 @@ declare namespace Iot {
      */
     value?: MetricValue;
     /**
-     * Use this to specify the period of time over which the behavior is evaluated, for those criteria which have a time dimension (for example, NUM_MESSAGES_SENT).
+     * Use this to specify the time duration over which the behavior is evaluated, for those criteria which have a time dimension (for example, NUM_MESSAGES_SENT). 
      */
     durationSeconds?: DurationSeconds;
   }
@@ -2593,6 +2593,10 @@ declare namespace Iot {
      * The name you want to give to the scheduled audit. (Max. 128 chars)
      */
     scheduledAuditName: ScheduledAuditName;
+    /**
+     * Metadata which can be used to manage the scheduled audit.
+     */
+    tags?: TagList;
   }
   export interface CreateScheduledAuditResponse {
     /**
@@ -4051,15 +4055,15 @@ declare namespace Iot {
      */
     abortConfig?: AbortConfig;
     /**
-     * The time, in milliseconds since the epoch, when the job was created.
+     * The time, in seconds since the epoch, when the job was created.
      */
     createdAt?: DateType;
     /**
-     * The time, in milliseconds since the epoch, when the job was last updated.
+     * The time, in seconds since the epoch, when the job was last updated.
      */
     lastUpdatedAt?: DateType;
     /**
-     * The time, in milliseconds since the epoch, when the job was completed.
+     * The time, in seconds since the epoch, when the job was completed.
      */
     completedAt?: DateType;
     /**
@@ -4097,15 +4101,15 @@ declare namespace Iot {
      */
     thingArn?: ThingArn;
     /**
-     * The time, in milliseconds since the epoch, when the job execution was queued.
+     * The time, in seconds since the epoch, when the job execution was queued.
      */
     queuedAt?: DateType;
     /**
-     * The time, in milliseconds since the epoch, when the job execution started.
+     * The time, in seconds since the epoch, when the job execution started.
      */
     startedAt?: DateType;
     /**
-     * The time, in milliseconds since the epoch, when the job execution was last updated.
+     * The time, in seconds since the epoch, when the job execution was last updated.
      */
     lastUpdatedAt?: DateType;
     /**
@@ -4135,15 +4139,15 @@ declare namespace Iot {
      */
     status?: JobExecutionStatus;
     /**
-     * The time, in milliseconds since the epoch, when the job execution was queued.
+     * The time, in seconds since the epoch, when the job execution was queued.
      */
     queuedAt?: DateType;
     /**
-     * The time, in milliseconds since the epoch, when the job execution started.
+     * The time, in seconds since the epoch, when the job execution started.
      */
     startedAt?: DateType;
     /**
-     * The time, in milliseconds since the epoch, when the job execution was last updated.
+     * The time, in seconds since the epoch, when the job execution was last updated.
      */
     lastUpdatedAt?: DateType;
     /**
@@ -4245,15 +4249,15 @@ declare namespace Iot {
      */
     status?: JobStatus;
     /**
-     * The time, in milliseconds since the epoch, when the job was created.
+     * The time, in seconds since the epoch, when the job was created.
      */
     createdAt?: DateType;
     /**
-     * The time, in milliseconds since the epoch, when the job was last updated.
+     * The time, in seconds since the epoch, when the job was last updated.
      */
     lastUpdatedAt?: DateType;
     /**
-     * The time, in milliseconds since the epoch, when the job completed.
+     * The time, in seconds since the epoch, when the job completed.
      */
     completedAt?: DateType;
   }
@@ -6140,7 +6144,7 @@ declare namespace Iot {
      */
     roleArn: AwsArn;
     /**
-     * (Optional) The message format of the message to publish. Accepted values are "JSON" and "RAW". The default value of the attribute is "RAW". SNS uses this setting to determine if the payload should be parsed and relevant platform-specific bits of the payload should be extracted. To read more about SNS message formats, see http://docs.aws.amazon.com/sns/latest/dg/json-formats.html refer to their official documentation.
+     * (Optional) The message format of the message to publish. Accepted values are "JSON" and "RAW". The default value of the attribute is "RAW". SNS uses this setting to determine if the payload should be parsed and relevant platform-specific bits of the payload should be extracted. To read more about SNS message formats, see https://docs.aws.amazon.com/sns/latest/dg/json-formats.html refer to their official documentation.
      */
     messageFormat?: MessageFormat;
   }
