@@ -14,35 +14,35 @@ declare class ES extends Service {
   /**
    * Attaches tags to an existing Elasticsearch domain. Tags are a set of case-sensitive key value pairs. An Elasticsearch domain may have up to 10 tags. See  Tagging Amazon Elasticsearch Service Domains for more information.
    */
-  addTags(params: ES.Types.AddTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  addTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Attaches tags to an existing Elasticsearch domain. Tags are a set of case-sensitive key value pairs. An Elasticsearch domain may have up to 10 tags. See  Tagging Amazon Elasticsearch Service Domains for more information.
    */
-  addTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
-  /**
-   * Cancels a scheduled service software update for an Amazon ES domain. You can only perform this operation before the AutomatedUpdateDate and when the UpdateStatus is in the PENDING_UPDATE state.
-   */
-  cancelElasticsearchServiceSoftwareUpdate(params: ES.Types.CancelElasticsearchServiceSoftwareUpdateRequest, callback?: (err: AWSError, data: ES.Types.CancelElasticsearchServiceSoftwareUpdateResponse) => void): Request<ES.Types.CancelElasticsearchServiceSoftwareUpdateResponse, AWSError>;
+  addTags(params: ES.Types.AddTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Cancels a scheduled service software update for an Amazon ES domain. You can only perform this operation before the AutomatedUpdateDate and when the UpdateStatus is in the PENDING_UPDATE state.
    */
   cancelElasticsearchServiceSoftwareUpdate(callback?: (err: AWSError, data: ES.Types.CancelElasticsearchServiceSoftwareUpdateResponse) => void): Request<ES.Types.CancelElasticsearchServiceSoftwareUpdateResponse, AWSError>;
   /**
-   * Creates a new Elasticsearch domain. For more information, see Creating Elasticsearch Domains in the Amazon Elasticsearch Service Developer Guide.
+   * Cancels a scheduled service software update for an Amazon ES domain. You can only perform this operation before the AutomatedUpdateDate and when the UpdateStatus is in the PENDING_UPDATE state.
    */
-  createElasticsearchDomain(params: ES.Types.CreateElasticsearchDomainRequest, callback?: (err: AWSError, data: ES.Types.CreateElasticsearchDomainResponse) => void): Request<ES.Types.CreateElasticsearchDomainResponse, AWSError>;
+  cancelElasticsearchServiceSoftwareUpdate(params: ES.Types.CancelElasticsearchServiceSoftwareUpdateRequest, callback?: (err: AWSError, data: ES.Types.CancelElasticsearchServiceSoftwareUpdateResponse) => void): Request<ES.Types.CancelElasticsearchServiceSoftwareUpdateResponse, AWSError>;
   /**
    * Creates a new Elasticsearch domain. For more information, see Creating Elasticsearch Domains in the Amazon Elasticsearch Service Developer Guide.
    */
   createElasticsearchDomain(callback?: (err: AWSError, data: ES.Types.CreateElasticsearchDomainResponse) => void): Request<ES.Types.CreateElasticsearchDomainResponse, AWSError>;
   /**
-   * Permanently deletes the specified Elasticsearch domain and all of its data. Once a domain is deleted, it cannot be recovered.
+   * Creates a new Elasticsearch domain. For more information, see Creating Elasticsearch Domains in the Amazon Elasticsearch Service Developer Guide.
    */
-  deleteElasticsearchDomain(params: ES.Types.DeleteElasticsearchDomainRequest, callback?: (err: AWSError, data: ES.Types.DeleteElasticsearchDomainResponse) => void): Request<ES.Types.DeleteElasticsearchDomainResponse, AWSError>;
+  createElasticsearchDomain(params: ES.Types.CreateElasticsearchDomainRequest, callback?: (err: AWSError, data: ES.Types.CreateElasticsearchDomainResponse) => void): Request<ES.Types.CreateElasticsearchDomainResponse, AWSError>;
   /**
    * Permanently deletes the specified Elasticsearch domain and all of its data. Once a domain is deleted, it cannot be recovered.
    */
   deleteElasticsearchDomain(callback?: (err: AWSError, data: ES.Types.DeleteElasticsearchDomainResponse) => void): Request<ES.Types.DeleteElasticsearchDomainResponse, AWSError>;
+  /**
+   * Permanently deletes the specified Elasticsearch domain and all of its data. Once a domain is deleted, it cannot be recovered.
+   */
+  deleteElasticsearchDomain(params: ES.Types.DeleteElasticsearchDomainRequest, callback?: (err: AWSError, data: ES.Types.DeleteElasticsearchDomainResponse) => void): Request<ES.Types.DeleteElasticsearchDomainResponse, AWSError>;
   /**
    * Deletes the service-linked role that Elasticsearch Service uses to manage and maintain VPC domains. Role deletion will fail if any existing VPC domains use the role. You must delete any such Elasticsearch domains before deleting the role. See Deleting Elasticsearch Service Role in VPC Endpoints for Amazon Elasticsearch Service Domains.
    */
@@ -50,75 +50,75 @@ declare class ES extends Service {
   /**
    * Returns domain configuration information about the specified Elasticsearch domain, including the domain ID, domain endpoint, and domain ARN.
    */
-  describeElasticsearchDomain(params: ES.Types.DescribeElasticsearchDomainRequest, callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchDomainResponse) => void): Request<ES.Types.DescribeElasticsearchDomainResponse, AWSError>;
+  describeElasticsearchDomain(callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchDomainResponse) => void): Request<ES.Types.DescribeElasticsearchDomainResponse, AWSError>;
   /**
    * Returns domain configuration information about the specified Elasticsearch domain, including the domain ID, domain endpoint, and domain ARN.
    */
-  describeElasticsearchDomain(callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchDomainResponse) => void): Request<ES.Types.DescribeElasticsearchDomainResponse, AWSError>;
-  /**
-   * Provides cluster configuration information about the specified Elasticsearch domain, such as the state, creation date, update version, and update date for cluster options.
-   */
-  describeElasticsearchDomainConfig(params: ES.Types.DescribeElasticsearchDomainConfigRequest, callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchDomainConfigResponse) => void): Request<ES.Types.DescribeElasticsearchDomainConfigResponse, AWSError>;
+  describeElasticsearchDomain(params: ES.Types.DescribeElasticsearchDomainRequest, callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchDomainResponse) => void): Request<ES.Types.DescribeElasticsearchDomainResponse, AWSError>;
   /**
    * Provides cluster configuration information about the specified Elasticsearch domain, such as the state, creation date, update version, and update date for cluster options.
    */
   describeElasticsearchDomainConfig(callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchDomainConfigResponse) => void): Request<ES.Types.DescribeElasticsearchDomainConfigResponse, AWSError>;
   /**
-   * Returns domain configuration information about the specified Elasticsearch domains, including the domain ID, domain endpoint, and domain ARN.
+   * Provides cluster configuration information about the specified Elasticsearch domain, such as the state, creation date, update version, and update date for cluster options.
    */
-  describeElasticsearchDomains(params: ES.Types.DescribeElasticsearchDomainsRequest, callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchDomainsResponse) => void): Request<ES.Types.DescribeElasticsearchDomainsResponse, AWSError>;
+  describeElasticsearchDomainConfig(params: ES.Types.DescribeElasticsearchDomainConfigRequest, callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchDomainConfigResponse) => void): Request<ES.Types.DescribeElasticsearchDomainConfigResponse, AWSError>;
   /**
    * Returns domain configuration information about the specified Elasticsearch domains, including the domain ID, domain endpoint, and domain ARN.
    */
   describeElasticsearchDomains(callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchDomainsResponse) => void): Request<ES.Types.DescribeElasticsearchDomainsResponse, AWSError>;
   /**
-   *  Describe Elasticsearch Limits for a given InstanceType and ElasticsearchVersion. When modifying existing Domain, specify the  DomainName  to know what Limits are supported for modifying. 
+   * Returns domain configuration information about the specified Elasticsearch domains, including the domain ID, domain endpoint, and domain ARN.
    */
-  describeElasticsearchInstanceTypeLimits(params: ES.Types.DescribeElasticsearchInstanceTypeLimitsRequest, callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchInstanceTypeLimitsResponse) => void): Request<ES.Types.DescribeElasticsearchInstanceTypeLimitsResponse, AWSError>;
+  describeElasticsearchDomains(params: ES.Types.DescribeElasticsearchDomainsRequest, callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchDomainsResponse) => void): Request<ES.Types.DescribeElasticsearchDomainsResponse, AWSError>;
   /**
    *  Describe Elasticsearch Limits for a given InstanceType and ElasticsearchVersion. When modifying existing Domain, specify the  DomainName  to know what Limits are supported for modifying. 
    */
   describeElasticsearchInstanceTypeLimits(callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchInstanceTypeLimitsResponse) => void): Request<ES.Types.DescribeElasticsearchInstanceTypeLimitsResponse, AWSError>;
   /**
-   * Lists available reserved Elasticsearch instance offerings.
+   *  Describe Elasticsearch Limits for a given InstanceType and ElasticsearchVersion. When modifying existing Domain, specify the  DomainName  to know what Limits are supported for modifying. 
    */
-  describeReservedElasticsearchInstanceOfferings(params: ES.Types.DescribeReservedElasticsearchInstanceOfferingsRequest, callback?: (err: AWSError, data: ES.Types.DescribeReservedElasticsearchInstanceOfferingsResponse) => void): Request<ES.Types.DescribeReservedElasticsearchInstanceOfferingsResponse, AWSError>;
+  describeElasticsearchInstanceTypeLimits(params: ES.Types.DescribeElasticsearchInstanceTypeLimitsRequest, callback?: (err: AWSError, data: ES.Types.DescribeElasticsearchInstanceTypeLimitsResponse) => void): Request<ES.Types.DescribeElasticsearchInstanceTypeLimitsResponse, AWSError>;
   /**
    * Lists available reserved Elasticsearch instance offerings.
    */
   describeReservedElasticsearchInstanceOfferings(callback?: (err: AWSError, data: ES.Types.DescribeReservedElasticsearchInstanceOfferingsResponse) => void): Request<ES.Types.DescribeReservedElasticsearchInstanceOfferingsResponse, AWSError>;
   /**
-   * Returns information about reserved Elasticsearch instances for this account.
+   * Lists available reserved Elasticsearch instance offerings.
    */
-  describeReservedElasticsearchInstances(params: ES.Types.DescribeReservedElasticsearchInstancesRequest, callback?: (err: AWSError, data: ES.Types.DescribeReservedElasticsearchInstancesResponse) => void): Request<ES.Types.DescribeReservedElasticsearchInstancesResponse, AWSError>;
+  describeReservedElasticsearchInstanceOfferings(params: ES.Types.DescribeReservedElasticsearchInstanceOfferingsRequest, callback?: (err: AWSError, data: ES.Types.DescribeReservedElasticsearchInstanceOfferingsResponse) => void): Request<ES.Types.DescribeReservedElasticsearchInstanceOfferingsResponse, AWSError>;
   /**
    * Returns information about reserved Elasticsearch instances for this account.
    */
   describeReservedElasticsearchInstances(callback?: (err: AWSError, data: ES.Types.DescribeReservedElasticsearchInstancesResponse) => void): Request<ES.Types.DescribeReservedElasticsearchInstancesResponse, AWSError>;
   /**
-   *  Returns a list of upgrade compatible Elastisearch versions. You can optionally pass a  DomainName  to get all upgrade compatible Elasticsearch versions for that specific domain. 
+   * Returns information about reserved Elasticsearch instances for this account.
    */
-  getCompatibleElasticsearchVersions(params: ES.Types.GetCompatibleElasticsearchVersionsRequest, callback?: (err: AWSError, data: ES.Types.GetCompatibleElasticsearchVersionsResponse) => void): Request<ES.Types.GetCompatibleElasticsearchVersionsResponse, AWSError>;
+  describeReservedElasticsearchInstances(params: ES.Types.DescribeReservedElasticsearchInstancesRequest, callback?: (err: AWSError, data: ES.Types.DescribeReservedElasticsearchInstancesResponse) => void): Request<ES.Types.DescribeReservedElasticsearchInstancesResponse, AWSError>;
   /**
    *  Returns a list of upgrade compatible Elastisearch versions. You can optionally pass a  DomainName  to get all upgrade compatible Elasticsearch versions for that specific domain. 
    */
   getCompatibleElasticsearchVersions(callback?: (err: AWSError, data: ES.Types.GetCompatibleElasticsearchVersionsResponse) => void): Request<ES.Types.GetCompatibleElasticsearchVersionsResponse, AWSError>;
   /**
-   * Retrieves the complete history of the last 10 upgrades that were performed on the domain.
+   *  Returns a list of upgrade compatible Elastisearch versions. You can optionally pass a  DomainName  to get all upgrade compatible Elasticsearch versions for that specific domain. 
    */
-  getUpgradeHistory(params: ES.Types.GetUpgradeHistoryRequest, callback?: (err: AWSError, data: ES.Types.GetUpgradeHistoryResponse) => void): Request<ES.Types.GetUpgradeHistoryResponse, AWSError>;
+  getCompatibleElasticsearchVersions(params: ES.Types.GetCompatibleElasticsearchVersionsRequest, callback?: (err: AWSError, data: ES.Types.GetCompatibleElasticsearchVersionsResponse) => void): Request<ES.Types.GetCompatibleElasticsearchVersionsResponse, AWSError>;
   /**
    * Retrieves the complete history of the last 10 upgrades that were performed on the domain.
    */
   getUpgradeHistory(callback?: (err: AWSError, data: ES.Types.GetUpgradeHistoryResponse) => void): Request<ES.Types.GetUpgradeHistoryResponse, AWSError>;
   /**
-   * Retrieves the latest status of the last upgrade or upgrade eligibility check that was performed on the domain.
+   * Retrieves the complete history of the last 10 upgrades that were performed on the domain.
    */
-  getUpgradeStatus(params: ES.Types.GetUpgradeStatusRequest, callback?: (err: AWSError, data: ES.Types.GetUpgradeStatusResponse) => void): Request<ES.Types.GetUpgradeStatusResponse, AWSError>;
+  getUpgradeHistory(params: ES.Types.GetUpgradeHistoryRequest, callback?: (err: AWSError, data: ES.Types.GetUpgradeHistoryResponse) => void): Request<ES.Types.GetUpgradeHistoryResponse, AWSError>;
   /**
    * Retrieves the latest status of the last upgrade or upgrade eligibility check that was performed on the domain.
    */
   getUpgradeStatus(callback?: (err: AWSError, data: ES.Types.GetUpgradeStatusResponse) => void): Request<ES.Types.GetUpgradeStatusResponse, AWSError>;
+  /**
+   * Retrieves the latest status of the last upgrade or upgrade eligibility check that was performed on the domain.
+   */
+  getUpgradeStatus(params: ES.Types.GetUpgradeStatusRequest, callback?: (err: AWSError, data: ES.Types.GetUpgradeStatusResponse) => void): Request<ES.Types.GetUpgradeStatusResponse, AWSError>;
   /**
    * Returns the name of all Elasticsearch domains owned by the current user's account. 
    */
@@ -126,67 +126,67 @@ declare class ES extends Service {
   /**
    * List all Elasticsearch instance types that are supported for given ElasticsearchVersion
    */
-  listElasticsearchInstanceTypes(params: ES.Types.ListElasticsearchInstanceTypesRequest, callback?: (err: AWSError, data: ES.Types.ListElasticsearchInstanceTypesResponse) => void): Request<ES.Types.ListElasticsearchInstanceTypesResponse, AWSError>;
+  listElasticsearchInstanceTypes(callback?: (err: AWSError, data: ES.Types.ListElasticsearchInstanceTypesResponse) => void): Request<ES.Types.ListElasticsearchInstanceTypesResponse, AWSError>;
   /**
    * List all Elasticsearch instance types that are supported for given ElasticsearchVersion
    */
-  listElasticsearchInstanceTypes(callback?: (err: AWSError, data: ES.Types.ListElasticsearchInstanceTypesResponse) => void): Request<ES.Types.ListElasticsearchInstanceTypesResponse, AWSError>;
-  /**
-   * List all supported Elasticsearch versions
-   */
-  listElasticsearchVersions(params: ES.Types.ListElasticsearchVersionsRequest, callback?: (err: AWSError, data: ES.Types.ListElasticsearchVersionsResponse) => void): Request<ES.Types.ListElasticsearchVersionsResponse, AWSError>;
+  listElasticsearchInstanceTypes(params: ES.Types.ListElasticsearchInstanceTypesRequest, callback?: (err: AWSError, data: ES.Types.ListElasticsearchInstanceTypesResponse) => void): Request<ES.Types.ListElasticsearchInstanceTypesResponse, AWSError>;
   /**
    * List all supported Elasticsearch versions
    */
   listElasticsearchVersions(callback?: (err: AWSError, data: ES.Types.ListElasticsearchVersionsResponse) => void): Request<ES.Types.ListElasticsearchVersionsResponse, AWSError>;
   /**
-   * Returns all tags for the given Elasticsearch domain.
+   * List all supported Elasticsearch versions
    */
-  listTags(params: ES.Types.ListTagsRequest, callback?: (err: AWSError, data: ES.Types.ListTagsResponse) => void): Request<ES.Types.ListTagsResponse, AWSError>;
+  listElasticsearchVersions(params: ES.Types.ListElasticsearchVersionsRequest, callback?: (err: AWSError, data: ES.Types.ListElasticsearchVersionsResponse) => void): Request<ES.Types.ListElasticsearchVersionsResponse, AWSError>;
   /**
    * Returns all tags for the given Elasticsearch domain.
    */
   listTags(callback?: (err: AWSError, data: ES.Types.ListTagsResponse) => void): Request<ES.Types.ListTagsResponse, AWSError>;
   /**
-   * Allows you to purchase reserved Elasticsearch instances.
+   * Returns all tags for the given Elasticsearch domain.
    */
-  purchaseReservedElasticsearchInstanceOffering(params: ES.Types.PurchaseReservedElasticsearchInstanceOfferingRequest, callback?: (err: AWSError, data: ES.Types.PurchaseReservedElasticsearchInstanceOfferingResponse) => void): Request<ES.Types.PurchaseReservedElasticsearchInstanceOfferingResponse, AWSError>;
+  listTags(params: ES.Types.ListTagsRequest, callback?: (err: AWSError, data: ES.Types.ListTagsResponse) => void): Request<ES.Types.ListTagsResponse, AWSError>;
   /**
    * Allows you to purchase reserved Elasticsearch instances.
    */
   purchaseReservedElasticsearchInstanceOffering(callback?: (err: AWSError, data: ES.Types.PurchaseReservedElasticsearchInstanceOfferingResponse) => void): Request<ES.Types.PurchaseReservedElasticsearchInstanceOfferingResponse, AWSError>;
   /**
-   * Removes the specified set of tags from the specified Elasticsearch domain.
+   * Allows you to purchase reserved Elasticsearch instances.
    */
-  removeTags(params: ES.Types.RemoveTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  purchaseReservedElasticsearchInstanceOffering(params: ES.Types.PurchaseReservedElasticsearchInstanceOfferingRequest, callback?: (err: AWSError, data: ES.Types.PurchaseReservedElasticsearchInstanceOfferingResponse) => void): Request<ES.Types.PurchaseReservedElasticsearchInstanceOfferingResponse, AWSError>;
   /**
    * Removes the specified set of tags from the specified Elasticsearch domain.
    */
   removeTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Schedules a service software update for an Amazon ES domain.
+   * Removes the specified set of tags from the specified Elasticsearch domain.
    */
-  startElasticsearchServiceSoftwareUpdate(params: ES.Types.StartElasticsearchServiceSoftwareUpdateRequest, callback?: (err: AWSError, data: ES.Types.StartElasticsearchServiceSoftwareUpdateResponse) => void): Request<ES.Types.StartElasticsearchServiceSoftwareUpdateResponse, AWSError>;
+  removeTags(params: ES.Types.RemoveTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Schedules a service software update for an Amazon ES domain.
    */
   startElasticsearchServiceSoftwareUpdate(callback?: (err: AWSError, data: ES.Types.StartElasticsearchServiceSoftwareUpdateResponse) => void): Request<ES.Types.StartElasticsearchServiceSoftwareUpdateResponse, AWSError>;
   /**
-   * Modifies the cluster configuration of the specified Elasticsearch domain, setting as setting the instance type and the number of instances. 
+   * Schedules a service software update for an Amazon ES domain.
    */
-  updateElasticsearchDomainConfig(params: ES.Types.UpdateElasticsearchDomainConfigRequest, callback?: (err: AWSError, data: ES.Types.UpdateElasticsearchDomainConfigResponse) => void): Request<ES.Types.UpdateElasticsearchDomainConfigResponse, AWSError>;
+  startElasticsearchServiceSoftwareUpdate(params: ES.Types.StartElasticsearchServiceSoftwareUpdateRequest, callback?: (err: AWSError, data: ES.Types.StartElasticsearchServiceSoftwareUpdateResponse) => void): Request<ES.Types.StartElasticsearchServiceSoftwareUpdateResponse, AWSError>;
   /**
    * Modifies the cluster configuration of the specified Elasticsearch domain, setting as setting the instance type and the number of instances. 
    */
   updateElasticsearchDomainConfig(callback?: (err: AWSError, data: ES.Types.UpdateElasticsearchDomainConfigResponse) => void): Request<ES.Types.UpdateElasticsearchDomainConfigResponse, AWSError>;
   /**
-   * Allows you to either upgrade your domain or perform an Upgrade eligibility check to a compatible Elasticsearch version.
+   * Modifies the cluster configuration of the specified Elasticsearch domain, setting as setting the instance type and the number of instances. 
    */
-  upgradeElasticsearchDomain(params: ES.Types.UpgradeElasticsearchDomainRequest, callback?: (err: AWSError, data: ES.Types.UpgradeElasticsearchDomainResponse) => void): Request<ES.Types.UpgradeElasticsearchDomainResponse, AWSError>;
+  updateElasticsearchDomainConfig(params: ES.Types.UpdateElasticsearchDomainConfigRequest, callback?: (err: AWSError, data: ES.Types.UpdateElasticsearchDomainConfigResponse) => void): Request<ES.Types.UpdateElasticsearchDomainConfigResponse, AWSError>;
   /**
    * Allows you to either upgrade your domain or perform an Upgrade eligibility check to a compatible Elasticsearch version.
    */
   upgradeElasticsearchDomain(callback?: (err: AWSError, data: ES.Types.UpgradeElasticsearchDomainResponse) => void): Request<ES.Types.UpgradeElasticsearchDomainResponse, AWSError>;
+  /**
+   * Allows you to either upgrade your domain or perform an Upgrade eligibility check to a compatible Elasticsearch version.
+   */
+  upgradeElasticsearchDomain(params: ES.Types.UpgradeElasticsearchDomainRequest, callback?: (err: AWSError, data: ES.Types.UpgradeElasticsearchDomainResponse) => void): Request<ES.Types.UpgradeElasticsearchDomainResponse, AWSError>;
 }
 declare namespace ES {
   export type ARN = string;

@@ -14,203 +14,203 @@ declare class ECR extends Service {
   /**
    * Check the availability of multiple image layers in a specified registry and repository.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
-  batchCheckLayerAvailability(params: ECR.Types.BatchCheckLayerAvailabilityRequest, callback?: (err: AWSError, data: ECR.Types.BatchCheckLayerAvailabilityResponse) => void): Request<ECR.Types.BatchCheckLayerAvailabilityResponse, AWSError>;
+  batchCheckLayerAvailability(callback?: (err: AWSError, data: ECR.Types.BatchCheckLayerAvailabilityResponse) => void): Request<ECR.Types.BatchCheckLayerAvailabilityResponse, AWSError>;
   /**
    * Check the availability of multiple image layers in a specified registry and repository.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
-  batchCheckLayerAvailability(callback?: (err: AWSError, data: ECR.Types.BatchCheckLayerAvailabilityResponse) => void): Request<ECR.Types.BatchCheckLayerAvailabilityResponse, AWSError>;
-  /**
-   * Deletes a list of specified images within a specified repository. Images are specified with either imageTag or imageDigest. You can remove a tag from an image by specifying the image's tag in your request. When you remove the last tag from an image, the image is deleted from your repository. You can completely delete an image (and all of its tags) by specifying the image's digest in your request.
-   */
-  batchDeleteImage(params: ECR.Types.BatchDeleteImageRequest, callback?: (err: AWSError, data: ECR.Types.BatchDeleteImageResponse) => void): Request<ECR.Types.BatchDeleteImageResponse, AWSError>;
+  batchCheckLayerAvailability(params: ECR.Types.BatchCheckLayerAvailabilityRequest, callback?: (err: AWSError, data: ECR.Types.BatchCheckLayerAvailabilityResponse) => void): Request<ECR.Types.BatchCheckLayerAvailabilityResponse, AWSError>;
   /**
    * Deletes a list of specified images within a specified repository. Images are specified with either imageTag or imageDigest. You can remove a tag from an image by specifying the image's tag in your request. When you remove the last tag from an image, the image is deleted from your repository. You can completely delete an image (and all of its tags) by specifying the image's digest in your request.
    */
   batchDeleteImage(callback?: (err: AWSError, data: ECR.Types.BatchDeleteImageResponse) => void): Request<ECR.Types.BatchDeleteImageResponse, AWSError>;
   /**
-   * Gets detailed information for specified images within a specified repository. Images are specified with either imageTag or imageDigest.
+   * Deletes a list of specified images within a specified repository. Images are specified with either imageTag or imageDigest. You can remove a tag from an image by specifying the image's tag in your request. When you remove the last tag from an image, the image is deleted from your repository. You can completely delete an image (and all of its tags) by specifying the image's digest in your request.
    */
-  batchGetImage(params: ECR.Types.BatchGetImageRequest, callback?: (err: AWSError, data: ECR.Types.BatchGetImageResponse) => void): Request<ECR.Types.BatchGetImageResponse, AWSError>;
+  batchDeleteImage(params: ECR.Types.BatchDeleteImageRequest, callback?: (err: AWSError, data: ECR.Types.BatchDeleteImageResponse) => void): Request<ECR.Types.BatchDeleteImageResponse, AWSError>;
   /**
    * Gets detailed information for specified images within a specified repository. Images are specified with either imageTag or imageDigest.
    */
   batchGetImage(callback?: (err: AWSError, data: ECR.Types.BatchGetImageResponse) => void): Request<ECR.Types.BatchGetImageResponse, AWSError>;
   /**
-   * Informs Amazon ECR that the image layer upload has completed for a specified registry, repository name, and upload ID. You can optionally provide a sha256 digest of the image layer for data validation purposes.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
+   * Gets detailed information for specified images within a specified repository. Images are specified with either imageTag or imageDigest.
    */
-  completeLayerUpload(params: ECR.Types.CompleteLayerUploadRequest, callback?: (err: AWSError, data: ECR.Types.CompleteLayerUploadResponse) => void): Request<ECR.Types.CompleteLayerUploadResponse, AWSError>;
+  batchGetImage(params: ECR.Types.BatchGetImageRequest, callback?: (err: AWSError, data: ECR.Types.BatchGetImageResponse) => void): Request<ECR.Types.BatchGetImageResponse, AWSError>;
   /**
    * Informs Amazon ECR that the image layer upload has completed for a specified registry, repository name, and upload ID. You can optionally provide a sha256 digest of the image layer for data validation purposes.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   completeLayerUpload(callback?: (err: AWSError, data: ECR.Types.CompleteLayerUploadResponse) => void): Request<ECR.Types.CompleteLayerUploadResponse, AWSError>;
   /**
-   * Creates an image repository.
+   * Informs Amazon ECR that the image layer upload has completed for a specified registry, repository name, and upload ID. You can optionally provide a sha256 digest of the image layer for data validation purposes.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
-  createRepository(params: ECR.Types.CreateRepositoryRequest, callback?: (err: AWSError, data: ECR.Types.CreateRepositoryResponse) => void): Request<ECR.Types.CreateRepositoryResponse, AWSError>;
+  completeLayerUpload(params: ECR.Types.CompleteLayerUploadRequest, callback?: (err: AWSError, data: ECR.Types.CompleteLayerUploadResponse) => void): Request<ECR.Types.CompleteLayerUploadResponse, AWSError>;
   /**
    * Creates an image repository.
    */
   createRepository(callback?: (err: AWSError, data: ECR.Types.CreateRepositoryResponse) => void): Request<ECR.Types.CreateRepositoryResponse, AWSError>;
   /**
-   * Deletes the specified lifecycle policy.
+   * Creates an image repository.
    */
-  deleteLifecyclePolicy(params: ECR.Types.DeleteLifecyclePolicyRequest, callback?: (err: AWSError, data: ECR.Types.DeleteLifecyclePolicyResponse) => void): Request<ECR.Types.DeleteLifecyclePolicyResponse, AWSError>;
+  createRepository(params: ECR.Types.CreateRepositoryRequest, callback?: (err: AWSError, data: ECR.Types.CreateRepositoryResponse) => void): Request<ECR.Types.CreateRepositoryResponse, AWSError>;
   /**
    * Deletes the specified lifecycle policy.
    */
   deleteLifecyclePolicy(callback?: (err: AWSError, data: ECR.Types.DeleteLifecyclePolicyResponse) => void): Request<ECR.Types.DeleteLifecyclePolicyResponse, AWSError>;
   /**
-   * Deletes an existing image repository. If a repository contains images, you must use the force option to delete it.
+   * Deletes the specified lifecycle policy.
    */
-  deleteRepository(params: ECR.Types.DeleteRepositoryRequest, callback?: (err: AWSError, data: ECR.Types.DeleteRepositoryResponse) => void): Request<ECR.Types.DeleteRepositoryResponse, AWSError>;
+  deleteLifecyclePolicy(params: ECR.Types.DeleteLifecyclePolicyRequest, callback?: (err: AWSError, data: ECR.Types.DeleteLifecyclePolicyResponse) => void): Request<ECR.Types.DeleteLifecyclePolicyResponse, AWSError>;
   /**
    * Deletes an existing image repository. If a repository contains images, you must use the force option to delete it.
    */
   deleteRepository(callback?: (err: AWSError, data: ECR.Types.DeleteRepositoryResponse) => void): Request<ECR.Types.DeleteRepositoryResponse, AWSError>;
   /**
-   * Deletes the repository policy from a specified repository.
+   * Deletes an existing image repository. If a repository contains images, you must use the force option to delete it.
    */
-  deleteRepositoryPolicy(params: ECR.Types.DeleteRepositoryPolicyRequest, callback?: (err: AWSError, data: ECR.Types.DeleteRepositoryPolicyResponse) => void): Request<ECR.Types.DeleteRepositoryPolicyResponse, AWSError>;
+  deleteRepository(params: ECR.Types.DeleteRepositoryRequest, callback?: (err: AWSError, data: ECR.Types.DeleteRepositoryResponse) => void): Request<ECR.Types.DeleteRepositoryResponse, AWSError>;
   /**
    * Deletes the repository policy from a specified repository.
    */
   deleteRepositoryPolicy(callback?: (err: AWSError, data: ECR.Types.DeleteRepositoryPolicyResponse) => void): Request<ECR.Types.DeleteRepositoryPolicyResponse, AWSError>;
   /**
-   * Returns metadata about the images in a repository, including image size, image tags, and creation date.  Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the docker images command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by DescribeImages. 
+   * Deletes the repository policy from a specified repository.
    */
-  describeImages(params: ECR.Types.DescribeImagesRequest, callback?: (err: AWSError, data: ECR.Types.DescribeImagesResponse) => void): Request<ECR.Types.DescribeImagesResponse, AWSError>;
+  deleteRepositoryPolicy(params: ECR.Types.DeleteRepositoryPolicyRequest, callback?: (err: AWSError, data: ECR.Types.DeleteRepositoryPolicyResponse) => void): Request<ECR.Types.DeleteRepositoryPolicyResponse, AWSError>;
   /**
    * Returns metadata about the images in a repository, including image size, image tags, and creation date.  Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the docker images command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by DescribeImages. 
    */
   describeImages(callback?: (err: AWSError, data: ECR.Types.DescribeImagesResponse) => void): Request<ECR.Types.DescribeImagesResponse, AWSError>;
   /**
-   * Describes image repositories in a registry.
+   * Returns metadata about the images in a repository, including image size, image tags, and creation date.  Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the docker images command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by DescribeImages. 
    */
-  describeRepositories(params: ECR.Types.DescribeRepositoriesRequest, callback?: (err: AWSError, data: ECR.Types.DescribeRepositoriesResponse) => void): Request<ECR.Types.DescribeRepositoriesResponse, AWSError>;
+  describeImages(params: ECR.Types.DescribeImagesRequest, callback?: (err: AWSError, data: ECR.Types.DescribeImagesResponse) => void): Request<ECR.Types.DescribeImagesResponse, AWSError>;
   /**
    * Describes image repositories in a registry.
    */
   describeRepositories(callback?: (err: AWSError, data: ECR.Types.DescribeRepositoriesResponse) => void): Request<ECR.Types.DescribeRepositoriesResponse, AWSError>;
   /**
-   * Retrieves a token that is valid for a specified registry for 12 hours. This command allows you to use the docker CLI to push and pull images with Amazon ECR. If you do not specify a registry, the default registry is assumed. The authorizationToken returned for each registry specified is a base64 encoded string that can be decoded and used in a docker login command to authenticate to a registry. The AWS CLI offers an aws ecr get-login command that simplifies the login process.
+   * Describes image repositories in a registry.
    */
-  getAuthorizationToken(params: ECR.Types.GetAuthorizationTokenRequest, callback?: (err: AWSError, data: ECR.Types.GetAuthorizationTokenResponse) => void): Request<ECR.Types.GetAuthorizationTokenResponse, AWSError>;
+  describeRepositories(params: ECR.Types.DescribeRepositoriesRequest, callback?: (err: AWSError, data: ECR.Types.DescribeRepositoriesResponse) => void): Request<ECR.Types.DescribeRepositoriesResponse, AWSError>;
   /**
    * Retrieves a token that is valid for a specified registry for 12 hours. This command allows you to use the docker CLI to push and pull images with Amazon ECR. If you do not specify a registry, the default registry is assumed. The authorizationToken returned for each registry specified is a base64 encoded string that can be decoded and used in a docker login command to authenticate to a registry. The AWS CLI offers an aws ecr get-login command that simplifies the login process.
    */
   getAuthorizationToken(callback?: (err: AWSError, data: ECR.Types.GetAuthorizationTokenResponse) => void): Request<ECR.Types.GetAuthorizationTokenResponse, AWSError>;
   /**
-   * Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer. You can only get URLs for image layers that are referenced in an image.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
+   * Retrieves a token that is valid for a specified registry for 12 hours. This command allows you to use the docker CLI to push and pull images with Amazon ECR. If you do not specify a registry, the default registry is assumed. The authorizationToken returned for each registry specified is a base64 encoded string that can be decoded and used in a docker login command to authenticate to a registry. The AWS CLI offers an aws ecr get-login command that simplifies the login process.
    */
-  getDownloadUrlForLayer(params: ECR.Types.GetDownloadUrlForLayerRequest, callback?: (err: AWSError, data: ECR.Types.GetDownloadUrlForLayerResponse) => void): Request<ECR.Types.GetDownloadUrlForLayerResponse, AWSError>;
+  getAuthorizationToken(params: ECR.Types.GetAuthorizationTokenRequest, callback?: (err: AWSError, data: ECR.Types.GetAuthorizationTokenResponse) => void): Request<ECR.Types.GetAuthorizationTokenResponse, AWSError>;
   /**
    * Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer. You can only get URLs for image layers that are referenced in an image.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   getDownloadUrlForLayer(callback?: (err: AWSError, data: ECR.Types.GetDownloadUrlForLayerResponse) => void): Request<ECR.Types.GetDownloadUrlForLayerResponse, AWSError>;
   /**
-   * Retrieves the specified lifecycle policy.
+   * Retrieves the pre-signed Amazon S3 download URL corresponding to an image layer. You can only get URLs for image layers that are referenced in an image.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
-  getLifecyclePolicy(params: ECR.Types.GetLifecyclePolicyRequest, callback?: (err: AWSError, data: ECR.Types.GetLifecyclePolicyResponse) => void): Request<ECR.Types.GetLifecyclePolicyResponse, AWSError>;
+  getDownloadUrlForLayer(params: ECR.Types.GetDownloadUrlForLayerRequest, callback?: (err: AWSError, data: ECR.Types.GetDownloadUrlForLayerResponse) => void): Request<ECR.Types.GetDownloadUrlForLayerResponse, AWSError>;
   /**
    * Retrieves the specified lifecycle policy.
    */
   getLifecyclePolicy(callback?: (err: AWSError, data: ECR.Types.GetLifecyclePolicyResponse) => void): Request<ECR.Types.GetLifecyclePolicyResponse, AWSError>;
   /**
-   * Retrieves the results of the specified lifecycle policy preview request.
+   * Retrieves the specified lifecycle policy.
    */
-  getLifecyclePolicyPreview(params: ECR.Types.GetLifecyclePolicyPreviewRequest, callback?: (err: AWSError, data: ECR.Types.GetLifecyclePolicyPreviewResponse) => void): Request<ECR.Types.GetLifecyclePolicyPreviewResponse, AWSError>;
+  getLifecyclePolicy(params: ECR.Types.GetLifecyclePolicyRequest, callback?: (err: AWSError, data: ECR.Types.GetLifecyclePolicyResponse) => void): Request<ECR.Types.GetLifecyclePolicyResponse, AWSError>;
   /**
    * Retrieves the results of the specified lifecycle policy preview request.
    */
   getLifecyclePolicyPreview(callback?: (err: AWSError, data: ECR.Types.GetLifecyclePolicyPreviewResponse) => void): Request<ECR.Types.GetLifecyclePolicyPreviewResponse, AWSError>;
   /**
-   * Retrieves the repository policy for a specified repository.
+   * Retrieves the results of the specified lifecycle policy preview request.
    */
-  getRepositoryPolicy(params: ECR.Types.GetRepositoryPolicyRequest, callback?: (err: AWSError, data: ECR.Types.GetRepositoryPolicyResponse) => void): Request<ECR.Types.GetRepositoryPolicyResponse, AWSError>;
+  getLifecyclePolicyPreview(params: ECR.Types.GetLifecyclePolicyPreviewRequest, callback?: (err: AWSError, data: ECR.Types.GetLifecyclePolicyPreviewResponse) => void): Request<ECR.Types.GetLifecyclePolicyPreviewResponse, AWSError>;
   /**
    * Retrieves the repository policy for a specified repository.
    */
   getRepositoryPolicy(callback?: (err: AWSError, data: ECR.Types.GetRepositoryPolicyResponse) => void): Request<ECR.Types.GetRepositoryPolicyResponse, AWSError>;
   /**
-   * Notify Amazon ECR that you intend to upload an image layer.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
+   * Retrieves the repository policy for a specified repository.
    */
-  initiateLayerUpload(params: ECR.Types.InitiateLayerUploadRequest, callback?: (err: AWSError, data: ECR.Types.InitiateLayerUploadResponse) => void): Request<ECR.Types.InitiateLayerUploadResponse, AWSError>;
+  getRepositoryPolicy(params: ECR.Types.GetRepositoryPolicyRequest, callback?: (err: AWSError, data: ECR.Types.GetRepositoryPolicyResponse) => void): Request<ECR.Types.GetRepositoryPolicyResponse, AWSError>;
   /**
    * Notify Amazon ECR that you intend to upload an image layer.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   initiateLayerUpload(callback?: (err: AWSError, data: ECR.Types.InitiateLayerUploadResponse) => void): Request<ECR.Types.InitiateLayerUploadResponse, AWSError>;
   /**
-   * Lists all the image IDs for a given repository. You can filter images based on whether or not they are tagged by setting the tagStatus parameter to TAGGED or UNTAGGED. For example, you can filter your results to return only UNTAGGED images and then pipe that result to a BatchDeleteImage operation to delete them. Or, you can filter your results to return only TAGGED images to list all of the tags in your repository.
+   * Notify Amazon ECR that you intend to upload an image layer.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
-  listImages(params: ECR.Types.ListImagesRequest, callback?: (err: AWSError, data: ECR.Types.ListImagesResponse) => void): Request<ECR.Types.ListImagesResponse, AWSError>;
+  initiateLayerUpload(params: ECR.Types.InitiateLayerUploadRequest, callback?: (err: AWSError, data: ECR.Types.InitiateLayerUploadResponse) => void): Request<ECR.Types.InitiateLayerUploadResponse, AWSError>;
   /**
    * Lists all the image IDs for a given repository. You can filter images based on whether or not they are tagged by setting the tagStatus parameter to TAGGED or UNTAGGED. For example, you can filter your results to return only UNTAGGED images and then pipe that result to a BatchDeleteImage operation to delete them. Or, you can filter your results to return only TAGGED images to list all of the tags in your repository.
    */
   listImages(callback?: (err: AWSError, data: ECR.Types.ListImagesResponse) => void): Request<ECR.Types.ListImagesResponse, AWSError>;
   /**
-   * List the tags for an Amazon ECR resource.
+   * Lists all the image IDs for a given repository. You can filter images based on whether or not they are tagged by setting the tagStatus parameter to TAGGED or UNTAGGED. For example, you can filter your results to return only UNTAGGED images and then pipe that result to a BatchDeleteImage operation to delete them. Or, you can filter your results to return only TAGGED images to list all of the tags in your repository.
    */
-  listTagsForResource(params: ECR.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: ECR.Types.ListTagsForResourceResponse) => void): Request<ECR.Types.ListTagsForResourceResponse, AWSError>;
+  listImages(params: ECR.Types.ListImagesRequest, callback?: (err: AWSError, data: ECR.Types.ListImagesResponse) => void): Request<ECR.Types.ListImagesResponse, AWSError>;
   /**
    * List the tags for an Amazon ECR resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: ECR.Types.ListTagsForResourceResponse) => void): Request<ECR.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Creates or updates the image manifest and tags associated with an image.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
+   * List the tags for an Amazon ECR resource.
    */
-  putImage(params: ECR.Types.PutImageRequest, callback?: (err: AWSError, data: ECR.Types.PutImageResponse) => void): Request<ECR.Types.PutImageResponse, AWSError>;
+  listTagsForResource(params: ECR.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: ECR.Types.ListTagsForResourceResponse) => void): Request<ECR.Types.ListTagsForResourceResponse, AWSError>;
   /**
    * Creates or updates the image manifest and tags associated with an image.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   putImage(callback?: (err: AWSError, data: ECR.Types.PutImageResponse) => void): Request<ECR.Types.PutImageResponse, AWSError>;
   /**
-   * Creates or updates a lifecycle policy. For information about lifecycle policy syntax, see Lifecycle Policy Template.
+   * Creates or updates the image manifest and tags associated with an image.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
-  putLifecyclePolicy(params: ECR.Types.PutLifecyclePolicyRequest, callback?: (err: AWSError, data: ECR.Types.PutLifecyclePolicyResponse) => void): Request<ECR.Types.PutLifecyclePolicyResponse, AWSError>;
+  putImage(params: ECR.Types.PutImageRequest, callback?: (err: AWSError, data: ECR.Types.PutImageResponse) => void): Request<ECR.Types.PutImageResponse, AWSError>;
   /**
    * Creates or updates a lifecycle policy. For information about lifecycle policy syntax, see Lifecycle Policy Template.
    */
   putLifecyclePolicy(callback?: (err: AWSError, data: ECR.Types.PutLifecyclePolicyResponse) => void): Request<ECR.Types.PutLifecyclePolicyResponse, AWSError>;
   /**
-   * Applies a repository policy on a specified repository to control access permissions.
+   * Creates or updates a lifecycle policy. For information about lifecycle policy syntax, see Lifecycle Policy Template.
    */
-  setRepositoryPolicy(params: ECR.Types.SetRepositoryPolicyRequest, callback?: (err: AWSError, data: ECR.Types.SetRepositoryPolicyResponse) => void): Request<ECR.Types.SetRepositoryPolicyResponse, AWSError>;
+  putLifecyclePolicy(params: ECR.Types.PutLifecyclePolicyRequest, callback?: (err: AWSError, data: ECR.Types.PutLifecyclePolicyResponse) => void): Request<ECR.Types.PutLifecyclePolicyResponse, AWSError>;
   /**
    * Applies a repository policy on a specified repository to control access permissions.
    */
   setRepositoryPolicy(callback?: (err: AWSError, data: ECR.Types.SetRepositoryPolicyResponse) => void): Request<ECR.Types.SetRepositoryPolicyResponse, AWSError>;
   /**
-   * Starts a preview of the specified lifecycle policy. This allows you to see the results before creating the lifecycle policy.
+   * Applies a repository policy on a specified repository to control access permissions.
    */
-  startLifecyclePolicyPreview(params: ECR.Types.StartLifecyclePolicyPreviewRequest, callback?: (err: AWSError, data: ECR.Types.StartLifecyclePolicyPreviewResponse) => void): Request<ECR.Types.StartLifecyclePolicyPreviewResponse, AWSError>;
+  setRepositoryPolicy(params: ECR.Types.SetRepositoryPolicyRequest, callback?: (err: AWSError, data: ECR.Types.SetRepositoryPolicyResponse) => void): Request<ECR.Types.SetRepositoryPolicyResponse, AWSError>;
   /**
    * Starts a preview of the specified lifecycle policy. This allows you to see the results before creating the lifecycle policy.
    */
   startLifecyclePolicyPreview(callback?: (err: AWSError, data: ECR.Types.StartLifecyclePolicyPreviewResponse) => void): Request<ECR.Types.StartLifecyclePolicyPreviewResponse, AWSError>;
   /**
-   * Adds specified tags to a resource with the specified ARN. Existing tags on a resource are not changed if they are not specified in the request parameters.
+   * Starts a preview of the specified lifecycle policy. This allows you to see the results before creating the lifecycle policy.
    */
-  tagResource(params: ECR.Types.TagResourceRequest, callback?: (err: AWSError, data: ECR.Types.TagResourceResponse) => void): Request<ECR.Types.TagResourceResponse, AWSError>;
+  startLifecyclePolicyPreview(params: ECR.Types.StartLifecyclePolicyPreviewRequest, callback?: (err: AWSError, data: ECR.Types.StartLifecyclePolicyPreviewResponse) => void): Request<ECR.Types.StartLifecyclePolicyPreviewResponse, AWSError>;
   /**
    * Adds specified tags to a resource with the specified ARN. Existing tags on a resource are not changed if they are not specified in the request parameters.
    */
   tagResource(callback?: (err: AWSError, data: ECR.Types.TagResourceResponse) => void): Request<ECR.Types.TagResourceResponse, AWSError>;
   /**
-   * Deletes specified tags from a resource.
+   * Adds specified tags to a resource with the specified ARN. Existing tags on a resource are not changed if they are not specified in the request parameters.
    */
-  untagResource(params: ECR.Types.UntagResourceRequest, callback?: (err: AWSError, data: ECR.Types.UntagResourceResponse) => void): Request<ECR.Types.UntagResourceResponse, AWSError>;
+  tagResource(params: ECR.Types.TagResourceRequest, callback?: (err: AWSError, data: ECR.Types.TagResourceResponse) => void): Request<ECR.Types.TagResourceResponse, AWSError>;
   /**
    * Deletes specified tags from a resource.
    */
   untagResource(callback?: (err: AWSError, data: ECR.Types.UntagResourceResponse) => void): Request<ECR.Types.UntagResourceResponse, AWSError>;
   /**
-   * Uploads an image layer part to Amazon ECR.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
+   * Deletes specified tags from a resource.
    */
-  uploadLayerPart(params: ECR.Types.UploadLayerPartRequest, callback?: (err: AWSError, data: ECR.Types.UploadLayerPartResponse) => void): Request<ECR.Types.UploadLayerPartResponse, AWSError>;
+  untagResource(params: ECR.Types.UntagResourceRequest, callback?: (err: AWSError, data: ECR.Types.UntagResourceResponse) => void): Request<ECR.Types.UntagResourceResponse, AWSError>;
   /**
    * Uploads an image layer part to Amazon ECR.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   uploadLayerPart(callback?: (err: AWSError, data: ECR.Types.UploadLayerPartResponse) => void): Request<ECR.Types.UploadLayerPartResponse, AWSError>;
+  /**
+   * Uploads an image layer part to Amazon ECR.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
+   */
+  uploadLayerPart(params: ECR.Types.UploadLayerPartRequest, callback?: (err: AWSError, data: ECR.Types.UploadLayerPartResponse) => void): Request<ECR.Types.UploadLayerPartResponse, AWSError>;
 }
 declare namespace ECR {
   export type Arn = string;

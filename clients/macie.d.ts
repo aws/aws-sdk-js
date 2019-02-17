@@ -14,59 +14,59 @@ declare class Macie extends Service {
   /**
    * Associates a specified AWS account with Amazon Macie as a member account.
    */
-  associateMemberAccount(params: Macie.Types.AssociateMemberAccountRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  associateMemberAccount(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Associates a specified AWS account with Amazon Macie as a member account.
    */
-  associateMemberAccount(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
-  /**
-   * Associates specified S3 resources with Amazon Macie for monitoring and data classification. If memberAccountId isn't specified, the action associates specified S3 resources with Macie for the current master account. If memberAccountId is specified, the action associates specified S3 resources with Macie for the specified member account. 
-   */
-  associateS3Resources(params: Macie.Types.AssociateS3ResourcesRequest, callback?: (err: AWSError, data: Macie.Types.AssociateS3ResourcesResult) => void): Request<Macie.Types.AssociateS3ResourcesResult, AWSError>;
+  associateMemberAccount(params: Macie.Types.AssociateMemberAccountRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Associates specified S3 resources with Amazon Macie for monitoring and data classification. If memberAccountId isn't specified, the action associates specified S3 resources with Macie for the current master account. If memberAccountId is specified, the action associates specified S3 resources with Macie for the specified member account. 
    */
   associateS3Resources(callback?: (err: AWSError, data: Macie.Types.AssociateS3ResourcesResult) => void): Request<Macie.Types.AssociateS3ResourcesResult, AWSError>;
   /**
-   * Removes the specified member account from Amazon Macie.
+   * Associates specified S3 resources with Amazon Macie for monitoring and data classification. If memberAccountId isn't specified, the action associates specified S3 resources with Macie for the current master account. If memberAccountId is specified, the action associates specified S3 resources with Macie for the specified member account. 
    */
-  disassociateMemberAccount(params: Macie.Types.DisassociateMemberAccountRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  associateS3Resources(params: Macie.Types.AssociateS3ResourcesRequest, callback?: (err: AWSError, data: Macie.Types.AssociateS3ResourcesResult) => void): Request<Macie.Types.AssociateS3ResourcesResult, AWSError>;
   /**
    * Removes the specified member account from Amazon Macie.
    */
   disassociateMemberAccount(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes specified S3 resources from being monitored by Amazon Macie. If memberAccountId isn't specified, the action removes specified S3 resources from Macie for the current master account. If memberAccountId is specified, the action removes specified S3 resources from Macie for the specified member account.
+   * Removes the specified member account from Amazon Macie.
    */
-  disassociateS3Resources(params: Macie.Types.DisassociateS3ResourcesRequest, callback?: (err: AWSError, data: Macie.Types.DisassociateS3ResourcesResult) => void): Request<Macie.Types.DisassociateS3ResourcesResult, AWSError>;
+  disassociateMemberAccount(params: Macie.Types.DisassociateMemberAccountRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes specified S3 resources from being monitored by Amazon Macie. If memberAccountId isn't specified, the action removes specified S3 resources from Macie for the current master account. If memberAccountId is specified, the action removes specified S3 resources from Macie for the specified member account.
    */
   disassociateS3Resources(callback?: (err: AWSError, data: Macie.Types.DisassociateS3ResourcesResult) => void): Request<Macie.Types.DisassociateS3ResourcesResult, AWSError>;
   /**
-   * Lists all Amazon Macie member accounts for the current Amazon Macie master account.
+   * Removes specified S3 resources from being monitored by Amazon Macie. If memberAccountId isn't specified, the action removes specified S3 resources from Macie for the current master account. If memberAccountId is specified, the action removes specified S3 resources from Macie for the specified member account.
    */
-  listMemberAccounts(params: Macie.Types.ListMemberAccountsRequest, callback?: (err: AWSError, data: Macie.Types.ListMemberAccountsResult) => void): Request<Macie.Types.ListMemberAccountsResult, AWSError>;
+  disassociateS3Resources(params: Macie.Types.DisassociateS3ResourcesRequest, callback?: (err: AWSError, data: Macie.Types.DisassociateS3ResourcesResult) => void): Request<Macie.Types.DisassociateS3ResourcesResult, AWSError>;
   /**
    * Lists all Amazon Macie member accounts for the current Amazon Macie master account.
    */
   listMemberAccounts(callback?: (err: AWSError, data: Macie.Types.ListMemberAccountsResult) => void): Request<Macie.Types.ListMemberAccountsResult, AWSError>;
   /**
-   * Lists all the S3 resources associated with Amazon Macie. If memberAccountId isn't specified, the action lists the S3 resources associated with Amazon Macie for the current master account. If memberAccountId is specified, the action lists the S3 resources associated with Amazon Macie for the specified member account. 
+   * Lists all Amazon Macie member accounts for the current Amazon Macie master account.
    */
-  listS3Resources(params: Macie.Types.ListS3ResourcesRequest, callback?: (err: AWSError, data: Macie.Types.ListS3ResourcesResult) => void): Request<Macie.Types.ListS3ResourcesResult, AWSError>;
+  listMemberAccounts(params: Macie.Types.ListMemberAccountsRequest, callback?: (err: AWSError, data: Macie.Types.ListMemberAccountsResult) => void): Request<Macie.Types.ListMemberAccountsResult, AWSError>;
   /**
    * Lists all the S3 resources associated with Amazon Macie. If memberAccountId isn't specified, the action lists the S3 resources associated with Amazon Macie for the current master account. If memberAccountId is specified, the action lists the S3 resources associated with Amazon Macie for the specified member account. 
    */
   listS3Resources(callback?: (err: AWSError, data: Macie.Types.ListS3ResourcesResult) => void): Request<Macie.Types.ListS3ResourcesResult, AWSError>;
   /**
-   * Updates the classification types for the specified S3 resources. If memberAccountId isn't specified, the action updates the classification types of the S3 resources associated with Amazon Macie for the current master account. If memberAccountId is specified, the action updates the classification types of the S3 resources associated with Amazon Macie for the specified member account. 
+   * Lists all the S3 resources associated with Amazon Macie. If memberAccountId isn't specified, the action lists the S3 resources associated with Amazon Macie for the current master account. If memberAccountId is specified, the action lists the S3 resources associated with Amazon Macie for the specified member account. 
    */
-  updateS3Resources(params: Macie.Types.UpdateS3ResourcesRequest, callback?: (err: AWSError, data: Macie.Types.UpdateS3ResourcesResult) => void): Request<Macie.Types.UpdateS3ResourcesResult, AWSError>;
+  listS3Resources(params: Macie.Types.ListS3ResourcesRequest, callback?: (err: AWSError, data: Macie.Types.ListS3ResourcesResult) => void): Request<Macie.Types.ListS3ResourcesResult, AWSError>;
   /**
    * Updates the classification types for the specified S3 resources. If memberAccountId isn't specified, the action updates the classification types of the S3 resources associated with Amazon Macie for the current master account. If memberAccountId is specified, the action updates the classification types of the S3 resources associated with Amazon Macie for the specified member account. 
    */
   updateS3Resources(callback?: (err: AWSError, data: Macie.Types.UpdateS3ResourcesResult) => void): Request<Macie.Types.UpdateS3ResourcesResult, AWSError>;
+  /**
+   * Updates the classification types for the specified S3 resources. If memberAccountId isn't specified, the action updates the classification types of the S3 resources associated with Amazon Macie for the current master account. If memberAccountId is specified, the action updates the classification types of the S3 resources associated with Amazon Macie for the specified member account. 
+   */
+  updateS3Resources(params: Macie.Types.UpdateS3ResourcesRequest, callback?: (err: AWSError, data: Macie.Types.UpdateS3ResourcesResult) => void): Request<Macie.Types.UpdateS3ResourcesResult, AWSError>;
 }
 declare namespace Macie {
   export type AWSAccountId = string;

@@ -14,147 +14,147 @@ declare class Snowball extends Service {
   /**
    * Cancels a cluster job. You can only cancel a cluster job while it's in the AwaitingQuorum status. You'll have at least an hour after creating a cluster job to cancel it.
    */
-  cancelCluster(params: Snowball.Types.CancelClusterRequest, callback?: (err: AWSError, data: Snowball.Types.CancelClusterResult) => void): Request<Snowball.Types.CancelClusterResult, AWSError>;
+  cancelCluster(callback?: (err: AWSError, data: Snowball.Types.CancelClusterResult) => void): Request<Snowball.Types.CancelClusterResult, AWSError>;
   /**
    * Cancels a cluster job. You can only cancel a cluster job while it's in the AwaitingQuorum status. You'll have at least an hour after creating a cluster job to cancel it.
    */
-  cancelCluster(callback?: (err: AWSError, data: Snowball.Types.CancelClusterResult) => void): Request<Snowball.Types.CancelClusterResult, AWSError>;
-  /**
-   * Cancels the specified job. You can only cancel a job before its JobState value changes to PreparingAppliance. Requesting the ListJobs or DescribeJob action returns a job's JobState as part of the response element data returned.
-   */
-  cancelJob(params: Snowball.Types.CancelJobRequest, callback?: (err: AWSError, data: Snowball.Types.CancelJobResult) => void): Request<Snowball.Types.CancelJobResult, AWSError>;
+  cancelCluster(params: Snowball.Types.CancelClusterRequest, callback?: (err: AWSError, data: Snowball.Types.CancelClusterResult) => void): Request<Snowball.Types.CancelClusterResult, AWSError>;
   /**
    * Cancels the specified job. You can only cancel a job before its JobState value changes to PreparingAppliance. Requesting the ListJobs or DescribeJob action returns a job's JobState as part of the response element data returned.
    */
   cancelJob(callback?: (err: AWSError, data: Snowball.Types.CancelJobResult) => void): Request<Snowball.Types.CancelJobResult, AWSError>;
   /**
-   * Creates an address for a Snowball to be shipped to. In most regions, addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception is thrown.
+   * Cancels the specified job. You can only cancel a job before its JobState value changes to PreparingAppliance. Requesting the ListJobs or DescribeJob action returns a job's JobState as part of the response element data returned.
    */
-  createAddress(params: Snowball.Types.CreateAddressRequest, callback?: (err: AWSError, data: Snowball.Types.CreateAddressResult) => void): Request<Snowball.Types.CreateAddressResult, AWSError>;
+  cancelJob(params: Snowball.Types.CancelJobRequest, callback?: (err: AWSError, data: Snowball.Types.CancelJobResult) => void): Request<Snowball.Types.CancelJobResult, AWSError>;
   /**
    * Creates an address for a Snowball to be shipped to. In most regions, addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception is thrown.
    */
   createAddress(callback?: (err: AWSError, data: Snowball.Types.CreateAddressResult) => void): Request<Snowball.Types.CreateAddressResult, AWSError>;
   /**
-   * Creates an empty cluster. Each cluster supports five nodes. You use the CreateJob action separately to create the jobs for each of these nodes. The cluster does not ship until these five node jobs have been created.
+   * Creates an address for a Snowball to be shipped to. In most regions, addresses are validated at the time of creation. The address you provide must be located within the serviceable area of your region. If the address is invalid or unsupported, then an exception is thrown.
    */
-  createCluster(params: Snowball.Types.CreateClusterRequest, callback?: (err: AWSError, data: Snowball.Types.CreateClusterResult) => void): Request<Snowball.Types.CreateClusterResult, AWSError>;
+  createAddress(params: Snowball.Types.CreateAddressRequest, callback?: (err: AWSError, data: Snowball.Types.CreateAddressResult) => void): Request<Snowball.Types.CreateAddressResult, AWSError>;
   /**
    * Creates an empty cluster. Each cluster supports five nodes. You use the CreateJob action separately to create the jobs for each of these nodes. The cluster does not ship until these five node jobs have been created.
    */
   createCluster(callback?: (err: AWSError, data: Snowball.Types.CreateClusterResult) => void): Request<Snowball.Types.CreateClusterResult, AWSError>;
   /**
-   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for Snowball. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster. 
+   * Creates an empty cluster. Each cluster supports five nodes. You use the CreateJob action separately to create the jobs for each of these nodes. The cluster does not ship until these five node jobs have been created.
    */
-  createJob(params: Snowball.Types.CreateJobRequest, callback?: (err: AWSError, data: Snowball.Types.CreateJobResult) => void): Request<Snowball.Types.CreateJobResult, AWSError>;
+  createCluster(params: Snowball.Types.CreateClusterRequest, callback?: (err: AWSError, data: Snowball.Types.CreateClusterResult) => void): Request<Snowball.Types.CreateClusterResult, AWSError>;
   /**
    * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for Snowball. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster. 
    */
   createJob(callback?: (err: AWSError, data: Snowball.Types.CreateJobResult) => void): Request<Snowball.Types.CreateJobResult, AWSError>;
   /**
-   * Takes an AddressId and returns specific details about that address in the form of an Address object.
+   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for Snowball. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster. 
    */
-  describeAddress(params: Snowball.Types.DescribeAddressRequest, callback?: (err: AWSError, data: Snowball.Types.DescribeAddressResult) => void): Request<Snowball.Types.DescribeAddressResult, AWSError>;
+  createJob(params: Snowball.Types.CreateJobRequest, callback?: (err: AWSError, data: Snowball.Types.CreateJobResult) => void): Request<Snowball.Types.CreateJobResult, AWSError>;
   /**
    * Takes an AddressId and returns specific details about that address in the form of an Address object.
    */
   describeAddress(callback?: (err: AWSError, data: Snowball.Types.DescribeAddressResult) => void): Request<Snowball.Types.DescribeAddressResult, AWSError>;
   /**
-   * Returns a specified number of ADDRESS objects. Calling this API in one of the US regions will return addresses from the list of all addresses associated with this account in all US regions.
+   * Takes an AddressId and returns specific details about that address in the form of an Address object.
    */
-  describeAddresses(params: Snowball.Types.DescribeAddressesRequest, callback?: (err: AWSError, data: Snowball.Types.DescribeAddressesResult) => void): Request<Snowball.Types.DescribeAddressesResult, AWSError>;
+  describeAddress(params: Snowball.Types.DescribeAddressRequest, callback?: (err: AWSError, data: Snowball.Types.DescribeAddressResult) => void): Request<Snowball.Types.DescribeAddressResult, AWSError>;
   /**
    * Returns a specified number of ADDRESS objects. Calling this API in one of the US regions will return addresses from the list of all addresses associated with this account in all US regions.
    */
   describeAddresses(callback?: (err: AWSError, data: Snowball.Types.DescribeAddressesResult) => void): Request<Snowball.Types.DescribeAddressesResult, AWSError>;
   /**
-   * Returns information about a specific cluster including shipping information, cluster status, and other important metadata.
+   * Returns a specified number of ADDRESS objects. Calling this API in one of the US regions will return addresses from the list of all addresses associated with this account in all US regions.
    */
-  describeCluster(params: Snowball.Types.DescribeClusterRequest, callback?: (err: AWSError, data: Snowball.Types.DescribeClusterResult) => void): Request<Snowball.Types.DescribeClusterResult, AWSError>;
+  describeAddresses(params: Snowball.Types.DescribeAddressesRequest, callback?: (err: AWSError, data: Snowball.Types.DescribeAddressesResult) => void): Request<Snowball.Types.DescribeAddressesResult, AWSError>;
   /**
    * Returns information about a specific cluster including shipping information, cluster status, and other important metadata.
    */
   describeCluster(callback?: (err: AWSError, data: Snowball.Types.DescribeClusterResult) => void): Request<Snowball.Types.DescribeClusterResult, AWSError>;
   /**
-   * Returns information about a specific job including shipping information, job status, and other important metadata. 
+   * Returns information about a specific cluster including shipping information, cluster status, and other important metadata.
    */
-  describeJob(params: Snowball.Types.DescribeJobRequest, callback?: (err: AWSError, data: Snowball.Types.DescribeJobResult) => void): Request<Snowball.Types.DescribeJobResult, AWSError>;
+  describeCluster(params: Snowball.Types.DescribeClusterRequest, callback?: (err: AWSError, data: Snowball.Types.DescribeClusterResult) => void): Request<Snowball.Types.DescribeClusterResult, AWSError>;
   /**
    * Returns information about a specific job including shipping information, job status, and other important metadata. 
    */
   describeJob(callback?: (err: AWSError, data: Snowball.Types.DescribeJobResult) => void): Request<Snowball.Types.DescribeJobResult, AWSError>;
   /**
-   * Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified JobId value. You can access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60 minutes have passed, you'll have to make another call to the GetJobManifest action. The manifest is an encrypted file that you can download after your job enters the WithCustomer status. The manifest is decrypted by using the UnlockCode code value, when you pass both values to the Snowball through the Snowball client when the client is started for the first time. As a best practice, we recommend that you don't save a copy of an UnlockCode value in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job. The credentials of a given job, including its manifest file and unlock code, expire 90 days after the job is created.
+   * Returns information about a specific job including shipping information, job status, and other important metadata. 
    */
-  getJobManifest(params: Snowball.Types.GetJobManifestRequest, callback?: (err: AWSError, data: Snowball.Types.GetJobManifestResult) => void): Request<Snowball.Types.GetJobManifestResult, AWSError>;
+  describeJob(params: Snowball.Types.DescribeJobRequest, callback?: (err: AWSError, data: Snowball.Types.DescribeJobResult) => void): Request<Snowball.Types.DescribeJobResult, AWSError>;
   /**
    * Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified JobId value. You can access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60 minutes have passed, you'll have to make another call to the GetJobManifest action. The manifest is an encrypted file that you can download after your job enters the WithCustomer status. The manifest is decrypted by using the UnlockCode code value, when you pass both values to the Snowball through the Snowball client when the client is started for the first time. As a best practice, we recommend that you don't save a copy of an UnlockCode value in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job. The credentials of a given job, including its manifest file and unlock code, expire 90 days after the job is created.
    */
   getJobManifest(callback?: (err: AWSError, data: Snowball.Types.GetJobManifestResult) => void): Request<Snowball.Types.GetJobManifestResult, AWSError>;
   /**
-   * Returns the UnlockCode code value for the specified job. A particular UnlockCode value can be accessed for up to 90 days after the associated job has been created. The UnlockCode value is a 29-character code with 25 alphanumeric characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed along with the manifest to the Snowball through the Snowball client when the client is started for the first time. As a best practice, we recommend that you don't save a copy of the UnlockCode in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job.
+   * Returns a link to an Amazon S3 presigned URL for the manifest file associated with the specified JobId value. You can access the manifest file for up to 60 minutes after this request has been made. To access the manifest file after 60 minutes have passed, you'll have to make another call to the GetJobManifest action. The manifest is an encrypted file that you can download after your job enters the WithCustomer status. The manifest is decrypted by using the UnlockCode code value, when you pass both values to the Snowball through the Snowball client when the client is started for the first time. As a best practice, we recommend that you don't save a copy of an UnlockCode value in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job. The credentials of a given job, including its manifest file and unlock code, expire 90 days after the job is created.
    */
-  getJobUnlockCode(params: Snowball.Types.GetJobUnlockCodeRequest, callback?: (err: AWSError, data: Snowball.Types.GetJobUnlockCodeResult) => void): Request<Snowball.Types.GetJobUnlockCodeResult, AWSError>;
+  getJobManifest(params: Snowball.Types.GetJobManifestRequest, callback?: (err: AWSError, data: Snowball.Types.GetJobManifestResult) => void): Request<Snowball.Types.GetJobManifestResult, AWSError>;
   /**
    * Returns the UnlockCode code value for the specified job. A particular UnlockCode value can be accessed for up to 90 days after the associated job has been created. The UnlockCode value is a 29-character code with 25 alphanumeric characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed along with the manifest to the Snowball through the Snowball client when the client is started for the first time. As a best practice, we recommend that you don't save a copy of the UnlockCode in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job.
    */
   getJobUnlockCode(callback?: (err: AWSError, data: Snowball.Types.GetJobUnlockCodeResult) => void): Request<Snowball.Types.GetJobUnlockCodeResult, AWSError>;
   /**
-   * Returns information about the Snowball service limit for your account, and also the number of Snowballs your account has in use. The default service limit for the number of Snowballs that you can have at one time is 1. If you want to increase your service limit, contact AWS Support.
+   * Returns the UnlockCode code value for the specified job. A particular UnlockCode value can be accessed for up to 90 days after the associated job has been created. The UnlockCode value is a 29-character code with 25 alphanumeric characters and 4 hyphens. This code is used to decrypt the manifest file when it is passed along with the manifest to the Snowball through the Snowball client when the client is started for the first time. As a best practice, we recommend that you don't save a copy of the UnlockCode in the same location as the manifest file for that job. Saving these separately helps prevent unauthorized parties from gaining access to the Snowball associated with that job.
    */
-  getSnowballUsage(params: Snowball.Types.GetSnowballUsageRequest, callback?: (err: AWSError, data: Snowball.Types.GetSnowballUsageResult) => void): Request<Snowball.Types.GetSnowballUsageResult, AWSError>;
+  getJobUnlockCode(params: Snowball.Types.GetJobUnlockCodeRequest, callback?: (err: AWSError, data: Snowball.Types.GetJobUnlockCodeResult) => void): Request<Snowball.Types.GetJobUnlockCodeResult, AWSError>;
   /**
    * Returns information about the Snowball service limit for your account, and also the number of Snowballs your account has in use. The default service limit for the number of Snowballs that you can have at one time is 1. If you want to increase your service limit, contact AWS Support.
    */
   getSnowballUsage(callback?: (err: AWSError, data: Snowball.Types.GetSnowballUsageResult) => void): Request<Snowball.Types.GetSnowballUsageResult, AWSError>;
   /**
-   * Returns an array of JobListEntry objects of the specified length. Each JobListEntry object is for a job in the specified cluster and contains a job's state, a job's ID, and other information.
+   * Returns information about the Snowball service limit for your account, and also the number of Snowballs your account has in use. The default service limit for the number of Snowballs that you can have at one time is 1. If you want to increase your service limit, contact AWS Support.
    */
-  listClusterJobs(params: Snowball.Types.ListClusterJobsRequest, callback?: (err: AWSError, data: Snowball.Types.ListClusterJobsResult) => void): Request<Snowball.Types.ListClusterJobsResult, AWSError>;
+  getSnowballUsage(params: Snowball.Types.GetSnowballUsageRequest, callback?: (err: AWSError, data: Snowball.Types.GetSnowballUsageResult) => void): Request<Snowball.Types.GetSnowballUsageResult, AWSError>;
   /**
    * Returns an array of JobListEntry objects of the specified length. Each JobListEntry object is for a job in the specified cluster and contains a job's state, a job's ID, and other information.
    */
   listClusterJobs(callback?: (err: AWSError, data: Snowball.Types.ListClusterJobsResult) => void): Request<Snowball.Types.ListClusterJobsResult, AWSError>;
   /**
-   * Returns an array of ClusterListEntry objects of the specified length. Each ClusterListEntry object contains a cluster's state, a cluster's ID, and other important status information.
+   * Returns an array of JobListEntry objects of the specified length. Each JobListEntry object is for a job in the specified cluster and contains a job's state, a job's ID, and other information.
    */
-  listClusters(params: Snowball.Types.ListClustersRequest, callback?: (err: AWSError, data: Snowball.Types.ListClustersResult) => void): Request<Snowball.Types.ListClustersResult, AWSError>;
+  listClusterJobs(params: Snowball.Types.ListClusterJobsRequest, callback?: (err: AWSError, data: Snowball.Types.ListClusterJobsResult) => void): Request<Snowball.Types.ListClusterJobsResult, AWSError>;
   /**
    * Returns an array of ClusterListEntry objects of the specified length. Each ClusterListEntry object contains a cluster's state, a cluster's ID, and other important status information.
    */
   listClusters(callback?: (err: AWSError, data: Snowball.Types.ListClustersResult) => void): Request<Snowball.Types.ListClustersResult, AWSError>;
   /**
-   * This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your AWS account that would be supported for use on EDGE, EDGE_C, and EDGE_CG devices. For more information on compatible AMIs, see Using Amazon EC2 Compute Instances in the AWS Snowball Developer Guide.
+   * Returns an array of ClusterListEntry objects of the specified length. Each ClusterListEntry object contains a cluster's state, a cluster's ID, and other important status information.
    */
-  listCompatibleImages(params: Snowball.Types.ListCompatibleImagesRequest, callback?: (err: AWSError, data: Snowball.Types.ListCompatibleImagesResult) => void): Request<Snowball.Types.ListCompatibleImagesResult, AWSError>;
+  listClusters(params: Snowball.Types.ListClustersRequest, callback?: (err: AWSError, data: Snowball.Types.ListClustersResult) => void): Request<Snowball.Types.ListClustersResult, AWSError>;
   /**
    * This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your AWS account that would be supported for use on EDGE, EDGE_C, and EDGE_CG devices. For more information on compatible AMIs, see Using Amazon EC2 Compute Instances in the AWS Snowball Developer Guide.
    */
   listCompatibleImages(callback?: (err: AWSError, data: Snowball.Types.ListCompatibleImagesResult) => void): Request<Snowball.Types.ListCompatibleImagesResult, AWSError>;
   /**
-   * Returns an array of JobListEntry objects of the specified length. Each JobListEntry object contains a job's state, a job's ID, and a value that indicates whether the job is a job part, in the case of export jobs. Calling this API action in one of the US regions will return jobs from the list of all jobs associated with this account in all US regions.
+   * This action returns a list of the different Amazon EC2 Amazon Machine Images (AMIs) that are owned by your AWS account that would be supported for use on EDGE, EDGE_C, and EDGE_CG devices. For more information on compatible AMIs, see Using Amazon EC2 Compute Instances in the AWS Snowball Developer Guide.
    */
-  listJobs(params: Snowball.Types.ListJobsRequest, callback?: (err: AWSError, data: Snowball.Types.ListJobsResult) => void): Request<Snowball.Types.ListJobsResult, AWSError>;
+  listCompatibleImages(params: Snowball.Types.ListCompatibleImagesRequest, callback?: (err: AWSError, data: Snowball.Types.ListCompatibleImagesResult) => void): Request<Snowball.Types.ListCompatibleImagesResult, AWSError>;
   /**
    * Returns an array of JobListEntry objects of the specified length. Each JobListEntry object contains a job's state, a job's ID, and a value that indicates whether the job is a job part, in the case of export jobs. Calling this API action in one of the US regions will return jobs from the list of all jobs associated with this account in all US regions.
    */
   listJobs(callback?: (err: AWSError, data: Snowball.Types.ListJobsResult) => void): Request<Snowball.Types.ListJobsResult, AWSError>;
   /**
-   * While a cluster's ClusterState value is in the AwaitingQuorum state, you can update some of the information associated with a cluster. Once the cluster changes to a different job state, usually 60 minutes after the cluster being created, this action is no longer available.
+   * Returns an array of JobListEntry objects of the specified length. Each JobListEntry object contains a job's state, a job's ID, and a value that indicates whether the job is a job part, in the case of export jobs. Calling this API action in one of the US regions will return jobs from the list of all jobs associated with this account in all US regions.
    */
-  updateCluster(params: Snowball.Types.UpdateClusterRequest, callback?: (err: AWSError, data: Snowball.Types.UpdateClusterResult) => void): Request<Snowball.Types.UpdateClusterResult, AWSError>;
+  listJobs(params: Snowball.Types.ListJobsRequest, callback?: (err: AWSError, data: Snowball.Types.ListJobsResult) => void): Request<Snowball.Types.ListJobsResult, AWSError>;
   /**
    * While a cluster's ClusterState value is in the AwaitingQuorum state, you can update some of the information associated with a cluster. Once the cluster changes to a different job state, usually 60 minutes after the cluster being created, this action is no longer available.
    */
   updateCluster(callback?: (err: AWSError, data: Snowball.Types.UpdateClusterResult) => void): Request<Snowball.Types.UpdateClusterResult, AWSError>;
   /**
-   * While a job's JobState value is New, you can update some of the information associated with a job. Once the job changes to a different job state, usually within 60 minutes of the job being created, this action is no longer available.
+   * While a cluster's ClusterState value is in the AwaitingQuorum state, you can update some of the information associated with a cluster. Once the cluster changes to a different job state, usually 60 minutes after the cluster being created, this action is no longer available.
    */
-  updateJob(params: Snowball.Types.UpdateJobRequest, callback?: (err: AWSError, data: Snowball.Types.UpdateJobResult) => void): Request<Snowball.Types.UpdateJobResult, AWSError>;
+  updateCluster(params: Snowball.Types.UpdateClusterRequest, callback?: (err: AWSError, data: Snowball.Types.UpdateClusterResult) => void): Request<Snowball.Types.UpdateClusterResult, AWSError>;
   /**
    * While a job's JobState value is New, you can update some of the information associated with a job. Once the job changes to a different job state, usually within 60 minutes of the job being created, this action is no longer available.
    */
   updateJob(callback?: (err: AWSError, data: Snowball.Types.UpdateJobResult) => void): Request<Snowball.Types.UpdateJobResult, AWSError>;
+  /**
+   * While a job's JobState value is New, you can update some of the information associated with a job. Once the job changes to a different job state, usually within 60 minutes of the job being created, this action is no longer available.
+   */
+  updateJob(params: Snowball.Types.UpdateJobRequest, callback?: (err: AWSError, data: Snowball.Types.UpdateJobResult) => void): Request<Snowball.Types.UpdateJobResult, AWSError>;
 }
 declare namespace Snowball {
   export interface Address {

@@ -14,139 +14,139 @@ declare class GlobalAccelerator extends Service {
   /**
    * Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers. To see an AWS CLI example of creating an accelerator, scroll down to Example.
    */
-  createAccelerator(params: GlobalAccelerator.Types.CreateAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.CreateAcceleratorResponse, AWSError>;
+  createAccelerator(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.CreateAcceleratorResponse, AWSError>;
   /**
    * Create an accelerator. An accelerator includes one or more listeners that process inbound connections and direct traffic to one or more endpoint groups, each of which includes endpoints, such as Network Load Balancers. To see an AWS CLI example of creating an accelerator, scroll down to Example.
    */
-  createAccelerator(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.CreateAcceleratorResponse, AWSError>;
-  /**
-   * Create an endpoint group for the specified listener. An endpoint group is a collection of endpoints in one AWS Region. To see an AWS CLI example of creating an endpoint group, scroll down to Example.
-   */
-  createEndpointGroup(params: GlobalAccelerator.Types.CreateEndpointGroupRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.CreateEndpointGroupResponse, AWSError>;
+  createAccelerator(params: GlobalAccelerator.Types.CreateAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.CreateAcceleratorResponse, AWSError>;
   /**
    * Create an endpoint group for the specified listener. An endpoint group is a collection of endpoints in one AWS Region. To see an AWS CLI example of creating an endpoint group, scroll down to Example.
    */
   createEndpointGroup(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.CreateEndpointGroupResponse, AWSError>;
   /**
-   * Create a listener to process inbound connections from clients to an accelerator. Connections arrive to assigned static IP addresses on a port, port range, or list of port ranges that you specify. To see an AWS CLI example of creating a listener, scroll down to Example.
+   * Create an endpoint group for the specified listener. An endpoint group is a collection of endpoints in one AWS Region. To see an AWS CLI example of creating an endpoint group, scroll down to Example.
    */
-  createListener(params: GlobalAccelerator.Types.CreateListenerRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateListenerResponse) => void): Request<GlobalAccelerator.Types.CreateListenerResponse, AWSError>;
+  createEndpointGroup(params: GlobalAccelerator.Types.CreateEndpointGroupRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.CreateEndpointGroupResponse, AWSError>;
   /**
    * Create a listener to process inbound connections from clients to an accelerator. Connections arrive to assigned static IP addresses on a port, port range, or list of port ranges that you specify. To see an AWS CLI example of creating a listener, scroll down to Example.
    */
   createListener(callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateListenerResponse) => void): Request<GlobalAccelerator.Types.CreateListenerResponse, AWSError>;
   /**
-   * Delete an accelerator. Note: before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups).
+   * Create a listener to process inbound connections from clients to an accelerator. Connections arrive to assigned static IP addresses on a port, port range, or list of port ranges that you specify. To see an AWS CLI example of creating a listener, scroll down to Example.
    */
-  deleteAccelerator(params: GlobalAccelerator.Types.DeleteAcceleratorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  createListener(params: GlobalAccelerator.Types.CreateListenerRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.CreateListenerResponse) => void): Request<GlobalAccelerator.Types.CreateListenerResponse, AWSError>;
   /**
    * Delete an accelerator. Note: before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups).
    */
   deleteAccelerator(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete an endpoint group from a listener.
+   * Delete an accelerator. Note: before you can delete an accelerator, you must disable it and remove all dependent resources (listeners and endpoint groups).
    */
-  deleteEndpointGroup(params: GlobalAccelerator.Types.DeleteEndpointGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteAccelerator(params: GlobalAccelerator.Types.DeleteAcceleratorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Delete an endpoint group from a listener.
    */
   deleteEndpointGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Delete a listener from an accelerator.
+   * Delete an endpoint group from a listener.
    */
-  deleteListener(params: GlobalAccelerator.Types.DeleteListenerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteEndpointGroup(params: GlobalAccelerator.Types.DeleteEndpointGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Delete a listener from an accelerator.
    */
   deleteListener(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Describe an accelerator. To see an AWS CLI example of describing an accelerator, scroll down to Example.
+   * Delete a listener from an accelerator.
    */
-  describeAccelerator(params: GlobalAccelerator.Types.DescribeAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeAcceleratorResponse) => void): Request<GlobalAccelerator.Types.DescribeAcceleratorResponse, AWSError>;
+  deleteListener(params: GlobalAccelerator.Types.DeleteListenerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Describe an accelerator. To see an AWS CLI example of describing an accelerator, scroll down to Example.
    */
   describeAccelerator(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeAcceleratorResponse) => void): Request<GlobalAccelerator.Types.DescribeAcceleratorResponse, AWSError>;
   /**
-   * Describe the attributes of an accelerator.
+   * Describe an accelerator. To see an AWS CLI example of describing an accelerator, scroll down to Example.
    */
-  describeAcceleratorAttributes(params: GlobalAccelerator.Types.DescribeAcceleratorAttributesRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.DescribeAcceleratorAttributesResponse, AWSError>;
+  describeAccelerator(params: GlobalAccelerator.Types.DescribeAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeAcceleratorResponse) => void): Request<GlobalAccelerator.Types.DescribeAcceleratorResponse, AWSError>;
   /**
    * Describe the attributes of an accelerator.
    */
   describeAcceleratorAttributes(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.DescribeAcceleratorAttributesResponse, AWSError>;
   /**
-   * Describe an endpoint group.
+   * Describe the attributes of an accelerator.
    */
-  describeEndpointGroup(params: GlobalAccelerator.Types.DescribeEndpointGroupRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.DescribeEndpointGroupResponse, AWSError>;
+  describeAcceleratorAttributes(params: GlobalAccelerator.Types.DescribeAcceleratorAttributesRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.DescribeAcceleratorAttributesResponse, AWSError>;
   /**
    * Describe an endpoint group.
    */
   describeEndpointGroup(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.DescribeEndpointGroupResponse, AWSError>;
   /**
-   * Describe a listener.
+   * Describe an endpoint group.
    */
-  describeListener(params: GlobalAccelerator.Types.DescribeListenerRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeListenerResponse) => void): Request<GlobalAccelerator.Types.DescribeListenerResponse, AWSError>;
+  describeEndpointGroup(params: GlobalAccelerator.Types.DescribeEndpointGroupRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.DescribeEndpointGroupResponse, AWSError>;
   /**
    * Describe a listener.
    */
   describeListener(callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeListenerResponse) => void): Request<GlobalAccelerator.Types.DescribeListenerResponse, AWSError>;
   /**
-   * List the accelerators for an AWS account.
+   * Describe a listener.
    */
-  listAccelerators(params: GlobalAccelerator.Types.ListAcceleratorsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListAcceleratorsResponse) => void): Request<GlobalAccelerator.Types.ListAcceleratorsResponse, AWSError>;
+  describeListener(params: GlobalAccelerator.Types.DescribeListenerRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.DescribeListenerResponse) => void): Request<GlobalAccelerator.Types.DescribeListenerResponse, AWSError>;
   /**
    * List the accelerators for an AWS account.
    */
   listAccelerators(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListAcceleratorsResponse) => void): Request<GlobalAccelerator.Types.ListAcceleratorsResponse, AWSError>;
   /**
-   * List the endpoint groups that are associated with a listener.
+   * List the accelerators for an AWS account.
    */
-  listEndpointGroups(params: GlobalAccelerator.Types.ListEndpointGroupsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListEndpointGroupsResponse) => void): Request<GlobalAccelerator.Types.ListEndpointGroupsResponse, AWSError>;
+  listAccelerators(params: GlobalAccelerator.Types.ListAcceleratorsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListAcceleratorsResponse) => void): Request<GlobalAccelerator.Types.ListAcceleratorsResponse, AWSError>;
   /**
    * List the endpoint groups that are associated with a listener.
    */
   listEndpointGroups(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListEndpointGroupsResponse) => void): Request<GlobalAccelerator.Types.ListEndpointGroupsResponse, AWSError>;
   /**
-   * List the listeners for an accelerator.
+   * List the endpoint groups that are associated with a listener.
    */
-  listListeners(params: GlobalAccelerator.Types.ListListenersRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListListenersResponse) => void): Request<GlobalAccelerator.Types.ListListenersResponse, AWSError>;
+  listEndpointGroups(params: GlobalAccelerator.Types.ListEndpointGroupsRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListEndpointGroupsResponse) => void): Request<GlobalAccelerator.Types.ListEndpointGroupsResponse, AWSError>;
   /**
    * List the listeners for an accelerator.
    */
   listListeners(callback?: (err: AWSError, data: GlobalAccelerator.Types.ListListenersResponse) => void): Request<GlobalAccelerator.Types.ListListenersResponse, AWSError>;
   /**
-   * Update an accelerator.
+   * List the listeners for an accelerator.
    */
-  updateAccelerator(params: GlobalAccelerator.Types.UpdateAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.UpdateAcceleratorResponse, AWSError>;
+  listListeners(params: GlobalAccelerator.Types.ListListenersRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.ListListenersResponse) => void): Request<GlobalAccelerator.Types.ListListenersResponse, AWSError>;
   /**
    * Update an accelerator.
    */
   updateAccelerator(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.UpdateAcceleratorResponse, AWSError>;
   /**
-   * Update the attributes for an accelerator. To see an AWS CLI example of updating an accelerator to enable flow logs, scroll down to Example.
+   * Update an accelerator.
    */
-  updateAcceleratorAttributes(params: GlobalAccelerator.Types.UpdateAcceleratorAttributesRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.UpdateAcceleratorAttributesResponse, AWSError>;
+  updateAccelerator(params: GlobalAccelerator.Types.UpdateAcceleratorRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateAcceleratorResponse) => void): Request<GlobalAccelerator.Types.UpdateAcceleratorResponse, AWSError>;
   /**
    * Update the attributes for an accelerator. To see an AWS CLI example of updating an accelerator to enable flow logs, scroll down to Example.
    */
   updateAcceleratorAttributes(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.UpdateAcceleratorAttributesResponse, AWSError>;
   /**
-   * Update an endpoint group. To see an AWS CLI example of updating an endpoint group, scroll down to Example.
+   * Update the attributes for an accelerator. To see an AWS CLI example of updating an accelerator to enable flow logs, scroll down to Example.
    */
-  updateEndpointGroup(params: GlobalAccelerator.Types.UpdateEndpointGroupRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.UpdateEndpointGroupResponse, AWSError>;
+  updateAcceleratorAttributes(params: GlobalAccelerator.Types.UpdateAcceleratorAttributesRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateAcceleratorAttributesResponse) => void): Request<GlobalAccelerator.Types.UpdateAcceleratorAttributesResponse, AWSError>;
   /**
    * Update an endpoint group. To see an AWS CLI example of updating an endpoint group, scroll down to Example.
    */
   updateEndpointGroup(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.UpdateEndpointGroupResponse, AWSError>;
   /**
-   * Update a listener.
+   * Update an endpoint group. To see an AWS CLI example of updating an endpoint group, scroll down to Example.
    */
-  updateListener(params: GlobalAccelerator.Types.UpdateListenerRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateListenerResponse) => void): Request<GlobalAccelerator.Types.UpdateListenerResponse, AWSError>;
+  updateEndpointGroup(params: GlobalAccelerator.Types.UpdateEndpointGroupRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateEndpointGroupResponse) => void): Request<GlobalAccelerator.Types.UpdateEndpointGroupResponse, AWSError>;
   /**
    * Update a listener.
    */
   updateListener(callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateListenerResponse) => void): Request<GlobalAccelerator.Types.UpdateListenerResponse, AWSError>;
+  /**
+   * Update a listener.
+   */
+  updateListener(params: GlobalAccelerator.Types.UpdateListenerRequest, callback?: (err: AWSError, data: GlobalAccelerator.Types.UpdateListenerResponse) => void): Request<GlobalAccelerator.Types.UpdateListenerResponse, AWSError>;
 }
 declare namespace GlobalAccelerator {
   export interface Accelerator {

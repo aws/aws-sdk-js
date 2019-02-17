@@ -14,75 +14,75 @@ declare class Mobile extends Service {
   /**
    *  Creates an AWS Mobile Hub project. 
    */
-  createProject(params: Mobile.Types.CreateProjectRequest, callback?: (err: AWSError, data: Mobile.Types.CreateProjectResult) => void): Request<Mobile.Types.CreateProjectResult, AWSError>;
+  createProject(callback?: (err: AWSError, data: Mobile.Types.CreateProjectResult) => void): Request<Mobile.Types.CreateProjectResult, AWSError>;
   /**
    *  Creates an AWS Mobile Hub project. 
    */
-  createProject(callback?: (err: AWSError, data: Mobile.Types.CreateProjectResult) => void): Request<Mobile.Types.CreateProjectResult, AWSError>;
-  /**
-   *  Delets a project in AWS Mobile Hub. 
-   */
-  deleteProject(params: Mobile.Types.DeleteProjectRequest, callback?: (err: AWSError, data: Mobile.Types.DeleteProjectResult) => void): Request<Mobile.Types.DeleteProjectResult, AWSError>;
+  createProject(params: Mobile.Types.CreateProjectRequest, callback?: (err: AWSError, data: Mobile.Types.CreateProjectResult) => void): Request<Mobile.Types.CreateProjectResult, AWSError>;
   /**
    *  Delets a project in AWS Mobile Hub. 
    */
   deleteProject(callback?: (err: AWSError, data: Mobile.Types.DeleteProjectResult) => void): Request<Mobile.Types.DeleteProjectResult, AWSError>;
   /**
-   *  Get the bundle details for the requested bundle id. 
+   *  Delets a project in AWS Mobile Hub. 
    */
-  describeBundle(params: Mobile.Types.DescribeBundleRequest, callback?: (err: AWSError, data: Mobile.Types.DescribeBundleResult) => void): Request<Mobile.Types.DescribeBundleResult, AWSError>;
+  deleteProject(params: Mobile.Types.DeleteProjectRequest, callback?: (err: AWSError, data: Mobile.Types.DeleteProjectResult) => void): Request<Mobile.Types.DeleteProjectResult, AWSError>;
   /**
    *  Get the bundle details for the requested bundle id. 
    */
   describeBundle(callback?: (err: AWSError, data: Mobile.Types.DescribeBundleResult) => void): Request<Mobile.Types.DescribeBundleResult, AWSError>;
   /**
-   *  Gets details about a project in AWS Mobile Hub. 
+   *  Get the bundle details for the requested bundle id. 
    */
-  describeProject(params: Mobile.Types.DescribeProjectRequest, callback?: (err: AWSError, data: Mobile.Types.DescribeProjectResult) => void): Request<Mobile.Types.DescribeProjectResult, AWSError>;
+  describeBundle(params: Mobile.Types.DescribeBundleRequest, callback?: (err: AWSError, data: Mobile.Types.DescribeBundleResult) => void): Request<Mobile.Types.DescribeBundleResult, AWSError>;
   /**
    *  Gets details about a project in AWS Mobile Hub. 
    */
   describeProject(callback?: (err: AWSError, data: Mobile.Types.DescribeProjectResult) => void): Request<Mobile.Types.DescribeProjectResult, AWSError>;
   /**
-   *  Generates customized software development kit (SDK) and or tool packages used to integrate mobile web or mobile app clients with backend AWS resources. 
+   *  Gets details about a project in AWS Mobile Hub. 
    */
-  exportBundle(params: Mobile.Types.ExportBundleRequest, callback?: (err: AWSError, data: Mobile.Types.ExportBundleResult) => void): Request<Mobile.Types.ExportBundleResult, AWSError>;
+  describeProject(params: Mobile.Types.DescribeProjectRequest, callback?: (err: AWSError, data: Mobile.Types.DescribeProjectResult) => void): Request<Mobile.Types.DescribeProjectResult, AWSError>;
   /**
    *  Generates customized software development kit (SDK) and or tool packages used to integrate mobile web or mobile app clients with backend AWS resources. 
    */
   exportBundle(callback?: (err: AWSError, data: Mobile.Types.ExportBundleResult) => void): Request<Mobile.Types.ExportBundleResult, AWSError>;
   /**
-   *  Exports project configuration to a snapshot which can be downloaded and shared. Note that mobile app push credentials are encrypted in exported projects, so they can only be shared successfully within the same AWS account. 
+   *  Generates customized software development kit (SDK) and or tool packages used to integrate mobile web or mobile app clients with backend AWS resources. 
    */
-  exportProject(params: Mobile.Types.ExportProjectRequest, callback?: (err: AWSError, data: Mobile.Types.ExportProjectResult) => void): Request<Mobile.Types.ExportProjectResult, AWSError>;
+  exportBundle(params: Mobile.Types.ExportBundleRequest, callback?: (err: AWSError, data: Mobile.Types.ExportBundleResult) => void): Request<Mobile.Types.ExportBundleResult, AWSError>;
   /**
    *  Exports project configuration to a snapshot which can be downloaded and shared. Note that mobile app push credentials are encrypted in exported projects, so they can only be shared successfully within the same AWS account. 
    */
   exportProject(callback?: (err: AWSError, data: Mobile.Types.ExportProjectResult) => void): Request<Mobile.Types.ExportProjectResult, AWSError>;
   /**
-   *  List all available bundles. 
+   *  Exports project configuration to a snapshot which can be downloaded and shared. Note that mobile app push credentials are encrypted in exported projects, so they can only be shared successfully within the same AWS account. 
    */
-  listBundles(params: Mobile.Types.ListBundlesRequest, callback?: (err: AWSError, data: Mobile.Types.ListBundlesResult) => void): Request<Mobile.Types.ListBundlesResult, AWSError>;
+  exportProject(params: Mobile.Types.ExportProjectRequest, callback?: (err: AWSError, data: Mobile.Types.ExportProjectResult) => void): Request<Mobile.Types.ExportProjectResult, AWSError>;
   /**
    *  List all available bundles. 
    */
   listBundles(callback?: (err: AWSError, data: Mobile.Types.ListBundlesResult) => void): Request<Mobile.Types.ListBundlesResult, AWSError>;
   /**
-   *  Lists projects in AWS Mobile Hub. 
+   *  List all available bundles. 
    */
-  listProjects(params: Mobile.Types.ListProjectsRequest, callback?: (err: AWSError, data: Mobile.Types.ListProjectsResult) => void): Request<Mobile.Types.ListProjectsResult, AWSError>;
+  listBundles(params: Mobile.Types.ListBundlesRequest, callback?: (err: AWSError, data: Mobile.Types.ListBundlesResult) => void): Request<Mobile.Types.ListBundlesResult, AWSError>;
   /**
    *  Lists projects in AWS Mobile Hub. 
    */
   listProjects(callback?: (err: AWSError, data: Mobile.Types.ListProjectsResult) => void): Request<Mobile.Types.ListProjectsResult, AWSError>;
   /**
-   *  Update an existing project. 
+   *  Lists projects in AWS Mobile Hub. 
    */
-  updateProject(params: Mobile.Types.UpdateProjectRequest, callback?: (err: AWSError, data: Mobile.Types.UpdateProjectResult) => void): Request<Mobile.Types.UpdateProjectResult, AWSError>;
+  listProjects(params: Mobile.Types.ListProjectsRequest, callback?: (err: AWSError, data: Mobile.Types.ListProjectsResult) => void): Request<Mobile.Types.ListProjectsResult, AWSError>;
   /**
    *  Update an existing project. 
    */
   updateProject(callback?: (err: AWSError, data: Mobile.Types.UpdateProjectResult) => void): Request<Mobile.Types.UpdateProjectResult, AWSError>;
+  /**
+   *  Update an existing project. 
+   */
+  updateProject(params: Mobile.Types.UpdateProjectRequest, callback?: (err: AWSError, data: Mobile.Types.UpdateProjectResult) => void): Request<Mobile.Types.UpdateProjectResult, AWSError>;
 }
 declare namespace Mobile {
   export type AttributeKey = string;

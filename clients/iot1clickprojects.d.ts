@@ -14,107 +14,107 @@ declare class IoT1ClickProjects extends Service {
   /**
    * Associates a physical device with a placement.
    */
-  associateDeviceWithPlacement(params: IoT1ClickProjects.Types.AssociateDeviceWithPlacementRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.AssociateDeviceWithPlacementResponse) => void): Request<IoT1ClickProjects.Types.AssociateDeviceWithPlacementResponse, AWSError>;
+  associateDeviceWithPlacement(callback?: (err: AWSError, data: IoT1ClickProjects.Types.AssociateDeviceWithPlacementResponse) => void): Request<IoT1ClickProjects.Types.AssociateDeviceWithPlacementResponse, AWSError>;
   /**
    * Associates a physical device with a placement.
    */
-  associateDeviceWithPlacement(callback?: (err: AWSError, data: IoT1ClickProjects.Types.AssociateDeviceWithPlacementResponse) => void): Request<IoT1ClickProjects.Types.AssociateDeviceWithPlacementResponse, AWSError>;
-  /**
-   * Creates an empty placement.
-   */
-  createPlacement(params: IoT1ClickProjects.Types.CreatePlacementRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.CreatePlacementResponse) => void): Request<IoT1ClickProjects.Types.CreatePlacementResponse, AWSError>;
+  associateDeviceWithPlacement(params: IoT1ClickProjects.Types.AssociateDeviceWithPlacementRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.AssociateDeviceWithPlacementResponse) => void): Request<IoT1ClickProjects.Types.AssociateDeviceWithPlacementResponse, AWSError>;
   /**
    * Creates an empty placement.
    */
   createPlacement(callback?: (err: AWSError, data: IoT1ClickProjects.Types.CreatePlacementResponse) => void): Request<IoT1ClickProjects.Types.CreatePlacementResponse, AWSError>;
   /**
-   * Creates an empty project with a placement template. A project contains zero or more placements that adhere to the placement template defined in the project.
+   * Creates an empty placement.
    */
-  createProject(params: IoT1ClickProjects.Types.CreateProjectRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.CreateProjectResponse) => void): Request<IoT1ClickProjects.Types.CreateProjectResponse, AWSError>;
+  createPlacement(params: IoT1ClickProjects.Types.CreatePlacementRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.CreatePlacementResponse) => void): Request<IoT1ClickProjects.Types.CreatePlacementResponse, AWSError>;
   /**
    * Creates an empty project with a placement template. A project contains zero or more placements that adhere to the placement template defined in the project.
    */
   createProject(callback?: (err: AWSError, data: IoT1ClickProjects.Types.CreateProjectResponse) => void): Request<IoT1ClickProjects.Types.CreateProjectResponse, AWSError>;
   /**
-   * Deletes a placement. To delete a placement, it must not have any devices associated with it.  When you delete a placement, all associated data becomes irretrievable. 
+   * Creates an empty project with a placement template. A project contains zero or more placements that adhere to the placement template defined in the project.
    */
-  deletePlacement(params: IoT1ClickProjects.Types.DeletePlacementRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.DeletePlacementResponse) => void): Request<IoT1ClickProjects.Types.DeletePlacementResponse, AWSError>;
+  createProject(params: IoT1ClickProjects.Types.CreateProjectRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.CreateProjectResponse) => void): Request<IoT1ClickProjects.Types.CreateProjectResponse, AWSError>;
   /**
    * Deletes a placement. To delete a placement, it must not have any devices associated with it.  When you delete a placement, all associated data becomes irretrievable. 
    */
   deletePlacement(callback?: (err: AWSError, data: IoT1ClickProjects.Types.DeletePlacementResponse) => void): Request<IoT1ClickProjects.Types.DeletePlacementResponse, AWSError>;
   /**
-   * Deletes a project. To delete a project, it must not have any placements associated with it.  When you delete a project, all associated data becomes irretrievable. 
+   * Deletes a placement. To delete a placement, it must not have any devices associated with it.  When you delete a placement, all associated data becomes irretrievable. 
    */
-  deleteProject(params: IoT1ClickProjects.Types.DeleteProjectRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.DeleteProjectResponse) => void): Request<IoT1ClickProjects.Types.DeleteProjectResponse, AWSError>;
+  deletePlacement(params: IoT1ClickProjects.Types.DeletePlacementRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.DeletePlacementResponse) => void): Request<IoT1ClickProjects.Types.DeletePlacementResponse, AWSError>;
   /**
    * Deletes a project. To delete a project, it must not have any placements associated with it.  When you delete a project, all associated data becomes irretrievable. 
    */
   deleteProject(callback?: (err: AWSError, data: IoT1ClickProjects.Types.DeleteProjectResponse) => void): Request<IoT1ClickProjects.Types.DeleteProjectResponse, AWSError>;
   /**
-   * Describes a placement in a project.
+   * Deletes a project. To delete a project, it must not have any placements associated with it.  When you delete a project, all associated data becomes irretrievable. 
    */
-  describePlacement(params: IoT1ClickProjects.Types.DescribePlacementRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.DescribePlacementResponse) => void): Request<IoT1ClickProjects.Types.DescribePlacementResponse, AWSError>;
+  deleteProject(params: IoT1ClickProjects.Types.DeleteProjectRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.DeleteProjectResponse) => void): Request<IoT1ClickProjects.Types.DeleteProjectResponse, AWSError>;
   /**
    * Describes a placement in a project.
    */
   describePlacement(callback?: (err: AWSError, data: IoT1ClickProjects.Types.DescribePlacementResponse) => void): Request<IoT1ClickProjects.Types.DescribePlacementResponse, AWSError>;
   /**
-   * Returns an object describing a project.
+   * Describes a placement in a project.
    */
-  describeProject(params: IoT1ClickProjects.Types.DescribeProjectRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.DescribeProjectResponse) => void): Request<IoT1ClickProjects.Types.DescribeProjectResponse, AWSError>;
+  describePlacement(params: IoT1ClickProjects.Types.DescribePlacementRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.DescribePlacementResponse) => void): Request<IoT1ClickProjects.Types.DescribePlacementResponse, AWSError>;
   /**
    * Returns an object describing a project.
    */
   describeProject(callback?: (err: AWSError, data: IoT1ClickProjects.Types.DescribeProjectResponse) => void): Request<IoT1ClickProjects.Types.DescribeProjectResponse, AWSError>;
   /**
-   * Removes a physical device from a placement.
+   * Returns an object describing a project.
    */
-  disassociateDeviceFromPlacement(params: IoT1ClickProjects.Types.DisassociateDeviceFromPlacementRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.DisassociateDeviceFromPlacementResponse) => void): Request<IoT1ClickProjects.Types.DisassociateDeviceFromPlacementResponse, AWSError>;
+  describeProject(params: IoT1ClickProjects.Types.DescribeProjectRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.DescribeProjectResponse) => void): Request<IoT1ClickProjects.Types.DescribeProjectResponse, AWSError>;
   /**
    * Removes a physical device from a placement.
    */
   disassociateDeviceFromPlacement(callback?: (err: AWSError, data: IoT1ClickProjects.Types.DisassociateDeviceFromPlacementResponse) => void): Request<IoT1ClickProjects.Types.DisassociateDeviceFromPlacementResponse, AWSError>;
   /**
-   * Returns an object enumerating the devices in a placement.
+   * Removes a physical device from a placement.
    */
-  getDevicesInPlacement(params: IoT1ClickProjects.Types.GetDevicesInPlacementRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.GetDevicesInPlacementResponse) => void): Request<IoT1ClickProjects.Types.GetDevicesInPlacementResponse, AWSError>;
+  disassociateDeviceFromPlacement(params: IoT1ClickProjects.Types.DisassociateDeviceFromPlacementRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.DisassociateDeviceFromPlacementResponse) => void): Request<IoT1ClickProjects.Types.DisassociateDeviceFromPlacementResponse, AWSError>;
   /**
    * Returns an object enumerating the devices in a placement.
    */
   getDevicesInPlacement(callback?: (err: AWSError, data: IoT1ClickProjects.Types.GetDevicesInPlacementResponse) => void): Request<IoT1ClickProjects.Types.GetDevicesInPlacementResponse, AWSError>;
   /**
-   * Lists the placement(s) of a project.
+   * Returns an object enumerating the devices in a placement.
    */
-  listPlacements(params: IoT1ClickProjects.Types.ListPlacementsRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.ListPlacementsResponse) => void): Request<IoT1ClickProjects.Types.ListPlacementsResponse, AWSError>;
+  getDevicesInPlacement(params: IoT1ClickProjects.Types.GetDevicesInPlacementRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.GetDevicesInPlacementResponse) => void): Request<IoT1ClickProjects.Types.GetDevicesInPlacementResponse, AWSError>;
   /**
    * Lists the placement(s) of a project.
    */
   listPlacements(callback?: (err: AWSError, data: IoT1ClickProjects.Types.ListPlacementsResponse) => void): Request<IoT1ClickProjects.Types.ListPlacementsResponse, AWSError>;
   /**
-   * Lists the AWS IoT 1-Click project(s) associated with your AWS account and region.
+   * Lists the placement(s) of a project.
    */
-  listProjects(params: IoT1ClickProjects.Types.ListProjectsRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.ListProjectsResponse) => void): Request<IoT1ClickProjects.Types.ListProjectsResponse, AWSError>;
+  listPlacements(params: IoT1ClickProjects.Types.ListPlacementsRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.ListPlacementsResponse) => void): Request<IoT1ClickProjects.Types.ListPlacementsResponse, AWSError>;
   /**
    * Lists the AWS IoT 1-Click project(s) associated with your AWS account and region.
    */
   listProjects(callback?: (err: AWSError, data: IoT1ClickProjects.Types.ListProjectsResponse) => void): Request<IoT1ClickProjects.Types.ListProjectsResponse, AWSError>;
   /**
-   * Updates a placement with the given attributes. To clear an attribute, pass an empty value (i.e., "").
+   * Lists the AWS IoT 1-Click project(s) associated with your AWS account and region.
    */
-  updatePlacement(params: IoT1ClickProjects.Types.UpdatePlacementRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.UpdatePlacementResponse) => void): Request<IoT1ClickProjects.Types.UpdatePlacementResponse, AWSError>;
+  listProjects(params: IoT1ClickProjects.Types.ListProjectsRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.ListProjectsResponse) => void): Request<IoT1ClickProjects.Types.ListProjectsResponse, AWSError>;
   /**
    * Updates a placement with the given attributes. To clear an attribute, pass an empty value (i.e., "").
    */
   updatePlacement(callback?: (err: AWSError, data: IoT1ClickProjects.Types.UpdatePlacementResponse) => void): Request<IoT1ClickProjects.Types.UpdatePlacementResponse, AWSError>;
   /**
-   * Updates a project associated with your AWS account and region. With the exception of device template names, you can pass just the values that need to be updated because the update request will change only the values that are provided. To clear a value, pass the empty string (i.e., "").
+   * Updates a placement with the given attributes. To clear an attribute, pass an empty value (i.e., "").
    */
-  updateProject(params: IoT1ClickProjects.Types.UpdateProjectRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.UpdateProjectResponse) => void): Request<IoT1ClickProjects.Types.UpdateProjectResponse, AWSError>;
+  updatePlacement(params: IoT1ClickProjects.Types.UpdatePlacementRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.UpdatePlacementResponse) => void): Request<IoT1ClickProjects.Types.UpdatePlacementResponse, AWSError>;
   /**
    * Updates a project associated with your AWS account and region. With the exception of device template names, you can pass just the values that need to be updated because the update request will change only the values that are provided. To clear a value, pass the empty string (i.e., "").
    */
   updateProject(callback?: (err: AWSError, data: IoT1ClickProjects.Types.UpdateProjectResponse) => void): Request<IoT1ClickProjects.Types.UpdateProjectResponse, AWSError>;
+  /**
+   * Updates a project associated with your AWS account and region. With the exception of device template names, you can pass just the values that need to be updated because the update request will change only the values that are provided. To clear a value, pass the empty string (i.e., "").
+   */
+  updateProject(params: IoT1ClickProjects.Types.UpdateProjectRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.UpdateProjectResponse) => void): Request<IoT1ClickProjects.Types.UpdateProjectResponse, AWSError>;
 }
 declare namespace IoT1ClickProjects {
   export interface AssociateDeviceWithPlacementRequest {

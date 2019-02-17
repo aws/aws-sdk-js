@@ -14,115 +14,115 @@ declare class Discovery extends Service {
   /**
    * Associates one or more configuration items with an application.
    */
-  associateConfigurationItemsToApplication(params: Discovery.Types.AssociateConfigurationItemsToApplicationRequest, callback?: (err: AWSError, data: Discovery.Types.AssociateConfigurationItemsToApplicationResponse) => void): Request<Discovery.Types.AssociateConfigurationItemsToApplicationResponse, AWSError>;
+  associateConfigurationItemsToApplication(callback?: (err: AWSError, data: Discovery.Types.AssociateConfigurationItemsToApplicationResponse) => void): Request<Discovery.Types.AssociateConfigurationItemsToApplicationResponse, AWSError>;
   /**
    * Associates one or more configuration items with an application.
    */
-  associateConfigurationItemsToApplication(callback?: (err: AWSError, data: Discovery.Types.AssociateConfigurationItemsToApplicationResponse) => void): Request<Discovery.Types.AssociateConfigurationItemsToApplicationResponse, AWSError>;
-  /**
-   * Deletes one or more import tasks, each identified by their import ID. Each import task has a number of records that can identify servers or applications.  AWS Application Discovery Service has built-in matching logic that will identify when discovered servers match existing entries that you've previously discovered, the information for the already-existing discovered server is updated. When you delete an import task that contains records that were used to match, the information in those matched records that comes from the deleted records will also be deleted.
-   */
-  batchDeleteImportData(params: Discovery.Types.BatchDeleteImportDataRequest, callback?: (err: AWSError, data: Discovery.Types.BatchDeleteImportDataResponse) => void): Request<Discovery.Types.BatchDeleteImportDataResponse, AWSError>;
+  associateConfigurationItemsToApplication(params: Discovery.Types.AssociateConfigurationItemsToApplicationRequest, callback?: (err: AWSError, data: Discovery.Types.AssociateConfigurationItemsToApplicationResponse) => void): Request<Discovery.Types.AssociateConfigurationItemsToApplicationResponse, AWSError>;
   /**
    * Deletes one or more import tasks, each identified by their import ID. Each import task has a number of records that can identify servers or applications.  AWS Application Discovery Service has built-in matching logic that will identify when discovered servers match existing entries that you've previously discovered, the information for the already-existing discovered server is updated. When you delete an import task that contains records that were used to match, the information in those matched records that comes from the deleted records will also be deleted.
    */
   batchDeleteImportData(callback?: (err: AWSError, data: Discovery.Types.BatchDeleteImportDataResponse) => void): Request<Discovery.Types.BatchDeleteImportDataResponse, AWSError>;
   /**
-   * Creates an application with the given name and description.
+   * Deletes one or more import tasks, each identified by their import ID. Each import task has a number of records that can identify servers or applications.  AWS Application Discovery Service has built-in matching logic that will identify when discovered servers match existing entries that you've previously discovered, the information for the already-existing discovered server is updated. When you delete an import task that contains records that were used to match, the information in those matched records that comes from the deleted records will also be deleted.
    */
-  createApplication(params: Discovery.Types.CreateApplicationRequest, callback?: (err: AWSError, data: Discovery.Types.CreateApplicationResponse) => void): Request<Discovery.Types.CreateApplicationResponse, AWSError>;
+  batchDeleteImportData(params: Discovery.Types.BatchDeleteImportDataRequest, callback?: (err: AWSError, data: Discovery.Types.BatchDeleteImportDataResponse) => void): Request<Discovery.Types.BatchDeleteImportDataResponse, AWSError>;
   /**
    * Creates an application with the given name and description.
    */
   createApplication(callback?: (err: AWSError, data: Discovery.Types.CreateApplicationResponse) => void): Request<Discovery.Types.CreateApplicationResponse, AWSError>;
   /**
-   * Creates one or more tags for configuration items. Tags are metadata that help you categorize IT assets. This API accepts a list of multiple configuration items.
+   * Creates an application with the given name and description.
    */
-  createTags(params: Discovery.Types.CreateTagsRequest, callback?: (err: AWSError, data: Discovery.Types.CreateTagsResponse) => void): Request<Discovery.Types.CreateTagsResponse, AWSError>;
+  createApplication(params: Discovery.Types.CreateApplicationRequest, callback?: (err: AWSError, data: Discovery.Types.CreateApplicationResponse) => void): Request<Discovery.Types.CreateApplicationResponse, AWSError>;
   /**
    * Creates one or more tags for configuration items. Tags are metadata that help you categorize IT assets. This API accepts a list of multiple configuration items.
    */
   createTags(callback?: (err: AWSError, data: Discovery.Types.CreateTagsResponse) => void): Request<Discovery.Types.CreateTagsResponse, AWSError>;
   /**
-   * Deletes a list of applications and their associations with configuration items.
+   * Creates one or more tags for configuration items. Tags are metadata that help you categorize IT assets. This API accepts a list of multiple configuration items.
    */
-  deleteApplications(params: Discovery.Types.DeleteApplicationsRequest, callback?: (err: AWSError, data: Discovery.Types.DeleteApplicationsResponse) => void): Request<Discovery.Types.DeleteApplicationsResponse, AWSError>;
+  createTags(params: Discovery.Types.CreateTagsRequest, callback?: (err: AWSError, data: Discovery.Types.CreateTagsResponse) => void): Request<Discovery.Types.CreateTagsResponse, AWSError>;
   /**
    * Deletes a list of applications and their associations with configuration items.
    */
   deleteApplications(callback?: (err: AWSError, data: Discovery.Types.DeleteApplicationsResponse) => void): Request<Discovery.Types.DeleteApplicationsResponse, AWSError>;
   /**
-   * Deletes the association between configuration items and one or more tags. This API accepts a list of multiple configuration items.
+   * Deletes a list of applications and their associations with configuration items.
    */
-  deleteTags(params: Discovery.Types.DeleteTagsRequest, callback?: (err: AWSError, data: Discovery.Types.DeleteTagsResponse) => void): Request<Discovery.Types.DeleteTagsResponse, AWSError>;
+  deleteApplications(params: Discovery.Types.DeleteApplicationsRequest, callback?: (err: AWSError, data: Discovery.Types.DeleteApplicationsResponse) => void): Request<Discovery.Types.DeleteApplicationsResponse, AWSError>;
   /**
    * Deletes the association between configuration items and one or more tags. This API accepts a list of multiple configuration items.
    */
   deleteTags(callback?: (err: AWSError, data: Discovery.Types.DeleteTagsResponse) => void): Request<Discovery.Types.DeleteTagsResponse, AWSError>;
   /**
-   * Lists agents or connectors as specified by ID or other filters. All agents/connectors associated with your user account can be listed if you call DescribeAgents as is without passing any parameters.
+   * Deletes the association between configuration items and one or more tags. This API accepts a list of multiple configuration items.
    */
-  describeAgents(params: Discovery.Types.DescribeAgentsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeAgentsResponse) => void): Request<Discovery.Types.DescribeAgentsResponse, AWSError>;
+  deleteTags(params: Discovery.Types.DeleteTagsRequest, callback?: (err: AWSError, data: Discovery.Types.DeleteTagsResponse) => void): Request<Discovery.Types.DeleteTagsResponse, AWSError>;
   /**
    * Lists agents or connectors as specified by ID or other filters. All agents/connectors associated with your user account can be listed if you call DescribeAgents as is without passing any parameters.
    */
   describeAgents(callback?: (err: AWSError, data: Discovery.Types.DescribeAgentsResponse) => void): Request<Discovery.Types.DescribeAgentsResponse, AWSError>;
   /**
-   * Retrieves attributes for a list of configuration item IDs.  All of the supplied IDs must be for the same asset type from one of the following:   server   application   process   connection   Output fields are specific to the asset type specified. For example, the output for a server configuration item includes a list of attributes about the server, such as host name, operating system, number of network cards, etc. For a complete list of outputs for each asset type, see Using the DescribeConfigurations Action. 
+   * Lists agents or connectors as specified by ID or other filters. All agents/connectors associated with your user account can be listed if you call DescribeAgents as is without passing any parameters.
    */
-  describeConfigurations(params: Discovery.Types.DescribeConfigurationsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeConfigurationsResponse) => void): Request<Discovery.Types.DescribeConfigurationsResponse, AWSError>;
+  describeAgents(params: Discovery.Types.DescribeAgentsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeAgentsResponse) => void): Request<Discovery.Types.DescribeAgentsResponse, AWSError>;
   /**
    * Retrieves attributes for a list of configuration item IDs.  All of the supplied IDs must be for the same asset type from one of the following:   server   application   process   connection   Output fields are specific to the asset type specified. For example, the output for a server configuration item includes a list of attributes about the server, such as host name, operating system, number of network cards, etc. For a complete list of outputs for each asset type, see Using the DescribeConfigurations Action. 
    */
   describeConfigurations(callback?: (err: AWSError, data: Discovery.Types.DescribeConfigurationsResponse) => void): Request<Discovery.Types.DescribeConfigurationsResponse, AWSError>;
   /**
-   * Lists exports as specified by ID. All continuous exports associated with your user account can be listed if you call DescribeContinuousExports as is without passing any parameters.
+   * Retrieves attributes for a list of configuration item IDs.  All of the supplied IDs must be for the same asset type from one of the following:   server   application   process   connection   Output fields are specific to the asset type specified. For example, the output for a server configuration item includes a list of attributes about the server, such as host name, operating system, number of network cards, etc. For a complete list of outputs for each asset type, see Using the DescribeConfigurations Action. 
    */
-  describeContinuousExports(params: Discovery.Types.DescribeContinuousExportsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeContinuousExportsResponse) => void): Request<Discovery.Types.DescribeContinuousExportsResponse, AWSError>;
+  describeConfigurations(params: Discovery.Types.DescribeConfigurationsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeConfigurationsResponse) => void): Request<Discovery.Types.DescribeConfigurationsResponse, AWSError>;
   /**
    * Lists exports as specified by ID. All continuous exports associated with your user account can be listed if you call DescribeContinuousExports as is without passing any parameters.
    */
   describeContinuousExports(callback?: (err: AWSError, data: Discovery.Types.DescribeContinuousExportsResponse) => void): Request<Discovery.Types.DescribeContinuousExportsResponse, AWSError>;
   /**
-   *  DescribeExportConfigurations is deprecated. Use instead  DescribeExportTasks .
+   * Lists exports as specified by ID. All continuous exports associated with your user account can be listed if you call DescribeContinuousExports as is without passing any parameters.
    */
-  describeExportConfigurations(params: Discovery.Types.DescribeExportConfigurationsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeExportConfigurationsResponse) => void): Request<Discovery.Types.DescribeExportConfigurationsResponse, AWSError>;
+  describeContinuousExports(params: Discovery.Types.DescribeContinuousExportsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeContinuousExportsResponse) => void): Request<Discovery.Types.DescribeContinuousExportsResponse, AWSError>;
   /**
    *  DescribeExportConfigurations is deprecated. Use instead  DescribeExportTasks .
    */
   describeExportConfigurations(callback?: (err: AWSError, data: Discovery.Types.DescribeExportConfigurationsResponse) => void): Request<Discovery.Types.DescribeExportConfigurationsResponse, AWSError>;
   /**
-   * Retrieve status of one or more export tasks. You can retrieve the status of up to 100 export tasks.
+   *  DescribeExportConfigurations is deprecated. Use instead  DescribeExportTasks .
    */
-  describeExportTasks(params: Discovery.Types.DescribeExportTasksRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeExportTasksResponse) => void): Request<Discovery.Types.DescribeExportTasksResponse, AWSError>;
+  describeExportConfigurations(params: Discovery.Types.DescribeExportConfigurationsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeExportConfigurationsResponse) => void): Request<Discovery.Types.DescribeExportConfigurationsResponse, AWSError>;
   /**
    * Retrieve status of one or more export tasks. You can retrieve the status of up to 100 export tasks.
    */
   describeExportTasks(callback?: (err: AWSError, data: Discovery.Types.DescribeExportTasksResponse) => void): Request<Discovery.Types.DescribeExportTasksResponse, AWSError>;
   /**
-   * Returns an array of import tasks for your account, including status information, times, IDs, the Amazon S3 Object URL for the import file, and more.
+   * Retrieve status of one or more export tasks. You can retrieve the status of up to 100 export tasks.
    */
-  describeImportTasks(params: Discovery.Types.DescribeImportTasksRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeImportTasksResponse) => void): Request<Discovery.Types.DescribeImportTasksResponse, AWSError>;
+  describeExportTasks(params: Discovery.Types.DescribeExportTasksRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeExportTasksResponse) => void): Request<Discovery.Types.DescribeExportTasksResponse, AWSError>;
   /**
    * Returns an array of import tasks for your account, including status information, times, IDs, the Amazon S3 Object URL for the import file, and more.
    */
   describeImportTasks(callback?: (err: AWSError, data: Discovery.Types.DescribeImportTasksResponse) => void): Request<Discovery.Types.DescribeImportTasksResponse, AWSError>;
   /**
-   * Retrieves a list of configuration items that have tags as specified by the key-value pairs, name and value, passed to the optional parameter filters. There are three valid tag filter names:   tagKey   tagValue   configurationId   Also, all configuration items associated with your user account that have tags can be listed if you call DescribeTags as is without passing any parameters.
+   * Returns an array of import tasks for your account, including status information, times, IDs, the Amazon S3 Object URL for the import file, and more.
    */
-  describeTags(params: Discovery.Types.DescribeTagsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeTagsResponse) => void): Request<Discovery.Types.DescribeTagsResponse, AWSError>;
+  describeImportTasks(params: Discovery.Types.DescribeImportTasksRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeImportTasksResponse) => void): Request<Discovery.Types.DescribeImportTasksResponse, AWSError>;
   /**
    * Retrieves a list of configuration items that have tags as specified by the key-value pairs, name and value, passed to the optional parameter filters. There are three valid tag filter names:   tagKey   tagValue   configurationId   Also, all configuration items associated with your user account that have tags can be listed if you call DescribeTags as is without passing any parameters.
    */
   describeTags(callback?: (err: AWSError, data: Discovery.Types.DescribeTagsResponse) => void): Request<Discovery.Types.DescribeTagsResponse, AWSError>;
   /**
-   * Disassociates one or more configuration items from an application.
+   * Retrieves a list of configuration items that have tags as specified by the key-value pairs, name and value, passed to the optional parameter filters. There are three valid tag filter names:   tagKey   tagValue   configurationId   Also, all configuration items associated with your user account that have tags can be listed if you call DescribeTags as is without passing any parameters.
    */
-  disassociateConfigurationItemsFromApplication(params: Discovery.Types.DisassociateConfigurationItemsFromApplicationRequest, callback?: (err: AWSError, data: Discovery.Types.DisassociateConfigurationItemsFromApplicationResponse) => void): Request<Discovery.Types.DisassociateConfigurationItemsFromApplicationResponse, AWSError>;
+  describeTags(params: Discovery.Types.DescribeTagsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeTagsResponse) => void): Request<Discovery.Types.DescribeTagsResponse, AWSError>;
   /**
    * Disassociates one or more configuration items from an application.
    */
   disassociateConfigurationItemsFromApplication(callback?: (err: AWSError, data: Discovery.Types.DisassociateConfigurationItemsFromApplicationResponse) => void): Request<Discovery.Types.DisassociateConfigurationItemsFromApplicationResponse, AWSError>;
+  /**
+   * Disassociates one or more configuration items from an application.
+   */
+  disassociateConfigurationItemsFromApplication(params: Discovery.Types.DisassociateConfigurationItemsFromApplicationRequest, callback?: (err: AWSError, data: Discovery.Types.DisassociateConfigurationItemsFromApplicationResponse) => void): Request<Discovery.Types.DisassociateConfigurationItemsFromApplicationResponse, AWSError>;
   /**
    * Deprecated. Use StartExportTask instead. Exports all discovered configuration data to an Amazon S3 bucket or an application that enables you to view and evaluate the data. Data includes tags and tag associations, processes, connections, servers, and system performance. This API returns an export ID that you can query using the DescribeExportConfigurations API. The system imposes a limit of two configuration exports in six hours.
    */
@@ -130,83 +130,83 @@ declare class Discovery extends Service {
   /**
    * Retrieves a short summary of discovered assets. This API operation takes no request parameters and is called as is at the command prompt as shown in the example.
    */
-  getDiscoverySummary(params: Discovery.Types.GetDiscoverySummaryRequest, callback?: (err: AWSError, data: Discovery.Types.GetDiscoverySummaryResponse) => void): Request<Discovery.Types.GetDiscoverySummaryResponse, AWSError>;
+  getDiscoverySummary(callback?: (err: AWSError, data: Discovery.Types.GetDiscoverySummaryResponse) => void): Request<Discovery.Types.GetDiscoverySummaryResponse, AWSError>;
   /**
    * Retrieves a short summary of discovered assets. This API operation takes no request parameters and is called as is at the command prompt as shown in the example.
    */
-  getDiscoverySummary(callback?: (err: AWSError, data: Discovery.Types.GetDiscoverySummaryResponse) => void): Request<Discovery.Types.GetDiscoverySummaryResponse, AWSError>;
-  /**
-   * Retrieves a list of configuration items as specified by the value passed to the required paramater configurationType. Optional filtering may be applied to refine search results.
-   */
-  listConfigurations(params: Discovery.Types.ListConfigurationsRequest, callback?: (err: AWSError, data: Discovery.Types.ListConfigurationsResponse) => void): Request<Discovery.Types.ListConfigurationsResponse, AWSError>;
+  getDiscoverySummary(params: Discovery.Types.GetDiscoverySummaryRequest, callback?: (err: AWSError, data: Discovery.Types.GetDiscoverySummaryResponse) => void): Request<Discovery.Types.GetDiscoverySummaryResponse, AWSError>;
   /**
    * Retrieves a list of configuration items as specified by the value passed to the required paramater configurationType. Optional filtering may be applied to refine search results.
    */
   listConfigurations(callback?: (err: AWSError, data: Discovery.Types.ListConfigurationsResponse) => void): Request<Discovery.Types.ListConfigurationsResponse, AWSError>;
   /**
-   * Retrieves a list of servers that are one network hop away from a specified server.
+   * Retrieves a list of configuration items as specified by the value passed to the required paramater configurationType. Optional filtering may be applied to refine search results.
    */
-  listServerNeighbors(params: Discovery.Types.ListServerNeighborsRequest, callback?: (err: AWSError, data: Discovery.Types.ListServerNeighborsResponse) => void): Request<Discovery.Types.ListServerNeighborsResponse, AWSError>;
+  listConfigurations(params: Discovery.Types.ListConfigurationsRequest, callback?: (err: AWSError, data: Discovery.Types.ListConfigurationsResponse) => void): Request<Discovery.Types.ListConfigurationsResponse, AWSError>;
   /**
    * Retrieves a list of servers that are one network hop away from a specified server.
    */
   listServerNeighbors(callback?: (err: AWSError, data: Discovery.Types.ListServerNeighborsResponse) => void): Request<Discovery.Types.ListServerNeighborsResponse, AWSError>;
   /**
-   * Start the continuous flow of agent's discovered data into Amazon Athena.
+   * Retrieves a list of servers that are one network hop away from a specified server.
    */
-  startContinuousExport(params: Discovery.Types.StartContinuousExportRequest, callback?: (err: AWSError, data: Discovery.Types.StartContinuousExportResponse) => void): Request<Discovery.Types.StartContinuousExportResponse, AWSError>;
+  listServerNeighbors(params: Discovery.Types.ListServerNeighborsRequest, callback?: (err: AWSError, data: Discovery.Types.ListServerNeighborsResponse) => void): Request<Discovery.Types.ListServerNeighborsResponse, AWSError>;
   /**
    * Start the continuous flow of agent's discovered data into Amazon Athena.
    */
   startContinuousExport(callback?: (err: AWSError, data: Discovery.Types.StartContinuousExportResponse) => void): Request<Discovery.Types.StartContinuousExportResponse, AWSError>;
   /**
-   * Instructs the specified agents or connectors to start collecting data.
+   * Start the continuous flow of agent's discovered data into Amazon Athena.
    */
-  startDataCollectionByAgentIds(params: Discovery.Types.StartDataCollectionByAgentIdsRequest, callback?: (err: AWSError, data: Discovery.Types.StartDataCollectionByAgentIdsResponse) => void): Request<Discovery.Types.StartDataCollectionByAgentIdsResponse, AWSError>;
+  startContinuousExport(params: Discovery.Types.StartContinuousExportRequest, callback?: (err: AWSError, data: Discovery.Types.StartContinuousExportResponse) => void): Request<Discovery.Types.StartContinuousExportResponse, AWSError>;
   /**
    * Instructs the specified agents or connectors to start collecting data.
    */
   startDataCollectionByAgentIds(callback?: (err: AWSError, data: Discovery.Types.StartDataCollectionByAgentIdsResponse) => void): Request<Discovery.Types.StartDataCollectionByAgentIdsResponse, AWSError>;
   /**
-   *  Begins the export of discovered data to an S3 bucket.  If you specify agentIds in a filter, the task exports up to 72 hours of detailed data collected by the identified Application Discovery Agent, including network, process, and performance details. A time range for exported agent data may be set by using startTime and endTime. Export of detailed agent data is limited to five concurrently running exports.   If you do not include an agentIds filter, summary data is exported that includes both AWS Agentless Discovery Connector data and summary data from AWS Discovery Agents. Export of summary data is limited to two exports per day. 
+   * Instructs the specified agents or connectors to start collecting data.
    */
-  startExportTask(params: Discovery.Types.StartExportTaskRequest, callback?: (err: AWSError, data: Discovery.Types.StartExportTaskResponse) => void): Request<Discovery.Types.StartExportTaskResponse, AWSError>;
+  startDataCollectionByAgentIds(params: Discovery.Types.StartDataCollectionByAgentIdsRequest, callback?: (err: AWSError, data: Discovery.Types.StartDataCollectionByAgentIdsResponse) => void): Request<Discovery.Types.StartDataCollectionByAgentIdsResponse, AWSError>;
   /**
    *  Begins the export of discovered data to an S3 bucket.  If you specify agentIds in a filter, the task exports up to 72 hours of detailed data collected by the identified Application Discovery Agent, including network, process, and performance details. A time range for exported agent data may be set by using startTime and endTime. Export of detailed agent data is limited to five concurrently running exports.   If you do not include an agentIds filter, summary data is exported that includes both AWS Agentless Discovery Connector data and summary data from AWS Discovery Agents. Export of summary data is limited to two exports per day. 
    */
   startExportTask(callback?: (err: AWSError, data: Discovery.Types.StartExportTaskResponse) => void): Request<Discovery.Types.StartExportTaskResponse, AWSError>;
   /**
-   * Starts an import task, which allows you to import details of your on-premises environment directly into AWS without having to use the Application Discovery Service (ADS) tools such as the Discovery Connector or Discovery Agent. This gives you the option to perform migration assessment and planning directly from your imported data, including the ability to group your devices as applications and track their migration status. To start an import request, do this:   Download the specially formatted comma separated value (CSV) import template, which you can find here: https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv.   Fill out the template with your server and application data.   Upload your import file to an Amazon S3 bucket, and make a note of it's Object URL. Your import file must be in the CSV format.   Use the console or the StartImportTask command with the AWS CLI or one of the AWS SDKs to import the records from your file.   For more information, including step-by-step procedures, see Migration Hub Import in the AWS Application Discovery Service User Guide.  There are limits to the number of import tasks you can create (and delete) in an AWS account. For more information, see AWS Application Discovery Service Limits in the AWS Application Discovery Service User Guide. 
+   *  Begins the export of discovered data to an S3 bucket.  If you specify agentIds in a filter, the task exports up to 72 hours of detailed data collected by the identified Application Discovery Agent, including network, process, and performance details. A time range for exported agent data may be set by using startTime and endTime. Export of detailed agent data is limited to five concurrently running exports.   If you do not include an agentIds filter, summary data is exported that includes both AWS Agentless Discovery Connector data and summary data from AWS Discovery Agents. Export of summary data is limited to two exports per day. 
    */
-  startImportTask(params: Discovery.Types.StartImportTaskRequest, callback?: (err: AWSError, data: Discovery.Types.StartImportTaskResponse) => void): Request<Discovery.Types.StartImportTaskResponse, AWSError>;
+  startExportTask(params: Discovery.Types.StartExportTaskRequest, callback?: (err: AWSError, data: Discovery.Types.StartExportTaskResponse) => void): Request<Discovery.Types.StartExportTaskResponse, AWSError>;
   /**
    * Starts an import task, which allows you to import details of your on-premises environment directly into AWS without having to use the Application Discovery Service (ADS) tools such as the Discovery Connector or Discovery Agent. This gives you the option to perform migration assessment and planning directly from your imported data, including the ability to group your devices as applications and track their migration status. To start an import request, do this:   Download the specially formatted comma separated value (CSV) import template, which you can find here: https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv.   Fill out the template with your server and application data.   Upload your import file to an Amazon S3 bucket, and make a note of it's Object URL. Your import file must be in the CSV format.   Use the console or the StartImportTask command with the AWS CLI or one of the AWS SDKs to import the records from your file.   For more information, including step-by-step procedures, see Migration Hub Import in the AWS Application Discovery Service User Guide.  There are limits to the number of import tasks you can create (and delete) in an AWS account. For more information, see AWS Application Discovery Service Limits in the AWS Application Discovery Service User Guide. 
    */
   startImportTask(callback?: (err: AWSError, data: Discovery.Types.StartImportTaskResponse) => void): Request<Discovery.Types.StartImportTaskResponse, AWSError>;
   /**
-   * Stop the continuous flow of agent's discovered data into Amazon Athena.
+   * Starts an import task, which allows you to import details of your on-premises environment directly into AWS without having to use the Application Discovery Service (ADS) tools such as the Discovery Connector or Discovery Agent. This gives you the option to perform migration assessment and planning directly from your imported data, including the ability to group your devices as applications and track their migration status. To start an import request, do this:   Download the specially formatted comma separated value (CSV) import template, which you can find here: https://s3-us-west-2.amazonaws.com/templates-7cffcf56-bd96-4b1c-b45b-a5b42f282e46/import_template.csv.   Fill out the template with your server and application data.   Upload your import file to an Amazon S3 bucket, and make a note of it's Object URL. Your import file must be in the CSV format.   Use the console or the StartImportTask command with the AWS CLI or one of the AWS SDKs to import the records from your file.   For more information, including step-by-step procedures, see Migration Hub Import in the AWS Application Discovery Service User Guide.  There are limits to the number of import tasks you can create (and delete) in an AWS account. For more information, see AWS Application Discovery Service Limits in the AWS Application Discovery Service User Guide. 
    */
-  stopContinuousExport(params: Discovery.Types.StopContinuousExportRequest, callback?: (err: AWSError, data: Discovery.Types.StopContinuousExportResponse) => void): Request<Discovery.Types.StopContinuousExportResponse, AWSError>;
+  startImportTask(params: Discovery.Types.StartImportTaskRequest, callback?: (err: AWSError, data: Discovery.Types.StartImportTaskResponse) => void): Request<Discovery.Types.StartImportTaskResponse, AWSError>;
   /**
    * Stop the continuous flow of agent's discovered data into Amazon Athena.
    */
   stopContinuousExport(callback?: (err: AWSError, data: Discovery.Types.StopContinuousExportResponse) => void): Request<Discovery.Types.StopContinuousExportResponse, AWSError>;
   /**
-   * Instructs the specified agents or connectors to stop collecting data.
+   * Stop the continuous flow of agent's discovered data into Amazon Athena.
    */
-  stopDataCollectionByAgentIds(params: Discovery.Types.StopDataCollectionByAgentIdsRequest, callback?: (err: AWSError, data: Discovery.Types.StopDataCollectionByAgentIdsResponse) => void): Request<Discovery.Types.StopDataCollectionByAgentIdsResponse, AWSError>;
+  stopContinuousExport(params: Discovery.Types.StopContinuousExportRequest, callback?: (err: AWSError, data: Discovery.Types.StopContinuousExportResponse) => void): Request<Discovery.Types.StopContinuousExportResponse, AWSError>;
   /**
    * Instructs the specified agents or connectors to stop collecting data.
    */
   stopDataCollectionByAgentIds(callback?: (err: AWSError, data: Discovery.Types.StopDataCollectionByAgentIdsResponse) => void): Request<Discovery.Types.StopDataCollectionByAgentIdsResponse, AWSError>;
   /**
-   * Updates metadata about an application.
+   * Instructs the specified agents or connectors to stop collecting data.
    */
-  updateApplication(params: Discovery.Types.UpdateApplicationRequest, callback?: (err: AWSError, data: Discovery.Types.UpdateApplicationResponse) => void): Request<Discovery.Types.UpdateApplicationResponse, AWSError>;
+  stopDataCollectionByAgentIds(params: Discovery.Types.StopDataCollectionByAgentIdsRequest, callback?: (err: AWSError, data: Discovery.Types.StopDataCollectionByAgentIdsResponse) => void): Request<Discovery.Types.StopDataCollectionByAgentIdsResponse, AWSError>;
   /**
    * Updates metadata about an application.
    */
   updateApplication(callback?: (err: AWSError, data: Discovery.Types.UpdateApplicationResponse) => void): Request<Discovery.Types.UpdateApplicationResponse, AWSError>;
+  /**
+   * Updates metadata about an application.
+   */
+  updateApplication(params: Discovery.Types.UpdateApplicationRequest, callback?: (err: AWSError, data: Discovery.Types.UpdateApplicationResponse) => void): Request<Discovery.Types.UpdateApplicationResponse, AWSError>;
 }
 declare namespace Discovery {
   export interface AgentConfigurationStatus {

@@ -15,139 +15,139 @@ declare class ElasticTranscoder extends Service {
   /**
    * The CancelJob operation cancels an unfinished job.  You can only cancel a job that has a status of Submitted. To prevent a pipeline from starting to process a job while you're getting the job identifier, use UpdatePipelineStatus to temporarily pause the pipeline. 
    */
-  cancelJob(params: ElasticTranscoder.Types.CancelJobRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.CancelJobResponse) => void): Request<ElasticTranscoder.Types.CancelJobResponse, AWSError>;
+  cancelJob(callback?: (err: AWSError, data: ElasticTranscoder.Types.CancelJobResponse) => void): Request<ElasticTranscoder.Types.CancelJobResponse, AWSError>;
   /**
    * The CancelJob operation cancels an unfinished job.  You can only cancel a job that has a status of Submitted. To prevent a pipeline from starting to process a job while you're getting the job identifier, use UpdatePipelineStatus to temporarily pause the pipeline. 
    */
-  cancelJob(callback?: (err: AWSError, data: ElasticTranscoder.Types.CancelJobResponse) => void): Request<ElasticTranscoder.Types.CancelJobResponse, AWSError>;
-  /**
-   * When you create a job, Elastic Transcoder returns JSON data that includes the values that you specified plus information about the job that is created. If you have specified more than one output for your jobs (for example, one output for the Kindle Fire and another output for the Apple iPhone 4s), you currently must use the Elastic Transcoder API to list the jobs (as opposed to the AWS Console).
-   */
-  createJob(params: ElasticTranscoder.Types.CreateJobRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.CreateJobResponse) => void): Request<ElasticTranscoder.Types.CreateJobResponse, AWSError>;
+  cancelJob(params: ElasticTranscoder.Types.CancelJobRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.CancelJobResponse) => void): Request<ElasticTranscoder.Types.CancelJobResponse, AWSError>;
   /**
    * When you create a job, Elastic Transcoder returns JSON data that includes the values that you specified plus information about the job that is created. If you have specified more than one output for your jobs (for example, one output for the Kindle Fire and another output for the Apple iPhone 4s), you currently must use the Elastic Transcoder API to list the jobs (as opposed to the AWS Console).
    */
   createJob(callback?: (err: AWSError, data: ElasticTranscoder.Types.CreateJobResponse) => void): Request<ElasticTranscoder.Types.CreateJobResponse, AWSError>;
   /**
-   * The CreatePipeline operation creates a pipeline with settings that you specify.
+   * When you create a job, Elastic Transcoder returns JSON data that includes the values that you specified plus information about the job that is created. If you have specified more than one output for your jobs (for example, one output for the Kindle Fire and another output for the Apple iPhone 4s), you currently must use the Elastic Transcoder API to list the jobs (as opposed to the AWS Console).
    */
-  createPipeline(params: ElasticTranscoder.Types.CreatePipelineRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.CreatePipelineResponse) => void): Request<ElasticTranscoder.Types.CreatePipelineResponse, AWSError>;
+  createJob(params: ElasticTranscoder.Types.CreateJobRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.CreateJobResponse) => void): Request<ElasticTranscoder.Types.CreateJobResponse, AWSError>;
   /**
    * The CreatePipeline operation creates a pipeline with settings that you specify.
    */
   createPipeline(callback?: (err: AWSError, data: ElasticTranscoder.Types.CreatePipelineResponse) => void): Request<ElasticTranscoder.Types.CreatePipelineResponse, AWSError>;
   /**
-   * The CreatePreset operation creates a preset with settings that you specify.  Elastic Transcoder checks the CreatePreset settings to ensure that they meet Elastic Transcoder requirements and to determine whether they comply with H.264 standards. If your settings are not valid for Elastic Transcoder, Elastic Transcoder returns an HTTP 400 response (ValidationException) and does not create the preset. If the settings are valid for Elastic Transcoder but aren't strictly compliant with the H.264 standard, Elastic Transcoder creates the preset and returns a warning message in the response. This helps you determine whether your settings comply with the H.264 standard while giving you greater flexibility with respect to the video that Elastic Transcoder produces.  Elastic Transcoder uses the H.264 video-compression format. For more information, see the International Telecommunication Union publication Recommendation ITU-T H.264: Advanced video coding for generic audiovisual services.
+   * The CreatePipeline operation creates a pipeline with settings that you specify.
    */
-  createPreset(params: ElasticTranscoder.Types.CreatePresetRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.CreatePresetResponse) => void): Request<ElasticTranscoder.Types.CreatePresetResponse, AWSError>;
+  createPipeline(params: ElasticTranscoder.Types.CreatePipelineRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.CreatePipelineResponse) => void): Request<ElasticTranscoder.Types.CreatePipelineResponse, AWSError>;
   /**
    * The CreatePreset operation creates a preset with settings that you specify.  Elastic Transcoder checks the CreatePreset settings to ensure that they meet Elastic Transcoder requirements and to determine whether they comply with H.264 standards. If your settings are not valid for Elastic Transcoder, Elastic Transcoder returns an HTTP 400 response (ValidationException) and does not create the preset. If the settings are valid for Elastic Transcoder but aren't strictly compliant with the H.264 standard, Elastic Transcoder creates the preset and returns a warning message in the response. This helps you determine whether your settings comply with the H.264 standard while giving you greater flexibility with respect to the video that Elastic Transcoder produces.  Elastic Transcoder uses the H.264 video-compression format. For more information, see the International Telecommunication Union publication Recommendation ITU-T H.264: Advanced video coding for generic audiovisual services.
    */
   createPreset(callback?: (err: AWSError, data: ElasticTranscoder.Types.CreatePresetResponse) => void): Request<ElasticTranscoder.Types.CreatePresetResponse, AWSError>;
   /**
-   * The DeletePipeline operation removes a pipeline.  You can only delete a pipeline that has never been used or that is not currently in use (doesn't contain any active jobs). If the pipeline is currently in use, DeletePipeline returns an error. 
+   * The CreatePreset operation creates a preset with settings that you specify.  Elastic Transcoder checks the CreatePreset settings to ensure that they meet Elastic Transcoder requirements and to determine whether they comply with H.264 standards. If your settings are not valid for Elastic Transcoder, Elastic Transcoder returns an HTTP 400 response (ValidationException) and does not create the preset. If the settings are valid for Elastic Transcoder but aren't strictly compliant with the H.264 standard, Elastic Transcoder creates the preset and returns a warning message in the response. This helps you determine whether your settings comply with the H.264 standard while giving you greater flexibility with respect to the video that Elastic Transcoder produces.  Elastic Transcoder uses the H.264 video-compression format. For more information, see the International Telecommunication Union publication Recommendation ITU-T H.264: Advanced video coding for generic audiovisual services.
    */
-  deletePipeline(params: ElasticTranscoder.Types.DeletePipelineRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.DeletePipelineResponse) => void): Request<ElasticTranscoder.Types.DeletePipelineResponse, AWSError>;
+  createPreset(params: ElasticTranscoder.Types.CreatePresetRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.CreatePresetResponse) => void): Request<ElasticTranscoder.Types.CreatePresetResponse, AWSError>;
   /**
    * The DeletePipeline operation removes a pipeline.  You can only delete a pipeline that has never been used or that is not currently in use (doesn't contain any active jobs). If the pipeline is currently in use, DeletePipeline returns an error. 
    */
   deletePipeline(callback?: (err: AWSError, data: ElasticTranscoder.Types.DeletePipelineResponse) => void): Request<ElasticTranscoder.Types.DeletePipelineResponse, AWSError>;
   /**
-   * The DeletePreset operation removes a preset that you've added in an AWS region.  You can't delete the default presets that are included with Elastic Transcoder. 
+   * The DeletePipeline operation removes a pipeline.  You can only delete a pipeline that has never been used or that is not currently in use (doesn't contain any active jobs). If the pipeline is currently in use, DeletePipeline returns an error. 
    */
-  deletePreset(params: ElasticTranscoder.Types.DeletePresetRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.DeletePresetResponse) => void): Request<ElasticTranscoder.Types.DeletePresetResponse, AWSError>;
+  deletePipeline(params: ElasticTranscoder.Types.DeletePipelineRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.DeletePipelineResponse) => void): Request<ElasticTranscoder.Types.DeletePipelineResponse, AWSError>;
   /**
    * The DeletePreset operation removes a preset that you've added in an AWS region.  You can't delete the default presets that are included with Elastic Transcoder. 
    */
   deletePreset(callback?: (err: AWSError, data: ElasticTranscoder.Types.DeletePresetResponse) => void): Request<ElasticTranscoder.Types.DeletePresetResponse, AWSError>;
   /**
-   * The ListJobsByPipeline operation gets a list of the jobs currently in a pipeline. Elastic Transcoder returns all of the jobs currently in the specified pipeline. The response body contains one element for each job that satisfies the search criteria.
+   * The DeletePreset operation removes a preset that you've added in an AWS region.  You can't delete the default presets that are included with Elastic Transcoder. 
    */
-  listJobsByPipeline(params: ElasticTranscoder.Types.ListJobsByPipelineRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.ListJobsByPipelineResponse) => void): Request<ElasticTranscoder.Types.ListJobsByPipelineResponse, AWSError>;
+  deletePreset(params: ElasticTranscoder.Types.DeletePresetRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.DeletePresetResponse) => void): Request<ElasticTranscoder.Types.DeletePresetResponse, AWSError>;
   /**
    * The ListJobsByPipeline operation gets a list of the jobs currently in a pipeline. Elastic Transcoder returns all of the jobs currently in the specified pipeline. The response body contains one element for each job that satisfies the search criteria.
    */
   listJobsByPipeline(callback?: (err: AWSError, data: ElasticTranscoder.Types.ListJobsByPipelineResponse) => void): Request<ElasticTranscoder.Types.ListJobsByPipelineResponse, AWSError>;
   /**
-   * The ListJobsByStatus operation gets a list of jobs that have a specified status. The response body contains one element for each job that satisfies the search criteria.
+   * The ListJobsByPipeline operation gets a list of the jobs currently in a pipeline. Elastic Transcoder returns all of the jobs currently in the specified pipeline. The response body contains one element for each job that satisfies the search criteria.
    */
-  listJobsByStatus(params: ElasticTranscoder.Types.ListJobsByStatusRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.ListJobsByStatusResponse) => void): Request<ElasticTranscoder.Types.ListJobsByStatusResponse, AWSError>;
+  listJobsByPipeline(params: ElasticTranscoder.Types.ListJobsByPipelineRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.ListJobsByPipelineResponse) => void): Request<ElasticTranscoder.Types.ListJobsByPipelineResponse, AWSError>;
   /**
    * The ListJobsByStatus operation gets a list of jobs that have a specified status. The response body contains one element for each job that satisfies the search criteria.
    */
   listJobsByStatus(callback?: (err: AWSError, data: ElasticTranscoder.Types.ListJobsByStatusResponse) => void): Request<ElasticTranscoder.Types.ListJobsByStatusResponse, AWSError>;
   /**
-   * The ListPipelines operation gets a list of the pipelines associated with the current AWS account.
+   * The ListJobsByStatus operation gets a list of jobs that have a specified status. The response body contains one element for each job that satisfies the search criteria.
    */
-  listPipelines(params: ElasticTranscoder.Types.ListPipelinesRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.ListPipelinesResponse) => void): Request<ElasticTranscoder.Types.ListPipelinesResponse, AWSError>;
+  listJobsByStatus(params: ElasticTranscoder.Types.ListJobsByStatusRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.ListJobsByStatusResponse) => void): Request<ElasticTranscoder.Types.ListJobsByStatusResponse, AWSError>;
   /**
    * The ListPipelines operation gets a list of the pipelines associated with the current AWS account.
    */
   listPipelines(callback?: (err: AWSError, data: ElasticTranscoder.Types.ListPipelinesResponse) => void): Request<ElasticTranscoder.Types.ListPipelinesResponse, AWSError>;
   /**
-   * The ListPresets operation gets a list of the default presets included with Elastic Transcoder and the presets that you've added in an AWS region.
+   * The ListPipelines operation gets a list of the pipelines associated with the current AWS account.
    */
-  listPresets(params: ElasticTranscoder.Types.ListPresetsRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.ListPresetsResponse) => void): Request<ElasticTranscoder.Types.ListPresetsResponse, AWSError>;
+  listPipelines(params: ElasticTranscoder.Types.ListPipelinesRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.ListPipelinesResponse) => void): Request<ElasticTranscoder.Types.ListPipelinesResponse, AWSError>;
   /**
    * The ListPresets operation gets a list of the default presets included with Elastic Transcoder and the presets that you've added in an AWS region.
    */
   listPresets(callback?: (err: AWSError, data: ElasticTranscoder.Types.ListPresetsResponse) => void): Request<ElasticTranscoder.Types.ListPresetsResponse, AWSError>;
   /**
-   * The ReadJob operation returns detailed information about a job.
+   * The ListPresets operation gets a list of the default presets included with Elastic Transcoder and the presets that you've added in an AWS region.
    */
-  readJob(params: ElasticTranscoder.Types.ReadJobRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.ReadJobResponse) => void): Request<ElasticTranscoder.Types.ReadJobResponse, AWSError>;
+  listPresets(params: ElasticTranscoder.Types.ListPresetsRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.ListPresetsResponse) => void): Request<ElasticTranscoder.Types.ListPresetsResponse, AWSError>;
   /**
    * The ReadJob operation returns detailed information about a job.
    */
   readJob(callback?: (err: AWSError, data: ElasticTranscoder.Types.ReadJobResponse) => void): Request<ElasticTranscoder.Types.ReadJobResponse, AWSError>;
   /**
-   * The ReadPipeline operation gets detailed information about a pipeline.
+   * The ReadJob operation returns detailed information about a job.
    */
-  readPipeline(params: ElasticTranscoder.Types.ReadPipelineRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.ReadPipelineResponse) => void): Request<ElasticTranscoder.Types.ReadPipelineResponse, AWSError>;
+  readJob(params: ElasticTranscoder.Types.ReadJobRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.ReadJobResponse) => void): Request<ElasticTranscoder.Types.ReadJobResponse, AWSError>;
   /**
    * The ReadPipeline operation gets detailed information about a pipeline.
    */
   readPipeline(callback?: (err: AWSError, data: ElasticTranscoder.Types.ReadPipelineResponse) => void): Request<ElasticTranscoder.Types.ReadPipelineResponse, AWSError>;
   /**
-   * The ReadPreset operation gets detailed information about a preset.
+   * The ReadPipeline operation gets detailed information about a pipeline.
    */
-  readPreset(params: ElasticTranscoder.Types.ReadPresetRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.ReadPresetResponse) => void): Request<ElasticTranscoder.Types.ReadPresetResponse, AWSError>;
+  readPipeline(params: ElasticTranscoder.Types.ReadPipelineRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.ReadPipelineResponse) => void): Request<ElasticTranscoder.Types.ReadPipelineResponse, AWSError>;
   /**
    * The ReadPreset operation gets detailed information about a preset.
    */
   readPreset(callback?: (err: AWSError, data: ElasticTranscoder.Types.ReadPresetResponse) => void): Request<ElasticTranscoder.Types.ReadPresetResponse, AWSError>;
   /**
-   * The TestRole operation tests the IAM role used to create the pipeline. The TestRole action lets you determine whether the IAM role you are using has sufficient permissions to let Elastic Transcoder perform tasks associated with the transcoding process. The action attempts to assume the specified IAM role, checks read access to the input and output buckets, and tries to send a test notification to Amazon SNS topics that you specify.
+   * The ReadPreset operation gets detailed information about a preset.
    */
-  testRole(params: ElasticTranscoder.Types.TestRoleRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.TestRoleResponse) => void): Request<ElasticTranscoder.Types.TestRoleResponse, AWSError>;
+  readPreset(params: ElasticTranscoder.Types.ReadPresetRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.ReadPresetResponse) => void): Request<ElasticTranscoder.Types.ReadPresetResponse, AWSError>;
   /**
    * The TestRole operation tests the IAM role used to create the pipeline. The TestRole action lets you determine whether the IAM role you are using has sufficient permissions to let Elastic Transcoder perform tasks associated with the transcoding process. The action attempts to assume the specified IAM role, checks read access to the input and output buckets, and tries to send a test notification to Amazon SNS topics that you specify.
    */
   testRole(callback?: (err: AWSError, data: ElasticTranscoder.Types.TestRoleResponse) => void): Request<ElasticTranscoder.Types.TestRoleResponse, AWSError>;
   /**
-   *  Use the UpdatePipeline operation to update settings for a pipeline.  When you change pipeline settings, your changes take effect immediately. Jobs that you have already submitted and that Elastic Transcoder has not started to process are affected in addition to jobs that you submit after you change settings.  
+   * The TestRole operation tests the IAM role used to create the pipeline. The TestRole action lets you determine whether the IAM role you are using has sufficient permissions to let Elastic Transcoder perform tasks associated with the transcoding process. The action attempts to assume the specified IAM role, checks read access to the input and output buckets, and tries to send a test notification to Amazon SNS topics that you specify.
    */
-  updatePipeline(params: ElasticTranscoder.Types.UpdatePipelineRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.UpdatePipelineResponse) => void): Request<ElasticTranscoder.Types.UpdatePipelineResponse, AWSError>;
+  testRole(params: ElasticTranscoder.Types.TestRoleRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.TestRoleResponse) => void): Request<ElasticTranscoder.Types.TestRoleResponse, AWSError>;
   /**
    *  Use the UpdatePipeline operation to update settings for a pipeline.  When you change pipeline settings, your changes take effect immediately. Jobs that you have already submitted and that Elastic Transcoder has not started to process are affected in addition to jobs that you submit after you change settings.  
    */
   updatePipeline(callback?: (err: AWSError, data: ElasticTranscoder.Types.UpdatePipelineResponse) => void): Request<ElasticTranscoder.Types.UpdatePipelineResponse, AWSError>;
   /**
-   * With the UpdatePipelineNotifications operation, you can update Amazon Simple Notification Service (Amazon SNS) notifications for a pipeline. When you update notifications for a pipeline, Elastic Transcoder returns the values that you specified in the request.
+   *  Use the UpdatePipeline operation to update settings for a pipeline.  When you change pipeline settings, your changes take effect immediately. Jobs that you have already submitted and that Elastic Transcoder has not started to process are affected in addition to jobs that you submit after you change settings.  
    */
-  updatePipelineNotifications(params: ElasticTranscoder.Types.UpdatePipelineNotificationsRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.UpdatePipelineNotificationsResponse) => void): Request<ElasticTranscoder.Types.UpdatePipelineNotificationsResponse, AWSError>;
+  updatePipeline(params: ElasticTranscoder.Types.UpdatePipelineRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.UpdatePipelineResponse) => void): Request<ElasticTranscoder.Types.UpdatePipelineResponse, AWSError>;
   /**
    * With the UpdatePipelineNotifications operation, you can update Amazon Simple Notification Service (Amazon SNS) notifications for a pipeline. When you update notifications for a pipeline, Elastic Transcoder returns the values that you specified in the request.
    */
   updatePipelineNotifications(callback?: (err: AWSError, data: ElasticTranscoder.Types.UpdatePipelineNotificationsResponse) => void): Request<ElasticTranscoder.Types.UpdatePipelineNotificationsResponse, AWSError>;
   /**
-   * The UpdatePipelineStatus operation pauses or reactivates a pipeline, so that the pipeline stops or restarts the processing of jobs. Changing the pipeline status is useful if you want to cancel one or more jobs. You can't cancel jobs after Elastic Transcoder has started processing them; if you pause the pipeline to which you submitted the jobs, you have more time to get the job IDs for the jobs that you want to cancel, and to send a CancelJob request. 
+   * With the UpdatePipelineNotifications operation, you can update Amazon Simple Notification Service (Amazon SNS) notifications for a pipeline. When you update notifications for a pipeline, Elastic Transcoder returns the values that you specified in the request.
    */
-  updatePipelineStatus(params: ElasticTranscoder.Types.UpdatePipelineStatusRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.UpdatePipelineStatusResponse) => void): Request<ElasticTranscoder.Types.UpdatePipelineStatusResponse, AWSError>;
+  updatePipelineNotifications(params: ElasticTranscoder.Types.UpdatePipelineNotificationsRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.UpdatePipelineNotificationsResponse) => void): Request<ElasticTranscoder.Types.UpdatePipelineNotificationsResponse, AWSError>;
   /**
    * The UpdatePipelineStatus operation pauses or reactivates a pipeline, so that the pipeline stops or restarts the processing of jobs. Changing the pipeline status is useful if you want to cancel one or more jobs. You can't cancel jobs after Elastic Transcoder has started processing them; if you pause the pipeline to which you submitted the jobs, you have more time to get the job IDs for the jobs that you want to cancel, and to send a CancelJob request. 
    */
   updatePipelineStatus(callback?: (err: AWSError, data: ElasticTranscoder.Types.UpdatePipelineStatusResponse) => void): Request<ElasticTranscoder.Types.UpdatePipelineStatusResponse, AWSError>;
+  /**
+   * The UpdatePipelineStatus operation pauses or reactivates a pipeline, so that the pipeline stops or restarts the processing of jobs. Changing the pipeline status is useful if you want to cancel one or more jobs. You can't cancel jobs after Elastic Transcoder has started processing them; if you pause the pipeline to which you submitted the jobs, you have more time to get the job IDs for the jobs that you want to cancel, and to send a CancelJob request. 
+   */
+  updatePipelineStatus(params: ElasticTranscoder.Types.UpdatePipelineStatusRequest, callback?: (err: AWSError, data: ElasticTranscoder.Types.UpdatePipelineStatusResponse) => void): Request<ElasticTranscoder.Types.UpdatePipelineStatusResponse, AWSError>;
   /**
    * Waits for the jobComplete state by periodically calling the underlying ElasticTranscoder.readJoboperation every 30 seconds (at most 120 times).
    */

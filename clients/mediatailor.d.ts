@@ -14,59 +14,59 @@ declare class MediaTailor extends Service {
   /**
    * Deletes the playback configuration for the specified name. 
    */
-  deletePlaybackConfiguration(params: MediaTailor.Types.DeletePlaybackConfigurationRequest, callback?: (err: AWSError, data: MediaTailor.Types.DeletePlaybackConfigurationResponse) => void): Request<MediaTailor.Types.DeletePlaybackConfigurationResponse, AWSError>;
+  deletePlaybackConfiguration(callback?: (err: AWSError, data: MediaTailor.Types.DeletePlaybackConfigurationResponse) => void): Request<MediaTailor.Types.DeletePlaybackConfigurationResponse, AWSError>;
   /**
    * Deletes the playback configuration for the specified name. 
    */
-  deletePlaybackConfiguration(callback?: (err: AWSError, data: MediaTailor.Types.DeletePlaybackConfigurationResponse) => void): Request<MediaTailor.Types.DeletePlaybackConfigurationResponse, AWSError>;
-  /**
-   * Returns the playback configuration for the specified name. 
-   */
-  getPlaybackConfiguration(params: MediaTailor.Types.GetPlaybackConfigurationRequest, callback?: (err: AWSError, data: MediaTailor.Types.GetPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.GetPlaybackConfigurationResponse, AWSError>;
+  deletePlaybackConfiguration(params: MediaTailor.Types.DeletePlaybackConfigurationRequest, callback?: (err: AWSError, data: MediaTailor.Types.DeletePlaybackConfigurationResponse) => void): Request<MediaTailor.Types.DeletePlaybackConfigurationResponse, AWSError>;
   /**
    * Returns the playback configuration for the specified name. 
    */
   getPlaybackConfiguration(callback?: (err: AWSError, data: MediaTailor.Types.GetPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.GetPlaybackConfigurationResponse, AWSError>;
   /**
-   * Returns a list of the playback configurations defined in AWS Elemental MediaTailor. You can specify a maximum number of configurations to return at a time. The default maximum is 50. Results are returned in pagefuls. If MediaTailor has more configurations than the specified maximum, it provides parameters in the response that you can use to retrieve the next pageful. 
+   * Returns the playback configuration for the specified name. 
    */
-  listPlaybackConfigurations(params: MediaTailor.Types.ListPlaybackConfigurationsRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListPlaybackConfigurationsResponse) => void): Request<MediaTailor.Types.ListPlaybackConfigurationsResponse, AWSError>;
+  getPlaybackConfiguration(params: MediaTailor.Types.GetPlaybackConfigurationRequest, callback?: (err: AWSError, data: MediaTailor.Types.GetPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.GetPlaybackConfigurationResponse, AWSError>;
   /**
    * Returns a list of the playback configurations defined in AWS Elemental MediaTailor. You can specify a maximum number of configurations to return at a time. The default maximum is 50. Results are returned in pagefuls. If MediaTailor has more configurations than the specified maximum, it provides parameters in the response that you can use to retrieve the next pageful. 
    */
   listPlaybackConfigurations(callback?: (err: AWSError, data: MediaTailor.Types.ListPlaybackConfigurationsResponse) => void): Request<MediaTailor.Types.ListPlaybackConfigurationsResponse, AWSError>;
   /**
-   * Returns a list of the tags assigned to the specified playback configuration resource. 
+   * Returns a list of the playback configurations defined in AWS Elemental MediaTailor. You can specify a maximum number of configurations to return at a time. The default maximum is 50. Results are returned in pagefuls. If MediaTailor has more configurations than the specified maximum, it provides parameters in the response that you can use to retrieve the next pageful. 
    */
-  listTagsForResource(params: MediaTailor.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListTagsForResourceResponse) => void): Request<MediaTailor.Types.ListTagsForResourceResponse, AWSError>;
+  listPlaybackConfigurations(params: MediaTailor.Types.ListPlaybackConfigurationsRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListPlaybackConfigurationsResponse) => void): Request<MediaTailor.Types.ListPlaybackConfigurationsResponse, AWSError>;
   /**
    * Returns a list of the tags assigned to the specified playback configuration resource. 
    */
   listTagsForResource(callback?: (err: AWSError, data: MediaTailor.Types.ListTagsForResourceResponse) => void): Request<MediaTailor.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Adds a new playback configuration to AWS Elemental MediaTailor. 
+   * Returns a list of the tags assigned to the specified playback configuration resource. 
    */
-  putPlaybackConfiguration(params: MediaTailor.Types.PutPlaybackConfigurationRequest, callback?: (err: AWSError, data: MediaTailor.Types.PutPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.PutPlaybackConfigurationResponse, AWSError>;
+  listTagsForResource(params: MediaTailor.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListTagsForResourceResponse) => void): Request<MediaTailor.Types.ListTagsForResourceResponse, AWSError>;
   /**
    * Adds a new playback configuration to AWS Elemental MediaTailor. 
    */
   putPlaybackConfiguration(callback?: (err: AWSError, data: MediaTailor.Types.PutPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.PutPlaybackConfigurationResponse, AWSError>;
   /**
-   * Adds tags to the specified playback configuration resource. You can specify one or more tags to add. 
+   * Adds a new playback configuration to AWS Elemental MediaTailor. 
    */
-  tagResource(params: MediaTailor.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putPlaybackConfiguration(params: MediaTailor.Types.PutPlaybackConfigurationRequest, callback?: (err: AWSError, data: MediaTailor.Types.PutPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.PutPlaybackConfigurationResponse, AWSError>;
   /**
    * Adds tags to the specified playback configuration resource. You can specify one or more tags to add. 
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes tags from the specified playback configuration resource. You can specify one or more tags to remove. 
+   * Adds tags to the specified playback configuration resource. You can specify one or more tags to add. 
    */
-  untagResource(params: MediaTailor.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  tagResource(params: MediaTailor.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes tags from the specified playback configuration resource. You can specify one or more tags to remove. 
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes tags from the specified playback configuration resource. You can specify one or more tags to remove. 
+   */
+  untagResource(params: MediaTailor.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace MediaTailor {
   export interface CdnConfiguration {

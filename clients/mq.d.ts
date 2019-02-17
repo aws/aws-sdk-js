@@ -14,163 +14,163 @@ declare class MQ extends Service {
   /**
    * Creates a broker. Note: This API is asynchronous.
    */
-  createBroker(params: MQ.Types.CreateBrokerRequest, callback?: (err: AWSError, data: MQ.Types.CreateBrokerResponse) => void): Request<MQ.Types.CreateBrokerResponse, AWSError>;
+  createBroker(callback?: (err: AWSError, data: MQ.Types.CreateBrokerResponse) => void): Request<MQ.Types.CreateBrokerResponse, AWSError>;
   /**
    * Creates a broker. Note: This API is asynchronous.
    */
-  createBroker(callback?: (err: AWSError, data: MQ.Types.CreateBrokerResponse) => void): Request<MQ.Types.CreateBrokerResponse, AWSError>;
-  /**
-   * Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version).
-   */
-  createConfiguration(params: MQ.Types.CreateConfigurationRequest, callback?: (err: AWSError, data: MQ.Types.CreateConfigurationResponse) => void): Request<MQ.Types.CreateConfigurationResponse, AWSError>;
+  createBroker(params: MQ.Types.CreateBrokerRequest, callback?: (err: AWSError, data: MQ.Types.CreateBrokerResponse) => void): Request<MQ.Types.CreateBrokerResponse, AWSError>;
   /**
    * Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version).
    */
   createConfiguration(callback?: (err: AWSError, data: MQ.Types.CreateConfigurationResponse) => void): Request<MQ.Types.CreateConfigurationResponse, AWSError>;
   /**
-   * Add a tag to a resource.
+   * Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version).
    */
-  createTags(params: MQ.Types.CreateTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  createConfiguration(params: MQ.Types.CreateConfigurationRequest, callback?: (err: AWSError, data: MQ.Types.CreateConfigurationResponse) => void): Request<MQ.Types.CreateConfigurationResponse, AWSError>;
   /**
    * Add a tag to a resource.
    */
   createTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates an ActiveMQ user.
+   * Add a tag to a resource.
    */
-  createUser(params: MQ.Types.CreateUserRequest, callback?: (err: AWSError, data: MQ.Types.CreateUserResponse) => void): Request<MQ.Types.CreateUserResponse, AWSError>;
+  createTags(params: MQ.Types.CreateTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Creates an ActiveMQ user.
    */
   createUser(callback?: (err: AWSError, data: MQ.Types.CreateUserResponse) => void): Request<MQ.Types.CreateUserResponse, AWSError>;
   /**
-   * Deletes a broker. Note: This API is asynchronous.
+   * Creates an ActiveMQ user.
    */
-  deleteBroker(params: MQ.Types.DeleteBrokerRequest, callback?: (err: AWSError, data: MQ.Types.DeleteBrokerResponse) => void): Request<MQ.Types.DeleteBrokerResponse, AWSError>;
+  createUser(params: MQ.Types.CreateUserRequest, callback?: (err: AWSError, data: MQ.Types.CreateUserResponse) => void): Request<MQ.Types.CreateUserResponse, AWSError>;
   /**
    * Deletes a broker. Note: This API is asynchronous.
    */
   deleteBroker(callback?: (err: AWSError, data: MQ.Types.DeleteBrokerResponse) => void): Request<MQ.Types.DeleteBrokerResponse, AWSError>;
   /**
-   * Remove a tag from a resource.
+   * Deletes a broker. Note: This API is asynchronous.
    */
-  deleteTags(params: MQ.Types.DeleteTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteBroker(params: MQ.Types.DeleteBrokerRequest, callback?: (err: AWSError, data: MQ.Types.DeleteBrokerResponse) => void): Request<MQ.Types.DeleteBrokerResponse, AWSError>;
   /**
    * Remove a tag from a resource.
    */
   deleteTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an ActiveMQ user.
+   * Remove a tag from a resource.
    */
-  deleteUser(params: MQ.Types.DeleteUserRequest, callback?: (err: AWSError, data: MQ.Types.DeleteUserResponse) => void): Request<MQ.Types.DeleteUserResponse, AWSError>;
+  deleteTags(params: MQ.Types.DeleteTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an ActiveMQ user.
    */
   deleteUser(callback?: (err: AWSError, data: MQ.Types.DeleteUserResponse) => void): Request<MQ.Types.DeleteUserResponse, AWSError>;
   /**
-   * Returns information about the specified broker.
+   * Deletes an ActiveMQ user.
    */
-  describeBroker(params: MQ.Types.DescribeBrokerRequest, callback?: (err: AWSError, data: MQ.Types.DescribeBrokerResponse) => void): Request<MQ.Types.DescribeBrokerResponse, AWSError>;
+  deleteUser(params: MQ.Types.DeleteUserRequest, callback?: (err: AWSError, data: MQ.Types.DeleteUserResponse) => void): Request<MQ.Types.DeleteUserResponse, AWSError>;
   /**
    * Returns information about the specified broker.
    */
   describeBroker(callback?: (err: AWSError, data: MQ.Types.DescribeBrokerResponse) => void): Request<MQ.Types.DescribeBrokerResponse, AWSError>;
   /**
-   * Returns information about the specified configuration.
+   * Returns information about the specified broker.
    */
-  describeConfiguration(params: MQ.Types.DescribeConfigurationRequest, callback?: (err: AWSError, data: MQ.Types.DescribeConfigurationResponse) => void): Request<MQ.Types.DescribeConfigurationResponse, AWSError>;
+  describeBroker(params: MQ.Types.DescribeBrokerRequest, callback?: (err: AWSError, data: MQ.Types.DescribeBrokerResponse) => void): Request<MQ.Types.DescribeBrokerResponse, AWSError>;
   /**
    * Returns information about the specified configuration.
    */
   describeConfiguration(callback?: (err: AWSError, data: MQ.Types.DescribeConfigurationResponse) => void): Request<MQ.Types.DescribeConfigurationResponse, AWSError>;
   /**
-   * Returns the specified configuration revision for the specified configuration.
+   * Returns information about the specified configuration.
    */
-  describeConfigurationRevision(params: MQ.Types.DescribeConfigurationRevisionRequest, callback?: (err: AWSError, data: MQ.Types.DescribeConfigurationRevisionResponse) => void): Request<MQ.Types.DescribeConfigurationRevisionResponse, AWSError>;
+  describeConfiguration(params: MQ.Types.DescribeConfigurationRequest, callback?: (err: AWSError, data: MQ.Types.DescribeConfigurationResponse) => void): Request<MQ.Types.DescribeConfigurationResponse, AWSError>;
   /**
    * Returns the specified configuration revision for the specified configuration.
    */
   describeConfigurationRevision(callback?: (err: AWSError, data: MQ.Types.DescribeConfigurationRevisionResponse) => void): Request<MQ.Types.DescribeConfigurationRevisionResponse, AWSError>;
   /**
-   * Returns information about an ActiveMQ user.
+   * Returns the specified configuration revision for the specified configuration.
    */
-  describeUser(params: MQ.Types.DescribeUserRequest, callback?: (err: AWSError, data: MQ.Types.DescribeUserResponse) => void): Request<MQ.Types.DescribeUserResponse, AWSError>;
+  describeConfigurationRevision(params: MQ.Types.DescribeConfigurationRevisionRequest, callback?: (err: AWSError, data: MQ.Types.DescribeConfigurationRevisionResponse) => void): Request<MQ.Types.DescribeConfigurationRevisionResponse, AWSError>;
   /**
    * Returns information about an ActiveMQ user.
    */
   describeUser(callback?: (err: AWSError, data: MQ.Types.DescribeUserResponse) => void): Request<MQ.Types.DescribeUserResponse, AWSError>;
   /**
-   * Returns a list of all brokers.
+   * Returns information about an ActiveMQ user.
    */
-  listBrokers(params: MQ.Types.ListBrokersRequest, callback?: (err: AWSError, data: MQ.Types.ListBrokersResponse) => void): Request<MQ.Types.ListBrokersResponse, AWSError>;
+  describeUser(params: MQ.Types.DescribeUserRequest, callback?: (err: AWSError, data: MQ.Types.DescribeUserResponse) => void): Request<MQ.Types.DescribeUserResponse, AWSError>;
   /**
    * Returns a list of all brokers.
    */
   listBrokers(callback?: (err: AWSError, data: MQ.Types.ListBrokersResponse) => void): Request<MQ.Types.ListBrokersResponse, AWSError>;
   /**
-   * Returns a list of all revisions for the specified configuration.
+   * Returns a list of all brokers.
    */
-  listConfigurationRevisions(params: MQ.Types.ListConfigurationRevisionsRequest, callback?: (err: AWSError, data: MQ.Types.ListConfigurationRevisionsResponse) => void): Request<MQ.Types.ListConfigurationRevisionsResponse, AWSError>;
+  listBrokers(params: MQ.Types.ListBrokersRequest, callback?: (err: AWSError, data: MQ.Types.ListBrokersResponse) => void): Request<MQ.Types.ListBrokersResponse, AWSError>;
   /**
    * Returns a list of all revisions for the specified configuration.
    */
   listConfigurationRevisions(callback?: (err: AWSError, data: MQ.Types.ListConfigurationRevisionsResponse) => void): Request<MQ.Types.ListConfigurationRevisionsResponse, AWSError>;
   /**
-   * Returns a list of all configurations.
+   * Returns a list of all revisions for the specified configuration.
    */
-  listConfigurations(params: MQ.Types.ListConfigurationsRequest, callback?: (err: AWSError, data: MQ.Types.ListConfigurationsResponse) => void): Request<MQ.Types.ListConfigurationsResponse, AWSError>;
+  listConfigurationRevisions(params: MQ.Types.ListConfigurationRevisionsRequest, callback?: (err: AWSError, data: MQ.Types.ListConfigurationRevisionsResponse) => void): Request<MQ.Types.ListConfigurationRevisionsResponse, AWSError>;
   /**
    * Returns a list of all configurations.
    */
   listConfigurations(callback?: (err: AWSError, data: MQ.Types.ListConfigurationsResponse) => void): Request<MQ.Types.ListConfigurationsResponse, AWSError>;
   /**
-   * Lists tags for a resource.
+   * Returns a list of all configurations.
    */
-  listTags(params: MQ.Types.ListTagsRequest, callback?: (err: AWSError, data: MQ.Types.ListTagsResponse) => void): Request<MQ.Types.ListTagsResponse, AWSError>;
+  listConfigurations(params: MQ.Types.ListConfigurationsRequest, callback?: (err: AWSError, data: MQ.Types.ListConfigurationsResponse) => void): Request<MQ.Types.ListConfigurationsResponse, AWSError>;
   /**
    * Lists tags for a resource.
    */
   listTags(callback?: (err: AWSError, data: MQ.Types.ListTagsResponse) => void): Request<MQ.Types.ListTagsResponse, AWSError>;
   /**
-   * Returns a list of all ActiveMQ users.
+   * Lists tags for a resource.
    */
-  listUsers(params: MQ.Types.ListUsersRequest, callback?: (err: AWSError, data: MQ.Types.ListUsersResponse) => void): Request<MQ.Types.ListUsersResponse, AWSError>;
+  listTags(params: MQ.Types.ListTagsRequest, callback?: (err: AWSError, data: MQ.Types.ListTagsResponse) => void): Request<MQ.Types.ListTagsResponse, AWSError>;
   /**
    * Returns a list of all ActiveMQ users.
    */
   listUsers(callback?: (err: AWSError, data: MQ.Types.ListUsersResponse) => void): Request<MQ.Types.ListUsersResponse, AWSError>;
   /**
-   * Reboots a broker. Note: This API is asynchronous.
+   * Returns a list of all ActiveMQ users.
    */
-  rebootBroker(params: MQ.Types.RebootBrokerRequest, callback?: (err: AWSError, data: MQ.Types.RebootBrokerResponse) => void): Request<MQ.Types.RebootBrokerResponse, AWSError>;
+  listUsers(params: MQ.Types.ListUsersRequest, callback?: (err: AWSError, data: MQ.Types.ListUsersResponse) => void): Request<MQ.Types.ListUsersResponse, AWSError>;
   /**
    * Reboots a broker. Note: This API is asynchronous.
    */
   rebootBroker(callback?: (err: AWSError, data: MQ.Types.RebootBrokerResponse) => void): Request<MQ.Types.RebootBrokerResponse, AWSError>;
   /**
-   * Adds a pending configuration change to a broker.
+   * Reboots a broker. Note: This API is asynchronous.
    */
-  updateBroker(params: MQ.Types.UpdateBrokerRequest, callback?: (err: AWSError, data: MQ.Types.UpdateBrokerResponse) => void): Request<MQ.Types.UpdateBrokerResponse, AWSError>;
+  rebootBroker(params: MQ.Types.RebootBrokerRequest, callback?: (err: AWSError, data: MQ.Types.RebootBrokerResponse) => void): Request<MQ.Types.RebootBrokerResponse, AWSError>;
   /**
    * Adds a pending configuration change to a broker.
    */
   updateBroker(callback?: (err: AWSError, data: MQ.Types.UpdateBrokerResponse) => void): Request<MQ.Types.UpdateBrokerResponse, AWSError>;
   /**
-   * Updates the specified configuration.
+   * Adds a pending configuration change to a broker.
    */
-  updateConfiguration(params: MQ.Types.UpdateConfigurationRequest, callback?: (err: AWSError, data: MQ.Types.UpdateConfigurationResponse) => void): Request<MQ.Types.UpdateConfigurationResponse, AWSError>;
+  updateBroker(params: MQ.Types.UpdateBrokerRequest, callback?: (err: AWSError, data: MQ.Types.UpdateBrokerResponse) => void): Request<MQ.Types.UpdateBrokerResponse, AWSError>;
   /**
    * Updates the specified configuration.
    */
   updateConfiguration(callback?: (err: AWSError, data: MQ.Types.UpdateConfigurationResponse) => void): Request<MQ.Types.UpdateConfigurationResponse, AWSError>;
   /**
-   * Updates the information for an ActiveMQ user.
+   * Updates the specified configuration.
    */
-  updateUser(params: MQ.Types.UpdateUserRequest, callback?: (err: AWSError, data: MQ.Types.UpdateUserResponse) => void): Request<MQ.Types.UpdateUserResponse, AWSError>;
+  updateConfiguration(params: MQ.Types.UpdateConfigurationRequest, callback?: (err: AWSError, data: MQ.Types.UpdateConfigurationResponse) => void): Request<MQ.Types.UpdateConfigurationResponse, AWSError>;
   /**
    * Updates the information for an ActiveMQ user.
    */
   updateUser(callback?: (err: AWSError, data: MQ.Types.UpdateUserResponse) => void): Request<MQ.Types.UpdateUserResponse, AWSError>;
+  /**
+   * Updates the information for an ActiveMQ user.
+   */
+  updateUser(params: MQ.Types.UpdateUserRequest, callback?: (err: AWSError, data: MQ.Types.UpdateUserResponse) => void): Request<MQ.Types.UpdateUserResponse, AWSError>;
 }
 declare namespace MQ {
   export interface BrokerInstance {

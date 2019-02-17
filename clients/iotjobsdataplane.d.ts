@@ -14,35 +14,35 @@ declare class IoTJobsDataPlane extends Service {
   /**
    * Gets details of a job execution.
    */
-  describeJobExecution(params: IoTJobsDataPlane.Types.DescribeJobExecutionRequest, callback?: (err: AWSError, data: IoTJobsDataPlane.Types.DescribeJobExecutionResponse) => void): Request<IoTJobsDataPlane.Types.DescribeJobExecutionResponse, AWSError>;
+  describeJobExecution(callback?: (err: AWSError, data: IoTJobsDataPlane.Types.DescribeJobExecutionResponse) => void): Request<IoTJobsDataPlane.Types.DescribeJobExecutionResponse, AWSError>;
   /**
    * Gets details of a job execution.
    */
-  describeJobExecution(callback?: (err: AWSError, data: IoTJobsDataPlane.Types.DescribeJobExecutionResponse) => void): Request<IoTJobsDataPlane.Types.DescribeJobExecutionResponse, AWSError>;
-  /**
-   * Gets the list of all jobs for a thing that are not in a terminal status.
-   */
-  getPendingJobExecutions(params: IoTJobsDataPlane.Types.GetPendingJobExecutionsRequest, callback?: (err: AWSError, data: IoTJobsDataPlane.Types.GetPendingJobExecutionsResponse) => void): Request<IoTJobsDataPlane.Types.GetPendingJobExecutionsResponse, AWSError>;
+  describeJobExecution(params: IoTJobsDataPlane.Types.DescribeJobExecutionRequest, callback?: (err: AWSError, data: IoTJobsDataPlane.Types.DescribeJobExecutionResponse) => void): Request<IoTJobsDataPlane.Types.DescribeJobExecutionResponse, AWSError>;
   /**
    * Gets the list of all jobs for a thing that are not in a terminal status.
    */
   getPendingJobExecutions(callback?: (err: AWSError, data: IoTJobsDataPlane.Types.GetPendingJobExecutionsResponse) => void): Request<IoTJobsDataPlane.Types.GetPendingJobExecutionsResponse, AWSError>;
   /**
-   * Gets and starts the next pending (status IN_PROGRESS or QUEUED) job execution for a thing.
+   * Gets the list of all jobs for a thing that are not in a terminal status.
    */
-  startNextPendingJobExecution(params: IoTJobsDataPlane.Types.StartNextPendingJobExecutionRequest, callback?: (err: AWSError, data: IoTJobsDataPlane.Types.StartNextPendingJobExecutionResponse) => void): Request<IoTJobsDataPlane.Types.StartNextPendingJobExecutionResponse, AWSError>;
+  getPendingJobExecutions(params: IoTJobsDataPlane.Types.GetPendingJobExecutionsRequest, callback?: (err: AWSError, data: IoTJobsDataPlane.Types.GetPendingJobExecutionsResponse) => void): Request<IoTJobsDataPlane.Types.GetPendingJobExecutionsResponse, AWSError>;
   /**
    * Gets and starts the next pending (status IN_PROGRESS or QUEUED) job execution for a thing.
    */
   startNextPendingJobExecution(callback?: (err: AWSError, data: IoTJobsDataPlane.Types.StartNextPendingJobExecutionResponse) => void): Request<IoTJobsDataPlane.Types.StartNextPendingJobExecutionResponse, AWSError>;
   /**
-   * Updates the status of a job execution.
+   * Gets and starts the next pending (status IN_PROGRESS or QUEUED) job execution for a thing.
    */
-  updateJobExecution(params: IoTJobsDataPlane.Types.UpdateJobExecutionRequest, callback?: (err: AWSError, data: IoTJobsDataPlane.Types.UpdateJobExecutionResponse) => void): Request<IoTJobsDataPlane.Types.UpdateJobExecutionResponse, AWSError>;
+  startNextPendingJobExecution(params: IoTJobsDataPlane.Types.StartNextPendingJobExecutionRequest, callback?: (err: AWSError, data: IoTJobsDataPlane.Types.StartNextPendingJobExecutionResponse) => void): Request<IoTJobsDataPlane.Types.StartNextPendingJobExecutionResponse, AWSError>;
   /**
    * Updates the status of a job execution.
    */
   updateJobExecution(callback?: (err: AWSError, data: IoTJobsDataPlane.Types.UpdateJobExecutionResponse) => void): Request<IoTJobsDataPlane.Types.UpdateJobExecutionResponse, AWSError>;
+  /**
+   * Updates the status of a job execution.
+   */
+  updateJobExecution(params: IoTJobsDataPlane.Types.UpdateJobExecutionRequest, callback?: (err: AWSError, data: IoTJobsDataPlane.Types.UpdateJobExecutionResponse) => void): Request<IoTJobsDataPlane.Types.UpdateJobExecutionResponse, AWSError>;
 }
 declare namespace IoTJobsDataPlane {
   export type ApproximateSecondsBeforeTimedOut = number;

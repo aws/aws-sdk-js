@@ -14,27 +14,27 @@ declare class CUR extends Service {
   /**
    * Delete a specified report definition
    */
-  deleteReportDefinition(params: CUR.Types.DeleteReportDefinitionRequest, callback?: (err: AWSError, data: CUR.Types.DeleteReportDefinitionResponse) => void): Request<CUR.Types.DeleteReportDefinitionResponse, AWSError>;
+  deleteReportDefinition(callback?: (err: AWSError, data: CUR.Types.DeleteReportDefinitionResponse) => void): Request<CUR.Types.DeleteReportDefinitionResponse, AWSError>;
   /**
    * Delete a specified report definition
    */
-  deleteReportDefinition(callback?: (err: AWSError, data: CUR.Types.DeleteReportDefinitionResponse) => void): Request<CUR.Types.DeleteReportDefinitionResponse, AWSError>;
-  /**
-   * Describe a list of report definitions owned by the account
-   */
-  describeReportDefinitions(params: CUR.Types.DescribeReportDefinitionsRequest, callback?: (err: AWSError, data: CUR.Types.DescribeReportDefinitionsResponse) => void): Request<CUR.Types.DescribeReportDefinitionsResponse, AWSError>;
+  deleteReportDefinition(params: CUR.Types.DeleteReportDefinitionRequest, callback?: (err: AWSError, data: CUR.Types.DeleteReportDefinitionResponse) => void): Request<CUR.Types.DeleteReportDefinitionResponse, AWSError>;
   /**
    * Describe a list of report definitions owned by the account
    */
   describeReportDefinitions(callback?: (err: AWSError, data: CUR.Types.DescribeReportDefinitionsResponse) => void): Request<CUR.Types.DescribeReportDefinitionsResponse, AWSError>;
   /**
-   * Create a new report definition
+   * Describe a list of report definitions owned by the account
    */
-  putReportDefinition(params: CUR.Types.PutReportDefinitionRequest, callback?: (err: AWSError, data: CUR.Types.PutReportDefinitionResponse) => void): Request<CUR.Types.PutReportDefinitionResponse, AWSError>;
+  describeReportDefinitions(params: CUR.Types.DescribeReportDefinitionsRequest, callback?: (err: AWSError, data: CUR.Types.DescribeReportDefinitionsResponse) => void): Request<CUR.Types.DescribeReportDefinitionsResponse, AWSError>;
   /**
    * Create a new report definition
    */
   putReportDefinition(callback?: (err: AWSError, data: CUR.Types.PutReportDefinitionResponse) => void): Request<CUR.Types.PutReportDefinitionResponse, AWSError>;
+  /**
+   * Create a new report definition
+   */
+  putReportDefinition(params: CUR.Types.PutReportDefinitionRequest, callback?: (err: AWSError, data: CUR.Types.PutReportDefinitionResponse) => void): Request<CUR.Types.PutReportDefinitionResponse, AWSError>;
 }
 declare namespace CUR {
   export type AWSRegion = "us-east-1"|"us-west-1"|"us-west-2"|"eu-central-1"|"eu-west-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|string;

@@ -15,459 +15,459 @@ declare class Neptune extends Service {
   /**
    * Associates an Identity and Access Management (IAM) role from an Neptune DB cluster. 
    */
-  addRoleToDBCluster(params: Neptune.Types.AddRoleToDBClusterMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  addRoleToDBCluster(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Associates an Identity and Access Management (IAM) role from an Neptune DB cluster. 
    */
-  addRoleToDBCluster(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
-  /**
-   * Adds a source identifier to an existing event notification subscription.
-   */
-  addSourceIdentifierToSubscription(params: Neptune.Types.AddSourceIdentifierToSubscriptionMessage, callback?: (err: AWSError, data: Neptune.Types.AddSourceIdentifierToSubscriptionResult) => void): Request<Neptune.Types.AddSourceIdentifierToSubscriptionResult, AWSError>;
+  addRoleToDBCluster(params: Neptune.Types.AddRoleToDBClusterMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Adds a source identifier to an existing event notification subscription.
    */
   addSourceIdentifierToSubscription(callback?: (err: AWSError, data: Neptune.Types.AddSourceIdentifierToSubscriptionResult) => void): Request<Neptune.Types.AddSourceIdentifierToSubscriptionResult, AWSError>;
   /**
-   * Adds metadata tags to an Amazon Neptune resource. These tags can also be used with cost allocation reporting to track cost associated with Amazon Neptune resources, or used in a Condition statement in an IAM policy for Amazon Neptune.
+   * Adds a source identifier to an existing event notification subscription.
    */
-  addTagsToResource(params: Neptune.Types.AddTagsToResourceMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  addSourceIdentifierToSubscription(params: Neptune.Types.AddSourceIdentifierToSubscriptionMessage, callback?: (err: AWSError, data: Neptune.Types.AddSourceIdentifierToSubscriptionResult) => void): Request<Neptune.Types.AddSourceIdentifierToSubscriptionResult, AWSError>;
   /**
    * Adds metadata tags to an Amazon Neptune resource. These tags can also be used with cost allocation reporting to track cost associated with Amazon Neptune resources, or used in a Condition statement in an IAM policy for Amazon Neptune.
    */
   addTagsToResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Applies a pending maintenance action to a resource (for example, to a DB instance).
+   * Adds metadata tags to an Amazon Neptune resource. These tags can also be used with cost allocation reporting to track cost associated with Amazon Neptune resources, or used in a Condition statement in an IAM policy for Amazon Neptune.
    */
-  applyPendingMaintenanceAction(params: Neptune.Types.ApplyPendingMaintenanceActionMessage, callback?: (err: AWSError, data: Neptune.Types.ApplyPendingMaintenanceActionResult) => void): Request<Neptune.Types.ApplyPendingMaintenanceActionResult, AWSError>;
+  addTagsToResource(params: Neptune.Types.AddTagsToResourceMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Applies a pending maintenance action to a resource (for example, to a DB instance).
    */
   applyPendingMaintenanceAction(callback?: (err: AWSError, data: Neptune.Types.ApplyPendingMaintenanceActionResult) => void): Request<Neptune.Types.ApplyPendingMaintenanceActionResult, AWSError>;
   /**
-   * Copies the specified DB cluster parameter group.
+   * Applies a pending maintenance action to a resource (for example, to a DB instance).
    */
-  copyDBClusterParameterGroup(params: Neptune.Types.CopyDBClusterParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.CopyDBClusterParameterGroupResult) => void): Request<Neptune.Types.CopyDBClusterParameterGroupResult, AWSError>;
+  applyPendingMaintenanceAction(params: Neptune.Types.ApplyPendingMaintenanceActionMessage, callback?: (err: AWSError, data: Neptune.Types.ApplyPendingMaintenanceActionResult) => void): Request<Neptune.Types.ApplyPendingMaintenanceActionResult, AWSError>;
   /**
    * Copies the specified DB cluster parameter group.
    */
   copyDBClusterParameterGroup(callback?: (err: AWSError, data: Neptune.Types.CopyDBClusterParameterGroupResult) => void): Request<Neptune.Types.CopyDBClusterParameterGroupResult, AWSError>;
   /**
-   * Copies a snapshot of a DB cluster. To copy a DB cluster snapshot from a shared manual DB cluster snapshot, SourceDBClusterSnapshotIdentifier must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot. You can copy an encrypted DB cluster snapshot from another AWS Region. In that case, the AWS Region where you call the CopyDBClusterSnapshot action is the destination AWS Region for the encrypted DB cluster snapshot to be copied to. To copy an encrypted DB cluster snapshot from another AWS Region, you must provide the following values:    KmsKeyId - The AWS Key Management System (AWS KMS) key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region.    PreSignedUrl - A URL that contains a Signature Version 4 signed request for the CopyDBClusterSnapshot action to be called in the source AWS Region where the DB cluster snapshot is copied from. The pre-signed URL must be a valid request for the CopyDBClusterSnapshot API action that can be executed in the source AWS Region that contains the encrypted DB cluster snapshot to be copied. The pre-signed URL request must contain the following parameter values:    KmsKeyId - The KMS key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. This is the same identifier for both the CopyDBClusterSnapshot action that is called in the destination AWS Region, and the action contained in the pre-signed URL.    DestinationRegion - The name of the AWS Region that the DB cluster snapshot will be created in.    SourceDBClusterSnapshotIdentifier - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster snapshot from the us-west-2 AWS Region, then your SourceDBClusterSnapshotIdentifier looks like the following example: arn:aws:rds:us-west-2:123456789012:cluster-snapshot:neptune-cluster1-snapshot-20161115.   To learn how to generate a Signature Version 4 signed request, see  Authenticating Requests: Using Query Parameters (AWS Signature Version 4) and  Signature Version 4 Signing Process.    TargetDBClusterSnapshotIdentifier - The identifier for the new copy of the DB cluster snapshot in the destination AWS Region.    SourceDBClusterSnapshotIdentifier - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the ARN format for the source AWS Region and is the same value as the SourceDBClusterSnapshotIdentifier in the pre-signed URL.    To cancel the copy operation once it is in progress, delete the target DB cluster snapshot identified by TargetDBClusterSnapshotIdentifier while that DB cluster snapshot is in "copying" status.
+   * Copies the specified DB cluster parameter group.
    */
-  copyDBClusterSnapshot(params: Neptune.Types.CopyDBClusterSnapshotMessage, callback?: (err: AWSError, data: Neptune.Types.CopyDBClusterSnapshotResult) => void): Request<Neptune.Types.CopyDBClusterSnapshotResult, AWSError>;
+  copyDBClusterParameterGroup(params: Neptune.Types.CopyDBClusterParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.CopyDBClusterParameterGroupResult) => void): Request<Neptune.Types.CopyDBClusterParameterGroupResult, AWSError>;
   /**
    * Copies a snapshot of a DB cluster. To copy a DB cluster snapshot from a shared manual DB cluster snapshot, SourceDBClusterSnapshotIdentifier must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot. You can copy an encrypted DB cluster snapshot from another AWS Region. In that case, the AWS Region where you call the CopyDBClusterSnapshot action is the destination AWS Region for the encrypted DB cluster snapshot to be copied to. To copy an encrypted DB cluster snapshot from another AWS Region, you must provide the following values:    KmsKeyId - The AWS Key Management System (AWS KMS) key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region.    PreSignedUrl - A URL that contains a Signature Version 4 signed request for the CopyDBClusterSnapshot action to be called in the source AWS Region where the DB cluster snapshot is copied from. The pre-signed URL must be a valid request for the CopyDBClusterSnapshot API action that can be executed in the source AWS Region that contains the encrypted DB cluster snapshot to be copied. The pre-signed URL request must contain the following parameter values:    KmsKeyId - The KMS key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. This is the same identifier for both the CopyDBClusterSnapshot action that is called in the destination AWS Region, and the action contained in the pre-signed URL.    DestinationRegion - The name of the AWS Region that the DB cluster snapshot will be created in.    SourceDBClusterSnapshotIdentifier - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster snapshot from the us-west-2 AWS Region, then your SourceDBClusterSnapshotIdentifier looks like the following example: arn:aws:rds:us-west-2:123456789012:cluster-snapshot:neptune-cluster1-snapshot-20161115.   To learn how to generate a Signature Version 4 signed request, see  Authenticating Requests: Using Query Parameters (AWS Signature Version 4) and  Signature Version 4 Signing Process.    TargetDBClusterSnapshotIdentifier - The identifier for the new copy of the DB cluster snapshot in the destination AWS Region.    SourceDBClusterSnapshotIdentifier - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the ARN format for the source AWS Region and is the same value as the SourceDBClusterSnapshotIdentifier in the pre-signed URL.    To cancel the copy operation once it is in progress, delete the target DB cluster snapshot identified by TargetDBClusterSnapshotIdentifier while that DB cluster snapshot is in "copying" status.
    */
   copyDBClusterSnapshot(callback?: (err: AWSError, data: Neptune.Types.CopyDBClusterSnapshotResult) => void): Request<Neptune.Types.CopyDBClusterSnapshotResult, AWSError>;
   /**
-   * Copies the specified DB parameter group.
+   * Copies a snapshot of a DB cluster. To copy a DB cluster snapshot from a shared manual DB cluster snapshot, SourceDBClusterSnapshotIdentifier must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot. You can copy an encrypted DB cluster snapshot from another AWS Region. In that case, the AWS Region where you call the CopyDBClusterSnapshot action is the destination AWS Region for the encrypted DB cluster snapshot to be copied to. To copy an encrypted DB cluster snapshot from another AWS Region, you must provide the following values:    KmsKeyId - The AWS Key Management System (AWS KMS) key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region.    PreSignedUrl - A URL that contains a Signature Version 4 signed request for the CopyDBClusterSnapshot action to be called in the source AWS Region where the DB cluster snapshot is copied from. The pre-signed URL must be a valid request for the CopyDBClusterSnapshot API action that can be executed in the source AWS Region that contains the encrypted DB cluster snapshot to be copied. The pre-signed URL request must contain the following parameter values:    KmsKeyId - The KMS key identifier for the key to use to encrypt the copy of the DB cluster snapshot in the destination AWS Region. This is the same identifier for both the CopyDBClusterSnapshot action that is called in the destination AWS Region, and the action contained in the pre-signed URL.    DestinationRegion - The name of the AWS Region that the DB cluster snapshot will be created in.    SourceDBClusterSnapshotIdentifier - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted DB cluster snapshot from the us-west-2 AWS Region, then your SourceDBClusterSnapshotIdentifier looks like the following example: arn:aws:rds:us-west-2:123456789012:cluster-snapshot:neptune-cluster1-snapshot-20161115.   To learn how to generate a Signature Version 4 signed request, see  Authenticating Requests: Using Query Parameters (AWS Signature Version 4) and  Signature Version 4 Signing Process.    TargetDBClusterSnapshotIdentifier - The identifier for the new copy of the DB cluster snapshot in the destination AWS Region.    SourceDBClusterSnapshotIdentifier - The DB cluster snapshot identifier for the encrypted DB cluster snapshot to be copied. This identifier must be in the ARN format for the source AWS Region and is the same value as the SourceDBClusterSnapshotIdentifier in the pre-signed URL.    To cancel the copy operation once it is in progress, delete the target DB cluster snapshot identified by TargetDBClusterSnapshotIdentifier while that DB cluster snapshot is in "copying" status.
    */
-  copyDBParameterGroup(params: Neptune.Types.CopyDBParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.CopyDBParameterGroupResult) => void): Request<Neptune.Types.CopyDBParameterGroupResult, AWSError>;
+  copyDBClusterSnapshot(params: Neptune.Types.CopyDBClusterSnapshotMessage, callback?: (err: AWSError, data: Neptune.Types.CopyDBClusterSnapshotResult) => void): Request<Neptune.Types.CopyDBClusterSnapshotResult, AWSError>;
   /**
    * Copies the specified DB parameter group.
    */
   copyDBParameterGroup(callback?: (err: AWSError, data: Neptune.Types.CopyDBParameterGroupResult) => void): Request<Neptune.Types.CopyDBParameterGroupResult, AWSError>;
   /**
-   * Creates a new Amazon Neptune DB cluster. You can use the ReplicationSourceIdentifier parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon Neptune DB instance. For cross-region replication where the DB cluster identified by ReplicationSourceIdentifier is encrypted, you must also specify the PreSignedUrl parameter.
+   * Copies the specified DB parameter group.
    */
-  createDBCluster(params: Neptune.Types.CreateDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterResult) => void): Request<Neptune.Types.CreateDBClusterResult, AWSError>;
+  copyDBParameterGroup(params: Neptune.Types.CopyDBParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.CopyDBParameterGroupResult) => void): Request<Neptune.Types.CopyDBParameterGroupResult, AWSError>;
   /**
    * Creates a new Amazon Neptune DB cluster. You can use the ReplicationSourceIdentifier parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon Neptune DB instance. For cross-region replication where the DB cluster identified by ReplicationSourceIdentifier is encrypted, you must also specify the PreSignedUrl parameter.
    */
   createDBCluster(callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterResult) => void): Request<Neptune.Types.CreateDBClusterResult, AWSError>;
   /**
-   * Creates a new DB cluster parameter group. Parameters in a DB cluster parameter group apply to all of the instances in a DB cluster.  A DB cluster parameter group is initially created with the default parameters for the database engine used by instances in the DB cluster. To provide custom values for any of the parameters, you must modify the group after creating it using ModifyDBClusterParameterGroup. Once you've created a DB cluster parameter group, you need to associate it with your DB cluster using ModifyDBCluster. When you associate a new DB cluster parameter group with a running DB cluster, you need to reboot the DB instances in the DB cluster without failover for the new DB cluster parameter group and associated settings to take effect.   After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the DB cluster parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBClusterParameters command to verify that your DB cluster parameter group has been created or modified. 
+   * Creates a new Amazon Neptune DB cluster. You can use the ReplicationSourceIdentifier parameter to create the DB cluster as a Read Replica of another DB cluster or Amazon Neptune DB instance. For cross-region replication where the DB cluster identified by ReplicationSourceIdentifier is encrypted, you must also specify the PreSignedUrl parameter.
    */
-  createDBClusterParameterGroup(params: Neptune.Types.CreateDBClusterParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterParameterGroupResult) => void): Request<Neptune.Types.CreateDBClusterParameterGroupResult, AWSError>;
+  createDBCluster(params: Neptune.Types.CreateDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterResult) => void): Request<Neptune.Types.CreateDBClusterResult, AWSError>;
   /**
    * Creates a new DB cluster parameter group. Parameters in a DB cluster parameter group apply to all of the instances in a DB cluster.  A DB cluster parameter group is initially created with the default parameters for the database engine used by instances in the DB cluster. To provide custom values for any of the parameters, you must modify the group after creating it using ModifyDBClusterParameterGroup. Once you've created a DB cluster parameter group, you need to associate it with your DB cluster using ModifyDBCluster. When you associate a new DB cluster parameter group with a running DB cluster, you need to reboot the DB instances in the DB cluster without failover for the new DB cluster parameter group and associated settings to take effect.   After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the DB cluster parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBClusterParameters command to verify that your DB cluster parameter group has been created or modified. 
    */
   createDBClusterParameterGroup(callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterParameterGroupResult) => void): Request<Neptune.Types.CreateDBClusterParameterGroupResult, AWSError>;
   /**
-   * Creates a snapshot of a DB cluster. 
+   * Creates a new DB cluster parameter group. Parameters in a DB cluster parameter group apply to all of the instances in a DB cluster.  A DB cluster parameter group is initially created with the default parameters for the database engine used by instances in the DB cluster. To provide custom values for any of the parameters, you must modify the group after creating it using ModifyDBClusterParameterGroup. Once you've created a DB cluster parameter group, you need to associate it with your DB cluster using ModifyDBCluster. When you associate a new DB cluster parameter group with a running DB cluster, you need to reboot the DB instances in the DB cluster without failover for the new DB cluster parameter group and associated settings to take effect.   After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the DB cluster parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBClusterParameters command to verify that your DB cluster parameter group has been created or modified. 
    */
-  createDBClusterSnapshot(params: Neptune.Types.CreateDBClusterSnapshotMessage, callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterSnapshotResult) => void): Request<Neptune.Types.CreateDBClusterSnapshotResult, AWSError>;
+  createDBClusterParameterGroup(params: Neptune.Types.CreateDBClusterParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterParameterGroupResult) => void): Request<Neptune.Types.CreateDBClusterParameterGroupResult, AWSError>;
   /**
    * Creates a snapshot of a DB cluster. 
    */
   createDBClusterSnapshot(callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterSnapshotResult) => void): Request<Neptune.Types.CreateDBClusterSnapshotResult, AWSError>;
   /**
-   * Creates a new DB instance.
+   * Creates a snapshot of a DB cluster. 
    */
-  createDBInstance(params: Neptune.Types.CreateDBInstanceMessage, callback?: (err: AWSError, data: Neptune.Types.CreateDBInstanceResult) => void): Request<Neptune.Types.CreateDBInstanceResult, AWSError>;
+  createDBClusterSnapshot(params: Neptune.Types.CreateDBClusterSnapshotMessage, callback?: (err: AWSError, data: Neptune.Types.CreateDBClusterSnapshotResult) => void): Request<Neptune.Types.CreateDBClusterSnapshotResult, AWSError>;
   /**
    * Creates a new DB instance.
    */
   createDBInstance(callback?: (err: AWSError, data: Neptune.Types.CreateDBInstanceResult) => void): Request<Neptune.Types.CreateDBInstanceResult, AWSError>;
   /**
-   * Creates a new DB parameter group.  A DB parameter group is initially created with the default parameters for the database engine used by the DB instance. To provide custom values for any of the parameters, you must modify the group after creating it using ModifyDBParameterGroup. Once you've created a DB parameter group, you need to associate it with your DB instance using ModifyDBInstance. When you associate a new DB parameter group with a running DB instance, you need to reboot the DB instance without failover for the new DB parameter group and associated settings to take effect.   After you create a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBParameters command to verify that your DB parameter group has been created or modified. 
+   * Creates a new DB instance.
    */
-  createDBParameterGroup(params: Neptune.Types.CreateDBParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.CreateDBParameterGroupResult) => void): Request<Neptune.Types.CreateDBParameterGroupResult, AWSError>;
+  createDBInstance(params: Neptune.Types.CreateDBInstanceMessage, callback?: (err: AWSError, data: Neptune.Types.CreateDBInstanceResult) => void): Request<Neptune.Types.CreateDBInstanceResult, AWSError>;
   /**
    * Creates a new DB parameter group.  A DB parameter group is initially created with the default parameters for the database engine used by the DB instance. To provide custom values for any of the parameters, you must modify the group after creating it using ModifyDBParameterGroup. Once you've created a DB parameter group, you need to associate it with your DB instance using ModifyDBInstance. When you associate a new DB parameter group with a running DB instance, you need to reboot the DB instance without failover for the new DB parameter group and associated settings to take effect.   After you create a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBParameters command to verify that your DB parameter group has been created or modified. 
    */
   createDBParameterGroup(callback?: (err: AWSError, data: Neptune.Types.CreateDBParameterGroupResult) => void): Request<Neptune.Types.CreateDBParameterGroupResult, AWSError>;
   /**
-   * Creates a new DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the AWS Region.
+   * Creates a new DB parameter group.  A DB parameter group is initially created with the default parameters for the database engine used by the DB instance. To provide custom values for any of the parameters, you must modify the group after creating it using ModifyDBParameterGroup. Once you've created a DB parameter group, you need to associate it with your DB instance using ModifyDBInstance. When you associate a new DB parameter group with a running DB instance, you need to reboot the DB instance without failover for the new DB parameter group and associated settings to take effect.   After you create a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBParameters command to verify that your DB parameter group has been created or modified. 
    */
-  createDBSubnetGroup(params: Neptune.Types.CreateDBSubnetGroupMessage, callback?: (err: AWSError, data: Neptune.Types.CreateDBSubnetGroupResult) => void): Request<Neptune.Types.CreateDBSubnetGroupResult, AWSError>;
+  createDBParameterGroup(params: Neptune.Types.CreateDBParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.CreateDBParameterGroupResult) => void): Request<Neptune.Types.CreateDBParameterGroupResult, AWSError>;
   /**
    * Creates a new DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the AWS Region.
    */
   createDBSubnetGroup(callback?: (err: AWSError, data: Neptune.Types.CreateDBSubnetGroupResult) => void): Request<Neptune.Types.CreateDBSubnetGroupResult, AWSError>;
   /**
-   * Creates an event notification subscription. This action requires a topic ARN (Amazon Resource Name) created by either the Neptune console, the SNS console, or the SNS API. To obtain an ARN with SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console. You can specify the type of source (SourceType) you want to be notified of, provide a list of Neptune sources (SourceIds) that triggers the events, and provide a list of event categories (EventCategories) for events you want to be notified of. For example, you can specify SourceType = db-instance, SourceIds = mydbinstance1, mydbinstance2 and EventCategories = Availability, Backup. If you specify both the SourceType and SourceIds, such as SourceType = db-instance and SourceIdentifier = myDBInstance1, you are notified of all the db-instance events for the specified source. If you specify a SourceType but do not specify a SourceIdentifier, you receive notice of the events for that source type for all your Neptune sources. If you do not specify either the SourceType nor the SourceIdentifier, you are notified of events generated from all Neptune sources belonging to your customer account.
+   * Creates a new DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the AWS Region.
    */
-  createEventSubscription(params: Neptune.Types.CreateEventSubscriptionMessage, callback?: (err: AWSError, data: Neptune.Types.CreateEventSubscriptionResult) => void): Request<Neptune.Types.CreateEventSubscriptionResult, AWSError>;
+  createDBSubnetGroup(params: Neptune.Types.CreateDBSubnetGroupMessage, callback?: (err: AWSError, data: Neptune.Types.CreateDBSubnetGroupResult) => void): Request<Neptune.Types.CreateDBSubnetGroupResult, AWSError>;
   /**
    * Creates an event notification subscription. This action requires a topic ARN (Amazon Resource Name) created by either the Neptune console, the SNS console, or the SNS API. To obtain an ARN with SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console. You can specify the type of source (SourceType) you want to be notified of, provide a list of Neptune sources (SourceIds) that triggers the events, and provide a list of event categories (EventCategories) for events you want to be notified of. For example, you can specify SourceType = db-instance, SourceIds = mydbinstance1, mydbinstance2 and EventCategories = Availability, Backup. If you specify both the SourceType and SourceIds, such as SourceType = db-instance and SourceIdentifier = myDBInstance1, you are notified of all the db-instance events for the specified source. If you specify a SourceType but do not specify a SourceIdentifier, you receive notice of the events for that source type for all your Neptune sources. If you do not specify either the SourceType nor the SourceIdentifier, you are notified of events generated from all Neptune sources belonging to your customer account.
    */
   createEventSubscription(callback?: (err: AWSError, data: Neptune.Types.CreateEventSubscriptionResult) => void): Request<Neptune.Types.CreateEventSubscriptionResult, AWSError>;
   /**
-   * The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted. 
+   * Creates an event notification subscription. This action requires a topic ARN (Amazon Resource Name) created by either the Neptune console, the SNS console, or the SNS API. To obtain an ARN with SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console. You can specify the type of source (SourceType) you want to be notified of, provide a list of Neptune sources (SourceIds) that triggers the events, and provide a list of event categories (EventCategories) for events you want to be notified of. For example, you can specify SourceType = db-instance, SourceIds = mydbinstance1, mydbinstance2 and EventCategories = Availability, Backup. If you specify both the SourceType and SourceIds, such as SourceType = db-instance and SourceIdentifier = myDBInstance1, you are notified of all the db-instance events for the specified source. If you specify a SourceType but do not specify a SourceIdentifier, you receive notice of the events for that source type for all your Neptune sources. If you do not specify either the SourceType nor the SourceIdentifier, you are notified of events generated from all Neptune sources belonging to your customer account.
    */
-  deleteDBCluster(params: Neptune.Types.DeleteDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.DeleteDBClusterResult) => void): Request<Neptune.Types.DeleteDBClusterResult, AWSError>;
+  createEventSubscription(params: Neptune.Types.CreateEventSubscriptionMessage, callback?: (err: AWSError, data: Neptune.Types.CreateEventSubscriptionResult) => void): Request<Neptune.Types.CreateEventSubscriptionResult, AWSError>;
   /**
    * The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted. 
    */
   deleteDBCluster(callback?: (err: AWSError, data: Neptune.Types.DeleteDBClusterResult) => void): Request<Neptune.Types.DeleteDBClusterResult, AWSError>;
   /**
-   * Deletes a specified DB cluster parameter group. The DB cluster parameter group to be deleted can't be associated with any DB clusters.
+   * The DeleteDBCluster action deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted. 
    */
-  deleteDBClusterParameterGroup(params: Neptune.Types.DeleteDBClusterParameterGroupMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDBCluster(params: Neptune.Types.DeleteDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.DeleteDBClusterResult) => void): Request<Neptune.Types.DeleteDBClusterResult, AWSError>;
   /**
    * Deletes a specified DB cluster parameter group. The DB cluster parameter group to be deleted can't be associated with any DB clusters.
    */
   deleteDBClusterParameterGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a DB cluster snapshot. If the snapshot is being copied, the copy operation is terminated.  The DB cluster snapshot must be in the available state to be deleted. 
+   * Deletes a specified DB cluster parameter group. The DB cluster parameter group to be deleted can't be associated with any DB clusters.
    */
-  deleteDBClusterSnapshot(params: Neptune.Types.DeleteDBClusterSnapshotMessage, callback?: (err: AWSError, data: Neptune.Types.DeleteDBClusterSnapshotResult) => void): Request<Neptune.Types.DeleteDBClusterSnapshotResult, AWSError>;
+  deleteDBClusterParameterGroup(params: Neptune.Types.DeleteDBClusterParameterGroupMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a DB cluster snapshot. If the snapshot is being copied, the copy operation is terminated.  The DB cluster snapshot must be in the available state to be deleted. 
    */
   deleteDBClusterSnapshot(callback?: (err: AWSError, data: Neptune.Types.DeleteDBClusterSnapshotResult) => void): Request<Neptune.Types.DeleteDBClusterSnapshotResult, AWSError>;
   /**
-   * The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can't be recovered. Manual DB snapshots of the DB instance to be deleted by DeleteDBInstance are not deleted.  If you request a final DB snapshot the status of the Amazon Neptune DB instance is deleting until the DB snapshot is created. The API action DescribeDBInstance is used to monitor the status of this operation. The action can't be canceled or reverted once submitted.  Note that when a DB instance is in a failure state and has a status of failed, incompatible-restore, or incompatible-network, you can only delete it when the SkipFinalSnapshot parameter is set to true. If the specified DB instance is part of a DB cluster, you can't delete the DB instance if both of the following conditions are true:   The DB cluster is a Read Replica of another DB cluster.   The DB instance is the only instance in the DB cluster.   To delete a DB instance in this case, first call the PromoteReadReplicaDBCluster API action to promote the DB cluster so it's no longer a Read Replica. After the promotion completes, then call the DeleteDBInstance API action to delete the final instance in the DB cluster.
+   * Deletes a DB cluster snapshot. If the snapshot is being copied, the copy operation is terminated.  The DB cluster snapshot must be in the available state to be deleted. 
    */
-  deleteDBInstance(params: Neptune.Types.DeleteDBInstanceMessage, callback?: (err: AWSError, data: Neptune.Types.DeleteDBInstanceResult) => void): Request<Neptune.Types.DeleteDBInstanceResult, AWSError>;
+  deleteDBClusterSnapshot(params: Neptune.Types.DeleteDBClusterSnapshotMessage, callback?: (err: AWSError, data: Neptune.Types.DeleteDBClusterSnapshotResult) => void): Request<Neptune.Types.DeleteDBClusterSnapshotResult, AWSError>;
   /**
    * The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can't be recovered. Manual DB snapshots of the DB instance to be deleted by DeleteDBInstance are not deleted.  If you request a final DB snapshot the status of the Amazon Neptune DB instance is deleting until the DB snapshot is created. The API action DescribeDBInstance is used to monitor the status of this operation. The action can't be canceled or reverted once submitted.  Note that when a DB instance is in a failure state and has a status of failed, incompatible-restore, or incompatible-network, you can only delete it when the SkipFinalSnapshot parameter is set to true. If the specified DB instance is part of a DB cluster, you can't delete the DB instance if both of the following conditions are true:   The DB cluster is a Read Replica of another DB cluster.   The DB instance is the only instance in the DB cluster.   To delete a DB instance in this case, first call the PromoteReadReplicaDBCluster API action to promote the DB cluster so it's no longer a Read Replica. After the promotion completes, then call the DeleteDBInstance API action to delete the final instance in the DB cluster.
    */
   deleteDBInstance(callback?: (err: AWSError, data: Neptune.Types.DeleteDBInstanceResult) => void): Request<Neptune.Types.DeleteDBInstanceResult, AWSError>;
   /**
-   * Deletes a specified DBParameterGroup. The DBParameterGroup to be deleted can't be associated with any DB instances.
+   * The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can't be recovered. Manual DB snapshots of the DB instance to be deleted by DeleteDBInstance are not deleted.  If you request a final DB snapshot the status of the Amazon Neptune DB instance is deleting until the DB snapshot is created. The API action DescribeDBInstance is used to monitor the status of this operation. The action can't be canceled or reverted once submitted.  Note that when a DB instance is in a failure state and has a status of failed, incompatible-restore, or incompatible-network, you can only delete it when the SkipFinalSnapshot parameter is set to true. If the specified DB instance is part of a DB cluster, you can't delete the DB instance if both of the following conditions are true:   The DB cluster is a Read Replica of another DB cluster.   The DB instance is the only instance in the DB cluster.   To delete a DB instance in this case, first call the PromoteReadReplicaDBCluster API action to promote the DB cluster so it's no longer a Read Replica. After the promotion completes, then call the DeleteDBInstance API action to delete the final instance in the DB cluster.
    */
-  deleteDBParameterGroup(params: Neptune.Types.DeleteDBParameterGroupMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDBInstance(params: Neptune.Types.DeleteDBInstanceMessage, callback?: (err: AWSError, data: Neptune.Types.DeleteDBInstanceResult) => void): Request<Neptune.Types.DeleteDBInstanceResult, AWSError>;
   /**
    * Deletes a specified DBParameterGroup. The DBParameterGroup to be deleted can't be associated with any DB instances.
    */
   deleteDBParameterGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a DB subnet group.  The specified database subnet group must not be associated with any DB instances. 
+   * Deletes a specified DBParameterGroup. The DBParameterGroup to be deleted can't be associated with any DB instances.
    */
-  deleteDBSubnetGroup(params: Neptune.Types.DeleteDBSubnetGroupMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDBParameterGroup(params: Neptune.Types.DeleteDBParameterGroupMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a DB subnet group.  The specified database subnet group must not be associated with any DB instances. 
    */
   deleteDBSubnetGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an event notification subscription.
+   * Deletes a DB subnet group.  The specified database subnet group must not be associated with any DB instances. 
    */
-  deleteEventSubscription(params: Neptune.Types.DeleteEventSubscriptionMessage, callback?: (err: AWSError, data: Neptune.Types.DeleteEventSubscriptionResult) => void): Request<Neptune.Types.DeleteEventSubscriptionResult, AWSError>;
+  deleteDBSubnetGroup(params: Neptune.Types.DeleteDBSubnetGroupMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an event notification subscription.
    */
   deleteEventSubscription(callback?: (err: AWSError, data: Neptune.Types.DeleteEventSubscriptionResult) => void): Request<Neptune.Types.DeleteEventSubscriptionResult, AWSError>;
   /**
-   *  Returns a list of DBClusterParameterGroup descriptions. If a DBClusterParameterGroupName parameter is specified, the list will contain only the description of the specified DB cluster parameter group. 
+   * Deletes an event notification subscription.
    */
-  describeDBClusterParameterGroups(params: Neptune.Types.DescribeDBClusterParameterGroupsMessage, callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupsMessage) => void): Request<Neptune.Types.DBClusterParameterGroupsMessage, AWSError>;
+  deleteEventSubscription(params: Neptune.Types.DeleteEventSubscriptionMessage, callback?: (err: AWSError, data: Neptune.Types.DeleteEventSubscriptionResult) => void): Request<Neptune.Types.DeleteEventSubscriptionResult, AWSError>;
   /**
    *  Returns a list of DBClusterParameterGroup descriptions. If a DBClusterParameterGroupName parameter is specified, the list will contain only the description of the specified DB cluster parameter group. 
    */
   describeDBClusterParameterGroups(callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupsMessage) => void): Request<Neptune.Types.DBClusterParameterGroupsMessage, AWSError>;
   /**
-   * Returns the detailed parameter list for a particular DB cluster parameter group.
+   *  Returns a list of DBClusterParameterGroup descriptions. If a DBClusterParameterGroupName parameter is specified, the list will contain only the description of the specified DB cluster parameter group. 
    */
-  describeDBClusterParameters(params: Neptune.Types.DescribeDBClusterParametersMessage, callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupDetails) => void): Request<Neptune.Types.DBClusterParameterGroupDetails, AWSError>;
+  describeDBClusterParameterGroups(params: Neptune.Types.DescribeDBClusterParameterGroupsMessage, callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupsMessage) => void): Request<Neptune.Types.DBClusterParameterGroupsMessage, AWSError>;
   /**
    * Returns the detailed parameter list for a particular DB cluster parameter group.
    */
   describeDBClusterParameters(callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupDetails) => void): Request<Neptune.Types.DBClusterParameterGroupDetails, AWSError>;
   /**
-   * Returns a list of DB cluster snapshot attribute names and values for a manual DB cluster snapshot. When sharing snapshots with other AWS accounts, DescribeDBClusterSnapshotAttributes returns the restore attribute and a list of IDs for the AWS accounts that are authorized to copy or restore the manual DB cluster snapshot. If all is included in the list of values for the restore attribute, then the manual DB cluster snapshot is public and can be copied or restored by all AWS accounts. To add or remove access for an AWS account to copy or restore a manual DB cluster snapshot, or to make the manual DB cluster snapshot public or private, use the ModifyDBClusterSnapshotAttribute API action.
+   * Returns the detailed parameter list for a particular DB cluster parameter group.
    */
-  describeDBClusterSnapshotAttributes(params: Neptune.Types.DescribeDBClusterSnapshotAttributesMessage, callback?: (err: AWSError, data: Neptune.Types.DescribeDBClusterSnapshotAttributesResult) => void): Request<Neptune.Types.DescribeDBClusterSnapshotAttributesResult, AWSError>;
+  describeDBClusterParameters(params: Neptune.Types.DescribeDBClusterParametersMessage, callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupDetails) => void): Request<Neptune.Types.DBClusterParameterGroupDetails, AWSError>;
   /**
    * Returns a list of DB cluster snapshot attribute names and values for a manual DB cluster snapshot. When sharing snapshots with other AWS accounts, DescribeDBClusterSnapshotAttributes returns the restore attribute and a list of IDs for the AWS accounts that are authorized to copy or restore the manual DB cluster snapshot. If all is included in the list of values for the restore attribute, then the manual DB cluster snapshot is public and can be copied or restored by all AWS accounts. To add or remove access for an AWS account to copy or restore a manual DB cluster snapshot, or to make the manual DB cluster snapshot public or private, use the ModifyDBClusterSnapshotAttribute API action.
    */
   describeDBClusterSnapshotAttributes(callback?: (err: AWSError, data: Neptune.Types.DescribeDBClusterSnapshotAttributesResult) => void): Request<Neptune.Types.DescribeDBClusterSnapshotAttributesResult, AWSError>;
   /**
-   * Returns information about DB cluster snapshots. This API action supports pagination.
+   * Returns a list of DB cluster snapshot attribute names and values for a manual DB cluster snapshot. When sharing snapshots with other AWS accounts, DescribeDBClusterSnapshotAttributes returns the restore attribute and a list of IDs for the AWS accounts that are authorized to copy or restore the manual DB cluster snapshot. If all is included in the list of values for the restore attribute, then the manual DB cluster snapshot is public and can be copied or restored by all AWS accounts. To add or remove access for an AWS account to copy or restore a manual DB cluster snapshot, or to make the manual DB cluster snapshot public or private, use the ModifyDBClusterSnapshotAttribute API action.
    */
-  describeDBClusterSnapshots(params: Neptune.Types.DescribeDBClusterSnapshotsMessage, callback?: (err: AWSError, data: Neptune.Types.DBClusterSnapshotMessage) => void): Request<Neptune.Types.DBClusterSnapshotMessage, AWSError>;
+  describeDBClusterSnapshotAttributes(params: Neptune.Types.DescribeDBClusterSnapshotAttributesMessage, callback?: (err: AWSError, data: Neptune.Types.DescribeDBClusterSnapshotAttributesResult) => void): Request<Neptune.Types.DescribeDBClusterSnapshotAttributesResult, AWSError>;
   /**
    * Returns information about DB cluster snapshots. This API action supports pagination.
    */
   describeDBClusterSnapshots(callback?: (err: AWSError, data: Neptune.Types.DBClusterSnapshotMessage) => void): Request<Neptune.Types.DBClusterSnapshotMessage, AWSError>;
   /**
-   * Returns information about provisioned DB clusters. This API supports pagination.
+   * Returns information about DB cluster snapshots. This API action supports pagination.
    */
-  describeDBClusters(params: Neptune.Types.DescribeDBClustersMessage, callback?: (err: AWSError, data: Neptune.Types.DBClusterMessage) => void): Request<Neptune.Types.DBClusterMessage, AWSError>;
+  describeDBClusterSnapshots(params: Neptune.Types.DescribeDBClusterSnapshotsMessage, callback?: (err: AWSError, data: Neptune.Types.DBClusterSnapshotMessage) => void): Request<Neptune.Types.DBClusterSnapshotMessage, AWSError>;
   /**
    * Returns information about provisioned DB clusters. This API supports pagination.
    */
   describeDBClusters(callback?: (err: AWSError, data: Neptune.Types.DBClusterMessage) => void): Request<Neptune.Types.DBClusterMessage, AWSError>;
   /**
-   * Returns a list of the available DB engines.
+   * Returns information about provisioned DB clusters. This API supports pagination.
    */
-  describeDBEngineVersions(params: Neptune.Types.DescribeDBEngineVersionsMessage, callback?: (err: AWSError, data: Neptune.Types.DBEngineVersionMessage) => void): Request<Neptune.Types.DBEngineVersionMessage, AWSError>;
+  describeDBClusters(params: Neptune.Types.DescribeDBClustersMessage, callback?: (err: AWSError, data: Neptune.Types.DBClusterMessage) => void): Request<Neptune.Types.DBClusterMessage, AWSError>;
   /**
    * Returns a list of the available DB engines.
    */
   describeDBEngineVersions(callback?: (err: AWSError, data: Neptune.Types.DBEngineVersionMessage) => void): Request<Neptune.Types.DBEngineVersionMessage, AWSError>;
   /**
-   * Returns information about provisioned instances. This API supports pagination.
+   * Returns a list of the available DB engines.
    */
-  describeDBInstances(params: Neptune.Types.DescribeDBInstancesMessage, callback?: (err: AWSError, data: Neptune.Types.DBInstanceMessage) => void): Request<Neptune.Types.DBInstanceMessage, AWSError>;
+  describeDBEngineVersions(params: Neptune.Types.DescribeDBEngineVersionsMessage, callback?: (err: AWSError, data: Neptune.Types.DBEngineVersionMessage) => void): Request<Neptune.Types.DBEngineVersionMessage, AWSError>;
   /**
    * Returns information about provisioned instances. This API supports pagination.
    */
   describeDBInstances(callback?: (err: AWSError, data: Neptune.Types.DBInstanceMessage) => void): Request<Neptune.Types.DBInstanceMessage, AWSError>;
   /**
-   *  Returns a list of DBParameterGroup descriptions. If a DBParameterGroupName is specified, the list will contain only the description of the specified DB parameter group. 
+   * Returns information about provisioned instances. This API supports pagination.
    */
-  describeDBParameterGroups(params: Neptune.Types.DescribeDBParameterGroupsMessage, callback?: (err: AWSError, data: Neptune.Types.DBParameterGroupsMessage) => void): Request<Neptune.Types.DBParameterGroupsMessage, AWSError>;
+  describeDBInstances(params: Neptune.Types.DescribeDBInstancesMessage, callback?: (err: AWSError, data: Neptune.Types.DBInstanceMessage) => void): Request<Neptune.Types.DBInstanceMessage, AWSError>;
   /**
    *  Returns a list of DBParameterGroup descriptions. If a DBParameterGroupName is specified, the list will contain only the description of the specified DB parameter group. 
    */
   describeDBParameterGroups(callback?: (err: AWSError, data: Neptune.Types.DBParameterGroupsMessage) => void): Request<Neptune.Types.DBParameterGroupsMessage, AWSError>;
   /**
-   * Returns the detailed parameter list for a particular DB parameter group.
+   *  Returns a list of DBParameterGroup descriptions. If a DBParameterGroupName is specified, the list will contain only the description of the specified DB parameter group. 
    */
-  describeDBParameters(params: Neptune.Types.DescribeDBParametersMessage, callback?: (err: AWSError, data: Neptune.Types.DBParameterGroupDetails) => void): Request<Neptune.Types.DBParameterGroupDetails, AWSError>;
+  describeDBParameterGroups(params: Neptune.Types.DescribeDBParameterGroupsMessage, callback?: (err: AWSError, data: Neptune.Types.DBParameterGroupsMessage) => void): Request<Neptune.Types.DBParameterGroupsMessage, AWSError>;
   /**
    * Returns the detailed parameter list for a particular DB parameter group.
    */
   describeDBParameters(callback?: (err: AWSError, data: Neptune.Types.DBParameterGroupDetails) => void): Request<Neptune.Types.DBParameterGroupDetails, AWSError>;
   /**
-   * Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is specified, the list will contain only the descriptions of the specified DBSubnetGroup. For an overview of CIDR ranges, go to the Wikipedia Tutorial. 
+   * Returns the detailed parameter list for a particular DB parameter group.
    */
-  describeDBSubnetGroups(params: Neptune.Types.DescribeDBSubnetGroupsMessage, callback?: (err: AWSError, data: Neptune.Types.DBSubnetGroupMessage) => void): Request<Neptune.Types.DBSubnetGroupMessage, AWSError>;
+  describeDBParameters(params: Neptune.Types.DescribeDBParametersMessage, callback?: (err: AWSError, data: Neptune.Types.DBParameterGroupDetails) => void): Request<Neptune.Types.DBParameterGroupDetails, AWSError>;
   /**
    * Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is specified, the list will contain only the descriptions of the specified DBSubnetGroup. For an overview of CIDR ranges, go to the Wikipedia Tutorial. 
    */
   describeDBSubnetGroups(callback?: (err: AWSError, data: Neptune.Types.DBSubnetGroupMessage) => void): Request<Neptune.Types.DBSubnetGroupMessage, AWSError>;
   /**
-   * Returns the default engine and system parameter information for the cluster database engine.
+   * Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is specified, the list will contain only the descriptions of the specified DBSubnetGroup. For an overview of CIDR ranges, go to the Wikipedia Tutorial. 
    */
-  describeEngineDefaultClusterParameters(params: Neptune.Types.DescribeEngineDefaultClusterParametersMessage, callback?: (err: AWSError, data: Neptune.Types.DescribeEngineDefaultClusterParametersResult) => void): Request<Neptune.Types.DescribeEngineDefaultClusterParametersResult, AWSError>;
+  describeDBSubnetGroups(params: Neptune.Types.DescribeDBSubnetGroupsMessage, callback?: (err: AWSError, data: Neptune.Types.DBSubnetGroupMessage) => void): Request<Neptune.Types.DBSubnetGroupMessage, AWSError>;
   /**
    * Returns the default engine and system parameter information for the cluster database engine.
    */
   describeEngineDefaultClusterParameters(callback?: (err: AWSError, data: Neptune.Types.DescribeEngineDefaultClusterParametersResult) => void): Request<Neptune.Types.DescribeEngineDefaultClusterParametersResult, AWSError>;
   /**
-   * Returns the default engine and system parameter information for the specified database engine.
+   * Returns the default engine and system parameter information for the cluster database engine.
    */
-  describeEngineDefaultParameters(params: Neptune.Types.DescribeEngineDefaultParametersMessage, callback?: (err: AWSError, data: Neptune.Types.DescribeEngineDefaultParametersResult) => void): Request<Neptune.Types.DescribeEngineDefaultParametersResult, AWSError>;
+  describeEngineDefaultClusterParameters(params: Neptune.Types.DescribeEngineDefaultClusterParametersMessage, callback?: (err: AWSError, data: Neptune.Types.DescribeEngineDefaultClusterParametersResult) => void): Request<Neptune.Types.DescribeEngineDefaultClusterParametersResult, AWSError>;
   /**
    * Returns the default engine and system parameter information for the specified database engine.
    */
   describeEngineDefaultParameters(callback?: (err: AWSError, data: Neptune.Types.DescribeEngineDefaultParametersResult) => void): Request<Neptune.Types.DescribeEngineDefaultParametersResult, AWSError>;
   /**
-   * Displays a list of categories for all event source types, or, if specified, for a specified source type. 
+   * Returns the default engine and system parameter information for the specified database engine.
    */
-  describeEventCategories(params: Neptune.Types.DescribeEventCategoriesMessage, callback?: (err: AWSError, data: Neptune.Types.EventCategoriesMessage) => void): Request<Neptune.Types.EventCategoriesMessage, AWSError>;
+  describeEngineDefaultParameters(params: Neptune.Types.DescribeEngineDefaultParametersMessage, callback?: (err: AWSError, data: Neptune.Types.DescribeEngineDefaultParametersResult) => void): Request<Neptune.Types.DescribeEngineDefaultParametersResult, AWSError>;
   /**
    * Displays a list of categories for all event source types, or, if specified, for a specified source type. 
    */
   describeEventCategories(callback?: (err: AWSError, data: Neptune.Types.EventCategoriesMessage) => void): Request<Neptune.Types.EventCategoriesMessage, AWSError>;
   /**
-   * Lists all the subscription descriptions for a customer account. The description for a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType, SourceID, CreationTime, and Status. If you specify a SubscriptionName, lists the description for that subscription.
+   * Displays a list of categories for all event source types, or, if specified, for a specified source type. 
    */
-  describeEventSubscriptions(params: Neptune.Types.DescribeEventSubscriptionsMessage, callback?: (err: AWSError, data: Neptune.Types.EventSubscriptionsMessage) => void): Request<Neptune.Types.EventSubscriptionsMessage, AWSError>;
+  describeEventCategories(params: Neptune.Types.DescribeEventCategoriesMessage, callback?: (err: AWSError, data: Neptune.Types.EventCategoriesMessage) => void): Request<Neptune.Types.EventCategoriesMessage, AWSError>;
   /**
    * Lists all the subscription descriptions for a customer account. The description for a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType, SourceID, CreationTime, and Status. If you specify a SubscriptionName, lists the description for that subscription.
    */
   describeEventSubscriptions(callback?: (err: AWSError, data: Neptune.Types.EventSubscriptionsMessage) => void): Request<Neptune.Types.EventSubscriptionsMessage, AWSError>;
   /**
-   * Returns events related to DB instances, DB security groups, DB snapshots, and DB parameter groups for the past 14 days. Events specific to a particular DB instance, DB security group, database snapshot, or DB parameter group can be obtained by providing the name as a parameter. By default, the past hour of events are returned.
+   * Lists all the subscription descriptions for a customer account. The description for a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType, SourceID, CreationTime, and Status. If you specify a SubscriptionName, lists the description for that subscription.
    */
-  describeEvents(params: Neptune.Types.DescribeEventsMessage, callback?: (err: AWSError, data: Neptune.Types.EventsMessage) => void): Request<Neptune.Types.EventsMessage, AWSError>;
+  describeEventSubscriptions(params: Neptune.Types.DescribeEventSubscriptionsMessage, callback?: (err: AWSError, data: Neptune.Types.EventSubscriptionsMessage) => void): Request<Neptune.Types.EventSubscriptionsMessage, AWSError>;
   /**
    * Returns events related to DB instances, DB security groups, DB snapshots, and DB parameter groups for the past 14 days. Events specific to a particular DB instance, DB security group, database snapshot, or DB parameter group can be obtained by providing the name as a parameter. By default, the past hour of events are returned.
    */
   describeEvents(callback?: (err: AWSError, data: Neptune.Types.EventsMessage) => void): Request<Neptune.Types.EventsMessage, AWSError>;
   /**
-   * Returns a list of orderable DB instance options for the specified engine.
+   * Returns events related to DB instances, DB security groups, DB snapshots, and DB parameter groups for the past 14 days. Events specific to a particular DB instance, DB security group, database snapshot, or DB parameter group can be obtained by providing the name as a parameter. By default, the past hour of events are returned.
    */
-  describeOrderableDBInstanceOptions(params: Neptune.Types.DescribeOrderableDBInstanceOptionsMessage, callback?: (err: AWSError, data: Neptune.Types.OrderableDBInstanceOptionsMessage) => void): Request<Neptune.Types.OrderableDBInstanceOptionsMessage, AWSError>;
+  describeEvents(params: Neptune.Types.DescribeEventsMessage, callback?: (err: AWSError, data: Neptune.Types.EventsMessage) => void): Request<Neptune.Types.EventsMessage, AWSError>;
   /**
    * Returns a list of orderable DB instance options for the specified engine.
    */
   describeOrderableDBInstanceOptions(callback?: (err: AWSError, data: Neptune.Types.OrderableDBInstanceOptionsMessage) => void): Request<Neptune.Types.OrderableDBInstanceOptionsMessage, AWSError>;
   /**
-   * Returns a list of resources (for example, DB instances) that have at least one pending maintenance action.
+   * Returns a list of orderable DB instance options for the specified engine.
    */
-  describePendingMaintenanceActions(params: Neptune.Types.DescribePendingMaintenanceActionsMessage, callback?: (err: AWSError, data: Neptune.Types.PendingMaintenanceActionsMessage) => void): Request<Neptune.Types.PendingMaintenanceActionsMessage, AWSError>;
+  describeOrderableDBInstanceOptions(params: Neptune.Types.DescribeOrderableDBInstanceOptionsMessage, callback?: (err: AWSError, data: Neptune.Types.OrderableDBInstanceOptionsMessage) => void): Request<Neptune.Types.OrderableDBInstanceOptionsMessage, AWSError>;
   /**
    * Returns a list of resources (for example, DB instances) that have at least one pending maintenance action.
    */
   describePendingMaintenanceActions(callback?: (err: AWSError, data: Neptune.Types.PendingMaintenanceActionsMessage) => void): Request<Neptune.Types.PendingMaintenanceActionsMessage, AWSError>;
   /**
-   * You can call DescribeValidDBInstanceModifications to learn what modifications you can make to your DB instance. You can use this information when you call ModifyDBInstance. 
+   * Returns a list of resources (for example, DB instances) that have at least one pending maintenance action.
    */
-  describeValidDBInstanceModifications(params: Neptune.Types.DescribeValidDBInstanceModificationsMessage, callback?: (err: AWSError, data: Neptune.Types.DescribeValidDBInstanceModificationsResult) => void): Request<Neptune.Types.DescribeValidDBInstanceModificationsResult, AWSError>;
+  describePendingMaintenanceActions(params: Neptune.Types.DescribePendingMaintenanceActionsMessage, callback?: (err: AWSError, data: Neptune.Types.PendingMaintenanceActionsMessage) => void): Request<Neptune.Types.PendingMaintenanceActionsMessage, AWSError>;
   /**
    * You can call DescribeValidDBInstanceModifications to learn what modifications you can make to your DB instance. You can use this information when you call ModifyDBInstance. 
    */
   describeValidDBInstanceModifications(callback?: (err: AWSError, data: Neptune.Types.DescribeValidDBInstanceModificationsResult) => void): Request<Neptune.Types.DescribeValidDBInstanceModificationsResult, AWSError>;
   /**
-   * Forces a failover for a DB cluster. A failover for a DB cluster promotes one of the Read Replicas (read-only instances) in the DB cluster to be the primary instance (the cluster writer). Amazon Neptune will automatically fail over to a Read Replica, if one exists, when the primary instance fails. You can force a failover when you want to simulate a failure of a primary instance for testing. Because each instance in a DB cluster has its own endpoint address, you will need to clean up and re-establish any existing connections that use those endpoint addresses when the failover is complete.
+   * You can call DescribeValidDBInstanceModifications to learn what modifications you can make to your DB instance. You can use this information when you call ModifyDBInstance. 
    */
-  failoverDBCluster(params: Neptune.Types.FailoverDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.FailoverDBClusterResult) => void): Request<Neptune.Types.FailoverDBClusterResult, AWSError>;
+  describeValidDBInstanceModifications(params: Neptune.Types.DescribeValidDBInstanceModificationsMessage, callback?: (err: AWSError, data: Neptune.Types.DescribeValidDBInstanceModificationsResult) => void): Request<Neptune.Types.DescribeValidDBInstanceModificationsResult, AWSError>;
   /**
    * Forces a failover for a DB cluster. A failover for a DB cluster promotes one of the Read Replicas (read-only instances) in the DB cluster to be the primary instance (the cluster writer). Amazon Neptune will automatically fail over to a Read Replica, if one exists, when the primary instance fails. You can force a failover when you want to simulate a failure of a primary instance for testing. Because each instance in a DB cluster has its own endpoint address, you will need to clean up and re-establish any existing connections that use those endpoint addresses when the failover is complete.
    */
   failoverDBCluster(callback?: (err: AWSError, data: Neptune.Types.FailoverDBClusterResult) => void): Request<Neptune.Types.FailoverDBClusterResult, AWSError>;
   /**
-   * Lists all tags on an Amazon Neptune resource.
+   * Forces a failover for a DB cluster. A failover for a DB cluster promotes one of the Read Replicas (read-only instances) in the DB cluster to be the primary instance (the cluster writer). Amazon Neptune will automatically fail over to a Read Replica, if one exists, when the primary instance fails. You can force a failover when you want to simulate a failure of a primary instance for testing. Because each instance in a DB cluster has its own endpoint address, you will need to clean up and re-establish any existing connections that use those endpoint addresses when the failover is complete.
    */
-  listTagsForResource(params: Neptune.Types.ListTagsForResourceMessage, callback?: (err: AWSError, data: Neptune.Types.TagListMessage) => void): Request<Neptune.Types.TagListMessage, AWSError>;
+  failoverDBCluster(params: Neptune.Types.FailoverDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.FailoverDBClusterResult) => void): Request<Neptune.Types.FailoverDBClusterResult, AWSError>;
   /**
    * Lists all tags on an Amazon Neptune resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: Neptune.Types.TagListMessage) => void): Request<Neptune.Types.TagListMessage, AWSError>;
   /**
-   * Modify a setting for a DB cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. 
+   * Lists all tags on an Amazon Neptune resource.
    */
-  modifyDBCluster(params: Neptune.Types.ModifyDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.ModifyDBClusterResult) => void): Request<Neptune.Types.ModifyDBClusterResult, AWSError>;
+  listTagsForResource(params: Neptune.Types.ListTagsForResourceMessage, callback?: (err: AWSError, data: Neptune.Types.TagListMessage) => void): Request<Neptune.Types.TagListMessage, AWSError>;
   /**
    * Modify a setting for a DB cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. 
    */
   modifyDBCluster(callback?: (err: AWSError, data: Neptune.Types.ModifyDBClusterResult) => void): Request<Neptune.Types.ModifyDBClusterResult, AWSError>;
   /**
-   *  Modifies the parameters of a DB cluster parameter group. To modify more than one parameter, submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request.   Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB cluster associated with the parameter group before the change can take effect.   After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBClusterParameters command to verify that your DB cluster parameter group has been created or modified. 
+   * Modify a setting for a DB cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. 
    */
-  modifyDBClusterParameterGroup(params: Neptune.Types.ModifyDBClusterParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupNameMessage) => void): Request<Neptune.Types.DBClusterParameterGroupNameMessage, AWSError>;
+  modifyDBCluster(params: Neptune.Types.ModifyDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.ModifyDBClusterResult) => void): Request<Neptune.Types.ModifyDBClusterResult, AWSError>;
   /**
    *  Modifies the parameters of a DB cluster parameter group. To modify more than one parameter, submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request.   Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB cluster associated with the parameter group before the change can take effect.   After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBClusterParameters command to verify that your DB cluster parameter group has been created or modified. 
    */
   modifyDBClusterParameterGroup(callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupNameMessage) => void): Request<Neptune.Types.DBClusterParameterGroupNameMessage, AWSError>;
   /**
-   * Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot. To share a manual DB cluster snapshot with other AWS accounts, specify restore as the AttributeName and use the ValuesToAdd parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB cluster snapshot. Use the value all to make the manual DB cluster snapshot public, which means that it can be copied or restored by all AWS accounts. Do not add the all value for any manual DB cluster snapshots that contain private information that you don't want available to all AWS accounts. If a manual DB cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the ValuesToAdd parameter. You can't use all as a value for that parameter in this case. To view which AWS accounts have access to copy or restore a manual DB cluster snapshot, or whether a manual DB cluster snapshot public or private, use the DescribeDBClusterSnapshotAttributes API action.
+   *  Modifies the parameters of a DB cluster parameter group. To modify more than one parameter, submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request.   Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB cluster associated with the parameter group before the change can take effect.   After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon Neptune to fully complete the create action before the parameter group is used as the default for a new DB cluster. This is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBClusterParameters command to verify that your DB cluster parameter group has been created or modified. 
    */
-  modifyDBClusterSnapshotAttribute(params: Neptune.Types.ModifyDBClusterSnapshotAttributeMessage, callback?: (err: AWSError, data: Neptune.Types.ModifyDBClusterSnapshotAttributeResult) => void): Request<Neptune.Types.ModifyDBClusterSnapshotAttributeResult, AWSError>;
+  modifyDBClusterParameterGroup(params: Neptune.Types.ModifyDBClusterParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupNameMessage) => void): Request<Neptune.Types.DBClusterParameterGroupNameMessage, AWSError>;
   /**
    * Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot. To share a manual DB cluster snapshot with other AWS accounts, specify restore as the AttributeName and use the ValuesToAdd parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB cluster snapshot. Use the value all to make the manual DB cluster snapshot public, which means that it can be copied or restored by all AWS accounts. Do not add the all value for any manual DB cluster snapshots that contain private information that you don't want available to all AWS accounts. If a manual DB cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the ValuesToAdd parameter. You can't use all as a value for that parameter in this case. To view which AWS accounts have access to copy or restore a manual DB cluster snapshot, or whether a manual DB cluster snapshot public or private, use the DescribeDBClusterSnapshotAttributes API action.
    */
   modifyDBClusterSnapshotAttribute(callback?: (err: AWSError, data: Neptune.Types.ModifyDBClusterSnapshotAttributeResult) => void): Request<Neptune.Types.ModifyDBClusterSnapshotAttributeResult, AWSError>;
   /**
-   * Modifies settings for a DB instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. To learn what modifications you can make to your DB instance, call DescribeValidDBInstanceModifications before you call ModifyDBInstance. 
+   * Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot. To share a manual DB cluster snapshot with other AWS accounts, specify restore as the AttributeName and use the ValuesToAdd parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB cluster snapshot. Use the value all to make the manual DB cluster snapshot public, which means that it can be copied or restored by all AWS accounts. Do not add the all value for any manual DB cluster snapshots that contain private information that you don't want available to all AWS accounts. If a manual DB cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the ValuesToAdd parameter. You can't use all as a value for that parameter in this case. To view which AWS accounts have access to copy or restore a manual DB cluster snapshot, or whether a manual DB cluster snapshot public or private, use the DescribeDBClusterSnapshotAttributes API action.
    */
-  modifyDBInstance(params: Neptune.Types.ModifyDBInstanceMessage, callback?: (err: AWSError, data: Neptune.Types.ModifyDBInstanceResult) => void): Request<Neptune.Types.ModifyDBInstanceResult, AWSError>;
+  modifyDBClusterSnapshotAttribute(params: Neptune.Types.ModifyDBClusterSnapshotAttributeMessage, callback?: (err: AWSError, data: Neptune.Types.ModifyDBClusterSnapshotAttributeResult) => void): Request<Neptune.Types.ModifyDBClusterSnapshotAttributeResult, AWSError>;
   /**
    * Modifies settings for a DB instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. To learn what modifications you can make to your DB instance, call DescribeValidDBInstanceModifications before you call ModifyDBInstance. 
    */
   modifyDBInstance(callback?: (err: AWSError, data: Neptune.Types.ModifyDBInstanceResult) => void): Request<Neptune.Types.ModifyDBInstanceResult, AWSError>;
   /**
-   *  Modifies the parameters of a DB parameter group. To modify more than one parameter, submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request.   Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB instance associated with the parameter group before the change can take effect.   After you modify a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon Neptune to fully complete the modify action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBParameters command to verify that your DB parameter group has been created or modified. 
+   * Modifies settings for a DB instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. To learn what modifications you can make to your DB instance, call DescribeValidDBInstanceModifications before you call ModifyDBInstance. 
    */
-  modifyDBParameterGroup(params: Neptune.Types.ModifyDBParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.DBParameterGroupNameMessage) => void): Request<Neptune.Types.DBParameterGroupNameMessage, AWSError>;
+  modifyDBInstance(params: Neptune.Types.ModifyDBInstanceMessage, callback?: (err: AWSError, data: Neptune.Types.ModifyDBInstanceResult) => void): Request<Neptune.Types.ModifyDBInstanceResult, AWSError>;
   /**
    *  Modifies the parameters of a DB parameter group. To modify more than one parameter, submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request.   Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB instance associated with the parameter group before the change can take effect.   After you modify a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon Neptune to fully complete the modify action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBParameters command to verify that your DB parameter group has been created or modified. 
    */
   modifyDBParameterGroup(callback?: (err: AWSError, data: Neptune.Types.DBParameterGroupNameMessage) => void): Request<Neptune.Types.DBParameterGroupNameMessage, AWSError>;
   /**
-   * Modifies an existing DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the AWS Region.
+   *  Modifies the parameters of a DB parameter group. To modify more than one parameter, submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request.   Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot without failover to the DB instance associated with the parameter group before the change can take effect.   After you modify a DB parameter group, you should wait at least 5 minutes before creating your first DB instance that uses that DB parameter group as the default parameter group. This allows Amazon Neptune to fully complete the modify action before the parameter group is used as the default for a new DB instance. This is especially important for parameters that are critical when creating the default database for a DB instance, such as the character set for the default database defined by the character_set_database parameter. You can use the Parameter Groups option of the Amazon Neptune console or the DescribeDBParameters command to verify that your DB parameter group has been created or modified. 
    */
-  modifyDBSubnetGroup(params: Neptune.Types.ModifyDBSubnetGroupMessage, callback?: (err: AWSError, data: Neptune.Types.ModifyDBSubnetGroupResult) => void): Request<Neptune.Types.ModifyDBSubnetGroupResult, AWSError>;
+  modifyDBParameterGroup(params: Neptune.Types.ModifyDBParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.DBParameterGroupNameMessage) => void): Request<Neptune.Types.DBParameterGroupNameMessage, AWSError>;
   /**
    * Modifies an existing DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the AWS Region.
    */
   modifyDBSubnetGroup(callback?: (err: AWSError, data: Neptune.Types.ModifyDBSubnetGroupResult) => void): Request<Neptune.Types.ModifyDBSubnetGroupResult, AWSError>;
   /**
-   * Modifies an existing event notification subscription. Note that you can't modify the source identifiers using this call; to change source identifiers for a subscription, use the AddSourceIdentifierToSubscription and RemoveSourceIdentifierFromSubscription calls. You can see a list of the event categories for a given SourceType by using the DescribeEventCategories action.
+   * Modifies an existing DB subnet group. DB subnet groups must contain at least one subnet in at least two AZs in the AWS Region.
    */
-  modifyEventSubscription(params: Neptune.Types.ModifyEventSubscriptionMessage, callback?: (err: AWSError, data: Neptune.Types.ModifyEventSubscriptionResult) => void): Request<Neptune.Types.ModifyEventSubscriptionResult, AWSError>;
+  modifyDBSubnetGroup(params: Neptune.Types.ModifyDBSubnetGroupMessage, callback?: (err: AWSError, data: Neptune.Types.ModifyDBSubnetGroupResult) => void): Request<Neptune.Types.ModifyDBSubnetGroupResult, AWSError>;
   /**
    * Modifies an existing event notification subscription. Note that you can't modify the source identifiers using this call; to change source identifiers for a subscription, use the AddSourceIdentifierToSubscription and RemoveSourceIdentifierFromSubscription calls. You can see a list of the event categories for a given SourceType by using the DescribeEventCategories action.
    */
   modifyEventSubscription(callback?: (err: AWSError, data: Neptune.Types.ModifyEventSubscriptionResult) => void): Request<Neptune.Types.ModifyEventSubscriptionResult, AWSError>;
   /**
-   * Promotes a Read Replica DB cluster to a standalone DB cluster.
+   * Modifies an existing event notification subscription. Note that you can't modify the source identifiers using this call; to change source identifiers for a subscription, use the AddSourceIdentifierToSubscription and RemoveSourceIdentifierFromSubscription calls. You can see a list of the event categories for a given SourceType by using the DescribeEventCategories action.
    */
-  promoteReadReplicaDBCluster(params: Neptune.Types.PromoteReadReplicaDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.PromoteReadReplicaDBClusterResult) => void): Request<Neptune.Types.PromoteReadReplicaDBClusterResult, AWSError>;
+  modifyEventSubscription(params: Neptune.Types.ModifyEventSubscriptionMessage, callback?: (err: AWSError, data: Neptune.Types.ModifyEventSubscriptionResult) => void): Request<Neptune.Types.ModifyEventSubscriptionResult, AWSError>;
   /**
    * Promotes a Read Replica DB cluster to a standalone DB cluster.
    */
   promoteReadReplicaDBCluster(callback?: (err: AWSError, data: Neptune.Types.PromoteReadReplicaDBClusterResult) => void): Request<Neptune.Types.PromoteReadReplicaDBClusterResult, AWSError>;
   /**
-   * You might need to reboot your DB instance, usually for maintenance reasons. For example, if you make certain modifications, or if you change the DB parameter group associated with the DB instance, you must reboot the instance for the changes to take effect.  Rebooting a DB instance restarts the database engine service. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to rebooting. 
+   * Promotes a Read Replica DB cluster to a standalone DB cluster.
    */
-  rebootDBInstance(params: Neptune.Types.RebootDBInstanceMessage, callback?: (err: AWSError, data: Neptune.Types.RebootDBInstanceResult) => void): Request<Neptune.Types.RebootDBInstanceResult, AWSError>;
+  promoteReadReplicaDBCluster(params: Neptune.Types.PromoteReadReplicaDBClusterMessage, callback?: (err: AWSError, data: Neptune.Types.PromoteReadReplicaDBClusterResult) => void): Request<Neptune.Types.PromoteReadReplicaDBClusterResult, AWSError>;
   /**
    * You might need to reboot your DB instance, usually for maintenance reasons. For example, if you make certain modifications, or if you change the DB parameter group associated with the DB instance, you must reboot the instance for the changes to take effect.  Rebooting a DB instance restarts the database engine service. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to rebooting. 
    */
   rebootDBInstance(callback?: (err: AWSError, data: Neptune.Types.RebootDBInstanceResult) => void): Request<Neptune.Types.RebootDBInstanceResult, AWSError>;
   /**
-   * Disassociates an Identity and Access Management (IAM) role from a DB cluster. 
+   * You might need to reboot your DB instance, usually for maintenance reasons. For example, if you make certain modifications, or if you change the DB parameter group associated with the DB instance, you must reboot the instance for the changes to take effect.  Rebooting a DB instance restarts the database engine service. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to rebooting. 
    */
-  removeRoleFromDBCluster(params: Neptune.Types.RemoveRoleFromDBClusterMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  rebootDBInstance(params: Neptune.Types.RebootDBInstanceMessage, callback?: (err: AWSError, data: Neptune.Types.RebootDBInstanceResult) => void): Request<Neptune.Types.RebootDBInstanceResult, AWSError>;
   /**
    * Disassociates an Identity and Access Management (IAM) role from a DB cluster. 
    */
   removeRoleFromDBCluster(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes a source identifier from an existing event notification subscription.
+   * Disassociates an Identity and Access Management (IAM) role from a DB cluster. 
    */
-  removeSourceIdentifierFromSubscription(params: Neptune.Types.RemoveSourceIdentifierFromSubscriptionMessage, callback?: (err: AWSError, data: Neptune.Types.RemoveSourceIdentifierFromSubscriptionResult) => void): Request<Neptune.Types.RemoveSourceIdentifierFromSubscriptionResult, AWSError>;
+  removeRoleFromDBCluster(params: Neptune.Types.RemoveRoleFromDBClusterMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes a source identifier from an existing event notification subscription.
    */
   removeSourceIdentifierFromSubscription(callback?: (err: AWSError, data: Neptune.Types.RemoveSourceIdentifierFromSubscriptionResult) => void): Request<Neptune.Types.RemoveSourceIdentifierFromSubscriptionResult, AWSError>;
   /**
-   * Removes metadata tags from an Amazon Neptune resource.
+   * Removes a source identifier from an existing event notification subscription.
    */
-  removeTagsFromResource(params: Neptune.Types.RemoveTagsFromResourceMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  removeSourceIdentifierFromSubscription(params: Neptune.Types.RemoveSourceIdentifierFromSubscriptionMessage, callback?: (err: AWSError, data: Neptune.Types.RemoveSourceIdentifierFromSubscriptionResult) => void): Request<Neptune.Types.RemoveSourceIdentifierFromSubscriptionResult, AWSError>;
   /**
    * Removes metadata tags from an Amazon Neptune resource.
    */
   removeTagsFromResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  Modifies the parameters of a DB cluster parameter group to the default value. To reset specific parameters submit a list of the following: ParameterName and ApplyMethod. To reset the entire DB cluster parameter group, specify the DBClusterParameterGroupName and ResetAllParameters parameters.   When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to pending-reboot to take effect on the next DB instance restart or RebootDBInstance request. You must call RebootDBInstance for every DB instance in your DB cluster that you want the updated static parameter to apply to.
+   * Removes metadata tags from an Amazon Neptune resource.
    */
-  resetDBClusterParameterGroup(params: Neptune.Types.ResetDBClusterParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupNameMessage) => void): Request<Neptune.Types.DBClusterParameterGroupNameMessage, AWSError>;
+  removeTagsFromResource(params: Neptune.Types.RemoveTagsFromResourceMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    *  Modifies the parameters of a DB cluster parameter group to the default value. To reset specific parameters submit a list of the following: ParameterName and ApplyMethod. To reset the entire DB cluster parameter group, specify the DBClusterParameterGroupName and ResetAllParameters parameters.   When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to pending-reboot to take effect on the next DB instance restart or RebootDBInstance request. You must call RebootDBInstance for every DB instance in your DB cluster that you want the updated static parameter to apply to.
    */
   resetDBClusterParameterGroup(callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupNameMessage) => void): Request<Neptune.Types.DBClusterParameterGroupNameMessage, AWSError>;
   /**
-   * Modifies the parameters of a DB parameter group to the engine/system default value. To reset specific parameters, provide a list of the following: ParameterName and ApplyMethod. To reset the entire DB parameter group, specify the DBParameterGroup name and ResetAllParameters parameters. When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to pending-reboot to take effect on the next DB instance restart or RebootDBInstance request. 
+   *  Modifies the parameters of a DB cluster parameter group to the default value. To reset specific parameters submit a list of the following: ParameterName and ApplyMethod. To reset the entire DB cluster parameter group, specify the DBClusterParameterGroupName and ResetAllParameters parameters.   When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to pending-reboot to take effect on the next DB instance restart or RebootDBInstance request. You must call RebootDBInstance for every DB instance in your DB cluster that you want the updated static parameter to apply to.
    */
-  resetDBParameterGroup(params: Neptune.Types.ResetDBParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.DBParameterGroupNameMessage) => void): Request<Neptune.Types.DBParameterGroupNameMessage, AWSError>;
+  resetDBClusterParameterGroup(params: Neptune.Types.ResetDBClusterParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.DBClusterParameterGroupNameMessage) => void): Request<Neptune.Types.DBClusterParameterGroupNameMessage, AWSError>;
   /**
    * Modifies the parameters of a DB parameter group to the engine/system default value. To reset specific parameters, provide a list of the following: ParameterName and ApplyMethod. To reset the entire DB parameter group, specify the DBParameterGroup name and ResetAllParameters parameters. When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to pending-reboot to take effect on the next DB instance restart or RebootDBInstance request. 
    */
   resetDBParameterGroup(callback?: (err: AWSError, data: Neptune.Types.DBParameterGroupNameMessage) => void): Request<Neptune.Types.DBParameterGroupNameMessage, AWSError>;
   /**
-   * Creates a new DB cluster from a DB snapshot or DB cluster snapshot. If a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group. If a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.
+   * Modifies the parameters of a DB parameter group to the engine/system default value. To reset specific parameters, provide a list of the following: ParameterName and ApplyMethod. To reset the entire DB parameter group, specify the DBParameterGroup name and ResetAllParameters parameters. When resetting the entire group, dynamic parameters are updated immediately and static parameters are set to pending-reboot to take effect on the next DB instance restart or RebootDBInstance request. 
    */
-  restoreDBClusterFromSnapshot(params: Neptune.Types.RestoreDBClusterFromSnapshotMessage, callback?: (err: AWSError, data: Neptune.Types.RestoreDBClusterFromSnapshotResult) => void): Request<Neptune.Types.RestoreDBClusterFromSnapshotResult, AWSError>;
+  resetDBParameterGroup(params: Neptune.Types.ResetDBParameterGroupMessage, callback?: (err: AWSError, data: Neptune.Types.DBParameterGroupNameMessage) => void): Request<Neptune.Types.DBParameterGroupNameMessage, AWSError>;
   /**
    * Creates a new DB cluster from a DB snapshot or DB cluster snapshot. If a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group. If a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.
    */
   restoreDBClusterFromSnapshot(callback?: (err: AWSError, data: Neptune.Types.RestoreDBClusterFromSnapshotResult) => void): Request<Neptune.Types.RestoreDBClusterFromSnapshotResult, AWSError>;
   /**
-   * Restores a DB cluster to an arbitrary point in time. Users can restore to any point in time before LatestRestorableTime for up to BackupRetentionPeriod days. The target DB cluster is created from the source DB cluster with the same configuration as the original DB cluster, except that the new DB cluster is created with the default DB security group.   This action only restores the DB cluster, not the DB instances for that DB cluster. You must invoke the CreateDBInstance action to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in DBClusterIdentifier. You can create DB instances only after the RestoreDBClusterToPointInTime action has completed and the DB cluster is available. 
+   * Creates a new DB cluster from a DB snapshot or DB cluster snapshot. If a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group. If a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.
    */
-  restoreDBClusterToPointInTime(params: Neptune.Types.RestoreDBClusterToPointInTimeMessage, callback?: (err: AWSError, data: Neptune.Types.RestoreDBClusterToPointInTimeResult) => void): Request<Neptune.Types.RestoreDBClusterToPointInTimeResult, AWSError>;
+  restoreDBClusterFromSnapshot(params: Neptune.Types.RestoreDBClusterFromSnapshotMessage, callback?: (err: AWSError, data: Neptune.Types.RestoreDBClusterFromSnapshotResult) => void): Request<Neptune.Types.RestoreDBClusterFromSnapshotResult, AWSError>;
   /**
    * Restores a DB cluster to an arbitrary point in time. Users can restore to any point in time before LatestRestorableTime for up to BackupRetentionPeriod days. The target DB cluster is created from the source DB cluster with the same configuration as the original DB cluster, except that the new DB cluster is created with the default DB security group.   This action only restores the DB cluster, not the DB instances for that DB cluster. You must invoke the CreateDBInstance action to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in DBClusterIdentifier. You can create DB instances only after the RestoreDBClusterToPointInTime action has completed and the DB cluster is available. 
    */
   restoreDBClusterToPointInTime(callback?: (err: AWSError, data: Neptune.Types.RestoreDBClusterToPointInTimeResult) => void): Request<Neptune.Types.RestoreDBClusterToPointInTimeResult, AWSError>;
+  /**
+   * Restores a DB cluster to an arbitrary point in time. Users can restore to any point in time before LatestRestorableTime for up to BackupRetentionPeriod days. The target DB cluster is created from the source DB cluster with the same configuration as the original DB cluster, except that the new DB cluster is created with the default DB security group.   This action only restores the DB cluster, not the DB instances for that DB cluster. You must invoke the CreateDBInstance action to create DB instances for the restored DB cluster, specifying the identifier of the restored DB cluster in DBClusterIdentifier. You can create DB instances only after the RestoreDBClusterToPointInTime action has completed and the DB cluster is available. 
+   */
+  restoreDBClusterToPointInTime(params: Neptune.Types.RestoreDBClusterToPointInTimeMessage, callback?: (err: AWSError, data: Neptune.Types.RestoreDBClusterToPointInTimeResult) => void): Request<Neptune.Types.RestoreDBClusterToPointInTimeResult, AWSError>;
   /**
    * Waits for the dBInstanceAvailable state by periodically calling the underlying Neptune.describeDBInstancesoperation every 30 seconds (at most 60 times).
    */

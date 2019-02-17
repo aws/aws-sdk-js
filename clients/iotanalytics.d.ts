@@ -14,275 +14,275 @@ declare class IoTAnalytics extends Service {
   /**
    * Sends messages to a channel.
    */
-  batchPutMessage(params: IoTAnalytics.Types.BatchPutMessageRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.BatchPutMessageResponse) => void): Request<IoTAnalytics.Types.BatchPutMessageResponse, AWSError>;
+  batchPutMessage(callback?: (err: AWSError, data: IoTAnalytics.Types.BatchPutMessageResponse) => void): Request<IoTAnalytics.Types.BatchPutMessageResponse, AWSError>;
   /**
    * Sends messages to a channel.
    */
-  batchPutMessage(callback?: (err: AWSError, data: IoTAnalytics.Types.BatchPutMessageResponse) => void): Request<IoTAnalytics.Types.BatchPutMessageResponse, AWSError>;
-  /**
-   * Cancels the reprocessing of data through the pipeline.
-   */
-  cancelPipelineReprocessing(params: IoTAnalytics.Types.CancelPipelineReprocessingRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CancelPipelineReprocessingResponse) => void): Request<IoTAnalytics.Types.CancelPipelineReprocessingResponse, AWSError>;
+  batchPutMessage(params: IoTAnalytics.Types.BatchPutMessageRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.BatchPutMessageResponse) => void): Request<IoTAnalytics.Types.BatchPutMessageResponse, AWSError>;
   /**
    * Cancels the reprocessing of data through the pipeline.
    */
   cancelPipelineReprocessing(callback?: (err: AWSError, data: IoTAnalytics.Types.CancelPipelineReprocessingResponse) => void): Request<IoTAnalytics.Types.CancelPipelineReprocessingResponse, AWSError>;
   /**
-   * Creates a channel. A channel collects data from an MQTT topic and archives the raw, unprocessed messages before publishing the data to a pipeline.
+   * Cancels the reprocessing of data through the pipeline.
    */
-  createChannel(params: IoTAnalytics.Types.CreateChannelRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CreateChannelResponse) => void): Request<IoTAnalytics.Types.CreateChannelResponse, AWSError>;
+  cancelPipelineReprocessing(params: IoTAnalytics.Types.CancelPipelineReprocessingRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CancelPipelineReprocessingResponse) => void): Request<IoTAnalytics.Types.CancelPipelineReprocessingResponse, AWSError>;
   /**
    * Creates a channel. A channel collects data from an MQTT topic and archives the raw, unprocessed messages before publishing the data to a pipeline.
    */
   createChannel(callback?: (err: AWSError, data: IoTAnalytics.Types.CreateChannelResponse) => void): Request<IoTAnalytics.Types.CreateChannelResponse, AWSError>;
   /**
-   * Creates a data set. A data set stores data retrieved from a data store by applying a "queryAction" (a SQL query) or a "containerAction" (executing a containerized application). This operation creates the skeleton of a data set. The data set can be populated manually by calling "CreateDatasetContent" or automatically according to a "trigger" you specify.
+   * Creates a channel. A channel collects data from an MQTT topic and archives the raw, unprocessed messages before publishing the data to a pipeline.
    */
-  createDataset(params: IoTAnalytics.Types.CreateDatasetRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatasetResponse) => void): Request<IoTAnalytics.Types.CreateDatasetResponse, AWSError>;
+  createChannel(params: IoTAnalytics.Types.CreateChannelRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CreateChannelResponse) => void): Request<IoTAnalytics.Types.CreateChannelResponse, AWSError>;
   /**
    * Creates a data set. A data set stores data retrieved from a data store by applying a "queryAction" (a SQL query) or a "containerAction" (executing a containerized application). This operation creates the skeleton of a data set. The data set can be populated manually by calling "CreateDatasetContent" or automatically according to a "trigger" you specify.
    */
   createDataset(callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatasetResponse) => void): Request<IoTAnalytics.Types.CreateDatasetResponse, AWSError>;
   /**
-   * Creates the content of a data set by applying a "queryAction" (a SQL query) or a "containerAction" (executing a containerized application).
+   * Creates a data set. A data set stores data retrieved from a data store by applying a "queryAction" (a SQL query) or a "containerAction" (executing a containerized application). This operation creates the skeleton of a data set. The data set can be populated manually by calling "CreateDatasetContent" or automatically according to a "trigger" you specify.
    */
-  createDatasetContent(params: IoTAnalytics.Types.CreateDatasetContentRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatasetContentResponse) => void): Request<IoTAnalytics.Types.CreateDatasetContentResponse, AWSError>;
+  createDataset(params: IoTAnalytics.Types.CreateDatasetRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatasetResponse) => void): Request<IoTAnalytics.Types.CreateDatasetResponse, AWSError>;
   /**
    * Creates the content of a data set by applying a "queryAction" (a SQL query) or a "containerAction" (executing a containerized application).
    */
   createDatasetContent(callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatasetContentResponse) => void): Request<IoTAnalytics.Types.CreateDatasetContentResponse, AWSError>;
   /**
-   * Creates a data store, which is a repository for messages.
+   * Creates the content of a data set by applying a "queryAction" (a SQL query) or a "containerAction" (executing a containerized application).
    */
-  createDatastore(params: IoTAnalytics.Types.CreateDatastoreRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatastoreResponse) => void): Request<IoTAnalytics.Types.CreateDatastoreResponse, AWSError>;
+  createDatasetContent(params: IoTAnalytics.Types.CreateDatasetContentRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatasetContentResponse) => void): Request<IoTAnalytics.Types.CreateDatasetContentResponse, AWSError>;
   /**
    * Creates a data store, which is a repository for messages.
    */
   createDatastore(callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatastoreResponse) => void): Request<IoTAnalytics.Types.CreateDatastoreResponse, AWSError>;
   /**
-   * Creates a pipeline. A pipeline consumes messages from one or more channels and allows you to process the messages before storing them in a data store.
+   * Creates a data store, which is a repository for messages.
    */
-  createPipeline(params: IoTAnalytics.Types.CreatePipelineRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CreatePipelineResponse) => void): Request<IoTAnalytics.Types.CreatePipelineResponse, AWSError>;
+  createDatastore(params: IoTAnalytics.Types.CreateDatastoreRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatastoreResponse) => void): Request<IoTAnalytics.Types.CreateDatastoreResponse, AWSError>;
   /**
    * Creates a pipeline. A pipeline consumes messages from one or more channels and allows you to process the messages before storing them in a data store.
    */
   createPipeline(callback?: (err: AWSError, data: IoTAnalytics.Types.CreatePipelineResponse) => void): Request<IoTAnalytics.Types.CreatePipelineResponse, AWSError>;
   /**
-   * Deletes the specified channel.
+   * Creates a pipeline. A pipeline consumes messages from one or more channels and allows you to process the messages before storing them in a data store.
    */
-  deleteChannel(params: IoTAnalytics.Types.DeleteChannelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  createPipeline(params: IoTAnalytics.Types.CreatePipelineRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CreatePipelineResponse) => void): Request<IoTAnalytics.Types.CreatePipelineResponse, AWSError>;
   /**
    * Deletes the specified channel.
    */
   deleteChannel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified data set. You do not have to delete the content of the data set before you perform this operation.
+   * Deletes the specified channel.
    */
-  deleteDataset(params: IoTAnalytics.Types.DeleteDatasetRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteChannel(params: IoTAnalytics.Types.DeleteChannelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified data set. You do not have to delete the content of the data set before you perform this operation.
    */
   deleteDataset(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the content of the specified data set.
+   * Deletes the specified data set. You do not have to delete the content of the data set before you perform this operation.
    */
-  deleteDatasetContent(params: IoTAnalytics.Types.DeleteDatasetContentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDataset(params: IoTAnalytics.Types.DeleteDatasetRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the content of the specified data set.
    */
   deleteDatasetContent(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified data store.
+   * Deletes the content of the specified data set.
    */
-  deleteDatastore(params: IoTAnalytics.Types.DeleteDatastoreRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDatasetContent(params: IoTAnalytics.Types.DeleteDatasetContentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified data store.
    */
   deleteDatastore(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified pipeline.
+   * Deletes the specified data store.
    */
-  deletePipeline(params: IoTAnalytics.Types.DeletePipelineRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDatastore(params: IoTAnalytics.Types.DeleteDatastoreRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified pipeline.
    */
   deletePipeline(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Retrieves information about a channel.
+   * Deletes the specified pipeline.
    */
-  describeChannel(params: IoTAnalytics.Types.DescribeChannelRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.DescribeChannelResponse) => void): Request<IoTAnalytics.Types.DescribeChannelResponse, AWSError>;
+  deletePipeline(params: IoTAnalytics.Types.DeletePipelineRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Retrieves information about a channel.
    */
   describeChannel(callback?: (err: AWSError, data: IoTAnalytics.Types.DescribeChannelResponse) => void): Request<IoTAnalytics.Types.DescribeChannelResponse, AWSError>;
   /**
-   * Retrieves information about a data set.
+   * Retrieves information about a channel.
    */
-  describeDataset(params: IoTAnalytics.Types.DescribeDatasetRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.DescribeDatasetResponse) => void): Request<IoTAnalytics.Types.DescribeDatasetResponse, AWSError>;
+  describeChannel(params: IoTAnalytics.Types.DescribeChannelRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.DescribeChannelResponse) => void): Request<IoTAnalytics.Types.DescribeChannelResponse, AWSError>;
   /**
    * Retrieves information about a data set.
    */
   describeDataset(callback?: (err: AWSError, data: IoTAnalytics.Types.DescribeDatasetResponse) => void): Request<IoTAnalytics.Types.DescribeDatasetResponse, AWSError>;
   /**
-   * Retrieves information about a data store.
+   * Retrieves information about a data set.
    */
-  describeDatastore(params: IoTAnalytics.Types.DescribeDatastoreRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.DescribeDatastoreResponse) => void): Request<IoTAnalytics.Types.DescribeDatastoreResponse, AWSError>;
+  describeDataset(params: IoTAnalytics.Types.DescribeDatasetRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.DescribeDatasetResponse) => void): Request<IoTAnalytics.Types.DescribeDatasetResponse, AWSError>;
   /**
    * Retrieves information about a data store.
    */
   describeDatastore(callback?: (err: AWSError, data: IoTAnalytics.Types.DescribeDatastoreResponse) => void): Request<IoTAnalytics.Types.DescribeDatastoreResponse, AWSError>;
   /**
-   * Retrieves the current settings of the AWS IoT Analytics logging options.
+   * Retrieves information about a data store.
    */
-  describeLoggingOptions(params: IoTAnalytics.Types.DescribeLoggingOptionsRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.DescribeLoggingOptionsResponse) => void): Request<IoTAnalytics.Types.DescribeLoggingOptionsResponse, AWSError>;
+  describeDatastore(params: IoTAnalytics.Types.DescribeDatastoreRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.DescribeDatastoreResponse) => void): Request<IoTAnalytics.Types.DescribeDatastoreResponse, AWSError>;
   /**
    * Retrieves the current settings of the AWS IoT Analytics logging options.
    */
   describeLoggingOptions(callback?: (err: AWSError, data: IoTAnalytics.Types.DescribeLoggingOptionsResponse) => void): Request<IoTAnalytics.Types.DescribeLoggingOptionsResponse, AWSError>;
   /**
-   * Retrieves information about a pipeline.
+   * Retrieves the current settings of the AWS IoT Analytics logging options.
    */
-  describePipeline(params: IoTAnalytics.Types.DescribePipelineRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.DescribePipelineResponse) => void): Request<IoTAnalytics.Types.DescribePipelineResponse, AWSError>;
+  describeLoggingOptions(params: IoTAnalytics.Types.DescribeLoggingOptionsRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.DescribeLoggingOptionsResponse) => void): Request<IoTAnalytics.Types.DescribeLoggingOptionsResponse, AWSError>;
   /**
    * Retrieves information about a pipeline.
    */
   describePipeline(callback?: (err: AWSError, data: IoTAnalytics.Types.DescribePipelineResponse) => void): Request<IoTAnalytics.Types.DescribePipelineResponse, AWSError>;
   /**
-   * Retrieves the contents of a data set as pre-signed URIs.
+   * Retrieves information about a pipeline.
    */
-  getDatasetContent(params: IoTAnalytics.Types.GetDatasetContentRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.GetDatasetContentResponse) => void): Request<IoTAnalytics.Types.GetDatasetContentResponse, AWSError>;
+  describePipeline(params: IoTAnalytics.Types.DescribePipelineRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.DescribePipelineResponse) => void): Request<IoTAnalytics.Types.DescribePipelineResponse, AWSError>;
   /**
    * Retrieves the contents of a data set as pre-signed URIs.
    */
   getDatasetContent(callback?: (err: AWSError, data: IoTAnalytics.Types.GetDatasetContentResponse) => void): Request<IoTAnalytics.Types.GetDatasetContentResponse, AWSError>;
   /**
-   * Retrieves a list of channels.
+   * Retrieves the contents of a data set as pre-signed URIs.
    */
-  listChannels(params: IoTAnalytics.Types.ListChannelsRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.ListChannelsResponse) => void): Request<IoTAnalytics.Types.ListChannelsResponse, AWSError>;
+  getDatasetContent(params: IoTAnalytics.Types.GetDatasetContentRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.GetDatasetContentResponse) => void): Request<IoTAnalytics.Types.GetDatasetContentResponse, AWSError>;
   /**
    * Retrieves a list of channels.
    */
   listChannels(callback?: (err: AWSError, data: IoTAnalytics.Types.ListChannelsResponse) => void): Request<IoTAnalytics.Types.ListChannelsResponse, AWSError>;
   /**
-   * Lists information about data set contents that have been created.
+   * Retrieves a list of channels.
    */
-  listDatasetContents(params: IoTAnalytics.Types.ListDatasetContentsRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.ListDatasetContentsResponse) => void): Request<IoTAnalytics.Types.ListDatasetContentsResponse, AWSError>;
+  listChannels(params: IoTAnalytics.Types.ListChannelsRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.ListChannelsResponse) => void): Request<IoTAnalytics.Types.ListChannelsResponse, AWSError>;
   /**
    * Lists information about data set contents that have been created.
    */
   listDatasetContents(callback?: (err: AWSError, data: IoTAnalytics.Types.ListDatasetContentsResponse) => void): Request<IoTAnalytics.Types.ListDatasetContentsResponse, AWSError>;
   /**
-   * Retrieves information about data sets.
+   * Lists information about data set contents that have been created.
    */
-  listDatasets(params: IoTAnalytics.Types.ListDatasetsRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.ListDatasetsResponse) => void): Request<IoTAnalytics.Types.ListDatasetsResponse, AWSError>;
+  listDatasetContents(params: IoTAnalytics.Types.ListDatasetContentsRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.ListDatasetContentsResponse) => void): Request<IoTAnalytics.Types.ListDatasetContentsResponse, AWSError>;
   /**
    * Retrieves information about data sets.
    */
   listDatasets(callback?: (err: AWSError, data: IoTAnalytics.Types.ListDatasetsResponse) => void): Request<IoTAnalytics.Types.ListDatasetsResponse, AWSError>;
   /**
-   * Retrieves a list of data stores.
+   * Retrieves information about data sets.
    */
-  listDatastores(params: IoTAnalytics.Types.ListDatastoresRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.ListDatastoresResponse) => void): Request<IoTAnalytics.Types.ListDatastoresResponse, AWSError>;
+  listDatasets(params: IoTAnalytics.Types.ListDatasetsRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.ListDatasetsResponse) => void): Request<IoTAnalytics.Types.ListDatasetsResponse, AWSError>;
   /**
    * Retrieves a list of data stores.
    */
   listDatastores(callback?: (err: AWSError, data: IoTAnalytics.Types.ListDatastoresResponse) => void): Request<IoTAnalytics.Types.ListDatastoresResponse, AWSError>;
   /**
-   * Retrieves a list of pipelines.
+   * Retrieves a list of data stores.
    */
-  listPipelines(params: IoTAnalytics.Types.ListPipelinesRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.ListPipelinesResponse) => void): Request<IoTAnalytics.Types.ListPipelinesResponse, AWSError>;
+  listDatastores(params: IoTAnalytics.Types.ListDatastoresRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.ListDatastoresResponse) => void): Request<IoTAnalytics.Types.ListDatastoresResponse, AWSError>;
   /**
    * Retrieves a list of pipelines.
    */
   listPipelines(callback?: (err: AWSError, data: IoTAnalytics.Types.ListPipelinesResponse) => void): Request<IoTAnalytics.Types.ListPipelinesResponse, AWSError>;
   /**
-   * Lists the tags (metadata) which you have assigned to the resource.
+   * Retrieves a list of pipelines.
    */
-  listTagsForResource(params: IoTAnalytics.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.ListTagsForResourceResponse) => void): Request<IoTAnalytics.Types.ListTagsForResourceResponse, AWSError>;
+  listPipelines(params: IoTAnalytics.Types.ListPipelinesRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.ListPipelinesResponse) => void): Request<IoTAnalytics.Types.ListPipelinesResponse, AWSError>;
   /**
    * Lists the tags (metadata) which you have assigned to the resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: IoTAnalytics.Types.ListTagsForResourceResponse) => void): Request<IoTAnalytics.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Sets or updates the AWS IoT Analytics logging options. Note that if you update the value of any loggingOptions field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the roleArn field (for example, to correct an invalid policy) it takes up to 5 minutes for that change to take effect. 
+   * Lists the tags (metadata) which you have assigned to the resource.
    */
-  putLoggingOptions(params: IoTAnalytics.Types.PutLoggingOptionsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  listTagsForResource(params: IoTAnalytics.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.ListTagsForResourceResponse) => void): Request<IoTAnalytics.Types.ListTagsForResourceResponse, AWSError>;
   /**
    * Sets or updates the AWS IoT Analytics logging options. Note that if you update the value of any loggingOptions field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the roleArn field (for example, to correct an invalid policy) it takes up to 5 minutes for that change to take effect. 
    */
   putLoggingOptions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Simulates the results of running a pipeline activity on a message payload.
+   * Sets or updates the AWS IoT Analytics logging options. Note that if you update the value of any loggingOptions field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the roleArn field (for example, to correct an invalid policy) it takes up to 5 minutes for that change to take effect. 
    */
-  runPipelineActivity(params: IoTAnalytics.Types.RunPipelineActivityRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.RunPipelineActivityResponse) => void): Request<IoTAnalytics.Types.RunPipelineActivityResponse, AWSError>;
+  putLoggingOptions(params: IoTAnalytics.Types.PutLoggingOptionsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Simulates the results of running a pipeline activity on a message payload.
    */
   runPipelineActivity(callback?: (err: AWSError, data: IoTAnalytics.Types.RunPipelineActivityResponse) => void): Request<IoTAnalytics.Types.RunPipelineActivityResponse, AWSError>;
   /**
-   * Retrieves a sample of messages from the specified channel ingested during the specified timeframe. Up to 10 messages can be retrieved.
+   * Simulates the results of running a pipeline activity on a message payload.
    */
-  sampleChannelData(params: IoTAnalytics.Types.SampleChannelDataRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.SampleChannelDataResponse) => void): Request<IoTAnalytics.Types.SampleChannelDataResponse, AWSError>;
+  runPipelineActivity(params: IoTAnalytics.Types.RunPipelineActivityRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.RunPipelineActivityResponse) => void): Request<IoTAnalytics.Types.RunPipelineActivityResponse, AWSError>;
   /**
    * Retrieves a sample of messages from the specified channel ingested during the specified timeframe. Up to 10 messages can be retrieved.
    */
   sampleChannelData(callback?: (err: AWSError, data: IoTAnalytics.Types.SampleChannelDataResponse) => void): Request<IoTAnalytics.Types.SampleChannelDataResponse, AWSError>;
   /**
-   * Starts the reprocessing of raw message data through the pipeline.
+   * Retrieves a sample of messages from the specified channel ingested during the specified timeframe. Up to 10 messages can be retrieved.
    */
-  startPipelineReprocessing(params: IoTAnalytics.Types.StartPipelineReprocessingRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.StartPipelineReprocessingResponse) => void): Request<IoTAnalytics.Types.StartPipelineReprocessingResponse, AWSError>;
+  sampleChannelData(params: IoTAnalytics.Types.SampleChannelDataRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.SampleChannelDataResponse) => void): Request<IoTAnalytics.Types.SampleChannelDataResponse, AWSError>;
   /**
    * Starts the reprocessing of raw message data through the pipeline.
    */
   startPipelineReprocessing(callback?: (err: AWSError, data: IoTAnalytics.Types.StartPipelineReprocessingResponse) => void): Request<IoTAnalytics.Types.StartPipelineReprocessingResponse, AWSError>;
   /**
-   * Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.
+   * Starts the reprocessing of raw message data through the pipeline.
    */
-  tagResource(params: IoTAnalytics.Types.TagResourceRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.TagResourceResponse) => void): Request<IoTAnalytics.Types.TagResourceResponse, AWSError>;
+  startPipelineReprocessing(params: IoTAnalytics.Types.StartPipelineReprocessingRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.StartPipelineReprocessingResponse) => void): Request<IoTAnalytics.Types.StartPipelineReprocessingResponse, AWSError>;
   /**
    * Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.
    */
   tagResource(callback?: (err: AWSError, data: IoTAnalytics.Types.TagResourceResponse) => void): Request<IoTAnalytics.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes the given tags (metadata) from the resource.
+   * Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.
    */
-  untagResource(params: IoTAnalytics.Types.UntagResourceRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.UntagResourceResponse) => void): Request<IoTAnalytics.Types.UntagResourceResponse, AWSError>;
+  tagResource(params: IoTAnalytics.Types.TagResourceRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.TagResourceResponse) => void): Request<IoTAnalytics.Types.TagResourceResponse, AWSError>;
   /**
    * Removes the given tags (metadata) from the resource.
    */
   untagResource(callback?: (err: AWSError, data: IoTAnalytics.Types.UntagResourceResponse) => void): Request<IoTAnalytics.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the settings of a channel.
+   * Removes the given tags (metadata) from the resource.
    */
-  updateChannel(params: IoTAnalytics.Types.UpdateChannelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  untagResource(params: IoTAnalytics.Types.UntagResourceRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.UntagResourceResponse) => void): Request<IoTAnalytics.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates the settings of a channel.
    */
   updateChannel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the settings of a data set.
+   * Updates the settings of a channel.
    */
-  updateDataset(params: IoTAnalytics.Types.UpdateDatasetRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateChannel(params: IoTAnalytics.Types.UpdateChannelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates the settings of a data set.
    */
   updateDataset(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the settings of a data store.
+   * Updates the settings of a data set.
    */
-  updateDatastore(params: IoTAnalytics.Types.UpdateDatastoreRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateDataset(params: IoTAnalytics.Types.UpdateDatasetRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates the settings of a data store.
    */
   updateDatastore(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the settings of a pipeline.
+   * Updates the settings of a data store.
    */
-  updatePipeline(params: IoTAnalytics.Types.UpdatePipelineRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateDatastore(params: IoTAnalytics.Types.UpdateDatastoreRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates the settings of a pipeline.
    */
   updatePipeline(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the settings of a pipeline.
+   */
+  updatePipeline(params: IoTAnalytics.Types.UpdatePipelineRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace IoTAnalytics {
   export type ActivityBatchSize = number;

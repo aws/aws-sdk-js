@@ -15,315 +15,315 @@ declare class DocDB extends Service {
   /**
    * Adds metadata tags to an Amazon DocumentDB resource. You can use these tags with cost allocation reporting to track costs that are associated with Amazon DocumentDB resources. or in a Condition statement in an AWS Identity and Access Management (IAM) policy for Amazon DocumentDB.
    */
-  addTagsToResource(params: DocDB.Types.AddTagsToResourceMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  addTagsToResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Adds metadata tags to an Amazon DocumentDB resource. You can use these tags with cost allocation reporting to track costs that are associated with Amazon DocumentDB resources. or in a Condition statement in an AWS Identity and Access Management (IAM) policy for Amazon DocumentDB.
    */
-  addTagsToResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
-  /**
-   * Applies a pending maintenance action to a resource (for example, to a DB instance).
-   */
-  applyPendingMaintenanceAction(params: DocDB.Types.ApplyPendingMaintenanceActionMessage, callback?: (err: AWSError, data: DocDB.Types.ApplyPendingMaintenanceActionResult) => void): Request<DocDB.Types.ApplyPendingMaintenanceActionResult, AWSError>;
+  addTagsToResource(params: DocDB.Types.AddTagsToResourceMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Applies a pending maintenance action to a resource (for example, to a DB instance).
    */
   applyPendingMaintenanceAction(callback?: (err: AWSError, data: DocDB.Types.ApplyPendingMaintenanceActionResult) => void): Request<DocDB.Types.ApplyPendingMaintenanceActionResult, AWSError>;
   /**
-   * Copies the specified DB cluster parameter group.
+   * Applies a pending maintenance action to a resource (for example, to a DB instance).
    */
-  copyDBClusterParameterGroup(params: DocDB.Types.CopyDBClusterParameterGroupMessage, callback?: (err: AWSError, data: DocDB.Types.CopyDBClusterParameterGroupResult) => void): Request<DocDB.Types.CopyDBClusterParameterGroupResult, AWSError>;
+  applyPendingMaintenanceAction(params: DocDB.Types.ApplyPendingMaintenanceActionMessage, callback?: (err: AWSError, data: DocDB.Types.ApplyPendingMaintenanceActionResult) => void): Request<DocDB.Types.ApplyPendingMaintenanceActionResult, AWSError>;
   /**
    * Copies the specified DB cluster parameter group.
    */
   copyDBClusterParameterGroup(callback?: (err: AWSError, data: DocDB.Types.CopyDBClusterParameterGroupResult) => void): Request<DocDB.Types.CopyDBClusterParameterGroupResult, AWSError>;
   /**
-   * Copies a snapshot of a DB cluster. To copy a DB cluster snapshot from a shared manual DB cluster snapshot, SourceDBClusterSnapshotIdentifier must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot. To cancel the copy operation after it is in progress, delete the target DB cluster snapshot identified by TargetDBClusterSnapshotIdentifier while that DB cluster snapshot is in the copying status.
+   * Copies the specified DB cluster parameter group.
    */
-  copyDBClusterSnapshot(params: DocDB.Types.CopyDBClusterSnapshotMessage, callback?: (err: AWSError, data: DocDB.Types.CopyDBClusterSnapshotResult) => void): Request<DocDB.Types.CopyDBClusterSnapshotResult, AWSError>;
+  copyDBClusterParameterGroup(params: DocDB.Types.CopyDBClusterParameterGroupMessage, callback?: (err: AWSError, data: DocDB.Types.CopyDBClusterParameterGroupResult) => void): Request<DocDB.Types.CopyDBClusterParameterGroupResult, AWSError>;
   /**
    * Copies a snapshot of a DB cluster. To copy a DB cluster snapshot from a shared manual DB cluster snapshot, SourceDBClusterSnapshotIdentifier must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot. To cancel the copy operation after it is in progress, delete the target DB cluster snapshot identified by TargetDBClusterSnapshotIdentifier while that DB cluster snapshot is in the copying status.
    */
   copyDBClusterSnapshot(callback?: (err: AWSError, data: DocDB.Types.CopyDBClusterSnapshotResult) => void): Request<DocDB.Types.CopyDBClusterSnapshotResult, AWSError>;
   /**
-   * Creates a new Amazon DocumentDB DB cluster.
+   * Copies a snapshot of a DB cluster. To copy a DB cluster snapshot from a shared manual DB cluster snapshot, SourceDBClusterSnapshotIdentifier must be the Amazon Resource Name (ARN) of the shared DB cluster snapshot. To cancel the copy operation after it is in progress, delete the target DB cluster snapshot identified by TargetDBClusterSnapshotIdentifier while that DB cluster snapshot is in the copying status.
    */
-  createDBCluster(params: DocDB.Types.CreateDBClusterMessage, callback?: (err: AWSError, data: DocDB.Types.CreateDBClusterResult) => void): Request<DocDB.Types.CreateDBClusterResult, AWSError>;
+  copyDBClusterSnapshot(params: DocDB.Types.CopyDBClusterSnapshotMessage, callback?: (err: AWSError, data: DocDB.Types.CopyDBClusterSnapshotResult) => void): Request<DocDB.Types.CopyDBClusterSnapshotResult, AWSError>;
   /**
    * Creates a new Amazon DocumentDB DB cluster.
    */
   createDBCluster(callback?: (err: AWSError, data: DocDB.Types.CreateDBClusterResult) => void): Request<DocDB.Types.CreateDBClusterResult, AWSError>;
   /**
-   * Creates a new DB cluster parameter group. Parameters in a DB cluster parameter group apply to all of the instances in a DB cluster. A DB cluster parameter group is initially created with the default parameters for the database engine used by instances in the DB cluster. To provide custom values for any of the parameters, you must modify the group after you create it. After you create a DB cluster parameter group, you must associate it with your DB cluster. For the new DB cluster parameter group and associated settings to take effect, you must then reboot the DB instances in the DB cluster without failover.  After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon DocumentDB to fully complete the create action before the DB cluster parameter group is used as the default for a new DB cluster. This step is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. 
+   * Creates a new Amazon DocumentDB DB cluster.
    */
-  createDBClusterParameterGroup(params: DocDB.Types.CreateDBClusterParameterGroupMessage, callback?: (err: AWSError, data: DocDB.Types.CreateDBClusterParameterGroupResult) => void): Request<DocDB.Types.CreateDBClusterParameterGroupResult, AWSError>;
+  createDBCluster(params: DocDB.Types.CreateDBClusterMessage, callback?: (err: AWSError, data: DocDB.Types.CreateDBClusterResult) => void): Request<DocDB.Types.CreateDBClusterResult, AWSError>;
   /**
    * Creates a new DB cluster parameter group. Parameters in a DB cluster parameter group apply to all of the instances in a DB cluster. A DB cluster parameter group is initially created with the default parameters for the database engine used by instances in the DB cluster. To provide custom values for any of the parameters, you must modify the group after you create it. After you create a DB cluster parameter group, you must associate it with your DB cluster. For the new DB cluster parameter group and associated settings to take effect, you must then reboot the DB instances in the DB cluster without failover.  After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon DocumentDB to fully complete the create action before the DB cluster parameter group is used as the default for a new DB cluster. This step is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. 
    */
   createDBClusterParameterGroup(callback?: (err: AWSError, data: DocDB.Types.CreateDBClusterParameterGroupResult) => void): Request<DocDB.Types.CreateDBClusterParameterGroupResult, AWSError>;
   /**
-   * Creates a snapshot of a DB cluster. 
+   * Creates a new DB cluster parameter group. Parameters in a DB cluster parameter group apply to all of the instances in a DB cluster. A DB cluster parameter group is initially created with the default parameters for the database engine used by instances in the DB cluster. To provide custom values for any of the parameters, you must modify the group after you create it. After you create a DB cluster parameter group, you must associate it with your DB cluster. For the new DB cluster parameter group and associated settings to take effect, you must then reboot the DB instances in the DB cluster without failover.  After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon DocumentDB to fully complete the create action before the DB cluster parameter group is used as the default for a new DB cluster. This step is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. 
    */
-  createDBClusterSnapshot(params: DocDB.Types.CreateDBClusterSnapshotMessage, callback?: (err: AWSError, data: DocDB.Types.CreateDBClusterSnapshotResult) => void): Request<DocDB.Types.CreateDBClusterSnapshotResult, AWSError>;
+  createDBClusterParameterGroup(params: DocDB.Types.CreateDBClusterParameterGroupMessage, callback?: (err: AWSError, data: DocDB.Types.CreateDBClusterParameterGroupResult) => void): Request<DocDB.Types.CreateDBClusterParameterGroupResult, AWSError>;
   /**
    * Creates a snapshot of a DB cluster. 
    */
   createDBClusterSnapshot(callback?: (err: AWSError, data: DocDB.Types.CreateDBClusterSnapshotResult) => void): Request<DocDB.Types.CreateDBClusterSnapshotResult, AWSError>;
   /**
-   * Creates a new DB instance.
+   * Creates a snapshot of a DB cluster. 
    */
-  createDBInstance(params: DocDB.Types.CreateDBInstanceMessage, callback?: (err: AWSError, data: DocDB.Types.CreateDBInstanceResult) => void): Request<DocDB.Types.CreateDBInstanceResult, AWSError>;
+  createDBClusterSnapshot(params: DocDB.Types.CreateDBClusterSnapshotMessage, callback?: (err: AWSError, data: DocDB.Types.CreateDBClusterSnapshotResult) => void): Request<DocDB.Types.CreateDBClusterSnapshotResult, AWSError>;
   /**
    * Creates a new DB instance.
    */
   createDBInstance(callback?: (err: AWSError, data: DocDB.Types.CreateDBInstanceResult) => void): Request<DocDB.Types.CreateDBInstanceResult, AWSError>;
   /**
-   * Creates a new DB subnet group. DB subnet groups must contain at least one subnet in at least two Availability Zones in the AWS Region.
+   * Creates a new DB instance.
    */
-  createDBSubnetGroup(params: DocDB.Types.CreateDBSubnetGroupMessage, callback?: (err: AWSError, data: DocDB.Types.CreateDBSubnetGroupResult) => void): Request<DocDB.Types.CreateDBSubnetGroupResult, AWSError>;
+  createDBInstance(params: DocDB.Types.CreateDBInstanceMessage, callback?: (err: AWSError, data: DocDB.Types.CreateDBInstanceResult) => void): Request<DocDB.Types.CreateDBInstanceResult, AWSError>;
   /**
    * Creates a new DB subnet group. DB subnet groups must contain at least one subnet in at least two Availability Zones in the AWS Region.
    */
   createDBSubnetGroup(callback?: (err: AWSError, data: DocDB.Types.CreateDBSubnetGroupResult) => void): Request<DocDB.Types.CreateDBSubnetGroupResult, AWSError>;
   /**
-   * Deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted. 
+   * Creates a new DB subnet group. DB subnet groups must contain at least one subnet in at least two Availability Zones in the AWS Region.
    */
-  deleteDBCluster(params: DocDB.Types.DeleteDBClusterMessage, callback?: (err: AWSError, data: DocDB.Types.DeleteDBClusterResult) => void): Request<DocDB.Types.DeleteDBClusterResult, AWSError>;
+  createDBSubnetGroup(params: DocDB.Types.CreateDBSubnetGroupMessage, callback?: (err: AWSError, data: DocDB.Types.CreateDBSubnetGroupResult) => void): Request<DocDB.Types.CreateDBSubnetGroupResult, AWSError>;
   /**
    * Deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted. 
    */
   deleteDBCluster(callback?: (err: AWSError, data: DocDB.Types.DeleteDBClusterResult) => void): Request<DocDB.Types.DeleteDBClusterResult, AWSError>;
   /**
-   * Deletes a specified DB cluster parameter group. The DB cluster parameter group to be deleted can't be associated with any DB clusters.
+   * Deletes a previously provisioned DB cluster. When you delete a DB cluster, all automated backups for that DB cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified DB cluster are not deleted. 
    */
-  deleteDBClusterParameterGroup(params: DocDB.Types.DeleteDBClusterParameterGroupMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDBCluster(params: DocDB.Types.DeleteDBClusterMessage, callback?: (err: AWSError, data: DocDB.Types.DeleteDBClusterResult) => void): Request<DocDB.Types.DeleteDBClusterResult, AWSError>;
   /**
    * Deletes a specified DB cluster parameter group. The DB cluster parameter group to be deleted can't be associated with any DB clusters.
    */
   deleteDBClusterParameterGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a DB cluster snapshot. If the snapshot is being copied, the copy operation is terminated.  The DB cluster snapshot must be in the available state to be deleted. 
+   * Deletes a specified DB cluster parameter group. The DB cluster parameter group to be deleted can't be associated with any DB clusters.
    */
-  deleteDBClusterSnapshot(params: DocDB.Types.DeleteDBClusterSnapshotMessage, callback?: (err: AWSError, data: DocDB.Types.DeleteDBClusterSnapshotResult) => void): Request<DocDB.Types.DeleteDBClusterSnapshotResult, AWSError>;
+  deleteDBClusterParameterGroup(params: DocDB.Types.DeleteDBClusterParameterGroupMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a DB cluster snapshot. If the snapshot is being copied, the copy operation is terminated.  The DB cluster snapshot must be in the available state to be deleted. 
    */
   deleteDBClusterSnapshot(callback?: (err: AWSError, data: DocDB.Types.DeleteDBClusterSnapshotResult) => void): Request<DocDB.Types.DeleteDBClusterSnapshotResult, AWSError>;
   /**
-   * Deletes a previously provisioned DB instance. 
+   * Deletes a DB cluster snapshot. If the snapshot is being copied, the copy operation is terminated.  The DB cluster snapshot must be in the available state to be deleted. 
    */
-  deleteDBInstance(params: DocDB.Types.DeleteDBInstanceMessage, callback?: (err: AWSError, data: DocDB.Types.DeleteDBInstanceResult) => void): Request<DocDB.Types.DeleteDBInstanceResult, AWSError>;
+  deleteDBClusterSnapshot(params: DocDB.Types.DeleteDBClusterSnapshotMessage, callback?: (err: AWSError, data: DocDB.Types.DeleteDBClusterSnapshotResult) => void): Request<DocDB.Types.DeleteDBClusterSnapshotResult, AWSError>;
   /**
    * Deletes a previously provisioned DB instance. 
    */
   deleteDBInstance(callback?: (err: AWSError, data: DocDB.Types.DeleteDBInstanceResult) => void): Request<DocDB.Types.DeleteDBInstanceResult, AWSError>;
   /**
-   * Deletes a DB subnet group.  The specified database subnet group must not be associated with any DB instances. 
+   * Deletes a previously provisioned DB instance. 
    */
-  deleteDBSubnetGroup(params: DocDB.Types.DeleteDBSubnetGroupMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDBInstance(params: DocDB.Types.DeleteDBInstanceMessage, callback?: (err: AWSError, data: DocDB.Types.DeleteDBInstanceResult) => void): Request<DocDB.Types.DeleteDBInstanceResult, AWSError>;
   /**
    * Deletes a DB subnet group.  The specified database subnet group must not be associated with any DB instances. 
    */
   deleteDBSubnetGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Returns a list of DBClusterParameterGroup descriptions. If a DBClusterParameterGroupName parameter is specified, the list contains only the description of the specified DB cluster parameter group. 
+   * Deletes a DB subnet group.  The specified database subnet group must not be associated with any DB instances. 
    */
-  describeDBClusterParameterGroups(params: DocDB.Types.DescribeDBClusterParameterGroupsMessage, callback?: (err: AWSError, data: DocDB.Types.DBClusterParameterGroupsMessage) => void): Request<DocDB.Types.DBClusterParameterGroupsMessage, AWSError>;
+  deleteDBSubnetGroup(params: DocDB.Types.DeleteDBSubnetGroupMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Returns a list of DBClusterParameterGroup descriptions. If a DBClusterParameterGroupName parameter is specified, the list contains only the description of the specified DB cluster parameter group. 
    */
   describeDBClusterParameterGroups(callback?: (err: AWSError, data: DocDB.Types.DBClusterParameterGroupsMessage) => void): Request<DocDB.Types.DBClusterParameterGroupsMessage, AWSError>;
   /**
-   * Returns the detailed parameter list for a particular DB cluster parameter group.
+   * Returns a list of DBClusterParameterGroup descriptions. If a DBClusterParameterGroupName parameter is specified, the list contains only the description of the specified DB cluster parameter group. 
    */
-  describeDBClusterParameters(params: DocDB.Types.DescribeDBClusterParametersMessage, callback?: (err: AWSError, data: DocDB.Types.DBClusterParameterGroupDetails) => void): Request<DocDB.Types.DBClusterParameterGroupDetails, AWSError>;
+  describeDBClusterParameterGroups(params: DocDB.Types.DescribeDBClusterParameterGroupsMessage, callback?: (err: AWSError, data: DocDB.Types.DBClusterParameterGroupsMessage) => void): Request<DocDB.Types.DBClusterParameterGroupsMessage, AWSError>;
   /**
    * Returns the detailed parameter list for a particular DB cluster parameter group.
    */
   describeDBClusterParameters(callback?: (err: AWSError, data: DocDB.Types.DBClusterParameterGroupDetails) => void): Request<DocDB.Types.DBClusterParameterGroupDetails, AWSError>;
   /**
-   * Returns a list of DB cluster snapshot attribute names and values for a manual DB cluster snapshot. When you share snapshots with other AWS accounts, DescribeDBClusterSnapshotAttributes returns the restore attribute and a list of IDs for the AWS accounts that are authorized to copy or restore the manual DB cluster snapshot. If all is included in the list of values for the restore attribute, then the manual DB cluster snapshot is public and can be copied or restored by all AWS accounts.
+   * Returns the detailed parameter list for a particular DB cluster parameter group.
    */
-  describeDBClusterSnapshotAttributes(params: DocDB.Types.DescribeDBClusterSnapshotAttributesMessage, callback?: (err: AWSError, data: DocDB.Types.DescribeDBClusterSnapshotAttributesResult) => void): Request<DocDB.Types.DescribeDBClusterSnapshotAttributesResult, AWSError>;
+  describeDBClusterParameters(params: DocDB.Types.DescribeDBClusterParametersMessage, callback?: (err: AWSError, data: DocDB.Types.DBClusterParameterGroupDetails) => void): Request<DocDB.Types.DBClusterParameterGroupDetails, AWSError>;
   /**
    * Returns a list of DB cluster snapshot attribute names and values for a manual DB cluster snapshot. When you share snapshots with other AWS accounts, DescribeDBClusterSnapshotAttributes returns the restore attribute and a list of IDs for the AWS accounts that are authorized to copy or restore the manual DB cluster snapshot. If all is included in the list of values for the restore attribute, then the manual DB cluster snapshot is public and can be copied or restored by all AWS accounts.
    */
   describeDBClusterSnapshotAttributes(callback?: (err: AWSError, data: DocDB.Types.DescribeDBClusterSnapshotAttributesResult) => void): Request<DocDB.Types.DescribeDBClusterSnapshotAttributesResult, AWSError>;
   /**
-   * Returns information about DB cluster snapshots. This API operation supports pagination.
+   * Returns a list of DB cluster snapshot attribute names and values for a manual DB cluster snapshot. When you share snapshots with other AWS accounts, DescribeDBClusterSnapshotAttributes returns the restore attribute and a list of IDs for the AWS accounts that are authorized to copy or restore the manual DB cluster snapshot. If all is included in the list of values for the restore attribute, then the manual DB cluster snapshot is public and can be copied or restored by all AWS accounts.
    */
-  describeDBClusterSnapshots(params: DocDB.Types.DescribeDBClusterSnapshotsMessage, callback?: (err: AWSError, data: DocDB.Types.DBClusterSnapshotMessage) => void): Request<DocDB.Types.DBClusterSnapshotMessage, AWSError>;
+  describeDBClusterSnapshotAttributes(params: DocDB.Types.DescribeDBClusterSnapshotAttributesMessage, callback?: (err: AWSError, data: DocDB.Types.DescribeDBClusterSnapshotAttributesResult) => void): Request<DocDB.Types.DescribeDBClusterSnapshotAttributesResult, AWSError>;
   /**
    * Returns information about DB cluster snapshots. This API operation supports pagination.
    */
   describeDBClusterSnapshots(callback?: (err: AWSError, data: DocDB.Types.DBClusterSnapshotMessage) => void): Request<DocDB.Types.DBClusterSnapshotMessage, AWSError>;
   /**
-   * Returns information about provisioned Amazon DocumentDB DB clusters. This API operation supports pagination.
+   * Returns information about DB cluster snapshots. This API operation supports pagination.
    */
-  describeDBClusters(params: DocDB.Types.DescribeDBClustersMessage, callback?: (err: AWSError, data: DocDB.Types.DBClusterMessage) => void): Request<DocDB.Types.DBClusterMessage, AWSError>;
+  describeDBClusterSnapshots(params: DocDB.Types.DescribeDBClusterSnapshotsMessage, callback?: (err: AWSError, data: DocDB.Types.DBClusterSnapshotMessage) => void): Request<DocDB.Types.DBClusterSnapshotMessage, AWSError>;
   /**
    * Returns information about provisioned Amazon DocumentDB DB clusters. This API operation supports pagination.
    */
   describeDBClusters(callback?: (err: AWSError, data: DocDB.Types.DBClusterMessage) => void): Request<DocDB.Types.DBClusterMessage, AWSError>;
   /**
-   * Returns a list of the available DB engines.
+   * Returns information about provisioned Amazon DocumentDB DB clusters. This API operation supports pagination.
    */
-  describeDBEngineVersions(params: DocDB.Types.DescribeDBEngineVersionsMessage, callback?: (err: AWSError, data: DocDB.Types.DBEngineVersionMessage) => void): Request<DocDB.Types.DBEngineVersionMessage, AWSError>;
+  describeDBClusters(params: DocDB.Types.DescribeDBClustersMessage, callback?: (err: AWSError, data: DocDB.Types.DBClusterMessage) => void): Request<DocDB.Types.DBClusterMessage, AWSError>;
   /**
    * Returns a list of the available DB engines.
    */
   describeDBEngineVersions(callback?: (err: AWSError, data: DocDB.Types.DBEngineVersionMessage) => void): Request<DocDB.Types.DBEngineVersionMessage, AWSError>;
   /**
-   * Returns information about provisioned Amazon DocumentDB instances. This API supports pagination.
+   * Returns a list of the available DB engines.
    */
-  describeDBInstances(params: DocDB.Types.DescribeDBInstancesMessage, callback?: (err: AWSError, data: DocDB.Types.DBInstanceMessage) => void): Request<DocDB.Types.DBInstanceMessage, AWSError>;
+  describeDBEngineVersions(params: DocDB.Types.DescribeDBEngineVersionsMessage, callback?: (err: AWSError, data: DocDB.Types.DBEngineVersionMessage) => void): Request<DocDB.Types.DBEngineVersionMessage, AWSError>;
   /**
    * Returns information about provisioned Amazon DocumentDB instances. This API supports pagination.
    */
   describeDBInstances(callback?: (err: AWSError, data: DocDB.Types.DBInstanceMessage) => void): Request<DocDB.Types.DBInstanceMessage, AWSError>;
   /**
-   * Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is specified, the list will contain only the descriptions of the specified DBSubnetGroup.
+   * Returns information about provisioned Amazon DocumentDB instances. This API supports pagination.
    */
-  describeDBSubnetGroups(params: DocDB.Types.DescribeDBSubnetGroupsMessage, callback?: (err: AWSError, data: DocDB.Types.DBSubnetGroupMessage) => void): Request<DocDB.Types.DBSubnetGroupMessage, AWSError>;
+  describeDBInstances(params: DocDB.Types.DescribeDBInstancesMessage, callback?: (err: AWSError, data: DocDB.Types.DBInstanceMessage) => void): Request<DocDB.Types.DBInstanceMessage, AWSError>;
   /**
    * Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is specified, the list will contain only the descriptions of the specified DBSubnetGroup.
    */
   describeDBSubnetGroups(callback?: (err: AWSError, data: DocDB.Types.DBSubnetGroupMessage) => void): Request<DocDB.Types.DBSubnetGroupMessage, AWSError>;
   /**
-   * Returns the default engine and system parameter information for the cluster database engine.
+   * Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is specified, the list will contain only the descriptions of the specified DBSubnetGroup.
    */
-  describeEngineDefaultClusterParameters(params: DocDB.Types.DescribeEngineDefaultClusterParametersMessage, callback?: (err: AWSError, data: DocDB.Types.DescribeEngineDefaultClusterParametersResult) => void): Request<DocDB.Types.DescribeEngineDefaultClusterParametersResult, AWSError>;
+  describeDBSubnetGroups(params: DocDB.Types.DescribeDBSubnetGroupsMessage, callback?: (err: AWSError, data: DocDB.Types.DBSubnetGroupMessage) => void): Request<DocDB.Types.DBSubnetGroupMessage, AWSError>;
   /**
    * Returns the default engine and system parameter information for the cluster database engine.
    */
   describeEngineDefaultClusterParameters(callback?: (err: AWSError, data: DocDB.Types.DescribeEngineDefaultClusterParametersResult) => void): Request<DocDB.Types.DescribeEngineDefaultClusterParametersResult, AWSError>;
   /**
-   * Displays a list of categories for all event source types, or, if specified, for a specified source type. 
+   * Returns the default engine and system parameter information for the cluster database engine.
    */
-  describeEventCategories(params: DocDB.Types.DescribeEventCategoriesMessage, callback?: (err: AWSError, data: DocDB.Types.EventCategoriesMessage) => void): Request<DocDB.Types.EventCategoriesMessage, AWSError>;
+  describeEngineDefaultClusterParameters(params: DocDB.Types.DescribeEngineDefaultClusterParametersMessage, callback?: (err: AWSError, data: DocDB.Types.DescribeEngineDefaultClusterParametersResult) => void): Request<DocDB.Types.DescribeEngineDefaultClusterParametersResult, AWSError>;
   /**
    * Displays a list of categories for all event source types, or, if specified, for a specified source type. 
    */
   describeEventCategories(callback?: (err: AWSError, data: DocDB.Types.EventCategoriesMessage) => void): Request<DocDB.Types.EventCategoriesMessage, AWSError>;
   /**
-   * Returns events related to DB instances, DB security groups, DB snapshots, and DB parameter groups for the past 14 days. You can obtain events specific to a particular DB instance, DB security group, DB snapshot, or DB parameter group by providing the name as a parameter. By default, the events of the past hour are returned.
+   * Displays a list of categories for all event source types, or, if specified, for a specified source type. 
    */
-  describeEvents(params: DocDB.Types.DescribeEventsMessage, callback?: (err: AWSError, data: DocDB.Types.EventsMessage) => void): Request<DocDB.Types.EventsMessage, AWSError>;
+  describeEventCategories(params: DocDB.Types.DescribeEventCategoriesMessage, callback?: (err: AWSError, data: DocDB.Types.EventCategoriesMessage) => void): Request<DocDB.Types.EventCategoriesMessage, AWSError>;
   /**
    * Returns events related to DB instances, DB security groups, DB snapshots, and DB parameter groups for the past 14 days. You can obtain events specific to a particular DB instance, DB security group, DB snapshot, or DB parameter group by providing the name as a parameter. By default, the events of the past hour are returned.
    */
   describeEvents(callback?: (err: AWSError, data: DocDB.Types.EventsMessage) => void): Request<DocDB.Types.EventsMessage, AWSError>;
   /**
-   * Returns a list of orderable DB instance options for the specified engine.
+   * Returns events related to DB instances, DB security groups, DB snapshots, and DB parameter groups for the past 14 days. You can obtain events specific to a particular DB instance, DB security group, DB snapshot, or DB parameter group by providing the name as a parameter. By default, the events of the past hour are returned.
    */
-  describeOrderableDBInstanceOptions(params: DocDB.Types.DescribeOrderableDBInstanceOptionsMessage, callback?: (err: AWSError, data: DocDB.Types.OrderableDBInstanceOptionsMessage) => void): Request<DocDB.Types.OrderableDBInstanceOptionsMessage, AWSError>;
+  describeEvents(params: DocDB.Types.DescribeEventsMessage, callback?: (err: AWSError, data: DocDB.Types.EventsMessage) => void): Request<DocDB.Types.EventsMessage, AWSError>;
   /**
    * Returns a list of orderable DB instance options for the specified engine.
    */
   describeOrderableDBInstanceOptions(callback?: (err: AWSError, data: DocDB.Types.OrderableDBInstanceOptionsMessage) => void): Request<DocDB.Types.OrderableDBInstanceOptionsMessage, AWSError>;
   /**
-   * Returns a list of resources (for example, DB instances) that have at least one pending maintenance action.
+   * Returns a list of orderable DB instance options for the specified engine.
    */
-  describePendingMaintenanceActions(params: DocDB.Types.DescribePendingMaintenanceActionsMessage, callback?: (err: AWSError, data: DocDB.Types.PendingMaintenanceActionsMessage) => void): Request<DocDB.Types.PendingMaintenanceActionsMessage, AWSError>;
+  describeOrderableDBInstanceOptions(params: DocDB.Types.DescribeOrderableDBInstanceOptionsMessage, callback?: (err: AWSError, data: DocDB.Types.OrderableDBInstanceOptionsMessage) => void): Request<DocDB.Types.OrderableDBInstanceOptionsMessage, AWSError>;
   /**
    * Returns a list of resources (for example, DB instances) that have at least one pending maintenance action.
    */
   describePendingMaintenanceActions(callback?: (err: AWSError, data: DocDB.Types.PendingMaintenanceActionsMessage) => void): Request<DocDB.Types.PendingMaintenanceActionsMessage, AWSError>;
   /**
-   * Forces a failover for a DB cluster. A failover for a DB cluster promotes one of the Amazon DocumentDB replicas (read-only instances) in the DB cluster to be the primary instance (the cluster writer). If the primary instance fails, Amazon DocumentDB automatically fails over to an Amazon DocumentDB replica, if one exists. You can force a failover when you want to simulate a failure of a primary instance for testing.
+   * Returns a list of resources (for example, DB instances) that have at least one pending maintenance action.
    */
-  failoverDBCluster(params: DocDB.Types.FailoverDBClusterMessage, callback?: (err: AWSError, data: DocDB.Types.FailoverDBClusterResult) => void): Request<DocDB.Types.FailoverDBClusterResult, AWSError>;
+  describePendingMaintenanceActions(params: DocDB.Types.DescribePendingMaintenanceActionsMessage, callback?: (err: AWSError, data: DocDB.Types.PendingMaintenanceActionsMessage) => void): Request<DocDB.Types.PendingMaintenanceActionsMessage, AWSError>;
   /**
    * Forces a failover for a DB cluster. A failover for a DB cluster promotes one of the Amazon DocumentDB replicas (read-only instances) in the DB cluster to be the primary instance (the cluster writer). If the primary instance fails, Amazon DocumentDB automatically fails over to an Amazon DocumentDB replica, if one exists. You can force a failover when you want to simulate a failure of a primary instance for testing.
    */
   failoverDBCluster(callback?: (err: AWSError, data: DocDB.Types.FailoverDBClusterResult) => void): Request<DocDB.Types.FailoverDBClusterResult, AWSError>;
   /**
-   * Lists all tags on an Amazon DocumentDB resource.
+   * Forces a failover for a DB cluster. A failover for a DB cluster promotes one of the Amazon DocumentDB replicas (read-only instances) in the DB cluster to be the primary instance (the cluster writer). If the primary instance fails, Amazon DocumentDB automatically fails over to an Amazon DocumentDB replica, if one exists. You can force a failover when you want to simulate a failure of a primary instance for testing.
    */
-  listTagsForResource(params: DocDB.Types.ListTagsForResourceMessage, callback?: (err: AWSError, data: DocDB.Types.TagListMessage) => void): Request<DocDB.Types.TagListMessage, AWSError>;
+  failoverDBCluster(params: DocDB.Types.FailoverDBClusterMessage, callback?: (err: AWSError, data: DocDB.Types.FailoverDBClusterResult) => void): Request<DocDB.Types.FailoverDBClusterResult, AWSError>;
   /**
    * Lists all tags on an Amazon DocumentDB resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: DocDB.Types.TagListMessage) => void): Request<DocDB.Types.TagListMessage, AWSError>;
   /**
-   * Modifies a setting for an Amazon DocumentDB DB cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. 
+   * Lists all tags on an Amazon DocumentDB resource.
    */
-  modifyDBCluster(params: DocDB.Types.ModifyDBClusterMessage, callback?: (err: AWSError, data: DocDB.Types.ModifyDBClusterResult) => void): Request<DocDB.Types.ModifyDBClusterResult, AWSError>;
+  listTagsForResource(params: DocDB.Types.ListTagsForResourceMessage, callback?: (err: AWSError, data: DocDB.Types.TagListMessage) => void): Request<DocDB.Types.TagListMessage, AWSError>;
   /**
    * Modifies a setting for an Amazon DocumentDB DB cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. 
    */
   modifyDBCluster(callback?: (err: AWSError, data: DocDB.Types.ModifyDBClusterResult) => void): Request<DocDB.Types.ModifyDBClusterResult, AWSError>;
   /**
-   *  Modifies the parameters of a DB cluster parameter group. To modify more than one parameter, submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request.   Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot or maintenance window before the change can take effect.   After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon DocumentDB to fully complete the create action before the parameter group is used as the default for a new DB cluster. This step is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. 
+   * Modifies a setting for an Amazon DocumentDB DB cluster. You can change one or more database configuration parameters by specifying these parameters and the new values in the request. 
    */
-  modifyDBClusterParameterGroup(params: DocDB.Types.ModifyDBClusterParameterGroupMessage, callback?: (err: AWSError, data: DocDB.Types.DBClusterParameterGroupNameMessage) => void): Request<DocDB.Types.DBClusterParameterGroupNameMessage, AWSError>;
+  modifyDBCluster(params: DocDB.Types.ModifyDBClusterMessage, callback?: (err: AWSError, data: DocDB.Types.ModifyDBClusterResult) => void): Request<DocDB.Types.ModifyDBClusterResult, AWSError>;
   /**
    *  Modifies the parameters of a DB cluster parameter group. To modify more than one parameter, submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request.   Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot or maintenance window before the change can take effect.   After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon DocumentDB to fully complete the create action before the parameter group is used as the default for a new DB cluster. This step is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. 
    */
   modifyDBClusterParameterGroup(callback?: (err: AWSError, data: DocDB.Types.DBClusterParameterGroupNameMessage) => void): Request<DocDB.Types.DBClusterParameterGroupNameMessage, AWSError>;
   /**
-   * Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot. To share a manual DB cluster snapshot with other AWS accounts, specify restore as the AttributeName, and use the ValuesToAdd parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB cluster snapshot. Use the value all to make the manual DB cluster snapshot public, which means that it can be copied or restored by all AWS accounts. Do not add the all value for any manual DB cluster snapshots that contain private information that you don't want available to all AWS accounts. If a manual DB cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the ValuesToAdd parameter. You can't use all as a value for that parameter in this case.
+   *  Modifies the parameters of a DB cluster parameter group. To modify more than one parameter, submit a list of the following: ParameterName, ParameterValue, and ApplyMethod. A maximum of 20 parameters can be modified in a single request.   Changes to dynamic parameters are applied immediately. Changes to static parameters require a reboot or maintenance window before the change can take effect.   After you create a DB cluster parameter group, you should wait at least 5 minutes before creating your first DB cluster that uses that DB cluster parameter group as the default parameter group. This allows Amazon DocumentDB to fully complete the create action before the parameter group is used as the default for a new DB cluster. This step is especially important for parameters that are critical when creating the default database for a DB cluster, such as the character set for the default database defined by the character_set_database parameter. 
    */
-  modifyDBClusterSnapshotAttribute(params: DocDB.Types.ModifyDBClusterSnapshotAttributeMessage, callback?: (err: AWSError, data: DocDB.Types.ModifyDBClusterSnapshotAttributeResult) => void): Request<DocDB.Types.ModifyDBClusterSnapshotAttributeResult, AWSError>;
+  modifyDBClusterParameterGroup(params: DocDB.Types.ModifyDBClusterParameterGroupMessage, callback?: (err: AWSError, data: DocDB.Types.DBClusterParameterGroupNameMessage) => void): Request<DocDB.Types.DBClusterParameterGroupNameMessage, AWSError>;
   /**
    * Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot. To share a manual DB cluster snapshot with other AWS accounts, specify restore as the AttributeName, and use the ValuesToAdd parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB cluster snapshot. Use the value all to make the manual DB cluster snapshot public, which means that it can be copied or restored by all AWS accounts. Do not add the all value for any manual DB cluster snapshots that contain private information that you don't want available to all AWS accounts. If a manual DB cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the ValuesToAdd parameter. You can't use all as a value for that parameter in this case.
    */
   modifyDBClusterSnapshotAttribute(callback?: (err: AWSError, data: DocDB.Types.ModifyDBClusterSnapshotAttributeResult) => void): Request<DocDB.Types.ModifyDBClusterSnapshotAttributeResult, AWSError>;
   /**
-   * Modifies settings for a DB instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request.
+   * Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot. To share a manual DB cluster snapshot with other AWS accounts, specify restore as the AttributeName, and use the ValuesToAdd parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual DB cluster snapshot. Use the value all to make the manual DB cluster snapshot public, which means that it can be copied or restored by all AWS accounts. Do not add the all value for any manual DB cluster snapshots that contain private information that you don't want available to all AWS accounts. If a manual DB cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the ValuesToAdd parameter. You can't use all as a value for that parameter in this case.
    */
-  modifyDBInstance(params: DocDB.Types.ModifyDBInstanceMessage, callback?: (err: AWSError, data: DocDB.Types.ModifyDBInstanceResult) => void): Request<DocDB.Types.ModifyDBInstanceResult, AWSError>;
+  modifyDBClusterSnapshotAttribute(params: DocDB.Types.ModifyDBClusterSnapshotAttributeMessage, callback?: (err: AWSError, data: DocDB.Types.ModifyDBClusterSnapshotAttributeResult) => void): Request<DocDB.Types.ModifyDBClusterSnapshotAttributeResult, AWSError>;
   /**
    * Modifies settings for a DB instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request.
    */
   modifyDBInstance(callback?: (err: AWSError, data: DocDB.Types.ModifyDBInstanceResult) => void): Request<DocDB.Types.ModifyDBInstanceResult, AWSError>;
   /**
-   * Modifies an existing DB subnet group. DB subnet groups must contain at least one subnet in at least two Availability Zones in the AWS Region.
+   * Modifies settings for a DB instance. You can change one or more database configuration parameters by specifying these parameters and the new values in the request.
    */
-  modifyDBSubnetGroup(params: DocDB.Types.ModifyDBSubnetGroupMessage, callback?: (err: AWSError, data: DocDB.Types.ModifyDBSubnetGroupResult) => void): Request<DocDB.Types.ModifyDBSubnetGroupResult, AWSError>;
+  modifyDBInstance(params: DocDB.Types.ModifyDBInstanceMessage, callback?: (err: AWSError, data: DocDB.Types.ModifyDBInstanceResult) => void): Request<DocDB.Types.ModifyDBInstanceResult, AWSError>;
   /**
    * Modifies an existing DB subnet group. DB subnet groups must contain at least one subnet in at least two Availability Zones in the AWS Region.
    */
   modifyDBSubnetGroup(callback?: (err: AWSError, data: DocDB.Types.ModifyDBSubnetGroupResult) => void): Request<DocDB.Types.ModifyDBSubnetGroupResult, AWSError>;
   /**
-   * You might need to reboot your DB instance, usually for maintenance reasons. For example, if you make certain changes, or if you change the DB cluster parameter group that is associated with the DB instance, you must reboot the instance for the changes to take effect.  Rebooting a DB instance restarts the database engine service. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to rebooting. 
+   * Modifies an existing DB subnet group. DB subnet groups must contain at least one subnet in at least two Availability Zones in the AWS Region.
    */
-  rebootDBInstance(params: DocDB.Types.RebootDBInstanceMessage, callback?: (err: AWSError, data: DocDB.Types.RebootDBInstanceResult) => void): Request<DocDB.Types.RebootDBInstanceResult, AWSError>;
+  modifyDBSubnetGroup(params: DocDB.Types.ModifyDBSubnetGroupMessage, callback?: (err: AWSError, data: DocDB.Types.ModifyDBSubnetGroupResult) => void): Request<DocDB.Types.ModifyDBSubnetGroupResult, AWSError>;
   /**
    * You might need to reboot your DB instance, usually for maintenance reasons. For example, if you make certain changes, or if you change the DB cluster parameter group that is associated with the DB instance, you must reboot the instance for the changes to take effect.  Rebooting a DB instance restarts the database engine service. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to rebooting. 
    */
   rebootDBInstance(callback?: (err: AWSError, data: DocDB.Types.RebootDBInstanceResult) => void): Request<DocDB.Types.RebootDBInstanceResult, AWSError>;
   /**
-   * Removes metadata tags from an Amazon DocumentDB resource.
+   * You might need to reboot your DB instance, usually for maintenance reasons. For example, if you make certain changes, or if you change the DB cluster parameter group that is associated with the DB instance, you must reboot the instance for the changes to take effect.  Rebooting a DB instance restarts the database engine service. Rebooting a DB instance results in a momentary outage, during which the DB instance status is set to rebooting. 
    */
-  removeTagsFromResource(params: DocDB.Types.RemoveTagsFromResourceMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  rebootDBInstance(params: DocDB.Types.RebootDBInstanceMessage, callback?: (err: AWSError, data: DocDB.Types.RebootDBInstanceResult) => void): Request<DocDB.Types.RebootDBInstanceResult, AWSError>;
   /**
    * Removes metadata tags from an Amazon DocumentDB resource.
    */
   removeTagsFromResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  Modifies the parameters of a DB cluster parameter group to the default value. To reset specific parameters, submit a list of the following: ParameterName and ApplyMethod. To reset the entire DB cluster parameter group, specify the DBClusterParameterGroupName and ResetAllParameters parameters.   When you reset the entire group, dynamic parameters are updated immediately and static parameters are set to pending-reboot to take effect on the next DB instance reboot.
+   * Removes metadata tags from an Amazon DocumentDB resource.
    */
-  resetDBClusterParameterGroup(params: DocDB.Types.ResetDBClusterParameterGroupMessage, callback?: (err: AWSError, data: DocDB.Types.DBClusterParameterGroupNameMessage) => void): Request<DocDB.Types.DBClusterParameterGroupNameMessage, AWSError>;
+  removeTagsFromResource(params: DocDB.Types.RemoveTagsFromResourceMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    *  Modifies the parameters of a DB cluster parameter group to the default value. To reset specific parameters, submit a list of the following: ParameterName and ApplyMethod. To reset the entire DB cluster parameter group, specify the DBClusterParameterGroupName and ResetAllParameters parameters.   When you reset the entire group, dynamic parameters are updated immediately and static parameters are set to pending-reboot to take effect on the next DB instance reboot.
    */
   resetDBClusterParameterGroup(callback?: (err: AWSError, data: DocDB.Types.DBClusterParameterGroupNameMessage) => void): Request<DocDB.Types.DBClusterParameterGroupNameMessage, AWSError>;
   /**
-   * Creates a new DB cluster from a DB snapshot or DB cluster snapshot. If a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group. If a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.
+   *  Modifies the parameters of a DB cluster parameter group to the default value. To reset specific parameters, submit a list of the following: ParameterName and ApplyMethod. To reset the entire DB cluster parameter group, specify the DBClusterParameterGroupName and ResetAllParameters parameters.   When you reset the entire group, dynamic parameters are updated immediately and static parameters are set to pending-reboot to take effect on the next DB instance reboot.
    */
-  restoreDBClusterFromSnapshot(params: DocDB.Types.RestoreDBClusterFromSnapshotMessage, callback?: (err: AWSError, data: DocDB.Types.RestoreDBClusterFromSnapshotResult) => void): Request<DocDB.Types.RestoreDBClusterFromSnapshotResult, AWSError>;
+  resetDBClusterParameterGroup(params: DocDB.Types.ResetDBClusterParameterGroupMessage, callback?: (err: AWSError, data: DocDB.Types.DBClusterParameterGroupNameMessage) => void): Request<DocDB.Types.DBClusterParameterGroupNameMessage, AWSError>;
   /**
    * Creates a new DB cluster from a DB snapshot or DB cluster snapshot. If a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group. If a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.
    */
   restoreDBClusterFromSnapshot(callback?: (err: AWSError, data: DocDB.Types.RestoreDBClusterFromSnapshotResult) => void): Request<DocDB.Types.RestoreDBClusterFromSnapshotResult, AWSError>;
   /**
-   * Restores a DB cluster to an arbitrary point in time. Users can restore to any point in time before LatestRestorableTime for up to BackupRetentionPeriod days. The target DB cluster is created from the source DB cluster with the same configuration as the original DB cluster, except that the new DB cluster is created with the default DB security group. 
+   * Creates a new DB cluster from a DB snapshot or DB cluster snapshot. If a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group. If a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.
    */
-  restoreDBClusterToPointInTime(params: DocDB.Types.RestoreDBClusterToPointInTimeMessage, callback?: (err: AWSError, data: DocDB.Types.RestoreDBClusterToPointInTimeResult) => void): Request<DocDB.Types.RestoreDBClusterToPointInTimeResult, AWSError>;
+  restoreDBClusterFromSnapshot(params: DocDB.Types.RestoreDBClusterFromSnapshotMessage, callback?: (err: AWSError, data: DocDB.Types.RestoreDBClusterFromSnapshotResult) => void): Request<DocDB.Types.RestoreDBClusterFromSnapshotResult, AWSError>;
   /**
    * Restores a DB cluster to an arbitrary point in time. Users can restore to any point in time before LatestRestorableTime for up to BackupRetentionPeriod days. The target DB cluster is created from the source DB cluster with the same configuration as the original DB cluster, except that the new DB cluster is created with the default DB security group. 
    */
   restoreDBClusterToPointInTime(callback?: (err: AWSError, data: DocDB.Types.RestoreDBClusterToPointInTimeResult) => void): Request<DocDB.Types.RestoreDBClusterToPointInTimeResult, AWSError>;
+  /**
+   * Restores a DB cluster to an arbitrary point in time. Users can restore to any point in time before LatestRestorableTime for up to BackupRetentionPeriod days. The target DB cluster is created from the source DB cluster with the same configuration as the original DB cluster, except that the new DB cluster is created with the default DB security group. 
+   */
+  restoreDBClusterToPointInTime(params: DocDB.Types.RestoreDBClusterToPointInTimeMessage, callback?: (err: AWSError, data: DocDB.Types.RestoreDBClusterToPointInTimeResult) => void): Request<DocDB.Types.RestoreDBClusterToPointInTimeResult, AWSError>;
   /**
    * Waits for the dBInstanceAvailable state by periodically calling the underlying DocDB.describeDBInstancesoperation every 30 seconds (at most 60 times).
    */

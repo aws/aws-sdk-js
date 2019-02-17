@@ -14,11 +14,11 @@ declare class RDSDataService extends Service {
   /**
    * Executes any SQL statement on the target database synchronously
    */
-  executeSql(params: RDSDataService.Types.ExecuteSqlRequest, callback?: (err: AWSError, data: RDSDataService.Types.ExecuteSqlResponse) => void): Request<RDSDataService.Types.ExecuteSqlResponse, AWSError>;
+  executeSql(callback?: (err: AWSError, data: RDSDataService.Types.ExecuteSqlResponse) => void): Request<RDSDataService.Types.ExecuteSqlResponse, AWSError>;
   /**
    * Executes any SQL statement on the target database synchronously
    */
-  executeSql(callback?: (err: AWSError, data: RDSDataService.Types.ExecuteSqlResponse) => void): Request<RDSDataService.Types.ExecuteSqlResponse, AWSError>;
+  executeSql(params: RDSDataService.Types.ExecuteSqlRequest, callback?: (err: AWSError, data: RDSDataService.Types.ExecuteSqlResponse) => void): Request<RDSDataService.Types.ExecuteSqlResponse, AWSError>;
 }
 declare namespace RDSDataService {
   export type Boolean = boolean;

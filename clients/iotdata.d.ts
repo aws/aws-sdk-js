@@ -14,35 +14,35 @@ declare class IotData extends Service {
   /**
    * Deletes the thing shadow for the specified thing. For more information, see DeleteThingShadow in the AWS IoT Developer Guide.
    */
-  deleteThingShadow(params: IotData.Types.DeleteThingShadowRequest, callback?: (err: AWSError, data: IotData.Types.DeleteThingShadowResponse) => void): Request<IotData.Types.DeleteThingShadowResponse, AWSError>;
+  deleteThingShadow(callback?: (err: AWSError, data: IotData.Types.DeleteThingShadowResponse) => void): Request<IotData.Types.DeleteThingShadowResponse, AWSError>;
   /**
    * Deletes the thing shadow for the specified thing. For more information, see DeleteThingShadow in the AWS IoT Developer Guide.
    */
-  deleteThingShadow(callback?: (err: AWSError, data: IotData.Types.DeleteThingShadowResponse) => void): Request<IotData.Types.DeleteThingShadowResponse, AWSError>;
-  /**
-   * Gets the thing shadow for the specified thing. For more information, see GetThingShadow in the AWS IoT Developer Guide.
-   */
-  getThingShadow(params: IotData.Types.GetThingShadowRequest, callback?: (err: AWSError, data: IotData.Types.GetThingShadowResponse) => void): Request<IotData.Types.GetThingShadowResponse, AWSError>;
+  deleteThingShadow(params: IotData.Types.DeleteThingShadowRequest, callback?: (err: AWSError, data: IotData.Types.DeleteThingShadowResponse) => void): Request<IotData.Types.DeleteThingShadowResponse, AWSError>;
   /**
    * Gets the thing shadow for the specified thing. For more information, see GetThingShadow in the AWS IoT Developer Guide.
    */
   getThingShadow(callback?: (err: AWSError, data: IotData.Types.GetThingShadowResponse) => void): Request<IotData.Types.GetThingShadowResponse, AWSError>;
   /**
-   * Publishes state information. For more information, see HTTP Protocol in the AWS IoT Developer Guide.
+   * Gets the thing shadow for the specified thing. For more information, see GetThingShadow in the AWS IoT Developer Guide.
    */
-  publish(params: IotData.Types.PublishRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  getThingShadow(params: IotData.Types.GetThingShadowRequest, callback?: (err: AWSError, data: IotData.Types.GetThingShadowResponse) => void): Request<IotData.Types.GetThingShadowResponse, AWSError>;
   /**
    * Publishes state information. For more information, see HTTP Protocol in the AWS IoT Developer Guide.
    */
   publish(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the thing shadow for the specified thing. For more information, see UpdateThingShadow in the AWS IoT Developer Guide.
+   * Publishes state information. For more information, see HTTP Protocol in the AWS IoT Developer Guide.
    */
-  updateThingShadow(params: IotData.Types.UpdateThingShadowRequest, callback?: (err: AWSError, data: IotData.Types.UpdateThingShadowResponse) => void): Request<IotData.Types.UpdateThingShadowResponse, AWSError>;
+  publish(params: IotData.Types.PublishRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates the thing shadow for the specified thing. For more information, see UpdateThingShadow in the AWS IoT Developer Guide.
    */
   updateThingShadow(callback?: (err: AWSError, data: IotData.Types.UpdateThingShadowResponse) => void): Request<IotData.Types.UpdateThingShadowResponse, AWSError>;
+  /**
+   * Updates the thing shadow for the specified thing. For more information, see UpdateThingShadow in the AWS IoT Developer Guide.
+   */
+  updateThingShadow(params: IotData.Types.UpdateThingShadowRequest, callback?: (err: AWSError, data: IotData.Types.UpdateThingShadowResponse) => void): Request<IotData.Types.UpdateThingShadowResponse, AWSError>;
 }
 declare namespace IotData {
   export interface DeleteThingShadowRequest {

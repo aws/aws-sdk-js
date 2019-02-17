@@ -14,99 +14,99 @@ declare class MediaPackage extends Service {
   /**
    * Creates a new Channel.
    */
-  createChannel(params: MediaPackage.Types.CreateChannelRequest, callback?: (err: AWSError, data: MediaPackage.Types.CreateChannelResponse) => void): Request<MediaPackage.Types.CreateChannelResponse, AWSError>;
+  createChannel(callback?: (err: AWSError, data: MediaPackage.Types.CreateChannelResponse) => void): Request<MediaPackage.Types.CreateChannelResponse, AWSError>;
   /**
    * Creates a new Channel.
    */
-  createChannel(callback?: (err: AWSError, data: MediaPackage.Types.CreateChannelResponse) => void): Request<MediaPackage.Types.CreateChannelResponse, AWSError>;
-  /**
-   * Creates a new OriginEndpoint record.
-   */
-  createOriginEndpoint(params: MediaPackage.Types.CreateOriginEndpointRequest, callback?: (err: AWSError, data: MediaPackage.Types.CreateOriginEndpointResponse) => void): Request<MediaPackage.Types.CreateOriginEndpointResponse, AWSError>;
+  createChannel(params: MediaPackage.Types.CreateChannelRequest, callback?: (err: AWSError, data: MediaPackage.Types.CreateChannelResponse) => void): Request<MediaPackage.Types.CreateChannelResponse, AWSError>;
   /**
    * Creates a new OriginEndpoint record.
    */
   createOriginEndpoint(callback?: (err: AWSError, data: MediaPackage.Types.CreateOriginEndpointResponse) => void): Request<MediaPackage.Types.CreateOriginEndpointResponse, AWSError>;
   /**
-   * Deletes an existing Channel.
+   * Creates a new OriginEndpoint record.
    */
-  deleteChannel(params: MediaPackage.Types.DeleteChannelRequest, callback?: (err: AWSError, data: MediaPackage.Types.DeleteChannelResponse) => void): Request<MediaPackage.Types.DeleteChannelResponse, AWSError>;
+  createOriginEndpoint(params: MediaPackage.Types.CreateOriginEndpointRequest, callback?: (err: AWSError, data: MediaPackage.Types.CreateOriginEndpointResponse) => void): Request<MediaPackage.Types.CreateOriginEndpointResponse, AWSError>;
   /**
    * Deletes an existing Channel.
    */
   deleteChannel(callback?: (err: AWSError, data: MediaPackage.Types.DeleteChannelResponse) => void): Request<MediaPackage.Types.DeleteChannelResponse, AWSError>;
   /**
-   * Deletes an existing OriginEndpoint.
+   * Deletes an existing Channel.
    */
-  deleteOriginEndpoint(params: MediaPackage.Types.DeleteOriginEndpointRequest, callback?: (err: AWSError, data: MediaPackage.Types.DeleteOriginEndpointResponse) => void): Request<MediaPackage.Types.DeleteOriginEndpointResponse, AWSError>;
+  deleteChannel(params: MediaPackage.Types.DeleteChannelRequest, callback?: (err: AWSError, data: MediaPackage.Types.DeleteChannelResponse) => void): Request<MediaPackage.Types.DeleteChannelResponse, AWSError>;
   /**
    * Deletes an existing OriginEndpoint.
    */
   deleteOriginEndpoint(callback?: (err: AWSError, data: MediaPackage.Types.DeleteOriginEndpointResponse) => void): Request<MediaPackage.Types.DeleteOriginEndpointResponse, AWSError>;
   /**
-   * Gets details about a Channel.
+   * Deletes an existing OriginEndpoint.
    */
-  describeChannel(params: MediaPackage.Types.DescribeChannelRequest, callback?: (err: AWSError, data: MediaPackage.Types.DescribeChannelResponse) => void): Request<MediaPackage.Types.DescribeChannelResponse, AWSError>;
+  deleteOriginEndpoint(params: MediaPackage.Types.DeleteOriginEndpointRequest, callback?: (err: AWSError, data: MediaPackage.Types.DeleteOriginEndpointResponse) => void): Request<MediaPackage.Types.DeleteOriginEndpointResponse, AWSError>;
   /**
    * Gets details about a Channel.
    */
   describeChannel(callback?: (err: AWSError, data: MediaPackage.Types.DescribeChannelResponse) => void): Request<MediaPackage.Types.DescribeChannelResponse, AWSError>;
   /**
-   * Gets details about an existing OriginEndpoint.
+   * Gets details about a Channel.
    */
-  describeOriginEndpoint(params: MediaPackage.Types.DescribeOriginEndpointRequest, callback?: (err: AWSError, data: MediaPackage.Types.DescribeOriginEndpointResponse) => void): Request<MediaPackage.Types.DescribeOriginEndpointResponse, AWSError>;
+  describeChannel(params: MediaPackage.Types.DescribeChannelRequest, callback?: (err: AWSError, data: MediaPackage.Types.DescribeChannelResponse) => void): Request<MediaPackage.Types.DescribeChannelResponse, AWSError>;
   /**
    * Gets details about an existing OriginEndpoint.
    */
   describeOriginEndpoint(callback?: (err: AWSError, data: MediaPackage.Types.DescribeOriginEndpointResponse) => void): Request<MediaPackage.Types.DescribeOriginEndpointResponse, AWSError>;
   /**
-   * Returns a collection of Channels.
+   * Gets details about an existing OriginEndpoint.
    */
-  listChannels(params: MediaPackage.Types.ListChannelsRequest, callback?: (err: AWSError, data: MediaPackage.Types.ListChannelsResponse) => void): Request<MediaPackage.Types.ListChannelsResponse, AWSError>;
+  describeOriginEndpoint(params: MediaPackage.Types.DescribeOriginEndpointRequest, callback?: (err: AWSError, data: MediaPackage.Types.DescribeOriginEndpointResponse) => void): Request<MediaPackage.Types.DescribeOriginEndpointResponse, AWSError>;
   /**
    * Returns a collection of Channels.
    */
   listChannels(callback?: (err: AWSError, data: MediaPackage.Types.ListChannelsResponse) => void): Request<MediaPackage.Types.ListChannelsResponse, AWSError>;
   /**
-   * Returns a collection of OriginEndpoint records.
+   * Returns a collection of Channels.
    */
-  listOriginEndpoints(params: MediaPackage.Types.ListOriginEndpointsRequest, callback?: (err: AWSError, data: MediaPackage.Types.ListOriginEndpointsResponse) => void): Request<MediaPackage.Types.ListOriginEndpointsResponse, AWSError>;
+  listChannels(params: MediaPackage.Types.ListChannelsRequest, callback?: (err: AWSError, data: MediaPackage.Types.ListChannelsResponse) => void): Request<MediaPackage.Types.ListChannelsResponse, AWSError>;
   /**
    * Returns a collection of OriginEndpoint records.
    */
   listOriginEndpoints(callback?: (err: AWSError, data: MediaPackage.Types.ListOriginEndpointsResponse) => void): Request<MediaPackage.Types.ListOriginEndpointsResponse, AWSError>;
   /**
-   * Changes the Channel's first IngestEndpoint's username and password. WARNING - This API is deprecated. Please use RotateIngestEndpointCredentials instead
+   * Returns a collection of OriginEndpoint records.
    */
-  rotateChannelCredentials(params: MediaPackage.Types.RotateChannelCredentialsRequest, callback?: (err: AWSError, data: MediaPackage.Types.RotateChannelCredentialsResponse) => void): Request<MediaPackage.Types.RotateChannelCredentialsResponse, AWSError>;
+  listOriginEndpoints(params: MediaPackage.Types.ListOriginEndpointsRequest, callback?: (err: AWSError, data: MediaPackage.Types.ListOriginEndpointsResponse) => void): Request<MediaPackage.Types.ListOriginEndpointsResponse, AWSError>;
   /**
    * Changes the Channel's first IngestEndpoint's username and password. WARNING - This API is deprecated. Please use RotateIngestEndpointCredentials instead
    */
   rotateChannelCredentials(callback?: (err: AWSError, data: MediaPackage.Types.RotateChannelCredentialsResponse) => void): Request<MediaPackage.Types.RotateChannelCredentialsResponse, AWSError>;
   /**
-   * Rotate the IngestEndpoint's username and password, as specified by the IngestEndpoint's id.
+   * Changes the Channel's first IngestEndpoint's username and password. WARNING - This API is deprecated. Please use RotateIngestEndpointCredentials instead
    */
-  rotateIngestEndpointCredentials(params: MediaPackage.Types.RotateIngestEndpointCredentialsRequest, callback?: (err: AWSError, data: MediaPackage.Types.RotateIngestEndpointCredentialsResponse) => void): Request<MediaPackage.Types.RotateIngestEndpointCredentialsResponse, AWSError>;
+  rotateChannelCredentials(params: MediaPackage.Types.RotateChannelCredentialsRequest, callback?: (err: AWSError, data: MediaPackage.Types.RotateChannelCredentialsResponse) => void): Request<MediaPackage.Types.RotateChannelCredentialsResponse, AWSError>;
   /**
    * Rotate the IngestEndpoint's username and password, as specified by the IngestEndpoint's id.
    */
   rotateIngestEndpointCredentials(callback?: (err: AWSError, data: MediaPackage.Types.RotateIngestEndpointCredentialsResponse) => void): Request<MediaPackage.Types.RotateIngestEndpointCredentialsResponse, AWSError>;
   /**
-   * Updates an existing Channel.
+   * Rotate the IngestEndpoint's username and password, as specified by the IngestEndpoint's id.
    */
-  updateChannel(params: MediaPackage.Types.UpdateChannelRequest, callback?: (err: AWSError, data: MediaPackage.Types.UpdateChannelResponse) => void): Request<MediaPackage.Types.UpdateChannelResponse, AWSError>;
+  rotateIngestEndpointCredentials(params: MediaPackage.Types.RotateIngestEndpointCredentialsRequest, callback?: (err: AWSError, data: MediaPackage.Types.RotateIngestEndpointCredentialsResponse) => void): Request<MediaPackage.Types.RotateIngestEndpointCredentialsResponse, AWSError>;
   /**
    * Updates an existing Channel.
    */
   updateChannel(callback?: (err: AWSError, data: MediaPackage.Types.UpdateChannelResponse) => void): Request<MediaPackage.Types.UpdateChannelResponse, AWSError>;
   /**
-   * Updates an existing OriginEndpoint.
+   * Updates an existing Channel.
    */
-  updateOriginEndpoint(params: MediaPackage.Types.UpdateOriginEndpointRequest, callback?: (err: AWSError, data: MediaPackage.Types.UpdateOriginEndpointResponse) => void): Request<MediaPackage.Types.UpdateOriginEndpointResponse, AWSError>;
+  updateChannel(params: MediaPackage.Types.UpdateChannelRequest, callback?: (err: AWSError, data: MediaPackage.Types.UpdateChannelResponse) => void): Request<MediaPackage.Types.UpdateChannelResponse, AWSError>;
   /**
    * Updates an existing OriginEndpoint.
    */
   updateOriginEndpoint(callback?: (err: AWSError, data: MediaPackage.Types.UpdateOriginEndpointResponse) => void): Request<MediaPackage.Types.UpdateOriginEndpointResponse, AWSError>;
+  /**
+   * Updates an existing OriginEndpoint.
+   */
+  updateOriginEndpoint(params: MediaPackage.Types.UpdateOriginEndpointRequest, callback?: (err: AWSError, data: MediaPackage.Types.UpdateOriginEndpointResponse) => void): Request<MediaPackage.Types.UpdateOriginEndpointResponse, AWSError>;
 }
 declare namespace MediaPackage {
   export type AdMarkers = "NONE"|"SCTE35_ENHANCED"|"PASSTHROUGH"|string;

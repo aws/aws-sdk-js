@@ -14,179 +14,179 @@ declare class Backup extends Service {
   /**
    * Backup plans are documents that contain information that AWS Backup uses to schedule tasks that create recovery points of resources. If you call CreateBackupPlan with a plan that already exists, the existing backupPlanId is returned.
    */
-  createBackupPlan(params: Backup.Types.CreateBackupPlanInput, callback?: (err: AWSError, data: Backup.Types.CreateBackupPlanOutput) => void): Request<Backup.Types.CreateBackupPlanOutput, AWSError>;
+  createBackupPlan(callback?: (err: AWSError, data: Backup.Types.CreateBackupPlanOutput) => void): Request<Backup.Types.CreateBackupPlanOutput, AWSError>;
   /**
    * Backup plans are documents that contain information that AWS Backup uses to schedule tasks that create recovery points of resources. If you call CreateBackupPlan with a plan that already exists, the existing backupPlanId is returned.
    */
-  createBackupPlan(callback?: (err: AWSError, data: Backup.Types.CreateBackupPlanOutput) => void): Request<Backup.Types.CreateBackupPlanOutput, AWSError>;
-  /**
-   * Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a ListOfTags and selected Resources.  For example, consider the following patterns:    Resources: "arn:aws:ec2:region:account-id:volume/volume-id"     ConditionKey:"department"   ConditionValue:"finance"   ConditionType:"StringEquals"     ConditionKey:"importance"   ConditionValue:"critical"   ConditionType:"StringEquals"    Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as "department=finance", "importance=critical", in addition to an EBS volume with the specified volume Id. Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn't be confused with a logical AND, where all conditions must match. The matching patterns are logically 'put together using the OR operator. In other words, all patterns that match are selected for backup.
-   */
-  createBackupSelection(params: Backup.Types.CreateBackupSelectionInput, callback?: (err: AWSError, data: Backup.Types.CreateBackupSelectionOutput) => void): Request<Backup.Types.CreateBackupSelectionOutput, AWSError>;
+  createBackupPlan(params: Backup.Types.CreateBackupPlanInput, callback?: (err: AWSError, data: Backup.Types.CreateBackupPlanOutput) => void): Request<Backup.Types.CreateBackupPlanOutput, AWSError>;
   /**
    * Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a ListOfTags and selected Resources.  For example, consider the following patterns:    Resources: "arn:aws:ec2:region:account-id:volume/volume-id"     ConditionKey:"department"   ConditionValue:"finance"   ConditionType:"StringEquals"     ConditionKey:"importance"   ConditionValue:"critical"   ConditionType:"StringEquals"    Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as "department=finance", "importance=critical", in addition to an EBS volume with the specified volume Id. Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn't be confused with a logical AND, where all conditions must match. The matching patterns are logically 'put together using the OR operator. In other words, all patterns that match are selected for backup.
    */
   createBackupSelection(callback?: (err: AWSError, data: Backup.Types.CreateBackupSelectionOutput) => void): Request<Backup.Types.CreateBackupSelectionOutput, AWSError>;
   /**
-   * Creates a logical container where backups are stored. A CreateBackupVault request includes a name, optionally one or more resource tags, an encryption key, and a request ID.  Sensitive data, such as passport numbers, should not be included the name of a backup vault. 
+   * Creates a JSON document that specifies a set of resources to assign to a backup plan. Resources can be included by specifying patterns for a ListOfTags and selected Resources.  For example, consider the following patterns:    Resources: "arn:aws:ec2:region:account-id:volume/volume-id"     ConditionKey:"department"   ConditionValue:"finance"   ConditionType:"StringEquals"     ConditionKey:"importance"   ConditionValue:"critical"   ConditionType:"StringEquals"    Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes that are tagged as "department=finance", "importance=critical", in addition to an EBS volume with the specified volume Id. Resources and conditions are additive in that all resources that match the pattern are selected. This shouldn't be confused with a logical AND, where all conditions must match. The matching patterns are logically 'put together using the OR operator. In other words, all patterns that match are selected for backup.
    */
-  createBackupVault(params: Backup.Types.CreateBackupVaultInput, callback?: (err: AWSError, data: Backup.Types.CreateBackupVaultOutput) => void): Request<Backup.Types.CreateBackupVaultOutput, AWSError>;
+  createBackupSelection(params: Backup.Types.CreateBackupSelectionInput, callback?: (err: AWSError, data: Backup.Types.CreateBackupSelectionOutput) => void): Request<Backup.Types.CreateBackupSelectionOutput, AWSError>;
   /**
    * Creates a logical container where backups are stored. A CreateBackupVault request includes a name, optionally one or more resource tags, an encryption key, and a request ID.  Sensitive data, such as passport numbers, should not be included the name of a backup vault. 
    */
   createBackupVault(callback?: (err: AWSError, data: Backup.Types.CreateBackupVaultOutput) => void): Request<Backup.Types.CreateBackupVaultOutput, AWSError>;
   /**
-   * Deletes a backup plan. A backup plan can only be deleted after all associated selections of resources have been deleted. Deleting a backup plan deletes the current version of a backup plan. Previous versions, if any, will still exist.
+   * Creates a logical container where backups are stored. A CreateBackupVault request includes a name, optionally one or more resource tags, an encryption key, and a request ID.  Sensitive data, such as passport numbers, should not be included the name of a backup vault. 
    */
-  deleteBackupPlan(params: Backup.Types.DeleteBackupPlanInput, callback?: (err: AWSError, data: Backup.Types.DeleteBackupPlanOutput) => void): Request<Backup.Types.DeleteBackupPlanOutput, AWSError>;
+  createBackupVault(params: Backup.Types.CreateBackupVaultInput, callback?: (err: AWSError, data: Backup.Types.CreateBackupVaultOutput) => void): Request<Backup.Types.CreateBackupVaultOutput, AWSError>;
   /**
    * Deletes a backup plan. A backup plan can only be deleted after all associated selections of resources have been deleted. Deleting a backup plan deletes the current version of a backup plan. Previous versions, if any, will still exist.
    */
   deleteBackupPlan(callback?: (err: AWSError, data: Backup.Types.DeleteBackupPlanOutput) => void): Request<Backup.Types.DeleteBackupPlanOutput, AWSError>;
   /**
-   * Deletes the resource selection associated with a backup plan that is specified by the SelectionId.
+   * Deletes a backup plan. A backup plan can only be deleted after all associated selections of resources have been deleted. Deleting a backup plan deletes the current version of a backup plan. Previous versions, if any, will still exist.
    */
-  deleteBackupSelection(params: Backup.Types.DeleteBackupSelectionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteBackupPlan(params: Backup.Types.DeleteBackupPlanInput, callback?: (err: AWSError, data: Backup.Types.DeleteBackupPlanOutput) => void): Request<Backup.Types.DeleteBackupPlanOutput, AWSError>;
   /**
    * Deletes the resource selection associated with a backup plan that is specified by the SelectionId.
    */
   deleteBackupSelection(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the backup vault identified by its name. A vault can be deleted only if it is empty.
+   * Deletes the resource selection associated with a backup plan that is specified by the SelectionId.
    */
-  deleteBackupVault(params: Backup.Types.DeleteBackupVaultInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteBackupSelection(params: Backup.Types.DeleteBackupSelectionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the backup vault identified by its name. A vault can be deleted only if it is empty.
    */
   deleteBackupVault(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the policy document that manages permissions on a backup vault.
+   * Deletes the backup vault identified by its name. A vault can be deleted only if it is empty.
    */
-  deleteBackupVaultAccessPolicy(params: Backup.Types.DeleteBackupVaultAccessPolicyInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteBackupVault(params: Backup.Types.DeleteBackupVaultInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the policy document that manages permissions on a backup vault.
    */
   deleteBackupVaultAccessPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes event notifications for the specified backup vault.
+   * Deletes the policy document that manages permissions on a backup vault.
    */
-  deleteBackupVaultNotifications(params: Backup.Types.DeleteBackupVaultNotificationsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteBackupVaultAccessPolicy(params: Backup.Types.DeleteBackupVaultAccessPolicyInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes event notifications for the specified backup vault.
    */
   deleteBackupVaultNotifications(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the recovery point specified by a recovery point ID.
+   * Deletes event notifications for the specified backup vault.
    */
-  deleteRecoveryPoint(params: Backup.Types.DeleteRecoveryPointInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteBackupVaultNotifications(params: Backup.Types.DeleteBackupVaultNotificationsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the recovery point specified by a recovery point ID.
    */
   deleteRecoveryPoint(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Returns metadata associated with creating a backup of a resource.
+   * Deletes the recovery point specified by a recovery point ID.
    */
-  describeBackupJob(params: Backup.Types.DescribeBackupJobInput, callback?: (err: AWSError, data: Backup.Types.DescribeBackupJobOutput) => void): Request<Backup.Types.DescribeBackupJobOutput, AWSError>;
+  deleteRecoveryPoint(params: Backup.Types.DeleteRecoveryPointInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Returns metadata associated with creating a backup of a resource.
    */
   describeBackupJob(callback?: (err: AWSError, data: Backup.Types.DescribeBackupJobOutput) => void): Request<Backup.Types.DescribeBackupJobOutput, AWSError>;
   /**
-   * Returns metadata about a backup vault specified by its name.
+   * Returns metadata associated with creating a backup of a resource.
    */
-  describeBackupVault(params: Backup.Types.DescribeBackupVaultInput, callback?: (err: AWSError, data: Backup.Types.DescribeBackupVaultOutput) => void): Request<Backup.Types.DescribeBackupVaultOutput, AWSError>;
+  describeBackupJob(params: Backup.Types.DescribeBackupJobInput, callback?: (err: AWSError, data: Backup.Types.DescribeBackupJobOutput) => void): Request<Backup.Types.DescribeBackupJobOutput, AWSError>;
   /**
    * Returns metadata about a backup vault specified by its name.
    */
   describeBackupVault(callback?: (err: AWSError, data: Backup.Types.DescribeBackupVaultOutput) => void): Request<Backup.Types.DescribeBackupVaultOutput, AWSError>;
   /**
-   * Returns information about a saved resource, including the last time it was backed-up, its Amazon Resource Name (ARN), and the AWS service type of the saved resource.
+   * Returns metadata about a backup vault specified by its name.
    */
-  describeProtectedResource(params: Backup.Types.DescribeProtectedResourceInput, callback?: (err: AWSError, data: Backup.Types.DescribeProtectedResourceOutput) => void): Request<Backup.Types.DescribeProtectedResourceOutput, AWSError>;
+  describeBackupVault(params: Backup.Types.DescribeBackupVaultInput, callback?: (err: AWSError, data: Backup.Types.DescribeBackupVaultOutput) => void): Request<Backup.Types.DescribeBackupVaultOutput, AWSError>;
   /**
    * Returns information about a saved resource, including the last time it was backed-up, its Amazon Resource Name (ARN), and the AWS service type of the saved resource.
    */
   describeProtectedResource(callback?: (err: AWSError, data: Backup.Types.DescribeProtectedResourceOutput) => void): Request<Backup.Types.DescribeProtectedResourceOutput, AWSError>;
   /**
-   * Returns metadata associated with a recovery point, including ID, status, encryption, and lifecycle.
+   * Returns information about a saved resource, including the last time it was backed-up, its Amazon Resource Name (ARN), and the AWS service type of the saved resource.
    */
-  describeRecoveryPoint(params: Backup.Types.DescribeRecoveryPointInput, callback?: (err: AWSError, data: Backup.Types.DescribeRecoveryPointOutput) => void): Request<Backup.Types.DescribeRecoveryPointOutput, AWSError>;
+  describeProtectedResource(params: Backup.Types.DescribeProtectedResourceInput, callback?: (err: AWSError, data: Backup.Types.DescribeProtectedResourceOutput) => void): Request<Backup.Types.DescribeProtectedResourceOutput, AWSError>;
   /**
    * Returns metadata associated with a recovery point, including ID, status, encryption, and lifecycle.
    */
   describeRecoveryPoint(callback?: (err: AWSError, data: Backup.Types.DescribeRecoveryPointOutput) => void): Request<Backup.Types.DescribeRecoveryPointOutput, AWSError>;
   /**
-   * Returns metadata associated with a restore job that is specified by a job ID.
+   * Returns metadata associated with a recovery point, including ID, status, encryption, and lifecycle.
    */
-  describeRestoreJob(params: Backup.Types.DescribeRestoreJobInput, callback?: (err: AWSError, data: Backup.Types.DescribeRestoreJobOutput) => void): Request<Backup.Types.DescribeRestoreJobOutput, AWSError>;
+  describeRecoveryPoint(params: Backup.Types.DescribeRecoveryPointInput, callback?: (err: AWSError, data: Backup.Types.DescribeRecoveryPointOutput) => void): Request<Backup.Types.DescribeRecoveryPointOutput, AWSError>;
   /**
    * Returns metadata associated with a restore job that is specified by a job ID.
    */
   describeRestoreJob(callback?: (err: AWSError, data: Backup.Types.DescribeRestoreJobOutput) => void): Request<Backup.Types.DescribeRestoreJobOutput, AWSError>;
   /**
-   * Returns the backup plan that is specified by the plan ID as a backup template.
+   * Returns metadata associated with a restore job that is specified by a job ID.
    */
-  exportBackupPlanTemplate(params: Backup.Types.ExportBackupPlanTemplateInput, callback?: (err: AWSError, data: Backup.Types.ExportBackupPlanTemplateOutput) => void): Request<Backup.Types.ExportBackupPlanTemplateOutput, AWSError>;
+  describeRestoreJob(params: Backup.Types.DescribeRestoreJobInput, callback?: (err: AWSError, data: Backup.Types.DescribeRestoreJobOutput) => void): Request<Backup.Types.DescribeRestoreJobOutput, AWSError>;
   /**
    * Returns the backup plan that is specified by the plan ID as a backup template.
    */
   exportBackupPlanTemplate(callback?: (err: AWSError, data: Backup.Types.ExportBackupPlanTemplateOutput) => void): Request<Backup.Types.ExportBackupPlanTemplateOutput, AWSError>;
   /**
-   * Returns the body of a backup plan in JSON format, in addition to plan metadata.
+   * Returns the backup plan that is specified by the plan ID as a backup template.
    */
-  getBackupPlan(params: Backup.Types.GetBackupPlanInput, callback?: (err: AWSError, data: Backup.Types.GetBackupPlanOutput) => void): Request<Backup.Types.GetBackupPlanOutput, AWSError>;
+  exportBackupPlanTemplate(params: Backup.Types.ExportBackupPlanTemplateInput, callback?: (err: AWSError, data: Backup.Types.ExportBackupPlanTemplateOutput) => void): Request<Backup.Types.ExportBackupPlanTemplateOutput, AWSError>;
   /**
    * Returns the body of a backup plan in JSON format, in addition to plan metadata.
    */
   getBackupPlan(callback?: (err: AWSError, data: Backup.Types.GetBackupPlanOutput) => void): Request<Backup.Types.GetBackupPlanOutput, AWSError>;
   /**
-   * Returns a valid JSON document specifying a backup plan or an error.
+   * Returns the body of a backup plan in JSON format, in addition to plan metadata.
    */
-  getBackupPlanFromJSON(params: Backup.Types.GetBackupPlanFromJSONInput, callback?: (err: AWSError, data: Backup.Types.GetBackupPlanFromJSONOutput) => void): Request<Backup.Types.GetBackupPlanFromJSONOutput, AWSError>;
+  getBackupPlan(params: Backup.Types.GetBackupPlanInput, callback?: (err: AWSError, data: Backup.Types.GetBackupPlanOutput) => void): Request<Backup.Types.GetBackupPlanOutput, AWSError>;
   /**
    * Returns a valid JSON document specifying a backup plan or an error.
    */
   getBackupPlanFromJSON(callback?: (err: AWSError, data: Backup.Types.GetBackupPlanFromJSONOutput) => void): Request<Backup.Types.GetBackupPlanFromJSONOutput, AWSError>;
   /**
-   * Returns the template specified by its templateId as a backup plan.
+   * Returns a valid JSON document specifying a backup plan or an error.
    */
-  getBackupPlanFromTemplate(params: Backup.Types.GetBackupPlanFromTemplateInput, callback?: (err: AWSError, data: Backup.Types.GetBackupPlanFromTemplateOutput) => void): Request<Backup.Types.GetBackupPlanFromTemplateOutput, AWSError>;
+  getBackupPlanFromJSON(params: Backup.Types.GetBackupPlanFromJSONInput, callback?: (err: AWSError, data: Backup.Types.GetBackupPlanFromJSONOutput) => void): Request<Backup.Types.GetBackupPlanFromJSONOutput, AWSError>;
   /**
    * Returns the template specified by its templateId as a backup plan.
    */
   getBackupPlanFromTemplate(callback?: (err: AWSError, data: Backup.Types.GetBackupPlanFromTemplateOutput) => void): Request<Backup.Types.GetBackupPlanFromTemplateOutput, AWSError>;
   /**
-   * Returns selection metadata and a document in JSON format that specifies a list of resources that are associated with a backup plan.
+   * Returns the template specified by its templateId as a backup plan.
    */
-  getBackupSelection(params: Backup.Types.GetBackupSelectionInput, callback?: (err: AWSError, data: Backup.Types.GetBackupSelectionOutput) => void): Request<Backup.Types.GetBackupSelectionOutput, AWSError>;
+  getBackupPlanFromTemplate(params: Backup.Types.GetBackupPlanFromTemplateInput, callback?: (err: AWSError, data: Backup.Types.GetBackupPlanFromTemplateOutput) => void): Request<Backup.Types.GetBackupPlanFromTemplateOutput, AWSError>;
   /**
    * Returns selection metadata and a document in JSON format that specifies a list of resources that are associated with a backup plan.
    */
   getBackupSelection(callback?: (err: AWSError, data: Backup.Types.GetBackupSelectionOutput) => void): Request<Backup.Types.GetBackupSelectionOutput, AWSError>;
   /**
-   * Returns the access policy document that is associated with the named backup vault.
+   * Returns selection metadata and a document in JSON format that specifies a list of resources that are associated with a backup plan.
    */
-  getBackupVaultAccessPolicy(params: Backup.Types.GetBackupVaultAccessPolicyInput, callback?: (err: AWSError, data: Backup.Types.GetBackupVaultAccessPolicyOutput) => void): Request<Backup.Types.GetBackupVaultAccessPolicyOutput, AWSError>;
+  getBackupSelection(params: Backup.Types.GetBackupSelectionInput, callback?: (err: AWSError, data: Backup.Types.GetBackupSelectionOutput) => void): Request<Backup.Types.GetBackupSelectionOutput, AWSError>;
   /**
    * Returns the access policy document that is associated with the named backup vault.
    */
   getBackupVaultAccessPolicy(callback?: (err: AWSError, data: Backup.Types.GetBackupVaultAccessPolicyOutput) => void): Request<Backup.Types.GetBackupVaultAccessPolicyOutput, AWSError>;
   /**
-   * Returns event notifications for the specified backup vault.
+   * Returns the access policy document that is associated with the named backup vault.
    */
-  getBackupVaultNotifications(params: Backup.Types.GetBackupVaultNotificationsInput, callback?: (err: AWSError, data: Backup.Types.GetBackupVaultNotificationsOutput) => void): Request<Backup.Types.GetBackupVaultNotificationsOutput, AWSError>;
+  getBackupVaultAccessPolicy(params: Backup.Types.GetBackupVaultAccessPolicyInput, callback?: (err: AWSError, data: Backup.Types.GetBackupVaultAccessPolicyOutput) => void): Request<Backup.Types.GetBackupVaultAccessPolicyOutput, AWSError>;
   /**
    * Returns event notifications for the specified backup vault.
    */
   getBackupVaultNotifications(callback?: (err: AWSError, data: Backup.Types.GetBackupVaultNotificationsOutput) => void): Request<Backup.Types.GetBackupVaultNotificationsOutput, AWSError>;
   /**
-   * Returns two sets of metadata key-value pairs. The first set lists the metadata that the recovery point was created with. The second set lists the metadata key-value pairs that are required to restore the recovery point. These sets can be the same, or the restore metadata set can contain different values if the target service to be restored has changed since the recovery point was created and now requires additional or different information in order to be restored.
+   * Returns event notifications for the specified backup vault.
    */
-  getRecoveryPointRestoreMetadata(params: Backup.Types.GetRecoveryPointRestoreMetadataInput, callback?: (err: AWSError, data: Backup.Types.GetRecoveryPointRestoreMetadataOutput) => void): Request<Backup.Types.GetRecoveryPointRestoreMetadataOutput, AWSError>;
+  getBackupVaultNotifications(params: Backup.Types.GetBackupVaultNotificationsInput, callback?: (err: AWSError, data: Backup.Types.GetBackupVaultNotificationsOutput) => void): Request<Backup.Types.GetBackupVaultNotificationsOutput, AWSError>;
   /**
    * Returns two sets of metadata key-value pairs. The first set lists the metadata that the recovery point was created with. The second set lists the metadata key-value pairs that are required to restore the recovery point. These sets can be the same, or the restore metadata set can contain different values if the target service to be restored has changed since the recovery point was created and now requires additional or different information in order to be restored.
    */
   getRecoveryPointRestoreMetadata(callback?: (err: AWSError, data: Backup.Types.GetRecoveryPointRestoreMetadataOutput) => void): Request<Backup.Types.GetRecoveryPointRestoreMetadataOutput, AWSError>;
+  /**
+   * Returns two sets of metadata key-value pairs. The first set lists the metadata that the recovery point was created with. The second set lists the metadata key-value pairs that are required to restore the recovery point. These sets can be the same, or the restore metadata set can contain different values if the target service to be restored has changed since the recovery point was created and now requires additional or different information in order to be restored.
+   */
+  getRecoveryPointRestoreMetadata(params: Backup.Types.GetRecoveryPointRestoreMetadataInput, callback?: (err: AWSError, data: Backup.Types.GetRecoveryPointRestoreMetadataOutput) => void): Request<Backup.Types.GetRecoveryPointRestoreMetadataOutput, AWSError>;
   /**
    * Returns the AWS resource types supported by AWS Backup.
    */
@@ -194,163 +194,163 @@ declare class Backup extends Service {
   /**
    * Returns metadata about your backup jobs.
    */
-  listBackupJobs(params: Backup.Types.ListBackupJobsInput, callback?: (err: AWSError, data: Backup.Types.ListBackupJobsOutput) => void): Request<Backup.Types.ListBackupJobsOutput, AWSError>;
+  listBackupJobs(callback?: (err: AWSError, data: Backup.Types.ListBackupJobsOutput) => void): Request<Backup.Types.ListBackupJobsOutput, AWSError>;
   /**
    * Returns metadata about your backup jobs.
    */
-  listBackupJobs(callback?: (err: AWSError, data: Backup.Types.ListBackupJobsOutput) => void): Request<Backup.Types.ListBackupJobsOutput, AWSError>;
-  /**
-   * Returns metadata of your saved backup plan templates, including the template ID, name, and the creation and deletion dates.
-   */
-  listBackupPlanTemplates(params: Backup.Types.ListBackupPlanTemplatesInput, callback?: (err: AWSError, data: Backup.Types.ListBackupPlanTemplatesOutput) => void): Request<Backup.Types.ListBackupPlanTemplatesOutput, AWSError>;
+  listBackupJobs(params: Backup.Types.ListBackupJobsInput, callback?: (err: AWSError, data: Backup.Types.ListBackupJobsOutput) => void): Request<Backup.Types.ListBackupJobsOutput, AWSError>;
   /**
    * Returns metadata of your saved backup plan templates, including the template ID, name, and the creation and deletion dates.
    */
   listBackupPlanTemplates(callback?: (err: AWSError, data: Backup.Types.ListBackupPlanTemplatesOutput) => void): Request<Backup.Types.ListBackupPlanTemplatesOutput, AWSError>;
   /**
-   * Returns version metadata of your backup plans, including Amazon Resource Names (ARNs), backup plan IDs, creation and deletion dates, plan names, and version IDs.
+   * Returns metadata of your saved backup plan templates, including the template ID, name, and the creation and deletion dates.
    */
-  listBackupPlanVersions(params: Backup.Types.ListBackupPlanVersionsInput, callback?: (err: AWSError, data: Backup.Types.ListBackupPlanVersionsOutput) => void): Request<Backup.Types.ListBackupPlanVersionsOutput, AWSError>;
+  listBackupPlanTemplates(params: Backup.Types.ListBackupPlanTemplatesInput, callback?: (err: AWSError, data: Backup.Types.ListBackupPlanTemplatesOutput) => void): Request<Backup.Types.ListBackupPlanTemplatesOutput, AWSError>;
   /**
    * Returns version metadata of your backup plans, including Amazon Resource Names (ARNs), backup plan IDs, creation and deletion dates, plan names, and version IDs.
    */
   listBackupPlanVersions(callback?: (err: AWSError, data: Backup.Types.ListBackupPlanVersionsOutput) => void): Request<Backup.Types.ListBackupPlanVersionsOutput, AWSError>;
   /**
-   * Returns metadata of your saved backup plans, including Amazon Resource Names (ARNs), plan IDs, creation and deletion dates, version IDs, plan names, and creator request IDs.
+   * Returns version metadata of your backup plans, including Amazon Resource Names (ARNs), backup plan IDs, creation and deletion dates, plan names, and version IDs.
    */
-  listBackupPlans(params: Backup.Types.ListBackupPlansInput, callback?: (err: AWSError, data: Backup.Types.ListBackupPlansOutput) => void): Request<Backup.Types.ListBackupPlansOutput, AWSError>;
+  listBackupPlanVersions(params: Backup.Types.ListBackupPlanVersionsInput, callback?: (err: AWSError, data: Backup.Types.ListBackupPlanVersionsOutput) => void): Request<Backup.Types.ListBackupPlanVersionsOutput, AWSError>;
   /**
    * Returns metadata of your saved backup plans, including Amazon Resource Names (ARNs), plan IDs, creation and deletion dates, version IDs, plan names, and creator request IDs.
    */
   listBackupPlans(callback?: (err: AWSError, data: Backup.Types.ListBackupPlansOutput) => void): Request<Backup.Types.ListBackupPlansOutput, AWSError>;
   /**
-   * Returns an array containing metadata of the resources associated with the target backup plan.
+   * Returns metadata of your saved backup plans, including Amazon Resource Names (ARNs), plan IDs, creation and deletion dates, version IDs, plan names, and creator request IDs.
    */
-  listBackupSelections(params: Backup.Types.ListBackupSelectionsInput, callback?: (err: AWSError, data: Backup.Types.ListBackupSelectionsOutput) => void): Request<Backup.Types.ListBackupSelectionsOutput, AWSError>;
+  listBackupPlans(params: Backup.Types.ListBackupPlansInput, callback?: (err: AWSError, data: Backup.Types.ListBackupPlansOutput) => void): Request<Backup.Types.ListBackupPlansOutput, AWSError>;
   /**
    * Returns an array containing metadata of the resources associated with the target backup plan.
    */
   listBackupSelections(callback?: (err: AWSError, data: Backup.Types.ListBackupSelectionsOutput) => void): Request<Backup.Types.ListBackupSelectionsOutput, AWSError>;
   /**
-   * Returns a list of recovery point storage containers along with information about them.
+   * Returns an array containing metadata of the resources associated with the target backup plan.
    */
-  listBackupVaults(params: Backup.Types.ListBackupVaultsInput, callback?: (err: AWSError, data: Backup.Types.ListBackupVaultsOutput) => void): Request<Backup.Types.ListBackupVaultsOutput, AWSError>;
+  listBackupSelections(params: Backup.Types.ListBackupSelectionsInput, callback?: (err: AWSError, data: Backup.Types.ListBackupSelectionsOutput) => void): Request<Backup.Types.ListBackupSelectionsOutput, AWSError>;
   /**
    * Returns a list of recovery point storage containers along with information about them.
    */
   listBackupVaults(callback?: (err: AWSError, data: Backup.Types.ListBackupVaultsOutput) => void): Request<Backup.Types.ListBackupVaultsOutput, AWSError>;
   /**
-   * Returns an array of resources successfully backed up by AWS Backup, including the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource type.
+   * Returns a list of recovery point storage containers along with information about them.
    */
-  listProtectedResources(params: Backup.Types.ListProtectedResourcesInput, callback?: (err: AWSError, data: Backup.Types.ListProtectedResourcesOutput) => void): Request<Backup.Types.ListProtectedResourcesOutput, AWSError>;
+  listBackupVaults(params: Backup.Types.ListBackupVaultsInput, callback?: (err: AWSError, data: Backup.Types.ListBackupVaultsOutput) => void): Request<Backup.Types.ListBackupVaultsOutput, AWSError>;
   /**
    * Returns an array of resources successfully backed up by AWS Backup, including the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource type.
    */
   listProtectedResources(callback?: (err: AWSError, data: Backup.Types.ListProtectedResourcesOutput) => void): Request<Backup.Types.ListProtectedResourcesOutput, AWSError>;
   /**
-   * Returns detailed information about the recovery points stored in a backup vault.
+   * Returns an array of resources successfully backed up by AWS Backup, including the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource type.
    */
-  listRecoveryPointsByBackupVault(params: Backup.Types.ListRecoveryPointsByBackupVaultInput, callback?: (err: AWSError, data: Backup.Types.ListRecoveryPointsByBackupVaultOutput) => void): Request<Backup.Types.ListRecoveryPointsByBackupVaultOutput, AWSError>;
+  listProtectedResources(params: Backup.Types.ListProtectedResourcesInput, callback?: (err: AWSError, data: Backup.Types.ListProtectedResourcesOutput) => void): Request<Backup.Types.ListProtectedResourcesOutput, AWSError>;
   /**
    * Returns detailed information about the recovery points stored in a backup vault.
    */
   listRecoveryPointsByBackupVault(callback?: (err: AWSError, data: Backup.Types.ListRecoveryPointsByBackupVaultOutput) => void): Request<Backup.Types.ListRecoveryPointsByBackupVaultOutput, AWSError>;
   /**
-   * Returns detailed information about recovery points of the type specified by a resource Amazon Resource Name (ARN).
+   * Returns detailed information about the recovery points stored in a backup vault.
    */
-  listRecoveryPointsByResource(params: Backup.Types.ListRecoveryPointsByResourceInput, callback?: (err: AWSError, data: Backup.Types.ListRecoveryPointsByResourceOutput) => void): Request<Backup.Types.ListRecoveryPointsByResourceOutput, AWSError>;
+  listRecoveryPointsByBackupVault(params: Backup.Types.ListRecoveryPointsByBackupVaultInput, callback?: (err: AWSError, data: Backup.Types.ListRecoveryPointsByBackupVaultOutput) => void): Request<Backup.Types.ListRecoveryPointsByBackupVaultOutput, AWSError>;
   /**
    * Returns detailed information about recovery points of the type specified by a resource Amazon Resource Name (ARN).
    */
   listRecoveryPointsByResource(callback?: (err: AWSError, data: Backup.Types.ListRecoveryPointsByResourceOutput) => void): Request<Backup.Types.ListRecoveryPointsByResourceOutput, AWSError>;
   /**
-   * Returns a list of jobs that AWS Backup initiated to restore a saved resource, including metadata about the recovery process.
+   * Returns detailed information about recovery points of the type specified by a resource Amazon Resource Name (ARN).
    */
-  listRestoreJobs(params: Backup.Types.ListRestoreJobsInput, callback?: (err: AWSError, data: Backup.Types.ListRestoreJobsOutput) => void): Request<Backup.Types.ListRestoreJobsOutput, AWSError>;
+  listRecoveryPointsByResource(params: Backup.Types.ListRecoveryPointsByResourceInput, callback?: (err: AWSError, data: Backup.Types.ListRecoveryPointsByResourceOutput) => void): Request<Backup.Types.ListRecoveryPointsByResourceOutput, AWSError>;
   /**
    * Returns a list of jobs that AWS Backup initiated to restore a saved resource, including metadata about the recovery process.
    */
   listRestoreJobs(callback?: (err: AWSError, data: Backup.Types.ListRestoreJobsOutput) => void): Request<Backup.Types.ListRestoreJobsOutput, AWSError>;
   /**
-   * Returns a list of key-value pairs assigned to a target recovery point, backup plan, or backup vault.
+   * Returns a list of jobs that AWS Backup initiated to restore a saved resource, including metadata about the recovery process.
    */
-  listTags(params: Backup.Types.ListTagsInput, callback?: (err: AWSError, data: Backup.Types.ListTagsOutput) => void): Request<Backup.Types.ListTagsOutput, AWSError>;
+  listRestoreJobs(params: Backup.Types.ListRestoreJobsInput, callback?: (err: AWSError, data: Backup.Types.ListRestoreJobsOutput) => void): Request<Backup.Types.ListRestoreJobsOutput, AWSError>;
   /**
    * Returns a list of key-value pairs assigned to a target recovery point, backup plan, or backup vault.
    */
   listTags(callback?: (err: AWSError, data: Backup.Types.ListTagsOutput) => void): Request<Backup.Types.ListTagsOutput, AWSError>;
   /**
-   * Sets a resource-based policy that is used to manage access permissions on the target backup vault. Requires a backup vault name and an access policy document in JSON format.
+   * Returns a list of key-value pairs assigned to a target recovery point, backup plan, or backup vault.
    */
-  putBackupVaultAccessPolicy(params: Backup.Types.PutBackupVaultAccessPolicyInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  listTags(params: Backup.Types.ListTagsInput, callback?: (err: AWSError, data: Backup.Types.ListTagsOutput) => void): Request<Backup.Types.ListTagsOutput, AWSError>;
   /**
    * Sets a resource-based policy that is used to manage access permissions on the target backup vault. Requires a backup vault name and an access policy document in JSON format.
    */
   putBackupVaultAccessPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Turns on notifications on a backup vault for the specified topic and events.
+   * Sets a resource-based policy that is used to manage access permissions on the target backup vault. Requires a backup vault name and an access policy document in JSON format.
    */
-  putBackupVaultNotifications(params: Backup.Types.PutBackupVaultNotificationsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putBackupVaultAccessPolicy(params: Backup.Types.PutBackupVaultAccessPolicyInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Turns on notifications on a backup vault for the specified topic and events.
    */
   putBackupVaultNotifications(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Starts a job to create a one-time backup of the specified resource.
+   * Turns on notifications on a backup vault for the specified topic and events.
    */
-  startBackupJob(params: Backup.Types.StartBackupJobInput, callback?: (err: AWSError, data: Backup.Types.StartBackupJobOutput) => void): Request<Backup.Types.StartBackupJobOutput, AWSError>;
+  putBackupVaultNotifications(params: Backup.Types.PutBackupVaultNotificationsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Starts a job to create a one-time backup of the specified resource.
    */
   startBackupJob(callback?: (err: AWSError, data: Backup.Types.StartBackupJobOutput) => void): Request<Backup.Types.StartBackupJobOutput, AWSError>;
   /**
-   * Recovers the saved resource identified by an Amazon Resource Name (ARN).  If the resource ARN is included in the request, then the last complete backup of that resource is recovered. If the ARN of a recovery point is supplied, then that recovery point is restored.
+   * Starts a job to create a one-time backup of the specified resource.
    */
-  startRestoreJob(params: Backup.Types.StartRestoreJobInput, callback?: (err: AWSError, data: Backup.Types.StartRestoreJobOutput) => void): Request<Backup.Types.StartRestoreJobOutput, AWSError>;
+  startBackupJob(params: Backup.Types.StartBackupJobInput, callback?: (err: AWSError, data: Backup.Types.StartBackupJobOutput) => void): Request<Backup.Types.StartBackupJobOutput, AWSError>;
   /**
    * Recovers the saved resource identified by an Amazon Resource Name (ARN).  If the resource ARN is included in the request, then the last complete backup of that resource is recovered. If the ARN of a recovery point is supplied, then that recovery point is restored.
    */
   startRestoreJob(callback?: (err: AWSError, data: Backup.Types.StartRestoreJobOutput) => void): Request<Backup.Types.StartRestoreJobOutput, AWSError>;
   /**
-   * Attempts to cancel a job to create a one-time backup of a resource.
+   * Recovers the saved resource identified by an Amazon Resource Name (ARN).  If the resource ARN is included in the request, then the last complete backup of that resource is recovered. If the ARN of a recovery point is supplied, then that recovery point is restored.
    */
-  stopBackupJob(params: Backup.Types.StopBackupJobInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  startRestoreJob(params: Backup.Types.StartRestoreJobInput, callback?: (err: AWSError, data: Backup.Types.StartRestoreJobOutput) => void): Request<Backup.Types.StartRestoreJobOutput, AWSError>;
   /**
    * Attempts to cancel a job to create a one-time backup of a resource.
    */
   stopBackupJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Assigns a set of key-value pairs to a recovery point, backup plan, or backup vault identified by an Amazon Resource Name (ARN).
+   * Attempts to cancel a job to create a one-time backup of a resource.
    */
-  tagResource(params: Backup.Types.TagResourceInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  stopBackupJob(params: Backup.Types.StopBackupJobInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Assigns a set of key-value pairs to a recovery point, backup plan, or backup vault identified by an Amazon Resource Name (ARN).
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes a set of key-value pairs from a recovery point, backup plan, or backup vault identified by an Amazon Resource Name (ARN)
+   * Assigns a set of key-value pairs to a recovery point, backup plan, or backup vault identified by an Amazon Resource Name (ARN).
    */
-  untagResource(params: Backup.Types.UntagResourceInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  tagResource(params: Backup.Types.TagResourceInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes a set of key-value pairs from a recovery point, backup plan, or backup vault identified by an Amazon Resource Name (ARN)
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Replaces the body of a saved backup plan identified by its backupPlanId with the input document in JSON format. The new version is uniquely identified by a VersionId.
+   * Removes a set of key-value pairs from a recovery point, backup plan, or backup vault identified by an Amazon Resource Name (ARN)
    */
-  updateBackupPlan(params: Backup.Types.UpdateBackupPlanInput, callback?: (err: AWSError, data: Backup.Types.UpdateBackupPlanOutput) => void): Request<Backup.Types.UpdateBackupPlanOutput, AWSError>;
+  untagResource(params: Backup.Types.UntagResourceInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Replaces the body of a saved backup plan identified by its backupPlanId with the input document in JSON format. The new version is uniquely identified by a VersionId.
    */
   updateBackupPlan(callback?: (err: AWSError, data: Backup.Types.UpdateBackupPlanOutput) => void): Request<Backup.Types.UpdateBackupPlanOutput, AWSError>;
   /**
-   * Sets the transition lifecycle of a recovery point. The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. 
+   * Replaces the body of a saved backup plan identified by its backupPlanId with the input document in JSON format. The new version is uniquely identified by a VersionId.
    */
-  updateRecoveryPointLifecycle(params: Backup.Types.UpdateRecoveryPointLifecycleInput, callback?: (err: AWSError, data: Backup.Types.UpdateRecoveryPointLifecycleOutput) => void): Request<Backup.Types.UpdateRecoveryPointLifecycleOutput, AWSError>;
+  updateBackupPlan(params: Backup.Types.UpdateBackupPlanInput, callback?: (err: AWSError, data: Backup.Types.UpdateBackupPlanOutput) => void): Request<Backup.Types.UpdateBackupPlanOutput, AWSError>;
   /**
    * Sets the transition lifecycle of a recovery point. The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. 
    */
   updateRecoveryPointLifecycle(callback?: (err: AWSError, data: Backup.Types.UpdateRecoveryPointLifecycleOutput) => void): Request<Backup.Types.UpdateRecoveryPointLifecycleOutput, AWSError>;
+  /**
+   * Sets the transition lifecycle of a recovery point. The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. 
+   */
+  updateRecoveryPointLifecycle(params: Backup.Types.UpdateRecoveryPointLifecycleInput, callback?: (err: AWSError, data: Backup.Types.UpdateRecoveryPointLifecycleOutput) => void): Request<Backup.Types.UpdateRecoveryPointLifecycleOutput, AWSError>;
 }
 declare namespace Backup {
   export type ARN = string;

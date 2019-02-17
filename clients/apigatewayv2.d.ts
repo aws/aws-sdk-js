@@ -14,451 +14,451 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Creates an Api resource.
    */
-  createApi(params: ApiGatewayV2.Types.CreateApiRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateApiResponse) => void): Request<ApiGatewayV2.Types.CreateApiResponse, AWSError>;
+  createApi(callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateApiResponse) => void): Request<ApiGatewayV2.Types.CreateApiResponse, AWSError>;
   /**
    * Creates an Api resource.
    */
-  createApi(callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateApiResponse) => void): Request<ApiGatewayV2.Types.CreateApiResponse, AWSError>;
-  /**
-   * Creates an API mapping.
-   */
-  createApiMapping(params: ApiGatewayV2.Types.CreateApiMappingRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateApiMappingResponse) => void): Request<ApiGatewayV2.Types.CreateApiMappingResponse, AWSError>;
+  createApi(params: ApiGatewayV2.Types.CreateApiRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateApiResponse) => void): Request<ApiGatewayV2.Types.CreateApiResponse, AWSError>;
   /**
    * Creates an API mapping.
    */
   createApiMapping(callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateApiMappingResponse) => void): Request<ApiGatewayV2.Types.CreateApiMappingResponse, AWSError>;
   /**
-   * Creates an Authorizer for an API.
+   * Creates an API mapping.
    */
-  createAuthorizer(params: ApiGatewayV2.Types.CreateAuthorizerRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateAuthorizerResponse) => void): Request<ApiGatewayV2.Types.CreateAuthorizerResponse, AWSError>;
+  createApiMapping(params: ApiGatewayV2.Types.CreateApiMappingRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateApiMappingResponse) => void): Request<ApiGatewayV2.Types.CreateApiMappingResponse, AWSError>;
   /**
    * Creates an Authorizer for an API.
    */
   createAuthorizer(callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateAuthorizerResponse) => void): Request<ApiGatewayV2.Types.CreateAuthorizerResponse, AWSError>;
   /**
-   * Creates a Deployment for an API.
+   * Creates an Authorizer for an API.
    */
-  createDeployment(params: ApiGatewayV2.Types.CreateDeploymentRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateDeploymentResponse) => void): Request<ApiGatewayV2.Types.CreateDeploymentResponse, AWSError>;
+  createAuthorizer(params: ApiGatewayV2.Types.CreateAuthorizerRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateAuthorizerResponse) => void): Request<ApiGatewayV2.Types.CreateAuthorizerResponse, AWSError>;
   /**
    * Creates a Deployment for an API.
    */
   createDeployment(callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateDeploymentResponse) => void): Request<ApiGatewayV2.Types.CreateDeploymentResponse, AWSError>;
   /**
-   * Creates a domain name.
+   * Creates a Deployment for an API.
    */
-  createDomainName(params: ApiGatewayV2.Types.CreateDomainNameRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateDomainNameResponse) => void): Request<ApiGatewayV2.Types.CreateDomainNameResponse, AWSError>;
+  createDeployment(params: ApiGatewayV2.Types.CreateDeploymentRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateDeploymentResponse) => void): Request<ApiGatewayV2.Types.CreateDeploymentResponse, AWSError>;
   /**
    * Creates a domain name.
    */
   createDomainName(callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateDomainNameResponse) => void): Request<ApiGatewayV2.Types.CreateDomainNameResponse, AWSError>;
   /**
-   * Creates an Integration.
+   * Creates a domain name.
    */
-  createIntegration(params: ApiGatewayV2.Types.CreateIntegrationRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateIntegrationResult) => void): Request<ApiGatewayV2.Types.CreateIntegrationResult, AWSError>;
+  createDomainName(params: ApiGatewayV2.Types.CreateDomainNameRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateDomainNameResponse) => void): Request<ApiGatewayV2.Types.CreateDomainNameResponse, AWSError>;
   /**
    * Creates an Integration.
    */
   createIntegration(callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateIntegrationResult) => void): Request<ApiGatewayV2.Types.CreateIntegrationResult, AWSError>;
   /**
-   * Creates an IntegrationResponses.
+   * Creates an Integration.
    */
-  createIntegrationResponse(params: ApiGatewayV2.Types.CreateIntegrationResponseRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateIntegrationResponseResponse) => void): Request<ApiGatewayV2.Types.CreateIntegrationResponseResponse, AWSError>;
+  createIntegration(params: ApiGatewayV2.Types.CreateIntegrationRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateIntegrationResult) => void): Request<ApiGatewayV2.Types.CreateIntegrationResult, AWSError>;
   /**
    * Creates an IntegrationResponses.
    */
   createIntegrationResponse(callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateIntegrationResponseResponse) => void): Request<ApiGatewayV2.Types.CreateIntegrationResponseResponse, AWSError>;
   /**
-   * Creates a Model for an API.
+   * Creates an IntegrationResponses.
    */
-  createModel(params: ApiGatewayV2.Types.CreateModelRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateModelResponse) => void): Request<ApiGatewayV2.Types.CreateModelResponse, AWSError>;
+  createIntegrationResponse(params: ApiGatewayV2.Types.CreateIntegrationResponseRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateIntegrationResponseResponse) => void): Request<ApiGatewayV2.Types.CreateIntegrationResponseResponse, AWSError>;
   /**
    * Creates a Model for an API.
    */
   createModel(callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateModelResponse) => void): Request<ApiGatewayV2.Types.CreateModelResponse, AWSError>;
   /**
-   * Creates a Route for an API.
+   * Creates a Model for an API.
    */
-  createRoute(params: ApiGatewayV2.Types.CreateRouteRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateRouteResult) => void): Request<ApiGatewayV2.Types.CreateRouteResult, AWSError>;
+  createModel(params: ApiGatewayV2.Types.CreateModelRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateModelResponse) => void): Request<ApiGatewayV2.Types.CreateModelResponse, AWSError>;
   /**
    * Creates a Route for an API.
    */
   createRoute(callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateRouteResult) => void): Request<ApiGatewayV2.Types.CreateRouteResult, AWSError>;
   /**
-   * Creates a RouteResponse for a Route.
+   * Creates a Route for an API.
    */
-  createRouteResponse(params: ApiGatewayV2.Types.CreateRouteResponseRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateRouteResponseResponse) => void): Request<ApiGatewayV2.Types.CreateRouteResponseResponse, AWSError>;
+  createRoute(params: ApiGatewayV2.Types.CreateRouteRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateRouteResult) => void): Request<ApiGatewayV2.Types.CreateRouteResult, AWSError>;
   /**
    * Creates a RouteResponse for a Route.
    */
   createRouteResponse(callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateRouteResponseResponse) => void): Request<ApiGatewayV2.Types.CreateRouteResponseResponse, AWSError>;
   /**
-   * Creates a Stage for an API.
+   * Creates a RouteResponse for a Route.
    */
-  createStage(params: ApiGatewayV2.Types.CreateStageRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateStageResponse) => void): Request<ApiGatewayV2.Types.CreateStageResponse, AWSError>;
+  createRouteResponse(params: ApiGatewayV2.Types.CreateRouteResponseRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateRouteResponseResponse) => void): Request<ApiGatewayV2.Types.CreateRouteResponseResponse, AWSError>;
   /**
    * Creates a Stage for an API.
    */
   createStage(callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateStageResponse) => void): Request<ApiGatewayV2.Types.CreateStageResponse, AWSError>;
   /**
-   * Deletes an Api resource.
+   * Creates a Stage for an API.
    */
-  deleteApi(params: ApiGatewayV2.Types.DeleteApiRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  createStage(params: ApiGatewayV2.Types.CreateStageRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateStageResponse) => void): Request<ApiGatewayV2.Types.CreateStageResponse, AWSError>;
   /**
    * Deletes an Api resource.
    */
   deleteApi(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an API mapping.
+   * Deletes an Api resource.
    */
-  deleteApiMapping(params: ApiGatewayV2.Types.DeleteApiMappingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteApi(params: ApiGatewayV2.Types.DeleteApiRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an API mapping.
    */
   deleteApiMapping(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an Authorizer.
+   * Deletes an API mapping.
    */
-  deleteAuthorizer(params: ApiGatewayV2.Types.DeleteAuthorizerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteApiMapping(params: ApiGatewayV2.Types.DeleteApiMappingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an Authorizer.
    */
   deleteAuthorizer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a Deployment.
+   * Deletes an Authorizer.
    */
-  deleteDeployment(params: ApiGatewayV2.Types.DeleteDeploymentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteAuthorizer(params: ApiGatewayV2.Types.DeleteAuthorizerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a Deployment.
    */
   deleteDeployment(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a domain name.
+   * Deletes a Deployment.
    */
-  deleteDomainName(params: ApiGatewayV2.Types.DeleteDomainNameRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDeployment(params: ApiGatewayV2.Types.DeleteDeploymentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a domain name.
    */
   deleteDomainName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an Integration.
+   * Deletes a domain name.
    */
-  deleteIntegration(params: ApiGatewayV2.Types.DeleteIntegrationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDomainName(params: ApiGatewayV2.Types.DeleteDomainNameRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an Integration.
    */
   deleteIntegration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an IntegrationResponses.
+   * Deletes an Integration.
    */
-  deleteIntegrationResponse(params: ApiGatewayV2.Types.DeleteIntegrationResponseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteIntegration(params: ApiGatewayV2.Types.DeleteIntegrationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an IntegrationResponses.
    */
   deleteIntegrationResponse(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a Model.
+   * Deletes an IntegrationResponses.
    */
-  deleteModel(params: ApiGatewayV2.Types.DeleteModelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteIntegrationResponse(params: ApiGatewayV2.Types.DeleteIntegrationResponseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a Model.
    */
   deleteModel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a Route.
+   * Deletes a Model.
    */
-  deleteRoute(params: ApiGatewayV2.Types.DeleteRouteRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteModel(params: ApiGatewayV2.Types.DeleteModelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a Route.
    */
   deleteRoute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a RouteResponse.
+   * Deletes a Route.
    */
-  deleteRouteResponse(params: ApiGatewayV2.Types.DeleteRouteResponseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteRoute(params: ApiGatewayV2.Types.DeleteRouteRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a RouteResponse.
    */
   deleteRouteResponse(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a Stage.
+   * Deletes a RouteResponse.
    */
-  deleteStage(params: ApiGatewayV2.Types.DeleteStageRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteRouteResponse(params: ApiGatewayV2.Types.DeleteRouteResponseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a Stage.
    */
   deleteStage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Gets an Api resource.
+   * Deletes a Stage.
    */
-  getApi(params: ApiGatewayV2.Types.GetApiRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApiResponse) => void): Request<ApiGatewayV2.Types.GetApiResponse, AWSError>;
+  deleteStage(params: ApiGatewayV2.Types.DeleteStageRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Gets an Api resource.
    */
   getApi(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApiResponse) => void): Request<ApiGatewayV2.Types.GetApiResponse, AWSError>;
   /**
-   * The API mapping.
+   * Gets an Api resource.
    */
-  getApiMapping(params: ApiGatewayV2.Types.GetApiMappingRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApiMappingResponse) => void): Request<ApiGatewayV2.Types.GetApiMappingResponse, AWSError>;
+  getApi(params: ApiGatewayV2.Types.GetApiRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApiResponse) => void): Request<ApiGatewayV2.Types.GetApiResponse, AWSError>;
   /**
    * The API mapping.
    */
   getApiMapping(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApiMappingResponse) => void): Request<ApiGatewayV2.Types.GetApiMappingResponse, AWSError>;
   /**
-   * The API mappings.
+   * The API mapping.
    */
-  getApiMappings(params: ApiGatewayV2.Types.GetApiMappingsRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApiMappingsResponse) => void): Request<ApiGatewayV2.Types.GetApiMappingsResponse, AWSError>;
+  getApiMapping(params: ApiGatewayV2.Types.GetApiMappingRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApiMappingResponse) => void): Request<ApiGatewayV2.Types.GetApiMappingResponse, AWSError>;
   /**
    * The API mappings.
    */
   getApiMappings(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApiMappingsResponse) => void): Request<ApiGatewayV2.Types.GetApiMappingsResponse, AWSError>;
   /**
-   * Gets a collection of Api resources.
+   * The API mappings.
    */
-  getApis(params: ApiGatewayV2.Types.GetApisRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApisResponse) => void): Request<ApiGatewayV2.Types.GetApisResponse, AWSError>;
+  getApiMappings(params: ApiGatewayV2.Types.GetApiMappingsRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApiMappingsResponse) => void): Request<ApiGatewayV2.Types.GetApiMappingsResponse, AWSError>;
   /**
    * Gets a collection of Api resources.
    */
   getApis(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApisResponse) => void): Request<ApiGatewayV2.Types.GetApisResponse, AWSError>;
   /**
-   * Gets an Authorizer.
+   * Gets a collection of Api resources.
    */
-  getAuthorizer(params: ApiGatewayV2.Types.GetAuthorizerRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetAuthorizerResponse) => void): Request<ApiGatewayV2.Types.GetAuthorizerResponse, AWSError>;
+  getApis(params: ApiGatewayV2.Types.GetApisRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApisResponse) => void): Request<ApiGatewayV2.Types.GetApisResponse, AWSError>;
   /**
    * Gets an Authorizer.
    */
   getAuthorizer(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetAuthorizerResponse) => void): Request<ApiGatewayV2.Types.GetAuthorizerResponse, AWSError>;
   /**
-   * Gets the Authorizers for an API.
+   * Gets an Authorizer.
    */
-  getAuthorizers(params: ApiGatewayV2.Types.GetAuthorizersRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetAuthorizersResponse) => void): Request<ApiGatewayV2.Types.GetAuthorizersResponse, AWSError>;
+  getAuthorizer(params: ApiGatewayV2.Types.GetAuthorizerRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetAuthorizerResponse) => void): Request<ApiGatewayV2.Types.GetAuthorizerResponse, AWSError>;
   /**
    * Gets the Authorizers for an API.
    */
   getAuthorizers(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetAuthorizersResponse) => void): Request<ApiGatewayV2.Types.GetAuthorizersResponse, AWSError>;
   /**
-   * Gets a Deployment.
+   * Gets the Authorizers for an API.
    */
-  getDeployment(params: ApiGatewayV2.Types.GetDeploymentRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetDeploymentResponse) => void): Request<ApiGatewayV2.Types.GetDeploymentResponse, AWSError>;
+  getAuthorizers(params: ApiGatewayV2.Types.GetAuthorizersRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetAuthorizersResponse) => void): Request<ApiGatewayV2.Types.GetAuthorizersResponse, AWSError>;
   /**
    * Gets a Deployment.
    */
   getDeployment(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetDeploymentResponse) => void): Request<ApiGatewayV2.Types.GetDeploymentResponse, AWSError>;
   /**
-   * Gets the Deployments for an API.
+   * Gets a Deployment.
    */
-  getDeployments(params: ApiGatewayV2.Types.GetDeploymentsRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetDeploymentsResponse) => void): Request<ApiGatewayV2.Types.GetDeploymentsResponse, AWSError>;
+  getDeployment(params: ApiGatewayV2.Types.GetDeploymentRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetDeploymentResponse) => void): Request<ApiGatewayV2.Types.GetDeploymentResponse, AWSError>;
   /**
    * Gets the Deployments for an API.
    */
   getDeployments(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetDeploymentsResponse) => void): Request<ApiGatewayV2.Types.GetDeploymentsResponse, AWSError>;
   /**
-   * Gets a domain name.
+   * Gets the Deployments for an API.
    */
-  getDomainName(params: ApiGatewayV2.Types.GetDomainNameRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetDomainNameResponse) => void): Request<ApiGatewayV2.Types.GetDomainNameResponse, AWSError>;
+  getDeployments(params: ApiGatewayV2.Types.GetDeploymentsRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetDeploymentsResponse) => void): Request<ApiGatewayV2.Types.GetDeploymentsResponse, AWSError>;
   /**
    * Gets a domain name.
    */
   getDomainName(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetDomainNameResponse) => void): Request<ApiGatewayV2.Types.GetDomainNameResponse, AWSError>;
   /**
-   * Gets the domain names for an AWS account.
+   * Gets a domain name.
    */
-  getDomainNames(params: ApiGatewayV2.Types.GetDomainNamesRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetDomainNamesResponse) => void): Request<ApiGatewayV2.Types.GetDomainNamesResponse, AWSError>;
+  getDomainName(params: ApiGatewayV2.Types.GetDomainNameRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetDomainNameResponse) => void): Request<ApiGatewayV2.Types.GetDomainNameResponse, AWSError>;
   /**
    * Gets the domain names for an AWS account.
    */
   getDomainNames(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetDomainNamesResponse) => void): Request<ApiGatewayV2.Types.GetDomainNamesResponse, AWSError>;
   /**
-   * Gets an Integration.
+   * Gets the domain names for an AWS account.
    */
-  getIntegration(params: ApiGatewayV2.Types.GetIntegrationRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationResult) => void): Request<ApiGatewayV2.Types.GetIntegrationResult, AWSError>;
+  getDomainNames(params: ApiGatewayV2.Types.GetDomainNamesRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetDomainNamesResponse) => void): Request<ApiGatewayV2.Types.GetDomainNamesResponse, AWSError>;
   /**
    * Gets an Integration.
    */
   getIntegration(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationResult) => void): Request<ApiGatewayV2.Types.GetIntegrationResult, AWSError>;
   /**
-   * Gets an IntegrationResponses.
+   * Gets an Integration.
    */
-  getIntegrationResponse(params: ApiGatewayV2.Types.GetIntegrationResponseRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationResponseResponse) => void): Request<ApiGatewayV2.Types.GetIntegrationResponseResponse, AWSError>;
+  getIntegration(params: ApiGatewayV2.Types.GetIntegrationRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationResult) => void): Request<ApiGatewayV2.Types.GetIntegrationResult, AWSError>;
   /**
    * Gets an IntegrationResponses.
    */
   getIntegrationResponse(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationResponseResponse) => void): Request<ApiGatewayV2.Types.GetIntegrationResponseResponse, AWSError>;
   /**
-   * Gets the IntegrationResponses for an Integration.
+   * Gets an IntegrationResponses.
    */
-  getIntegrationResponses(params: ApiGatewayV2.Types.GetIntegrationResponsesRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationResponsesResponse) => void): Request<ApiGatewayV2.Types.GetIntegrationResponsesResponse, AWSError>;
+  getIntegrationResponse(params: ApiGatewayV2.Types.GetIntegrationResponseRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationResponseResponse) => void): Request<ApiGatewayV2.Types.GetIntegrationResponseResponse, AWSError>;
   /**
    * Gets the IntegrationResponses for an Integration.
    */
   getIntegrationResponses(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationResponsesResponse) => void): Request<ApiGatewayV2.Types.GetIntegrationResponsesResponse, AWSError>;
   /**
-   * Gets the Integrations for an API.
+   * Gets the IntegrationResponses for an Integration.
    */
-  getIntegrations(params: ApiGatewayV2.Types.GetIntegrationsRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationsResponse) => void): Request<ApiGatewayV2.Types.GetIntegrationsResponse, AWSError>;
+  getIntegrationResponses(params: ApiGatewayV2.Types.GetIntegrationResponsesRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationResponsesResponse) => void): Request<ApiGatewayV2.Types.GetIntegrationResponsesResponse, AWSError>;
   /**
    * Gets the Integrations for an API.
    */
   getIntegrations(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationsResponse) => void): Request<ApiGatewayV2.Types.GetIntegrationsResponse, AWSError>;
   /**
-   * Gets a Model.
+   * Gets the Integrations for an API.
    */
-  getModel(params: ApiGatewayV2.Types.GetModelRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetModelResponse) => void): Request<ApiGatewayV2.Types.GetModelResponse, AWSError>;
+  getIntegrations(params: ApiGatewayV2.Types.GetIntegrationsRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationsResponse) => void): Request<ApiGatewayV2.Types.GetIntegrationsResponse, AWSError>;
   /**
    * Gets a Model.
    */
   getModel(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetModelResponse) => void): Request<ApiGatewayV2.Types.GetModelResponse, AWSError>;
   /**
-   * Gets a model template.
+   * Gets a Model.
    */
-  getModelTemplate(params: ApiGatewayV2.Types.GetModelTemplateRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetModelTemplateResponse) => void): Request<ApiGatewayV2.Types.GetModelTemplateResponse, AWSError>;
+  getModel(params: ApiGatewayV2.Types.GetModelRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetModelResponse) => void): Request<ApiGatewayV2.Types.GetModelResponse, AWSError>;
   /**
    * Gets a model template.
    */
   getModelTemplate(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetModelTemplateResponse) => void): Request<ApiGatewayV2.Types.GetModelTemplateResponse, AWSError>;
   /**
-   * Gets the Models for an API.
+   * Gets a model template.
    */
-  getModels(params: ApiGatewayV2.Types.GetModelsRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetModelsResponse) => void): Request<ApiGatewayV2.Types.GetModelsResponse, AWSError>;
+  getModelTemplate(params: ApiGatewayV2.Types.GetModelTemplateRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetModelTemplateResponse) => void): Request<ApiGatewayV2.Types.GetModelTemplateResponse, AWSError>;
   /**
    * Gets the Models for an API.
    */
   getModels(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetModelsResponse) => void): Request<ApiGatewayV2.Types.GetModelsResponse, AWSError>;
   /**
-   * Gets a Route.
+   * Gets the Models for an API.
    */
-  getRoute(params: ApiGatewayV2.Types.GetRouteRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRouteResult) => void): Request<ApiGatewayV2.Types.GetRouteResult, AWSError>;
+  getModels(params: ApiGatewayV2.Types.GetModelsRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetModelsResponse) => void): Request<ApiGatewayV2.Types.GetModelsResponse, AWSError>;
   /**
    * Gets a Route.
    */
   getRoute(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRouteResult) => void): Request<ApiGatewayV2.Types.GetRouteResult, AWSError>;
   /**
-   * Gets a RouteResponse.
+   * Gets a Route.
    */
-  getRouteResponse(params: ApiGatewayV2.Types.GetRouteResponseRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRouteResponseResponse) => void): Request<ApiGatewayV2.Types.GetRouteResponseResponse, AWSError>;
+  getRoute(params: ApiGatewayV2.Types.GetRouteRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRouteResult) => void): Request<ApiGatewayV2.Types.GetRouteResult, AWSError>;
   /**
    * Gets a RouteResponse.
    */
   getRouteResponse(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRouteResponseResponse) => void): Request<ApiGatewayV2.Types.GetRouteResponseResponse, AWSError>;
   /**
-   * Gets the RouteResponses for a Route.
+   * Gets a RouteResponse.
    */
-  getRouteResponses(params: ApiGatewayV2.Types.GetRouteResponsesRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRouteResponsesResponse) => void): Request<ApiGatewayV2.Types.GetRouteResponsesResponse, AWSError>;
+  getRouteResponse(params: ApiGatewayV2.Types.GetRouteResponseRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRouteResponseResponse) => void): Request<ApiGatewayV2.Types.GetRouteResponseResponse, AWSError>;
   /**
    * Gets the RouteResponses for a Route.
    */
   getRouteResponses(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRouteResponsesResponse) => void): Request<ApiGatewayV2.Types.GetRouteResponsesResponse, AWSError>;
   /**
-   * Gets the Routes for an API.
+   * Gets the RouteResponses for a Route.
    */
-  getRoutes(params: ApiGatewayV2.Types.GetRoutesRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRoutesResponse) => void): Request<ApiGatewayV2.Types.GetRoutesResponse, AWSError>;
+  getRouteResponses(params: ApiGatewayV2.Types.GetRouteResponsesRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRouteResponsesResponse) => void): Request<ApiGatewayV2.Types.GetRouteResponsesResponse, AWSError>;
   /**
    * Gets the Routes for an API.
    */
   getRoutes(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRoutesResponse) => void): Request<ApiGatewayV2.Types.GetRoutesResponse, AWSError>;
   /**
-   * Gets a Stage.
+   * Gets the Routes for an API.
    */
-  getStage(params: ApiGatewayV2.Types.GetStageRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetStageResponse) => void): Request<ApiGatewayV2.Types.GetStageResponse, AWSError>;
+  getRoutes(params: ApiGatewayV2.Types.GetRoutesRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRoutesResponse) => void): Request<ApiGatewayV2.Types.GetRoutesResponse, AWSError>;
   /**
    * Gets a Stage.
    */
   getStage(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetStageResponse) => void): Request<ApiGatewayV2.Types.GetStageResponse, AWSError>;
   /**
-   * Gets the Stages for an API.
+   * Gets a Stage.
    */
-  getStages(params: ApiGatewayV2.Types.GetStagesRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetStagesResponse) => void): Request<ApiGatewayV2.Types.GetStagesResponse, AWSError>;
+  getStage(params: ApiGatewayV2.Types.GetStageRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetStageResponse) => void): Request<ApiGatewayV2.Types.GetStageResponse, AWSError>;
   /**
    * Gets the Stages for an API.
    */
   getStages(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetStagesResponse) => void): Request<ApiGatewayV2.Types.GetStagesResponse, AWSError>;
   /**
-   * Updates an Api resource.
+   * Gets the Stages for an API.
    */
-  updateApi(params: ApiGatewayV2.Types.UpdateApiRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateApiResponse) => void): Request<ApiGatewayV2.Types.UpdateApiResponse, AWSError>;
+  getStages(params: ApiGatewayV2.Types.GetStagesRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetStagesResponse) => void): Request<ApiGatewayV2.Types.GetStagesResponse, AWSError>;
   /**
    * Updates an Api resource.
    */
   updateApi(callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateApiResponse) => void): Request<ApiGatewayV2.Types.UpdateApiResponse, AWSError>;
   /**
-   * The API mapping.
+   * Updates an Api resource.
    */
-  updateApiMapping(params: ApiGatewayV2.Types.UpdateApiMappingRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateApiMappingResponse) => void): Request<ApiGatewayV2.Types.UpdateApiMappingResponse, AWSError>;
+  updateApi(params: ApiGatewayV2.Types.UpdateApiRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateApiResponse) => void): Request<ApiGatewayV2.Types.UpdateApiResponse, AWSError>;
   /**
    * The API mapping.
    */
   updateApiMapping(callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateApiMappingResponse) => void): Request<ApiGatewayV2.Types.UpdateApiMappingResponse, AWSError>;
   /**
-   * Updates an Authorizer.
+   * The API mapping.
    */
-  updateAuthorizer(params: ApiGatewayV2.Types.UpdateAuthorizerRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateAuthorizerResponse) => void): Request<ApiGatewayV2.Types.UpdateAuthorizerResponse, AWSError>;
+  updateApiMapping(params: ApiGatewayV2.Types.UpdateApiMappingRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateApiMappingResponse) => void): Request<ApiGatewayV2.Types.UpdateApiMappingResponse, AWSError>;
   /**
    * Updates an Authorizer.
    */
   updateAuthorizer(callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateAuthorizerResponse) => void): Request<ApiGatewayV2.Types.UpdateAuthorizerResponse, AWSError>;
   /**
-   * Updates a Deployment.
+   * Updates an Authorizer.
    */
-  updateDeployment(params: ApiGatewayV2.Types.UpdateDeploymentRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateDeploymentResponse) => void): Request<ApiGatewayV2.Types.UpdateDeploymentResponse, AWSError>;
+  updateAuthorizer(params: ApiGatewayV2.Types.UpdateAuthorizerRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateAuthorizerResponse) => void): Request<ApiGatewayV2.Types.UpdateAuthorizerResponse, AWSError>;
   /**
    * Updates a Deployment.
    */
   updateDeployment(callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateDeploymentResponse) => void): Request<ApiGatewayV2.Types.UpdateDeploymentResponse, AWSError>;
   /**
-   * Updates a domain name.
+   * Updates a Deployment.
    */
-  updateDomainName(params: ApiGatewayV2.Types.UpdateDomainNameRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateDomainNameResponse) => void): Request<ApiGatewayV2.Types.UpdateDomainNameResponse, AWSError>;
+  updateDeployment(params: ApiGatewayV2.Types.UpdateDeploymentRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateDeploymentResponse) => void): Request<ApiGatewayV2.Types.UpdateDeploymentResponse, AWSError>;
   /**
    * Updates a domain name.
    */
   updateDomainName(callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateDomainNameResponse) => void): Request<ApiGatewayV2.Types.UpdateDomainNameResponse, AWSError>;
   /**
-   * Updates an Integration.
+   * Updates a domain name.
    */
-  updateIntegration(params: ApiGatewayV2.Types.UpdateIntegrationRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateIntegrationResult) => void): Request<ApiGatewayV2.Types.UpdateIntegrationResult, AWSError>;
+  updateDomainName(params: ApiGatewayV2.Types.UpdateDomainNameRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateDomainNameResponse) => void): Request<ApiGatewayV2.Types.UpdateDomainNameResponse, AWSError>;
   /**
    * Updates an Integration.
    */
   updateIntegration(callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateIntegrationResult) => void): Request<ApiGatewayV2.Types.UpdateIntegrationResult, AWSError>;
   /**
-   * Updates an IntegrationResponses.
+   * Updates an Integration.
    */
-  updateIntegrationResponse(params: ApiGatewayV2.Types.UpdateIntegrationResponseRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateIntegrationResponseResponse) => void): Request<ApiGatewayV2.Types.UpdateIntegrationResponseResponse, AWSError>;
+  updateIntegration(params: ApiGatewayV2.Types.UpdateIntegrationRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateIntegrationResult) => void): Request<ApiGatewayV2.Types.UpdateIntegrationResult, AWSError>;
   /**
    * Updates an IntegrationResponses.
    */
   updateIntegrationResponse(callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateIntegrationResponseResponse) => void): Request<ApiGatewayV2.Types.UpdateIntegrationResponseResponse, AWSError>;
   /**
-   * Updates a Model.
+   * Updates an IntegrationResponses.
    */
-  updateModel(params: ApiGatewayV2.Types.UpdateModelRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateModelResponse) => void): Request<ApiGatewayV2.Types.UpdateModelResponse, AWSError>;
+  updateIntegrationResponse(params: ApiGatewayV2.Types.UpdateIntegrationResponseRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateIntegrationResponseResponse) => void): Request<ApiGatewayV2.Types.UpdateIntegrationResponseResponse, AWSError>;
   /**
    * Updates a Model.
    */
   updateModel(callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateModelResponse) => void): Request<ApiGatewayV2.Types.UpdateModelResponse, AWSError>;
   /**
-   * Updates a Route.
+   * Updates a Model.
    */
-  updateRoute(params: ApiGatewayV2.Types.UpdateRouteRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateRouteResult) => void): Request<ApiGatewayV2.Types.UpdateRouteResult, AWSError>;
+  updateModel(params: ApiGatewayV2.Types.UpdateModelRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateModelResponse) => void): Request<ApiGatewayV2.Types.UpdateModelResponse, AWSError>;
   /**
    * Updates a Route.
    */
   updateRoute(callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateRouteResult) => void): Request<ApiGatewayV2.Types.UpdateRouteResult, AWSError>;
   /**
-   * Updates a RouteResponse.
+   * Updates a Route.
    */
-  updateRouteResponse(params: ApiGatewayV2.Types.UpdateRouteResponseRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateRouteResponseResponse) => void): Request<ApiGatewayV2.Types.UpdateRouteResponseResponse, AWSError>;
+  updateRoute(params: ApiGatewayV2.Types.UpdateRouteRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateRouteResult) => void): Request<ApiGatewayV2.Types.UpdateRouteResult, AWSError>;
   /**
    * Updates a RouteResponse.
    */
   updateRouteResponse(callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateRouteResponseResponse) => void): Request<ApiGatewayV2.Types.UpdateRouteResponseResponse, AWSError>;
   /**
-   * Updates a Stage.
+   * Updates a RouteResponse.
    */
-  updateStage(params: ApiGatewayV2.Types.UpdateStageRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateStageResponse) => void): Request<ApiGatewayV2.Types.UpdateStageResponse, AWSError>;
+  updateRouteResponse(params: ApiGatewayV2.Types.UpdateRouteResponseRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateRouteResponseResponse) => void): Request<ApiGatewayV2.Types.UpdateRouteResponseResponse, AWSError>;
   /**
    * Updates a Stage.
    */
   updateStage(callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateStageResponse) => void): Request<ApiGatewayV2.Types.UpdateStageResponse, AWSError>;
+  /**
+   * Updates a Stage.
+   */
+  updateStage(params: ApiGatewayV2.Types.UpdateStageRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateStageResponse) => void): Request<ApiGatewayV2.Types.UpdateStageResponse, AWSError>;
 }
 declare namespace ApiGatewayV2 {
   export interface AccessLogSettings {

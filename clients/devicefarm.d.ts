@@ -14,515 +14,515 @@ declare class DeviceFarm extends Service {
   /**
    * Creates a device pool.
    */
-  createDevicePool(params: DeviceFarm.Types.CreateDevicePoolRequest, callback?: (err: AWSError, data: DeviceFarm.Types.CreateDevicePoolResult) => void): Request<DeviceFarm.Types.CreateDevicePoolResult, AWSError>;
+  createDevicePool(callback?: (err: AWSError, data: DeviceFarm.Types.CreateDevicePoolResult) => void): Request<DeviceFarm.Types.CreateDevicePoolResult, AWSError>;
   /**
    * Creates a device pool.
    */
-  createDevicePool(callback?: (err: AWSError, data: DeviceFarm.Types.CreateDevicePoolResult) => void): Request<DeviceFarm.Types.CreateDevicePoolResult, AWSError>;
-  /**
-   * Creates a profile that can be applied to one or more private fleet device instances.
-   */
-  createInstanceProfile(params: DeviceFarm.Types.CreateInstanceProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.CreateInstanceProfileResult) => void): Request<DeviceFarm.Types.CreateInstanceProfileResult, AWSError>;
+  createDevicePool(params: DeviceFarm.Types.CreateDevicePoolRequest, callback?: (err: AWSError, data: DeviceFarm.Types.CreateDevicePoolResult) => void): Request<DeviceFarm.Types.CreateDevicePoolResult, AWSError>;
   /**
    * Creates a profile that can be applied to one or more private fleet device instances.
    */
   createInstanceProfile(callback?: (err: AWSError, data: DeviceFarm.Types.CreateInstanceProfileResult) => void): Request<DeviceFarm.Types.CreateInstanceProfileResult, AWSError>;
   /**
-   * Creates a network profile.
+   * Creates a profile that can be applied to one or more private fleet device instances.
    */
-  createNetworkProfile(params: DeviceFarm.Types.CreateNetworkProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.CreateNetworkProfileResult) => void): Request<DeviceFarm.Types.CreateNetworkProfileResult, AWSError>;
+  createInstanceProfile(params: DeviceFarm.Types.CreateInstanceProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.CreateInstanceProfileResult) => void): Request<DeviceFarm.Types.CreateInstanceProfileResult, AWSError>;
   /**
    * Creates a network profile.
    */
   createNetworkProfile(callback?: (err: AWSError, data: DeviceFarm.Types.CreateNetworkProfileResult) => void): Request<DeviceFarm.Types.CreateNetworkProfileResult, AWSError>;
   /**
-   * Creates a new project.
+   * Creates a network profile.
    */
-  createProject(params: DeviceFarm.Types.CreateProjectRequest, callback?: (err: AWSError, data: DeviceFarm.Types.CreateProjectResult) => void): Request<DeviceFarm.Types.CreateProjectResult, AWSError>;
+  createNetworkProfile(params: DeviceFarm.Types.CreateNetworkProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.CreateNetworkProfileResult) => void): Request<DeviceFarm.Types.CreateNetworkProfileResult, AWSError>;
   /**
    * Creates a new project.
    */
   createProject(callback?: (err: AWSError, data: DeviceFarm.Types.CreateProjectResult) => void): Request<DeviceFarm.Types.CreateProjectResult, AWSError>;
   /**
-   * Specifies and starts a remote access session.
+   * Creates a new project.
    */
-  createRemoteAccessSession(params: DeviceFarm.Types.CreateRemoteAccessSessionRequest, callback?: (err: AWSError, data: DeviceFarm.Types.CreateRemoteAccessSessionResult) => void): Request<DeviceFarm.Types.CreateRemoteAccessSessionResult, AWSError>;
+  createProject(params: DeviceFarm.Types.CreateProjectRequest, callback?: (err: AWSError, data: DeviceFarm.Types.CreateProjectResult) => void): Request<DeviceFarm.Types.CreateProjectResult, AWSError>;
   /**
    * Specifies and starts a remote access session.
    */
   createRemoteAccessSession(callback?: (err: AWSError, data: DeviceFarm.Types.CreateRemoteAccessSessionResult) => void): Request<DeviceFarm.Types.CreateRemoteAccessSessionResult, AWSError>;
   /**
-   * Uploads an app or test scripts.
+   * Specifies and starts a remote access session.
    */
-  createUpload(params: DeviceFarm.Types.CreateUploadRequest, callback?: (err: AWSError, data: DeviceFarm.Types.CreateUploadResult) => void): Request<DeviceFarm.Types.CreateUploadResult, AWSError>;
+  createRemoteAccessSession(params: DeviceFarm.Types.CreateRemoteAccessSessionRequest, callback?: (err: AWSError, data: DeviceFarm.Types.CreateRemoteAccessSessionResult) => void): Request<DeviceFarm.Types.CreateRemoteAccessSessionResult, AWSError>;
   /**
    * Uploads an app or test scripts.
    */
   createUpload(callback?: (err: AWSError, data: DeviceFarm.Types.CreateUploadResult) => void): Request<DeviceFarm.Types.CreateUploadResult, AWSError>;
   /**
-   * Creates a configuration record in Device Farm for your Amazon Virtual Private Cloud (VPC) endpoint.
+   * Uploads an app or test scripts.
    */
-  createVPCEConfiguration(params: DeviceFarm.Types.CreateVPCEConfigurationRequest, callback?: (err: AWSError, data: DeviceFarm.Types.CreateVPCEConfigurationResult) => void): Request<DeviceFarm.Types.CreateVPCEConfigurationResult, AWSError>;
+  createUpload(params: DeviceFarm.Types.CreateUploadRequest, callback?: (err: AWSError, data: DeviceFarm.Types.CreateUploadResult) => void): Request<DeviceFarm.Types.CreateUploadResult, AWSError>;
   /**
    * Creates a configuration record in Device Farm for your Amazon Virtual Private Cloud (VPC) endpoint.
    */
   createVPCEConfiguration(callback?: (err: AWSError, data: DeviceFarm.Types.CreateVPCEConfigurationResult) => void): Request<DeviceFarm.Types.CreateVPCEConfigurationResult, AWSError>;
   /**
-   * Deletes a device pool given the pool ARN. Does not allow deletion of curated pools owned by the system.
+   * Creates a configuration record in Device Farm for your Amazon Virtual Private Cloud (VPC) endpoint.
    */
-  deleteDevicePool(params: DeviceFarm.Types.DeleteDevicePoolRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteDevicePoolResult) => void): Request<DeviceFarm.Types.DeleteDevicePoolResult, AWSError>;
+  createVPCEConfiguration(params: DeviceFarm.Types.CreateVPCEConfigurationRequest, callback?: (err: AWSError, data: DeviceFarm.Types.CreateVPCEConfigurationResult) => void): Request<DeviceFarm.Types.CreateVPCEConfigurationResult, AWSError>;
   /**
    * Deletes a device pool given the pool ARN. Does not allow deletion of curated pools owned by the system.
    */
   deleteDevicePool(callback?: (err: AWSError, data: DeviceFarm.Types.DeleteDevicePoolResult) => void): Request<DeviceFarm.Types.DeleteDevicePoolResult, AWSError>;
   /**
-   * Deletes a profile that can be applied to one or more private device instances.
+   * Deletes a device pool given the pool ARN. Does not allow deletion of curated pools owned by the system.
    */
-  deleteInstanceProfile(params: DeviceFarm.Types.DeleteInstanceProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteInstanceProfileResult) => void): Request<DeviceFarm.Types.DeleteInstanceProfileResult, AWSError>;
+  deleteDevicePool(params: DeviceFarm.Types.DeleteDevicePoolRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteDevicePoolResult) => void): Request<DeviceFarm.Types.DeleteDevicePoolResult, AWSError>;
   /**
    * Deletes a profile that can be applied to one or more private device instances.
    */
   deleteInstanceProfile(callback?: (err: AWSError, data: DeviceFarm.Types.DeleteInstanceProfileResult) => void): Request<DeviceFarm.Types.DeleteInstanceProfileResult, AWSError>;
   /**
-   * Deletes a network profile.
+   * Deletes a profile that can be applied to one or more private device instances.
    */
-  deleteNetworkProfile(params: DeviceFarm.Types.DeleteNetworkProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteNetworkProfileResult) => void): Request<DeviceFarm.Types.DeleteNetworkProfileResult, AWSError>;
+  deleteInstanceProfile(params: DeviceFarm.Types.DeleteInstanceProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteInstanceProfileResult) => void): Request<DeviceFarm.Types.DeleteInstanceProfileResult, AWSError>;
   /**
    * Deletes a network profile.
    */
   deleteNetworkProfile(callback?: (err: AWSError, data: DeviceFarm.Types.DeleteNetworkProfileResult) => void): Request<DeviceFarm.Types.DeleteNetworkProfileResult, AWSError>;
   /**
-   * Deletes an AWS Device Farm project, given the project ARN.  Note Deleting this resource does not stop an in-progress run.
+   * Deletes a network profile.
    */
-  deleteProject(params: DeviceFarm.Types.DeleteProjectRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteProjectResult) => void): Request<DeviceFarm.Types.DeleteProjectResult, AWSError>;
+  deleteNetworkProfile(params: DeviceFarm.Types.DeleteNetworkProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteNetworkProfileResult) => void): Request<DeviceFarm.Types.DeleteNetworkProfileResult, AWSError>;
   /**
    * Deletes an AWS Device Farm project, given the project ARN.  Note Deleting this resource does not stop an in-progress run.
    */
   deleteProject(callback?: (err: AWSError, data: DeviceFarm.Types.DeleteProjectResult) => void): Request<DeviceFarm.Types.DeleteProjectResult, AWSError>;
   /**
-   * Deletes a completed remote access session and its results.
+   * Deletes an AWS Device Farm project, given the project ARN.  Note Deleting this resource does not stop an in-progress run.
    */
-  deleteRemoteAccessSession(params: DeviceFarm.Types.DeleteRemoteAccessSessionRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteRemoteAccessSessionResult) => void): Request<DeviceFarm.Types.DeleteRemoteAccessSessionResult, AWSError>;
+  deleteProject(params: DeviceFarm.Types.DeleteProjectRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteProjectResult) => void): Request<DeviceFarm.Types.DeleteProjectResult, AWSError>;
   /**
    * Deletes a completed remote access session and its results.
    */
   deleteRemoteAccessSession(callback?: (err: AWSError, data: DeviceFarm.Types.DeleteRemoteAccessSessionResult) => void): Request<DeviceFarm.Types.DeleteRemoteAccessSessionResult, AWSError>;
   /**
-   * Deletes the run, given the run ARN.  Note Deleting this resource does not stop an in-progress run.
+   * Deletes a completed remote access session and its results.
    */
-  deleteRun(params: DeviceFarm.Types.DeleteRunRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteRunResult) => void): Request<DeviceFarm.Types.DeleteRunResult, AWSError>;
+  deleteRemoteAccessSession(params: DeviceFarm.Types.DeleteRemoteAccessSessionRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteRemoteAccessSessionResult) => void): Request<DeviceFarm.Types.DeleteRemoteAccessSessionResult, AWSError>;
   /**
    * Deletes the run, given the run ARN.  Note Deleting this resource does not stop an in-progress run.
    */
   deleteRun(callback?: (err: AWSError, data: DeviceFarm.Types.DeleteRunResult) => void): Request<DeviceFarm.Types.DeleteRunResult, AWSError>;
   /**
-   * Deletes an upload given the upload ARN.
+   * Deletes the run, given the run ARN.  Note Deleting this resource does not stop an in-progress run.
    */
-  deleteUpload(params: DeviceFarm.Types.DeleteUploadRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteUploadResult) => void): Request<DeviceFarm.Types.DeleteUploadResult, AWSError>;
+  deleteRun(params: DeviceFarm.Types.DeleteRunRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteRunResult) => void): Request<DeviceFarm.Types.DeleteRunResult, AWSError>;
   /**
    * Deletes an upload given the upload ARN.
    */
   deleteUpload(callback?: (err: AWSError, data: DeviceFarm.Types.DeleteUploadResult) => void): Request<DeviceFarm.Types.DeleteUploadResult, AWSError>;
   /**
-   * Deletes a configuration for your Amazon Virtual Private Cloud (VPC) endpoint.
+   * Deletes an upload given the upload ARN.
    */
-  deleteVPCEConfiguration(params: DeviceFarm.Types.DeleteVPCEConfigurationRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteVPCEConfigurationResult) => void): Request<DeviceFarm.Types.DeleteVPCEConfigurationResult, AWSError>;
+  deleteUpload(params: DeviceFarm.Types.DeleteUploadRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteUploadResult) => void): Request<DeviceFarm.Types.DeleteUploadResult, AWSError>;
   /**
    * Deletes a configuration for your Amazon Virtual Private Cloud (VPC) endpoint.
    */
   deleteVPCEConfiguration(callback?: (err: AWSError, data: DeviceFarm.Types.DeleteVPCEConfigurationResult) => void): Request<DeviceFarm.Types.DeleteVPCEConfigurationResult, AWSError>;
   /**
-   * Returns the number of unmetered iOS and/or unmetered Android devices that have been purchased by the account.
+   * Deletes a configuration for your Amazon Virtual Private Cloud (VPC) endpoint.
    */
-  getAccountSettings(params: DeviceFarm.Types.GetAccountSettingsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetAccountSettingsResult) => void): Request<DeviceFarm.Types.GetAccountSettingsResult, AWSError>;
+  deleteVPCEConfiguration(params: DeviceFarm.Types.DeleteVPCEConfigurationRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteVPCEConfigurationResult) => void): Request<DeviceFarm.Types.DeleteVPCEConfigurationResult, AWSError>;
   /**
    * Returns the number of unmetered iOS and/or unmetered Android devices that have been purchased by the account.
    */
   getAccountSettings(callback?: (err: AWSError, data: DeviceFarm.Types.GetAccountSettingsResult) => void): Request<DeviceFarm.Types.GetAccountSettingsResult, AWSError>;
   /**
-   * Gets information about a unique device type.
+   * Returns the number of unmetered iOS and/or unmetered Android devices that have been purchased by the account.
    */
-  getDevice(params: DeviceFarm.Types.GetDeviceRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetDeviceResult) => void): Request<DeviceFarm.Types.GetDeviceResult, AWSError>;
+  getAccountSettings(params: DeviceFarm.Types.GetAccountSettingsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetAccountSettingsResult) => void): Request<DeviceFarm.Types.GetAccountSettingsResult, AWSError>;
   /**
    * Gets information about a unique device type.
    */
   getDevice(callback?: (err: AWSError, data: DeviceFarm.Types.GetDeviceResult) => void): Request<DeviceFarm.Types.GetDeviceResult, AWSError>;
   /**
-   * Returns information about a device instance belonging to a private device fleet.
+   * Gets information about a unique device type.
    */
-  getDeviceInstance(params: DeviceFarm.Types.GetDeviceInstanceRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetDeviceInstanceResult) => void): Request<DeviceFarm.Types.GetDeviceInstanceResult, AWSError>;
+  getDevice(params: DeviceFarm.Types.GetDeviceRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetDeviceResult) => void): Request<DeviceFarm.Types.GetDeviceResult, AWSError>;
   /**
    * Returns information about a device instance belonging to a private device fleet.
    */
   getDeviceInstance(callback?: (err: AWSError, data: DeviceFarm.Types.GetDeviceInstanceResult) => void): Request<DeviceFarm.Types.GetDeviceInstanceResult, AWSError>;
   /**
-   * Gets information about a device pool.
+   * Returns information about a device instance belonging to a private device fleet.
    */
-  getDevicePool(params: DeviceFarm.Types.GetDevicePoolRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetDevicePoolResult) => void): Request<DeviceFarm.Types.GetDevicePoolResult, AWSError>;
+  getDeviceInstance(params: DeviceFarm.Types.GetDeviceInstanceRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetDeviceInstanceResult) => void): Request<DeviceFarm.Types.GetDeviceInstanceResult, AWSError>;
   /**
    * Gets information about a device pool.
    */
   getDevicePool(callback?: (err: AWSError, data: DeviceFarm.Types.GetDevicePoolResult) => void): Request<DeviceFarm.Types.GetDevicePoolResult, AWSError>;
   /**
-   * Gets information about compatibility with a device pool.
+   * Gets information about a device pool.
    */
-  getDevicePoolCompatibility(params: DeviceFarm.Types.GetDevicePoolCompatibilityRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetDevicePoolCompatibilityResult) => void): Request<DeviceFarm.Types.GetDevicePoolCompatibilityResult, AWSError>;
+  getDevicePool(params: DeviceFarm.Types.GetDevicePoolRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetDevicePoolResult) => void): Request<DeviceFarm.Types.GetDevicePoolResult, AWSError>;
   /**
    * Gets information about compatibility with a device pool.
    */
   getDevicePoolCompatibility(callback?: (err: AWSError, data: DeviceFarm.Types.GetDevicePoolCompatibilityResult) => void): Request<DeviceFarm.Types.GetDevicePoolCompatibilityResult, AWSError>;
   /**
-   * Returns information about the specified instance profile.
+   * Gets information about compatibility with a device pool.
    */
-  getInstanceProfile(params: DeviceFarm.Types.GetInstanceProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetInstanceProfileResult) => void): Request<DeviceFarm.Types.GetInstanceProfileResult, AWSError>;
+  getDevicePoolCompatibility(params: DeviceFarm.Types.GetDevicePoolCompatibilityRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetDevicePoolCompatibilityResult) => void): Request<DeviceFarm.Types.GetDevicePoolCompatibilityResult, AWSError>;
   /**
    * Returns information about the specified instance profile.
    */
   getInstanceProfile(callback?: (err: AWSError, data: DeviceFarm.Types.GetInstanceProfileResult) => void): Request<DeviceFarm.Types.GetInstanceProfileResult, AWSError>;
   /**
-   * Gets information about a job.
+   * Returns information about the specified instance profile.
    */
-  getJob(params: DeviceFarm.Types.GetJobRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetJobResult) => void): Request<DeviceFarm.Types.GetJobResult, AWSError>;
+  getInstanceProfile(params: DeviceFarm.Types.GetInstanceProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetInstanceProfileResult) => void): Request<DeviceFarm.Types.GetInstanceProfileResult, AWSError>;
   /**
    * Gets information about a job.
    */
   getJob(callback?: (err: AWSError, data: DeviceFarm.Types.GetJobResult) => void): Request<DeviceFarm.Types.GetJobResult, AWSError>;
   /**
-   * Returns information about a network profile.
+   * Gets information about a job.
    */
-  getNetworkProfile(params: DeviceFarm.Types.GetNetworkProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetNetworkProfileResult) => void): Request<DeviceFarm.Types.GetNetworkProfileResult, AWSError>;
+  getJob(params: DeviceFarm.Types.GetJobRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetJobResult) => void): Request<DeviceFarm.Types.GetJobResult, AWSError>;
   /**
    * Returns information about a network profile.
    */
   getNetworkProfile(callback?: (err: AWSError, data: DeviceFarm.Types.GetNetworkProfileResult) => void): Request<DeviceFarm.Types.GetNetworkProfileResult, AWSError>;
   /**
-   * Gets the current status and future status of all offerings purchased by an AWS account. The response indicates how many offerings are currently available and the offerings that will be available in the next period. The API returns a NotEligible error if the user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
+   * Returns information about a network profile.
    */
-  getOfferingStatus(params: DeviceFarm.Types.GetOfferingStatusRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetOfferingStatusResult) => void): Request<DeviceFarm.Types.GetOfferingStatusResult, AWSError>;
+  getNetworkProfile(params: DeviceFarm.Types.GetNetworkProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetNetworkProfileResult) => void): Request<DeviceFarm.Types.GetNetworkProfileResult, AWSError>;
   /**
    * Gets the current status and future status of all offerings purchased by an AWS account. The response indicates how many offerings are currently available and the offerings that will be available in the next period. The API returns a NotEligible error if the user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
    */
   getOfferingStatus(callback?: (err: AWSError, data: DeviceFarm.Types.GetOfferingStatusResult) => void): Request<DeviceFarm.Types.GetOfferingStatusResult, AWSError>;
   /**
-   * Gets information about a project.
+   * Gets the current status and future status of all offerings purchased by an AWS account. The response indicates how many offerings are currently available and the offerings that will be available in the next period. The API returns a NotEligible error if the user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
    */
-  getProject(params: DeviceFarm.Types.GetProjectRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetProjectResult) => void): Request<DeviceFarm.Types.GetProjectResult, AWSError>;
+  getOfferingStatus(params: DeviceFarm.Types.GetOfferingStatusRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetOfferingStatusResult) => void): Request<DeviceFarm.Types.GetOfferingStatusResult, AWSError>;
   /**
    * Gets information about a project.
    */
   getProject(callback?: (err: AWSError, data: DeviceFarm.Types.GetProjectResult) => void): Request<DeviceFarm.Types.GetProjectResult, AWSError>;
   /**
-   * Returns a link to a currently running remote access session.
+   * Gets information about a project.
    */
-  getRemoteAccessSession(params: DeviceFarm.Types.GetRemoteAccessSessionRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetRemoteAccessSessionResult) => void): Request<DeviceFarm.Types.GetRemoteAccessSessionResult, AWSError>;
+  getProject(params: DeviceFarm.Types.GetProjectRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetProjectResult) => void): Request<DeviceFarm.Types.GetProjectResult, AWSError>;
   /**
    * Returns a link to a currently running remote access session.
    */
   getRemoteAccessSession(callback?: (err: AWSError, data: DeviceFarm.Types.GetRemoteAccessSessionResult) => void): Request<DeviceFarm.Types.GetRemoteAccessSessionResult, AWSError>;
   /**
-   * Gets information about a run.
+   * Returns a link to a currently running remote access session.
    */
-  getRun(params: DeviceFarm.Types.GetRunRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetRunResult) => void): Request<DeviceFarm.Types.GetRunResult, AWSError>;
+  getRemoteAccessSession(params: DeviceFarm.Types.GetRemoteAccessSessionRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetRemoteAccessSessionResult) => void): Request<DeviceFarm.Types.GetRemoteAccessSessionResult, AWSError>;
   /**
    * Gets information about a run.
    */
   getRun(callback?: (err: AWSError, data: DeviceFarm.Types.GetRunResult) => void): Request<DeviceFarm.Types.GetRunResult, AWSError>;
   /**
-   * Gets information about a suite.
+   * Gets information about a run.
    */
-  getSuite(params: DeviceFarm.Types.GetSuiteRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetSuiteResult) => void): Request<DeviceFarm.Types.GetSuiteResult, AWSError>;
+  getRun(params: DeviceFarm.Types.GetRunRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetRunResult) => void): Request<DeviceFarm.Types.GetRunResult, AWSError>;
   /**
    * Gets information about a suite.
    */
   getSuite(callback?: (err: AWSError, data: DeviceFarm.Types.GetSuiteResult) => void): Request<DeviceFarm.Types.GetSuiteResult, AWSError>;
   /**
-   * Gets information about a test.
+   * Gets information about a suite.
    */
-  getTest(params: DeviceFarm.Types.GetTestRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetTestResult) => void): Request<DeviceFarm.Types.GetTestResult, AWSError>;
+  getSuite(params: DeviceFarm.Types.GetSuiteRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetSuiteResult) => void): Request<DeviceFarm.Types.GetSuiteResult, AWSError>;
   /**
    * Gets information about a test.
    */
   getTest(callback?: (err: AWSError, data: DeviceFarm.Types.GetTestResult) => void): Request<DeviceFarm.Types.GetTestResult, AWSError>;
   /**
-   * Gets information about an upload.
+   * Gets information about a test.
    */
-  getUpload(params: DeviceFarm.Types.GetUploadRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetUploadResult) => void): Request<DeviceFarm.Types.GetUploadResult, AWSError>;
+  getTest(params: DeviceFarm.Types.GetTestRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetTestResult) => void): Request<DeviceFarm.Types.GetTestResult, AWSError>;
   /**
    * Gets information about an upload.
    */
   getUpload(callback?: (err: AWSError, data: DeviceFarm.Types.GetUploadResult) => void): Request<DeviceFarm.Types.GetUploadResult, AWSError>;
   /**
-   * Returns information about the configuration settings for your Amazon Virtual Private Cloud (VPC) endpoint.
+   * Gets information about an upload.
    */
-  getVPCEConfiguration(params: DeviceFarm.Types.GetVPCEConfigurationRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetVPCEConfigurationResult) => void): Request<DeviceFarm.Types.GetVPCEConfigurationResult, AWSError>;
+  getUpload(params: DeviceFarm.Types.GetUploadRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetUploadResult) => void): Request<DeviceFarm.Types.GetUploadResult, AWSError>;
   /**
    * Returns information about the configuration settings for your Amazon Virtual Private Cloud (VPC) endpoint.
    */
   getVPCEConfiguration(callback?: (err: AWSError, data: DeviceFarm.Types.GetVPCEConfigurationResult) => void): Request<DeviceFarm.Types.GetVPCEConfigurationResult, AWSError>;
   /**
-   * Installs an application to the device in a remote access session. For Android applications, the file must be in .apk format. For iOS applications, the file must be in .ipa format.
+   * Returns information about the configuration settings for your Amazon Virtual Private Cloud (VPC) endpoint.
    */
-  installToRemoteAccessSession(params: DeviceFarm.Types.InstallToRemoteAccessSessionRequest, callback?: (err: AWSError, data: DeviceFarm.Types.InstallToRemoteAccessSessionResult) => void): Request<DeviceFarm.Types.InstallToRemoteAccessSessionResult, AWSError>;
+  getVPCEConfiguration(params: DeviceFarm.Types.GetVPCEConfigurationRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetVPCEConfigurationResult) => void): Request<DeviceFarm.Types.GetVPCEConfigurationResult, AWSError>;
   /**
    * Installs an application to the device in a remote access session. For Android applications, the file must be in .apk format. For iOS applications, the file must be in .ipa format.
    */
   installToRemoteAccessSession(callback?: (err: AWSError, data: DeviceFarm.Types.InstallToRemoteAccessSessionResult) => void): Request<DeviceFarm.Types.InstallToRemoteAccessSessionResult, AWSError>;
   /**
-   * Gets information about artifacts.
+   * Installs an application to the device in a remote access session. For Android applications, the file must be in .apk format. For iOS applications, the file must be in .ipa format.
    */
-  listArtifacts(params: DeviceFarm.Types.ListArtifactsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListArtifactsResult) => void): Request<DeviceFarm.Types.ListArtifactsResult, AWSError>;
+  installToRemoteAccessSession(params: DeviceFarm.Types.InstallToRemoteAccessSessionRequest, callback?: (err: AWSError, data: DeviceFarm.Types.InstallToRemoteAccessSessionResult) => void): Request<DeviceFarm.Types.InstallToRemoteAccessSessionResult, AWSError>;
   /**
    * Gets information about artifacts.
    */
   listArtifacts(callback?: (err: AWSError, data: DeviceFarm.Types.ListArtifactsResult) => void): Request<DeviceFarm.Types.ListArtifactsResult, AWSError>;
   /**
-   * Returns information about the private device instances associated with one or more AWS accounts.
+   * Gets information about artifacts.
    */
-  listDeviceInstances(params: DeviceFarm.Types.ListDeviceInstancesRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListDeviceInstancesResult) => void): Request<DeviceFarm.Types.ListDeviceInstancesResult, AWSError>;
+  listArtifacts(params: DeviceFarm.Types.ListArtifactsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListArtifactsResult) => void): Request<DeviceFarm.Types.ListArtifactsResult, AWSError>;
   /**
    * Returns information about the private device instances associated with one or more AWS accounts.
    */
   listDeviceInstances(callback?: (err: AWSError, data: DeviceFarm.Types.ListDeviceInstancesResult) => void): Request<DeviceFarm.Types.ListDeviceInstancesResult, AWSError>;
   /**
-   * Gets information about device pools.
+   * Returns information about the private device instances associated with one or more AWS accounts.
    */
-  listDevicePools(params: DeviceFarm.Types.ListDevicePoolsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListDevicePoolsResult) => void): Request<DeviceFarm.Types.ListDevicePoolsResult, AWSError>;
+  listDeviceInstances(params: DeviceFarm.Types.ListDeviceInstancesRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListDeviceInstancesResult) => void): Request<DeviceFarm.Types.ListDeviceInstancesResult, AWSError>;
   /**
    * Gets information about device pools.
    */
   listDevicePools(callback?: (err: AWSError, data: DeviceFarm.Types.ListDevicePoolsResult) => void): Request<DeviceFarm.Types.ListDevicePoolsResult, AWSError>;
   /**
-   * Gets information about unique device types.
+   * Gets information about device pools.
    */
-  listDevices(params: DeviceFarm.Types.ListDevicesRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListDevicesResult) => void): Request<DeviceFarm.Types.ListDevicesResult, AWSError>;
+  listDevicePools(params: DeviceFarm.Types.ListDevicePoolsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListDevicePoolsResult) => void): Request<DeviceFarm.Types.ListDevicePoolsResult, AWSError>;
   /**
    * Gets information about unique device types.
    */
   listDevices(callback?: (err: AWSError, data: DeviceFarm.Types.ListDevicesResult) => void): Request<DeviceFarm.Types.ListDevicesResult, AWSError>;
   /**
-   * Returns information about all the instance profiles in an AWS account.
+   * Gets information about unique device types.
    */
-  listInstanceProfiles(params: DeviceFarm.Types.ListInstanceProfilesRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListInstanceProfilesResult) => void): Request<DeviceFarm.Types.ListInstanceProfilesResult, AWSError>;
+  listDevices(params: DeviceFarm.Types.ListDevicesRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListDevicesResult) => void): Request<DeviceFarm.Types.ListDevicesResult, AWSError>;
   /**
    * Returns information about all the instance profiles in an AWS account.
    */
   listInstanceProfiles(callback?: (err: AWSError, data: DeviceFarm.Types.ListInstanceProfilesResult) => void): Request<DeviceFarm.Types.ListInstanceProfilesResult, AWSError>;
   /**
-   * Gets information about jobs for a given test run.
+   * Returns information about all the instance profiles in an AWS account.
    */
-  listJobs(params: DeviceFarm.Types.ListJobsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListJobsResult) => void): Request<DeviceFarm.Types.ListJobsResult, AWSError>;
+  listInstanceProfiles(params: DeviceFarm.Types.ListInstanceProfilesRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListInstanceProfilesResult) => void): Request<DeviceFarm.Types.ListInstanceProfilesResult, AWSError>;
   /**
    * Gets information about jobs for a given test run.
    */
   listJobs(callback?: (err: AWSError, data: DeviceFarm.Types.ListJobsResult) => void): Request<DeviceFarm.Types.ListJobsResult, AWSError>;
   /**
-   * Returns the list of available network profiles.
+   * Gets information about jobs for a given test run.
    */
-  listNetworkProfiles(params: DeviceFarm.Types.ListNetworkProfilesRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListNetworkProfilesResult) => void): Request<DeviceFarm.Types.ListNetworkProfilesResult, AWSError>;
+  listJobs(params: DeviceFarm.Types.ListJobsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListJobsResult) => void): Request<DeviceFarm.Types.ListJobsResult, AWSError>;
   /**
    * Returns the list of available network profiles.
    */
   listNetworkProfiles(callback?: (err: AWSError, data: DeviceFarm.Types.ListNetworkProfilesResult) => void): Request<DeviceFarm.Types.ListNetworkProfilesResult, AWSError>;
   /**
-   * Returns a list of offering promotions. Each offering promotion record contains the ID and description of the promotion. The API returns a NotEligible error if the caller is not permitted to invoke the operation. Contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
+   * Returns the list of available network profiles.
    */
-  listOfferingPromotions(params: DeviceFarm.Types.ListOfferingPromotionsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListOfferingPromotionsResult) => void): Request<DeviceFarm.Types.ListOfferingPromotionsResult, AWSError>;
+  listNetworkProfiles(params: DeviceFarm.Types.ListNetworkProfilesRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListNetworkProfilesResult) => void): Request<DeviceFarm.Types.ListNetworkProfilesResult, AWSError>;
   /**
    * Returns a list of offering promotions. Each offering promotion record contains the ID and description of the promotion. The API returns a NotEligible error if the caller is not permitted to invoke the operation. Contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
    */
   listOfferingPromotions(callback?: (err: AWSError, data: DeviceFarm.Types.ListOfferingPromotionsResult) => void): Request<DeviceFarm.Types.ListOfferingPromotionsResult, AWSError>;
   /**
-   * Returns a list of all historical purchases, renewals, and system renewal transactions for an AWS account. The list is paginated and ordered by a descending timestamp (most recent transactions are first). The API returns a NotEligible error if the user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
+   * Returns a list of offering promotions. Each offering promotion record contains the ID and description of the promotion. The API returns a NotEligible error if the caller is not permitted to invoke the operation. Contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
    */
-  listOfferingTransactions(params: DeviceFarm.Types.ListOfferingTransactionsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListOfferingTransactionsResult) => void): Request<DeviceFarm.Types.ListOfferingTransactionsResult, AWSError>;
+  listOfferingPromotions(params: DeviceFarm.Types.ListOfferingPromotionsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListOfferingPromotionsResult) => void): Request<DeviceFarm.Types.ListOfferingPromotionsResult, AWSError>;
   /**
    * Returns a list of all historical purchases, renewals, and system renewal transactions for an AWS account. The list is paginated and ordered by a descending timestamp (most recent transactions are first). The API returns a NotEligible error if the user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
    */
   listOfferingTransactions(callback?: (err: AWSError, data: DeviceFarm.Types.ListOfferingTransactionsResult) => void): Request<DeviceFarm.Types.ListOfferingTransactionsResult, AWSError>;
   /**
-   * Returns a list of products or offerings that the user can manage through the API. Each offering record indicates the recurring price per unit and the frequency for that offering. The API returns a NotEligible error if the user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
+   * Returns a list of all historical purchases, renewals, and system renewal transactions for an AWS account. The list is paginated and ordered by a descending timestamp (most recent transactions are first). The API returns a NotEligible error if the user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
    */
-  listOfferings(params: DeviceFarm.Types.ListOfferingsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListOfferingsResult) => void): Request<DeviceFarm.Types.ListOfferingsResult, AWSError>;
+  listOfferingTransactions(params: DeviceFarm.Types.ListOfferingTransactionsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListOfferingTransactionsResult) => void): Request<DeviceFarm.Types.ListOfferingTransactionsResult, AWSError>;
   /**
    * Returns a list of products or offerings that the user can manage through the API. Each offering record indicates the recurring price per unit and the frequency for that offering. The API returns a NotEligible error if the user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
    */
   listOfferings(callback?: (err: AWSError, data: DeviceFarm.Types.ListOfferingsResult) => void): Request<DeviceFarm.Types.ListOfferingsResult, AWSError>;
   /**
-   * Gets information about projects.
+   * Returns a list of products or offerings that the user can manage through the API. Each offering record indicates the recurring price per unit and the frequency for that offering. The API returns a NotEligible error if the user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
    */
-  listProjects(params: DeviceFarm.Types.ListProjectsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListProjectsResult) => void): Request<DeviceFarm.Types.ListProjectsResult, AWSError>;
+  listOfferings(params: DeviceFarm.Types.ListOfferingsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListOfferingsResult) => void): Request<DeviceFarm.Types.ListOfferingsResult, AWSError>;
   /**
    * Gets information about projects.
    */
   listProjects(callback?: (err: AWSError, data: DeviceFarm.Types.ListProjectsResult) => void): Request<DeviceFarm.Types.ListProjectsResult, AWSError>;
   /**
-   * Returns a list of all currently running remote access sessions.
+   * Gets information about projects.
    */
-  listRemoteAccessSessions(params: DeviceFarm.Types.ListRemoteAccessSessionsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListRemoteAccessSessionsResult) => void): Request<DeviceFarm.Types.ListRemoteAccessSessionsResult, AWSError>;
+  listProjects(params: DeviceFarm.Types.ListProjectsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListProjectsResult) => void): Request<DeviceFarm.Types.ListProjectsResult, AWSError>;
   /**
    * Returns a list of all currently running remote access sessions.
    */
   listRemoteAccessSessions(callback?: (err: AWSError, data: DeviceFarm.Types.ListRemoteAccessSessionsResult) => void): Request<DeviceFarm.Types.ListRemoteAccessSessionsResult, AWSError>;
   /**
-   * Gets information about runs, given an AWS Device Farm project ARN.
+   * Returns a list of all currently running remote access sessions.
    */
-  listRuns(params: DeviceFarm.Types.ListRunsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListRunsResult) => void): Request<DeviceFarm.Types.ListRunsResult, AWSError>;
+  listRemoteAccessSessions(params: DeviceFarm.Types.ListRemoteAccessSessionsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListRemoteAccessSessionsResult) => void): Request<DeviceFarm.Types.ListRemoteAccessSessionsResult, AWSError>;
   /**
    * Gets information about runs, given an AWS Device Farm project ARN.
    */
   listRuns(callback?: (err: AWSError, data: DeviceFarm.Types.ListRunsResult) => void): Request<DeviceFarm.Types.ListRunsResult, AWSError>;
   /**
-   * Gets information about samples, given an AWS Device Farm job ARN.
+   * Gets information about runs, given an AWS Device Farm project ARN.
    */
-  listSamples(params: DeviceFarm.Types.ListSamplesRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListSamplesResult) => void): Request<DeviceFarm.Types.ListSamplesResult, AWSError>;
+  listRuns(params: DeviceFarm.Types.ListRunsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListRunsResult) => void): Request<DeviceFarm.Types.ListRunsResult, AWSError>;
   /**
    * Gets information about samples, given an AWS Device Farm job ARN.
    */
   listSamples(callback?: (err: AWSError, data: DeviceFarm.Types.ListSamplesResult) => void): Request<DeviceFarm.Types.ListSamplesResult, AWSError>;
   /**
-   * Gets information about test suites for a given job.
+   * Gets information about samples, given an AWS Device Farm job ARN.
    */
-  listSuites(params: DeviceFarm.Types.ListSuitesRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListSuitesResult) => void): Request<DeviceFarm.Types.ListSuitesResult, AWSError>;
+  listSamples(params: DeviceFarm.Types.ListSamplesRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListSamplesResult) => void): Request<DeviceFarm.Types.ListSamplesResult, AWSError>;
   /**
    * Gets information about test suites for a given job.
    */
   listSuites(callback?: (err: AWSError, data: DeviceFarm.Types.ListSuitesResult) => void): Request<DeviceFarm.Types.ListSuitesResult, AWSError>;
   /**
-   * Gets information about tests in a given test suite.
+   * Gets information about test suites for a given job.
    */
-  listTests(params: DeviceFarm.Types.ListTestsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListTestsResult) => void): Request<DeviceFarm.Types.ListTestsResult, AWSError>;
+  listSuites(params: DeviceFarm.Types.ListSuitesRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListSuitesResult) => void): Request<DeviceFarm.Types.ListSuitesResult, AWSError>;
   /**
    * Gets information about tests in a given test suite.
    */
   listTests(callback?: (err: AWSError, data: DeviceFarm.Types.ListTestsResult) => void): Request<DeviceFarm.Types.ListTestsResult, AWSError>;
   /**
-   * Gets information about unique problems.
+   * Gets information about tests in a given test suite.
    */
-  listUniqueProblems(params: DeviceFarm.Types.ListUniqueProblemsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListUniqueProblemsResult) => void): Request<DeviceFarm.Types.ListUniqueProblemsResult, AWSError>;
+  listTests(params: DeviceFarm.Types.ListTestsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListTestsResult) => void): Request<DeviceFarm.Types.ListTestsResult, AWSError>;
   /**
    * Gets information about unique problems.
    */
   listUniqueProblems(callback?: (err: AWSError, data: DeviceFarm.Types.ListUniqueProblemsResult) => void): Request<DeviceFarm.Types.ListUniqueProblemsResult, AWSError>;
   /**
-   * Gets information about uploads, given an AWS Device Farm project ARN.
+   * Gets information about unique problems.
    */
-  listUploads(params: DeviceFarm.Types.ListUploadsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListUploadsResult) => void): Request<DeviceFarm.Types.ListUploadsResult, AWSError>;
+  listUniqueProblems(params: DeviceFarm.Types.ListUniqueProblemsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListUniqueProblemsResult) => void): Request<DeviceFarm.Types.ListUniqueProblemsResult, AWSError>;
   /**
    * Gets information about uploads, given an AWS Device Farm project ARN.
    */
   listUploads(callback?: (err: AWSError, data: DeviceFarm.Types.ListUploadsResult) => void): Request<DeviceFarm.Types.ListUploadsResult, AWSError>;
   /**
-   * Returns information about all Amazon Virtual Private Cloud (VPC) endpoint configurations in the AWS account.
+   * Gets information about uploads, given an AWS Device Farm project ARN.
    */
-  listVPCEConfigurations(params: DeviceFarm.Types.ListVPCEConfigurationsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListVPCEConfigurationsResult) => void): Request<DeviceFarm.Types.ListVPCEConfigurationsResult, AWSError>;
+  listUploads(params: DeviceFarm.Types.ListUploadsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListUploadsResult) => void): Request<DeviceFarm.Types.ListUploadsResult, AWSError>;
   /**
    * Returns information about all Amazon Virtual Private Cloud (VPC) endpoint configurations in the AWS account.
    */
   listVPCEConfigurations(callback?: (err: AWSError, data: DeviceFarm.Types.ListVPCEConfigurationsResult) => void): Request<DeviceFarm.Types.ListVPCEConfigurationsResult, AWSError>;
   /**
-   * Immediately purchases offerings for an AWS account. Offerings renew with the latest total purchased quantity for an offering, unless the renewal was overridden. The API returns a NotEligible error if the user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
+   * Returns information about all Amazon Virtual Private Cloud (VPC) endpoint configurations in the AWS account.
    */
-  purchaseOffering(params: DeviceFarm.Types.PurchaseOfferingRequest, callback?: (err: AWSError, data: DeviceFarm.Types.PurchaseOfferingResult) => void): Request<DeviceFarm.Types.PurchaseOfferingResult, AWSError>;
+  listVPCEConfigurations(params: DeviceFarm.Types.ListVPCEConfigurationsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListVPCEConfigurationsResult) => void): Request<DeviceFarm.Types.ListVPCEConfigurationsResult, AWSError>;
   /**
    * Immediately purchases offerings for an AWS account. Offerings renew with the latest total purchased quantity for an offering, unless the renewal was overridden. The API returns a NotEligible error if the user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
    */
   purchaseOffering(callback?: (err: AWSError, data: DeviceFarm.Types.PurchaseOfferingResult) => void): Request<DeviceFarm.Types.PurchaseOfferingResult, AWSError>;
   /**
-   * Explicitly sets the quantity of devices to renew for an offering, starting from the effectiveDate of the next period. The API returns a NotEligible error if the user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
+   * Immediately purchases offerings for an AWS account. Offerings renew with the latest total purchased quantity for an offering, unless the renewal was overridden. The API returns a NotEligible error if the user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
    */
-  renewOffering(params: DeviceFarm.Types.RenewOfferingRequest, callback?: (err: AWSError, data: DeviceFarm.Types.RenewOfferingResult) => void): Request<DeviceFarm.Types.RenewOfferingResult, AWSError>;
+  purchaseOffering(params: DeviceFarm.Types.PurchaseOfferingRequest, callback?: (err: AWSError, data: DeviceFarm.Types.PurchaseOfferingResult) => void): Request<DeviceFarm.Types.PurchaseOfferingResult, AWSError>;
   /**
    * Explicitly sets the quantity of devices to renew for an offering, starting from the effectiveDate of the next period. The API returns a NotEligible error if the user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
    */
   renewOffering(callback?: (err: AWSError, data: DeviceFarm.Types.RenewOfferingResult) => void): Request<DeviceFarm.Types.RenewOfferingResult, AWSError>;
   /**
-   * Schedules a run.
+   * Explicitly sets the quantity of devices to renew for an offering, starting from the effectiveDate of the next period. The API returns a NotEligible error if the user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
    */
-  scheduleRun(params: DeviceFarm.Types.ScheduleRunRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ScheduleRunResult) => void): Request<DeviceFarm.Types.ScheduleRunResult, AWSError>;
+  renewOffering(params: DeviceFarm.Types.RenewOfferingRequest, callback?: (err: AWSError, data: DeviceFarm.Types.RenewOfferingResult) => void): Request<DeviceFarm.Types.RenewOfferingResult, AWSError>;
   /**
    * Schedules a run.
    */
   scheduleRun(callback?: (err: AWSError, data: DeviceFarm.Types.ScheduleRunResult) => void): Request<DeviceFarm.Types.ScheduleRunResult, AWSError>;
   /**
-   * Initiates a stop request for the current job. AWS Device Farm will immediately stop the job on the device where tests have not started executing, and you will not be billed for this device. On the device where tests have started executing, Setup Suite and Teardown Suite tests will run to completion before stopping execution on the device. You will be billed for Setup, Teardown, and any tests that were in progress or already completed.
+   * Schedules a run.
    */
-  stopJob(params: DeviceFarm.Types.StopJobRequest, callback?: (err: AWSError, data: DeviceFarm.Types.StopJobResult) => void): Request<DeviceFarm.Types.StopJobResult, AWSError>;
+  scheduleRun(params: DeviceFarm.Types.ScheduleRunRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ScheduleRunResult) => void): Request<DeviceFarm.Types.ScheduleRunResult, AWSError>;
   /**
    * Initiates a stop request for the current job. AWS Device Farm will immediately stop the job on the device where tests have not started executing, and you will not be billed for this device. On the device where tests have started executing, Setup Suite and Teardown Suite tests will run to completion before stopping execution on the device. You will be billed for Setup, Teardown, and any tests that were in progress or already completed.
    */
   stopJob(callback?: (err: AWSError, data: DeviceFarm.Types.StopJobResult) => void): Request<DeviceFarm.Types.StopJobResult, AWSError>;
   /**
-   * Ends a specified remote access session.
+   * Initiates a stop request for the current job. AWS Device Farm will immediately stop the job on the device where tests have not started executing, and you will not be billed for this device. On the device where tests have started executing, Setup Suite and Teardown Suite tests will run to completion before stopping execution on the device. You will be billed for Setup, Teardown, and any tests that were in progress or already completed.
    */
-  stopRemoteAccessSession(params: DeviceFarm.Types.StopRemoteAccessSessionRequest, callback?: (err: AWSError, data: DeviceFarm.Types.StopRemoteAccessSessionResult) => void): Request<DeviceFarm.Types.StopRemoteAccessSessionResult, AWSError>;
+  stopJob(params: DeviceFarm.Types.StopJobRequest, callback?: (err: AWSError, data: DeviceFarm.Types.StopJobResult) => void): Request<DeviceFarm.Types.StopJobResult, AWSError>;
   /**
    * Ends a specified remote access session.
    */
   stopRemoteAccessSession(callback?: (err: AWSError, data: DeviceFarm.Types.StopRemoteAccessSessionResult) => void): Request<DeviceFarm.Types.StopRemoteAccessSessionResult, AWSError>;
   /**
-   * Initiates a stop request for the current test run. AWS Device Farm will immediately stop the run on devices where tests have not started executing, and you will not be billed for these devices. On devices where tests have started executing, Setup Suite and Teardown Suite tests will run to completion before stopping execution on those devices. You will be billed for Setup, Teardown, and any tests that were in progress or already completed.
+   * Ends a specified remote access session.
    */
-  stopRun(params: DeviceFarm.Types.StopRunRequest, callback?: (err: AWSError, data: DeviceFarm.Types.StopRunResult) => void): Request<DeviceFarm.Types.StopRunResult, AWSError>;
+  stopRemoteAccessSession(params: DeviceFarm.Types.StopRemoteAccessSessionRequest, callback?: (err: AWSError, data: DeviceFarm.Types.StopRemoteAccessSessionResult) => void): Request<DeviceFarm.Types.StopRemoteAccessSessionResult, AWSError>;
   /**
    * Initiates a stop request for the current test run. AWS Device Farm will immediately stop the run on devices where tests have not started executing, and you will not be billed for these devices. On devices where tests have started executing, Setup Suite and Teardown Suite tests will run to completion before stopping execution on those devices. You will be billed for Setup, Teardown, and any tests that were in progress or already completed.
    */
   stopRun(callback?: (err: AWSError, data: DeviceFarm.Types.StopRunResult) => void): Request<DeviceFarm.Types.StopRunResult, AWSError>;
   /**
-   * Updates information about an existing private device instance.
+   * Initiates a stop request for the current test run. AWS Device Farm will immediately stop the run on devices where tests have not started executing, and you will not be billed for these devices. On devices where tests have started executing, Setup Suite and Teardown Suite tests will run to completion before stopping execution on those devices. You will be billed for Setup, Teardown, and any tests that were in progress or already completed.
    */
-  updateDeviceInstance(params: DeviceFarm.Types.UpdateDeviceInstanceRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateDeviceInstanceResult) => void): Request<DeviceFarm.Types.UpdateDeviceInstanceResult, AWSError>;
+  stopRun(params: DeviceFarm.Types.StopRunRequest, callback?: (err: AWSError, data: DeviceFarm.Types.StopRunResult) => void): Request<DeviceFarm.Types.StopRunResult, AWSError>;
   /**
    * Updates information about an existing private device instance.
    */
   updateDeviceInstance(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateDeviceInstanceResult) => void): Request<DeviceFarm.Types.UpdateDeviceInstanceResult, AWSError>;
   /**
-   * Modifies the name, description, and rules in a device pool given the attributes and the pool ARN. Rule updates are all-or-nothing, meaning they can only be updated as a whole (or not at all).
+   * Updates information about an existing private device instance.
    */
-  updateDevicePool(params: DeviceFarm.Types.UpdateDevicePoolRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateDevicePoolResult) => void): Request<DeviceFarm.Types.UpdateDevicePoolResult, AWSError>;
+  updateDeviceInstance(params: DeviceFarm.Types.UpdateDeviceInstanceRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateDeviceInstanceResult) => void): Request<DeviceFarm.Types.UpdateDeviceInstanceResult, AWSError>;
   /**
    * Modifies the name, description, and rules in a device pool given the attributes and the pool ARN. Rule updates are all-or-nothing, meaning they can only be updated as a whole (or not at all).
    */
   updateDevicePool(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateDevicePoolResult) => void): Request<DeviceFarm.Types.UpdateDevicePoolResult, AWSError>;
   /**
-   * Updates information about an existing private device instance profile.
+   * Modifies the name, description, and rules in a device pool given the attributes and the pool ARN. Rule updates are all-or-nothing, meaning they can only be updated as a whole (or not at all).
    */
-  updateInstanceProfile(params: DeviceFarm.Types.UpdateInstanceProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateInstanceProfileResult) => void): Request<DeviceFarm.Types.UpdateInstanceProfileResult, AWSError>;
+  updateDevicePool(params: DeviceFarm.Types.UpdateDevicePoolRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateDevicePoolResult) => void): Request<DeviceFarm.Types.UpdateDevicePoolResult, AWSError>;
   /**
    * Updates information about an existing private device instance profile.
    */
   updateInstanceProfile(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateInstanceProfileResult) => void): Request<DeviceFarm.Types.UpdateInstanceProfileResult, AWSError>;
   /**
-   * Updates the network profile with specific settings.
+   * Updates information about an existing private device instance profile.
    */
-  updateNetworkProfile(params: DeviceFarm.Types.UpdateNetworkProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateNetworkProfileResult) => void): Request<DeviceFarm.Types.UpdateNetworkProfileResult, AWSError>;
+  updateInstanceProfile(params: DeviceFarm.Types.UpdateInstanceProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateInstanceProfileResult) => void): Request<DeviceFarm.Types.UpdateInstanceProfileResult, AWSError>;
   /**
    * Updates the network profile with specific settings.
    */
   updateNetworkProfile(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateNetworkProfileResult) => void): Request<DeviceFarm.Types.UpdateNetworkProfileResult, AWSError>;
   /**
-   * Modifies the specified project name, given the project ARN and a new name.
+   * Updates the network profile with specific settings.
    */
-  updateProject(params: DeviceFarm.Types.UpdateProjectRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateProjectResult) => void): Request<DeviceFarm.Types.UpdateProjectResult, AWSError>;
+  updateNetworkProfile(params: DeviceFarm.Types.UpdateNetworkProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateNetworkProfileResult) => void): Request<DeviceFarm.Types.UpdateNetworkProfileResult, AWSError>;
   /**
    * Modifies the specified project name, given the project ARN and a new name.
    */
   updateProject(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateProjectResult) => void): Request<DeviceFarm.Types.UpdateProjectResult, AWSError>;
   /**
-   * Update an uploaded test specification (test spec).
+   * Modifies the specified project name, given the project ARN and a new name.
    */
-  updateUpload(params: DeviceFarm.Types.UpdateUploadRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateUploadResult) => void): Request<DeviceFarm.Types.UpdateUploadResult, AWSError>;
+  updateProject(params: DeviceFarm.Types.UpdateProjectRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateProjectResult) => void): Request<DeviceFarm.Types.UpdateProjectResult, AWSError>;
   /**
    * Update an uploaded test specification (test spec).
    */
   updateUpload(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateUploadResult) => void): Request<DeviceFarm.Types.UpdateUploadResult, AWSError>;
   /**
-   * Updates information about an existing Amazon Virtual Private Cloud (VPC) endpoint configuration.
+   * Update an uploaded test specification (test spec).
    */
-  updateVPCEConfiguration(params: DeviceFarm.Types.UpdateVPCEConfigurationRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateVPCEConfigurationResult) => void): Request<DeviceFarm.Types.UpdateVPCEConfigurationResult, AWSError>;
+  updateUpload(params: DeviceFarm.Types.UpdateUploadRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateUploadResult) => void): Request<DeviceFarm.Types.UpdateUploadResult, AWSError>;
   /**
    * Updates information about an existing Amazon Virtual Private Cloud (VPC) endpoint configuration.
    */
   updateVPCEConfiguration(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateVPCEConfigurationResult) => void): Request<DeviceFarm.Types.UpdateVPCEConfigurationResult, AWSError>;
+  /**
+   * Updates information about an existing Amazon Virtual Private Cloud (VPC) endpoint configuration.
+   */
+  updateVPCEConfiguration(params: DeviceFarm.Types.UpdateVPCEConfigurationRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateVPCEConfigurationResult) => void): Request<DeviceFarm.Types.UpdateVPCEConfigurationResult, AWSError>;
 }
 declare namespace DeviceFarm {
   export type AWSAccountNumber = string;

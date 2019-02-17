@@ -14,259 +14,259 @@ declare class CodePipeline extends Service {
   /**
    * Returns information about a specified job and whether that job has been received by the job worker. Only used for custom actions.
    */
-  acknowledgeJob(params: CodePipeline.Types.AcknowledgeJobInput, callback?: (err: AWSError, data: CodePipeline.Types.AcknowledgeJobOutput) => void): Request<CodePipeline.Types.AcknowledgeJobOutput, AWSError>;
+  acknowledgeJob(callback?: (err: AWSError, data: CodePipeline.Types.AcknowledgeJobOutput) => void): Request<CodePipeline.Types.AcknowledgeJobOutput, AWSError>;
   /**
    * Returns information about a specified job and whether that job has been received by the job worker. Only used for custom actions.
    */
-  acknowledgeJob(callback?: (err: AWSError, data: CodePipeline.Types.AcknowledgeJobOutput) => void): Request<CodePipeline.Types.AcknowledgeJobOutput, AWSError>;
-  /**
-   * Confirms a job worker has received the specified job. Only used for partner actions.
-   */
-  acknowledgeThirdPartyJob(params: CodePipeline.Types.AcknowledgeThirdPartyJobInput, callback?: (err: AWSError, data: CodePipeline.Types.AcknowledgeThirdPartyJobOutput) => void): Request<CodePipeline.Types.AcknowledgeThirdPartyJobOutput, AWSError>;
+  acknowledgeJob(params: CodePipeline.Types.AcknowledgeJobInput, callback?: (err: AWSError, data: CodePipeline.Types.AcknowledgeJobOutput) => void): Request<CodePipeline.Types.AcknowledgeJobOutput, AWSError>;
   /**
    * Confirms a job worker has received the specified job. Only used for partner actions.
    */
   acknowledgeThirdPartyJob(callback?: (err: AWSError, data: CodePipeline.Types.AcknowledgeThirdPartyJobOutput) => void): Request<CodePipeline.Types.AcknowledgeThirdPartyJobOutput, AWSError>;
   /**
-   * Creates a new custom action that can be used in all pipelines associated with the AWS account. Only used for custom actions.
+   * Confirms a job worker has received the specified job. Only used for partner actions.
    */
-  createCustomActionType(params: CodePipeline.Types.CreateCustomActionTypeInput, callback?: (err: AWSError, data: CodePipeline.Types.CreateCustomActionTypeOutput) => void): Request<CodePipeline.Types.CreateCustomActionTypeOutput, AWSError>;
+  acknowledgeThirdPartyJob(params: CodePipeline.Types.AcknowledgeThirdPartyJobInput, callback?: (err: AWSError, data: CodePipeline.Types.AcknowledgeThirdPartyJobOutput) => void): Request<CodePipeline.Types.AcknowledgeThirdPartyJobOutput, AWSError>;
   /**
    * Creates a new custom action that can be used in all pipelines associated with the AWS account. Only used for custom actions.
    */
   createCustomActionType(callback?: (err: AWSError, data: CodePipeline.Types.CreateCustomActionTypeOutput) => void): Request<CodePipeline.Types.CreateCustomActionTypeOutput, AWSError>;
   /**
-   * Creates a pipeline.
+   * Creates a new custom action that can be used in all pipelines associated with the AWS account. Only used for custom actions.
    */
-  createPipeline(params: CodePipeline.Types.CreatePipelineInput, callback?: (err: AWSError, data: CodePipeline.Types.CreatePipelineOutput) => void): Request<CodePipeline.Types.CreatePipelineOutput, AWSError>;
+  createCustomActionType(params: CodePipeline.Types.CreateCustomActionTypeInput, callback?: (err: AWSError, data: CodePipeline.Types.CreateCustomActionTypeOutput) => void): Request<CodePipeline.Types.CreateCustomActionTypeOutput, AWSError>;
   /**
    * Creates a pipeline.
    */
   createPipeline(callback?: (err: AWSError, data: CodePipeline.Types.CreatePipelineOutput) => void): Request<CodePipeline.Types.CreatePipelineOutput, AWSError>;
   /**
-   * Marks a custom action as deleted. PollForJobs for the custom action will fail after the action is marked for deletion. Only used for custom actions.  To re-create a custom action after it has been deleted you must use a string in the version field that has never been used before. This string can be an incremented version number, for example. To restore a deleted custom action, use a JSON file that is identical to the deleted action, including the original string in the version field. 
+   * Creates a pipeline.
    */
-  deleteCustomActionType(params: CodePipeline.Types.DeleteCustomActionTypeInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  createPipeline(params: CodePipeline.Types.CreatePipelineInput, callback?: (err: AWSError, data: CodePipeline.Types.CreatePipelineOutput) => void): Request<CodePipeline.Types.CreatePipelineOutput, AWSError>;
   /**
    * Marks a custom action as deleted. PollForJobs for the custom action will fail after the action is marked for deletion. Only used for custom actions.  To re-create a custom action after it has been deleted you must use a string in the version field that has never been used before. This string can be an incremented version number, for example. To restore a deleted custom action, use a JSON file that is identical to the deleted action, including the original string in the version field. 
    */
   deleteCustomActionType(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified pipeline.
+   * Marks a custom action as deleted. PollForJobs for the custom action will fail after the action is marked for deletion. Only used for custom actions.  To re-create a custom action after it has been deleted you must use a string in the version field that has never been used before. This string can be an incremented version number, for example. To restore a deleted custom action, use a JSON file that is identical to the deleted action, including the original string in the version field. 
    */
-  deletePipeline(params: CodePipeline.Types.DeletePipelineInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteCustomActionType(params: CodePipeline.Types.DeleteCustomActionTypeInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified pipeline.
    */
   deletePipeline(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a previously created webhook by name. Deleting the webhook stops AWS CodePipeline from starting a pipeline every time an external event occurs. The API will return successfully when trying to delete a webhook that is already deleted. If a deleted webhook is re-created by calling PutWebhook with the same name, it will have a different URL.
+   * Deletes the specified pipeline.
    */
-  deleteWebhook(params: CodePipeline.Types.DeleteWebhookInput, callback?: (err: AWSError, data: CodePipeline.Types.DeleteWebhookOutput) => void): Request<CodePipeline.Types.DeleteWebhookOutput, AWSError>;
+  deletePipeline(params: CodePipeline.Types.DeletePipelineInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a previously created webhook by name. Deleting the webhook stops AWS CodePipeline from starting a pipeline every time an external event occurs. The API will return successfully when trying to delete a webhook that is already deleted. If a deleted webhook is re-created by calling PutWebhook with the same name, it will have a different URL.
    */
   deleteWebhook(callback?: (err: AWSError, data: CodePipeline.Types.DeleteWebhookOutput) => void): Request<CodePipeline.Types.DeleteWebhookOutput, AWSError>;
   /**
-   * Removes the connection between the webhook that was created by CodePipeline and the external tool with events to be detected. Currently only supported for webhooks that target an action type of GitHub.
+   * Deletes a previously created webhook by name. Deleting the webhook stops AWS CodePipeline from starting a pipeline every time an external event occurs. The API will return successfully when trying to delete a webhook that is already deleted. If a deleted webhook is re-created by calling PutWebhook with the same name, it will have a different URL.
    */
-  deregisterWebhookWithThirdParty(params: CodePipeline.Types.DeregisterWebhookWithThirdPartyInput, callback?: (err: AWSError, data: CodePipeline.Types.DeregisterWebhookWithThirdPartyOutput) => void): Request<CodePipeline.Types.DeregisterWebhookWithThirdPartyOutput, AWSError>;
+  deleteWebhook(params: CodePipeline.Types.DeleteWebhookInput, callback?: (err: AWSError, data: CodePipeline.Types.DeleteWebhookOutput) => void): Request<CodePipeline.Types.DeleteWebhookOutput, AWSError>;
   /**
    * Removes the connection between the webhook that was created by CodePipeline and the external tool with events to be detected. Currently only supported for webhooks that target an action type of GitHub.
    */
   deregisterWebhookWithThirdParty(callback?: (err: AWSError, data: CodePipeline.Types.DeregisterWebhookWithThirdPartyOutput) => void): Request<CodePipeline.Types.DeregisterWebhookWithThirdPartyOutput, AWSError>;
   /**
-   * Prevents artifacts in a pipeline from transitioning to the next stage in the pipeline.
+   * Removes the connection between the webhook that was created by CodePipeline and the external tool with events to be detected. Currently only supported for webhooks that target an action type of GitHub.
    */
-  disableStageTransition(params: CodePipeline.Types.DisableStageTransitionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deregisterWebhookWithThirdParty(params: CodePipeline.Types.DeregisterWebhookWithThirdPartyInput, callback?: (err: AWSError, data: CodePipeline.Types.DeregisterWebhookWithThirdPartyOutput) => void): Request<CodePipeline.Types.DeregisterWebhookWithThirdPartyOutput, AWSError>;
   /**
    * Prevents artifacts in a pipeline from transitioning to the next stage in the pipeline.
    */
   disableStageTransition(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Enables artifacts in a pipeline to transition to a stage in a pipeline.
+   * Prevents artifacts in a pipeline from transitioning to the next stage in the pipeline.
    */
-  enableStageTransition(params: CodePipeline.Types.EnableStageTransitionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  disableStageTransition(params: CodePipeline.Types.DisableStageTransitionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Enables artifacts in a pipeline to transition to a stage in a pipeline.
    */
   enableStageTransition(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Returns information about a job. Only used for custom actions.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action. 
+   * Enables artifacts in a pipeline to transition to a stage in a pipeline.
    */
-  getJobDetails(params: CodePipeline.Types.GetJobDetailsInput, callback?: (err: AWSError, data: CodePipeline.Types.GetJobDetailsOutput) => void): Request<CodePipeline.Types.GetJobDetailsOutput, AWSError>;
+  enableStageTransition(params: CodePipeline.Types.EnableStageTransitionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Returns information about a job. Only used for custom actions.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action. 
    */
   getJobDetails(callback?: (err: AWSError, data: CodePipeline.Types.GetJobDetailsOutput) => void): Request<CodePipeline.Types.GetJobDetailsOutput, AWSError>;
   /**
-   * Returns the metadata, structure, stages, and actions of a pipeline. Can be used to return the entire structure of a pipeline in JSON format, which can then be modified and used to update the pipeline structure with UpdatePipeline.
+   * Returns information about a job. Only used for custom actions.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action. 
    */
-  getPipeline(params: CodePipeline.Types.GetPipelineInput, callback?: (err: AWSError, data: CodePipeline.Types.GetPipelineOutput) => void): Request<CodePipeline.Types.GetPipelineOutput, AWSError>;
+  getJobDetails(params: CodePipeline.Types.GetJobDetailsInput, callback?: (err: AWSError, data: CodePipeline.Types.GetJobDetailsOutput) => void): Request<CodePipeline.Types.GetJobDetailsOutput, AWSError>;
   /**
    * Returns the metadata, structure, stages, and actions of a pipeline. Can be used to return the entire structure of a pipeline in JSON format, which can then be modified and used to update the pipeline structure with UpdatePipeline.
    */
   getPipeline(callback?: (err: AWSError, data: CodePipeline.Types.GetPipelineOutput) => void): Request<CodePipeline.Types.GetPipelineOutput, AWSError>;
   /**
-   * Returns information about an execution of a pipeline, including details about artifacts, the pipeline execution ID, and the name, version, and status of the pipeline.
+   * Returns the metadata, structure, stages, and actions of a pipeline. Can be used to return the entire structure of a pipeline in JSON format, which can then be modified and used to update the pipeline structure with UpdatePipeline.
    */
-  getPipelineExecution(params: CodePipeline.Types.GetPipelineExecutionInput, callback?: (err: AWSError, data: CodePipeline.Types.GetPipelineExecutionOutput) => void): Request<CodePipeline.Types.GetPipelineExecutionOutput, AWSError>;
+  getPipeline(params: CodePipeline.Types.GetPipelineInput, callback?: (err: AWSError, data: CodePipeline.Types.GetPipelineOutput) => void): Request<CodePipeline.Types.GetPipelineOutput, AWSError>;
   /**
    * Returns information about an execution of a pipeline, including details about artifacts, the pipeline execution ID, and the name, version, and status of the pipeline.
    */
   getPipelineExecution(callback?: (err: AWSError, data: CodePipeline.Types.GetPipelineExecutionOutput) => void): Request<CodePipeline.Types.GetPipelineExecutionOutput, AWSError>;
   /**
-   * Returns information about the state of a pipeline, including the stages and actions.
+   * Returns information about an execution of a pipeline, including details about artifacts, the pipeline execution ID, and the name, version, and status of the pipeline.
    */
-  getPipelineState(params: CodePipeline.Types.GetPipelineStateInput, callback?: (err: AWSError, data: CodePipeline.Types.GetPipelineStateOutput) => void): Request<CodePipeline.Types.GetPipelineStateOutput, AWSError>;
+  getPipelineExecution(params: CodePipeline.Types.GetPipelineExecutionInput, callback?: (err: AWSError, data: CodePipeline.Types.GetPipelineExecutionOutput) => void): Request<CodePipeline.Types.GetPipelineExecutionOutput, AWSError>;
   /**
    * Returns information about the state of a pipeline, including the stages and actions.
    */
   getPipelineState(callback?: (err: AWSError, data: CodePipeline.Types.GetPipelineStateOutput) => void): Request<CodePipeline.Types.GetPipelineStateOutput, AWSError>;
   /**
-   * Requests the details of a job for a third party action. Only used for partner actions.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action. 
+   * Returns information about the state of a pipeline, including the stages and actions.
    */
-  getThirdPartyJobDetails(params: CodePipeline.Types.GetThirdPartyJobDetailsInput, callback?: (err: AWSError, data: CodePipeline.Types.GetThirdPartyJobDetailsOutput) => void): Request<CodePipeline.Types.GetThirdPartyJobDetailsOutput, AWSError>;
+  getPipelineState(params: CodePipeline.Types.GetPipelineStateInput, callback?: (err: AWSError, data: CodePipeline.Types.GetPipelineStateOutput) => void): Request<CodePipeline.Types.GetPipelineStateOutput, AWSError>;
   /**
    * Requests the details of a job for a third party action. Only used for partner actions.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action. 
    */
   getThirdPartyJobDetails(callback?: (err: AWSError, data: CodePipeline.Types.GetThirdPartyJobDetailsOutput) => void): Request<CodePipeline.Types.GetThirdPartyJobDetailsOutput, AWSError>;
   /**
-   * Gets a summary of all AWS CodePipeline action types associated with your account.
+   * Requests the details of a job for a third party action. Only used for partner actions.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action. 
    */
-  listActionTypes(params: CodePipeline.Types.ListActionTypesInput, callback?: (err: AWSError, data: CodePipeline.Types.ListActionTypesOutput) => void): Request<CodePipeline.Types.ListActionTypesOutput, AWSError>;
+  getThirdPartyJobDetails(params: CodePipeline.Types.GetThirdPartyJobDetailsInput, callback?: (err: AWSError, data: CodePipeline.Types.GetThirdPartyJobDetailsOutput) => void): Request<CodePipeline.Types.GetThirdPartyJobDetailsOutput, AWSError>;
   /**
    * Gets a summary of all AWS CodePipeline action types associated with your account.
    */
   listActionTypes(callback?: (err: AWSError, data: CodePipeline.Types.ListActionTypesOutput) => void): Request<CodePipeline.Types.ListActionTypesOutput, AWSError>;
   /**
-   * Gets a summary of the most recent executions for a pipeline.
+   * Gets a summary of all AWS CodePipeline action types associated with your account.
    */
-  listPipelineExecutions(params: CodePipeline.Types.ListPipelineExecutionsInput, callback?: (err: AWSError, data: CodePipeline.Types.ListPipelineExecutionsOutput) => void): Request<CodePipeline.Types.ListPipelineExecutionsOutput, AWSError>;
+  listActionTypes(params: CodePipeline.Types.ListActionTypesInput, callback?: (err: AWSError, data: CodePipeline.Types.ListActionTypesOutput) => void): Request<CodePipeline.Types.ListActionTypesOutput, AWSError>;
   /**
    * Gets a summary of the most recent executions for a pipeline.
    */
   listPipelineExecutions(callback?: (err: AWSError, data: CodePipeline.Types.ListPipelineExecutionsOutput) => void): Request<CodePipeline.Types.ListPipelineExecutionsOutput, AWSError>;
   /**
-   * Gets a summary of all of the pipelines associated with your account.
+   * Gets a summary of the most recent executions for a pipeline.
    */
-  listPipelines(params: CodePipeline.Types.ListPipelinesInput, callback?: (err: AWSError, data: CodePipeline.Types.ListPipelinesOutput) => void): Request<CodePipeline.Types.ListPipelinesOutput, AWSError>;
+  listPipelineExecutions(params: CodePipeline.Types.ListPipelineExecutionsInput, callback?: (err: AWSError, data: CodePipeline.Types.ListPipelineExecutionsOutput) => void): Request<CodePipeline.Types.ListPipelineExecutionsOutput, AWSError>;
   /**
    * Gets a summary of all of the pipelines associated with your account.
    */
   listPipelines(callback?: (err: AWSError, data: CodePipeline.Types.ListPipelinesOutput) => void): Request<CodePipeline.Types.ListPipelinesOutput, AWSError>;
   /**
-   * Gets a listing of all the webhooks in this region for this account. The output lists all webhooks and includes the webhook URL and ARN, as well the configuration for each webhook.
+   * Gets a summary of all of the pipelines associated with your account.
    */
-  listWebhooks(params: CodePipeline.Types.ListWebhooksInput, callback?: (err: AWSError, data: CodePipeline.Types.ListWebhooksOutput) => void): Request<CodePipeline.Types.ListWebhooksOutput, AWSError>;
+  listPipelines(params: CodePipeline.Types.ListPipelinesInput, callback?: (err: AWSError, data: CodePipeline.Types.ListPipelinesOutput) => void): Request<CodePipeline.Types.ListPipelinesOutput, AWSError>;
   /**
    * Gets a listing of all the webhooks in this region for this account. The output lists all webhooks and includes the webhook URL and ARN, as well the configuration for each webhook.
    */
   listWebhooks(callback?: (err: AWSError, data: CodePipeline.Types.ListWebhooksOutput) => void): Request<CodePipeline.Types.ListWebhooksOutput, AWSError>;
   /**
-   * Returns information about any jobs for AWS CodePipeline to act upon. PollForJobs is only valid for action types with "Custom" in the owner field. If the action type contains "AWS" or "ThirdParty" in the owner field, the PollForJobs action returns an error.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action. 
+   * Gets a listing of all the webhooks in this region for this account. The output lists all webhooks and includes the webhook URL and ARN, as well the configuration for each webhook.
    */
-  pollForJobs(params: CodePipeline.Types.PollForJobsInput, callback?: (err: AWSError, data: CodePipeline.Types.PollForJobsOutput) => void): Request<CodePipeline.Types.PollForJobsOutput, AWSError>;
+  listWebhooks(params: CodePipeline.Types.ListWebhooksInput, callback?: (err: AWSError, data: CodePipeline.Types.ListWebhooksOutput) => void): Request<CodePipeline.Types.ListWebhooksOutput, AWSError>;
   /**
    * Returns information about any jobs for AWS CodePipeline to act upon. PollForJobs is only valid for action types with "Custom" in the owner field. If the action type contains "AWS" or "ThirdParty" in the owner field, the PollForJobs action returns an error.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action. 
    */
   pollForJobs(callback?: (err: AWSError, data: CodePipeline.Types.PollForJobsOutput) => void): Request<CodePipeline.Types.PollForJobsOutput, AWSError>;
   /**
-   * Determines whether there are any third party jobs for a job worker to act on. Only used for partner actions.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. 
+   * Returns information about any jobs for AWS CodePipeline to act upon. PollForJobs is only valid for action types with "Custom" in the owner field. If the action type contains "AWS" or "ThirdParty" in the owner field, the PollForJobs action returns an error.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action. 
    */
-  pollForThirdPartyJobs(params: CodePipeline.Types.PollForThirdPartyJobsInput, callback?: (err: AWSError, data: CodePipeline.Types.PollForThirdPartyJobsOutput) => void): Request<CodePipeline.Types.PollForThirdPartyJobsOutput, AWSError>;
+  pollForJobs(params: CodePipeline.Types.PollForJobsInput, callback?: (err: AWSError, data: CodePipeline.Types.PollForJobsOutput) => void): Request<CodePipeline.Types.PollForJobsOutput, AWSError>;
   /**
    * Determines whether there are any third party jobs for a job worker to act on. Only used for partner actions.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. 
    */
   pollForThirdPartyJobs(callback?: (err: AWSError, data: CodePipeline.Types.PollForThirdPartyJobsOutput) => void): Request<CodePipeline.Types.PollForThirdPartyJobsOutput, AWSError>;
   /**
-   * Provides information to AWS CodePipeline about new revisions to a source.
+   * Determines whether there are any third party jobs for a job worker to act on. Only used for partner actions.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. 
    */
-  putActionRevision(params: CodePipeline.Types.PutActionRevisionInput, callback?: (err: AWSError, data: CodePipeline.Types.PutActionRevisionOutput) => void): Request<CodePipeline.Types.PutActionRevisionOutput, AWSError>;
+  pollForThirdPartyJobs(params: CodePipeline.Types.PollForThirdPartyJobsInput, callback?: (err: AWSError, data: CodePipeline.Types.PollForThirdPartyJobsOutput) => void): Request<CodePipeline.Types.PollForThirdPartyJobsOutput, AWSError>;
   /**
    * Provides information to AWS CodePipeline about new revisions to a source.
    */
   putActionRevision(callback?: (err: AWSError, data: CodePipeline.Types.PutActionRevisionOutput) => void): Request<CodePipeline.Types.PutActionRevisionOutput, AWSError>;
   /**
-   * Provides the response to a manual approval request to AWS CodePipeline. Valid responses include Approved and Rejected.
+   * Provides information to AWS CodePipeline about new revisions to a source.
    */
-  putApprovalResult(params: CodePipeline.Types.PutApprovalResultInput, callback?: (err: AWSError, data: CodePipeline.Types.PutApprovalResultOutput) => void): Request<CodePipeline.Types.PutApprovalResultOutput, AWSError>;
+  putActionRevision(params: CodePipeline.Types.PutActionRevisionInput, callback?: (err: AWSError, data: CodePipeline.Types.PutActionRevisionOutput) => void): Request<CodePipeline.Types.PutActionRevisionOutput, AWSError>;
   /**
    * Provides the response to a manual approval request to AWS CodePipeline. Valid responses include Approved and Rejected.
    */
   putApprovalResult(callback?: (err: AWSError, data: CodePipeline.Types.PutApprovalResultOutput) => void): Request<CodePipeline.Types.PutApprovalResultOutput, AWSError>;
   /**
-   * Represents the failure of a job as returned to the pipeline by a job worker. Only used for custom actions.
+   * Provides the response to a manual approval request to AWS CodePipeline. Valid responses include Approved and Rejected.
    */
-  putJobFailureResult(params: CodePipeline.Types.PutJobFailureResultInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putApprovalResult(params: CodePipeline.Types.PutApprovalResultInput, callback?: (err: AWSError, data: CodePipeline.Types.PutApprovalResultOutput) => void): Request<CodePipeline.Types.PutApprovalResultOutput, AWSError>;
   /**
    * Represents the failure of a job as returned to the pipeline by a job worker. Only used for custom actions.
    */
   putJobFailureResult(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Represents the success of a job as returned to the pipeline by a job worker. Only used for custom actions.
+   * Represents the failure of a job as returned to the pipeline by a job worker. Only used for custom actions.
    */
-  putJobSuccessResult(params: CodePipeline.Types.PutJobSuccessResultInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putJobFailureResult(params: CodePipeline.Types.PutJobFailureResultInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Represents the success of a job as returned to the pipeline by a job worker. Only used for custom actions.
    */
   putJobSuccessResult(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Represents the failure of a third party job as returned to the pipeline by a job worker. Only used for partner actions.
+   * Represents the success of a job as returned to the pipeline by a job worker. Only used for custom actions.
    */
-  putThirdPartyJobFailureResult(params: CodePipeline.Types.PutThirdPartyJobFailureResultInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putJobSuccessResult(params: CodePipeline.Types.PutJobSuccessResultInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Represents the failure of a third party job as returned to the pipeline by a job worker. Only used for partner actions.
    */
   putThirdPartyJobFailureResult(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Represents the success of a third party job as returned to the pipeline by a job worker. Only used for partner actions.
+   * Represents the failure of a third party job as returned to the pipeline by a job worker. Only used for partner actions.
    */
-  putThirdPartyJobSuccessResult(params: CodePipeline.Types.PutThirdPartyJobSuccessResultInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putThirdPartyJobFailureResult(params: CodePipeline.Types.PutThirdPartyJobFailureResultInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Represents the success of a third party job as returned to the pipeline by a job worker. Only used for partner actions.
    */
   putThirdPartyJobSuccessResult(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Defines a webhook and returns a unique webhook URL generated by CodePipeline. This URL can be supplied to third party source hosting providers to call every time there's a code change. When CodePipeline receives a POST request on this URL, the pipeline defined in the webhook is started as long as the POST request satisfied the authentication and filtering requirements supplied when defining the webhook. RegisterWebhookWithThirdParty and DeregisterWebhookWithThirdParty APIs can be used to automatically configure supported third parties to call the generated webhook URL.
+   * Represents the success of a third party job as returned to the pipeline by a job worker. Only used for partner actions.
    */
-  putWebhook(params: CodePipeline.Types.PutWebhookInput, callback?: (err: AWSError, data: CodePipeline.Types.PutWebhookOutput) => void): Request<CodePipeline.Types.PutWebhookOutput, AWSError>;
+  putThirdPartyJobSuccessResult(params: CodePipeline.Types.PutThirdPartyJobSuccessResultInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Defines a webhook and returns a unique webhook URL generated by CodePipeline. This URL can be supplied to third party source hosting providers to call every time there's a code change. When CodePipeline receives a POST request on this URL, the pipeline defined in the webhook is started as long as the POST request satisfied the authentication and filtering requirements supplied when defining the webhook. RegisterWebhookWithThirdParty and DeregisterWebhookWithThirdParty APIs can be used to automatically configure supported third parties to call the generated webhook URL.
    */
   putWebhook(callback?: (err: AWSError, data: CodePipeline.Types.PutWebhookOutput) => void): Request<CodePipeline.Types.PutWebhookOutput, AWSError>;
   /**
-   * Configures a connection between the webhook that was created and the external tool with events to be detected.
+   * Defines a webhook and returns a unique webhook URL generated by CodePipeline. This URL can be supplied to third party source hosting providers to call every time there's a code change. When CodePipeline receives a POST request on this URL, the pipeline defined in the webhook is started as long as the POST request satisfied the authentication and filtering requirements supplied when defining the webhook. RegisterWebhookWithThirdParty and DeregisterWebhookWithThirdParty APIs can be used to automatically configure supported third parties to call the generated webhook URL.
    */
-  registerWebhookWithThirdParty(params: CodePipeline.Types.RegisterWebhookWithThirdPartyInput, callback?: (err: AWSError, data: CodePipeline.Types.RegisterWebhookWithThirdPartyOutput) => void): Request<CodePipeline.Types.RegisterWebhookWithThirdPartyOutput, AWSError>;
+  putWebhook(params: CodePipeline.Types.PutWebhookInput, callback?: (err: AWSError, data: CodePipeline.Types.PutWebhookOutput) => void): Request<CodePipeline.Types.PutWebhookOutput, AWSError>;
   /**
    * Configures a connection between the webhook that was created and the external tool with events to be detected.
    */
   registerWebhookWithThirdParty(callback?: (err: AWSError, data: CodePipeline.Types.RegisterWebhookWithThirdPartyOutput) => void): Request<CodePipeline.Types.RegisterWebhookWithThirdPartyOutput, AWSError>;
   /**
-   * Resumes the pipeline execution by retrying the last failed actions in a stage.
+   * Configures a connection between the webhook that was created and the external tool with events to be detected.
    */
-  retryStageExecution(params: CodePipeline.Types.RetryStageExecutionInput, callback?: (err: AWSError, data: CodePipeline.Types.RetryStageExecutionOutput) => void): Request<CodePipeline.Types.RetryStageExecutionOutput, AWSError>;
+  registerWebhookWithThirdParty(params: CodePipeline.Types.RegisterWebhookWithThirdPartyInput, callback?: (err: AWSError, data: CodePipeline.Types.RegisterWebhookWithThirdPartyOutput) => void): Request<CodePipeline.Types.RegisterWebhookWithThirdPartyOutput, AWSError>;
   /**
    * Resumes the pipeline execution by retrying the last failed actions in a stage.
    */
   retryStageExecution(callback?: (err: AWSError, data: CodePipeline.Types.RetryStageExecutionOutput) => void): Request<CodePipeline.Types.RetryStageExecutionOutput, AWSError>;
   /**
-   * Starts the specified pipeline. Specifically, it begins processing the latest commit to the source location specified as part of the pipeline.
+   * Resumes the pipeline execution by retrying the last failed actions in a stage.
    */
-  startPipelineExecution(params: CodePipeline.Types.StartPipelineExecutionInput, callback?: (err: AWSError, data: CodePipeline.Types.StartPipelineExecutionOutput) => void): Request<CodePipeline.Types.StartPipelineExecutionOutput, AWSError>;
+  retryStageExecution(params: CodePipeline.Types.RetryStageExecutionInput, callback?: (err: AWSError, data: CodePipeline.Types.RetryStageExecutionOutput) => void): Request<CodePipeline.Types.RetryStageExecutionOutput, AWSError>;
   /**
    * Starts the specified pipeline. Specifically, it begins processing the latest commit to the source location specified as part of the pipeline.
    */
   startPipelineExecution(callback?: (err: AWSError, data: CodePipeline.Types.StartPipelineExecutionOutput) => void): Request<CodePipeline.Types.StartPipelineExecutionOutput, AWSError>;
   /**
-   * Updates a specified pipeline with edits or changes to its structure. Use a JSON file with the pipeline structure in conjunction with UpdatePipeline to provide the full structure of the pipeline. Updating the pipeline increases the version number of the pipeline by 1.
+   * Starts the specified pipeline. Specifically, it begins processing the latest commit to the source location specified as part of the pipeline.
    */
-  updatePipeline(params: CodePipeline.Types.UpdatePipelineInput, callback?: (err: AWSError, data: CodePipeline.Types.UpdatePipelineOutput) => void): Request<CodePipeline.Types.UpdatePipelineOutput, AWSError>;
+  startPipelineExecution(params: CodePipeline.Types.StartPipelineExecutionInput, callback?: (err: AWSError, data: CodePipeline.Types.StartPipelineExecutionOutput) => void): Request<CodePipeline.Types.StartPipelineExecutionOutput, AWSError>;
   /**
    * Updates a specified pipeline with edits or changes to its structure. Use a JSON file with the pipeline structure in conjunction with UpdatePipeline to provide the full structure of the pipeline. Updating the pipeline increases the version number of the pipeline by 1.
    */
   updatePipeline(callback?: (err: AWSError, data: CodePipeline.Types.UpdatePipelineOutput) => void): Request<CodePipeline.Types.UpdatePipelineOutput, AWSError>;
+  /**
+   * Updates a specified pipeline with edits or changes to its structure. Use a JSON file with the pipeline structure in conjunction with UpdatePipeline to provide the full structure of the pipeline. Updating the pipeline increases the version number of the pipeline by 1.
+   */
+  updatePipeline(params: CodePipeline.Types.UpdatePipelineInput, callback?: (err: AWSError, data: CodePipeline.Types.UpdatePipelineOutput) => void): Request<CodePipeline.Types.UpdatePipelineOutput, AWSError>;
 }
 declare namespace CodePipeline {
   export type AWSRegionName = string;

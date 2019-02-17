@@ -14,11 +14,11 @@ declare class MarketplaceEntitlementService extends Service {
   /**
    * GetEntitlements retrieves entitlement values for a given product. The results can be filtered based on customer identifier or product dimensions.
    */
-  getEntitlements(params: MarketplaceEntitlementService.Types.GetEntitlementsRequest, callback?: (err: AWSError, data: MarketplaceEntitlementService.Types.GetEntitlementsResult) => void): Request<MarketplaceEntitlementService.Types.GetEntitlementsResult, AWSError>;
+  getEntitlements(callback?: (err: AWSError, data: MarketplaceEntitlementService.Types.GetEntitlementsResult) => void): Request<MarketplaceEntitlementService.Types.GetEntitlementsResult, AWSError>;
   /**
    * GetEntitlements retrieves entitlement values for a given product. The results can be filtered based on customer identifier or product dimensions.
    */
-  getEntitlements(callback?: (err: AWSError, data: MarketplaceEntitlementService.Types.GetEntitlementsResult) => void): Request<MarketplaceEntitlementService.Types.GetEntitlementsResult, AWSError>;
+  getEntitlements(params: MarketplaceEntitlementService.Types.GetEntitlementsRequest, callback?: (err: AWSError, data: MarketplaceEntitlementService.Types.GetEntitlementsResult) => void): Request<MarketplaceEntitlementService.Types.GetEntitlementsResult, AWSError>;
 }
 declare namespace MarketplaceEntitlementService {
   export type Boolean = boolean;

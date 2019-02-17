@@ -15,43 +15,43 @@ declare class MediaStoreData extends Service {
   /**
    * Deletes an object at the specified path.
    */
-  deleteObject(params: MediaStoreData.Types.DeleteObjectRequest, callback?: (err: AWSError, data: MediaStoreData.Types.DeleteObjectResponse) => void): Request<MediaStoreData.Types.DeleteObjectResponse, AWSError>;
+  deleteObject(callback?: (err: AWSError, data: MediaStoreData.Types.DeleteObjectResponse) => void): Request<MediaStoreData.Types.DeleteObjectResponse, AWSError>;
   /**
    * Deletes an object at the specified path.
    */
-  deleteObject(callback?: (err: AWSError, data: MediaStoreData.Types.DeleteObjectResponse) => void): Request<MediaStoreData.Types.DeleteObjectResponse, AWSError>;
-  /**
-   * Gets the headers for an object at the specified path.
-   */
-  describeObject(params: MediaStoreData.Types.DescribeObjectRequest, callback?: (err: AWSError, data: MediaStoreData.Types.DescribeObjectResponse) => void): Request<MediaStoreData.Types.DescribeObjectResponse, AWSError>;
+  deleteObject(params: MediaStoreData.Types.DeleteObjectRequest, callback?: (err: AWSError, data: MediaStoreData.Types.DeleteObjectResponse) => void): Request<MediaStoreData.Types.DeleteObjectResponse, AWSError>;
   /**
    * Gets the headers for an object at the specified path.
    */
   describeObject(callback?: (err: AWSError, data: MediaStoreData.Types.DescribeObjectResponse) => void): Request<MediaStoreData.Types.DescribeObjectResponse, AWSError>;
   /**
-   * Downloads the object at the specified path.
+   * Gets the headers for an object at the specified path.
    */
-  getObject(params: MediaStoreData.Types.GetObjectRequest, callback?: (err: AWSError, data: MediaStoreData.Types.GetObjectResponse) => void): Request<MediaStoreData.Types.GetObjectResponse, AWSError>;
+  describeObject(params: MediaStoreData.Types.DescribeObjectRequest, callback?: (err: AWSError, data: MediaStoreData.Types.DescribeObjectResponse) => void): Request<MediaStoreData.Types.DescribeObjectResponse, AWSError>;
   /**
    * Downloads the object at the specified path.
    */
   getObject(callback?: (err: AWSError, data: MediaStoreData.Types.GetObjectResponse) => void): Request<MediaStoreData.Types.GetObjectResponse, AWSError>;
   /**
-   * Provides a list of metadata entries about folders and objects in the specified folder.
+   * Downloads the object at the specified path.
    */
-  listItems(params: MediaStoreData.Types.ListItemsRequest, callback?: (err: AWSError, data: MediaStoreData.Types.ListItemsResponse) => void): Request<MediaStoreData.Types.ListItemsResponse, AWSError>;
+  getObject(params: MediaStoreData.Types.GetObjectRequest, callback?: (err: AWSError, data: MediaStoreData.Types.GetObjectResponse) => void): Request<MediaStoreData.Types.GetObjectResponse, AWSError>;
   /**
    * Provides a list of metadata entries about folders and objects in the specified folder.
    */
   listItems(callback?: (err: AWSError, data: MediaStoreData.Types.ListItemsResponse) => void): Request<MediaStoreData.Types.ListItemsResponse, AWSError>;
   /**
-   * Uploads an object to the specified path. Object sizes are limited to 25 MB.
+   * Provides a list of metadata entries about folders and objects in the specified folder.
    */
-  putObject(params: MediaStoreData.Types.PutObjectRequest, callback?: (err: AWSError, data: MediaStoreData.Types.PutObjectResponse) => void): Request<MediaStoreData.Types.PutObjectResponse, AWSError>;
+  listItems(params: MediaStoreData.Types.ListItemsRequest, callback?: (err: AWSError, data: MediaStoreData.Types.ListItemsResponse) => void): Request<MediaStoreData.Types.ListItemsResponse, AWSError>;
   /**
    * Uploads an object to the specified path. Object sizes are limited to 25 MB.
    */
   putObject(callback?: (err: AWSError, data: MediaStoreData.Types.PutObjectResponse) => void): Request<MediaStoreData.Types.PutObjectResponse, AWSError>;
+  /**
+   * Uploads an object to the specified path. Object sizes are limited to 25 MB.
+   */
+  putObject(params: MediaStoreData.Types.PutObjectRequest, callback?: (err: AWSError, data: MediaStoreData.Types.PutObjectResponse) => void): Request<MediaStoreData.Types.PutObjectResponse, AWSError>;
 }
 declare namespace MediaStoreData {
   export type ContentRangePattern = string;

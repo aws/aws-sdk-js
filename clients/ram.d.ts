@@ -14,131 +14,131 @@ declare class RAM extends Service {
   /**
    * Accepts an invitation to a resource share from another AWS account.
    */
-  acceptResourceShareInvitation(params: RAM.Types.AcceptResourceShareInvitationRequest, callback?: (err: AWSError, data: RAM.Types.AcceptResourceShareInvitationResponse) => void): Request<RAM.Types.AcceptResourceShareInvitationResponse, AWSError>;
+  acceptResourceShareInvitation(callback?: (err: AWSError, data: RAM.Types.AcceptResourceShareInvitationResponse) => void): Request<RAM.Types.AcceptResourceShareInvitationResponse, AWSError>;
   /**
    * Accepts an invitation to a resource share from another AWS account.
    */
-  acceptResourceShareInvitation(callback?: (err: AWSError, data: RAM.Types.AcceptResourceShareInvitationResponse) => void): Request<RAM.Types.AcceptResourceShareInvitationResponse, AWSError>;
-  /**
-   * Associates the specified resource share with the specified principals and resources.
-   */
-  associateResourceShare(params: RAM.Types.AssociateResourceShareRequest, callback?: (err: AWSError, data: RAM.Types.AssociateResourceShareResponse) => void): Request<RAM.Types.AssociateResourceShareResponse, AWSError>;
+  acceptResourceShareInvitation(params: RAM.Types.AcceptResourceShareInvitationRequest, callback?: (err: AWSError, data: RAM.Types.AcceptResourceShareInvitationResponse) => void): Request<RAM.Types.AcceptResourceShareInvitationResponse, AWSError>;
   /**
    * Associates the specified resource share with the specified principals and resources.
    */
   associateResourceShare(callback?: (err: AWSError, data: RAM.Types.AssociateResourceShareResponse) => void): Request<RAM.Types.AssociateResourceShareResponse, AWSError>;
   /**
-   * Creates a resource share.
+   * Associates the specified resource share with the specified principals and resources.
    */
-  createResourceShare(params: RAM.Types.CreateResourceShareRequest, callback?: (err: AWSError, data: RAM.Types.CreateResourceShareResponse) => void): Request<RAM.Types.CreateResourceShareResponse, AWSError>;
+  associateResourceShare(params: RAM.Types.AssociateResourceShareRequest, callback?: (err: AWSError, data: RAM.Types.AssociateResourceShareResponse) => void): Request<RAM.Types.AssociateResourceShareResponse, AWSError>;
   /**
    * Creates a resource share.
    */
   createResourceShare(callback?: (err: AWSError, data: RAM.Types.CreateResourceShareResponse) => void): Request<RAM.Types.CreateResourceShareResponse, AWSError>;
   /**
-   * Deletes the specified resource share.
+   * Creates a resource share.
    */
-  deleteResourceShare(params: RAM.Types.DeleteResourceShareRequest, callback?: (err: AWSError, data: RAM.Types.DeleteResourceShareResponse) => void): Request<RAM.Types.DeleteResourceShareResponse, AWSError>;
+  createResourceShare(params: RAM.Types.CreateResourceShareRequest, callback?: (err: AWSError, data: RAM.Types.CreateResourceShareResponse) => void): Request<RAM.Types.CreateResourceShareResponse, AWSError>;
   /**
    * Deletes the specified resource share.
    */
   deleteResourceShare(callback?: (err: AWSError, data: RAM.Types.DeleteResourceShareResponse) => void): Request<RAM.Types.DeleteResourceShareResponse, AWSError>;
   /**
-   * Disassociates the specified principals or resources from the specified resource share.
+   * Deletes the specified resource share.
    */
-  disassociateResourceShare(params: RAM.Types.DisassociateResourceShareRequest, callback?: (err: AWSError, data: RAM.Types.DisassociateResourceShareResponse) => void): Request<RAM.Types.DisassociateResourceShareResponse, AWSError>;
+  deleteResourceShare(params: RAM.Types.DeleteResourceShareRequest, callback?: (err: AWSError, data: RAM.Types.DeleteResourceShareResponse) => void): Request<RAM.Types.DeleteResourceShareResponse, AWSError>;
   /**
    * Disassociates the specified principals or resources from the specified resource share.
    */
   disassociateResourceShare(callback?: (err: AWSError, data: RAM.Types.DisassociateResourceShareResponse) => void): Request<RAM.Types.DisassociateResourceShareResponse, AWSError>;
   /**
-   * Enables resource sharing within your organization.
+   * Disassociates the specified principals or resources from the specified resource share.
    */
-  enableSharingWithAwsOrganization(params: RAM.Types.EnableSharingWithAwsOrganizationRequest, callback?: (err: AWSError, data: RAM.Types.EnableSharingWithAwsOrganizationResponse) => void): Request<RAM.Types.EnableSharingWithAwsOrganizationResponse, AWSError>;
+  disassociateResourceShare(params: RAM.Types.DisassociateResourceShareRequest, callback?: (err: AWSError, data: RAM.Types.DisassociateResourceShareResponse) => void): Request<RAM.Types.DisassociateResourceShareResponse, AWSError>;
   /**
    * Enables resource sharing within your organization.
    */
   enableSharingWithAwsOrganization(callback?: (err: AWSError, data: RAM.Types.EnableSharingWithAwsOrganizationResponse) => void): Request<RAM.Types.EnableSharingWithAwsOrganizationResponse, AWSError>;
   /**
-   * Gets the policies for the specifies resources.
+   * Enables resource sharing within your organization.
    */
-  getResourcePolicies(params: RAM.Types.GetResourcePoliciesRequest, callback?: (err: AWSError, data: RAM.Types.GetResourcePoliciesResponse) => void): Request<RAM.Types.GetResourcePoliciesResponse, AWSError>;
+  enableSharingWithAwsOrganization(params: RAM.Types.EnableSharingWithAwsOrganizationRequest, callback?: (err: AWSError, data: RAM.Types.EnableSharingWithAwsOrganizationResponse) => void): Request<RAM.Types.EnableSharingWithAwsOrganizationResponse, AWSError>;
   /**
    * Gets the policies for the specifies resources.
    */
   getResourcePolicies(callback?: (err: AWSError, data: RAM.Types.GetResourcePoliciesResponse) => void): Request<RAM.Types.GetResourcePoliciesResponse, AWSError>;
   /**
-   * Gets the associations for the specified resource share.
+   * Gets the policies for the specifies resources.
    */
-  getResourceShareAssociations(params: RAM.Types.GetResourceShareAssociationsRequest, callback?: (err: AWSError, data: RAM.Types.GetResourceShareAssociationsResponse) => void): Request<RAM.Types.GetResourceShareAssociationsResponse, AWSError>;
+  getResourcePolicies(params: RAM.Types.GetResourcePoliciesRequest, callback?: (err: AWSError, data: RAM.Types.GetResourcePoliciesResponse) => void): Request<RAM.Types.GetResourcePoliciesResponse, AWSError>;
   /**
    * Gets the associations for the specified resource share.
    */
   getResourceShareAssociations(callback?: (err: AWSError, data: RAM.Types.GetResourceShareAssociationsResponse) => void): Request<RAM.Types.GetResourceShareAssociationsResponse, AWSError>;
   /**
-   * Gets the specified invitations for resource sharing.
+   * Gets the associations for the specified resource share.
    */
-  getResourceShareInvitations(params: RAM.Types.GetResourceShareInvitationsRequest, callback?: (err: AWSError, data: RAM.Types.GetResourceShareInvitationsResponse) => void): Request<RAM.Types.GetResourceShareInvitationsResponse, AWSError>;
+  getResourceShareAssociations(params: RAM.Types.GetResourceShareAssociationsRequest, callback?: (err: AWSError, data: RAM.Types.GetResourceShareAssociationsResponse) => void): Request<RAM.Types.GetResourceShareAssociationsResponse, AWSError>;
   /**
    * Gets the specified invitations for resource sharing.
    */
   getResourceShareInvitations(callback?: (err: AWSError, data: RAM.Types.GetResourceShareInvitationsResponse) => void): Request<RAM.Types.GetResourceShareInvitationsResponse, AWSError>;
   /**
-   * Gets the specified resource shares or all of your resource shares.
+   * Gets the specified invitations for resource sharing.
    */
-  getResourceShares(params: RAM.Types.GetResourceSharesRequest, callback?: (err: AWSError, data: RAM.Types.GetResourceSharesResponse) => void): Request<RAM.Types.GetResourceSharesResponse, AWSError>;
+  getResourceShareInvitations(params: RAM.Types.GetResourceShareInvitationsRequest, callback?: (err: AWSError, data: RAM.Types.GetResourceShareInvitationsResponse) => void): Request<RAM.Types.GetResourceShareInvitationsResponse, AWSError>;
   /**
    * Gets the specified resource shares or all of your resource shares.
    */
   getResourceShares(callback?: (err: AWSError, data: RAM.Types.GetResourceSharesResponse) => void): Request<RAM.Types.GetResourceSharesResponse, AWSError>;
   /**
-   * Lists the principals with access to the specified resource.
+   * Gets the specified resource shares or all of your resource shares.
    */
-  listPrincipals(params: RAM.Types.ListPrincipalsRequest, callback?: (err: AWSError, data: RAM.Types.ListPrincipalsResponse) => void): Request<RAM.Types.ListPrincipalsResponse, AWSError>;
+  getResourceShares(params: RAM.Types.GetResourceSharesRequest, callback?: (err: AWSError, data: RAM.Types.GetResourceSharesResponse) => void): Request<RAM.Types.GetResourceSharesResponse, AWSError>;
   /**
    * Lists the principals with access to the specified resource.
    */
   listPrincipals(callback?: (err: AWSError, data: RAM.Types.ListPrincipalsResponse) => void): Request<RAM.Types.ListPrincipalsResponse, AWSError>;
   /**
-   * Lists the resources that the specified principal can access.
+   * Lists the principals with access to the specified resource.
    */
-  listResources(params: RAM.Types.ListResourcesRequest, callback?: (err: AWSError, data: RAM.Types.ListResourcesResponse) => void): Request<RAM.Types.ListResourcesResponse, AWSError>;
+  listPrincipals(params: RAM.Types.ListPrincipalsRequest, callback?: (err: AWSError, data: RAM.Types.ListPrincipalsResponse) => void): Request<RAM.Types.ListPrincipalsResponse, AWSError>;
   /**
    * Lists the resources that the specified principal can access.
    */
   listResources(callback?: (err: AWSError, data: RAM.Types.ListResourcesResponse) => void): Request<RAM.Types.ListResourcesResponse, AWSError>;
   /**
-   * Rejects an invitation to a resource share from another AWS account.
+   * Lists the resources that the specified principal can access.
    */
-  rejectResourceShareInvitation(params: RAM.Types.RejectResourceShareInvitationRequest, callback?: (err: AWSError, data: RAM.Types.RejectResourceShareInvitationResponse) => void): Request<RAM.Types.RejectResourceShareInvitationResponse, AWSError>;
+  listResources(params: RAM.Types.ListResourcesRequest, callback?: (err: AWSError, data: RAM.Types.ListResourcesResponse) => void): Request<RAM.Types.ListResourcesResponse, AWSError>;
   /**
    * Rejects an invitation to a resource share from another AWS account.
    */
   rejectResourceShareInvitation(callback?: (err: AWSError, data: RAM.Types.RejectResourceShareInvitationResponse) => void): Request<RAM.Types.RejectResourceShareInvitationResponse, AWSError>;
   /**
-   * Adds the specified tags to the specified resource share.
+   * Rejects an invitation to a resource share from another AWS account.
    */
-  tagResource(params: RAM.Types.TagResourceRequest, callback?: (err: AWSError, data: RAM.Types.TagResourceResponse) => void): Request<RAM.Types.TagResourceResponse, AWSError>;
+  rejectResourceShareInvitation(params: RAM.Types.RejectResourceShareInvitationRequest, callback?: (err: AWSError, data: RAM.Types.RejectResourceShareInvitationResponse) => void): Request<RAM.Types.RejectResourceShareInvitationResponse, AWSError>;
   /**
    * Adds the specified tags to the specified resource share.
    */
   tagResource(callback?: (err: AWSError, data: RAM.Types.TagResourceResponse) => void): Request<RAM.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes the specified tags from the specified resource share.
+   * Adds the specified tags to the specified resource share.
    */
-  untagResource(params: RAM.Types.UntagResourceRequest, callback?: (err: AWSError, data: RAM.Types.UntagResourceResponse) => void): Request<RAM.Types.UntagResourceResponse, AWSError>;
+  tagResource(params: RAM.Types.TagResourceRequest, callback?: (err: AWSError, data: RAM.Types.TagResourceResponse) => void): Request<RAM.Types.TagResourceResponse, AWSError>;
   /**
    * Removes the specified tags from the specified resource share.
    */
   untagResource(callback?: (err: AWSError, data: RAM.Types.UntagResourceResponse) => void): Request<RAM.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the specified resource share.
+   * Removes the specified tags from the specified resource share.
    */
-  updateResourceShare(params: RAM.Types.UpdateResourceShareRequest, callback?: (err: AWSError, data: RAM.Types.UpdateResourceShareResponse) => void): Request<RAM.Types.UpdateResourceShareResponse, AWSError>;
+  untagResource(params: RAM.Types.UntagResourceRequest, callback?: (err: AWSError, data: RAM.Types.UntagResourceResponse) => void): Request<RAM.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates the specified resource share.
    */
   updateResourceShare(callback?: (err: AWSError, data: RAM.Types.UpdateResourceShareResponse) => void): Request<RAM.Types.UpdateResourceShareResponse, AWSError>;
+  /**
+   * Updates the specified resource share.
+   */
+  updateResourceShare(params: RAM.Types.UpdateResourceShareRequest, callback?: (err: AWSError, data: RAM.Types.UpdateResourceShareResponse) => void): Request<RAM.Types.UpdateResourceShareResponse, AWSError>;
 }
 declare namespace RAM {
   export interface AcceptResourceShareInvitationRequest {

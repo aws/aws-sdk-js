@@ -14,75 +14,75 @@ declare class ElasticBeanstalk extends Service {
   /**
    * Cancels in-progress environment configuration update or application version deployment.
    */
-  abortEnvironmentUpdate(params: ElasticBeanstalk.Types.AbortEnvironmentUpdateMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  abortEnvironmentUpdate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Cancels in-progress environment configuration update or application version deployment.
    */
-  abortEnvironmentUpdate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
-  /**
-   * Applies a scheduled managed action immediately. A managed action can be applied only if its status is Scheduled. Get the status and action ID of a managed action with DescribeEnvironmentManagedActions.
-   */
-  applyEnvironmentManagedAction(params: ElasticBeanstalk.Types.ApplyEnvironmentManagedActionRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplyEnvironmentManagedActionResult) => void): Request<ElasticBeanstalk.Types.ApplyEnvironmentManagedActionResult, AWSError>;
+  abortEnvironmentUpdate(params: ElasticBeanstalk.Types.AbortEnvironmentUpdateMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Applies a scheduled managed action immediately. A managed action can be applied only if its status is Scheduled. Get the status and action ID of a managed action with DescribeEnvironmentManagedActions.
    */
   applyEnvironmentManagedAction(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplyEnvironmentManagedActionResult) => void): Request<ElasticBeanstalk.Types.ApplyEnvironmentManagedActionResult, AWSError>;
   /**
-   * Checks if the specified CNAME is available.
+   * Applies a scheduled managed action immediately. A managed action can be applied only if its status is Scheduled. Get the status and action ID of a managed action with DescribeEnvironmentManagedActions.
    */
-  checkDNSAvailability(params: ElasticBeanstalk.Types.CheckDNSAvailabilityMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.CheckDNSAvailabilityResultMessage) => void): Request<ElasticBeanstalk.Types.CheckDNSAvailabilityResultMessage, AWSError>;
+  applyEnvironmentManagedAction(params: ElasticBeanstalk.Types.ApplyEnvironmentManagedActionRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplyEnvironmentManagedActionResult) => void): Request<ElasticBeanstalk.Types.ApplyEnvironmentManagedActionResult, AWSError>;
   /**
    * Checks if the specified CNAME is available.
    */
   checkDNSAvailability(callback?: (err: AWSError, data: ElasticBeanstalk.Types.CheckDNSAvailabilityResultMessage) => void): Request<ElasticBeanstalk.Types.CheckDNSAvailabilityResultMessage, AWSError>;
   /**
-   * Create or update a group of environments that each run a separate component of a single application. Takes a list of version labels that specify application source bundles for each of the environments to create or update. The name of each environment and other required information must be included in the source bundles in an environment manifest named env.yaml. See Compose Environments for details.
+   * Checks if the specified CNAME is available.
    */
-  composeEnvironments(params: ElasticBeanstalk.Types.ComposeEnvironmentsMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EnvironmentDescriptionsMessage, AWSError>;
+  checkDNSAvailability(params: ElasticBeanstalk.Types.CheckDNSAvailabilityMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.CheckDNSAvailabilityResultMessage) => void): Request<ElasticBeanstalk.Types.CheckDNSAvailabilityResultMessage, AWSError>;
   /**
    * Create or update a group of environments that each run a separate component of a single application. Takes a list of version labels that specify application source bundles for each of the environments to create or update. The name of each environment and other required information must be included in the source bundles in an environment manifest named env.yaml. See Compose Environments for details.
    */
   composeEnvironments(callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EnvironmentDescriptionsMessage, AWSError>;
   /**
-   *  Creates an application that has one configuration template named default and no application versions. 
+   * Create or update a group of environments that each run a separate component of a single application. Takes a list of version labels that specify application source bundles for each of the environments to create or update. The name of each environment and other required information must be included in the source bundles in an environment manifest named env.yaml. See Compose Environments for details.
    */
-  createApplication(params: ElasticBeanstalk.Types.CreateApplicationMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationDescriptionMessage, AWSError>;
+  composeEnvironments(params: ElasticBeanstalk.Types.ComposeEnvironmentsMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EnvironmentDescriptionsMessage, AWSError>;
   /**
    *  Creates an application that has one configuration template named default and no application versions. 
    */
   createApplication(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationDescriptionMessage, AWSError>;
   /**
-   * Creates an application version for the specified application. You can create an application version from a source bundle in Amazon S3, a commit in AWS CodeCommit, or the output of an AWS CodeBuild build as follows: Specify a commit in an AWS CodeCommit repository with SourceBuildInformation. Specify a build in an AWS CodeBuild with SourceBuildInformation and BuildConfiguration. Specify a source bundle in S3 with SourceBundle  Omit both SourceBuildInformation and SourceBundle to use the default sample application.  Once you create an application version with a specified Amazon S3 bucket and key location, you cannot change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version. 
+   *  Creates an application that has one configuration template named default and no application versions. 
    */
-  createApplicationVersion(params: ElasticBeanstalk.Types.CreateApplicationVersionMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage, AWSError>;
+  createApplication(params: ElasticBeanstalk.Types.CreateApplicationMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationDescriptionMessage, AWSError>;
   /**
    * Creates an application version for the specified application. You can create an application version from a source bundle in Amazon S3, a commit in AWS CodeCommit, or the output of an AWS CodeBuild build as follows: Specify a commit in an AWS CodeCommit repository with SourceBuildInformation. Specify a build in an AWS CodeBuild with SourceBuildInformation and BuildConfiguration. Specify a source bundle in S3 with SourceBundle  Omit both SourceBuildInformation and SourceBundle to use the default sample application.  Once you create an application version with a specified Amazon S3 bucket and key location, you cannot change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version. 
    */
   createApplicationVersion(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage, AWSError>;
   /**
-   * Creates a configuration template. Templates are associated with a specific application and are used to deploy different versions of the application with the same configuration settings. Templates aren't associated with any environment. The EnvironmentName response element is always null. Related Topics    DescribeConfigurationOptions     DescribeConfigurationSettings     ListAvailableSolutionStacks   
+   * Creates an application version for the specified application. You can create an application version from a source bundle in Amazon S3, a commit in AWS CodeCommit, or the output of an AWS CodeBuild build as follows: Specify a commit in an AWS CodeCommit repository with SourceBuildInformation. Specify a build in an AWS CodeBuild with SourceBuildInformation and BuildConfiguration. Specify a source bundle in S3 with SourceBundle  Omit both SourceBuildInformation and SourceBundle to use the default sample application.  Once you create an application version with a specified Amazon S3 bucket and key location, you cannot change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version. 
    */
-  createConfigurationTemplate(params: ElasticBeanstalk.Types.CreateConfigurationTemplateMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsDescription) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsDescription, AWSError>;
+  createApplicationVersion(params: ElasticBeanstalk.Types.CreateApplicationVersionMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage, AWSError>;
   /**
    * Creates a configuration template. Templates are associated with a specific application and are used to deploy different versions of the application with the same configuration settings. Templates aren't associated with any environment. The EnvironmentName response element is always null. Related Topics    DescribeConfigurationOptions     DescribeConfigurationSettings     ListAvailableSolutionStacks   
    */
   createConfigurationTemplate(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsDescription) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsDescription, AWSError>;
   /**
-   * Launches an environment for the specified application using the specified configuration.
+   * Creates a configuration template. Templates are associated with a specific application and are used to deploy different versions of the application with the same configuration settings. Templates aren't associated with any environment. The EnvironmentName response element is always null. Related Topics    DescribeConfigurationOptions     DescribeConfigurationSettings     ListAvailableSolutionStacks   
    */
-  createEnvironment(params: ElasticBeanstalk.Types.CreateEnvironmentMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescription) => void): Request<ElasticBeanstalk.Types.EnvironmentDescription, AWSError>;
+  createConfigurationTemplate(params: ElasticBeanstalk.Types.CreateConfigurationTemplateMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsDescription) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsDescription, AWSError>;
   /**
    * Launches an environment for the specified application using the specified configuration.
    */
   createEnvironment(callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescription) => void): Request<ElasticBeanstalk.Types.EnvironmentDescription, AWSError>;
   /**
-   * Create a new version of your custom platform.
+   * Launches an environment for the specified application using the specified configuration.
    */
-  createPlatformVersion(params: ElasticBeanstalk.Types.CreatePlatformVersionRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.CreatePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.CreatePlatformVersionResult, AWSError>;
+  createEnvironment(params: ElasticBeanstalk.Types.CreateEnvironmentMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescription) => void): Request<ElasticBeanstalk.Types.EnvironmentDescription, AWSError>;
   /**
    * Create a new version of your custom platform.
    */
   createPlatformVersion(callback?: (err: AWSError, data: ElasticBeanstalk.Types.CreatePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.CreatePlatformVersionResult, AWSError>;
+  /**
+   * Create a new version of your custom platform.
+   */
+  createPlatformVersion(params: ElasticBeanstalk.Types.CreatePlatformVersionRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.CreatePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.CreatePlatformVersionResult, AWSError>;
   /**
    * Creates a bucket in Amazon S3 to store application versions, logs, and other files used by Elastic Beanstalk environments. The Elastic Beanstalk console and EB CLI call this API the first time you create an environment in a region. If the storage location already exists, CreateStorageLocation still returns the bucket name but does not create a new bucket.
    */
@@ -90,43 +90,43 @@ declare class ElasticBeanstalk extends Service {
   /**
    * Deletes the specified application along with all associated versions and configurations. The application versions will not be deleted from your Amazon S3 bucket.  You cannot delete an application that has a running environment. 
    */
-  deleteApplication(params: ElasticBeanstalk.Types.DeleteApplicationMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteApplication(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified application along with all associated versions and configurations. The application versions will not be deleted from your Amazon S3 bucket.  You cannot delete an application that has a running environment. 
    */
-  deleteApplication(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
-  /**
-   * Deletes the specified version from the specified application.  You cannot delete an application version that is associated with a running environment. 
-   */
-  deleteApplicationVersion(params: ElasticBeanstalk.Types.DeleteApplicationVersionMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteApplication(params: ElasticBeanstalk.Types.DeleteApplicationMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified version from the specified application.  You cannot delete an application version that is associated with a running environment. 
    */
   deleteApplicationVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified configuration template.  When you launch an environment using a configuration template, the environment gets a copy of the template. You can delete or modify the environment's copy of the template without affecting the running environment. 
+   * Deletes the specified version from the specified application.  You cannot delete an application version that is associated with a running environment. 
    */
-  deleteConfigurationTemplate(params: ElasticBeanstalk.Types.DeleteConfigurationTemplateMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteApplicationVersion(params: ElasticBeanstalk.Types.DeleteApplicationVersionMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified configuration template.  When you launch an environment using a configuration template, the environment gets a copy of the template. You can delete or modify the environment's copy of the template without affecting the running environment. 
    */
   deleteConfigurationTemplate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the draft configuration associated with the running environment. Updating a running environment with any configuration changes creates a draft configuration set. You can get the draft configuration using DescribeConfigurationSettings while the update is in progress or if the update fails. The DeploymentStatus for the draft configuration indicates whether the deployment is in process or has failed. The draft configuration remains in existence until it is deleted with this action.
+   * Deletes the specified configuration template.  When you launch an environment using a configuration template, the environment gets a copy of the template. You can delete or modify the environment's copy of the template without affecting the running environment. 
    */
-  deleteEnvironmentConfiguration(params: ElasticBeanstalk.Types.DeleteEnvironmentConfigurationMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteConfigurationTemplate(params: ElasticBeanstalk.Types.DeleteConfigurationTemplateMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the draft configuration associated with the running environment. Updating a running environment with any configuration changes creates a draft configuration set. You can get the draft configuration using DescribeConfigurationSettings while the update is in progress or if the update fails. The DeploymentStatus for the draft configuration indicates whether the deployment is in process or has failed. The draft configuration remains in existence until it is deleted with this action.
    */
   deleteEnvironmentConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified version of a custom platform.
+   * Deletes the draft configuration associated with the running environment. Updating a running environment with any configuration changes creates a draft configuration set. You can get the draft configuration using DescribeConfigurationSettings while the update is in progress or if the update fails. The DeploymentStatus for the draft configuration indicates whether the deployment is in process or has failed. The draft configuration remains in existence until it is deleted with this action.
    */
-  deletePlatformVersion(params: ElasticBeanstalk.Types.DeletePlatformVersionRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.DeletePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.DeletePlatformVersionResult, AWSError>;
+  deleteEnvironmentConfiguration(params: ElasticBeanstalk.Types.DeleteEnvironmentConfigurationMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified version of a custom platform.
    */
   deletePlatformVersion(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DeletePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.DeletePlatformVersionResult, AWSError>;
+  /**
+   * Deletes the specified version of a custom platform.
+   */
+  deletePlatformVersion(params: ElasticBeanstalk.Types.DeletePlatformVersionRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.DeletePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.DeletePlatformVersionResult, AWSError>;
   /**
    * Returns attributes related to AWS Elastic Beanstalk that are associated with the calling AWS account. The result currently has one set of attributes—resource quotas.
    */
@@ -134,99 +134,99 @@ declare class ElasticBeanstalk extends Service {
   /**
    * Retrieve a list of application versions.
    */
-  describeApplicationVersions(params: ElasticBeanstalk.Types.DescribeApplicationVersionsMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationVersionDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.ApplicationVersionDescriptionsMessage, AWSError>;
+  describeApplicationVersions(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationVersionDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.ApplicationVersionDescriptionsMessage, AWSError>;
   /**
    * Retrieve a list of application versions.
    */
-  describeApplicationVersions(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationVersionDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.ApplicationVersionDescriptionsMessage, AWSError>;
-  /**
-   * Returns the descriptions of existing applications.
-   */
-  describeApplications(params: ElasticBeanstalk.Types.DescribeApplicationsMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.ApplicationDescriptionsMessage, AWSError>;
+  describeApplicationVersions(params: ElasticBeanstalk.Types.DescribeApplicationVersionsMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationVersionDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.ApplicationVersionDescriptionsMessage, AWSError>;
   /**
    * Returns the descriptions of existing applications.
    */
   describeApplications(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.ApplicationDescriptionsMessage, AWSError>;
   /**
-   * Describes the configuration options that are used in a particular configuration template or environment, or that a specified solution stack defines. The description includes the values the options, their default values, and an indication of the required action on a running environment if an option value is changed.
+   * Returns the descriptions of existing applications.
    */
-  describeConfigurationOptions(params: ElasticBeanstalk.Types.DescribeConfigurationOptionsMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationOptionsDescription) => void): Request<ElasticBeanstalk.Types.ConfigurationOptionsDescription, AWSError>;
+  describeApplications(params: ElasticBeanstalk.Types.DescribeApplicationsMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.ApplicationDescriptionsMessage, AWSError>;
   /**
    * Describes the configuration options that are used in a particular configuration template or environment, or that a specified solution stack defines. The description includes the values the options, their default values, and an indication of the required action on a running environment if an option value is changed.
    */
   describeConfigurationOptions(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationOptionsDescription) => void): Request<ElasticBeanstalk.Types.ConfigurationOptionsDescription, AWSError>;
   /**
-   * Returns a description of the settings for the specified configuration set, that is, either a configuration template or the configuration set associated with a running environment. When describing the settings for the configuration set associated with a running environment, it is possible to receive two sets of setting descriptions. One is the deployed configuration set, and the other is a draft configuration of an environment that is either in the process of deployment or that failed to deploy. Related Topics    DeleteEnvironmentConfiguration   
+   * Describes the configuration options that are used in a particular configuration template or environment, or that a specified solution stack defines. The description includes the values the options, their default values, and an indication of the required action on a running environment if an option value is changed.
    */
-  describeConfigurationSettings(params: ElasticBeanstalk.Types.DescribeConfigurationSettingsMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsDescriptions) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsDescriptions, AWSError>;
+  describeConfigurationOptions(params: ElasticBeanstalk.Types.DescribeConfigurationOptionsMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationOptionsDescription) => void): Request<ElasticBeanstalk.Types.ConfigurationOptionsDescription, AWSError>;
   /**
    * Returns a description of the settings for the specified configuration set, that is, either a configuration template or the configuration set associated with a running environment. When describing the settings for the configuration set associated with a running environment, it is possible to receive two sets of setting descriptions. One is the deployed configuration set, and the other is a draft configuration of an environment that is either in the process of deployment or that failed to deploy. Related Topics    DeleteEnvironmentConfiguration   
    */
   describeConfigurationSettings(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsDescriptions) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsDescriptions, AWSError>;
   /**
-   * Returns information about the overall health of the specified environment. The DescribeEnvironmentHealth operation is only available with AWS Elastic Beanstalk Enhanced Health.
+   * Returns a description of the settings for the specified configuration set, that is, either a configuration template or the configuration set associated with a running environment. When describing the settings for the configuration set associated with a running environment, it is possible to receive two sets of setting descriptions. One is the deployed configuration set, and the other is a draft configuration of an environment that is either in the process of deployment or that failed to deploy. Related Topics    DeleteEnvironmentConfiguration   
    */
-  describeEnvironmentHealth(params: ElasticBeanstalk.Types.DescribeEnvironmentHealthRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeEnvironmentHealthResult) => void): Request<ElasticBeanstalk.Types.DescribeEnvironmentHealthResult, AWSError>;
+  describeConfigurationSettings(params: ElasticBeanstalk.Types.DescribeConfigurationSettingsMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsDescriptions) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsDescriptions, AWSError>;
   /**
    * Returns information about the overall health of the specified environment. The DescribeEnvironmentHealth operation is only available with AWS Elastic Beanstalk Enhanced Health.
    */
   describeEnvironmentHealth(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeEnvironmentHealthResult) => void): Request<ElasticBeanstalk.Types.DescribeEnvironmentHealthResult, AWSError>;
   /**
-   * Lists an environment's completed and failed managed actions.
+   * Returns information about the overall health of the specified environment. The DescribeEnvironmentHealth operation is only available with AWS Elastic Beanstalk Enhanced Health.
    */
-  describeEnvironmentManagedActionHistory(params: ElasticBeanstalk.Types.DescribeEnvironmentManagedActionHistoryRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeEnvironmentManagedActionHistoryResult) => void): Request<ElasticBeanstalk.Types.DescribeEnvironmentManagedActionHistoryResult, AWSError>;
+  describeEnvironmentHealth(params: ElasticBeanstalk.Types.DescribeEnvironmentHealthRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeEnvironmentHealthResult) => void): Request<ElasticBeanstalk.Types.DescribeEnvironmentHealthResult, AWSError>;
   /**
    * Lists an environment's completed and failed managed actions.
    */
   describeEnvironmentManagedActionHistory(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeEnvironmentManagedActionHistoryResult) => void): Request<ElasticBeanstalk.Types.DescribeEnvironmentManagedActionHistoryResult, AWSError>;
   /**
-   * Lists an environment's upcoming and in-progress managed actions.
+   * Lists an environment's completed and failed managed actions.
    */
-  describeEnvironmentManagedActions(params: ElasticBeanstalk.Types.DescribeEnvironmentManagedActionsRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeEnvironmentManagedActionsResult) => void): Request<ElasticBeanstalk.Types.DescribeEnvironmentManagedActionsResult, AWSError>;
+  describeEnvironmentManagedActionHistory(params: ElasticBeanstalk.Types.DescribeEnvironmentManagedActionHistoryRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeEnvironmentManagedActionHistoryResult) => void): Request<ElasticBeanstalk.Types.DescribeEnvironmentManagedActionHistoryResult, AWSError>;
   /**
    * Lists an environment's upcoming and in-progress managed actions.
    */
   describeEnvironmentManagedActions(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeEnvironmentManagedActionsResult) => void): Request<ElasticBeanstalk.Types.DescribeEnvironmentManagedActionsResult, AWSError>;
   /**
-   * Returns AWS resources for this environment.
+   * Lists an environment's upcoming and in-progress managed actions.
    */
-  describeEnvironmentResources(params: ElasticBeanstalk.Types.DescribeEnvironmentResourcesMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentResourceDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EnvironmentResourceDescriptionsMessage, AWSError>;
+  describeEnvironmentManagedActions(params: ElasticBeanstalk.Types.DescribeEnvironmentManagedActionsRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeEnvironmentManagedActionsResult) => void): Request<ElasticBeanstalk.Types.DescribeEnvironmentManagedActionsResult, AWSError>;
   /**
    * Returns AWS resources for this environment.
    */
   describeEnvironmentResources(callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentResourceDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EnvironmentResourceDescriptionsMessage, AWSError>;
   /**
-   * Returns descriptions for existing environments.
+   * Returns AWS resources for this environment.
    */
-  describeEnvironments(params: ElasticBeanstalk.Types.DescribeEnvironmentsMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EnvironmentDescriptionsMessage, AWSError>;
+  describeEnvironmentResources(params: ElasticBeanstalk.Types.DescribeEnvironmentResourcesMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentResourceDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EnvironmentResourceDescriptionsMessage, AWSError>;
   /**
    * Returns descriptions for existing environments.
    */
   describeEnvironments(callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EnvironmentDescriptionsMessage, AWSError>;
   /**
-   * Returns list of event descriptions matching criteria up to the last 6 weeks.  This action returns the most recent 1,000 events from the specified NextToken. 
+   * Returns descriptions for existing environments.
    */
-  describeEvents(params: ElasticBeanstalk.Types.DescribeEventsMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.EventDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EventDescriptionsMessage, AWSError>;
+  describeEnvironments(params: ElasticBeanstalk.Types.DescribeEnvironmentsMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EnvironmentDescriptionsMessage, AWSError>;
   /**
    * Returns list of event descriptions matching criteria up to the last 6 weeks.  This action returns the most recent 1,000 events from the specified NextToken. 
    */
   describeEvents(callback?: (err: AWSError, data: ElasticBeanstalk.Types.EventDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EventDescriptionsMessage, AWSError>;
   /**
-   * Retrieves detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires enhanced health reporting.
+   * Returns list of event descriptions matching criteria up to the last 6 weeks.  This action returns the most recent 1,000 events from the specified NextToken. 
    */
-  describeInstancesHealth(params: ElasticBeanstalk.Types.DescribeInstancesHealthRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeInstancesHealthResult) => void): Request<ElasticBeanstalk.Types.DescribeInstancesHealthResult, AWSError>;
+  describeEvents(params: ElasticBeanstalk.Types.DescribeEventsMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.EventDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EventDescriptionsMessage, AWSError>;
   /**
    * Retrieves detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires enhanced health reporting.
    */
   describeInstancesHealth(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeInstancesHealthResult) => void): Request<ElasticBeanstalk.Types.DescribeInstancesHealthResult, AWSError>;
   /**
-   * Describes the version of the platform.
+   * Retrieves detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires enhanced health reporting.
    */
-  describePlatformVersion(params: ElasticBeanstalk.Types.DescribePlatformVersionRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.DescribePlatformVersionResult, AWSError>;
+  describeInstancesHealth(params: ElasticBeanstalk.Types.DescribeInstancesHealthRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeInstancesHealthResult) => void): Request<ElasticBeanstalk.Types.DescribeInstancesHealthResult, AWSError>;
   /**
    * Describes the version of the platform.
    */
   describePlatformVersion(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.DescribePlatformVersionResult, AWSError>;
+  /**
+   * Describes the version of the platform.
+   */
+  describePlatformVersion(params: ElasticBeanstalk.Types.DescribePlatformVersionRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.DescribePlatformVersionResult, AWSError>;
   /**
    * Returns a list of the available solution stack names, with the public version first and then in reverse chronological order.
    */
@@ -234,123 +234,123 @@ declare class ElasticBeanstalk extends Service {
   /**
    * Lists the available platforms.
    */
-  listPlatformVersions(params: ElasticBeanstalk.Types.ListPlatformVersionsRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ListPlatformVersionsResult) => void): Request<ElasticBeanstalk.Types.ListPlatformVersionsResult, AWSError>;
+  listPlatformVersions(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ListPlatformVersionsResult) => void): Request<ElasticBeanstalk.Types.ListPlatformVersionsResult, AWSError>;
   /**
    * Lists the available platforms.
    */
-  listPlatformVersions(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ListPlatformVersionsResult) => void): Request<ElasticBeanstalk.Types.ListPlatformVersionsResult, AWSError>;
-  /**
-   * Returns the tags applied to an AWS Elastic Beanstalk resource. The response contains a list of tag key-value pairs. Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments. For details about environment tagging, see Tagging Resources in Your Elastic Beanstalk Environment.
-   */
-  listTagsForResource(params: ElasticBeanstalk.Types.ListTagsForResourceMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ResourceTagsDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ResourceTagsDescriptionMessage, AWSError>;
+  listPlatformVersions(params: ElasticBeanstalk.Types.ListPlatformVersionsRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ListPlatformVersionsResult) => void): Request<ElasticBeanstalk.Types.ListPlatformVersionsResult, AWSError>;
   /**
    * Returns the tags applied to an AWS Elastic Beanstalk resource. The response contains a list of tag key-value pairs. Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments. For details about environment tagging, see Tagging Resources in Your Elastic Beanstalk Environment.
    */
   listTagsForResource(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ResourceTagsDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ResourceTagsDescriptionMessage, AWSError>;
   /**
-   * Deletes and recreates all of the AWS resources (for example: the Auto Scaling group, load balancer, etc.) for a specified environment and forces a restart.
+   * Returns the tags applied to an AWS Elastic Beanstalk resource. The response contains a list of tag key-value pairs. Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments. For details about environment tagging, see Tagging Resources in Your Elastic Beanstalk Environment.
    */
-  rebuildEnvironment(params: ElasticBeanstalk.Types.RebuildEnvironmentMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  listTagsForResource(params: ElasticBeanstalk.Types.ListTagsForResourceMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ResourceTagsDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ResourceTagsDescriptionMessage, AWSError>;
   /**
    * Deletes and recreates all of the AWS resources (for example: the Auto Scaling group, load balancer, etc.) for a specified environment and forces a restart.
    */
   rebuildEnvironment(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Initiates a request to compile the specified type of information of the deployed environment.  Setting the InfoType to tail compiles the last lines from the application server log files of every Amazon EC2 instance in your environment.   Setting the InfoType to bundle compresses the application server log files for every Amazon EC2 instance into a .zip file. Legacy and .NET containers do not support bundle logs.   Use RetrieveEnvironmentInfo to obtain the set of logs.  Related Topics    RetrieveEnvironmentInfo   
+   * Deletes and recreates all of the AWS resources (for example: the Auto Scaling group, load balancer, etc.) for a specified environment and forces a restart.
    */
-  requestEnvironmentInfo(params: ElasticBeanstalk.Types.RequestEnvironmentInfoMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  rebuildEnvironment(params: ElasticBeanstalk.Types.RebuildEnvironmentMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Initiates a request to compile the specified type of information of the deployed environment.  Setting the InfoType to tail compiles the last lines from the application server log files of every Amazon EC2 instance in your environment.   Setting the InfoType to bundle compresses the application server log files for every Amazon EC2 instance into a .zip file. Legacy and .NET containers do not support bundle logs.   Use RetrieveEnvironmentInfo to obtain the set of logs.  Related Topics    RetrieveEnvironmentInfo   
    */
   requestEnvironmentInfo(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Causes the environment to restart the application container server running on each Amazon EC2 instance.
+   * Initiates a request to compile the specified type of information of the deployed environment.  Setting the InfoType to tail compiles the last lines from the application server log files of every Amazon EC2 instance in your environment.   Setting the InfoType to bundle compresses the application server log files for every Amazon EC2 instance into a .zip file. Legacy and .NET containers do not support bundle logs.   Use RetrieveEnvironmentInfo to obtain the set of logs.  Related Topics    RetrieveEnvironmentInfo   
    */
-  restartAppServer(params: ElasticBeanstalk.Types.RestartAppServerMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  requestEnvironmentInfo(params: ElasticBeanstalk.Types.RequestEnvironmentInfoMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Causes the environment to restart the application container server running on each Amazon EC2 instance.
    */
   restartAppServer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Retrieves the compiled information from a RequestEnvironmentInfo request. Related Topics    RequestEnvironmentInfo   
+   * Causes the environment to restart the application container server running on each Amazon EC2 instance.
    */
-  retrieveEnvironmentInfo(params: ElasticBeanstalk.Types.RetrieveEnvironmentInfoMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.RetrieveEnvironmentInfoResultMessage) => void): Request<ElasticBeanstalk.Types.RetrieveEnvironmentInfoResultMessage, AWSError>;
+  restartAppServer(params: ElasticBeanstalk.Types.RestartAppServerMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Retrieves the compiled information from a RequestEnvironmentInfo request. Related Topics    RequestEnvironmentInfo   
    */
   retrieveEnvironmentInfo(callback?: (err: AWSError, data: ElasticBeanstalk.Types.RetrieveEnvironmentInfoResultMessage) => void): Request<ElasticBeanstalk.Types.RetrieveEnvironmentInfoResultMessage, AWSError>;
   /**
-   * Swaps the CNAMEs of two environments.
+   * Retrieves the compiled information from a RequestEnvironmentInfo request. Related Topics    RequestEnvironmentInfo   
    */
-  swapEnvironmentCNAMEs(params: ElasticBeanstalk.Types.SwapEnvironmentCNAMEsMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  retrieveEnvironmentInfo(params: ElasticBeanstalk.Types.RetrieveEnvironmentInfoMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.RetrieveEnvironmentInfoResultMessage) => void): Request<ElasticBeanstalk.Types.RetrieveEnvironmentInfoResultMessage, AWSError>;
   /**
    * Swaps the CNAMEs of two environments.
    */
   swapEnvironmentCNAMEs(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Terminates the specified environment.
+   * Swaps the CNAMEs of two environments.
    */
-  terminateEnvironment(params: ElasticBeanstalk.Types.TerminateEnvironmentMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescription) => void): Request<ElasticBeanstalk.Types.EnvironmentDescription, AWSError>;
+  swapEnvironmentCNAMEs(params: ElasticBeanstalk.Types.SwapEnvironmentCNAMEsMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Terminates the specified environment.
    */
   terminateEnvironment(callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescription) => void): Request<ElasticBeanstalk.Types.EnvironmentDescription, AWSError>;
   /**
-   * Updates the specified application to have the specified properties.  If a property (for example, description) is not provided, the value remains unchanged. To clear these properties, specify an empty string. 
+   * Terminates the specified environment.
    */
-  updateApplication(params: ElasticBeanstalk.Types.UpdateApplicationMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationDescriptionMessage, AWSError>;
+  terminateEnvironment(params: ElasticBeanstalk.Types.TerminateEnvironmentMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescription) => void): Request<ElasticBeanstalk.Types.EnvironmentDescription, AWSError>;
   /**
    * Updates the specified application to have the specified properties.  If a property (for example, description) is not provided, the value remains unchanged. To clear these properties, specify an empty string. 
    */
   updateApplication(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationDescriptionMessage, AWSError>;
   /**
-   * Modifies lifecycle settings for an application.
+   * Updates the specified application to have the specified properties.  If a property (for example, description) is not provided, the value remains unchanged. To clear these properties, specify an empty string. 
    */
-  updateApplicationResourceLifecycle(params: ElasticBeanstalk.Types.UpdateApplicationResourceLifecycleMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationResourceLifecycleDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationResourceLifecycleDescriptionMessage, AWSError>;
+  updateApplication(params: ElasticBeanstalk.Types.UpdateApplicationMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationDescriptionMessage, AWSError>;
   /**
    * Modifies lifecycle settings for an application.
    */
   updateApplicationResourceLifecycle(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationResourceLifecycleDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationResourceLifecycleDescriptionMessage, AWSError>;
   /**
-   * Updates the specified application version to have the specified properties.  If a property (for example, description) is not provided, the value remains unchanged. To clear properties, specify an empty string. 
+   * Modifies lifecycle settings for an application.
    */
-  updateApplicationVersion(params: ElasticBeanstalk.Types.UpdateApplicationVersionMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage, AWSError>;
+  updateApplicationResourceLifecycle(params: ElasticBeanstalk.Types.UpdateApplicationResourceLifecycleMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationResourceLifecycleDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationResourceLifecycleDescriptionMessage, AWSError>;
   /**
    * Updates the specified application version to have the specified properties.  If a property (for example, description) is not provided, the value remains unchanged. To clear properties, specify an empty string. 
    */
   updateApplicationVersion(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage, AWSError>;
   /**
-   * Updates the specified configuration template to have the specified properties or configuration option values.  If a property (for example, ApplicationName) is not provided, its value remains unchanged. To clear such properties, specify an empty string.  Related Topics    DescribeConfigurationOptions   
+   * Updates the specified application version to have the specified properties.  If a property (for example, description) is not provided, the value remains unchanged. To clear properties, specify an empty string. 
    */
-  updateConfigurationTemplate(params: ElasticBeanstalk.Types.UpdateConfigurationTemplateMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsDescription) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsDescription, AWSError>;
+  updateApplicationVersion(params: ElasticBeanstalk.Types.UpdateApplicationVersionMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage, AWSError>;
   /**
    * Updates the specified configuration template to have the specified properties or configuration option values.  If a property (for example, ApplicationName) is not provided, its value remains unchanged. To clear such properties, specify an empty string.  Related Topics    DescribeConfigurationOptions   
    */
   updateConfigurationTemplate(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsDescription) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsDescription, AWSError>;
   /**
-   * Updates the environment description, deploys a new application version, updates the configuration settings to an entirely new configuration template, or updates select configuration option values in the running environment.  Attempting to update both the release and configuration is not allowed and AWS Elastic Beanstalk returns an InvalidParameterCombination error.   When updating the configuration settings to a new template or individual settings, a draft configuration is created and DescribeConfigurationSettings for this environment returns two setting descriptions with different DeploymentStatus values. 
+   * Updates the specified configuration template to have the specified properties or configuration option values.  If a property (for example, ApplicationName) is not provided, its value remains unchanged. To clear such properties, specify an empty string.  Related Topics    DescribeConfigurationOptions   
    */
-  updateEnvironment(params: ElasticBeanstalk.Types.UpdateEnvironmentMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescription) => void): Request<ElasticBeanstalk.Types.EnvironmentDescription, AWSError>;
+  updateConfigurationTemplate(params: ElasticBeanstalk.Types.UpdateConfigurationTemplateMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsDescription) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsDescription, AWSError>;
   /**
    * Updates the environment description, deploys a new application version, updates the configuration settings to an entirely new configuration template, or updates select configuration option values in the running environment.  Attempting to update both the release and configuration is not allowed and AWS Elastic Beanstalk returns an InvalidParameterCombination error.   When updating the configuration settings to a new template or individual settings, a draft configuration is created and DescribeConfigurationSettings for this environment returns two setting descriptions with different DeploymentStatus values. 
    */
   updateEnvironment(callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescription) => void): Request<ElasticBeanstalk.Types.EnvironmentDescription, AWSError>;
   /**
-   * Update the list of tags applied to an AWS Elastic Beanstalk resource. Two lists can be passed: TagsToAdd for tags to add or update, and TagsToRemove. Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments. For details about environment tagging, see Tagging Resources in Your Elastic Beanstalk Environment. If you create a custom IAM user policy to control permission to this operation, specify one of the following two virtual actions (or both) instead of the API operation name:  elasticbeanstalk:AddTags  Controls permission to call UpdateTagsForResource and pass a list of tags to add in the TagsToAdd parameter.  elasticbeanstalk:RemoveTags  Controls permission to call UpdateTagsForResource and pass a list of tag keys to remove in the TagsToRemove parameter.   For details about creating a custom user policy, see Creating a Custom User Policy.
+   * Updates the environment description, deploys a new application version, updates the configuration settings to an entirely new configuration template, or updates select configuration option values in the running environment.  Attempting to update both the release and configuration is not allowed and AWS Elastic Beanstalk returns an InvalidParameterCombination error.   When updating the configuration settings to a new template or individual settings, a draft configuration is created and DescribeConfigurationSettings for this environment returns two setting descriptions with different DeploymentStatus values. 
    */
-  updateTagsForResource(params: ElasticBeanstalk.Types.UpdateTagsForResourceMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateEnvironment(params: ElasticBeanstalk.Types.UpdateEnvironmentMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.EnvironmentDescription) => void): Request<ElasticBeanstalk.Types.EnvironmentDescription, AWSError>;
   /**
    * Update the list of tags applied to an AWS Elastic Beanstalk resource. Two lists can be passed: TagsToAdd for tags to add or update, and TagsToRemove. Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments. For details about environment tagging, see Tagging Resources in Your Elastic Beanstalk Environment. If you create a custom IAM user policy to control permission to this operation, specify one of the following two virtual actions (or both) instead of the API operation name:  elasticbeanstalk:AddTags  Controls permission to call UpdateTagsForResource and pass a list of tags to add in the TagsToAdd parameter.  elasticbeanstalk:RemoveTags  Controls permission to call UpdateTagsForResource and pass a list of tag keys to remove in the TagsToRemove parameter.   For details about creating a custom user policy, see Creating a Custom User Policy.
    */
   updateTagsForResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Takes a set of configuration settings and either a configuration template or environment, and determines whether those values are valid. This action returns a list of messages indicating any errors or warnings associated with the selection of option values.
+   * Update the list of tags applied to an AWS Elastic Beanstalk resource. Two lists can be passed: TagsToAdd for tags to add or update, and TagsToRemove. Currently, Elastic Beanstalk only supports tagging of Elastic Beanstalk environments. For details about environment tagging, see Tagging Resources in Your Elastic Beanstalk Environment. If you create a custom IAM user policy to control permission to this operation, specify one of the following two virtual actions (or both) instead of the API operation name:  elasticbeanstalk:AddTags  Controls permission to call UpdateTagsForResource and pass a list of tags to add in the TagsToAdd parameter.  elasticbeanstalk:RemoveTags  Controls permission to call UpdateTagsForResource and pass a list of tag keys to remove in the TagsToRemove parameter.   For details about creating a custom user policy, see Creating a Custom User Policy.
    */
-  validateConfigurationSettings(params: ElasticBeanstalk.Types.ValidateConfigurationSettingsMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsValidationMessages) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsValidationMessages, AWSError>;
+  updateTagsForResource(params: ElasticBeanstalk.Types.UpdateTagsForResourceMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Takes a set of configuration settings and either a configuration template or environment, and determines whether those values are valid. This action returns a list of messages indicating any errors or warnings associated with the selection of option values.
    */
   validateConfigurationSettings(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsValidationMessages) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsValidationMessages, AWSError>;
+  /**
+   * Takes a set of configuration settings and either a configuration template or environment, and determines whether those values are valid. This action returns a list of messages indicating any errors or warnings associated with the selection of option values.
+   */
+  validateConfigurationSettings(params: ElasticBeanstalk.Types.ValidateConfigurationSettingsMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsValidationMessages) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsValidationMessages, AWSError>;
 }
 declare namespace ElasticBeanstalk {
   export type ARN = string;

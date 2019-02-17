@@ -14,163 +14,163 @@ declare class CloudSearch extends Service {
   /**
    * Indexes the search suggestions. For more information, see Configuring Suggesters in the Amazon CloudSearch Developer Guide.
    */
-  buildSuggesters(params: CloudSearch.Types.BuildSuggestersRequest, callback?: (err: AWSError, data: CloudSearch.Types.BuildSuggestersResponse) => void): Request<CloudSearch.Types.BuildSuggestersResponse, AWSError>;
+  buildSuggesters(callback?: (err: AWSError, data: CloudSearch.Types.BuildSuggestersResponse) => void): Request<CloudSearch.Types.BuildSuggestersResponse, AWSError>;
   /**
    * Indexes the search suggestions. For more information, see Configuring Suggesters in the Amazon CloudSearch Developer Guide.
    */
-  buildSuggesters(callback?: (err: AWSError, data: CloudSearch.Types.BuildSuggestersResponse) => void): Request<CloudSearch.Types.BuildSuggestersResponse, AWSError>;
-  /**
-   * Creates a new search domain. For more information, see Creating a Search Domain in the Amazon CloudSearch Developer Guide.
-   */
-  createDomain(params: CloudSearch.Types.CreateDomainRequest, callback?: (err: AWSError, data: CloudSearch.Types.CreateDomainResponse) => void): Request<CloudSearch.Types.CreateDomainResponse, AWSError>;
+  buildSuggesters(params: CloudSearch.Types.BuildSuggestersRequest, callback?: (err: AWSError, data: CloudSearch.Types.BuildSuggestersResponse) => void): Request<CloudSearch.Types.BuildSuggestersResponse, AWSError>;
   /**
    * Creates a new search domain. For more information, see Creating a Search Domain in the Amazon CloudSearch Developer Guide.
    */
   createDomain(callback?: (err: AWSError, data: CloudSearch.Types.CreateDomainResponse) => void): Request<CloudSearch.Types.CreateDomainResponse, AWSError>;
   /**
-   * Configures an analysis scheme that can be applied to a text or text-array field to define language-specific text processing options. For more information, see Configuring Analysis Schemes in the Amazon CloudSearch Developer Guide.
+   * Creates a new search domain. For more information, see Creating a Search Domain in the Amazon CloudSearch Developer Guide.
    */
-  defineAnalysisScheme(params: CloudSearch.Types.DefineAnalysisSchemeRequest, callback?: (err: AWSError, data: CloudSearch.Types.DefineAnalysisSchemeResponse) => void): Request<CloudSearch.Types.DefineAnalysisSchemeResponse, AWSError>;
+  createDomain(params: CloudSearch.Types.CreateDomainRequest, callback?: (err: AWSError, data: CloudSearch.Types.CreateDomainResponse) => void): Request<CloudSearch.Types.CreateDomainResponse, AWSError>;
   /**
    * Configures an analysis scheme that can be applied to a text or text-array field to define language-specific text processing options. For more information, see Configuring Analysis Schemes in the Amazon CloudSearch Developer Guide.
    */
   defineAnalysisScheme(callback?: (err: AWSError, data: CloudSearch.Types.DefineAnalysisSchemeResponse) => void): Request<CloudSearch.Types.DefineAnalysisSchemeResponse, AWSError>;
   /**
-   * Configures an Expression for the search domain. Used to create new expressions and modify existing ones. If the expression exists, the new configuration replaces the old one. For more information, see Configuring Expressions in the Amazon CloudSearch Developer Guide.
+   * Configures an analysis scheme that can be applied to a text or text-array field to define language-specific text processing options. For more information, see Configuring Analysis Schemes in the Amazon CloudSearch Developer Guide.
    */
-  defineExpression(params: CloudSearch.Types.DefineExpressionRequest, callback?: (err: AWSError, data: CloudSearch.Types.DefineExpressionResponse) => void): Request<CloudSearch.Types.DefineExpressionResponse, AWSError>;
+  defineAnalysisScheme(params: CloudSearch.Types.DefineAnalysisSchemeRequest, callback?: (err: AWSError, data: CloudSearch.Types.DefineAnalysisSchemeResponse) => void): Request<CloudSearch.Types.DefineAnalysisSchemeResponse, AWSError>;
   /**
    * Configures an Expression for the search domain. Used to create new expressions and modify existing ones. If the expression exists, the new configuration replaces the old one. For more information, see Configuring Expressions in the Amazon CloudSearch Developer Guide.
    */
   defineExpression(callback?: (err: AWSError, data: CloudSearch.Types.DefineExpressionResponse) => void): Request<CloudSearch.Types.DefineExpressionResponse, AWSError>;
   /**
-   * Configures an IndexField for the search domain. Used to create new fields and modify existing ones. You must specify the name of the domain you are configuring and an index field configuration. The index field configuration specifies a unique name, the index field type, and the options you want to configure for the field. The options you can specify depend on the IndexFieldType. If the field exists, the new configuration replaces the old one. For more information, see Configuring Index Fields in the Amazon CloudSearch Developer Guide. 
+   * Configures an Expression for the search domain. Used to create new expressions and modify existing ones. If the expression exists, the new configuration replaces the old one. For more information, see Configuring Expressions in the Amazon CloudSearch Developer Guide.
    */
-  defineIndexField(params: CloudSearch.Types.DefineIndexFieldRequest, callback?: (err: AWSError, data: CloudSearch.Types.DefineIndexFieldResponse) => void): Request<CloudSearch.Types.DefineIndexFieldResponse, AWSError>;
+  defineExpression(params: CloudSearch.Types.DefineExpressionRequest, callback?: (err: AWSError, data: CloudSearch.Types.DefineExpressionResponse) => void): Request<CloudSearch.Types.DefineExpressionResponse, AWSError>;
   /**
    * Configures an IndexField for the search domain. Used to create new fields and modify existing ones. You must specify the name of the domain you are configuring and an index field configuration. The index field configuration specifies a unique name, the index field type, and the options you want to configure for the field. The options you can specify depend on the IndexFieldType. If the field exists, the new configuration replaces the old one. For more information, see Configuring Index Fields in the Amazon CloudSearch Developer Guide. 
    */
   defineIndexField(callback?: (err: AWSError, data: CloudSearch.Types.DefineIndexFieldResponse) => void): Request<CloudSearch.Types.DefineIndexFieldResponse, AWSError>;
   /**
-   * Configures a suggester for a domain. A suggester enables you to display possible matches before users finish typing their queries. When you configure a suggester, you must specify the name of the text field you want to search for possible matches and a unique name for the suggester. For more information, see Getting Search Suggestions in the Amazon CloudSearch Developer Guide.
+   * Configures an IndexField for the search domain. Used to create new fields and modify existing ones. You must specify the name of the domain you are configuring and an index field configuration. The index field configuration specifies a unique name, the index field type, and the options you want to configure for the field. The options you can specify depend on the IndexFieldType. If the field exists, the new configuration replaces the old one. For more information, see Configuring Index Fields in the Amazon CloudSearch Developer Guide. 
    */
-  defineSuggester(params: CloudSearch.Types.DefineSuggesterRequest, callback?: (err: AWSError, data: CloudSearch.Types.DefineSuggesterResponse) => void): Request<CloudSearch.Types.DefineSuggesterResponse, AWSError>;
+  defineIndexField(params: CloudSearch.Types.DefineIndexFieldRequest, callback?: (err: AWSError, data: CloudSearch.Types.DefineIndexFieldResponse) => void): Request<CloudSearch.Types.DefineIndexFieldResponse, AWSError>;
   /**
    * Configures a suggester for a domain. A suggester enables you to display possible matches before users finish typing their queries. When you configure a suggester, you must specify the name of the text field you want to search for possible matches and a unique name for the suggester. For more information, see Getting Search Suggestions in the Amazon CloudSearch Developer Guide.
    */
   defineSuggester(callback?: (err: AWSError, data: CloudSearch.Types.DefineSuggesterResponse) => void): Request<CloudSearch.Types.DefineSuggesterResponse, AWSError>;
   /**
-   * Deletes an analysis scheme. For more information, see Configuring Analysis Schemes in the Amazon CloudSearch Developer Guide. 
+   * Configures a suggester for a domain. A suggester enables you to display possible matches before users finish typing their queries. When you configure a suggester, you must specify the name of the text field you want to search for possible matches and a unique name for the suggester. For more information, see Getting Search Suggestions in the Amazon CloudSearch Developer Guide.
    */
-  deleteAnalysisScheme(params: CloudSearch.Types.DeleteAnalysisSchemeRequest, callback?: (err: AWSError, data: CloudSearch.Types.DeleteAnalysisSchemeResponse) => void): Request<CloudSearch.Types.DeleteAnalysisSchemeResponse, AWSError>;
+  defineSuggester(params: CloudSearch.Types.DefineSuggesterRequest, callback?: (err: AWSError, data: CloudSearch.Types.DefineSuggesterResponse) => void): Request<CloudSearch.Types.DefineSuggesterResponse, AWSError>;
   /**
    * Deletes an analysis scheme. For more information, see Configuring Analysis Schemes in the Amazon CloudSearch Developer Guide. 
    */
   deleteAnalysisScheme(callback?: (err: AWSError, data: CloudSearch.Types.DeleteAnalysisSchemeResponse) => void): Request<CloudSearch.Types.DeleteAnalysisSchemeResponse, AWSError>;
   /**
-   * Permanently deletes a search domain and all of its data. Once a domain has been deleted, it cannot be recovered. For more information, see Deleting a Search Domain in the Amazon CloudSearch Developer Guide. 
+   * Deletes an analysis scheme. For more information, see Configuring Analysis Schemes in the Amazon CloudSearch Developer Guide. 
    */
-  deleteDomain(params: CloudSearch.Types.DeleteDomainRequest, callback?: (err: AWSError, data: CloudSearch.Types.DeleteDomainResponse) => void): Request<CloudSearch.Types.DeleteDomainResponse, AWSError>;
+  deleteAnalysisScheme(params: CloudSearch.Types.DeleteAnalysisSchemeRequest, callback?: (err: AWSError, data: CloudSearch.Types.DeleteAnalysisSchemeResponse) => void): Request<CloudSearch.Types.DeleteAnalysisSchemeResponse, AWSError>;
   /**
    * Permanently deletes a search domain and all of its data. Once a domain has been deleted, it cannot be recovered. For more information, see Deleting a Search Domain in the Amazon CloudSearch Developer Guide. 
    */
   deleteDomain(callback?: (err: AWSError, data: CloudSearch.Types.DeleteDomainResponse) => void): Request<CloudSearch.Types.DeleteDomainResponse, AWSError>;
   /**
-   * Removes an Expression from the search domain. For more information, see Configuring Expressions in the Amazon CloudSearch Developer Guide.
+   * Permanently deletes a search domain and all of its data. Once a domain has been deleted, it cannot be recovered. For more information, see Deleting a Search Domain in the Amazon CloudSearch Developer Guide. 
    */
-  deleteExpression(params: CloudSearch.Types.DeleteExpressionRequest, callback?: (err: AWSError, data: CloudSearch.Types.DeleteExpressionResponse) => void): Request<CloudSearch.Types.DeleteExpressionResponse, AWSError>;
+  deleteDomain(params: CloudSearch.Types.DeleteDomainRequest, callback?: (err: AWSError, data: CloudSearch.Types.DeleteDomainResponse) => void): Request<CloudSearch.Types.DeleteDomainResponse, AWSError>;
   /**
    * Removes an Expression from the search domain. For more information, see Configuring Expressions in the Amazon CloudSearch Developer Guide.
    */
   deleteExpression(callback?: (err: AWSError, data: CloudSearch.Types.DeleteExpressionResponse) => void): Request<CloudSearch.Types.DeleteExpressionResponse, AWSError>;
   /**
-   * Removes an IndexField from the search domain. For more information, see Configuring Index Fields in the Amazon CloudSearch Developer Guide.
+   * Removes an Expression from the search domain. For more information, see Configuring Expressions in the Amazon CloudSearch Developer Guide.
    */
-  deleteIndexField(params: CloudSearch.Types.DeleteIndexFieldRequest, callback?: (err: AWSError, data: CloudSearch.Types.DeleteIndexFieldResponse) => void): Request<CloudSearch.Types.DeleteIndexFieldResponse, AWSError>;
+  deleteExpression(params: CloudSearch.Types.DeleteExpressionRequest, callback?: (err: AWSError, data: CloudSearch.Types.DeleteExpressionResponse) => void): Request<CloudSearch.Types.DeleteExpressionResponse, AWSError>;
   /**
    * Removes an IndexField from the search domain. For more information, see Configuring Index Fields in the Amazon CloudSearch Developer Guide.
    */
   deleteIndexField(callback?: (err: AWSError, data: CloudSearch.Types.DeleteIndexFieldResponse) => void): Request<CloudSearch.Types.DeleteIndexFieldResponse, AWSError>;
   /**
-   * Deletes a suggester. For more information, see Getting Search Suggestions in the Amazon CloudSearch Developer Guide.
+   * Removes an IndexField from the search domain. For more information, see Configuring Index Fields in the Amazon CloudSearch Developer Guide.
    */
-  deleteSuggester(params: CloudSearch.Types.DeleteSuggesterRequest, callback?: (err: AWSError, data: CloudSearch.Types.DeleteSuggesterResponse) => void): Request<CloudSearch.Types.DeleteSuggesterResponse, AWSError>;
+  deleteIndexField(params: CloudSearch.Types.DeleteIndexFieldRequest, callback?: (err: AWSError, data: CloudSearch.Types.DeleteIndexFieldResponse) => void): Request<CloudSearch.Types.DeleteIndexFieldResponse, AWSError>;
   /**
    * Deletes a suggester. For more information, see Getting Search Suggestions in the Amazon CloudSearch Developer Guide.
    */
   deleteSuggester(callback?: (err: AWSError, data: CloudSearch.Types.DeleteSuggesterResponse) => void): Request<CloudSearch.Types.DeleteSuggesterResponse, AWSError>;
   /**
-   * Gets the analysis schemes configured for a domain. An analysis scheme defines language-specific text processing options for a text field. Can be limited to specific analysis schemes by name. By default, shows all analysis schemes and includes any pending changes to the configuration. Set the Deployed option to true to show the active configuration and exclude pending changes. For more information, see Configuring Analysis Schemes in the Amazon CloudSearch Developer Guide.
+   * Deletes a suggester. For more information, see Getting Search Suggestions in the Amazon CloudSearch Developer Guide.
    */
-  describeAnalysisSchemes(params: CloudSearch.Types.DescribeAnalysisSchemesRequest, callback?: (err: AWSError, data: CloudSearch.Types.DescribeAnalysisSchemesResponse) => void): Request<CloudSearch.Types.DescribeAnalysisSchemesResponse, AWSError>;
+  deleteSuggester(params: CloudSearch.Types.DeleteSuggesterRequest, callback?: (err: AWSError, data: CloudSearch.Types.DeleteSuggesterResponse) => void): Request<CloudSearch.Types.DeleteSuggesterResponse, AWSError>;
   /**
    * Gets the analysis schemes configured for a domain. An analysis scheme defines language-specific text processing options for a text field. Can be limited to specific analysis schemes by name. By default, shows all analysis schemes and includes any pending changes to the configuration. Set the Deployed option to true to show the active configuration and exclude pending changes. For more information, see Configuring Analysis Schemes in the Amazon CloudSearch Developer Guide.
    */
   describeAnalysisSchemes(callback?: (err: AWSError, data: CloudSearch.Types.DescribeAnalysisSchemesResponse) => void): Request<CloudSearch.Types.DescribeAnalysisSchemesResponse, AWSError>;
   /**
-   * Gets the availability options configured for a domain. By default, shows the configuration with any pending changes. Set the Deployed option to true to show the active configuration and exclude pending changes. For more information, see Configuring Availability Options in the Amazon CloudSearch Developer Guide.
+   * Gets the analysis schemes configured for a domain. An analysis scheme defines language-specific text processing options for a text field. Can be limited to specific analysis schemes by name. By default, shows all analysis schemes and includes any pending changes to the configuration. Set the Deployed option to true to show the active configuration and exclude pending changes. For more information, see Configuring Analysis Schemes in the Amazon CloudSearch Developer Guide.
    */
-  describeAvailabilityOptions(params: CloudSearch.Types.DescribeAvailabilityOptionsRequest, callback?: (err: AWSError, data: CloudSearch.Types.DescribeAvailabilityOptionsResponse) => void): Request<CloudSearch.Types.DescribeAvailabilityOptionsResponse, AWSError>;
+  describeAnalysisSchemes(params: CloudSearch.Types.DescribeAnalysisSchemesRequest, callback?: (err: AWSError, data: CloudSearch.Types.DescribeAnalysisSchemesResponse) => void): Request<CloudSearch.Types.DescribeAnalysisSchemesResponse, AWSError>;
   /**
    * Gets the availability options configured for a domain. By default, shows the configuration with any pending changes. Set the Deployed option to true to show the active configuration and exclude pending changes. For more information, see Configuring Availability Options in the Amazon CloudSearch Developer Guide.
    */
   describeAvailabilityOptions(callback?: (err: AWSError, data: CloudSearch.Types.DescribeAvailabilityOptionsResponse) => void): Request<CloudSearch.Types.DescribeAvailabilityOptionsResponse, AWSError>;
   /**
-   * Gets information about the search domains owned by this account. Can be limited to specific domains. Shows all domains by default. To get the number of searchable documents in a domain, use the console or submit a matchall request to your domain's search endpoint: q=matchall&amp;amp;q.parser=structured&amp;amp;size=0. For more information, see Getting Information about a Search Domain in the Amazon CloudSearch Developer Guide.
+   * Gets the availability options configured for a domain. By default, shows the configuration with any pending changes. Set the Deployed option to true to show the active configuration and exclude pending changes. For more information, see Configuring Availability Options in the Amazon CloudSearch Developer Guide.
    */
-  describeDomains(params: CloudSearch.Types.DescribeDomainsRequest, callback?: (err: AWSError, data: CloudSearch.Types.DescribeDomainsResponse) => void): Request<CloudSearch.Types.DescribeDomainsResponse, AWSError>;
+  describeAvailabilityOptions(params: CloudSearch.Types.DescribeAvailabilityOptionsRequest, callback?: (err: AWSError, data: CloudSearch.Types.DescribeAvailabilityOptionsResponse) => void): Request<CloudSearch.Types.DescribeAvailabilityOptionsResponse, AWSError>;
   /**
    * Gets information about the search domains owned by this account. Can be limited to specific domains. Shows all domains by default. To get the number of searchable documents in a domain, use the console or submit a matchall request to your domain's search endpoint: q=matchall&amp;amp;q.parser=structured&amp;amp;size=0. For more information, see Getting Information about a Search Domain in the Amazon CloudSearch Developer Guide.
    */
   describeDomains(callback?: (err: AWSError, data: CloudSearch.Types.DescribeDomainsResponse) => void): Request<CloudSearch.Types.DescribeDomainsResponse, AWSError>;
   /**
-   * Gets the expressions configured for the search domain. Can be limited to specific expressions by name. By default, shows all expressions and includes any pending changes to the configuration. Set the Deployed option to true to show the active configuration and exclude pending changes. For more information, see Configuring Expressions in the Amazon CloudSearch Developer Guide.
+   * Gets information about the search domains owned by this account. Can be limited to specific domains. Shows all domains by default. To get the number of searchable documents in a domain, use the console or submit a matchall request to your domain's search endpoint: q=matchall&amp;amp;q.parser=structured&amp;amp;size=0. For more information, see Getting Information about a Search Domain in the Amazon CloudSearch Developer Guide.
    */
-  describeExpressions(params: CloudSearch.Types.DescribeExpressionsRequest, callback?: (err: AWSError, data: CloudSearch.Types.DescribeExpressionsResponse) => void): Request<CloudSearch.Types.DescribeExpressionsResponse, AWSError>;
+  describeDomains(params: CloudSearch.Types.DescribeDomainsRequest, callback?: (err: AWSError, data: CloudSearch.Types.DescribeDomainsResponse) => void): Request<CloudSearch.Types.DescribeDomainsResponse, AWSError>;
   /**
    * Gets the expressions configured for the search domain. Can be limited to specific expressions by name. By default, shows all expressions and includes any pending changes to the configuration. Set the Deployed option to true to show the active configuration and exclude pending changes. For more information, see Configuring Expressions in the Amazon CloudSearch Developer Guide.
    */
   describeExpressions(callback?: (err: AWSError, data: CloudSearch.Types.DescribeExpressionsResponse) => void): Request<CloudSearch.Types.DescribeExpressionsResponse, AWSError>;
   /**
-   * Gets information about the index fields configured for the search domain. Can be limited to specific fields by name. By default, shows all fields and includes any pending changes to the configuration. Set the Deployed option to true to show the active configuration and exclude pending changes. For more information, see Getting Domain Information in the Amazon CloudSearch Developer Guide.
+   * Gets the expressions configured for the search domain. Can be limited to specific expressions by name. By default, shows all expressions and includes any pending changes to the configuration. Set the Deployed option to true to show the active configuration and exclude pending changes. For more information, see Configuring Expressions in the Amazon CloudSearch Developer Guide.
    */
-  describeIndexFields(params: CloudSearch.Types.DescribeIndexFieldsRequest, callback?: (err: AWSError, data: CloudSearch.Types.DescribeIndexFieldsResponse) => void): Request<CloudSearch.Types.DescribeIndexFieldsResponse, AWSError>;
+  describeExpressions(params: CloudSearch.Types.DescribeExpressionsRequest, callback?: (err: AWSError, data: CloudSearch.Types.DescribeExpressionsResponse) => void): Request<CloudSearch.Types.DescribeExpressionsResponse, AWSError>;
   /**
    * Gets information about the index fields configured for the search domain. Can be limited to specific fields by name. By default, shows all fields and includes any pending changes to the configuration. Set the Deployed option to true to show the active configuration and exclude pending changes. For more information, see Getting Domain Information in the Amazon CloudSearch Developer Guide.
    */
   describeIndexFields(callback?: (err: AWSError, data: CloudSearch.Types.DescribeIndexFieldsResponse) => void): Request<CloudSearch.Types.DescribeIndexFieldsResponse, AWSError>;
   /**
-   * Gets the scaling parameters configured for a domain. A domain's scaling parameters specify the desired search instance type and replication count. For more information, see Configuring Scaling Options in the Amazon CloudSearch Developer Guide.
+   * Gets information about the index fields configured for the search domain. Can be limited to specific fields by name. By default, shows all fields and includes any pending changes to the configuration. Set the Deployed option to true to show the active configuration and exclude pending changes. For more information, see Getting Domain Information in the Amazon CloudSearch Developer Guide.
    */
-  describeScalingParameters(params: CloudSearch.Types.DescribeScalingParametersRequest, callback?: (err: AWSError, data: CloudSearch.Types.DescribeScalingParametersResponse) => void): Request<CloudSearch.Types.DescribeScalingParametersResponse, AWSError>;
+  describeIndexFields(params: CloudSearch.Types.DescribeIndexFieldsRequest, callback?: (err: AWSError, data: CloudSearch.Types.DescribeIndexFieldsResponse) => void): Request<CloudSearch.Types.DescribeIndexFieldsResponse, AWSError>;
   /**
    * Gets the scaling parameters configured for a domain. A domain's scaling parameters specify the desired search instance type and replication count. For more information, see Configuring Scaling Options in the Amazon CloudSearch Developer Guide.
    */
   describeScalingParameters(callback?: (err: AWSError, data: CloudSearch.Types.DescribeScalingParametersResponse) => void): Request<CloudSearch.Types.DescribeScalingParametersResponse, AWSError>;
   /**
-   * Gets information about the access policies that control access to the domain's document and search endpoints. By default, shows the configuration with any pending changes. Set the Deployed option to true to show the active configuration and exclude pending changes. For more information, see Configuring Access for a Search Domain in the Amazon CloudSearch Developer Guide.
+   * Gets the scaling parameters configured for a domain. A domain's scaling parameters specify the desired search instance type and replication count. For more information, see Configuring Scaling Options in the Amazon CloudSearch Developer Guide.
    */
-  describeServiceAccessPolicies(params: CloudSearch.Types.DescribeServiceAccessPoliciesRequest, callback?: (err: AWSError, data: CloudSearch.Types.DescribeServiceAccessPoliciesResponse) => void): Request<CloudSearch.Types.DescribeServiceAccessPoliciesResponse, AWSError>;
+  describeScalingParameters(params: CloudSearch.Types.DescribeScalingParametersRequest, callback?: (err: AWSError, data: CloudSearch.Types.DescribeScalingParametersResponse) => void): Request<CloudSearch.Types.DescribeScalingParametersResponse, AWSError>;
   /**
    * Gets information about the access policies that control access to the domain's document and search endpoints. By default, shows the configuration with any pending changes. Set the Deployed option to true to show the active configuration and exclude pending changes. For more information, see Configuring Access for a Search Domain in the Amazon CloudSearch Developer Guide.
    */
   describeServiceAccessPolicies(callback?: (err: AWSError, data: CloudSearch.Types.DescribeServiceAccessPoliciesResponse) => void): Request<CloudSearch.Types.DescribeServiceAccessPoliciesResponse, AWSError>;
   /**
-   * Gets the suggesters configured for a domain. A suggester enables you to display possible matches before users finish typing their queries. Can be limited to specific suggesters by name. By default, shows all suggesters and includes any pending changes to the configuration. Set the Deployed option to true to show the active configuration and exclude pending changes. For more information, see Getting Search Suggestions in the Amazon CloudSearch Developer Guide.
+   * Gets information about the access policies that control access to the domain's document and search endpoints. By default, shows the configuration with any pending changes. Set the Deployed option to true to show the active configuration and exclude pending changes. For more information, see Configuring Access for a Search Domain in the Amazon CloudSearch Developer Guide.
    */
-  describeSuggesters(params: CloudSearch.Types.DescribeSuggestersRequest, callback?: (err: AWSError, data: CloudSearch.Types.DescribeSuggestersResponse) => void): Request<CloudSearch.Types.DescribeSuggestersResponse, AWSError>;
+  describeServiceAccessPolicies(params: CloudSearch.Types.DescribeServiceAccessPoliciesRequest, callback?: (err: AWSError, data: CloudSearch.Types.DescribeServiceAccessPoliciesResponse) => void): Request<CloudSearch.Types.DescribeServiceAccessPoliciesResponse, AWSError>;
   /**
    * Gets the suggesters configured for a domain. A suggester enables you to display possible matches before users finish typing their queries. Can be limited to specific suggesters by name. By default, shows all suggesters and includes any pending changes to the configuration. Set the Deployed option to true to show the active configuration and exclude pending changes. For more information, see Getting Search Suggestions in the Amazon CloudSearch Developer Guide.
    */
   describeSuggesters(callback?: (err: AWSError, data: CloudSearch.Types.DescribeSuggestersResponse) => void): Request<CloudSearch.Types.DescribeSuggestersResponse, AWSError>;
   /**
-   * Tells the search domain to start indexing its documents using the latest indexing options. This operation must be invoked to activate options whose OptionStatus is RequiresIndexDocuments.
+   * Gets the suggesters configured for a domain. A suggester enables you to display possible matches before users finish typing their queries. Can be limited to specific suggesters by name. By default, shows all suggesters and includes any pending changes to the configuration. Set the Deployed option to true to show the active configuration and exclude pending changes. For more information, see Getting Search Suggestions in the Amazon CloudSearch Developer Guide.
    */
-  indexDocuments(params: CloudSearch.Types.IndexDocumentsRequest, callback?: (err: AWSError, data: CloudSearch.Types.IndexDocumentsResponse) => void): Request<CloudSearch.Types.IndexDocumentsResponse, AWSError>;
+  describeSuggesters(params: CloudSearch.Types.DescribeSuggestersRequest, callback?: (err: AWSError, data: CloudSearch.Types.DescribeSuggestersResponse) => void): Request<CloudSearch.Types.DescribeSuggestersResponse, AWSError>;
   /**
    * Tells the search domain to start indexing its documents using the latest indexing options. This operation must be invoked to activate options whose OptionStatus is RequiresIndexDocuments.
    */
   indexDocuments(callback?: (err: AWSError, data: CloudSearch.Types.IndexDocumentsResponse) => void): Request<CloudSearch.Types.IndexDocumentsResponse, AWSError>;
+  /**
+   * Tells the search domain to start indexing its documents using the latest indexing options. This operation must be invoked to activate options whose OptionStatus is RequiresIndexDocuments.
+   */
+  indexDocuments(params: CloudSearch.Types.IndexDocumentsRequest, callback?: (err: AWSError, data: CloudSearch.Types.IndexDocumentsResponse) => void): Request<CloudSearch.Types.IndexDocumentsResponse, AWSError>;
   /**
    * Lists all search domains owned by an account.
    */
@@ -178,27 +178,27 @@ declare class CloudSearch extends Service {
   /**
    * Configures the availability options for a domain. Enabling the Multi-AZ option expands an Amazon CloudSearch domain to an additional Availability Zone in the same Region to increase fault tolerance in the event of a service disruption. Changes to the Multi-AZ option can take about half an hour to become active. For more information, see Configuring Availability Options in the Amazon CloudSearch Developer Guide.
    */
-  updateAvailabilityOptions(params: CloudSearch.Types.UpdateAvailabilityOptionsRequest, callback?: (err: AWSError, data: CloudSearch.Types.UpdateAvailabilityOptionsResponse) => void): Request<CloudSearch.Types.UpdateAvailabilityOptionsResponse, AWSError>;
+  updateAvailabilityOptions(callback?: (err: AWSError, data: CloudSearch.Types.UpdateAvailabilityOptionsResponse) => void): Request<CloudSearch.Types.UpdateAvailabilityOptionsResponse, AWSError>;
   /**
    * Configures the availability options for a domain. Enabling the Multi-AZ option expands an Amazon CloudSearch domain to an additional Availability Zone in the same Region to increase fault tolerance in the event of a service disruption. Changes to the Multi-AZ option can take about half an hour to become active. For more information, see Configuring Availability Options in the Amazon CloudSearch Developer Guide.
    */
-  updateAvailabilityOptions(callback?: (err: AWSError, data: CloudSearch.Types.UpdateAvailabilityOptionsResponse) => void): Request<CloudSearch.Types.UpdateAvailabilityOptionsResponse, AWSError>;
-  /**
-   * Configures scaling parameters for a domain. A domain's scaling parameters specify the desired search instance type and replication count. Amazon CloudSearch will still automatically scale your domain based on the volume of data and traffic, but not below the desired instance type and replication count. If the Multi-AZ option is enabled, these values control the resources used per Availability Zone. For more information, see Configuring Scaling Options in the Amazon CloudSearch Developer Guide. 
-   */
-  updateScalingParameters(params: CloudSearch.Types.UpdateScalingParametersRequest, callback?: (err: AWSError, data: CloudSearch.Types.UpdateScalingParametersResponse) => void): Request<CloudSearch.Types.UpdateScalingParametersResponse, AWSError>;
+  updateAvailabilityOptions(params: CloudSearch.Types.UpdateAvailabilityOptionsRequest, callback?: (err: AWSError, data: CloudSearch.Types.UpdateAvailabilityOptionsResponse) => void): Request<CloudSearch.Types.UpdateAvailabilityOptionsResponse, AWSError>;
   /**
    * Configures scaling parameters for a domain. A domain's scaling parameters specify the desired search instance type and replication count. Amazon CloudSearch will still automatically scale your domain based on the volume of data and traffic, but not below the desired instance type and replication count. If the Multi-AZ option is enabled, these values control the resources used per Availability Zone. For more information, see Configuring Scaling Options in the Amazon CloudSearch Developer Guide. 
    */
   updateScalingParameters(callback?: (err: AWSError, data: CloudSearch.Types.UpdateScalingParametersResponse) => void): Request<CloudSearch.Types.UpdateScalingParametersResponse, AWSError>;
   /**
-   * Configures the access rules that control access to the domain's document and search endpoints. For more information, see  Configuring Access for an Amazon CloudSearch Domain.
+   * Configures scaling parameters for a domain. A domain's scaling parameters specify the desired search instance type and replication count. Amazon CloudSearch will still automatically scale your domain based on the volume of data and traffic, but not below the desired instance type and replication count. If the Multi-AZ option is enabled, these values control the resources used per Availability Zone. For more information, see Configuring Scaling Options in the Amazon CloudSearch Developer Guide. 
    */
-  updateServiceAccessPolicies(params: CloudSearch.Types.UpdateServiceAccessPoliciesRequest, callback?: (err: AWSError, data: CloudSearch.Types.UpdateServiceAccessPoliciesResponse) => void): Request<CloudSearch.Types.UpdateServiceAccessPoliciesResponse, AWSError>;
+  updateScalingParameters(params: CloudSearch.Types.UpdateScalingParametersRequest, callback?: (err: AWSError, data: CloudSearch.Types.UpdateScalingParametersResponse) => void): Request<CloudSearch.Types.UpdateScalingParametersResponse, AWSError>;
   /**
    * Configures the access rules that control access to the domain's document and search endpoints. For more information, see  Configuring Access for an Amazon CloudSearch Domain.
    */
   updateServiceAccessPolicies(callback?: (err: AWSError, data: CloudSearch.Types.UpdateServiceAccessPoliciesResponse) => void): Request<CloudSearch.Types.UpdateServiceAccessPoliciesResponse, AWSError>;
+  /**
+   * Configures the access rules that control access to the domain's document and search endpoints. For more information, see  Configuring Access for an Amazon CloudSearch Domain.
+   */
+  updateServiceAccessPolicies(params: CloudSearch.Types.UpdateServiceAccessPoliciesRequest, callback?: (err: AWSError, data: CloudSearch.Types.UpdateServiceAccessPoliciesResponse) => void): Request<CloudSearch.Types.UpdateServiceAccessPoliciesResponse, AWSError>;
 }
 declare namespace CloudSearch {
   export type APIVersion = string;

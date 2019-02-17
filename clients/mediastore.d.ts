@@ -14,107 +14,107 @@ declare class MediaStore extends Service {
   /**
    * Creates a storage container to hold objects. A container is similar to a bucket in the Amazon S3 service.
    */
-  createContainer(params: MediaStore.Types.CreateContainerInput, callback?: (err: AWSError, data: MediaStore.Types.CreateContainerOutput) => void): Request<MediaStore.Types.CreateContainerOutput, AWSError>;
+  createContainer(callback?: (err: AWSError, data: MediaStore.Types.CreateContainerOutput) => void): Request<MediaStore.Types.CreateContainerOutput, AWSError>;
   /**
    * Creates a storage container to hold objects. A container is similar to a bucket in the Amazon S3 service.
    */
-  createContainer(callback?: (err: AWSError, data: MediaStore.Types.CreateContainerOutput) => void): Request<MediaStore.Types.CreateContainerOutput, AWSError>;
-  /**
-   * Deletes the specified container. Before you make a DeleteContainer request, delete any objects in the container or in any folders in the container. You can delete only empty containers. 
-   */
-  deleteContainer(params: MediaStore.Types.DeleteContainerInput, callback?: (err: AWSError, data: MediaStore.Types.DeleteContainerOutput) => void): Request<MediaStore.Types.DeleteContainerOutput, AWSError>;
+  createContainer(params: MediaStore.Types.CreateContainerInput, callback?: (err: AWSError, data: MediaStore.Types.CreateContainerOutput) => void): Request<MediaStore.Types.CreateContainerOutput, AWSError>;
   /**
    * Deletes the specified container. Before you make a DeleteContainer request, delete any objects in the container or in any folders in the container. You can delete only empty containers. 
    */
   deleteContainer(callback?: (err: AWSError, data: MediaStore.Types.DeleteContainerOutput) => void): Request<MediaStore.Types.DeleteContainerOutput, AWSError>;
   /**
-   * Deletes the access policy that is associated with the specified container.
+   * Deletes the specified container. Before you make a DeleteContainer request, delete any objects in the container or in any folders in the container. You can delete only empty containers. 
    */
-  deleteContainerPolicy(params: MediaStore.Types.DeleteContainerPolicyInput, callback?: (err: AWSError, data: MediaStore.Types.DeleteContainerPolicyOutput) => void): Request<MediaStore.Types.DeleteContainerPolicyOutput, AWSError>;
+  deleteContainer(params: MediaStore.Types.DeleteContainerInput, callback?: (err: AWSError, data: MediaStore.Types.DeleteContainerOutput) => void): Request<MediaStore.Types.DeleteContainerOutput, AWSError>;
   /**
    * Deletes the access policy that is associated with the specified container.
    */
   deleteContainerPolicy(callback?: (err: AWSError, data: MediaStore.Types.DeleteContainerPolicyOutput) => void): Request<MediaStore.Types.DeleteContainerPolicyOutput, AWSError>;
   /**
-   * Deletes the cross-origin resource sharing (CORS) configuration information that is set for the container. To use this operation, you must have permission to perform the MediaStore:DeleteCorsPolicy action. The container owner has this permission by default and can grant this permission to others.
+   * Deletes the access policy that is associated with the specified container.
    */
-  deleteCorsPolicy(params: MediaStore.Types.DeleteCorsPolicyInput, callback?: (err: AWSError, data: MediaStore.Types.DeleteCorsPolicyOutput) => void): Request<MediaStore.Types.DeleteCorsPolicyOutput, AWSError>;
+  deleteContainerPolicy(params: MediaStore.Types.DeleteContainerPolicyInput, callback?: (err: AWSError, data: MediaStore.Types.DeleteContainerPolicyOutput) => void): Request<MediaStore.Types.DeleteContainerPolicyOutput, AWSError>;
   /**
    * Deletes the cross-origin resource sharing (CORS) configuration information that is set for the container. To use this operation, you must have permission to perform the MediaStore:DeleteCorsPolicy action. The container owner has this permission by default and can grant this permission to others.
    */
   deleteCorsPolicy(callback?: (err: AWSError, data: MediaStore.Types.DeleteCorsPolicyOutput) => void): Request<MediaStore.Types.DeleteCorsPolicyOutput, AWSError>;
   /**
-   * Removes an object lifecycle policy from a container.
+   * Deletes the cross-origin resource sharing (CORS) configuration information that is set for the container. To use this operation, you must have permission to perform the MediaStore:DeleteCorsPolicy action. The container owner has this permission by default and can grant this permission to others.
    */
-  deleteLifecyclePolicy(params: MediaStore.Types.DeleteLifecyclePolicyInput, callback?: (err: AWSError, data: MediaStore.Types.DeleteLifecyclePolicyOutput) => void): Request<MediaStore.Types.DeleteLifecyclePolicyOutput, AWSError>;
+  deleteCorsPolicy(params: MediaStore.Types.DeleteCorsPolicyInput, callback?: (err: AWSError, data: MediaStore.Types.DeleteCorsPolicyOutput) => void): Request<MediaStore.Types.DeleteCorsPolicyOutput, AWSError>;
   /**
    * Removes an object lifecycle policy from a container.
    */
   deleteLifecyclePolicy(callback?: (err: AWSError, data: MediaStore.Types.DeleteLifecyclePolicyOutput) => void): Request<MediaStore.Types.DeleteLifecyclePolicyOutput, AWSError>;
   /**
-   * Retrieves the properties of the requested container. This request is commonly used to retrieve the endpoint of a container. An endpoint is a value assigned by the service when a new container is created. A container's endpoint does not change after it has been assigned. The DescribeContainer request returns a single Container object based on ContainerName. To return all Container objects that are associated with a specified AWS account, use ListContainers.
+   * Removes an object lifecycle policy from a container.
    */
-  describeContainer(params: MediaStore.Types.DescribeContainerInput, callback?: (err: AWSError, data: MediaStore.Types.DescribeContainerOutput) => void): Request<MediaStore.Types.DescribeContainerOutput, AWSError>;
+  deleteLifecyclePolicy(params: MediaStore.Types.DeleteLifecyclePolicyInput, callback?: (err: AWSError, data: MediaStore.Types.DeleteLifecyclePolicyOutput) => void): Request<MediaStore.Types.DeleteLifecyclePolicyOutput, AWSError>;
   /**
    * Retrieves the properties of the requested container. This request is commonly used to retrieve the endpoint of a container. An endpoint is a value assigned by the service when a new container is created. A container's endpoint does not change after it has been assigned. The DescribeContainer request returns a single Container object based on ContainerName. To return all Container objects that are associated with a specified AWS account, use ListContainers.
    */
   describeContainer(callback?: (err: AWSError, data: MediaStore.Types.DescribeContainerOutput) => void): Request<MediaStore.Types.DescribeContainerOutput, AWSError>;
   /**
-   * Retrieves the access policy for the specified container. For information about the data that is included in an access policy, see the AWS Identity and Access Management User Guide.
+   * Retrieves the properties of the requested container. This request is commonly used to retrieve the endpoint of a container. An endpoint is a value assigned by the service when a new container is created. A container's endpoint does not change after it has been assigned. The DescribeContainer request returns a single Container object based on ContainerName. To return all Container objects that are associated with a specified AWS account, use ListContainers.
    */
-  getContainerPolicy(params: MediaStore.Types.GetContainerPolicyInput, callback?: (err: AWSError, data: MediaStore.Types.GetContainerPolicyOutput) => void): Request<MediaStore.Types.GetContainerPolicyOutput, AWSError>;
+  describeContainer(params: MediaStore.Types.DescribeContainerInput, callback?: (err: AWSError, data: MediaStore.Types.DescribeContainerOutput) => void): Request<MediaStore.Types.DescribeContainerOutput, AWSError>;
   /**
    * Retrieves the access policy for the specified container. For information about the data that is included in an access policy, see the AWS Identity and Access Management User Guide.
    */
   getContainerPolicy(callback?: (err: AWSError, data: MediaStore.Types.GetContainerPolicyOutput) => void): Request<MediaStore.Types.GetContainerPolicyOutput, AWSError>;
   /**
-   * Returns the cross-origin resource sharing (CORS) configuration information that is set for the container. To use this operation, you must have permission to perform the MediaStore:GetCorsPolicy action. By default, the container owner has this permission and can grant it to others.
+   * Retrieves the access policy for the specified container. For information about the data that is included in an access policy, see the AWS Identity and Access Management User Guide.
    */
-  getCorsPolicy(params: MediaStore.Types.GetCorsPolicyInput, callback?: (err: AWSError, data: MediaStore.Types.GetCorsPolicyOutput) => void): Request<MediaStore.Types.GetCorsPolicyOutput, AWSError>;
+  getContainerPolicy(params: MediaStore.Types.GetContainerPolicyInput, callback?: (err: AWSError, data: MediaStore.Types.GetContainerPolicyOutput) => void): Request<MediaStore.Types.GetContainerPolicyOutput, AWSError>;
   /**
    * Returns the cross-origin resource sharing (CORS) configuration information that is set for the container. To use this operation, you must have permission to perform the MediaStore:GetCorsPolicy action. By default, the container owner has this permission and can grant it to others.
    */
   getCorsPolicy(callback?: (err: AWSError, data: MediaStore.Types.GetCorsPolicyOutput) => void): Request<MediaStore.Types.GetCorsPolicyOutput, AWSError>;
   /**
-   * Retrieves the object lifecycle policy that is assigned to a container.
+   * Returns the cross-origin resource sharing (CORS) configuration information that is set for the container. To use this operation, you must have permission to perform the MediaStore:GetCorsPolicy action. By default, the container owner has this permission and can grant it to others.
    */
-  getLifecyclePolicy(params: MediaStore.Types.GetLifecyclePolicyInput, callback?: (err: AWSError, data: MediaStore.Types.GetLifecyclePolicyOutput) => void): Request<MediaStore.Types.GetLifecyclePolicyOutput, AWSError>;
+  getCorsPolicy(params: MediaStore.Types.GetCorsPolicyInput, callback?: (err: AWSError, data: MediaStore.Types.GetCorsPolicyOutput) => void): Request<MediaStore.Types.GetCorsPolicyOutput, AWSError>;
   /**
    * Retrieves the object lifecycle policy that is assigned to a container.
    */
   getLifecyclePolicy(callback?: (err: AWSError, data: MediaStore.Types.GetLifecyclePolicyOutput) => void): Request<MediaStore.Types.GetLifecyclePolicyOutput, AWSError>;
   /**
-   * Lists the properties of all containers in AWS Elemental MediaStore.  You can query to receive all the containers in one response. Or you can include the MaxResults parameter to receive a limited number of containers in each response. In this case, the response includes a token. To get the next set of containers, send the command again, this time with the NextToken parameter (with the returned token as its value). The next set of responses appears, with a token if there are still more containers to receive.  See also DescribeContainer, which gets the properties of one container. 
+   * Retrieves the object lifecycle policy that is assigned to a container.
    */
-  listContainers(params: MediaStore.Types.ListContainersInput, callback?: (err: AWSError, data: MediaStore.Types.ListContainersOutput) => void): Request<MediaStore.Types.ListContainersOutput, AWSError>;
+  getLifecyclePolicy(params: MediaStore.Types.GetLifecyclePolicyInput, callback?: (err: AWSError, data: MediaStore.Types.GetLifecyclePolicyOutput) => void): Request<MediaStore.Types.GetLifecyclePolicyOutput, AWSError>;
   /**
    * Lists the properties of all containers in AWS Elemental MediaStore.  You can query to receive all the containers in one response. Or you can include the MaxResults parameter to receive a limited number of containers in each response. In this case, the response includes a token. To get the next set of containers, send the command again, this time with the NextToken parameter (with the returned token as its value). The next set of responses appears, with a token if there are still more containers to receive.  See also DescribeContainer, which gets the properties of one container. 
    */
   listContainers(callback?: (err: AWSError, data: MediaStore.Types.ListContainersOutput) => void): Request<MediaStore.Types.ListContainersOutput, AWSError>;
   /**
-   * Creates an access policy for the specified container to restrict the users and clients that can access it. For information about the data that is included in an access policy, see the AWS Identity and Access Management User Guide. For this release of the REST API, you can create only one policy for a container. If you enter PutContainerPolicy twice, the second command modifies the existing policy. 
+   * Lists the properties of all containers in AWS Elemental MediaStore.  You can query to receive all the containers in one response. Or you can include the MaxResults parameter to receive a limited number of containers in each response. In this case, the response includes a token. To get the next set of containers, send the command again, this time with the NextToken parameter (with the returned token as its value). The next set of responses appears, with a token if there are still more containers to receive.  See also DescribeContainer, which gets the properties of one container. 
    */
-  putContainerPolicy(params: MediaStore.Types.PutContainerPolicyInput, callback?: (err: AWSError, data: MediaStore.Types.PutContainerPolicyOutput) => void): Request<MediaStore.Types.PutContainerPolicyOutput, AWSError>;
+  listContainers(params: MediaStore.Types.ListContainersInput, callback?: (err: AWSError, data: MediaStore.Types.ListContainersOutput) => void): Request<MediaStore.Types.ListContainersOutput, AWSError>;
   /**
    * Creates an access policy for the specified container to restrict the users and clients that can access it. For information about the data that is included in an access policy, see the AWS Identity and Access Management User Guide. For this release of the REST API, you can create only one policy for a container. If you enter PutContainerPolicy twice, the second command modifies the existing policy. 
    */
   putContainerPolicy(callback?: (err: AWSError, data: MediaStore.Types.PutContainerPolicyOutput) => void): Request<MediaStore.Types.PutContainerPolicyOutput, AWSError>;
   /**
-   * Sets the cross-origin resource sharing (CORS) configuration on a container so that the container can service cross-origin requests. For example, you might want to enable a request whose origin is http://www.example.com to access your AWS Elemental MediaStore container at my.example.container.com by using the browser's XMLHttpRequest capability. To enable CORS on a container, you attach a CORS policy to the container. In the CORS policy, you configure rules that identify origins and the HTTP methods that can be executed on your container. The policy can contain up to 398,000 characters. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed.
+   * Creates an access policy for the specified container to restrict the users and clients that can access it. For information about the data that is included in an access policy, see the AWS Identity and Access Management User Guide. For this release of the REST API, you can create only one policy for a container. If you enter PutContainerPolicy twice, the second command modifies the existing policy. 
    */
-  putCorsPolicy(params: MediaStore.Types.PutCorsPolicyInput, callback?: (err: AWSError, data: MediaStore.Types.PutCorsPolicyOutput) => void): Request<MediaStore.Types.PutCorsPolicyOutput, AWSError>;
+  putContainerPolicy(params: MediaStore.Types.PutContainerPolicyInput, callback?: (err: AWSError, data: MediaStore.Types.PutContainerPolicyOutput) => void): Request<MediaStore.Types.PutContainerPolicyOutput, AWSError>;
   /**
    * Sets the cross-origin resource sharing (CORS) configuration on a container so that the container can service cross-origin requests. For example, you might want to enable a request whose origin is http://www.example.com to access your AWS Elemental MediaStore container at my.example.container.com by using the browser's XMLHttpRequest capability. To enable CORS on a container, you attach a CORS policy to the container. In the CORS policy, you configure rules that identify origins and the HTTP methods that can be executed on your container. The policy can contain up to 398,000 characters. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed.
    */
   putCorsPolicy(callback?: (err: AWSError, data: MediaStore.Types.PutCorsPolicyOutput) => void): Request<MediaStore.Types.PutCorsPolicyOutput, AWSError>;
   /**
-   * Writes an object lifecycle policy to a container. If the container already has an object lifecycle policy, the service replaces the existing policy with the new policy. 
+   * Sets the cross-origin resource sharing (CORS) configuration on a container so that the container can service cross-origin requests. For example, you might want to enable a request whose origin is http://www.example.com to access your AWS Elemental MediaStore container at my.example.container.com by using the browser's XMLHttpRequest capability. To enable CORS on a container, you attach a CORS policy to the container. In the CORS policy, you configure rules that identify origins and the HTTP methods that can be executed on your container. The policy can contain up to 398,000 characters. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed.
    */
-  putLifecyclePolicy(params: MediaStore.Types.PutLifecyclePolicyInput, callback?: (err: AWSError, data: MediaStore.Types.PutLifecyclePolicyOutput) => void): Request<MediaStore.Types.PutLifecyclePolicyOutput, AWSError>;
+  putCorsPolicy(params: MediaStore.Types.PutCorsPolicyInput, callback?: (err: AWSError, data: MediaStore.Types.PutCorsPolicyOutput) => void): Request<MediaStore.Types.PutCorsPolicyOutput, AWSError>;
   /**
    * Writes an object lifecycle policy to a container. If the container already has an object lifecycle policy, the service replaces the existing policy with the new policy. 
    */
   putLifecyclePolicy(callback?: (err: AWSError, data: MediaStore.Types.PutLifecyclePolicyOutput) => void): Request<MediaStore.Types.PutLifecyclePolicyOutput, AWSError>;
+  /**
+   * Writes an object lifecycle policy to a container. If the container already has an object lifecycle policy, the service replaces the existing policy with the new policy. 
+   */
+  putLifecyclePolicy(params: MediaStore.Types.PutLifecyclePolicyInput, callback?: (err: AWSError, data: MediaStore.Types.PutLifecyclePolicyOutput) => void): Request<MediaStore.Types.PutLifecyclePolicyOutput, AWSError>;
 }
 declare namespace MediaStore {
   export type AllowedHeaders = Header[];

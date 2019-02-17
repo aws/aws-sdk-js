@@ -14,123 +14,123 @@ declare class LicenseManager extends Service {
   /**
    * Creates a new license configuration object. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or VCPU), tenancy (shared tenancy, Amazon EC2 Dedicated Instance, Amazon EC2 Dedicated Host, or any of these), host affinity (how long a VM must be associated with a host), the number of licenses purchased and used.
    */
-  createLicenseConfiguration(params: LicenseManager.Types.CreateLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.CreateLicenseConfigurationResponse) => void): Request<LicenseManager.Types.CreateLicenseConfigurationResponse, AWSError>;
+  createLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.CreateLicenseConfigurationResponse) => void): Request<LicenseManager.Types.CreateLicenseConfigurationResponse, AWSError>;
   /**
    * Creates a new license configuration object. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (licensing by instance, socket, CPU, or VCPU), tenancy (shared tenancy, Amazon EC2 Dedicated Instance, Amazon EC2 Dedicated Host, or any of these), host affinity (how long a VM must be associated with a host), the number of licenses purchased and used.
    */
-  createLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.CreateLicenseConfigurationResponse) => void): Request<LicenseManager.Types.CreateLicenseConfigurationResponse, AWSError>;
-  /**
-   * Deletes an existing license configuration. This action fails if the configuration is in use.
-   */
-  deleteLicenseConfiguration(params: LicenseManager.Types.DeleteLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.DeleteLicenseConfigurationResponse) => void): Request<LicenseManager.Types.DeleteLicenseConfigurationResponse, AWSError>;
+  createLicenseConfiguration(params: LicenseManager.Types.CreateLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.CreateLicenseConfigurationResponse) => void): Request<LicenseManager.Types.CreateLicenseConfigurationResponse, AWSError>;
   /**
    * Deletes an existing license configuration. This action fails if the configuration is in use.
    */
   deleteLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.DeleteLicenseConfigurationResponse) => void): Request<LicenseManager.Types.DeleteLicenseConfigurationResponse, AWSError>;
   /**
-   * Returns a detailed description of a license configuration.
+   * Deletes an existing license configuration. This action fails if the configuration is in use.
    */
-  getLicenseConfiguration(params: LicenseManager.Types.GetLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.GetLicenseConfigurationResponse) => void): Request<LicenseManager.Types.GetLicenseConfigurationResponse, AWSError>;
+  deleteLicenseConfiguration(params: LicenseManager.Types.DeleteLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.DeleteLicenseConfigurationResponse) => void): Request<LicenseManager.Types.DeleteLicenseConfigurationResponse, AWSError>;
   /**
    * Returns a detailed description of a license configuration.
    */
   getLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.GetLicenseConfigurationResponse) => void): Request<LicenseManager.Types.GetLicenseConfigurationResponse, AWSError>;
   /**
-   * Gets License Manager settings for a region. Exposes the configured S3 bucket, SNS topic, etc., for inspection. 
+   * Returns a detailed description of a license configuration.
    */
-  getServiceSettings(params: LicenseManager.Types.GetServiceSettingsRequest, callback?: (err: AWSError, data: LicenseManager.Types.GetServiceSettingsResponse) => void): Request<LicenseManager.Types.GetServiceSettingsResponse, AWSError>;
+  getLicenseConfiguration(params: LicenseManager.Types.GetLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.GetLicenseConfigurationResponse) => void): Request<LicenseManager.Types.GetLicenseConfigurationResponse, AWSError>;
   /**
    * Gets License Manager settings for a region. Exposes the configured S3 bucket, SNS topic, etc., for inspection. 
    */
   getServiceSettings(callback?: (err: AWSError, data: LicenseManager.Types.GetServiceSettingsResponse) => void): Request<LicenseManager.Types.GetServiceSettingsResponse, AWSError>;
   /**
-   * Lists the resource associations for a license configuration. Resource associations need not consume licenses from a license configuration. For example, an AMI or a stopped instance may not consume a license (depending on the license rules). Use this operation to find all resources associated with a license configuration.
+   * Gets License Manager settings for a region. Exposes the configured S3 bucket, SNS topic, etc., for inspection. 
    */
-  listAssociationsForLicenseConfiguration(params: LicenseManager.Types.ListAssociationsForLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListAssociationsForLicenseConfigurationResponse) => void): Request<LicenseManager.Types.ListAssociationsForLicenseConfigurationResponse, AWSError>;
+  getServiceSettings(params: LicenseManager.Types.GetServiceSettingsRequest, callback?: (err: AWSError, data: LicenseManager.Types.GetServiceSettingsResponse) => void): Request<LicenseManager.Types.GetServiceSettingsResponse, AWSError>;
   /**
    * Lists the resource associations for a license configuration. Resource associations need not consume licenses from a license configuration. For example, an AMI or a stopped instance may not consume a license (depending on the license rules). Use this operation to find all resources associated with a license configuration.
    */
   listAssociationsForLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.ListAssociationsForLicenseConfigurationResponse) => void): Request<LicenseManager.Types.ListAssociationsForLicenseConfigurationResponse, AWSError>;
   /**
-   * Lists license configuration objects for an account, each containing the name, description, license type, and other license terms modeled from a license agreement.
+   * Lists the resource associations for a license configuration. Resource associations need not consume licenses from a license configuration. For example, an AMI or a stopped instance may not consume a license (depending on the license rules). Use this operation to find all resources associated with a license configuration.
    */
-  listLicenseConfigurations(params: LicenseManager.Types.ListLicenseConfigurationsRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListLicenseConfigurationsResponse) => void): Request<LicenseManager.Types.ListLicenseConfigurationsResponse, AWSError>;
+  listAssociationsForLicenseConfiguration(params: LicenseManager.Types.ListAssociationsForLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListAssociationsForLicenseConfigurationResponse) => void): Request<LicenseManager.Types.ListAssociationsForLicenseConfigurationResponse, AWSError>;
   /**
    * Lists license configuration objects for an account, each containing the name, description, license type, and other license terms modeled from a license agreement.
    */
   listLicenseConfigurations(callback?: (err: AWSError, data: LicenseManager.Types.ListLicenseConfigurationsResponse) => void): Request<LicenseManager.Types.ListLicenseConfigurationsResponse, AWSError>;
   /**
-   * Returns the license configuration for a resource.
+   * Lists license configuration objects for an account, each containing the name, description, license type, and other license terms modeled from a license agreement.
    */
-  listLicenseSpecificationsForResource(params: LicenseManager.Types.ListLicenseSpecificationsForResourceRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListLicenseSpecificationsForResourceResponse) => void): Request<LicenseManager.Types.ListLicenseSpecificationsForResourceResponse, AWSError>;
+  listLicenseConfigurations(params: LicenseManager.Types.ListLicenseConfigurationsRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListLicenseConfigurationsResponse) => void): Request<LicenseManager.Types.ListLicenseConfigurationsResponse, AWSError>;
   /**
    * Returns the license configuration for a resource.
    */
   listLicenseSpecificationsForResource(callback?: (err: AWSError, data: LicenseManager.Types.ListLicenseSpecificationsForResourceResponse) => void): Request<LicenseManager.Types.ListLicenseSpecificationsForResourceResponse, AWSError>;
   /**
-   * Returns a detailed list of resources.
+   * Returns the license configuration for a resource.
    */
-  listResourceInventory(params: LicenseManager.Types.ListResourceInventoryRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListResourceInventoryResponse) => void): Request<LicenseManager.Types.ListResourceInventoryResponse, AWSError>;
+  listLicenseSpecificationsForResource(params: LicenseManager.Types.ListLicenseSpecificationsForResourceRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListLicenseSpecificationsForResourceResponse) => void): Request<LicenseManager.Types.ListLicenseSpecificationsForResourceResponse, AWSError>;
   /**
    * Returns a detailed list of resources.
    */
   listResourceInventory(callback?: (err: AWSError, data: LicenseManager.Types.ListResourceInventoryResponse) => void): Request<LicenseManager.Types.ListResourceInventoryResponse, AWSError>;
   /**
-   * Lists tags attached to a resource.
+   * Returns a detailed list of resources.
    */
-  listTagsForResource(params: LicenseManager.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListTagsForResourceResponse) => void): Request<LicenseManager.Types.ListTagsForResourceResponse, AWSError>;
+  listResourceInventory(params: LicenseManager.Types.ListResourceInventoryRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListResourceInventoryResponse) => void): Request<LicenseManager.Types.ListResourceInventoryResponse, AWSError>;
   /**
    * Lists tags attached to a resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: LicenseManager.Types.ListTagsForResourceResponse) => void): Request<LicenseManager.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists all license usage records for a license configuration, displaying license consumption details by resource at a selected point in time. Use this action to audit the current license consumption for any license inventory and configuration.
+   * Lists tags attached to a resource.
    */
-  listUsageForLicenseConfiguration(params: LicenseManager.Types.ListUsageForLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListUsageForLicenseConfigurationResponse) => void): Request<LicenseManager.Types.ListUsageForLicenseConfigurationResponse, AWSError>;
+  listTagsForResource(params: LicenseManager.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListTagsForResourceResponse) => void): Request<LicenseManager.Types.ListTagsForResourceResponse, AWSError>;
   /**
    * Lists all license usage records for a license configuration, displaying license consumption details by resource at a selected point in time. Use this action to audit the current license consumption for any license inventory and configuration.
    */
   listUsageForLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.ListUsageForLicenseConfigurationResponse) => void): Request<LicenseManager.Types.ListUsageForLicenseConfigurationResponse, AWSError>;
   /**
-   * Attach one of more tags to any resource.
+   * Lists all license usage records for a license configuration, displaying license consumption details by resource at a selected point in time. Use this action to audit the current license consumption for any license inventory and configuration.
    */
-  tagResource(params: LicenseManager.Types.TagResourceRequest, callback?: (err: AWSError, data: LicenseManager.Types.TagResourceResponse) => void): Request<LicenseManager.Types.TagResourceResponse, AWSError>;
+  listUsageForLicenseConfiguration(params: LicenseManager.Types.ListUsageForLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.ListUsageForLicenseConfigurationResponse) => void): Request<LicenseManager.Types.ListUsageForLicenseConfigurationResponse, AWSError>;
   /**
    * Attach one of more tags to any resource.
    */
   tagResource(callback?: (err: AWSError, data: LicenseManager.Types.TagResourceResponse) => void): Request<LicenseManager.Types.TagResourceResponse, AWSError>;
   /**
-   * Remove tags from a resource.
+   * Attach one of more tags to any resource.
    */
-  untagResource(params: LicenseManager.Types.UntagResourceRequest, callback?: (err: AWSError, data: LicenseManager.Types.UntagResourceResponse) => void): Request<LicenseManager.Types.UntagResourceResponse, AWSError>;
+  tagResource(params: LicenseManager.Types.TagResourceRequest, callback?: (err: AWSError, data: LicenseManager.Types.TagResourceResponse) => void): Request<LicenseManager.Types.TagResourceResponse, AWSError>;
   /**
    * Remove tags from a resource.
    */
   untagResource(callback?: (err: AWSError, data: LicenseManager.Types.UntagResourceResponse) => void): Request<LicenseManager.Types.UntagResourceResponse, AWSError>;
   /**
-   * Modifies the attributes of an existing license configuration object. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (Instances, cores, sockets, VCPUs), tenancy (shared or Dedicated Host), host affinity (how long a VM is associated with a host), the number of licenses purchased and used.
+   * Remove tags from a resource.
    */
-  updateLicenseConfiguration(params: LicenseManager.Types.UpdateLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.UpdateLicenseConfigurationResponse) => void): Request<LicenseManager.Types.UpdateLicenseConfigurationResponse, AWSError>;
+  untagResource(params: LicenseManager.Types.UntagResourceRequest, callback?: (err: AWSError, data: LicenseManager.Types.UntagResourceResponse) => void): Request<LicenseManager.Types.UntagResourceResponse, AWSError>;
   /**
    * Modifies the attributes of an existing license configuration object. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (Instances, cores, sockets, VCPUs), tenancy (shared or Dedicated Host), host affinity (how long a VM is associated with a host), the number of licenses purchased and used.
    */
   updateLicenseConfiguration(callback?: (err: AWSError, data: LicenseManager.Types.UpdateLicenseConfigurationResponse) => void): Request<LicenseManager.Types.UpdateLicenseConfigurationResponse, AWSError>;
   /**
-   * Adds or removes license configurations for a specified AWS resource. This operation currently supports updating the license specifications of AMIs, instances, and hosts. Launch templates and AWS CloudFormation templates are not managed from this operation as those resources send the license configurations directly to a resource creation operation, such as RunInstances.
+   * Modifies the attributes of an existing license configuration object. A license configuration is an abstraction of a customer license agreement that can be consumed and enforced by License Manager. Components include specifications for the license type (Instances, cores, sockets, VCPUs), tenancy (shared or Dedicated Host), host affinity (how long a VM is associated with a host), the number of licenses purchased and used.
    */
-  updateLicenseSpecificationsForResource(params: LicenseManager.Types.UpdateLicenseSpecificationsForResourceRequest, callback?: (err: AWSError, data: LicenseManager.Types.UpdateLicenseSpecificationsForResourceResponse) => void): Request<LicenseManager.Types.UpdateLicenseSpecificationsForResourceResponse, AWSError>;
+  updateLicenseConfiguration(params: LicenseManager.Types.UpdateLicenseConfigurationRequest, callback?: (err: AWSError, data: LicenseManager.Types.UpdateLicenseConfigurationResponse) => void): Request<LicenseManager.Types.UpdateLicenseConfigurationResponse, AWSError>;
   /**
    * Adds or removes license configurations for a specified AWS resource. This operation currently supports updating the license specifications of AMIs, instances, and hosts. Launch templates and AWS CloudFormation templates are not managed from this operation as those resources send the license configurations directly to a resource creation operation, such as RunInstances.
    */
   updateLicenseSpecificationsForResource(callback?: (err: AWSError, data: LicenseManager.Types.UpdateLicenseSpecificationsForResourceResponse) => void): Request<LicenseManager.Types.UpdateLicenseSpecificationsForResourceResponse, AWSError>;
   /**
-   * Updates License Manager service settings.
+   * Adds or removes license configurations for a specified AWS resource. This operation currently supports updating the license specifications of AMIs, instances, and hosts. Launch templates and AWS CloudFormation templates are not managed from this operation as those resources send the license configurations directly to a resource creation operation, such as RunInstances.
    */
-  updateServiceSettings(params: LicenseManager.Types.UpdateServiceSettingsRequest, callback?: (err: AWSError, data: LicenseManager.Types.UpdateServiceSettingsResponse) => void): Request<LicenseManager.Types.UpdateServiceSettingsResponse, AWSError>;
+  updateLicenseSpecificationsForResource(params: LicenseManager.Types.UpdateLicenseSpecificationsForResourceRequest, callback?: (err: AWSError, data: LicenseManager.Types.UpdateLicenseSpecificationsForResourceResponse) => void): Request<LicenseManager.Types.UpdateLicenseSpecificationsForResourceResponse, AWSError>;
   /**
    * Updates License Manager service settings.
    */
   updateServiceSettings(callback?: (err: AWSError, data: LicenseManager.Types.UpdateServiceSettingsResponse) => void): Request<LicenseManager.Types.UpdateServiceSettingsResponse, AWSError>;
+  /**
+   * Updates License Manager service settings.
+   */
+  updateServiceSettings(params: LicenseManager.Types.UpdateServiceSettingsRequest, callback?: (err: AWSError, data: LicenseManager.Types.UpdateServiceSettingsResponse) => void): Request<LicenseManager.Types.UpdateServiceSettingsResponse, AWSError>;
 }
 declare namespace LicenseManager {
   export type Boolean = boolean;

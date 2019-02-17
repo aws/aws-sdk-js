@@ -14,603 +14,603 @@ declare class AlexaForBusiness extends Service {
   /**
    * Associates a skill with the organization under the customer's AWS account. If a skill is private, the user implicitly accepts access to this skill during enablement.
    */
-  approveSkill(params: AlexaForBusiness.Types.ApproveSkillRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ApproveSkillResponse) => void): Request<AlexaForBusiness.Types.ApproveSkillResponse, AWSError>;
+  approveSkill(callback?: (err: AWSError, data: AlexaForBusiness.Types.ApproveSkillResponse) => void): Request<AlexaForBusiness.Types.ApproveSkillResponse, AWSError>;
   /**
    * Associates a skill with the organization under the customer's AWS account. If a skill is private, the user implicitly accepts access to this skill during enablement.
    */
-  approveSkill(callback?: (err: AWSError, data: AlexaForBusiness.Types.ApproveSkillResponse) => void): Request<AlexaForBusiness.Types.ApproveSkillResponse, AWSError>;
-  /**
-   * Associates a contact with a given address book.
-   */
-  associateContactWithAddressBook(params: AlexaForBusiness.Types.AssociateContactWithAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateContactWithAddressBookResponse) => void): Request<AlexaForBusiness.Types.AssociateContactWithAddressBookResponse, AWSError>;
+  approveSkill(params: AlexaForBusiness.Types.ApproveSkillRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ApproveSkillResponse) => void): Request<AlexaForBusiness.Types.ApproveSkillResponse, AWSError>;
   /**
    * Associates a contact with a given address book.
    */
   associateContactWithAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateContactWithAddressBookResponse) => void): Request<AlexaForBusiness.Types.AssociateContactWithAddressBookResponse, AWSError>;
   /**
-   * Associates a device with a given room. This applies all the settings from the room profile to the device, and all the skills in any skill groups added to that room. This operation requires the device to be online, or else a manual sync is required. 
+   * Associates a contact with a given address book.
    */
-  associateDeviceWithRoom(params: AlexaForBusiness.Types.AssociateDeviceWithRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateDeviceWithRoomResponse) => void): Request<AlexaForBusiness.Types.AssociateDeviceWithRoomResponse, AWSError>;
+  associateContactWithAddressBook(params: AlexaForBusiness.Types.AssociateContactWithAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateContactWithAddressBookResponse) => void): Request<AlexaForBusiness.Types.AssociateContactWithAddressBookResponse, AWSError>;
   /**
    * Associates a device with a given room. This applies all the settings from the room profile to the device, and all the skills in any skill groups added to that room. This operation requires the device to be online, or else a manual sync is required. 
    */
   associateDeviceWithRoom(callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateDeviceWithRoomResponse) => void): Request<AlexaForBusiness.Types.AssociateDeviceWithRoomResponse, AWSError>;
   /**
-   * Associates a skill group with a given room. This enables all skills in the associated skill group on all devices in the room.
+   * Associates a device with a given room. This applies all the settings from the room profile to the device, and all the skills in any skill groups added to that room. This operation requires the device to be online, or else a manual sync is required. 
    */
-  associateSkillGroupWithRoom(params: AlexaForBusiness.Types.AssociateSkillGroupWithRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateSkillGroupWithRoomResponse) => void): Request<AlexaForBusiness.Types.AssociateSkillGroupWithRoomResponse, AWSError>;
+  associateDeviceWithRoom(params: AlexaForBusiness.Types.AssociateDeviceWithRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateDeviceWithRoomResponse) => void): Request<AlexaForBusiness.Types.AssociateDeviceWithRoomResponse, AWSError>;
   /**
    * Associates a skill group with a given room. This enables all skills in the associated skill group on all devices in the room.
    */
   associateSkillGroupWithRoom(callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateSkillGroupWithRoomResponse) => void): Request<AlexaForBusiness.Types.AssociateSkillGroupWithRoomResponse, AWSError>;
   /**
-   * Associates a skill with a skill group.
+   * Associates a skill group with a given room. This enables all skills in the associated skill group on all devices in the room.
    */
-  associateSkillWithSkillGroup(params: AlexaForBusiness.Types.AssociateSkillWithSkillGroupRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateSkillWithSkillGroupResponse) => void): Request<AlexaForBusiness.Types.AssociateSkillWithSkillGroupResponse, AWSError>;
+  associateSkillGroupWithRoom(params: AlexaForBusiness.Types.AssociateSkillGroupWithRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateSkillGroupWithRoomResponse) => void): Request<AlexaForBusiness.Types.AssociateSkillGroupWithRoomResponse, AWSError>;
   /**
    * Associates a skill with a skill group.
    */
   associateSkillWithSkillGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateSkillWithSkillGroupResponse) => void): Request<AlexaForBusiness.Types.AssociateSkillWithSkillGroupResponse, AWSError>;
   /**
-   * Makes a private skill available for enrolled users to enable on their devices.
+   * Associates a skill with a skill group.
    */
-  associateSkillWithUsers(params: AlexaForBusiness.Types.AssociateSkillWithUsersRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateSkillWithUsersResponse) => void): Request<AlexaForBusiness.Types.AssociateSkillWithUsersResponse, AWSError>;
+  associateSkillWithSkillGroup(params: AlexaForBusiness.Types.AssociateSkillWithSkillGroupRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateSkillWithSkillGroupResponse) => void): Request<AlexaForBusiness.Types.AssociateSkillWithSkillGroupResponse, AWSError>;
   /**
    * Makes a private skill available for enrolled users to enable on their devices.
    */
   associateSkillWithUsers(callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateSkillWithUsersResponse) => void): Request<AlexaForBusiness.Types.AssociateSkillWithUsersResponse, AWSError>;
   /**
-   * Creates an address book with the specified details.
+   * Makes a private skill available for enrolled users to enable on their devices.
    */
-  createAddressBook(params: AlexaForBusiness.Types.CreateAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateAddressBookResponse) => void): Request<AlexaForBusiness.Types.CreateAddressBookResponse, AWSError>;
+  associateSkillWithUsers(params: AlexaForBusiness.Types.AssociateSkillWithUsersRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateSkillWithUsersResponse) => void): Request<AlexaForBusiness.Types.AssociateSkillWithUsersResponse, AWSError>;
   /**
    * Creates an address book with the specified details.
    */
   createAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateAddressBookResponse) => void): Request<AlexaForBusiness.Types.CreateAddressBookResponse, AWSError>;
   /**
-   * Creates a recurring schedule for usage reports to deliver to the specified S3 location with a specified daily or weekly interval.
+   * Creates an address book with the specified details.
    */
-  createBusinessReportSchedule(params: AlexaForBusiness.Types.CreateBusinessReportScheduleRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateBusinessReportScheduleResponse) => void): Request<AlexaForBusiness.Types.CreateBusinessReportScheduleResponse, AWSError>;
+  createAddressBook(params: AlexaForBusiness.Types.CreateAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateAddressBookResponse) => void): Request<AlexaForBusiness.Types.CreateAddressBookResponse, AWSError>;
   /**
    * Creates a recurring schedule for usage reports to deliver to the specified S3 location with a specified daily or weekly interval.
    */
   createBusinessReportSchedule(callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateBusinessReportScheduleResponse) => void): Request<AlexaForBusiness.Types.CreateBusinessReportScheduleResponse, AWSError>;
   /**
-   * Adds a new conference provider under the user's AWS account.
+   * Creates a recurring schedule for usage reports to deliver to the specified S3 location with a specified daily or weekly interval.
    */
-  createConferenceProvider(params: AlexaForBusiness.Types.CreateConferenceProviderRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.CreateConferenceProviderResponse, AWSError>;
+  createBusinessReportSchedule(params: AlexaForBusiness.Types.CreateBusinessReportScheduleRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateBusinessReportScheduleResponse) => void): Request<AlexaForBusiness.Types.CreateBusinessReportScheduleResponse, AWSError>;
   /**
    * Adds a new conference provider under the user's AWS account.
    */
   createConferenceProvider(callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.CreateConferenceProviderResponse, AWSError>;
   /**
-   * Creates a contact with the specified details.
+   * Adds a new conference provider under the user's AWS account.
    */
-  createContact(params: AlexaForBusiness.Types.CreateContactRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateContactResponse) => void): Request<AlexaForBusiness.Types.CreateContactResponse, AWSError>;
+  createConferenceProvider(params: AlexaForBusiness.Types.CreateConferenceProviderRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.CreateConferenceProviderResponse, AWSError>;
   /**
    * Creates a contact with the specified details.
    */
   createContact(callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateContactResponse) => void): Request<AlexaForBusiness.Types.CreateContactResponse, AWSError>;
   /**
-   * Creates a new room profile with the specified details.
+   * Creates a contact with the specified details.
    */
-  createProfile(params: AlexaForBusiness.Types.CreateProfileRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateProfileResponse) => void): Request<AlexaForBusiness.Types.CreateProfileResponse, AWSError>;
+  createContact(params: AlexaForBusiness.Types.CreateContactRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateContactResponse) => void): Request<AlexaForBusiness.Types.CreateContactResponse, AWSError>;
   /**
    * Creates a new room profile with the specified details.
    */
   createProfile(callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateProfileResponse) => void): Request<AlexaForBusiness.Types.CreateProfileResponse, AWSError>;
   /**
-   * Creates a room with the specified details.
+   * Creates a new room profile with the specified details.
    */
-  createRoom(params: AlexaForBusiness.Types.CreateRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateRoomResponse) => void): Request<AlexaForBusiness.Types.CreateRoomResponse, AWSError>;
+  createProfile(params: AlexaForBusiness.Types.CreateProfileRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateProfileResponse) => void): Request<AlexaForBusiness.Types.CreateProfileResponse, AWSError>;
   /**
    * Creates a room with the specified details.
    */
   createRoom(callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateRoomResponse) => void): Request<AlexaForBusiness.Types.CreateRoomResponse, AWSError>;
   /**
-   * Creates a skill group with a specified name and description.
+   * Creates a room with the specified details.
    */
-  createSkillGroup(params: AlexaForBusiness.Types.CreateSkillGroupRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateSkillGroupResponse) => void): Request<AlexaForBusiness.Types.CreateSkillGroupResponse, AWSError>;
+  createRoom(params: AlexaForBusiness.Types.CreateRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateRoomResponse) => void): Request<AlexaForBusiness.Types.CreateRoomResponse, AWSError>;
   /**
    * Creates a skill group with a specified name and description.
    */
   createSkillGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateSkillGroupResponse) => void): Request<AlexaForBusiness.Types.CreateSkillGroupResponse, AWSError>;
   /**
-   * Creates a user.
+   * Creates a skill group with a specified name and description.
    */
-  createUser(params: AlexaForBusiness.Types.CreateUserRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateUserResponse) => void): Request<AlexaForBusiness.Types.CreateUserResponse, AWSError>;
+  createSkillGroup(params: AlexaForBusiness.Types.CreateSkillGroupRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateSkillGroupResponse) => void): Request<AlexaForBusiness.Types.CreateSkillGroupResponse, AWSError>;
   /**
    * Creates a user.
    */
   createUser(callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateUserResponse) => void): Request<AlexaForBusiness.Types.CreateUserResponse, AWSError>;
   /**
-   * Deletes an address book by the address book ARN.
+   * Creates a user.
    */
-  deleteAddressBook(params: AlexaForBusiness.Types.DeleteAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteAddressBookResponse) => void): Request<AlexaForBusiness.Types.DeleteAddressBookResponse, AWSError>;
+  createUser(params: AlexaForBusiness.Types.CreateUserRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateUserResponse) => void): Request<AlexaForBusiness.Types.CreateUserResponse, AWSError>;
   /**
    * Deletes an address book by the address book ARN.
    */
   deleteAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteAddressBookResponse) => void): Request<AlexaForBusiness.Types.DeleteAddressBookResponse, AWSError>;
   /**
-   * Deletes the recurring report delivery schedule with the specified schedule ARN.
+   * Deletes an address book by the address book ARN.
    */
-  deleteBusinessReportSchedule(params: AlexaForBusiness.Types.DeleteBusinessReportScheduleRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteBusinessReportScheduleResponse) => void): Request<AlexaForBusiness.Types.DeleteBusinessReportScheduleResponse, AWSError>;
+  deleteAddressBook(params: AlexaForBusiness.Types.DeleteAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteAddressBookResponse) => void): Request<AlexaForBusiness.Types.DeleteAddressBookResponse, AWSError>;
   /**
    * Deletes the recurring report delivery schedule with the specified schedule ARN.
    */
   deleteBusinessReportSchedule(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteBusinessReportScheduleResponse) => void): Request<AlexaForBusiness.Types.DeleteBusinessReportScheduleResponse, AWSError>;
   /**
-   * Deletes a conference provider.
+   * Deletes the recurring report delivery schedule with the specified schedule ARN.
    */
-  deleteConferenceProvider(params: AlexaForBusiness.Types.DeleteConferenceProviderRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.DeleteConferenceProviderResponse, AWSError>;
+  deleteBusinessReportSchedule(params: AlexaForBusiness.Types.DeleteBusinessReportScheduleRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteBusinessReportScheduleResponse) => void): Request<AlexaForBusiness.Types.DeleteBusinessReportScheduleResponse, AWSError>;
   /**
    * Deletes a conference provider.
    */
   deleteConferenceProvider(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.DeleteConferenceProviderResponse, AWSError>;
   /**
-   * Deletes a contact by the contact ARN.
+   * Deletes a conference provider.
    */
-  deleteContact(params: AlexaForBusiness.Types.DeleteContactRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteContactResponse) => void): Request<AlexaForBusiness.Types.DeleteContactResponse, AWSError>;
+  deleteConferenceProvider(params: AlexaForBusiness.Types.DeleteConferenceProviderRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.DeleteConferenceProviderResponse, AWSError>;
   /**
    * Deletes a contact by the contact ARN.
    */
   deleteContact(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteContactResponse) => void): Request<AlexaForBusiness.Types.DeleteContactResponse, AWSError>;
   /**
-   * Removes a device from Alexa For Business.
+   * Deletes a contact by the contact ARN.
    */
-  deleteDevice(params: AlexaForBusiness.Types.DeleteDeviceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteDeviceResponse) => void): Request<AlexaForBusiness.Types.DeleteDeviceResponse, AWSError>;
+  deleteContact(params: AlexaForBusiness.Types.DeleteContactRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteContactResponse) => void): Request<AlexaForBusiness.Types.DeleteContactResponse, AWSError>;
   /**
    * Removes a device from Alexa For Business.
    */
   deleteDevice(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteDeviceResponse) => void): Request<AlexaForBusiness.Types.DeleteDeviceResponse, AWSError>;
   /**
-   * Deletes a room profile by the profile ARN.
+   * Removes a device from Alexa For Business.
    */
-  deleteProfile(params: AlexaForBusiness.Types.DeleteProfileRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteProfileResponse) => void): Request<AlexaForBusiness.Types.DeleteProfileResponse, AWSError>;
+  deleteDevice(params: AlexaForBusiness.Types.DeleteDeviceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteDeviceResponse) => void): Request<AlexaForBusiness.Types.DeleteDeviceResponse, AWSError>;
   /**
    * Deletes a room profile by the profile ARN.
    */
   deleteProfile(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteProfileResponse) => void): Request<AlexaForBusiness.Types.DeleteProfileResponse, AWSError>;
   /**
-   * Deletes a room by the room ARN.
+   * Deletes a room profile by the profile ARN.
    */
-  deleteRoom(params: AlexaForBusiness.Types.DeleteRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteRoomResponse) => void): Request<AlexaForBusiness.Types.DeleteRoomResponse, AWSError>;
+  deleteProfile(params: AlexaForBusiness.Types.DeleteProfileRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteProfileResponse) => void): Request<AlexaForBusiness.Types.DeleteProfileResponse, AWSError>;
   /**
    * Deletes a room by the room ARN.
    */
   deleteRoom(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteRoomResponse) => void): Request<AlexaForBusiness.Types.DeleteRoomResponse, AWSError>;
   /**
-   * Deletes room skill parameter details by room, skill, and parameter key ID.
+   * Deletes a room by the room ARN.
    */
-  deleteRoomSkillParameter(params: AlexaForBusiness.Types.DeleteRoomSkillParameterRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteRoomSkillParameterResponse) => void): Request<AlexaForBusiness.Types.DeleteRoomSkillParameterResponse, AWSError>;
+  deleteRoom(params: AlexaForBusiness.Types.DeleteRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteRoomResponse) => void): Request<AlexaForBusiness.Types.DeleteRoomResponse, AWSError>;
   /**
    * Deletes room skill parameter details by room, skill, and parameter key ID.
    */
   deleteRoomSkillParameter(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteRoomSkillParameterResponse) => void): Request<AlexaForBusiness.Types.DeleteRoomSkillParameterResponse, AWSError>;
   /**
-   * Unlinks a third-party account from a skill.
+   * Deletes room skill parameter details by room, skill, and parameter key ID.
    */
-  deleteSkillAuthorization(params: AlexaForBusiness.Types.DeleteSkillAuthorizationRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteSkillAuthorizationResponse) => void): Request<AlexaForBusiness.Types.DeleteSkillAuthorizationResponse, AWSError>;
+  deleteRoomSkillParameter(params: AlexaForBusiness.Types.DeleteRoomSkillParameterRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteRoomSkillParameterResponse) => void): Request<AlexaForBusiness.Types.DeleteRoomSkillParameterResponse, AWSError>;
   /**
    * Unlinks a third-party account from a skill.
    */
   deleteSkillAuthorization(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteSkillAuthorizationResponse) => void): Request<AlexaForBusiness.Types.DeleteSkillAuthorizationResponse, AWSError>;
   /**
-   * Deletes a skill group by skill group ARN.
+   * Unlinks a third-party account from a skill.
    */
-  deleteSkillGroup(params: AlexaForBusiness.Types.DeleteSkillGroupRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteSkillGroupResponse) => void): Request<AlexaForBusiness.Types.DeleteSkillGroupResponse, AWSError>;
+  deleteSkillAuthorization(params: AlexaForBusiness.Types.DeleteSkillAuthorizationRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteSkillAuthorizationResponse) => void): Request<AlexaForBusiness.Types.DeleteSkillAuthorizationResponse, AWSError>;
   /**
    * Deletes a skill group by skill group ARN.
    */
   deleteSkillGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteSkillGroupResponse) => void): Request<AlexaForBusiness.Types.DeleteSkillGroupResponse, AWSError>;
   /**
-   * Deletes a specified user by user ARN and enrollment ARN.
+   * Deletes a skill group by skill group ARN.
    */
-  deleteUser(params: AlexaForBusiness.Types.DeleteUserRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteUserResponse) => void): Request<AlexaForBusiness.Types.DeleteUserResponse, AWSError>;
+  deleteSkillGroup(params: AlexaForBusiness.Types.DeleteSkillGroupRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteSkillGroupResponse) => void): Request<AlexaForBusiness.Types.DeleteSkillGroupResponse, AWSError>;
   /**
    * Deletes a specified user by user ARN and enrollment ARN.
    */
   deleteUser(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteUserResponse) => void): Request<AlexaForBusiness.Types.DeleteUserResponse, AWSError>;
   /**
-   * Disassociates a contact from a given address book.
+   * Deletes a specified user by user ARN and enrollment ARN.
    */
-  disassociateContactFromAddressBook(params: AlexaForBusiness.Types.DisassociateContactFromAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateContactFromAddressBookResponse) => void): Request<AlexaForBusiness.Types.DisassociateContactFromAddressBookResponse, AWSError>;
+  deleteUser(params: AlexaForBusiness.Types.DeleteUserRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteUserResponse) => void): Request<AlexaForBusiness.Types.DeleteUserResponse, AWSError>;
   /**
    * Disassociates a contact from a given address book.
    */
   disassociateContactFromAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateContactFromAddressBookResponse) => void): Request<AlexaForBusiness.Types.DisassociateContactFromAddressBookResponse, AWSError>;
   /**
-   * Disassociates a device from its current room. The device continues to be connected to the Wi-Fi network and is still registered to the account. The device settings and skills are removed from the room.
+   * Disassociates a contact from a given address book.
    */
-  disassociateDeviceFromRoom(params: AlexaForBusiness.Types.DisassociateDeviceFromRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateDeviceFromRoomResponse) => void): Request<AlexaForBusiness.Types.DisassociateDeviceFromRoomResponse, AWSError>;
+  disassociateContactFromAddressBook(params: AlexaForBusiness.Types.DisassociateContactFromAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateContactFromAddressBookResponse) => void): Request<AlexaForBusiness.Types.DisassociateContactFromAddressBookResponse, AWSError>;
   /**
    * Disassociates a device from its current room. The device continues to be connected to the Wi-Fi network and is still registered to the account. The device settings and skills are removed from the room.
    */
   disassociateDeviceFromRoom(callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateDeviceFromRoomResponse) => void): Request<AlexaForBusiness.Types.DisassociateDeviceFromRoomResponse, AWSError>;
   /**
-   * Disassociates a skill from a skill group.
+   * Disassociates a device from its current room. The device continues to be connected to the Wi-Fi network and is still registered to the account. The device settings and skills are removed from the room.
    */
-  disassociateSkillFromSkillGroup(params: AlexaForBusiness.Types.DisassociateSkillFromSkillGroupRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateSkillFromSkillGroupResponse) => void): Request<AlexaForBusiness.Types.DisassociateSkillFromSkillGroupResponse, AWSError>;
+  disassociateDeviceFromRoom(params: AlexaForBusiness.Types.DisassociateDeviceFromRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateDeviceFromRoomResponse) => void): Request<AlexaForBusiness.Types.DisassociateDeviceFromRoomResponse, AWSError>;
   /**
    * Disassociates a skill from a skill group.
    */
   disassociateSkillFromSkillGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateSkillFromSkillGroupResponse) => void): Request<AlexaForBusiness.Types.DisassociateSkillFromSkillGroupResponse, AWSError>;
   /**
-   * Makes a private skill unavailable for enrolled users and prevents them from enabling it on their devices.
+   * Disassociates a skill from a skill group.
    */
-  disassociateSkillFromUsers(params: AlexaForBusiness.Types.DisassociateSkillFromUsersRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateSkillFromUsersResponse) => void): Request<AlexaForBusiness.Types.DisassociateSkillFromUsersResponse, AWSError>;
+  disassociateSkillFromSkillGroup(params: AlexaForBusiness.Types.DisassociateSkillFromSkillGroupRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateSkillFromSkillGroupResponse) => void): Request<AlexaForBusiness.Types.DisassociateSkillFromSkillGroupResponse, AWSError>;
   /**
    * Makes a private skill unavailable for enrolled users and prevents them from enabling it on their devices.
    */
   disassociateSkillFromUsers(callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateSkillFromUsersResponse) => void): Request<AlexaForBusiness.Types.DisassociateSkillFromUsersResponse, AWSError>;
   /**
-   * Disassociates a skill group from a specified room. This disables all skills in the skill group on all devices in the room.
+   * Makes a private skill unavailable for enrolled users and prevents them from enabling it on their devices.
    */
-  disassociateSkillGroupFromRoom(params: AlexaForBusiness.Types.DisassociateSkillGroupFromRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateSkillGroupFromRoomResponse) => void): Request<AlexaForBusiness.Types.DisassociateSkillGroupFromRoomResponse, AWSError>;
+  disassociateSkillFromUsers(params: AlexaForBusiness.Types.DisassociateSkillFromUsersRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateSkillFromUsersResponse) => void): Request<AlexaForBusiness.Types.DisassociateSkillFromUsersResponse, AWSError>;
   /**
    * Disassociates a skill group from a specified room. This disables all skills in the skill group on all devices in the room.
    */
   disassociateSkillGroupFromRoom(callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateSkillGroupFromRoomResponse) => void): Request<AlexaForBusiness.Types.DisassociateSkillGroupFromRoomResponse, AWSError>;
   /**
-   * Forgets smart home appliances associated to a room.
+   * Disassociates a skill group from a specified room. This disables all skills in the skill group on all devices in the room.
    */
-  forgetSmartHomeAppliances(params: AlexaForBusiness.Types.ForgetSmartHomeAppliancesRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ForgetSmartHomeAppliancesResponse) => void): Request<AlexaForBusiness.Types.ForgetSmartHomeAppliancesResponse, AWSError>;
+  disassociateSkillGroupFromRoom(params: AlexaForBusiness.Types.DisassociateSkillGroupFromRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DisassociateSkillGroupFromRoomResponse) => void): Request<AlexaForBusiness.Types.DisassociateSkillGroupFromRoomResponse, AWSError>;
   /**
    * Forgets smart home appliances associated to a room.
    */
   forgetSmartHomeAppliances(callback?: (err: AWSError, data: AlexaForBusiness.Types.ForgetSmartHomeAppliancesResponse) => void): Request<AlexaForBusiness.Types.ForgetSmartHomeAppliancesResponse, AWSError>;
   /**
-   * Gets address the book details by the address book ARN.
+   * Forgets smart home appliances associated to a room.
    */
-  getAddressBook(params: AlexaForBusiness.Types.GetAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetAddressBookResponse) => void): Request<AlexaForBusiness.Types.GetAddressBookResponse, AWSError>;
+  forgetSmartHomeAppliances(params: AlexaForBusiness.Types.ForgetSmartHomeAppliancesRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ForgetSmartHomeAppliancesResponse) => void): Request<AlexaForBusiness.Types.ForgetSmartHomeAppliancesResponse, AWSError>;
   /**
    * Gets address the book details by the address book ARN.
    */
   getAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetAddressBookResponse) => void): Request<AlexaForBusiness.Types.GetAddressBookResponse, AWSError>;
   /**
-   * Retrieves the existing conference preferences.
+   * Gets address the book details by the address book ARN.
    */
-  getConferencePreference(params: AlexaForBusiness.Types.GetConferencePreferenceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetConferencePreferenceResponse) => void): Request<AlexaForBusiness.Types.GetConferencePreferenceResponse, AWSError>;
+  getAddressBook(params: AlexaForBusiness.Types.GetAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetAddressBookResponse) => void): Request<AlexaForBusiness.Types.GetAddressBookResponse, AWSError>;
   /**
    * Retrieves the existing conference preferences.
    */
   getConferencePreference(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetConferencePreferenceResponse) => void): Request<AlexaForBusiness.Types.GetConferencePreferenceResponse, AWSError>;
   /**
-   * Gets details about a specific conference provider.
+   * Retrieves the existing conference preferences.
    */
-  getConferenceProvider(params: AlexaForBusiness.Types.GetConferenceProviderRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.GetConferenceProviderResponse, AWSError>;
+  getConferencePreference(params: AlexaForBusiness.Types.GetConferencePreferenceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetConferencePreferenceResponse) => void): Request<AlexaForBusiness.Types.GetConferencePreferenceResponse, AWSError>;
   /**
    * Gets details about a specific conference provider.
    */
   getConferenceProvider(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.GetConferenceProviderResponse, AWSError>;
   /**
-   * Gets the contact details by the contact ARN.
+   * Gets details about a specific conference provider.
    */
-  getContact(params: AlexaForBusiness.Types.GetContactRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetContactResponse) => void): Request<AlexaForBusiness.Types.GetContactResponse, AWSError>;
+  getConferenceProvider(params: AlexaForBusiness.Types.GetConferenceProviderRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.GetConferenceProviderResponse, AWSError>;
   /**
    * Gets the contact details by the contact ARN.
    */
   getContact(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetContactResponse) => void): Request<AlexaForBusiness.Types.GetContactResponse, AWSError>;
   /**
-   * Gets the details of a device by device ARN.
+   * Gets the contact details by the contact ARN.
    */
-  getDevice(params: AlexaForBusiness.Types.GetDeviceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetDeviceResponse) => void): Request<AlexaForBusiness.Types.GetDeviceResponse, AWSError>;
+  getContact(params: AlexaForBusiness.Types.GetContactRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetContactResponse) => void): Request<AlexaForBusiness.Types.GetContactResponse, AWSError>;
   /**
    * Gets the details of a device by device ARN.
    */
   getDevice(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetDeviceResponse) => void): Request<AlexaForBusiness.Types.GetDeviceResponse, AWSError>;
   /**
-   * Gets the details of a room profile by profile ARN.
+   * Gets the details of a device by device ARN.
    */
-  getProfile(params: AlexaForBusiness.Types.GetProfileRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetProfileResponse) => void): Request<AlexaForBusiness.Types.GetProfileResponse, AWSError>;
+  getDevice(params: AlexaForBusiness.Types.GetDeviceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetDeviceResponse) => void): Request<AlexaForBusiness.Types.GetDeviceResponse, AWSError>;
   /**
    * Gets the details of a room profile by profile ARN.
    */
   getProfile(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetProfileResponse) => void): Request<AlexaForBusiness.Types.GetProfileResponse, AWSError>;
   /**
-   * Gets room details by room ARN.
+   * Gets the details of a room profile by profile ARN.
    */
-  getRoom(params: AlexaForBusiness.Types.GetRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetRoomResponse) => void): Request<AlexaForBusiness.Types.GetRoomResponse, AWSError>;
+  getProfile(params: AlexaForBusiness.Types.GetProfileRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetProfileResponse) => void): Request<AlexaForBusiness.Types.GetProfileResponse, AWSError>;
   /**
    * Gets room details by room ARN.
    */
   getRoom(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetRoomResponse) => void): Request<AlexaForBusiness.Types.GetRoomResponse, AWSError>;
   /**
-   * Gets room skill parameter details by room, skill, and parameter key ARN.
+   * Gets room details by room ARN.
    */
-  getRoomSkillParameter(params: AlexaForBusiness.Types.GetRoomSkillParameterRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetRoomSkillParameterResponse) => void): Request<AlexaForBusiness.Types.GetRoomSkillParameterResponse, AWSError>;
+  getRoom(params: AlexaForBusiness.Types.GetRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetRoomResponse) => void): Request<AlexaForBusiness.Types.GetRoomResponse, AWSError>;
   /**
    * Gets room skill parameter details by room, skill, and parameter key ARN.
    */
   getRoomSkillParameter(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetRoomSkillParameterResponse) => void): Request<AlexaForBusiness.Types.GetRoomSkillParameterResponse, AWSError>;
   /**
-   * Gets skill group details by skill group ARN.
+   * Gets room skill parameter details by room, skill, and parameter key ARN.
    */
-  getSkillGroup(params: AlexaForBusiness.Types.GetSkillGroupRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetSkillGroupResponse) => void): Request<AlexaForBusiness.Types.GetSkillGroupResponse, AWSError>;
+  getRoomSkillParameter(params: AlexaForBusiness.Types.GetRoomSkillParameterRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetRoomSkillParameterResponse) => void): Request<AlexaForBusiness.Types.GetRoomSkillParameterResponse, AWSError>;
   /**
    * Gets skill group details by skill group ARN.
    */
   getSkillGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetSkillGroupResponse) => void): Request<AlexaForBusiness.Types.GetSkillGroupResponse, AWSError>;
   /**
-   * Lists the details of the schedules that a user configured.
+   * Gets skill group details by skill group ARN.
    */
-  listBusinessReportSchedules(params: AlexaForBusiness.Types.ListBusinessReportSchedulesRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListBusinessReportSchedulesResponse) => void): Request<AlexaForBusiness.Types.ListBusinessReportSchedulesResponse, AWSError>;
+  getSkillGroup(params: AlexaForBusiness.Types.GetSkillGroupRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetSkillGroupResponse) => void): Request<AlexaForBusiness.Types.GetSkillGroupResponse, AWSError>;
   /**
    * Lists the details of the schedules that a user configured.
    */
   listBusinessReportSchedules(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListBusinessReportSchedulesResponse) => void): Request<AlexaForBusiness.Types.ListBusinessReportSchedulesResponse, AWSError>;
   /**
-   * Lists conference providers under a specific AWS account.
+   * Lists the details of the schedules that a user configured.
    */
-  listConferenceProviders(params: AlexaForBusiness.Types.ListConferenceProvidersRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListConferenceProvidersResponse) => void): Request<AlexaForBusiness.Types.ListConferenceProvidersResponse, AWSError>;
+  listBusinessReportSchedules(params: AlexaForBusiness.Types.ListBusinessReportSchedulesRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListBusinessReportSchedulesResponse) => void): Request<AlexaForBusiness.Types.ListBusinessReportSchedulesResponse, AWSError>;
   /**
    * Lists conference providers under a specific AWS account.
    */
   listConferenceProviders(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListConferenceProvidersResponse) => void): Request<AlexaForBusiness.Types.ListConferenceProvidersResponse, AWSError>;
   /**
-   * Lists the device event history, including device connection status, for up to 30 days.
+   * Lists conference providers under a specific AWS account.
    */
-  listDeviceEvents(params: AlexaForBusiness.Types.ListDeviceEventsRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListDeviceEventsResponse) => void): Request<AlexaForBusiness.Types.ListDeviceEventsResponse, AWSError>;
+  listConferenceProviders(params: AlexaForBusiness.Types.ListConferenceProvidersRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListConferenceProvidersResponse) => void): Request<AlexaForBusiness.Types.ListConferenceProvidersResponse, AWSError>;
   /**
    * Lists the device event history, including device connection status, for up to 30 days.
    */
   listDeviceEvents(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListDeviceEventsResponse) => void): Request<AlexaForBusiness.Types.ListDeviceEventsResponse, AWSError>;
   /**
-   * Lists all enabled skills in a specific skill group.
+   * Lists the device event history, including device connection status, for up to 30 days.
    */
-  listSkills(params: AlexaForBusiness.Types.ListSkillsRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSkillsResponse) => void): Request<AlexaForBusiness.Types.ListSkillsResponse, AWSError>;
+  listDeviceEvents(params: AlexaForBusiness.Types.ListDeviceEventsRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListDeviceEventsResponse) => void): Request<AlexaForBusiness.Types.ListDeviceEventsResponse, AWSError>;
   /**
    * Lists all enabled skills in a specific skill group.
    */
   listSkills(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSkillsResponse) => void): Request<AlexaForBusiness.Types.ListSkillsResponse, AWSError>;
   /**
-   * Lists all categories in the Alexa skill store.
+   * Lists all enabled skills in a specific skill group.
    */
-  listSkillsStoreCategories(params: AlexaForBusiness.Types.ListSkillsStoreCategoriesRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSkillsStoreCategoriesResponse) => void): Request<AlexaForBusiness.Types.ListSkillsStoreCategoriesResponse, AWSError>;
+  listSkills(params: AlexaForBusiness.Types.ListSkillsRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSkillsResponse) => void): Request<AlexaForBusiness.Types.ListSkillsResponse, AWSError>;
   /**
    * Lists all categories in the Alexa skill store.
    */
   listSkillsStoreCategories(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSkillsStoreCategoriesResponse) => void): Request<AlexaForBusiness.Types.ListSkillsStoreCategoriesResponse, AWSError>;
   /**
-   * Lists all skills in the Alexa skill store by category.
+   * Lists all categories in the Alexa skill store.
    */
-  listSkillsStoreSkillsByCategory(params: AlexaForBusiness.Types.ListSkillsStoreSkillsByCategoryRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSkillsStoreSkillsByCategoryResponse) => void): Request<AlexaForBusiness.Types.ListSkillsStoreSkillsByCategoryResponse, AWSError>;
+  listSkillsStoreCategories(params: AlexaForBusiness.Types.ListSkillsStoreCategoriesRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSkillsStoreCategoriesResponse) => void): Request<AlexaForBusiness.Types.ListSkillsStoreCategoriesResponse, AWSError>;
   /**
    * Lists all skills in the Alexa skill store by category.
    */
   listSkillsStoreSkillsByCategory(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSkillsStoreSkillsByCategoryResponse) => void): Request<AlexaForBusiness.Types.ListSkillsStoreSkillsByCategoryResponse, AWSError>;
   /**
-   * Lists all of the smart home appliances associated with a room.
+   * Lists all skills in the Alexa skill store by category.
    */
-  listSmartHomeAppliances(params: AlexaForBusiness.Types.ListSmartHomeAppliancesRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSmartHomeAppliancesResponse) => void): Request<AlexaForBusiness.Types.ListSmartHomeAppliancesResponse, AWSError>;
+  listSkillsStoreSkillsByCategory(params: AlexaForBusiness.Types.ListSkillsStoreSkillsByCategoryRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSkillsStoreSkillsByCategoryResponse) => void): Request<AlexaForBusiness.Types.ListSkillsStoreSkillsByCategoryResponse, AWSError>;
   /**
    * Lists all of the smart home appliances associated with a room.
    */
   listSmartHomeAppliances(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSmartHomeAppliancesResponse) => void): Request<AlexaForBusiness.Types.ListSmartHomeAppliancesResponse, AWSError>;
   /**
-   * Lists all tags for the specified resource.
+   * Lists all of the smart home appliances associated with a room.
    */
-  listTags(params: AlexaForBusiness.Types.ListTagsRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListTagsResponse) => void): Request<AlexaForBusiness.Types.ListTagsResponse, AWSError>;
+  listSmartHomeAppliances(params: AlexaForBusiness.Types.ListSmartHomeAppliancesRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListSmartHomeAppliancesResponse) => void): Request<AlexaForBusiness.Types.ListSmartHomeAppliancesResponse, AWSError>;
   /**
    * Lists all tags for the specified resource.
    */
   listTags(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListTagsResponse) => void): Request<AlexaForBusiness.Types.ListTagsResponse, AWSError>;
   /**
-   * Sets the conference preferences on a specific conference provider at the account level.
+   * Lists all tags for the specified resource.
    */
-  putConferencePreference(params: AlexaForBusiness.Types.PutConferencePreferenceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.PutConferencePreferenceResponse) => void): Request<AlexaForBusiness.Types.PutConferencePreferenceResponse, AWSError>;
+  listTags(params: AlexaForBusiness.Types.ListTagsRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListTagsResponse) => void): Request<AlexaForBusiness.Types.ListTagsResponse, AWSError>;
   /**
    * Sets the conference preferences on a specific conference provider at the account level.
    */
   putConferencePreference(callback?: (err: AWSError, data: AlexaForBusiness.Types.PutConferencePreferenceResponse) => void): Request<AlexaForBusiness.Types.PutConferencePreferenceResponse, AWSError>;
   /**
-   * Updates room skill parameter details by room, skill, and parameter key ID. Not all skills have a room skill parameter.
+   * Sets the conference preferences on a specific conference provider at the account level.
    */
-  putRoomSkillParameter(params: AlexaForBusiness.Types.PutRoomSkillParameterRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.PutRoomSkillParameterResponse) => void): Request<AlexaForBusiness.Types.PutRoomSkillParameterResponse, AWSError>;
+  putConferencePreference(params: AlexaForBusiness.Types.PutConferencePreferenceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.PutConferencePreferenceResponse) => void): Request<AlexaForBusiness.Types.PutConferencePreferenceResponse, AWSError>;
   /**
    * Updates room skill parameter details by room, skill, and parameter key ID. Not all skills have a room skill parameter.
    */
   putRoomSkillParameter(callback?: (err: AWSError, data: AlexaForBusiness.Types.PutRoomSkillParameterResponse) => void): Request<AlexaForBusiness.Types.PutRoomSkillParameterResponse, AWSError>;
   /**
-   * Links a user's account to a third-party skill provider. If this API operation is called by an assumed IAM role, the skill being linked must be a private skill. Also, the skill must be owned by the AWS account that assumed the IAM role.
+   * Updates room skill parameter details by room, skill, and parameter key ID. Not all skills have a room skill parameter.
    */
-  putSkillAuthorization(params: AlexaForBusiness.Types.PutSkillAuthorizationRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.PutSkillAuthorizationResponse) => void): Request<AlexaForBusiness.Types.PutSkillAuthorizationResponse, AWSError>;
+  putRoomSkillParameter(params: AlexaForBusiness.Types.PutRoomSkillParameterRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.PutRoomSkillParameterResponse) => void): Request<AlexaForBusiness.Types.PutRoomSkillParameterResponse, AWSError>;
   /**
    * Links a user's account to a third-party skill provider. If this API operation is called by an assumed IAM role, the skill being linked must be a private skill. Also, the skill must be owned by the AWS account that assumed the IAM role.
    */
   putSkillAuthorization(callback?: (err: AWSError, data: AlexaForBusiness.Types.PutSkillAuthorizationResponse) => void): Request<AlexaForBusiness.Types.PutSkillAuthorizationResponse, AWSError>;
   /**
-   * Registers an Alexa-enabled device built by an Original Equipment Manufacturer (OEM) using Alexa Voice Service (AVS).
+   * Links a user's account to a third-party skill provider. If this API operation is called by an assumed IAM role, the skill being linked must be a private skill. Also, the skill must be owned by the AWS account that assumed the IAM role.
    */
-  registerAVSDevice(params: AlexaForBusiness.Types.RegisterAVSDeviceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.RegisterAVSDeviceResponse) => void): Request<AlexaForBusiness.Types.RegisterAVSDeviceResponse, AWSError>;
+  putSkillAuthorization(params: AlexaForBusiness.Types.PutSkillAuthorizationRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.PutSkillAuthorizationResponse) => void): Request<AlexaForBusiness.Types.PutSkillAuthorizationResponse, AWSError>;
   /**
    * Registers an Alexa-enabled device built by an Original Equipment Manufacturer (OEM) using Alexa Voice Service (AVS).
    */
   registerAVSDevice(callback?: (err: AWSError, data: AlexaForBusiness.Types.RegisterAVSDeviceResponse) => void): Request<AlexaForBusiness.Types.RegisterAVSDeviceResponse, AWSError>;
   /**
-   * Disassociates a skill from the organization under a user's AWS account. If the skill is a private skill, it moves to an AcceptStatus of PENDING. Any private or public skill that is rejected can be added later by calling the ApproveSkill API. 
+   * Registers an Alexa-enabled device built by an Original Equipment Manufacturer (OEM) using Alexa Voice Service (AVS).
    */
-  rejectSkill(params: AlexaForBusiness.Types.RejectSkillRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.RejectSkillResponse) => void): Request<AlexaForBusiness.Types.RejectSkillResponse, AWSError>;
+  registerAVSDevice(params: AlexaForBusiness.Types.RegisterAVSDeviceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.RegisterAVSDeviceResponse) => void): Request<AlexaForBusiness.Types.RegisterAVSDeviceResponse, AWSError>;
   /**
    * Disassociates a skill from the organization under a user's AWS account. If the skill is a private skill, it moves to an AcceptStatus of PENDING. Any private or public skill that is rejected can be added later by calling the ApproveSkill API. 
    */
   rejectSkill(callback?: (err: AWSError, data: AlexaForBusiness.Types.RejectSkillResponse) => void): Request<AlexaForBusiness.Types.RejectSkillResponse, AWSError>;
   /**
-   * Determines the details for the room from which a skill request was invoked. This operation is used by skill developers.
+   * Disassociates a skill from the organization under a user's AWS account. If the skill is a private skill, it moves to an AcceptStatus of PENDING. Any private or public skill that is rejected can be added later by calling the ApproveSkill API. 
    */
-  resolveRoom(params: AlexaForBusiness.Types.ResolveRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ResolveRoomResponse) => void): Request<AlexaForBusiness.Types.ResolveRoomResponse, AWSError>;
+  rejectSkill(params: AlexaForBusiness.Types.RejectSkillRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.RejectSkillResponse) => void): Request<AlexaForBusiness.Types.RejectSkillResponse, AWSError>;
   /**
    * Determines the details for the room from which a skill request was invoked. This operation is used by skill developers.
    */
   resolveRoom(callback?: (err: AWSError, data: AlexaForBusiness.Types.ResolveRoomResponse) => void): Request<AlexaForBusiness.Types.ResolveRoomResponse, AWSError>;
   /**
-   * Revokes an invitation and invalidates the enrollment URL.
+   * Determines the details for the room from which a skill request was invoked. This operation is used by skill developers.
    */
-  revokeInvitation(params: AlexaForBusiness.Types.RevokeInvitationRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.RevokeInvitationResponse) => void): Request<AlexaForBusiness.Types.RevokeInvitationResponse, AWSError>;
+  resolveRoom(params: AlexaForBusiness.Types.ResolveRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ResolveRoomResponse) => void): Request<AlexaForBusiness.Types.ResolveRoomResponse, AWSError>;
   /**
    * Revokes an invitation and invalidates the enrollment URL.
    */
   revokeInvitation(callback?: (err: AWSError, data: AlexaForBusiness.Types.RevokeInvitationResponse) => void): Request<AlexaForBusiness.Types.RevokeInvitationResponse, AWSError>;
   /**
-   * Searches address books and lists the ones that meet a set of filter and sort criteria.
+   * Revokes an invitation and invalidates the enrollment URL.
    */
-  searchAddressBooks(params: AlexaForBusiness.Types.SearchAddressBooksRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchAddressBooksResponse) => void): Request<AlexaForBusiness.Types.SearchAddressBooksResponse, AWSError>;
+  revokeInvitation(params: AlexaForBusiness.Types.RevokeInvitationRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.RevokeInvitationResponse) => void): Request<AlexaForBusiness.Types.RevokeInvitationResponse, AWSError>;
   /**
    * Searches address books and lists the ones that meet a set of filter and sort criteria.
    */
   searchAddressBooks(callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchAddressBooksResponse) => void): Request<AlexaForBusiness.Types.SearchAddressBooksResponse, AWSError>;
   /**
-   * Searches contacts and lists the ones that meet a set of filter and sort criteria.
+   * Searches address books and lists the ones that meet a set of filter and sort criteria.
    */
-  searchContacts(params: AlexaForBusiness.Types.SearchContactsRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchContactsResponse) => void): Request<AlexaForBusiness.Types.SearchContactsResponse, AWSError>;
+  searchAddressBooks(params: AlexaForBusiness.Types.SearchAddressBooksRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchAddressBooksResponse) => void): Request<AlexaForBusiness.Types.SearchAddressBooksResponse, AWSError>;
   /**
    * Searches contacts and lists the ones that meet a set of filter and sort criteria.
    */
   searchContacts(callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchContactsResponse) => void): Request<AlexaForBusiness.Types.SearchContactsResponse, AWSError>;
   /**
-   * Searches devices and lists the ones that meet a set of filter criteria.
+   * Searches contacts and lists the ones that meet a set of filter and sort criteria.
    */
-  searchDevices(params: AlexaForBusiness.Types.SearchDevicesRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchDevicesResponse) => void): Request<AlexaForBusiness.Types.SearchDevicesResponse, AWSError>;
+  searchContacts(params: AlexaForBusiness.Types.SearchContactsRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchContactsResponse) => void): Request<AlexaForBusiness.Types.SearchContactsResponse, AWSError>;
   /**
    * Searches devices and lists the ones that meet a set of filter criteria.
    */
   searchDevices(callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchDevicesResponse) => void): Request<AlexaForBusiness.Types.SearchDevicesResponse, AWSError>;
   /**
-   * Searches room profiles and lists the ones that meet a set of filter criteria.
+   * Searches devices and lists the ones that meet a set of filter criteria.
    */
-  searchProfiles(params: AlexaForBusiness.Types.SearchProfilesRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchProfilesResponse) => void): Request<AlexaForBusiness.Types.SearchProfilesResponse, AWSError>;
+  searchDevices(params: AlexaForBusiness.Types.SearchDevicesRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchDevicesResponse) => void): Request<AlexaForBusiness.Types.SearchDevicesResponse, AWSError>;
   /**
    * Searches room profiles and lists the ones that meet a set of filter criteria.
    */
   searchProfiles(callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchProfilesResponse) => void): Request<AlexaForBusiness.Types.SearchProfilesResponse, AWSError>;
   /**
-   * Searches rooms and lists the ones that meet a set of filter and sort criteria.
+   * Searches room profiles and lists the ones that meet a set of filter criteria.
    */
-  searchRooms(params: AlexaForBusiness.Types.SearchRoomsRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchRoomsResponse) => void): Request<AlexaForBusiness.Types.SearchRoomsResponse, AWSError>;
+  searchProfiles(params: AlexaForBusiness.Types.SearchProfilesRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchProfilesResponse) => void): Request<AlexaForBusiness.Types.SearchProfilesResponse, AWSError>;
   /**
    * Searches rooms and lists the ones that meet a set of filter and sort criteria.
    */
   searchRooms(callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchRoomsResponse) => void): Request<AlexaForBusiness.Types.SearchRoomsResponse, AWSError>;
   /**
-   * Searches skill groups and lists the ones that meet a set of filter and sort criteria.
+   * Searches rooms and lists the ones that meet a set of filter and sort criteria.
    */
-  searchSkillGroups(params: AlexaForBusiness.Types.SearchSkillGroupsRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchSkillGroupsResponse) => void): Request<AlexaForBusiness.Types.SearchSkillGroupsResponse, AWSError>;
+  searchRooms(params: AlexaForBusiness.Types.SearchRoomsRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchRoomsResponse) => void): Request<AlexaForBusiness.Types.SearchRoomsResponse, AWSError>;
   /**
    * Searches skill groups and lists the ones that meet a set of filter and sort criteria.
    */
   searchSkillGroups(callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchSkillGroupsResponse) => void): Request<AlexaForBusiness.Types.SearchSkillGroupsResponse, AWSError>;
   /**
-   * Searches users and lists the ones that meet a set of filter and sort criteria.
+   * Searches skill groups and lists the ones that meet a set of filter and sort criteria.
    */
-  searchUsers(params: AlexaForBusiness.Types.SearchUsersRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchUsersResponse) => void): Request<AlexaForBusiness.Types.SearchUsersResponse, AWSError>;
+  searchSkillGroups(params: AlexaForBusiness.Types.SearchSkillGroupsRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchSkillGroupsResponse) => void): Request<AlexaForBusiness.Types.SearchSkillGroupsResponse, AWSError>;
   /**
    * Searches users and lists the ones that meet a set of filter and sort criteria.
    */
   searchUsers(callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchUsersResponse) => void): Request<AlexaForBusiness.Types.SearchUsersResponse, AWSError>;
   /**
-   * Sends an enrollment invitation email with a URL to a user. The URL is valid for 72 hours or until you call this operation again, whichever comes first. 
+   * Searches users and lists the ones that meet a set of filter and sort criteria.
    */
-  sendInvitation(params: AlexaForBusiness.Types.SendInvitationRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SendInvitationResponse) => void): Request<AlexaForBusiness.Types.SendInvitationResponse, AWSError>;
+  searchUsers(params: AlexaForBusiness.Types.SearchUsersRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchUsersResponse) => void): Request<AlexaForBusiness.Types.SearchUsersResponse, AWSError>;
   /**
    * Sends an enrollment invitation email with a URL to a user. The URL is valid for 72 hours or until you call this operation again, whichever comes first. 
    */
   sendInvitation(callback?: (err: AWSError, data: AlexaForBusiness.Types.SendInvitationResponse) => void): Request<AlexaForBusiness.Types.SendInvitationResponse, AWSError>;
   /**
-   * Resets a device and its account to the known default settings, by clearing all information and settings set by previous users.
+   * Sends an enrollment invitation email with a URL to a user. The URL is valid for 72 hours or until you call this operation again, whichever comes first. 
    */
-  startDeviceSync(params: AlexaForBusiness.Types.StartDeviceSyncRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.StartDeviceSyncResponse) => void): Request<AlexaForBusiness.Types.StartDeviceSyncResponse, AWSError>;
+  sendInvitation(params: AlexaForBusiness.Types.SendInvitationRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SendInvitationResponse) => void): Request<AlexaForBusiness.Types.SendInvitationResponse, AWSError>;
   /**
    * Resets a device and its account to the known default settings, by clearing all information and settings set by previous users.
    */
   startDeviceSync(callback?: (err: AWSError, data: AlexaForBusiness.Types.StartDeviceSyncResponse) => void): Request<AlexaForBusiness.Types.StartDeviceSyncResponse, AWSError>;
   /**
-   * Initiates the discovery of any smart home appliances associated with the room.
+   * Resets a device and its account to the known default settings, by clearing all information and settings set by previous users.
    */
-  startSmartHomeApplianceDiscovery(params: AlexaForBusiness.Types.StartSmartHomeApplianceDiscoveryRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.StartSmartHomeApplianceDiscoveryResponse) => void): Request<AlexaForBusiness.Types.StartSmartHomeApplianceDiscoveryResponse, AWSError>;
+  startDeviceSync(params: AlexaForBusiness.Types.StartDeviceSyncRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.StartDeviceSyncResponse) => void): Request<AlexaForBusiness.Types.StartDeviceSyncResponse, AWSError>;
   /**
    * Initiates the discovery of any smart home appliances associated with the room.
    */
   startSmartHomeApplianceDiscovery(callback?: (err: AWSError, data: AlexaForBusiness.Types.StartSmartHomeApplianceDiscoveryResponse) => void): Request<AlexaForBusiness.Types.StartSmartHomeApplianceDiscoveryResponse, AWSError>;
   /**
-   * Adds metadata tags to a specified resource.
+   * Initiates the discovery of any smart home appliances associated with the room.
    */
-  tagResource(params: AlexaForBusiness.Types.TagResourceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.TagResourceResponse) => void): Request<AlexaForBusiness.Types.TagResourceResponse, AWSError>;
+  startSmartHomeApplianceDiscovery(params: AlexaForBusiness.Types.StartSmartHomeApplianceDiscoveryRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.StartSmartHomeApplianceDiscoveryResponse) => void): Request<AlexaForBusiness.Types.StartSmartHomeApplianceDiscoveryResponse, AWSError>;
   /**
    * Adds metadata tags to a specified resource.
    */
   tagResource(callback?: (err: AWSError, data: AlexaForBusiness.Types.TagResourceResponse) => void): Request<AlexaForBusiness.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes metadata tags from a specified resource.
+   * Adds metadata tags to a specified resource.
    */
-  untagResource(params: AlexaForBusiness.Types.UntagResourceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UntagResourceResponse) => void): Request<AlexaForBusiness.Types.UntagResourceResponse, AWSError>;
+  tagResource(params: AlexaForBusiness.Types.TagResourceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.TagResourceResponse) => void): Request<AlexaForBusiness.Types.TagResourceResponse, AWSError>;
   /**
    * Removes metadata tags from a specified resource.
    */
   untagResource(callback?: (err: AWSError, data: AlexaForBusiness.Types.UntagResourceResponse) => void): Request<AlexaForBusiness.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates address book details by the address book ARN.
+   * Removes metadata tags from a specified resource.
    */
-  updateAddressBook(params: AlexaForBusiness.Types.UpdateAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateAddressBookResponse) => void): Request<AlexaForBusiness.Types.UpdateAddressBookResponse, AWSError>;
+  untagResource(params: AlexaForBusiness.Types.UntagResourceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UntagResourceResponse) => void): Request<AlexaForBusiness.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates address book details by the address book ARN.
    */
   updateAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateAddressBookResponse) => void): Request<AlexaForBusiness.Types.UpdateAddressBookResponse, AWSError>;
   /**
-   * Updates the configuration of the report delivery schedule with the specified schedule ARN.
+   * Updates address book details by the address book ARN.
    */
-  updateBusinessReportSchedule(params: AlexaForBusiness.Types.UpdateBusinessReportScheduleRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateBusinessReportScheduleResponse) => void): Request<AlexaForBusiness.Types.UpdateBusinessReportScheduleResponse, AWSError>;
+  updateAddressBook(params: AlexaForBusiness.Types.UpdateAddressBookRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateAddressBookResponse) => void): Request<AlexaForBusiness.Types.UpdateAddressBookResponse, AWSError>;
   /**
    * Updates the configuration of the report delivery schedule with the specified schedule ARN.
    */
   updateBusinessReportSchedule(callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateBusinessReportScheduleResponse) => void): Request<AlexaForBusiness.Types.UpdateBusinessReportScheduleResponse, AWSError>;
   /**
-   * Updates an existing conference provider's settings.
+   * Updates the configuration of the report delivery schedule with the specified schedule ARN.
    */
-  updateConferenceProvider(params: AlexaForBusiness.Types.UpdateConferenceProviderRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.UpdateConferenceProviderResponse, AWSError>;
+  updateBusinessReportSchedule(params: AlexaForBusiness.Types.UpdateBusinessReportScheduleRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateBusinessReportScheduleResponse) => void): Request<AlexaForBusiness.Types.UpdateBusinessReportScheduleResponse, AWSError>;
   /**
    * Updates an existing conference provider's settings.
    */
   updateConferenceProvider(callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.UpdateConferenceProviderResponse, AWSError>;
   /**
-   * Updates the contact details by the contact ARN.
+   * Updates an existing conference provider's settings.
    */
-  updateContact(params: AlexaForBusiness.Types.UpdateContactRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateContactResponse) => void): Request<AlexaForBusiness.Types.UpdateContactResponse, AWSError>;
+  updateConferenceProvider(params: AlexaForBusiness.Types.UpdateConferenceProviderRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateConferenceProviderResponse) => void): Request<AlexaForBusiness.Types.UpdateConferenceProviderResponse, AWSError>;
   /**
    * Updates the contact details by the contact ARN.
    */
   updateContact(callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateContactResponse) => void): Request<AlexaForBusiness.Types.UpdateContactResponse, AWSError>;
   /**
-   * Updates the device name by device ARN.
+   * Updates the contact details by the contact ARN.
    */
-  updateDevice(params: AlexaForBusiness.Types.UpdateDeviceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateDeviceResponse) => void): Request<AlexaForBusiness.Types.UpdateDeviceResponse, AWSError>;
+  updateContact(params: AlexaForBusiness.Types.UpdateContactRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateContactResponse) => void): Request<AlexaForBusiness.Types.UpdateContactResponse, AWSError>;
   /**
    * Updates the device name by device ARN.
    */
   updateDevice(callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateDeviceResponse) => void): Request<AlexaForBusiness.Types.UpdateDeviceResponse, AWSError>;
   /**
-   * Updates an existing room profile by room profile ARN.
+   * Updates the device name by device ARN.
    */
-  updateProfile(params: AlexaForBusiness.Types.UpdateProfileRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateProfileResponse) => void): Request<AlexaForBusiness.Types.UpdateProfileResponse, AWSError>;
+  updateDevice(params: AlexaForBusiness.Types.UpdateDeviceRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateDeviceResponse) => void): Request<AlexaForBusiness.Types.UpdateDeviceResponse, AWSError>;
   /**
    * Updates an existing room profile by room profile ARN.
    */
   updateProfile(callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateProfileResponse) => void): Request<AlexaForBusiness.Types.UpdateProfileResponse, AWSError>;
   /**
-   * Updates room details by room ARN.
+   * Updates an existing room profile by room profile ARN.
    */
-  updateRoom(params: AlexaForBusiness.Types.UpdateRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateRoomResponse) => void): Request<AlexaForBusiness.Types.UpdateRoomResponse, AWSError>;
+  updateProfile(params: AlexaForBusiness.Types.UpdateProfileRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateProfileResponse) => void): Request<AlexaForBusiness.Types.UpdateProfileResponse, AWSError>;
   /**
    * Updates room details by room ARN.
    */
   updateRoom(callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateRoomResponse) => void): Request<AlexaForBusiness.Types.UpdateRoomResponse, AWSError>;
   /**
-   * Updates skill group details by skill group ARN.
+   * Updates room details by room ARN.
    */
-  updateSkillGroup(params: AlexaForBusiness.Types.UpdateSkillGroupRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateSkillGroupResponse) => void): Request<AlexaForBusiness.Types.UpdateSkillGroupResponse, AWSError>;
+  updateRoom(params: AlexaForBusiness.Types.UpdateRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateRoomResponse) => void): Request<AlexaForBusiness.Types.UpdateRoomResponse, AWSError>;
   /**
    * Updates skill group details by skill group ARN.
    */
   updateSkillGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateSkillGroupResponse) => void): Request<AlexaForBusiness.Types.UpdateSkillGroupResponse, AWSError>;
+  /**
+   * Updates skill group details by skill group ARN.
+   */
+  updateSkillGroup(params: AlexaForBusiness.Types.UpdateSkillGroupRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateSkillGroupResponse) => void): Request<AlexaForBusiness.Types.UpdateSkillGroupResponse, AWSError>;
 }
 declare namespace AlexaForBusiness {
   export type Address = string;

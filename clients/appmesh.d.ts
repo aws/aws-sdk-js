@@ -17,25 +17,14 @@ declare class AppMesh extends Service {
          After you create your service mesh, you can create virtual nodes, virtual routers, and
          routes to distribute traffic between the applications in your mesh.
    */
-  createMesh(params: AppMesh.Types.CreateMeshInput, callback?: (err: AWSError, data: AppMesh.Types.CreateMeshOutput) => void): Request<AppMesh.Types.CreateMeshOutput, AWSError>;
+  createMesh(callback?: (err: AWSError, data: AppMesh.Types.CreateMeshOutput) => void): Request<AppMesh.Types.CreateMeshOutput, AWSError>;
   /**
    * Creates a new service mesh. A service mesh is a logical boundary for network traffic
          between the services that reside within it.
          After you create your service mesh, you can create virtual nodes, virtual routers, and
          routes to distribute traffic between the applications in your mesh.
    */
-  createMesh(callback?: (err: AWSError, data: AppMesh.Types.CreateMeshOutput) => void): Request<AppMesh.Types.CreateMeshOutput, AWSError>;
-  /**
-   * Creates a new route that is associated with a virtual router.
-         You can use the prefix parameter in your route specification for path-based
-         routing of requests. For example, if your virtual router service name is
-            my-service.local, and you want the route to match requests to
-            my-service.local/metrics, then your prefix should be
-         /metrics.
-         If your route matches a request, you can distribute traffic to one or more target
-         virtual nodes with relative weighting.
-   */
-  createRoute(params: AppMesh.Types.CreateRouteInput, callback?: (err: AWSError, data: AppMesh.Types.CreateRouteOutput) => void): Request<AppMesh.Types.CreateRouteOutput, AWSError>;
+  createMesh(params: AppMesh.Types.CreateMeshInput, callback?: (err: AWSError, data: AppMesh.Types.CreateMeshOutput) => void): Request<AppMesh.Types.CreateMeshOutput, AWSError>;
   /**
    * Creates a new route that is associated with a virtual router.
          You can use the prefix parameter in your route specification for path-based
@@ -48,27 +37,16 @@ declare class AppMesh extends Service {
    */
   createRoute(callback?: (err: AWSError, data: AppMesh.Types.CreateRouteOutput) => void): Request<AppMesh.Types.CreateRouteOutput, AWSError>;
   /**
-   * Creates a new virtual node within a service mesh.
-         A virtual node acts as logical pointer to a particular task group, such as an Amazon ECS
-         service or a Kubernetes deployment. When you create a virtual node, you must specify the
-         DNS service discovery name for your task group.
-         Any inbound traffic that your virtual node expects should be specified as a
-            listener. Any outbound traffic that your virtual node expects to reach
-         should be specified as a backend.
-         The response metadata for your new virtual node contains the arn that is
-         associated with the virtual node. Set this value (either the full ARN or the truncated
-         resource name, for example, mesh/default/virtualNode/simpleapp, as the
-            APPMESH_VIRTUAL_NODE_NAME environment variable for your task group's Envoy
-         proxy container in your task definition or pod spec. This is then mapped to the
-            node.id and node.cluster Envoy parameters.
-         
-            If you require your Envoy stats or tracing to use a different name, you can override
-            the node.cluster value that is set by
-               APPMESH_VIRTUAL_NODE_NAME with the
-               APPMESH_VIRTUAL_NODE_CLUSTER environment variable.
-         
+   * Creates a new route that is associated with a virtual router.
+         You can use the prefix parameter in your route specification for path-based
+         routing of requests. For example, if your virtual router service name is
+            my-service.local, and you want the route to match requests to
+            my-service.local/metrics, then your prefix should be
+         /metrics.
+         If your route matches a request, you can distribute traffic to one or more target
+         virtual nodes with relative weighting.
    */
-  createVirtualNode(params: AppMesh.Types.CreateVirtualNodeInput, callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualNodeOutput) => void): Request<AppMesh.Types.CreateVirtualNodeOutput, AWSError>;
+  createRoute(params: AppMesh.Types.CreateRouteInput, callback?: (err: AWSError, data: AppMesh.Types.CreateRouteOutput) => void): Request<AppMesh.Types.CreateRouteOutput, AWSError>;
   /**
    * Creates a new virtual node within a service mesh.
          A virtual node acts as logical pointer to a particular task group, such as an Amazon ECS
@@ -92,12 +70,27 @@ declare class AppMesh extends Service {
    */
   createVirtualNode(callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualNodeOutput) => void): Request<AppMesh.Types.CreateVirtualNodeOutput, AWSError>;
   /**
-   * Creates a new virtual router within a service mesh.
-         Virtual routers handle traffic for one or more service names within your mesh. After you
-         create your virtual router, create and associate routes for your virtual router that direct
-         incoming requests to different virtual nodes.
+   * Creates a new virtual node within a service mesh.
+         A virtual node acts as logical pointer to a particular task group, such as an Amazon ECS
+         service or a Kubernetes deployment. When you create a virtual node, you must specify the
+         DNS service discovery name for your task group.
+         Any inbound traffic that your virtual node expects should be specified as a
+            listener. Any outbound traffic that your virtual node expects to reach
+         should be specified as a backend.
+         The response metadata for your new virtual node contains the arn that is
+         associated with the virtual node. Set this value (either the full ARN or the truncated
+         resource name, for example, mesh/default/virtualNode/simpleapp, as the
+            APPMESH_VIRTUAL_NODE_NAME environment variable for your task group's Envoy
+         proxy container in your task definition or pod spec. This is then mapped to the
+            node.id and node.cluster Envoy parameters.
+         
+            If you require your Envoy stats or tracing to use a different name, you can override
+            the node.cluster value that is set by
+               APPMESH_VIRTUAL_NODE_NAME with the
+               APPMESH_VIRTUAL_NODE_CLUSTER environment variable.
+         
    */
-  createVirtualRouter(params: AppMesh.Types.CreateVirtualRouterInput, callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualRouterOutput) => void): Request<AppMesh.Types.CreateVirtualRouterOutput, AWSError>;
+  createVirtualNode(params: AppMesh.Types.CreateVirtualNodeInput, callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualNodeOutput) => void): Request<AppMesh.Types.CreateVirtualNodeOutput, AWSError>;
   /**
    * Creates a new virtual router within a service mesh.
          Virtual routers handle traffic for one or more service names within your mesh. After you
@@ -106,11 +99,12 @@ declare class AppMesh extends Service {
    */
   createVirtualRouter(callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualRouterOutput) => void): Request<AppMesh.Types.CreateVirtualRouterOutput, AWSError>;
   /**
-   * Deletes an existing service mesh.
-         You must delete all resources (routes, virtual routers, virtual nodes) in the service
-         mesh before you can delete the mesh itself.
+   * Creates a new virtual router within a service mesh.
+         Virtual routers handle traffic for one or more service names within your mesh. After you
+         create your virtual router, create and associate routes for your virtual router that direct
+         incoming requests to different virtual nodes.
    */
-  deleteMesh(params: AppMesh.Types.DeleteMeshInput, callback?: (err: AWSError, data: AppMesh.Types.DeleteMeshOutput) => void): Request<AppMesh.Types.DeleteMeshOutput, AWSError>;
+  createVirtualRouter(params: AppMesh.Types.CreateVirtualRouterInput, callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualRouterOutput) => void): Request<AppMesh.Types.CreateVirtualRouterOutput, AWSError>;
   /**
    * Deletes an existing service mesh.
          You must delete all resources (routes, virtual routers, virtual nodes) in the service
@@ -118,27 +112,27 @@ declare class AppMesh extends Service {
    */
   deleteMesh(callback?: (err: AWSError, data: AppMesh.Types.DeleteMeshOutput) => void): Request<AppMesh.Types.DeleteMeshOutput, AWSError>;
   /**
-   * Deletes an existing route.
+   * Deletes an existing service mesh.
+         You must delete all resources (routes, virtual routers, virtual nodes) in the service
+         mesh before you can delete the mesh itself.
    */
-  deleteRoute(params: AppMesh.Types.DeleteRouteInput, callback?: (err: AWSError, data: AppMesh.Types.DeleteRouteOutput) => void): Request<AppMesh.Types.DeleteRouteOutput, AWSError>;
+  deleteMesh(params: AppMesh.Types.DeleteMeshInput, callback?: (err: AWSError, data: AppMesh.Types.DeleteMeshOutput) => void): Request<AppMesh.Types.DeleteMeshOutput, AWSError>;
   /**
    * Deletes an existing route.
    */
   deleteRoute(callback?: (err: AWSError, data: AppMesh.Types.DeleteRouteOutput) => void): Request<AppMesh.Types.DeleteRouteOutput, AWSError>;
   /**
-   * Deletes an existing virtual node.
+   * Deletes an existing route.
    */
-  deleteVirtualNode(params: AppMesh.Types.DeleteVirtualNodeInput, callback?: (err: AWSError, data: AppMesh.Types.DeleteVirtualNodeOutput) => void): Request<AppMesh.Types.DeleteVirtualNodeOutput, AWSError>;
+  deleteRoute(params: AppMesh.Types.DeleteRouteInput, callback?: (err: AWSError, data: AppMesh.Types.DeleteRouteOutput) => void): Request<AppMesh.Types.DeleteRouteOutput, AWSError>;
   /**
    * Deletes an existing virtual node.
    */
   deleteVirtualNode(callback?: (err: AWSError, data: AppMesh.Types.DeleteVirtualNodeOutput) => void): Request<AppMesh.Types.DeleteVirtualNodeOutput, AWSError>;
   /**
-   * Deletes an existing virtual router.
-         You must delete any routes associated with the virtual router before you can delete the
-         router itself.
+   * Deletes an existing virtual node.
    */
-  deleteVirtualRouter(params: AppMesh.Types.DeleteVirtualRouterInput, callback?: (err: AWSError, data: AppMesh.Types.DeleteVirtualRouterOutput) => void): Request<AppMesh.Types.DeleteVirtualRouterOutput, AWSError>;
+  deleteVirtualNode(params: AppMesh.Types.DeleteVirtualNodeInput, callback?: (err: AWSError, data: AppMesh.Types.DeleteVirtualNodeOutput) => void): Request<AppMesh.Types.DeleteVirtualNodeOutput, AWSError>;
   /**
    * Deletes an existing virtual router.
          You must delete any routes associated with the virtual router before you can delete the
@@ -146,93 +140,99 @@ declare class AppMesh extends Service {
    */
   deleteVirtualRouter(callback?: (err: AWSError, data: AppMesh.Types.DeleteVirtualRouterOutput) => void): Request<AppMesh.Types.DeleteVirtualRouterOutput, AWSError>;
   /**
-   * Describes an existing service mesh.
+   * Deletes an existing virtual router.
+         You must delete any routes associated with the virtual router before you can delete the
+         router itself.
    */
-  describeMesh(params: AppMesh.Types.DescribeMeshInput, callback?: (err: AWSError, data: AppMesh.Types.DescribeMeshOutput) => void): Request<AppMesh.Types.DescribeMeshOutput, AWSError>;
+  deleteVirtualRouter(params: AppMesh.Types.DeleteVirtualRouterInput, callback?: (err: AWSError, data: AppMesh.Types.DeleteVirtualRouterOutput) => void): Request<AppMesh.Types.DeleteVirtualRouterOutput, AWSError>;
   /**
    * Describes an existing service mesh.
    */
   describeMesh(callback?: (err: AWSError, data: AppMesh.Types.DescribeMeshOutput) => void): Request<AppMesh.Types.DescribeMeshOutput, AWSError>;
   /**
-   * Describes an existing route.
+   * Describes an existing service mesh.
    */
-  describeRoute(params: AppMesh.Types.DescribeRouteInput, callback?: (err: AWSError, data: AppMesh.Types.DescribeRouteOutput) => void): Request<AppMesh.Types.DescribeRouteOutput, AWSError>;
+  describeMesh(params: AppMesh.Types.DescribeMeshInput, callback?: (err: AWSError, data: AppMesh.Types.DescribeMeshOutput) => void): Request<AppMesh.Types.DescribeMeshOutput, AWSError>;
   /**
    * Describes an existing route.
    */
   describeRoute(callback?: (err: AWSError, data: AppMesh.Types.DescribeRouteOutput) => void): Request<AppMesh.Types.DescribeRouteOutput, AWSError>;
   /**
-   * Describes an existing virtual node.
+   * Describes an existing route.
    */
-  describeVirtualNode(params: AppMesh.Types.DescribeVirtualNodeInput, callback?: (err: AWSError, data: AppMesh.Types.DescribeVirtualNodeOutput) => void): Request<AppMesh.Types.DescribeVirtualNodeOutput, AWSError>;
+  describeRoute(params: AppMesh.Types.DescribeRouteInput, callback?: (err: AWSError, data: AppMesh.Types.DescribeRouteOutput) => void): Request<AppMesh.Types.DescribeRouteOutput, AWSError>;
   /**
    * Describes an existing virtual node.
    */
   describeVirtualNode(callback?: (err: AWSError, data: AppMesh.Types.DescribeVirtualNodeOutput) => void): Request<AppMesh.Types.DescribeVirtualNodeOutput, AWSError>;
   /**
-   * Describes an existing virtual router.
+   * Describes an existing virtual node.
    */
-  describeVirtualRouter(params: AppMesh.Types.DescribeVirtualRouterInput, callback?: (err: AWSError, data: AppMesh.Types.DescribeVirtualRouterOutput) => void): Request<AppMesh.Types.DescribeVirtualRouterOutput, AWSError>;
+  describeVirtualNode(params: AppMesh.Types.DescribeVirtualNodeInput, callback?: (err: AWSError, data: AppMesh.Types.DescribeVirtualNodeOutput) => void): Request<AppMesh.Types.DescribeVirtualNodeOutput, AWSError>;
   /**
    * Describes an existing virtual router.
    */
   describeVirtualRouter(callback?: (err: AWSError, data: AppMesh.Types.DescribeVirtualRouterOutput) => void): Request<AppMesh.Types.DescribeVirtualRouterOutput, AWSError>;
   /**
-   * Returns a list of existing service meshes.
+   * Describes an existing virtual router.
    */
-  listMeshes(params: AppMesh.Types.ListMeshesInput, callback?: (err: AWSError, data: AppMesh.Types.ListMeshesOutput) => void): Request<AppMesh.Types.ListMeshesOutput, AWSError>;
+  describeVirtualRouter(params: AppMesh.Types.DescribeVirtualRouterInput, callback?: (err: AWSError, data: AppMesh.Types.DescribeVirtualRouterOutput) => void): Request<AppMesh.Types.DescribeVirtualRouterOutput, AWSError>;
   /**
    * Returns a list of existing service meshes.
    */
   listMeshes(callback?: (err: AWSError, data: AppMesh.Types.ListMeshesOutput) => void): Request<AppMesh.Types.ListMeshesOutput, AWSError>;
   /**
-   * Returns a list of existing routes in a service mesh.
+   * Returns a list of existing service meshes.
    */
-  listRoutes(params: AppMesh.Types.ListRoutesInput, callback?: (err: AWSError, data: AppMesh.Types.ListRoutesOutput) => void): Request<AppMesh.Types.ListRoutesOutput, AWSError>;
+  listMeshes(params: AppMesh.Types.ListMeshesInput, callback?: (err: AWSError, data: AppMesh.Types.ListMeshesOutput) => void): Request<AppMesh.Types.ListMeshesOutput, AWSError>;
   /**
    * Returns a list of existing routes in a service mesh.
    */
   listRoutes(callback?: (err: AWSError, data: AppMesh.Types.ListRoutesOutput) => void): Request<AppMesh.Types.ListRoutesOutput, AWSError>;
   /**
-   * Returns a list of existing virtual nodes.
+   * Returns a list of existing routes in a service mesh.
    */
-  listVirtualNodes(params: AppMesh.Types.ListVirtualNodesInput, callback?: (err: AWSError, data: AppMesh.Types.ListVirtualNodesOutput) => void): Request<AppMesh.Types.ListVirtualNodesOutput, AWSError>;
+  listRoutes(params: AppMesh.Types.ListRoutesInput, callback?: (err: AWSError, data: AppMesh.Types.ListRoutesOutput) => void): Request<AppMesh.Types.ListRoutesOutput, AWSError>;
   /**
    * Returns a list of existing virtual nodes.
    */
   listVirtualNodes(callback?: (err: AWSError, data: AppMesh.Types.ListVirtualNodesOutput) => void): Request<AppMesh.Types.ListVirtualNodesOutput, AWSError>;
   /**
-   * Returns a list of existing virtual routers in a service mesh.
+   * Returns a list of existing virtual nodes.
    */
-  listVirtualRouters(params: AppMesh.Types.ListVirtualRoutersInput, callback?: (err: AWSError, data: AppMesh.Types.ListVirtualRoutersOutput) => void): Request<AppMesh.Types.ListVirtualRoutersOutput, AWSError>;
+  listVirtualNodes(params: AppMesh.Types.ListVirtualNodesInput, callback?: (err: AWSError, data: AppMesh.Types.ListVirtualNodesOutput) => void): Request<AppMesh.Types.ListVirtualNodesOutput, AWSError>;
   /**
    * Returns a list of existing virtual routers in a service mesh.
    */
   listVirtualRouters(callback?: (err: AWSError, data: AppMesh.Types.ListVirtualRoutersOutput) => void): Request<AppMesh.Types.ListVirtualRoutersOutput, AWSError>;
   /**
-   * Updates an existing route for a specified service mesh and virtual router.
+   * Returns a list of existing virtual routers in a service mesh.
    */
-  updateRoute(params: AppMesh.Types.UpdateRouteInput, callback?: (err: AWSError, data: AppMesh.Types.UpdateRouteOutput) => void): Request<AppMesh.Types.UpdateRouteOutput, AWSError>;
+  listVirtualRouters(params: AppMesh.Types.ListVirtualRoutersInput, callback?: (err: AWSError, data: AppMesh.Types.ListVirtualRoutersOutput) => void): Request<AppMesh.Types.ListVirtualRoutersOutput, AWSError>;
   /**
    * Updates an existing route for a specified service mesh and virtual router.
    */
   updateRoute(callback?: (err: AWSError, data: AppMesh.Types.UpdateRouteOutput) => void): Request<AppMesh.Types.UpdateRouteOutput, AWSError>;
   /**
-   * Updates an existing virtual node in a specified service mesh.
+   * Updates an existing route for a specified service mesh and virtual router.
    */
-  updateVirtualNode(params: AppMesh.Types.UpdateVirtualNodeInput, callback?: (err: AWSError, data: AppMesh.Types.UpdateVirtualNodeOutput) => void): Request<AppMesh.Types.UpdateVirtualNodeOutput, AWSError>;
+  updateRoute(params: AppMesh.Types.UpdateRouteInput, callback?: (err: AWSError, data: AppMesh.Types.UpdateRouteOutput) => void): Request<AppMesh.Types.UpdateRouteOutput, AWSError>;
   /**
    * Updates an existing virtual node in a specified service mesh.
    */
   updateVirtualNode(callback?: (err: AWSError, data: AppMesh.Types.UpdateVirtualNodeOutput) => void): Request<AppMesh.Types.UpdateVirtualNodeOutput, AWSError>;
   /**
-   * Updates an existing virtual router in a specified service mesh.
+   * Updates an existing virtual node in a specified service mesh.
    */
-  updateVirtualRouter(params: AppMesh.Types.UpdateVirtualRouterInput, callback?: (err: AWSError, data: AppMesh.Types.UpdateVirtualRouterOutput) => void): Request<AppMesh.Types.UpdateVirtualRouterOutput, AWSError>;
+  updateVirtualNode(params: AppMesh.Types.UpdateVirtualNodeInput, callback?: (err: AWSError, data: AppMesh.Types.UpdateVirtualNodeOutput) => void): Request<AppMesh.Types.UpdateVirtualNodeOutput, AWSError>;
   /**
    * Updates an existing virtual router in a specified service mesh.
    */
   updateVirtualRouter(callback?: (err: AWSError, data: AppMesh.Types.UpdateVirtualRouterOutput) => void): Request<AppMesh.Types.UpdateVirtualRouterOutput, AWSError>;
+  /**
+   * Updates an existing virtual router in a specified service mesh.
+   */
+  updateVirtualRouter(params: AppMesh.Types.UpdateVirtualRouterInput, callback?: (err: AWSError, data: AppMesh.Types.UpdateVirtualRouterOutput) => void): Request<AppMesh.Types.UpdateVirtualRouterOutput, AWSError>;
 }
 declare namespace AppMesh {
   export type ServiceName = string;

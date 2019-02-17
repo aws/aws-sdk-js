@@ -14,331 +14,331 @@ declare class WorkDocs extends Service {
   /**
    * Aborts the upload of the specified document version that was previously initiated by InitiateDocumentVersionUpload. The client should make this call only when it no longer intends to upload the document version, or fails to do so.
    */
-  abortDocumentVersionUpload(params: WorkDocs.Types.AbortDocumentVersionUploadRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  abortDocumentVersionUpload(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Aborts the upload of the specified document version that was previously initiated by InitiateDocumentVersionUpload. The client should make this call only when it no longer intends to upload the document version, or fails to do so.
    */
-  abortDocumentVersionUpload(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
-  /**
-   * Activates the specified user. Only active users can access Amazon WorkDocs.
-   */
-  activateUser(params: WorkDocs.Types.ActivateUserRequest, callback?: (err: AWSError, data: WorkDocs.Types.ActivateUserResponse) => void): Request<WorkDocs.Types.ActivateUserResponse, AWSError>;
+  abortDocumentVersionUpload(params: WorkDocs.Types.AbortDocumentVersionUploadRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Activates the specified user. Only active users can access Amazon WorkDocs.
    */
   activateUser(callback?: (err: AWSError, data: WorkDocs.Types.ActivateUserResponse) => void): Request<WorkDocs.Types.ActivateUserResponse, AWSError>;
   /**
-   * Creates a set of permissions for the specified folder or document. The resource permissions are overwritten if the principals already have different permissions.
+   * Activates the specified user. Only active users can access Amazon WorkDocs.
    */
-  addResourcePermissions(params: WorkDocs.Types.AddResourcePermissionsRequest, callback?: (err: AWSError, data: WorkDocs.Types.AddResourcePermissionsResponse) => void): Request<WorkDocs.Types.AddResourcePermissionsResponse, AWSError>;
+  activateUser(params: WorkDocs.Types.ActivateUserRequest, callback?: (err: AWSError, data: WorkDocs.Types.ActivateUserResponse) => void): Request<WorkDocs.Types.ActivateUserResponse, AWSError>;
   /**
    * Creates a set of permissions for the specified folder or document. The resource permissions are overwritten if the principals already have different permissions.
    */
   addResourcePermissions(callback?: (err: AWSError, data: WorkDocs.Types.AddResourcePermissionsResponse) => void): Request<WorkDocs.Types.AddResourcePermissionsResponse, AWSError>;
   /**
-   * Adds a new comment to the specified document version.
+   * Creates a set of permissions for the specified folder or document. The resource permissions are overwritten if the principals already have different permissions.
    */
-  createComment(params: WorkDocs.Types.CreateCommentRequest, callback?: (err: AWSError, data: WorkDocs.Types.CreateCommentResponse) => void): Request<WorkDocs.Types.CreateCommentResponse, AWSError>;
+  addResourcePermissions(params: WorkDocs.Types.AddResourcePermissionsRequest, callback?: (err: AWSError, data: WorkDocs.Types.AddResourcePermissionsResponse) => void): Request<WorkDocs.Types.AddResourcePermissionsResponse, AWSError>;
   /**
    * Adds a new comment to the specified document version.
    */
   createComment(callback?: (err: AWSError, data: WorkDocs.Types.CreateCommentResponse) => void): Request<WorkDocs.Types.CreateCommentResponse, AWSError>;
   /**
-   * Adds one or more custom properties to the specified resource (a folder, document, or version).
+   * Adds a new comment to the specified document version.
    */
-  createCustomMetadata(params: WorkDocs.Types.CreateCustomMetadataRequest, callback?: (err: AWSError, data: WorkDocs.Types.CreateCustomMetadataResponse) => void): Request<WorkDocs.Types.CreateCustomMetadataResponse, AWSError>;
+  createComment(params: WorkDocs.Types.CreateCommentRequest, callback?: (err: AWSError, data: WorkDocs.Types.CreateCommentResponse) => void): Request<WorkDocs.Types.CreateCommentResponse, AWSError>;
   /**
    * Adds one or more custom properties to the specified resource (a folder, document, or version).
    */
   createCustomMetadata(callback?: (err: AWSError, data: WorkDocs.Types.CreateCustomMetadataResponse) => void): Request<WorkDocs.Types.CreateCustomMetadataResponse, AWSError>;
   /**
-   * Creates a folder with the specified name and parent folder.
+   * Adds one or more custom properties to the specified resource (a folder, document, or version).
    */
-  createFolder(params: WorkDocs.Types.CreateFolderRequest, callback?: (err: AWSError, data: WorkDocs.Types.CreateFolderResponse) => void): Request<WorkDocs.Types.CreateFolderResponse, AWSError>;
+  createCustomMetadata(params: WorkDocs.Types.CreateCustomMetadataRequest, callback?: (err: AWSError, data: WorkDocs.Types.CreateCustomMetadataResponse) => void): Request<WorkDocs.Types.CreateCustomMetadataResponse, AWSError>;
   /**
    * Creates a folder with the specified name and parent folder.
    */
   createFolder(callback?: (err: AWSError, data: WorkDocs.Types.CreateFolderResponse) => void): Request<WorkDocs.Types.CreateFolderResponse, AWSError>;
   /**
-   * Adds the specified list of labels to the given resource (a document or folder)
+   * Creates a folder with the specified name and parent folder.
    */
-  createLabels(params: WorkDocs.Types.CreateLabelsRequest, callback?: (err: AWSError, data: WorkDocs.Types.CreateLabelsResponse) => void): Request<WorkDocs.Types.CreateLabelsResponse, AWSError>;
+  createFolder(params: WorkDocs.Types.CreateFolderRequest, callback?: (err: AWSError, data: WorkDocs.Types.CreateFolderResponse) => void): Request<WorkDocs.Types.CreateFolderResponse, AWSError>;
   /**
    * Adds the specified list of labels to the given resource (a document or folder)
    */
   createLabels(callback?: (err: AWSError, data: WorkDocs.Types.CreateLabelsResponse) => void): Request<WorkDocs.Types.CreateLabelsResponse, AWSError>;
   /**
-   * Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription. For more information, see Subscribe to Notifications in the Amazon WorkDocs Developer Guide.
+   * Adds the specified list of labels to the given resource (a document or folder)
    */
-  createNotificationSubscription(params: WorkDocs.Types.CreateNotificationSubscriptionRequest, callback?: (err: AWSError, data: WorkDocs.Types.CreateNotificationSubscriptionResponse) => void): Request<WorkDocs.Types.CreateNotificationSubscriptionResponse, AWSError>;
+  createLabels(params: WorkDocs.Types.CreateLabelsRequest, callback?: (err: AWSError, data: WorkDocs.Types.CreateLabelsResponse) => void): Request<WorkDocs.Types.CreateLabelsResponse, AWSError>;
   /**
    * Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription. For more information, see Subscribe to Notifications in the Amazon WorkDocs Developer Guide.
    */
   createNotificationSubscription(callback?: (err: AWSError, data: WorkDocs.Types.CreateNotificationSubscriptionResponse) => void): Request<WorkDocs.Types.CreateNotificationSubscriptionResponse, AWSError>;
   /**
-   * Creates a user in a Simple AD or Microsoft AD directory. The status of a newly created user is "ACTIVE". New users can access Amazon WorkDocs.
+   * Configure Amazon WorkDocs to use Amazon SNS notifications. The endpoint receives a confirmation message, and must confirm the subscription. For more information, see Subscribe to Notifications in the Amazon WorkDocs Developer Guide.
    */
-  createUser(params: WorkDocs.Types.CreateUserRequest, callback?: (err: AWSError, data: WorkDocs.Types.CreateUserResponse) => void): Request<WorkDocs.Types.CreateUserResponse, AWSError>;
+  createNotificationSubscription(params: WorkDocs.Types.CreateNotificationSubscriptionRequest, callback?: (err: AWSError, data: WorkDocs.Types.CreateNotificationSubscriptionResponse) => void): Request<WorkDocs.Types.CreateNotificationSubscriptionResponse, AWSError>;
   /**
    * Creates a user in a Simple AD or Microsoft AD directory. The status of a newly created user is "ACTIVE". New users can access Amazon WorkDocs.
    */
   createUser(callback?: (err: AWSError, data: WorkDocs.Types.CreateUserResponse) => void): Request<WorkDocs.Types.CreateUserResponse, AWSError>;
   /**
-   * Deactivates the specified user, which revokes the user's access to Amazon WorkDocs.
+   * Creates a user in a Simple AD or Microsoft AD directory. The status of a newly created user is "ACTIVE". New users can access Amazon WorkDocs.
    */
-  deactivateUser(params: WorkDocs.Types.DeactivateUserRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  createUser(params: WorkDocs.Types.CreateUserRequest, callback?: (err: AWSError, data: WorkDocs.Types.CreateUserResponse) => void): Request<WorkDocs.Types.CreateUserResponse, AWSError>;
   /**
    * Deactivates the specified user, which revokes the user's access to Amazon WorkDocs.
    */
   deactivateUser(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified comment from the document version.
+   * Deactivates the specified user, which revokes the user's access to Amazon WorkDocs.
    */
-  deleteComment(params: WorkDocs.Types.DeleteCommentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deactivateUser(params: WorkDocs.Types.DeactivateUserRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified comment from the document version.
    */
   deleteComment(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes custom metadata from the specified resource.
+   * Deletes the specified comment from the document version.
    */
-  deleteCustomMetadata(params: WorkDocs.Types.DeleteCustomMetadataRequest, callback?: (err: AWSError, data: WorkDocs.Types.DeleteCustomMetadataResponse) => void): Request<WorkDocs.Types.DeleteCustomMetadataResponse, AWSError>;
+  deleteComment(params: WorkDocs.Types.DeleteCommentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes custom metadata from the specified resource.
    */
   deleteCustomMetadata(callback?: (err: AWSError, data: WorkDocs.Types.DeleteCustomMetadataResponse) => void): Request<WorkDocs.Types.DeleteCustomMetadataResponse, AWSError>;
   /**
-   * Permanently deletes the specified document and its associated metadata.
+   * Deletes custom metadata from the specified resource.
    */
-  deleteDocument(params: WorkDocs.Types.DeleteDocumentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteCustomMetadata(params: WorkDocs.Types.DeleteCustomMetadataRequest, callback?: (err: AWSError, data: WorkDocs.Types.DeleteCustomMetadataResponse) => void): Request<WorkDocs.Types.DeleteCustomMetadataResponse, AWSError>;
   /**
    * Permanently deletes the specified document and its associated metadata.
    */
   deleteDocument(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Permanently deletes the specified folder and its contents.
+   * Permanently deletes the specified document and its associated metadata.
    */
-  deleteFolder(params: WorkDocs.Types.DeleteFolderRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDocument(params: WorkDocs.Types.DeleteDocumentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Permanently deletes the specified folder and its contents.
    */
   deleteFolder(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the contents of the specified folder.
+   * Permanently deletes the specified folder and its contents.
    */
-  deleteFolderContents(params: WorkDocs.Types.DeleteFolderContentsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteFolder(params: WorkDocs.Types.DeleteFolderRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the contents of the specified folder.
    */
   deleteFolderContents(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified list of labels from a resource.
+   * Deletes the contents of the specified folder.
    */
-  deleteLabels(params: WorkDocs.Types.DeleteLabelsRequest, callback?: (err: AWSError, data: WorkDocs.Types.DeleteLabelsResponse) => void): Request<WorkDocs.Types.DeleteLabelsResponse, AWSError>;
+  deleteFolderContents(params: WorkDocs.Types.DeleteFolderContentsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified list of labels from a resource.
    */
   deleteLabels(callback?: (err: AWSError, data: WorkDocs.Types.DeleteLabelsResponse) => void): Request<WorkDocs.Types.DeleteLabelsResponse, AWSError>;
   /**
-   * Deletes the specified subscription from the specified organization.
+   * Deletes the specified list of labels from a resource.
    */
-  deleteNotificationSubscription(params: WorkDocs.Types.DeleteNotificationSubscriptionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteLabels(params: WorkDocs.Types.DeleteLabelsRequest, callback?: (err: AWSError, data: WorkDocs.Types.DeleteLabelsResponse) => void): Request<WorkDocs.Types.DeleteLabelsResponse, AWSError>;
   /**
    * Deletes the specified subscription from the specified organization.
    */
   deleteNotificationSubscription(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified user from a Simple AD or Microsoft AD directory.
+   * Deletes the specified subscription from the specified organization.
    */
-  deleteUser(params: WorkDocs.Types.DeleteUserRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteNotificationSubscription(params: WorkDocs.Types.DeleteNotificationSubscriptionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified user from a Simple AD or Microsoft AD directory.
    */
   deleteUser(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Describes the user activities in a specified time period.
+   * Deletes the specified user from a Simple AD or Microsoft AD directory.
    */
-  describeActivities(params: WorkDocs.Types.DescribeActivitiesRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeActivitiesResponse) => void): Request<WorkDocs.Types.DescribeActivitiesResponse, AWSError>;
+  deleteUser(params: WorkDocs.Types.DeleteUserRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Describes the user activities in a specified time period.
    */
   describeActivities(callback?: (err: AWSError, data: WorkDocs.Types.DescribeActivitiesResponse) => void): Request<WorkDocs.Types.DescribeActivitiesResponse, AWSError>;
   /**
-   * List all the comments for the specified document version.
+   * Describes the user activities in a specified time period.
    */
-  describeComments(params: WorkDocs.Types.DescribeCommentsRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeCommentsResponse) => void): Request<WorkDocs.Types.DescribeCommentsResponse, AWSError>;
+  describeActivities(params: WorkDocs.Types.DescribeActivitiesRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeActivitiesResponse) => void): Request<WorkDocs.Types.DescribeActivitiesResponse, AWSError>;
   /**
    * List all the comments for the specified document version.
    */
   describeComments(callback?: (err: AWSError, data: WorkDocs.Types.DescribeCommentsResponse) => void): Request<WorkDocs.Types.DescribeCommentsResponse, AWSError>;
   /**
-   * Retrieves the document versions for the specified document. By default, only active versions are returned.
+   * List all the comments for the specified document version.
    */
-  describeDocumentVersions(params: WorkDocs.Types.DescribeDocumentVersionsRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeDocumentVersionsResponse) => void): Request<WorkDocs.Types.DescribeDocumentVersionsResponse, AWSError>;
+  describeComments(params: WorkDocs.Types.DescribeCommentsRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeCommentsResponse) => void): Request<WorkDocs.Types.DescribeCommentsResponse, AWSError>;
   /**
    * Retrieves the document versions for the specified document. By default, only active versions are returned.
    */
   describeDocumentVersions(callback?: (err: AWSError, data: WorkDocs.Types.DescribeDocumentVersionsResponse) => void): Request<WorkDocs.Types.DescribeDocumentVersionsResponse, AWSError>;
   /**
-   * Describes the contents of the specified folder, including its documents and subfolders. By default, Amazon WorkDocs returns the first 100 active document and folder metadata items. If there are more results, the response includes a marker that you can use to request the next set of results. You can also request initialized documents.
+   * Retrieves the document versions for the specified document. By default, only active versions are returned.
    */
-  describeFolderContents(params: WorkDocs.Types.DescribeFolderContentsRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeFolderContentsResponse) => void): Request<WorkDocs.Types.DescribeFolderContentsResponse, AWSError>;
+  describeDocumentVersions(params: WorkDocs.Types.DescribeDocumentVersionsRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeDocumentVersionsResponse) => void): Request<WorkDocs.Types.DescribeDocumentVersionsResponse, AWSError>;
   /**
    * Describes the contents of the specified folder, including its documents and subfolders. By default, Amazon WorkDocs returns the first 100 active document and folder metadata items. If there are more results, the response includes a marker that you can use to request the next set of results. You can also request initialized documents.
    */
   describeFolderContents(callback?: (err: AWSError, data: WorkDocs.Types.DescribeFolderContentsResponse) => void): Request<WorkDocs.Types.DescribeFolderContentsResponse, AWSError>;
   /**
-   * Describes the groups specified by the query. Groups are defined by the underlying Active Directory.
+   * Describes the contents of the specified folder, including its documents and subfolders. By default, Amazon WorkDocs returns the first 100 active document and folder metadata items. If there are more results, the response includes a marker that you can use to request the next set of results. You can also request initialized documents.
    */
-  describeGroups(params: WorkDocs.Types.DescribeGroupsRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeGroupsResponse) => void): Request<WorkDocs.Types.DescribeGroupsResponse, AWSError>;
+  describeFolderContents(params: WorkDocs.Types.DescribeFolderContentsRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeFolderContentsResponse) => void): Request<WorkDocs.Types.DescribeFolderContentsResponse, AWSError>;
   /**
    * Describes the groups specified by the query. Groups are defined by the underlying Active Directory.
    */
   describeGroups(callback?: (err: AWSError, data: WorkDocs.Types.DescribeGroupsResponse) => void): Request<WorkDocs.Types.DescribeGroupsResponse, AWSError>;
   /**
-   * Lists the specified notification subscriptions.
+   * Describes the groups specified by the query. Groups are defined by the underlying Active Directory.
    */
-  describeNotificationSubscriptions(params: WorkDocs.Types.DescribeNotificationSubscriptionsRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeNotificationSubscriptionsResponse) => void): Request<WorkDocs.Types.DescribeNotificationSubscriptionsResponse, AWSError>;
+  describeGroups(params: WorkDocs.Types.DescribeGroupsRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeGroupsResponse) => void): Request<WorkDocs.Types.DescribeGroupsResponse, AWSError>;
   /**
    * Lists the specified notification subscriptions.
    */
   describeNotificationSubscriptions(callback?: (err: AWSError, data: WorkDocs.Types.DescribeNotificationSubscriptionsResponse) => void): Request<WorkDocs.Types.DescribeNotificationSubscriptionsResponse, AWSError>;
   /**
-   * Describes the permissions of a specified resource.
+   * Lists the specified notification subscriptions.
    */
-  describeResourcePermissions(params: WorkDocs.Types.DescribeResourcePermissionsRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeResourcePermissionsResponse) => void): Request<WorkDocs.Types.DescribeResourcePermissionsResponse, AWSError>;
+  describeNotificationSubscriptions(params: WorkDocs.Types.DescribeNotificationSubscriptionsRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeNotificationSubscriptionsResponse) => void): Request<WorkDocs.Types.DescribeNotificationSubscriptionsResponse, AWSError>;
   /**
    * Describes the permissions of a specified resource.
    */
   describeResourcePermissions(callback?: (err: AWSError, data: WorkDocs.Types.DescribeResourcePermissionsResponse) => void): Request<WorkDocs.Types.DescribeResourcePermissionsResponse, AWSError>;
   /**
-   * Describes the current user's special folders; the RootFolder and the RecycleBin. RootFolder is the root of user's files and folders and RecycleBin is the root of recycled items. This is not a valid action for SigV4 (administrative API) clients. This action requires an authentication token. To get an authentication token, register an application with Amazon WorkDocs. For more information, see Authentication and Access Control for User Applications in the Amazon WorkDocs Developer Guide.
+   * Describes the permissions of a specified resource.
    */
-  describeRootFolders(params: WorkDocs.Types.DescribeRootFoldersRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeRootFoldersResponse) => void): Request<WorkDocs.Types.DescribeRootFoldersResponse, AWSError>;
+  describeResourcePermissions(params: WorkDocs.Types.DescribeResourcePermissionsRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeResourcePermissionsResponse) => void): Request<WorkDocs.Types.DescribeResourcePermissionsResponse, AWSError>;
   /**
    * Describes the current user's special folders; the RootFolder and the RecycleBin. RootFolder is the root of user's files and folders and RecycleBin is the root of recycled items. This is not a valid action for SigV4 (administrative API) clients. This action requires an authentication token. To get an authentication token, register an application with Amazon WorkDocs. For more information, see Authentication and Access Control for User Applications in the Amazon WorkDocs Developer Guide.
    */
   describeRootFolders(callback?: (err: AWSError, data: WorkDocs.Types.DescribeRootFoldersResponse) => void): Request<WorkDocs.Types.DescribeRootFoldersResponse, AWSError>;
   /**
-   * Describes the specified users. You can describe all users or filter the results (for example, by status or organization). By default, Amazon WorkDocs returns the first 24 active or pending users. If there are more results, the response includes a marker that you can use to request the next set of results.
+   * Describes the current user's special folders; the RootFolder and the RecycleBin. RootFolder is the root of user's files and folders and RecycleBin is the root of recycled items. This is not a valid action for SigV4 (administrative API) clients. This action requires an authentication token. To get an authentication token, register an application with Amazon WorkDocs. For more information, see Authentication and Access Control for User Applications in the Amazon WorkDocs Developer Guide.
    */
-  describeUsers(params: WorkDocs.Types.DescribeUsersRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeUsersResponse) => void): Request<WorkDocs.Types.DescribeUsersResponse, AWSError>;
+  describeRootFolders(params: WorkDocs.Types.DescribeRootFoldersRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeRootFoldersResponse) => void): Request<WorkDocs.Types.DescribeRootFoldersResponse, AWSError>;
   /**
    * Describes the specified users. You can describe all users or filter the results (for example, by status or organization). By default, Amazon WorkDocs returns the first 24 active or pending users. If there are more results, the response includes a marker that you can use to request the next set of results.
    */
   describeUsers(callback?: (err: AWSError, data: WorkDocs.Types.DescribeUsersResponse) => void): Request<WorkDocs.Types.DescribeUsersResponse, AWSError>;
   /**
-   * Retrieves details of the current user for whom the authentication token was generated. This is not a valid action for SigV4 (administrative API) clients.
+   * Describes the specified users. You can describe all users or filter the results (for example, by status or organization). By default, Amazon WorkDocs returns the first 24 active or pending users. If there are more results, the response includes a marker that you can use to request the next set of results.
    */
-  getCurrentUser(params: WorkDocs.Types.GetCurrentUserRequest, callback?: (err: AWSError, data: WorkDocs.Types.GetCurrentUserResponse) => void): Request<WorkDocs.Types.GetCurrentUserResponse, AWSError>;
+  describeUsers(params: WorkDocs.Types.DescribeUsersRequest, callback?: (err: AWSError, data: WorkDocs.Types.DescribeUsersResponse) => void): Request<WorkDocs.Types.DescribeUsersResponse, AWSError>;
   /**
    * Retrieves details of the current user for whom the authentication token was generated. This is not a valid action for SigV4 (administrative API) clients.
    */
   getCurrentUser(callback?: (err: AWSError, data: WorkDocs.Types.GetCurrentUserResponse) => void): Request<WorkDocs.Types.GetCurrentUserResponse, AWSError>;
   /**
-   * Retrieves details of a document.
+   * Retrieves details of the current user for whom the authentication token was generated. This is not a valid action for SigV4 (administrative API) clients.
    */
-  getDocument(params: WorkDocs.Types.GetDocumentRequest, callback?: (err: AWSError, data: WorkDocs.Types.GetDocumentResponse) => void): Request<WorkDocs.Types.GetDocumentResponse, AWSError>;
+  getCurrentUser(params: WorkDocs.Types.GetCurrentUserRequest, callback?: (err: AWSError, data: WorkDocs.Types.GetCurrentUserResponse) => void): Request<WorkDocs.Types.GetCurrentUserResponse, AWSError>;
   /**
    * Retrieves details of a document.
    */
   getDocument(callback?: (err: AWSError, data: WorkDocs.Types.GetDocumentResponse) => void): Request<WorkDocs.Types.GetDocumentResponse, AWSError>;
   /**
-   * Retrieves the path information (the hierarchy from the root folder) for the requested document. By default, Amazon WorkDocs returns a maximum of 100 levels upwards from the requested document and only includes the IDs of the parent folders in the path. You can limit the maximum number of levels. You can also request the names of the parent folders.
+   * Retrieves details of a document.
    */
-  getDocumentPath(params: WorkDocs.Types.GetDocumentPathRequest, callback?: (err: AWSError, data: WorkDocs.Types.GetDocumentPathResponse) => void): Request<WorkDocs.Types.GetDocumentPathResponse, AWSError>;
+  getDocument(params: WorkDocs.Types.GetDocumentRequest, callback?: (err: AWSError, data: WorkDocs.Types.GetDocumentResponse) => void): Request<WorkDocs.Types.GetDocumentResponse, AWSError>;
   /**
    * Retrieves the path information (the hierarchy from the root folder) for the requested document. By default, Amazon WorkDocs returns a maximum of 100 levels upwards from the requested document and only includes the IDs of the parent folders in the path. You can limit the maximum number of levels. You can also request the names of the parent folders.
    */
   getDocumentPath(callback?: (err: AWSError, data: WorkDocs.Types.GetDocumentPathResponse) => void): Request<WorkDocs.Types.GetDocumentPathResponse, AWSError>;
   /**
-   * Retrieves version metadata for the specified document.
+   * Retrieves the path information (the hierarchy from the root folder) for the requested document. By default, Amazon WorkDocs returns a maximum of 100 levels upwards from the requested document and only includes the IDs of the parent folders in the path. You can limit the maximum number of levels. You can also request the names of the parent folders.
    */
-  getDocumentVersion(params: WorkDocs.Types.GetDocumentVersionRequest, callback?: (err: AWSError, data: WorkDocs.Types.GetDocumentVersionResponse) => void): Request<WorkDocs.Types.GetDocumentVersionResponse, AWSError>;
+  getDocumentPath(params: WorkDocs.Types.GetDocumentPathRequest, callback?: (err: AWSError, data: WorkDocs.Types.GetDocumentPathResponse) => void): Request<WorkDocs.Types.GetDocumentPathResponse, AWSError>;
   /**
    * Retrieves version metadata for the specified document.
    */
   getDocumentVersion(callback?: (err: AWSError, data: WorkDocs.Types.GetDocumentVersionResponse) => void): Request<WorkDocs.Types.GetDocumentVersionResponse, AWSError>;
   /**
-   * Retrieves the metadata of the specified folder.
+   * Retrieves version metadata for the specified document.
    */
-  getFolder(params: WorkDocs.Types.GetFolderRequest, callback?: (err: AWSError, data: WorkDocs.Types.GetFolderResponse) => void): Request<WorkDocs.Types.GetFolderResponse, AWSError>;
+  getDocumentVersion(params: WorkDocs.Types.GetDocumentVersionRequest, callback?: (err: AWSError, data: WorkDocs.Types.GetDocumentVersionResponse) => void): Request<WorkDocs.Types.GetDocumentVersionResponse, AWSError>;
   /**
    * Retrieves the metadata of the specified folder.
    */
   getFolder(callback?: (err: AWSError, data: WorkDocs.Types.GetFolderResponse) => void): Request<WorkDocs.Types.GetFolderResponse, AWSError>;
   /**
-   * Retrieves the path information (the hierarchy from the root folder) for the specified folder. By default, Amazon WorkDocs returns a maximum of 100 levels upwards from the requested folder and only includes the IDs of the parent folders in the path. You can limit the maximum number of levels. You can also request the parent folder names.
+   * Retrieves the metadata of the specified folder.
    */
-  getFolderPath(params: WorkDocs.Types.GetFolderPathRequest, callback?: (err: AWSError, data: WorkDocs.Types.GetFolderPathResponse) => void): Request<WorkDocs.Types.GetFolderPathResponse, AWSError>;
+  getFolder(params: WorkDocs.Types.GetFolderRequest, callback?: (err: AWSError, data: WorkDocs.Types.GetFolderResponse) => void): Request<WorkDocs.Types.GetFolderResponse, AWSError>;
   /**
    * Retrieves the path information (the hierarchy from the root folder) for the specified folder. By default, Amazon WorkDocs returns a maximum of 100 levels upwards from the requested folder and only includes the IDs of the parent folders in the path. You can limit the maximum number of levels. You can also request the parent folder names.
    */
   getFolderPath(callback?: (err: AWSError, data: WorkDocs.Types.GetFolderPathResponse) => void): Request<WorkDocs.Types.GetFolderPathResponse, AWSError>;
   /**
-   * Retrieves a collection of resources, including folders and documents. The only CollectionType supported is SHARED_WITH_ME.
+   * Retrieves the path information (the hierarchy from the root folder) for the specified folder. By default, Amazon WorkDocs returns a maximum of 100 levels upwards from the requested folder and only includes the IDs of the parent folders in the path. You can limit the maximum number of levels. You can also request the parent folder names.
    */
-  getResources(params: WorkDocs.Types.GetResourcesRequest, callback?: (err: AWSError, data: WorkDocs.Types.GetResourcesResponse) => void): Request<WorkDocs.Types.GetResourcesResponse, AWSError>;
+  getFolderPath(params: WorkDocs.Types.GetFolderPathRequest, callback?: (err: AWSError, data: WorkDocs.Types.GetFolderPathResponse) => void): Request<WorkDocs.Types.GetFolderPathResponse, AWSError>;
   /**
    * Retrieves a collection of resources, including folders and documents. The only CollectionType supported is SHARED_WITH_ME.
    */
   getResources(callback?: (err: AWSError, data: WorkDocs.Types.GetResourcesResponse) => void): Request<WorkDocs.Types.GetResourcesResponse, AWSError>;
   /**
-   * Creates a new document object and version object. The client specifies the parent folder ID and name of the document to upload. The ID is optionally specified when creating a new version of an existing document. This is the first step to upload a document. Next, upload the document to the URL returned from the call, and then call UpdateDocumentVersion. To cancel the document upload, call AbortDocumentVersionUpload.
+   * Retrieves a collection of resources, including folders and documents. The only CollectionType supported is SHARED_WITH_ME.
    */
-  initiateDocumentVersionUpload(params: WorkDocs.Types.InitiateDocumentVersionUploadRequest, callback?: (err: AWSError, data: WorkDocs.Types.InitiateDocumentVersionUploadResponse) => void): Request<WorkDocs.Types.InitiateDocumentVersionUploadResponse, AWSError>;
+  getResources(params: WorkDocs.Types.GetResourcesRequest, callback?: (err: AWSError, data: WorkDocs.Types.GetResourcesResponse) => void): Request<WorkDocs.Types.GetResourcesResponse, AWSError>;
   /**
    * Creates a new document object and version object. The client specifies the parent folder ID and name of the document to upload. The ID is optionally specified when creating a new version of an existing document. This is the first step to upload a document. Next, upload the document to the URL returned from the call, and then call UpdateDocumentVersion. To cancel the document upload, call AbortDocumentVersionUpload.
    */
   initiateDocumentVersionUpload(callback?: (err: AWSError, data: WorkDocs.Types.InitiateDocumentVersionUploadResponse) => void): Request<WorkDocs.Types.InitiateDocumentVersionUploadResponse, AWSError>;
   /**
-   * Removes all the permissions from the specified resource.
+   * Creates a new document object and version object. The client specifies the parent folder ID and name of the document to upload. The ID is optionally specified when creating a new version of an existing document. This is the first step to upload a document. Next, upload the document to the URL returned from the call, and then call UpdateDocumentVersion. To cancel the document upload, call AbortDocumentVersionUpload.
    */
-  removeAllResourcePermissions(params: WorkDocs.Types.RemoveAllResourcePermissionsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  initiateDocumentVersionUpload(params: WorkDocs.Types.InitiateDocumentVersionUploadRequest, callback?: (err: AWSError, data: WorkDocs.Types.InitiateDocumentVersionUploadResponse) => void): Request<WorkDocs.Types.InitiateDocumentVersionUploadResponse, AWSError>;
   /**
    * Removes all the permissions from the specified resource.
    */
   removeAllResourcePermissions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the permission for the specified principal from the specified resource.
+   * Removes all the permissions from the specified resource.
    */
-  removeResourcePermission(params: WorkDocs.Types.RemoveResourcePermissionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  removeAllResourcePermissions(params: WorkDocs.Types.RemoveAllResourcePermissionsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes the permission for the specified principal from the specified resource.
    */
   removeResourcePermission(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the specified attributes of a document. The user must have access to both the document and its parent folder, if applicable.
+   * Removes the permission for the specified principal from the specified resource.
    */
-  updateDocument(params: WorkDocs.Types.UpdateDocumentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  removeResourcePermission(params: WorkDocs.Types.RemoveResourcePermissionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates the specified attributes of a document. The user must have access to both the document and its parent folder, if applicable.
    */
   updateDocument(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Changes the status of the document version to ACTIVE.  Amazon WorkDocs also sets its document container to ACTIVE. This is the last step in a document upload, after the client uploads the document to an S3-presigned URL returned by InitiateDocumentVersionUpload. 
+   * Updates the specified attributes of a document. The user must have access to both the document and its parent folder, if applicable.
    */
-  updateDocumentVersion(params: WorkDocs.Types.UpdateDocumentVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateDocument(params: WorkDocs.Types.UpdateDocumentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Changes the status of the document version to ACTIVE.  Amazon WorkDocs also sets its document container to ACTIVE. This is the last step in a document upload, after the client uploads the document to an S3-presigned URL returned by InitiateDocumentVersionUpload. 
    */
   updateDocumentVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the specified attributes of the specified folder. The user must have access to both the folder and its parent folder, if applicable.
+   * Changes the status of the document version to ACTIVE.  Amazon WorkDocs also sets its document container to ACTIVE. This is the last step in a document upload, after the client uploads the document to an S3-presigned URL returned by InitiateDocumentVersionUpload. 
    */
-  updateFolder(params: WorkDocs.Types.UpdateFolderRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateDocumentVersion(params: WorkDocs.Types.UpdateDocumentVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates the specified attributes of the specified folder. The user must have access to both the folder and its parent folder, if applicable.
    */
   updateFolder(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the specified attributes of the specified user, and grants or revokes administrative privileges to the Amazon WorkDocs site.
+   * Updates the specified attributes of the specified folder. The user must have access to both the folder and its parent folder, if applicable.
    */
-  updateUser(params: WorkDocs.Types.UpdateUserRequest, callback?: (err: AWSError, data: WorkDocs.Types.UpdateUserResponse) => void): Request<WorkDocs.Types.UpdateUserResponse, AWSError>;
+  updateFolder(params: WorkDocs.Types.UpdateFolderRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates the specified attributes of the specified user, and grants or revokes administrative privileges to the Amazon WorkDocs site.
    */
   updateUser(callback?: (err: AWSError, data: WorkDocs.Types.UpdateUserResponse) => void): Request<WorkDocs.Types.UpdateUserResponse, AWSError>;
+  /**
+   * Updates the specified attributes of the specified user, and grants or revokes administrative privileges to the Amazon WorkDocs site.
+   */
+  updateUser(params: WorkDocs.Types.UpdateUserRequest, callback?: (err: AWSError, data: WorkDocs.Types.UpdateUserResponse) => void): Request<WorkDocs.Types.UpdateUserResponse, AWSError>;
 }
 declare namespace WorkDocs {
   export interface AbortDocumentVersionUploadRequest {

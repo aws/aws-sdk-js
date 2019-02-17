@@ -14,107 +14,107 @@ declare class CloudHSMV2 extends Service {
   /**
    * Copy an AWS CloudHSM cluster backup to a different region.
    */
-  copyBackupToRegion(params: CloudHSMV2.Types.CopyBackupToRegionRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.CopyBackupToRegionResponse) => void): Request<CloudHSMV2.Types.CopyBackupToRegionResponse, AWSError>;
+  copyBackupToRegion(callback?: (err: AWSError, data: CloudHSMV2.Types.CopyBackupToRegionResponse) => void): Request<CloudHSMV2.Types.CopyBackupToRegionResponse, AWSError>;
   /**
    * Copy an AWS CloudHSM cluster backup to a different region.
    */
-  copyBackupToRegion(callback?: (err: AWSError, data: CloudHSMV2.Types.CopyBackupToRegionResponse) => void): Request<CloudHSMV2.Types.CopyBackupToRegionResponse, AWSError>;
-  /**
-   * Creates a new AWS CloudHSM cluster.
-   */
-  createCluster(params: CloudHSMV2.Types.CreateClusterRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.CreateClusterResponse) => void): Request<CloudHSMV2.Types.CreateClusterResponse, AWSError>;
+  copyBackupToRegion(params: CloudHSMV2.Types.CopyBackupToRegionRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.CopyBackupToRegionResponse) => void): Request<CloudHSMV2.Types.CopyBackupToRegionResponse, AWSError>;
   /**
    * Creates a new AWS CloudHSM cluster.
    */
   createCluster(callback?: (err: AWSError, data: CloudHSMV2.Types.CreateClusterResponse) => void): Request<CloudHSMV2.Types.CreateClusterResponse, AWSError>;
   /**
-   * Creates a new hardware security module (HSM) in the specified AWS CloudHSM cluster.
+   * Creates a new AWS CloudHSM cluster.
    */
-  createHsm(params: CloudHSMV2.Types.CreateHsmRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.CreateHsmResponse) => void): Request<CloudHSMV2.Types.CreateHsmResponse, AWSError>;
+  createCluster(params: CloudHSMV2.Types.CreateClusterRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.CreateClusterResponse) => void): Request<CloudHSMV2.Types.CreateClusterResponse, AWSError>;
   /**
    * Creates a new hardware security module (HSM) in the specified AWS CloudHSM cluster.
    */
   createHsm(callback?: (err: AWSError, data: CloudHSMV2.Types.CreateHsmResponse) => void): Request<CloudHSMV2.Types.CreateHsmResponse, AWSError>;
   /**
-   * Deletes a specified AWS CloudHSM backup. A backup can be restored up to 7 days after the DeleteBackup request. For more information on restoring a backup, see RestoreBackup 
+   * Creates a new hardware security module (HSM) in the specified AWS CloudHSM cluster.
    */
-  deleteBackup(params: CloudHSMV2.Types.DeleteBackupRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.DeleteBackupResponse) => void): Request<CloudHSMV2.Types.DeleteBackupResponse, AWSError>;
+  createHsm(params: CloudHSMV2.Types.CreateHsmRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.CreateHsmResponse) => void): Request<CloudHSMV2.Types.CreateHsmResponse, AWSError>;
   /**
    * Deletes a specified AWS CloudHSM backup. A backup can be restored up to 7 days after the DeleteBackup request. For more information on restoring a backup, see RestoreBackup 
    */
   deleteBackup(callback?: (err: AWSError, data: CloudHSMV2.Types.DeleteBackupResponse) => void): Request<CloudHSMV2.Types.DeleteBackupResponse, AWSError>;
   /**
-   * Deletes the specified AWS CloudHSM cluster. Before you can delete a cluster, you must delete all HSMs in the cluster. To see if the cluster contains any HSMs, use DescribeClusters. To delete an HSM, use DeleteHsm.
+   * Deletes a specified AWS CloudHSM backup. A backup can be restored up to 7 days after the DeleteBackup request. For more information on restoring a backup, see RestoreBackup 
    */
-  deleteCluster(params: CloudHSMV2.Types.DeleteClusterRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.DeleteClusterResponse) => void): Request<CloudHSMV2.Types.DeleteClusterResponse, AWSError>;
+  deleteBackup(params: CloudHSMV2.Types.DeleteBackupRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.DeleteBackupResponse) => void): Request<CloudHSMV2.Types.DeleteBackupResponse, AWSError>;
   /**
    * Deletes the specified AWS CloudHSM cluster. Before you can delete a cluster, you must delete all HSMs in the cluster. To see if the cluster contains any HSMs, use DescribeClusters. To delete an HSM, use DeleteHsm.
    */
   deleteCluster(callback?: (err: AWSError, data: CloudHSMV2.Types.DeleteClusterResponse) => void): Request<CloudHSMV2.Types.DeleteClusterResponse, AWSError>;
   /**
-   * Deletes the specified HSM. To specify an HSM, you can use its identifier (ID), the IP address of the HSM's elastic network interface (ENI), or the ID of the HSM's ENI. You need to specify only one of these values. To find these values, use DescribeClusters.
+   * Deletes the specified AWS CloudHSM cluster. Before you can delete a cluster, you must delete all HSMs in the cluster. To see if the cluster contains any HSMs, use DescribeClusters. To delete an HSM, use DeleteHsm.
    */
-  deleteHsm(params: CloudHSMV2.Types.DeleteHsmRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.DeleteHsmResponse) => void): Request<CloudHSMV2.Types.DeleteHsmResponse, AWSError>;
+  deleteCluster(params: CloudHSMV2.Types.DeleteClusterRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.DeleteClusterResponse) => void): Request<CloudHSMV2.Types.DeleteClusterResponse, AWSError>;
   /**
    * Deletes the specified HSM. To specify an HSM, you can use its identifier (ID), the IP address of the HSM's elastic network interface (ENI), or the ID of the HSM's ENI. You need to specify only one of these values. To find these values, use DescribeClusters.
    */
   deleteHsm(callback?: (err: AWSError, data: CloudHSMV2.Types.DeleteHsmResponse) => void): Request<CloudHSMV2.Types.DeleteHsmResponse, AWSError>;
   /**
-   * Gets information about backups of AWS CloudHSM clusters. This is a paginated operation, which means that each response might contain only a subset of all the backups. When the response contains only a subset of backups, it includes a NextToken value. Use this value in a subsequent DescribeBackups request to get more backups. When you receive a response with no NextToken (or an empty or null value), that means there are no more backups to get.
+   * Deletes the specified HSM. To specify an HSM, you can use its identifier (ID), the IP address of the HSM's elastic network interface (ENI), or the ID of the HSM's ENI. You need to specify only one of these values. To find these values, use DescribeClusters.
    */
-  describeBackups(params: CloudHSMV2.Types.DescribeBackupsRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.DescribeBackupsResponse) => void): Request<CloudHSMV2.Types.DescribeBackupsResponse, AWSError>;
+  deleteHsm(params: CloudHSMV2.Types.DeleteHsmRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.DeleteHsmResponse) => void): Request<CloudHSMV2.Types.DeleteHsmResponse, AWSError>;
   /**
    * Gets information about backups of AWS CloudHSM clusters. This is a paginated operation, which means that each response might contain only a subset of all the backups. When the response contains only a subset of backups, it includes a NextToken value. Use this value in a subsequent DescribeBackups request to get more backups. When you receive a response with no NextToken (or an empty or null value), that means there are no more backups to get.
    */
   describeBackups(callback?: (err: AWSError, data: CloudHSMV2.Types.DescribeBackupsResponse) => void): Request<CloudHSMV2.Types.DescribeBackupsResponse, AWSError>;
   /**
-   * Gets information about AWS CloudHSM clusters. This is a paginated operation, which means that each response might contain only a subset of all the clusters. When the response contains only a subset of clusters, it includes a NextToken value. Use this value in a subsequent DescribeClusters request to get more clusters. When you receive a response with no NextToken (or an empty or null value), that means there are no more clusters to get.
+   * Gets information about backups of AWS CloudHSM clusters. This is a paginated operation, which means that each response might contain only a subset of all the backups. When the response contains only a subset of backups, it includes a NextToken value. Use this value in a subsequent DescribeBackups request to get more backups. When you receive a response with no NextToken (or an empty or null value), that means there are no more backups to get.
    */
-  describeClusters(params: CloudHSMV2.Types.DescribeClustersRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.DescribeClustersResponse) => void): Request<CloudHSMV2.Types.DescribeClustersResponse, AWSError>;
+  describeBackups(params: CloudHSMV2.Types.DescribeBackupsRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.DescribeBackupsResponse) => void): Request<CloudHSMV2.Types.DescribeBackupsResponse, AWSError>;
   /**
    * Gets information about AWS CloudHSM clusters. This is a paginated operation, which means that each response might contain only a subset of all the clusters. When the response contains only a subset of clusters, it includes a NextToken value. Use this value in a subsequent DescribeClusters request to get more clusters. When you receive a response with no NextToken (or an empty or null value), that means there are no more clusters to get.
    */
   describeClusters(callback?: (err: AWSError, data: CloudHSMV2.Types.DescribeClustersResponse) => void): Request<CloudHSMV2.Types.DescribeClustersResponse, AWSError>;
   /**
-   * Claims an AWS CloudHSM cluster by submitting the cluster certificate issued by your issuing certificate authority (CA) and the CA's root certificate. Before you can claim a cluster, you must sign the cluster's certificate signing request (CSR) with your issuing CA. To get the cluster's CSR, use DescribeClusters.
+   * Gets information about AWS CloudHSM clusters. This is a paginated operation, which means that each response might contain only a subset of all the clusters. When the response contains only a subset of clusters, it includes a NextToken value. Use this value in a subsequent DescribeClusters request to get more clusters. When you receive a response with no NextToken (or an empty or null value), that means there are no more clusters to get.
    */
-  initializeCluster(params: CloudHSMV2.Types.InitializeClusterRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.InitializeClusterResponse) => void): Request<CloudHSMV2.Types.InitializeClusterResponse, AWSError>;
+  describeClusters(params: CloudHSMV2.Types.DescribeClustersRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.DescribeClustersResponse) => void): Request<CloudHSMV2.Types.DescribeClustersResponse, AWSError>;
   /**
    * Claims an AWS CloudHSM cluster by submitting the cluster certificate issued by your issuing certificate authority (CA) and the CA's root certificate. Before you can claim a cluster, you must sign the cluster's certificate signing request (CSR) with your issuing CA. To get the cluster's CSR, use DescribeClusters.
    */
   initializeCluster(callback?: (err: AWSError, data: CloudHSMV2.Types.InitializeClusterResponse) => void): Request<CloudHSMV2.Types.InitializeClusterResponse, AWSError>;
   /**
-   * Gets a list of tags for the specified AWS CloudHSM cluster. This is a paginated operation, which means that each response might contain only a subset of all the tags. When the response contains only a subset of tags, it includes a NextToken value. Use this value in a subsequent ListTags request to get more tags. When you receive a response with no NextToken (or an empty or null value), that means there are no more tags to get.
+   * Claims an AWS CloudHSM cluster by submitting the cluster certificate issued by your issuing certificate authority (CA) and the CA's root certificate. Before you can claim a cluster, you must sign the cluster's certificate signing request (CSR) with your issuing CA. To get the cluster's CSR, use DescribeClusters.
    */
-  listTags(params: CloudHSMV2.Types.ListTagsRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.ListTagsResponse) => void): Request<CloudHSMV2.Types.ListTagsResponse, AWSError>;
+  initializeCluster(params: CloudHSMV2.Types.InitializeClusterRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.InitializeClusterResponse) => void): Request<CloudHSMV2.Types.InitializeClusterResponse, AWSError>;
   /**
    * Gets a list of tags for the specified AWS CloudHSM cluster. This is a paginated operation, which means that each response might contain only a subset of all the tags. When the response contains only a subset of tags, it includes a NextToken value. Use this value in a subsequent ListTags request to get more tags. When you receive a response with no NextToken (or an empty or null value), that means there are no more tags to get.
    */
   listTags(callback?: (err: AWSError, data: CloudHSMV2.Types.ListTagsResponse) => void): Request<CloudHSMV2.Types.ListTagsResponse, AWSError>;
   /**
-   * Restores a specified AWS CloudHSM backup that is in the PENDING_DELETION state. For more information on deleting a backup, see DeleteBackup.
+   * Gets a list of tags for the specified AWS CloudHSM cluster. This is a paginated operation, which means that each response might contain only a subset of all the tags. When the response contains only a subset of tags, it includes a NextToken value. Use this value in a subsequent ListTags request to get more tags. When you receive a response with no NextToken (or an empty or null value), that means there are no more tags to get.
    */
-  restoreBackup(params: CloudHSMV2.Types.RestoreBackupRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.RestoreBackupResponse) => void): Request<CloudHSMV2.Types.RestoreBackupResponse, AWSError>;
+  listTags(params: CloudHSMV2.Types.ListTagsRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.ListTagsResponse) => void): Request<CloudHSMV2.Types.ListTagsResponse, AWSError>;
   /**
    * Restores a specified AWS CloudHSM backup that is in the PENDING_DELETION state. For more information on deleting a backup, see DeleteBackup.
    */
   restoreBackup(callback?: (err: AWSError, data: CloudHSMV2.Types.RestoreBackupResponse) => void): Request<CloudHSMV2.Types.RestoreBackupResponse, AWSError>;
   /**
-   * Adds or overwrites one or more tags for the specified AWS CloudHSM cluster.
+   * Restores a specified AWS CloudHSM backup that is in the PENDING_DELETION state. For more information on deleting a backup, see DeleteBackup.
    */
-  tagResource(params: CloudHSMV2.Types.TagResourceRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.TagResourceResponse) => void): Request<CloudHSMV2.Types.TagResourceResponse, AWSError>;
+  restoreBackup(params: CloudHSMV2.Types.RestoreBackupRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.RestoreBackupResponse) => void): Request<CloudHSMV2.Types.RestoreBackupResponse, AWSError>;
   /**
    * Adds or overwrites one or more tags for the specified AWS CloudHSM cluster.
    */
   tagResource(callback?: (err: AWSError, data: CloudHSMV2.Types.TagResourceResponse) => void): Request<CloudHSMV2.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes the specified tag or tags from the specified AWS CloudHSM cluster.
+   * Adds or overwrites one or more tags for the specified AWS CloudHSM cluster.
    */
-  untagResource(params: CloudHSMV2.Types.UntagResourceRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.UntagResourceResponse) => void): Request<CloudHSMV2.Types.UntagResourceResponse, AWSError>;
+  tagResource(params: CloudHSMV2.Types.TagResourceRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.TagResourceResponse) => void): Request<CloudHSMV2.Types.TagResourceResponse, AWSError>;
   /**
    * Removes the specified tag or tags from the specified AWS CloudHSM cluster.
    */
   untagResource(callback?: (err: AWSError, data: CloudHSMV2.Types.UntagResourceResponse) => void): Request<CloudHSMV2.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes the specified tag or tags from the specified AWS CloudHSM cluster.
+   */
+  untagResource(params: CloudHSMV2.Types.UntagResourceRequest, callback?: (err: AWSError, data: CloudHSMV2.Types.UntagResourceResponse) => void): Request<CloudHSMV2.Types.UntagResourceResponse, AWSError>;
 }
 declare namespace CloudHSMV2 {
   export interface Backup {

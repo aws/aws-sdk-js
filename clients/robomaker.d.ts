@@ -14,283 +14,283 @@ declare class RoboMaker extends Service {
   /**
    * Describes one or more simulation jobs.
    */
-  batchDescribeSimulationJob(params: RoboMaker.Types.BatchDescribeSimulationJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.BatchDescribeSimulationJobResponse) => void): Request<RoboMaker.Types.BatchDescribeSimulationJobResponse, AWSError>;
+  batchDescribeSimulationJob(callback?: (err: AWSError, data: RoboMaker.Types.BatchDescribeSimulationJobResponse) => void): Request<RoboMaker.Types.BatchDescribeSimulationJobResponse, AWSError>;
   /**
    * Describes one or more simulation jobs.
    */
-  batchDescribeSimulationJob(callback?: (err: AWSError, data: RoboMaker.Types.BatchDescribeSimulationJobResponse) => void): Request<RoboMaker.Types.BatchDescribeSimulationJobResponse, AWSError>;
-  /**
-   * Cancels the specified simulation job.
-   */
-  cancelSimulationJob(params: RoboMaker.Types.CancelSimulationJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.CancelSimulationJobResponse) => void): Request<RoboMaker.Types.CancelSimulationJobResponse, AWSError>;
+  batchDescribeSimulationJob(params: RoboMaker.Types.BatchDescribeSimulationJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.BatchDescribeSimulationJobResponse) => void): Request<RoboMaker.Types.BatchDescribeSimulationJobResponse, AWSError>;
   /**
    * Cancels the specified simulation job.
    */
   cancelSimulationJob(callback?: (err: AWSError, data: RoboMaker.Types.CancelSimulationJobResponse) => void): Request<RoboMaker.Types.CancelSimulationJobResponse, AWSError>;
   /**
-   * Deploys a specific version of a robot application to robots in a fleet. The robot application must have a numbered applicationVersion for consistency reasons. To create a new version, use CreateRobotApplicationVersion or see Creating a Robot Application Version. 
+   * Cancels the specified simulation job.
    */
-  createDeploymentJob(params: RoboMaker.Types.CreateDeploymentJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateDeploymentJobResponse) => void): Request<RoboMaker.Types.CreateDeploymentJobResponse, AWSError>;
+  cancelSimulationJob(params: RoboMaker.Types.CancelSimulationJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.CancelSimulationJobResponse) => void): Request<RoboMaker.Types.CancelSimulationJobResponse, AWSError>;
   /**
    * Deploys a specific version of a robot application to robots in a fleet. The robot application must have a numbered applicationVersion for consistency reasons. To create a new version, use CreateRobotApplicationVersion or see Creating a Robot Application Version. 
    */
   createDeploymentJob(callback?: (err: AWSError, data: RoboMaker.Types.CreateDeploymentJobResponse) => void): Request<RoboMaker.Types.CreateDeploymentJobResponse, AWSError>;
   /**
-   * Creates a fleet, a logical group of robots running the same robot application.
+   * Deploys a specific version of a robot application to robots in a fleet. The robot application must have a numbered applicationVersion for consistency reasons. To create a new version, use CreateRobotApplicationVersion or see Creating a Robot Application Version. 
    */
-  createFleet(params: RoboMaker.Types.CreateFleetRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateFleetResponse) => void): Request<RoboMaker.Types.CreateFleetResponse, AWSError>;
+  createDeploymentJob(params: RoboMaker.Types.CreateDeploymentJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateDeploymentJobResponse) => void): Request<RoboMaker.Types.CreateDeploymentJobResponse, AWSError>;
   /**
    * Creates a fleet, a logical group of robots running the same robot application.
    */
   createFleet(callback?: (err: AWSError, data: RoboMaker.Types.CreateFleetResponse) => void): Request<RoboMaker.Types.CreateFleetResponse, AWSError>;
   /**
-   * Creates a robot.
+   * Creates a fleet, a logical group of robots running the same robot application.
    */
-  createRobot(params: RoboMaker.Types.CreateRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateRobotResponse) => void): Request<RoboMaker.Types.CreateRobotResponse, AWSError>;
+  createFleet(params: RoboMaker.Types.CreateFleetRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateFleetResponse) => void): Request<RoboMaker.Types.CreateFleetResponse, AWSError>;
   /**
    * Creates a robot.
    */
   createRobot(callback?: (err: AWSError, data: RoboMaker.Types.CreateRobotResponse) => void): Request<RoboMaker.Types.CreateRobotResponse, AWSError>;
   /**
-   * Creates a robot application. 
+   * Creates a robot.
    */
-  createRobotApplication(params: RoboMaker.Types.CreateRobotApplicationRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateRobotApplicationResponse) => void): Request<RoboMaker.Types.CreateRobotApplicationResponse, AWSError>;
+  createRobot(params: RoboMaker.Types.CreateRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateRobotResponse) => void): Request<RoboMaker.Types.CreateRobotResponse, AWSError>;
   /**
    * Creates a robot application. 
    */
   createRobotApplication(callback?: (err: AWSError, data: RoboMaker.Types.CreateRobotApplicationResponse) => void): Request<RoboMaker.Types.CreateRobotApplicationResponse, AWSError>;
   /**
-   * Creates a version of a robot application.
+   * Creates a robot application. 
    */
-  createRobotApplicationVersion(params: RoboMaker.Types.CreateRobotApplicationVersionRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateRobotApplicationVersionResponse) => void): Request<RoboMaker.Types.CreateRobotApplicationVersionResponse, AWSError>;
+  createRobotApplication(params: RoboMaker.Types.CreateRobotApplicationRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateRobotApplicationResponse) => void): Request<RoboMaker.Types.CreateRobotApplicationResponse, AWSError>;
   /**
    * Creates a version of a robot application.
    */
   createRobotApplicationVersion(callback?: (err: AWSError, data: RoboMaker.Types.CreateRobotApplicationVersionResponse) => void): Request<RoboMaker.Types.CreateRobotApplicationVersionResponse, AWSError>;
   /**
-   * Creates a simulation application.
+   * Creates a version of a robot application.
    */
-  createSimulationApplication(params: RoboMaker.Types.CreateSimulationApplicationRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateSimulationApplicationResponse) => void): Request<RoboMaker.Types.CreateSimulationApplicationResponse, AWSError>;
+  createRobotApplicationVersion(params: RoboMaker.Types.CreateRobotApplicationVersionRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateRobotApplicationVersionResponse) => void): Request<RoboMaker.Types.CreateRobotApplicationVersionResponse, AWSError>;
   /**
    * Creates a simulation application.
    */
   createSimulationApplication(callback?: (err: AWSError, data: RoboMaker.Types.CreateSimulationApplicationResponse) => void): Request<RoboMaker.Types.CreateSimulationApplicationResponse, AWSError>;
   /**
-   * Creates a simulation application with a specific revision id.
+   * Creates a simulation application.
    */
-  createSimulationApplicationVersion(params: RoboMaker.Types.CreateSimulationApplicationVersionRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateSimulationApplicationVersionResponse) => void): Request<RoboMaker.Types.CreateSimulationApplicationVersionResponse, AWSError>;
+  createSimulationApplication(params: RoboMaker.Types.CreateSimulationApplicationRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateSimulationApplicationResponse) => void): Request<RoboMaker.Types.CreateSimulationApplicationResponse, AWSError>;
   /**
    * Creates a simulation application with a specific revision id.
    */
   createSimulationApplicationVersion(callback?: (err: AWSError, data: RoboMaker.Types.CreateSimulationApplicationVersionResponse) => void): Request<RoboMaker.Types.CreateSimulationApplicationVersionResponse, AWSError>;
   /**
-   * Creates a simulation job.
+   * Creates a simulation application with a specific revision id.
    */
-  createSimulationJob(params: RoboMaker.Types.CreateSimulationJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateSimulationJobResponse) => void): Request<RoboMaker.Types.CreateSimulationJobResponse, AWSError>;
+  createSimulationApplicationVersion(params: RoboMaker.Types.CreateSimulationApplicationVersionRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateSimulationApplicationVersionResponse) => void): Request<RoboMaker.Types.CreateSimulationApplicationVersionResponse, AWSError>;
   /**
    * Creates a simulation job.
    */
   createSimulationJob(callback?: (err: AWSError, data: RoboMaker.Types.CreateSimulationJobResponse) => void): Request<RoboMaker.Types.CreateSimulationJobResponse, AWSError>;
   /**
-   * Deletes a fleet.
+   * Creates a simulation job.
    */
-  deleteFleet(params: RoboMaker.Types.DeleteFleetRequest, callback?: (err: AWSError, data: RoboMaker.Types.DeleteFleetResponse) => void): Request<RoboMaker.Types.DeleteFleetResponse, AWSError>;
+  createSimulationJob(params: RoboMaker.Types.CreateSimulationJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateSimulationJobResponse) => void): Request<RoboMaker.Types.CreateSimulationJobResponse, AWSError>;
   /**
    * Deletes a fleet.
    */
   deleteFleet(callback?: (err: AWSError, data: RoboMaker.Types.DeleteFleetResponse) => void): Request<RoboMaker.Types.DeleteFleetResponse, AWSError>;
   /**
-   * Deletes a robot.
+   * Deletes a fleet.
    */
-  deleteRobot(params: RoboMaker.Types.DeleteRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.DeleteRobotResponse) => void): Request<RoboMaker.Types.DeleteRobotResponse, AWSError>;
+  deleteFleet(params: RoboMaker.Types.DeleteFleetRequest, callback?: (err: AWSError, data: RoboMaker.Types.DeleteFleetResponse) => void): Request<RoboMaker.Types.DeleteFleetResponse, AWSError>;
   /**
    * Deletes a robot.
    */
   deleteRobot(callback?: (err: AWSError, data: RoboMaker.Types.DeleteRobotResponse) => void): Request<RoboMaker.Types.DeleteRobotResponse, AWSError>;
   /**
-   * Deletes a robot application.
+   * Deletes a robot.
    */
-  deleteRobotApplication(params: RoboMaker.Types.DeleteRobotApplicationRequest, callback?: (err: AWSError, data: RoboMaker.Types.DeleteRobotApplicationResponse) => void): Request<RoboMaker.Types.DeleteRobotApplicationResponse, AWSError>;
+  deleteRobot(params: RoboMaker.Types.DeleteRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.DeleteRobotResponse) => void): Request<RoboMaker.Types.DeleteRobotResponse, AWSError>;
   /**
    * Deletes a robot application.
    */
   deleteRobotApplication(callback?: (err: AWSError, data: RoboMaker.Types.DeleteRobotApplicationResponse) => void): Request<RoboMaker.Types.DeleteRobotApplicationResponse, AWSError>;
   /**
-   * Deletes a simulation application.
+   * Deletes a robot application.
    */
-  deleteSimulationApplication(params: RoboMaker.Types.DeleteSimulationApplicationRequest, callback?: (err: AWSError, data: RoboMaker.Types.DeleteSimulationApplicationResponse) => void): Request<RoboMaker.Types.DeleteSimulationApplicationResponse, AWSError>;
+  deleteRobotApplication(params: RoboMaker.Types.DeleteRobotApplicationRequest, callback?: (err: AWSError, data: RoboMaker.Types.DeleteRobotApplicationResponse) => void): Request<RoboMaker.Types.DeleteRobotApplicationResponse, AWSError>;
   /**
    * Deletes a simulation application.
    */
   deleteSimulationApplication(callback?: (err: AWSError, data: RoboMaker.Types.DeleteSimulationApplicationResponse) => void): Request<RoboMaker.Types.DeleteSimulationApplicationResponse, AWSError>;
   /**
-   * Deregisters a robot.
+   * Deletes a simulation application.
    */
-  deregisterRobot(params: RoboMaker.Types.DeregisterRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.DeregisterRobotResponse) => void): Request<RoboMaker.Types.DeregisterRobotResponse, AWSError>;
+  deleteSimulationApplication(params: RoboMaker.Types.DeleteSimulationApplicationRequest, callback?: (err: AWSError, data: RoboMaker.Types.DeleteSimulationApplicationResponse) => void): Request<RoboMaker.Types.DeleteSimulationApplicationResponse, AWSError>;
   /**
    * Deregisters a robot.
    */
   deregisterRobot(callback?: (err: AWSError, data: RoboMaker.Types.DeregisterRobotResponse) => void): Request<RoboMaker.Types.DeregisterRobotResponse, AWSError>;
   /**
-   * Describes a deployment job. [Does it work regardless of deployment status, e.g. Failed?]
+   * Deregisters a robot.
    */
-  describeDeploymentJob(params: RoboMaker.Types.DescribeDeploymentJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeDeploymentJobResponse) => void): Request<RoboMaker.Types.DescribeDeploymentJobResponse, AWSError>;
+  deregisterRobot(params: RoboMaker.Types.DeregisterRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.DeregisterRobotResponse) => void): Request<RoboMaker.Types.DeregisterRobotResponse, AWSError>;
   /**
    * Describes a deployment job. [Does it work regardless of deployment status, e.g. Failed?]
    */
   describeDeploymentJob(callback?: (err: AWSError, data: RoboMaker.Types.DescribeDeploymentJobResponse) => void): Request<RoboMaker.Types.DescribeDeploymentJobResponse, AWSError>;
   /**
-   * Describes a fleet.
+   * Describes a deployment job. [Does it work regardless of deployment status, e.g. Failed?]
    */
-  describeFleet(params: RoboMaker.Types.DescribeFleetRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeFleetResponse) => void): Request<RoboMaker.Types.DescribeFleetResponse, AWSError>;
+  describeDeploymentJob(params: RoboMaker.Types.DescribeDeploymentJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeDeploymentJobResponse) => void): Request<RoboMaker.Types.DescribeDeploymentJobResponse, AWSError>;
   /**
    * Describes a fleet.
    */
   describeFleet(callback?: (err: AWSError, data: RoboMaker.Types.DescribeFleetResponse) => void): Request<RoboMaker.Types.DescribeFleetResponse, AWSError>;
   /**
-   * Describes a robot.
+   * Describes a fleet.
    */
-  describeRobot(params: RoboMaker.Types.DescribeRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeRobotResponse) => void): Request<RoboMaker.Types.DescribeRobotResponse, AWSError>;
+  describeFleet(params: RoboMaker.Types.DescribeFleetRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeFleetResponse) => void): Request<RoboMaker.Types.DescribeFleetResponse, AWSError>;
   /**
    * Describes a robot.
    */
   describeRobot(callback?: (err: AWSError, data: RoboMaker.Types.DescribeRobotResponse) => void): Request<RoboMaker.Types.DescribeRobotResponse, AWSError>;
   /**
-   * Describes a robot application.
+   * Describes a robot.
    */
-  describeRobotApplication(params: RoboMaker.Types.DescribeRobotApplicationRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeRobotApplicationResponse) => void): Request<RoboMaker.Types.DescribeRobotApplicationResponse, AWSError>;
+  describeRobot(params: RoboMaker.Types.DescribeRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeRobotResponse) => void): Request<RoboMaker.Types.DescribeRobotResponse, AWSError>;
   /**
    * Describes a robot application.
    */
   describeRobotApplication(callback?: (err: AWSError, data: RoboMaker.Types.DescribeRobotApplicationResponse) => void): Request<RoboMaker.Types.DescribeRobotApplicationResponse, AWSError>;
   /**
-   * Describes a simulation application.
+   * Describes a robot application.
    */
-  describeSimulationApplication(params: RoboMaker.Types.DescribeSimulationApplicationRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeSimulationApplicationResponse) => void): Request<RoboMaker.Types.DescribeSimulationApplicationResponse, AWSError>;
+  describeRobotApplication(params: RoboMaker.Types.DescribeRobotApplicationRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeRobotApplicationResponse) => void): Request<RoboMaker.Types.DescribeRobotApplicationResponse, AWSError>;
   /**
    * Describes a simulation application.
    */
   describeSimulationApplication(callback?: (err: AWSError, data: RoboMaker.Types.DescribeSimulationApplicationResponse) => void): Request<RoboMaker.Types.DescribeSimulationApplicationResponse, AWSError>;
   /**
-   * Describes a simulation job.
+   * Describes a simulation application.
    */
-  describeSimulationJob(params: RoboMaker.Types.DescribeSimulationJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeSimulationJobResponse) => void): Request<RoboMaker.Types.DescribeSimulationJobResponse, AWSError>;
+  describeSimulationApplication(params: RoboMaker.Types.DescribeSimulationApplicationRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeSimulationApplicationResponse) => void): Request<RoboMaker.Types.DescribeSimulationApplicationResponse, AWSError>;
   /**
    * Describes a simulation job.
    */
   describeSimulationJob(callback?: (err: AWSError, data: RoboMaker.Types.DescribeSimulationJobResponse) => void): Request<RoboMaker.Types.DescribeSimulationJobResponse, AWSError>;
   /**
-   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.
+   * Describes a simulation job.
    */
-  listDeploymentJobs(params: RoboMaker.Types.ListDeploymentJobsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListDeploymentJobsResponse) => void): Request<RoboMaker.Types.ListDeploymentJobsResponse, AWSError>;
+  describeSimulationJob(params: RoboMaker.Types.DescribeSimulationJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeSimulationJobResponse) => void): Request<RoboMaker.Types.DescribeSimulationJobResponse, AWSError>;
   /**
    * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.
    */
   listDeploymentJobs(callback?: (err: AWSError, data: RoboMaker.Types.ListDeploymentJobsResponse) => void): Request<RoboMaker.Types.ListDeploymentJobsResponse, AWSError>;
   /**
-   * Returns a list of fleets. You can optionally provide filters to retrieve specific fleets.
+   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.
    */
-  listFleets(params: RoboMaker.Types.ListFleetsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListFleetsResponse) => void): Request<RoboMaker.Types.ListFleetsResponse, AWSError>;
+  listDeploymentJobs(params: RoboMaker.Types.ListDeploymentJobsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListDeploymentJobsResponse) => void): Request<RoboMaker.Types.ListDeploymentJobsResponse, AWSError>;
   /**
    * Returns a list of fleets. You can optionally provide filters to retrieve specific fleets.
    */
   listFleets(callback?: (err: AWSError, data: RoboMaker.Types.ListFleetsResponse) => void): Request<RoboMaker.Types.ListFleetsResponse, AWSError>;
   /**
-   * Returns a list of robot application. You can optionally provide filters to retrieve specific robot applications.
+   * Returns a list of fleets. You can optionally provide filters to retrieve specific fleets.
    */
-  listRobotApplications(params: RoboMaker.Types.ListRobotApplicationsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListRobotApplicationsResponse) => void): Request<RoboMaker.Types.ListRobotApplicationsResponse, AWSError>;
+  listFleets(params: RoboMaker.Types.ListFleetsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListFleetsResponse) => void): Request<RoboMaker.Types.ListFleetsResponse, AWSError>;
   /**
    * Returns a list of robot application. You can optionally provide filters to retrieve specific robot applications.
    */
   listRobotApplications(callback?: (err: AWSError, data: RoboMaker.Types.ListRobotApplicationsResponse) => void): Request<RoboMaker.Types.ListRobotApplicationsResponse, AWSError>;
   /**
-   * Returns a list of robots. You can optionally provide filters to retrieve specific robots.
+   * Returns a list of robot application. You can optionally provide filters to retrieve specific robot applications.
    */
-  listRobots(params: RoboMaker.Types.ListRobotsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListRobotsResponse) => void): Request<RoboMaker.Types.ListRobotsResponse, AWSError>;
+  listRobotApplications(params: RoboMaker.Types.ListRobotApplicationsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListRobotApplicationsResponse) => void): Request<RoboMaker.Types.ListRobotApplicationsResponse, AWSError>;
   /**
    * Returns a list of robots. You can optionally provide filters to retrieve specific robots.
    */
   listRobots(callback?: (err: AWSError, data: RoboMaker.Types.ListRobotsResponse) => void): Request<RoboMaker.Types.ListRobotsResponse, AWSError>;
   /**
-   * Returns a list of simulation applications. You can optionally provide filters to retrieve specific simulation applications.
+   * Returns a list of robots. You can optionally provide filters to retrieve specific robots.
    */
-  listSimulationApplications(params: RoboMaker.Types.ListSimulationApplicationsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListSimulationApplicationsResponse) => void): Request<RoboMaker.Types.ListSimulationApplicationsResponse, AWSError>;
+  listRobots(params: RoboMaker.Types.ListRobotsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListRobotsResponse) => void): Request<RoboMaker.Types.ListRobotsResponse, AWSError>;
   /**
    * Returns a list of simulation applications. You can optionally provide filters to retrieve specific simulation applications.
    */
   listSimulationApplications(callback?: (err: AWSError, data: RoboMaker.Types.ListSimulationApplicationsResponse) => void): Request<RoboMaker.Types.ListSimulationApplicationsResponse, AWSError>;
   /**
-   * Returns a list of simulation jobs. You can optionally provide filters to retrieve specific simulation jobs.
+   * Returns a list of simulation applications. You can optionally provide filters to retrieve specific simulation applications.
    */
-  listSimulationJobs(params: RoboMaker.Types.ListSimulationJobsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListSimulationJobsResponse) => void): Request<RoboMaker.Types.ListSimulationJobsResponse, AWSError>;
+  listSimulationApplications(params: RoboMaker.Types.ListSimulationApplicationsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListSimulationApplicationsResponse) => void): Request<RoboMaker.Types.ListSimulationApplicationsResponse, AWSError>;
   /**
    * Returns a list of simulation jobs. You can optionally provide filters to retrieve specific simulation jobs.
    */
   listSimulationJobs(callback?: (err: AWSError, data: RoboMaker.Types.ListSimulationJobsResponse) => void): Request<RoboMaker.Types.ListSimulationJobsResponse, AWSError>;
   /**
-   * Lists all tags on a AWS RoboMaker resource.
+   * Returns a list of simulation jobs. You can optionally provide filters to retrieve specific simulation jobs.
    */
-  listTagsForResource(params: RoboMaker.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListTagsForResourceResponse) => void): Request<RoboMaker.Types.ListTagsForResourceResponse, AWSError>;
+  listSimulationJobs(params: RoboMaker.Types.ListSimulationJobsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListSimulationJobsResponse) => void): Request<RoboMaker.Types.ListSimulationJobsResponse, AWSError>;
   /**
    * Lists all tags on a AWS RoboMaker resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: RoboMaker.Types.ListTagsForResourceResponse) => void): Request<RoboMaker.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Registers a robot with a fleet.
+   * Lists all tags on a AWS RoboMaker resource.
    */
-  registerRobot(params: RoboMaker.Types.RegisterRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.RegisterRobotResponse) => void): Request<RoboMaker.Types.RegisterRobotResponse, AWSError>;
+  listTagsForResource(params: RoboMaker.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListTagsForResourceResponse) => void): Request<RoboMaker.Types.ListTagsForResourceResponse, AWSError>;
   /**
    * Registers a robot with a fleet.
    */
   registerRobot(callback?: (err: AWSError, data: RoboMaker.Types.RegisterRobotResponse) => void): Request<RoboMaker.Types.RegisterRobotResponse, AWSError>;
   /**
-   * Restarts a running simulation job.
+   * Registers a robot with a fleet.
    */
-  restartSimulationJob(params: RoboMaker.Types.RestartSimulationJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.RestartSimulationJobResponse) => void): Request<RoboMaker.Types.RestartSimulationJobResponse, AWSError>;
+  registerRobot(params: RoboMaker.Types.RegisterRobotRequest, callback?: (err: AWSError, data: RoboMaker.Types.RegisterRobotResponse) => void): Request<RoboMaker.Types.RegisterRobotResponse, AWSError>;
   /**
    * Restarts a running simulation job.
    */
   restartSimulationJob(callback?: (err: AWSError, data: RoboMaker.Types.RestartSimulationJobResponse) => void): Request<RoboMaker.Types.RestartSimulationJobResponse, AWSError>;
   /**
-   * Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.
+   * Restarts a running simulation job.
    */
-  syncDeploymentJob(params: RoboMaker.Types.SyncDeploymentJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.SyncDeploymentJobResponse) => void): Request<RoboMaker.Types.SyncDeploymentJobResponse, AWSError>;
+  restartSimulationJob(params: RoboMaker.Types.RestartSimulationJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.RestartSimulationJobResponse) => void): Request<RoboMaker.Types.RestartSimulationJobResponse, AWSError>;
   /**
    * Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.
    */
   syncDeploymentJob(callback?: (err: AWSError, data: RoboMaker.Types.SyncDeploymentJobResponse) => void): Request<RoboMaker.Types.SyncDeploymentJobResponse, AWSError>;
   /**
-   * Adds or edits tags for a AWS RoboMaker resource. Each tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty strings.  For information about the rules that apply to tag keys and tag values, see User-Defined Tag Restrictions in the AWS Billing and Cost Management User Guide. 
+   * Syncrhonizes robots in a fleet to the latest deployment. This is helpful if robots were added after a deployment.
    */
-  tagResource(params: RoboMaker.Types.TagResourceRequest, callback?: (err: AWSError, data: RoboMaker.Types.TagResourceResponse) => void): Request<RoboMaker.Types.TagResourceResponse, AWSError>;
+  syncDeploymentJob(params: RoboMaker.Types.SyncDeploymentJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.SyncDeploymentJobResponse) => void): Request<RoboMaker.Types.SyncDeploymentJobResponse, AWSError>;
   /**
    * Adds or edits tags for a AWS RoboMaker resource. Each tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty strings.  For information about the rules that apply to tag keys and tag values, see User-Defined Tag Restrictions in the AWS Billing and Cost Management User Guide. 
    */
   tagResource(callback?: (err: AWSError, data: RoboMaker.Types.TagResourceResponse) => void): Request<RoboMaker.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes the specified tags from the specified AWS RoboMaker resource. To remove a tag, specify the tag key. To change the tag value of an existing tag key, use  TagResource . 
+   * Adds or edits tags for a AWS RoboMaker resource. Each tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty strings.  For information about the rules that apply to tag keys and tag values, see User-Defined Tag Restrictions in the AWS Billing and Cost Management User Guide. 
    */
-  untagResource(params: RoboMaker.Types.UntagResourceRequest, callback?: (err: AWSError, data: RoboMaker.Types.UntagResourceResponse) => void): Request<RoboMaker.Types.UntagResourceResponse, AWSError>;
+  tagResource(params: RoboMaker.Types.TagResourceRequest, callback?: (err: AWSError, data: RoboMaker.Types.TagResourceResponse) => void): Request<RoboMaker.Types.TagResourceResponse, AWSError>;
   /**
    * Removes the specified tags from the specified AWS RoboMaker resource. To remove a tag, specify the tag key. To change the tag value of an existing tag key, use  TagResource . 
    */
   untagResource(callback?: (err: AWSError, data: RoboMaker.Types.UntagResourceResponse) => void): Request<RoboMaker.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates a robot application.
+   * Removes the specified tags from the specified AWS RoboMaker resource. To remove a tag, specify the tag key. To change the tag value of an existing tag key, use  TagResource . 
    */
-  updateRobotApplication(params: RoboMaker.Types.UpdateRobotApplicationRequest, callback?: (err: AWSError, data: RoboMaker.Types.UpdateRobotApplicationResponse) => void): Request<RoboMaker.Types.UpdateRobotApplicationResponse, AWSError>;
+  untagResource(params: RoboMaker.Types.UntagResourceRequest, callback?: (err: AWSError, data: RoboMaker.Types.UntagResourceResponse) => void): Request<RoboMaker.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates a robot application.
    */
   updateRobotApplication(callback?: (err: AWSError, data: RoboMaker.Types.UpdateRobotApplicationResponse) => void): Request<RoboMaker.Types.UpdateRobotApplicationResponse, AWSError>;
   /**
-   * Updates a simulation application.
+   * Updates a robot application.
    */
-  updateSimulationApplication(params: RoboMaker.Types.UpdateSimulationApplicationRequest, callback?: (err: AWSError, data: RoboMaker.Types.UpdateSimulationApplicationResponse) => void): Request<RoboMaker.Types.UpdateSimulationApplicationResponse, AWSError>;
+  updateRobotApplication(params: RoboMaker.Types.UpdateRobotApplicationRequest, callback?: (err: AWSError, data: RoboMaker.Types.UpdateRobotApplicationResponse) => void): Request<RoboMaker.Types.UpdateRobotApplicationResponse, AWSError>;
   /**
    * Updates a simulation application.
    */
   updateSimulationApplication(callback?: (err: AWSError, data: RoboMaker.Types.UpdateSimulationApplicationResponse) => void): Request<RoboMaker.Types.UpdateSimulationApplicationResponse, AWSError>;
+  /**
+   * Updates a simulation application.
+   */
+  updateSimulationApplication(params: RoboMaker.Types.UpdateSimulationApplicationRequest, callback?: (err: AWSError, data: RoboMaker.Types.UpdateSimulationApplicationResponse) => void): Request<RoboMaker.Types.UpdateSimulationApplicationResponse, AWSError>;
 }
 declare namespace RoboMaker {
   export type Architecture = "X86_64"|"ARM64"|"ARMHF"|string;

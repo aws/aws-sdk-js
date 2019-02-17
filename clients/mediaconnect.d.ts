@@ -14,139 +14,139 @@ declare class MediaConnect extends Service {
   /**
    * Adds outputs to an existing flow. You can create up to 20 outputs per flow.
    */
-  addFlowOutputs(params: MediaConnect.Types.AddFlowOutputsRequest, callback?: (err: AWSError, data: MediaConnect.Types.AddFlowOutputsResponse) => void): Request<MediaConnect.Types.AddFlowOutputsResponse, AWSError>;
+  addFlowOutputs(callback?: (err: AWSError, data: MediaConnect.Types.AddFlowOutputsResponse) => void): Request<MediaConnect.Types.AddFlowOutputsResponse, AWSError>;
   /**
    * Adds outputs to an existing flow. You can create up to 20 outputs per flow.
    */
-  addFlowOutputs(callback?: (err: AWSError, data: MediaConnect.Types.AddFlowOutputsResponse) => void): Request<MediaConnect.Types.AddFlowOutputsResponse, AWSError>;
-  /**
-   * Creates a new flow. The request must include one source. The request optionally can include outputs (up to 20) and entitlements (up to 50).
-   */
-  createFlow(params: MediaConnect.Types.CreateFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.CreateFlowResponse) => void): Request<MediaConnect.Types.CreateFlowResponse, AWSError>;
+  addFlowOutputs(params: MediaConnect.Types.AddFlowOutputsRequest, callback?: (err: AWSError, data: MediaConnect.Types.AddFlowOutputsResponse) => void): Request<MediaConnect.Types.AddFlowOutputsResponse, AWSError>;
   /**
    * Creates a new flow. The request must include one source. The request optionally can include outputs (up to 20) and entitlements (up to 50).
    */
   createFlow(callback?: (err: AWSError, data: MediaConnect.Types.CreateFlowResponse) => void): Request<MediaConnect.Types.CreateFlowResponse, AWSError>;
   /**
-   * Deletes a flow. Before you can delete a flow, you must stop the flow.
+   * Creates a new flow. The request must include one source. The request optionally can include outputs (up to 20) and entitlements (up to 50).
    */
-  deleteFlow(params: MediaConnect.Types.DeleteFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.DeleteFlowResponse) => void): Request<MediaConnect.Types.DeleteFlowResponse, AWSError>;
+  createFlow(params: MediaConnect.Types.CreateFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.CreateFlowResponse) => void): Request<MediaConnect.Types.CreateFlowResponse, AWSError>;
   /**
    * Deletes a flow. Before you can delete a flow, you must stop the flow.
    */
   deleteFlow(callback?: (err: AWSError, data: MediaConnect.Types.DeleteFlowResponse) => void): Request<MediaConnect.Types.DeleteFlowResponse, AWSError>;
   /**
-   * Displays the details of a flow. The response includes the flow ARN, name, and Availability Zone, as well as details about the source, outputs, and entitlements.
+   * Deletes a flow. Before you can delete a flow, you must stop the flow.
    */
-  describeFlow(params: MediaConnect.Types.DescribeFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
+  deleteFlow(params: MediaConnect.Types.DeleteFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.DeleteFlowResponse) => void): Request<MediaConnect.Types.DeleteFlowResponse, AWSError>;
   /**
    * Displays the details of a flow. The response includes the flow ARN, name, and Availability Zone, as well as details about the source, outputs, and entitlements.
    */
   describeFlow(callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
   /**
-   * Grants entitlements to an existing flow.
+   * Displays the details of a flow. The response includes the flow ARN, name, and Availability Zone, as well as details about the source, outputs, and entitlements.
    */
-  grantFlowEntitlements(params: MediaConnect.Types.GrantFlowEntitlementsRequest, callback?: (err: AWSError, data: MediaConnect.Types.GrantFlowEntitlementsResponse) => void): Request<MediaConnect.Types.GrantFlowEntitlementsResponse, AWSError>;
+  describeFlow(params: MediaConnect.Types.DescribeFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
   /**
    * Grants entitlements to an existing flow.
    */
   grantFlowEntitlements(callback?: (err: AWSError, data: MediaConnect.Types.GrantFlowEntitlementsResponse) => void): Request<MediaConnect.Types.GrantFlowEntitlementsResponse, AWSError>;
   /**
-   * Displays a list of all entitlements that have been granted to this account. This request returns 20 results per page.
+   * Grants entitlements to an existing flow.
    */
-  listEntitlements(params: MediaConnect.Types.ListEntitlementsRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListEntitlementsResponse) => void): Request<MediaConnect.Types.ListEntitlementsResponse, AWSError>;
+  grantFlowEntitlements(params: MediaConnect.Types.GrantFlowEntitlementsRequest, callback?: (err: AWSError, data: MediaConnect.Types.GrantFlowEntitlementsResponse) => void): Request<MediaConnect.Types.GrantFlowEntitlementsResponse, AWSError>;
   /**
    * Displays a list of all entitlements that have been granted to this account. This request returns 20 results per page.
    */
   listEntitlements(callback?: (err: AWSError, data: MediaConnect.Types.ListEntitlementsResponse) => void): Request<MediaConnect.Types.ListEntitlementsResponse, AWSError>;
   /**
-   * Displays a list of flows that are associated with this account. This request returns a paginated result.
+   * Displays a list of all entitlements that have been granted to this account. This request returns 20 results per page.
    */
-  listFlows(params: MediaConnect.Types.ListFlowsRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListFlowsResponse) => void): Request<MediaConnect.Types.ListFlowsResponse, AWSError>;
+  listEntitlements(params: MediaConnect.Types.ListEntitlementsRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListEntitlementsResponse) => void): Request<MediaConnect.Types.ListEntitlementsResponse, AWSError>;
   /**
    * Displays a list of flows that are associated with this account. This request returns a paginated result.
    */
   listFlows(callback?: (err: AWSError, data: MediaConnect.Types.ListFlowsResponse) => void): Request<MediaConnect.Types.ListFlowsResponse, AWSError>;
   /**
-   * Lists all tags associated with the resource.
+   * Displays a list of flows that are associated with this account. This request returns a paginated result.
    */
-  listTagsForResource(params: MediaConnect.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListTagsForResourceResponse) => void): Request<MediaConnect.Types.ListTagsForResourceResponse, AWSError>;
+  listFlows(params: MediaConnect.Types.ListFlowsRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListFlowsResponse) => void): Request<MediaConnect.Types.ListFlowsResponse, AWSError>;
   /**
    * Lists all tags associated with the resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: MediaConnect.Types.ListTagsForResourceResponse) => void): Request<MediaConnect.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Removes an output from an existing flow. This request can be made only on an output that does not have an entitlement associated with it. If the output has an entitlement, you must revoke the entitlement instead. When an entitlement is revoked from a flow, the service automatically removes the associated output.
+   * Lists all tags associated with the resource.
    */
-  removeFlowOutput(params: MediaConnect.Types.RemoveFlowOutputRequest, callback?: (err: AWSError, data: MediaConnect.Types.RemoveFlowOutputResponse) => void): Request<MediaConnect.Types.RemoveFlowOutputResponse, AWSError>;
+  listTagsForResource(params: MediaConnect.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListTagsForResourceResponse) => void): Request<MediaConnect.Types.ListTagsForResourceResponse, AWSError>;
   /**
    * Removes an output from an existing flow. This request can be made only on an output that does not have an entitlement associated with it. If the output has an entitlement, you must revoke the entitlement instead. When an entitlement is revoked from a flow, the service automatically removes the associated output.
    */
   removeFlowOutput(callback?: (err: AWSError, data: MediaConnect.Types.RemoveFlowOutputResponse) => void): Request<MediaConnect.Types.RemoveFlowOutputResponse, AWSError>;
   /**
-   * Revokes an entitlement from a flow. Once an entitlement is revoked, the content becomes unavailable to the subscriber and the associated output is removed.
+   * Removes an output from an existing flow. This request can be made only on an output that does not have an entitlement associated with it. If the output has an entitlement, you must revoke the entitlement instead. When an entitlement is revoked from a flow, the service automatically removes the associated output.
    */
-  revokeFlowEntitlement(params: MediaConnect.Types.RevokeFlowEntitlementRequest, callback?: (err: AWSError, data: MediaConnect.Types.RevokeFlowEntitlementResponse) => void): Request<MediaConnect.Types.RevokeFlowEntitlementResponse, AWSError>;
+  removeFlowOutput(params: MediaConnect.Types.RemoveFlowOutputRequest, callback?: (err: AWSError, data: MediaConnect.Types.RemoveFlowOutputResponse) => void): Request<MediaConnect.Types.RemoveFlowOutputResponse, AWSError>;
   /**
    * Revokes an entitlement from a flow. Once an entitlement is revoked, the content becomes unavailable to the subscriber and the associated output is removed.
    */
   revokeFlowEntitlement(callback?: (err: AWSError, data: MediaConnect.Types.RevokeFlowEntitlementResponse) => void): Request<MediaConnect.Types.RevokeFlowEntitlementResponse, AWSError>;
   /**
-   * Starts a flow.
+   * Revokes an entitlement from a flow. Once an entitlement is revoked, the content becomes unavailable to the subscriber and the associated output is removed.
    */
-  startFlow(params: MediaConnect.Types.StartFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.StartFlowResponse) => void): Request<MediaConnect.Types.StartFlowResponse, AWSError>;
+  revokeFlowEntitlement(params: MediaConnect.Types.RevokeFlowEntitlementRequest, callback?: (err: AWSError, data: MediaConnect.Types.RevokeFlowEntitlementResponse) => void): Request<MediaConnect.Types.RevokeFlowEntitlementResponse, AWSError>;
   /**
    * Starts a flow.
    */
   startFlow(callback?: (err: AWSError, data: MediaConnect.Types.StartFlowResponse) => void): Request<MediaConnect.Types.StartFlowResponse, AWSError>;
   /**
-   * Stops a flow.
+   * Starts a flow.
    */
-  stopFlow(params: MediaConnect.Types.StopFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.StopFlowResponse) => void): Request<MediaConnect.Types.StopFlowResponse, AWSError>;
+  startFlow(params: MediaConnect.Types.StartFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.StartFlowResponse) => void): Request<MediaConnect.Types.StartFlowResponse, AWSError>;
   /**
    * Stops a flow.
    */
   stopFlow(callback?: (err: AWSError, data: MediaConnect.Types.StopFlowResponse) => void): Request<MediaConnect.Types.StopFlowResponse, AWSError>;
   /**
-   * Associates the specified tags to a resource. If the request does not mention an existing tag associated with the resource, that tag is not changed.
+   * Stops a flow.
    */
-  tagResource(params: MediaConnect.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  stopFlow(params: MediaConnect.Types.StopFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.StopFlowResponse) => void): Request<MediaConnect.Types.StopFlowResponse, AWSError>;
   /**
    * Associates the specified tags to a resource. If the request does not mention an existing tag associated with the resource, that tag is not changed.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified tags from a resource.
+   * Associates the specified tags to a resource. If the request does not mention an existing tag associated with the resource, that tag is not changed.
    */
-  untagResource(params: MediaConnect.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  tagResource(params: MediaConnect.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified tags from a resource.
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * You can change an entitlement's description, subscribers, and encryption. If you change the subscribers, the service will remove the outputs that are are used by the subscribers that are removed.
+   * Deletes the specified tags from a resource.
    */
-  updateFlowEntitlement(params: MediaConnect.Types.UpdateFlowEntitlementRequest, callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowEntitlementResponse) => void): Request<MediaConnect.Types.UpdateFlowEntitlementResponse, AWSError>;
+  untagResource(params: MediaConnect.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * You can change an entitlement's description, subscribers, and encryption. If you change the subscribers, the service will remove the outputs that are are used by the subscribers that are removed.
    */
   updateFlowEntitlement(callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowEntitlementResponse) => void): Request<MediaConnect.Types.UpdateFlowEntitlementResponse, AWSError>;
   /**
-   * Updates an existing flow output.
+   * You can change an entitlement's description, subscribers, and encryption. If you change the subscribers, the service will remove the outputs that are are used by the subscribers that are removed.
    */
-  updateFlowOutput(params: MediaConnect.Types.UpdateFlowOutputRequest, callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowOutputResponse) => void): Request<MediaConnect.Types.UpdateFlowOutputResponse, AWSError>;
+  updateFlowEntitlement(params: MediaConnect.Types.UpdateFlowEntitlementRequest, callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowEntitlementResponse) => void): Request<MediaConnect.Types.UpdateFlowEntitlementResponse, AWSError>;
   /**
    * Updates an existing flow output.
    */
   updateFlowOutput(callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowOutputResponse) => void): Request<MediaConnect.Types.UpdateFlowOutputResponse, AWSError>;
   /**
-   * Updates the source of a flow.
+   * Updates an existing flow output.
    */
-  updateFlowSource(params: MediaConnect.Types.UpdateFlowSourceRequest, callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowSourceResponse) => void): Request<MediaConnect.Types.UpdateFlowSourceResponse, AWSError>;
+  updateFlowOutput(params: MediaConnect.Types.UpdateFlowOutputRequest, callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowOutputResponse) => void): Request<MediaConnect.Types.UpdateFlowOutputResponse, AWSError>;
   /**
    * Updates the source of a flow.
    */
   updateFlowSource(callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowSourceResponse) => void): Request<MediaConnect.Types.UpdateFlowSourceResponse, AWSError>;
+  /**
+   * Updates the source of a flow.
+   */
+  updateFlowSource(params: MediaConnect.Types.UpdateFlowSourceRequest, callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowSourceResponse) => void): Request<MediaConnect.Types.UpdateFlowSourceResponse, AWSError>;
 }
 declare namespace MediaConnect {
   export interface AddFlowOutputsRequest {

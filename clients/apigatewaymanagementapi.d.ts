@@ -14,11 +14,11 @@ declare class ApiGatewayManagementApi extends Service {
   /**
    * Sends the provided data to the specified connection.
    */
-  postToConnection(params: ApiGatewayManagementApi.Types.PostToConnectionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  postToConnection(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sends the provided data to the specified connection.
    */
-  postToConnection(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  postToConnection(params: ApiGatewayManagementApi.Types.PostToConnectionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace ApiGatewayManagementApi {
   export type Data = Buffer|Uint8Array|Blob|string;

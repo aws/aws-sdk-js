@@ -14,67 +14,67 @@ declare class PinpointSMSVoice extends Service {
   /**
    * Create a new configuration set. After you create the configuration set, you can add one or more event destinations to it.
    */
-  createConfigurationSet(params: PinpointSMSVoice.Types.CreateConfigurationSetRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.CreateConfigurationSetResponse) => void): Request<PinpointSMSVoice.Types.CreateConfigurationSetResponse, AWSError>;
+  createConfigurationSet(callback?: (err: AWSError, data: PinpointSMSVoice.Types.CreateConfigurationSetResponse) => void): Request<PinpointSMSVoice.Types.CreateConfigurationSetResponse, AWSError>;
   /**
    * Create a new configuration set. After you create the configuration set, you can add one or more event destinations to it.
    */
-  createConfigurationSet(callback?: (err: AWSError, data: PinpointSMSVoice.Types.CreateConfigurationSetResponse) => void): Request<PinpointSMSVoice.Types.CreateConfigurationSetResponse, AWSError>;
-  /**
-   * Create a new event destination in a configuration set.
-   */
-  createConfigurationSetEventDestination(params: PinpointSMSVoice.Types.CreateConfigurationSetEventDestinationRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.CreateConfigurationSetEventDestinationResponse) => void): Request<PinpointSMSVoice.Types.CreateConfigurationSetEventDestinationResponse, AWSError>;
+  createConfigurationSet(params: PinpointSMSVoice.Types.CreateConfigurationSetRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.CreateConfigurationSetResponse) => void): Request<PinpointSMSVoice.Types.CreateConfigurationSetResponse, AWSError>;
   /**
    * Create a new event destination in a configuration set.
    */
   createConfigurationSetEventDestination(callback?: (err: AWSError, data: PinpointSMSVoice.Types.CreateConfigurationSetEventDestinationResponse) => void): Request<PinpointSMSVoice.Types.CreateConfigurationSetEventDestinationResponse, AWSError>;
   /**
-   * Deletes an existing configuration set.
+   * Create a new event destination in a configuration set.
    */
-  deleteConfigurationSet(params: PinpointSMSVoice.Types.DeleteConfigurationSetRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.DeleteConfigurationSetResponse) => void): Request<PinpointSMSVoice.Types.DeleteConfigurationSetResponse, AWSError>;
+  createConfigurationSetEventDestination(params: PinpointSMSVoice.Types.CreateConfigurationSetEventDestinationRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.CreateConfigurationSetEventDestinationResponse) => void): Request<PinpointSMSVoice.Types.CreateConfigurationSetEventDestinationResponse, AWSError>;
   /**
    * Deletes an existing configuration set.
    */
   deleteConfigurationSet(callback?: (err: AWSError, data: PinpointSMSVoice.Types.DeleteConfigurationSetResponse) => void): Request<PinpointSMSVoice.Types.DeleteConfigurationSetResponse, AWSError>;
   /**
-   * Deletes an event destination in a configuration set.
+   * Deletes an existing configuration set.
    */
-  deleteConfigurationSetEventDestination(params: PinpointSMSVoice.Types.DeleteConfigurationSetEventDestinationRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.DeleteConfigurationSetEventDestinationResponse) => void): Request<PinpointSMSVoice.Types.DeleteConfigurationSetEventDestinationResponse, AWSError>;
+  deleteConfigurationSet(params: PinpointSMSVoice.Types.DeleteConfigurationSetRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.DeleteConfigurationSetResponse) => void): Request<PinpointSMSVoice.Types.DeleteConfigurationSetResponse, AWSError>;
   /**
    * Deletes an event destination in a configuration set.
    */
   deleteConfigurationSetEventDestination(callback?: (err: AWSError, data: PinpointSMSVoice.Types.DeleteConfigurationSetEventDestinationResponse) => void): Request<PinpointSMSVoice.Types.DeleteConfigurationSetEventDestinationResponse, AWSError>;
   /**
-   * Obtain information about an event destination, including the types of events it reports, the Amazon Resource Name (ARN) of the destination, and the name of the event destination.
+   * Deletes an event destination in a configuration set.
    */
-  getConfigurationSetEventDestinations(params: PinpointSMSVoice.Types.GetConfigurationSetEventDestinationsRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.GetConfigurationSetEventDestinationsResponse) => void): Request<PinpointSMSVoice.Types.GetConfigurationSetEventDestinationsResponse, AWSError>;
+  deleteConfigurationSetEventDestination(params: PinpointSMSVoice.Types.DeleteConfigurationSetEventDestinationRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.DeleteConfigurationSetEventDestinationResponse) => void): Request<PinpointSMSVoice.Types.DeleteConfigurationSetEventDestinationResponse, AWSError>;
   /**
    * Obtain information about an event destination, including the types of events it reports, the Amazon Resource Name (ARN) of the destination, and the name of the event destination.
    */
   getConfigurationSetEventDestinations(callback?: (err: AWSError, data: PinpointSMSVoice.Types.GetConfigurationSetEventDestinationsResponse) => void): Request<PinpointSMSVoice.Types.GetConfigurationSetEventDestinationsResponse, AWSError>;
   /**
-   * List all of the configuration sets associated with your Amazon Pinpoint account in the current region.
+   * Obtain information about an event destination, including the types of events it reports, the Amazon Resource Name (ARN) of the destination, and the name of the event destination.
    */
-  listConfigurationSets(params: PinpointSMSVoice.Types.ListConfigurationSetsRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.ListConfigurationSetsResponse) => void): Request<PinpointSMSVoice.Types.ListConfigurationSetsResponse, AWSError>;
+  getConfigurationSetEventDestinations(params: PinpointSMSVoice.Types.GetConfigurationSetEventDestinationsRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.GetConfigurationSetEventDestinationsResponse) => void): Request<PinpointSMSVoice.Types.GetConfigurationSetEventDestinationsResponse, AWSError>;
   /**
    * List all of the configuration sets associated with your Amazon Pinpoint account in the current region.
    */
   listConfigurationSets(callback?: (err: AWSError, data: PinpointSMSVoice.Types.ListConfigurationSetsResponse) => void): Request<PinpointSMSVoice.Types.ListConfigurationSetsResponse, AWSError>;
   /**
-   * Create a new voice message and send it to a recipient's phone number.
+   * List all of the configuration sets associated with your Amazon Pinpoint account in the current region.
    */
-  sendVoiceMessage(params: PinpointSMSVoice.Types.SendVoiceMessageRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.SendVoiceMessageResponse) => void): Request<PinpointSMSVoice.Types.SendVoiceMessageResponse, AWSError>;
+  listConfigurationSets(params: PinpointSMSVoice.Types.ListConfigurationSetsRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.ListConfigurationSetsResponse) => void): Request<PinpointSMSVoice.Types.ListConfigurationSetsResponse, AWSError>;
   /**
    * Create a new voice message and send it to a recipient's phone number.
    */
   sendVoiceMessage(callback?: (err: AWSError, data: PinpointSMSVoice.Types.SendVoiceMessageResponse) => void): Request<PinpointSMSVoice.Types.SendVoiceMessageResponse, AWSError>;
   /**
-   * Update an event destination in a configuration set. An event destination is a location that you publish information about your voice calls to. For example, you can log an event to an Amazon CloudWatch destination when a call fails.
+   * Create a new voice message and send it to a recipient's phone number.
    */
-  updateConfigurationSetEventDestination(params: PinpointSMSVoice.Types.UpdateConfigurationSetEventDestinationRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.UpdateConfigurationSetEventDestinationResponse) => void): Request<PinpointSMSVoice.Types.UpdateConfigurationSetEventDestinationResponse, AWSError>;
+  sendVoiceMessage(params: PinpointSMSVoice.Types.SendVoiceMessageRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.SendVoiceMessageResponse) => void): Request<PinpointSMSVoice.Types.SendVoiceMessageResponse, AWSError>;
   /**
    * Update an event destination in a configuration set. An event destination is a location that you publish information about your voice calls to. For example, you can log an event to an Amazon CloudWatch destination when a call fails.
    */
   updateConfigurationSetEventDestination(callback?: (err: AWSError, data: PinpointSMSVoice.Types.UpdateConfigurationSetEventDestinationResponse) => void): Request<PinpointSMSVoice.Types.UpdateConfigurationSetEventDestinationResponse, AWSError>;
+  /**
+   * Update an event destination in a configuration set. An event destination is a location that you publish information about your voice calls to. For example, you can log an event to an Amazon CloudWatch destination when a call fails.
+   */
+  updateConfigurationSetEventDestination(params: PinpointSMSVoice.Types.UpdateConfigurationSetEventDestinationRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.UpdateConfigurationSetEventDestinationResponse) => void): Request<PinpointSMSVoice.Types.UpdateConfigurationSetEventDestinationResponse, AWSError>;
 }
 declare namespace PinpointSMSVoice {
   export type Boolean = boolean;

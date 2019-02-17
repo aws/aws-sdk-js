@@ -14,171 +14,171 @@ declare class DAX extends Service {
   /**
    * Creates a DAX cluster. All nodes in the cluster run the same DAX caching software.
    */
-  createCluster(params: DAX.Types.CreateClusterRequest, callback?: (err: AWSError, data: DAX.Types.CreateClusterResponse) => void): Request<DAX.Types.CreateClusterResponse, AWSError>;
+  createCluster(callback?: (err: AWSError, data: DAX.Types.CreateClusterResponse) => void): Request<DAX.Types.CreateClusterResponse, AWSError>;
   /**
    * Creates a DAX cluster. All nodes in the cluster run the same DAX caching software.
    */
-  createCluster(callback?: (err: AWSError, data: DAX.Types.CreateClusterResponse) => void): Request<DAX.Types.CreateClusterResponse, AWSError>;
-  /**
-   * Creates a new parameter group. A parameter group is a collection of parameters that you apply to all of the nodes in a DAX cluster.
-   */
-  createParameterGroup(params: DAX.Types.CreateParameterGroupRequest, callback?: (err: AWSError, data: DAX.Types.CreateParameterGroupResponse) => void): Request<DAX.Types.CreateParameterGroupResponse, AWSError>;
+  createCluster(params: DAX.Types.CreateClusterRequest, callback?: (err: AWSError, data: DAX.Types.CreateClusterResponse) => void): Request<DAX.Types.CreateClusterResponse, AWSError>;
   /**
    * Creates a new parameter group. A parameter group is a collection of parameters that you apply to all of the nodes in a DAX cluster.
    */
   createParameterGroup(callback?: (err: AWSError, data: DAX.Types.CreateParameterGroupResponse) => void): Request<DAX.Types.CreateParameterGroupResponse, AWSError>;
   /**
-   * Creates a new subnet group.
+   * Creates a new parameter group. A parameter group is a collection of parameters that you apply to all of the nodes in a DAX cluster.
    */
-  createSubnetGroup(params: DAX.Types.CreateSubnetGroupRequest, callback?: (err: AWSError, data: DAX.Types.CreateSubnetGroupResponse) => void): Request<DAX.Types.CreateSubnetGroupResponse, AWSError>;
+  createParameterGroup(params: DAX.Types.CreateParameterGroupRequest, callback?: (err: AWSError, data: DAX.Types.CreateParameterGroupResponse) => void): Request<DAX.Types.CreateParameterGroupResponse, AWSError>;
   /**
    * Creates a new subnet group.
    */
   createSubnetGroup(callback?: (err: AWSError, data: DAX.Types.CreateSubnetGroupResponse) => void): Request<DAX.Types.CreateSubnetGroupResponse, AWSError>;
   /**
-   * Removes one or more nodes from a DAX cluster.  You cannot use DecreaseReplicationFactor to remove the last node in a DAX cluster. If you need to do this, use DeleteCluster instead. 
+   * Creates a new subnet group.
    */
-  decreaseReplicationFactor(params: DAX.Types.DecreaseReplicationFactorRequest, callback?: (err: AWSError, data: DAX.Types.DecreaseReplicationFactorResponse) => void): Request<DAX.Types.DecreaseReplicationFactorResponse, AWSError>;
+  createSubnetGroup(params: DAX.Types.CreateSubnetGroupRequest, callback?: (err: AWSError, data: DAX.Types.CreateSubnetGroupResponse) => void): Request<DAX.Types.CreateSubnetGroupResponse, AWSError>;
   /**
    * Removes one or more nodes from a DAX cluster.  You cannot use DecreaseReplicationFactor to remove the last node in a DAX cluster. If you need to do this, use DeleteCluster instead. 
    */
   decreaseReplicationFactor(callback?: (err: AWSError, data: DAX.Types.DecreaseReplicationFactorResponse) => void): Request<DAX.Types.DecreaseReplicationFactorResponse, AWSError>;
   /**
-   * Deletes a previously provisioned DAX cluster. DeleteCluster deletes all associated nodes, node endpoints and the DAX cluster itself. When you receive a successful response from this action, DAX immediately begins deleting the cluster; you cannot cancel or revert this action.
+   * Removes one or more nodes from a DAX cluster.  You cannot use DecreaseReplicationFactor to remove the last node in a DAX cluster. If you need to do this, use DeleteCluster instead. 
    */
-  deleteCluster(params: DAX.Types.DeleteClusterRequest, callback?: (err: AWSError, data: DAX.Types.DeleteClusterResponse) => void): Request<DAX.Types.DeleteClusterResponse, AWSError>;
+  decreaseReplicationFactor(params: DAX.Types.DecreaseReplicationFactorRequest, callback?: (err: AWSError, data: DAX.Types.DecreaseReplicationFactorResponse) => void): Request<DAX.Types.DecreaseReplicationFactorResponse, AWSError>;
   /**
    * Deletes a previously provisioned DAX cluster. DeleteCluster deletes all associated nodes, node endpoints and the DAX cluster itself. When you receive a successful response from this action, DAX immediately begins deleting the cluster; you cannot cancel or revert this action.
    */
   deleteCluster(callback?: (err: AWSError, data: DAX.Types.DeleteClusterResponse) => void): Request<DAX.Types.DeleteClusterResponse, AWSError>;
   /**
-   * Deletes the specified parameter group. You cannot delete a parameter group if it is associated with any DAX clusters.
+   * Deletes a previously provisioned DAX cluster. DeleteCluster deletes all associated nodes, node endpoints and the DAX cluster itself. When you receive a successful response from this action, DAX immediately begins deleting the cluster; you cannot cancel or revert this action.
    */
-  deleteParameterGroup(params: DAX.Types.DeleteParameterGroupRequest, callback?: (err: AWSError, data: DAX.Types.DeleteParameterGroupResponse) => void): Request<DAX.Types.DeleteParameterGroupResponse, AWSError>;
+  deleteCluster(params: DAX.Types.DeleteClusterRequest, callback?: (err: AWSError, data: DAX.Types.DeleteClusterResponse) => void): Request<DAX.Types.DeleteClusterResponse, AWSError>;
   /**
    * Deletes the specified parameter group. You cannot delete a parameter group if it is associated with any DAX clusters.
    */
   deleteParameterGroup(callback?: (err: AWSError, data: DAX.Types.DeleteParameterGroupResponse) => void): Request<DAX.Types.DeleteParameterGroupResponse, AWSError>;
   /**
-   * Deletes a subnet group.  You cannot delete a subnet group if it is associated with any DAX clusters. 
+   * Deletes the specified parameter group. You cannot delete a parameter group if it is associated with any DAX clusters.
    */
-  deleteSubnetGroup(params: DAX.Types.DeleteSubnetGroupRequest, callback?: (err: AWSError, data: DAX.Types.DeleteSubnetGroupResponse) => void): Request<DAX.Types.DeleteSubnetGroupResponse, AWSError>;
+  deleteParameterGroup(params: DAX.Types.DeleteParameterGroupRequest, callback?: (err: AWSError, data: DAX.Types.DeleteParameterGroupResponse) => void): Request<DAX.Types.DeleteParameterGroupResponse, AWSError>;
   /**
    * Deletes a subnet group.  You cannot delete a subnet group if it is associated with any DAX clusters. 
    */
   deleteSubnetGroup(callback?: (err: AWSError, data: DAX.Types.DeleteSubnetGroupResponse) => void): Request<DAX.Types.DeleteSubnetGroupResponse, AWSError>;
   /**
-   * Returns information about all provisioned DAX clusters if no cluster identifier is specified, or about a specific DAX cluster if a cluster identifier is supplied. If the cluster is in the CREATING state, only cluster level information will be displayed until all of the nodes are successfully provisioned. If the cluster is in the DELETING state, only cluster level information will be displayed. If nodes are currently being added to the DAX cluster, node endpoint information and creation time for the additional nodes will not be displayed until they are completely provisioned. When the DAX cluster state is available, the cluster is ready for use. If nodes are currently being removed from the DAX cluster, no endpoint information for the removed nodes is displayed.
+   * Deletes a subnet group.  You cannot delete a subnet group if it is associated with any DAX clusters. 
    */
-  describeClusters(params: DAX.Types.DescribeClustersRequest, callback?: (err: AWSError, data: DAX.Types.DescribeClustersResponse) => void): Request<DAX.Types.DescribeClustersResponse, AWSError>;
+  deleteSubnetGroup(params: DAX.Types.DeleteSubnetGroupRequest, callback?: (err: AWSError, data: DAX.Types.DeleteSubnetGroupResponse) => void): Request<DAX.Types.DeleteSubnetGroupResponse, AWSError>;
   /**
    * Returns information about all provisioned DAX clusters if no cluster identifier is specified, or about a specific DAX cluster if a cluster identifier is supplied. If the cluster is in the CREATING state, only cluster level information will be displayed until all of the nodes are successfully provisioned. If the cluster is in the DELETING state, only cluster level information will be displayed. If nodes are currently being added to the DAX cluster, node endpoint information and creation time for the additional nodes will not be displayed until they are completely provisioned. When the DAX cluster state is available, the cluster is ready for use. If nodes are currently being removed from the DAX cluster, no endpoint information for the removed nodes is displayed.
    */
   describeClusters(callback?: (err: AWSError, data: DAX.Types.DescribeClustersResponse) => void): Request<DAX.Types.DescribeClustersResponse, AWSError>;
   /**
-   * Returns the default system parameter information for the DAX caching software.
+   * Returns information about all provisioned DAX clusters if no cluster identifier is specified, or about a specific DAX cluster if a cluster identifier is supplied. If the cluster is in the CREATING state, only cluster level information will be displayed until all of the nodes are successfully provisioned. If the cluster is in the DELETING state, only cluster level information will be displayed. If nodes are currently being added to the DAX cluster, node endpoint information and creation time for the additional nodes will not be displayed until they are completely provisioned. When the DAX cluster state is available, the cluster is ready for use. If nodes are currently being removed from the DAX cluster, no endpoint information for the removed nodes is displayed.
    */
-  describeDefaultParameters(params: DAX.Types.DescribeDefaultParametersRequest, callback?: (err: AWSError, data: DAX.Types.DescribeDefaultParametersResponse) => void): Request<DAX.Types.DescribeDefaultParametersResponse, AWSError>;
+  describeClusters(params: DAX.Types.DescribeClustersRequest, callback?: (err: AWSError, data: DAX.Types.DescribeClustersResponse) => void): Request<DAX.Types.DescribeClustersResponse, AWSError>;
   /**
    * Returns the default system parameter information for the DAX caching software.
    */
   describeDefaultParameters(callback?: (err: AWSError, data: DAX.Types.DescribeDefaultParametersResponse) => void): Request<DAX.Types.DescribeDefaultParametersResponse, AWSError>;
   /**
-   * Returns events related to DAX clusters and parameter groups. You can obtain events specific to a particular DAX cluster or parameter group by providing the name as a parameter. By default, only the events occurring within the last hour are returned; however, you can retrieve up to 14 days' worth of events if necessary.
+   * Returns the default system parameter information for the DAX caching software.
    */
-  describeEvents(params: DAX.Types.DescribeEventsRequest, callback?: (err: AWSError, data: DAX.Types.DescribeEventsResponse) => void): Request<DAX.Types.DescribeEventsResponse, AWSError>;
+  describeDefaultParameters(params: DAX.Types.DescribeDefaultParametersRequest, callback?: (err: AWSError, data: DAX.Types.DescribeDefaultParametersResponse) => void): Request<DAX.Types.DescribeDefaultParametersResponse, AWSError>;
   /**
    * Returns events related to DAX clusters and parameter groups. You can obtain events specific to a particular DAX cluster or parameter group by providing the name as a parameter. By default, only the events occurring within the last hour are returned; however, you can retrieve up to 14 days' worth of events if necessary.
    */
   describeEvents(callback?: (err: AWSError, data: DAX.Types.DescribeEventsResponse) => void): Request<DAX.Types.DescribeEventsResponse, AWSError>;
   /**
-   * Returns a list of parameter group descriptions. If a parameter group name is specified, the list will contain only the descriptions for that group.
+   * Returns events related to DAX clusters and parameter groups. You can obtain events specific to a particular DAX cluster or parameter group by providing the name as a parameter. By default, only the events occurring within the last hour are returned; however, you can retrieve up to 14 days' worth of events if necessary.
    */
-  describeParameterGroups(params: DAX.Types.DescribeParameterGroupsRequest, callback?: (err: AWSError, data: DAX.Types.DescribeParameterGroupsResponse) => void): Request<DAX.Types.DescribeParameterGroupsResponse, AWSError>;
+  describeEvents(params: DAX.Types.DescribeEventsRequest, callback?: (err: AWSError, data: DAX.Types.DescribeEventsResponse) => void): Request<DAX.Types.DescribeEventsResponse, AWSError>;
   /**
    * Returns a list of parameter group descriptions. If a parameter group name is specified, the list will contain only the descriptions for that group.
    */
   describeParameterGroups(callback?: (err: AWSError, data: DAX.Types.DescribeParameterGroupsResponse) => void): Request<DAX.Types.DescribeParameterGroupsResponse, AWSError>;
   /**
-   * Returns the detailed parameter list for a particular parameter group.
+   * Returns a list of parameter group descriptions. If a parameter group name is specified, the list will contain only the descriptions for that group.
    */
-  describeParameters(params: DAX.Types.DescribeParametersRequest, callback?: (err: AWSError, data: DAX.Types.DescribeParametersResponse) => void): Request<DAX.Types.DescribeParametersResponse, AWSError>;
+  describeParameterGroups(params: DAX.Types.DescribeParameterGroupsRequest, callback?: (err: AWSError, data: DAX.Types.DescribeParameterGroupsResponse) => void): Request<DAX.Types.DescribeParameterGroupsResponse, AWSError>;
   /**
    * Returns the detailed parameter list for a particular parameter group.
    */
   describeParameters(callback?: (err: AWSError, data: DAX.Types.DescribeParametersResponse) => void): Request<DAX.Types.DescribeParametersResponse, AWSError>;
   /**
-   * Returns a list of subnet group descriptions. If a subnet group name is specified, the list will contain only the description of that group.
+   * Returns the detailed parameter list for a particular parameter group.
    */
-  describeSubnetGroups(params: DAX.Types.DescribeSubnetGroupsRequest, callback?: (err: AWSError, data: DAX.Types.DescribeSubnetGroupsResponse) => void): Request<DAX.Types.DescribeSubnetGroupsResponse, AWSError>;
+  describeParameters(params: DAX.Types.DescribeParametersRequest, callback?: (err: AWSError, data: DAX.Types.DescribeParametersResponse) => void): Request<DAX.Types.DescribeParametersResponse, AWSError>;
   /**
    * Returns a list of subnet group descriptions. If a subnet group name is specified, the list will contain only the description of that group.
    */
   describeSubnetGroups(callback?: (err: AWSError, data: DAX.Types.DescribeSubnetGroupsResponse) => void): Request<DAX.Types.DescribeSubnetGroupsResponse, AWSError>;
   /**
-   * Adds one or more nodes to a DAX cluster.
+   * Returns a list of subnet group descriptions. If a subnet group name is specified, the list will contain only the description of that group.
    */
-  increaseReplicationFactor(params: DAX.Types.IncreaseReplicationFactorRequest, callback?: (err: AWSError, data: DAX.Types.IncreaseReplicationFactorResponse) => void): Request<DAX.Types.IncreaseReplicationFactorResponse, AWSError>;
+  describeSubnetGroups(params: DAX.Types.DescribeSubnetGroupsRequest, callback?: (err: AWSError, data: DAX.Types.DescribeSubnetGroupsResponse) => void): Request<DAX.Types.DescribeSubnetGroupsResponse, AWSError>;
   /**
    * Adds one or more nodes to a DAX cluster.
    */
   increaseReplicationFactor(callback?: (err: AWSError, data: DAX.Types.IncreaseReplicationFactorResponse) => void): Request<DAX.Types.IncreaseReplicationFactorResponse, AWSError>;
   /**
-   * List all of the tags for a DAX cluster. You can call ListTags up to 10 times per second, per account.
+   * Adds one or more nodes to a DAX cluster.
    */
-  listTags(params: DAX.Types.ListTagsRequest, callback?: (err: AWSError, data: DAX.Types.ListTagsResponse) => void): Request<DAX.Types.ListTagsResponse, AWSError>;
+  increaseReplicationFactor(params: DAX.Types.IncreaseReplicationFactorRequest, callback?: (err: AWSError, data: DAX.Types.IncreaseReplicationFactorResponse) => void): Request<DAX.Types.IncreaseReplicationFactorResponse, AWSError>;
   /**
    * List all of the tags for a DAX cluster. You can call ListTags up to 10 times per second, per account.
    */
   listTags(callback?: (err: AWSError, data: DAX.Types.ListTagsResponse) => void): Request<DAX.Types.ListTagsResponse, AWSError>;
   /**
-   * Reboots a single node of a DAX cluster. The reboot action takes place as soon as possible. During the reboot, the node status is set to REBOOTING.
+   * List all of the tags for a DAX cluster. You can call ListTags up to 10 times per second, per account.
    */
-  rebootNode(params: DAX.Types.RebootNodeRequest, callback?: (err: AWSError, data: DAX.Types.RebootNodeResponse) => void): Request<DAX.Types.RebootNodeResponse, AWSError>;
+  listTags(params: DAX.Types.ListTagsRequest, callback?: (err: AWSError, data: DAX.Types.ListTagsResponse) => void): Request<DAX.Types.ListTagsResponse, AWSError>;
   /**
    * Reboots a single node of a DAX cluster. The reboot action takes place as soon as possible. During the reboot, the node status is set to REBOOTING.
    */
   rebootNode(callback?: (err: AWSError, data: DAX.Types.RebootNodeResponse) => void): Request<DAX.Types.RebootNodeResponse, AWSError>;
   /**
-   * Associates a set of tags with a DAX resource. You can call TagResource up to 5 times per second, per account. 
+   * Reboots a single node of a DAX cluster. The reboot action takes place as soon as possible. During the reboot, the node status is set to REBOOTING.
    */
-  tagResource(params: DAX.Types.TagResourceRequest, callback?: (err: AWSError, data: DAX.Types.TagResourceResponse) => void): Request<DAX.Types.TagResourceResponse, AWSError>;
+  rebootNode(params: DAX.Types.RebootNodeRequest, callback?: (err: AWSError, data: DAX.Types.RebootNodeResponse) => void): Request<DAX.Types.RebootNodeResponse, AWSError>;
   /**
    * Associates a set of tags with a DAX resource. You can call TagResource up to 5 times per second, per account. 
    */
   tagResource(callback?: (err: AWSError, data: DAX.Types.TagResourceResponse) => void): Request<DAX.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes the association of tags from a DAX resource. You can call UntagResource up to 5 times per second, per account. 
+   * Associates a set of tags with a DAX resource. You can call TagResource up to 5 times per second, per account. 
    */
-  untagResource(params: DAX.Types.UntagResourceRequest, callback?: (err: AWSError, data: DAX.Types.UntagResourceResponse) => void): Request<DAX.Types.UntagResourceResponse, AWSError>;
+  tagResource(params: DAX.Types.TagResourceRequest, callback?: (err: AWSError, data: DAX.Types.TagResourceResponse) => void): Request<DAX.Types.TagResourceResponse, AWSError>;
   /**
    * Removes the association of tags from a DAX resource. You can call UntagResource up to 5 times per second, per account. 
    */
   untagResource(callback?: (err: AWSError, data: DAX.Types.UntagResourceResponse) => void): Request<DAX.Types.UntagResourceResponse, AWSError>;
   /**
-   * Modifies the settings for a DAX cluster. You can use this action to change one or more cluster configuration parameters by specifying the parameters and the new values.
+   * Removes the association of tags from a DAX resource. You can call UntagResource up to 5 times per second, per account. 
    */
-  updateCluster(params: DAX.Types.UpdateClusterRequest, callback?: (err: AWSError, data: DAX.Types.UpdateClusterResponse) => void): Request<DAX.Types.UpdateClusterResponse, AWSError>;
+  untagResource(params: DAX.Types.UntagResourceRequest, callback?: (err: AWSError, data: DAX.Types.UntagResourceResponse) => void): Request<DAX.Types.UntagResourceResponse, AWSError>;
   /**
    * Modifies the settings for a DAX cluster. You can use this action to change one or more cluster configuration parameters by specifying the parameters and the new values.
    */
   updateCluster(callback?: (err: AWSError, data: DAX.Types.UpdateClusterResponse) => void): Request<DAX.Types.UpdateClusterResponse, AWSError>;
   /**
-   * Modifies the parameters of a parameter group. You can modify up to 20 parameters in a single request by submitting a list parameter name and value pairs.
+   * Modifies the settings for a DAX cluster. You can use this action to change one or more cluster configuration parameters by specifying the parameters and the new values.
    */
-  updateParameterGroup(params: DAX.Types.UpdateParameterGroupRequest, callback?: (err: AWSError, data: DAX.Types.UpdateParameterGroupResponse) => void): Request<DAX.Types.UpdateParameterGroupResponse, AWSError>;
+  updateCluster(params: DAX.Types.UpdateClusterRequest, callback?: (err: AWSError, data: DAX.Types.UpdateClusterResponse) => void): Request<DAX.Types.UpdateClusterResponse, AWSError>;
   /**
    * Modifies the parameters of a parameter group. You can modify up to 20 parameters in a single request by submitting a list parameter name and value pairs.
    */
   updateParameterGroup(callback?: (err: AWSError, data: DAX.Types.UpdateParameterGroupResponse) => void): Request<DAX.Types.UpdateParameterGroupResponse, AWSError>;
   /**
-   * Modifies an existing subnet group.
+   * Modifies the parameters of a parameter group. You can modify up to 20 parameters in a single request by submitting a list parameter name and value pairs.
    */
-  updateSubnetGroup(params: DAX.Types.UpdateSubnetGroupRequest, callback?: (err: AWSError, data: DAX.Types.UpdateSubnetGroupResponse) => void): Request<DAX.Types.UpdateSubnetGroupResponse, AWSError>;
+  updateParameterGroup(params: DAX.Types.UpdateParameterGroupRequest, callback?: (err: AWSError, data: DAX.Types.UpdateParameterGroupResponse) => void): Request<DAX.Types.UpdateParameterGroupResponse, AWSError>;
   /**
    * Modifies an existing subnet group.
    */
   updateSubnetGroup(callback?: (err: AWSError, data: DAX.Types.UpdateSubnetGroupResponse) => void): Request<DAX.Types.UpdateSubnetGroupResponse, AWSError>;
+  /**
+   * Modifies an existing subnet group.
+   */
+  updateSubnetGroup(params: DAX.Types.UpdateSubnetGroupRequest, callback?: (err: AWSError, data: DAX.Types.UpdateSubnetGroupResponse) => void): Request<DAX.Types.UpdateSubnetGroupResponse, AWSError>;
 }
 declare namespace DAX {
   export type AvailabilityZoneList = String[];

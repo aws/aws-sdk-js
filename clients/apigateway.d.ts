@@ -14,39 +14,35 @@ declare class APIGateway extends Service {
   /**
    * Create an ApiKey resource.  AWS CLI
    */
-  createApiKey(params: APIGateway.Types.CreateApiKeyRequest, callback?: (err: AWSError, data: APIGateway.Types.ApiKey) => void): Request<APIGateway.Types.ApiKey, AWSError>;
+  createApiKey(callback?: (err: AWSError, data: APIGateway.Types.ApiKey) => void): Request<APIGateway.Types.ApiKey, AWSError>;
   /**
    * Create an ApiKey resource.  AWS CLI
    */
-  createApiKey(callback?: (err: AWSError, data: APIGateway.Types.ApiKey) => void): Request<APIGateway.Types.ApiKey, AWSError>;
-  /**
-   * Adds a new Authorizer resource to an existing RestApi resource. AWS CLI
-   */
-  createAuthorizer(params: APIGateway.Types.CreateAuthorizerRequest, callback?: (err: AWSError, data: APIGateway.Types.Authorizer) => void): Request<APIGateway.Types.Authorizer, AWSError>;
+  createApiKey(params: APIGateway.Types.CreateApiKeyRequest, callback?: (err: AWSError, data: APIGateway.Types.ApiKey) => void): Request<APIGateway.Types.ApiKey, AWSError>;
   /**
    * Adds a new Authorizer resource to an existing RestApi resource. AWS CLI
    */
   createAuthorizer(callback?: (err: AWSError, data: APIGateway.Types.Authorizer) => void): Request<APIGateway.Types.Authorizer, AWSError>;
   /**
-   * Creates a new BasePathMapping resource.
+   * Adds a new Authorizer resource to an existing RestApi resource. AWS CLI
    */
-  createBasePathMapping(params: APIGateway.Types.CreateBasePathMappingRequest, callback?: (err: AWSError, data: APIGateway.Types.BasePathMapping) => void): Request<APIGateway.Types.BasePathMapping, AWSError>;
+  createAuthorizer(params: APIGateway.Types.CreateAuthorizerRequest, callback?: (err: AWSError, data: APIGateway.Types.Authorizer) => void): Request<APIGateway.Types.Authorizer, AWSError>;
   /**
    * Creates a new BasePathMapping resource.
    */
   createBasePathMapping(callback?: (err: AWSError, data: APIGateway.Types.BasePathMapping) => void): Request<APIGateway.Types.BasePathMapping, AWSError>;
   /**
-   * Creates a Deployment resource, which makes a specified RestApi callable over the internet.
+   * Creates a new BasePathMapping resource.
    */
-  createDeployment(params: APIGateway.Types.CreateDeploymentRequest, callback?: (err: AWSError, data: APIGateway.Types.Deployment) => void): Request<APIGateway.Types.Deployment, AWSError>;
+  createBasePathMapping(params: APIGateway.Types.CreateBasePathMappingRequest, callback?: (err: AWSError, data: APIGateway.Types.BasePathMapping) => void): Request<APIGateway.Types.BasePathMapping, AWSError>;
   /**
    * Creates a Deployment resource, which makes a specified RestApi callable over the internet.
    */
   createDeployment(callback?: (err: AWSError, data: APIGateway.Types.Deployment) => void): Request<APIGateway.Types.Deployment, AWSError>;
   /**
-   * 
+   * Creates a Deployment resource, which makes a specified RestApi callable over the internet.
    */
-  createDocumentationPart(params: APIGateway.Types.CreateDocumentationPartRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationPart) => void): Request<APIGateway.Types.DocumentationPart, AWSError>;
+  createDeployment(params: APIGateway.Types.CreateDeploymentRequest, callback?: (err: AWSError, data: APIGateway.Types.Deployment) => void): Request<APIGateway.Types.Deployment, AWSError>;
   /**
    * 
    */
@@ -54,127 +50,127 @@ declare class APIGateway extends Service {
   /**
    * 
    */
-  createDocumentationVersion(params: APIGateway.Types.CreateDocumentationVersionRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersion) => void): Request<APIGateway.Types.DocumentationVersion, AWSError>;
+  createDocumentationPart(params: APIGateway.Types.CreateDocumentationPartRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationPart) => void): Request<APIGateway.Types.DocumentationPart, AWSError>;
   /**
    * 
    */
   createDocumentationVersion(callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersion) => void): Request<APIGateway.Types.DocumentationVersion, AWSError>;
   /**
-   * Creates a new domain name.
+   * 
    */
-  createDomainName(params: APIGateway.Types.CreateDomainNameRequest, callback?: (err: AWSError, data: APIGateway.Types.DomainName) => void): Request<APIGateway.Types.DomainName, AWSError>;
+  createDocumentationVersion(params: APIGateway.Types.CreateDocumentationVersionRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersion) => void): Request<APIGateway.Types.DocumentationVersion, AWSError>;
   /**
    * Creates a new domain name.
    */
   createDomainName(callback?: (err: AWSError, data: APIGateway.Types.DomainName) => void): Request<APIGateway.Types.DomainName, AWSError>;
   /**
-   * Adds a new Model resource to an existing RestApi resource.
+   * Creates a new domain name.
    */
-  createModel(params: APIGateway.Types.CreateModelRequest, callback?: (err: AWSError, data: APIGateway.Types.Model) => void): Request<APIGateway.Types.Model, AWSError>;
+  createDomainName(params: APIGateway.Types.CreateDomainNameRequest, callback?: (err: AWSError, data: APIGateway.Types.DomainName) => void): Request<APIGateway.Types.DomainName, AWSError>;
   /**
    * Adds a new Model resource to an existing RestApi resource.
    */
   createModel(callback?: (err: AWSError, data: APIGateway.Types.Model) => void): Request<APIGateway.Types.Model, AWSError>;
   /**
-   * Creates a ReqeustValidator of a given RestApi.
+   * Adds a new Model resource to an existing RestApi resource.
    */
-  createRequestValidator(params: APIGateway.Types.CreateRequestValidatorRequest, callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
+  createModel(params: APIGateway.Types.CreateModelRequest, callback?: (err: AWSError, data: APIGateway.Types.Model) => void): Request<APIGateway.Types.Model, AWSError>;
   /**
    * Creates a ReqeustValidator of a given RestApi.
    */
   createRequestValidator(callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
   /**
-   * Creates a Resource resource.
+   * Creates a ReqeustValidator of a given RestApi.
    */
-  createResource(params: APIGateway.Types.CreateResourceRequest, callback?: (err: AWSError, data: APIGateway.Types.Resource) => void): Request<APIGateway.Types.Resource, AWSError>;
+  createRequestValidator(params: APIGateway.Types.CreateRequestValidatorRequest, callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
   /**
    * Creates a Resource resource.
    */
   createResource(callback?: (err: AWSError, data: APIGateway.Types.Resource) => void): Request<APIGateway.Types.Resource, AWSError>;
   /**
-   * Creates a new RestApi resource.
+   * Creates a Resource resource.
    */
-  createRestApi(params: APIGateway.Types.CreateRestApiRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
+  createResource(params: APIGateway.Types.CreateResourceRequest, callback?: (err: AWSError, data: APIGateway.Types.Resource) => void): Request<APIGateway.Types.Resource, AWSError>;
   /**
    * Creates a new RestApi resource.
    */
   createRestApi(callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
   /**
-   * Creates a new Stage resource that references a pre-existing Deployment for the API. 
+   * Creates a new RestApi resource.
    */
-  createStage(params: APIGateway.Types.CreateStageRequest, callback?: (err: AWSError, data: APIGateway.Types.Stage) => void): Request<APIGateway.Types.Stage, AWSError>;
+  createRestApi(params: APIGateway.Types.CreateRestApiRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
   /**
    * Creates a new Stage resource that references a pre-existing Deployment for the API. 
    */
   createStage(callback?: (err: AWSError, data: APIGateway.Types.Stage) => void): Request<APIGateway.Types.Stage, AWSError>;
   /**
-   * Creates a usage plan with the throttle and quota limits, as well as the associated API stages, specified in the payload. 
+   * Creates a new Stage resource that references a pre-existing Deployment for the API. 
    */
-  createUsagePlan(params: APIGateway.Types.CreateUsagePlanRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlan) => void): Request<APIGateway.Types.UsagePlan, AWSError>;
+  createStage(params: APIGateway.Types.CreateStageRequest, callback?: (err: AWSError, data: APIGateway.Types.Stage) => void): Request<APIGateway.Types.Stage, AWSError>;
   /**
    * Creates a usage plan with the throttle and quota limits, as well as the associated API stages, specified in the payload. 
    */
   createUsagePlan(callback?: (err: AWSError, data: APIGateway.Types.UsagePlan) => void): Request<APIGateway.Types.UsagePlan, AWSError>;
   /**
-   * Creates a usage plan key for adding an existing API key to a usage plan.
+   * Creates a usage plan with the throttle and quota limits, as well as the associated API stages, specified in the payload. 
    */
-  createUsagePlanKey(params: APIGateway.Types.CreateUsagePlanKeyRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlanKey) => void): Request<APIGateway.Types.UsagePlanKey, AWSError>;
+  createUsagePlan(params: APIGateway.Types.CreateUsagePlanRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlan) => void): Request<APIGateway.Types.UsagePlan, AWSError>;
   /**
    * Creates a usage plan key for adding an existing API key to a usage plan.
    */
   createUsagePlanKey(callback?: (err: AWSError, data: APIGateway.Types.UsagePlanKey) => void): Request<APIGateway.Types.UsagePlanKey, AWSError>;
   /**
-   * Creates a VPC link, under the caller's account in a selected region, in an asynchronous operation that typically takes 2-4 minutes to complete and become operational. The caller must have permissions to create and update VPC Endpoint services.
+   * Creates a usage plan key for adding an existing API key to a usage plan.
    */
-  createVpcLink(params: APIGateway.Types.CreateVpcLinkRequest, callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
+  createUsagePlanKey(params: APIGateway.Types.CreateUsagePlanKeyRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlanKey) => void): Request<APIGateway.Types.UsagePlanKey, AWSError>;
   /**
    * Creates a VPC link, under the caller's account in a selected region, in an asynchronous operation that typically takes 2-4 minutes to complete and become operational. The caller must have permissions to create and update VPC Endpoint services.
    */
   createVpcLink(callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
   /**
-   * Deletes the ApiKey resource.
+   * Creates a VPC link, under the caller's account in a selected region, in an asynchronous operation that typically takes 2-4 minutes to complete and become operational. The caller must have permissions to create and update VPC Endpoint services.
    */
-  deleteApiKey(params: APIGateway.Types.DeleteApiKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  createVpcLink(params: APIGateway.Types.CreateVpcLinkRequest, callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
   /**
    * Deletes the ApiKey resource.
    */
   deleteApiKey(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an existing Authorizer resource. AWS CLI
+   * Deletes the ApiKey resource.
    */
-  deleteAuthorizer(params: APIGateway.Types.DeleteAuthorizerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteApiKey(params: APIGateway.Types.DeleteApiKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an existing Authorizer resource. AWS CLI
    */
   deleteAuthorizer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the BasePathMapping resource.
+   * Deletes an existing Authorizer resource. AWS CLI
    */
-  deleteBasePathMapping(params: APIGateway.Types.DeleteBasePathMappingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteAuthorizer(params: APIGateway.Types.DeleteAuthorizerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the BasePathMapping resource.
    */
   deleteBasePathMapping(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the ClientCertificate resource.
+   * Deletes the BasePathMapping resource.
    */
-  deleteClientCertificate(params: APIGateway.Types.DeleteClientCertificateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteBasePathMapping(params: APIGateway.Types.DeleteBasePathMappingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the ClientCertificate resource.
    */
   deleteClientCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a Deployment resource. Deleting a deployment will only succeed if there are no Stage resources associated with it.
+   * Deletes the ClientCertificate resource.
    */
-  deleteDeployment(params: APIGateway.Types.DeleteDeploymentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteClientCertificate(params: APIGateway.Types.DeleteClientCertificateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a Deployment resource. Deleting a deployment will only succeed if there are no Stage resources associated with it.
    */
   deleteDeployment(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * 
+   * Deletes a Deployment resource. Deleting a deployment will only succeed if there are no Stage resources associated with it.
    */
-  deleteDocumentationPart(params: APIGateway.Types.DeleteDocumentationPartRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDeployment(params: APIGateway.Types.DeleteDeploymentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * 
    */
@@ -182,239 +178,239 @@ declare class APIGateway extends Service {
   /**
    * 
    */
-  deleteDocumentationVersion(params: APIGateway.Types.DeleteDocumentationVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDocumentationPart(params: APIGateway.Types.DeleteDocumentationPartRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * 
    */
   deleteDocumentationVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the DomainName resource.
+   * 
    */
-  deleteDomainName(params: APIGateway.Types.DeleteDomainNameRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDocumentationVersion(params: APIGateway.Types.DeleteDocumentationVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the DomainName resource.
    */
   deleteDomainName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Clears any customization of a GatewayResponse of a specified response type on the given RestApi and resets it with the default settings.
+   * Deletes the DomainName resource.
    */
-  deleteGatewayResponse(params: APIGateway.Types.DeleteGatewayResponseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDomainName(params: APIGateway.Types.DeleteDomainNameRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Clears any customization of a GatewayResponse of a specified response type on the given RestApi and resets it with the default settings.
    */
   deleteGatewayResponse(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Represents a delete integration.
+   * Clears any customization of a GatewayResponse of a specified response type on the given RestApi and resets it with the default settings.
    */
-  deleteIntegration(params: APIGateway.Types.DeleteIntegrationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteGatewayResponse(params: APIGateway.Types.DeleteGatewayResponseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Represents a delete integration.
    */
   deleteIntegration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Represents a delete integration response.
+   * Represents a delete integration.
    */
-  deleteIntegrationResponse(params: APIGateway.Types.DeleteIntegrationResponseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteIntegration(params: APIGateway.Types.DeleteIntegrationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Represents a delete integration response.
    */
   deleteIntegrationResponse(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an existing Method resource.
+   * Represents a delete integration response.
    */
-  deleteMethod(params: APIGateway.Types.DeleteMethodRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteIntegrationResponse(params: APIGateway.Types.DeleteIntegrationResponseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an existing Method resource.
    */
   deleteMethod(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an existing MethodResponse resource.
+   * Deletes an existing Method resource.
    */
-  deleteMethodResponse(params: APIGateway.Types.DeleteMethodResponseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteMethod(params: APIGateway.Types.DeleteMethodRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an existing MethodResponse resource.
    */
   deleteMethodResponse(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a model.
+   * Deletes an existing MethodResponse resource.
    */
-  deleteModel(params: APIGateway.Types.DeleteModelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteMethodResponse(params: APIGateway.Types.DeleteMethodResponseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a model.
    */
   deleteModel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a RequestValidator of a given RestApi.
+   * Deletes a model.
    */
-  deleteRequestValidator(params: APIGateway.Types.DeleteRequestValidatorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteModel(params: APIGateway.Types.DeleteModelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a RequestValidator of a given RestApi.
    */
   deleteRequestValidator(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a Resource resource.
+   * Deletes a RequestValidator of a given RestApi.
    */
-  deleteResource(params: APIGateway.Types.DeleteResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteRequestValidator(params: APIGateway.Types.DeleteRequestValidatorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a Resource resource.
    */
   deleteResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified API.
+   * Deletes a Resource resource.
    */
-  deleteRestApi(params: APIGateway.Types.DeleteRestApiRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteResource(params: APIGateway.Types.DeleteResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified API.
    */
   deleteRestApi(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a Stage resource.
+   * Deletes the specified API.
    */
-  deleteStage(params: APIGateway.Types.DeleteStageRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteRestApi(params: APIGateway.Types.DeleteRestApiRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a Stage resource.
    */
   deleteStage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a usage plan of a given plan Id.
+   * Deletes a Stage resource.
    */
-  deleteUsagePlan(params: APIGateway.Types.DeleteUsagePlanRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteStage(params: APIGateway.Types.DeleteStageRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a usage plan of a given plan Id.
    */
   deleteUsagePlan(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a usage plan key and remove the underlying API key from the associated usage plan.
+   * Deletes a usage plan of a given plan Id.
    */
-  deleteUsagePlanKey(params: APIGateway.Types.DeleteUsagePlanKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteUsagePlan(params: APIGateway.Types.DeleteUsagePlanRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a usage plan key and remove the underlying API key from the associated usage plan.
    */
   deleteUsagePlanKey(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an existing VpcLink of a specified identifier.
+   * Deletes a usage plan key and remove the underlying API key from the associated usage plan.
    */
-  deleteVpcLink(params: APIGateway.Types.DeleteVpcLinkRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteUsagePlanKey(params: APIGateway.Types.DeleteUsagePlanKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an existing VpcLink of a specified identifier.
    */
   deleteVpcLink(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Flushes all authorizer cache entries on a stage.
+   * Deletes an existing VpcLink of a specified identifier.
    */
-  flushStageAuthorizersCache(params: APIGateway.Types.FlushStageAuthorizersCacheRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteVpcLink(params: APIGateway.Types.DeleteVpcLinkRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Flushes all authorizer cache entries on a stage.
    */
   flushStageAuthorizersCache(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Flushes a stage's cache.
+   * Flushes all authorizer cache entries on a stage.
    */
-  flushStageCache(params: APIGateway.Types.FlushStageCacheRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  flushStageAuthorizersCache(params: APIGateway.Types.FlushStageAuthorizersCacheRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Flushes a stage's cache.
    */
   flushStageCache(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Generates a ClientCertificate resource.
+   * Flushes a stage's cache.
    */
-  generateClientCertificate(params: APIGateway.Types.GenerateClientCertificateRequest, callback?: (err: AWSError, data: APIGateway.Types.ClientCertificate) => void): Request<APIGateway.Types.ClientCertificate, AWSError>;
+  flushStageCache(params: APIGateway.Types.FlushStageCacheRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Generates a ClientCertificate resource.
    */
   generateClientCertificate(callback?: (err: AWSError, data: APIGateway.Types.ClientCertificate) => void): Request<APIGateway.Types.ClientCertificate, AWSError>;
   /**
-   * Gets information about the current Account resource.
+   * Generates a ClientCertificate resource.
    */
-  getAccount(params: APIGateway.Types.GetAccountRequest, callback?: (err: AWSError, data: APIGateway.Types.Account) => void): Request<APIGateway.Types.Account, AWSError>;
+  generateClientCertificate(params: APIGateway.Types.GenerateClientCertificateRequest, callback?: (err: AWSError, data: APIGateway.Types.ClientCertificate) => void): Request<APIGateway.Types.ClientCertificate, AWSError>;
   /**
    * Gets information about the current Account resource.
    */
   getAccount(callback?: (err: AWSError, data: APIGateway.Types.Account) => void): Request<APIGateway.Types.Account, AWSError>;
   /**
-   * Gets information about the current ApiKey resource.
+   * Gets information about the current Account resource.
    */
-  getApiKey(params: APIGateway.Types.GetApiKeyRequest, callback?: (err: AWSError, data: APIGateway.Types.ApiKey) => void): Request<APIGateway.Types.ApiKey, AWSError>;
+  getAccount(params: APIGateway.Types.GetAccountRequest, callback?: (err: AWSError, data: APIGateway.Types.Account) => void): Request<APIGateway.Types.Account, AWSError>;
   /**
    * Gets information about the current ApiKey resource.
    */
   getApiKey(callback?: (err: AWSError, data: APIGateway.Types.ApiKey) => void): Request<APIGateway.Types.ApiKey, AWSError>;
   /**
-   * Gets information about the current ApiKeys resource.
+   * Gets information about the current ApiKey resource.
    */
-  getApiKeys(params: APIGateway.Types.GetApiKeysRequest, callback?: (err: AWSError, data: APIGateway.Types.ApiKeys) => void): Request<APIGateway.Types.ApiKeys, AWSError>;
+  getApiKey(params: APIGateway.Types.GetApiKeyRequest, callback?: (err: AWSError, data: APIGateway.Types.ApiKey) => void): Request<APIGateway.Types.ApiKey, AWSError>;
   /**
    * Gets information about the current ApiKeys resource.
    */
   getApiKeys(callback?: (err: AWSError, data: APIGateway.Types.ApiKeys) => void): Request<APIGateway.Types.ApiKeys, AWSError>;
   /**
-   * Describe an existing Authorizer resource. AWS CLI
+   * Gets information about the current ApiKeys resource.
    */
-  getAuthorizer(params: APIGateway.Types.GetAuthorizerRequest, callback?: (err: AWSError, data: APIGateway.Types.Authorizer) => void): Request<APIGateway.Types.Authorizer, AWSError>;
+  getApiKeys(params: APIGateway.Types.GetApiKeysRequest, callback?: (err: AWSError, data: APIGateway.Types.ApiKeys) => void): Request<APIGateway.Types.ApiKeys, AWSError>;
   /**
    * Describe an existing Authorizer resource. AWS CLI
    */
   getAuthorizer(callback?: (err: AWSError, data: APIGateway.Types.Authorizer) => void): Request<APIGateway.Types.Authorizer, AWSError>;
   /**
-   * Describe an existing Authorizers resource. AWS CLI
+   * Describe an existing Authorizer resource. AWS CLI
    */
-  getAuthorizers(params: APIGateway.Types.GetAuthorizersRequest, callback?: (err: AWSError, data: APIGateway.Types.Authorizers) => void): Request<APIGateway.Types.Authorizers, AWSError>;
+  getAuthorizer(params: APIGateway.Types.GetAuthorizerRequest, callback?: (err: AWSError, data: APIGateway.Types.Authorizer) => void): Request<APIGateway.Types.Authorizer, AWSError>;
   /**
    * Describe an existing Authorizers resource. AWS CLI
    */
   getAuthorizers(callback?: (err: AWSError, data: APIGateway.Types.Authorizers) => void): Request<APIGateway.Types.Authorizers, AWSError>;
   /**
-   * Describe a BasePathMapping resource.
+   * Describe an existing Authorizers resource. AWS CLI
    */
-  getBasePathMapping(params: APIGateway.Types.GetBasePathMappingRequest, callback?: (err: AWSError, data: APIGateway.Types.BasePathMapping) => void): Request<APIGateway.Types.BasePathMapping, AWSError>;
+  getAuthorizers(params: APIGateway.Types.GetAuthorizersRequest, callback?: (err: AWSError, data: APIGateway.Types.Authorizers) => void): Request<APIGateway.Types.Authorizers, AWSError>;
   /**
    * Describe a BasePathMapping resource.
    */
   getBasePathMapping(callback?: (err: AWSError, data: APIGateway.Types.BasePathMapping) => void): Request<APIGateway.Types.BasePathMapping, AWSError>;
   /**
-   * Represents a collection of BasePathMapping resources.
+   * Describe a BasePathMapping resource.
    */
-  getBasePathMappings(params: APIGateway.Types.GetBasePathMappingsRequest, callback?: (err: AWSError, data: APIGateway.Types.BasePathMappings) => void): Request<APIGateway.Types.BasePathMappings, AWSError>;
+  getBasePathMapping(params: APIGateway.Types.GetBasePathMappingRequest, callback?: (err: AWSError, data: APIGateway.Types.BasePathMapping) => void): Request<APIGateway.Types.BasePathMapping, AWSError>;
   /**
    * Represents a collection of BasePathMapping resources.
    */
   getBasePathMappings(callback?: (err: AWSError, data: APIGateway.Types.BasePathMappings) => void): Request<APIGateway.Types.BasePathMappings, AWSError>;
   /**
-   * Gets information about the current ClientCertificate resource.
+   * Represents a collection of BasePathMapping resources.
    */
-  getClientCertificate(params: APIGateway.Types.GetClientCertificateRequest, callback?: (err: AWSError, data: APIGateway.Types.ClientCertificate) => void): Request<APIGateway.Types.ClientCertificate, AWSError>;
+  getBasePathMappings(params: APIGateway.Types.GetBasePathMappingsRequest, callback?: (err: AWSError, data: APIGateway.Types.BasePathMappings) => void): Request<APIGateway.Types.BasePathMappings, AWSError>;
   /**
    * Gets information about the current ClientCertificate resource.
    */
   getClientCertificate(callback?: (err: AWSError, data: APIGateway.Types.ClientCertificate) => void): Request<APIGateway.Types.ClientCertificate, AWSError>;
   /**
-   * Gets a collection of ClientCertificate resources.
+   * Gets information about the current ClientCertificate resource.
    */
-  getClientCertificates(params: APIGateway.Types.GetClientCertificatesRequest, callback?: (err: AWSError, data: APIGateway.Types.ClientCertificates) => void): Request<APIGateway.Types.ClientCertificates, AWSError>;
+  getClientCertificate(params: APIGateway.Types.GetClientCertificateRequest, callback?: (err: AWSError, data: APIGateway.Types.ClientCertificate) => void): Request<APIGateway.Types.ClientCertificate, AWSError>;
   /**
    * Gets a collection of ClientCertificate resources.
    */
   getClientCertificates(callback?: (err: AWSError, data: APIGateway.Types.ClientCertificates) => void): Request<APIGateway.Types.ClientCertificates, AWSError>;
   /**
-   * Gets information about a Deployment resource.
+   * Gets a collection of ClientCertificate resources.
    */
-  getDeployment(params: APIGateway.Types.GetDeploymentRequest, callback?: (err: AWSError, data: APIGateway.Types.Deployment) => void): Request<APIGateway.Types.Deployment, AWSError>;
+  getClientCertificates(params: APIGateway.Types.GetClientCertificatesRequest, callback?: (err: AWSError, data: APIGateway.Types.ClientCertificates) => void): Request<APIGateway.Types.ClientCertificates, AWSError>;
   /**
    * Gets information about a Deployment resource.
    */
   getDeployment(callback?: (err: AWSError, data: APIGateway.Types.Deployment) => void): Request<APIGateway.Types.Deployment, AWSError>;
   /**
-   * Gets information about a Deployments collection.
+   * Gets information about a Deployment resource.
    */
-  getDeployments(params: APIGateway.Types.GetDeploymentsRequest, callback?: (err: AWSError, data: APIGateway.Types.Deployments) => void): Request<APIGateway.Types.Deployments, AWSError>;
+  getDeployment(params: APIGateway.Types.GetDeploymentRequest, callback?: (err: AWSError, data: APIGateway.Types.Deployment) => void): Request<APIGateway.Types.Deployment, AWSError>;
   /**
    * Gets information about a Deployments collection.
    */
   getDeployments(callback?: (err: AWSError, data: APIGateway.Types.Deployments) => void): Request<APIGateway.Types.Deployments, AWSError>;
   /**
-   * 
+   * Gets information about a Deployments collection.
    */
-  getDocumentationPart(params: APIGateway.Types.GetDocumentationPartRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationPart) => void): Request<APIGateway.Types.DocumentationPart, AWSError>;
+  getDeployments(params: APIGateway.Types.GetDeploymentsRequest, callback?: (err: AWSError, data: APIGateway.Types.Deployments) => void): Request<APIGateway.Types.Deployments, AWSError>;
   /**
    * 
    */
@@ -422,7 +418,7 @@ declare class APIGateway extends Service {
   /**
    * 
    */
-  getDocumentationParts(params: APIGateway.Types.GetDocumentationPartsRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationParts) => void): Request<APIGateway.Types.DocumentationParts, AWSError>;
+  getDocumentationPart(params: APIGateway.Types.GetDocumentationPartRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationPart) => void): Request<APIGateway.Types.DocumentationPart, AWSError>;
   /**
    * 
    */
@@ -430,7 +426,7 @@ declare class APIGateway extends Service {
   /**
    * 
    */
-  getDocumentationVersion(params: APIGateway.Types.GetDocumentationVersionRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersion) => void): Request<APIGateway.Types.DocumentationVersion, AWSError>;
+  getDocumentationParts(params: APIGateway.Types.GetDocumentationPartsRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationParts) => void): Request<APIGateway.Types.DocumentationParts, AWSError>;
   /**
    * 
    */
@@ -438,167 +434,167 @@ declare class APIGateway extends Service {
   /**
    * 
    */
-  getDocumentationVersions(params: APIGateway.Types.GetDocumentationVersionsRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersions) => void): Request<APIGateway.Types.DocumentationVersions, AWSError>;
+  getDocumentationVersion(params: APIGateway.Types.GetDocumentationVersionRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersion) => void): Request<APIGateway.Types.DocumentationVersion, AWSError>;
   /**
    * 
    */
   getDocumentationVersions(callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersions) => void): Request<APIGateway.Types.DocumentationVersions, AWSError>;
   /**
-   * Represents a domain name that is contained in a simpler, more intuitive URL that can be called.
+   * 
    */
-  getDomainName(params: APIGateway.Types.GetDomainNameRequest, callback?: (err: AWSError, data: APIGateway.Types.DomainName) => void): Request<APIGateway.Types.DomainName, AWSError>;
+  getDocumentationVersions(params: APIGateway.Types.GetDocumentationVersionsRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersions) => void): Request<APIGateway.Types.DocumentationVersions, AWSError>;
   /**
    * Represents a domain name that is contained in a simpler, more intuitive URL that can be called.
    */
   getDomainName(callback?: (err: AWSError, data: APIGateway.Types.DomainName) => void): Request<APIGateway.Types.DomainName, AWSError>;
   /**
-   * Represents a collection of DomainName resources.
+   * Represents a domain name that is contained in a simpler, more intuitive URL that can be called.
    */
-  getDomainNames(params: APIGateway.Types.GetDomainNamesRequest, callback?: (err: AWSError, data: APIGateway.Types.DomainNames) => void): Request<APIGateway.Types.DomainNames, AWSError>;
+  getDomainName(params: APIGateway.Types.GetDomainNameRequest, callback?: (err: AWSError, data: APIGateway.Types.DomainName) => void): Request<APIGateway.Types.DomainName, AWSError>;
   /**
    * Represents a collection of DomainName resources.
    */
   getDomainNames(callback?: (err: AWSError, data: APIGateway.Types.DomainNames) => void): Request<APIGateway.Types.DomainNames, AWSError>;
   /**
-   * Exports a deployed version of a RestApi in a specified format.
+   * Represents a collection of DomainName resources.
    */
-  getExport(params: APIGateway.Types.GetExportRequest, callback?: (err: AWSError, data: APIGateway.Types.ExportResponse) => void): Request<APIGateway.Types.ExportResponse, AWSError>;
+  getDomainNames(params: APIGateway.Types.GetDomainNamesRequest, callback?: (err: AWSError, data: APIGateway.Types.DomainNames) => void): Request<APIGateway.Types.DomainNames, AWSError>;
   /**
    * Exports a deployed version of a RestApi in a specified format.
    */
   getExport(callback?: (err: AWSError, data: APIGateway.Types.ExportResponse) => void): Request<APIGateway.Types.ExportResponse, AWSError>;
   /**
-   * Gets a GatewayResponse of a specified response type on the given RestApi.
+   * Exports a deployed version of a RestApi in a specified format.
    */
-  getGatewayResponse(params: APIGateway.Types.GetGatewayResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.GatewayResponse) => void): Request<APIGateway.Types.GatewayResponse, AWSError>;
+  getExport(params: APIGateway.Types.GetExportRequest, callback?: (err: AWSError, data: APIGateway.Types.ExportResponse) => void): Request<APIGateway.Types.ExportResponse, AWSError>;
   /**
    * Gets a GatewayResponse of a specified response type on the given RestApi.
    */
   getGatewayResponse(callback?: (err: AWSError, data: APIGateway.Types.GatewayResponse) => void): Request<APIGateway.Types.GatewayResponse, AWSError>;
   /**
-   * Gets the GatewayResponses collection on the given RestApi. If an API developer has not added any definitions for gateway responses, the result will be the API Gateway-generated default GatewayResponses collection for the supported response types.
+   * Gets a GatewayResponse of a specified response type on the given RestApi.
    */
-  getGatewayResponses(params: APIGateway.Types.GetGatewayResponsesRequest, callback?: (err: AWSError, data: APIGateway.Types.GatewayResponses) => void): Request<APIGateway.Types.GatewayResponses, AWSError>;
+  getGatewayResponse(params: APIGateway.Types.GetGatewayResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.GatewayResponse) => void): Request<APIGateway.Types.GatewayResponse, AWSError>;
   /**
    * Gets the GatewayResponses collection on the given RestApi. If an API developer has not added any definitions for gateway responses, the result will be the API Gateway-generated default GatewayResponses collection for the supported response types.
    */
   getGatewayResponses(callback?: (err: AWSError, data: APIGateway.Types.GatewayResponses) => void): Request<APIGateway.Types.GatewayResponses, AWSError>;
   /**
-   * Get the integration settings.
+   * Gets the GatewayResponses collection on the given RestApi. If an API developer has not added any definitions for gateway responses, the result will be the API Gateway-generated default GatewayResponses collection for the supported response types.
    */
-  getIntegration(params: APIGateway.Types.GetIntegrationRequest, callback?: (err: AWSError, data: APIGateway.Types.Integration) => void): Request<APIGateway.Types.Integration, AWSError>;
+  getGatewayResponses(params: APIGateway.Types.GetGatewayResponsesRequest, callback?: (err: AWSError, data: APIGateway.Types.GatewayResponses) => void): Request<APIGateway.Types.GatewayResponses, AWSError>;
   /**
    * Get the integration settings.
    */
   getIntegration(callback?: (err: AWSError, data: APIGateway.Types.Integration) => void): Request<APIGateway.Types.Integration, AWSError>;
   /**
-   * Represents a get integration response.
+   * Get the integration settings.
    */
-  getIntegrationResponse(params: APIGateway.Types.GetIntegrationResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.IntegrationResponse) => void): Request<APIGateway.Types.IntegrationResponse, AWSError>;
+  getIntegration(params: APIGateway.Types.GetIntegrationRequest, callback?: (err: AWSError, data: APIGateway.Types.Integration) => void): Request<APIGateway.Types.Integration, AWSError>;
   /**
    * Represents a get integration response.
    */
   getIntegrationResponse(callback?: (err: AWSError, data: APIGateway.Types.IntegrationResponse) => void): Request<APIGateway.Types.IntegrationResponse, AWSError>;
   /**
-   * Describe an existing Method resource.
+   * Represents a get integration response.
    */
-  getMethod(params: APIGateway.Types.GetMethodRequest, callback?: (err: AWSError, data: APIGateway.Types.Method) => void): Request<APIGateway.Types.Method, AWSError>;
+  getIntegrationResponse(params: APIGateway.Types.GetIntegrationResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.IntegrationResponse) => void): Request<APIGateway.Types.IntegrationResponse, AWSError>;
   /**
    * Describe an existing Method resource.
    */
   getMethod(callback?: (err: AWSError, data: APIGateway.Types.Method) => void): Request<APIGateway.Types.Method, AWSError>;
   /**
-   * Describes a MethodResponse resource.
+   * Describe an existing Method resource.
    */
-  getMethodResponse(params: APIGateway.Types.GetMethodResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.MethodResponse) => void): Request<APIGateway.Types.MethodResponse, AWSError>;
+  getMethod(params: APIGateway.Types.GetMethodRequest, callback?: (err: AWSError, data: APIGateway.Types.Method) => void): Request<APIGateway.Types.Method, AWSError>;
   /**
    * Describes a MethodResponse resource.
    */
   getMethodResponse(callback?: (err: AWSError, data: APIGateway.Types.MethodResponse) => void): Request<APIGateway.Types.MethodResponse, AWSError>;
   /**
-   * Describes an existing model defined for a RestApi resource.
+   * Describes a MethodResponse resource.
    */
-  getModel(params: APIGateway.Types.GetModelRequest, callback?: (err: AWSError, data: APIGateway.Types.Model) => void): Request<APIGateway.Types.Model, AWSError>;
+  getMethodResponse(params: APIGateway.Types.GetMethodResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.MethodResponse) => void): Request<APIGateway.Types.MethodResponse, AWSError>;
   /**
    * Describes an existing model defined for a RestApi resource.
    */
   getModel(callback?: (err: AWSError, data: APIGateway.Types.Model) => void): Request<APIGateway.Types.Model, AWSError>;
   /**
-   * Generates a sample mapping template that can be used to transform a payload into the structure of a model.
+   * Describes an existing model defined for a RestApi resource.
    */
-  getModelTemplate(params: APIGateway.Types.GetModelTemplateRequest, callback?: (err: AWSError, data: APIGateway.Types.Template) => void): Request<APIGateway.Types.Template, AWSError>;
+  getModel(params: APIGateway.Types.GetModelRequest, callback?: (err: AWSError, data: APIGateway.Types.Model) => void): Request<APIGateway.Types.Model, AWSError>;
   /**
    * Generates a sample mapping template that can be used to transform a payload into the structure of a model.
    */
   getModelTemplate(callback?: (err: AWSError, data: APIGateway.Types.Template) => void): Request<APIGateway.Types.Template, AWSError>;
   /**
-   * Describes existing Models defined for a RestApi resource.
+   * Generates a sample mapping template that can be used to transform a payload into the structure of a model.
    */
-  getModels(params: APIGateway.Types.GetModelsRequest, callback?: (err: AWSError, data: APIGateway.Types.Models) => void): Request<APIGateway.Types.Models, AWSError>;
+  getModelTemplate(params: APIGateway.Types.GetModelTemplateRequest, callback?: (err: AWSError, data: APIGateway.Types.Template) => void): Request<APIGateway.Types.Template, AWSError>;
   /**
    * Describes existing Models defined for a RestApi resource.
    */
   getModels(callback?: (err: AWSError, data: APIGateway.Types.Models) => void): Request<APIGateway.Types.Models, AWSError>;
   /**
-   * Gets a RequestValidator of a given RestApi.
+   * Describes existing Models defined for a RestApi resource.
    */
-  getRequestValidator(params: APIGateway.Types.GetRequestValidatorRequest, callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
+  getModels(params: APIGateway.Types.GetModelsRequest, callback?: (err: AWSError, data: APIGateway.Types.Models) => void): Request<APIGateway.Types.Models, AWSError>;
   /**
    * Gets a RequestValidator of a given RestApi.
    */
   getRequestValidator(callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
   /**
-   * Gets the RequestValidators collection of a given RestApi.
+   * Gets a RequestValidator of a given RestApi.
    */
-  getRequestValidators(params: APIGateway.Types.GetRequestValidatorsRequest, callback?: (err: AWSError, data: APIGateway.Types.RequestValidators) => void): Request<APIGateway.Types.RequestValidators, AWSError>;
+  getRequestValidator(params: APIGateway.Types.GetRequestValidatorRequest, callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
   /**
    * Gets the RequestValidators collection of a given RestApi.
    */
   getRequestValidators(callback?: (err: AWSError, data: APIGateway.Types.RequestValidators) => void): Request<APIGateway.Types.RequestValidators, AWSError>;
   /**
-   * Lists information about a resource.
+   * Gets the RequestValidators collection of a given RestApi.
    */
-  getResource(params: APIGateway.Types.GetResourceRequest, callback?: (err: AWSError, data: APIGateway.Types.Resource) => void): Request<APIGateway.Types.Resource, AWSError>;
+  getRequestValidators(params: APIGateway.Types.GetRequestValidatorsRequest, callback?: (err: AWSError, data: APIGateway.Types.RequestValidators) => void): Request<APIGateway.Types.RequestValidators, AWSError>;
   /**
    * Lists information about a resource.
    */
   getResource(callback?: (err: AWSError, data: APIGateway.Types.Resource) => void): Request<APIGateway.Types.Resource, AWSError>;
   /**
-   * Lists information about a collection of Resource resources.
+   * Lists information about a resource.
    */
-  getResources(params: APIGateway.Types.GetResourcesRequest, callback?: (err: AWSError, data: APIGateway.Types.Resources) => void): Request<APIGateway.Types.Resources, AWSError>;
+  getResource(params: APIGateway.Types.GetResourceRequest, callback?: (err: AWSError, data: APIGateway.Types.Resource) => void): Request<APIGateway.Types.Resource, AWSError>;
   /**
    * Lists information about a collection of Resource resources.
    */
   getResources(callback?: (err: AWSError, data: APIGateway.Types.Resources) => void): Request<APIGateway.Types.Resources, AWSError>;
   /**
-   * Lists the RestApi resource in the collection.
+   * Lists information about a collection of Resource resources.
    */
-  getRestApi(params: APIGateway.Types.GetRestApiRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
+  getResources(params: APIGateway.Types.GetResourcesRequest, callback?: (err: AWSError, data: APIGateway.Types.Resources) => void): Request<APIGateway.Types.Resources, AWSError>;
   /**
    * Lists the RestApi resource in the collection.
    */
   getRestApi(callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
   /**
-   * Lists the RestApis resources for your collection.
+   * Lists the RestApi resource in the collection.
    */
-  getRestApis(params: APIGateway.Types.GetRestApisRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApis) => void): Request<APIGateway.Types.RestApis, AWSError>;
+  getRestApi(params: APIGateway.Types.GetRestApiRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
   /**
    * Lists the RestApis resources for your collection.
    */
   getRestApis(callback?: (err: AWSError, data: APIGateway.Types.RestApis) => void): Request<APIGateway.Types.RestApis, AWSError>;
   /**
-   * Generates a client SDK for a RestApi and Stage.
+   * Lists the RestApis resources for your collection.
    */
-  getSdk(params: APIGateway.Types.GetSdkRequest, callback?: (err: AWSError, data: APIGateway.Types.SdkResponse) => void): Request<APIGateway.Types.SdkResponse, AWSError>;
+  getRestApis(params: APIGateway.Types.GetRestApisRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApis) => void): Request<APIGateway.Types.RestApis, AWSError>;
   /**
    * Generates a client SDK for a RestApi and Stage.
    */
   getSdk(callback?: (err: AWSError, data: APIGateway.Types.SdkResponse) => void): Request<APIGateway.Types.SdkResponse, AWSError>;
   /**
-   * 
+   * Generates a client SDK for a RestApi and Stage.
    */
-  getSdkType(params: APIGateway.Types.GetSdkTypeRequest, callback?: (err: AWSError, data: APIGateway.Types.SdkType) => void): Request<APIGateway.Types.SdkType, AWSError>;
+  getSdk(params: APIGateway.Types.GetSdkRequest, callback?: (err: AWSError, data: APIGateway.Types.SdkResponse) => void): Request<APIGateway.Types.SdkResponse, AWSError>;
   /**
    * 
    */
@@ -606,247 +602,247 @@ declare class APIGateway extends Service {
   /**
    * 
    */
-  getSdkTypes(params: APIGateway.Types.GetSdkTypesRequest, callback?: (err: AWSError, data: APIGateway.Types.SdkTypes) => void): Request<APIGateway.Types.SdkTypes, AWSError>;
+  getSdkType(params: APIGateway.Types.GetSdkTypeRequest, callback?: (err: AWSError, data: APIGateway.Types.SdkType) => void): Request<APIGateway.Types.SdkType, AWSError>;
   /**
    * 
    */
   getSdkTypes(callback?: (err: AWSError, data: APIGateway.Types.SdkTypes) => void): Request<APIGateway.Types.SdkTypes, AWSError>;
   /**
-   * Gets information about a Stage resource.
+   * 
    */
-  getStage(params: APIGateway.Types.GetStageRequest, callback?: (err: AWSError, data: APIGateway.Types.Stage) => void): Request<APIGateway.Types.Stage, AWSError>;
+  getSdkTypes(params: APIGateway.Types.GetSdkTypesRequest, callback?: (err: AWSError, data: APIGateway.Types.SdkTypes) => void): Request<APIGateway.Types.SdkTypes, AWSError>;
   /**
    * Gets information about a Stage resource.
    */
   getStage(callback?: (err: AWSError, data: APIGateway.Types.Stage) => void): Request<APIGateway.Types.Stage, AWSError>;
   /**
-   * Gets information about one or more Stage resources.
+   * Gets information about a Stage resource.
    */
-  getStages(params: APIGateway.Types.GetStagesRequest, callback?: (err: AWSError, data: APIGateway.Types.Stages) => void): Request<APIGateway.Types.Stages, AWSError>;
+  getStage(params: APIGateway.Types.GetStageRequest, callback?: (err: AWSError, data: APIGateway.Types.Stage) => void): Request<APIGateway.Types.Stage, AWSError>;
   /**
    * Gets information about one or more Stage resources.
    */
   getStages(callback?: (err: AWSError, data: APIGateway.Types.Stages) => void): Request<APIGateway.Types.Stages, AWSError>;
   /**
-   * Gets the Tags collection for a given resource.
+   * Gets information about one or more Stage resources.
    */
-  getTags(params: APIGateway.Types.GetTagsRequest, callback?: (err: AWSError, data: APIGateway.Types.Tags) => void): Request<APIGateway.Types.Tags, AWSError>;
+  getStages(params: APIGateway.Types.GetStagesRequest, callback?: (err: AWSError, data: APIGateway.Types.Stages) => void): Request<APIGateway.Types.Stages, AWSError>;
   /**
    * Gets the Tags collection for a given resource.
    */
   getTags(callback?: (err: AWSError, data: APIGateway.Types.Tags) => void): Request<APIGateway.Types.Tags, AWSError>;
   /**
-   * Gets the usage data of a usage plan in a specified time interval.
+   * Gets the Tags collection for a given resource.
    */
-  getUsage(params: APIGateway.Types.GetUsageRequest, callback?: (err: AWSError, data: APIGateway.Types.Usage) => void): Request<APIGateway.Types.Usage, AWSError>;
+  getTags(params: APIGateway.Types.GetTagsRequest, callback?: (err: AWSError, data: APIGateway.Types.Tags) => void): Request<APIGateway.Types.Tags, AWSError>;
   /**
    * Gets the usage data of a usage plan in a specified time interval.
    */
   getUsage(callback?: (err: AWSError, data: APIGateway.Types.Usage) => void): Request<APIGateway.Types.Usage, AWSError>;
   /**
-   * Gets a usage plan of a given plan identifier.
+   * Gets the usage data of a usage plan in a specified time interval.
    */
-  getUsagePlan(params: APIGateway.Types.GetUsagePlanRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlan) => void): Request<APIGateway.Types.UsagePlan, AWSError>;
+  getUsage(params: APIGateway.Types.GetUsageRequest, callback?: (err: AWSError, data: APIGateway.Types.Usage) => void): Request<APIGateway.Types.Usage, AWSError>;
   /**
    * Gets a usage plan of a given plan identifier.
    */
   getUsagePlan(callback?: (err: AWSError, data: APIGateway.Types.UsagePlan) => void): Request<APIGateway.Types.UsagePlan, AWSError>;
   /**
-   * Gets a usage plan key of a given key identifier.
+   * Gets a usage plan of a given plan identifier.
    */
-  getUsagePlanKey(params: APIGateway.Types.GetUsagePlanKeyRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlanKey) => void): Request<APIGateway.Types.UsagePlanKey, AWSError>;
+  getUsagePlan(params: APIGateway.Types.GetUsagePlanRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlan) => void): Request<APIGateway.Types.UsagePlan, AWSError>;
   /**
    * Gets a usage plan key of a given key identifier.
    */
   getUsagePlanKey(callback?: (err: AWSError, data: APIGateway.Types.UsagePlanKey) => void): Request<APIGateway.Types.UsagePlanKey, AWSError>;
   /**
-   * Gets all the usage plan keys representing the API keys added to a specified usage plan.
+   * Gets a usage plan key of a given key identifier.
    */
-  getUsagePlanKeys(params: APIGateway.Types.GetUsagePlanKeysRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlanKeys) => void): Request<APIGateway.Types.UsagePlanKeys, AWSError>;
+  getUsagePlanKey(params: APIGateway.Types.GetUsagePlanKeyRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlanKey) => void): Request<APIGateway.Types.UsagePlanKey, AWSError>;
   /**
    * Gets all the usage plan keys representing the API keys added to a specified usage plan.
    */
   getUsagePlanKeys(callback?: (err: AWSError, data: APIGateway.Types.UsagePlanKeys) => void): Request<APIGateway.Types.UsagePlanKeys, AWSError>;
   /**
-   * Gets all the usage plans of the caller's account.
+   * Gets all the usage plan keys representing the API keys added to a specified usage plan.
    */
-  getUsagePlans(params: APIGateway.Types.GetUsagePlansRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlans) => void): Request<APIGateway.Types.UsagePlans, AWSError>;
+  getUsagePlanKeys(params: APIGateway.Types.GetUsagePlanKeysRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlanKeys) => void): Request<APIGateway.Types.UsagePlanKeys, AWSError>;
   /**
    * Gets all the usage plans of the caller's account.
    */
   getUsagePlans(callback?: (err: AWSError, data: APIGateway.Types.UsagePlans) => void): Request<APIGateway.Types.UsagePlans, AWSError>;
   /**
-   * Gets a specified VPC link under the caller's account in a region.
+   * Gets all the usage plans of the caller's account.
    */
-  getVpcLink(params: APIGateway.Types.GetVpcLinkRequest, callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
+  getUsagePlans(params: APIGateway.Types.GetUsagePlansRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlans) => void): Request<APIGateway.Types.UsagePlans, AWSError>;
   /**
    * Gets a specified VPC link under the caller's account in a region.
    */
   getVpcLink(callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
   /**
-   * Gets the VpcLinks collection under the caller's account in a selected region.
+   * Gets a specified VPC link under the caller's account in a region.
    */
-  getVpcLinks(params: APIGateway.Types.GetVpcLinksRequest, callback?: (err: AWSError, data: APIGateway.Types.VpcLinks) => void): Request<APIGateway.Types.VpcLinks, AWSError>;
+  getVpcLink(params: APIGateway.Types.GetVpcLinkRequest, callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
   /**
    * Gets the VpcLinks collection under the caller's account in a selected region.
    */
   getVpcLinks(callback?: (err: AWSError, data: APIGateway.Types.VpcLinks) => void): Request<APIGateway.Types.VpcLinks, AWSError>;
   /**
-   * Import API keys from an external source, such as a CSV-formatted file.
+   * Gets the VpcLinks collection under the caller's account in a selected region.
    */
-  importApiKeys(params: APIGateway.Types.ImportApiKeysRequest, callback?: (err: AWSError, data: APIGateway.Types.ApiKeyIds) => void): Request<APIGateway.Types.ApiKeyIds, AWSError>;
+  getVpcLinks(params: APIGateway.Types.GetVpcLinksRequest, callback?: (err: AWSError, data: APIGateway.Types.VpcLinks) => void): Request<APIGateway.Types.VpcLinks, AWSError>;
   /**
    * Import API keys from an external source, such as a CSV-formatted file.
    */
   importApiKeys(callback?: (err: AWSError, data: APIGateway.Types.ApiKeyIds) => void): Request<APIGateway.Types.ApiKeyIds, AWSError>;
   /**
-   * 
+   * Import API keys from an external source, such as a CSV-formatted file.
    */
-  importDocumentationParts(params: APIGateway.Types.ImportDocumentationPartsRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationPartIds) => void): Request<APIGateway.Types.DocumentationPartIds, AWSError>;
+  importApiKeys(params: APIGateway.Types.ImportApiKeysRequest, callback?: (err: AWSError, data: APIGateway.Types.ApiKeyIds) => void): Request<APIGateway.Types.ApiKeyIds, AWSError>;
   /**
    * 
    */
   importDocumentationParts(callback?: (err: AWSError, data: APIGateway.Types.DocumentationPartIds) => void): Request<APIGateway.Types.DocumentationPartIds, AWSError>;
   /**
-   * A feature of the API Gateway control service for creating a new API from an external API definition file.
+   * 
    */
-  importRestApi(params: APIGateway.Types.ImportRestApiRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
+  importDocumentationParts(params: APIGateway.Types.ImportDocumentationPartsRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationPartIds) => void): Request<APIGateway.Types.DocumentationPartIds, AWSError>;
   /**
    * A feature of the API Gateway control service for creating a new API from an external API definition file.
    */
   importRestApi(callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
   /**
-   * Creates a customization of a GatewayResponse of a specified response type and status code on the given RestApi.
+   * A feature of the API Gateway control service for creating a new API from an external API definition file.
    */
-  putGatewayResponse(params: APIGateway.Types.PutGatewayResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.GatewayResponse) => void): Request<APIGateway.Types.GatewayResponse, AWSError>;
+  importRestApi(params: APIGateway.Types.ImportRestApiRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
   /**
    * Creates a customization of a GatewayResponse of a specified response type and status code on the given RestApi.
    */
   putGatewayResponse(callback?: (err: AWSError, data: APIGateway.Types.GatewayResponse) => void): Request<APIGateway.Types.GatewayResponse, AWSError>;
   /**
-   * Sets up a method's integration.
+   * Creates a customization of a GatewayResponse of a specified response type and status code on the given RestApi.
    */
-  putIntegration(params: APIGateway.Types.PutIntegrationRequest, callback?: (err: AWSError, data: APIGateway.Types.Integration) => void): Request<APIGateway.Types.Integration, AWSError>;
+  putGatewayResponse(params: APIGateway.Types.PutGatewayResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.GatewayResponse) => void): Request<APIGateway.Types.GatewayResponse, AWSError>;
   /**
    * Sets up a method's integration.
    */
   putIntegration(callback?: (err: AWSError, data: APIGateway.Types.Integration) => void): Request<APIGateway.Types.Integration, AWSError>;
   /**
-   * Represents a put integration.
+   * Sets up a method's integration.
    */
-  putIntegrationResponse(params: APIGateway.Types.PutIntegrationResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.IntegrationResponse) => void): Request<APIGateway.Types.IntegrationResponse, AWSError>;
+  putIntegration(params: APIGateway.Types.PutIntegrationRequest, callback?: (err: AWSError, data: APIGateway.Types.Integration) => void): Request<APIGateway.Types.Integration, AWSError>;
   /**
    * Represents a put integration.
    */
   putIntegrationResponse(callback?: (err: AWSError, data: APIGateway.Types.IntegrationResponse) => void): Request<APIGateway.Types.IntegrationResponse, AWSError>;
   /**
-   * Add a method to an existing Resource resource.
+   * Represents a put integration.
    */
-  putMethod(params: APIGateway.Types.PutMethodRequest, callback?: (err: AWSError, data: APIGateway.Types.Method) => void): Request<APIGateway.Types.Method, AWSError>;
+  putIntegrationResponse(params: APIGateway.Types.PutIntegrationResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.IntegrationResponse) => void): Request<APIGateway.Types.IntegrationResponse, AWSError>;
   /**
    * Add a method to an existing Resource resource.
    */
   putMethod(callback?: (err: AWSError, data: APIGateway.Types.Method) => void): Request<APIGateway.Types.Method, AWSError>;
   /**
-   * Adds a MethodResponse to an existing Method resource.
+   * Add a method to an existing Resource resource.
    */
-  putMethodResponse(params: APIGateway.Types.PutMethodResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.MethodResponse) => void): Request<APIGateway.Types.MethodResponse, AWSError>;
+  putMethod(params: APIGateway.Types.PutMethodRequest, callback?: (err: AWSError, data: APIGateway.Types.Method) => void): Request<APIGateway.Types.Method, AWSError>;
   /**
    * Adds a MethodResponse to an existing Method resource.
    */
   putMethodResponse(callback?: (err: AWSError, data: APIGateway.Types.MethodResponse) => void): Request<APIGateway.Types.MethodResponse, AWSError>;
   /**
-   * A feature of the API Gateway control service for updating an existing API with an input of external API definitions. The update can take the form of merging the supplied definition into the existing API or overwriting the existing API.
+   * Adds a MethodResponse to an existing Method resource.
    */
-  putRestApi(params: APIGateway.Types.PutRestApiRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
+  putMethodResponse(params: APIGateway.Types.PutMethodResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.MethodResponse) => void): Request<APIGateway.Types.MethodResponse, AWSError>;
   /**
    * A feature of the API Gateway control service for updating an existing API with an input of external API definitions. The update can take the form of merging the supplied definition into the existing API or overwriting the existing API.
    */
   putRestApi(callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
   /**
-   * Adds or updates a tag on a given resource.
+   * A feature of the API Gateway control service for updating an existing API with an input of external API definitions. The update can take the form of merging the supplied definition into the existing API or overwriting the existing API.
    */
-  tagResource(params: APIGateway.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putRestApi(params: APIGateway.Types.PutRestApiRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
   /**
    * Adds or updates a tag on a given resource.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Simulate the execution of an Authorizer in your RestApi with headers, parameters, and an incoming request body.  Enable custom authorizers 
+   * Adds or updates a tag on a given resource.
    */
-  testInvokeAuthorizer(params: APIGateway.Types.TestInvokeAuthorizerRequest, callback?: (err: AWSError, data: APIGateway.Types.TestInvokeAuthorizerResponse) => void): Request<APIGateway.Types.TestInvokeAuthorizerResponse, AWSError>;
+  tagResource(params: APIGateway.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Simulate the execution of an Authorizer in your RestApi with headers, parameters, and an incoming request body.  Enable custom authorizers 
    */
   testInvokeAuthorizer(callback?: (err: AWSError, data: APIGateway.Types.TestInvokeAuthorizerResponse) => void): Request<APIGateway.Types.TestInvokeAuthorizerResponse, AWSError>;
   /**
-   * Simulate the execution of a Method in your RestApi with headers, parameters, and an incoming request body.
+   * Simulate the execution of an Authorizer in your RestApi with headers, parameters, and an incoming request body.  Enable custom authorizers 
    */
-  testInvokeMethod(params: APIGateway.Types.TestInvokeMethodRequest, callback?: (err: AWSError, data: APIGateway.Types.TestInvokeMethodResponse) => void): Request<APIGateway.Types.TestInvokeMethodResponse, AWSError>;
+  testInvokeAuthorizer(params: APIGateway.Types.TestInvokeAuthorizerRequest, callback?: (err: AWSError, data: APIGateway.Types.TestInvokeAuthorizerResponse) => void): Request<APIGateway.Types.TestInvokeAuthorizerResponse, AWSError>;
   /**
    * Simulate the execution of a Method in your RestApi with headers, parameters, and an incoming request body.
    */
   testInvokeMethod(callback?: (err: AWSError, data: APIGateway.Types.TestInvokeMethodResponse) => void): Request<APIGateway.Types.TestInvokeMethodResponse, AWSError>;
   /**
-   * Removes a tag from a given resource.
+   * Simulate the execution of a Method in your RestApi with headers, parameters, and an incoming request body.
    */
-  untagResource(params: APIGateway.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  testInvokeMethod(params: APIGateway.Types.TestInvokeMethodRequest, callback?: (err: AWSError, data: APIGateway.Types.TestInvokeMethodResponse) => void): Request<APIGateway.Types.TestInvokeMethodResponse, AWSError>;
   /**
    * Removes a tag from a given resource.
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Changes information about the current Account resource.
+   * Removes a tag from a given resource.
    */
-  updateAccount(params: APIGateway.Types.UpdateAccountRequest, callback?: (err: AWSError, data: APIGateway.Types.Account) => void): Request<APIGateway.Types.Account, AWSError>;
+  untagResource(params: APIGateway.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Changes information about the current Account resource.
    */
   updateAccount(callback?: (err: AWSError, data: APIGateway.Types.Account) => void): Request<APIGateway.Types.Account, AWSError>;
   /**
-   * Changes information about an ApiKey resource.
+   * Changes information about the current Account resource.
    */
-  updateApiKey(params: APIGateway.Types.UpdateApiKeyRequest, callback?: (err: AWSError, data: APIGateway.Types.ApiKey) => void): Request<APIGateway.Types.ApiKey, AWSError>;
+  updateAccount(params: APIGateway.Types.UpdateAccountRequest, callback?: (err: AWSError, data: APIGateway.Types.Account) => void): Request<APIGateway.Types.Account, AWSError>;
   /**
    * Changes information about an ApiKey resource.
    */
   updateApiKey(callback?: (err: AWSError, data: APIGateway.Types.ApiKey) => void): Request<APIGateway.Types.ApiKey, AWSError>;
   /**
-   * Updates an existing Authorizer resource. AWS CLI
+   * Changes information about an ApiKey resource.
    */
-  updateAuthorizer(params: APIGateway.Types.UpdateAuthorizerRequest, callback?: (err: AWSError, data: APIGateway.Types.Authorizer) => void): Request<APIGateway.Types.Authorizer, AWSError>;
+  updateApiKey(params: APIGateway.Types.UpdateApiKeyRequest, callback?: (err: AWSError, data: APIGateway.Types.ApiKey) => void): Request<APIGateway.Types.ApiKey, AWSError>;
   /**
    * Updates an existing Authorizer resource. AWS CLI
    */
   updateAuthorizer(callback?: (err: AWSError, data: APIGateway.Types.Authorizer) => void): Request<APIGateway.Types.Authorizer, AWSError>;
   /**
-   * Changes information about the BasePathMapping resource.
+   * Updates an existing Authorizer resource. AWS CLI
    */
-  updateBasePathMapping(params: APIGateway.Types.UpdateBasePathMappingRequest, callback?: (err: AWSError, data: APIGateway.Types.BasePathMapping) => void): Request<APIGateway.Types.BasePathMapping, AWSError>;
+  updateAuthorizer(params: APIGateway.Types.UpdateAuthorizerRequest, callback?: (err: AWSError, data: APIGateway.Types.Authorizer) => void): Request<APIGateway.Types.Authorizer, AWSError>;
   /**
    * Changes information about the BasePathMapping resource.
    */
   updateBasePathMapping(callback?: (err: AWSError, data: APIGateway.Types.BasePathMapping) => void): Request<APIGateway.Types.BasePathMapping, AWSError>;
   /**
-   * Changes information about an ClientCertificate resource.
+   * Changes information about the BasePathMapping resource.
    */
-  updateClientCertificate(params: APIGateway.Types.UpdateClientCertificateRequest, callback?: (err: AWSError, data: APIGateway.Types.ClientCertificate) => void): Request<APIGateway.Types.ClientCertificate, AWSError>;
+  updateBasePathMapping(params: APIGateway.Types.UpdateBasePathMappingRequest, callback?: (err: AWSError, data: APIGateway.Types.BasePathMapping) => void): Request<APIGateway.Types.BasePathMapping, AWSError>;
   /**
    * Changes information about an ClientCertificate resource.
    */
   updateClientCertificate(callback?: (err: AWSError, data: APIGateway.Types.ClientCertificate) => void): Request<APIGateway.Types.ClientCertificate, AWSError>;
   /**
-   * Changes information about a Deployment resource.
+   * Changes information about an ClientCertificate resource.
    */
-  updateDeployment(params: APIGateway.Types.UpdateDeploymentRequest, callback?: (err: AWSError, data: APIGateway.Types.Deployment) => void): Request<APIGateway.Types.Deployment, AWSError>;
+  updateClientCertificate(params: APIGateway.Types.UpdateClientCertificateRequest, callback?: (err: AWSError, data: APIGateway.Types.ClientCertificate) => void): Request<APIGateway.Types.ClientCertificate, AWSError>;
   /**
    * Changes information about a Deployment resource.
    */
   updateDeployment(callback?: (err: AWSError, data: APIGateway.Types.Deployment) => void): Request<APIGateway.Types.Deployment, AWSError>;
   /**
-   * 
+   * Changes information about a Deployment resource.
    */
-  updateDocumentationPart(params: APIGateway.Types.UpdateDocumentationPartRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationPart) => void): Request<APIGateway.Types.DocumentationPart, AWSError>;
+  updateDeployment(params: APIGateway.Types.UpdateDeploymentRequest, callback?: (err: AWSError, data: APIGateway.Types.Deployment) => void): Request<APIGateway.Types.Deployment, AWSError>;
   /**
    * 
    */
@@ -854,123 +850,127 @@ declare class APIGateway extends Service {
   /**
    * 
    */
-  updateDocumentationVersion(params: APIGateway.Types.UpdateDocumentationVersionRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersion) => void): Request<APIGateway.Types.DocumentationVersion, AWSError>;
+  updateDocumentationPart(params: APIGateway.Types.UpdateDocumentationPartRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationPart) => void): Request<APIGateway.Types.DocumentationPart, AWSError>;
   /**
    * 
    */
   updateDocumentationVersion(callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersion) => void): Request<APIGateway.Types.DocumentationVersion, AWSError>;
   /**
-   * Changes information about the DomainName resource.
+   * 
    */
-  updateDomainName(params: APIGateway.Types.UpdateDomainNameRequest, callback?: (err: AWSError, data: APIGateway.Types.DomainName) => void): Request<APIGateway.Types.DomainName, AWSError>;
+  updateDocumentationVersion(params: APIGateway.Types.UpdateDocumentationVersionRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersion) => void): Request<APIGateway.Types.DocumentationVersion, AWSError>;
   /**
    * Changes information about the DomainName resource.
    */
   updateDomainName(callback?: (err: AWSError, data: APIGateway.Types.DomainName) => void): Request<APIGateway.Types.DomainName, AWSError>;
   /**
-   * Updates a GatewayResponse of a specified response type on the given RestApi.
+   * Changes information about the DomainName resource.
    */
-  updateGatewayResponse(params: APIGateway.Types.UpdateGatewayResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.GatewayResponse) => void): Request<APIGateway.Types.GatewayResponse, AWSError>;
+  updateDomainName(params: APIGateway.Types.UpdateDomainNameRequest, callback?: (err: AWSError, data: APIGateway.Types.DomainName) => void): Request<APIGateway.Types.DomainName, AWSError>;
   /**
    * Updates a GatewayResponse of a specified response type on the given RestApi.
    */
   updateGatewayResponse(callback?: (err: AWSError, data: APIGateway.Types.GatewayResponse) => void): Request<APIGateway.Types.GatewayResponse, AWSError>;
   /**
-   * Represents an update integration.
+   * Updates a GatewayResponse of a specified response type on the given RestApi.
    */
-  updateIntegration(params: APIGateway.Types.UpdateIntegrationRequest, callback?: (err: AWSError, data: APIGateway.Types.Integration) => void): Request<APIGateway.Types.Integration, AWSError>;
+  updateGatewayResponse(params: APIGateway.Types.UpdateGatewayResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.GatewayResponse) => void): Request<APIGateway.Types.GatewayResponse, AWSError>;
   /**
    * Represents an update integration.
    */
   updateIntegration(callback?: (err: AWSError, data: APIGateway.Types.Integration) => void): Request<APIGateway.Types.Integration, AWSError>;
   /**
-   * Represents an update integration response.
+   * Represents an update integration.
    */
-  updateIntegrationResponse(params: APIGateway.Types.UpdateIntegrationResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.IntegrationResponse) => void): Request<APIGateway.Types.IntegrationResponse, AWSError>;
+  updateIntegration(params: APIGateway.Types.UpdateIntegrationRequest, callback?: (err: AWSError, data: APIGateway.Types.Integration) => void): Request<APIGateway.Types.Integration, AWSError>;
   /**
    * Represents an update integration response.
    */
   updateIntegrationResponse(callback?: (err: AWSError, data: APIGateway.Types.IntegrationResponse) => void): Request<APIGateway.Types.IntegrationResponse, AWSError>;
   /**
-   * Updates an existing Method resource.
+   * Represents an update integration response.
    */
-  updateMethod(params: APIGateway.Types.UpdateMethodRequest, callback?: (err: AWSError, data: APIGateway.Types.Method) => void): Request<APIGateway.Types.Method, AWSError>;
+  updateIntegrationResponse(params: APIGateway.Types.UpdateIntegrationResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.IntegrationResponse) => void): Request<APIGateway.Types.IntegrationResponse, AWSError>;
   /**
    * Updates an existing Method resource.
    */
   updateMethod(callback?: (err: AWSError, data: APIGateway.Types.Method) => void): Request<APIGateway.Types.Method, AWSError>;
   /**
-   * Updates an existing MethodResponse resource.
+   * Updates an existing Method resource.
    */
-  updateMethodResponse(params: APIGateway.Types.UpdateMethodResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.MethodResponse) => void): Request<APIGateway.Types.MethodResponse, AWSError>;
+  updateMethod(params: APIGateway.Types.UpdateMethodRequest, callback?: (err: AWSError, data: APIGateway.Types.Method) => void): Request<APIGateway.Types.Method, AWSError>;
   /**
    * Updates an existing MethodResponse resource.
    */
   updateMethodResponse(callback?: (err: AWSError, data: APIGateway.Types.MethodResponse) => void): Request<APIGateway.Types.MethodResponse, AWSError>;
   /**
-   * Changes information about a model.
+   * Updates an existing MethodResponse resource.
    */
-  updateModel(params: APIGateway.Types.UpdateModelRequest, callback?: (err: AWSError, data: APIGateway.Types.Model) => void): Request<APIGateway.Types.Model, AWSError>;
+  updateMethodResponse(params: APIGateway.Types.UpdateMethodResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.MethodResponse) => void): Request<APIGateway.Types.MethodResponse, AWSError>;
   /**
    * Changes information about a model.
    */
   updateModel(callback?: (err: AWSError, data: APIGateway.Types.Model) => void): Request<APIGateway.Types.Model, AWSError>;
   /**
-   * Updates a RequestValidator of a given RestApi.
+   * Changes information about a model.
    */
-  updateRequestValidator(params: APIGateway.Types.UpdateRequestValidatorRequest, callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
+  updateModel(params: APIGateway.Types.UpdateModelRequest, callback?: (err: AWSError, data: APIGateway.Types.Model) => void): Request<APIGateway.Types.Model, AWSError>;
   /**
    * Updates a RequestValidator of a given RestApi.
    */
   updateRequestValidator(callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
   /**
-   * Changes information about a Resource resource.
+   * Updates a RequestValidator of a given RestApi.
    */
-  updateResource(params: APIGateway.Types.UpdateResourceRequest, callback?: (err: AWSError, data: APIGateway.Types.Resource) => void): Request<APIGateway.Types.Resource, AWSError>;
+  updateRequestValidator(params: APIGateway.Types.UpdateRequestValidatorRequest, callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
   /**
    * Changes information about a Resource resource.
    */
   updateResource(callback?: (err: AWSError, data: APIGateway.Types.Resource) => void): Request<APIGateway.Types.Resource, AWSError>;
   /**
-   * Changes information about the specified API.
+   * Changes information about a Resource resource.
    */
-  updateRestApi(params: APIGateway.Types.UpdateRestApiRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
+  updateResource(params: APIGateway.Types.UpdateResourceRequest, callback?: (err: AWSError, data: APIGateway.Types.Resource) => void): Request<APIGateway.Types.Resource, AWSError>;
   /**
    * Changes information about the specified API.
    */
   updateRestApi(callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
   /**
-   * Changes information about a Stage resource.
+   * Changes information about the specified API.
    */
-  updateStage(params: APIGateway.Types.UpdateStageRequest, callback?: (err: AWSError, data: APIGateway.Types.Stage) => void): Request<APIGateway.Types.Stage, AWSError>;
+  updateRestApi(params: APIGateway.Types.UpdateRestApiRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
   /**
    * Changes information about a Stage resource.
    */
   updateStage(callback?: (err: AWSError, data: APIGateway.Types.Stage) => void): Request<APIGateway.Types.Stage, AWSError>;
   /**
-   * Grants a temporary extension to the remaining quota of a usage plan associated with a specified API key.
+   * Changes information about a Stage resource.
    */
-  updateUsage(params: APIGateway.Types.UpdateUsageRequest, callback?: (err: AWSError, data: APIGateway.Types.Usage) => void): Request<APIGateway.Types.Usage, AWSError>;
+  updateStage(params: APIGateway.Types.UpdateStageRequest, callback?: (err: AWSError, data: APIGateway.Types.Stage) => void): Request<APIGateway.Types.Stage, AWSError>;
   /**
    * Grants a temporary extension to the remaining quota of a usage plan associated with a specified API key.
    */
   updateUsage(callback?: (err: AWSError, data: APIGateway.Types.Usage) => void): Request<APIGateway.Types.Usage, AWSError>;
   /**
-   * Updates a usage plan of a given plan Id.
+   * Grants a temporary extension to the remaining quota of a usage plan associated with a specified API key.
    */
-  updateUsagePlan(params: APIGateway.Types.UpdateUsagePlanRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlan) => void): Request<APIGateway.Types.UsagePlan, AWSError>;
+  updateUsage(params: APIGateway.Types.UpdateUsageRequest, callback?: (err: AWSError, data: APIGateway.Types.Usage) => void): Request<APIGateway.Types.Usage, AWSError>;
   /**
    * Updates a usage plan of a given plan Id.
    */
   updateUsagePlan(callback?: (err: AWSError, data: APIGateway.Types.UsagePlan) => void): Request<APIGateway.Types.UsagePlan, AWSError>;
   /**
-   * Updates an existing VpcLink of a specified identifier.
+   * Updates a usage plan of a given plan Id.
    */
-  updateVpcLink(params: APIGateway.Types.UpdateVpcLinkRequest, callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
+  updateUsagePlan(params: APIGateway.Types.UpdateUsagePlanRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlan) => void): Request<APIGateway.Types.UsagePlan, AWSError>;
   /**
    * Updates an existing VpcLink of a specified identifier.
    */
   updateVpcLink(callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
+  /**
+   * Updates an existing VpcLink of a specified identifier.
+   */
+  updateVpcLink(params: APIGateway.Types.UpdateVpcLinkRequest, callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
 }
 declare namespace APIGateway {
   export interface AccessLogSettings {

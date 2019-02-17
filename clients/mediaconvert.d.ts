@@ -14,203 +14,203 @@ declare class MediaConvert extends Service {
   /**
    * Associates an AWS Certificate Manager (ACM) Amazon Resource Name (ARN) with AWS Elemental MediaConvert.
    */
-  associateCertificate(params: MediaConvert.Types.AssociateCertificateRequest, callback?: (err: AWSError, data: MediaConvert.Types.AssociateCertificateResponse) => void): Request<MediaConvert.Types.AssociateCertificateResponse, AWSError>;
+  associateCertificate(callback?: (err: AWSError, data: MediaConvert.Types.AssociateCertificateResponse) => void): Request<MediaConvert.Types.AssociateCertificateResponse, AWSError>;
   /**
    * Associates an AWS Certificate Manager (ACM) Amazon Resource Name (ARN) with AWS Elemental MediaConvert.
    */
-  associateCertificate(callback?: (err: AWSError, data: MediaConvert.Types.AssociateCertificateResponse) => void): Request<MediaConvert.Types.AssociateCertificateResponse, AWSError>;
-  /**
-   * Permanently remove a job from a queue. Once you have canceled a job, you can't start it again. You can't delete a running job.
-   */
-  cancelJob(params: MediaConvert.Types.CancelJobRequest, callback?: (err: AWSError, data: MediaConvert.Types.CancelJobResponse) => void): Request<MediaConvert.Types.CancelJobResponse, AWSError>;
+  associateCertificate(params: MediaConvert.Types.AssociateCertificateRequest, callback?: (err: AWSError, data: MediaConvert.Types.AssociateCertificateResponse) => void): Request<MediaConvert.Types.AssociateCertificateResponse, AWSError>;
   /**
    * Permanently remove a job from a queue. Once you have canceled a job, you can't start it again. You can't delete a running job.
    */
   cancelJob(callback?: (err: AWSError, data: MediaConvert.Types.CancelJobResponse) => void): Request<MediaConvert.Types.CancelJobResponse, AWSError>;
   /**
-   * Create a new transcoding job. For information about jobs and job settings, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+   * Permanently remove a job from a queue. Once you have canceled a job, you can't start it again. You can't delete a running job.
    */
-  createJob(params: MediaConvert.Types.CreateJobRequest, callback?: (err: AWSError, data: MediaConvert.Types.CreateJobResponse) => void): Request<MediaConvert.Types.CreateJobResponse, AWSError>;
+  cancelJob(params: MediaConvert.Types.CancelJobRequest, callback?: (err: AWSError, data: MediaConvert.Types.CancelJobResponse) => void): Request<MediaConvert.Types.CancelJobResponse, AWSError>;
   /**
    * Create a new transcoding job. For information about jobs and job settings, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
    */
   createJob(callback?: (err: AWSError, data: MediaConvert.Types.CreateJobResponse) => void): Request<MediaConvert.Types.CreateJobResponse, AWSError>;
   /**
-   * Create a new job template. For information about job templates see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+   * Create a new transcoding job. For information about jobs and job settings, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
    */
-  createJobTemplate(params: MediaConvert.Types.CreateJobTemplateRequest, callback?: (err: AWSError, data: MediaConvert.Types.CreateJobTemplateResponse) => void): Request<MediaConvert.Types.CreateJobTemplateResponse, AWSError>;
+  createJob(params: MediaConvert.Types.CreateJobRequest, callback?: (err: AWSError, data: MediaConvert.Types.CreateJobResponse) => void): Request<MediaConvert.Types.CreateJobResponse, AWSError>;
   /**
    * Create a new job template. For information about job templates see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
    */
   createJobTemplate(callback?: (err: AWSError, data: MediaConvert.Types.CreateJobTemplateResponse) => void): Request<MediaConvert.Types.CreateJobTemplateResponse, AWSError>;
   /**
-   * Create a new preset. For information about job templates see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
+   * Create a new job template. For information about job templates see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
    */
-  createPreset(params: MediaConvert.Types.CreatePresetRequest, callback?: (err: AWSError, data: MediaConvert.Types.CreatePresetResponse) => void): Request<MediaConvert.Types.CreatePresetResponse, AWSError>;
+  createJobTemplate(params: MediaConvert.Types.CreateJobTemplateRequest, callback?: (err: AWSError, data: MediaConvert.Types.CreateJobTemplateResponse) => void): Request<MediaConvert.Types.CreateJobTemplateResponse, AWSError>;
   /**
    * Create a new preset. For information about job templates see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
    */
   createPreset(callback?: (err: AWSError, data: MediaConvert.Types.CreatePresetResponse) => void): Request<MediaConvert.Types.CreatePresetResponse, AWSError>;
   /**
-   * Create a new transcoding queue. For information about queues, see Working With Queues in the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html
+   * Create a new preset. For information about job templates see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
    */
-  createQueue(params: MediaConvert.Types.CreateQueueRequest, callback?: (err: AWSError, data: MediaConvert.Types.CreateQueueResponse) => void): Request<MediaConvert.Types.CreateQueueResponse, AWSError>;
+  createPreset(params: MediaConvert.Types.CreatePresetRequest, callback?: (err: AWSError, data: MediaConvert.Types.CreatePresetResponse) => void): Request<MediaConvert.Types.CreatePresetResponse, AWSError>;
   /**
    * Create a new transcoding queue. For information about queues, see Working With Queues in the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html
    */
   createQueue(callback?: (err: AWSError, data: MediaConvert.Types.CreateQueueResponse) => void): Request<MediaConvert.Types.CreateQueueResponse, AWSError>;
   /**
-   * Permanently delete a job template you have created.
+   * Create a new transcoding queue. For information about queues, see Working With Queues in the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html
    */
-  deleteJobTemplate(params: MediaConvert.Types.DeleteJobTemplateRequest, callback?: (err: AWSError, data: MediaConvert.Types.DeleteJobTemplateResponse) => void): Request<MediaConvert.Types.DeleteJobTemplateResponse, AWSError>;
+  createQueue(params: MediaConvert.Types.CreateQueueRequest, callback?: (err: AWSError, data: MediaConvert.Types.CreateQueueResponse) => void): Request<MediaConvert.Types.CreateQueueResponse, AWSError>;
   /**
    * Permanently delete a job template you have created.
    */
   deleteJobTemplate(callback?: (err: AWSError, data: MediaConvert.Types.DeleteJobTemplateResponse) => void): Request<MediaConvert.Types.DeleteJobTemplateResponse, AWSError>;
   /**
-   * Permanently delete a preset you have created.
+   * Permanently delete a job template you have created.
    */
-  deletePreset(params: MediaConvert.Types.DeletePresetRequest, callback?: (err: AWSError, data: MediaConvert.Types.DeletePresetResponse) => void): Request<MediaConvert.Types.DeletePresetResponse, AWSError>;
+  deleteJobTemplate(params: MediaConvert.Types.DeleteJobTemplateRequest, callback?: (err: AWSError, data: MediaConvert.Types.DeleteJobTemplateResponse) => void): Request<MediaConvert.Types.DeleteJobTemplateResponse, AWSError>;
   /**
    * Permanently delete a preset you have created.
    */
   deletePreset(callback?: (err: AWSError, data: MediaConvert.Types.DeletePresetResponse) => void): Request<MediaConvert.Types.DeletePresetResponse, AWSError>;
   /**
-   * Permanently delete a queue you have created.
+   * Permanently delete a preset you have created.
    */
-  deleteQueue(params: MediaConvert.Types.DeleteQueueRequest, callback?: (err: AWSError, data: MediaConvert.Types.DeleteQueueResponse) => void): Request<MediaConvert.Types.DeleteQueueResponse, AWSError>;
+  deletePreset(params: MediaConvert.Types.DeletePresetRequest, callback?: (err: AWSError, data: MediaConvert.Types.DeletePresetResponse) => void): Request<MediaConvert.Types.DeletePresetResponse, AWSError>;
   /**
    * Permanently delete a queue you have created.
    */
   deleteQueue(callback?: (err: AWSError, data: MediaConvert.Types.DeleteQueueResponse) => void): Request<MediaConvert.Types.DeleteQueueResponse, AWSError>;
   /**
-   * Send an request with an empty body to the regional API endpoint to get your account API endpoint.
+   * Permanently delete a queue you have created.
    */
-  describeEndpoints(params: MediaConvert.Types.DescribeEndpointsRequest, callback?: (err: AWSError, data: MediaConvert.Types.DescribeEndpointsResponse) => void): Request<MediaConvert.Types.DescribeEndpointsResponse, AWSError>;
+  deleteQueue(params: MediaConvert.Types.DeleteQueueRequest, callback?: (err: AWSError, data: MediaConvert.Types.DeleteQueueResponse) => void): Request<MediaConvert.Types.DeleteQueueResponse, AWSError>;
   /**
    * Send an request with an empty body to the regional API endpoint to get your account API endpoint.
    */
   describeEndpoints(callback?: (err: AWSError, data: MediaConvert.Types.DescribeEndpointsResponse) => void): Request<MediaConvert.Types.DescribeEndpointsResponse, AWSError>;
   /**
-   * Removes an association between the Amazon Resource Name (ARN) of an AWS Certificate Manager (ACM) certificate and an AWS Elemental MediaConvert resource.
+   * Send an request with an empty body to the regional API endpoint to get your account API endpoint.
    */
-  disassociateCertificate(params: MediaConvert.Types.DisassociateCertificateRequest, callback?: (err: AWSError, data: MediaConvert.Types.DisassociateCertificateResponse) => void): Request<MediaConvert.Types.DisassociateCertificateResponse, AWSError>;
+  describeEndpoints(params: MediaConvert.Types.DescribeEndpointsRequest, callback?: (err: AWSError, data: MediaConvert.Types.DescribeEndpointsResponse) => void): Request<MediaConvert.Types.DescribeEndpointsResponse, AWSError>;
   /**
    * Removes an association between the Amazon Resource Name (ARN) of an AWS Certificate Manager (ACM) certificate and an AWS Elemental MediaConvert resource.
    */
   disassociateCertificate(callback?: (err: AWSError, data: MediaConvert.Types.DisassociateCertificateResponse) => void): Request<MediaConvert.Types.DisassociateCertificateResponse, AWSError>;
   /**
-   * Retrieve the JSON for a specific completed transcoding job.
+   * Removes an association between the Amazon Resource Name (ARN) of an AWS Certificate Manager (ACM) certificate and an AWS Elemental MediaConvert resource.
    */
-  getJob(params: MediaConvert.Types.GetJobRequest, callback?: (err: AWSError, data: MediaConvert.Types.GetJobResponse) => void): Request<MediaConvert.Types.GetJobResponse, AWSError>;
+  disassociateCertificate(params: MediaConvert.Types.DisassociateCertificateRequest, callback?: (err: AWSError, data: MediaConvert.Types.DisassociateCertificateResponse) => void): Request<MediaConvert.Types.DisassociateCertificateResponse, AWSError>;
   /**
    * Retrieve the JSON for a specific completed transcoding job.
    */
   getJob(callback?: (err: AWSError, data: MediaConvert.Types.GetJobResponse) => void): Request<MediaConvert.Types.GetJobResponse, AWSError>;
   /**
-   * Retrieve the JSON for a specific job template.
+   * Retrieve the JSON for a specific completed transcoding job.
    */
-  getJobTemplate(params: MediaConvert.Types.GetJobTemplateRequest, callback?: (err: AWSError, data: MediaConvert.Types.GetJobTemplateResponse) => void): Request<MediaConvert.Types.GetJobTemplateResponse, AWSError>;
+  getJob(params: MediaConvert.Types.GetJobRequest, callback?: (err: AWSError, data: MediaConvert.Types.GetJobResponse) => void): Request<MediaConvert.Types.GetJobResponse, AWSError>;
   /**
    * Retrieve the JSON for a specific job template.
    */
   getJobTemplate(callback?: (err: AWSError, data: MediaConvert.Types.GetJobTemplateResponse) => void): Request<MediaConvert.Types.GetJobTemplateResponse, AWSError>;
   /**
-   * Retrieve the JSON for a specific preset.
+   * Retrieve the JSON for a specific job template.
    */
-  getPreset(params: MediaConvert.Types.GetPresetRequest, callback?: (err: AWSError, data: MediaConvert.Types.GetPresetResponse) => void): Request<MediaConvert.Types.GetPresetResponse, AWSError>;
+  getJobTemplate(params: MediaConvert.Types.GetJobTemplateRequest, callback?: (err: AWSError, data: MediaConvert.Types.GetJobTemplateResponse) => void): Request<MediaConvert.Types.GetJobTemplateResponse, AWSError>;
   /**
    * Retrieve the JSON for a specific preset.
    */
   getPreset(callback?: (err: AWSError, data: MediaConvert.Types.GetPresetResponse) => void): Request<MediaConvert.Types.GetPresetResponse, AWSError>;
   /**
-   * Retrieve the JSON for a specific queue.
+   * Retrieve the JSON for a specific preset.
    */
-  getQueue(params: MediaConvert.Types.GetQueueRequest, callback?: (err: AWSError, data: MediaConvert.Types.GetQueueResponse) => void): Request<MediaConvert.Types.GetQueueResponse, AWSError>;
+  getPreset(params: MediaConvert.Types.GetPresetRequest, callback?: (err: AWSError, data: MediaConvert.Types.GetPresetResponse) => void): Request<MediaConvert.Types.GetPresetResponse, AWSError>;
   /**
    * Retrieve the JSON for a specific queue.
    */
   getQueue(callback?: (err: AWSError, data: MediaConvert.Types.GetQueueResponse) => void): Request<MediaConvert.Types.GetQueueResponse, AWSError>;
   /**
-   * Retrieve a JSON array of up to twenty of your job templates. This will return the templates themselves, not just a list of them. To retrieve the next twenty templates, use the nextToken string returned with the array
+   * Retrieve the JSON for a specific queue.
    */
-  listJobTemplates(params: MediaConvert.Types.ListJobTemplatesRequest, callback?: (err: AWSError, data: MediaConvert.Types.ListJobTemplatesResponse) => void): Request<MediaConvert.Types.ListJobTemplatesResponse, AWSError>;
+  getQueue(params: MediaConvert.Types.GetQueueRequest, callback?: (err: AWSError, data: MediaConvert.Types.GetQueueResponse) => void): Request<MediaConvert.Types.GetQueueResponse, AWSError>;
   /**
    * Retrieve a JSON array of up to twenty of your job templates. This will return the templates themselves, not just a list of them. To retrieve the next twenty templates, use the nextToken string returned with the array
    */
   listJobTemplates(callback?: (err: AWSError, data: MediaConvert.Types.ListJobTemplatesResponse) => void): Request<MediaConvert.Types.ListJobTemplatesResponse, AWSError>;
   /**
-   * Retrieve a JSON array of up to twenty of your most recently created jobs. This array includes in-process, completed, and errored jobs. This will return the jobs themselves, not just a list of the jobs. To retrieve the twenty next most recent jobs, use the nextToken string returned with the array.
+   * Retrieve a JSON array of up to twenty of your job templates. This will return the templates themselves, not just a list of them. To retrieve the next twenty templates, use the nextToken string returned with the array
    */
-  listJobs(params: MediaConvert.Types.ListJobsRequest, callback?: (err: AWSError, data: MediaConvert.Types.ListJobsResponse) => void): Request<MediaConvert.Types.ListJobsResponse, AWSError>;
+  listJobTemplates(params: MediaConvert.Types.ListJobTemplatesRequest, callback?: (err: AWSError, data: MediaConvert.Types.ListJobTemplatesResponse) => void): Request<MediaConvert.Types.ListJobTemplatesResponse, AWSError>;
   /**
    * Retrieve a JSON array of up to twenty of your most recently created jobs. This array includes in-process, completed, and errored jobs. This will return the jobs themselves, not just a list of the jobs. To retrieve the twenty next most recent jobs, use the nextToken string returned with the array.
    */
   listJobs(callback?: (err: AWSError, data: MediaConvert.Types.ListJobsResponse) => void): Request<MediaConvert.Types.ListJobsResponse, AWSError>;
   /**
-   * Retrieve a JSON array of up to twenty of your presets. This will return the presets themselves, not just a list of them. To retrieve the next twenty presets, use the nextToken string returned with the array.
+   * Retrieve a JSON array of up to twenty of your most recently created jobs. This array includes in-process, completed, and errored jobs. This will return the jobs themselves, not just a list of the jobs. To retrieve the twenty next most recent jobs, use the nextToken string returned with the array.
    */
-  listPresets(params: MediaConvert.Types.ListPresetsRequest, callback?: (err: AWSError, data: MediaConvert.Types.ListPresetsResponse) => void): Request<MediaConvert.Types.ListPresetsResponse, AWSError>;
+  listJobs(params: MediaConvert.Types.ListJobsRequest, callback?: (err: AWSError, data: MediaConvert.Types.ListJobsResponse) => void): Request<MediaConvert.Types.ListJobsResponse, AWSError>;
   /**
    * Retrieve a JSON array of up to twenty of your presets. This will return the presets themselves, not just a list of them. To retrieve the next twenty presets, use the nextToken string returned with the array.
    */
   listPresets(callback?: (err: AWSError, data: MediaConvert.Types.ListPresetsResponse) => void): Request<MediaConvert.Types.ListPresetsResponse, AWSError>;
   /**
-   * Retrieve a JSON array of up to twenty of your queues. This will return the queues themselves, not just a list of them. To retrieve the next twenty queues, use the nextToken string returned with the array.
+   * Retrieve a JSON array of up to twenty of your presets. This will return the presets themselves, not just a list of them. To retrieve the next twenty presets, use the nextToken string returned with the array.
    */
-  listQueues(params: MediaConvert.Types.ListQueuesRequest, callback?: (err: AWSError, data: MediaConvert.Types.ListQueuesResponse) => void): Request<MediaConvert.Types.ListQueuesResponse, AWSError>;
+  listPresets(params: MediaConvert.Types.ListPresetsRequest, callback?: (err: AWSError, data: MediaConvert.Types.ListPresetsResponse) => void): Request<MediaConvert.Types.ListPresetsResponse, AWSError>;
   /**
    * Retrieve a JSON array of up to twenty of your queues. This will return the queues themselves, not just a list of them. To retrieve the next twenty queues, use the nextToken string returned with the array.
    */
   listQueues(callback?: (err: AWSError, data: MediaConvert.Types.ListQueuesResponse) => void): Request<MediaConvert.Types.ListQueuesResponse, AWSError>;
   /**
-   * Retrieve the tags for a MediaConvert resource.
+   * Retrieve a JSON array of up to twenty of your queues. This will return the queues themselves, not just a list of them. To retrieve the next twenty queues, use the nextToken string returned with the array.
    */
-  listTagsForResource(params: MediaConvert.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaConvert.Types.ListTagsForResourceResponse) => void): Request<MediaConvert.Types.ListTagsForResourceResponse, AWSError>;
+  listQueues(params: MediaConvert.Types.ListQueuesRequest, callback?: (err: AWSError, data: MediaConvert.Types.ListQueuesResponse) => void): Request<MediaConvert.Types.ListQueuesResponse, AWSError>;
   /**
    * Retrieve the tags for a MediaConvert resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: MediaConvert.Types.ListTagsForResourceResponse) => void): Request<MediaConvert.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Add tags to a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
+   * Retrieve the tags for a MediaConvert resource.
    */
-  tagResource(params: MediaConvert.Types.TagResourceRequest, callback?: (err: AWSError, data: MediaConvert.Types.TagResourceResponse) => void): Request<MediaConvert.Types.TagResourceResponse, AWSError>;
+  listTagsForResource(params: MediaConvert.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaConvert.Types.ListTagsForResourceResponse) => void): Request<MediaConvert.Types.ListTagsForResourceResponse, AWSError>;
   /**
    * Add tags to a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
    */
   tagResource(callback?: (err: AWSError, data: MediaConvert.Types.TagResourceResponse) => void): Request<MediaConvert.Types.TagResourceResponse, AWSError>;
   /**
-   * Remove tags from a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
+   * Add tags to a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
    */
-  untagResource(params: MediaConvert.Types.UntagResourceRequest, callback?: (err: AWSError, data: MediaConvert.Types.UntagResourceResponse) => void): Request<MediaConvert.Types.UntagResourceResponse, AWSError>;
+  tagResource(params: MediaConvert.Types.TagResourceRequest, callback?: (err: AWSError, data: MediaConvert.Types.TagResourceResponse) => void): Request<MediaConvert.Types.TagResourceResponse, AWSError>;
   /**
    * Remove tags from a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
    */
   untagResource(callback?: (err: AWSError, data: MediaConvert.Types.UntagResourceResponse) => void): Request<MediaConvert.Types.UntagResourceResponse, AWSError>;
   /**
-   * Modify one of your existing job templates.
+   * Remove tags from a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
    */
-  updateJobTemplate(params: MediaConvert.Types.UpdateJobTemplateRequest, callback?: (err: AWSError, data: MediaConvert.Types.UpdateJobTemplateResponse) => void): Request<MediaConvert.Types.UpdateJobTemplateResponse, AWSError>;
+  untagResource(params: MediaConvert.Types.UntagResourceRequest, callback?: (err: AWSError, data: MediaConvert.Types.UntagResourceResponse) => void): Request<MediaConvert.Types.UntagResourceResponse, AWSError>;
   /**
    * Modify one of your existing job templates.
    */
   updateJobTemplate(callback?: (err: AWSError, data: MediaConvert.Types.UpdateJobTemplateResponse) => void): Request<MediaConvert.Types.UpdateJobTemplateResponse, AWSError>;
   /**
-   * Modify one of your existing presets.
+   * Modify one of your existing job templates.
    */
-  updatePreset(params: MediaConvert.Types.UpdatePresetRequest, callback?: (err: AWSError, data: MediaConvert.Types.UpdatePresetResponse) => void): Request<MediaConvert.Types.UpdatePresetResponse, AWSError>;
+  updateJobTemplate(params: MediaConvert.Types.UpdateJobTemplateRequest, callback?: (err: AWSError, data: MediaConvert.Types.UpdateJobTemplateResponse) => void): Request<MediaConvert.Types.UpdateJobTemplateResponse, AWSError>;
   /**
    * Modify one of your existing presets.
    */
   updatePreset(callback?: (err: AWSError, data: MediaConvert.Types.UpdatePresetResponse) => void): Request<MediaConvert.Types.UpdatePresetResponse, AWSError>;
   /**
-   * Modify one of your existing queues.
+   * Modify one of your existing presets.
    */
-  updateQueue(params: MediaConvert.Types.UpdateQueueRequest, callback?: (err: AWSError, data: MediaConvert.Types.UpdateQueueResponse) => void): Request<MediaConvert.Types.UpdateQueueResponse, AWSError>;
+  updatePreset(params: MediaConvert.Types.UpdatePresetRequest, callback?: (err: AWSError, data: MediaConvert.Types.UpdatePresetResponse) => void): Request<MediaConvert.Types.UpdatePresetResponse, AWSError>;
   /**
    * Modify one of your existing queues.
    */
   updateQueue(callback?: (err: AWSError, data: MediaConvert.Types.UpdateQueueResponse) => void): Request<MediaConvert.Types.UpdateQueueResponse, AWSError>;
+  /**
+   * Modify one of your existing queues.
+   */
+  updateQueue(params: MediaConvert.Types.UpdateQueueRequest, callback?: (err: AWSError, data: MediaConvert.Types.UpdateQueueResponse) => void): Request<MediaConvert.Types.UpdateQueueResponse, AWSError>;
 }
 declare namespace MediaConvert {
   export type AacAudioDescriptionBroadcasterMix = "BROADCASTER_MIXED_AD"|"NORMAL"|string;

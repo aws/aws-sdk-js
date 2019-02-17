@@ -14,227 +14,227 @@ declare class SMS extends Service {
   /**
    * Creates an application. An application consists of one or more server groups. Each server group contain one or more servers.
    */
-  createApp(params: SMS.Types.CreateAppRequest, callback?: (err: AWSError, data: SMS.Types.CreateAppResponse) => void): Request<SMS.Types.CreateAppResponse, AWSError>;
+  createApp(callback?: (err: AWSError, data: SMS.Types.CreateAppResponse) => void): Request<SMS.Types.CreateAppResponse, AWSError>;
   /**
    * Creates an application. An application consists of one or more server groups. Each server group contain one or more servers.
    */
-  createApp(callback?: (err: AWSError, data: SMS.Types.CreateAppResponse) => void): Request<SMS.Types.CreateAppResponse, AWSError>;
-  /**
-   * Creates a replication job. The replication job schedules periodic replication runs to replicate your server to AWS. Each replication run creates an Amazon Machine Image (AMI).
-   */
-  createReplicationJob(params: SMS.Types.CreateReplicationJobRequest, callback?: (err: AWSError, data: SMS.Types.CreateReplicationJobResponse) => void): Request<SMS.Types.CreateReplicationJobResponse, AWSError>;
+  createApp(params: SMS.Types.CreateAppRequest, callback?: (err: AWSError, data: SMS.Types.CreateAppResponse) => void): Request<SMS.Types.CreateAppResponse, AWSError>;
   /**
    * Creates a replication job. The replication job schedules periodic replication runs to replicate your server to AWS. Each replication run creates an Amazon Machine Image (AMI).
    */
   createReplicationJob(callback?: (err: AWSError, data: SMS.Types.CreateReplicationJobResponse) => void): Request<SMS.Types.CreateReplicationJobResponse, AWSError>;
   /**
-   * Deletes an existing application. Optionally deletes the launched stack associated with the application and all AWS SMS replication jobs for servers in the application.
+   * Creates a replication job. The replication job schedules periodic replication runs to replicate your server to AWS. Each replication run creates an Amazon Machine Image (AMI).
    */
-  deleteApp(params: SMS.Types.DeleteAppRequest, callback?: (err: AWSError, data: SMS.Types.DeleteAppResponse) => void): Request<SMS.Types.DeleteAppResponse, AWSError>;
+  createReplicationJob(params: SMS.Types.CreateReplicationJobRequest, callback?: (err: AWSError, data: SMS.Types.CreateReplicationJobResponse) => void): Request<SMS.Types.CreateReplicationJobResponse, AWSError>;
   /**
    * Deletes an existing application. Optionally deletes the launched stack associated with the application and all AWS SMS replication jobs for servers in the application.
    */
   deleteApp(callback?: (err: AWSError, data: SMS.Types.DeleteAppResponse) => void): Request<SMS.Types.DeleteAppResponse, AWSError>;
   /**
-   * Deletes existing launch configuration for an application.
+   * Deletes an existing application. Optionally deletes the launched stack associated with the application and all AWS SMS replication jobs for servers in the application.
    */
-  deleteAppLaunchConfiguration(params: SMS.Types.DeleteAppLaunchConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.DeleteAppLaunchConfigurationResponse) => void): Request<SMS.Types.DeleteAppLaunchConfigurationResponse, AWSError>;
+  deleteApp(params: SMS.Types.DeleteAppRequest, callback?: (err: AWSError, data: SMS.Types.DeleteAppResponse) => void): Request<SMS.Types.DeleteAppResponse, AWSError>;
   /**
    * Deletes existing launch configuration for an application.
    */
   deleteAppLaunchConfiguration(callback?: (err: AWSError, data: SMS.Types.DeleteAppLaunchConfigurationResponse) => void): Request<SMS.Types.DeleteAppLaunchConfigurationResponse, AWSError>;
   /**
-   * Deletes existing replication configuration for an application.
+   * Deletes existing launch configuration for an application.
    */
-  deleteAppReplicationConfiguration(params: SMS.Types.DeleteAppReplicationConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.DeleteAppReplicationConfigurationResponse) => void): Request<SMS.Types.DeleteAppReplicationConfigurationResponse, AWSError>;
+  deleteAppLaunchConfiguration(params: SMS.Types.DeleteAppLaunchConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.DeleteAppLaunchConfigurationResponse) => void): Request<SMS.Types.DeleteAppLaunchConfigurationResponse, AWSError>;
   /**
    * Deletes existing replication configuration for an application.
    */
   deleteAppReplicationConfiguration(callback?: (err: AWSError, data: SMS.Types.DeleteAppReplicationConfigurationResponse) => void): Request<SMS.Types.DeleteAppReplicationConfigurationResponse, AWSError>;
   /**
-   * Deletes the specified replication job. After you delete a replication job, there are no further replication runs. AWS deletes the contents of the Amazon S3 bucket used to store AWS SMS artifacts. The AMIs created by the replication runs are not deleted.
+   * Deletes existing replication configuration for an application.
    */
-  deleteReplicationJob(params: SMS.Types.DeleteReplicationJobRequest, callback?: (err: AWSError, data: SMS.Types.DeleteReplicationJobResponse) => void): Request<SMS.Types.DeleteReplicationJobResponse, AWSError>;
+  deleteAppReplicationConfiguration(params: SMS.Types.DeleteAppReplicationConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.DeleteAppReplicationConfigurationResponse) => void): Request<SMS.Types.DeleteAppReplicationConfigurationResponse, AWSError>;
   /**
    * Deletes the specified replication job. After you delete a replication job, there are no further replication runs. AWS deletes the contents of the Amazon S3 bucket used to store AWS SMS artifacts. The AMIs created by the replication runs are not deleted.
    */
   deleteReplicationJob(callback?: (err: AWSError, data: SMS.Types.DeleteReplicationJobResponse) => void): Request<SMS.Types.DeleteReplicationJobResponse, AWSError>;
   /**
-   * Deletes all servers from your server catalog.
+   * Deletes the specified replication job. After you delete a replication job, there are no further replication runs. AWS deletes the contents of the Amazon S3 bucket used to store AWS SMS artifacts. The AMIs created by the replication runs are not deleted.
    */
-  deleteServerCatalog(params: SMS.Types.DeleteServerCatalogRequest, callback?: (err: AWSError, data: SMS.Types.DeleteServerCatalogResponse) => void): Request<SMS.Types.DeleteServerCatalogResponse, AWSError>;
+  deleteReplicationJob(params: SMS.Types.DeleteReplicationJobRequest, callback?: (err: AWSError, data: SMS.Types.DeleteReplicationJobResponse) => void): Request<SMS.Types.DeleteReplicationJobResponse, AWSError>;
   /**
    * Deletes all servers from your server catalog.
    */
   deleteServerCatalog(callback?: (err: AWSError, data: SMS.Types.DeleteServerCatalogResponse) => void): Request<SMS.Types.DeleteServerCatalogResponse, AWSError>;
   /**
-   * Disassociates the specified connector from AWS SMS. After you disassociate a connector, it is no longer available to support replication jobs.
+   * Deletes all servers from your server catalog.
    */
-  disassociateConnector(params: SMS.Types.DisassociateConnectorRequest, callback?: (err: AWSError, data: SMS.Types.DisassociateConnectorResponse) => void): Request<SMS.Types.DisassociateConnectorResponse, AWSError>;
+  deleteServerCatalog(params: SMS.Types.DeleteServerCatalogRequest, callback?: (err: AWSError, data: SMS.Types.DeleteServerCatalogResponse) => void): Request<SMS.Types.DeleteServerCatalogResponse, AWSError>;
   /**
    * Disassociates the specified connector from AWS SMS. After you disassociate a connector, it is no longer available to support replication jobs.
    */
   disassociateConnector(callback?: (err: AWSError, data: SMS.Types.DisassociateConnectorResponse) => void): Request<SMS.Types.DisassociateConnectorResponse, AWSError>;
   /**
-   * Generates a target change set for a currently launched stack and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
+   * Disassociates the specified connector from AWS SMS. After you disassociate a connector, it is no longer available to support replication jobs.
    */
-  generateChangeSet(params: SMS.Types.GenerateChangeSetRequest, callback?: (err: AWSError, data: SMS.Types.GenerateChangeSetResponse) => void): Request<SMS.Types.GenerateChangeSetResponse, AWSError>;
+  disassociateConnector(params: SMS.Types.DisassociateConnectorRequest, callback?: (err: AWSError, data: SMS.Types.DisassociateConnectorResponse) => void): Request<SMS.Types.DisassociateConnectorResponse, AWSError>;
   /**
    * Generates a target change set for a currently launched stack and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
    */
   generateChangeSet(callback?: (err: AWSError, data: SMS.Types.GenerateChangeSetResponse) => void): Request<SMS.Types.GenerateChangeSetResponse, AWSError>;
   /**
-   * Generates an Amazon CloudFormation template based on the current launch configuration and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
+   * Generates a target change set for a currently launched stack and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
    */
-  generateTemplate(params: SMS.Types.GenerateTemplateRequest, callback?: (err: AWSError, data: SMS.Types.GenerateTemplateResponse) => void): Request<SMS.Types.GenerateTemplateResponse, AWSError>;
+  generateChangeSet(params: SMS.Types.GenerateChangeSetRequest, callback?: (err: AWSError, data: SMS.Types.GenerateChangeSetResponse) => void): Request<SMS.Types.GenerateChangeSetResponse, AWSError>;
   /**
    * Generates an Amazon CloudFormation template based on the current launch configuration and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
    */
   generateTemplate(callback?: (err: AWSError, data: SMS.Types.GenerateTemplateResponse) => void): Request<SMS.Types.GenerateTemplateResponse, AWSError>;
   /**
-   * Retrieve information about an application.
+   * Generates an Amazon CloudFormation template based on the current launch configuration and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
    */
-  getApp(params: SMS.Types.GetAppRequest, callback?: (err: AWSError, data: SMS.Types.GetAppResponse) => void): Request<SMS.Types.GetAppResponse, AWSError>;
+  generateTemplate(params: SMS.Types.GenerateTemplateRequest, callback?: (err: AWSError, data: SMS.Types.GenerateTemplateResponse) => void): Request<SMS.Types.GenerateTemplateResponse, AWSError>;
   /**
    * Retrieve information about an application.
    */
   getApp(callback?: (err: AWSError, data: SMS.Types.GetAppResponse) => void): Request<SMS.Types.GetAppResponse, AWSError>;
   /**
-   * Retrieves the application launch configuration associated with an application.
+   * Retrieve information about an application.
    */
-  getAppLaunchConfiguration(params: SMS.Types.GetAppLaunchConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.GetAppLaunchConfigurationResponse) => void): Request<SMS.Types.GetAppLaunchConfigurationResponse, AWSError>;
+  getApp(params: SMS.Types.GetAppRequest, callback?: (err: AWSError, data: SMS.Types.GetAppResponse) => void): Request<SMS.Types.GetAppResponse, AWSError>;
   /**
    * Retrieves the application launch configuration associated with an application.
    */
   getAppLaunchConfiguration(callback?: (err: AWSError, data: SMS.Types.GetAppLaunchConfigurationResponse) => void): Request<SMS.Types.GetAppLaunchConfigurationResponse, AWSError>;
   /**
-   * Retrieves an application replication configuration associatd with an application.
+   * Retrieves the application launch configuration associated with an application.
    */
-  getAppReplicationConfiguration(params: SMS.Types.GetAppReplicationConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.GetAppReplicationConfigurationResponse) => void): Request<SMS.Types.GetAppReplicationConfigurationResponse, AWSError>;
+  getAppLaunchConfiguration(params: SMS.Types.GetAppLaunchConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.GetAppLaunchConfigurationResponse) => void): Request<SMS.Types.GetAppLaunchConfigurationResponse, AWSError>;
   /**
    * Retrieves an application replication configuration associatd with an application.
    */
   getAppReplicationConfiguration(callback?: (err: AWSError, data: SMS.Types.GetAppReplicationConfigurationResponse) => void): Request<SMS.Types.GetAppReplicationConfigurationResponse, AWSError>;
   /**
-   * Describes the connectors registered with the AWS SMS.
+   * Retrieves an application replication configuration associatd with an application.
    */
-  getConnectors(params: SMS.Types.GetConnectorsRequest, callback?: (err: AWSError, data: SMS.Types.GetConnectorsResponse) => void): Request<SMS.Types.GetConnectorsResponse, AWSError>;
+  getAppReplicationConfiguration(params: SMS.Types.GetAppReplicationConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.GetAppReplicationConfigurationResponse) => void): Request<SMS.Types.GetAppReplicationConfigurationResponse, AWSError>;
   /**
    * Describes the connectors registered with the AWS SMS.
    */
   getConnectors(callback?: (err: AWSError, data: SMS.Types.GetConnectorsResponse) => void): Request<SMS.Types.GetConnectorsResponse, AWSError>;
   /**
-   * Describes the specified replication job or all of your replication jobs.
+   * Describes the connectors registered with the AWS SMS.
    */
-  getReplicationJobs(params: SMS.Types.GetReplicationJobsRequest, callback?: (err: AWSError, data: SMS.Types.GetReplicationJobsResponse) => void): Request<SMS.Types.GetReplicationJobsResponse, AWSError>;
+  getConnectors(params: SMS.Types.GetConnectorsRequest, callback?: (err: AWSError, data: SMS.Types.GetConnectorsResponse) => void): Request<SMS.Types.GetConnectorsResponse, AWSError>;
   /**
    * Describes the specified replication job or all of your replication jobs.
    */
   getReplicationJobs(callback?: (err: AWSError, data: SMS.Types.GetReplicationJobsResponse) => void): Request<SMS.Types.GetReplicationJobsResponse, AWSError>;
   /**
-   * Describes the replication runs for the specified replication job.
+   * Describes the specified replication job or all of your replication jobs.
    */
-  getReplicationRuns(params: SMS.Types.GetReplicationRunsRequest, callback?: (err: AWSError, data: SMS.Types.GetReplicationRunsResponse) => void): Request<SMS.Types.GetReplicationRunsResponse, AWSError>;
+  getReplicationJobs(params: SMS.Types.GetReplicationJobsRequest, callback?: (err: AWSError, data: SMS.Types.GetReplicationJobsResponse) => void): Request<SMS.Types.GetReplicationJobsResponse, AWSError>;
   /**
    * Describes the replication runs for the specified replication job.
    */
   getReplicationRuns(callback?: (err: AWSError, data: SMS.Types.GetReplicationRunsResponse) => void): Request<SMS.Types.GetReplicationRunsResponse, AWSError>;
   /**
-   * Describes the servers in your server catalog. Before you can describe your servers, you must import them using ImportServerCatalog.
+   * Describes the replication runs for the specified replication job.
    */
-  getServers(params: SMS.Types.GetServersRequest, callback?: (err: AWSError, data: SMS.Types.GetServersResponse) => void): Request<SMS.Types.GetServersResponse, AWSError>;
+  getReplicationRuns(params: SMS.Types.GetReplicationRunsRequest, callback?: (err: AWSError, data: SMS.Types.GetReplicationRunsResponse) => void): Request<SMS.Types.GetReplicationRunsResponse, AWSError>;
   /**
    * Describes the servers in your server catalog. Before you can describe your servers, you must import them using ImportServerCatalog.
    */
   getServers(callback?: (err: AWSError, data: SMS.Types.GetServersResponse) => void): Request<SMS.Types.GetServersResponse, AWSError>;
   /**
-   * Gathers a complete list of on-premises servers. Connectors must be installed and monitoring all servers that you want to import. This call returns immediately, but might take additional time to retrieve all the servers.
+   * Describes the servers in your server catalog. Before you can describe your servers, you must import them using ImportServerCatalog.
    */
-  importServerCatalog(params: SMS.Types.ImportServerCatalogRequest, callback?: (err: AWSError, data: SMS.Types.ImportServerCatalogResponse) => void): Request<SMS.Types.ImportServerCatalogResponse, AWSError>;
+  getServers(params: SMS.Types.GetServersRequest, callback?: (err: AWSError, data: SMS.Types.GetServersResponse) => void): Request<SMS.Types.GetServersResponse, AWSError>;
   /**
    * Gathers a complete list of on-premises servers. Connectors must be installed and monitoring all servers that you want to import. This call returns immediately, but might take additional time to retrieve all the servers.
    */
   importServerCatalog(callback?: (err: AWSError, data: SMS.Types.ImportServerCatalogResponse) => void): Request<SMS.Types.ImportServerCatalogResponse, AWSError>;
   /**
-   * Launches an application stack.
+   * Gathers a complete list of on-premises servers. Connectors must be installed and monitoring all servers that you want to import. This call returns immediately, but might take additional time to retrieve all the servers.
    */
-  launchApp(params: SMS.Types.LaunchAppRequest, callback?: (err: AWSError, data: SMS.Types.LaunchAppResponse) => void): Request<SMS.Types.LaunchAppResponse, AWSError>;
+  importServerCatalog(params: SMS.Types.ImportServerCatalogRequest, callback?: (err: AWSError, data: SMS.Types.ImportServerCatalogResponse) => void): Request<SMS.Types.ImportServerCatalogResponse, AWSError>;
   /**
    * Launches an application stack.
    */
   launchApp(callback?: (err: AWSError, data: SMS.Types.LaunchAppResponse) => void): Request<SMS.Types.LaunchAppResponse, AWSError>;
   /**
-   * Returns a list of summaries for all applications.
+   * Launches an application stack.
    */
-  listApps(params: SMS.Types.ListAppsRequest, callback?: (err: AWSError, data: SMS.Types.ListAppsResponse) => void): Request<SMS.Types.ListAppsResponse, AWSError>;
+  launchApp(params: SMS.Types.LaunchAppRequest, callback?: (err: AWSError, data: SMS.Types.LaunchAppResponse) => void): Request<SMS.Types.LaunchAppResponse, AWSError>;
   /**
    * Returns a list of summaries for all applications.
    */
   listApps(callback?: (err: AWSError, data: SMS.Types.ListAppsResponse) => void): Request<SMS.Types.ListAppsResponse, AWSError>;
   /**
-   * Creates a launch configuration for an application.
+   * Returns a list of summaries for all applications.
    */
-  putAppLaunchConfiguration(params: SMS.Types.PutAppLaunchConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.PutAppLaunchConfigurationResponse) => void): Request<SMS.Types.PutAppLaunchConfigurationResponse, AWSError>;
+  listApps(params: SMS.Types.ListAppsRequest, callback?: (err: AWSError, data: SMS.Types.ListAppsResponse) => void): Request<SMS.Types.ListAppsResponse, AWSError>;
   /**
    * Creates a launch configuration for an application.
    */
   putAppLaunchConfiguration(callback?: (err: AWSError, data: SMS.Types.PutAppLaunchConfigurationResponse) => void): Request<SMS.Types.PutAppLaunchConfigurationResponse, AWSError>;
   /**
-   * Creates or updates a replication configuration for an application.
+   * Creates a launch configuration for an application.
    */
-  putAppReplicationConfiguration(params: SMS.Types.PutAppReplicationConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.PutAppReplicationConfigurationResponse) => void): Request<SMS.Types.PutAppReplicationConfigurationResponse, AWSError>;
+  putAppLaunchConfiguration(params: SMS.Types.PutAppLaunchConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.PutAppLaunchConfigurationResponse) => void): Request<SMS.Types.PutAppLaunchConfigurationResponse, AWSError>;
   /**
    * Creates or updates a replication configuration for an application.
    */
   putAppReplicationConfiguration(callback?: (err: AWSError, data: SMS.Types.PutAppReplicationConfigurationResponse) => void): Request<SMS.Types.PutAppReplicationConfigurationResponse, AWSError>;
   /**
-   * Starts replicating an application.
+   * Creates or updates a replication configuration for an application.
    */
-  startAppReplication(params: SMS.Types.StartAppReplicationRequest, callback?: (err: AWSError, data: SMS.Types.StartAppReplicationResponse) => void): Request<SMS.Types.StartAppReplicationResponse, AWSError>;
+  putAppReplicationConfiguration(params: SMS.Types.PutAppReplicationConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.PutAppReplicationConfigurationResponse) => void): Request<SMS.Types.PutAppReplicationConfigurationResponse, AWSError>;
   /**
    * Starts replicating an application.
    */
   startAppReplication(callback?: (err: AWSError, data: SMS.Types.StartAppReplicationResponse) => void): Request<SMS.Types.StartAppReplicationResponse, AWSError>;
   /**
-   * Starts an on-demand replication run for the specified replication job. This replication run starts immediately. This replication run is in addition to the ones already scheduled. There is a limit on the number of on-demand replications runs you can request in a 24-hour period.
+   * Starts replicating an application.
    */
-  startOnDemandReplicationRun(params: SMS.Types.StartOnDemandReplicationRunRequest, callback?: (err: AWSError, data: SMS.Types.StartOnDemandReplicationRunResponse) => void): Request<SMS.Types.StartOnDemandReplicationRunResponse, AWSError>;
+  startAppReplication(params: SMS.Types.StartAppReplicationRequest, callback?: (err: AWSError, data: SMS.Types.StartAppReplicationResponse) => void): Request<SMS.Types.StartAppReplicationResponse, AWSError>;
   /**
    * Starts an on-demand replication run for the specified replication job. This replication run starts immediately. This replication run is in addition to the ones already scheduled. There is a limit on the number of on-demand replications runs you can request in a 24-hour period.
    */
   startOnDemandReplicationRun(callback?: (err: AWSError, data: SMS.Types.StartOnDemandReplicationRunResponse) => void): Request<SMS.Types.StartOnDemandReplicationRunResponse, AWSError>;
   /**
-   * Stops replicating an application.
+   * Starts an on-demand replication run for the specified replication job. This replication run starts immediately. This replication run is in addition to the ones already scheduled. There is a limit on the number of on-demand replications runs you can request in a 24-hour period.
    */
-  stopAppReplication(params: SMS.Types.StopAppReplicationRequest, callback?: (err: AWSError, data: SMS.Types.StopAppReplicationResponse) => void): Request<SMS.Types.StopAppReplicationResponse, AWSError>;
+  startOnDemandReplicationRun(params: SMS.Types.StartOnDemandReplicationRunRequest, callback?: (err: AWSError, data: SMS.Types.StartOnDemandReplicationRunResponse) => void): Request<SMS.Types.StartOnDemandReplicationRunResponse, AWSError>;
   /**
    * Stops replicating an application.
    */
   stopAppReplication(callback?: (err: AWSError, data: SMS.Types.StopAppReplicationResponse) => void): Request<SMS.Types.StopAppReplicationResponse, AWSError>;
   /**
-   * Terminates the stack for an application.
+   * Stops replicating an application.
    */
-  terminateApp(params: SMS.Types.TerminateAppRequest, callback?: (err: AWSError, data: SMS.Types.TerminateAppResponse) => void): Request<SMS.Types.TerminateAppResponse, AWSError>;
+  stopAppReplication(params: SMS.Types.StopAppReplicationRequest, callback?: (err: AWSError, data: SMS.Types.StopAppReplicationResponse) => void): Request<SMS.Types.StopAppReplicationResponse, AWSError>;
   /**
    * Terminates the stack for an application.
    */
   terminateApp(callback?: (err: AWSError, data: SMS.Types.TerminateAppResponse) => void): Request<SMS.Types.TerminateAppResponse, AWSError>;
   /**
-   * Updates an application.
+   * Terminates the stack for an application.
    */
-  updateApp(params: SMS.Types.UpdateAppRequest, callback?: (err: AWSError, data: SMS.Types.UpdateAppResponse) => void): Request<SMS.Types.UpdateAppResponse, AWSError>;
+  terminateApp(params: SMS.Types.TerminateAppRequest, callback?: (err: AWSError, data: SMS.Types.TerminateAppResponse) => void): Request<SMS.Types.TerminateAppResponse, AWSError>;
   /**
    * Updates an application.
    */
   updateApp(callback?: (err: AWSError, data: SMS.Types.UpdateAppResponse) => void): Request<SMS.Types.UpdateAppResponse, AWSError>;
   /**
-   * Updates the specified settings for the specified replication job.
+   * Updates an application.
    */
-  updateReplicationJob(params: SMS.Types.UpdateReplicationJobRequest, callback?: (err: AWSError, data: SMS.Types.UpdateReplicationJobResponse) => void): Request<SMS.Types.UpdateReplicationJobResponse, AWSError>;
+  updateApp(params: SMS.Types.UpdateAppRequest, callback?: (err: AWSError, data: SMS.Types.UpdateAppResponse) => void): Request<SMS.Types.UpdateAppResponse, AWSError>;
   /**
    * Updates the specified settings for the specified replication job.
    */
   updateReplicationJob(callback?: (err: AWSError, data: SMS.Types.UpdateReplicationJobResponse) => void): Request<SMS.Types.UpdateReplicationJobResponse, AWSError>;
+  /**
+   * Updates the specified settings for the specified replication job.
+   */
+  updateReplicationJob(params: SMS.Types.UpdateReplicationJobRequest, callback?: (err: AWSError, data: SMS.Types.UpdateReplicationJobResponse) => void): Request<SMS.Types.UpdateReplicationJobResponse, AWSError>;
 }
 declare namespace SMS {
   export type AmiId = string;
