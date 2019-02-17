@@ -101,6 +101,17 @@ dynamodb.getItem(getParams, (err, data) => {
 
 });
 
+// Table name is optional since it's specified in constructor
+dynamodb.getItem({
+    Key: {
+        'my-key': {
+            S: 'value'
+        }
+    }
+}, (err, data) => {
+
+})
+
 // Still works with Types namespace as well
 const getParams2: DynamoDB.Types.GetItemInput = {
     TableName: 'MyTable',
