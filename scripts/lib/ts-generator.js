@@ -359,7 +359,7 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
 /**
  * Generates a class method type for an operation.
  */
-TSGenerator.prototype.generateTypingsFromOperations = function generateTypingsFromOperations(className, operation, operationName, tabCount) {
+TSGenerator.prototype.generateTypingsFromOperations = function generateTypingsFromOperations(className, operation, operationName, tabCount, parameterTypes) {
     var code = '';
     tabCount = tabCount || 0;
     var tabs = this.tabs;
@@ -372,8 +372,11 @@ TSGenerator.prototype.generateTypingsFromOperations = function generateTypingsFr
     var outputShape = output ? className + '.Types.' + output.shape : '{}';
 
     if (input) {
+        if (!parameterTypes.includes(input.shape)) {
+            parameterTypes.push(input.shape);
+        }
         code += this.generateDocString(operation.documentation, tabCount);
-        code += tabs(tabCount) + operationName + '(params: ' + inputShape + ', callback?: (err: AWSError, data: ' + outputShape + ') => void): Request<' + outputShape + ', AWSError>;\n';
+        code += tabs(tabCount) + operationName + '(params: BoundInput<' + inputShape + ', keyof Params>, callback?: (err: AWSError, data: ' + outputShape + ') => void): Request<' + outputShape + ', AWSError>;\n';
     }
     code += this.generateDocString(operation.documentation, tabCount);
     code += tabs(tabCount) + operationName + '(callback?: (err: AWSError, data: ' + outputShape + ') => void): Request<' + outputShape + ', AWSError>;\n';
@@ -537,10 +540,12 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
         code += 'import {WaiterConfiguration} from \'../lib/service\';\n';
     }
     code += 'import {ServiceConfigurationOptions} from \'../lib/service\';\n';
+    code += 'import {BoundInput} from \'../lib/service\';\n';
+    code += 'import {InputParams} from \'../lib/service\';\n';
     // get any custom config options
     var customConfig = this.generateCustomConfigFromMetadata(serviceIdentifier);
     var hasCustomConfig = !!customConfig.length;
-    var customConfigTypes = ['ServiceConfigurationOptions'];
+    var customConfigTypes = [];
     code += 'import {ConfigBase as Config} from \'../lib/config\';\n';
     if (hasCustomConfig) {
         // generate import statements and custom config type
@@ -560,14 +565,16 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     // generate methods
     var modelOperations = model.operations;
     var operationKeys = Object.keys(modelOperations);
-    code += 'declare class ' + className + ' extends ' + parentClass + ' {\n';
+    code += 'declare class ' + className + '<Params extends ' + className + '.Types.ClientParams = {}> extends ' + parentClass + ' {\n';
     // create constructor
     code += this.generateDocString('Constructs a service object. This object has one method for each API operation.', 1);
-    code += this.tabs(1) + 'constructor(options?: ' + className + '.Types.ClientConfiguration' + ')\n';
-    code += this.tabs(1) + 'config: Config & ' + className + '.Types.ClientConfiguration' + ';\n';
+    code += this.tabs(1) + 'constructor(options?: ' + className + '.Types.ClientConfiguration<Params>' + ')\n';
+    code += this.tabs(1) + 'config: Config & ' + className + '.Types.ClientConfiguration<Params>' + ';\n';
+
+    var parameterTypes = [];
 
     operationKeys.forEach(function (operationKey) {
-        code += self.generateTypingsFromOperations(className, modelOperations[operationKey], operationKey, 1);
+        code += self.generateTypingsFromOperations(className, modelOperations[operationKey], operationKey, 1, parameterTypes);
     });
 
     // generate waitFor methods
@@ -618,7 +625,9 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     code += this.generateDocString('A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify \'latest\' to use the latest possible version.', 2);
     code += this.tabs(2) + 'apiVersion?: apiVersion;\n';
     code += this.tabs(1) + '}\n';
-    code += this.tabs(1) + 'export type ClientConfiguration = ' + customConfigTypes.join(' & ') + ' & ClientApiVersions;\n';
+    // all input parameters
+    code += this.tabs(1) + 'export type ClientParams = InputParams<' + parameterTypes.join(' & ') + '>;\n';
+    code += this.tabs(1) + 'export type ClientConfiguration<Params extends ClientParams = {}> = ' + customConfigTypes.concat(['ServiceConfigurationOptions<Params>', 'ClientApiVersions']).join(' & ') + ';\n';
     // export interfaces under Types namespace for backwards-compatibility
     code += this.generateDocString('Contains interfaces for use with the ' + className + ' client.', 1);
     code += this.tabs(1) + 'export import Types = ' + className + ';\n';
