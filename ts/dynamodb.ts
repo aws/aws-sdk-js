@@ -125,3 +125,9 @@ const getParams2: DynamoDB.Types.GetItemInput = {
 dynamodb.getItem(getParams2, (err, data) => {
 
 });
+
+const clientTwo = new DynamoDB.DocumentClient({service: dynamodb});
+
+clientTwo.get({
+    Key: {'my-key': 'value'}
+}, (err, data) => {})

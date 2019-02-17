@@ -95,7 +95,7 @@ export namespace DocumentClient {
         /**
          * An optional pre-configured instance of the AWS.DynamoDB service object to use for requests. The object may bound parameters used by the document client.
          */
-        service?: DynamoDB
+        service?: DynamoDB<Params>
     }
 
     export interface CreateSetOptions {
@@ -2387,4 +2387,6 @@ export namespace DocumentClient {
   export type WriteRequests = WriteRequest[];
 
   //<!--auto-generated end-->
+
+
 }
