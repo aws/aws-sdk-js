@@ -33,7 +33,7 @@
     "mocha": "^3.0.0",
     "repl.history": "*",
     "semver": "*",
-    "typescript": "2.0.8",
+    "typescript": "2.8.4",
     "uglify-js": "2.x",
     "webpack": "^1.15.0"
   },
