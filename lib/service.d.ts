@@ -66,7 +66,7 @@ export class Service {
     endpoint: Endpoint;
 }
 
-export interface ServiceConfigurationOptions extends ConfigurationOptions {
+export interface ServiceConfigurationOptions<Params extends InputParams = {}> extends ConfigurationOptions {
     /**
      * The endpoint URI to send requests to. The default endpoint is built from the configured region. 
      * The endpoint should be a string like 'https://{service}.{region}.amazonaws.com'.
@@ -76,8 +76,18 @@ export interface ServiceConfigurationOptions extends ConfigurationOptions {
      * An optional map of parameters to bind to every request sent by this service object. 
      * For more information on bound parameters, see "Working with Services" in the Getting Started Guide.
      */
-    params?: {
-        [key: string]: any;
-    }
+    params?: Params
 }
+
+/**
+ * A alias for Partial due to a name conflict with some service shapes
+ */
+export type InputParams<Params extends object = {}> = Partial<Params>
+
+/**
+ * An Input in which some of the parameters have already been bound
+ * Parameters that are already bound are optional.
+ */
+export type BoundInput<Interface extends object, Params extends string | number | symbol> = Pick<Interface, Exclude<keyof Interface, Params>>
+                                                                                            & { [K in keyof Interface & Params]?: Interface[K] }
 
