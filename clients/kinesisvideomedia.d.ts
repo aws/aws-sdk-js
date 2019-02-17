@@ -3,19 +3,21 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 import {Readable} from 'stream';
 interface Blob {}
-declare class KinesisVideoMedia extends Service {
+declare class KinesisVideoMedia<Params extends KinesisVideoMedia.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: KinesisVideoMedia.Types.ClientConfiguration)
-  config: Config & KinesisVideoMedia.Types.ClientConfiguration;
+  constructor(options?: KinesisVideoMedia.Types.ClientConfiguration<Params>)
+  config: Config & KinesisVideoMedia.Types.ClientConfiguration<Params>;
   /**
    *  Use this API to retrieve media content from a Kinesis video stream. In the request, you identify stream name or stream Amazon Resource Name (ARN), and the starting chunk. Kinesis Video Streams then returns a stream of chunks in order by fragment number.   You must first call the GetDataEndpoint API to get an endpoint to which you can then send the GetMedia requests.   When you put media data (fragments) on a stream, Kinesis Video Streams stores each incoming fragment and related metadata in what is called a "chunk." For more information, see . The GetMedia API returns a stream of these chunks starting from the chunk that you specify in the request.  The following limits apply when using the GetMedia API:   A client can call GetMedia up to five times per second per stream.    Kinesis Video Streams sends media data at a rate of up to 25 megabytes per second (or 200 megabits per second) during a GetMedia session.   
    */
-  getMedia(params: KinesisVideoMedia.Types.GetMediaInput, callback?: (err: AWSError, data: KinesisVideoMedia.Types.GetMediaOutput) => void): Request<KinesisVideoMedia.Types.GetMediaOutput, AWSError>;
+  getMedia(params: BoundInput<KinesisVideoMedia.Types.GetMediaInput, keyof Params>, callback?: (err: AWSError, data: KinesisVideoMedia.Types.GetMediaOutput) => void): Request<KinesisVideoMedia.Types.GetMediaOutput, AWSError>;
   /**
    *  Use this API to retrieve media content from a Kinesis video stream. In the request, you identify stream name or stream Amazon Resource Name (ARN), and the starting chunk. Kinesis Video Streams then returns a stream of chunks in order by fragment number.   You must first call the GetDataEndpoint API to get an endpoint to which you can then send the GetMedia requests.   When you put media data (fragments) on a stream, Kinesis Video Streams stores each incoming fragment and related metadata in what is called a "chunk." For more information, see . The GetMedia API returns a stream of these chunks starting from the chunk that you specify in the request.  The following limits apply when using the GetMedia API:   A client can call GetMedia up to five times per second per stream.    Kinesis Video Streams sends media data at a rate of up to 25 megabytes per second (or 200 megabits per second) during a GetMedia session.   
    */
@@ -82,7 +84,8 @@ declare namespace KinesisVideoMedia {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<GetMediaInput>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the KinesisVideoMedia client.
    */

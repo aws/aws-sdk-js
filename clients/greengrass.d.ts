@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class Greengrass extends Service {
+declare class Greengrass<Params extends Greengrass.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: Greengrass.Types.ClientConfiguration)
-  config: Config & Greengrass.Types.ClientConfiguration;
+  constructor(options?: Greengrass.Types.ClientConfiguration<Params>)
+  config: Config & Greengrass.Types.ClientConfiguration<Params>;
   /**
    * Associates a role with a group. Your Greengrass core will use the role to access AWS cloud services. The role's permissions should allow Greengrass core Lambda functions to perform actions against the cloud.
    */
-  associateRoleToGroup(params: Greengrass.Types.AssociateRoleToGroupRequest, callback?: (err: AWSError, data: Greengrass.Types.AssociateRoleToGroupResponse) => void): Request<Greengrass.Types.AssociateRoleToGroupResponse, AWSError>;
+  associateRoleToGroup(params: BoundInput<Greengrass.Types.AssociateRoleToGroupRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.AssociateRoleToGroupResponse) => void): Request<Greengrass.Types.AssociateRoleToGroupResponse, AWSError>;
   /**
    * Associates a role with a group. Your Greengrass core will use the role to access AWS cloud services. The role's permissions should allow Greengrass core Lambda functions to perform actions against the cloud.
    */
@@ -22,7 +24,7 @@ declare class Greengrass extends Service {
   /**
    * Associates a role with your account. AWS IoT Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ''AWSGreengrassResourceAccessRolePolicy''.
    */
-  associateServiceRoleToAccount(params: Greengrass.Types.AssociateServiceRoleToAccountRequest, callback?: (err: AWSError, data: Greengrass.Types.AssociateServiceRoleToAccountResponse) => void): Request<Greengrass.Types.AssociateServiceRoleToAccountResponse, AWSError>;
+  associateServiceRoleToAccount(params: BoundInput<Greengrass.Types.AssociateServiceRoleToAccountRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.AssociateServiceRoleToAccountResponse) => void): Request<Greengrass.Types.AssociateServiceRoleToAccountResponse, AWSError>;
   /**
    * Associates a role with your account. AWS IoT Greengrass will use the role to access your Lambda functions and AWS IoT resources. This is necessary for deployments to succeed. The role must have at least minimum permissions in the policy ''AWSGreengrassResourceAccessRolePolicy''.
    */
@@ -30,7 +32,7 @@ declare class Greengrass extends Service {
   /**
    * Creates a connector definition. You may provide the initial version of the connector definition now or use ''CreateConnectorDefinitionVersion'' at a later time.
    */
-  createConnectorDefinition(params: Greengrass.Types.CreateConnectorDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateConnectorDefinitionResponse) => void): Request<Greengrass.Types.CreateConnectorDefinitionResponse, AWSError>;
+  createConnectorDefinition(params: BoundInput<Greengrass.Types.CreateConnectorDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.CreateConnectorDefinitionResponse) => void): Request<Greengrass.Types.CreateConnectorDefinitionResponse, AWSError>;
   /**
    * Creates a connector definition. You may provide the initial version of the connector definition now or use ''CreateConnectorDefinitionVersion'' at a later time.
    */
@@ -38,7 +40,7 @@ declare class Greengrass extends Service {
   /**
    * Creates a version of a connector definition which has already been defined.
    */
-  createConnectorDefinitionVersion(params: Greengrass.Types.CreateConnectorDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateConnectorDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateConnectorDefinitionVersionResponse, AWSError>;
+  createConnectorDefinitionVersion(params: BoundInput<Greengrass.Types.CreateConnectorDefinitionVersionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.CreateConnectorDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateConnectorDefinitionVersionResponse, AWSError>;
   /**
    * Creates a version of a connector definition which has already been defined.
    */
@@ -46,7 +48,7 @@ declare class Greengrass extends Service {
   /**
    * Creates a core definition. You may provide the initial version of the core definition now or use ''CreateCoreDefinitionVersion'' at a later time. Greengrass groups must each contain exactly one Greengrass core.
    */
-  createCoreDefinition(params: Greengrass.Types.CreateCoreDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateCoreDefinitionResponse) => void): Request<Greengrass.Types.CreateCoreDefinitionResponse, AWSError>;
+  createCoreDefinition(params: BoundInput<Greengrass.Types.CreateCoreDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.CreateCoreDefinitionResponse) => void): Request<Greengrass.Types.CreateCoreDefinitionResponse, AWSError>;
   /**
    * Creates a core definition. You may provide the initial version of the core definition now or use ''CreateCoreDefinitionVersion'' at a later time. Greengrass groups must each contain exactly one Greengrass core.
    */
@@ -54,7 +56,7 @@ declare class Greengrass extends Service {
   /**
    * Creates a version of a core definition that has already been defined. Greengrass groups must each contain exactly one Greengrass core.
    */
-  createCoreDefinitionVersion(params: Greengrass.Types.CreateCoreDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateCoreDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateCoreDefinitionVersionResponse, AWSError>;
+  createCoreDefinitionVersion(params: BoundInput<Greengrass.Types.CreateCoreDefinitionVersionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.CreateCoreDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateCoreDefinitionVersionResponse, AWSError>;
   /**
    * Creates a version of a core definition that has already been defined. Greengrass groups must each contain exactly one Greengrass core.
    */
@@ -62,7 +64,7 @@ declare class Greengrass extends Service {
   /**
    * Creates a deployment. ''CreateDeployment'' requests are idempotent with respect to the ''X-Amzn-Client-Token'' token and the request parameters.
    */
-  createDeployment(params: Greengrass.Types.CreateDeploymentRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateDeploymentResponse) => void): Request<Greengrass.Types.CreateDeploymentResponse, AWSError>;
+  createDeployment(params: BoundInput<Greengrass.Types.CreateDeploymentRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.CreateDeploymentResponse) => void): Request<Greengrass.Types.CreateDeploymentResponse, AWSError>;
   /**
    * Creates a deployment. ''CreateDeployment'' requests are idempotent with respect to the ''X-Amzn-Client-Token'' token and the request parameters.
    */
@@ -70,7 +72,7 @@ declare class Greengrass extends Service {
   /**
    * Creates a device definition. You may provide the initial version of the device definition now or use ''CreateDeviceDefinitionVersion'' at a later time.
    */
-  createDeviceDefinition(params: Greengrass.Types.CreateDeviceDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateDeviceDefinitionResponse) => void): Request<Greengrass.Types.CreateDeviceDefinitionResponse, AWSError>;
+  createDeviceDefinition(params: BoundInput<Greengrass.Types.CreateDeviceDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.CreateDeviceDefinitionResponse) => void): Request<Greengrass.Types.CreateDeviceDefinitionResponse, AWSError>;
   /**
    * Creates a device definition. You may provide the initial version of the device definition now or use ''CreateDeviceDefinitionVersion'' at a later time.
    */
@@ -78,7 +80,7 @@ declare class Greengrass extends Service {
   /**
    * Creates a version of a device definition that has already been defined.
    */
-  createDeviceDefinitionVersion(params: Greengrass.Types.CreateDeviceDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateDeviceDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateDeviceDefinitionVersionResponse, AWSError>;
+  createDeviceDefinitionVersion(params: BoundInput<Greengrass.Types.CreateDeviceDefinitionVersionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.CreateDeviceDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateDeviceDefinitionVersionResponse, AWSError>;
   /**
    * Creates a version of a device definition that has already been defined.
    */
@@ -86,7 +88,7 @@ declare class Greengrass extends Service {
   /**
    * Creates a Lambda function definition which contains a list of Lambda functions and their configurations to be used in a group. You can create an initial version of the definition by providing a list of Lambda functions and their configurations now, or use ''CreateFunctionDefinitionVersion'' later.
    */
-  createFunctionDefinition(params: Greengrass.Types.CreateFunctionDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateFunctionDefinitionResponse) => void): Request<Greengrass.Types.CreateFunctionDefinitionResponse, AWSError>;
+  createFunctionDefinition(params: BoundInput<Greengrass.Types.CreateFunctionDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.CreateFunctionDefinitionResponse) => void): Request<Greengrass.Types.CreateFunctionDefinitionResponse, AWSError>;
   /**
    * Creates a Lambda function definition which contains a list of Lambda functions and their configurations to be used in a group. You can create an initial version of the definition by providing a list of Lambda functions and their configurations now, or use ''CreateFunctionDefinitionVersion'' later.
    */
@@ -94,7 +96,7 @@ declare class Greengrass extends Service {
   /**
    * Creates a version of a Lambda function definition that has already been defined.
    */
-  createFunctionDefinitionVersion(params: Greengrass.Types.CreateFunctionDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateFunctionDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateFunctionDefinitionVersionResponse, AWSError>;
+  createFunctionDefinitionVersion(params: BoundInput<Greengrass.Types.CreateFunctionDefinitionVersionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.CreateFunctionDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateFunctionDefinitionVersionResponse, AWSError>;
   /**
    * Creates a version of a Lambda function definition that has already been defined.
    */
@@ -102,7 +104,7 @@ declare class Greengrass extends Service {
   /**
    * Creates a group. You may provide the initial version of the group or use ''CreateGroupVersion'' at a later time. Tip: You can use the ''gg_group_setup'' package (https://github.com/awslabs/aws-greengrass-group-setup) as a library or command-line application to create and deploy Greengrass groups.
    */
-  createGroup(params: Greengrass.Types.CreateGroupRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateGroupResponse) => void): Request<Greengrass.Types.CreateGroupResponse, AWSError>;
+  createGroup(params: BoundInput<Greengrass.Types.CreateGroupRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.CreateGroupResponse) => void): Request<Greengrass.Types.CreateGroupResponse, AWSError>;
   /**
    * Creates a group. You may provide the initial version of the group or use ''CreateGroupVersion'' at a later time. Tip: You can use the ''gg_group_setup'' package (https://github.com/awslabs/aws-greengrass-group-setup) as a library or command-line application to create and deploy Greengrass groups.
    */
@@ -110,7 +112,7 @@ declare class Greengrass extends Service {
   /**
    * Creates a CA for the group. If a CA already exists, it will rotate the existing CA.
    */
-  createGroupCertificateAuthority(params: Greengrass.Types.CreateGroupCertificateAuthorityRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateGroupCertificateAuthorityResponse) => void): Request<Greengrass.Types.CreateGroupCertificateAuthorityResponse, AWSError>;
+  createGroupCertificateAuthority(params: BoundInput<Greengrass.Types.CreateGroupCertificateAuthorityRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.CreateGroupCertificateAuthorityResponse) => void): Request<Greengrass.Types.CreateGroupCertificateAuthorityResponse, AWSError>;
   /**
    * Creates a CA for the group. If a CA already exists, it will rotate the existing CA.
    */
@@ -118,7 +120,7 @@ declare class Greengrass extends Service {
   /**
    * Creates a version of a group which has already been defined.
    */
-  createGroupVersion(params: Greengrass.Types.CreateGroupVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateGroupVersionResponse) => void): Request<Greengrass.Types.CreateGroupVersionResponse, AWSError>;
+  createGroupVersion(params: BoundInput<Greengrass.Types.CreateGroupVersionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.CreateGroupVersionResponse) => void): Request<Greengrass.Types.CreateGroupVersionResponse, AWSError>;
   /**
    * Creates a version of a group which has already been defined.
    */
@@ -126,7 +128,7 @@ declare class Greengrass extends Service {
   /**
    * Creates a logger definition. You may provide the initial version of the logger definition now or use ''CreateLoggerDefinitionVersion'' at a later time.
    */
-  createLoggerDefinition(params: Greengrass.Types.CreateLoggerDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateLoggerDefinitionResponse) => void): Request<Greengrass.Types.CreateLoggerDefinitionResponse, AWSError>;
+  createLoggerDefinition(params: BoundInput<Greengrass.Types.CreateLoggerDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.CreateLoggerDefinitionResponse) => void): Request<Greengrass.Types.CreateLoggerDefinitionResponse, AWSError>;
   /**
    * Creates a logger definition. You may provide the initial version of the logger definition now or use ''CreateLoggerDefinitionVersion'' at a later time.
    */
@@ -134,7 +136,7 @@ declare class Greengrass extends Service {
   /**
    * Creates a version of a logger definition that has already been defined.
    */
-  createLoggerDefinitionVersion(params: Greengrass.Types.CreateLoggerDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateLoggerDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateLoggerDefinitionVersionResponse, AWSError>;
+  createLoggerDefinitionVersion(params: BoundInput<Greengrass.Types.CreateLoggerDefinitionVersionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.CreateLoggerDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateLoggerDefinitionVersionResponse, AWSError>;
   /**
    * Creates a version of a logger definition that has already been defined.
    */
@@ -142,7 +144,7 @@ declare class Greengrass extends Service {
   /**
    * Creates a resource definition which contains a list of resources to be used in a group. You can create an initial version of the definition by providing a list of resources now, or use ''CreateResourceDefinitionVersion'' later.
    */
-  createResourceDefinition(params: Greengrass.Types.CreateResourceDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateResourceDefinitionResponse) => void): Request<Greengrass.Types.CreateResourceDefinitionResponse, AWSError>;
+  createResourceDefinition(params: BoundInput<Greengrass.Types.CreateResourceDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.CreateResourceDefinitionResponse) => void): Request<Greengrass.Types.CreateResourceDefinitionResponse, AWSError>;
   /**
    * Creates a resource definition which contains a list of resources to be used in a group. You can create an initial version of the definition by providing a list of resources now, or use ''CreateResourceDefinitionVersion'' later.
    */
@@ -150,7 +152,7 @@ declare class Greengrass extends Service {
   /**
    * Creates a version of a resource definition that has already been defined.
    */
-  createResourceDefinitionVersion(params: Greengrass.Types.CreateResourceDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateResourceDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateResourceDefinitionVersionResponse, AWSError>;
+  createResourceDefinitionVersion(params: BoundInput<Greengrass.Types.CreateResourceDefinitionVersionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.CreateResourceDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateResourceDefinitionVersionResponse, AWSError>;
   /**
    * Creates a version of a resource definition that has already been defined.
    */
@@ -158,7 +160,7 @@ declare class Greengrass extends Service {
   /**
    * Creates a software update for a core or group of cores (specified as an IoT thing group.) Use this to update the OTA Agent as well as the Greengrass core software. It makes use of the IoT Jobs feature which provides additional commands to manage a Greengrass core software update job.
    */
-  createSoftwareUpdateJob(params: Greengrass.Types.CreateSoftwareUpdateJobRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateSoftwareUpdateJobResponse) => void): Request<Greengrass.Types.CreateSoftwareUpdateJobResponse, AWSError>;
+  createSoftwareUpdateJob(params: BoundInput<Greengrass.Types.CreateSoftwareUpdateJobRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.CreateSoftwareUpdateJobResponse) => void): Request<Greengrass.Types.CreateSoftwareUpdateJobResponse, AWSError>;
   /**
    * Creates a software update for a core or group of cores (specified as an IoT thing group.) Use this to update the OTA Agent as well as the Greengrass core software. It makes use of the IoT Jobs feature which provides additional commands to manage a Greengrass core software update job.
    */
@@ -166,7 +168,7 @@ declare class Greengrass extends Service {
   /**
    * Creates a subscription definition. You may provide the initial version of the subscription definition now or use ''CreateSubscriptionDefinitionVersion'' at a later time.
    */
-  createSubscriptionDefinition(params: Greengrass.Types.CreateSubscriptionDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateSubscriptionDefinitionResponse) => void): Request<Greengrass.Types.CreateSubscriptionDefinitionResponse, AWSError>;
+  createSubscriptionDefinition(params: BoundInput<Greengrass.Types.CreateSubscriptionDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.CreateSubscriptionDefinitionResponse) => void): Request<Greengrass.Types.CreateSubscriptionDefinitionResponse, AWSError>;
   /**
    * Creates a subscription definition. You may provide the initial version of the subscription definition now or use ''CreateSubscriptionDefinitionVersion'' at a later time.
    */
@@ -174,7 +176,7 @@ declare class Greengrass extends Service {
   /**
    * Creates a version of a subscription definition which has already been defined.
    */
-  createSubscriptionDefinitionVersion(params: Greengrass.Types.CreateSubscriptionDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.CreateSubscriptionDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateSubscriptionDefinitionVersionResponse, AWSError>;
+  createSubscriptionDefinitionVersion(params: BoundInput<Greengrass.Types.CreateSubscriptionDefinitionVersionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.CreateSubscriptionDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateSubscriptionDefinitionVersionResponse, AWSError>;
   /**
    * Creates a version of a subscription definition which has already been defined.
    */
@@ -182,7 +184,7 @@ declare class Greengrass extends Service {
   /**
    * Deletes a connector definition.
    */
-  deleteConnectorDefinition(params: Greengrass.Types.DeleteConnectorDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteConnectorDefinitionResponse) => void): Request<Greengrass.Types.DeleteConnectorDefinitionResponse, AWSError>;
+  deleteConnectorDefinition(params: BoundInput<Greengrass.Types.DeleteConnectorDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.DeleteConnectorDefinitionResponse) => void): Request<Greengrass.Types.DeleteConnectorDefinitionResponse, AWSError>;
   /**
    * Deletes a connector definition.
    */
@@ -190,7 +192,7 @@ declare class Greengrass extends Service {
   /**
    * Deletes a core definition.
    */
-  deleteCoreDefinition(params: Greengrass.Types.DeleteCoreDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteCoreDefinitionResponse) => void): Request<Greengrass.Types.DeleteCoreDefinitionResponse, AWSError>;
+  deleteCoreDefinition(params: BoundInput<Greengrass.Types.DeleteCoreDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.DeleteCoreDefinitionResponse) => void): Request<Greengrass.Types.DeleteCoreDefinitionResponse, AWSError>;
   /**
    * Deletes a core definition.
    */
@@ -198,7 +200,7 @@ declare class Greengrass extends Service {
   /**
    * Deletes a device definition.
    */
-  deleteDeviceDefinition(params: Greengrass.Types.DeleteDeviceDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteDeviceDefinitionResponse) => void): Request<Greengrass.Types.DeleteDeviceDefinitionResponse, AWSError>;
+  deleteDeviceDefinition(params: BoundInput<Greengrass.Types.DeleteDeviceDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.DeleteDeviceDefinitionResponse) => void): Request<Greengrass.Types.DeleteDeviceDefinitionResponse, AWSError>;
   /**
    * Deletes a device definition.
    */
@@ -206,7 +208,7 @@ declare class Greengrass extends Service {
   /**
    * Deletes a Lambda function definition.
    */
-  deleteFunctionDefinition(params: Greengrass.Types.DeleteFunctionDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteFunctionDefinitionResponse) => void): Request<Greengrass.Types.DeleteFunctionDefinitionResponse, AWSError>;
+  deleteFunctionDefinition(params: BoundInput<Greengrass.Types.DeleteFunctionDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.DeleteFunctionDefinitionResponse) => void): Request<Greengrass.Types.DeleteFunctionDefinitionResponse, AWSError>;
   /**
    * Deletes a Lambda function definition.
    */
@@ -214,7 +216,7 @@ declare class Greengrass extends Service {
   /**
    * Deletes a group.
    */
-  deleteGroup(params: Greengrass.Types.DeleteGroupRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteGroupResponse) => void): Request<Greengrass.Types.DeleteGroupResponse, AWSError>;
+  deleteGroup(params: BoundInput<Greengrass.Types.DeleteGroupRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.DeleteGroupResponse) => void): Request<Greengrass.Types.DeleteGroupResponse, AWSError>;
   /**
    * Deletes a group.
    */
@@ -222,7 +224,7 @@ declare class Greengrass extends Service {
   /**
    * Deletes a logger definition.
    */
-  deleteLoggerDefinition(params: Greengrass.Types.DeleteLoggerDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteLoggerDefinitionResponse) => void): Request<Greengrass.Types.DeleteLoggerDefinitionResponse, AWSError>;
+  deleteLoggerDefinition(params: BoundInput<Greengrass.Types.DeleteLoggerDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.DeleteLoggerDefinitionResponse) => void): Request<Greengrass.Types.DeleteLoggerDefinitionResponse, AWSError>;
   /**
    * Deletes a logger definition.
    */
@@ -230,7 +232,7 @@ declare class Greengrass extends Service {
   /**
    * Deletes a resource definition.
    */
-  deleteResourceDefinition(params: Greengrass.Types.DeleteResourceDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteResourceDefinitionResponse) => void): Request<Greengrass.Types.DeleteResourceDefinitionResponse, AWSError>;
+  deleteResourceDefinition(params: BoundInput<Greengrass.Types.DeleteResourceDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.DeleteResourceDefinitionResponse) => void): Request<Greengrass.Types.DeleteResourceDefinitionResponse, AWSError>;
   /**
    * Deletes a resource definition.
    */
@@ -238,7 +240,7 @@ declare class Greengrass extends Service {
   /**
    * Deletes a subscription definition.
    */
-  deleteSubscriptionDefinition(params: Greengrass.Types.DeleteSubscriptionDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteSubscriptionDefinitionResponse) => void): Request<Greengrass.Types.DeleteSubscriptionDefinitionResponse, AWSError>;
+  deleteSubscriptionDefinition(params: BoundInput<Greengrass.Types.DeleteSubscriptionDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.DeleteSubscriptionDefinitionResponse) => void): Request<Greengrass.Types.DeleteSubscriptionDefinitionResponse, AWSError>;
   /**
    * Deletes a subscription definition.
    */
@@ -246,7 +248,7 @@ declare class Greengrass extends Service {
   /**
    * Disassociates the role from a group.
    */
-  disassociateRoleFromGroup(params: Greengrass.Types.DisassociateRoleFromGroupRequest, callback?: (err: AWSError, data: Greengrass.Types.DisassociateRoleFromGroupResponse) => void): Request<Greengrass.Types.DisassociateRoleFromGroupResponse, AWSError>;
+  disassociateRoleFromGroup(params: BoundInput<Greengrass.Types.DisassociateRoleFromGroupRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.DisassociateRoleFromGroupResponse) => void): Request<Greengrass.Types.DisassociateRoleFromGroupResponse, AWSError>;
   /**
    * Disassociates the role from a group.
    */
@@ -254,7 +256,7 @@ declare class Greengrass extends Service {
   /**
    * Disassociates the service role from your account. Without a service role, deployments will not work.
    */
-  disassociateServiceRoleFromAccount(params: Greengrass.Types.DisassociateServiceRoleFromAccountRequest, callback?: (err: AWSError, data: Greengrass.Types.DisassociateServiceRoleFromAccountResponse) => void): Request<Greengrass.Types.DisassociateServiceRoleFromAccountResponse, AWSError>;
+  disassociateServiceRoleFromAccount(params: BoundInput<Greengrass.Types.DisassociateServiceRoleFromAccountRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.DisassociateServiceRoleFromAccountResponse) => void): Request<Greengrass.Types.DisassociateServiceRoleFromAccountResponse, AWSError>;
   /**
    * Disassociates the service role from your account. Without a service role, deployments will not work.
    */
@@ -262,7 +264,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves the role associated with a particular group.
    */
-  getAssociatedRole(params: Greengrass.Types.GetAssociatedRoleRequest, callback?: (err: AWSError, data: Greengrass.Types.GetAssociatedRoleResponse) => void): Request<Greengrass.Types.GetAssociatedRoleResponse, AWSError>;
+  getAssociatedRole(params: BoundInput<Greengrass.Types.GetAssociatedRoleRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetAssociatedRoleResponse) => void): Request<Greengrass.Types.GetAssociatedRoleResponse, AWSError>;
   /**
    * Retrieves the role associated with a particular group.
    */
@@ -270,7 +272,7 @@ declare class Greengrass extends Service {
   /**
    * Returns the status of a bulk deployment.
    */
-  getBulkDeploymentStatus(params: Greengrass.Types.GetBulkDeploymentStatusRequest, callback?: (err: AWSError, data: Greengrass.Types.GetBulkDeploymentStatusResponse) => void): Request<Greengrass.Types.GetBulkDeploymentStatusResponse, AWSError>;
+  getBulkDeploymentStatus(params: BoundInput<Greengrass.Types.GetBulkDeploymentStatusRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetBulkDeploymentStatusResponse) => void): Request<Greengrass.Types.GetBulkDeploymentStatusResponse, AWSError>;
   /**
    * Returns the status of a bulk deployment.
    */
@@ -278,7 +280,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves the connectivity information for a core.
    */
-  getConnectivityInfo(params: Greengrass.Types.GetConnectivityInfoRequest, callback?: (err: AWSError, data: Greengrass.Types.GetConnectivityInfoResponse) => void): Request<Greengrass.Types.GetConnectivityInfoResponse, AWSError>;
+  getConnectivityInfo(params: BoundInput<Greengrass.Types.GetConnectivityInfoRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetConnectivityInfoResponse) => void): Request<Greengrass.Types.GetConnectivityInfoResponse, AWSError>;
   /**
    * Retrieves the connectivity information for a core.
    */
@@ -286,7 +288,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves information about a connector definition.
    */
-  getConnectorDefinition(params: Greengrass.Types.GetConnectorDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetConnectorDefinitionResponse) => void): Request<Greengrass.Types.GetConnectorDefinitionResponse, AWSError>;
+  getConnectorDefinition(params: BoundInput<Greengrass.Types.GetConnectorDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetConnectorDefinitionResponse) => void): Request<Greengrass.Types.GetConnectorDefinitionResponse, AWSError>;
   /**
    * Retrieves information about a connector definition.
    */
@@ -294,7 +296,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves information about a connector definition version, including the connectors that the version contains. Connectors are prebuilt modules that interact with local infrastructure, device protocols, AWS, and other cloud services.
    */
-  getConnectorDefinitionVersion(params: Greengrass.Types.GetConnectorDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetConnectorDefinitionVersionResponse) => void): Request<Greengrass.Types.GetConnectorDefinitionVersionResponse, AWSError>;
+  getConnectorDefinitionVersion(params: BoundInput<Greengrass.Types.GetConnectorDefinitionVersionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetConnectorDefinitionVersionResponse) => void): Request<Greengrass.Types.GetConnectorDefinitionVersionResponse, AWSError>;
   /**
    * Retrieves information about a connector definition version, including the connectors that the version contains. Connectors are prebuilt modules that interact with local infrastructure, device protocols, AWS, and other cloud services.
    */
@@ -302,7 +304,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves information about a core definition version.
    */
-  getCoreDefinition(params: Greengrass.Types.GetCoreDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetCoreDefinitionResponse) => void): Request<Greengrass.Types.GetCoreDefinitionResponse, AWSError>;
+  getCoreDefinition(params: BoundInput<Greengrass.Types.GetCoreDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetCoreDefinitionResponse) => void): Request<Greengrass.Types.GetCoreDefinitionResponse, AWSError>;
   /**
    * Retrieves information about a core definition version.
    */
@@ -310,7 +312,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves information about a core definition version.
    */
-  getCoreDefinitionVersion(params: Greengrass.Types.GetCoreDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetCoreDefinitionVersionResponse) => void): Request<Greengrass.Types.GetCoreDefinitionVersionResponse, AWSError>;
+  getCoreDefinitionVersion(params: BoundInput<Greengrass.Types.GetCoreDefinitionVersionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetCoreDefinitionVersionResponse) => void): Request<Greengrass.Types.GetCoreDefinitionVersionResponse, AWSError>;
   /**
    * Retrieves information about a core definition version.
    */
@@ -318,7 +320,7 @@ declare class Greengrass extends Service {
   /**
    * Returns the status of a deployment.
    */
-  getDeploymentStatus(params: Greengrass.Types.GetDeploymentStatusRequest, callback?: (err: AWSError, data: Greengrass.Types.GetDeploymentStatusResponse) => void): Request<Greengrass.Types.GetDeploymentStatusResponse, AWSError>;
+  getDeploymentStatus(params: BoundInput<Greengrass.Types.GetDeploymentStatusRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetDeploymentStatusResponse) => void): Request<Greengrass.Types.GetDeploymentStatusResponse, AWSError>;
   /**
    * Returns the status of a deployment.
    */
@@ -326,7 +328,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves information about a device definition.
    */
-  getDeviceDefinition(params: Greengrass.Types.GetDeviceDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetDeviceDefinitionResponse) => void): Request<Greengrass.Types.GetDeviceDefinitionResponse, AWSError>;
+  getDeviceDefinition(params: BoundInput<Greengrass.Types.GetDeviceDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetDeviceDefinitionResponse) => void): Request<Greengrass.Types.GetDeviceDefinitionResponse, AWSError>;
   /**
    * Retrieves information about a device definition.
    */
@@ -334,7 +336,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves information about a device definition version.
    */
-  getDeviceDefinitionVersion(params: Greengrass.Types.GetDeviceDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetDeviceDefinitionVersionResponse) => void): Request<Greengrass.Types.GetDeviceDefinitionVersionResponse, AWSError>;
+  getDeviceDefinitionVersion(params: BoundInput<Greengrass.Types.GetDeviceDefinitionVersionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetDeviceDefinitionVersionResponse) => void): Request<Greengrass.Types.GetDeviceDefinitionVersionResponse, AWSError>;
   /**
    * Retrieves information about a device definition version.
    */
@@ -342,7 +344,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves information about a Lambda function definition, including its creation time and latest version.
    */
-  getFunctionDefinition(params: Greengrass.Types.GetFunctionDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetFunctionDefinitionResponse) => void): Request<Greengrass.Types.GetFunctionDefinitionResponse, AWSError>;
+  getFunctionDefinition(params: BoundInput<Greengrass.Types.GetFunctionDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetFunctionDefinitionResponse) => void): Request<Greengrass.Types.GetFunctionDefinitionResponse, AWSError>;
   /**
    * Retrieves information about a Lambda function definition, including its creation time and latest version.
    */
@@ -350,7 +352,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves information about a Lambda function definition version, including which Lambda functions are included in the version and their configurations.
    */
-  getFunctionDefinitionVersion(params: Greengrass.Types.GetFunctionDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetFunctionDefinitionVersionResponse) => void): Request<Greengrass.Types.GetFunctionDefinitionVersionResponse, AWSError>;
+  getFunctionDefinitionVersion(params: BoundInput<Greengrass.Types.GetFunctionDefinitionVersionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetFunctionDefinitionVersionResponse) => void): Request<Greengrass.Types.GetFunctionDefinitionVersionResponse, AWSError>;
   /**
    * Retrieves information about a Lambda function definition version, including which Lambda functions are included in the version and their configurations.
    */
@@ -358,7 +360,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves information about a group.
    */
-  getGroup(params: Greengrass.Types.GetGroupRequest, callback?: (err: AWSError, data: Greengrass.Types.GetGroupResponse) => void): Request<Greengrass.Types.GetGroupResponse, AWSError>;
+  getGroup(params: BoundInput<Greengrass.Types.GetGroupRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetGroupResponse) => void): Request<Greengrass.Types.GetGroupResponse, AWSError>;
   /**
    * Retrieves information about a group.
    */
@@ -366,7 +368,7 @@ declare class Greengrass extends Service {
   /**
    * Retreives the CA associated with a group. Returns the public key of the CA.
    */
-  getGroupCertificateAuthority(params: Greengrass.Types.GetGroupCertificateAuthorityRequest, callback?: (err: AWSError, data: Greengrass.Types.GetGroupCertificateAuthorityResponse) => void): Request<Greengrass.Types.GetGroupCertificateAuthorityResponse, AWSError>;
+  getGroupCertificateAuthority(params: BoundInput<Greengrass.Types.GetGroupCertificateAuthorityRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetGroupCertificateAuthorityResponse) => void): Request<Greengrass.Types.GetGroupCertificateAuthorityResponse, AWSError>;
   /**
    * Retreives the CA associated with a group. Returns the public key of the CA.
    */
@@ -374,7 +376,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves the current configuration for the CA used by the group.
    */
-  getGroupCertificateConfiguration(params: Greengrass.Types.GetGroupCertificateConfigurationRequest, callback?: (err: AWSError, data: Greengrass.Types.GetGroupCertificateConfigurationResponse) => void): Request<Greengrass.Types.GetGroupCertificateConfigurationResponse, AWSError>;
+  getGroupCertificateConfiguration(params: BoundInput<Greengrass.Types.GetGroupCertificateConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetGroupCertificateConfigurationResponse) => void): Request<Greengrass.Types.GetGroupCertificateConfigurationResponse, AWSError>;
   /**
    * Retrieves the current configuration for the CA used by the group.
    */
@@ -382,7 +384,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves information about a group version.
    */
-  getGroupVersion(params: Greengrass.Types.GetGroupVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetGroupVersionResponse) => void): Request<Greengrass.Types.GetGroupVersionResponse, AWSError>;
+  getGroupVersion(params: BoundInput<Greengrass.Types.GetGroupVersionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetGroupVersionResponse) => void): Request<Greengrass.Types.GetGroupVersionResponse, AWSError>;
   /**
    * Retrieves information about a group version.
    */
@@ -390,7 +392,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves information about a logger definition.
    */
-  getLoggerDefinition(params: Greengrass.Types.GetLoggerDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetLoggerDefinitionResponse) => void): Request<Greengrass.Types.GetLoggerDefinitionResponse, AWSError>;
+  getLoggerDefinition(params: BoundInput<Greengrass.Types.GetLoggerDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetLoggerDefinitionResponse) => void): Request<Greengrass.Types.GetLoggerDefinitionResponse, AWSError>;
   /**
    * Retrieves information about a logger definition.
    */
@@ -398,7 +400,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves information about a logger definition version.
    */
-  getLoggerDefinitionVersion(params: Greengrass.Types.GetLoggerDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetLoggerDefinitionVersionResponse) => void): Request<Greengrass.Types.GetLoggerDefinitionVersionResponse, AWSError>;
+  getLoggerDefinitionVersion(params: BoundInput<Greengrass.Types.GetLoggerDefinitionVersionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetLoggerDefinitionVersionResponse) => void): Request<Greengrass.Types.GetLoggerDefinitionVersionResponse, AWSError>;
   /**
    * Retrieves information about a logger definition version.
    */
@@ -406,7 +408,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves information about a resource definition, including its creation time and latest version.
    */
-  getResourceDefinition(params: Greengrass.Types.GetResourceDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetResourceDefinitionResponse) => void): Request<Greengrass.Types.GetResourceDefinitionResponse, AWSError>;
+  getResourceDefinition(params: BoundInput<Greengrass.Types.GetResourceDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetResourceDefinitionResponse) => void): Request<Greengrass.Types.GetResourceDefinitionResponse, AWSError>;
   /**
    * Retrieves information about a resource definition, including its creation time and latest version.
    */
@@ -414,7 +416,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves information about a resource definition version, including which resources are included in the version.
    */
-  getResourceDefinitionVersion(params: Greengrass.Types.GetResourceDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetResourceDefinitionVersionResponse) => void): Request<Greengrass.Types.GetResourceDefinitionVersionResponse, AWSError>;
+  getResourceDefinitionVersion(params: BoundInput<Greengrass.Types.GetResourceDefinitionVersionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetResourceDefinitionVersionResponse) => void): Request<Greengrass.Types.GetResourceDefinitionVersionResponse, AWSError>;
   /**
    * Retrieves information about a resource definition version, including which resources are included in the version.
    */
@@ -422,7 +424,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves the service role that is attached to your account.
    */
-  getServiceRoleForAccount(params: Greengrass.Types.GetServiceRoleForAccountRequest, callback?: (err: AWSError, data: Greengrass.Types.GetServiceRoleForAccountResponse) => void): Request<Greengrass.Types.GetServiceRoleForAccountResponse, AWSError>;
+  getServiceRoleForAccount(params: BoundInput<Greengrass.Types.GetServiceRoleForAccountRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetServiceRoleForAccountResponse) => void): Request<Greengrass.Types.GetServiceRoleForAccountResponse, AWSError>;
   /**
    * Retrieves the service role that is attached to your account.
    */
@@ -430,7 +432,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves information about a subscription definition.
    */
-  getSubscriptionDefinition(params: Greengrass.Types.GetSubscriptionDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetSubscriptionDefinitionResponse) => void): Request<Greengrass.Types.GetSubscriptionDefinitionResponse, AWSError>;
+  getSubscriptionDefinition(params: BoundInput<Greengrass.Types.GetSubscriptionDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetSubscriptionDefinitionResponse) => void): Request<Greengrass.Types.GetSubscriptionDefinitionResponse, AWSError>;
   /**
    * Retrieves information about a subscription definition.
    */
@@ -438,7 +440,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves information about a subscription definition version.
    */
-  getSubscriptionDefinitionVersion(params: Greengrass.Types.GetSubscriptionDefinitionVersionRequest, callback?: (err: AWSError, data: Greengrass.Types.GetSubscriptionDefinitionVersionResponse) => void): Request<Greengrass.Types.GetSubscriptionDefinitionVersionResponse, AWSError>;
+  getSubscriptionDefinitionVersion(params: BoundInput<Greengrass.Types.GetSubscriptionDefinitionVersionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.GetSubscriptionDefinitionVersionResponse) => void): Request<Greengrass.Types.GetSubscriptionDefinitionVersionResponse, AWSError>;
   /**
    * Retrieves information about a subscription definition version.
    */
@@ -446,7 +448,7 @@ declare class Greengrass extends Service {
   /**
    * Gets a paginated list of the deployments that have been started in a bulk deployment operation, and their current deployment status.
    */
-  listBulkDeploymentDetailedReports(params: Greengrass.Types.ListBulkDeploymentDetailedReportsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListBulkDeploymentDetailedReportsResponse) => void): Request<Greengrass.Types.ListBulkDeploymentDetailedReportsResponse, AWSError>;
+  listBulkDeploymentDetailedReports(params: BoundInput<Greengrass.Types.ListBulkDeploymentDetailedReportsRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ListBulkDeploymentDetailedReportsResponse) => void): Request<Greengrass.Types.ListBulkDeploymentDetailedReportsResponse, AWSError>;
   /**
    * Gets a paginated list of the deployments that have been started in a bulk deployment operation, and their current deployment status.
    */
@@ -454,7 +456,7 @@ declare class Greengrass extends Service {
   /**
    * Returns a list of bulk deployments.
    */
-  listBulkDeployments(params: Greengrass.Types.ListBulkDeploymentsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListBulkDeploymentsResponse) => void): Request<Greengrass.Types.ListBulkDeploymentsResponse, AWSError>;
+  listBulkDeployments(params: BoundInput<Greengrass.Types.ListBulkDeploymentsRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ListBulkDeploymentsResponse) => void): Request<Greengrass.Types.ListBulkDeploymentsResponse, AWSError>;
   /**
    * Returns a list of bulk deployments.
    */
@@ -462,7 +464,7 @@ declare class Greengrass extends Service {
   /**
    * Lists the versions of a connector definition, which are containers for connectors. Connectors run on the Greengrass core and contain built-in integration with local infrastructure, device protocols, AWS, and other cloud services.
    */
-  listConnectorDefinitionVersions(params: Greengrass.Types.ListConnectorDefinitionVersionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListConnectorDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListConnectorDefinitionVersionsResponse, AWSError>;
+  listConnectorDefinitionVersions(params: BoundInput<Greengrass.Types.ListConnectorDefinitionVersionsRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ListConnectorDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListConnectorDefinitionVersionsResponse, AWSError>;
   /**
    * Lists the versions of a connector definition, which are containers for connectors. Connectors run on the Greengrass core and contain built-in integration with local infrastructure, device protocols, AWS, and other cloud services.
    */
@@ -470,7 +472,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves a list of connector definitions.
    */
-  listConnectorDefinitions(params: Greengrass.Types.ListConnectorDefinitionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListConnectorDefinitionsResponse) => void): Request<Greengrass.Types.ListConnectorDefinitionsResponse, AWSError>;
+  listConnectorDefinitions(params: BoundInput<Greengrass.Types.ListConnectorDefinitionsRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ListConnectorDefinitionsResponse) => void): Request<Greengrass.Types.ListConnectorDefinitionsResponse, AWSError>;
   /**
    * Retrieves a list of connector definitions.
    */
@@ -478,7 +480,7 @@ declare class Greengrass extends Service {
   /**
    * Lists the versions of a core definition.
    */
-  listCoreDefinitionVersions(params: Greengrass.Types.ListCoreDefinitionVersionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListCoreDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListCoreDefinitionVersionsResponse, AWSError>;
+  listCoreDefinitionVersions(params: BoundInput<Greengrass.Types.ListCoreDefinitionVersionsRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ListCoreDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListCoreDefinitionVersionsResponse, AWSError>;
   /**
    * Lists the versions of a core definition.
    */
@@ -486,7 +488,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves a list of core definitions.
    */
-  listCoreDefinitions(params: Greengrass.Types.ListCoreDefinitionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListCoreDefinitionsResponse) => void): Request<Greengrass.Types.ListCoreDefinitionsResponse, AWSError>;
+  listCoreDefinitions(params: BoundInput<Greengrass.Types.ListCoreDefinitionsRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ListCoreDefinitionsResponse) => void): Request<Greengrass.Types.ListCoreDefinitionsResponse, AWSError>;
   /**
    * Retrieves a list of core definitions.
    */
@@ -494,7 +496,7 @@ declare class Greengrass extends Service {
   /**
    * Returns a history of deployments for the group.
    */
-  listDeployments(params: Greengrass.Types.ListDeploymentsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListDeploymentsResponse) => void): Request<Greengrass.Types.ListDeploymentsResponse, AWSError>;
+  listDeployments(params: BoundInput<Greengrass.Types.ListDeploymentsRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ListDeploymentsResponse) => void): Request<Greengrass.Types.ListDeploymentsResponse, AWSError>;
   /**
    * Returns a history of deployments for the group.
    */
@@ -502,7 +504,7 @@ declare class Greengrass extends Service {
   /**
    * Lists the versions of a device definition.
    */
-  listDeviceDefinitionVersions(params: Greengrass.Types.ListDeviceDefinitionVersionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListDeviceDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListDeviceDefinitionVersionsResponse, AWSError>;
+  listDeviceDefinitionVersions(params: BoundInput<Greengrass.Types.ListDeviceDefinitionVersionsRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ListDeviceDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListDeviceDefinitionVersionsResponse, AWSError>;
   /**
    * Lists the versions of a device definition.
    */
@@ -510,7 +512,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves a list of device definitions.
    */
-  listDeviceDefinitions(params: Greengrass.Types.ListDeviceDefinitionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListDeviceDefinitionsResponse) => void): Request<Greengrass.Types.ListDeviceDefinitionsResponse, AWSError>;
+  listDeviceDefinitions(params: BoundInput<Greengrass.Types.ListDeviceDefinitionsRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ListDeviceDefinitionsResponse) => void): Request<Greengrass.Types.ListDeviceDefinitionsResponse, AWSError>;
   /**
    * Retrieves a list of device definitions.
    */
@@ -518,7 +520,7 @@ declare class Greengrass extends Service {
   /**
    * Lists the versions of a Lambda function definition.
    */
-  listFunctionDefinitionVersions(params: Greengrass.Types.ListFunctionDefinitionVersionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListFunctionDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListFunctionDefinitionVersionsResponse, AWSError>;
+  listFunctionDefinitionVersions(params: BoundInput<Greengrass.Types.ListFunctionDefinitionVersionsRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ListFunctionDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListFunctionDefinitionVersionsResponse, AWSError>;
   /**
    * Lists the versions of a Lambda function definition.
    */
@@ -526,7 +528,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves a list of Lambda function definitions.
    */
-  listFunctionDefinitions(params: Greengrass.Types.ListFunctionDefinitionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListFunctionDefinitionsResponse) => void): Request<Greengrass.Types.ListFunctionDefinitionsResponse, AWSError>;
+  listFunctionDefinitions(params: BoundInput<Greengrass.Types.ListFunctionDefinitionsRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ListFunctionDefinitionsResponse) => void): Request<Greengrass.Types.ListFunctionDefinitionsResponse, AWSError>;
   /**
    * Retrieves a list of Lambda function definitions.
    */
@@ -534,7 +536,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves the current CAs for a group.
    */
-  listGroupCertificateAuthorities(params: Greengrass.Types.ListGroupCertificateAuthoritiesRequest, callback?: (err: AWSError, data: Greengrass.Types.ListGroupCertificateAuthoritiesResponse) => void): Request<Greengrass.Types.ListGroupCertificateAuthoritiesResponse, AWSError>;
+  listGroupCertificateAuthorities(params: BoundInput<Greengrass.Types.ListGroupCertificateAuthoritiesRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ListGroupCertificateAuthoritiesResponse) => void): Request<Greengrass.Types.ListGroupCertificateAuthoritiesResponse, AWSError>;
   /**
    * Retrieves the current CAs for a group.
    */
@@ -542,7 +544,7 @@ declare class Greengrass extends Service {
   /**
    * Lists the versions of a group.
    */
-  listGroupVersions(params: Greengrass.Types.ListGroupVersionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListGroupVersionsResponse) => void): Request<Greengrass.Types.ListGroupVersionsResponse, AWSError>;
+  listGroupVersions(params: BoundInput<Greengrass.Types.ListGroupVersionsRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ListGroupVersionsResponse) => void): Request<Greengrass.Types.ListGroupVersionsResponse, AWSError>;
   /**
    * Lists the versions of a group.
    */
@@ -550,7 +552,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves a list of groups.
    */
-  listGroups(params: Greengrass.Types.ListGroupsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListGroupsResponse) => void): Request<Greengrass.Types.ListGroupsResponse, AWSError>;
+  listGroups(params: BoundInput<Greengrass.Types.ListGroupsRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ListGroupsResponse) => void): Request<Greengrass.Types.ListGroupsResponse, AWSError>;
   /**
    * Retrieves a list of groups.
    */
@@ -558,7 +560,7 @@ declare class Greengrass extends Service {
   /**
    * Lists the versions of a logger definition.
    */
-  listLoggerDefinitionVersions(params: Greengrass.Types.ListLoggerDefinitionVersionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListLoggerDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListLoggerDefinitionVersionsResponse, AWSError>;
+  listLoggerDefinitionVersions(params: BoundInput<Greengrass.Types.ListLoggerDefinitionVersionsRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ListLoggerDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListLoggerDefinitionVersionsResponse, AWSError>;
   /**
    * Lists the versions of a logger definition.
    */
@@ -566,7 +568,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves a list of logger definitions.
    */
-  listLoggerDefinitions(params: Greengrass.Types.ListLoggerDefinitionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListLoggerDefinitionsResponse) => void): Request<Greengrass.Types.ListLoggerDefinitionsResponse, AWSError>;
+  listLoggerDefinitions(params: BoundInput<Greengrass.Types.ListLoggerDefinitionsRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ListLoggerDefinitionsResponse) => void): Request<Greengrass.Types.ListLoggerDefinitionsResponse, AWSError>;
   /**
    * Retrieves a list of logger definitions.
    */
@@ -574,7 +576,7 @@ declare class Greengrass extends Service {
   /**
    * Lists the versions of a resource definition.
    */
-  listResourceDefinitionVersions(params: Greengrass.Types.ListResourceDefinitionVersionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListResourceDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListResourceDefinitionVersionsResponse, AWSError>;
+  listResourceDefinitionVersions(params: BoundInput<Greengrass.Types.ListResourceDefinitionVersionsRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ListResourceDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListResourceDefinitionVersionsResponse, AWSError>;
   /**
    * Lists the versions of a resource definition.
    */
@@ -582,7 +584,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves a list of resource definitions.
    */
-  listResourceDefinitions(params: Greengrass.Types.ListResourceDefinitionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListResourceDefinitionsResponse) => void): Request<Greengrass.Types.ListResourceDefinitionsResponse, AWSError>;
+  listResourceDefinitions(params: BoundInput<Greengrass.Types.ListResourceDefinitionsRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ListResourceDefinitionsResponse) => void): Request<Greengrass.Types.ListResourceDefinitionsResponse, AWSError>;
   /**
    * Retrieves a list of resource definitions.
    */
@@ -590,7 +592,7 @@ declare class Greengrass extends Service {
   /**
    * Lists the versions of a subscription definition.
    */
-  listSubscriptionDefinitionVersions(params: Greengrass.Types.ListSubscriptionDefinitionVersionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListSubscriptionDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListSubscriptionDefinitionVersionsResponse, AWSError>;
+  listSubscriptionDefinitionVersions(params: BoundInput<Greengrass.Types.ListSubscriptionDefinitionVersionsRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ListSubscriptionDefinitionVersionsResponse) => void): Request<Greengrass.Types.ListSubscriptionDefinitionVersionsResponse, AWSError>;
   /**
    * Lists the versions of a subscription definition.
    */
@@ -598,7 +600,7 @@ declare class Greengrass extends Service {
   /**
    * Retrieves a list of subscription definitions.
    */
-  listSubscriptionDefinitions(params: Greengrass.Types.ListSubscriptionDefinitionsRequest, callback?: (err: AWSError, data: Greengrass.Types.ListSubscriptionDefinitionsResponse) => void): Request<Greengrass.Types.ListSubscriptionDefinitionsResponse, AWSError>;
+  listSubscriptionDefinitions(params: BoundInput<Greengrass.Types.ListSubscriptionDefinitionsRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ListSubscriptionDefinitionsResponse) => void): Request<Greengrass.Types.ListSubscriptionDefinitionsResponse, AWSError>;
   /**
    * Retrieves a list of subscription definitions.
    */
@@ -606,7 +608,7 @@ declare class Greengrass extends Service {
   /**
    * Resets a group's deployments.
    */
-  resetDeployments(params: Greengrass.Types.ResetDeploymentsRequest, callback?: (err: AWSError, data: Greengrass.Types.ResetDeploymentsResponse) => void): Request<Greengrass.Types.ResetDeploymentsResponse, AWSError>;
+  resetDeployments(params: BoundInput<Greengrass.Types.ResetDeploymentsRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.ResetDeploymentsResponse) => void): Request<Greengrass.Types.ResetDeploymentsResponse, AWSError>;
   /**
    * Resets a group's deployments.
    */
@@ -614,7 +616,7 @@ declare class Greengrass extends Service {
   /**
    * Deploys multiple groups in one operation. This action starts the bulk deployment of a specified set of group versions. Each group version deployment will be triggered with an adaptive rate that has a fixed upper limit. We recommend that you include an ''X-Amzn-Client-Token'' token in every ''StartBulkDeployment'' request. These requests are idempotent with respect to the token and the request parameters.
    */
-  startBulkDeployment(params: Greengrass.Types.StartBulkDeploymentRequest, callback?: (err: AWSError, data: Greengrass.Types.StartBulkDeploymentResponse) => void): Request<Greengrass.Types.StartBulkDeploymentResponse, AWSError>;
+  startBulkDeployment(params: BoundInput<Greengrass.Types.StartBulkDeploymentRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.StartBulkDeploymentResponse) => void): Request<Greengrass.Types.StartBulkDeploymentResponse, AWSError>;
   /**
    * Deploys multiple groups in one operation. This action starts the bulk deployment of a specified set of group versions. Each group version deployment will be triggered with an adaptive rate that has a fixed upper limit. We recommend that you include an ''X-Amzn-Client-Token'' token in every ''StartBulkDeployment'' request. These requests are idempotent with respect to the token and the request parameters.
    */
@@ -622,7 +624,7 @@ declare class Greengrass extends Service {
   /**
    * Stops the execution of a bulk deployment. This action returns a status of ''Stopping'' until the deployment is stopped. You cannot start a new bulk deployment while a previous deployment is in the ''Stopping'' state. This action doesn't rollback completed deployments or cancel pending deployments.
    */
-  stopBulkDeployment(params: Greengrass.Types.StopBulkDeploymentRequest, callback?: (err: AWSError, data: Greengrass.Types.StopBulkDeploymentResponse) => void): Request<Greengrass.Types.StopBulkDeploymentResponse, AWSError>;
+  stopBulkDeployment(params: BoundInput<Greengrass.Types.StopBulkDeploymentRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.StopBulkDeploymentResponse) => void): Request<Greengrass.Types.StopBulkDeploymentResponse, AWSError>;
   /**
    * Stops the execution of a bulk deployment. This action returns a status of ''Stopping'' until the deployment is stopped. You cannot start a new bulk deployment while a previous deployment is in the ''Stopping'' state. This action doesn't rollback completed deployments or cancel pending deployments.
    */
@@ -630,7 +632,7 @@ declare class Greengrass extends Service {
   /**
    * Updates the connectivity information for the core. Any devices that belong to the group which has this core will receive this information in order to find the location of the core and connect to it.
    */
-  updateConnectivityInfo(params: Greengrass.Types.UpdateConnectivityInfoRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateConnectivityInfoResponse) => void): Request<Greengrass.Types.UpdateConnectivityInfoResponse, AWSError>;
+  updateConnectivityInfo(params: BoundInput<Greengrass.Types.UpdateConnectivityInfoRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.UpdateConnectivityInfoResponse) => void): Request<Greengrass.Types.UpdateConnectivityInfoResponse, AWSError>;
   /**
    * Updates the connectivity information for the core. Any devices that belong to the group which has this core will receive this information in order to find the location of the core and connect to it.
    */
@@ -638,7 +640,7 @@ declare class Greengrass extends Service {
   /**
    * Updates a connector definition.
    */
-  updateConnectorDefinition(params: Greengrass.Types.UpdateConnectorDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateConnectorDefinitionResponse) => void): Request<Greengrass.Types.UpdateConnectorDefinitionResponse, AWSError>;
+  updateConnectorDefinition(params: BoundInput<Greengrass.Types.UpdateConnectorDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.UpdateConnectorDefinitionResponse) => void): Request<Greengrass.Types.UpdateConnectorDefinitionResponse, AWSError>;
   /**
    * Updates a connector definition.
    */
@@ -646,7 +648,7 @@ declare class Greengrass extends Service {
   /**
    * Updates a core definition.
    */
-  updateCoreDefinition(params: Greengrass.Types.UpdateCoreDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateCoreDefinitionResponse) => void): Request<Greengrass.Types.UpdateCoreDefinitionResponse, AWSError>;
+  updateCoreDefinition(params: BoundInput<Greengrass.Types.UpdateCoreDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.UpdateCoreDefinitionResponse) => void): Request<Greengrass.Types.UpdateCoreDefinitionResponse, AWSError>;
   /**
    * Updates a core definition.
    */
@@ -654,7 +656,7 @@ declare class Greengrass extends Service {
   /**
    * Updates a device definition.
    */
-  updateDeviceDefinition(params: Greengrass.Types.UpdateDeviceDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateDeviceDefinitionResponse) => void): Request<Greengrass.Types.UpdateDeviceDefinitionResponse, AWSError>;
+  updateDeviceDefinition(params: BoundInput<Greengrass.Types.UpdateDeviceDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.UpdateDeviceDefinitionResponse) => void): Request<Greengrass.Types.UpdateDeviceDefinitionResponse, AWSError>;
   /**
    * Updates a device definition.
    */
@@ -662,7 +664,7 @@ declare class Greengrass extends Service {
   /**
    * Updates a Lambda function definition.
    */
-  updateFunctionDefinition(params: Greengrass.Types.UpdateFunctionDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateFunctionDefinitionResponse) => void): Request<Greengrass.Types.UpdateFunctionDefinitionResponse, AWSError>;
+  updateFunctionDefinition(params: BoundInput<Greengrass.Types.UpdateFunctionDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.UpdateFunctionDefinitionResponse) => void): Request<Greengrass.Types.UpdateFunctionDefinitionResponse, AWSError>;
   /**
    * Updates a Lambda function definition.
    */
@@ -670,7 +672,7 @@ declare class Greengrass extends Service {
   /**
    * Updates a group.
    */
-  updateGroup(params: Greengrass.Types.UpdateGroupRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateGroupResponse) => void): Request<Greengrass.Types.UpdateGroupResponse, AWSError>;
+  updateGroup(params: BoundInput<Greengrass.Types.UpdateGroupRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.UpdateGroupResponse) => void): Request<Greengrass.Types.UpdateGroupResponse, AWSError>;
   /**
    * Updates a group.
    */
@@ -678,7 +680,7 @@ declare class Greengrass extends Service {
   /**
    * Updates the Certificate expiry time for a group.
    */
-  updateGroupCertificateConfiguration(params: Greengrass.Types.UpdateGroupCertificateConfigurationRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateGroupCertificateConfigurationResponse) => void): Request<Greengrass.Types.UpdateGroupCertificateConfigurationResponse, AWSError>;
+  updateGroupCertificateConfiguration(params: BoundInput<Greengrass.Types.UpdateGroupCertificateConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.UpdateGroupCertificateConfigurationResponse) => void): Request<Greengrass.Types.UpdateGroupCertificateConfigurationResponse, AWSError>;
   /**
    * Updates the Certificate expiry time for a group.
    */
@@ -686,7 +688,7 @@ declare class Greengrass extends Service {
   /**
    * Updates a logger definition.
    */
-  updateLoggerDefinition(params: Greengrass.Types.UpdateLoggerDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateLoggerDefinitionResponse) => void): Request<Greengrass.Types.UpdateLoggerDefinitionResponse, AWSError>;
+  updateLoggerDefinition(params: BoundInput<Greengrass.Types.UpdateLoggerDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.UpdateLoggerDefinitionResponse) => void): Request<Greengrass.Types.UpdateLoggerDefinitionResponse, AWSError>;
   /**
    * Updates a logger definition.
    */
@@ -694,7 +696,7 @@ declare class Greengrass extends Service {
   /**
    * Updates a resource definition.
    */
-  updateResourceDefinition(params: Greengrass.Types.UpdateResourceDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateResourceDefinitionResponse) => void): Request<Greengrass.Types.UpdateResourceDefinitionResponse, AWSError>;
+  updateResourceDefinition(params: BoundInput<Greengrass.Types.UpdateResourceDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.UpdateResourceDefinitionResponse) => void): Request<Greengrass.Types.UpdateResourceDefinitionResponse, AWSError>;
   /**
    * Updates a resource definition.
    */
@@ -702,7 +704,7 @@ declare class Greengrass extends Service {
   /**
    * Updates a subscription definition.
    */
-  updateSubscriptionDefinition(params: Greengrass.Types.UpdateSubscriptionDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.UpdateSubscriptionDefinitionResponse) => void): Request<Greengrass.Types.UpdateSubscriptionDefinitionResponse, AWSError>;
+  updateSubscriptionDefinition(params: BoundInput<Greengrass.Types.UpdateSubscriptionDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: Greengrass.Types.UpdateSubscriptionDefinitionResponse) => void): Request<Greengrass.Types.UpdateSubscriptionDefinitionResponse, AWSError>;
   /**
    * Updates a subscription definition.
    */
@@ -3491,7 +3493,8 @@ declare namespace Greengrass {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AssociateRoleToGroupRequest & AssociateServiceRoleToAccountRequest & CreateConnectorDefinitionRequest & CreateConnectorDefinitionVersionRequest & CreateCoreDefinitionRequest & CreateCoreDefinitionVersionRequest & CreateDeploymentRequest & CreateDeviceDefinitionRequest & CreateDeviceDefinitionVersionRequest & CreateFunctionDefinitionRequest & CreateFunctionDefinitionVersionRequest & CreateGroupRequest & CreateGroupCertificateAuthorityRequest & CreateGroupVersionRequest & CreateLoggerDefinitionRequest & CreateLoggerDefinitionVersionRequest & CreateResourceDefinitionRequest & CreateResourceDefinitionVersionRequest & CreateSoftwareUpdateJobRequest & CreateSubscriptionDefinitionRequest & CreateSubscriptionDefinitionVersionRequest & DeleteConnectorDefinitionRequest & DeleteCoreDefinitionRequest & DeleteDeviceDefinitionRequest & DeleteFunctionDefinitionRequest & DeleteGroupRequest & DeleteLoggerDefinitionRequest & DeleteResourceDefinitionRequest & DeleteSubscriptionDefinitionRequest & DisassociateRoleFromGroupRequest & DisassociateServiceRoleFromAccountRequest & GetAssociatedRoleRequest & GetBulkDeploymentStatusRequest & GetConnectivityInfoRequest & GetConnectorDefinitionRequest & GetConnectorDefinitionVersionRequest & GetCoreDefinitionRequest & GetCoreDefinitionVersionRequest & GetDeploymentStatusRequest & GetDeviceDefinitionRequest & GetDeviceDefinitionVersionRequest & GetFunctionDefinitionRequest & GetFunctionDefinitionVersionRequest & GetGroupRequest & GetGroupCertificateAuthorityRequest & GetGroupCertificateConfigurationRequest & GetGroupVersionRequest & GetLoggerDefinitionRequest & GetLoggerDefinitionVersionRequest & GetResourceDefinitionRequest & GetResourceDefinitionVersionRequest & GetServiceRoleForAccountRequest & GetSubscriptionDefinitionRequest & GetSubscriptionDefinitionVersionRequest & ListBulkDeploymentDetailedReportsRequest & ListBulkDeploymentsRequest & ListConnectorDefinitionVersionsRequest & ListConnectorDefinitionsRequest & ListCoreDefinitionVersionsRequest & ListCoreDefinitionsRequest & ListDeploymentsRequest & ListDeviceDefinitionVersionsRequest & ListDeviceDefinitionsRequest & ListFunctionDefinitionVersionsRequest & ListFunctionDefinitionsRequest & ListGroupCertificateAuthoritiesRequest & ListGroupVersionsRequest & ListGroupsRequest & ListLoggerDefinitionVersionsRequest & ListLoggerDefinitionsRequest & ListResourceDefinitionVersionsRequest & ListResourceDefinitionsRequest & ListSubscriptionDefinitionVersionsRequest & ListSubscriptionDefinitionsRequest & ResetDeploymentsRequest & StartBulkDeploymentRequest & StopBulkDeploymentRequest & UpdateConnectivityInfoRequest & UpdateConnectorDefinitionRequest & UpdateCoreDefinitionRequest & UpdateDeviceDefinitionRequest & UpdateFunctionDefinitionRequest & UpdateGroupRequest & UpdateGroupCertificateConfigurationRequest & UpdateLoggerDefinitionRequest & UpdateResourceDefinitionRequest & UpdateSubscriptionDefinitionRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the Greengrass client.
    */

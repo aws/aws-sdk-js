@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class GuardDuty extends Service {
+declare class GuardDuty<Params extends GuardDuty.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: GuardDuty.Types.ClientConfiguration)
-  config: Config & GuardDuty.Types.ClientConfiguration;
+  constructor(options?: GuardDuty.Types.ClientConfiguration<Params>)
+  config: Config & GuardDuty.Types.ClientConfiguration<Params>;
   /**
    * Accepts the invitation to be monitored by a master GuardDuty account.
    */
-  acceptInvitation(params: GuardDuty.Types.AcceptInvitationRequest, callback?: (err: AWSError, data: GuardDuty.Types.AcceptInvitationResponse) => void): Request<GuardDuty.Types.AcceptInvitationResponse, AWSError>;
+  acceptInvitation(params: BoundInput<GuardDuty.Types.AcceptInvitationRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.AcceptInvitationResponse) => void): Request<GuardDuty.Types.AcceptInvitationResponse, AWSError>;
   /**
    * Accepts the invitation to be monitored by a master GuardDuty account.
    */
@@ -22,7 +24,7 @@ declare class GuardDuty extends Service {
   /**
    * Archives Amazon GuardDuty findings specified by the list of finding IDs.
    */
-  archiveFindings(params: GuardDuty.Types.ArchiveFindingsRequest, callback?: (err: AWSError, data: GuardDuty.Types.ArchiveFindingsResponse) => void): Request<GuardDuty.Types.ArchiveFindingsResponse, AWSError>;
+  archiveFindings(params: BoundInput<GuardDuty.Types.ArchiveFindingsRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.ArchiveFindingsResponse) => void): Request<GuardDuty.Types.ArchiveFindingsResponse, AWSError>;
   /**
    * Archives Amazon GuardDuty findings specified by the list of finding IDs.
    */
@@ -30,7 +32,7 @@ declare class GuardDuty extends Service {
   /**
    * Creates a single Amazon GuardDuty detector. A detector is an object that represents the GuardDuty service. A detector must be created in order for GuardDuty to become operational.
    */
-  createDetector(params: GuardDuty.Types.CreateDetectorRequest, callback?: (err: AWSError, data: GuardDuty.Types.CreateDetectorResponse) => void): Request<GuardDuty.Types.CreateDetectorResponse, AWSError>;
+  createDetector(params: BoundInput<GuardDuty.Types.CreateDetectorRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.CreateDetectorResponse) => void): Request<GuardDuty.Types.CreateDetectorResponse, AWSError>;
   /**
    * Creates a single Amazon GuardDuty detector. A detector is an object that represents the GuardDuty service. A detector must be created in order for GuardDuty to become operational.
    */
@@ -38,7 +40,7 @@ declare class GuardDuty extends Service {
   /**
    * Creates a filter using the specified finding criteria.
    */
-  createFilter(params: GuardDuty.Types.CreateFilterRequest, callback?: (err: AWSError, data: GuardDuty.Types.CreateFilterResponse) => void): Request<GuardDuty.Types.CreateFilterResponse, AWSError>;
+  createFilter(params: BoundInput<GuardDuty.Types.CreateFilterRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.CreateFilterResponse) => void): Request<GuardDuty.Types.CreateFilterResponse, AWSError>;
   /**
    * Creates a filter using the specified finding criteria.
    */
@@ -46,7 +48,7 @@ declare class GuardDuty extends Service {
   /**
    * Creates a new IPSet - a list of trusted IP addresses that have been whitelisted for secure communication with AWS infrastructure and applications.
    */
-  createIPSet(params: GuardDuty.Types.CreateIPSetRequest, callback?: (err: AWSError, data: GuardDuty.Types.CreateIPSetResponse) => void): Request<GuardDuty.Types.CreateIPSetResponse, AWSError>;
+  createIPSet(params: BoundInput<GuardDuty.Types.CreateIPSetRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.CreateIPSetResponse) => void): Request<GuardDuty.Types.CreateIPSetResponse, AWSError>;
   /**
    * Creates a new IPSet - a list of trusted IP addresses that have been whitelisted for secure communication with AWS infrastructure and applications.
    */
@@ -54,7 +56,7 @@ declare class GuardDuty extends Service {
   /**
    * Creates member accounts of the current AWS account by specifying a list of AWS account IDs. The current AWS account can then invite these members to manage GuardDuty in their accounts.
    */
-  createMembers(params: GuardDuty.Types.CreateMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.CreateMembersResponse) => void): Request<GuardDuty.Types.CreateMembersResponse, AWSError>;
+  createMembers(params: BoundInput<GuardDuty.Types.CreateMembersRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.CreateMembersResponse) => void): Request<GuardDuty.Types.CreateMembersResponse, AWSError>;
   /**
    * Creates member accounts of the current AWS account by specifying a list of AWS account IDs. The current AWS account can then invite these members to manage GuardDuty in their accounts.
    */
@@ -62,7 +64,7 @@ declare class GuardDuty extends Service {
   /**
    * Generates example findings of types specified by the list of finding types. If 'NULL' is specified for findingTypes, the API generates example findings of all supported finding types.
    */
-  createSampleFindings(params: GuardDuty.Types.CreateSampleFindingsRequest, callback?: (err: AWSError, data: GuardDuty.Types.CreateSampleFindingsResponse) => void): Request<GuardDuty.Types.CreateSampleFindingsResponse, AWSError>;
+  createSampleFindings(params: BoundInput<GuardDuty.Types.CreateSampleFindingsRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.CreateSampleFindingsResponse) => void): Request<GuardDuty.Types.CreateSampleFindingsResponse, AWSError>;
   /**
    * Generates example findings of types specified by the list of finding types. If 'NULL' is specified for findingTypes, the API generates example findings of all supported finding types.
    */
@@ -70,7 +72,7 @@ declare class GuardDuty extends Service {
   /**
    * Create a new ThreatIntelSet. ThreatIntelSets consist of known malicious IP addresses. GuardDuty generates findings based on ThreatIntelSets.
    */
-  createThreatIntelSet(params: GuardDuty.Types.CreateThreatIntelSetRequest, callback?: (err: AWSError, data: GuardDuty.Types.CreateThreatIntelSetResponse) => void): Request<GuardDuty.Types.CreateThreatIntelSetResponse, AWSError>;
+  createThreatIntelSet(params: BoundInput<GuardDuty.Types.CreateThreatIntelSetRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.CreateThreatIntelSetResponse) => void): Request<GuardDuty.Types.CreateThreatIntelSetResponse, AWSError>;
   /**
    * Create a new ThreatIntelSet. ThreatIntelSets consist of known malicious IP addresses. GuardDuty generates findings based on ThreatIntelSets.
    */
@@ -78,7 +80,7 @@ declare class GuardDuty extends Service {
   /**
    * Declines invitations sent to the current member account by AWS account specified by their account IDs.
    */
-  declineInvitations(params: GuardDuty.Types.DeclineInvitationsRequest, callback?: (err: AWSError, data: GuardDuty.Types.DeclineInvitationsResponse) => void): Request<GuardDuty.Types.DeclineInvitationsResponse, AWSError>;
+  declineInvitations(params: BoundInput<GuardDuty.Types.DeclineInvitationsRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.DeclineInvitationsResponse) => void): Request<GuardDuty.Types.DeclineInvitationsResponse, AWSError>;
   /**
    * Declines invitations sent to the current member account by AWS account specified by their account IDs.
    */
@@ -86,7 +88,7 @@ declare class GuardDuty extends Service {
   /**
    * Deletes a Amazon GuardDuty detector specified by the detector ID.
    */
-  deleteDetector(params: GuardDuty.Types.DeleteDetectorRequest, callback?: (err: AWSError, data: GuardDuty.Types.DeleteDetectorResponse) => void): Request<GuardDuty.Types.DeleteDetectorResponse, AWSError>;
+  deleteDetector(params: BoundInput<GuardDuty.Types.DeleteDetectorRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.DeleteDetectorResponse) => void): Request<GuardDuty.Types.DeleteDetectorResponse, AWSError>;
   /**
    * Deletes a Amazon GuardDuty detector specified by the detector ID.
    */
@@ -94,7 +96,7 @@ declare class GuardDuty extends Service {
   /**
    * Deletes the filter specified by the filter name.
    */
-  deleteFilter(params: GuardDuty.Types.DeleteFilterRequest, callback?: (err: AWSError, data: GuardDuty.Types.DeleteFilterResponse) => void): Request<GuardDuty.Types.DeleteFilterResponse, AWSError>;
+  deleteFilter(params: BoundInput<GuardDuty.Types.DeleteFilterRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.DeleteFilterResponse) => void): Request<GuardDuty.Types.DeleteFilterResponse, AWSError>;
   /**
    * Deletes the filter specified by the filter name.
    */
@@ -102,7 +104,7 @@ declare class GuardDuty extends Service {
   /**
    * Deletes the IPSet specified by the IPSet ID.
    */
-  deleteIPSet(params: GuardDuty.Types.DeleteIPSetRequest, callback?: (err: AWSError, data: GuardDuty.Types.DeleteIPSetResponse) => void): Request<GuardDuty.Types.DeleteIPSetResponse, AWSError>;
+  deleteIPSet(params: BoundInput<GuardDuty.Types.DeleteIPSetRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.DeleteIPSetResponse) => void): Request<GuardDuty.Types.DeleteIPSetResponse, AWSError>;
   /**
    * Deletes the IPSet specified by the IPSet ID.
    */
@@ -110,7 +112,7 @@ declare class GuardDuty extends Service {
   /**
    * Deletes invitations sent to the current member account by AWS accounts specified by their account IDs.
    */
-  deleteInvitations(params: GuardDuty.Types.DeleteInvitationsRequest, callback?: (err: AWSError, data: GuardDuty.Types.DeleteInvitationsResponse) => void): Request<GuardDuty.Types.DeleteInvitationsResponse, AWSError>;
+  deleteInvitations(params: BoundInput<GuardDuty.Types.DeleteInvitationsRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.DeleteInvitationsResponse) => void): Request<GuardDuty.Types.DeleteInvitationsResponse, AWSError>;
   /**
    * Deletes invitations sent to the current member account by AWS accounts specified by their account IDs.
    */
@@ -118,7 +120,7 @@ declare class GuardDuty extends Service {
   /**
    * Deletes GuardDuty member accounts (to the current GuardDuty master account) specified by the account IDs.
    */
-  deleteMembers(params: GuardDuty.Types.DeleteMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.DeleteMembersResponse) => void): Request<GuardDuty.Types.DeleteMembersResponse, AWSError>;
+  deleteMembers(params: BoundInput<GuardDuty.Types.DeleteMembersRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.DeleteMembersResponse) => void): Request<GuardDuty.Types.DeleteMembersResponse, AWSError>;
   /**
    * Deletes GuardDuty member accounts (to the current GuardDuty master account) specified by the account IDs.
    */
@@ -126,7 +128,7 @@ declare class GuardDuty extends Service {
   /**
    * Deletes ThreatIntelSet specified by the ThreatIntelSet ID.
    */
-  deleteThreatIntelSet(params: GuardDuty.Types.DeleteThreatIntelSetRequest, callback?: (err: AWSError, data: GuardDuty.Types.DeleteThreatIntelSetResponse) => void): Request<GuardDuty.Types.DeleteThreatIntelSetResponse, AWSError>;
+  deleteThreatIntelSet(params: BoundInput<GuardDuty.Types.DeleteThreatIntelSetRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.DeleteThreatIntelSetResponse) => void): Request<GuardDuty.Types.DeleteThreatIntelSetResponse, AWSError>;
   /**
    * Deletes ThreatIntelSet specified by the ThreatIntelSet ID.
    */
@@ -134,7 +136,7 @@ declare class GuardDuty extends Service {
   /**
    * Disassociates the current GuardDuty member account from its master account.
    */
-  disassociateFromMasterAccount(params: GuardDuty.Types.DisassociateFromMasterAccountRequest, callback?: (err: AWSError, data: GuardDuty.Types.DisassociateFromMasterAccountResponse) => void): Request<GuardDuty.Types.DisassociateFromMasterAccountResponse, AWSError>;
+  disassociateFromMasterAccount(params: BoundInput<GuardDuty.Types.DisassociateFromMasterAccountRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.DisassociateFromMasterAccountResponse) => void): Request<GuardDuty.Types.DisassociateFromMasterAccountResponse, AWSError>;
   /**
    * Disassociates the current GuardDuty member account from its master account.
    */
@@ -142,7 +144,7 @@ declare class GuardDuty extends Service {
   /**
    * Disassociates GuardDuty member accounts (to the current GuardDuty master account) specified by the account IDs.
    */
-  disassociateMembers(params: GuardDuty.Types.DisassociateMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.DisassociateMembersResponse) => void): Request<GuardDuty.Types.DisassociateMembersResponse, AWSError>;
+  disassociateMembers(params: BoundInput<GuardDuty.Types.DisassociateMembersRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.DisassociateMembersResponse) => void): Request<GuardDuty.Types.DisassociateMembersResponse, AWSError>;
   /**
    * Disassociates GuardDuty member accounts (to the current GuardDuty master account) specified by the account IDs.
    */
@@ -150,7 +152,7 @@ declare class GuardDuty extends Service {
   /**
    * Retrieves an Amazon GuardDuty detector specified by the detectorId.
    */
-  getDetector(params: GuardDuty.Types.GetDetectorRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetDetectorResponse) => void): Request<GuardDuty.Types.GetDetectorResponse, AWSError>;
+  getDetector(params: BoundInput<GuardDuty.Types.GetDetectorRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.GetDetectorResponse) => void): Request<GuardDuty.Types.GetDetectorResponse, AWSError>;
   /**
    * Retrieves an Amazon GuardDuty detector specified by the detectorId.
    */
@@ -158,7 +160,7 @@ declare class GuardDuty extends Service {
   /**
    * Returns the details of the filter specified by the filter name.
    */
-  getFilter(params: GuardDuty.Types.GetFilterRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetFilterResponse) => void): Request<GuardDuty.Types.GetFilterResponse, AWSError>;
+  getFilter(params: BoundInput<GuardDuty.Types.GetFilterRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.GetFilterResponse) => void): Request<GuardDuty.Types.GetFilterResponse, AWSError>;
   /**
    * Returns the details of the filter specified by the filter name.
    */
@@ -166,7 +168,7 @@ declare class GuardDuty extends Service {
   /**
    * Describes Amazon GuardDuty findings specified by finding IDs.
    */
-  getFindings(params: GuardDuty.Types.GetFindingsRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetFindingsResponse) => void): Request<GuardDuty.Types.GetFindingsResponse, AWSError>;
+  getFindings(params: BoundInput<GuardDuty.Types.GetFindingsRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.GetFindingsResponse) => void): Request<GuardDuty.Types.GetFindingsResponse, AWSError>;
   /**
    * Describes Amazon GuardDuty findings specified by finding IDs.
    */
@@ -174,7 +176,7 @@ declare class GuardDuty extends Service {
   /**
    * Lists Amazon GuardDuty findings' statistics for the specified detector ID.
    */
-  getFindingsStatistics(params: GuardDuty.Types.GetFindingsStatisticsRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetFindingsStatisticsResponse) => void): Request<GuardDuty.Types.GetFindingsStatisticsResponse, AWSError>;
+  getFindingsStatistics(params: BoundInput<GuardDuty.Types.GetFindingsStatisticsRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.GetFindingsStatisticsResponse) => void): Request<GuardDuty.Types.GetFindingsStatisticsResponse, AWSError>;
   /**
    * Lists Amazon GuardDuty findings' statistics for the specified detector ID.
    */
@@ -182,7 +184,7 @@ declare class GuardDuty extends Service {
   /**
    * Retrieves the IPSet specified by the IPSet ID.
    */
-  getIPSet(params: GuardDuty.Types.GetIPSetRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetIPSetResponse) => void): Request<GuardDuty.Types.GetIPSetResponse, AWSError>;
+  getIPSet(params: BoundInput<GuardDuty.Types.GetIPSetRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.GetIPSetResponse) => void): Request<GuardDuty.Types.GetIPSetResponse, AWSError>;
   /**
    * Retrieves the IPSet specified by the IPSet ID.
    */
@@ -190,7 +192,7 @@ declare class GuardDuty extends Service {
   /**
    * Returns the count of all GuardDuty membership invitations that were sent to the current member account except the currently accepted invitation.
    */
-  getInvitationsCount(params: GuardDuty.Types.GetInvitationsCountRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetInvitationsCountResponse) => void): Request<GuardDuty.Types.GetInvitationsCountResponse, AWSError>;
+  getInvitationsCount(params: BoundInput<GuardDuty.Types.GetInvitationsCountRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.GetInvitationsCountResponse) => void): Request<GuardDuty.Types.GetInvitationsCountResponse, AWSError>;
   /**
    * Returns the count of all GuardDuty membership invitations that were sent to the current member account except the currently accepted invitation.
    */
@@ -198,7 +200,7 @@ declare class GuardDuty extends Service {
   /**
    * Provides the details for the GuardDuty master account to the current GuardDuty member account.
    */
-  getMasterAccount(params: GuardDuty.Types.GetMasterAccountRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetMasterAccountResponse) => void): Request<GuardDuty.Types.GetMasterAccountResponse, AWSError>;
+  getMasterAccount(params: BoundInput<GuardDuty.Types.GetMasterAccountRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.GetMasterAccountResponse) => void): Request<GuardDuty.Types.GetMasterAccountResponse, AWSError>;
   /**
    * Provides the details for the GuardDuty master account to the current GuardDuty member account.
    */
@@ -206,7 +208,7 @@ declare class GuardDuty extends Service {
   /**
    * Retrieves GuardDuty member accounts (to the current GuardDuty master account) specified by the account IDs.
    */
-  getMembers(params: GuardDuty.Types.GetMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetMembersResponse) => void): Request<GuardDuty.Types.GetMembersResponse, AWSError>;
+  getMembers(params: BoundInput<GuardDuty.Types.GetMembersRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.GetMembersResponse) => void): Request<GuardDuty.Types.GetMembersResponse, AWSError>;
   /**
    * Retrieves GuardDuty member accounts (to the current GuardDuty master account) specified by the account IDs.
    */
@@ -214,7 +216,7 @@ declare class GuardDuty extends Service {
   /**
    * Retrieves the ThreatIntelSet that is specified by the ThreatIntelSet ID.
    */
-  getThreatIntelSet(params: GuardDuty.Types.GetThreatIntelSetRequest, callback?: (err: AWSError, data: GuardDuty.Types.GetThreatIntelSetResponse) => void): Request<GuardDuty.Types.GetThreatIntelSetResponse, AWSError>;
+  getThreatIntelSet(params: BoundInput<GuardDuty.Types.GetThreatIntelSetRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.GetThreatIntelSetResponse) => void): Request<GuardDuty.Types.GetThreatIntelSetResponse, AWSError>;
   /**
    * Retrieves the ThreatIntelSet that is specified by the ThreatIntelSet ID.
    */
@@ -222,7 +224,7 @@ declare class GuardDuty extends Service {
   /**
    * Invites other AWS accounts (created as members of the current AWS account by CreateMembers) to enable GuardDuty and allow the current AWS account to view and manage these accounts' GuardDuty findings on their behalf as the master account.
    */
-  inviteMembers(params: GuardDuty.Types.InviteMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.InviteMembersResponse) => void): Request<GuardDuty.Types.InviteMembersResponse, AWSError>;
+  inviteMembers(params: BoundInput<GuardDuty.Types.InviteMembersRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.InviteMembersResponse) => void): Request<GuardDuty.Types.InviteMembersResponse, AWSError>;
   /**
    * Invites other AWS accounts (created as members of the current AWS account by CreateMembers) to enable GuardDuty and allow the current AWS account to view and manage these accounts' GuardDuty findings on their behalf as the master account.
    */
@@ -230,7 +232,7 @@ declare class GuardDuty extends Service {
   /**
    * Lists detectorIds of all the existing Amazon GuardDuty detector resources.
    */
-  listDetectors(params: GuardDuty.Types.ListDetectorsRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListDetectorsResponse) => void): Request<GuardDuty.Types.ListDetectorsResponse, AWSError>;
+  listDetectors(params: BoundInput<GuardDuty.Types.ListDetectorsRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.ListDetectorsResponse) => void): Request<GuardDuty.Types.ListDetectorsResponse, AWSError>;
   /**
    * Lists detectorIds of all the existing Amazon GuardDuty detector resources.
    */
@@ -238,7 +240,7 @@ declare class GuardDuty extends Service {
   /**
    * Returns a paginated list of the current filters.
    */
-  listFilters(params: GuardDuty.Types.ListFiltersRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListFiltersResponse) => void): Request<GuardDuty.Types.ListFiltersResponse, AWSError>;
+  listFilters(params: BoundInput<GuardDuty.Types.ListFiltersRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.ListFiltersResponse) => void): Request<GuardDuty.Types.ListFiltersResponse, AWSError>;
   /**
    * Returns a paginated list of the current filters.
    */
@@ -246,7 +248,7 @@ declare class GuardDuty extends Service {
   /**
    * Lists Amazon GuardDuty findings for the specified detector ID.
    */
-  listFindings(params: GuardDuty.Types.ListFindingsRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListFindingsResponse) => void): Request<GuardDuty.Types.ListFindingsResponse, AWSError>;
+  listFindings(params: BoundInput<GuardDuty.Types.ListFindingsRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.ListFindingsResponse) => void): Request<GuardDuty.Types.ListFindingsResponse, AWSError>;
   /**
    * Lists Amazon GuardDuty findings for the specified detector ID.
    */
@@ -254,7 +256,7 @@ declare class GuardDuty extends Service {
   /**
    * Lists the IPSets of the GuardDuty service specified by the detector ID.
    */
-  listIPSets(params: GuardDuty.Types.ListIPSetsRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListIPSetsResponse) => void): Request<GuardDuty.Types.ListIPSetsResponse, AWSError>;
+  listIPSets(params: BoundInput<GuardDuty.Types.ListIPSetsRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.ListIPSetsResponse) => void): Request<GuardDuty.Types.ListIPSetsResponse, AWSError>;
   /**
    * Lists the IPSets of the GuardDuty service specified by the detector ID.
    */
@@ -262,7 +264,7 @@ declare class GuardDuty extends Service {
   /**
    * Lists all GuardDuty membership invitations that were sent to the current AWS account.
    */
-  listInvitations(params: GuardDuty.Types.ListInvitationsRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListInvitationsResponse) => void): Request<GuardDuty.Types.ListInvitationsResponse, AWSError>;
+  listInvitations(params: BoundInput<GuardDuty.Types.ListInvitationsRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.ListInvitationsResponse) => void): Request<GuardDuty.Types.ListInvitationsResponse, AWSError>;
   /**
    * Lists all GuardDuty membership invitations that were sent to the current AWS account.
    */
@@ -270,7 +272,7 @@ declare class GuardDuty extends Service {
   /**
    * Lists details about all member accounts for the current GuardDuty master account.
    */
-  listMembers(params: GuardDuty.Types.ListMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListMembersResponse) => void): Request<GuardDuty.Types.ListMembersResponse, AWSError>;
+  listMembers(params: BoundInput<GuardDuty.Types.ListMembersRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.ListMembersResponse) => void): Request<GuardDuty.Types.ListMembersResponse, AWSError>;
   /**
    * Lists details about all member accounts for the current GuardDuty master account.
    */
@@ -278,7 +280,7 @@ declare class GuardDuty extends Service {
   /**
    * Lists the ThreatIntelSets of the GuardDuty service specified by the detector ID.
    */
-  listThreatIntelSets(params: GuardDuty.Types.ListThreatIntelSetsRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListThreatIntelSetsResponse) => void): Request<GuardDuty.Types.ListThreatIntelSetsResponse, AWSError>;
+  listThreatIntelSets(params: BoundInput<GuardDuty.Types.ListThreatIntelSetsRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.ListThreatIntelSetsResponse) => void): Request<GuardDuty.Types.ListThreatIntelSetsResponse, AWSError>;
   /**
    * Lists the ThreatIntelSets of the GuardDuty service specified by the detector ID.
    */
@@ -286,7 +288,7 @@ declare class GuardDuty extends Service {
   /**
    * Re-enables GuardDuty to monitor findings of the member accounts specified by the account IDs. A master GuardDuty account can run this command after disabling GuardDuty from monitoring these members' findings by running StopMonitoringMembers.
    */
-  startMonitoringMembers(params: GuardDuty.Types.StartMonitoringMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.StartMonitoringMembersResponse) => void): Request<GuardDuty.Types.StartMonitoringMembersResponse, AWSError>;
+  startMonitoringMembers(params: BoundInput<GuardDuty.Types.StartMonitoringMembersRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.StartMonitoringMembersResponse) => void): Request<GuardDuty.Types.StartMonitoringMembersResponse, AWSError>;
   /**
    * Re-enables GuardDuty to monitor findings of the member accounts specified by the account IDs. A master GuardDuty account can run this command after disabling GuardDuty from monitoring these members' findings by running StopMonitoringMembers.
    */
@@ -294,7 +296,7 @@ declare class GuardDuty extends Service {
   /**
    * Disables GuardDuty from monitoring findings of the member accounts specified by the account IDs. After running this command, a master GuardDuty account can run StartMonitoringMembers to re-enable GuardDuty to monitor these members’ findings.
    */
-  stopMonitoringMembers(params: GuardDuty.Types.StopMonitoringMembersRequest, callback?: (err: AWSError, data: GuardDuty.Types.StopMonitoringMembersResponse) => void): Request<GuardDuty.Types.StopMonitoringMembersResponse, AWSError>;
+  stopMonitoringMembers(params: BoundInput<GuardDuty.Types.StopMonitoringMembersRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.StopMonitoringMembersResponse) => void): Request<GuardDuty.Types.StopMonitoringMembersResponse, AWSError>;
   /**
    * Disables GuardDuty from monitoring findings of the member accounts specified by the account IDs. After running this command, a master GuardDuty account can run StartMonitoringMembers to re-enable GuardDuty to monitor these members’ findings.
    */
@@ -302,7 +304,7 @@ declare class GuardDuty extends Service {
   /**
    * Unarchives Amazon GuardDuty findings specified by the list of finding IDs.
    */
-  unarchiveFindings(params: GuardDuty.Types.UnarchiveFindingsRequest, callback?: (err: AWSError, data: GuardDuty.Types.UnarchiveFindingsResponse) => void): Request<GuardDuty.Types.UnarchiveFindingsResponse, AWSError>;
+  unarchiveFindings(params: BoundInput<GuardDuty.Types.UnarchiveFindingsRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.UnarchiveFindingsResponse) => void): Request<GuardDuty.Types.UnarchiveFindingsResponse, AWSError>;
   /**
    * Unarchives Amazon GuardDuty findings specified by the list of finding IDs.
    */
@@ -310,7 +312,7 @@ declare class GuardDuty extends Service {
   /**
    * Updates an Amazon GuardDuty detector specified by the detectorId.
    */
-  updateDetector(params: GuardDuty.Types.UpdateDetectorRequest, callback?: (err: AWSError, data: GuardDuty.Types.UpdateDetectorResponse) => void): Request<GuardDuty.Types.UpdateDetectorResponse, AWSError>;
+  updateDetector(params: BoundInput<GuardDuty.Types.UpdateDetectorRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.UpdateDetectorResponse) => void): Request<GuardDuty.Types.UpdateDetectorResponse, AWSError>;
   /**
    * Updates an Amazon GuardDuty detector specified by the detectorId.
    */
@@ -318,7 +320,7 @@ declare class GuardDuty extends Service {
   /**
    * Updates the filter specified by the filter name.
    */
-  updateFilter(params: GuardDuty.Types.UpdateFilterRequest, callback?: (err: AWSError, data: GuardDuty.Types.UpdateFilterResponse) => void): Request<GuardDuty.Types.UpdateFilterResponse, AWSError>;
+  updateFilter(params: BoundInput<GuardDuty.Types.UpdateFilterRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.UpdateFilterResponse) => void): Request<GuardDuty.Types.UpdateFilterResponse, AWSError>;
   /**
    * Updates the filter specified by the filter name.
    */
@@ -326,7 +328,7 @@ declare class GuardDuty extends Service {
   /**
    * Marks specified Amazon GuardDuty findings as useful or not useful.
    */
-  updateFindingsFeedback(params: GuardDuty.Types.UpdateFindingsFeedbackRequest, callback?: (err: AWSError, data: GuardDuty.Types.UpdateFindingsFeedbackResponse) => void): Request<GuardDuty.Types.UpdateFindingsFeedbackResponse, AWSError>;
+  updateFindingsFeedback(params: BoundInput<GuardDuty.Types.UpdateFindingsFeedbackRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.UpdateFindingsFeedbackResponse) => void): Request<GuardDuty.Types.UpdateFindingsFeedbackResponse, AWSError>;
   /**
    * Marks specified Amazon GuardDuty findings as useful or not useful.
    */
@@ -334,7 +336,7 @@ declare class GuardDuty extends Service {
   /**
    * Updates the IPSet specified by the IPSet ID.
    */
-  updateIPSet(params: GuardDuty.Types.UpdateIPSetRequest, callback?: (err: AWSError, data: GuardDuty.Types.UpdateIPSetResponse) => void): Request<GuardDuty.Types.UpdateIPSetResponse, AWSError>;
+  updateIPSet(params: BoundInput<GuardDuty.Types.UpdateIPSetRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.UpdateIPSetResponse) => void): Request<GuardDuty.Types.UpdateIPSetResponse, AWSError>;
   /**
    * Updates the IPSet specified by the IPSet ID.
    */
@@ -342,7 +344,7 @@ declare class GuardDuty extends Service {
   /**
    * Updates the ThreatIntelSet specified by ThreatIntelSet ID.
    */
-  updateThreatIntelSet(params: GuardDuty.Types.UpdateThreatIntelSetRequest, callback?: (err: AWSError, data: GuardDuty.Types.UpdateThreatIntelSetResponse) => void): Request<GuardDuty.Types.UpdateThreatIntelSetResponse, AWSError>;
+  updateThreatIntelSet(params: BoundInput<GuardDuty.Types.UpdateThreatIntelSetRequest, keyof Params>, callback?: (err: AWSError, data: GuardDuty.Types.UpdateThreatIntelSetResponse) => void): Request<GuardDuty.Types.UpdateThreatIntelSetResponse, AWSError>;
   /**
    * Updates the ThreatIntelSet specified by ThreatIntelSet ID.
    */
@@ -1763,7 +1765,8 @@ declare namespace GuardDuty {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AcceptInvitationRequest & ArchiveFindingsRequest & CreateDetectorRequest & CreateFilterRequest & CreateIPSetRequest & CreateMembersRequest & CreateSampleFindingsRequest & CreateThreatIntelSetRequest & DeclineInvitationsRequest & DeleteDetectorRequest & DeleteFilterRequest & DeleteIPSetRequest & DeleteInvitationsRequest & DeleteMembersRequest & DeleteThreatIntelSetRequest & DisassociateFromMasterAccountRequest & DisassociateMembersRequest & GetDetectorRequest & GetFilterRequest & GetFindingsRequest & GetFindingsStatisticsRequest & GetIPSetRequest & GetInvitationsCountRequest & GetMasterAccountRequest & GetMembersRequest & GetThreatIntelSetRequest & InviteMembersRequest & ListDetectorsRequest & ListFiltersRequest & ListFindingsRequest & ListIPSetsRequest & ListInvitationsRequest & ListMembersRequest & ListThreatIntelSetsRequest & StartMonitoringMembersRequest & StopMonitoringMembersRequest & UnarchiveFindingsRequest & UpdateDetectorRequest & UpdateFilterRequest & UpdateFindingsFeedbackRequest & UpdateIPSetRequest & UpdateThreatIntelSetRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the GuardDuty client.
    */

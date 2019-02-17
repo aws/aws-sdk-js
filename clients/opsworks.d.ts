@@ -4,18 +4,20 @@ import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class OpsWorks extends Service {
+declare class OpsWorks<Params extends OpsWorks.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: OpsWorks.Types.ClientConfiguration)
-  config: Config & OpsWorks.Types.ClientConfiguration;
+  constructor(options?: OpsWorks.Types.ClientConfiguration<Params>)
+  config: Config & OpsWorks.Types.ClientConfiguration<Params>;
   /**
    * Assign a registered instance to a layer.   You can assign registered on-premises instances to any layer type.   You can assign registered Amazon EC2 instances only to custom layers.   You cannot use this action with instances that were created with AWS OpsWorks Stacks.    Required Permissions: To use this action, an AWS Identity and Access Management (IAM) user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  assignInstance(params: OpsWorks.Types.AssignInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  assignInstance(params: BoundInput<OpsWorks.Types.AssignInstanceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Assign a registered instance to a layer.   You can assign registered on-premises instances to any layer type.   You can assign registered Amazon EC2 instances only to custom layers.   You cannot use this action with instances that were created with AWS OpsWorks Stacks.    Required Permissions: To use this action, an AWS Identity and Access Management (IAM) user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -23,7 +25,7 @@ declare class OpsWorks extends Service {
   /**
    * Assigns one of the stack's registered Amazon EBS volumes to a specified instance. The volume must first be registered with the stack by calling RegisterVolume. After you register the volume, you must call UpdateVolume to specify a mount point before calling AssignVolume. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  assignVolume(params: OpsWorks.Types.AssignVolumeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  assignVolume(params: BoundInput<OpsWorks.Types.AssignVolumeRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Assigns one of the stack's registered Amazon EBS volumes to a specified instance. The volume must first be registered with the stack by calling RegisterVolume. After you register the volume, you must call UpdateVolume to specify a mount point before calling AssignVolume. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -31,7 +33,7 @@ declare class OpsWorks extends Service {
   /**
    * Associates one of the stack's registered Elastic IP addresses with a specified instance. The address must first be registered with the stack by calling RegisterElasticIp. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  associateElasticIp(params: OpsWorks.Types.AssociateElasticIpRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  associateElasticIp(params: BoundInput<OpsWorks.Types.AssociateElasticIpRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Associates one of the stack's registered Elastic IP addresses with a specified instance. The address must first be registered with the stack by calling RegisterElasticIp. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -39,7 +41,7 @@ declare class OpsWorks extends Service {
   /**
    * Attaches an Elastic Load Balancing load balancer to a specified layer. AWS OpsWorks Stacks does not support Application Load Balancer. You can only use Classic Load Balancer with AWS OpsWorks Stacks. For more information, see Elastic Load Balancing.  You must create the Elastic Load Balancing instance separately, by using the Elastic Load Balancing console, API, or CLI. For more information, see  Elastic Load Balancing Developer Guide.   Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  attachElasticLoadBalancer(params: OpsWorks.Types.AttachElasticLoadBalancerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  attachElasticLoadBalancer(params: BoundInput<OpsWorks.Types.AttachElasticLoadBalancerRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Attaches an Elastic Load Balancing load balancer to a specified layer. AWS OpsWorks Stacks does not support Application Load Balancer. You can only use Classic Load Balancer with AWS OpsWorks Stacks. For more information, see Elastic Load Balancing.  You must create the Elastic Load Balancing instance separately, by using the Elastic Load Balancing console, API, or CLI. For more information, see  Elastic Load Balancing Developer Guide.   Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -47,7 +49,7 @@ declare class OpsWorks extends Service {
   /**
    * Creates a clone of a specified stack. For more information, see Clone a Stack. By default, all parameters are set to the values used by the parent stack.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  cloneStack(params: OpsWorks.Types.CloneStackRequest, callback?: (err: AWSError, data: OpsWorks.Types.CloneStackResult) => void): Request<OpsWorks.Types.CloneStackResult, AWSError>;
+  cloneStack(params: BoundInput<OpsWorks.Types.CloneStackRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.CloneStackResult) => void): Request<OpsWorks.Types.CloneStackResult, AWSError>;
   /**
    * Creates a clone of a specified stack. For more information, see Clone a Stack. By default, all parameters are set to the values used by the parent stack.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -55,7 +57,7 @@ declare class OpsWorks extends Service {
   /**
    * Creates an app for a specified stack. For more information, see Creating Apps.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  createApp(params: OpsWorks.Types.CreateAppRequest, callback?: (err: AWSError, data: OpsWorks.Types.CreateAppResult) => void): Request<OpsWorks.Types.CreateAppResult, AWSError>;
+  createApp(params: BoundInput<OpsWorks.Types.CreateAppRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.CreateAppResult) => void): Request<OpsWorks.Types.CreateAppResult, AWSError>;
   /**
    * Creates an app for a specified stack. For more information, see Creating Apps.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -63,7 +65,7 @@ declare class OpsWorks extends Service {
   /**
    * Runs deployment or stack commands. For more information, see Deploying Apps and Run Stack Commands.  Required Permissions: To use this action, an IAM user must have a Deploy or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  createDeployment(params: OpsWorks.Types.CreateDeploymentRequest, callback?: (err: AWSError, data: OpsWorks.Types.CreateDeploymentResult) => void): Request<OpsWorks.Types.CreateDeploymentResult, AWSError>;
+  createDeployment(params: BoundInput<OpsWorks.Types.CreateDeploymentRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.CreateDeploymentResult) => void): Request<OpsWorks.Types.CreateDeploymentResult, AWSError>;
   /**
    * Runs deployment or stack commands. For more information, see Deploying Apps and Run Stack Commands.  Required Permissions: To use this action, an IAM user must have a Deploy or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -71,7 +73,7 @@ declare class OpsWorks extends Service {
   /**
    * Creates an instance in a specified stack. For more information, see Adding an Instance to a Layer.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  createInstance(params: OpsWorks.Types.CreateInstanceRequest, callback?: (err: AWSError, data: OpsWorks.Types.CreateInstanceResult) => void): Request<OpsWorks.Types.CreateInstanceResult, AWSError>;
+  createInstance(params: BoundInput<OpsWorks.Types.CreateInstanceRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.CreateInstanceResult) => void): Request<OpsWorks.Types.CreateInstanceResult, AWSError>;
   /**
    * Creates an instance in a specified stack. For more information, see Adding an Instance to a Layer.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -79,7 +81,7 @@ declare class OpsWorks extends Service {
   /**
    * Creates a layer. For more information, see How to Create a Layer.  You should use CreateLayer for noncustom layer types such as PHP App Server only if the stack does not have an existing layer of that type. A stack can have at most one instance of each noncustom layer; if you attempt to create a second instance, CreateLayer fails. A stack can have an arbitrary number of custom layers, so you can call CreateLayer as many times as you like for that layer type.   Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  createLayer(params: OpsWorks.Types.CreateLayerRequest, callback?: (err: AWSError, data: OpsWorks.Types.CreateLayerResult) => void): Request<OpsWorks.Types.CreateLayerResult, AWSError>;
+  createLayer(params: BoundInput<OpsWorks.Types.CreateLayerRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.CreateLayerResult) => void): Request<OpsWorks.Types.CreateLayerResult, AWSError>;
   /**
    * Creates a layer. For more information, see How to Create a Layer.  You should use CreateLayer for noncustom layer types such as PHP App Server only if the stack does not have an existing layer of that type. A stack can have at most one instance of each noncustom layer; if you attempt to create a second instance, CreateLayer fails. A stack can have an arbitrary number of custom layers, so you can call CreateLayer as many times as you like for that layer type.   Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -87,7 +89,7 @@ declare class OpsWorks extends Service {
   /**
    * Creates a new stack. For more information, see Create a New Stack.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  createStack(params: OpsWorks.Types.CreateStackRequest, callback?: (err: AWSError, data: OpsWorks.Types.CreateStackResult) => void): Request<OpsWorks.Types.CreateStackResult, AWSError>;
+  createStack(params: BoundInput<OpsWorks.Types.CreateStackRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.CreateStackResult) => void): Request<OpsWorks.Types.CreateStackResult, AWSError>;
   /**
    * Creates a new stack. For more information, see Create a New Stack.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -95,7 +97,7 @@ declare class OpsWorks extends Service {
   /**
    * Creates a new user profile.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  createUserProfile(params: OpsWorks.Types.CreateUserProfileRequest, callback?: (err: AWSError, data: OpsWorks.Types.CreateUserProfileResult) => void): Request<OpsWorks.Types.CreateUserProfileResult, AWSError>;
+  createUserProfile(params: BoundInput<OpsWorks.Types.CreateUserProfileRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.CreateUserProfileResult) => void): Request<OpsWorks.Types.CreateUserProfileResult, AWSError>;
   /**
    * Creates a new user profile.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -103,7 +105,7 @@ declare class OpsWorks extends Service {
   /**
    * Deletes a specified app.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  deleteApp(params: OpsWorks.Types.DeleteAppRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteApp(params: BoundInput<OpsWorks.Types.DeleteAppRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a specified app.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -111,7 +113,7 @@ declare class OpsWorks extends Service {
   /**
    * Deletes a specified instance, which terminates the associated Amazon EC2 instance. You must stop an instance before you can delete it. For more information, see Deleting Instances.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  deleteInstance(params: OpsWorks.Types.DeleteInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteInstance(params: BoundInput<OpsWorks.Types.DeleteInstanceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a specified instance, which terminates the associated Amazon EC2 instance. You must stop an instance before you can delete it. For more information, see Deleting Instances.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -119,7 +121,7 @@ declare class OpsWorks extends Service {
   /**
    * Deletes a specified layer. You must first stop and then delete all associated instances or unassign registered instances. For more information, see How to Delete a Layer.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  deleteLayer(params: OpsWorks.Types.DeleteLayerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteLayer(params: BoundInput<OpsWorks.Types.DeleteLayerRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a specified layer. You must first stop and then delete all associated instances or unassign registered instances. For more information, see How to Delete a Layer.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -127,7 +129,7 @@ declare class OpsWorks extends Service {
   /**
    * Deletes a specified stack. You must first delete all instances, layers, and apps or deregister registered instances. For more information, see Shut Down a Stack.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  deleteStack(params: OpsWorks.Types.DeleteStackRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteStack(params: BoundInput<OpsWorks.Types.DeleteStackRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a specified stack. You must first delete all instances, layers, and apps or deregister registered instances. For more information, see Shut Down a Stack.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -135,7 +137,7 @@ declare class OpsWorks extends Service {
   /**
    * Deletes a user profile.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  deleteUserProfile(params: OpsWorks.Types.DeleteUserProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteUserProfile(params: BoundInput<OpsWorks.Types.DeleteUserProfileRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a user profile.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -143,7 +145,7 @@ declare class OpsWorks extends Service {
   /**
    * Deregisters a specified Amazon ECS cluster from a stack. For more information, see  Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html.
    */
-  deregisterEcsCluster(params: OpsWorks.Types.DeregisterEcsClusterRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deregisterEcsCluster(params: BoundInput<OpsWorks.Types.DeregisterEcsClusterRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deregisters a specified Amazon ECS cluster from a stack. For more information, see  Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html.
    */
@@ -151,7 +153,7 @@ declare class OpsWorks extends Service {
   /**
    * Deregisters a specified Elastic IP address. The address can then be registered by another stack. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  deregisterElasticIp(params: OpsWorks.Types.DeregisterElasticIpRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deregisterElasticIp(params: BoundInput<OpsWorks.Types.DeregisterElasticIpRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deregisters a specified Elastic IP address. The address can then be registered by another stack. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -159,7 +161,7 @@ declare class OpsWorks extends Service {
   /**
    * Deregister a registered Amazon EC2 or on-premises instance. This action removes the instance from the stack and returns it to your control. This action cannot be used with instances that were created with AWS OpsWorks Stacks.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  deregisterInstance(params: OpsWorks.Types.DeregisterInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deregisterInstance(params: BoundInput<OpsWorks.Types.DeregisterInstanceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deregister a registered Amazon EC2 or on-premises instance. This action removes the instance from the stack and returns it to your control. This action cannot be used with instances that were created with AWS OpsWorks Stacks.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -167,7 +169,7 @@ declare class OpsWorks extends Service {
   /**
    * Deregisters an Amazon RDS instance.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  deregisterRdsDbInstance(params: OpsWorks.Types.DeregisterRdsDbInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deregisterRdsDbInstance(params: BoundInput<OpsWorks.Types.DeregisterRdsDbInstanceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deregisters an Amazon RDS instance.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -175,7 +177,7 @@ declare class OpsWorks extends Service {
   /**
    * Deregisters an Amazon EBS volume. The volume can then be registered by another stack. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  deregisterVolume(params: OpsWorks.Types.DeregisterVolumeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deregisterVolume(params: BoundInput<OpsWorks.Types.DeregisterVolumeRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deregisters an Amazon EBS volume. The volume can then be registered by another stack. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -183,7 +185,7 @@ declare class OpsWorks extends Service {
   /**
    * Describes the available AWS OpsWorks Stacks agent versions. You must specify a stack ID or a configuration manager. DescribeAgentVersions returns a list of available agent versions for the specified stack or configuration manager.
    */
-  describeAgentVersions(params: OpsWorks.Types.DescribeAgentVersionsRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeAgentVersionsResult) => void): Request<OpsWorks.Types.DescribeAgentVersionsResult, AWSError>;
+  describeAgentVersions(params: BoundInput<OpsWorks.Types.DescribeAgentVersionsRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.DescribeAgentVersionsResult) => void): Request<OpsWorks.Types.DescribeAgentVersionsResult, AWSError>;
   /**
    * Describes the available AWS OpsWorks Stacks agent versions. You must specify a stack ID or a configuration manager. DescribeAgentVersions returns a list of available agent versions for the specified stack or configuration manager.
    */
@@ -191,7 +193,7 @@ declare class OpsWorks extends Service {
   /**
    * Requests a description of a specified set of apps.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  describeApps(params: OpsWorks.Types.DescribeAppsRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeAppsResult) => void): Request<OpsWorks.Types.DescribeAppsResult, AWSError>;
+  describeApps(params: BoundInput<OpsWorks.Types.DescribeAppsRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.DescribeAppsResult) => void): Request<OpsWorks.Types.DescribeAppsResult, AWSError>;
   /**
    * Requests a description of a specified set of apps.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -199,7 +201,7 @@ declare class OpsWorks extends Service {
   /**
    * Describes the results of specified commands.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  describeCommands(params: OpsWorks.Types.DescribeCommandsRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeCommandsResult) => void): Request<OpsWorks.Types.DescribeCommandsResult, AWSError>;
+  describeCommands(params: BoundInput<OpsWorks.Types.DescribeCommandsRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.DescribeCommandsResult) => void): Request<OpsWorks.Types.DescribeCommandsResult, AWSError>;
   /**
    * Describes the results of specified commands.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -207,7 +209,7 @@ declare class OpsWorks extends Service {
   /**
    * Requests a description of a specified set of deployments.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  describeDeployments(params: OpsWorks.Types.DescribeDeploymentsRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeDeploymentsResult) => void): Request<OpsWorks.Types.DescribeDeploymentsResult, AWSError>;
+  describeDeployments(params: BoundInput<OpsWorks.Types.DescribeDeploymentsRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.DescribeDeploymentsResult) => void): Request<OpsWorks.Types.DescribeDeploymentsResult, AWSError>;
   /**
    * Requests a description of a specified set of deployments.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -215,7 +217,7 @@ declare class OpsWorks extends Service {
   /**
    * Describes Amazon ECS clusters that are registered with a stack. If you specify only a stack ID, you can use the MaxResults and NextToken parameters to paginate the response. However, AWS OpsWorks Stacks currently supports only one cluster per layer, so the result set has a maximum of one element.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack or an attached policy that explicitly grants permission. For more information about user permissions, see Managing User Permissions. This call accepts only one resource-identifying parameter.
    */
-  describeEcsClusters(params: OpsWorks.Types.DescribeEcsClustersRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeEcsClustersResult) => void): Request<OpsWorks.Types.DescribeEcsClustersResult, AWSError>;
+  describeEcsClusters(params: BoundInput<OpsWorks.Types.DescribeEcsClustersRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.DescribeEcsClustersResult) => void): Request<OpsWorks.Types.DescribeEcsClustersResult, AWSError>;
   /**
    * Describes Amazon ECS clusters that are registered with a stack. If you specify only a stack ID, you can use the MaxResults and NextToken parameters to paginate the response. However, AWS OpsWorks Stacks currently supports only one cluster per layer, so the result set has a maximum of one element.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack or an attached policy that explicitly grants permission. For more information about user permissions, see Managing User Permissions. This call accepts only one resource-identifying parameter.
    */
@@ -223,7 +225,7 @@ declare class OpsWorks extends Service {
   /**
    * Describes Elastic IP addresses.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  describeElasticIps(params: OpsWorks.Types.DescribeElasticIpsRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeElasticIpsResult) => void): Request<OpsWorks.Types.DescribeElasticIpsResult, AWSError>;
+  describeElasticIps(params: BoundInput<OpsWorks.Types.DescribeElasticIpsRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.DescribeElasticIpsResult) => void): Request<OpsWorks.Types.DescribeElasticIpsResult, AWSError>;
   /**
    * Describes Elastic IP addresses.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -231,7 +233,7 @@ declare class OpsWorks extends Service {
   /**
    * Describes a stack's Elastic Load Balancing instances.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  describeElasticLoadBalancers(params: OpsWorks.Types.DescribeElasticLoadBalancersRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeElasticLoadBalancersResult) => void): Request<OpsWorks.Types.DescribeElasticLoadBalancersResult, AWSError>;
+  describeElasticLoadBalancers(params: BoundInput<OpsWorks.Types.DescribeElasticLoadBalancersRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.DescribeElasticLoadBalancersResult) => void): Request<OpsWorks.Types.DescribeElasticLoadBalancersResult, AWSError>;
   /**
    * Describes a stack's Elastic Load Balancing instances.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -239,7 +241,7 @@ declare class OpsWorks extends Service {
   /**
    * Requests a description of a set of instances.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  describeInstances(params: OpsWorks.Types.DescribeInstancesRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeInstancesResult) => void): Request<OpsWorks.Types.DescribeInstancesResult, AWSError>;
+  describeInstances(params: BoundInput<OpsWorks.Types.DescribeInstancesRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.DescribeInstancesResult) => void): Request<OpsWorks.Types.DescribeInstancesResult, AWSError>;
   /**
    * Requests a description of a set of instances.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -247,7 +249,7 @@ declare class OpsWorks extends Service {
   /**
    * Requests a description of one or more layers in a specified stack.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  describeLayers(params: OpsWorks.Types.DescribeLayersRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeLayersResult) => void): Request<OpsWorks.Types.DescribeLayersResult, AWSError>;
+  describeLayers(params: BoundInput<OpsWorks.Types.DescribeLayersRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.DescribeLayersResult) => void): Request<OpsWorks.Types.DescribeLayersResult, AWSError>;
   /**
    * Requests a description of one or more layers in a specified stack.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -255,7 +257,7 @@ declare class OpsWorks extends Service {
   /**
    * Describes load-based auto scaling configurations for specified layers.  You must specify at least one of the parameters.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  describeLoadBasedAutoScaling(params: OpsWorks.Types.DescribeLoadBasedAutoScalingRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeLoadBasedAutoScalingResult) => void): Request<OpsWorks.Types.DescribeLoadBasedAutoScalingResult, AWSError>;
+  describeLoadBasedAutoScaling(params: BoundInput<OpsWorks.Types.DescribeLoadBasedAutoScalingRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.DescribeLoadBasedAutoScalingResult) => void): Request<OpsWorks.Types.DescribeLoadBasedAutoScalingResult, AWSError>;
   /**
    * Describes load-based auto scaling configurations for specified layers.  You must specify at least one of the parameters.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -271,7 +273,7 @@ declare class OpsWorks extends Service {
   /**
    * Describes the permissions for a specified stack.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  describePermissions(params: OpsWorks.Types.DescribePermissionsRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribePermissionsResult) => void): Request<OpsWorks.Types.DescribePermissionsResult, AWSError>;
+  describePermissions(params: BoundInput<OpsWorks.Types.DescribePermissionsRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.DescribePermissionsResult) => void): Request<OpsWorks.Types.DescribePermissionsResult, AWSError>;
   /**
    * Describes the permissions for a specified stack.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -279,7 +281,7 @@ declare class OpsWorks extends Service {
   /**
    * Describe an instance's RAID arrays.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  describeRaidArrays(params: OpsWorks.Types.DescribeRaidArraysRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeRaidArraysResult) => void): Request<OpsWorks.Types.DescribeRaidArraysResult, AWSError>;
+  describeRaidArrays(params: BoundInput<OpsWorks.Types.DescribeRaidArraysRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.DescribeRaidArraysResult) => void): Request<OpsWorks.Types.DescribeRaidArraysResult, AWSError>;
   /**
    * Describe an instance's RAID arrays.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -287,7 +289,7 @@ declare class OpsWorks extends Service {
   /**
    * Describes Amazon RDS instances.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions. This call accepts only one resource-identifying parameter.
    */
-  describeRdsDbInstances(params: OpsWorks.Types.DescribeRdsDbInstancesRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeRdsDbInstancesResult) => void): Request<OpsWorks.Types.DescribeRdsDbInstancesResult, AWSError>;
+  describeRdsDbInstances(params: BoundInput<OpsWorks.Types.DescribeRdsDbInstancesRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.DescribeRdsDbInstancesResult) => void): Request<OpsWorks.Types.DescribeRdsDbInstancesResult, AWSError>;
   /**
    * Describes Amazon RDS instances.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions. This call accepts only one resource-identifying parameter.
    */
@@ -295,7 +297,7 @@ declare class OpsWorks extends Service {
   /**
    * Describes AWS OpsWorks Stacks service errors.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions. This call accepts only one resource-identifying parameter.
    */
-  describeServiceErrors(params: OpsWorks.Types.DescribeServiceErrorsRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeServiceErrorsResult) => void): Request<OpsWorks.Types.DescribeServiceErrorsResult, AWSError>;
+  describeServiceErrors(params: BoundInput<OpsWorks.Types.DescribeServiceErrorsRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.DescribeServiceErrorsResult) => void): Request<OpsWorks.Types.DescribeServiceErrorsResult, AWSError>;
   /**
    * Describes AWS OpsWorks Stacks service errors.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions. This call accepts only one resource-identifying parameter.
    */
@@ -303,7 +305,7 @@ declare class OpsWorks extends Service {
   /**
    * Requests a description of a stack's provisioning parameters.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  describeStackProvisioningParameters(params: OpsWorks.Types.DescribeStackProvisioningParametersRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeStackProvisioningParametersResult) => void): Request<OpsWorks.Types.DescribeStackProvisioningParametersResult, AWSError>;
+  describeStackProvisioningParameters(params: BoundInput<OpsWorks.Types.DescribeStackProvisioningParametersRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.DescribeStackProvisioningParametersResult) => void): Request<OpsWorks.Types.DescribeStackProvisioningParametersResult, AWSError>;
   /**
    * Requests a description of a stack's provisioning parameters.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -311,7 +313,7 @@ declare class OpsWorks extends Service {
   /**
    * Describes the number of layers and apps in a specified stack, and the number of instances in each state, such as running_setup or online.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  describeStackSummary(params: OpsWorks.Types.DescribeStackSummaryRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeStackSummaryResult) => void): Request<OpsWorks.Types.DescribeStackSummaryResult, AWSError>;
+  describeStackSummary(params: BoundInput<OpsWorks.Types.DescribeStackSummaryRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.DescribeStackSummaryResult) => void): Request<OpsWorks.Types.DescribeStackSummaryResult, AWSError>;
   /**
    * Describes the number of layers and apps in a specified stack, and the number of instances in each state, such as running_setup or online.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -319,7 +321,7 @@ declare class OpsWorks extends Service {
   /**
    * Requests a description of one or more stacks.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  describeStacks(params: OpsWorks.Types.DescribeStacksRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeStacksResult) => void): Request<OpsWorks.Types.DescribeStacksResult, AWSError>;
+  describeStacks(params: BoundInput<OpsWorks.Types.DescribeStacksRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.DescribeStacksResult) => void): Request<OpsWorks.Types.DescribeStacksResult, AWSError>;
   /**
    * Requests a description of one or more stacks.  Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -327,7 +329,7 @@ declare class OpsWorks extends Service {
   /**
    * Describes time-based auto scaling configurations for specified instances.  You must specify at least one of the parameters.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  describeTimeBasedAutoScaling(params: OpsWorks.Types.DescribeTimeBasedAutoScalingRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeTimeBasedAutoScalingResult) => void): Request<OpsWorks.Types.DescribeTimeBasedAutoScalingResult, AWSError>;
+  describeTimeBasedAutoScaling(params: BoundInput<OpsWorks.Types.DescribeTimeBasedAutoScalingRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.DescribeTimeBasedAutoScalingResult) => void): Request<OpsWorks.Types.DescribeTimeBasedAutoScalingResult, AWSError>;
   /**
    * Describes time-based auto scaling configurations for specified instances.  You must specify at least one of the parameters.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -335,7 +337,7 @@ declare class OpsWorks extends Service {
   /**
    * Describe specified users.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  describeUserProfiles(params: OpsWorks.Types.DescribeUserProfilesRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeUserProfilesResult) => void): Request<OpsWorks.Types.DescribeUserProfilesResult, AWSError>;
+  describeUserProfiles(params: BoundInput<OpsWorks.Types.DescribeUserProfilesRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.DescribeUserProfilesResult) => void): Request<OpsWorks.Types.DescribeUserProfilesResult, AWSError>;
   /**
    * Describe specified users.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -343,7 +345,7 @@ declare class OpsWorks extends Service {
   /**
    * Describes an instance's Amazon EBS volumes.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  describeVolumes(params: OpsWorks.Types.DescribeVolumesRequest, callback?: (err: AWSError, data: OpsWorks.Types.DescribeVolumesResult) => void): Request<OpsWorks.Types.DescribeVolumesResult, AWSError>;
+  describeVolumes(params: BoundInput<OpsWorks.Types.DescribeVolumesRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.DescribeVolumesResult) => void): Request<OpsWorks.Types.DescribeVolumesResult, AWSError>;
   /**
    * Describes an instance's Amazon EBS volumes.  This call accepts only one resource-identifying parameter.   Required Permissions: To use this action, an IAM user must have a Show, Deploy, or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -351,7 +353,7 @@ declare class OpsWorks extends Service {
   /**
    * Detaches a specified Elastic Load Balancing instance from its layer.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  detachElasticLoadBalancer(params: OpsWorks.Types.DetachElasticLoadBalancerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  detachElasticLoadBalancer(params: BoundInput<OpsWorks.Types.DetachElasticLoadBalancerRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Detaches a specified Elastic Load Balancing instance from its layer.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -359,7 +361,7 @@ declare class OpsWorks extends Service {
   /**
    * Disassociates an Elastic IP address from its instance. The address remains registered with the stack. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  disassociateElasticIp(params: OpsWorks.Types.DisassociateElasticIpRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  disassociateElasticIp(params: BoundInput<OpsWorks.Types.DisassociateElasticIpRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Disassociates an Elastic IP address from its instance. The address remains registered with the stack. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -367,7 +369,7 @@ declare class OpsWorks extends Service {
   /**
    * Gets a generated host name for the specified layer, based on the current host name theme.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  getHostnameSuggestion(params: OpsWorks.Types.GetHostnameSuggestionRequest, callback?: (err: AWSError, data: OpsWorks.Types.GetHostnameSuggestionResult) => void): Request<OpsWorks.Types.GetHostnameSuggestionResult, AWSError>;
+  getHostnameSuggestion(params: BoundInput<OpsWorks.Types.GetHostnameSuggestionRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.GetHostnameSuggestionResult) => void): Request<OpsWorks.Types.GetHostnameSuggestionResult, AWSError>;
   /**
    * Gets a generated host name for the specified layer, based on the current host name theme.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -375,7 +377,7 @@ declare class OpsWorks extends Service {
   /**
    *  This action can be used only with Windows stacks.  Grants RDP access to a Windows instance for a specified time period.
    */
-  grantAccess(params: OpsWorks.Types.GrantAccessRequest, callback?: (err: AWSError, data: OpsWorks.Types.GrantAccessResult) => void): Request<OpsWorks.Types.GrantAccessResult, AWSError>;
+  grantAccess(params: BoundInput<OpsWorks.Types.GrantAccessRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.GrantAccessResult) => void): Request<OpsWorks.Types.GrantAccessResult, AWSError>;
   /**
    *  This action can be used only with Windows stacks.  Grants RDP access to a Windows instance for a specified time period.
    */
@@ -383,7 +385,7 @@ declare class OpsWorks extends Service {
   /**
    * Returns a list of tags that are applied to the specified stack or layer.
    */
-  listTags(params: OpsWorks.Types.ListTagsRequest, callback?: (err: AWSError, data: OpsWorks.Types.ListTagsResult) => void): Request<OpsWorks.Types.ListTagsResult, AWSError>;
+  listTags(params: BoundInput<OpsWorks.Types.ListTagsRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.ListTagsResult) => void): Request<OpsWorks.Types.ListTagsResult, AWSError>;
   /**
    * Returns a list of tags that are applied to the specified stack or layer.
    */
@@ -391,7 +393,7 @@ declare class OpsWorks extends Service {
   /**
    * Reboots a specified instance. For more information, see Starting, Stopping, and Rebooting Instances.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  rebootInstance(params: OpsWorks.Types.RebootInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  rebootInstance(params: BoundInput<OpsWorks.Types.RebootInstanceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Reboots a specified instance. For more information, see Starting, Stopping, and Rebooting Instances.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -399,7 +401,7 @@ declare class OpsWorks extends Service {
   /**
    * Registers a specified Amazon ECS cluster with a stack. You can register only one cluster with a stack. A cluster can be registered with only one stack. For more information, see  Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see  Managing User Permissions.
    */
-  registerEcsCluster(params: OpsWorks.Types.RegisterEcsClusterRequest, callback?: (err: AWSError, data: OpsWorks.Types.RegisterEcsClusterResult) => void): Request<OpsWorks.Types.RegisterEcsClusterResult, AWSError>;
+  registerEcsCluster(params: BoundInput<OpsWorks.Types.RegisterEcsClusterRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.RegisterEcsClusterResult) => void): Request<OpsWorks.Types.RegisterEcsClusterResult, AWSError>;
   /**
    * Registers a specified Amazon ECS cluster with a stack. You can register only one cluster with a stack. A cluster can be registered with only one stack. For more information, see  Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see  Managing User Permissions.
    */
@@ -407,7 +409,7 @@ declare class OpsWorks extends Service {
   /**
    * Registers an Elastic IP address with a specified stack. An address can be registered with only one stack at a time. If the address is already registered, you must first deregister it by calling DeregisterElasticIp. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  registerElasticIp(params: OpsWorks.Types.RegisterElasticIpRequest, callback?: (err: AWSError, data: OpsWorks.Types.RegisterElasticIpResult) => void): Request<OpsWorks.Types.RegisterElasticIpResult, AWSError>;
+  registerElasticIp(params: BoundInput<OpsWorks.Types.RegisterElasticIpRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.RegisterElasticIpResult) => void): Request<OpsWorks.Types.RegisterElasticIpResult, AWSError>;
   /**
    * Registers an Elastic IP address with a specified stack. An address can be registered with only one stack at a time. If the address is already registered, you must first deregister it by calling DeregisterElasticIp. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -415,7 +417,7 @@ declare class OpsWorks extends Service {
   /**
    * Registers instances that were created outside of AWS OpsWorks Stacks with a specified stack.  We do not recommend using this action to register instances. The complete registration operation includes two tasks: installing the AWS OpsWorks Stacks agent on the instance, and registering the instance with the stack. RegisterInstance handles only the second step. You should instead use the AWS CLI register command, which performs the entire registration operation. For more information, see  Registering an Instance with an AWS OpsWorks Stacks Stack.  Registered instances have the same requirements as instances that are created by using the CreateInstance API. For example, registered instances must be running a supported Linux-based operating system, and they must have a supported instance type. For more information about requirements for instances that you want to register, see  Preparing the Instance.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  registerInstance(params: OpsWorks.Types.RegisterInstanceRequest, callback?: (err: AWSError, data: OpsWorks.Types.RegisterInstanceResult) => void): Request<OpsWorks.Types.RegisterInstanceResult, AWSError>;
+  registerInstance(params: BoundInput<OpsWorks.Types.RegisterInstanceRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.RegisterInstanceResult) => void): Request<OpsWorks.Types.RegisterInstanceResult, AWSError>;
   /**
    * Registers instances that were created outside of AWS OpsWorks Stacks with a specified stack.  We do not recommend using this action to register instances. The complete registration operation includes two tasks: installing the AWS OpsWorks Stacks agent on the instance, and registering the instance with the stack. RegisterInstance handles only the second step. You should instead use the AWS CLI register command, which performs the entire registration operation. For more information, see  Registering an Instance with an AWS OpsWorks Stacks Stack.  Registered instances have the same requirements as instances that are created by using the CreateInstance API. For example, registered instances must be running a supported Linux-based operating system, and they must have a supported instance type. For more information about requirements for instances that you want to register, see  Preparing the Instance.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -423,7 +425,7 @@ declare class OpsWorks extends Service {
   /**
    * Registers an Amazon RDS instance with a stack.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  registerRdsDbInstance(params: OpsWorks.Types.RegisterRdsDbInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  registerRdsDbInstance(params: BoundInput<OpsWorks.Types.RegisterRdsDbInstanceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Registers an Amazon RDS instance with a stack.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -431,7 +433,7 @@ declare class OpsWorks extends Service {
   /**
    * Registers an Amazon EBS volume with a specified stack. A volume can be registered with only one stack at a time. If the volume is already registered, you must first deregister it by calling DeregisterVolume. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  registerVolume(params: OpsWorks.Types.RegisterVolumeRequest, callback?: (err: AWSError, data: OpsWorks.Types.RegisterVolumeResult) => void): Request<OpsWorks.Types.RegisterVolumeResult, AWSError>;
+  registerVolume(params: BoundInput<OpsWorks.Types.RegisterVolumeRequest, keyof Params>, callback?: (err: AWSError, data: OpsWorks.Types.RegisterVolumeResult) => void): Request<OpsWorks.Types.RegisterVolumeResult, AWSError>;
   /**
    * Registers an Amazon EBS volume with a specified stack. A volume can be registered with only one stack at a time. If the volume is already registered, you must first deregister it by calling DeregisterVolume. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -439,7 +441,7 @@ declare class OpsWorks extends Service {
   /**
    * Specify the load-based auto scaling configuration for a specified layer. For more information, see Managing Load with Time-based and Load-based Instances.  To use load-based auto scaling, you must create a set of load-based auto scaling instances. Load-based auto scaling operates only on the instances from that set, so you must ensure that you have created enough instances to handle the maximum anticipated load.   Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  setLoadBasedAutoScaling(params: OpsWorks.Types.SetLoadBasedAutoScalingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  setLoadBasedAutoScaling(params: BoundInput<OpsWorks.Types.SetLoadBasedAutoScalingRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Specify the load-based auto scaling configuration for a specified layer. For more information, see Managing Load with Time-based and Load-based Instances.  To use load-based auto scaling, you must create a set of load-based auto scaling instances. Load-based auto scaling operates only on the instances from that set, so you must ensure that you have created enough instances to handle the maximum anticipated load.   Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -447,7 +449,7 @@ declare class OpsWorks extends Service {
   /**
    * Specifies a user's permissions. For more information, see Security and Permissions.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  setPermission(params: OpsWorks.Types.SetPermissionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  setPermission(params: BoundInput<OpsWorks.Types.SetPermissionRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Specifies a user's permissions. For more information, see Security and Permissions.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -455,7 +457,7 @@ declare class OpsWorks extends Service {
   /**
    * Specify the time-based auto scaling configuration for a specified instance. For more information, see Managing Load with Time-based and Load-based Instances.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  setTimeBasedAutoScaling(params: OpsWorks.Types.SetTimeBasedAutoScalingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  setTimeBasedAutoScaling(params: BoundInput<OpsWorks.Types.SetTimeBasedAutoScalingRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Specify the time-based auto scaling configuration for a specified instance. For more information, see Managing Load with Time-based and Load-based Instances.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -463,7 +465,7 @@ declare class OpsWorks extends Service {
   /**
    * Starts a specified instance. For more information, see Starting, Stopping, and Rebooting Instances.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  startInstance(params: OpsWorks.Types.StartInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  startInstance(params: BoundInput<OpsWorks.Types.StartInstanceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Starts a specified instance. For more information, see Starting, Stopping, and Rebooting Instances.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -471,7 +473,7 @@ declare class OpsWorks extends Service {
   /**
    * Starts a stack's instances.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  startStack(params: OpsWorks.Types.StartStackRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  startStack(params: BoundInput<OpsWorks.Types.StartStackRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Starts a stack's instances.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -479,7 +481,7 @@ declare class OpsWorks extends Service {
   /**
    * Stops a specified instance. When you stop a standard instance, the data disappears and must be reinstalled when you restart the instance. You can stop an Amazon EBS-backed instance without losing data. For more information, see Starting, Stopping, and Rebooting Instances.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  stopInstance(params: OpsWorks.Types.StopInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  stopInstance(params: BoundInput<OpsWorks.Types.StopInstanceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Stops a specified instance. When you stop a standard instance, the data disappears and must be reinstalled when you restart the instance. You can stop an Amazon EBS-backed instance without losing data. For more information, see Starting, Stopping, and Rebooting Instances.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -487,7 +489,7 @@ declare class OpsWorks extends Service {
   /**
    * Stops a specified stack.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  stopStack(params: OpsWorks.Types.StopStackRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  stopStack(params: BoundInput<OpsWorks.Types.StopStackRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Stops a specified stack.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -495,7 +497,7 @@ declare class OpsWorks extends Service {
   /**
    * Apply cost-allocation tags to a specified stack or layer in AWS OpsWorks Stacks. For more information about how tagging works, see Tags in the AWS OpsWorks User Guide.
    */
-  tagResource(params: OpsWorks.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  tagResource(params: BoundInput<OpsWorks.Types.TagResourceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Apply cost-allocation tags to a specified stack or layer in AWS OpsWorks Stacks. For more information about how tagging works, see Tags in the AWS OpsWorks User Guide.
    */
@@ -503,7 +505,7 @@ declare class OpsWorks extends Service {
   /**
    * Unassigns a registered instance from all layers that are using the instance. The instance remains in the stack as an unassigned instance, and can be assigned to another layer as needed. You cannot use this action with instances that were created with AWS OpsWorks Stacks.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  unassignInstance(params: OpsWorks.Types.UnassignInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  unassignInstance(params: BoundInput<OpsWorks.Types.UnassignInstanceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Unassigns a registered instance from all layers that are using the instance. The instance remains in the stack as an unassigned instance, and can be assigned to another layer as needed. You cannot use this action with instances that were created with AWS OpsWorks Stacks.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -511,7 +513,7 @@ declare class OpsWorks extends Service {
   /**
    * Unassigns an assigned Amazon EBS volume. The volume remains registered with the stack. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  unassignVolume(params: OpsWorks.Types.UnassignVolumeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  unassignVolume(params: BoundInput<OpsWorks.Types.UnassignVolumeRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Unassigns an assigned Amazon EBS volume. The volume remains registered with the stack. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -519,7 +521,7 @@ declare class OpsWorks extends Service {
   /**
    * Removes tags from a specified stack or layer.
    */
-  untagResource(params: OpsWorks.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  untagResource(params: BoundInput<OpsWorks.Types.UntagResourceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes tags from a specified stack or layer.
    */
@@ -527,7 +529,7 @@ declare class OpsWorks extends Service {
   /**
    * Updates a specified app.  Required Permissions: To use this action, an IAM user must have a Deploy or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  updateApp(params: OpsWorks.Types.UpdateAppRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateApp(params: BoundInput<OpsWorks.Types.UpdateAppRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates a specified app.  Required Permissions: To use this action, an IAM user must have a Deploy or Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -535,7 +537,7 @@ declare class OpsWorks extends Service {
   /**
    * Updates a registered Elastic IP address's name. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  updateElasticIp(params: OpsWorks.Types.UpdateElasticIpRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateElasticIp(params: BoundInput<OpsWorks.Types.UpdateElasticIpRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates a registered Elastic IP address's name. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -543,7 +545,7 @@ declare class OpsWorks extends Service {
   /**
    * Updates a specified instance.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  updateInstance(params: OpsWorks.Types.UpdateInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateInstance(params: BoundInput<OpsWorks.Types.UpdateInstanceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates a specified instance.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -551,7 +553,7 @@ declare class OpsWorks extends Service {
   /**
    * Updates a specified layer.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  updateLayer(params: OpsWorks.Types.UpdateLayerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateLayer(params: BoundInput<OpsWorks.Types.UpdateLayerRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates a specified layer.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -559,7 +561,7 @@ declare class OpsWorks extends Service {
   /**
    * Updates a user's SSH public key.  Required Permissions: To use this action, an IAM user must have self-management enabled or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  updateMyUserProfile(params: OpsWorks.Types.UpdateMyUserProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateMyUserProfile(params: BoundInput<OpsWorks.Types.UpdateMyUserProfileRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates a user's SSH public key.  Required Permissions: To use this action, an IAM user must have self-management enabled or an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -567,7 +569,7 @@ declare class OpsWorks extends Service {
   /**
    * Updates an Amazon RDS instance.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  updateRdsDbInstance(params: OpsWorks.Types.UpdateRdsDbInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateRdsDbInstance(params: BoundInput<OpsWorks.Types.UpdateRdsDbInstanceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates an Amazon RDS instance.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -575,7 +577,7 @@ declare class OpsWorks extends Service {
   /**
    * Updates a specified stack.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  updateStack(params: OpsWorks.Types.UpdateStackRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateStack(params: BoundInput<OpsWorks.Types.UpdateStackRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates a specified stack.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -583,7 +585,7 @@ declare class OpsWorks extends Service {
   /**
    * Updates a specified user profile.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
-  updateUserProfile(params: OpsWorks.Types.UpdateUserProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateUserProfile(params: BoundInput<OpsWorks.Types.UpdateUserProfileRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates a specified user profile.  Required Permissions: To use this action, an IAM user must have an attached policy that explicitly grants permissions. For more information about user permissions, see Managing User Permissions.
    */
@@ -591,7 +593,7 @@ declare class OpsWorks extends Service {
   /**
    * Updates an Amazon EBS volume's name or mount point. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
-  updateVolume(params: OpsWorks.Types.UpdateVolumeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateVolume(params: BoundInput<OpsWorks.Types.UpdateVolumeRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates an Amazon EBS volume's name or mount point. For more information, see Resource Management.  Required Permissions: To use this action, an IAM user must have a Manage permissions level for the stack, or an attached policy that explicitly grants permissions. For more information on user permissions, see Managing User Permissions.
    */
@@ -3579,7 +3581,8 @@ declare namespace OpsWorks {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AssignInstanceRequest & AssignVolumeRequest & AssociateElasticIpRequest & AttachElasticLoadBalancerRequest & CloneStackRequest & CreateAppRequest & CreateDeploymentRequest & CreateInstanceRequest & CreateLayerRequest & CreateStackRequest & CreateUserProfileRequest & DeleteAppRequest & DeleteInstanceRequest & DeleteLayerRequest & DeleteStackRequest & DeleteUserProfileRequest & DeregisterEcsClusterRequest & DeregisterElasticIpRequest & DeregisterInstanceRequest & DeregisterRdsDbInstanceRequest & DeregisterVolumeRequest & DescribeAgentVersionsRequest & DescribeAppsRequest & DescribeCommandsRequest & DescribeDeploymentsRequest & DescribeEcsClustersRequest & DescribeElasticIpsRequest & DescribeElasticLoadBalancersRequest & DescribeInstancesRequest & DescribeLayersRequest & DescribeLoadBasedAutoScalingRequest & DescribePermissionsRequest & DescribeRaidArraysRequest & DescribeRdsDbInstancesRequest & DescribeServiceErrorsRequest & DescribeStackProvisioningParametersRequest & DescribeStackSummaryRequest & DescribeStacksRequest & DescribeTimeBasedAutoScalingRequest & DescribeUserProfilesRequest & DescribeVolumesRequest & DetachElasticLoadBalancerRequest & DisassociateElasticIpRequest & GetHostnameSuggestionRequest & GrantAccessRequest & ListTagsRequest & RebootInstanceRequest & RegisterEcsClusterRequest & RegisterElasticIpRequest & RegisterInstanceRequest & RegisterRdsDbInstanceRequest & RegisterVolumeRequest & SetLoadBasedAutoScalingRequest & SetPermissionRequest & SetTimeBasedAutoScalingRequest & StartInstanceRequest & StartStackRequest & StopInstanceRequest & StopStackRequest & TagResourceRequest & UnassignInstanceRequest & UnassignVolumeRequest & UntagResourceRequest & UpdateAppRequest & UpdateElasticIpRequest & UpdateInstanceRequest & UpdateLayerRequest & UpdateMyUserProfileRequest & UpdateRdsDbInstanceRequest & UpdateStackRequest & UpdateUserProfileRequest & UpdateVolumeRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the OpsWorks client.
    */

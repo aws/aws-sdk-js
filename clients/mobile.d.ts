@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class Mobile extends Service {
+declare class Mobile<Params extends Mobile.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: Mobile.Types.ClientConfiguration)
-  config: Config & Mobile.Types.ClientConfiguration;
+  constructor(options?: Mobile.Types.ClientConfiguration<Params>)
+  config: Config & Mobile.Types.ClientConfiguration<Params>;
   /**
    *  Creates an AWS Mobile Hub project. 
    */
-  createProject(params: Mobile.Types.CreateProjectRequest, callback?: (err: AWSError, data: Mobile.Types.CreateProjectResult) => void): Request<Mobile.Types.CreateProjectResult, AWSError>;
+  createProject(params: BoundInput<Mobile.Types.CreateProjectRequest, keyof Params>, callback?: (err: AWSError, data: Mobile.Types.CreateProjectResult) => void): Request<Mobile.Types.CreateProjectResult, AWSError>;
   /**
    *  Creates an AWS Mobile Hub project. 
    */
@@ -22,7 +24,7 @@ declare class Mobile extends Service {
   /**
    *  Delets a project in AWS Mobile Hub. 
    */
-  deleteProject(params: Mobile.Types.DeleteProjectRequest, callback?: (err: AWSError, data: Mobile.Types.DeleteProjectResult) => void): Request<Mobile.Types.DeleteProjectResult, AWSError>;
+  deleteProject(params: BoundInput<Mobile.Types.DeleteProjectRequest, keyof Params>, callback?: (err: AWSError, data: Mobile.Types.DeleteProjectResult) => void): Request<Mobile.Types.DeleteProjectResult, AWSError>;
   /**
    *  Delets a project in AWS Mobile Hub. 
    */
@@ -30,7 +32,7 @@ declare class Mobile extends Service {
   /**
    *  Get the bundle details for the requested bundle id. 
    */
-  describeBundle(params: Mobile.Types.DescribeBundleRequest, callback?: (err: AWSError, data: Mobile.Types.DescribeBundleResult) => void): Request<Mobile.Types.DescribeBundleResult, AWSError>;
+  describeBundle(params: BoundInput<Mobile.Types.DescribeBundleRequest, keyof Params>, callback?: (err: AWSError, data: Mobile.Types.DescribeBundleResult) => void): Request<Mobile.Types.DescribeBundleResult, AWSError>;
   /**
    *  Get the bundle details for the requested bundle id. 
    */
@@ -38,7 +40,7 @@ declare class Mobile extends Service {
   /**
    *  Gets details about a project in AWS Mobile Hub. 
    */
-  describeProject(params: Mobile.Types.DescribeProjectRequest, callback?: (err: AWSError, data: Mobile.Types.DescribeProjectResult) => void): Request<Mobile.Types.DescribeProjectResult, AWSError>;
+  describeProject(params: BoundInput<Mobile.Types.DescribeProjectRequest, keyof Params>, callback?: (err: AWSError, data: Mobile.Types.DescribeProjectResult) => void): Request<Mobile.Types.DescribeProjectResult, AWSError>;
   /**
    *  Gets details about a project in AWS Mobile Hub. 
    */
@@ -46,7 +48,7 @@ declare class Mobile extends Service {
   /**
    *  Generates customized software development kit (SDK) and or tool packages used to integrate mobile web or mobile app clients with backend AWS resources. 
    */
-  exportBundle(params: Mobile.Types.ExportBundleRequest, callback?: (err: AWSError, data: Mobile.Types.ExportBundleResult) => void): Request<Mobile.Types.ExportBundleResult, AWSError>;
+  exportBundle(params: BoundInput<Mobile.Types.ExportBundleRequest, keyof Params>, callback?: (err: AWSError, data: Mobile.Types.ExportBundleResult) => void): Request<Mobile.Types.ExportBundleResult, AWSError>;
   /**
    *  Generates customized software development kit (SDK) and or tool packages used to integrate mobile web or mobile app clients with backend AWS resources. 
    */
@@ -54,7 +56,7 @@ declare class Mobile extends Service {
   /**
    *  Exports project configuration to a snapshot which can be downloaded and shared. Note that mobile app push credentials are encrypted in exported projects, so they can only be shared successfully within the same AWS account. 
    */
-  exportProject(params: Mobile.Types.ExportProjectRequest, callback?: (err: AWSError, data: Mobile.Types.ExportProjectResult) => void): Request<Mobile.Types.ExportProjectResult, AWSError>;
+  exportProject(params: BoundInput<Mobile.Types.ExportProjectRequest, keyof Params>, callback?: (err: AWSError, data: Mobile.Types.ExportProjectResult) => void): Request<Mobile.Types.ExportProjectResult, AWSError>;
   /**
    *  Exports project configuration to a snapshot which can be downloaded and shared. Note that mobile app push credentials are encrypted in exported projects, so they can only be shared successfully within the same AWS account. 
    */
@@ -62,7 +64,7 @@ declare class Mobile extends Service {
   /**
    *  List all available bundles. 
    */
-  listBundles(params: Mobile.Types.ListBundlesRequest, callback?: (err: AWSError, data: Mobile.Types.ListBundlesResult) => void): Request<Mobile.Types.ListBundlesResult, AWSError>;
+  listBundles(params: BoundInput<Mobile.Types.ListBundlesRequest, keyof Params>, callback?: (err: AWSError, data: Mobile.Types.ListBundlesResult) => void): Request<Mobile.Types.ListBundlesResult, AWSError>;
   /**
    *  List all available bundles. 
    */
@@ -70,7 +72,7 @@ declare class Mobile extends Service {
   /**
    *  Lists projects in AWS Mobile Hub. 
    */
-  listProjects(params: Mobile.Types.ListProjectsRequest, callback?: (err: AWSError, data: Mobile.Types.ListProjectsResult) => void): Request<Mobile.Types.ListProjectsResult, AWSError>;
+  listProjects(params: BoundInput<Mobile.Types.ListProjectsRequest, keyof Params>, callback?: (err: AWSError, data: Mobile.Types.ListProjectsResult) => void): Request<Mobile.Types.ListProjectsResult, AWSError>;
   /**
    *  Lists projects in AWS Mobile Hub. 
    */
@@ -78,7 +80,7 @@ declare class Mobile extends Service {
   /**
    *  Update an existing project. 
    */
-  updateProject(params: Mobile.Types.UpdateProjectRequest, callback?: (err: AWSError, data: Mobile.Types.UpdateProjectResult) => void): Request<Mobile.Types.UpdateProjectResult, AWSError>;
+  updateProject(params: BoundInput<Mobile.Types.UpdateProjectRequest, keyof Params>, callback?: (err: AWSError, data: Mobile.Types.UpdateProjectResult) => void): Request<Mobile.Types.UpdateProjectResult, AWSError>;
   /**
    *  Update an existing project. 
    */
@@ -324,7 +326,8 @@ declare namespace Mobile {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateProjectRequest & DeleteProjectRequest & DescribeBundleRequest & DescribeProjectRequest & ExportBundleRequest & ExportProjectRequest & ListBundlesRequest & ListProjectsRequest & UpdateProjectRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the Mobile client.
    */

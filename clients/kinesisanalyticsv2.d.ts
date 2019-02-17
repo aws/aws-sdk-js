@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class KinesisAnalyticsV2 extends Service {
+declare class KinesisAnalyticsV2<Params extends KinesisAnalyticsV2.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: KinesisAnalyticsV2.Types.ClientConfiguration)
-  config: Config & KinesisAnalyticsV2.Types.ClientConfiguration;
+  constructor(options?: KinesisAnalyticsV2.Types.ClientConfiguration<Params>)
+  config: Config & KinesisAnalyticsV2.Types.ClientConfiguration<Params>;
   /**
    * Adds an Amazon CloudWatch log stream to monitor application configuration errors.
    */
-  addApplicationCloudWatchLoggingOption(params: KinesisAnalyticsV2.Types.AddApplicationCloudWatchLoggingOptionRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationCloudWatchLoggingOptionResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationCloudWatchLoggingOptionResponse, AWSError>;
+  addApplicationCloudWatchLoggingOption(params: BoundInput<KinesisAnalyticsV2.Types.AddApplicationCloudWatchLoggingOptionRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationCloudWatchLoggingOptionResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationCloudWatchLoggingOptionResponse, AWSError>;
   /**
    * Adds an Amazon CloudWatch log stream to monitor application configuration errors.
    */
@@ -22,7 +24,7 @@ declare class KinesisAnalyticsV2 extends Service {
   /**
    *  Adds a streaming source to your SQL-based Amazon Kinesis Data Analytics application.  You can add a streaming source when you create an application, or you can use this operation to add a streaming source after you create an application. For more information, see CreateApplication. Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the DescribeApplication operation to find the current application version. 
    */
-  addApplicationInput(params: KinesisAnalyticsV2.Types.AddApplicationInputRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationInputResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationInputResponse, AWSError>;
+  addApplicationInput(params: BoundInput<KinesisAnalyticsV2.Types.AddApplicationInputRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationInputResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationInputResponse, AWSError>;
   /**
    *  Adds a streaming source to your SQL-based Amazon Kinesis Data Analytics application.  You can add a streaming source when you create an application, or you can use this operation to add a streaming source after you create an application. For more information, see CreateApplication. Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the DescribeApplication operation to find the current application version. 
    */
@@ -30,7 +32,7 @@ declare class KinesisAnalyticsV2 extends Service {
   /**
    * Adds an InputProcessingConfiguration to an SQL-based Kinesis Data Analytics application. An input processor pre-processes records on the input stream before the application's SQL code executes. Currently, the only input processor available is AWS Lambda.
    */
-  addApplicationInputProcessingConfiguration(params: KinesisAnalyticsV2.Types.AddApplicationInputProcessingConfigurationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationInputProcessingConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationInputProcessingConfigurationResponse, AWSError>;
+  addApplicationInputProcessingConfiguration(params: BoundInput<KinesisAnalyticsV2.Types.AddApplicationInputProcessingConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationInputProcessingConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationInputProcessingConfigurationResponse, AWSError>;
   /**
    * Adds an InputProcessingConfiguration to an SQL-based Kinesis Data Analytics application. An input processor pre-processes records on the input stream before the application's SQL code executes. Currently, the only input processor available is AWS Lambda.
    */
@@ -38,7 +40,7 @@ declare class KinesisAnalyticsV2 extends Service {
   /**
    * Adds an external destination to your SQL-based Amazon Kinesis Data Analytics application. If you want Kinesis Data Analytics to deliver data from an in-application stream within your application to an external destination (such as an Kinesis data stream, a Kinesis Data Firehose delivery stream, or an AWS Lambda function), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.  You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors.   Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the DescribeApplication operation to find the current application version.
    */
-  addApplicationOutput(params: KinesisAnalyticsV2.Types.AddApplicationOutputRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationOutputResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationOutputResponse, AWSError>;
+  addApplicationOutput(params: BoundInput<KinesisAnalyticsV2.Types.AddApplicationOutputRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationOutputResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationOutputResponse, AWSError>;
   /**
    * Adds an external destination to your SQL-based Amazon Kinesis Data Analytics application. If you want Kinesis Data Analytics to deliver data from an in-application stream within your application to an external destination (such as an Kinesis data stream, a Kinesis Data Firehose delivery stream, or an AWS Lambda function), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.  You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors.   Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the DescribeApplication operation to find the current application version.
    */
@@ -46,7 +48,7 @@ declare class KinesisAnalyticsV2 extends Service {
   /**
    * Adds a reference data source to an existing SQL-based Amazon Kinesis Data Analytics application. Kinesis Data Analytics reads reference data (that is, an Amazon S3 object) and creates an in-application table within your application. In the request, you provide the source (S3 bucket name and object key name), name of the in-application table to create, and the necessary mapping information that describes how data in an Amazon S3 object maps to columns in the resulting in-application table.
    */
-  addApplicationReferenceDataSource(params: KinesisAnalyticsV2.Types.AddApplicationReferenceDataSourceRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationReferenceDataSourceResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationReferenceDataSourceResponse, AWSError>;
+  addApplicationReferenceDataSource(params: BoundInput<KinesisAnalyticsV2.Types.AddApplicationReferenceDataSourceRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationReferenceDataSourceResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationReferenceDataSourceResponse, AWSError>;
   /**
    * Adds a reference data source to an existing SQL-based Amazon Kinesis Data Analytics application. Kinesis Data Analytics reads reference data (that is, an Amazon S3 object) and creates an in-application table within your application. In the request, you provide the source (S3 bucket name and object key name), name of the in-application table to create, and the necessary mapping information that describes how data in an Amazon S3 object maps to columns in the resulting in-application table.
    */
@@ -54,7 +56,7 @@ declare class KinesisAnalyticsV2 extends Service {
   /**
    * Creates an Amazon Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see Creating an Application.   SQL is not enabled for this private beta release. Using SQL parameters (such as SqlApplicationConfiguration) will result in an error. 
    */
-  createApplication(params: KinesisAnalyticsV2.Types.CreateApplicationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.CreateApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.CreateApplicationResponse, AWSError>;
+  createApplication(params: BoundInput<KinesisAnalyticsV2.Types.CreateApplicationRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.CreateApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.CreateApplicationResponse, AWSError>;
   /**
    * Creates an Amazon Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see Creating an Application.   SQL is not enabled for this private beta release. Using SQL parameters (such as SqlApplicationConfiguration) will result in an error. 
    */
@@ -62,7 +64,7 @@ declare class KinesisAnalyticsV2 extends Service {
   /**
    * Creates a snapshot of the application's state data.
    */
-  createApplicationSnapshot(params: KinesisAnalyticsV2.Types.CreateApplicationSnapshotRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.CreateApplicationSnapshotResponse) => void): Request<KinesisAnalyticsV2.Types.CreateApplicationSnapshotResponse, AWSError>;
+  createApplicationSnapshot(params: BoundInput<KinesisAnalyticsV2.Types.CreateApplicationSnapshotRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.CreateApplicationSnapshotResponse) => void): Request<KinesisAnalyticsV2.Types.CreateApplicationSnapshotResponse, AWSError>;
   /**
    * Creates a snapshot of the application's state data.
    */
@@ -70,7 +72,7 @@ declare class KinesisAnalyticsV2 extends Service {
   /**
    * Deletes the specified application. Kinesis Data Analytics halts application execution and deletes the application.
    */
-  deleteApplication(params: KinesisAnalyticsV2.Types.DeleteApplicationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationResponse, AWSError>;
+  deleteApplication(params: BoundInput<KinesisAnalyticsV2.Types.DeleteApplicationRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationResponse, AWSError>;
   /**
    * Deletes the specified application. Kinesis Data Analytics halts application execution and deletes the application.
    */
@@ -78,7 +80,7 @@ declare class KinesisAnalyticsV2 extends Service {
   /**
    * Deletes an Amazon CloudWatch log stream from an Amazon Kinesis Data Analytics application. 
    */
-  deleteApplicationCloudWatchLoggingOption(params: KinesisAnalyticsV2.Types.DeleteApplicationCloudWatchLoggingOptionRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationCloudWatchLoggingOptionResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationCloudWatchLoggingOptionResponse, AWSError>;
+  deleteApplicationCloudWatchLoggingOption(params: BoundInput<KinesisAnalyticsV2.Types.DeleteApplicationCloudWatchLoggingOptionRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationCloudWatchLoggingOptionResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationCloudWatchLoggingOptionResponse, AWSError>;
   /**
    * Deletes an Amazon CloudWatch log stream from an Amazon Kinesis Data Analytics application. 
    */
@@ -86,7 +88,7 @@ declare class KinesisAnalyticsV2 extends Service {
   /**
    * Deletes an InputProcessingConfiguration from an input.
    */
-  deleteApplicationInputProcessingConfiguration(params: KinesisAnalyticsV2.Types.DeleteApplicationInputProcessingConfigurationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationInputProcessingConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationInputProcessingConfigurationResponse, AWSError>;
+  deleteApplicationInputProcessingConfiguration(params: BoundInput<KinesisAnalyticsV2.Types.DeleteApplicationInputProcessingConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationInputProcessingConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationInputProcessingConfigurationResponse, AWSError>;
   /**
    * Deletes an InputProcessingConfiguration from an input.
    */
@@ -94,7 +96,7 @@ declare class KinesisAnalyticsV2 extends Service {
   /**
    * Deletes the output destination configuration from your SQL-based Amazon Kinesis Data Analytics application's configuration. Kinesis Data Analytics will no longer write data from the corresponding in-application stream to the external output destination.
    */
-  deleteApplicationOutput(params: KinesisAnalyticsV2.Types.DeleteApplicationOutputRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationOutputResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationOutputResponse, AWSError>;
+  deleteApplicationOutput(params: BoundInput<KinesisAnalyticsV2.Types.DeleteApplicationOutputRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationOutputResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationOutputResponse, AWSError>;
   /**
    * Deletes the output destination configuration from your SQL-based Amazon Kinesis Data Analytics application's configuration. Kinesis Data Analytics will no longer write data from the corresponding in-application stream to the external output destination.
    */
@@ -102,7 +104,7 @@ declare class KinesisAnalyticsV2 extends Service {
   /**
    * Deletes a reference data source configuration from the specified SQL-based Amazon Kinesis Data Analytics application's configuration. If the application is running, Kinesis Data Analytics immediately removes the in-application table that you created using the AddApplicationReferenceDataSource operation. 
    */
-  deleteApplicationReferenceDataSource(params: KinesisAnalyticsV2.Types.DeleteApplicationReferenceDataSourceRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationReferenceDataSourceResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationReferenceDataSourceResponse, AWSError>;
+  deleteApplicationReferenceDataSource(params: BoundInput<KinesisAnalyticsV2.Types.DeleteApplicationReferenceDataSourceRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationReferenceDataSourceResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationReferenceDataSourceResponse, AWSError>;
   /**
    * Deletes a reference data source configuration from the specified SQL-based Amazon Kinesis Data Analytics application's configuration. If the application is running, Kinesis Data Analytics immediately removes the in-application table that you created using the AddApplicationReferenceDataSource operation. 
    */
@@ -110,7 +112,7 @@ declare class KinesisAnalyticsV2 extends Service {
   /**
    * Deletes a snapshot of application state.
    */
-  deleteApplicationSnapshot(params: KinesisAnalyticsV2.Types.DeleteApplicationSnapshotRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationSnapshotResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationSnapshotResponse, AWSError>;
+  deleteApplicationSnapshot(params: BoundInput<KinesisAnalyticsV2.Types.DeleteApplicationSnapshotRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DeleteApplicationSnapshotResponse) => void): Request<KinesisAnalyticsV2.Types.DeleteApplicationSnapshotResponse, AWSError>;
   /**
    * Deletes a snapshot of application state.
    */
@@ -118,7 +120,7 @@ declare class KinesisAnalyticsV2 extends Service {
   /**
    * Returns information about a specific Amazon Kinesis Data Analytics application. If you want to retrieve a list of all applications in your account, use the ListApplications operation.
    */
-  describeApplication(params: KinesisAnalyticsV2.Types.DescribeApplicationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DescribeApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.DescribeApplicationResponse, AWSError>;
+  describeApplication(params: BoundInput<KinesisAnalyticsV2.Types.DescribeApplicationRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DescribeApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.DescribeApplicationResponse, AWSError>;
   /**
    * Returns information about a specific Amazon Kinesis Data Analytics application. If you want to retrieve a list of all applications in your account, use the ListApplications operation.
    */
@@ -126,7 +128,7 @@ declare class KinesisAnalyticsV2 extends Service {
   /**
    * Returns information about a snapshot of application state data.
    */
-  describeApplicationSnapshot(params: KinesisAnalyticsV2.Types.DescribeApplicationSnapshotRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DescribeApplicationSnapshotResponse) => void): Request<KinesisAnalyticsV2.Types.DescribeApplicationSnapshotResponse, AWSError>;
+  describeApplicationSnapshot(params: BoundInput<KinesisAnalyticsV2.Types.DescribeApplicationSnapshotRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DescribeApplicationSnapshotResponse) => void): Request<KinesisAnalyticsV2.Types.DescribeApplicationSnapshotResponse, AWSError>;
   /**
    * Returns information about a snapshot of application state data.
    */
@@ -134,7 +136,7 @@ declare class KinesisAnalyticsV2 extends Service {
   /**
    * Infers a schema for an SQL-based Amazon Kinesis Data Analytics application by evaluating sample records on the specified streaming source (Kinesis data stream or Kinesis Data Firehose delivery stream) or Amazon S3 object. In the response, the operation returns the inferred schema and also the sample records that the operation used to infer the schema.  You can use the inferred schema when configuring a streaming source for your application. When you create an application using the Kinesis Data Analytics console, the console uses this operation to infer a schema and show it in the console user interface. 
    */
-  discoverInputSchema(params: KinesisAnalyticsV2.Types.DiscoverInputSchemaRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DiscoverInputSchemaResponse) => void): Request<KinesisAnalyticsV2.Types.DiscoverInputSchemaResponse, AWSError>;
+  discoverInputSchema(params: BoundInput<KinesisAnalyticsV2.Types.DiscoverInputSchemaRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DiscoverInputSchemaResponse) => void): Request<KinesisAnalyticsV2.Types.DiscoverInputSchemaResponse, AWSError>;
   /**
    * Infers a schema for an SQL-based Amazon Kinesis Data Analytics application by evaluating sample records on the specified streaming source (Kinesis data stream or Kinesis Data Firehose delivery stream) or Amazon S3 object. In the response, the operation returns the inferred schema and also the sample records that the operation used to infer the schema.  You can use the inferred schema when configuring a streaming source for your application. When you create an application using the Kinesis Data Analytics console, the console uses this operation to infer a schema and show it in the console user interface. 
    */
@@ -142,7 +144,7 @@ declare class KinesisAnalyticsV2 extends Service {
   /**
    * Lists information about the current application snapshots.
    */
-  listApplicationSnapshots(params: KinesisAnalyticsV2.Types.ListApplicationSnapshotsRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListApplicationSnapshotsResponse) => void): Request<KinesisAnalyticsV2.Types.ListApplicationSnapshotsResponse, AWSError>;
+  listApplicationSnapshots(params: BoundInput<KinesisAnalyticsV2.Types.ListApplicationSnapshotsRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListApplicationSnapshotsResponse) => void): Request<KinesisAnalyticsV2.Types.ListApplicationSnapshotsResponse, AWSError>;
   /**
    * Lists information about the current application snapshots.
    */
@@ -150,7 +152,7 @@ declare class KinesisAnalyticsV2 extends Service {
   /**
    * Returns a list of Amazon Kinesis Data Analytics applications in your account. For each application, the response includes the application name, Amazon Resource Name (ARN), and status.  If you want detailed information about a specific application, use DescribeApplication.
    */
-  listApplications(params: KinesisAnalyticsV2.Types.ListApplicationsRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListApplicationsResponse) => void): Request<KinesisAnalyticsV2.Types.ListApplicationsResponse, AWSError>;
+  listApplications(params: BoundInput<KinesisAnalyticsV2.Types.ListApplicationsRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListApplicationsResponse) => void): Request<KinesisAnalyticsV2.Types.ListApplicationsResponse, AWSError>;
   /**
    * Returns a list of Amazon Kinesis Data Analytics applications in your account. For each application, the response includes the application name, Amazon Resource Name (ARN), and status.  If you want detailed information about a specific application, use DescribeApplication.
    */
@@ -158,7 +160,7 @@ declare class KinesisAnalyticsV2 extends Service {
   /**
    * Starts the specified Amazon Kinesis Data Analytics application. After creating an application, you must exclusively call this operation to start your application.  SQL is not enabled for this private beta. Using SQL parameters (such as RunConfiguration$SqlRunConfigurations) will result in an error. 
    */
-  startApplication(params: KinesisAnalyticsV2.Types.StartApplicationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.StartApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.StartApplicationResponse, AWSError>;
+  startApplication(params: BoundInput<KinesisAnalyticsV2.Types.StartApplicationRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.StartApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.StartApplicationResponse, AWSError>;
   /**
    * Starts the specified Amazon Kinesis Data Analytics application. After creating an application, you must exclusively call this operation to start your application.  SQL is not enabled for this private beta. Using SQL parameters (such as RunConfiguration$SqlRunConfigurations) will result in an error. 
    */
@@ -166,7 +168,7 @@ declare class KinesisAnalyticsV2 extends Service {
   /**
    * Stops the application from processing data. You can stop an application only if it is in the running state. You can use the DescribeApplication operation to find the application state. 
    */
-  stopApplication(params: KinesisAnalyticsV2.Types.StopApplicationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.StopApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.StopApplicationResponse, AWSError>;
+  stopApplication(params: BoundInput<KinesisAnalyticsV2.Types.StopApplicationRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.StopApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.StopApplicationResponse, AWSError>;
   /**
    * Stops the application from processing data. You can stop an application only if it is in the running state. You can use the DescribeApplication operation to find the application state. 
    */
@@ -174,7 +176,7 @@ declare class KinesisAnalyticsV2 extends Service {
   /**
    * Updates an existing Amazon Kinesis Data Analytics application. Using this operation, you can update application code, input configuration, and output configuration.  Kinesis Data Analytics updates the ApplicationVersionId each time you update your application.   SQL is not enabled for this private beta. Using SQL parameters (such as SqlApplicationConfigurationUpdate) will result in an error. 
    */
-  updateApplication(params: KinesisAnalyticsV2.Types.UpdateApplicationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UpdateApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.UpdateApplicationResponse, AWSError>;
+  updateApplication(params: BoundInput<KinesisAnalyticsV2.Types.UpdateApplicationRequest, keyof Params>, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UpdateApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.UpdateApplicationResponse, AWSError>;
   /**
    * Updates an existing Amazon Kinesis Data Analytics application. Using this operation, you can update application code, input configuration, and output configuration.  Kinesis Data Analytics updates the ApplicationVersionId each time you update your application.   SQL is not enabled for this private beta. Using SQL parameters (such as SqlApplicationConfigurationUpdate) will result in an error. 
    */
@@ -1900,7 +1902,8 @@ declare namespace KinesisAnalyticsV2 {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AddApplicationCloudWatchLoggingOptionRequest & AddApplicationInputRequest & AddApplicationInputProcessingConfigurationRequest & AddApplicationOutputRequest & AddApplicationReferenceDataSourceRequest & CreateApplicationRequest & CreateApplicationSnapshotRequest & DeleteApplicationRequest & DeleteApplicationCloudWatchLoggingOptionRequest & DeleteApplicationInputProcessingConfigurationRequest & DeleteApplicationOutputRequest & DeleteApplicationReferenceDataSourceRequest & DeleteApplicationSnapshotRequest & DescribeApplicationRequest & DescribeApplicationSnapshotRequest & DiscoverInputSchemaRequest & ListApplicationSnapshotsRequest & ListApplicationsRequest & StartApplicationRequest & StopApplicationRequest & UpdateApplicationRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the KinesisAnalyticsV2 client.
    */

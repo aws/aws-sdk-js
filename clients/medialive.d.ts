@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class MediaLive extends Service {
+declare class MediaLive<Params extends MediaLive.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: MediaLive.Types.ClientConfiguration)
-  config: Config & MediaLive.Types.ClientConfiguration;
+  constructor(options?: MediaLive.Types.ClientConfiguration<Params>)
+  config: Config & MediaLive.Types.ClientConfiguration<Params>;
   /**
    * Update a channel schedule
    */
-  batchUpdateSchedule(params: MediaLive.Types.BatchUpdateScheduleRequest, callback?: (err: AWSError, data: MediaLive.Types.BatchUpdateScheduleResponse) => void): Request<MediaLive.Types.BatchUpdateScheduleResponse, AWSError>;
+  batchUpdateSchedule(params: BoundInput<MediaLive.Types.BatchUpdateScheduleRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.BatchUpdateScheduleResponse) => void): Request<MediaLive.Types.BatchUpdateScheduleResponse, AWSError>;
   /**
    * Update a channel schedule
    */
@@ -22,7 +24,7 @@ declare class MediaLive extends Service {
   /**
    * Creates a new channel
    */
-  createChannel(params: MediaLive.Types.CreateChannelRequest, callback?: (err: AWSError, data: MediaLive.Types.CreateChannelResponse) => void): Request<MediaLive.Types.CreateChannelResponse, AWSError>;
+  createChannel(params: BoundInput<MediaLive.Types.CreateChannelRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.CreateChannelResponse) => void): Request<MediaLive.Types.CreateChannelResponse, AWSError>;
   /**
    * Creates a new channel
    */
@@ -30,7 +32,7 @@ declare class MediaLive extends Service {
   /**
    * Create an input
    */
-  createInput(params: MediaLive.Types.CreateInputRequest, callback?: (err: AWSError, data: MediaLive.Types.CreateInputResponse) => void): Request<MediaLive.Types.CreateInputResponse, AWSError>;
+  createInput(params: BoundInput<MediaLive.Types.CreateInputRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.CreateInputResponse) => void): Request<MediaLive.Types.CreateInputResponse, AWSError>;
   /**
    * Create an input
    */
@@ -38,7 +40,7 @@ declare class MediaLive extends Service {
   /**
    * Creates a Input Security Group
    */
-  createInputSecurityGroup(params: MediaLive.Types.CreateInputSecurityGroupRequest, callback?: (err: AWSError, data: MediaLive.Types.CreateInputSecurityGroupResponse) => void): Request<MediaLive.Types.CreateInputSecurityGroupResponse, AWSError>;
+  createInputSecurityGroup(params: BoundInput<MediaLive.Types.CreateInputSecurityGroupRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.CreateInputSecurityGroupResponse) => void): Request<MediaLive.Types.CreateInputSecurityGroupResponse, AWSError>;
   /**
    * Creates a Input Security Group
    */
@@ -46,7 +48,7 @@ declare class MediaLive extends Service {
   /**
    * Create tags for a resource
    */
-  createTags(params: MediaLive.Types.CreateTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  createTags(params: BoundInput<MediaLive.Types.CreateTagsRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Create tags for a resource
    */
@@ -54,7 +56,7 @@ declare class MediaLive extends Service {
   /**
    * Starts deletion of channel. The associated outputs are also deleted.
    */
-  deleteChannel(params: MediaLive.Types.DeleteChannelRequest, callback?: (err: AWSError, data: MediaLive.Types.DeleteChannelResponse) => void): Request<MediaLive.Types.DeleteChannelResponse, AWSError>;
+  deleteChannel(params: BoundInput<MediaLive.Types.DeleteChannelRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.DeleteChannelResponse) => void): Request<MediaLive.Types.DeleteChannelResponse, AWSError>;
   /**
    * Starts deletion of channel. The associated outputs are also deleted.
    */
@@ -62,7 +64,7 @@ declare class MediaLive extends Service {
   /**
    * Deletes the input end point
    */
-  deleteInput(params: MediaLive.Types.DeleteInputRequest, callback?: (err: AWSError, data: MediaLive.Types.DeleteInputResponse) => void): Request<MediaLive.Types.DeleteInputResponse, AWSError>;
+  deleteInput(params: BoundInput<MediaLive.Types.DeleteInputRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.DeleteInputResponse) => void): Request<MediaLive.Types.DeleteInputResponse, AWSError>;
   /**
    * Deletes the input end point
    */
@@ -70,7 +72,7 @@ declare class MediaLive extends Service {
   /**
    * Deletes an Input Security Group
    */
-  deleteInputSecurityGroup(params: MediaLive.Types.DeleteInputSecurityGroupRequest, callback?: (err: AWSError, data: MediaLive.Types.DeleteInputSecurityGroupResponse) => void): Request<MediaLive.Types.DeleteInputSecurityGroupResponse, AWSError>;
+  deleteInputSecurityGroup(params: BoundInput<MediaLive.Types.DeleteInputSecurityGroupRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.DeleteInputSecurityGroupResponse) => void): Request<MediaLive.Types.DeleteInputSecurityGroupResponse, AWSError>;
   /**
    * Deletes an Input Security Group
    */
@@ -78,7 +80,7 @@ declare class MediaLive extends Service {
   /**
    * Delete an expired reservation.
    */
-  deleteReservation(params: MediaLive.Types.DeleteReservationRequest, callback?: (err: AWSError, data: MediaLive.Types.DeleteReservationResponse) => void): Request<MediaLive.Types.DeleteReservationResponse, AWSError>;
+  deleteReservation(params: BoundInput<MediaLive.Types.DeleteReservationRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.DeleteReservationResponse) => void): Request<MediaLive.Types.DeleteReservationResponse, AWSError>;
   /**
    * Delete an expired reservation.
    */
@@ -86,7 +88,7 @@ declare class MediaLive extends Service {
   /**
    * Removes tags for a resource
    */
-  deleteTags(params: MediaLive.Types.DeleteTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteTags(params: BoundInput<MediaLive.Types.DeleteTagsRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes tags for a resource
    */
@@ -94,7 +96,7 @@ declare class MediaLive extends Service {
   /**
    * Gets details about a channel
    */
-  describeChannel(params: MediaLive.Types.DescribeChannelRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeChannelResponse) => void): Request<MediaLive.Types.DescribeChannelResponse, AWSError>;
+  describeChannel(params: BoundInput<MediaLive.Types.DescribeChannelRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.DescribeChannelResponse) => void): Request<MediaLive.Types.DescribeChannelResponse, AWSError>;
   /**
    * Gets details about a channel
    */
@@ -102,7 +104,7 @@ declare class MediaLive extends Service {
   /**
    * Produces details about an input
    */
-  describeInput(params: MediaLive.Types.DescribeInputRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeInputResponse) => void): Request<MediaLive.Types.DescribeInputResponse, AWSError>;
+  describeInput(params: BoundInput<MediaLive.Types.DescribeInputRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.DescribeInputResponse) => void): Request<MediaLive.Types.DescribeInputResponse, AWSError>;
   /**
    * Produces details about an input
    */
@@ -110,7 +112,7 @@ declare class MediaLive extends Service {
   /**
    * Produces a summary of an Input Security Group
    */
-  describeInputSecurityGroup(params: MediaLive.Types.DescribeInputSecurityGroupRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeInputSecurityGroupResponse) => void): Request<MediaLive.Types.DescribeInputSecurityGroupResponse, AWSError>;
+  describeInputSecurityGroup(params: BoundInput<MediaLive.Types.DescribeInputSecurityGroupRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.DescribeInputSecurityGroupResponse) => void): Request<MediaLive.Types.DescribeInputSecurityGroupResponse, AWSError>;
   /**
    * Produces a summary of an Input Security Group
    */
@@ -118,7 +120,7 @@ declare class MediaLive extends Service {
   /**
    * Get details for an offering.
    */
-  describeOffering(params: MediaLive.Types.DescribeOfferingRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeOfferingResponse) => void): Request<MediaLive.Types.DescribeOfferingResponse, AWSError>;
+  describeOffering(params: BoundInput<MediaLive.Types.DescribeOfferingRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.DescribeOfferingResponse) => void): Request<MediaLive.Types.DescribeOfferingResponse, AWSError>;
   /**
    * Get details for an offering.
    */
@@ -126,7 +128,7 @@ declare class MediaLive extends Service {
   /**
    * Get details for a reservation.
    */
-  describeReservation(params: MediaLive.Types.DescribeReservationRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeReservationResponse) => void): Request<MediaLive.Types.DescribeReservationResponse, AWSError>;
+  describeReservation(params: BoundInput<MediaLive.Types.DescribeReservationRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.DescribeReservationResponse) => void): Request<MediaLive.Types.DescribeReservationResponse, AWSError>;
   /**
    * Get details for a reservation.
    */
@@ -134,7 +136,7 @@ declare class MediaLive extends Service {
   /**
    * Get a channel schedule
    */
-  describeSchedule(params: MediaLive.Types.DescribeScheduleRequest, callback?: (err: AWSError, data: MediaLive.Types.DescribeScheduleResponse) => void): Request<MediaLive.Types.DescribeScheduleResponse, AWSError>;
+  describeSchedule(params: BoundInput<MediaLive.Types.DescribeScheduleRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.DescribeScheduleResponse) => void): Request<MediaLive.Types.DescribeScheduleResponse, AWSError>;
   /**
    * Get a channel schedule
    */
@@ -142,7 +144,7 @@ declare class MediaLive extends Service {
   /**
    * Produces list of channels that have been created
    */
-  listChannels(params: MediaLive.Types.ListChannelsRequest, callback?: (err: AWSError, data: MediaLive.Types.ListChannelsResponse) => void): Request<MediaLive.Types.ListChannelsResponse, AWSError>;
+  listChannels(params: BoundInput<MediaLive.Types.ListChannelsRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.ListChannelsResponse) => void): Request<MediaLive.Types.ListChannelsResponse, AWSError>;
   /**
    * Produces list of channels that have been created
    */
@@ -150,7 +152,7 @@ declare class MediaLive extends Service {
   /**
    * Produces a list of Input Security Groups for an account
    */
-  listInputSecurityGroups(params: MediaLive.Types.ListInputSecurityGroupsRequest, callback?: (err: AWSError, data: MediaLive.Types.ListInputSecurityGroupsResponse) => void): Request<MediaLive.Types.ListInputSecurityGroupsResponse, AWSError>;
+  listInputSecurityGroups(params: BoundInput<MediaLive.Types.ListInputSecurityGroupsRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.ListInputSecurityGroupsResponse) => void): Request<MediaLive.Types.ListInputSecurityGroupsResponse, AWSError>;
   /**
    * Produces a list of Input Security Groups for an account
    */
@@ -158,7 +160,7 @@ declare class MediaLive extends Service {
   /**
    * Produces list of inputs that have been created
    */
-  listInputs(params: MediaLive.Types.ListInputsRequest, callback?: (err: AWSError, data: MediaLive.Types.ListInputsResponse) => void): Request<MediaLive.Types.ListInputsResponse, AWSError>;
+  listInputs(params: BoundInput<MediaLive.Types.ListInputsRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.ListInputsResponse) => void): Request<MediaLive.Types.ListInputsResponse, AWSError>;
   /**
    * Produces list of inputs that have been created
    */
@@ -166,7 +168,7 @@ declare class MediaLive extends Service {
   /**
    * List offerings available for purchase.
    */
-  listOfferings(params: MediaLive.Types.ListOfferingsRequest, callback?: (err: AWSError, data: MediaLive.Types.ListOfferingsResponse) => void): Request<MediaLive.Types.ListOfferingsResponse, AWSError>;
+  listOfferings(params: BoundInput<MediaLive.Types.ListOfferingsRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.ListOfferingsResponse) => void): Request<MediaLive.Types.ListOfferingsResponse, AWSError>;
   /**
    * List offerings available for purchase.
    */
@@ -174,7 +176,7 @@ declare class MediaLive extends Service {
   /**
    * List purchased reservations.
    */
-  listReservations(params: MediaLive.Types.ListReservationsRequest, callback?: (err: AWSError, data: MediaLive.Types.ListReservationsResponse) => void): Request<MediaLive.Types.ListReservationsResponse, AWSError>;
+  listReservations(params: BoundInput<MediaLive.Types.ListReservationsRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.ListReservationsResponse) => void): Request<MediaLive.Types.ListReservationsResponse, AWSError>;
   /**
    * List purchased reservations.
    */
@@ -182,7 +184,7 @@ declare class MediaLive extends Service {
   /**
    * Produces list of tags that have been created for a resource
    */
-  listTagsForResource(params: MediaLive.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaLive.Types.ListTagsForResourceResponse) => void): Request<MediaLive.Types.ListTagsForResourceResponse, AWSError>;
+  listTagsForResource(params: BoundInput<MediaLive.Types.ListTagsForResourceRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.ListTagsForResourceResponse) => void): Request<MediaLive.Types.ListTagsForResourceResponse, AWSError>;
   /**
    * Produces list of tags that have been created for a resource
    */
@@ -190,7 +192,7 @@ declare class MediaLive extends Service {
   /**
    * Purchase an offering and create a reservation.
    */
-  purchaseOffering(params: MediaLive.Types.PurchaseOfferingRequest, callback?: (err: AWSError, data: MediaLive.Types.PurchaseOfferingResponse) => void): Request<MediaLive.Types.PurchaseOfferingResponse, AWSError>;
+  purchaseOffering(params: BoundInput<MediaLive.Types.PurchaseOfferingRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.PurchaseOfferingResponse) => void): Request<MediaLive.Types.PurchaseOfferingResponse, AWSError>;
   /**
    * Purchase an offering and create a reservation.
    */
@@ -198,7 +200,7 @@ declare class MediaLive extends Service {
   /**
    * Starts an existing channel
    */
-  startChannel(params: MediaLive.Types.StartChannelRequest, callback?: (err: AWSError, data: MediaLive.Types.StartChannelResponse) => void): Request<MediaLive.Types.StartChannelResponse, AWSError>;
+  startChannel(params: BoundInput<MediaLive.Types.StartChannelRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.StartChannelResponse) => void): Request<MediaLive.Types.StartChannelResponse, AWSError>;
   /**
    * Starts an existing channel
    */
@@ -206,7 +208,7 @@ declare class MediaLive extends Service {
   /**
    * Stops a running channel
    */
-  stopChannel(params: MediaLive.Types.StopChannelRequest, callback?: (err: AWSError, data: MediaLive.Types.StopChannelResponse) => void): Request<MediaLive.Types.StopChannelResponse, AWSError>;
+  stopChannel(params: BoundInput<MediaLive.Types.StopChannelRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.StopChannelResponse) => void): Request<MediaLive.Types.StopChannelResponse, AWSError>;
   /**
    * Stops a running channel
    */
@@ -214,7 +216,7 @@ declare class MediaLive extends Service {
   /**
    * Updates a channel.
    */
-  updateChannel(params: MediaLive.Types.UpdateChannelRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateChannelResponse) => void): Request<MediaLive.Types.UpdateChannelResponse, AWSError>;
+  updateChannel(params: BoundInput<MediaLive.Types.UpdateChannelRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.UpdateChannelResponse) => void): Request<MediaLive.Types.UpdateChannelResponse, AWSError>;
   /**
    * Updates a channel.
    */
@@ -222,7 +224,7 @@ declare class MediaLive extends Service {
   /**
    * Updates an input.
    */
-  updateInput(params: MediaLive.Types.UpdateInputRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateInputResponse) => void): Request<MediaLive.Types.UpdateInputResponse, AWSError>;
+  updateInput(params: BoundInput<MediaLive.Types.UpdateInputRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.UpdateInputResponse) => void): Request<MediaLive.Types.UpdateInputResponse, AWSError>;
   /**
    * Updates an input.
    */
@@ -230,7 +232,7 @@ declare class MediaLive extends Service {
   /**
    * Update an Input Security Group's Whilelists.
    */
-  updateInputSecurityGroup(params: MediaLive.Types.UpdateInputSecurityGroupRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateInputSecurityGroupResponse) => void): Request<MediaLive.Types.UpdateInputSecurityGroupResponse, AWSError>;
+  updateInputSecurityGroup(params: BoundInput<MediaLive.Types.UpdateInputSecurityGroupRequest, keyof Params>, callback?: (err: AWSError, data: MediaLive.Types.UpdateInputSecurityGroupResponse) => void): Request<MediaLive.Types.UpdateInputSecurityGroupResponse, AWSError>;
   /**
    * Update an Input Security Group's Whilelists.
    */
@@ -4090,7 +4092,8 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<BatchUpdateScheduleRequest & CreateChannelRequest & CreateInputRequest & CreateInputSecurityGroupRequest & CreateTagsRequest & DeleteChannelRequest & DeleteInputRequest & DeleteInputSecurityGroupRequest & DeleteReservationRequest & DeleteTagsRequest & DescribeChannelRequest & DescribeInputRequest & DescribeInputSecurityGroupRequest & DescribeOfferingRequest & DescribeReservationRequest & DescribeScheduleRequest & ListChannelsRequest & ListInputSecurityGroupsRequest & ListInputsRequest & ListOfferingsRequest & ListReservationsRequest & ListTagsForResourceRequest & PurchaseOfferingRequest & StartChannelRequest & StopChannelRequest & UpdateChannelRequest & UpdateInputRequest & UpdateInputSecurityGroupRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the MediaLive client.
    */

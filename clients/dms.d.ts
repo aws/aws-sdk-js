@@ -4,18 +4,20 @@ import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class DMS extends Service {
+declare class DMS<Params extends DMS.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: DMS.Types.ClientConfiguration)
-  config: Config & DMS.Types.ClientConfiguration;
+  constructor(options?: DMS.Types.ClientConfiguration<Params>)
+  config: Config & DMS.Types.ClientConfiguration<Params>;
   /**
    * Adds metadata tags to an AWS DMS resource, including replication instance, endpoint, security group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with DMS resources, or used in a Condition statement in an IAM policy for DMS.
    */
-  addTagsToResource(params: DMS.Types.AddTagsToResourceMessage, callback?: (err: AWSError, data: DMS.Types.AddTagsToResourceResponse) => void): Request<DMS.Types.AddTagsToResourceResponse, AWSError>;
+  addTagsToResource(params: BoundInput<DMS.Types.AddTagsToResourceMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.AddTagsToResourceResponse) => void): Request<DMS.Types.AddTagsToResourceResponse, AWSError>;
   /**
    * Adds metadata tags to an AWS DMS resource, including replication instance, endpoint, security group, and migration task. These tags can also be used with cost allocation reporting to track cost associated with DMS resources, or used in a Condition statement in an IAM policy for DMS.
    */
@@ -23,7 +25,7 @@ declare class DMS extends Service {
   /**
    * Creates an endpoint using the provided settings.
    */
-  createEndpoint(params: DMS.Types.CreateEndpointMessage, callback?: (err: AWSError, data: DMS.Types.CreateEndpointResponse) => void): Request<DMS.Types.CreateEndpointResponse, AWSError>;
+  createEndpoint(params: BoundInput<DMS.Types.CreateEndpointMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.CreateEndpointResponse) => void): Request<DMS.Types.CreateEndpointResponse, AWSError>;
   /**
    * Creates an endpoint using the provided settings.
    */
@@ -31,7 +33,7 @@ declare class DMS extends Service {
   /**
    *  Creates an AWS DMS event notification subscription.  You can specify the type of source (SourceType) you want to be notified of, provide a list of AWS DMS source IDs (SourceIds) that triggers the events, and provide a list of event categories (EventCategories) for events you want to be notified of. If you specify both the SourceType and SourceIds, such as SourceType = replication-instance and SourceIdentifier = my-replinstance, you will be notified of all the replication instance events for the specified source. If you specify a SourceType but don't specify a SourceIdentifier, you receive notice of the events for that source type for all your AWS DMS sources. If you don't specify either SourceType nor SourceIdentifier, you will be notified of events generated from all AWS DMS sources belonging to your customer account. For more information about AWS DMS events, see Working with Events and Notifications in the AWS Database Migration Service User Guide. 
    */
-  createEventSubscription(params: DMS.Types.CreateEventSubscriptionMessage, callback?: (err: AWSError, data: DMS.Types.CreateEventSubscriptionResponse) => void): Request<DMS.Types.CreateEventSubscriptionResponse, AWSError>;
+  createEventSubscription(params: BoundInput<DMS.Types.CreateEventSubscriptionMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.CreateEventSubscriptionResponse) => void): Request<DMS.Types.CreateEventSubscriptionResponse, AWSError>;
   /**
    *  Creates an AWS DMS event notification subscription.  You can specify the type of source (SourceType) you want to be notified of, provide a list of AWS DMS source IDs (SourceIds) that triggers the events, and provide a list of event categories (EventCategories) for events you want to be notified of. If you specify both the SourceType and SourceIds, such as SourceType = replication-instance and SourceIdentifier = my-replinstance, you will be notified of all the replication instance events for the specified source. If you specify a SourceType but don't specify a SourceIdentifier, you receive notice of the events for that source type for all your AWS DMS sources. If you don't specify either SourceType nor SourceIdentifier, you will be notified of events generated from all AWS DMS sources belonging to your customer account. For more information about AWS DMS events, see Working with Events and Notifications in the AWS Database Migration Service User Guide. 
    */
@@ -39,7 +41,7 @@ declare class DMS extends Service {
   /**
    * Creates the replication instance using the specified parameters.
    */
-  createReplicationInstance(params: DMS.Types.CreateReplicationInstanceMessage, callback?: (err: AWSError, data: DMS.Types.CreateReplicationInstanceResponse) => void): Request<DMS.Types.CreateReplicationInstanceResponse, AWSError>;
+  createReplicationInstance(params: BoundInput<DMS.Types.CreateReplicationInstanceMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.CreateReplicationInstanceResponse) => void): Request<DMS.Types.CreateReplicationInstanceResponse, AWSError>;
   /**
    * Creates the replication instance using the specified parameters.
    */
@@ -47,7 +49,7 @@ declare class DMS extends Service {
   /**
    * Creates a replication subnet group given a list of the subnet IDs in a VPC.
    */
-  createReplicationSubnetGroup(params: DMS.Types.CreateReplicationSubnetGroupMessage, callback?: (err: AWSError, data: DMS.Types.CreateReplicationSubnetGroupResponse) => void): Request<DMS.Types.CreateReplicationSubnetGroupResponse, AWSError>;
+  createReplicationSubnetGroup(params: BoundInput<DMS.Types.CreateReplicationSubnetGroupMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.CreateReplicationSubnetGroupResponse) => void): Request<DMS.Types.CreateReplicationSubnetGroupResponse, AWSError>;
   /**
    * Creates a replication subnet group given a list of the subnet IDs in a VPC.
    */
@@ -55,7 +57,7 @@ declare class DMS extends Service {
   /**
    * Creates a replication task using the specified parameters.
    */
-  createReplicationTask(params: DMS.Types.CreateReplicationTaskMessage, callback?: (err: AWSError, data: DMS.Types.CreateReplicationTaskResponse) => void): Request<DMS.Types.CreateReplicationTaskResponse, AWSError>;
+  createReplicationTask(params: BoundInput<DMS.Types.CreateReplicationTaskMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.CreateReplicationTaskResponse) => void): Request<DMS.Types.CreateReplicationTaskResponse, AWSError>;
   /**
    * Creates a replication task using the specified parameters.
    */
@@ -63,7 +65,7 @@ declare class DMS extends Service {
   /**
    * Deletes the specified certificate. 
    */
-  deleteCertificate(params: DMS.Types.DeleteCertificateMessage, callback?: (err: AWSError, data: DMS.Types.DeleteCertificateResponse) => void): Request<DMS.Types.DeleteCertificateResponse, AWSError>;
+  deleteCertificate(params: BoundInput<DMS.Types.DeleteCertificateMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DeleteCertificateResponse) => void): Request<DMS.Types.DeleteCertificateResponse, AWSError>;
   /**
    * Deletes the specified certificate. 
    */
@@ -71,7 +73,7 @@ declare class DMS extends Service {
   /**
    * Deletes the specified endpoint.  All tasks associated with the endpoint must be deleted before you can delete the endpoint.  
    */
-  deleteEndpoint(params: DMS.Types.DeleteEndpointMessage, callback?: (err: AWSError, data: DMS.Types.DeleteEndpointResponse) => void): Request<DMS.Types.DeleteEndpointResponse, AWSError>;
+  deleteEndpoint(params: BoundInput<DMS.Types.DeleteEndpointMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DeleteEndpointResponse) => void): Request<DMS.Types.DeleteEndpointResponse, AWSError>;
   /**
    * Deletes the specified endpoint.  All tasks associated with the endpoint must be deleted before you can delete the endpoint.  
    */
@@ -79,7 +81,7 @@ declare class DMS extends Service {
   /**
    *  Deletes an AWS DMS event subscription. 
    */
-  deleteEventSubscription(params: DMS.Types.DeleteEventSubscriptionMessage, callback?: (err: AWSError, data: DMS.Types.DeleteEventSubscriptionResponse) => void): Request<DMS.Types.DeleteEventSubscriptionResponse, AWSError>;
+  deleteEventSubscription(params: BoundInput<DMS.Types.DeleteEventSubscriptionMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DeleteEventSubscriptionResponse) => void): Request<DMS.Types.DeleteEventSubscriptionResponse, AWSError>;
   /**
    *  Deletes an AWS DMS event subscription. 
    */
@@ -87,7 +89,7 @@ declare class DMS extends Service {
   /**
    * Deletes the specified replication instance.  You must delete any migration tasks that are associated with the replication instance before you can delete it.  
    */
-  deleteReplicationInstance(params: DMS.Types.DeleteReplicationInstanceMessage, callback?: (err: AWSError, data: DMS.Types.DeleteReplicationInstanceResponse) => void): Request<DMS.Types.DeleteReplicationInstanceResponse, AWSError>;
+  deleteReplicationInstance(params: BoundInput<DMS.Types.DeleteReplicationInstanceMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DeleteReplicationInstanceResponse) => void): Request<DMS.Types.DeleteReplicationInstanceResponse, AWSError>;
   /**
    * Deletes the specified replication instance.  You must delete any migration tasks that are associated with the replication instance before you can delete it.  
    */
@@ -95,7 +97,7 @@ declare class DMS extends Service {
   /**
    * Deletes a subnet group.
    */
-  deleteReplicationSubnetGroup(params: DMS.Types.DeleteReplicationSubnetGroupMessage, callback?: (err: AWSError, data: DMS.Types.DeleteReplicationSubnetGroupResponse) => void): Request<DMS.Types.DeleteReplicationSubnetGroupResponse, AWSError>;
+  deleteReplicationSubnetGroup(params: BoundInput<DMS.Types.DeleteReplicationSubnetGroupMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DeleteReplicationSubnetGroupResponse) => void): Request<DMS.Types.DeleteReplicationSubnetGroupResponse, AWSError>;
   /**
    * Deletes a subnet group.
    */
@@ -103,7 +105,7 @@ declare class DMS extends Service {
   /**
    * Deletes the specified replication task.
    */
-  deleteReplicationTask(params: DMS.Types.DeleteReplicationTaskMessage, callback?: (err: AWSError, data: DMS.Types.DeleteReplicationTaskResponse) => void): Request<DMS.Types.DeleteReplicationTaskResponse, AWSError>;
+  deleteReplicationTask(params: BoundInput<DMS.Types.DeleteReplicationTaskMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DeleteReplicationTaskResponse) => void): Request<DMS.Types.DeleteReplicationTaskResponse, AWSError>;
   /**
    * Deletes the specified replication task.
    */
@@ -111,7 +113,7 @@ declare class DMS extends Service {
   /**
    * Lists all of the AWS DMS attributes for a customer account. The attributes include AWS DMS quotas for the account, such as the number of replication instances allowed. The description for a quota includes the quota name, current usage toward that quota, and the quota's maximum value. This command does not take any parameters.
    */
-  describeAccountAttributes(params: DMS.Types.DescribeAccountAttributesMessage, callback?: (err: AWSError, data: DMS.Types.DescribeAccountAttributesResponse) => void): Request<DMS.Types.DescribeAccountAttributesResponse, AWSError>;
+  describeAccountAttributes(params: BoundInput<DMS.Types.DescribeAccountAttributesMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DescribeAccountAttributesResponse) => void): Request<DMS.Types.DescribeAccountAttributesResponse, AWSError>;
   /**
    * Lists all of the AWS DMS attributes for a customer account. The attributes include AWS DMS quotas for the account, such as the number of replication instances allowed. The description for a quota includes the quota name, current usage toward that quota, and the quota's maximum value. This command does not take any parameters.
    */
@@ -119,7 +121,7 @@ declare class DMS extends Service {
   /**
    * Provides a description of the certificate.
    */
-  describeCertificates(params: DMS.Types.DescribeCertificatesMessage, callback?: (err: AWSError, data: DMS.Types.DescribeCertificatesResponse) => void): Request<DMS.Types.DescribeCertificatesResponse, AWSError>;
+  describeCertificates(params: BoundInput<DMS.Types.DescribeCertificatesMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DescribeCertificatesResponse) => void): Request<DMS.Types.DescribeCertificatesResponse, AWSError>;
   /**
    * Provides a description of the certificate.
    */
@@ -127,7 +129,7 @@ declare class DMS extends Service {
   /**
    * Describes the status of the connections that have been made between the replication instance and an endpoint. Connections are created when you test an endpoint.
    */
-  describeConnections(params: DMS.Types.DescribeConnectionsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeConnectionsResponse) => void): Request<DMS.Types.DescribeConnectionsResponse, AWSError>;
+  describeConnections(params: BoundInput<DMS.Types.DescribeConnectionsMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DescribeConnectionsResponse) => void): Request<DMS.Types.DescribeConnectionsResponse, AWSError>;
   /**
    * Describes the status of the connections that have been made between the replication instance and an endpoint. Connections are created when you test an endpoint.
    */
@@ -135,7 +137,7 @@ declare class DMS extends Service {
   /**
    * Returns information about the type of endpoints available.
    */
-  describeEndpointTypes(params: DMS.Types.DescribeEndpointTypesMessage, callback?: (err: AWSError, data: DMS.Types.DescribeEndpointTypesResponse) => void): Request<DMS.Types.DescribeEndpointTypesResponse, AWSError>;
+  describeEndpointTypes(params: BoundInput<DMS.Types.DescribeEndpointTypesMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DescribeEndpointTypesResponse) => void): Request<DMS.Types.DescribeEndpointTypesResponse, AWSError>;
   /**
    * Returns information about the type of endpoints available.
    */
@@ -143,7 +145,7 @@ declare class DMS extends Service {
   /**
    * Returns information about the endpoints for your account in the current region.
    */
-  describeEndpoints(params: DMS.Types.DescribeEndpointsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeEndpointsResponse) => void): Request<DMS.Types.DescribeEndpointsResponse, AWSError>;
+  describeEndpoints(params: BoundInput<DMS.Types.DescribeEndpointsMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DescribeEndpointsResponse) => void): Request<DMS.Types.DescribeEndpointsResponse, AWSError>;
   /**
    * Returns information about the endpoints for your account in the current region.
    */
@@ -151,7 +153,7 @@ declare class DMS extends Service {
   /**
    * Lists categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in Working with Events and Notifications in the AWS Database Migration Service User Guide. 
    */
-  describeEventCategories(params: DMS.Types.DescribeEventCategoriesMessage, callback?: (err: AWSError, data: DMS.Types.DescribeEventCategoriesResponse) => void): Request<DMS.Types.DescribeEventCategoriesResponse, AWSError>;
+  describeEventCategories(params: BoundInput<DMS.Types.DescribeEventCategoriesMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DescribeEventCategoriesResponse) => void): Request<DMS.Types.DescribeEventCategoriesResponse, AWSError>;
   /**
    * Lists categories for all event source types, or, if specified, for a specified source type. You can see a list of the event categories and source types in Working with Events and Notifications in the AWS Database Migration Service User Guide. 
    */
@@ -159,7 +161,7 @@ declare class DMS extends Service {
   /**
    * Lists all the event subscriptions for a customer account. The description of a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType, SourceID, CreationTime, and Status.  If you specify SubscriptionName, this action lists the description for that subscription.
    */
-  describeEventSubscriptions(params: DMS.Types.DescribeEventSubscriptionsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeEventSubscriptionsResponse) => void): Request<DMS.Types.DescribeEventSubscriptionsResponse, AWSError>;
+  describeEventSubscriptions(params: BoundInput<DMS.Types.DescribeEventSubscriptionsMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DescribeEventSubscriptionsResponse) => void): Request<DMS.Types.DescribeEventSubscriptionsResponse, AWSError>;
   /**
    * Lists all the event subscriptions for a customer account. The description of a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType, SourceID, CreationTime, and Status.  If you specify SubscriptionName, this action lists the description for that subscription.
    */
@@ -167,7 +169,7 @@ declare class DMS extends Service {
   /**
    *  Lists events for a given source identifier and source type. You can also specify a start and end time. For more information on AWS DMS events, see Working with Events and Notifications in the AWS Database Migration User Guide. 
    */
-  describeEvents(params: DMS.Types.DescribeEventsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeEventsResponse) => void): Request<DMS.Types.DescribeEventsResponse, AWSError>;
+  describeEvents(params: BoundInput<DMS.Types.DescribeEventsMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DescribeEventsResponse) => void): Request<DMS.Types.DescribeEventsResponse, AWSError>;
   /**
    *  Lists events for a given source identifier and source type. You can also specify a start and end time. For more information on AWS DMS events, see Working with Events and Notifications in the AWS Database Migration User Guide. 
    */
@@ -175,7 +177,7 @@ declare class DMS extends Service {
   /**
    * Returns information about the replication instance types that can be created in the specified region.
    */
-  describeOrderableReplicationInstances(params: DMS.Types.DescribeOrderableReplicationInstancesMessage, callback?: (err: AWSError, data: DMS.Types.DescribeOrderableReplicationInstancesResponse) => void): Request<DMS.Types.DescribeOrderableReplicationInstancesResponse, AWSError>;
+  describeOrderableReplicationInstances(params: BoundInput<DMS.Types.DescribeOrderableReplicationInstancesMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DescribeOrderableReplicationInstancesResponse) => void): Request<DMS.Types.DescribeOrderableReplicationInstancesResponse, AWSError>;
   /**
    * Returns information about the replication instance types that can be created in the specified region.
    */
@@ -183,7 +185,7 @@ declare class DMS extends Service {
   /**
    * Returns the status of the RefreshSchemas operation.
    */
-  describeRefreshSchemasStatus(params: DMS.Types.DescribeRefreshSchemasStatusMessage, callback?: (err: AWSError, data: DMS.Types.DescribeRefreshSchemasStatusResponse) => void): Request<DMS.Types.DescribeRefreshSchemasStatusResponse, AWSError>;
+  describeRefreshSchemasStatus(params: BoundInput<DMS.Types.DescribeRefreshSchemasStatusMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DescribeRefreshSchemasStatusResponse) => void): Request<DMS.Types.DescribeRefreshSchemasStatusResponse, AWSError>;
   /**
    * Returns the status of the RefreshSchemas operation.
    */
@@ -191,7 +193,7 @@ declare class DMS extends Service {
   /**
    * Returns information about the task logs for the specified task.
    */
-  describeReplicationInstanceTaskLogs(params: DMS.Types.DescribeReplicationInstanceTaskLogsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationInstanceTaskLogsResponse) => void): Request<DMS.Types.DescribeReplicationInstanceTaskLogsResponse, AWSError>;
+  describeReplicationInstanceTaskLogs(params: BoundInput<DMS.Types.DescribeReplicationInstanceTaskLogsMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationInstanceTaskLogsResponse) => void): Request<DMS.Types.DescribeReplicationInstanceTaskLogsResponse, AWSError>;
   /**
    * Returns information about the task logs for the specified task.
    */
@@ -199,7 +201,7 @@ declare class DMS extends Service {
   /**
    * Returns information about replication instances for your account in the current region.
    */
-  describeReplicationInstances(params: DMS.Types.DescribeReplicationInstancesMessage, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationInstancesResponse) => void): Request<DMS.Types.DescribeReplicationInstancesResponse, AWSError>;
+  describeReplicationInstances(params: BoundInput<DMS.Types.DescribeReplicationInstancesMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationInstancesResponse) => void): Request<DMS.Types.DescribeReplicationInstancesResponse, AWSError>;
   /**
    * Returns information about replication instances for your account in the current region.
    */
@@ -207,7 +209,7 @@ declare class DMS extends Service {
   /**
    * Returns information about the replication subnet groups.
    */
-  describeReplicationSubnetGroups(params: DMS.Types.DescribeReplicationSubnetGroupsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationSubnetGroupsResponse) => void): Request<DMS.Types.DescribeReplicationSubnetGroupsResponse, AWSError>;
+  describeReplicationSubnetGroups(params: BoundInput<DMS.Types.DescribeReplicationSubnetGroupsMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationSubnetGroupsResponse) => void): Request<DMS.Types.DescribeReplicationSubnetGroupsResponse, AWSError>;
   /**
    * Returns information about the replication subnet groups.
    */
@@ -215,7 +217,7 @@ declare class DMS extends Service {
   /**
    * Returns the task assessment results from Amazon S3. This action always returns the latest results.
    */
-  describeReplicationTaskAssessmentResults(params: DMS.Types.DescribeReplicationTaskAssessmentResultsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTaskAssessmentResultsResponse) => void): Request<DMS.Types.DescribeReplicationTaskAssessmentResultsResponse, AWSError>;
+  describeReplicationTaskAssessmentResults(params: BoundInput<DMS.Types.DescribeReplicationTaskAssessmentResultsMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTaskAssessmentResultsResponse) => void): Request<DMS.Types.DescribeReplicationTaskAssessmentResultsResponse, AWSError>;
   /**
    * Returns the task assessment results from Amazon S3. This action always returns the latest results.
    */
@@ -223,7 +225,7 @@ declare class DMS extends Service {
   /**
    * Returns information about replication tasks for your account in the current region.
    */
-  describeReplicationTasks(params: DMS.Types.DescribeReplicationTasksMessage, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTasksResponse) => void): Request<DMS.Types.DescribeReplicationTasksResponse, AWSError>;
+  describeReplicationTasks(params: BoundInput<DMS.Types.DescribeReplicationTasksMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTasksResponse) => void): Request<DMS.Types.DescribeReplicationTasksResponse, AWSError>;
   /**
    * Returns information about replication tasks for your account in the current region.
    */
@@ -231,7 +233,7 @@ declare class DMS extends Service {
   /**
    * Returns information about the schema for the specified endpoint. 
    */
-  describeSchemas(params: DMS.Types.DescribeSchemasMessage, callback?: (err: AWSError, data: DMS.Types.DescribeSchemasResponse) => void): Request<DMS.Types.DescribeSchemasResponse, AWSError>;
+  describeSchemas(params: BoundInput<DMS.Types.DescribeSchemasMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DescribeSchemasResponse) => void): Request<DMS.Types.DescribeSchemasResponse, AWSError>;
   /**
    * Returns information about the schema for the specified endpoint. 
    */
@@ -239,7 +241,7 @@ declare class DMS extends Service {
   /**
    * Returns table statistics on the database migration task, including table name, rows inserted, rows updated, and rows deleted. Note that the "last updated" column the DMS console only indicates the time that AWS DMS last updated the table statistics record for a table. It does not indicate the time of the last update to the table.
    */
-  describeTableStatistics(params: DMS.Types.DescribeTableStatisticsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeTableStatisticsResponse) => void): Request<DMS.Types.DescribeTableStatisticsResponse, AWSError>;
+  describeTableStatistics(params: BoundInput<DMS.Types.DescribeTableStatisticsMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.DescribeTableStatisticsResponse) => void): Request<DMS.Types.DescribeTableStatisticsResponse, AWSError>;
   /**
    * Returns table statistics on the database migration task, including table name, rows inserted, rows updated, and rows deleted. Note that the "last updated" column the DMS console only indicates the time that AWS DMS last updated the table statistics record for a table. It does not indicate the time of the last update to the table.
    */
@@ -247,7 +249,7 @@ declare class DMS extends Service {
   /**
    * Uploads the specified certificate.
    */
-  importCertificate(params: DMS.Types.ImportCertificateMessage, callback?: (err: AWSError, data: DMS.Types.ImportCertificateResponse) => void): Request<DMS.Types.ImportCertificateResponse, AWSError>;
+  importCertificate(params: BoundInput<DMS.Types.ImportCertificateMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.ImportCertificateResponse) => void): Request<DMS.Types.ImportCertificateResponse, AWSError>;
   /**
    * Uploads the specified certificate.
    */
@@ -255,7 +257,7 @@ declare class DMS extends Service {
   /**
    * Lists all tags for an AWS DMS resource.
    */
-  listTagsForResource(params: DMS.Types.ListTagsForResourceMessage, callback?: (err: AWSError, data: DMS.Types.ListTagsForResourceResponse) => void): Request<DMS.Types.ListTagsForResourceResponse, AWSError>;
+  listTagsForResource(params: BoundInput<DMS.Types.ListTagsForResourceMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.ListTagsForResourceResponse) => void): Request<DMS.Types.ListTagsForResourceResponse, AWSError>;
   /**
    * Lists all tags for an AWS DMS resource.
    */
@@ -263,7 +265,7 @@ declare class DMS extends Service {
   /**
    * Modifies the specified endpoint.
    */
-  modifyEndpoint(params: DMS.Types.ModifyEndpointMessage, callback?: (err: AWSError, data: DMS.Types.ModifyEndpointResponse) => void): Request<DMS.Types.ModifyEndpointResponse, AWSError>;
+  modifyEndpoint(params: BoundInput<DMS.Types.ModifyEndpointMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.ModifyEndpointResponse) => void): Request<DMS.Types.ModifyEndpointResponse, AWSError>;
   /**
    * Modifies the specified endpoint.
    */
@@ -271,7 +273,7 @@ declare class DMS extends Service {
   /**
    * Modifies an existing AWS DMS event notification subscription. 
    */
-  modifyEventSubscription(params: DMS.Types.ModifyEventSubscriptionMessage, callback?: (err: AWSError, data: DMS.Types.ModifyEventSubscriptionResponse) => void): Request<DMS.Types.ModifyEventSubscriptionResponse, AWSError>;
+  modifyEventSubscription(params: BoundInput<DMS.Types.ModifyEventSubscriptionMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.ModifyEventSubscriptionResponse) => void): Request<DMS.Types.ModifyEventSubscriptionResponse, AWSError>;
   /**
    * Modifies an existing AWS DMS event notification subscription. 
    */
@@ -279,7 +281,7 @@ declare class DMS extends Service {
   /**
    * Modifies the replication instance to apply new settings. You can change one or more parameters by specifying these parameters and the new values in the request. Some settings are applied during the maintenance window. 
    */
-  modifyReplicationInstance(params: DMS.Types.ModifyReplicationInstanceMessage, callback?: (err: AWSError, data: DMS.Types.ModifyReplicationInstanceResponse) => void): Request<DMS.Types.ModifyReplicationInstanceResponse, AWSError>;
+  modifyReplicationInstance(params: BoundInput<DMS.Types.ModifyReplicationInstanceMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.ModifyReplicationInstanceResponse) => void): Request<DMS.Types.ModifyReplicationInstanceResponse, AWSError>;
   /**
    * Modifies the replication instance to apply new settings. You can change one or more parameters by specifying these parameters and the new values in the request. Some settings are applied during the maintenance window. 
    */
@@ -287,7 +289,7 @@ declare class DMS extends Service {
   /**
    * Modifies the settings for the specified replication subnet group.
    */
-  modifyReplicationSubnetGroup(params: DMS.Types.ModifyReplicationSubnetGroupMessage, callback?: (err: AWSError, data: DMS.Types.ModifyReplicationSubnetGroupResponse) => void): Request<DMS.Types.ModifyReplicationSubnetGroupResponse, AWSError>;
+  modifyReplicationSubnetGroup(params: BoundInput<DMS.Types.ModifyReplicationSubnetGroupMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.ModifyReplicationSubnetGroupResponse) => void): Request<DMS.Types.ModifyReplicationSubnetGroupResponse, AWSError>;
   /**
    * Modifies the settings for the specified replication subnet group.
    */
@@ -295,7 +297,7 @@ declare class DMS extends Service {
   /**
    * Modifies the specified replication task. You can't modify the task endpoints. The task must be stopped before you can modify it.  For more information about AWS DMS tasks, see Working with Migration Tasks in the AWS Database Migration Service User Guide.
    */
-  modifyReplicationTask(params: DMS.Types.ModifyReplicationTaskMessage, callback?: (err: AWSError, data: DMS.Types.ModifyReplicationTaskResponse) => void): Request<DMS.Types.ModifyReplicationTaskResponse, AWSError>;
+  modifyReplicationTask(params: BoundInput<DMS.Types.ModifyReplicationTaskMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.ModifyReplicationTaskResponse) => void): Request<DMS.Types.ModifyReplicationTaskResponse, AWSError>;
   /**
    * Modifies the specified replication task. You can't modify the task endpoints. The task must be stopped before you can modify it.  For more information about AWS DMS tasks, see Working with Migration Tasks in the AWS Database Migration Service User Guide.
    */
@@ -303,7 +305,7 @@ declare class DMS extends Service {
   /**
    * Reboots a replication instance. Rebooting results in a momentary outage, until the replication instance becomes available again.
    */
-  rebootReplicationInstance(params: DMS.Types.RebootReplicationInstanceMessage, callback?: (err: AWSError, data: DMS.Types.RebootReplicationInstanceResponse) => void): Request<DMS.Types.RebootReplicationInstanceResponse, AWSError>;
+  rebootReplicationInstance(params: BoundInput<DMS.Types.RebootReplicationInstanceMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.RebootReplicationInstanceResponse) => void): Request<DMS.Types.RebootReplicationInstanceResponse, AWSError>;
   /**
    * Reboots a replication instance. Rebooting results in a momentary outage, until the replication instance becomes available again.
    */
@@ -311,7 +313,7 @@ declare class DMS extends Service {
   /**
    * Populates the schema for the specified endpoint. This is an asynchronous operation and can take several minutes. You can check the status of this operation by calling the DescribeRefreshSchemasStatus operation.
    */
-  refreshSchemas(params: DMS.Types.RefreshSchemasMessage, callback?: (err: AWSError, data: DMS.Types.RefreshSchemasResponse) => void): Request<DMS.Types.RefreshSchemasResponse, AWSError>;
+  refreshSchemas(params: BoundInput<DMS.Types.RefreshSchemasMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.RefreshSchemasResponse) => void): Request<DMS.Types.RefreshSchemasResponse, AWSError>;
   /**
    * Populates the schema for the specified endpoint. This is an asynchronous operation and can take several minutes. You can check the status of this operation by calling the DescribeRefreshSchemasStatus operation.
    */
@@ -319,7 +321,7 @@ declare class DMS extends Service {
   /**
    * Reloads the target database table with the source data. 
    */
-  reloadTables(params: DMS.Types.ReloadTablesMessage, callback?: (err: AWSError, data: DMS.Types.ReloadTablesResponse) => void): Request<DMS.Types.ReloadTablesResponse, AWSError>;
+  reloadTables(params: BoundInput<DMS.Types.ReloadTablesMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.ReloadTablesResponse) => void): Request<DMS.Types.ReloadTablesResponse, AWSError>;
   /**
    * Reloads the target database table with the source data. 
    */
@@ -327,7 +329,7 @@ declare class DMS extends Service {
   /**
    * Removes metadata tags from a DMS resource.
    */
-  removeTagsFromResource(params: DMS.Types.RemoveTagsFromResourceMessage, callback?: (err: AWSError, data: DMS.Types.RemoveTagsFromResourceResponse) => void): Request<DMS.Types.RemoveTagsFromResourceResponse, AWSError>;
+  removeTagsFromResource(params: BoundInput<DMS.Types.RemoveTagsFromResourceMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.RemoveTagsFromResourceResponse) => void): Request<DMS.Types.RemoveTagsFromResourceResponse, AWSError>;
   /**
    * Removes metadata tags from a DMS resource.
    */
@@ -335,7 +337,7 @@ declare class DMS extends Service {
   /**
    * Starts the replication task. For more information about AWS DMS tasks, see Working with Migration Tasks  in the AWS Database Migration Service User Guide. 
    */
-  startReplicationTask(params: DMS.Types.StartReplicationTaskMessage, callback?: (err: AWSError, data: DMS.Types.StartReplicationTaskResponse) => void): Request<DMS.Types.StartReplicationTaskResponse, AWSError>;
+  startReplicationTask(params: BoundInput<DMS.Types.StartReplicationTaskMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.StartReplicationTaskResponse) => void): Request<DMS.Types.StartReplicationTaskResponse, AWSError>;
   /**
    * Starts the replication task. For more information about AWS DMS tasks, see Working with Migration Tasks  in the AWS Database Migration Service User Guide. 
    */
@@ -343,7 +345,7 @@ declare class DMS extends Service {
   /**
    *  Starts the replication task assessment for unsupported data types in the source database. 
    */
-  startReplicationTaskAssessment(params: DMS.Types.StartReplicationTaskAssessmentMessage, callback?: (err: AWSError, data: DMS.Types.StartReplicationTaskAssessmentResponse) => void): Request<DMS.Types.StartReplicationTaskAssessmentResponse, AWSError>;
+  startReplicationTaskAssessment(params: BoundInput<DMS.Types.StartReplicationTaskAssessmentMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.StartReplicationTaskAssessmentResponse) => void): Request<DMS.Types.StartReplicationTaskAssessmentResponse, AWSError>;
   /**
    *  Starts the replication task assessment for unsupported data types in the source database. 
    */
@@ -351,7 +353,7 @@ declare class DMS extends Service {
   /**
    * Stops the replication task. 
    */
-  stopReplicationTask(params: DMS.Types.StopReplicationTaskMessage, callback?: (err: AWSError, data: DMS.Types.StopReplicationTaskResponse) => void): Request<DMS.Types.StopReplicationTaskResponse, AWSError>;
+  stopReplicationTask(params: BoundInput<DMS.Types.StopReplicationTaskMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.StopReplicationTaskResponse) => void): Request<DMS.Types.StopReplicationTaskResponse, AWSError>;
   /**
    * Stops the replication task. 
    */
@@ -359,7 +361,7 @@ declare class DMS extends Service {
   /**
    * Tests the connection between the replication instance and the endpoint.
    */
-  testConnection(params: DMS.Types.TestConnectionMessage, callback?: (err: AWSError, data: DMS.Types.TestConnectionResponse) => void): Request<DMS.Types.TestConnectionResponse, AWSError>;
+  testConnection(params: BoundInput<DMS.Types.TestConnectionMessage, keyof Params>, callback?: (err: AWSError, data: DMS.Types.TestConnectionResponse) => void): Request<DMS.Types.TestConnectionResponse, AWSError>;
   /**
    * Tests the connection between the replication instance and the endpoint.
    */
@@ -2490,7 +2492,8 @@ declare namespace DMS {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AddTagsToResourceMessage & CreateEndpointMessage & CreateEventSubscriptionMessage & CreateReplicationInstanceMessage & CreateReplicationSubnetGroupMessage & CreateReplicationTaskMessage & DeleteCertificateMessage & DeleteEndpointMessage & DeleteEventSubscriptionMessage & DeleteReplicationInstanceMessage & DeleteReplicationSubnetGroupMessage & DeleteReplicationTaskMessage & DescribeAccountAttributesMessage & DescribeCertificatesMessage & DescribeConnectionsMessage & DescribeEndpointTypesMessage & DescribeEndpointsMessage & DescribeEventCategoriesMessage & DescribeEventSubscriptionsMessage & DescribeEventsMessage & DescribeOrderableReplicationInstancesMessage & DescribeRefreshSchemasStatusMessage & DescribeReplicationInstanceTaskLogsMessage & DescribeReplicationInstancesMessage & DescribeReplicationSubnetGroupsMessage & DescribeReplicationTaskAssessmentResultsMessage & DescribeReplicationTasksMessage & DescribeSchemasMessage & DescribeTableStatisticsMessage & ImportCertificateMessage & ListTagsForResourceMessage & ModifyEndpointMessage & ModifyEventSubscriptionMessage & ModifyReplicationInstanceMessage & ModifyReplicationSubnetGroupMessage & ModifyReplicationTaskMessage & RebootReplicationInstanceMessage & RefreshSchemasMessage & ReloadTablesMessage & RemoveTagsFromResourceMessage & StartReplicationTaskMessage & StartReplicationTaskAssessmentMessage & StopReplicationTaskMessage & TestConnectionMessage>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the DMS client.
    */

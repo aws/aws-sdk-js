@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class Connect extends Service {
+declare class Connect<Params extends Connect.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: Connect.Types.ClientConfiguration)
-  config: Config & Connect.Types.ClientConfiguration;
+  constructor(options?: Connect.Types.ClientConfiguration<Params>)
+  config: Config & Connect.Types.ClientConfiguration<Params>;
   /**
    * Creates a new user account in your Amazon Connect instance.
    */
-  createUser(params: Connect.Types.CreateUserRequest, callback?: (err: AWSError, data: Connect.Types.CreateUserResponse) => void): Request<Connect.Types.CreateUserResponse, AWSError>;
+  createUser(params: BoundInput<Connect.Types.CreateUserRequest, keyof Params>, callback?: (err: AWSError, data: Connect.Types.CreateUserResponse) => void): Request<Connect.Types.CreateUserResponse, AWSError>;
   /**
    * Creates a new user account in your Amazon Connect instance.
    */
@@ -22,7 +24,7 @@ declare class Connect extends Service {
   /**
    * Deletes a user account from Amazon Connect.
    */
-  deleteUser(params: Connect.Types.DeleteUserRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteUser(params: BoundInput<Connect.Types.DeleteUserRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a user account from Amazon Connect.
    */
@@ -30,7 +32,7 @@ declare class Connect extends Service {
   /**
    * Returns a User object that contains information about the user account specified by the UserId.
    */
-  describeUser(params: Connect.Types.DescribeUserRequest, callback?: (err: AWSError, data: Connect.Types.DescribeUserResponse) => void): Request<Connect.Types.DescribeUserResponse, AWSError>;
+  describeUser(params: BoundInput<Connect.Types.DescribeUserRequest, keyof Params>, callback?: (err: AWSError, data: Connect.Types.DescribeUserResponse) => void): Request<Connect.Types.DescribeUserResponse, AWSError>;
   /**
    * Returns a User object that contains information about the user account specified by the UserId.
    */
@@ -38,7 +40,7 @@ declare class Connect extends Service {
   /**
    * Returns a HierarchyGroup object that includes information about a hierarchy group in your instance.
    */
-  describeUserHierarchyGroup(params: Connect.Types.DescribeUserHierarchyGroupRequest, callback?: (err: AWSError, data: Connect.Types.DescribeUserHierarchyGroupResponse) => void): Request<Connect.Types.DescribeUserHierarchyGroupResponse, AWSError>;
+  describeUserHierarchyGroup(params: BoundInput<Connect.Types.DescribeUserHierarchyGroupRequest, keyof Params>, callback?: (err: AWSError, data: Connect.Types.DescribeUserHierarchyGroupResponse) => void): Request<Connect.Types.DescribeUserHierarchyGroupResponse, AWSError>;
   /**
    * Returns a HierarchyGroup object that includes information about a hierarchy group in your instance.
    */
@@ -46,7 +48,7 @@ declare class Connect extends Service {
   /**
    * Returns a HiearchyGroupStructure object, which contains data about the levels in the agent hierarchy.
    */
-  describeUserHierarchyStructure(params: Connect.Types.DescribeUserHierarchyStructureRequest, callback?: (err: AWSError, data: Connect.Types.DescribeUserHierarchyStructureResponse) => void): Request<Connect.Types.DescribeUserHierarchyStructureResponse, AWSError>;
+  describeUserHierarchyStructure(params: BoundInput<Connect.Types.DescribeUserHierarchyStructureRequest, keyof Params>, callback?: (err: AWSError, data: Connect.Types.DescribeUserHierarchyStructureResponse) => void): Request<Connect.Types.DescribeUserHierarchyStructureResponse, AWSError>;
   /**
    * Returns a HiearchyGroupStructure object, which contains data about the levels in the agent hierarchy.
    */
@@ -54,7 +56,7 @@ declare class Connect extends Service {
   /**
    * Retrieves the contact attributes associated with a contact.
    */
-  getContactAttributes(params: Connect.Types.GetContactAttributesRequest, callback?: (err: AWSError, data: Connect.Types.GetContactAttributesResponse) => void): Request<Connect.Types.GetContactAttributesResponse, AWSError>;
+  getContactAttributes(params: BoundInput<Connect.Types.GetContactAttributesRequest, keyof Params>, callback?: (err: AWSError, data: Connect.Types.GetContactAttributesResponse) => void): Request<Connect.Types.GetContactAttributesResponse, AWSError>;
   /**
    * Retrieves the contact attributes associated with a contact.
    */
@@ -62,7 +64,7 @@ declare class Connect extends Service {
   /**
    * The GetCurrentMetricData operation retrieves current metric data from your Amazon Connect instance. If you are using an IAM account, it must have permission to the connect:GetCurrentMetricData action.
    */
-  getCurrentMetricData(params: Connect.Types.GetCurrentMetricDataRequest, callback?: (err: AWSError, data: Connect.Types.GetCurrentMetricDataResponse) => void): Request<Connect.Types.GetCurrentMetricDataResponse, AWSError>;
+  getCurrentMetricData(params: BoundInput<Connect.Types.GetCurrentMetricDataRequest, keyof Params>, callback?: (err: AWSError, data: Connect.Types.GetCurrentMetricDataResponse) => void): Request<Connect.Types.GetCurrentMetricDataResponse, AWSError>;
   /**
    * The GetCurrentMetricData operation retrieves current metric data from your Amazon Connect instance. If you are using an IAM account, it must have permission to the connect:GetCurrentMetricData action.
    */
@@ -70,7 +72,7 @@ declare class Connect extends Service {
   /**
    * Retrieves a token for federation.
    */
-  getFederationToken(params: Connect.Types.GetFederationTokenRequest, callback?: (err: AWSError, data: Connect.Types.GetFederationTokenResponse) => void): Request<Connect.Types.GetFederationTokenResponse, AWSError>;
+  getFederationToken(params: BoundInput<Connect.Types.GetFederationTokenRequest, keyof Params>, callback?: (err: AWSError, data: Connect.Types.GetFederationTokenResponse) => void): Request<Connect.Types.GetFederationTokenResponse, AWSError>;
   /**
    * Retrieves a token for federation.
    */
@@ -78,7 +80,7 @@ declare class Connect extends Service {
   /**
    * The GetMetricData operation retrieves historical metrics data from your Amazon Connect instance. If you are using an IAM account, it must have permission to the connect:GetMetricData action.
    */
-  getMetricData(params: Connect.Types.GetMetricDataRequest, callback?: (err: AWSError, data: Connect.Types.GetMetricDataResponse) => void): Request<Connect.Types.GetMetricDataResponse, AWSError>;
+  getMetricData(params: BoundInput<Connect.Types.GetMetricDataRequest, keyof Params>, callback?: (err: AWSError, data: Connect.Types.GetMetricDataResponse) => void): Request<Connect.Types.GetMetricDataResponse, AWSError>;
   /**
    * The GetMetricData operation retrieves historical metrics data from your Amazon Connect instance. If you are using an IAM account, it must have permission to the connect:GetMetricData action.
    */
@@ -86,7 +88,7 @@ declare class Connect extends Service {
   /**
    * Returns an array of RoutingProfileSummary objects that includes information about the routing profiles in your instance.
    */
-  listRoutingProfiles(params: Connect.Types.ListRoutingProfilesRequest, callback?: (err: AWSError, data: Connect.Types.ListRoutingProfilesResponse) => void): Request<Connect.Types.ListRoutingProfilesResponse, AWSError>;
+  listRoutingProfiles(params: BoundInput<Connect.Types.ListRoutingProfilesRequest, keyof Params>, callback?: (err: AWSError, data: Connect.Types.ListRoutingProfilesResponse) => void): Request<Connect.Types.ListRoutingProfilesResponse, AWSError>;
   /**
    * Returns an array of RoutingProfileSummary objects that includes information about the routing profiles in your instance.
    */
@@ -94,7 +96,7 @@ declare class Connect extends Service {
   /**
    * Returns an array of SecurityProfileSummary objects that contain information about the security profiles in your instance, including the ARN, Id, and Name of the security profile.
    */
-  listSecurityProfiles(params: Connect.Types.ListSecurityProfilesRequest, callback?: (err: AWSError, data: Connect.Types.ListSecurityProfilesResponse) => void): Request<Connect.Types.ListSecurityProfilesResponse, AWSError>;
+  listSecurityProfiles(params: BoundInput<Connect.Types.ListSecurityProfilesRequest, keyof Params>, callback?: (err: AWSError, data: Connect.Types.ListSecurityProfilesResponse) => void): Request<Connect.Types.ListSecurityProfilesResponse, AWSError>;
   /**
    * Returns an array of SecurityProfileSummary objects that contain information about the security profiles in your instance, including the ARN, Id, and Name of the security profile.
    */
@@ -102,7 +104,7 @@ declare class Connect extends Service {
   /**
    * Returns a UserHierarchyGroupSummaryList, which is an array of HierarchyGroupSummary objects that contain information about the hierarchy groups in your instance.
    */
-  listUserHierarchyGroups(params: Connect.Types.ListUserHierarchyGroupsRequest, callback?: (err: AWSError, data: Connect.Types.ListUserHierarchyGroupsResponse) => void): Request<Connect.Types.ListUserHierarchyGroupsResponse, AWSError>;
+  listUserHierarchyGroups(params: BoundInput<Connect.Types.ListUserHierarchyGroupsRequest, keyof Params>, callback?: (err: AWSError, data: Connect.Types.ListUserHierarchyGroupsResponse) => void): Request<Connect.Types.ListUserHierarchyGroupsResponse, AWSError>;
   /**
    * Returns a UserHierarchyGroupSummaryList, which is an array of HierarchyGroupSummary objects that contain information about the hierarchy groups in your instance.
    */
@@ -110,7 +112,7 @@ declare class Connect extends Service {
   /**
    * Returns a UserSummaryList, which is an array of UserSummary objects.
    */
-  listUsers(params: Connect.Types.ListUsersRequest, callback?: (err: AWSError, data: Connect.Types.ListUsersResponse) => void): Request<Connect.Types.ListUsersResponse, AWSError>;
+  listUsers(params: BoundInput<Connect.Types.ListUsersRequest, keyof Params>, callback?: (err: AWSError, data: Connect.Types.ListUsersResponse) => void): Request<Connect.Types.ListUsersResponse, AWSError>;
   /**
    * Returns a UserSummaryList, which is an array of UserSummary objects.
    */
@@ -118,7 +120,7 @@ declare class Connect extends Service {
   /**
    * The StartOutboundVoiceContact operation initiates a contact flow to place an outbound call to a customer. If you are using an IAM account, it must have permission to the connect:StartOutboundVoiceContact action. There is a 60 second dialing timeout for this operation. If the call is not connected after 60 seconds, the call fails.
    */
-  startOutboundVoiceContact(params: Connect.Types.StartOutboundVoiceContactRequest, callback?: (err: AWSError, data: Connect.Types.StartOutboundVoiceContactResponse) => void): Request<Connect.Types.StartOutboundVoiceContactResponse, AWSError>;
+  startOutboundVoiceContact(params: BoundInput<Connect.Types.StartOutboundVoiceContactRequest, keyof Params>, callback?: (err: AWSError, data: Connect.Types.StartOutboundVoiceContactResponse) => void): Request<Connect.Types.StartOutboundVoiceContactResponse, AWSError>;
   /**
    * The StartOutboundVoiceContact operation initiates a contact flow to place an outbound call to a customer. If you are using an IAM account, it must have permission to the connect:StartOutboundVoiceContact action. There is a 60 second dialing timeout for this operation. If the call is not connected after 60 seconds, the call fails.
    */
@@ -126,7 +128,7 @@ declare class Connect extends Service {
   /**
    * Ends the contact initiated by the StartOutboundVoiceContact operation. If you are using an IAM account, it must have permission to the connect:StopContact action.
    */
-  stopContact(params: Connect.Types.StopContactRequest, callback?: (err: AWSError, data: Connect.Types.StopContactResponse) => void): Request<Connect.Types.StopContactResponse, AWSError>;
+  stopContact(params: BoundInput<Connect.Types.StopContactRequest, keyof Params>, callback?: (err: AWSError, data: Connect.Types.StopContactResponse) => void): Request<Connect.Types.StopContactResponse, AWSError>;
   /**
    * Ends the contact initiated by the StartOutboundVoiceContact operation. If you are using an IAM account, it must have permission to the connect:StopContact action.
    */
@@ -134,7 +136,7 @@ declare class Connect extends Service {
   /**
    * The UpdateContactAttributes operation lets you programmatically create new, or update existing, contact attributes associated with a contact. You can use the operation to add or update attributes for both ongoing and completed contacts. For example, you can update the customer's name or the reason the customer called while the call is active, or add notes about steps that the agent took during the call that are displayed to the next agent that takes the call. You can also use the UpdateContactAttributes operation to update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or identifying abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted.  Important:  You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.
    */
-  updateContactAttributes(params: Connect.Types.UpdateContactAttributesRequest, callback?: (err: AWSError, data: Connect.Types.UpdateContactAttributesResponse) => void): Request<Connect.Types.UpdateContactAttributesResponse, AWSError>;
+  updateContactAttributes(params: BoundInput<Connect.Types.UpdateContactAttributesRequest, keyof Params>, callback?: (err: AWSError, data: Connect.Types.UpdateContactAttributesResponse) => void): Request<Connect.Types.UpdateContactAttributesResponse, AWSError>;
   /**
    * The UpdateContactAttributes operation lets you programmatically create new, or update existing, contact attributes associated with a contact. You can use the operation to add or update attributes for both ongoing and completed contacts. For example, you can update the customer's name or the reason the customer called while the call is active, or add notes about steps that the agent took during the call that are displayed to the next agent that takes the call. You can also use the UpdateContactAttributes operation to update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or identifying abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted.  Important:  You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.
    */
@@ -142,7 +144,7 @@ declare class Connect extends Service {
   /**
    * Assigns the specified hierarchy group to the user.
    */
-  updateUserHierarchy(params: Connect.Types.UpdateUserHierarchyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateUserHierarchy(params: BoundInput<Connect.Types.UpdateUserHierarchyRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Assigns the specified hierarchy group to the user.
    */
@@ -150,7 +152,7 @@ declare class Connect extends Service {
   /**
    * Updates the identity information for the specified user in a UserIdentityInfo object, including email, first name, and last name.
    */
-  updateUserIdentityInfo(params: Connect.Types.UpdateUserIdentityInfoRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateUserIdentityInfo(params: BoundInput<Connect.Types.UpdateUserIdentityInfoRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates the identity information for the specified user in a UserIdentityInfo object, including email, first name, and last name.
    */
@@ -158,7 +160,7 @@ declare class Connect extends Service {
   /**
    * Updates the phone configuration settings in the UserPhoneConfig object for the specified user.
    */
-  updateUserPhoneConfig(params: Connect.Types.UpdateUserPhoneConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateUserPhoneConfig(params: BoundInput<Connect.Types.UpdateUserPhoneConfigRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates the phone configuration settings in the UserPhoneConfig object for the specified user.
    */
@@ -166,7 +168,7 @@ declare class Connect extends Service {
   /**
    * Assigns the specified routing profile to a user.
    */
-  updateUserRoutingProfile(params: Connect.Types.UpdateUserRoutingProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateUserRoutingProfile(params: BoundInput<Connect.Types.UpdateUserRoutingProfileRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Assigns the specified routing profile to a user.
    */
@@ -174,7 +176,7 @@ declare class Connect extends Service {
   /**
    * Updates the security profiles assigned to the user.
    */
-  updateUserSecurityProfiles(params: Connect.Types.UpdateUserSecurityProfilesRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateUserSecurityProfiles(params: BoundInput<Connect.Types.UpdateUserSecurityProfilesRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates the security profiles assigned to the user.
    */
@@ -1023,7 +1025,8 @@ declare namespace Connect {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateUserRequest & DeleteUserRequest & DescribeUserRequest & DescribeUserHierarchyGroupRequest & DescribeUserHierarchyStructureRequest & GetContactAttributesRequest & GetCurrentMetricDataRequest & GetFederationTokenRequest & GetMetricDataRequest & ListRoutingProfilesRequest & ListSecurityProfilesRequest & ListUserHierarchyGroupsRequest & ListUsersRequest & StartOutboundVoiceContactRequest & StopContactRequest & UpdateContactAttributesRequest & UpdateUserHierarchyRequest & UpdateUserIdentityInfoRequest & UpdateUserPhoneConfigRequest & UpdateUserRoutingProfileRequest & UpdateUserSecurityProfilesRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the Connect client.
    */

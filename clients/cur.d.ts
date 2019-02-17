@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class CUR extends Service {
+declare class CUR<Params extends CUR.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: CUR.Types.ClientConfiguration)
-  config: Config & CUR.Types.ClientConfiguration;
+  constructor(options?: CUR.Types.ClientConfiguration<Params>)
+  config: Config & CUR.Types.ClientConfiguration<Params>;
   /**
    * Delete a specified report definition
    */
-  deleteReportDefinition(params: CUR.Types.DeleteReportDefinitionRequest, callback?: (err: AWSError, data: CUR.Types.DeleteReportDefinitionResponse) => void): Request<CUR.Types.DeleteReportDefinitionResponse, AWSError>;
+  deleteReportDefinition(params: BoundInput<CUR.Types.DeleteReportDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: CUR.Types.DeleteReportDefinitionResponse) => void): Request<CUR.Types.DeleteReportDefinitionResponse, AWSError>;
   /**
    * Delete a specified report definition
    */
@@ -22,7 +24,7 @@ declare class CUR extends Service {
   /**
    * Describe a list of report definitions owned by the account
    */
-  describeReportDefinitions(params: CUR.Types.DescribeReportDefinitionsRequest, callback?: (err: AWSError, data: CUR.Types.DescribeReportDefinitionsResponse) => void): Request<CUR.Types.DescribeReportDefinitionsResponse, AWSError>;
+  describeReportDefinitions(params: BoundInput<CUR.Types.DescribeReportDefinitionsRequest, keyof Params>, callback?: (err: AWSError, data: CUR.Types.DescribeReportDefinitionsResponse) => void): Request<CUR.Types.DescribeReportDefinitionsResponse, AWSError>;
   /**
    * Describe a list of report definitions owned by the account
    */
@@ -30,7 +32,7 @@ declare class CUR extends Service {
   /**
    * Create a new report definition
    */
-  putReportDefinition(params: CUR.Types.PutReportDefinitionRequest, callback?: (err: AWSError, data: CUR.Types.PutReportDefinitionResponse) => void): Request<CUR.Types.PutReportDefinitionResponse, AWSError>;
+  putReportDefinition(params: BoundInput<CUR.Types.PutReportDefinitionRequest, keyof Params>, callback?: (err: AWSError, data: CUR.Types.PutReportDefinitionResponse) => void): Request<CUR.Types.PutReportDefinitionResponse, AWSError>;
   /**
    * Create a new report definition
    */
@@ -92,7 +94,8 @@ declare namespace CUR {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<DeleteReportDefinitionRequest & DescribeReportDefinitionsRequest & PutReportDefinitionRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the CUR client.
    */

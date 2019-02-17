@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class TranscribeService extends Service {
+declare class TranscribeService<Params extends TranscribeService.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: TranscribeService.Types.ClientConfiguration)
-  config: Config & TranscribeService.Types.ClientConfiguration;
+  constructor(options?: TranscribeService.Types.ClientConfiguration<Params>)
+  config: Config & TranscribeService.Types.ClientConfiguration<Params>;
   /**
    * Creates a new custom vocabulary that you can use to change the way Amazon Transcribe handles transcription of an audio file. 
    */
-  createVocabulary(params: TranscribeService.Types.CreateVocabularyRequest, callback?: (err: AWSError, data: TranscribeService.Types.CreateVocabularyResponse) => void): Request<TranscribeService.Types.CreateVocabularyResponse, AWSError>;
+  createVocabulary(params: BoundInput<TranscribeService.Types.CreateVocabularyRequest, keyof Params>, callback?: (err: AWSError, data: TranscribeService.Types.CreateVocabularyResponse) => void): Request<TranscribeService.Types.CreateVocabularyResponse, AWSError>;
   /**
    * Creates a new custom vocabulary that you can use to change the way Amazon Transcribe handles transcription of an audio file. 
    */
@@ -22,7 +24,7 @@ declare class TranscribeService extends Service {
   /**
    * Deletes a previously submitted transcription job along with any other generated results such as the transcription, models, and so on.
    */
-  deleteTranscriptionJob(params: TranscribeService.Types.DeleteTranscriptionJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteTranscriptionJob(params: BoundInput<TranscribeService.Types.DeleteTranscriptionJobRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a previously submitted transcription job along with any other generated results such as the transcription, models, and so on.
    */
@@ -30,7 +32,7 @@ declare class TranscribeService extends Service {
   /**
    * Deletes a vocabulary from Amazon Transcribe. 
    */
-  deleteVocabulary(params: TranscribeService.Types.DeleteVocabularyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteVocabulary(params: BoundInput<TranscribeService.Types.DeleteVocabularyRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a vocabulary from Amazon Transcribe. 
    */
@@ -38,7 +40,7 @@ declare class TranscribeService extends Service {
   /**
    * Returns information about a transcription job. To see the status of the job, check the TranscriptionJobStatus field. If the status is COMPLETED, the job is finished and you can find the results at the location specified in the TranscriptionFileUri field.
    */
-  getTranscriptionJob(params: TranscribeService.Types.GetTranscriptionJobRequest, callback?: (err: AWSError, data: TranscribeService.Types.GetTranscriptionJobResponse) => void): Request<TranscribeService.Types.GetTranscriptionJobResponse, AWSError>;
+  getTranscriptionJob(params: BoundInput<TranscribeService.Types.GetTranscriptionJobRequest, keyof Params>, callback?: (err: AWSError, data: TranscribeService.Types.GetTranscriptionJobResponse) => void): Request<TranscribeService.Types.GetTranscriptionJobResponse, AWSError>;
   /**
    * Returns information about a transcription job. To see the status of the job, check the TranscriptionJobStatus field. If the status is COMPLETED, the job is finished and you can find the results at the location specified in the TranscriptionFileUri field.
    */
@@ -46,7 +48,7 @@ declare class TranscribeService extends Service {
   /**
    * Gets information about a vocabulary. 
    */
-  getVocabulary(params: TranscribeService.Types.GetVocabularyRequest, callback?: (err: AWSError, data: TranscribeService.Types.GetVocabularyResponse) => void): Request<TranscribeService.Types.GetVocabularyResponse, AWSError>;
+  getVocabulary(params: BoundInput<TranscribeService.Types.GetVocabularyRequest, keyof Params>, callback?: (err: AWSError, data: TranscribeService.Types.GetVocabularyResponse) => void): Request<TranscribeService.Types.GetVocabularyResponse, AWSError>;
   /**
    * Gets information about a vocabulary. 
    */
@@ -54,7 +56,7 @@ declare class TranscribeService extends Service {
   /**
    * Lists transcription jobs with the specified status.
    */
-  listTranscriptionJobs(params: TranscribeService.Types.ListTranscriptionJobsRequest, callback?: (err: AWSError, data: TranscribeService.Types.ListTranscriptionJobsResponse) => void): Request<TranscribeService.Types.ListTranscriptionJobsResponse, AWSError>;
+  listTranscriptionJobs(params: BoundInput<TranscribeService.Types.ListTranscriptionJobsRequest, keyof Params>, callback?: (err: AWSError, data: TranscribeService.Types.ListTranscriptionJobsResponse) => void): Request<TranscribeService.Types.ListTranscriptionJobsResponse, AWSError>;
   /**
    * Lists transcription jobs with the specified status.
    */
@@ -62,7 +64,7 @@ declare class TranscribeService extends Service {
   /**
    * Returns a list of vocabularies that match the specified criteria. If no criteria are specified, returns the entire list of vocabularies.
    */
-  listVocabularies(params: TranscribeService.Types.ListVocabulariesRequest, callback?: (err: AWSError, data: TranscribeService.Types.ListVocabulariesResponse) => void): Request<TranscribeService.Types.ListVocabulariesResponse, AWSError>;
+  listVocabularies(params: BoundInput<TranscribeService.Types.ListVocabulariesRequest, keyof Params>, callback?: (err: AWSError, data: TranscribeService.Types.ListVocabulariesResponse) => void): Request<TranscribeService.Types.ListVocabulariesResponse, AWSError>;
   /**
    * Returns a list of vocabularies that match the specified criteria. If no criteria are specified, returns the entire list of vocabularies.
    */
@@ -70,7 +72,7 @@ declare class TranscribeService extends Service {
   /**
    * Starts an asynchronous job to transcribe speech to text. 
    */
-  startTranscriptionJob(params: TranscribeService.Types.StartTranscriptionJobRequest, callback?: (err: AWSError, data: TranscribeService.Types.StartTranscriptionJobResponse) => void): Request<TranscribeService.Types.StartTranscriptionJobResponse, AWSError>;
+  startTranscriptionJob(params: BoundInput<TranscribeService.Types.StartTranscriptionJobRequest, keyof Params>, callback?: (err: AWSError, data: TranscribeService.Types.StartTranscriptionJobResponse) => void): Request<TranscribeService.Types.StartTranscriptionJobResponse, AWSError>;
   /**
    * Starts an asynchronous job to transcribe speech to text. 
    */
@@ -78,7 +80,7 @@ declare class TranscribeService extends Service {
   /**
    * Updates an existing vocabulary with new values. The UpdateVocabulary operation overwrites all of the existing information with the values that you provide in the request. 
    */
-  updateVocabulary(params: TranscribeService.Types.UpdateVocabularyRequest, callback?: (err: AWSError, data: TranscribeService.Types.UpdateVocabularyResponse) => void): Request<TranscribeService.Types.UpdateVocabularyResponse, AWSError>;
+  updateVocabulary(params: BoundInput<TranscribeService.Types.UpdateVocabularyRequest, keyof Params>, callback?: (err: AWSError, data: TranscribeService.Types.UpdateVocabularyResponse) => void): Request<TranscribeService.Types.UpdateVocabularyResponse, AWSError>;
   /**
    * Updates an existing vocabulary with new values. The UpdateVocabulary operation overwrites all of the existing information with the values that you provide in the request. 
    */
@@ -463,7 +465,8 @@ declare namespace TranscribeService {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateVocabularyRequest & DeleteTranscriptionJobRequest & DeleteVocabularyRequest & GetTranscriptionJobRequest & GetVocabularyRequest & ListTranscriptionJobsRequest & ListVocabulariesRequest & StartTranscriptionJobRequest & UpdateVocabularyRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the TranscribeService client.
    */

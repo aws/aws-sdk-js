@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class CodeCommit extends Service {
+declare class CodeCommit<Params extends CodeCommit.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: CodeCommit.Types.ClientConfiguration)
-  config: Config & CodeCommit.Types.ClientConfiguration;
+  constructor(options?: CodeCommit.Types.ClientConfiguration<Params>)
+  config: Config & CodeCommit.Types.ClientConfiguration<Params>;
   /**
    * Returns information about one or more repositories.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
    */
-  batchGetRepositories(params: CodeCommit.Types.BatchGetRepositoriesInput, callback?: (err: AWSError, data: CodeCommit.Types.BatchGetRepositoriesOutput) => void): Request<CodeCommit.Types.BatchGetRepositoriesOutput, AWSError>;
+  batchGetRepositories(params: BoundInput<CodeCommit.Types.BatchGetRepositoriesInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.BatchGetRepositoriesOutput) => void): Request<CodeCommit.Types.BatchGetRepositoriesOutput, AWSError>;
   /**
    * Returns information about one or more repositories.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
    */
@@ -22,7 +24,7 @@ declare class CodeCommit extends Service {
   /**
    * Creates a new branch in a repository and points the branch to a commit.  Calling the create branch operation does not set a repository's default branch. To do this, call the update default branch operation. 
    */
-  createBranch(params: CodeCommit.Types.CreateBranchInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  createBranch(params: BoundInput<CodeCommit.Types.CreateBranchInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Creates a new branch in a repository and points the branch to a commit.  Calling the create branch operation does not set a repository's default branch. To do this, call the update default branch operation. 
    */
@@ -30,7 +32,7 @@ declare class CodeCommit extends Service {
   /**
    * Creates a pull request in the specified repository.
    */
-  createPullRequest(params: CodeCommit.Types.CreatePullRequestInput, callback?: (err: AWSError, data: CodeCommit.Types.CreatePullRequestOutput) => void): Request<CodeCommit.Types.CreatePullRequestOutput, AWSError>;
+  createPullRequest(params: BoundInput<CodeCommit.Types.CreatePullRequestInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.CreatePullRequestOutput) => void): Request<CodeCommit.Types.CreatePullRequestOutput, AWSError>;
   /**
    * Creates a pull request in the specified repository.
    */
@@ -38,7 +40,7 @@ declare class CodeCommit extends Service {
   /**
    * Creates a new, empty repository.
    */
-  createRepository(params: CodeCommit.Types.CreateRepositoryInput, callback?: (err: AWSError, data: CodeCommit.Types.CreateRepositoryOutput) => void): Request<CodeCommit.Types.CreateRepositoryOutput, AWSError>;
+  createRepository(params: BoundInput<CodeCommit.Types.CreateRepositoryInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.CreateRepositoryOutput) => void): Request<CodeCommit.Types.CreateRepositoryOutput, AWSError>;
   /**
    * Creates a new, empty repository.
    */
@@ -46,7 +48,7 @@ declare class CodeCommit extends Service {
   /**
    * Deletes a branch from a repository, unless that branch is the default branch for the repository. 
    */
-  deleteBranch(params: CodeCommit.Types.DeleteBranchInput, callback?: (err: AWSError, data: CodeCommit.Types.DeleteBranchOutput) => void): Request<CodeCommit.Types.DeleteBranchOutput, AWSError>;
+  deleteBranch(params: BoundInput<CodeCommit.Types.DeleteBranchInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.DeleteBranchOutput) => void): Request<CodeCommit.Types.DeleteBranchOutput, AWSError>;
   /**
    * Deletes a branch from a repository, unless that branch is the default branch for the repository. 
    */
@@ -54,7 +56,7 @@ declare class CodeCommit extends Service {
   /**
    * Deletes the content of a comment made on a change, file, or commit in a repository.
    */
-  deleteCommentContent(params: CodeCommit.Types.DeleteCommentContentInput, callback?: (err: AWSError, data: CodeCommit.Types.DeleteCommentContentOutput) => void): Request<CodeCommit.Types.DeleteCommentContentOutput, AWSError>;
+  deleteCommentContent(params: BoundInput<CodeCommit.Types.DeleteCommentContentInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.DeleteCommentContentOutput) => void): Request<CodeCommit.Types.DeleteCommentContentOutput, AWSError>;
   /**
    * Deletes the content of a comment made on a change, file, or commit in a repository.
    */
@@ -62,7 +64,7 @@ declare class CodeCommit extends Service {
   /**
    * Deletes a specified file from a specified branch. A commit is created on the branch that contains the revision. The file will still exist in the commits prior to the commit that contains the deletion.
    */
-  deleteFile(params: CodeCommit.Types.DeleteFileInput, callback?: (err: AWSError, data: CodeCommit.Types.DeleteFileOutput) => void): Request<CodeCommit.Types.DeleteFileOutput, AWSError>;
+  deleteFile(params: BoundInput<CodeCommit.Types.DeleteFileInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.DeleteFileOutput) => void): Request<CodeCommit.Types.DeleteFileOutput, AWSError>;
   /**
    * Deletes a specified file from a specified branch. A commit is created on the branch that contains the revision. The file will still exist in the commits prior to the commit that contains the deletion.
    */
@@ -70,7 +72,7 @@ declare class CodeCommit extends Service {
   /**
    * Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned.  Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail. 
    */
-  deleteRepository(params: CodeCommit.Types.DeleteRepositoryInput, callback?: (err: AWSError, data: CodeCommit.Types.DeleteRepositoryOutput) => void): Request<CodeCommit.Types.DeleteRepositoryOutput, AWSError>;
+  deleteRepository(params: BoundInput<CodeCommit.Types.DeleteRepositoryInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.DeleteRepositoryOutput) => void): Request<CodeCommit.Types.DeleteRepositoryOutput, AWSError>;
   /**
    * Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned.  Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail. 
    */
@@ -78,7 +80,7 @@ declare class CodeCommit extends Service {
   /**
    * Returns information about one or more pull request events.
    */
-  describePullRequestEvents(params: CodeCommit.Types.DescribePullRequestEventsInput, callback?: (err: AWSError, data: CodeCommit.Types.DescribePullRequestEventsOutput) => void): Request<CodeCommit.Types.DescribePullRequestEventsOutput, AWSError>;
+  describePullRequestEvents(params: BoundInput<CodeCommit.Types.DescribePullRequestEventsInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.DescribePullRequestEventsOutput) => void): Request<CodeCommit.Types.DescribePullRequestEventsOutput, AWSError>;
   /**
    * Returns information about one or more pull request events.
    */
@@ -86,7 +88,7 @@ declare class CodeCommit extends Service {
   /**
    * Returns the base-64 encoded content of an individual blob within a repository.
    */
-  getBlob(params: CodeCommit.Types.GetBlobInput, callback?: (err: AWSError, data: CodeCommit.Types.GetBlobOutput) => void): Request<CodeCommit.Types.GetBlobOutput, AWSError>;
+  getBlob(params: BoundInput<CodeCommit.Types.GetBlobInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.GetBlobOutput) => void): Request<CodeCommit.Types.GetBlobOutput, AWSError>;
   /**
    * Returns the base-64 encoded content of an individual blob within a repository.
    */
@@ -94,7 +96,7 @@ declare class CodeCommit extends Service {
   /**
    * Returns information about a repository branch, including its name and the last commit ID.
    */
-  getBranch(params: CodeCommit.Types.GetBranchInput, callback?: (err: AWSError, data: CodeCommit.Types.GetBranchOutput) => void): Request<CodeCommit.Types.GetBranchOutput, AWSError>;
+  getBranch(params: BoundInput<CodeCommit.Types.GetBranchInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.GetBranchOutput) => void): Request<CodeCommit.Types.GetBranchOutput, AWSError>;
   /**
    * Returns information about a repository branch, including its name and the last commit ID.
    */
@@ -102,7 +104,7 @@ declare class CodeCommit extends Service {
   /**
    * Returns the content of a comment made on a change, file, or commit in a repository.
    */
-  getComment(params: CodeCommit.Types.GetCommentInput, callback?: (err: AWSError, data: CodeCommit.Types.GetCommentOutput) => void): Request<CodeCommit.Types.GetCommentOutput, AWSError>;
+  getComment(params: BoundInput<CodeCommit.Types.GetCommentInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.GetCommentOutput) => void): Request<CodeCommit.Types.GetCommentOutput, AWSError>;
   /**
    * Returns the content of a comment made on a change, file, or commit in a repository.
    */
@@ -110,7 +112,7 @@ declare class CodeCommit extends Service {
   /**
    * Returns information about comments made on the comparison between two commits.
    */
-  getCommentsForComparedCommit(params: CodeCommit.Types.GetCommentsForComparedCommitInput, callback?: (err: AWSError, data: CodeCommit.Types.GetCommentsForComparedCommitOutput) => void): Request<CodeCommit.Types.GetCommentsForComparedCommitOutput, AWSError>;
+  getCommentsForComparedCommit(params: BoundInput<CodeCommit.Types.GetCommentsForComparedCommitInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.GetCommentsForComparedCommitOutput) => void): Request<CodeCommit.Types.GetCommentsForComparedCommitOutput, AWSError>;
   /**
    * Returns information about comments made on the comparison between two commits.
    */
@@ -118,7 +120,7 @@ declare class CodeCommit extends Service {
   /**
    * Returns comments made on a pull request.
    */
-  getCommentsForPullRequest(params: CodeCommit.Types.GetCommentsForPullRequestInput, callback?: (err: AWSError, data: CodeCommit.Types.GetCommentsForPullRequestOutput) => void): Request<CodeCommit.Types.GetCommentsForPullRequestOutput, AWSError>;
+  getCommentsForPullRequest(params: BoundInput<CodeCommit.Types.GetCommentsForPullRequestInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.GetCommentsForPullRequestOutput) => void): Request<CodeCommit.Types.GetCommentsForPullRequestOutput, AWSError>;
   /**
    * Returns comments made on a pull request.
    */
@@ -126,7 +128,7 @@ declare class CodeCommit extends Service {
   /**
    * Returns information about a commit, including commit message and committer information.
    */
-  getCommit(params: CodeCommit.Types.GetCommitInput, callback?: (err: AWSError, data: CodeCommit.Types.GetCommitOutput) => void): Request<CodeCommit.Types.GetCommitOutput, AWSError>;
+  getCommit(params: BoundInput<CodeCommit.Types.GetCommitInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.GetCommitOutput) => void): Request<CodeCommit.Types.GetCommitOutput, AWSError>;
   /**
    * Returns information about a commit, including commit message and committer information.
    */
@@ -134,7 +136,7 @@ declare class CodeCommit extends Service {
   /**
    * Returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference). Results can be limited to a specified path.
    */
-  getDifferences(params: CodeCommit.Types.GetDifferencesInput, callback?: (err: AWSError, data: CodeCommit.Types.GetDifferencesOutput) => void): Request<CodeCommit.Types.GetDifferencesOutput, AWSError>;
+  getDifferences(params: BoundInput<CodeCommit.Types.GetDifferencesInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.GetDifferencesOutput) => void): Request<CodeCommit.Types.GetDifferencesOutput, AWSError>;
   /**
    * Returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference). Results can be limited to a specified path.
    */
@@ -142,7 +144,7 @@ declare class CodeCommit extends Service {
   /**
    * Returns the base-64 encoded contents of a specified file and its metadata.
    */
-  getFile(params: CodeCommit.Types.GetFileInput, callback?: (err: AWSError, data: CodeCommit.Types.GetFileOutput) => void): Request<CodeCommit.Types.GetFileOutput, AWSError>;
+  getFile(params: BoundInput<CodeCommit.Types.GetFileInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.GetFileOutput) => void): Request<CodeCommit.Types.GetFileOutput, AWSError>;
   /**
    * Returns the base-64 encoded contents of a specified file and its metadata.
    */
@@ -150,7 +152,7 @@ declare class CodeCommit extends Service {
   /**
    * Returns the contents of a specified folder in a repository.
    */
-  getFolder(params: CodeCommit.Types.GetFolderInput, callback?: (err: AWSError, data: CodeCommit.Types.GetFolderOutput) => void): Request<CodeCommit.Types.GetFolderOutput, AWSError>;
+  getFolder(params: BoundInput<CodeCommit.Types.GetFolderInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.GetFolderOutput) => void): Request<CodeCommit.Types.GetFolderOutput, AWSError>;
   /**
    * Returns the contents of a specified folder in a repository.
    */
@@ -158,7 +160,7 @@ declare class CodeCommit extends Service {
   /**
    * Returns information about merge conflicts between the before and after commit IDs for a pull request in a repository.
    */
-  getMergeConflicts(params: CodeCommit.Types.GetMergeConflictsInput, callback?: (err: AWSError, data: CodeCommit.Types.GetMergeConflictsOutput) => void): Request<CodeCommit.Types.GetMergeConflictsOutput, AWSError>;
+  getMergeConflicts(params: BoundInput<CodeCommit.Types.GetMergeConflictsInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.GetMergeConflictsOutput) => void): Request<CodeCommit.Types.GetMergeConflictsOutput, AWSError>;
   /**
    * Returns information about merge conflicts between the before and after commit IDs for a pull request in a repository.
    */
@@ -166,7 +168,7 @@ declare class CodeCommit extends Service {
   /**
    * Gets information about a pull request in a specified repository.
    */
-  getPullRequest(params: CodeCommit.Types.GetPullRequestInput, callback?: (err: AWSError, data: CodeCommit.Types.GetPullRequestOutput) => void): Request<CodeCommit.Types.GetPullRequestOutput, AWSError>;
+  getPullRequest(params: BoundInput<CodeCommit.Types.GetPullRequestInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.GetPullRequestOutput) => void): Request<CodeCommit.Types.GetPullRequestOutput, AWSError>;
   /**
    * Gets information about a pull request in a specified repository.
    */
@@ -174,7 +176,7 @@ declare class CodeCommit extends Service {
   /**
    * Returns information about a repository.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
    */
-  getRepository(params: CodeCommit.Types.GetRepositoryInput, callback?: (err: AWSError, data: CodeCommit.Types.GetRepositoryOutput) => void): Request<CodeCommit.Types.GetRepositoryOutput, AWSError>;
+  getRepository(params: BoundInput<CodeCommit.Types.GetRepositoryInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.GetRepositoryOutput) => void): Request<CodeCommit.Types.GetRepositoryOutput, AWSError>;
   /**
    * Returns information about a repository.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
    */
@@ -182,7 +184,7 @@ declare class CodeCommit extends Service {
   /**
    * Gets information about triggers configured for a repository.
    */
-  getRepositoryTriggers(params: CodeCommit.Types.GetRepositoryTriggersInput, callback?: (err: AWSError, data: CodeCommit.Types.GetRepositoryTriggersOutput) => void): Request<CodeCommit.Types.GetRepositoryTriggersOutput, AWSError>;
+  getRepositoryTriggers(params: BoundInput<CodeCommit.Types.GetRepositoryTriggersInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.GetRepositoryTriggersOutput) => void): Request<CodeCommit.Types.GetRepositoryTriggersOutput, AWSError>;
   /**
    * Gets information about triggers configured for a repository.
    */
@@ -190,7 +192,7 @@ declare class CodeCommit extends Service {
   /**
    * Gets information about one or more branches in a repository.
    */
-  listBranches(params: CodeCommit.Types.ListBranchesInput, callback?: (err: AWSError, data: CodeCommit.Types.ListBranchesOutput) => void): Request<CodeCommit.Types.ListBranchesOutput, AWSError>;
+  listBranches(params: BoundInput<CodeCommit.Types.ListBranchesInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.ListBranchesOutput) => void): Request<CodeCommit.Types.ListBranchesOutput, AWSError>;
   /**
    * Gets information about one or more branches in a repository.
    */
@@ -198,7 +200,7 @@ declare class CodeCommit extends Service {
   /**
    * Returns a list of pull requests for a specified repository. The return list can be refined by pull request status or pull request author ARN.
    */
-  listPullRequests(params: CodeCommit.Types.ListPullRequestsInput, callback?: (err: AWSError, data: CodeCommit.Types.ListPullRequestsOutput) => void): Request<CodeCommit.Types.ListPullRequestsOutput, AWSError>;
+  listPullRequests(params: BoundInput<CodeCommit.Types.ListPullRequestsInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.ListPullRequestsOutput) => void): Request<CodeCommit.Types.ListPullRequestsOutput, AWSError>;
   /**
    * Returns a list of pull requests for a specified repository. The return list can be refined by pull request status or pull request author ARN.
    */
@@ -206,7 +208,7 @@ declare class CodeCommit extends Service {
   /**
    * Gets information about one or more repositories.
    */
-  listRepositories(params: CodeCommit.Types.ListRepositoriesInput, callback?: (err: AWSError, data: CodeCommit.Types.ListRepositoriesOutput) => void): Request<CodeCommit.Types.ListRepositoriesOutput, AWSError>;
+  listRepositories(params: BoundInput<CodeCommit.Types.ListRepositoriesInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.ListRepositoriesOutput) => void): Request<CodeCommit.Types.ListRepositoriesOutput, AWSError>;
   /**
    * Gets information about one or more repositories.
    */
@@ -214,7 +216,7 @@ declare class CodeCommit extends Service {
   /**
    * Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge option.
    */
-  mergePullRequestByFastForward(params: CodeCommit.Types.MergePullRequestByFastForwardInput, callback?: (err: AWSError, data: CodeCommit.Types.MergePullRequestByFastForwardOutput) => void): Request<CodeCommit.Types.MergePullRequestByFastForwardOutput, AWSError>;
+  mergePullRequestByFastForward(params: BoundInput<CodeCommit.Types.MergePullRequestByFastForwardInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.MergePullRequestByFastForwardOutput) => void): Request<CodeCommit.Types.MergePullRequestByFastForwardOutput, AWSError>;
   /**
    * Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge option.
    */
@@ -222,7 +224,7 @@ declare class CodeCommit extends Service {
   /**
    * Posts a comment on the comparison between two commits.
    */
-  postCommentForComparedCommit(params: CodeCommit.Types.PostCommentForComparedCommitInput, callback?: (err: AWSError, data: CodeCommit.Types.PostCommentForComparedCommitOutput) => void): Request<CodeCommit.Types.PostCommentForComparedCommitOutput, AWSError>;
+  postCommentForComparedCommit(params: BoundInput<CodeCommit.Types.PostCommentForComparedCommitInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.PostCommentForComparedCommitOutput) => void): Request<CodeCommit.Types.PostCommentForComparedCommitOutput, AWSError>;
   /**
    * Posts a comment on the comparison between two commits.
    */
@@ -230,7 +232,7 @@ declare class CodeCommit extends Service {
   /**
    * Posts a comment on a pull request.
    */
-  postCommentForPullRequest(params: CodeCommit.Types.PostCommentForPullRequestInput, callback?: (err: AWSError, data: CodeCommit.Types.PostCommentForPullRequestOutput) => void): Request<CodeCommit.Types.PostCommentForPullRequestOutput, AWSError>;
+  postCommentForPullRequest(params: BoundInput<CodeCommit.Types.PostCommentForPullRequestInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.PostCommentForPullRequestOutput) => void): Request<CodeCommit.Types.PostCommentForPullRequestOutput, AWSError>;
   /**
    * Posts a comment on a pull request.
    */
@@ -238,7 +240,7 @@ declare class CodeCommit extends Service {
   /**
    * Posts a comment in reply to an existing comment on a comparison between commits or a pull request.
    */
-  postCommentReply(params: CodeCommit.Types.PostCommentReplyInput, callback?: (err: AWSError, data: CodeCommit.Types.PostCommentReplyOutput) => void): Request<CodeCommit.Types.PostCommentReplyOutput, AWSError>;
+  postCommentReply(params: BoundInput<CodeCommit.Types.PostCommentReplyInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.PostCommentReplyOutput) => void): Request<CodeCommit.Types.PostCommentReplyOutput, AWSError>;
   /**
    * Posts a comment in reply to an existing comment on a comparison between commits or a pull request.
    */
@@ -246,7 +248,7 @@ declare class CodeCommit extends Service {
   /**
    * Adds or updates a file in a branch in an AWS CodeCommit repository, and generates a commit for the addition in the specified branch.
    */
-  putFile(params: CodeCommit.Types.PutFileInput, callback?: (err: AWSError, data: CodeCommit.Types.PutFileOutput) => void): Request<CodeCommit.Types.PutFileOutput, AWSError>;
+  putFile(params: BoundInput<CodeCommit.Types.PutFileInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.PutFileOutput) => void): Request<CodeCommit.Types.PutFileOutput, AWSError>;
   /**
    * Adds or updates a file in a branch in an AWS CodeCommit repository, and generates a commit for the addition in the specified branch.
    */
@@ -254,7 +256,7 @@ declare class CodeCommit extends Service {
   /**
    * Replaces all triggers for a repository. This can be used to create or delete triggers.
    */
-  putRepositoryTriggers(params: CodeCommit.Types.PutRepositoryTriggersInput, callback?: (err: AWSError, data: CodeCommit.Types.PutRepositoryTriggersOutput) => void): Request<CodeCommit.Types.PutRepositoryTriggersOutput, AWSError>;
+  putRepositoryTriggers(params: BoundInput<CodeCommit.Types.PutRepositoryTriggersInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.PutRepositoryTriggersOutput) => void): Request<CodeCommit.Types.PutRepositoryTriggersOutput, AWSError>;
   /**
    * Replaces all triggers for a repository. This can be used to create or delete triggers.
    */
@@ -262,7 +264,7 @@ declare class CodeCommit extends Service {
   /**
    * Tests the functionality of repository triggers by sending information to the trigger target. If real data is available in the repository, the test will send data from the last commit. If no data is available, sample data will be generated.
    */
-  testRepositoryTriggers(params: CodeCommit.Types.TestRepositoryTriggersInput, callback?: (err: AWSError, data: CodeCommit.Types.TestRepositoryTriggersOutput) => void): Request<CodeCommit.Types.TestRepositoryTriggersOutput, AWSError>;
+  testRepositoryTriggers(params: BoundInput<CodeCommit.Types.TestRepositoryTriggersInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.TestRepositoryTriggersOutput) => void): Request<CodeCommit.Types.TestRepositoryTriggersOutput, AWSError>;
   /**
    * Tests the functionality of repository triggers by sending information to the trigger target. If real data is available in the repository, the test will send data from the last commit. If no data is available, sample data will be generated.
    */
@@ -270,7 +272,7 @@ declare class CodeCommit extends Service {
   /**
    * Replaces the contents of a comment.
    */
-  updateComment(params: CodeCommit.Types.UpdateCommentInput, callback?: (err: AWSError, data: CodeCommit.Types.UpdateCommentOutput) => void): Request<CodeCommit.Types.UpdateCommentOutput, AWSError>;
+  updateComment(params: BoundInput<CodeCommit.Types.UpdateCommentInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.UpdateCommentOutput) => void): Request<CodeCommit.Types.UpdateCommentOutput, AWSError>;
   /**
    * Replaces the contents of a comment.
    */
@@ -278,7 +280,7 @@ declare class CodeCommit extends Service {
   /**
    * Sets or changes the default branch name for the specified repository.  If you use this operation to change the default branch name to the current default branch name, a success message is returned even though the default branch did not change. 
    */
-  updateDefaultBranch(params: CodeCommit.Types.UpdateDefaultBranchInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateDefaultBranch(params: BoundInput<CodeCommit.Types.UpdateDefaultBranchInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sets or changes the default branch name for the specified repository.  If you use this operation to change the default branch name to the current default branch name, a success message is returned even though the default branch did not change. 
    */
@@ -286,7 +288,7 @@ declare class CodeCommit extends Service {
   /**
    * Replaces the contents of the description of a pull request.
    */
-  updatePullRequestDescription(params: CodeCommit.Types.UpdatePullRequestDescriptionInput, callback?: (err: AWSError, data: CodeCommit.Types.UpdatePullRequestDescriptionOutput) => void): Request<CodeCommit.Types.UpdatePullRequestDescriptionOutput, AWSError>;
+  updatePullRequestDescription(params: BoundInput<CodeCommit.Types.UpdatePullRequestDescriptionInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.UpdatePullRequestDescriptionOutput) => void): Request<CodeCommit.Types.UpdatePullRequestDescriptionOutput, AWSError>;
   /**
    * Replaces the contents of the description of a pull request.
    */
@@ -294,7 +296,7 @@ declare class CodeCommit extends Service {
   /**
    * Updates the status of a pull request. 
    */
-  updatePullRequestStatus(params: CodeCommit.Types.UpdatePullRequestStatusInput, callback?: (err: AWSError, data: CodeCommit.Types.UpdatePullRequestStatusOutput) => void): Request<CodeCommit.Types.UpdatePullRequestStatusOutput, AWSError>;
+  updatePullRequestStatus(params: BoundInput<CodeCommit.Types.UpdatePullRequestStatusInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.UpdatePullRequestStatusOutput) => void): Request<CodeCommit.Types.UpdatePullRequestStatusOutput, AWSError>;
   /**
    * Updates the status of a pull request. 
    */
@@ -302,7 +304,7 @@ declare class CodeCommit extends Service {
   /**
    * Replaces the title of a pull request.
    */
-  updatePullRequestTitle(params: CodeCommit.Types.UpdatePullRequestTitleInput, callback?: (err: AWSError, data: CodeCommit.Types.UpdatePullRequestTitleOutput) => void): Request<CodeCommit.Types.UpdatePullRequestTitleOutput, AWSError>;
+  updatePullRequestTitle(params: BoundInput<CodeCommit.Types.UpdatePullRequestTitleInput, keyof Params>, callback?: (err: AWSError, data: CodeCommit.Types.UpdatePullRequestTitleOutput) => void): Request<CodeCommit.Types.UpdatePullRequestTitleOutput, AWSError>;
   /**
    * Replaces the title of a pull request.
    */
@@ -310,7 +312,7 @@ declare class CodeCommit extends Service {
   /**
    * Sets or changes the comment or description for a repository.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
    */
-  updateRepositoryDescription(params: CodeCommit.Types.UpdateRepositoryDescriptionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateRepositoryDescription(params: BoundInput<CodeCommit.Types.UpdateRepositoryDescriptionInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sets or changes the comment or description for a repository.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
    */
@@ -318,7 +320,7 @@ declare class CodeCommit extends Service {
   /**
    * Renames a repository. The repository name must be unique across the calling AWS account. In addition, repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. The suffix ".git" is prohibited. For a full description of the limits on repository names, see Limits in the AWS CodeCommit User Guide.
    */
-  updateRepositoryName(params: CodeCommit.Types.UpdateRepositoryNameInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateRepositoryName(params: BoundInput<CodeCommit.Types.UpdateRepositoryNameInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Renames a repository. The repository name must be unique across the calling AWS account. In addition, repository names are limited to 100 alphanumeric, dash, and underscore characters, and cannot include certain characters. The suffix ".git" is prohibited. For a full description of the limits on repository names, see Limits in the AWS CodeCommit User Guide.
    */
@@ -1869,7 +1871,8 @@ declare namespace CodeCommit {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<BatchGetRepositoriesInput & CreateBranchInput & CreatePullRequestInput & CreateRepositoryInput & DeleteBranchInput & DeleteCommentContentInput & DeleteFileInput & DeleteRepositoryInput & DescribePullRequestEventsInput & GetBlobInput & GetBranchInput & GetCommentInput & GetCommentsForComparedCommitInput & GetCommentsForPullRequestInput & GetCommitInput & GetDifferencesInput & GetFileInput & GetFolderInput & GetMergeConflictsInput & GetPullRequestInput & GetRepositoryInput & GetRepositoryTriggersInput & ListBranchesInput & ListPullRequestsInput & ListRepositoriesInput & MergePullRequestByFastForwardInput & PostCommentForComparedCommitInput & PostCommentForPullRequestInput & PostCommentReplyInput & PutFileInput & PutRepositoryTriggersInput & TestRepositoryTriggersInput & UpdateCommentInput & UpdateDefaultBranchInput & UpdatePullRequestDescriptionInput & UpdatePullRequestStatusInput & UpdatePullRequestTitleInput & UpdateRepositoryDescriptionInput & UpdateRepositoryNameInput>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the CodeCommit client.
    */

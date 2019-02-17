@@ -3,19 +3,21 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 import {UseDualstackConfigOptions} from '../lib/config_use_dualstack';
 interface Blob {}
-declare class S3Control extends Service {
+declare class S3Control<Params extends S3Control.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: S3Control.Types.ClientConfiguration)
-  config: Config & S3Control.Types.ClientConfiguration;
+  constructor(options?: S3Control.Types.ClientConfiguration<Params>)
+  config: Config & S3Control.Types.ClientConfiguration<Params>;
   /**
    * Removes the Public Access Block configuration for an Amazon Web Services account.
    */
-  deletePublicAccessBlock(params: S3Control.Types.DeletePublicAccessBlockRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deletePublicAccessBlock(params: BoundInput<S3Control.Types.DeletePublicAccessBlockRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes the Public Access Block configuration for an Amazon Web Services account.
    */
@@ -23,7 +25,7 @@ declare class S3Control extends Service {
   /**
    * Retrieves the Public Access Block configuration for an Amazon Web Services account.
    */
-  getPublicAccessBlock(params: S3Control.Types.GetPublicAccessBlockRequest, callback?: (err: AWSError, data: S3Control.Types.GetPublicAccessBlockOutput) => void): Request<S3Control.Types.GetPublicAccessBlockOutput, AWSError>;
+  getPublicAccessBlock(params: BoundInput<S3Control.Types.GetPublicAccessBlockRequest, keyof Params>, callback?: (err: AWSError, data: S3Control.Types.GetPublicAccessBlockOutput) => void): Request<S3Control.Types.GetPublicAccessBlockOutput, AWSError>;
   /**
    * Retrieves the Public Access Block configuration for an Amazon Web Services account.
    */
@@ -31,7 +33,7 @@ declare class S3Control extends Service {
   /**
    * Creates or modifies the Public Access Block configuration for an Amazon Web Services account.
    */
-  putPublicAccessBlock(params: S3Control.Types.PutPublicAccessBlockRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putPublicAccessBlock(params: BoundInput<S3Control.Types.PutPublicAccessBlockRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Creates or modifies the Public Access Block configuration for an Amazon Web Services account.
    */
@@ -96,7 +98,8 @@ declare namespace S3Control {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & UseDualstackConfigOptions & ClientApiVersions;
+  export type ClientParams = InputParams<DeletePublicAccessBlockRequest & GetPublicAccessBlockRequest & PutPublicAccessBlockRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = UseDualstackConfigOptions & ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the S3Control client.
    */

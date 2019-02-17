@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class CognitoIdentityServiceProvider extends Service {
+declare class CognitoIdentityServiceProvider<Params extends CognitoIdentityServiceProvider.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: CognitoIdentityServiceProvider.Types.ClientConfiguration)
-  config: Config & CognitoIdentityServiceProvider.Types.ClientConfiguration;
+  constructor(options?: CognitoIdentityServiceProvider.Types.ClientConfiguration<Params>)
+  config: Config & CognitoIdentityServiceProvider.Types.ClientConfiguration<Params>;
   /**
    * Adds additional user attributes to the user pool schema.
    */
-  addCustomAttributes(params: CognitoIdentityServiceProvider.Types.AddCustomAttributesRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AddCustomAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AddCustomAttributesResponse, AWSError>;
+  addCustomAttributes(params: BoundInput<CognitoIdentityServiceProvider.Types.AddCustomAttributesRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AddCustomAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AddCustomAttributesResponse, AWSError>;
   /**
    * Adds additional user attributes to the user pool schema.
    */
@@ -22,7 +24,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Adds the specified user to the specified group. Requires developer credentials.
    */
-  adminAddUserToGroup(params: CognitoIdentityServiceProvider.Types.AdminAddUserToGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  adminAddUserToGroup(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminAddUserToGroupRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Adds the specified user to the specified group. Requires developer credentials.
    */
@@ -30,7 +32,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Confirms user registration as an admin without using a confirmation code. Works on any user. Requires developer credentials.
    */
-  adminConfirmSignUp(params: CognitoIdentityServiceProvider.Types.AdminConfirmSignUpRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse, AWSError>;
+  adminConfirmSignUp(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminConfirmSignUpRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminConfirmSignUpResponse, AWSError>;
   /**
    * Confirms user registration as an admin without using a confirmation code. Works on any user. Requires developer credentials.
    */
@@ -38,7 +40,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Creates a new user in the specified user pool. If MessageAction is not set, the default is to send a welcome message via email or phone (SMS).  This message is based on a template that you configured in your call to or . This template includes your custom sign-up instructions and placeholders for user name and temporary password.  Alternatively, you can call AdminCreateUser with “SUPPRESS” for the MessageAction parameter, and Amazon Cognito will not send any email.  In either case, the user will be in the FORCE_CHANGE_PASSWORD state until they sign in and change their password. AdminCreateUser requires developer credentials.
    */
-  adminCreateUser(params: CognitoIdentityServiceProvider.Types.AdminCreateUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminCreateUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminCreateUserResponse, AWSError>;
+  adminCreateUser(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminCreateUserRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminCreateUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminCreateUserResponse, AWSError>;
   /**
    * Creates a new user in the specified user pool. If MessageAction is not set, the default is to send a welcome message via email or phone (SMS).  This message is based on a template that you configured in your call to or . This template includes your custom sign-up instructions and placeholders for user name and temporary password.  Alternatively, you can call AdminCreateUser with “SUPPRESS” for the MessageAction parameter, and Amazon Cognito will not send any email.  In either case, the user will be in the FORCE_CHANGE_PASSWORD state until they sign in and change their password. AdminCreateUser requires developer credentials.
    */
@@ -46,7 +48,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Deletes a user as an administrator. Works on any user. Requires developer credentials.
    */
-  adminDeleteUser(params: CognitoIdentityServiceProvider.Types.AdminDeleteUserRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  adminDeleteUser(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminDeleteUserRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a user as an administrator. Works on any user. Requires developer credentials.
    */
@@ -54,7 +56,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Deletes the user attributes in a user pool as an administrator. Works on any user. Requires developer credentials.
    */
-  adminDeleteUserAttributes(params: CognitoIdentityServiceProvider.Types.AdminDeleteUserAttributesRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDeleteUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDeleteUserAttributesResponse, AWSError>;
+  adminDeleteUserAttributes(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminDeleteUserAttributesRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDeleteUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDeleteUserAttributesResponse, AWSError>;
   /**
    * Deletes the user attributes in a user pool as an administrator. Works on any user. Requires developer credentials.
    */
@@ -62,7 +64,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Disables the user from signing in with the specified external (SAML or social) identity provider. If the user to disable is a Cognito User Pools native username + password user, they are not permitted to use their password to sign-in. If the user to disable is a linked external IdP user, any link between that user and an existing user is removed. The next time the external user (no longer attached to the previously linked DestinationUser) signs in, they must create a new user account. See . This action is enabled only for admin access and requires developer credentials. The ProviderName must match the value specified when creating an IdP for the pool.  To disable a native username + password user, the ProviderName value must be Cognito and the ProviderAttributeName must be Cognito_Subject, with the ProviderAttributeValue being the name that is used in the user pool for the user. The ProviderAttributeName must always be Cognito_Subject for social identity providers. The ProviderAttributeValue must always be the exact subject that was used when the user was originally linked as a source user. For de-linking a SAML identity, there are two scenarios. If the linked identity has not yet been used to sign-in, the ProviderAttributeName and ProviderAttributeValue must be the same values that were used for the SourceUser when the identities were originally linked in the call. (If the linking was done with ProviderAttributeName set to Cognito_Subject, the same applies here). However, if the user has already signed in, the ProviderAttributeName must be Cognito_Subject and ProviderAttributeValue must be the subject of the SAML assertion.
    */
-  adminDisableProviderForUser(params: CognitoIdentityServiceProvider.Types.AdminDisableProviderForUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDisableProviderForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDisableProviderForUserResponse, AWSError>;
+  adminDisableProviderForUser(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminDisableProviderForUserRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDisableProviderForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDisableProviderForUserResponse, AWSError>;
   /**
    * Disables the user from signing in with the specified external (SAML or social) identity provider. If the user to disable is a Cognito User Pools native username + password user, they are not permitted to use their password to sign-in. If the user to disable is a linked external IdP user, any link between that user and an existing user is removed. The next time the external user (no longer attached to the previously linked DestinationUser) signs in, they must create a new user account. See . This action is enabled only for admin access and requires developer credentials. The ProviderName must match the value specified when creating an IdP for the pool.  To disable a native username + password user, the ProviderName value must be Cognito and the ProviderAttributeName must be Cognito_Subject, with the ProviderAttributeValue being the name that is used in the user pool for the user. The ProviderAttributeName must always be Cognito_Subject for social identity providers. The ProviderAttributeValue must always be the exact subject that was used when the user was originally linked as a source user. For de-linking a SAML identity, there are two scenarios. If the linked identity has not yet been used to sign-in, the ProviderAttributeName and ProviderAttributeValue must be the same values that were used for the SourceUser when the identities were originally linked in the call. (If the linking was done with ProviderAttributeName set to Cognito_Subject, the same applies here). However, if the user has already signed in, the ProviderAttributeName must be Cognito_Subject and ProviderAttributeValue must be the subject of the SAML assertion.
    */
@@ -70,7 +72,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Disables the specified user as an administrator. Works on any user. Requires developer credentials.
    */
-  adminDisableUser(params: CognitoIdentityServiceProvider.Types.AdminDisableUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDisableUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDisableUserResponse, AWSError>;
+  adminDisableUser(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminDisableUserRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminDisableUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminDisableUserResponse, AWSError>;
   /**
    * Disables the specified user as an administrator. Works on any user. Requires developer credentials.
    */
@@ -78,7 +80,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Enables the specified user as an administrator. Works on any user. Requires developer credentials.
    */
-  adminEnableUser(params: CognitoIdentityServiceProvider.Types.AdminEnableUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminEnableUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminEnableUserResponse, AWSError>;
+  adminEnableUser(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminEnableUserRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminEnableUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminEnableUserResponse, AWSError>;
   /**
    * Enables the specified user as an administrator. Works on any user. Requires developer credentials.
    */
@@ -86,7 +88,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Forgets the device, as an administrator. Requires developer credentials.
    */
-  adminForgetDevice(params: CognitoIdentityServiceProvider.Types.AdminForgetDeviceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  adminForgetDevice(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminForgetDeviceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Forgets the device, as an administrator. Requires developer credentials.
    */
@@ -94,7 +96,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Gets the device, as an administrator. Requires developer credentials.
    */
-  adminGetDevice(params: CognitoIdentityServiceProvider.Types.AdminGetDeviceRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminGetDeviceResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminGetDeviceResponse, AWSError>;
+  adminGetDevice(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminGetDeviceRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminGetDeviceResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminGetDeviceResponse, AWSError>;
   /**
    * Gets the device, as an administrator. Requires developer credentials.
    */
@@ -102,7 +104,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Gets the specified user by user name in a user pool as an administrator. Works on any user. Requires developer credentials.
    */
-  adminGetUser(params: CognitoIdentityServiceProvider.Types.AdminGetUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminGetUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminGetUserResponse, AWSError>;
+  adminGetUser(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminGetUserRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminGetUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminGetUserResponse, AWSError>;
   /**
    * Gets the specified user by user name in a user pool as an administrator. Works on any user. Requires developer credentials.
    */
@@ -110,7 +112,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Initiates the authentication flow, as an administrator. Requires developer credentials.
    */
-  adminInitiateAuth(params: CognitoIdentityServiceProvider.Types.AdminInitiateAuthRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminInitiateAuthResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminInitiateAuthResponse, AWSError>;
+  adminInitiateAuth(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminInitiateAuthRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminInitiateAuthResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminInitiateAuthResponse, AWSError>;
   /**
    * Initiates the authentication flow, as an administrator. Requires developer credentials.
    */
@@ -118,7 +120,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Links an existing user account in a user pool (DestinationUser) to an identity from an external identity provider (SourceUser) based on a specified attribute name and value from the external identity provider. This allows you to create a link from the existing user account to an external federated user identity that has not yet been used to sign in, so that the federated user identity can be used to sign in as the existing user account.   For example, if there is an existing user with a username and password, this API links that user to a federated user identity, so that when the federated user identity is used, the user signs in as the existing user account.   Because this API allows a user with an external federated identity to sign in as an existing user in the user pool, it is critical that it only be used with external identity providers and provider attributes that have been trusted by the application owner.  See also . This action is enabled only for admin access and requires developer credentials.
    */
-  adminLinkProviderForUser(params: CognitoIdentityServiceProvider.Types.AdminLinkProviderForUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminLinkProviderForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminLinkProviderForUserResponse, AWSError>;
+  adminLinkProviderForUser(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminLinkProviderForUserRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminLinkProviderForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminLinkProviderForUserResponse, AWSError>;
   /**
    * Links an existing user account in a user pool (DestinationUser) to an identity from an external identity provider (SourceUser) based on a specified attribute name and value from the external identity provider. This allows you to create a link from the existing user account to an external federated user identity that has not yet been used to sign in, so that the federated user identity can be used to sign in as the existing user account.   For example, if there is an existing user with a username and password, this API links that user to a federated user identity, so that when the federated user identity is used, the user signs in as the existing user account.   Because this API allows a user with an external federated identity to sign in as an existing user in the user pool, it is critical that it only be used with external identity providers and provider attributes that have been trusted by the application owner.  See also . This action is enabled only for admin access and requires developer credentials.
    */
@@ -126,7 +128,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Lists devices, as an administrator. Requires developer credentials.
    */
-  adminListDevices(params: CognitoIdentityServiceProvider.Types.AdminListDevicesRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListDevicesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListDevicesResponse, AWSError>;
+  adminListDevices(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminListDevicesRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListDevicesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListDevicesResponse, AWSError>;
   /**
    * Lists devices, as an administrator. Requires developer credentials.
    */
@@ -134,7 +136,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Lists the groups that the user belongs to. Requires developer credentials.
    */
-  adminListGroupsForUser(params: CognitoIdentityServiceProvider.Types.AdminListGroupsForUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListGroupsForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListGroupsForUserResponse, AWSError>;
+  adminListGroupsForUser(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminListGroupsForUserRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListGroupsForUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListGroupsForUserResponse, AWSError>;
   /**
    * Lists the groups that the user belongs to. Requires developer credentials.
    */
@@ -142,7 +144,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Lists a history of user activity and any risks detected as part of Amazon Cognito advanced security.
    */
-  adminListUserAuthEvents(params: CognitoIdentityServiceProvider.Types.AdminListUserAuthEventsRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListUserAuthEventsResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListUserAuthEventsResponse, AWSError>;
+  adminListUserAuthEvents(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminListUserAuthEventsRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminListUserAuthEventsResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminListUserAuthEventsResponse, AWSError>;
   /**
    * Lists a history of user activity and any risks detected as part of Amazon Cognito advanced security.
    */
@@ -150,7 +152,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Removes the specified user from the specified group. Requires developer credentials.
    */
-  adminRemoveUserFromGroup(params: CognitoIdentityServiceProvider.Types.AdminRemoveUserFromGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  adminRemoveUserFromGroup(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminRemoveUserFromGroupRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes the specified user from the specified group. Requires developer credentials.
    */
@@ -158,7 +160,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Resets the specified user's password in a user pool as an administrator. Works on any user. When a developer calls this API, the current password is invalidated, so it must be changed. If a user tries to sign in after the API is called, the app will get a PasswordResetRequiredException exception back and should direct the user down the flow to reset the password, which is the same as the forgot password flow. In addition, if the user pool has phone verification selected and a verified phone number exists for the user, or if email verification is selected and a verified email exists for the user, calling this API will also result in sending a message to the end user with the code to change their password. Requires developer credentials.
    */
-  adminResetUserPassword(params: CognitoIdentityServiceProvider.Types.AdminResetUserPasswordRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminResetUserPasswordResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminResetUserPasswordResponse, AWSError>;
+  adminResetUserPassword(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminResetUserPasswordRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminResetUserPasswordResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminResetUserPasswordResponse, AWSError>;
   /**
    * Resets the specified user's password in a user pool as an administrator. Works on any user. When a developer calls this API, the current password is invalidated, so it must be changed. If a user tries to sign in after the API is called, the app will get a PasswordResetRequiredException exception back and should direct the user down the flow to reset the password, which is the same as the forgot password flow. In addition, if the user pool has phone verification selected and a verified phone number exists for the user, or if email verification is selected and a verified email exists for the user, calling this API will also result in sending a message to the end user with the code to change their password. Requires developer credentials.
    */
@@ -166,7 +168,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Responds to an authentication challenge, as an administrator. Requires developer credentials.
    */
-  adminRespondToAuthChallenge(params: CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeResponse, AWSError>;
+  adminRespondToAuthChallenge(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminRespondToAuthChallengeResponse, AWSError>;
   /**
    * Responds to an authentication challenge, as an administrator. Requires developer credentials.
    */
@@ -174,7 +176,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Sets the user's multi-factor authentication (MFA) preference.
    */
-  adminSetUserMFAPreference(params: CognitoIdentityServiceProvider.Types.AdminSetUserMFAPreferenceRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminSetUserMFAPreferenceResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminSetUserMFAPreferenceResponse, AWSError>;
+  adminSetUserMFAPreference(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminSetUserMFAPreferenceRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminSetUserMFAPreferenceResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminSetUserMFAPreferenceResponse, AWSError>;
   /**
    * Sets the user's multi-factor authentication (MFA) preference.
    */
@@ -182,7 +184,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Sets all the user settings for a specified user name. Works on any user. Requires developer credentials.
    */
-  adminSetUserSettings(params: CognitoIdentityServiceProvider.Types.AdminSetUserSettingsRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminSetUserSettingsResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminSetUserSettingsResponse, AWSError>;
+  adminSetUserSettings(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminSetUserSettingsRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminSetUserSettingsResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminSetUserSettingsResponse, AWSError>;
   /**
    * Sets all the user settings for a specified user name. Works on any user. Requires developer credentials.
    */
@@ -190,7 +192,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Provides feedback for an authentication event as to whether it was from a valid user. This feedback is used for improving the risk evaluation decision for the user pool as part of Amazon Cognito advanced security.
    */
-  adminUpdateAuthEventFeedback(params: CognitoIdentityServiceProvider.Types.AdminUpdateAuthEventFeedbackRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUpdateAuthEventFeedbackResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUpdateAuthEventFeedbackResponse, AWSError>;
+  adminUpdateAuthEventFeedback(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminUpdateAuthEventFeedbackRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUpdateAuthEventFeedbackResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUpdateAuthEventFeedbackResponse, AWSError>;
   /**
    * Provides feedback for an authentication event as to whether it was from a valid user. This feedback is used for improving the risk evaluation decision for the user pool as part of Amazon Cognito advanced security.
    */
@@ -198,7 +200,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Updates the device status as an administrator. Requires developer credentials.
    */
-  adminUpdateDeviceStatus(params: CognitoIdentityServiceProvider.Types.AdminUpdateDeviceStatusRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUpdateDeviceStatusResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUpdateDeviceStatusResponse, AWSError>;
+  adminUpdateDeviceStatus(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminUpdateDeviceStatusRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUpdateDeviceStatusResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUpdateDeviceStatusResponse, AWSError>;
   /**
    * Updates the device status as an administrator. Requires developer credentials.
    */
@@ -206,7 +208,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Updates the specified user's attributes, including developer attributes, as an administrator. Works on any user. For custom attributes, you must prepend the custom: prefix to the attribute name. In addition to updating user attributes, this API can also be used to mark phone and email as verified. Requires developer credentials.
    */
-  adminUpdateUserAttributes(params: CognitoIdentityServiceProvider.Types.AdminUpdateUserAttributesRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUpdateUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUpdateUserAttributesResponse, AWSError>;
+  adminUpdateUserAttributes(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminUpdateUserAttributesRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUpdateUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUpdateUserAttributesResponse, AWSError>;
   /**
    * Updates the specified user's attributes, including developer attributes, as an administrator. Works on any user. For custom attributes, you must prepend the custom: prefix to the attribute name. In addition to updating user attributes, this API can also be used to mark phone and email as verified. Requires developer credentials.
    */
@@ -214,7 +216,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Signs out users from all devices, as an administrator. Requires developer credentials.
    */
-  adminUserGlobalSignOut(params: CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse, AWSError>;
+  adminUserGlobalSignOut(params: BoundInput<CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminUserGlobalSignOutResponse, AWSError>;
   /**
    * Signs out users from all devices, as an administrator. Requires developer credentials.
    */
@@ -222,7 +224,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Returns a unique generated shared secret key code for the user account. The request takes an access token or a session string, but not both.
    */
-  associateSoftwareToken(params: CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenResponse) => void): Request<CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenResponse, AWSError>;
+  associateSoftwareToken(params: BoundInput<CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenResponse) => void): Request<CognitoIdentityServiceProvider.Types.AssociateSoftwareTokenResponse, AWSError>;
   /**
    * Returns a unique generated shared secret key code for the user account. The request takes an access token or a session string, but not both.
    */
@@ -230,7 +232,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Changes the password for a specified user in a user pool.
    */
-  changePassword(params: CognitoIdentityServiceProvider.Types.ChangePasswordRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ChangePasswordResponse) => void): Request<CognitoIdentityServiceProvider.Types.ChangePasswordResponse, AWSError>;
+  changePassword(params: BoundInput<CognitoIdentityServiceProvider.Types.ChangePasswordRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ChangePasswordResponse) => void): Request<CognitoIdentityServiceProvider.Types.ChangePasswordResponse, AWSError>;
   /**
    * Changes the password for a specified user in a user pool.
    */
@@ -238,7 +240,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Confirms tracking of the device. This API call is the call that begins device tracking.
    */
-  confirmDevice(params: CognitoIdentityServiceProvider.Types.ConfirmDeviceRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ConfirmDeviceResponse) => void): Request<CognitoIdentityServiceProvider.Types.ConfirmDeviceResponse, AWSError>;
+  confirmDevice(params: BoundInput<CognitoIdentityServiceProvider.Types.ConfirmDeviceRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ConfirmDeviceResponse) => void): Request<CognitoIdentityServiceProvider.Types.ConfirmDeviceResponse, AWSError>;
   /**
    * Confirms tracking of the device. This API call is the call that begins device tracking.
    */
@@ -246,7 +248,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Allows a user to enter a confirmation code to reset a forgotten password.
    */
-  confirmForgotPassword(params: CognitoIdentityServiceProvider.Types.ConfirmForgotPasswordRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ConfirmForgotPasswordResponse) => void): Request<CognitoIdentityServiceProvider.Types.ConfirmForgotPasswordResponse, AWSError>;
+  confirmForgotPassword(params: BoundInput<CognitoIdentityServiceProvider.Types.ConfirmForgotPasswordRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ConfirmForgotPasswordResponse) => void): Request<CognitoIdentityServiceProvider.Types.ConfirmForgotPasswordResponse, AWSError>;
   /**
    * Allows a user to enter a confirmation code to reset a forgotten password.
    */
@@ -254,7 +256,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Confirms registration of a user and handles the existing alias from a previous user.
    */
-  confirmSignUp(params: CognitoIdentityServiceProvider.Types.ConfirmSignUpRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ConfirmSignUpResponse) => void): Request<CognitoIdentityServiceProvider.Types.ConfirmSignUpResponse, AWSError>;
+  confirmSignUp(params: BoundInput<CognitoIdentityServiceProvider.Types.ConfirmSignUpRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ConfirmSignUpResponse) => void): Request<CognitoIdentityServiceProvider.Types.ConfirmSignUpResponse, AWSError>;
   /**
    * Confirms registration of a user and handles the existing alias from a previous user.
    */
@@ -262,7 +264,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Creates a new group in the specified user pool. Requires developer credentials.
    */
-  createGroup(params: CognitoIdentityServiceProvider.Types.CreateGroupRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateGroupResponse, AWSError>;
+  createGroup(params: BoundInput<CognitoIdentityServiceProvider.Types.CreateGroupRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateGroupResponse, AWSError>;
   /**
    * Creates a new group in the specified user pool. Requires developer credentials.
    */
@@ -270,7 +272,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Creates an identity provider for a user pool.
    */
-  createIdentityProvider(params: CognitoIdentityServiceProvider.Types.CreateIdentityProviderRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateIdentityProviderResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateIdentityProviderResponse, AWSError>;
+  createIdentityProvider(params: BoundInput<CognitoIdentityServiceProvider.Types.CreateIdentityProviderRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateIdentityProviderResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateIdentityProviderResponse, AWSError>;
   /**
    * Creates an identity provider for a user pool.
    */
@@ -278,7 +280,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Creates a new OAuth2.0 resource server and defines custom scopes in it.
    */
-  createResourceServer(params: CognitoIdentityServiceProvider.Types.CreateResourceServerRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateResourceServerResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateResourceServerResponse, AWSError>;
+  createResourceServer(params: BoundInput<CognitoIdentityServiceProvider.Types.CreateResourceServerRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateResourceServerResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateResourceServerResponse, AWSError>;
   /**
    * Creates a new OAuth2.0 resource server and defines custom scopes in it.
    */
@@ -286,7 +288,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Creates the user import job.
    */
-  createUserImportJob(params: CognitoIdentityServiceProvider.Types.CreateUserImportJobRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateUserImportJobResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateUserImportJobResponse, AWSError>;
+  createUserImportJob(params: BoundInput<CognitoIdentityServiceProvider.Types.CreateUserImportJobRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateUserImportJobResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateUserImportJobResponse, AWSError>;
   /**
    * Creates the user import job.
    */
@@ -294,7 +296,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Creates a new Amazon Cognito user pool and sets the password policy for the pool.
    */
-  createUserPool(params: CognitoIdentityServiceProvider.Types.CreateUserPoolRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateUserPoolResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateUserPoolResponse, AWSError>;
+  createUserPool(params: BoundInput<CognitoIdentityServiceProvider.Types.CreateUserPoolRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateUserPoolResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateUserPoolResponse, AWSError>;
   /**
    * Creates a new Amazon Cognito user pool and sets the password policy for the pool.
    */
@@ -302,7 +304,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Creates the user pool client.
    */
-  createUserPoolClient(params: CognitoIdentityServiceProvider.Types.CreateUserPoolClientRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateUserPoolClientResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateUserPoolClientResponse, AWSError>;
+  createUserPoolClient(params: BoundInput<CognitoIdentityServiceProvider.Types.CreateUserPoolClientRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateUserPoolClientResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateUserPoolClientResponse, AWSError>;
   /**
    * Creates the user pool client.
    */
@@ -310,7 +312,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Creates a new domain for a user pool.
    */
-  createUserPoolDomain(params: CognitoIdentityServiceProvider.Types.CreateUserPoolDomainRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateUserPoolDomainResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateUserPoolDomainResponse, AWSError>;
+  createUserPoolDomain(params: BoundInput<CognitoIdentityServiceProvider.Types.CreateUserPoolDomainRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.CreateUserPoolDomainResponse) => void): Request<CognitoIdentityServiceProvider.Types.CreateUserPoolDomainResponse, AWSError>;
   /**
    * Creates a new domain for a user pool.
    */
@@ -318,7 +320,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Deletes a group. Currently only groups with no members can be deleted. Requires developer credentials.
    */
-  deleteGroup(params: CognitoIdentityServiceProvider.Types.DeleteGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteGroup(params: BoundInput<CognitoIdentityServiceProvider.Types.DeleteGroupRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a group. Currently only groups with no members can be deleted. Requires developer credentials.
    */
@@ -326,7 +328,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Deletes an identity provider for a user pool.
    */
-  deleteIdentityProvider(params: CognitoIdentityServiceProvider.Types.DeleteIdentityProviderRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteIdentityProvider(params: BoundInput<CognitoIdentityServiceProvider.Types.DeleteIdentityProviderRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an identity provider for a user pool.
    */
@@ -334,7 +336,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Deletes a resource server.
    */
-  deleteResourceServer(params: CognitoIdentityServiceProvider.Types.DeleteResourceServerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteResourceServer(params: BoundInput<CognitoIdentityServiceProvider.Types.DeleteResourceServerRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a resource server.
    */
@@ -342,7 +344,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Allows a user to delete himself or herself.
    */
-  deleteUser(params: CognitoIdentityServiceProvider.Types.DeleteUserRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteUser(params: BoundInput<CognitoIdentityServiceProvider.Types.DeleteUserRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Allows a user to delete himself or herself.
    */
@@ -350,7 +352,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Deletes the attributes for a user.
    */
-  deleteUserAttributes(params: CognitoIdentityServiceProvider.Types.DeleteUserAttributesRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DeleteUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.DeleteUserAttributesResponse, AWSError>;
+  deleteUserAttributes(params: BoundInput<CognitoIdentityServiceProvider.Types.DeleteUserAttributesRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DeleteUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.DeleteUserAttributesResponse, AWSError>;
   /**
    * Deletes the attributes for a user.
    */
@@ -358,7 +360,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Deletes the specified Amazon Cognito user pool.
    */
-  deleteUserPool(params: CognitoIdentityServiceProvider.Types.DeleteUserPoolRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteUserPool(params: BoundInput<CognitoIdentityServiceProvider.Types.DeleteUserPoolRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified Amazon Cognito user pool.
    */
@@ -366,7 +368,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Allows the developer to delete the user pool client.
    */
-  deleteUserPoolClient(params: CognitoIdentityServiceProvider.Types.DeleteUserPoolClientRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteUserPoolClient(params: BoundInput<CognitoIdentityServiceProvider.Types.DeleteUserPoolClientRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Allows the developer to delete the user pool client.
    */
@@ -374,7 +376,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Deletes a domain for a user pool.
    */
-  deleteUserPoolDomain(params: CognitoIdentityServiceProvider.Types.DeleteUserPoolDomainRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DeleteUserPoolDomainResponse) => void): Request<CognitoIdentityServiceProvider.Types.DeleteUserPoolDomainResponse, AWSError>;
+  deleteUserPoolDomain(params: BoundInput<CognitoIdentityServiceProvider.Types.DeleteUserPoolDomainRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DeleteUserPoolDomainResponse) => void): Request<CognitoIdentityServiceProvider.Types.DeleteUserPoolDomainResponse, AWSError>;
   /**
    * Deletes a domain for a user pool.
    */
@@ -382,7 +384,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Gets information about a specific identity provider.
    */
-  describeIdentityProvider(params: CognitoIdentityServiceProvider.Types.DescribeIdentityProviderRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeIdentityProviderResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeIdentityProviderResponse, AWSError>;
+  describeIdentityProvider(params: BoundInput<CognitoIdentityServiceProvider.Types.DescribeIdentityProviderRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeIdentityProviderResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeIdentityProviderResponse, AWSError>;
   /**
    * Gets information about a specific identity provider.
    */
@@ -390,7 +392,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Describes a resource server.
    */
-  describeResourceServer(params: CognitoIdentityServiceProvider.Types.DescribeResourceServerRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeResourceServerResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeResourceServerResponse, AWSError>;
+  describeResourceServer(params: BoundInput<CognitoIdentityServiceProvider.Types.DescribeResourceServerRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeResourceServerResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeResourceServerResponse, AWSError>;
   /**
    * Describes a resource server.
    */
@@ -398,7 +400,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Describes the risk configuration.
    */
-  describeRiskConfiguration(params: CognitoIdentityServiceProvider.Types.DescribeRiskConfigurationRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeRiskConfigurationResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeRiskConfigurationResponse, AWSError>;
+  describeRiskConfiguration(params: BoundInput<CognitoIdentityServiceProvider.Types.DescribeRiskConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeRiskConfigurationResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeRiskConfigurationResponse, AWSError>;
   /**
    * Describes the risk configuration.
    */
@@ -406,7 +408,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Describes the user import job.
    */
-  describeUserImportJob(params: CognitoIdentityServiceProvider.Types.DescribeUserImportJobRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeUserImportJobResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeUserImportJobResponse, AWSError>;
+  describeUserImportJob(params: BoundInput<CognitoIdentityServiceProvider.Types.DescribeUserImportJobRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeUserImportJobResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeUserImportJobResponse, AWSError>;
   /**
    * Describes the user import job.
    */
@@ -414,7 +416,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Returns the configuration information and metadata of the specified user pool.
    */
-  describeUserPool(params: CognitoIdentityServiceProvider.Types.DescribeUserPoolRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeUserPoolResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeUserPoolResponse, AWSError>;
+  describeUserPool(params: BoundInput<CognitoIdentityServiceProvider.Types.DescribeUserPoolRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeUserPoolResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeUserPoolResponse, AWSError>;
   /**
    * Returns the configuration information and metadata of the specified user pool.
    */
@@ -422,7 +424,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Client method for returning the configuration information and metadata of the specified user pool app client.
    */
-  describeUserPoolClient(params: CognitoIdentityServiceProvider.Types.DescribeUserPoolClientRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeUserPoolClientResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeUserPoolClientResponse, AWSError>;
+  describeUserPoolClient(params: BoundInput<CognitoIdentityServiceProvider.Types.DescribeUserPoolClientRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeUserPoolClientResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeUserPoolClientResponse, AWSError>;
   /**
    * Client method for returning the configuration information and metadata of the specified user pool app client.
    */
@@ -430,7 +432,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Gets information about a domain.
    */
-  describeUserPoolDomain(params: CognitoIdentityServiceProvider.Types.DescribeUserPoolDomainRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeUserPoolDomainResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeUserPoolDomainResponse, AWSError>;
+  describeUserPoolDomain(params: BoundInput<CognitoIdentityServiceProvider.Types.DescribeUserPoolDomainRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeUserPoolDomainResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeUserPoolDomainResponse, AWSError>;
   /**
    * Gets information about a domain.
    */
@@ -438,7 +440,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Forgets the specified device.
    */
-  forgetDevice(params: CognitoIdentityServiceProvider.Types.ForgetDeviceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  forgetDevice(params: BoundInput<CognitoIdentityServiceProvider.Types.ForgetDeviceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Forgets the specified device.
    */
@@ -446,7 +448,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Calling this API causes a message to be sent to the end user with a confirmation code that is required to change the user's password. For the Username parameter, you can use the username or user alias. If a verified phone number exists for the user, the confirmation code is sent to the phone number. Otherwise, if a verified email exists, the confirmation code is sent to the email. If neither a verified phone number nor a verified email exists, InvalidParameterException is thrown. To use the confirmation code for resetting the password, call .
    */
-  forgotPassword(params: CognitoIdentityServiceProvider.Types.ForgotPasswordRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ForgotPasswordResponse) => void): Request<CognitoIdentityServiceProvider.Types.ForgotPasswordResponse, AWSError>;
+  forgotPassword(params: BoundInput<CognitoIdentityServiceProvider.Types.ForgotPasswordRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ForgotPasswordResponse) => void): Request<CognitoIdentityServiceProvider.Types.ForgotPasswordResponse, AWSError>;
   /**
    * Calling this API causes a message to be sent to the end user with a confirmation code that is required to change the user's password. For the Username parameter, you can use the username or user alias. If a verified phone number exists for the user, the confirmation code is sent to the phone number. Otherwise, if a verified email exists, the confirmation code is sent to the email. If neither a verified phone number nor a verified email exists, InvalidParameterException is thrown. To use the confirmation code for resetting the password, call .
    */
@@ -454,7 +456,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Gets the header information for the .csv file to be used as input for the user import job.
    */
-  getCSVHeader(params: CognitoIdentityServiceProvider.Types.GetCSVHeaderRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetCSVHeaderResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetCSVHeaderResponse, AWSError>;
+  getCSVHeader(params: BoundInput<CognitoIdentityServiceProvider.Types.GetCSVHeaderRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetCSVHeaderResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetCSVHeaderResponse, AWSError>;
   /**
    * Gets the header information for the .csv file to be used as input for the user import job.
    */
@@ -462,7 +464,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Gets the device.
    */
-  getDevice(params: CognitoIdentityServiceProvider.Types.GetDeviceRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetDeviceResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetDeviceResponse, AWSError>;
+  getDevice(params: BoundInput<CognitoIdentityServiceProvider.Types.GetDeviceRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetDeviceResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetDeviceResponse, AWSError>;
   /**
    * Gets the device.
    */
@@ -470,7 +472,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Gets a group. Requires developer credentials.
    */
-  getGroup(params: CognitoIdentityServiceProvider.Types.GetGroupRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetGroupResponse, AWSError>;
+  getGroup(params: BoundInput<CognitoIdentityServiceProvider.Types.GetGroupRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetGroupResponse, AWSError>;
   /**
    * Gets a group. Requires developer credentials.
    */
@@ -478,7 +480,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Gets the specified identity provider.
    */
-  getIdentityProviderByIdentifier(params: CognitoIdentityServiceProvider.Types.GetIdentityProviderByIdentifierRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetIdentityProviderByIdentifierResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetIdentityProviderByIdentifierResponse, AWSError>;
+  getIdentityProviderByIdentifier(params: BoundInput<CognitoIdentityServiceProvider.Types.GetIdentityProviderByIdentifierRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetIdentityProviderByIdentifierResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetIdentityProviderByIdentifierResponse, AWSError>;
   /**
    * Gets the specified identity provider.
    */
@@ -486,7 +488,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * This method takes a user pool ID, and returns the signing certificate.
    */
-  getSigningCertificate(params: CognitoIdentityServiceProvider.Types.GetSigningCertificateRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetSigningCertificateResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetSigningCertificateResponse, AWSError>;
+  getSigningCertificate(params: BoundInput<CognitoIdentityServiceProvider.Types.GetSigningCertificateRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetSigningCertificateResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetSigningCertificateResponse, AWSError>;
   /**
    * This method takes a user pool ID, and returns the signing certificate.
    */
@@ -494,7 +496,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Gets the UI Customization information for a particular app client's app UI, if there is something set. If nothing is set for the particular client, but there is an existing pool level customization (app clientId will be ALL), then that is returned. If nothing is present, then an empty shape is returned.
    */
-  getUICustomization(params: CognitoIdentityServiceProvider.Types.GetUICustomizationRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetUICustomizationResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetUICustomizationResponse, AWSError>;
+  getUICustomization(params: BoundInput<CognitoIdentityServiceProvider.Types.GetUICustomizationRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetUICustomizationResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetUICustomizationResponse, AWSError>;
   /**
    * Gets the UI Customization information for a particular app client's app UI, if there is something set. If nothing is set for the particular client, but there is an existing pool level customization (app clientId will be ALL), then that is returned. If nothing is present, then an empty shape is returned.
    */
@@ -502,7 +504,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Gets the user attributes and metadata for a user.
    */
-  getUser(params: CognitoIdentityServiceProvider.Types.GetUserRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetUserResponse, AWSError>;
+  getUser(params: BoundInput<CognitoIdentityServiceProvider.Types.GetUserRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetUserResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetUserResponse, AWSError>;
   /**
    * Gets the user attributes and metadata for a user.
    */
@@ -510,7 +512,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Gets the user attribute verification code for the specified attribute name.
    */
-  getUserAttributeVerificationCode(params: CognitoIdentityServiceProvider.Types.GetUserAttributeVerificationCodeRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetUserAttributeVerificationCodeResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetUserAttributeVerificationCodeResponse, AWSError>;
+  getUserAttributeVerificationCode(params: BoundInput<CognitoIdentityServiceProvider.Types.GetUserAttributeVerificationCodeRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetUserAttributeVerificationCodeResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetUserAttributeVerificationCodeResponse, AWSError>;
   /**
    * Gets the user attribute verification code for the specified attribute name.
    */
@@ -518,7 +520,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Gets the user pool multi-factor authentication (MFA) configuration.
    */
-  getUserPoolMfaConfig(params: CognitoIdentityServiceProvider.Types.GetUserPoolMfaConfigRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetUserPoolMfaConfigResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetUserPoolMfaConfigResponse, AWSError>;
+  getUserPoolMfaConfig(params: BoundInput<CognitoIdentityServiceProvider.Types.GetUserPoolMfaConfigRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GetUserPoolMfaConfigResponse) => void): Request<CognitoIdentityServiceProvider.Types.GetUserPoolMfaConfigResponse, AWSError>;
   /**
    * Gets the user pool multi-factor authentication (MFA) configuration.
    */
@@ -526,7 +528,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Signs out users from all devices.
    */
-  globalSignOut(params: CognitoIdentityServiceProvider.Types.GlobalSignOutRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.GlobalSignOutResponse, AWSError>;
+  globalSignOut(params: BoundInput<CognitoIdentityServiceProvider.Types.GlobalSignOutRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.GlobalSignOutResponse) => void): Request<CognitoIdentityServiceProvider.Types.GlobalSignOutResponse, AWSError>;
   /**
    * Signs out users from all devices.
    */
@@ -534,7 +536,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Initiates the authentication flow.
    */
-  initiateAuth(params: CognitoIdentityServiceProvider.Types.InitiateAuthRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.InitiateAuthResponse) => void): Request<CognitoIdentityServiceProvider.Types.InitiateAuthResponse, AWSError>;
+  initiateAuth(params: BoundInput<CognitoIdentityServiceProvider.Types.InitiateAuthRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.InitiateAuthResponse) => void): Request<CognitoIdentityServiceProvider.Types.InitiateAuthResponse, AWSError>;
   /**
    * Initiates the authentication flow.
    */
@@ -542,7 +544,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Lists the devices.
    */
-  listDevices(params: CognitoIdentityServiceProvider.Types.ListDevicesRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListDevicesResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListDevicesResponse, AWSError>;
+  listDevices(params: BoundInput<CognitoIdentityServiceProvider.Types.ListDevicesRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListDevicesResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListDevicesResponse, AWSError>;
   /**
    * Lists the devices.
    */
@@ -550,7 +552,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Lists the groups associated with a user pool. Requires developer credentials.
    */
-  listGroups(params: CognitoIdentityServiceProvider.Types.ListGroupsRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListGroupsResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListGroupsResponse, AWSError>;
+  listGroups(params: BoundInput<CognitoIdentityServiceProvider.Types.ListGroupsRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListGroupsResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListGroupsResponse, AWSError>;
   /**
    * Lists the groups associated with a user pool. Requires developer credentials.
    */
@@ -558,7 +560,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Lists information about all identity providers for a user pool.
    */
-  listIdentityProviders(params: CognitoIdentityServiceProvider.Types.ListIdentityProvidersRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListIdentityProvidersResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListIdentityProvidersResponse, AWSError>;
+  listIdentityProviders(params: BoundInput<CognitoIdentityServiceProvider.Types.ListIdentityProvidersRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListIdentityProvidersResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListIdentityProvidersResponse, AWSError>;
   /**
    * Lists information about all identity providers for a user pool.
    */
@@ -566,7 +568,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Lists the resource servers for a user pool.
    */
-  listResourceServers(params: CognitoIdentityServiceProvider.Types.ListResourceServersRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListResourceServersResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListResourceServersResponse, AWSError>;
+  listResourceServers(params: BoundInput<CognitoIdentityServiceProvider.Types.ListResourceServersRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListResourceServersResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListResourceServersResponse, AWSError>;
   /**
    * Lists the resource servers for a user pool.
    */
@@ -574,7 +576,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Lists the user import jobs.
    */
-  listUserImportJobs(params: CognitoIdentityServiceProvider.Types.ListUserImportJobsRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListUserImportJobsResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListUserImportJobsResponse, AWSError>;
+  listUserImportJobs(params: BoundInput<CognitoIdentityServiceProvider.Types.ListUserImportJobsRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListUserImportJobsResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListUserImportJobsResponse, AWSError>;
   /**
    * Lists the user import jobs.
    */
@@ -582,7 +584,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Lists the clients that have been created for the specified user pool.
    */
-  listUserPoolClients(params: CognitoIdentityServiceProvider.Types.ListUserPoolClientsRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListUserPoolClientsResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListUserPoolClientsResponse, AWSError>;
+  listUserPoolClients(params: BoundInput<CognitoIdentityServiceProvider.Types.ListUserPoolClientsRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListUserPoolClientsResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListUserPoolClientsResponse, AWSError>;
   /**
    * Lists the clients that have been created for the specified user pool.
    */
@@ -590,7 +592,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Lists the user pools associated with an AWS account.
    */
-  listUserPools(params: CognitoIdentityServiceProvider.Types.ListUserPoolsRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListUserPoolsResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListUserPoolsResponse, AWSError>;
+  listUserPools(params: BoundInput<CognitoIdentityServiceProvider.Types.ListUserPoolsRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListUserPoolsResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListUserPoolsResponse, AWSError>;
   /**
    * Lists the user pools associated with an AWS account.
    */
@@ -598,7 +600,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Lists the users in the Amazon Cognito user pool.
    */
-  listUsers(params: CognitoIdentityServiceProvider.Types.ListUsersRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListUsersResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListUsersResponse, AWSError>;
+  listUsers(params: BoundInput<CognitoIdentityServiceProvider.Types.ListUsersRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListUsersResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListUsersResponse, AWSError>;
   /**
    * Lists the users in the Amazon Cognito user pool.
    */
@@ -606,7 +608,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Lists the users in the specified group. Requires developer credentials.
    */
-  listUsersInGroup(params: CognitoIdentityServiceProvider.Types.ListUsersInGroupRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListUsersInGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListUsersInGroupResponse, AWSError>;
+  listUsersInGroup(params: BoundInput<CognitoIdentityServiceProvider.Types.ListUsersInGroupRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ListUsersInGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.ListUsersInGroupResponse, AWSError>;
   /**
    * Lists the users in the specified group. Requires developer credentials.
    */
@@ -614,7 +616,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Resends the confirmation (for confirmation of registration) to a specific user in the user pool.
    */
-  resendConfirmationCode(params: CognitoIdentityServiceProvider.Types.ResendConfirmationCodeRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ResendConfirmationCodeResponse) => void): Request<CognitoIdentityServiceProvider.Types.ResendConfirmationCodeResponse, AWSError>;
+  resendConfirmationCode(params: BoundInput<CognitoIdentityServiceProvider.Types.ResendConfirmationCodeRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.ResendConfirmationCodeResponse) => void): Request<CognitoIdentityServiceProvider.Types.ResendConfirmationCodeResponse, AWSError>;
   /**
    * Resends the confirmation (for confirmation of registration) to a specific user in the user pool.
    */
@@ -622,7 +624,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Responds to the authentication challenge.
    */
-  respondToAuthChallenge(params: CognitoIdentityServiceProvider.Types.RespondToAuthChallengeRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.RespondToAuthChallengeResponse) => void): Request<CognitoIdentityServiceProvider.Types.RespondToAuthChallengeResponse, AWSError>;
+  respondToAuthChallenge(params: BoundInput<CognitoIdentityServiceProvider.Types.RespondToAuthChallengeRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.RespondToAuthChallengeResponse) => void): Request<CognitoIdentityServiceProvider.Types.RespondToAuthChallengeResponse, AWSError>;
   /**
    * Responds to the authentication challenge.
    */
@@ -630,7 +632,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Configures actions on detected risks. To delete the risk configuration for UserPoolId or ClientId, pass null values for all four configuration types. To enable Amazon Cognito advanced security features, update the user pool to include the UserPoolAddOns keyAdvancedSecurityMode. See .
    */
-  setRiskConfiguration(params: CognitoIdentityServiceProvider.Types.SetRiskConfigurationRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetRiskConfigurationResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetRiskConfigurationResponse, AWSError>;
+  setRiskConfiguration(params: BoundInput<CognitoIdentityServiceProvider.Types.SetRiskConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetRiskConfigurationResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetRiskConfigurationResponse, AWSError>;
   /**
    * Configures actions on detected risks. To delete the risk configuration for UserPoolId or ClientId, pass null values for all four configuration types. To enable Amazon Cognito advanced security features, update the user pool to include the UserPoolAddOns keyAdvancedSecurityMode. See .
    */
@@ -638,7 +640,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Sets the UI customization information for a user pool's built-in app UI. You can specify app UI customization settings for a single client (with a specific clientId) or for all clients (by setting the clientId to ALL). If you specify ALL, the default configuration will be used for every client that has no UI customization set previously. If you specify UI customization settings for a particular client, it will no longer fall back to the ALL configuration.   To use this API, your user pool must have a domain associated with it. Otherwise, there is no place to host the app's pages, and the service will throw an error. 
    */
-  setUICustomization(params: CognitoIdentityServiceProvider.Types.SetUICustomizationRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUICustomizationResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUICustomizationResponse, AWSError>;
+  setUICustomization(params: BoundInput<CognitoIdentityServiceProvider.Types.SetUICustomizationRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUICustomizationResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUICustomizationResponse, AWSError>;
   /**
    * Sets the UI customization information for a user pool's built-in app UI. You can specify app UI customization settings for a single client (with a specific clientId) or for all clients (by setting the clientId to ALL). If you specify ALL, the default configuration will be used for every client that has no UI customization set previously. If you specify UI customization settings for a particular client, it will no longer fall back to the ALL configuration.   To use this API, your user pool must have a domain associated with it. Otherwise, there is no place to host the app's pages, and the service will throw an error. 
    */
@@ -646,7 +648,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Set the user's multi-factor authentication (MFA) method preference.
    */
-  setUserMFAPreference(params: CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceResponse, AWSError>;
+  setUserMFAPreference(params: BoundInput<CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUserMFAPreferenceResponse, AWSError>;
   /**
    * Set the user's multi-factor authentication (MFA) method preference.
    */
@@ -654,7 +656,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Set the user pool MFA configuration.
    */
-  setUserPoolMfaConfig(params: CognitoIdentityServiceProvider.Types.SetUserPoolMfaConfigRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUserPoolMfaConfigResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUserPoolMfaConfigResponse, AWSError>;
+  setUserPoolMfaConfig(params: BoundInput<CognitoIdentityServiceProvider.Types.SetUserPoolMfaConfigRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUserPoolMfaConfigResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUserPoolMfaConfigResponse, AWSError>;
   /**
    * Set the user pool MFA configuration.
    */
@@ -662,7 +664,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Sets the user settings like multi-factor authentication (MFA). If MFA is to be removed for a particular attribute pass the attribute with code delivery as null. If null list is passed, all MFA options are removed.
    */
-  setUserSettings(params: CognitoIdentityServiceProvider.Types.SetUserSettingsRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUserSettingsResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUserSettingsResponse, AWSError>;
+  setUserSettings(params: BoundInput<CognitoIdentityServiceProvider.Types.SetUserSettingsRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SetUserSettingsResponse) => void): Request<CognitoIdentityServiceProvider.Types.SetUserSettingsResponse, AWSError>;
   /**
    * Sets the user settings like multi-factor authentication (MFA). If MFA is to be removed for a particular attribute pass the attribute with code delivery as null. If null list is passed, all MFA options are removed.
    */
@@ -670,7 +672,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Registers the user in the specified user pool and creates a user name, password, and user attributes.
    */
-  signUp(params: CognitoIdentityServiceProvider.Types.SignUpRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SignUpResponse) => void): Request<CognitoIdentityServiceProvider.Types.SignUpResponse, AWSError>;
+  signUp(params: BoundInput<CognitoIdentityServiceProvider.Types.SignUpRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.SignUpResponse) => void): Request<CognitoIdentityServiceProvider.Types.SignUpResponse, AWSError>;
   /**
    * Registers the user in the specified user pool and creates a user name, password, and user attributes.
    */
@@ -678,7 +680,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Starts the user import.
    */
-  startUserImportJob(params: CognitoIdentityServiceProvider.Types.StartUserImportJobRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.StartUserImportJobResponse) => void): Request<CognitoIdentityServiceProvider.Types.StartUserImportJobResponse, AWSError>;
+  startUserImportJob(params: BoundInput<CognitoIdentityServiceProvider.Types.StartUserImportJobRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.StartUserImportJobResponse) => void): Request<CognitoIdentityServiceProvider.Types.StartUserImportJobResponse, AWSError>;
   /**
    * Starts the user import.
    */
@@ -686,7 +688,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Stops the user import job.
    */
-  stopUserImportJob(params: CognitoIdentityServiceProvider.Types.StopUserImportJobRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.StopUserImportJobResponse) => void): Request<CognitoIdentityServiceProvider.Types.StopUserImportJobResponse, AWSError>;
+  stopUserImportJob(params: BoundInput<CognitoIdentityServiceProvider.Types.StopUserImportJobRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.StopUserImportJobResponse) => void): Request<CognitoIdentityServiceProvider.Types.StopUserImportJobResponse, AWSError>;
   /**
    * Stops the user import job.
    */
@@ -694,7 +696,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Provides the feedback for an authentication event whether it was from a valid user or not. This feedback is used for improving the risk evaluation decision for the user pool as part of Amazon Cognito advanced security.
    */
-  updateAuthEventFeedback(params: CognitoIdentityServiceProvider.Types.UpdateAuthEventFeedbackRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateAuthEventFeedbackResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateAuthEventFeedbackResponse, AWSError>;
+  updateAuthEventFeedback(params: BoundInput<CognitoIdentityServiceProvider.Types.UpdateAuthEventFeedbackRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateAuthEventFeedbackResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateAuthEventFeedbackResponse, AWSError>;
   /**
    * Provides the feedback for an authentication event whether it was from a valid user or not. This feedback is used for improving the risk evaluation decision for the user pool as part of Amazon Cognito advanced security.
    */
@@ -702,7 +704,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Updates the device status.
    */
-  updateDeviceStatus(params: CognitoIdentityServiceProvider.Types.UpdateDeviceStatusRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateDeviceStatusResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateDeviceStatusResponse, AWSError>;
+  updateDeviceStatus(params: BoundInput<CognitoIdentityServiceProvider.Types.UpdateDeviceStatusRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateDeviceStatusResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateDeviceStatusResponse, AWSError>;
   /**
    * Updates the device status.
    */
@@ -710,7 +712,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Updates the specified group with the specified attributes. Requires developer credentials.
    */
-  updateGroup(params: CognitoIdentityServiceProvider.Types.UpdateGroupRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateGroupResponse, AWSError>;
+  updateGroup(params: BoundInput<CognitoIdentityServiceProvider.Types.UpdateGroupRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateGroupResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateGroupResponse, AWSError>;
   /**
    * Updates the specified group with the specified attributes. Requires developer credentials.
    */
@@ -718,7 +720,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Updates identity provider information for a user pool.
    */
-  updateIdentityProvider(params: CognitoIdentityServiceProvider.Types.UpdateIdentityProviderRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateIdentityProviderResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateIdentityProviderResponse, AWSError>;
+  updateIdentityProvider(params: BoundInput<CognitoIdentityServiceProvider.Types.UpdateIdentityProviderRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateIdentityProviderResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateIdentityProviderResponse, AWSError>;
   /**
    * Updates identity provider information for a user pool.
    */
@@ -726,7 +728,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Updates the name and scopes of resource server. All other fields are read-only.
    */
-  updateResourceServer(params: CognitoIdentityServiceProvider.Types.UpdateResourceServerRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateResourceServerResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateResourceServerResponse, AWSError>;
+  updateResourceServer(params: BoundInput<CognitoIdentityServiceProvider.Types.UpdateResourceServerRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateResourceServerResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateResourceServerResponse, AWSError>;
   /**
    * Updates the name and scopes of resource server. All other fields are read-only.
    */
@@ -734,7 +736,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Allows a user to update a specific attribute (one at a time).
    */
-  updateUserAttributes(params: CognitoIdentityServiceProvider.Types.UpdateUserAttributesRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateUserAttributesResponse, AWSError>;
+  updateUserAttributes(params: BoundInput<CognitoIdentityServiceProvider.Types.UpdateUserAttributesRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateUserAttributesResponse, AWSError>;
   /**
    * Allows a user to update a specific attribute (one at a time).
    */
@@ -742,7 +744,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Updates the specified user pool with the specified attributes. If you don't provide a value for an attribute, it will be set to the default value. You can get a list of the current user pool settings with .
    */
-  updateUserPool(params: CognitoIdentityServiceProvider.Types.UpdateUserPoolRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateUserPoolResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateUserPoolResponse, AWSError>;
+  updateUserPool(params: BoundInput<CognitoIdentityServiceProvider.Types.UpdateUserPoolRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateUserPoolResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateUserPoolResponse, AWSError>;
   /**
    * Updates the specified user pool with the specified attributes. If you don't provide a value for an attribute, it will be set to the default value. You can get a list of the current user pool settings with .
    */
@@ -750,7 +752,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Updates the specified user pool app client with the specified attributes. If you don't provide a value for an attribute, it will be set to the default value. You can get a list of the current user pool app client settings with .
    */
-  updateUserPoolClient(params: CognitoIdentityServiceProvider.Types.UpdateUserPoolClientRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateUserPoolClientResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateUserPoolClientResponse, AWSError>;
+  updateUserPoolClient(params: BoundInput<CognitoIdentityServiceProvider.Types.UpdateUserPoolClientRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateUserPoolClientResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateUserPoolClientResponse, AWSError>;
   /**
    * Updates the specified user pool app client with the specified attributes. If you don't provide a value for an attribute, it will be set to the default value. You can get a list of the current user pool app client settings with .
    */
@@ -758,7 +760,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Updates the Secure Sockets Layer (SSL) certificate for the custom domain for your user pool. You can use this operation to provide the Amazon Resource Name (ARN) of a new certificate to Amazon Cognito. You cannot use it to change the domain for a user pool. A custom domain is used to host the Amazon Cognito hosted UI, which provides sign-up and sign-in pages for your application. When you set up a custom domain, you provide a certificate that you manage with AWS Certificate Manager (ACM). When necessary, you can use this operation to change the certificate that you applied to your custom domain. Usually, this is unnecessary following routine certificate renewal with ACM. When you renew your existing certificate in ACM, the ARN for your certificate remains the same, and your custom domain uses the new certificate automatically. However, if you replace your existing certificate with a new one, ACM gives the new certificate a new ARN. To apply the new certificate to your custom domain, you must provide this ARN to Amazon Cognito. When you add your new certificate in ACM, you must choose US East (N. Virginia) as the AWS Region. After you submit your request, Amazon Cognito requires up to 1 hour to distribute your new certificate to your custom domain. For more information about adding a custom domain to your user pool, see Using Your Own Domain for the Hosted UI.
    */
-  updateUserPoolDomain(params: CognitoIdentityServiceProvider.Types.UpdateUserPoolDomainRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateUserPoolDomainResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateUserPoolDomainResponse, AWSError>;
+  updateUserPoolDomain(params: BoundInput<CognitoIdentityServiceProvider.Types.UpdateUserPoolDomainRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateUserPoolDomainResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateUserPoolDomainResponse, AWSError>;
   /**
    * Updates the Secure Sockets Layer (SSL) certificate for the custom domain for your user pool. You can use this operation to provide the Amazon Resource Name (ARN) of a new certificate to Amazon Cognito. You cannot use it to change the domain for a user pool. A custom domain is used to host the Amazon Cognito hosted UI, which provides sign-up and sign-in pages for your application. When you set up a custom domain, you provide a certificate that you manage with AWS Certificate Manager (ACM). When necessary, you can use this operation to change the certificate that you applied to your custom domain. Usually, this is unnecessary following routine certificate renewal with ACM. When you renew your existing certificate in ACM, the ARN for your certificate remains the same, and your custom domain uses the new certificate automatically. However, if you replace your existing certificate with a new one, ACM gives the new certificate a new ARN. To apply the new certificate to your custom domain, you must provide this ARN to Amazon Cognito. When you add your new certificate in ACM, you must choose US East (N. Virginia) as the AWS Region. After you submit your request, Amazon Cognito requires up to 1 hour to distribute your new certificate to your custom domain. For more information about adding a custom domain to your user pool, see Using Your Own Domain for the Hosted UI.
    */
@@ -766,7 +768,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Use this API to register a user's entered TOTP code and mark the user's software token MFA status as "verified" if successful. The request takes an access token or a session string, but not both.
    */
-  verifySoftwareToken(params: CognitoIdentityServiceProvider.Types.VerifySoftwareTokenRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.VerifySoftwareTokenResponse) => void): Request<CognitoIdentityServiceProvider.Types.VerifySoftwareTokenResponse, AWSError>;
+  verifySoftwareToken(params: BoundInput<CognitoIdentityServiceProvider.Types.VerifySoftwareTokenRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.VerifySoftwareTokenResponse) => void): Request<CognitoIdentityServiceProvider.Types.VerifySoftwareTokenResponse, AWSError>;
   /**
    * Use this API to register a user's entered TOTP code and mark the user's software token MFA status as "verified" if successful. The request takes an access token or a session string, but not both.
    */
@@ -774,7 +776,7 @@ declare class CognitoIdentityServiceProvider extends Service {
   /**
    * Verifies the specified user attributes in the user pool.
    */
-  verifyUserAttribute(params: CognitoIdentityServiceProvider.Types.VerifyUserAttributeRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.VerifyUserAttributeResponse) => void): Request<CognitoIdentityServiceProvider.Types.VerifyUserAttributeResponse, AWSError>;
+  verifyUserAttribute(params: BoundInput<CognitoIdentityServiceProvider.Types.VerifyUserAttributeRequest, keyof Params>, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.VerifyUserAttributeResponse) => void): Request<CognitoIdentityServiceProvider.Types.VerifyUserAttributeResponse, AWSError>;
   /**
    * Verifies the specified user attributes in the user pool.
    */
@@ -4267,7 +4269,8 @@ declare namespace CognitoIdentityServiceProvider {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AddCustomAttributesRequest & AdminAddUserToGroupRequest & AdminConfirmSignUpRequest & AdminCreateUserRequest & AdminDeleteUserRequest & AdminDeleteUserAttributesRequest & AdminDisableProviderForUserRequest & AdminDisableUserRequest & AdminEnableUserRequest & AdminForgetDeviceRequest & AdminGetDeviceRequest & AdminGetUserRequest & AdminInitiateAuthRequest & AdminLinkProviderForUserRequest & AdminListDevicesRequest & AdminListGroupsForUserRequest & AdminListUserAuthEventsRequest & AdminRemoveUserFromGroupRequest & AdminResetUserPasswordRequest & AdminRespondToAuthChallengeRequest & AdminSetUserMFAPreferenceRequest & AdminSetUserSettingsRequest & AdminUpdateAuthEventFeedbackRequest & AdminUpdateDeviceStatusRequest & AdminUpdateUserAttributesRequest & AdminUserGlobalSignOutRequest & AssociateSoftwareTokenRequest & ChangePasswordRequest & ConfirmDeviceRequest & ConfirmForgotPasswordRequest & ConfirmSignUpRequest & CreateGroupRequest & CreateIdentityProviderRequest & CreateResourceServerRequest & CreateUserImportJobRequest & CreateUserPoolRequest & CreateUserPoolClientRequest & CreateUserPoolDomainRequest & DeleteGroupRequest & DeleteIdentityProviderRequest & DeleteResourceServerRequest & DeleteUserRequest & DeleteUserAttributesRequest & DeleteUserPoolRequest & DeleteUserPoolClientRequest & DeleteUserPoolDomainRequest & DescribeIdentityProviderRequest & DescribeResourceServerRequest & DescribeRiskConfigurationRequest & DescribeUserImportJobRequest & DescribeUserPoolRequest & DescribeUserPoolClientRequest & DescribeUserPoolDomainRequest & ForgetDeviceRequest & ForgotPasswordRequest & GetCSVHeaderRequest & GetDeviceRequest & GetGroupRequest & GetIdentityProviderByIdentifierRequest & GetSigningCertificateRequest & GetUICustomizationRequest & GetUserRequest & GetUserAttributeVerificationCodeRequest & GetUserPoolMfaConfigRequest & GlobalSignOutRequest & InitiateAuthRequest & ListDevicesRequest & ListGroupsRequest & ListIdentityProvidersRequest & ListResourceServersRequest & ListUserImportJobsRequest & ListUserPoolClientsRequest & ListUserPoolsRequest & ListUsersRequest & ListUsersInGroupRequest & ResendConfirmationCodeRequest & RespondToAuthChallengeRequest & SetRiskConfigurationRequest & SetUICustomizationRequest & SetUserMFAPreferenceRequest & SetUserPoolMfaConfigRequest & SetUserSettingsRequest & SignUpRequest & StartUserImportJobRequest & StopUserImportJobRequest & UpdateAuthEventFeedbackRequest & UpdateDeviceStatusRequest & UpdateGroupRequest & UpdateIdentityProviderRequest & UpdateResourceServerRequest & UpdateUserAttributesRequest & UpdateUserPoolRequest & UpdateUserPoolClientRequest & UpdateUserPoolDomainRequest & VerifySoftwareTokenRequest & VerifyUserAttributeRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the CognitoIdentityServiceProvider client.
    */

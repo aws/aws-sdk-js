@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class Comprehend extends Service {
+declare class Comprehend<Params extends Comprehend.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: Comprehend.Types.ClientConfiguration)
-  config: Config & Comprehend.Types.ClientConfiguration;
+  constructor(options?: Comprehend.Types.ClientConfiguration<Params>)
+  config: Config & Comprehend.Types.ClientConfiguration<Params>;
   /**
    * Determines the dominant language of the input text for a batch of documents. For a list of languages that Amazon Comprehend can detect, see Amazon Comprehend Supported Languages. 
    */
-  batchDetectDominantLanguage(params: Comprehend.Types.BatchDetectDominantLanguageRequest, callback?: (err: AWSError, data: Comprehend.Types.BatchDetectDominantLanguageResponse) => void): Request<Comprehend.Types.BatchDetectDominantLanguageResponse, AWSError>;
+  batchDetectDominantLanguage(params: BoundInput<Comprehend.Types.BatchDetectDominantLanguageRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.BatchDetectDominantLanguageResponse) => void): Request<Comprehend.Types.BatchDetectDominantLanguageResponse, AWSError>;
   /**
    * Determines the dominant language of the input text for a batch of documents. For a list of languages that Amazon Comprehend can detect, see Amazon Comprehend Supported Languages. 
    */
@@ -22,7 +24,7 @@ declare class Comprehend extends Service {
   /**
    * Inspects the text of a batch of documents for named entities and returns information about them. For more information about named entities, see how-entities 
    */
-  batchDetectEntities(params: Comprehend.Types.BatchDetectEntitiesRequest, callback?: (err: AWSError, data: Comprehend.Types.BatchDetectEntitiesResponse) => void): Request<Comprehend.Types.BatchDetectEntitiesResponse, AWSError>;
+  batchDetectEntities(params: BoundInput<Comprehend.Types.BatchDetectEntitiesRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.BatchDetectEntitiesResponse) => void): Request<Comprehend.Types.BatchDetectEntitiesResponse, AWSError>;
   /**
    * Inspects the text of a batch of documents for named entities and returns information about them. For more information about named entities, see how-entities 
    */
@@ -30,7 +32,7 @@ declare class Comprehend extends Service {
   /**
    * Detects the key noun phrases found in a batch of documents.
    */
-  batchDetectKeyPhrases(params: Comprehend.Types.BatchDetectKeyPhrasesRequest, callback?: (err: AWSError, data: Comprehend.Types.BatchDetectKeyPhrasesResponse) => void): Request<Comprehend.Types.BatchDetectKeyPhrasesResponse, AWSError>;
+  batchDetectKeyPhrases(params: BoundInput<Comprehend.Types.BatchDetectKeyPhrasesRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.BatchDetectKeyPhrasesResponse) => void): Request<Comprehend.Types.BatchDetectKeyPhrasesResponse, AWSError>;
   /**
    * Detects the key noun phrases found in a batch of documents.
    */
@@ -38,7 +40,7 @@ declare class Comprehend extends Service {
   /**
    * Inspects a batch of documents and returns an inference of the prevailing sentiment, POSITIVE, NEUTRAL, MIXED, or NEGATIVE, in each one.
    */
-  batchDetectSentiment(params: Comprehend.Types.BatchDetectSentimentRequest, callback?: (err: AWSError, data: Comprehend.Types.BatchDetectSentimentResponse) => void): Request<Comprehend.Types.BatchDetectSentimentResponse, AWSError>;
+  batchDetectSentiment(params: BoundInput<Comprehend.Types.BatchDetectSentimentRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.BatchDetectSentimentResponse) => void): Request<Comprehend.Types.BatchDetectSentimentResponse, AWSError>;
   /**
    * Inspects a batch of documents and returns an inference of the prevailing sentiment, POSITIVE, NEUTRAL, MIXED, or NEGATIVE, in each one.
    */
@@ -46,7 +48,7 @@ declare class Comprehend extends Service {
   /**
    * Inspects the text of a batch of documents for the syntax and part of speech of the words in the document and returns information about them. For more information, see how-syntax.
    */
-  batchDetectSyntax(params: Comprehend.Types.BatchDetectSyntaxRequest, callback?: (err: AWSError, data: Comprehend.Types.BatchDetectSyntaxResponse) => void): Request<Comprehend.Types.BatchDetectSyntaxResponse, AWSError>;
+  batchDetectSyntax(params: BoundInput<Comprehend.Types.BatchDetectSyntaxRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.BatchDetectSyntaxResponse) => void): Request<Comprehend.Types.BatchDetectSyntaxResponse, AWSError>;
   /**
    * Inspects the text of a batch of documents for the syntax and part of speech of the words in the document and returns information about them. For more information, see how-syntax.
    */
@@ -54,7 +56,7 @@ declare class Comprehend extends Service {
   /**
    * Creates a new document classifier that you can use to categorize documents. To create a classifier you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. For more information, see how-document-classification.
    */
-  createDocumentClassifier(params: Comprehend.Types.CreateDocumentClassifierRequest, callback?: (err: AWSError, data: Comprehend.Types.CreateDocumentClassifierResponse) => void): Request<Comprehend.Types.CreateDocumentClassifierResponse, AWSError>;
+  createDocumentClassifier(params: BoundInput<Comprehend.Types.CreateDocumentClassifierRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.CreateDocumentClassifierResponse) => void): Request<Comprehend.Types.CreateDocumentClassifierResponse, AWSError>;
   /**
    * Creates a new document classifier that you can use to categorize documents. To create a classifier you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. For more information, see how-document-classification.
    */
@@ -62,7 +64,7 @@ declare class Comprehend extends Service {
   /**
    * Creates an entity recognizer using submitted files. After your CreateEntityRecognizer request is submitted, you can check job status using the API. 
    */
-  createEntityRecognizer(params: Comprehend.Types.CreateEntityRecognizerRequest, callback?: (err: AWSError, data: Comprehend.Types.CreateEntityRecognizerResponse) => void): Request<Comprehend.Types.CreateEntityRecognizerResponse, AWSError>;
+  createEntityRecognizer(params: BoundInput<Comprehend.Types.CreateEntityRecognizerRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.CreateEntityRecognizerResponse) => void): Request<Comprehend.Types.CreateEntityRecognizerResponse, AWSError>;
   /**
    * Creates an entity recognizer using submitted files. After your CreateEntityRecognizer request is submitted, you can check job status using the API. 
    */
@@ -70,7 +72,7 @@ declare class Comprehend extends Service {
   /**
    * Deletes a previously created document classifier Only those classifiers that are in terminated states (IN_ERROR, TRAINED) will be deleted. If an active inference job is using the model, a ResourceInUseException will be returned. This is an asynchronous action that puts the classifier into a DELETING state, and it is then removed by a background job. Once removed, the classifier disappears from your account and is no longer available for use. 
    */
-  deleteDocumentClassifier(params: Comprehend.Types.DeleteDocumentClassifierRequest, callback?: (err: AWSError, data: Comprehend.Types.DeleteDocumentClassifierResponse) => void): Request<Comprehend.Types.DeleteDocumentClassifierResponse, AWSError>;
+  deleteDocumentClassifier(params: BoundInput<Comprehend.Types.DeleteDocumentClassifierRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.DeleteDocumentClassifierResponse) => void): Request<Comprehend.Types.DeleteDocumentClassifierResponse, AWSError>;
   /**
    * Deletes a previously created document classifier Only those classifiers that are in terminated states (IN_ERROR, TRAINED) will be deleted. If an active inference job is using the model, a ResourceInUseException will be returned. This is an asynchronous action that puts the classifier into a DELETING state, and it is then removed by a background job. Once removed, the classifier disappears from your account and is no longer available for use. 
    */
@@ -78,7 +80,7 @@ declare class Comprehend extends Service {
   /**
    * Deletes an entity recognizer. Only those recognizers that are in terminated states (IN_ERROR, TRAINED) will be deleted. If an active inference job is using the model, a ResourceInUseException will be returned. This is an asynchronous action that puts the recognizer into a DELETING state, and it is then removed by a background job. Once removed, the recognizer disappears from your account and is no longer available for use. 
    */
-  deleteEntityRecognizer(params: Comprehend.Types.DeleteEntityRecognizerRequest, callback?: (err: AWSError, data: Comprehend.Types.DeleteEntityRecognizerResponse) => void): Request<Comprehend.Types.DeleteEntityRecognizerResponse, AWSError>;
+  deleteEntityRecognizer(params: BoundInput<Comprehend.Types.DeleteEntityRecognizerRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.DeleteEntityRecognizerResponse) => void): Request<Comprehend.Types.DeleteEntityRecognizerResponse, AWSError>;
   /**
    * Deletes an entity recognizer. Only those recognizers that are in terminated states (IN_ERROR, TRAINED) will be deleted. If an active inference job is using the model, a ResourceInUseException will be returned. This is an asynchronous action that puts the recognizer into a DELETING state, and it is then removed by a background job. Once removed, the recognizer disappears from your account and is no longer available for use. 
    */
@@ -86,7 +88,7 @@ declare class Comprehend extends Service {
   /**
    * Gets the properties associated with a document classification job. Use this operation to get the status of a classification job.
    */
-  describeDocumentClassificationJob(params: Comprehend.Types.DescribeDocumentClassificationJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeDocumentClassificationJobResponse) => void): Request<Comprehend.Types.DescribeDocumentClassificationJobResponse, AWSError>;
+  describeDocumentClassificationJob(params: BoundInput<Comprehend.Types.DescribeDocumentClassificationJobRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.DescribeDocumentClassificationJobResponse) => void): Request<Comprehend.Types.DescribeDocumentClassificationJobResponse, AWSError>;
   /**
    * Gets the properties associated with a document classification job. Use this operation to get the status of a classification job.
    */
@@ -94,7 +96,7 @@ declare class Comprehend extends Service {
   /**
    * Gets the properties associated with a document classifier.
    */
-  describeDocumentClassifier(params: Comprehend.Types.DescribeDocumentClassifierRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeDocumentClassifierResponse) => void): Request<Comprehend.Types.DescribeDocumentClassifierResponse, AWSError>;
+  describeDocumentClassifier(params: BoundInput<Comprehend.Types.DescribeDocumentClassifierRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.DescribeDocumentClassifierResponse) => void): Request<Comprehend.Types.DescribeDocumentClassifierResponse, AWSError>;
   /**
    * Gets the properties associated with a document classifier.
    */
@@ -102,7 +104,7 @@ declare class Comprehend extends Service {
   /**
    * Gets the properties associated with a dominant language detection job. Use this operation to get the status of a detection job.
    */
-  describeDominantLanguageDetectionJob(params: Comprehend.Types.DescribeDominantLanguageDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.DescribeDominantLanguageDetectionJobResponse, AWSError>;
+  describeDominantLanguageDetectionJob(params: BoundInput<Comprehend.Types.DescribeDominantLanguageDetectionJobRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.DescribeDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.DescribeDominantLanguageDetectionJobResponse, AWSError>;
   /**
    * Gets the properties associated with a dominant language detection job. Use this operation to get the status of a detection job.
    */
@@ -110,7 +112,7 @@ declare class Comprehend extends Service {
   /**
    * Gets the properties associated with an entities detection job. Use this operation to get the status of a detection job.
    */
-  describeEntitiesDetectionJob(params: Comprehend.Types.DescribeEntitiesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.DescribeEntitiesDetectionJobResponse, AWSError>;
+  describeEntitiesDetectionJob(params: BoundInput<Comprehend.Types.DescribeEntitiesDetectionJobRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.DescribeEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.DescribeEntitiesDetectionJobResponse, AWSError>;
   /**
    * Gets the properties associated with an entities detection job. Use this operation to get the status of a detection job.
    */
@@ -118,7 +120,7 @@ declare class Comprehend extends Service {
   /**
    * Provides details about an entity recognizer including status, S3 buckets containing training data, recognizer metadata, metrics, and so on.
    */
-  describeEntityRecognizer(params: Comprehend.Types.DescribeEntityRecognizerRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeEntityRecognizerResponse) => void): Request<Comprehend.Types.DescribeEntityRecognizerResponse, AWSError>;
+  describeEntityRecognizer(params: BoundInput<Comprehend.Types.DescribeEntityRecognizerRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.DescribeEntityRecognizerResponse) => void): Request<Comprehend.Types.DescribeEntityRecognizerResponse, AWSError>;
   /**
    * Provides details about an entity recognizer including status, S3 buckets containing training data, recognizer metadata, metrics, and so on.
    */
@@ -126,7 +128,7 @@ declare class Comprehend extends Service {
   /**
    * Gets the properties associated with a key phrases detection job. Use this operation to get the status of a detection job.
    */
-  describeKeyPhrasesDetectionJob(params: Comprehend.Types.DescribeKeyPhrasesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.DescribeKeyPhrasesDetectionJobResponse, AWSError>;
+  describeKeyPhrasesDetectionJob(params: BoundInput<Comprehend.Types.DescribeKeyPhrasesDetectionJobRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.DescribeKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.DescribeKeyPhrasesDetectionJobResponse, AWSError>;
   /**
    * Gets the properties associated with a key phrases detection job. Use this operation to get the status of a detection job.
    */
@@ -134,7 +136,7 @@ declare class Comprehend extends Service {
   /**
    * Gets the properties associated with a sentiment detection job. Use this operation to get the status of a detection job.
    */
-  describeSentimentDetectionJob(params: Comprehend.Types.DescribeSentimentDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeSentimentDetectionJobResponse) => void): Request<Comprehend.Types.DescribeSentimentDetectionJobResponse, AWSError>;
+  describeSentimentDetectionJob(params: BoundInput<Comprehend.Types.DescribeSentimentDetectionJobRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.DescribeSentimentDetectionJobResponse) => void): Request<Comprehend.Types.DescribeSentimentDetectionJobResponse, AWSError>;
   /**
    * Gets the properties associated with a sentiment detection job. Use this operation to get the status of a detection job.
    */
@@ -142,7 +144,7 @@ declare class Comprehend extends Service {
   /**
    * Gets the properties associated with a topic detection job. Use this operation to get the status of a detection job.
    */
-  describeTopicsDetectionJob(params: Comprehend.Types.DescribeTopicsDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeTopicsDetectionJobResponse) => void): Request<Comprehend.Types.DescribeTopicsDetectionJobResponse, AWSError>;
+  describeTopicsDetectionJob(params: BoundInput<Comprehend.Types.DescribeTopicsDetectionJobRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.DescribeTopicsDetectionJobResponse) => void): Request<Comprehend.Types.DescribeTopicsDetectionJobResponse, AWSError>;
   /**
    * Gets the properties associated with a topic detection job. Use this operation to get the status of a detection job.
    */
@@ -150,7 +152,7 @@ declare class Comprehend extends Service {
   /**
    * Determines the dominant language of the input text. For a list of languages that Amazon Comprehend can detect, see Amazon Comprehend Supported Languages. 
    */
-  detectDominantLanguage(params: Comprehend.Types.DetectDominantLanguageRequest, callback?: (err: AWSError, data: Comprehend.Types.DetectDominantLanguageResponse) => void): Request<Comprehend.Types.DetectDominantLanguageResponse, AWSError>;
+  detectDominantLanguage(params: BoundInput<Comprehend.Types.DetectDominantLanguageRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.DetectDominantLanguageResponse) => void): Request<Comprehend.Types.DetectDominantLanguageResponse, AWSError>;
   /**
    * Determines the dominant language of the input text. For a list of languages that Amazon Comprehend can detect, see Amazon Comprehend Supported Languages. 
    */
@@ -158,7 +160,7 @@ declare class Comprehend extends Service {
   /**
    * Inspects text for named entities, and returns information about them. For more information, about named entities, see how-entities. 
    */
-  detectEntities(params: Comprehend.Types.DetectEntitiesRequest, callback?: (err: AWSError, data: Comprehend.Types.DetectEntitiesResponse) => void): Request<Comprehend.Types.DetectEntitiesResponse, AWSError>;
+  detectEntities(params: BoundInput<Comprehend.Types.DetectEntitiesRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.DetectEntitiesResponse) => void): Request<Comprehend.Types.DetectEntitiesResponse, AWSError>;
   /**
    * Inspects text for named entities, and returns information about them. For more information, about named entities, see how-entities. 
    */
@@ -166,7 +168,7 @@ declare class Comprehend extends Service {
   /**
    * Detects the key noun phrases found in the text. 
    */
-  detectKeyPhrases(params: Comprehend.Types.DetectKeyPhrasesRequest, callback?: (err: AWSError, data: Comprehend.Types.DetectKeyPhrasesResponse) => void): Request<Comprehend.Types.DetectKeyPhrasesResponse, AWSError>;
+  detectKeyPhrases(params: BoundInput<Comprehend.Types.DetectKeyPhrasesRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.DetectKeyPhrasesResponse) => void): Request<Comprehend.Types.DetectKeyPhrasesResponse, AWSError>;
   /**
    * Detects the key noun phrases found in the text. 
    */
@@ -174,7 +176,7 @@ declare class Comprehend extends Service {
   /**
    * Inspects text and returns an inference of the prevailing sentiment (POSITIVE, NEUTRAL, MIXED, or NEGATIVE). 
    */
-  detectSentiment(params: Comprehend.Types.DetectSentimentRequest, callback?: (err: AWSError, data: Comprehend.Types.DetectSentimentResponse) => void): Request<Comprehend.Types.DetectSentimentResponse, AWSError>;
+  detectSentiment(params: BoundInput<Comprehend.Types.DetectSentimentRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.DetectSentimentResponse) => void): Request<Comprehend.Types.DetectSentimentResponse, AWSError>;
   /**
    * Inspects text and returns an inference of the prevailing sentiment (POSITIVE, NEUTRAL, MIXED, or NEGATIVE). 
    */
@@ -182,7 +184,7 @@ declare class Comprehend extends Service {
   /**
    * Inspects text for syntax and the part of speech of words in the document. For more information, how-syntax.
    */
-  detectSyntax(params: Comprehend.Types.DetectSyntaxRequest, callback?: (err: AWSError, data: Comprehend.Types.DetectSyntaxResponse) => void): Request<Comprehend.Types.DetectSyntaxResponse, AWSError>;
+  detectSyntax(params: BoundInput<Comprehend.Types.DetectSyntaxRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.DetectSyntaxResponse) => void): Request<Comprehend.Types.DetectSyntaxResponse, AWSError>;
   /**
    * Inspects text for syntax and the part of speech of words in the document. For more information, how-syntax.
    */
@@ -190,7 +192,7 @@ declare class Comprehend extends Service {
   /**
    * Gets a list of the documentation classification jobs that you have submitted.
    */
-  listDocumentClassificationJobs(params: Comprehend.Types.ListDocumentClassificationJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassificationJobsResponse) => void): Request<Comprehend.Types.ListDocumentClassificationJobsResponse, AWSError>;
+  listDocumentClassificationJobs(params: BoundInput<Comprehend.Types.ListDocumentClassificationJobsRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassificationJobsResponse) => void): Request<Comprehend.Types.ListDocumentClassificationJobsResponse, AWSError>;
   /**
    * Gets a list of the documentation classification jobs that you have submitted.
    */
@@ -198,7 +200,7 @@ declare class Comprehend extends Service {
   /**
    * Gets a list of the document classifiers that you have created.
    */
-  listDocumentClassifiers(params: Comprehend.Types.ListDocumentClassifiersRequest, callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassifiersResponse) => void): Request<Comprehend.Types.ListDocumentClassifiersResponse, AWSError>;
+  listDocumentClassifiers(params: BoundInput<Comprehend.Types.ListDocumentClassifiersRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassifiersResponse) => void): Request<Comprehend.Types.ListDocumentClassifiersResponse, AWSError>;
   /**
    * Gets a list of the document classifiers that you have created.
    */
@@ -206,7 +208,7 @@ declare class Comprehend extends Service {
   /**
    * Gets a list of the dominant language detection jobs that you have submitted.
    */
-  listDominantLanguageDetectionJobs(params: Comprehend.Types.ListDominantLanguageDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListDominantLanguageDetectionJobsResponse) => void): Request<Comprehend.Types.ListDominantLanguageDetectionJobsResponse, AWSError>;
+  listDominantLanguageDetectionJobs(params: BoundInput<Comprehend.Types.ListDominantLanguageDetectionJobsRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.ListDominantLanguageDetectionJobsResponse) => void): Request<Comprehend.Types.ListDominantLanguageDetectionJobsResponse, AWSError>;
   /**
    * Gets a list of the dominant language detection jobs that you have submitted.
    */
@@ -214,7 +216,7 @@ declare class Comprehend extends Service {
   /**
    * Gets a list of the entity detection jobs that you have submitted.
    */
-  listEntitiesDetectionJobs(params: Comprehend.Types.ListEntitiesDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListEntitiesDetectionJobsResponse) => void): Request<Comprehend.Types.ListEntitiesDetectionJobsResponse, AWSError>;
+  listEntitiesDetectionJobs(params: BoundInput<Comprehend.Types.ListEntitiesDetectionJobsRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.ListEntitiesDetectionJobsResponse) => void): Request<Comprehend.Types.ListEntitiesDetectionJobsResponse, AWSError>;
   /**
    * Gets a list of the entity detection jobs that you have submitted.
    */
@@ -222,7 +224,7 @@ declare class Comprehend extends Service {
   /**
    * Gets a list of the properties of all entity recognizers that you created, including recognizers currently in training. Allows you to filter the list of recognizers based on criteria such as status and submission time. This call returns up to 500 entity recognizers in the list, with a default number of 100 recognizers in the list. The results of this list are not in any particular order. Please get the list and sort locally if needed.
    */
-  listEntityRecognizers(params: Comprehend.Types.ListEntityRecognizersRequest, callback?: (err: AWSError, data: Comprehend.Types.ListEntityRecognizersResponse) => void): Request<Comprehend.Types.ListEntityRecognizersResponse, AWSError>;
+  listEntityRecognizers(params: BoundInput<Comprehend.Types.ListEntityRecognizersRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.ListEntityRecognizersResponse) => void): Request<Comprehend.Types.ListEntityRecognizersResponse, AWSError>;
   /**
    * Gets a list of the properties of all entity recognizers that you created, including recognizers currently in training. Allows you to filter the list of recognizers based on criteria such as status and submission time. This call returns up to 500 entity recognizers in the list, with a default number of 100 recognizers in the list. The results of this list are not in any particular order. Please get the list and sort locally if needed.
    */
@@ -230,7 +232,7 @@ declare class Comprehend extends Service {
   /**
    * Get a list of key phrase detection jobs that you have submitted.
    */
-  listKeyPhrasesDetectionJobs(params: Comprehend.Types.ListKeyPhrasesDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListKeyPhrasesDetectionJobsResponse) => void): Request<Comprehend.Types.ListKeyPhrasesDetectionJobsResponse, AWSError>;
+  listKeyPhrasesDetectionJobs(params: BoundInput<Comprehend.Types.ListKeyPhrasesDetectionJobsRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.ListKeyPhrasesDetectionJobsResponse) => void): Request<Comprehend.Types.ListKeyPhrasesDetectionJobsResponse, AWSError>;
   /**
    * Get a list of key phrase detection jobs that you have submitted.
    */
@@ -238,7 +240,7 @@ declare class Comprehend extends Service {
   /**
    * Gets a list of sentiment detection jobs that you have submitted.
    */
-  listSentimentDetectionJobs(params: Comprehend.Types.ListSentimentDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListSentimentDetectionJobsResponse) => void): Request<Comprehend.Types.ListSentimentDetectionJobsResponse, AWSError>;
+  listSentimentDetectionJobs(params: BoundInput<Comprehend.Types.ListSentimentDetectionJobsRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.ListSentimentDetectionJobsResponse) => void): Request<Comprehend.Types.ListSentimentDetectionJobsResponse, AWSError>;
   /**
    * Gets a list of sentiment detection jobs that you have submitted.
    */
@@ -246,7 +248,7 @@ declare class Comprehend extends Service {
   /**
    * Gets a list of the topic detection jobs that you have submitted.
    */
-  listTopicsDetectionJobs(params: Comprehend.Types.ListTopicsDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListTopicsDetectionJobsResponse) => void): Request<Comprehend.Types.ListTopicsDetectionJobsResponse, AWSError>;
+  listTopicsDetectionJobs(params: BoundInput<Comprehend.Types.ListTopicsDetectionJobsRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.ListTopicsDetectionJobsResponse) => void): Request<Comprehend.Types.ListTopicsDetectionJobsResponse, AWSError>;
   /**
    * Gets a list of the topic detection jobs that you have submitted.
    */
@@ -254,7 +256,7 @@ declare class Comprehend extends Service {
   /**
    * Starts an asynchronous document classification job. Use the operation to track the progress of the job.
    */
-  startDocumentClassificationJob(params: Comprehend.Types.StartDocumentClassificationJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartDocumentClassificationJobResponse) => void): Request<Comprehend.Types.StartDocumentClassificationJobResponse, AWSError>;
+  startDocumentClassificationJob(params: BoundInput<Comprehend.Types.StartDocumentClassificationJobRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.StartDocumentClassificationJobResponse) => void): Request<Comprehend.Types.StartDocumentClassificationJobResponse, AWSError>;
   /**
    * Starts an asynchronous document classification job. Use the operation to track the progress of the job.
    */
@@ -262,7 +264,7 @@ declare class Comprehend extends Service {
   /**
    * Starts an asynchronous dominant language detection job for a collection of documents. Use the operation to track the status of a job.
    */
-  startDominantLanguageDetectionJob(params: Comprehend.Types.StartDominantLanguageDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.StartDominantLanguageDetectionJobResponse, AWSError>;
+  startDominantLanguageDetectionJob(params: BoundInput<Comprehend.Types.StartDominantLanguageDetectionJobRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.StartDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.StartDominantLanguageDetectionJobResponse, AWSError>;
   /**
    * Starts an asynchronous dominant language detection job for a collection of documents. Use the operation to track the status of a job.
    */
@@ -270,7 +272,7 @@ declare class Comprehend extends Service {
   /**
    * Starts an asynchronous entity detection job for a collection of documents. Use the operation to track the status of a job. This API can be used for either standard entity detection or custom entity recognition. In order to be used for custom entity recognition, the optional EntityRecognizerArn must be used in order to provide access to the recognizer being used to detect the custom entity.
    */
-  startEntitiesDetectionJob(params: Comprehend.Types.StartEntitiesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StartEntitiesDetectionJobResponse, AWSError>;
+  startEntitiesDetectionJob(params: BoundInput<Comprehend.Types.StartEntitiesDetectionJobRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.StartEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StartEntitiesDetectionJobResponse, AWSError>;
   /**
    * Starts an asynchronous entity detection job for a collection of documents. Use the operation to track the status of a job. This API can be used for either standard entity detection or custom entity recognition. In order to be used for custom entity recognition, the optional EntityRecognizerArn must be used in order to provide access to the recognizer being used to detect the custom entity.
    */
@@ -278,7 +280,7 @@ declare class Comprehend extends Service {
   /**
    * Starts an asynchronous key phrase detection job for a collection of documents. Use the operation to track the status of a job.
    */
-  startKeyPhrasesDetectionJob(params: Comprehend.Types.StartKeyPhrasesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.StartKeyPhrasesDetectionJobResponse, AWSError>;
+  startKeyPhrasesDetectionJob(params: BoundInput<Comprehend.Types.StartKeyPhrasesDetectionJobRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.StartKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.StartKeyPhrasesDetectionJobResponse, AWSError>;
   /**
    * Starts an asynchronous key phrase detection job for a collection of documents. Use the operation to track the status of a job.
    */
@@ -286,7 +288,7 @@ declare class Comprehend extends Service {
   /**
    * Starts an asynchronous sentiment detection job for a collection of documents. use the operation to track the status of a job.
    */
-  startSentimentDetectionJob(params: Comprehend.Types.StartSentimentDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StartSentimentDetectionJobResponse, AWSError>;
+  startSentimentDetectionJob(params: BoundInput<Comprehend.Types.StartSentimentDetectionJobRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.StartSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StartSentimentDetectionJobResponse, AWSError>;
   /**
    * Starts an asynchronous sentiment detection job for a collection of documents. use the operation to track the status of a job.
    */
@@ -294,7 +296,7 @@ declare class Comprehend extends Service {
   /**
    * Starts an asynchronous topic detection job. Use the DescribeTopicDetectionJob operation to track the status of a job.
    */
-  startTopicsDetectionJob(params: Comprehend.Types.StartTopicsDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartTopicsDetectionJobResponse) => void): Request<Comprehend.Types.StartTopicsDetectionJobResponse, AWSError>;
+  startTopicsDetectionJob(params: BoundInput<Comprehend.Types.StartTopicsDetectionJobRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.StartTopicsDetectionJobResponse) => void): Request<Comprehend.Types.StartTopicsDetectionJobResponse, AWSError>;
   /**
    * Starts an asynchronous topic detection job. Use the DescribeTopicDetectionJob operation to track the status of a job.
    */
@@ -302,7 +304,7 @@ declare class Comprehend extends Service {
   /**
    * Stops a dominant language detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
-  stopDominantLanguageDetectionJob(params: Comprehend.Types.StopDominantLanguageDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StopDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.StopDominantLanguageDetectionJobResponse, AWSError>;
+  stopDominantLanguageDetectionJob(params: BoundInput<Comprehend.Types.StopDominantLanguageDetectionJobRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.StopDominantLanguageDetectionJobResponse) => void): Request<Comprehend.Types.StopDominantLanguageDetectionJobResponse, AWSError>;
   /**
    * Stops a dominant language detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
@@ -310,7 +312,7 @@ declare class Comprehend extends Service {
   /**
    * Stops an entities detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
-  stopEntitiesDetectionJob(params: Comprehend.Types.StopEntitiesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StopEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StopEntitiesDetectionJobResponse, AWSError>;
+  stopEntitiesDetectionJob(params: BoundInput<Comprehend.Types.StopEntitiesDetectionJobRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.StopEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StopEntitiesDetectionJobResponse, AWSError>;
   /**
    * Stops an entities detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
@@ -318,7 +320,7 @@ declare class Comprehend extends Service {
   /**
    * Stops a key phrases detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
-  stopKeyPhrasesDetectionJob(params: Comprehend.Types.StopKeyPhrasesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StopKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.StopKeyPhrasesDetectionJobResponse, AWSError>;
+  stopKeyPhrasesDetectionJob(params: BoundInput<Comprehend.Types.StopKeyPhrasesDetectionJobRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.StopKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.StopKeyPhrasesDetectionJobResponse, AWSError>;
   /**
    * Stops a key phrases detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
@@ -326,7 +328,7 @@ declare class Comprehend extends Service {
   /**
    * Stops a sentiment detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is be stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
-  stopSentimentDetectionJob(params: Comprehend.Types.StopSentimentDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StopSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StopSentimentDetectionJobResponse, AWSError>;
+  stopSentimentDetectionJob(params: BoundInput<Comprehend.Types.StopSentimentDetectionJobRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.StopSentimentDetectionJobResponse) => void): Request<Comprehend.Types.StopSentimentDetectionJobResponse, AWSError>;
   /**
    * Stops a sentiment detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is be stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
@@ -334,7 +336,7 @@ declare class Comprehend extends Service {
   /**
    * Stops a document classifier training job while in progress. If the training job state is TRAINING, the job is marked for termination and put into the STOP_REQUESTED state. If the training job completes before it can be stopped, it is put into the TRAINED; otherwise the training job is stopped and put into the STOPPED state and the service sends back an HTTP 200 response with an empty HTTP body. 
    */
-  stopTrainingDocumentClassifier(params: Comprehend.Types.StopTrainingDocumentClassifierRequest, callback?: (err: AWSError, data: Comprehend.Types.StopTrainingDocumentClassifierResponse) => void): Request<Comprehend.Types.StopTrainingDocumentClassifierResponse, AWSError>;
+  stopTrainingDocumentClassifier(params: BoundInput<Comprehend.Types.StopTrainingDocumentClassifierRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.StopTrainingDocumentClassifierResponse) => void): Request<Comprehend.Types.StopTrainingDocumentClassifierResponse, AWSError>;
   /**
    * Stops a document classifier training job while in progress. If the training job state is TRAINING, the job is marked for termination and put into the STOP_REQUESTED state. If the training job completes before it can be stopped, it is put into the TRAINED; otherwise the training job is stopped and put into the STOPPED state and the service sends back an HTTP 200 response with an empty HTTP body. 
    */
@@ -342,7 +344,7 @@ declare class Comprehend extends Service {
   /**
    * Stops an entity recognizer training job while in progress. If the training job state is TRAINING, the job is marked for termination and put into the STOP_REQUESTED state. If the training job completes before it can be stopped, it is put into the TRAINED; otherwise the training job is stopped and putted into the STOPPED state and the service sends back an HTTP 200 response with an empty HTTP body.
    */
-  stopTrainingEntityRecognizer(params: Comprehend.Types.StopTrainingEntityRecognizerRequest, callback?: (err: AWSError, data: Comprehend.Types.StopTrainingEntityRecognizerResponse) => void): Request<Comprehend.Types.StopTrainingEntityRecognizerResponse, AWSError>;
+  stopTrainingEntityRecognizer(params: BoundInput<Comprehend.Types.StopTrainingEntityRecognizerRequest, keyof Params>, callback?: (err: AWSError, data: Comprehend.Types.StopTrainingEntityRecognizerResponse) => void): Request<Comprehend.Types.StopTrainingEntityRecognizerResponse, AWSError>;
   /**
    * Stops an entity recognizer training job while in progress. If the training job state is TRAINING, the job is marked for termination and put into the STOP_REQUESTED state. If the training job completes before it can be stopped, it is put into the TRAINED; otherwise the training job is stopped and putted into the STOPPED state and the service sends back an HTTP 200 response with an empty HTTP body.
    */
@@ -2019,7 +2021,8 @@ declare namespace Comprehend {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<BatchDetectDominantLanguageRequest & BatchDetectEntitiesRequest & BatchDetectKeyPhrasesRequest & BatchDetectSentimentRequest & BatchDetectSyntaxRequest & CreateDocumentClassifierRequest & CreateEntityRecognizerRequest & DeleteDocumentClassifierRequest & DeleteEntityRecognizerRequest & DescribeDocumentClassificationJobRequest & DescribeDocumentClassifierRequest & DescribeDominantLanguageDetectionJobRequest & DescribeEntitiesDetectionJobRequest & DescribeEntityRecognizerRequest & DescribeKeyPhrasesDetectionJobRequest & DescribeSentimentDetectionJobRequest & DescribeTopicsDetectionJobRequest & DetectDominantLanguageRequest & DetectEntitiesRequest & DetectKeyPhrasesRequest & DetectSentimentRequest & DetectSyntaxRequest & ListDocumentClassificationJobsRequest & ListDocumentClassifiersRequest & ListDominantLanguageDetectionJobsRequest & ListEntitiesDetectionJobsRequest & ListEntityRecognizersRequest & ListKeyPhrasesDetectionJobsRequest & ListSentimentDetectionJobsRequest & ListTopicsDetectionJobsRequest & StartDocumentClassificationJobRequest & StartDominantLanguageDetectionJobRequest & StartEntitiesDetectionJobRequest & StartKeyPhrasesDetectionJobRequest & StartSentimentDetectionJobRequest & StartTopicsDetectionJobRequest & StopDominantLanguageDetectionJobRequest & StopEntitiesDetectionJobRequest & StopKeyPhrasesDetectionJobRequest & StopSentimentDetectionJobRequest & StopTrainingDocumentClassifierRequest & StopTrainingEntityRecognizerRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the Comprehend client.
    */

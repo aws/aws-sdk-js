@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class SMS extends Service {
+declare class SMS<Params extends SMS.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: SMS.Types.ClientConfiguration)
-  config: Config & SMS.Types.ClientConfiguration;
+  constructor(options?: SMS.Types.ClientConfiguration<Params>)
+  config: Config & SMS.Types.ClientConfiguration<Params>;
   /**
    * Creates an application. An application consists of one or more server groups. Each server group contain one or more servers.
    */
-  createApp(params: SMS.Types.CreateAppRequest, callback?: (err: AWSError, data: SMS.Types.CreateAppResponse) => void): Request<SMS.Types.CreateAppResponse, AWSError>;
+  createApp(params: BoundInput<SMS.Types.CreateAppRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.CreateAppResponse) => void): Request<SMS.Types.CreateAppResponse, AWSError>;
   /**
    * Creates an application. An application consists of one or more server groups. Each server group contain one or more servers.
    */
@@ -22,7 +24,7 @@ declare class SMS extends Service {
   /**
    * Creates a replication job. The replication job schedules periodic replication runs to replicate your server to AWS. Each replication run creates an Amazon Machine Image (AMI).
    */
-  createReplicationJob(params: SMS.Types.CreateReplicationJobRequest, callback?: (err: AWSError, data: SMS.Types.CreateReplicationJobResponse) => void): Request<SMS.Types.CreateReplicationJobResponse, AWSError>;
+  createReplicationJob(params: BoundInput<SMS.Types.CreateReplicationJobRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.CreateReplicationJobResponse) => void): Request<SMS.Types.CreateReplicationJobResponse, AWSError>;
   /**
    * Creates a replication job. The replication job schedules periodic replication runs to replicate your server to AWS. Each replication run creates an Amazon Machine Image (AMI).
    */
@@ -30,7 +32,7 @@ declare class SMS extends Service {
   /**
    * Deletes an existing application. Optionally deletes the launched stack associated with the application and all AWS SMS replication jobs for servers in the application.
    */
-  deleteApp(params: SMS.Types.DeleteAppRequest, callback?: (err: AWSError, data: SMS.Types.DeleteAppResponse) => void): Request<SMS.Types.DeleteAppResponse, AWSError>;
+  deleteApp(params: BoundInput<SMS.Types.DeleteAppRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.DeleteAppResponse) => void): Request<SMS.Types.DeleteAppResponse, AWSError>;
   /**
    * Deletes an existing application. Optionally deletes the launched stack associated with the application and all AWS SMS replication jobs for servers in the application.
    */
@@ -38,7 +40,7 @@ declare class SMS extends Service {
   /**
    * Deletes existing launch configuration for an application.
    */
-  deleteAppLaunchConfiguration(params: SMS.Types.DeleteAppLaunchConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.DeleteAppLaunchConfigurationResponse) => void): Request<SMS.Types.DeleteAppLaunchConfigurationResponse, AWSError>;
+  deleteAppLaunchConfiguration(params: BoundInput<SMS.Types.DeleteAppLaunchConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.DeleteAppLaunchConfigurationResponse) => void): Request<SMS.Types.DeleteAppLaunchConfigurationResponse, AWSError>;
   /**
    * Deletes existing launch configuration for an application.
    */
@@ -46,7 +48,7 @@ declare class SMS extends Service {
   /**
    * Deletes existing replication configuration for an application.
    */
-  deleteAppReplicationConfiguration(params: SMS.Types.DeleteAppReplicationConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.DeleteAppReplicationConfigurationResponse) => void): Request<SMS.Types.DeleteAppReplicationConfigurationResponse, AWSError>;
+  deleteAppReplicationConfiguration(params: BoundInput<SMS.Types.DeleteAppReplicationConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.DeleteAppReplicationConfigurationResponse) => void): Request<SMS.Types.DeleteAppReplicationConfigurationResponse, AWSError>;
   /**
    * Deletes existing replication configuration for an application.
    */
@@ -54,7 +56,7 @@ declare class SMS extends Service {
   /**
    * Deletes the specified replication job. After you delete a replication job, there are no further replication runs. AWS deletes the contents of the Amazon S3 bucket used to store AWS SMS artifacts. The AMIs created by the replication runs are not deleted.
    */
-  deleteReplicationJob(params: SMS.Types.DeleteReplicationJobRequest, callback?: (err: AWSError, data: SMS.Types.DeleteReplicationJobResponse) => void): Request<SMS.Types.DeleteReplicationJobResponse, AWSError>;
+  deleteReplicationJob(params: BoundInput<SMS.Types.DeleteReplicationJobRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.DeleteReplicationJobResponse) => void): Request<SMS.Types.DeleteReplicationJobResponse, AWSError>;
   /**
    * Deletes the specified replication job. After you delete a replication job, there are no further replication runs. AWS deletes the contents of the Amazon S3 bucket used to store AWS SMS artifacts. The AMIs created by the replication runs are not deleted.
    */
@@ -62,7 +64,7 @@ declare class SMS extends Service {
   /**
    * Deletes all servers from your server catalog.
    */
-  deleteServerCatalog(params: SMS.Types.DeleteServerCatalogRequest, callback?: (err: AWSError, data: SMS.Types.DeleteServerCatalogResponse) => void): Request<SMS.Types.DeleteServerCatalogResponse, AWSError>;
+  deleteServerCatalog(params: BoundInput<SMS.Types.DeleteServerCatalogRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.DeleteServerCatalogResponse) => void): Request<SMS.Types.DeleteServerCatalogResponse, AWSError>;
   /**
    * Deletes all servers from your server catalog.
    */
@@ -70,7 +72,7 @@ declare class SMS extends Service {
   /**
    * Disassociates the specified connector from AWS SMS. After you disassociate a connector, it is no longer available to support replication jobs.
    */
-  disassociateConnector(params: SMS.Types.DisassociateConnectorRequest, callback?: (err: AWSError, data: SMS.Types.DisassociateConnectorResponse) => void): Request<SMS.Types.DisassociateConnectorResponse, AWSError>;
+  disassociateConnector(params: BoundInput<SMS.Types.DisassociateConnectorRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.DisassociateConnectorResponse) => void): Request<SMS.Types.DisassociateConnectorResponse, AWSError>;
   /**
    * Disassociates the specified connector from AWS SMS. After you disassociate a connector, it is no longer available to support replication jobs.
    */
@@ -78,7 +80,7 @@ declare class SMS extends Service {
   /**
    * Generates a target change set for a currently launched stack and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
    */
-  generateChangeSet(params: SMS.Types.GenerateChangeSetRequest, callback?: (err: AWSError, data: SMS.Types.GenerateChangeSetResponse) => void): Request<SMS.Types.GenerateChangeSetResponse, AWSError>;
+  generateChangeSet(params: BoundInput<SMS.Types.GenerateChangeSetRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.GenerateChangeSetResponse) => void): Request<SMS.Types.GenerateChangeSetResponse, AWSError>;
   /**
    * Generates a target change set for a currently launched stack and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
    */
@@ -86,7 +88,7 @@ declare class SMS extends Service {
   /**
    * Generates an Amazon CloudFormation template based on the current launch configuration and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
    */
-  generateTemplate(params: SMS.Types.GenerateTemplateRequest, callback?: (err: AWSError, data: SMS.Types.GenerateTemplateResponse) => void): Request<SMS.Types.GenerateTemplateResponse, AWSError>;
+  generateTemplate(params: BoundInput<SMS.Types.GenerateTemplateRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.GenerateTemplateResponse) => void): Request<SMS.Types.GenerateTemplateResponse, AWSError>;
   /**
    * Generates an Amazon CloudFormation template based on the current launch configuration and writes it to an Amazon S3 object in the customer’s Amazon S3 bucket.
    */
@@ -94,7 +96,7 @@ declare class SMS extends Service {
   /**
    * Retrieve information about an application.
    */
-  getApp(params: SMS.Types.GetAppRequest, callback?: (err: AWSError, data: SMS.Types.GetAppResponse) => void): Request<SMS.Types.GetAppResponse, AWSError>;
+  getApp(params: BoundInput<SMS.Types.GetAppRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.GetAppResponse) => void): Request<SMS.Types.GetAppResponse, AWSError>;
   /**
    * Retrieve information about an application.
    */
@@ -102,7 +104,7 @@ declare class SMS extends Service {
   /**
    * Retrieves the application launch configuration associated with an application.
    */
-  getAppLaunchConfiguration(params: SMS.Types.GetAppLaunchConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.GetAppLaunchConfigurationResponse) => void): Request<SMS.Types.GetAppLaunchConfigurationResponse, AWSError>;
+  getAppLaunchConfiguration(params: BoundInput<SMS.Types.GetAppLaunchConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.GetAppLaunchConfigurationResponse) => void): Request<SMS.Types.GetAppLaunchConfigurationResponse, AWSError>;
   /**
    * Retrieves the application launch configuration associated with an application.
    */
@@ -110,7 +112,7 @@ declare class SMS extends Service {
   /**
    * Retrieves an application replication configuration associatd with an application.
    */
-  getAppReplicationConfiguration(params: SMS.Types.GetAppReplicationConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.GetAppReplicationConfigurationResponse) => void): Request<SMS.Types.GetAppReplicationConfigurationResponse, AWSError>;
+  getAppReplicationConfiguration(params: BoundInput<SMS.Types.GetAppReplicationConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.GetAppReplicationConfigurationResponse) => void): Request<SMS.Types.GetAppReplicationConfigurationResponse, AWSError>;
   /**
    * Retrieves an application replication configuration associatd with an application.
    */
@@ -118,7 +120,7 @@ declare class SMS extends Service {
   /**
    * Describes the connectors registered with the AWS SMS.
    */
-  getConnectors(params: SMS.Types.GetConnectorsRequest, callback?: (err: AWSError, data: SMS.Types.GetConnectorsResponse) => void): Request<SMS.Types.GetConnectorsResponse, AWSError>;
+  getConnectors(params: BoundInput<SMS.Types.GetConnectorsRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.GetConnectorsResponse) => void): Request<SMS.Types.GetConnectorsResponse, AWSError>;
   /**
    * Describes the connectors registered with the AWS SMS.
    */
@@ -126,7 +128,7 @@ declare class SMS extends Service {
   /**
    * Describes the specified replication job or all of your replication jobs.
    */
-  getReplicationJobs(params: SMS.Types.GetReplicationJobsRequest, callback?: (err: AWSError, data: SMS.Types.GetReplicationJobsResponse) => void): Request<SMS.Types.GetReplicationJobsResponse, AWSError>;
+  getReplicationJobs(params: BoundInput<SMS.Types.GetReplicationJobsRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.GetReplicationJobsResponse) => void): Request<SMS.Types.GetReplicationJobsResponse, AWSError>;
   /**
    * Describes the specified replication job or all of your replication jobs.
    */
@@ -134,7 +136,7 @@ declare class SMS extends Service {
   /**
    * Describes the replication runs for the specified replication job.
    */
-  getReplicationRuns(params: SMS.Types.GetReplicationRunsRequest, callback?: (err: AWSError, data: SMS.Types.GetReplicationRunsResponse) => void): Request<SMS.Types.GetReplicationRunsResponse, AWSError>;
+  getReplicationRuns(params: BoundInput<SMS.Types.GetReplicationRunsRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.GetReplicationRunsResponse) => void): Request<SMS.Types.GetReplicationRunsResponse, AWSError>;
   /**
    * Describes the replication runs for the specified replication job.
    */
@@ -142,7 +144,7 @@ declare class SMS extends Service {
   /**
    * Describes the servers in your server catalog. Before you can describe your servers, you must import them using ImportServerCatalog.
    */
-  getServers(params: SMS.Types.GetServersRequest, callback?: (err: AWSError, data: SMS.Types.GetServersResponse) => void): Request<SMS.Types.GetServersResponse, AWSError>;
+  getServers(params: BoundInput<SMS.Types.GetServersRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.GetServersResponse) => void): Request<SMS.Types.GetServersResponse, AWSError>;
   /**
    * Describes the servers in your server catalog. Before you can describe your servers, you must import them using ImportServerCatalog.
    */
@@ -150,7 +152,7 @@ declare class SMS extends Service {
   /**
    * Gathers a complete list of on-premises servers. Connectors must be installed and monitoring all servers that you want to import. This call returns immediately, but might take additional time to retrieve all the servers.
    */
-  importServerCatalog(params: SMS.Types.ImportServerCatalogRequest, callback?: (err: AWSError, data: SMS.Types.ImportServerCatalogResponse) => void): Request<SMS.Types.ImportServerCatalogResponse, AWSError>;
+  importServerCatalog(params: BoundInput<SMS.Types.ImportServerCatalogRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.ImportServerCatalogResponse) => void): Request<SMS.Types.ImportServerCatalogResponse, AWSError>;
   /**
    * Gathers a complete list of on-premises servers. Connectors must be installed and monitoring all servers that you want to import. This call returns immediately, but might take additional time to retrieve all the servers.
    */
@@ -158,7 +160,7 @@ declare class SMS extends Service {
   /**
    * Launches an application stack.
    */
-  launchApp(params: SMS.Types.LaunchAppRequest, callback?: (err: AWSError, data: SMS.Types.LaunchAppResponse) => void): Request<SMS.Types.LaunchAppResponse, AWSError>;
+  launchApp(params: BoundInput<SMS.Types.LaunchAppRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.LaunchAppResponse) => void): Request<SMS.Types.LaunchAppResponse, AWSError>;
   /**
    * Launches an application stack.
    */
@@ -166,7 +168,7 @@ declare class SMS extends Service {
   /**
    * Returns a list of summaries for all applications.
    */
-  listApps(params: SMS.Types.ListAppsRequest, callback?: (err: AWSError, data: SMS.Types.ListAppsResponse) => void): Request<SMS.Types.ListAppsResponse, AWSError>;
+  listApps(params: BoundInput<SMS.Types.ListAppsRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.ListAppsResponse) => void): Request<SMS.Types.ListAppsResponse, AWSError>;
   /**
    * Returns a list of summaries for all applications.
    */
@@ -174,7 +176,7 @@ declare class SMS extends Service {
   /**
    * Creates a launch configuration for an application.
    */
-  putAppLaunchConfiguration(params: SMS.Types.PutAppLaunchConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.PutAppLaunchConfigurationResponse) => void): Request<SMS.Types.PutAppLaunchConfigurationResponse, AWSError>;
+  putAppLaunchConfiguration(params: BoundInput<SMS.Types.PutAppLaunchConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.PutAppLaunchConfigurationResponse) => void): Request<SMS.Types.PutAppLaunchConfigurationResponse, AWSError>;
   /**
    * Creates a launch configuration for an application.
    */
@@ -182,7 +184,7 @@ declare class SMS extends Service {
   /**
    * Creates or updates a replication configuration for an application.
    */
-  putAppReplicationConfiguration(params: SMS.Types.PutAppReplicationConfigurationRequest, callback?: (err: AWSError, data: SMS.Types.PutAppReplicationConfigurationResponse) => void): Request<SMS.Types.PutAppReplicationConfigurationResponse, AWSError>;
+  putAppReplicationConfiguration(params: BoundInput<SMS.Types.PutAppReplicationConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.PutAppReplicationConfigurationResponse) => void): Request<SMS.Types.PutAppReplicationConfigurationResponse, AWSError>;
   /**
    * Creates or updates a replication configuration for an application.
    */
@@ -190,7 +192,7 @@ declare class SMS extends Service {
   /**
    * Starts replicating an application.
    */
-  startAppReplication(params: SMS.Types.StartAppReplicationRequest, callback?: (err: AWSError, data: SMS.Types.StartAppReplicationResponse) => void): Request<SMS.Types.StartAppReplicationResponse, AWSError>;
+  startAppReplication(params: BoundInput<SMS.Types.StartAppReplicationRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.StartAppReplicationResponse) => void): Request<SMS.Types.StartAppReplicationResponse, AWSError>;
   /**
    * Starts replicating an application.
    */
@@ -198,7 +200,7 @@ declare class SMS extends Service {
   /**
    * Starts an on-demand replication run for the specified replication job. This replication run starts immediately. This replication run is in addition to the ones already scheduled. There is a limit on the number of on-demand replications runs you can request in a 24-hour period.
    */
-  startOnDemandReplicationRun(params: SMS.Types.StartOnDemandReplicationRunRequest, callback?: (err: AWSError, data: SMS.Types.StartOnDemandReplicationRunResponse) => void): Request<SMS.Types.StartOnDemandReplicationRunResponse, AWSError>;
+  startOnDemandReplicationRun(params: BoundInput<SMS.Types.StartOnDemandReplicationRunRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.StartOnDemandReplicationRunResponse) => void): Request<SMS.Types.StartOnDemandReplicationRunResponse, AWSError>;
   /**
    * Starts an on-demand replication run for the specified replication job. This replication run starts immediately. This replication run is in addition to the ones already scheduled. There is a limit on the number of on-demand replications runs you can request in a 24-hour period.
    */
@@ -206,7 +208,7 @@ declare class SMS extends Service {
   /**
    * Stops replicating an application.
    */
-  stopAppReplication(params: SMS.Types.StopAppReplicationRequest, callback?: (err: AWSError, data: SMS.Types.StopAppReplicationResponse) => void): Request<SMS.Types.StopAppReplicationResponse, AWSError>;
+  stopAppReplication(params: BoundInput<SMS.Types.StopAppReplicationRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.StopAppReplicationResponse) => void): Request<SMS.Types.StopAppReplicationResponse, AWSError>;
   /**
    * Stops replicating an application.
    */
@@ -214,7 +216,7 @@ declare class SMS extends Service {
   /**
    * Terminates the stack for an application.
    */
-  terminateApp(params: SMS.Types.TerminateAppRequest, callback?: (err: AWSError, data: SMS.Types.TerminateAppResponse) => void): Request<SMS.Types.TerminateAppResponse, AWSError>;
+  terminateApp(params: BoundInput<SMS.Types.TerminateAppRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.TerminateAppResponse) => void): Request<SMS.Types.TerminateAppResponse, AWSError>;
   /**
    * Terminates the stack for an application.
    */
@@ -222,7 +224,7 @@ declare class SMS extends Service {
   /**
    * Updates an application.
    */
-  updateApp(params: SMS.Types.UpdateAppRequest, callback?: (err: AWSError, data: SMS.Types.UpdateAppResponse) => void): Request<SMS.Types.UpdateAppResponse, AWSError>;
+  updateApp(params: BoundInput<SMS.Types.UpdateAppRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.UpdateAppResponse) => void): Request<SMS.Types.UpdateAppResponse, AWSError>;
   /**
    * Updates an application.
    */
@@ -230,7 +232,7 @@ declare class SMS extends Service {
   /**
    * Updates the specified settings for the specified replication job.
    */
-  updateReplicationJob(params: SMS.Types.UpdateReplicationJobRequest, callback?: (err: AWSError, data: SMS.Types.UpdateReplicationJobResponse) => void): Request<SMS.Types.UpdateReplicationJobResponse, AWSError>;
+  updateReplicationJob(params: BoundInput<SMS.Types.UpdateReplicationJobRequest, keyof Params>, callback?: (err: AWSError, data: SMS.Types.UpdateReplicationJobResponse) => void): Request<SMS.Types.UpdateReplicationJobResponse, AWSError>;
   /**
    * Updates the specified settings for the specified replication job.
    */
@@ -1289,7 +1291,8 @@ declare namespace SMS {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateAppRequest & CreateReplicationJobRequest & DeleteAppRequest & DeleteAppLaunchConfigurationRequest & DeleteAppReplicationConfigurationRequest & DeleteReplicationJobRequest & DeleteServerCatalogRequest & DisassociateConnectorRequest & GenerateChangeSetRequest & GenerateTemplateRequest & GetAppRequest & GetAppLaunchConfigurationRequest & GetAppReplicationConfigurationRequest & GetConnectorsRequest & GetReplicationJobsRequest & GetReplicationRunsRequest & GetServersRequest & ImportServerCatalogRequest & LaunchAppRequest & ListAppsRequest & PutAppLaunchConfigurationRequest & PutAppReplicationConfigurationRequest & StartAppReplicationRequest & StartOnDemandReplicationRunRequest & StopAppReplicationRequest & TerminateAppRequest & UpdateAppRequest & UpdateReplicationJobRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the SMS client.
    */

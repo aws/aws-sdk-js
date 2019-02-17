@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class RDSDataService extends Service {
+declare class RDSDataService<Params extends RDSDataService.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: RDSDataService.Types.ClientConfiguration)
-  config: Config & RDSDataService.Types.ClientConfiguration;
+  constructor(options?: RDSDataService.Types.ClientConfiguration<Params>)
+  config: Config & RDSDataService.Types.ClientConfiguration<Params>;
   /**
    * Executes any SQL statement on the target database synchronously
    */
-  executeSql(params: RDSDataService.Types.ExecuteSqlRequest, callback?: (err: AWSError, data: RDSDataService.Types.ExecuteSqlResponse) => void): Request<RDSDataService.Types.ExecuteSqlResponse, AWSError>;
+  executeSql(params: BoundInput<RDSDataService.Types.ExecuteSqlRequest, keyof Params>, callback?: (err: AWSError, data: RDSDataService.Types.ExecuteSqlResponse) => void): Request<RDSDataService.Types.ExecuteSqlResponse, AWSError>;
   /**
    * Executes any SQL statement on the target database synchronously
    */
@@ -216,7 +218,8 @@ declare namespace RDSDataService {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<ExecuteSqlRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the RDSDataService client.
    */

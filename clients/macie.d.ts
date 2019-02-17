@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class Macie extends Service {
+declare class Macie<Params extends Macie.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: Macie.Types.ClientConfiguration)
-  config: Config & Macie.Types.ClientConfiguration;
+  constructor(options?: Macie.Types.ClientConfiguration<Params>)
+  config: Config & Macie.Types.ClientConfiguration<Params>;
   /**
    * Associates a specified AWS account with Amazon Macie as a member account.
    */
-  associateMemberAccount(params: Macie.Types.AssociateMemberAccountRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  associateMemberAccount(params: BoundInput<Macie.Types.AssociateMemberAccountRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Associates a specified AWS account with Amazon Macie as a member account.
    */
@@ -22,7 +24,7 @@ declare class Macie extends Service {
   /**
    * Associates specified S3 resources with Amazon Macie for monitoring and data classification. If memberAccountId isn't specified, the action associates specified S3 resources with Macie for the current master account. If memberAccountId is specified, the action associates specified S3 resources with Macie for the specified member account. 
    */
-  associateS3Resources(params: Macie.Types.AssociateS3ResourcesRequest, callback?: (err: AWSError, data: Macie.Types.AssociateS3ResourcesResult) => void): Request<Macie.Types.AssociateS3ResourcesResult, AWSError>;
+  associateS3Resources(params: BoundInput<Macie.Types.AssociateS3ResourcesRequest, keyof Params>, callback?: (err: AWSError, data: Macie.Types.AssociateS3ResourcesResult) => void): Request<Macie.Types.AssociateS3ResourcesResult, AWSError>;
   /**
    * Associates specified S3 resources with Amazon Macie for monitoring and data classification. If memberAccountId isn't specified, the action associates specified S3 resources with Macie for the current master account. If memberAccountId is specified, the action associates specified S3 resources with Macie for the specified member account. 
    */
@@ -30,7 +32,7 @@ declare class Macie extends Service {
   /**
    * Removes the specified member account from Amazon Macie.
    */
-  disassociateMemberAccount(params: Macie.Types.DisassociateMemberAccountRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  disassociateMemberAccount(params: BoundInput<Macie.Types.DisassociateMemberAccountRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes the specified member account from Amazon Macie.
    */
@@ -38,7 +40,7 @@ declare class Macie extends Service {
   /**
    * Removes specified S3 resources from being monitored by Amazon Macie. If memberAccountId isn't specified, the action removes specified S3 resources from Macie for the current master account. If memberAccountId is specified, the action removes specified S3 resources from Macie for the specified member account.
    */
-  disassociateS3Resources(params: Macie.Types.DisassociateS3ResourcesRequest, callback?: (err: AWSError, data: Macie.Types.DisassociateS3ResourcesResult) => void): Request<Macie.Types.DisassociateS3ResourcesResult, AWSError>;
+  disassociateS3Resources(params: BoundInput<Macie.Types.DisassociateS3ResourcesRequest, keyof Params>, callback?: (err: AWSError, data: Macie.Types.DisassociateS3ResourcesResult) => void): Request<Macie.Types.DisassociateS3ResourcesResult, AWSError>;
   /**
    * Removes specified S3 resources from being monitored by Amazon Macie. If memberAccountId isn't specified, the action removes specified S3 resources from Macie for the current master account. If memberAccountId is specified, the action removes specified S3 resources from Macie for the specified member account.
    */
@@ -46,7 +48,7 @@ declare class Macie extends Service {
   /**
    * Lists all Amazon Macie member accounts for the current Amazon Macie master account.
    */
-  listMemberAccounts(params: Macie.Types.ListMemberAccountsRequest, callback?: (err: AWSError, data: Macie.Types.ListMemberAccountsResult) => void): Request<Macie.Types.ListMemberAccountsResult, AWSError>;
+  listMemberAccounts(params: BoundInput<Macie.Types.ListMemberAccountsRequest, keyof Params>, callback?: (err: AWSError, data: Macie.Types.ListMemberAccountsResult) => void): Request<Macie.Types.ListMemberAccountsResult, AWSError>;
   /**
    * Lists all Amazon Macie member accounts for the current Amazon Macie master account.
    */
@@ -54,7 +56,7 @@ declare class Macie extends Service {
   /**
    * Lists all the S3 resources associated with Amazon Macie. If memberAccountId isn't specified, the action lists the S3 resources associated with Amazon Macie for the current master account. If memberAccountId is specified, the action lists the S3 resources associated with Amazon Macie for the specified member account. 
    */
-  listS3Resources(params: Macie.Types.ListS3ResourcesRequest, callback?: (err: AWSError, data: Macie.Types.ListS3ResourcesResult) => void): Request<Macie.Types.ListS3ResourcesResult, AWSError>;
+  listS3Resources(params: BoundInput<Macie.Types.ListS3ResourcesRequest, keyof Params>, callback?: (err: AWSError, data: Macie.Types.ListS3ResourcesResult) => void): Request<Macie.Types.ListS3ResourcesResult, AWSError>;
   /**
    * Lists all the S3 resources associated with Amazon Macie. If memberAccountId isn't specified, the action lists the S3 resources associated with Amazon Macie for the current master account. If memberAccountId is specified, the action lists the S3 resources associated with Amazon Macie for the specified member account. 
    */
@@ -62,7 +64,7 @@ declare class Macie extends Service {
   /**
    * Updates the classification types for the specified S3 resources. If memberAccountId isn't specified, the action updates the classification types of the S3 resources associated with Amazon Macie for the current master account. If memberAccountId is specified, the action updates the classification types of the S3 resources associated with Amazon Macie for the specified member account. 
    */
-  updateS3Resources(params: Macie.Types.UpdateS3ResourcesRequest, callback?: (err: AWSError, data: Macie.Types.UpdateS3ResourcesResult) => void): Request<Macie.Types.UpdateS3ResourcesResult, AWSError>;
+  updateS3Resources(params: BoundInput<Macie.Types.UpdateS3ResourcesRequest, keyof Params>, callback?: (err: AWSError, data: Macie.Types.UpdateS3ResourcesResult) => void): Request<Macie.Types.UpdateS3ResourcesResult, AWSError>;
   /**
    * Updates the classification types for the specified S3 resources. If memberAccountId isn't specified, the action updates the classification types of the S3 resources associated with Amazon Macie for the current master account. If memberAccountId is specified, the action updates the classification types of the S3 resources associated with Amazon Macie for the specified member account. 
    */
@@ -275,7 +277,8 @@ declare namespace Macie {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AssociateMemberAccountRequest & AssociateS3ResourcesRequest & DisassociateMemberAccountRequest & DisassociateS3ResourcesRequest & ListMemberAccountsRequest & ListS3ResourcesRequest & UpdateS3ResourcesRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the Macie client.
    */

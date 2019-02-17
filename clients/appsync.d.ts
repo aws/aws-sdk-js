@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class AppSync extends Service {
+declare class AppSync<Params extends AppSync.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: AppSync.Types.ClientConfiguration)
-  config: Config & AppSync.Types.ClientConfiguration;
+  constructor(options?: AppSync.Types.ClientConfiguration<Params>)
+  config: Config & AppSync.Types.ClientConfiguration<Params>;
   /**
    * Creates a unique key that you can distribute to clients who are executing your API.
    */
-  createApiKey(params: AppSync.Types.CreateApiKeyRequest, callback?: (err: AWSError, data: AppSync.Types.CreateApiKeyResponse) => void): Request<AppSync.Types.CreateApiKeyResponse, AWSError>;
+  createApiKey(params: BoundInput<AppSync.Types.CreateApiKeyRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.CreateApiKeyResponse) => void): Request<AppSync.Types.CreateApiKeyResponse, AWSError>;
   /**
    * Creates a unique key that you can distribute to clients who are executing your API.
    */
@@ -22,7 +24,7 @@ declare class AppSync extends Service {
   /**
    * Creates a DataSource object.
    */
-  createDataSource(params: AppSync.Types.CreateDataSourceRequest, callback?: (err: AWSError, data: AppSync.Types.CreateDataSourceResponse) => void): Request<AppSync.Types.CreateDataSourceResponse, AWSError>;
+  createDataSource(params: BoundInput<AppSync.Types.CreateDataSourceRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.CreateDataSourceResponse) => void): Request<AppSync.Types.CreateDataSourceResponse, AWSError>;
   /**
    * Creates a DataSource object.
    */
@@ -30,7 +32,7 @@ declare class AppSync extends Service {
   /**
    * Creates a Function object. A function is a reusable entity. Multiple functions can be used to compose the resolver logic.
    */
-  createFunction(params: AppSync.Types.CreateFunctionRequest, callback?: (err: AWSError, data: AppSync.Types.CreateFunctionResponse) => void): Request<AppSync.Types.CreateFunctionResponse, AWSError>;
+  createFunction(params: BoundInput<AppSync.Types.CreateFunctionRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.CreateFunctionResponse) => void): Request<AppSync.Types.CreateFunctionResponse, AWSError>;
   /**
    * Creates a Function object. A function is a reusable entity. Multiple functions can be used to compose the resolver logic.
    */
@@ -38,7 +40,7 @@ declare class AppSync extends Service {
   /**
    * Creates a GraphqlApi object.
    */
-  createGraphqlApi(params: AppSync.Types.CreateGraphqlApiRequest, callback?: (err: AWSError, data: AppSync.Types.CreateGraphqlApiResponse) => void): Request<AppSync.Types.CreateGraphqlApiResponse, AWSError>;
+  createGraphqlApi(params: BoundInput<AppSync.Types.CreateGraphqlApiRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.CreateGraphqlApiResponse) => void): Request<AppSync.Types.CreateGraphqlApiResponse, AWSError>;
   /**
    * Creates a GraphqlApi object.
    */
@@ -46,7 +48,7 @@ declare class AppSync extends Service {
   /**
    * Creates a Resolver object. A resolver converts incoming requests into a format that a data source can understand and converts the data source's responses into GraphQL.
    */
-  createResolver(params: AppSync.Types.CreateResolverRequest, callback?: (err: AWSError, data: AppSync.Types.CreateResolverResponse) => void): Request<AppSync.Types.CreateResolverResponse, AWSError>;
+  createResolver(params: BoundInput<AppSync.Types.CreateResolverRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.CreateResolverResponse) => void): Request<AppSync.Types.CreateResolverResponse, AWSError>;
   /**
    * Creates a Resolver object. A resolver converts incoming requests into a format that a data source can understand and converts the data source's responses into GraphQL.
    */
@@ -54,7 +56,7 @@ declare class AppSync extends Service {
   /**
    * Creates a Type object.
    */
-  createType(params: AppSync.Types.CreateTypeRequest, callback?: (err: AWSError, data: AppSync.Types.CreateTypeResponse) => void): Request<AppSync.Types.CreateTypeResponse, AWSError>;
+  createType(params: BoundInput<AppSync.Types.CreateTypeRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.CreateTypeResponse) => void): Request<AppSync.Types.CreateTypeResponse, AWSError>;
   /**
    * Creates a Type object.
    */
@@ -62,7 +64,7 @@ declare class AppSync extends Service {
   /**
    * Deletes an API key.
    */
-  deleteApiKey(params: AppSync.Types.DeleteApiKeyRequest, callback?: (err: AWSError, data: AppSync.Types.DeleteApiKeyResponse) => void): Request<AppSync.Types.DeleteApiKeyResponse, AWSError>;
+  deleteApiKey(params: BoundInput<AppSync.Types.DeleteApiKeyRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.DeleteApiKeyResponse) => void): Request<AppSync.Types.DeleteApiKeyResponse, AWSError>;
   /**
    * Deletes an API key.
    */
@@ -70,7 +72,7 @@ declare class AppSync extends Service {
   /**
    * Deletes a DataSource object.
    */
-  deleteDataSource(params: AppSync.Types.DeleteDataSourceRequest, callback?: (err: AWSError, data: AppSync.Types.DeleteDataSourceResponse) => void): Request<AppSync.Types.DeleteDataSourceResponse, AWSError>;
+  deleteDataSource(params: BoundInput<AppSync.Types.DeleteDataSourceRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.DeleteDataSourceResponse) => void): Request<AppSync.Types.DeleteDataSourceResponse, AWSError>;
   /**
    * Deletes a DataSource object.
    */
@@ -78,7 +80,7 @@ declare class AppSync extends Service {
   /**
    * Deletes a Function.
    */
-  deleteFunction(params: AppSync.Types.DeleteFunctionRequest, callback?: (err: AWSError, data: AppSync.Types.DeleteFunctionResponse) => void): Request<AppSync.Types.DeleteFunctionResponse, AWSError>;
+  deleteFunction(params: BoundInput<AppSync.Types.DeleteFunctionRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.DeleteFunctionResponse) => void): Request<AppSync.Types.DeleteFunctionResponse, AWSError>;
   /**
    * Deletes a Function.
    */
@@ -86,7 +88,7 @@ declare class AppSync extends Service {
   /**
    * Deletes a GraphqlApi object.
    */
-  deleteGraphqlApi(params: AppSync.Types.DeleteGraphqlApiRequest, callback?: (err: AWSError, data: AppSync.Types.DeleteGraphqlApiResponse) => void): Request<AppSync.Types.DeleteGraphqlApiResponse, AWSError>;
+  deleteGraphqlApi(params: BoundInput<AppSync.Types.DeleteGraphqlApiRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.DeleteGraphqlApiResponse) => void): Request<AppSync.Types.DeleteGraphqlApiResponse, AWSError>;
   /**
    * Deletes a GraphqlApi object.
    */
@@ -94,7 +96,7 @@ declare class AppSync extends Service {
   /**
    * Deletes a Resolver object.
    */
-  deleteResolver(params: AppSync.Types.DeleteResolverRequest, callback?: (err: AWSError, data: AppSync.Types.DeleteResolverResponse) => void): Request<AppSync.Types.DeleteResolverResponse, AWSError>;
+  deleteResolver(params: BoundInput<AppSync.Types.DeleteResolverRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.DeleteResolverResponse) => void): Request<AppSync.Types.DeleteResolverResponse, AWSError>;
   /**
    * Deletes a Resolver object.
    */
@@ -102,7 +104,7 @@ declare class AppSync extends Service {
   /**
    * Deletes a Type object.
    */
-  deleteType(params: AppSync.Types.DeleteTypeRequest, callback?: (err: AWSError, data: AppSync.Types.DeleteTypeResponse) => void): Request<AppSync.Types.DeleteTypeResponse, AWSError>;
+  deleteType(params: BoundInput<AppSync.Types.DeleteTypeRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.DeleteTypeResponse) => void): Request<AppSync.Types.DeleteTypeResponse, AWSError>;
   /**
    * Deletes a Type object.
    */
@@ -110,7 +112,7 @@ declare class AppSync extends Service {
   /**
    * Retrieves a DataSource object.
    */
-  getDataSource(params: AppSync.Types.GetDataSourceRequest, callback?: (err: AWSError, data: AppSync.Types.GetDataSourceResponse) => void): Request<AppSync.Types.GetDataSourceResponse, AWSError>;
+  getDataSource(params: BoundInput<AppSync.Types.GetDataSourceRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.GetDataSourceResponse) => void): Request<AppSync.Types.GetDataSourceResponse, AWSError>;
   /**
    * Retrieves a DataSource object.
    */
@@ -118,7 +120,7 @@ declare class AppSync extends Service {
   /**
    * Get a Function.
    */
-  getFunction(params: AppSync.Types.GetFunctionRequest, callback?: (err: AWSError, data: AppSync.Types.GetFunctionResponse) => void): Request<AppSync.Types.GetFunctionResponse, AWSError>;
+  getFunction(params: BoundInput<AppSync.Types.GetFunctionRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.GetFunctionResponse) => void): Request<AppSync.Types.GetFunctionResponse, AWSError>;
   /**
    * Get a Function.
    */
@@ -126,7 +128,7 @@ declare class AppSync extends Service {
   /**
    * Retrieves a GraphqlApi object.
    */
-  getGraphqlApi(params: AppSync.Types.GetGraphqlApiRequest, callback?: (err: AWSError, data: AppSync.Types.GetGraphqlApiResponse) => void): Request<AppSync.Types.GetGraphqlApiResponse, AWSError>;
+  getGraphqlApi(params: BoundInput<AppSync.Types.GetGraphqlApiRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.GetGraphqlApiResponse) => void): Request<AppSync.Types.GetGraphqlApiResponse, AWSError>;
   /**
    * Retrieves a GraphqlApi object.
    */
@@ -134,7 +136,7 @@ declare class AppSync extends Service {
   /**
    * Retrieves the introspection schema for a GraphQL API.
    */
-  getIntrospectionSchema(params: AppSync.Types.GetIntrospectionSchemaRequest, callback?: (err: AWSError, data: AppSync.Types.GetIntrospectionSchemaResponse) => void): Request<AppSync.Types.GetIntrospectionSchemaResponse, AWSError>;
+  getIntrospectionSchema(params: BoundInput<AppSync.Types.GetIntrospectionSchemaRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.GetIntrospectionSchemaResponse) => void): Request<AppSync.Types.GetIntrospectionSchemaResponse, AWSError>;
   /**
    * Retrieves the introspection schema for a GraphQL API.
    */
@@ -142,7 +144,7 @@ declare class AppSync extends Service {
   /**
    * Retrieves a Resolver object.
    */
-  getResolver(params: AppSync.Types.GetResolverRequest, callback?: (err: AWSError, data: AppSync.Types.GetResolverResponse) => void): Request<AppSync.Types.GetResolverResponse, AWSError>;
+  getResolver(params: BoundInput<AppSync.Types.GetResolverRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.GetResolverResponse) => void): Request<AppSync.Types.GetResolverResponse, AWSError>;
   /**
    * Retrieves a Resolver object.
    */
@@ -150,7 +152,7 @@ declare class AppSync extends Service {
   /**
    * Retrieves the current status of a schema creation operation.
    */
-  getSchemaCreationStatus(params: AppSync.Types.GetSchemaCreationStatusRequest, callback?: (err: AWSError, data: AppSync.Types.GetSchemaCreationStatusResponse) => void): Request<AppSync.Types.GetSchemaCreationStatusResponse, AWSError>;
+  getSchemaCreationStatus(params: BoundInput<AppSync.Types.GetSchemaCreationStatusRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.GetSchemaCreationStatusResponse) => void): Request<AppSync.Types.GetSchemaCreationStatusResponse, AWSError>;
   /**
    * Retrieves the current status of a schema creation operation.
    */
@@ -158,7 +160,7 @@ declare class AppSync extends Service {
   /**
    * Retrieves a Type object.
    */
-  getType(params: AppSync.Types.GetTypeRequest, callback?: (err: AWSError, data: AppSync.Types.GetTypeResponse) => void): Request<AppSync.Types.GetTypeResponse, AWSError>;
+  getType(params: BoundInput<AppSync.Types.GetTypeRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.GetTypeResponse) => void): Request<AppSync.Types.GetTypeResponse, AWSError>;
   /**
    * Retrieves a Type object.
    */
@@ -166,7 +168,7 @@ declare class AppSync extends Service {
   /**
    * Lists the API keys for a given API.  API keys are deleted automatically sometime after they expire. However, they may still be included in the response until they have actually been deleted. You can safely call DeleteApiKey to manually delete a key before it's automatically deleted. 
    */
-  listApiKeys(params: AppSync.Types.ListApiKeysRequest, callback?: (err: AWSError, data: AppSync.Types.ListApiKeysResponse) => void): Request<AppSync.Types.ListApiKeysResponse, AWSError>;
+  listApiKeys(params: BoundInput<AppSync.Types.ListApiKeysRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.ListApiKeysResponse) => void): Request<AppSync.Types.ListApiKeysResponse, AWSError>;
   /**
    * Lists the API keys for a given API.  API keys are deleted automatically sometime after they expire. However, they may still be included in the response until they have actually been deleted. You can safely call DeleteApiKey to manually delete a key before it's automatically deleted. 
    */
@@ -174,7 +176,7 @@ declare class AppSync extends Service {
   /**
    * Lists the data sources for a given API.
    */
-  listDataSources(params: AppSync.Types.ListDataSourcesRequest, callback?: (err: AWSError, data: AppSync.Types.ListDataSourcesResponse) => void): Request<AppSync.Types.ListDataSourcesResponse, AWSError>;
+  listDataSources(params: BoundInput<AppSync.Types.ListDataSourcesRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.ListDataSourcesResponse) => void): Request<AppSync.Types.ListDataSourcesResponse, AWSError>;
   /**
    * Lists the data sources for a given API.
    */
@@ -182,7 +184,7 @@ declare class AppSync extends Service {
   /**
    * List multiple functions.
    */
-  listFunctions(params: AppSync.Types.ListFunctionsRequest, callback?: (err: AWSError, data: AppSync.Types.ListFunctionsResponse) => void): Request<AppSync.Types.ListFunctionsResponse, AWSError>;
+  listFunctions(params: BoundInput<AppSync.Types.ListFunctionsRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.ListFunctionsResponse) => void): Request<AppSync.Types.ListFunctionsResponse, AWSError>;
   /**
    * List multiple functions.
    */
@@ -190,7 +192,7 @@ declare class AppSync extends Service {
   /**
    * Lists your GraphQL APIs.
    */
-  listGraphqlApis(params: AppSync.Types.ListGraphqlApisRequest, callback?: (err: AWSError, data: AppSync.Types.ListGraphqlApisResponse) => void): Request<AppSync.Types.ListGraphqlApisResponse, AWSError>;
+  listGraphqlApis(params: BoundInput<AppSync.Types.ListGraphqlApisRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.ListGraphqlApisResponse) => void): Request<AppSync.Types.ListGraphqlApisResponse, AWSError>;
   /**
    * Lists your GraphQL APIs.
    */
@@ -198,7 +200,7 @@ declare class AppSync extends Service {
   /**
    * Lists the resolvers for a given API and type.
    */
-  listResolvers(params: AppSync.Types.ListResolversRequest, callback?: (err: AWSError, data: AppSync.Types.ListResolversResponse) => void): Request<AppSync.Types.ListResolversResponse, AWSError>;
+  listResolvers(params: BoundInput<AppSync.Types.ListResolversRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.ListResolversResponse) => void): Request<AppSync.Types.ListResolversResponse, AWSError>;
   /**
    * Lists the resolvers for a given API and type.
    */
@@ -206,7 +208,7 @@ declare class AppSync extends Service {
   /**
    * List the resolvers that are associated with a specific function.
    */
-  listResolversByFunction(params: AppSync.Types.ListResolversByFunctionRequest, callback?: (err: AWSError, data: AppSync.Types.ListResolversByFunctionResponse) => void): Request<AppSync.Types.ListResolversByFunctionResponse, AWSError>;
+  listResolversByFunction(params: BoundInput<AppSync.Types.ListResolversByFunctionRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.ListResolversByFunctionResponse) => void): Request<AppSync.Types.ListResolversByFunctionResponse, AWSError>;
   /**
    * List the resolvers that are associated with a specific function.
    */
@@ -214,7 +216,7 @@ declare class AppSync extends Service {
   /**
    * Lists the types for a given API.
    */
-  listTypes(params: AppSync.Types.ListTypesRequest, callback?: (err: AWSError, data: AppSync.Types.ListTypesResponse) => void): Request<AppSync.Types.ListTypesResponse, AWSError>;
+  listTypes(params: BoundInput<AppSync.Types.ListTypesRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.ListTypesResponse) => void): Request<AppSync.Types.ListTypesResponse, AWSError>;
   /**
    * Lists the types for a given API.
    */
@@ -222,7 +224,7 @@ declare class AppSync extends Service {
   /**
    * Adds a new schema to your GraphQL API. This operation is asynchronous. Use to determine when it has completed.
    */
-  startSchemaCreation(params: AppSync.Types.StartSchemaCreationRequest, callback?: (err: AWSError, data: AppSync.Types.StartSchemaCreationResponse) => void): Request<AppSync.Types.StartSchemaCreationResponse, AWSError>;
+  startSchemaCreation(params: BoundInput<AppSync.Types.StartSchemaCreationRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.StartSchemaCreationResponse) => void): Request<AppSync.Types.StartSchemaCreationResponse, AWSError>;
   /**
    * Adds a new schema to your GraphQL API. This operation is asynchronous. Use to determine when it has completed.
    */
@@ -230,7 +232,7 @@ declare class AppSync extends Service {
   /**
    * Updates an API key.
    */
-  updateApiKey(params: AppSync.Types.UpdateApiKeyRequest, callback?: (err: AWSError, data: AppSync.Types.UpdateApiKeyResponse) => void): Request<AppSync.Types.UpdateApiKeyResponse, AWSError>;
+  updateApiKey(params: BoundInput<AppSync.Types.UpdateApiKeyRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.UpdateApiKeyResponse) => void): Request<AppSync.Types.UpdateApiKeyResponse, AWSError>;
   /**
    * Updates an API key.
    */
@@ -238,7 +240,7 @@ declare class AppSync extends Service {
   /**
    * Updates a DataSource object.
    */
-  updateDataSource(params: AppSync.Types.UpdateDataSourceRequest, callback?: (err: AWSError, data: AppSync.Types.UpdateDataSourceResponse) => void): Request<AppSync.Types.UpdateDataSourceResponse, AWSError>;
+  updateDataSource(params: BoundInput<AppSync.Types.UpdateDataSourceRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.UpdateDataSourceResponse) => void): Request<AppSync.Types.UpdateDataSourceResponse, AWSError>;
   /**
    * Updates a DataSource object.
    */
@@ -246,7 +248,7 @@ declare class AppSync extends Service {
   /**
    * Updates a Function object.
    */
-  updateFunction(params: AppSync.Types.UpdateFunctionRequest, callback?: (err: AWSError, data: AppSync.Types.UpdateFunctionResponse) => void): Request<AppSync.Types.UpdateFunctionResponse, AWSError>;
+  updateFunction(params: BoundInput<AppSync.Types.UpdateFunctionRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.UpdateFunctionResponse) => void): Request<AppSync.Types.UpdateFunctionResponse, AWSError>;
   /**
    * Updates a Function object.
    */
@@ -254,7 +256,7 @@ declare class AppSync extends Service {
   /**
    * Updates a GraphqlApi object.
    */
-  updateGraphqlApi(params: AppSync.Types.UpdateGraphqlApiRequest, callback?: (err: AWSError, data: AppSync.Types.UpdateGraphqlApiResponse) => void): Request<AppSync.Types.UpdateGraphqlApiResponse, AWSError>;
+  updateGraphqlApi(params: BoundInput<AppSync.Types.UpdateGraphqlApiRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.UpdateGraphqlApiResponse) => void): Request<AppSync.Types.UpdateGraphqlApiResponse, AWSError>;
   /**
    * Updates a GraphqlApi object.
    */
@@ -262,7 +264,7 @@ declare class AppSync extends Service {
   /**
    * Updates a Resolver object.
    */
-  updateResolver(params: AppSync.Types.UpdateResolverRequest, callback?: (err: AWSError, data: AppSync.Types.UpdateResolverResponse) => void): Request<AppSync.Types.UpdateResolverResponse, AWSError>;
+  updateResolver(params: BoundInput<AppSync.Types.UpdateResolverRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.UpdateResolverResponse) => void): Request<AppSync.Types.UpdateResolverResponse, AWSError>;
   /**
    * Updates a Resolver object.
    */
@@ -270,7 +272,7 @@ declare class AppSync extends Service {
   /**
    * Updates a Type object.
    */
-  updateType(params: AppSync.Types.UpdateTypeRequest, callback?: (err: AWSError, data: AppSync.Types.UpdateTypeResponse) => void): Request<AppSync.Types.UpdateTypeResponse, AWSError>;
+  updateType(params: BoundInput<AppSync.Types.UpdateTypeRequest, keyof Params>, callback?: (err: AWSError, data: AppSync.Types.UpdateTypeResponse) => void): Request<AppSync.Types.UpdateTypeResponse, AWSError>;
   /**
    * Updates a Type object.
    */
@@ -1417,7 +1419,8 @@ declare namespace AppSync {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateApiKeyRequest & CreateDataSourceRequest & CreateFunctionRequest & CreateGraphqlApiRequest & CreateResolverRequest & CreateTypeRequest & DeleteApiKeyRequest & DeleteDataSourceRequest & DeleteFunctionRequest & DeleteGraphqlApiRequest & DeleteResolverRequest & DeleteTypeRequest & GetDataSourceRequest & GetFunctionRequest & GetGraphqlApiRequest & GetIntrospectionSchemaRequest & GetResolverRequest & GetSchemaCreationStatusRequest & GetTypeRequest & ListApiKeysRequest & ListDataSourcesRequest & ListFunctionsRequest & ListGraphqlApisRequest & ListResolversRequest & ListResolversByFunctionRequest & ListTypesRequest & StartSchemaCreationRequest & UpdateApiKeyRequest & UpdateDataSourceRequest & UpdateFunctionRequest & UpdateGraphqlApiRequest & UpdateResolverRequest & UpdateTypeRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the AppSync client.
    */

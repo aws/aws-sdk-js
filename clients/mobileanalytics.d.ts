@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class MobileAnalytics extends Service {
+declare class MobileAnalytics<Params extends MobileAnalytics.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: MobileAnalytics.Types.ClientConfiguration)
-  config: Config & MobileAnalytics.Types.ClientConfiguration;
+  constructor(options?: MobileAnalytics.Types.ClientConfiguration<Params>)
+  config: Config & MobileAnalytics.Types.ClientConfiguration<Params>;
   /**
    * The PutEvents operation records one or more events. You can have up to 1,500 unique custom events per app, any combination of up to 40 attributes and metrics per custom event, and any number of attribute or metric values.
    */
-  putEvents(params: MobileAnalytics.Types.PutEventsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putEvents(params: BoundInput<MobileAnalytics.Types.PutEventsInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * The PutEvents operation records one or more events. You can have up to 1,500 unique custom events per app, any combination of up to 40 attributes and metrics per custom event, and any number of attribute or metric values.
    */
@@ -99,7 +101,8 @@ declare namespace MobileAnalytics {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<PutEventsInput>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the MobileAnalytics client.
    */

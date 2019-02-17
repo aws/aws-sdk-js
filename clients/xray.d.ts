@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class XRay extends Service {
+declare class XRay<Params extends XRay.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: XRay.Types.ClientConfiguration)
-  config: Config & XRay.Types.ClientConfiguration;
+  constructor(options?: XRay.Types.ClientConfiguration<Params>)
+  config: Config & XRay.Types.ClientConfiguration<Params>;
   /**
    * Retrieves a list of traces specified by ID. Each trace is a collection of segment documents that originates from a single request. Use GetTraceSummaries to get a list of trace IDs.
    */
-  batchGetTraces(params: XRay.Types.BatchGetTracesRequest, callback?: (err: AWSError, data: XRay.Types.BatchGetTracesResult) => void): Request<XRay.Types.BatchGetTracesResult, AWSError>;
+  batchGetTraces(params: BoundInput<XRay.Types.BatchGetTracesRequest, keyof Params>, callback?: (err: AWSError, data: XRay.Types.BatchGetTracesResult) => void): Request<XRay.Types.BatchGetTracesResult, AWSError>;
   /**
    * Retrieves a list of traces specified by ID. Each trace is a collection of segment documents that originates from a single request. Use GetTraceSummaries to get a list of trace IDs.
    */
@@ -22,7 +24,7 @@ declare class XRay extends Service {
   /**
    * Creates a group resource with a name and a filter expression. 
    */
-  createGroup(params: XRay.Types.CreateGroupRequest, callback?: (err: AWSError, data: XRay.Types.CreateGroupResult) => void): Request<XRay.Types.CreateGroupResult, AWSError>;
+  createGroup(params: BoundInput<XRay.Types.CreateGroupRequest, keyof Params>, callback?: (err: AWSError, data: XRay.Types.CreateGroupResult) => void): Request<XRay.Types.CreateGroupResult, AWSError>;
   /**
    * Creates a group resource with a name and a filter expression. 
    */
@@ -30,7 +32,7 @@ declare class XRay extends Service {
   /**
    * Creates a rule to control sampling behavior for instrumented applications. Services retrieve rules with GetSamplingRules, and evaluate each rule in ascending order of priority for each request. If a rule matches, the service records a trace, borrowing it from the reservoir size. After 10 seconds, the service reports back to X-Ray with GetSamplingTargets to get updated versions of each in-use rule. The updated rule contains a trace quota that the service can use instead of borrowing from the reservoir.
    */
-  createSamplingRule(params: XRay.Types.CreateSamplingRuleRequest, callback?: (err: AWSError, data: XRay.Types.CreateSamplingRuleResult) => void): Request<XRay.Types.CreateSamplingRuleResult, AWSError>;
+  createSamplingRule(params: BoundInput<XRay.Types.CreateSamplingRuleRequest, keyof Params>, callback?: (err: AWSError, data: XRay.Types.CreateSamplingRuleResult) => void): Request<XRay.Types.CreateSamplingRuleResult, AWSError>;
   /**
    * Creates a rule to control sampling behavior for instrumented applications. Services retrieve rules with GetSamplingRules, and evaluate each rule in ascending order of priority for each request. If a rule matches, the service records a trace, borrowing it from the reservoir size. After 10 seconds, the service reports back to X-Ray with GetSamplingTargets to get updated versions of each in-use rule. The updated rule contains a trace quota that the service can use instead of borrowing from the reservoir.
    */
@@ -38,7 +40,7 @@ declare class XRay extends Service {
   /**
    * Deletes a group resource.
    */
-  deleteGroup(params: XRay.Types.DeleteGroupRequest, callback?: (err: AWSError, data: XRay.Types.DeleteGroupResult) => void): Request<XRay.Types.DeleteGroupResult, AWSError>;
+  deleteGroup(params: BoundInput<XRay.Types.DeleteGroupRequest, keyof Params>, callback?: (err: AWSError, data: XRay.Types.DeleteGroupResult) => void): Request<XRay.Types.DeleteGroupResult, AWSError>;
   /**
    * Deletes a group resource.
    */
@@ -46,7 +48,7 @@ declare class XRay extends Service {
   /**
    * Deletes a sampling rule.
    */
-  deleteSamplingRule(params: XRay.Types.DeleteSamplingRuleRequest, callback?: (err: AWSError, data: XRay.Types.DeleteSamplingRuleResult) => void): Request<XRay.Types.DeleteSamplingRuleResult, AWSError>;
+  deleteSamplingRule(params: BoundInput<XRay.Types.DeleteSamplingRuleRequest, keyof Params>, callback?: (err: AWSError, data: XRay.Types.DeleteSamplingRuleResult) => void): Request<XRay.Types.DeleteSamplingRuleResult, AWSError>;
   /**
    * Deletes a sampling rule.
    */
@@ -54,7 +56,7 @@ declare class XRay extends Service {
   /**
    * Retrieves the current encryption configuration for X-Ray data.
    */
-  getEncryptionConfig(params: XRay.Types.GetEncryptionConfigRequest, callback?: (err: AWSError, data: XRay.Types.GetEncryptionConfigResult) => void): Request<XRay.Types.GetEncryptionConfigResult, AWSError>;
+  getEncryptionConfig(params: BoundInput<XRay.Types.GetEncryptionConfigRequest, keyof Params>, callback?: (err: AWSError, data: XRay.Types.GetEncryptionConfigResult) => void): Request<XRay.Types.GetEncryptionConfigResult, AWSError>;
   /**
    * Retrieves the current encryption configuration for X-Ray data.
    */
@@ -62,7 +64,7 @@ declare class XRay extends Service {
   /**
    * Retrieves group resource details.
    */
-  getGroup(params: XRay.Types.GetGroupRequest, callback?: (err: AWSError, data: XRay.Types.GetGroupResult) => void): Request<XRay.Types.GetGroupResult, AWSError>;
+  getGroup(params: BoundInput<XRay.Types.GetGroupRequest, keyof Params>, callback?: (err: AWSError, data: XRay.Types.GetGroupResult) => void): Request<XRay.Types.GetGroupResult, AWSError>;
   /**
    * Retrieves group resource details.
    */
@@ -70,7 +72,7 @@ declare class XRay extends Service {
   /**
    * Retrieves all active group details.
    */
-  getGroups(params: XRay.Types.GetGroupsRequest, callback?: (err: AWSError, data: XRay.Types.GetGroupsResult) => void): Request<XRay.Types.GetGroupsResult, AWSError>;
+  getGroups(params: BoundInput<XRay.Types.GetGroupsRequest, keyof Params>, callback?: (err: AWSError, data: XRay.Types.GetGroupsResult) => void): Request<XRay.Types.GetGroupsResult, AWSError>;
   /**
    * Retrieves all active group details.
    */
@@ -78,7 +80,7 @@ declare class XRay extends Service {
   /**
    * Retrieves all sampling rules.
    */
-  getSamplingRules(params: XRay.Types.GetSamplingRulesRequest, callback?: (err: AWSError, data: XRay.Types.GetSamplingRulesResult) => void): Request<XRay.Types.GetSamplingRulesResult, AWSError>;
+  getSamplingRules(params: BoundInput<XRay.Types.GetSamplingRulesRequest, keyof Params>, callback?: (err: AWSError, data: XRay.Types.GetSamplingRulesResult) => void): Request<XRay.Types.GetSamplingRulesResult, AWSError>;
   /**
    * Retrieves all sampling rules.
    */
@@ -86,7 +88,7 @@ declare class XRay extends Service {
   /**
    * Retrieves information about recent sampling results for all sampling rules.
    */
-  getSamplingStatisticSummaries(params: XRay.Types.GetSamplingStatisticSummariesRequest, callback?: (err: AWSError, data: XRay.Types.GetSamplingStatisticSummariesResult) => void): Request<XRay.Types.GetSamplingStatisticSummariesResult, AWSError>;
+  getSamplingStatisticSummaries(params: BoundInput<XRay.Types.GetSamplingStatisticSummariesRequest, keyof Params>, callback?: (err: AWSError, data: XRay.Types.GetSamplingStatisticSummariesResult) => void): Request<XRay.Types.GetSamplingStatisticSummariesResult, AWSError>;
   /**
    * Retrieves information about recent sampling results for all sampling rules.
    */
@@ -94,7 +96,7 @@ declare class XRay extends Service {
   /**
    * Requests a sampling quota for rules that the service is using to sample requests. 
    */
-  getSamplingTargets(params: XRay.Types.GetSamplingTargetsRequest, callback?: (err: AWSError, data: XRay.Types.GetSamplingTargetsResult) => void): Request<XRay.Types.GetSamplingTargetsResult, AWSError>;
+  getSamplingTargets(params: BoundInput<XRay.Types.GetSamplingTargetsRequest, keyof Params>, callback?: (err: AWSError, data: XRay.Types.GetSamplingTargetsResult) => void): Request<XRay.Types.GetSamplingTargetsResult, AWSError>;
   /**
    * Requests a sampling quota for rules that the service is using to sample requests. 
    */
@@ -102,7 +104,7 @@ declare class XRay extends Service {
   /**
    * Retrieves a document that describes services that process incoming requests, and downstream services that they call as a result. Root services process incoming requests and make calls to downstream services. Root services are applications that use the AWS X-Ray SDK. Downstream services can be other applications, AWS resources, HTTP web APIs, or SQL databases.
    */
-  getServiceGraph(params: XRay.Types.GetServiceGraphRequest, callback?: (err: AWSError, data: XRay.Types.GetServiceGraphResult) => void): Request<XRay.Types.GetServiceGraphResult, AWSError>;
+  getServiceGraph(params: BoundInput<XRay.Types.GetServiceGraphRequest, keyof Params>, callback?: (err: AWSError, data: XRay.Types.GetServiceGraphResult) => void): Request<XRay.Types.GetServiceGraphResult, AWSError>;
   /**
    * Retrieves a document that describes services that process incoming requests, and downstream services that they call as a result. Root services process incoming requests and make calls to downstream services. Root services are applications that use the AWS X-Ray SDK. Downstream services can be other applications, AWS resources, HTTP web APIs, or SQL databases.
    */
@@ -110,7 +112,7 @@ declare class XRay extends Service {
   /**
    * Retrieves a service graph for one or more specific trace IDs.
    */
-  getTraceGraph(params: XRay.Types.GetTraceGraphRequest, callback?: (err: AWSError, data: XRay.Types.GetTraceGraphResult) => void): Request<XRay.Types.GetTraceGraphResult, AWSError>;
+  getTraceGraph(params: BoundInput<XRay.Types.GetTraceGraphRequest, keyof Params>, callback?: (err: AWSError, data: XRay.Types.GetTraceGraphResult) => void): Request<XRay.Types.GetTraceGraphResult, AWSError>;
   /**
    * Retrieves a service graph for one or more specific trace IDs.
    */
@@ -118,7 +120,7 @@ declare class XRay extends Service {
   /**
    * Retrieves IDs and metadata for traces available for a specified time frame using an optional filter. To get the full traces, pass the trace IDs to BatchGetTraces. A filter expression can target traced requests that hit specific service nodes or edges, have errors, or come from a known user. For example, the following filter expression targets traces that pass through api.example.com:  service("api.example.com")  This filter expression finds traces that have an annotation named account with the value 12345:  annotation.account = "12345"  For a full list of indexed fields and keywords that you can use in filter expressions, see Using Filter Expressions in the AWS X-Ray Developer Guide.
    */
-  getTraceSummaries(params: XRay.Types.GetTraceSummariesRequest, callback?: (err: AWSError, data: XRay.Types.GetTraceSummariesResult) => void): Request<XRay.Types.GetTraceSummariesResult, AWSError>;
+  getTraceSummaries(params: BoundInput<XRay.Types.GetTraceSummariesRequest, keyof Params>, callback?: (err: AWSError, data: XRay.Types.GetTraceSummariesResult) => void): Request<XRay.Types.GetTraceSummariesResult, AWSError>;
   /**
    * Retrieves IDs and metadata for traces available for a specified time frame using an optional filter. To get the full traces, pass the trace IDs to BatchGetTraces. A filter expression can target traced requests that hit specific service nodes or edges, have errors, or come from a known user. For example, the following filter expression targets traces that pass through api.example.com:  service("api.example.com")  This filter expression finds traces that have an annotation named account with the value 12345:  annotation.account = "12345"  For a full list of indexed fields and keywords that you can use in filter expressions, see Using Filter Expressions in the AWS X-Ray Developer Guide.
    */
@@ -126,7 +128,7 @@ declare class XRay extends Service {
   /**
    * Updates the encryption configuration for X-Ray data.
    */
-  putEncryptionConfig(params: XRay.Types.PutEncryptionConfigRequest, callback?: (err: AWSError, data: XRay.Types.PutEncryptionConfigResult) => void): Request<XRay.Types.PutEncryptionConfigResult, AWSError>;
+  putEncryptionConfig(params: BoundInput<XRay.Types.PutEncryptionConfigRequest, keyof Params>, callback?: (err: AWSError, data: XRay.Types.PutEncryptionConfigResult) => void): Request<XRay.Types.PutEncryptionConfigResult, AWSError>;
   /**
    * Updates the encryption configuration for X-Ray data.
    */
@@ -134,7 +136,7 @@ declare class XRay extends Service {
   /**
    * Used by the AWS X-Ray daemon to upload telemetry.
    */
-  putTelemetryRecords(params: XRay.Types.PutTelemetryRecordsRequest, callback?: (err: AWSError, data: XRay.Types.PutTelemetryRecordsResult) => void): Request<XRay.Types.PutTelemetryRecordsResult, AWSError>;
+  putTelemetryRecords(params: BoundInput<XRay.Types.PutTelemetryRecordsRequest, keyof Params>, callback?: (err: AWSError, data: XRay.Types.PutTelemetryRecordsResult) => void): Request<XRay.Types.PutTelemetryRecordsResult, AWSError>;
   /**
    * Used by the AWS X-Ray daemon to upload telemetry.
    */
@@ -142,7 +144,7 @@ declare class XRay extends Service {
   /**
    * Uploads segment documents to AWS X-Ray. The X-Ray SDK generates segment documents and sends them to the X-Ray daemon, which uploads them in batches. A segment document can be a completed segment, an in-progress segment, or an array of subsegments. Segments must include the following fields. For the full segment document schema, see AWS X-Ray Segment Documents in the AWS X-Ray Developer Guide.  Required Segment Document Fields     name - The name of the service that handled the request.    id - A 64-bit identifier for the segment, unique among segments in the same trace, in 16 hexadecimal digits.    trace_id - A unique identifier that connects all segments and subsegments originating from a single client request.    start_time - Time the segment or subsegment was created, in floating point seconds in epoch time, accurate to milliseconds. For example, 1480615200.010 or 1.480615200010E9.    end_time - Time the segment or subsegment was closed. For example, 1480615200.090 or 1.480615200090E9. Specify either an end_time or in_progress.    in_progress - Set to true instead of specifying an end_time to record that a segment has been started, but is not complete. Send an in progress segment when your application receives a request that will take a long time to serve, to trace the fact that the request was received. When the response is sent, send the complete segment to overwrite the in-progress segment.   A trace_id consists of three numbers separated by hyphens. For example, 1-58406520-a006649127e371903a2de979. This includes:  Trace ID Format    The version number, i.e. 1.   The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is 1480615200 seconds, or 58406520 in hexadecimal.   A 96-bit identifier for the trace, globally unique, in 24 hexadecimal digits.  
    */
-  putTraceSegments(params: XRay.Types.PutTraceSegmentsRequest, callback?: (err: AWSError, data: XRay.Types.PutTraceSegmentsResult) => void): Request<XRay.Types.PutTraceSegmentsResult, AWSError>;
+  putTraceSegments(params: BoundInput<XRay.Types.PutTraceSegmentsRequest, keyof Params>, callback?: (err: AWSError, data: XRay.Types.PutTraceSegmentsResult) => void): Request<XRay.Types.PutTraceSegmentsResult, AWSError>;
   /**
    * Uploads segment documents to AWS X-Ray. The X-Ray SDK generates segment documents and sends them to the X-Ray daemon, which uploads them in batches. A segment document can be a completed segment, an in-progress segment, or an array of subsegments. Segments must include the following fields. For the full segment document schema, see AWS X-Ray Segment Documents in the AWS X-Ray Developer Guide.  Required Segment Document Fields     name - The name of the service that handled the request.    id - A 64-bit identifier for the segment, unique among segments in the same trace, in 16 hexadecimal digits.    trace_id - A unique identifier that connects all segments and subsegments originating from a single client request.    start_time - Time the segment or subsegment was created, in floating point seconds in epoch time, accurate to milliseconds. For example, 1480615200.010 or 1.480615200010E9.    end_time - Time the segment or subsegment was closed. For example, 1480615200.090 or 1.480615200090E9. Specify either an end_time or in_progress.    in_progress - Set to true instead of specifying an end_time to record that a segment has been started, but is not complete. Send an in progress segment when your application receives a request that will take a long time to serve, to trace the fact that the request was received. When the response is sent, send the complete segment to overwrite the in-progress segment.   A trace_id consists of three numbers separated by hyphens. For example, 1-58406520-a006649127e371903a2de979. This includes:  Trace ID Format    The version number, i.e. 1.   The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is 1480615200 seconds, or 58406520 in hexadecimal.   A 96-bit identifier for the trace, globally unique, in 24 hexadecimal digits.  
    */
@@ -150,7 +152,7 @@ declare class XRay extends Service {
   /**
    * Updates a group resource.
    */
-  updateGroup(params: XRay.Types.UpdateGroupRequest, callback?: (err: AWSError, data: XRay.Types.UpdateGroupResult) => void): Request<XRay.Types.UpdateGroupResult, AWSError>;
+  updateGroup(params: BoundInput<XRay.Types.UpdateGroupRequest, keyof Params>, callback?: (err: AWSError, data: XRay.Types.UpdateGroupResult) => void): Request<XRay.Types.UpdateGroupResult, AWSError>;
   /**
    * Updates a group resource.
    */
@@ -158,7 +160,7 @@ declare class XRay extends Service {
   /**
    * Modifies a sampling rule's configuration.
    */
-  updateSamplingRule(params: XRay.Types.UpdateSamplingRuleRequest, callback?: (err: AWSError, data: XRay.Types.UpdateSamplingRuleResult) => void): Request<XRay.Types.UpdateSamplingRuleResult, AWSError>;
+  updateSamplingRule(params: BoundInput<XRay.Types.UpdateSamplingRuleRequest, keyof Params>, callback?: (err: AWSError, data: XRay.Types.UpdateSamplingRuleResult) => void): Request<XRay.Types.UpdateSamplingRuleResult, AWSError>;
   /**
    * Modifies a sampling rule's configuration.
    */
@@ -1433,7 +1435,8 @@ declare namespace XRay {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<BatchGetTracesRequest & CreateGroupRequest & CreateSamplingRuleRequest & DeleteGroupRequest & DeleteSamplingRuleRequest & GetEncryptionConfigRequest & GetGroupRequest & GetGroupsRequest & GetSamplingRulesRequest & GetSamplingStatisticSummariesRequest & GetSamplingTargetsRequest & GetServiceGraphRequest & GetTraceGraphRequest & GetTraceSummariesRequest & PutEncryptionConfigRequest & PutTelemetryRecordsRequest & PutTraceSegmentsRequest & UpdateGroupRequest & UpdateSamplingRuleRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the XRay client.
    */

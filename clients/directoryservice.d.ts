@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class DirectoryService extends Service {
+declare class DirectoryService<Params extends DirectoryService.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: DirectoryService.Types.ClientConfiguration)
-  config: Config & DirectoryService.Types.ClientConfiguration;
+  constructor(options?: DirectoryService.Types.ClientConfiguration<Params>)
+  config: Config & DirectoryService.Types.ClientConfiguration<Params>;
   /**
    * Accepts a directory sharing request that was sent from the directory owner account.
    */
-  acceptSharedDirectory(params: DirectoryService.Types.AcceptSharedDirectoryRequest, callback?: (err: AWSError, data: DirectoryService.Types.AcceptSharedDirectoryResult) => void): Request<DirectoryService.Types.AcceptSharedDirectoryResult, AWSError>;
+  acceptSharedDirectory(params: BoundInput<DirectoryService.Types.AcceptSharedDirectoryRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.AcceptSharedDirectoryResult) => void): Request<DirectoryService.Types.AcceptSharedDirectoryResult, AWSError>;
   /**
    * Accepts a directory sharing request that was sent from the directory owner account.
    */
@@ -22,7 +24,7 @@ declare class DirectoryService extends Service {
   /**
    * If the DNS server for your on-premises domain uses a publicly addressable IP address, you must add a CIDR address block to correctly route traffic to and from your Microsoft AD on Amazon Web Services. AddIpRoutes adds this address block. You can also use AddIpRoutes to facilitate routing traffic that uses public IP ranges from your Microsoft AD on AWS to a peer VPC.  Before you call AddIpRoutes, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the AddIpRoutes operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
-  addIpRoutes(params: DirectoryService.Types.AddIpRoutesRequest, callback?: (err: AWSError, data: DirectoryService.Types.AddIpRoutesResult) => void): Request<DirectoryService.Types.AddIpRoutesResult, AWSError>;
+  addIpRoutes(params: BoundInput<DirectoryService.Types.AddIpRoutesRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.AddIpRoutesResult) => void): Request<DirectoryService.Types.AddIpRoutesResult, AWSError>;
   /**
    * If the DNS server for your on-premises domain uses a publicly addressable IP address, you must add a CIDR address block to correctly route traffic to and from your Microsoft AD on Amazon Web Services. AddIpRoutes adds this address block. You can also use AddIpRoutes to facilitate routing traffic that uses public IP ranges from your Microsoft AD on AWS to a peer VPC.  Before you call AddIpRoutes, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the AddIpRoutes operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
@@ -30,7 +32,7 @@ declare class DirectoryService extends Service {
   /**
    * Adds or overwrites one or more tags for the specified directory. Each directory can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique to each resource.
    */
-  addTagsToResource(params: DirectoryService.Types.AddTagsToResourceRequest, callback?: (err: AWSError, data: DirectoryService.Types.AddTagsToResourceResult) => void): Request<DirectoryService.Types.AddTagsToResourceResult, AWSError>;
+  addTagsToResource(params: BoundInput<DirectoryService.Types.AddTagsToResourceRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.AddTagsToResourceResult) => void): Request<DirectoryService.Types.AddTagsToResourceResult, AWSError>;
   /**
    * Adds or overwrites one or more tags for the specified directory. Each directory can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique to each resource.
    */
@@ -38,7 +40,7 @@ declare class DirectoryService extends Service {
   /**
    * Cancels an in-progress schema extension to a Microsoft AD directory. Once a schema extension has started replicating to all domain controllers, the task can no longer be canceled. A schema extension can be canceled during any of the following states; Initializing, CreatingSnapshot, and UpdatingSchema.
    */
-  cancelSchemaExtension(params: DirectoryService.Types.CancelSchemaExtensionRequest, callback?: (err: AWSError, data: DirectoryService.Types.CancelSchemaExtensionResult) => void): Request<DirectoryService.Types.CancelSchemaExtensionResult, AWSError>;
+  cancelSchemaExtension(params: BoundInput<DirectoryService.Types.CancelSchemaExtensionRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.CancelSchemaExtensionResult) => void): Request<DirectoryService.Types.CancelSchemaExtensionResult, AWSError>;
   /**
    * Cancels an in-progress schema extension to a Microsoft AD directory. Once a schema extension has started replicating to all domain controllers, the task can no longer be canceled. A schema extension can be canceled during any of the following states; Initializing, CreatingSnapshot, and UpdatingSchema.
    */
@@ -46,7 +48,7 @@ declare class DirectoryService extends Service {
   /**
    * Creates an AD Connector to connect to an on-premises directory. Before you call ConnectDirectory, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the ConnectDirectory operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
-  connectDirectory(params: DirectoryService.Types.ConnectDirectoryRequest, callback?: (err: AWSError, data: DirectoryService.Types.ConnectDirectoryResult) => void): Request<DirectoryService.Types.ConnectDirectoryResult, AWSError>;
+  connectDirectory(params: BoundInput<DirectoryService.Types.ConnectDirectoryRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.ConnectDirectoryResult) => void): Request<DirectoryService.Types.ConnectDirectoryResult, AWSError>;
   /**
    * Creates an AD Connector to connect to an on-premises directory. Before you call ConnectDirectory, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the ConnectDirectory operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
@@ -54,7 +56,7 @@ declare class DirectoryService extends Service {
   /**
    * Creates an alias for a directory and assigns the alias to the directory. The alias is used to construct the access URL for the directory, such as http://&lt;alias&gt;.awsapps.com.  After an alias has been created, it cannot be deleted or reused, so this operation should only be used when absolutely necessary. 
    */
-  createAlias(params: DirectoryService.Types.CreateAliasRequest, callback?: (err: AWSError, data: DirectoryService.Types.CreateAliasResult) => void): Request<DirectoryService.Types.CreateAliasResult, AWSError>;
+  createAlias(params: BoundInput<DirectoryService.Types.CreateAliasRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.CreateAliasResult) => void): Request<DirectoryService.Types.CreateAliasResult, AWSError>;
   /**
    * Creates an alias for a directory and assigns the alias to the directory. The alias is used to construct the access URL for the directory, such as http://&lt;alias&gt;.awsapps.com.  After an alias has been created, it cannot be deleted or reused, so this operation should only be used when absolutely necessary. 
    */
@@ -62,7 +64,7 @@ declare class DirectoryService extends Service {
   /**
    * Creates a computer account in the specified directory, and joins the computer to the directory.
    */
-  createComputer(params: DirectoryService.Types.CreateComputerRequest, callback?: (err: AWSError, data: DirectoryService.Types.CreateComputerResult) => void): Request<DirectoryService.Types.CreateComputerResult, AWSError>;
+  createComputer(params: BoundInput<DirectoryService.Types.CreateComputerRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.CreateComputerResult) => void): Request<DirectoryService.Types.CreateComputerResult, AWSError>;
   /**
    * Creates a computer account in the specified directory, and joins the computer to the directory.
    */
@@ -70,7 +72,7 @@ declare class DirectoryService extends Service {
   /**
    * Creates a conditional forwarder associated with your AWS directory. Conditional forwarders are required in order to set up a trust relationship with another domain. The conditional forwarder points to the trusted domain.
    */
-  createConditionalForwarder(params: DirectoryService.Types.CreateConditionalForwarderRequest, callback?: (err: AWSError, data: DirectoryService.Types.CreateConditionalForwarderResult) => void): Request<DirectoryService.Types.CreateConditionalForwarderResult, AWSError>;
+  createConditionalForwarder(params: BoundInput<DirectoryService.Types.CreateConditionalForwarderRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.CreateConditionalForwarderResult) => void): Request<DirectoryService.Types.CreateConditionalForwarderResult, AWSError>;
   /**
    * Creates a conditional forwarder associated with your AWS directory. Conditional forwarders are required in order to set up a trust relationship with another domain. The conditional forwarder points to the trusted domain.
    */
@@ -78,7 +80,7 @@ declare class DirectoryService extends Service {
   /**
    * Creates a Simple AD directory. Before you call CreateDirectory, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateDirectory operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
-  createDirectory(params: DirectoryService.Types.CreateDirectoryRequest, callback?: (err: AWSError, data: DirectoryService.Types.CreateDirectoryResult) => void): Request<DirectoryService.Types.CreateDirectoryResult, AWSError>;
+  createDirectory(params: BoundInput<DirectoryService.Types.CreateDirectoryRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.CreateDirectoryResult) => void): Request<DirectoryService.Types.CreateDirectoryResult, AWSError>;
   /**
    * Creates a Simple AD directory. Before you call CreateDirectory, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateDirectory operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
@@ -86,7 +88,7 @@ declare class DirectoryService extends Service {
   /**
    * Creates a subscription to forward real time Directory Service domain controller security logs to the specified CloudWatch log group in your AWS account.
    */
-  createLogSubscription(params: DirectoryService.Types.CreateLogSubscriptionRequest, callback?: (err: AWSError, data: DirectoryService.Types.CreateLogSubscriptionResult) => void): Request<DirectoryService.Types.CreateLogSubscriptionResult, AWSError>;
+  createLogSubscription(params: BoundInput<DirectoryService.Types.CreateLogSubscriptionRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.CreateLogSubscriptionResult) => void): Request<DirectoryService.Types.CreateLogSubscriptionResult, AWSError>;
   /**
    * Creates a subscription to forward real time Directory Service domain controller security logs to the specified CloudWatch log group in your AWS account.
    */
@@ -94,7 +96,7 @@ declare class DirectoryService extends Service {
   /**
    * Creates an AWS Managed Microsoft AD directory. Before you call CreateMicrosoftAD, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateMicrosoftAD operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
-  createMicrosoftAD(params: DirectoryService.Types.CreateMicrosoftADRequest, callback?: (err: AWSError, data: DirectoryService.Types.CreateMicrosoftADResult) => void): Request<DirectoryService.Types.CreateMicrosoftADResult, AWSError>;
+  createMicrosoftAD(params: BoundInput<DirectoryService.Types.CreateMicrosoftADRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.CreateMicrosoftADResult) => void): Request<DirectoryService.Types.CreateMicrosoftADResult, AWSError>;
   /**
    * Creates an AWS Managed Microsoft AD directory. Before you call CreateMicrosoftAD, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the CreateMicrosoftAD operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
@@ -102,7 +104,7 @@ declare class DirectoryService extends Service {
   /**
    * Creates a snapshot of a Simple AD or Microsoft AD directory in the AWS cloud.  You cannot take snapshots of AD Connector directories. 
    */
-  createSnapshot(params: DirectoryService.Types.CreateSnapshotRequest, callback?: (err: AWSError, data: DirectoryService.Types.CreateSnapshotResult) => void): Request<DirectoryService.Types.CreateSnapshotResult, AWSError>;
+  createSnapshot(params: BoundInput<DirectoryService.Types.CreateSnapshotRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.CreateSnapshotResult) => void): Request<DirectoryService.Types.CreateSnapshotResult, AWSError>;
   /**
    * Creates a snapshot of a Simple AD or Microsoft AD directory in the AWS cloud.  You cannot take snapshots of AD Connector directories. 
    */
@@ -110,7 +112,7 @@ declare class DirectoryService extends Service {
   /**
    * AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your AWS Managed Microsoft AD directory, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials. This action initiates the creation of the AWS side of a trust relationship between an AWS Managed Microsoft AD directory and an external domain. You can create either a forest trust or an external trust.
    */
-  createTrust(params: DirectoryService.Types.CreateTrustRequest, callback?: (err: AWSError, data: DirectoryService.Types.CreateTrustResult) => void): Request<DirectoryService.Types.CreateTrustResult, AWSError>;
+  createTrust(params: BoundInput<DirectoryService.Types.CreateTrustRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.CreateTrustResult) => void): Request<DirectoryService.Types.CreateTrustResult, AWSError>;
   /**
    * AWS Directory Service for Microsoft Active Directory allows you to configure trust relationships. For example, you can establish a trust between your AWS Managed Microsoft AD directory, and your existing on-premises Microsoft Active Directory. This would allow you to provide users and groups access to resources in either domain, with a single set of credentials. This action initiates the creation of the AWS side of a trust relationship between an AWS Managed Microsoft AD directory and an external domain. You can create either a forest trust or an external trust.
    */
@@ -118,7 +120,7 @@ declare class DirectoryService extends Service {
   /**
    * Deletes a conditional forwarder that has been set up for your AWS directory.
    */
-  deleteConditionalForwarder(params: DirectoryService.Types.DeleteConditionalForwarderRequest, callback?: (err: AWSError, data: DirectoryService.Types.DeleteConditionalForwarderResult) => void): Request<DirectoryService.Types.DeleteConditionalForwarderResult, AWSError>;
+  deleteConditionalForwarder(params: BoundInput<DirectoryService.Types.DeleteConditionalForwarderRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.DeleteConditionalForwarderResult) => void): Request<DirectoryService.Types.DeleteConditionalForwarderResult, AWSError>;
   /**
    * Deletes a conditional forwarder that has been set up for your AWS directory.
    */
@@ -126,7 +128,7 @@ declare class DirectoryService extends Service {
   /**
    * Deletes an AWS Directory Service directory. Before you call DeleteDirectory, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the DeleteDirectory operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
-  deleteDirectory(params: DirectoryService.Types.DeleteDirectoryRequest, callback?: (err: AWSError, data: DirectoryService.Types.DeleteDirectoryResult) => void): Request<DirectoryService.Types.DeleteDirectoryResult, AWSError>;
+  deleteDirectory(params: BoundInput<DirectoryService.Types.DeleteDirectoryRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.DeleteDirectoryResult) => void): Request<DirectoryService.Types.DeleteDirectoryResult, AWSError>;
   /**
    * Deletes an AWS Directory Service directory. Before you call DeleteDirectory, ensure that all of the required permissions have been explicitly granted through a policy. For details about what permissions are required to run the DeleteDirectory operation, see AWS Directory Service API Permissions: Actions, Resources, and Conditions Reference.
    */
@@ -134,7 +136,7 @@ declare class DirectoryService extends Service {
   /**
    * Deletes the specified log subscription.
    */
-  deleteLogSubscription(params: DirectoryService.Types.DeleteLogSubscriptionRequest, callback?: (err: AWSError, data: DirectoryService.Types.DeleteLogSubscriptionResult) => void): Request<DirectoryService.Types.DeleteLogSubscriptionResult, AWSError>;
+  deleteLogSubscription(params: BoundInput<DirectoryService.Types.DeleteLogSubscriptionRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.DeleteLogSubscriptionResult) => void): Request<DirectoryService.Types.DeleteLogSubscriptionResult, AWSError>;
   /**
    * Deletes the specified log subscription.
    */
@@ -142,7 +144,7 @@ declare class DirectoryService extends Service {
   /**
    * Deletes a directory snapshot.
    */
-  deleteSnapshot(params: DirectoryService.Types.DeleteSnapshotRequest, callback?: (err: AWSError, data: DirectoryService.Types.DeleteSnapshotResult) => void): Request<DirectoryService.Types.DeleteSnapshotResult, AWSError>;
+  deleteSnapshot(params: BoundInput<DirectoryService.Types.DeleteSnapshotRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.DeleteSnapshotResult) => void): Request<DirectoryService.Types.DeleteSnapshotResult, AWSError>;
   /**
    * Deletes a directory snapshot.
    */
@@ -150,7 +152,7 @@ declare class DirectoryService extends Service {
   /**
    * Deletes an existing trust relationship between your AWS Managed Microsoft AD directory and an external domain.
    */
-  deleteTrust(params: DirectoryService.Types.DeleteTrustRequest, callback?: (err: AWSError, data: DirectoryService.Types.DeleteTrustResult) => void): Request<DirectoryService.Types.DeleteTrustResult, AWSError>;
+  deleteTrust(params: BoundInput<DirectoryService.Types.DeleteTrustRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.DeleteTrustResult) => void): Request<DirectoryService.Types.DeleteTrustResult, AWSError>;
   /**
    * Deletes an existing trust relationship between your AWS Managed Microsoft AD directory and an external domain.
    */
@@ -158,7 +160,7 @@ declare class DirectoryService extends Service {
   /**
    * Removes the specified directory as a publisher to the specified SNS topic.
    */
-  deregisterEventTopic(params: DirectoryService.Types.DeregisterEventTopicRequest, callback?: (err: AWSError, data: DirectoryService.Types.DeregisterEventTopicResult) => void): Request<DirectoryService.Types.DeregisterEventTopicResult, AWSError>;
+  deregisterEventTopic(params: BoundInput<DirectoryService.Types.DeregisterEventTopicRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.DeregisterEventTopicResult) => void): Request<DirectoryService.Types.DeregisterEventTopicResult, AWSError>;
   /**
    * Removes the specified directory as a publisher to the specified SNS topic.
    */
@@ -166,7 +168,7 @@ declare class DirectoryService extends Service {
   /**
    * Obtains information about the conditional forwarders for this account. If no input parameters are provided for RemoteDomainNames, this request describes all conditional forwarders for the specified directory ID.
    */
-  describeConditionalForwarders(params: DirectoryService.Types.DescribeConditionalForwardersRequest, callback?: (err: AWSError, data: DirectoryService.Types.DescribeConditionalForwardersResult) => void): Request<DirectoryService.Types.DescribeConditionalForwardersResult, AWSError>;
+  describeConditionalForwarders(params: BoundInput<DirectoryService.Types.DescribeConditionalForwardersRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.DescribeConditionalForwardersResult) => void): Request<DirectoryService.Types.DescribeConditionalForwardersResult, AWSError>;
   /**
    * Obtains information about the conditional forwarders for this account. If no input parameters are provided for RemoteDomainNames, this request describes all conditional forwarders for the specified directory ID.
    */
@@ -174,7 +176,7 @@ declare class DirectoryService extends Service {
   /**
    * Obtains information about the directories that belong to this account. You can retrieve information about specific directories by passing the directory identifiers in the DirectoryIds parameter. Otherwise, all directories that belong to the current account are returned. This operation supports pagination with the use of the NextToken request and response parameters. If more results are available, the DescribeDirectoriesResult.NextToken member contains a token that you pass in the next call to DescribeDirectories to retrieve the next set of items. You can also specify a maximum number of return results with the Limit parameter.
    */
-  describeDirectories(params: DirectoryService.Types.DescribeDirectoriesRequest, callback?: (err: AWSError, data: DirectoryService.Types.DescribeDirectoriesResult) => void): Request<DirectoryService.Types.DescribeDirectoriesResult, AWSError>;
+  describeDirectories(params: BoundInput<DirectoryService.Types.DescribeDirectoriesRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.DescribeDirectoriesResult) => void): Request<DirectoryService.Types.DescribeDirectoriesResult, AWSError>;
   /**
    * Obtains information about the directories that belong to this account. You can retrieve information about specific directories by passing the directory identifiers in the DirectoryIds parameter. Otherwise, all directories that belong to the current account are returned. This operation supports pagination with the use of the NextToken request and response parameters. If more results are available, the DescribeDirectoriesResult.NextToken member contains a token that you pass in the next call to DescribeDirectories to retrieve the next set of items. You can also specify a maximum number of return results with the Limit parameter.
    */
@@ -182,7 +184,7 @@ declare class DirectoryService extends Service {
   /**
    * Provides information about any domain controllers in your directory.
    */
-  describeDomainControllers(params: DirectoryService.Types.DescribeDomainControllersRequest, callback?: (err: AWSError, data: DirectoryService.Types.DescribeDomainControllersResult) => void): Request<DirectoryService.Types.DescribeDomainControllersResult, AWSError>;
+  describeDomainControllers(params: BoundInput<DirectoryService.Types.DescribeDomainControllersRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.DescribeDomainControllersResult) => void): Request<DirectoryService.Types.DescribeDomainControllersResult, AWSError>;
   /**
    * Provides information about any domain controllers in your directory.
    */
@@ -190,7 +192,7 @@ declare class DirectoryService extends Service {
   /**
    * Obtains information about which SNS topics receive status messages from the specified directory. If no input parameters are provided, such as DirectoryId or TopicName, this request describes all of the associations in the account.
    */
-  describeEventTopics(params: DirectoryService.Types.DescribeEventTopicsRequest, callback?: (err: AWSError, data: DirectoryService.Types.DescribeEventTopicsResult) => void): Request<DirectoryService.Types.DescribeEventTopicsResult, AWSError>;
+  describeEventTopics(params: BoundInput<DirectoryService.Types.DescribeEventTopicsRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.DescribeEventTopicsResult) => void): Request<DirectoryService.Types.DescribeEventTopicsResult, AWSError>;
   /**
    * Obtains information about which SNS topics receive status messages from the specified directory. If no input parameters are provided, such as DirectoryId or TopicName, this request describes all of the associations in the account.
    */
@@ -198,7 +200,7 @@ declare class DirectoryService extends Service {
   /**
    * Returns the shared directories in your account. 
    */
-  describeSharedDirectories(params: DirectoryService.Types.DescribeSharedDirectoriesRequest, callback?: (err: AWSError, data: DirectoryService.Types.DescribeSharedDirectoriesResult) => void): Request<DirectoryService.Types.DescribeSharedDirectoriesResult, AWSError>;
+  describeSharedDirectories(params: BoundInput<DirectoryService.Types.DescribeSharedDirectoriesRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.DescribeSharedDirectoriesResult) => void): Request<DirectoryService.Types.DescribeSharedDirectoriesResult, AWSError>;
   /**
    * Returns the shared directories in your account. 
    */
@@ -206,7 +208,7 @@ declare class DirectoryService extends Service {
   /**
    * Obtains information about the directory snapshots that belong to this account. This operation supports pagination with the use of the NextToken request and response parameters. If more results are available, the DescribeSnapshots.NextToken member contains a token that you pass in the next call to DescribeSnapshots to retrieve the next set of items. You can also specify a maximum number of return results with the Limit parameter.
    */
-  describeSnapshots(params: DirectoryService.Types.DescribeSnapshotsRequest, callback?: (err: AWSError, data: DirectoryService.Types.DescribeSnapshotsResult) => void): Request<DirectoryService.Types.DescribeSnapshotsResult, AWSError>;
+  describeSnapshots(params: BoundInput<DirectoryService.Types.DescribeSnapshotsRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.DescribeSnapshotsResult) => void): Request<DirectoryService.Types.DescribeSnapshotsResult, AWSError>;
   /**
    * Obtains information about the directory snapshots that belong to this account. This operation supports pagination with the use of the NextToken request and response parameters. If more results are available, the DescribeSnapshots.NextToken member contains a token that you pass in the next call to DescribeSnapshots to retrieve the next set of items. You can also specify a maximum number of return results with the Limit parameter.
    */
@@ -214,7 +216,7 @@ declare class DirectoryService extends Service {
   /**
    * Obtains information about the trust relationships for this account. If no input parameters are provided, such as DirectoryId or TrustIds, this request describes all the trust relationships belonging to the account.
    */
-  describeTrusts(params: DirectoryService.Types.DescribeTrustsRequest, callback?: (err: AWSError, data: DirectoryService.Types.DescribeTrustsResult) => void): Request<DirectoryService.Types.DescribeTrustsResult, AWSError>;
+  describeTrusts(params: BoundInput<DirectoryService.Types.DescribeTrustsRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.DescribeTrustsResult) => void): Request<DirectoryService.Types.DescribeTrustsResult, AWSError>;
   /**
    * Obtains information about the trust relationships for this account. If no input parameters are provided, such as DirectoryId or TrustIds, this request describes all the trust relationships belonging to the account.
    */
@@ -222,7 +224,7 @@ declare class DirectoryService extends Service {
   /**
    * Disables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector or Microsoft AD directory.
    */
-  disableRadius(params: DirectoryService.Types.DisableRadiusRequest, callback?: (err: AWSError, data: DirectoryService.Types.DisableRadiusResult) => void): Request<DirectoryService.Types.DisableRadiusResult, AWSError>;
+  disableRadius(params: BoundInput<DirectoryService.Types.DisableRadiusRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.DisableRadiusResult) => void): Request<DirectoryService.Types.DisableRadiusResult, AWSError>;
   /**
    * Disables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector or Microsoft AD directory.
    */
@@ -230,7 +232,7 @@ declare class DirectoryService extends Service {
   /**
    * Disables single-sign on for a directory.
    */
-  disableSso(params: DirectoryService.Types.DisableSsoRequest, callback?: (err: AWSError, data: DirectoryService.Types.DisableSsoResult) => void): Request<DirectoryService.Types.DisableSsoResult, AWSError>;
+  disableSso(params: BoundInput<DirectoryService.Types.DisableSsoRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.DisableSsoResult) => void): Request<DirectoryService.Types.DisableSsoResult, AWSError>;
   /**
    * Disables single-sign on for a directory.
    */
@@ -238,7 +240,7 @@ declare class DirectoryService extends Service {
   /**
    * Enables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector or Microsoft AD directory.
    */
-  enableRadius(params: DirectoryService.Types.EnableRadiusRequest, callback?: (err: AWSError, data: DirectoryService.Types.EnableRadiusResult) => void): Request<DirectoryService.Types.EnableRadiusResult, AWSError>;
+  enableRadius(params: BoundInput<DirectoryService.Types.EnableRadiusRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.EnableRadiusResult) => void): Request<DirectoryService.Types.EnableRadiusResult, AWSError>;
   /**
    * Enables multi-factor authentication (MFA) with the Remote Authentication Dial In User Service (RADIUS) server for an AD Connector or Microsoft AD directory.
    */
@@ -246,7 +248,7 @@ declare class DirectoryService extends Service {
   /**
    * Enables single sign-on for a directory.
    */
-  enableSso(params: DirectoryService.Types.EnableSsoRequest, callback?: (err: AWSError, data: DirectoryService.Types.EnableSsoResult) => void): Request<DirectoryService.Types.EnableSsoResult, AWSError>;
+  enableSso(params: BoundInput<DirectoryService.Types.EnableSsoRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.EnableSsoResult) => void): Request<DirectoryService.Types.EnableSsoResult, AWSError>;
   /**
    * Enables single sign-on for a directory.
    */
@@ -254,7 +256,7 @@ declare class DirectoryService extends Service {
   /**
    * Obtains directory limit information for the current region.
    */
-  getDirectoryLimits(params: DirectoryService.Types.GetDirectoryLimitsRequest, callback?: (err: AWSError, data: DirectoryService.Types.GetDirectoryLimitsResult) => void): Request<DirectoryService.Types.GetDirectoryLimitsResult, AWSError>;
+  getDirectoryLimits(params: BoundInput<DirectoryService.Types.GetDirectoryLimitsRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.GetDirectoryLimitsResult) => void): Request<DirectoryService.Types.GetDirectoryLimitsResult, AWSError>;
   /**
    * Obtains directory limit information for the current region.
    */
@@ -262,7 +264,7 @@ declare class DirectoryService extends Service {
   /**
    * Obtains the manual snapshot limits for a directory.
    */
-  getSnapshotLimits(params: DirectoryService.Types.GetSnapshotLimitsRequest, callback?: (err: AWSError, data: DirectoryService.Types.GetSnapshotLimitsResult) => void): Request<DirectoryService.Types.GetSnapshotLimitsResult, AWSError>;
+  getSnapshotLimits(params: BoundInput<DirectoryService.Types.GetSnapshotLimitsRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.GetSnapshotLimitsResult) => void): Request<DirectoryService.Types.GetSnapshotLimitsResult, AWSError>;
   /**
    * Obtains the manual snapshot limits for a directory.
    */
@@ -270,7 +272,7 @@ declare class DirectoryService extends Service {
   /**
    * Lists the address blocks that you have added to a directory.
    */
-  listIpRoutes(params: DirectoryService.Types.ListIpRoutesRequest, callback?: (err: AWSError, data: DirectoryService.Types.ListIpRoutesResult) => void): Request<DirectoryService.Types.ListIpRoutesResult, AWSError>;
+  listIpRoutes(params: BoundInput<DirectoryService.Types.ListIpRoutesRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.ListIpRoutesResult) => void): Request<DirectoryService.Types.ListIpRoutesResult, AWSError>;
   /**
    * Lists the address blocks that you have added to a directory.
    */
@@ -278,7 +280,7 @@ declare class DirectoryService extends Service {
   /**
    * Lists the active log subscriptions for the AWS account.
    */
-  listLogSubscriptions(params: DirectoryService.Types.ListLogSubscriptionsRequest, callback?: (err: AWSError, data: DirectoryService.Types.ListLogSubscriptionsResult) => void): Request<DirectoryService.Types.ListLogSubscriptionsResult, AWSError>;
+  listLogSubscriptions(params: BoundInput<DirectoryService.Types.ListLogSubscriptionsRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.ListLogSubscriptionsResult) => void): Request<DirectoryService.Types.ListLogSubscriptionsResult, AWSError>;
   /**
    * Lists the active log subscriptions for the AWS account.
    */
@@ -286,7 +288,7 @@ declare class DirectoryService extends Service {
   /**
    * Lists all schema extensions applied to a Microsoft AD Directory.
    */
-  listSchemaExtensions(params: DirectoryService.Types.ListSchemaExtensionsRequest, callback?: (err: AWSError, data: DirectoryService.Types.ListSchemaExtensionsResult) => void): Request<DirectoryService.Types.ListSchemaExtensionsResult, AWSError>;
+  listSchemaExtensions(params: BoundInput<DirectoryService.Types.ListSchemaExtensionsRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.ListSchemaExtensionsResult) => void): Request<DirectoryService.Types.ListSchemaExtensionsResult, AWSError>;
   /**
    * Lists all schema extensions applied to a Microsoft AD Directory.
    */
@@ -294,7 +296,7 @@ declare class DirectoryService extends Service {
   /**
    * Lists all tags on a directory.
    */
-  listTagsForResource(params: DirectoryService.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: DirectoryService.Types.ListTagsForResourceResult) => void): Request<DirectoryService.Types.ListTagsForResourceResult, AWSError>;
+  listTagsForResource(params: BoundInput<DirectoryService.Types.ListTagsForResourceRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.ListTagsForResourceResult) => void): Request<DirectoryService.Types.ListTagsForResourceResult, AWSError>;
   /**
    * Lists all tags on a directory.
    */
@@ -302,7 +304,7 @@ declare class DirectoryService extends Service {
   /**
    * Associates a directory with an SNS topic. This establishes the directory as a publisher to the specified SNS topic. You can then receive email or text (SMS) messages when the status of your directory changes. You get notified if your directory goes from an Active status to an Impaired or Inoperable status. You also receive a notification when the directory returns to an Active status.
    */
-  registerEventTopic(params: DirectoryService.Types.RegisterEventTopicRequest, callback?: (err: AWSError, data: DirectoryService.Types.RegisterEventTopicResult) => void): Request<DirectoryService.Types.RegisterEventTopicResult, AWSError>;
+  registerEventTopic(params: BoundInput<DirectoryService.Types.RegisterEventTopicRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.RegisterEventTopicResult) => void): Request<DirectoryService.Types.RegisterEventTopicResult, AWSError>;
   /**
    * Associates a directory with an SNS topic. This establishes the directory as a publisher to the specified SNS topic. You can then receive email or text (SMS) messages when the status of your directory changes. You get notified if your directory goes from an Active status to an Impaired or Inoperable status. You also receive a notification when the directory returns to an Active status.
    */
@@ -310,7 +312,7 @@ declare class DirectoryService extends Service {
   /**
    * Rejects a directory sharing request that was sent from the directory owner account.
    */
-  rejectSharedDirectory(params: DirectoryService.Types.RejectSharedDirectoryRequest, callback?: (err: AWSError, data: DirectoryService.Types.RejectSharedDirectoryResult) => void): Request<DirectoryService.Types.RejectSharedDirectoryResult, AWSError>;
+  rejectSharedDirectory(params: BoundInput<DirectoryService.Types.RejectSharedDirectoryRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.RejectSharedDirectoryResult) => void): Request<DirectoryService.Types.RejectSharedDirectoryResult, AWSError>;
   /**
    * Rejects a directory sharing request that was sent from the directory owner account.
    */
@@ -318,7 +320,7 @@ declare class DirectoryService extends Service {
   /**
    * Removes IP address blocks from a directory.
    */
-  removeIpRoutes(params: DirectoryService.Types.RemoveIpRoutesRequest, callback?: (err: AWSError, data: DirectoryService.Types.RemoveIpRoutesResult) => void): Request<DirectoryService.Types.RemoveIpRoutesResult, AWSError>;
+  removeIpRoutes(params: BoundInput<DirectoryService.Types.RemoveIpRoutesRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.RemoveIpRoutesResult) => void): Request<DirectoryService.Types.RemoveIpRoutesResult, AWSError>;
   /**
    * Removes IP address blocks from a directory.
    */
@@ -326,7 +328,7 @@ declare class DirectoryService extends Service {
   /**
    * Removes tags from a directory.
    */
-  removeTagsFromResource(params: DirectoryService.Types.RemoveTagsFromResourceRequest, callback?: (err: AWSError, data: DirectoryService.Types.RemoveTagsFromResourceResult) => void): Request<DirectoryService.Types.RemoveTagsFromResourceResult, AWSError>;
+  removeTagsFromResource(params: BoundInput<DirectoryService.Types.RemoveTagsFromResourceRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.RemoveTagsFromResourceResult) => void): Request<DirectoryService.Types.RemoveTagsFromResourceResult, AWSError>;
   /**
    * Removes tags from a directory.
    */
@@ -334,7 +336,7 @@ declare class DirectoryService extends Service {
   /**
    * Resets the password for any user in your AWS Managed Microsoft AD or Simple AD directory.
    */
-  resetUserPassword(params: DirectoryService.Types.ResetUserPasswordRequest, callback?: (err: AWSError, data: DirectoryService.Types.ResetUserPasswordResult) => void): Request<DirectoryService.Types.ResetUserPasswordResult, AWSError>;
+  resetUserPassword(params: BoundInput<DirectoryService.Types.ResetUserPasswordRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.ResetUserPasswordResult) => void): Request<DirectoryService.Types.ResetUserPasswordResult, AWSError>;
   /**
    * Resets the password for any user in your AWS Managed Microsoft AD or Simple AD directory.
    */
@@ -342,7 +344,7 @@ declare class DirectoryService extends Service {
   /**
    * Restores a directory using an existing directory snapshot. When you restore a directory from a snapshot, any changes made to the directory after the snapshot date are overwritten. This action returns as soon as the restore operation is initiated. You can monitor the progress of the restore operation by calling the DescribeDirectories operation with the directory identifier. When the DirectoryDescription.Stage value changes to Active, the restore operation is complete.
    */
-  restoreFromSnapshot(params: DirectoryService.Types.RestoreFromSnapshotRequest, callback?: (err: AWSError, data: DirectoryService.Types.RestoreFromSnapshotResult) => void): Request<DirectoryService.Types.RestoreFromSnapshotResult, AWSError>;
+  restoreFromSnapshot(params: BoundInput<DirectoryService.Types.RestoreFromSnapshotRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.RestoreFromSnapshotResult) => void): Request<DirectoryService.Types.RestoreFromSnapshotResult, AWSError>;
   /**
    * Restores a directory using an existing directory snapshot. When you restore a directory from a snapshot, any changes made to the directory after the snapshot date are overwritten. This action returns as soon as the restore operation is initiated. You can monitor the progress of the restore operation by calling the DescribeDirectories operation with the directory identifier. When the DirectoryDescription.Stage value changes to Active, the restore operation is complete.
    */
@@ -350,7 +352,7 @@ declare class DirectoryService extends Service {
   /**
    * Shares a specified directory (DirectoryId) in your AWS account (directory owner) with another AWS account (directory consumer). With this operation you can use your directory from any AWS account and from any Amazon VPC within an AWS Region. When you share your AWS Managed Microsoft AD directory, AWS Directory Service creates a shared directory in the directory consumer account. This shared directory contains the metadata to provide access to the directory within the directory owner account. The shared directory is visible in all VPCs in the directory consumer account. The ShareMethod parameter determines whether the specified directory can be shared between AWS accounts inside the same AWS organization (ORGANIZATIONS). It also determines whether you can share the directory with any other AWS account either inside or outside of the organization (HANDSHAKE). The ShareNotes parameter is only used when HANDSHAKE is called, which sends a directory sharing request to the directory consumer. 
    */
-  shareDirectory(params: DirectoryService.Types.ShareDirectoryRequest, callback?: (err: AWSError, data: DirectoryService.Types.ShareDirectoryResult) => void): Request<DirectoryService.Types.ShareDirectoryResult, AWSError>;
+  shareDirectory(params: BoundInput<DirectoryService.Types.ShareDirectoryRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.ShareDirectoryResult) => void): Request<DirectoryService.Types.ShareDirectoryResult, AWSError>;
   /**
    * Shares a specified directory (DirectoryId) in your AWS account (directory owner) with another AWS account (directory consumer). With this operation you can use your directory from any AWS account and from any Amazon VPC within an AWS Region. When you share your AWS Managed Microsoft AD directory, AWS Directory Service creates a shared directory in the directory consumer account. This shared directory contains the metadata to provide access to the directory within the directory owner account. The shared directory is visible in all VPCs in the directory consumer account. The ShareMethod parameter determines whether the specified directory can be shared between AWS accounts inside the same AWS organization (ORGANIZATIONS). It also determines whether you can share the directory with any other AWS account either inside or outside of the organization (HANDSHAKE). The ShareNotes parameter is only used when HANDSHAKE is called, which sends a directory sharing request to the directory consumer. 
    */
@@ -358,7 +360,7 @@ declare class DirectoryService extends Service {
   /**
    * Applies a schema extension to a Microsoft AD directory.
    */
-  startSchemaExtension(params: DirectoryService.Types.StartSchemaExtensionRequest, callback?: (err: AWSError, data: DirectoryService.Types.StartSchemaExtensionResult) => void): Request<DirectoryService.Types.StartSchemaExtensionResult, AWSError>;
+  startSchemaExtension(params: BoundInput<DirectoryService.Types.StartSchemaExtensionRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.StartSchemaExtensionResult) => void): Request<DirectoryService.Types.StartSchemaExtensionResult, AWSError>;
   /**
    * Applies a schema extension to a Microsoft AD directory.
    */
@@ -366,7 +368,7 @@ declare class DirectoryService extends Service {
   /**
    * Stops the directory sharing between the directory owner and consumer accounts. 
    */
-  unshareDirectory(params: DirectoryService.Types.UnshareDirectoryRequest, callback?: (err: AWSError, data: DirectoryService.Types.UnshareDirectoryResult) => void): Request<DirectoryService.Types.UnshareDirectoryResult, AWSError>;
+  unshareDirectory(params: BoundInput<DirectoryService.Types.UnshareDirectoryRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.UnshareDirectoryResult) => void): Request<DirectoryService.Types.UnshareDirectoryResult, AWSError>;
   /**
    * Stops the directory sharing between the directory owner and consumer accounts. 
    */
@@ -374,7 +376,7 @@ declare class DirectoryService extends Service {
   /**
    * Updates a conditional forwarder that has been set up for your AWS directory.
    */
-  updateConditionalForwarder(params: DirectoryService.Types.UpdateConditionalForwarderRequest, callback?: (err: AWSError, data: DirectoryService.Types.UpdateConditionalForwarderResult) => void): Request<DirectoryService.Types.UpdateConditionalForwarderResult, AWSError>;
+  updateConditionalForwarder(params: BoundInput<DirectoryService.Types.UpdateConditionalForwarderRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.UpdateConditionalForwarderResult) => void): Request<DirectoryService.Types.UpdateConditionalForwarderResult, AWSError>;
   /**
    * Updates a conditional forwarder that has been set up for your AWS directory.
    */
@@ -382,7 +384,7 @@ declare class DirectoryService extends Service {
   /**
    * Adds or removes domain controllers to or from the directory. Based on the difference between current value and new value (provided through this API call), domain controllers will be added or removed. It may take up to 45 minutes for any new domain controllers to become fully active once the requested number of domain controllers is updated. During this time, you cannot make another update request.
    */
-  updateNumberOfDomainControllers(params: DirectoryService.Types.UpdateNumberOfDomainControllersRequest, callback?: (err: AWSError, data: DirectoryService.Types.UpdateNumberOfDomainControllersResult) => void): Request<DirectoryService.Types.UpdateNumberOfDomainControllersResult, AWSError>;
+  updateNumberOfDomainControllers(params: BoundInput<DirectoryService.Types.UpdateNumberOfDomainControllersRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.UpdateNumberOfDomainControllersResult) => void): Request<DirectoryService.Types.UpdateNumberOfDomainControllersResult, AWSError>;
   /**
    * Adds or removes domain controllers to or from the directory. Based on the difference between current value and new value (provided through this API call), domain controllers will be added or removed. It may take up to 45 minutes for any new domain controllers to become fully active once the requested number of domain controllers is updated. During this time, you cannot make another update request.
    */
@@ -390,7 +392,7 @@ declare class DirectoryService extends Service {
   /**
    * Updates the Remote Authentication Dial In User Service (RADIUS) server information for an AD Connector or Microsoft AD directory.
    */
-  updateRadius(params: DirectoryService.Types.UpdateRadiusRequest, callback?: (err: AWSError, data: DirectoryService.Types.UpdateRadiusResult) => void): Request<DirectoryService.Types.UpdateRadiusResult, AWSError>;
+  updateRadius(params: BoundInput<DirectoryService.Types.UpdateRadiusRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.UpdateRadiusResult) => void): Request<DirectoryService.Types.UpdateRadiusResult, AWSError>;
   /**
    * Updates the Remote Authentication Dial In User Service (RADIUS) server information for an AD Connector or Microsoft AD directory.
    */
@@ -398,7 +400,7 @@ declare class DirectoryService extends Service {
   /**
    * Updates the trust that has been set up between your AWS Managed Microsoft AD directory and an on-premises Active Directory.
    */
-  updateTrust(params: DirectoryService.Types.UpdateTrustRequest, callback?: (err: AWSError, data: DirectoryService.Types.UpdateTrustResult) => void): Request<DirectoryService.Types.UpdateTrustResult, AWSError>;
+  updateTrust(params: BoundInput<DirectoryService.Types.UpdateTrustRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.UpdateTrustResult) => void): Request<DirectoryService.Types.UpdateTrustResult, AWSError>;
   /**
    * Updates the trust that has been set up between your AWS Managed Microsoft AD directory and an on-premises Active Directory.
    */
@@ -406,7 +408,7 @@ declare class DirectoryService extends Service {
   /**
    * AWS Directory Service for Microsoft Active Directory allows you to configure and verify trust relationships. This action verifies a trust relationship between your AWS Managed Microsoft AD directory and an external domain.
    */
-  verifyTrust(params: DirectoryService.Types.VerifyTrustRequest, callback?: (err: AWSError, data: DirectoryService.Types.VerifyTrustResult) => void): Request<DirectoryService.Types.VerifyTrustResult, AWSError>;
+  verifyTrust(params: BoundInput<DirectoryService.Types.VerifyTrustRequest, keyof Params>, callback?: (err: AWSError, data: DirectoryService.Types.VerifyTrustResult) => void): Request<DirectoryService.Types.VerifyTrustResult, AWSError>;
   /**
    * AWS Directory Service for Microsoft Active Directory allows you to configure and verify trust relationships. This action verifies a trust relationship between your AWS Managed Microsoft AD directory and an external domain.
    */
@@ -2034,7 +2036,8 @@ declare namespace DirectoryService {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AcceptSharedDirectoryRequest & AddIpRoutesRequest & AddTagsToResourceRequest & CancelSchemaExtensionRequest & ConnectDirectoryRequest & CreateAliasRequest & CreateComputerRequest & CreateConditionalForwarderRequest & CreateDirectoryRequest & CreateLogSubscriptionRequest & CreateMicrosoftADRequest & CreateSnapshotRequest & CreateTrustRequest & DeleteConditionalForwarderRequest & DeleteDirectoryRequest & DeleteLogSubscriptionRequest & DeleteSnapshotRequest & DeleteTrustRequest & DeregisterEventTopicRequest & DescribeConditionalForwardersRequest & DescribeDirectoriesRequest & DescribeDomainControllersRequest & DescribeEventTopicsRequest & DescribeSharedDirectoriesRequest & DescribeSnapshotsRequest & DescribeTrustsRequest & DisableRadiusRequest & DisableSsoRequest & EnableRadiusRequest & EnableSsoRequest & GetDirectoryLimitsRequest & GetSnapshotLimitsRequest & ListIpRoutesRequest & ListLogSubscriptionsRequest & ListSchemaExtensionsRequest & ListTagsForResourceRequest & RegisterEventTopicRequest & RejectSharedDirectoryRequest & RemoveIpRoutesRequest & RemoveTagsFromResourceRequest & ResetUserPasswordRequest & RestoreFromSnapshotRequest & ShareDirectoryRequest & StartSchemaExtensionRequest & UnshareDirectoryRequest & UpdateConditionalForwarderRequest & UpdateNumberOfDomainControllersRequest & UpdateRadiusRequest & UpdateTrustRequest & VerifyTrustRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the DirectoryService client.
    */

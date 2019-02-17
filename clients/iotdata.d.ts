@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class IotData extends Service {
+declare class IotData<Params extends IotData.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: IotData.Types.ClientConfiguration)
-  config: Config & IotData.Types.ClientConfiguration;
+  constructor(options?: IotData.Types.ClientConfiguration<Params>)
+  config: Config & IotData.Types.ClientConfiguration<Params>;
   /**
    * Deletes the thing shadow for the specified thing. For more information, see DeleteThingShadow in the AWS IoT Developer Guide.
    */
-  deleteThingShadow(params: IotData.Types.DeleteThingShadowRequest, callback?: (err: AWSError, data: IotData.Types.DeleteThingShadowResponse) => void): Request<IotData.Types.DeleteThingShadowResponse, AWSError>;
+  deleteThingShadow(params: BoundInput<IotData.Types.DeleteThingShadowRequest, keyof Params>, callback?: (err: AWSError, data: IotData.Types.DeleteThingShadowResponse) => void): Request<IotData.Types.DeleteThingShadowResponse, AWSError>;
   /**
    * Deletes the thing shadow for the specified thing. For more information, see DeleteThingShadow in the AWS IoT Developer Guide.
    */
@@ -22,7 +24,7 @@ declare class IotData extends Service {
   /**
    * Gets the thing shadow for the specified thing. For more information, see GetThingShadow in the AWS IoT Developer Guide.
    */
-  getThingShadow(params: IotData.Types.GetThingShadowRequest, callback?: (err: AWSError, data: IotData.Types.GetThingShadowResponse) => void): Request<IotData.Types.GetThingShadowResponse, AWSError>;
+  getThingShadow(params: BoundInput<IotData.Types.GetThingShadowRequest, keyof Params>, callback?: (err: AWSError, data: IotData.Types.GetThingShadowResponse) => void): Request<IotData.Types.GetThingShadowResponse, AWSError>;
   /**
    * Gets the thing shadow for the specified thing. For more information, see GetThingShadow in the AWS IoT Developer Guide.
    */
@@ -30,7 +32,7 @@ declare class IotData extends Service {
   /**
    * Publishes state information. For more information, see HTTP Protocol in the AWS IoT Developer Guide.
    */
-  publish(params: IotData.Types.PublishRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  publish(params: BoundInput<IotData.Types.PublishRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Publishes state information. For more information, see HTTP Protocol in the AWS IoT Developer Guide.
    */
@@ -38,7 +40,7 @@ declare class IotData extends Service {
   /**
    * Updates the thing shadow for the specified thing. For more information, see UpdateThingShadow in the AWS IoT Developer Guide.
    */
-  updateThingShadow(params: IotData.Types.UpdateThingShadowRequest, callback?: (err: AWSError, data: IotData.Types.UpdateThingShadowResponse) => void): Request<IotData.Types.UpdateThingShadowResponse, AWSError>;
+  updateThingShadow(params: BoundInput<IotData.Types.UpdateThingShadowRequest, keyof Params>, callback?: (err: AWSError, data: IotData.Types.UpdateThingShadowResponse) => void): Request<IotData.Types.UpdateThingShadowResponse, AWSError>;
   /**
    * Updates the thing shadow for the specified thing. For more information, see UpdateThingShadow in the AWS IoT Developer Guide.
    */
@@ -114,7 +116,8 @@ declare namespace IotData {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<DeleteThingShadowRequest & GetThingShadowRequest & PublishRequest & UpdateThingShadowRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the IotData client.
    */

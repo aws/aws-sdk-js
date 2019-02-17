@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class Amplify extends Service {
+declare class Amplify<Params extends Amplify.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: Amplify.Types.ClientConfiguration)
-  config: Config & Amplify.Types.ClientConfiguration;
+  constructor(options?: Amplify.Types.ClientConfiguration<Params>)
+  config: Config & Amplify.Types.ClientConfiguration<Params>;
   /**
    *  Creates a new Amplify App. 
    */
-  createApp(params: Amplify.Types.CreateAppRequest, callback?: (err: AWSError, data: Amplify.Types.CreateAppResult) => void): Request<Amplify.Types.CreateAppResult, AWSError>;
+  createApp(params: BoundInput<Amplify.Types.CreateAppRequest, keyof Params>, callback?: (err: AWSError, data: Amplify.Types.CreateAppResult) => void): Request<Amplify.Types.CreateAppResult, AWSError>;
   /**
    *  Creates a new Amplify App. 
    */
@@ -22,7 +24,7 @@ declare class Amplify extends Service {
   /**
    *  Creates a new Branch for an Amplify App. 
    */
-  createBranch(params: Amplify.Types.CreateBranchRequest, callback?: (err: AWSError, data: Amplify.Types.CreateBranchResult) => void): Request<Amplify.Types.CreateBranchResult, AWSError>;
+  createBranch(params: BoundInput<Amplify.Types.CreateBranchRequest, keyof Params>, callback?: (err: AWSError, data: Amplify.Types.CreateBranchResult) => void): Request<Amplify.Types.CreateBranchResult, AWSError>;
   /**
    *  Creates a new Branch for an Amplify App. 
    */
@@ -30,7 +32,7 @@ declare class Amplify extends Service {
   /**
    *  Create a new DomainAssociation on an App 
    */
-  createDomainAssociation(params: Amplify.Types.CreateDomainAssociationRequest, callback?: (err: AWSError, data: Amplify.Types.CreateDomainAssociationResult) => void): Request<Amplify.Types.CreateDomainAssociationResult, AWSError>;
+  createDomainAssociation(params: BoundInput<Amplify.Types.CreateDomainAssociationRequest, keyof Params>, callback?: (err: AWSError, data: Amplify.Types.CreateDomainAssociationResult) => void): Request<Amplify.Types.CreateDomainAssociationResult, AWSError>;
   /**
    *  Create a new DomainAssociation on an App 
    */
@@ -38,7 +40,7 @@ declare class Amplify extends Service {
   /**
    *  Delete an existing Amplify App by appId. 
    */
-  deleteApp(params: Amplify.Types.DeleteAppRequest, callback?: (err: AWSError, data: Amplify.Types.DeleteAppResult) => void): Request<Amplify.Types.DeleteAppResult, AWSError>;
+  deleteApp(params: BoundInput<Amplify.Types.DeleteAppRequest, keyof Params>, callback?: (err: AWSError, data: Amplify.Types.DeleteAppResult) => void): Request<Amplify.Types.DeleteAppResult, AWSError>;
   /**
    *  Delete an existing Amplify App by appId. 
    */
@@ -46,7 +48,7 @@ declare class Amplify extends Service {
   /**
    *  Deletes a branch for an Amplify App. 
    */
-  deleteBranch(params: Amplify.Types.DeleteBranchRequest, callback?: (err: AWSError, data: Amplify.Types.DeleteBranchResult) => void): Request<Amplify.Types.DeleteBranchResult, AWSError>;
+  deleteBranch(params: BoundInput<Amplify.Types.DeleteBranchRequest, keyof Params>, callback?: (err: AWSError, data: Amplify.Types.DeleteBranchResult) => void): Request<Amplify.Types.DeleteBranchResult, AWSError>;
   /**
    *  Deletes a branch for an Amplify App. 
    */
@@ -54,7 +56,7 @@ declare class Amplify extends Service {
   /**
    *  Deletes a DomainAssociation. 
    */
-  deleteDomainAssociation(params: Amplify.Types.DeleteDomainAssociationRequest, callback?: (err: AWSError, data: Amplify.Types.DeleteDomainAssociationResult) => void): Request<Amplify.Types.DeleteDomainAssociationResult, AWSError>;
+  deleteDomainAssociation(params: BoundInput<Amplify.Types.DeleteDomainAssociationRequest, keyof Params>, callback?: (err: AWSError, data: Amplify.Types.DeleteDomainAssociationResult) => void): Request<Amplify.Types.DeleteDomainAssociationResult, AWSError>;
   /**
    *  Deletes a DomainAssociation. 
    */
@@ -62,7 +64,7 @@ declare class Amplify extends Service {
   /**
    *  Delete a job, for an Amplify branch, part of Amplify App. 
    */
-  deleteJob(params: Amplify.Types.DeleteJobRequest, callback?: (err: AWSError, data: Amplify.Types.DeleteJobResult) => void): Request<Amplify.Types.DeleteJobResult, AWSError>;
+  deleteJob(params: BoundInput<Amplify.Types.DeleteJobRequest, keyof Params>, callback?: (err: AWSError, data: Amplify.Types.DeleteJobResult) => void): Request<Amplify.Types.DeleteJobResult, AWSError>;
   /**
    *  Delete a job, for an Amplify branch, part of Amplify App. 
    */
@@ -70,7 +72,7 @@ declare class Amplify extends Service {
   /**
    *  Retrieves an existing Amplify App by appId. 
    */
-  getApp(params: Amplify.Types.GetAppRequest, callback?: (err: AWSError, data: Amplify.Types.GetAppResult) => void): Request<Amplify.Types.GetAppResult, AWSError>;
+  getApp(params: BoundInput<Amplify.Types.GetAppRequest, keyof Params>, callback?: (err: AWSError, data: Amplify.Types.GetAppResult) => void): Request<Amplify.Types.GetAppResult, AWSError>;
   /**
    *  Retrieves an existing Amplify App by appId. 
    */
@@ -78,7 +80,7 @@ declare class Amplify extends Service {
   /**
    *  Retrieves a branch for an Amplify App. 
    */
-  getBranch(params: Amplify.Types.GetBranchRequest, callback?: (err: AWSError, data: Amplify.Types.GetBranchResult) => void): Request<Amplify.Types.GetBranchResult, AWSError>;
+  getBranch(params: BoundInput<Amplify.Types.GetBranchRequest, keyof Params>, callback?: (err: AWSError, data: Amplify.Types.GetBranchResult) => void): Request<Amplify.Types.GetBranchResult, AWSError>;
   /**
    *  Retrieves a branch for an Amplify App. 
    */
@@ -86,7 +88,7 @@ declare class Amplify extends Service {
   /**
    *  Retrieves domain info that corresponds to an appId and domainName. 
    */
-  getDomainAssociation(params: Amplify.Types.GetDomainAssociationRequest, callback?: (err: AWSError, data: Amplify.Types.GetDomainAssociationResult) => void): Request<Amplify.Types.GetDomainAssociationResult, AWSError>;
+  getDomainAssociation(params: BoundInput<Amplify.Types.GetDomainAssociationRequest, keyof Params>, callback?: (err: AWSError, data: Amplify.Types.GetDomainAssociationResult) => void): Request<Amplify.Types.GetDomainAssociationResult, AWSError>;
   /**
    *  Retrieves domain info that corresponds to an appId and domainName. 
    */
@@ -94,7 +96,7 @@ declare class Amplify extends Service {
   /**
    *  Get a job for a branch, part of an Amplify App. 
    */
-  getJob(params: Amplify.Types.GetJobRequest, callback?: (err: AWSError, data: Amplify.Types.GetJobResult) => void): Request<Amplify.Types.GetJobResult, AWSError>;
+  getJob(params: BoundInput<Amplify.Types.GetJobRequest, keyof Params>, callback?: (err: AWSError, data: Amplify.Types.GetJobResult) => void): Request<Amplify.Types.GetJobResult, AWSError>;
   /**
    *  Get a job for a branch, part of an Amplify App. 
    */
@@ -102,7 +104,7 @@ declare class Amplify extends Service {
   /**
    *  Lists existing Amplify Apps. 
    */
-  listApps(params: Amplify.Types.ListAppsRequest, callback?: (err: AWSError, data: Amplify.Types.ListAppsResult) => void): Request<Amplify.Types.ListAppsResult, AWSError>;
+  listApps(params: BoundInput<Amplify.Types.ListAppsRequest, keyof Params>, callback?: (err: AWSError, data: Amplify.Types.ListAppsResult) => void): Request<Amplify.Types.ListAppsResult, AWSError>;
   /**
    *  Lists existing Amplify Apps. 
    */
@@ -110,7 +112,7 @@ declare class Amplify extends Service {
   /**
    *  Lists branches for an Amplify App. 
    */
-  listBranches(params: Amplify.Types.ListBranchesRequest, callback?: (err: AWSError, data: Amplify.Types.ListBranchesResult) => void): Request<Amplify.Types.ListBranchesResult, AWSError>;
+  listBranches(params: BoundInput<Amplify.Types.ListBranchesRequest, keyof Params>, callback?: (err: AWSError, data: Amplify.Types.ListBranchesResult) => void): Request<Amplify.Types.ListBranchesResult, AWSError>;
   /**
    *  Lists branches for an Amplify App. 
    */
@@ -118,7 +120,7 @@ declare class Amplify extends Service {
   /**
    *  List domains with an app 
    */
-  listDomainAssociations(params: Amplify.Types.ListDomainAssociationsRequest, callback?: (err: AWSError, data: Amplify.Types.ListDomainAssociationsResult) => void): Request<Amplify.Types.ListDomainAssociationsResult, AWSError>;
+  listDomainAssociations(params: BoundInput<Amplify.Types.ListDomainAssociationsRequest, keyof Params>, callback?: (err: AWSError, data: Amplify.Types.ListDomainAssociationsResult) => void): Request<Amplify.Types.ListDomainAssociationsResult, AWSError>;
   /**
    *  List domains with an app 
    */
@@ -126,7 +128,7 @@ declare class Amplify extends Service {
   /**
    *  List Jobs for a branch, part of an Amplify App. 
    */
-  listJobs(params: Amplify.Types.ListJobsRequest, callback?: (err: AWSError, data: Amplify.Types.ListJobsResult) => void): Request<Amplify.Types.ListJobsResult, AWSError>;
+  listJobs(params: BoundInput<Amplify.Types.ListJobsRequest, keyof Params>, callback?: (err: AWSError, data: Amplify.Types.ListJobsResult) => void): Request<Amplify.Types.ListJobsResult, AWSError>;
   /**
    *  List Jobs for a branch, part of an Amplify App. 
    */
@@ -134,7 +136,7 @@ declare class Amplify extends Service {
   /**
    *  Starts a new job for a branch, part of an Amplify App. 
    */
-  startJob(params: Amplify.Types.StartJobRequest, callback?: (err: AWSError, data: Amplify.Types.StartJobResult) => void): Request<Amplify.Types.StartJobResult, AWSError>;
+  startJob(params: BoundInput<Amplify.Types.StartJobRequest, keyof Params>, callback?: (err: AWSError, data: Amplify.Types.StartJobResult) => void): Request<Amplify.Types.StartJobResult, AWSError>;
   /**
    *  Starts a new job for a branch, part of an Amplify App. 
    */
@@ -142,7 +144,7 @@ declare class Amplify extends Service {
   /**
    *  Stop a job that is in progress, for an Amplify branch, part of Amplify App. 
    */
-  stopJob(params: Amplify.Types.StopJobRequest, callback?: (err: AWSError, data: Amplify.Types.StopJobResult) => void): Request<Amplify.Types.StopJobResult, AWSError>;
+  stopJob(params: BoundInput<Amplify.Types.StopJobRequest, keyof Params>, callback?: (err: AWSError, data: Amplify.Types.StopJobResult) => void): Request<Amplify.Types.StopJobResult, AWSError>;
   /**
    *  Stop a job that is in progress, for an Amplify branch, part of Amplify App. 
    */
@@ -150,7 +152,7 @@ declare class Amplify extends Service {
   /**
    *  Updates an existing Amplify App. 
    */
-  updateApp(params: Amplify.Types.UpdateAppRequest, callback?: (err: AWSError, data: Amplify.Types.UpdateAppResult) => void): Request<Amplify.Types.UpdateAppResult, AWSError>;
+  updateApp(params: BoundInput<Amplify.Types.UpdateAppRequest, keyof Params>, callback?: (err: AWSError, data: Amplify.Types.UpdateAppResult) => void): Request<Amplify.Types.UpdateAppResult, AWSError>;
   /**
    *  Updates an existing Amplify App. 
    */
@@ -158,7 +160,7 @@ declare class Amplify extends Service {
   /**
    *  Updates a branch for an Amplify App. 
    */
-  updateBranch(params: Amplify.Types.UpdateBranchRequest, callback?: (err: AWSError, data: Amplify.Types.UpdateBranchResult) => void): Request<Amplify.Types.UpdateBranchResult, AWSError>;
+  updateBranch(params: BoundInput<Amplify.Types.UpdateBranchRequest, keyof Params>, callback?: (err: AWSError, data: Amplify.Types.UpdateBranchResult) => void): Request<Amplify.Types.UpdateBranchResult, AWSError>;
   /**
    *  Updates a branch for an Amplify App. 
    */
@@ -166,7 +168,7 @@ declare class Amplify extends Service {
   /**
    *  Create a new DomainAssociation on an App 
    */
-  updateDomainAssociation(params: Amplify.Types.UpdateDomainAssociationRequest, callback?: (err: AWSError, data: Amplify.Types.UpdateDomainAssociationResult) => void): Request<Amplify.Types.UpdateDomainAssociationResult, AWSError>;
+  updateDomainAssociation(params: BoundInput<Amplify.Types.UpdateDomainAssociationRequest, keyof Params>, callback?: (err: AWSError, data: Amplify.Types.UpdateDomainAssociationResult) => void): Request<Amplify.Types.UpdateDomainAssociationResult, AWSError>;
   /**
    *  Create a new DomainAssociation on an App 
    */
@@ -1119,7 +1121,8 @@ declare namespace Amplify {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateAppRequest & CreateBranchRequest & CreateDomainAssociationRequest & DeleteAppRequest & DeleteBranchRequest & DeleteDomainAssociationRequest & DeleteJobRequest & GetAppRequest & GetBranchRequest & GetDomainAssociationRequest & GetJobRequest & ListAppsRequest & ListBranchesRequest & ListDomainAssociationsRequest & ListJobsRequest & StartJobRequest & StopJobRequest & UpdateAppRequest & UpdateBranchRequest & UpdateDomainAssociationRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the Amplify client.
    */

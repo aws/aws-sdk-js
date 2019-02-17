@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class ImportExport extends Service {
+declare class ImportExport<Params extends ImportExport.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: ImportExport.Types.ClientConfiguration)
-  config: Config & ImportExport.Types.ClientConfiguration;
+  constructor(options?: ImportExport.Types.ClientConfiguration<Params>)
+  config: Config & ImportExport.Types.ClientConfiguration<Params>;
   /**
    * This operation cancels a specified job. Only the job owner can cancel it. The operation fails if the job has already started or is complete.
    */
-  cancelJob(params: ImportExport.Types.CancelJobInput, callback?: (err: AWSError, data: ImportExport.Types.CancelJobOutput) => void): Request<ImportExport.Types.CancelJobOutput, AWSError>;
+  cancelJob(params: BoundInput<ImportExport.Types.CancelJobInput, keyof Params>, callback?: (err: AWSError, data: ImportExport.Types.CancelJobOutput) => void): Request<ImportExport.Types.CancelJobOutput, AWSError>;
   /**
    * This operation cancels a specified job. Only the job owner can cancel it. The operation fails if the job has already started or is complete.
    */
@@ -22,7 +24,7 @@ declare class ImportExport extends Service {
   /**
    * This operation initiates the process of scheduling an upload or download of your data. You include in the request a manifest that describes the data transfer specifics. The response to the request includes a job ID, which you can use in other operations, a signature that you use to identify your storage device, and the address where you should ship your storage device.
    */
-  createJob(params: ImportExport.Types.CreateJobInput, callback?: (err: AWSError, data: ImportExport.Types.CreateJobOutput) => void): Request<ImportExport.Types.CreateJobOutput, AWSError>;
+  createJob(params: BoundInput<ImportExport.Types.CreateJobInput, keyof Params>, callback?: (err: AWSError, data: ImportExport.Types.CreateJobOutput) => void): Request<ImportExport.Types.CreateJobOutput, AWSError>;
   /**
    * This operation initiates the process of scheduling an upload or download of your data. You include in the request a manifest that describes the data transfer specifics. The response to the request includes a job ID, which you can use in other operations, a signature that you use to identify your storage device, and the address where you should ship your storage device.
    */
@@ -30,7 +32,7 @@ declare class ImportExport extends Service {
   /**
    * This operation generates a pre-paid UPS shipping label that you will use to ship your device to AWS for processing.
    */
-  getShippingLabel(params: ImportExport.Types.GetShippingLabelInput, callback?: (err: AWSError, data: ImportExport.Types.GetShippingLabelOutput) => void): Request<ImportExport.Types.GetShippingLabelOutput, AWSError>;
+  getShippingLabel(params: BoundInput<ImportExport.Types.GetShippingLabelInput, keyof Params>, callback?: (err: AWSError, data: ImportExport.Types.GetShippingLabelOutput) => void): Request<ImportExport.Types.GetShippingLabelOutput, AWSError>;
   /**
    * This operation generates a pre-paid UPS shipping label that you will use to ship your device to AWS for processing.
    */
@@ -38,7 +40,7 @@ declare class ImportExport extends Service {
   /**
    * This operation returns information about a job, including where the job is in the processing pipeline, the status of the results, and the signature value associated with the job. You can only return information about jobs you own.
    */
-  getStatus(params: ImportExport.Types.GetStatusInput, callback?: (err: AWSError, data: ImportExport.Types.GetStatusOutput) => void): Request<ImportExport.Types.GetStatusOutput, AWSError>;
+  getStatus(params: BoundInput<ImportExport.Types.GetStatusInput, keyof Params>, callback?: (err: AWSError, data: ImportExport.Types.GetStatusOutput) => void): Request<ImportExport.Types.GetStatusOutput, AWSError>;
   /**
    * This operation returns information about a job, including where the job is in the processing pipeline, the status of the results, and the signature value associated with the job. You can only return information about jobs you own.
    */
@@ -46,7 +48,7 @@ declare class ImportExport extends Service {
   /**
    * This operation returns the jobs associated with the requester. AWS Import/Export lists the jobs in reverse chronological order based on the date of creation. For example if Job Test1 was created 2009Dec30 and Test2 was created 2010Feb05, the ListJobs operation would return Test2 followed by Test1.
    */
-  listJobs(params: ImportExport.Types.ListJobsInput, callback?: (err: AWSError, data: ImportExport.Types.ListJobsOutput) => void): Request<ImportExport.Types.ListJobsOutput, AWSError>;
+  listJobs(params: BoundInput<ImportExport.Types.ListJobsInput, keyof Params>, callback?: (err: AWSError, data: ImportExport.Types.ListJobsOutput) => void): Request<ImportExport.Types.ListJobsOutput, AWSError>;
   /**
    * This operation returns the jobs associated with the requester. AWS Import/Export lists the jobs in reverse chronological order based on the date of creation. For example if Job Test1 was created 2009Dec30 and Test2 was created 2010Feb05, the ListJobs operation would return Test2 followed by Test1.
    */
@@ -54,7 +56,7 @@ declare class ImportExport extends Service {
   /**
    * You use this operation to change the parameters specified in the original manifest file by supplying a new manifest file. The manifest file attached to this request replaces the original manifest file. You can only use the operation after a CreateJob request but before the data transfer starts and you can only use it on jobs you own.
    */
-  updateJob(params: ImportExport.Types.UpdateJobInput, callback?: (err: AWSError, data: ImportExport.Types.UpdateJobOutput) => void): Request<ImportExport.Types.UpdateJobOutput, AWSError>;
+  updateJob(params: BoundInput<ImportExport.Types.UpdateJobInput, keyof Params>, callback?: (err: AWSError, data: ImportExport.Types.UpdateJobOutput) => void): Request<ImportExport.Types.UpdateJobOutput, AWSError>;
   /**
    * You use this operation to change the parameters specified in the original manifest file by supplying a new manifest file. The manifest file attached to this request replaces the original manifest file. You can only use the operation after a CreateJob request but before the data transfer starts and you can only use it on jobs you own.
    */
@@ -205,7 +207,8 @@ declare namespace ImportExport {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CancelJobInput & CreateJobInput & GetShippingLabelInput & GetStatusInput & ListJobsInput & UpdateJobInput>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the ImportExport client.
    */

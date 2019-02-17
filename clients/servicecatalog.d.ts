@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class ServiceCatalog extends Service {
+declare class ServiceCatalog<Params extends ServiceCatalog.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: ServiceCatalog.Types.ClientConfiguration)
-  config: Config & ServiceCatalog.Types.ClientConfiguration;
+  constructor(options?: ServiceCatalog.Types.ClientConfiguration<Params>)
+  config: Config & ServiceCatalog.Types.ClientConfiguration<Params>;
   /**
    * Accepts an offer to share the specified portfolio.
    */
-  acceptPortfolioShare(params: ServiceCatalog.Types.AcceptPortfolioShareInput, callback?: (err: AWSError, data: ServiceCatalog.Types.AcceptPortfolioShareOutput) => void): Request<ServiceCatalog.Types.AcceptPortfolioShareOutput, AWSError>;
+  acceptPortfolioShare(params: BoundInput<ServiceCatalog.Types.AcceptPortfolioShareInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.AcceptPortfolioShareOutput) => void): Request<ServiceCatalog.Types.AcceptPortfolioShareOutput, AWSError>;
   /**
    * Accepts an offer to share the specified portfolio.
    */
@@ -22,7 +24,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Associates the specified principal ARN with the specified portfolio.
    */
-  associatePrincipalWithPortfolio(params: ServiceCatalog.Types.AssociatePrincipalWithPortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.AssociatePrincipalWithPortfolioOutput) => void): Request<ServiceCatalog.Types.AssociatePrincipalWithPortfolioOutput, AWSError>;
+  associatePrincipalWithPortfolio(params: BoundInput<ServiceCatalog.Types.AssociatePrincipalWithPortfolioInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.AssociatePrincipalWithPortfolioOutput) => void): Request<ServiceCatalog.Types.AssociatePrincipalWithPortfolioOutput, AWSError>;
   /**
    * Associates the specified principal ARN with the specified portfolio.
    */
@@ -30,7 +32,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Associates the specified product with the specified portfolio.
    */
-  associateProductWithPortfolio(params: ServiceCatalog.Types.AssociateProductWithPortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateProductWithPortfolioOutput) => void): Request<ServiceCatalog.Types.AssociateProductWithPortfolioOutput, AWSError>;
+  associateProductWithPortfolio(params: BoundInput<ServiceCatalog.Types.AssociateProductWithPortfolioInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateProductWithPortfolioOutput) => void): Request<ServiceCatalog.Types.AssociateProductWithPortfolioOutput, AWSError>;
   /**
    * Associates the specified product with the specified portfolio.
    */
@@ -38,7 +40,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Associates a self-service action with a provisioning artifact.
    */
-  associateServiceActionWithProvisioningArtifact(params: ServiceCatalog.Types.AssociateServiceActionWithProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateServiceActionWithProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.AssociateServiceActionWithProvisioningArtifactOutput, AWSError>;
+  associateServiceActionWithProvisioningArtifact(params: BoundInput<ServiceCatalog.Types.AssociateServiceActionWithProvisioningArtifactInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateServiceActionWithProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.AssociateServiceActionWithProvisioningArtifactOutput, AWSError>;
   /**
    * Associates a self-service action with a provisioning artifact.
    */
@@ -46,7 +48,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Associate the specified TagOption with the specified portfolio or product.
    */
-  associateTagOptionWithResource(params: ServiceCatalog.Types.AssociateTagOptionWithResourceInput, callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateTagOptionWithResourceOutput) => void): Request<ServiceCatalog.Types.AssociateTagOptionWithResourceOutput, AWSError>;
+  associateTagOptionWithResource(params: BoundInput<ServiceCatalog.Types.AssociateTagOptionWithResourceInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateTagOptionWithResourceOutput) => void): Request<ServiceCatalog.Types.AssociateTagOptionWithResourceOutput, AWSError>;
   /**
    * Associate the specified TagOption with the specified portfolio or product.
    */
@@ -54,7 +56,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Associates multiple self-service actions with provisioning artifacts.
    */
-  batchAssociateServiceActionWithProvisioningArtifact(params: ServiceCatalog.Types.BatchAssociateServiceActionWithProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.BatchAssociateServiceActionWithProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.BatchAssociateServiceActionWithProvisioningArtifactOutput, AWSError>;
+  batchAssociateServiceActionWithProvisioningArtifact(params: BoundInput<ServiceCatalog.Types.BatchAssociateServiceActionWithProvisioningArtifactInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.BatchAssociateServiceActionWithProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.BatchAssociateServiceActionWithProvisioningArtifactOutput, AWSError>;
   /**
    * Associates multiple self-service actions with provisioning artifacts.
    */
@@ -62,7 +64,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Disassociates a batch of self-service actions from the specified provisioning artifact.
    */
-  batchDisassociateServiceActionFromProvisioningArtifact(params: ServiceCatalog.Types.BatchDisassociateServiceActionFromProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.BatchDisassociateServiceActionFromProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.BatchDisassociateServiceActionFromProvisioningArtifactOutput, AWSError>;
+  batchDisassociateServiceActionFromProvisioningArtifact(params: BoundInput<ServiceCatalog.Types.BatchDisassociateServiceActionFromProvisioningArtifactInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.BatchDisassociateServiceActionFromProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.BatchDisassociateServiceActionFromProvisioningArtifactOutput, AWSError>;
   /**
    * Disassociates a batch of self-service actions from the specified provisioning artifact.
    */
@@ -70,7 +72,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Copies the specified source product to the specified target product or a new product. You can copy a product to the same account or another account. You can copy a product to the same region or another region. This operation is performed asynchronously. To track the progress of the operation, use DescribeCopyProductStatus.
    */
-  copyProduct(params: ServiceCatalog.Types.CopyProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CopyProductOutput) => void): Request<ServiceCatalog.Types.CopyProductOutput, AWSError>;
+  copyProduct(params: BoundInput<ServiceCatalog.Types.CopyProductInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.CopyProductOutput) => void): Request<ServiceCatalog.Types.CopyProductOutput, AWSError>;
   /**
    * Copies the specified source product to the specified target product or a new product. You can copy a product to the same account or another account. You can copy a product to the same region or another region. This operation is performed asynchronously. To track the progress of the operation, use DescribeCopyProductStatus.
    */
@@ -78,7 +80,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Creates a constraint.
    */
-  createConstraint(params: ServiceCatalog.Types.CreateConstraintInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateConstraintOutput) => void): Request<ServiceCatalog.Types.CreateConstraintOutput, AWSError>;
+  createConstraint(params: BoundInput<ServiceCatalog.Types.CreateConstraintInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateConstraintOutput) => void): Request<ServiceCatalog.Types.CreateConstraintOutput, AWSError>;
   /**
    * Creates a constraint.
    */
@@ -86,7 +88,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Creates a portfolio.
    */
-  createPortfolio(params: ServiceCatalog.Types.CreatePortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreatePortfolioOutput) => void): Request<ServiceCatalog.Types.CreatePortfolioOutput, AWSError>;
+  createPortfolio(params: BoundInput<ServiceCatalog.Types.CreatePortfolioInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.CreatePortfolioOutput) => void): Request<ServiceCatalog.Types.CreatePortfolioOutput, AWSError>;
   /**
    * Creates a portfolio.
    */
@@ -94,7 +96,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the master account of an Organization. AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node.
    */
-  createPortfolioShare(params: ServiceCatalog.Types.CreatePortfolioShareInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreatePortfolioShareOutput) => void): Request<ServiceCatalog.Types.CreatePortfolioShareOutput, AWSError>;
+  createPortfolioShare(params: BoundInput<ServiceCatalog.Types.CreatePortfolioShareInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.CreatePortfolioShareOutput) => void): Request<ServiceCatalog.Types.CreatePortfolioShareOutput, AWSError>;
   /**
    * Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the master account of an Organization. AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node.
    */
@@ -102,7 +104,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Creates a product.
    */
-  createProduct(params: ServiceCatalog.Types.CreateProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProductOutput) => void): Request<ServiceCatalog.Types.CreateProductOutput, AWSError>;
+  createProduct(params: BoundInput<ServiceCatalog.Types.CreateProductInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProductOutput) => void): Request<ServiceCatalog.Types.CreateProductOutput, AWSError>;
   /**
    * Creates a product.
    */
@@ -110,7 +112,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Creates a plan. A plan includes the list of resources to be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed. You can create one plan per provisioned product. To create a plan for an existing provisioned product, the product status must be AVAILBLE or TAINTED. To view the resource changes in the change set, use DescribeProvisionedProductPlan. To create or modify the provisioned product, use ExecuteProvisionedProductPlan.
    */
-  createProvisionedProductPlan(params: ServiceCatalog.Types.CreateProvisionedProductPlanInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.CreateProvisionedProductPlanOutput, AWSError>;
+  createProvisionedProductPlan(params: BoundInput<ServiceCatalog.Types.CreateProvisionedProductPlanInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.CreateProvisionedProductPlanOutput, AWSError>;
   /**
    * Creates a plan. A plan includes the list of resources to be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed. You can create one plan per provisioned product. To create a plan for an existing provisioned product, the product status must be AVAILBLE or TAINTED. To view the resource changes in the change set, use DescribeProvisionedProductPlan. To create or modify the provisioned product, use ExecuteProvisionedProductPlan.
    */
@@ -118,7 +120,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Creates a provisioning artifact (also known as a version) for the specified product. You cannot create a provisioning artifact for a product that was shared with you.
    */
-  createProvisioningArtifact(params: ServiceCatalog.Types.CreateProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.CreateProvisioningArtifactOutput, AWSError>;
+  createProvisioningArtifact(params: BoundInput<ServiceCatalog.Types.CreateProvisioningArtifactInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.CreateProvisioningArtifactOutput, AWSError>;
   /**
    * Creates a provisioning artifact (also known as a version) for the specified product. You cannot create a provisioning artifact for a product that was shared with you.
    */
@@ -126,7 +128,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Creates a self-service action.
    */
-  createServiceAction(params: ServiceCatalog.Types.CreateServiceActionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateServiceActionOutput) => void): Request<ServiceCatalog.Types.CreateServiceActionOutput, AWSError>;
+  createServiceAction(params: BoundInput<ServiceCatalog.Types.CreateServiceActionInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateServiceActionOutput) => void): Request<ServiceCatalog.Types.CreateServiceActionOutput, AWSError>;
   /**
    * Creates a self-service action.
    */
@@ -134,7 +136,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Creates a TagOption.
    */
-  createTagOption(params: ServiceCatalog.Types.CreateTagOptionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateTagOptionOutput) => void): Request<ServiceCatalog.Types.CreateTagOptionOutput, AWSError>;
+  createTagOption(params: BoundInput<ServiceCatalog.Types.CreateTagOptionInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateTagOptionOutput) => void): Request<ServiceCatalog.Types.CreateTagOptionOutput, AWSError>;
   /**
    * Creates a TagOption.
    */
@@ -142,7 +144,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Deletes the specified constraint.
    */
-  deleteConstraint(params: ServiceCatalog.Types.DeleteConstraintInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteConstraintOutput) => void): Request<ServiceCatalog.Types.DeleteConstraintOutput, AWSError>;
+  deleteConstraint(params: BoundInput<ServiceCatalog.Types.DeleteConstraintInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteConstraintOutput) => void): Request<ServiceCatalog.Types.DeleteConstraintOutput, AWSError>;
   /**
    * Deletes the specified constraint.
    */
@@ -150,7 +152,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Deletes the specified portfolio. You cannot delete a portfolio if it was shared with you or if it has associated products, users, constraints, or shared accounts.
    */
-  deletePortfolio(params: ServiceCatalog.Types.DeletePortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeletePortfolioOutput) => void): Request<ServiceCatalog.Types.DeletePortfolioOutput, AWSError>;
+  deletePortfolio(params: BoundInput<ServiceCatalog.Types.DeletePortfolioInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DeletePortfolioOutput) => void): Request<ServiceCatalog.Types.DeletePortfolioOutput, AWSError>;
   /**
    * Deletes the specified portfolio. You cannot delete a portfolio if it was shared with you or if it has associated products, users, constraints, or shared accounts.
    */
@@ -158,7 +160,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Stops sharing the specified portfolio with the specified account or organization node. Shares to an organization node can only be deleted by the master account of an Organization.
    */
-  deletePortfolioShare(params: ServiceCatalog.Types.DeletePortfolioShareInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeletePortfolioShareOutput) => void): Request<ServiceCatalog.Types.DeletePortfolioShareOutput, AWSError>;
+  deletePortfolioShare(params: BoundInput<ServiceCatalog.Types.DeletePortfolioShareInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DeletePortfolioShareOutput) => void): Request<ServiceCatalog.Types.DeletePortfolioShareOutput, AWSError>;
   /**
    * Stops sharing the specified portfolio with the specified account or organization node. Shares to an organization node can only be deleted by the master account of an Organization.
    */
@@ -166,7 +168,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Deletes the specified product. You cannot delete a product if it was shared with you or is associated with a portfolio.
    */
-  deleteProduct(params: ServiceCatalog.Types.DeleteProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteProductOutput) => void): Request<ServiceCatalog.Types.DeleteProductOutput, AWSError>;
+  deleteProduct(params: BoundInput<ServiceCatalog.Types.DeleteProductInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteProductOutput) => void): Request<ServiceCatalog.Types.DeleteProductOutput, AWSError>;
   /**
    * Deletes the specified product. You cannot delete a product if it was shared with you or is associated with a portfolio.
    */
@@ -174,7 +176,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Deletes the specified plan.
    */
-  deleteProvisionedProductPlan(params: ServiceCatalog.Types.DeleteProvisionedProductPlanInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.DeleteProvisionedProductPlanOutput, AWSError>;
+  deleteProvisionedProductPlan(params: BoundInput<ServiceCatalog.Types.DeleteProvisionedProductPlanInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.DeleteProvisionedProductPlanOutput, AWSError>;
   /**
    * Deletes the specified plan.
    */
@@ -182,7 +184,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Deletes the specified provisioning artifact (also known as a version) for the specified product. You cannot delete a provisioning artifact associated with a product that was shared with you. You cannot delete the last provisioning artifact for a product, because a product must have at least one provisioning artifact.
    */
-  deleteProvisioningArtifact(params: ServiceCatalog.Types.DeleteProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DeleteProvisioningArtifactOutput, AWSError>;
+  deleteProvisioningArtifact(params: BoundInput<ServiceCatalog.Types.DeleteProvisioningArtifactInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DeleteProvisioningArtifactOutput, AWSError>;
   /**
    * Deletes the specified provisioning artifact (also known as a version) for the specified product. You cannot delete a provisioning artifact associated with a product that was shared with you. You cannot delete the last provisioning artifact for a product, because a product must have at least one provisioning artifact.
    */
@@ -190,7 +192,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Deletes a self-service action.
    */
-  deleteServiceAction(params: ServiceCatalog.Types.DeleteServiceActionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteServiceActionOutput) => void): Request<ServiceCatalog.Types.DeleteServiceActionOutput, AWSError>;
+  deleteServiceAction(params: BoundInput<ServiceCatalog.Types.DeleteServiceActionInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteServiceActionOutput) => void): Request<ServiceCatalog.Types.DeleteServiceActionOutput, AWSError>;
   /**
    * Deletes a self-service action.
    */
@@ -198,7 +200,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Deletes the specified TagOption. You cannot delete a TagOption if it is associated with a product or portfolio.
    */
-  deleteTagOption(params: ServiceCatalog.Types.DeleteTagOptionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteTagOptionOutput) => void): Request<ServiceCatalog.Types.DeleteTagOptionOutput, AWSError>;
+  deleteTagOption(params: BoundInput<ServiceCatalog.Types.DeleteTagOptionInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteTagOptionOutput) => void): Request<ServiceCatalog.Types.DeleteTagOptionOutput, AWSError>;
   /**
    * Deletes the specified TagOption. You cannot delete a TagOption if it is associated with a product or portfolio.
    */
@@ -206,7 +208,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Gets information about the specified constraint.
    */
-  describeConstraint(params: ServiceCatalog.Types.DescribeConstraintInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeConstraintOutput) => void): Request<ServiceCatalog.Types.DescribeConstraintOutput, AWSError>;
+  describeConstraint(params: BoundInput<ServiceCatalog.Types.DescribeConstraintInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeConstraintOutput) => void): Request<ServiceCatalog.Types.DescribeConstraintOutput, AWSError>;
   /**
    * Gets information about the specified constraint.
    */
@@ -214,7 +216,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Gets the status of the specified copy product operation.
    */
-  describeCopyProductStatus(params: ServiceCatalog.Types.DescribeCopyProductStatusInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeCopyProductStatusOutput) => void): Request<ServiceCatalog.Types.DescribeCopyProductStatusOutput, AWSError>;
+  describeCopyProductStatus(params: BoundInput<ServiceCatalog.Types.DescribeCopyProductStatusInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeCopyProductStatusOutput) => void): Request<ServiceCatalog.Types.DescribeCopyProductStatusOutput, AWSError>;
   /**
    * Gets the status of the specified copy product operation.
    */
@@ -222,7 +224,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Gets information about the specified portfolio.
    */
-  describePortfolio(params: ServiceCatalog.Types.DescribePortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribePortfolioOutput) => void): Request<ServiceCatalog.Types.DescribePortfolioOutput, AWSError>;
+  describePortfolio(params: BoundInput<ServiceCatalog.Types.DescribePortfolioInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribePortfolioOutput) => void): Request<ServiceCatalog.Types.DescribePortfolioOutput, AWSError>;
   /**
    * Gets information about the specified portfolio.
    */
@@ -230,7 +232,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Gets the status of the specified portfolio share operation. This API can only be called by the master account in the organization.
    */
-  describePortfolioShareStatus(params: ServiceCatalog.Types.DescribePortfolioShareStatusInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribePortfolioShareStatusOutput) => void): Request<ServiceCatalog.Types.DescribePortfolioShareStatusOutput, AWSError>;
+  describePortfolioShareStatus(params: BoundInput<ServiceCatalog.Types.DescribePortfolioShareStatusInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribePortfolioShareStatusOutput) => void): Request<ServiceCatalog.Types.DescribePortfolioShareStatusOutput, AWSError>;
   /**
    * Gets the status of the specified portfolio share operation. This API can only be called by the master account in the organization.
    */
@@ -238,7 +240,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Gets information about the specified product.
    */
-  describeProduct(params: ServiceCatalog.Types.DescribeProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProductOutput) => void): Request<ServiceCatalog.Types.DescribeProductOutput, AWSError>;
+  describeProduct(params: BoundInput<ServiceCatalog.Types.DescribeProductInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProductOutput) => void): Request<ServiceCatalog.Types.DescribeProductOutput, AWSError>;
   /**
    * Gets information about the specified product.
    */
@@ -246,7 +248,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Gets information about the specified product. This operation is run with administrator access.
    */
-  describeProductAsAdmin(params: ServiceCatalog.Types.DescribeProductAsAdminInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProductAsAdminOutput) => void): Request<ServiceCatalog.Types.DescribeProductAsAdminOutput, AWSError>;
+  describeProductAsAdmin(params: BoundInput<ServiceCatalog.Types.DescribeProductAsAdminInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProductAsAdminOutput) => void): Request<ServiceCatalog.Types.DescribeProductAsAdminOutput, AWSError>;
   /**
    * Gets information about the specified product. This operation is run with administrator access.
    */
@@ -254,7 +256,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Gets information about the specified product.
    */
-  describeProductView(params: ServiceCatalog.Types.DescribeProductViewInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProductViewOutput) => void): Request<ServiceCatalog.Types.DescribeProductViewOutput, AWSError>;
+  describeProductView(params: BoundInput<ServiceCatalog.Types.DescribeProductViewInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProductViewOutput) => void): Request<ServiceCatalog.Types.DescribeProductViewOutput, AWSError>;
   /**
    * Gets information about the specified product.
    */
@@ -262,7 +264,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Gets information about the specified provisioned product.
    */
-  describeProvisionedProduct(params: ServiceCatalog.Types.DescribeProvisionedProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisionedProductOutput) => void): Request<ServiceCatalog.Types.DescribeProvisionedProductOutput, AWSError>;
+  describeProvisionedProduct(params: BoundInput<ServiceCatalog.Types.DescribeProvisionedProductInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisionedProductOutput) => void): Request<ServiceCatalog.Types.DescribeProvisionedProductOutput, AWSError>;
   /**
    * Gets information about the specified provisioned product.
    */
@@ -270,7 +272,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Gets information about the resource changes for the specified plan.
    */
-  describeProvisionedProductPlan(params: ServiceCatalog.Types.DescribeProvisionedProductPlanInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.DescribeProvisionedProductPlanOutput, AWSError>;
+  describeProvisionedProductPlan(params: BoundInput<ServiceCatalog.Types.DescribeProvisionedProductPlanInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.DescribeProvisionedProductPlanOutput, AWSError>;
   /**
    * Gets information about the resource changes for the specified plan.
    */
@@ -278,7 +280,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Gets information about the specified provisioning artifact (also known as a version) for the specified product.
    */
-  describeProvisioningArtifact(params: ServiceCatalog.Types.DescribeProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DescribeProvisioningArtifactOutput, AWSError>;
+  describeProvisioningArtifact(params: BoundInput<ServiceCatalog.Types.DescribeProvisioningArtifactInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DescribeProvisioningArtifactOutput, AWSError>;
   /**
    * Gets information about the specified provisioning artifact (also known as a version) for the specified product.
    */
@@ -286,7 +288,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Gets information about the configuration required to provision the specified product using the specified provisioning artifact. If the output contains a TagOption key with an empty list of values, there is a TagOption conflict for that key. The end user cannot take action to fix the conflict, and launch is not blocked. In subsequent calls to ProvisionProduct, do not include conflicted TagOption keys as tags, or this causes the error "Parameter validation failed: Missing required parameter in Tags[N]:Value". Tag the provisioned product with the value sc-tagoption-conflict-portfolioId-productId.
    */
-  describeProvisioningParameters(params: ServiceCatalog.Types.DescribeProvisioningParametersInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisioningParametersOutput) => void): Request<ServiceCatalog.Types.DescribeProvisioningParametersOutput, AWSError>;
+  describeProvisioningParameters(params: BoundInput<ServiceCatalog.Types.DescribeProvisioningParametersInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisioningParametersOutput) => void): Request<ServiceCatalog.Types.DescribeProvisioningParametersOutput, AWSError>;
   /**
    * Gets information about the configuration required to provision the specified product using the specified provisioning artifact. If the output contains a TagOption key with an empty list of values, there is a TagOption conflict for that key. The end user cannot take action to fix the conflict, and launch is not blocked. In subsequent calls to ProvisionProduct, do not include conflicted TagOption keys as tags, or this causes the error "Parameter validation failed: Missing required parameter in Tags[N]:Value". Tag the provisioned product with the value sc-tagoption-conflict-portfolioId-productId.
    */
@@ -294,7 +296,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Gets information about the specified request operation. Use this operation after calling a request operation (for example, ProvisionProduct, TerminateProvisionedProduct, or UpdateProvisionedProduct). 
    */
-  describeRecord(params: ServiceCatalog.Types.DescribeRecordInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeRecordOutput) => void): Request<ServiceCatalog.Types.DescribeRecordOutput, AWSError>;
+  describeRecord(params: BoundInput<ServiceCatalog.Types.DescribeRecordInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeRecordOutput) => void): Request<ServiceCatalog.Types.DescribeRecordOutput, AWSError>;
   /**
    * Gets information about the specified request operation. Use this operation after calling a request operation (for example, ProvisionProduct, TerminateProvisionedProduct, or UpdateProvisionedProduct). 
    */
@@ -302,7 +304,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Describes a self-service action.
    */
-  describeServiceAction(params: ServiceCatalog.Types.DescribeServiceActionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeServiceActionOutput) => void): Request<ServiceCatalog.Types.DescribeServiceActionOutput, AWSError>;
+  describeServiceAction(params: BoundInput<ServiceCatalog.Types.DescribeServiceActionInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeServiceActionOutput) => void): Request<ServiceCatalog.Types.DescribeServiceActionOutput, AWSError>;
   /**
    * Describes a self-service action.
    */
@@ -310,7 +312,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Gets information about the specified TagOption.
    */
-  describeTagOption(params: ServiceCatalog.Types.DescribeTagOptionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeTagOptionOutput) => void): Request<ServiceCatalog.Types.DescribeTagOptionOutput, AWSError>;
+  describeTagOption(params: BoundInput<ServiceCatalog.Types.DescribeTagOptionInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeTagOptionOutput) => void): Request<ServiceCatalog.Types.DescribeTagOptionOutput, AWSError>;
   /**
    * Gets information about the specified TagOption.
    */
@@ -318,7 +320,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Disable portfolio sharing through AWS Organizations feature. This feature will not delete your current shares but it will prevent you from creating new shares throughout your organization. Current shares will not be in sync with your organization structure if it changes after calling this API. This API can only be called by the master account in the organization.
    */
-  disableAWSOrganizationsAccess(params: ServiceCatalog.Types.DisableAWSOrganizationsAccessInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DisableAWSOrganizationsAccessOutput) => void): Request<ServiceCatalog.Types.DisableAWSOrganizationsAccessOutput, AWSError>;
+  disableAWSOrganizationsAccess(params: BoundInput<ServiceCatalog.Types.DisableAWSOrganizationsAccessInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DisableAWSOrganizationsAccessOutput) => void): Request<ServiceCatalog.Types.DisableAWSOrganizationsAccessOutput, AWSError>;
   /**
    * Disable portfolio sharing through AWS Organizations feature. This feature will not delete your current shares but it will prevent you from creating new shares throughout your organization. Current shares will not be in sync with your organization structure if it changes after calling this API. This API can only be called by the master account in the organization.
    */
@@ -326,7 +328,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Disassociates a previously associated principal ARN from a specified portfolio.
    */
-  disassociatePrincipalFromPortfolio(params: ServiceCatalog.Types.DisassociatePrincipalFromPortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociatePrincipalFromPortfolioOutput) => void): Request<ServiceCatalog.Types.DisassociatePrincipalFromPortfolioOutput, AWSError>;
+  disassociatePrincipalFromPortfolio(params: BoundInput<ServiceCatalog.Types.DisassociatePrincipalFromPortfolioInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociatePrincipalFromPortfolioOutput) => void): Request<ServiceCatalog.Types.DisassociatePrincipalFromPortfolioOutput, AWSError>;
   /**
    * Disassociates a previously associated principal ARN from a specified portfolio.
    */
@@ -334,7 +336,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Disassociates the specified product from the specified portfolio. 
    */
-  disassociateProductFromPortfolio(params: ServiceCatalog.Types.DisassociateProductFromPortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateProductFromPortfolioOutput) => void): Request<ServiceCatalog.Types.DisassociateProductFromPortfolioOutput, AWSError>;
+  disassociateProductFromPortfolio(params: BoundInput<ServiceCatalog.Types.DisassociateProductFromPortfolioInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateProductFromPortfolioOutput) => void): Request<ServiceCatalog.Types.DisassociateProductFromPortfolioOutput, AWSError>;
   /**
    * Disassociates the specified product from the specified portfolio. 
    */
@@ -342,7 +344,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Disassociates the specified self-service action association from the specified provisioning artifact.
    */
-  disassociateServiceActionFromProvisioningArtifact(params: ServiceCatalog.Types.DisassociateServiceActionFromProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateServiceActionFromProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DisassociateServiceActionFromProvisioningArtifactOutput, AWSError>;
+  disassociateServiceActionFromProvisioningArtifact(params: BoundInput<ServiceCatalog.Types.DisassociateServiceActionFromProvisioningArtifactInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateServiceActionFromProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DisassociateServiceActionFromProvisioningArtifactOutput, AWSError>;
   /**
    * Disassociates the specified self-service action association from the specified provisioning artifact.
    */
@@ -350,7 +352,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Disassociates the specified TagOption from the specified resource.
    */
-  disassociateTagOptionFromResource(params: ServiceCatalog.Types.DisassociateTagOptionFromResourceInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateTagOptionFromResourceOutput) => void): Request<ServiceCatalog.Types.DisassociateTagOptionFromResourceOutput, AWSError>;
+  disassociateTagOptionFromResource(params: BoundInput<ServiceCatalog.Types.DisassociateTagOptionFromResourceInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateTagOptionFromResourceOutput) => void): Request<ServiceCatalog.Types.DisassociateTagOptionFromResourceOutput, AWSError>;
   /**
    * Disassociates the specified TagOption from the specified resource.
    */
@@ -358,7 +360,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the master account in the organization. By calling this API Service Catalog will make a call to organizations:EnableAWSServiceAccess on your behalf so that your shares can be in sync with any changes in your AWS Organizations structure.
    */
-  enableAWSOrganizationsAccess(params: ServiceCatalog.Types.EnableAWSOrganizationsAccessInput, callback?: (err: AWSError, data: ServiceCatalog.Types.EnableAWSOrganizationsAccessOutput) => void): Request<ServiceCatalog.Types.EnableAWSOrganizationsAccessOutput, AWSError>;
+  enableAWSOrganizationsAccess(params: BoundInput<ServiceCatalog.Types.EnableAWSOrganizationsAccessInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.EnableAWSOrganizationsAccessOutput) => void): Request<ServiceCatalog.Types.EnableAWSOrganizationsAccessOutput, AWSError>;
   /**
    * Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the master account in the organization. By calling this API Service Catalog will make a call to organizations:EnableAWSServiceAccess on your behalf so that your shares can be in sync with any changes in your AWS Organizations structure.
    */
@@ -366,7 +368,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Provisions or modifies a product based on the resource changes for the specified plan.
    */
-  executeProvisionedProductPlan(params: ServiceCatalog.Types.ExecuteProvisionedProductPlanInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ExecuteProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.ExecuteProvisionedProductPlanOutput, AWSError>;
+  executeProvisionedProductPlan(params: BoundInput<ServiceCatalog.Types.ExecuteProvisionedProductPlanInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.ExecuteProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.ExecuteProvisionedProductPlanOutput, AWSError>;
   /**
    * Provisions or modifies a product based on the resource changes for the specified plan.
    */
@@ -374,7 +376,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Executes a self-service action against a provisioned product.
    */
-  executeProvisionedProductServiceAction(params: ServiceCatalog.Types.ExecuteProvisionedProductServiceActionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ExecuteProvisionedProductServiceActionOutput) => void): Request<ServiceCatalog.Types.ExecuteProvisionedProductServiceActionOutput, AWSError>;
+  executeProvisionedProductServiceAction(params: BoundInput<ServiceCatalog.Types.ExecuteProvisionedProductServiceActionInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.ExecuteProvisionedProductServiceActionOutput) => void): Request<ServiceCatalog.Types.ExecuteProvisionedProductServiceActionOutput, AWSError>;
   /**
    * Executes a self-service action against a provisioned product.
    */
@@ -382,7 +384,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Get the Access Status for AWS Organization portfolio share feature. This API can only be called by the master account in the organization.
    */
-  getAWSOrganizationsAccessStatus(params: ServiceCatalog.Types.GetAWSOrganizationsAccessStatusInput, callback?: (err: AWSError, data: ServiceCatalog.Types.GetAWSOrganizationsAccessStatusOutput) => void): Request<ServiceCatalog.Types.GetAWSOrganizationsAccessStatusOutput, AWSError>;
+  getAWSOrganizationsAccessStatus(params: BoundInput<ServiceCatalog.Types.GetAWSOrganizationsAccessStatusInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.GetAWSOrganizationsAccessStatusOutput) => void): Request<ServiceCatalog.Types.GetAWSOrganizationsAccessStatusOutput, AWSError>;
   /**
    * Get the Access Status for AWS Organization portfolio share feature. This API can only be called by the master account in the organization.
    */
@@ -390,7 +392,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Lists all portfolios for which sharing was accepted by this account.
    */
-  listAcceptedPortfolioShares(params: ServiceCatalog.Types.ListAcceptedPortfolioSharesInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListAcceptedPortfolioSharesOutput) => void): Request<ServiceCatalog.Types.ListAcceptedPortfolioSharesOutput, AWSError>;
+  listAcceptedPortfolioShares(params: BoundInput<ServiceCatalog.Types.ListAcceptedPortfolioSharesInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.ListAcceptedPortfolioSharesOutput) => void): Request<ServiceCatalog.Types.ListAcceptedPortfolioSharesOutput, AWSError>;
   /**
    * Lists all portfolios for which sharing was accepted by this account.
    */
@@ -398,7 +400,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Lists the constraints for the specified portfolio and product.
    */
-  listConstraintsForPortfolio(params: ServiceCatalog.Types.ListConstraintsForPortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListConstraintsForPortfolioOutput) => void): Request<ServiceCatalog.Types.ListConstraintsForPortfolioOutput, AWSError>;
+  listConstraintsForPortfolio(params: BoundInput<ServiceCatalog.Types.ListConstraintsForPortfolioInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.ListConstraintsForPortfolioOutput) => void): Request<ServiceCatalog.Types.ListConstraintsForPortfolioOutput, AWSError>;
   /**
    * Lists the constraints for the specified portfolio and product.
    */
@@ -406,7 +408,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Lists the paths to the specified product. A path is how the user has access to a specified product, and is necessary when provisioning a product. A path also determines the constraints put on the product.
    */
-  listLaunchPaths(params: ServiceCatalog.Types.ListLaunchPathsInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListLaunchPathsOutput) => void): Request<ServiceCatalog.Types.ListLaunchPathsOutput, AWSError>;
+  listLaunchPaths(params: BoundInput<ServiceCatalog.Types.ListLaunchPathsInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.ListLaunchPathsOutput) => void): Request<ServiceCatalog.Types.ListLaunchPathsOutput, AWSError>;
   /**
    * Lists the paths to the specified product. A path is how the user has access to a specified product, and is necessary when provisioning a product. A path also determines the constraints put on the product.
    */
@@ -414,7 +416,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Lists the organization nodes that have access to the specified portfolio. This API can only be called by the master account in the organization.
    */
-  listOrganizationPortfolioAccess(params: ServiceCatalog.Types.ListOrganizationPortfolioAccessInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListOrganizationPortfolioAccessOutput) => void): Request<ServiceCatalog.Types.ListOrganizationPortfolioAccessOutput, AWSError>;
+  listOrganizationPortfolioAccess(params: BoundInput<ServiceCatalog.Types.ListOrganizationPortfolioAccessInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.ListOrganizationPortfolioAccessOutput) => void): Request<ServiceCatalog.Types.ListOrganizationPortfolioAccessOutput, AWSError>;
   /**
    * Lists the organization nodes that have access to the specified portfolio. This API can only be called by the master account in the organization.
    */
@@ -422,7 +424,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Lists the account IDs that have access to the specified portfolio.
    */
-  listPortfolioAccess(params: ServiceCatalog.Types.ListPortfolioAccessInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListPortfolioAccessOutput) => void): Request<ServiceCatalog.Types.ListPortfolioAccessOutput, AWSError>;
+  listPortfolioAccess(params: BoundInput<ServiceCatalog.Types.ListPortfolioAccessInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.ListPortfolioAccessOutput) => void): Request<ServiceCatalog.Types.ListPortfolioAccessOutput, AWSError>;
   /**
    * Lists the account IDs that have access to the specified portfolio.
    */
@@ -430,7 +432,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Lists all portfolios in the catalog.
    */
-  listPortfolios(params: ServiceCatalog.Types.ListPortfoliosInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListPortfoliosOutput) => void): Request<ServiceCatalog.Types.ListPortfoliosOutput, AWSError>;
+  listPortfolios(params: BoundInput<ServiceCatalog.Types.ListPortfoliosInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.ListPortfoliosOutput) => void): Request<ServiceCatalog.Types.ListPortfoliosOutput, AWSError>;
   /**
    * Lists all portfolios in the catalog.
    */
@@ -438,7 +440,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Lists all portfolios that the specified product is associated with.
    */
-  listPortfoliosForProduct(params: ServiceCatalog.Types.ListPortfoliosForProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListPortfoliosForProductOutput) => void): Request<ServiceCatalog.Types.ListPortfoliosForProductOutput, AWSError>;
+  listPortfoliosForProduct(params: BoundInput<ServiceCatalog.Types.ListPortfoliosForProductInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.ListPortfoliosForProductOutput) => void): Request<ServiceCatalog.Types.ListPortfoliosForProductOutput, AWSError>;
   /**
    * Lists all portfolios that the specified product is associated with.
    */
@@ -446,7 +448,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Lists all principal ARNs associated with the specified portfolio.
    */
-  listPrincipalsForPortfolio(params: ServiceCatalog.Types.ListPrincipalsForPortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListPrincipalsForPortfolioOutput) => void): Request<ServiceCatalog.Types.ListPrincipalsForPortfolioOutput, AWSError>;
+  listPrincipalsForPortfolio(params: BoundInput<ServiceCatalog.Types.ListPrincipalsForPortfolioInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.ListPrincipalsForPortfolioOutput) => void): Request<ServiceCatalog.Types.ListPrincipalsForPortfolioOutput, AWSError>;
   /**
    * Lists all principal ARNs associated with the specified portfolio.
    */
@@ -454,7 +456,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Lists the plans for the specified provisioned product or all plans to which the user has access.
    */
-  listProvisionedProductPlans(params: ServiceCatalog.Types.ListProvisionedProductPlansInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisionedProductPlansOutput) => void): Request<ServiceCatalog.Types.ListProvisionedProductPlansOutput, AWSError>;
+  listProvisionedProductPlans(params: BoundInput<ServiceCatalog.Types.ListProvisionedProductPlansInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisionedProductPlansOutput) => void): Request<ServiceCatalog.Types.ListProvisionedProductPlansOutput, AWSError>;
   /**
    * Lists the plans for the specified provisioned product or all plans to which the user has access.
    */
@@ -462,7 +464,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Lists all provisioning artifacts (also known as versions) for the specified product.
    */
-  listProvisioningArtifacts(params: ServiceCatalog.Types.ListProvisioningArtifactsInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisioningArtifactsOutput) => void): Request<ServiceCatalog.Types.ListProvisioningArtifactsOutput, AWSError>;
+  listProvisioningArtifacts(params: BoundInput<ServiceCatalog.Types.ListProvisioningArtifactsInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisioningArtifactsOutput) => void): Request<ServiceCatalog.Types.ListProvisioningArtifactsOutput, AWSError>;
   /**
    * Lists all provisioning artifacts (also known as versions) for the specified product.
    */
@@ -470,7 +472,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Lists all provisioning artifacts (also known as versions) for the specified self-service action.
    */
-  listProvisioningArtifactsForServiceAction(params: ServiceCatalog.Types.ListProvisioningArtifactsForServiceActionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisioningArtifactsForServiceActionOutput) => void): Request<ServiceCatalog.Types.ListProvisioningArtifactsForServiceActionOutput, AWSError>;
+  listProvisioningArtifactsForServiceAction(params: BoundInput<ServiceCatalog.Types.ListProvisioningArtifactsForServiceActionInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisioningArtifactsForServiceActionOutput) => void): Request<ServiceCatalog.Types.ListProvisioningArtifactsForServiceActionOutput, AWSError>;
   /**
    * Lists all provisioning artifacts (also known as versions) for the specified self-service action.
    */
@@ -478,7 +480,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Lists the specified requests or all performed requests.
    */
-  listRecordHistory(params: ServiceCatalog.Types.ListRecordHistoryInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListRecordHistoryOutput) => void): Request<ServiceCatalog.Types.ListRecordHistoryOutput, AWSError>;
+  listRecordHistory(params: BoundInput<ServiceCatalog.Types.ListRecordHistoryInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.ListRecordHistoryOutput) => void): Request<ServiceCatalog.Types.ListRecordHistoryOutput, AWSError>;
   /**
    * Lists the specified requests or all performed requests.
    */
@@ -486,7 +488,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Lists the resources associated with the specified TagOption.
    */
-  listResourcesForTagOption(params: ServiceCatalog.Types.ListResourcesForTagOptionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListResourcesForTagOptionOutput) => void): Request<ServiceCatalog.Types.ListResourcesForTagOptionOutput, AWSError>;
+  listResourcesForTagOption(params: BoundInput<ServiceCatalog.Types.ListResourcesForTagOptionInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.ListResourcesForTagOptionOutput) => void): Request<ServiceCatalog.Types.ListResourcesForTagOptionOutput, AWSError>;
   /**
    * Lists the resources associated with the specified TagOption.
    */
@@ -494,7 +496,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Lists all self-service actions.
    */
-  listServiceActions(params: ServiceCatalog.Types.ListServiceActionsInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListServiceActionsOutput) => void): Request<ServiceCatalog.Types.ListServiceActionsOutput, AWSError>;
+  listServiceActions(params: BoundInput<ServiceCatalog.Types.ListServiceActionsInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.ListServiceActionsOutput) => void): Request<ServiceCatalog.Types.ListServiceActionsOutput, AWSError>;
   /**
    * Lists all self-service actions.
    */
@@ -502,7 +504,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Returns a paginated list of self-service actions associated with the specified Product ID and Provisioning Artifact ID.
    */
-  listServiceActionsForProvisioningArtifact(params: ServiceCatalog.Types.ListServiceActionsForProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListServiceActionsForProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.ListServiceActionsForProvisioningArtifactOutput, AWSError>;
+  listServiceActionsForProvisioningArtifact(params: BoundInput<ServiceCatalog.Types.ListServiceActionsForProvisioningArtifactInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.ListServiceActionsForProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.ListServiceActionsForProvisioningArtifactOutput, AWSError>;
   /**
    * Returns a paginated list of self-service actions associated with the specified Product ID and Provisioning Artifact ID.
    */
@@ -510,7 +512,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Lists the specified TagOptions or all TagOptions.
    */
-  listTagOptions(params: ServiceCatalog.Types.ListTagOptionsInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListTagOptionsOutput) => void): Request<ServiceCatalog.Types.ListTagOptionsOutput, AWSError>;
+  listTagOptions(params: BoundInput<ServiceCatalog.Types.ListTagOptionsInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.ListTagOptionsOutput) => void): Request<ServiceCatalog.Types.ListTagOptionsOutput, AWSError>;
   /**
    * Lists the specified TagOptions or all TagOptions.
    */
@@ -518,7 +520,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Provisions the specified product. A provisioned product is a resourced instance of a product. For example, provisioning a product based on a CloudFormation template launches a CloudFormation stack and its underlying resources. You can check the status of this request using DescribeRecord. If the request contains a tag key with an empty list of values, there is a tag conflict for that key. Do not include conflicted keys as tags, or this causes the error "Parameter validation failed: Missing required parameter in Tags[N]:Value".
    */
-  provisionProduct(params: ServiceCatalog.Types.ProvisionProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ProvisionProductOutput) => void): Request<ServiceCatalog.Types.ProvisionProductOutput, AWSError>;
+  provisionProduct(params: BoundInput<ServiceCatalog.Types.ProvisionProductInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.ProvisionProductOutput) => void): Request<ServiceCatalog.Types.ProvisionProductOutput, AWSError>;
   /**
    * Provisions the specified product. A provisioned product is a resourced instance of a product. For example, provisioning a product based on a CloudFormation template launches a CloudFormation stack and its underlying resources. You can check the status of this request using DescribeRecord. If the request contains a tag key with an empty list of values, there is a tag conflict for that key. Do not include conflicted keys as tags, or this causes the error "Parameter validation failed: Missing required parameter in Tags[N]:Value".
    */
@@ -526,7 +528,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Rejects an offer to share the specified portfolio.
    */
-  rejectPortfolioShare(params: ServiceCatalog.Types.RejectPortfolioShareInput, callback?: (err: AWSError, data: ServiceCatalog.Types.RejectPortfolioShareOutput) => void): Request<ServiceCatalog.Types.RejectPortfolioShareOutput, AWSError>;
+  rejectPortfolioShare(params: BoundInput<ServiceCatalog.Types.RejectPortfolioShareInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.RejectPortfolioShareOutput) => void): Request<ServiceCatalog.Types.RejectPortfolioShareOutput, AWSError>;
   /**
    * Rejects an offer to share the specified portfolio.
    */
@@ -534,7 +536,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Lists the provisioned products that are available (not terminated). To use additional filtering, see SearchProvisionedProducts.
    */
-  scanProvisionedProducts(params: ServiceCatalog.Types.ScanProvisionedProductsInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ScanProvisionedProductsOutput) => void): Request<ServiceCatalog.Types.ScanProvisionedProductsOutput, AWSError>;
+  scanProvisionedProducts(params: BoundInput<ServiceCatalog.Types.ScanProvisionedProductsInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.ScanProvisionedProductsOutput) => void): Request<ServiceCatalog.Types.ScanProvisionedProductsOutput, AWSError>;
   /**
    * Lists the provisioned products that are available (not terminated). To use additional filtering, see SearchProvisionedProducts.
    */
@@ -542,7 +544,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Gets information about the products to which the caller has access.
    */
-  searchProducts(params: ServiceCatalog.Types.SearchProductsInput, callback?: (err: AWSError, data: ServiceCatalog.Types.SearchProductsOutput) => void): Request<ServiceCatalog.Types.SearchProductsOutput, AWSError>;
+  searchProducts(params: BoundInput<ServiceCatalog.Types.SearchProductsInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.SearchProductsOutput) => void): Request<ServiceCatalog.Types.SearchProductsOutput, AWSError>;
   /**
    * Gets information about the products to which the caller has access.
    */
@@ -550,7 +552,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Gets information about the products for the specified portfolio or all products.
    */
-  searchProductsAsAdmin(params: ServiceCatalog.Types.SearchProductsAsAdminInput, callback?: (err: AWSError, data: ServiceCatalog.Types.SearchProductsAsAdminOutput) => void): Request<ServiceCatalog.Types.SearchProductsAsAdminOutput, AWSError>;
+  searchProductsAsAdmin(params: BoundInput<ServiceCatalog.Types.SearchProductsAsAdminInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.SearchProductsAsAdminOutput) => void): Request<ServiceCatalog.Types.SearchProductsAsAdminOutput, AWSError>;
   /**
    * Gets information about the products for the specified portfolio or all products.
    */
@@ -558,7 +560,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Gets information about the provisioned products that meet the specified criteria.
    */
-  searchProvisionedProducts(params: ServiceCatalog.Types.SearchProvisionedProductsInput, callback?: (err: AWSError, data: ServiceCatalog.Types.SearchProvisionedProductsOutput) => void): Request<ServiceCatalog.Types.SearchProvisionedProductsOutput, AWSError>;
+  searchProvisionedProducts(params: BoundInput<ServiceCatalog.Types.SearchProvisionedProductsInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.SearchProvisionedProductsOutput) => void): Request<ServiceCatalog.Types.SearchProvisionedProductsOutput, AWSError>;
   /**
    * Gets information about the provisioned products that meet the specified criteria.
    */
@@ -566,7 +568,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Terminates the specified provisioned product. This operation does not delete any records associated with the provisioned product. You can check the status of this request using DescribeRecord.
    */
-  terminateProvisionedProduct(params: ServiceCatalog.Types.TerminateProvisionedProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.TerminateProvisionedProductOutput) => void): Request<ServiceCatalog.Types.TerminateProvisionedProductOutput, AWSError>;
+  terminateProvisionedProduct(params: BoundInput<ServiceCatalog.Types.TerminateProvisionedProductInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.TerminateProvisionedProductOutput) => void): Request<ServiceCatalog.Types.TerminateProvisionedProductOutput, AWSError>;
   /**
    * Terminates the specified provisioned product. This operation does not delete any records associated with the provisioned product. You can check the status of this request using DescribeRecord.
    */
@@ -574,7 +576,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Updates the specified constraint.
    */
-  updateConstraint(params: ServiceCatalog.Types.UpdateConstraintInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateConstraintOutput) => void): Request<ServiceCatalog.Types.UpdateConstraintOutput, AWSError>;
+  updateConstraint(params: BoundInput<ServiceCatalog.Types.UpdateConstraintInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateConstraintOutput) => void): Request<ServiceCatalog.Types.UpdateConstraintOutput, AWSError>;
   /**
    * Updates the specified constraint.
    */
@@ -582,7 +584,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Updates the specified portfolio. You cannot update a product that was shared with you.
    */
-  updatePortfolio(params: ServiceCatalog.Types.UpdatePortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdatePortfolioOutput) => void): Request<ServiceCatalog.Types.UpdatePortfolioOutput, AWSError>;
+  updatePortfolio(params: BoundInput<ServiceCatalog.Types.UpdatePortfolioInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdatePortfolioOutput) => void): Request<ServiceCatalog.Types.UpdatePortfolioOutput, AWSError>;
   /**
    * Updates the specified portfolio. You cannot update a product that was shared with you.
    */
@@ -590,7 +592,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Updates the specified product.
    */
-  updateProduct(params: ServiceCatalog.Types.UpdateProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProductOutput) => void): Request<ServiceCatalog.Types.UpdateProductOutput, AWSError>;
+  updateProduct(params: BoundInput<ServiceCatalog.Types.UpdateProductInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProductOutput) => void): Request<ServiceCatalog.Types.UpdateProductOutput, AWSError>;
   /**
    * Updates the specified product.
    */
@@ -598,7 +600,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Requests updates to the configuration of the specified provisioned product. If there are tags associated with the object, they cannot be updated or added. Depending on the specific updates requested, this operation can update with no interruption, with some interruption, or replace the provisioned product entirely. You can check the status of this request using DescribeRecord.
    */
-  updateProvisionedProduct(params: ServiceCatalog.Types.UpdateProvisionedProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProvisionedProductOutput) => void): Request<ServiceCatalog.Types.UpdateProvisionedProductOutput, AWSError>;
+  updateProvisionedProduct(params: BoundInput<ServiceCatalog.Types.UpdateProvisionedProductInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProvisionedProductOutput) => void): Request<ServiceCatalog.Types.UpdateProvisionedProductOutput, AWSError>;
   /**
    * Requests updates to the configuration of the specified provisioned product. If there are tags associated with the object, they cannot be updated or added. Depending on the specific updates requested, this operation can update with no interruption, with some interruption, or replace the provisioned product entirely. You can check the status of this request using DescribeRecord.
    */
@@ -606,7 +608,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Updates the specified provisioning artifact (also known as a version) for the specified product. You cannot update a provisioning artifact for a product that was shared with you.
    */
-  updateProvisioningArtifact(params: ServiceCatalog.Types.UpdateProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.UpdateProvisioningArtifactOutput, AWSError>;
+  updateProvisioningArtifact(params: BoundInput<ServiceCatalog.Types.UpdateProvisioningArtifactInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.UpdateProvisioningArtifactOutput, AWSError>;
   /**
    * Updates the specified provisioning artifact (also known as a version) for the specified product. You cannot update a provisioning artifact for a product that was shared with you.
    */
@@ -614,7 +616,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Updates a self-service action.
    */
-  updateServiceAction(params: ServiceCatalog.Types.UpdateServiceActionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateServiceActionOutput) => void): Request<ServiceCatalog.Types.UpdateServiceActionOutput, AWSError>;
+  updateServiceAction(params: BoundInput<ServiceCatalog.Types.UpdateServiceActionInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateServiceActionOutput) => void): Request<ServiceCatalog.Types.UpdateServiceActionOutput, AWSError>;
   /**
    * Updates a self-service action.
    */
@@ -622,7 +624,7 @@ declare class ServiceCatalog extends Service {
   /**
    * Updates the specified TagOption.
    */
-  updateTagOption(params: ServiceCatalog.Types.UpdateTagOptionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateTagOptionOutput) => void): Request<ServiceCatalog.Types.UpdateTagOptionOutput, AWSError>;
+  updateTagOption(params: BoundInput<ServiceCatalog.Types.UpdateTagOptionInput, keyof Params>, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateTagOptionOutput) => void): Request<ServiceCatalog.Types.UpdateTagOptionOutput, AWSError>;
   /**
    * Updates the specified TagOption.
    */
@@ -3760,7 +3762,8 @@ declare namespace ServiceCatalog {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AcceptPortfolioShareInput & AssociatePrincipalWithPortfolioInput & AssociateProductWithPortfolioInput & AssociateServiceActionWithProvisioningArtifactInput & AssociateTagOptionWithResourceInput & BatchAssociateServiceActionWithProvisioningArtifactInput & BatchDisassociateServiceActionFromProvisioningArtifactInput & CopyProductInput & CreateConstraintInput & CreatePortfolioInput & CreatePortfolioShareInput & CreateProductInput & CreateProvisionedProductPlanInput & CreateProvisioningArtifactInput & CreateServiceActionInput & CreateTagOptionInput & DeleteConstraintInput & DeletePortfolioInput & DeletePortfolioShareInput & DeleteProductInput & DeleteProvisionedProductPlanInput & DeleteProvisioningArtifactInput & DeleteServiceActionInput & DeleteTagOptionInput & DescribeConstraintInput & DescribeCopyProductStatusInput & DescribePortfolioInput & DescribePortfolioShareStatusInput & DescribeProductInput & DescribeProductAsAdminInput & DescribeProductViewInput & DescribeProvisionedProductInput & DescribeProvisionedProductPlanInput & DescribeProvisioningArtifactInput & DescribeProvisioningParametersInput & DescribeRecordInput & DescribeServiceActionInput & DescribeTagOptionInput & DisableAWSOrganizationsAccessInput & DisassociatePrincipalFromPortfolioInput & DisassociateProductFromPortfolioInput & DisassociateServiceActionFromProvisioningArtifactInput & DisassociateTagOptionFromResourceInput & EnableAWSOrganizationsAccessInput & ExecuteProvisionedProductPlanInput & ExecuteProvisionedProductServiceActionInput & GetAWSOrganizationsAccessStatusInput & ListAcceptedPortfolioSharesInput & ListConstraintsForPortfolioInput & ListLaunchPathsInput & ListOrganizationPortfolioAccessInput & ListPortfolioAccessInput & ListPortfoliosInput & ListPortfoliosForProductInput & ListPrincipalsForPortfolioInput & ListProvisionedProductPlansInput & ListProvisioningArtifactsInput & ListProvisioningArtifactsForServiceActionInput & ListRecordHistoryInput & ListResourcesForTagOptionInput & ListServiceActionsInput & ListServiceActionsForProvisioningArtifactInput & ListTagOptionsInput & ProvisionProductInput & RejectPortfolioShareInput & ScanProvisionedProductsInput & SearchProductsInput & SearchProductsAsAdminInput & SearchProvisionedProductsInput & TerminateProvisionedProductInput & UpdateConstraintInput & UpdatePortfolioInput & UpdateProductInput & UpdateProvisionedProductInput & UpdateProvisioningArtifactInput & UpdateServiceActionInput & UpdateTagOptionInput>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the ServiceCatalog client.
    */

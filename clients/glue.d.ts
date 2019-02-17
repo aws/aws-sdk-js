@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class Glue extends Service {
+declare class Glue<Params extends Glue.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: Glue.Types.ClientConfiguration)
-  config: Config & Glue.Types.ClientConfiguration;
+  constructor(options?: Glue.Types.ClientConfiguration<Params>)
+  config: Config & Glue.Types.ClientConfiguration<Params>;
   /**
    * Creates one or more partitions in a batch operation.
    */
-  batchCreatePartition(params: Glue.Types.BatchCreatePartitionRequest, callback?: (err: AWSError, data: Glue.Types.BatchCreatePartitionResponse) => void): Request<Glue.Types.BatchCreatePartitionResponse, AWSError>;
+  batchCreatePartition(params: BoundInput<Glue.Types.BatchCreatePartitionRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.BatchCreatePartitionResponse) => void): Request<Glue.Types.BatchCreatePartitionResponse, AWSError>;
   /**
    * Creates one or more partitions in a batch operation.
    */
@@ -22,7 +24,7 @@ declare class Glue extends Service {
   /**
    * Deletes a list of connection definitions from the Data Catalog.
    */
-  batchDeleteConnection(params: Glue.Types.BatchDeleteConnectionRequest, callback?: (err: AWSError, data: Glue.Types.BatchDeleteConnectionResponse) => void): Request<Glue.Types.BatchDeleteConnectionResponse, AWSError>;
+  batchDeleteConnection(params: BoundInput<Glue.Types.BatchDeleteConnectionRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.BatchDeleteConnectionResponse) => void): Request<Glue.Types.BatchDeleteConnectionResponse, AWSError>;
   /**
    * Deletes a list of connection definitions from the Data Catalog.
    */
@@ -30,7 +32,7 @@ declare class Glue extends Service {
   /**
    * Deletes one or more partitions in a batch operation.
    */
-  batchDeletePartition(params: Glue.Types.BatchDeletePartitionRequest, callback?: (err: AWSError, data: Glue.Types.BatchDeletePartitionResponse) => void): Request<Glue.Types.BatchDeletePartitionResponse, AWSError>;
+  batchDeletePartition(params: BoundInput<Glue.Types.BatchDeletePartitionRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.BatchDeletePartitionResponse) => void): Request<Glue.Types.BatchDeletePartitionResponse, AWSError>;
   /**
    * Deletes one or more partitions in a batch operation.
    */
@@ -38,7 +40,7 @@ declare class Glue extends Service {
   /**
    * Deletes multiple tables at once.  After completing this operation, you will no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure immediate deletion of all related resources, before calling BatchDeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
-  batchDeleteTable(params: Glue.Types.BatchDeleteTableRequest, callback?: (err: AWSError, data: Glue.Types.BatchDeleteTableResponse) => void): Request<Glue.Types.BatchDeleteTableResponse, AWSError>;
+  batchDeleteTable(params: BoundInput<Glue.Types.BatchDeleteTableRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.BatchDeleteTableResponse) => void): Request<Glue.Types.BatchDeleteTableResponse, AWSError>;
   /**
    * Deletes multiple tables at once.  After completing this operation, you will no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure immediate deletion of all related resources, before calling BatchDeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
@@ -46,7 +48,7 @@ declare class Glue extends Service {
   /**
    * Deletes a specified batch of versions of a table.
    */
-  batchDeleteTableVersion(params: Glue.Types.BatchDeleteTableVersionRequest, callback?: (err: AWSError, data: Glue.Types.BatchDeleteTableVersionResponse) => void): Request<Glue.Types.BatchDeleteTableVersionResponse, AWSError>;
+  batchDeleteTableVersion(params: BoundInput<Glue.Types.BatchDeleteTableVersionRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.BatchDeleteTableVersionResponse) => void): Request<Glue.Types.BatchDeleteTableVersionResponse, AWSError>;
   /**
    * Deletes a specified batch of versions of a table.
    */
@@ -54,7 +56,7 @@ declare class Glue extends Service {
   /**
    * Retrieves partitions in a batch request.
    */
-  batchGetPartition(params: Glue.Types.BatchGetPartitionRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetPartitionResponse) => void): Request<Glue.Types.BatchGetPartitionResponse, AWSError>;
+  batchGetPartition(params: BoundInput<Glue.Types.BatchGetPartitionRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.BatchGetPartitionResponse) => void): Request<Glue.Types.BatchGetPartitionResponse, AWSError>;
   /**
    * Retrieves partitions in a batch request.
    */
@@ -62,7 +64,7 @@ declare class Glue extends Service {
   /**
    * Stops one or more job runs for a specified job definition.
    */
-  batchStopJobRun(params: Glue.Types.BatchStopJobRunRequest, callback?: (err: AWSError, data: Glue.Types.BatchStopJobRunResponse) => void): Request<Glue.Types.BatchStopJobRunResponse, AWSError>;
+  batchStopJobRun(params: BoundInput<Glue.Types.BatchStopJobRunRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.BatchStopJobRunResponse) => void): Request<Glue.Types.BatchStopJobRunResponse, AWSError>;
   /**
    * Stops one or more job runs for a specified job definition.
    */
@@ -70,7 +72,7 @@ declare class Glue extends Service {
   /**
    * Creates a classifier in the user's account. This may be a GrokClassifier, an XMLClassifier, or abbrev JsonClassifier, depending on which field of the request is present.
    */
-  createClassifier(params: Glue.Types.CreateClassifierRequest, callback?: (err: AWSError, data: Glue.Types.CreateClassifierResponse) => void): Request<Glue.Types.CreateClassifierResponse, AWSError>;
+  createClassifier(params: BoundInput<Glue.Types.CreateClassifierRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.CreateClassifierResponse) => void): Request<Glue.Types.CreateClassifierResponse, AWSError>;
   /**
    * Creates a classifier in the user's account. This may be a GrokClassifier, an XMLClassifier, or abbrev JsonClassifier, depending on which field of the request is present.
    */
@@ -78,7 +80,7 @@ declare class Glue extends Service {
   /**
    * Creates a connection definition in the Data Catalog.
    */
-  createConnection(params: Glue.Types.CreateConnectionRequest, callback?: (err: AWSError, data: Glue.Types.CreateConnectionResponse) => void): Request<Glue.Types.CreateConnectionResponse, AWSError>;
+  createConnection(params: BoundInput<Glue.Types.CreateConnectionRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.CreateConnectionResponse) => void): Request<Glue.Types.CreateConnectionResponse, AWSError>;
   /**
    * Creates a connection definition in the Data Catalog.
    */
@@ -86,7 +88,7 @@ declare class Glue extends Service {
   /**
    * Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in the s3Targets field, the jdbcTargets field, or the DynamoDBTargets field.
    */
-  createCrawler(params: Glue.Types.CreateCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.CreateCrawlerResponse) => void): Request<Glue.Types.CreateCrawlerResponse, AWSError>;
+  createCrawler(params: BoundInput<Glue.Types.CreateCrawlerRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.CreateCrawlerResponse) => void): Request<Glue.Types.CreateCrawlerResponse, AWSError>;
   /**
    * Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in the s3Targets field, the jdbcTargets field, or the DynamoDBTargets field.
    */
@@ -94,7 +96,7 @@ declare class Glue extends Service {
   /**
    * Creates a new database in a Data Catalog.
    */
-  createDatabase(params: Glue.Types.CreateDatabaseRequest, callback?: (err: AWSError, data: Glue.Types.CreateDatabaseResponse) => void): Request<Glue.Types.CreateDatabaseResponse, AWSError>;
+  createDatabase(params: BoundInput<Glue.Types.CreateDatabaseRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.CreateDatabaseResponse) => void): Request<Glue.Types.CreateDatabaseResponse, AWSError>;
   /**
    * Creates a new database in a Data Catalog.
    */
@@ -102,7 +104,7 @@ declare class Glue extends Service {
   /**
    * Creates a new DevEndpoint.
    */
-  createDevEndpoint(params: Glue.Types.CreateDevEndpointRequest, callback?: (err: AWSError, data: Glue.Types.CreateDevEndpointResponse) => void): Request<Glue.Types.CreateDevEndpointResponse, AWSError>;
+  createDevEndpoint(params: BoundInput<Glue.Types.CreateDevEndpointRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.CreateDevEndpointResponse) => void): Request<Glue.Types.CreateDevEndpointResponse, AWSError>;
   /**
    * Creates a new DevEndpoint.
    */
@@ -110,7 +112,7 @@ declare class Glue extends Service {
   /**
    * Creates a new job definition.
    */
-  createJob(params: Glue.Types.CreateJobRequest, callback?: (err: AWSError, data: Glue.Types.CreateJobResponse) => void): Request<Glue.Types.CreateJobResponse, AWSError>;
+  createJob(params: BoundInput<Glue.Types.CreateJobRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.CreateJobResponse) => void): Request<Glue.Types.CreateJobResponse, AWSError>;
   /**
    * Creates a new job definition.
    */
@@ -118,7 +120,7 @@ declare class Glue extends Service {
   /**
    * Creates a new partition.
    */
-  createPartition(params: Glue.Types.CreatePartitionRequest, callback?: (err: AWSError, data: Glue.Types.CreatePartitionResponse) => void): Request<Glue.Types.CreatePartitionResponse, AWSError>;
+  createPartition(params: BoundInput<Glue.Types.CreatePartitionRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.CreatePartitionResponse) => void): Request<Glue.Types.CreatePartitionResponse, AWSError>;
   /**
    * Creates a new partition.
    */
@@ -126,7 +128,7 @@ declare class Glue extends Service {
   /**
    * Transforms a directed acyclic graph (DAG) into code.
    */
-  createScript(params: Glue.Types.CreateScriptRequest, callback?: (err: AWSError, data: Glue.Types.CreateScriptResponse) => void): Request<Glue.Types.CreateScriptResponse, AWSError>;
+  createScript(params: BoundInput<Glue.Types.CreateScriptRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.CreateScriptResponse) => void): Request<Glue.Types.CreateScriptResponse, AWSError>;
   /**
    * Transforms a directed acyclic graph (DAG) into code.
    */
@@ -134,7 +136,7 @@ declare class Glue extends Service {
   /**
    * Creates a new security configuration.
    */
-  createSecurityConfiguration(params: Glue.Types.CreateSecurityConfigurationRequest, callback?: (err: AWSError, data: Glue.Types.CreateSecurityConfigurationResponse) => void): Request<Glue.Types.CreateSecurityConfigurationResponse, AWSError>;
+  createSecurityConfiguration(params: BoundInput<Glue.Types.CreateSecurityConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.CreateSecurityConfigurationResponse) => void): Request<Glue.Types.CreateSecurityConfigurationResponse, AWSError>;
   /**
    * Creates a new security configuration.
    */
@@ -142,7 +144,7 @@ declare class Glue extends Service {
   /**
    * Creates a new table definition in the Data Catalog.
    */
-  createTable(params: Glue.Types.CreateTableRequest, callback?: (err: AWSError, data: Glue.Types.CreateTableResponse) => void): Request<Glue.Types.CreateTableResponse, AWSError>;
+  createTable(params: BoundInput<Glue.Types.CreateTableRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.CreateTableResponse) => void): Request<Glue.Types.CreateTableResponse, AWSError>;
   /**
    * Creates a new table definition in the Data Catalog.
    */
@@ -150,7 +152,7 @@ declare class Glue extends Service {
   /**
    * Creates a new trigger.
    */
-  createTrigger(params: Glue.Types.CreateTriggerRequest, callback?: (err: AWSError, data: Glue.Types.CreateTriggerResponse) => void): Request<Glue.Types.CreateTriggerResponse, AWSError>;
+  createTrigger(params: BoundInput<Glue.Types.CreateTriggerRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.CreateTriggerResponse) => void): Request<Glue.Types.CreateTriggerResponse, AWSError>;
   /**
    * Creates a new trigger.
    */
@@ -158,7 +160,7 @@ declare class Glue extends Service {
   /**
    * Creates a new function definition in the Data Catalog.
    */
-  createUserDefinedFunction(params: Glue.Types.CreateUserDefinedFunctionRequest, callback?: (err: AWSError, data: Glue.Types.CreateUserDefinedFunctionResponse) => void): Request<Glue.Types.CreateUserDefinedFunctionResponse, AWSError>;
+  createUserDefinedFunction(params: BoundInput<Glue.Types.CreateUserDefinedFunctionRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.CreateUserDefinedFunctionResponse) => void): Request<Glue.Types.CreateUserDefinedFunctionResponse, AWSError>;
   /**
    * Creates a new function definition in the Data Catalog.
    */
@@ -166,7 +168,7 @@ declare class Glue extends Service {
   /**
    * Removes a classifier from the Data Catalog.
    */
-  deleteClassifier(params: Glue.Types.DeleteClassifierRequest, callback?: (err: AWSError, data: Glue.Types.DeleteClassifierResponse) => void): Request<Glue.Types.DeleteClassifierResponse, AWSError>;
+  deleteClassifier(params: BoundInput<Glue.Types.DeleteClassifierRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.DeleteClassifierResponse) => void): Request<Glue.Types.DeleteClassifierResponse, AWSError>;
   /**
    * Removes a classifier from the Data Catalog.
    */
@@ -174,7 +176,7 @@ declare class Glue extends Service {
   /**
    * Deletes a connection from the Data Catalog.
    */
-  deleteConnection(params: Glue.Types.DeleteConnectionRequest, callback?: (err: AWSError, data: Glue.Types.DeleteConnectionResponse) => void): Request<Glue.Types.DeleteConnectionResponse, AWSError>;
+  deleteConnection(params: BoundInput<Glue.Types.DeleteConnectionRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.DeleteConnectionResponse) => void): Request<Glue.Types.DeleteConnectionResponse, AWSError>;
   /**
    * Deletes a connection from the Data Catalog.
    */
@@ -182,7 +184,7 @@ declare class Glue extends Service {
   /**
    * Removes a specified crawler from the Data Catalog, unless the crawler state is RUNNING.
    */
-  deleteCrawler(params: Glue.Types.DeleteCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.DeleteCrawlerResponse) => void): Request<Glue.Types.DeleteCrawlerResponse, AWSError>;
+  deleteCrawler(params: BoundInput<Glue.Types.DeleteCrawlerRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.DeleteCrawlerResponse) => void): Request<Glue.Types.DeleteCrawlerResponse, AWSError>;
   /**
    * Removes a specified crawler from the Data Catalog, unless the crawler state is RUNNING.
    */
@@ -190,7 +192,7 @@ declare class Glue extends Service {
   /**
    * Removes a specified Database from a Data Catalog.  After completing this operation, you will no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure immediate deletion of all related resources, before calling DeleteDatabase, use DeleteTableVersion or BatchDeleteTableVersion, DeletePartition or BatchDeletePartition, DeleteUserDefinedFunction, and DeleteTable or BatchDeleteTable, to delete any resources that belong to the database. 
    */
-  deleteDatabase(params: Glue.Types.DeleteDatabaseRequest, callback?: (err: AWSError, data: Glue.Types.DeleteDatabaseResponse) => void): Request<Glue.Types.DeleteDatabaseResponse, AWSError>;
+  deleteDatabase(params: BoundInput<Glue.Types.DeleteDatabaseRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.DeleteDatabaseResponse) => void): Request<Glue.Types.DeleteDatabaseResponse, AWSError>;
   /**
    * Removes a specified Database from a Data Catalog.  After completing this operation, you will no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure immediate deletion of all related resources, before calling DeleteDatabase, use DeleteTableVersion or BatchDeleteTableVersion, DeletePartition or BatchDeletePartition, DeleteUserDefinedFunction, and DeleteTable or BatchDeleteTable, to delete any resources that belong to the database. 
    */
@@ -198,7 +200,7 @@ declare class Glue extends Service {
   /**
    * Deletes a specified DevEndpoint.
    */
-  deleteDevEndpoint(params: Glue.Types.DeleteDevEndpointRequest, callback?: (err: AWSError, data: Glue.Types.DeleteDevEndpointResponse) => void): Request<Glue.Types.DeleteDevEndpointResponse, AWSError>;
+  deleteDevEndpoint(params: BoundInput<Glue.Types.DeleteDevEndpointRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.DeleteDevEndpointResponse) => void): Request<Glue.Types.DeleteDevEndpointResponse, AWSError>;
   /**
    * Deletes a specified DevEndpoint.
    */
@@ -206,7 +208,7 @@ declare class Glue extends Service {
   /**
    * Deletes a specified job definition. If the job definition is not found, no exception is thrown.
    */
-  deleteJob(params: Glue.Types.DeleteJobRequest, callback?: (err: AWSError, data: Glue.Types.DeleteJobResponse) => void): Request<Glue.Types.DeleteJobResponse, AWSError>;
+  deleteJob(params: BoundInput<Glue.Types.DeleteJobRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.DeleteJobResponse) => void): Request<Glue.Types.DeleteJobResponse, AWSError>;
   /**
    * Deletes a specified job definition. If the job definition is not found, no exception is thrown.
    */
@@ -214,7 +216,7 @@ declare class Glue extends Service {
   /**
    * Deletes a specified partition.
    */
-  deletePartition(params: Glue.Types.DeletePartitionRequest, callback?: (err: AWSError, data: Glue.Types.DeletePartitionResponse) => void): Request<Glue.Types.DeletePartitionResponse, AWSError>;
+  deletePartition(params: BoundInput<Glue.Types.DeletePartitionRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.DeletePartitionResponse) => void): Request<Glue.Types.DeletePartitionResponse, AWSError>;
   /**
    * Deletes a specified partition.
    */
@@ -222,7 +224,7 @@ declare class Glue extends Service {
   /**
    * Deletes a specified policy.
    */
-  deleteResourcePolicy(params: Glue.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: Glue.Types.DeleteResourcePolicyResponse) => void): Request<Glue.Types.DeleteResourcePolicyResponse, AWSError>;
+  deleteResourcePolicy(params: BoundInput<Glue.Types.DeleteResourcePolicyRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.DeleteResourcePolicyResponse) => void): Request<Glue.Types.DeleteResourcePolicyResponse, AWSError>;
   /**
    * Deletes a specified policy.
    */
@@ -230,7 +232,7 @@ declare class Glue extends Service {
   /**
    * Deletes a specified security configuration.
    */
-  deleteSecurityConfiguration(params: Glue.Types.DeleteSecurityConfigurationRequest, callback?: (err: AWSError, data: Glue.Types.DeleteSecurityConfigurationResponse) => void): Request<Glue.Types.DeleteSecurityConfigurationResponse, AWSError>;
+  deleteSecurityConfiguration(params: BoundInput<Glue.Types.DeleteSecurityConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.DeleteSecurityConfigurationResponse) => void): Request<Glue.Types.DeleteSecurityConfigurationResponse, AWSError>;
   /**
    * Deletes a specified security configuration.
    */
@@ -238,7 +240,7 @@ declare class Glue extends Service {
   /**
    * Removes a table definition from the Data Catalog.  After completing this operation, you will no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure immediate deletion of all related resources, before calling DeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
-  deleteTable(params: Glue.Types.DeleteTableRequest, callback?: (err: AWSError, data: Glue.Types.DeleteTableResponse) => void): Request<Glue.Types.DeleteTableResponse, AWSError>;
+  deleteTable(params: BoundInput<Glue.Types.DeleteTableRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.DeleteTableResponse) => void): Request<Glue.Types.DeleteTableResponse, AWSError>;
   /**
    * Removes a table definition from the Data Catalog.  After completing this operation, you will no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure immediate deletion of all related resources, before calling DeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
@@ -246,7 +248,7 @@ declare class Glue extends Service {
   /**
    * Deletes a specified version of a table.
    */
-  deleteTableVersion(params: Glue.Types.DeleteTableVersionRequest, callback?: (err: AWSError, data: Glue.Types.DeleteTableVersionResponse) => void): Request<Glue.Types.DeleteTableVersionResponse, AWSError>;
+  deleteTableVersion(params: BoundInput<Glue.Types.DeleteTableVersionRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.DeleteTableVersionResponse) => void): Request<Glue.Types.DeleteTableVersionResponse, AWSError>;
   /**
    * Deletes a specified version of a table.
    */
@@ -254,7 +256,7 @@ declare class Glue extends Service {
   /**
    * Deletes a specified trigger. If the trigger is not found, no exception is thrown.
    */
-  deleteTrigger(params: Glue.Types.DeleteTriggerRequest, callback?: (err: AWSError, data: Glue.Types.DeleteTriggerResponse) => void): Request<Glue.Types.DeleteTriggerResponse, AWSError>;
+  deleteTrigger(params: BoundInput<Glue.Types.DeleteTriggerRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.DeleteTriggerResponse) => void): Request<Glue.Types.DeleteTriggerResponse, AWSError>;
   /**
    * Deletes a specified trigger. If the trigger is not found, no exception is thrown.
    */
@@ -262,7 +264,7 @@ declare class Glue extends Service {
   /**
    * Deletes an existing function definition from the Data Catalog.
    */
-  deleteUserDefinedFunction(params: Glue.Types.DeleteUserDefinedFunctionRequest, callback?: (err: AWSError, data: Glue.Types.DeleteUserDefinedFunctionResponse) => void): Request<Glue.Types.DeleteUserDefinedFunctionResponse, AWSError>;
+  deleteUserDefinedFunction(params: BoundInput<Glue.Types.DeleteUserDefinedFunctionRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.DeleteUserDefinedFunctionResponse) => void): Request<Glue.Types.DeleteUserDefinedFunctionResponse, AWSError>;
   /**
    * Deletes an existing function definition from the Data Catalog.
    */
@@ -270,7 +272,7 @@ declare class Glue extends Service {
   /**
    * Retrieves the status of a migration operation.
    */
-  getCatalogImportStatus(params: Glue.Types.GetCatalogImportStatusRequest, callback?: (err: AWSError, data: Glue.Types.GetCatalogImportStatusResponse) => void): Request<Glue.Types.GetCatalogImportStatusResponse, AWSError>;
+  getCatalogImportStatus(params: BoundInput<Glue.Types.GetCatalogImportStatusRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetCatalogImportStatusResponse) => void): Request<Glue.Types.GetCatalogImportStatusResponse, AWSError>;
   /**
    * Retrieves the status of a migration operation.
    */
@@ -278,7 +280,7 @@ declare class Glue extends Service {
   /**
    * Retrieve a classifier by name.
    */
-  getClassifier(params: Glue.Types.GetClassifierRequest, callback?: (err: AWSError, data: Glue.Types.GetClassifierResponse) => void): Request<Glue.Types.GetClassifierResponse, AWSError>;
+  getClassifier(params: BoundInput<Glue.Types.GetClassifierRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetClassifierResponse) => void): Request<Glue.Types.GetClassifierResponse, AWSError>;
   /**
    * Retrieve a classifier by name.
    */
@@ -286,7 +288,7 @@ declare class Glue extends Service {
   /**
    * Lists all classifier objects in the Data Catalog.
    */
-  getClassifiers(params: Glue.Types.GetClassifiersRequest, callback?: (err: AWSError, data: Glue.Types.GetClassifiersResponse) => void): Request<Glue.Types.GetClassifiersResponse, AWSError>;
+  getClassifiers(params: BoundInput<Glue.Types.GetClassifiersRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetClassifiersResponse) => void): Request<Glue.Types.GetClassifiersResponse, AWSError>;
   /**
    * Lists all classifier objects in the Data Catalog.
    */
@@ -294,7 +296,7 @@ declare class Glue extends Service {
   /**
    * Retrieves a connection definition from the Data Catalog.
    */
-  getConnection(params: Glue.Types.GetConnectionRequest, callback?: (err: AWSError, data: Glue.Types.GetConnectionResponse) => void): Request<Glue.Types.GetConnectionResponse, AWSError>;
+  getConnection(params: BoundInput<Glue.Types.GetConnectionRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetConnectionResponse) => void): Request<Glue.Types.GetConnectionResponse, AWSError>;
   /**
    * Retrieves a connection definition from the Data Catalog.
    */
@@ -302,7 +304,7 @@ declare class Glue extends Service {
   /**
    * Retrieves a list of connection definitions from the Data Catalog.
    */
-  getConnections(params: Glue.Types.GetConnectionsRequest, callback?: (err: AWSError, data: Glue.Types.GetConnectionsResponse) => void): Request<Glue.Types.GetConnectionsResponse, AWSError>;
+  getConnections(params: BoundInput<Glue.Types.GetConnectionsRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetConnectionsResponse) => void): Request<Glue.Types.GetConnectionsResponse, AWSError>;
   /**
    * Retrieves a list of connection definitions from the Data Catalog.
    */
@@ -310,7 +312,7 @@ declare class Glue extends Service {
   /**
    * Retrieves metadata for a specified crawler.
    */
-  getCrawler(params: Glue.Types.GetCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.GetCrawlerResponse) => void): Request<Glue.Types.GetCrawlerResponse, AWSError>;
+  getCrawler(params: BoundInput<Glue.Types.GetCrawlerRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetCrawlerResponse) => void): Request<Glue.Types.GetCrawlerResponse, AWSError>;
   /**
    * Retrieves metadata for a specified crawler.
    */
@@ -318,7 +320,7 @@ declare class Glue extends Service {
   /**
    * Retrieves metrics about specified crawlers.
    */
-  getCrawlerMetrics(params: Glue.Types.GetCrawlerMetricsRequest, callback?: (err: AWSError, data: Glue.Types.GetCrawlerMetricsResponse) => void): Request<Glue.Types.GetCrawlerMetricsResponse, AWSError>;
+  getCrawlerMetrics(params: BoundInput<Glue.Types.GetCrawlerMetricsRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetCrawlerMetricsResponse) => void): Request<Glue.Types.GetCrawlerMetricsResponse, AWSError>;
   /**
    * Retrieves metrics about specified crawlers.
    */
@@ -326,7 +328,7 @@ declare class Glue extends Service {
   /**
    * Retrieves metadata for all crawlers defined in the customer account.
    */
-  getCrawlers(params: Glue.Types.GetCrawlersRequest, callback?: (err: AWSError, data: Glue.Types.GetCrawlersResponse) => void): Request<Glue.Types.GetCrawlersResponse, AWSError>;
+  getCrawlers(params: BoundInput<Glue.Types.GetCrawlersRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetCrawlersResponse) => void): Request<Glue.Types.GetCrawlersResponse, AWSError>;
   /**
    * Retrieves metadata for all crawlers defined in the customer account.
    */
@@ -334,7 +336,7 @@ declare class Glue extends Service {
   /**
    * Retrieves the security configuration for a specified catalog.
    */
-  getDataCatalogEncryptionSettings(params: Glue.Types.GetDataCatalogEncryptionSettingsRequest, callback?: (err: AWSError, data: Glue.Types.GetDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.GetDataCatalogEncryptionSettingsResponse, AWSError>;
+  getDataCatalogEncryptionSettings(params: BoundInput<Glue.Types.GetDataCatalogEncryptionSettingsRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.GetDataCatalogEncryptionSettingsResponse, AWSError>;
   /**
    * Retrieves the security configuration for a specified catalog.
    */
@@ -342,7 +344,7 @@ declare class Glue extends Service {
   /**
    * Retrieves the definition of a specified database.
    */
-  getDatabase(params: Glue.Types.GetDatabaseRequest, callback?: (err: AWSError, data: Glue.Types.GetDatabaseResponse) => void): Request<Glue.Types.GetDatabaseResponse, AWSError>;
+  getDatabase(params: BoundInput<Glue.Types.GetDatabaseRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetDatabaseResponse) => void): Request<Glue.Types.GetDatabaseResponse, AWSError>;
   /**
    * Retrieves the definition of a specified database.
    */
@@ -350,7 +352,7 @@ declare class Glue extends Service {
   /**
    * Retrieves all Databases defined in a given Data Catalog.
    */
-  getDatabases(params: Glue.Types.GetDatabasesRequest, callback?: (err: AWSError, data: Glue.Types.GetDatabasesResponse) => void): Request<Glue.Types.GetDatabasesResponse, AWSError>;
+  getDatabases(params: BoundInput<Glue.Types.GetDatabasesRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetDatabasesResponse) => void): Request<Glue.Types.GetDatabasesResponse, AWSError>;
   /**
    * Retrieves all Databases defined in a given Data Catalog.
    */
@@ -358,7 +360,7 @@ declare class Glue extends Service {
   /**
    * Transforms a Python script into a directed acyclic graph (DAG). 
    */
-  getDataflowGraph(params: Glue.Types.GetDataflowGraphRequest, callback?: (err: AWSError, data: Glue.Types.GetDataflowGraphResponse) => void): Request<Glue.Types.GetDataflowGraphResponse, AWSError>;
+  getDataflowGraph(params: BoundInput<Glue.Types.GetDataflowGraphRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetDataflowGraphResponse) => void): Request<Glue.Types.GetDataflowGraphResponse, AWSError>;
   /**
    * Transforms a Python script into a directed acyclic graph (DAG). 
    */
@@ -366,7 +368,7 @@ declare class Glue extends Service {
   /**
    * Retrieves information about a specified DevEndpoint.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
    */
-  getDevEndpoint(params: Glue.Types.GetDevEndpointRequest, callback?: (err: AWSError, data: Glue.Types.GetDevEndpointResponse) => void): Request<Glue.Types.GetDevEndpointResponse, AWSError>;
+  getDevEndpoint(params: BoundInput<Glue.Types.GetDevEndpointRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetDevEndpointResponse) => void): Request<Glue.Types.GetDevEndpointResponse, AWSError>;
   /**
    * Retrieves information about a specified DevEndpoint.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
    */
@@ -374,7 +376,7 @@ declare class Glue extends Service {
   /**
    * Retrieves all the DevEndpoints in this AWS account.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
    */
-  getDevEndpoints(params: Glue.Types.GetDevEndpointsRequest, callback?: (err: AWSError, data: Glue.Types.GetDevEndpointsResponse) => void): Request<Glue.Types.GetDevEndpointsResponse, AWSError>;
+  getDevEndpoints(params: BoundInput<Glue.Types.GetDevEndpointsRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetDevEndpointsResponse) => void): Request<Glue.Types.GetDevEndpointsResponse, AWSError>;
   /**
    * Retrieves all the DevEndpoints in this AWS account.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
    */
@@ -382,7 +384,7 @@ declare class Glue extends Service {
   /**
    * Retrieves an existing job definition.
    */
-  getJob(params: Glue.Types.GetJobRequest, callback?: (err: AWSError, data: Glue.Types.GetJobResponse) => void): Request<Glue.Types.GetJobResponse, AWSError>;
+  getJob(params: BoundInput<Glue.Types.GetJobRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetJobResponse) => void): Request<Glue.Types.GetJobResponse, AWSError>;
   /**
    * Retrieves an existing job definition.
    */
@@ -390,7 +392,7 @@ declare class Glue extends Service {
   /**
    * Retrieves the metadata for a given job run.
    */
-  getJobRun(params: Glue.Types.GetJobRunRequest, callback?: (err: AWSError, data: Glue.Types.GetJobRunResponse) => void): Request<Glue.Types.GetJobRunResponse, AWSError>;
+  getJobRun(params: BoundInput<Glue.Types.GetJobRunRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetJobRunResponse) => void): Request<Glue.Types.GetJobRunResponse, AWSError>;
   /**
    * Retrieves the metadata for a given job run.
    */
@@ -398,7 +400,7 @@ declare class Glue extends Service {
   /**
    * Retrieves metadata for all runs of a given job definition.
    */
-  getJobRuns(params: Glue.Types.GetJobRunsRequest, callback?: (err: AWSError, data: Glue.Types.GetJobRunsResponse) => void): Request<Glue.Types.GetJobRunsResponse, AWSError>;
+  getJobRuns(params: BoundInput<Glue.Types.GetJobRunsRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetJobRunsResponse) => void): Request<Glue.Types.GetJobRunsResponse, AWSError>;
   /**
    * Retrieves metadata for all runs of a given job definition.
    */
@@ -406,7 +408,7 @@ declare class Glue extends Service {
   /**
    * Retrieves all current job definitions.
    */
-  getJobs(params: Glue.Types.GetJobsRequest, callback?: (err: AWSError, data: Glue.Types.GetJobsResponse) => void): Request<Glue.Types.GetJobsResponse, AWSError>;
+  getJobs(params: BoundInput<Glue.Types.GetJobsRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetJobsResponse) => void): Request<Glue.Types.GetJobsResponse, AWSError>;
   /**
    * Retrieves all current job definitions.
    */
@@ -414,7 +416,7 @@ declare class Glue extends Service {
   /**
    * Creates mappings.
    */
-  getMapping(params: Glue.Types.GetMappingRequest, callback?: (err: AWSError, data: Glue.Types.GetMappingResponse) => void): Request<Glue.Types.GetMappingResponse, AWSError>;
+  getMapping(params: BoundInput<Glue.Types.GetMappingRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetMappingResponse) => void): Request<Glue.Types.GetMappingResponse, AWSError>;
   /**
    * Creates mappings.
    */
@@ -422,7 +424,7 @@ declare class Glue extends Service {
   /**
    * Retrieves information about a specified partition.
    */
-  getPartition(params: Glue.Types.GetPartitionRequest, callback?: (err: AWSError, data: Glue.Types.GetPartitionResponse) => void): Request<Glue.Types.GetPartitionResponse, AWSError>;
+  getPartition(params: BoundInput<Glue.Types.GetPartitionRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetPartitionResponse) => void): Request<Glue.Types.GetPartitionResponse, AWSError>;
   /**
    * Retrieves information about a specified partition.
    */
@@ -430,7 +432,7 @@ declare class Glue extends Service {
   /**
    * Retrieves information about the partitions in a table.
    */
-  getPartitions(params: Glue.Types.GetPartitionsRequest, callback?: (err: AWSError, data: Glue.Types.GetPartitionsResponse) => void): Request<Glue.Types.GetPartitionsResponse, AWSError>;
+  getPartitions(params: BoundInput<Glue.Types.GetPartitionsRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetPartitionsResponse) => void): Request<Glue.Types.GetPartitionsResponse, AWSError>;
   /**
    * Retrieves information about the partitions in a table.
    */
@@ -438,7 +440,7 @@ declare class Glue extends Service {
   /**
    * Gets code to perform a specified mapping.
    */
-  getPlan(params: Glue.Types.GetPlanRequest, callback?: (err: AWSError, data: Glue.Types.GetPlanResponse) => void): Request<Glue.Types.GetPlanResponse, AWSError>;
+  getPlan(params: BoundInput<Glue.Types.GetPlanRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetPlanResponse) => void): Request<Glue.Types.GetPlanResponse, AWSError>;
   /**
    * Gets code to perform a specified mapping.
    */
@@ -446,7 +448,7 @@ declare class Glue extends Service {
   /**
    * Retrieves a specified resource policy.
    */
-  getResourcePolicy(params: Glue.Types.GetResourcePolicyRequest, callback?: (err: AWSError, data: Glue.Types.GetResourcePolicyResponse) => void): Request<Glue.Types.GetResourcePolicyResponse, AWSError>;
+  getResourcePolicy(params: BoundInput<Glue.Types.GetResourcePolicyRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetResourcePolicyResponse) => void): Request<Glue.Types.GetResourcePolicyResponse, AWSError>;
   /**
    * Retrieves a specified resource policy.
    */
@@ -454,7 +456,7 @@ declare class Glue extends Service {
   /**
    * Retrieves a specified security configuration.
    */
-  getSecurityConfiguration(params: Glue.Types.GetSecurityConfigurationRequest, callback?: (err: AWSError, data: Glue.Types.GetSecurityConfigurationResponse) => void): Request<Glue.Types.GetSecurityConfigurationResponse, AWSError>;
+  getSecurityConfiguration(params: BoundInput<Glue.Types.GetSecurityConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetSecurityConfigurationResponse) => void): Request<Glue.Types.GetSecurityConfigurationResponse, AWSError>;
   /**
    * Retrieves a specified security configuration.
    */
@@ -462,7 +464,7 @@ declare class Glue extends Service {
   /**
    * Retrieves a list of all security configurations.
    */
-  getSecurityConfigurations(params: Glue.Types.GetSecurityConfigurationsRequest, callback?: (err: AWSError, data: Glue.Types.GetSecurityConfigurationsResponse) => void): Request<Glue.Types.GetSecurityConfigurationsResponse, AWSError>;
+  getSecurityConfigurations(params: BoundInput<Glue.Types.GetSecurityConfigurationsRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetSecurityConfigurationsResponse) => void): Request<Glue.Types.GetSecurityConfigurationsResponse, AWSError>;
   /**
    * Retrieves a list of all security configurations.
    */
@@ -470,7 +472,7 @@ declare class Glue extends Service {
   /**
    * Retrieves the Table definition in a Data Catalog for a specified table.
    */
-  getTable(params: Glue.Types.GetTableRequest, callback?: (err: AWSError, data: Glue.Types.GetTableResponse) => void): Request<Glue.Types.GetTableResponse, AWSError>;
+  getTable(params: BoundInput<Glue.Types.GetTableRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetTableResponse) => void): Request<Glue.Types.GetTableResponse, AWSError>;
   /**
    * Retrieves the Table definition in a Data Catalog for a specified table.
    */
@@ -478,7 +480,7 @@ declare class Glue extends Service {
   /**
    * Retrieves a specified version of a table.
    */
-  getTableVersion(params: Glue.Types.GetTableVersionRequest, callback?: (err: AWSError, data: Glue.Types.GetTableVersionResponse) => void): Request<Glue.Types.GetTableVersionResponse, AWSError>;
+  getTableVersion(params: BoundInput<Glue.Types.GetTableVersionRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetTableVersionResponse) => void): Request<Glue.Types.GetTableVersionResponse, AWSError>;
   /**
    * Retrieves a specified version of a table.
    */
@@ -486,7 +488,7 @@ declare class Glue extends Service {
   /**
    * Retrieves a list of strings that identify available versions of a specified table.
    */
-  getTableVersions(params: Glue.Types.GetTableVersionsRequest, callback?: (err: AWSError, data: Glue.Types.GetTableVersionsResponse) => void): Request<Glue.Types.GetTableVersionsResponse, AWSError>;
+  getTableVersions(params: BoundInput<Glue.Types.GetTableVersionsRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetTableVersionsResponse) => void): Request<Glue.Types.GetTableVersionsResponse, AWSError>;
   /**
    * Retrieves a list of strings that identify available versions of a specified table.
    */
@@ -494,7 +496,7 @@ declare class Glue extends Service {
   /**
    * Retrieves the definitions of some or all of the tables in a given Database.
    */
-  getTables(params: Glue.Types.GetTablesRequest, callback?: (err: AWSError, data: Glue.Types.GetTablesResponse) => void): Request<Glue.Types.GetTablesResponse, AWSError>;
+  getTables(params: BoundInput<Glue.Types.GetTablesRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetTablesResponse) => void): Request<Glue.Types.GetTablesResponse, AWSError>;
   /**
    * Retrieves the definitions of some or all of the tables in a given Database.
    */
@@ -502,7 +504,7 @@ declare class Glue extends Service {
   /**
    * Retrieves the definition of a trigger.
    */
-  getTrigger(params: Glue.Types.GetTriggerRequest, callback?: (err: AWSError, data: Glue.Types.GetTriggerResponse) => void): Request<Glue.Types.GetTriggerResponse, AWSError>;
+  getTrigger(params: BoundInput<Glue.Types.GetTriggerRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetTriggerResponse) => void): Request<Glue.Types.GetTriggerResponse, AWSError>;
   /**
    * Retrieves the definition of a trigger.
    */
@@ -510,7 +512,7 @@ declare class Glue extends Service {
   /**
    * Gets all the triggers associated with a job.
    */
-  getTriggers(params: Glue.Types.GetTriggersRequest, callback?: (err: AWSError, data: Glue.Types.GetTriggersResponse) => void): Request<Glue.Types.GetTriggersResponse, AWSError>;
+  getTriggers(params: BoundInput<Glue.Types.GetTriggersRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetTriggersResponse) => void): Request<Glue.Types.GetTriggersResponse, AWSError>;
   /**
    * Gets all the triggers associated with a job.
    */
@@ -518,7 +520,7 @@ declare class Glue extends Service {
   /**
    * Retrieves a specified function definition from the Data Catalog.
    */
-  getUserDefinedFunction(params: Glue.Types.GetUserDefinedFunctionRequest, callback?: (err: AWSError, data: Glue.Types.GetUserDefinedFunctionResponse) => void): Request<Glue.Types.GetUserDefinedFunctionResponse, AWSError>;
+  getUserDefinedFunction(params: BoundInput<Glue.Types.GetUserDefinedFunctionRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetUserDefinedFunctionResponse) => void): Request<Glue.Types.GetUserDefinedFunctionResponse, AWSError>;
   /**
    * Retrieves a specified function definition from the Data Catalog.
    */
@@ -526,7 +528,7 @@ declare class Glue extends Service {
   /**
    * Retrieves a multiple function definitions from the Data Catalog.
    */
-  getUserDefinedFunctions(params: Glue.Types.GetUserDefinedFunctionsRequest, callback?: (err: AWSError, data: Glue.Types.GetUserDefinedFunctionsResponse) => void): Request<Glue.Types.GetUserDefinedFunctionsResponse, AWSError>;
+  getUserDefinedFunctions(params: BoundInput<Glue.Types.GetUserDefinedFunctionsRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.GetUserDefinedFunctionsResponse) => void): Request<Glue.Types.GetUserDefinedFunctionsResponse, AWSError>;
   /**
    * Retrieves a multiple function definitions from the Data Catalog.
    */
@@ -534,7 +536,7 @@ declare class Glue extends Service {
   /**
    * Imports an existing Athena Data Catalog to AWS Glue
    */
-  importCatalogToGlue(params: Glue.Types.ImportCatalogToGlueRequest, callback?: (err: AWSError, data: Glue.Types.ImportCatalogToGlueResponse) => void): Request<Glue.Types.ImportCatalogToGlueResponse, AWSError>;
+  importCatalogToGlue(params: BoundInput<Glue.Types.ImportCatalogToGlueRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.ImportCatalogToGlueResponse) => void): Request<Glue.Types.ImportCatalogToGlueResponse, AWSError>;
   /**
    * Imports an existing Athena Data Catalog to AWS Glue
    */
@@ -542,7 +544,7 @@ declare class Glue extends Service {
   /**
    * Sets the security configuration for a specified catalog. Once the configuration has been set, the specified encryption is applied to every catalog write thereafter.
    */
-  putDataCatalogEncryptionSettings(params: Glue.Types.PutDataCatalogEncryptionSettingsRequest, callback?: (err: AWSError, data: Glue.Types.PutDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.PutDataCatalogEncryptionSettingsResponse, AWSError>;
+  putDataCatalogEncryptionSettings(params: BoundInput<Glue.Types.PutDataCatalogEncryptionSettingsRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.PutDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.PutDataCatalogEncryptionSettingsResponse, AWSError>;
   /**
    * Sets the security configuration for a specified catalog. Once the configuration has been set, the specified encryption is applied to every catalog write thereafter.
    */
@@ -550,7 +552,7 @@ declare class Glue extends Service {
   /**
    * Sets the Data Catalog resource policy for access control.
    */
-  putResourcePolicy(params: Glue.Types.PutResourcePolicyRequest, callback?: (err: AWSError, data: Glue.Types.PutResourcePolicyResponse) => void): Request<Glue.Types.PutResourcePolicyResponse, AWSError>;
+  putResourcePolicy(params: BoundInput<Glue.Types.PutResourcePolicyRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.PutResourcePolicyResponse) => void): Request<Glue.Types.PutResourcePolicyResponse, AWSError>;
   /**
    * Sets the Data Catalog resource policy for access control.
    */
@@ -558,7 +560,7 @@ declare class Glue extends Service {
   /**
    * Resets a bookmark entry.
    */
-  resetJobBookmark(params: Glue.Types.ResetJobBookmarkRequest, callback?: (err: AWSError, data: Glue.Types.ResetJobBookmarkResponse) => void): Request<Glue.Types.ResetJobBookmarkResponse, AWSError>;
+  resetJobBookmark(params: BoundInput<Glue.Types.ResetJobBookmarkRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.ResetJobBookmarkResponse) => void): Request<Glue.Types.ResetJobBookmarkResponse, AWSError>;
   /**
    * Resets a bookmark entry.
    */
@@ -566,7 +568,7 @@ declare class Glue extends Service {
   /**
    * Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, returns a CrawlerRunningException.
    */
-  startCrawler(params: Glue.Types.StartCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.StartCrawlerResponse) => void): Request<Glue.Types.StartCrawlerResponse, AWSError>;
+  startCrawler(params: BoundInput<Glue.Types.StartCrawlerRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.StartCrawlerResponse) => void): Request<Glue.Types.StartCrawlerResponse, AWSError>;
   /**
    * Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, returns a CrawlerRunningException.
    */
@@ -574,7 +576,7 @@ declare class Glue extends Service {
   /**
    * Changes the schedule state of the specified crawler to SCHEDULED, unless the crawler is already running or the schedule state is already SCHEDULED.
    */
-  startCrawlerSchedule(params: Glue.Types.StartCrawlerScheduleRequest, callback?: (err: AWSError, data: Glue.Types.StartCrawlerScheduleResponse) => void): Request<Glue.Types.StartCrawlerScheduleResponse, AWSError>;
+  startCrawlerSchedule(params: BoundInput<Glue.Types.StartCrawlerScheduleRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.StartCrawlerScheduleResponse) => void): Request<Glue.Types.StartCrawlerScheduleResponse, AWSError>;
   /**
    * Changes the schedule state of the specified crawler to SCHEDULED, unless the crawler is already running or the schedule state is already SCHEDULED.
    */
@@ -582,7 +584,7 @@ declare class Glue extends Service {
   /**
    * Starts a job run using a job definition.
    */
-  startJobRun(params: Glue.Types.StartJobRunRequest, callback?: (err: AWSError, data: Glue.Types.StartJobRunResponse) => void): Request<Glue.Types.StartJobRunResponse, AWSError>;
+  startJobRun(params: BoundInput<Glue.Types.StartJobRunRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.StartJobRunResponse) => void): Request<Glue.Types.StartJobRunResponse, AWSError>;
   /**
    * Starts a job run using a job definition.
    */
@@ -590,7 +592,7 @@ declare class Glue extends Service {
   /**
    * Starts an existing trigger. See Triggering Jobs for information about how different types of trigger are started.
    */
-  startTrigger(params: Glue.Types.StartTriggerRequest, callback?: (err: AWSError, data: Glue.Types.StartTriggerResponse) => void): Request<Glue.Types.StartTriggerResponse, AWSError>;
+  startTrigger(params: BoundInput<Glue.Types.StartTriggerRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.StartTriggerResponse) => void): Request<Glue.Types.StartTriggerResponse, AWSError>;
   /**
    * Starts an existing trigger. See Triggering Jobs for information about how different types of trigger are started.
    */
@@ -598,7 +600,7 @@ declare class Glue extends Service {
   /**
    * If the specified crawler is running, stops the crawl.
    */
-  stopCrawler(params: Glue.Types.StopCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.StopCrawlerResponse) => void): Request<Glue.Types.StopCrawlerResponse, AWSError>;
+  stopCrawler(params: BoundInput<Glue.Types.StopCrawlerRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.StopCrawlerResponse) => void): Request<Glue.Types.StopCrawlerResponse, AWSError>;
   /**
    * If the specified crawler is running, stops the crawl.
    */
@@ -606,7 +608,7 @@ declare class Glue extends Service {
   /**
    * Sets the schedule state of the specified crawler to NOT_SCHEDULED, but does not stop the crawler if it is already running.
    */
-  stopCrawlerSchedule(params: Glue.Types.StopCrawlerScheduleRequest, callback?: (err: AWSError, data: Glue.Types.StopCrawlerScheduleResponse) => void): Request<Glue.Types.StopCrawlerScheduleResponse, AWSError>;
+  stopCrawlerSchedule(params: BoundInput<Glue.Types.StopCrawlerScheduleRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.StopCrawlerScheduleResponse) => void): Request<Glue.Types.StopCrawlerScheduleResponse, AWSError>;
   /**
    * Sets the schedule state of the specified crawler to NOT_SCHEDULED, but does not stop the crawler if it is already running.
    */
@@ -614,7 +616,7 @@ declare class Glue extends Service {
   /**
    * Stops a specified trigger.
    */
-  stopTrigger(params: Glue.Types.StopTriggerRequest, callback?: (err: AWSError, data: Glue.Types.StopTriggerResponse) => void): Request<Glue.Types.StopTriggerResponse, AWSError>;
+  stopTrigger(params: BoundInput<Glue.Types.StopTriggerRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.StopTriggerResponse) => void): Request<Glue.Types.StopTriggerResponse, AWSError>;
   /**
    * Stops a specified trigger.
    */
@@ -622,7 +624,7 @@ declare class Glue extends Service {
   /**
    * Modifies an existing classifier (a GrokClassifier, XMLClassifier, or JsonClassifier, depending on which field is present).
    */
-  updateClassifier(params: Glue.Types.UpdateClassifierRequest, callback?: (err: AWSError, data: Glue.Types.UpdateClassifierResponse) => void): Request<Glue.Types.UpdateClassifierResponse, AWSError>;
+  updateClassifier(params: BoundInput<Glue.Types.UpdateClassifierRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.UpdateClassifierResponse) => void): Request<Glue.Types.UpdateClassifierResponse, AWSError>;
   /**
    * Modifies an existing classifier (a GrokClassifier, XMLClassifier, or JsonClassifier, depending on which field is present).
    */
@@ -630,7 +632,7 @@ declare class Glue extends Service {
   /**
    * Updates a connection definition in the Data Catalog.
    */
-  updateConnection(params: Glue.Types.UpdateConnectionRequest, callback?: (err: AWSError, data: Glue.Types.UpdateConnectionResponse) => void): Request<Glue.Types.UpdateConnectionResponse, AWSError>;
+  updateConnection(params: BoundInput<Glue.Types.UpdateConnectionRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.UpdateConnectionResponse) => void): Request<Glue.Types.UpdateConnectionResponse, AWSError>;
   /**
    * Updates a connection definition in the Data Catalog.
    */
@@ -638,7 +640,7 @@ declare class Glue extends Service {
   /**
    * Updates a crawler. If a crawler is running, you must stop it using StopCrawler before updating it.
    */
-  updateCrawler(params: Glue.Types.UpdateCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.UpdateCrawlerResponse) => void): Request<Glue.Types.UpdateCrawlerResponse, AWSError>;
+  updateCrawler(params: BoundInput<Glue.Types.UpdateCrawlerRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.UpdateCrawlerResponse) => void): Request<Glue.Types.UpdateCrawlerResponse, AWSError>;
   /**
    * Updates a crawler. If a crawler is running, you must stop it using StopCrawler before updating it.
    */
@@ -646,7 +648,7 @@ declare class Glue extends Service {
   /**
    * Updates the schedule of a crawler using a cron expression. 
    */
-  updateCrawlerSchedule(params: Glue.Types.UpdateCrawlerScheduleRequest, callback?: (err: AWSError, data: Glue.Types.UpdateCrawlerScheduleResponse) => void): Request<Glue.Types.UpdateCrawlerScheduleResponse, AWSError>;
+  updateCrawlerSchedule(params: BoundInput<Glue.Types.UpdateCrawlerScheduleRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.UpdateCrawlerScheduleResponse) => void): Request<Glue.Types.UpdateCrawlerScheduleResponse, AWSError>;
   /**
    * Updates the schedule of a crawler using a cron expression. 
    */
@@ -654,7 +656,7 @@ declare class Glue extends Service {
   /**
    * Updates an existing database definition in a Data Catalog.
    */
-  updateDatabase(params: Glue.Types.UpdateDatabaseRequest, callback?: (err: AWSError, data: Glue.Types.UpdateDatabaseResponse) => void): Request<Glue.Types.UpdateDatabaseResponse, AWSError>;
+  updateDatabase(params: BoundInput<Glue.Types.UpdateDatabaseRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.UpdateDatabaseResponse) => void): Request<Glue.Types.UpdateDatabaseResponse, AWSError>;
   /**
    * Updates an existing database definition in a Data Catalog.
    */
@@ -662,7 +664,7 @@ declare class Glue extends Service {
   /**
    * Updates a specified DevEndpoint.
    */
-  updateDevEndpoint(params: Glue.Types.UpdateDevEndpointRequest, callback?: (err: AWSError, data: Glue.Types.UpdateDevEndpointResponse) => void): Request<Glue.Types.UpdateDevEndpointResponse, AWSError>;
+  updateDevEndpoint(params: BoundInput<Glue.Types.UpdateDevEndpointRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.UpdateDevEndpointResponse) => void): Request<Glue.Types.UpdateDevEndpointResponse, AWSError>;
   /**
    * Updates a specified DevEndpoint.
    */
@@ -670,7 +672,7 @@ declare class Glue extends Service {
   /**
    * Updates an existing job definition.
    */
-  updateJob(params: Glue.Types.UpdateJobRequest, callback?: (err: AWSError, data: Glue.Types.UpdateJobResponse) => void): Request<Glue.Types.UpdateJobResponse, AWSError>;
+  updateJob(params: BoundInput<Glue.Types.UpdateJobRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.UpdateJobResponse) => void): Request<Glue.Types.UpdateJobResponse, AWSError>;
   /**
    * Updates an existing job definition.
    */
@@ -678,7 +680,7 @@ declare class Glue extends Service {
   /**
    * Updates a partition.
    */
-  updatePartition(params: Glue.Types.UpdatePartitionRequest, callback?: (err: AWSError, data: Glue.Types.UpdatePartitionResponse) => void): Request<Glue.Types.UpdatePartitionResponse, AWSError>;
+  updatePartition(params: BoundInput<Glue.Types.UpdatePartitionRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.UpdatePartitionResponse) => void): Request<Glue.Types.UpdatePartitionResponse, AWSError>;
   /**
    * Updates a partition.
    */
@@ -686,7 +688,7 @@ declare class Glue extends Service {
   /**
    * Updates a metadata table in the Data Catalog.
    */
-  updateTable(params: Glue.Types.UpdateTableRequest, callback?: (err: AWSError, data: Glue.Types.UpdateTableResponse) => void): Request<Glue.Types.UpdateTableResponse, AWSError>;
+  updateTable(params: BoundInput<Glue.Types.UpdateTableRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.UpdateTableResponse) => void): Request<Glue.Types.UpdateTableResponse, AWSError>;
   /**
    * Updates a metadata table in the Data Catalog.
    */
@@ -694,7 +696,7 @@ declare class Glue extends Service {
   /**
    * Updates a trigger definition.
    */
-  updateTrigger(params: Glue.Types.UpdateTriggerRequest, callback?: (err: AWSError, data: Glue.Types.UpdateTriggerResponse) => void): Request<Glue.Types.UpdateTriggerResponse, AWSError>;
+  updateTrigger(params: BoundInput<Glue.Types.UpdateTriggerRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.UpdateTriggerResponse) => void): Request<Glue.Types.UpdateTriggerResponse, AWSError>;
   /**
    * Updates a trigger definition.
    */
@@ -702,7 +704,7 @@ declare class Glue extends Service {
   /**
    * Updates an existing function definition in the Data Catalog.
    */
-  updateUserDefinedFunction(params: Glue.Types.UpdateUserDefinedFunctionRequest, callback?: (err: AWSError, data: Glue.Types.UpdateUserDefinedFunctionResponse) => void): Request<Glue.Types.UpdateUserDefinedFunctionResponse, AWSError>;
+  updateUserDefinedFunction(params: BoundInput<Glue.Types.UpdateUserDefinedFunctionRequest, keyof Params>, callback?: (err: AWSError, data: Glue.Types.UpdateUserDefinedFunctionResponse) => void): Request<Glue.Types.UpdateUserDefinedFunctionResponse, AWSError>;
   /**
    * Updates an existing function definition in the Data Catalog.
    */
@@ -4231,7 +4233,8 @@ declare namespace Glue {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<BatchCreatePartitionRequest & BatchDeleteConnectionRequest & BatchDeletePartitionRequest & BatchDeleteTableRequest & BatchDeleteTableVersionRequest & BatchGetPartitionRequest & BatchStopJobRunRequest & CreateClassifierRequest & CreateConnectionRequest & CreateCrawlerRequest & CreateDatabaseRequest & CreateDevEndpointRequest & CreateJobRequest & CreatePartitionRequest & CreateScriptRequest & CreateSecurityConfigurationRequest & CreateTableRequest & CreateTriggerRequest & CreateUserDefinedFunctionRequest & DeleteClassifierRequest & DeleteConnectionRequest & DeleteCrawlerRequest & DeleteDatabaseRequest & DeleteDevEndpointRequest & DeleteJobRequest & DeletePartitionRequest & DeleteResourcePolicyRequest & DeleteSecurityConfigurationRequest & DeleteTableRequest & DeleteTableVersionRequest & DeleteTriggerRequest & DeleteUserDefinedFunctionRequest & GetCatalogImportStatusRequest & GetClassifierRequest & GetClassifiersRequest & GetConnectionRequest & GetConnectionsRequest & GetCrawlerRequest & GetCrawlerMetricsRequest & GetCrawlersRequest & GetDataCatalogEncryptionSettingsRequest & GetDatabaseRequest & GetDatabasesRequest & GetDataflowGraphRequest & GetDevEndpointRequest & GetDevEndpointsRequest & GetJobRequest & GetJobRunRequest & GetJobRunsRequest & GetJobsRequest & GetMappingRequest & GetPartitionRequest & GetPartitionsRequest & GetPlanRequest & GetResourcePolicyRequest & GetSecurityConfigurationRequest & GetSecurityConfigurationsRequest & GetTableRequest & GetTableVersionRequest & GetTableVersionsRequest & GetTablesRequest & GetTriggerRequest & GetTriggersRequest & GetUserDefinedFunctionRequest & GetUserDefinedFunctionsRequest & ImportCatalogToGlueRequest & PutDataCatalogEncryptionSettingsRequest & PutResourcePolicyRequest & ResetJobBookmarkRequest & StartCrawlerRequest & StartCrawlerScheduleRequest & StartJobRunRequest & StartTriggerRequest & StopCrawlerRequest & StopCrawlerScheduleRequest & StopTriggerRequest & UpdateClassifierRequest & UpdateConnectionRequest & UpdateCrawlerRequest & UpdateCrawlerScheduleRequest & UpdateDatabaseRequest & UpdateDevEndpointRequest & UpdateJobRequest & UpdatePartitionRequest & UpdateTableRequest & UpdateTriggerRequest & UpdateUserDefinedFunctionRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the Glue client.
    */

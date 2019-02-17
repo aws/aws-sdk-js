@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class ServiceDiscovery extends Service {
+declare class ServiceDiscovery<Params extends ServiceDiscovery.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: ServiceDiscovery.Types.ClientConfiguration)
-  config: Config & ServiceDiscovery.Types.ClientConfiguration;
+  constructor(options?: ServiceDiscovery.Types.ClientConfiguration<Params>)
+  config: Config & ServiceDiscovery.Types.ClientConfiguration<Params>;
   /**
    * Creates an HTTP namespace. Service instances that you register using an HTTP namespace can be discovered using a DiscoverInstances request but can't be discovered using DNS.  For the current limit on the number of namespaces that you can create using the same AWS account, see AWS Cloud Map Limits in the AWS Cloud Map Developer Guide.
    */
-  createHttpNamespace(params: ServiceDiscovery.Types.CreateHttpNamespaceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.CreateHttpNamespaceResponse) => void): Request<ServiceDiscovery.Types.CreateHttpNamespaceResponse, AWSError>;
+  createHttpNamespace(params: BoundInput<ServiceDiscovery.Types.CreateHttpNamespaceRequest, keyof Params>, callback?: (err: AWSError, data: ServiceDiscovery.Types.CreateHttpNamespaceResponse) => void): Request<ServiceDiscovery.Types.CreateHttpNamespaceResponse, AWSError>;
   /**
    * Creates an HTTP namespace. Service instances that you register using an HTTP namespace can be discovered using a DiscoverInstances request but can't be discovered using DNS.  For the current limit on the number of namespaces that you can create using the same AWS account, see AWS Cloud Map Limits in the AWS Cloud Map Developer Guide.
    */
@@ -22,7 +24,7 @@ declare class ServiceDiscovery extends Service {
   /**
    * Creates a private namespace based on DNS, which will be visible only inside a specified Amazon VPC. The namespace defines your service naming scheme. For example, if you name your namespace example.com and name your service backend, the resulting DNS name for the service will be backend.example.com. For the current limit on the number of namespaces that you can create using the same AWS account, see AWS Cloud Map Limits in the AWS Cloud Map Developer Guide.
    */
-  createPrivateDnsNamespace(params: ServiceDiscovery.Types.CreatePrivateDnsNamespaceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.CreatePrivateDnsNamespaceResponse) => void): Request<ServiceDiscovery.Types.CreatePrivateDnsNamespaceResponse, AWSError>;
+  createPrivateDnsNamespace(params: BoundInput<ServiceDiscovery.Types.CreatePrivateDnsNamespaceRequest, keyof Params>, callback?: (err: AWSError, data: ServiceDiscovery.Types.CreatePrivateDnsNamespaceResponse) => void): Request<ServiceDiscovery.Types.CreatePrivateDnsNamespaceResponse, AWSError>;
   /**
    * Creates a private namespace based on DNS, which will be visible only inside a specified Amazon VPC. The namespace defines your service naming scheme. For example, if you name your namespace example.com and name your service backend, the resulting DNS name for the service will be backend.example.com. For the current limit on the number of namespaces that you can create using the same AWS account, see AWS Cloud Map Limits in the AWS Cloud Map Developer Guide.
    */
@@ -30,7 +32,7 @@ declare class ServiceDiscovery extends Service {
   /**
    * Creates a public namespace based on DNS, which will be visible on the internet. The namespace defines your service naming scheme. For example, if you name your namespace example.com and name your service backend, the resulting DNS name for the service will be backend.example.com. For the current limit on the number of namespaces that you can create using the same AWS account, see AWS Cloud Map Limits in the AWS Cloud Map Developer Guide.
    */
-  createPublicDnsNamespace(params: ServiceDiscovery.Types.CreatePublicDnsNamespaceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.CreatePublicDnsNamespaceResponse) => void): Request<ServiceDiscovery.Types.CreatePublicDnsNamespaceResponse, AWSError>;
+  createPublicDnsNamespace(params: BoundInput<ServiceDiscovery.Types.CreatePublicDnsNamespaceRequest, keyof Params>, callback?: (err: AWSError, data: ServiceDiscovery.Types.CreatePublicDnsNamespaceResponse) => void): Request<ServiceDiscovery.Types.CreatePublicDnsNamespaceResponse, AWSError>;
   /**
    * Creates a public namespace based on DNS, which will be visible on the internet. The namespace defines your service naming scheme. For example, if you name your namespace example.com and name your service backend, the resulting DNS name for the service will be backend.example.com. For the current limit on the number of namespaces that you can create using the same AWS account, see AWS Cloud Map Limits in the AWS Cloud Map Developer Guide.
    */
@@ -38,7 +40,7 @@ declare class ServiceDiscovery extends Service {
   /**
    * Creates a service, which defines the configuration for the following entities:   For public and private DNS namespaces, one of the following combinations of DNS records in Amazon Route 53:   A   AAAA   A and AAAA   SRV   CNAME     Optionally, a health check   After you create the service, you can submit a RegisterInstance request, and AWS Cloud Map uses the values in the configuration to create the specified entities. For the current limit on the number of instances that you can register using the same namespace and using the same service, see AWS Cloud Map Limits in the AWS Cloud Map Developer Guide.
    */
-  createService(params: ServiceDiscovery.Types.CreateServiceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.CreateServiceResponse) => void): Request<ServiceDiscovery.Types.CreateServiceResponse, AWSError>;
+  createService(params: BoundInput<ServiceDiscovery.Types.CreateServiceRequest, keyof Params>, callback?: (err: AWSError, data: ServiceDiscovery.Types.CreateServiceResponse) => void): Request<ServiceDiscovery.Types.CreateServiceResponse, AWSError>;
   /**
    * Creates a service, which defines the configuration for the following entities:   For public and private DNS namespaces, one of the following combinations of DNS records in Amazon Route 53:   A   AAAA   A and AAAA   SRV   CNAME     Optionally, a health check   After you create the service, you can submit a RegisterInstance request, and AWS Cloud Map uses the values in the configuration to create the specified entities. For the current limit on the number of instances that you can register using the same namespace and using the same service, see AWS Cloud Map Limits in the AWS Cloud Map Developer Guide.
    */
@@ -46,7 +48,7 @@ declare class ServiceDiscovery extends Service {
   /**
    * Deletes a namespace from the current account. If the namespace still contains one or more services, the request fails.
    */
-  deleteNamespace(params: ServiceDiscovery.Types.DeleteNamespaceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.DeleteNamespaceResponse) => void): Request<ServiceDiscovery.Types.DeleteNamespaceResponse, AWSError>;
+  deleteNamespace(params: BoundInput<ServiceDiscovery.Types.DeleteNamespaceRequest, keyof Params>, callback?: (err: AWSError, data: ServiceDiscovery.Types.DeleteNamespaceResponse) => void): Request<ServiceDiscovery.Types.DeleteNamespaceResponse, AWSError>;
   /**
    * Deletes a namespace from the current account. If the namespace still contains one or more services, the request fails.
    */
@@ -54,7 +56,7 @@ declare class ServiceDiscovery extends Service {
   /**
    * Deletes a specified service. If the service still contains one or more registered instances, the request fails.
    */
-  deleteService(params: ServiceDiscovery.Types.DeleteServiceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.DeleteServiceResponse) => void): Request<ServiceDiscovery.Types.DeleteServiceResponse, AWSError>;
+  deleteService(params: BoundInput<ServiceDiscovery.Types.DeleteServiceRequest, keyof Params>, callback?: (err: AWSError, data: ServiceDiscovery.Types.DeleteServiceResponse) => void): Request<ServiceDiscovery.Types.DeleteServiceResponse, AWSError>;
   /**
    * Deletes a specified service. If the service still contains one or more registered instances, the request fails.
    */
@@ -62,7 +64,7 @@ declare class ServiceDiscovery extends Service {
   /**
    * Deletes the Amazon Route 53 DNS records and health check, if any, that AWS Cloud Map created for the specified instance.
    */
-  deregisterInstance(params: ServiceDiscovery.Types.DeregisterInstanceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.DeregisterInstanceResponse) => void): Request<ServiceDiscovery.Types.DeregisterInstanceResponse, AWSError>;
+  deregisterInstance(params: BoundInput<ServiceDiscovery.Types.DeregisterInstanceRequest, keyof Params>, callback?: (err: AWSError, data: ServiceDiscovery.Types.DeregisterInstanceResponse) => void): Request<ServiceDiscovery.Types.DeregisterInstanceResponse, AWSError>;
   /**
    * Deletes the Amazon Route 53 DNS records and health check, if any, that AWS Cloud Map created for the specified instance.
    */
@@ -70,7 +72,7 @@ declare class ServiceDiscovery extends Service {
   /**
    * Discovers registered instances for a specified namespace and service.
    */
-  discoverInstances(params: ServiceDiscovery.Types.DiscoverInstancesRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.DiscoverInstancesResponse) => void): Request<ServiceDiscovery.Types.DiscoverInstancesResponse, AWSError>;
+  discoverInstances(params: BoundInput<ServiceDiscovery.Types.DiscoverInstancesRequest, keyof Params>, callback?: (err: AWSError, data: ServiceDiscovery.Types.DiscoverInstancesResponse) => void): Request<ServiceDiscovery.Types.DiscoverInstancesResponse, AWSError>;
   /**
    * Discovers registered instances for a specified namespace and service.
    */
@@ -78,7 +80,7 @@ declare class ServiceDiscovery extends Service {
   /**
    * Gets information about a specified instance.
    */
-  getInstance(params: ServiceDiscovery.Types.GetInstanceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.GetInstanceResponse) => void): Request<ServiceDiscovery.Types.GetInstanceResponse, AWSError>;
+  getInstance(params: BoundInput<ServiceDiscovery.Types.GetInstanceRequest, keyof Params>, callback?: (err: AWSError, data: ServiceDiscovery.Types.GetInstanceResponse) => void): Request<ServiceDiscovery.Types.GetInstanceResponse, AWSError>;
   /**
    * Gets information about a specified instance.
    */
@@ -86,7 +88,7 @@ declare class ServiceDiscovery extends Service {
   /**
    * Gets the current health status (Healthy, Unhealthy, or Unknown) of one or more instances that are associated with a specified service.  There is a brief delay between when you register an instance and when the health status for the instance is available.  
    */
-  getInstancesHealthStatus(params: ServiceDiscovery.Types.GetInstancesHealthStatusRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.GetInstancesHealthStatusResponse) => void): Request<ServiceDiscovery.Types.GetInstancesHealthStatusResponse, AWSError>;
+  getInstancesHealthStatus(params: BoundInput<ServiceDiscovery.Types.GetInstancesHealthStatusRequest, keyof Params>, callback?: (err: AWSError, data: ServiceDiscovery.Types.GetInstancesHealthStatusResponse) => void): Request<ServiceDiscovery.Types.GetInstancesHealthStatusResponse, AWSError>;
   /**
    * Gets the current health status (Healthy, Unhealthy, or Unknown) of one or more instances that are associated with a specified service.  There is a brief delay between when you register an instance and when the health status for the instance is available.  
    */
@@ -94,7 +96,7 @@ declare class ServiceDiscovery extends Service {
   /**
    * Gets information about a namespace.
    */
-  getNamespace(params: ServiceDiscovery.Types.GetNamespaceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.GetNamespaceResponse) => void): Request<ServiceDiscovery.Types.GetNamespaceResponse, AWSError>;
+  getNamespace(params: BoundInput<ServiceDiscovery.Types.GetNamespaceRequest, keyof Params>, callback?: (err: AWSError, data: ServiceDiscovery.Types.GetNamespaceResponse) => void): Request<ServiceDiscovery.Types.GetNamespaceResponse, AWSError>;
   /**
    * Gets information about a namespace.
    */
@@ -102,7 +104,7 @@ declare class ServiceDiscovery extends Service {
   /**
    * Gets information about any operation that returns an operation ID in the response, such as a CreateService request.  To get a list of operations that match specified criteria, see ListOperations. 
    */
-  getOperation(params: ServiceDiscovery.Types.GetOperationRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.GetOperationResponse) => void): Request<ServiceDiscovery.Types.GetOperationResponse, AWSError>;
+  getOperation(params: BoundInput<ServiceDiscovery.Types.GetOperationRequest, keyof Params>, callback?: (err: AWSError, data: ServiceDiscovery.Types.GetOperationResponse) => void): Request<ServiceDiscovery.Types.GetOperationResponse, AWSError>;
   /**
    * Gets information about any operation that returns an operation ID in the response, such as a CreateService request.  To get a list of operations that match specified criteria, see ListOperations. 
    */
@@ -110,7 +112,7 @@ declare class ServiceDiscovery extends Service {
   /**
    * Gets the settings for a specified service.
    */
-  getService(params: ServiceDiscovery.Types.GetServiceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.GetServiceResponse) => void): Request<ServiceDiscovery.Types.GetServiceResponse, AWSError>;
+  getService(params: BoundInput<ServiceDiscovery.Types.GetServiceRequest, keyof Params>, callback?: (err: AWSError, data: ServiceDiscovery.Types.GetServiceResponse) => void): Request<ServiceDiscovery.Types.GetServiceResponse, AWSError>;
   /**
    * Gets the settings for a specified service.
    */
@@ -118,7 +120,7 @@ declare class ServiceDiscovery extends Service {
   /**
    * Lists summary information about the instances that you registered by using a specified service.
    */
-  listInstances(params: ServiceDiscovery.Types.ListInstancesRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.ListInstancesResponse) => void): Request<ServiceDiscovery.Types.ListInstancesResponse, AWSError>;
+  listInstances(params: BoundInput<ServiceDiscovery.Types.ListInstancesRequest, keyof Params>, callback?: (err: AWSError, data: ServiceDiscovery.Types.ListInstancesResponse) => void): Request<ServiceDiscovery.Types.ListInstancesResponse, AWSError>;
   /**
    * Lists summary information about the instances that you registered by using a specified service.
    */
@@ -126,7 +128,7 @@ declare class ServiceDiscovery extends Service {
   /**
    * Lists summary information about the namespaces that were created by the current AWS account.
    */
-  listNamespaces(params: ServiceDiscovery.Types.ListNamespacesRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.ListNamespacesResponse) => void): Request<ServiceDiscovery.Types.ListNamespacesResponse, AWSError>;
+  listNamespaces(params: BoundInput<ServiceDiscovery.Types.ListNamespacesRequest, keyof Params>, callback?: (err: AWSError, data: ServiceDiscovery.Types.ListNamespacesResponse) => void): Request<ServiceDiscovery.Types.ListNamespacesResponse, AWSError>;
   /**
    * Lists summary information about the namespaces that were created by the current AWS account.
    */
@@ -134,7 +136,7 @@ declare class ServiceDiscovery extends Service {
   /**
    * Lists operations that match the criteria that you specify.
    */
-  listOperations(params: ServiceDiscovery.Types.ListOperationsRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.ListOperationsResponse) => void): Request<ServiceDiscovery.Types.ListOperationsResponse, AWSError>;
+  listOperations(params: BoundInput<ServiceDiscovery.Types.ListOperationsRequest, keyof Params>, callback?: (err: AWSError, data: ServiceDiscovery.Types.ListOperationsResponse) => void): Request<ServiceDiscovery.Types.ListOperationsResponse, AWSError>;
   /**
    * Lists operations that match the criteria that you specify.
    */
@@ -142,7 +144,7 @@ declare class ServiceDiscovery extends Service {
   /**
    * Lists summary information for all the services that are associated with one or more specified namespaces.
    */
-  listServices(params: ServiceDiscovery.Types.ListServicesRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.ListServicesResponse) => void): Request<ServiceDiscovery.Types.ListServicesResponse, AWSError>;
+  listServices(params: BoundInput<ServiceDiscovery.Types.ListServicesRequest, keyof Params>, callback?: (err: AWSError, data: ServiceDiscovery.Types.ListServicesResponse) => void): Request<ServiceDiscovery.Types.ListServicesResponse, AWSError>;
   /**
    * Lists summary information for all the services that are associated with one or more specified namespaces.
    */
@@ -150,7 +152,7 @@ declare class ServiceDiscovery extends Service {
   /**
    * Creates or updates one or more records and, optionally, creates a health check based on the settings in a specified service. When you submit a RegisterInstance request, the following occurs:   For each DNS record that you define in the service that is specified by ServiceId, a record is created or updated in the hosted zone that is associated with the corresponding namespace.   If the service includes HealthCheckConfig, a health check is created based on the settings in the health check configuration.   The health check, if any, is associated with each of the new or updated records.    One RegisterInstance request must complete before you can submit another request and specify the same service ID and instance ID.  For more information, see CreateService. When AWS Cloud Map receives a DNS query for the specified DNS name, it returns the applicable value:    If the health check is healthy: returns all the records    If the health check is unhealthy: returns the applicable value for the last healthy instance    If you didn't specify a health check configuration: returns all the records   For the current limit on the number of instances that you can register using the same namespace and using the same service, see AWS Cloud Map Limits in the AWS Cloud Map Developer Guide.
    */
-  registerInstance(params: ServiceDiscovery.Types.RegisterInstanceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.RegisterInstanceResponse) => void): Request<ServiceDiscovery.Types.RegisterInstanceResponse, AWSError>;
+  registerInstance(params: BoundInput<ServiceDiscovery.Types.RegisterInstanceRequest, keyof Params>, callback?: (err: AWSError, data: ServiceDiscovery.Types.RegisterInstanceResponse) => void): Request<ServiceDiscovery.Types.RegisterInstanceResponse, AWSError>;
   /**
    * Creates or updates one or more records and, optionally, creates a health check based on the settings in a specified service. When you submit a RegisterInstance request, the following occurs:   For each DNS record that you define in the service that is specified by ServiceId, a record is created or updated in the hosted zone that is associated with the corresponding namespace.   If the service includes HealthCheckConfig, a health check is created based on the settings in the health check configuration.   The health check, if any, is associated with each of the new or updated records.    One RegisterInstance request must complete before you can submit another request and specify the same service ID and instance ID.  For more information, see CreateService. When AWS Cloud Map receives a DNS query for the specified DNS name, it returns the applicable value:    If the health check is healthy: returns all the records    If the health check is unhealthy: returns the applicable value for the last healthy instance    If you didn't specify a health check configuration: returns all the records   For the current limit on the number of instances that you can register using the same namespace and using the same service, see AWS Cloud Map Limits in the AWS Cloud Map Developer Guide.
    */
@@ -158,7 +160,7 @@ declare class ServiceDiscovery extends Service {
   /**
    * Submits a request to change the health status of a custom health check to healthy or unhealthy. You can use UpdateInstanceCustomHealthStatus to change the status only for custom health checks, which you define using HealthCheckCustomConfig when you create a service. You can't use it to change the status for Route 53 health checks, which you define using HealthCheckConfig. For more information, see HealthCheckCustomConfig.
    */
-  updateInstanceCustomHealthStatus(params: ServiceDiscovery.Types.UpdateInstanceCustomHealthStatusRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateInstanceCustomHealthStatus(params: BoundInput<ServiceDiscovery.Types.UpdateInstanceCustomHealthStatusRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Submits a request to change the health status of a custom health check to healthy or unhealthy. You can use UpdateInstanceCustomHealthStatus to change the status only for custom health checks, which you define using HealthCheckCustomConfig when you create a service. You can't use it to change the status for Route 53 health checks, which you define using HealthCheckConfig. For more information, see HealthCheckCustomConfig.
    */
@@ -166,7 +168,7 @@ declare class ServiceDiscovery extends Service {
   /**
    * Submits a request to perform the following operations:   Add or delete DnsRecords configurations   Update the TTL setting for existing DnsRecords configurations   Add, update, or delete HealthCheckConfig for a specified service   For public and private DNS namespaces, you must specify all DnsRecords configurations (and, optionally, HealthCheckConfig) that you want to appear in the updated service. Any current configurations that don't appear in an UpdateService request are deleted. When you update the TTL setting for a service, AWS Cloud Map also updates the corresponding settings in all the records and health checks that were created by using the specified service.
    */
-  updateService(params: ServiceDiscovery.Types.UpdateServiceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.UpdateServiceResponse) => void): Request<ServiceDiscovery.Types.UpdateServiceResponse, AWSError>;
+  updateService(params: BoundInput<ServiceDiscovery.Types.UpdateServiceRequest, keyof Params>, callback?: (err: AWSError, data: ServiceDiscovery.Types.UpdateServiceResponse) => void): Request<ServiceDiscovery.Types.UpdateServiceResponse, AWSError>;
   /**
    * Submits a request to perform the following operations:   Add or delete DnsRecords configurations   Update the TTL setting for existing DnsRecords configurations   Add, update, or delete HealthCheckConfig for a specified service   For public and private DNS namespaces, you must specify all DnsRecords configurations (and, optionally, HealthCheckConfig) that you want to appear in the updated service. Any current configurations that don't appear in an UpdateService request are deleted. When you update the TTL setting for a service, AWS Cloud Map also updates the corresponding settings in all the records and health checks that were created by using the specified service.
    */
@@ -982,7 +984,8 @@ declare namespace ServiceDiscovery {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateHttpNamespaceRequest & CreatePrivateDnsNamespaceRequest & CreatePublicDnsNamespaceRequest & CreateServiceRequest & DeleteNamespaceRequest & DeleteServiceRequest & DeregisterInstanceRequest & DiscoverInstancesRequest & GetInstanceRequest & GetInstancesHealthStatusRequest & GetNamespaceRequest & GetOperationRequest & GetServiceRequest & ListInstancesRequest & ListNamespacesRequest & ListOperationsRequest & ListServicesRequest & RegisterInstanceRequest & UpdateInstanceCustomHealthStatusRequest & UpdateServiceRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the ServiceDiscovery client.
    */

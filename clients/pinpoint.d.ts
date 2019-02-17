@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class Pinpoint extends Service {
+declare class Pinpoint<Params extends Pinpoint.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: Pinpoint.Types.ClientConfiguration)
-  config: Config & Pinpoint.Types.ClientConfiguration;
+  constructor(options?: Pinpoint.Types.ClientConfiguration<Params>)
+  config: Config & Pinpoint.Types.ClientConfiguration<Params>;
   /**
    * Creates or updates an app.
    */
-  createApp(params: Pinpoint.Types.CreateAppRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateAppResponse) => void): Request<Pinpoint.Types.CreateAppResponse, AWSError>;
+  createApp(params: BoundInput<Pinpoint.Types.CreateAppRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.CreateAppResponse) => void): Request<Pinpoint.Types.CreateAppResponse, AWSError>;
   /**
    * Creates or updates an app.
    */
@@ -22,7 +24,7 @@ declare class Pinpoint extends Service {
   /**
    * Creates or updates a campaign.
    */
-  createCampaign(params: Pinpoint.Types.CreateCampaignRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateCampaignResponse) => void): Request<Pinpoint.Types.CreateCampaignResponse, AWSError>;
+  createCampaign(params: BoundInput<Pinpoint.Types.CreateCampaignRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.CreateCampaignResponse) => void): Request<Pinpoint.Types.CreateCampaignResponse, AWSError>;
   /**
    * Creates or updates a campaign.
    */
@@ -30,7 +32,7 @@ declare class Pinpoint extends Service {
   /**
    * Creates an export job.
    */
-  createExportJob(params: Pinpoint.Types.CreateExportJobRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateExportJobResponse) => void): Request<Pinpoint.Types.CreateExportJobResponse, AWSError>;
+  createExportJob(params: BoundInput<Pinpoint.Types.CreateExportJobRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.CreateExportJobResponse) => void): Request<Pinpoint.Types.CreateExportJobResponse, AWSError>;
   /**
    * Creates an export job.
    */
@@ -38,7 +40,7 @@ declare class Pinpoint extends Service {
   /**
    * Creates or updates an import job.
    */
-  createImportJob(params: Pinpoint.Types.CreateImportJobRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateImportJobResponse) => void): Request<Pinpoint.Types.CreateImportJobResponse, AWSError>;
+  createImportJob(params: BoundInput<Pinpoint.Types.CreateImportJobRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.CreateImportJobResponse) => void): Request<Pinpoint.Types.CreateImportJobResponse, AWSError>;
   /**
    * Creates or updates an import job.
    */
@@ -46,7 +48,7 @@ declare class Pinpoint extends Service {
   /**
    * Used to create or update a segment.
    */
-  createSegment(params: Pinpoint.Types.CreateSegmentRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateSegmentResponse) => void): Request<Pinpoint.Types.CreateSegmentResponse, AWSError>;
+  createSegment(params: BoundInput<Pinpoint.Types.CreateSegmentRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.CreateSegmentResponse) => void): Request<Pinpoint.Types.CreateSegmentResponse, AWSError>;
   /**
    * Used to create or update a segment.
    */
@@ -54,7 +56,7 @@ declare class Pinpoint extends Service {
   /**
    * Delete an ADM channel.
    */
-  deleteAdmChannel(params: Pinpoint.Types.DeleteAdmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteAdmChannelResponse) => void): Request<Pinpoint.Types.DeleteAdmChannelResponse, AWSError>;
+  deleteAdmChannel(params: BoundInput<Pinpoint.Types.DeleteAdmChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.DeleteAdmChannelResponse) => void): Request<Pinpoint.Types.DeleteAdmChannelResponse, AWSError>;
   /**
    * Delete an ADM channel.
    */
@@ -62,7 +64,7 @@ declare class Pinpoint extends Service {
   /**
    * Deletes the APNs channel for an app.
    */
-  deleteApnsChannel(params: Pinpoint.Types.DeleteApnsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsChannelResponse, AWSError>;
+  deleteApnsChannel(params: BoundInput<Pinpoint.Types.DeleteApnsChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsChannelResponse, AWSError>;
   /**
    * Deletes the APNs channel for an app.
    */
@@ -70,7 +72,7 @@ declare class Pinpoint extends Service {
   /**
    * Delete an APNS sandbox channel.
    */
-  deleteApnsSandboxChannel(params: Pinpoint.Types.DeleteApnsSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsSandboxChannelResponse, AWSError>;
+  deleteApnsSandboxChannel(params: BoundInput<Pinpoint.Types.DeleteApnsSandboxChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsSandboxChannelResponse, AWSError>;
   /**
    * Delete an APNS sandbox channel.
    */
@@ -78,7 +80,7 @@ declare class Pinpoint extends Service {
   /**
    * Delete an APNS VoIP channel
    */
-  deleteApnsVoipChannel(params: Pinpoint.Types.DeleteApnsVoipChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsVoipChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsVoipChannelResponse, AWSError>;
+  deleteApnsVoipChannel(params: BoundInput<Pinpoint.Types.DeleteApnsVoipChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsVoipChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsVoipChannelResponse, AWSError>;
   /**
    * Delete an APNS VoIP channel
    */
@@ -86,7 +88,7 @@ declare class Pinpoint extends Service {
   /**
    * Delete an APNS VoIP sandbox channel
    */
-  deleteApnsVoipSandboxChannel(params: Pinpoint.Types.DeleteApnsVoipSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsVoipSandboxChannelResponse, AWSError>;
+  deleteApnsVoipSandboxChannel(params: BoundInput<Pinpoint.Types.DeleteApnsVoipSandboxChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.DeleteApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.DeleteApnsVoipSandboxChannelResponse, AWSError>;
   /**
    * Delete an APNS VoIP sandbox channel
    */
@@ -94,7 +96,7 @@ declare class Pinpoint extends Service {
   /**
    * Deletes an app.
    */
-  deleteApp(params: Pinpoint.Types.DeleteAppRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteAppResponse) => void): Request<Pinpoint.Types.DeleteAppResponse, AWSError>;
+  deleteApp(params: BoundInput<Pinpoint.Types.DeleteAppRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.DeleteAppResponse) => void): Request<Pinpoint.Types.DeleteAppResponse, AWSError>;
   /**
    * Deletes an app.
    */
@@ -102,7 +104,7 @@ declare class Pinpoint extends Service {
   /**
    * Delete a BAIDU GCM channel
    */
-  deleteBaiduChannel(params: Pinpoint.Types.DeleteBaiduChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteBaiduChannelResponse) => void): Request<Pinpoint.Types.DeleteBaiduChannelResponse, AWSError>;
+  deleteBaiduChannel(params: BoundInput<Pinpoint.Types.DeleteBaiduChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.DeleteBaiduChannelResponse) => void): Request<Pinpoint.Types.DeleteBaiduChannelResponse, AWSError>;
   /**
    * Delete a BAIDU GCM channel
    */
@@ -110,7 +112,7 @@ declare class Pinpoint extends Service {
   /**
    * Deletes a campaign.
    */
-  deleteCampaign(params: Pinpoint.Types.DeleteCampaignRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteCampaignResponse) => void): Request<Pinpoint.Types.DeleteCampaignResponse, AWSError>;
+  deleteCampaign(params: BoundInput<Pinpoint.Types.DeleteCampaignRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.DeleteCampaignResponse) => void): Request<Pinpoint.Types.DeleteCampaignResponse, AWSError>;
   /**
    * Deletes a campaign.
    */
@@ -118,7 +120,7 @@ declare class Pinpoint extends Service {
   /**
    * Delete an email channel.
    */
-  deleteEmailChannel(params: Pinpoint.Types.DeleteEmailChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteEmailChannelResponse) => void): Request<Pinpoint.Types.DeleteEmailChannelResponse, AWSError>;
+  deleteEmailChannel(params: BoundInput<Pinpoint.Types.DeleteEmailChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.DeleteEmailChannelResponse) => void): Request<Pinpoint.Types.DeleteEmailChannelResponse, AWSError>;
   /**
    * Delete an email channel.
    */
@@ -126,7 +128,7 @@ declare class Pinpoint extends Service {
   /**
    * Deletes an endpoint.
    */
-  deleteEndpoint(params: Pinpoint.Types.DeleteEndpointRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteEndpointResponse) => void): Request<Pinpoint.Types.DeleteEndpointResponse, AWSError>;
+  deleteEndpoint(params: BoundInput<Pinpoint.Types.DeleteEndpointRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.DeleteEndpointResponse) => void): Request<Pinpoint.Types.DeleteEndpointResponse, AWSError>;
   /**
    * Deletes an endpoint.
    */
@@ -134,7 +136,7 @@ declare class Pinpoint extends Service {
   /**
    * Deletes the event stream for an app.
    */
-  deleteEventStream(params: Pinpoint.Types.DeleteEventStreamRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteEventStreamResponse) => void): Request<Pinpoint.Types.DeleteEventStreamResponse, AWSError>;
+  deleteEventStream(params: BoundInput<Pinpoint.Types.DeleteEventStreamRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.DeleteEventStreamResponse) => void): Request<Pinpoint.Types.DeleteEventStreamResponse, AWSError>;
   /**
    * Deletes the event stream for an app.
    */
@@ -142,7 +144,7 @@ declare class Pinpoint extends Service {
   /**
    * Deletes the GCM channel for an app.
    */
-  deleteGcmChannel(params: Pinpoint.Types.DeleteGcmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteGcmChannelResponse) => void): Request<Pinpoint.Types.DeleteGcmChannelResponse, AWSError>;
+  deleteGcmChannel(params: BoundInput<Pinpoint.Types.DeleteGcmChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.DeleteGcmChannelResponse) => void): Request<Pinpoint.Types.DeleteGcmChannelResponse, AWSError>;
   /**
    * Deletes the GCM channel for an app.
    */
@@ -150,7 +152,7 @@ declare class Pinpoint extends Service {
   /**
    * Deletes a segment.
    */
-  deleteSegment(params: Pinpoint.Types.DeleteSegmentRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteSegmentResponse) => void): Request<Pinpoint.Types.DeleteSegmentResponse, AWSError>;
+  deleteSegment(params: BoundInput<Pinpoint.Types.DeleteSegmentRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.DeleteSegmentResponse) => void): Request<Pinpoint.Types.DeleteSegmentResponse, AWSError>;
   /**
    * Deletes a segment.
    */
@@ -158,7 +160,7 @@ declare class Pinpoint extends Service {
   /**
    * Delete an SMS channel.
    */
-  deleteSmsChannel(params: Pinpoint.Types.DeleteSmsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteSmsChannelResponse) => void): Request<Pinpoint.Types.DeleteSmsChannelResponse, AWSError>;
+  deleteSmsChannel(params: BoundInput<Pinpoint.Types.DeleteSmsChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.DeleteSmsChannelResponse) => void): Request<Pinpoint.Types.DeleteSmsChannelResponse, AWSError>;
   /**
    * Delete an SMS channel.
    */
@@ -166,7 +168,7 @@ declare class Pinpoint extends Service {
   /**
    * Deletes endpoints that are associated with a User ID.
    */
-  deleteUserEndpoints(params: Pinpoint.Types.DeleteUserEndpointsRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteUserEndpointsResponse) => void): Request<Pinpoint.Types.DeleteUserEndpointsResponse, AWSError>;
+  deleteUserEndpoints(params: BoundInput<Pinpoint.Types.DeleteUserEndpointsRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.DeleteUserEndpointsResponse) => void): Request<Pinpoint.Types.DeleteUserEndpointsResponse, AWSError>;
   /**
    * Deletes endpoints that are associated with a User ID.
    */
@@ -174,7 +176,7 @@ declare class Pinpoint extends Service {
   /**
    * Delete an Voice channel
    */
-  deleteVoiceChannel(params: Pinpoint.Types.DeleteVoiceChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteVoiceChannelResponse) => void): Request<Pinpoint.Types.DeleteVoiceChannelResponse, AWSError>;
+  deleteVoiceChannel(params: BoundInput<Pinpoint.Types.DeleteVoiceChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.DeleteVoiceChannelResponse) => void): Request<Pinpoint.Types.DeleteVoiceChannelResponse, AWSError>;
   /**
    * Delete an Voice channel
    */
@@ -182,7 +184,7 @@ declare class Pinpoint extends Service {
   /**
    * Get an ADM channel.
    */
-  getAdmChannel(params: Pinpoint.Types.GetAdmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetAdmChannelResponse) => void): Request<Pinpoint.Types.GetAdmChannelResponse, AWSError>;
+  getAdmChannel(params: BoundInput<Pinpoint.Types.GetAdmChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetAdmChannelResponse) => void): Request<Pinpoint.Types.GetAdmChannelResponse, AWSError>;
   /**
    * Get an ADM channel.
    */
@@ -190,7 +192,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns information about the APNs channel for an app.
    */
-  getApnsChannel(params: Pinpoint.Types.GetApnsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetApnsChannelResponse) => void): Request<Pinpoint.Types.GetApnsChannelResponse, AWSError>;
+  getApnsChannel(params: BoundInput<Pinpoint.Types.GetApnsChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetApnsChannelResponse) => void): Request<Pinpoint.Types.GetApnsChannelResponse, AWSError>;
   /**
    * Returns information about the APNs channel for an app.
    */
@@ -198,7 +200,7 @@ declare class Pinpoint extends Service {
   /**
    * Get an APNS sandbox channel.
    */
-  getApnsSandboxChannel(params: Pinpoint.Types.GetApnsSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.GetApnsSandboxChannelResponse, AWSError>;
+  getApnsSandboxChannel(params: BoundInput<Pinpoint.Types.GetApnsSandboxChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.GetApnsSandboxChannelResponse, AWSError>;
   /**
    * Get an APNS sandbox channel.
    */
@@ -206,7 +208,7 @@ declare class Pinpoint extends Service {
   /**
    * Get an APNS VoIP channel
    */
-  getApnsVoipChannel(params: Pinpoint.Types.GetApnsVoipChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetApnsVoipChannelResponse) => void): Request<Pinpoint.Types.GetApnsVoipChannelResponse, AWSError>;
+  getApnsVoipChannel(params: BoundInput<Pinpoint.Types.GetApnsVoipChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetApnsVoipChannelResponse) => void): Request<Pinpoint.Types.GetApnsVoipChannelResponse, AWSError>;
   /**
    * Get an APNS VoIP channel
    */
@@ -214,7 +216,7 @@ declare class Pinpoint extends Service {
   /**
    * Get an APNS VoIPSandbox channel
    */
-  getApnsVoipSandboxChannel(params: Pinpoint.Types.GetApnsVoipSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.GetApnsVoipSandboxChannelResponse, AWSError>;
+  getApnsVoipSandboxChannel(params: BoundInput<Pinpoint.Types.GetApnsVoipSandboxChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.GetApnsVoipSandboxChannelResponse, AWSError>;
   /**
    * Get an APNS VoIPSandbox channel
    */
@@ -222,7 +224,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns information about an app.
    */
-  getApp(params: Pinpoint.Types.GetAppRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetAppResponse) => void): Request<Pinpoint.Types.GetAppResponse, AWSError>;
+  getApp(params: BoundInput<Pinpoint.Types.GetAppRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetAppResponse) => void): Request<Pinpoint.Types.GetAppResponse, AWSError>;
   /**
    * Returns information about an app.
    */
@@ -230,7 +232,7 @@ declare class Pinpoint extends Service {
   /**
    * Used to request the settings for an app.
    */
-  getApplicationSettings(params: Pinpoint.Types.GetApplicationSettingsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetApplicationSettingsResponse) => void): Request<Pinpoint.Types.GetApplicationSettingsResponse, AWSError>;
+  getApplicationSettings(params: BoundInput<Pinpoint.Types.GetApplicationSettingsRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetApplicationSettingsResponse) => void): Request<Pinpoint.Types.GetApplicationSettingsResponse, AWSError>;
   /**
    * Used to request the settings for an app.
    */
@@ -238,7 +240,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns information about your apps.
    */
-  getApps(params: Pinpoint.Types.GetAppsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetAppsResponse) => void): Request<Pinpoint.Types.GetAppsResponse, AWSError>;
+  getApps(params: BoundInput<Pinpoint.Types.GetAppsRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetAppsResponse) => void): Request<Pinpoint.Types.GetAppsResponse, AWSError>;
   /**
    * Returns information about your apps.
    */
@@ -246,7 +248,7 @@ declare class Pinpoint extends Service {
   /**
    * Get a BAIDU GCM channel
    */
-  getBaiduChannel(params: Pinpoint.Types.GetBaiduChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetBaiduChannelResponse) => void): Request<Pinpoint.Types.GetBaiduChannelResponse, AWSError>;
+  getBaiduChannel(params: BoundInput<Pinpoint.Types.GetBaiduChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetBaiduChannelResponse) => void): Request<Pinpoint.Types.GetBaiduChannelResponse, AWSError>;
   /**
    * Get a BAIDU GCM channel
    */
@@ -254,7 +256,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns information about a campaign.
    */
-  getCampaign(params: Pinpoint.Types.GetCampaignRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignResponse) => void): Request<Pinpoint.Types.GetCampaignResponse, AWSError>;
+  getCampaign(params: BoundInput<Pinpoint.Types.GetCampaignRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignResponse) => void): Request<Pinpoint.Types.GetCampaignResponse, AWSError>;
   /**
    * Returns information about a campaign.
    */
@@ -262,7 +264,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns information about the activity performed by a campaign.
    */
-  getCampaignActivities(params: Pinpoint.Types.GetCampaignActivitiesRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignActivitiesResponse) => void): Request<Pinpoint.Types.GetCampaignActivitiesResponse, AWSError>;
+  getCampaignActivities(params: BoundInput<Pinpoint.Types.GetCampaignActivitiesRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignActivitiesResponse) => void): Request<Pinpoint.Types.GetCampaignActivitiesResponse, AWSError>;
   /**
    * Returns information about the activity performed by a campaign.
    */
@@ -270,7 +272,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns information about a specific version of a campaign.
    */
-  getCampaignVersion(params: Pinpoint.Types.GetCampaignVersionRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignVersionResponse) => void): Request<Pinpoint.Types.GetCampaignVersionResponse, AWSError>;
+  getCampaignVersion(params: BoundInput<Pinpoint.Types.GetCampaignVersionRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignVersionResponse) => void): Request<Pinpoint.Types.GetCampaignVersionResponse, AWSError>;
   /**
    * Returns information about a specific version of a campaign.
    */
@@ -278,7 +280,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns information about your campaign versions.
    */
-  getCampaignVersions(params: Pinpoint.Types.GetCampaignVersionsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignVersionsResponse) => void): Request<Pinpoint.Types.GetCampaignVersionsResponse, AWSError>;
+  getCampaignVersions(params: BoundInput<Pinpoint.Types.GetCampaignVersionsRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignVersionsResponse) => void): Request<Pinpoint.Types.GetCampaignVersionsResponse, AWSError>;
   /**
    * Returns information about your campaign versions.
    */
@@ -286,7 +288,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns information about your campaigns.
    */
-  getCampaigns(params: Pinpoint.Types.GetCampaignsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignsResponse) => void): Request<Pinpoint.Types.GetCampaignsResponse, AWSError>;
+  getCampaigns(params: BoundInput<Pinpoint.Types.GetCampaignsRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetCampaignsResponse) => void): Request<Pinpoint.Types.GetCampaignsResponse, AWSError>;
   /**
    * Returns information about your campaigns.
    */
@@ -294,7 +296,7 @@ declare class Pinpoint extends Service {
   /**
    * Get all channels.
    */
-  getChannels(params: Pinpoint.Types.GetChannelsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetChannelsResponse) => void): Request<Pinpoint.Types.GetChannelsResponse, AWSError>;
+  getChannels(params: BoundInput<Pinpoint.Types.GetChannelsRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetChannelsResponse) => void): Request<Pinpoint.Types.GetChannelsResponse, AWSError>;
   /**
    * Get all channels.
    */
@@ -302,7 +304,7 @@ declare class Pinpoint extends Service {
   /**
    * Get an email channel.
    */
-  getEmailChannel(params: Pinpoint.Types.GetEmailChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetEmailChannelResponse) => void): Request<Pinpoint.Types.GetEmailChannelResponse, AWSError>;
+  getEmailChannel(params: BoundInput<Pinpoint.Types.GetEmailChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetEmailChannelResponse) => void): Request<Pinpoint.Types.GetEmailChannelResponse, AWSError>;
   /**
    * Get an email channel.
    */
@@ -310,7 +312,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns information about an endpoint.
    */
-  getEndpoint(params: Pinpoint.Types.GetEndpointRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetEndpointResponse) => void): Request<Pinpoint.Types.GetEndpointResponse, AWSError>;
+  getEndpoint(params: BoundInput<Pinpoint.Types.GetEndpointRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetEndpointResponse) => void): Request<Pinpoint.Types.GetEndpointResponse, AWSError>;
   /**
    * Returns information about an endpoint.
    */
@@ -318,7 +320,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns the event stream for an app.
    */
-  getEventStream(params: Pinpoint.Types.GetEventStreamRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetEventStreamResponse) => void): Request<Pinpoint.Types.GetEventStreamResponse, AWSError>;
+  getEventStream(params: BoundInput<Pinpoint.Types.GetEventStreamRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetEventStreamResponse) => void): Request<Pinpoint.Types.GetEventStreamResponse, AWSError>;
   /**
    * Returns the event stream for an app.
    */
@@ -326,7 +328,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns information about an export job.
    */
-  getExportJob(params: Pinpoint.Types.GetExportJobRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetExportJobResponse) => void): Request<Pinpoint.Types.GetExportJobResponse, AWSError>;
+  getExportJob(params: BoundInput<Pinpoint.Types.GetExportJobRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetExportJobResponse) => void): Request<Pinpoint.Types.GetExportJobResponse, AWSError>;
   /**
    * Returns information about an export job.
    */
@@ -334,7 +336,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns information about your export jobs.
    */
-  getExportJobs(params: Pinpoint.Types.GetExportJobsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetExportJobsResponse) => void): Request<Pinpoint.Types.GetExportJobsResponse, AWSError>;
+  getExportJobs(params: BoundInput<Pinpoint.Types.GetExportJobsRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetExportJobsResponse) => void): Request<Pinpoint.Types.GetExportJobsResponse, AWSError>;
   /**
    * Returns information about your export jobs.
    */
@@ -342,7 +344,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns information about the GCM channel for an app.
    */
-  getGcmChannel(params: Pinpoint.Types.GetGcmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetGcmChannelResponse) => void): Request<Pinpoint.Types.GetGcmChannelResponse, AWSError>;
+  getGcmChannel(params: BoundInput<Pinpoint.Types.GetGcmChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetGcmChannelResponse) => void): Request<Pinpoint.Types.GetGcmChannelResponse, AWSError>;
   /**
    * Returns information about the GCM channel for an app.
    */
@@ -350,7 +352,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns information about an import job.
    */
-  getImportJob(params: Pinpoint.Types.GetImportJobRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetImportJobResponse) => void): Request<Pinpoint.Types.GetImportJobResponse, AWSError>;
+  getImportJob(params: BoundInput<Pinpoint.Types.GetImportJobRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetImportJobResponse) => void): Request<Pinpoint.Types.GetImportJobResponse, AWSError>;
   /**
    * Returns information about an import job.
    */
@@ -358,7 +360,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns information about your import jobs.
    */
-  getImportJobs(params: Pinpoint.Types.GetImportJobsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetImportJobsResponse) => void): Request<Pinpoint.Types.GetImportJobsResponse, AWSError>;
+  getImportJobs(params: BoundInput<Pinpoint.Types.GetImportJobsRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetImportJobsResponse) => void): Request<Pinpoint.Types.GetImportJobsResponse, AWSError>;
   /**
    * Returns information about your import jobs.
    */
@@ -366,7 +368,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns information about a segment.
    */
-  getSegment(params: Pinpoint.Types.GetSegmentRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentResponse) => void): Request<Pinpoint.Types.GetSegmentResponse, AWSError>;
+  getSegment(params: BoundInput<Pinpoint.Types.GetSegmentRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentResponse) => void): Request<Pinpoint.Types.GetSegmentResponse, AWSError>;
   /**
    * Returns information about a segment.
    */
@@ -374,7 +376,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns a list of export jobs for a specific segment.
    */
-  getSegmentExportJobs(params: Pinpoint.Types.GetSegmentExportJobsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentExportJobsResponse) => void): Request<Pinpoint.Types.GetSegmentExportJobsResponse, AWSError>;
+  getSegmentExportJobs(params: BoundInput<Pinpoint.Types.GetSegmentExportJobsRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentExportJobsResponse) => void): Request<Pinpoint.Types.GetSegmentExportJobsResponse, AWSError>;
   /**
    * Returns a list of export jobs for a specific segment.
    */
@@ -382,7 +384,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns a list of import jobs for a specific segment.
    */
-  getSegmentImportJobs(params: Pinpoint.Types.GetSegmentImportJobsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentImportJobsResponse) => void): Request<Pinpoint.Types.GetSegmentImportJobsResponse, AWSError>;
+  getSegmentImportJobs(params: BoundInput<Pinpoint.Types.GetSegmentImportJobsRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentImportJobsResponse) => void): Request<Pinpoint.Types.GetSegmentImportJobsResponse, AWSError>;
   /**
    * Returns a list of import jobs for a specific segment.
    */
@@ -390,7 +392,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns information about a segment version.
    */
-  getSegmentVersion(params: Pinpoint.Types.GetSegmentVersionRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentVersionResponse) => void): Request<Pinpoint.Types.GetSegmentVersionResponse, AWSError>;
+  getSegmentVersion(params: BoundInput<Pinpoint.Types.GetSegmentVersionRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentVersionResponse) => void): Request<Pinpoint.Types.GetSegmentVersionResponse, AWSError>;
   /**
    * Returns information about a segment version.
    */
@@ -398,7 +400,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns information about your segment versions.
    */
-  getSegmentVersions(params: Pinpoint.Types.GetSegmentVersionsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentVersionsResponse) => void): Request<Pinpoint.Types.GetSegmentVersionsResponse, AWSError>;
+  getSegmentVersions(params: BoundInput<Pinpoint.Types.GetSegmentVersionsRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentVersionsResponse) => void): Request<Pinpoint.Types.GetSegmentVersionsResponse, AWSError>;
   /**
    * Returns information about your segment versions.
    */
@@ -406,7 +408,7 @@ declare class Pinpoint extends Service {
   /**
    * Used to get information about your segments.
    */
-  getSegments(params: Pinpoint.Types.GetSegmentsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentsResponse) => void): Request<Pinpoint.Types.GetSegmentsResponse, AWSError>;
+  getSegments(params: BoundInput<Pinpoint.Types.GetSegmentsRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetSegmentsResponse) => void): Request<Pinpoint.Types.GetSegmentsResponse, AWSError>;
   /**
    * Used to get information about your segments.
    */
@@ -414,7 +416,7 @@ declare class Pinpoint extends Service {
   /**
    * Get an SMS channel.
    */
-  getSmsChannel(params: Pinpoint.Types.GetSmsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetSmsChannelResponse) => void): Request<Pinpoint.Types.GetSmsChannelResponse, AWSError>;
+  getSmsChannel(params: BoundInput<Pinpoint.Types.GetSmsChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetSmsChannelResponse) => void): Request<Pinpoint.Types.GetSmsChannelResponse, AWSError>;
   /**
    * Get an SMS channel.
    */
@@ -422,7 +424,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns information about the endpoints that are associated with a User ID.
    */
-  getUserEndpoints(params: Pinpoint.Types.GetUserEndpointsRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetUserEndpointsResponse) => void): Request<Pinpoint.Types.GetUserEndpointsResponse, AWSError>;
+  getUserEndpoints(params: BoundInput<Pinpoint.Types.GetUserEndpointsRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetUserEndpointsResponse) => void): Request<Pinpoint.Types.GetUserEndpointsResponse, AWSError>;
   /**
    * Returns information about the endpoints that are associated with a User ID.
    */
@@ -430,7 +432,7 @@ declare class Pinpoint extends Service {
   /**
    * Get a Voice Channel
    */
-  getVoiceChannel(params: Pinpoint.Types.GetVoiceChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetVoiceChannelResponse) => void): Request<Pinpoint.Types.GetVoiceChannelResponse, AWSError>;
+  getVoiceChannel(params: BoundInput<Pinpoint.Types.GetVoiceChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.GetVoiceChannelResponse) => void): Request<Pinpoint.Types.GetVoiceChannelResponse, AWSError>;
   /**
    * Get a Voice Channel
    */
@@ -438,7 +440,7 @@ declare class Pinpoint extends Service {
   /**
    * Returns information about the specified phone number.
    */
-  phoneNumberValidate(params: Pinpoint.Types.PhoneNumberValidateRequest, callback?: (err: AWSError, data: Pinpoint.Types.PhoneNumberValidateResponse) => void): Request<Pinpoint.Types.PhoneNumberValidateResponse, AWSError>;
+  phoneNumberValidate(params: BoundInput<Pinpoint.Types.PhoneNumberValidateRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.PhoneNumberValidateResponse) => void): Request<Pinpoint.Types.PhoneNumberValidateResponse, AWSError>;
   /**
    * Returns information about the specified phone number.
    */
@@ -446,7 +448,7 @@ declare class Pinpoint extends Service {
   /**
    * Use to create or update the event stream for an app.
    */
-  putEventStream(params: Pinpoint.Types.PutEventStreamRequest, callback?: (err: AWSError, data: Pinpoint.Types.PutEventStreamResponse) => void): Request<Pinpoint.Types.PutEventStreamResponse, AWSError>;
+  putEventStream(params: BoundInput<Pinpoint.Types.PutEventStreamRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.PutEventStreamResponse) => void): Request<Pinpoint.Types.PutEventStreamResponse, AWSError>;
   /**
    * Use to create or update the event stream for an app.
    */
@@ -454,7 +456,7 @@ declare class Pinpoint extends Service {
   /**
    * Use to record events for endpoints. This method creates events and creates or updates the endpoints that those events are associated with.
    */
-  putEvents(params: Pinpoint.Types.PutEventsRequest, callback?: (err: AWSError, data: Pinpoint.Types.PutEventsResponse) => void): Request<Pinpoint.Types.PutEventsResponse, AWSError>;
+  putEvents(params: BoundInput<Pinpoint.Types.PutEventsRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.PutEventsResponse) => void): Request<Pinpoint.Types.PutEventsResponse, AWSError>;
   /**
    * Use to record events for endpoints. This method creates events and creates or updates the endpoints that those events are associated with.
    */
@@ -462,7 +464,7 @@ declare class Pinpoint extends Service {
   /**
    * Used to remove the attributes for an app
    */
-  removeAttributes(params: Pinpoint.Types.RemoveAttributesRequest, callback?: (err: AWSError, data: Pinpoint.Types.RemoveAttributesResponse) => void): Request<Pinpoint.Types.RemoveAttributesResponse, AWSError>;
+  removeAttributes(params: BoundInput<Pinpoint.Types.RemoveAttributesRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.RemoveAttributesResponse) => void): Request<Pinpoint.Types.RemoveAttributesResponse, AWSError>;
   /**
    * Used to remove the attributes for an app
    */
@@ -470,7 +472,7 @@ declare class Pinpoint extends Service {
   /**
    * Used to send a direct message.
    */
-  sendMessages(params: Pinpoint.Types.SendMessagesRequest, callback?: (err: AWSError, data: Pinpoint.Types.SendMessagesResponse) => void): Request<Pinpoint.Types.SendMessagesResponse, AWSError>;
+  sendMessages(params: BoundInput<Pinpoint.Types.SendMessagesRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.SendMessagesResponse) => void): Request<Pinpoint.Types.SendMessagesResponse, AWSError>;
   /**
    * Used to send a direct message.
    */
@@ -478,7 +480,7 @@ declare class Pinpoint extends Service {
   /**
    * Used to send a message to a list of users.
    */
-  sendUsersMessages(params: Pinpoint.Types.SendUsersMessagesRequest, callback?: (err: AWSError, data: Pinpoint.Types.SendUsersMessagesResponse) => void): Request<Pinpoint.Types.SendUsersMessagesResponse, AWSError>;
+  sendUsersMessages(params: BoundInput<Pinpoint.Types.SendUsersMessagesRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.SendUsersMessagesResponse) => void): Request<Pinpoint.Types.SendUsersMessagesResponse, AWSError>;
   /**
    * Used to send a message to a list of users.
    */
@@ -486,7 +488,7 @@ declare class Pinpoint extends Service {
   /**
    * Update an ADM channel.
    */
-  updateAdmChannel(params: Pinpoint.Types.UpdateAdmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateAdmChannelResponse) => void): Request<Pinpoint.Types.UpdateAdmChannelResponse, AWSError>;
+  updateAdmChannel(params: BoundInput<Pinpoint.Types.UpdateAdmChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.UpdateAdmChannelResponse) => void): Request<Pinpoint.Types.UpdateAdmChannelResponse, AWSError>;
   /**
    * Update an ADM channel.
    */
@@ -494,7 +496,7 @@ declare class Pinpoint extends Service {
   /**
    * Use to update the APNs channel for an app.
    */
-  updateApnsChannel(params: Pinpoint.Types.UpdateApnsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsChannelResponse, AWSError>;
+  updateApnsChannel(params: BoundInput<Pinpoint.Types.UpdateApnsChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsChannelResponse, AWSError>;
   /**
    * Use to update the APNs channel for an app.
    */
@@ -502,7 +504,7 @@ declare class Pinpoint extends Service {
   /**
    * Update an APNS sandbox channel.
    */
-  updateApnsSandboxChannel(params: Pinpoint.Types.UpdateApnsSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsSandboxChannelResponse, AWSError>;
+  updateApnsSandboxChannel(params: BoundInput<Pinpoint.Types.UpdateApnsSandboxChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsSandboxChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsSandboxChannelResponse, AWSError>;
   /**
    * Update an APNS sandbox channel.
    */
@@ -510,7 +512,7 @@ declare class Pinpoint extends Service {
   /**
    * Update an APNS VoIP channel
    */
-  updateApnsVoipChannel(params: Pinpoint.Types.UpdateApnsVoipChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsVoipChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsVoipChannelResponse, AWSError>;
+  updateApnsVoipChannel(params: BoundInput<Pinpoint.Types.UpdateApnsVoipChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsVoipChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsVoipChannelResponse, AWSError>;
   /**
    * Update an APNS VoIP channel
    */
@@ -518,7 +520,7 @@ declare class Pinpoint extends Service {
   /**
    * Update an APNS VoIP sandbox channel
    */
-  updateApnsVoipSandboxChannel(params: Pinpoint.Types.UpdateApnsVoipSandboxChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsVoipSandboxChannelResponse, AWSError>;
+  updateApnsVoipSandboxChannel(params: BoundInput<Pinpoint.Types.UpdateApnsVoipSandboxChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApnsVoipSandboxChannelResponse) => void): Request<Pinpoint.Types.UpdateApnsVoipSandboxChannelResponse, AWSError>;
   /**
    * Update an APNS VoIP sandbox channel
    */
@@ -526,7 +528,7 @@ declare class Pinpoint extends Service {
   /**
    * Used to update the settings for an app.
    */
-  updateApplicationSettings(params: Pinpoint.Types.UpdateApplicationSettingsRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApplicationSettingsResponse) => void): Request<Pinpoint.Types.UpdateApplicationSettingsResponse, AWSError>;
+  updateApplicationSettings(params: BoundInput<Pinpoint.Types.UpdateApplicationSettingsRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.UpdateApplicationSettingsResponse) => void): Request<Pinpoint.Types.UpdateApplicationSettingsResponse, AWSError>;
   /**
    * Used to update the settings for an app.
    */
@@ -534,7 +536,7 @@ declare class Pinpoint extends Service {
   /**
    * Update a BAIDU GCM channel
    */
-  updateBaiduChannel(params: Pinpoint.Types.UpdateBaiduChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateBaiduChannelResponse) => void): Request<Pinpoint.Types.UpdateBaiduChannelResponse, AWSError>;
+  updateBaiduChannel(params: BoundInput<Pinpoint.Types.UpdateBaiduChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.UpdateBaiduChannelResponse) => void): Request<Pinpoint.Types.UpdateBaiduChannelResponse, AWSError>;
   /**
    * Update a BAIDU GCM channel
    */
@@ -542,7 +544,7 @@ declare class Pinpoint extends Service {
   /**
    * Use to update a campaign.
    */
-  updateCampaign(params: Pinpoint.Types.UpdateCampaignRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateCampaignResponse) => void): Request<Pinpoint.Types.UpdateCampaignResponse, AWSError>;
+  updateCampaign(params: BoundInput<Pinpoint.Types.UpdateCampaignRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.UpdateCampaignResponse) => void): Request<Pinpoint.Types.UpdateCampaignResponse, AWSError>;
   /**
    * Use to update a campaign.
    */
@@ -550,7 +552,7 @@ declare class Pinpoint extends Service {
   /**
    * Update an email channel.
    */
-  updateEmailChannel(params: Pinpoint.Types.UpdateEmailChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateEmailChannelResponse) => void): Request<Pinpoint.Types.UpdateEmailChannelResponse, AWSError>;
+  updateEmailChannel(params: BoundInput<Pinpoint.Types.UpdateEmailChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.UpdateEmailChannelResponse) => void): Request<Pinpoint.Types.UpdateEmailChannelResponse, AWSError>;
   /**
    * Update an email channel.
    */
@@ -558,7 +560,7 @@ declare class Pinpoint extends Service {
   /**
    * Creates or updates an endpoint.
    */
-  updateEndpoint(params: Pinpoint.Types.UpdateEndpointRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateEndpointResponse) => void): Request<Pinpoint.Types.UpdateEndpointResponse, AWSError>;
+  updateEndpoint(params: BoundInput<Pinpoint.Types.UpdateEndpointRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.UpdateEndpointResponse) => void): Request<Pinpoint.Types.UpdateEndpointResponse, AWSError>;
   /**
    * Creates or updates an endpoint.
    */
@@ -566,7 +568,7 @@ declare class Pinpoint extends Service {
   /**
    * Use to update a batch of endpoints.
    */
-  updateEndpointsBatch(params: Pinpoint.Types.UpdateEndpointsBatchRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateEndpointsBatchResponse) => void): Request<Pinpoint.Types.UpdateEndpointsBatchResponse, AWSError>;
+  updateEndpointsBatch(params: BoundInput<Pinpoint.Types.UpdateEndpointsBatchRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.UpdateEndpointsBatchResponse) => void): Request<Pinpoint.Types.UpdateEndpointsBatchResponse, AWSError>;
   /**
    * Use to update a batch of endpoints.
    */
@@ -574,7 +576,7 @@ declare class Pinpoint extends Service {
   /**
    * Use to update the GCM channel for an app.
    */
-  updateGcmChannel(params: Pinpoint.Types.UpdateGcmChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateGcmChannelResponse) => void): Request<Pinpoint.Types.UpdateGcmChannelResponse, AWSError>;
+  updateGcmChannel(params: BoundInput<Pinpoint.Types.UpdateGcmChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.UpdateGcmChannelResponse) => void): Request<Pinpoint.Types.UpdateGcmChannelResponse, AWSError>;
   /**
    * Use to update the GCM channel for an app.
    */
@@ -582,7 +584,7 @@ declare class Pinpoint extends Service {
   /**
    * Used to update a segment.
    */
-  updateSegment(params: Pinpoint.Types.UpdateSegmentRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateSegmentResponse) => void): Request<Pinpoint.Types.UpdateSegmentResponse, AWSError>;
+  updateSegment(params: BoundInput<Pinpoint.Types.UpdateSegmentRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.UpdateSegmentResponse) => void): Request<Pinpoint.Types.UpdateSegmentResponse, AWSError>;
   /**
    * Used to update a segment.
    */
@@ -590,7 +592,7 @@ declare class Pinpoint extends Service {
   /**
    * Update an SMS channel.
    */
-  updateSmsChannel(params: Pinpoint.Types.UpdateSmsChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateSmsChannelResponse) => void): Request<Pinpoint.Types.UpdateSmsChannelResponse, AWSError>;
+  updateSmsChannel(params: BoundInput<Pinpoint.Types.UpdateSmsChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.UpdateSmsChannelResponse) => void): Request<Pinpoint.Types.UpdateSmsChannelResponse, AWSError>;
   /**
    * Update an SMS channel.
    */
@@ -598,7 +600,7 @@ declare class Pinpoint extends Service {
   /**
    * Update an Voice channel
    */
-  updateVoiceChannel(params: Pinpoint.Types.UpdateVoiceChannelRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateVoiceChannelResponse) => void): Request<Pinpoint.Types.UpdateVoiceChannelResponse, AWSError>;
+  updateVoiceChannel(params: BoundInput<Pinpoint.Types.UpdateVoiceChannelRequest, keyof Params>, callback?: (err: AWSError, data: Pinpoint.Types.UpdateVoiceChannelResponse) => void): Request<Pinpoint.Types.UpdateVoiceChannelResponse, AWSError>;
   /**
    * Update an Voice channel
    */
@@ -4694,7 +4696,8 @@ Individual campaigns within the app can have their own quiet time settings, whic
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateAppRequest & CreateCampaignRequest & CreateExportJobRequest & CreateImportJobRequest & CreateSegmentRequest & DeleteAdmChannelRequest & DeleteApnsChannelRequest & DeleteApnsSandboxChannelRequest & DeleteApnsVoipChannelRequest & DeleteApnsVoipSandboxChannelRequest & DeleteAppRequest & DeleteBaiduChannelRequest & DeleteCampaignRequest & DeleteEmailChannelRequest & DeleteEndpointRequest & DeleteEventStreamRequest & DeleteGcmChannelRequest & DeleteSegmentRequest & DeleteSmsChannelRequest & DeleteUserEndpointsRequest & DeleteVoiceChannelRequest & GetAdmChannelRequest & GetApnsChannelRequest & GetApnsSandboxChannelRequest & GetApnsVoipChannelRequest & GetApnsVoipSandboxChannelRequest & GetAppRequest & GetApplicationSettingsRequest & GetAppsRequest & GetBaiduChannelRequest & GetCampaignRequest & GetCampaignActivitiesRequest & GetCampaignVersionRequest & GetCampaignVersionsRequest & GetCampaignsRequest & GetChannelsRequest & GetEmailChannelRequest & GetEndpointRequest & GetEventStreamRequest & GetExportJobRequest & GetExportJobsRequest & GetGcmChannelRequest & GetImportJobRequest & GetImportJobsRequest & GetSegmentRequest & GetSegmentExportJobsRequest & GetSegmentImportJobsRequest & GetSegmentVersionRequest & GetSegmentVersionsRequest & GetSegmentsRequest & GetSmsChannelRequest & GetUserEndpointsRequest & GetVoiceChannelRequest & PhoneNumberValidateRequest & PutEventStreamRequest & PutEventsRequest & RemoveAttributesRequest & SendMessagesRequest & SendUsersMessagesRequest & UpdateAdmChannelRequest & UpdateApnsChannelRequest & UpdateApnsSandboxChannelRequest & UpdateApnsVoipChannelRequest & UpdateApnsVoipSandboxChannelRequest & UpdateApplicationSettingsRequest & UpdateBaiduChannelRequest & UpdateCampaignRequest & UpdateEmailChannelRequest & UpdateEndpointRequest & UpdateEndpointsBatchRequest & UpdateGcmChannelRequest & UpdateSegmentRequest & UpdateSmsChannelRequest & UpdateVoiceChannelRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the Pinpoint client.
    */

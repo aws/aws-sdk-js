@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class RAM extends Service {
+declare class RAM<Params extends RAM.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: RAM.Types.ClientConfiguration)
-  config: Config & RAM.Types.ClientConfiguration;
+  constructor(options?: RAM.Types.ClientConfiguration<Params>)
+  config: Config & RAM.Types.ClientConfiguration<Params>;
   /**
    * Accepts an invitation to a resource share from another AWS account.
    */
-  acceptResourceShareInvitation(params: RAM.Types.AcceptResourceShareInvitationRequest, callback?: (err: AWSError, data: RAM.Types.AcceptResourceShareInvitationResponse) => void): Request<RAM.Types.AcceptResourceShareInvitationResponse, AWSError>;
+  acceptResourceShareInvitation(params: BoundInput<RAM.Types.AcceptResourceShareInvitationRequest, keyof Params>, callback?: (err: AWSError, data: RAM.Types.AcceptResourceShareInvitationResponse) => void): Request<RAM.Types.AcceptResourceShareInvitationResponse, AWSError>;
   /**
    * Accepts an invitation to a resource share from another AWS account.
    */
@@ -22,7 +24,7 @@ declare class RAM extends Service {
   /**
    * Associates the specified resource share with the specified principals and resources.
    */
-  associateResourceShare(params: RAM.Types.AssociateResourceShareRequest, callback?: (err: AWSError, data: RAM.Types.AssociateResourceShareResponse) => void): Request<RAM.Types.AssociateResourceShareResponse, AWSError>;
+  associateResourceShare(params: BoundInput<RAM.Types.AssociateResourceShareRequest, keyof Params>, callback?: (err: AWSError, data: RAM.Types.AssociateResourceShareResponse) => void): Request<RAM.Types.AssociateResourceShareResponse, AWSError>;
   /**
    * Associates the specified resource share with the specified principals and resources.
    */
@@ -30,7 +32,7 @@ declare class RAM extends Service {
   /**
    * Creates a resource share.
    */
-  createResourceShare(params: RAM.Types.CreateResourceShareRequest, callback?: (err: AWSError, data: RAM.Types.CreateResourceShareResponse) => void): Request<RAM.Types.CreateResourceShareResponse, AWSError>;
+  createResourceShare(params: BoundInput<RAM.Types.CreateResourceShareRequest, keyof Params>, callback?: (err: AWSError, data: RAM.Types.CreateResourceShareResponse) => void): Request<RAM.Types.CreateResourceShareResponse, AWSError>;
   /**
    * Creates a resource share.
    */
@@ -38,7 +40,7 @@ declare class RAM extends Service {
   /**
    * Deletes the specified resource share.
    */
-  deleteResourceShare(params: RAM.Types.DeleteResourceShareRequest, callback?: (err: AWSError, data: RAM.Types.DeleteResourceShareResponse) => void): Request<RAM.Types.DeleteResourceShareResponse, AWSError>;
+  deleteResourceShare(params: BoundInput<RAM.Types.DeleteResourceShareRequest, keyof Params>, callback?: (err: AWSError, data: RAM.Types.DeleteResourceShareResponse) => void): Request<RAM.Types.DeleteResourceShareResponse, AWSError>;
   /**
    * Deletes the specified resource share.
    */
@@ -46,7 +48,7 @@ declare class RAM extends Service {
   /**
    * Disassociates the specified principals or resources from the specified resource share.
    */
-  disassociateResourceShare(params: RAM.Types.DisassociateResourceShareRequest, callback?: (err: AWSError, data: RAM.Types.DisassociateResourceShareResponse) => void): Request<RAM.Types.DisassociateResourceShareResponse, AWSError>;
+  disassociateResourceShare(params: BoundInput<RAM.Types.DisassociateResourceShareRequest, keyof Params>, callback?: (err: AWSError, data: RAM.Types.DisassociateResourceShareResponse) => void): Request<RAM.Types.DisassociateResourceShareResponse, AWSError>;
   /**
    * Disassociates the specified principals or resources from the specified resource share.
    */
@@ -54,7 +56,7 @@ declare class RAM extends Service {
   /**
    * Enables resource sharing within your organization.
    */
-  enableSharingWithAwsOrganization(params: RAM.Types.EnableSharingWithAwsOrganizationRequest, callback?: (err: AWSError, data: RAM.Types.EnableSharingWithAwsOrganizationResponse) => void): Request<RAM.Types.EnableSharingWithAwsOrganizationResponse, AWSError>;
+  enableSharingWithAwsOrganization(params: BoundInput<RAM.Types.EnableSharingWithAwsOrganizationRequest, keyof Params>, callback?: (err: AWSError, data: RAM.Types.EnableSharingWithAwsOrganizationResponse) => void): Request<RAM.Types.EnableSharingWithAwsOrganizationResponse, AWSError>;
   /**
    * Enables resource sharing within your organization.
    */
@@ -62,7 +64,7 @@ declare class RAM extends Service {
   /**
    * Gets the policies for the specifies resources.
    */
-  getResourcePolicies(params: RAM.Types.GetResourcePoliciesRequest, callback?: (err: AWSError, data: RAM.Types.GetResourcePoliciesResponse) => void): Request<RAM.Types.GetResourcePoliciesResponse, AWSError>;
+  getResourcePolicies(params: BoundInput<RAM.Types.GetResourcePoliciesRequest, keyof Params>, callback?: (err: AWSError, data: RAM.Types.GetResourcePoliciesResponse) => void): Request<RAM.Types.GetResourcePoliciesResponse, AWSError>;
   /**
    * Gets the policies for the specifies resources.
    */
@@ -70,7 +72,7 @@ declare class RAM extends Service {
   /**
    * Gets the associations for the specified resource share.
    */
-  getResourceShareAssociations(params: RAM.Types.GetResourceShareAssociationsRequest, callback?: (err: AWSError, data: RAM.Types.GetResourceShareAssociationsResponse) => void): Request<RAM.Types.GetResourceShareAssociationsResponse, AWSError>;
+  getResourceShareAssociations(params: BoundInput<RAM.Types.GetResourceShareAssociationsRequest, keyof Params>, callback?: (err: AWSError, data: RAM.Types.GetResourceShareAssociationsResponse) => void): Request<RAM.Types.GetResourceShareAssociationsResponse, AWSError>;
   /**
    * Gets the associations for the specified resource share.
    */
@@ -78,7 +80,7 @@ declare class RAM extends Service {
   /**
    * Gets the specified invitations for resource sharing.
    */
-  getResourceShareInvitations(params: RAM.Types.GetResourceShareInvitationsRequest, callback?: (err: AWSError, data: RAM.Types.GetResourceShareInvitationsResponse) => void): Request<RAM.Types.GetResourceShareInvitationsResponse, AWSError>;
+  getResourceShareInvitations(params: BoundInput<RAM.Types.GetResourceShareInvitationsRequest, keyof Params>, callback?: (err: AWSError, data: RAM.Types.GetResourceShareInvitationsResponse) => void): Request<RAM.Types.GetResourceShareInvitationsResponse, AWSError>;
   /**
    * Gets the specified invitations for resource sharing.
    */
@@ -86,7 +88,7 @@ declare class RAM extends Service {
   /**
    * Gets the specified resource shares or all of your resource shares.
    */
-  getResourceShares(params: RAM.Types.GetResourceSharesRequest, callback?: (err: AWSError, data: RAM.Types.GetResourceSharesResponse) => void): Request<RAM.Types.GetResourceSharesResponse, AWSError>;
+  getResourceShares(params: BoundInput<RAM.Types.GetResourceSharesRequest, keyof Params>, callback?: (err: AWSError, data: RAM.Types.GetResourceSharesResponse) => void): Request<RAM.Types.GetResourceSharesResponse, AWSError>;
   /**
    * Gets the specified resource shares or all of your resource shares.
    */
@@ -94,7 +96,7 @@ declare class RAM extends Service {
   /**
    * Lists the principals with access to the specified resource.
    */
-  listPrincipals(params: RAM.Types.ListPrincipalsRequest, callback?: (err: AWSError, data: RAM.Types.ListPrincipalsResponse) => void): Request<RAM.Types.ListPrincipalsResponse, AWSError>;
+  listPrincipals(params: BoundInput<RAM.Types.ListPrincipalsRequest, keyof Params>, callback?: (err: AWSError, data: RAM.Types.ListPrincipalsResponse) => void): Request<RAM.Types.ListPrincipalsResponse, AWSError>;
   /**
    * Lists the principals with access to the specified resource.
    */
@@ -102,7 +104,7 @@ declare class RAM extends Service {
   /**
    * Lists the resources that the specified principal can access.
    */
-  listResources(params: RAM.Types.ListResourcesRequest, callback?: (err: AWSError, data: RAM.Types.ListResourcesResponse) => void): Request<RAM.Types.ListResourcesResponse, AWSError>;
+  listResources(params: BoundInput<RAM.Types.ListResourcesRequest, keyof Params>, callback?: (err: AWSError, data: RAM.Types.ListResourcesResponse) => void): Request<RAM.Types.ListResourcesResponse, AWSError>;
   /**
    * Lists the resources that the specified principal can access.
    */
@@ -110,7 +112,7 @@ declare class RAM extends Service {
   /**
    * Rejects an invitation to a resource share from another AWS account.
    */
-  rejectResourceShareInvitation(params: RAM.Types.RejectResourceShareInvitationRequest, callback?: (err: AWSError, data: RAM.Types.RejectResourceShareInvitationResponse) => void): Request<RAM.Types.RejectResourceShareInvitationResponse, AWSError>;
+  rejectResourceShareInvitation(params: BoundInput<RAM.Types.RejectResourceShareInvitationRequest, keyof Params>, callback?: (err: AWSError, data: RAM.Types.RejectResourceShareInvitationResponse) => void): Request<RAM.Types.RejectResourceShareInvitationResponse, AWSError>;
   /**
    * Rejects an invitation to a resource share from another AWS account.
    */
@@ -118,7 +120,7 @@ declare class RAM extends Service {
   /**
    * Adds the specified tags to the specified resource share.
    */
-  tagResource(params: RAM.Types.TagResourceRequest, callback?: (err: AWSError, data: RAM.Types.TagResourceResponse) => void): Request<RAM.Types.TagResourceResponse, AWSError>;
+  tagResource(params: BoundInput<RAM.Types.TagResourceRequest, keyof Params>, callback?: (err: AWSError, data: RAM.Types.TagResourceResponse) => void): Request<RAM.Types.TagResourceResponse, AWSError>;
   /**
    * Adds the specified tags to the specified resource share.
    */
@@ -126,7 +128,7 @@ declare class RAM extends Service {
   /**
    * Removes the specified tags from the specified resource share.
    */
-  untagResource(params: RAM.Types.UntagResourceRequest, callback?: (err: AWSError, data: RAM.Types.UntagResourceResponse) => void): Request<RAM.Types.UntagResourceResponse, AWSError>;
+  untagResource(params: BoundInput<RAM.Types.UntagResourceRequest, keyof Params>, callback?: (err: AWSError, data: RAM.Types.UntagResourceResponse) => void): Request<RAM.Types.UntagResourceResponse, AWSError>;
   /**
    * Removes the specified tags from the specified resource share.
    */
@@ -134,7 +136,7 @@ declare class RAM extends Service {
   /**
    * Updates the specified resource share.
    */
-  updateResourceShare(params: RAM.Types.UpdateResourceShareRequest, callback?: (err: AWSError, data: RAM.Types.UpdateResourceShareResponse) => void): Request<RAM.Types.UpdateResourceShareResponse, AWSError>;
+  updateResourceShare(params: BoundInput<RAM.Types.UpdateResourceShareRequest, keyof Params>, callback?: (err: AWSError, data: RAM.Types.UpdateResourceShareResponse) => void): Request<RAM.Types.UpdateResourceShareResponse, AWSError>;
   /**
    * Updates the specified resource share.
    */
@@ -784,7 +786,8 @@ declare namespace RAM {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AcceptResourceShareInvitationRequest & AssociateResourceShareRequest & CreateResourceShareRequest & DeleteResourceShareRequest & DisassociateResourceShareRequest & EnableSharingWithAwsOrganizationRequest & GetResourcePoliciesRequest & GetResourceShareAssociationsRequest & GetResourceShareInvitationsRequest & GetResourceSharesRequest & ListPrincipalsRequest & ListResourcesRequest & RejectResourceShareInvitationRequest & TagResourceRequest & UntagResourceRequest & UpdateResourceShareRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the RAM client.
    */

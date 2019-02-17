@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class APIGateway extends Service {
+declare class APIGateway<Params extends APIGateway.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: APIGateway.Types.ClientConfiguration)
-  config: Config & APIGateway.Types.ClientConfiguration;
+  constructor(options?: APIGateway.Types.ClientConfiguration<Params>)
+  config: Config & APIGateway.Types.ClientConfiguration<Params>;
   /**
    * Create an ApiKey resource.  AWS CLI
    */
-  createApiKey(params: APIGateway.Types.CreateApiKeyRequest, callback?: (err: AWSError, data: APIGateway.Types.ApiKey) => void): Request<APIGateway.Types.ApiKey, AWSError>;
+  createApiKey(params: BoundInput<APIGateway.Types.CreateApiKeyRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.ApiKey) => void): Request<APIGateway.Types.ApiKey, AWSError>;
   /**
    * Create an ApiKey resource.  AWS CLI
    */
@@ -22,7 +24,7 @@ declare class APIGateway extends Service {
   /**
    * Adds a new Authorizer resource to an existing RestApi resource. AWS CLI
    */
-  createAuthorizer(params: APIGateway.Types.CreateAuthorizerRequest, callback?: (err: AWSError, data: APIGateway.Types.Authorizer) => void): Request<APIGateway.Types.Authorizer, AWSError>;
+  createAuthorizer(params: BoundInput<APIGateway.Types.CreateAuthorizerRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Authorizer) => void): Request<APIGateway.Types.Authorizer, AWSError>;
   /**
    * Adds a new Authorizer resource to an existing RestApi resource. AWS CLI
    */
@@ -30,7 +32,7 @@ declare class APIGateway extends Service {
   /**
    * Creates a new BasePathMapping resource.
    */
-  createBasePathMapping(params: APIGateway.Types.CreateBasePathMappingRequest, callback?: (err: AWSError, data: APIGateway.Types.BasePathMapping) => void): Request<APIGateway.Types.BasePathMapping, AWSError>;
+  createBasePathMapping(params: BoundInput<APIGateway.Types.CreateBasePathMappingRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.BasePathMapping) => void): Request<APIGateway.Types.BasePathMapping, AWSError>;
   /**
    * Creates a new BasePathMapping resource.
    */
@@ -38,7 +40,7 @@ declare class APIGateway extends Service {
   /**
    * Creates a Deployment resource, which makes a specified RestApi callable over the internet.
    */
-  createDeployment(params: APIGateway.Types.CreateDeploymentRequest, callback?: (err: AWSError, data: APIGateway.Types.Deployment) => void): Request<APIGateway.Types.Deployment, AWSError>;
+  createDeployment(params: BoundInput<APIGateway.Types.CreateDeploymentRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Deployment) => void): Request<APIGateway.Types.Deployment, AWSError>;
   /**
    * Creates a Deployment resource, which makes a specified RestApi callable over the internet.
    */
@@ -46,7 +48,7 @@ declare class APIGateway extends Service {
   /**
    * 
    */
-  createDocumentationPart(params: APIGateway.Types.CreateDocumentationPartRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationPart) => void): Request<APIGateway.Types.DocumentationPart, AWSError>;
+  createDocumentationPart(params: BoundInput<APIGateway.Types.CreateDocumentationPartRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.DocumentationPart) => void): Request<APIGateway.Types.DocumentationPart, AWSError>;
   /**
    * 
    */
@@ -54,7 +56,7 @@ declare class APIGateway extends Service {
   /**
    * 
    */
-  createDocumentationVersion(params: APIGateway.Types.CreateDocumentationVersionRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersion) => void): Request<APIGateway.Types.DocumentationVersion, AWSError>;
+  createDocumentationVersion(params: BoundInput<APIGateway.Types.CreateDocumentationVersionRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersion) => void): Request<APIGateway.Types.DocumentationVersion, AWSError>;
   /**
    * 
    */
@@ -62,7 +64,7 @@ declare class APIGateway extends Service {
   /**
    * Creates a new domain name.
    */
-  createDomainName(params: APIGateway.Types.CreateDomainNameRequest, callback?: (err: AWSError, data: APIGateway.Types.DomainName) => void): Request<APIGateway.Types.DomainName, AWSError>;
+  createDomainName(params: BoundInput<APIGateway.Types.CreateDomainNameRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.DomainName) => void): Request<APIGateway.Types.DomainName, AWSError>;
   /**
    * Creates a new domain name.
    */
@@ -70,7 +72,7 @@ declare class APIGateway extends Service {
   /**
    * Adds a new Model resource to an existing RestApi resource.
    */
-  createModel(params: APIGateway.Types.CreateModelRequest, callback?: (err: AWSError, data: APIGateway.Types.Model) => void): Request<APIGateway.Types.Model, AWSError>;
+  createModel(params: BoundInput<APIGateway.Types.CreateModelRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Model) => void): Request<APIGateway.Types.Model, AWSError>;
   /**
    * Adds a new Model resource to an existing RestApi resource.
    */
@@ -78,7 +80,7 @@ declare class APIGateway extends Service {
   /**
    * Creates a ReqeustValidator of a given RestApi.
    */
-  createRequestValidator(params: APIGateway.Types.CreateRequestValidatorRequest, callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
+  createRequestValidator(params: BoundInput<APIGateway.Types.CreateRequestValidatorRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
   /**
    * Creates a ReqeustValidator of a given RestApi.
    */
@@ -86,7 +88,7 @@ declare class APIGateway extends Service {
   /**
    * Creates a Resource resource.
    */
-  createResource(params: APIGateway.Types.CreateResourceRequest, callback?: (err: AWSError, data: APIGateway.Types.Resource) => void): Request<APIGateway.Types.Resource, AWSError>;
+  createResource(params: BoundInput<APIGateway.Types.CreateResourceRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Resource) => void): Request<APIGateway.Types.Resource, AWSError>;
   /**
    * Creates a Resource resource.
    */
@@ -94,7 +96,7 @@ declare class APIGateway extends Service {
   /**
    * Creates a new RestApi resource.
    */
-  createRestApi(params: APIGateway.Types.CreateRestApiRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
+  createRestApi(params: BoundInput<APIGateway.Types.CreateRestApiRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
   /**
    * Creates a new RestApi resource.
    */
@@ -102,7 +104,7 @@ declare class APIGateway extends Service {
   /**
    * Creates a new Stage resource that references a pre-existing Deployment for the API. 
    */
-  createStage(params: APIGateway.Types.CreateStageRequest, callback?: (err: AWSError, data: APIGateway.Types.Stage) => void): Request<APIGateway.Types.Stage, AWSError>;
+  createStage(params: BoundInput<APIGateway.Types.CreateStageRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Stage) => void): Request<APIGateway.Types.Stage, AWSError>;
   /**
    * Creates a new Stage resource that references a pre-existing Deployment for the API. 
    */
@@ -110,7 +112,7 @@ declare class APIGateway extends Service {
   /**
    * Creates a usage plan with the throttle and quota limits, as well as the associated API stages, specified in the payload. 
    */
-  createUsagePlan(params: APIGateway.Types.CreateUsagePlanRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlan) => void): Request<APIGateway.Types.UsagePlan, AWSError>;
+  createUsagePlan(params: BoundInput<APIGateway.Types.CreateUsagePlanRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.UsagePlan) => void): Request<APIGateway.Types.UsagePlan, AWSError>;
   /**
    * Creates a usage plan with the throttle and quota limits, as well as the associated API stages, specified in the payload. 
    */
@@ -118,7 +120,7 @@ declare class APIGateway extends Service {
   /**
    * Creates a usage plan key for adding an existing API key to a usage plan.
    */
-  createUsagePlanKey(params: APIGateway.Types.CreateUsagePlanKeyRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlanKey) => void): Request<APIGateway.Types.UsagePlanKey, AWSError>;
+  createUsagePlanKey(params: BoundInput<APIGateway.Types.CreateUsagePlanKeyRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.UsagePlanKey) => void): Request<APIGateway.Types.UsagePlanKey, AWSError>;
   /**
    * Creates a usage plan key for adding an existing API key to a usage plan.
    */
@@ -126,7 +128,7 @@ declare class APIGateway extends Service {
   /**
    * Creates a VPC link, under the caller's account in a selected region, in an asynchronous operation that typically takes 2-4 minutes to complete and become operational. The caller must have permissions to create and update VPC Endpoint services.
    */
-  createVpcLink(params: APIGateway.Types.CreateVpcLinkRequest, callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
+  createVpcLink(params: BoundInput<APIGateway.Types.CreateVpcLinkRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
   /**
    * Creates a VPC link, under the caller's account in a selected region, in an asynchronous operation that typically takes 2-4 minutes to complete and become operational. The caller must have permissions to create and update VPC Endpoint services.
    */
@@ -134,7 +136,7 @@ declare class APIGateway extends Service {
   /**
    * Deletes the ApiKey resource.
    */
-  deleteApiKey(params: APIGateway.Types.DeleteApiKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteApiKey(params: BoundInput<APIGateway.Types.DeleteApiKeyRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the ApiKey resource.
    */
@@ -142,7 +144,7 @@ declare class APIGateway extends Service {
   /**
    * Deletes an existing Authorizer resource. AWS CLI
    */
-  deleteAuthorizer(params: APIGateway.Types.DeleteAuthorizerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteAuthorizer(params: BoundInput<APIGateway.Types.DeleteAuthorizerRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an existing Authorizer resource. AWS CLI
    */
@@ -150,7 +152,7 @@ declare class APIGateway extends Service {
   /**
    * Deletes the BasePathMapping resource.
    */
-  deleteBasePathMapping(params: APIGateway.Types.DeleteBasePathMappingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteBasePathMapping(params: BoundInput<APIGateway.Types.DeleteBasePathMappingRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the BasePathMapping resource.
    */
@@ -158,7 +160,7 @@ declare class APIGateway extends Service {
   /**
    * Deletes the ClientCertificate resource.
    */
-  deleteClientCertificate(params: APIGateway.Types.DeleteClientCertificateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteClientCertificate(params: BoundInput<APIGateway.Types.DeleteClientCertificateRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the ClientCertificate resource.
    */
@@ -166,7 +168,7 @@ declare class APIGateway extends Service {
   /**
    * Deletes a Deployment resource. Deleting a deployment will only succeed if there are no Stage resources associated with it.
    */
-  deleteDeployment(params: APIGateway.Types.DeleteDeploymentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDeployment(params: BoundInput<APIGateway.Types.DeleteDeploymentRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a Deployment resource. Deleting a deployment will only succeed if there are no Stage resources associated with it.
    */
@@ -174,7 +176,7 @@ declare class APIGateway extends Service {
   /**
    * 
    */
-  deleteDocumentationPart(params: APIGateway.Types.DeleteDocumentationPartRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDocumentationPart(params: BoundInput<APIGateway.Types.DeleteDocumentationPartRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * 
    */
@@ -182,7 +184,7 @@ declare class APIGateway extends Service {
   /**
    * 
    */
-  deleteDocumentationVersion(params: APIGateway.Types.DeleteDocumentationVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDocumentationVersion(params: BoundInput<APIGateway.Types.DeleteDocumentationVersionRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * 
    */
@@ -190,7 +192,7 @@ declare class APIGateway extends Service {
   /**
    * Deletes the DomainName resource.
    */
-  deleteDomainName(params: APIGateway.Types.DeleteDomainNameRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDomainName(params: BoundInput<APIGateway.Types.DeleteDomainNameRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the DomainName resource.
    */
@@ -198,7 +200,7 @@ declare class APIGateway extends Service {
   /**
    * Clears any customization of a GatewayResponse of a specified response type on the given RestApi and resets it with the default settings.
    */
-  deleteGatewayResponse(params: APIGateway.Types.DeleteGatewayResponseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteGatewayResponse(params: BoundInput<APIGateway.Types.DeleteGatewayResponseRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Clears any customization of a GatewayResponse of a specified response type on the given RestApi and resets it with the default settings.
    */
@@ -206,7 +208,7 @@ declare class APIGateway extends Service {
   /**
    * Represents a delete integration.
    */
-  deleteIntegration(params: APIGateway.Types.DeleteIntegrationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteIntegration(params: BoundInput<APIGateway.Types.DeleteIntegrationRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Represents a delete integration.
    */
@@ -214,7 +216,7 @@ declare class APIGateway extends Service {
   /**
    * Represents a delete integration response.
    */
-  deleteIntegrationResponse(params: APIGateway.Types.DeleteIntegrationResponseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteIntegrationResponse(params: BoundInput<APIGateway.Types.DeleteIntegrationResponseRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Represents a delete integration response.
    */
@@ -222,7 +224,7 @@ declare class APIGateway extends Service {
   /**
    * Deletes an existing Method resource.
    */
-  deleteMethod(params: APIGateway.Types.DeleteMethodRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteMethod(params: BoundInput<APIGateway.Types.DeleteMethodRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an existing Method resource.
    */
@@ -230,7 +232,7 @@ declare class APIGateway extends Service {
   /**
    * Deletes an existing MethodResponse resource.
    */
-  deleteMethodResponse(params: APIGateway.Types.DeleteMethodResponseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteMethodResponse(params: BoundInput<APIGateway.Types.DeleteMethodResponseRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an existing MethodResponse resource.
    */
@@ -238,7 +240,7 @@ declare class APIGateway extends Service {
   /**
    * Deletes a model.
    */
-  deleteModel(params: APIGateway.Types.DeleteModelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteModel(params: BoundInput<APIGateway.Types.DeleteModelRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a model.
    */
@@ -246,7 +248,7 @@ declare class APIGateway extends Service {
   /**
    * Deletes a RequestValidator of a given RestApi.
    */
-  deleteRequestValidator(params: APIGateway.Types.DeleteRequestValidatorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteRequestValidator(params: BoundInput<APIGateway.Types.DeleteRequestValidatorRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a RequestValidator of a given RestApi.
    */
@@ -254,7 +256,7 @@ declare class APIGateway extends Service {
   /**
    * Deletes a Resource resource.
    */
-  deleteResource(params: APIGateway.Types.DeleteResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteResource(params: BoundInput<APIGateway.Types.DeleteResourceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a Resource resource.
    */
@@ -262,7 +264,7 @@ declare class APIGateway extends Service {
   /**
    * Deletes the specified API.
    */
-  deleteRestApi(params: APIGateway.Types.DeleteRestApiRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteRestApi(params: BoundInput<APIGateway.Types.DeleteRestApiRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified API.
    */
@@ -270,7 +272,7 @@ declare class APIGateway extends Service {
   /**
    * Deletes a Stage resource.
    */
-  deleteStage(params: APIGateway.Types.DeleteStageRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteStage(params: BoundInput<APIGateway.Types.DeleteStageRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a Stage resource.
    */
@@ -278,7 +280,7 @@ declare class APIGateway extends Service {
   /**
    * Deletes a usage plan of a given plan Id.
    */
-  deleteUsagePlan(params: APIGateway.Types.DeleteUsagePlanRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteUsagePlan(params: BoundInput<APIGateway.Types.DeleteUsagePlanRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a usage plan of a given plan Id.
    */
@@ -286,7 +288,7 @@ declare class APIGateway extends Service {
   /**
    * Deletes a usage plan key and remove the underlying API key from the associated usage plan.
    */
-  deleteUsagePlanKey(params: APIGateway.Types.DeleteUsagePlanKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteUsagePlanKey(params: BoundInput<APIGateway.Types.DeleteUsagePlanKeyRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a usage plan key and remove the underlying API key from the associated usage plan.
    */
@@ -294,7 +296,7 @@ declare class APIGateway extends Service {
   /**
    * Deletes an existing VpcLink of a specified identifier.
    */
-  deleteVpcLink(params: APIGateway.Types.DeleteVpcLinkRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteVpcLink(params: BoundInput<APIGateway.Types.DeleteVpcLinkRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an existing VpcLink of a specified identifier.
    */
@@ -302,7 +304,7 @@ declare class APIGateway extends Service {
   /**
    * Flushes all authorizer cache entries on a stage.
    */
-  flushStageAuthorizersCache(params: APIGateway.Types.FlushStageAuthorizersCacheRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  flushStageAuthorizersCache(params: BoundInput<APIGateway.Types.FlushStageAuthorizersCacheRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Flushes all authorizer cache entries on a stage.
    */
@@ -310,7 +312,7 @@ declare class APIGateway extends Service {
   /**
    * Flushes a stage's cache.
    */
-  flushStageCache(params: APIGateway.Types.FlushStageCacheRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  flushStageCache(params: BoundInput<APIGateway.Types.FlushStageCacheRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Flushes a stage's cache.
    */
@@ -318,7 +320,7 @@ declare class APIGateway extends Service {
   /**
    * Generates a ClientCertificate resource.
    */
-  generateClientCertificate(params: APIGateway.Types.GenerateClientCertificateRequest, callback?: (err: AWSError, data: APIGateway.Types.ClientCertificate) => void): Request<APIGateway.Types.ClientCertificate, AWSError>;
+  generateClientCertificate(params: BoundInput<APIGateway.Types.GenerateClientCertificateRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.ClientCertificate) => void): Request<APIGateway.Types.ClientCertificate, AWSError>;
   /**
    * Generates a ClientCertificate resource.
    */
@@ -326,7 +328,7 @@ declare class APIGateway extends Service {
   /**
    * Gets information about the current Account resource.
    */
-  getAccount(params: APIGateway.Types.GetAccountRequest, callback?: (err: AWSError, data: APIGateway.Types.Account) => void): Request<APIGateway.Types.Account, AWSError>;
+  getAccount(params: BoundInput<APIGateway.Types.GetAccountRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Account) => void): Request<APIGateway.Types.Account, AWSError>;
   /**
    * Gets information about the current Account resource.
    */
@@ -334,7 +336,7 @@ declare class APIGateway extends Service {
   /**
    * Gets information about the current ApiKey resource.
    */
-  getApiKey(params: APIGateway.Types.GetApiKeyRequest, callback?: (err: AWSError, data: APIGateway.Types.ApiKey) => void): Request<APIGateway.Types.ApiKey, AWSError>;
+  getApiKey(params: BoundInput<APIGateway.Types.GetApiKeyRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.ApiKey) => void): Request<APIGateway.Types.ApiKey, AWSError>;
   /**
    * Gets information about the current ApiKey resource.
    */
@@ -342,7 +344,7 @@ declare class APIGateway extends Service {
   /**
    * Gets information about the current ApiKeys resource.
    */
-  getApiKeys(params: APIGateway.Types.GetApiKeysRequest, callback?: (err: AWSError, data: APIGateway.Types.ApiKeys) => void): Request<APIGateway.Types.ApiKeys, AWSError>;
+  getApiKeys(params: BoundInput<APIGateway.Types.GetApiKeysRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.ApiKeys) => void): Request<APIGateway.Types.ApiKeys, AWSError>;
   /**
    * Gets information about the current ApiKeys resource.
    */
@@ -350,7 +352,7 @@ declare class APIGateway extends Service {
   /**
    * Describe an existing Authorizer resource. AWS CLI
    */
-  getAuthorizer(params: APIGateway.Types.GetAuthorizerRequest, callback?: (err: AWSError, data: APIGateway.Types.Authorizer) => void): Request<APIGateway.Types.Authorizer, AWSError>;
+  getAuthorizer(params: BoundInput<APIGateway.Types.GetAuthorizerRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Authorizer) => void): Request<APIGateway.Types.Authorizer, AWSError>;
   /**
    * Describe an existing Authorizer resource. AWS CLI
    */
@@ -358,7 +360,7 @@ declare class APIGateway extends Service {
   /**
    * Describe an existing Authorizers resource. AWS CLI
    */
-  getAuthorizers(params: APIGateway.Types.GetAuthorizersRequest, callback?: (err: AWSError, data: APIGateway.Types.Authorizers) => void): Request<APIGateway.Types.Authorizers, AWSError>;
+  getAuthorizers(params: BoundInput<APIGateway.Types.GetAuthorizersRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Authorizers) => void): Request<APIGateway.Types.Authorizers, AWSError>;
   /**
    * Describe an existing Authorizers resource. AWS CLI
    */
@@ -366,7 +368,7 @@ declare class APIGateway extends Service {
   /**
    * Describe a BasePathMapping resource.
    */
-  getBasePathMapping(params: APIGateway.Types.GetBasePathMappingRequest, callback?: (err: AWSError, data: APIGateway.Types.BasePathMapping) => void): Request<APIGateway.Types.BasePathMapping, AWSError>;
+  getBasePathMapping(params: BoundInput<APIGateway.Types.GetBasePathMappingRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.BasePathMapping) => void): Request<APIGateway.Types.BasePathMapping, AWSError>;
   /**
    * Describe a BasePathMapping resource.
    */
@@ -374,7 +376,7 @@ declare class APIGateway extends Service {
   /**
    * Represents a collection of BasePathMapping resources.
    */
-  getBasePathMappings(params: APIGateway.Types.GetBasePathMappingsRequest, callback?: (err: AWSError, data: APIGateway.Types.BasePathMappings) => void): Request<APIGateway.Types.BasePathMappings, AWSError>;
+  getBasePathMappings(params: BoundInput<APIGateway.Types.GetBasePathMappingsRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.BasePathMappings) => void): Request<APIGateway.Types.BasePathMappings, AWSError>;
   /**
    * Represents a collection of BasePathMapping resources.
    */
@@ -382,7 +384,7 @@ declare class APIGateway extends Service {
   /**
    * Gets information about the current ClientCertificate resource.
    */
-  getClientCertificate(params: APIGateway.Types.GetClientCertificateRequest, callback?: (err: AWSError, data: APIGateway.Types.ClientCertificate) => void): Request<APIGateway.Types.ClientCertificate, AWSError>;
+  getClientCertificate(params: BoundInput<APIGateway.Types.GetClientCertificateRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.ClientCertificate) => void): Request<APIGateway.Types.ClientCertificate, AWSError>;
   /**
    * Gets information about the current ClientCertificate resource.
    */
@@ -390,7 +392,7 @@ declare class APIGateway extends Service {
   /**
    * Gets a collection of ClientCertificate resources.
    */
-  getClientCertificates(params: APIGateway.Types.GetClientCertificatesRequest, callback?: (err: AWSError, data: APIGateway.Types.ClientCertificates) => void): Request<APIGateway.Types.ClientCertificates, AWSError>;
+  getClientCertificates(params: BoundInput<APIGateway.Types.GetClientCertificatesRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.ClientCertificates) => void): Request<APIGateway.Types.ClientCertificates, AWSError>;
   /**
    * Gets a collection of ClientCertificate resources.
    */
@@ -398,7 +400,7 @@ declare class APIGateway extends Service {
   /**
    * Gets information about a Deployment resource.
    */
-  getDeployment(params: APIGateway.Types.GetDeploymentRequest, callback?: (err: AWSError, data: APIGateway.Types.Deployment) => void): Request<APIGateway.Types.Deployment, AWSError>;
+  getDeployment(params: BoundInput<APIGateway.Types.GetDeploymentRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Deployment) => void): Request<APIGateway.Types.Deployment, AWSError>;
   /**
    * Gets information about a Deployment resource.
    */
@@ -406,7 +408,7 @@ declare class APIGateway extends Service {
   /**
    * Gets information about a Deployments collection.
    */
-  getDeployments(params: APIGateway.Types.GetDeploymentsRequest, callback?: (err: AWSError, data: APIGateway.Types.Deployments) => void): Request<APIGateway.Types.Deployments, AWSError>;
+  getDeployments(params: BoundInput<APIGateway.Types.GetDeploymentsRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Deployments) => void): Request<APIGateway.Types.Deployments, AWSError>;
   /**
    * Gets information about a Deployments collection.
    */
@@ -414,7 +416,7 @@ declare class APIGateway extends Service {
   /**
    * 
    */
-  getDocumentationPart(params: APIGateway.Types.GetDocumentationPartRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationPart) => void): Request<APIGateway.Types.DocumentationPart, AWSError>;
+  getDocumentationPart(params: BoundInput<APIGateway.Types.GetDocumentationPartRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.DocumentationPart) => void): Request<APIGateway.Types.DocumentationPart, AWSError>;
   /**
    * 
    */
@@ -422,7 +424,7 @@ declare class APIGateway extends Service {
   /**
    * 
    */
-  getDocumentationParts(params: APIGateway.Types.GetDocumentationPartsRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationParts) => void): Request<APIGateway.Types.DocumentationParts, AWSError>;
+  getDocumentationParts(params: BoundInput<APIGateway.Types.GetDocumentationPartsRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.DocumentationParts) => void): Request<APIGateway.Types.DocumentationParts, AWSError>;
   /**
    * 
    */
@@ -430,7 +432,7 @@ declare class APIGateway extends Service {
   /**
    * 
    */
-  getDocumentationVersion(params: APIGateway.Types.GetDocumentationVersionRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersion) => void): Request<APIGateway.Types.DocumentationVersion, AWSError>;
+  getDocumentationVersion(params: BoundInput<APIGateway.Types.GetDocumentationVersionRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersion) => void): Request<APIGateway.Types.DocumentationVersion, AWSError>;
   /**
    * 
    */
@@ -438,7 +440,7 @@ declare class APIGateway extends Service {
   /**
    * 
    */
-  getDocumentationVersions(params: APIGateway.Types.GetDocumentationVersionsRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersions) => void): Request<APIGateway.Types.DocumentationVersions, AWSError>;
+  getDocumentationVersions(params: BoundInput<APIGateway.Types.GetDocumentationVersionsRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersions) => void): Request<APIGateway.Types.DocumentationVersions, AWSError>;
   /**
    * 
    */
@@ -446,7 +448,7 @@ declare class APIGateway extends Service {
   /**
    * Represents a domain name that is contained in a simpler, more intuitive URL that can be called.
    */
-  getDomainName(params: APIGateway.Types.GetDomainNameRequest, callback?: (err: AWSError, data: APIGateway.Types.DomainName) => void): Request<APIGateway.Types.DomainName, AWSError>;
+  getDomainName(params: BoundInput<APIGateway.Types.GetDomainNameRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.DomainName) => void): Request<APIGateway.Types.DomainName, AWSError>;
   /**
    * Represents a domain name that is contained in a simpler, more intuitive URL that can be called.
    */
@@ -454,7 +456,7 @@ declare class APIGateway extends Service {
   /**
    * Represents a collection of DomainName resources.
    */
-  getDomainNames(params: APIGateway.Types.GetDomainNamesRequest, callback?: (err: AWSError, data: APIGateway.Types.DomainNames) => void): Request<APIGateway.Types.DomainNames, AWSError>;
+  getDomainNames(params: BoundInput<APIGateway.Types.GetDomainNamesRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.DomainNames) => void): Request<APIGateway.Types.DomainNames, AWSError>;
   /**
    * Represents a collection of DomainName resources.
    */
@@ -462,7 +464,7 @@ declare class APIGateway extends Service {
   /**
    * Exports a deployed version of a RestApi in a specified format.
    */
-  getExport(params: APIGateway.Types.GetExportRequest, callback?: (err: AWSError, data: APIGateway.Types.ExportResponse) => void): Request<APIGateway.Types.ExportResponse, AWSError>;
+  getExport(params: BoundInput<APIGateway.Types.GetExportRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.ExportResponse) => void): Request<APIGateway.Types.ExportResponse, AWSError>;
   /**
    * Exports a deployed version of a RestApi in a specified format.
    */
@@ -470,7 +472,7 @@ declare class APIGateway extends Service {
   /**
    * Gets a GatewayResponse of a specified response type on the given RestApi.
    */
-  getGatewayResponse(params: APIGateway.Types.GetGatewayResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.GatewayResponse) => void): Request<APIGateway.Types.GatewayResponse, AWSError>;
+  getGatewayResponse(params: BoundInput<APIGateway.Types.GetGatewayResponseRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.GatewayResponse) => void): Request<APIGateway.Types.GatewayResponse, AWSError>;
   /**
    * Gets a GatewayResponse of a specified response type on the given RestApi.
    */
@@ -478,7 +480,7 @@ declare class APIGateway extends Service {
   /**
    * Gets the GatewayResponses collection on the given RestApi. If an API developer has not added any definitions for gateway responses, the result will be the API Gateway-generated default GatewayResponses collection for the supported response types.
    */
-  getGatewayResponses(params: APIGateway.Types.GetGatewayResponsesRequest, callback?: (err: AWSError, data: APIGateway.Types.GatewayResponses) => void): Request<APIGateway.Types.GatewayResponses, AWSError>;
+  getGatewayResponses(params: BoundInput<APIGateway.Types.GetGatewayResponsesRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.GatewayResponses) => void): Request<APIGateway.Types.GatewayResponses, AWSError>;
   /**
    * Gets the GatewayResponses collection on the given RestApi. If an API developer has not added any definitions for gateway responses, the result will be the API Gateway-generated default GatewayResponses collection for the supported response types.
    */
@@ -486,7 +488,7 @@ declare class APIGateway extends Service {
   /**
    * Get the integration settings.
    */
-  getIntegration(params: APIGateway.Types.GetIntegrationRequest, callback?: (err: AWSError, data: APIGateway.Types.Integration) => void): Request<APIGateway.Types.Integration, AWSError>;
+  getIntegration(params: BoundInput<APIGateway.Types.GetIntegrationRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Integration) => void): Request<APIGateway.Types.Integration, AWSError>;
   /**
    * Get the integration settings.
    */
@@ -494,7 +496,7 @@ declare class APIGateway extends Service {
   /**
    * Represents a get integration response.
    */
-  getIntegrationResponse(params: APIGateway.Types.GetIntegrationResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.IntegrationResponse) => void): Request<APIGateway.Types.IntegrationResponse, AWSError>;
+  getIntegrationResponse(params: BoundInput<APIGateway.Types.GetIntegrationResponseRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.IntegrationResponse) => void): Request<APIGateway.Types.IntegrationResponse, AWSError>;
   /**
    * Represents a get integration response.
    */
@@ -502,7 +504,7 @@ declare class APIGateway extends Service {
   /**
    * Describe an existing Method resource.
    */
-  getMethod(params: APIGateway.Types.GetMethodRequest, callback?: (err: AWSError, data: APIGateway.Types.Method) => void): Request<APIGateway.Types.Method, AWSError>;
+  getMethod(params: BoundInput<APIGateway.Types.GetMethodRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Method) => void): Request<APIGateway.Types.Method, AWSError>;
   /**
    * Describe an existing Method resource.
    */
@@ -510,7 +512,7 @@ declare class APIGateway extends Service {
   /**
    * Describes a MethodResponse resource.
    */
-  getMethodResponse(params: APIGateway.Types.GetMethodResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.MethodResponse) => void): Request<APIGateway.Types.MethodResponse, AWSError>;
+  getMethodResponse(params: BoundInput<APIGateway.Types.GetMethodResponseRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.MethodResponse) => void): Request<APIGateway.Types.MethodResponse, AWSError>;
   /**
    * Describes a MethodResponse resource.
    */
@@ -518,7 +520,7 @@ declare class APIGateway extends Service {
   /**
    * Describes an existing model defined for a RestApi resource.
    */
-  getModel(params: APIGateway.Types.GetModelRequest, callback?: (err: AWSError, data: APIGateway.Types.Model) => void): Request<APIGateway.Types.Model, AWSError>;
+  getModel(params: BoundInput<APIGateway.Types.GetModelRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Model) => void): Request<APIGateway.Types.Model, AWSError>;
   /**
    * Describes an existing model defined for a RestApi resource.
    */
@@ -526,7 +528,7 @@ declare class APIGateway extends Service {
   /**
    * Generates a sample mapping template that can be used to transform a payload into the structure of a model.
    */
-  getModelTemplate(params: APIGateway.Types.GetModelTemplateRequest, callback?: (err: AWSError, data: APIGateway.Types.Template) => void): Request<APIGateway.Types.Template, AWSError>;
+  getModelTemplate(params: BoundInput<APIGateway.Types.GetModelTemplateRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Template) => void): Request<APIGateway.Types.Template, AWSError>;
   /**
    * Generates a sample mapping template that can be used to transform a payload into the structure of a model.
    */
@@ -534,7 +536,7 @@ declare class APIGateway extends Service {
   /**
    * Describes existing Models defined for a RestApi resource.
    */
-  getModels(params: APIGateway.Types.GetModelsRequest, callback?: (err: AWSError, data: APIGateway.Types.Models) => void): Request<APIGateway.Types.Models, AWSError>;
+  getModels(params: BoundInput<APIGateway.Types.GetModelsRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Models) => void): Request<APIGateway.Types.Models, AWSError>;
   /**
    * Describes existing Models defined for a RestApi resource.
    */
@@ -542,7 +544,7 @@ declare class APIGateway extends Service {
   /**
    * Gets a RequestValidator of a given RestApi.
    */
-  getRequestValidator(params: APIGateway.Types.GetRequestValidatorRequest, callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
+  getRequestValidator(params: BoundInput<APIGateway.Types.GetRequestValidatorRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
   /**
    * Gets a RequestValidator of a given RestApi.
    */
@@ -550,7 +552,7 @@ declare class APIGateway extends Service {
   /**
    * Gets the RequestValidators collection of a given RestApi.
    */
-  getRequestValidators(params: APIGateway.Types.GetRequestValidatorsRequest, callback?: (err: AWSError, data: APIGateway.Types.RequestValidators) => void): Request<APIGateway.Types.RequestValidators, AWSError>;
+  getRequestValidators(params: BoundInput<APIGateway.Types.GetRequestValidatorsRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.RequestValidators) => void): Request<APIGateway.Types.RequestValidators, AWSError>;
   /**
    * Gets the RequestValidators collection of a given RestApi.
    */
@@ -558,7 +560,7 @@ declare class APIGateway extends Service {
   /**
    * Lists information about a resource.
    */
-  getResource(params: APIGateway.Types.GetResourceRequest, callback?: (err: AWSError, data: APIGateway.Types.Resource) => void): Request<APIGateway.Types.Resource, AWSError>;
+  getResource(params: BoundInput<APIGateway.Types.GetResourceRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Resource) => void): Request<APIGateway.Types.Resource, AWSError>;
   /**
    * Lists information about a resource.
    */
@@ -566,7 +568,7 @@ declare class APIGateway extends Service {
   /**
    * Lists information about a collection of Resource resources.
    */
-  getResources(params: APIGateway.Types.GetResourcesRequest, callback?: (err: AWSError, data: APIGateway.Types.Resources) => void): Request<APIGateway.Types.Resources, AWSError>;
+  getResources(params: BoundInput<APIGateway.Types.GetResourcesRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Resources) => void): Request<APIGateway.Types.Resources, AWSError>;
   /**
    * Lists information about a collection of Resource resources.
    */
@@ -574,7 +576,7 @@ declare class APIGateway extends Service {
   /**
    * Lists the RestApi resource in the collection.
    */
-  getRestApi(params: APIGateway.Types.GetRestApiRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
+  getRestApi(params: BoundInput<APIGateway.Types.GetRestApiRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
   /**
    * Lists the RestApi resource in the collection.
    */
@@ -582,7 +584,7 @@ declare class APIGateway extends Service {
   /**
    * Lists the RestApis resources for your collection.
    */
-  getRestApis(params: APIGateway.Types.GetRestApisRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApis) => void): Request<APIGateway.Types.RestApis, AWSError>;
+  getRestApis(params: BoundInput<APIGateway.Types.GetRestApisRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.RestApis) => void): Request<APIGateway.Types.RestApis, AWSError>;
   /**
    * Lists the RestApis resources for your collection.
    */
@@ -590,7 +592,7 @@ declare class APIGateway extends Service {
   /**
    * Generates a client SDK for a RestApi and Stage.
    */
-  getSdk(params: APIGateway.Types.GetSdkRequest, callback?: (err: AWSError, data: APIGateway.Types.SdkResponse) => void): Request<APIGateway.Types.SdkResponse, AWSError>;
+  getSdk(params: BoundInput<APIGateway.Types.GetSdkRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.SdkResponse) => void): Request<APIGateway.Types.SdkResponse, AWSError>;
   /**
    * Generates a client SDK for a RestApi and Stage.
    */
@@ -598,7 +600,7 @@ declare class APIGateway extends Service {
   /**
    * 
    */
-  getSdkType(params: APIGateway.Types.GetSdkTypeRequest, callback?: (err: AWSError, data: APIGateway.Types.SdkType) => void): Request<APIGateway.Types.SdkType, AWSError>;
+  getSdkType(params: BoundInput<APIGateway.Types.GetSdkTypeRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.SdkType) => void): Request<APIGateway.Types.SdkType, AWSError>;
   /**
    * 
    */
@@ -606,7 +608,7 @@ declare class APIGateway extends Service {
   /**
    * 
    */
-  getSdkTypes(params: APIGateway.Types.GetSdkTypesRequest, callback?: (err: AWSError, data: APIGateway.Types.SdkTypes) => void): Request<APIGateway.Types.SdkTypes, AWSError>;
+  getSdkTypes(params: BoundInput<APIGateway.Types.GetSdkTypesRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.SdkTypes) => void): Request<APIGateway.Types.SdkTypes, AWSError>;
   /**
    * 
    */
@@ -614,7 +616,7 @@ declare class APIGateway extends Service {
   /**
    * Gets information about a Stage resource.
    */
-  getStage(params: APIGateway.Types.GetStageRequest, callback?: (err: AWSError, data: APIGateway.Types.Stage) => void): Request<APIGateway.Types.Stage, AWSError>;
+  getStage(params: BoundInput<APIGateway.Types.GetStageRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Stage) => void): Request<APIGateway.Types.Stage, AWSError>;
   /**
    * Gets information about a Stage resource.
    */
@@ -622,7 +624,7 @@ declare class APIGateway extends Service {
   /**
    * Gets information about one or more Stage resources.
    */
-  getStages(params: APIGateway.Types.GetStagesRequest, callback?: (err: AWSError, data: APIGateway.Types.Stages) => void): Request<APIGateway.Types.Stages, AWSError>;
+  getStages(params: BoundInput<APIGateway.Types.GetStagesRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Stages) => void): Request<APIGateway.Types.Stages, AWSError>;
   /**
    * Gets information about one or more Stage resources.
    */
@@ -630,7 +632,7 @@ declare class APIGateway extends Service {
   /**
    * Gets the Tags collection for a given resource.
    */
-  getTags(params: APIGateway.Types.GetTagsRequest, callback?: (err: AWSError, data: APIGateway.Types.Tags) => void): Request<APIGateway.Types.Tags, AWSError>;
+  getTags(params: BoundInput<APIGateway.Types.GetTagsRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Tags) => void): Request<APIGateway.Types.Tags, AWSError>;
   /**
    * Gets the Tags collection for a given resource.
    */
@@ -638,7 +640,7 @@ declare class APIGateway extends Service {
   /**
    * Gets the usage data of a usage plan in a specified time interval.
    */
-  getUsage(params: APIGateway.Types.GetUsageRequest, callback?: (err: AWSError, data: APIGateway.Types.Usage) => void): Request<APIGateway.Types.Usage, AWSError>;
+  getUsage(params: BoundInput<APIGateway.Types.GetUsageRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Usage) => void): Request<APIGateway.Types.Usage, AWSError>;
   /**
    * Gets the usage data of a usage plan in a specified time interval.
    */
@@ -646,7 +648,7 @@ declare class APIGateway extends Service {
   /**
    * Gets a usage plan of a given plan identifier.
    */
-  getUsagePlan(params: APIGateway.Types.GetUsagePlanRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlan) => void): Request<APIGateway.Types.UsagePlan, AWSError>;
+  getUsagePlan(params: BoundInput<APIGateway.Types.GetUsagePlanRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.UsagePlan) => void): Request<APIGateway.Types.UsagePlan, AWSError>;
   /**
    * Gets a usage plan of a given plan identifier.
    */
@@ -654,7 +656,7 @@ declare class APIGateway extends Service {
   /**
    * Gets a usage plan key of a given key identifier.
    */
-  getUsagePlanKey(params: APIGateway.Types.GetUsagePlanKeyRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlanKey) => void): Request<APIGateway.Types.UsagePlanKey, AWSError>;
+  getUsagePlanKey(params: BoundInput<APIGateway.Types.GetUsagePlanKeyRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.UsagePlanKey) => void): Request<APIGateway.Types.UsagePlanKey, AWSError>;
   /**
    * Gets a usage plan key of a given key identifier.
    */
@@ -662,7 +664,7 @@ declare class APIGateway extends Service {
   /**
    * Gets all the usage plan keys representing the API keys added to a specified usage plan.
    */
-  getUsagePlanKeys(params: APIGateway.Types.GetUsagePlanKeysRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlanKeys) => void): Request<APIGateway.Types.UsagePlanKeys, AWSError>;
+  getUsagePlanKeys(params: BoundInput<APIGateway.Types.GetUsagePlanKeysRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.UsagePlanKeys) => void): Request<APIGateway.Types.UsagePlanKeys, AWSError>;
   /**
    * Gets all the usage plan keys representing the API keys added to a specified usage plan.
    */
@@ -670,7 +672,7 @@ declare class APIGateway extends Service {
   /**
    * Gets all the usage plans of the caller's account.
    */
-  getUsagePlans(params: APIGateway.Types.GetUsagePlansRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlans) => void): Request<APIGateway.Types.UsagePlans, AWSError>;
+  getUsagePlans(params: BoundInput<APIGateway.Types.GetUsagePlansRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.UsagePlans) => void): Request<APIGateway.Types.UsagePlans, AWSError>;
   /**
    * Gets all the usage plans of the caller's account.
    */
@@ -678,7 +680,7 @@ declare class APIGateway extends Service {
   /**
    * Gets a specified VPC link under the caller's account in a region.
    */
-  getVpcLink(params: APIGateway.Types.GetVpcLinkRequest, callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
+  getVpcLink(params: BoundInput<APIGateway.Types.GetVpcLinkRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
   /**
    * Gets a specified VPC link under the caller's account in a region.
    */
@@ -686,7 +688,7 @@ declare class APIGateway extends Service {
   /**
    * Gets the VpcLinks collection under the caller's account in a selected region.
    */
-  getVpcLinks(params: APIGateway.Types.GetVpcLinksRequest, callback?: (err: AWSError, data: APIGateway.Types.VpcLinks) => void): Request<APIGateway.Types.VpcLinks, AWSError>;
+  getVpcLinks(params: BoundInput<APIGateway.Types.GetVpcLinksRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.VpcLinks) => void): Request<APIGateway.Types.VpcLinks, AWSError>;
   /**
    * Gets the VpcLinks collection under the caller's account in a selected region.
    */
@@ -694,7 +696,7 @@ declare class APIGateway extends Service {
   /**
    * Import API keys from an external source, such as a CSV-formatted file.
    */
-  importApiKeys(params: APIGateway.Types.ImportApiKeysRequest, callback?: (err: AWSError, data: APIGateway.Types.ApiKeyIds) => void): Request<APIGateway.Types.ApiKeyIds, AWSError>;
+  importApiKeys(params: BoundInput<APIGateway.Types.ImportApiKeysRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.ApiKeyIds) => void): Request<APIGateway.Types.ApiKeyIds, AWSError>;
   /**
    * Import API keys from an external source, such as a CSV-formatted file.
    */
@@ -702,7 +704,7 @@ declare class APIGateway extends Service {
   /**
    * 
    */
-  importDocumentationParts(params: APIGateway.Types.ImportDocumentationPartsRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationPartIds) => void): Request<APIGateway.Types.DocumentationPartIds, AWSError>;
+  importDocumentationParts(params: BoundInput<APIGateway.Types.ImportDocumentationPartsRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.DocumentationPartIds) => void): Request<APIGateway.Types.DocumentationPartIds, AWSError>;
   /**
    * 
    */
@@ -710,7 +712,7 @@ declare class APIGateway extends Service {
   /**
    * A feature of the API Gateway control service for creating a new API from an external API definition file.
    */
-  importRestApi(params: APIGateway.Types.ImportRestApiRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
+  importRestApi(params: BoundInput<APIGateway.Types.ImportRestApiRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
   /**
    * A feature of the API Gateway control service for creating a new API from an external API definition file.
    */
@@ -718,7 +720,7 @@ declare class APIGateway extends Service {
   /**
    * Creates a customization of a GatewayResponse of a specified response type and status code on the given RestApi.
    */
-  putGatewayResponse(params: APIGateway.Types.PutGatewayResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.GatewayResponse) => void): Request<APIGateway.Types.GatewayResponse, AWSError>;
+  putGatewayResponse(params: BoundInput<APIGateway.Types.PutGatewayResponseRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.GatewayResponse) => void): Request<APIGateway.Types.GatewayResponse, AWSError>;
   /**
    * Creates a customization of a GatewayResponse of a specified response type and status code on the given RestApi.
    */
@@ -726,7 +728,7 @@ declare class APIGateway extends Service {
   /**
    * Sets up a method's integration.
    */
-  putIntegration(params: APIGateway.Types.PutIntegrationRequest, callback?: (err: AWSError, data: APIGateway.Types.Integration) => void): Request<APIGateway.Types.Integration, AWSError>;
+  putIntegration(params: BoundInput<APIGateway.Types.PutIntegrationRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Integration) => void): Request<APIGateway.Types.Integration, AWSError>;
   /**
    * Sets up a method's integration.
    */
@@ -734,7 +736,7 @@ declare class APIGateway extends Service {
   /**
    * Represents a put integration.
    */
-  putIntegrationResponse(params: APIGateway.Types.PutIntegrationResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.IntegrationResponse) => void): Request<APIGateway.Types.IntegrationResponse, AWSError>;
+  putIntegrationResponse(params: BoundInput<APIGateway.Types.PutIntegrationResponseRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.IntegrationResponse) => void): Request<APIGateway.Types.IntegrationResponse, AWSError>;
   /**
    * Represents a put integration.
    */
@@ -742,7 +744,7 @@ declare class APIGateway extends Service {
   /**
    * Add a method to an existing Resource resource.
    */
-  putMethod(params: APIGateway.Types.PutMethodRequest, callback?: (err: AWSError, data: APIGateway.Types.Method) => void): Request<APIGateway.Types.Method, AWSError>;
+  putMethod(params: BoundInput<APIGateway.Types.PutMethodRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Method) => void): Request<APIGateway.Types.Method, AWSError>;
   /**
    * Add a method to an existing Resource resource.
    */
@@ -750,7 +752,7 @@ declare class APIGateway extends Service {
   /**
    * Adds a MethodResponse to an existing Method resource.
    */
-  putMethodResponse(params: APIGateway.Types.PutMethodResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.MethodResponse) => void): Request<APIGateway.Types.MethodResponse, AWSError>;
+  putMethodResponse(params: BoundInput<APIGateway.Types.PutMethodResponseRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.MethodResponse) => void): Request<APIGateway.Types.MethodResponse, AWSError>;
   /**
    * Adds a MethodResponse to an existing Method resource.
    */
@@ -758,7 +760,7 @@ declare class APIGateway extends Service {
   /**
    * A feature of the API Gateway control service for updating an existing API with an input of external API definitions. The update can take the form of merging the supplied definition into the existing API or overwriting the existing API.
    */
-  putRestApi(params: APIGateway.Types.PutRestApiRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
+  putRestApi(params: BoundInput<APIGateway.Types.PutRestApiRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
   /**
    * A feature of the API Gateway control service for updating an existing API with an input of external API definitions. The update can take the form of merging the supplied definition into the existing API or overwriting the existing API.
    */
@@ -766,7 +768,7 @@ declare class APIGateway extends Service {
   /**
    * Adds or updates a tag on a given resource.
    */
-  tagResource(params: APIGateway.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  tagResource(params: BoundInput<APIGateway.Types.TagResourceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Adds or updates a tag on a given resource.
    */
@@ -774,7 +776,7 @@ declare class APIGateway extends Service {
   /**
    * Simulate the execution of an Authorizer in your RestApi with headers, parameters, and an incoming request body.  Enable custom authorizers 
    */
-  testInvokeAuthorizer(params: APIGateway.Types.TestInvokeAuthorizerRequest, callback?: (err: AWSError, data: APIGateway.Types.TestInvokeAuthorizerResponse) => void): Request<APIGateway.Types.TestInvokeAuthorizerResponse, AWSError>;
+  testInvokeAuthorizer(params: BoundInput<APIGateway.Types.TestInvokeAuthorizerRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.TestInvokeAuthorizerResponse) => void): Request<APIGateway.Types.TestInvokeAuthorizerResponse, AWSError>;
   /**
    * Simulate the execution of an Authorizer in your RestApi with headers, parameters, and an incoming request body.  Enable custom authorizers 
    */
@@ -782,7 +784,7 @@ declare class APIGateway extends Service {
   /**
    * Simulate the execution of a Method in your RestApi with headers, parameters, and an incoming request body.
    */
-  testInvokeMethod(params: APIGateway.Types.TestInvokeMethodRequest, callback?: (err: AWSError, data: APIGateway.Types.TestInvokeMethodResponse) => void): Request<APIGateway.Types.TestInvokeMethodResponse, AWSError>;
+  testInvokeMethod(params: BoundInput<APIGateway.Types.TestInvokeMethodRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.TestInvokeMethodResponse) => void): Request<APIGateway.Types.TestInvokeMethodResponse, AWSError>;
   /**
    * Simulate the execution of a Method in your RestApi with headers, parameters, and an incoming request body.
    */
@@ -790,7 +792,7 @@ declare class APIGateway extends Service {
   /**
    * Removes a tag from a given resource.
    */
-  untagResource(params: APIGateway.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  untagResource(params: BoundInput<APIGateway.Types.UntagResourceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes a tag from a given resource.
    */
@@ -798,7 +800,7 @@ declare class APIGateway extends Service {
   /**
    * Changes information about the current Account resource.
    */
-  updateAccount(params: APIGateway.Types.UpdateAccountRequest, callback?: (err: AWSError, data: APIGateway.Types.Account) => void): Request<APIGateway.Types.Account, AWSError>;
+  updateAccount(params: BoundInput<APIGateway.Types.UpdateAccountRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Account) => void): Request<APIGateway.Types.Account, AWSError>;
   /**
    * Changes information about the current Account resource.
    */
@@ -806,7 +808,7 @@ declare class APIGateway extends Service {
   /**
    * Changes information about an ApiKey resource.
    */
-  updateApiKey(params: APIGateway.Types.UpdateApiKeyRequest, callback?: (err: AWSError, data: APIGateway.Types.ApiKey) => void): Request<APIGateway.Types.ApiKey, AWSError>;
+  updateApiKey(params: BoundInput<APIGateway.Types.UpdateApiKeyRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.ApiKey) => void): Request<APIGateway.Types.ApiKey, AWSError>;
   /**
    * Changes information about an ApiKey resource.
    */
@@ -814,7 +816,7 @@ declare class APIGateway extends Service {
   /**
    * Updates an existing Authorizer resource. AWS CLI
    */
-  updateAuthorizer(params: APIGateway.Types.UpdateAuthorizerRequest, callback?: (err: AWSError, data: APIGateway.Types.Authorizer) => void): Request<APIGateway.Types.Authorizer, AWSError>;
+  updateAuthorizer(params: BoundInput<APIGateway.Types.UpdateAuthorizerRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Authorizer) => void): Request<APIGateway.Types.Authorizer, AWSError>;
   /**
    * Updates an existing Authorizer resource. AWS CLI
    */
@@ -822,7 +824,7 @@ declare class APIGateway extends Service {
   /**
    * Changes information about the BasePathMapping resource.
    */
-  updateBasePathMapping(params: APIGateway.Types.UpdateBasePathMappingRequest, callback?: (err: AWSError, data: APIGateway.Types.BasePathMapping) => void): Request<APIGateway.Types.BasePathMapping, AWSError>;
+  updateBasePathMapping(params: BoundInput<APIGateway.Types.UpdateBasePathMappingRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.BasePathMapping) => void): Request<APIGateway.Types.BasePathMapping, AWSError>;
   /**
    * Changes information about the BasePathMapping resource.
    */
@@ -830,7 +832,7 @@ declare class APIGateway extends Service {
   /**
    * Changes information about an ClientCertificate resource.
    */
-  updateClientCertificate(params: APIGateway.Types.UpdateClientCertificateRequest, callback?: (err: AWSError, data: APIGateway.Types.ClientCertificate) => void): Request<APIGateway.Types.ClientCertificate, AWSError>;
+  updateClientCertificate(params: BoundInput<APIGateway.Types.UpdateClientCertificateRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.ClientCertificate) => void): Request<APIGateway.Types.ClientCertificate, AWSError>;
   /**
    * Changes information about an ClientCertificate resource.
    */
@@ -838,7 +840,7 @@ declare class APIGateway extends Service {
   /**
    * Changes information about a Deployment resource.
    */
-  updateDeployment(params: APIGateway.Types.UpdateDeploymentRequest, callback?: (err: AWSError, data: APIGateway.Types.Deployment) => void): Request<APIGateway.Types.Deployment, AWSError>;
+  updateDeployment(params: BoundInput<APIGateway.Types.UpdateDeploymentRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Deployment) => void): Request<APIGateway.Types.Deployment, AWSError>;
   /**
    * Changes information about a Deployment resource.
    */
@@ -846,7 +848,7 @@ declare class APIGateway extends Service {
   /**
    * 
    */
-  updateDocumentationPart(params: APIGateway.Types.UpdateDocumentationPartRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationPart) => void): Request<APIGateway.Types.DocumentationPart, AWSError>;
+  updateDocumentationPart(params: BoundInput<APIGateway.Types.UpdateDocumentationPartRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.DocumentationPart) => void): Request<APIGateway.Types.DocumentationPart, AWSError>;
   /**
    * 
    */
@@ -854,7 +856,7 @@ declare class APIGateway extends Service {
   /**
    * 
    */
-  updateDocumentationVersion(params: APIGateway.Types.UpdateDocumentationVersionRequest, callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersion) => void): Request<APIGateway.Types.DocumentationVersion, AWSError>;
+  updateDocumentationVersion(params: BoundInput<APIGateway.Types.UpdateDocumentationVersionRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.DocumentationVersion) => void): Request<APIGateway.Types.DocumentationVersion, AWSError>;
   /**
    * 
    */
@@ -862,7 +864,7 @@ declare class APIGateway extends Service {
   /**
    * Changes information about the DomainName resource.
    */
-  updateDomainName(params: APIGateway.Types.UpdateDomainNameRequest, callback?: (err: AWSError, data: APIGateway.Types.DomainName) => void): Request<APIGateway.Types.DomainName, AWSError>;
+  updateDomainName(params: BoundInput<APIGateway.Types.UpdateDomainNameRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.DomainName) => void): Request<APIGateway.Types.DomainName, AWSError>;
   /**
    * Changes information about the DomainName resource.
    */
@@ -870,7 +872,7 @@ declare class APIGateway extends Service {
   /**
    * Updates a GatewayResponse of a specified response type on the given RestApi.
    */
-  updateGatewayResponse(params: APIGateway.Types.UpdateGatewayResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.GatewayResponse) => void): Request<APIGateway.Types.GatewayResponse, AWSError>;
+  updateGatewayResponse(params: BoundInput<APIGateway.Types.UpdateGatewayResponseRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.GatewayResponse) => void): Request<APIGateway.Types.GatewayResponse, AWSError>;
   /**
    * Updates a GatewayResponse of a specified response type on the given RestApi.
    */
@@ -878,7 +880,7 @@ declare class APIGateway extends Service {
   /**
    * Represents an update integration.
    */
-  updateIntegration(params: APIGateway.Types.UpdateIntegrationRequest, callback?: (err: AWSError, data: APIGateway.Types.Integration) => void): Request<APIGateway.Types.Integration, AWSError>;
+  updateIntegration(params: BoundInput<APIGateway.Types.UpdateIntegrationRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Integration) => void): Request<APIGateway.Types.Integration, AWSError>;
   /**
    * Represents an update integration.
    */
@@ -886,7 +888,7 @@ declare class APIGateway extends Service {
   /**
    * Represents an update integration response.
    */
-  updateIntegrationResponse(params: APIGateway.Types.UpdateIntegrationResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.IntegrationResponse) => void): Request<APIGateway.Types.IntegrationResponse, AWSError>;
+  updateIntegrationResponse(params: BoundInput<APIGateway.Types.UpdateIntegrationResponseRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.IntegrationResponse) => void): Request<APIGateway.Types.IntegrationResponse, AWSError>;
   /**
    * Represents an update integration response.
    */
@@ -894,7 +896,7 @@ declare class APIGateway extends Service {
   /**
    * Updates an existing Method resource.
    */
-  updateMethod(params: APIGateway.Types.UpdateMethodRequest, callback?: (err: AWSError, data: APIGateway.Types.Method) => void): Request<APIGateway.Types.Method, AWSError>;
+  updateMethod(params: BoundInput<APIGateway.Types.UpdateMethodRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Method) => void): Request<APIGateway.Types.Method, AWSError>;
   /**
    * Updates an existing Method resource.
    */
@@ -902,7 +904,7 @@ declare class APIGateway extends Service {
   /**
    * Updates an existing MethodResponse resource.
    */
-  updateMethodResponse(params: APIGateway.Types.UpdateMethodResponseRequest, callback?: (err: AWSError, data: APIGateway.Types.MethodResponse) => void): Request<APIGateway.Types.MethodResponse, AWSError>;
+  updateMethodResponse(params: BoundInput<APIGateway.Types.UpdateMethodResponseRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.MethodResponse) => void): Request<APIGateway.Types.MethodResponse, AWSError>;
   /**
    * Updates an existing MethodResponse resource.
    */
@@ -910,7 +912,7 @@ declare class APIGateway extends Service {
   /**
    * Changes information about a model.
    */
-  updateModel(params: APIGateway.Types.UpdateModelRequest, callback?: (err: AWSError, data: APIGateway.Types.Model) => void): Request<APIGateway.Types.Model, AWSError>;
+  updateModel(params: BoundInput<APIGateway.Types.UpdateModelRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Model) => void): Request<APIGateway.Types.Model, AWSError>;
   /**
    * Changes information about a model.
    */
@@ -918,7 +920,7 @@ declare class APIGateway extends Service {
   /**
    * Updates a RequestValidator of a given RestApi.
    */
-  updateRequestValidator(params: APIGateway.Types.UpdateRequestValidatorRequest, callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
+  updateRequestValidator(params: BoundInput<APIGateway.Types.UpdateRequestValidatorRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.RequestValidator) => void): Request<APIGateway.Types.RequestValidator, AWSError>;
   /**
    * Updates a RequestValidator of a given RestApi.
    */
@@ -926,7 +928,7 @@ declare class APIGateway extends Service {
   /**
    * Changes information about a Resource resource.
    */
-  updateResource(params: APIGateway.Types.UpdateResourceRequest, callback?: (err: AWSError, data: APIGateway.Types.Resource) => void): Request<APIGateway.Types.Resource, AWSError>;
+  updateResource(params: BoundInput<APIGateway.Types.UpdateResourceRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Resource) => void): Request<APIGateway.Types.Resource, AWSError>;
   /**
    * Changes information about a Resource resource.
    */
@@ -934,7 +936,7 @@ declare class APIGateway extends Service {
   /**
    * Changes information about the specified API.
    */
-  updateRestApi(params: APIGateway.Types.UpdateRestApiRequest, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
+  updateRestApi(params: BoundInput<APIGateway.Types.UpdateRestApiRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.RestApi) => void): Request<APIGateway.Types.RestApi, AWSError>;
   /**
    * Changes information about the specified API.
    */
@@ -942,7 +944,7 @@ declare class APIGateway extends Service {
   /**
    * Changes information about a Stage resource.
    */
-  updateStage(params: APIGateway.Types.UpdateStageRequest, callback?: (err: AWSError, data: APIGateway.Types.Stage) => void): Request<APIGateway.Types.Stage, AWSError>;
+  updateStage(params: BoundInput<APIGateway.Types.UpdateStageRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Stage) => void): Request<APIGateway.Types.Stage, AWSError>;
   /**
    * Changes information about a Stage resource.
    */
@@ -950,7 +952,7 @@ declare class APIGateway extends Service {
   /**
    * Grants a temporary extension to the remaining quota of a usage plan associated with a specified API key.
    */
-  updateUsage(params: APIGateway.Types.UpdateUsageRequest, callback?: (err: AWSError, data: APIGateway.Types.Usage) => void): Request<APIGateway.Types.Usage, AWSError>;
+  updateUsage(params: BoundInput<APIGateway.Types.UpdateUsageRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.Usage) => void): Request<APIGateway.Types.Usage, AWSError>;
   /**
    * Grants a temporary extension to the remaining quota of a usage plan associated with a specified API key.
    */
@@ -958,7 +960,7 @@ declare class APIGateway extends Service {
   /**
    * Updates a usage plan of a given plan Id.
    */
-  updateUsagePlan(params: APIGateway.Types.UpdateUsagePlanRequest, callback?: (err: AWSError, data: APIGateway.Types.UsagePlan) => void): Request<APIGateway.Types.UsagePlan, AWSError>;
+  updateUsagePlan(params: BoundInput<APIGateway.Types.UpdateUsagePlanRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.UsagePlan) => void): Request<APIGateway.Types.UsagePlan, AWSError>;
   /**
    * Updates a usage plan of a given plan Id.
    */
@@ -966,7 +968,7 @@ declare class APIGateway extends Service {
   /**
    * Updates an existing VpcLink of a specified identifier.
    */
-  updateVpcLink(params: APIGateway.Types.UpdateVpcLinkRequest, callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
+  updateVpcLink(params: BoundInput<APIGateway.Types.UpdateVpcLinkRequest, keyof Params>, callback?: (err: AWSError, data: APIGateway.Types.VpcLink) => void): Request<APIGateway.Types.VpcLink, AWSError>;
   /**
    * Updates an existing VpcLink of a specified identifier.
    */
@@ -4039,7 +4041,8 @@ declare namespace APIGateway {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateApiKeyRequest & CreateAuthorizerRequest & CreateBasePathMappingRequest & CreateDeploymentRequest & CreateDocumentationPartRequest & CreateDocumentationVersionRequest & CreateDomainNameRequest & CreateModelRequest & CreateRequestValidatorRequest & CreateResourceRequest & CreateRestApiRequest & CreateStageRequest & CreateUsagePlanRequest & CreateUsagePlanKeyRequest & CreateVpcLinkRequest & DeleteApiKeyRequest & DeleteAuthorizerRequest & DeleteBasePathMappingRequest & DeleteClientCertificateRequest & DeleteDeploymentRequest & DeleteDocumentationPartRequest & DeleteDocumentationVersionRequest & DeleteDomainNameRequest & DeleteGatewayResponseRequest & DeleteIntegrationRequest & DeleteIntegrationResponseRequest & DeleteMethodRequest & DeleteMethodResponseRequest & DeleteModelRequest & DeleteRequestValidatorRequest & DeleteResourceRequest & DeleteRestApiRequest & DeleteStageRequest & DeleteUsagePlanRequest & DeleteUsagePlanKeyRequest & DeleteVpcLinkRequest & FlushStageAuthorizersCacheRequest & FlushStageCacheRequest & GenerateClientCertificateRequest & GetAccountRequest & GetApiKeyRequest & GetApiKeysRequest & GetAuthorizerRequest & GetAuthorizersRequest & GetBasePathMappingRequest & GetBasePathMappingsRequest & GetClientCertificateRequest & GetClientCertificatesRequest & GetDeploymentRequest & GetDeploymentsRequest & GetDocumentationPartRequest & GetDocumentationPartsRequest & GetDocumentationVersionRequest & GetDocumentationVersionsRequest & GetDomainNameRequest & GetDomainNamesRequest & GetExportRequest & GetGatewayResponseRequest & GetGatewayResponsesRequest & GetIntegrationRequest & GetIntegrationResponseRequest & GetMethodRequest & GetMethodResponseRequest & GetModelRequest & GetModelTemplateRequest & GetModelsRequest & GetRequestValidatorRequest & GetRequestValidatorsRequest & GetResourceRequest & GetResourcesRequest & GetRestApiRequest & GetRestApisRequest & GetSdkRequest & GetSdkTypeRequest & GetSdkTypesRequest & GetStageRequest & GetStagesRequest & GetTagsRequest & GetUsageRequest & GetUsagePlanRequest & GetUsagePlanKeyRequest & GetUsagePlanKeysRequest & GetUsagePlansRequest & GetVpcLinkRequest & GetVpcLinksRequest & ImportApiKeysRequest & ImportDocumentationPartsRequest & ImportRestApiRequest & PutGatewayResponseRequest & PutIntegrationRequest & PutIntegrationResponseRequest & PutMethodRequest & PutMethodResponseRequest & PutRestApiRequest & TagResourceRequest & TestInvokeAuthorizerRequest & TestInvokeMethodRequest & UntagResourceRequest & UpdateAccountRequest & UpdateApiKeyRequest & UpdateAuthorizerRequest & UpdateBasePathMappingRequest & UpdateClientCertificateRequest & UpdateDeploymentRequest & UpdateDocumentationPartRequest & UpdateDocumentationVersionRequest & UpdateDomainNameRequest & UpdateGatewayResponseRequest & UpdateIntegrationRequest & UpdateIntegrationResponseRequest & UpdateMethodRequest & UpdateMethodResponseRequest & UpdateModelRequest & UpdateRequestValidatorRequest & UpdateResourceRequest & UpdateRestApiRequest & UpdateStageRequest & UpdateUsageRequest & UpdateUsagePlanRequest & UpdateVpcLinkRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the APIGateway client.
    */

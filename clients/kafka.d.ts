@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class Kafka extends Service {
+declare class Kafka<Params extends Kafka.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: Kafka.Types.ClientConfiguration)
-  config: Config & Kafka.Types.ClientConfiguration;
+  constructor(options?: Kafka.Types.ClientConfiguration<Params>)
+  config: Config & Kafka.Types.ClientConfiguration<Params>;
   /**
    * Creates a new MSK cluster.
    */
-  createCluster(params: Kafka.Types.CreateClusterRequest, callback?: (err: AWSError, data: Kafka.Types.CreateClusterResponse) => void): Request<Kafka.Types.CreateClusterResponse, AWSError>;
+  createCluster(params: BoundInput<Kafka.Types.CreateClusterRequest, keyof Params>, callback?: (err: AWSError, data: Kafka.Types.CreateClusterResponse) => void): Request<Kafka.Types.CreateClusterResponse, AWSError>;
   /**
    * Creates a new MSK cluster.
    */
@@ -22,7 +24,7 @@ declare class Kafka extends Service {
   /**
    * Deletes the MSK cluster specified by the Amazon Resource Name (ARN) in the request.
    */
-  deleteCluster(params: Kafka.Types.DeleteClusterRequest, callback?: (err: AWSError, data: Kafka.Types.DeleteClusterResponse) => void): Request<Kafka.Types.DeleteClusterResponse, AWSError>;
+  deleteCluster(params: BoundInput<Kafka.Types.DeleteClusterRequest, keyof Params>, callback?: (err: AWSError, data: Kafka.Types.DeleteClusterResponse) => void): Request<Kafka.Types.DeleteClusterResponse, AWSError>;
   /**
    * Deletes the MSK cluster specified by the Amazon Resource Name (ARN) in the request.
    */
@@ -30,7 +32,7 @@ declare class Kafka extends Service {
   /**
    * Returns a description of the MSK cluster whose Amazon Resource Name (ARN) is specified in the request.
    */
-  describeCluster(params: Kafka.Types.DescribeClusterRequest, callback?: (err: AWSError, data: Kafka.Types.DescribeClusterResponse) => void): Request<Kafka.Types.DescribeClusterResponse, AWSError>;
+  describeCluster(params: BoundInput<Kafka.Types.DescribeClusterRequest, keyof Params>, callback?: (err: AWSError, data: Kafka.Types.DescribeClusterResponse) => void): Request<Kafka.Types.DescribeClusterResponse, AWSError>;
   /**
    * Returns a description of the MSK cluster whose Amazon Resource Name (ARN) is specified in the request.
    */
@@ -38,7 +40,7 @@ declare class Kafka extends Service {
   /**
    * A list of brokers that a client application can use to bootstrap.
    */
-  getBootstrapBrokers(params: Kafka.Types.GetBootstrapBrokersRequest, callback?: (err: AWSError, data: Kafka.Types.GetBootstrapBrokersResponse) => void): Request<Kafka.Types.GetBootstrapBrokersResponse, AWSError>;
+  getBootstrapBrokers(params: BoundInput<Kafka.Types.GetBootstrapBrokersRequest, keyof Params>, callback?: (err: AWSError, data: Kafka.Types.GetBootstrapBrokersResponse) => void): Request<Kafka.Types.GetBootstrapBrokersResponse, AWSError>;
   /**
    * A list of brokers that a client application can use to bootstrap.
    */
@@ -46,7 +48,7 @@ declare class Kafka extends Service {
   /**
    * Returns a list of clusters in an account.
    */
-  listClusters(params: Kafka.Types.ListClustersRequest, callback?: (err: AWSError, data: Kafka.Types.ListClustersResponse) => void): Request<Kafka.Types.ListClustersResponse, AWSError>;
+  listClusters(params: BoundInput<Kafka.Types.ListClustersRequest, keyof Params>, callback?: (err: AWSError, data: Kafka.Types.ListClustersResponse) => void): Request<Kafka.Types.ListClustersResponse, AWSError>;
   /**
    * Returns a list of clusters in an account.
    */
@@ -54,7 +56,7 @@ declare class Kafka extends Service {
   /**
    * Returns a list of the broker nodes in the cluster.
    */
-  listNodes(params: Kafka.Types.ListNodesRequest, callback?: (err: AWSError, data: Kafka.Types.ListNodesResponse) => void): Request<Kafka.Types.ListNodesResponse, AWSError>;
+  listNodes(params: BoundInput<Kafka.Types.ListNodesRequest, keyof Params>, callback?: (err: AWSError, data: Kafka.Types.ListNodesResponse) => void): Request<Kafka.Types.ListNodesResponse, AWSError>;
   /**
    * Returns a list of the broker nodes in the cluster.
    */
@@ -397,7 +399,8 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateClusterRequest & DeleteClusterRequest & DescribeClusterRequest & GetBootstrapBrokersRequest & ListClustersRequest & ListNodesRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the Kafka client.
    */

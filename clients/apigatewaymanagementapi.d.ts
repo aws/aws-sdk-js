@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class ApiGatewayManagementApi extends Service {
+declare class ApiGatewayManagementApi<Params extends ApiGatewayManagementApi.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: ApiGatewayManagementApi.Types.ClientConfiguration)
-  config: Config & ApiGatewayManagementApi.Types.ClientConfiguration;
+  constructor(options?: ApiGatewayManagementApi.Types.ClientConfiguration<Params>)
+  config: Config & ApiGatewayManagementApi.Types.ClientConfiguration<Params>;
   /**
    * Sends the provided data to the specified connection.
    */
-  postToConnection(params: ApiGatewayManagementApi.Types.PostToConnectionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  postToConnection(params: BoundInput<ApiGatewayManagementApi.Types.PostToConnectionRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sends the provided data to the specified connection.
    */
@@ -43,7 +45,8 @@ declare namespace ApiGatewayManagementApi {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<PostToConnectionRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the ApiGatewayManagementApi client.
    */

@@ -3,19 +3,21 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class IoT1ClickDevicesService extends Service {
+declare class IoT1ClickDevicesService<Params extends IoT1ClickDevicesService.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: IoT1ClickDevicesService.Types.ClientConfiguration)
-  config: Config & IoT1ClickDevicesService.Types.ClientConfiguration;
+  constructor(options?: IoT1ClickDevicesService.Types.ClientConfiguration<Params>)
+  config: Config & IoT1ClickDevicesService.Types.ClientConfiguration<Params>;
   /**
    * Adds device(s) to your account (i.e., claim one or more devices) if and only if
  you received a claim code with the device(s).
    */
-  claimDevicesByClaimCode(params: IoT1ClickDevicesService.Types.ClaimDevicesByClaimCodeRequest, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.ClaimDevicesByClaimCodeResponse) => void): Request<IoT1ClickDevicesService.Types.ClaimDevicesByClaimCodeResponse, AWSError>;
+  claimDevicesByClaimCode(params: BoundInput<IoT1ClickDevicesService.Types.ClaimDevicesByClaimCodeRequest, keyof Params>, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.ClaimDevicesByClaimCodeResponse) => void): Request<IoT1ClickDevicesService.Types.ClaimDevicesByClaimCodeResponse, AWSError>;
   /**
    * Adds device(s) to your account (i.e., claim one or more devices) if and only if
  you received a claim code with the device(s).
@@ -25,7 +27,7 @@ declare class IoT1ClickDevicesService extends Service {
    * Given a device ID, returns a DescribeDeviceResponse object describing
  the details of the device.
    */
-  describeDevice(params: IoT1ClickDevicesService.Types.DescribeDeviceRequest, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.DescribeDeviceResponse) => void): Request<IoT1ClickDevicesService.Types.DescribeDeviceResponse, AWSError>;
+  describeDevice(params: BoundInput<IoT1ClickDevicesService.Types.DescribeDeviceRequest, keyof Params>, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.DescribeDeviceResponse) => void): Request<IoT1ClickDevicesService.Types.DescribeDeviceResponse, AWSError>;
   /**
    * Given a device ID, returns a DescribeDeviceResponse object describing
  the details of the device.
@@ -38,7 +40,7 @@ declare class IoT1ClickDevicesService extends Service {
  device event can be published by simply clicking the device.
  
    */
-  finalizeDeviceClaim(params: IoT1ClickDevicesService.Types.FinalizeDeviceClaimRequest, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.FinalizeDeviceClaimResponse) => void): Request<IoT1ClickDevicesService.Types.FinalizeDeviceClaimResponse, AWSError>;
+  finalizeDeviceClaim(params: BoundInput<IoT1ClickDevicesService.Types.FinalizeDeviceClaimRequest, keyof Params>, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.FinalizeDeviceClaimResponse) => void): Request<IoT1ClickDevicesService.Types.FinalizeDeviceClaimResponse, AWSError>;
   /**
    * Given a device ID, finalizes the claim request for the associated device.
  Claiming a device consists of initiating a claim, then publishing a device
@@ -51,7 +53,7 @@ declare class IoT1ClickDevicesService extends Service {
    * Given a device ID, returns the invokable methods associated with the
  device.
    */
-  getDeviceMethods(params: IoT1ClickDevicesService.Types.GetDeviceMethodsRequest, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.GetDeviceMethodsResponse) => void): Request<IoT1ClickDevicesService.Types.GetDeviceMethodsResponse, AWSError>;
+  getDeviceMethods(params: BoundInput<IoT1ClickDevicesService.Types.GetDeviceMethodsRequest, keyof Params>, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.GetDeviceMethodsResponse) => void): Request<IoT1ClickDevicesService.Types.GetDeviceMethodsResponse, AWSError>;
   /**
    * Given a device ID, returns the invokable methods associated with the
  device.
@@ -64,7 +66,7 @@ declare class IoT1ClickDevicesService extends Service {
  device event can be published by simply clicking the device.
  
    */
-  initiateDeviceClaim(params: IoT1ClickDevicesService.Types.InitiateDeviceClaimRequest, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.InitiateDeviceClaimResponse) => void): Request<IoT1ClickDevicesService.Types.InitiateDeviceClaimResponse, AWSError>;
+  initiateDeviceClaim(params: BoundInput<IoT1ClickDevicesService.Types.InitiateDeviceClaimRequest, keyof Params>, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.InitiateDeviceClaimResponse) => void): Request<IoT1ClickDevicesService.Types.InitiateDeviceClaimResponse, AWSError>;
   /**
    * Given a device ID, initiates a claim request for the associated device.
  Claiming a device consists of initiating a claim, then publishing a device
@@ -77,7 +79,7 @@ declare class IoT1ClickDevicesService extends Service {
    * Given a device ID, issues a request to invoke a named device method (with possible
  parameters). See the "Example POST" code snippet below.
    */
-  invokeDeviceMethod(params: IoT1ClickDevicesService.Types.InvokeDeviceMethodRequest, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.InvokeDeviceMethodResponse) => void): Request<IoT1ClickDevicesService.Types.InvokeDeviceMethodResponse, AWSError>;
+  invokeDeviceMethod(params: BoundInput<IoT1ClickDevicesService.Types.InvokeDeviceMethodRequest, keyof Params>, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.InvokeDeviceMethodResponse) => void): Request<IoT1ClickDevicesService.Types.InvokeDeviceMethodResponse, AWSError>;
   /**
    * Given a device ID, issues a request to invoke a named device method (with possible
  parameters). See the "Example POST" code snippet below.
@@ -87,7 +89,7 @@ declare class IoT1ClickDevicesService extends Service {
    * Using a device ID, returns a DeviceEventsResponse object containing
  an array of events for the device.
    */
-  listDeviceEvents(params: IoT1ClickDevicesService.Types.ListDeviceEventsRequest, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.ListDeviceEventsResponse) => void): Request<IoT1ClickDevicesService.Types.ListDeviceEventsResponse, AWSError>;
+  listDeviceEvents(params: BoundInput<IoT1ClickDevicesService.Types.ListDeviceEventsRequest, keyof Params>, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.ListDeviceEventsResponse) => void): Request<IoT1ClickDevicesService.Types.ListDeviceEventsResponse, AWSError>;
   /**
    * Using a device ID, returns a DeviceEventsResponse object containing
  an array of events for the device.
@@ -96,7 +98,7 @@ declare class IoT1ClickDevicesService extends Service {
   /**
    * Lists the 1-Click compatible devices associated with your AWS account.
    */
-  listDevices(params: IoT1ClickDevicesService.Types.ListDevicesRequest, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.ListDevicesResponse) => void): Request<IoT1ClickDevicesService.Types.ListDevicesResponse, AWSError>;
+  listDevices(params: BoundInput<IoT1ClickDevicesService.Types.ListDevicesRequest, keyof Params>, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.ListDevicesResponse) => void): Request<IoT1ClickDevicesService.Types.ListDevicesResponse, AWSError>;
   /**
    * Lists the 1-Click compatible devices associated with your AWS account.
    */
@@ -104,7 +106,7 @@ declare class IoT1ClickDevicesService extends Service {
   /**
    * Disassociates a device from your AWS account using its device ID.
    */
-  unclaimDevice(params: IoT1ClickDevicesService.Types.UnclaimDeviceRequest, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.UnclaimDeviceResponse) => void): Request<IoT1ClickDevicesService.Types.UnclaimDeviceResponse, AWSError>;
+  unclaimDevice(params: BoundInput<IoT1ClickDevicesService.Types.UnclaimDeviceRequest, keyof Params>, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.UnclaimDeviceResponse) => void): Request<IoT1ClickDevicesService.Types.UnclaimDeviceResponse, AWSError>;
   /**
    * Disassociates a device from your AWS account using its device ID.
    */
@@ -113,7 +115,7 @@ declare class IoT1ClickDevicesService extends Service {
    * Using a Boolean value (true or false), this operation
  enables or disables the device given a device ID.
    */
-  updateDeviceState(params: IoT1ClickDevicesService.Types.UpdateDeviceStateRequest, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.UpdateDeviceStateResponse) => void): Request<IoT1ClickDevicesService.Types.UpdateDeviceStateResponse, AWSError>;
+  updateDeviceState(params: BoundInput<IoT1ClickDevicesService.Types.UpdateDeviceStateRequest, keyof Params>, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.UpdateDeviceStateResponse) => void): Request<IoT1ClickDevicesService.Types.UpdateDeviceStateResponse, AWSError>;
   /**
    * Using a Boolean value (true or false), this operation
  enables or disables the device given a device ID.
@@ -375,7 +377,8 @@ declare namespace IoT1ClickDevicesService {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<ClaimDevicesByClaimCodeRequest & DescribeDeviceRequest & FinalizeDeviceClaimRequest & GetDeviceMethodsRequest & InitiateDeviceClaimRequest & InvokeDeviceMethodRequest & ListDeviceEventsRequest & ListDevicesRequest & UnclaimDeviceRequest & UpdateDeviceStateRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the IoT1ClickDevicesService client.
    */

@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class ServerlessApplicationRepository extends Service {
+declare class ServerlessApplicationRepository<Params extends ServerlessApplicationRepository.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: ServerlessApplicationRepository.Types.ClientConfiguration)
-  config: Config & ServerlessApplicationRepository.Types.ClientConfiguration;
+  constructor(options?: ServerlessApplicationRepository.Types.ClientConfiguration<Params>)
+  config: Config & ServerlessApplicationRepository.Types.ClientConfiguration<Params>;
   /**
    * Creates an application, optionally including an AWS SAM file to create the first application version in the same call.
    */
-  createApplication(params: ServerlessApplicationRepository.Types.CreateApplicationRequest, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.CreateApplicationResponse) => void): Request<ServerlessApplicationRepository.Types.CreateApplicationResponse, AWSError>;
+  createApplication(params: BoundInput<ServerlessApplicationRepository.Types.CreateApplicationRequest, keyof Params>, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.CreateApplicationResponse) => void): Request<ServerlessApplicationRepository.Types.CreateApplicationResponse, AWSError>;
   /**
    * Creates an application, optionally including an AWS SAM file to create the first application version in the same call.
    */
@@ -22,7 +24,7 @@ declare class ServerlessApplicationRepository extends Service {
   /**
    * Creates an application version.
    */
-  createApplicationVersion(params: ServerlessApplicationRepository.Types.CreateApplicationVersionRequest, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.CreateApplicationVersionResponse) => void): Request<ServerlessApplicationRepository.Types.CreateApplicationVersionResponse, AWSError>;
+  createApplicationVersion(params: BoundInput<ServerlessApplicationRepository.Types.CreateApplicationVersionRequest, keyof Params>, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.CreateApplicationVersionResponse) => void): Request<ServerlessApplicationRepository.Types.CreateApplicationVersionResponse, AWSError>;
   /**
    * Creates an application version.
    */
@@ -30,7 +32,7 @@ declare class ServerlessApplicationRepository extends Service {
   /**
    * Creates an AWS CloudFormation change set for the given application.
    */
-  createCloudFormationChangeSet(params: ServerlessApplicationRepository.Types.CreateCloudFormationChangeSetRequest, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.CreateCloudFormationChangeSetResponse) => void): Request<ServerlessApplicationRepository.Types.CreateCloudFormationChangeSetResponse, AWSError>;
+  createCloudFormationChangeSet(params: BoundInput<ServerlessApplicationRepository.Types.CreateCloudFormationChangeSetRequest, keyof Params>, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.CreateCloudFormationChangeSetResponse) => void): Request<ServerlessApplicationRepository.Types.CreateCloudFormationChangeSetResponse, AWSError>;
   /**
    * Creates an AWS CloudFormation change set for the given application.
    */
@@ -38,7 +40,7 @@ declare class ServerlessApplicationRepository extends Service {
   /**
    * Creates an AWS CloudFormation template.
    */
-  createCloudFormationTemplate(params: ServerlessApplicationRepository.Types.CreateCloudFormationTemplateRequest, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.CreateCloudFormationTemplateResponse) => void): Request<ServerlessApplicationRepository.Types.CreateCloudFormationTemplateResponse, AWSError>;
+  createCloudFormationTemplate(params: BoundInput<ServerlessApplicationRepository.Types.CreateCloudFormationTemplateRequest, keyof Params>, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.CreateCloudFormationTemplateResponse) => void): Request<ServerlessApplicationRepository.Types.CreateCloudFormationTemplateResponse, AWSError>;
   /**
    * Creates an AWS CloudFormation template.
    */
@@ -46,7 +48,7 @@ declare class ServerlessApplicationRepository extends Service {
   /**
    * Deletes the specified application.
    */
-  deleteApplication(params: ServerlessApplicationRepository.Types.DeleteApplicationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteApplication(params: BoundInput<ServerlessApplicationRepository.Types.DeleteApplicationRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified application.
    */
@@ -54,7 +56,7 @@ declare class ServerlessApplicationRepository extends Service {
   /**
    * Gets the specified application.
    */
-  getApplication(params: ServerlessApplicationRepository.Types.GetApplicationRequest, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.GetApplicationResponse) => void): Request<ServerlessApplicationRepository.Types.GetApplicationResponse, AWSError>;
+  getApplication(params: BoundInput<ServerlessApplicationRepository.Types.GetApplicationRequest, keyof Params>, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.GetApplicationResponse) => void): Request<ServerlessApplicationRepository.Types.GetApplicationResponse, AWSError>;
   /**
    * Gets the specified application.
    */
@@ -62,7 +64,7 @@ declare class ServerlessApplicationRepository extends Service {
   /**
    * Retrieves the policy for the application.
    */
-  getApplicationPolicy(params: ServerlessApplicationRepository.Types.GetApplicationPolicyRequest, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.GetApplicationPolicyResponse) => void): Request<ServerlessApplicationRepository.Types.GetApplicationPolicyResponse, AWSError>;
+  getApplicationPolicy(params: BoundInput<ServerlessApplicationRepository.Types.GetApplicationPolicyRequest, keyof Params>, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.GetApplicationPolicyResponse) => void): Request<ServerlessApplicationRepository.Types.GetApplicationPolicyResponse, AWSError>;
   /**
    * Retrieves the policy for the application.
    */
@@ -70,7 +72,7 @@ declare class ServerlessApplicationRepository extends Service {
   /**
    * Gets the specified AWS CloudFormation template.
    */
-  getCloudFormationTemplate(params: ServerlessApplicationRepository.Types.GetCloudFormationTemplateRequest, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.GetCloudFormationTemplateResponse) => void): Request<ServerlessApplicationRepository.Types.GetCloudFormationTemplateResponse, AWSError>;
+  getCloudFormationTemplate(params: BoundInput<ServerlessApplicationRepository.Types.GetCloudFormationTemplateRequest, keyof Params>, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.GetCloudFormationTemplateResponse) => void): Request<ServerlessApplicationRepository.Types.GetCloudFormationTemplateResponse, AWSError>;
   /**
    * Gets the specified AWS CloudFormation template.
    */
@@ -78,7 +80,7 @@ declare class ServerlessApplicationRepository extends Service {
   /**
    * Retrieves the list of applications nested in the containing application.
    */
-  listApplicationDependencies(params: ServerlessApplicationRepository.Types.ListApplicationDependenciesRequest, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.ListApplicationDependenciesResponse) => void): Request<ServerlessApplicationRepository.Types.ListApplicationDependenciesResponse, AWSError>;
+  listApplicationDependencies(params: BoundInput<ServerlessApplicationRepository.Types.ListApplicationDependenciesRequest, keyof Params>, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.ListApplicationDependenciesResponse) => void): Request<ServerlessApplicationRepository.Types.ListApplicationDependenciesResponse, AWSError>;
   /**
    * Retrieves the list of applications nested in the containing application.
    */
@@ -86,7 +88,7 @@ declare class ServerlessApplicationRepository extends Service {
   /**
    * Lists versions for the specified application.
    */
-  listApplicationVersions(params: ServerlessApplicationRepository.Types.ListApplicationVersionsRequest, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.ListApplicationVersionsResponse) => void): Request<ServerlessApplicationRepository.Types.ListApplicationVersionsResponse, AWSError>;
+  listApplicationVersions(params: BoundInput<ServerlessApplicationRepository.Types.ListApplicationVersionsRequest, keyof Params>, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.ListApplicationVersionsResponse) => void): Request<ServerlessApplicationRepository.Types.ListApplicationVersionsResponse, AWSError>;
   /**
    * Lists versions for the specified application.
    */
@@ -94,7 +96,7 @@ declare class ServerlessApplicationRepository extends Service {
   /**
    * Lists applications owned by the requester.
    */
-  listApplications(params: ServerlessApplicationRepository.Types.ListApplicationsRequest, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.ListApplicationsResponse) => void): Request<ServerlessApplicationRepository.Types.ListApplicationsResponse, AWSError>;
+  listApplications(params: BoundInput<ServerlessApplicationRepository.Types.ListApplicationsRequest, keyof Params>, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.ListApplicationsResponse) => void): Request<ServerlessApplicationRepository.Types.ListApplicationsResponse, AWSError>;
   /**
    * Lists applications owned by the requester.
    */
@@ -105,7 +107,7 @@ declare class ServerlessApplicationRepository extends Service {
  Permissions
  .
    */
-  putApplicationPolicy(params: ServerlessApplicationRepository.Types.PutApplicationPolicyRequest, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.PutApplicationPolicyResponse) => void): Request<ServerlessApplicationRepository.Types.PutApplicationPolicyResponse, AWSError>;
+  putApplicationPolicy(params: BoundInput<ServerlessApplicationRepository.Types.PutApplicationPolicyRequest, keyof Params>, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.PutApplicationPolicyResponse) => void): Request<ServerlessApplicationRepository.Types.PutApplicationPolicyResponse, AWSError>;
   /**
    * Sets the permission policy for an application. For the list of actions supported for this operation, see
  Application 
@@ -116,7 +118,7 @@ declare class ServerlessApplicationRepository extends Service {
   /**
    * Updates the specified application.
    */
-  updateApplication(params: ServerlessApplicationRepository.Types.UpdateApplicationRequest, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.UpdateApplicationResponse) => void): Request<ServerlessApplicationRepository.Types.UpdateApplicationResponse, AWSError>;
+  updateApplication(params: BoundInput<ServerlessApplicationRepository.Types.UpdateApplicationRequest, keyof Params>, callback?: (err: AWSError, data: ServerlessApplicationRepository.Types.UpdateApplicationResponse) => void): Request<ServerlessApplicationRepository.Types.UpdateApplicationResponse, AWSError>;
   /**
    * Updates the specified application.
    */
@@ -1024,7 +1026,8 @@ declare namespace ServerlessApplicationRepository {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateApplicationRequest & CreateApplicationVersionRequest & CreateCloudFormationChangeSetRequest & CreateCloudFormationTemplateRequest & DeleteApplicationRequest & GetApplicationRequest & GetApplicationPolicyRequest & GetCloudFormationTemplateRequest & ListApplicationDependenciesRequest & ListApplicationVersionsRequest & ListApplicationsRequest & PutApplicationPolicyRequest & UpdateApplicationRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the ServerlessApplicationRepository client.
    */

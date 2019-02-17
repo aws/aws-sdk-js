@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class KinesisVideo extends Service {
+declare class KinesisVideo<Params extends KinesisVideo.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: KinesisVideo.Types.ClientConfiguration)
-  config: Config & KinesisVideo.Types.ClientConfiguration;
+  constructor(options?: KinesisVideo.Types.ClientConfiguration<Params>)
+  config: Config & KinesisVideo.Types.ClientConfiguration<Params>;
   /**
    * Creates a new Kinesis video stream.  When you create a new stream, Kinesis Video Streams assigns it a version number. When you change the stream's metadata, Kinesis Video Streams updates the version.   CreateStream is an asynchronous operation. For information about how the service works, see How it Works.  You must have permissions for the KinesisVideo:CreateStream action.
    */
-  createStream(params: KinesisVideo.Types.CreateStreamInput, callback?: (err: AWSError, data: KinesisVideo.Types.CreateStreamOutput) => void): Request<KinesisVideo.Types.CreateStreamOutput, AWSError>;
+  createStream(params: BoundInput<KinesisVideo.Types.CreateStreamInput, keyof Params>, callback?: (err: AWSError, data: KinesisVideo.Types.CreateStreamOutput) => void): Request<KinesisVideo.Types.CreateStreamOutput, AWSError>;
   /**
    * Creates a new Kinesis video stream.  When you create a new stream, Kinesis Video Streams assigns it a version number. When you change the stream's metadata, Kinesis Video Streams updates the version.   CreateStream is an asynchronous operation. For information about how the service works, see How it Works.  You must have permissions for the KinesisVideo:CreateStream action.
    */
@@ -22,7 +24,7 @@ declare class KinesisVideo extends Service {
   /**
    * Deletes a Kinesis video stream and the data contained in the stream.  This method marks the stream for deletion, and makes the data in the stream inaccessible immediately.    To ensure that you have the latest version of the stream before deleting it, you can specify the stream version. Kinesis Video Streams assigns a version to each stream. When you update a stream, Kinesis Video Streams assigns a new version number. To get the latest stream version, use the DescribeStream API.  This operation requires permission for the KinesisVideo:DeleteStream action.
    */
-  deleteStream(params: KinesisVideo.Types.DeleteStreamInput, callback?: (err: AWSError, data: KinesisVideo.Types.DeleteStreamOutput) => void): Request<KinesisVideo.Types.DeleteStreamOutput, AWSError>;
+  deleteStream(params: BoundInput<KinesisVideo.Types.DeleteStreamInput, keyof Params>, callback?: (err: AWSError, data: KinesisVideo.Types.DeleteStreamOutput) => void): Request<KinesisVideo.Types.DeleteStreamOutput, AWSError>;
   /**
    * Deletes a Kinesis video stream and the data contained in the stream.  This method marks the stream for deletion, and makes the data in the stream inaccessible immediately.    To ensure that you have the latest version of the stream before deleting it, you can specify the stream version. Kinesis Video Streams assigns a version to each stream. When you update a stream, Kinesis Video Streams assigns a new version number. To get the latest stream version, use the DescribeStream API.  This operation requires permission for the KinesisVideo:DeleteStream action.
    */
@@ -30,7 +32,7 @@ declare class KinesisVideo extends Service {
   /**
    * Returns the most current information about the specified stream. You must specify either the StreamName or the StreamARN. 
    */
-  describeStream(params: KinesisVideo.Types.DescribeStreamInput, callback?: (err: AWSError, data: KinesisVideo.Types.DescribeStreamOutput) => void): Request<KinesisVideo.Types.DescribeStreamOutput, AWSError>;
+  describeStream(params: BoundInput<KinesisVideo.Types.DescribeStreamInput, keyof Params>, callback?: (err: AWSError, data: KinesisVideo.Types.DescribeStreamOutput) => void): Request<KinesisVideo.Types.DescribeStreamOutput, AWSError>;
   /**
    * Returns the most current information about the specified stream. You must specify either the StreamName or the StreamARN. 
    */
@@ -38,7 +40,7 @@ declare class KinesisVideo extends Service {
   /**
    * Gets an endpoint for a specified stream for either reading or writing. Use this endpoint in your application to read from the specified stream (using the GetMedia or GetMediaForFragmentList operations) or write to it (using the PutMedia operation).   The returned endpoint does not have the API name appended. The client needs to add the API name to the returned endpoint.  In the request, specify the stream either by StreamName or StreamARN.
    */
-  getDataEndpoint(params: KinesisVideo.Types.GetDataEndpointInput, callback?: (err: AWSError, data: KinesisVideo.Types.GetDataEndpointOutput) => void): Request<KinesisVideo.Types.GetDataEndpointOutput, AWSError>;
+  getDataEndpoint(params: BoundInput<KinesisVideo.Types.GetDataEndpointInput, keyof Params>, callback?: (err: AWSError, data: KinesisVideo.Types.GetDataEndpointOutput) => void): Request<KinesisVideo.Types.GetDataEndpointOutput, AWSError>;
   /**
    * Gets an endpoint for a specified stream for either reading or writing. Use this endpoint in your application to read from the specified stream (using the GetMedia or GetMediaForFragmentList operations) or write to it (using the PutMedia operation).   The returned endpoint does not have the API name appended. The client needs to add the API name to the returned endpoint.  In the request, specify the stream either by StreamName or StreamARN.
    */
@@ -46,7 +48,7 @@ declare class KinesisVideo extends Service {
   /**
    * Returns an array of StreamInfo objects. Each object describes a stream. To retrieve only streams that satisfy a specific condition, you can specify a StreamNameCondition. 
    */
-  listStreams(params: KinesisVideo.Types.ListStreamsInput, callback?: (err: AWSError, data: KinesisVideo.Types.ListStreamsOutput) => void): Request<KinesisVideo.Types.ListStreamsOutput, AWSError>;
+  listStreams(params: BoundInput<KinesisVideo.Types.ListStreamsInput, keyof Params>, callback?: (err: AWSError, data: KinesisVideo.Types.ListStreamsOutput) => void): Request<KinesisVideo.Types.ListStreamsOutput, AWSError>;
   /**
    * Returns an array of StreamInfo objects. Each object describes a stream. To retrieve only streams that satisfy a specific condition, you can specify a StreamNameCondition. 
    */
@@ -54,7 +56,7 @@ declare class KinesisVideo extends Service {
   /**
    * Returns a list of tags associated with the specified stream. In the request, you must specify either the StreamName or the StreamARN. 
    */
-  listTagsForStream(params: KinesisVideo.Types.ListTagsForStreamInput, callback?: (err: AWSError, data: KinesisVideo.Types.ListTagsForStreamOutput) => void): Request<KinesisVideo.Types.ListTagsForStreamOutput, AWSError>;
+  listTagsForStream(params: BoundInput<KinesisVideo.Types.ListTagsForStreamInput, keyof Params>, callback?: (err: AWSError, data: KinesisVideo.Types.ListTagsForStreamOutput) => void): Request<KinesisVideo.Types.ListTagsForStreamOutput, AWSError>;
   /**
    * Returns a list of tags associated with the specified stream. In the request, you must specify either the StreamName or the StreamARN. 
    */
@@ -62,7 +64,7 @@ declare class KinesisVideo extends Service {
   /**
    * Adds one or more tags to a stream. A tag is a key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.  You must provide either the StreamName or the StreamARN. This operation requires permission for the KinesisVideo:TagStream action. Kinesis video streams support up to 50 tags.
    */
-  tagStream(params: KinesisVideo.Types.TagStreamInput, callback?: (err: AWSError, data: KinesisVideo.Types.TagStreamOutput) => void): Request<KinesisVideo.Types.TagStreamOutput, AWSError>;
+  tagStream(params: BoundInput<KinesisVideo.Types.TagStreamInput, keyof Params>, callback?: (err: AWSError, data: KinesisVideo.Types.TagStreamOutput) => void): Request<KinesisVideo.Types.TagStreamOutput, AWSError>;
   /**
    * Adds one or more tags to a stream. A tag is a key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.  You must provide either the StreamName or the StreamARN. This operation requires permission for the KinesisVideo:TagStream action. Kinesis video streams support up to 50 tags.
    */
@@ -70,7 +72,7 @@ declare class KinesisVideo extends Service {
   /**
    * Removes one or more tags from a stream. In the request, specify only a tag key or keys; don't specify the value. If you specify a tag key that does not exist, it's ignored. In the request, you must provide the StreamName or StreamARN.
    */
-  untagStream(params: KinesisVideo.Types.UntagStreamInput, callback?: (err: AWSError, data: KinesisVideo.Types.UntagStreamOutput) => void): Request<KinesisVideo.Types.UntagStreamOutput, AWSError>;
+  untagStream(params: BoundInput<KinesisVideo.Types.UntagStreamInput, keyof Params>, callback?: (err: AWSError, data: KinesisVideo.Types.UntagStreamOutput) => void): Request<KinesisVideo.Types.UntagStreamOutput, AWSError>;
   /**
    * Removes one or more tags from a stream. In the request, specify only a tag key or keys; don't specify the value. If you specify a tag key that does not exist, it's ignored. In the request, you must provide the StreamName or StreamARN.
    */
@@ -78,7 +80,7 @@ declare class KinesisVideo extends Service {
   /**
    *  Increases or decreases the stream's data retention period by the value that you specify. To indicate whether you want to increase or decrease the data retention period, specify the Operation parameter in the request body. In the request, you must specify either the StreamName or the StreamARN.   The retention period that you specify replaces the current value.  This operation requires permission for the KinesisVideo:UpdateDataRetention action. Changing the data retention period affects the data in the stream as follows:   If the data retention period is increased, existing data is retained for the new retention period. For example, if the data retention period is increased from one hour to seven hours, all existing data is retained for seven hours.   If the data retention period is decreased, existing data is retained for the new retention period. For example, if the data retention period is decreased from seven hours to one hour, all existing data is retained for one hour, and any data older than one hour is deleted immediately.  
    */
-  updateDataRetention(params: KinesisVideo.Types.UpdateDataRetentionInput, callback?: (err: AWSError, data: KinesisVideo.Types.UpdateDataRetentionOutput) => void): Request<KinesisVideo.Types.UpdateDataRetentionOutput, AWSError>;
+  updateDataRetention(params: BoundInput<KinesisVideo.Types.UpdateDataRetentionInput, keyof Params>, callback?: (err: AWSError, data: KinesisVideo.Types.UpdateDataRetentionOutput) => void): Request<KinesisVideo.Types.UpdateDataRetentionOutput, AWSError>;
   /**
    *  Increases or decreases the stream's data retention period by the value that you specify. To indicate whether you want to increase or decrease the data retention period, specify the Operation parameter in the request body. In the request, you must specify either the StreamName or the StreamARN.   The retention period that you specify replaces the current value.  This operation requires permission for the KinesisVideo:UpdateDataRetention action. Changing the data retention period affects the data in the stream as follows:   If the data retention period is increased, existing data is retained for the new retention period. For example, if the data retention period is increased from one hour to seven hours, all existing data is retained for seven hours.   If the data retention period is decreased, existing data is retained for the new retention period. For example, if the data retention period is decreased from seven hours to one hour, all existing data is retained for one hour, and any data older than one hour is deleted immediately.  
    */
@@ -86,7 +88,7 @@ declare class KinesisVideo extends Service {
   /**
    * Updates stream metadata, such as the device name and media type. You must provide the stream name or the Amazon Resource Name (ARN) of the stream. To make sure that you have the latest version of the stream before updating it, you can specify the stream version. Kinesis Video Streams assigns a version to each stream. When you update a stream, Kinesis Video Streams assigns a new version number. To get the latest stream version, use the DescribeStream API.   UpdateStream is an asynchronous operation, and takes time to complete.
    */
-  updateStream(params: KinesisVideo.Types.UpdateStreamInput, callback?: (err: AWSError, data: KinesisVideo.Types.UpdateStreamOutput) => void): Request<KinesisVideo.Types.UpdateStreamOutput, AWSError>;
+  updateStream(params: BoundInput<KinesisVideo.Types.UpdateStreamInput, keyof Params>, callback?: (err: AWSError, data: KinesisVideo.Types.UpdateStreamOutput) => void): Request<KinesisVideo.Types.UpdateStreamOutput, AWSError>;
   /**
    * Updates stream metadata, such as the device name and media type. You must provide the stream name or the Amazon Resource Name (ARN) of the stream. To make sure that you have the latest version of the stream before updating it, you can specify the stream version. Kinesis Video Streams assigns a version to each stream. When you update a stream, Kinesis Video Streams assigns a new version number. To get the latest stream version, use the DescribeStream API.   UpdateStream is an asynchronous operation, and takes time to complete.
    */
@@ -380,7 +382,8 @@ declare namespace KinesisVideo {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateStreamInput & DeleteStreamInput & DescribeStreamInput & GetDataEndpointInput & ListStreamsInput & ListTagsForStreamInput & TagStreamInput & UntagStreamInput & UpdateDataRetentionInput & UpdateStreamInput>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the KinesisVideo client.
    */

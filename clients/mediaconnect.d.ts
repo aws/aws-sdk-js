@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class MediaConnect extends Service {
+declare class MediaConnect<Params extends MediaConnect.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: MediaConnect.Types.ClientConfiguration)
-  config: Config & MediaConnect.Types.ClientConfiguration;
+  constructor(options?: MediaConnect.Types.ClientConfiguration<Params>)
+  config: Config & MediaConnect.Types.ClientConfiguration<Params>;
   /**
    * Adds outputs to an existing flow. You can create up to 20 outputs per flow.
    */
-  addFlowOutputs(params: MediaConnect.Types.AddFlowOutputsRequest, callback?: (err: AWSError, data: MediaConnect.Types.AddFlowOutputsResponse) => void): Request<MediaConnect.Types.AddFlowOutputsResponse, AWSError>;
+  addFlowOutputs(params: BoundInput<MediaConnect.Types.AddFlowOutputsRequest, keyof Params>, callback?: (err: AWSError, data: MediaConnect.Types.AddFlowOutputsResponse) => void): Request<MediaConnect.Types.AddFlowOutputsResponse, AWSError>;
   /**
    * Adds outputs to an existing flow. You can create up to 20 outputs per flow.
    */
@@ -22,7 +24,7 @@ declare class MediaConnect extends Service {
   /**
    * Creates a new flow. The request must include one source. The request optionally can include outputs (up to 20) and entitlements (up to 50).
    */
-  createFlow(params: MediaConnect.Types.CreateFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.CreateFlowResponse) => void): Request<MediaConnect.Types.CreateFlowResponse, AWSError>;
+  createFlow(params: BoundInput<MediaConnect.Types.CreateFlowRequest, keyof Params>, callback?: (err: AWSError, data: MediaConnect.Types.CreateFlowResponse) => void): Request<MediaConnect.Types.CreateFlowResponse, AWSError>;
   /**
    * Creates a new flow. The request must include one source. The request optionally can include outputs (up to 20) and entitlements (up to 50).
    */
@@ -30,7 +32,7 @@ declare class MediaConnect extends Service {
   /**
    * Deletes a flow. Before you can delete a flow, you must stop the flow.
    */
-  deleteFlow(params: MediaConnect.Types.DeleteFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.DeleteFlowResponse) => void): Request<MediaConnect.Types.DeleteFlowResponse, AWSError>;
+  deleteFlow(params: BoundInput<MediaConnect.Types.DeleteFlowRequest, keyof Params>, callback?: (err: AWSError, data: MediaConnect.Types.DeleteFlowResponse) => void): Request<MediaConnect.Types.DeleteFlowResponse, AWSError>;
   /**
    * Deletes a flow. Before you can delete a flow, you must stop the flow.
    */
@@ -38,7 +40,7 @@ declare class MediaConnect extends Service {
   /**
    * Displays the details of a flow. The response includes the flow ARN, name, and Availability Zone, as well as details about the source, outputs, and entitlements.
    */
-  describeFlow(params: MediaConnect.Types.DescribeFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
+  describeFlow(params: BoundInput<MediaConnect.Types.DescribeFlowRequest, keyof Params>, callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
   /**
    * Displays the details of a flow. The response includes the flow ARN, name, and Availability Zone, as well as details about the source, outputs, and entitlements.
    */
@@ -46,7 +48,7 @@ declare class MediaConnect extends Service {
   /**
    * Grants entitlements to an existing flow.
    */
-  grantFlowEntitlements(params: MediaConnect.Types.GrantFlowEntitlementsRequest, callback?: (err: AWSError, data: MediaConnect.Types.GrantFlowEntitlementsResponse) => void): Request<MediaConnect.Types.GrantFlowEntitlementsResponse, AWSError>;
+  grantFlowEntitlements(params: BoundInput<MediaConnect.Types.GrantFlowEntitlementsRequest, keyof Params>, callback?: (err: AWSError, data: MediaConnect.Types.GrantFlowEntitlementsResponse) => void): Request<MediaConnect.Types.GrantFlowEntitlementsResponse, AWSError>;
   /**
    * Grants entitlements to an existing flow.
    */
@@ -54,7 +56,7 @@ declare class MediaConnect extends Service {
   /**
    * Displays a list of all entitlements that have been granted to this account. This request returns 20 results per page.
    */
-  listEntitlements(params: MediaConnect.Types.ListEntitlementsRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListEntitlementsResponse) => void): Request<MediaConnect.Types.ListEntitlementsResponse, AWSError>;
+  listEntitlements(params: BoundInput<MediaConnect.Types.ListEntitlementsRequest, keyof Params>, callback?: (err: AWSError, data: MediaConnect.Types.ListEntitlementsResponse) => void): Request<MediaConnect.Types.ListEntitlementsResponse, AWSError>;
   /**
    * Displays a list of all entitlements that have been granted to this account. This request returns 20 results per page.
    */
@@ -62,7 +64,7 @@ declare class MediaConnect extends Service {
   /**
    * Displays a list of flows that are associated with this account. This request returns a paginated result.
    */
-  listFlows(params: MediaConnect.Types.ListFlowsRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListFlowsResponse) => void): Request<MediaConnect.Types.ListFlowsResponse, AWSError>;
+  listFlows(params: BoundInput<MediaConnect.Types.ListFlowsRequest, keyof Params>, callback?: (err: AWSError, data: MediaConnect.Types.ListFlowsResponse) => void): Request<MediaConnect.Types.ListFlowsResponse, AWSError>;
   /**
    * Displays a list of flows that are associated with this account. This request returns a paginated result.
    */
@@ -70,7 +72,7 @@ declare class MediaConnect extends Service {
   /**
    * Lists all tags associated with the resource.
    */
-  listTagsForResource(params: MediaConnect.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListTagsForResourceResponse) => void): Request<MediaConnect.Types.ListTagsForResourceResponse, AWSError>;
+  listTagsForResource(params: BoundInput<MediaConnect.Types.ListTagsForResourceRequest, keyof Params>, callback?: (err: AWSError, data: MediaConnect.Types.ListTagsForResourceResponse) => void): Request<MediaConnect.Types.ListTagsForResourceResponse, AWSError>;
   /**
    * Lists all tags associated with the resource.
    */
@@ -78,7 +80,7 @@ declare class MediaConnect extends Service {
   /**
    * Removes an output from an existing flow. This request can be made only on an output that does not have an entitlement associated with it. If the output has an entitlement, you must revoke the entitlement instead. When an entitlement is revoked from a flow, the service automatically removes the associated output.
    */
-  removeFlowOutput(params: MediaConnect.Types.RemoveFlowOutputRequest, callback?: (err: AWSError, data: MediaConnect.Types.RemoveFlowOutputResponse) => void): Request<MediaConnect.Types.RemoveFlowOutputResponse, AWSError>;
+  removeFlowOutput(params: BoundInput<MediaConnect.Types.RemoveFlowOutputRequest, keyof Params>, callback?: (err: AWSError, data: MediaConnect.Types.RemoveFlowOutputResponse) => void): Request<MediaConnect.Types.RemoveFlowOutputResponse, AWSError>;
   /**
    * Removes an output from an existing flow. This request can be made only on an output that does not have an entitlement associated with it. If the output has an entitlement, you must revoke the entitlement instead. When an entitlement is revoked from a flow, the service automatically removes the associated output.
    */
@@ -86,7 +88,7 @@ declare class MediaConnect extends Service {
   /**
    * Revokes an entitlement from a flow. Once an entitlement is revoked, the content becomes unavailable to the subscriber and the associated output is removed.
    */
-  revokeFlowEntitlement(params: MediaConnect.Types.RevokeFlowEntitlementRequest, callback?: (err: AWSError, data: MediaConnect.Types.RevokeFlowEntitlementResponse) => void): Request<MediaConnect.Types.RevokeFlowEntitlementResponse, AWSError>;
+  revokeFlowEntitlement(params: BoundInput<MediaConnect.Types.RevokeFlowEntitlementRequest, keyof Params>, callback?: (err: AWSError, data: MediaConnect.Types.RevokeFlowEntitlementResponse) => void): Request<MediaConnect.Types.RevokeFlowEntitlementResponse, AWSError>;
   /**
    * Revokes an entitlement from a flow. Once an entitlement is revoked, the content becomes unavailable to the subscriber and the associated output is removed.
    */
@@ -94,7 +96,7 @@ declare class MediaConnect extends Service {
   /**
    * Starts a flow.
    */
-  startFlow(params: MediaConnect.Types.StartFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.StartFlowResponse) => void): Request<MediaConnect.Types.StartFlowResponse, AWSError>;
+  startFlow(params: BoundInput<MediaConnect.Types.StartFlowRequest, keyof Params>, callback?: (err: AWSError, data: MediaConnect.Types.StartFlowResponse) => void): Request<MediaConnect.Types.StartFlowResponse, AWSError>;
   /**
    * Starts a flow.
    */
@@ -102,7 +104,7 @@ declare class MediaConnect extends Service {
   /**
    * Stops a flow.
    */
-  stopFlow(params: MediaConnect.Types.StopFlowRequest, callback?: (err: AWSError, data: MediaConnect.Types.StopFlowResponse) => void): Request<MediaConnect.Types.StopFlowResponse, AWSError>;
+  stopFlow(params: BoundInput<MediaConnect.Types.StopFlowRequest, keyof Params>, callback?: (err: AWSError, data: MediaConnect.Types.StopFlowResponse) => void): Request<MediaConnect.Types.StopFlowResponse, AWSError>;
   /**
    * Stops a flow.
    */
@@ -110,7 +112,7 @@ declare class MediaConnect extends Service {
   /**
    * Associates the specified tags to a resource. If the request does not mention an existing tag associated with the resource, that tag is not changed.
    */
-  tagResource(params: MediaConnect.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  tagResource(params: BoundInput<MediaConnect.Types.TagResourceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Associates the specified tags to a resource. If the request does not mention an existing tag associated with the resource, that tag is not changed.
    */
@@ -118,7 +120,7 @@ declare class MediaConnect extends Service {
   /**
    * Deletes the specified tags from a resource.
    */
-  untagResource(params: MediaConnect.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  untagResource(params: BoundInput<MediaConnect.Types.UntagResourceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified tags from a resource.
    */
@@ -126,7 +128,7 @@ declare class MediaConnect extends Service {
   /**
    * You can change an entitlement's description, subscribers, and encryption. If you change the subscribers, the service will remove the outputs that are are used by the subscribers that are removed.
    */
-  updateFlowEntitlement(params: MediaConnect.Types.UpdateFlowEntitlementRequest, callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowEntitlementResponse) => void): Request<MediaConnect.Types.UpdateFlowEntitlementResponse, AWSError>;
+  updateFlowEntitlement(params: BoundInput<MediaConnect.Types.UpdateFlowEntitlementRequest, keyof Params>, callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowEntitlementResponse) => void): Request<MediaConnect.Types.UpdateFlowEntitlementResponse, AWSError>;
   /**
    * You can change an entitlement's description, subscribers, and encryption. If you change the subscribers, the service will remove the outputs that are are used by the subscribers that are removed.
    */
@@ -134,7 +136,7 @@ declare class MediaConnect extends Service {
   /**
    * Updates an existing flow output.
    */
-  updateFlowOutput(params: MediaConnect.Types.UpdateFlowOutputRequest, callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowOutputResponse) => void): Request<MediaConnect.Types.UpdateFlowOutputResponse, AWSError>;
+  updateFlowOutput(params: BoundInput<MediaConnect.Types.UpdateFlowOutputRequest, keyof Params>, callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowOutputResponse) => void): Request<MediaConnect.Types.UpdateFlowOutputResponse, AWSError>;
   /**
    * Updates an existing flow output.
    */
@@ -142,7 +144,7 @@ declare class MediaConnect extends Service {
   /**
    * Updates the source of a flow.
    */
-  updateFlowSource(params: MediaConnect.Types.UpdateFlowSourceRequest, callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowSourceResponse) => void): Request<MediaConnect.Types.UpdateFlowSourceResponse, AWSError>;
+  updateFlowSource(params: BoundInput<MediaConnect.Types.UpdateFlowSourceRequest, keyof Params>, callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowSourceResponse) => void): Request<MediaConnect.Types.UpdateFlowSourceResponse, AWSError>;
   /**
    * Updates the source of a flow.
    */
@@ -872,7 +874,8 @@ declare namespace MediaConnect {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AddFlowOutputsRequest & CreateFlowRequest & DeleteFlowRequest & DescribeFlowRequest & GrantFlowEntitlementsRequest & ListEntitlementsRequest & ListFlowsRequest & ListTagsForResourceRequest & RemoveFlowOutputRequest & RevokeFlowEntitlementRequest & StartFlowRequest & StopFlowRequest & TagResourceRequest & UntagResourceRequest & UpdateFlowEntitlementRequest & UpdateFlowOutputRequest & UpdateFlowSourceRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the MediaConnect client.
    */

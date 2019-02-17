@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class ComprehendMedical extends Service {
+declare class ComprehendMedical<Params extends ComprehendMedical.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: ComprehendMedical.Types.ClientConfiguration)
-  config: Config & ComprehendMedical.Types.ClientConfiguration;
+  constructor(options?: ComprehendMedical.Types.ClientConfiguration<Params>)
+  config: Config & ComprehendMedical.Types.ClientConfiguration<Params>;
   /**
    *  Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information .
    */
-  detectEntities(params: ComprehendMedical.Types.DetectEntitiesRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.DetectEntitiesResponse) => void): Request<ComprehendMedical.Types.DetectEntitiesResponse, AWSError>;
+  detectEntities(params: BoundInput<ComprehendMedical.Types.DetectEntitiesRequest, keyof Params>, callback?: (err: AWSError, data: ComprehendMedical.Types.DetectEntitiesResponse) => void): Request<ComprehendMedical.Types.DetectEntitiesResponse, AWSError>;
   /**
    *  Inspects the clinical text for a variety of medical entities and returns specific information about them such as entity category, location, and confidence score on that information .
    */
@@ -22,7 +24,7 @@ declare class ComprehendMedical extends Service {
   /**
    *  Inspects the clinical text for personal health information (PHI) entities and entity category, location, and confidence score on that information.
    */
-  detectPHI(params: ComprehendMedical.Types.DetectPHIRequest, callback?: (err: AWSError, data: ComprehendMedical.Types.DetectPHIResponse) => void): Request<ComprehendMedical.Types.DetectPHIResponse, AWSError>;
+  detectPHI(params: BoundInput<ComprehendMedical.Types.DetectPHIRequest, keyof Params>, callback?: (err: AWSError, data: ComprehendMedical.Types.DetectPHIResponse) => void): Request<ComprehendMedical.Types.DetectPHIResponse, AWSError>;
   /**
    *  Inspects the clinical text for personal health information (PHI) entities and entity category, location, and confidence score on that information.
    */
@@ -178,7 +180,8 @@ declare namespace ComprehendMedical {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<DetectEntitiesRequest & DetectPHIRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the ComprehendMedical client.
    */

@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class DLM extends Service {
+declare class DLM<Params extends DLM.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: DLM.Types.ClientConfiguration)
-  config: Config & DLM.Types.ClientConfiguration;
+  constructor(options?: DLM.Types.ClientConfiguration<Params>)
+  config: Config & DLM.Types.ClientConfiguration<Params>;
   /**
    * Creates a policy to manage the lifecycle of the specified AWS resources. You can create up to 100 lifecycle policies.
    */
-  createLifecyclePolicy(params: DLM.Types.CreateLifecyclePolicyRequest, callback?: (err: AWSError, data: DLM.Types.CreateLifecyclePolicyResponse) => void): Request<DLM.Types.CreateLifecyclePolicyResponse, AWSError>;
+  createLifecyclePolicy(params: BoundInput<DLM.Types.CreateLifecyclePolicyRequest, keyof Params>, callback?: (err: AWSError, data: DLM.Types.CreateLifecyclePolicyResponse) => void): Request<DLM.Types.CreateLifecyclePolicyResponse, AWSError>;
   /**
    * Creates a policy to manage the lifecycle of the specified AWS resources. You can create up to 100 lifecycle policies.
    */
@@ -22,7 +24,7 @@ declare class DLM extends Service {
   /**
    * Deletes the specified lifecycle policy and halts the automated operations that the policy specified.
    */
-  deleteLifecyclePolicy(params: DLM.Types.DeleteLifecyclePolicyRequest, callback?: (err: AWSError, data: DLM.Types.DeleteLifecyclePolicyResponse) => void): Request<DLM.Types.DeleteLifecyclePolicyResponse, AWSError>;
+  deleteLifecyclePolicy(params: BoundInput<DLM.Types.DeleteLifecyclePolicyRequest, keyof Params>, callback?: (err: AWSError, data: DLM.Types.DeleteLifecyclePolicyResponse) => void): Request<DLM.Types.DeleteLifecyclePolicyResponse, AWSError>;
   /**
    * Deletes the specified lifecycle policy and halts the automated operations that the policy specified.
    */
@@ -30,7 +32,7 @@ declare class DLM extends Service {
   /**
    * Gets summary information about all or the specified data lifecycle policies. To get complete information about a policy, use GetLifecyclePolicy.
    */
-  getLifecyclePolicies(params: DLM.Types.GetLifecyclePoliciesRequest, callback?: (err: AWSError, data: DLM.Types.GetLifecyclePoliciesResponse) => void): Request<DLM.Types.GetLifecyclePoliciesResponse, AWSError>;
+  getLifecyclePolicies(params: BoundInput<DLM.Types.GetLifecyclePoliciesRequest, keyof Params>, callback?: (err: AWSError, data: DLM.Types.GetLifecyclePoliciesResponse) => void): Request<DLM.Types.GetLifecyclePoliciesResponse, AWSError>;
   /**
    * Gets summary information about all or the specified data lifecycle policies. To get complete information about a policy, use GetLifecyclePolicy.
    */
@@ -38,7 +40,7 @@ declare class DLM extends Service {
   /**
    * Gets detailed information about the specified lifecycle policy.
    */
-  getLifecyclePolicy(params: DLM.Types.GetLifecyclePolicyRequest, callback?: (err: AWSError, data: DLM.Types.GetLifecyclePolicyResponse) => void): Request<DLM.Types.GetLifecyclePolicyResponse, AWSError>;
+  getLifecyclePolicy(params: BoundInput<DLM.Types.GetLifecyclePolicyRequest, keyof Params>, callback?: (err: AWSError, data: DLM.Types.GetLifecyclePolicyResponse) => void): Request<DLM.Types.GetLifecyclePolicyResponse, AWSError>;
   /**
    * Gets detailed information about the specified lifecycle policy.
    */
@@ -46,7 +48,7 @@ declare class DLM extends Service {
   /**
    * Updates the specified lifecycle policy.
    */
-  updateLifecyclePolicy(params: DLM.Types.UpdateLifecyclePolicyRequest, callback?: (err: AWSError, data: DLM.Types.UpdateLifecyclePolicyResponse) => void): Request<DLM.Types.UpdateLifecyclePolicyResponse, AWSError>;
+  updateLifecyclePolicy(params: BoundInput<DLM.Types.UpdateLifecyclePolicyRequest, keyof Params>, callback?: (err: AWSError, data: DLM.Types.UpdateLifecyclePolicyResponse) => void): Request<DLM.Types.UpdateLifecyclePolicyResponse, AWSError>;
   /**
    * Updates the specified lifecycle policy.
    */
@@ -290,7 +292,8 @@ declare namespace DLM {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateLifecyclePolicyRequest & DeleteLifecyclePolicyRequest & GetLifecyclePoliciesRequest & GetLifecyclePolicyRequest & UpdateLifecyclePolicyRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the DLM client.
    */

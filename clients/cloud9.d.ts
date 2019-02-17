@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class Cloud9 extends Service {
+declare class Cloud9<Params extends Cloud9.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: Cloud9.Types.ClientConfiguration)
-  config: Config & Cloud9.Types.ClientConfiguration;
+  constructor(options?: Cloud9.Types.ClientConfiguration<Params>)
+  config: Config & Cloud9.Types.ClientConfiguration<Params>;
   /**
    * Creates an AWS Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and then connects from the instance to the environment.
    */
-  createEnvironmentEC2(params: Cloud9.Types.CreateEnvironmentEC2Request, callback?: (err: AWSError, data: Cloud9.Types.CreateEnvironmentEC2Result) => void): Request<Cloud9.Types.CreateEnvironmentEC2Result, AWSError>;
+  createEnvironmentEC2(params: BoundInput<Cloud9.Types.CreateEnvironmentEC2Request, keyof Params>, callback?: (err: AWSError, data: Cloud9.Types.CreateEnvironmentEC2Result) => void): Request<Cloud9.Types.CreateEnvironmentEC2Result, AWSError>;
   /**
    * Creates an AWS Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and then connects from the instance to the environment.
    */
@@ -22,7 +24,7 @@ declare class Cloud9 extends Service {
   /**
    * Adds an environment member to an AWS Cloud9 development environment.
    */
-  createEnvironmentMembership(params: Cloud9.Types.CreateEnvironmentMembershipRequest, callback?: (err: AWSError, data: Cloud9.Types.CreateEnvironmentMembershipResult) => void): Request<Cloud9.Types.CreateEnvironmentMembershipResult, AWSError>;
+  createEnvironmentMembership(params: BoundInput<Cloud9.Types.CreateEnvironmentMembershipRequest, keyof Params>, callback?: (err: AWSError, data: Cloud9.Types.CreateEnvironmentMembershipResult) => void): Request<Cloud9.Types.CreateEnvironmentMembershipResult, AWSError>;
   /**
    * Adds an environment member to an AWS Cloud9 development environment.
    */
@@ -30,7 +32,7 @@ declare class Cloud9 extends Service {
   /**
    * Deletes an AWS Cloud9 development environment. If an Amazon EC2 instance is connected to the environment, also terminates the instance.
    */
-  deleteEnvironment(params: Cloud9.Types.DeleteEnvironmentRequest, callback?: (err: AWSError, data: Cloud9.Types.DeleteEnvironmentResult) => void): Request<Cloud9.Types.DeleteEnvironmentResult, AWSError>;
+  deleteEnvironment(params: BoundInput<Cloud9.Types.DeleteEnvironmentRequest, keyof Params>, callback?: (err: AWSError, data: Cloud9.Types.DeleteEnvironmentResult) => void): Request<Cloud9.Types.DeleteEnvironmentResult, AWSError>;
   /**
    * Deletes an AWS Cloud9 development environment. If an Amazon EC2 instance is connected to the environment, also terminates the instance.
    */
@@ -38,7 +40,7 @@ declare class Cloud9 extends Service {
   /**
    * Deletes an environment member from an AWS Cloud9 development environment.
    */
-  deleteEnvironmentMembership(params: Cloud9.Types.DeleteEnvironmentMembershipRequest, callback?: (err: AWSError, data: Cloud9.Types.DeleteEnvironmentMembershipResult) => void): Request<Cloud9.Types.DeleteEnvironmentMembershipResult, AWSError>;
+  deleteEnvironmentMembership(params: BoundInput<Cloud9.Types.DeleteEnvironmentMembershipRequest, keyof Params>, callback?: (err: AWSError, data: Cloud9.Types.DeleteEnvironmentMembershipResult) => void): Request<Cloud9.Types.DeleteEnvironmentMembershipResult, AWSError>;
   /**
    * Deletes an environment member from an AWS Cloud9 development environment.
    */
@@ -46,7 +48,7 @@ declare class Cloud9 extends Service {
   /**
    * Gets information about environment members for an AWS Cloud9 development environment.
    */
-  describeEnvironmentMemberships(params: Cloud9.Types.DescribeEnvironmentMembershipsRequest, callback?: (err: AWSError, data: Cloud9.Types.DescribeEnvironmentMembershipsResult) => void): Request<Cloud9.Types.DescribeEnvironmentMembershipsResult, AWSError>;
+  describeEnvironmentMemberships(params: BoundInput<Cloud9.Types.DescribeEnvironmentMembershipsRequest, keyof Params>, callback?: (err: AWSError, data: Cloud9.Types.DescribeEnvironmentMembershipsResult) => void): Request<Cloud9.Types.DescribeEnvironmentMembershipsResult, AWSError>;
   /**
    * Gets information about environment members for an AWS Cloud9 development environment.
    */
@@ -54,7 +56,7 @@ declare class Cloud9 extends Service {
   /**
    * Gets status information for an AWS Cloud9 development environment.
    */
-  describeEnvironmentStatus(params: Cloud9.Types.DescribeEnvironmentStatusRequest, callback?: (err: AWSError, data: Cloud9.Types.DescribeEnvironmentStatusResult) => void): Request<Cloud9.Types.DescribeEnvironmentStatusResult, AWSError>;
+  describeEnvironmentStatus(params: BoundInput<Cloud9.Types.DescribeEnvironmentStatusRequest, keyof Params>, callback?: (err: AWSError, data: Cloud9.Types.DescribeEnvironmentStatusResult) => void): Request<Cloud9.Types.DescribeEnvironmentStatusResult, AWSError>;
   /**
    * Gets status information for an AWS Cloud9 development environment.
    */
@@ -62,7 +64,7 @@ declare class Cloud9 extends Service {
   /**
    * Gets information about AWS Cloud9 development environments.
    */
-  describeEnvironments(params: Cloud9.Types.DescribeEnvironmentsRequest, callback?: (err: AWSError, data: Cloud9.Types.DescribeEnvironmentsResult) => void): Request<Cloud9.Types.DescribeEnvironmentsResult, AWSError>;
+  describeEnvironments(params: BoundInput<Cloud9.Types.DescribeEnvironmentsRequest, keyof Params>, callback?: (err: AWSError, data: Cloud9.Types.DescribeEnvironmentsResult) => void): Request<Cloud9.Types.DescribeEnvironmentsResult, AWSError>;
   /**
    * Gets information about AWS Cloud9 development environments.
    */
@@ -70,7 +72,7 @@ declare class Cloud9 extends Service {
   /**
    * Gets a list of AWS Cloud9 development environment identifiers.
    */
-  listEnvironments(params: Cloud9.Types.ListEnvironmentsRequest, callback?: (err: AWSError, data: Cloud9.Types.ListEnvironmentsResult) => void): Request<Cloud9.Types.ListEnvironmentsResult, AWSError>;
+  listEnvironments(params: BoundInput<Cloud9.Types.ListEnvironmentsRequest, keyof Params>, callback?: (err: AWSError, data: Cloud9.Types.ListEnvironmentsResult) => void): Request<Cloud9.Types.ListEnvironmentsResult, AWSError>;
   /**
    * Gets a list of AWS Cloud9 development environment identifiers.
    */
@@ -78,7 +80,7 @@ declare class Cloud9 extends Service {
   /**
    * Changes the settings of an existing AWS Cloud9 development environment.
    */
-  updateEnvironment(params: Cloud9.Types.UpdateEnvironmentRequest, callback?: (err: AWSError, data: Cloud9.Types.UpdateEnvironmentResult) => void): Request<Cloud9.Types.UpdateEnvironmentResult, AWSError>;
+  updateEnvironment(params: BoundInput<Cloud9.Types.UpdateEnvironmentRequest, keyof Params>, callback?: (err: AWSError, data: Cloud9.Types.UpdateEnvironmentResult) => void): Request<Cloud9.Types.UpdateEnvironmentResult, AWSError>;
   /**
    * Changes the settings of an existing AWS Cloud9 development environment.
    */
@@ -86,7 +88,7 @@ declare class Cloud9 extends Service {
   /**
    * Changes the settings of an existing environment member for an AWS Cloud9 development environment.
    */
-  updateEnvironmentMembership(params: Cloud9.Types.UpdateEnvironmentMembershipRequest, callback?: (err: AWSError, data: Cloud9.Types.UpdateEnvironmentMembershipResult) => void): Request<Cloud9.Types.UpdateEnvironmentMembershipResult, AWSError>;
+  updateEnvironmentMembership(params: BoundInput<Cloud9.Types.UpdateEnvironmentMembershipRequest, keyof Params>, callback?: (err: AWSError, data: Cloud9.Types.UpdateEnvironmentMembershipResult) => void): Request<Cloud9.Types.UpdateEnvironmentMembershipResult, AWSError>;
   /**
    * Changes the settings of an existing environment member for an AWS Cloud9 development environment.
    */
@@ -363,7 +365,8 @@ declare namespace Cloud9 {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateEnvironmentEC2Request & CreateEnvironmentMembershipRequest & DeleteEnvironmentRequest & DeleteEnvironmentMembershipRequest & DescribeEnvironmentMembershipsRequest & DescribeEnvironmentStatusRequest & DescribeEnvironmentsRequest & ListEnvironmentsRequest & UpdateEnvironmentRequest & UpdateEnvironmentMembershipRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the Cloud9 client.
    */

@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class ApiGatewayV2 extends Service {
+declare class ApiGatewayV2<Params extends ApiGatewayV2.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: ApiGatewayV2.Types.ClientConfiguration)
-  config: Config & ApiGatewayV2.Types.ClientConfiguration;
+  constructor(options?: ApiGatewayV2.Types.ClientConfiguration<Params>)
+  config: Config & ApiGatewayV2.Types.ClientConfiguration<Params>;
   /**
    * Creates an Api resource.
    */
-  createApi(params: ApiGatewayV2.Types.CreateApiRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateApiResponse) => void): Request<ApiGatewayV2.Types.CreateApiResponse, AWSError>;
+  createApi(params: BoundInput<ApiGatewayV2.Types.CreateApiRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateApiResponse) => void): Request<ApiGatewayV2.Types.CreateApiResponse, AWSError>;
   /**
    * Creates an Api resource.
    */
@@ -22,7 +24,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Creates an API mapping.
    */
-  createApiMapping(params: ApiGatewayV2.Types.CreateApiMappingRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateApiMappingResponse) => void): Request<ApiGatewayV2.Types.CreateApiMappingResponse, AWSError>;
+  createApiMapping(params: BoundInput<ApiGatewayV2.Types.CreateApiMappingRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateApiMappingResponse) => void): Request<ApiGatewayV2.Types.CreateApiMappingResponse, AWSError>;
   /**
    * Creates an API mapping.
    */
@@ -30,7 +32,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Creates an Authorizer for an API.
    */
-  createAuthorizer(params: ApiGatewayV2.Types.CreateAuthorizerRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateAuthorizerResponse) => void): Request<ApiGatewayV2.Types.CreateAuthorizerResponse, AWSError>;
+  createAuthorizer(params: BoundInput<ApiGatewayV2.Types.CreateAuthorizerRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateAuthorizerResponse) => void): Request<ApiGatewayV2.Types.CreateAuthorizerResponse, AWSError>;
   /**
    * Creates an Authorizer for an API.
    */
@@ -38,7 +40,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Creates a Deployment for an API.
    */
-  createDeployment(params: ApiGatewayV2.Types.CreateDeploymentRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateDeploymentResponse) => void): Request<ApiGatewayV2.Types.CreateDeploymentResponse, AWSError>;
+  createDeployment(params: BoundInput<ApiGatewayV2.Types.CreateDeploymentRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateDeploymentResponse) => void): Request<ApiGatewayV2.Types.CreateDeploymentResponse, AWSError>;
   /**
    * Creates a Deployment for an API.
    */
@@ -46,7 +48,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Creates a domain name.
    */
-  createDomainName(params: ApiGatewayV2.Types.CreateDomainNameRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateDomainNameResponse) => void): Request<ApiGatewayV2.Types.CreateDomainNameResponse, AWSError>;
+  createDomainName(params: BoundInput<ApiGatewayV2.Types.CreateDomainNameRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateDomainNameResponse) => void): Request<ApiGatewayV2.Types.CreateDomainNameResponse, AWSError>;
   /**
    * Creates a domain name.
    */
@@ -54,7 +56,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Creates an Integration.
    */
-  createIntegration(params: ApiGatewayV2.Types.CreateIntegrationRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateIntegrationResult) => void): Request<ApiGatewayV2.Types.CreateIntegrationResult, AWSError>;
+  createIntegration(params: BoundInput<ApiGatewayV2.Types.CreateIntegrationRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateIntegrationResult) => void): Request<ApiGatewayV2.Types.CreateIntegrationResult, AWSError>;
   /**
    * Creates an Integration.
    */
@@ -62,7 +64,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Creates an IntegrationResponses.
    */
-  createIntegrationResponse(params: ApiGatewayV2.Types.CreateIntegrationResponseRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateIntegrationResponseResponse) => void): Request<ApiGatewayV2.Types.CreateIntegrationResponseResponse, AWSError>;
+  createIntegrationResponse(params: BoundInput<ApiGatewayV2.Types.CreateIntegrationResponseRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateIntegrationResponseResponse) => void): Request<ApiGatewayV2.Types.CreateIntegrationResponseResponse, AWSError>;
   /**
    * Creates an IntegrationResponses.
    */
@@ -70,7 +72,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Creates a Model for an API.
    */
-  createModel(params: ApiGatewayV2.Types.CreateModelRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateModelResponse) => void): Request<ApiGatewayV2.Types.CreateModelResponse, AWSError>;
+  createModel(params: BoundInput<ApiGatewayV2.Types.CreateModelRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateModelResponse) => void): Request<ApiGatewayV2.Types.CreateModelResponse, AWSError>;
   /**
    * Creates a Model for an API.
    */
@@ -78,7 +80,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Creates a Route for an API.
    */
-  createRoute(params: ApiGatewayV2.Types.CreateRouteRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateRouteResult) => void): Request<ApiGatewayV2.Types.CreateRouteResult, AWSError>;
+  createRoute(params: BoundInput<ApiGatewayV2.Types.CreateRouteRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateRouteResult) => void): Request<ApiGatewayV2.Types.CreateRouteResult, AWSError>;
   /**
    * Creates a Route for an API.
    */
@@ -86,7 +88,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Creates a RouteResponse for a Route.
    */
-  createRouteResponse(params: ApiGatewayV2.Types.CreateRouteResponseRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateRouteResponseResponse) => void): Request<ApiGatewayV2.Types.CreateRouteResponseResponse, AWSError>;
+  createRouteResponse(params: BoundInput<ApiGatewayV2.Types.CreateRouteResponseRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateRouteResponseResponse) => void): Request<ApiGatewayV2.Types.CreateRouteResponseResponse, AWSError>;
   /**
    * Creates a RouteResponse for a Route.
    */
@@ -94,7 +96,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Creates a Stage for an API.
    */
-  createStage(params: ApiGatewayV2.Types.CreateStageRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateStageResponse) => void): Request<ApiGatewayV2.Types.CreateStageResponse, AWSError>;
+  createStage(params: BoundInput<ApiGatewayV2.Types.CreateStageRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateStageResponse) => void): Request<ApiGatewayV2.Types.CreateStageResponse, AWSError>;
   /**
    * Creates a Stage for an API.
    */
@@ -102,7 +104,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Deletes an Api resource.
    */
-  deleteApi(params: ApiGatewayV2.Types.DeleteApiRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteApi(params: BoundInput<ApiGatewayV2.Types.DeleteApiRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an Api resource.
    */
@@ -110,7 +112,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Deletes an API mapping.
    */
-  deleteApiMapping(params: ApiGatewayV2.Types.DeleteApiMappingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteApiMapping(params: BoundInput<ApiGatewayV2.Types.DeleteApiMappingRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an API mapping.
    */
@@ -118,7 +120,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Deletes an Authorizer.
    */
-  deleteAuthorizer(params: ApiGatewayV2.Types.DeleteAuthorizerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteAuthorizer(params: BoundInput<ApiGatewayV2.Types.DeleteAuthorizerRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an Authorizer.
    */
@@ -126,7 +128,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Deletes a Deployment.
    */
-  deleteDeployment(params: ApiGatewayV2.Types.DeleteDeploymentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDeployment(params: BoundInput<ApiGatewayV2.Types.DeleteDeploymentRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a Deployment.
    */
@@ -134,7 +136,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Deletes a domain name.
    */
-  deleteDomainName(params: ApiGatewayV2.Types.DeleteDomainNameRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDomainName(params: BoundInput<ApiGatewayV2.Types.DeleteDomainNameRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a domain name.
    */
@@ -142,7 +144,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Deletes an Integration.
    */
-  deleteIntegration(params: ApiGatewayV2.Types.DeleteIntegrationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteIntegration(params: BoundInput<ApiGatewayV2.Types.DeleteIntegrationRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an Integration.
    */
@@ -150,7 +152,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Deletes an IntegrationResponses.
    */
-  deleteIntegrationResponse(params: ApiGatewayV2.Types.DeleteIntegrationResponseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteIntegrationResponse(params: BoundInput<ApiGatewayV2.Types.DeleteIntegrationResponseRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an IntegrationResponses.
    */
@@ -158,7 +160,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Deletes a Model.
    */
-  deleteModel(params: ApiGatewayV2.Types.DeleteModelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteModel(params: BoundInput<ApiGatewayV2.Types.DeleteModelRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a Model.
    */
@@ -166,7 +168,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Deletes a Route.
    */
-  deleteRoute(params: ApiGatewayV2.Types.DeleteRouteRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteRoute(params: BoundInput<ApiGatewayV2.Types.DeleteRouteRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a Route.
    */
@@ -174,7 +176,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Deletes a RouteResponse.
    */
-  deleteRouteResponse(params: ApiGatewayV2.Types.DeleteRouteResponseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteRouteResponse(params: BoundInput<ApiGatewayV2.Types.DeleteRouteResponseRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a RouteResponse.
    */
@@ -182,7 +184,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Deletes a Stage.
    */
-  deleteStage(params: ApiGatewayV2.Types.DeleteStageRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteStage(params: BoundInput<ApiGatewayV2.Types.DeleteStageRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a Stage.
    */
@@ -190,7 +192,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets an Api resource.
    */
-  getApi(params: ApiGatewayV2.Types.GetApiRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApiResponse) => void): Request<ApiGatewayV2.Types.GetApiResponse, AWSError>;
+  getApi(params: BoundInput<ApiGatewayV2.Types.GetApiRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApiResponse) => void): Request<ApiGatewayV2.Types.GetApiResponse, AWSError>;
   /**
    * Gets an Api resource.
    */
@@ -198,7 +200,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * The API mapping.
    */
-  getApiMapping(params: ApiGatewayV2.Types.GetApiMappingRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApiMappingResponse) => void): Request<ApiGatewayV2.Types.GetApiMappingResponse, AWSError>;
+  getApiMapping(params: BoundInput<ApiGatewayV2.Types.GetApiMappingRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApiMappingResponse) => void): Request<ApiGatewayV2.Types.GetApiMappingResponse, AWSError>;
   /**
    * The API mapping.
    */
@@ -206,7 +208,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * The API mappings.
    */
-  getApiMappings(params: ApiGatewayV2.Types.GetApiMappingsRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApiMappingsResponse) => void): Request<ApiGatewayV2.Types.GetApiMappingsResponse, AWSError>;
+  getApiMappings(params: BoundInput<ApiGatewayV2.Types.GetApiMappingsRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApiMappingsResponse) => void): Request<ApiGatewayV2.Types.GetApiMappingsResponse, AWSError>;
   /**
    * The API mappings.
    */
@@ -214,7 +216,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets a collection of Api resources.
    */
-  getApis(params: ApiGatewayV2.Types.GetApisRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApisResponse) => void): Request<ApiGatewayV2.Types.GetApisResponse, AWSError>;
+  getApis(params: BoundInput<ApiGatewayV2.Types.GetApisRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetApisResponse) => void): Request<ApiGatewayV2.Types.GetApisResponse, AWSError>;
   /**
    * Gets a collection of Api resources.
    */
@@ -222,7 +224,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets an Authorizer.
    */
-  getAuthorizer(params: ApiGatewayV2.Types.GetAuthorizerRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetAuthorizerResponse) => void): Request<ApiGatewayV2.Types.GetAuthorizerResponse, AWSError>;
+  getAuthorizer(params: BoundInput<ApiGatewayV2.Types.GetAuthorizerRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetAuthorizerResponse) => void): Request<ApiGatewayV2.Types.GetAuthorizerResponse, AWSError>;
   /**
    * Gets an Authorizer.
    */
@@ -230,7 +232,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets the Authorizers for an API.
    */
-  getAuthorizers(params: ApiGatewayV2.Types.GetAuthorizersRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetAuthorizersResponse) => void): Request<ApiGatewayV2.Types.GetAuthorizersResponse, AWSError>;
+  getAuthorizers(params: BoundInput<ApiGatewayV2.Types.GetAuthorizersRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetAuthorizersResponse) => void): Request<ApiGatewayV2.Types.GetAuthorizersResponse, AWSError>;
   /**
    * Gets the Authorizers for an API.
    */
@@ -238,7 +240,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets a Deployment.
    */
-  getDeployment(params: ApiGatewayV2.Types.GetDeploymentRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetDeploymentResponse) => void): Request<ApiGatewayV2.Types.GetDeploymentResponse, AWSError>;
+  getDeployment(params: BoundInput<ApiGatewayV2.Types.GetDeploymentRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetDeploymentResponse) => void): Request<ApiGatewayV2.Types.GetDeploymentResponse, AWSError>;
   /**
    * Gets a Deployment.
    */
@@ -246,7 +248,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets the Deployments for an API.
    */
-  getDeployments(params: ApiGatewayV2.Types.GetDeploymentsRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetDeploymentsResponse) => void): Request<ApiGatewayV2.Types.GetDeploymentsResponse, AWSError>;
+  getDeployments(params: BoundInput<ApiGatewayV2.Types.GetDeploymentsRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetDeploymentsResponse) => void): Request<ApiGatewayV2.Types.GetDeploymentsResponse, AWSError>;
   /**
    * Gets the Deployments for an API.
    */
@@ -254,7 +256,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets a domain name.
    */
-  getDomainName(params: ApiGatewayV2.Types.GetDomainNameRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetDomainNameResponse) => void): Request<ApiGatewayV2.Types.GetDomainNameResponse, AWSError>;
+  getDomainName(params: BoundInput<ApiGatewayV2.Types.GetDomainNameRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetDomainNameResponse) => void): Request<ApiGatewayV2.Types.GetDomainNameResponse, AWSError>;
   /**
    * Gets a domain name.
    */
@@ -262,7 +264,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets the domain names for an AWS account.
    */
-  getDomainNames(params: ApiGatewayV2.Types.GetDomainNamesRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetDomainNamesResponse) => void): Request<ApiGatewayV2.Types.GetDomainNamesResponse, AWSError>;
+  getDomainNames(params: BoundInput<ApiGatewayV2.Types.GetDomainNamesRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetDomainNamesResponse) => void): Request<ApiGatewayV2.Types.GetDomainNamesResponse, AWSError>;
   /**
    * Gets the domain names for an AWS account.
    */
@@ -270,7 +272,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets an Integration.
    */
-  getIntegration(params: ApiGatewayV2.Types.GetIntegrationRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationResult) => void): Request<ApiGatewayV2.Types.GetIntegrationResult, AWSError>;
+  getIntegration(params: BoundInput<ApiGatewayV2.Types.GetIntegrationRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationResult) => void): Request<ApiGatewayV2.Types.GetIntegrationResult, AWSError>;
   /**
    * Gets an Integration.
    */
@@ -278,7 +280,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets an IntegrationResponses.
    */
-  getIntegrationResponse(params: ApiGatewayV2.Types.GetIntegrationResponseRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationResponseResponse) => void): Request<ApiGatewayV2.Types.GetIntegrationResponseResponse, AWSError>;
+  getIntegrationResponse(params: BoundInput<ApiGatewayV2.Types.GetIntegrationResponseRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationResponseResponse) => void): Request<ApiGatewayV2.Types.GetIntegrationResponseResponse, AWSError>;
   /**
    * Gets an IntegrationResponses.
    */
@@ -286,7 +288,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets the IntegrationResponses for an Integration.
    */
-  getIntegrationResponses(params: ApiGatewayV2.Types.GetIntegrationResponsesRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationResponsesResponse) => void): Request<ApiGatewayV2.Types.GetIntegrationResponsesResponse, AWSError>;
+  getIntegrationResponses(params: BoundInput<ApiGatewayV2.Types.GetIntegrationResponsesRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationResponsesResponse) => void): Request<ApiGatewayV2.Types.GetIntegrationResponsesResponse, AWSError>;
   /**
    * Gets the IntegrationResponses for an Integration.
    */
@@ -294,7 +296,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets the Integrations for an API.
    */
-  getIntegrations(params: ApiGatewayV2.Types.GetIntegrationsRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationsResponse) => void): Request<ApiGatewayV2.Types.GetIntegrationsResponse, AWSError>;
+  getIntegrations(params: BoundInput<ApiGatewayV2.Types.GetIntegrationsRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationsResponse) => void): Request<ApiGatewayV2.Types.GetIntegrationsResponse, AWSError>;
   /**
    * Gets the Integrations for an API.
    */
@@ -302,7 +304,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets a Model.
    */
-  getModel(params: ApiGatewayV2.Types.GetModelRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetModelResponse) => void): Request<ApiGatewayV2.Types.GetModelResponse, AWSError>;
+  getModel(params: BoundInput<ApiGatewayV2.Types.GetModelRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetModelResponse) => void): Request<ApiGatewayV2.Types.GetModelResponse, AWSError>;
   /**
    * Gets a Model.
    */
@@ -310,7 +312,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets a model template.
    */
-  getModelTemplate(params: ApiGatewayV2.Types.GetModelTemplateRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetModelTemplateResponse) => void): Request<ApiGatewayV2.Types.GetModelTemplateResponse, AWSError>;
+  getModelTemplate(params: BoundInput<ApiGatewayV2.Types.GetModelTemplateRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetModelTemplateResponse) => void): Request<ApiGatewayV2.Types.GetModelTemplateResponse, AWSError>;
   /**
    * Gets a model template.
    */
@@ -318,7 +320,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets the Models for an API.
    */
-  getModels(params: ApiGatewayV2.Types.GetModelsRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetModelsResponse) => void): Request<ApiGatewayV2.Types.GetModelsResponse, AWSError>;
+  getModels(params: BoundInput<ApiGatewayV2.Types.GetModelsRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetModelsResponse) => void): Request<ApiGatewayV2.Types.GetModelsResponse, AWSError>;
   /**
    * Gets the Models for an API.
    */
@@ -326,7 +328,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets a Route.
    */
-  getRoute(params: ApiGatewayV2.Types.GetRouteRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRouteResult) => void): Request<ApiGatewayV2.Types.GetRouteResult, AWSError>;
+  getRoute(params: BoundInput<ApiGatewayV2.Types.GetRouteRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRouteResult) => void): Request<ApiGatewayV2.Types.GetRouteResult, AWSError>;
   /**
    * Gets a Route.
    */
@@ -334,7 +336,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets a RouteResponse.
    */
-  getRouteResponse(params: ApiGatewayV2.Types.GetRouteResponseRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRouteResponseResponse) => void): Request<ApiGatewayV2.Types.GetRouteResponseResponse, AWSError>;
+  getRouteResponse(params: BoundInput<ApiGatewayV2.Types.GetRouteResponseRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRouteResponseResponse) => void): Request<ApiGatewayV2.Types.GetRouteResponseResponse, AWSError>;
   /**
    * Gets a RouteResponse.
    */
@@ -342,7 +344,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets the RouteResponses for a Route.
    */
-  getRouteResponses(params: ApiGatewayV2.Types.GetRouteResponsesRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRouteResponsesResponse) => void): Request<ApiGatewayV2.Types.GetRouteResponsesResponse, AWSError>;
+  getRouteResponses(params: BoundInput<ApiGatewayV2.Types.GetRouteResponsesRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRouteResponsesResponse) => void): Request<ApiGatewayV2.Types.GetRouteResponsesResponse, AWSError>;
   /**
    * Gets the RouteResponses for a Route.
    */
@@ -350,7 +352,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets the Routes for an API.
    */
-  getRoutes(params: ApiGatewayV2.Types.GetRoutesRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRoutesResponse) => void): Request<ApiGatewayV2.Types.GetRoutesResponse, AWSError>;
+  getRoutes(params: BoundInput<ApiGatewayV2.Types.GetRoutesRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRoutesResponse) => void): Request<ApiGatewayV2.Types.GetRoutesResponse, AWSError>;
   /**
    * Gets the Routes for an API.
    */
@@ -358,7 +360,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets a Stage.
    */
-  getStage(params: ApiGatewayV2.Types.GetStageRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetStageResponse) => void): Request<ApiGatewayV2.Types.GetStageResponse, AWSError>;
+  getStage(params: BoundInput<ApiGatewayV2.Types.GetStageRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetStageResponse) => void): Request<ApiGatewayV2.Types.GetStageResponse, AWSError>;
   /**
    * Gets a Stage.
    */
@@ -366,7 +368,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets the Stages for an API.
    */
-  getStages(params: ApiGatewayV2.Types.GetStagesRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetStagesResponse) => void): Request<ApiGatewayV2.Types.GetStagesResponse, AWSError>;
+  getStages(params: BoundInput<ApiGatewayV2.Types.GetStagesRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetStagesResponse) => void): Request<ApiGatewayV2.Types.GetStagesResponse, AWSError>;
   /**
    * Gets the Stages for an API.
    */
@@ -374,7 +376,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Updates an Api resource.
    */
-  updateApi(params: ApiGatewayV2.Types.UpdateApiRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateApiResponse) => void): Request<ApiGatewayV2.Types.UpdateApiResponse, AWSError>;
+  updateApi(params: BoundInput<ApiGatewayV2.Types.UpdateApiRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateApiResponse) => void): Request<ApiGatewayV2.Types.UpdateApiResponse, AWSError>;
   /**
    * Updates an Api resource.
    */
@@ -382,7 +384,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * The API mapping.
    */
-  updateApiMapping(params: ApiGatewayV2.Types.UpdateApiMappingRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateApiMappingResponse) => void): Request<ApiGatewayV2.Types.UpdateApiMappingResponse, AWSError>;
+  updateApiMapping(params: BoundInput<ApiGatewayV2.Types.UpdateApiMappingRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateApiMappingResponse) => void): Request<ApiGatewayV2.Types.UpdateApiMappingResponse, AWSError>;
   /**
    * The API mapping.
    */
@@ -390,7 +392,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Updates an Authorizer.
    */
-  updateAuthorizer(params: ApiGatewayV2.Types.UpdateAuthorizerRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateAuthorizerResponse) => void): Request<ApiGatewayV2.Types.UpdateAuthorizerResponse, AWSError>;
+  updateAuthorizer(params: BoundInput<ApiGatewayV2.Types.UpdateAuthorizerRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateAuthorizerResponse) => void): Request<ApiGatewayV2.Types.UpdateAuthorizerResponse, AWSError>;
   /**
    * Updates an Authorizer.
    */
@@ -398,7 +400,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Updates a Deployment.
    */
-  updateDeployment(params: ApiGatewayV2.Types.UpdateDeploymentRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateDeploymentResponse) => void): Request<ApiGatewayV2.Types.UpdateDeploymentResponse, AWSError>;
+  updateDeployment(params: BoundInput<ApiGatewayV2.Types.UpdateDeploymentRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateDeploymentResponse) => void): Request<ApiGatewayV2.Types.UpdateDeploymentResponse, AWSError>;
   /**
    * Updates a Deployment.
    */
@@ -406,7 +408,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Updates a domain name.
    */
-  updateDomainName(params: ApiGatewayV2.Types.UpdateDomainNameRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateDomainNameResponse) => void): Request<ApiGatewayV2.Types.UpdateDomainNameResponse, AWSError>;
+  updateDomainName(params: BoundInput<ApiGatewayV2.Types.UpdateDomainNameRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateDomainNameResponse) => void): Request<ApiGatewayV2.Types.UpdateDomainNameResponse, AWSError>;
   /**
    * Updates a domain name.
    */
@@ -414,7 +416,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Updates an Integration.
    */
-  updateIntegration(params: ApiGatewayV2.Types.UpdateIntegrationRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateIntegrationResult) => void): Request<ApiGatewayV2.Types.UpdateIntegrationResult, AWSError>;
+  updateIntegration(params: BoundInput<ApiGatewayV2.Types.UpdateIntegrationRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateIntegrationResult) => void): Request<ApiGatewayV2.Types.UpdateIntegrationResult, AWSError>;
   /**
    * Updates an Integration.
    */
@@ -422,7 +424,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Updates an IntegrationResponses.
    */
-  updateIntegrationResponse(params: ApiGatewayV2.Types.UpdateIntegrationResponseRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateIntegrationResponseResponse) => void): Request<ApiGatewayV2.Types.UpdateIntegrationResponseResponse, AWSError>;
+  updateIntegrationResponse(params: BoundInput<ApiGatewayV2.Types.UpdateIntegrationResponseRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateIntegrationResponseResponse) => void): Request<ApiGatewayV2.Types.UpdateIntegrationResponseResponse, AWSError>;
   /**
    * Updates an IntegrationResponses.
    */
@@ -430,7 +432,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Updates a Model.
    */
-  updateModel(params: ApiGatewayV2.Types.UpdateModelRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateModelResponse) => void): Request<ApiGatewayV2.Types.UpdateModelResponse, AWSError>;
+  updateModel(params: BoundInput<ApiGatewayV2.Types.UpdateModelRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateModelResponse) => void): Request<ApiGatewayV2.Types.UpdateModelResponse, AWSError>;
   /**
    * Updates a Model.
    */
@@ -438,7 +440,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Updates a Route.
    */
-  updateRoute(params: ApiGatewayV2.Types.UpdateRouteRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateRouteResult) => void): Request<ApiGatewayV2.Types.UpdateRouteResult, AWSError>;
+  updateRoute(params: BoundInput<ApiGatewayV2.Types.UpdateRouteRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateRouteResult) => void): Request<ApiGatewayV2.Types.UpdateRouteResult, AWSError>;
   /**
    * Updates a Route.
    */
@@ -446,7 +448,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Updates a RouteResponse.
    */
-  updateRouteResponse(params: ApiGatewayV2.Types.UpdateRouteResponseRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateRouteResponseResponse) => void): Request<ApiGatewayV2.Types.UpdateRouteResponseResponse, AWSError>;
+  updateRouteResponse(params: BoundInput<ApiGatewayV2.Types.UpdateRouteResponseRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateRouteResponseResponse) => void): Request<ApiGatewayV2.Types.UpdateRouteResponseResponse, AWSError>;
   /**
    * Updates a RouteResponse.
    */
@@ -454,7 +456,7 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Updates a Stage.
    */
-  updateStage(params: ApiGatewayV2.Types.UpdateStageRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateStageResponse) => void): Request<ApiGatewayV2.Types.UpdateStageResponse, AWSError>;
+  updateStage(params: BoundInput<ApiGatewayV2.Types.UpdateStageRequest, keyof Params>, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateStageResponse) => void): Request<ApiGatewayV2.Types.UpdateStageResponse, AWSError>;
   /**
    * Updates a Stage.
    */
@@ -3214,7 +3216,8 @@ declare namespace ApiGatewayV2 {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateApiRequest & CreateApiMappingRequest & CreateAuthorizerRequest & CreateDeploymentRequest & CreateDomainNameRequest & CreateIntegrationRequest & CreateIntegrationResponseRequest & CreateModelRequest & CreateRouteRequest & CreateRouteResponseRequest & CreateStageRequest & DeleteApiRequest & DeleteApiMappingRequest & DeleteAuthorizerRequest & DeleteDeploymentRequest & DeleteDomainNameRequest & DeleteIntegrationRequest & DeleteIntegrationResponseRequest & DeleteModelRequest & DeleteRouteRequest & DeleteRouteResponseRequest & DeleteStageRequest & GetApiRequest & GetApiMappingRequest & GetApiMappingsRequest & GetApisRequest & GetAuthorizerRequest & GetAuthorizersRequest & GetDeploymentRequest & GetDeploymentsRequest & GetDomainNameRequest & GetDomainNamesRequest & GetIntegrationRequest & GetIntegrationResponseRequest & GetIntegrationResponsesRequest & GetIntegrationsRequest & GetModelRequest & GetModelTemplateRequest & GetModelsRequest & GetRouteRequest & GetRouteResponseRequest & GetRouteResponsesRequest & GetRoutesRequest & GetStageRequest & GetStagesRequest & UpdateApiRequest & UpdateApiMappingRequest & UpdateAuthorizerRequest & UpdateDeploymentRequest & UpdateDomainNameRequest & UpdateIntegrationRequest & UpdateIntegrationResponseRequest & UpdateModelRequest & UpdateRouteRequest & UpdateRouteResponseRequest & UpdateStageRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the ApiGatewayV2 client.
    */

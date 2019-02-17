@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class CodeBuild extends Service {
+declare class CodeBuild<Params extends CodeBuild.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: CodeBuild.Types.ClientConfiguration)
-  config: Config & CodeBuild.Types.ClientConfiguration;
+  constructor(options?: CodeBuild.Types.ClientConfiguration<Params>)
+  config: Config & CodeBuild.Types.ClientConfiguration<Params>;
   /**
    * Deletes one or more builds.
    */
-  batchDeleteBuilds(params: CodeBuild.Types.BatchDeleteBuildsInput, callback?: (err: AWSError, data: CodeBuild.Types.BatchDeleteBuildsOutput) => void): Request<CodeBuild.Types.BatchDeleteBuildsOutput, AWSError>;
+  batchDeleteBuilds(params: BoundInput<CodeBuild.Types.BatchDeleteBuildsInput, keyof Params>, callback?: (err: AWSError, data: CodeBuild.Types.BatchDeleteBuildsOutput) => void): Request<CodeBuild.Types.BatchDeleteBuildsOutput, AWSError>;
   /**
    * Deletes one or more builds.
    */
@@ -22,7 +24,7 @@ declare class CodeBuild extends Service {
   /**
    * Gets information about builds.
    */
-  batchGetBuilds(params: CodeBuild.Types.BatchGetBuildsInput, callback?: (err: AWSError, data: CodeBuild.Types.BatchGetBuildsOutput) => void): Request<CodeBuild.Types.BatchGetBuildsOutput, AWSError>;
+  batchGetBuilds(params: BoundInput<CodeBuild.Types.BatchGetBuildsInput, keyof Params>, callback?: (err: AWSError, data: CodeBuild.Types.BatchGetBuildsOutput) => void): Request<CodeBuild.Types.BatchGetBuildsOutput, AWSError>;
   /**
    * Gets information about builds.
    */
@@ -30,7 +32,7 @@ declare class CodeBuild extends Service {
   /**
    * Gets information about build projects.
    */
-  batchGetProjects(params: CodeBuild.Types.BatchGetProjectsInput, callback?: (err: AWSError, data: CodeBuild.Types.BatchGetProjectsOutput) => void): Request<CodeBuild.Types.BatchGetProjectsOutput, AWSError>;
+  batchGetProjects(params: BoundInput<CodeBuild.Types.BatchGetProjectsInput, keyof Params>, callback?: (err: AWSError, data: CodeBuild.Types.BatchGetProjectsOutput) => void): Request<CodeBuild.Types.BatchGetProjectsOutput, AWSError>;
   /**
    * Gets information about build projects.
    */
@@ -38,7 +40,7 @@ declare class CodeBuild extends Service {
   /**
    * Creates a build project.
    */
-  createProject(params: CodeBuild.Types.CreateProjectInput, callback?: (err: AWSError, data: CodeBuild.Types.CreateProjectOutput) => void): Request<CodeBuild.Types.CreateProjectOutput, AWSError>;
+  createProject(params: BoundInput<CodeBuild.Types.CreateProjectInput, keyof Params>, callback?: (err: AWSError, data: CodeBuild.Types.CreateProjectOutput) => void): Request<CodeBuild.Types.CreateProjectOutput, AWSError>;
   /**
    * Creates a build project.
    */
@@ -46,7 +48,7 @@ declare class CodeBuild extends Service {
   /**
    * For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables AWS CodeBuild to start rebuilding the source code every time a code change is pushed to the repository.  If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds are created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you are billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in AWS CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 5 in Change a Build Project's Settings. 
    */
-  createWebhook(params: CodeBuild.Types.CreateWebhookInput, callback?: (err: AWSError, data: CodeBuild.Types.CreateWebhookOutput) => void): Request<CodeBuild.Types.CreateWebhookOutput, AWSError>;
+  createWebhook(params: BoundInput<CodeBuild.Types.CreateWebhookInput, keyof Params>, callback?: (err: AWSError, data: CodeBuild.Types.CreateWebhookOutput) => void): Request<CodeBuild.Types.CreateWebhookOutput, AWSError>;
   /**
    * For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables AWS CodeBuild to start rebuilding the source code every time a code change is pushed to the repository.  If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds are created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you are billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in AWS CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 5 in Change a Build Project's Settings. 
    */
@@ -54,7 +56,7 @@ declare class CodeBuild extends Service {
   /**
    * Deletes a build project.
    */
-  deleteProject(params: CodeBuild.Types.DeleteProjectInput, callback?: (err: AWSError, data: CodeBuild.Types.DeleteProjectOutput) => void): Request<CodeBuild.Types.DeleteProjectOutput, AWSError>;
+  deleteProject(params: BoundInput<CodeBuild.Types.DeleteProjectInput, keyof Params>, callback?: (err: AWSError, data: CodeBuild.Types.DeleteProjectOutput) => void): Request<CodeBuild.Types.DeleteProjectOutput, AWSError>;
   /**
    * Deletes a build project.
    */
@@ -62,7 +64,7 @@ declare class CodeBuild extends Service {
   /**
    *  Deletes a set of GitHub, GitHub Enterprise, or Bitbucket source credentials. 
    */
-  deleteSourceCredentials(params: CodeBuild.Types.DeleteSourceCredentialsInput, callback?: (err: AWSError, data: CodeBuild.Types.DeleteSourceCredentialsOutput) => void): Request<CodeBuild.Types.DeleteSourceCredentialsOutput, AWSError>;
+  deleteSourceCredentials(params: BoundInput<CodeBuild.Types.DeleteSourceCredentialsInput, keyof Params>, callback?: (err: AWSError, data: CodeBuild.Types.DeleteSourceCredentialsOutput) => void): Request<CodeBuild.Types.DeleteSourceCredentialsOutput, AWSError>;
   /**
    *  Deletes a set of GitHub, GitHub Enterprise, or Bitbucket source credentials. 
    */
@@ -70,7 +72,7 @@ declare class CodeBuild extends Service {
   /**
    * For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from rebuilding the source code every time a code change is pushed to the repository.
    */
-  deleteWebhook(params: CodeBuild.Types.DeleteWebhookInput, callback?: (err: AWSError, data: CodeBuild.Types.DeleteWebhookOutput) => void): Request<CodeBuild.Types.DeleteWebhookOutput, AWSError>;
+  deleteWebhook(params: BoundInput<CodeBuild.Types.DeleteWebhookInput, keyof Params>, callback?: (err: AWSError, data: CodeBuild.Types.DeleteWebhookOutput) => void): Request<CodeBuild.Types.DeleteWebhookOutput, AWSError>;
   /**
    * For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from rebuilding the source code every time a code change is pushed to the repository.
    */
@@ -78,7 +80,7 @@ declare class CodeBuild extends Service {
   /**
    *  Imports the source repository credentials for an AWS CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository. 
    */
-  importSourceCredentials(params: CodeBuild.Types.ImportSourceCredentialsInput, callback?: (err: AWSError, data: CodeBuild.Types.ImportSourceCredentialsOutput) => void): Request<CodeBuild.Types.ImportSourceCredentialsOutput, AWSError>;
+  importSourceCredentials(params: BoundInput<CodeBuild.Types.ImportSourceCredentialsInput, keyof Params>, callback?: (err: AWSError, data: CodeBuild.Types.ImportSourceCredentialsOutput) => void): Request<CodeBuild.Types.ImportSourceCredentialsOutput, AWSError>;
   /**
    *  Imports the source repository credentials for an AWS CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository. 
    */
@@ -86,7 +88,7 @@ declare class CodeBuild extends Service {
   /**
    * Resets the cache for a project.
    */
-  invalidateProjectCache(params: CodeBuild.Types.InvalidateProjectCacheInput, callback?: (err: AWSError, data: CodeBuild.Types.InvalidateProjectCacheOutput) => void): Request<CodeBuild.Types.InvalidateProjectCacheOutput, AWSError>;
+  invalidateProjectCache(params: BoundInput<CodeBuild.Types.InvalidateProjectCacheInput, keyof Params>, callback?: (err: AWSError, data: CodeBuild.Types.InvalidateProjectCacheOutput) => void): Request<CodeBuild.Types.InvalidateProjectCacheOutput, AWSError>;
   /**
    * Resets the cache for a project.
    */
@@ -94,7 +96,7 @@ declare class CodeBuild extends Service {
   /**
    * Gets a list of build IDs, with each build ID representing a single build.
    */
-  listBuilds(params: CodeBuild.Types.ListBuildsInput, callback?: (err: AWSError, data: CodeBuild.Types.ListBuildsOutput) => void): Request<CodeBuild.Types.ListBuildsOutput, AWSError>;
+  listBuilds(params: BoundInput<CodeBuild.Types.ListBuildsInput, keyof Params>, callback?: (err: AWSError, data: CodeBuild.Types.ListBuildsOutput) => void): Request<CodeBuild.Types.ListBuildsOutput, AWSError>;
   /**
    * Gets a list of build IDs, with each build ID representing a single build.
    */
@@ -102,7 +104,7 @@ declare class CodeBuild extends Service {
   /**
    * Gets a list of build IDs for the specified build project, with each build ID representing a single build.
    */
-  listBuildsForProject(params: CodeBuild.Types.ListBuildsForProjectInput, callback?: (err: AWSError, data: CodeBuild.Types.ListBuildsForProjectOutput) => void): Request<CodeBuild.Types.ListBuildsForProjectOutput, AWSError>;
+  listBuildsForProject(params: BoundInput<CodeBuild.Types.ListBuildsForProjectInput, keyof Params>, callback?: (err: AWSError, data: CodeBuild.Types.ListBuildsForProjectOutput) => void): Request<CodeBuild.Types.ListBuildsForProjectOutput, AWSError>;
   /**
    * Gets a list of build IDs for the specified build project, with each build ID representing a single build.
    */
@@ -110,7 +112,7 @@ declare class CodeBuild extends Service {
   /**
    * Gets information about Docker images that are managed by AWS CodeBuild.
    */
-  listCuratedEnvironmentImages(params: CodeBuild.Types.ListCuratedEnvironmentImagesInput, callback?: (err: AWSError, data: CodeBuild.Types.ListCuratedEnvironmentImagesOutput) => void): Request<CodeBuild.Types.ListCuratedEnvironmentImagesOutput, AWSError>;
+  listCuratedEnvironmentImages(params: BoundInput<CodeBuild.Types.ListCuratedEnvironmentImagesInput, keyof Params>, callback?: (err: AWSError, data: CodeBuild.Types.ListCuratedEnvironmentImagesOutput) => void): Request<CodeBuild.Types.ListCuratedEnvironmentImagesOutput, AWSError>;
   /**
    * Gets information about Docker images that are managed by AWS CodeBuild.
    */
@@ -118,7 +120,7 @@ declare class CodeBuild extends Service {
   /**
    * Gets a list of build project names, with each build project name representing a single build project.
    */
-  listProjects(params: CodeBuild.Types.ListProjectsInput, callback?: (err: AWSError, data: CodeBuild.Types.ListProjectsOutput) => void): Request<CodeBuild.Types.ListProjectsOutput, AWSError>;
+  listProjects(params: BoundInput<CodeBuild.Types.ListProjectsInput, keyof Params>, callback?: (err: AWSError, data: CodeBuild.Types.ListProjectsOutput) => void): Request<CodeBuild.Types.ListProjectsOutput, AWSError>;
   /**
    * Gets a list of build project names, with each build project name representing a single build project.
    */
@@ -126,7 +128,7 @@ declare class CodeBuild extends Service {
   /**
    *  Returns a list of SourceCredentialsInfo objects. 
    */
-  listSourceCredentials(params: CodeBuild.Types.ListSourceCredentialsInput, callback?: (err: AWSError, data: CodeBuild.Types.ListSourceCredentialsOutput) => void): Request<CodeBuild.Types.ListSourceCredentialsOutput, AWSError>;
+  listSourceCredentials(params: BoundInput<CodeBuild.Types.ListSourceCredentialsInput, keyof Params>, callback?: (err: AWSError, data: CodeBuild.Types.ListSourceCredentialsOutput) => void): Request<CodeBuild.Types.ListSourceCredentialsOutput, AWSError>;
   /**
    *  Returns a list of SourceCredentialsInfo objects. 
    */
@@ -134,7 +136,7 @@ declare class CodeBuild extends Service {
   /**
    * Starts running a build.
    */
-  startBuild(params: CodeBuild.Types.StartBuildInput, callback?: (err: AWSError, data: CodeBuild.Types.StartBuildOutput) => void): Request<CodeBuild.Types.StartBuildOutput, AWSError>;
+  startBuild(params: BoundInput<CodeBuild.Types.StartBuildInput, keyof Params>, callback?: (err: AWSError, data: CodeBuild.Types.StartBuildOutput) => void): Request<CodeBuild.Types.StartBuildOutput, AWSError>;
   /**
    * Starts running a build.
    */
@@ -142,7 +144,7 @@ declare class CodeBuild extends Service {
   /**
    * Attempts to stop running a build.
    */
-  stopBuild(params: CodeBuild.Types.StopBuildInput, callback?: (err: AWSError, data: CodeBuild.Types.StopBuildOutput) => void): Request<CodeBuild.Types.StopBuildOutput, AWSError>;
+  stopBuild(params: BoundInput<CodeBuild.Types.StopBuildInput, keyof Params>, callback?: (err: AWSError, data: CodeBuild.Types.StopBuildOutput) => void): Request<CodeBuild.Types.StopBuildOutput, AWSError>;
   /**
    * Attempts to stop running a build.
    */
@@ -150,7 +152,7 @@ declare class CodeBuild extends Service {
   /**
    * Changes the settings of a build project.
    */
-  updateProject(params: CodeBuild.Types.UpdateProjectInput, callback?: (err: AWSError, data: CodeBuild.Types.UpdateProjectOutput) => void): Request<CodeBuild.Types.UpdateProjectOutput, AWSError>;
+  updateProject(params: BoundInput<CodeBuild.Types.UpdateProjectInput, keyof Params>, callback?: (err: AWSError, data: CodeBuild.Types.UpdateProjectOutput) => void): Request<CodeBuild.Types.UpdateProjectOutput, AWSError>;
   /**
    * Changes the settings of a build project.
    */
@@ -158,7 +160,7 @@ declare class CodeBuild extends Service {
   /**
    *  Updates the webhook associated with an AWS CodeBuild build project.    If you use Bitbucket for your repository, rotateSecret is ignored.  
    */
-  updateWebhook(params: CodeBuild.Types.UpdateWebhookInput, callback?: (err: AWSError, data: CodeBuild.Types.UpdateWebhookOutput) => void): Request<CodeBuild.Types.UpdateWebhookOutput, AWSError>;
+  updateWebhook(params: BoundInput<CodeBuild.Types.UpdateWebhookInput, keyof Params>, callback?: (err: AWSError, data: CodeBuild.Types.UpdateWebhookOutput) => void): Request<CodeBuild.Types.UpdateWebhookOutput, AWSError>;
   /**
    *  Updates the webhook associated with an AWS CodeBuild build project.    If you use Bitbucket for your repository, rotateSecret is ignored.  
    */
@@ -1352,7 +1354,8 @@ declare namespace CodeBuild {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<BatchDeleteBuildsInput & BatchGetBuildsInput & BatchGetProjectsInput & CreateProjectInput & CreateWebhookInput & DeleteProjectInput & DeleteSourceCredentialsInput & DeleteWebhookInput & ImportSourceCredentialsInput & InvalidateProjectCacheInput & ListBuildsInput & ListBuildsForProjectInput & ListCuratedEnvironmentImagesInput & ListProjectsInput & ListSourceCredentialsInput & StartBuildInput & StopBuildInput & UpdateProjectInput & UpdateWebhookInput>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the CodeBuild client.
    */

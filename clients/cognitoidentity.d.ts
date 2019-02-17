@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class CognitoIdentity extends Service {
+declare class CognitoIdentity<Params extends CognitoIdentity.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: CognitoIdentity.Types.ClientConfiguration)
-  config: Config & CognitoIdentity.Types.ClientConfiguration;
+  constructor(options?: CognitoIdentity.Types.ClientConfiguration<Params>)
+  config: Config & CognitoIdentity.Types.ClientConfiguration<Params>;
   /**
    * Creates a new identity pool. The identity pool is a store of user identity information that is specific to your AWS account. The limit on identity pools is 60 per account. The keys for SupportedLoginProviders are as follows:   Facebook: graph.facebook.com    Google: accounts.google.com    Amazon: www.amazon.com    Twitter: api.twitter.com    Digits: www.digits.com    You must use AWS Developer credentials to call this API.
    */
-  createIdentityPool(params: CognitoIdentity.Types.CreateIdentityPoolInput, callback?: (err: AWSError, data: CognitoIdentity.Types.IdentityPool) => void): Request<CognitoIdentity.Types.IdentityPool, AWSError>;
+  createIdentityPool(params: BoundInput<CognitoIdentity.Types.CreateIdentityPoolInput, keyof Params>, callback?: (err: AWSError, data: CognitoIdentity.Types.IdentityPool) => void): Request<CognitoIdentity.Types.IdentityPool, AWSError>;
   /**
    * Creates a new identity pool. The identity pool is a store of user identity information that is specific to your AWS account. The limit on identity pools is 60 per account. The keys for SupportedLoginProviders are as follows:   Facebook: graph.facebook.com    Google: accounts.google.com    Amazon: www.amazon.com    Twitter: api.twitter.com    Digits: www.digits.com    You must use AWS Developer credentials to call this API.
    */
@@ -22,7 +24,7 @@ declare class CognitoIdentity extends Service {
   /**
    * Deletes identities from an identity pool. You can specify a list of 1-60 identities that you want to delete. You must use AWS Developer credentials to call this API.
    */
-  deleteIdentities(params: CognitoIdentity.Types.DeleteIdentitiesInput, callback?: (err: AWSError, data: CognitoIdentity.Types.DeleteIdentitiesResponse) => void): Request<CognitoIdentity.Types.DeleteIdentitiesResponse, AWSError>;
+  deleteIdentities(params: BoundInput<CognitoIdentity.Types.DeleteIdentitiesInput, keyof Params>, callback?: (err: AWSError, data: CognitoIdentity.Types.DeleteIdentitiesResponse) => void): Request<CognitoIdentity.Types.DeleteIdentitiesResponse, AWSError>;
   /**
    * Deletes identities from an identity pool. You can specify a list of 1-60 identities that you want to delete. You must use AWS Developer credentials to call this API.
    */
@@ -30,7 +32,7 @@ declare class CognitoIdentity extends Service {
   /**
    * Deletes a user pool. Once a pool is deleted, users will not be able to authenticate with the pool. You must use AWS Developer credentials to call this API.
    */
-  deleteIdentityPool(params: CognitoIdentity.Types.DeleteIdentityPoolInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteIdentityPool(params: BoundInput<CognitoIdentity.Types.DeleteIdentityPoolInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a user pool. Once a pool is deleted, users will not be able to authenticate with the pool. You must use AWS Developer credentials to call this API.
    */
@@ -38,7 +40,7 @@ declare class CognitoIdentity extends Service {
   /**
    * Returns metadata related to the given identity, including when the identity was created and any associated linked logins. You must use AWS Developer credentials to call this API.
    */
-  describeIdentity(params: CognitoIdentity.Types.DescribeIdentityInput, callback?: (err: AWSError, data: CognitoIdentity.Types.IdentityDescription) => void): Request<CognitoIdentity.Types.IdentityDescription, AWSError>;
+  describeIdentity(params: BoundInput<CognitoIdentity.Types.DescribeIdentityInput, keyof Params>, callback?: (err: AWSError, data: CognitoIdentity.Types.IdentityDescription) => void): Request<CognitoIdentity.Types.IdentityDescription, AWSError>;
   /**
    * Returns metadata related to the given identity, including when the identity was created and any associated linked logins. You must use AWS Developer credentials to call this API.
    */
@@ -46,7 +48,7 @@ declare class CognitoIdentity extends Service {
   /**
    * Gets details about a particular identity pool, including the pool name, ID description, creation date, and current number of users. You must use AWS Developer credentials to call this API.
    */
-  describeIdentityPool(params: CognitoIdentity.Types.DescribeIdentityPoolInput, callback?: (err: AWSError, data: CognitoIdentity.Types.IdentityPool) => void): Request<CognitoIdentity.Types.IdentityPool, AWSError>;
+  describeIdentityPool(params: BoundInput<CognitoIdentity.Types.DescribeIdentityPoolInput, keyof Params>, callback?: (err: AWSError, data: CognitoIdentity.Types.IdentityPool) => void): Request<CognitoIdentity.Types.IdentityPool, AWSError>;
   /**
    * Gets details about a particular identity pool, including the pool name, ID description, creation date, and current number of users. You must use AWS Developer credentials to call this API.
    */
@@ -54,7 +56,7 @@ declare class CognitoIdentity extends Service {
   /**
    * Returns credentials for the provided identity ID. Any provided logins will be validated against supported login providers. If the token is for cognito-identity.amazonaws.com, it will be passed through to AWS Security Token Service with the appropriate role for the token. This is a public API. You do not need any credentials to call this API.
    */
-  getCredentialsForIdentity(params: CognitoIdentity.Types.GetCredentialsForIdentityInput, callback?: (err: AWSError, data: CognitoIdentity.Types.GetCredentialsForIdentityResponse) => void): Request<CognitoIdentity.Types.GetCredentialsForIdentityResponse, AWSError>;
+  getCredentialsForIdentity(params: BoundInput<CognitoIdentity.Types.GetCredentialsForIdentityInput, keyof Params>, callback?: (err: AWSError, data: CognitoIdentity.Types.GetCredentialsForIdentityResponse) => void): Request<CognitoIdentity.Types.GetCredentialsForIdentityResponse, AWSError>;
   /**
    * Returns credentials for the provided identity ID. Any provided logins will be validated against supported login providers. If the token is for cognito-identity.amazonaws.com, it will be passed through to AWS Security Token Service with the appropriate role for the token. This is a public API. You do not need any credentials to call this API.
    */
@@ -62,7 +64,7 @@ declare class CognitoIdentity extends Service {
   /**
    * Generates (or retrieves) a Cognito ID. Supplying multiple logins will create an implicit linked account. This is a public API. You do not need any credentials to call this API.
    */
-  getId(params: CognitoIdentity.Types.GetIdInput, callback?: (err: AWSError, data: CognitoIdentity.Types.GetIdResponse) => void): Request<CognitoIdentity.Types.GetIdResponse, AWSError>;
+  getId(params: BoundInput<CognitoIdentity.Types.GetIdInput, keyof Params>, callback?: (err: AWSError, data: CognitoIdentity.Types.GetIdResponse) => void): Request<CognitoIdentity.Types.GetIdResponse, AWSError>;
   /**
    * Generates (or retrieves) a Cognito ID. Supplying multiple logins will create an implicit linked account. This is a public API. You do not need any credentials to call this API.
    */
@@ -70,7 +72,7 @@ declare class CognitoIdentity extends Service {
   /**
    * Gets the roles for an identity pool. You must use AWS Developer credentials to call this API.
    */
-  getIdentityPoolRoles(params: CognitoIdentity.Types.GetIdentityPoolRolesInput, callback?: (err: AWSError, data: CognitoIdentity.Types.GetIdentityPoolRolesResponse) => void): Request<CognitoIdentity.Types.GetIdentityPoolRolesResponse, AWSError>;
+  getIdentityPoolRoles(params: BoundInput<CognitoIdentity.Types.GetIdentityPoolRolesInput, keyof Params>, callback?: (err: AWSError, data: CognitoIdentity.Types.GetIdentityPoolRolesResponse) => void): Request<CognitoIdentity.Types.GetIdentityPoolRolesResponse, AWSError>;
   /**
    * Gets the roles for an identity pool. You must use AWS Developer credentials to call this API.
    */
@@ -78,7 +80,7 @@ declare class CognitoIdentity extends Service {
   /**
    * Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned by GetId. You can optionally add additional logins for the identity. Supplying multiple logins creates an implicit link. The OpenId token is valid for 15 minutes. This is a public API. You do not need any credentials to call this API.
    */
-  getOpenIdToken(params: CognitoIdentity.Types.GetOpenIdTokenInput, callback?: (err: AWSError, data: CognitoIdentity.Types.GetOpenIdTokenResponse) => void): Request<CognitoIdentity.Types.GetOpenIdTokenResponse, AWSError>;
+  getOpenIdToken(params: BoundInput<CognitoIdentity.Types.GetOpenIdTokenInput, keyof Params>, callback?: (err: AWSError, data: CognitoIdentity.Types.GetOpenIdTokenResponse) => void): Request<CognitoIdentity.Types.GetOpenIdTokenResponse, AWSError>;
   /**
    * Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned by GetId. You can optionally add additional logins for the identity. Supplying multiple logins creates an implicit link. The OpenId token is valid for 15 minutes. This is a public API. You do not need any credentials to call this API.
    */
@@ -86,7 +88,7 @@ declare class CognitoIdentity extends Service {
   /**
    * Registers (or retrieves) a Cognito IdentityId and an OpenID Connect token for a user authenticated by your backend authentication process. Supplying multiple logins will create an implicit linked account. You can only specify one developer provider as part of the Logins map, which is linked to the identity pool. The developer provider is the "domain" by which Cognito will refer to your users. You can use GetOpenIdTokenForDeveloperIdentity to create a new identity and to link new logins (that is, user credentials issued by a public provider or developer provider) to an existing identity. When you want to create a new identity, the IdentityId should be null. When you want to associate a new login with an existing authenticated/unauthenticated identity, you can do so by providing the existing IdentityId. This API will create the identity in the specified IdentityPoolId. You must use AWS Developer credentials to call this API.
    */
-  getOpenIdTokenForDeveloperIdentity(params: CognitoIdentity.Types.GetOpenIdTokenForDeveloperIdentityInput, callback?: (err: AWSError, data: CognitoIdentity.Types.GetOpenIdTokenForDeveloperIdentityResponse) => void): Request<CognitoIdentity.Types.GetOpenIdTokenForDeveloperIdentityResponse, AWSError>;
+  getOpenIdTokenForDeveloperIdentity(params: BoundInput<CognitoIdentity.Types.GetOpenIdTokenForDeveloperIdentityInput, keyof Params>, callback?: (err: AWSError, data: CognitoIdentity.Types.GetOpenIdTokenForDeveloperIdentityResponse) => void): Request<CognitoIdentity.Types.GetOpenIdTokenForDeveloperIdentityResponse, AWSError>;
   /**
    * Registers (or retrieves) a Cognito IdentityId and an OpenID Connect token for a user authenticated by your backend authentication process. Supplying multiple logins will create an implicit linked account. You can only specify one developer provider as part of the Logins map, which is linked to the identity pool. The developer provider is the "domain" by which Cognito will refer to your users. You can use GetOpenIdTokenForDeveloperIdentity to create a new identity and to link new logins (that is, user credentials issued by a public provider or developer provider) to an existing identity. When you want to create a new identity, the IdentityId should be null. When you want to associate a new login with an existing authenticated/unauthenticated identity, you can do so by providing the existing IdentityId. This API will create the identity in the specified IdentityPoolId. You must use AWS Developer credentials to call this API.
    */
@@ -94,7 +96,7 @@ declare class CognitoIdentity extends Service {
   /**
    * Lists the identities in a pool. You must use AWS Developer credentials to call this API.
    */
-  listIdentities(params: CognitoIdentity.Types.ListIdentitiesInput, callback?: (err: AWSError, data: CognitoIdentity.Types.ListIdentitiesResponse) => void): Request<CognitoIdentity.Types.ListIdentitiesResponse, AWSError>;
+  listIdentities(params: BoundInput<CognitoIdentity.Types.ListIdentitiesInput, keyof Params>, callback?: (err: AWSError, data: CognitoIdentity.Types.ListIdentitiesResponse) => void): Request<CognitoIdentity.Types.ListIdentitiesResponse, AWSError>;
   /**
    * Lists the identities in a pool. You must use AWS Developer credentials to call this API.
    */
@@ -102,7 +104,7 @@ declare class CognitoIdentity extends Service {
   /**
    * Lists all of the Cognito identity pools registered for your account. You must use AWS Developer credentials to call this API.
    */
-  listIdentityPools(params: CognitoIdentity.Types.ListIdentityPoolsInput, callback?: (err: AWSError, data: CognitoIdentity.Types.ListIdentityPoolsResponse) => void): Request<CognitoIdentity.Types.ListIdentityPoolsResponse, AWSError>;
+  listIdentityPools(params: BoundInput<CognitoIdentity.Types.ListIdentityPoolsInput, keyof Params>, callback?: (err: AWSError, data: CognitoIdentity.Types.ListIdentityPoolsResponse) => void): Request<CognitoIdentity.Types.ListIdentityPoolsResponse, AWSError>;
   /**
    * Lists all of the Cognito identity pools registered for your account. You must use AWS Developer credentials to call this API.
    */
@@ -110,7 +112,7 @@ declare class CognitoIdentity extends Service {
   /**
    * Retrieves the IdentityID associated with a DeveloperUserIdentifier or the list of DeveloperUserIdentifiers associated with an IdentityId for an existing identity. Either IdentityID or DeveloperUserIdentifier must not be null. If you supply only one of these values, the other value will be searched in the database and returned as a part of the response. If you supply both, DeveloperUserIdentifier will be matched against IdentityID. If the values are verified against the database, the response returns both values and is the same as the request. Otherwise a ResourceConflictException is thrown. You must use AWS Developer credentials to call this API.
    */
-  lookupDeveloperIdentity(params: CognitoIdentity.Types.LookupDeveloperIdentityInput, callback?: (err: AWSError, data: CognitoIdentity.Types.LookupDeveloperIdentityResponse) => void): Request<CognitoIdentity.Types.LookupDeveloperIdentityResponse, AWSError>;
+  lookupDeveloperIdentity(params: BoundInput<CognitoIdentity.Types.LookupDeveloperIdentityInput, keyof Params>, callback?: (err: AWSError, data: CognitoIdentity.Types.LookupDeveloperIdentityResponse) => void): Request<CognitoIdentity.Types.LookupDeveloperIdentityResponse, AWSError>;
   /**
    * Retrieves the IdentityID associated with a DeveloperUserIdentifier or the list of DeveloperUserIdentifiers associated with an IdentityId for an existing identity. Either IdentityID or DeveloperUserIdentifier must not be null. If you supply only one of these values, the other value will be searched in the database and returned as a part of the response. If you supply both, DeveloperUserIdentifier will be matched against IdentityID. If the values are verified against the database, the response returns both values and is the same as the request. Otherwise a ResourceConflictException is thrown. You must use AWS Developer credentials to call this API.
    */
@@ -118,7 +120,7 @@ declare class CognitoIdentity extends Service {
   /**
    * Merges two users having different IdentityIds, existing in the same identity pool, and identified by the same developer provider. You can use this action to request that discrete users be merged and identified as a single user in the Cognito environment. Cognito associates the given source user (SourceUserIdentifier) with the IdentityId of the DestinationUserIdentifier. Only developer-authenticated users can be merged. If the users to be merged are associated with the same public provider, but as two different users, an exception will be thrown. You must use AWS Developer credentials to call this API.
    */
-  mergeDeveloperIdentities(params: CognitoIdentity.Types.MergeDeveloperIdentitiesInput, callback?: (err: AWSError, data: CognitoIdentity.Types.MergeDeveloperIdentitiesResponse) => void): Request<CognitoIdentity.Types.MergeDeveloperIdentitiesResponse, AWSError>;
+  mergeDeveloperIdentities(params: BoundInput<CognitoIdentity.Types.MergeDeveloperIdentitiesInput, keyof Params>, callback?: (err: AWSError, data: CognitoIdentity.Types.MergeDeveloperIdentitiesResponse) => void): Request<CognitoIdentity.Types.MergeDeveloperIdentitiesResponse, AWSError>;
   /**
    * Merges two users having different IdentityIds, existing in the same identity pool, and identified by the same developer provider. You can use this action to request that discrete users be merged and identified as a single user in the Cognito environment. Cognito associates the given source user (SourceUserIdentifier) with the IdentityId of the DestinationUserIdentifier. Only developer-authenticated users can be merged. If the users to be merged are associated with the same public provider, but as two different users, an exception will be thrown. You must use AWS Developer credentials to call this API.
    */
@@ -126,7 +128,7 @@ declare class CognitoIdentity extends Service {
   /**
    * Sets the roles for an identity pool. These roles are used when making calls to GetCredentialsForIdentity action. You must use AWS Developer credentials to call this API.
    */
-  setIdentityPoolRoles(params: CognitoIdentity.Types.SetIdentityPoolRolesInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  setIdentityPoolRoles(params: BoundInput<CognitoIdentity.Types.SetIdentityPoolRolesInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sets the roles for an identity pool. These roles are used when making calls to GetCredentialsForIdentity action. You must use AWS Developer credentials to call this API.
    */
@@ -134,7 +136,7 @@ declare class CognitoIdentity extends Service {
   /**
    * Unlinks a DeveloperUserIdentifier from an existing identity. Unlinked developer users will be considered new identities next time they are seen. If, for a given Cognito identity, you remove all federated identities as well as the developer user identifier, the Cognito identity becomes inaccessible. You must use AWS Developer credentials to call this API.
    */
-  unlinkDeveloperIdentity(params: CognitoIdentity.Types.UnlinkDeveloperIdentityInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  unlinkDeveloperIdentity(params: BoundInput<CognitoIdentity.Types.UnlinkDeveloperIdentityInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Unlinks a DeveloperUserIdentifier from an existing identity. Unlinked developer users will be considered new identities next time they are seen. If, for a given Cognito identity, you remove all federated identities as well as the developer user identifier, the Cognito identity becomes inaccessible. You must use AWS Developer credentials to call this API.
    */
@@ -142,7 +144,7 @@ declare class CognitoIdentity extends Service {
   /**
    * Unlinks a federated identity from an existing account. Unlinked logins will be considered new identities next time they are seen. Removing the last linked login will make this identity inaccessible. This is a public API. You do not need any credentials to call this API.
    */
-  unlinkIdentity(params: CognitoIdentity.Types.UnlinkIdentityInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  unlinkIdentity(params: BoundInput<CognitoIdentity.Types.UnlinkIdentityInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Unlinks a federated identity from an existing account. Unlinked logins will be considered new identities next time they are seen. Removing the last linked login will make this identity inaccessible. This is a public API. You do not need any credentials to call this API.
    */
@@ -150,7 +152,7 @@ declare class CognitoIdentity extends Service {
   /**
    * Updates a user pool. You must use AWS Developer credentials to call this API.
    */
-  updateIdentityPool(params: CognitoIdentity.Types.IdentityPool, callback?: (err: AWSError, data: CognitoIdentity.Types.IdentityPool) => void): Request<CognitoIdentity.Types.IdentityPool, AWSError>;
+  updateIdentityPool(params: BoundInput<CognitoIdentity.Types.IdentityPool, keyof Params>, callback?: (err: AWSError, data: CognitoIdentity.Types.IdentityPool) => void): Request<CognitoIdentity.Types.IdentityPool, AWSError>;
   /**
    * Updates a user pool. You must use AWS Developer credentials to call this API.
    */
@@ -683,7 +685,8 @@ declare namespace CognitoIdentity {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateIdentityPoolInput & DeleteIdentitiesInput & DeleteIdentityPoolInput & DescribeIdentityInput & DescribeIdentityPoolInput & GetCredentialsForIdentityInput & GetIdInput & GetIdentityPoolRolesInput & GetOpenIdTokenInput & GetOpenIdTokenForDeveloperIdentityInput & ListIdentitiesInput & ListIdentityPoolsInput & LookupDeveloperIdentityInput & MergeDeveloperIdentitiesInput & SetIdentityPoolRolesInput & UnlinkDeveloperIdentityInput & UnlinkIdentityInput & IdentityPool>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the CognitoIdentity client.
    */

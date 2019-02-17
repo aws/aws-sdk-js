@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class WorkSpaces extends Service {
+declare class WorkSpaces<Params extends WorkSpaces.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: WorkSpaces.Types.ClientConfiguration)
-  config: Config & WorkSpaces.Types.ClientConfiguration;
+  constructor(options?: WorkSpaces.Types.ClientConfiguration<Params>)
+  config: Config & WorkSpaces.Types.ClientConfiguration<Params>;
   /**
    * Associates the specified IP access control group with the specified directory.
    */
-  associateIpGroups(params: WorkSpaces.Types.AssociateIpGroupsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.AssociateIpGroupsResult) => void): Request<WorkSpaces.Types.AssociateIpGroupsResult, AWSError>;
+  associateIpGroups(params: BoundInput<WorkSpaces.Types.AssociateIpGroupsRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.AssociateIpGroupsResult) => void): Request<WorkSpaces.Types.AssociateIpGroupsResult, AWSError>;
   /**
    * Associates the specified IP access control group with the specified directory.
    */
@@ -22,7 +24,7 @@ declare class WorkSpaces extends Service {
   /**
    * Adds one or more rules to the specified IP access control group. This action gives users permission to access their WorkSpaces from the CIDR address ranges specified in the rules.
    */
-  authorizeIpRules(params: WorkSpaces.Types.AuthorizeIpRulesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.AuthorizeIpRulesResult) => void): Request<WorkSpaces.Types.AuthorizeIpRulesResult, AWSError>;
+  authorizeIpRules(params: BoundInput<WorkSpaces.Types.AuthorizeIpRulesRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.AuthorizeIpRulesResult) => void): Request<WorkSpaces.Types.AuthorizeIpRulesResult, AWSError>;
   /**
    * Adds one or more rules to the specified IP access control group. This action gives users permission to access their WorkSpaces from the CIDR address ranges specified in the rules.
    */
@@ -30,7 +32,7 @@ declare class WorkSpaces extends Service {
   /**
    * Creates an IP access control group. An IP access control group provides you with the ability to control the IP addresses from which users are allowed to access their WorkSpaces. To specify the CIDR address ranges, add rules to your IP access control group and then associate the group with your directory. You can add rules when you create the group or at any time using AuthorizeIpRules. There is a default IP access control group associated with your directory. If you don't associate an IP access control group with your directory, the default group is used. The default group includes a default rule that allows users to access their WorkSpaces from anywhere. You cannot modify the default IP access control group for your directory.
    */
-  createIpGroup(params: WorkSpaces.Types.CreateIpGroupRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateIpGroupResult) => void): Request<WorkSpaces.Types.CreateIpGroupResult, AWSError>;
+  createIpGroup(params: BoundInput<WorkSpaces.Types.CreateIpGroupRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.CreateIpGroupResult) => void): Request<WorkSpaces.Types.CreateIpGroupResult, AWSError>;
   /**
    * Creates an IP access control group. An IP access control group provides you with the ability to control the IP addresses from which users are allowed to access their WorkSpaces. To specify the CIDR address ranges, add rules to your IP access control group and then associate the group with your directory. You can add rules when you create the group or at any time using AuthorizeIpRules. There is a default IP access control group associated with your directory. If you don't associate an IP access control group with your directory, the default group is used. The default group includes a default rule that allows users to access their WorkSpaces from anywhere. You cannot modify the default IP access control group for your directory.
    */
@@ -38,7 +40,7 @@ declare class WorkSpaces extends Service {
   /**
    * Creates the specified tags for the specified WorkSpace.
    */
-  createTags(params: WorkSpaces.Types.CreateTagsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateTagsResult) => void): Request<WorkSpaces.Types.CreateTagsResult, AWSError>;
+  createTags(params: BoundInput<WorkSpaces.Types.CreateTagsRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.CreateTagsResult) => void): Request<WorkSpaces.Types.CreateTagsResult, AWSError>;
   /**
    * Creates the specified tags for the specified WorkSpace.
    */
@@ -46,7 +48,7 @@ declare class WorkSpaces extends Service {
   /**
    * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.
    */
-  createWorkspaces(params: WorkSpaces.Types.CreateWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
+  createWorkspaces(params: BoundInput<WorkSpaces.Types.CreateWorkspacesRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
   /**
    * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.
    */
@@ -54,7 +56,7 @@ declare class WorkSpaces extends Service {
   /**
    * Deletes the specified IP access control group. You cannot delete an IP access control group that is associated with a directory.
    */
-  deleteIpGroup(params: WorkSpaces.Types.DeleteIpGroupRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteIpGroupResult) => void): Request<WorkSpaces.Types.DeleteIpGroupResult, AWSError>;
+  deleteIpGroup(params: BoundInput<WorkSpaces.Types.DeleteIpGroupRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteIpGroupResult) => void): Request<WorkSpaces.Types.DeleteIpGroupResult, AWSError>;
   /**
    * Deletes the specified IP access control group. You cannot delete an IP access control group that is associated with a directory.
    */
@@ -62,7 +64,7 @@ declare class WorkSpaces extends Service {
   /**
    * Deletes the specified tags from the specified WorkSpace.
    */
-  deleteTags(params: WorkSpaces.Types.DeleteTagsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteTagsResult) => void): Request<WorkSpaces.Types.DeleteTagsResult, AWSError>;
+  deleteTags(params: BoundInput<WorkSpaces.Types.DeleteTagsRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteTagsResult) => void): Request<WorkSpaces.Types.DeleteTagsResult, AWSError>;
   /**
    * Deletes the specified tags from the specified WorkSpace.
    */
@@ -70,7 +72,7 @@ declare class WorkSpaces extends Service {
   /**
    * Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image. 
    */
-  deleteWorkspaceImage(params: WorkSpaces.Types.DeleteWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteWorkspaceImageResult) => void): Request<WorkSpaces.Types.DeleteWorkspaceImageResult, AWSError>;
+  deleteWorkspaceImage(params: BoundInput<WorkSpaces.Types.DeleteWorkspaceImageRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteWorkspaceImageResult) => void): Request<WorkSpaces.Types.DeleteWorkspaceImageResult, AWSError>;
   /**
    * Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image. 
    */
@@ -78,7 +80,7 @@ declare class WorkSpaces extends Service {
   /**
    * Retrieves a list that describes the configuration of bring your own license (BYOL) for the specified account.
    */
-  describeAccount(params: WorkSpaces.Types.DescribeAccountRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeAccountResult) => void): Request<WorkSpaces.Types.DescribeAccountResult, AWSError>;
+  describeAccount(params: BoundInput<WorkSpaces.Types.DescribeAccountRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeAccountResult) => void): Request<WorkSpaces.Types.DescribeAccountResult, AWSError>;
   /**
    * Retrieves a list that describes the configuration of bring your own license (BYOL) for the specified account.
    */
@@ -86,7 +88,7 @@ declare class WorkSpaces extends Service {
   /**
    * Retrieves a list that describes modifications to the configuration of bring your own license (BYOL) for the specified account.
    */
-  describeAccountModifications(params: WorkSpaces.Types.DescribeAccountModificationsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeAccountModificationsResult) => void): Request<WorkSpaces.Types.DescribeAccountModificationsResult, AWSError>;
+  describeAccountModifications(params: BoundInput<WorkSpaces.Types.DescribeAccountModificationsRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeAccountModificationsResult) => void): Request<WorkSpaces.Types.DescribeAccountModificationsResult, AWSError>;
   /**
    * Retrieves a list that describes modifications to the configuration of bring your own license (BYOL) for the specified account.
    */
@@ -94,7 +96,7 @@ declare class WorkSpaces extends Service {
   /**
    * Retrieves a list that describes one or more specified Amazon WorkSpaces clients.
    */
-  describeClientProperties(params: WorkSpaces.Types.DescribeClientPropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeClientPropertiesResult) => void): Request<WorkSpaces.Types.DescribeClientPropertiesResult, AWSError>;
+  describeClientProperties(params: BoundInput<WorkSpaces.Types.DescribeClientPropertiesRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeClientPropertiesResult) => void): Request<WorkSpaces.Types.DescribeClientPropertiesResult, AWSError>;
   /**
    * Retrieves a list that describes one or more specified Amazon WorkSpaces clients.
    */
@@ -102,7 +104,7 @@ declare class WorkSpaces extends Service {
   /**
    * Describes one or more of your IP access control groups.
    */
-  describeIpGroups(params: WorkSpaces.Types.DescribeIpGroupsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeIpGroupsResult) => void): Request<WorkSpaces.Types.DescribeIpGroupsResult, AWSError>;
+  describeIpGroups(params: BoundInput<WorkSpaces.Types.DescribeIpGroupsRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeIpGroupsResult) => void): Request<WorkSpaces.Types.DescribeIpGroupsResult, AWSError>;
   /**
    * Describes one or more of your IP access control groups.
    */
@@ -110,7 +112,7 @@ declare class WorkSpaces extends Service {
   /**
    * Describes the specified tags for the specified WorkSpace.
    */
-  describeTags(params: WorkSpaces.Types.DescribeTagsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeTagsResult) => void): Request<WorkSpaces.Types.DescribeTagsResult, AWSError>;
+  describeTags(params: BoundInput<WorkSpaces.Types.DescribeTagsRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeTagsResult) => void): Request<WorkSpaces.Types.DescribeTagsResult, AWSError>;
   /**
    * Describes the specified tags for the specified WorkSpace.
    */
@@ -118,7 +120,7 @@ declare class WorkSpaces extends Service {
   /**
    * Retrieves a list that describes the available WorkSpace bundles. You can filter the results using either bundle ID or owner, but not both.
    */
-  describeWorkspaceBundles(params: WorkSpaces.Types.DescribeWorkspaceBundlesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceBundlesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceBundlesResult, AWSError>;
+  describeWorkspaceBundles(params: BoundInput<WorkSpaces.Types.DescribeWorkspaceBundlesRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceBundlesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceBundlesResult, AWSError>;
   /**
    * Retrieves a list that describes the available WorkSpace bundles. You can filter the results using either bundle ID or owner, but not both.
    */
@@ -126,7 +128,7 @@ declare class WorkSpaces extends Service {
   /**
    * Describes the available AWS Directory Service directories that are registered with Amazon WorkSpaces.
    */
-  describeWorkspaceDirectories(params: WorkSpaces.Types.DescribeWorkspaceDirectoriesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceDirectoriesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceDirectoriesResult, AWSError>;
+  describeWorkspaceDirectories(params: BoundInput<WorkSpaces.Types.DescribeWorkspaceDirectoriesRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceDirectoriesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceDirectoriesResult, AWSError>;
   /**
    * Describes the available AWS Directory Service directories that are registered with Amazon WorkSpaces.
    */
@@ -134,7 +136,7 @@ declare class WorkSpaces extends Service {
   /**
    * Retrieves a list that describes one or more specified images, if the image identifiers are provided. Otherwise, all images in the account are described. 
    */
-  describeWorkspaceImages(params: WorkSpaces.Types.DescribeWorkspaceImagesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceImagesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceImagesResult, AWSError>;
+  describeWorkspaceImages(params: BoundInput<WorkSpaces.Types.DescribeWorkspaceImagesRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspaceImagesResult) => void): Request<WorkSpaces.Types.DescribeWorkspaceImagesResult, AWSError>;
   /**
    * Retrieves a list that describes one or more specified images, if the image identifiers are provided. Otherwise, all images in the account are described. 
    */
@@ -142,7 +144,7 @@ declare class WorkSpaces extends Service {
   /**
    * Describes the specified WorkSpaces. You can filter the results by using the bundle identifier, directory identifier, or owner, but you can specify only one filter at a time.
    */
-  describeWorkspaces(params: WorkSpaces.Types.DescribeWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesResult, AWSError>;
+  describeWorkspaces(params: BoundInput<WorkSpaces.Types.DescribeWorkspacesRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesResult, AWSError>;
   /**
    * Describes the specified WorkSpaces. You can filter the results by using the bundle identifier, directory identifier, or owner, but you can specify only one filter at a time.
    */
@@ -150,7 +152,7 @@ declare class WorkSpaces extends Service {
   /**
    * Describes the connection status of the specified WorkSpaces.
    */
-  describeWorkspacesConnectionStatus(params: WorkSpaces.Types.DescribeWorkspacesConnectionStatusRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesConnectionStatusResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesConnectionStatusResult, AWSError>;
+  describeWorkspacesConnectionStatus(params: BoundInput<WorkSpaces.Types.DescribeWorkspacesConnectionStatusRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesConnectionStatusResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesConnectionStatusResult, AWSError>;
   /**
    * Describes the connection status of the specified WorkSpaces.
    */
@@ -158,7 +160,7 @@ declare class WorkSpaces extends Service {
   /**
    * Disassociates the specified IP access control group from the specified directory.
    */
-  disassociateIpGroups(params: WorkSpaces.Types.DisassociateIpGroupsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateIpGroupsResult) => void): Request<WorkSpaces.Types.DisassociateIpGroupsResult, AWSError>;
+  disassociateIpGroups(params: BoundInput<WorkSpaces.Types.DisassociateIpGroupsRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateIpGroupsResult) => void): Request<WorkSpaces.Types.DisassociateIpGroupsResult, AWSError>;
   /**
    * Disassociates the specified IP access control group from the specified directory.
    */
@@ -166,7 +168,7 @@ declare class WorkSpaces extends Service {
   /**
    * Imports the specified Windows 7 or Windows 10 bring your own license (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. 
    */
-  importWorkspaceImage(params: WorkSpaces.Types.ImportWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ImportWorkspaceImageResult) => void): Request<WorkSpaces.Types.ImportWorkspaceImageResult, AWSError>;
+  importWorkspaceImage(params: BoundInput<WorkSpaces.Types.ImportWorkspaceImageRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.ImportWorkspaceImageResult) => void): Request<WorkSpaces.Types.ImportWorkspaceImageResult, AWSError>;
   /**
    * Imports the specified Windows 7 or Windows 10 bring your own license (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. 
    */
@@ -174,7 +176,7 @@ declare class WorkSpaces extends Service {
   /**
    * Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable bring your own license (BYOL).  The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
    */
-  listAvailableManagementCidrRanges(params: WorkSpaces.Types.ListAvailableManagementCidrRangesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ListAvailableManagementCidrRangesResult) => void): Request<WorkSpaces.Types.ListAvailableManagementCidrRangesResult, AWSError>;
+  listAvailableManagementCidrRanges(params: BoundInput<WorkSpaces.Types.ListAvailableManagementCidrRangesRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.ListAvailableManagementCidrRangesResult) => void): Request<WorkSpaces.Types.ListAvailableManagementCidrRangesResult, AWSError>;
   /**
    * Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable bring your own license (BYOL).  The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
    */
@@ -182,7 +184,7 @@ declare class WorkSpaces extends Service {
   /**
    * Modifies the configuration of bring your own license (BYOL) for the specified account.
    */
-  modifyAccount(params: WorkSpaces.Types.ModifyAccountRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyAccountResult) => void): Request<WorkSpaces.Types.ModifyAccountResult, AWSError>;
+  modifyAccount(params: BoundInput<WorkSpaces.Types.ModifyAccountRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyAccountResult) => void): Request<WorkSpaces.Types.ModifyAccountResult, AWSError>;
   /**
    * Modifies the configuration of bring your own license (BYOL) for the specified account.
    */
@@ -190,7 +192,7 @@ declare class WorkSpaces extends Service {
   /**
    * Modifies the properties of the specified Amazon WorkSpaces client.
    */
-  modifyClientProperties(params: WorkSpaces.Types.ModifyClientPropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyClientPropertiesResult) => void): Request<WorkSpaces.Types.ModifyClientPropertiesResult, AWSError>;
+  modifyClientProperties(params: BoundInput<WorkSpaces.Types.ModifyClientPropertiesRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyClientPropertiesResult) => void): Request<WorkSpaces.Types.ModifyClientPropertiesResult, AWSError>;
   /**
    * Modifies the properties of the specified Amazon WorkSpaces client.
    */
@@ -198,7 +200,7 @@ declare class WorkSpaces extends Service {
   /**
    * Modifies the specified WorkSpace properties.
    */
-  modifyWorkspaceProperties(params: WorkSpaces.Types.ModifyWorkspacePropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspacePropertiesResult) => void): Request<WorkSpaces.Types.ModifyWorkspacePropertiesResult, AWSError>;
+  modifyWorkspaceProperties(params: BoundInput<WorkSpaces.Types.ModifyWorkspacePropertiesRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspacePropertiesResult) => void): Request<WorkSpaces.Types.ModifyWorkspacePropertiesResult, AWSError>;
   /**
    * Modifies the specified WorkSpace properties.
    */
@@ -206,7 +208,7 @@ declare class WorkSpaces extends Service {
   /**
    * Sets the state of the specified WorkSpace. To maintain a WorkSpace without being interrupted, set the WorkSpace state to ADMIN_MAINTENANCE. WorkSpaces in this state do not respond to requests to reboot, stop, start, or rebuild. An AutoStop WorkSpace in this state is not stopped. Users can log into a WorkSpace in the ADMIN_MAINTENANCE state.
    */
-  modifyWorkspaceState(params: WorkSpaces.Types.ModifyWorkspaceStateRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspaceStateResult) => void): Request<WorkSpaces.Types.ModifyWorkspaceStateResult, AWSError>;
+  modifyWorkspaceState(params: BoundInput<WorkSpaces.Types.ModifyWorkspaceStateRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyWorkspaceStateResult) => void): Request<WorkSpaces.Types.ModifyWorkspaceStateResult, AWSError>;
   /**
    * Sets the state of the specified WorkSpace. To maintain a WorkSpace without being interrupted, set the WorkSpace state to ADMIN_MAINTENANCE. WorkSpaces in this state do not respond to requests to reboot, stop, start, or rebuild. An AutoStop WorkSpace in this state is not stopped. Users can log into a WorkSpace in the ADMIN_MAINTENANCE state.
    */
@@ -214,7 +216,7 @@ declare class WorkSpaces extends Service {
   /**
    * Reboots the specified WorkSpaces. You cannot reboot a WorkSpace unless its state is AVAILABLE or UNHEALTHY. This operation is asynchronous and returns before the WorkSpaces have rebooted.
    */
-  rebootWorkspaces(params: WorkSpaces.Types.RebootWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.RebootWorkspacesResult) => void): Request<WorkSpaces.Types.RebootWorkspacesResult, AWSError>;
+  rebootWorkspaces(params: BoundInput<WorkSpaces.Types.RebootWorkspacesRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.RebootWorkspacesResult) => void): Request<WorkSpaces.Types.RebootWorkspacesResult, AWSError>;
   /**
    * Reboots the specified WorkSpaces. You cannot reboot a WorkSpace unless its state is AVAILABLE or UNHEALTHY. This operation is asynchronous and returns before the WorkSpaces have rebooted.
    */
@@ -222,7 +224,7 @@ declare class WorkSpaces extends Service {
   /**
    * Rebuilds the specified WorkSpace. You cannot rebuild a WorkSpace unless its state is AVAILABLE, ERROR, or UNHEALTHY. Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Rebuild a WorkSpace. This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.
    */
-  rebuildWorkspaces(params: WorkSpaces.Types.RebuildWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.RebuildWorkspacesResult) => void): Request<WorkSpaces.Types.RebuildWorkspacesResult, AWSError>;
+  rebuildWorkspaces(params: BoundInput<WorkSpaces.Types.RebuildWorkspacesRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.RebuildWorkspacesResult) => void): Request<WorkSpaces.Types.RebuildWorkspacesResult, AWSError>;
   /**
    * Rebuilds the specified WorkSpace. You cannot rebuild a WorkSpace unless its state is AVAILABLE, ERROR, or UNHEALTHY. Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see Rebuild a WorkSpace. This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.
    */
@@ -230,7 +232,7 @@ declare class WorkSpaces extends Service {
   /**
    * Removes one or more rules from the specified IP access control group.
    */
-  revokeIpRules(params: WorkSpaces.Types.RevokeIpRulesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.RevokeIpRulesResult) => void): Request<WorkSpaces.Types.RevokeIpRulesResult, AWSError>;
+  revokeIpRules(params: BoundInput<WorkSpaces.Types.RevokeIpRulesRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.RevokeIpRulesResult) => void): Request<WorkSpaces.Types.RevokeIpRulesResult, AWSError>;
   /**
    * Removes one or more rules from the specified IP access control group.
    */
@@ -238,7 +240,7 @@ declare class WorkSpaces extends Service {
   /**
    * Starts the specified WorkSpaces. You cannot start a WorkSpace unless it has a running mode of AutoStop and a state of STOPPED.
    */
-  startWorkspaces(params: WorkSpaces.Types.StartWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.StartWorkspacesResult) => void): Request<WorkSpaces.Types.StartWorkspacesResult, AWSError>;
+  startWorkspaces(params: BoundInput<WorkSpaces.Types.StartWorkspacesRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.StartWorkspacesResult) => void): Request<WorkSpaces.Types.StartWorkspacesResult, AWSError>;
   /**
    * Starts the specified WorkSpaces. You cannot start a WorkSpace unless it has a running mode of AutoStop and a state of STOPPED.
    */
@@ -246,7 +248,7 @@ declare class WorkSpaces extends Service {
   /**
    *  Stops the specified WorkSpaces. You cannot stop a WorkSpace unless it has a running mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
    */
-  stopWorkspaces(params: WorkSpaces.Types.StopWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.StopWorkspacesResult) => void): Request<WorkSpaces.Types.StopWorkspacesResult, AWSError>;
+  stopWorkspaces(params: BoundInput<WorkSpaces.Types.StopWorkspacesRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.StopWorkspacesResult) => void): Request<WorkSpaces.Types.StopWorkspacesResult, AWSError>;
   /**
    *  Stops the specified WorkSpaces. You cannot stop a WorkSpace unless it has a running mode of AutoStop and a state of AVAILABLE, IMPAIRED, UNHEALTHY, or ERROR.
    */
@@ -254,7 +256,7 @@ declare class WorkSpaces extends Service {
   /**
    * Terminates the specified WorkSpaces. Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is destroyed. If you need to archive any user data, contact Amazon Web Services before terminating the WorkSpace. You can terminate a WorkSpace that is in any state except SUSPENDED. This operation is asynchronous and returns before the WorkSpaces have been completely terminated.
    */
-  terminateWorkspaces(params: WorkSpaces.Types.TerminateWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesResult, AWSError>;
+  terminateWorkspaces(params: BoundInput<WorkSpaces.Types.TerminateWorkspacesRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesResult, AWSError>;
   /**
    * Terminates the specified WorkSpaces. Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is destroyed. If you need to archive any user data, contact Amazon Web Services before terminating the WorkSpace. You can terminate a WorkSpace that is in any state except SUSPENDED. This operation is asynchronous and returns before the WorkSpaces have been completely terminated.
    */
@@ -262,7 +264,7 @@ declare class WorkSpaces extends Service {
   /**
    * Replaces the current rules of the specified IP access control group with the specified rules.
    */
-  updateRulesOfIpGroup(params: WorkSpaces.Types.UpdateRulesOfIpGroupRequest, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateRulesOfIpGroupResult) => void): Request<WorkSpaces.Types.UpdateRulesOfIpGroupResult, AWSError>;
+  updateRulesOfIpGroup(params: BoundInput<WorkSpaces.Types.UpdateRulesOfIpGroupRequest, keyof Params>, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateRulesOfIpGroupResult) => void): Request<WorkSpaces.Types.UpdateRulesOfIpGroupResult, AWSError>;
   /**
    * Replaces the current rules of the specified IP access control group with the specified rules.
    */
@@ -1311,7 +1313,8 @@ declare namespace WorkSpaces {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AssociateIpGroupsRequest & AuthorizeIpRulesRequest & CreateIpGroupRequest & CreateTagsRequest & CreateWorkspacesRequest & DeleteIpGroupRequest & DeleteTagsRequest & DeleteWorkspaceImageRequest & DescribeAccountRequest & DescribeAccountModificationsRequest & DescribeClientPropertiesRequest & DescribeIpGroupsRequest & DescribeTagsRequest & DescribeWorkspaceBundlesRequest & DescribeWorkspaceDirectoriesRequest & DescribeWorkspaceImagesRequest & DescribeWorkspacesRequest & DescribeWorkspacesConnectionStatusRequest & DisassociateIpGroupsRequest & ImportWorkspaceImageRequest & ListAvailableManagementCidrRangesRequest & ModifyAccountRequest & ModifyClientPropertiesRequest & ModifyWorkspacePropertiesRequest & ModifyWorkspaceStateRequest & RebootWorkspacesRequest & RebuildWorkspacesRequest & RevokeIpRulesRequest & StartWorkspacesRequest & StopWorkspacesRequest & TerminateWorkspacesRequest & UpdateRulesOfIpGroupRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the WorkSpaces client.
    */

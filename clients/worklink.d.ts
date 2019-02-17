@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class WorkLink extends Service {
+declare class WorkLink<Params extends WorkLink.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: WorkLink.Types.ClientConfiguration)
-  config: Config & WorkLink.Types.ClientConfiguration;
+  constructor(options?: WorkLink.Types.ClientConfiguration<Params>)
+  config: Config & WorkLink.Types.ClientConfiguration<Params>;
   /**
    * Imports the root certificate of a certificate authority (CA) used to obtain TLS certificates used by associated websites within the company network.
    */
-  associateWebsiteCertificateAuthority(params: WorkLink.Types.AssociateWebsiteCertificateAuthorityRequest, callback?: (err: AWSError, data: WorkLink.Types.AssociateWebsiteCertificateAuthorityResponse) => void): Request<WorkLink.Types.AssociateWebsiteCertificateAuthorityResponse, AWSError>;
+  associateWebsiteCertificateAuthority(params: BoundInput<WorkLink.Types.AssociateWebsiteCertificateAuthorityRequest, keyof Params>, callback?: (err: AWSError, data: WorkLink.Types.AssociateWebsiteCertificateAuthorityResponse) => void): Request<WorkLink.Types.AssociateWebsiteCertificateAuthorityResponse, AWSError>;
   /**
    * Imports the root certificate of a certificate authority (CA) used to obtain TLS certificates used by associated websites within the company network.
    */
@@ -22,7 +24,7 @@ declare class WorkLink extends Service {
   /**
    * Creates a fleet. A fleet consists of resources and the configuration that delivers associated websites to authorized users who download and set up the Amazon WorkLink app.
    */
-  createFleet(params: WorkLink.Types.CreateFleetRequest, callback?: (err: AWSError, data: WorkLink.Types.CreateFleetResponse) => void): Request<WorkLink.Types.CreateFleetResponse, AWSError>;
+  createFleet(params: BoundInput<WorkLink.Types.CreateFleetRequest, keyof Params>, callback?: (err: AWSError, data: WorkLink.Types.CreateFleetResponse) => void): Request<WorkLink.Types.CreateFleetResponse, AWSError>;
   /**
    * Creates a fleet. A fleet consists of resources and the configuration that delivers associated websites to authorized users who download and set up the Amazon WorkLink app.
    */
@@ -30,7 +32,7 @@ declare class WorkLink extends Service {
   /**
    * Deletes a fleet. Prevents users from accessing previously associated websites. 
    */
-  deleteFleet(params: WorkLink.Types.DeleteFleetRequest, callback?: (err: AWSError, data: WorkLink.Types.DeleteFleetResponse) => void): Request<WorkLink.Types.DeleteFleetResponse, AWSError>;
+  deleteFleet(params: BoundInput<WorkLink.Types.DeleteFleetRequest, keyof Params>, callback?: (err: AWSError, data: WorkLink.Types.DeleteFleetResponse) => void): Request<WorkLink.Types.DeleteFleetResponse, AWSError>;
   /**
    * Deletes a fleet. Prevents users from accessing previously associated websites. 
    */
@@ -38,7 +40,7 @@ declare class WorkLink extends Service {
   /**
    * Describes the configuration for delivering audit streams to the customer account.
    */
-  describeAuditStreamConfiguration(params: WorkLink.Types.DescribeAuditStreamConfigurationRequest, callback?: (err: AWSError, data: WorkLink.Types.DescribeAuditStreamConfigurationResponse) => void): Request<WorkLink.Types.DescribeAuditStreamConfigurationResponse, AWSError>;
+  describeAuditStreamConfiguration(params: BoundInput<WorkLink.Types.DescribeAuditStreamConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: WorkLink.Types.DescribeAuditStreamConfigurationResponse) => void): Request<WorkLink.Types.DescribeAuditStreamConfigurationResponse, AWSError>;
   /**
    * Describes the configuration for delivering audit streams to the customer account.
    */
@@ -46,7 +48,7 @@ declare class WorkLink extends Service {
   /**
    * Describes the networking configuration to access the internal websites associated with the specified fleet.
    */
-  describeCompanyNetworkConfiguration(params: WorkLink.Types.DescribeCompanyNetworkConfigurationRequest, callback?: (err: AWSError, data: WorkLink.Types.DescribeCompanyNetworkConfigurationResponse) => void): Request<WorkLink.Types.DescribeCompanyNetworkConfigurationResponse, AWSError>;
+  describeCompanyNetworkConfiguration(params: BoundInput<WorkLink.Types.DescribeCompanyNetworkConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: WorkLink.Types.DescribeCompanyNetworkConfigurationResponse) => void): Request<WorkLink.Types.DescribeCompanyNetworkConfigurationResponse, AWSError>;
   /**
    * Describes the networking configuration to access the internal websites associated with the specified fleet.
    */
@@ -54,7 +56,7 @@ declare class WorkLink extends Service {
   /**
    * Provides information about a user's device.
    */
-  describeDevice(params: WorkLink.Types.DescribeDeviceRequest, callback?: (err: AWSError, data: WorkLink.Types.DescribeDeviceResponse) => void): Request<WorkLink.Types.DescribeDeviceResponse, AWSError>;
+  describeDevice(params: BoundInput<WorkLink.Types.DescribeDeviceRequest, keyof Params>, callback?: (err: AWSError, data: WorkLink.Types.DescribeDeviceResponse) => void): Request<WorkLink.Types.DescribeDeviceResponse, AWSError>;
   /**
    * Provides information about a user's device.
    */
@@ -62,7 +64,7 @@ declare class WorkLink extends Service {
   /**
    * Describes the device policy configuration for the specified fleet.
    */
-  describeDevicePolicyConfiguration(params: WorkLink.Types.DescribeDevicePolicyConfigurationRequest, callback?: (err: AWSError, data: WorkLink.Types.DescribeDevicePolicyConfigurationResponse) => void): Request<WorkLink.Types.DescribeDevicePolicyConfigurationResponse, AWSError>;
+  describeDevicePolicyConfiguration(params: BoundInput<WorkLink.Types.DescribeDevicePolicyConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: WorkLink.Types.DescribeDevicePolicyConfigurationResponse) => void): Request<WorkLink.Types.DescribeDevicePolicyConfigurationResponse, AWSError>;
   /**
    * Describes the device policy configuration for the specified fleet.
    */
@@ -70,7 +72,7 @@ declare class WorkLink extends Service {
   /**
    * Provides basic information for the specified fleet, excluding identity provider, networking, and device configuration details.
    */
-  describeFleetMetadata(params: WorkLink.Types.DescribeFleetMetadataRequest, callback?: (err: AWSError, data: WorkLink.Types.DescribeFleetMetadataResponse) => void): Request<WorkLink.Types.DescribeFleetMetadataResponse, AWSError>;
+  describeFleetMetadata(params: BoundInput<WorkLink.Types.DescribeFleetMetadataRequest, keyof Params>, callback?: (err: AWSError, data: WorkLink.Types.DescribeFleetMetadataResponse) => void): Request<WorkLink.Types.DescribeFleetMetadataResponse, AWSError>;
   /**
    * Provides basic information for the specified fleet, excluding identity provider, networking, and device configuration details.
    */
@@ -78,7 +80,7 @@ declare class WorkLink extends Service {
   /**
    * Describes the identity provider configuration of the specified fleet.
    */
-  describeIdentityProviderConfiguration(params: WorkLink.Types.DescribeIdentityProviderConfigurationRequest, callback?: (err: AWSError, data: WorkLink.Types.DescribeIdentityProviderConfigurationResponse) => void): Request<WorkLink.Types.DescribeIdentityProviderConfigurationResponse, AWSError>;
+  describeIdentityProviderConfiguration(params: BoundInput<WorkLink.Types.DescribeIdentityProviderConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: WorkLink.Types.DescribeIdentityProviderConfigurationResponse) => void): Request<WorkLink.Types.DescribeIdentityProviderConfigurationResponse, AWSError>;
   /**
    * Describes the identity provider configuration of the specified fleet.
    */
@@ -86,7 +88,7 @@ declare class WorkLink extends Service {
   /**
    * Provides information about the certificate authority.
    */
-  describeWebsiteCertificateAuthority(params: WorkLink.Types.DescribeWebsiteCertificateAuthorityRequest, callback?: (err: AWSError, data: WorkLink.Types.DescribeWebsiteCertificateAuthorityResponse) => void): Request<WorkLink.Types.DescribeWebsiteCertificateAuthorityResponse, AWSError>;
+  describeWebsiteCertificateAuthority(params: BoundInput<WorkLink.Types.DescribeWebsiteCertificateAuthorityRequest, keyof Params>, callback?: (err: AWSError, data: WorkLink.Types.DescribeWebsiteCertificateAuthorityResponse) => void): Request<WorkLink.Types.DescribeWebsiteCertificateAuthorityResponse, AWSError>;
   /**
    * Provides information about the certificate authority.
    */
@@ -94,7 +96,7 @@ declare class WorkLink extends Service {
   /**
    * Removes a certificate authority (CA).
    */
-  disassociateWebsiteCertificateAuthority(params: WorkLink.Types.DisassociateWebsiteCertificateAuthorityRequest, callback?: (err: AWSError, data: WorkLink.Types.DisassociateWebsiteCertificateAuthorityResponse) => void): Request<WorkLink.Types.DisassociateWebsiteCertificateAuthorityResponse, AWSError>;
+  disassociateWebsiteCertificateAuthority(params: BoundInput<WorkLink.Types.DisassociateWebsiteCertificateAuthorityRequest, keyof Params>, callback?: (err: AWSError, data: WorkLink.Types.DisassociateWebsiteCertificateAuthorityResponse) => void): Request<WorkLink.Types.DisassociateWebsiteCertificateAuthorityResponse, AWSError>;
   /**
    * Removes a certificate authority (CA).
    */
@@ -102,7 +104,7 @@ declare class WorkLink extends Service {
   /**
    * Retrieves a list of devices registered with the specified fleet.
    */
-  listDevices(params: WorkLink.Types.ListDevicesRequest, callback?: (err: AWSError, data: WorkLink.Types.ListDevicesResponse) => void): Request<WorkLink.Types.ListDevicesResponse, AWSError>;
+  listDevices(params: BoundInput<WorkLink.Types.ListDevicesRequest, keyof Params>, callback?: (err: AWSError, data: WorkLink.Types.ListDevicesResponse) => void): Request<WorkLink.Types.ListDevicesResponse, AWSError>;
   /**
    * Retrieves a list of devices registered with the specified fleet.
    */
@@ -110,7 +112,7 @@ declare class WorkLink extends Service {
   /**
    * Retrieves a list of fleets for the current account and Region.
    */
-  listFleets(params: WorkLink.Types.ListFleetsRequest, callback?: (err: AWSError, data: WorkLink.Types.ListFleetsResponse) => void): Request<WorkLink.Types.ListFleetsResponse, AWSError>;
+  listFleets(params: BoundInput<WorkLink.Types.ListFleetsRequest, keyof Params>, callback?: (err: AWSError, data: WorkLink.Types.ListFleetsResponse) => void): Request<WorkLink.Types.ListFleetsResponse, AWSError>;
   /**
    * Retrieves a list of fleets for the current account and Region.
    */
@@ -118,7 +120,7 @@ declare class WorkLink extends Service {
   /**
    * Retrieves a list of certificate authorities added for the current account and Region.
    */
-  listWebsiteCertificateAuthorities(params: WorkLink.Types.ListWebsiteCertificateAuthoritiesRequest, callback?: (err: AWSError, data: WorkLink.Types.ListWebsiteCertificateAuthoritiesResponse) => void): Request<WorkLink.Types.ListWebsiteCertificateAuthoritiesResponse, AWSError>;
+  listWebsiteCertificateAuthorities(params: BoundInput<WorkLink.Types.ListWebsiteCertificateAuthoritiesRequest, keyof Params>, callback?: (err: AWSError, data: WorkLink.Types.ListWebsiteCertificateAuthoritiesResponse) => void): Request<WorkLink.Types.ListWebsiteCertificateAuthoritiesResponse, AWSError>;
   /**
    * Retrieves a list of certificate authorities added for the current account and Region.
    */
@@ -126,7 +128,7 @@ declare class WorkLink extends Service {
   /**
    * Signs the user out from all of their devices. The user can sign in again if they have valid credentials.
    */
-  signOutUser(params: WorkLink.Types.SignOutUserRequest, callback?: (err: AWSError, data: WorkLink.Types.SignOutUserResponse) => void): Request<WorkLink.Types.SignOutUserResponse, AWSError>;
+  signOutUser(params: BoundInput<WorkLink.Types.SignOutUserRequest, keyof Params>, callback?: (err: AWSError, data: WorkLink.Types.SignOutUserResponse) => void): Request<WorkLink.Types.SignOutUserResponse, AWSError>;
   /**
    * Signs the user out from all of their devices. The user can sign in again if they have valid credentials.
    */
@@ -134,7 +136,7 @@ declare class WorkLink extends Service {
   /**
    * Updates the audit stream configuration for the fleet.
    */
-  updateAuditStreamConfiguration(params: WorkLink.Types.UpdateAuditStreamConfigurationRequest, callback?: (err: AWSError, data: WorkLink.Types.UpdateAuditStreamConfigurationResponse) => void): Request<WorkLink.Types.UpdateAuditStreamConfigurationResponse, AWSError>;
+  updateAuditStreamConfiguration(params: BoundInput<WorkLink.Types.UpdateAuditStreamConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: WorkLink.Types.UpdateAuditStreamConfigurationResponse) => void): Request<WorkLink.Types.UpdateAuditStreamConfigurationResponse, AWSError>;
   /**
    * Updates the audit stream configuration for the fleet.
    */
@@ -142,7 +144,7 @@ declare class WorkLink extends Service {
   /**
    * Updates the company network configuration for the fleet.
    */
-  updateCompanyNetworkConfiguration(params: WorkLink.Types.UpdateCompanyNetworkConfigurationRequest, callback?: (err: AWSError, data: WorkLink.Types.UpdateCompanyNetworkConfigurationResponse) => void): Request<WorkLink.Types.UpdateCompanyNetworkConfigurationResponse, AWSError>;
+  updateCompanyNetworkConfiguration(params: BoundInput<WorkLink.Types.UpdateCompanyNetworkConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: WorkLink.Types.UpdateCompanyNetworkConfigurationResponse) => void): Request<WorkLink.Types.UpdateCompanyNetworkConfigurationResponse, AWSError>;
   /**
    * Updates the company network configuration for the fleet.
    */
@@ -150,7 +152,7 @@ declare class WorkLink extends Service {
   /**
    * Updates the device policy configuration for the fleet.
    */
-  updateDevicePolicyConfiguration(params: WorkLink.Types.UpdateDevicePolicyConfigurationRequest, callback?: (err: AWSError, data: WorkLink.Types.UpdateDevicePolicyConfigurationResponse) => void): Request<WorkLink.Types.UpdateDevicePolicyConfigurationResponse, AWSError>;
+  updateDevicePolicyConfiguration(params: BoundInput<WorkLink.Types.UpdateDevicePolicyConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: WorkLink.Types.UpdateDevicePolicyConfigurationResponse) => void): Request<WorkLink.Types.UpdateDevicePolicyConfigurationResponse, AWSError>;
   /**
    * Updates the device policy configuration for the fleet.
    */
@@ -158,7 +160,7 @@ declare class WorkLink extends Service {
   /**
    * Updates fleet metadata, such as DisplayName.
    */
-  updateFleetMetadata(params: WorkLink.Types.UpdateFleetMetadataRequest, callback?: (err: AWSError, data: WorkLink.Types.UpdateFleetMetadataResponse) => void): Request<WorkLink.Types.UpdateFleetMetadataResponse, AWSError>;
+  updateFleetMetadata(params: BoundInput<WorkLink.Types.UpdateFleetMetadataRequest, keyof Params>, callback?: (err: AWSError, data: WorkLink.Types.UpdateFleetMetadataResponse) => void): Request<WorkLink.Types.UpdateFleetMetadataResponse, AWSError>;
   /**
    * Updates fleet metadata, such as DisplayName.
    */
@@ -166,7 +168,7 @@ declare class WorkLink extends Service {
   /**
    * Updates the identity provider configuration for the fleet.
    */
-  updateIdentityProviderConfiguration(params: WorkLink.Types.UpdateIdentityProviderConfigurationRequest, callback?: (err: AWSError, data: WorkLink.Types.UpdateIdentityProviderConfigurationResponse) => void): Request<WorkLink.Types.UpdateIdentityProviderConfigurationResponse, AWSError>;
+  updateIdentityProviderConfiguration(params: BoundInput<WorkLink.Types.UpdateIdentityProviderConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: WorkLink.Types.UpdateIdentityProviderConfigurationResponse) => void): Request<WorkLink.Types.UpdateIdentityProviderConfigurationResponse, AWSError>;
   /**
    * Updates the identity provider configuration for the fleet.
    */
@@ -655,7 +657,8 @@ declare namespace WorkLink {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AssociateWebsiteCertificateAuthorityRequest & CreateFleetRequest & DeleteFleetRequest & DescribeAuditStreamConfigurationRequest & DescribeCompanyNetworkConfigurationRequest & DescribeDeviceRequest & DescribeDevicePolicyConfigurationRequest & DescribeFleetMetadataRequest & DescribeIdentityProviderConfigurationRequest & DescribeWebsiteCertificateAuthorityRequest & DisassociateWebsiteCertificateAuthorityRequest & ListDevicesRequest & ListFleetsRequest & ListWebsiteCertificateAuthoritiesRequest & SignOutUserRequest & UpdateAuditStreamConfigurationRequest & UpdateCompanyNetworkConfigurationRequest & UpdateDevicePolicyConfigurationRequest & UpdateFleetMetadataRequest & UpdateIdentityProviderConfigurationRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the WorkLink client.
    */

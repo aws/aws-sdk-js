@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class AutoScalingPlans extends Service {
+declare class AutoScalingPlans<Params extends AutoScalingPlans.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: AutoScalingPlans.Types.ClientConfiguration)
-  config: Config & AutoScalingPlans.Types.ClientConfiguration;
+  constructor(options?: AutoScalingPlans.Types.ClientConfiguration<Params>)
+  config: Config & AutoScalingPlans.Types.ClientConfiguration<Params>;
   /**
    * Creates a scaling plan.
    */
-  createScalingPlan(params: AutoScalingPlans.Types.CreateScalingPlanRequest, callback?: (err: AWSError, data: AutoScalingPlans.Types.CreateScalingPlanResponse) => void): Request<AutoScalingPlans.Types.CreateScalingPlanResponse, AWSError>;
+  createScalingPlan(params: BoundInput<AutoScalingPlans.Types.CreateScalingPlanRequest, keyof Params>, callback?: (err: AWSError, data: AutoScalingPlans.Types.CreateScalingPlanResponse) => void): Request<AutoScalingPlans.Types.CreateScalingPlanResponse, AWSError>;
   /**
    * Creates a scaling plan.
    */
@@ -22,7 +24,7 @@ declare class AutoScalingPlans extends Service {
   /**
    * Deletes the specified scaling plan. Deleting a scaling plan deletes the underlying ScalingInstruction for all of the scalable resources that are covered by the plan. If the plan has launched resources or has scaling activities in progress, you must delete those resources separately.
    */
-  deleteScalingPlan(params: AutoScalingPlans.Types.DeleteScalingPlanRequest, callback?: (err: AWSError, data: AutoScalingPlans.Types.DeleteScalingPlanResponse) => void): Request<AutoScalingPlans.Types.DeleteScalingPlanResponse, AWSError>;
+  deleteScalingPlan(params: BoundInput<AutoScalingPlans.Types.DeleteScalingPlanRequest, keyof Params>, callback?: (err: AWSError, data: AutoScalingPlans.Types.DeleteScalingPlanResponse) => void): Request<AutoScalingPlans.Types.DeleteScalingPlanResponse, AWSError>;
   /**
    * Deletes the specified scaling plan. Deleting a scaling plan deletes the underlying ScalingInstruction for all of the scalable resources that are covered by the plan. If the plan has launched resources or has scaling activities in progress, you must delete those resources separately.
    */
@@ -30,7 +32,7 @@ declare class AutoScalingPlans extends Service {
   /**
    * Describes the scalable resources in the specified scaling plan.
    */
-  describeScalingPlanResources(params: AutoScalingPlans.Types.DescribeScalingPlanResourcesRequest, callback?: (err: AWSError, data: AutoScalingPlans.Types.DescribeScalingPlanResourcesResponse) => void): Request<AutoScalingPlans.Types.DescribeScalingPlanResourcesResponse, AWSError>;
+  describeScalingPlanResources(params: BoundInput<AutoScalingPlans.Types.DescribeScalingPlanResourcesRequest, keyof Params>, callback?: (err: AWSError, data: AutoScalingPlans.Types.DescribeScalingPlanResourcesResponse) => void): Request<AutoScalingPlans.Types.DescribeScalingPlanResourcesResponse, AWSError>;
   /**
    * Describes the scalable resources in the specified scaling plan.
    */
@@ -38,7 +40,7 @@ declare class AutoScalingPlans extends Service {
   /**
    * Describes one or more of your scaling plans.
    */
-  describeScalingPlans(params: AutoScalingPlans.Types.DescribeScalingPlansRequest, callback?: (err: AWSError, data: AutoScalingPlans.Types.DescribeScalingPlansResponse) => void): Request<AutoScalingPlans.Types.DescribeScalingPlansResponse, AWSError>;
+  describeScalingPlans(params: BoundInput<AutoScalingPlans.Types.DescribeScalingPlansRequest, keyof Params>, callback?: (err: AWSError, data: AutoScalingPlans.Types.DescribeScalingPlansResponse) => void): Request<AutoScalingPlans.Types.DescribeScalingPlansResponse, AWSError>;
   /**
    * Describes one or more of your scaling plans.
    */
@@ -46,7 +48,7 @@ declare class AutoScalingPlans extends Service {
   /**
    * Retrieves the forecast data for a scalable resource. Capacity forecasts are represented as predicted values, or data points, that are calculated using historical data points from a specified CloudWatch load metric. Data points are available for up to 56 days. 
    */
-  getScalingPlanResourceForecastData(params: AutoScalingPlans.Types.GetScalingPlanResourceForecastDataRequest, callback?: (err: AWSError, data: AutoScalingPlans.Types.GetScalingPlanResourceForecastDataResponse) => void): Request<AutoScalingPlans.Types.GetScalingPlanResourceForecastDataResponse, AWSError>;
+  getScalingPlanResourceForecastData(params: BoundInput<AutoScalingPlans.Types.GetScalingPlanResourceForecastDataRequest, keyof Params>, callback?: (err: AWSError, data: AutoScalingPlans.Types.GetScalingPlanResourceForecastDataResponse) => void): Request<AutoScalingPlans.Types.GetScalingPlanResourceForecastDataResponse, AWSError>;
   /**
    * Retrieves the forecast data for a scalable resource. Capacity forecasts are represented as predicted values, or data points, that are calculated using historical data points from a specified CloudWatch load metric. Data points are available for up to 56 days. 
    */
@@ -54,7 +56,7 @@ declare class AutoScalingPlans extends Service {
   /**
    * Updates the specified scaling plan. You cannot update a scaling plan if it is in the process of being created, updated, or deleted.
    */
-  updateScalingPlan(params: AutoScalingPlans.Types.UpdateScalingPlanRequest, callback?: (err: AWSError, data: AutoScalingPlans.Types.UpdateScalingPlanResponse) => void): Request<AutoScalingPlans.Types.UpdateScalingPlanResponse, AWSError>;
+  updateScalingPlan(params: BoundInput<AutoScalingPlans.Types.UpdateScalingPlanRequest, keyof Params>, callback?: (err: AWSError, data: AutoScalingPlans.Types.UpdateScalingPlanResponse) => void): Request<AutoScalingPlans.Types.UpdateScalingPlanResponse, AWSError>;
   /**
    * Updates the specified scaling plan. You cannot update a scaling plan if it is in the process of being created, updated, or deleted.
    */
@@ -542,7 +544,8 @@ declare namespace AutoScalingPlans {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateScalingPlanRequest & DeleteScalingPlanRequest & DescribeScalingPlanResourcesRequest & DescribeScalingPlansRequest & GetScalingPlanResourceForecastDataRequest & UpdateScalingPlanRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the AutoScalingPlans client.
    */

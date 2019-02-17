@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class PinpointSMSVoice extends Service {
+declare class PinpointSMSVoice<Params extends PinpointSMSVoice.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: PinpointSMSVoice.Types.ClientConfiguration)
-  config: Config & PinpointSMSVoice.Types.ClientConfiguration;
+  constructor(options?: PinpointSMSVoice.Types.ClientConfiguration<Params>)
+  config: Config & PinpointSMSVoice.Types.ClientConfiguration<Params>;
   /**
    * Create a new configuration set. After you create the configuration set, you can add one or more event destinations to it.
    */
-  createConfigurationSet(params: PinpointSMSVoice.Types.CreateConfigurationSetRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.CreateConfigurationSetResponse) => void): Request<PinpointSMSVoice.Types.CreateConfigurationSetResponse, AWSError>;
+  createConfigurationSet(params: BoundInput<PinpointSMSVoice.Types.CreateConfigurationSetRequest, keyof Params>, callback?: (err: AWSError, data: PinpointSMSVoice.Types.CreateConfigurationSetResponse) => void): Request<PinpointSMSVoice.Types.CreateConfigurationSetResponse, AWSError>;
   /**
    * Create a new configuration set. After you create the configuration set, you can add one or more event destinations to it.
    */
@@ -22,7 +24,7 @@ declare class PinpointSMSVoice extends Service {
   /**
    * Create a new event destination in a configuration set.
    */
-  createConfigurationSetEventDestination(params: PinpointSMSVoice.Types.CreateConfigurationSetEventDestinationRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.CreateConfigurationSetEventDestinationResponse) => void): Request<PinpointSMSVoice.Types.CreateConfigurationSetEventDestinationResponse, AWSError>;
+  createConfigurationSetEventDestination(params: BoundInput<PinpointSMSVoice.Types.CreateConfigurationSetEventDestinationRequest, keyof Params>, callback?: (err: AWSError, data: PinpointSMSVoice.Types.CreateConfigurationSetEventDestinationResponse) => void): Request<PinpointSMSVoice.Types.CreateConfigurationSetEventDestinationResponse, AWSError>;
   /**
    * Create a new event destination in a configuration set.
    */
@@ -30,7 +32,7 @@ declare class PinpointSMSVoice extends Service {
   /**
    * Deletes an existing configuration set.
    */
-  deleteConfigurationSet(params: PinpointSMSVoice.Types.DeleteConfigurationSetRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.DeleteConfigurationSetResponse) => void): Request<PinpointSMSVoice.Types.DeleteConfigurationSetResponse, AWSError>;
+  deleteConfigurationSet(params: BoundInput<PinpointSMSVoice.Types.DeleteConfigurationSetRequest, keyof Params>, callback?: (err: AWSError, data: PinpointSMSVoice.Types.DeleteConfigurationSetResponse) => void): Request<PinpointSMSVoice.Types.DeleteConfigurationSetResponse, AWSError>;
   /**
    * Deletes an existing configuration set.
    */
@@ -38,7 +40,7 @@ declare class PinpointSMSVoice extends Service {
   /**
    * Deletes an event destination in a configuration set.
    */
-  deleteConfigurationSetEventDestination(params: PinpointSMSVoice.Types.DeleteConfigurationSetEventDestinationRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.DeleteConfigurationSetEventDestinationResponse) => void): Request<PinpointSMSVoice.Types.DeleteConfigurationSetEventDestinationResponse, AWSError>;
+  deleteConfigurationSetEventDestination(params: BoundInput<PinpointSMSVoice.Types.DeleteConfigurationSetEventDestinationRequest, keyof Params>, callback?: (err: AWSError, data: PinpointSMSVoice.Types.DeleteConfigurationSetEventDestinationResponse) => void): Request<PinpointSMSVoice.Types.DeleteConfigurationSetEventDestinationResponse, AWSError>;
   /**
    * Deletes an event destination in a configuration set.
    */
@@ -46,7 +48,7 @@ declare class PinpointSMSVoice extends Service {
   /**
    * Obtain information about an event destination, including the types of events it reports, the Amazon Resource Name (ARN) of the destination, and the name of the event destination.
    */
-  getConfigurationSetEventDestinations(params: PinpointSMSVoice.Types.GetConfigurationSetEventDestinationsRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.GetConfigurationSetEventDestinationsResponse) => void): Request<PinpointSMSVoice.Types.GetConfigurationSetEventDestinationsResponse, AWSError>;
+  getConfigurationSetEventDestinations(params: BoundInput<PinpointSMSVoice.Types.GetConfigurationSetEventDestinationsRequest, keyof Params>, callback?: (err: AWSError, data: PinpointSMSVoice.Types.GetConfigurationSetEventDestinationsResponse) => void): Request<PinpointSMSVoice.Types.GetConfigurationSetEventDestinationsResponse, AWSError>;
   /**
    * Obtain information about an event destination, including the types of events it reports, the Amazon Resource Name (ARN) of the destination, and the name of the event destination.
    */
@@ -54,7 +56,7 @@ declare class PinpointSMSVoice extends Service {
   /**
    * List all of the configuration sets associated with your Amazon Pinpoint account in the current region.
    */
-  listConfigurationSets(params: PinpointSMSVoice.Types.ListConfigurationSetsRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.ListConfigurationSetsResponse) => void): Request<PinpointSMSVoice.Types.ListConfigurationSetsResponse, AWSError>;
+  listConfigurationSets(params: BoundInput<PinpointSMSVoice.Types.ListConfigurationSetsRequest, keyof Params>, callback?: (err: AWSError, data: PinpointSMSVoice.Types.ListConfigurationSetsResponse) => void): Request<PinpointSMSVoice.Types.ListConfigurationSetsResponse, AWSError>;
   /**
    * List all of the configuration sets associated with your Amazon Pinpoint account in the current region.
    */
@@ -62,7 +64,7 @@ declare class PinpointSMSVoice extends Service {
   /**
    * Create a new voice message and send it to a recipient's phone number.
    */
-  sendVoiceMessage(params: PinpointSMSVoice.Types.SendVoiceMessageRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.SendVoiceMessageResponse) => void): Request<PinpointSMSVoice.Types.SendVoiceMessageResponse, AWSError>;
+  sendVoiceMessage(params: BoundInput<PinpointSMSVoice.Types.SendVoiceMessageRequest, keyof Params>, callback?: (err: AWSError, data: PinpointSMSVoice.Types.SendVoiceMessageResponse) => void): Request<PinpointSMSVoice.Types.SendVoiceMessageResponse, AWSError>;
   /**
    * Create a new voice message and send it to a recipient's phone number.
    */
@@ -70,7 +72,7 @@ declare class PinpointSMSVoice extends Service {
   /**
    * Update an event destination in a configuration set. An event destination is a location that you publish information about your voice calls to. For example, you can log an event to an Amazon CloudWatch destination when a call fails.
    */
-  updateConfigurationSetEventDestination(params: PinpointSMSVoice.Types.UpdateConfigurationSetEventDestinationRequest, callback?: (err: AWSError, data: PinpointSMSVoice.Types.UpdateConfigurationSetEventDestinationResponse) => void): Request<PinpointSMSVoice.Types.UpdateConfigurationSetEventDestinationResponse, AWSError>;
+  updateConfigurationSetEventDestination(params: BoundInput<PinpointSMSVoice.Types.UpdateConfigurationSetEventDestinationRequest, keyof Params>, callback?: (err: AWSError, data: PinpointSMSVoice.Types.UpdateConfigurationSetEventDestinationResponse) => void): Request<PinpointSMSVoice.Types.UpdateConfigurationSetEventDestinationResponse, AWSError>;
   /**
    * Update an event destination in a configuration set. An event destination is a location that you publish information about your voice calls to. For example, you can log an event to an Amazon CloudWatch destination when a call fails.
    */
@@ -294,7 +296,8 @@ declare namespace PinpointSMSVoice {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateConfigurationSetRequest & CreateConfigurationSetEventDestinationRequest & DeleteConfigurationSetRequest & DeleteConfigurationSetEventDestinationRequest & GetConfigurationSetEventDestinationsRequest & ListConfigurationSetsRequest & SendVoiceMessageRequest & UpdateConfigurationSetEventDestinationRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the PinpointSMSVoice client.
    */

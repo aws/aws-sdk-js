@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class WorkMail extends Service {
+declare class WorkMail<Params extends WorkMail.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: WorkMail.Types.ClientConfiguration)
-  config: Config & WorkMail.Types.ClientConfiguration;
+  constructor(options?: WorkMail.Types.ClientConfiguration<Params>)
+  config: Config & WorkMail.Types.ClientConfiguration<Params>;
   /**
    * Adds a member to the resource's set of delegates.
    */
-  associateDelegateToResource(params: WorkMail.Types.AssociateDelegateToResourceRequest, callback?: (err: AWSError, data: WorkMail.Types.AssociateDelegateToResourceResponse) => void): Request<WorkMail.Types.AssociateDelegateToResourceResponse, AWSError>;
+  associateDelegateToResource(params: BoundInput<WorkMail.Types.AssociateDelegateToResourceRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.AssociateDelegateToResourceResponse) => void): Request<WorkMail.Types.AssociateDelegateToResourceResponse, AWSError>;
   /**
    * Adds a member to the resource's set of delegates.
    */
@@ -22,7 +24,7 @@ declare class WorkMail extends Service {
   /**
    * Adds a member to the group's set.
    */
-  associateMemberToGroup(params: WorkMail.Types.AssociateMemberToGroupRequest, callback?: (err: AWSError, data: WorkMail.Types.AssociateMemberToGroupResponse) => void): Request<WorkMail.Types.AssociateMemberToGroupResponse, AWSError>;
+  associateMemberToGroup(params: BoundInput<WorkMail.Types.AssociateMemberToGroupRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.AssociateMemberToGroupResponse) => void): Request<WorkMail.Types.AssociateMemberToGroupResponse, AWSError>;
   /**
    * Adds a member to the group's set.
    */
@@ -30,7 +32,7 @@ declare class WorkMail extends Service {
   /**
    * Adds an alias to the set of a given member of Amazon WorkMail.
    */
-  createAlias(params: WorkMail.Types.CreateAliasRequest, callback?: (err: AWSError, data: WorkMail.Types.CreateAliasResponse) => void): Request<WorkMail.Types.CreateAliasResponse, AWSError>;
+  createAlias(params: BoundInput<WorkMail.Types.CreateAliasRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.CreateAliasResponse) => void): Request<WorkMail.Types.CreateAliasResponse, AWSError>;
   /**
    * Adds an alias to the set of a given member of Amazon WorkMail.
    */
@@ -38,7 +40,7 @@ declare class WorkMail extends Service {
   /**
    * Creates a group that can be used in Amazon WorkMail by calling the RegisterToWorkMail operation.
    */
-  createGroup(params: WorkMail.Types.CreateGroupRequest, callback?: (err: AWSError, data: WorkMail.Types.CreateGroupResponse) => void): Request<WorkMail.Types.CreateGroupResponse, AWSError>;
+  createGroup(params: BoundInput<WorkMail.Types.CreateGroupRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.CreateGroupResponse) => void): Request<WorkMail.Types.CreateGroupResponse, AWSError>;
   /**
    * Creates a group that can be used in Amazon WorkMail by calling the RegisterToWorkMail operation.
    */
@@ -46,7 +48,7 @@ declare class WorkMail extends Service {
   /**
    * Creates a new Amazon WorkMail resource. The available types are equipment and room.
    */
-  createResource(params: WorkMail.Types.CreateResourceRequest, callback?: (err: AWSError, data: WorkMail.Types.CreateResourceResponse) => void): Request<WorkMail.Types.CreateResourceResponse, AWSError>;
+  createResource(params: BoundInput<WorkMail.Types.CreateResourceRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.CreateResourceResponse) => void): Request<WorkMail.Types.CreateResourceResponse, AWSError>;
   /**
    * Creates a new Amazon WorkMail resource. The available types are equipment and room.
    */
@@ -54,7 +56,7 @@ declare class WorkMail extends Service {
   /**
    * Creates a user who can be used in Amazon WorkMail by calling the RegisterToWorkMail operation.
    */
-  createUser(params: WorkMail.Types.CreateUserRequest, callback?: (err: AWSError, data: WorkMail.Types.CreateUserResponse) => void): Request<WorkMail.Types.CreateUserResponse, AWSError>;
+  createUser(params: BoundInput<WorkMail.Types.CreateUserRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.CreateUserResponse) => void): Request<WorkMail.Types.CreateUserResponse, AWSError>;
   /**
    * Creates a user who can be used in Amazon WorkMail by calling the RegisterToWorkMail operation.
    */
@@ -62,7 +64,7 @@ declare class WorkMail extends Service {
   /**
    * Remove the alias from a set of aliases for a given user.
    */
-  deleteAlias(params: WorkMail.Types.DeleteAliasRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteAliasResponse) => void): Request<WorkMail.Types.DeleteAliasResponse, AWSError>;
+  deleteAlias(params: BoundInput<WorkMail.Types.DeleteAliasRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.DeleteAliasResponse) => void): Request<WorkMail.Types.DeleteAliasResponse, AWSError>;
   /**
    * Remove the alias from a set of aliases for a given user.
    */
@@ -70,7 +72,7 @@ declare class WorkMail extends Service {
   /**
    * Deletes a group from Amazon WorkMail.
    */
-  deleteGroup(params: WorkMail.Types.DeleteGroupRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteGroupResponse) => void): Request<WorkMail.Types.DeleteGroupResponse, AWSError>;
+  deleteGroup(params: BoundInput<WorkMail.Types.DeleteGroupRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.DeleteGroupResponse) => void): Request<WorkMail.Types.DeleteGroupResponse, AWSError>;
   /**
    * Deletes a group from Amazon WorkMail.
    */
@@ -78,7 +80,7 @@ declare class WorkMail extends Service {
   /**
    * Deletes permissions granted to a user or group.
    */
-  deleteMailboxPermissions(params: WorkMail.Types.DeleteMailboxPermissionsRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteMailboxPermissionsResponse) => void): Request<WorkMail.Types.DeleteMailboxPermissionsResponse, AWSError>;
+  deleteMailboxPermissions(params: BoundInput<WorkMail.Types.DeleteMailboxPermissionsRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.DeleteMailboxPermissionsResponse) => void): Request<WorkMail.Types.DeleteMailboxPermissionsResponse, AWSError>;
   /**
    * Deletes permissions granted to a user or group.
    */
@@ -86,7 +88,7 @@ declare class WorkMail extends Service {
   /**
    * Deletes the specified resource. 
    */
-  deleteResource(params: WorkMail.Types.DeleteResourceRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteResourceResponse) => void): Request<WorkMail.Types.DeleteResourceResponse, AWSError>;
+  deleteResource(params: BoundInput<WorkMail.Types.DeleteResourceRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.DeleteResourceResponse) => void): Request<WorkMail.Types.DeleteResourceResponse, AWSError>;
   /**
    * Deletes the specified resource. 
    */
@@ -94,7 +96,7 @@ declare class WorkMail extends Service {
   /**
    * Deletes a user from Amazon WorkMail and all subsequent systems. The action can't be undone. The mailbox is kept as-is for a minimum of 30 days, without any means to restore it. 
    */
-  deleteUser(params: WorkMail.Types.DeleteUserRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteUserResponse) => void): Request<WorkMail.Types.DeleteUserResponse, AWSError>;
+  deleteUser(params: BoundInput<WorkMail.Types.DeleteUserRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.DeleteUserResponse) => void): Request<WorkMail.Types.DeleteUserResponse, AWSError>;
   /**
    * Deletes a user from Amazon WorkMail and all subsequent systems. The action can't be undone. The mailbox is kept as-is for a minimum of 30 days, without any means to restore it. 
    */
@@ -102,7 +104,7 @@ declare class WorkMail extends Service {
   /**
    * Mark a user, group, or resource as no longer used in Amazon WorkMail. This action disassociates the mailbox and schedules it for clean-up. Amazon WorkMail keeps mailboxes for 30 days before they are permanently removed. The functionality in the console is Disable.
    */
-  deregisterFromWorkMail(params: WorkMail.Types.DeregisterFromWorkMailRequest, callback?: (err: AWSError, data: WorkMail.Types.DeregisterFromWorkMailResponse) => void): Request<WorkMail.Types.DeregisterFromWorkMailResponse, AWSError>;
+  deregisterFromWorkMail(params: BoundInput<WorkMail.Types.DeregisterFromWorkMailRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.DeregisterFromWorkMailResponse) => void): Request<WorkMail.Types.DeregisterFromWorkMailResponse, AWSError>;
   /**
    * Mark a user, group, or resource as no longer used in Amazon WorkMail. This action disassociates the mailbox and schedules it for clean-up. Amazon WorkMail keeps mailboxes for 30 days before they are permanently removed. The functionality in the console is Disable.
    */
@@ -110,7 +112,7 @@ declare class WorkMail extends Service {
   /**
    * Returns the data available for the group.
    */
-  describeGroup(params: WorkMail.Types.DescribeGroupRequest, callback?: (err: AWSError, data: WorkMail.Types.DescribeGroupResponse) => void): Request<WorkMail.Types.DescribeGroupResponse, AWSError>;
+  describeGroup(params: BoundInput<WorkMail.Types.DescribeGroupRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.DescribeGroupResponse) => void): Request<WorkMail.Types.DescribeGroupResponse, AWSError>;
   /**
    * Returns the data available for the group.
    */
@@ -118,7 +120,7 @@ declare class WorkMail extends Service {
   /**
    * Provides more information regarding a given organization based on its identifier.
    */
-  describeOrganization(params: WorkMail.Types.DescribeOrganizationRequest, callback?: (err: AWSError, data: WorkMail.Types.DescribeOrganizationResponse) => void): Request<WorkMail.Types.DescribeOrganizationResponse, AWSError>;
+  describeOrganization(params: BoundInput<WorkMail.Types.DescribeOrganizationRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.DescribeOrganizationResponse) => void): Request<WorkMail.Types.DescribeOrganizationResponse, AWSError>;
   /**
    * Provides more information regarding a given organization based on its identifier.
    */
@@ -126,7 +128,7 @@ declare class WorkMail extends Service {
   /**
    * Returns the data available for the resource.
    */
-  describeResource(params: WorkMail.Types.DescribeResourceRequest, callback?: (err: AWSError, data: WorkMail.Types.DescribeResourceResponse) => void): Request<WorkMail.Types.DescribeResourceResponse, AWSError>;
+  describeResource(params: BoundInput<WorkMail.Types.DescribeResourceRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.DescribeResourceResponse) => void): Request<WorkMail.Types.DescribeResourceResponse, AWSError>;
   /**
    * Returns the data available for the resource.
    */
@@ -134,7 +136,7 @@ declare class WorkMail extends Service {
   /**
    * Provides information regarding the user.
    */
-  describeUser(params: WorkMail.Types.DescribeUserRequest, callback?: (err: AWSError, data: WorkMail.Types.DescribeUserResponse) => void): Request<WorkMail.Types.DescribeUserResponse, AWSError>;
+  describeUser(params: BoundInput<WorkMail.Types.DescribeUserRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.DescribeUserResponse) => void): Request<WorkMail.Types.DescribeUserResponse, AWSError>;
   /**
    * Provides information regarding the user.
    */
@@ -142,7 +144,7 @@ declare class WorkMail extends Service {
   /**
    * Removes a member from the resource's set of delegates.
    */
-  disassociateDelegateFromResource(params: WorkMail.Types.DisassociateDelegateFromResourceRequest, callback?: (err: AWSError, data: WorkMail.Types.DisassociateDelegateFromResourceResponse) => void): Request<WorkMail.Types.DisassociateDelegateFromResourceResponse, AWSError>;
+  disassociateDelegateFromResource(params: BoundInput<WorkMail.Types.DisassociateDelegateFromResourceRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.DisassociateDelegateFromResourceResponse) => void): Request<WorkMail.Types.DisassociateDelegateFromResourceResponse, AWSError>;
   /**
    * Removes a member from the resource's set of delegates.
    */
@@ -150,7 +152,7 @@ declare class WorkMail extends Service {
   /**
    * Removes a member from a group.
    */
-  disassociateMemberFromGroup(params: WorkMail.Types.DisassociateMemberFromGroupRequest, callback?: (err: AWSError, data: WorkMail.Types.DisassociateMemberFromGroupResponse) => void): Request<WorkMail.Types.DisassociateMemberFromGroupResponse, AWSError>;
+  disassociateMemberFromGroup(params: BoundInput<WorkMail.Types.DisassociateMemberFromGroupRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.DisassociateMemberFromGroupResponse) => void): Request<WorkMail.Types.DisassociateMemberFromGroupResponse, AWSError>;
   /**
    * Removes a member from a group.
    */
@@ -158,7 +160,7 @@ declare class WorkMail extends Service {
   /**
    * Creates a paginated call to list the aliases associated with a given entity.
    */
-  listAliases(params: WorkMail.Types.ListAliasesRequest, callback?: (err: AWSError, data: WorkMail.Types.ListAliasesResponse) => void): Request<WorkMail.Types.ListAliasesResponse, AWSError>;
+  listAliases(params: BoundInput<WorkMail.Types.ListAliasesRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.ListAliasesResponse) => void): Request<WorkMail.Types.ListAliasesResponse, AWSError>;
   /**
    * Creates a paginated call to list the aliases associated with a given entity.
    */
@@ -166,7 +168,7 @@ declare class WorkMail extends Service {
   /**
    * Returns an overview of the members of a group.
    */
-  listGroupMembers(params: WorkMail.Types.ListGroupMembersRequest, callback?: (err: AWSError, data: WorkMail.Types.ListGroupMembersResponse) => void): Request<WorkMail.Types.ListGroupMembersResponse, AWSError>;
+  listGroupMembers(params: BoundInput<WorkMail.Types.ListGroupMembersRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.ListGroupMembersResponse) => void): Request<WorkMail.Types.ListGroupMembersResponse, AWSError>;
   /**
    * Returns an overview of the members of a group.
    */
@@ -174,7 +176,7 @@ declare class WorkMail extends Service {
   /**
    * Returns summaries of the organization's groups.
    */
-  listGroups(params: WorkMail.Types.ListGroupsRequest, callback?: (err: AWSError, data: WorkMail.Types.ListGroupsResponse) => void): Request<WorkMail.Types.ListGroupsResponse, AWSError>;
+  listGroups(params: BoundInput<WorkMail.Types.ListGroupsRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.ListGroupsResponse) => void): Request<WorkMail.Types.ListGroupsResponse, AWSError>;
   /**
    * Returns summaries of the organization's groups.
    */
@@ -182,7 +184,7 @@ declare class WorkMail extends Service {
   /**
    * Lists the mailbox permissions associated with a mailbox.
    */
-  listMailboxPermissions(params: WorkMail.Types.ListMailboxPermissionsRequest, callback?: (err: AWSError, data: WorkMail.Types.ListMailboxPermissionsResponse) => void): Request<WorkMail.Types.ListMailboxPermissionsResponse, AWSError>;
+  listMailboxPermissions(params: BoundInput<WorkMail.Types.ListMailboxPermissionsRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.ListMailboxPermissionsResponse) => void): Request<WorkMail.Types.ListMailboxPermissionsResponse, AWSError>;
   /**
    * Lists the mailbox permissions associated with a mailbox.
    */
@@ -190,7 +192,7 @@ declare class WorkMail extends Service {
   /**
    * Returns summaries of the customer's non-deleted organizations.
    */
-  listOrganizations(params: WorkMail.Types.ListOrganizationsRequest, callback?: (err: AWSError, data: WorkMail.Types.ListOrganizationsResponse) => void): Request<WorkMail.Types.ListOrganizationsResponse, AWSError>;
+  listOrganizations(params: BoundInput<WorkMail.Types.ListOrganizationsRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.ListOrganizationsResponse) => void): Request<WorkMail.Types.ListOrganizationsResponse, AWSError>;
   /**
    * Returns summaries of the customer's non-deleted organizations.
    */
@@ -198,7 +200,7 @@ declare class WorkMail extends Service {
   /**
    * Lists the delegates associated with a resource. Users and groups can be resource delegates and answer requests on behalf of the resource.
    */
-  listResourceDelegates(params: WorkMail.Types.ListResourceDelegatesRequest, callback?: (err: AWSError, data: WorkMail.Types.ListResourceDelegatesResponse) => void): Request<WorkMail.Types.ListResourceDelegatesResponse, AWSError>;
+  listResourceDelegates(params: BoundInput<WorkMail.Types.ListResourceDelegatesRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.ListResourceDelegatesResponse) => void): Request<WorkMail.Types.ListResourceDelegatesResponse, AWSError>;
   /**
    * Lists the delegates associated with a resource. Users and groups can be resource delegates and answer requests on behalf of the resource.
    */
@@ -206,7 +208,7 @@ declare class WorkMail extends Service {
   /**
    * Returns summaries of the organization's resources.
    */
-  listResources(params: WorkMail.Types.ListResourcesRequest, callback?: (err: AWSError, data: WorkMail.Types.ListResourcesResponse) => void): Request<WorkMail.Types.ListResourcesResponse, AWSError>;
+  listResources(params: BoundInput<WorkMail.Types.ListResourcesRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.ListResourcesResponse) => void): Request<WorkMail.Types.ListResourcesResponse, AWSError>;
   /**
    * Returns summaries of the organization's resources.
    */
@@ -214,7 +216,7 @@ declare class WorkMail extends Service {
   /**
    * Returns summaries of the organization's users.
    */
-  listUsers(params: WorkMail.Types.ListUsersRequest, callback?: (err: AWSError, data: WorkMail.Types.ListUsersResponse) => void): Request<WorkMail.Types.ListUsersResponse, AWSError>;
+  listUsers(params: BoundInput<WorkMail.Types.ListUsersRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.ListUsersResponse) => void): Request<WorkMail.Types.ListUsersResponse, AWSError>;
   /**
    * Returns summaries of the organization's users.
    */
@@ -222,7 +224,7 @@ declare class WorkMail extends Service {
   /**
    * Sets permissions for a user or group. This replaces any pre-existing permissions set for the entity.
    */
-  putMailboxPermissions(params: WorkMail.Types.PutMailboxPermissionsRequest, callback?: (err: AWSError, data: WorkMail.Types.PutMailboxPermissionsResponse) => void): Request<WorkMail.Types.PutMailboxPermissionsResponse, AWSError>;
+  putMailboxPermissions(params: BoundInput<WorkMail.Types.PutMailboxPermissionsRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.PutMailboxPermissionsResponse) => void): Request<WorkMail.Types.PutMailboxPermissionsResponse, AWSError>;
   /**
    * Sets permissions for a user or group. This replaces any pre-existing permissions set for the entity.
    */
@@ -230,7 +232,7 @@ declare class WorkMail extends Service {
   /**
    * Registers an existing and disabled user, group, or resource/entity for Amazon WorkMail use by associating a mailbox and calendaring capabilities. It performs no change if the entity is enabled and fails if the entity is deleted. This operation results in the accumulation of costs. For more information, see Pricing. The equivalent console functionality for this operation is Enable. Users can either be created by calling the CreateUser API or they can be synchronized from your directory. For more information, see DeregisterFromWorkMail.
    */
-  registerToWorkMail(params: WorkMail.Types.RegisterToWorkMailRequest, callback?: (err: AWSError, data: WorkMail.Types.RegisterToWorkMailResponse) => void): Request<WorkMail.Types.RegisterToWorkMailResponse, AWSError>;
+  registerToWorkMail(params: BoundInput<WorkMail.Types.RegisterToWorkMailRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.RegisterToWorkMailResponse) => void): Request<WorkMail.Types.RegisterToWorkMailResponse, AWSError>;
   /**
    * Registers an existing and disabled user, group, or resource/entity for Amazon WorkMail use by associating a mailbox and calendaring capabilities. It performs no change if the entity is enabled and fails if the entity is deleted. This operation results in the accumulation of costs. For more information, see Pricing. The equivalent console functionality for this operation is Enable. Users can either be created by calling the CreateUser API or they can be synchronized from your directory. For more information, see DeregisterFromWorkMail.
    */
@@ -238,7 +240,7 @@ declare class WorkMail extends Service {
   /**
    * Allows the administrator to reset the password for a user.
    */
-  resetPassword(params: WorkMail.Types.ResetPasswordRequest, callback?: (err: AWSError, data: WorkMail.Types.ResetPasswordResponse) => void): Request<WorkMail.Types.ResetPasswordResponse, AWSError>;
+  resetPassword(params: BoundInput<WorkMail.Types.ResetPasswordRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.ResetPasswordResponse) => void): Request<WorkMail.Types.ResetPasswordResponse, AWSError>;
   /**
    * Allows the administrator to reset the password for a user.
    */
@@ -246,7 +248,7 @@ declare class WorkMail extends Service {
   /**
    * Updates the primary email for an entity. The current email is moved into the list of aliases (or swapped between an existing alias and the current primary email) and the email provided in the input is promoted as the primary.
    */
-  updatePrimaryEmailAddress(params: WorkMail.Types.UpdatePrimaryEmailAddressRequest, callback?: (err: AWSError, data: WorkMail.Types.UpdatePrimaryEmailAddressResponse) => void): Request<WorkMail.Types.UpdatePrimaryEmailAddressResponse, AWSError>;
+  updatePrimaryEmailAddress(params: BoundInput<WorkMail.Types.UpdatePrimaryEmailAddressRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.UpdatePrimaryEmailAddressResponse) => void): Request<WorkMail.Types.UpdatePrimaryEmailAddressResponse, AWSError>;
   /**
    * Updates the primary email for an entity. The current email is moved into the list of aliases (or swapped between an existing alias and the current primary email) and the email provided in the input is promoted as the primary.
    */
@@ -254,7 +256,7 @@ declare class WorkMail extends Service {
   /**
    * Updates data for the resource. It must be preceded by a describe call in order to have the latest information. The dataset in the request should be the one expected when performing another describe call.
    */
-  updateResource(params: WorkMail.Types.UpdateResourceRequest, callback?: (err: AWSError, data: WorkMail.Types.UpdateResourceResponse) => void): Request<WorkMail.Types.UpdateResourceResponse, AWSError>;
+  updateResource(params: BoundInput<WorkMail.Types.UpdateResourceRequest, keyof Params>, callback?: (err: AWSError, data: WorkMail.Types.UpdateResourceResponse) => void): Request<WorkMail.Types.UpdateResourceResponse, AWSError>;
   /**
    * Updates data for the resource. It must be preceded by a describe call in order to have the latest information. The dataset in the request should be the one expected when performing another describe call.
    */
@@ -1147,7 +1149,8 @@ declare namespace WorkMail {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AssociateDelegateToResourceRequest & AssociateMemberToGroupRequest & CreateAliasRequest & CreateGroupRequest & CreateResourceRequest & CreateUserRequest & DeleteAliasRequest & DeleteGroupRequest & DeleteMailboxPermissionsRequest & DeleteResourceRequest & DeleteUserRequest & DeregisterFromWorkMailRequest & DescribeGroupRequest & DescribeOrganizationRequest & DescribeResourceRequest & DescribeUserRequest & DisassociateDelegateFromResourceRequest & DisassociateMemberFromGroupRequest & ListAliasesRequest & ListGroupMembersRequest & ListGroupsRequest & ListMailboxPermissionsRequest & ListOrganizationsRequest & ListResourceDelegatesRequest & ListResourcesRequest & ListUsersRequest & PutMailboxPermissionsRequest & RegisterToWorkMailRequest & ResetPasswordRequest & UpdatePrimaryEmailAddressRequest & UpdateResourceRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the WorkMail client.
    */

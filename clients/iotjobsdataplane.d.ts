@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class IoTJobsDataPlane extends Service {
+declare class IoTJobsDataPlane<Params extends IoTJobsDataPlane.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: IoTJobsDataPlane.Types.ClientConfiguration)
-  config: Config & IoTJobsDataPlane.Types.ClientConfiguration;
+  constructor(options?: IoTJobsDataPlane.Types.ClientConfiguration<Params>)
+  config: Config & IoTJobsDataPlane.Types.ClientConfiguration<Params>;
   /**
    * Gets details of a job execution.
    */
-  describeJobExecution(params: IoTJobsDataPlane.Types.DescribeJobExecutionRequest, callback?: (err: AWSError, data: IoTJobsDataPlane.Types.DescribeJobExecutionResponse) => void): Request<IoTJobsDataPlane.Types.DescribeJobExecutionResponse, AWSError>;
+  describeJobExecution(params: BoundInput<IoTJobsDataPlane.Types.DescribeJobExecutionRequest, keyof Params>, callback?: (err: AWSError, data: IoTJobsDataPlane.Types.DescribeJobExecutionResponse) => void): Request<IoTJobsDataPlane.Types.DescribeJobExecutionResponse, AWSError>;
   /**
    * Gets details of a job execution.
    */
@@ -22,7 +24,7 @@ declare class IoTJobsDataPlane extends Service {
   /**
    * Gets the list of all jobs for a thing that are not in a terminal status.
    */
-  getPendingJobExecutions(params: IoTJobsDataPlane.Types.GetPendingJobExecutionsRequest, callback?: (err: AWSError, data: IoTJobsDataPlane.Types.GetPendingJobExecutionsResponse) => void): Request<IoTJobsDataPlane.Types.GetPendingJobExecutionsResponse, AWSError>;
+  getPendingJobExecutions(params: BoundInput<IoTJobsDataPlane.Types.GetPendingJobExecutionsRequest, keyof Params>, callback?: (err: AWSError, data: IoTJobsDataPlane.Types.GetPendingJobExecutionsResponse) => void): Request<IoTJobsDataPlane.Types.GetPendingJobExecutionsResponse, AWSError>;
   /**
    * Gets the list of all jobs for a thing that are not in a terminal status.
    */
@@ -30,7 +32,7 @@ declare class IoTJobsDataPlane extends Service {
   /**
    * Gets and starts the next pending (status IN_PROGRESS or QUEUED) job execution for a thing.
    */
-  startNextPendingJobExecution(params: IoTJobsDataPlane.Types.StartNextPendingJobExecutionRequest, callback?: (err: AWSError, data: IoTJobsDataPlane.Types.StartNextPendingJobExecutionResponse) => void): Request<IoTJobsDataPlane.Types.StartNextPendingJobExecutionResponse, AWSError>;
+  startNextPendingJobExecution(params: BoundInput<IoTJobsDataPlane.Types.StartNextPendingJobExecutionRequest, keyof Params>, callback?: (err: AWSError, data: IoTJobsDataPlane.Types.StartNextPendingJobExecutionResponse) => void): Request<IoTJobsDataPlane.Types.StartNextPendingJobExecutionResponse, AWSError>;
   /**
    * Gets and starts the next pending (status IN_PROGRESS or QUEUED) job execution for a thing.
    */
@@ -38,7 +40,7 @@ declare class IoTJobsDataPlane extends Service {
   /**
    * Updates the status of a job execution.
    */
-  updateJobExecution(params: IoTJobsDataPlane.Types.UpdateJobExecutionRequest, callback?: (err: AWSError, data: IoTJobsDataPlane.Types.UpdateJobExecutionResponse) => void): Request<IoTJobsDataPlane.Types.UpdateJobExecutionResponse, AWSError>;
+  updateJobExecution(params: BoundInput<IoTJobsDataPlane.Types.UpdateJobExecutionRequest, keyof Params>, callback?: (err: AWSError, data: IoTJobsDataPlane.Types.UpdateJobExecutionResponse) => void): Request<IoTJobsDataPlane.Types.UpdateJobExecutionResponse, AWSError>;
   /**
    * Updates the status of a job execution.
    */
@@ -268,7 +270,8 @@ declare namespace IoTJobsDataPlane {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<DescribeJobExecutionRequest & GetPendingJobExecutionsRequest & StartNextPendingJobExecutionRequest & UpdateJobExecutionRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the IoTJobsDataPlane client.
    */

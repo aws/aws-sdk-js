@@ -3,19 +3,21 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 import {Readable} from 'stream';
 interface Blob {}
-declare class MediaStoreData extends Service {
+declare class MediaStoreData<Params extends MediaStoreData.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: MediaStoreData.Types.ClientConfiguration)
-  config: Config & MediaStoreData.Types.ClientConfiguration;
+  constructor(options?: MediaStoreData.Types.ClientConfiguration<Params>)
+  config: Config & MediaStoreData.Types.ClientConfiguration<Params>;
   /**
    * Deletes an object at the specified path.
    */
-  deleteObject(params: MediaStoreData.Types.DeleteObjectRequest, callback?: (err: AWSError, data: MediaStoreData.Types.DeleteObjectResponse) => void): Request<MediaStoreData.Types.DeleteObjectResponse, AWSError>;
+  deleteObject(params: BoundInput<MediaStoreData.Types.DeleteObjectRequest, keyof Params>, callback?: (err: AWSError, data: MediaStoreData.Types.DeleteObjectResponse) => void): Request<MediaStoreData.Types.DeleteObjectResponse, AWSError>;
   /**
    * Deletes an object at the specified path.
    */
@@ -23,7 +25,7 @@ declare class MediaStoreData extends Service {
   /**
    * Gets the headers for an object at the specified path.
    */
-  describeObject(params: MediaStoreData.Types.DescribeObjectRequest, callback?: (err: AWSError, data: MediaStoreData.Types.DescribeObjectResponse) => void): Request<MediaStoreData.Types.DescribeObjectResponse, AWSError>;
+  describeObject(params: BoundInput<MediaStoreData.Types.DescribeObjectRequest, keyof Params>, callback?: (err: AWSError, data: MediaStoreData.Types.DescribeObjectResponse) => void): Request<MediaStoreData.Types.DescribeObjectResponse, AWSError>;
   /**
    * Gets the headers for an object at the specified path.
    */
@@ -31,7 +33,7 @@ declare class MediaStoreData extends Service {
   /**
    * Downloads the object at the specified path.
    */
-  getObject(params: MediaStoreData.Types.GetObjectRequest, callback?: (err: AWSError, data: MediaStoreData.Types.GetObjectResponse) => void): Request<MediaStoreData.Types.GetObjectResponse, AWSError>;
+  getObject(params: BoundInput<MediaStoreData.Types.GetObjectRequest, keyof Params>, callback?: (err: AWSError, data: MediaStoreData.Types.GetObjectResponse) => void): Request<MediaStoreData.Types.GetObjectResponse, AWSError>;
   /**
    * Downloads the object at the specified path.
    */
@@ -39,7 +41,7 @@ declare class MediaStoreData extends Service {
   /**
    * Provides a list of metadata entries about folders and objects in the specified folder.
    */
-  listItems(params: MediaStoreData.Types.ListItemsRequest, callback?: (err: AWSError, data: MediaStoreData.Types.ListItemsResponse) => void): Request<MediaStoreData.Types.ListItemsResponse, AWSError>;
+  listItems(params: BoundInput<MediaStoreData.Types.ListItemsRequest, keyof Params>, callback?: (err: AWSError, data: MediaStoreData.Types.ListItemsResponse) => void): Request<MediaStoreData.Types.ListItemsResponse, AWSError>;
   /**
    * Provides a list of metadata entries about folders and objects in the specified folder.
    */
@@ -47,7 +49,7 @@ declare class MediaStoreData extends Service {
   /**
    * Uploads an object to the specified path. Object sizes are limited to 25 MB.
    */
-  putObject(params: MediaStoreData.Types.PutObjectRequest, callback?: (err: AWSError, data: MediaStoreData.Types.PutObjectResponse) => void): Request<MediaStoreData.Types.PutObjectResponse, AWSError>;
+  putObject(params: BoundInput<MediaStoreData.Types.PutObjectRequest, keyof Params>, callback?: (err: AWSError, data: MediaStoreData.Types.PutObjectResponse) => void): Request<MediaStoreData.Types.PutObjectResponse, AWSError>;
   /**
    * Uploads an object to the specified path. Object sizes are limited to 25 MB.
    */
@@ -248,7 +250,8 @@ declare namespace MediaStoreData {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<DeleteObjectRequest & DescribeObjectRequest & GetObjectRequest & ListItemsRequest & PutObjectRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the MediaStoreData client.
    */

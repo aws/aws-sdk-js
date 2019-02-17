@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class MediaConvert extends Service {
+declare class MediaConvert<Params extends MediaConvert.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: MediaConvert.Types.ClientConfiguration)
-  config: Config & MediaConvert.Types.ClientConfiguration;
+  constructor(options?: MediaConvert.Types.ClientConfiguration<Params>)
+  config: Config & MediaConvert.Types.ClientConfiguration<Params>;
   /**
    * Associates an AWS Certificate Manager (ACM) Amazon Resource Name (ARN) with AWS Elemental MediaConvert.
    */
-  associateCertificate(params: MediaConvert.Types.AssociateCertificateRequest, callback?: (err: AWSError, data: MediaConvert.Types.AssociateCertificateResponse) => void): Request<MediaConvert.Types.AssociateCertificateResponse, AWSError>;
+  associateCertificate(params: BoundInput<MediaConvert.Types.AssociateCertificateRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.AssociateCertificateResponse) => void): Request<MediaConvert.Types.AssociateCertificateResponse, AWSError>;
   /**
    * Associates an AWS Certificate Manager (ACM) Amazon Resource Name (ARN) with AWS Elemental MediaConvert.
    */
@@ -22,7 +24,7 @@ declare class MediaConvert extends Service {
   /**
    * Permanently remove a job from a queue. Once you have canceled a job, you can't start it again. You can't delete a running job.
    */
-  cancelJob(params: MediaConvert.Types.CancelJobRequest, callback?: (err: AWSError, data: MediaConvert.Types.CancelJobResponse) => void): Request<MediaConvert.Types.CancelJobResponse, AWSError>;
+  cancelJob(params: BoundInput<MediaConvert.Types.CancelJobRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.CancelJobResponse) => void): Request<MediaConvert.Types.CancelJobResponse, AWSError>;
   /**
    * Permanently remove a job from a queue. Once you have canceled a job, you can't start it again. You can't delete a running job.
    */
@@ -30,7 +32,7 @@ declare class MediaConvert extends Service {
   /**
    * Create a new transcoding job. For information about jobs and job settings, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
    */
-  createJob(params: MediaConvert.Types.CreateJobRequest, callback?: (err: AWSError, data: MediaConvert.Types.CreateJobResponse) => void): Request<MediaConvert.Types.CreateJobResponse, AWSError>;
+  createJob(params: BoundInput<MediaConvert.Types.CreateJobRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.CreateJobResponse) => void): Request<MediaConvert.Types.CreateJobResponse, AWSError>;
   /**
    * Create a new transcoding job. For information about jobs and job settings, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
    */
@@ -38,7 +40,7 @@ declare class MediaConvert extends Service {
   /**
    * Create a new job template. For information about job templates see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
    */
-  createJobTemplate(params: MediaConvert.Types.CreateJobTemplateRequest, callback?: (err: AWSError, data: MediaConvert.Types.CreateJobTemplateResponse) => void): Request<MediaConvert.Types.CreateJobTemplateResponse, AWSError>;
+  createJobTemplate(params: BoundInput<MediaConvert.Types.CreateJobTemplateRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.CreateJobTemplateResponse) => void): Request<MediaConvert.Types.CreateJobTemplateResponse, AWSError>;
   /**
    * Create a new job template. For information about job templates see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
    */
@@ -46,7 +48,7 @@ declare class MediaConvert extends Service {
   /**
    * Create a new preset. For information about job templates see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
    */
-  createPreset(params: MediaConvert.Types.CreatePresetRequest, callback?: (err: AWSError, data: MediaConvert.Types.CreatePresetResponse) => void): Request<MediaConvert.Types.CreatePresetResponse, AWSError>;
+  createPreset(params: BoundInput<MediaConvert.Types.CreatePresetRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.CreatePresetResponse) => void): Request<MediaConvert.Types.CreatePresetResponse, AWSError>;
   /**
    * Create a new preset. For information about job templates see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html
    */
@@ -54,7 +56,7 @@ declare class MediaConvert extends Service {
   /**
    * Create a new transcoding queue. For information about queues, see Working With Queues in the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html
    */
-  createQueue(params: MediaConvert.Types.CreateQueueRequest, callback?: (err: AWSError, data: MediaConvert.Types.CreateQueueResponse) => void): Request<MediaConvert.Types.CreateQueueResponse, AWSError>;
+  createQueue(params: BoundInput<MediaConvert.Types.CreateQueueRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.CreateQueueResponse) => void): Request<MediaConvert.Types.CreateQueueResponse, AWSError>;
   /**
    * Create a new transcoding queue. For information about queues, see Working With Queues in the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html
    */
@@ -62,7 +64,7 @@ declare class MediaConvert extends Service {
   /**
    * Permanently delete a job template you have created.
    */
-  deleteJobTemplate(params: MediaConvert.Types.DeleteJobTemplateRequest, callback?: (err: AWSError, data: MediaConvert.Types.DeleteJobTemplateResponse) => void): Request<MediaConvert.Types.DeleteJobTemplateResponse, AWSError>;
+  deleteJobTemplate(params: BoundInput<MediaConvert.Types.DeleteJobTemplateRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.DeleteJobTemplateResponse) => void): Request<MediaConvert.Types.DeleteJobTemplateResponse, AWSError>;
   /**
    * Permanently delete a job template you have created.
    */
@@ -70,7 +72,7 @@ declare class MediaConvert extends Service {
   /**
    * Permanently delete a preset you have created.
    */
-  deletePreset(params: MediaConvert.Types.DeletePresetRequest, callback?: (err: AWSError, data: MediaConvert.Types.DeletePresetResponse) => void): Request<MediaConvert.Types.DeletePresetResponse, AWSError>;
+  deletePreset(params: BoundInput<MediaConvert.Types.DeletePresetRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.DeletePresetResponse) => void): Request<MediaConvert.Types.DeletePresetResponse, AWSError>;
   /**
    * Permanently delete a preset you have created.
    */
@@ -78,7 +80,7 @@ declare class MediaConvert extends Service {
   /**
    * Permanently delete a queue you have created.
    */
-  deleteQueue(params: MediaConvert.Types.DeleteQueueRequest, callback?: (err: AWSError, data: MediaConvert.Types.DeleteQueueResponse) => void): Request<MediaConvert.Types.DeleteQueueResponse, AWSError>;
+  deleteQueue(params: BoundInput<MediaConvert.Types.DeleteQueueRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.DeleteQueueResponse) => void): Request<MediaConvert.Types.DeleteQueueResponse, AWSError>;
   /**
    * Permanently delete a queue you have created.
    */
@@ -86,7 +88,7 @@ declare class MediaConvert extends Service {
   /**
    * Send an request with an empty body to the regional API endpoint to get your account API endpoint.
    */
-  describeEndpoints(params: MediaConvert.Types.DescribeEndpointsRequest, callback?: (err: AWSError, data: MediaConvert.Types.DescribeEndpointsResponse) => void): Request<MediaConvert.Types.DescribeEndpointsResponse, AWSError>;
+  describeEndpoints(params: BoundInput<MediaConvert.Types.DescribeEndpointsRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.DescribeEndpointsResponse) => void): Request<MediaConvert.Types.DescribeEndpointsResponse, AWSError>;
   /**
    * Send an request with an empty body to the regional API endpoint to get your account API endpoint.
    */
@@ -94,7 +96,7 @@ declare class MediaConvert extends Service {
   /**
    * Removes an association between the Amazon Resource Name (ARN) of an AWS Certificate Manager (ACM) certificate and an AWS Elemental MediaConvert resource.
    */
-  disassociateCertificate(params: MediaConvert.Types.DisassociateCertificateRequest, callback?: (err: AWSError, data: MediaConvert.Types.DisassociateCertificateResponse) => void): Request<MediaConvert.Types.DisassociateCertificateResponse, AWSError>;
+  disassociateCertificate(params: BoundInput<MediaConvert.Types.DisassociateCertificateRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.DisassociateCertificateResponse) => void): Request<MediaConvert.Types.DisassociateCertificateResponse, AWSError>;
   /**
    * Removes an association between the Amazon Resource Name (ARN) of an AWS Certificate Manager (ACM) certificate and an AWS Elemental MediaConvert resource.
    */
@@ -102,7 +104,7 @@ declare class MediaConvert extends Service {
   /**
    * Retrieve the JSON for a specific completed transcoding job.
    */
-  getJob(params: MediaConvert.Types.GetJobRequest, callback?: (err: AWSError, data: MediaConvert.Types.GetJobResponse) => void): Request<MediaConvert.Types.GetJobResponse, AWSError>;
+  getJob(params: BoundInput<MediaConvert.Types.GetJobRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.GetJobResponse) => void): Request<MediaConvert.Types.GetJobResponse, AWSError>;
   /**
    * Retrieve the JSON for a specific completed transcoding job.
    */
@@ -110,7 +112,7 @@ declare class MediaConvert extends Service {
   /**
    * Retrieve the JSON for a specific job template.
    */
-  getJobTemplate(params: MediaConvert.Types.GetJobTemplateRequest, callback?: (err: AWSError, data: MediaConvert.Types.GetJobTemplateResponse) => void): Request<MediaConvert.Types.GetJobTemplateResponse, AWSError>;
+  getJobTemplate(params: BoundInput<MediaConvert.Types.GetJobTemplateRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.GetJobTemplateResponse) => void): Request<MediaConvert.Types.GetJobTemplateResponse, AWSError>;
   /**
    * Retrieve the JSON for a specific job template.
    */
@@ -118,7 +120,7 @@ declare class MediaConvert extends Service {
   /**
    * Retrieve the JSON for a specific preset.
    */
-  getPreset(params: MediaConvert.Types.GetPresetRequest, callback?: (err: AWSError, data: MediaConvert.Types.GetPresetResponse) => void): Request<MediaConvert.Types.GetPresetResponse, AWSError>;
+  getPreset(params: BoundInput<MediaConvert.Types.GetPresetRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.GetPresetResponse) => void): Request<MediaConvert.Types.GetPresetResponse, AWSError>;
   /**
    * Retrieve the JSON for a specific preset.
    */
@@ -126,7 +128,7 @@ declare class MediaConvert extends Service {
   /**
    * Retrieve the JSON for a specific queue.
    */
-  getQueue(params: MediaConvert.Types.GetQueueRequest, callback?: (err: AWSError, data: MediaConvert.Types.GetQueueResponse) => void): Request<MediaConvert.Types.GetQueueResponse, AWSError>;
+  getQueue(params: BoundInput<MediaConvert.Types.GetQueueRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.GetQueueResponse) => void): Request<MediaConvert.Types.GetQueueResponse, AWSError>;
   /**
    * Retrieve the JSON for a specific queue.
    */
@@ -134,7 +136,7 @@ declare class MediaConvert extends Service {
   /**
    * Retrieve a JSON array of up to twenty of your job templates. This will return the templates themselves, not just a list of them. To retrieve the next twenty templates, use the nextToken string returned with the array
    */
-  listJobTemplates(params: MediaConvert.Types.ListJobTemplatesRequest, callback?: (err: AWSError, data: MediaConvert.Types.ListJobTemplatesResponse) => void): Request<MediaConvert.Types.ListJobTemplatesResponse, AWSError>;
+  listJobTemplates(params: BoundInput<MediaConvert.Types.ListJobTemplatesRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.ListJobTemplatesResponse) => void): Request<MediaConvert.Types.ListJobTemplatesResponse, AWSError>;
   /**
    * Retrieve a JSON array of up to twenty of your job templates. This will return the templates themselves, not just a list of them. To retrieve the next twenty templates, use the nextToken string returned with the array
    */
@@ -142,7 +144,7 @@ declare class MediaConvert extends Service {
   /**
    * Retrieve a JSON array of up to twenty of your most recently created jobs. This array includes in-process, completed, and errored jobs. This will return the jobs themselves, not just a list of the jobs. To retrieve the twenty next most recent jobs, use the nextToken string returned with the array.
    */
-  listJobs(params: MediaConvert.Types.ListJobsRequest, callback?: (err: AWSError, data: MediaConvert.Types.ListJobsResponse) => void): Request<MediaConvert.Types.ListJobsResponse, AWSError>;
+  listJobs(params: BoundInput<MediaConvert.Types.ListJobsRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.ListJobsResponse) => void): Request<MediaConvert.Types.ListJobsResponse, AWSError>;
   /**
    * Retrieve a JSON array of up to twenty of your most recently created jobs. This array includes in-process, completed, and errored jobs. This will return the jobs themselves, not just a list of the jobs. To retrieve the twenty next most recent jobs, use the nextToken string returned with the array.
    */
@@ -150,7 +152,7 @@ declare class MediaConvert extends Service {
   /**
    * Retrieve a JSON array of up to twenty of your presets. This will return the presets themselves, not just a list of them. To retrieve the next twenty presets, use the nextToken string returned with the array.
    */
-  listPresets(params: MediaConvert.Types.ListPresetsRequest, callback?: (err: AWSError, data: MediaConvert.Types.ListPresetsResponse) => void): Request<MediaConvert.Types.ListPresetsResponse, AWSError>;
+  listPresets(params: BoundInput<MediaConvert.Types.ListPresetsRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.ListPresetsResponse) => void): Request<MediaConvert.Types.ListPresetsResponse, AWSError>;
   /**
    * Retrieve a JSON array of up to twenty of your presets. This will return the presets themselves, not just a list of them. To retrieve the next twenty presets, use the nextToken string returned with the array.
    */
@@ -158,7 +160,7 @@ declare class MediaConvert extends Service {
   /**
    * Retrieve a JSON array of up to twenty of your queues. This will return the queues themselves, not just a list of them. To retrieve the next twenty queues, use the nextToken string returned with the array.
    */
-  listQueues(params: MediaConvert.Types.ListQueuesRequest, callback?: (err: AWSError, data: MediaConvert.Types.ListQueuesResponse) => void): Request<MediaConvert.Types.ListQueuesResponse, AWSError>;
+  listQueues(params: BoundInput<MediaConvert.Types.ListQueuesRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.ListQueuesResponse) => void): Request<MediaConvert.Types.ListQueuesResponse, AWSError>;
   /**
    * Retrieve a JSON array of up to twenty of your queues. This will return the queues themselves, not just a list of them. To retrieve the next twenty queues, use the nextToken string returned with the array.
    */
@@ -166,7 +168,7 @@ declare class MediaConvert extends Service {
   /**
    * Retrieve the tags for a MediaConvert resource.
    */
-  listTagsForResource(params: MediaConvert.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaConvert.Types.ListTagsForResourceResponse) => void): Request<MediaConvert.Types.ListTagsForResourceResponse, AWSError>;
+  listTagsForResource(params: BoundInput<MediaConvert.Types.ListTagsForResourceRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.ListTagsForResourceResponse) => void): Request<MediaConvert.Types.ListTagsForResourceResponse, AWSError>;
   /**
    * Retrieve the tags for a MediaConvert resource.
    */
@@ -174,7 +176,7 @@ declare class MediaConvert extends Service {
   /**
    * Add tags to a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
    */
-  tagResource(params: MediaConvert.Types.TagResourceRequest, callback?: (err: AWSError, data: MediaConvert.Types.TagResourceResponse) => void): Request<MediaConvert.Types.TagResourceResponse, AWSError>;
+  tagResource(params: BoundInput<MediaConvert.Types.TagResourceRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.TagResourceResponse) => void): Request<MediaConvert.Types.TagResourceResponse, AWSError>;
   /**
    * Add tags to a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
    */
@@ -182,7 +184,7 @@ declare class MediaConvert extends Service {
   /**
    * Remove tags from a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
    */
-  untagResource(params: MediaConvert.Types.UntagResourceRequest, callback?: (err: AWSError, data: MediaConvert.Types.UntagResourceResponse) => void): Request<MediaConvert.Types.UntagResourceResponse, AWSError>;
+  untagResource(params: BoundInput<MediaConvert.Types.UntagResourceRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.UntagResourceResponse) => void): Request<MediaConvert.Types.UntagResourceResponse, AWSError>;
   /**
    * Remove tags from a MediaConvert queue, preset, or job template. For information about tagging, see the User Guide at https://docs.aws.amazon.com/mediaconvert/latest/ug/tagging-resources.html
    */
@@ -190,7 +192,7 @@ declare class MediaConvert extends Service {
   /**
    * Modify one of your existing job templates.
    */
-  updateJobTemplate(params: MediaConvert.Types.UpdateJobTemplateRequest, callback?: (err: AWSError, data: MediaConvert.Types.UpdateJobTemplateResponse) => void): Request<MediaConvert.Types.UpdateJobTemplateResponse, AWSError>;
+  updateJobTemplate(params: BoundInput<MediaConvert.Types.UpdateJobTemplateRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.UpdateJobTemplateResponse) => void): Request<MediaConvert.Types.UpdateJobTemplateResponse, AWSError>;
   /**
    * Modify one of your existing job templates.
    */
@@ -198,7 +200,7 @@ declare class MediaConvert extends Service {
   /**
    * Modify one of your existing presets.
    */
-  updatePreset(params: MediaConvert.Types.UpdatePresetRequest, callback?: (err: AWSError, data: MediaConvert.Types.UpdatePresetResponse) => void): Request<MediaConvert.Types.UpdatePresetResponse, AWSError>;
+  updatePreset(params: BoundInput<MediaConvert.Types.UpdatePresetRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.UpdatePresetResponse) => void): Request<MediaConvert.Types.UpdatePresetResponse, AWSError>;
   /**
    * Modify one of your existing presets.
    */
@@ -206,7 +208,7 @@ declare class MediaConvert extends Service {
   /**
    * Modify one of your existing queues.
    */
-  updateQueue(params: MediaConvert.Types.UpdateQueueRequest, callback?: (err: AWSError, data: MediaConvert.Types.UpdateQueueResponse) => void): Request<MediaConvert.Types.UpdateQueueResponse, AWSError>;
+  updateQueue(params: BoundInput<MediaConvert.Types.UpdateQueueRequest, keyof Params>, callback?: (err: AWSError, data: MediaConvert.Types.UpdateQueueResponse) => void): Request<MediaConvert.Types.UpdateQueueResponse, AWSError>;
   /**
    * Modify one of your existing queues.
    */
@@ -3115,7 +3117,8 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AssociateCertificateRequest & CancelJobRequest & CreateJobRequest & CreateJobTemplateRequest & CreatePresetRequest & CreateQueueRequest & DeleteJobTemplateRequest & DeletePresetRequest & DeleteQueueRequest & DescribeEndpointsRequest & DisassociateCertificateRequest & GetJobRequest & GetJobTemplateRequest & GetPresetRequest & GetQueueRequest & ListJobTemplatesRequest & ListJobsRequest & ListPresetsRequest & ListQueuesRequest & ListTagsForResourceRequest & TagResourceRequest & UntagResourceRequest & UpdateJobTemplateRequest & UpdatePresetRequest & UpdateQueueRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the MediaConvert client.
    */

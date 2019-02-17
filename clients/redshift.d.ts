@@ -4,18 +4,20 @@ import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class Redshift extends Service {
+declare class Redshift<Params extends Redshift.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: Redshift.Types.ClientConfiguration)
-  config: Config & Redshift.Types.ClientConfiguration;
+  constructor(options?: Redshift.Types.ClientConfiguration<Params>)
+  config: Config & Redshift.Types.ClientConfiguration<Params>;
   /**
    * Exchanges a DC1 Reserved Node for a DC2 Reserved Node with no changes to the configuration (term, payment type, or number of nodes) and no additional costs. 
    */
-  acceptReservedNodeExchange(params: Redshift.Types.AcceptReservedNodeExchangeInputMessage, callback?: (err: AWSError, data: Redshift.Types.AcceptReservedNodeExchangeOutputMessage) => void): Request<Redshift.Types.AcceptReservedNodeExchangeOutputMessage, AWSError>;
+  acceptReservedNodeExchange(params: BoundInput<Redshift.Types.AcceptReservedNodeExchangeInputMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.AcceptReservedNodeExchangeOutputMessage) => void): Request<Redshift.Types.AcceptReservedNodeExchangeOutputMessage, AWSError>;
   /**
    * Exchanges a DC1 Reserved Node for a DC2 Reserved Node with no changes to the configuration (term, payment type, or number of nodes) and no additional costs. 
    */
@@ -23,7 +25,7 @@ declare class Redshift extends Service {
   /**
    * Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group. If you authorize access to an Amazon EC2 security group, specify EC2SecurityGroupName and EC2SecurityGroupOwnerId. The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS Region.  If you authorize access to a CIDR/IP address range, specify CIDRIP. For an overview of CIDR blocks, see the Wikipedia article on Classless Inter-Domain Routing.  You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to Working with Security Groups in the Amazon Redshift Cluster Management Guide.
    */
-  authorizeClusterSecurityGroupIngress(params: Redshift.Types.AuthorizeClusterSecurityGroupIngressMessage, callback?: (err: AWSError, data: Redshift.Types.AuthorizeClusterSecurityGroupIngressResult) => void): Request<Redshift.Types.AuthorizeClusterSecurityGroupIngressResult, AWSError>;
+  authorizeClusterSecurityGroupIngress(params: BoundInput<Redshift.Types.AuthorizeClusterSecurityGroupIngressMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.AuthorizeClusterSecurityGroupIngressResult) => void): Request<Redshift.Types.AuthorizeClusterSecurityGroupIngressResult, AWSError>;
   /**
    * Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group. If you authorize access to an Amazon EC2 security group, specify EC2SecurityGroupName and EC2SecurityGroupOwnerId. The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS Region.  If you authorize access to a CIDR/IP address range, specify CIDRIP. For an overview of CIDR blocks, see the Wikipedia article on Classless Inter-Domain Routing.  You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to Working with Security Groups in the Amazon Redshift Cluster Management Guide.
    */
@@ -31,7 +33,7 @@ declare class Redshift extends Service {
   /**
    * Authorizes the specified AWS customer account to restore the specified snapshot.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
-  authorizeSnapshotAccess(params: Redshift.Types.AuthorizeSnapshotAccessMessage, callback?: (err: AWSError, data: Redshift.Types.AuthorizeSnapshotAccessResult) => void): Request<Redshift.Types.AuthorizeSnapshotAccessResult, AWSError>;
+  authorizeSnapshotAccess(params: BoundInput<Redshift.Types.AuthorizeSnapshotAccessMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.AuthorizeSnapshotAccessResult) => void): Request<Redshift.Types.AuthorizeSnapshotAccessResult, AWSError>;
   /**
    * Authorizes the specified AWS customer account to restore the specified snapshot.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
@@ -39,7 +41,7 @@ declare class Redshift extends Service {
   /**
    * Deletes a set of cluster snapshots.
    */
-  batchDeleteClusterSnapshots(params: Redshift.Types.BatchDeleteClusterSnapshotsRequest, callback?: (err: AWSError, data: Redshift.Types.BatchDeleteClusterSnapshotsResult) => void): Request<Redshift.Types.BatchDeleteClusterSnapshotsResult, AWSError>;
+  batchDeleteClusterSnapshots(params: BoundInput<Redshift.Types.BatchDeleteClusterSnapshotsRequest, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.BatchDeleteClusterSnapshotsResult) => void): Request<Redshift.Types.BatchDeleteClusterSnapshotsResult, AWSError>;
   /**
    * Deletes a set of cluster snapshots.
    */
@@ -47,7 +49,7 @@ declare class Redshift extends Service {
   /**
    * Modifies the settings for a list of snapshots.
    */
-  batchModifyClusterSnapshots(params: Redshift.Types.BatchModifyClusterSnapshotsMessage, callback?: (err: AWSError, data: Redshift.Types.BatchModifyClusterSnapshotsOutputMessage) => void): Request<Redshift.Types.BatchModifyClusterSnapshotsOutputMessage, AWSError>;
+  batchModifyClusterSnapshots(params: BoundInput<Redshift.Types.BatchModifyClusterSnapshotsMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.BatchModifyClusterSnapshotsOutputMessage) => void): Request<Redshift.Types.BatchModifyClusterSnapshotsOutputMessage, AWSError>;
   /**
    * Modifies the settings for a list of snapshots.
    */
@@ -55,7 +57,7 @@ declare class Redshift extends Service {
   /**
    * Cancels a resize operation.
    */
-  cancelResize(params: Redshift.Types.CancelResizeMessage, callback?: (err: AWSError, data: Redshift.Types.ResizeProgressMessage) => void): Request<Redshift.Types.ResizeProgressMessage, AWSError>;
+  cancelResize(params: BoundInput<Redshift.Types.CancelResizeMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ResizeProgressMessage) => void): Request<Redshift.Types.ResizeProgressMessage, AWSError>;
   /**
    * Cancels a resize operation.
    */
@@ -63,7 +65,7 @@ declare class Redshift extends Service {
   /**
    * Copies the specified automated cluster snapshot to a new manual cluster snapshot. The source must be an automated snapshot and it must be in the available state. When you delete a cluster, Amazon Redshift deletes any automated snapshots of the cluster. Also, when the retention period of the snapshot expires, Amazon Redshift automatically deletes it. If you want to keep an automated snapshot for a longer period, you can make a manual copy of the snapshot. Manual snapshots are retained until you delete them.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
-  copyClusterSnapshot(params: Redshift.Types.CopyClusterSnapshotMessage, callback?: (err: AWSError, data: Redshift.Types.CopyClusterSnapshotResult) => void): Request<Redshift.Types.CopyClusterSnapshotResult, AWSError>;
+  copyClusterSnapshot(params: BoundInput<Redshift.Types.CopyClusterSnapshotMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.CopyClusterSnapshotResult) => void): Request<Redshift.Types.CopyClusterSnapshotResult, AWSError>;
   /**
    * Copies the specified automated cluster snapshot to a new manual cluster snapshot. The source must be an automated snapshot and it must be in the available state. When you delete a cluster, Amazon Redshift deletes any automated snapshots of the cluster. Also, when the retention period of the snapshot expires, Amazon Redshift automatically deletes it. If you want to keep an automated snapshot for a longer period, you can make a manual copy of the snapshot. Manual snapshots are retained until you delete them.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
@@ -71,7 +73,7 @@ declare class Redshift extends Service {
   /**
    * Creates a new cluster. To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
-  createCluster(params: Redshift.Types.CreateClusterMessage, callback?: (err: AWSError, data: Redshift.Types.CreateClusterResult) => void): Request<Redshift.Types.CreateClusterResult, AWSError>;
+  createCluster(params: BoundInput<Redshift.Types.CreateClusterMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.CreateClusterResult) => void): Request<Redshift.Types.CreateClusterResult, AWSError>;
   /**
    * Creates a new cluster. To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
@@ -79,7 +81,7 @@ declare class Redshift extends Service {
   /**
    * Creates an Amazon Redshift parameter group. Creating parameter groups is independent of creating clusters. You can associate a cluster with a parameter group when you create the cluster. You can also associate an existing cluster with a parameter group after the cluster is created by using ModifyCluster.  Parameters in the parameter group define specific behavior that applies to the databases you create on the cluster. For more information about parameters and parameter groups, go to Amazon Redshift Parameter Groups in the Amazon Redshift Cluster Management Guide.
    */
-  createClusterParameterGroup(params: Redshift.Types.CreateClusterParameterGroupMessage, callback?: (err: AWSError, data: Redshift.Types.CreateClusterParameterGroupResult) => void): Request<Redshift.Types.CreateClusterParameterGroupResult, AWSError>;
+  createClusterParameterGroup(params: BoundInput<Redshift.Types.CreateClusterParameterGroupMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.CreateClusterParameterGroupResult) => void): Request<Redshift.Types.CreateClusterParameterGroupResult, AWSError>;
   /**
    * Creates an Amazon Redshift parameter group. Creating parameter groups is independent of creating clusters. You can associate a cluster with a parameter group when you create the cluster. You can also associate an existing cluster with a parameter group after the cluster is created by using ModifyCluster.  Parameters in the parameter group define specific behavior that applies to the databases you create on the cluster. For more information about parameters and parameter groups, go to Amazon Redshift Parameter Groups in the Amazon Redshift Cluster Management Guide.
    */
@@ -87,7 +89,7 @@ declare class Redshift extends Service {
   /**
    * Creates a new Amazon Redshift security group. You use security groups to control access to non-VPC clusters.  For information about managing security groups, go to Amazon Redshift Cluster Security Groups in the Amazon Redshift Cluster Management Guide.
    */
-  createClusterSecurityGroup(params: Redshift.Types.CreateClusterSecurityGroupMessage, callback?: (err: AWSError, data: Redshift.Types.CreateClusterSecurityGroupResult) => void): Request<Redshift.Types.CreateClusterSecurityGroupResult, AWSError>;
+  createClusterSecurityGroup(params: BoundInput<Redshift.Types.CreateClusterSecurityGroupMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.CreateClusterSecurityGroupResult) => void): Request<Redshift.Types.CreateClusterSecurityGroupResult, AWSError>;
   /**
    * Creates a new Amazon Redshift security group. You use security groups to control access to non-VPC clusters.  For information about managing security groups, go to Amazon Redshift Cluster Security Groups in the Amazon Redshift Cluster Management Guide.
    */
@@ -95,7 +97,7 @@ declare class Redshift extends Service {
   /**
    * Creates a manual snapshot of the specified cluster. The cluster must be in the available state.   For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
-  createClusterSnapshot(params: Redshift.Types.CreateClusterSnapshotMessage, callback?: (err: AWSError, data: Redshift.Types.CreateClusterSnapshotResult) => void): Request<Redshift.Types.CreateClusterSnapshotResult, AWSError>;
+  createClusterSnapshot(params: BoundInput<Redshift.Types.CreateClusterSnapshotMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.CreateClusterSnapshotResult) => void): Request<Redshift.Types.CreateClusterSnapshotResult, AWSError>;
   /**
    * Creates a manual snapshot of the specified cluster. The cluster must be in the available state.   For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
@@ -103,7 +105,7 @@ declare class Redshift extends Service {
   /**
    * Creates a new Amazon Redshift subnet group. You must provide a list of one or more subnets in your existing Amazon Virtual Private Cloud (Amazon VPC) when creating Amazon Redshift subnet group.  For information about subnet groups, go to Amazon Redshift Cluster Subnet Groups in the Amazon Redshift Cluster Management Guide.
    */
-  createClusterSubnetGroup(params: Redshift.Types.CreateClusterSubnetGroupMessage, callback?: (err: AWSError, data: Redshift.Types.CreateClusterSubnetGroupResult) => void): Request<Redshift.Types.CreateClusterSubnetGroupResult, AWSError>;
+  createClusterSubnetGroup(params: BoundInput<Redshift.Types.CreateClusterSubnetGroupMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.CreateClusterSubnetGroupResult) => void): Request<Redshift.Types.CreateClusterSubnetGroupResult, AWSError>;
   /**
    * Creates a new Amazon Redshift subnet group. You must provide a list of one or more subnets in your existing Amazon Virtual Private Cloud (Amazon VPC) when creating Amazon Redshift subnet group.  For information about subnet groups, go to Amazon Redshift Cluster Subnet Groups in the Amazon Redshift Cluster Management Guide.
    */
@@ -111,7 +113,7 @@ declare class Redshift extends Service {
   /**
    * Creates an Amazon Redshift event notification subscription. This action requires an ARN (Amazon Resource Name) of an Amazon SNS topic created by either the Amazon Redshift console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console. You can specify the source type, and lists of Amazon Redshift source IDs, event categories, and event severities. Notifications will be sent for all events you want that match those criteria. For example, you can specify source type = cluster, source ID = my-cluster-1 and mycluster2, event categories = Availability, Backup, and severity = ERROR. The subscription will only send notifications for those ERROR events in the Availability and Backup categories for the specified clusters. If you specify both the source type and source IDs, such as source type = cluster and source identifier = my-cluster-1, notifications will be sent for all the cluster events for my-cluster-1. If you specify a source type but do not specify a source identifier, you will receive notice of the events for the objects of that type in your AWS account. If you do not specify either the SourceType nor the SourceIdentifier, you will be notified of events generated from all Amazon Redshift sources belonging to your AWS account. You must specify a source type if you specify a source ID.
    */
-  createEventSubscription(params: Redshift.Types.CreateEventSubscriptionMessage, callback?: (err: AWSError, data: Redshift.Types.CreateEventSubscriptionResult) => void): Request<Redshift.Types.CreateEventSubscriptionResult, AWSError>;
+  createEventSubscription(params: BoundInput<Redshift.Types.CreateEventSubscriptionMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.CreateEventSubscriptionResult) => void): Request<Redshift.Types.CreateEventSubscriptionResult, AWSError>;
   /**
    * Creates an Amazon Redshift event notification subscription. This action requires an ARN (Amazon Resource Name) of an Amazon SNS topic created by either the Amazon Redshift console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console. You can specify the source type, and lists of Amazon Redshift source IDs, event categories, and event severities. Notifications will be sent for all events you want that match those criteria. For example, you can specify source type = cluster, source ID = my-cluster-1 and mycluster2, event categories = Availability, Backup, and severity = ERROR. The subscription will only send notifications for those ERROR events in the Availability and Backup categories for the specified clusters. If you specify both the source type and source IDs, such as source type = cluster and source identifier = my-cluster-1, notifications will be sent for all the cluster events for my-cluster-1. If you specify a source type but do not specify a source identifier, you will receive notice of the events for the objects of that type in your AWS account. If you do not specify either the SourceType nor the SourceIdentifier, you will be notified of events generated from all Amazon Redshift sources belonging to your AWS account. You must specify a source type if you specify a source ID.
    */
@@ -119,7 +121,7 @@ declare class Redshift extends Service {
   /**
    * Creates an HSM client certificate that an Amazon Redshift cluster will use to connect to the client's HSM in order to store and retrieve the keys used to encrypt the cluster databases. The command returns a public key, which you must store in the HSM. In addition to creating the HSM certificate, you must create an Amazon Redshift HSM configuration that provides a cluster the information needed to store and use encryption keys in the HSM. For more information, go to Hardware Security Modules in the Amazon Redshift Cluster Management Guide.
    */
-  createHsmClientCertificate(params: Redshift.Types.CreateHsmClientCertificateMessage, callback?: (err: AWSError, data: Redshift.Types.CreateHsmClientCertificateResult) => void): Request<Redshift.Types.CreateHsmClientCertificateResult, AWSError>;
+  createHsmClientCertificate(params: BoundInput<Redshift.Types.CreateHsmClientCertificateMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.CreateHsmClientCertificateResult) => void): Request<Redshift.Types.CreateHsmClientCertificateResult, AWSError>;
   /**
    * Creates an HSM client certificate that an Amazon Redshift cluster will use to connect to the client's HSM in order to store and retrieve the keys used to encrypt the cluster databases. The command returns a public key, which you must store in the HSM. In addition to creating the HSM certificate, you must create an Amazon Redshift HSM configuration that provides a cluster the information needed to store and use encryption keys in the HSM. For more information, go to Hardware Security Modules in the Amazon Redshift Cluster Management Guide.
    */
@@ -127,7 +129,7 @@ declare class Redshift extends Service {
   /**
    * Creates an HSM configuration that contains the information required by an Amazon Redshift cluster to store and use database encryption keys in a Hardware Security Module (HSM). After creating the HSM configuration, you can specify it as a parameter when creating a cluster. The cluster will then store its encryption keys in the HSM. In addition to creating an HSM configuration, you must also create an HSM client certificate. For more information, go to Hardware Security Modules in the Amazon Redshift Cluster Management Guide.
    */
-  createHsmConfiguration(params: Redshift.Types.CreateHsmConfigurationMessage, callback?: (err: AWSError, data: Redshift.Types.CreateHsmConfigurationResult) => void): Request<Redshift.Types.CreateHsmConfigurationResult, AWSError>;
+  createHsmConfiguration(params: BoundInput<Redshift.Types.CreateHsmConfigurationMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.CreateHsmConfigurationResult) => void): Request<Redshift.Types.CreateHsmConfigurationResult, AWSError>;
   /**
    * Creates an HSM configuration that contains the information required by an Amazon Redshift cluster to store and use database encryption keys in a Hardware Security Module (HSM). After creating the HSM configuration, you can specify it as a parameter when creating a cluster. The cluster will then store its encryption keys in the HSM. In addition to creating an HSM configuration, you must also create an HSM client certificate. For more information, go to Hardware Security Modules in the Amazon Redshift Cluster Management Guide.
    */
@@ -135,7 +137,7 @@ declare class Redshift extends Service {
   /**
    * Creates a snapshot copy grant that permits Amazon Redshift to use a customer master key (CMK) from AWS Key Management Service (AWS KMS) to encrypt copied snapshots in a destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
    */
-  createSnapshotCopyGrant(params: Redshift.Types.CreateSnapshotCopyGrantMessage, callback?: (err: AWSError, data: Redshift.Types.CreateSnapshotCopyGrantResult) => void): Request<Redshift.Types.CreateSnapshotCopyGrantResult, AWSError>;
+  createSnapshotCopyGrant(params: BoundInput<Redshift.Types.CreateSnapshotCopyGrantMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.CreateSnapshotCopyGrantResult) => void): Request<Redshift.Types.CreateSnapshotCopyGrantResult, AWSError>;
   /**
    * Creates a snapshot copy grant that permits Amazon Redshift to use a customer master key (CMK) from AWS Key Management Service (AWS KMS) to encrypt copied snapshots in a destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
    */
@@ -143,7 +145,7 @@ declare class Redshift extends Service {
   /**
    * Creates a new snapshot schedule.
    */
-  createSnapshotSchedule(params: Redshift.Types.CreateSnapshotScheduleMessage, callback?: (err: AWSError, data: Redshift.Types.SnapshotSchedule) => void): Request<Redshift.Types.SnapshotSchedule, AWSError>;
+  createSnapshotSchedule(params: BoundInput<Redshift.Types.CreateSnapshotScheduleMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.SnapshotSchedule) => void): Request<Redshift.Types.SnapshotSchedule, AWSError>;
   /**
    * Creates a new snapshot schedule.
    */
@@ -151,7 +153,7 @@ declare class Redshift extends Service {
   /**
    * Adds one or more tags to a specified resource. A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, you will receive an error and the attempt will fail. If you specify a key that already exists for the resource, the value for that key will be updated with the new value.
    */
-  createTags(params: Redshift.Types.CreateTagsMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  createTags(params: BoundInput<Redshift.Types.CreateTagsMessage, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Adds one or more tags to a specified resource. A resource can have up to 50 tags. If you try to create more than 50 tags for a resource, you will receive an error and the attempt will fail. If you specify a key that already exists for the resource, the value for that key will be updated with the new value.
    */
@@ -159,7 +161,7 @@ declare class Redshift extends Service {
   /**
    * Deletes a previously provisioned cluster. A successful response from the web service indicates that the request was received correctly. Use DescribeClusters to monitor the status of the deletion. The delete operation cannot be canceled or reverted once submitted. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide. If you want to shut down the cluster and retain it for future use, set SkipFinalClusterSnapshot to false and specify a name for FinalClusterSnapshotIdentifier. You can later restore this snapshot to resume using the cluster. If a final cluster snapshot is requested, the status of the cluster will be "final-snapshot" while the snapshot is being taken, then it's "deleting" once Amazon Redshift begins deleting the cluster.   For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
-  deleteCluster(params: Redshift.Types.DeleteClusterMessage, callback?: (err: AWSError, data: Redshift.Types.DeleteClusterResult) => void): Request<Redshift.Types.DeleteClusterResult, AWSError>;
+  deleteCluster(params: BoundInput<Redshift.Types.DeleteClusterMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.DeleteClusterResult) => void): Request<Redshift.Types.DeleteClusterResult, AWSError>;
   /**
    * Deletes a previously provisioned cluster. A successful response from the web service indicates that the request was received correctly. Use DescribeClusters to monitor the status of the deletion. The delete operation cannot be canceled or reverted once submitted. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide. If you want to shut down the cluster and retain it for future use, set SkipFinalClusterSnapshot to false and specify a name for FinalClusterSnapshotIdentifier. You can later restore this snapshot to resume using the cluster. If a final cluster snapshot is requested, the status of the cluster will be "final-snapshot" while the snapshot is being taken, then it's "deleting" once Amazon Redshift begins deleting the cluster.   For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
@@ -167,7 +169,7 @@ declare class Redshift extends Service {
   /**
    * Deletes a specified Amazon Redshift parameter group.  You cannot delete a parameter group if it is associated with a cluster. 
    */
-  deleteClusterParameterGroup(params: Redshift.Types.DeleteClusterParameterGroupMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteClusterParameterGroup(params: BoundInput<Redshift.Types.DeleteClusterParameterGroupMessage, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a specified Amazon Redshift parameter group.  You cannot delete a parameter group if it is associated with a cluster. 
    */
@@ -175,7 +177,7 @@ declare class Redshift extends Service {
   /**
    * Deletes an Amazon Redshift security group.  You cannot delete a security group that is associated with any clusters. You cannot delete the default security group.   For information about managing security groups, go to Amazon Redshift Cluster Security Groups in the Amazon Redshift Cluster Management Guide.
    */
-  deleteClusterSecurityGroup(params: Redshift.Types.DeleteClusterSecurityGroupMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteClusterSecurityGroup(params: BoundInput<Redshift.Types.DeleteClusterSecurityGroupMessage, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an Amazon Redshift security group.  You cannot delete a security group that is associated with any clusters. You cannot delete the default security group.   For information about managing security groups, go to Amazon Redshift Cluster Security Groups in the Amazon Redshift Cluster Management Guide.
    */
@@ -183,7 +185,7 @@ declare class Redshift extends Service {
   /**
    * Deletes the specified manual snapshot. The snapshot must be in the available state, with no other users authorized to access the snapshot.  Unlike automated snapshots, manual snapshots are retained even after you delete your cluster. Amazon Redshift does not delete your manual snapshots. You must delete manual snapshot explicitly to avoid getting charged. If other accounts are authorized to access the snapshot, you must revoke all of the authorizations before you can delete the snapshot.
    */
-  deleteClusterSnapshot(params: Redshift.Types.DeleteClusterSnapshotMessage, callback?: (err: AWSError, data: Redshift.Types.DeleteClusterSnapshotResult) => void): Request<Redshift.Types.DeleteClusterSnapshotResult, AWSError>;
+  deleteClusterSnapshot(params: BoundInput<Redshift.Types.DeleteClusterSnapshotMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.DeleteClusterSnapshotResult) => void): Request<Redshift.Types.DeleteClusterSnapshotResult, AWSError>;
   /**
    * Deletes the specified manual snapshot. The snapshot must be in the available state, with no other users authorized to access the snapshot.  Unlike automated snapshots, manual snapshots are retained even after you delete your cluster. Amazon Redshift does not delete your manual snapshots. You must delete manual snapshot explicitly to avoid getting charged. If other accounts are authorized to access the snapshot, you must revoke all of the authorizations before you can delete the snapshot.
    */
@@ -191,7 +193,7 @@ declare class Redshift extends Service {
   /**
    * Deletes the specified cluster subnet group.
    */
-  deleteClusterSubnetGroup(params: Redshift.Types.DeleteClusterSubnetGroupMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteClusterSubnetGroup(params: BoundInput<Redshift.Types.DeleteClusterSubnetGroupMessage, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified cluster subnet group.
    */
@@ -199,7 +201,7 @@ declare class Redshift extends Service {
   /**
    * Deletes an Amazon Redshift event notification subscription.
    */
-  deleteEventSubscription(params: Redshift.Types.DeleteEventSubscriptionMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteEventSubscription(params: BoundInput<Redshift.Types.DeleteEventSubscriptionMessage, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an Amazon Redshift event notification subscription.
    */
@@ -207,7 +209,7 @@ declare class Redshift extends Service {
   /**
    * Deletes the specified HSM client certificate.
    */
-  deleteHsmClientCertificate(params: Redshift.Types.DeleteHsmClientCertificateMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteHsmClientCertificate(params: BoundInput<Redshift.Types.DeleteHsmClientCertificateMessage, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified HSM client certificate.
    */
@@ -215,7 +217,7 @@ declare class Redshift extends Service {
   /**
    * Deletes the specified Amazon Redshift HSM configuration.
    */
-  deleteHsmConfiguration(params: Redshift.Types.DeleteHsmConfigurationMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteHsmConfiguration(params: BoundInput<Redshift.Types.DeleteHsmConfigurationMessage, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified Amazon Redshift HSM configuration.
    */
@@ -223,7 +225,7 @@ declare class Redshift extends Service {
   /**
    * Deletes the specified snapshot copy grant.
    */
-  deleteSnapshotCopyGrant(params: Redshift.Types.DeleteSnapshotCopyGrantMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteSnapshotCopyGrant(params: BoundInput<Redshift.Types.DeleteSnapshotCopyGrantMessage, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified snapshot copy grant.
    */
@@ -231,7 +233,7 @@ declare class Redshift extends Service {
   /**
    * Deletes a snapshot schedule.
    */
-  deleteSnapshotSchedule(params: Redshift.Types.DeleteSnapshotScheduleMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteSnapshotSchedule(params: BoundInput<Redshift.Types.DeleteSnapshotScheduleMessage, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a snapshot schedule.
    */
@@ -239,7 +241,7 @@ declare class Redshift extends Service {
   /**
    * Deletes a tag or tags from a resource. You must provide the ARN of the resource from which you want to delete the tag or tags.
    */
-  deleteTags(params: Redshift.Types.DeleteTagsMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteTags(params: BoundInput<Redshift.Types.DeleteTagsMessage, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a tag or tags from a resource. You must provide the ARN of the resource from which you want to delete the tag or tags.
    */
@@ -247,7 +249,7 @@ declare class Redshift extends Service {
   /**
    * Returns a list of attributes attached to an account
    */
-  describeAccountAttributes(params: Redshift.Types.DescribeAccountAttributesMessage, callback?: (err: AWSError, data: Redshift.Types.AccountAttributeList) => void): Request<Redshift.Types.AccountAttributeList, AWSError>;
+  describeAccountAttributes(params: BoundInput<Redshift.Types.DescribeAccountAttributesMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.AccountAttributeList) => void): Request<Redshift.Types.AccountAttributeList, AWSError>;
   /**
    * Returns a list of attributes attached to an account
    */
@@ -255,7 +257,7 @@ declare class Redshift extends Service {
   /**
    * Returns an array of ClusterDbRevision objects.
    */
-  describeClusterDbRevisions(params: Redshift.Types.DescribeClusterDbRevisionsMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterDbRevisionsMessage) => void): Request<Redshift.Types.ClusterDbRevisionsMessage, AWSError>;
+  describeClusterDbRevisions(params: BoundInput<Redshift.Types.DescribeClusterDbRevisionsMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ClusterDbRevisionsMessage) => void): Request<Redshift.Types.ClusterDbRevisionsMessage, AWSError>;
   /**
    * Returns an array of ClusterDbRevision objects.
    */
@@ -263,7 +265,7 @@ declare class Redshift extends Service {
   /**
    * Returns a list of Amazon Redshift parameter groups, including parameter groups you created and the default parameter group. For each parameter group, the response includes the parameter group name, description, and parameter group family name. You can optionally specify a name to retrieve the description of a specific parameter group.  For more information about parameters and parameter groups, go to Amazon Redshift Parameter Groups in the Amazon Redshift Cluster Management Guide. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all parameter groups that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all parameter groups that have any combination of those values are returned. If both tag keys and values are omitted from the request, parameter groups are returned regardless of whether they have tag keys or values associated with them.
    */
-  describeClusterParameterGroups(params: Redshift.Types.DescribeClusterParameterGroupsMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterParameterGroupsMessage) => void): Request<Redshift.Types.ClusterParameterGroupsMessage, AWSError>;
+  describeClusterParameterGroups(params: BoundInput<Redshift.Types.DescribeClusterParameterGroupsMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ClusterParameterGroupsMessage) => void): Request<Redshift.Types.ClusterParameterGroupsMessage, AWSError>;
   /**
    * Returns a list of Amazon Redshift parameter groups, including parameter groups you created and the default parameter group. For each parameter group, the response includes the parameter group name, description, and parameter group family name. You can optionally specify a name to retrieve the description of a specific parameter group.  For more information about parameters and parameter groups, go to Amazon Redshift Parameter Groups in the Amazon Redshift Cluster Management Guide. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all parameter groups that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all parameter groups that have any combination of those values are returned. If both tag keys and values are omitted from the request, parameter groups are returned regardless of whether they have tag keys or values associated with them.
    */
@@ -271,7 +273,7 @@ declare class Redshift extends Service {
   /**
    * Returns a detailed list of parameters contained within the specified Amazon Redshift parameter group. For each parameter the response includes information such as parameter name, description, data type, value, whether the parameter value is modifiable, and so on. You can specify source filter to retrieve parameters of only specific type. For example, to retrieve parameters that were modified by a user action such as from ModifyClusterParameterGroup, you can specify source equal to user.  For more information about parameters and parameter groups, go to Amazon Redshift Parameter Groups in the Amazon Redshift Cluster Management Guide.
    */
-  describeClusterParameters(params: Redshift.Types.DescribeClusterParametersMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterParameterGroupDetails) => void): Request<Redshift.Types.ClusterParameterGroupDetails, AWSError>;
+  describeClusterParameters(params: BoundInput<Redshift.Types.DescribeClusterParametersMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ClusterParameterGroupDetails) => void): Request<Redshift.Types.ClusterParameterGroupDetails, AWSError>;
   /**
    * Returns a detailed list of parameters contained within the specified Amazon Redshift parameter group. For each parameter the response includes information such as parameter name, description, data type, value, whether the parameter value is modifiable, and so on. You can specify source filter to retrieve parameters of only specific type. For example, to retrieve parameters that were modified by a user action such as from ModifyClusterParameterGroup, you can specify source equal to user.  For more information about parameters and parameter groups, go to Amazon Redshift Parameter Groups in the Amazon Redshift Cluster Management Guide.
    */
@@ -279,7 +281,7 @@ declare class Redshift extends Service {
   /**
    * Returns information about Amazon Redshift security groups. If the name of a security group is specified, the response will contain only information about only that security group.  For information about managing security groups, go to Amazon Redshift Cluster Security Groups in the Amazon Redshift Cluster Management Guide. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all security groups that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all security groups that have any combination of those values are returned. If both tag keys and values are omitted from the request, security groups are returned regardless of whether they have tag keys or values associated with them.
    */
-  describeClusterSecurityGroups(params: Redshift.Types.DescribeClusterSecurityGroupsMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterSecurityGroupMessage) => void): Request<Redshift.Types.ClusterSecurityGroupMessage, AWSError>;
+  describeClusterSecurityGroups(params: BoundInput<Redshift.Types.DescribeClusterSecurityGroupsMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ClusterSecurityGroupMessage) => void): Request<Redshift.Types.ClusterSecurityGroupMessage, AWSError>;
   /**
    * Returns information about Amazon Redshift security groups. If the name of a security group is specified, the response will contain only information about only that security group.  For information about managing security groups, go to Amazon Redshift Cluster Security Groups in the Amazon Redshift Cluster Management Guide. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all security groups that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all security groups that have any combination of those values are returned. If both tag keys and values are omitted from the request, security groups are returned regardless of whether they have tag keys or values associated with them.
    */
@@ -287,7 +289,7 @@ declare class Redshift extends Service {
   /**
    * Returns one or more snapshot objects, which contain metadata about your cluster snapshots. By default, this operation returns information about all snapshots of all clusters that are owned by you AWS customer account. No information is returned for snapshots owned by inactive AWS customer accounts. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all snapshots that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all snapshots that have any combination of those values are returned. Only snapshots that you own are returned in the response; shared snapshots are not returned with the tag key and tag value request parameters. If both tag keys and values are omitted from the request, snapshots are returned regardless of whether they have tag keys or values associated with them.
    */
-  describeClusterSnapshots(params: Redshift.Types.DescribeClusterSnapshotsMessage, callback?: (err: AWSError, data: Redshift.Types.SnapshotMessage) => void): Request<Redshift.Types.SnapshotMessage, AWSError>;
+  describeClusterSnapshots(params: BoundInput<Redshift.Types.DescribeClusterSnapshotsMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.SnapshotMessage) => void): Request<Redshift.Types.SnapshotMessage, AWSError>;
   /**
    * Returns one or more snapshot objects, which contain metadata about your cluster snapshots. By default, this operation returns information about all snapshots of all clusters that are owned by you AWS customer account. No information is returned for snapshots owned by inactive AWS customer accounts. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all snapshots that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all snapshots that have any combination of those values are returned. Only snapshots that you own are returned in the response; shared snapshots are not returned with the tag key and tag value request parameters. If both tag keys and values are omitted from the request, snapshots are returned regardless of whether they have tag keys or values associated with them.
    */
@@ -295,7 +297,7 @@ declare class Redshift extends Service {
   /**
    * Returns one or more cluster subnet group objects, which contain metadata about your cluster subnet groups. By default, this operation returns information about all cluster subnet groups that are defined in you AWS account. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all subnet groups that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all subnet groups that have any combination of those values are returned. If both tag keys and values are omitted from the request, subnet groups are returned regardless of whether they have tag keys or values associated with them.
    */
-  describeClusterSubnetGroups(params: Redshift.Types.DescribeClusterSubnetGroupsMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterSubnetGroupMessage) => void): Request<Redshift.Types.ClusterSubnetGroupMessage, AWSError>;
+  describeClusterSubnetGroups(params: BoundInput<Redshift.Types.DescribeClusterSubnetGroupsMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ClusterSubnetGroupMessage) => void): Request<Redshift.Types.ClusterSubnetGroupMessage, AWSError>;
   /**
    * Returns one or more cluster subnet group objects, which contain metadata about your cluster subnet groups. By default, this operation returns information about all cluster subnet groups that are defined in you AWS account. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all subnet groups that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all subnet groups that have any combination of those values are returned. If both tag keys and values are omitted from the request, subnet groups are returned regardless of whether they have tag keys or values associated with them.
    */
@@ -303,7 +305,7 @@ declare class Redshift extends Service {
   /**
    * Returns a list of all the available maintenance tracks.
    */
-  describeClusterTracks(params: Redshift.Types.DescribeClusterTracksMessage, callback?: (err: AWSError, data: Redshift.Types.TrackListMessage) => void): Request<Redshift.Types.TrackListMessage, AWSError>;
+  describeClusterTracks(params: BoundInput<Redshift.Types.DescribeClusterTracksMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.TrackListMessage) => void): Request<Redshift.Types.TrackListMessage, AWSError>;
   /**
    * Returns a list of all the available maintenance tracks.
    */
@@ -311,7 +313,7 @@ declare class Redshift extends Service {
   /**
    * Returns descriptions of the available Amazon Redshift cluster versions. You can call this operation even before creating any clusters to learn more about the Amazon Redshift versions. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
-  describeClusterVersions(params: Redshift.Types.DescribeClusterVersionsMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterVersionsMessage) => void): Request<Redshift.Types.ClusterVersionsMessage, AWSError>;
+  describeClusterVersions(params: BoundInput<Redshift.Types.DescribeClusterVersionsMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ClusterVersionsMessage) => void): Request<Redshift.Types.ClusterVersionsMessage, AWSError>;
   /**
    * Returns descriptions of the available Amazon Redshift cluster versions. You can call this operation even before creating any clusters to learn more about the Amazon Redshift versions. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
@@ -319,7 +321,7 @@ declare class Redshift extends Service {
   /**
    * Returns properties of provisioned clusters including general cluster properties, cluster database properties, maintenance and backup properties, and security and access properties. This operation supports pagination. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all clusters that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all clusters that have any combination of those values are returned. If both tag keys and values are omitted from the request, clusters are returned regardless of whether they have tag keys or values associated with them.
    */
-  describeClusters(params: Redshift.Types.DescribeClustersMessage, callback?: (err: AWSError, data: Redshift.Types.ClustersMessage) => void): Request<Redshift.Types.ClustersMessage, AWSError>;
+  describeClusters(params: BoundInput<Redshift.Types.DescribeClustersMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ClustersMessage) => void): Request<Redshift.Types.ClustersMessage, AWSError>;
   /**
    * Returns properties of provisioned clusters including general cluster properties, cluster database properties, maintenance and backup properties, and security and access properties. This operation supports pagination. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all clusters that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all clusters that have any combination of those values are returned. If both tag keys and values are omitted from the request, clusters are returned regardless of whether they have tag keys or values associated with them.
    */
@@ -327,7 +329,7 @@ declare class Redshift extends Service {
   /**
    * Returns a list of parameter settings for the specified parameter group family.  For more information about parameters and parameter groups, go to Amazon Redshift Parameter Groups in the Amazon Redshift Cluster Management Guide.
    */
-  describeDefaultClusterParameters(params: Redshift.Types.DescribeDefaultClusterParametersMessage, callback?: (err: AWSError, data: Redshift.Types.DescribeDefaultClusterParametersResult) => void): Request<Redshift.Types.DescribeDefaultClusterParametersResult, AWSError>;
+  describeDefaultClusterParameters(params: BoundInput<Redshift.Types.DescribeDefaultClusterParametersMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.DescribeDefaultClusterParametersResult) => void): Request<Redshift.Types.DescribeDefaultClusterParametersResult, AWSError>;
   /**
    * Returns a list of parameter settings for the specified parameter group family.  For more information about parameters and parameter groups, go to Amazon Redshift Parameter Groups in the Amazon Redshift Cluster Management Guide.
    */
@@ -335,7 +337,7 @@ declare class Redshift extends Service {
   /**
    * Displays a list of event categories for all event source types, or for a specified source type. For a list of the event categories and source types, go to Amazon Redshift Event Notifications.
    */
-  describeEventCategories(params: Redshift.Types.DescribeEventCategoriesMessage, callback?: (err: AWSError, data: Redshift.Types.EventCategoriesMessage) => void): Request<Redshift.Types.EventCategoriesMessage, AWSError>;
+  describeEventCategories(params: BoundInput<Redshift.Types.DescribeEventCategoriesMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.EventCategoriesMessage) => void): Request<Redshift.Types.EventCategoriesMessage, AWSError>;
   /**
    * Displays a list of event categories for all event source types, or for a specified source type. For a list of the event categories and source types, go to Amazon Redshift Event Notifications.
    */
@@ -343,7 +345,7 @@ declare class Redshift extends Service {
   /**
    * Lists descriptions of all the Amazon Redshift event notification subscriptions for a customer account. If you specify a subscription name, lists the description for that subscription. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all event notification subscriptions that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all subscriptions that have any combination of those values are returned. If both tag keys and values are omitted from the request, subscriptions are returned regardless of whether they have tag keys or values associated with them.
    */
-  describeEventSubscriptions(params: Redshift.Types.DescribeEventSubscriptionsMessage, callback?: (err: AWSError, data: Redshift.Types.EventSubscriptionsMessage) => void): Request<Redshift.Types.EventSubscriptionsMessage, AWSError>;
+  describeEventSubscriptions(params: BoundInput<Redshift.Types.DescribeEventSubscriptionsMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.EventSubscriptionsMessage) => void): Request<Redshift.Types.EventSubscriptionsMessage, AWSError>;
   /**
    * Lists descriptions of all the Amazon Redshift event notification subscriptions for a customer account. If you specify a subscription name, lists the description for that subscription. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all event notification subscriptions that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all subscriptions that have any combination of those values are returned. If both tag keys and values are omitted from the request, subscriptions are returned regardless of whether they have tag keys or values associated with them.
    */
@@ -351,7 +353,7 @@ declare class Redshift extends Service {
   /**
    * Returns events related to clusters, security groups, snapshots, and parameter groups for the past 14 days. Events specific to a particular cluster, security group, snapshot or parameter group can be obtained by providing the name as a parameter. By default, the past hour of events are returned.
    */
-  describeEvents(params: Redshift.Types.DescribeEventsMessage, callback?: (err: AWSError, data: Redshift.Types.EventsMessage) => void): Request<Redshift.Types.EventsMessage, AWSError>;
+  describeEvents(params: BoundInput<Redshift.Types.DescribeEventsMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.EventsMessage) => void): Request<Redshift.Types.EventsMessage, AWSError>;
   /**
    * Returns events related to clusters, security groups, snapshots, and parameter groups for the past 14 days. Events specific to a particular cluster, security group, snapshot or parameter group can be obtained by providing the name as a parameter. By default, the past hour of events are returned.
    */
@@ -359,7 +361,7 @@ declare class Redshift extends Service {
   /**
    * Returns information about the specified HSM client certificate. If no certificate ID is specified, returns information about all the HSM certificates owned by your AWS customer account. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM client certificates that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all HSM client certificates that have any combination of those values are returned. If both tag keys and values are omitted from the request, HSM client certificates are returned regardless of whether they have tag keys or values associated with them.
    */
-  describeHsmClientCertificates(params: Redshift.Types.DescribeHsmClientCertificatesMessage, callback?: (err: AWSError, data: Redshift.Types.HsmClientCertificateMessage) => void): Request<Redshift.Types.HsmClientCertificateMessage, AWSError>;
+  describeHsmClientCertificates(params: BoundInput<Redshift.Types.DescribeHsmClientCertificatesMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.HsmClientCertificateMessage) => void): Request<Redshift.Types.HsmClientCertificateMessage, AWSError>;
   /**
    * Returns information about the specified HSM client certificate. If no certificate ID is specified, returns information about all the HSM certificates owned by your AWS customer account. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM client certificates that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all HSM client certificates that have any combination of those values are returned. If both tag keys and values are omitted from the request, HSM client certificates are returned regardless of whether they have tag keys or values associated with them.
    */
@@ -367,7 +369,7 @@ declare class Redshift extends Service {
   /**
    * Returns information about the specified Amazon Redshift HSM configuration. If no configuration ID is specified, returns information about all the HSM configurations owned by your AWS customer account. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM connections that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all HSM connections that have any combination of those values are returned. If both tag keys and values are omitted from the request, HSM connections are returned regardless of whether they have tag keys or values associated with them.
    */
-  describeHsmConfigurations(params: Redshift.Types.DescribeHsmConfigurationsMessage, callback?: (err: AWSError, data: Redshift.Types.HsmConfigurationMessage) => void): Request<Redshift.Types.HsmConfigurationMessage, AWSError>;
+  describeHsmConfigurations(params: BoundInput<Redshift.Types.DescribeHsmConfigurationsMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.HsmConfigurationMessage) => void): Request<Redshift.Types.HsmConfigurationMessage, AWSError>;
   /**
    * Returns information about the specified Amazon Redshift HSM configuration. If no configuration ID is specified, returns information about all the HSM configurations owned by your AWS customer account. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM connections that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all HSM connections that have any combination of those values are returned. If both tag keys and values are omitted from the request, HSM connections are returned regardless of whether they have tag keys or values associated with them.
    */
@@ -375,7 +377,7 @@ declare class Redshift extends Service {
   /**
    * Describes whether information, such as queries and connection attempts, is being logged for the specified Amazon Redshift cluster.
    */
-  describeLoggingStatus(params: Redshift.Types.DescribeLoggingStatusMessage, callback?: (err: AWSError, data: Redshift.Types.LoggingStatus) => void): Request<Redshift.Types.LoggingStatus, AWSError>;
+  describeLoggingStatus(params: BoundInput<Redshift.Types.DescribeLoggingStatusMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.LoggingStatus) => void): Request<Redshift.Types.LoggingStatus, AWSError>;
   /**
    * Describes whether information, such as queries and connection attempts, is being logged for the specified Amazon Redshift cluster.
    */
@@ -383,7 +385,7 @@ declare class Redshift extends Service {
   /**
    * Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific AWS Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
-  describeOrderableClusterOptions(params: Redshift.Types.DescribeOrderableClusterOptionsMessage, callback?: (err: AWSError, data: Redshift.Types.OrderableClusterOptionsMessage) => void): Request<Redshift.Types.OrderableClusterOptionsMessage, AWSError>;
+  describeOrderableClusterOptions(params: BoundInput<Redshift.Types.DescribeOrderableClusterOptionsMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.OrderableClusterOptionsMessage) => void): Request<Redshift.Types.OrderableClusterOptionsMessage, AWSError>;
   /**
    * Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific AWS Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
@@ -391,7 +393,7 @@ declare class Redshift extends Service {
   /**
    * Returns a list of the available reserved node offerings by Amazon Redshift with their descriptions including the node type, the fixed and recurring costs of reserving the node and duration the node will be reserved for you. These descriptions help you determine which reserve node offering you want to purchase. You then use the unique offering ID in you call to PurchaseReservedNodeOffering to reserve one or more nodes for your Amazon Redshift cluster.   For more information about reserved node offerings, go to Purchasing Reserved Nodes in the Amazon Redshift Cluster Management Guide.
    */
-  describeReservedNodeOfferings(params: Redshift.Types.DescribeReservedNodeOfferingsMessage, callback?: (err: AWSError, data: Redshift.Types.ReservedNodeOfferingsMessage) => void): Request<Redshift.Types.ReservedNodeOfferingsMessage, AWSError>;
+  describeReservedNodeOfferings(params: BoundInput<Redshift.Types.DescribeReservedNodeOfferingsMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ReservedNodeOfferingsMessage) => void): Request<Redshift.Types.ReservedNodeOfferingsMessage, AWSError>;
   /**
    * Returns a list of the available reserved node offerings by Amazon Redshift with their descriptions including the node type, the fixed and recurring costs of reserving the node and duration the node will be reserved for you. These descriptions help you determine which reserve node offering you want to purchase. You then use the unique offering ID in you call to PurchaseReservedNodeOffering to reserve one or more nodes for your Amazon Redshift cluster.   For more information about reserved node offerings, go to Purchasing Reserved Nodes in the Amazon Redshift Cluster Management Guide.
    */
@@ -399,7 +401,7 @@ declare class Redshift extends Service {
   /**
    * Returns the descriptions of the reserved nodes.
    */
-  describeReservedNodes(params: Redshift.Types.DescribeReservedNodesMessage, callback?: (err: AWSError, data: Redshift.Types.ReservedNodesMessage) => void): Request<Redshift.Types.ReservedNodesMessage, AWSError>;
+  describeReservedNodes(params: BoundInput<Redshift.Types.DescribeReservedNodesMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ReservedNodesMessage) => void): Request<Redshift.Types.ReservedNodesMessage, AWSError>;
   /**
    * Returns the descriptions of the reserved nodes.
    */
@@ -407,7 +409,7 @@ declare class Redshift extends Service {
   /**
    * Returns information about the last resize operation for the specified cluster. If no resize operation has ever been initiated for the specified cluster, a HTTP 404 error is returned. If a resize operation was initiated and completed, the status of the resize remains as SUCCEEDED until the next resize.  A resize operation can be requested using ModifyCluster and specifying a different number or type of nodes for the cluster. 
    */
-  describeResize(params: Redshift.Types.DescribeResizeMessage, callback?: (err: AWSError, data: Redshift.Types.ResizeProgressMessage) => void): Request<Redshift.Types.ResizeProgressMessage, AWSError>;
+  describeResize(params: BoundInput<Redshift.Types.DescribeResizeMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ResizeProgressMessage) => void): Request<Redshift.Types.ResizeProgressMessage, AWSError>;
   /**
    * Returns information about the last resize operation for the specified cluster. If no resize operation has ever been initiated for the specified cluster, a HTTP 404 error is returned. If a resize operation was initiated and completed, the status of the resize remains as SUCCEEDED until the next resize.  A resize operation can be requested using ModifyCluster and specifying a different number or type of nodes for the cluster. 
    */
@@ -415,7 +417,7 @@ declare class Redshift extends Service {
   /**
    * Returns a list of snapshot copy grants owned by the AWS account in the destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
    */
-  describeSnapshotCopyGrants(params: Redshift.Types.DescribeSnapshotCopyGrantsMessage, callback?: (err: AWSError, data: Redshift.Types.SnapshotCopyGrantMessage) => void): Request<Redshift.Types.SnapshotCopyGrantMessage, AWSError>;
+  describeSnapshotCopyGrants(params: BoundInput<Redshift.Types.DescribeSnapshotCopyGrantsMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.SnapshotCopyGrantMessage) => void): Request<Redshift.Types.SnapshotCopyGrantMessage, AWSError>;
   /**
    * Returns a list of snapshot copy grants owned by the AWS account in the destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
    */
@@ -423,7 +425,7 @@ declare class Redshift extends Service {
   /**
    * Returns a list of snapshot schedules. 
    */
-  describeSnapshotSchedules(params: Redshift.Types.DescribeSnapshotSchedulesMessage, callback?: (err: AWSError, data: Redshift.Types.DescribeSnapshotSchedulesOutputMessage) => void): Request<Redshift.Types.DescribeSnapshotSchedulesOutputMessage, AWSError>;
+  describeSnapshotSchedules(params: BoundInput<Redshift.Types.DescribeSnapshotSchedulesMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.DescribeSnapshotSchedulesOutputMessage) => void): Request<Redshift.Types.DescribeSnapshotSchedulesOutputMessage, AWSError>;
   /**
    * Returns a list of snapshot schedules. 
    */
@@ -435,7 +437,7 @@ declare class Redshift extends Service {
   /**
    * Lists the status of one or more table restore requests made using the RestoreTableFromClusterSnapshot API action. If you don't specify a value for the TableRestoreRequestId parameter, then DescribeTableRestoreStatus returns the status of all table restore requests ordered by the date and time of the request in ascending order. Otherwise DescribeTableRestoreStatus returns the status of the table specified by TableRestoreRequestId.
    */
-  describeTableRestoreStatus(params: Redshift.Types.DescribeTableRestoreStatusMessage, callback?: (err: AWSError, data: Redshift.Types.TableRestoreStatusMessage) => void): Request<Redshift.Types.TableRestoreStatusMessage, AWSError>;
+  describeTableRestoreStatus(params: BoundInput<Redshift.Types.DescribeTableRestoreStatusMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.TableRestoreStatusMessage) => void): Request<Redshift.Types.TableRestoreStatusMessage, AWSError>;
   /**
    * Lists the status of one or more table restore requests made using the RestoreTableFromClusterSnapshot API action. If you don't specify a value for the TableRestoreRequestId parameter, then DescribeTableRestoreStatus returns the status of all table restore requests ordered by the date and time of the request in ascending order. Otherwise DescribeTableRestoreStatus returns the status of the table specified by TableRestoreRequestId.
    */
@@ -443,7 +445,7 @@ declare class Redshift extends Service {
   /**
    * Returns a list of tags. You can return tags from a specific resource by specifying an ARN, or you can return all tags for a given type of resource, such as clusters, snapshots, and so on. The following are limitations for DescribeTags:    You cannot specify an ARN and a resource-type value together in the same request.   You cannot use the MaxRecords and Marker parameters together with the ARN parameter.   The MaxRecords parameter can be a range from 10 to 50 results to return in a request.   If you specify both tag keys and tag values in the same request, Amazon Redshift returns all resources that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all resources that have any combination of those values are returned. If both tag keys and values are omitted from the request, resources are returned regardless of whether they have tag keys or values associated with them.
    */
-  describeTags(params: Redshift.Types.DescribeTagsMessage, callback?: (err: AWSError, data: Redshift.Types.TaggedResourceListMessage) => void): Request<Redshift.Types.TaggedResourceListMessage, AWSError>;
+  describeTags(params: BoundInput<Redshift.Types.DescribeTagsMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.TaggedResourceListMessage) => void): Request<Redshift.Types.TaggedResourceListMessage, AWSError>;
   /**
    * Returns a list of tags. You can return tags from a specific resource by specifying an ARN, or you can return all tags for a given type of resource, such as clusters, snapshots, and so on. The following are limitations for DescribeTags:    You cannot specify an ARN and a resource-type value together in the same request.   You cannot use the MaxRecords and Marker parameters together with the ARN parameter.   The MaxRecords parameter can be a range from 10 to 50 results to return in a request.   If you specify both tag keys and tag values in the same request, Amazon Redshift returns all resources that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all resources that have any combination of those values are returned. If both tag keys and values are omitted from the request, resources are returned regardless of whether they have tag keys or values associated with them.
    */
@@ -451,7 +453,7 @@ declare class Redshift extends Service {
   /**
    * Stops logging information, such as queries and connection attempts, for the specified Amazon Redshift cluster.
    */
-  disableLogging(params: Redshift.Types.DisableLoggingMessage, callback?: (err: AWSError, data: Redshift.Types.LoggingStatus) => void): Request<Redshift.Types.LoggingStatus, AWSError>;
+  disableLogging(params: BoundInput<Redshift.Types.DisableLoggingMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.LoggingStatus) => void): Request<Redshift.Types.LoggingStatus, AWSError>;
   /**
    * Stops logging information, such as queries and connection attempts, for the specified Amazon Redshift cluster.
    */
@@ -459,7 +461,7 @@ declare class Redshift extends Service {
   /**
    * Disables the automatic copying of snapshots from one region to another region for a specified cluster. If your cluster and its snapshots are encrypted using a customer master key (CMK) from AWS KMS, use DeleteSnapshotCopyGrant to delete the grant that grants Amazon Redshift permission to the CMK in the destination region. 
    */
-  disableSnapshotCopy(params: Redshift.Types.DisableSnapshotCopyMessage, callback?: (err: AWSError, data: Redshift.Types.DisableSnapshotCopyResult) => void): Request<Redshift.Types.DisableSnapshotCopyResult, AWSError>;
+  disableSnapshotCopy(params: BoundInput<Redshift.Types.DisableSnapshotCopyMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.DisableSnapshotCopyResult) => void): Request<Redshift.Types.DisableSnapshotCopyResult, AWSError>;
   /**
    * Disables the automatic copying of snapshots from one region to another region for a specified cluster. If your cluster and its snapshots are encrypted using a customer master key (CMK) from AWS KMS, use DeleteSnapshotCopyGrant to delete the grant that grants Amazon Redshift permission to the CMK in the destination region. 
    */
@@ -467,7 +469,7 @@ declare class Redshift extends Service {
   /**
    * Starts logging information, such as queries and connection attempts, for the specified Amazon Redshift cluster.
    */
-  enableLogging(params: Redshift.Types.EnableLoggingMessage, callback?: (err: AWSError, data: Redshift.Types.LoggingStatus) => void): Request<Redshift.Types.LoggingStatus, AWSError>;
+  enableLogging(params: BoundInput<Redshift.Types.EnableLoggingMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.LoggingStatus) => void): Request<Redshift.Types.LoggingStatus, AWSError>;
   /**
    * Starts logging information, such as queries and connection attempts, for the specified Amazon Redshift cluster.
    */
@@ -475,7 +477,7 @@ declare class Redshift extends Service {
   /**
    * Enables the automatic copy of snapshots from one region to another region for a specified cluster.
    */
-  enableSnapshotCopy(params: Redshift.Types.EnableSnapshotCopyMessage, callback?: (err: AWSError, data: Redshift.Types.EnableSnapshotCopyResult) => void): Request<Redshift.Types.EnableSnapshotCopyResult, AWSError>;
+  enableSnapshotCopy(params: BoundInput<Redshift.Types.EnableSnapshotCopyMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.EnableSnapshotCopyResult) => void): Request<Redshift.Types.EnableSnapshotCopyResult, AWSError>;
   /**
    * Enables the automatic copy of snapshots from one region to another region for a specified cluster.
    */
@@ -483,7 +485,7 @@ declare class Redshift extends Service {
   /**
    * Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with IAM: if AutoCreate is False or IAMA: if AutoCreate is True. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see Using IAM Authentication to Generate Database User Credentials in the Amazon Redshift Cluster Management Guide. The AWS Identity and Access Management (IAM)user or role that executes GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see Resource Policies for GetClusterCredentials in the Amazon Redshift Cluster Management Guide. If the DbGroups parameter is specified, the IAM policy must allow the redshift:JoinGroup action with access to the listed dbgroups.  In addition, if the AutoCreate parameter is set to True, then the policy must include the redshift:CreateClusterUser privilege. If the DbName parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name. 
    */
-  getClusterCredentials(params: Redshift.Types.GetClusterCredentialsMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterCredentials) => void): Request<Redshift.Types.ClusterCredentials, AWSError>;
+  getClusterCredentials(params: BoundInput<Redshift.Types.GetClusterCredentialsMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ClusterCredentials) => void): Request<Redshift.Types.ClusterCredentials, AWSError>;
   /**
    * Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with IAM: if AutoCreate is False or IAMA: if AutoCreate is True. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see Using IAM Authentication to Generate Database User Credentials in the Amazon Redshift Cluster Management Guide. The AWS Identity and Access Management (IAM)user or role that executes GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see Resource Policies for GetClusterCredentials in the Amazon Redshift Cluster Management Guide. If the DbGroups parameter is specified, the IAM policy must allow the redshift:JoinGroup action with access to the listed dbgroups.  In addition, if the AutoCreate parameter is set to True, then the policy must include the redshift:CreateClusterUser privilege. If the DbName parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name. 
    */
@@ -491,7 +493,7 @@ declare class Redshift extends Service {
   /**
    * Returns an array of DC2 ReservedNodeOfferings that matches the payment type, term, and usage price of the given DC1 reserved node.
    */
-  getReservedNodeExchangeOfferings(params: Redshift.Types.GetReservedNodeExchangeOfferingsInputMessage, callback?: (err: AWSError, data: Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage) => void): Request<Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage, AWSError>;
+  getReservedNodeExchangeOfferings(params: BoundInput<Redshift.Types.GetReservedNodeExchangeOfferingsInputMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage) => void): Request<Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage, AWSError>;
   /**
    * Returns an array of DC2 ReservedNodeOfferings that matches the payment type, term, and usage price of the given DC1 reserved node.
    */
@@ -499,7 +501,7 @@ declare class Redshift extends Service {
   /**
    * Modifies the settings for a cluster. For example, you can add another security or parameter group, update the preferred maintenance window, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide. You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change.
    */
-  modifyCluster(params: Redshift.Types.ModifyClusterMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterResult) => void): Request<Redshift.Types.ModifyClusterResult, AWSError>;
+  modifyCluster(params: BoundInput<Redshift.Types.ModifyClusterMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterResult) => void): Request<Redshift.Types.ModifyClusterResult, AWSError>;
   /**
    * Modifies the settings for a cluster. For example, you can add another security or parameter group, update the preferred maintenance window, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide. You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change.
    */
@@ -507,7 +509,7 @@ declare class Redshift extends Service {
   /**
    * Modifies the database revision of a cluster. The database revision is a unique revision of the database running in a cluster.
    */
-  modifyClusterDbRevision(params: Redshift.Types.ModifyClusterDbRevisionMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterDbRevisionResult) => void): Request<Redshift.Types.ModifyClusterDbRevisionResult, AWSError>;
+  modifyClusterDbRevision(params: BoundInput<Redshift.Types.ModifyClusterDbRevisionMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterDbRevisionResult) => void): Request<Redshift.Types.ModifyClusterDbRevisionResult, AWSError>;
   /**
    * Modifies the database revision of a cluster. The database revision is a unique revision of the database running in a cluster.
    */
@@ -515,7 +517,7 @@ declare class Redshift extends Service {
   /**
    * Modifies the list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. A cluster can have up to 10 IAM roles associated at any time.
    */
-  modifyClusterIamRoles(params: Redshift.Types.ModifyClusterIamRolesMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterIamRolesResult) => void): Request<Redshift.Types.ModifyClusterIamRolesResult, AWSError>;
+  modifyClusterIamRoles(params: BoundInput<Redshift.Types.ModifyClusterIamRolesMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterIamRolesResult) => void): Request<Redshift.Types.ModifyClusterIamRolesResult, AWSError>;
   /**
    * Modifies the list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. A cluster can have up to 10 IAM roles associated at any time.
    */
@@ -523,7 +525,7 @@ declare class Redshift extends Service {
   /**
    * Modifies the maintenance settings of a cluster. For example, you can defer a maintenance window. You can also update or cancel a deferment. 
    */
-  modifyClusterMaintenance(params: Redshift.Types.ModifyClusterMaintenanceMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterMaintenanceResult) => void): Request<Redshift.Types.ModifyClusterMaintenanceResult, AWSError>;
+  modifyClusterMaintenance(params: BoundInput<Redshift.Types.ModifyClusterMaintenanceMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterMaintenanceResult) => void): Request<Redshift.Types.ModifyClusterMaintenanceResult, AWSError>;
   /**
    * Modifies the maintenance settings of a cluster. For example, you can defer a maintenance window. You can also update or cancel a deferment. 
    */
@@ -531,7 +533,7 @@ declare class Redshift extends Service {
   /**
    * Modifies the parameters of a parameter group.  For more information about parameters and parameter groups, go to Amazon Redshift Parameter Groups in the Amazon Redshift Cluster Management Guide.
    */
-  modifyClusterParameterGroup(params: Redshift.Types.ModifyClusterParameterGroupMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterParameterGroupNameMessage) => void): Request<Redshift.Types.ClusterParameterGroupNameMessage, AWSError>;
+  modifyClusterParameterGroup(params: BoundInput<Redshift.Types.ModifyClusterParameterGroupMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ClusterParameterGroupNameMessage) => void): Request<Redshift.Types.ClusterParameterGroupNameMessage, AWSError>;
   /**
    * Modifies the parameters of a parameter group.  For more information about parameters and parameter groups, go to Amazon Redshift Parameter Groups in the Amazon Redshift Cluster Management Guide.
    */
@@ -539,7 +541,7 @@ declare class Redshift extends Service {
   /**
    * Modifies the settings for a snapshot.
    */
-  modifyClusterSnapshot(params: Redshift.Types.ModifyClusterSnapshotMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterSnapshotResult) => void): Request<Redshift.Types.ModifyClusterSnapshotResult, AWSError>;
+  modifyClusterSnapshot(params: BoundInput<Redshift.Types.ModifyClusterSnapshotMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterSnapshotResult) => void): Request<Redshift.Types.ModifyClusterSnapshotResult, AWSError>;
   /**
    * Modifies the settings for a snapshot.
    */
@@ -547,7 +549,7 @@ declare class Redshift extends Service {
   /**
    * Modifies a snapshot schedule for a cluster.
    */
-  modifyClusterSnapshotSchedule(params: Redshift.Types.ModifyClusterSnapshotScheduleMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  modifyClusterSnapshotSchedule(params: BoundInput<Redshift.Types.ModifyClusterSnapshotScheduleMessage, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Modifies a snapshot schedule for a cluster.
    */
@@ -555,7 +557,7 @@ declare class Redshift extends Service {
   /**
    * Modifies a cluster subnet group to include the specified list of VPC subnets. The operation replaces the existing list of subnets with the new list of subnets.
    */
-  modifyClusterSubnetGroup(params: Redshift.Types.ModifyClusterSubnetGroupMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterSubnetGroupResult) => void): Request<Redshift.Types.ModifyClusterSubnetGroupResult, AWSError>;
+  modifyClusterSubnetGroup(params: BoundInput<Redshift.Types.ModifyClusterSubnetGroupMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterSubnetGroupResult) => void): Request<Redshift.Types.ModifyClusterSubnetGroupResult, AWSError>;
   /**
    * Modifies a cluster subnet group to include the specified list of VPC subnets. The operation replaces the existing list of subnets with the new list of subnets.
    */
@@ -563,7 +565,7 @@ declare class Redshift extends Service {
   /**
    * Modifies an existing Amazon Redshift event notification subscription.
    */
-  modifyEventSubscription(params: Redshift.Types.ModifyEventSubscriptionMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyEventSubscriptionResult) => void): Request<Redshift.Types.ModifyEventSubscriptionResult, AWSError>;
+  modifyEventSubscription(params: BoundInput<Redshift.Types.ModifyEventSubscriptionMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ModifyEventSubscriptionResult) => void): Request<Redshift.Types.ModifyEventSubscriptionResult, AWSError>;
   /**
    * Modifies an existing Amazon Redshift event notification subscription.
    */
@@ -571,7 +573,7 @@ declare class Redshift extends Service {
   /**
    * Modifies the number of days to retain snapshots in the destination AWS Region after they are copied from the source AWS Region. By default, this operation only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots are updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option, only newly copied manual snapshots have the new retention period. 
    */
-  modifySnapshotCopyRetentionPeriod(params: Redshift.Types.ModifySnapshotCopyRetentionPeriodMessage, callback?: (err: AWSError, data: Redshift.Types.ModifySnapshotCopyRetentionPeriodResult) => void): Request<Redshift.Types.ModifySnapshotCopyRetentionPeriodResult, AWSError>;
+  modifySnapshotCopyRetentionPeriod(params: BoundInput<Redshift.Types.ModifySnapshotCopyRetentionPeriodMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ModifySnapshotCopyRetentionPeriodResult) => void): Request<Redshift.Types.ModifySnapshotCopyRetentionPeriodResult, AWSError>;
   /**
    * Modifies the number of days to retain snapshots in the destination AWS Region after they are copied from the source AWS Region. By default, this operation only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots are updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option, only newly copied manual snapshots have the new retention period. 
    */
@@ -579,7 +581,7 @@ declare class Redshift extends Service {
   /**
    * Modifies a snapshot schedule. Any schedule associated with a cluster is modified asynchronously.
    */
-  modifySnapshotSchedule(params: Redshift.Types.ModifySnapshotScheduleMessage, callback?: (err: AWSError, data: Redshift.Types.SnapshotSchedule) => void): Request<Redshift.Types.SnapshotSchedule, AWSError>;
+  modifySnapshotSchedule(params: BoundInput<Redshift.Types.ModifySnapshotScheduleMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.SnapshotSchedule) => void): Request<Redshift.Types.SnapshotSchedule, AWSError>;
   /**
    * Modifies a snapshot schedule. Any schedule associated with a cluster is modified asynchronously.
    */
@@ -587,7 +589,7 @@ declare class Redshift extends Service {
   /**
    * Allows you to purchase reserved nodes. Amazon Redshift offers a predefined set of reserved node offerings. You can purchase one or more of the offerings. You can call the DescribeReservedNodeOfferings API to obtain the available reserved node offerings. You can call this API by providing a specific reserved node offering and the number of nodes you want to reserve.   For more information about reserved node offerings, go to Purchasing Reserved Nodes in the Amazon Redshift Cluster Management Guide.
    */
-  purchaseReservedNodeOffering(params: Redshift.Types.PurchaseReservedNodeOfferingMessage, callback?: (err: AWSError, data: Redshift.Types.PurchaseReservedNodeOfferingResult) => void): Request<Redshift.Types.PurchaseReservedNodeOfferingResult, AWSError>;
+  purchaseReservedNodeOffering(params: BoundInput<Redshift.Types.PurchaseReservedNodeOfferingMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.PurchaseReservedNodeOfferingResult) => void): Request<Redshift.Types.PurchaseReservedNodeOfferingResult, AWSError>;
   /**
    * Allows you to purchase reserved nodes. Amazon Redshift offers a predefined set of reserved node offerings. You can purchase one or more of the offerings. You can call the DescribeReservedNodeOfferings API to obtain the available reserved node offerings. You can call this API by providing a specific reserved node offering and the number of nodes you want to reserve.   For more information about reserved node offerings, go to Purchasing Reserved Nodes in the Amazon Redshift Cluster Management Guide.
    */
@@ -595,7 +597,7 @@ declare class Redshift extends Service {
   /**
    * Reboots a cluster. This action is taken as soon as possible. It results in a momentary outage to the cluster, during which the cluster status is set to rebooting. A cluster event is created when the reboot is completed. Any pending cluster modifications (see ModifyCluster) are applied at this reboot. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide. 
    */
-  rebootCluster(params: Redshift.Types.RebootClusterMessage, callback?: (err: AWSError, data: Redshift.Types.RebootClusterResult) => void): Request<Redshift.Types.RebootClusterResult, AWSError>;
+  rebootCluster(params: BoundInput<Redshift.Types.RebootClusterMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.RebootClusterResult) => void): Request<Redshift.Types.RebootClusterResult, AWSError>;
   /**
    * Reboots a cluster. This action is taken as soon as possible. It results in a momentary outage to the cluster, during which the cluster status is set to rebooting. A cluster event is created when the reboot is completed. Any pending cluster modifications (see ModifyCluster) are applied at this reboot. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide. 
    */
@@ -603,7 +605,7 @@ declare class Redshift extends Service {
   /**
    * Sets one or more parameters of the specified parameter group to their default values and sets the source values of the parameters to "engine-default". To reset the entire parameter group specify the ResetAllParameters parameter. For parameter changes to take effect you must reboot any associated clusters. 
    */
-  resetClusterParameterGroup(params: Redshift.Types.ResetClusterParameterGroupMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterParameterGroupNameMessage) => void): Request<Redshift.Types.ClusterParameterGroupNameMessage, AWSError>;
+  resetClusterParameterGroup(params: BoundInput<Redshift.Types.ResetClusterParameterGroupMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ClusterParameterGroupNameMessage) => void): Request<Redshift.Types.ClusterParameterGroupNameMessage, AWSError>;
   /**
    * Sets one or more parameters of the specified parameter group to their default values and sets the source values of the parameters to "engine-default". To reset the entire parameter group specify the ResetAllParameters parameter. For parameter changes to take effect you must reboot any associated clusters. 
    */
@@ -611,7 +613,7 @@ declare class Redshift extends Service {
   /**
    * Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method.  Elastic resize operations have the following restrictions:   You can only resize clusters of the following types:   dc2.large   dc2.8xlarge   ds2.xlarge   ds2.8xlarge     The type of nodes that you add must match the node type for the cluster.  
    */
-  resizeCluster(params: Redshift.Types.ResizeClusterMessage, callback?: (err: AWSError, data: Redshift.Types.ResizeClusterResult) => void): Request<Redshift.Types.ResizeClusterResult, AWSError>;
+  resizeCluster(params: BoundInput<Redshift.Types.ResizeClusterMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.ResizeClusterResult) => void): Request<Redshift.Types.ResizeClusterResult, AWSError>;
   /**
    * Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method.  Elastic resize operations have the following restrictions:   You can only resize clusters of the following types:   dc2.large   dc2.8xlarge   ds2.xlarge   ds2.8xlarge     The type of nodes that you add must match the node type for the cluster.  
    */
@@ -619,7 +621,7 @@ declare class Redshift extends Service {
   /**
    * Creates a new cluster from a snapshot. By default, Amazon Redshift creates the resulting cluster with the same configuration as the original cluster from which the snapshot was created, except that the new cluster is created with the default cluster security and parameter groups. After Amazon Redshift creates the cluster, you can use the ModifyCluster API to associate a different security group and different parameter group with the restored cluster. If you are using a DS node type, you can also choose to change to another DS node type of the same size during restore. If you restore a cluster into a VPC, you must provide a cluster subnet group where you want the cluster restored.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
-  restoreFromClusterSnapshot(params: Redshift.Types.RestoreFromClusterSnapshotMessage, callback?: (err: AWSError, data: Redshift.Types.RestoreFromClusterSnapshotResult) => void): Request<Redshift.Types.RestoreFromClusterSnapshotResult, AWSError>;
+  restoreFromClusterSnapshot(params: BoundInput<Redshift.Types.RestoreFromClusterSnapshotMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.RestoreFromClusterSnapshotResult) => void): Request<Redshift.Types.RestoreFromClusterSnapshotResult, AWSError>;
   /**
    * Creates a new cluster from a snapshot. By default, Amazon Redshift creates the resulting cluster with the same configuration as the original cluster from which the snapshot was created, except that the new cluster is created with the default cluster security and parameter groups. After Amazon Redshift creates the cluster, you can use the ModifyCluster API to associate a different security group and different parameter group with the restored cluster. If you are using a DS node type, you can also choose to change to another DS node type of the same size during restore. If you restore a cluster into a VPC, you must provide a cluster subnet group where you want the cluster restored.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
@@ -627,7 +629,7 @@ declare class Redshift extends Service {
   /**
    * Creates a new table from a table in an Amazon Redshift cluster snapshot. You must create the new table within the Amazon Redshift cluster that the snapshot was taken from. You cannot use RestoreTableFromClusterSnapshot to restore a table with the same name as an existing table in an Amazon Redshift cluster. That is, you cannot overwrite an existing table in a cluster with a restored table. If you want to replace your original table with a new, restored table, then rename or drop your original table before you call RestoreTableFromClusterSnapshot. When you have renamed your original table, then you can pass the original name of the table as the NewTableName parameter value in the call to RestoreTableFromClusterSnapshot. This way, you can replace the original table with the table created from the snapshot.
    */
-  restoreTableFromClusterSnapshot(params: Redshift.Types.RestoreTableFromClusterSnapshotMessage, callback?: (err: AWSError, data: Redshift.Types.RestoreTableFromClusterSnapshotResult) => void): Request<Redshift.Types.RestoreTableFromClusterSnapshotResult, AWSError>;
+  restoreTableFromClusterSnapshot(params: BoundInput<Redshift.Types.RestoreTableFromClusterSnapshotMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.RestoreTableFromClusterSnapshotResult) => void): Request<Redshift.Types.RestoreTableFromClusterSnapshotResult, AWSError>;
   /**
    * Creates a new table from a table in an Amazon Redshift cluster snapshot. You must create the new table within the Amazon Redshift cluster that the snapshot was taken from. You cannot use RestoreTableFromClusterSnapshot to restore a table with the same name as an existing table in an Amazon Redshift cluster. That is, you cannot overwrite an existing table in a cluster with a restored table. If you want to replace your original table with a new, restored table, then rename or drop your original table before you call RestoreTableFromClusterSnapshot. When you have renamed your original table, then you can pass the original name of the table as the NewTableName parameter value in the call to RestoreTableFromClusterSnapshot. This way, you can replace the original table with the table created from the snapshot.
    */
@@ -635,7 +637,7 @@ declare class Redshift extends Service {
   /**
    * Revokes an ingress rule in an Amazon Redshift security group for a previously authorized IP range or Amazon EC2 security group. To add an ingress rule, see AuthorizeClusterSecurityGroupIngress. For information about managing security groups, go to Amazon Redshift Cluster Security Groups in the Amazon Redshift Cluster Management Guide. 
    */
-  revokeClusterSecurityGroupIngress(params: Redshift.Types.RevokeClusterSecurityGroupIngressMessage, callback?: (err: AWSError, data: Redshift.Types.RevokeClusterSecurityGroupIngressResult) => void): Request<Redshift.Types.RevokeClusterSecurityGroupIngressResult, AWSError>;
+  revokeClusterSecurityGroupIngress(params: BoundInput<Redshift.Types.RevokeClusterSecurityGroupIngressMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.RevokeClusterSecurityGroupIngressResult) => void): Request<Redshift.Types.RevokeClusterSecurityGroupIngressResult, AWSError>;
   /**
    * Revokes an ingress rule in an Amazon Redshift security group for a previously authorized IP range or Amazon EC2 security group. To add an ingress rule, see AuthorizeClusterSecurityGroupIngress. For information about managing security groups, go to Amazon Redshift Cluster Security Groups in the Amazon Redshift Cluster Management Guide. 
    */
@@ -643,7 +645,7 @@ declare class Redshift extends Service {
   /**
    * Removes the ability of the specified AWS customer account to restore the specified snapshot. If the account is currently restoring the snapshot, the restore will run to completion.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
-  revokeSnapshotAccess(params: Redshift.Types.RevokeSnapshotAccessMessage, callback?: (err: AWSError, data: Redshift.Types.RevokeSnapshotAccessResult) => void): Request<Redshift.Types.RevokeSnapshotAccessResult, AWSError>;
+  revokeSnapshotAccess(params: BoundInput<Redshift.Types.RevokeSnapshotAccessMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.RevokeSnapshotAccessResult) => void): Request<Redshift.Types.RevokeSnapshotAccessResult, AWSError>;
   /**
    * Removes the ability of the specified AWS customer account to restore the specified snapshot. If the account is currently restoring the snapshot, the restore will run to completion.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
@@ -651,7 +653,7 @@ declare class Redshift extends Service {
   /**
    * Rotates the encryption keys for a cluster.
    */
-  rotateEncryptionKey(params: Redshift.Types.RotateEncryptionKeyMessage, callback?: (err: AWSError, data: Redshift.Types.RotateEncryptionKeyResult) => void): Request<Redshift.Types.RotateEncryptionKeyResult, AWSError>;
+  rotateEncryptionKey(params: BoundInput<Redshift.Types.RotateEncryptionKeyMessage, keyof Params>, callback?: (err: AWSError, data: Redshift.Types.RotateEncryptionKeyResult) => void): Request<Redshift.Types.RotateEncryptionKeyResult, AWSError>;
   /**
    * Rotates the encryption keys for a cluster.
    */
@@ -3981,7 +3983,8 @@ declare namespace Redshift {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AcceptReservedNodeExchangeInputMessage & AuthorizeClusterSecurityGroupIngressMessage & AuthorizeSnapshotAccessMessage & BatchDeleteClusterSnapshotsRequest & BatchModifyClusterSnapshotsMessage & CancelResizeMessage & CopyClusterSnapshotMessage & CreateClusterMessage & CreateClusterParameterGroupMessage & CreateClusterSecurityGroupMessage & CreateClusterSnapshotMessage & CreateClusterSubnetGroupMessage & CreateEventSubscriptionMessage & CreateHsmClientCertificateMessage & CreateHsmConfigurationMessage & CreateSnapshotCopyGrantMessage & CreateSnapshotScheduleMessage & CreateTagsMessage & DeleteClusterMessage & DeleteClusterParameterGroupMessage & DeleteClusterSecurityGroupMessage & DeleteClusterSnapshotMessage & DeleteClusterSubnetGroupMessage & DeleteEventSubscriptionMessage & DeleteHsmClientCertificateMessage & DeleteHsmConfigurationMessage & DeleteSnapshotCopyGrantMessage & DeleteSnapshotScheduleMessage & DeleteTagsMessage & DescribeAccountAttributesMessage & DescribeClusterDbRevisionsMessage & DescribeClusterParameterGroupsMessage & DescribeClusterParametersMessage & DescribeClusterSecurityGroupsMessage & DescribeClusterSnapshotsMessage & DescribeClusterSubnetGroupsMessage & DescribeClusterTracksMessage & DescribeClusterVersionsMessage & DescribeClustersMessage & DescribeDefaultClusterParametersMessage & DescribeEventCategoriesMessage & DescribeEventSubscriptionsMessage & DescribeEventsMessage & DescribeHsmClientCertificatesMessage & DescribeHsmConfigurationsMessage & DescribeLoggingStatusMessage & DescribeOrderableClusterOptionsMessage & DescribeReservedNodeOfferingsMessage & DescribeReservedNodesMessage & DescribeResizeMessage & DescribeSnapshotCopyGrantsMessage & DescribeSnapshotSchedulesMessage & DescribeTableRestoreStatusMessage & DescribeTagsMessage & DisableLoggingMessage & DisableSnapshotCopyMessage & EnableLoggingMessage & EnableSnapshotCopyMessage & GetClusterCredentialsMessage & GetReservedNodeExchangeOfferingsInputMessage & ModifyClusterMessage & ModifyClusterDbRevisionMessage & ModifyClusterIamRolesMessage & ModifyClusterMaintenanceMessage & ModifyClusterParameterGroupMessage & ModifyClusterSnapshotMessage & ModifyClusterSnapshotScheduleMessage & ModifyClusterSubnetGroupMessage & ModifyEventSubscriptionMessage & ModifySnapshotCopyRetentionPeriodMessage & ModifySnapshotScheduleMessage & PurchaseReservedNodeOfferingMessage & RebootClusterMessage & ResetClusterParameterGroupMessage & ResizeClusterMessage & RestoreFromClusterSnapshotMessage & RestoreTableFromClusterSnapshotMessage & RevokeClusterSecurityGroupIngressMessage & RevokeSnapshotAccessMessage & RotateEncryptionKeyMessage>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the Redshift client.
    */

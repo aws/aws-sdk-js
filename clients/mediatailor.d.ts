@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class MediaTailor extends Service {
+declare class MediaTailor<Params extends MediaTailor.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: MediaTailor.Types.ClientConfiguration)
-  config: Config & MediaTailor.Types.ClientConfiguration;
+  constructor(options?: MediaTailor.Types.ClientConfiguration<Params>)
+  config: Config & MediaTailor.Types.ClientConfiguration<Params>;
   /**
    * Deletes the playback configuration for the specified name. 
    */
-  deletePlaybackConfiguration(params: MediaTailor.Types.DeletePlaybackConfigurationRequest, callback?: (err: AWSError, data: MediaTailor.Types.DeletePlaybackConfigurationResponse) => void): Request<MediaTailor.Types.DeletePlaybackConfigurationResponse, AWSError>;
+  deletePlaybackConfiguration(params: BoundInput<MediaTailor.Types.DeletePlaybackConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: MediaTailor.Types.DeletePlaybackConfigurationResponse) => void): Request<MediaTailor.Types.DeletePlaybackConfigurationResponse, AWSError>;
   /**
    * Deletes the playback configuration for the specified name. 
    */
@@ -22,7 +24,7 @@ declare class MediaTailor extends Service {
   /**
    * Returns the playback configuration for the specified name. 
    */
-  getPlaybackConfiguration(params: MediaTailor.Types.GetPlaybackConfigurationRequest, callback?: (err: AWSError, data: MediaTailor.Types.GetPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.GetPlaybackConfigurationResponse, AWSError>;
+  getPlaybackConfiguration(params: BoundInput<MediaTailor.Types.GetPlaybackConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: MediaTailor.Types.GetPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.GetPlaybackConfigurationResponse, AWSError>;
   /**
    * Returns the playback configuration for the specified name. 
    */
@@ -30,7 +32,7 @@ declare class MediaTailor extends Service {
   /**
    * Returns a list of the playback configurations defined in AWS Elemental MediaTailor. You can specify a maximum number of configurations to return at a time. The default maximum is 50. Results are returned in pagefuls. If MediaTailor has more configurations than the specified maximum, it provides parameters in the response that you can use to retrieve the next pageful. 
    */
-  listPlaybackConfigurations(params: MediaTailor.Types.ListPlaybackConfigurationsRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListPlaybackConfigurationsResponse) => void): Request<MediaTailor.Types.ListPlaybackConfigurationsResponse, AWSError>;
+  listPlaybackConfigurations(params: BoundInput<MediaTailor.Types.ListPlaybackConfigurationsRequest, keyof Params>, callback?: (err: AWSError, data: MediaTailor.Types.ListPlaybackConfigurationsResponse) => void): Request<MediaTailor.Types.ListPlaybackConfigurationsResponse, AWSError>;
   /**
    * Returns a list of the playback configurations defined in AWS Elemental MediaTailor. You can specify a maximum number of configurations to return at a time. The default maximum is 50. Results are returned in pagefuls. If MediaTailor has more configurations than the specified maximum, it provides parameters in the response that you can use to retrieve the next pageful. 
    */
@@ -38,7 +40,7 @@ declare class MediaTailor extends Service {
   /**
    * Returns a list of the tags assigned to the specified playback configuration resource. 
    */
-  listTagsForResource(params: MediaTailor.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListTagsForResourceResponse) => void): Request<MediaTailor.Types.ListTagsForResourceResponse, AWSError>;
+  listTagsForResource(params: BoundInput<MediaTailor.Types.ListTagsForResourceRequest, keyof Params>, callback?: (err: AWSError, data: MediaTailor.Types.ListTagsForResourceResponse) => void): Request<MediaTailor.Types.ListTagsForResourceResponse, AWSError>;
   /**
    * Returns a list of the tags assigned to the specified playback configuration resource. 
    */
@@ -46,7 +48,7 @@ declare class MediaTailor extends Service {
   /**
    * Adds a new playback configuration to AWS Elemental MediaTailor. 
    */
-  putPlaybackConfiguration(params: MediaTailor.Types.PutPlaybackConfigurationRequest, callback?: (err: AWSError, data: MediaTailor.Types.PutPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.PutPlaybackConfigurationResponse, AWSError>;
+  putPlaybackConfiguration(params: BoundInput<MediaTailor.Types.PutPlaybackConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: MediaTailor.Types.PutPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.PutPlaybackConfigurationResponse, AWSError>;
   /**
    * Adds a new playback configuration to AWS Elemental MediaTailor. 
    */
@@ -54,7 +56,7 @@ declare class MediaTailor extends Service {
   /**
    * Adds tags to the specified playback configuration resource. You can specify one or more tags to add. 
    */
-  tagResource(params: MediaTailor.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  tagResource(params: BoundInput<MediaTailor.Types.TagResourceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Adds tags to the specified playback configuration resource. You can specify one or more tags to add. 
    */
@@ -62,7 +64,7 @@ declare class MediaTailor extends Service {
   /**
    * Removes tags from the specified playback configuration resource. You can specify one or more tags to remove. 
    */
-  untagResource(params: MediaTailor.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  untagResource(params: BoundInput<MediaTailor.Types.UntagResourceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes tags from the specified playback configuration resource. You can specify one or more tags to remove. 
    */
@@ -376,7 +378,8 @@ declare namespace MediaTailor {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<DeletePlaybackConfigurationRequest & GetPlaybackConfigurationRequest & ListPlaybackConfigurationsRequest & ListTagsForResourceRequest & PutPlaybackConfigurationRequest & TagResourceRequest & UntagResourceRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the MediaTailor client.
    */

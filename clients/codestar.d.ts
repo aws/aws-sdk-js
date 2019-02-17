@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class CodeStar extends Service {
+declare class CodeStar<Params extends CodeStar.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: CodeStar.Types.ClientConfiguration)
-  config: Config & CodeStar.Types.ClientConfiguration;
+  constructor(options?: CodeStar.Types.ClientConfiguration<Params>)
+  config: Config & CodeStar.Types.ClientConfiguration<Params>;
   /**
    * Adds an IAM user to the team for an AWS CodeStar project.
    */
-  associateTeamMember(params: CodeStar.Types.AssociateTeamMemberRequest, callback?: (err: AWSError, data: CodeStar.Types.AssociateTeamMemberResult) => void): Request<CodeStar.Types.AssociateTeamMemberResult, AWSError>;
+  associateTeamMember(params: BoundInput<CodeStar.Types.AssociateTeamMemberRequest, keyof Params>, callback?: (err: AWSError, data: CodeStar.Types.AssociateTeamMemberResult) => void): Request<CodeStar.Types.AssociateTeamMemberResult, AWSError>;
   /**
    * Adds an IAM user to the team for an AWS CodeStar project.
    */
@@ -22,7 +24,7 @@ declare class CodeStar extends Service {
   /**
    * Creates a project, including project resources. This action creates a project based on a submitted project request. A set of source code files and a toolchain template file can be included with the project request. If these are not provided, an empty project is created.
    */
-  createProject(params: CodeStar.Types.CreateProjectRequest, callback?: (err: AWSError, data: CodeStar.Types.CreateProjectResult) => void): Request<CodeStar.Types.CreateProjectResult, AWSError>;
+  createProject(params: BoundInput<CodeStar.Types.CreateProjectRequest, keyof Params>, callback?: (err: AWSError, data: CodeStar.Types.CreateProjectResult) => void): Request<CodeStar.Types.CreateProjectResult, AWSError>;
   /**
    * Creates a project, including project resources. This action creates a project based on a submitted project request. A set of source code files and a toolchain template file can be included with the project request. If these are not provided, an empty project is created.
    */
@@ -30,7 +32,7 @@ declare class CodeStar extends Service {
   /**
    * Creates a profile for a user that includes user preferences, such as the display name and email address assocciated with the user, in AWS CodeStar. The user profile is not project-specific. Information in the user profile is displayed wherever the user's information appears to other users in AWS CodeStar.
    */
-  createUserProfile(params: CodeStar.Types.CreateUserProfileRequest, callback?: (err: AWSError, data: CodeStar.Types.CreateUserProfileResult) => void): Request<CodeStar.Types.CreateUserProfileResult, AWSError>;
+  createUserProfile(params: BoundInput<CodeStar.Types.CreateUserProfileRequest, keyof Params>, callback?: (err: AWSError, data: CodeStar.Types.CreateUserProfileResult) => void): Request<CodeStar.Types.CreateUserProfileResult, AWSError>;
   /**
    * Creates a profile for a user that includes user preferences, such as the display name and email address assocciated with the user, in AWS CodeStar. The user profile is not project-specific. Information in the user profile is displayed wherever the user's information appears to other users in AWS CodeStar.
    */
@@ -38,7 +40,7 @@ declare class CodeStar extends Service {
   /**
    * Deletes a project, including project resources. Does not delete users associated with the project, but does delete the IAM roles that allowed access to the project.
    */
-  deleteProject(params: CodeStar.Types.DeleteProjectRequest, callback?: (err: AWSError, data: CodeStar.Types.DeleteProjectResult) => void): Request<CodeStar.Types.DeleteProjectResult, AWSError>;
+  deleteProject(params: BoundInput<CodeStar.Types.DeleteProjectRequest, keyof Params>, callback?: (err: AWSError, data: CodeStar.Types.DeleteProjectResult) => void): Request<CodeStar.Types.DeleteProjectResult, AWSError>;
   /**
    * Deletes a project, including project resources. Does not delete users associated with the project, but does delete the IAM roles that allowed access to the project.
    */
@@ -46,7 +48,7 @@ declare class CodeStar extends Service {
   /**
    * Deletes a user profile in AWS CodeStar, including all personal preference data associated with that profile, such as display name and email address. It does not delete the history of that user, for example the history of commits made by that user.
    */
-  deleteUserProfile(params: CodeStar.Types.DeleteUserProfileRequest, callback?: (err: AWSError, data: CodeStar.Types.DeleteUserProfileResult) => void): Request<CodeStar.Types.DeleteUserProfileResult, AWSError>;
+  deleteUserProfile(params: BoundInput<CodeStar.Types.DeleteUserProfileRequest, keyof Params>, callback?: (err: AWSError, data: CodeStar.Types.DeleteUserProfileResult) => void): Request<CodeStar.Types.DeleteUserProfileResult, AWSError>;
   /**
    * Deletes a user profile in AWS CodeStar, including all personal preference data associated with that profile, such as display name and email address. It does not delete the history of that user, for example the history of commits made by that user.
    */
@@ -54,7 +56,7 @@ declare class CodeStar extends Service {
   /**
    * Describes a project and its resources.
    */
-  describeProject(params: CodeStar.Types.DescribeProjectRequest, callback?: (err: AWSError, data: CodeStar.Types.DescribeProjectResult) => void): Request<CodeStar.Types.DescribeProjectResult, AWSError>;
+  describeProject(params: BoundInput<CodeStar.Types.DescribeProjectRequest, keyof Params>, callback?: (err: AWSError, data: CodeStar.Types.DescribeProjectResult) => void): Request<CodeStar.Types.DescribeProjectResult, AWSError>;
   /**
    * Describes a project and its resources.
    */
@@ -62,7 +64,7 @@ declare class CodeStar extends Service {
   /**
    * Describes a user in AWS CodeStar and the user attributes across all projects.
    */
-  describeUserProfile(params: CodeStar.Types.DescribeUserProfileRequest, callback?: (err: AWSError, data: CodeStar.Types.DescribeUserProfileResult) => void): Request<CodeStar.Types.DescribeUserProfileResult, AWSError>;
+  describeUserProfile(params: BoundInput<CodeStar.Types.DescribeUserProfileRequest, keyof Params>, callback?: (err: AWSError, data: CodeStar.Types.DescribeUserProfileResult) => void): Request<CodeStar.Types.DescribeUserProfileResult, AWSError>;
   /**
    * Describes a user in AWS CodeStar and the user attributes across all projects.
    */
@@ -70,7 +72,7 @@ declare class CodeStar extends Service {
   /**
    * Removes a user from a project. Removing a user from a project also removes the IAM policies from that user that allowed access to the project and its resources. Disassociating a team member does not remove that user's profile from AWS CodeStar. It does not remove the user from IAM.
    */
-  disassociateTeamMember(params: CodeStar.Types.DisassociateTeamMemberRequest, callback?: (err: AWSError, data: CodeStar.Types.DisassociateTeamMemberResult) => void): Request<CodeStar.Types.DisassociateTeamMemberResult, AWSError>;
+  disassociateTeamMember(params: BoundInput<CodeStar.Types.DisassociateTeamMemberRequest, keyof Params>, callback?: (err: AWSError, data: CodeStar.Types.DisassociateTeamMemberResult) => void): Request<CodeStar.Types.DisassociateTeamMemberResult, AWSError>;
   /**
    * Removes a user from a project. Removing a user from a project also removes the IAM policies from that user that allowed access to the project and its resources. Disassociating a team member does not remove that user's profile from AWS CodeStar. It does not remove the user from IAM.
    */
@@ -78,7 +80,7 @@ declare class CodeStar extends Service {
   /**
    * Lists all projects in AWS CodeStar associated with your AWS account.
    */
-  listProjects(params: CodeStar.Types.ListProjectsRequest, callback?: (err: AWSError, data: CodeStar.Types.ListProjectsResult) => void): Request<CodeStar.Types.ListProjectsResult, AWSError>;
+  listProjects(params: BoundInput<CodeStar.Types.ListProjectsRequest, keyof Params>, callback?: (err: AWSError, data: CodeStar.Types.ListProjectsResult) => void): Request<CodeStar.Types.ListProjectsResult, AWSError>;
   /**
    * Lists all projects in AWS CodeStar associated with your AWS account.
    */
@@ -86,7 +88,7 @@ declare class CodeStar extends Service {
   /**
    * Lists resources associated with a project in AWS CodeStar.
    */
-  listResources(params: CodeStar.Types.ListResourcesRequest, callback?: (err: AWSError, data: CodeStar.Types.ListResourcesResult) => void): Request<CodeStar.Types.ListResourcesResult, AWSError>;
+  listResources(params: BoundInput<CodeStar.Types.ListResourcesRequest, keyof Params>, callback?: (err: AWSError, data: CodeStar.Types.ListResourcesResult) => void): Request<CodeStar.Types.ListResourcesResult, AWSError>;
   /**
    * Lists resources associated with a project in AWS CodeStar.
    */
@@ -94,7 +96,7 @@ declare class CodeStar extends Service {
   /**
    * Gets the tags for a project.
    */
-  listTagsForProject(params: CodeStar.Types.ListTagsForProjectRequest, callback?: (err: AWSError, data: CodeStar.Types.ListTagsForProjectResult) => void): Request<CodeStar.Types.ListTagsForProjectResult, AWSError>;
+  listTagsForProject(params: BoundInput<CodeStar.Types.ListTagsForProjectRequest, keyof Params>, callback?: (err: AWSError, data: CodeStar.Types.ListTagsForProjectResult) => void): Request<CodeStar.Types.ListTagsForProjectResult, AWSError>;
   /**
    * Gets the tags for a project.
    */
@@ -102,7 +104,7 @@ declare class CodeStar extends Service {
   /**
    * Lists all team members associated with a project.
    */
-  listTeamMembers(params: CodeStar.Types.ListTeamMembersRequest, callback?: (err: AWSError, data: CodeStar.Types.ListTeamMembersResult) => void): Request<CodeStar.Types.ListTeamMembersResult, AWSError>;
+  listTeamMembers(params: BoundInput<CodeStar.Types.ListTeamMembersRequest, keyof Params>, callback?: (err: AWSError, data: CodeStar.Types.ListTeamMembersResult) => void): Request<CodeStar.Types.ListTeamMembersResult, AWSError>;
   /**
    * Lists all team members associated with a project.
    */
@@ -110,7 +112,7 @@ declare class CodeStar extends Service {
   /**
    * Lists all the user profiles configured for your AWS account in AWS CodeStar.
    */
-  listUserProfiles(params: CodeStar.Types.ListUserProfilesRequest, callback?: (err: AWSError, data: CodeStar.Types.ListUserProfilesResult) => void): Request<CodeStar.Types.ListUserProfilesResult, AWSError>;
+  listUserProfiles(params: BoundInput<CodeStar.Types.ListUserProfilesRequest, keyof Params>, callback?: (err: AWSError, data: CodeStar.Types.ListUserProfilesResult) => void): Request<CodeStar.Types.ListUserProfilesResult, AWSError>;
   /**
    * Lists all the user profiles configured for your AWS account in AWS CodeStar.
    */
@@ -118,7 +120,7 @@ declare class CodeStar extends Service {
   /**
    * Adds tags to a project.
    */
-  tagProject(params: CodeStar.Types.TagProjectRequest, callback?: (err: AWSError, data: CodeStar.Types.TagProjectResult) => void): Request<CodeStar.Types.TagProjectResult, AWSError>;
+  tagProject(params: BoundInput<CodeStar.Types.TagProjectRequest, keyof Params>, callback?: (err: AWSError, data: CodeStar.Types.TagProjectResult) => void): Request<CodeStar.Types.TagProjectResult, AWSError>;
   /**
    * Adds tags to a project.
    */
@@ -126,7 +128,7 @@ declare class CodeStar extends Service {
   /**
    * Removes tags from a project.
    */
-  untagProject(params: CodeStar.Types.UntagProjectRequest, callback?: (err: AWSError, data: CodeStar.Types.UntagProjectResult) => void): Request<CodeStar.Types.UntagProjectResult, AWSError>;
+  untagProject(params: BoundInput<CodeStar.Types.UntagProjectRequest, keyof Params>, callback?: (err: AWSError, data: CodeStar.Types.UntagProjectResult) => void): Request<CodeStar.Types.UntagProjectResult, AWSError>;
   /**
    * Removes tags from a project.
    */
@@ -134,7 +136,7 @@ declare class CodeStar extends Service {
   /**
    * Updates a project in AWS CodeStar.
    */
-  updateProject(params: CodeStar.Types.UpdateProjectRequest, callback?: (err: AWSError, data: CodeStar.Types.UpdateProjectResult) => void): Request<CodeStar.Types.UpdateProjectResult, AWSError>;
+  updateProject(params: BoundInput<CodeStar.Types.UpdateProjectRequest, keyof Params>, callback?: (err: AWSError, data: CodeStar.Types.UpdateProjectResult) => void): Request<CodeStar.Types.UpdateProjectResult, AWSError>;
   /**
    * Updates a project in AWS CodeStar.
    */
@@ -142,7 +144,7 @@ declare class CodeStar extends Service {
   /**
    * Updates a team member's attributes in an AWS CodeStar project. For example, you can change a team member's role in the project, or change whether they have remote access to project resources.
    */
-  updateTeamMember(params: CodeStar.Types.UpdateTeamMemberRequest, callback?: (err: AWSError, data: CodeStar.Types.UpdateTeamMemberResult) => void): Request<CodeStar.Types.UpdateTeamMemberResult, AWSError>;
+  updateTeamMember(params: BoundInput<CodeStar.Types.UpdateTeamMemberRequest, keyof Params>, callback?: (err: AWSError, data: CodeStar.Types.UpdateTeamMemberResult) => void): Request<CodeStar.Types.UpdateTeamMemberResult, AWSError>;
   /**
    * Updates a team member's attributes in an AWS CodeStar project. For example, you can change a team member's role in the project, or change whether they have remote access to project resources.
    */
@@ -150,7 +152,7 @@ declare class CodeStar extends Service {
   /**
    * Updates a user's profile in AWS CodeStar. The user profile is not project-specific. Information in the user profile is displayed wherever the user's information appears to other users in AWS CodeStar. 
    */
-  updateUserProfile(params: CodeStar.Types.UpdateUserProfileRequest, callback?: (err: AWSError, data: CodeStar.Types.UpdateUserProfileResult) => void): Request<CodeStar.Types.UpdateUserProfileResult, AWSError>;
+  updateUserProfile(params: BoundInput<CodeStar.Types.UpdateUserProfileRequest, keyof Params>, callback?: (err: AWSError, data: CodeStar.Types.UpdateUserProfileResult) => void): Request<CodeStar.Types.UpdateUserProfileResult, AWSError>;
   /**
    * Updates a user's profile in AWS CodeStar. The user profile is not project-specific. Information in the user profile is displayed wherever the user's information appears to other users in AWS CodeStar. 
    */
@@ -836,7 +838,8 @@ declare namespace CodeStar {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AssociateTeamMemberRequest & CreateProjectRequest & CreateUserProfileRequest & DeleteProjectRequest & DeleteUserProfileRequest & DescribeProjectRequest & DescribeUserProfileRequest & DisassociateTeamMemberRequest & ListProjectsRequest & ListResourcesRequest & ListTagsForProjectRequest & ListTeamMembersRequest & ListUserProfilesRequest & TagProjectRequest & UntagProjectRequest & UpdateProjectRequest & UpdateTeamMemberRequest & UpdateUserProfileRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the CodeStar client.
    */

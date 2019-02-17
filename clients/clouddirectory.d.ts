@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class CloudDirectory extends Service {
+declare class CloudDirectory<Params extends CloudDirectory.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: CloudDirectory.Types.ClientConfiguration)
-  config: Config & CloudDirectory.Types.ClientConfiguration;
+  constructor(options?: CloudDirectory.Types.ClientConfiguration<Params>)
+  config: Config & CloudDirectory.Types.ClientConfiguration<Params>;
   /**
    * Adds a new Facet to an object. An object can have more than one facet applied on it.
    */
-  addFacetToObject(params: CloudDirectory.Types.AddFacetToObjectRequest, callback?: (err: AWSError, data: CloudDirectory.Types.AddFacetToObjectResponse) => void): Request<CloudDirectory.Types.AddFacetToObjectResponse, AWSError>;
+  addFacetToObject(params: BoundInput<CloudDirectory.Types.AddFacetToObjectRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.AddFacetToObjectResponse) => void): Request<CloudDirectory.Types.AddFacetToObjectResponse, AWSError>;
   /**
    * Adds a new Facet to an object. An object can have more than one facet applied on it.
    */
@@ -22,7 +24,7 @@ declare class CloudDirectory extends Service {
   /**
    * Copies the input published schema, at the specified version, into the Directory with the same name and version as that of the published schema.
    */
-  applySchema(params: CloudDirectory.Types.ApplySchemaRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ApplySchemaResponse) => void): Request<CloudDirectory.Types.ApplySchemaResponse, AWSError>;
+  applySchema(params: BoundInput<CloudDirectory.Types.ApplySchemaRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ApplySchemaResponse) => void): Request<CloudDirectory.Types.ApplySchemaResponse, AWSError>;
   /**
    * Copies the input published schema, at the specified version, into the Directory with the same name and version as that of the published schema.
    */
@@ -30,7 +32,7 @@ declare class CloudDirectory extends Service {
   /**
    * Attaches an existing object to another object. An object can be accessed in two ways:   Using the path   Using ObjectIdentifier   
    */
-  attachObject(params: CloudDirectory.Types.AttachObjectRequest, callback?: (err: AWSError, data: CloudDirectory.Types.AttachObjectResponse) => void): Request<CloudDirectory.Types.AttachObjectResponse, AWSError>;
+  attachObject(params: BoundInput<CloudDirectory.Types.AttachObjectRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.AttachObjectResponse) => void): Request<CloudDirectory.Types.AttachObjectResponse, AWSError>;
   /**
    * Attaches an existing object to another object. An object can be accessed in two ways:   Using the path   Using ObjectIdentifier   
    */
@@ -38,7 +40,7 @@ declare class CloudDirectory extends Service {
   /**
    * Attaches a policy object to a regular object. An object can have a limited number of attached policies.
    */
-  attachPolicy(params: CloudDirectory.Types.AttachPolicyRequest, callback?: (err: AWSError, data: CloudDirectory.Types.AttachPolicyResponse) => void): Request<CloudDirectory.Types.AttachPolicyResponse, AWSError>;
+  attachPolicy(params: BoundInput<CloudDirectory.Types.AttachPolicyRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.AttachPolicyResponse) => void): Request<CloudDirectory.Types.AttachPolicyResponse, AWSError>;
   /**
    * Attaches a policy object to a regular object. An object can have a limited number of attached policies.
    */
@@ -46,7 +48,7 @@ declare class CloudDirectory extends Service {
   /**
    * Attaches the specified object to the specified index.
    */
-  attachToIndex(params: CloudDirectory.Types.AttachToIndexRequest, callback?: (err: AWSError, data: CloudDirectory.Types.AttachToIndexResponse) => void): Request<CloudDirectory.Types.AttachToIndexResponse, AWSError>;
+  attachToIndex(params: BoundInput<CloudDirectory.Types.AttachToIndexRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.AttachToIndexResponse) => void): Request<CloudDirectory.Types.AttachToIndexResponse, AWSError>;
   /**
    * Attaches the specified object to the specified index.
    */
@@ -54,7 +56,7 @@ declare class CloudDirectory extends Service {
   /**
    * Attaches a typed link to a specified source and target object. For more information, see Typed Links.
    */
-  attachTypedLink(params: CloudDirectory.Types.AttachTypedLinkRequest, callback?: (err: AWSError, data: CloudDirectory.Types.AttachTypedLinkResponse) => void): Request<CloudDirectory.Types.AttachTypedLinkResponse, AWSError>;
+  attachTypedLink(params: BoundInput<CloudDirectory.Types.AttachTypedLinkRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.AttachTypedLinkResponse) => void): Request<CloudDirectory.Types.AttachTypedLinkResponse, AWSError>;
   /**
    * Attaches a typed link to a specified source and target object. For more information, see Typed Links.
    */
@@ -62,7 +64,7 @@ declare class CloudDirectory extends Service {
   /**
    * Performs all the read operations in a batch. 
    */
-  batchRead(params: CloudDirectory.Types.BatchReadRequest, callback?: (err: AWSError, data: CloudDirectory.Types.BatchReadResponse) => void): Request<CloudDirectory.Types.BatchReadResponse, AWSError>;
+  batchRead(params: BoundInput<CloudDirectory.Types.BatchReadRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.BatchReadResponse) => void): Request<CloudDirectory.Types.BatchReadResponse, AWSError>;
   /**
    * Performs all the read operations in a batch. 
    */
@@ -70,7 +72,7 @@ declare class CloudDirectory extends Service {
   /**
    * Performs all the write operations in a batch. Either all the operations succeed or none.
    */
-  batchWrite(params: CloudDirectory.Types.BatchWriteRequest, callback?: (err: AWSError, data: CloudDirectory.Types.BatchWriteResponse) => void): Request<CloudDirectory.Types.BatchWriteResponse, AWSError>;
+  batchWrite(params: BoundInput<CloudDirectory.Types.BatchWriteRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.BatchWriteResponse) => void): Request<CloudDirectory.Types.BatchWriteResponse, AWSError>;
   /**
    * Performs all the write operations in a batch. Either all the operations succeed or none.
    */
@@ -78,7 +80,7 @@ declare class CloudDirectory extends Service {
   /**
    * Creates a Directory by copying the published schema into the directory. A directory cannot be created without a schema. You can also quickly create a directory using a managed schema, called the QuickStartSchema. For more information, see Managed Schema in the Amazon Cloud Directory Developer Guide.
    */
-  createDirectory(params: CloudDirectory.Types.CreateDirectoryRequest, callback?: (err: AWSError, data: CloudDirectory.Types.CreateDirectoryResponse) => void): Request<CloudDirectory.Types.CreateDirectoryResponse, AWSError>;
+  createDirectory(params: BoundInput<CloudDirectory.Types.CreateDirectoryRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.CreateDirectoryResponse) => void): Request<CloudDirectory.Types.CreateDirectoryResponse, AWSError>;
   /**
    * Creates a Directory by copying the published schema into the directory. A directory cannot be created without a schema. You can also quickly create a directory using a managed schema, called the QuickStartSchema. For more information, see Managed Schema in the Amazon Cloud Directory Developer Guide.
    */
@@ -86,7 +88,7 @@ declare class CloudDirectory extends Service {
   /**
    * Creates a new Facet in a schema. Facet creation is allowed only in development or applied schemas.
    */
-  createFacet(params: CloudDirectory.Types.CreateFacetRequest, callback?: (err: AWSError, data: CloudDirectory.Types.CreateFacetResponse) => void): Request<CloudDirectory.Types.CreateFacetResponse, AWSError>;
+  createFacet(params: BoundInput<CloudDirectory.Types.CreateFacetRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.CreateFacetResponse) => void): Request<CloudDirectory.Types.CreateFacetResponse, AWSError>;
   /**
    * Creates a new Facet in a schema. Facet creation is allowed only in development or applied schemas.
    */
@@ -94,7 +96,7 @@ declare class CloudDirectory extends Service {
   /**
    * Creates an index object. See Indexing and search for more information.
    */
-  createIndex(params: CloudDirectory.Types.CreateIndexRequest, callback?: (err: AWSError, data: CloudDirectory.Types.CreateIndexResponse) => void): Request<CloudDirectory.Types.CreateIndexResponse, AWSError>;
+  createIndex(params: BoundInput<CloudDirectory.Types.CreateIndexRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.CreateIndexResponse) => void): Request<CloudDirectory.Types.CreateIndexResponse, AWSError>;
   /**
    * Creates an index object. See Indexing and search for more information.
    */
@@ -102,7 +104,7 @@ declare class CloudDirectory extends Service {
   /**
    * Creates an object in a Directory. Additionally attaches the object to a parent, if a parent reference and LinkName is specified. An object is simply a collection of Facet attributes. You can also use this API call to create a policy object, if the facet from which you create the object is a policy facet. 
    */
-  createObject(params: CloudDirectory.Types.CreateObjectRequest, callback?: (err: AWSError, data: CloudDirectory.Types.CreateObjectResponse) => void): Request<CloudDirectory.Types.CreateObjectResponse, AWSError>;
+  createObject(params: BoundInput<CloudDirectory.Types.CreateObjectRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.CreateObjectResponse) => void): Request<CloudDirectory.Types.CreateObjectResponse, AWSError>;
   /**
    * Creates an object in a Directory. Additionally attaches the object to a parent, if a parent reference and LinkName is specified. An object is simply a collection of Facet attributes. You can also use this API call to create a policy object, if the facet from which you create the object is a policy facet. 
    */
@@ -110,7 +112,7 @@ declare class CloudDirectory extends Service {
   /**
    * Creates a new schema in a development state. A schema can exist in three phases:    Development: This is a mutable phase of the schema. All new schemas are in the development phase. Once the schema is finalized, it can be published.    Published: Published schemas are immutable and have a version associated with them.    Applied: Applied schemas are mutable in a way that allows you to add new schema facets. You can also add new, nonrequired attributes to existing schema facets. You can apply only published schemas to directories.   
    */
-  createSchema(params: CloudDirectory.Types.CreateSchemaRequest, callback?: (err: AWSError, data: CloudDirectory.Types.CreateSchemaResponse) => void): Request<CloudDirectory.Types.CreateSchemaResponse, AWSError>;
+  createSchema(params: BoundInput<CloudDirectory.Types.CreateSchemaRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.CreateSchemaResponse) => void): Request<CloudDirectory.Types.CreateSchemaResponse, AWSError>;
   /**
    * Creates a new schema in a development state. A schema can exist in three phases:    Development: This is a mutable phase of the schema. All new schemas are in the development phase. Once the schema is finalized, it can be published.    Published: Published schemas are immutable and have a version associated with them.    Applied: Applied schemas are mutable in a way that allows you to add new schema facets. You can also add new, nonrequired attributes to existing schema facets. You can apply only published schemas to directories.   
    */
@@ -118,7 +120,7 @@ declare class CloudDirectory extends Service {
   /**
    * Creates a TypedLinkFacet. For more information, see Typed Links.
    */
-  createTypedLinkFacet(params: CloudDirectory.Types.CreateTypedLinkFacetRequest, callback?: (err: AWSError, data: CloudDirectory.Types.CreateTypedLinkFacetResponse) => void): Request<CloudDirectory.Types.CreateTypedLinkFacetResponse, AWSError>;
+  createTypedLinkFacet(params: BoundInput<CloudDirectory.Types.CreateTypedLinkFacetRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.CreateTypedLinkFacetResponse) => void): Request<CloudDirectory.Types.CreateTypedLinkFacetResponse, AWSError>;
   /**
    * Creates a TypedLinkFacet. For more information, see Typed Links.
    */
@@ -126,7 +128,7 @@ declare class CloudDirectory extends Service {
   /**
    * Deletes a directory. Only disabled directories can be deleted. A deleted directory cannot be undone. Exercise extreme caution when deleting directories.
    */
-  deleteDirectory(params: CloudDirectory.Types.DeleteDirectoryRequest, callback?: (err: AWSError, data: CloudDirectory.Types.DeleteDirectoryResponse) => void): Request<CloudDirectory.Types.DeleteDirectoryResponse, AWSError>;
+  deleteDirectory(params: BoundInput<CloudDirectory.Types.DeleteDirectoryRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.DeleteDirectoryResponse) => void): Request<CloudDirectory.Types.DeleteDirectoryResponse, AWSError>;
   /**
    * Deletes a directory. Only disabled directories can be deleted. A deleted directory cannot be undone. Exercise extreme caution when deleting directories.
    */
@@ -134,7 +136,7 @@ declare class CloudDirectory extends Service {
   /**
    * Deletes a given Facet. All attributes and Rules that are associated with the facet will be deleted. Only development schema facets are allowed deletion.
    */
-  deleteFacet(params: CloudDirectory.Types.DeleteFacetRequest, callback?: (err: AWSError, data: CloudDirectory.Types.DeleteFacetResponse) => void): Request<CloudDirectory.Types.DeleteFacetResponse, AWSError>;
+  deleteFacet(params: BoundInput<CloudDirectory.Types.DeleteFacetRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.DeleteFacetResponse) => void): Request<CloudDirectory.Types.DeleteFacetResponse, AWSError>;
   /**
    * Deletes a given Facet. All attributes and Rules that are associated with the facet will be deleted. Only development schema facets are allowed deletion.
    */
@@ -142,7 +144,7 @@ declare class CloudDirectory extends Service {
   /**
    * Deletes an object and its associated attributes. Only objects with no children and no parents can be deleted. The maximum number of attributes that can be deleted during an object deletion is 30. For more information, see Amazon Cloud Directory Limits.
    */
-  deleteObject(params: CloudDirectory.Types.DeleteObjectRequest, callback?: (err: AWSError, data: CloudDirectory.Types.DeleteObjectResponse) => void): Request<CloudDirectory.Types.DeleteObjectResponse, AWSError>;
+  deleteObject(params: BoundInput<CloudDirectory.Types.DeleteObjectRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.DeleteObjectResponse) => void): Request<CloudDirectory.Types.DeleteObjectResponse, AWSError>;
   /**
    * Deletes an object and its associated attributes. Only objects with no children and no parents can be deleted. The maximum number of attributes that can be deleted during an object deletion is 30. For more information, see Amazon Cloud Directory Limits.
    */
@@ -150,7 +152,7 @@ declare class CloudDirectory extends Service {
   /**
    * Deletes a given schema. Schemas in a development and published state can only be deleted. 
    */
-  deleteSchema(params: CloudDirectory.Types.DeleteSchemaRequest, callback?: (err: AWSError, data: CloudDirectory.Types.DeleteSchemaResponse) => void): Request<CloudDirectory.Types.DeleteSchemaResponse, AWSError>;
+  deleteSchema(params: BoundInput<CloudDirectory.Types.DeleteSchemaRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.DeleteSchemaResponse) => void): Request<CloudDirectory.Types.DeleteSchemaResponse, AWSError>;
   /**
    * Deletes a given schema. Schemas in a development and published state can only be deleted. 
    */
@@ -158,7 +160,7 @@ declare class CloudDirectory extends Service {
   /**
    * Deletes a TypedLinkFacet. For more information, see Typed Links.
    */
-  deleteTypedLinkFacet(params: CloudDirectory.Types.DeleteTypedLinkFacetRequest, callback?: (err: AWSError, data: CloudDirectory.Types.DeleteTypedLinkFacetResponse) => void): Request<CloudDirectory.Types.DeleteTypedLinkFacetResponse, AWSError>;
+  deleteTypedLinkFacet(params: BoundInput<CloudDirectory.Types.DeleteTypedLinkFacetRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.DeleteTypedLinkFacetResponse) => void): Request<CloudDirectory.Types.DeleteTypedLinkFacetResponse, AWSError>;
   /**
    * Deletes a TypedLinkFacet. For more information, see Typed Links.
    */
@@ -166,7 +168,7 @@ declare class CloudDirectory extends Service {
   /**
    * Detaches the specified object from the specified index.
    */
-  detachFromIndex(params: CloudDirectory.Types.DetachFromIndexRequest, callback?: (err: AWSError, data: CloudDirectory.Types.DetachFromIndexResponse) => void): Request<CloudDirectory.Types.DetachFromIndexResponse, AWSError>;
+  detachFromIndex(params: BoundInput<CloudDirectory.Types.DetachFromIndexRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.DetachFromIndexResponse) => void): Request<CloudDirectory.Types.DetachFromIndexResponse, AWSError>;
   /**
    * Detaches the specified object from the specified index.
    */
@@ -174,7 +176,7 @@ declare class CloudDirectory extends Service {
   /**
    * Detaches a given object from the parent object. The object that is to be detached from the parent is specified by the link name.
    */
-  detachObject(params: CloudDirectory.Types.DetachObjectRequest, callback?: (err: AWSError, data: CloudDirectory.Types.DetachObjectResponse) => void): Request<CloudDirectory.Types.DetachObjectResponse, AWSError>;
+  detachObject(params: BoundInput<CloudDirectory.Types.DetachObjectRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.DetachObjectResponse) => void): Request<CloudDirectory.Types.DetachObjectResponse, AWSError>;
   /**
    * Detaches a given object from the parent object. The object that is to be detached from the parent is specified by the link name.
    */
@@ -182,7 +184,7 @@ declare class CloudDirectory extends Service {
   /**
    * Detaches a policy from an object.
    */
-  detachPolicy(params: CloudDirectory.Types.DetachPolicyRequest, callback?: (err: AWSError, data: CloudDirectory.Types.DetachPolicyResponse) => void): Request<CloudDirectory.Types.DetachPolicyResponse, AWSError>;
+  detachPolicy(params: BoundInput<CloudDirectory.Types.DetachPolicyRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.DetachPolicyResponse) => void): Request<CloudDirectory.Types.DetachPolicyResponse, AWSError>;
   /**
    * Detaches a policy from an object.
    */
@@ -190,7 +192,7 @@ declare class CloudDirectory extends Service {
   /**
    * Detaches a typed link from a specified source and target object. For more information, see Typed Links.
    */
-  detachTypedLink(params: CloudDirectory.Types.DetachTypedLinkRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  detachTypedLink(params: BoundInput<CloudDirectory.Types.DetachTypedLinkRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Detaches a typed link from a specified source and target object. For more information, see Typed Links.
    */
@@ -198,7 +200,7 @@ declare class CloudDirectory extends Service {
   /**
    * Disables the specified directory. Disabled directories cannot be read or written to. Only enabled directories can be disabled. Disabled directories may be reenabled.
    */
-  disableDirectory(params: CloudDirectory.Types.DisableDirectoryRequest, callback?: (err: AWSError, data: CloudDirectory.Types.DisableDirectoryResponse) => void): Request<CloudDirectory.Types.DisableDirectoryResponse, AWSError>;
+  disableDirectory(params: BoundInput<CloudDirectory.Types.DisableDirectoryRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.DisableDirectoryResponse) => void): Request<CloudDirectory.Types.DisableDirectoryResponse, AWSError>;
   /**
    * Disables the specified directory. Disabled directories cannot be read or written to. Only enabled directories can be disabled. Disabled directories may be reenabled.
    */
@@ -206,7 +208,7 @@ declare class CloudDirectory extends Service {
   /**
    * Enables the specified directory. Only disabled directories can be enabled. Once enabled, the directory can then be read and written to.
    */
-  enableDirectory(params: CloudDirectory.Types.EnableDirectoryRequest, callback?: (err: AWSError, data: CloudDirectory.Types.EnableDirectoryResponse) => void): Request<CloudDirectory.Types.EnableDirectoryResponse, AWSError>;
+  enableDirectory(params: BoundInput<CloudDirectory.Types.EnableDirectoryRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.EnableDirectoryResponse) => void): Request<CloudDirectory.Types.EnableDirectoryResponse, AWSError>;
   /**
    * Enables the specified directory. Only disabled directories can be enabled. Once enabled, the directory can then be read and written to.
    */
@@ -214,7 +216,7 @@ declare class CloudDirectory extends Service {
   /**
    * Returns current applied schema version ARN, including the minor version in use.
    */
-  getAppliedSchemaVersion(params: CloudDirectory.Types.GetAppliedSchemaVersionRequest, callback?: (err: AWSError, data: CloudDirectory.Types.GetAppliedSchemaVersionResponse) => void): Request<CloudDirectory.Types.GetAppliedSchemaVersionResponse, AWSError>;
+  getAppliedSchemaVersion(params: BoundInput<CloudDirectory.Types.GetAppliedSchemaVersionRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.GetAppliedSchemaVersionResponse) => void): Request<CloudDirectory.Types.GetAppliedSchemaVersionResponse, AWSError>;
   /**
    * Returns current applied schema version ARN, including the minor version in use.
    */
@@ -222,7 +224,7 @@ declare class CloudDirectory extends Service {
   /**
    * Retrieves metadata about a directory.
    */
-  getDirectory(params: CloudDirectory.Types.GetDirectoryRequest, callback?: (err: AWSError, data: CloudDirectory.Types.GetDirectoryResponse) => void): Request<CloudDirectory.Types.GetDirectoryResponse, AWSError>;
+  getDirectory(params: BoundInput<CloudDirectory.Types.GetDirectoryRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.GetDirectoryResponse) => void): Request<CloudDirectory.Types.GetDirectoryResponse, AWSError>;
   /**
    * Retrieves metadata about a directory.
    */
@@ -230,7 +232,7 @@ declare class CloudDirectory extends Service {
   /**
    * Gets details of the Facet, such as facet name, attributes, Rules, or ObjectType. You can call this on all kinds of schema facets -- published, development, or applied.
    */
-  getFacet(params: CloudDirectory.Types.GetFacetRequest, callback?: (err: AWSError, data: CloudDirectory.Types.GetFacetResponse) => void): Request<CloudDirectory.Types.GetFacetResponse, AWSError>;
+  getFacet(params: BoundInput<CloudDirectory.Types.GetFacetRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.GetFacetResponse) => void): Request<CloudDirectory.Types.GetFacetResponse, AWSError>;
   /**
    * Gets details of the Facet, such as facet name, attributes, Rules, or ObjectType. You can call this on all kinds of schema facets -- published, development, or applied.
    */
@@ -238,7 +240,7 @@ declare class CloudDirectory extends Service {
   /**
    * Retrieves attributes that are associated with a typed link.
    */
-  getLinkAttributes(params: CloudDirectory.Types.GetLinkAttributesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.GetLinkAttributesResponse) => void): Request<CloudDirectory.Types.GetLinkAttributesResponse, AWSError>;
+  getLinkAttributes(params: BoundInput<CloudDirectory.Types.GetLinkAttributesRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.GetLinkAttributesResponse) => void): Request<CloudDirectory.Types.GetLinkAttributesResponse, AWSError>;
   /**
    * Retrieves attributes that are associated with a typed link.
    */
@@ -246,7 +248,7 @@ declare class CloudDirectory extends Service {
   /**
    * Retrieves attributes within a facet that are associated with an object.
    */
-  getObjectAttributes(params: CloudDirectory.Types.GetObjectAttributesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.GetObjectAttributesResponse) => void): Request<CloudDirectory.Types.GetObjectAttributesResponse, AWSError>;
+  getObjectAttributes(params: BoundInput<CloudDirectory.Types.GetObjectAttributesRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.GetObjectAttributesResponse) => void): Request<CloudDirectory.Types.GetObjectAttributesResponse, AWSError>;
   /**
    * Retrieves attributes within a facet that are associated with an object.
    */
@@ -254,7 +256,7 @@ declare class CloudDirectory extends Service {
   /**
    * Retrieves metadata about an object.
    */
-  getObjectInformation(params: CloudDirectory.Types.GetObjectInformationRequest, callback?: (err: AWSError, data: CloudDirectory.Types.GetObjectInformationResponse) => void): Request<CloudDirectory.Types.GetObjectInformationResponse, AWSError>;
+  getObjectInformation(params: BoundInput<CloudDirectory.Types.GetObjectInformationRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.GetObjectInformationResponse) => void): Request<CloudDirectory.Types.GetObjectInformationResponse, AWSError>;
   /**
    * Retrieves metadata about an object.
    */
@@ -262,7 +264,7 @@ declare class CloudDirectory extends Service {
   /**
    * Retrieves a JSON representation of the schema. See JSON Schema Format for more information.
    */
-  getSchemaAsJson(params: CloudDirectory.Types.GetSchemaAsJsonRequest, callback?: (err: AWSError, data: CloudDirectory.Types.GetSchemaAsJsonResponse) => void): Request<CloudDirectory.Types.GetSchemaAsJsonResponse, AWSError>;
+  getSchemaAsJson(params: BoundInput<CloudDirectory.Types.GetSchemaAsJsonRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.GetSchemaAsJsonResponse) => void): Request<CloudDirectory.Types.GetSchemaAsJsonResponse, AWSError>;
   /**
    * Retrieves a JSON representation of the schema. See JSON Schema Format for more information.
    */
@@ -270,7 +272,7 @@ declare class CloudDirectory extends Service {
   /**
    * Returns the identity attribute order for a specific TypedLinkFacet. For more information, see Typed Links.
    */
-  getTypedLinkFacetInformation(params: CloudDirectory.Types.GetTypedLinkFacetInformationRequest, callback?: (err: AWSError, data: CloudDirectory.Types.GetTypedLinkFacetInformationResponse) => void): Request<CloudDirectory.Types.GetTypedLinkFacetInformationResponse, AWSError>;
+  getTypedLinkFacetInformation(params: BoundInput<CloudDirectory.Types.GetTypedLinkFacetInformationRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.GetTypedLinkFacetInformationResponse) => void): Request<CloudDirectory.Types.GetTypedLinkFacetInformationResponse, AWSError>;
   /**
    * Returns the identity attribute order for a specific TypedLinkFacet. For more information, see Typed Links.
    */
@@ -278,7 +280,7 @@ declare class CloudDirectory extends Service {
   /**
    * Lists schema major versions applied to a directory. If SchemaArn is provided, lists the minor version.
    */
-  listAppliedSchemaArns(params: CloudDirectory.Types.ListAppliedSchemaArnsRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListAppliedSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListAppliedSchemaArnsResponse, AWSError>;
+  listAppliedSchemaArns(params: BoundInput<CloudDirectory.Types.ListAppliedSchemaArnsRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ListAppliedSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListAppliedSchemaArnsResponse, AWSError>;
   /**
    * Lists schema major versions applied to a directory. If SchemaArn is provided, lists the minor version.
    */
@@ -286,7 +288,7 @@ declare class CloudDirectory extends Service {
   /**
    * Lists indices attached to the specified object.
    */
-  listAttachedIndices(params: CloudDirectory.Types.ListAttachedIndicesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListAttachedIndicesResponse) => void): Request<CloudDirectory.Types.ListAttachedIndicesResponse, AWSError>;
+  listAttachedIndices(params: BoundInput<CloudDirectory.Types.ListAttachedIndicesRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ListAttachedIndicesResponse) => void): Request<CloudDirectory.Types.ListAttachedIndicesResponse, AWSError>;
   /**
    * Lists indices attached to the specified object.
    */
@@ -294,7 +296,7 @@ declare class CloudDirectory extends Service {
   /**
    * Retrieves each Amazon Resource Name (ARN) of schemas in the development state.
    */
-  listDevelopmentSchemaArns(params: CloudDirectory.Types.ListDevelopmentSchemaArnsRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListDevelopmentSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListDevelopmentSchemaArnsResponse, AWSError>;
+  listDevelopmentSchemaArns(params: BoundInput<CloudDirectory.Types.ListDevelopmentSchemaArnsRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ListDevelopmentSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListDevelopmentSchemaArnsResponse, AWSError>;
   /**
    * Retrieves each Amazon Resource Name (ARN) of schemas in the development state.
    */
@@ -302,7 +304,7 @@ declare class CloudDirectory extends Service {
   /**
    * Lists directories created within an account.
    */
-  listDirectories(params: CloudDirectory.Types.ListDirectoriesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListDirectoriesResponse) => void): Request<CloudDirectory.Types.ListDirectoriesResponse, AWSError>;
+  listDirectories(params: BoundInput<CloudDirectory.Types.ListDirectoriesRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ListDirectoriesResponse) => void): Request<CloudDirectory.Types.ListDirectoriesResponse, AWSError>;
   /**
    * Lists directories created within an account.
    */
@@ -310,7 +312,7 @@ declare class CloudDirectory extends Service {
   /**
    * Retrieves attributes attached to the facet.
    */
-  listFacetAttributes(params: CloudDirectory.Types.ListFacetAttributesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListFacetAttributesResponse) => void): Request<CloudDirectory.Types.ListFacetAttributesResponse, AWSError>;
+  listFacetAttributes(params: BoundInput<CloudDirectory.Types.ListFacetAttributesRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ListFacetAttributesResponse) => void): Request<CloudDirectory.Types.ListFacetAttributesResponse, AWSError>;
   /**
    * Retrieves attributes attached to the facet.
    */
@@ -318,7 +320,7 @@ declare class CloudDirectory extends Service {
   /**
    * Retrieves the names of facets that exist in a schema.
    */
-  listFacetNames(params: CloudDirectory.Types.ListFacetNamesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListFacetNamesResponse) => void): Request<CloudDirectory.Types.ListFacetNamesResponse, AWSError>;
+  listFacetNames(params: BoundInput<CloudDirectory.Types.ListFacetNamesRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ListFacetNamesResponse) => void): Request<CloudDirectory.Types.ListFacetNamesResponse, AWSError>;
   /**
    * Retrieves the names of facets that exist in a schema.
    */
@@ -326,7 +328,7 @@ declare class CloudDirectory extends Service {
   /**
    * Returns a paginated list of all the incoming TypedLinkSpecifier information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see Typed Links.
    */
-  listIncomingTypedLinks(params: CloudDirectory.Types.ListIncomingTypedLinksRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListIncomingTypedLinksResponse) => void): Request<CloudDirectory.Types.ListIncomingTypedLinksResponse, AWSError>;
+  listIncomingTypedLinks(params: BoundInput<CloudDirectory.Types.ListIncomingTypedLinksRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ListIncomingTypedLinksResponse) => void): Request<CloudDirectory.Types.ListIncomingTypedLinksResponse, AWSError>;
   /**
    * Returns a paginated list of all the incoming TypedLinkSpecifier information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see Typed Links.
    */
@@ -334,7 +336,7 @@ declare class CloudDirectory extends Service {
   /**
    * Lists objects attached to the specified index.
    */
-  listIndex(params: CloudDirectory.Types.ListIndexRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListIndexResponse) => void): Request<CloudDirectory.Types.ListIndexResponse, AWSError>;
+  listIndex(params: BoundInput<CloudDirectory.Types.ListIndexRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ListIndexResponse) => void): Request<CloudDirectory.Types.ListIndexResponse, AWSError>;
   /**
    * Lists objects attached to the specified index.
    */
@@ -342,7 +344,7 @@ declare class CloudDirectory extends Service {
   /**
    * Lists the major version families of each managed schema. If a major version ARN is provided as SchemaArn, the minor version revisions in that family are listed instead.
    */
-  listManagedSchemaArns(params: CloudDirectory.Types.ListManagedSchemaArnsRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListManagedSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListManagedSchemaArnsResponse, AWSError>;
+  listManagedSchemaArns(params: BoundInput<CloudDirectory.Types.ListManagedSchemaArnsRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ListManagedSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListManagedSchemaArnsResponse, AWSError>;
   /**
    * Lists the major version families of each managed schema. If a major version ARN is provided as SchemaArn, the minor version revisions in that family are listed instead.
    */
@@ -350,7 +352,7 @@ declare class CloudDirectory extends Service {
   /**
    * Lists all attributes that are associated with an object. 
    */
-  listObjectAttributes(params: CloudDirectory.Types.ListObjectAttributesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectAttributesResponse) => void): Request<CloudDirectory.Types.ListObjectAttributesResponse, AWSError>;
+  listObjectAttributes(params: BoundInput<CloudDirectory.Types.ListObjectAttributesRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectAttributesResponse) => void): Request<CloudDirectory.Types.ListObjectAttributesResponse, AWSError>;
   /**
    * Lists all attributes that are associated with an object. 
    */
@@ -358,7 +360,7 @@ declare class CloudDirectory extends Service {
   /**
    * Returns a paginated list of child objects that are associated with a given object.
    */
-  listObjectChildren(params: CloudDirectory.Types.ListObjectChildrenRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectChildrenResponse) => void): Request<CloudDirectory.Types.ListObjectChildrenResponse, AWSError>;
+  listObjectChildren(params: BoundInput<CloudDirectory.Types.ListObjectChildrenRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectChildrenResponse) => void): Request<CloudDirectory.Types.ListObjectChildrenResponse, AWSError>;
   /**
    * Returns a paginated list of child objects that are associated with a given object.
    */
@@ -366,7 +368,7 @@ declare class CloudDirectory extends Service {
   /**
    * Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see Directory Structure. Use this API to evaluate all parents for an object. The call returns all objects from the root of the directory up to the requested object. The API returns the number of paths based on user-defined MaxResults, in case there are multiple paths to the parent. The order of the paths and nodes returned is consistent among multiple API calls unless the objects are deleted or moved. Paths not leading to the directory root are ignored from the target object.
    */
-  listObjectParentPaths(params: CloudDirectory.Types.ListObjectParentPathsRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectParentPathsResponse) => void): Request<CloudDirectory.Types.ListObjectParentPathsResponse, AWSError>;
+  listObjectParentPaths(params: BoundInput<CloudDirectory.Types.ListObjectParentPathsRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectParentPathsResponse) => void): Request<CloudDirectory.Types.ListObjectParentPathsResponse, AWSError>;
   /**
    * Retrieves all available parent paths for any object type such as node, leaf node, policy node, and index node objects. For more information about objects, see Directory Structure. Use this API to evaluate all parents for an object. The call returns all objects from the root of the directory up to the requested object. The API returns the number of paths based on user-defined MaxResults, in case there are multiple paths to the parent. The order of the paths and nodes returned is consistent among multiple API calls unless the objects are deleted or moved. Paths not leading to the directory root are ignored from the target object.
    */
@@ -374,7 +376,7 @@ declare class CloudDirectory extends Service {
   /**
    * Lists parent objects that are associated with a given object in pagination fashion.
    */
-  listObjectParents(params: CloudDirectory.Types.ListObjectParentsRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectParentsResponse) => void): Request<CloudDirectory.Types.ListObjectParentsResponse, AWSError>;
+  listObjectParents(params: BoundInput<CloudDirectory.Types.ListObjectParentsRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectParentsResponse) => void): Request<CloudDirectory.Types.ListObjectParentsResponse, AWSError>;
   /**
    * Lists parent objects that are associated with a given object in pagination fashion.
    */
@@ -382,7 +384,7 @@ declare class CloudDirectory extends Service {
   /**
    * Returns policies attached to an object in pagination fashion.
    */
-  listObjectPolicies(params: CloudDirectory.Types.ListObjectPoliciesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectPoliciesResponse) => void): Request<CloudDirectory.Types.ListObjectPoliciesResponse, AWSError>;
+  listObjectPolicies(params: BoundInput<CloudDirectory.Types.ListObjectPoliciesRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ListObjectPoliciesResponse) => void): Request<CloudDirectory.Types.ListObjectPoliciesResponse, AWSError>;
   /**
    * Returns policies attached to an object in pagination fashion.
    */
@@ -390,7 +392,7 @@ declare class CloudDirectory extends Service {
   /**
    * Returns a paginated list of all the outgoing TypedLinkSpecifier information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see Typed Links.
    */
-  listOutgoingTypedLinks(params: CloudDirectory.Types.ListOutgoingTypedLinksRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListOutgoingTypedLinksResponse) => void): Request<CloudDirectory.Types.ListOutgoingTypedLinksResponse, AWSError>;
+  listOutgoingTypedLinks(params: BoundInput<CloudDirectory.Types.ListOutgoingTypedLinksRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ListOutgoingTypedLinksResponse) => void): Request<CloudDirectory.Types.ListOutgoingTypedLinksResponse, AWSError>;
   /**
    * Returns a paginated list of all the outgoing TypedLinkSpecifier information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see Typed Links.
    */
@@ -398,7 +400,7 @@ declare class CloudDirectory extends Service {
   /**
    * Returns all of the ObjectIdentifiers to which a given policy is attached.
    */
-  listPolicyAttachments(params: CloudDirectory.Types.ListPolicyAttachmentsRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListPolicyAttachmentsResponse) => void): Request<CloudDirectory.Types.ListPolicyAttachmentsResponse, AWSError>;
+  listPolicyAttachments(params: BoundInput<CloudDirectory.Types.ListPolicyAttachmentsRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ListPolicyAttachmentsResponse) => void): Request<CloudDirectory.Types.ListPolicyAttachmentsResponse, AWSError>;
   /**
    * Returns all of the ObjectIdentifiers to which a given policy is attached.
    */
@@ -406,7 +408,7 @@ declare class CloudDirectory extends Service {
   /**
    * Lists the major version families of each published schema. If a major version ARN is provided as SchemaArn, the minor version revisions in that family are listed instead.
    */
-  listPublishedSchemaArns(params: CloudDirectory.Types.ListPublishedSchemaArnsRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListPublishedSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListPublishedSchemaArnsResponse, AWSError>;
+  listPublishedSchemaArns(params: BoundInput<CloudDirectory.Types.ListPublishedSchemaArnsRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ListPublishedSchemaArnsResponse) => void): Request<CloudDirectory.Types.ListPublishedSchemaArnsResponse, AWSError>;
   /**
    * Lists the major version families of each published schema. If a major version ARN is provided as SchemaArn, the minor version revisions in that family are listed instead.
    */
@@ -414,7 +416,7 @@ declare class CloudDirectory extends Service {
   /**
    * Returns tags for a resource. Tagging is currently supported only for directories with a limit of 50 tags per directory. All 50 tags are returned for a given directory with this API call.
    */
-  listTagsForResource(params: CloudDirectory.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListTagsForResourceResponse) => void): Request<CloudDirectory.Types.ListTagsForResourceResponse, AWSError>;
+  listTagsForResource(params: BoundInput<CloudDirectory.Types.ListTagsForResourceRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ListTagsForResourceResponse) => void): Request<CloudDirectory.Types.ListTagsForResourceResponse, AWSError>;
   /**
    * Returns tags for a resource. Tagging is currently supported only for directories with a limit of 50 tags per directory. All 50 tags are returned for a given directory with this API call.
    */
@@ -422,7 +424,7 @@ declare class CloudDirectory extends Service {
   /**
    * Returns a paginated list of all attribute definitions for a particular TypedLinkFacet. For more information, see Typed Links.
    */
-  listTypedLinkFacetAttributes(params: CloudDirectory.Types.ListTypedLinkFacetAttributesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListTypedLinkFacetAttributesResponse) => void): Request<CloudDirectory.Types.ListTypedLinkFacetAttributesResponse, AWSError>;
+  listTypedLinkFacetAttributes(params: BoundInput<CloudDirectory.Types.ListTypedLinkFacetAttributesRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ListTypedLinkFacetAttributesResponse) => void): Request<CloudDirectory.Types.ListTypedLinkFacetAttributesResponse, AWSError>;
   /**
    * Returns a paginated list of all attribute definitions for a particular TypedLinkFacet. For more information, see Typed Links.
    */
@@ -430,7 +432,7 @@ declare class CloudDirectory extends Service {
   /**
    * Returns a paginated list of TypedLink facet names for a particular schema. For more information, see Typed Links.
    */
-  listTypedLinkFacetNames(params: CloudDirectory.Types.ListTypedLinkFacetNamesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.ListTypedLinkFacetNamesResponse) => void): Request<CloudDirectory.Types.ListTypedLinkFacetNamesResponse, AWSError>;
+  listTypedLinkFacetNames(params: BoundInput<CloudDirectory.Types.ListTypedLinkFacetNamesRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.ListTypedLinkFacetNamesResponse) => void): Request<CloudDirectory.Types.ListTypedLinkFacetNamesResponse, AWSError>;
   /**
    * Returns a paginated list of TypedLink facet names for a particular schema. For more information, see Typed Links.
    */
@@ -438,7 +440,7 @@ declare class CloudDirectory extends Service {
   /**
    * Lists all policies from the root of the Directory to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don't have the policies attached, it returns the ObjectIdentifier for such objects. If policies are present, it returns ObjectIdentifier, policyId, and policyType. Paths that don't lead to the root from the target object are ignored. For more information, see Policies.
    */
-  lookupPolicy(params: CloudDirectory.Types.LookupPolicyRequest, callback?: (err: AWSError, data: CloudDirectory.Types.LookupPolicyResponse) => void): Request<CloudDirectory.Types.LookupPolicyResponse, AWSError>;
+  lookupPolicy(params: BoundInput<CloudDirectory.Types.LookupPolicyRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.LookupPolicyResponse) => void): Request<CloudDirectory.Types.LookupPolicyResponse, AWSError>;
   /**
    * Lists all policies from the root of the Directory to the object specified. If there are no policies present, an empty list is returned. If policies are present, and if some objects don't have the policies attached, it returns the ObjectIdentifier for such objects. If policies are present, it returns ObjectIdentifier, policyId, and policyType. Paths that don't lead to the root from the target object are ignored. For more information, see Policies.
    */
@@ -446,7 +448,7 @@ declare class CloudDirectory extends Service {
   /**
    * Publishes a development schema with a major version and a recommended minor version.
    */
-  publishSchema(params: CloudDirectory.Types.PublishSchemaRequest, callback?: (err: AWSError, data: CloudDirectory.Types.PublishSchemaResponse) => void): Request<CloudDirectory.Types.PublishSchemaResponse, AWSError>;
+  publishSchema(params: BoundInput<CloudDirectory.Types.PublishSchemaRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.PublishSchemaResponse) => void): Request<CloudDirectory.Types.PublishSchemaResponse, AWSError>;
   /**
    * Publishes a development schema with a major version and a recommended minor version.
    */
@@ -454,7 +456,7 @@ declare class CloudDirectory extends Service {
   /**
    * Allows a schema to be updated using JSON upload. Only available for development schemas. See JSON Schema Format for more information.
    */
-  putSchemaFromJson(params: CloudDirectory.Types.PutSchemaFromJsonRequest, callback?: (err: AWSError, data: CloudDirectory.Types.PutSchemaFromJsonResponse) => void): Request<CloudDirectory.Types.PutSchemaFromJsonResponse, AWSError>;
+  putSchemaFromJson(params: BoundInput<CloudDirectory.Types.PutSchemaFromJsonRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.PutSchemaFromJsonResponse) => void): Request<CloudDirectory.Types.PutSchemaFromJsonResponse, AWSError>;
   /**
    * Allows a schema to be updated using JSON upload. Only available for development schemas. See JSON Schema Format for more information.
    */
@@ -462,7 +464,7 @@ declare class CloudDirectory extends Service {
   /**
    * Removes the specified facet from the specified object.
    */
-  removeFacetFromObject(params: CloudDirectory.Types.RemoveFacetFromObjectRequest, callback?: (err: AWSError, data: CloudDirectory.Types.RemoveFacetFromObjectResponse) => void): Request<CloudDirectory.Types.RemoveFacetFromObjectResponse, AWSError>;
+  removeFacetFromObject(params: BoundInput<CloudDirectory.Types.RemoveFacetFromObjectRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.RemoveFacetFromObjectResponse) => void): Request<CloudDirectory.Types.RemoveFacetFromObjectResponse, AWSError>;
   /**
    * Removes the specified facet from the specified object.
    */
@@ -470,7 +472,7 @@ declare class CloudDirectory extends Service {
   /**
    * An API operation for adding tags to a resource.
    */
-  tagResource(params: CloudDirectory.Types.TagResourceRequest, callback?: (err: AWSError, data: CloudDirectory.Types.TagResourceResponse) => void): Request<CloudDirectory.Types.TagResourceResponse, AWSError>;
+  tagResource(params: BoundInput<CloudDirectory.Types.TagResourceRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.TagResourceResponse) => void): Request<CloudDirectory.Types.TagResourceResponse, AWSError>;
   /**
    * An API operation for adding tags to a resource.
    */
@@ -478,7 +480,7 @@ declare class CloudDirectory extends Service {
   /**
    * An API operation for removing tags from a resource.
    */
-  untagResource(params: CloudDirectory.Types.UntagResourceRequest, callback?: (err: AWSError, data: CloudDirectory.Types.UntagResourceResponse) => void): Request<CloudDirectory.Types.UntagResourceResponse, AWSError>;
+  untagResource(params: BoundInput<CloudDirectory.Types.UntagResourceRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.UntagResourceResponse) => void): Request<CloudDirectory.Types.UntagResourceResponse, AWSError>;
   /**
    * An API operation for removing tags from a resource.
    */
@@ -486,7 +488,7 @@ declare class CloudDirectory extends Service {
   /**
    * Does the following:   Adds new Attributes, Rules, or ObjectTypes.   Updates existing Attributes, Rules, or ObjectTypes.   Deletes existing Attributes, Rules, or ObjectTypes.  
    */
-  updateFacet(params: CloudDirectory.Types.UpdateFacetRequest, callback?: (err: AWSError, data: CloudDirectory.Types.UpdateFacetResponse) => void): Request<CloudDirectory.Types.UpdateFacetResponse, AWSError>;
+  updateFacet(params: BoundInput<CloudDirectory.Types.UpdateFacetRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.UpdateFacetResponse) => void): Request<CloudDirectory.Types.UpdateFacetResponse, AWSError>;
   /**
    * Does the following:   Adds new Attributes, Rules, or ObjectTypes.   Updates existing Attributes, Rules, or ObjectTypes.   Deletes existing Attributes, Rules, or ObjectTypes.  
    */
@@ -494,7 +496,7 @@ declare class CloudDirectory extends Service {
   /**
    * Updates a given typed link’s attributes. Attributes to be updated must not contribute to the typed link’s identity, as defined by its IdentityAttributeOrder.
    */
-  updateLinkAttributes(params: CloudDirectory.Types.UpdateLinkAttributesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.UpdateLinkAttributesResponse) => void): Request<CloudDirectory.Types.UpdateLinkAttributesResponse, AWSError>;
+  updateLinkAttributes(params: BoundInput<CloudDirectory.Types.UpdateLinkAttributesRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.UpdateLinkAttributesResponse) => void): Request<CloudDirectory.Types.UpdateLinkAttributesResponse, AWSError>;
   /**
    * Updates a given typed link’s attributes. Attributes to be updated must not contribute to the typed link’s identity, as defined by its IdentityAttributeOrder.
    */
@@ -502,7 +504,7 @@ declare class CloudDirectory extends Service {
   /**
    * Updates a given object's attributes.
    */
-  updateObjectAttributes(params: CloudDirectory.Types.UpdateObjectAttributesRequest, callback?: (err: AWSError, data: CloudDirectory.Types.UpdateObjectAttributesResponse) => void): Request<CloudDirectory.Types.UpdateObjectAttributesResponse, AWSError>;
+  updateObjectAttributes(params: BoundInput<CloudDirectory.Types.UpdateObjectAttributesRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.UpdateObjectAttributesResponse) => void): Request<CloudDirectory.Types.UpdateObjectAttributesResponse, AWSError>;
   /**
    * Updates a given object's attributes.
    */
@@ -510,7 +512,7 @@ declare class CloudDirectory extends Service {
   /**
    * Updates the schema name with a new name. Only development schema names can be updated.
    */
-  updateSchema(params: CloudDirectory.Types.UpdateSchemaRequest, callback?: (err: AWSError, data: CloudDirectory.Types.UpdateSchemaResponse) => void): Request<CloudDirectory.Types.UpdateSchemaResponse, AWSError>;
+  updateSchema(params: BoundInput<CloudDirectory.Types.UpdateSchemaRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.UpdateSchemaResponse) => void): Request<CloudDirectory.Types.UpdateSchemaResponse, AWSError>;
   /**
    * Updates the schema name with a new name. Only development schema names can be updated.
    */
@@ -518,7 +520,7 @@ declare class CloudDirectory extends Service {
   /**
    * Updates a TypedLinkFacet. For more information, see Typed Links.
    */
-  updateTypedLinkFacet(params: CloudDirectory.Types.UpdateTypedLinkFacetRequest, callback?: (err: AWSError, data: CloudDirectory.Types.UpdateTypedLinkFacetResponse) => void): Request<CloudDirectory.Types.UpdateTypedLinkFacetResponse, AWSError>;
+  updateTypedLinkFacet(params: BoundInput<CloudDirectory.Types.UpdateTypedLinkFacetRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.UpdateTypedLinkFacetResponse) => void): Request<CloudDirectory.Types.UpdateTypedLinkFacetResponse, AWSError>;
   /**
    * Updates a TypedLinkFacet. For more information, see Typed Links.
    */
@@ -526,7 +528,7 @@ declare class CloudDirectory extends Service {
   /**
    * Upgrades a single directory in-place using the PublishedSchemaArn with schema updates found in MinorVersion. Backwards-compatible minor version upgrades are instantaneously available for readers on all objects in the directory. Note: This is a synchronous API call and upgrades only one schema on a given directory per call. To upgrade multiple directories from one schema, you would need to call this API on each directory.
    */
-  upgradeAppliedSchema(params: CloudDirectory.Types.UpgradeAppliedSchemaRequest, callback?: (err: AWSError, data: CloudDirectory.Types.UpgradeAppliedSchemaResponse) => void): Request<CloudDirectory.Types.UpgradeAppliedSchemaResponse, AWSError>;
+  upgradeAppliedSchema(params: BoundInput<CloudDirectory.Types.UpgradeAppliedSchemaRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.UpgradeAppliedSchemaResponse) => void): Request<CloudDirectory.Types.UpgradeAppliedSchemaResponse, AWSError>;
   /**
    * Upgrades a single directory in-place using the PublishedSchemaArn with schema updates found in MinorVersion. Backwards-compatible minor version upgrades are instantaneously available for readers on all objects in the directory. Note: This is a synchronous API call and upgrades only one schema on a given directory per call. To upgrade multiple directories from one schema, you would need to call this API on each directory.
    */
@@ -534,7 +536,7 @@ declare class CloudDirectory extends Service {
   /**
    * Upgrades a published schema under a new minor version revision using the current contents of DevelopmentSchemaArn.
    */
-  upgradePublishedSchema(params: CloudDirectory.Types.UpgradePublishedSchemaRequest, callback?: (err: AWSError, data: CloudDirectory.Types.UpgradePublishedSchemaResponse) => void): Request<CloudDirectory.Types.UpgradePublishedSchemaResponse, AWSError>;
+  upgradePublishedSchema(params: BoundInput<CloudDirectory.Types.UpgradePublishedSchemaRequest, keyof Params>, callback?: (err: AWSError, data: CloudDirectory.Types.UpgradePublishedSchemaResponse) => void): Request<CloudDirectory.Types.UpgradePublishedSchemaResponse, AWSError>;
   /**
    * Upgrades a published schema under a new minor version revision using the current contents of DevelopmentSchemaArn.
    */
@@ -3281,7 +3283,8 @@ declare namespace CloudDirectory {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AddFacetToObjectRequest & ApplySchemaRequest & AttachObjectRequest & AttachPolicyRequest & AttachToIndexRequest & AttachTypedLinkRequest & BatchReadRequest & BatchWriteRequest & CreateDirectoryRequest & CreateFacetRequest & CreateIndexRequest & CreateObjectRequest & CreateSchemaRequest & CreateTypedLinkFacetRequest & DeleteDirectoryRequest & DeleteFacetRequest & DeleteObjectRequest & DeleteSchemaRequest & DeleteTypedLinkFacetRequest & DetachFromIndexRequest & DetachObjectRequest & DetachPolicyRequest & DetachTypedLinkRequest & DisableDirectoryRequest & EnableDirectoryRequest & GetAppliedSchemaVersionRequest & GetDirectoryRequest & GetFacetRequest & GetLinkAttributesRequest & GetObjectAttributesRequest & GetObjectInformationRequest & GetSchemaAsJsonRequest & GetTypedLinkFacetInformationRequest & ListAppliedSchemaArnsRequest & ListAttachedIndicesRequest & ListDevelopmentSchemaArnsRequest & ListDirectoriesRequest & ListFacetAttributesRequest & ListFacetNamesRequest & ListIncomingTypedLinksRequest & ListIndexRequest & ListManagedSchemaArnsRequest & ListObjectAttributesRequest & ListObjectChildrenRequest & ListObjectParentPathsRequest & ListObjectParentsRequest & ListObjectPoliciesRequest & ListOutgoingTypedLinksRequest & ListPolicyAttachmentsRequest & ListPublishedSchemaArnsRequest & ListTagsForResourceRequest & ListTypedLinkFacetAttributesRequest & ListTypedLinkFacetNamesRequest & LookupPolicyRequest & PublishSchemaRequest & PutSchemaFromJsonRequest & RemoveFacetFromObjectRequest & TagResourceRequest & UntagResourceRequest & UpdateFacetRequest & UpdateLinkAttributesRequest & UpdateObjectAttributesRequest & UpdateSchemaRequest & UpdateTypedLinkFacetRequest & UpgradeAppliedSchemaRequest & UpgradePublishedSchemaRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the CloudDirectory client.
    */

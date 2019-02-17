@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class Pricing extends Service {
+declare class Pricing<Params extends Pricing.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: Pricing.Types.ClientConfiguration)
-  config: Config & Pricing.Types.ClientConfiguration;
+  constructor(options?: Pricing.Types.ClientConfiguration<Params>)
+  config: Config & Pricing.Types.ClientConfiguration<Params>;
   /**
    * Returns the metadata for one service or a list of the metadata for all services. Use this without a service code to get the service codes for all services. Use it with a service code, such as AmazonEC2, to get information specific to that service, such as the attribute names available for that service. For example, some of the attribute names available for EC2 are volumeType, maxIopsVolume, operation, locationType, and instanceCapacity10xlarge.
    */
-  describeServices(params: Pricing.Types.DescribeServicesRequest, callback?: (err: AWSError, data: Pricing.Types.DescribeServicesResponse) => void): Request<Pricing.Types.DescribeServicesResponse, AWSError>;
+  describeServices(params: BoundInput<Pricing.Types.DescribeServicesRequest, keyof Params>, callback?: (err: AWSError, data: Pricing.Types.DescribeServicesResponse) => void): Request<Pricing.Types.DescribeServicesResponse, AWSError>;
   /**
    * Returns the metadata for one service or a list of the metadata for all services. Use this without a service code to get the service codes for all services. Use it with a service code, such as AmazonEC2, to get information specific to that service, such as the attribute names available for that service. For example, some of the attribute names available for EC2 are volumeType, maxIopsVolume, operation, locationType, and instanceCapacity10xlarge.
    */
@@ -22,7 +24,7 @@ declare class Pricing extends Service {
   /**
    * Returns a list of attribute values. Attibutes are similar to the details in a Price List API offer file. For a list of available attributes, see Offer File Definitions in the AWS Billing and Cost Management User Guide.
    */
-  getAttributeValues(params: Pricing.Types.GetAttributeValuesRequest, callback?: (err: AWSError, data: Pricing.Types.GetAttributeValuesResponse) => void): Request<Pricing.Types.GetAttributeValuesResponse, AWSError>;
+  getAttributeValues(params: BoundInput<Pricing.Types.GetAttributeValuesRequest, keyof Params>, callback?: (err: AWSError, data: Pricing.Types.GetAttributeValuesResponse) => void): Request<Pricing.Types.GetAttributeValuesResponse, AWSError>;
   /**
    * Returns a list of attribute values. Attibutes are similar to the details in a Price List API offer file. For a list of available attributes, see Offer File Definitions in the AWS Billing and Cost Management User Guide.
    */
@@ -30,7 +32,7 @@ declare class Pricing extends Service {
   /**
    * Returns a list of all products that match the filter criteria.
    */
-  getProducts(params: Pricing.Types.GetProductsRequest, callback?: (err: AWSError, data: Pricing.Types.GetProductsResponse) => void): Request<Pricing.Types.GetProductsResponse, AWSError>;
+  getProducts(params: BoundInput<Pricing.Types.GetProductsRequest, keyof Params>, callback?: (err: AWSError, data: Pricing.Types.GetProductsResponse) => void): Request<Pricing.Types.GetProductsResponse, AWSError>;
   /**
    * Returns a list of all products that match the filter criteria.
    */
@@ -182,7 +184,8 @@ declare namespace Pricing {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<DescribeServicesRequest & GetAttributeValuesRequest & GetProductsRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the Pricing client.
    */

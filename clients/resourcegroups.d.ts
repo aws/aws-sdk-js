@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class ResourceGroups extends Service {
+declare class ResourceGroups<Params extends ResourceGroups.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: ResourceGroups.Types.ClientConfiguration)
-  config: Config & ResourceGroups.Types.ClientConfiguration;
+  constructor(options?: ResourceGroups.Types.ClientConfiguration<Params>)
+  config: Config & ResourceGroups.Types.ClientConfiguration<Params>;
   /**
    * Creates a group with a specified name, description, and resource query.
    */
-  createGroup(params: ResourceGroups.Types.CreateGroupInput, callback?: (err: AWSError, data: ResourceGroups.Types.CreateGroupOutput) => void): Request<ResourceGroups.Types.CreateGroupOutput, AWSError>;
+  createGroup(params: BoundInput<ResourceGroups.Types.CreateGroupInput, keyof Params>, callback?: (err: AWSError, data: ResourceGroups.Types.CreateGroupOutput) => void): Request<ResourceGroups.Types.CreateGroupOutput, AWSError>;
   /**
    * Creates a group with a specified name, description, and resource query.
    */
@@ -22,7 +24,7 @@ declare class ResourceGroups extends Service {
   /**
    * Deletes a specified resource group. Deleting a resource group does not delete resources that are members of the group; it only deletes the group structure.
    */
-  deleteGroup(params: ResourceGroups.Types.DeleteGroupInput, callback?: (err: AWSError, data: ResourceGroups.Types.DeleteGroupOutput) => void): Request<ResourceGroups.Types.DeleteGroupOutput, AWSError>;
+  deleteGroup(params: BoundInput<ResourceGroups.Types.DeleteGroupInput, keyof Params>, callback?: (err: AWSError, data: ResourceGroups.Types.DeleteGroupOutput) => void): Request<ResourceGroups.Types.DeleteGroupOutput, AWSError>;
   /**
    * Deletes a specified resource group. Deleting a resource group does not delete resources that are members of the group; it only deletes the group structure.
    */
@@ -30,7 +32,7 @@ declare class ResourceGroups extends Service {
   /**
    * Returns information about a specified resource group.
    */
-  getGroup(params: ResourceGroups.Types.GetGroupInput, callback?: (err: AWSError, data: ResourceGroups.Types.GetGroupOutput) => void): Request<ResourceGroups.Types.GetGroupOutput, AWSError>;
+  getGroup(params: BoundInput<ResourceGroups.Types.GetGroupInput, keyof Params>, callback?: (err: AWSError, data: ResourceGroups.Types.GetGroupOutput) => void): Request<ResourceGroups.Types.GetGroupOutput, AWSError>;
   /**
    * Returns information about a specified resource group.
    */
@@ -38,7 +40,7 @@ declare class ResourceGroups extends Service {
   /**
    * Returns the resource query associated with the specified resource group.
    */
-  getGroupQuery(params: ResourceGroups.Types.GetGroupQueryInput, callback?: (err: AWSError, data: ResourceGroups.Types.GetGroupQueryOutput) => void): Request<ResourceGroups.Types.GetGroupQueryOutput, AWSError>;
+  getGroupQuery(params: BoundInput<ResourceGroups.Types.GetGroupQueryInput, keyof Params>, callback?: (err: AWSError, data: ResourceGroups.Types.GetGroupQueryOutput) => void): Request<ResourceGroups.Types.GetGroupQueryOutput, AWSError>;
   /**
    * Returns the resource query associated with the specified resource group.
    */
@@ -46,7 +48,7 @@ declare class ResourceGroups extends Service {
   /**
    * Returns a list of tags that are associated with a resource, specified by an ARN.
    */
-  getTags(params: ResourceGroups.Types.GetTagsInput, callback?: (err: AWSError, data: ResourceGroups.Types.GetTagsOutput) => void): Request<ResourceGroups.Types.GetTagsOutput, AWSError>;
+  getTags(params: BoundInput<ResourceGroups.Types.GetTagsInput, keyof Params>, callback?: (err: AWSError, data: ResourceGroups.Types.GetTagsOutput) => void): Request<ResourceGroups.Types.GetTagsOutput, AWSError>;
   /**
    * Returns a list of tags that are associated with a resource, specified by an ARN.
    */
@@ -54,7 +56,7 @@ declare class ResourceGroups extends Service {
   /**
    * Returns a list of ARNs of resources that are members of a specified resource group.
    */
-  listGroupResources(params: ResourceGroups.Types.ListGroupResourcesInput, callback?: (err: AWSError, data: ResourceGroups.Types.ListGroupResourcesOutput) => void): Request<ResourceGroups.Types.ListGroupResourcesOutput, AWSError>;
+  listGroupResources(params: BoundInput<ResourceGroups.Types.ListGroupResourcesInput, keyof Params>, callback?: (err: AWSError, data: ResourceGroups.Types.ListGroupResourcesOutput) => void): Request<ResourceGroups.Types.ListGroupResourcesOutput, AWSError>;
   /**
    * Returns a list of ARNs of resources that are members of a specified resource group.
    */
@@ -62,7 +64,7 @@ declare class ResourceGroups extends Service {
   /**
    * Returns a list of existing resource groups in your account.
    */
-  listGroups(params: ResourceGroups.Types.ListGroupsInput, callback?: (err: AWSError, data: ResourceGroups.Types.ListGroupsOutput) => void): Request<ResourceGroups.Types.ListGroupsOutput, AWSError>;
+  listGroups(params: BoundInput<ResourceGroups.Types.ListGroupsInput, keyof Params>, callback?: (err: AWSError, data: ResourceGroups.Types.ListGroupsOutput) => void): Request<ResourceGroups.Types.ListGroupsOutput, AWSError>;
   /**
    * Returns a list of existing resource groups in your account.
    */
@@ -70,7 +72,7 @@ declare class ResourceGroups extends Service {
   /**
    * Returns a list of AWS resource identifiers that matches a specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.
    */
-  searchResources(params: ResourceGroups.Types.SearchResourcesInput, callback?: (err: AWSError, data: ResourceGroups.Types.SearchResourcesOutput) => void): Request<ResourceGroups.Types.SearchResourcesOutput, AWSError>;
+  searchResources(params: BoundInput<ResourceGroups.Types.SearchResourcesInput, keyof Params>, callback?: (err: AWSError, data: ResourceGroups.Types.SearchResourcesOutput) => void): Request<ResourceGroups.Types.SearchResourcesOutput, AWSError>;
   /**
    * Returns a list of AWS resource identifiers that matches a specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.
    */
@@ -78,7 +80,7 @@ declare class ResourceGroups extends Service {
   /**
    * Adds specified tags to a resource with the specified ARN. Existing tags on a resource are not changed if they are not specified in the request parameters.
    */
-  tag(params: ResourceGroups.Types.TagInput, callback?: (err: AWSError, data: ResourceGroups.Types.TagOutput) => void): Request<ResourceGroups.Types.TagOutput, AWSError>;
+  tag(params: BoundInput<ResourceGroups.Types.TagInput, keyof Params>, callback?: (err: AWSError, data: ResourceGroups.Types.TagOutput) => void): Request<ResourceGroups.Types.TagOutput, AWSError>;
   /**
    * Adds specified tags to a resource with the specified ARN. Existing tags on a resource are not changed if they are not specified in the request parameters.
    */
@@ -86,7 +88,7 @@ declare class ResourceGroups extends Service {
   /**
    * Deletes specified tags from a specified resource.
    */
-  untag(params: ResourceGroups.Types.UntagInput, callback?: (err: AWSError, data: ResourceGroups.Types.UntagOutput) => void): Request<ResourceGroups.Types.UntagOutput, AWSError>;
+  untag(params: BoundInput<ResourceGroups.Types.UntagInput, keyof Params>, callback?: (err: AWSError, data: ResourceGroups.Types.UntagOutput) => void): Request<ResourceGroups.Types.UntagOutput, AWSError>;
   /**
    * Deletes specified tags from a specified resource.
    */
@@ -94,7 +96,7 @@ declare class ResourceGroups extends Service {
   /**
    * Updates an existing group with a new or changed description. You cannot update the name of a resource group.
    */
-  updateGroup(params: ResourceGroups.Types.UpdateGroupInput, callback?: (err: AWSError, data: ResourceGroups.Types.UpdateGroupOutput) => void): Request<ResourceGroups.Types.UpdateGroupOutput, AWSError>;
+  updateGroup(params: BoundInput<ResourceGroups.Types.UpdateGroupInput, keyof Params>, callback?: (err: AWSError, data: ResourceGroups.Types.UpdateGroupOutput) => void): Request<ResourceGroups.Types.UpdateGroupOutput, AWSError>;
   /**
    * Updates an existing group with a new or changed description. You cannot update the name of a resource group.
    */
@@ -102,7 +104,7 @@ declare class ResourceGroups extends Service {
   /**
    * Updates the resource query of a group.
    */
-  updateGroupQuery(params: ResourceGroups.Types.UpdateGroupQueryInput, callback?: (err: AWSError, data: ResourceGroups.Types.UpdateGroupQueryOutput) => void): Request<ResourceGroups.Types.UpdateGroupQueryOutput, AWSError>;
+  updateGroupQuery(params: BoundInput<ResourceGroups.Types.UpdateGroupQueryInput, keyof Params>, callback?: (err: AWSError, data: ResourceGroups.Types.UpdateGroupQueryOutput) => void): Request<ResourceGroups.Types.UpdateGroupQueryOutput, AWSError>;
   /**
    * Updates the resource query of a group.
    */
@@ -474,7 +476,8 @@ declare namespace ResourceGroups {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateGroupInput & DeleteGroupInput & GetGroupInput & GetGroupQueryInput & GetTagsInput & ListGroupResourcesInput & ListGroupsInput & SearchResourcesInput & TagInput & UntagInput & UpdateGroupInput & UpdateGroupQueryInput>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the ResourceGroups client.
    */

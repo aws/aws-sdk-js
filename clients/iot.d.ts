@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class Iot extends Service {
+declare class Iot<Params extends Iot.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: Iot.Types.ClientConfiguration)
-  config: Config & Iot.Types.ClientConfiguration;
+  constructor(options?: Iot.Types.ClientConfiguration<Params>)
+  config: Config & Iot.Types.ClientConfiguration<Params>;
   /**
    * Accepts a pending certificate transfer. The default state of the certificate is INACTIVE. To check for pending certificate transfers, call ListCertificates to enumerate your certificates.
    */
-  acceptCertificateTransfer(params: Iot.Types.AcceptCertificateTransferRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  acceptCertificateTransfer(params: BoundInput<Iot.Types.AcceptCertificateTransferRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Accepts a pending certificate transfer. The default state of the certificate is INACTIVE. To check for pending certificate transfers, call ListCertificates to enumerate your certificates.
    */
@@ -22,7 +24,7 @@ declare class Iot extends Service {
   /**
    * Adds a thing to a billing group.
    */
-  addThingToBillingGroup(params: Iot.Types.AddThingToBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.AddThingToBillingGroupResponse) => void): Request<Iot.Types.AddThingToBillingGroupResponse, AWSError>;
+  addThingToBillingGroup(params: BoundInput<Iot.Types.AddThingToBillingGroupRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.AddThingToBillingGroupResponse) => void): Request<Iot.Types.AddThingToBillingGroupResponse, AWSError>;
   /**
    * Adds a thing to a billing group.
    */
@@ -30,7 +32,7 @@ declare class Iot extends Service {
   /**
    * Adds a thing to a thing group.
    */
-  addThingToThingGroup(params: Iot.Types.AddThingToThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.AddThingToThingGroupResponse) => void): Request<Iot.Types.AddThingToThingGroupResponse, AWSError>;
+  addThingToThingGroup(params: BoundInput<Iot.Types.AddThingToThingGroupRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.AddThingToThingGroupResponse) => void): Request<Iot.Types.AddThingToThingGroupResponse, AWSError>;
   /**
    * Adds a thing to a thing group.
    */
@@ -38,7 +40,7 @@ declare class Iot extends Service {
   /**
    * Associates a group with a continuous job. The following criteria must be met:    The job must have been created with the targetSelection field set to "CONTINUOUS".   The job status must currently be "IN_PROGRESS".   The total number of targets associated with a job must not exceed 100.  
    */
-  associateTargetsWithJob(params: Iot.Types.AssociateTargetsWithJobRequest, callback?: (err: AWSError, data: Iot.Types.AssociateTargetsWithJobResponse) => void): Request<Iot.Types.AssociateTargetsWithJobResponse, AWSError>;
+  associateTargetsWithJob(params: BoundInput<Iot.Types.AssociateTargetsWithJobRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.AssociateTargetsWithJobResponse) => void): Request<Iot.Types.AssociateTargetsWithJobResponse, AWSError>;
   /**
    * Associates a group with a continuous job. The following criteria must be met:    The job must have been created with the targetSelection field set to "CONTINUOUS".   The job status must currently be "IN_PROGRESS".   The total number of targets associated with a job must not exceed 100.  
    */
@@ -46,7 +48,7 @@ declare class Iot extends Service {
   /**
    * Attaches a policy to the specified target.
    */
-  attachPolicy(params: Iot.Types.AttachPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  attachPolicy(params: BoundInput<Iot.Types.AttachPolicyRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Attaches a policy to the specified target.
    */
@@ -54,7 +56,7 @@ declare class Iot extends Service {
   /**
    * Attaches the specified policy to the specified principal (certificate or other credential).  Note: This API is deprecated. Please use AttachPolicy instead.
    */
-  attachPrincipalPolicy(params: Iot.Types.AttachPrincipalPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  attachPrincipalPolicy(params: BoundInput<Iot.Types.AttachPrincipalPolicyRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Attaches the specified policy to the specified principal (certificate or other credential).  Note: This API is deprecated. Please use AttachPolicy instead.
    */
@@ -62,7 +64,7 @@ declare class Iot extends Service {
   /**
    * Associates a Device Defender security profile with a thing group or with this account. Each thing group or account can have up to five security profiles associated with it.
    */
-  attachSecurityProfile(params: Iot.Types.AttachSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.AttachSecurityProfileResponse) => void): Request<Iot.Types.AttachSecurityProfileResponse, AWSError>;
+  attachSecurityProfile(params: BoundInput<Iot.Types.AttachSecurityProfileRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.AttachSecurityProfileResponse) => void): Request<Iot.Types.AttachSecurityProfileResponse, AWSError>;
   /**
    * Associates a Device Defender security profile with a thing group or with this account. Each thing group or account can have up to five security profiles associated with it.
    */
@@ -70,7 +72,7 @@ declare class Iot extends Service {
   /**
    * Attaches the specified principal to the specified thing.
    */
-  attachThingPrincipal(params: Iot.Types.AttachThingPrincipalRequest, callback?: (err: AWSError, data: Iot.Types.AttachThingPrincipalResponse) => void): Request<Iot.Types.AttachThingPrincipalResponse, AWSError>;
+  attachThingPrincipal(params: BoundInput<Iot.Types.AttachThingPrincipalRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.AttachThingPrincipalResponse) => void): Request<Iot.Types.AttachThingPrincipalResponse, AWSError>;
   /**
    * Attaches the specified principal to the specified thing.
    */
@@ -78,7 +80,7 @@ declare class Iot extends Service {
   /**
    * Cancels an audit that is in progress. The audit can be either scheduled or on-demand. If the audit is not in progress, an "InvalidRequestException" occurs.
    */
-  cancelAuditTask(params: Iot.Types.CancelAuditTaskRequest, callback?: (err: AWSError, data: Iot.Types.CancelAuditTaskResponse) => void): Request<Iot.Types.CancelAuditTaskResponse, AWSError>;
+  cancelAuditTask(params: BoundInput<Iot.Types.CancelAuditTaskRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.CancelAuditTaskResponse) => void): Request<Iot.Types.CancelAuditTaskResponse, AWSError>;
   /**
    * Cancels an audit that is in progress. The audit can be either scheduled or on-demand. If the audit is not in progress, an "InvalidRequestException" occurs.
    */
@@ -86,7 +88,7 @@ declare class Iot extends Service {
   /**
    * Cancels a pending transfer for the specified certificate.  Note Only the transfer source account can use this operation to cancel a transfer. (Transfer destinations can use RejectCertificateTransfer instead.) After transfer, AWS IoT returns the certificate to the source account in the INACTIVE state. After the destination account has accepted the transfer, the transfer cannot be cancelled. After a certificate transfer is cancelled, the status of the certificate changes from PENDING_TRANSFER to INACTIVE.
    */
-  cancelCertificateTransfer(params: Iot.Types.CancelCertificateTransferRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  cancelCertificateTransfer(params: BoundInput<Iot.Types.CancelCertificateTransferRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Cancels a pending transfer for the specified certificate.  Note Only the transfer source account can use this operation to cancel a transfer. (Transfer destinations can use RejectCertificateTransfer instead.) After transfer, AWS IoT returns the certificate to the source account in the INACTIVE state. After the destination account has accepted the transfer, the transfer cannot be cancelled. After a certificate transfer is cancelled, the status of the certificate changes from PENDING_TRANSFER to INACTIVE.
    */
@@ -94,7 +96,7 @@ declare class Iot extends Service {
   /**
    * Cancels a job.
    */
-  cancelJob(params: Iot.Types.CancelJobRequest, callback?: (err: AWSError, data: Iot.Types.CancelJobResponse) => void): Request<Iot.Types.CancelJobResponse, AWSError>;
+  cancelJob(params: BoundInput<Iot.Types.CancelJobRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.CancelJobResponse) => void): Request<Iot.Types.CancelJobResponse, AWSError>;
   /**
    * Cancels a job.
    */
@@ -102,7 +104,7 @@ declare class Iot extends Service {
   /**
    * Cancels the execution of a job for a given thing.
    */
-  cancelJobExecution(params: Iot.Types.CancelJobExecutionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  cancelJobExecution(params: BoundInput<Iot.Types.CancelJobExecutionRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Cancels the execution of a job for a given thing.
    */
@@ -110,7 +112,7 @@ declare class Iot extends Service {
   /**
    * Clears the default authorizer.
    */
-  clearDefaultAuthorizer(params: Iot.Types.ClearDefaultAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.ClearDefaultAuthorizerResponse) => void): Request<Iot.Types.ClearDefaultAuthorizerResponse, AWSError>;
+  clearDefaultAuthorizer(params: BoundInput<Iot.Types.ClearDefaultAuthorizerRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ClearDefaultAuthorizerResponse) => void): Request<Iot.Types.ClearDefaultAuthorizerResponse, AWSError>;
   /**
    * Clears the default authorizer.
    */
@@ -118,7 +120,7 @@ declare class Iot extends Service {
   /**
    * Creates an authorizer.
    */
-  createAuthorizer(params: Iot.Types.CreateAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.CreateAuthorizerResponse) => void): Request<Iot.Types.CreateAuthorizerResponse, AWSError>;
+  createAuthorizer(params: BoundInput<Iot.Types.CreateAuthorizerRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.CreateAuthorizerResponse) => void): Request<Iot.Types.CreateAuthorizerResponse, AWSError>;
   /**
    * Creates an authorizer.
    */
@@ -126,7 +128,7 @@ declare class Iot extends Service {
   /**
    * Creates a billing group.
    */
-  createBillingGroup(params: Iot.Types.CreateBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.CreateBillingGroupResponse) => void): Request<Iot.Types.CreateBillingGroupResponse, AWSError>;
+  createBillingGroup(params: BoundInput<Iot.Types.CreateBillingGroupRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.CreateBillingGroupResponse) => void): Request<Iot.Types.CreateBillingGroupResponse, AWSError>;
   /**
    * Creates a billing group.
    */
@@ -134,7 +136,7 @@ declare class Iot extends Service {
   /**
    * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves.   Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr AWS CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
    */
-  createCertificateFromCsr(params: Iot.Types.CreateCertificateFromCsrRequest, callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
+  createCertificateFromCsr(params: BoundInput<Iot.Types.CreateCertificateFromCsrRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
   /**
    * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves.   Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr AWS CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
    */
@@ -142,7 +144,7 @@ declare class Iot extends Service {
   /**
    * Creates a dynamic thing group.
    */
-  createDynamicThingGroup(params: Iot.Types.CreateDynamicThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.CreateDynamicThingGroupResponse) => void): Request<Iot.Types.CreateDynamicThingGroupResponse, AWSError>;
+  createDynamicThingGroup(params: BoundInput<Iot.Types.CreateDynamicThingGroupRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.CreateDynamicThingGroupResponse) => void): Request<Iot.Types.CreateDynamicThingGroupResponse, AWSError>;
   /**
    * Creates a dynamic thing group.
    */
@@ -150,7 +152,7 @@ declare class Iot extends Service {
   /**
    * Creates a job.
    */
-  createJob(params: Iot.Types.CreateJobRequest, callback?: (err: AWSError, data: Iot.Types.CreateJobResponse) => void): Request<Iot.Types.CreateJobResponse, AWSError>;
+  createJob(params: BoundInput<Iot.Types.CreateJobRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.CreateJobResponse) => void): Request<Iot.Types.CreateJobResponse, AWSError>;
   /**
    * Creates a job.
    */
@@ -158,7 +160,7 @@ declare class Iot extends Service {
   /**
    * Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key.  Note This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.
    */
-  createKeysAndCertificate(params: Iot.Types.CreateKeysAndCertificateRequest, callback?: (err: AWSError, data: Iot.Types.CreateKeysAndCertificateResponse) => void): Request<Iot.Types.CreateKeysAndCertificateResponse, AWSError>;
+  createKeysAndCertificate(params: BoundInput<Iot.Types.CreateKeysAndCertificateRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.CreateKeysAndCertificateResponse) => void): Request<Iot.Types.CreateKeysAndCertificateResponse, AWSError>;
   /**
    * Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key.  Note This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.
    */
@@ -166,7 +168,7 @@ declare class Iot extends Service {
   /**
    * Creates an AWS IoT OTAUpdate on a target group of things or groups.
    */
-  createOTAUpdate(params: Iot.Types.CreateOTAUpdateRequest, callback?: (err: AWSError, data: Iot.Types.CreateOTAUpdateResponse) => void): Request<Iot.Types.CreateOTAUpdateResponse, AWSError>;
+  createOTAUpdate(params: BoundInput<Iot.Types.CreateOTAUpdateRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.CreateOTAUpdateResponse) => void): Request<Iot.Types.CreateOTAUpdateResponse, AWSError>;
   /**
    * Creates an AWS IoT OTAUpdate on a target group of things or groups.
    */
@@ -174,7 +176,7 @@ declare class Iot extends Service {
   /**
    * Creates an AWS IoT policy. The created policy is the default version for the policy. This operation creates a policy version with a version identifier of 1 and sets 1 as the policy's default version.
    */
-  createPolicy(params: Iot.Types.CreatePolicyRequest, callback?: (err: AWSError, data: Iot.Types.CreatePolicyResponse) => void): Request<Iot.Types.CreatePolicyResponse, AWSError>;
+  createPolicy(params: BoundInput<Iot.Types.CreatePolicyRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.CreatePolicyResponse) => void): Request<Iot.Types.CreatePolicyResponse, AWSError>;
   /**
    * Creates an AWS IoT policy. The created policy is the default version for the policy. This operation creates a policy version with a version identifier of 1 and sets 1 as the policy's default version.
    */
@@ -182,7 +184,7 @@ declare class Iot extends Service {
   /**
    * Creates a new version of the specified AWS IoT policy. To update a policy, create a new policy version. A managed policy can have up to five versions. If the policy has five versions, you must use DeletePolicyVersion to delete an existing version before you create a new one. Optionally, you can set the new version as the policy's default version. The default version is the operative version (that is, the version that is in effect for the certificates to which the policy is attached).
    */
-  createPolicyVersion(params: Iot.Types.CreatePolicyVersionRequest, callback?: (err: AWSError, data: Iot.Types.CreatePolicyVersionResponse) => void): Request<Iot.Types.CreatePolicyVersionResponse, AWSError>;
+  createPolicyVersion(params: BoundInput<Iot.Types.CreatePolicyVersionRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.CreatePolicyVersionResponse) => void): Request<Iot.Types.CreatePolicyVersionResponse, AWSError>;
   /**
    * Creates a new version of the specified AWS IoT policy. To update a policy, create a new policy version. A managed policy can have up to five versions. If the policy has five versions, you must use DeletePolicyVersion to delete an existing version before you create a new one. Optionally, you can set the new version as the policy's default version. The default version is the operative version (that is, the version that is in effect for the certificates to which the policy is attached).
    */
@@ -190,7 +192,7 @@ declare class Iot extends Service {
   /**
    * Creates a role alias.
    */
-  createRoleAlias(params: Iot.Types.CreateRoleAliasRequest, callback?: (err: AWSError, data: Iot.Types.CreateRoleAliasResponse) => void): Request<Iot.Types.CreateRoleAliasResponse, AWSError>;
+  createRoleAlias(params: BoundInput<Iot.Types.CreateRoleAliasRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.CreateRoleAliasResponse) => void): Request<Iot.Types.CreateRoleAliasResponse, AWSError>;
   /**
    * Creates a role alias.
    */
@@ -198,7 +200,7 @@ declare class Iot extends Service {
   /**
    * Creates a scheduled audit that is run at a specified time interval.
    */
-  createScheduledAudit(params: Iot.Types.CreateScheduledAuditRequest, callback?: (err: AWSError, data: Iot.Types.CreateScheduledAuditResponse) => void): Request<Iot.Types.CreateScheduledAuditResponse, AWSError>;
+  createScheduledAudit(params: BoundInput<Iot.Types.CreateScheduledAuditRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.CreateScheduledAuditResponse) => void): Request<Iot.Types.CreateScheduledAuditResponse, AWSError>;
   /**
    * Creates a scheduled audit that is run at a specified time interval.
    */
@@ -206,7 +208,7 @@ declare class Iot extends Service {
   /**
    * Creates a Device Defender security profile.
    */
-  createSecurityProfile(params: Iot.Types.CreateSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.CreateSecurityProfileResponse) => void): Request<Iot.Types.CreateSecurityProfileResponse, AWSError>;
+  createSecurityProfile(params: BoundInput<Iot.Types.CreateSecurityProfileRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.CreateSecurityProfileResponse) => void): Request<Iot.Types.CreateSecurityProfileResponse, AWSError>;
   /**
    * Creates a Device Defender security profile.
    */
@@ -214,7 +216,7 @@ declare class Iot extends Service {
   /**
    * Creates a stream for delivering one or more large files in chunks over MQTT. A stream transports data bytes in chunks or blocks packaged as MQTT messages from a source like S3. You can have one or more files associated with a stream. The total size of a file associated with the stream cannot exceed more than 2 MB. The stream will be created with version 0. If a stream is created with the same streamID as a stream that existed and was deleted within last 90 days, we will resurrect that old stream by incrementing the version by 1.
    */
-  createStream(params: Iot.Types.CreateStreamRequest, callback?: (err: AWSError, data: Iot.Types.CreateStreamResponse) => void): Request<Iot.Types.CreateStreamResponse, AWSError>;
+  createStream(params: BoundInput<Iot.Types.CreateStreamRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.CreateStreamResponse) => void): Request<Iot.Types.CreateStreamResponse, AWSError>;
   /**
    * Creates a stream for delivering one or more large files in chunks over MQTT. A stream transports data bytes in chunks or blocks packaged as MQTT messages from a source like S3. You can have one or more files associated with a stream. The total size of a file associated with the stream cannot exceed more than 2 MB. The stream will be created with version 0. If a stream is created with the same streamID as a stream that existed and was deleted within last 90 days, we will resurrect that old stream by incrementing the version by 1.
    */
@@ -222,7 +224,7 @@ declare class Iot extends Service {
   /**
    * Creates a thing record in the registry.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
    */
-  createThing(params: Iot.Types.CreateThingRequest, callback?: (err: AWSError, data: Iot.Types.CreateThingResponse) => void): Request<Iot.Types.CreateThingResponse, AWSError>;
+  createThing(params: BoundInput<Iot.Types.CreateThingRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.CreateThingResponse) => void): Request<Iot.Types.CreateThingResponse, AWSError>;
   /**
    * Creates a thing record in the registry.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
    */
@@ -230,7 +232,7 @@ declare class Iot extends Service {
   /**
    * Create a thing group.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
    */
-  createThingGroup(params: Iot.Types.CreateThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.CreateThingGroupResponse) => void): Request<Iot.Types.CreateThingGroupResponse, AWSError>;
+  createThingGroup(params: BoundInput<Iot.Types.CreateThingGroupRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.CreateThingGroupResponse) => void): Request<Iot.Types.CreateThingGroupResponse, AWSError>;
   /**
    * Create a thing group.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
    */
@@ -238,7 +240,7 @@ declare class Iot extends Service {
   /**
    * Creates a new thing type.
    */
-  createThingType(params: Iot.Types.CreateThingTypeRequest, callback?: (err: AWSError, data: Iot.Types.CreateThingTypeResponse) => void): Request<Iot.Types.CreateThingTypeResponse, AWSError>;
+  createThingType(params: BoundInput<Iot.Types.CreateThingTypeRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.CreateThingTypeResponse) => void): Request<Iot.Types.CreateThingTypeResponse, AWSError>;
   /**
    * Creates a new thing type.
    */
@@ -246,7 +248,7 @@ declare class Iot extends Service {
   /**
    * Creates a rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.
    */
-  createTopicRule(params: Iot.Types.CreateTopicRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  createTopicRule(params: BoundInput<Iot.Types.CreateTopicRuleRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Creates a rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.
    */
@@ -254,7 +256,7 @@ declare class Iot extends Service {
   /**
    * Restores the default settings for Device Defender audits for this account. Any configuration data you entered is deleted and all audit checks are reset to disabled. 
    */
-  deleteAccountAuditConfiguration(params: Iot.Types.DeleteAccountAuditConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.DeleteAccountAuditConfigurationResponse) => void): Request<Iot.Types.DeleteAccountAuditConfigurationResponse, AWSError>;
+  deleteAccountAuditConfiguration(params: BoundInput<Iot.Types.DeleteAccountAuditConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DeleteAccountAuditConfigurationResponse) => void): Request<Iot.Types.DeleteAccountAuditConfigurationResponse, AWSError>;
   /**
    * Restores the default settings for Device Defender audits for this account. Any configuration data you entered is deleted and all audit checks are reset to disabled. 
    */
@@ -262,7 +264,7 @@ declare class Iot extends Service {
   /**
    * Deletes an authorizer.
    */
-  deleteAuthorizer(params: Iot.Types.DeleteAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.DeleteAuthorizerResponse) => void): Request<Iot.Types.DeleteAuthorizerResponse, AWSError>;
+  deleteAuthorizer(params: BoundInput<Iot.Types.DeleteAuthorizerRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DeleteAuthorizerResponse) => void): Request<Iot.Types.DeleteAuthorizerResponse, AWSError>;
   /**
    * Deletes an authorizer.
    */
@@ -270,7 +272,7 @@ declare class Iot extends Service {
   /**
    * Deletes the billing group.
    */
-  deleteBillingGroup(params: Iot.Types.DeleteBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.DeleteBillingGroupResponse) => void): Request<Iot.Types.DeleteBillingGroupResponse, AWSError>;
+  deleteBillingGroup(params: BoundInput<Iot.Types.DeleteBillingGroupRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DeleteBillingGroupResponse) => void): Request<Iot.Types.DeleteBillingGroupResponse, AWSError>;
   /**
    * Deletes the billing group.
    */
@@ -278,7 +280,7 @@ declare class Iot extends Service {
   /**
    * Deletes a registered CA certificate.
    */
-  deleteCACertificate(params: Iot.Types.DeleteCACertificateRequest, callback?: (err: AWSError, data: Iot.Types.DeleteCACertificateResponse) => void): Request<Iot.Types.DeleteCACertificateResponse, AWSError>;
+  deleteCACertificate(params: BoundInput<Iot.Types.DeleteCACertificateRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DeleteCACertificateResponse) => void): Request<Iot.Types.DeleteCACertificateResponse, AWSError>;
   /**
    * Deletes a registered CA certificate.
    */
@@ -286,7 +288,7 @@ declare class Iot extends Service {
   /**
    * Deletes the specified certificate. A certificate cannot be deleted if it has a policy attached to it or if its status is set to ACTIVE. To delete a certificate, first use the DetachPrincipalPolicy API to detach all policies. Next, use the UpdateCertificate API to set the certificate to the INACTIVE status.
    */
-  deleteCertificate(params: Iot.Types.DeleteCertificateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteCertificate(params: BoundInput<Iot.Types.DeleteCertificateRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified certificate. A certificate cannot be deleted if it has a policy attached to it or if its status is set to ACTIVE. To delete a certificate, first use the DetachPrincipalPolicy API to detach all policies. Next, use the UpdateCertificate API to set the certificate to the INACTIVE status.
    */
@@ -294,7 +296,7 @@ declare class Iot extends Service {
   /**
    * Deletes a dynamic thing group.
    */
-  deleteDynamicThingGroup(params: Iot.Types.DeleteDynamicThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.DeleteDynamicThingGroupResponse) => void): Request<Iot.Types.DeleteDynamicThingGroupResponse, AWSError>;
+  deleteDynamicThingGroup(params: BoundInput<Iot.Types.DeleteDynamicThingGroupRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DeleteDynamicThingGroupResponse) => void): Request<Iot.Types.DeleteDynamicThingGroupResponse, AWSError>;
   /**
    * Deletes a dynamic thing group.
    */
@@ -302,7 +304,7 @@ declare class Iot extends Service {
   /**
    * Deletes a job and its related job executions. Deleting a job may take time, depending on the number of job executions created for the job and various other factors. While the job is being deleted, the status of the job will be shown as "DELETION_IN_PROGRESS". Attempting to delete or cancel a job whose status is already "DELETION_IN_PROGRESS" will result in an error. Only 10 jobs may have status "DELETION_IN_PROGRESS" at the same time, or a LimitExceededException will occur.
    */
-  deleteJob(params: Iot.Types.DeleteJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteJob(params: BoundInput<Iot.Types.DeleteJobRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a job and its related job executions. Deleting a job may take time, depending on the number of job executions created for the job and various other factors. While the job is being deleted, the status of the job will be shown as "DELETION_IN_PROGRESS". Attempting to delete or cancel a job whose status is already "DELETION_IN_PROGRESS" will result in an error. Only 10 jobs may have status "DELETION_IN_PROGRESS" at the same time, or a LimitExceededException will occur.
    */
@@ -310,7 +312,7 @@ declare class Iot extends Service {
   /**
    * Deletes a job execution.
    */
-  deleteJobExecution(params: Iot.Types.DeleteJobExecutionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteJobExecution(params: BoundInput<Iot.Types.DeleteJobExecutionRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a job execution.
    */
@@ -318,7 +320,7 @@ declare class Iot extends Service {
   /**
    * Delete an OTA update.
    */
-  deleteOTAUpdate(params: Iot.Types.DeleteOTAUpdateRequest, callback?: (err: AWSError, data: Iot.Types.DeleteOTAUpdateResponse) => void): Request<Iot.Types.DeleteOTAUpdateResponse, AWSError>;
+  deleteOTAUpdate(params: BoundInput<Iot.Types.DeleteOTAUpdateRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DeleteOTAUpdateResponse) => void): Request<Iot.Types.DeleteOTAUpdateResponse, AWSError>;
   /**
    * Delete an OTA update.
    */
@@ -326,7 +328,7 @@ declare class Iot extends Service {
   /**
    * Deletes the specified policy. A policy cannot be deleted if it has non-default versions or it is attached to any certificate. To delete a policy, use the DeletePolicyVersion API to delete all non-default versions of the policy; use the DetachPrincipalPolicy API to detach the policy from any certificate; and then use the DeletePolicy API to delete the policy. When a policy is deleted using DeletePolicy, its default version is deleted with it.
    */
-  deletePolicy(params: Iot.Types.DeletePolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deletePolicy(params: BoundInput<Iot.Types.DeletePolicyRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified policy. A policy cannot be deleted if it has non-default versions or it is attached to any certificate. To delete a policy, use the DeletePolicyVersion API to delete all non-default versions of the policy; use the DetachPrincipalPolicy API to detach the policy from any certificate; and then use the DeletePolicy API to delete the policy. When a policy is deleted using DeletePolicy, its default version is deleted with it.
    */
@@ -334,7 +336,7 @@ declare class Iot extends Service {
   /**
    * Deletes the specified version of the specified policy. You cannot delete the default version of a policy using this API. To delete the default version of a policy, use DeletePolicy. To find out which version of a policy is marked as the default version, use ListPolicyVersions.
    */
-  deletePolicyVersion(params: Iot.Types.DeletePolicyVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deletePolicyVersion(params: BoundInput<Iot.Types.DeletePolicyVersionRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified version of the specified policy. You cannot delete the default version of a policy using this API. To delete the default version of a policy, use DeletePolicy. To find out which version of a policy is marked as the default version, use ListPolicyVersions.
    */
@@ -342,7 +344,7 @@ declare class Iot extends Service {
   /**
    * Deletes a CA certificate registration code.
    */
-  deleteRegistrationCode(params: Iot.Types.DeleteRegistrationCodeRequest, callback?: (err: AWSError, data: Iot.Types.DeleteRegistrationCodeResponse) => void): Request<Iot.Types.DeleteRegistrationCodeResponse, AWSError>;
+  deleteRegistrationCode(params: BoundInput<Iot.Types.DeleteRegistrationCodeRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DeleteRegistrationCodeResponse) => void): Request<Iot.Types.DeleteRegistrationCodeResponse, AWSError>;
   /**
    * Deletes a CA certificate registration code.
    */
@@ -350,7 +352,7 @@ declare class Iot extends Service {
   /**
    * Deletes a role alias
    */
-  deleteRoleAlias(params: Iot.Types.DeleteRoleAliasRequest, callback?: (err: AWSError, data: Iot.Types.DeleteRoleAliasResponse) => void): Request<Iot.Types.DeleteRoleAliasResponse, AWSError>;
+  deleteRoleAlias(params: BoundInput<Iot.Types.DeleteRoleAliasRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DeleteRoleAliasResponse) => void): Request<Iot.Types.DeleteRoleAliasResponse, AWSError>;
   /**
    * Deletes a role alias
    */
@@ -358,7 +360,7 @@ declare class Iot extends Service {
   /**
    * Deletes a scheduled audit.
    */
-  deleteScheduledAudit(params: Iot.Types.DeleteScheduledAuditRequest, callback?: (err: AWSError, data: Iot.Types.DeleteScheduledAuditResponse) => void): Request<Iot.Types.DeleteScheduledAuditResponse, AWSError>;
+  deleteScheduledAudit(params: BoundInput<Iot.Types.DeleteScheduledAuditRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DeleteScheduledAuditResponse) => void): Request<Iot.Types.DeleteScheduledAuditResponse, AWSError>;
   /**
    * Deletes a scheduled audit.
    */
@@ -366,7 +368,7 @@ declare class Iot extends Service {
   /**
    * Deletes a Device Defender security profile.
    */
-  deleteSecurityProfile(params: Iot.Types.DeleteSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.DeleteSecurityProfileResponse) => void): Request<Iot.Types.DeleteSecurityProfileResponse, AWSError>;
+  deleteSecurityProfile(params: BoundInput<Iot.Types.DeleteSecurityProfileRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DeleteSecurityProfileResponse) => void): Request<Iot.Types.DeleteSecurityProfileResponse, AWSError>;
   /**
    * Deletes a Device Defender security profile.
    */
@@ -374,7 +376,7 @@ declare class Iot extends Service {
   /**
    * Deletes a stream.
    */
-  deleteStream(params: Iot.Types.DeleteStreamRequest, callback?: (err: AWSError, data: Iot.Types.DeleteStreamResponse) => void): Request<Iot.Types.DeleteStreamResponse, AWSError>;
+  deleteStream(params: BoundInput<Iot.Types.DeleteStreamRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DeleteStreamResponse) => void): Request<Iot.Types.DeleteStreamResponse, AWSError>;
   /**
    * Deletes a stream.
    */
@@ -382,7 +384,7 @@ declare class Iot extends Service {
   /**
    * Deletes the specified thing. Returns successfully with no error if the deletion is successful or you specify a thing that doesn't exist.
    */
-  deleteThing(params: Iot.Types.DeleteThingRequest, callback?: (err: AWSError, data: Iot.Types.DeleteThingResponse) => void): Request<Iot.Types.DeleteThingResponse, AWSError>;
+  deleteThing(params: BoundInput<Iot.Types.DeleteThingRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DeleteThingResponse) => void): Request<Iot.Types.DeleteThingResponse, AWSError>;
   /**
    * Deletes the specified thing. Returns successfully with no error if the deletion is successful or you specify a thing that doesn't exist.
    */
@@ -390,7 +392,7 @@ declare class Iot extends Service {
   /**
    * Deletes a thing group.
    */
-  deleteThingGroup(params: Iot.Types.DeleteThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.DeleteThingGroupResponse) => void): Request<Iot.Types.DeleteThingGroupResponse, AWSError>;
+  deleteThingGroup(params: BoundInput<Iot.Types.DeleteThingGroupRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DeleteThingGroupResponse) => void): Request<Iot.Types.DeleteThingGroupResponse, AWSError>;
   /**
    * Deletes a thing group.
    */
@@ -398,7 +400,7 @@ declare class Iot extends Service {
   /**
    * Deletes the specified thing type. You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling DeprecateThingType, then remove any associated things by calling UpdateThing to change the thing type on any associated thing, and finally use DeleteThingType to delete the thing type.
    */
-  deleteThingType(params: Iot.Types.DeleteThingTypeRequest, callback?: (err: AWSError, data: Iot.Types.DeleteThingTypeResponse) => void): Request<Iot.Types.DeleteThingTypeResponse, AWSError>;
+  deleteThingType(params: BoundInput<Iot.Types.DeleteThingTypeRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DeleteThingTypeResponse) => void): Request<Iot.Types.DeleteThingTypeResponse, AWSError>;
   /**
    * Deletes the specified thing type. You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling DeprecateThingType, then remove any associated things by calling UpdateThing to change the thing type on any associated thing, and finally use DeleteThingType to delete the thing type.
    */
@@ -406,7 +408,7 @@ declare class Iot extends Service {
   /**
    * Deletes the rule.
    */
-  deleteTopicRule(params: Iot.Types.DeleteTopicRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteTopicRule(params: BoundInput<Iot.Types.DeleteTopicRuleRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the rule.
    */
@@ -414,7 +416,7 @@ declare class Iot extends Service {
   /**
    * Deletes a logging level.
    */
-  deleteV2LoggingLevel(params: Iot.Types.DeleteV2LoggingLevelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteV2LoggingLevel(params: BoundInput<Iot.Types.DeleteV2LoggingLevelRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a logging level.
    */
@@ -422,7 +424,7 @@ declare class Iot extends Service {
   /**
    * Deprecates a thing type. You can not associate new things with deprecated thing type.
    */
-  deprecateThingType(params: Iot.Types.DeprecateThingTypeRequest, callback?: (err: AWSError, data: Iot.Types.DeprecateThingTypeResponse) => void): Request<Iot.Types.DeprecateThingTypeResponse, AWSError>;
+  deprecateThingType(params: BoundInput<Iot.Types.DeprecateThingTypeRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DeprecateThingTypeResponse) => void): Request<Iot.Types.DeprecateThingTypeResponse, AWSError>;
   /**
    * Deprecates a thing type. You can not associate new things with deprecated thing type.
    */
@@ -430,7 +432,7 @@ declare class Iot extends Service {
   /**
    * Gets information about the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.
    */
-  describeAccountAuditConfiguration(params: Iot.Types.DescribeAccountAuditConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.DescribeAccountAuditConfigurationResponse) => void): Request<Iot.Types.DescribeAccountAuditConfigurationResponse, AWSError>;
+  describeAccountAuditConfiguration(params: BoundInput<Iot.Types.DescribeAccountAuditConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DescribeAccountAuditConfigurationResponse) => void): Request<Iot.Types.DescribeAccountAuditConfigurationResponse, AWSError>;
   /**
    * Gets information about the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.
    */
@@ -438,7 +440,7 @@ declare class Iot extends Service {
   /**
    * Gets information about a Device Defender audit.
    */
-  describeAuditTask(params: Iot.Types.DescribeAuditTaskRequest, callback?: (err: AWSError, data: Iot.Types.DescribeAuditTaskResponse) => void): Request<Iot.Types.DescribeAuditTaskResponse, AWSError>;
+  describeAuditTask(params: BoundInput<Iot.Types.DescribeAuditTaskRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DescribeAuditTaskResponse) => void): Request<Iot.Types.DescribeAuditTaskResponse, AWSError>;
   /**
    * Gets information about a Device Defender audit.
    */
@@ -446,7 +448,7 @@ declare class Iot extends Service {
   /**
    * Describes an authorizer.
    */
-  describeAuthorizer(params: Iot.Types.DescribeAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.DescribeAuthorizerResponse) => void): Request<Iot.Types.DescribeAuthorizerResponse, AWSError>;
+  describeAuthorizer(params: BoundInput<Iot.Types.DescribeAuthorizerRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DescribeAuthorizerResponse) => void): Request<Iot.Types.DescribeAuthorizerResponse, AWSError>;
   /**
    * Describes an authorizer.
    */
@@ -454,7 +456,7 @@ declare class Iot extends Service {
   /**
    * Returns information about a billing group.
    */
-  describeBillingGroup(params: Iot.Types.DescribeBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.DescribeBillingGroupResponse) => void): Request<Iot.Types.DescribeBillingGroupResponse, AWSError>;
+  describeBillingGroup(params: BoundInput<Iot.Types.DescribeBillingGroupRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DescribeBillingGroupResponse) => void): Request<Iot.Types.DescribeBillingGroupResponse, AWSError>;
   /**
    * Returns information about a billing group.
    */
@@ -462,7 +464,7 @@ declare class Iot extends Service {
   /**
    * Describes a registered CA certificate.
    */
-  describeCACertificate(params: Iot.Types.DescribeCACertificateRequest, callback?: (err: AWSError, data: Iot.Types.DescribeCACertificateResponse) => void): Request<Iot.Types.DescribeCACertificateResponse, AWSError>;
+  describeCACertificate(params: BoundInput<Iot.Types.DescribeCACertificateRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DescribeCACertificateResponse) => void): Request<Iot.Types.DescribeCACertificateResponse, AWSError>;
   /**
    * Describes a registered CA certificate.
    */
@@ -470,7 +472,7 @@ declare class Iot extends Service {
   /**
    * Gets information about the specified certificate.
    */
-  describeCertificate(params: Iot.Types.DescribeCertificateRequest, callback?: (err: AWSError, data: Iot.Types.DescribeCertificateResponse) => void): Request<Iot.Types.DescribeCertificateResponse, AWSError>;
+  describeCertificate(params: BoundInput<Iot.Types.DescribeCertificateRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DescribeCertificateResponse) => void): Request<Iot.Types.DescribeCertificateResponse, AWSError>;
   /**
    * Gets information about the specified certificate.
    */
@@ -478,7 +480,7 @@ declare class Iot extends Service {
   /**
    * Describes the default authorizer.
    */
-  describeDefaultAuthorizer(params: Iot.Types.DescribeDefaultAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.DescribeDefaultAuthorizerResponse) => void): Request<Iot.Types.DescribeDefaultAuthorizerResponse, AWSError>;
+  describeDefaultAuthorizer(params: BoundInput<Iot.Types.DescribeDefaultAuthorizerRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DescribeDefaultAuthorizerResponse) => void): Request<Iot.Types.DescribeDefaultAuthorizerResponse, AWSError>;
   /**
    * Describes the default authorizer.
    */
@@ -486,7 +488,7 @@ declare class Iot extends Service {
   /**
    * Returns a unique endpoint specific to the AWS account making the call.
    */
-  describeEndpoint(params: Iot.Types.DescribeEndpointRequest, callback?: (err: AWSError, data: Iot.Types.DescribeEndpointResponse) => void): Request<Iot.Types.DescribeEndpointResponse, AWSError>;
+  describeEndpoint(params: BoundInput<Iot.Types.DescribeEndpointRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DescribeEndpointResponse) => void): Request<Iot.Types.DescribeEndpointResponse, AWSError>;
   /**
    * Returns a unique endpoint specific to the AWS account making the call.
    */
@@ -494,7 +496,7 @@ declare class Iot extends Service {
   /**
    * Describes event configurations.
    */
-  describeEventConfigurations(params: Iot.Types.DescribeEventConfigurationsRequest, callback?: (err: AWSError, data: Iot.Types.DescribeEventConfigurationsResponse) => void): Request<Iot.Types.DescribeEventConfigurationsResponse, AWSError>;
+  describeEventConfigurations(params: BoundInput<Iot.Types.DescribeEventConfigurationsRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DescribeEventConfigurationsResponse) => void): Request<Iot.Types.DescribeEventConfigurationsResponse, AWSError>;
   /**
    * Describes event configurations.
    */
@@ -502,7 +504,7 @@ declare class Iot extends Service {
   /**
    * Describes a search index.
    */
-  describeIndex(params: Iot.Types.DescribeIndexRequest, callback?: (err: AWSError, data: Iot.Types.DescribeIndexResponse) => void): Request<Iot.Types.DescribeIndexResponse, AWSError>;
+  describeIndex(params: BoundInput<Iot.Types.DescribeIndexRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DescribeIndexResponse) => void): Request<Iot.Types.DescribeIndexResponse, AWSError>;
   /**
    * Describes a search index.
    */
@@ -510,7 +512,7 @@ declare class Iot extends Service {
   /**
    * Describes a job.
    */
-  describeJob(params: Iot.Types.DescribeJobRequest, callback?: (err: AWSError, data: Iot.Types.DescribeJobResponse) => void): Request<Iot.Types.DescribeJobResponse, AWSError>;
+  describeJob(params: BoundInput<Iot.Types.DescribeJobRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DescribeJobResponse) => void): Request<Iot.Types.DescribeJobResponse, AWSError>;
   /**
    * Describes a job.
    */
@@ -518,7 +520,7 @@ declare class Iot extends Service {
   /**
    * Describes a job execution.
    */
-  describeJobExecution(params: Iot.Types.DescribeJobExecutionRequest, callback?: (err: AWSError, data: Iot.Types.DescribeJobExecutionResponse) => void): Request<Iot.Types.DescribeJobExecutionResponse, AWSError>;
+  describeJobExecution(params: BoundInput<Iot.Types.DescribeJobExecutionRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DescribeJobExecutionResponse) => void): Request<Iot.Types.DescribeJobExecutionResponse, AWSError>;
   /**
    * Describes a job execution.
    */
@@ -526,7 +528,7 @@ declare class Iot extends Service {
   /**
    * Describes a role alias.
    */
-  describeRoleAlias(params: Iot.Types.DescribeRoleAliasRequest, callback?: (err: AWSError, data: Iot.Types.DescribeRoleAliasResponse) => void): Request<Iot.Types.DescribeRoleAliasResponse, AWSError>;
+  describeRoleAlias(params: BoundInput<Iot.Types.DescribeRoleAliasRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DescribeRoleAliasResponse) => void): Request<Iot.Types.DescribeRoleAliasResponse, AWSError>;
   /**
    * Describes a role alias.
    */
@@ -534,7 +536,7 @@ declare class Iot extends Service {
   /**
    * Gets information about a scheduled audit.
    */
-  describeScheduledAudit(params: Iot.Types.DescribeScheduledAuditRequest, callback?: (err: AWSError, data: Iot.Types.DescribeScheduledAuditResponse) => void): Request<Iot.Types.DescribeScheduledAuditResponse, AWSError>;
+  describeScheduledAudit(params: BoundInput<Iot.Types.DescribeScheduledAuditRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DescribeScheduledAuditResponse) => void): Request<Iot.Types.DescribeScheduledAuditResponse, AWSError>;
   /**
    * Gets information about a scheduled audit.
    */
@@ -542,7 +544,7 @@ declare class Iot extends Service {
   /**
    * Gets information about a Device Defender security profile.
    */
-  describeSecurityProfile(params: Iot.Types.DescribeSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.DescribeSecurityProfileResponse) => void): Request<Iot.Types.DescribeSecurityProfileResponse, AWSError>;
+  describeSecurityProfile(params: BoundInput<Iot.Types.DescribeSecurityProfileRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DescribeSecurityProfileResponse) => void): Request<Iot.Types.DescribeSecurityProfileResponse, AWSError>;
   /**
    * Gets information about a Device Defender security profile.
    */
@@ -550,7 +552,7 @@ declare class Iot extends Service {
   /**
    * Gets information about a stream.
    */
-  describeStream(params: Iot.Types.DescribeStreamRequest, callback?: (err: AWSError, data: Iot.Types.DescribeStreamResponse) => void): Request<Iot.Types.DescribeStreamResponse, AWSError>;
+  describeStream(params: BoundInput<Iot.Types.DescribeStreamRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DescribeStreamResponse) => void): Request<Iot.Types.DescribeStreamResponse, AWSError>;
   /**
    * Gets information about a stream.
    */
@@ -558,7 +560,7 @@ declare class Iot extends Service {
   /**
    * Gets information about the specified thing.
    */
-  describeThing(params: Iot.Types.DescribeThingRequest, callback?: (err: AWSError, data: Iot.Types.DescribeThingResponse) => void): Request<Iot.Types.DescribeThingResponse, AWSError>;
+  describeThing(params: BoundInput<Iot.Types.DescribeThingRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DescribeThingResponse) => void): Request<Iot.Types.DescribeThingResponse, AWSError>;
   /**
    * Gets information about the specified thing.
    */
@@ -566,7 +568,7 @@ declare class Iot extends Service {
   /**
    * Describe a thing group.
    */
-  describeThingGroup(params: Iot.Types.DescribeThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.DescribeThingGroupResponse) => void): Request<Iot.Types.DescribeThingGroupResponse, AWSError>;
+  describeThingGroup(params: BoundInput<Iot.Types.DescribeThingGroupRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DescribeThingGroupResponse) => void): Request<Iot.Types.DescribeThingGroupResponse, AWSError>;
   /**
    * Describe a thing group.
    */
@@ -574,7 +576,7 @@ declare class Iot extends Service {
   /**
    * Describes a bulk thing provisioning task.
    */
-  describeThingRegistrationTask(params: Iot.Types.DescribeThingRegistrationTaskRequest, callback?: (err: AWSError, data: Iot.Types.DescribeThingRegistrationTaskResponse) => void): Request<Iot.Types.DescribeThingRegistrationTaskResponse, AWSError>;
+  describeThingRegistrationTask(params: BoundInput<Iot.Types.DescribeThingRegistrationTaskRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DescribeThingRegistrationTaskResponse) => void): Request<Iot.Types.DescribeThingRegistrationTaskResponse, AWSError>;
   /**
    * Describes a bulk thing provisioning task.
    */
@@ -582,7 +584,7 @@ declare class Iot extends Service {
   /**
    * Gets information about the specified thing type.
    */
-  describeThingType(params: Iot.Types.DescribeThingTypeRequest, callback?: (err: AWSError, data: Iot.Types.DescribeThingTypeResponse) => void): Request<Iot.Types.DescribeThingTypeResponse, AWSError>;
+  describeThingType(params: BoundInput<Iot.Types.DescribeThingTypeRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DescribeThingTypeResponse) => void): Request<Iot.Types.DescribeThingTypeResponse, AWSError>;
   /**
    * Gets information about the specified thing type.
    */
@@ -590,7 +592,7 @@ declare class Iot extends Service {
   /**
    * Detaches a policy from the specified target.
    */
-  detachPolicy(params: Iot.Types.DetachPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  detachPolicy(params: BoundInput<Iot.Types.DetachPolicyRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Detaches a policy from the specified target.
    */
@@ -598,7 +600,7 @@ declare class Iot extends Service {
   /**
    * Removes the specified policy from the specified certificate.  Note: This API is deprecated. Please use DetachPolicy instead.
    */
-  detachPrincipalPolicy(params: Iot.Types.DetachPrincipalPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  detachPrincipalPolicy(params: BoundInput<Iot.Types.DetachPrincipalPolicyRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes the specified policy from the specified certificate.  Note: This API is deprecated. Please use DetachPolicy instead.
    */
@@ -606,7 +608,7 @@ declare class Iot extends Service {
   /**
    * Disassociates a Device Defender security profile from a thing group or from this account.
    */
-  detachSecurityProfile(params: Iot.Types.DetachSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.DetachSecurityProfileResponse) => void): Request<Iot.Types.DetachSecurityProfileResponse, AWSError>;
+  detachSecurityProfile(params: BoundInput<Iot.Types.DetachSecurityProfileRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DetachSecurityProfileResponse) => void): Request<Iot.Types.DetachSecurityProfileResponse, AWSError>;
   /**
    * Disassociates a Device Defender security profile from a thing group or from this account.
    */
@@ -614,7 +616,7 @@ declare class Iot extends Service {
   /**
    * Detaches the specified principal from the specified thing.  This call is asynchronous. It might take several seconds for the detachment to propagate. 
    */
-  detachThingPrincipal(params: Iot.Types.DetachThingPrincipalRequest, callback?: (err: AWSError, data: Iot.Types.DetachThingPrincipalResponse) => void): Request<Iot.Types.DetachThingPrincipalResponse, AWSError>;
+  detachThingPrincipal(params: BoundInput<Iot.Types.DetachThingPrincipalRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.DetachThingPrincipalResponse) => void): Request<Iot.Types.DetachThingPrincipalResponse, AWSError>;
   /**
    * Detaches the specified principal from the specified thing.  This call is asynchronous. It might take several seconds for the detachment to propagate. 
    */
@@ -622,7 +624,7 @@ declare class Iot extends Service {
   /**
    * Disables the rule.
    */
-  disableTopicRule(params: Iot.Types.DisableTopicRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  disableTopicRule(params: BoundInput<Iot.Types.DisableTopicRuleRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Disables the rule.
    */
@@ -630,7 +632,7 @@ declare class Iot extends Service {
   /**
    * Enables the rule.
    */
-  enableTopicRule(params: Iot.Types.EnableTopicRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  enableTopicRule(params: BoundInput<Iot.Types.EnableTopicRuleRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Enables the rule.
    */
@@ -638,7 +640,7 @@ declare class Iot extends Service {
   /**
    * Gets a list of the policies that have an effect on the authorization behavior of the specified device when it connects to the AWS IoT device gateway.
    */
-  getEffectivePolicies(params: Iot.Types.GetEffectivePoliciesRequest, callback?: (err: AWSError, data: Iot.Types.GetEffectivePoliciesResponse) => void): Request<Iot.Types.GetEffectivePoliciesResponse, AWSError>;
+  getEffectivePolicies(params: BoundInput<Iot.Types.GetEffectivePoliciesRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.GetEffectivePoliciesResponse) => void): Request<Iot.Types.GetEffectivePoliciesResponse, AWSError>;
   /**
    * Gets a list of the policies that have an effect on the authorization behavior of the specified device when it connects to the AWS IoT device gateway.
    */
@@ -646,7 +648,7 @@ declare class Iot extends Service {
   /**
    * Gets the search configuration.
    */
-  getIndexingConfiguration(params: Iot.Types.GetIndexingConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.GetIndexingConfigurationResponse) => void): Request<Iot.Types.GetIndexingConfigurationResponse, AWSError>;
+  getIndexingConfiguration(params: BoundInput<Iot.Types.GetIndexingConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.GetIndexingConfigurationResponse) => void): Request<Iot.Types.GetIndexingConfigurationResponse, AWSError>;
   /**
    * Gets the search configuration.
    */
@@ -654,7 +656,7 @@ declare class Iot extends Service {
   /**
    * Gets a job document.
    */
-  getJobDocument(params: Iot.Types.GetJobDocumentRequest, callback?: (err: AWSError, data: Iot.Types.GetJobDocumentResponse) => void): Request<Iot.Types.GetJobDocumentResponse, AWSError>;
+  getJobDocument(params: BoundInput<Iot.Types.GetJobDocumentRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.GetJobDocumentResponse) => void): Request<Iot.Types.GetJobDocumentResponse, AWSError>;
   /**
    * Gets a job document.
    */
@@ -662,7 +664,7 @@ declare class Iot extends Service {
   /**
    * Gets the logging options. NOTE: use of this command is not recommended. Use GetV2LoggingOptions instead.
    */
-  getLoggingOptions(params: Iot.Types.GetLoggingOptionsRequest, callback?: (err: AWSError, data: Iot.Types.GetLoggingOptionsResponse) => void): Request<Iot.Types.GetLoggingOptionsResponse, AWSError>;
+  getLoggingOptions(params: BoundInput<Iot.Types.GetLoggingOptionsRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.GetLoggingOptionsResponse) => void): Request<Iot.Types.GetLoggingOptionsResponse, AWSError>;
   /**
    * Gets the logging options. NOTE: use of this command is not recommended. Use GetV2LoggingOptions instead.
    */
@@ -670,7 +672,7 @@ declare class Iot extends Service {
   /**
    * Gets an OTA update.
    */
-  getOTAUpdate(params: Iot.Types.GetOTAUpdateRequest, callback?: (err: AWSError, data: Iot.Types.GetOTAUpdateResponse) => void): Request<Iot.Types.GetOTAUpdateResponse, AWSError>;
+  getOTAUpdate(params: BoundInput<Iot.Types.GetOTAUpdateRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.GetOTAUpdateResponse) => void): Request<Iot.Types.GetOTAUpdateResponse, AWSError>;
   /**
    * Gets an OTA update.
    */
@@ -678,7 +680,7 @@ declare class Iot extends Service {
   /**
    * Gets information about the specified policy with the policy document of the default version.
    */
-  getPolicy(params: Iot.Types.GetPolicyRequest, callback?: (err: AWSError, data: Iot.Types.GetPolicyResponse) => void): Request<Iot.Types.GetPolicyResponse, AWSError>;
+  getPolicy(params: BoundInput<Iot.Types.GetPolicyRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.GetPolicyResponse) => void): Request<Iot.Types.GetPolicyResponse, AWSError>;
   /**
    * Gets information about the specified policy with the policy document of the default version.
    */
@@ -686,7 +688,7 @@ declare class Iot extends Service {
   /**
    * Gets information about the specified policy version.
    */
-  getPolicyVersion(params: Iot.Types.GetPolicyVersionRequest, callback?: (err: AWSError, data: Iot.Types.GetPolicyVersionResponse) => void): Request<Iot.Types.GetPolicyVersionResponse, AWSError>;
+  getPolicyVersion(params: BoundInput<Iot.Types.GetPolicyVersionRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.GetPolicyVersionResponse) => void): Request<Iot.Types.GetPolicyVersionResponse, AWSError>;
   /**
    * Gets information about the specified policy version.
    */
@@ -694,7 +696,7 @@ declare class Iot extends Service {
   /**
    * Gets a registration code used to register a CA certificate with AWS IoT.
    */
-  getRegistrationCode(params: Iot.Types.GetRegistrationCodeRequest, callback?: (err: AWSError, data: Iot.Types.GetRegistrationCodeResponse) => void): Request<Iot.Types.GetRegistrationCodeResponse, AWSError>;
+  getRegistrationCode(params: BoundInput<Iot.Types.GetRegistrationCodeRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.GetRegistrationCodeResponse) => void): Request<Iot.Types.GetRegistrationCodeResponse, AWSError>;
   /**
    * Gets a registration code used to register a CA certificate with AWS IoT.
    */
@@ -702,7 +704,7 @@ declare class Iot extends Service {
   /**
    * Gets information about the rule.
    */
-  getTopicRule(params: Iot.Types.GetTopicRuleRequest, callback?: (err: AWSError, data: Iot.Types.GetTopicRuleResponse) => void): Request<Iot.Types.GetTopicRuleResponse, AWSError>;
+  getTopicRule(params: BoundInput<Iot.Types.GetTopicRuleRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.GetTopicRuleResponse) => void): Request<Iot.Types.GetTopicRuleResponse, AWSError>;
   /**
    * Gets information about the rule.
    */
@@ -710,7 +712,7 @@ declare class Iot extends Service {
   /**
    * Gets the fine grained logging options.
    */
-  getV2LoggingOptions(params: Iot.Types.GetV2LoggingOptionsRequest, callback?: (err: AWSError, data: Iot.Types.GetV2LoggingOptionsResponse) => void): Request<Iot.Types.GetV2LoggingOptionsResponse, AWSError>;
+  getV2LoggingOptions(params: BoundInput<Iot.Types.GetV2LoggingOptionsRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.GetV2LoggingOptionsResponse) => void): Request<Iot.Types.GetV2LoggingOptionsResponse, AWSError>;
   /**
    * Gets the fine grained logging options.
    */
@@ -718,7 +720,7 @@ declare class Iot extends Service {
   /**
    * Lists the active violations for a given Device Defender security profile.
    */
-  listActiveViolations(params: Iot.Types.ListActiveViolationsRequest, callback?: (err: AWSError, data: Iot.Types.ListActiveViolationsResponse) => void): Request<Iot.Types.ListActiveViolationsResponse, AWSError>;
+  listActiveViolations(params: BoundInput<Iot.Types.ListActiveViolationsRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListActiveViolationsResponse) => void): Request<Iot.Types.ListActiveViolationsResponse, AWSError>;
   /**
    * Lists the active violations for a given Device Defender security profile.
    */
@@ -726,7 +728,7 @@ declare class Iot extends Service {
   /**
    * Lists the policies attached to the specified thing group.
    */
-  listAttachedPolicies(params: Iot.Types.ListAttachedPoliciesRequest, callback?: (err: AWSError, data: Iot.Types.ListAttachedPoliciesResponse) => void): Request<Iot.Types.ListAttachedPoliciesResponse, AWSError>;
+  listAttachedPolicies(params: BoundInput<Iot.Types.ListAttachedPoliciesRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListAttachedPoliciesResponse) => void): Request<Iot.Types.ListAttachedPoliciesResponse, AWSError>;
   /**
    * Lists the policies attached to the specified thing group.
    */
@@ -734,7 +736,7 @@ declare class Iot extends Service {
   /**
    * Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 180 days.)
    */
-  listAuditFindings(params: Iot.Types.ListAuditFindingsRequest, callback?: (err: AWSError, data: Iot.Types.ListAuditFindingsResponse) => void): Request<Iot.Types.ListAuditFindingsResponse, AWSError>;
+  listAuditFindings(params: BoundInput<Iot.Types.ListAuditFindingsRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListAuditFindingsResponse) => void): Request<Iot.Types.ListAuditFindingsResponse, AWSError>;
   /**
    * Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 180 days.)
    */
@@ -742,7 +744,7 @@ declare class Iot extends Service {
   /**
    * Lists the Device Defender audits that have been performed during a given time period.
    */
-  listAuditTasks(params: Iot.Types.ListAuditTasksRequest, callback?: (err: AWSError, data: Iot.Types.ListAuditTasksResponse) => void): Request<Iot.Types.ListAuditTasksResponse, AWSError>;
+  listAuditTasks(params: BoundInput<Iot.Types.ListAuditTasksRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListAuditTasksResponse) => void): Request<Iot.Types.ListAuditTasksResponse, AWSError>;
   /**
    * Lists the Device Defender audits that have been performed during a given time period.
    */
@@ -750,7 +752,7 @@ declare class Iot extends Service {
   /**
    * Lists the authorizers registered in your account.
    */
-  listAuthorizers(params: Iot.Types.ListAuthorizersRequest, callback?: (err: AWSError, data: Iot.Types.ListAuthorizersResponse) => void): Request<Iot.Types.ListAuthorizersResponse, AWSError>;
+  listAuthorizers(params: BoundInput<Iot.Types.ListAuthorizersRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListAuthorizersResponse) => void): Request<Iot.Types.ListAuthorizersResponse, AWSError>;
   /**
    * Lists the authorizers registered in your account.
    */
@@ -758,7 +760,7 @@ declare class Iot extends Service {
   /**
    * Lists the billing groups you have created.
    */
-  listBillingGroups(params: Iot.Types.ListBillingGroupsRequest, callback?: (err: AWSError, data: Iot.Types.ListBillingGroupsResponse) => void): Request<Iot.Types.ListBillingGroupsResponse, AWSError>;
+  listBillingGroups(params: BoundInput<Iot.Types.ListBillingGroupsRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListBillingGroupsResponse) => void): Request<Iot.Types.ListBillingGroupsResponse, AWSError>;
   /**
    * Lists the billing groups you have created.
    */
@@ -766,7 +768,7 @@ declare class Iot extends Service {
   /**
    * Lists the CA certificates registered for your AWS account. The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results.
    */
-  listCACertificates(params: Iot.Types.ListCACertificatesRequest, callback?: (err: AWSError, data: Iot.Types.ListCACertificatesResponse) => void): Request<Iot.Types.ListCACertificatesResponse, AWSError>;
+  listCACertificates(params: BoundInput<Iot.Types.ListCACertificatesRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListCACertificatesResponse) => void): Request<Iot.Types.ListCACertificatesResponse, AWSError>;
   /**
    * Lists the CA certificates registered for your AWS account. The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results.
    */
@@ -774,7 +776,7 @@ declare class Iot extends Service {
   /**
    * Lists the certificates registered in your AWS account. The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results.
    */
-  listCertificates(params: Iot.Types.ListCertificatesRequest, callback?: (err: AWSError, data: Iot.Types.ListCertificatesResponse) => void): Request<Iot.Types.ListCertificatesResponse, AWSError>;
+  listCertificates(params: BoundInput<Iot.Types.ListCertificatesRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListCertificatesResponse) => void): Request<Iot.Types.ListCertificatesResponse, AWSError>;
   /**
    * Lists the certificates registered in your AWS account. The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results.
    */
@@ -782,7 +784,7 @@ declare class Iot extends Service {
   /**
    * List the device certificates signed by the specified CA certificate.
    */
-  listCertificatesByCA(params: Iot.Types.ListCertificatesByCARequest, callback?: (err: AWSError, data: Iot.Types.ListCertificatesByCAResponse) => void): Request<Iot.Types.ListCertificatesByCAResponse, AWSError>;
+  listCertificatesByCA(params: BoundInput<Iot.Types.ListCertificatesByCARequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListCertificatesByCAResponse) => void): Request<Iot.Types.ListCertificatesByCAResponse, AWSError>;
   /**
    * List the device certificates signed by the specified CA certificate.
    */
@@ -790,7 +792,7 @@ declare class Iot extends Service {
   /**
    * Lists the search indices.
    */
-  listIndices(params: Iot.Types.ListIndicesRequest, callback?: (err: AWSError, data: Iot.Types.ListIndicesResponse) => void): Request<Iot.Types.ListIndicesResponse, AWSError>;
+  listIndices(params: BoundInput<Iot.Types.ListIndicesRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListIndicesResponse) => void): Request<Iot.Types.ListIndicesResponse, AWSError>;
   /**
    * Lists the search indices.
    */
@@ -798,7 +800,7 @@ declare class Iot extends Service {
   /**
    * Lists the job executions for a job.
    */
-  listJobExecutionsForJob(params: Iot.Types.ListJobExecutionsForJobRequest, callback?: (err: AWSError, data: Iot.Types.ListJobExecutionsForJobResponse) => void): Request<Iot.Types.ListJobExecutionsForJobResponse, AWSError>;
+  listJobExecutionsForJob(params: BoundInput<Iot.Types.ListJobExecutionsForJobRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListJobExecutionsForJobResponse) => void): Request<Iot.Types.ListJobExecutionsForJobResponse, AWSError>;
   /**
    * Lists the job executions for a job.
    */
@@ -806,7 +808,7 @@ declare class Iot extends Service {
   /**
    * Lists the job executions for the specified thing.
    */
-  listJobExecutionsForThing(params: Iot.Types.ListJobExecutionsForThingRequest, callback?: (err: AWSError, data: Iot.Types.ListJobExecutionsForThingResponse) => void): Request<Iot.Types.ListJobExecutionsForThingResponse, AWSError>;
+  listJobExecutionsForThing(params: BoundInput<Iot.Types.ListJobExecutionsForThingRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListJobExecutionsForThingResponse) => void): Request<Iot.Types.ListJobExecutionsForThingResponse, AWSError>;
   /**
    * Lists the job executions for the specified thing.
    */
@@ -814,7 +816,7 @@ declare class Iot extends Service {
   /**
    * Lists jobs.
    */
-  listJobs(params: Iot.Types.ListJobsRequest, callback?: (err: AWSError, data: Iot.Types.ListJobsResponse) => void): Request<Iot.Types.ListJobsResponse, AWSError>;
+  listJobs(params: BoundInput<Iot.Types.ListJobsRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListJobsResponse) => void): Request<Iot.Types.ListJobsResponse, AWSError>;
   /**
    * Lists jobs.
    */
@@ -822,7 +824,7 @@ declare class Iot extends Service {
   /**
    * Lists OTA updates.
    */
-  listOTAUpdates(params: Iot.Types.ListOTAUpdatesRequest, callback?: (err: AWSError, data: Iot.Types.ListOTAUpdatesResponse) => void): Request<Iot.Types.ListOTAUpdatesResponse, AWSError>;
+  listOTAUpdates(params: BoundInput<Iot.Types.ListOTAUpdatesRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListOTAUpdatesResponse) => void): Request<Iot.Types.ListOTAUpdatesResponse, AWSError>;
   /**
    * Lists OTA updates.
    */
@@ -830,7 +832,7 @@ declare class Iot extends Service {
   /**
    * Lists certificates that are being transferred but not yet accepted.
    */
-  listOutgoingCertificates(params: Iot.Types.ListOutgoingCertificatesRequest, callback?: (err: AWSError, data: Iot.Types.ListOutgoingCertificatesResponse) => void): Request<Iot.Types.ListOutgoingCertificatesResponse, AWSError>;
+  listOutgoingCertificates(params: BoundInput<Iot.Types.ListOutgoingCertificatesRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListOutgoingCertificatesResponse) => void): Request<Iot.Types.ListOutgoingCertificatesResponse, AWSError>;
   /**
    * Lists certificates that are being transferred but not yet accepted.
    */
@@ -838,7 +840,7 @@ declare class Iot extends Service {
   /**
    * Lists your policies.
    */
-  listPolicies(params: Iot.Types.ListPoliciesRequest, callback?: (err: AWSError, data: Iot.Types.ListPoliciesResponse) => void): Request<Iot.Types.ListPoliciesResponse, AWSError>;
+  listPolicies(params: BoundInput<Iot.Types.ListPoliciesRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListPoliciesResponse) => void): Request<Iot.Types.ListPoliciesResponse, AWSError>;
   /**
    * Lists your policies.
    */
@@ -846,7 +848,7 @@ declare class Iot extends Service {
   /**
    * Lists the principals associated with the specified policy.  Note: This API is deprecated. Please use ListTargetsForPolicy instead.
    */
-  listPolicyPrincipals(params: Iot.Types.ListPolicyPrincipalsRequest, callback?: (err: AWSError, data: Iot.Types.ListPolicyPrincipalsResponse) => void): Request<Iot.Types.ListPolicyPrincipalsResponse, AWSError>;
+  listPolicyPrincipals(params: BoundInput<Iot.Types.ListPolicyPrincipalsRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListPolicyPrincipalsResponse) => void): Request<Iot.Types.ListPolicyPrincipalsResponse, AWSError>;
   /**
    * Lists the principals associated with the specified policy.  Note: This API is deprecated. Please use ListTargetsForPolicy instead.
    */
@@ -854,7 +856,7 @@ declare class Iot extends Service {
   /**
    * Lists the versions of the specified policy and identifies the default version.
    */
-  listPolicyVersions(params: Iot.Types.ListPolicyVersionsRequest, callback?: (err: AWSError, data: Iot.Types.ListPolicyVersionsResponse) => void): Request<Iot.Types.ListPolicyVersionsResponse, AWSError>;
+  listPolicyVersions(params: BoundInput<Iot.Types.ListPolicyVersionsRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListPolicyVersionsResponse) => void): Request<Iot.Types.ListPolicyVersionsResponse, AWSError>;
   /**
    * Lists the versions of the specified policy and identifies the default version.
    */
@@ -862,7 +864,7 @@ declare class Iot extends Service {
   /**
    * Lists the policies attached to the specified principal. If you use an Cognito identity, the ID must be in AmazonCognito Identity format.  Note: This API is deprecated. Please use ListAttachedPolicies instead.
    */
-  listPrincipalPolicies(params: Iot.Types.ListPrincipalPoliciesRequest, callback?: (err: AWSError, data: Iot.Types.ListPrincipalPoliciesResponse) => void): Request<Iot.Types.ListPrincipalPoliciesResponse, AWSError>;
+  listPrincipalPolicies(params: BoundInput<Iot.Types.ListPrincipalPoliciesRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListPrincipalPoliciesResponse) => void): Request<Iot.Types.ListPrincipalPoliciesResponse, AWSError>;
   /**
    * Lists the policies attached to the specified principal. If you use an Cognito identity, the ID must be in AmazonCognito Identity format.  Note: This API is deprecated. Please use ListAttachedPolicies instead.
    */
@@ -870,7 +872,7 @@ declare class Iot extends Service {
   /**
    * Lists the things associated with the specified principal.
    */
-  listPrincipalThings(params: Iot.Types.ListPrincipalThingsRequest, callback?: (err: AWSError, data: Iot.Types.ListPrincipalThingsResponse) => void): Request<Iot.Types.ListPrincipalThingsResponse, AWSError>;
+  listPrincipalThings(params: BoundInput<Iot.Types.ListPrincipalThingsRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListPrincipalThingsResponse) => void): Request<Iot.Types.ListPrincipalThingsResponse, AWSError>;
   /**
    * Lists the things associated with the specified principal.
    */
@@ -878,7 +880,7 @@ declare class Iot extends Service {
   /**
    * Lists the role aliases registered in your account.
    */
-  listRoleAliases(params: Iot.Types.ListRoleAliasesRequest, callback?: (err: AWSError, data: Iot.Types.ListRoleAliasesResponse) => void): Request<Iot.Types.ListRoleAliasesResponse, AWSError>;
+  listRoleAliases(params: BoundInput<Iot.Types.ListRoleAliasesRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListRoleAliasesResponse) => void): Request<Iot.Types.ListRoleAliasesResponse, AWSError>;
   /**
    * Lists the role aliases registered in your account.
    */
@@ -886,7 +888,7 @@ declare class Iot extends Service {
   /**
    * Lists all of your scheduled audits.
    */
-  listScheduledAudits(params: Iot.Types.ListScheduledAuditsRequest, callback?: (err: AWSError, data: Iot.Types.ListScheduledAuditsResponse) => void): Request<Iot.Types.ListScheduledAuditsResponse, AWSError>;
+  listScheduledAudits(params: BoundInput<Iot.Types.ListScheduledAuditsRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListScheduledAuditsResponse) => void): Request<Iot.Types.ListScheduledAuditsResponse, AWSError>;
   /**
    * Lists all of your scheduled audits.
    */
@@ -894,7 +896,7 @@ declare class Iot extends Service {
   /**
    * Lists the Device Defender security profiles you have created. You can use filters to list only those security profiles associated with a thing group or only those associated with your account.
    */
-  listSecurityProfiles(params: Iot.Types.ListSecurityProfilesRequest, callback?: (err: AWSError, data: Iot.Types.ListSecurityProfilesResponse) => void): Request<Iot.Types.ListSecurityProfilesResponse, AWSError>;
+  listSecurityProfiles(params: BoundInput<Iot.Types.ListSecurityProfilesRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListSecurityProfilesResponse) => void): Request<Iot.Types.ListSecurityProfilesResponse, AWSError>;
   /**
    * Lists the Device Defender security profiles you have created. You can use filters to list only those security profiles associated with a thing group or only those associated with your account.
    */
@@ -902,7 +904,7 @@ declare class Iot extends Service {
   /**
    * Lists the Device Defender security profiles attached to a target (thing group).
    */
-  listSecurityProfilesForTarget(params: Iot.Types.ListSecurityProfilesForTargetRequest, callback?: (err: AWSError, data: Iot.Types.ListSecurityProfilesForTargetResponse) => void): Request<Iot.Types.ListSecurityProfilesForTargetResponse, AWSError>;
+  listSecurityProfilesForTarget(params: BoundInput<Iot.Types.ListSecurityProfilesForTargetRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListSecurityProfilesForTargetResponse) => void): Request<Iot.Types.ListSecurityProfilesForTargetResponse, AWSError>;
   /**
    * Lists the Device Defender security profiles attached to a target (thing group).
    */
@@ -910,7 +912,7 @@ declare class Iot extends Service {
   /**
    * Lists all of the streams in your AWS account.
    */
-  listStreams(params: Iot.Types.ListStreamsRequest, callback?: (err: AWSError, data: Iot.Types.ListStreamsResponse) => void): Request<Iot.Types.ListStreamsResponse, AWSError>;
+  listStreams(params: BoundInput<Iot.Types.ListStreamsRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListStreamsResponse) => void): Request<Iot.Types.ListStreamsResponse, AWSError>;
   /**
    * Lists all of the streams in your AWS account.
    */
@@ -918,7 +920,7 @@ declare class Iot extends Service {
   /**
    * Lists the tags (metadata) you have assigned to the resource.
    */
-  listTagsForResource(params: Iot.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Iot.Types.ListTagsForResourceResponse) => void): Request<Iot.Types.ListTagsForResourceResponse, AWSError>;
+  listTagsForResource(params: BoundInput<Iot.Types.ListTagsForResourceRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListTagsForResourceResponse) => void): Request<Iot.Types.ListTagsForResourceResponse, AWSError>;
   /**
    * Lists the tags (metadata) you have assigned to the resource.
    */
@@ -926,7 +928,7 @@ declare class Iot extends Service {
   /**
    * List targets for the specified policy.
    */
-  listTargetsForPolicy(params: Iot.Types.ListTargetsForPolicyRequest, callback?: (err: AWSError, data: Iot.Types.ListTargetsForPolicyResponse) => void): Request<Iot.Types.ListTargetsForPolicyResponse, AWSError>;
+  listTargetsForPolicy(params: BoundInput<Iot.Types.ListTargetsForPolicyRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListTargetsForPolicyResponse) => void): Request<Iot.Types.ListTargetsForPolicyResponse, AWSError>;
   /**
    * List targets for the specified policy.
    */
@@ -934,7 +936,7 @@ declare class Iot extends Service {
   /**
    * Lists the targets (thing groups) associated with a given Device Defender security profile.
    */
-  listTargetsForSecurityProfile(params: Iot.Types.ListTargetsForSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.ListTargetsForSecurityProfileResponse) => void): Request<Iot.Types.ListTargetsForSecurityProfileResponse, AWSError>;
+  listTargetsForSecurityProfile(params: BoundInput<Iot.Types.ListTargetsForSecurityProfileRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListTargetsForSecurityProfileResponse) => void): Request<Iot.Types.ListTargetsForSecurityProfileResponse, AWSError>;
   /**
    * Lists the targets (thing groups) associated with a given Device Defender security profile.
    */
@@ -942,7 +944,7 @@ declare class Iot extends Service {
   /**
    * List the thing groups in your account.
    */
-  listThingGroups(params: Iot.Types.ListThingGroupsRequest, callback?: (err: AWSError, data: Iot.Types.ListThingGroupsResponse) => void): Request<Iot.Types.ListThingGroupsResponse, AWSError>;
+  listThingGroups(params: BoundInput<Iot.Types.ListThingGroupsRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListThingGroupsResponse) => void): Request<Iot.Types.ListThingGroupsResponse, AWSError>;
   /**
    * List the thing groups in your account.
    */
@@ -950,7 +952,7 @@ declare class Iot extends Service {
   /**
    * List the thing groups to which the specified thing belongs.
    */
-  listThingGroupsForThing(params: Iot.Types.ListThingGroupsForThingRequest, callback?: (err: AWSError, data: Iot.Types.ListThingGroupsForThingResponse) => void): Request<Iot.Types.ListThingGroupsForThingResponse, AWSError>;
+  listThingGroupsForThing(params: BoundInput<Iot.Types.ListThingGroupsForThingRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListThingGroupsForThingResponse) => void): Request<Iot.Types.ListThingGroupsForThingResponse, AWSError>;
   /**
    * List the thing groups to which the specified thing belongs.
    */
@@ -958,7 +960,7 @@ declare class Iot extends Service {
   /**
    * Lists the principals associated with the specified thing.
    */
-  listThingPrincipals(params: Iot.Types.ListThingPrincipalsRequest, callback?: (err: AWSError, data: Iot.Types.ListThingPrincipalsResponse) => void): Request<Iot.Types.ListThingPrincipalsResponse, AWSError>;
+  listThingPrincipals(params: BoundInput<Iot.Types.ListThingPrincipalsRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListThingPrincipalsResponse) => void): Request<Iot.Types.ListThingPrincipalsResponse, AWSError>;
   /**
    * Lists the principals associated with the specified thing.
    */
@@ -966,7 +968,7 @@ declare class Iot extends Service {
   /**
    * Information about the thing registration tasks.
    */
-  listThingRegistrationTaskReports(params: Iot.Types.ListThingRegistrationTaskReportsRequest, callback?: (err: AWSError, data: Iot.Types.ListThingRegistrationTaskReportsResponse) => void): Request<Iot.Types.ListThingRegistrationTaskReportsResponse, AWSError>;
+  listThingRegistrationTaskReports(params: BoundInput<Iot.Types.ListThingRegistrationTaskReportsRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListThingRegistrationTaskReportsResponse) => void): Request<Iot.Types.ListThingRegistrationTaskReportsResponse, AWSError>;
   /**
    * Information about the thing registration tasks.
    */
@@ -974,7 +976,7 @@ declare class Iot extends Service {
   /**
    * List bulk thing provisioning tasks.
    */
-  listThingRegistrationTasks(params: Iot.Types.ListThingRegistrationTasksRequest, callback?: (err: AWSError, data: Iot.Types.ListThingRegistrationTasksResponse) => void): Request<Iot.Types.ListThingRegistrationTasksResponse, AWSError>;
+  listThingRegistrationTasks(params: BoundInput<Iot.Types.ListThingRegistrationTasksRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListThingRegistrationTasksResponse) => void): Request<Iot.Types.ListThingRegistrationTasksResponse, AWSError>;
   /**
    * List bulk thing provisioning tasks.
    */
@@ -982,7 +984,7 @@ declare class Iot extends Service {
   /**
    * Lists the existing thing types.
    */
-  listThingTypes(params: Iot.Types.ListThingTypesRequest, callback?: (err: AWSError, data: Iot.Types.ListThingTypesResponse) => void): Request<Iot.Types.ListThingTypesResponse, AWSError>;
+  listThingTypes(params: BoundInput<Iot.Types.ListThingTypesRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListThingTypesResponse) => void): Request<Iot.Types.ListThingTypesResponse, AWSError>;
   /**
    * Lists the existing thing types.
    */
@@ -990,7 +992,7 @@ declare class Iot extends Service {
   /**
    * Lists your things. Use the attributeName and attributeValue parameters to filter your things. For example, calling ListThings with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute Color with the value Red. 
    */
-  listThings(params: Iot.Types.ListThingsRequest, callback?: (err: AWSError, data: Iot.Types.ListThingsResponse) => void): Request<Iot.Types.ListThingsResponse, AWSError>;
+  listThings(params: BoundInput<Iot.Types.ListThingsRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListThingsResponse) => void): Request<Iot.Types.ListThingsResponse, AWSError>;
   /**
    * Lists your things. Use the attributeName and attributeValue parameters to filter your things. For example, calling ListThings with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute Color with the value Red. 
    */
@@ -998,7 +1000,7 @@ declare class Iot extends Service {
   /**
    * Lists the things you have added to the given billing group.
    */
-  listThingsInBillingGroup(params: Iot.Types.ListThingsInBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.ListThingsInBillingGroupResponse) => void): Request<Iot.Types.ListThingsInBillingGroupResponse, AWSError>;
+  listThingsInBillingGroup(params: BoundInput<Iot.Types.ListThingsInBillingGroupRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListThingsInBillingGroupResponse) => void): Request<Iot.Types.ListThingsInBillingGroupResponse, AWSError>;
   /**
    * Lists the things you have added to the given billing group.
    */
@@ -1006,7 +1008,7 @@ declare class Iot extends Service {
   /**
    * Lists the things in the specified group.
    */
-  listThingsInThingGroup(params: Iot.Types.ListThingsInThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.ListThingsInThingGroupResponse) => void): Request<Iot.Types.ListThingsInThingGroupResponse, AWSError>;
+  listThingsInThingGroup(params: BoundInput<Iot.Types.ListThingsInThingGroupRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListThingsInThingGroupResponse) => void): Request<Iot.Types.ListThingsInThingGroupResponse, AWSError>;
   /**
    * Lists the things in the specified group.
    */
@@ -1014,7 +1016,7 @@ declare class Iot extends Service {
   /**
    * Lists the rules for the specific topic.
    */
-  listTopicRules(params: Iot.Types.ListTopicRulesRequest, callback?: (err: AWSError, data: Iot.Types.ListTopicRulesResponse) => void): Request<Iot.Types.ListTopicRulesResponse, AWSError>;
+  listTopicRules(params: BoundInput<Iot.Types.ListTopicRulesRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListTopicRulesResponse) => void): Request<Iot.Types.ListTopicRulesResponse, AWSError>;
   /**
    * Lists the rules for the specific topic.
    */
@@ -1022,7 +1024,7 @@ declare class Iot extends Service {
   /**
    * Lists logging levels.
    */
-  listV2LoggingLevels(params: Iot.Types.ListV2LoggingLevelsRequest, callback?: (err: AWSError, data: Iot.Types.ListV2LoggingLevelsResponse) => void): Request<Iot.Types.ListV2LoggingLevelsResponse, AWSError>;
+  listV2LoggingLevels(params: BoundInput<Iot.Types.ListV2LoggingLevelsRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListV2LoggingLevelsResponse) => void): Request<Iot.Types.ListV2LoggingLevelsResponse, AWSError>;
   /**
    * Lists logging levels.
    */
@@ -1030,7 +1032,7 @@ declare class Iot extends Service {
   /**
    * Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior or thing (device).
    */
-  listViolationEvents(params: Iot.Types.ListViolationEventsRequest, callback?: (err: AWSError, data: Iot.Types.ListViolationEventsResponse) => void): Request<Iot.Types.ListViolationEventsResponse, AWSError>;
+  listViolationEvents(params: BoundInput<Iot.Types.ListViolationEventsRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ListViolationEventsResponse) => void): Request<Iot.Types.ListViolationEventsResponse, AWSError>;
   /**
    * Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior or thing (device).
    */
@@ -1038,7 +1040,7 @@ declare class Iot extends Service {
   /**
    * Registers a CA certificate with AWS IoT. This CA certificate can then be used to sign device certificates, which can be then registered with AWS IoT. You can register up to 10 CA certificates per AWS account that have the same subject field. This enables you to have up to 10 certificate authorities sign your device certificates. If you have more than one CA certificate registered, make sure you pass the CA certificate when you register your device certificates with the RegisterCertificate API.
    */
-  registerCACertificate(params: Iot.Types.RegisterCACertificateRequest, callback?: (err: AWSError, data: Iot.Types.RegisterCACertificateResponse) => void): Request<Iot.Types.RegisterCACertificateResponse, AWSError>;
+  registerCACertificate(params: BoundInput<Iot.Types.RegisterCACertificateRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.RegisterCACertificateResponse) => void): Request<Iot.Types.RegisterCACertificateResponse, AWSError>;
   /**
    * Registers a CA certificate with AWS IoT. This CA certificate can then be used to sign device certificates, which can be then registered with AWS IoT. You can register up to 10 CA certificates per AWS account that have the same subject field. This enables you to have up to 10 certificate authorities sign your device certificates. If you have more than one CA certificate registered, make sure you pass the CA certificate when you register your device certificates with the RegisterCertificate API.
    */
@@ -1046,7 +1048,7 @@ declare class Iot extends Service {
   /**
    * Registers a device certificate with AWS IoT. If you have more than one CA certificate that has the same subject field, you must specify the CA certificate that was used to sign the device certificate being registered.
    */
-  registerCertificate(params: Iot.Types.RegisterCertificateRequest, callback?: (err: AWSError, data: Iot.Types.RegisterCertificateResponse) => void): Request<Iot.Types.RegisterCertificateResponse, AWSError>;
+  registerCertificate(params: BoundInput<Iot.Types.RegisterCertificateRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.RegisterCertificateResponse) => void): Request<Iot.Types.RegisterCertificateResponse, AWSError>;
   /**
    * Registers a device certificate with AWS IoT. If you have more than one CA certificate that has the same subject field, you must specify the CA certificate that was used to sign the device certificate being registered.
    */
@@ -1054,7 +1056,7 @@ declare class Iot extends Service {
   /**
    * Provisions a thing.
    */
-  registerThing(params: Iot.Types.RegisterThingRequest, callback?: (err: AWSError, data: Iot.Types.RegisterThingResponse) => void): Request<Iot.Types.RegisterThingResponse, AWSError>;
+  registerThing(params: BoundInput<Iot.Types.RegisterThingRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.RegisterThingResponse) => void): Request<Iot.Types.RegisterThingResponse, AWSError>;
   /**
    * Provisions a thing.
    */
@@ -1062,7 +1064,7 @@ declare class Iot extends Service {
   /**
    * Rejects a pending certificate transfer. After AWS IoT rejects a certificate transfer, the certificate status changes from PENDING_TRANSFER to INACTIVE. To check for pending certificate transfers, call ListCertificates to enumerate your certificates. This operation can only be called by the transfer destination. After it is called, the certificate will be returned to the source's account in the INACTIVE state.
    */
-  rejectCertificateTransfer(params: Iot.Types.RejectCertificateTransferRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  rejectCertificateTransfer(params: BoundInput<Iot.Types.RejectCertificateTransferRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Rejects a pending certificate transfer. After AWS IoT rejects a certificate transfer, the certificate status changes from PENDING_TRANSFER to INACTIVE. To check for pending certificate transfers, call ListCertificates to enumerate your certificates. This operation can only be called by the transfer destination. After it is called, the certificate will be returned to the source's account in the INACTIVE state.
    */
@@ -1070,7 +1072,7 @@ declare class Iot extends Service {
   /**
    * Removes the given thing from the billing group.
    */
-  removeThingFromBillingGroup(params: Iot.Types.RemoveThingFromBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.RemoveThingFromBillingGroupResponse) => void): Request<Iot.Types.RemoveThingFromBillingGroupResponse, AWSError>;
+  removeThingFromBillingGroup(params: BoundInput<Iot.Types.RemoveThingFromBillingGroupRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.RemoveThingFromBillingGroupResponse) => void): Request<Iot.Types.RemoveThingFromBillingGroupResponse, AWSError>;
   /**
    * Removes the given thing from the billing group.
    */
@@ -1078,7 +1080,7 @@ declare class Iot extends Service {
   /**
    * Remove the specified thing from the specified group.
    */
-  removeThingFromThingGroup(params: Iot.Types.RemoveThingFromThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.RemoveThingFromThingGroupResponse) => void): Request<Iot.Types.RemoveThingFromThingGroupResponse, AWSError>;
+  removeThingFromThingGroup(params: BoundInput<Iot.Types.RemoveThingFromThingGroupRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.RemoveThingFromThingGroupResponse) => void): Request<Iot.Types.RemoveThingFromThingGroupResponse, AWSError>;
   /**
    * Remove the specified thing from the specified group.
    */
@@ -1086,7 +1088,7 @@ declare class Iot extends Service {
   /**
    * Replaces the rule. You must specify all parameters for the new rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.
    */
-  replaceTopicRule(params: Iot.Types.ReplaceTopicRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  replaceTopicRule(params: BoundInput<Iot.Types.ReplaceTopicRuleRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Replaces the rule. You must specify all parameters for the new rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.
    */
@@ -1094,7 +1096,7 @@ declare class Iot extends Service {
   /**
    * The query search index.
    */
-  searchIndex(params: Iot.Types.SearchIndexRequest, callback?: (err: AWSError, data: Iot.Types.SearchIndexResponse) => void): Request<Iot.Types.SearchIndexResponse, AWSError>;
+  searchIndex(params: BoundInput<Iot.Types.SearchIndexRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.SearchIndexResponse) => void): Request<Iot.Types.SearchIndexResponse, AWSError>;
   /**
    * The query search index.
    */
@@ -1102,7 +1104,7 @@ declare class Iot extends Service {
   /**
    * Sets the default authorizer. This will be used if a websocket connection is made without specifying an authorizer.
    */
-  setDefaultAuthorizer(params: Iot.Types.SetDefaultAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.SetDefaultAuthorizerResponse) => void): Request<Iot.Types.SetDefaultAuthorizerResponse, AWSError>;
+  setDefaultAuthorizer(params: BoundInput<Iot.Types.SetDefaultAuthorizerRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.SetDefaultAuthorizerResponse) => void): Request<Iot.Types.SetDefaultAuthorizerResponse, AWSError>;
   /**
    * Sets the default authorizer. This will be used if a websocket connection is made without specifying an authorizer.
    */
@@ -1110,7 +1112,7 @@ declare class Iot extends Service {
   /**
    * Sets the specified version of the specified policy as the policy's default (operative) version. This action affects all certificates to which the policy is attached. To list the principals the policy is attached to, use the ListPrincipalPolicy API.
    */
-  setDefaultPolicyVersion(params: Iot.Types.SetDefaultPolicyVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  setDefaultPolicyVersion(params: BoundInput<Iot.Types.SetDefaultPolicyVersionRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sets the specified version of the specified policy as the policy's default (operative) version. This action affects all certificates to which the policy is attached. To list the principals the policy is attached to, use the ListPrincipalPolicy API.
    */
@@ -1118,7 +1120,7 @@ declare class Iot extends Service {
   /**
    * Sets the logging options. NOTE: use of this command is not recommended. Use SetV2LoggingOptions instead.
    */
-  setLoggingOptions(params: Iot.Types.SetLoggingOptionsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  setLoggingOptions(params: BoundInput<Iot.Types.SetLoggingOptionsRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sets the logging options. NOTE: use of this command is not recommended. Use SetV2LoggingOptions instead.
    */
@@ -1126,7 +1128,7 @@ declare class Iot extends Service {
   /**
    * Sets the logging level.
    */
-  setV2LoggingLevel(params: Iot.Types.SetV2LoggingLevelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  setV2LoggingLevel(params: BoundInput<Iot.Types.SetV2LoggingLevelRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sets the logging level.
    */
@@ -1134,7 +1136,7 @@ declare class Iot extends Service {
   /**
    * Sets the logging options for the V2 logging service.
    */
-  setV2LoggingOptions(params: Iot.Types.SetV2LoggingOptionsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  setV2LoggingOptions(params: BoundInput<Iot.Types.SetV2LoggingOptionsRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sets the logging options for the V2 logging service.
    */
@@ -1142,7 +1144,7 @@ declare class Iot extends Service {
   /**
    * Starts an on-demand Device Defender audit.
    */
-  startOnDemandAuditTask(params: Iot.Types.StartOnDemandAuditTaskRequest, callback?: (err: AWSError, data: Iot.Types.StartOnDemandAuditTaskResponse) => void): Request<Iot.Types.StartOnDemandAuditTaskResponse, AWSError>;
+  startOnDemandAuditTask(params: BoundInput<Iot.Types.StartOnDemandAuditTaskRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.StartOnDemandAuditTaskResponse) => void): Request<Iot.Types.StartOnDemandAuditTaskResponse, AWSError>;
   /**
    * Starts an on-demand Device Defender audit.
    */
@@ -1150,7 +1152,7 @@ declare class Iot extends Service {
   /**
    * Creates a bulk thing provisioning task.
    */
-  startThingRegistrationTask(params: Iot.Types.StartThingRegistrationTaskRequest, callback?: (err: AWSError, data: Iot.Types.StartThingRegistrationTaskResponse) => void): Request<Iot.Types.StartThingRegistrationTaskResponse, AWSError>;
+  startThingRegistrationTask(params: BoundInput<Iot.Types.StartThingRegistrationTaskRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.StartThingRegistrationTaskResponse) => void): Request<Iot.Types.StartThingRegistrationTaskResponse, AWSError>;
   /**
    * Creates a bulk thing provisioning task.
    */
@@ -1158,7 +1160,7 @@ declare class Iot extends Service {
   /**
    * Cancels a bulk thing provisioning task.
    */
-  stopThingRegistrationTask(params: Iot.Types.StopThingRegistrationTaskRequest, callback?: (err: AWSError, data: Iot.Types.StopThingRegistrationTaskResponse) => void): Request<Iot.Types.StopThingRegistrationTaskResponse, AWSError>;
+  stopThingRegistrationTask(params: BoundInput<Iot.Types.StopThingRegistrationTaskRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.StopThingRegistrationTaskResponse) => void): Request<Iot.Types.StopThingRegistrationTaskResponse, AWSError>;
   /**
    * Cancels a bulk thing provisioning task.
    */
@@ -1166,7 +1168,7 @@ declare class Iot extends Service {
   /**
    * Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.
    */
-  tagResource(params: Iot.Types.TagResourceRequest, callback?: (err: AWSError, data: Iot.Types.TagResourceResponse) => void): Request<Iot.Types.TagResourceResponse, AWSError>;
+  tagResource(params: BoundInput<Iot.Types.TagResourceRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.TagResourceResponse) => void): Request<Iot.Types.TagResourceResponse, AWSError>;
   /**
    * Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.
    */
@@ -1174,7 +1176,7 @@ declare class Iot extends Service {
   /**
    * Tests if a specified principal is authorized to perform an AWS IoT action on a specified resource. Use this to test and debug the authorization behavior of devices that connect to the AWS IoT device gateway.
    */
-  testAuthorization(params: Iot.Types.TestAuthorizationRequest, callback?: (err: AWSError, data: Iot.Types.TestAuthorizationResponse) => void): Request<Iot.Types.TestAuthorizationResponse, AWSError>;
+  testAuthorization(params: BoundInput<Iot.Types.TestAuthorizationRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.TestAuthorizationResponse) => void): Request<Iot.Types.TestAuthorizationResponse, AWSError>;
   /**
    * Tests if a specified principal is authorized to perform an AWS IoT action on a specified resource. Use this to test and debug the authorization behavior of devices that connect to the AWS IoT device gateway.
    */
@@ -1182,7 +1184,7 @@ declare class Iot extends Service {
   /**
    * Tests a custom authorization behavior by invoking a specified custom authorizer. Use this to test and debug the custom authorization behavior of devices that connect to the AWS IoT device gateway.
    */
-  testInvokeAuthorizer(params: Iot.Types.TestInvokeAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.TestInvokeAuthorizerResponse) => void): Request<Iot.Types.TestInvokeAuthorizerResponse, AWSError>;
+  testInvokeAuthorizer(params: BoundInput<Iot.Types.TestInvokeAuthorizerRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.TestInvokeAuthorizerResponse) => void): Request<Iot.Types.TestInvokeAuthorizerResponse, AWSError>;
   /**
    * Tests a custom authorization behavior by invoking a specified custom authorizer. Use this to test and debug the custom authorization behavior of devices that connect to the AWS IoT device gateway.
    */
@@ -1190,7 +1192,7 @@ declare class Iot extends Service {
   /**
    * Transfers the specified certificate to the specified AWS account. You can cancel the transfer until it is acknowledged by the recipient. No notification is sent to the transfer destination's account. It is up to the caller to notify the transfer target. The certificate being transferred must not be in the ACTIVE state. You can use the UpdateCertificate API to deactivate it. The certificate must not have any policies attached to it. You can use the DetachPrincipalPolicy API to detach them.
    */
-  transferCertificate(params: Iot.Types.TransferCertificateRequest, callback?: (err: AWSError, data: Iot.Types.TransferCertificateResponse) => void): Request<Iot.Types.TransferCertificateResponse, AWSError>;
+  transferCertificate(params: BoundInput<Iot.Types.TransferCertificateRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.TransferCertificateResponse) => void): Request<Iot.Types.TransferCertificateResponse, AWSError>;
   /**
    * Transfers the specified certificate to the specified AWS account. You can cancel the transfer until it is acknowledged by the recipient. No notification is sent to the transfer destination's account. It is up to the caller to notify the transfer target. The certificate being transferred must not be in the ACTIVE state. You can use the UpdateCertificate API to deactivate it. The certificate must not have any policies attached to it. You can use the DetachPrincipalPolicy API to detach them.
    */
@@ -1198,7 +1200,7 @@ declare class Iot extends Service {
   /**
    * Removes the given tags (metadata) from the resource.
    */
-  untagResource(params: Iot.Types.UntagResourceRequest, callback?: (err: AWSError, data: Iot.Types.UntagResourceResponse) => void): Request<Iot.Types.UntagResourceResponse, AWSError>;
+  untagResource(params: BoundInput<Iot.Types.UntagResourceRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.UntagResourceResponse) => void): Request<Iot.Types.UntagResourceResponse, AWSError>;
   /**
    * Removes the given tags (metadata) from the resource.
    */
@@ -1206,7 +1208,7 @@ declare class Iot extends Service {
   /**
    * Configures or reconfigures the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.
    */
-  updateAccountAuditConfiguration(params: Iot.Types.UpdateAccountAuditConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.UpdateAccountAuditConfigurationResponse) => void): Request<Iot.Types.UpdateAccountAuditConfigurationResponse, AWSError>;
+  updateAccountAuditConfiguration(params: BoundInput<Iot.Types.UpdateAccountAuditConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.UpdateAccountAuditConfigurationResponse) => void): Request<Iot.Types.UpdateAccountAuditConfigurationResponse, AWSError>;
   /**
    * Configures or reconfigures the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.
    */
@@ -1214,7 +1216,7 @@ declare class Iot extends Service {
   /**
    * Updates an authorizer.
    */
-  updateAuthorizer(params: Iot.Types.UpdateAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.UpdateAuthorizerResponse) => void): Request<Iot.Types.UpdateAuthorizerResponse, AWSError>;
+  updateAuthorizer(params: BoundInput<Iot.Types.UpdateAuthorizerRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.UpdateAuthorizerResponse) => void): Request<Iot.Types.UpdateAuthorizerResponse, AWSError>;
   /**
    * Updates an authorizer.
    */
@@ -1222,7 +1224,7 @@ declare class Iot extends Service {
   /**
    * Updates information about the billing group.
    */
-  updateBillingGroup(params: Iot.Types.UpdateBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.UpdateBillingGroupResponse) => void): Request<Iot.Types.UpdateBillingGroupResponse, AWSError>;
+  updateBillingGroup(params: BoundInput<Iot.Types.UpdateBillingGroupRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.UpdateBillingGroupResponse) => void): Request<Iot.Types.UpdateBillingGroupResponse, AWSError>;
   /**
    * Updates information about the billing group.
    */
@@ -1230,7 +1232,7 @@ declare class Iot extends Service {
   /**
    * Updates a registered CA certificate.
    */
-  updateCACertificate(params: Iot.Types.UpdateCACertificateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateCACertificate(params: BoundInput<Iot.Types.UpdateCACertificateRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates a registered CA certificate.
    */
@@ -1238,7 +1240,7 @@ declare class Iot extends Service {
   /**
    * Updates the status of the specified certificate. This operation is idempotent. Moving a certificate from the ACTIVE state (including REVOKED) will not disconnect currently connected devices, but these devices will be unable to reconnect. The ACTIVE state is required to authenticate devices connecting to AWS IoT using a certificate.
    */
-  updateCertificate(params: Iot.Types.UpdateCertificateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateCertificate(params: BoundInput<Iot.Types.UpdateCertificateRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates the status of the specified certificate. This operation is idempotent. Moving a certificate from the ACTIVE state (including REVOKED) will not disconnect currently connected devices, but these devices will be unable to reconnect. The ACTIVE state is required to authenticate devices connecting to AWS IoT using a certificate.
    */
@@ -1246,7 +1248,7 @@ declare class Iot extends Service {
   /**
    * Updates a dynamic thing group.
    */
-  updateDynamicThingGroup(params: Iot.Types.UpdateDynamicThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.UpdateDynamicThingGroupResponse) => void): Request<Iot.Types.UpdateDynamicThingGroupResponse, AWSError>;
+  updateDynamicThingGroup(params: BoundInput<Iot.Types.UpdateDynamicThingGroupRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.UpdateDynamicThingGroupResponse) => void): Request<Iot.Types.UpdateDynamicThingGroupResponse, AWSError>;
   /**
    * Updates a dynamic thing group.
    */
@@ -1254,7 +1256,7 @@ declare class Iot extends Service {
   /**
    * Updates the event configurations.
    */
-  updateEventConfigurations(params: Iot.Types.UpdateEventConfigurationsRequest, callback?: (err: AWSError, data: Iot.Types.UpdateEventConfigurationsResponse) => void): Request<Iot.Types.UpdateEventConfigurationsResponse, AWSError>;
+  updateEventConfigurations(params: BoundInput<Iot.Types.UpdateEventConfigurationsRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.UpdateEventConfigurationsResponse) => void): Request<Iot.Types.UpdateEventConfigurationsResponse, AWSError>;
   /**
    * Updates the event configurations.
    */
@@ -1262,7 +1264,7 @@ declare class Iot extends Service {
   /**
    * Updates the search configuration.
    */
-  updateIndexingConfiguration(params: Iot.Types.UpdateIndexingConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.UpdateIndexingConfigurationResponse) => void): Request<Iot.Types.UpdateIndexingConfigurationResponse, AWSError>;
+  updateIndexingConfiguration(params: BoundInput<Iot.Types.UpdateIndexingConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.UpdateIndexingConfigurationResponse) => void): Request<Iot.Types.UpdateIndexingConfigurationResponse, AWSError>;
   /**
    * Updates the search configuration.
    */
@@ -1270,7 +1272,7 @@ declare class Iot extends Service {
   /**
    * Updates supported fields of the specified job.
    */
-  updateJob(params: Iot.Types.UpdateJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateJob(params: BoundInput<Iot.Types.UpdateJobRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates supported fields of the specified job.
    */
@@ -1278,7 +1280,7 @@ declare class Iot extends Service {
   /**
    * Updates a role alias.
    */
-  updateRoleAlias(params: Iot.Types.UpdateRoleAliasRequest, callback?: (err: AWSError, data: Iot.Types.UpdateRoleAliasResponse) => void): Request<Iot.Types.UpdateRoleAliasResponse, AWSError>;
+  updateRoleAlias(params: BoundInput<Iot.Types.UpdateRoleAliasRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.UpdateRoleAliasResponse) => void): Request<Iot.Types.UpdateRoleAliasResponse, AWSError>;
   /**
    * Updates a role alias.
    */
@@ -1286,7 +1288,7 @@ declare class Iot extends Service {
   /**
    * Updates a scheduled audit, including what checks are performed and how often the audit takes place.
    */
-  updateScheduledAudit(params: Iot.Types.UpdateScheduledAuditRequest, callback?: (err: AWSError, data: Iot.Types.UpdateScheduledAuditResponse) => void): Request<Iot.Types.UpdateScheduledAuditResponse, AWSError>;
+  updateScheduledAudit(params: BoundInput<Iot.Types.UpdateScheduledAuditRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.UpdateScheduledAuditResponse) => void): Request<Iot.Types.UpdateScheduledAuditResponse, AWSError>;
   /**
    * Updates a scheduled audit, including what checks are performed and how often the audit takes place.
    */
@@ -1294,7 +1296,7 @@ declare class Iot extends Service {
   /**
    * Updates a Device Defender security profile.
    */
-  updateSecurityProfile(params: Iot.Types.UpdateSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.UpdateSecurityProfileResponse) => void): Request<Iot.Types.UpdateSecurityProfileResponse, AWSError>;
+  updateSecurityProfile(params: BoundInput<Iot.Types.UpdateSecurityProfileRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.UpdateSecurityProfileResponse) => void): Request<Iot.Types.UpdateSecurityProfileResponse, AWSError>;
   /**
    * Updates a Device Defender security profile.
    */
@@ -1302,7 +1304,7 @@ declare class Iot extends Service {
   /**
    * Updates an existing stream. The stream version will be incremented by one.
    */
-  updateStream(params: Iot.Types.UpdateStreamRequest, callback?: (err: AWSError, data: Iot.Types.UpdateStreamResponse) => void): Request<Iot.Types.UpdateStreamResponse, AWSError>;
+  updateStream(params: BoundInput<Iot.Types.UpdateStreamRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.UpdateStreamResponse) => void): Request<Iot.Types.UpdateStreamResponse, AWSError>;
   /**
    * Updates an existing stream. The stream version will be incremented by one.
    */
@@ -1310,7 +1312,7 @@ declare class Iot extends Service {
   /**
    * Updates the data for a thing.
    */
-  updateThing(params: Iot.Types.UpdateThingRequest, callback?: (err: AWSError, data: Iot.Types.UpdateThingResponse) => void): Request<Iot.Types.UpdateThingResponse, AWSError>;
+  updateThing(params: BoundInput<Iot.Types.UpdateThingRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.UpdateThingResponse) => void): Request<Iot.Types.UpdateThingResponse, AWSError>;
   /**
    * Updates the data for a thing.
    */
@@ -1318,7 +1320,7 @@ declare class Iot extends Service {
   /**
    * Update a thing group.
    */
-  updateThingGroup(params: Iot.Types.UpdateThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.UpdateThingGroupResponse) => void): Request<Iot.Types.UpdateThingGroupResponse, AWSError>;
+  updateThingGroup(params: BoundInput<Iot.Types.UpdateThingGroupRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.UpdateThingGroupResponse) => void): Request<Iot.Types.UpdateThingGroupResponse, AWSError>;
   /**
    * Update a thing group.
    */
@@ -1326,7 +1328,7 @@ declare class Iot extends Service {
   /**
    * Updates the groups to which the thing belongs.
    */
-  updateThingGroupsForThing(params: Iot.Types.UpdateThingGroupsForThingRequest, callback?: (err: AWSError, data: Iot.Types.UpdateThingGroupsForThingResponse) => void): Request<Iot.Types.UpdateThingGroupsForThingResponse, AWSError>;
+  updateThingGroupsForThing(params: BoundInput<Iot.Types.UpdateThingGroupsForThingRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.UpdateThingGroupsForThingResponse) => void): Request<Iot.Types.UpdateThingGroupsForThingResponse, AWSError>;
   /**
    * Updates the groups to which the thing belongs.
    */
@@ -1334,7 +1336,7 @@ declare class Iot extends Service {
   /**
    * Validates a Device Defender security profile behaviors specification.
    */
-  validateSecurityProfileBehaviors(params: Iot.Types.ValidateSecurityProfileBehaviorsRequest, callback?: (err: AWSError, data: Iot.Types.ValidateSecurityProfileBehaviorsResponse) => void): Request<Iot.Types.ValidateSecurityProfileBehaviorsResponse, AWSError>;
+  validateSecurityProfileBehaviors(params: BoundInput<Iot.Types.ValidateSecurityProfileBehaviorsRequest, keyof Params>, callback?: (err: AWSError, data: Iot.Types.ValidateSecurityProfileBehaviorsResponse) => void): Request<Iot.Types.ValidateSecurityProfileBehaviorsResponse, AWSError>;
   /**
    * Validates a Device Defender security profile behaviors specification.
    */
@@ -7253,7 +7255,8 @@ declare namespace Iot {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AcceptCertificateTransferRequest & AddThingToBillingGroupRequest & AddThingToThingGroupRequest & AssociateTargetsWithJobRequest & AttachPolicyRequest & AttachPrincipalPolicyRequest & AttachSecurityProfileRequest & AttachThingPrincipalRequest & CancelAuditTaskRequest & CancelCertificateTransferRequest & CancelJobRequest & CancelJobExecutionRequest & ClearDefaultAuthorizerRequest & CreateAuthorizerRequest & CreateBillingGroupRequest & CreateCertificateFromCsrRequest & CreateDynamicThingGroupRequest & CreateJobRequest & CreateKeysAndCertificateRequest & CreateOTAUpdateRequest & CreatePolicyRequest & CreatePolicyVersionRequest & CreateRoleAliasRequest & CreateScheduledAuditRequest & CreateSecurityProfileRequest & CreateStreamRequest & CreateThingRequest & CreateThingGroupRequest & CreateThingTypeRequest & CreateTopicRuleRequest & DeleteAccountAuditConfigurationRequest & DeleteAuthorizerRequest & DeleteBillingGroupRequest & DeleteCACertificateRequest & DeleteCertificateRequest & DeleteDynamicThingGroupRequest & DeleteJobRequest & DeleteJobExecutionRequest & DeleteOTAUpdateRequest & DeletePolicyRequest & DeletePolicyVersionRequest & DeleteRegistrationCodeRequest & DeleteRoleAliasRequest & DeleteScheduledAuditRequest & DeleteSecurityProfileRequest & DeleteStreamRequest & DeleteThingRequest & DeleteThingGroupRequest & DeleteThingTypeRequest & DeleteTopicRuleRequest & DeleteV2LoggingLevelRequest & DeprecateThingTypeRequest & DescribeAccountAuditConfigurationRequest & DescribeAuditTaskRequest & DescribeAuthorizerRequest & DescribeBillingGroupRequest & DescribeCACertificateRequest & DescribeCertificateRequest & DescribeDefaultAuthorizerRequest & DescribeEndpointRequest & DescribeEventConfigurationsRequest & DescribeIndexRequest & DescribeJobRequest & DescribeJobExecutionRequest & DescribeRoleAliasRequest & DescribeScheduledAuditRequest & DescribeSecurityProfileRequest & DescribeStreamRequest & DescribeThingRequest & DescribeThingGroupRequest & DescribeThingRegistrationTaskRequest & DescribeThingTypeRequest & DetachPolicyRequest & DetachPrincipalPolicyRequest & DetachSecurityProfileRequest & DetachThingPrincipalRequest & DisableTopicRuleRequest & EnableTopicRuleRequest & GetEffectivePoliciesRequest & GetIndexingConfigurationRequest & GetJobDocumentRequest & GetLoggingOptionsRequest & GetOTAUpdateRequest & GetPolicyRequest & GetPolicyVersionRequest & GetRegistrationCodeRequest & GetTopicRuleRequest & GetV2LoggingOptionsRequest & ListActiveViolationsRequest & ListAttachedPoliciesRequest & ListAuditFindingsRequest & ListAuditTasksRequest & ListAuthorizersRequest & ListBillingGroupsRequest & ListCACertificatesRequest & ListCertificatesRequest & ListCertificatesByCARequest & ListIndicesRequest & ListJobExecutionsForJobRequest & ListJobExecutionsForThingRequest & ListJobsRequest & ListOTAUpdatesRequest & ListOutgoingCertificatesRequest & ListPoliciesRequest & ListPolicyPrincipalsRequest & ListPolicyVersionsRequest & ListPrincipalPoliciesRequest & ListPrincipalThingsRequest & ListRoleAliasesRequest & ListScheduledAuditsRequest & ListSecurityProfilesRequest & ListSecurityProfilesForTargetRequest & ListStreamsRequest & ListTagsForResourceRequest & ListTargetsForPolicyRequest & ListTargetsForSecurityProfileRequest & ListThingGroupsRequest & ListThingGroupsForThingRequest & ListThingPrincipalsRequest & ListThingRegistrationTaskReportsRequest & ListThingRegistrationTasksRequest & ListThingTypesRequest & ListThingsRequest & ListThingsInBillingGroupRequest & ListThingsInThingGroupRequest & ListTopicRulesRequest & ListV2LoggingLevelsRequest & ListViolationEventsRequest & RegisterCACertificateRequest & RegisterCertificateRequest & RegisterThingRequest & RejectCertificateTransferRequest & RemoveThingFromBillingGroupRequest & RemoveThingFromThingGroupRequest & ReplaceTopicRuleRequest & SearchIndexRequest & SetDefaultAuthorizerRequest & SetDefaultPolicyVersionRequest & SetLoggingOptionsRequest & SetV2LoggingLevelRequest & SetV2LoggingOptionsRequest & StartOnDemandAuditTaskRequest & StartThingRegistrationTaskRequest & StopThingRegistrationTaskRequest & TagResourceRequest & TestAuthorizationRequest & TestInvokeAuthorizerRequest & TransferCertificateRequest & UntagResourceRequest & UpdateAccountAuditConfigurationRequest & UpdateAuthorizerRequest & UpdateBillingGroupRequest & UpdateCACertificateRequest & UpdateCertificateRequest & UpdateDynamicThingGroupRequest & UpdateEventConfigurationsRequest & UpdateIndexingConfigurationRequest & UpdateJobRequest & UpdateRoleAliasRequest & UpdateScheduledAuditRequest & UpdateSecurityProfileRequest & UpdateStreamRequest & UpdateThingRequest & UpdateThingGroupRequest & UpdateThingGroupsForThingRequest & ValidateSecurityProfileBehaviorsRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the Iot client.
    */

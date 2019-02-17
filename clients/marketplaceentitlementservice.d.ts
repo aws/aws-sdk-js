@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class MarketplaceEntitlementService extends Service {
+declare class MarketplaceEntitlementService<Params extends MarketplaceEntitlementService.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: MarketplaceEntitlementService.Types.ClientConfiguration)
-  config: Config & MarketplaceEntitlementService.Types.ClientConfiguration;
+  constructor(options?: MarketplaceEntitlementService.Types.ClientConfiguration<Params>)
+  config: Config & MarketplaceEntitlementService.Types.ClientConfiguration<Params>;
   /**
    * GetEntitlements retrieves entitlement values for a given product. The results can be filtered based on customer identifier or product dimensions.
    */
-  getEntitlements(params: MarketplaceEntitlementService.Types.GetEntitlementsRequest, callback?: (err: AWSError, data: MarketplaceEntitlementService.Types.GetEntitlementsResult) => void): Request<MarketplaceEntitlementService.Types.GetEntitlementsResult, AWSError>;
+  getEntitlements(params: BoundInput<MarketplaceEntitlementService.Types.GetEntitlementsRequest, keyof Params>, callback?: (err: AWSError, data: MarketplaceEntitlementService.Types.GetEntitlementsResult) => void): Request<MarketplaceEntitlementService.Types.GetEntitlementsResult, AWSError>;
   /**
    * GetEntitlements retrieves entitlement values for a given product. The results can be filtered based on customer identifier or product dimensions.
    */
@@ -111,7 +113,8 @@ declare namespace MarketplaceEntitlementService {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<GetEntitlementsRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the MarketplaceEntitlementService client.
    */

@@ -4,18 +4,20 @@ import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class CodeDeploy extends Service {
+declare class CodeDeploy<Params extends CodeDeploy.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: CodeDeploy.Types.ClientConfiguration)
-  config: Config & CodeDeploy.Types.ClientConfiguration;
+  constructor(options?: CodeDeploy.Types.ClientConfiguration<Params>)
+  config: Config & CodeDeploy.Types.ClientConfiguration<Params>;
   /**
    * Adds tags to on-premises instances.
    */
-  addTagsToOnPremisesInstances(params: CodeDeploy.Types.AddTagsToOnPremisesInstancesInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  addTagsToOnPremisesInstances(params: BoundInput<CodeDeploy.Types.AddTagsToOnPremisesInstancesInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Adds tags to on-premises instances.
    */
@@ -23,7 +25,7 @@ declare class CodeDeploy extends Service {
   /**
    * Gets information about one or more application revisions.
    */
-  batchGetApplicationRevisions(params: CodeDeploy.Types.BatchGetApplicationRevisionsInput, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetApplicationRevisionsOutput) => void): Request<CodeDeploy.Types.BatchGetApplicationRevisionsOutput, AWSError>;
+  batchGetApplicationRevisions(params: BoundInput<CodeDeploy.Types.BatchGetApplicationRevisionsInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetApplicationRevisionsOutput) => void): Request<CodeDeploy.Types.BatchGetApplicationRevisionsOutput, AWSError>;
   /**
    * Gets information about one or more application revisions.
    */
@@ -31,7 +33,7 @@ declare class CodeDeploy extends Service {
   /**
    * Gets information about one or more applications.
    */
-  batchGetApplications(params: CodeDeploy.Types.BatchGetApplicationsInput, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetApplicationsOutput) => void): Request<CodeDeploy.Types.BatchGetApplicationsOutput, AWSError>;
+  batchGetApplications(params: BoundInput<CodeDeploy.Types.BatchGetApplicationsInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetApplicationsOutput) => void): Request<CodeDeploy.Types.BatchGetApplicationsOutput, AWSError>;
   /**
    * Gets information about one or more applications.
    */
@@ -39,7 +41,7 @@ declare class CodeDeploy extends Service {
   /**
    * Gets information about one or more deployment groups.
    */
-  batchGetDeploymentGroups(params: CodeDeploy.Types.BatchGetDeploymentGroupsInput, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentGroupsOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentGroupsOutput, AWSError>;
+  batchGetDeploymentGroups(params: BoundInput<CodeDeploy.Types.BatchGetDeploymentGroupsInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentGroupsOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentGroupsOutput, AWSError>;
   /**
    * Gets information about one or more deployment groups.
    */
@@ -47,7 +49,7 @@ declare class CodeDeploy extends Service {
   /**
    *   This method works, but is deprecated. Use BatchGetDeploymentTargets instead.    Returns an array of instances associated with a deployment. This method works with EC2/On-premises and AWS Lambda compute platforms. The newer BatchGetDeploymentTargets works with all compute platforms. 
    */
-  batchGetDeploymentInstances(params: CodeDeploy.Types.BatchGetDeploymentInstancesInput, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentInstancesOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentInstancesOutput, AWSError>;
+  batchGetDeploymentInstances(params: BoundInput<CodeDeploy.Types.BatchGetDeploymentInstancesInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentInstancesOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentInstancesOutput, AWSError>;
   /**
    *   This method works, but is deprecated. Use BatchGetDeploymentTargets instead.    Returns an array of instances associated with a deployment. This method works with EC2/On-premises and AWS Lambda compute platforms. The newer BatchGetDeploymentTargets works with all compute platforms. 
    */
@@ -55,7 +57,7 @@ declare class CodeDeploy extends Service {
   /**
    *  Returns an array of targets associated with a deployment. This method works with all compute types and should be used instead of the deprecated BatchGetDeploymentInstances.   The type of targets returned depends on the deployment's compute platform:     EC2/On-premises: Information about EC2 instance targets.     AWS Lambda: Information about Lambda functions targets.     Amazon ECS: Information about Amazon ECS service targets.   
    */
-  batchGetDeploymentTargets(params: CodeDeploy.Types.BatchGetDeploymentTargetsInput, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentTargetsOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentTargetsOutput, AWSError>;
+  batchGetDeploymentTargets(params: BoundInput<CodeDeploy.Types.BatchGetDeploymentTargetsInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentTargetsOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentTargetsOutput, AWSError>;
   /**
    *  Returns an array of targets associated with a deployment. This method works with all compute types and should be used instead of the deprecated BatchGetDeploymentInstances.   The type of targets returned depends on the deployment's compute platform:     EC2/On-premises: Information about EC2 instance targets.     AWS Lambda: Information about Lambda functions targets.     Amazon ECS: Information about Amazon ECS service targets.   
    */
@@ -63,7 +65,7 @@ declare class CodeDeploy extends Service {
   /**
    * Gets information about one or more deployments.
    */
-  batchGetDeployments(params: CodeDeploy.Types.BatchGetDeploymentsInput, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentsOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentsOutput, AWSError>;
+  batchGetDeployments(params: BoundInput<CodeDeploy.Types.BatchGetDeploymentsInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentsOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentsOutput, AWSError>;
   /**
    * Gets information about one or more deployments.
    */
@@ -71,7 +73,7 @@ declare class CodeDeploy extends Service {
   /**
    * Gets information about one or more on-premises instances.
    */
-  batchGetOnPremisesInstances(params: CodeDeploy.Types.BatchGetOnPremisesInstancesInput, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetOnPremisesInstancesOutput) => void): Request<CodeDeploy.Types.BatchGetOnPremisesInstancesOutput, AWSError>;
+  batchGetOnPremisesInstances(params: BoundInput<CodeDeploy.Types.BatchGetOnPremisesInstancesInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetOnPremisesInstancesOutput) => void): Request<CodeDeploy.Types.BatchGetOnPremisesInstancesOutput, AWSError>;
   /**
    * Gets information about one or more on-premises instances.
    */
@@ -79,7 +81,7 @@ declare class CodeDeploy extends Service {
   /**
    * For a blue/green deployment, starts the process of rerouting traffic from instances in the original environment to instances in the replacement environment without waiting for a specified wait time to elapse. (Traffic rerouting, which is achieved by registering instances in the replacement environment with the load balancer, can start as soon as all instances have a status of Ready.) 
    */
-  continueDeployment(params: CodeDeploy.Types.ContinueDeploymentInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  continueDeployment(params: BoundInput<CodeDeploy.Types.ContinueDeploymentInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * For a blue/green deployment, starts the process of rerouting traffic from instances in the original environment to instances in the replacement environment without waiting for a specified wait time to elapse. (Traffic rerouting, which is achieved by registering instances in the replacement environment with the load balancer, can start as soon as all instances have a status of Ready.) 
    */
@@ -87,7 +89,7 @@ declare class CodeDeploy extends Service {
   /**
    * Creates an application.
    */
-  createApplication(params: CodeDeploy.Types.CreateApplicationInput, callback?: (err: AWSError, data: CodeDeploy.Types.CreateApplicationOutput) => void): Request<CodeDeploy.Types.CreateApplicationOutput, AWSError>;
+  createApplication(params: BoundInput<CodeDeploy.Types.CreateApplicationInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.CreateApplicationOutput) => void): Request<CodeDeploy.Types.CreateApplicationOutput, AWSError>;
   /**
    * Creates an application.
    */
@@ -95,7 +97,7 @@ declare class CodeDeploy extends Service {
   /**
    * Deploys an application revision through the specified deployment group.
    */
-  createDeployment(params: CodeDeploy.Types.CreateDeploymentInput, callback?: (err: AWSError, data: CodeDeploy.Types.CreateDeploymentOutput) => void): Request<CodeDeploy.Types.CreateDeploymentOutput, AWSError>;
+  createDeployment(params: BoundInput<CodeDeploy.Types.CreateDeploymentInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.CreateDeploymentOutput) => void): Request<CodeDeploy.Types.CreateDeploymentOutput, AWSError>;
   /**
    * Deploys an application revision through the specified deployment group.
    */
@@ -103,7 +105,7 @@ declare class CodeDeploy extends Service {
   /**
    *  Creates a deployment configuration. 
    */
-  createDeploymentConfig(params: CodeDeploy.Types.CreateDeploymentConfigInput, callback?: (err: AWSError, data: CodeDeploy.Types.CreateDeploymentConfigOutput) => void): Request<CodeDeploy.Types.CreateDeploymentConfigOutput, AWSError>;
+  createDeploymentConfig(params: BoundInput<CodeDeploy.Types.CreateDeploymentConfigInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.CreateDeploymentConfigOutput) => void): Request<CodeDeploy.Types.CreateDeploymentConfigOutput, AWSError>;
   /**
    *  Creates a deployment configuration. 
    */
@@ -111,7 +113,7 @@ declare class CodeDeploy extends Service {
   /**
    * Creates a deployment group to which application revisions are deployed.
    */
-  createDeploymentGroup(params: CodeDeploy.Types.CreateDeploymentGroupInput, callback?: (err: AWSError, data: CodeDeploy.Types.CreateDeploymentGroupOutput) => void): Request<CodeDeploy.Types.CreateDeploymentGroupOutput, AWSError>;
+  createDeploymentGroup(params: BoundInput<CodeDeploy.Types.CreateDeploymentGroupInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.CreateDeploymentGroupOutput) => void): Request<CodeDeploy.Types.CreateDeploymentGroupOutput, AWSError>;
   /**
    * Creates a deployment group to which application revisions are deployed.
    */
@@ -119,7 +121,7 @@ declare class CodeDeploy extends Service {
   /**
    * Deletes an application.
    */
-  deleteApplication(params: CodeDeploy.Types.DeleteApplicationInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteApplication(params: BoundInput<CodeDeploy.Types.DeleteApplicationInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an application.
    */
@@ -127,7 +129,7 @@ declare class CodeDeploy extends Service {
   /**
    * Deletes a deployment configuration.  A deployment configuration cannot be deleted if it is currently in use. Predefined configurations cannot be deleted. 
    */
-  deleteDeploymentConfig(params: CodeDeploy.Types.DeleteDeploymentConfigInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDeploymentConfig(params: BoundInput<CodeDeploy.Types.DeleteDeploymentConfigInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a deployment configuration.  A deployment configuration cannot be deleted if it is currently in use. Predefined configurations cannot be deleted. 
    */
@@ -135,7 +137,7 @@ declare class CodeDeploy extends Service {
   /**
    * Deletes a deployment group.
    */
-  deleteDeploymentGroup(params: CodeDeploy.Types.DeleteDeploymentGroupInput, callback?: (err: AWSError, data: CodeDeploy.Types.DeleteDeploymentGroupOutput) => void): Request<CodeDeploy.Types.DeleteDeploymentGroupOutput, AWSError>;
+  deleteDeploymentGroup(params: BoundInput<CodeDeploy.Types.DeleteDeploymentGroupInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.DeleteDeploymentGroupOutput) => void): Request<CodeDeploy.Types.DeleteDeploymentGroupOutput, AWSError>;
   /**
    * Deletes a deployment group.
    */
@@ -143,7 +145,7 @@ declare class CodeDeploy extends Service {
   /**
    * Deletes a GitHub account connection.
    */
-  deleteGitHubAccountToken(params: CodeDeploy.Types.DeleteGitHubAccountTokenInput, callback?: (err: AWSError, data: CodeDeploy.Types.DeleteGitHubAccountTokenOutput) => void): Request<CodeDeploy.Types.DeleteGitHubAccountTokenOutput, AWSError>;
+  deleteGitHubAccountToken(params: BoundInput<CodeDeploy.Types.DeleteGitHubAccountTokenInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.DeleteGitHubAccountTokenOutput) => void): Request<CodeDeploy.Types.DeleteGitHubAccountTokenOutput, AWSError>;
   /**
    * Deletes a GitHub account connection.
    */
@@ -151,7 +153,7 @@ declare class CodeDeploy extends Service {
   /**
    * Deregisters an on-premises instance.
    */
-  deregisterOnPremisesInstance(params: CodeDeploy.Types.DeregisterOnPremisesInstanceInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deregisterOnPremisesInstance(params: BoundInput<CodeDeploy.Types.DeregisterOnPremisesInstanceInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deregisters an on-premises instance.
    */
@@ -159,7 +161,7 @@ declare class CodeDeploy extends Service {
   /**
    * Gets information about an application.
    */
-  getApplication(params: CodeDeploy.Types.GetApplicationInput, callback?: (err: AWSError, data: CodeDeploy.Types.GetApplicationOutput) => void): Request<CodeDeploy.Types.GetApplicationOutput, AWSError>;
+  getApplication(params: BoundInput<CodeDeploy.Types.GetApplicationInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.GetApplicationOutput) => void): Request<CodeDeploy.Types.GetApplicationOutput, AWSError>;
   /**
    * Gets information about an application.
    */
@@ -167,7 +169,7 @@ declare class CodeDeploy extends Service {
   /**
    * Gets information about an application revision.
    */
-  getApplicationRevision(params: CodeDeploy.Types.GetApplicationRevisionInput, callback?: (err: AWSError, data: CodeDeploy.Types.GetApplicationRevisionOutput) => void): Request<CodeDeploy.Types.GetApplicationRevisionOutput, AWSError>;
+  getApplicationRevision(params: BoundInput<CodeDeploy.Types.GetApplicationRevisionInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.GetApplicationRevisionOutput) => void): Request<CodeDeploy.Types.GetApplicationRevisionOutput, AWSError>;
   /**
    * Gets information about an application revision.
    */
@@ -175,7 +177,7 @@ declare class CodeDeploy extends Service {
   /**
    * Gets information about a deployment.
    */
-  getDeployment(params: CodeDeploy.Types.GetDeploymentInput, callback?: (err: AWSError, data: CodeDeploy.Types.GetDeploymentOutput) => void): Request<CodeDeploy.Types.GetDeploymentOutput, AWSError>;
+  getDeployment(params: BoundInput<CodeDeploy.Types.GetDeploymentInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.GetDeploymentOutput) => void): Request<CodeDeploy.Types.GetDeploymentOutput, AWSError>;
   /**
    * Gets information about a deployment.
    */
@@ -183,7 +185,7 @@ declare class CodeDeploy extends Service {
   /**
    * Gets information about a deployment configuration.
    */
-  getDeploymentConfig(params: CodeDeploy.Types.GetDeploymentConfigInput, callback?: (err: AWSError, data: CodeDeploy.Types.GetDeploymentConfigOutput) => void): Request<CodeDeploy.Types.GetDeploymentConfigOutput, AWSError>;
+  getDeploymentConfig(params: BoundInput<CodeDeploy.Types.GetDeploymentConfigInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.GetDeploymentConfigOutput) => void): Request<CodeDeploy.Types.GetDeploymentConfigOutput, AWSError>;
   /**
    * Gets information about a deployment configuration.
    */
@@ -191,7 +193,7 @@ declare class CodeDeploy extends Service {
   /**
    * Gets information about a deployment group.
    */
-  getDeploymentGroup(params: CodeDeploy.Types.GetDeploymentGroupInput, callback?: (err: AWSError, data: CodeDeploy.Types.GetDeploymentGroupOutput) => void): Request<CodeDeploy.Types.GetDeploymentGroupOutput, AWSError>;
+  getDeploymentGroup(params: BoundInput<CodeDeploy.Types.GetDeploymentGroupInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.GetDeploymentGroupOutput) => void): Request<CodeDeploy.Types.GetDeploymentGroupOutput, AWSError>;
   /**
    * Gets information about a deployment group.
    */
@@ -199,7 +201,7 @@ declare class CodeDeploy extends Service {
   /**
    * Gets information about an instance as part of a deployment.
    */
-  getDeploymentInstance(params: CodeDeploy.Types.GetDeploymentInstanceInput, callback?: (err: AWSError, data: CodeDeploy.Types.GetDeploymentInstanceOutput) => void): Request<CodeDeploy.Types.GetDeploymentInstanceOutput, AWSError>;
+  getDeploymentInstance(params: BoundInput<CodeDeploy.Types.GetDeploymentInstanceInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.GetDeploymentInstanceOutput) => void): Request<CodeDeploy.Types.GetDeploymentInstanceOutput, AWSError>;
   /**
    * Gets information about an instance as part of a deployment.
    */
@@ -207,7 +209,7 @@ declare class CodeDeploy extends Service {
   /**
    *  Returns information about a deployment target. 
    */
-  getDeploymentTarget(params: CodeDeploy.Types.GetDeploymentTargetInput, callback?: (err: AWSError, data: CodeDeploy.Types.GetDeploymentTargetOutput) => void): Request<CodeDeploy.Types.GetDeploymentTargetOutput, AWSError>;
+  getDeploymentTarget(params: BoundInput<CodeDeploy.Types.GetDeploymentTargetInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.GetDeploymentTargetOutput) => void): Request<CodeDeploy.Types.GetDeploymentTargetOutput, AWSError>;
   /**
    *  Returns information about a deployment target. 
    */
@@ -215,7 +217,7 @@ declare class CodeDeploy extends Service {
   /**
    *  Gets information about an on-premises instance. 
    */
-  getOnPremisesInstance(params: CodeDeploy.Types.GetOnPremisesInstanceInput, callback?: (err: AWSError, data: CodeDeploy.Types.GetOnPremisesInstanceOutput) => void): Request<CodeDeploy.Types.GetOnPremisesInstanceOutput, AWSError>;
+  getOnPremisesInstance(params: BoundInput<CodeDeploy.Types.GetOnPremisesInstanceInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.GetOnPremisesInstanceOutput) => void): Request<CodeDeploy.Types.GetOnPremisesInstanceOutput, AWSError>;
   /**
    *  Gets information about an on-premises instance. 
    */
@@ -223,7 +225,7 @@ declare class CodeDeploy extends Service {
   /**
    * Lists information about revisions for an application.
    */
-  listApplicationRevisions(params: CodeDeploy.Types.ListApplicationRevisionsInput, callback?: (err: AWSError, data: CodeDeploy.Types.ListApplicationRevisionsOutput) => void): Request<CodeDeploy.Types.ListApplicationRevisionsOutput, AWSError>;
+  listApplicationRevisions(params: BoundInput<CodeDeploy.Types.ListApplicationRevisionsInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.ListApplicationRevisionsOutput) => void): Request<CodeDeploy.Types.ListApplicationRevisionsOutput, AWSError>;
   /**
    * Lists information about revisions for an application.
    */
@@ -231,7 +233,7 @@ declare class CodeDeploy extends Service {
   /**
    * Lists the applications registered with the IAM user or AWS account.
    */
-  listApplications(params: CodeDeploy.Types.ListApplicationsInput, callback?: (err: AWSError, data: CodeDeploy.Types.ListApplicationsOutput) => void): Request<CodeDeploy.Types.ListApplicationsOutput, AWSError>;
+  listApplications(params: BoundInput<CodeDeploy.Types.ListApplicationsInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.ListApplicationsOutput) => void): Request<CodeDeploy.Types.ListApplicationsOutput, AWSError>;
   /**
    * Lists the applications registered with the IAM user or AWS account.
    */
@@ -239,7 +241,7 @@ declare class CodeDeploy extends Service {
   /**
    * Lists the deployment configurations with the IAM user or AWS account.
    */
-  listDeploymentConfigs(params: CodeDeploy.Types.ListDeploymentConfigsInput, callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentConfigsOutput) => void): Request<CodeDeploy.Types.ListDeploymentConfigsOutput, AWSError>;
+  listDeploymentConfigs(params: BoundInput<CodeDeploy.Types.ListDeploymentConfigsInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentConfigsOutput) => void): Request<CodeDeploy.Types.ListDeploymentConfigsOutput, AWSError>;
   /**
    * Lists the deployment configurations with the IAM user or AWS account.
    */
@@ -247,7 +249,7 @@ declare class CodeDeploy extends Service {
   /**
    * Lists the deployment groups for an application registered with the IAM user or AWS account.
    */
-  listDeploymentGroups(params: CodeDeploy.Types.ListDeploymentGroupsInput, callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentGroupsOutput) => void): Request<CodeDeploy.Types.ListDeploymentGroupsOutput, AWSError>;
+  listDeploymentGroups(params: BoundInput<CodeDeploy.Types.ListDeploymentGroupsInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentGroupsOutput) => void): Request<CodeDeploy.Types.ListDeploymentGroupsOutput, AWSError>;
   /**
    * Lists the deployment groups for an application registered with the IAM user or AWS account.
    */
@@ -255,7 +257,7 @@ declare class CodeDeploy extends Service {
   /**
    *   The newer BatchGetDeploymentTargets should be used instead because it works with all compute types. ListDeploymentInstances throws an exception if it is used with a compute platform other than EC2/On-premises or AWS Lambda.    Lists the instance for a deployment associated with the IAM user or AWS account. 
    */
-  listDeploymentInstances(params: CodeDeploy.Types.ListDeploymentInstancesInput, callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentInstancesOutput) => void): Request<CodeDeploy.Types.ListDeploymentInstancesOutput, AWSError>;
+  listDeploymentInstances(params: BoundInput<CodeDeploy.Types.ListDeploymentInstancesInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentInstancesOutput) => void): Request<CodeDeploy.Types.ListDeploymentInstancesOutput, AWSError>;
   /**
    *   The newer BatchGetDeploymentTargets should be used instead because it works with all compute types. ListDeploymentInstances throws an exception if it is used with a compute platform other than EC2/On-premises or AWS Lambda.    Lists the instance for a deployment associated with the IAM user or AWS account. 
    */
@@ -263,7 +265,7 @@ declare class CodeDeploy extends Service {
   /**
    *  Returns an array of target IDs that are associated a deployment. 
    */
-  listDeploymentTargets(params: CodeDeploy.Types.ListDeploymentTargetsInput, callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentTargetsOutput) => void): Request<CodeDeploy.Types.ListDeploymentTargetsOutput, AWSError>;
+  listDeploymentTargets(params: BoundInput<CodeDeploy.Types.ListDeploymentTargetsInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentTargetsOutput) => void): Request<CodeDeploy.Types.ListDeploymentTargetsOutput, AWSError>;
   /**
    *  Returns an array of target IDs that are associated a deployment. 
    */
@@ -271,7 +273,7 @@ declare class CodeDeploy extends Service {
   /**
    * Lists the deployments in a deployment group for an application registered with the IAM user or AWS account.
    */
-  listDeployments(params: CodeDeploy.Types.ListDeploymentsInput, callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentsOutput) => void): Request<CodeDeploy.Types.ListDeploymentsOutput, AWSError>;
+  listDeployments(params: BoundInput<CodeDeploy.Types.ListDeploymentsInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.ListDeploymentsOutput) => void): Request<CodeDeploy.Types.ListDeploymentsOutput, AWSError>;
   /**
    * Lists the deployments in a deployment group for an application registered with the IAM user or AWS account.
    */
@@ -279,7 +281,7 @@ declare class CodeDeploy extends Service {
   /**
    * Lists the names of stored connections to GitHub accounts.
    */
-  listGitHubAccountTokenNames(params: CodeDeploy.Types.ListGitHubAccountTokenNamesInput, callback?: (err: AWSError, data: CodeDeploy.Types.ListGitHubAccountTokenNamesOutput) => void): Request<CodeDeploy.Types.ListGitHubAccountTokenNamesOutput, AWSError>;
+  listGitHubAccountTokenNames(params: BoundInput<CodeDeploy.Types.ListGitHubAccountTokenNamesInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.ListGitHubAccountTokenNamesOutput) => void): Request<CodeDeploy.Types.ListGitHubAccountTokenNamesOutput, AWSError>;
   /**
    * Lists the names of stored connections to GitHub accounts.
    */
@@ -287,7 +289,7 @@ declare class CodeDeploy extends Service {
   /**
    * Gets a list of names for one or more on-premises instances. Unless otherwise specified, both registered and deregistered on-premises instance names are listed. To list only registered or deregistered on-premises instance names, use the registration status parameter.
    */
-  listOnPremisesInstances(params: CodeDeploy.Types.ListOnPremisesInstancesInput, callback?: (err: AWSError, data: CodeDeploy.Types.ListOnPremisesInstancesOutput) => void): Request<CodeDeploy.Types.ListOnPremisesInstancesOutput, AWSError>;
+  listOnPremisesInstances(params: BoundInput<CodeDeploy.Types.ListOnPremisesInstancesInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.ListOnPremisesInstancesOutput) => void): Request<CodeDeploy.Types.ListOnPremisesInstancesOutput, AWSError>;
   /**
    * Gets a list of names for one or more on-premises instances. Unless otherwise specified, both registered and deregistered on-premises instance names are listed. To list only registered or deregistered on-premises instance names, use the registration status parameter.
    */
@@ -295,7 +297,7 @@ declare class CodeDeploy extends Service {
   /**
    *  Sets the result of a Lambda validation function. The function validates one or both lifecycle events (BeforeAllowTraffic and AfterAllowTraffic) and returns Succeeded or Failed. 
    */
-  putLifecycleEventHookExecutionStatus(params: CodeDeploy.Types.PutLifecycleEventHookExecutionStatusInput, callback?: (err: AWSError, data: CodeDeploy.Types.PutLifecycleEventHookExecutionStatusOutput) => void): Request<CodeDeploy.Types.PutLifecycleEventHookExecutionStatusOutput, AWSError>;
+  putLifecycleEventHookExecutionStatus(params: BoundInput<CodeDeploy.Types.PutLifecycleEventHookExecutionStatusInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.PutLifecycleEventHookExecutionStatusOutput) => void): Request<CodeDeploy.Types.PutLifecycleEventHookExecutionStatusOutput, AWSError>;
   /**
    *  Sets the result of a Lambda validation function. The function validates one or both lifecycle events (BeforeAllowTraffic and AfterAllowTraffic) and returns Succeeded or Failed. 
    */
@@ -303,7 +305,7 @@ declare class CodeDeploy extends Service {
   /**
    * Registers with AWS CodeDeploy a revision for the specified application.
    */
-  registerApplicationRevision(params: CodeDeploy.Types.RegisterApplicationRevisionInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  registerApplicationRevision(params: BoundInput<CodeDeploy.Types.RegisterApplicationRevisionInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Registers with AWS CodeDeploy a revision for the specified application.
    */
@@ -311,7 +313,7 @@ declare class CodeDeploy extends Service {
   /**
    * Registers an on-premises instance.  Only one IAM ARN (an IAM session ARN or IAM user ARN) is supported in the request. You cannot use both. 
    */
-  registerOnPremisesInstance(params: CodeDeploy.Types.RegisterOnPremisesInstanceInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  registerOnPremisesInstance(params: BoundInput<CodeDeploy.Types.RegisterOnPremisesInstanceInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Registers an on-premises instance.  Only one IAM ARN (an IAM session ARN or IAM user ARN) is supported in the request. You cannot use both. 
    */
@@ -319,7 +321,7 @@ declare class CodeDeploy extends Service {
   /**
    * Removes one or more tags from one or more on-premises instances.
    */
-  removeTagsFromOnPremisesInstances(params: CodeDeploy.Types.RemoveTagsFromOnPremisesInstancesInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  removeTagsFromOnPremisesInstances(params: BoundInput<CodeDeploy.Types.RemoveTagsFromOnPremisesInstancesInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes one or more tags from one or more on-premises instances.
    */
@@ -327,7 +329,7 @@ declare class CodeDeploy extends Service {
   /**
    * In a blue/green deployment, overrides any specified wait time and starts terminating instances immediately after the traffic routing is complete.
    */
-  skipWaitTimeForInstanceTermination(params: CodeDeploy.Types.SkipWaitTimeForInstanceTerminationInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  skipWaitTimeForInstanceTermination(params: BoundInput<CodeDeploy.Types.SkipWaitTimeForInstanceTerminationInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * In a blue/green deployment, overrides any specified wait time and starts terminating instances immediately after the traffic routing is complete.
    */
@@ -335,7 +337,7 @@ declare class CodeDeploy extends Service {
   /**
    * Attempts to stop an ongoing deployment.
    */
-  stopDeployment(params: CodeDeploy.Types.StopDeploymentInput, callback?: (err: AWSError, data: CodeDeploy.Types.StopDeploymentOutput) => void): Request<CodeDeploy.Types.StopDeploymentOutput, AWSError>;
+  stopDeployment(params: BoundInput<CodeDeploy.Types.StopDeploymentInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.StopDeploymentOutput) => void): Request<CodeDeploy.Types.StopDeploymentOutput, AWSError>;
   /**
    * Attempts to stop an ongoing deployment.
    */
@@ -343,7 +345,7 @@ declare class CodeDeploy extends Service {
   /**
    * Changes the name of an application.
    */
-  updateApplication(params: CodeDeploy.Types.UpdateApplicationInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  updateApplication(params: BoundInput<CodeDeploy.Types.UpdateApplicationInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Changes the name of an application.
    */
@@ -351,7 +353,7 @@ declare class CodeDeploy extends Service {
   /**
    * Changes information about a deployment group.
    */
-  updateDeploymentGroup(params: CodeDeploy.Types.UpdateDeploymentGroupInput, callback?: (err: AWSError, data: CodeDeploy.Types.UpdateDeploymentGroupOutput) => void): Request<CodeDeploy.Types.UpdateDeploymentGroupOutput, AWSError>;
+  updateDeploymentGroup(params: BoundInput<CodeDeploy.Types.UpdateDeploymentGroupInput, keyof Params>, callback?: (err: AWSError, data: CodeDeploy.Types.UpdateDeploymentGroupOutput) => void): Request<CodeDeploy.Types.UpdateDeploymentGroupOutput, AWSError>;
   /**
    * Changes information about a deployment group.
    */
@@ -2294,7 +2296,8 @@ declare namespace CodeDeploy {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AddTagsToOnPremisesInstancesInput & BatchGetApplicationRevisionsInput & BatchGetApplicationsInput & BatchGetDeploymentGroupsInput & BatchGetDeploymentInstancesInput & BatchGetDeploymentTargetsInput & BatchGetDeploymentsInput & BatchGetOnPremisesInstancesInput & ContinueDeploymentInput & CreateApplicationInput & CreateDeploymentInput & CreateDeploymentConfigInput & CreateDeploymentGroupInput & DeleteApplicationInput & DeleteDeploymentConfigInput & DeleteDeploymentGroupInput & DeleteGitHubAccountTokenInput & DeregisterOnPremisesInstanceInput & GetApplicationInput & GetApplicationRevisionInput & GetDeploymentInput & GetDeploymentConfigInput & GetDeploymentGroupInput & GetDeploymentInstanceInput & GetDeploymentTargetInput & GetOnPremisesInstanceInput & ListApplicationRevisionsInput & ListApplicationsInput & ListDeploymentConfigsInput & ListDeploymentGroupsInput & ListDeploymentInstancesInput & ListDeploymentTargetsInput & ListDeploymentsInput & ListGitHubAccountTokenNamesInput & ListOnPremisesInstancesInput & PutLifecycleEventHookExecutionStatusInput & RegisterApplicationRevisionInput & RegisterOnPremisesInstanceInput & RemoveTagsFromOnPremisesInstancesInput & SkipWaitTimeForInstanceTerminationInput & StopDeploymentInput & UpdateApplicationInput & UpdateDeploymentGroupInput>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the CodeDeploy client.
    */

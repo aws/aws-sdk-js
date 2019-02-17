@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class Budgets extends Service {
+declare class Budgets<Params extends Budgets.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: Budgets.Types.ClientConfiguration)
-  config: Config & Budgets.Types.ClientConfiguration;
+  constructor(options?: Budgets.Types.ClientConfiguration<Params>)
+  config: Config & Budgets.Types.ClientConfiguration<Params>;
   /**
    * Creates a budget and, if included, notifications and subscribers. 
    */
-  createBudget(params: Budgets.Types.CreateBudgetRequest, callback?: (err: AWSError, data: Budgets.Types.CreateBudgetResponse) => void): Request<Budgets.Types.CreateBudgetResponse, AWSError>;
+  createBudget(params: BoundInput<Budgets.Types.CreateBudgetRequest, keyof Params>, callback?: (err: AWSError, data: Budgets.Types.CreateBudgetResponse) => void): Request<Budgets.Types.CreateBudgetResponse, AWSError>;
   /**
    * Creates a budget and, if included, notifications and subscribers. 
    */
@@ -22,7 +24,7 @@ declare class Budgets extends Service {
   /**
    * Creates a notification. You must create the budget before you create the associated notification.
    */
-  createNotification(params: Budgets.Types.CreateNotificationRequest, callback?: (err: AWSError, data: Budgets.Types.CreateNotificationResponse) => void): Request<Budgets.Types.CreateNotificationResponse, AWSError>;
+  createNotification(params: BoundInput<Budgets.Types.CreateNotificationRequest, keyof Params>, callback?: (err: AWSError, data: Budgets.Types.CreateNotificationResponse) => void): Request<Budgets.Types.CreateNotificationResponse, AWSError>;
   /**
    * Creates a notification. You must create the budget before you create the associated notification.
    */
@@ -30,7 +32,7 @@ declare class Budgets extends Service {
   /**
    * Creates a subscriber. You must create the associated budget and notification before you create the subscriber.
    */
-  createSubscriber(params: Budgets.Types.CreateSubscriberRequest, callback?: (err: AWSError, data: Budgets.Types.CreateSubscriberResponse) => void): Request<Budgets.Types.CreateSubscriberResponse, AWSError>;
+  createSubscriber(params: BoundInput<Budgets.Types.CreateSubscriberRequest, keyof Params>, callback?: (err: AWSError, data: Budgets.Types.CreateSubscriberResponse) => void): Request<Budgets.Types.CreateSubscriberResponse, AWSError>;
   /**
    * Creates a subscriber. You must create the associated budget and notification before you create the subscriber.
    */
@@ -38,7 +40,7 @@ declare class Budgets extends Service {
   /**
    * Deletes a budget. You can delete your budget at any time.  Deleting a budget also deletes the notifications and subscribers that are associated with that budget. 
    */
-  deleteBudget(params: Budgets.Types.DeleteBudgetRequest, callback?: (err: AWSError, data: Budgets.Types.DeleteBudgetResponse) => void): Request<Budgets.Types.DeleteBudgetResponse, AWSError>;
+  deleteBudget(params: BoundInput<Budgets.Types.DeleteBudgetRequest, keyof Params>, callback?: (err: AWSError, data: Budgets.Types.DeleteBudgetResponse) => void): Request<Budgets.Types.DeleteBudgetResponse, AWSError>;
   /**
    * Deletes a budget. You can delete your budget at any time.  Deleting a budget also deletes the notifications and subscribers that are associated with that budget. 
    */
@@ -46,7 +48,7 @@ declare class Budgets extends Service {
   /**
    * Deletes a notification.  Deleting a notification also deletes the subscribers that are associated with the notification. 
    */
-  deleteNotification(params: Budgets.Types.DeleteNotificationRequest, callback?: (err: AWSError, data: Budgets.Types.DeleteNotificationResponse) => void): Request<Budgets.Types.DeleteNotificationResponse, AWSError>;
+  deleteNotification(params: BoundInput<Budgets.Types.DeleteNotificationRequest, keyof Params>, callback?: (err: AWSError, data: Budgets.Types.DeleteNotificationResponse) => void): Request<Budgets.Types.DeleteNotificationResponse, AWSError>;
   /**
    * Deletes a notification.  Deleting a notification also deletes the subscribers that are associated with the notification. 
    */
@@ -54,7 +56,7 @@ declare class Budgets extends Service {
   /**
    * Deletes a subscriber.  Deleting the last subscriber to a notification also deletes the notification. 
    */
-  deleteSubscriber(params: Budgets.Types.DeleteSubscriberRequest, callback?: (err: AWSError, data: Budgets.Types.DeleteSubscriberResponse) => void): Request<Budgets.Types.DeleteSubscriberResponse, AWSError>;
+  deleteSubscriber(params: BoundInput<Budgets.Types.DeleteSubscriberRequest, keyof Params>, callback?: (err: AWSError, data: Budgets.Types.DeleteSubscriberResponse) => void): Request<Budgets.Types.DeleteSubscriberResponse, AWSError>;
   /**
    * Deletes a subscriber.  Deleting the last subscriber to a notification also deletes the notification. 
    */
@@ -62,7 +64,7 @@ declare class Budgets extends Service {
   /**
    * Describes a budget.
    */
-  describeBudget(params: Budgets.Types.DescribeBudgetRequest, callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetResponse) => void): Request<Budgets.Types.DescribeBudgetResponse, AWSError>;
+  describeBudget(params: BoundInput<Budgets.Types.DescribeBudgetRequest, keyof Params>, callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetResponse) => void): Request<Budgets.Types.DescribeBudgetResponse, AWSError>;
   /**
    * Describes a budget.
    */
@@ -70,7 +72,7 @@ declare class Budgets extends Service {
   /**
    * Describes the history for DAILY, MONTHLY, and QUARTERLY budgets. Budget history isn't available for ANNUAL budgets.
    */
-  describeBudgetPerformanceHistory(params: Budgets.Types.DescribeBudgetPerformanceHistoryRequest, callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetPerformanceHistoryResponse) => void): Request<Budgets.Types.DescribeBudgetPerformanceHistoryResponse, AWSError>;
+  describeBudgetPerformanceHistory(params: BoundInput<Budgets.Types.DescribeBudgetPerformanceHistoryRequest, keyof Params>, callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetPerformanceHistoryResponse) => void): Request<Budgets.Types.DescribeBudgetPerformanceHistoryResponse, AWSError>;
   /**
    * Describes the history for DAILY, MONTHLY, and QUARTERLY budgets. Budget history isn't available for ANNUAL budgets.
    */
@@ -78,7 +80,7 @@ declare class Budgets extends Service {
   /**
    * Lists the budgets that are associated with an account.
    */
-  describeBudgets(params: Budgets.Types.DescribeBudgetsRequest, callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetsResponse) => void): Request<Budgets.Types.DescribeBudgetsResponse, AWSError>;
+  describeBudgets(params: BoundInput<Budgets.Types.DescribeBudgetsRequest, keyof Params>, callback?: (err: AWSError, data: Budgets.Types.DescribeBudgetsResponse) => void): Request<Budgets.Types.DescribeBudgetsResponse, AWSError>;
   /**
    * Lists the budgets that are associated with an account.
    */
@@ -86,7 +88,7 @@ declare class Budgets extends Service {
   /**
    * Lists the notifications that are associated with a budget.
    */
-  describeNotificationsForBudget(params: Budgets.Types.DescribeNotificationsForBudgetRequest, callback?: (err: AWSError, data: Budgets.Types.DescribeNotificationsForBudgetResponse) => void): Request<Budgets.Types.DescribeNotificationsForBudgetResponse, AWSError>;
+  describeNotificationsForBudget(params: BoundInput<Budgets.Types.DescribeNotificationsForBudgetRequest, keyof Params>, callback?: (err: AWSError, data: Budgets.Types.DescribeNotificationsForBudgetResponse) => void): Request<Budgets.Types.DescribeNotificationsForBudgetResponse, AWSError>;
   /**
    * Lists the notifications that are associated with a budget.
    */
@@ -94,7 +96,7 @@ declare class Budgets extends Service {
   /**
    * Lists the subscribers that are associated with a notification.
    */
-  describeSubscribersForNotification(params: Budgets.Types.DescribeSubscribersForNotificationRequest, callback?: (err: AWSError, data: Budgets.Types.DescribeSubscribersForNotificationResponse) => void): Request<Budgets.Types.DescribeSubscribersForNotificationResponse, AWSError>;
+  describeSubscribersForNotification(params: BoundInput<Budgets.Types.DescribeSubscribersForNotificationRequest, keyof Params>, callback?: (err: AWSError, data: Budgets.Types.DescribeSubscribersForNotificationResponse) => void): Request<Budgets.Types.DescribeSubscribersForNotificationResponse, AWSError>;
   /**
    * Lists the subscribers that are associated with a notification.
    */
@@ -102,7 +104,7 @@ declare class Budgets extends Service {
   /**
    * Updates a budget. You can change every part of a budget except for the budgetName and the calculatedSpend. When you modify a budget, the calculatedSpend drops to zero until AWS has new usage data to use for forecasting.
    */
-  updateBudget(params: Budgets.Types.UpdateBudgetRequest, callback?: (err: AWSError, data: Budgets.Types.UpdateBudgetResponse) => void): Request<Budgets.Types.UpdateBudgetResponse, AWSError>;
+  updateBudget(params: BoundInput<Budgets.Types.UpdateBudgetRequest, keyof Params>, callback?: (err: AWSError, data: Budgets.Types.UpdateBudgetResponse) => void): Request<Budgets.Types.UpdateBudgetResponse, AWSError>;
   /**
    * Updates a budget. You can change every part of a budget except for the budgetName and the calculatedSpend. When you modify a budget, the calculatedSpend drops to zero until AWS has new usage data to use for forecasting.
    */
@@ -110,7 +112,7 @@ declare class Budgets extends Service {
   /**
    * Updates a notification.
    */
-  updateNotification(params: Budgets.Types.UpdateNotificationRequest, callback?: (err: AWSError, data: Budgets.Types.UpdateNotificationResponse) => void): Request<Budgets.Types.UpdateNotificationResponse, AWSError>;
+  updateNotification(params: BoundInput<Budgets.Types.UpdateNotificationRequest, keyof Params>, callback?: (err: AWSError, data: Budgets.Types.UpdateNotificationResponse) => void): Request<Budgets.Types.UpdateNotificationResponse, AWSError>;
   /**
    * Updates a notification.
    */
@@ -118,7 +120,7 @@ declare class Budgets extends Service {
   /**
    * Updates a subscriber.
    */
-  updateSubscriber(params: Budgets.Types.UpdateSubscriberRequest, callback?: (err: AWSError, data: Budgets.Types.UpdateSubscriberResponse) => void): Request<Budgets.Types.UpdateSubscriberResponse, AWSError>;
+  updateSubscriber(params: BoundInput<Budgets.Types.UpdateSubscriberRequest, keyof Params>, callback?: (err: AWSError, data: Budgets.Types.UpdateSubscriberResponse) => void): Request<Budgets.Types.UpdateSubscriberResponse, AWSError>;
   /**
    * Updates a subscriber.
    */
@@ -623,7 +625,8 @@ declare namespace Budgets {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateBudgetRequest & CreateNotificationRequest & CreateSubscriberRequest & DeleteBudgetRequest & DeleteNotificationRequest & DeleteSubscriberRequest & DescribeBudgetRequest & DescribeBudgetPerformanceHistoryRequest & DescribeBudgetsRequest & DescribeNotificationsForBudgetRequest & DescribeSubscribersForNotificationRequest & UpdateBudgetRequest & UpdateNotificationRequest & UpdateSubscriberRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the Budgets client.
    */

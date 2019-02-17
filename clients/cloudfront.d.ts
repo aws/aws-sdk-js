@@ -4,19 +4,21 @@ import {AWSError} from '../lib/error';
 import {CloudFrontCustomizations} from '../lib/services/cloudfront';
 import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 import {Signer as signer} from '../lib/cloudfront/signer';
 interface Blob {}
-declare class CloudFront extends CloudFrontCustomizations {
+declare class CloudFront<Params extends CloudFront.Types.ClientParams = {}> extends CloudFrontCustomizations {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: CloudFront.Types.ClientConfiguration)
-  config: Config & CloudFront.Types.ClientConfiguration;
+  constructor(options?: CloudFront.Types.ClientConfiguration<Params>)
+  config: Config & CloudFront.Types.ClientConfiguration<Params>;
   /**
    * Creates a new origin access identity. If you're using Amazon S3 for your origin, you can use an origin access identity to require users to access your content using a CloudFront URL instead of the Amazon S3 URL. For more information about how to use origin access identities, see Serving Private Content through CloudFront in the Amazon CloudFront Developer Guide.
    */
-  createCloudFrontOriginAccessIdentity(params: CloudFront.Types.CreateCloudFrontOriginAccessIdentityRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.Types.CreateCloudFrontOriginAccessIdentityResult, AWSError>;
+  createCloudFrontOriginAccessIdentity(params: BoundInput<CloudFront.Types.CreateCloudFrontOriginAccessIdentityRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.CreateCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.Types.CreateCloudFrontOriginAccessIdentityResult, AWSError>;
   /**
    * Creates a new origin access identity. If you're using Amazon S3 for your origin, you can use an origin access identity to require users to access your content using a CloudFront URL instead of the Amazon S3 URL. For more information about how to use origin access identities, see Serving Private Content through CloudFront in the Amazon CloudFront Developer Guide.
    */
@@ -24,7 +26,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Creates a new web distribution. You create a CloudFront distribution to tell CloudFront where you want content to be delivered from, and the details about how to track and manage content delivery. Send a POST request to the /CloudFront API version/distribution/distribution ID resource.  When you update a distribution, there are more required fields than when you create a distribution. When you update your distribution by using UpdateDistribution, follow the steps included in the documentation to get the current configuration and then make your updates. This helps to make sure that you include all of the required fields. To view a summary, see Required Fields for Create Distribution and Update Distribution in the Amazon CloudFront Developer Guide.  If you are using Adobe Flash Media Server's RTMP protocol, you set up a different kind of CloudFront distribution. For more information, see CreateStreamingDistribution.
    */
-  createDistribution(params: CloudFront.Types.CreateDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateDistributionResult) => void): Request<CloudFront.Types.CreateDistributionResult, AWSError>;
+  createDistribution(params: BoundInput<CloudFront.Types.CreateDistributionRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.CreateDistributionResult) => void): Request<CloudFront.Types.CreateDistributionResult, AWSError>;
   /**
    * Creates a new web distribution. You create a CloudFront distribution to tell CloudFront where you want content to be delivered from, and the details about how to track and manage content delivery. Send a POST request to the /CloudFront API version/distribution/distribution ID resource.  When you update a distribution, there are more required fields than when you create a distribution. When you update your distribution by using UpdateDistribution, follow the steps included in the documentation to get the current configuration and then make your updates. This helps to make sure that you include all of the required fields. To view a summary, see Required Fields for Create Distribution and Update Distribution in the Amazon CloudFront Developer Guide.  If you are using Adobe Flash Media Server's RTMP protocol, you set up a different kind of CloudFront distribution. For more information, see CreateStreamingDistribution.
    */
@@ -32,7 +34,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Create a new distribution with tags.
    */
-  createDistributionWithTags(params: CloudFront.Types.CreateDistributionWithTagsRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateDistributionWithTagsResult) => void): Request<CloudFront.Types.CreateDistributionWithTagsResult, AWSError>;
+  createDistributionWithTags(params: BoundInput<CloudFront.Types.CreateDistributionWithTagsRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.CreateDistributionWithTagsResult) => void): Request<CloudFront.Types.CreateDistributionWithTagsResult, AWSError>;
   /**
    * Create a new distribution with tags.
    */
@@ -40,7 +42,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Create a new field-level encryption configuration.
    */
-  createFieldLevelEncryptionConfig(params: CloudFront.Types.CreateFieldLevelEncryptionConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateFieldLevelEncryptionConfigResult) => void): Request<CloudFront.Types.CreateFieldLevelEncryptionConfigResult, AWSError>;
+  createFieldLevelEncryptionConfig(params: BoundInput<CloudFront.Types.CreateFieldLevelEncryptionConfigRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.CreateFieldLevelEncryptionConfigResult) => void): Request<CloudFront.Types.CreateFieldLevelEncryptionConfigResult, AWSError>;
   /**
    * Create a new field-level encryption configuration.
    */
@@ -48,7 +50,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Create a field-level encryption profile.
    */
-  createFieldLevelEncryptionProfile(params: CloudFront.Types.CreateFieldLevelEncryptionProfileRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateFieldLevelEncryptionProfileResult) => void): Request<CloudFront.Types.CreateFieldLevelEncryptionProfileResult, AWSError>;
+  createFieldLevelEncryptionProfile(params: BoundInput<CloudFront.Types.CreateFieldLevelEncryptionProfileRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.CreateFieldLevelEncryptionProfileResult) => void): Request<CloudFront.Types.CreateFieldLevelEncryptionProfileResult, AWSError>;
   /**
    * Create a field-level encryption profile.
    */
@@ -56,7 +58,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Create a new invalidation. 
    */
-  createInvalidation(params: CloudFront.Types.CreateInvalidationRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateInvalidationResult) => void): Request<CloudFront.Types.CreateInvalidationResult, AWSError>;
+  createInvalidation(params: BoundInput<CloudFront.Types.CreateInvalidationRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.CreateInvalidationResult) => void): Request<CloudFront.Types.CreateInvalidationResult, AWSError>;
   /**
    * Create a new invalidation. 
    */
@@ -64,7 +66,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Add a new public key to CloudFront to use, for example, for field-level encryption. You can add a maximum of 10 public keys with one AWS account.
    */
-  createPublicKey(params: CloudFront.Types.CreatePublicKeyRequest, callback?: (err: AWSError, data: CloudFront.Types.CreatePublicKeyResult) => void): Request<CloudFront.Types.CreatePublicKeyResult, AWSError>;
+  createPublicKey(params: BoundInput<CloudFront.Types.CreatePublicKeyRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.CreatePublicKeyResult) => void): Request<CloudFront.Types.CreatePublicKeyResult, AWSError>;
   /**
    * Add a new public key to CloudFront to use, for example, for field-level encryption. You can add a maximum of 10 public keys with one AWS account.
    */
@@ -72,7 +74,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Creates a new RMTP distribution. An RTMP distribution is similar to a web distribution, but an RTMP distribution streams media files using the Adobe Real-Time Messaging Protocol (RTMP) instead of serving files using HTTP.  To create a new web distribution, submit a POST request to the CloudFront API version/distribution resource. The request body must include a document with a StreamingDistributionConfig element. The response echoes the StreamingDistributionConfig element and returns other information about the RTMP distribution. To get the status of your request, use the GET StreamingDistribution API action. When the value of Enabled is true and the value of Status is Deployed, your distribution is ready. A distribution usually deploys in less than 15 minutes. For more information about web distributions, see Working with RTMP Distributions in the Amazon CloudFront Developer Guide.  Beginning with the 2012-05-05 version of the CloudFront API, we made substantial changes to the format of the XML document that you include in the request body when you create or update a web distribution or an RTMP distribution, and when you invalidate objects. With previous versions of the API, we discovered that it was too easy to accidentally delete one or more values for an element that accepts multiple values, for example, CNAMEs and trusted signers. Our changes for the 2012-05-05 release are intended to prevent these accidental deletions and to notify you when there's a mismatch between the number of values you say you're specifying in the Quantity element and the number of values specified. 
    */
-  createStreamingDistribution(params: CloudFront.Types.CreateStreamingDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateStreamingDistributionResult) => void): Request<CloudFront.Types.CreateStreamingDistributionResult, AWSError>;
+  createStreamingDistribution(params: BoundInput<CloudFront.Types.CreateStreamingDistributionRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.CreateStreamingDistributionResult) => void): Request<CloudFront.Types.CreateStreamingDistributionResult, AWSError>;
   /**
    * Creates a new RMTP distribution. An RTMP distribution is similar to a web distribution, but an RTMP distribution streams media files using the Adobe Real-Time Messaging Protocol (RTMP) instead of serving files using HTTP.  To create a new web distribution, submit a POST request to the CloudFront API version/distribution resource. The request body must include a document with a StreamingDistributionConfig element. The response echoes the StreamingDistributionConfig element and returns other information about the RTMP distribution. To get the status of your request, use the GET StreamingDistribution API action. When the value of Enabled is true and the value of Status is Deployed, your distribution is ready. A distribution usually deploys in less than 15 minutes. For more information about web distributions, see Working with RTMP Distributions in the Amazon CloudFront Developer Guide.  Beginning with the 2012-05-05 version of the CloudFront API, we made substantial changes to the format of the XML document that you include in the request body when you create or update a web distribution or an RTMP distribution, and when you invalidate objects. With previous versions of the API, we discovered that it was too easy to accidentally delete one or more values for an element that accepts multiple values, for example, CNAMEs and trusted signers. Our changes for the 2012-05-05 release are intended to prevent these accidental deletions and to notify you when there's a mismatch between the number of values you say you're specifying in the Quantity element and the number of values specified. 
    */
@@ -80,7 +82,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Create a new streaming distribution with tags.
    */
-  createStreamingDistributionWithTags(params: CloudFront.Types.CreateStreamingDistributionWithTagsRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateStreamingDistributionWithTagsResult) => void): Request<CloudFront.Types.CreateStreamingDistributionWithTagsResult, AWSError>;
+  createStreamingDistributionWithTags(params: BoundInput<CloudFront.Types.CreateStreamingDistributionWithTagsRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.CreateStreamingDistributionWithTagsResult) => void): Request<CloudFront.Types.CreateStreamingDistributionWithTagsResult, AWSError>;
   /**
    * Create a new streaming distribution with tags.
    */
@@ -88,7 +90,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Delete an origin access identity. 
    */
-  deleteCloudFrontOriginAccessIdentity(params: CloudFront.Types.DeleteCloudFrontOriginAccessIdentityRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteCloudFrontOriginAccessIdentity(params: BoundInput<CloudFront.Types.DeleteCloudFrontOriginAccessIdentityRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Delete an origin access identity. 
    */
@@ -96,7 +98,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Delete a distribution. 
    */
-  deleteDistribution(params: CloudFront.Types.DeleteDistributionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteDistribution(params: BoundInput<CloudFront.Types.DeleteDistributionRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Delete a distribution. 
    */
@@ -104,7 +106,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Remove a field-level encryption configuration.
    */
-  deleteFieldLevelEncryptionConfig(params: CloudFront.Types.DeleteFieldLevelEncryptionConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteFieldLevelEncryptionConfig(params: BoundInput<CloudFront.Types.DeleteFieldLevelEncryptionConfigRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Remove a field-level encryption configuration.
    */
@@ -112,7 +114,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Remove a field-level encryption profile.
    */
-  deleteFieldLevelEncryptionProfile(params: CloudFront.Types.DeleteFieldLevelEncryptionProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteFieldLevelEncryptionProfile(params: BoundInput<CloudFront.Types.DeleteFieldLevelEncryptionProfileRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Remove a field-level encryption profile.
    */
@@ -120,7 +122,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Remove a public key you previously added to CloudFront.
    */
-  deletePublicKey(params: CloudFront.Types.DeletePublicKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deletePublicKey(params: BoundInput<CloudFront.Types.DeletePublicKeyRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Remove a public key you previously added to CloudFront.
    */
@@ -128,7 +130,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Delete a streaming distribution. To delete an RTMP distribution using the CloudFront API, perform the following steps.  To delete an RTMP distribution using the CloudFront API:   Disable the RTMP distribution.   Submit a GET Streaming Distribution Config request to get the current configuration and the Etag header for the distribution.    Update the XML document that was returned in the response to your GET Streaming Distribution Config request to change the value of Enabled to false.   Submit a PUT Streaming Distribution Config request to update the configuration for your distribution. In the request body, include the XML document that you updated in Step 3. Then set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GET Streaming Distribution Config request in Step 2.   Review the response to the PUT Streaming Distribution Config request to confirm that the distribution was successfully disabled.   Submit a GET Streaming Distribution Config request to confirm that your changes have propagated. When propagation is complete, the value of Status is Deployed.   Submit a DELETE Streaming Distribution request. Set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GET Streaming Distribution Config request in Step 2.   Review the response to your DELETE Streaming Distribution request to confirm that the distribution was successfully deleted.   For information about deleting a distribution using the CloudFront console, see Deleting a Distribution in the Amazon CloudFront Developer Guide.
    */
-  deleteStreamingDistribution(params: CloudFront.Types.DeleteStreamingDistributionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteStreamingDistribution(params: BoundInput<CloudFront.Types.DeleteStreamingDistributionRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Delete a streaming distribution. To delete an RTMP distribution using the CloudFront API, perform the following steps.  To delete an RTMP distribution using the CloudFront API:   Disable the RTMP distribution.   Submit a GET Streaming Distribution Config request to get the current configuration and the Etag header for the distribution.    Update the XML document that was returned in the response to your GET Streaming Distribution Config request to change the value of Enabled to false.   Submit a PUT Streaming Distribution Config request to update the configuration for your distribution. In the request body, include the XML document that you updated in Step 3. Then set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GET Streaming Distribution Config request in Step 2.   Review the response to the PUT Streaming Distribution Config request to confirm that the distribution was successfully disabled.   Submit a GET Streaming Distribution Config request to confirm that your changes have propagated. When propagation is complete, the value of Status is Deployed.   Submit a DELETE Streaming Distribution request. Set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GET Streaming Distribution Config request in Step 2.   Review the response to your DELETE Streaming Distribution request to confirm that the distribution was successfully deleted.   For information about deleting a distribution using the CloudFront console, see Deleting a Distribution in the Amazon CloudFront Developer Guide.
    */
@@ -136,7 +138,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Get the information about an origin access identity. 
    */
-  getCloudFrontOriginAccessIdentity(params: CloudFront.Types.GetCloudFrontOriginAccessIdentityRequest, callback?: (err: AWSError, data: CloudFront.Types.GetCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.Types.GetCloudFrontOriginAccessIdentityResult, AWSError>;
+  getCloudFrontOriginAccessIdentity(params: BoundInput<CloudFront.Types.GetCloudFrontOriginAccessIdentityRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.GetCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.Types.GetCloudFrontOriginAccessIdentityResult, AWSError>;
   /**
    * Get the information about an origin access identity. 
    */
@@ -144,7 +146,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Get the configuration information about an origin access identity. 
    */
-  getCloudFrontOriginAccessIdentityConfig(params: CloudFront.Types.GetCloudFrontOriginAccessIdentityConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetCloudFrontOriginAccessIdentityConfigResult) => void): Request<CloudFront.Types.GetCloudFrontOriginAccessIdentityConfigResult, AWSError>;
+  getCloudFrontOriginAccessIdentityConfig(params: BoundInput<CloudFront.Types.GetCloudFrontOriginAccessIdentityConfigRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.GetCloudFrontOriginAccessIdentityConfigResult) => void): Request<CloudFront.Types.GetCloudFrontOriginAccessIdentityConfigResult, AWSError>;
   /**
    * Get the configuration information about an origin access identity. 
    */
@@ -152,7 +154,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Get the information about a distribution. 
    */
-  getDistribution(params: CloudFront.Types.GetDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.GetDistributionResult) => void): Request<CloudFront.Types.GetDistributionResult, AWSError>;
+  getDistribution(params: BoundInput<CloudFront.Types.GetDistributionRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.GetDistributionResult) => void): Request<CloudFront.Types.GetDistributionResult, AWSError>;
   /**
    * Get the information about a distribution. 
    */
@@ -160,7 +162,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Get the configuration information about a distribution. 
    */
-  getDistributionConfig(params: CloudFront.Types.GetDistributionConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetDistributionConfigResult) => void): Request<CloudFront.Types.GetDistributionConfigResult, AWSError>;
+  getDistributionConfig(params: BoundInput<CloudFront.Types.GetDistributionConfigRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.GetDistributionConfigResult) => void): Request<CloudFront.Types.GetDistributionConfigResult, AWSError>;
   /**
    * Get the configuration information about a distribution. 
    */
@@ -168,7 +170,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Get the field-level encryption configuration information.
    */
-  getFieldLevelEncryption(params: CloudFront.Types.GetFieldLevelEncryptionRequest, callback?: (err: AWSError, data: CloudFront.Types.GetFieldLevelEncryptionResult) => void): Request<CloudFront.Types.GetFieldLevelEncryptionResult, AWSError>;
+  getFieldLevelEncryption(params: BoundInput<CloudFront.Types.GetFieldLevelEncryptionRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.GetFieldLevelEncryptionResult) => void): Request<CloudFront.Types.GetFieldLevelEncryptionResult, AWSError>;
   /**
    * Get the field-level encryption configuration information.
    */
@@ -176,7 +178,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Get the field-level encryption configuration information.
    */
-  getFieldLevelEncryptionConfig(params: CloudFront.Types.GetFieldLevelEncryptionConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetFieldLevelEncryptionConfigResult) => void): Request<CloudFront.Types.GetFieldLevelEncryptionConfigResult, AWSError>;
+  getFieldLevelEncryptionConfig(params: BoundInput<CloudFront.Types.GetFieldLevelEncryptionConfigRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.GetFieldLevelEncryptionConfigResult) => void): Request<CloudFront.Types.GetFieldLevelEncryptionConfigResult, AWSError>;
   /**
    * Get the field-level encryption configuration information.
    */
@@ -184,7 +186,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Get the field-level encryption profile information.
    */
-  getFieldLevelEncryptionProfile(params: CloudFront.Types.GetFieldLevelEncryptionProfileRequest, callback?: (err: AWSError, data: CloudFront.Types.GetFieldLevelEncryptionProfileResult) => void): Request<CloudFront.Types.GetFieldLevelEncryptionProfileResult, AWSError>;
+  getFieldLevelEncryptionProfile(params: BoundInput<CloudFront.Types.GetFieldLevelEncryptionProfileRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.GetFieldLevelEncryptionProfileResult) => void): Request<CloudFront.Types.GetFieldLevelEncryptionProfileResult, AWSError>;
   /**
    * Get the field-level encryption profile information.
    */
@@ -192,7 +194,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Get the field-level encryption profile configuration information.
    */
-  getFieldLevelEncryptionProfileConfig(params: CloudFront.Types.GetFieldLevelEncryptionProfileConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetFieldLevelEncryptionProfileConfigResult) => void): Request<CloudFront.Types.GetFieldLevelEncryptionProfileConfigResult, AWSError>;
+  getFieldLevelEncryptionProfileConfig(params: BoundInput<CloudFront.Types.GetFieldLevelEncryptionProfileConfigRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.GetFieldLevelEncryptionProfileConfigResult) => void): Request<CloudFront.Types.GetFieldLevelEncryptionProfileConfigResult, AWSError>;
   /**
    * Get the field-level encryption profile configuration information.
    */
@@ -200,7 +202,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Get the information about an invalidation. 
    */
-  getInvalidation(params: CloudFront.Types.GetInvalidationRequest, callback?: (err: AWSError, data: CloudFront.Types.GetInvalidationResult) => void): Request<CloudFront.Types.GetInvalidationResult, AWSError>;
+  getInvalidation(params: BoundInput<CloudFront.Types.GetInvalidationRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.GetInvalidationResult) => void): Request<CloudFront.Types.GetInvalidationResult, AWSError>;
   /**
    * Get the information about an invalidation. 
    */
@@ -208,7 +210,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Get the public key information.
    */
-  getPublicKey(params: CloudFront.Types.GetPublicKeyRequest, callback?: (err: AWSError, data: CloudFront.Types.GetPublicKeyResult) => void): Request<CloudFront.Types.GetPublicKeyResult, AWSError>;
+  getPublicKey(params: BoundInput<CloudFront.Types.GetPublicKeyRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.GetPublicKeyResult) => void): Request<CloudFront.Types.GetPublicKeyResult, AWSError>;
   /**
    * Get the public key information.
    */
@@ -216,7 +218,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Return public key configuration informaation
    */
-  getPublicKeyConfig(params: CloudFront.Types.GetPublicKeyConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetPublicKeyConfigResult) => void): Request<CloudFront.Types.GetPublicKeyConfigResult, AWSError>;
+  getPublicKeyConfig(params: BoundInput<CloudFront.Types.GetPublicKeyConfigRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.GetPublicKeyConfigResult) => void): Request<CloudFront.Types.GetPublicKeyConfigResult, AWSError>;
   /**
    * Return public key configuration informaation
    */
@@ -224,7 +226,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Gets information about a specified RTMP distribution, including the distribution configuration.
    */
-  getStreamingDistribution(params: CloudFront.Types.GetStreamingDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.GetStreamingDistributionResult) => void): Request<CloudFront.Types.GetStreamingDistributionResult, AWSError>;
+  getStreamingDistribution(params: BoundInput<CloudFront.Types.GetStreamingDistributionRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.GetStreamingDistributionResult) => void): Request<CloudFront.Types.GetStreamingDistributionResult, AWSError>;
   /**
    * Gets information about a specified RTMP distribution, including the distribution configuration.
    */
@@ -232,7 +234,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Get the configuration information about a streaming distribution. 
    */
-  getStreamingDistributionConfig(params: CloudFront.Types.GetStreamingDistributionConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetStreamingDistributionConfigResult) => void): Request<CloudFront.Types.GetStreamingDistributionConfigResult, AWSError>;
+  getStreamingDistributionConfig(params: BoundInput<CloudFront.Types.GetStreamingDistributionConfigRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.GetStreamingDistributionConfigResult) => void): Request<CloudFront.Types.GetStreamingDistributionConfigResult, AWSError>;
   /**
    * Get the configuration information about a streaming distribution. 
    */
@@ -240,7 +242,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Lists origin access identities.
    */
-  listCloudFrontOriginAccessIdentities(params: CloudFront.Types.ListCloudFrontOriginAccessIdentitiesRequest, callback?: (err: AWSError, data: CloudFront.Types.ListCloudFrontOriginAccessIdentitiesResult) => void): Request<CloudFront.Types.ListCloudFrontOriginAccessIdentitiesResult, AWSError>;
+  listCloudFrontOriginAccessIdentities(params: BoundInput<CloudFront.Types.ListCloudFrontOriginAccessIdentitiesRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.ListCloudFrontOriginAccessIdentitiesResult) => void): Request<CloudFront.Types.ListCloudFrontOriginAccessIdentitiesResult, AWSError>;
   /**
    * Lists origin access identities.
    */
@@ -248,7 +250,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * List distributions. 
    */
-  listDistributions(params: CloudFront.Types.ListDistributionsRequest, callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsResult) => void): Request<CloudFront.Types.ListDistributionsResult, AWSError>;
+  listDistributions(params: BoundInput<CloudFront.Types.ListDistributionsRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsResult) => void): Request<CloudFront.Types.ListDistributionsResult, AWSError>;
   /**
    * List distributions. 
    */
@@ -256,7 +258,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * List the distributions that are associated with a specified AWS WAF web ACL. 
    */
-  listDistributionsByWebACLId(params: CloudFront.Types.ListDistributionsByWebACLIdRequest, callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByWebACLIdResult) => void): Request<CloudFront.Types.ListDistributionsByWebACLIdResult, AWSError>;
+  listDistributionsByWebACLId(params: BoundInput<CloudFront.Types.ListDistributionsByWebACLIdRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByWebACLIdResult) => void): Request<CloudFront.Types.ListDistributionsByWebACLIdResult, AWSError>;
   /**
    * List the distributions that are associated with a specified AWS WAF web ACL. 
    */
@@ -264,7 +266,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * List all field-level encryption configurations that have been created in CloudFront for this account.
    */
-  listFieldLevelEncryptionConfigs(params: CloudFront.Types.ListFieldLevelEncryptionConfigsRequest, callback?: (err: AWSError, data: CloudFront.Types.ListFieldLevelEncryptionConfigsResult) => void): Request<CloudFront.Types.ListFieldLevelEncryptionConfigsResult, AWSError>;
+  listFieldLevelEncryptionConfigs(params: BoundInput<CloudFront.Types.ListFieldLevelEncryptionConfigsRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.ListFieldLevelEncryptionConfigsResult) => void): Request<CloudFront.Types.ListFieldLevelEncryptionConfigsResult, AWSError>;
   /**
    * List all field-level encryption configurations that have been created in CloudFront for this account.
    */
@@ -272,7 +274,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Request a list of field-level encryption profiles that have been created in CloudFront for this account.
    */
-  listFieldLevelEncryptionProfiles(params: CloudFront.Types.ListFieldLevelEncryptionProfilesRequest, callback?: (err: AWSError, data: CloudFront.Types.ListFieldLevelEncryptionProfilesResult) => void): Request<CloudFront.Types.ListFieldLevelEncryptionProfilesResult, AWSError>;
+  listFieldLevelEncryptionProfiles(params: BoundInput<CloudFront.Types.ListFieldLevelEncryptionProfilesRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.ListFieldLevelEncryptionProfilesResult) => void): Request<CloudFront.Types.ListFieldLevelEncryptionProfilesResult, AWSError>;
   /**
    * Request a list of field-level encryption profiles that have been created in CloudFront for this account.
    */
@@ -280,7 +282,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Lists invalidation batches. 
    */
-  listInvalidations(params: CloudFront.Types.ListInvalidationsRequest, callback?: (err: AWSError, data: CloudFront.Types.ListInvalidationsResult) => void): Request<CloudFront.Types.ListInvalidationsResult, AWSError>;
+  listInvalidations(params: BoundInput<CloudFront.Types.ListInvalidationsRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.ListInvalidationsResult) => void): Request<CloudFront.Types.ListInvalidationsResult, AWSError>;
   /**
    * Lists invalidation batches. 
    */
@@ -288,7 +290,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * List all public keys that have been added to CloudFront for this account.
    */
-  listPublicKeys(params: CloudFront.Types.ListPublicKeysRequest, callback?: (err: AWSError, data: CloudFront.Types.ListPublicKeysResult) => void): Request<CloudFront.Types.ListPublicKeysResult, AWSError>;
+  listPublicKeys(params: BoundInput<CloudFront.Types.ListPublicKeysRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.ListPublicKeysResult) => void): Request<CloudFront.Types.ListPublicKeysResult, AWSError>;
   /**
    * List all public keys that have been added to CloudFront for this account.
    */
@@ -296,7 +298,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * List streaming distributions. 
    */
-  listStreamingDistributions(params: CloudFront.Types.ListStreamingDistributionsRequest, callback?: (err: AWSError, data: CloudFront.Types.ListStreamingDistributionsResult) => void): Request<CloudFront.Types.ListStreamingDistributionsResult, AWSError>;
+  listStreamingDistributions(params: BoundInput<CloudFront.Types.ListStreamingDistributionsRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.ListStreamingDistributionsResult) => void): Request<CloudFront.Types.ListStreamingDistributionsResult, AWSError>;
   /**
    * List streaming distributions. 
    */
@@ -304,7 +306,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * List tags for a CloudFront resource.
    */
-  listTagsForResource(params: CloudFront.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: CloudFront.Types.ListTagsForResourceResult) => void): Request<CloudFront.Types.ListTagsForResourceResult, AWSError>;
+  listTagsForResource(params: BoundInput<CloudFront.Types.ListTagsForResourceRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.ListTagsForResourceResult) => void): Request<CloudFront.Types.ListTagsForResourceResult, AWSError>;
   /**
    * List tags for a CloudFront resource.
    */
@@ -312,7 +314,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Add tags to a CloudFront resource.
    */
-  tagResource(params: CloudFront.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  tagResource(params: BoundInput<CloudFront.Types.TagResourceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Add tags to a CloudFront resource.
    */
@@ -320,7 +322,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Remove tags from a CloudFront resource.
    */
-  untagResource(params: CloudFront.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  untagResource(params: BoundInput<CloudFront.Types.UntagResourceRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Remove tags from a CloudFront resource.
    */
@@ -328,7 +330,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Update an origin access identity. 
    */
-  updateCloudFrontOriginAccessIdentity(params: CloudFront.Types.UpdateCloudFrontOriginAccessIdentityRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.Types.UpdateCloudFrontOriginAccessIdentityResult, AWSError>;
+  updateCloudFrontOriginAccessIdentity(params: BoundInput<CloudFront.Types.UpdateCloudFrontOriginAccessIdentityRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.UpdateCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.Types.UpdateCloudFrontOriginAccessIdentityResult, AWSError>;
   /**
    * Update an origin access identity. 
    */
@@ -336,7 +338,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Updates the configuration for a web distribution.   When you update a distribution, there are more required fields than when you create a distribution. When you update your distribution by using this API action, follow the steps here to get the current configuration and then make your updates, to make sure that you include all of the required fields. To view a summary, see Required Fields for Create Distribution and Update Distribution in the Amazon CloudFront Developer Guide.  The update process includes getting the current distribution configuration, updating the XML document that is returned to make your changes, and then submitting an UpdateDistribution request to make the updates. For information about updating a distribution using the CloudFront console instead, see Creating a Distribution in the Amazon CloudFront Developer Guide.  To update a web distribution using the CloudFront API    Submit a GetDistributionConfig request to get the current configuration and an Etag header for the distribution.  If you update the distribution again, you must get a new Etag header.    Update the XML document that was returned in the response to your GetDistributionConfig request to include your changes.   When you edit the XML file, be aware of the following:   You must strip out the ETag parameter that is returned.   Additional fields are required when you update a distribution. There may be fields included in the XML file for features that you haven't configured for your distribution. This is expected and required to successfully update the distribution.   You can't change the value of CallerReference. If you try to change this value, CloudFront returns an IllegalUpdate error.    The new configuration replaces the existing configuration; the values that you specify in an UpdateDistribution request are not merged into your existing configuration. When you add, delete, or replace values in an element that allows multiple values (for example, CNAME), you must specify all of the values that you want to appear in the updated distribution. In addition, you must update the corresponding Quantity element.      Submit an UpdateDistribution request to update the configuration for your distribution:   In the request body, include the XML document that you updated in Step 2. The request body must include an XML document with a DistributionConfig element.   Set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GetDistributionConfig request in Step 1.     Review the response to the UpdateDistribution request to confirm that the configuration was successfully updated.   Optional: Submit a GetDistribution request to confirm that your changes have propagated. When propagation is complete, the value of Status is Deployed.  
    */
-  updateDistribution(params: CloudFront.Types.UpdateDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateDistributionResult) => void): Request<CloudFront.Types.UpdateDistributionResult, AWSError>;
+  updateDistribution(params: BoundInput<CloudFront.Types.UpdateDistributionRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.UpdateDistributionResult) => void): Request<CloudFront.Types.UpdateDistributionResult, AWSError>;
   /**
    * Updates the configuration for a web distribution.   When you update a distribution, there are more required fields than when you create a distribution. When you update your distribution by using this API action, follow the steps here to get the current configuration and then make your updates, to make sure that you include all of the required fields. To view a summary, see Required Fields for Create Distribution and Update Distribution in the Amazon CloudFront Developer Guide.  The update process includes getting the current distribution configuration, updating the XML document that is returned to make your changes, and then submitting an UpdateDistribution request to make the updates. For information about updating a distribution using the CloudFront console instead, see Creating a Distribution in the Amazon CloudFront Developer Guide.  To update a web distribution using the CloudFront API    Submit a GetDistributionConfig request to get the current configuration and an Etag header for the distribution.  If you update the distribution again, you must get a new Etag header.    Update the XML document that was returned in the response to your GetDistributionConfig request to include your changes.   When you edit the XML file, be aware of the following:   You must strip out the ETag parameter that is returned.   Additional fields are required when you update a distribution. There may be fields included in the XML file for features that you haven't configured for your distribution. This is expected and required to successfully update the distribution.   You can't change the value of CallerReference. If you try to change this value, CloudFront returns an IllegalUpdate error.    The new configuration replaces the existing configuration; the values that you specify in an UpdateDistribution request are not merged into your existing configuration. When you add, delete, or replace values in an element that allows multiple values (for example, CNAME), you must specify all of the values that you want to appear in the updated distribution. In addition, you must update the corresponding Quantity element.      Submit an UpdateDistribution request to update the configuration for your distribution:   In the request body, include the XML document that you updated in Step 2. The request body must include an XML document with a DistributionConfig element.   Set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GetDistributionConfig request in Step 1.     Review the response to the UpdateDistribution request to confirm that the configuration was successfully updated.   Optional: Submit a GetDistribution request to confirm that your changes have propagated. When propagation is complete, the value of Status is Deployed.  
    */
@@ -344,7 +346,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Update a field-level encryption configuration. 
    */
-  updateFieldLevelEncryptionConfig(params: CloudFront.Types.UpdateFieldLevelEncryptionConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateFieldLevelEncryptionConfigResult) => void): Request<CloudFront.Types.UpdateFieldLevelEncryptionConfigResult, AWSError>;
+  updateFieldLevelEncryptionConfig(params: BoundInput<CloudFront.Types.UpdateFieldLevelEncryptionConfigRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.UpdateFieldLevelEncryptionConfigResult) => void): Request<CloudFront.Types.UpdateFieldLevelEncryptionConfigResult, AWSError>;
   /**
    * Update a field-level encryption configuration. 
    */
@@ -352,7 +354,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Update a field-level encryption profile. 
    */
-  updateFieldLevelEncryptionProfile(params: CloudFront.Types.UpdateFieldLevelEncryptionProfileRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateFieldLevelEncryptionProfileResult) => void): Request<CloudFront.Types.UpdateFieldLevelEncryptionProfileResult, AWSError>;
+  updateFieldLevelEncryptionProfile(params: BoundInput<CloudFront.Types.UpdateFieldLevelEncryptionProfileRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.UpdateFieldLevelEncryptionProfileResult) => void): Request<CloudFront.Types.UpdateFieldLevelEncryptionProfileResult, AWSError>;
   /**
    * Update a field-level encryption profile. 
    */
@@ -360,7 +362,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Update public key information. Note that the only value you can change is the comment.
    */
-  updatePublicKey(params: CloudFront.Types.UpdatePublicKeyRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdatePublicKeyResult) => void): Request<CloudFront.Types.UpdatePublicKeyResult, AWSError>;
+  updatePublicKey(params: BoundInput<CloudFront.Types.UpdatePublicKeyRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.UpdatePublicKeyResult) => void): Request<CloudFront.Types.UpdatePublicKeyResult, AWSError>;
   /**
    * Update public key information. Note that the only value you can change is the comment.
    */
@@ -368,7 +370,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Update a streaming distribution. 
    */
-  updateStreamingDistribution(params: CloudFront.Types.UpdateStreamingDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateStreamingDistributionResult) => void): Request<CloudFront.Types.UpdateStreamingDistributionResult, AWSError>;
+  updateStreamingDistribution(params: BoundInput<CloudFront.Types.UpdateStreamingDistributionRequest, keyof Params>, callback?: (err: AWSError, data: CloudFront.Types.UpdateStreamingDistributionResult) => void): Request<CloudFront.Types.UpdateStreamingDistributionResult, AWSError>;
   /**
    * Update a streaming distribution. 
    */
@@ -2603,7 +2605,8 @@ declare namespace CloudFront {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateCloudFrontOriginAccessIdentityRequest & CreateDistributionRequest & CreateDistributionWithTagsRequest & CreateFieldLevelEncryptionConfigRequest & CreateFieldLevelEncryptionProfileRequest & CreateInvalidationRequest & CreatePublicKeyRequest & CreateStreamingDistributionRequest & CreateStreamingDistributionWithTagsRequest & DeleteCloudFrontOriginAccessIdentityRequest & DeleteDistributionRequest & DeleteFieldLevelEncryptionConfigRequest & DeleteFieldLevelEncryptionProfileRequest & DeletePublicKeyRequest & DeleteStreamingDistributionRequest & GetCloudFrontOriginAccessIdentityRequest & GetCloudFrontOriginAccessIdentityConfigRequest & GetDistributionRequest & GetDistributionConfigRequest & GetFieldLevelEncryptionRequest & GetFieldLevelEncryptionConfigRequest & GetFieldLevelEncryptionProfileRequest & GetFieldLevelEncryptionProfileConfigRequest & GetInvalidationRequest & GetPublicKeyRequest & GetPublicKeyConfigRequest & GetStreamingDistributionRequest & GetStreamingDistributionConfigRequest & ListCloudFrontOriginAccessIdentitiesRequest & ListDistributionsRequest & ListDistributionsByWebACLIdRequest & ListFieldLevelEncryptionConfigsRequest & ListFieldLevelEncryptionProfilesRequest & ListInvalidationsRequest & ListPublicKeysRequest & ListStreamingDistributionsRequest & ListTagsForResourceRequest & TagResourceRequest & UntagResourceRequest & UpdateCloudFrontOriginAccessIdentityRequest & UpdateDistributionRequest & UpdateFieldLevelEncryptionConfigRequest & UpdateFieldLevelEncryptionProfileRequest & UpdatePublicKeyRequest & UpdateStreamingDistributionRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the CloudFront client.
    */

@@ -4,6 +4,8 @@ import {AWSError} from '../lib/error';
 import {S3Customizations} from '../lib/services/s3';
 import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 import {UseDualstackConfigOptions} from '../lib/config_use_dualstack';
 import {EventStream} from '../lib/event-stream/event-stream';
@@ -11,16 +13,16 @@ import {ManagedUpload as managed_upload} from '../lib/s3/managed_upload';
 import {PresignedPost as presigned_post} from '../lib/s3/presigned_post';
 import {Readable} from 'stream';
 interface Blob {}
-declare class S3 extends S3Customizations {
+declare class S3<Params extends S3.Types.ClientParams = {}> extends S3Customizations {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: S3.Types.ClientConfiguration)
-  config: Config & S3.Types.ClientConfiguration;
+  constructor(options?: S3.Types.ClientConfiguration<Params>)
+  config: Config & S3.Types.ClientConfiguration<Params>;
   /**
    * Aborts a multipart upload. To verify that all parts have been removed, so you don't get charged for the part storage, you should call the List Parts operation and ensure the parts list is empty.
    */
-  abortMultipartUpload(params: S3.Types.AbortMultipartUploadRequest, callback?: (err: AWSError, data: S3.Types.AbortMultipartUploadOutput) => void): Request<S3.Types.AbortMultipartUploadOutput, AWSError>;
+  abortMultipartUpload(params: BoundInput<S3.Types.AbortMultipartUploadRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.AbortMultipartUploadOutput) => void): Request<S3.Types.AbortMultipartUploadOutput, AWSError>;
   /**
    * Aborts a multipart upload. To verify that all parts have been removed, so you don't get charged for the part storage, you should call the List Parts operation and ensure the parts list is empty.
    */
@@ -28,7 +30,7 @@ declare class S3 extends S3Customizations {
   /**
    * Completes a multipart upload by assembling previously uploaded parts.
    */
-  completeMultipartUpload(params: S3.Types.CompleteMultipartUploadRequest, callback?: (err: AWSError, data: S3.Types.CompleteMultipartUploadOutput) => void): Request<S3.Types.CompleteMultipartUploadOutput, AWSError>;
+  completeMultipartUpload(params: BoundInput<S3.Types.CompleteMultipartUploadRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.CompleteMultipartUploadOutput) => void): Request<S3.Types.CompleteMultipartUploadOutput, AWSError>;
   /**
    * Completes a multipart upload by assembling previously uploaded parts.
    */
@@ -36,7 +38,7 @@ declare class S3 extends S3Customizations {
   /**
    * Creates a copy of an object that is already stored in Amazon S3.
    */
-  copyObject(params: S3.Types.CopyObjectRequest, callback?: (err: AWSError, data: S3.Types.CopyObjectOutput) => void): Request<S3.Types.CopyObjectOutput, AWSError>;
+  copyObject(params: BoundInput<S3.Types.CopyObjectRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.CopyObjectOutput) => void): Request<S3.Types.CopyObjectOutput, AWSError>;
   /**
    * Creates a copy of an object that is already stored in Amazon S3.
    */
@@ -44,7 +46,7 @@ declare class S3 extends S3Customizations {
   /**
    * Creates a new bucket.
    */
-  createBucket(params: S3.Types.CreateBucketRequest, callback?: (err: AWSError, data: S3.Types.CreateBucketOutput) => void): Request<S3.Types.CreateBucketOutput, AWSError>;
+  createBucket(params: BoundInput<S3.Types.CreateBucketRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.CreateBucketOutput) => void): Request<S3.Types.CreateBucketOutput, AWSError>;
   /**
    * Creates a new bucket.
    */
@@ -52,7 +54,7 @@ declare class S3 extends S3Customizations {
   /**
    * Initiates a multipart upload and returns an upload ID.  Note: After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.
    */
-  createMultipartUpload(params: S3.Types.CreateMultipartUploadRequest, callback?: (err: AWSError, data: S3.Types.CreateMultipartUploadOutput) => void): Request<S3.Types.CreateMultipartUploadOutput, AWSError>;
+  createMultipartUpload(params: BoundInput<S3.Types.CreateMultipartUploadRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.CreateMultipartUploadOutput) => void): Request<S3.Types.CreateMultipartUploadOutput, AWSError>;
   /**
    * Initiates a multipart upload and returns an upload ID.  Note: After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.
    */
@@ -60,7 +62,7 @@ declare class S3 extends S3Customizations {
   /**
    * Deletes the bucket. All objects (including all object versions and Delete Markers) in the bucket must be deleted before the bucket itself can be deleted.
    */
-  deleteBucket(params: S3.Types.DeleteBucketRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteBucket(params: BoundInput<S3.Types.DeleteBucketRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the bucket. All objects (including all object versions and Delete Markers) in the bucket must be deleted before the bucket itself can be deleted.
    */
@@ -68,7 +70,7 @@ declare class S3 extends S3Customizations {
   /**
    * Deletes an analytics configuration for the bucket (specified by the analytics configuration ID).
    */
-  deleteBucketAnalyticsConfiguration(params: S3.Types.DeleteBucketAnalyticsConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteBucketAnalyticsConfiguration(params: BoundInput<S3.Types.DeleteBucketAnalyticsConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an analytics configuration for the bucket (specified by the analytics configuration ID).
    */
@@ -76,7 +78,7 @@ declare class S3 extends S3Customizations {
   /**
    * Deletes the CORS configuration information set for the bucket.
    */
-  deleteBucketCors(params: S3.Types.DeleteBucketCorsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteBucketCors(params: BoundInput<S3.Types.DeleteBucketCorsRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the CORS configuration information set for the bucket.
    */
@@ -84,7 +86,7 @@ declare class S3 extends S3Customizations {
   /**
    * Deletes the server-side encryption configuration from the bucket.
    */
-  deleteBucketEncryption(params: S3.Types.DeleteBucketEncryptionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteBucketEncryption(params: BoundInput<S3.Types.DeleteBucketEncryptionRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the server-side encryption configuration from the bucket.
    */
@@ -92,7 +94,7 @@ declare class S3 extends S3Customizations {
   /**
    * Deletes an inventory configuration (identified by the inventory ID) from the bucket.
    */
-  deleteBucketInventoryConfiguration(params: S3.Types.DeleteBucketInventoryConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteBucketInventoryConfiguration(params: BoundInput<S3.Types.DeleteBucketInventoryConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an inventory configuration (identified by the inventory ID) from the bucket.
    */
@@ -100,7 +102,7 @@ declare class S3 extends S3Customizations {
   /**
    * Deletes the lifecycle configuration from the bucket.
    */
-  deleteBucketLifecycle(params: S3.Types.DeleteBucketLifecycleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteBucketLifecycle(params: BoundInput<S3.Types.DeleteBucketLifecycleRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the lifecycle configuration from the bucket.
    */
@@ -108,7 +110,7 @@ declare class S3 extends S3Customizations {
   /**
    * Deletes a metrics configuration (specified by the metrics configuration ID) from the bucket.
    */
-  deleteBucketMetricsConfiguration(params: S3.Types.DeleteBucketMetricsConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteBucketMetricsConfiguration(params: BoundInput<S3.Types.DeleteBucketMetricsConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a metrics configuration (specified by the metrics configuration ID) from the bucket.
    */
@@ -116,7 +118,7 @@ declare class S3 extends S3Customizations {
   /**
    * Deletes the policy from the bucket.
    */
-  deleteBucketPolicy(params: S3.Types.DeleteBucketPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteBucketPolicy(params: BoundInput<S3.Types.DeleteBucketPolicyRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the policy from the bucket.
    */
@@ -124,7 +126,7 @@ declare class S3 extends S3Customizations {
   /**
    *  Deletes the replication configuration from the bucket. For information about replication configuration, see Cross-Region Replication (CRR) in the Amazon S3 Developer Guide. 
    */
-  deleteBucketReplication(params: S3.Types.DeleteBucketReplicationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteBucketReplication(params: BoundInput<S3.Types.DeleteBucketReplicationRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    *  Deletes the replication configuration from the bucket. For information about replication configuration, see Cross-Region Replication (CRR) in the Amazon S3 Developer Guide. 
    */
@@ -132,7 +134,7 @@ declare class S3 extends S3Customizations {
   /**
    * Deletes the tags from the bucket.
    */
-  deleteBucketTagging(params: S3.Types.DeleteBucketTaggingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteBucketTagging(params: BoundInput<S3.Types.DeleteBucketTaggingRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the tags from the bucket.
    */
@@ -140,7 +142,7 @@ declare class S3 extends S3Customizations {
   /**
    * This operation removes the website configuration from the bucket.
    */
-  deleteBucketWebsite(params: S3.Types.DeleteBucketWebsiteRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteBucketWebsite(params: BoundInput<S3.Types.DeleteBucketWebsiteRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * This operation removes the website configuration from the bucket.
    */
@@ -148,7 +150,7 @@ declare class S3 extends S3Customizations {
   /**
    * Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, Amazon S3 does not remove any objects.
    */
-  deleteObject(params: S3.Types.DeleteObjectRequest, callback?: (err: AWSError, data: S3.Types.DeleteObjectOutput) => void): Request<S3.Types.DeleteObjectOutput, AWSError>;
+  deleteObject(params: BoundInput<S3.Types.DeleteObjectRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.DeleteObjectOutput) => void): Request<S3.Types.DeleteObjectOutput, AWSError>;
   /**
    * Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, Amazon S3 does not remove any objects.
    */
@@ -156,7 +158,7 @@ declare class S3 extends S3Customizations {
   /**
    * Removes the tag-set from an existing object.
    */
-  deleteObjectTagging(params: S3.Types.DeleteObjectTaggingRequest, callback?: (err: AWSError, data: S3.Types.DeleteObjectTaggingOutput) => void): Request<S3.Types.DeleteObjectTaggingOutput, AWSError>;
+  deleteObjectTagging(params: BoundInput<S3.Types.DeleteObjectTaggingRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.DeleteObjectTaggingOutput) => void): Request<S3.Types.DeleteObjectTaggingOutput, AWSError>;
   /**
    * Removes the tag-set from an existing object.
    */
@@ -164,7 +166,7 @@ declare class S3 extends S3Customizations {
   /**
    * This operation enables you to delete multiple objects from a bucket using a single HTTP request. You may specify up to 1000 keys.
    */
-  deleteObjects(params: S3.Types.DeleteObjectsRequest, callback?: (err: AWSError, data: S3.Types.DeleteObjectsOutput) => void): Request<S3.Types.DeleteObjectsOutput, AWSError>;
+  deleteObjects(params: BoundInput<S3.Types.DeleteObjectsRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.DeleteObjectsOutput) => void): Request<S3.Types.DeleteObjectsOutput, AWSError>;
   /**
    * This operation enables you to delete multiple objects from a bucket using a single HTTP request. You may specify up to 1000 keys.
    */
@@ -172,7 +174,7 @@ declare class S3 extends S3Customizations {
   /**
    * Removes the PublicAccessBlock configuration from an Amazon S3 bucket.
    */
-  deletePublicAccessBlock(params: S3.Types.DeletePublicAccessBlockRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deletePublicAccessBlock(params: BoundInput<S3.Types.DeletePublicAccessBlockRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Removes the PublicAccessBlock configuration from an Amazon S3 bucket.
    */
@@ -180,7 +182,7 @@ declare class S3 extends S3Customizations {
   /**
    * Returns the accelerate configuration of a bucket.
    */
-  getBucketAccelerateConfiguration(params: S3.Types.GetBucketAccelerateConfigurationRequest, callback?: (err: AWSError, data: S3.Types.GetBucketAccelerateConfigurationOutput) => void): Request<S3.Types.GetBucketAccelerateConfigurationOutput, AWSError>;
+  getBucketAccelerateConfiguration(params: BoundInput<S3.Types.GetBucketAccelerateConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetBucketAccelerateConfigurationOutput) => void): Request<S3.Types.GetBucketAccelerateConfigurationOutput, AWSError>;
   /**
    * Returns the accelerate configuration of a bucket.
    */
@@ -188,7 +190,7 @@ declare class S3 extends S3Customizations {
   /**
    * Gets the access control policy for the bucket.
    */
-  getBucketAcl(params: S3.Types.GetBucketAclRequest, callback?: (err: AWSError, data: S3.Types.GetBucketAclOutput) => void): Request<S3.Types.GetBucketAclOutput, AWSError>;
+  getBucketAcl(params: BoundInput<S3.Types.GetBucketAclRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetBucketAclOutput) => void): Request<S3.Types.GetBucketAclOutput, AWSError>;
   /**
    * Gets the access control policy for the bucket.
    */
@@ -196,7 +198,7 @@ declare class S3 extends S3Customizations {
   /**
    * Gets an analytics configuration for the bucket (specified by the analytics configuration ID).
    */
-  getBucketAnalyticsConfiguration(params: S3.Types.GetBucketAnalyticsConfigurationRequest, callback?: (err: AWSError, data: S3.Types.GetBucketAnalyticsConfigurationOutput) => void): Request<S3.Types.GetBucketAnalyticsConfigurationOutput, AWSError>;
+  getBucketAnalyticsConfiguration(params: BoundInput<S3.Types.GetBucketAnalyticsConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetBucketAnalyticsConfigurationOutput) => void): Request<S3.Types.GetBucketAnalyticsConfigurationOutput, AWSError>;
   /**
    * Gets an analytics configuration for the bucket (specified by the analytics configuration ID).
    */
@@ -204,7 +206,7 @@ declare class S3 extends S3Customizations {
   /**
    * Returns the CORS configuration for the bucket.
    */
-  getBucketCors(params: S3.Types.GetBucketCorsRequest, callback?: (err: AWSError, data: S3.Types.GetBucketCorsOutput) => void): Request<S3.Types.GetBucketCorsOutput, AWSError>;
+  getBucketCors(params: BoundInput<S3.Types.GetBucketCorsRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetBucketCorsOutput) => void): Request<S3.Types.GetBucketCorsOutput, AWSError>;
   /**
    * Returns the CORS configuration for the bucket.
    */
@@ -212,7 +214,7 @@ declare class S3 extends S3Customizations {
   /**
    * Returns the server-side encryption configuration of a bucket.
    */
-  getBucketEncryption(params: S3.Types.GetBucketEncryptionRequest, callback?: (err: AWSError, data: S3.Types.GetBucketEncryptionOutput) => void): Request<S3.Types.GetBucketEncryptionOutput, AWSError>;
+  getBucketEncryption(params: BoundInput<S3.Types.GetBucketEncryptionRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetBucketEncryptionOutput) => void): Request<S3.Types.GetBucketEncryptionOutput, AWSError>;
   /**
    * Returns the server-side encryption configuration of a bucket.
    */
@@ -220,7 +222,7 @@ declare class S3 extends S3Customizations {
   /**
    * Returns an inventory configuration (identified by the inventory ID) from the bucket.
    */
-  getBucketInventoryConfiguration(params: S3.Types.GetBucketInventoryConfigurationRequest, callback?: (err: AWSError, data: S3.Types.GetBucketInventoryConfigurationOutput) => void): Request<S3.Types.GetBucketInventoryConfigurationOutput, AWSError>;
+  getBucketInventoryConfiguration(params: BoundInput<S3.Types.GetBucketInventoryConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetBucketInventoryConfigurationOutput) => void): Request<S3.Types.GetBucketInventoryConfigurationOutput, AWSError>;
   /**
    * Returns an inventory configuration (identified by the inventory ID) from the bucket.
    */
@@ -228,7 +230,7 @@ declare class S3 extends S3Customizations {
   /**
    * Deprecated, see the GetBucketLifecycleConfiguration operation.
    */
-  getBucketLifecycle(params: S3.Types.GetBucketLifecycleRequest, callback?: (err: AWSError, data: S3.Types.GetBucketLifecycleOutput) => void): Request<S3.Types.GetBucketLifecycleOutput, AWSError>;
+  getBucketLifecycle(params: BoundInput<S3.Types.GetBucketLifecycleRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetBucketLifecycleOutput) => void): Request<S3.Types.GetBucketLifecycleOutput, AWSError>;
   /**
    * Deprecated, see the GetBucketLifecycleConfiguration operation.
    */
@@ -236,7 +238,7 @@ declare class S3 extends S3Customizations {
   /**
    * Returns the lifecycle configuration information set on the bucket.
    */
-  getBucketLifecycleConfiguration(params: S3.Types.GetBucketLifecycleConfigurationRequest, callback?: (err: AWSError, data: S3.Types.GetBucketLifecycleConfigurationOutput) => void): Request<S3.Types.GetBucketLifecycleConfigurationOutput, AWSError>;
+  getBucketLifecycleConfiguration(params: BoundInput<S3.Types.GetBucketLifecycleConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetBucketLifecycleConfigurationOutput) => void): Request<S3.Types.GetBucketLifecycleConfigurationOutput, AWSError>;
   /**
    * Returns the lifecycle configuration information set on the bucket.
    */
@@ -244,7 +246,7 @@ declare class S3 extends S3Customizations {
   /**
    * Returns the region the bucket resides in.
    */
-  getBucketLocation(params: S3.Types.GetBucketLocationRequest, callback?: (err: AWSError, data: S3.Types.GetBucketLocationOutput) => void): Request<S3.Types.GetBucketLocationOutput, AWSError>;
+  getBucketLocation(params: BoundInput<S3.Types.GetBucketLocationRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetBucketLocationOutput) => void): Request<S3.Types.GetBucketLocationOutput, AWSError>;
   /**
    * Returns the region the bucket resides in.
    */
@@ -252,7 +254,7 @@ declare class S3 extends S3Customizations {
   /**
    * Returns the logging status of a bucket and the permissions users have to view and modify that status. To use GET, you must be the bucket owner.
    */
-  getBucketLogging(params: S3.Types.GetBucketLoggingRequest, callback?: (err: AWSError, data: S3.Types.GetBucketLoggingOutput) => void): Request<S3.Types.GetBucketLoggingOutput, AWSError>;
+  getBucketLogging(params: BoundInput<S3.Types.GetBucketLoggingRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetBucketLoggingOutput) => void): Request<S3.Types.GetBucketLoggingOutput, AWSError>;
   /**
    * Returns the logging status of a bucket and the permissions users have to view and modify that status. To use GET, you must be the bucket owner.
    */
@@ -260,7 +262,7 @@ declare class S3 extends S3Customizations {
   /**
    * Gets a metrics configuration (specified by the metrics configuration ID) from the bucket.
    */
-  getBucketMetricsConfiguration(params: S3.Types.GetBucketMetricsConfigurationRequest, callback?: (err: AWSError, data: S3.Types.GetBucketMetricsConfigurationOutput) => void): Request<S3.Types.GetBucketMetricsConfigurationOutput, AWSError>;
+  getBucketMetricsConfiguration(params: BoundInput<S3.Types.GetBucketMetricsConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetBucketMetricsConfigurationOutput) => void): Request<S3.Types.GetBucketMetricsConfigurationOutput, AWSError>;
   /**
    * Gets a metrics configuration (specified by the metrics configuration ID) from the bucket.
    */
@@ -268,7 +270,7 @@ declare class S3 extends S3Customizations {
   /**
    * Deprecated, see the GetBucketNotificationConfiguration operation.
    */
-  getBucketNotification(params: S3.Types.GetBucketNotificationConfigurationRequest, callback?: (err: AWSError, data: S3.Types.NotificationConfigurationDeprecated) => void): Request<S3.Types.NotificationConfigurationDeprecated, AWSError>;
+  getBucketNotification(params: BoundInput<S3.Types.GetBucketNotificationConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.NotificationConfigurationDeprecated) => void): Request<S3.Types.NotificationConfigurationDeprecated, AWSError>;
   /**
    * Deprecated, see the GetBucketNotificationConfiguration operation.
    */
@@ -276,7 +278,7 @@ declare class S3 extends S3Customizations {
   /**
    * Returns the notification configuration of a bucket.
    */
-  getBucketNotificationConfiguration(params: S3.Types.GetBucketNotificationConfigurationRequest, callback?: (err: AWSError, data: S3.Types.NotificationConfiguration) => void): Request<S3.Types.NotificationConfiguration, AWSError>;
+  getBucketNotificationConfiguration(params: BoundInput<S3.Types.GetBucketNotificationConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.NotificationConfiguration) => void): Request<S3.Types.NotificationConfiguration, AWSError>;
   /**
    * Returns the notification configuration of a bucket.
    */
@@ -284,7 +286,7 @@ declare class S3 extends S3Customizations {
   /**
    * Returns the policy of a specified bucket.
    */
-  getBucketPolicy(params: S3.Types.GetBucketPolicyRequest, callback?: (err: AWSError, data: S3.Types.GetBucketPolicyOutput) => void): Request<S3.Types.GetBucketPolicyOutput, AWSError>;
+  getBucketPolicy(params: BoundInput<S3.Types.GetBucketPolicyRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetBucketPolicyOutput) => void): Request<S3.Types.GetBucketPolicyOutput, AWSError>;
   /**
    * Returns the policy of a specified bucket.
    */
@@ -292,7 +294,7 @@ declare class S3 extends S3Customizations {
   /**
    * Retrieves the policy status for an Amazon S3 bucket, indicating whether the bucket is public.
    */
-  getBucketPolicyStatus(params: S3.Types.GetBucketPolicyStatusRequest, callback?: (err: AWSError, data: S3.Types.GetBucketPolicyStatusOutput) => void): Request<S3.Types.GetBucketPolicyStatusOutput, AWSError>;
+  getBucketPolicyStatus(params: BoundInput<S3.Types.GetBucketPolicyStatusRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetBucketPolicyStatusOutput) => void): Request<S3.Types.GetBucketPolicyStatusOutput, AWSError>;
   /**
    * Retrieves the policy status for an Amazon S3 bucket, indicating whether the bucket is public.
    */
@@ -300,7 +302,7 @@ declare class S3 extends S3Customizations {
   /**
    * Returns the replication configuration of a bucket.   It can take a while to propagate the put or delete a replication configuration to all Amazon S3 systems. Therefore, a get request soon after put or delete can return a wrong result.  
    */
-  getBucketReplication(params: S3.Types.GetBucketReplicationRequest, callback?: (err: AWSError, data: S3.Types.GetBucketReplicationOutput) => void): Request<S3.Types.GetBucketReplicationOutput, AWSError>;
+  getBucketReplication(params: BoundInput<S3.Types.GetBucketReplicationRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetBucketReplicationOutput) => void): Request<S3.Types.GetBucketReplicationOutput, AWSError>;
   /**
    * Returns the replication configuration of a bucket.   It can take a while to propagate the put or delete a replication configuration to all Amazon S3 systems. Therefore, a get request soon after put or delete can return a wrong result.  
    */
@@ -308,7 +310,7 @@ declare class S3 extends S3Customizations {
   /**
    * Returns the request payment configuration of a bucket.
    */
-  getBucketRequestPayment(params: S3.Types.GetBucketRequestPaymentRequest, callback?: (err: AWSError, data: S3.Types.GetBucketRequestPaymentOutput) => void): Request<S3.Types.GetBucketRequestPaymentOutput, AWSError>;
+  getBucketRequestPayment(params: BoundInput<S3.Types.GetBucketRequestPaymentRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetBucketRequestPaymentOutput) => void): Request<S3.Types.GetBucketRequestPaymentOutput, AWSError>;
   /**
    * Returns the request payment configuration of a bucket.
    */
@@ -316,7 +318,7 @@ declare class S3 extends S3Customizations {
   /**
    * Returns the tag set associated with the bucket.
    */
-  getBucketTagging(params: S3.Types.GetBucketTaggingRequest, callback?: (err: AWSError, data: S3.Types.GetBucketTaggingOutput) => void): Request<S3.Types.GetBucketTaggingOutput, AWSError>;
+  getBucketTagging(params: BoundInput<S3.Types.GetBucketTaggingRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetBucketTaggingOutput) => void): Request<S3.Types.GetBucketTaggingOutput, AWSError>;
   /**
    * Returns the tag set associated with the bucket.
    */
@@ -324,7 +326,7 @@ declare class S3 extends S3Customizations {
   /**
    * Returns the versioning state of a bucket.
    */
-  getBucketVersioning(params: S3.Types.GetBucketVersioningRequest, callback?: (err: AWSError, data: S3.Types.GetBucketVersioningOutput) => void): Request<S3.Types.GetBucketVersioningOutput, AWSError>;
+  getBucketVersioning(params: BoundInput<S3.Types.GetBucketVersioningRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetBucketVersioningOutput) => void): Request<S3.Types.GetBucketVersioningOutput, AWSError>;
   /**
    * Returns the versioning state of a bucket.
    */
@@ -332,7 +334,7 @@ declare class S3 extends S3Customizations {
   /**
    * Returns the website configuration for a bucket.
    */
-  getBucketWebsite(params: S3.Types.GetBucketWebsiteRequest, callback?: (err: AWSError, data: S3.Types.GetBucketWebsiteOutput) => void): Request<S3.Types.GetBucketWebsiteOutput, AWSError>;
+  getBucketWebsite(params: BoundInput<S3.Types.GetBucketWebsiteRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetBucketWebsiteOutput) => void): Request<S3.Types.GetBucketWebsiteOutput, AWSError>;
   /**
    * Returns the website configuration for a bucket.
    */
@@ -340,7 +342,7 @@ declare class S3 extends S3Customizations {
   /**
    * Retrieves objects from Amazon S3.
    */
-  getObject(params: S3.Types.GetObjectRequest, callback?: (err: AWSError, data: S3.Types.GetObjectOutput) => void): Request<S3.Types.GetObjectOutput, AWSError>;
+  getObject(params: BoundInput<S3.Types.GetObjectRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetObjectOutput) => void): Request<S3.Types.GetObjectOutput, AWSError>;
   /**
    * Retrieves objects from Amazon S3.
    */
@@ -348,7 +350,7 @@ declare class S3 extends S3Customizations {
   /**
    * Returns the access control list (ACL) of an object.
    */
-  getObjectAcl(params: S3.Types.GetObjectAclRequest, callback?: (err: AWSError, data: S3.Types.GetObjectAclOutput) => void): Request<S3.Types.GetObjectAclOutput, AWSError>;
+  getObjectAcl(params: BoundInput<S3.Types.GetObjectAclRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetObjectAclOutput) => void): Request<S3.Types.GetObjectAclOutput, AWSError>;
   /**
    * Returns the access control list (ACL) of an object.
    */
@@ -356,7 +358,7 @@ declare class S3 extends S3Customizations {
   /**
    * Gets an object's current Legal Hold status.
    */
-  getObjectLegalHold(params: S3.Types.GetObjectLegalHoldRequest, callback?: (err: AWSError, data: S3.Types.GetObjectLegalHoldOutput) => void): Request<S3.Types.GetObjectLegalHoldOutput, AWSError>;
+  getObjectLegalHold(params: BoundInput<S3.Types.GetObjectLegalHoldRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetObjectLegalHoldOutput) => void): Request<S3.Types.GetObjectLegalHoldOutput, AWSError>;
   /**
    * Gets an object's current Legal Hold status.
    */
@@ -364,7 +366,7 @@ declare class S3 extends S3Customizations {
   /**
    * Gets the Object Lock configuration for a bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket.
    */
-  getObjectLockConfiguration(params: S3.Types.GetObjectLockConfigurationRequest, callback?: (err: AWSError, data: S3.Types.GetObjectLockConfigurationOutput) => void): Request<S3.Types.GetObjectLockConfigurationOutput, AWSError>;
+  getObjectLockConfiguration(params: BoundInput<S3.Types.GetObjectLockConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetObjectLockConfigurationOutput) => void): Request<S3.Types.GetObjectLockConfigurationOutput, AWSError>;
   /**
    * Gets the Object Lock configuration for a bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket.
    */
@@ -372,7 +374,7 @@ declare class S3 extends S3Customizations {
   /**
    * Retrieves an object's retention settings.
    */
-  getObjectRetention(params: S3.Types.GetObjectRetentionRequest, callback?: (err: AWSError, data: S3.Types.GetObjectRetentionOutput) => void): Request<S3.Types.GetObjectRetentionOutput, AWSError>;
+  getObjectRetention(params: BoundInput<S3.Types.GetObjectRetentionRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetObjectRetentionOutput) => void): Request<S3.Types.GetObjectRetentionOutput, AWSError>;
   /**
    * Retrieves an object's retention settings.
    */
@@ -380,7 +382,7 @@ declare class S3 extends S3Customizations {
   /**
    * Returns the tag-set of an object.
    */
-  getObjectTagging(params: S3.Types.GetObjectTaggingRequest, callback?: (err: AWSError, data: S3.Types.GetObjectTaggingOutput) => void): Request<S3.Types.GetObjectTaggingOutput, AWSError>;
+  getObjectTagging(params: BoundInput<S3.Types.GetObjectTaggingRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetObjectTaggingOutput) => void): Request<S3.Types.GetObjectTaggingOutput, AWSError>;
   /**
    * Returns the tag-set of an object.
    */
@@ -388,7 +390,7 @@ declare class S3 extends S3Customizations {
   /**
    * Return torrent files from a bucket.
    */
-  getObjectTorrent(params: S3.Types.GetObjectTorrentRequest, callback?: (err: AWSError, data: S3.Types.GetObjectTorrentOutput) => void): Request<S3.Types.GetObjectTorrentOutput, AWSError>;
+  getObjectTorrent(params: BoundInput<S3.Types.GetObjectTorrentRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetObjectTorrentOutput) => void): Request<S3.Types.GetObjectTorrentOutput, AWSError>;
   /**
    * Return torrent files from a bucket.
    */
@@ -396,7 +398,7 @@ declare class S3 extends S3Customizations {
   /**
    * Retrieves the PublicAccessBlock configuration for an Amazon S3 bucket.
    */
-  getPublicAccessBlock(params: S3.Types.GetPublicAccessBlockRequest, callback?: (err: AWSError, data: S3.Types.GetPublicAccessBlockOutput) => void): Request<S3.Types.GetPublicAccessBlockOutput, AWSError>;
+  getPublicAccessBlock(params: BoundInput<S3.Types.GetPublicAccessBlockRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.GetPublicAccessBlockOutput) => void): Request<S3.Types.GetPublicAccessBlockOutput, AWSError>;
   /**
    * Retrieves the PublicAccessBlock configuration for an Amazon S3 bucket.
    */
@@ -404,7 +406,7 @@ declare class S3 extends S3Customizations {
   /**
    * This operation is useful to determine if a bucket exists and you have permission to access it.
    */
-  headBucket(params: S3.Types.HeadBucketRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  headBucket(params: BoundInput<S3.Types.HeadBucketRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * This operation is useful to determine if a bucket exists and you have permission to access it.
    */
@@ -412,7 +414,7 @@ declare class S3 extends S3Customizations {
   /**
    * The HEAD operation retrieves metadata from an object without returning the object itself. This operation is useful if you're only interested in an object's metadata. To use HEAD, you must have READ access to the object.
    */
-  headObject(params: S3.Types.HeadObjectRequest, callback?: (err: AWSError, data: S3.Types.HeadObjectOutput) => void): Request<S3.Types.HeadObjectOutput, AWSError>;
+  headObject(params: BoundInput<S3.Types.HeadObjectRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.HeadObjectOutput) => void): Request<S3.Types.HeadObjectOutput, AWSError>;
   /**
    * The HEAD operation retrieves metadata from an object without returning the object itself. This operation is useful if you're only interested in an object's metadata. To use HEAD, you must have READ access to the object.
    */
@@ -420,7 +422,7 @@ declare class S3 extends S3Customizations {
   /**
    * Lists the analytics configurations for the bucket.
    */
-  listBucketAnalyticsConfigurations(params: S3.Types.ListBucketAnalyticsConfigurationsRequest, callback?: (err: AWSError, data: S3.Types.ListBucketAnalyticsConfigurationsOutput) => void): Request<S3.Types.ListBucketAnalyticsConfigurationsOutput, AWSError>;
+  listBucketAnalyticsConfigurations(params: BoundInput<S3.Types.ListBucketAnalyticsConfigurationsRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.ListBucketAnalyticsConfigurationsOutput) => void): Request<S3.Types.ListBucketAnalyticsConfigurationsOutput, AWSError>;
   /**
    * Lists the analytics configurations for the bucket.
    */
@@ -428,7 +430,7 @@ declare class S3 extends S3Customizations {
   /**
    * Returns a list of inventory configurations for the bucket.
    */
-  listBucketInventoryConfigurations(params: S3.Types.ListBucketInventoryConfigurationsRequest, callback?: (err: AWSError, data: S3.Types.ListBucketInventoryConfigurationsOutput) => void): Request<S3.Types.ListBucketInventoryConfigurationsOutput, AWSError>;
+  listBucketInventoryConfigurations(params: BoundInput<S3.Types.ListBucketInventoryConfigurationsRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.ListBucketInventoryConfigurationsOutput) => void): Request<S3.Types.ListBucketInventoryConfigurationsOutput, AWSError>;
   /**
    * Returns a list of inventory configurations for the bucket.
    */
@@ -436,7 +438,7 @@ declare class S3 extends S3Customizations {
   /**
    * Lists the metrics configurations for the bucket.
    */
-  listBucketMetricsConfigurations(params: S3.Types.ListBucketMetricsConfigurationsRequest, callback?: (err: AWSError, data: S3.Types.ListBucketMetricsConfigurationsOutput) => void): Request<S3.Types.ListBucketMetricsConfigurationsOutput, AWSError>;
+  listBucketMetricsConfigurations(params: BoundInput<S3.Types.ListBucketMetricsConfigurationsRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.ListBucketMetricsConfigurationsOutput) => void): Request<S3.Types.ListBucketMetricsConfigurationsOutput, AWSError>;
   /**
    * Lists the metrics configurations for the bucket.
    */
@@ -448,7 +450,7 @@ declare class S3 extends S3Customizations {
   /**
    * This operation lists in-progress multipart uploads.
    */
-  listMultipartUploads(params: S3.Types.ListMultipartUploadsRequest, callback?: (err: AWSError, data: S3.Types.ListMultipartUploadsOutput) => void): Request<S3.Types.ListMultipartUploadsOutput, AWSError>;
+  listMultipartUploads(params: BoundInput<S3.Types.ListMultipartUploadsRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.ListMultipartUploadsOutput) => void): Request<S3.Types.ListMultipartUploadsOutput, AWSError>;
   /**
    * This operation lists in-progress multipart uploads.
    */
@@ -456,7 +458,7 @@ declare class S3 extends S3Customizations {
   /**
    * Returns metadata about all of the versions of objects in a bucket.
    */
-  listObjectVersions(params: S3.Types.ListObjectVersionsRequest, callback?: (err: AWSError, data: S3.Types.ListObjectVersionsOutput) => void): Request<S3.Types.ListObjectVersionsOutput, AWSError>;
+  listObjectVersions(params: BoundInput<S3.Types.ListObjectVersionsRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.ListObjectVersionsOutput) => void): Request<S3.Types.ListObjectVersionsOutput, AWSError>;
   /**
    * Returns metadata about all of the versions of objects in a bucket.
    */
@@ -464,7 +466,7 @@ declare class S3 extends S3Customizations {
   /**
    * Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket.
    */
-  listObjects(params: S3.Types.ListObjectsRequest, callback?: (err: AWSError, data: S3.Types.ListObjectsOutput) => void): Request<S3.Types.ListObjectsOutput, AWSError>;
+  listObjects(params: BoundInput<S3.Types.ListObjectsRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.ListObjectsOutput) => void): Request<S3.Types.ListObjectsOutput, AWSError>;
   /**
    * Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket.
    */
@@ -472,7 +474,7 @@ declare class S3 extends S3Customizations {
   /**
    * Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket. Note: ListObjectsV2 is the revised List Objects API and we recommend you use this revised API for new application development.
    */
-  listObjectsV2(params: S3.Types.ListObjectsV2Request, callback?: (err: AWSError, data: S3.Types.ListObjectsV2Output) => void): Request<S3.Types.ListObjectsV2Output, AWSError>;
+  listObjectsV2(params: BoundInput<S3.Types.ListObjectsV2Request, keyof Params>, callback?: (err: AWSError, data: S3.Types.ListObjectsV2Output) => void): Request<S3.Types.ListObjectsV2Output, AWSError>;
   /**
    * Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket. Note: ListObjectsV2 is the revised List Objects API and we recommend you use this revised API for new application development.
    */
@@ -480,7 +482,7 @@ declare class S3 extends S3Customizations {
   /**
    * Lists the parts that have been uploaded for a specific multipart upload.
    */
-  listParts(params: S3.Types.ListPartsRequest, callback?: (err: AWSError, data: S3.Types.ListPartsOutput) => void): Request<S3.Types.ListPartsOutput, AWSError>;
+  listParts(params: BoundInput<S3.Types.ListPartsRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.ListPartsOutput) => void): Request<S3.Types.ListPartsOutput, AWSError>;
   /**
    * Lists the parts that have been uploaded for a specific multipart upload.
    */
@@ -488,7 +490,7 @@ declare class S3 extends S3Customizations {
   /**
    * Sets the accelerate configuration of an existing bucket.
    */
-  putBucketAccelerateConfiguration(params: S3.Types.PutBucketAccelerateConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putBucketAccelerateConfiguration(params: BoundInput<S3.Types.PutBucketAccelerateConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sets the accelerate configuration of an existing bucket.
    */
@@ -496,7 +498,7 @@ declare class S3 extends S3Customizations {
   /**
    * Sets the permissions on a bucket using access control lists (ACL).
    */
-  putBucketAcl(params: S3.Types.PutBucketAclRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putBucketAcl(params: BoundInput<S3.Types.PutBucketAclRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sets the permissions on a bucket using access control lists (ACL).
    */
@@ -504,7 +506,7 @@ declare class S3 extends S3Customizations {
   /**
    * Sets an analytics configuration for the bucket (specified by the analytics configuration ID).
    */
-  putBucketAnalyticsConfiguration(params: S3.Types.PutBucketAnalyticsConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putBucketAnalyticsConfiguration(params: BoundInput<S3.Types.PutBucketAnalyticsConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sets an analytics configuration for the bucket (specified by the analytics configuration ID).
    */
@@ -512,7 +514,7 @@ declare class S3 extends S3Customizations {
   /**
    * Sets the CORS configuration for a bucket.
    */
-  putBucketCors(params: S3.Types.PutBucketCorsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putBucketCors(params: BoundInput<S3.Types.PutBucketCorsRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sets the CORS configuration for a bucket.
    */
@@ -520,7 +522,7 @@ declare class S3 extends S3Customizations {
   /**
    * Creates a new server-side encryption configuration (or replaces an existing one, if present).
    */
-  putBucketEncryption(params: S3.Types.PutBucketEncryptionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putBucketEncryption(params: BoundInput<S3.Types.PutBucketEncryptionRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Creates a new server-side encryption configuration (or replaces an existing one, if present).
    */
@@ -528,7 +530,7 @@ declare class S3 extends S3Customizations {
   /**
    * Adds an inventory configuration (identified by the inventory ID) from the bucket.
    */
-  putBucketInventoryConfiguration(params: S3.Types.PutBucketInventoryConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putBucketInventoryConfiguration(params: BoundInput<S3.Types.PutBucketInventoryConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Adds an inventory configuration (identified by the inventory ID) from the bucket.
    */
@@ -536,7 +538,7 @@ declare class S3 extends S3Customizations {
   /**
    * Deprecated, see the PutBucketLifecycleConfiguration operation.
    */
-  putBucketLifecycle(params: S3.Types.PutBucketLifecycleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putBucketLifecycle(params: BoundInput<S3.Types.PutBucketLifecycleRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deprecated, see the PutBucketLifecycleConfiguration operation.
    */
@@ -544,7 +546,7 @@ declare class S3 extends S3Customizations {
   /**
    * Sets lifecycle configuration for your bucket. If a lifecycle configuration exists, it replaces it.
    */
-  putBucketLifecycleConfiguration(params: S3.Types.PutBucketLifecycleConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putBucketLifecycleConfiguration(params: BoundInput<S3.Types.PutBucketLifecycleConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sets lifecycle configuration for your bucket. If a lifecycle configuration exists, it replaces it.
    */
@@ -552,7 +554,7 @@ declare class S3 extends S3Customizations {
   /**
    * Set the logging parameters for a bucket and to specify permissions for who can view and modify the logging parameters. To set the logging status of a bucket, you must be the bucket owner.
    */
-  putBucketLogging(params: S3.Types.PutBucketLoggingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putBucketLogging(params: BoundInput<S3.Types.PutBucketLoggingRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Set the logging parameters for a bucket and to specify permissions for who can view and modify the logging parameters. To set the logging status of a bucket, you must be the bucket owner.
    */
@@ -560,7 +562,7 @@ declare class S3 extends S3Customizations {
   /**
    * Sets a metrics configuration (specified by the metrics configuration ID) for the bucket.
    */
-  putBucketMetricsConfiguration(params: S3.Types.PutBucketMetricsConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putBucketMetricsConfiguration(params: BoundInput<S3.Types.PutBucketMetricsConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sets a metrics configuration (specified by the metrics configuration ID) for the bucket.
    */
@@ -568,7 +570,7 @@ declare class S3 extends S3Customizations {
   /**
    * Deprecated, see the PutBucketNotificationConfiguraiton operation.
    */
-  putBucketNotification(params: S3.Types.PutBucketNotificationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putBucketNotification(params: BoundInput<S3.Types.PutBucketNotificationRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deprecated, see the PutBucketNotificationConfiguraiton operation.
    */
@@ -576,7 +578,7 @@ declare class S3 extends S3Customizations {
   /**
    * Enables notifications of specified events for a bucket.
    */
-  putBucketNotificationConfiguration(params: S3.Types.PutBucketNotificationConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putBucketNotificationConfiguration(params: BoundInput<S3.Types.PutBucketNotificationConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Enables notifications of specified events for a bucket.
    */
@@ -584,7 +586,7 @@ declare class S3 extends S3Customizations {
   /**
    * Replaces a policy on a bucket. If the bucket already has a policy, the one in this request completely replaces it.
    */
-  putBucketPolicy(params: S3.Types.PutBucketPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putBucketPolicy(params: BoundInput<S3.Types.PutBucketPolicyRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Replaces a policy on a bucket. If the bucket already has a policy, the one in this request completely replaces it.
    */
@@ -592,7 +594,7 @@ declare class S3 extends S3Customizations {
   /**
    *  Creates a replication configuration or replaces an existing one. For more information, see Cross-Region Replication (CRR) in the Amazon S3 Developer Guide. 
    */
-  putBucketReplication(params: S3.Types.PutBucketReplicationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putBucketReplication(params: BoundInput<S3.Types.PutBucketReplicationRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    *  Creates a replication configuration or replaces an existing one. For more information, see Cross-Region Replication (CRR) in the Amazon S3 Developer Guide. 
    */
@@ -600,7 +602,7 @@ declare class S3 extends S3Customizations {
   /**
    * Sets the request payment configuration for a bucket. By default, the bucket owner pays for downloads from the bucket. This configuration parameter enables the bucket owner (only) to specify that the person requesting the download will be charged for the download. Documentation on requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html
    */
-  putBucketRequestPayment(params: S3.Types.PutBucketRequestPaymentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putBucketRequestPayment(params: BoundInput<S3.Types.PutBucketRequestPaymentRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sets the request payment configuration for a bucket. By default, the bucket owner pays for downloads from the bucket. This configuration parameter enables the bucket owner (only) to specify that the person requesting the download will be charged for the download. Documentation on requester pays buckets can be found at http://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html
    */
@@ -608,7 +610,7 @@ declare class S3 extends S3Customizations {
   /**
    * Sets the tags for a bucket.
    */
-  putBucketTagging(params: S3.Types.PutBucketTaggingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putBucketTagging(params: BoundInput<S3.Types.PutBucketTaggingRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sets the tags for a bucket.
    */
@@ -616,7 +618,7 @@ declare class S3 extends S3Customizations {
   /**
    * Sets the versioning state of an existing bucket. To set the versioning state, you must be the bucket owner.
    */
-  putBucketVersioning(params: S3.Types.PutBucketVersioningRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putBucketVersioning(params: BoundInput<S3.Types.PutBucketVersioningRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sets the versioning state of an existing bucket. To set the versioning state, you must be the bucket owner.
    */
@@ -624,7 +626,7 @@ declare class S3 extends S3Customizations {
   /**
    * Set the website configuration for a bucket.
    */
-  putBucketWebsite(params: S3.Types.PutBucketWebsiteRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putBucketWebsite(params: BoundInput<S3.Types.PutBucketWebsiteRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Set the website configuration for a bucket.
    */
@@ -632,7 +634,7 @@ declare class S3 extends S3Customizations {
   /**
    * Adds an object to a bucket.
    */
-  putObject(params: S3.Types.PutObjectRequest, callback?: (err: AWSError, data: S3.Types.PutObjectOutput) => void): Request<S3.Types.PutObjectOutput, AWSError>;
+  putObject(params: BoundInput<S3.Types.PutObjectRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.PutObjectOutput) => void): Request<S3.Types.PutObjectOutput, AWSError>;
   /**
    * Adds an object to a bucket.
    */
@@ -640,7 +642,7 @@ declare class S3 extends S3Customizations {
   /**
    * uses the acl subresource to set the access control list (ACL) permissions for an object that already exists in a bucket
    */
-  putObjectAcl(params: S3.Types.PutObjectAclRequest, callback?: (err: AWSError, data: S3.Types.PutObjectAclOutput) => void): Request<S3.Types.PutObjectAclOutput, AWSError>;
+  putObjectAcl(params: BoundInput<S3.Types.PutObjectAclRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.PutObjectAclOutput) => void): Request<S3.Types.PutObjectAclOutput, AWSError>;
   /**
    * uses the acl subresource to set the access control list (ACL) permissions for an object that already exists in a bucket
    */
@@ -648,7 +650,7 @@ declare class S3 extends S3Customizations {
   /**
    * Applies a Legal Hold configuration to the specified object.
    */
-  putObjectLegalHold(params: S3.Types.PutObjectLegalHoldRequest, callback?: (err: AWSError, data: S3.Types.PutObjectLegalHoldOutput) => void): Request<S3.Types.PutObjectLegalHoldOutput, AWSError>;
+  putObjectLegalHold(params: BoundInput<S3.Types.PutObjectLegalHoldRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.PutObjectLegalHoldOutput) => void): Request<S3.Types.PutObjectLegalHoldOutput, AWSError>;
   /**
    * Applies a Legal Hold configuration to the specified object.
    */
@@ -656,7 +658,7 @@ declare class S3 extends S3Customizations {
   /**
    * Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket.
    */
-  putObjectLockConfiguration(params: S3.Types.PutObjectLockConfigurationRequest, callback?: (err: AWSError, data: S3.Types.PutObjectLockConfigurationOutput) => void): Request<S3.Types.PutObjectLockConfigurationOutput, AWSError>;
+  putObjectLockConfiguration(params: BoundInput<S3.Types.PutObjectLockConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.PutObjectLockConfigurationOutput) => void): Request<S3.Types.PutObjectLockConfigurationOutput, AWSError>;
   /**
    * Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket.
    */
@@ -664,7 +666,7 @@ declare class S3 extends S3Customizations {
   /**
    * Places an Object Retention configuration on an object.
    */
-  putObjectRetention(params: S3.Types.PutObjectRetentionRequest, callback?: (err: AWSError, data: S3.Types.PutObjectRetentionOutput) => void): Request<S3.Types.PutObjectRetentionOutput, AWSError>;
+  putObjectRetention(params: BoundInput<S3.Types.PutObjectRetentionRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.PutObjectRetentionOutput) => void): Request<S3.Types.PutObjectRetentionOutput, AWSError>;
   /**
    * Places an Object Retention configuration on an object.
    */
@@ -672,7 +674,7 @@ declare class S3 extends S3Customizations {
   /**
    * Sets the supplied tag-set to an object that already exists in a bucket
    */
-  putObjectTagging(params: S3.Types.PutObjectTaggingRequest, callback?: (err: AWSError, data: S3.Types.PutObjectTaggingOutput) => void): Request<S3.Types.PutObjectTaggingOutput, AWSError>;
+  putObjectTagging(params: BoundInput<S3.Types.PutObjectTaggingRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.PutObjectTaggingOutput) => void): Request<S3.Types.PutObjectTaggingOutput, AWSError>;
   /**
    * Sets the supplied tag-set to an object that already exists in a bucket
    */
@@ -680,7 +682,7 @@ declare class S3 extends S3Customizations {
   /**
    * Creates or modifies the PublicAccessBlock configuration for an Amazon S3 bucket.
    */
-  putPublicAccessBlock(params: S3.Types.PutPublicAccessBlockRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  putPublicAccessBlock(params: BoundInput<S3.Types.PutPublicAccessBlockRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Creates or modifies the PublicAccessBlock configuration for an Amazon S3 bucket.
    */
@@ -688,7 +690,7 @@ declare class S3 extends S3Customizations {
   /**
    * Restores an archived copy of an object back into Amazon S3
    */
-  restoreObject(params: S3.Types.RestoreObjectRequest, callback?: (err: AWSError, data: S3.Types.RestoreObjectOutput) => void): Request<S3.Types.RestoreObjectOutput, AWSError>;
+  restoreObject(params: BoundInput<S3.Types.RestoreObjectRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.RestoreObjectOutput) => void): Request<S3.Types.RestoreObjectOutput, AWSError>;
   /**
    * Restores an archived copy of an object back into Amazon S3
    */
@@ -696,7 +698,7 @@ declare class S3 extends S3Customizations {
   /**
    * This operation filters the contents of an Amazon S3 object based on a simple Structured Query Language (SQL) statement. In the request, along with the SQL expression, you must also specify a data serialization format (JSON or CSV) of the object. Amazon S3 uses this to parse object data into records, and returns only records that match the specified SQL expression. You must also specify the data serialization format for the response.
    */
-  selectObjectContent(params: S3.Types.SelectObjectContentRequest, callback?: (err: AWSError, data: S3.Types.SelectObjectContentOutput) => void): Request<S3.Types.SelectObjectContentOutput, AWSError>;
+  selectObjectContent(params: BoundInput<S3.Types.SelectObjectContentRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.SelectObjectContentOutput) => void): Request<S3.Types.SelectObjectContentOutput, AWSError>;
   /**
    * This operation filters the contents of an Amazon S3 object based on a simple Structured Query Language (SQL) statement. In the request, along with the SQL expression, you must also specify a data serialization format (JSON or CSV) of the object. Amazon S3 uses this to parse object data into records, and returns only records that match the specified SQL expression. You must also specify the data serialization format for the response.
    */
@@ -704,7 +706,7 @@ declare class S3 extends S3Customizations {
   /**
    * Uploads a part in a multipart upload.  Note: After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.
    */
-  uploadPart(params: S3.Types.UploadPartRequest, callback?: (err: AWSError, data: S3.Types.UploadPartOutput) => void): Request<S3.Types.UploadPartOutput, AWSError>;
+  uploadPart(params: BoundInput<S3.Types.UploadPartRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.UploadPartOutput) => void): Request<S3.Types.UploadPartOutput, AWSError>;
   /**
    * Uploads a part in a multipart upload.  Note: After you initiate multipart upload and upload one or more parts, you must either complete or abort multipart upload in order to stop getting charged for storage of the uploaded parts. Only after you either complete or abort multipart upload, Amazon S3 frees up the parts storage and stops charging you for the parts storage.
    */
@@ -712,7 +714,7 @@ declare class S3 extends S3Customizations {
   /**
    * Uploads a part by copying data from an existing object as data source.
    */
-  uploadPartCopy(params: S3.Types.UploadPartCopyRequest, callback?: (err: AWSError, data: S3.Types.UploadPartCopyOutput) => void): Request<S3.Types.UploadPartCopyOutput, AWSError>;
+  uploadPartCopy(params: BoundInput<S3.Types.UploadPartCopyRequest, keyof Params>, callback?: (err: AWSError, data: S3.Types.UploadPartCopyOutput) => void): Request<S3.Types.UploadPartCopyOutput, AWSError>;
   /**
    * Uploads a part by copying data from an existing object as data source.
    */
@@ -4403,7 +4405,8 @@ declare namespace S3 {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & UseDualstackConfigOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AbortMultipartUploadRequest & CompleteMultipartUploadRequest & CopyObjectRequest & CreateBucketRequest & CreateMultipartUploadRequest & DeleteBucketRequest & DeleteBucketAnalyticsConfigurationRequest & DeleteBucketCorsRequest & DeleteBucketEncryptionRequest & DeleteBucketInventoryConfigurationRequest & DeleteBucketLifecycleRequest & DeleteBucketMetricsConfigurationRequest & DeleteBucketPolicyRequest & DeleteBucketReplicationRequest & DeleteBucketTaggingRequest & DeleteBucketWebsiteRequest & DeleteObjectRequest & DeleteObjectTaggingRequest & DeleteObjectsRequest & DeletePublicAccessBlockRequest & GetBucketAccelerateConfigurationRequest & GetBucketAclRequest & GetBucketAnalyticsConfigurationRequest & GetBucketCorsRequest & GetBucketEncryptionRequest & GetBucketInventoryConfigurationRequest & GetBucketLifecycleRequest & GetBucketLifecycleConfigurationRequest & GetBucketLocationRequest & GetBucketLoggingRequest & GetBucketMetricsConfigurationRequest & GetBucketNotificationConfigurationRequest & GetBucketPolicyRequest & GetBucketPolicyStatusRequest & GetBucketReplicationRequest & GetBucketRequestPaymentRequest & GetBucketTaggingRequest & GetBucketVersioningRequest & GetBucketWebsiteRequest & GetObjectRequest & GetObjectAclRequest & GetObjectLegalHoldRequest & GetObjectLockConfigurationRequest & GetObjectRetentionRequest & GetObjectTaggingRequest & GetObjectTorrentRequest & GetPublicAccessBlockRequest & HeadBucketRequest & HeadObjectRequest & ListBucketAnalyticsConfigurationsRequest & ListBucketInventoryConfigurationsRequest & ListBucketMetricsConfigurationsRequest & ListMultipartUploadsRequest & ListObjectVersionsRequest & ListObjectsRequest & ListObjectsV2Request & ListPartsRequest & PutBucketAccelerateConfigurationRequest & PutBucketAclRequest & PutBucketAnalyticsConfigurationRequest & PutBucketCorsRequest & PutBucketEncryptionRequest & PutBucketInventoryConfigurationRequest & PutBucketLifecycleRequest & PutBucketLifecycleConfigurationRequest & PutBucketLoggingRequest & PutBucketMetricsConfigurationRequest & PutBucketNotificationRequest & PutBucketNotificationConfigurationRequest & PutBucketPolicyRequest & PutBucketReplicationRequest & PutBucketRequestPaymentRequest & PutBucketTaggingRequest & PutBucketVersioningRequest & PutBucketWebsiteRequest & PutObjectRequest & PutObjectAclRequest & PutObjectLegalHoldRequest & PutObjectLockConfigurationRequest & PutObjectRetentionRequest & PutObjectTaggingRequest & PutPublicAccessBlockRequest & RestoreObjectRequest & SelectObjectContentRequest & UploadPartRequest & UploadPartCopyRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = UseDualstackConfigOptions & ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the S3 client.
    */

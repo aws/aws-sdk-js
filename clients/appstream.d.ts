@@ -4,18 +4,20 @@ import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class AppStream extends Service {
+declare class AppStream<Params extends AppStream.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: AppStream.Types.ClientConfiguration)
-  config: Config & AppStream.Types.ClientConfiguration;
+  constructor(options?: AppStream.Types.ClientConfiguration<Params>)
+  config: Config & AppStream.Types.ClientConfiguration<Params>;
   /**
    * Associates the specified fleet with the specified stack.
    */
-  associateFleet(params: AppStream.Types.AssociateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.AssociateFleetResult) => void): Request<AppStream.Types.AssociateFleetResult, AWSError>;
+  associateFleet(params: BoundInput<AppStream.Types.AssociateFleetRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.AssociateFleetResult) => void): Request<AppStream.Types.AssociateFleetResult, AWSError>;
   /**
    * Associates the specified fleet with the specified stack.
    */
@@ -23,7 +25,7 @@ declare class AppStream extends Service {
   /**
    * Associates the specified users with the specified stacks. Users in a user pool cannot be assigned to stacks with fleets that are joined to an Active Directory domain.
    */
-  batchAssociateUserStack(params: AppStream.Types.BatchAssociateUserStackRequest, callback?: (err: AWSError, data: AppStream.Types.BatchAssociateUserStackResult) => void): Request<AppStream.Types.BatchAssociateUserStackResult, AWSError>;
+  batchAssociateUserStack(params: BoundInput<AppStream.Types.BatchAssociateUserStackRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.BatchAssociateUserStackResult) => void): Request<AppStream.Types.BatchAssociateUserStackResult, AWSError>;
   /**
    * Associates the specified users with the specified stacks. Users in a user pool cannot be assigned to stacks with fleets that are joined to an Active Directory domain.
    */
@@ -31,7 +33,7 @@ declare class AppStream extends Service {
   /**
    * Disassociates the specified users from the specified stacks.
    */
-  batchDisassociateUserStack(params: AppStream.Types.BatchDisassociateUserStackRequest, callback?: (err: AWSError, data: AppStream.Types.BatchDisassociateUserStackResult) => void): Request<AppStream.Types.BatchDisassociateUserStackResult, AWSError>;
+  batchDisassociateUserStack(params: BoundInput<AppStream.Types.BatchDisassociateUserStackRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.BatchDisassociateUserStackResult) => void): Request<AppStream.Types.BatchDisassociateUserStackResult, AWSError>;
   /**
    * Disassociates the specified users from the specified stacks.
    */
@@ -39,7 +41,7 @@ declare class AppStream extends Service {
   /**
    * Copies the image within the same region or to a new region within the same AWS account. Note that any tags you added to the image will not be copied.
    */
-  copyImage(params: AppStream.Types.CopyImageRequest, callback?: (err: AWSError, data: AppStream.Types.CopyImageResponse) => void): Request<AppStream.Types.CopyImageResponse, AWSError>;
+  copyImage(params: BoundInput<AppStream.Types.CopyImageRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.CopyImageResponse) => void): Request<AppStream.Types.CopyImageResponse, AWSError>;
   /**
    * Copies the image within the same region or to a new region within the same AWS account. Note that any tags you added to the image will not be copied.
    */
@@ -47,7 +49,7 @@ declare class AppStream extends Service {
   /**
    * Creates a Directory Config object in AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
    */
-  createDirectoryConfig(params: AppStream.Types.CreateDirectoryConfigRequest, callback?: (err: AWSError, data: AppStream.Types.CreateDirectoryConfigResult) => void): Request<AppStream.Types.CreateDirectoryConfigResult, AWSError>;
+  createDirectoryConfig(params: BoundInput<AppStream.Types.CreateDirectoryConfigRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.CreateDirectoryConfigResult) => void): Request<AppStream.Types.CreateDirectoryConfigResult, AWSError>;
   /**
    * Creates a Directory Config object in AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
    */
@@ -55,7 +57,7 @@ declare class AppStream extends Service {
   /**
    * Creates a fleet. A fleet consists of streaming instances that run a specified image.
    */
-  createFleet(params: AppStream.Types.CreateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.CreateFleetResult) => void): Request<AppStream.Types.CreateFleetResult, AWSError>;
+  createFleet(params: BoundInput<AppStream.Types.CreateFleetRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.CreateFleetResult) => void): Request<AppStream.Types.CreateFleetResult, AWSError>;
   /**
    * Creates a fleet. A fleet consists of streaming instances that run a specified image.
    */
@@ -63,7 +65,7 @@ declare class AppStream extends Service {
   /**
    * Creates an image builder. An image builder is a virtual machine that is used to create an image. The initial state of the builder is PENDING. When it is ready, the state is RUNNING.
    */
-  createImageBuilder(params: AppStream.Types.CreateImageBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.CreateImageBuilderResult) => void): Request<AppStream.Types.CreateImageBuilderResult, AWSError>;
+  createImageBuilder(params: BoundInput<AppStream.Types.CreateImageBuilderRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.CreateImageBuilderResult) => void): Request<AppStream.Types.CreateImageBuilderResult, AWSError>;
   /**
    * Creates an image builder. An image builder is a virtual machine that is used to create an image. The initial state of the builder is PENDING. When it is ready, the state is RUNNING.
    */
@@ -71,7 +73,7 @@ declare class AppStream extends Service {
   /**
    * Creates a URL to start an image builder streaming session.
    */
-  createImageBuilderStreamingURL(params: AppStream.Types.CreateImageBuilderStreamingURLRequest, callback?: (err: AWSError, data: AppStream.Types.CreateImageBuilderStreamingURLResult) => void): Request<AppStream.Types.CreateImageBuilderStreamingURLResult, AWSError>;
+  createImageBuilderStreamingURL(params: BoundInput<AppStream.Types.CreateImageBuilderStreamingURLRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.CreateImageBuilderStreamingURLResult) => void): Request<AppStream.Types.CreateImageBuilderStreamingURLResult, AWSError>;
   /**
    * Creates a URL to start an image builder streaming session.
    */
@@ -79,7 +81,7 @@ declare class AppStream extends Service {
   /**
    * Creates a stack to start streaming applications to users. A stack consists of an associated fleet, user access policies, and storage configurations. 
    */
-  createStack(params: AppStream.Types.CreateStackRequest, callback?: (err: AWSError, data: AppStream.Types.CreateStackResult) => void): Request<AppStream.Types.CreateStackResult, AWSError>;
+  createStack(params: BoundInput<AppStream.Types.CreateStackRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.CreateStackResult) => void): Request<AppStream.Types.CreateStackResult, AWSError>;
   /**
    * Creates a stack to start streaming applications to users. A stack consists of an associated fleet, user access policies, and storage configurations. 
    */
@@ -87,7 +89,7 @@ declare class AppStream extends Service {
   /**
    * Creates a temporary URL to start an AppStream 2.0 streaming session for the specified user. A streaming URL enables application streaming to be tested without user setup. 
    */
-  createStreamingURL(params: AppStream.Types.CreateStreamingURLRequest, callback?: (err: AWSError, data: AppStream.Types.CreateStreamingURLResult) => void): Request<AppStream.Types.CreateStreamingURLResult, AWSError>;
+  createStreamingURL(params: BoundInput<AppStream.Types.CreateStreamingURLRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.CreateStreamingURLResult) => void): Request<AppStream.Types.CreateStreamingURLResult, AWSError>;
   /**
    * Creates a temporary URL to start an AppStream 2.0 streaming session for the specified user. A streaming URL enables application streaming to be tested without user setup. 
    */
@@ -95,7 +97,7 @@ declare class AppStream extends Service {
   /**
    * Creates a new user in the user pool.
    */
-  createUser(params: AppStream.Types.CreateUserRequest, callback?: (err: AWSError, data: AppStream.Types.CreateUserResult) => void): Request<AppStream.Types.CreateUserResult, AWSError>;
+  createUser(params: BoundInput<AppStream.Types.CreateUserRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.CreateUserResult) => void): Request<AppStream.Types.CreateUserResult, AWSError>;
   /**
    * Creates a new user in the user pool.
    */
@@ -103,7 +105,7 @@ declare class AppStream extends Service {
   /**
    * Deletes the specified Directory Config object from AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
    */
-  deleteDirectoryConfig(params: AppStream.Types.DeleteDirectoryConfigRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteDirectoryConfigResult) => void): Request<AppStream.Types.DeleteDirectoryConfigResult, AWSError>;
+  deleteDirectoryConfig(params: BoundInput<AppStream.Types.DeleteDirectoryConfigRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.DeleteDirectoryConfigResult) => void): Request<AppStream.Types.DeleteDirectoryConfigResult, AWSError>;
   /**
    * Deletes the specified Directory Config object from AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
    */
@@ -111,7 +113,7 @@ declare class AppStream extends Service {
   /**
    * Deletes the specified fleet.
    */
-  deleteFleet(params: AppStream.Types.DeleteFleetRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteFleetResult) => void): Request<AppStream.Types.DeleteFleetResult, AWSError>;
+  deleteFleet(params: BoundInput<AppStream.Types.DeleteFleetRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.DeleteFleetResult) => void): Request<AppStream.Types.DeleteFleetResult, AWSError>;
   /**
    * Deletes the specified fleet.
    */
@@ -119,7 +121,7 @@ declare class AppStream extends Service {
   /**
    * Deletes the specified image. You cannot delete an image when it is in use. After you delete an image, you cannot provision new capacity using the image.
    */
-  deleteImage(params: AppStream.Types.DeleteImageRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteImageResult) => void): Request<AppStream.Types.DeleteImageResult, AWSError>;
+  deleteImage(params: BoundInput<AppStream.Types.DeleteImageRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.DeleteImageResult) => void): Request<AppStream.Types.DeleteImageResult, AWSError>;
   /**
    * Deletes the specified image. You cannot delete an image when it is in use. After you delete an image, you cannot provision new capacity using the image.
    */
@@ -127,7 +129,7 @@ declare class AppStream extends Service {
   /**
    * Deletes the specified image builder and releases the capacity.
    */
-  deleteImageBuilder(params: AppStream.Types.DeleteImageBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteImageBuilderResult) => void): Request<AppStream.Types.DeleteImageBuilderResult, AWSError>;
+  deleteImageBuilder(params: BoundInput<AppStream.Types.DeleteImageBuilderRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.DeleteImageBuilderResult) => void): Request<AppStream.Types.DeleteImageBuilderResult, AWSError>;
   /**
    * Deletes the specified image builder and releases the capacity.
    */
@@ -135,7 +137,7 @@ declare class AppStream extends Service {
   /**
    * Deletes permissions for the specified private image. After you delete permissions for an image, AWS accounts to which you previously granted these permissions can no longer use the image.
    */
-  deleteImagePermissions(params: AppStream.Types.DeleteImagePermissionsRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteImagePermissionsResult) => void): Request<AppStream.Types.DeleteImagePermissionsResult, AWSError>;
+  deleteImagePermissions(params: BoundInput<AppStream.Types.DeleteImagePermissionsRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.DeleteImagePermissionsResult) => void): Request<AppStream.Types.DeleteImagePermissionsResult, AWSError>;
   /**
    * Deletes permissions for the specified private image. After you delete permissions for an image, AWS accounts to which you previously granted these permissions can no longer use the image.
    */
@@ -143,7 +145,7 @@ declare class AppStream extends Service {
   /**
    * Deletes the specified stack. After the stack is deleted, the application streaming environment provided by the stack is no longer available to users. Also, any reservations made for application streaming sessions for the stack are released.
    */
-  deleteStack(params: AppStream.Types.DeleteStackRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteStackResult) => void): Request<AppStream.Types.DeleteStackResult, AWSError>;
+  deleteStack(params: BoundInput<AppStream.Types.DeleteStackRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.DeleteStackResult) => void): Request<AppStream.Types.DeleteStackResult, AWSError>;
   /**
    * Deletes the specified stack. After the stack is deleted, the application streaming environment provided by the stack is no longer available to users. Also, any reservations made for application streaming sessions for the stack are released.
    */
@@ -151,7 +153,7 @@ declare class AppStream extends Service {
   /**
    * Deletes a user from the user pool.
    */
-  deleteUser(params: AppStream.Types.DeleteUserRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteUserResult) => void): Request<AppStream.Types.DeleteUserResult, AWSError>;
+  deleteUser(params: BoundInput<AppStream.Types.DeleteUserRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.DeleteUserResult) => void): Request<AppStream.Types.DeleteUserResult, AWSError>;
   /**
    * Deletes a user from the user pool.
    */
@@ -159,7 +161,7 @@ declare class AppStream extends Service {
   /**
    * Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the information required to join streaming instances to an Active Directory domain.  Although the response syntax in this topic includes the account password, this password is not returned in the actual response.
    */
-  describeDirectoryConfigs(params: AppStream.Types.DescribeDirectoryConfigsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeDirectoryConfigsResult) => void): Request<AppStream.Types.DescribeDirectoryConfigsResult, AWSError>;
+  describeDirectoryConfigs(params: BoundInput<AppStream.Types.DescribeDirectoryConfigsRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.DescribeDirectoryConfigsResult) => void): Request<AppStream.Types.DescribeDirectoryConfigsResult, AWSError>;
   /**
    * Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the information required to join streaming instances to an Active Directory domain.  Although the response syntax in this topic includes the account password, this password is not returned in the actual response.
    */
@@ -167,7 +169,7 @@ declare class AppStream extends Service {
   /**
    * Retrieves a list that describes one or more specified fleets, if the fleet names are provided. Otherwise, all fleets in the account are described.
    */
-  describeFleets(params: AppStream.Types.DescribeFleetsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeFleetsResult) => void): Request<AppStream.Types.DescribeFleetsResult, AWSError>;
+  describeFleets(params: BoundInput<AppStream.Types.DescribeFleetsRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.DescribeFleetsResult) => void): Request<AppStream.Types.DescribeFleetsResult, AWSError>;
   /**
    * Retrieves a list that describes one or more specified fleets, if the fleet names are provided. Otherwise, all fleets in the account are described.
    */
@@ -175,7 +177,7 @@ declare class AppStream extends Service {
   /**
    * Retrieves a list that describes one or more specified image builders, if the image builder names are provided. Otherwise, all image builders in the account are described.
    */
-  describeImageBuilders(params: AppStream.Types.DescribeImageBuildersRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeImageBuildersResult) => void): Request<AppStream.Types.DescribeImageBuildersResult, AWSError>;
+  describeImageBuilders(params: BoundInput<AppStream.Types.DescribeImageBuildersRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.DescribeImageBuildersResult) => void): Request<AppStream.Types.DescribeImageBuildersResult, AWSError>;
   /**
    * Retrieves a list that describes one or more specified image builders, if the image builder names are provided. Otherwise, all image builders in the account are described.
    */
@@ -183,7 +185,7 @@ declare class AppStream extends Service {
   /**
    * Retrieves a list that describes the permissions for shared AWS account IDs on a private image that you own. 
    */
-  describeImagePermissions(params: AppStream.Types.DescribeImagePermissionsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeImagePermissionsResult) => void): Request<AppStream.Types.DescribeImagePermissionsResult, AWSError>;
+  describeImagePermissions(params: BoundInput<AppStream.Types.DescribeImagePermissionsRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.DescribeImagePermissionsResult) => void): Request<AppStream.Types.DescribeImagePermissionsResult, AWSError>;
   /**
    * Retrieves a list that describes the permissions for shared AWS account IDs on a private image that you own. 
    */
@@ -191,7 +193,7 @@ declare class AppStream extends Service {
   /**
    * Retrieves a list that describes one or more specified images, if the image names or image ARNs are provided. Otherwise, all images in the account are described.
    */
-  describeImages(params: AppStream.Types.DescribeImagesRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeImagesResult) => void): Request<AppStream.Types.DescribeImagesResult, AWSError>;
+  describeImages(params: BoundInput<AppStream.Types.DescribeImagesRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.DescribeImagesResult) => void): Request<AppStream.Types.DescribeImagesResult, AWSError>;
   /**
    * Retrieves a list that describes one or more specified images, if the image names or image ARNs are provided. Otherwise, all images in the account are described.
    */
@@ -199,7 +201,7 @@ declare class AppStream extends Service {
   /**
    * Retrieves a list that describes the active streaming sessions for a specified stack and fleet. If a value for UserId is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.
    */
-  describeSessions(params: AppStream.Types.DescribeSessionsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeSessionsResult) => void): Request<AppStream.Types.DescribeSessionsResult, AWSError>;
+  describeSessions(params: BoundInput<AppStream.Types.DescribeSessionsRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.DescribeSessionsResult) => void): Request<AppStream.Types.DescribeSessionsResult, AWSError>;
   /**
    * Retrieves a list that describes the active streaming sessions for a specified stack and fleet. If a value for UserId is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.
    */
@@ -207,7 +209,7 @@ declare class AppStream extends Service {
   /**
    * Retrieves a list that describes one or more specified stacks, if the stack names are provided. Otherwise, all stacks in the account are described.
    */
-  describeStacks(params: AppStream.Types.DescribeStacksRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeStacksResult) => void): Request<AppStream.Types.DescribeStacksResult, AWSError>;
+  describeStacks(params: BoundInput<AppStream.Types.DescribeStacksRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.DescribeStacksResult) => void): Request<AppStream.Types.DescribeStacksResult, AWSError>;
   /**
    * Retrieves a list that describes one or more specified stacks, if the stack names are provided. Otherwise, all stacks in the account are described.
    */
@@ -215,7 +217,7 @@ declare class AppStream extends Service {
   /**
    * Retrieves a list that describes the UserStackAssociation objects. You must specify either or both of the following:   The stack name   The user name (email address of the user associated with the stack) and the authentication type for the user  
    */
-  describeUserStackAssociations(params: AppStream.Types.DescribeUserStackAssociationsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeUserStackAssociationsResult) => void): Request<AppStream.Types.DescribeUserStackAssociationsResult, AWSError>;
+  describeUserStackAssociations(params: BoundInput<AppStream.Types.DescribeUserStackAssociationsRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.DescribeUserStackAssociationsResult) => void): Request<AppStream.Types.DescribeUserStackAssociationsResult, AWSError>;
   /**
    * Retrieves a list that describes the UserStackAssociation objects. You must specify either or both of the following:   The stack name   The user name (email address of the user associated with the stack) and the authentication type for the user  
    */
@@ -223,7 +225,7 @@ declare class AppStream extends Service {
   /**
    * Retrieves a list that describes one or more specified users in the user pool.
    */
-  describeUsers(params: AppStream.Types.DescribeUsersRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeUsersResult) => void): Request<AppStream.Types.DescribeUsersResult, AWSError>;
+  describeUsers(params: BoundInput<AppStream.Types.DescribeUsersRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.DescribeUsersResult) => void): Request<AppStream.Types.DescribeUsersResult, AWSError>;
   /**
    * Retrieves a list that describes one or more specified users in the user pool.
    */
@@ -231,7 +233,7 @@ declare class AppStream extends Service {
   /**
    * Disables the specified user in the user pool. Users can't sign in to AppStream 2.0 until they are re-enabled. This action does not delete the user. 
    */
-  disableUser(params: AppStream.Types.DisableUserRequest, callback?: (err: AWSError, data: AppStream.Types.DisableUserResult) => void): Request<AppStream.Types.DisableUserResult, AWSError>;
+  disableUser(params: BoundInput<AppStream.Types.DisableUserRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.DisableUserResult) => void): Request<AppStream.Types.DisableUserResult, AWSError>;
   /**
    * Disables the specified user in the user pool. Users can't sign in to AppStream 2.0 until they are re-enabled. This action does not delete the user. 
    */
@@ -239,7 +241,7 @@ declare class AppStream extends Service {
   /**
    * Disassociates the specified fleet from the specified stack.
    */
-  disassociateFleet(params: AppStream.Types.DisassociateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.DisassociateFleetResult) => void): Request<AppStream.Types.DisassociateFleetResult, AWSError>;
+  disassociateFleet(params: BoundInput<AppStream.Types.DisassociateFleetRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.DisassociateFleetResult) => void): Request<AppStream.Types.DisassociateFleetResult, AWSError>;
   /**
    * Disassociates the specified fleet from the specified stack.
    */
@@ -247,7 +249,7 @@ declare class AppStream extends Service {
   /**
    * Enables a user in the user pool. After being enabled, users can sign in to AppStream 2.0 and open applications from the stacks to which they are assigned.
    */
-  enableUser(params: AppStream.Types.EnableUserRequest, callback?: (err: AWSError, data: AppStream.Types.EnableUserResult) => void): Request<AppStream.Types.EnableUserResult, AWSError>;
+  enableUser(params: BoundInput<AppStream.Types.EnableUserRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.EnableUserResult) => void): Request<AppStream.Types.EnableUserResult, AWSError>;
   /**
    * Enables a user in the user pool. After being enabled, users can sign in to AppStream 2.0 and open applications from the stacks to which they are assigned.
    */
@@ -255,7 +257,7 @@ declare class AppStream extends Service {
   /**
    * Immediately stops the specified streaming session.
    */
-  expireSession(params: AppStream.Types.ExpireSessionRequest, callback?: (err: AWSError, data: AppStream.Types.ExpireSessionResult) => void): Request<AppStream.Types.ExpireSessionResult, AWSError>;
+  expireSession(params: BoundInput<AppStream.Types.ExpireSessionRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.ExpireSessionResult) => void): Request<AppStream.Types.ExpireSessionResult, AWSError>;
   /**
    * Immediately stops the specified streaming session.
    */
@@ -263,7 +265,7 @@ declare class AppStream extends Service {
   /**
    * Retrieves the name of the fleet that is associated with the specified stack.
    */
-  listAssociatedFleets(params: AppStream.Types.ListAssociatedFleetsRequest, callback?: (err: AWSError, data: AppStream.Types.ListAssociatedFleetsResult) => void): Request<AppStream.Types.ListAssociatedFleetsResult, AWSError>;
+  listAssociatedFleets(params: BoundInput<AppStream.Types.ListAssociatedFleetsRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.ListAssociatedFleetsResult) => void): Request<AppStream.Types.ListAssociatedFleetsResult, AWSError>;
   /**
    * Retrieves the name of the fleet that is associated with the specified stack.
    */
@@ -271,7 +273,7 @@ declare class AppStream extends Service {
   /**
    * Retrieves the name of the stack with which the specified fleet is associated.
    */
-  listAssociatedStacks(params: AppStream.Types.ListAssociatedStacksRequest, callback?: (err: AWSError, data: AppStream.Types.ListAssociatedStacksResult) => void): Request<AppStream.Types.ListAssociatedStacksResult, AWSError>;
+  listAssociatedStacks(params: BoundInput<AppStream.Types.ListAssociatedStacksRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.ListAssociatedStacksResult) => void): Request<AppStream.Types.ListAssociatedStacksResult, AWSError>;
   /**
    * Retrieves the name of the stack with which the specified fleet is associated.
    */
@@ -279,7 +281,7 @@ declare class AppStream extends Service {
   /**
    * Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
    */
-  listTagsForResource(params: AppStream.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: AppStream.Types.ListTagsForResourceResponse) => void): Request<AppStream.Types.ListTagsForResourceResponse, AWSError>;
+  listTagsForResource(params: BoundInput<AppStream.Types.ListTagsForResourceRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.ListTagsForResourceResponse) => void): Request<AppStream.Types.ListTagsForResourceResponse, AWSError>;
   /**
    * Retrieves a list of all tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
    */
@@ -287,7 +289,7 @@ declare class AppStream extends Service {
   /**
    * Starts the specified fleet.
    */
-  startFleet(params: AppStream.Types.StartFleetRequest, callback?: (err: AWSError, data: AppStream.Types.StartFleetResult) => void): Request<AppStream.Types.StartFleetResult, AWSError>;
+  startFleet(params: BoundInput<AppStream.Types.StartFleetRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.StartFleetResult) => void): Request<AppStream.Types.StartFleetResult, AWSError>;
   /**
    * Starts the specified fleet.
    */
@@ -295,7 +297,7 @@ declare class AppStream extends Service {
   /**
    * Starts the specified image builder.
    */
-  startImageBuilder(params: AppStream.Types.StartImageBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.StartImageBuilderResult) => void): Request<AppStream.Types.StartImageBuilderResult, AWSError>;
+  startImageBuilder(params: BoundInput<AppStream.Types.StartImageBuilderRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.StartImageBuilderResult) => void): Request<AppStream.Types.StartImageBuilderResult, AWSError>;
   /**
    * Starts the specified image builder.
    */
@@ -303,7 +305,7 @@ declare class AppStream extends Service {
   /**
    * Stops the specified fleet.
    */
-  stopFleet(params: AppStream.Types.StopFleetRequest, callback?: (err: AWSError, data: AppStream.Types.StopFleetResult) => void): Request<AppStream.Types.StopFleetResult, AWSError>;
+  stopFleet(params: BoundInput<AppStream.Types.StopFleetRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.StopFleetResult) => void): Request<AppStream.Types.StopFleetResult, AWSError>;
   /**
    * Stops the specified fleet.
    */
@@ -311,7 +313,7 @@ declare class AppStream extends Service {
   /**
    * Stops the specified image builder.
    */
-  stopImageBuilder(params: AppStream.Types.StopImageBuilderRequest, callback?: (err: AWSError, data: AppStream.Types.StopImageBuilderResult) => void): Request<AppStream.Types.StopImageBuilderResult, AWSError>;
+  stopImageBuilder(params: BoundInput<AppStream.Types.StopImageBuilderRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.StopImageBuilderResult) => void): Request<AppStream.Types.StopImageBuilderResult, AWSError>;
   /**
    * Stops the specified image builder.
    */
@@ -319,7 +321,7 @@ declare class AppStream extends Service {
   /**
    * Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value. To list the current tags for your resources, use ListTagsForResource. To disassociate tags from your resources, use UntagResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
    */
-  tagResource(params: AppStream.Types.TagResourceRequest, callback?: (err: AWSError, data: AppStream.Types.TagResourceResponse) => void): Request<AppStream.Types.TagResourceResponse, AWSError>;
+  tagResource(params: BoundInput<AppStream.Types.TagResourceRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.TagResourceResponse) => void): Request<AppStream.Types.TagResourceResponse, AWSError>;
   /**
    * Adds or overwrites one or more tags for the specified AppStream 2.0 resource. You can tag AppStream 2.0 image builders, images, fleets, and stacks. Each tag consists of a key and an optional value. If a resource already has a tag with the same key, this operation updates its value. To list the current tags for your resources, use ListTagsForResource. To disassociate tags from your resources, use UntagResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
    */
@@ -327,7 +329,7 @@ declare class AppStream extends Service {
   /**
    * Disassociates one or more specified tags from the specified AppStream 2.0 resource. To list the current tags for your resources, use ListTagsForResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
    */
-  untagResource(params: AppStream.Types.UntagResourceRequest, callback?: (err: AWSError, data: AppStream.Types.UntagResourceResponse) => void): Request<AppStream.Types.UntagResourceResponse, AWSError>;
+  untagResource(params: BoundInput<AppStream.Types.UntagResourceRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.UntagResourceResponse) => void): Request<AppStream.Types.UntagResourceResponse, AWSError>;
   /**
    * Disassociates one or more specified tags from the specified AppStream 2.0 resource. To list the current tags for your resources, use ListTagsForResource. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
    */
@@ -335,7 +337,7 @@ declare class AppStream extends Service {
   /**
    * Updates the specified Directory Config object in AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
    */
-  updateDirectoryConfig(params: AppStream.Types.UpdateDirectoryConfigRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateDirectoryConfigResult) => void): Request<AppStream.Types.UpdateDirectoryConfigResult, AWSError>;
+  updateDirectoryConfig(params: BoundInput<AppStream.Types.UpdateDirectoryConfigRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.UpdateDirectoryConfigResult) => void): Request<AppStream.Types.UpdateDirectoryConfigResult, AWSError>;
   /**
    * Updates the specified Directory Config object in AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
    */
@@ -343,7 +345,7 @@ declare class AppStream extends Service {
   /**
    * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the DisplayName and ComputeCapacity attributes. If the fleet is in the STARTING or STOPPING state, you can't update it.
    */
-  updateFleet(params: AppStream.Types.UpdateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateFleetResult) => void): Request<AppStream.Types.UpdateFleetResult, AWSError>;
+  updateFleet(params: BoundInput<AppStream.Types.UpdateFleetRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.UpdateFleetResult) => void): Request<AppStream.Types.UpdateFleetResult, AWSError>;
   /**
    * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the DisplayName and ComputeCapacity attributes. If the fleet is in the STARTING or STOPPING state, you can't update it.
    */
@@ -351,7 +353,7 @@ declare class AppStream extends Service {
   /**
    * Adds or updates permissions for the specified private image. 
    */
-  updateImagePermissions(params: AppStream.Types.UpdateImagePermissionsRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateImagePermissionsResult) => void): Request<AppStream.Types.UpdateImagePermissionsResult, AWSError>;
+  updateImagePermissions(params: BoundInput<AppStream.Types.UpdateImagePermissionsRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.UpdateImagePermissionsResult) => void): Request<AppStream.Types.UpdateImagePermissionsResult, AWSError>;
   /**
    * Adds or updates permissions for the specified private image. 
    */
@@ -359,7 +361,7 @@ declare class AppStream extends Service {
   /**
    * Updates the specified fields for the specified stack.
    */
-  updateStack(params: AppStream.Types.UpdateStackRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateStackResult) => void): Request<AppStream.Types.UpdateStackResult, AWSError>;
+  updateStack(params: BoundInput<AppStream.Types.UpdateStackRequest, keyof Params>, callback?: (err: AWSError, data: AppStream.Types.UpdateStackResult) => void): Request<AppStream.Types.UpdateStackResult, AWSError>;
   /**
    * Updates the specified fields for the specified stack.
    */
@@ -2001,7 +2003,8 @@ declare namespace AppStream {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AssociateFleetRequest & BatchAssociateUserStackRequest & BatchDisassociateUserStackRequest & CopyImageRequest & CreateDirectoryConfigRequest & CreateFleetRequest & CreateImageBuilderRequest & CreateImageBuilderStreamingURLRequest & CreateStackRequest & CreateStreamingURLRequest & CreateUserRequest & DeleteDirectoryConfigRequest & DeleteFleetRequest & DeleteImageRequest & DeleteImageBuilderRequest & DeleteImagePermissionsRequest & DeleteStackRequest & DeleteUserRequest & DescribeDirectoryConfigsRequest & DescribeFleetsRequest & DescribeImageBuildersRequest & DescribeImagePermissionsRequest & DescribeImagesRequest & DescribeSessionsRequest & DescribeStacksRequest & DescribeUserStackAssociationsRequest & DescribeUsersRequest & DisableUserRequest & DisassociateFleetRequest & EnableUserRequest & ExpireSessionRequest & ListAssociatedFleetsRequest & ListAssociatedStacksRequest & ListTagsForResourceRequest & StartFleetRequest & StartImageBuilderRequest & StopFleetRequest & StopImageBuilderRequest & TagResourceRequest & UntagResourceRequest & UpdateDirectoryConfigRequest & UpdateFleetRequest & UpdateImagePermissionsRequest & UpdateStackRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the AppStream client.
    */

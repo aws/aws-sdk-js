@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class Route53Resolver extends Service {
+declare class Route53Resolver<Params extends Route53Resolver.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: Route53Resolver.Types.ClientConfiguration)
-  config: Config & Route53Resolver.Types.ClientConfiguration;
+  constructor(options?: Route53Resolver.Types.ClientConfiguration<Params>)
+  config: Config & Route53Resolver.Types.ClientConfiguration<Params>;
   /**
    * Adds IP addresses to an inbound or an outbound resolver endpoint. If you want to adding more than one IP address, submit one AssociateResolverEndpointIpAddress request for each IP address. To remove an IP address from an endpoint, see DisassociateResolverEndpointIpAddress.
    */
-  associateResolverEndpointIpAddress(params: Route53Resolver.Types.AssociateResolverEndpointIpAddressRequest, callback?: (err: AWSError, data: Route53Resolver.Types.AssociateResolverEndpointIpAddressResponse) => void): Request<Route53Resolver.Types.AssociateResolverEndpointIpAddressResponse, AWSError>;
+  associateResolverEndpointIpAddress(params: BoundInput<Route53Resolver.Types.AssociateResolverEndpointIpAddressRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.AssociateResolverEndpointIpAddressResponse) => void): Request<Route53Resolver.Types.AssociateResolverEndpointIpAddressResponse, AWSError>;
   /**
    * Adds IP addresses to an inbound or an outbound resolver endpoint. If you want to adding more than one IP address, submit one AssociateResolverEndpointIpAddress request for each IP address. To remove an IP address from an endpoint, see DisassociateResolverEndpointIpAddress.
    */
@@ -22,7 +24,7 @@ declare class Route53Resolver extends Service {
   /**
    * Associates a resolver rule with a VPC. When you associate a rule with a VPC, Resolver forwards all DNS queries for the domain name that is specified in the rule and that originate in the VPC. The queries are forwarded to the IP addresses for the DNS resolvers that are specified in the rule. For more information about rules, see CreateResolverRule. 
    */
-  associateResolverRule(params: Route53Resolver.Types.AssociateResolverRuleRequest, callback?: (err: AWSError, data: Route53Resolver.Types.AssociateResolverRuleResponse) => void): Request<Route53Resolver.Types.AssociateResolverRuleResponse, AWSError>;
+  associateResolverRule(params: BoundInput<Route53Resolver.Types.AssociateResolverRuleRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.AssociateResolverRuleResponse) => void): Request<Route53Resolver.Types.AssociateResolverRuleResponse, AWSError>;
   /**
    * Associates a resolver rule with a VPC. When you associate a rule with a VPC, Resolver forwards all DNS queries for the domain name that is specified in the rule and that originate in the VPC. The queries are forwarded to the IP addresses for the DNS resolvers that are specified in the rule. For more information about rules, see CreateResolverRule. 
    */
@@ -30,7 +32,7 @@ declare class Route53Resolver extends Service {
   /**
    * Creates a resolver endpoint. There are two types of resolver endpoints, inbound and outbound:   An inbound resolver endpoint forwards DNS queries to the DNS service for a VPC from your network or another VPC.   An outbound resolver endpoint forwards DNS queries from the DNS service for a VPC to your network or another VPC.  
    */
-  createResolverEndpoint(params: Route53Resolver.Types.CreateResolverEndpointRequest, callback?: (err: AWSError, data: Route53Resolver.Types.CreateResolverEndpointResponse) => void): Request<Route53Resolver.Types.CreateResolverEndpointResponse, AWSError>;
+  createResolverEndpoint(params: BoundInput<Route53Resolver.Types.CreateResolverEndpointRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.CreateResolverEndpointResponse) => void): Request<Route53Resolver.Types.CreateResolverEndpointResponse, AWSError>;
   /**
    * Creates a resolver endpoint. There are two types of resolver endpoints, inbound and outbound:   An inbound resolver endpoint forwards DNS queries to the DNS service for a VPC from your network or another VPC.   An outbound resolver endpoint forwards DNS queries from the DNS service for a VPC to your network or another VPC.  
    */
@@ -38,7 +40,7 @@ declare class Route53Resolver extends Service {
   /**
    * For DNS queries that originate in your VPCs, specifies which resolver endpoint the queries pass through, one domain name that you want to forward to your network, and the IP addresses of the DNS resolvers in your network.
    */
-  createResolverRule(params: Route53Resolver.Types.CreateResolverRuleRequest, callback?: (err: AWSError, data: Route53Resolver.Types.CreateResolverRuleResponse) => void): Request<Route53Resolver.Types.CreateResolverRuleResponse, AWSError>;
+  createResolverRule(params: BoundInput<Route53Resolver.Types.CreateResolverRuleRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.CreateResolverRuleResponse) => void): Request<Route53Resolver.Types.CreateResolverRuleResponse, AWSError>;
   /**
    * For DNS queries that originate in your VPCs, specifies which resolver endpoint the queries pass through, one domain name that you want to forward to your network, and the IP addresses of the DNS resolvers in your network.
    */
@@ -46,7 +48,7 @@ declare class Route53Resolver extends Service {
   /**
    * Deletes a resolver endpoint. The effect of deleting a resolver endpoint depends on whether it's an inbound or an outbound resolver endpoint:    Inbound: DNS queries from your network or another VPC are no longer routed to the DNS service for the specified VPC.    Outbound: DNS queries from a VPC are no longer routed to your network or to another VPC.  
    */
-  deleteResolverEndpoint(params: Route53Resolver.Types.DeleteResolverEndpointRequest, callback?: (err: AWSError, data: Route53Resolver.Types.DeleteResolverEndpointResponse) => void): Request<Route53Resolver.Types.DeleteResolverEndpointResponse, AWSError>;
+  deleteResolverEndpoint(params: BoundInput<Route53Resolver.Types.DeleteResolverEndpointRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.DeleteResolverEndpointResponse) => void): Request<Route53Resolver.Types.DeleteResolverEndpointResponse, AWSError>;
   /**
    * Deletes a resolver endpoint. The effect of deleting a resolver endpoint depends on whether it's an inbound or an outbound resolver endpoint:    Inbound: DNS queries from your network or another VPC are no longer routed to the DNS service for the specified VPC.    Outbound: DNS queries from a VPC are no longer routed to your network or to another VPC.  
    */
@@ -54,7 +56,7 @@ declare class Route53Resolver extends Service {
   /**
    * Deletes a resolver rule. Before you can delete a resolver rule, you must disassociate it from all the VPCs that you associated the resolver rule with. For more infomation, see DisassociateResolverRule.
    */
-  deleteResolverRule(params: Route53Resolver.Types.DeleteResolverRuleRequest, callback?: (err: AWSError, data: Route53Resolver.Types.DeleteResolverRuleResponse) => void): Request<Route53Resolver.Types.DeleteResolverRuleResponse, AWSError>;
+  deleteResolverRule(params: BoundInput<Route53Resolver.Types.DeleteResolverRuleRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.DeleteResolverRuleResponse) => void): Request<Route53Resolver.Types.DeleteResolverRuleResponse, AWSError>;
   /**
    * Deletes a resolver rule. Before you can delete a resolver rule, you must disassociate it from all the VPCs that you associated the resolver rule with. For more infomation, see DisassociateResolverRule.
    */
@@ -62,7 +64,7 @@ declare class Route53Resolver extends Service {
   /**
    * Removes IP addresses from an inbound or an outbound resolver endpoint. If you want to remove more than one IP address, submit one DisassociateResolverEndpointIpAddress request for each IP address. To add an IP address to an endpoint, see AssociateResolverEndpointIpAddress.
    */
-  disassociateResolverEndpointIpAddress(params: Route53Resolver.Types.DisassociateResolverEndpointIpAddressRequest, callback?: (err: AWSError, data: Route53Resolver.Types.DisassociateResolverEndpointIpAddressResponse) => void): Request<Route53Resolver.Types.DisassociateResolverEndpointIpAddressResponse, AWSError>;
+  disassociateResolverEndpointIpAddress(params: BoundInput<Route53Resolver.Types.DisassociateResolverEndpointIpAddressRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.DisassociateResolverEndpointIpAddressResponse) => void): Request<Route53Resolver.Types.DisassociateResolverEndpointIpAddressResponse, AWSError>;
   /**
    * Removes IP addresses from an inbound or an outbound resolver endpoint. If you want to remove more than one IP address, submit one DisassociateResolverEndpointIpAddress request for each IP address. To add an IP address to an endpoint, see AssociateResolverEndpointIpAddress.
    */
@@ -70,7 +72,7 @@ declare class Route53Resolver extends Service {
   /**
    * Removes the association between a specified resolver rule and a specified VPC.  If you disassociate a resolver rule from a VPC, Resolver stops forwarding DNS queries for the domain name that you specified in the resolver rule.  
    */
-  disassociateResolverRule(params: Route53Resolver.Types.DisassociateResolverRuleRequest, callback?: (err: AWSError, data: Route53Resolver.Types.DisassociateResolverRuleResponse) => void): Request<Route53Resolver.Types.DisassociateResolverRuleResponse, AWSError>;
+  disassociateResolverRule(params: BoundInput<Route53Resolver.Types.DisassociateResolverRuleRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.DisassociateResolverRuleResponse) => void): Request<Route53Resolver.Types.DisassociateResolverRuleResponse, AWSError>;
   /**
    * Removes the association between a specified resolver rule and a specified VPC.  If you disassociate a resolver rule from a VPC, Resolver stops forwarding DNS queries for the domain name that you specified in the resolver rule.  
    */
@@ -78,7 +80,7 @@ declare class Route53Resolver extends Service {
   /**
    * Gets information about a specified resolver endpoint, such as whether it's an inbound or an outbound resolver endpoint, and the current status of the endpoint.
    */
-  getResolverEndpoint(params: Route53Resolver.Types.GetResolverEndpointRequest, callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverEndpointResponse) => void): Request<Route53Resolver.Types.GetResolverEndpointResponse, AWSError>;
+  getResolverEndpoint(params: BoundInput<Route53Resolver.Types.GetResolverEndpointRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverEndpointResponse) => void): Request<Route53Resolver.Types.GetResolverEndpointResponse, AWSError>;
   /**
    * Gets information about a specified resolver endpoint, such as whether it's an inbound or an outbound resolver endpoint, and the current status of the endpoint.
    */
@@ -86,7 +88,7 @@ declare class Route53Resolver extends Service {
   /**
    * Gets information about a specified resolver rule, such as the domain name that the rule forwards DNS queries for and the ID of the outbound resolver endpoint that the rule is associated with.
    */
-  getResolverRule(params: Route53Resolver.Types.GetResolverRuleRequest, callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverRuleResponse) => void): Request<Route53Resolver.Types.GetResolverRuleResponse, AWSError>;
+  getResolverRule(params: BoundInput<Route53Resolver.Types.GetResolverRuleRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverRuleResponse) => void): Request<Route53Resolver.Types.GetResolverRuleResponse, AWSError>;
   /**
    * Gets information about a specified resolver rule, such as the domain name that the rule forwards DNS queries for and the ID of the outbound resolver endpoint that the rule is associated with.
    */
@@ -94,7 +96,7 @@ declare class Route53Resolver extends Service {
   /**
    * Gets information about an association between a specified resolver rule and a VPC. You associate a resolver rule and a VPC using AssociateResolverRule. 
    */
-  getResolverRuleAssociation(params: Route53Resolver.Types.GetResolverRuleAssociationRequest, callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverRuleAssociationResponse) => void): Request<Route53Resolver.Types.GetResolverRuleAssociationResponse, AWSError>;
+  getResolverRuleAssociation(params: BoundInput<Route53Resolver.Types.GetResolverRuleAssociationRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverRuleAssociationResponse) => void): Request<Route53Resolver.Types.GetResolverRuleAssociationResponse, AWSError>;
   /**
    * Gets information about an association between a specified resolver rule and a VPC. You associate a resolver rule and a VPC using AssociateResolverRule. 
    */
@@ -102,7 +104,7 @@ declare class Route53Resolver extends Service {
   /**
    * Gets information about a resolver rule policy. A resolver rule policy specifies the Resolver operations and resources that you want to allow another AWS account to be able to use. 
    */
-  getResolverRulePolicy(params: Route53Resolver.Types.GetResolverRulePolicyRequest, callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverRulePolicyResponse) => void): Request<Route53Resolver.Types.GetResolverRulePolicyResponse, AWSError>;
+  getResolverRulePolicy(params: BoundInput<Route53Resolver.Types.GetResolverRulePolicyRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverRulePolicyResponse) => void): Request<Route53Resolver.Types.GetResolverRulePolicyResponse, AWSError>;
   /**
    * Gets information about a resolver rule policy. A resolver rule policy specifies the Resolver operations and resources that you want to allow another AWS account to be able to use. 
    */
@@ -110,7 +112,7 @@ declare class Route53Resolver extends Service {
   /**
    * Gets the IP addresses for a specified resolver endpoint.
    */
-  listResolverEndpointIpAddresses(params: Route53Resolver.Types.ListResolverEndpointIpAddressesRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverEndpointIpAddressesResponse) => void): Request<Route53Resolver.Types.ListResolverEndpointIpAddressesResponse, AWSError>;
+  listResolverEndpointIpAddresses(params: BoundInput<Route53Resolver.Types.ListResolverEndpointIpAddressesRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverEndpointIpAddressesResponse) => void): Request<Route53Resolver.Types.ListResolverEndpointIpAddressesResponse, AWSError>;
   /**
    * Gets the IP addresses for a specified resolver endpoint.
    */
@@ -118,7 +120,7 @@ declare class Route53Resolver extends Service {
   /**
    * Lists all the resolver endpoints that were created using the current AWS account.
    */
-  listResolverEndpoints(params: Route53Resolver.Types.ListResolverEndpointsRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverEndpointsResponse) => void): Request<Route53Resolver.Types.ListResolverEndpointsResponse, AWSError>;
+  listResolverEndpoints(params: BoundInput<Route53Resolver.Types.ListResolverEndpointsRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverEndpointsResponse) => void): Request<Route53Resolver.Types.ListResolverEndpointsResponse, AWSError>;
   /**
    * Lists all the resolver endpoints that were created using the current AWS account.
    */
@@ -126,7 +128,7 @@ declare class Route53Resolver extends Service {
   /**
    * Lists the associations that were created between resolver rules and VPCs using the current AWS account.
    */
-  listResolverRuleAssociations(params: Route53Resolver.Types.ListResolverRuleAssociationsRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverRuleAssociationsResponse) => void): Request<Route53Resolver.Types.ListResolverRuleAssociationsResponse, AWSError>;
+  listResolverRuleAssociations(params: BoundInput<Route53Resolver.Types.ListResolverRuleAssociationsRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverRuleAssociationsResponse) => void): Request<Route53Resolver.Types.ListResolverRuleAssociationsResponse, AWSError>;
   /**
    * Lists the associations that were created between resolver rules and VPCs using the current AWS account.
    */
@@ -134,7 +136,7 @@ declare class Route53Resolver extends Service {
   /**
    * Lists the resolver rules that were created using the current AWS account.
    */
-  listResolverRules(params: Route53Resolver.Types.ListResolverRulesRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverRulesResponse) => void): Request<Route53Resolver.Types.ListResolverRulesResponse, AWSError>;
+  listResolverRules(params: BoundInput<Route53Resolver.Types.ListResolverRulesRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverRulesResponse) => void): Request<Route53Resolver.Types.ListResolverRulesResponse, AWSError>;
   /**
    * Lists the resolver rules that were created using the current AWS account.
    */
@@ -142,7 +144,7 @@ declare class Route53Resolver extends Service {
   /**
    * Lists the tags that you associated with the specified resource.
    */
-  listTagsForResource(params: Route53Resolver.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ListTagsForResourceResponse) => void): Request<Route53Resolver.Types.ListTagsForResourceResponse, AWSError>;
+  listTagsForResource(params: BoundInput<Route53Resolver.Types.ListTagsForResourceRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.ListTagsForResourceResponse) => void): Request<Route53Resolver.Types.ListTagsForResourceResponse, AWSError>;
   /**
    * Lists the tags that you associated with the specified resource.
    */
@@ -150,7 +152,7 @@ declare class Route53Resolver extends Service {
   /**
    * Specifies the Resolver operations and resources that you want to allow another AWS account to be able to use.
    */
-  putResolverRulePolicy(params: Route53Resolver.Types.PutResolverRulePolicyRequest, callback?: (err: AWSError, data: Route53Resolver.Types.PutResolverRulePolicyResponse) => void): Request<Route53Resolver.Types.PutResolverRulePolicyResponse, AWSError>;
+  putResolverRulePolicy(params: BoundInput<Route53Resolver.Types.PutResolverRulePolicyRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.PutResolverRulePolicyResponse) => void): Request<Route53Resolver.Types.PutResolverRulePolicyResponse, AWSError>;
   /**
    * Specifies the Resolver operations and resources that you want to allow another AWS account to be able to use.
    */
@@ -158,7 +160,7 @@ declare class Route53Resolver extends Service {
   /**
    * Adds one or more tags to a specified resource.
    */
-  tagResource(params: Route53Resolver.Types.TagResourceRequest, callback?: (err: AWSError, data: Route53Resolver.Types.TagResourceResponse) => void): Request<Route53Resolver.Types.TagResourceResponse, AWSError>;
+  tagResource(params: BoundInput<Route53Resolver.Types.TagResourceRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.TagResourceResponse) => void): Request<Route53Resolver.Types.TagResourceResponse, AWSError>;
   /**
    * Adds one or more tags to a specified resource.
    */
@@ -166,7 +168,7 @@ declare class Route53Resolver extends Service {
   /**
    * Removes one or more tags from a specified resource.
    */
-  untagResource(params: Route53Resolver.Types.UntagResourceRequest, callback?: (err: AWSError, data: Route53Resolver.Types.UntagResourceResponse) => void): Request<Route53Resolver.Types.UntagResourceResponse, AWSError>;
+  untagResource(params: BoundInput<Route53Resolver.Types.UntagResourceRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.UntagResourceResponse) => void): Request<Route53Resolver.Types.UntagResourceResponse, AWSError>;
   /**
    * Removes one or more tags from a specified resource.
    */
@@ -174,7 +176,7 @@ declare class Route53Resolver extends Service {
   /**
    * Updates the name of an inbound or an outbound resolver endpoint. 
    */
-  updateResolverEndpoint(params: Route53Resolver.Types.UpdateResolverEndpointRequest, callback?: (err: AWSError, data: Route53Resolver.Types.UpdateResolverEndpointResponse) => void): Request<Route53Resolver.Types.UpdateResolverEndpointResponse, AWSError>;
+  updateResolverEndpoint(params: BoundInput<Route53Resolver.Types.UpdateResolverEndpointRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.UpdateResolverEndpointResponse) => void): Request<Route53Resolver.Types.UpdateResolverEndpointResponse, AWSError>;
   /**
    * Updates the name of an inbound or an outbound resolver endpoint. 
    */
@@ -182,7 +184,7 @@ declare class Route53Resolver extends Service {
   /**
    * Updates settings for a specified resolver rule. ResolverRuleId is required, and all other parameters are optional. If you don't specify a parameter, it retains its current value.
    */
-  updateResolverRule(params: Route53Resolver.Types.UpdateResolverRuleRequest, callback?: (err: AWSError, data: Route53Resolver.Types.UpdateResolverRuleResponse) => void): Request<Route53Resolver.Types.UpdateResolverRuleResponse, AWSError>;
+  updateResolverRule(params: BoundInput<Route53Resolver.Types.UpdateResolverRuleRequest, keyof Params>, callback?: (err: AWSError, data: Route53Resolver.Types.UpdateResolverRuleResponse) => void): Request<Route53Resolver.Types.UpdateResolverRuleResponse, AWSError>;
   /**
    * Updates settings for a specified resolver rule. ResolverRuleId is required, and all other parameters are optional. If you don't specify a parameter, it retains its current value.
    */
@@ -877,7 +879,8 @@ declare namespace Route53Resolver {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<AssociateResolverEndpointIpAddressRequest & AssociateResolverRuleRequest & CreateResolverEndpointRequest & CreateResolverRuleRequest & DeleteResolverEndpointRequest & DeleteResolverRuleRequest & DisassociateResolverEndpointIpAddressRequest & DisassociateResolverRuleRequest & GetResolverEndpointRequest & GetResolverRuleRequest & GetResolverRuleAssociationRequest & GetResolverRulePolicyRequest & ListResolverEndpointIpAddressesRequest & ListResolverEndpointsRequest & ListResolverRuleAssociationsRequest & ListResolverRulesRequest & ListTagsForResourceRequest & PutResolverRulePolicyRequest & TagResourceRequest & UntagResourceRequest & UpdateResolverEndpointRequest & UpdateResolverRuleRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the Route53Resolver client.
    */

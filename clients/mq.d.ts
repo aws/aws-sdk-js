@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class MQ extends Service {
+declare class MQ<Params extends MQ.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: MQ.Types.ClientConfiguration)
-  config: Config & MQ.Types.ClientConfiguration;
+  constructor(options?: MQ.Types.ClientConfiguration<Params>)
+  config: Config & MQ.Types.ClientConfiguration<Params>;
   /**
    * Creates a broker. Note: This API is asynchronous.
    */
-  createBroker(params: MQ.Types.CreateBrokerRequest, callback?: (err: AWSError, data: MQ.Types.CreateBrokerResponse) => void): Request<MQ.Types.CreateBrokerResponse, AWSError>;
+  createBroker(params: BoundInput<MQ.Types.CreateBrokerRequest, keyof Params>, callback?: (err: AWSError, data: MQ.Types.CreateBrokerResponse) => void): Request<MQ.Types.CreateBrokerResponse, AWSError>;
   /**
    * Creates a broker. Note: This API is asynchronous.
    */
@@ -22,7 +24,7 @@ declare class MQ extends Service {
   /**
    * Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version).
    */
-  createConfiguration(params: MQ.Types.CreateConfigurationRequest, callback?: (err: AWSError, data: MQ.Types.CreateConfigurationResponse) => void): Request<MQ.Types.CreateConfigurationResponse, AWSError>;
+  createConfiguration(params: BoundInput<MQ.Types.CreateConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: MQ.Types.CreateConfigurationResponse) => void): Request<MQ.Types.CreateConfigurationResponse, AWSError>;
   /**
    * Creates a new configuration for the specified configuration name. Amazon MQ uses the default configuration (the engine type and version).
    */
@@ -30,7 +32,7 @@ declare class MQ extends Service {
   /**
    * Add a tag to a resource.
    */
-  createTags(params: MQ.Types.CreateTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  createTags(params: BoundInput<MQ.Types.CreateTagsRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Add a tag to a resource.
    */
@@ -38,7 +40,7 @@ declare class MQ extends Service {
   /**
    * Creates an ActiveMQ user.
    */
-  createUser(params: MQ.Types.CreateUserRequest, callback?: (err: AWSError, data: MQ.Types.CreateUserResponse) => void): Request<MQ.Types.CreateUserResponse, AWSError>;
+  createUser(params: BoundInput<MQ.Types.CreateUserRequest, keyof Params>, callback?: (err: AWSError, data: MQ.Types.CreateUserResponse) => void): Request<MQ.Types.CreateUserResponse, AWSError>;
   /**
    * Creates an ActiveMQ user.
    */
@@ -46,7 +48,7 @@ declare class MQ extends Service {
   /**
    * Deletes a broker. Note: This API is asynchronous.
    */
-  deleteBroker(params: MQ.Types.DeleteBrokerRequest, callback?: (err: AWSError, data: MQ.Types.DeleteBrokerResponse) => void): Request<MQ.Types.DeleteBrokerResponse, AWSError>;
+  deleteBroker(params: BoundInput<MQ.Types.DeleteBrokerRequest, keyof Params>, callback?: (err: AWSError, data: MQ.Types.DeleteBrokerResponse) => void): Request<MQ.Types.DeleteBrokerResponse, AWSError>;
   /**
    * Deletes a broker. Note: This API is asynchronous.
    */
@@ -54,7 +56,7 @@ declare class MQ extends Service {
   /**
    * Remove a tag from a resource.
    */
-  deleteTags(params: MQ.Types.DeleteTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteTags(params: BoundInput<MQ.Types.DeleteTagsRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Remove a tag from a resource.
    */
@@ -62,7 +64,7 @@ declare class MQ extends Service {
   /**
    * Deletes an ActiveMQ user.
    */
-  deleteUser(params: MQ.Types.DeleteUserRequest, callback?: (err: AWSError, data: MQ.Types.DeleteUserResponse) => void): Request<MQ.Types.DeleteUserResponse, AWSError>;
+  deleteUser(params: BoundInput<MQ.Types.DeleteUserRequest, keyof Params>, callback?: (err: AWSError, data: MQ.Types.DeleteUserResponse) => void): Request<MQ.Types.DeleteUserResponse, AWSError>;
   /**
    * Deletes an ActiveMQ user.
    */
@@ -70,7 +72,7 @@ declare class MQ extends Service {
   /**
    * Returns information about the specified broker.
    */
-  describeBroker(params: MQ.Types.DescribeBrokerRequest, callback?: (err: AWSError, data: MQ.Types.DescribeBrokerResponse) => void): Request<MQ.Types.DescribeBrokerResponse, AWSError>;
+  describeBroker(params: BoundInput<MQ.Types.DescribeBrokerRequest, keyof Params>, callback?: (err: AWSError, data: MQ.Types.DescribeBrokerResponse) => void): Request<MQ.Types.DescribeBrokerResponse, AWSError>;
   /**
    * Returns information about the specified broker.
    */
@@ -78,7 +80,7 @@ declare class MQ extends Service {
   /**
    * Returns information about the specified configuration.
    */
-  describeConfiguration(params: MQ.Types.DescribeConfigurationRequest, callback?: (err: AWSError, data: MQ.Types.DescribeConfigurationResponse) => void): Request<MQ.Types.DescribeConfigurationResponse, AWSError>;
+  describeConfiguration(params: BoundInput<MQ.Types.DescribeConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: MQ.Types.DescribeConfigurationResponse) => void): Request<MQ.Types.DescribeConfigurationResponse, AWSError>;
   /**
    * Returns information about the specified configuration.
    */
@@ -86,7 +88,7 @@ declare class MQ extends Service {
   /**
    * Returns the specified configuration revision for the specified configuration.
    */
-  describeConfigurationRevision(params: MQ.Types.DescribeConfigurationRevisionRequest, callback?: (err: AWSError, data: MQ.Types.DescribeConfigurationRevisionResponse) => void): Request<MQ.Types.DescribeConfigurationRevisionResponse, AWSError>;
+  describeConfigurationRevision(params: BoundInput<MQ.Types.DescribeConfigurationRevisionRequest, keyof Params>, callback?: (err: AWSError, data: MQ.Types.DescribeConfigurationRevisionResponse) => void): Request<MQ.Types.DescribeConfigurationRevisionResponse, AWSError>;
   /**
    * Returns the specified configuration revision for the specified configuration.
    */
@@ -94,7 +96,7 @@ declare class MQ extends Service {
   /**
    * Returns information about an ActiveMQ user.
    */
-  describeUser(params: MQ.Types.DescribeUserRequest, callback?: (err: AWSError, data: MQ.Types.DescribeUserResponse) => void): Request<MQ.Types.DescribeUserResponse, AWSError>;
+  describeUser(params: BoundInput<MQ.Types.DescribeUserRequest, keyof Params>, callback?: (err: AWSError, data: MQ.Types.DescribeUserResponse) => void): Request<MQ.Types.DescribeUserResponse, AWSError>;
   /**
    * Returns information about an ActiveMQ user.
    */
@@ -102,7 +104,7 @@ declare class MQ extends Service {
   /**
    * Returns a list of all brokers.
    */
-  listBrokers(params: MQ.Types.ListBrokersRequest, callback?: (err: AWSError, data: MQ.Types.ListBrokersResponse) => void): Request<MQ.Types.ListBrokersResponse, AWSError>;
+  listBrokers(params: BoundInput<MQ.Types.ListBrokersRequest, keyof Params>, callback?: (err: AWSError, data: MQ.Types.ListBrokersResponse) => void): Request<MQ.Types.ListBrokersResponse, AWSError>;
   /**
    * Returns a list of all brokers.
    */
@@ -110,7 +112,7 @@ declare class MQ extends Service {
   /**
    * Returns a list of all revisions for the specified configuration.
    */
-  listConfigurationRevisions(params: MQ.Types.ListConfigurationRevisionsRequest, callback?: (err: AWSError, data: MQ.Types.ListConfigurationRevisionsResponse) => void): Request<MQ.Types.ListConfigurationRevisionsResponse, AWSError>;
+  listConfigurationRevisions(params: BoundInput<MQ.Types.ListConfigurationRevisionsRequest, keyof Params>, callback?: (err: AWSError, data: MQ.Types.ListConfigurationRevisionsResponse) => void): Request<MQ.Types.ListConfigurationRevisionsResponse, AWSError>;
   /**
    * Returns a list of all revisions for the specified configuration.
    */
@@ -118,7 +120,7 @@ declare class MQ extends Service {
   /**
    * Returns a list of all configurations.
    */
-  listConfigurations(params: MQ.Types.ListConfigurationsRequest, callback?: (err: AWSError, data: MQ.Types.ListConfigurationsResponse) => void): Request<MQ.Types.ListConfigurationsResponse, AWSError>;
+  listConfigurations(params: BoundInput<MQ.Types.ListConfigurationsRequest, keyof Params>, callback?: (err: AWSError, data: MQ.Types.ListConfigurationsResponse) => void): Request<MQ.Types.ListConfigurationsResponse, AWSError>;
   /**
    * Returns a list of all configurations.
    */
@@ -126,7 +128,7 @@ declare class MQ extends Service {
   /**
    * Lists tags for a resource.
    */
-  listTags(params: MQ.Types.ListTagsRequest, callback?: (err: AWSError, data: MQ.Types.ListTagsResponse) => void): Request<MQ.Types.ListTagsResponse, AWSError>;
+  listTags(params: BoundInput<MQ.Types.ListTagsRequest, keyof Params>, callback?: (err: AWSError, data: MQ.Types.ListTagsResponse) => void): Request<MQ.Types.ListTagsResponse, AWSError>;
   /**
    * Lists tags for a resource.
    */
@@ -134,7 +136,7 @@ declare class MQ extends Service {
   /**
    * Returns a list of all ActiveMQ users.
    */
-  listUsers(params: MQ.Types.ListUsersRequest, callback?: (err: AWSError, data: MQ.Types.ListUsersResponse) => void): Request<MQ.Types.ListUsersResponse, AWSError>;
+  listUsers(params: BoundInput<MQ.Types.ListUsersRequest, keyof Params>, callback?: (err: AWSError, data: MQ.Types.ListUsersResponse) => void): Request<MQ.Types.ListUsersResponse, AWSError>;
   /**
    * Returns a list of all ActiveMQ users.
    */
@@ -142,7 +144,7 @@ declare class MQ extends Service {
   /**
    * Reboots a broker. Note: This API is asynchronous.
    */
-  rebootBroker(params: MQ.Types.RebootBrokerRequest, callback?: (err: AWSError, data: MQ.Types.RebootBrokerResponse) => void): Request<MQ.Types.RebootBrokerResponse, AWSError>;
+  rebootBroker(params: BoundInput<MQ.Types.RebootBrokerRequest, keyof Params>, callback?: (err: AWSError, data: MQ.Types.RebootBrokerResponse) => void): Request<MQ.Types.RebootBrokerResponse, AWSError>;
   /**
    * Reboots a broker. Note: This API is asynchronous.
    */
@@ -150,7 +152,7 @@ declare class MQ extends Service {
   /**
    * Adds a pending configuration change to a broker.
    */
-  updateBroker(params: MQ.Types.UpdateBrokerRequest, callback?: (err: AWSError, data: MQ.Types.UpdateBrokerResponse) => void): Request<MQ.Types.UpdateBrokerResponse, AWSError>;
+  updateBroker(params: BoundInput<MQ.Types.UpdateBrokerRequest, keyof Params>, callback?: (err: AWSError, data: MQ.Types.UpdateBrokerResponse) => void): Request<MQ.Types.UpdateBrokerResponse, AWSError>;
   /**
    * Adds a pending configuration change to a broker.
    */
@@ -158,7 +160,7 @@ declare class MQ extends Service {
   /**
    * Updates the specified configuration.
    */
-  updateConfiguration(params: MQ.Types.UpdateConfigurationRequest, callback?: (err: AWSError, data: MQ.Types.UpdateConfigurationResponse) => void): Request<MQ.Types.UpdateConfigurationResponse, AWSError>;
+  updateConfiguration(params: BoundInput<MQ.Types.UpdateConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: MQ.Types.UpdateConfigurationResponse) => void): Request<MQ.Types.UpdateConfigurationResponse, AWSError>;
   /**
    * Updates the specified configuration.
    */
@@ -166,7 +168,7 @@ declare class MQ extends Service {
   /**
    * Updates the information for an ActiveMQ user.
    */
-  updateUser(params: MQ.Types.UpdateUserRequest, callback?: (err: AWSError, data: MQ.Types.UpdateUserResponse) => void): Request<MQ.Types.UpdateUserResponse, AWSError>;
+  updateUser(params: BoundInput<MQ.Types.UpdateUserRequest, keyof Params>, callback?: (err: AWSError, data: MQ.Types.UpdateUserResponse) => void): Request<MQ.Types.UpdateUserResponse, AWSError>;
   /**
    * Updates the information for an ActiveMQ user.
    */
@@ -1045,7 +1047,8 @@ declare namespace MQ {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<CreateBrokerRequest & CreateConfigurationRequest & CreateTagsRequest & CreateUserRequest & DeleteBrokerRequest & DeleteTagsRequest & DeleteUserRequest & DescribeBrokerRequest & DescribeConfigurationRequest & DescribeConfigurationRevisionRequest & DescribeUserRequest & ListBrokersRequest & ListConfigurationRevisionsRequest & ListConfigurationsRequest & ListTagsRequest & ListUsersRequest & RebootBrokerRequest & UpdateBrokerRequest & UpdateConfigurationRequest & UpdateUserRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the MQ client.
    */

@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class CognitoSync extends Service {
+declare class CognitoSync<Params extends CognitoSync.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: CognitoSync.Types.ClientConfiguration)
-  config: Config & CognitoSync.Types.ClientConfiguration;
+  constructor(options?: CognitoSync.Types.ClientConfiguration<Params>)
+  config: Config & CognitoSync.Types.ClientConfiguration<Params>;
   /**
    * Initiates a bulk publish of all existing datasets for an Identity Pool to the configured stream. Customers are limited to one successful bulk publish per 24 hours. Bulk publish is an asynchronous request, customers can see the status of the request via the GetBulkPublishDetails operation. This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.
    */
-  bulkPublish(params: CognitoSync.Types.BulkPublishRequest, callback?: (err: AWSError, data: CognitoSync.Types.BulkPublishResponse) => void): Request<CognitoSync.Types.BulkPublishResponse, AWSError>;
+  bulkPublish(params: BoundInput<CognitoSync.Types.BulkPublishRequest, keyof Params>, callback?: (err: AWSError, data: CognitoSync.Types.BulkPublishResponse) => void): Request<CognitoSync.Types.BulkPublishResponse, AWSError>;
   /**
    * Initiates a bulk publish of all existing datasets for an Identity Pool to the configured stream. Customers are limited to one successful bulk publish per 24 hours. Bulk publish is an asynchronous request, customers can see the status of the request via the GetBulkPublishDetails operation. This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.
    */
@@ -22,7 +24,7 @@ declare class CognitoSync extends Service {
   /**
    * Deletes the specific dataset. The dataset will be deleted permanently, and the action can't be undone. Datasets that this dataset was merged with will no longer report the merge. Any subsequent operation on this dataset will result in a ResourceNotFoundException. This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.
    */
-  deleteDataset(params: CognitoSync.Types.DeleteDatasetRequest, callback?: (err: AWSError, data: CognitoSync.Types.DeleteDatasetResponse) => void): Request<CognitoSync.Types.DeleteDatasetResponse, AWSError>;
+  deleteDataset(params: BoundInput<CognitoSync.Types.DeleteDatasetRequest, keyof Params>, callback?: (err: AWSError, data: CognitoSync.Types.DeleteDatasetResponse) => void): Request<CognitoSync.Types.DeleteDatasetResponse, AWSError>;
   /**
    * Deletes the specific dataset. The dataset will be deleted permanently, and the action can't be undone. Datasets that this dataset was merged with will no longer report the merge. Any subsequent operation on this dataset will result in a ResourceNotFoundException. This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.
    */
@@ -30,7 +32,7 @@ declare class CognitoSync extends Service {
   /**
    * Gets meta data about a dataset by identity and dataset name. With Amazon Cognito Sync, each identity has access only to its own data. Thus, the credentials used to make this API call need to have access to the identity data. This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials. You should use Cognito Identity credentials to make this API call.
    */
-  describeDataset(params: CognitoSync.Types.DescribeDatasetRequest, callback?: (err: AWSError, data: CognitoSync.Types.DescribeDatasetResponse) => void): Request<CognitoSync.Types.DescribeDatasetResponse, AWSError>;
+  describeDataset(params: BoundInput<CognitoSync.Types.DescribeDatasetRequest, keyof Params>, callback?: (err: AWSError, data: CognitoSync.Types.DescribeDatasetResponse) => void): Request<CognitoSync.Types.DescribeDatasetResponse, AWSError>;
   /**
    * Gets meta data about a dataset by identity and dataset name. With Amazon Cognito Sync, each identity has access only to its own data. Thus, the credentials used to make this API call need to have access to the identity data. This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials. You should use Cognito Identity credentials to make this API call.
    */
@@ -38,7 +40,7 @@ declare class CognitoSync extends Service {
   /**
    * Gets usage details (for example, data storage) about a particular identity pool. This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.
    */
-  describeIdentityPoolUsage(params: CognitoSync.Types.DescribeIdentityPoolUsageRequest, callback?: (err: AWSError, data: CognitoSync.Types.DescribeIdentityPoolUsageResponse) => void): Request<CognitoSync.Types.DescribeIdentityPoolUsageResponse, AWSError>;
+  describeIdentityPoolUsage(params: BoundInput<CognitoSync.Types.DescribeIdentityPoolUsageRequest, keyof Params>, callback?: (err: AWSError, data: CognitoSync.Types.DescribeIdentityPoolUsageResponse) => void): Request<CognitoSync.Types.DescribeIdentityPoolUsageResponse, AWSError>;
   /**
    * Gets usage details (for example, data storage) about a particular identity pool. This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.
    */
@@ -46,7 +48,7 @@ declare class CognitoSync extends Service {
   /**
    * Gets usage information for an identity, including number of datasets and data usage. This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.
    */
-  describeIdentityUsage(params: CognitoSync.Types.DescribeIdentityUsageRequest, callback?: (err: AWSError, data: CognitoSync.Types.DescribeIdentityUsageResponse) => void): Request<CognitoSync.Types.DescribeIdentityUsageResponse, AWSError>;
+  describeIdentityUsage(params: BoundInput<CognitoSync.Types.DescribeIdentityUsageRequest, keyof Params>, callback?: (err: AWSError, data: CognitoSync.Types.DescribeIdentityUsageResponse) => void): Request<CognitoSync.Types.DescribeIdentityUsageResponse, AWSError>;
   /**
    * Gets usage information for an identity, including number of datasets and data usage. This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.
    */
@@ -54,7 +56,7 @@ declare class CognitoSync extends Service {
   /**
    * Get the status of the last BulkPublish operation for an identity pool. This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.
    */
-  getBulkPublishDetails(params: CognitoSync.Types.GetBulkPublishDetailsRequest, callback?: (err: AWSError, data: CognitoSync.Types.GetBulkPublishDetailsResponse) => void): Request<CognitoSync.Types.GetBulkPublishDetailsResponse, AWSError>;
+  getBulkPublishDetails(params: BoundInput<CognitoSync.Types.GetBulkPublishDetailsRequest, keyof Params>, callback?: (err: AWSError, data: CognitoSync.Types.GetBulkPublishDetailsResponse) => void): Request<CognitoSync.Types.GetBulkPublishDetailsResponse, AWSError>;
   /**
    * Get the status of the last BulkPublish operation for an identity pool. This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.
    */
@@ -62,7 +64,7 @@ declare class CognitoSync extends Service {
   /**
    * Gets the events and the corresponding Lambda functions associated with an identity pool. This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.
    */
-  getCognitoEvents(params: CognitoSync.Types.GetCognitoEventsRequest, callback?: (err: AWSError, data: CognitoSync.Types.GetCognitoEventsResponse) => void): Request<CognitoSync.Types.GetCognitoEventsResponse, AWSError>;
+  getCognitoEvents(params: BoundInput<CognitoSync.Types.GetCognitoEventsRequest, keyof Params>, callback?: (err: AWSError, data: CognitoSync.Types.GetCognitoEventsResponse) => void): Request<CognitoSync.Types.GetCognitoEventsResponse, AWSError>;
   /**
    * Gets the events and the corresponding Lambda functions associated with an identity pool. This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.
    */
@@ -70,7 +72,7 @@ declare class CognitoSync extends Service {
   /**
    * Gets the configuration settings of an identity pool. This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.
    */
-  getIdentityPoolConfiguration(params: CognitoSync.Types.GetIdentityPoolConfigurationRequest, callback?: (err: AWSError, data: CognitoSync.Types.GetIdentityPoolConfigurationResponse) => void): Request<CognitoSync.Types.GetIdentityPoolConfigurationResponse, AWSError>;
+  getIdentityPoolConfiguration(params: BoundInput<CognitoSync.Types.GetIdentityPoolConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: CognitoSync.Types.GetIdentityPoolConfigurationResponse) => void): Request<CognitoSync.Types.GetIdentityPoolConfigurationResponse, AWSError>;
   /**
    * Gets the configuration settings of an identity pool. This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.
    */
@@ -78,7 +80,7 @@ declare class CognitoSync extends Service {
   /**
    * Lists datasets for an identity. With Amazon Cognito Sync, each identity has access only to its own data. Thus, the credentials used to make this API call need to have access to the identity data. ListDatasets can be called with temporary user credentials provided by Cognito Identity or with developer credentials. You should use the Cognito Identity credentials to make this API call.
    */
-  listDatasets(params: CognitoSync.Types.ListDatasetsRequest, callback?: (err: AWSError, data: CognitoSync.Types.ListDatasetsResponse) => void): Request<CognitoSync.Types.ListDatasetsResponse, AWSError>;
+  listDatasets(params: BoundInput<CognitoSync.Types.ListDatasetsRequest, keyof Params>, callback?: (err: AWSError, data: CognitoSync.Types.ListDatasetsResponse) => void): Request<CognitoSync.Types.ListDatasetsResponse, AWSError>;
   /**
    * Lists datasets for an identity. With Amazon Cognito Sync, each identity has access only to its own data. Thus, the credentials used to make this API call need to have access to the identity data. ListDatasets can be called with temporary user credentials provided by Cognito Identity or with developer credentials. You should use the Cognito Identity credentials to make this API call.
    */
@@ -86,7 +88,7 @@ declare class CognitoSync extends Service {
   /**
    * Gets a list of identity pools registered with Cognito. ListIdentityPoolUsage can only be called with developer credentials. You cannot make this API call with the temporary user credentials provided by Cognito Identity.
    */
-  listIdentityPoolUsage(params: CognitoSync.Types.ListIdentityPoolUsageRequest, callback?: (err: AWSError, data: CognitoSync.Types.ListIdentityPoolUsageResponse) => void): Request<CognitoSync.Types.ListIdentityPoolUsageResponse, AWSError>;
+  listIdentityPoolUsage(params: BoundInput<CognitoSync.Types.ListIdentityPoolUsageRequest, keyof Params>, callback?: (err: AWSError, data: CognitoSync.Types.ListIdentityPoolUsageResponse) => void): Request<CognitoSync.Types.ListIdentityPoolUsageResponse, AWSError>;
   /**
    * Gets a list of identity pools registered with Cognito. ListIdentityPoolUsage can only be called with developer credentials. You cannot make this API call with the temporary user credentials provided by Cognito Identity.
    */
@@ -94,7 +96,7 @@ declare class CognitoSync extends Service {
   /**
    * Gets paginated records, optionally changed after a particular sync count for a dataset and identity. With Amazon Cognito Sync, each identity has access only to its own data. Thus, the credentials used to make this API call need to have access to the identity data. ListRecords can be called with temporary user credentials provided by Cognito Identity or with developer credentials. You should use Cognito Identity credentials to make this API call.
    */
-  listRecords(params: CognitoSync.Types.ListRecordsRequest, callback?: (err: AWSError, data: CognitoSync.Types.ListRecordsResponse) => void): Request<CognitoSync.Types.ListRecordsResponse, AWSError>;
+  listRecords(params: BoundInput<CognitoSync.Types.ListRecordsRequest, keyof Params>, callback?: (err: AWSError, data: CognitoSync.Types.ListRecordsResponse) => void): Request<CognitoSync.Types.ListRecordsResponse, AWSError>;
   /**
    * Gets paginated records, optionally changed after a particular sync count for a dataset and identity. With Amazon Cognito Sync, each identity has access only to its own data. Thus, the credentials used to make this API call need to have access to the identity data. ListRecords can be called with temporary user credentials provided by Cognito Identity or with developer credentials. You should use Cognito Identity credentials to make this API call.
    */
@@ -102,7 +104,7 @@ declare class CognitoSync extends Service {
   /**
    * Registers a device to receive push sync notifications. This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.
    */
-  registerDevice(params: CognitoSync.Types.RegisterDeviceRequest, callback?: (err: AWSError, data: CognitoSync.Types.RegisterDeviceResponse) => void): Request<CognitoSync.Types.RegisterDeviceResponse, AWSError>;
+  registerDevice(params: BoundInput<CognitoSync.Types.RegisterDeviceRequest, keyof Params>, callback?: (err: AWSError, data: CognitoSync.Types.RegisterDeviceResponse) => void): Request<CognitoSync.Types.RegisterDeviceResponse, AWSError>;
   /**
    * Registers a device to receive push sync notifications. This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.
    */
@@ -110,7 +112,7 @@ declare class CognitoSync extends Service {
   /**
    * Sets the AWS Lambda function for a given event type for an identity pool. This request only updates the key/value pair specified. Other key/values pairs are not updated. To remove a key value pair, pass a empty value for the particular key. This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.
    */
-  setCognitoEvents(params: CognitoSync.Types.SetCognitoEventsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  setCognitoEvents(params: BoundInput<CognitoSync.Types.SetCognitoEventsRequest, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Sets the AWS Lambda function for a given event type for an identity pool. This request only updates the key/value pair specified. Other key/values pairs are not updated. To remove a key value pair, pass a empty value for the particular key. This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.
    */
@@ -118,7 +120,7 @@ declare class CognitoSync extends Service {
   /**
    * Sets the necessary configuration for push sync. This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.
    */
-  setIdentityPoolConfiguration(params: CognitoSync.Types.SetIdentityPoolConfigurationRequest, callback?: (err: AWSError, data: CognitoSync.Types.SetIdentityPoolConfigurationResponse) => void): Request<CognitoSync.Types.SetIdentityPoolConfigurationResponse, AWSError>;
+  setIdentityPoolConfiguration(params: BoundInput<CognitoSync.Types.SetIdentityPoolConfigurationRequest, keyof Params>, callback?: (err: AWSError, data: CognitoSync.Types.SetIdentityPoolConfigurationResponse) => void): Request<CognitoSync.Types.SetIdentityPoolConfigurationResponse, AWSError>;
   /**
    * Sets the necessary configuration for push sync. This API can only be called with developer credentials. You cannot call this API with the temporary user credentials provided by Cognito Identity.
    */
@@ -126,7 +128,7 @@ declare class CognitoSync extends Service {
   /**
    * Subscribes to receive notifications when a dataset is modified by another device. This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.
    */
-  subscribeToDataset(params: CognitoSync.Types.SubscribeToDatasetRequest, callback?: (err: AWSError, data: CognitoSync.Types.SubscribeToDatasetResponse) => void): Request<CognitoSync.Types.SubscribeToDatasetResponse, AWSError>;
+  subscribeToDataset(params: BoundInput<CognitoSync.Types.SubscribeToDatasetRequest, keyof Params>, callback?: (err: AWSError, data: CognitoSync.Types.SubscribeToDatasetResponse) => void): Request<CognitoSync.Types.SubscribeToDatasetResponse, AWSError>;
   /**
    * Subscribes to receive notifications when a dataset is modified by another device. This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.
    */
@@ -134,7 +136,7 @@ declare class CognitoSync extends Service {
   /**
    * Unsubscribes from receiving notifications when a dataset is modified by another device. This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.
    */
-  unsubscribeFromDataset(params: CognitoSync.Types.UnsubscribeFromDatasetRequest, callback?: (err: AWSError, data: CognitoSync.Types.UnsubscribeFromDatasetResponse) => void): Request<CognitoSync.Types.UnsubscribeFromDatasetResponse, AWSError>;
+  unsubscribeFromDataset(params: BoundInput<CognitoSync.Types.UnsubscribeFromDatasetRequest, keyof Params>, callback?: (err: AWSError, data: CognitoSync.Types.UnsubscribeFromDatasetResponse) => void): Request<CognitoSync.Types.UnsubscribeFromDatasetResponse, AWSError>;
   /**
    * Unsubscribes from receiving notifications when a dataset is modified by another device. This API can only be called with temporary credentials provided by Cognito Identity. You cannot call this API with developer credentials.
    */
@@ -142,7 +144,7 @@ declare class CognitoSync extends Service {
   /**
    * Posts updates to records and adds and deletes records for a dataset and user. The sync count in the record patch is your last known sync count for that record. The server will reject an UpdateRecords request with a ResourceConflictException if you try to patch a record with a new value but a stale sync count. For example, if the sync count on the server is 5 for a key called highScore and you try and submit a new highScore with sync count of 4, the request will be rejected. To obtain the current sync count for a record, call ListRecords. On a successful update of the record, the response returns the new sync count for that record. You should present that sync count the next time you try to update that same record. When the record does not exist, specify the sync count as 0. This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.
    */
-  updateRecords(params: CognitoSync.Types.UpdateRecordsRequest, callback?: (err: AWSError, data: CognitoSync.Types.UpdateRecordsResponse) => void): Request<CognitoSync.Types.UpdateRecordsResponse, AWSError>;
+  updateRecords(params: BoundInput<CognitoSync.Types.UpdateRecordsRequest, keyof Params>, callback?: (err: AWSError, data: CognitoSync.Types.UpdateRecordsResponse) => void): Request<CognitoSync.Types.UpdateRecordsResponse, AWSError>;
   /**
    * Posts updates to records and adds and deletes records for a dataset and user. The sync count in the record patch is your last known sync count for that record. The server will reject an UpdateRecords request with a ResourceConflictException if you try to patch a record with a new value but a stale sync count. For example, if the sync count on the server is 5 for a key called highScore and you try and submit a new highScore with sync count of 4, the request will be rejected. To obtain the current sync count for a record, call ListRecords. On a successful update of the record, the response returns the new sync count for that record. You should present that sync count the next time you try to update that same record. When the record does not exist, specify the sync count as 0. This API can be called with temporary user credentials provided by Cognito Identity or with developer credentials.
    */
@@ -738,7 +740,8 @@ declare namespace CognitoSync {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<BulkPublishRequest & DeleteDatasetRequest & DescribeDatasetRequest & DescribeIdentityPoolUsageRequest & DescribeIdentityUsageRequest & GetBulkPublishDetailsRequest & GetCognitoEventsRequest & GetIdentityPoolConfigurationRequest & ListDatasetsRequest & ListIdentityPoolUsageRequest & ListRecordsRequest & RegisterDeviceRequest & SetCognitoEventsRequest & SetIdentityPoolConfigurationRequest & SubscribeToDatasetRequest & UnsubscribeFromDatasetRequest & UpdateRecordsRequest>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the CognitoSync client.
    */

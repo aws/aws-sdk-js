@@ -3,18 +3,20 @@ import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
+import {BoundInput} from '../lib/service';
+import {InputParams} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
-declare class DataPipeline extends Service {
+declare class DataPipeline<Params extends DataPipeline.Types.ClientParams = {}> extends Service {
   /**
    * Constructs a service object. This object has one method for each API operation.
    */
-  constructor(options?: DataPipeline.Types.ClientConfiguration)
-  config: Config & DataPipeline.Types.ClientConfiguration;
+  constructor(options?: DataPipeline.Types.ClientConfiguration<Params>)
+  config: Config & DataPipeline.Types.ClientConfiguration<Params>;
   /**
    * Validates the specified pipeline and starts processing pipeline tasks. If the pipeline does not pass validation, activation fails. If you need to pause the pipeline to investigate an issue with a component, such as a data source or script, call DeactivatePipeline. To activate a finished pipeline, modify the end date for the pipeline and then activate it.
    */
-  activatePipeline(params: DataPipeline.Types.ActivatePipelineInput, callback?: (err: AWSError, data: DataPipeline.Types.ActivatePipelineOutput) => void): Request<DataPipeline.Types.ActivatePipelineOutput, AWSError>;
+  activatePipeline(params: BoundInput<DataPipeline.Types.ActivatePipelineInput, keyof Params>, callback?: (err: AWSError, data: DataPipeline.Types.ActivatePipelineOutput) => void): Request<DataPipeline.Types.ActivatePipelineOutput, AWSError>;
   /**
    * Validates the specified pipeline and starts processing pipeline tasks. If the pipeline does not pass validation, activation fails. If you need to pause the pipeline to investigate an issue with a component, such as a data source or script, call DeactivatePipeline. To activate a finished pipeline, modify the end date for the pipeline and then activate it.
    */
@@ -22,7 +24,7 @@ declare class DataPipeline extends Service {
   /**
    * Adds or modifies tags for the specified pipeline.
    */
-  addTags(params: DataPipeline.Types.AddTagsInput, callback?: (err: AWSError, data: DataPipeline.Types.AddTagsOutput) => void): Request<DataPipeline.Types.AddTagsOutput, AWSError>;
+  addTags(params: BoundInput<DataPipeline.Types.AddTagsInput, keyof Params>, callback?: (err: AWSError, data: DataPipeline.Types.AddTagsOutput) => void): Request<DataPipeline.Types.AddTagsOutput, AWSError>;
   /**
    * Adds or modifies tags for the specified pipeline.
    */
@@ -30,7 +32,7 @@ declare class DataPipeline extends Service {
   /**
    * Creates a new, empty pipeline. Use PutPipelineDefinition to populate the pipeline.
    */
-  createPipeline(params: DataPipeline.Types.CreatePipelineInput, callback?: (err: AWSError, data: DataPipeline.Types.CreatePipelineOutput) => void): Request<DataPipeline.Types.CreatePipelineOutput, AWSError>;
+  createPipeline(params: BoundInput<DataPipeline.Types.CreatePipelineInput, keyof Params>, callback?: (err: AWSError, data: DataPipeline.Types.CreatePipelineOutput) => void): Request<DataPipeline.Types.CreatePipelineOutput, AWSError>;
   /**
    * Creates a new, empty pipeline. Use PutPipelineDefinition to populate the pipeline.
    */
@@ -38,7 +40,7 @@ declare class DataPipeline extends Service {
   /**
    * Deactivates the specified running pipeline. The pipeline is set to the DEACTIVATING state until the deactivation process completes. To resume a deactivated pipeline, use ActivatePipeline. By default, the pipeline resumes from the last completed execution. Optionally, you can specify the date and time to resume the pipeline.
    */
-  deactivatePipeline(params: DataPipeline.Types.DeactivatePipelineInput, callback?: (err: AWSError, data: DataPipeline.Types.DeactivatePipelineOutput) => void): Request<DataPipeline.Types.DeactivatePipelineOutput, AWSError>;
+  deactivatePipeline(params: BoundInput<DataPipeline.Types.DeactivatePipelineInput, keyof Params>, callback?: (err: AWSError, data: DataPipeline.Types.DeactivatePipelineOutput) => void): Request<DataPipeline.Types.DeactivatePipelineOutput, AWSError>;
   /**
    * Deactivates the specified running pipeline. The pipeline is set to the DEACTIVATING state until the deactivation process completes. To resume a deactivated pipeline, use ActivatePipeline. By default, the pipeline resumes from the last completed execution. Optionally, you can specify the date and time to resume the pipeline.
    */
@@ -46,7 +48,7 @@ declare class DataPipeline extends Service {
   /**
    * Deletes a pipeline, its pipeline definition, and its run history. AWS Data Pipeline attempts to cancel instances associated with the pipeline that are currently being processed by task runners. Deleting a pipeline cannot be undone. You cannot query or restore a deleted pipeline. To temporarily pause a pipeline instead of deleting it, call SetStatus with the status set to PAUSE on individual components. Components that are paused by SetStatus can be resumed.
    */
-  deletePipeline(params: DataPipeline.Types.DeletePipelineInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deletePipeline(params: BoundInput<DataPipeline.Types.DeletePipelineInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes a pipeline, its pipeline definition, and its run history. AWS Data Pipeline attempts to cancel instances associated with the pipeline that are currently being processed by task runners. Deleting a pipeline cannot be undone. You cannot query or restore a deleted pipeline. To temporarily pause a pipeline instead of deleting it, call SetStatus with the status set to PAUSE on individual components. Components that are paused by SetStatus can be resumed.
    */
@@ -54,7 +56,7 @@ declare class DataPipeline extends Service {
   /**
    * Gets the object definitions for a set of objects associated with the pipeline. Object definitions are composed of a set of fields that define the properties of the object.
    */
-  describeObjects(params: DataPipeline.Types.DescribeObjectsInput, callback?: (err: AWSError, data: DataPipeline.Types.DescribeObjectsOutput) => void): Request<DataPipeline.Types.DescribeObjectsOutput, AWSError>;
+  describeObjects(params: BoundInput<DataPipeline.Types.DescribeObjectsInput, keyof Params>, callback?: (err: AWSError, data: DataPipeline.Types.DescribeObjectsOutput) => void): Request<DataPipeline.Types.DescribeObjectsOutput, AWSError>;
   /**
    * Gets the object definitions for a set of objects associated with the pipeline. Object definitions are composed of a set of fields that define the properties of the object.
    */
@@ -62,7 +64,7 @@ declare class DataPipeline extends Service {
   /**
    * Retrieves metadata about one or more pipelines. The information retrieved includes the name of the pipeline, the pipeline identifier, its current state, and the user account that owns the pipeline. Using account credentials, you can retrieve metadata about pipelines that you or your IAM users have created. If you are using an IAM user account, you can retrieve metadata about only those pipelines for which you have read permissions. To retrieve the full pipeline definition instead of metadata about the pipeline, call GetPipelineDefinition.
    */
-  describePipelines(params: DataPipeline.Types.DescribePipelinesInput, callback?: (err: AWSError, data: DataPipeline.Types.DescribePipelinesOutput) => void): Request<DataPipeline.Types.DescribePipelinesOutput, AWSError>;
+  describePipelines(params: BoundInput<DataPipeline.Types.DescribePipelinesInput, keyof Params>, callback?: (err: AWSError, data: DataPipeline.Types.DescribePipelinesOutput) => void): Request<DataPipeline.Types.DescribePipelinesOutput, AWSError>;
   /**
    * Retrieves metadata about one or more pipelines. The information retrieved includes the name of the pipeline, the pipeline identifier, its current state, and the user account that owns the pipeline. Using account credentials, you can retrieve metadata about pipelines that you or your IAM users have created. If you are using an IAM user account, you can retrieve metadata about only those pipelines for which you have read permissions. To retrieve the full pipeline definition instead of metadata about the pipeline, call GetPipelineDefinition.
    */
@@ -70,7 +72,7 @@ declare class DataPipeline extends Service {
   /**
    * Task runners call EvaluateExpression to evaluate a string in the context of the specified object. For example, a task runner can evaluate SQL queries stored in Amazon S3.
    */
-  evaluateExpression(params: DataPipeline.Types.EvaluateExpressionInput, callback?: (err: AWSError, data: DataPipeline.Types.EvaluateExpressionOutput) => void): Request<DataPipeline.Types.EvaluateExpressionOutput, AWSError>;
+  evaluateExpression(params: BoundInput<DataPipeline.Types.EvaluateExpressionInput, keyof Params>, callback?: (err: AWSError, data: DataPipeline.Types.EvaluateExpressionOutput) => void): Request<DataPipeline.Types.EvaluateExpressionOutput, AWSError>;
   /**
    * Task runners call EvaluateExpression to evaluate a string in the context of the specified object. For example, a task runner can evaluate SQL queries stored in Amazon S3.
    */
@@ -78,7 +80,7 @@ declare class DataPipeline extends Service {
   /**
    * Gets the definition of the specified pipeline. You can call GetPipelineDefinition to retrieve the pipeline definition that you provided using PutPipelineDefinition.
    */
-  getPipelineDefinition(params: DataPipeline.Types.GetPipelineDefinitionInput, callback?: (err: AWSError, data: DataPipeline.Types.GetPipelineDefinitionOutput) => void): Request<DataPipeline.Types.GetPipelineDefinitionOutput, AWSError>;
+  getPipelineDefinition(params: BoundInput<DataPipeline.Types.GetPipelineDefinitionInput, keyof Params>, callback?: (err: AWSError, data: DataPipeline.Types.GetPipelineDefinitionOutput) => void): Request<DataPipeline.Types.GetPipelineDefinitionOutput, AWSError>;
   /**
    * Gets the definition of the specified pipeline. You can call GetPipelineDefinition to retrieve the pipeline definition that you provided using PutPipelineDefinition.
    */
@@ -86,7 +88,7 @@ declare class DataPipeline extends Service {
   /**
    * Lists the pipeline identifiers for all active pipelines that you have permission to access.
    */
-  listPipelines(params: DataPipeline.Types.ListPipelinesInput, callback?: (err: AWSError, data: DataPipeline.Types.ListPipelinesOutput) => void): Request<DataPipeline.Types.ListPipelinesOutput, AWSError>;
+  listPipelines(params: BoundInput<DataPipeline.Types.ListPipelinesInput, keyof Params>, callback?: (err: AWSError, data: DataPipeline.Types.ListPipelinesOutput) => void): Request<DataPipeline.Types.ListPipelinesOutput, AWSError>;
   /**
    * Lists the pipeline identifiers for all active pipelines that you have permission to access.
    */
@@ -94,7 +96,7 @@ declare class DataPipeline extends Service {
   /**
    * Task runners call PollForTask to receive a task to perform from AWS Data Pipeline. The task runner specifies which tasks it can perform by setting a value for the workerGroup parameter. The task returned can come from any of the pipelines that match the workerGroup value passed in by the task runner and that was launched using the IAM user credentials specified by the task runner. If tasks are ready in the work queue, PollForTask returns a response immediately. If no tasks are available in the queue, PollForTask uses long-polling and holds on to a poll connection for up to a 90 seconds, during which time the first newly scheduled task is handed to the task runner. To accomodate this, set the socket timeout in your task runner to 90 seconds. The task runner should not call PollForTask again on the same workerGroup until it receives a response, and this can take up to 90 seconds. 
    */
-  pollForTask(params: DataPipeline.Types.PollForTaskInput, callback?: (err: AWSError, data: DataPipeline.Types.PollForTaskOutput) => void): Request<DataPipeline.Types.PollForTaskOutput, AWSError>;
+  pollForTask(params: BoundInput<DataPipeline.Types.PollForTaskInput, keyof Params>, callback?: (err: AWSError, data: DataPipeline.Types.PollForTaskOutput) => void): Request<DataPipeline.Types.PollForTaskOutput, AWSError>;
   /**
    * Task runners call PollForTask to receive a task to perform from AWS Data Pipeline. The task runner specifies which tasks it can perform by setting a value for the workerGroup parameter. The task returned can come from any of the pipelines that match the workerGroup value passed in by the task runner and that was launched using the IAM user credentials specified by the task runner. If tasks are ready in the work queue, PollForTask returns a response immediately. If no tasks are available in the queue, PollForTask uses long-polling and holds on to a poll connection for up to a 90 seconds, during which time the first newly scheduled task is handed to the task runner. To accomodate this, set the socket timeout in your task runner to 90 seconds. The task runner should not call PollForTask again on the same workerGroup until it receives a response, and this can take up to 90 seconds. 
    */
@@ -102,7 +104,7 @@ declare class DataPipeline extends Service {
   /**
    * Adds tasks, schedules, and preconditions to the specified pipeline. You can use PutPipelineDefinition to populate a new pipeline.  PutPipelineDefinition also validates the configuration as it adds it to the pipeline. Changes to the pipeline are saved unless one of the following three validation errors exists in the pipeline.   An object is missing a name or identifier field. A string or reference field is empty. The number of objects in the pipeline exceeds the maximum allowed objects. The pipeline is in a FINISHED state.   Pipeline object definitions are passed to the PutPipelineDefinition action and returned by the GetPipelineDefinition action. 
    */
-  putPipelineDefinition(params: DataPipeline.Types.PutPipelineDefinitionInput, callback?: (err: AWSError, data: DataPipeline.Types.PutPipelineDefinitionOutput) => void): Request<DataPipeline.Types.PutPipelineDefinitionOutput, AWSError>;
+  putPipelineDefinition(params: BoundInput<DataPipeline.Types.PutPipelineDefinitionInput, keyof Params>, callback?: (err: AWSError, data: DataPipeline.Types.PutPipelineDefinitionOutput) => void): Request<DataPipeline.Types.PutPipelineDefinitionOutput, AWSError>;
   /**
    * Adds tasks, schedules, and preconditions to the specified pipeline. You can use PutPipelineDefinition to populate a new pipeline.  PutPipelineDefinition also validates the configuration as it adds it to the pipeline. Changes to the pipeline are saved unless one of the following three validation errors exists in the pipeline.   An object is missing a name or identifier field. A string or reference field is empty. The number of objects in the pipeline exceeds the maximum allowed objects. The pipeline is in a FINISHED state.   Pipeline object definitions are passed to the PutPipelineDefinition action and returned by the GetPipelineDefinition action. 
    */
@@ -110,7 +112,7 @@ declare class DataPipeline extends Service {
   /**
    * Queries the specified pipeline for the names of objects that match the specified set of conditions.
    */
-  queryObjects(params: DataPipeline.Types.QueryObjectsInput, callback?: (err: AWSError, data: DataPipeline.Types.QueryObjectsOutput) => void): Request<DataPipeline.Types.QueryObjectsOutput, AWSError>;
+  queryObjects(params: BoundInput<DataPipeline.Types.QueryObjectsInput, keyof Params>, callback?: (err: AWSError, data: DataPipeline.Types.QueryObjectsOutput) => void): Request<DataPipeline.Types.QueryObjectsOutput, AWSError>;
   /**
    * Queries the specified pipeline for the names of objects that match the specified set of conditions.
    */
@@ -118,7 +120,7 @@ declare class DataPipeline extends Service {
   /**
    * Removes existing tags from the specified pipeline.
    */
-  removeTags(params: DataPipeline.Types.RemoveTagsInput, callback?: (err: AWSError, data: DataPipeline.Types.RemoveTagsOutput) => void): Request<DataPipeline.Types.RemoveTagsOutput, AWSError>;
+  removeTags(params: BoundInput<DataPipeline.Types.RemoveTagsInput, keyof Params>, callback?: (err: AWSError, data: DataPipeline.Types.RemoveTagsOutput) => void): Request<DataPipeline.Types.RemoveTagsOutput, AWSError>;
   /**
    * Removes existing tags from the specified pipeline.
    */
@@ -126,7 +128,7 @@ declare class DataPipeline extends Service {
   /**
    * Task runners call ReportTaskProgress when assigned a task to acknowledge that it has the task. If the web service does not receive this acknowledgement within 2 minutes, it assigns the task in a subsequent PollForTask call. After this initial acknowledgement, the task runner only needs to report progress every 15 minutes to maintain its ownership of the task. You can change this reporting time from 15 minutes by specifying a reportProgressTimeout field in your pipeline. If a task runner does not report its status after 5 minutes, AWS Data Pipeline assumes that the task runner is unable to process the task and reassigns the task in a subsequent response to PollForTask. Task runners should call ReportTaskProgress every 60 seconds.
    */
-  reportTaskProgress(params: DataPipeline.Types.ReportTaskProgressInput, callback?: (err: AWSError, data: DataPipeline.Types.ReportTaskProgressOutput) => void): Request<DataPipeline.Types.ReportTaskProgressOutput, AWSError>;
+  reportTaskProgress(params: BoundInput<DataPipeline.Types.ReportTaskProgressInput, keyof Params>, callback?: (err: AWSError, data: DataPipeline.Types.ReportTaskProgressOutput) => void): Request<DataPipeline.Types.ReportTaskProgressOutput, AWSError>;
   /**
    * Task runners call ReportTaskProgress when assigned a task to acknowledge that it has the task. If the web service does not receive this acknowledgement within 2 minutes, it assigns the task in a subsequent PollForTask call. After this initial acknowledgement, the task runner only needs to report progress every 15 minutes to maintain its ownership of the task. You can change this reporting time from 15 minutes by specifying a reportProgressTimeout field in your pipeline. If a task runner does not report its status after 5 minutes, AWS Data Pipeline assumes that the task runner is unable to process the task and reassigns the task in a subsequent response to PollForTask. Task runners should call ReportTaskProgress every 60 seconds.
    */
@@ -134,7 +136,7 @@ declare class DataPipeline extends Service {
   /**
    * Task runners call ReportTaskRunnerHeartbeat every 15 minutes to indicate that they are operational. If the AWS Data Pipeline Task Runner is launched on a resource managed by AWS Data Pipeline, the web service can use this call to detect when the task runner application has failed and restart a new instance.
    */
-  reportTaskRunnerHeartbeat(params: DataPipeline.Types.ReportTaskRunnerHeartbeatInput, callback?: (err: AWSError, data: DataPipeline.Types.ReportTaskRunnerHeartbeatOutput) => void): Request<DataPipeline.Types.ReportTaskRunnerHeartbeatOutput, AWSError>;
+  reportTaskRunnerHeartbeat(params: BoundInput<DataPipeline.Types.ReportTaskRunnerHeartbeatInput, keyof Params>, callback?: (err: AWSError, data: DataPipeline.Types.ReportTaskRunnerHeartbeatOutput) => void): Request<DataPipeline.Types.ReportTaskRunnerHeartbeatOutput, AWSError>;
   /**
    * Task runners call ReportTaskRunnerHeartbeat every 15 minutes to indicate that they are operational. If the AWS Data Pipeline Task Runner is launched on a resource managed by AWS Data Pipeline, the web service can use this call to detect when the task runner application has failed and restart a new instance.
    */
@@ -142,7 +144,7 @@ declare class DataPipeline extends Service {
   /**
    * Requests that the status of the specified physical or logical pipeline objects be updated in the specified pipeline. This update might not occur immediately, but is eventually consistent. The status that can be set depends on the type of object (for example, DataNode or Activity). You cannot perform this operation on FINISHED pipelines and attempting to do so returns InvalidRequestException.
    */
-  setStatus(params: DataPipeline.Types.SetStatusInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  setStatus(params: BoundInput<DataPipeline.Types.SetStatusInput, keyof Params>, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Requests that the status of the specified physical or logical pipeline objects be updated in the specified pipeline. This update might not occur immediately, but is eventually consistent. The status that can be set depends on the type of object (for example, DataNode or Activity). You cannot perform this operation on FINISHED pipelines and attempting to do so returns InvalidRequestException.
    */
@@ -150,7 +152,7 @@ declare class DataPipeline extends Service {
   /**
    * Task runners call SetTaskStatus to notify AWS Data Pipeline that a task is completed and provide information about the final status. A task runner makes this call regardless of whether the task was sucessful. A task runner does not need to call SetTaskStatus for tasks that are canceled by the web service during a call to ReportTaskProgress.
    */
-  setTaskStatus(params: DataPipeline.Types.SetTaskStatusInput, callback?: (err: AWSError, data: DataPipeline.Types.SetTaskStatusOutput) => void): Request<DataPipeline.Types.SetTaskStatusOutput, AWSError>;
+  setTaskStatus(params: BoundInput<DataPipeline.Types.SetTaskStatusInput, keyof Params>, callback?: (err: AWSError, data: DataPipeline.Types.SetTaskStatusOutput) => void): Request<DataPipeline.Types.SetTaskStatusOutput, AWSError>;
   /**
    * Task runners call SetTaskStatus to notify AWS Data Pipeline that a task is completed and provide information about the final status. A task runner makes this call regardless of whether the task was sucessful. A task runner does not need to call SetTaskStatus for tasks that are canceled by the web service during a call to ReportTaskProgress.
    */
@@ -158,7 +160,7 @@ declare class DataPipeline extends Service {
   /**
    * Validates the specified pipeline definition to ensure that it is well formed and can be run without error.
    */
-  validatePipelineDefinition(params: DataPipeline.Types.ValidatePipelineDefinitionInput, callback?: (err: AWSError, data: DataPipeline.Types.ValidatePipelineDefinitionOutput) => void): Request<DataPipeline.Types.ValidatePipelineDefinitionOutput, AWSError>;
+  validatePipelineDefinition(params: BoundInput<DataPipeline.Types.ValidatePipelineDefinitionInput, keyof Params>, callback?: (err: AWSError, data: DataPipeline.Types.ValidatePipelineDefinitionOutput) => void): Request<DataPipeline.Types.ValidatePipelineDefinitionOutput, AWSError>;
   /**
    * Validates the specified pipeline definition to ensure that it is well formed and can be run without error.
    */
@@ -761,7 +763,8 @@ declare namespace DataPipeline {
      */
     apiVersion?: apiVersion;
   }
-  export type ClientConfiguration = ServiceConfigurationOptions & ClientApiVersions;
+  export type ClientParams = InputParams<ActivatePipelineInput & AddTagsInput & CreatePipelineInput & DeactivatePipelineInput & DeletePipelineInput & DescribeObjectsInput & DescribePipelinesInput & EvaluateExpressionInput & GetPipelineDefinitionInput & ListPipelinesInput & PollForTaskInput & PutPipelineDefinitionInput & QueryObjectsInput & RemoveTagsInput & ReportTaskProgressInput & ReportTaskRunnerHeartbeatInput & SetStatusInput & SetTaskStatusInput & ValidatePipelineDefinitionInput>;
+  export type ClientConfiguration<Params extends ClientParams = {}> = ServiceConfigurationOptions<Params> & ClientApiVersions;
   /**
    * Contains interfaces for use with the DataPipeline client.
    */
