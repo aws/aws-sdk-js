@@ -1,10 +1,13 @@
 import DynamoDB = require('../clients/dynamodb');
 
-const client: DynamoDB.DocumentClient = new DynamoDB.DocumentClient({
+const client = new DynamoDB.DocumentClient({
     region: 'us-west-2',
     apiVersion: '2012-08-10',
     signatureVersion: 'v4',
     dynamoDbCrc32: false,
+    params: {
+        TableName: 'MyTable'
+    }
 });
 
 const params: DynamoDB.DocumentClient.GetItemInput = {
@@ -48,7 +51,7 @@ const record: DynamoDB.AttributeMap = DynamoDB.Converter.marshall(
     options
 );
 
-const jsType: any = DynamoDB.Converter.output('string');
+const jsType = DynamoDB.Converter.output('string' as any);
 const jsObject: {[key: string]: any} = DynamoDB.Converter.unmarshall({
     string: {S: 'foo'},
     list: {L: [{S: 'fizz'}, {S: 'buzz'}, {S: 'pop'}]},
@@ -72,8 +75,17 @@ client.get(params, (err, data) => {
 
 });
 
-const dynamodb = new DynamoDB(<DynamoDB.ClientConfiguration>{
-    apiVersion: "2012-08-10"
+client.get({
+    Key: {'my-key': 'value'}
+}, (err, data) => {
+
+});
+
+const dynamodb = new DynamoDB({
+    apiVersion: "2012-08-10",
+    params: {
+        TableName: 'MyTable'
+    }
 });
 
 const getParams: DynamoDB.GetItemInput = {
