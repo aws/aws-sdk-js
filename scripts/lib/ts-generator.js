@@ -371,12 +371,13 @@ TSGenerator.prototype.generateTypingsFromOperations = function generateTypingsFr
     var inputShape = input ? className + '.Types.' + input.shape : '{}';
     var outputShape = output ? className + '.Types.' + output.shape : '{}';
 
+    code += this.generateDocString(operation.documentation, tabCount);
+    code += tabs(tabCount) + operationName + '(callback?: (err: AWSError, data: ' + outputShape + ') => void): Request<' + outputShape + ', AWSError>;\n';
+
     if (input) {
         code += this.generateDocString(operation.documentation, tabCount);
         code += tabs(tabCount) + operationName + '(params: ' + inputShape + ', callback?: (err: AWSError, data: ' + outputShape + ') => void): Request<' + outputShape + ', AWSError>;\n';
     }
-    code += this.generateDocString(operation.documentation, tabCount);
-    code += tabs(tabCount) + operationName + '(callback?: (err: AWSError, data: ' + outputShape + ') => void): Request<' + outputShape + ', AWSError>;\n';
 
     return code;
 };
