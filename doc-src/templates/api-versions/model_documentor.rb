@@ -1,6 +1,12 @@
 require 'ostruct'
 
 module Documentor
+  def service_overview(rules)
+    docs = documentation(rules)
+    docs = docs ? docs.gsub(/<fullname>.+?<\/fullname>/, '') : docs
+    docs
+  end
+
   def documentation(rules)
     docs = rules['documentation'] || ''
     docs = docs.gsub(/<!--.*?-->/m, '')
@@ -37,12 +43,25 @@ class ModelDocumentor
 
   def initialize(klass, api)
     api_version = api['metadata']['apiVersion']
+    service_desc = service_overview(api)
     @lines = []
     @lines << ''
     @lines << <<-DOCS.strip
 Constructs a service interface object. Each API operation is exposed as a
 function on service.
+DOCS
 
+    if service_desc
+      @lines << <<-DOCS.strip
+
+### Service Description
+      
+#{service_desc}
+
+DOCS
+    end
+
+    @lines << <<-DOCS.strip
 ### Sending a Request Using #{klass}
 
 ```javascript
