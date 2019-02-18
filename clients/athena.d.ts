@@ -12,93 +12,133 @@ declare class Athena extends Service {
   constructor(options?: Athena.Types.ClientConfiguration)
   config: Config & Athena.Types.ClientConfiguration;
   /**
-   * Returns the details of a single named query or a list of up to 50 queries, which you provide as an array of query ID strings. Use ListNamedQueries to get the list of named query IDs. If information could not be retrieved for a submitted query ID, information about the query ID submitted is listed under UnprocessedNamedQueryId. Named queries are different from executed queries. Use BatchGetQueryExecution to get details about each unique query execution, and ListQueryExecutions to get a list of query execution IDs.
+   * Returns the details of a single named query or a list of up to 50 queries, which you provide as an array of query ID strings. Requires you to have access to the workgroup in which the queries were saved. Use ListNamedQueriesInput to get the list of named query IDs in the specified workgroup. If information could not be retrieved for a submitted query ID, information about the query ID submitted is listed under UnprocessedNamedQueryId. Named queries differ from executed queries. Use BatchGetQueryExecutionInput to get details about each unique query execution, and ListQueryExecutionsInput to get a list of query execution IDs.
    */
   batchGetNamedQuery(params: Athena.Types.BatchGetNamedQueryInput, callback?: (err: AWSError, data: Athena.Types.BatchGetNamedQueryOutput) => void): Request<Athena.Types.BatchGetNamedQueryOutput, AWSError>;
   /**
-   * Returns the details of a single named query or a list of up to 50 queries, which you provide as an array of query ID strings. Use ListNamedQueries to get the list of named query IDs. If information could not be retrieved for a submitted query ID, information about the query ID submitted is listed under UnprocessedNamedQueryId. Named queries are different from executed queries. Use BatchGetQueryExecution to get details about each unique query execution, and ListQueryExecutions to get a list of query execution IDs.
+   * Returns the details of a single named query or a list of up to 50 queries, which you provide as an array of query ID strings. Requires you to have access to the workgroup in which the queries were saved. Use ListNamedQueriesInput to get the list of named query IDs in the specified workgroup. If information could not be retrieved for a submitted query ID, information about the query ID submitted is listed under UnprocessedNamedQueryId. Named queries differ from executed queries. Use BatchGetQueryExecutionInput to get details about each unique query execution, and ListQueryExecutionsInput to get a list of query execution IDs.
    */
   batchGetNamedQuery(callback?: (err: AWSError, data: Athena.Types.BatchGetNamedQueryOutput) => void): Request<Athena.Types.BatchGetNamedQueryOutput, AWSError>;
   /**
-   * Returns the details of a single query execution or a list of up to 50 query executions, which you provide as an array of query execution ID strings. To get a list of query execution IDs, use ListQueryExecutions. Query executions are different from named (saved) queries. Use BatchGetNamedQuery to get details about named queries.
+   * Returns the details of a single query execution or a list of up to 50 query executions, which you provide as an array of query execution ID strings. Requires you to have access to the workgroup in which the queries ran. To get a list of query execution IDs, use ListQueryExecutionsInput$WorkGroup. Query executions differ from named (saved) queries. Use BatchGetNamedQueryInput to get details about named queries.
    */
   batchGetQueryExecution(params: Athena.Types.BatchGetQueryExecutionInput, callback?: (err: AWSError, data: Athena.Types.BatchGetQueryExecutionOutput) => void): Request<Athena.Types.BatchGetQueryExecutionOutput, AWSError>;
   /**
-   * Returns the details of a single query execution or a list of up to 50 query executions, which you provide as an array of query execution ID strings. To get a list of query execution IDs, use ListQueryExecutions. Query executions are different from named (saved) queries. Use BatchGetNamedQuery to get details about named queries.
+   * Returns the details of a single query execution or a list of up to 50 query executions, which you provide as an array of query execution ID strings. Requires you to have access to the workgroup in which the queries ran. To get a list of query execution IDs, use ListQueryExecutionsInput$WorkGroup. Query executions differ from named (saved) queries. Use BatchGetNamedQueryInput to get details about named queries.
    */
   batchGetQueryExecution(callback?: (err: AWSError, data: Athena.Types.BatchGetQueryExecutionOutput) => void): Request<Athena.Types.BatchGetQueryExecutionOutput, AWSError>;
   /**
-   * Creates a named query. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Creates a named query in the specified workgroup. Requires that you have access to the workgroup. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   createNamedQuery(params: Athena.Types.CreateNamedQueryInput, callback?: (err: AWSError, data: Athena.Types.CreateNamedQueryOutput) => void): Request<Athena.Types.CreateNamedQueryOutput, AWSError>;
   /**
-   * Creates a named query. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Creates a named query in the specified workgroup. Requires that you have access to the workgroup. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   createNamedQuery(callback?: (err: AWSError, data: Athena.Types.CreateNamedQueryOutput) => void): Request<Athena.Types.CreateNamedQueryOutput, AWSError>;
   /**
-   * Deletes a named query. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Creates a workgroup with the specified name.
+   */
+  createWorkGroup(params: Athena.Types.CreateWorkGroupInput, callback?: (err: AWSError, data: Athena.Types.CreateWorkGroupOutput) => void): Request<Athena.Types.CreateWorkGroupOutput, AWSError>;
+  /**
+   * Creates a workgroup with the specified name.
+   */
+  createWorkGroup(callback?: (err: AWSError, data: Athena.Types.CreateWorkGroupOutput) => void): Request<Athena.Types.CreateWorkGroupOutput, AWSError>;
+  /**
+   * Deletes the named query if you have access to the workgroup in which the query was saved. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   deleteNamedQuery(params: Athena.Types.DeleteNamedQueryInput, callback?: (err: AWSError, data: Athena.Types.DeleteNamedQueryOutput) => void): Request<Athena.Types.DeleteNamedQueryOutput, AWSError>;
   /**
-   * Deletes a named query. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Deletes the named query if you have access to the workgroup in which the query was saved. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   deleteNamedQuery(callback?: (err: AWSError, data: Athena.Types.DeleteNamedQueryOutput) => void): Request<Athena.Types.DeleteNamedQueryOutput, AWSError>;
   /**
-   * Returns information about a single query.
+   * Deletes the workgroup with the specified name. The primary workgroup cannot be deleted.
+   */
+  deleteWorkGroup(params: Athena.Types.DeleteWorkGroupInput, callback?: (err: AWSError, data: Athena.Types.DeleteWorkGroupOutput) => void): Request<Athena.Types.DeleteWorkGroupOutput, AWSError>;
+  /**
+   * Deletes the workgroup with the specified name. The primary workgroup cannot be deleted.
+   */
+  deleteWorkGroup(callback?: (err: AWSError, data: Athena.Types.DeleteWorkGroupOutput) => void): Request<Athena.Types.DeleteWorkGroupOutput, AWSError>;
+  /**
+   * Returns information about a single query. Requires that you have access to the workgroup in which the query was saved.
    */
   getNamedQuery(params: Athena.Types.GetNamedQueryInput, callback?: (err: AWSError, data: Athena.Types.GetNamedQueryOutput) => void): Request<Athena.Types.GetNamedQueryOutput, AWSError>;
   /**
-   * Returns information about a single query.
+   * Returns information about a single query. Requires that you have access to the workgroup in which the query was saved.
    */
   getNamedQuery(callback?: (err: AWSError, data: Athena.Types.GetNamedQueryOutput) => void): Request<Athena.Types.GetNamedQueryOutput, AWSError>;
   /**
-   * Returns information about a single execution of a query. Each time a query executes, information about the query execution is saved with a unique ID.
+   * Returns information about a single execution of a query if you have access to the workgroup in which the query ran. Each time a query executes, information about the query execution is saved with a unique ID.
    */
   getQueryExecution(params: Athena.Types.GetQueryExecutionInput, callback?: (err: AWSError, data: Athena.Types.GetQueryExecutionOutput) => void): Request<Athena.Types.GetQueryExecutionOutput, AWSError>;
   /**
-   * Returns information about a single execution of a query. Each time a query executes, information about the query execution is saved with a unique ID.
+   * Returns information about a single execution of a query if you have access to the workgroup in which the query ran. Each time a query executes, information about the query execution is saved with a unique ID.
    */
   getQueryExecution(callback?: (err: AWSError, data: Athena.Types.GetQueryExecutionOutput) => void): Request<Athena.Types.GetQueryExecutionOutput, AWSError>;
   /**
-   * Returns the results of a single query execution specified by QueryExecutionId. This request does not execute the query but returns results. Use StartQueryExecution to run a query.
+   * Returns the results of a single query execution specified by QueryExecutionId if you have access to the workgroup in which the query ran. This request does not execute the query but returns results. Use StartQueryExecution to run a query.
    */
   getQueryResults(params: Athena.Types.GetQueryResultsInput, callback?: (err: AWSError, data: Athena.Types.GetQueryResultsOutput) => void): Request<Athena.Types.GetQueryResultsOutput, AWSError>;
   /**
-   * Returns the results of a single query execution specified by QueryExecutionId. This request does not execute the query but returns results. Use StartQueryExecution to run a query.
+   * Returns the results of a single query execution specified by QueryExecutionId if you have access to the workgroup in which the query ran. This request does not execute the query but returns results. Use StartQueryExecution to run a query.
    */
   getQueryResults(callback?: (err: AWSError, data: Athena.Types.GetQueryResultsOutput) => void): Request<Athena.Types.GetQueryResultsOutput, AWSError>;
   /**
-   * Provides a list of all available query IDs. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Returns information about the workgroup with the speficied name.
+   */
+  getWorkGroup(params: Athena.Types.GetWorkGroupInput, callback?: (err: AWSError, data: Athena.Types.GetWorkGroupOutput) => void): Request<Athena.Types.GetWorkGroupOutput, AWSError>;
+  /**
+   * Returns information about the workgroup with the speficied name.
+   */
+  getWorkGroup(callback?: (err: AWSError, data: Athena.Types.GetWorkGroupOutput) => void): Request<Athena.Types.GetWorkGroupOutput, AWSError>;
+  /**
+   * Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the workgroup. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   listNamedQueries(params: Athena.Types.ListNamedQueriesInput, callback?: (err: AWSError, data: Athena.Types.ListNamedQueriesOutput) => void): Request<Athena.Types.ListNamedQueriesOutput, AWSError>;
   /**
-   * Provides a list of all available query IDs. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the workgroup. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   listNamedQueries(callback?: (err: AWSError, data: Athena.Types.ListNamedQueriesOutput) => void): Request<Athena.Types.ListNamedQueriesOutput, AWSError>;
   /**
-   * Provides a list of all available query execution IDs. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Provides a list of available query execution IDs for the queries in the specified workgroup. Requires you to have access to the workgroup in which the queries ran. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   listQueryExecutions(params: Athena.Types.ListQueryExecutionsInput, callback?: (err: AWSError, data: Athena.Types.ListQueryExecutionsOutput) => void): Request<Athena.Types.ListQueryExecutionsOutput, AWSError>;
   /**
-   * Provides a list of all available query execution IDs. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Provides a list of available query execution IDs for the queries in the specified workgroup. Requires you to have access to the workgroup in which the queries ran. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   listQueryExecutions(callback?: (err: AWSError, data: Athena.Types.ListQueryExecutionsOutput) => void): Request<Athena.Types.ListQueryExecutionsOutput, AWSError>;
   /**
-   * Runs (executes) the SQL query statements contained in the Query string. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Lists available workgroups for the account.
+   */
+  listWorkGroups(params: Athena.Types.ListWorkGroupsInput, callback?: (err: AWSError, data: Athena.Types.ListWorkGroupsOutput) => void): Request<Athena.Types.ListWorkGroupsOutput, AWSError>;
+  /**
+   * Lists available workgroups for the account.
+   */
+  listWorkGroups(callback?: (err: AWSError, data: Athena.Types.ListWorkGroupsOutput) => void): Request<Athena.Types.ListWorkGroupsOutput, AWSError>;
+  /**
+   * Runs the SQL query statements contained in the Query. Requires you to have access to the workgroup in which the query ran. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   startQueryExecution(params: Athena.Types.StartQueryExecutionInput, callback?: (err: AWSError, data: Athena.Types.StartQueryExecutionOutput) => void): Request<Athena.Types.StartQueryExecutionOutput, AWSError>;
   /**
-   * Runs (executes) the SQL query statements contained in the Query string. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Runs the SQL query statements contained in the Query. Requires you to have access to the workgroup in which the query ran. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   startQueryExecution(callback?: (err: AWSError, data: Athena.Types.StartQueryExecutionOutput) => void): Request<Athena.Types.StartQueryExecutionOutput, AWSError>;
   /**
-   * Stops a query execution. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Stops a query execution. Requires you to have access to the workgroup in which the query ran. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   stopQueryExecution(params: Athena.Types.StopQueryExecutionInput, callback?: (err: AWSError, data: Athena.Types.StopQueryExecutionOutput) => void): Request<Athena.Types.StopQueryExecutionOutput, AWSError>;
   /**
-   * Stops a query execution. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
+   * Stops a query execution. Requires you to have access to the workgroup in which the query ran. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   stopQueryExecution(callback?: (err: AWSError, data: Athena.Types.StopQueryExecutionOutput) => void): Request<Athena.Types.StopQueryExecutionOutput, AWSError>;
+  /**
+   * Updates the workgroup with the specified name. The workgroup's name cannot be changed.
+   */
+  updateWorkGroup(params: Athena.Types.UpdateWorkGroupInput, callback?: (err: AWSError, data: Athena.Types.UpdateWorkGroupOutput) => void): Request<Athena.Types.UpdateWorkGroupOutput, AWSError>;
+  /**
+   * Updates the workgroup with the specified name. The workgroup's name cannot be changed.
+   */
+  updateWorkGroup(callback?: (err: AWSError, data: Athena.Types.UpdateWorkGroupOutput) => void): Request<Athena.Types.UpdateWorkGroupOutput, AWSError>;
 }
 declare namespace Athena {
   export interface BatchGetNamedQueryInput {
@@ -134,6 +174,8 @@ declare namespace Athena {
     UnprocessedQueryExecutionIds?: UnprocessedQueryExecutionIdList;
   }
   export type Boolean = boolean;
+  export type BoxedBoolean = boolean;
+  export type BytesScannedCutoffValue = number;
   export interface ColumnInfo {
     /**
      * The catalog to which the query results belong.
@@ -180,11 +222,11 @@ declare namespace Athena {
   export type ColumnNullable = "NOT_NULL"|"NULLABLE"|"UNKNOWN"|string;
   export interface CreateNamedQueryInput {
     /**
-     * The plain language name for the query.
+     * The query name.
      */
     Name: NameString;
     /**
-     * A brief explanation of the query.
+     * The query description.
      */
     Description?: DescriptionString;
     /**
@@ -192,19 +234,39 @@ declare namespace Athena {
      */
     Database: DatabaseString;
     /**
-     * The text of the query itself. In other words, all query statements.
+     * The contents of the query with all query statements.
      */
     QueryString: QueryString;
     /**
      * A unique case-sensitive string used to ensure the request to create the query is idempotent (executes only once). If another CreateNamedQuery request is received, the same response is returned and another query is not created. If a parameter has changed, for example, the QueryString, an error is returned.  This token is listed as not required because AWS SDKs (for example the AWS SDK for Java) auto-generate the token for users. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the action will fail. 
      */
     ClientRequestToken?: IdempotencyToken;
+    /**
+     * The name of the workgroup in which the named query is being created.
+     */
+    WorkGroup?: WorkGroupName;
   }
   export interface CreateNamedQueryOutput {
     /**
      * The unique ID of the query.
      */
     NamedQueryId?: NamedQueryId;
+  }
+  export interface CreateWorkGroupInput {
+    /**
+     * The workgroup name.
+     */
+    Name: WorkGroupName;
+    /**
+     * The configuration for the workgroup, which includes the location in Amazon S3 where query results are stored, the encryption configuration, if any, used for encrypting query results, whether the Amazon CloudWatch Metrics are enabled for the workgroup, the limit for the amount of bytes scanned (cutoff) per query, if it is specified, and whether workgroup's settings (specified with EnforceWorkGroupConfiguration) in the WorkGroupConfiguration override client-side settings. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
+     */
+    Configuration?: WorkGroupConfiguration;
+    /**
+     * The workgroup description.
+     */
+    Description?: WorkGroupDescriptionString;
+  }
+  export interface CreateWorkGroupOutput {
   }
   export type DatabaseString = string;
   export type _Date = Date;
@@ -222,10 +284,22 @@ declare namespace Athena {
   }
   export interface DeleteNamedQueryOutput {
   }
+  export interface DeleteWorkGroupInput {
+    /**
+     * The unique name of the workgroup to delete.
+     */
+    WorkGroup: WorkGroupName;
+    /**
+     * The option to delete the workgroup and its contents even if the workgroup contains any named queries.
+     */
+    RecursiveDeleteOption?: BoxedBoolean;
+  }
+  export interface DeleteWorkGroupOutput {
+  }
   export type DescriptionString = string;
   export interface EncryptionConfiguration {
     /**
-     * Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.
+     * Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used. If a query runs in a workgroup and the workgroup overrides client-side settings, then the workgroup's setting for encryption is used. It specifies whether query results must be encrypted, for all queries that run in this workgroup. 
      */
     EncryptionOption: EncryptionOption;
     /**
@@ -288,6 +362,18 @@ declare namespace Athena {
      */
     NextToken?: Token;
   }
+  export interface GetWorkGroupInput {
+    /**
+     * The name of the workgroup.
+     */
+    WorkGroup: WorkGroupName;
+  }
+  export interface GetWorkGroupOutput {
+    /**
+     * Information about the workgroup.
+     */
+    WorkGroup?: WorkGroup;
+  }
   export type IdempotencyToken = string;
   export type Integer = number;
   export interface ListNamedQueriesInput {
@@ -299,6 +385,10 @@ declare namespace Athena {
      * The maximum number of queries to return in this request.
      */
     MaxResults?: MaxNamedQueriesCount;
+    /**
+     * The name of the workgroup from which the named queries are being returned.
+     */
+    WorkGroup?: WorkGroupName;
   }
   export interface ListNamedQueriesOutput {
     /**
@@ -319,6 +409,10 @@ declare namespace Athena {
      * The maximum number of query executions to return in this request.
      */
     MaxResults?: MaxQueryExecutionsCount;
+    /**
+     * The name of the workgroup from which queries are being returned.
+     */
+    WorkGroup?: WorkGroupName;
   }
   export interface ListQueryExecutionsOutput {
     /**
@@ -330,18 +424,39 @@ declare namespace Athena {
      */
     NextToken?: Token;
   }
+  export interface ListWorkGroupsInput {
+    /**
+     * A token to be used by the next request if this request is truncated.
+     */
+    NextToken?: Token;
+    /**
+     * The maximum number of workgroups to return in this request.
+     */
+    MaxResults?: MaxWorkGroupsCount;
+  }
+  export interface ListWorkGroupsOutput {
+    /**
+     * The list of workgroups, including their names, descriptions, creation times, and states.
+     */
+    WorkGroups?: WorkGroupsList;
+    /**
+     * A token to be used by the next request if this request is truncated.
+     */
+    NextToken?: Token;
+  }
   export type Long = number;
   export type MaxNamedQueriesCount = number;
   export type MaxQueryExecutionsCount = number;
   export type MaxQueryResults = number;
+  export type MaxWorkGroupsCount = number;
   export type NameString = string;
   export interface NamedQuery {
     /**
-     * The plain-language name of the query.
+     * The query name.
      */
     Name: NameString;
     /**
-     * A brief description of the query.
+     * The query description.
      */
     Description?: DescriptionString;
     /**
@@ -356,6 +471,10 @@ declare namespace Athena {
      * The unique identifier of the query.
      */
     NamedQueryId?: NamedQueryId;
+    /**
+     * The name of the workgroup that contains the named query.
+     */
+    WorkGroup?: WorkGroupName;
   }
   export type NamedQueryId = string;
   export type NamedQueryIdList = NamedQueryId[];
@@ -374,7 +493,7 @@ declare namespace Athena {
      */
     StatementType?: StatementType;
     /**
-     * The location in Amazon S3 where query results were stored and the encryption option, if any, used for query results.
+     * The location in Amazon S3 where query results were stored and the encryption option, if any, used for query results. These are known as "client-side settings". If workgroup settings override client-side settings, then the query uses the location for the query results and the encryption configuration that are specified for the workgroup.
      */
     ResultConfiguration?: ResultConfiguration;
     /**
@@ -389,6 +508,10 @@ declare namespace Athena {
      * The amount of data scanned during the query execution and the amount of time that it took to execute, and the type of statement that was run.
      */
     Statistics?: QueryExecutionStatistics;
+    /**
+     * The name of the workgroup in which the query ran.
+     */
+    WorkGroup?: WorkGroupName;
   }
   export interface QueryExecutionContext {
     /**
@@ -412,7 +535,7 @@ declare namespace Athena {
   }
   export interface QueryExecutionStatus {
     /**
-     * The state of query execution. QUEUED state is listed but is not used by Athena and is reserved for future use. RUNNING indicates that the query has been submitted to the service, and Athena will execute the query as soon as resources are available. SUCCEEDED indicates that the query completed without error. FAILED indicates that the query experienced an error and did not complete processing.CANCELLED indicates that user input interrupted query execution. 
+     * The state of query execution. QUEUED state is listed but is not used by Athena and is reserved for future use. RUNNING indicates that the query has been submitted to the service, and Athena will execute the query as soon as resources are available. SUCCEEDED indicates that the query completed without errors. FAILED indicates that the query experienced an error and did not complete processing. CANCELLED indicates that a user input interrupted query execution. 
      */
     State?: QueryExecutionState;
     /**
@@ -431,13 +554,31 @@ declare namespace Athena {
   export type QueryString = string;
   export interface ResultConfiguration {
     /**
-     * The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. For more information, see Queries and Query Result Files.  
+     * The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. For more information, see Queries and Query Result Files. If workgroup settings override client-side settings, then the query uses the location for the query results and the encryption configuration that are specified for the workgroup. The "workgroup settings override" is specified in EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
      */
-    OutputLocation: String;
+    OutputLocation?: String;
     /**
-     * If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information.
+     * If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information. This is a client-side setting. If workgroup settings override client-side settings, then the query uses the encryption configuration that is specified for the workgroup, and also uses the location for storing query results specified in the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings Override Client-Side Settings.
      */
     EncryptionConfiguration?: EncryptionConfiguration;
+  }
+  export interface ResultConfigurationUpdates {
+    /**
+     * The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. For more information, see Queries and Query Result Files. If workgroup settings override client-side settings, then the query uses the location for the query results and the encryption configuration that are specified for the workgroup. The "workgroup settings override" is specified in EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
+     */
+    OutputLocation?: String;
+    /**
+     * If set to "true", indicates that the previously-specified query results location (also known as a client-side setting) for queries in this workgroup should be ignored and set to null. If set to "false" or not set, and a value is present in the OutputLocation in ResultConfigurationUpdates (the client-side setting), the OutputLocation in the workgroup's ResultConfiguration will be updated with the new value. For more information, see Workgroup Settings Override Client-Side Settings.
+     */
+    RemoveOutputLocation?: BoxedBoolean;
+    /**
+     * The encryption configuration for the query results.
+     */
+    EncryptionConfiguration?: EncryptionConfiguration;
+    /**
+     * If set to "true", indicates that the previously-specified encryption configuration (also known as the client-side setting) for queries in this workgroup should be ignored and set to null. If set to "false" or not set, and a value is present in the EncryptionConfiguration in ResultConfigurationUpdates (the client-side setting), the EncryptionConfiguration in the workgroup's ResultConfiguration will be updated with the new value. For more information, see Workgroup Settings Override Client-Side Settings.
+     */
+    RemoveEncryptionConfiguration?: BoxedBoolean;
   }
   export interface ResultSet {
     /**
@@ -476,9 +617,13 @@ declare namespace Athena {
      */
     QueryExecutionContext?: QueryExecutionContext;
     /**
-     * Specifies information about where and how to save the results of the query execution.
+     * Specifies information about where and how to save the results of the query execution. If the query runs in a workgroup, then workgroup's settings may override query settings. This affects the query results location. The workgroup settings override is specified in EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
      */
-    ResultConfiguration: ResultConfiguration;
+    ResultConfiguration?: ResultConfiguration;
+    /**
+     * The name of the workgroup in which the query is being started.
+     */
+    WorkGroup?: WorkGroupName;
   }
   export interface StartQueryExecutionOutput {
     /**
@@ -527,6 +672,110 @@ declare namespace Athena {
     ErrorMessage?: ErrorMessage;
   }
   export type UnprocessedQueryExecutionIdList = UnprocessedQueryExecutionId[];
+  export interface UpdateWorkGroupInput {
+    /**
+     * The specified workgroup that will be updated.
+     */
+    WorkGroup: WorkGroupName;
+    /**
+     * The workgroup description.
+     */
+    Description?: WorkGroupDescriptionString;
+    /**
+     * The workgroup configuration that will be updated for the given workgroup.
+     */
+    ConfigurationUpdates?: WorkGroupConfigurationUpdates;
+    /**
+     * The workgroup state that will be updated for the given workgroup.
+     */
+    State?: WorkGroupState;
+  }
+  export interface UpdateWorkGroupOutput {
+  }
+  export interface WorkGroup {
+    /**
+     * The workgroup name.
+     */
+    Name: WorkGroupName;
+    /**
+     * The state of the workgroup: ENABLED or DISABLED.
+     */
+    State?: WorkGroupState;
+    /**
+     * The configuration of the workgroup, which includes the location in Amazon S3 where query results are stored, the encryption configuration, if any, used for query results; whether the Amazon CloudWatch Metrics are enabled for the workgroup; whether workgroup settings override client-side settings; and the data usage limit for the amount of data scanned per query, if it is specified. The workgroup settings override is specified in EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
+     */
+    Configuration?: WorkGroupConfiguration;
+    /**
+     * The workgroup description.
+     */
+    Description?: WorkGroupDescriptionString;
+    /**
+     * The date and time the workgroup was created.
+     */
+    CreationTime?: _Date;
+  }
+  export interface WorkGroupConfiguration {
+    /**
+     * The configuration for the workgroup, which includes the location in Amazon S3 where query results are stored and the encryption option, if any, used for query results.
+     */
+    ResultConfiguration?: ResultConfiguration;
+    /**
+     * If set to "true", the settings for the workgroup override client-side settings. If set to "false", client-side settings are used. For more information, see Workgroup Settings Override Client-Side Settings.
+     */
+    EnforceWorkGroupConfiguration?: BoxedBoolean;
+    /**
+     * Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.
+     */
+    PublishCloudWatchMetricsEnabled?: BoxedBoolean;
+    /**
+     * The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.
+     */
+    BytesScannedCutoffPerQuery?: BytesScannedCutoffValue;
+  }
+  export interface WorkGroupConfigurationUpdates {
+    /**
+     * If set to "true", the settings for the workgroup override client-side settings. If set to "false" client-side settings are used. For more information, see Workgroup Settings Override Client-Side Settings.
+     */
+    EnforceWorkGroupConfiguration?: BoxedBoolean;
+    /**
+     * The result configuration information about the queries in this workgroup that will be updated. Includes the updated results location and an updated option for encrypting query results.
+     */
+    ResultConfigurationUpdates?: ResultConfigurationUpdates;
+    /**
+     * Indicates whether this workgroup enables publishing metrics to Amazon CloudWatch.
+     */
+    PublishCloudWatchMetricsEnabled?: BoxedBoolean;
+    /**
+     * The upper limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.
+     */
+    BytesScannedCutoffPerQuery?: BytesScannedCutoffValue;
+    /**
+     * Indicates that the data usage control limit per query is removed. WorkGroupConfiguration$BytesScannedCutoffPerQuery 
+     */
+    RemoveBytesScannedCutoffPerQuery?: BoxedBoolean;
+  }
+  export type WorkGroupDescriptionString = string;
+  export type WorkGroupName = string;
+  export type WorkGroupState = "ENABLED"|"DISABLED"|string;
+  export interface WorkGroupSummary {
+    /**
+     * The name of the workgroup.
+     */
+    Name?: WorkGroupName;
+    /**
+     * The state of the workgroup.
+     */
+    State?: WorkGroupState;
+    /**
+     * The workgroup description.
+     */
+    Description?: WorkGroupDescriptionString;
+    /**
+     * The workgroup creation date and time.
+     */
+    CreationTime?: _Date;
+  }
+  export type WorkGroupsList = WorkGroupSummary[];
   export type datumList = Datum[];
   export type datumString = string;
   /**

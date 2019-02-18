@@ -32,7 +32,7 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Returns the details of a single named query or a list of up to 50 queries, which you provide as an array of query ID strings. Use <a>ListNamedQueries</a> to get the list of named query IDs. If information could not be retrieved for a submitted query ID, information about the query ID submitted is listed under <a>UnprocessedNamedQueryId</a>. Named queries are different from executed queries. Use <a>BatchGetQueryExecution</a> to get details about each unique query execution, and <a>ListQueryExecutions</a> to get a list of query execution IDs.</p>"
+      "documentation": "<p>Returns the details of a single named query or a list of up to 50 queries, which you provide as an array of query ID strings. Requires you to have access to the workgroup in which the queries were saved. Use <a>ListNamedQueriesInput</a> to get the list of named query IDs in the specified workgroup. If information could not be retrieved for a submitted query ID, information about the query ID submitted is listed under <a>UnprocessedNamedQueryId</a>. Named queries differ from executed queries. Use <a>BatchGetQueryExecutionInput</a> to get details about each unique query execution, and <a>ListQueryExecutionsInput</a> to get a list of query execution IDs.</p>"
     },
     "BatchGetQueryExecution": {
       "name": "BatchGetQueryExecution",
@@ -54,7 +54,7 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Returns the details of a single query execution or a list of up to 50 query executions, which you provide as an array of query execution ID strings. To get a list of query execution IDs, use <a>ListQueryExecutions</a>. Query executions are different from named (saved) queries. Use <a>BatchGetNamedQuery</a> to get details about named queries.</p>"
+      "documentation": "<p>Returns the details of a single query execution or a list of up to 50 query executions, which you provide as an array of query execution ID strings. Requires you to have access to the workgroup in which the queries ran. To get a list of query execution IDs, use <a>ListQueryExecutionsInput$WorkGroup</a>. Query executions differ from named (saved) queries. Use <a>BatchGetNamedQueryInput</a> to get details about named queries.</p>"
     },
     "CreateNamedQuery": {
       "name": "CreateNamedQuery",
@@ -76,8 +76,30 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Creates a named query.</p> <p>For code samples using the AWS SDK for Java, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>",
+      "documentation": "<p>Creates a named query in the specified workgroup. Requires that you have access to the workgroup.</p> <p>For code samples using the AWS SDK for Java, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>",
       "idempotent": true
+    },
+    "CreateWorkGroup": {
+      "name": "CreateWorkGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateWorkGroupInput"
+      },
+      "output": {
+        "shape": "CreateWorkGroupOutput"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        }
+      ],
+      "documentation": "<p>Creates a workgroup with the specified name.</p>"
     },
     "DeleteNamedQuery": {
       "name": "DeleteNamedQuery",
@@ -99,7 +121,30 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Deletes a named query.</p> <p>For code samples using the AWS SDK for Java, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>",
+      "documentation": "<p>Deletes the named query if you have access to the workgroup in which the query was saved.</p> <p>For code samples using the AWS SDK for Java, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>",
+      "idempotent": true
+    },
+    "DeleteWorkGroup": {
+      "name": "DeleteWorkGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteWorkGroupInput"
+      },
+      "output": {
+        "shape": "DeleteWorkGroupOutput"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        }
+      ],
+      "documentation": "<p>Deletes the workgroup with the specified name. The primary workgroup cannot be deleted.</p>",
       "idempotent": true
     },
     "GetNamedQuery": {
@@ -122,7 +167,7 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Returns information about a single query.</p>"
+      "documentation": "<p>Returns information about a single query. Requires that you have access to the workgroup in which the query was saved.</p>"
     },
     "GetQueryExecution": {
       "name": "GetQueryExecution",
@@ -144,7 +189,7 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Returns information about a single execution of a query. Each time a query executes, information about the query execution is saved with a unique ID.</p>"
+      "documentation": "<p>Returns information about a single execution of a query if you have access to the workgroup in which the query ran. Each time a query executes, information about the query execution is saved with a unique ID.</p>"
     },
     "GetQueryResults": {
       "name": "GetQueryResults",
@@ -166,7 +211,29 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Returns the results of a single query execution specified by <code>QueryExecutionId</code>. This request does not execute the query but returns results. Use <a>StartQueryExecution</a> to run a query.</p>"
+      "documentation": "<p>Returns the results of a single query execution specified by <code>QueryExecutionId</code> if you have access to the workgroup in which the query ran. This request does not execute the query but returns results. Use <a>StartQueryExecution</a> to run a query.</p>"
+    },
+    "GetWorkGroup": {
+      "name": "GetWorkGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetWorkGroupInput"
+      },
+      "output": {
+        "shape": "GetWorkGroupOutput"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        }
+      ],
+      "documentation": "<p>Returns information about the workgroup with the speficied name.</p>"
     },
     "ListNamedQueries": {
       "name": "ListNamedQueries",
@@ -188,7 +255,7 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Provides a list of all available query IDs.</p> <p>For code samples using the AWS SDK for Java, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>"
+      "documentation": "<p>Provides a list of available query IDs only for queries saved in the specified workgroup. Requires that you have access to the workgroup.</p> <p>For code samples using the AWS SDK for Java, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>"
     },
     "ListQueryExecutions": {
       "name": "ListQueryExecutions",
@@ -210,7 +277,29 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Provides a list of all available query execution IDs.</p> <p>For code samples using the AWS SDK for Java, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>"
+      "documentation": "<p>Provides a list of available query execution IDs for the queries in the specified workgroup. Requires you to have access to the workgroup in which the queries ran.</p> <p>For code samples using the AWS SDK for Java, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>"
+    },
+    "ListWorkGroups": {
+      "name": "ListWorkGroups",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListWorkGroupsInput"
+      },
+      "output": {
+        "shape": "ListWorkGroupsOutput"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        }
+      ],
+      "documentation": "<p>Lists available workgroups for the account.</p>"
     },
     "StartQueryExecution": {
       "name": "StartQueryExecution",
@@ -235,7 +324,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Runs (executes) the SQL query statements contained in the <code>Query</code> string.</p> <p>For code samples using the AWS SDK for Java, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>",
+      "documentation": "<p>Runs the SQL query statements contained in the <code>Query</code>. Requires you to have access to the workgroup in which the query ran.</p> <p>For code samples using the AWS SDK for Java, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>",
       "idempotent": true
     },
     "StopQueryExecution": {
@@ -258,8 +347,30 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Stops a query execution.</p> <p>For code samples using the AWS SDK for Java, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>",
+      "documentation": "<p>Stops a query execution. Requires you to have access to the workgroup in which the query ran.</p> <p>For code samples using the AWS SDK for Java, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>",
       "idempotent": true
+    },
+    "UpdateWorkGroup": {
+      "name": "UpdateWorkGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateWorkGroupInput"
+      },
+      "output": {
+        "shape": "UpdateWorkGroupOutput"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        }
+      ],
+      "documentation": "<p>Updates the workgroup with the specified name. The workgroup's name cannot be changed.</p>"
     }
   },
   "shapes": {
@@ -315,6 +426,13 @@
     },
     "Boolean": {
       "type": "boolean"
+    },
+    "BoxedBoolean": {
+      "type": "boolean"
+    },
+    "BytesScannedCutoffValue": {
+      "type": "long",
+      "min": 10000000
     },
     "ColumnInfo": {
       "type": "structure",
@@ -390,11 +508,11 @@
       "members": {
         "Name": {
           "shape": "NameString",
-          "documentation": "<p>The plain language name for the query.</p>"
+          "documentation": "<p>The query name.</p>"
         },
         "Description": {
           "shape": "DescriptionString",
-          "documentation": "<p>A brief explanation of the query.</p>"
+          "documentation": "<p>The query description.</p>"
         },
         "Database": {
           "shape": "DatabaseString",
@@ -402,12 +520,16 @@
         },
         "QueryString": {
           "shape": "QueryString",
-          "documentation": "<p>The text of the query itself. In other words, all query statements.</p>"
+          "documentation": "<p>The contents of the query with all query statements.</p>"
         },
         "ClientRequestToken": {
           "shape": "IdempotencyToken",
           "documentation": "<p>A unique case-sensitive string used to ensure the request to create the query is idempotent (executes only once). If another <code>CreateNamedQuery</code> request is received, the same response is returned and another query is not created. If a parameter has changed, for example, the <code>QueryString</code>, an error is returned.</p> <important> <p>This token is listed as not required because AWS SDKs (for example the AWS SDK for Java) auto-generate the token for users. If you are not using the AWS SDK or the AWS CLI, you must provide this token or the action will fail.</p> </important>",
           "idempotencyToken": true
+        },
+        "WorkGroup": {
+          "shape": "WorkGroupName",
+          "documentation": "<p>The name of the workgroup in which the named query is being created.</p>"
         }
       }
     },
@@ -420,9 +542,33 @@
         }
       }
     },
+    "CreateWorkGroupInput": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "WorkGroupName",
+          "documentation": "<p>The workgroup name.</p>"
+        },
+        "Configuration": {
+          "shape": "WorkGroupConfiguration",
+          "documentation": "<p>The configuration for the workgroup, which includes the location in Amazon S3 where query results are stored, the encryption configuration, if any, used for encrypting query results, whether the Amazon CloudWatch Metrics are enabled for the workgroup, the limit for the amount of bytes scanned (cutoff) per query, if it is specified, and whether workgroup's settings (specified with EnforceWorkGroupConfiguration) in the WorkGroupConfiguration override client-side settings. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>"
+        },
+        "Description": {
+          "shape": "WorkGroupDescriptionString",
+          "documentation": "<p>The workgroup description.</p>"
+        }
+      }
+    },
+    "CreateWorkGroupOutput": {
+      "type": "structure",
+      "members": {}
+    },
     "DatabaseString": {
       "type": "string",
-      "max": 32,
+      "max": 255,
       "min": 1
     },
     "Date": {
@@ -455,6 +601,26 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteWorkGroupInput": {
+      "type": "structure",
+      "required": [
+        "WorkGroup"
+      ],
+      "members": {
+        "WorkGroup": {
+          "shape": "WorkGroupName",
+          "documentation": "<p>The unique name of the workgroup to delete.</p>"
+        },
+        "RecursiveDeleteOption": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>The option to delete the workgroup and its contents even if the workgroup contains any named queries.</p>"
+        }
+      }
+    },
+    "DeleteWorkGroupOutput": {
+      "type": "structure",
+      "members": {}
+    },
     "DescriptionString": {
       "type": "string",
       "max": 1024,
@@ -468,7 +634,7 @@
       "members": {
         "EncryptionOption": {
           "shape": "EncryptionOption",
-          "documentation": "<p>Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (<code>SSE-S3</code>), server-side encryption with KMS-managed keys (<code>SSE-KMS</code>), or client-side encryption with KMS-managed keys (CSE-KMS) is used.</p>"
+          "documentation": "<p>Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (<code>SSE-S3</code>), server-side encryption with KMS-managed keys (<code>SSE-KMS</code>), or client-side encryption with KMS-managed keys (CSE-KMS) is used.</p> <p>If a query runs in a workgroup and the workgroup overrides client-side settings, then the workgroup's setting for encryption is used. It specifies whether query results must be encrypted, for all queries that run in this workgroup. </p>"
         },
         "KmsKey": {
           "shape": "String",
@@ -573,6 +739,27 @@
         }
       }
     },
+    "GetWorkGroupInput": {
+      "type": "structure",
+      "required": [
+        "WorkGroup"
+      ],
+      "members": {
+        "WorkGroup": {
+          "shape": "WorkGroupName",
+          "documentation": "<p>The name of the workgroup.</p>"
+        }
+      }
+    },
+    "GetWorkGroupOutput": {
+      "type": "structure",
+      "members": {
+        "WorkGroup": {
+          "shape": "WorkGroup",
+          "documentation": "<p>Information about the workgroup.</p>"
+        }
+      }
+    },
     "IdempotencyToken": {
       "type": "string",
       "max": 128,
@@ -591,6 +778,10 @@
         "MaxResults": {
           "shape": "MaxNamedQueriesCount",
           "documentation": "<p>The maximum number of queries to return in this request.</p>"
+        },
+        "WorkGroup": {
+          "shape": "WorkGroupName",
+          "documentation": "<p>The name of the workgroup from which the named queries are being returned.</p>"
         }
       }
     },
@@ -617,6 +808,10 @@
         "MaxResults": {
           "shape": "MaxQueryExecutionsCount",
           "documentation": "<p>The maximum number of query executions to return in this request.</p>"
+        },
+        "WorkGroup": {
+          "shape": "WorkGroupName",
+          "documentation": "<p>The name of the workgroup from which queries are being returned.</p>"
         }
       }
     },
@@ -626,6 +821,32 @@
         "QueryExecutionIds": {
           "shape": "QueryExecutionIdList",
           "documentation": "<p>The unique IDs of each query execution as an array of strings.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>A token to be used by the next request if this request is truncated.</p>"
+        }
+      }
+    },
+    "ListWorkGroupsInput": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>A token to be used by the next request if this request is truncated.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxWorkGroupsCount",
+          "documentation": "<p>The maximum number of workgroups to return in this request.</p>"
+        }
+      }
+    },
+    "ListWorkGroupsOutput": {
+      "type": "structure",
+      "members": {
+        "WorkGroups": {
+          "shape": "WorkGroupsList",
+          "documentation": "<p>The list of workgroups, including their names, descriptions, creation times, and states.</p>"
         },
         "NextToken": {
           "shape": "Token",
@@ -654,6 +875,12 @@
       "max": 1000,
       "min": 0
     },
+    "MaxWorkGroupsCount": {
+      "type": "integer",
+      "box": true,
+      "max": 50,
+      "min": 1
+    },
     "NameString": {
       "type": "string",
       "max": 128,
@@ -669,11 +896,11 @@
       "members": {
         "Name": {
           "shape": "NameString",
-          "documentation": "<p>The plain-language name of the query.</p>"
+          "documentation": "<p>The query name.</p>"
         },
         "Description": {
           "shape": "DescriptionString",
-          "documentation": "<p>A brief description of the query.</p>"
+          "documentation": "<p>The query description.</p>"
         },
         "Database": {
           "shape": "DatabaseString",
@@ -686,9 +913,13 @@
         "NamedQueryId": {
           "shape": "NamedQueryId",
           "documentation": "<p>The unique identifier of the query.</p>"
+        },
+        "WorkGroup": {
+          "shape": "WorkGroupName",
+          "documentation": "<p>The name of the workgroup that contains the named query.</p>"
         }
       },
-      "documentation": "<p>A query, where <code>QueryString</code> is the SQL query statements that comprise the query.</p>"
+      "documentation": "<p>A query, where <code>QueryString</code> is the list of SQL query statements that comprise the query.</p>"
     },
     "NamedQueryId": {
       "type": "string"
@@ -724,7 +955,7 @@
         },
         "ResultConfiguration": {
           "shape": "ResultConfiguration",
-          "documentation": "<p>The location in Amazon S3 where query results were stored and the encryption option, if any, used for query results.</p>"
+          "documentation": "<p>The location in Amazon S3 where query results were stored and the encryption option, if any, used for query results. These are known as \"client-side settings\". If workgroup settings override client-side settings, then the query uses the location for the query results and the encryption configuration that are specified for the workgroup.</p>"
         },
         "QueryExecutionContext": {
           "shape": "QueryExecutionContext",
@@ -737,6 +968,10 @@
         "Statistics": {
           "shape": "QueryExecutionStatistics",
           "documentation": "<p>The amount of data scanned during the query execution and the amount of time that it took to execute, and the type of statement that was run.</p>"
+        },
+        "WorkGroup": {
+          "shape": "WorkGroupName",
+          "documentation": "<p>The name of the workgroup in which the query ran.</p>"
         }
       },
       "documentation": "<p>Information about a single instance of a query execution.</p>"
@@ -797,7 +1032,7 @@
       "members": {
         "State": {
           "shape": "QueryExecutionState",
-          "documentation": "<p>The state of query execution. <code>QUEUED</code> state is listed but is not used by Athena and is reserved for future use. <code>RUNNING</code> indicates that the query has been submitted to the service, and Athena will execute the query as soon as resources are available. <code>SUCCEEDED</code> indicates that the query completed without error. <code>FAILED</code> indicates that the query experienced an error and did not complete processing.<code>CANCELLED</code> indicates that user input interrupted query execution. </p>"
+          "documentation": "<p>The state of query execution. <code>QUEUED</code> state is listed but is not used by Athena and is reserved for future use. <code>RUNNING</code> indicates that the query has been submitted to the service, and Athena will execute the query as soon as resources are available. <code>SUCCEEDED</code> indicates that the query completed without errors. <code>FAILED</code> indicates that the query experienced an error and did not complete processing. <code>CANCELLED</code> indicates that a user input interrupted query execution. </p>"
         },
         "StateChangeReason": {
           "shape": "String",
@@ -821,20 +1056,39 @@
     },
     "ResultConfiguration": {
       "type": "structure",
-      "required": [
-        "OutputLocation"
-      ],
       "members": {
         "OutputLocation": {
           "shape": "String",
-          "documentation": "<p>The location in Amazon S3 where your query results are stored, such as <code>s3://path/to/query/bucket/</code>. For more information, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/querying.html\">Queries and Query Result Files. </a> </p>"
+          "documentation": "<p>The location in Amazon S3 where your query results are stored, such as <code>s3://path/to/query/bucket/</code>. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/querying.html\">Queries and Query Result Files.</a> If workgroup settings override client-side settings, then the query uses the location for the query results and the encryption configuration that are specified for the workgroup. The \"workgroup settings override\" is specified in EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>"
         },
         "EncryptionConfiguration": {
           "shape": "EncryptionConfiguration",
-          "documentation": "<p>If query results are encrypted in Amazon S3, indicates the encryption option used (for example, <code>SSE-KMS</code> or <code>CSE-KMS</code>) and key information.</p>"
+          "documentation": "<p>If query results are encrypted in Amazon S3, indicates the encryption option used (for example, <code>SSE-KMS</code> or <code>CSE-KMS</code>) and key information. This is a client-side setting. If workgroup settings override client-side settings, then the query uses the encryption configuration that is specified for the workgroup, and also uses the location for storing query results specified in the workgroup. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a> and <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
         }
       },
-      "documentation": "<p>The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results.</p>"
+      "documentation": "<p>The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results. These are known as \"client-side settings\". If workgroup settings override client-side settings, then the query uses the location for the query results and the encryption configuration that are specified for the workgroup.</p>"
+    },
+    "ResultConfigurationUpdates": {
+      "type": "structure",
+      "members": {
+        "OutputLocation": {
+          "shape": "String",
+          "documentation": "<p>The location in Amazon S3 where your query results are stored, such as <code>s3://path/to/query/bucket/</code>. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/querying.html\">Queries and Query Result Files.</a> If workgroup settings override client-side settings, then the query uses the location for the query results and the encryption configuration that are specified for the workgroup. The \"workgroup settings override\" is specified in EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>"
+        },
+        "RemoveOutputLocation": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>If set to \"true\", indicates that the previously-specified query results location (also known as a client-side setting) for queries in this workgroup should be ignored and set to null. If set to \"false\" or not set, and a value is present in the OutputLocation in ResultConfigurationUpdates (the client-side setting), the OutputLocation in the workgroup's ResultConfiguration will be updated with the new value. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
+        },
+        "EncryptionConfiguration": {
+          "shape": "EncryptionConfiguration",
+          "documentation": "<p>The encryption configuration for the query results.</p>"
+        },
+        "RemoveEncryptionConfiguration": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>If set to \"true\", indicates that the previously-specified encryption configuration (also known as the client-side setting) for queries in this workgroup should be ignored and set to null. If set to \"false\" or not set, and a value is present in the EncryptionConfiguration in ResultConfigurationUpdates (the client-side setting), the EncryptionConfiguration in the workgroup's ResultConfiguration will be updated with the new value. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
+        }
+      },
+      "documentation": "<p>The information about the updates in the query results, such as output location and encryption configuration for the query results.</p>"
     },
     "ResultSet": {
       "type": "structure",
@@ -879,8 +1133,7 @@
     "StartQueryExecutionInput": {
       "type": "structure",
       "required": [
-        "QueryString",
-        "ResultConfiguration"
+        "QueryString"
       ],
       "members": {
         "QueryString": {
@@ -898,7 +1151,11 @@
         },
         "ResultConfiguration": {
           "shape": "ResultConfiguration",
-          "documentation": "<p>Specifies information about where and how to save the results of the query execution.</p>"
+          "documentation": "<p>Specifies information about where and how to save the results of the query execution. If the query runs in a workgroup, then workgroup's settings may override query settings. This affects the query results location. The workgroup settings override is specified in EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>"
+        },
+        "WorkGroup": {
+          "shape": "WorkGroupName",
+          "documentation": "<p>The name of the workgroup in which the query is being started.</p>"
         }
       }
     },
@@ -940,7 +1197,9 @@
       "type": "string"
     },
     "Token": {
-      "type": "string"
+      "type": "string",
+      "max": 1024,
+      "min": 1
     },
     "UnprocessedNamedQueryId": {
       "type": "structure",
@@ -989,6 +1248,157 @@
       "member": {
         "shape": "UnprocessedQueryExecutionId"
       }
+    },
+    "UpdateWorkGroupInput": {
+      "type": "structure",
+      "required": [
+        "WorkGroup"
+      ],
+      "members": {
+        "WorkGroup": {
+          "shape": "WorkGroupName",
+          "documentation": "<p>The specified workgroup that will be updated.</p>"
+        },
+        "Description": {
+          "shape": "WorkGroupDescriptionString",
+          "documentation": "<p>The workgroup description.</p>"
+        },
+        "ConfigurationUpdates": {
+          "shape": "WorkGroupConfigurationUpdates",
+          "documentation": "<p>The workgroup configuration that will be updated for the given workgroup.</p>"
+        },
+        "State": {
+          "shape": "WorkGroupState",
+          "documentation": "<p>The workgroup state that will be updated for the given workgroup.</p>"
+        }
+      }
+    },
+    "UpdateWorkGroupOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "WorkGroup": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "WorkGroupName",
+          "documentation": "<p>The workgroup name.</p>"
+        },
+        "State": {
+          "shape": "WorkGroupState",
+          "documentation": "<p>The state of the workgroup: ENABLED or DISABLED.</p>"
+        },
+        "Configuration": {
+          "shape": "WorkGroupConfiguration",
+          "documentation": "<p>The configuration of the workgroup, which includes the location in Amazon S3 where query results are stored, the encryption configuration, if any, used for query results; whether the Amazon CloudWatch Metrics are enabled for the workgroup; whether workgroup settings override client-side settings; and the data usage limit for the amount of data scanned per query, if it is specified. The workgroup settings override is specified in EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>"
+        },
+        "Description": {
+          "shape": "WorkGroupDescriptionString",
+          "documentation": "<p>The workgroup description.</p>"
+        },
+        "CreationTime": {
+          "shape": "Date",
+          "documentation": "<p>The date and time the workgroup was created.</p>"
+        }
+      },
+      "documentation": "<p>A workgroup, which contains a name, description, creation time, state, and other configuration, listed under <a>WorkGroup$Configuration</a>. Each workgroup enables you to isolate queries for you or your group of users from other queries in the same account, to configure the query results location and the encryption configuration (known as workgroup settings), to enable sending query metrics to Amazon CloudWatch, and to establish per-query data usage control limits for all queries in a workgroup. The workgroup settings override is specified in EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>"
+    },
+    "WorkGroupConfiguration": {
+      "type": "structure",
+      "members": {
+        "ResultConfiguration": {
+          "shape": "ResultConfiguration",
+          "documentation": "<p>The configuration for the workgroup, which includes the location in Amazon S3 where query results are stored and the encryption option, if any, used for query results.</p>"
+        },
+        "EnforceWorkGroupConfiguration": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
+        },
+        "PublishCloudWatchMetricsEnabled": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.</p>"
+        },
+        "BytesScannedCutoffPerQuery": {
+          "shape": "BytesScannedCutoffValue",
+          "documentation": "<p>The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.</p>"
+        }
+      },
+      "documentation": "<p>The configuration of the workgroup, which includes the location in Amazon S3 where query results are stored, the encryption option, if any, used for query results, whether the Amazon CloudWatch Metrics are enabled for the workgroup and whether workgroup settings override query settings, and the data usage limit for the amount of data scanned per query, if it is specified. The workgroup settings override is specified in EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration. See <a>WorkGroupConfiguration$EnforceWorkGroupConfiguration</a>.</p>"
+    },
+    "WorkGroupConfigurationUpdates": {
+      "type": "structure",
+      "members": {
+        "EnforceWorkGroupConfiguration": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\" client-side settings are used. For more information, see <a href=\"https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html\">Workgroup Settings Override Client-Side Settings</a>.</p>"
+        },
+        "ResultConfigurationUpdates": {
+          "shape": "ResultConfigurationUpdates",
+          "documentation": "<p>The result configuration information about the queries in this workgroup that will be updated. Includes the updated results location and an updated option for encrypting query results.</p>"
+        },
+        "PublishCloudWatchMetricsEnabled": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>Indicates whether this workgroup enables publishing metrics to Amazon CloudWatch.</p>"
+        },
+        "BytesScannedCutoffPerQuery": {
+          "shape": "BytesScannedCutoffValue",
+          "documentation": "<p>The upper limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.</p>"
+        },
+        "RemoveBytesScannedCutoffPerQuery": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>Indicates that the data usage control limit per query is removed. <a>WorkGroupConfiguration$BytesScannedCutoffPerQuery</a> </p>"
+        }
+      },
+      "documentation": "<p>The configuration information that will be updated for this workgroup, which includes the location in Amazon S3 where query results are stored, the encryption option, if any, used for query results, whether the Amazon CloudWatch Metrics are enabled for the workgroup, whether the workgroup settings override the client-side settings, and the data usage limit for the amount of bytes scanned per query, if it is specified.</p>"
+    },
+    "WorkGroupDescriptionString": {
+      "type": "string",
+      "max": 1024,
+      "min": 0
+    },
+    "WorkGroupName": {
+      "type": "string",
+      "pattern": "[a-zA-z0-9._-]{1,128}"
+    },
+    "WorkGroupState": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "WorkGroupSummary": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "WorkGroupName",
+          "documentation": "<p>The name of the workgroup.</p>"
+        },
+        "State": {
+          "shape": "WorkGroupState",
+          "documentation": "<p>The state of the workgroup.</p>"
+        },
+        "Description": {
+          "shape": "WorkGroupDescriptionString",
+          "documentation": "<p>The workgroup description.</p>"
+        },
+        "CreationTime": {
+          "shape": "Date",
+          "documentation": "<p>The workgroup creation date and time.</p>"
+        }
+      },
+      "documentation": "<p>The summary information for the workgroup, which includes its name, state, description, and the date and time it was created.</p>"
+    },
+    "WorkGroupsList": {
+      "type": "list",
+      "member": {
+        "shape": "WorkGroupSummary"
+      },
+      "max": 50,
+      "min": 0
     },
     "datumList": {
       "type": "list",

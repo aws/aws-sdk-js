@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.404.0-->
+<!--LATEST=2.405.0-->
 <!--ENTRYINSERT-->
+
+## 2.405.0
+* feature: Athena: This release adds support for Workgroups to Amazon Athena. Use Workgroups to isolate users, teams, applications or workloads in the same account, control costs by setting up query limits and creating Amazon SNS alarms, and publish query-related metrics to Amazon CloudWatch. 
+* feature: SecretsManager: This release increases the maximum allowed size of SecretString or SecretBinary from 4KB to 7KB in the CreateSecret, UpdateSecret, PutSecretValue and GetSecretValue APIs.
 
 ## 2.404.0
 * feature: ApplicationAutoScaling: Documentation updates for Application Auto Scaling
