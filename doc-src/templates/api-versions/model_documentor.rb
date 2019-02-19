@@ -3,8 +3,13 @@ require 'ostruct'
 module Documentor
   def service_overview(rules)
     docs = documentation(rules)
-    docs = docs ? docs.gsub(/<fullname>.+?<\/fullname>/, '') : docs
-    docs
+    docs = docs || '';
+    docs = docs.gsub(/<fullname>.+?<\/fullname>/, '')
+    docs = docs.gsub(/(.*?)\{(\S*?)\}/, '\1[\2]') ## replace {} in format string with []
+    if docs && (docs.include? 'runtime aspects of your deployed APIs')
+      puts docs
+    end
+    docs == '' ? nil : docs
   end
 
   def documentation(rules)
