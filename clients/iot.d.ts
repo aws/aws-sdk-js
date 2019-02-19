@@ -68,11 +68,11 @@ declare class Iot extends Service {
    */
   attachSecurityProfile(callback?: (err: AWSError, data: Iot.Types.AttachSecurityProfileResponse) => void): Request<Iot.Types.AttachSecurityProfileResponse, AWSError>;
   /**
-   * Attaches the specified principal to the specified thing.
+   * Attaches the specified principal to the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.
    */
   attachThingPrincipal(params: Iot.Types.AttachThingPrincipalRequest, callback?: (err: AWSError, data: Iot.Types.AttachThingPrincipalResponse) => void): Request<Iot.Types.AttachThingPrincipalResponse, AWSError>;
   /**
-   * Attaches the specified principal to the specified thing.
+   * Attaches the specified principal to the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.
    */
   attachThingPrincipal(callback?: (err: AWSError, data: Iot.Types.AttachThingPrincipalResponse) => void): Request<Iot.Types.AttachThingPrincipalResponse, AWSError>;
   /**
@@ -612,11 +612,11 @@ declare class Iot extends Service {
    */
   detachSecurityProfile(callback?: (err: AWSError, data: Iot.Types.DetachSecurityProfileResponse) => void): Request<Iot.Types.DetachSecurityProfileResponse, AWSError>;
   /**
-   * Detaches the specified principal from the specified thing.  This call is asynchronous. It might take several seconds for the detachment to propagate. 
+   * Detaches the specified principal from the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.  This call is asynchronous. It might take several seconds for the detachment to propagate. 
    */
   detachThingPrincipal(params: Iot.Types.DetachThingPrincipalRequest, callback?: (err: AWSError, data: Iot.Types.DetachThingPrincipalResponse) => void): Request<Iot.Types.DetachThingPrincipalResponse, AWSError>;
   /**
-   * Detaches the specified principal from the specified thing.  This call is asynchronous. It might take several seconds for the detachment to propagate. 
+   * Detaches the specified principal from the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.  This call is asynchronous. It might take several seconds for the detachment to propagate. 
    */
   detachThingPrincipal(callback?: (err: AWSError, data: Iot.Types.DetachThingPrincipalResponse) => void): Request<Iot.Types.DetachThingPrincipalResponse, AWSError>;
   /**
@@ -868,11 +868,11 @@ declare class Iot extends Service {
    */
   listPrincipalPolicies(callback?: (err: AWSError, data: Iot.Types.ListPrincipalPoliciesResponse) => void): Request<Iot.Types.ListPrincipalPoliciesResponse, AWSError>;
   /**
-   * Lists the things associated with the specified principal.
+   * Lists the things associated with the specified principal. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities. 
    */
   listPrincipalThings(params: Iot.Types.ListPrincipalThingsRequest, callback?: (err: AWSError, data: Iot.Types.ListPrincipalThingsResponse) => void): Request<Iot.Types.ListPrincipalThingsResponse, AWSError>;
   /**
-   * Lists the things associated with the specified principal.
+   * Lists the things associated with the specified principal. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities. 
    */
   listPrincipalThings(callback?: (err: AWSError, data: Iot.Types.ListPrincipalThingsResponse) => void): Request<Iot.Types.ListPrincipalThingsResponse, AWSError>;
   /**
@@ -956,11 +956,11 @@ declare class Iot extends Service {
    */
   listThingGroupsForThing(callback?: (err: AWSError, data: Iot.Types.ListThingGroupsForThingResponse) => void): Request<Iot.Types.ListThingGroupsForThingResponse, AWSError>;
   /**
-   * Lists the principals associated with the specified thing.
+   * Lists the principals associated with the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.
    */
   listThingPrincipals(params: Iot.Types.ListThingPrincipalsRequest, callback?: (err: AWSError, data: Iot.Types.ListThingPrincipalsResponse) => void): Request<Iot.Types.ListThingPrincipalsResponse, AWSError>;
   /**
-   * Lists the principals associated with the specified thing.
+   * Lists the principals associated with the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.
    */
   listThingPrincipals(callback?: (err: AWSError, data: Iot.Types.ListThingPrincipalsResponse) => void): Request<Iot.Types.ListThingPrincipalsResponse, AWSError>;
   /**
@@ -1521,6 +1521,7 @@ declare namespace Iot {
   }
   export interface AddThingToThingGroupResponse {
   }
+  export type AdditionalMetricsToRetainList = BehaviorMetric[];
   export type AdditionalParameterMap = {[key: string]: Value};
   export type AlarmName = string;
   export interface AlertTarget {
@@ -1855,7 +1856,7 @@ declare namespace Iot {
   }
   export interface BehaviorCriteria {
     /**
-     * The operator that relates the thing measured (metric) to the criteria (containing a value.
+     * The operator that relates the thing measured (metric) to the criteria (containing a value or statisticalThreshold).
      */
     comparisonOperator?: ComparisonOperator;
     /**
@@ -1863,9 +1864,21 @@ declare namespace Iot {
      */
     value?: MetricValue;
     /**
-     * Use this to specify the time duration over which the behavior is evaluated, for those criteria which have a time dimension (for example, NUM_MESSAGES_SENT). 
+     * Use this to specify the time duration over which the behavior is evaluated, for those criteria which have a time dimension (for example, NUM_MESSAGES_SENT). For a statisticalThreshhold metric comparison, measurements from all devices are accumulated over this time duration before being used to calculate percentiles, and later, measurements from an individual device are also accumulated over this time duration before being given a percentile rank.
      */
     durationSeconds?: DurationSeconds;
+    /**
+     * If a device is in violation of the behavior for the specified number of consecutive datapoints, an alarm occurs. If not specified, the default is 1.
+     */
+    consecutiveDatapointsToAlarm?: ConsecutiveDatapointsToAlarm;
+    /**
+     * If an alarm has occurred and the offending device is no longer in violation of the behavior for the specified number of consecutive datapoints, the alarm is cleared. If not specified, the default is 1.
+     */
+    consecutiveDatapointsToClear?: ConsecutiveDatapointsToClear;
+    /**
+     * A statistical ranking (percentile) which indicates a threshold value by which a behavior is determined to be in compliance or in violation of the behavior.
+     */
+    statisticalThreshold?: StatisticalThreshold;
   }
   export type BehaviorMetric = string;
   export type BehaviorName = string;
@@ -2211,6 +2224,8 @@ declare namespace Iot {
     Enabled?: Enabled;
   }
   export type ConnectivityTimestamp = number;
+  export type ConsecutiveDatapointsToAlarm = number;
+  export type ConsecutiveDatapointsToClear = number;
   export type Count = number;
   export interface CreateAuthorizerRequest {
     /**
@@ -2590,13 +2605,13 @@ declare namespace Iot {
      */
     targetCheckNames: TargetAuditCheckNames;
     /**
-     * The name you want to give to the scheduled audit. (Max. 128 chars)
-     */
-    scheduledAuditName: ScheduledAuditName;
-    /**
      * Metadata which can be used to manage the scheduled audit.
      */
     tags?: TagList;
+    /**
+     * The name you want to give to the scheduled audit. (Max. 128 chars)
+     */
+    scheduledAuditName: ScheduledAuditName;
   }
   export interface CreateScheduledAuditResponse {
     /**
@@ -2616,11 +2631,15 @@ declare namespace Iot {
     /**
      * Specifies the behaviors that, when violated by a device (thing), cause an alert.
      */
-    behaviors: Behaviors;
+    behaviors?: Behaviors;
     /**
      * Specifies the destinations to which alerts are sent. (Alerts are always sent to the console.) Alerts are generated when a device (thing) violates a behavior.
      */
     alertTargets?: AlertTargets;
+    /**
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors but it is also retained for any metric specified here.
+     */
+    additionalMetricsToRetain?: AdditionalMetricsToRetainList;
     /**
      * Metadata which can be used to manage the security profile.
      */
@@ -2811,6 +2830,8 @@ declare namespace Iot {
   }
   export interface DeleteAccountAuditConfigurationResponse {
   }
+  export type DeleteAdditionalMetricsToRetain = boolean;
+  export type DeleteAlertTargets = boolean;
   export interface DeleteAuthorizerRequest {
     /**
      * The name of the authorizer to delete.
@@ -2819,6 +2840,7 @@ declare namespace Iot {
   }
   export interface DeleteAuthorizerResponse {
   }
+  export type DeleteBehaviors = boolean;
   export interface DeleteBillingGroupRequest {
     /**
      * The name of the billing group.
@@ -3319,6 +3341,10 @@ declare namespace Iot {
      */
     alertTargets?: AlertTargets;
     /**
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors but it is also retained for any metric specified here.
+     */
+    additionalMetricsToRetain?: AdditionalMetricsToRetainList;
+    /**
      * The version of the security profile. A new version is generated whenever the security profile is updated.
      */
     version?: Version;
@@ -3694,6 +3720,7 @@ declare namespace Iot {
     message?: OTAUpdateErrorMessage;
   }
   export type ErrorMessage = string;
+  export type EvaluationStatistic = string;
   export type EventConfigurations = {[key: string]: Configuration};
   export type EventType = "THING"|"THING_GROUP"|"THING_TYPE"|"THING_GROUP_MEMBERSHIP"|"THING_GROUP_HIERARCHY"|"THING_TYPE_ASSOCIATION"|"JOB"|"JOB_EXECUTION"|"POLICY"|"CERTIFICATE"|"CA_CERTIFICATE"|string;
   export type ExecutionNamePrefix = string;
@@ -6215,6 +6242,12 @@ declare namespace Iot {
   export type StateMachineName = string;
   export type StateReason = string;
   export type StateValue = string;
+  export interface StatisticalThreshold {
+    /**
+     * The percentile which resolves to a threshold value by which compliance with a behavior is determined. Metrics are collected over the specified period (durationSeconds) from all reporting devices in your account and statistical ranks are calculated. Then, the measurements from a device are collected over the same period. If the accumulated measurements from the device fall above or below (comparisonOperator) the value associated with the percentile specified, then the device is considered to be in compliance with the behavior, otherwise a violation occurs.
+     */
+    statistic?: EvaluationStatistic;
+  }
   export type Status = "InProgress"|"Completed"|"Failed"|"Cancelled"|"Cancelling"|string;
   export interface StepFunctionsAction {
     /**
@@ -7043,6 +7076,22 @@ declare namespace Iot {
      */
     alertTargets?: AlertTargets;
     /**
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors but it is also retained for any metric specified here.
+     */
+    additionalMetricsToRetain?: AdditionalMetricsToRetainList;
+    /**
+     * If true, delete all behaviors defined for this security profile. If any behaviors are defined in the current invocation an exception occurs.
+     */
+    deleteBehaviors?: DeleteBehaviors;
+    /**
+     * If true, delete all alertTargets defined for this security profile. If any alertTargets are defined in the current invocation an exception occurs.
+     */
+    deleteAlertTargets?: DeleteAlertTargets;
+    /**
+     * If true, delete all additionalMetricsToRetain defined for this security profile. If any additionalMetricsToRetain are defined in the current invocation an exception occurs.
+     */
+    deleteAdditionalMetricsToRetain?: DeleteAdditionalMetricsToRetain;
+    /**
      * The expected version of the security profile. A new version is generated whenever the security profile is updated. If you specify a value that is different than the actual version, a VersionConflictException is thrown.
      */
     expectedVersion?: OptionalVersion;
@@ -7068,6 +7117,10 @@ declare namespace Iot {
      * Where the alerts are sent. (Alerts are always sent to the console.)
      */
     alertTargets?: AlertTargets;
+    /**
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the security profile's behaviors but it is also retained for any metric specified here.
+     */
+    additionalMetricsToRetain?: AdditionalMetricsToRetainList;
     /**
      * The updated version of the security profile.
      */

@@ -942,6 +942,10 @@ declare namespace SSM {
      * The date the activation was created.
      */
     CreatedDate?: CreatedDate;
+    /**
+     * Tags assigned to the activation.
+     */
+    Tags?: TagList;
   }
   export type ActivationCode = string;
   export type ActivationDescription = string;
@@ -2006,6 +2010,10 @@ declare namespace SSM {
      * The date by which this activation request should expire. The default value is 24 hours.
      */
     ExpirationDate?: ExpirationDate;
+    /**
+     * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an activation to identify which servers or virtual machines (VMs) in your on-premises environment you intend to activate. In this case, you could specify the following key name/value pairs:    Key=OS,Value=Windows     Key=Environment,Value=Production     When you install SSM Agent on your on-premises servers and VMs, you specify an activation ID and code. When you specify the activation ID and code, tags assigned to the activation are automatically applied to the on-premises servers or VMs.  You can't add tags to or delete tags from an existing activation. You can tag your on-premises servers and VMs after they connect to Systems Manager for the first time and are assigned a managed instance ID. This means they are listed in the AWS Systems Manager console with an ID that is prefixed with "mi-". For information about how to add tags to your managed instances, see AddTagsToResource. For information about how to remove tags from your managed instances, see RemoveTagsFromResource.
+     */
+    Tags?: TagList;
   }
   export interface CreateActivationResult {
     /**
@@ -2169,6 +2177,10 @@ declare namespace SSM {
      * Specify a target type to define the kinds of resources the document can run on. For example, to run a document on EC2 instances, specify the following value: /AWS::EC2::Instance. If you specify a value of '/' the document can run on all types of resources. If you don't specify a value, the document can't run on any resources. For a list of valid resource types, see AWS Resource Types Reference in the AWS CloudFormation User Guide. 
      */
     TargetType?: TargetType;
+    /**
+     * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an SSM document to identify the types of targets or the environment where it will run. In this case, you could specify the following key name/value pairs:    Key=OS,Value=Windows     Key=Environment,Value=Production     To add tags to an existing SSM document, use the AddTagsToResource action. 
+     */
+    Tags?: TagList;
   }
   export interface CreateDocumentResult {
     /**
@@ -2217,6 +2229,10 @@ declare namespace SSM {
      * User-provided idempotency token.
      */
     ClientToken?: ClientToken;
+    /**
+     * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a Maintenance Window to identify the type of tasks it will run, the types of targets, and the environment it will run in. In this case, you could specify the following key name/value pairs:    Key=TaskType,Value=AgentUpdate     Key=OS,Value=Windows     Key=Environment,Value=Production     To add tags to an existing Maintenance Window, use the AddTagsToResource action. 
+     */
+    Tags?: TagList;
   }
   export interface CreateMaintenanceWindowResult {
     /**
@@ -2273,6 +2289,10 @@ declare namespace SSM {
      * User-provided idempotency token.
      */
     ClientToken?: ClientToken;
+    /**
+     * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a patch baseline to identify the severity level of patches it specifies and the operating system family it applies to. In this case, you could specify the following key name/value pairs:    Key=PatchSeverity,Value=Critical     Key=OS,Value=Windows     To add tags to an existing patch baseline, use the AddTagsToResource action. 
+     */
+    Tags?: TagList;
   }
   export interface CreatePatchBaselineResult {
     /**
@@ -2599,7 +2619,7 @@ declare namespace SSM {
      */
     AssociationId?: AssociationId;
     /**
-     * Specify the association version to retrieve. To view the latest version, either specify $LATEST for this parameter, or omit this parameter. To view a list of all associations for an instance, use ListInstanceAssociations. To get a list of versions for a specific association, use ListAssociationVersions. 
+     * Specify the association version to retrieve. To view the latest version, either specify $LATEST for this parameter, or omit this parameter. To view a list of all associations for an instance, use ListAssociations. To get a list of versions for a specific association, use ListAssociationVersions. 
      */
     AssociationVersion?: AssociationVersion;
   }
@@ -6208,6 +6228,10 @@ declare namespace SSM {
      * A regular expression used to validate the parameter value. For example, for String types with values restricted to numbers, you can specify the following: AllowedPattern=^\d+$ 
      */
     AllowedPattern?: AllowedPattern;
+    /**
+     * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a Systems Manager parameter to identify the type of resource to which it applies, the environment, or the type of configuration data referenced by the parameter. In this case, you could specify the following key name/value pairs:    Key=Resource,Value=S3bucket     Key=OS,Value=Windows     Key=ParameterType,Value=LicenseKey     To add tags to an existing Systems Manager parameter, use the AddTagsToResource action. 
+     */
+    Tags?: TagList;
   }
   export interface PutParameterResult {
     /**

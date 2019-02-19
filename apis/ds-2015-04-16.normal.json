@@ -1808,6 +1808,10 @@
         "ConnectSettings": {
           "shape": "DirectoryConnectSettings",
           "documentation": "<p>A <a>DirectoryConnectSettings</a> object that contains additional information for the operation.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>The tags to be assigned to AD Connector.</p>"
         }
       },
       "documentation": "<p>Contains the inputs for the <a>ConnectDirectory</a> operation.</p>"
@@ -1963,6 +1967,10 @@
         "VpcSettings": {
           "shape": "DirectoryVpcSettings",
           "documentation": "<p>A <a>DirectoryVpcSettings</a> object that contains additional information for the operation.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>The tags to be assigned to the Simple AD directory.</p>"
         }
       },
       "documentation": "<p>Contains the inputs for the <a>CreateDirectory</a> operation. </p>"
@@ -2029,6 +2037,10 @@
         "Edition": {
           "shape": "DirectoryEdition",
           "documentation": "<p>AWS Managed Microsoft AD is available in two editions: Standard and Enterprise. Enterprise is the default.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>The tags to be assigned to the AWS Managed Microsoft AD directory.</p>"
         }
       },
       "documentation": "<p>Creates an AWS Managed Microsoft AD directory.</p>"

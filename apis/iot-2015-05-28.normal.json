@@ -267,7 +267,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Attaches the specified principal to the specified thing.</p>"
+      "documentation": "<p>Attaches the specified principal to the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.</p>"
     },
     "CancelAuditTask": {
       "name": "CancelAuditTask",
@@ -2433,7 +2433,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Detaches the specified principal from the specified thing.</p> <note> <p>This call is asynchronous. It might take several seconds for the detachment to propagate.</p> </note>"
+      "documentation": "<p>Detaches the specified principal from the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.</p> <note> <p>This call is asynchronous. It might take several seconds for the detachment to propagate.</p> </note>"
     },
     "DisableTopicRule": {
       "name": "DisableTopicRule",
@@ -3409,7 +3409,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Lists the things associated with the specified principal.</p>"
+      "documentation": "<p>Lists the things associated with the specified principal. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities. </p>"
     },
     "ListRoleAliases": {
       "name": "ListRoleAliases",
@@ -3726,7 +3726,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Lists the principals associated with the specified thing.</p>"
+      "documentation": "<p>Lists the principals associated with the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.</p>"
     },
     "ListThingRegistrationTaskReports": {
       "name": "ListThingRegistrationTaskReports",
@@ -5441,6 +5441,12 @@
       "type": "structure",
       "members": {}
     },
+    "AdditionalMetricsToRetainList": {
+      "type": "list",
+      "member": {
+        "shape": "BehaviorMetric"
+      }
+    },
     "AdditionalParameterMap": {
       "type": "map",
       "key": {
@@ -6105,7 +6111,7 @@
       "members": {
         "comparisonOperator": {
           "shape": "ComparisonOperator",
-          "documentation": "<p>The operator that relates the thing measured (<code>metric</code>) to the criteria (containing a <code>value</code>.</p>"
+          "documentation": "<p>The operator that relates the thing measured (<code>metric</code>) to the criteria (containing a <code>value</code> or <code>statisticalThreshold</code>).</p>"
         },
         "value": {
           "shape": "MetricValue",
@@ -6113,7 +6119,19 @@
         },
         "durationSeconds": {
           "shape": "DurationSeconds",
-          "documentation": "<p>Use this to specify the time duration over which the behavior is evaluated, for those criteria which have a time dimension (for example, <code>NUM_MESSAGES_SENT</code>). </p>"
+          "documentation": "<p>Use this to specify the time duration over which the behavior is evaluated, for those criteria which have a time dimension (for example, <code>NUM_MESSAGES_SENT</code>). For a <code>statisticalThreshhold</code> metric comparison, measurements from all devices are accumulated over this time duration before being used to calculate percentiles, and later, measurements from an individual device are also accumulated over this time duration before being given a percentile rank.</p>"
+        },
+        "consecutiveDatapointsToAlarm": {
+          "shape": "ConsecutiveDatapointsToAlarm",
+          "documentation": "<p>If a device is in violation of the behavior for the specified number of consecutive datapoints, an alarm occurs. If not specified, the default is 1.</p>"
+        },
+        "consecutiveDatapointsToClear": {
+          "shape": "ConsecutiveDatapointsToClear",
+          "documentation": "<p>If an alarm has occurred and the offending device is no longer in violation of the behavior for the specified number of consecutive datapoints, the alarm is cleared. If not specified, the default is 1.</p>"
+        },
+        "statisticalThreshold": {
+          "shape": "StatisticalThreshold",
+          "documentation": "<p>A statistical ranking (percentile) which indicates a threshold value by which a behavior is determined to be in compliance or in violation of the behavior.</p>"
         }
       },
       "documentation": "<p>The criteria by which the behavior is determined to be normal.</p>"
@@ -6715,6 +6733,16 @@
     "ConnectivityTimestamp": {
       "type": "long"
     },
+    "ConsecutiveDatapointsToAlarm": {
+      "type": "integer",
+      "max": 10,
+      "min": 1
+    },
+    "ConsecutiveDatapointsToClear": {
+      "type": "integer",
+      "max": 10,
+      "min": 1
+    },
     "Count": {
       "type": "integer"
     },
@@ -7230,15 +7258,15 @@
           "shape": "TargetAuditCheckNames",
           "documentation": "<p>Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use <code>DescribeAccountAuditConfiguration</code> to see the list of all checks including those that are enabled or <code>UpdateAccountAuditConfiguration</code> to select which checks are enabled.)</p>"
         },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Metadata which can be used to manage the scheduled audit.</p>"
+        },
         "scheduledAuditName": {
           "shape": "ScheduledAuditName",
           "documentation": "<p>The name you want to give to the scheduled audit. (Max. 128 chars)</p>",
           "location": "uri",
           "locationName": "scheduledAuditName"
-        },
-        "tags": {
-          "shape": "TagList",
-          "documentation": "<p>Metadata which can be used to manage the scheduled audit.</p>"
         }
       }
     },
@@ -7254,8 +7282,7 @@
     "CreateSecurityProfileRequest": {
       "type": "structure",
       "required": [
-        "securityProfileName",
-        "behaviors"
+        "securityProfileName"
       ],
       "members": {
         "securityProfileName": {
@@ -7275,6 +7302,10 @@
         "alertTargets": {
           "shape": "AlertTargets",
           "documentation": "<p>Specifies the destinations to which alerts are sent. (Alerts are always sent to the console.) Alerts are generated when a device (thing) violates a behavior.</p>"
+        },
+        "additionalMetricsToRetain": {
+          "shape": "AdditionalMetricsToRetainList",
+          "documentation": "<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's <code>behaviors</code> but it is also retained for any metric specified here.</p>"
         },
         "tags": {
           "shape": "TagList",
@@ -7571,6 +7602,12 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteAdditionalMetricsToRetain": {
+      "type": "boolean"
+    },
+    "DeleteAlertTargets": {
+      "type": "boolean"
+    },
     "DeleteAuthorizerRequest": {
       "type": "structure",
       "required": [
@@ -7588,6 +7625,9 @@
     "DeleteAuthorizerResponse": {
       "type": "structure",
       "members": {}
+    },
+    "DeleteBehaviors": {
+      "type": "boolean"
     },
     "DeleteBillingGroupRequest": {
       "type": "structure",
@@ -8480,6 +8520,10 @@
           "shape": "AlertTargets",
           "documentation": "<p>Where the alerts are sent. (Alerts are always sent to the console.)</p>"
         },
+        "additionalMetricsToRetain": {
+          "shape": "AdditionalMetricsToRetainList",
+          "documentation": "<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's <code>behaviors</code> but it is also retained for any metric specified here.</p>"
+        },
         "version": {
           "shape": "Version",
           "documentation": "<p>The version of the security profile. A new version is generated whenever the security profile is updated.</p>"
@@ -9087,6 +9131,10 @@
     "ErrorMessage": {
       "type": "string",
       "max": 2048
+    },
+    "EvaluationStatistic": {
+      "type": "string",
+      "pattern": "(p0|p0\\.1|p0\\.01|p1|p10|p50|p90|p99|p99\\.9|p99\\.99|p100)"
     },
     "EventConfigurations": {
       "type": "map",
@@ -13338,6 +13386,16 @@
     "StateValue": {
       "type": "string"
     },
+    "StatisticalThreshold": {
+      "type": "structure",
+      "members": {
+        "statistic": {
+          "shape": "EvaluationStatistic",
+          "documentation": "<p>The percentile which resolves to a threshold value by which compliance with a behavior is determined. Metrics are collected over the specified period (<code>durationSeconds</code>) from all reporting devices in your account and statistical ranks are calculated. Then, the measurements from a device are collected over the same period. If the accumulated measurements from the device fall above or below (<code>comparisonOperator</code>) the value associated with the percentile specified, then the device is considered to be in compliance with the behavior, otherwise a violation occurs.</p>"
+        }
+      },
+      "documentation": "<p>A statistical ranking (percentile) which indicates a threshold value by which a behavior is determined to be in compliance or in violation of the behavior.</p>"
+    },
     "Status": {
       "type": "string",
       "enum": [
@@ -14681,6 +14739,22 @@
           "shape": "AlertTargets",
           "documentation": "<p>Where the alerts are sent. (Alerts are always sent to the console.)</p>"
         },
+        "additionalMetricsToRetain": {
+          "shape": "AdditionalMetricsToRetainList",
+          "documentation": "<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's <code>behaviors</code> but it is also retained for any metric specified here.</p>"
+        },
+        "deleteBehaviors": {
+          "shape": "DeleteBehaviors",
+          "documentation": "<p>If true, delete all <code>behaviors</code> defined for this security profile. If any <code>behaviors</code> are defined in the current invocation an exception occurs.</p>"
+        },
+        "deleteAlertTargets": {
+          "shape": "DeleteAlertTargets",
+          "documentation": "<p>If true, delete all <code>alertTargets</code> defined for this security profile. If any <code>alertTargets</code> are defined in the current invocation an exception occurs.</p>"
+        },
+        "deleteAdditionalMetricsToRetain": {
+          "shape": "DeleteAdditionalMetricsToRetain",
+          "documentation": "<p>If true, delete all <code>additionalMetricsToRetain</code> defined for this security profile. If any <code>additionalMetricsToRetain</code> are defined in the current invocation an exception occurs.</p>"
+        },
         "expectedVersion": {
           "shape": "OptionalVersion",
           "documentation": "<p>The expected version of the security profile. A new version is generated whenever the security profile is updated. If you specify a value that is different than the actual version, a <code>VersionConflictException</code> is thrown.</p>",
@@ -14711,6 +14785,10 @@
         "alertTargets": {
           "shape": "AlertTargets",
           "documentation": "<p>Where the alerts are sent. (Alerts are always sent to the console.)</p>"
+        },
+        "additionalMetricsToRetain": {
+          "shape": "AdditionalMetricsToRetainList",
+          "documentation": "<p>A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the security profile's <code>behaviors</code> but it is also retained for any metric specified here.</p>"
         },
         "version": {
           "shape": "Version",

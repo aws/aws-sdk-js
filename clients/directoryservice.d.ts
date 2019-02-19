@@ -542,6 +542,10 @@ declare namespace DirectoryService {
      * A DirectoryConnectSettings object that contains additional information for the operation.
      */
     ConnectSettings: DirectoryConnectSettings;
+    /**
+     * The tags to be assigned to AD Connector.
+     */
+    Tags?: Tags;
   }
   export interface ConnectDirectoryResult {
     /**
@@ -640,6 +644,10 @@ declare namespace DirectoryService {
      * A DirectoryVpcSettings object that contains additional information for the operation.
      */
     VpcSettings?: DirectoryVpcSettings;
+    /**
+     * The tags to be assigned to the Simple AD directory.
+     */
+    Tags?: Tags;
   }
   export interface CreateDirectoryResult {
     /**
@@ -684,6 +692,10 @@ declare namespace DirectoryService {
      * AWS Managed Microsoft AD is available in two editions: Standard and Enterprise. Enterprise is the default.
      */
     Edition?: DirectoryEdition;
+    /**
+     * The tags to be assigned to the AWS Managed Microsoft AD directory.
+     */
+    Tags?: Tags;
   }
   export interface CreateMicrosoftADResult {
     /**
