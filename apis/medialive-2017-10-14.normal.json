@@ -2595,6 +2595,10 @@
         "Type": {
           "shape": "InputType",
           "locationName": "type"
+        },
+        "Vpc": {
+          "shape": "InputVpcRequest",
+          "locationName": "vpc"
         }
       },
       "documentation": "The name of the input"
@@ -3042,7 +3046,7 @@
         "SecurityGroups": {
           "shape": "__listOf__string",
           "locationName": "securityGroups",
-          "documentation": "A list of IDs for all the security groups attached to the input."
+          "documentation": "A list of IDs for all the Input Security Groups attached to the input."
         },
         "Sources": {
           "shape": "__listOfInputSource",
@@ -5104,7 +5108,7 @@
         "SecurityGroups": {
           "shape": "__listOf__string",
           "locationName": "securityGroups",
-          "documentation": "A list of IDs for all the security groups attached to the input."
+          "documentation": "A list of IDs for all the Input Security Groups attached to the input."
         },
         "Sources": {
           "shape": "__listOfInputSource",
@@ -5210,6 +5214,10 @@
           "shape": "__string",
           "locationName": "url",
           "documentation": "This represents the endpoint that the customer stream will be\npushed to.\n"
+        },
+        "Vpc": {
+          "shape": "InputDestinationVpc",
+          "locationName": "vpc"
         }
       },
       "documentation": "The settings for a PUSH type input."
@@ -5224,6 +5232,22 @@
         }
       },
       "documentation": "Endpoint settings for a PUSH type input."
+    },
+    "InputDestinationVpc": {
+      "type": "structure",
+      "members": {
+        "AvailabilityZone": {
+          "shape": "__string",
+          "locationName": "availabilityZone",
+          "documentation": "The availability zone of the Input destination.\n"
+        },
+        "NetworkInterfaceId": {
+          "shape": "__string",
+          "locationName": "networkInterfaceId",
+          "documentation": "The network interface ID of the Input destination in the VPC.\n"
+        }
+      },
+      "documentation": "The properties for a VPC type input destination."
     },
     "InputFilter": {
       "type": "string",
@@ -5553,6 +5577,25 @@
         "MEDIACONNECT"
       ],
       "documentation": "Placeholder documentation for InputType"
+    },
+    "InputVpcRequest": {
+      "type": "structure",
+      "members": {
+        "SecurityGroupIds": {
+          "shape": "__listOf__string",
+          "locationName": "securityGroupIds",
+          "documentation": "A list of up to 5 EC2 VPC security group IDs to attach to the Input VPC network interfaces.\nRequires subnetIds. If none are specified then the VPC default security group will be used.\n"
+        },
+        "SubnetIds": {
+          "shape": "__listOf__string",
+          "locationName": "subnetIds",
+          "documentation": "A list of 2 VPC subnet IDs from the same VPC.\nSubnet IDs must be mapped to two unique availability zones (AZ).\n"
+        }
+      },
+      "documentation": "Settings for a private VPC Input.\nWhen this property is specified, the input destination addresses will be created in a VPC rather than with public Internet addresses.\nThis property requires setting the roleArn property on Input creation.\nNot compatible with the inputSecurityGroups property.\n",
+      "required": [
+        "SubnetIds"
+      ]
     },
     "InputWhitelistRule": {
       "type": "structure",

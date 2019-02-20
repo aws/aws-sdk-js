@@ -913,6 +913,7 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
      */
     Tags?: Tags;
     Type?: InputType;
+    Vpc?: InputVpcRequest;
   }
   export interface CreateInputResponse {
     Input?: Input;
@@ -1177,7 +1178,7 @@ one destination per packager.
      */
     RoleArn?: __string;
     /**
-     * A list of IDs for all the security groups attached to the input.
+     * A list of IDs for all the Input Security Groups attached to the input.
      */
     SecurityGroups?: __listOf__string;
     /**
@@ -2251,7 +2252,7 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
      */
     RoleArn?: __string;
     /**
-     * A list of IDs for all the security groups attached to the input.
+     * A list of IDs for all the Input Security Groups attached to the input.
      */
     SecurityGroups?: __listOf__string;
     /**
@@ -2309,6 +2310,7 @@ pushed to.
 
      */
     Url?: __string;
+    Vpc?: InputDestinationVpc;
   }
   export interface InputDestinationRequest {
     /**
@@ -2317,6 +2319,18 @@ to.
 
      */
     StreamName?: __string;
+  }
+  export interface InputDestinationVpc {
+    /**
+     * The availability zone of the Input destination.
+
+     */
+    AvailabilityZone?: __string;
+    /**
+     * The network interface ID of the Input destination in the VPC.
+
+     */
+    NetworkInterfaceId?: __string;
   }
   export type InputFilter = "AUTO"|"DISABLED"|"FORCED"|string;
   export interface InputLocation {
@@ -2485,6 +2499,20 @@ pulled from.
     InputAttachmentNameReference: __string;
   }
   export type InputType = "UDP_PUSH"|"RTP_PUSH"|"RTMP_PUSH"|"RTMP_PULL"|"URL_PULL"|"MP4_FILE"|"MEDIACONNECT"|string;
+  export interface InputVpcRequest {
+    /**
+     * A list of up to 5 EC2 VPC security group IDs to attach to the Input VPC network interfaces.
+Requires subnetIds. If none are specified then the VPC default security group will be used.
+
+     */
+    SecurityGroupIds?: __listOf__string;
+    /**
+     * A list of 2 VPC subnet IDs from the same VPC.
+Subnet IDs must be mapped to two unique availability zones (AZ).
+
+     */
+    SubnetIds: __listOf__string;
+  }
   export interface InputWhitelistRule {
     /**
      * The IPv4 CIDR that's whitelisted.

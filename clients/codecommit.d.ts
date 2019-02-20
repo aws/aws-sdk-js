@@ -28,6 +28,14 @@ declare class CodeCommit extends Service {
    */
   createBranch(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Creates a commit for a repository on the tip of a specified branch.
+   */
+  createCommit(params: CodeCommit.Types.CreateCommitInput, callback?: (err: AWSError, data: CodeCommit.Types.CreateCommitOutput) => void): Request<CodeCommit.Types.CreateCommitOutput, AWSError>;
+  /**
+   * Creates a commit for a repository on the tip of a specified branch.
+   */
+  createCommit(callback?: (err: AWSError, data: CodeCommit.Types.CreateCommitOutput) => void): Request<CodeCommit.Types.CreateCommitOutput, AWSError>;
+  /**
    * Creates a pull request in the specified repository.
    */
   createPullRequest(params: CodeCommit.Types.CreatePullRequestInput, callback?: (err: AWSError, data: CodeCommit.Types.CreatePullRequestOutput) => void): Request<CodeCommit.Types.CreatePullRequestOutput, AWSError>;
@@ -523,6 +531,70 @@ declare namespace CodeCommit {
      */
     commitId: CommitId;
   }
+  export interface CreateCommitInput {
+    /**
+     * The name of the repository where you will create the commit.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The name of the branch where you will create the commit.
+     */
+    branchName: BranchName;
+    /**
+     * The ID of the commit that is the parent of the commit you will create. If this is an empty repository, this is not required.
+     */
+    parentCommitId?: CommitId;
+    /**
+     * The name of the author who created the commit. This information will be used as both the author and committer for the commit.
+     */
+    authorName?: Name;
+    /**
+     * The email address of the person who created the commit.
+     */
+    email?: Email;
+    /**
+     * The commit message you want to include as part of creating the commit. Commit messages are limited to 256 KB. If no message is specified, a default message will be used.
+     */
+    commitMessage?: Message;
+    /**
+     * If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders.
+     */
+    keepEmptyFolders?: KeepEmptyFolders;
+    /**
+     * The files to add or update in this commit.
+     */
+    putFiles?: PutFileEntries;
+    /**
+     * The files to delete in this commit. These files will still exist in prior commits.
+     */
+    deleteFiles?: DeleteFileEntries;
+    /**
+     * The file modes to update for files in this commit.
+     */
+    setFileModes?: SetFileModeEntries;
+  }
+  export interface CreateCommitOutput {
+    /**
+     * The full commit ID of the commit that contains your committed file changes.
+     */
+    commitId?: ObjectId;
+    /**
+     * The full SHA-1 pointer of the tree information for the commit that contains the commited file changes.
+     */
+    treeId?: ObjectId;
+    /**
+     * The files added as part of the committed file changes.
+     */
+    filesAdded?: FilesMetadata;
+    /**
+     * The files updated as part of the commited file changes.
+     */
+    filesUpdated?: FilesMetadata;
+    /**
+     * The files deleted as part of the committed file changes.
+     */
+    filesDeleted?: FilesMetadata;
+  }
   export interface CreatePullRequestInput {
     /**
      * The title of the pull request. This title will be used to identify the pull request to other users in the repository.
@@ -592,6 +664,13 @@ declare namespace CodeCommit {
      * Information about the comment you just deleted.
      */
     comment?: Comment;
+  }
+  export type DeleteFileEntries = DeleteFileEntry[];
+  export interface DeleteFileEntry {
+    /**
+     * The full path of the file that will be deleted, including the name of the file.
+     */
+    filePath: Path;
   }
   export interface DeleteFileInput {
     /**
@@ -727,7 +806,22 @@ declare namespace CodeCommit {
   }
   export type FileContent = Buffer|Uint8Array|Blob|string;
   export type FileList = File[];
+  export interface FileMetadata {
+    /**
+     * The full path to the file that will be added or updated, including the name of the file.
+     */
+    absolutePath?: Path;
+    /**
+     * The blob ID that contains the file information.
+     */
+    blobId?: ObjectId;
+    /**
+     * The extrapolated file mode permissions for the file. Valid values include EXECUTABLE and NORMAL.
+     */
+    fileMode?: FileModeTypeEnum;
+  }
   export type FileModeTypeEnum = "EXECUTABLE"|"NORMAL"|"SYMLINK"|string;
+  export type FilesMetadata = FileMetadata[];
   export interface Folder {
     /**
      * The full SHA-1 pointer of the tree information for the commit that contains the folder.
@@ -1070,6 +1164,7 @@ declare namespace CodeCommit {
   export type IsCommentDeleted = boolean;
   export type IsMergeable = boolean;
   export type IsMerged = boolean;
+  export type IsMove = boolean;
   export type KeepEmptyFolders = boolean;
   export type LastModifiedDate = Date;
   export type Limit = number;
@@ -1509,6 +1604,25 @@ declare namespace CodeCommit {
     mergeMetadata?: MergeMetadata;
   }
   export type PullRequestTargetList = PullRequestTarget[];
+  export type PutFileEntries = PutFileEntry[];
+  export interface PutFileEntry {
+    /**
+     * The full path to the file in the repository, including the name of the file.
+     */
+    filePath: Path;
+    /**
+     * The extrapolated file mode permissions for the file. Valid values include EXECUTABLE and NORMAL.
+     */
+    fileMode?: FileModeTypeEnum;
+    /**
+     * The content of the file, if a source file is not specified.
+     */
+    fileContent?: FileContent;
+    /**
+     * The name and full path of the file that contains the changes you want to make as part of the commit, if you are not providing the file content directly.
+     */
+    sourceFile?: SourceFileSpecifier;
+  }
   export interface PutFileInput {
     /**
      * The name of the repository where you want to add or update the file.
@@ -1679,7 +1793,28 @@ declare namespace CodeCommit {
   export type RepositoryTriggerNameList = RepositoryTriggerName[];
   export type RepositoryTriggersConfigurationId = string;
   export type RepositoryTriggersList = RepositoryTrigger[];
+  export type SetFileModeEntries = SetFileModeEntry[];
+  export interface SetFileModeEntry {
+    /**
+     * The full path to the file, including the name of the file.
+     */
+    filePath: Path;
+    /**
+     * The file mode for the file.
+     */
+    fileMode: FileModeTypeEnum;
+  }
   export type SortByEnum = "repositoryName"|"lastModifiedDate"|string;
+  export interface SourceFileSpecifier {
+    /**
+     * The full path to the file, including the name of the file.
+     */
+    filePath: Path;
+    /**
+     * Whether to remove the source file from the parent commit.
+     */
+    isMove?: IsMove;
+  }
   export interface SubModule {
     /**
      * The commit ID that contains the reference to the submodule.

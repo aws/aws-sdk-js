@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeCommit",
+        "description": "This release adds an API for adding / updating / deleting / copying / moving / setting file modes for one or more files directly to an AWS CodeCommit repository without requiring a Git client."
+    },
+    {
+        "type": "feature",
+        "category": "DirectConnect",
+        "description": "Documentation updates for AWS Direct Connect"
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "This release adds support for VPC inputs, allowing you to push content from your Amazon VPC directly to MediaLive."
+    }
+]
