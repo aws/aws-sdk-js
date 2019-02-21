@@ -105,7 +105,7 @@ declare namespace KinesisVideo {
      */
     StreamName: StreamName;
     /**
-     * The media type of the stream. Consumers of the stream can use this information when processing the stream. For more information about media types, see Media Types. If you choose to specify the MediaType, see Naming Requirements for guidelines. Example valid values include "video/h264" and "video/h264,audio/aac". This parameter is optional; the default value is null (or empty in JSON).
+     * The media type of the stream. Consumers of the stream can use this information when processing the stream. For more information about media types, see Media Types. If you choose to specify the MediaType, see Naming Requirements for guidelines. This parameter is optional; the default value is null (or empty in JSON).
      */
     MediaType?: MediaType;
     /**

@@ -160,7 +160,7 @@ declare namespace Transfer {
   export type Arn = string;
   export interface CreateServerRequest {
     /**
-     *  An array containing all of the information required to call a customer-supplied authentication API. This parameter is not required when the IdentityProviderType value of server that is created uses the SERVICE_MANAGED authentication method.
+     * An array containing all of the information required to call a customer-supplied authentication API. This parameter is not required when the IdentityProviderType value of server that is created uses the SERVICE_MANAGED authentication method.
      */
     IdentityProviderDetails?: IdentityProviderDetails;
     /**
@@ -414,7 +414,13 @@ declare namespace Transfer {
      * Requests the tags associated with a particular Amazon Resource Name (ARN). An ARN is an identifier for a specific AWS resource, such as a server, user, or role.
      */
     Arn: Arn;
+    /**
+     * Specifies the number of tags to return as a response to the ListTagsForResource request.
+     */
     MaxResults?: MaxResults;
+    /**
+     * When you request additional results from the ListTagsForResource call, a NextToken parameter is returned in the input. You can then pass in a subsequent command the NextToken parameter to continue listing additional tags.
+     */
     NextToken?: NextToken;
   }
   export interface ListTagsForResourceResponse {
@@ -422,6 +428,9 @@ declare namespace Transfer {
      * This value is the ARN you specified to list the tags of.
      */
     Arn?: Arn;
+    /**
+     * When you can get additional results from the ListTagsForResource call, a NextToken parameter is returned in the output. You can then pass in a subsequent command the NextToken parameter to continue listing additional tags.
+     */
     NextToken?: NextToken;
     /**
      * Key-value pairs that are assigned to a resource, usually for the purpose of grouping and searching for items. Tags are metadata that you define that you can use for any purpose.
@@ -434,7 +443,7 @@ declare namespace Transfer {
      */
     MaxResults?: MaxResults;
     /**
-     * When you can get additional results from the ListUsersListUsers call, a NextToken parameter is returned in the output. You can then pass in a subsequent command the NextToken parameter to continue listing additional users.
+     * When you can get additional results from the ListUsers call, a NextToken parameter is returned in the output. You can then pass in a subsequent command the NextToken parameter to continue listing additional users.
      */
     NextToken?: NextToken;
     /**

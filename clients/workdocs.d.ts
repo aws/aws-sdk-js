@@ -605,7 +605,7 @@ declare namespace WorkDocs {
      */
     OrganizationId: IdType;
     /**
-     * The endpoint to receive the notifications. If the protocol is HTTPS, the endpoint is a URL that begins with "https://".
+     * The endpoint to receive the notifications. If the protocol is HTTPS, the endpoint is a URL that begins with https.
      */
     Endpoint: SubscriptionEndPointType;
     /**

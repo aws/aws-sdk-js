@@ -509,7 +509,7 @@
       "members": {
         "IdentityProviderDetails": {
           "shape": "IdentityProviderDetails",
-          "documentation": "<p> An array containing all of the information required to call a customer-supplied authentication API. This parameter is not required when the <code>IdentityProviderType</code> value of server that is created uses the <code>SERVICE_MANAGED</code> authentication method.</p>"
+          "documentation": "<p>An array containing all of the information required to call a customer-supplied authentication API. This parameter is not required when the <code>IdentityProviderType</code> value of server that is created uses the <code>SERVICE_MANAGED</code> authentication method.</p>"
         },
         "IdentityProviderType": {
           "shape": "IdentityProviderType",
@@ -894,10 +894,12 @@
           "documentation": "<p>Requests the tags associated with a particular Amazon Resource Name (ARN). An ARN is an identifier for a specific AWS resource, such as a server, user, or role.</p>"
         },
         "MaxResults": {
-          "shape": "MaxResults"
+          "shape": "MaxResults",
+          "documentation": "<p>Specifies the number of tags to return as a response to the <code>ListTagsForResource</code> request.</p>"
         },
         "NextToken": {
-          "shape": "NextToken"
+          "shape": "NextToken",
+          "documentation": "<p>When you request additional results from the <code>ListTagsForResource</code> call, a <code>NextToken</code> parameter is returned in the input. You can then pass in a subsequent command the <code>NextToken</code> parameter to continue listing additional tags.</p>"
         }
       }
     },
@@ -909,7 +911,8 @@
           "documentation": "<p>This value is the ARN you specified to list the tags of.</p>"
         },
         "NextToken": {
-          "shape": "NextToken"
+          "shape": "NextToken",
+          "documentation": "<p>When you can get additional results from the <code>ListTagsForResource</code> call, a <code>NextToken</code> parameter is returned in the output. You can then pass in a subsequent command the <code>NextToken</code> parameter to continue listing additional tags.</p>"
         },
         "Tags": {
           "shape": "Tags",
@@ -929,7 +932,7 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>When you can get additional results from the <code>ListUsers</code>ListUsers call, a <code>NextToken</code> parameter is returned in the output. You can then pass in a subsequent command the <code>NextToken</code> parameter to continue listing additional users.</p>"
+          "documentation": "<p>When you can get additional results from the <code>ListUsers</code> call, a <code>NextToken</code> parameter is returned in the output. You can then pass in a subsequent command the <code>NextToken</code> parameter to continue listing additional users.</p>"
         },
         "ServerId": {
           "shape": "ServerId",
@@ -1042,7 +1045,7 @@
     },
     "NextToken": {
       "type": "string",
-      "max": 256,
+      "max": 6144,
       "min": 1
     },
     "NullableRole": {
@@ -1349,5 +1352,6 @@
     "UserPassword": {
       "type": "string"
     }
-  }
+  },
+  "documentation": "<p>AWS Transfer for SFTP is a fully managed service that enables the transfer of files directly into and out of Amazon S3 using the Secure File Transfer Protocol (SFTP)—also known as Secure Shell (SSH) File Transfer Protocol. AWS helps you seamlessly migrate your file transfer workflows to AWS Transfer for SFTP—by integrating with existing authentication systems, and providing DNS routing with Amazon Route 53—so nothing changes for your customers and partners, or their applications. With your data in S3, you can use it with AWS services for processing, analytics, machine learning, and archiving. Getting started with AWS Transfer for SFTP (AWS SFTP) is easy; there is no infrastructure to buy and setup. </p>"
 }

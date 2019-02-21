@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.407.0-->
+<!--LATEST=2.408.0-->
 <!--ENTRYINSERT-->
+
+## 2.408.0
+* feature: CodeBuild: Add support for CodeBuild local caching feature
+* feature: KinesisVideoArchivedMedia: In this release, HLS playback of KVS streams can be configured to output MPEG TS fragments using the ContainerFormat parameter. HLS playback of KVS streams can also be configured to include the EXT-X-PROGRAM-DATE-TIME field using the DisplayFragmentTimestamp parameter.
+* feature: Transfer: Bug fix: increased the max length allowed for request parameter NextToken when paginating List operations
 
 ## 2.407.0
 * feature: CodeCommit: This release adds an API for adding / updating / deleting / copying / moving / setting file modes for one or more files directly to an AWS CodeCommit repository without requiring a Git client.
