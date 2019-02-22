@@ -12,19 +12,19 @@ declare class StepFunctions extends Service {
   constructor(options?: StepFunctions.Types.ClientConfiguration)
   config: Config & StepFunctions.Types.ClientConfiguration;
   /**
-   * Creates an activity. An activity is a task that you write in any programming language and host on any machine that has access to AWS Step Functions. Activities must poll Step Functions using the GetActivityTask API action and respond using SendTask* API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.
+   * Creates an activity. An activity is a task that you write in any programming language and host on any machine that has access to AWS Step Functions. Activities must poll Step Functions using the GetActivityTask API action and respond using SendTask* API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   createActivity(params: StepFunctions.Types.CreateActivityInput, callback?: (err: AWSError, data: StepFunctions.Types.CreateActivityOutput) => void): Request<StepFunctions.Types.CreateActivityOutput, AWSError>;
   /**
-   * Creates an activity. An activity is a task that you write in any programming language and host on any machine that has access to AWS Step Functions. Activities must poll Step Functions using the GetActivityTask API action and respond using SendTask* API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.
+   * Creates an activity. An activity is a task that you write in any programming language and host on any machine that has access to AWS Step Functions. Activities must poll Step Functions using the GetActivityTask API action and respond using SendTask* API actions. This function lets Step Functions know the existence of your activity and returns an identifier for use in a state machine and when polling from the activity.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   createActivity(callback?: (err: AWSError, data: StepFunctions.Types.CreateActivityOutput) => void): Request<StepFunctions.Types.CreateActivityOutput, AWSError>;
   /**
-   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language.
+   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   createStateMachine(params: StepFunctions.Types.CreateStateMachineInput, callback?: (err: AWSError, data: StepFunctions.Types.CreateStateMachineOutput) => void): Request<StepFunctions.Types.CreateStateMachineOutput, AWSError>;
   /**
-   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language.
+   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   createStateMachine(callback?: (err: AWSError, data: StepFunctions.Types.CreateStateMachineOutput) => void): Request<StepFunctions.Types.CreateStateMachineOutput, AWSError>;
   /**
@@ -271,6 +271,10 @@ declare namespace StepFunctions {
      * The name of the activity to create. This name must be unique for your AWS account and region for 90 days. For more information, see  Limits Related to State Machine Executions in the AWS Step Functions Developer Guide. A name must not contain:   whitespace   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)  
      */
     name: Name;
+    /**
+     * The list of tags to add to a resource.
+     */
+    tags?: TagList;
   }
   export interface CreateActivityOutput {
     /**
@@ -295,6 +299,10 @@ declare namespace StepFunctions {
      * The Amazon Resource Name (ARN) of the IAM role to use for this state machine.
      */
     roleArn: Arn;
+    /**
+     * Tags to be added when creating a state machine.
+     */
+    tags?: TagList;
   }
   export interface CreateStateMachineOutput {
     /**
@@ -536,7 +544,7 @@ declare namespace StepFunctions {
     /**
      * The string that contains the JSON input data for the task.
      */
-    input?: SensitiveData;
+    input?: SensitiveDataJobInput;
   }
   export interface GetExecutionHistoryInput {
     /**
@@ -592,13 +600,37 @@ declare namespace StepFunctions {
     activityStartedEventDetails?: ActivityStartedEventDetails;
     activitySucceededEventDetails?: ActivitySucceededEventDetails;
     activityTimedOutEventDetails?: ActivityTimedOutEventDetails;
+    /**
+     * Contains details about the failure of a task.
+     */
     taskFailedEventDetails?: TaskFailedEventDetails;
+    /**
+     * Contains details about a task that was scheduled.
+     */
     taskScheduledEventDetails?: TaskScheduledEventDetails;
+    /**
+     * Contains details about a task that failed to start.
+     */
     taskStartFailedEventDetails?: TaskStartFailedEventDetails;
+    /**
+     * Contains details about a task that was started.
+     */
     taskStartedEventDetails?: TaskStartedEventDetails;
+    /**
+     * Contains details about a task that where the submit failed.
+     */
     taskSubmitFailedEventDetails?: TaskSubmitFailedEventDetails;
+    /**
+     * Contains details about a submitted task.
+     */
     taskSubmittedEventDetails?: TaskSubmittedEventDetails;
+    /**
+     * Contains details about a task that succeeded.
+     */
     taskSucceededEventDetails?: TaskSucceededEventDetails;
+    /**
+     * Contains details about a task that timed out.
+     */
     taskTimedOutEventDetails?: TaskTimedOutEventDetails;
     executionFailedEventDetails?: ExecutionFailedEventDetails;
     executionStartedEventDetails?: ExecutionStartedEventDetails;
@@ -802,6 +834,7 @@ declare namespace StepFunctions {
   }
   export type SensitiveCause = string;
   export type SensitiveData = string;
+  export type SensitiveDataJobInput = string;
   export type SensitiveError = string;
   export interface StartExecutionInput {
     /**
@@ -809,7 +842,7 @@ declare namespace StepFunctions {
      */
     stateMachineArn: Arn;
     /**
-     * The name of the execution. This name must be unique for your AWS account and region for 90 days. For more information, see  Limits Related to State Machine Executions in the AWS Step Functions Developer Guide. A name must not contain:   whitespace   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)  
+     * The name of the execution. This name must be unique for your AWS account, region, and state machine for 90 days. For more information, see  Limits Related to State Machine Executions in the AWS Step Functions Developer Guide. A name must not contain:   whitespace   brackets &lt; &gt; { } [ ]    wildcard characters ? *    special characters " # % \ ^ | ~ ` $ &amp; , ; : /    control characters (U+0000-001F, U+007F-009F)  
      */
     name?: Name;
     /**

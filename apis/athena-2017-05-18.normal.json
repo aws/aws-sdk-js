@@ -233,7 +233,7 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Returns information about the workgroup with the speficied name.</p>"
+      "documentation": "<p>Returns information about the workgroup with the specified name.</p>"
     },
     "ListNamedQueries": {
       "name": "ListNamedQueries",
@@ -278,6 +278,31 @@
         }
       ],
       "documentation": "<p>Provides a list of available query execution IDs for the queries in the specified workgroup. Requires you to have access to the workgroup in which the queries ran.</p> <p>For code samples using the AWS SDK for Java, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>"
+    },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTagsForResourceInput"
+      },
+      "output": {
+        "shape": "ListTagsForResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Lists the tags associated with this workgroup.</p>"
     },
     "ListWorkGroups": {
       "name": "ListWorkGroups",
@@ -350,6 +375,56 @@
       "documentation": "<p>Stops a query execution. Requires you to have access to the workgroup in which the query ran.</p> <p>For code samples using the AWS SDK for Java, see <a href=\"http://docs.aws.amazon.com/athena/latest/ug/code-samples.html\">Examples and Code Samples</a> in the <i>Amazon Athena User Guide</i>.</p>",
       "idempotent": true
     },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TagResourceInput"
+      },
+      "output": {
+        "shape": "TagResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Adds one or more tags to the resource, such as a workgroup. A tag is a label that you assign to an AWS Athena resource (a workgroup). Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize resources (workgroups) in Athena, for example, by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups in your account. For best practices, see <a href=\"https://aws.amazon.com/answers/account-management/aws-tagging-strategies/\">AWS Tagging Strategies</a>. The key length is from 1 (minimum) to 128 (maximum) Unicode characters in UTF-8. The tag value length is from 0 (minimum) to 256 (maximum) Unicode characters in UTF-8. You can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one, separate them by commas.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UntagResourceInput"
+      },
+      "output": {
+        "shape": "UntagResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Removes one or more tags from the workgroup resource. Takes as an input a list of TagKey Strings separated by commas, and removes their tags at the same time.</p>"
+    },
     "UpdateWorkGroup": {
       "name": "UpdateWorkGroup",
       "http": {
@@ -374,6 +449,11 @@
     }
   },
   "shapes": {
+    "AmazonResourceName": {
+      "type": "string",
+      "max": 1011,
+      "min": 1
+    },
     "BatchGetNamedQueryInput": {
       "type": "structure",
       "required": [
@@ -559,6 +639,10 @@
         "Description": {
           "shape": "WorkGroupDescriptionString",
           "documentation": "<p>The workgroup description.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>One or more tags, separated by commas, that you want to attach to the workgroup as you create it.</p>"
         }
       }
     },
@@ -828,6 +912,39 @@
         }
       }
     },
+    "ListTagsForResourceInput": {
+      "type": "structure",
+      "required": [
+        "ResourceARN"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>Lists the tags for the workgroup resource with the specified ARN.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>The token for the next set of results, or null if there are no additional results for this request, where the request lists the tags for the workgroup resource with the specified ARN.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxTagsCount",
+          "documentation": "<p>The maximum number of results to be returned per request that lists the tags for the workgroup resource.</p>"
+        }
+      }
+    },
+    "ListTagsForResourceOutput": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The list of tags associated with this workgroup.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>A token to be used by the next request if this request is truncated.</p>"
+        }
+      }
+    },
     "ListWorkGroupsInput": {
       "type": "structure",
       "members": {
@@ -874,6 +991,11 @@
       "box": true,
       "max": 1000,
       "min": 0
+    },
+    "MaxTagsCount": {
+      "type": "integer",
+      "box": true,
+      "min": 75
     },
     "MaxWorkGroupsCount": {
       "type": "integer",
@@ -1196,6 +1318,63 @@
     "String": {
       "type": "string"
     },
+    "Tag": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "TagKey",
+          "documentation": "<p>A tag key. The tag key length is from 1 to 128 Unicode characters in UTF-8. You can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys are case-sensitive and must be unique per resource. </p>"
+        },
+        "Value": {
+          "shape": "TagValue",
+          "documentation": "<p>A tag value. The tag value length is from 0 to 256 Unicode characters in UTF-8. You can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag values are case-sensitive. </p>"
+        }
+      },
+      "documentation": "<p>A tag that you can add to a resource. A tag is a label that you assign to an AWS Athena resource (a workgroup). Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize workgroups in Athena, for example, by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups in your account. The maximum tag key length is 128 Unicode characters in UTF-8. The maximum tag value length is 256 Unicode characters in UTF-8. You can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. </p>"
+    },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      }
+    },
+    "TagList": {
+      "type": "list",
+      "member": {
+        "shape": "Tag"
+      }
+    },
+    "TagResourceInput": {
+      "type": "structure",
+      "required": [
+        "ResourceARN",
+        "Tags"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>Requests that one or more tags are added to the resource (such as a workgroup) for the specified ARN.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>One or more tags, separated by commas, to be added to the resource, such as a workgroup.</p>"
+        }
+      }
+    },
+    "TagResourceOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0
+    },
     "Token": {
       "type": "string",
       "max": 1024,
@@ -1248,6 +1427,27 @@
       "member": {
         "shape": "UnprocessedQueryExecutionId"
       }
+    },
+    "UntagResourceInput": {
+      "type": "structure",
+      "required": [
+        "ResourceARN",
+        "TagKeys"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>Removes one or more tags from the workgroup resource for the specified ARN.</p>"
+        },
+        "TagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>Removes the tags associated with one or more tag keys from the workgroup resource.</p>"
+        }
+      }
+    },
+    "UntagResourceOutput": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateWorkGroupInput": {
       "type": "structure",

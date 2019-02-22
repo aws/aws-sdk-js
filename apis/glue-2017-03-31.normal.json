@@ -155,6 +155,81 @@
       ],
       "documentation": "<p>Deletes a specified batch of versions of a table.</p>"
     },
+    "BatchGetCrawlers": {
+      "name": "BatchGetCrawlers",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "BatchGetCrawlersRequest"
+      },
+      "output": {
+        "shape": "BatchGetCrawlersResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        }
+      ],
+      "documentation": "<p>Returns a list of resource metadata for a given list of crawler names. After calling the <code>ListCrawlers</code> operation, you can call this operation to access the data to which you have been granted permissions to based on tags.</p>"
+    },
+    "BatchGetDevEndpoints": {
+      "name": "BatchGetDevEndpoints",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "BatchGetDevEndpointsRequest"
+      },
+      "output": {
+        "shape": "BatchGetDevEndpointsResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InvalidInputException"
+        }
+      ],
+      "documentation": "<p>Returns a list of resource metadata for a given list of DevEndpoint names. After calling the <code>ListDevEndpoints</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.</p>"
+    },
+    "BatchGetJobs": {
+      "name": "BatchGetJobs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "BatchGetJobsRequest"
+      },
+      "output": {
+        "shape": "BatchGetJobsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InvalidInputException"
+        }
+      ],
+      "documentation": "<p>Returns a list of resource metadata for a given list of job names. After calling the <code>ListJobs</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags. </p>"
+    },
     "BatchGetPartition": {
       "name": "BatchGetPartition",
       "http": {
@@ -185,6 +260,31 @@
         }
       ],
       "documentation": "<p>Retrieves partitions in a batch request.</p>"
+    },
+    "BatchGetTriggers": {
+      "name": "BatchGetTriggers",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "BatchGetTriggersRequest"
+      },
+      "output": {
+        "shape": "BatchGetTriggersResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InvalidInputException"
+        }
+      ],
+      "documentation": "<p>Returns a list of resource metadata for a given list of trigger names. After calling the <code>ListTriggers</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.</p>"
     },
     "BatchStopJobRun": {
       "name": "BatchStopJobRun",
@@ -1741,6 +1841,34 @@
       ],
       "documentation": "<p>Retrieves the definitions of some or all of the tables in a given <code>Database</code>.</p>"
     },
+    "GetTags": {
+      "name": "GetTags",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetTagsRequest"
+      },
+      "output": {
+        "shape": "GetTagsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        }
+      ],
+      "documentation": "<p>Retrieves a list of tags associated with a resource.</p>"
+    },
     "GetTrigger": {
       "name": "GetTrigger",
       "http": {
@@ -1881,6 +2009,109 @@
       ],
       "documentation": "<p>Imports an existing Athena Data Catalog to AWS Glue</p>"
     },
+    "ListCrawlers": {
+      "name": "ListCrawlers",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListCrawlersRequest"
+      },
+      "output": {
+        "shape": "ListCrawlersResponse"
+      },
+      "errors": [
+        {
+          "shape": "OperationTimeoutException"
+        }
+      ],
+      "documentation": "<p>Retrieves the names of all crawler resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.</p>"
+    },
+    "ListDevEndpoints": {
+      "name": "ListDevEndpoints",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListDevEndpointsRequest"
+      },
+      "output": {
+        "shape": "ListDevEndpointsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        }
+      ],
+      "documentation": "<p>Retrieves the names of all DevEndpoint resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.</p>"
+    },
+    "ListJobs": {
+      "name": "ListJobs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListJobsRequest"
+      },
+      "output": {
+        "shape": "ListJobsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        }
+      ],
+      "documentation": "<p>Retrieves the names of all job resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.</p>"
+    },
+    "ListTriggers": {
+      "name": "ListTriggers",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTriggersRequest"
+      },
+      "output": {
+        "shape": "ListTriggersResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        }
+      ],
+      "documentation": "<p>Retrieves the names of all trigger resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.</p>"
+    },
     "PutDataCatalogEncryptionSettings": {
       "name": "PutDataCatalogEncryptionSettings",
       "http": {
@@ -1904,7 +2135,7 @@
           "shape": "OperationTimeoutException"
         }
       ],
-      "documentation": "<p>Sets the security configuration for a specified catalog. Once the configuration has been set, the specified encryption is applied to every catalog write thereafter.</p>"
+      "documentation": "<p>Sets the security configuration for a specified catalog. After the configuration has been set, the specified encryption is applied to every catalog write thereafter.</p>"
     },
     "PutResourcePolicy": {
       "name": "PutResourcePolicy",
@@ -2175,6 +2406,62 @@
         }
       ],
       "documentation": "<p>Stops a specified trigger.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        }
+      ],
+      "documentation": "<p>Adds tags to a resource. A tag is a label you can assign to an AWS resource. In AWS Glue, you can tag only certain resources. For information about what resources you can tag, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">AWS Tags in AWS Glue</a>.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        }
+      ],
+      "documentation": "<p>Removes tags from a resource.</p>"
     },
     "UpdateClassifier": {
       "name": "UpdateClassifier",
@@ -2531,7 +2818,7 @@
         },
         "Arguments": {
           "shape": "GenericMap",
-          "documentation": "<p>Arguments to be passed to the job run.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
+          "documentation": "<p>The job arguments used when this trigger fires. For this job run, they replace the default arguments set in the job definition itself.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
         },
         "Timeout": {
           "shape": "Timeout",
@@ -2600,7 +2887,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog in which the connections reside. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog in which the connections reside. If none is provided, the AWS account ID is used by default.</p>"
         },
         "ConnectionNameList": {
           "shape": "DeleteConnectionNameList",
@@ -2745,6 +3032,81 @@
         }
       }
     },
+    "BatchGetCrawlersRequest": {
+      "type": "structure",
+      "required": [
+        "CrawlerNames"
+      ],
+      "members": {
+        "CrawlerNames": {
+          "shape": "CrawlerNameList",
+          "documentation": "<p>A list of crawler names, which may be the names returned from the <code>ListCrawlers</code> operation.</p>"
+        }
+      }
+    },
+    "BatchGetCrawlersResponse": {
+      "type": "structure",
+      "members": {
+        "Crawlers": {
+          "shape": "CrawlerList",
+          "documentation": "<p>A list of crawler definitions.</p>"
+        },
+        "CrawlersNotFound": {
+          "shape": "CrawlerNameList",
+          "documentation": "<p>A list of crawlers not found.</p>"
+        }
+      }
+    },
+    "BatchGetDevEndpointsRequest": {
+      "type": "structure",
+      "required": [
+        "DevEndpointNames"
+      ],
+      "members": {
+        "DevEndpointNames": {
+          "shape": "DevEndpointNames",
+          "documentation": "<p>The list of DevEndpoint names, which may be the names returned from the <code>ListDevEndpoint</code> operation.</p>"
+        }
+      }
+    },
+    "BatchGetDevEndpointsResponse": {
+      "type": "structure",
+      "members": {
+        "DevEndpoints": {
+          "shape": "DevEndpointList",
+          "documentation": "<p>A list of DevEndpoint definitions.</p>"
+        },
+        "DevEndpointsNotFound": {
+          "shape": "DevEndpointNames",
+          "documentation": "<p>A list of DevEndpoints not found.</p>"
+        }
+      }
+    },
+    "BatchGetJobsRequest": {
+      "type": "structure",
+      "required": [
+        "JobNames"
+      ],
+      "members": {
+        "JobNames": {
+          "shape": "JobNameList",
+          "documentation": "<p>A list of job names, which may be the names returned from the <code>ListJobs</code> operation.</p>"
+        }
+      }
+    },
+    "BatchGetJobsResponse": {
+      "type": "structure",
+      "members": {
+        "Jobs": {
+          "shape": "JobList",
+          "documentation": "<p>A list of job definitions.</p>"
+        },
+        "JobsNotFound": {
+          "shape": "JobNameList",
+          "documentation": "<p>A list of names of jobs not found.</p>"
+        }
+      }
+    },
     "BatchGetPartitionRequest": {
       "type": "structure",
       "required": [
@@ -2791,6 +3153,31 @@
       },
       "max": 1000,
       "min": 0
+    },
+    "BatchGetTriggersRequest": {
+      "type": "structure",
+      "required": [
+        "TriggerNames"
+      ],
+      "members": {
+        "TriggerNames": {
+          "shape": "TriggerNameList",
+          "documentation": "<p>A list of trigger names, which may be the names returned from the <code>ListTriggers</code> operation.</p>"
+        }
+      }
+    },
+    "BatchGetTriggersResponse": {
+      "type": "structure",
+      "members": {
+        "Triggers": {
+          "shape": "TriggerList",
+          "documentation": "<p>A list of trigger definitions.</p>"
+        },
+        "TriggersNotFound": {
+          "shape": "TriggerNameList",
+          "documentation": "<p>A list of names of triggers not found.</p>"
+        }
+      }
     },
     "BatchStopJobRunError": {
       "type": "structure",
@@ -3175,7 +3562,7 @@
         },
         "Description": {
           "shape": "DescriptionString",
-          "documentation": "<p>Description of the connection.</p>"
+          "documentation": "<p>The description of the connection.</p>"
         },
         "ConnectionType": {
           "shape": "ConnectionType",
@@ -3187,23 +3574,23 @@
         },
         "ConnectionProperties": {
           "shape": "ConnectionProperties",
-          "documentation": "<p>These key-value pairs define parameters for the connection:</p> <ul> <li> <p> <code>HOST</code> - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.</p> </li> <li> <p> <code>PORT</code> - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.</p> </li> <li> <p> <code>USER_NAME</code> - The name under which to log in to the database. The value string for <code>USER_NAME</code> is \"<code>USERNAME</code>\".</p> </li> <li> <p> <code>PASSWORD</code> - A password, if one is used, for the user name.</p> </li> <li> <p> <code>ENCRYPTED_PASSWORD</code> - When you enable connection password protection by setting <code>ConnectionPasswordEncryption</code> in the Data Catalog encryption settings, this field stores the key you designate to encrypt the password.</p> </li> <li> <p> <code>JDBC_DRIVER_JAR_URI</code> - The S3 path of the a jar file that contains the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_DRIVER_CLASS_NAME</code> - The class name of the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_ENGINE</code> - The name of the JDBC engine to use.</p> </li> <li> <p> <code>JDBC_ENGINE_VERSION</code> - The version of the JDBC engine to use.</p> </li> <li> <p> <code>CONFIG_FILES</code> - (Reserved for future use).</p> </li> <li> <p> <code>INSTANCE_ID</code> - The instance ID to use.</p> </li> <li> <p> <code>JDBC_CONNECTION_URL</code> - The URL for the JDBC connection.</p> </li> <li> <p> <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether SSL with hostname matching will be enforced for the JDBC connection on the client. The default is false.</p> </li> </ul>"
+          "documentation": "<p>These key-value pairs define parameters for the connection:</p> <ul> <li> <p> <code>HOST</code> - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.</p> </li> <li> <p> <code>PORT</code> - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.</p> </li> <li> <p> <code>USER_NAME</code> - The name under which to log in to the database. The value string for <code>USER_NAME</code> is \"<code>USERNAME</code>\".</p> </li> <li> <p> <code>PASSWORD</code> - A password, if one is used, for the user name.</p> </li> <li> <p> <code>ENCRYPTED_PASSWORD</code> - When you enable connection password protection by setting <code>ConnectionPasswordEncryption</code> in the Data Catalog encryption settings, this field stores the encrypted password.</p> </li> <li> <p> <code>JDBC_DRIVER_JAR_URI</code> - The Amazon S3 path of the JAR file that contains the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_DRIVER_CLASS_NAME</code> - The class name of the JDBC driver to use.</p> </li> <li> <p> <code>JDBC_ENGINE</code> - The name of the JDBC engine to use.</p> </li> <li> <p> <code>JDBC_ENGINE_VERSION</code> - The version of the JDBC engine to use.</p> </li> <li> <p> <code>CONFIG_FILES</code> - (Reserved for future use).</p> </li> <li> <p> <code>INSTANCE_ID</code> - The instance ID to use.</p> </li> <li> <p> <code>JDBC_CONNECTION_URL</code> - The URL for the JDBC connection.</p> </li> <li> <p> <code>JDBC_ENFORCE_SSL</code> - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with hostname matching will be enforced for the JDBC connection on the client. The default is false.</p> </li> </ul>"
         },
         "PhysicalConnectionRequirements": {
           "shape": "PhysicalConnectionRequirements",
-          "documentation": "<p>A map of physical connection requirements, such as VPC and SecurityGroup, needed for making this connection successfully.</p>"
+          "documentation": "<p>A map of physical connection requirements, such as virtual private cloud (VPC) and <code>SecurityGroup</code>, that are needed to make this connection successfully.</p>"
         },
         "CreationTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The time this connection definition was created.</p>"
+          "documentation": "<p>The time that this connection definition was created.</p>"
         },
         "LastUpdatedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The last time this connection definition was updated.</p>"
+          "documentation": "<p>The last time that this connection definition was updated.</p>"
         },
         "LastUpdatedBy": {
           "shape": "NameString",
-          "documentation": "<p>The user, group or role that last updated this connection definition.</p>"
+          "documentation": "<p>The user, group, or role that last updated this connection definition.</p>"
         }
       },
       "documentation": "<p>Defines a connection to a data source.</p>"
@@ -3222,7 +3609,7 @@
         },
         "Description": {
           "shape": "DescriptionString",
-          "documentation": "<p>Description of the connection.</p>"
+          "documentation": "<p>The description of the connection.</p>"
         },
         "ConnectionType": {
           "shape": "ConnectionType",
@@ -3238,10 +3625,10 @@
         },
         "PhysicalConnectionRequirements": {
           "shape": "PhysicalConnectionRequirements",
-          "documentation": "<p>A map of physical connection requirements, such as VPC and SecurityGroup, needed for making this connection successfully.</p>"
+          "documentation": "<p>A map of physical connection requirements, such as virtual private cloud (VPC) and <code>SecurityGroup</code>, that are needed to successfully make this connection.</p>"
         }
       },
-      "documentation": "<p>A structure used to specify a connection to create or update.</p>"
+      "documentation": "<p>A structure that is used to specify a connection to create or update.</p>"
     },
     "ConnectionList": {
       "type": "list",
@@ -3264,10 +3651,10 @@
         },
         "AwsKmsKeyId": {
           "shape": "NameString",
-          "documentation": "<p>A KMS key used to protect access to the JDBC source. </p> <p>All users in your account should be granted the <code>kms:encrypt</code> permission to encrypt passwords before storing them in the Data Catalog (through the AWS Glue <code>CreateConnection</code> operation).</p> <p>The decrypt permission should be granted only to KMS key admins and IAM roles designated for AWS Glue crawlers.</p>"
+          "documentation": "<p>An AWS KMS key that is used to encrypt the connection password. </p> <p>If connection password protection is enabled, the caller of <code>CreateConnection</code> and <code>UpdateConnection</code> needs at least <code>kms:Encrypt</code> permission on the specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog. </p> <p>You can set the decrypt permission to enable or restrict access on the password key according to your security requirements.</p>"
         }
       },
-      "documentation": "<p>The data structure used by the Data Catalog to encrypt the password as part of <code>CreateConnection</code> or <code>UpdateConnection</code> and store it in the <code>ENCRYPTED_PASSWORD</code> field in the connection properties. You can enable catalog encryption or only password encryption.</p> <p>When a <code>CreationConnection</code> request arrives containing a password, the Data Catalog first encrypts the password using your KMS key, and then encrypts the whole connection object again if catalog encryption is also enabled.</p> <p>This encryption requires that you set KMS key permissions to enable or restrict access on the password key according to your security requirements. For example, you may want only admin users to have decrypt permission on the password key.</p>"
+      "documentation": "<p>The data structure used by the Data Catalog to encrypt the password as part of <code>CreateConnection</code> or <code>UpdateConnection</code> and store it in the <code>ENCRYPTED_PASSWORD</code> field in the connection properties. You can enable catalog encryption or only password encryption.</p> <p>When a <code>CreationConnection</code> request arrives containing a password, the Data Catalog first encrypts the password using your AWS KMS key. It then encrypts the whole connection object again if catalog encryption is also enabled.</p> <p>This encryption requires that you set AWS KMS key permissions to enable or restrict access on the password key according to your security requirements. For example, you might want only admin users to have decrypt permission on the password key.</p>"
     },
     "ConnectionProperties": {
       "type": "map",
@@ -3510,7 +3897,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog in which to create the connection. If none is provided, the AWS account ID is used by default.</p>"
         },
         "ConnectionInput": {
           "shape": "ConnectionInput",
@@ -3574,6 +3961,10 @@
         "CrawlerSecurityConfiguration": {
           "shape": "CrawlerSecurityConfiguration",
           "documentation": "<p>The name of the SecurityConfiguration structure to be used by this Crawler.</p>"
+        },
+        "Tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>The tags to use with this crawler request. You may use tags to limit access to the crawler. For more information about tags in AWS Glue, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">AWS Tags in AWS Glue</a> in the developer guide.</p>"
         }
       }
     },
@@ -3647,6 +4038,10 @@
         "SecurityConfiguration": {
           "shape": "NameString",
           "documentation": "<p>The name of the SecurityConfiguration structure to be used with this DevEndpoint.</p>"
+        },
+        "Tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>The tags to use with this DevEndpoint. You may use tags to limit access to the DevEndpoint. For more information about tags in AWS Glue, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">AWS Tags in AWS Glue</a> in the developer guide.</p>"
         }
       }
     },
@@ -3798,7 +4193,7 @@
         },
         "MaxCapacity": {
           "shape": "NullableDouble",
-          "documentation": "<p>AWS Glue supports running jobs on a <code>JobCommand.Name</code>=\"pythonshell\" with allocated processing as low as 0.0625 DPU, which can be specified using <code>MaxCapacity</code>. Glue ETL jobs running in any other way cannot have fractional DPU allocations.</p>"
+          "documentation": "<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a python shell job, or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a python shell job (<code>JobCommand.Name</code>=\"pythonshell\"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>=\"glueetl\"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>"
         },
         "NotificationProperty": {
           "shape": "NotificationProperty",
@@ -3807,6 +4202,10 @@
         "SecurityConfiguration": {
           "shape": "NameString",
           "documentation": "<p>The name of the SecurityConfiguration structure to be used with this job.</p>"
+        },
+        "Tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>The tags to use with this job. You may use tags to limit access to the job. For more information about tags in AWS Glue, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">AWS Tags in AWS Glue</a> in the developer guide.</p>"
         }
       }
     },
@@ -3987,6 +4386,10 @@
         "StartOnCreation": {
           "shape": "BooleanValue",
           "documentation": "<p>Set to true to start SCHEDULED and CONDITIONAL triggers when created. True not supported for ON_DEMAND triggers.</p>"
+        },
+        "Tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>The tags to use with this trigger. You may use tags to limit access to the trigger. For more information about tags in AWS Glue, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">AWS Tags in AWS Glue</a> in the developer guide. </p>"
         }
       }
     },
@@ -4072,11 +4475,11 @@
       "members": {
         "EncryptionAtRest": {
           "shape": "EncryptionAtRest",
-          "documentation": "<p>Specifies encryption-at-rest configuration for the Data Catalog.</p>"
+          "documentation": "<p>Specifies the encryption-at-rest configuration for the Data Catalog.</p>"
         },
         "ConnectionPasswordEncryption": {
           "shape": "ConnectionPasswordEncryption",
-          "documentation": "<p>When password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of <code>CreateConnection</code> or <code>UpdateConnection</code> and store it in the <code>ENCRYPTED_PASSWORD</code> field in the connection properties. You can enable catalog encryption or only password encryption.</p>"
+          "documentation": "<p>When connection password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of <code>CreateConnection</code> or <code>UpdateConnection</code> and store it in the <code>ENCRYPTED_PASSWORD</code> field in the connection properties. You can enable catalog encryption or only password encryption.</p>"
         }
       },
       "documentation": "<p>Contains configuration information for maintaining Data Catalog security.</p>"
@@ -4184,7 +4587,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog in which the connection resides. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.</p>"
         },
         "ConnectionName": {
           "shape": "NameString",
@@ -4551,6 +4954,20 @@
         "shape": "DevEndpoint"
       }
     },
+    "DevEndpointNameList": {
+      "type": "list",
+      "member": {
+        "shape": "NameString"
+      }
+    },
+    "DevEndpointNames": {
+      "type": "list",
+      "member": {
+        "shape": "GenericString"
+      },
+      "max": 25,
+      "min": 1
+    },
     "DynamoDBTarget": {
       "type": "structure",
       "members": {
@@ -4582,7 +4999,7 @@
           "documentation": "<p>The ID of the AWS KMS key to use for encryption at rest.</p>"
         }
       },
-      "documentation": "<p>Specifies encryption-at-rest configuration for the Data Catalog.</p>"
+      "documentation": "<p>Specifies the encryption-at-rest configuration for the Data Catalog.</p>"
     },
     "EncryptionConfiguration": {
       "type": "structure",
@@ -4748,7 +5165,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog in which the connection resides. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.</p>"
         },
         "Name": {
           "shape": "NameString",
@@ -4756,7 +5173,7 @@
         },
         "HidePassword": {
           "shape": "Boolean",
-          "documentation": "<p>Allow you to retrieve the connection metadata without displaying the password. For instance, the AWS Glue console uses this flag to retrieve connections, since the console does not display passwords. Set this parameter where the caller may not have permission to use the KMS key to decrypt the password, but does have permission to access the rest of the connection metadata (that is, the other connection properties).</p>"
+          "documentation": "<p>Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but does have permission to access the rest of the connection properties.</p>"
         }
       }
     },
@@ -4781,14 +5198,14 @@
           "documentation": "<p>The type of connections to return. Currently, only JDBC is supported; SFTP is not supported.</p>"
         }
       },
-      "documentation": "<p>Filters the connection definitions returned by the <code>GetConnections</code> API.</p>"
+      "documentation": "<p>Filters the connection definitions that are returned by the <code>GetConnections</code> API operation.</p>"
     },
     "GetConnectionsRequest": {
       "type": "structure",
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog in which the connections reside. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog in which the connections reside. If none is provided, the AWS account ID is used by default.</p>"
         },
         "Filter": {
           "shape": "GetConnectionsFilter",
@@ -4796,7 +5213,7 @@
         },
         "HidePassword": {
           "shape": "Boolean",
-          "documentation": "<p>Allow you to retrieve the connection metadata without displaying the password. For instance, the AWS Glue console uses this flag to retrieve connections, since the console does not display passwords. Set this parameter where the caller may not have permission to use the KMS key to decrypt the password, but does have permission to access the rest of the connection metadata (that is, the other connection properties).</p>"
+          "documentation": "<p>Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but does have permission to access the rest of the connection properties.</p>"
         },
         "NextToken": {
           "shape": "Token",
@@ -4903,7 +5320,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog for which to retrieve the security configuration. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog for which to retrieve the security configuration. If none is provided, the AWS account ID is used by default.</p>"
         }
       }
     },
@@ -5537,6 +5954,27 @@
         }
       }
     },
+    "GetTagsRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "GlueResourceArn",
+          "documentation": "<p>The Amazon ARN of the resource for which to retrieve tags.</p>"
+        }
+      }
+    },
+    "GetTagsResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>The requested tags.</p>"
+        }
+      }
+    },
     "GetTriggerRequest": {
       "type": "structure",
       "required": [
@@ -5659,6 +6097,12 @@
           "documentation": "<p>A continuation token, if the list of functions returned does not include the last requested function.</p>"
         }
       }
+    },
+    "GlueResourceArn": {
+      "type": "string",
+      "max": 10240,
+      "min": 1,
+      "pattern": "arn:aws:glue:.*"
     },
     "GrokClassifier": {
       "type": "structure",
@@ -5824,7 +6268,7 @@
         },
         "MaxCapacity": {
           "shape": "NullableDouble",
-          "documentation": "<p>AWS Glue supports running jobs on a <code>JobCommand.Name</code>=\"pythonshell\" with allocated processing as low as 0.0625 DPU, which can be specified using <code>MaxCapacity</code>. Glue ETL jobs running in any other way cannot have fractional DPU allocations.</p>"
+          "documentation": "<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a python shell job, or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a python shell job (<code>JobCommand.Name</code>=\"pythonshell\"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>=\"glueetl\"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>"
         },
         "NotificationProperty": {
           "shape": "NotificationProperty",
@@ -5907,6 +6351,12 @@
     "JobName": {
       "type": "string"
     },
+    "JobNameList": {
+      "type": "list",
+      "member": {
+        "shape": "NameString"
+      }
+    },
     "JobRun": {
       "type": "structure",
       "members": {
@@ -5948,7 +6398,7 @@
         },
         "Arguments": {
           "shape": "GenericMap",
-          "documentation": "<p>The job arguments associated with this run. These override equivalent default arguments set for the job.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
+          "documentation": "<p>The job arguments associated with this run. For this job run, they replace the default arguments set in the job definition itself.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
         },
         "ErrorMessage": {
           "shape": "ErrorString",
@@ -5974,7 +6424,7 @@
         },
         "MaxCapacity": {
           "shape": "NullableDouble",
-          "documentation": "<p>AWS Glue supports running jobs on a <code>JobCommand.Name</code>=\"pythonshell\" with allocated processing as low as 0.0625 DPU, which can be specified using <code>MaxCapacity</code>. Glue ETL jobs running in any other way cannot have fractional DPU allocations.</p>"
+          "documentation": "<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a python shell job, or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a python shell job (<code>JobCommand.Name</code>=\"pythonshell\"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>=\"glueetl\"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>"
         },
         "NotificationProperty": {
           "shape": "NotificationProperty",
@@ -6056,7 +6506,7 @@
         },
         "MaxCapacity": {
           "shape": "NullableDouble",
-          "documentation": "<p>AWS Glue supports running jobs on a <code>JobCommand.Name</code>=\"pythonshell\" with allocated processing as low as 0.0625 DPU, which can be specified using <code>MaxCapacity</code>. Glue ETL jobs running in any other way cannot have fractional DPU allocations.</p>"
+          "documentation": "<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a python shell job, or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a python shell job (<code>JobCommand.Name</code>=\"pythonshell\"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>=\"glueetl\"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>"
         },
         "NotificationProperty": {
           "shape": "NotificationProperty",
@@ -6159,6 +6609,130 @@
         "CANCELLED",
         "FAILED"
       ]
+    },
+    "ListCrawlersRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "shape": "PageSize",
+          "documentation": "<p>The maximum size of a list to return.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>A continuation token, if this is a continuation request.</p>"
+        },
+        "Tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>Specifies to return only these tagged resources.</p>"
+        }
+      }
+    },
+    "ListCrawlersResponse": {
+      "type": "structure",
+      "members": {
+        "CrawlerNames": {
+          "shape": "CrawlerNameList",
+          "documentation": "<p>The names of all crawlers in the account, or the crawlers with the specified tags.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>A continuation token, if the returned list does not contain the last metric available.</p>"
+        }
+      }
+    },
+    "ListDevEndpointsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "GenericString",
+          "documentation": "<p>A continuation token, if this is a continuation request.</p>"
+        },
+        "MaxResults": {
+          "shape": "PageSize",
+          "documentation": "<p>The maximum size of a list to return.</p>"
+        },
+        "Tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>Specifies to return only these tagged resources.</p>"
+        }
+      }
+    },
+    "ListDevEndpointsResponse": {
+      "type": "structure",
+      "members": {
+        "DevEndpointNames": {
+          "shape": "DevEndpointNameList",
+          "documentation": "<p>The names of all DevEndpoints in the account, or the DevEndpoints with the specified tags.</p>"
+        },
+        "NextToken": {
+          "shape": "GenericString",
+          "documentation": "<p>A continuation token, if the returned list does not contain the last metric available.</p>"
+        }
+      }
+    },
+    "ListJobsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "GenericString",
+          "documentation": "<p>A continuation token, if this is a continuation request.</p>"
+        },
+        "MaxResults": {
+          "shape": "PageSize",
+          "documentation": "<p>The maximum size of a list to return.</p>"
+        },
+        "Tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>Specifies to return only these tagged resources.</p>"
+        }
+      }
+    },
+    "ListJobsResponse": {
+      "type": "structure",
+      "members": {
+        "JobNames": {
+          "shape": "JobNameList",
+          "documentation": "<p>The names of all jobs in the account, or the jobs with the specified tags.</p>"
+        },
+        "NextToken": {
+          "shape": "GenericString",
+          "documentation": "<p>A continuation token, if the returned list does not contain the last metric available.</p>"
+        }
+      }
+    },
+    "ListTriggersRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "GenericString",
+          "documentation": "<p>A continuation token, if this is a continuation request.</p>"
+        },
+        "DependentJobName": {
+          "shape": "NameString",
+          "documentation": "<p> The name of the job for which to retrieve triggers. The trigger that can start this job will be returned, and if there is no such trigger, all triggers will be returned.</p>"
+        },
+        "MaxResults": {
+          "shape": "PageSize",
+          "documentation": "<p>The maximum size of a list to return.</p>"
+        },
+        "Tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>Specifies to return only these tagged resources.</p>"
+        }
+      }
+    },
+    "ListTriggersResponse": {
+      "type": "structure",
+      "members": {
+        "TriggerNames": {
+          "shape": "TriggerNameList",
+          "documentation": "<p>The names of all triggers in the account, or the triggers with the specified tags.</p>"
+        },
+        "NextToken": {
+          "shape": "GenericString",
+          "documentation": "<p>A continuation token, if the returned list does not contain the last metric available.</p>"
+        }
+      }
     },
     "Location": {
       "type": "structure",
@@ -6421,7 +6995,7 @@
       "members": {
         "Values": {
           "shape": "ValueStringList",
-          "documentation": "<p>The values of the partition.</p>"
+          "documentation": "<p>The values of the partition. Although this parameter is not required by the SDK, you must specify this parameter for a valid input.</p>"
         },
         "LastAccessTime": {
           "shape": "Timestamp",
@@ -6491,7 +7065,7 @@
         },
         "AvailabilityZone": {
           "shape": "NameString",
-          "documentation": "<p>The connection's availability zone. This field is redundant, since the specified subnet implies the availability zone to be used. The field must be populated now, but will be deprecated in the future.</p>"
+          "documentation": "<p>The connection's Availability Zone. This field is redundant because the specified subnet implies the Availability Zone to be used. Currently the field must be populated, but it will be deprecated in the future.</p>"
         }
       },
       "documentation": "<p>Specifies the physical requirements for a connection.</p>"
@@ -6564,7 +7138,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog for which to set the security configuration. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog for which to set the security configuration. If none is provided, the AWS account ID is used by default.</p>"
         },
         "DataCatalogEncryptionSettings": {
           "shape": "DataCatalogEncryptionSettings",
@@ -6588,7 +7162,7 @@
         },
         "PolicyHashCondition": {
           "shape": "HashString",
-          "documentation": "<p>This is the hash value returned when the previous policy was set using PutResourcePolicy. Its purpose is to prevent concurrent modifications of a policy. Do not use this parameter if no previous policy has been set.</p>"
+          "documentation": "<p>The hash value returned when the previous policy was set using <code>PutResourcePolicy</code>. Its purpose is to prevent concurrent modifications of a policy. Do not use this parameter if no previous policy has been set.</p>"
         },
         "PolicyExistsCondition": {
           "shape": "ExistCondition",
@@ -6899,7 +7473,7 @@
         },
         "Arguments": {
           "shape": "GenericMap",
-          "documentation": "<p>The job arguments specifically for this run. They override the equivalent default arguments set for in the job definition itself.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
+          "documentation": "<p>The job arguments specifically for this run. For this job run, they replace the default arguments set in the job definition itself.</p> <p>You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes.</p> <p>For information about how to specify and consume your own Job arguments, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html\">Calling AWS Glue APIs in Python</a> topic in the developer guide.</p> <p>For information about the key-value pairs that AWS Glue consumes to set up your job, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html\">Special Parameters Used by AWS Glue</a> topic in the developer guide.</p>"
         },
         "AllocatedCapacity": {
           "shape": "IntegerValue",
@@ -6913,7 +7487,7 @@
         },
         "MaxCapacity": {
           "shape": "NullableDouble",
-          "documentation": "<p>AWS Glue supports running jobs on a <code>JobCommand.Name</code>=\"pythonshell\" with allocated processing as low as 0.0625 DPU, which can be specified using <code>MaxCapacity</code>. Glue ETL jobs running in any other way cannot have fractional DPU allocations.</p>"
+          "documentation": "<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a python shell job, or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a python shell job (<code>JobCommand.Name</code>=\"pythonshell\"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>=\"glueetl\"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>"
         },
         "NotificationProperty": {
           "shape": "NotificationProperty",
@@ -7274,6 +7848,56 @@
         "shape": "TableVersionError"
       }
     },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "TagKeysList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "max": 50,
+      "min": 0
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "TagsToAdd"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "GlueResourceArn",
+          "documentation": "<p>The ARN of the AWS Glue resource to which to add the tags. For more information about AWS Glue resource ARNs, see the <a href=\"http://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id\">AWS Glue ARN string pattern</a>.</p>"
+        },
+        "TagsToAdd": {
+          "shape": "TagsMap",
+          "documentation": "<p>Tags to add to this resource.</p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0
+    },
+    "TagsMap": {
+      "type": "map",
+      "key": {
+        "shape": "TagKey"
+      },
+      "value": {
+        "shape": "TagValue"
+      },
+      "max": 50,
+      "min": 0
+    },
     "Timeout": {
       "type": "integer",
       "box": true,
@@ -7337,6 +7961,12 @@
         "shape": "Trigger"
       }
     },
+    "TriggerNameList": {
+      "type": "list",
+      "member": {
+        "shape": "NameString"
+      }
+    },
     "TriggerState": {
       "type": "string",
       "enum": [
@@ -7390,6 +8020,27 @@
       "min": 1,
       "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
     },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "TagsToRemove"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "GlueResourceArn",
+          "documentation": "<p>The ARN of the resource from which to remove the tags.</p>"
+        },
+        "TagsToRemove": {
+          "shape": "TagKeysList",
+          "documentation": "<p>Tags to remove from this resource.</p>"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "UpdateBehavior": {
       "type": "string",
       "enum": [
@@ -7427,7 +8078,7 @@
       "members": {
         "CatalogId": {
           "shape": "CatalogIdString",
-          "documentation": "<p>The ID of the Data Catalog in which the connection resides. If none is supplied, the AWS account ID is used by default.</p>"
+          "documentation": "<p>The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.</p>"
         },
         "Name": {
           "shape": "NameString",

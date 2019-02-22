@@ -257,10 +257,29 @@ declare namespace Cloud9 {
      * The Amazon Resource Name (ARN) of the environment owner.
      */
     ownerArn?: String;
+    /**
+     * The state of the environment in its creation or deletion lifecycle.
+     */
+    lifecycle?: EnvironmentLifecycle;
   }
   export type EnvironmentDescription = string;
   export type EnvironmentId = string;
   export type EnvironmentIdList = EnvironmentId[];
+  export interface EnvironmentLifecycle {
+    /**
+     * The current creation or deletion lifecycle state of the environment.    CREATED: The environment was successfully created.    DELETE_FAILED: The environment failed to delete.    DELETING: The environment is in the process of being deleted.  
+     */
+    status?: EnvironmentLifecycleStatus;
+    /**
+     * Any informational message about the lifecycle state of the environment.
+     */
+    reason?: String;
+    /**
+     * If the environment failed to delete, the Amazon Resource Name (ARN) of the related AWS resource.
+     */
+    failureResource?: String;
+  }
+  export type EnvironmentLifecycleStatus = "CREATED"|"DELETING"|"DELETE_FAILED"|string;
   export type EnvironmentList = Environment[];
   export interface EnvironmentMember {
     /**

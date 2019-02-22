@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.408.0-->
+<!--LATEST=2.409.0-->
 <!--ENTRYINSERT-->
+
+## 2.409.0
+* feature: Athena: This release adds tagging support for Workgroups to Amazon Athena. Use these APIs to add, remove, or list tags on Workgroups, and leverage the tags for various authorization and billing scenarios.
+* feature: Cloud9: Adding EnvironmentLifecycle to the Environment data type.
+* feature: Glue: AWS Glue adds support for assigning AWS resource tags to jobs, triggers, development endpoints, and crawlers. Each tag consists of a key and an optional value, both of which you define. With this capacity, customers can use tags in AWS Glue to easily organize and identify your resources, create cost allocation reports, and control access to resources. 
+* feature: StepFunctions: This release adds support for tag-on-create. You can now add tags when you create AWS Step Functions activity and state machine resources. For more information about tagging, see AWS Tagging Strategies.
 
 ## 2.408.0
 * feature: CodeBuild: Add support for CodeBuild local caching feature

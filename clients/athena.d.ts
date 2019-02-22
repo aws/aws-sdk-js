@@ -84,11 +84,11 @@ declare class Athena extends Service {
    */
   getQueryResults(callback?: (err: AWSError, data: Athena.Types.GetQueryResultsOutput) => void): Request<Athena.Types.GetQueryResultsOutput, AWSError>;
   /**
-   * Returns information about the workgroup with the speficied name.
+   * Returns information about the workgroup with the specified name.
    */
   getWorkGroup(params: Athena.Types.GetWorkGroupInput, callback?: (err: AWSError, data: Athena.Types.GetWorkGroupOutput) => void): Request<Athena.Types.GetWorkGroupOutput, AWSError>;
   /**
-   * Returns information about the workgroup with the speficied name.
+   * Returns information about the workgroup with the specified name.
    */
   getWorkGroup(callback?: (err: AWSError, data: Athena.Types.GetWorkGroupOutput) => void): Request<Athena.Types.GetWorkGroupOutput, AWSError>;
   /**
@@ -107,6 +107,14 @@ declare class Athena extends Service {
    * Provides a list of available query execution IDs for the queries in the specified workgroup. Requires you to have access to the workgroup in which the queries ran. For code samples using the AWS SDK for Java, see Examples and Code Samples in the Amazon Athena User Guide.
    */
   listQueryExecutions(callback?: (err: AWSError, data: Athena.Types.ListQueryExecutionsOutput) => void): Request<Athena.Types.ListQueryExecutionsOutput, AWSError>;
+  /**
+   * Lists the tags associated with this workgroup.
+   */
+  listTagsForResource(params: Athena.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: Athena.Types.ListTagsForResourceOutput) => void): Request<Athena.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   * Lists the tags associated with this workgroup.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Athena.Types.ListTagsForResourceOutput) => void): Request<Athena.Types.ListTagsForResourceOutput, AWSError>;
   /**
    * Lists available workgroups for the account.
    */
@@ -132,6 +140,22 @@ declare class Athena extends Service {
    */
   stopQueryExecution(callback?: (err: AWSError, data: Athena.Types.StopQueryExecutionOutput) => void): Request<Athena.Types.StopQueryExecutionOutput, AWSError>;
   /**
+   * Adds one or more tags to the resource, such as a workgroup. A tag is a label that you assign to an AWS Athena resource (a workgroup). Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize resources (workgroups) in Athena, for example, by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups in your account. For best practices, see AWS Tagging Strategies. The key length is from 1 (minimum) to 128 (maximum) Unicode characters in UTF-8. The tag value length is from 0 (minimum) to 256 (maximum) Unicode characters in UTF-8. You can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one, separate them by commas.
+   */
+  tagResource(params: Athena.Types.TagResourceInput, callback?: (err: AWSError, data: Athena.Types.TagResourceOutput) => void): Request<Athena.Types.TagResourceOutput, AWSError>;
+  /**
+   * Adds one or more tags to the resource, such as a workgroup. A tag is a label that you assign to an AWS Athena resource (a workgroup). Each tag consists of a key and an optional value, both of which you define. Tags enable you to categorize resources (workgroups) in Athena, for example, by purpose, owner, or environment. Use a consistent set of tag keys to make it easier to search and filter workgroups in your account. For best practices, see AWS Tagging Strategies. The key length is from 1 (minimum) to 128 (maximum) Unicode characters in UTF-8. The tag value length is from 0 (minimum) to 256 (maximum) Unicode characters in UTF-8. You can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys must be unique per resource. If you specify more than one, separate them by commas.
+   */
+  tagResource(callback?: (err: AWSError, data: Athena.Types.TagResourceOutput) => void): Request<Athena.Types.TagResourceOutput, AWSError>;
+  /**
+   * Removes one or more tags from the workgroup resource. Takes as an input a list of TagKey Strings separated by commas, and removes their tags at the same time.
+   */
+  untagResource(params: Athena.Types.UntagResourceInput, callback?: (err: AWSError, data: Athena.Types.UntagResourceOutput) => void): Request<Athena.Types.UntagResourceOutput, AWSError>;
+  /**
+   * Removes one or more tags from the workgroup resource. Takes as an input a list of TagKey Strings separated by commas, and removes their tags at the same time.
+   */
+  untagResource(callback?: (err: AWSError, data: Athena.Types.UntagResourceOutput) => void): Request<Athena.Types.UntagResourceOutput, AWSError>;
+  /**
    * Updates the workgroup with the specified name. The workgroup's name cannot be changed.
    */
   updateWorkGroup(params: Athena.Types.UpdateWorkGroupInput, callback?: (err: AWSError, data: Athena.Types.UpdateWorkGroupOutput) => void): Request<Athena.Types.UpdateWorkGroupOutput, AWSError>;
@@ -141,6 +165,7 @@ declare class Athena extends Service {
   updateWorkGroup(callback?: (err: AWSError, data: Athena.Types.UpdateWorkGroupOutput) => void): Request<Athena.Types.UpdateWorkGroupOutput, AWSError>;
 }
 declare namespace Athena {
+  export type AmazonResourceName = string;
   export interface BatchGetNamedQueryInput {
     /**
      * An array of query IDs.
@@ -265,6 +290,10 @@ declare namespace Athena {
      * The workgroup description.
      */
     Description?: WorkGroupDescriptionString;
+    /**
+     * One or more tags, separated by commas, that you want to attach to the workgroup as you create it.
+     */
+    Tags?: TagList;
   }
   export interface CreateWorkGroupOutput {
   }
@@ -424,6 +453,30 @@ declare namespace Athena {
      */
     NextToken?: Token;
   }
+  export interface ListTagsForResourceInput {
+    /**
+     * Lists the tags for the workgroup resource with the specified ARN.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * The token for the next set of results, or null if there are no additional results for this request, where the request lists the tags for the workgroup resource with the specified ARN.
+     */
+    NextToken?: Token;
+    /**
+     * The maximum number of results to be returned per request that lists the tags for the workgroup resource.
+     */
+    MaxResults?: MaxTagsCount;
+  }
+  export interface ListTagsForResourceOutput {
+    /**
+     * The list of tags associated with this workgroup.
+     */
+    Tags?: TagList;
+    /**
+     * A token to be used by the next request if this request is truncated.
+     */
+    NextToken?: Token;
+  }
   export interface ListWorkGroupsInput {
     /**
      * A token to be used by the next request if this request is truncated.
@@ -448,6 +501,7 @@ declare namespace Athena {
   export type MaxNamedQueriesCount = number;
   export type MaxQueryExecutionsCount = number;
   export type MaxQueryResults = number;
+  export type MaxTagsCount = number;
   export type MaxWorkGroupsCount = number;
   export type NameString = string;
   export interface NamedQuery {
@@ -641,6 +695,32 @@ declare namespace Athena {
   export interface StopQueryExecutionOutput {
   }
   export type String = string;
+  export interface Tag {
+    /**
+     * A tag key. The tag key length is from 1 to 128 Unicode characters in UTF-8. You can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys are case-sensitive and must be unique per resource. 
+     */
+    Key?: TagKey;
+    /**
+     * A tag value. The tag value length is from 0 to 256 Unicode characters in UTF-8. You can use letters and numbers representable in UTF-8, and the following characters: + - = . _ : / @. Tag values are case-sensitive. 
+     */
+    Value?: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceInput {
+    /**
+     * Requests that one or more tags are added to the resource (such as a workgroup) for the specified ARN.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * One or more tags, separated by commas, to be added to the resource, such as a workgroup.
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceOutput {
+  }
+  export type TagValue = string;
   export type Token = string;
   export interface UnprocessedNamedQueryId {
     /**
@@ -672,6 +752,18 @@ declare namespace Athena {
     ErrorMessage?: ErrorMessage;
   }
   export type UnprocessedQueryExecutionIdList = UnprocessedQueryExecutionId[];
+  export interface UntagResourceInput {
+    /**
+     * Removes one or more tags from the workgroup resource for the specified ARN.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * Removes the tags associated with one or more tag keys from the workgroup resource.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceOutput {
+  }
   export interface UpdateWorkGroupInput {
     /**
      * The specified workgroup that will be updated.

@@ -52,6 +52,30 @@ declare class Glue extends Service {
    */
   batchDeleteTableVersion(callback?: (err: AWSError, data: Glue.Types.BatchDeleteTableVersionResponse) => void): Request<Glue.Types.BatchDeleteTableVersionResponse, AWSError>;
   /**
+   * Returns a list of resource metadata for a given list of crawler names. After calling the ListCrawlers operation, you can call this operation to access the data to which you have been granted permissions to based on tags.
+   */
+  batchGetCrawlers(params: Glue.Types.BatchGetCrawlersRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetCrawlersResponse) => void): Request<Glue.Types.BatchGetCrawlersResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of crawler names. After calling the ListCrawlers operation, you can call this operation to access the data to which you have been granted permissions to based on tags.
+   */
+  batchGetCrawlers(callback?: (err: AWSError, data: Glue.Types.BatchGetCrawlersResponse) => void): Request<Glue.Types.BatchGetCrawlersResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of DevEndpoint names. After calling the ListDevEndpoints operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+   */
+  batchGetDevEndpoints(params: Glue.Types.BatchGetDevEndpointsRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetDevEndpointsResponse) => void): Request<Glue.Types.BatchGetDevEndpointsResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of DevEndpoint names. After calling the ListDevEndpoints operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+   */
+  batchGetDevEndpoints(callback?: (err: AWSError, data: Glue.Types.BatchGetDevEndpointsResponse) => void): Request<Glue.Types.BatchGetDevEndpointsResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of job names. After calling the ListJobs operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags. 
+   */
+  batchGetJobs(params: Glue.Types.BatchGetJobsRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetJobsResponse) => void): Request<Glue.Types.BatchGetJobsResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of job names. After calling the ListJobs operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags. 
+   */
+  batchGetJobs(callback?: (err: AWSError, data: Glue.Types.BatchGetJobsResponse) => void): Request<Glue.Types.BatchGetJobsResponse, AWSError>;
+  /**
    * Retrieves partitions in a batch request.
    */
   batchGetPartition(params: Glue.Types.BatchGetPartitionRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetPartitionResponse) => void): Request<Glue.Types.BatchGetPartitionResponse, AWSError>;
@@ -59,6 +83,14 @@ declare class Glue extends Service {
    * Retrieves partitions in a batch request.
    */
   batchGetPartition(callback?: (err: AWSError, data: Glue.Types.BatchGetPartitionResponse) => void): Request<Glue.Types.BatchGetPartitionResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of trigger names. After calling the ListTriggers operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+   */
+  batchGetTriggers(params: Glue.Types.BatchGetTriggersRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetTriggersResponse) => void): Request<Glue.Types.BatchGetTriggersResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of trigger names. After calling the ListTriggers operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+   */
+  batchGetTriggers(callback?: (err: AWSError, data: Glue.Types.BatchGetTriggersResponse) => void): Request<Glue.Types.BatchGetTriggersResponse, AWSError>;
   /**
    * Stops one or more job runs for a specified job definition.
    */
@@ -500,6 +532,14 @@ declare class Glue extends Service {
    */
   getTables(callback?: (err: AWSError, data: Glue.Types.GetTablesResponse) => void): Request<Glue.Types.GetTablesResponse, AWSError>;
   /**
+   * Retrieves a list of tags associated with a resource.
+   */
+  getTags(params: Glue.Types.GetTagsRequest, callback?: (err: AWSError, data: Glue.Types.GetTagsResponse) => void): Request<Glue.Types.GetTagsResponse, AWSError>;
+  /**
+   * Retrieves a list of tags associated with a resource.
+   */
+  getTags(callback?: (err: AWSError, data: Glue.Types.GetTagsResponse) => void): Request<Glue.Types.GetTagsResponse, AWSError>;
+  /**
    * Retrieves the definition of a trigger.
    */
   getTrigger(params: Glue.Types.GetTriggerRequest, callback?: (err: AWSError, data: Glue.Types.GetTriggerResponse) => void): Request<Glue.Types.GetTriggerResponse, AWSError>;
@@ -540,11 +580,43 @@ declare class Glue extends Service {
    */
   importCatalogToGlue(callback?: (err: AWSError, data: Glue.Types.ImportCatalogToGlueResponse) => void): Request<Glue.Types.ImportCatalogToGlueResponse, AWSError>;
   /**
-   * Sets the security configuration for a specified catalog. Once the configuration has been set, the specified encryption is applied to every catalog write thereafter.
+   * Retrieves the names of all crawler resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   */
+  listCrawlers(params: Glue.Types.ListCrawlersRequest, callback?: (err: AWSError, data: Glue.Types.ListCrawlersResponse) => void): Request<Glue.Types.ListCrawlersResponse, AWSError>;
+  /**
+   * Retrieves the names of all crawler resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   */
+  listCrawlers(callback?: (err: AWSError, data: Glue.Types.ListCrawlersResponse) => void): Request<Glue.Types.ListCrawlersResponse, AWSError>;
+  /**
+   * Retrieves the names of all DevEndpoint resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   */
+  listDevEndpoints(params: Glue.Types.ListDevEndpointsRequest, callback?: (err: AWSError, data: Glue.Types.ListDevEndpointsResponse) => void): Request<Glue.Types.ListDevEndpointsResponse, AWSError>;
+  /**
+   * Retrieves the names of all DevEndpoint resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   */
+  listDevEndpoints(callback?: (err: AWSError, data: Glue.Types.ListDevEndpointsResponse) => void): Request<Glue.Types.ListDevEndpointsResponse, AWSError>;
+  /**
+   * Retrieves the names of all job resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   */
+  listJobs(params: Glue.Types.ListJobsRequest, callback?: (err: AWSError, data: Glue.Types.ListJobsResponse) => void): Request<Glue.Types.ListJobsResponse, AWSError>;
+  /**
+   * Retrieves the names of all job resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   */
+  listJobs(callback?: (err: AWSError, data: Glue.Types.ListJobsResponse) => void): Request<Glue.Types.ListJobsResponse, AWSError>;
+  /**
+   * Retrieves the names of all trigger resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   */
+  listTriggers(params: Glue.Types.ListTriggersRequest, callback?: (err: AWSError, data: Glue.Types.ListTriggersResponse) => void): Request<Glue.Types.ListTriggersResponse, AWSError>;
+  /**
+   * Retrieves the names of all trigger resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   */
+  listTriggers(callback?: (err: AWSError, data: Glue.Types.ListTriggersResponse) => void): Request<Glue.Types.ListTriggersResponse, AWSError>;
+  /**
+   * Sets the security configuration for a specified catalog. After the configuration has been set, the specified encryption is applied to every catalog write thereafter.
    */
   putDataCatalogEncryptionSettings(params: Glue.Types.PutDataCatalogEncryptionSettingsRequest, callback?: (err: AWSError, data: Glue.Types.PutDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.PutDataCatalogEncryptionSettingsResponse, AWSError>;
   /**
-   * Sets the security configuration for a specified catalog. Once the configuration has been set, the specified encryption is applied to every catalog write thereafter.
+   * Sets the security configuration for a specified catalog. After the configuration has been set, the specified encryption is applied to every catalog write thereafter.
    */
   putDataCatalogEncryptionSettings(callback?: (err: AWSError, data: Glue.Types.PutDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.PutDataCatalogEncryptionSettingsResponse, AWSError>;
   /**
@@ -619,6 +691,22 @@ declare class Glue extends Service {
    * Stops a specified trigger.
    */
   stopTrigger(callback?: (err: AWSError, data: Glue.Types.StopTriggerResponse) => void): Request<Glue.Types.StopTriggerResponse, AWSError>;
+  /**
+   * Adds tags to a resource. A tag is a label you can assign to an AWS resource. In AWS Glue, you can tag only certain resources. For information about what resources you can tag, see AWS Tags in AWS Glue.
+   */
+  tagResource(params: Glue.Types.TagResourceRequest, callback?: (err: AWSError, data: Glue.Types.TagResourceResponse) => void): Request<Glue.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds tags to a resource. A tag is a label you can assign to an AWS resource. In AWS Glue, you can tag only certain resources. For information about what resources you can tag, see AWS Tags in AWS Glue.
+   */
+  tagResource(callback?: (err: AWSError, data: Glue.Types.TagResourceResponse) => void): Request<Glue.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes tags from a resource.
+   */
+  untagResource(params: Glue.Types.UntagResourceRequest, callback?: (err: AWSError, data: Glue.Types.UntagResourceResponse) => void): Request<Glue.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes tags from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: Glue.Types.UntagResourceResponse) => void): Request<Glue.Types.UntagResourceResponse, AWSError>;
   /**
    * Modifies an existing classifier (a GrokClassifier, XMLClassifier, or JsonClassifier, depending on which field is present).
    */
@@ -715,7 +803,7 @@ declare namespace Glue {
      */
     JobName?: NameString;
     /**
-     * Arguments to be passed to the job run. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+     * The job arguments used when this trigger fires. For this job run, they replace the default arguments set in the job definition itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
     /**
@@ -759,7 +847,7 @@ declare namespace Glue {
   }
   export interface BatchDeleteConnectionRequest {
     /**
-     * The ID of the Data Catalog in which the connections reside. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the connections reside. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -848,6 +936,54 @@ declare namespace Glue {
      */
     Errors?: TableVersionErrors;
   }
+  export interface BatchGetCrawlersRequest {
+    /**
+     * A list of crawler names, which may be the names returned from the ListCrawlers operation.
+     */
+    CrawlerNames: CrawlerNameList;
+  }
+  export interface BatchGetCrawlersResponse {
+    /**
+     * A list of crawler definitions.
+     */
+    Crawlers?: CrawlerList;
+    /**
+     * A list of crawlers not found.
+     */
+    CrawlersNotFound?: CrawlerNameList;
+  }
+  export interface BatchGetDevEndpointsRequest {
+    /**
+     * The list of DevEndpoint names, which may be the names returned from the ListDevEndpoint operation.
+     */
+    DevEndpointNames: DevEndpointNames;
+  }
+  export interface BatchGetDevEndpointsResponse {
+    /**
+     * A list of DevEndpoint definitions.
+     */
+    DevEndpoints?: DevEndpointList;
+    /**
+     * A list of DevEndpoints not found.
+     */
+    DevEndpointsNotFound?: DevEndpointNames;
+  }
+  export interface BatchGetJobsRequest {
+    /**
+     * A list of job names, which may be the names returned from the ListJobs operation.
+     */
+    JobNames: JobNameList;
+  }
+  export interface BatchGetJobsResponse {
+    /**
+     * A list of job definitions.
+     */
+    Jobs?: JobList;
+    /**
+     * A list of names of jobs not found.
+     */
+    JobsNotFound?: JobNameList;
+  }
   export interface BatchGetPartitionRequest {
     /**
      * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.
@@ -877,6 +1013,22 @@ declare namespace Glue {
     UnprocessedKeys?: BatchGetPartitionValueList;
   }
   export type BatchGetPartitionValueList = PartitionValueList[];
+  export interface BatchGetTriggersRequest {
+    /**
+     * A list of trigger names, which may be the names returned from the ListTriggers operation.
+     */
+    TriggerNames: TriggerNameList;
+  }
+  export interface BatchGetTriggersResponse {
+    /**
+     * A list of trigger definitions.
+     */
+    Triggers?: TriggerList;
+    /**
+     * A list of names of triggers not found.
+     */
+    TriggersNotFound?: TriggerNameList;
+  }
   export interface BatchStopJobRunError {
     /**
      * The name of the job definition used in the job run in question.
@@ -1074,7 +1226,7 @@ declare namespace Glue {
      */
     Name?: NameString;
     /**
-     * Description of the connection.
+     * The description of the connection.
      */
     Description?: DescriptionString;
     /**
@@ -1086,23 +1238,23 @@ declare namespace Glue {
      */
     MatchCriteria?: MatchCriteria;
     /**
-     * These key-value pairs define parameters for the connection:    HOST - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.    PORT - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.    USER_NAME - The name under which to log in to the database. The value string for USER_NAME is "USERNAME".    PASSWORD - A password, if one is used, for the user name.    ENCRYPTED_PASSWORD - When you enable connection password protection by setting ConnectionPasswordEncryption in the Data Catalog encryption settings, this field stores the key you designate to encrypt the password.    JDBC_DRIVER_JAR_URI - The S3 path of the a jar file that contains the JDBC driver to use.    JDBC_DRIVER_CLASS_NAME - The class name of the JDBC driver to use.    JDBC_ENGINE - The name of the JDBC engine to use.    JDBC_ENGINE_VERSION - The version of the JDBC engine to use.    CONFIG_FILES - (Reserved for future use).    INSTANCE_ID - The instance ID to use.    JDBC_CONNECTION_URL - The URL for the JDBC connection.    JDBC_ENFORCE_SSL - A Boolean string (true, false) specifying whether SSL with hostname matching will be enforced for the JDBC connection on the client. The default is false.  
+     * These key-value pairs define parameters for the connection:    HOST - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.    PORT - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.    USER_NAME - The name under which to log in to the database. The value string for USER_NAME is "USERNAME".    PASSWORD - A password, if one is used, for the user name.    ENCRYPTED_PASSWORD - When you enable connection password protection by setting ConnectionPasswordEncryption in the Data Catalog encryption settings, this field stores the encrypted password.    JDBC_DRIVER_JAR_URI - The Amazon S3 path of the JAR file that contains the JDBC driver to use.    JDBC_DRIVER_CLASS_NAME - The class name of the JDBC driver to use.    JDBC_ENGINE - The name of the JDBC engine to use.    JDBC_ENGINE_VERSION - The version of the JDBC engine to use.    CONFIG_FILES - (Reserved for future use).    INSTANCE_ID - The instance ID to use.    JDBC_CONNECTION_URL - The URL for the JDBC connection.    JDBC_ENFORCE_SSL - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with hostname matching will be enforced for the JDBC connection on the client. The default is false.  
      */
     ConnectionProperties?: ConnectionProperties;
     /**
-     * A map of physical connection requirements, such as VPC and SecurityGroup, needed for making this connection successfully.
+     * A map of physical connection requirements, such as virtual private cloud (VPC) and SecurityGroup, that are needed to make this connection successfully.
      */
     PhysicalConnectionRequirements?: PhysicalConnectionRequirements;
     /**
-     * The time this connection definition was created.
+     * The time that this connection definition was created.
      */
     CreationTime?: Timestamp;
     /**
-     * The last time this connection definition was updated.
+     * The last time that this connection definition was updated.
      */
     LastUpdatedTime?: Timestamp;
     /**
-     * The user, group or role that last updated this connection definition.
+     * The user, group, or role that last updated this connection definition.
      */
     LastUpdatedBy?: NameString;
   }
@@ -1112,7 +1264,7 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * Description of the connection.
+     * The description of the connection.
      */
     Description?: DescriptionString;
     /**
@@ -1128,7 +1280,7 @@ declare namespace Glue {
      */
     ConnectionProperties: ConnectionProperties;
     /**
-     * A map of physical connection requirements, such as VPC and SecurityGroup, needed for making this connection successfully.
+     * A map of physical connection requirements, such as virtual private cloud (VPC) and SecurityGroup, that are needed to successfully make this connection.
      */
     PhysicalConnectionRequirements?: PhysicalConnectionRequirements;
   }
@@ -1140,7 +1292,7 @@ declare namespace Glue {
      */
     ReturnConnectionPasswordEncrypted: Boolean;
     /**
-     * A KMS key used to protect access to the JDBC source.  All users in your account should be granted the kms:encrypt permission to encrypt passwords before storing them in the Data Catalog (through the AWS Glue CreateConnection operation). The decrypt permission should be granted only to KMS key admins and IAM roles designated for AWS Glue crawlers.
+     * An AWS KMS key that is used to encrypt the connection password.  If connection password protection is enabled, the caller of CreateConnection and UpdateConnection needs at least kms:Encrypt permission on the specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog.  You can set the decrypt permission to enable or restrict access on the password key according to your security requirements.
      */
     AwsKmsKeyId?: NameString;
   }
@@ -1295,7 +1447,7 @@ declare namespace Glue {
   }
   export interface CreateConnectionRequest {
     /**
-     * The ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which to create the connection. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -1350,6 +1502,10 @@ declare namespace Glue {
      * The name of the SecurityConfiguration structure to be used by this Crawler.
      */
     CrawlerSecurityConfiguration?: CrawlerSecurityConfiguration;
+    /**
+     * The tags to use with this crawler request. You may use tags to limit access to the crawler. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.
+     */
+    Tags?: TagsMap;
   }
   export interface CreateCrawlerResponse {
   }
@@ -1406,6 +1562,10 @@ declare namespace Glue {
      * The name of the SecurityConfiguration structure to be used with this DevEndpoint.
      */
     SecurityConfiguration?: NameString;
+    /**
+     * The tags to use with this DevEndpoint. You may use tags to limit access to the DevEndpoint. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.
+     */
+    Tags?: TagsMap;
   }
   export interface CreateDevEndpointResponse {
     /**
@@ -1533,7 +1693,7 @@ declare namespace Glue {
      */
     Timeout?: Timeout;
     /**
-     * AWS Glue supports running jobs on a JobCommand.Name="pythonshell" with allocated processing as low as 0.0625 DPU, which can be specified using MaxCapacity. Glue ETL jobs running in any other way cannot have fractional DPU allocations.
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. The value that can be allocated for MaxCapacity depends on whether you are running a python shell job, or an Apache Spark ETL job:   When you specify a python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -1544,6 +1704,10 @@ declare namespace Glue {
      * The name of the SecurityConfiguration structure to be used with this job.
      */
     SecurityConfiguration?: NameString;
+    /**
+     * The tags to use with this job. You may use tags to limit access to the job. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.
+     */
+    Tags?: TagsMap;
   }
   export interface CreateJobResponse {
     /**
@@ -1670,6 +1834,10 @@ declare namespace Glue {
      * Set to true to start SCHEDULED and CONDITIONAL triggers when created. True not supported for ON_DEMAND triggers.
      */
     StartOnCreation?: BooleanValue;
+    /**
+     * The tags to use with this trigger. You may use tags to limit access to the trigger. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide. 
+     */
+    Tags?: TagsMap;
   }
   export interface CreateTriggerResponse {
     /**
@@ -1713,11 +1881,11 @@ declare namespace Glue {
   export type DagNodes = CodeGenNode[];
   export interface DataCatalogEncryptionSettings {
     /**
-     * Specifies encryption-at-rest configuration for the Data Catalog.
+     * Specifies the encryption-at-rest configuration for the Data Catalog.
      */
     EncryptionAtRest?: EncryptionAtRest;
     /**
-     * When password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of CreateConnection or UpdateConnection and store it in the ENCRYPTED_PASSWORD field in the connection properties. You can enable catalog encryption or only password encryption.
+     * When connection password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of CreateConnection or UpdateConnection and store it in the ENCRYPTED_PASSWORD field in the connection properties. You can enable catalog encryption or only password encryption.
      */
     ConnectionPasswordEncryption?: ConnectionPasswordEncryption;
   }
@@ -1775,7 +1943,7 @@ declare namespace Glue {
   export type DeleteConnectionNameList = NameString[];
   export interface DeleteConnectionRequest {
     /**
-     * The ID of the Data Catalog in which the connection resides. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -2024,6 +2192,8 @@ declare namespace Glue {
     ExtraJarsS3Path?: GenericString;
   }
   export type DevEndpointList = DevEndpoint[];
+  export type DevEndpointNameList = NameString[];
+  export type DevEndpointNames = GenericString[];
   export interface DynamoDBTarget {
     /**
      * The name of the DynamoDB table to crawl.
@@ -2126,7 +2296,7 @@ declare namespace Glue {
   }
   export interface GetConnectionRequest {
     /**
-     * The ID of the Data Catalog in which the connection resides. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -2134,7 +2304,7 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * Allow you to retrieve the connection metadata without displaying the password. For instance, the AWS Glue console uses this flag to retrieve connections, since the console does not display passwords. Set this parameter where the caller may not have permission to use the KMS key to decrypt the password, but does have permission to access the rest of the connection metadata (that is, the other connection properties).
+     * Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but does have permission to access the rest of the connection properties.
      */
     HidePassword?: Boolean;
   }
@@ -2156,7 +2326,7 @@ declare namespace Glue {
   }
   export interface GetConnectionsRequest {
     /**
-     * The ID of the Data Catalog in which the connections reside. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the connections reside. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -2164,7 +2334,7 @@ declare namespace Glue {
      */
     Filter?: GetConnectionsFilter;
     /**
-     * Allow you to retrieve the connection metadata without displaying the password. For instance, the AWS Glue console uses this flag to retrieve connections, since the console does not display passwords. Set this parameter where the caller may not have permission to use the KMS key to decrypt the password, but does have permission to access the rest of the connection metadata (that is, the other connection properties).
+     * Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but does have permission to access the rest of the connection properties.
      */
     HidePassword?: Boolean;
     /**
@@ -2244,7 +2414,7 @@ declare namespace Glue {
   }
   export interface GetDataCatalogEncryptionSettingsRequest {
     /**
-     * The ID of the Data Catalog for which to retrieve the security configuration. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog for which to retrieve the security configuration. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
   }
@@ -2695,6 +2865,18 @@ declare namespace Glue {
      */
     NextToken?: Token;
   }
+  export interface GetTagsRequest {
+    /**
+     * The Amazon ARN of the resource for which to retrieve tags.
+     */
+    ResourceArn: GlueResourceArn;
+  }
+  export interface GetTagsResponse {
+    /**
+     * The requested tags.
+     */
+    Tags?: TagsMap;
+  }
   export interface GetTriggerRequest {
     /**
      * The name of the trigger to retrieve.
@@ -2783,6 +2965,7 @@ declare namespace Glue {
      */
     NextToken?: Token;
   }
+  export type GlueResourceArn = string;
   export interface GrokClassifier {
     /**
      * The name of the classifier.
@@ -2896,7 +3079,7 @@ declare namespace Glue {
      */
     Timeout?: Timeout;
     /**
-     * AWS Glue supports running jobs on a JobCommand.Name="pythonshell" with allocated processing as low as 0.0625 DPU, which can be specified using MaxCapacity. Glue ETL jobs running in any other way cannot have fractional DPU allocations.
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. The value that can be allocated for MaxCapacity depends on whether you are running a python shell job, or an Apache Spark ETL job:   When you specify a python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -2953,6 +3136,7 @@ declare namespace Glue {
   }
   export type JobList = Job[];
   export type JobName = string;
+  export type JobNameList = NameString[];
   export interface JobRun {
     /**
      * The ID of this job run.
@@ -2991,7 +3175,7 @@ declare namespace Glue {
      */
     JobRunState?: JobRunState;
     /**
-     * The job arguments associated with this run. These override equivalent default arguments set for the job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+     * The job arguments associated with this run. For this job run, they replace the default arguments set in the job definition itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
     /**
@@ -3015,7 +3199,7 @@ declare namespace Glue {
      */
     Timeout?: Timeout;
     /**
-     * AWS Glue supports running jobs on a JobCommand.Name="pythonshell" with allocated processing as low as 0.0625 DPU, which can be specified using MaxCapacity. Glue ETL jobs running in any other way cannot have fractional DPU allocations.
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. The value that can be allocated for MaxCapacity depends on whether you are running a python shell job, or an Apache Spark ETL job:   When you specify a python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -3075,7 +3259,7 @@ declare namespace Glue {
      */
     Timeout?: Timeout;
     /**
-     * AWS Glue supports running jobs on a JobCommand.Name="pythonshell" with allocated processing as low as 0.0625 DPU, which can be specified using MaxCapacity. Glue ETL jobs running in any other way cannot have fractional DPU allocations.
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. The value that can be allocated for MaxCapacity depends on whether you are running a python shell job, or an Apache Spark ETL job:   When you specify a python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -3141,6 +3325,106 @@ declare namespace Glue {
     StartTime?: Timestamp;
   }
   export type LastCrawlStatus = "SUCCEEDED"|"CANCELLED"|"FAILED"|string;
+  export interface ListCrawlersRequest {
+    /**
+     * The maximum size of a list to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * A continuation token, if this is a continuation request.
+     */
+    NextToken?: Token;
+    /**
+     * Specifies to return only these tagged resources.
+     */
+    Tags?: TagsMap;
+  }
+  export interface ListCrawlersResponse {
+    /**
+     * The names of all crawlers in the account, or the crawlers with the specified tags.
+     */
+    CrawlerNames?: CrawlerNameList;
+    /**
+     * A continuation token, if the returned list does not contain the last metric available.
+     */
+    NextToken?: Token;
+  }
+  export interface ListDevEndpointsRequest {
+    /**
+     * A continuation token, if this is a continuation request.
+     */
+    NextToken?: GenericString;
+    /**
+     * The maximum size of a list to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * Specifies to return only these tagged resources.
+     */
+    Tags?: TagsMap;
+  }
+  export interface ListDevEndpointsResponse {
+    /**
+     * The names of all DevEndpoints in the account, or the DevEndpoints with the specified tags.
+     */
+    DevEndpointNames?: DevEndpointNameList;
+    /**
+     * A continuation token, if the returned list does not contain the last metric available.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListJobsRequest {
+    /**
+     * A continuation token, if this is a continuation request.
+     */
+    NextToken?: GenericString;
+    /**
+     * The maximum size of a list to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * Specifies to return only these tagged resources.
+     */
+    Tags?: TagsMap;
+  }
+  export interface ListJobsResponse {
+    /**
+     * The names of all jobs in the account, or the jobs with the specified tags.
+     */
+    JobNames?: JobNameList;
+    /**
+     * A continuation token, if the returned list does not contain the last metric available.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListTriggersRequest {
+    /**
+     * A continuation token, if this is a continuation request.
+     */
+    NextToken?: GenericString;
+    /**
+     *  The name of the job for which to retrieve triggers. The trigger that can start this job will be returned, and if there is no such trigger, all triggers will be returned.
+     */
+    DependentJobName?: NameString;
+    /**
+     * The maximum size of a list to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * Specifies to return only these tagged resources.
+     */
+    Tags?: TagsMap;
+  }
+  export interface ListTriggersResponse {
+    /**
+     * The names of all triggers in the account, or the triggers with the specified tags.
+     */
+    TriggerNames?: TriggerNameList;
+    /**
+     * A continuation token, if the returned list does not contain the last metric available.
+     */
+    NextToken?: GenericString;
+  }
   export interface Location {
     /**
      * A JDBC location.
@@ -3266,7 +3550,7 @@ declare namespace Glue {
   export type PartitionErrors = PartitionError[];
   export interface PartitionInput {
     /**
-     * The values of the partition.
+     * The values of the partition. Although this parameter is not required by the SDK, you must specify this parameter for a valid input.
      */
     Values?: ValueStringList;
     /**
@@ -3306,7 +3590,7 @@ declare namespace Glue {
      */
     SecurityGroupIdList?: SecurityGroupIdList;
     /**
-     * The connection's availability zone. This field is redundant, since the specified subnet implies the availability zone to be used. The field must be populated now, but will be deprecated in the future.
+     * The connection's Availability Zone. This field is redundant because the specified subnet implies the Availability Zone to be used. Currently the field must be populated, but it will be deprecated in the future.
      */
     AvailabilityZone?: NameString;
   }
@@ -3337,7 +3621,7 @@ declare namespace Glue {
   export type PublicKeysList = GenericString[];
   export interface PutDataCatalogEncryptionSettingsRequest {
     /**
-     * The ID of the Data Catalog for which to set the security configuration. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog for which to set the security configuration. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -3353,7 +3637,7 @@ declare namespace Glue {
      */
     PolicyInJson: PolicyJsonString;
     /**
-     * This is the hash value returned when the previous policy was set using PutResourcePolicy. Its purpose is to prevent concurrent modifications of a policy. Do not use this parameter if no previous policy has been set.
+     * The hash value returned when the previous policy was set using PutResourcePolicy. Its purpose is to prevent concurrent modifications of a policy. Do not use this parameter if no previous policy has been set.
      */
     PolicyHashCondition?: HashString;
     /**
@@ -3523,7 +3807,7 @@ declare namespace Glue {
      */
     JobRunId?: IdString;
     /**
-     * The job arguments specifically for this run. They override the equivalent default arguments set for in the job definition itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+     * The job arguments specifically for this run. For this job run, they replace the default arguments set in the job definition itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
     /**
@@ -3535,7 +3819,7 @@ declare namespace Glue {
      */
     Timeout?: Timeout;
     /**
-     * AWS Glue supports running jobs on a JobCommand.Name="pythonshell" with allocated processing as low as 0.0625 DPU, which can be specified using MaxCapacity. Glue ETL jobs running in any other way cannot have fractional DPU allocations.
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. The value that can be allocated for MaxCapacity depends on whether you are running a python shell job, or an Apache Spark ETL job:   When you specify a python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -3800,6 +4084,22 @@ declare namespace Glue {
     ErrorDetail?: ErrorDetail;
   }
   export type TableVersionErrors = TableVersionError[];
+  export type TagKey = string;
+  export type TagKeysList = TagKey[];
+  export interface TagResourceRequest {
+    /**
+     * The ARN of the AWS Glue resource to which to add the tags. For more information about AWS Glue resource ARNs, see the AWS Glue ARN string pattern.
+     */
+    ResourceArn: GlueResourceArn;
+    /**
+     * Tags to add to this resource.
+     */
+    TagsToAdd: TagsMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export type TagsMap = {[key: string]: TagValue};
   export type Timeout = number;
   export type Timestamp = Date;
   export type TimestampValue = Date;
@@ -3840,6 +4140,7 @@ declare namespace Glue {
     Predicate?: Predicate;
   }
   export type TriggerList = Trigger[];
+  export type TriggerNameList = NameString[];
   export type TriggerState = "CREATING"|"CREATED"|"ACTIVATING"|"ACTIVATED"|"DEACTIVATING"|"DEACTIVATED"|"DELETING"|"UPDATING"|string;
   export type TriggerType = "SCHEDULED"|"CONDITIONAL"|"ON_DEMAND"|string;
   export interface TriggerUpdate {
@@ -3865,6 +4166,18 @@ declare namespace Glue {
     Predicate?: Predicate;
   }
   export type URI = string;
+  export interface UntagResourceRequest {
+    /**
+     * The ARN of the resource from which to remove the tags.
+     */
+    ResourceArn: GlueResourceArn;
+    /**
+     * Tags to remove from this resource.
+     */
+    TagsToRemove: TagKeysList;
+  }
+  export interface UntagResourceResponse {
+  }
   export type UpdateBehavior = "LOG"|"UPDATE_IN_DATABASE"|string;
   export interface UpdateClassifierRequest {
     /**
@@ -3884,7 +4197,7 @@ declare namespace Glue {
   }
   export interface UpdateConnectionRequest {
     /**
-     * The ID of the Data Catalog in which the connection resides. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
