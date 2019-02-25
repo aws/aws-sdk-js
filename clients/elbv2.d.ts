@@ -461,9 +461,9 @@ declare namespace ELBv2 {
      */
     ClientId: AuthenticateOidcActionClientId;
     /**
-     * The OAuth 2.0 client secret.
+     * The OAuth 2.0 client secret. This parameter is required if you are creating a rule. If you are modifying a rule, you can omit this parameter if you set UseExistingClientSecret to true.
      */
-    ClientSecret: AuthenticateOidcActionClientSecret;
+    ClientSecret?: AuthenticateOidcActionClientSecret;
     /**
      * The name of the cookie used to maintain session information. The default is AWSELBAuthSessionCookie.
      */
@@ -484,12 +484,17 @@ declare namespace ELBv2 {
      * The behavior if the user is not authenticated. The following are possible values:   deny - Return an HTTP 401 Unauthorized error.   allow - Allow the request to be forwarded to the target.   authenticate - Redirect the request to the IdP authorization endpoint. This is the default value.  
      */
     OnUnauthenticatedRequest?: AuthenticateOidcActionConditionalBehaviorEnum;
+    /**
+     * Indicates whether to use the existing client secret when modifying a rule. If you are creating a rule, you can omit this parameter or set it to false.
+     */
+    UseExistingClientSecret?: AuthenticateOidcActionUseExistingClientSecret;
   }
   export type AuthenticateOidcActionIssuer = string;
   export type AuthenticateOidcActionScope = string;
   export type AuthenticateOidcActionSessionCookieName = string;
   export type AuthenticateOidcActionSessionTimeout = number;
   export type AuthenticateOidcActionTokenEndpoint = string;
+  export type AuthenticateOidcActionUseExistingClientSecret = boolean;
   export type AuthenticateOidcActionUserInfoEndpoint = string;
   export interface AvailabilityZone {
     /**
@@ -1113,7 +1118,7 @@ declare namespace ELBv2 {
   export type LoadBalancerArns = LoadBalancerArn[];
   export interface LoadBalancerAttribute {
     /**
-     * The name of the attribute. The following attributes are supported by both Application Load Balancers and Network Load Balancers:    deletion_protection.enabled - Indicates whether deletion protection is enabled. The value is true or false. The default is false.   The following attributes are supported by only Application Load Balancers:    access_logs.s3.enabled - Indicates whether access logs are enabled. The value is true or false. The default is false.    access_logs.s3.bucket - The name of the S3 bucket for the access logs. This attribute is required if access logs are enabled. The bucket must exist in the same region as the load balancer and have a bucket policy that grants Elastic Load Balancing permissions to write to the bucket.    access_logs.s3.prefix - The prefix for the location in the S3 bucket for the access logs.    idle_timeout.timeout_seconds - The idle timeout value, in seconds. The valid range is 1-4000 seconds. The default is 60 seconds.    routing.http2.enabled - Indicates whether HTTP/2 is enabled. The value is true or false. The default is true.   The following attributes are supported by only Network Load Balancers:    load_balancing.cross_zone.enabled - Indicates whether cross-zone load balancing is enabled. The value is true or false. The default is false.  
+     * The name of the attribute. The following attributes are supported by both Application Load Balancers and Network Load Balancers:    access_logs.s3.enabled - Indicates whether access logs are enabled. The value is true or false. The default is false.    access_logs.s3.bucket - The name of the S3 bucket for the access logs. This attribute is required if access logs are enabled. The bucket must exist in the same region as the load balancer and have a bucket policy that grants Elastic Load Balancing permissions to write to the bucket.    access_logs.s3.prefix - The prefix for the location in the S3 bucket for the access logs.    deletion_protection.enabled - Indicates whether deletion protection is enabled. The value is true or false. The default is false.   The following attributes are supported by only Application Load Balancers:    idle_timeout.timeout_seconds - The idle timeout value, in seconds. The valid range is 1-4000 seconds. The default is 60 seconds.    routing.http2.enabled - Indicates whether HTTP/2 is enabled. The value is true or false. The default is true.   The following attributes are supported by only Network Load Balancers:    load_balancing.cross_zone.enabled - Indicates whether cross-zone load balancing is enabled. The value is true or false. The default is false.  
      */
     Key?: LoadBalancerAttributeKey;
     /**

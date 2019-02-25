@@ -146,7 +146,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Removes an object lifecycle policy from a container.</p>"
+      "documentation": "<p>Removes an object lifecycle policy from a container. It takes up to 20 minutes for the change to take effect.</p>"
     },
     "DescribeContainer": {
       "name": "DescribeContainer",
@@ -321,7 +321,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Sets the cross-origin resource sharing (CORS) configuration on a container so that the container can service cross-origin requests. For example, you might want to enable a request whose origin is http://www.example.com to access your AWS Elemental MediaStore container at my.example.container.com by using the browser's XMLHttpRequest capability.</p> <p>To enable CORS on a container, you attach a CORS policy to the container. In the CORS policy, you configure rules that identify origins and the HTTP methods that can be executed on your container. The policy can contain up to 398,000 characters. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed.</p>"
+      "documentation": "<p>Sets the cross-origin resource sharing (CORS) configuration on a container so that the container can service cross-origin requests. For example, you might want to enable a request whose origin is http://www.example.com to access your AWS Elemental MediaStore container at my.example.container.com by using the browser's XMLHttpRequest capability.</p> <p>To enable CORS on a container, you attach a CORS policy to the container. In the CORS policy, you configure rules that identify origins and the HTTP methods that can be executed on your container. The policy can contain up to 398,000 characters. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed.</p> <p>To learn more about CORS, see <a href=\"https://docs.aws.amazon.com/mediastore/latest/ug/cors-policy.html\">Cross-Origin Resource Sharing (CORS) in AWS Elemental MediaStore</a>.</p>"
     },
     "PutLifecyclePolicy": {
       "name": "PutLifecyclePolicy",
@@ -346,7 +346,57 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Writes an object lifecycle policy to a container. If the container already has an object lifecycle policy, the service replaces the existing policy with the new policy. </p>"
+      "documentation": "<p>Writes an object lifecycle policy to a container. If the container already has an object lifecycle policy, the service replaces the existing policy with the new policy. It takes up to 20 minutes for the change to take effect.</p> <p>For information about how to construct an object lifecycle policy, see <a href=\"https://docs.aws.amazon.com/mediastore/latest/ug/policies-object-lifecycle-components.html\">Components of an Object Lifecycle Policy</a>.</p>"
+    },
+    "StartAccessLogging": {
+      "name": "StartAccessLogging",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartAccessLoggingInput"
+      },
+      "output": {
+        "shape": "StartAccessLoggingOutput"
+      },
+      "errors": [
+        {
+          "shape": "ContainerInUseException"
+        },
+        {
+          "shape": "ContainerNotFoundException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Starts access logging on the specified container. When you enable access logging on a container, MediaStore delivers access logs for objects stored in that container to Amazon CloudWatch Logs.</p>"
+    },
+    "StopAccessLogging": {
+      "name": "StopAccessLogging",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StopAccessLoggingInput"
+      },
+      "output": {
+        "shape": "StopAccessLoggingOutput"
+      },
+      "errors": [
+        {
+          "shape": "ContainerInUseException"
+        },
+        {
+          "shape": "ContainerNotFoundException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Stops access logging on the specified container. When you stop access logging on a container, MediaStore stops sending access logs to Amazon CloudWatch Logs. These access logs are not saved and are not retrievable.</p>"
     }
   },
   "shapes": {
@@ -396,6 +446,10 @@
         "Status": {
           "shape": "ContainerStatus",
           "documentation": "<p>The status of container creation or deletion. The status is one of the following: <code>CREATING</code>, <code>ACTIVE</code>, or <code>DELETING</code>. While the service is creating the container, the status is <code>CREATING</code>. When the endpoint is available, the status changes to <code>ACTIVE</code>.</p>"
+        },
+        "AccessLoggingEnabled": {
+          "shape": "ContainerAccessLoggingEnabled",
+          "documentation": "<p>The state of access logging on the container. This value is <code>false</code> by default, indicating that AWS Elemental MediaStore does not send access logs to Amazon CloudWatch Logs. When you enable access logging on the container, MediaStore changes this value to <code>true</code>, indicating that the service delivers access logs for objects stored in that container to CloudWatch Logs.</p>"
         }
       },
       "documentation": "<p>This section describes operations that you can perform on an AWS Elemental MediaStore container.</p>"
@@ -405,6 +459,9 @@
       "max": 1024,
       "min": 1,
       "pattern": "arn:aws:mediastore:[a-z]+-[a-z]+-\\d:\\d{12}:container/\\w{1,255}"
+    },
+    "ContainerAccessLoggingEnabled": {
+      "type": "boolean"
     },
     "ContainerList": {
       "type": "list",
@@ -732,7 +789,7 @@
     },
     "PaginationToken": {
       "type": "string",
-      "max": 255,
+      "max": 1024,
       "min": 1,
       "pattern": "[0-9A-Za-z=/+]+"
     },
@@ -796,6 +853,38 @@
       }
     },
     "PutLifecyclePolicyOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "StartAccessLoggingInput": {
+      "type": "structure",
+      "required": [
+        "ContainerName"
+      ],
+      "members": {
+        "ContainerName": {
+          "shape": "ContainerName",
+          "documentation": "<p>The name of the container that you want to start access logging on.</p>"
+        }
+      }
+    },
+    "StartAccessLoggingOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "StopAccessLoggingInput": {
+      "type": "structure",
+      "required": [
+        "ContainerName"
+      ],
+      "members": {
+        "ContainerName": {
+          "shape": "ContainerName",
+          "documentation": "<p>The name of the container that you want to stop access logging on.</p>"
+        }
+      }
+    },
+    "StopAccessLoggingOutput": {
       "type": "structure",
       "members": {}
     },

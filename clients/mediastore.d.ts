@@ -44,11 +44,11 @@ declare class MediaStore extends Service {
    */
   deleteCorsPolicy(callback?: (err: AWSError, data: MediaStore.Types.DeleteCorsPolicyOutput) => void): Request<MediaStore.Types.DeleteCorsPolicyOutput, AWSError>;
   /**
-   * Removes an object lifecycle policy from a container.
+   * Removes an object lifecycle policy from a container. It takes up to 20 minutes for the change to take effect.
    */
   deleteLifecyclePolicy(params: MediaStore.Types.DeleteLifecyclePolicyInput, callback?: (err: AWSError, data: MediaStore.Types.DeleteLifecyclePolicyOutput) => void): Request<MediaStore.Types.DeleteLifecyclePolicyOutput, AWSError>;
   /**
-   * Removes an object lifecycle policy from a container.
+   * Removes an object lifecycle policy from a container. It takes up to 20 minutes for the change to take effect.
    */
   deleteLifecyclePolicy(callback?: (err: AWSError, data: MediaStore.Types.DeleteLifecyclePolicyOutput) => void): Request<MediaStore.Types.DeleteLifecyclePolicyOutput, AWSError>;
   /**
@@ -100,21 +100,37 @@ declare class MediaStore extends Service {
    */
   putContainerPolicy(callback?: (err: AWSError, data: MediaStore.Types.PutContainerPolicyOutput) => void): Request<MediaStore.Types.PutContainerPolicyOutput, AWSError>;
   /**
-   * Sets the cross-origin resource sharing (CORS) configuration on a container so that the container can service cross-origin requests. For example, you might want to enable a request whose origin is http://www.example.com to access your AWS Elemental MediaStore container at my.example.container.com by using the browser's XMLHttpRequest capability. To enable CORS on a container, you attach a CORS policy to the container. In the CORS policy, you configure rules that identify origins and the HTTP methods that can be executed on your container. The policy can contain up to 398,000 characters. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed.
+   * Sets the cross-origin resource sharing (CORS) configuration on a container so that the container can service cross-origin requests. For example, you might want to enable a request whose origin is http://www.example.com to access your AWS Elemental MediaStore container at my.example.container.com by using the browser's XMLHttpRequest capability. To enable CORS on a container, you attach a CORS policy to the container. In the CORS policy, you configure rules that identify origins and the HTTP methods that can be executed on your container. The policy can contain up to 398,000 characters. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed. To learn more about CORS, see Cross-Origin Resource Sharing (CORS) in AWS Elemental MediaStore.
    */
   putCorsPolicy(params: MediaStore.Types.PutCorsPolicyInput, callback?: (err: AWSError, data: MediaStore.Types.PutCorsPolicyOutput) => void): Request<MediaStore.Types.PutCorsPolicyOutput, AWSError>;
   /**
-   * Sets the cross-origin resource sharing (CORS) configuration on a container so that the container can service cross-origin requests. For example, you might want to enable a request whose origin is http://www.example.com to access your AWS Elemental MediaStore container at my.example.container.com by using the browser's XMLHttpRequest capability. To enable CORS on a container, you attach a CORS policy to the container. In the CORS policy, you configure rules that identify origins and the HTTP methods that can be executed on your container. The policy can contain up to 398,000 characters. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed.
+   * Sets the cross-origin resource sharing (CORS) configuration on a container so that the container can service cross-origin requests. For example, you might want to enable a request whose origin is http://www.example.com to access your AWS Elemental MediaStore container at my.example.container.com by using the browser's XMLHttpRequest capability. To enable CORS on a container, you attach a CORS policy to the container. In the CORS policy, you configure rules that identify origins and the HTTP methods that can be executed on your container. The policy can contain up to 398,000 characters. You can add up to 100 rules to a CORS policy. If more than one rule applies, the service uses the first applicable rule listed. To learn more about CORS, see Cross-Origin Resource Sharing (CORS) in AWS Elemental MediaStore.
    */
   putCorsPolicy(callback?: (err: AWSError, data: MediaStore.Types.PutCorsPolicyOutput) => void): Request<MediaStore.Types.PutCorsPolicyOutput, AWSError>;
   /**
-   * Writes an object lifecycle policy to a container. If the container already has an object lifecycle policy, the service replaces the existing policy with the new policy. 
+   * Writes an object lifecycle policy to a container. If the container already has an object lifecycle policy, the service replaces the existing policy with the new policy. It takes up to 20 minutes for the change to take effect. For information about how to construct an object lifecycle policy, see Components of an Object Lifecycle Policy.
    */
   putLifecyclePolicy(params: MediaStore.Types.PutLifecyclePolicyInput, callback?: (err: AWSError, data: MediaStore.Types.PutLifecyclePolicyOutput) => void): Request<MediaStore.Types.PutLifecyclePolicyOutput, AWSError>;
   /**
-   * Writes an object lifecycle policy to a container. If the container already has an object lifecycle policy, the service replaces the existing policy with the new policy. 
+   * Writes an object lifecycle policy to a container. If the container already has an object lifecycle policy, the service replaces the existing policy with the new policy. It takes up to 20 minutes for the change to take effect. For information about how to construct an object lifecycle policy, see Components of an Object Lifecycle Policy.
    */
   putLifecyclePolicy(callback?: (err: AWSError, data: MediaStore.Types.PutLifecyclePolicyOutput) => void): Request<MediaStore.Types.PutLifecyclePolicyOutput, AWSError>;
+  /**
+   * Starts access logging on the specified container. When you enable access logging on a container, MediaStore delivers access logs for objects stored in that container to Amazon CloudWatch Logs.
+   */
+  startAccessLogging(params: MediaStore.Types.StartAccessLoggingInput, callback?: (err: AWSError, data: MediaStore.Types.StartAccessLoggingOutput) => void): Request<MediaStore.Types.StartAccessLoggingOutput, AWSError>;
+  /**
+   * Starts access logging on the specified container. When you enable access logging on a container, MediaStore delivers access logs for objects stored in that container to Amazon CloudWatch Logs.
+   */
+  startAccessLogging(callback?: (err: AWSError, data: MediaStore.Types.StartAccessLoggingOutput) => void): Request<MediaStore.Types.StartAccessLoggingOutput, AWSError>;
+  /**
+   * Stops access logging on the specified container. When you stop access logging on a container, MediaStore stops sending access logs to Amazon CloudWatch Logs. These access logs are not saved and are not retrievable.
+   */
+  stopAccessLogging(params: MediaStore.Types.StopAccessLoggingInput, callback?: (err: AWSError, data: MediaStore.Types.StopAccessLoggingOutput) => void): Request<MediaStore.Types.StopAccessLoggingOutput, AWSError>;
+  /**
+   * Stops access logging on the specified container. When you stop access logging on a container, MediaStore stops sending access logs to Amazon CloudWatch Logs. These access logs are not saved and are not retrievable.
+   */
+  stopAccessLogging(callback?: (err: AWSError, data: MediaStore.Types.StopAccessLoggingOutput) => void): Request<MediaStore.Types.StopAccessLoggingOutput, AWSError>;
 }
 declare namespace MediaStore {
   export type AllowedHeaders = Header[];
@@ -141,8 +157,13 @@ declare namespace MediaStore {
      * The status of container creation or deletion. The status is one of the following: CREATING, ACTIVE, or DELETING. While the service is creating the container, the status is CREATING. When the endpoint is available, the status changes to ACTIVE.
      */
     Status?: ContainerStatus;
+    /**
+     * The state of access logging on the container. This value is false by default, indicating that AWS Elemental MediaStore does not send access logs to Amazon CloudWatch Logs. When you enable access logging on the container, MediaStore changes this value to true, indicating that the service delivers access logs for objects stored in that container to CloudWatch Logs.
+     */
+    AccessLoggingEnabled?: ContainerAccessLoggingEnabled;
   }
   export type ContainerARN = string;
+  export type ContainerAccessLoggingEnabled = boolean;
   export type ContainerList = Container[];
   export type ContainerListLimit = number;
   export type ContainerName = string;
@@ -326,6 +347,22 @@ declare namespace MediaStore {
     LifecyclePolicy: LifecyclePolicy;
   }
   export interface PutLifecyclePolicyOutput {
+  }
+  export interface StartAccessLoggingInput {
+    /**
+     * The name of the container that you want to start access logging on.
+     */
+    ContainerName: ContainerName;
+  }
+  export interface StartAccessLoggingOutput {
+  }
+  export interface StopAccessLoggingInput {
+    /**
+     * The name of the container that you want to stop access logging on.
+     */
+    ContainerName: ContainerName;
+  }
+  export interface StopAccessLoggingOutput {
   }
   export type TimeStamp = Date;
   /**

@@ -444,6 +444,9 @@ declare namespace CostExplorer {
      * Filters utilization data by dimensions. You can filter by the following dimensions:   AZ   CACHE_ENGINE   DATABASE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   SERVICE   TAG   TENANCY    GetReservationCoverage uses the same Expression object as the other operations, but only AND is supported among each dimension. You can nest only one level deep. If there are multiple values for a dimension, they are OR'd together. If you don't provide a SERVICE filter, Cost Explorer defaults to EC2.
      */
     Filter?: Expression;
+    /**
+     * The measurement that you want your reservation coverage reported in. Valid values are Hour, Unit, and Cost. You can use multiple values in a request.
+     */
     Metrics?: MetricNames;
     /**
      * The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
@@ -829,6 +832,9 @@ declare namespace CostExplorer {
     RecommendationSummary?: ReservationPurchaseRecommendationSummary;
   }
   export interface ReservationPurchaseRecommendationDetail {
+    /**
+     * The account that this RI recommendation is for.
+     */
     AccountId?: GenericString;
     /**
      * Details about the instances that AWS recommends that you purchase.
