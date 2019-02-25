@@ -645,7 +645,8 @@
     "name": "GlobalAccelerator"
   },
   "comprehendmedical": {
-    "name": "ComprehendMedical"
+    "name": "ComprehendMedical",
+    "cors": true
   },
   "kinesisanalyticsv2": {
     "name": "KinesisAnalyticsV2"
