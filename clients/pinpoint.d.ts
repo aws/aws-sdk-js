@@ -436,6 +436,14 @@ declare class Pinpoint extends Service {
    */
   getVoiceChannel(callback?: (err: AWSError, data: Pinpoint.Types.GetVoiceChannelResponse) => void): Request<Pinpoint.Types.GetVoiceChannelResponse, AWSError>;
   /**
+   * 
+   */
+  listTagsForResource(params: Pinpoint.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Pinpoint.Types.ListTagsForResourceResponse) => void): Request<Pinpoint.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * 
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Pinpoint.Types.ListTagsForResourceResponse) => void): Request<Pinpoint.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Returns information about the specified phone number.
    */
   phoneNumberValidate(params: Pinpoint.Types.PhoneNumberValidateRequest, callback?: (err: AWSError, data: Pinpoint.Types.PhoneNumberValidateResponse) => void): Request<Pinpoint.Types.PhoneNumberValidateResponse, AWSError>;
@@ -483,6 +491,22 @@ declare class Pinpoint extends Service {
    * Used to send a message to a list of users.
    */
   sendUsersMessages(callback?: (err: AWSError, data: Pinpoint.Types.SendUsersMessagesResponse) => void): Request<Pinpoint.Types.SendUsersMessagesResponse, AWSError>;
+  /**
+   * 
+   */
+  tagResource(params: Pinpoint.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  untagResource(params: Pinpoint.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Update an ADM channel.
    */
@@ -1242,6 +1266,10 @@ Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | 
   }
   export interface ApplicationResponse {
     /**
+     * The arn for the application.
+     */
+    Arn?: __string;
+    /**
      * The unique application ID.
      */
     Id?: __string;
@@ -1249,6 +1277,10 @@ Valid values: GCM | APNS | APNS_SANDBOX | APNS_VOIP | APNS_VOIP_SANDBOX | ADM | 
      * The display name of the application.
      */
     Name?: __string;
+    /**
+     * The Tags for the application.
+     */
+    tags?: MapOf__string;
   }
   export interface ApplicationSettingsResource {
     /**
@@ -1512,6 +1544,10 @@ ENDPOINT - Send the campaign when an endpoint event occurs. See the Event resour
      */
     ApplicationId?: __string;
     /**
+     * The arn for the campaign.
+     */
+    Arn?: __string;
+    /**
      * The date the campaign was created in ISO 8601 format.
      */
     CreationDate?: __string;
@@ -1573,6 +1609,10 @@ ENDPOINT - Send the campaign when an endpoint event occurs. See the Event resour
 An A/B test campaign will have a status of COMPLETED only when all treatments have a status of COMPLETED.
      */
     State?: CampaignState;
+    /**
+     * The Tags for the campaign.
+     */
+    tags?: MapOf__string;
     /**
      * A custom description for the treatment.
      */
@@ -1675,6 +1715,10 @@ Valid values: SCHEDULED, EXECUTING, PENDING_NEXT_RUN, COMPLETED, PAUSED
      * The display name of the application. Used in the Amazon Pinpoint console.
      */
     Name?: __string;
+    /**
+     * The Tags for the app.
+     */
+    tags?: MapOf__string;
   }
   export interface CreateCampaignRequest {
     /**
@@ -3385,6 +3429,12 @@ The job status is FAILED if one or more pieces failed to import.
     EventsItemResponse?: MapOfEventItemResponse;
   }
   export type JobStatus = "CREATED"|"INITIALIZING"|"PROCESSING"|"COMPLETING"|"COMPLETED"|"FAILING"|"FAILED"|string;
+  export interface ListTagsForResourceRequest {
+    ResourceArn: __string;
+  }
+  export interface ListTagsForResourceResponse {
+    TagsModel: TagsModel;
+  }
   export interface Message {
     /**
      * The action that occurs if the user taps a push notification delivered by the campaign:
@@ -4097,6 +4147,10 @@ Valid values: CSV, JSON
      */
     ApplicationId?: __string;
     /**
+     * The arn for the segment.
+     */
+    Arn?: __string;
+    /**
      * The date and time when the segment was created.
      */
     CreationDate?: __string;
@@ -4130,6 +4184,10 @@ DIMENSIONAL - A dynamic segment built from selection criteria based on endpoint 
 IMPORT - A static segment built from an imported set of endpoint definitions. You create this type of segment by importing a segment in the Amazon Pinpoint console or by making a POST request to the jobs/import resource.
      */
     SegmentType?: SegmentType;
+    /**
+     * The Tags for the segment.
+     */
+    tags?: MapOf__string;
     /**
      * The segment version number.
      */
@@ -4255,6 +4313,13 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
     Data?: __string;
   }
   export type SourceType = "ALL"|"ANY"|"NONE"|string;
+  export interface TagResourceRequest {
+    ResourceArn: __string;
+    TagsModel: TagsModel;
+  }
+  export interface TagsModel {
+    tags: MapOf__string;
+  }
   export interface TreatmentResource {
     /**
      * The unique treatment ID.
@@ -4286,6 +4351,13 @@ EXCLUSIVE - Endpoints that match the criteria are excluded from the segment.
     TreatmentName?: __string;
   }
   export type Type = "ALL"|"ANY"|"NONE"|string;
+  export interface UntagResourceRequest {
+    ResourceArn: __string;
+    /**
+     * The key(s) of tag to be deleted
+     */
+    TagKeys: ListOf__string;
+  }
   export interface UpdateAdmChannelRequest {
     ADMChannelRequest: ADMChannelRequest;
     /**
@@ -4594,6 +4666,10 @@ Individual campaigns within the app can have their own quiet time settings, whic
      */
     SegmentVersion?: __integer;
     /**
+     * The Tags for the campaign.
+     */
+    tags?: MapOf__string;
+    /**
      * A custom description for the treatment.
      */
     TreatmentDescription?: __string;
@@ -4627,6 +4703,10 @@ Individual campaigns within the app can have their own quiet time settings, whic
      * A segment group, which consists of zero or more source segments, plus dimensions that are applied to those source segments. Your request can only include one segment group. Your request can include either a SegmentGroups object or a Dimensions object, but not both.
      */
     SegmentGroups?: SegmentGroupList;
+    /**
+     * The Tags for the segments.
+     */
+    tags?: MapOf__string;
   }
   export interface WriteTreatmentResource {
     /**

@@ -20,11 +20,11 @@ declare class MediaConvert extends Service {
    */
   associateCertificate(callback?: (err: AWSError, data: MediaConvert.Types.AssociateCertificateResponse) => void): Request<MediaConvert.Types.AssociateCertificateResponse, AWSError>;
   /**
-   * Permanently remove a job from a queue. Once you have canceled a job, you can't start it again. You can't delete a running job.
+   * Permanently cancel a job. Once you have canceled a job, you can't start it again.
    */
   cancelJob(params: MediaConvert.Types.CancelJobRequest, callback?: (err: AWSError, data: MediaConvert.Types.CancelJobResponse) => void): Request<MediaConvert.Types.CancelJobResponse, AWSError>;
   /**
-   * Permanently remove a job from a queue. Once you have canceled a job, you can't start it again. You can't delete a running job.
+   * Permanently cancel a job. Once you have canceled a job, you can't start it again.
    */
   cancelJob(callback?: (err: AWSError, data: MediaConvert.Types.CancelJobResponse) => void): Request<MediaConvert.Types.CancelJobResponse, AWSError>;
   /**
@@ -668,6 +668,10 @@ All burn-in and DVB-Sub font settings must match.
     Role: __string;
     Settings: JobSettings;
     /**
+     * Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.
+     */
+    StatusUpdateIntervalInSecs?: __integerMin10Max600;
+    /**
      * User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.
      */
     UserMetadata?: __mapOf__string;
@@ -697,6 +701,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     Queue?: __string;
     Settings: JobTemplateSettings;
+    /**
+     * Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.
+     */
+    StatusUpdateIntervalInSecs?: __integerMin10Max600;
     /**
      * The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.
      */
@@ -1020,7 +1028,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type EmbeddedConvert608To708 = "UPCONVERT"|"DISABLED"|string;
   export interface EmbeddedDestinationSettings {
     /**
-     * Ignore this setting unless your input captions are SCC format and your output container is MXF. With this combination of input captions format and output container, you can optionally use this setting to replace the input channel number with the track number that you specify. If you don't specify an output track number, the system uses the input channel number for the output channel number. This setting applies to each output individually. Channels must be unique and may only be combined in the following combinations: (1+3, 2+4, 1+4, 2+3).
+     * Ignore this setting unless your input captions are SCC format and your output container is MXF. With this combination of input captions format and output container, you can optionally use this setting to replace the input channel number with the track number that you specify. Specify a different number for each output captions track. If you don't specify an output track number, the system uses the input channel number for the output channel number. This setting applies to each output individually. You can optionally combine two captions channels in your output. The two output channel numbers can be one of the following pairs: 1,3; 2,4; 1,4; or 2,3.
      */
     Destination608ChannelNumber?: __integerMin1Max4;
   }
@@ -1040,6 +1048,32 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      * URL of endpoint
      */
     Url?: __string;
+  }
+  export interface EsamManifestConfirmConditionNotification {
+    /**
+     * Provide your ESAM ManifestConfirmConditionNotification XML document inside your JSON job settings. Form the XML document as per OC-SP-ESAM-API-I03-131025. The transcoder will use the Manifest Conditioning instructions in the message that you supply.
+     */
+    MccXml?: __stringPatternSNManifestConfirmConditionNotificationNS;
+  }
+  export interface EsamSettings {
+    /**
+     * Specifies an ESAM ManifestConfirmConditionNotification XML as per OC-SP-ESAM-API-I03-131025. The transcoder uses the manifest conditioning instructions that you provide in the setting MCC XML (mccXml).
+     */
+    ManifestConfirmConditionNotification?: EsamManifestConfirmConditionNotification;
+    /**
+     * Specifies the stream distance, in milliseconds, between the SCTE 35 messages that the transcoder places and the splice points that they refer to. If the time between the start of the asset and the SCTE-35 message is less than this value, then the transcoder places the SCTE-35 marker at the beginning of the stream.
+     */
+    ResponseSignalPreroll?: __integerMin0Max30000;
+    /**
+     * Specifies an ESAM SignalProcessingNotification XML as per OC-SP-ESAM-API-I03-131025. The transcoder uses the signal processing instructions that you provide in the setting SCC XML (sccXml).
+     */
+    SignalProcessingNotification?: EsamSignalProcessingNotification;
+  }
+  export interface EsamSignalProcessingNotification {
+    /**
+     * Provide your ESAM SignalProcessingNotification XML document inside your JSON job settings. Form the XML document as per OC-SP-ESAM-API-I03-131025. The transcoder will use the signal processing instructions in the message that you supply. Provide your ESAM SignalProcessingNotification XML document inside your JSON job settings. If you want the service to place SCTE-35 markers at the insertion points you specify in the XML document, you must also enable SCTE-35 ESAM (scte35Esam). Note that you can either specify an ESAM XML document or enable SCTE-35 passthrough. You can't do both.
+     */
+    SccXml?: __stringPatternSNSignalProcessingNotificationNS;
   }
   export type F4vMoovPlacement = "PROGRESSIVE_DOWNLOAD"|"NORMAL"|string;
   export interface F4vSettings {
@@ -1356,6 +1390,9 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     TemporalIds?: H265TemporalIds;
     Tiles?: H265Tiles;
     UnregisteredSeiTimecode?: H265UnregisteredSeiTimecode;
+    /**
+     * Use this setting only for outputs encoded with H.265 that are in CMAF or DASH output groups. If you include writeMp4PackagingType in your JSON job specification for other outputs, your video might not work properly with downstream systems and video players. If the location of parameter set NAL units don't matter in your workflow, ignore this setting. The service defaults to marking your output as HEV1. Choose HVC1 to mark your output as HVC1. This makes your output compliant with this specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the samples directly. Keep the default HEV1 to mark your output as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.
+     */
     WriteMp4PackagingType?: H265WriteMp4PackagingType;
   }
   export type H265SlowPal = "DISABLED"|"ENABLED"|string;
@@ -1444,6 +1481,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     ConstantInitializationVector?: __stringMin32Max32Pattern09aFAF32;
     EncryptionMethod?: HlsEncryptionType;
     InitializationVectorInManifest?: HlsInitializationVectorInManifest;
+    OfflineEncrypted?: HlsOfflineEncrypted;
     SpekeKeyProvider?: SpekeKeyProvider;
     StaticKeyProvider?: StaticKeyProvider;
     Type?: HlsKeyProviderType;
@@ -1515,6 +1553,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type HlsKeyProviderType = "SPEKE"|"STATIC_KEY"|string;
   export type HlsManifestCompression = "GZIP"|"NONE"|string;
   export type HlsManifestDurationFormat = "FLOATING_POINT"|"INTEGER"|string;
+  export type HlsOfflineEncrypted = "ENABLED"|"DISABLED"|string;
   export type HlsOutputSelection = "MANIFESTS_AND_SEGMENTS"|"SEGMENTS_ONLY"|string;
   export type HlsProgramDateTime = "INCLUDE"|"EXCLUDE"|string;
   export type HlsSegmentControl = "SINGLE_FILE"|"SEGMENTED_FILES"|string;
@@ -1629,6 +1668,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type InputDenoiseFilter = "ENABLED"|"DISABLED"|string;
   export type InputFilterEnable = "AUTO"|"DISABLE"|"FORCE"|string;
   export type InputPsiControl = "IGNORE_PSI"|"USE_PSI"|string;
+  export type InputRotate = "DEGREE_0"|"DEGREES_90"|"DEGREES_180"|"DEGREES_270"|"AUTO"|string;
   export interface InputTemplate {
     /**
      * Specifies set of audio selectors within an input to combine. An input may have multiple audio selector groups. See "Audio Selector Group":#inputs-audio_selector_group for more information.
@@ -1756,6 +1796,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     Role: __string;
     Settings: JobSettings;
     Status?: JobStatus;
+    /**
+     * Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.
+     */
+    StatusUpdateIntervalInSecs?: __integerMin10Max600;
     Timing?: Timing;
     /**
      * User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.
@@ -1771,6 +1815,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      * Settings for ad avail blanking.  Video can be blanked or overlaid with an image, and audio muted during SCTE-35 triggered ad avails.
      */
     AvailBlanking?: AvailBlanking;
+    /**
+     * Settings for Event Signaling And Messaging (ESAM).
+     */
+    Esam?: EsamSettings;
     /**
      * Use Inputs (inputs) to define source file used in the transcode job. There can be multiple inputs add in a job. These inputs will be concantenated together to create the output.
      */
@@ -1826,6 +1874,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     Queue?: __string;
     Settings: JobTemplateSettings;
     /**
+     * Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.
+     */
+    StatusUpdateIntervalInSecs?: __integerMin10Max600;
+    /**
      * A job template can be of two types: system or custom. System or built-in job templates can't be modified or deleted by the user.
      */
     Type?: Type;
@@ -1840,6 +1892,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      * Settings for ad avail blanking.  Video can be blanked or overlaid with an image, and audio muted during SCTE-35 triggered ad avails.
      */
     AvailBlanking?: AvailBlanking;
+    /**
+     * Settings for Event Signaling And Messaging (ESAM).
+     */
+    Esam?: EsamSettings;
     /**
      * Use Inputs (inputs) to define the source file used in the transcode job. There can only be one input in a job template.  Using the API, you can include multiple inputs when referencing a job template.
      */
@@ -1978,6 +2034,12 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type M2tsNielsenId3 = "INSERT"|"NONE"|string;
   export type M2tsPcrControl = "PCR_EVERY_PES_PACKET"|"CONFIGURED_PCR_PERIOD"|string;
   export type M2tsRateMode = "VBR"|"CBR"|string;
+  export interface M2tsScte35Esam {
+    /**
+     * Packet Identifier (PID) of the SCTE-35 stream in the transport stream generated by ESAM.
+     */
+    Scte35EsamPid?: __integerMin32Max8182;
+  }
   export type M2tsScte35Source = "PASSTHROUGH"|"NONE"|string;
   export type M2tsSegmentationMarkers = "NONE"|"RAI_SEGSTART"|"RAI_ADAPT"|"PSI_SEGSTART"|"EBP"|"EBP_LEGACY"|string;
   export type M2tsSegmentationStyle = "MAINTAIN_CADENCE"|"RESET_CADENCE"|string;
@@ -1988,35 +2050,38 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     AudioFramesPerPes?: __integerMin0Max2147483647;
     /**
-     * Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation.
+     * Specify the packet identifiers (PIDs) for any elementary audio streams you include in this output. Specify multiple PIDs as a JSON array. Default is the range 482-492.
      */
     AudioPids?: __listOf__integerMin32Max8182;
     /**
-     * The output bitrate of the transport stream in bits per second. Setting to 0 lets the muxer automatically determine the appropriate bitrate. Other common values are 3750000, 7500000, and 15000000.
+     * Specify the output bitrate of the transport stream in bits per second. Setting to 0 lets the muxer automatically determine the appropriate bitrate. Other common values are 3750000, 7500000, and 15000000.
      */
     Bitrate?: __integerMin0Max2147483647;
     BufferModel?: M2tsBufferModel;
     DvbNitSettings?: DvbNitSettings;
     DvbSdtSettings?: DvbSdtSettings;
     /**
-     * Packet Identifier (PID) for input source DVB Subtitle data to this output. Multiple values are accepted, and can be entered in ranges and/or by comma separation.
+     * Specify the packet identifiers (PIDs) for DVB subtitle data included in this output. Specify multiple PIDs as a JSON array. Default is the range 460-479.
      */
     DvbSubPids?: __listOf__integerMin32Max8182;
     DvbTdtSettings?: DvbTdtSettings;
     /**
-     * Packet Identifier (PID) for input source DVB Teletext data to this output.
+     * Specify the packet identifier (PID) for DVB teletext data you include in this output. Default is 499.
      */
     DvbTeletextPid?: __integerMin32Max8182;
     EbpAudioInterval?: M2tsEbpAudioInterval;
     EbpPlacement?: M2tsEbpPlacement;
     EsRateInPes?: M2tsEsRateInPes;
+    /**
+     * Keep the default value (DEFAULT) unless you know that your audio EBP markers are incorrectly appearing before your video EBP markers. To correct this problem, set this value to Force (FORCE).
+     */
     ForceTsVideoEbpOrder?: M2tsForceTsVideoEbpOrder;
     /**
-     * The length in seconds of each fragment. Only used with EBP markers.
+     * The length, in seconds, of each fragment. Only used with EBP markers.
      */
     FragmentTime?: __doubleMin0;
     /**
-     * Maximum time in milliseconds between Program Clock References (PCRs) inserted into the transport stream.
+     * Specify the maximum time, in milliseconds, between Program Clock References (PCRs) inserted into the transport stream.
      */
     MaxPcrInterval?: __integerMin0Max500;
     /**
@@ -2034,47 +2099,51 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     PatInterval?: __integerMin0Max1000;
     PcrControl?: M2tsPcrControl;
     /**
-     * Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport stream. When no value is given, the encoder will assign the same value as the Video PID.
+     * Specify the packet identifier (PID) for the program clock reference (PCR) in this output. If you do not specify a value, the service will use the value for Video PID (VideoPid).
      */
     PcrPid?: __integerMin32Max8182;
     /**
-     * The number of milliseconds between instances of this table in the output transport stream.
+     * Specify the number of milliseconds between instances of the program map table (PMT) in the output transport stream.
      */
     PmtInterval?: __integerMin0Max1000;
     /**
-     * Packet Identifier (PID) for the Program Map Table (PMT) in the transport stream.
+     * Specify the packet identifier (PID) for the program map table (PMT) itself. Default is 480.
      */
     PmtPid?: __integerMin32Max8182;
     /**
-     * Packet Identifier (PID) of the private metadata stream in the transport stream.
+     * Specify the packet identifier (PID) of the private metadata stream. Default is 503.
      */
     PrivateMetadataPid?: __integerMin32Max8182;
     /**
-     * The value of the program number field in the Program Map Table.
+     * Use Program number (programNumber) to specify the program number used in the program map table (PMT) for this output. Default is 1. Program numbers and program map tables are parts of MPEG-2 transport stream containers, used for organizing data.
      */
     ProgramNumber?: __integerMin0Max65535;
     RateMode?: M2tsRateMode;
     /**
-     * Packet Identifier (PID) of the SCTE-35 stream in the transport stream.
+     * Include this in your job settings to put SCTE-35 markers in your HLS and transport stream outputs at the insertion points that you specify in an ESAM XML document. Provide the document in the setting SCC XML (sccXml).
+     */
+    Scte35Esam?: M2tsScte35Esam;
+    /**
+     * Specify the packet identifier (PID) of the SCTE-35 stream in the transport stream.
      */
     Scte35Pid?: __integerMin32Max8182;
     Scte35Source?: M2tsScte35Source;
     SegmentationMarkers?: M2tsSegmentationMarkers;
     SegmentationStyle?: M2tsSegmentationStyle;
     /**
-     * The length in seconds of each segment. Required unless markers is set to _none_.
+     * Specify the length, in seconds, of each segment. Required unless markers is set to _none_.
      */
     SegmentationTime?: __doubleMin0;
     /**
-     * Packet Identifier (PID) of the timed metadata stream in the transport stream.
+     * Specify the packet identifier (PID) for timed metadata in this output. Default is 502.
      */
     TimedMetadataPid?: __integerMin32Max8182;
     /**
-     * The value of the transport stream ID field in the Program Map Table.
+     * Specify the ID for the transport stream itself in the program map table for this output. Transport stream IDs and program map tables are parts of MPEG-2 transport stream containers, used for organizing data.
      */
     TransportStreamId?: __integerMin0Max65535;
     /**
-     * Packet Identifier (PID) of the elementary video stream in the transport stream.
+     * Specify the packet identifier (PID) of the elementary video stream in the transport stream.
      */
     VideoPid?: __integerMin32Max8182;
   }
@@ -2813,6 +2882,10 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     Queue?: __string;
     Settings?: JobTemplateSettings;
+    /**
+     * Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.
+     */
+    StatusUpdateIntervalInSecs?: __integerMin10Max600;
   }
   export interface UpdateJobTemplateResponse {
     JobTemplate?: JobTemplate;
@@ -2870,6 +2943,9 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   }
   export interface VideoDescription {
     AfdSignaling?: AfdSignaling;
+    /**
+     * You no longer need to specify the anti-alias filter. It's now automatically applied to all outputs. This property is deprecated.
+     */
     AntiAlias?: AntiAlias;
     CodecSettings?: VideoCodecSettings;
     ColorMetadata?: ColorMetadata;
@@ -2893,7 +2969,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
     RespondToAfd?: RespondToAfd;
     ScalingBehavior?: ScalingBehavior;
     /**
-     * Use Sharpness (Sharpness)setting to specify the strength of anti-aliasing. This setting changes the width of the anti-alias filter kernel used for scaling. Sharpness only applies if your output resolution is different from your input resolution, and if you set Anti-alias (AntiAlias) to ENABLED. 0 is the softest setting, 100 the sharpest, and 50 recommended for most content.
+     * Use Sharpness (Sharpness) setting to specify the strength of anti-aliasing. This setting changes the width of the anti-alias filter kernel used for scaling. Sharpness only applies if your output resolution is different from your input resolution. 0 is the softest setting, 100 the sharpest, and 50 recommended for most content.
      */
     Sharpness?: __integerMin0Max100;
     TimecodeInsertion?: VideoTimecodeInsertion;
@@ -2950,6 +3026,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      * Selects a specific program from within a multi-program transport stream. Note that Quad 4K is not currently supported.
      */
     ProgramNumber?: __integerMinNegative2147483648Max2147483647;
+    Rotate?: InputRotate;
   }
   export type VideoTimecodeInsertion = "DISABLED"|"PIC_TIMING_SEI"|string;
   export type WavFormat = "RIFF"|"RF64"|string;
@@ -2987,6 +3064,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __integerMin0Max255 = number;
   export type __integerMin0Max3 = number;
   export type __integerMin0Max30 = number;
+  export type __integerMin0Max30000 = number;
   export type __integerMin0Max3600 = number;
   export type __integerMin0Max47185920 = number;
   export type __integerMin0Max500 = number;
@@ -3003,6 +3081,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __integerMin1000Max30000 = number;
   export type __integerMin1000Max300000000 = number;
   export type __integerMin10Max48 = number;
+  export type __integerMin10Max600 = number;
   export type __integerMin16Max24 = number;
   export type __integerMin1Max1 = number;
   export type __integerMin1Max10 = number;
@@ -3103,6 +3182,8 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   export type __stringPatternS3ASSETMAPXml = string;
   export type __stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE = string;
   export type __stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL = string;
+  export type __stringPatternSNManifestConfirmConditionNotificationNS = string;
+  export type __stringPatternSNSignalProcessingNotificationNS = string;
   export type __stringPatternWS = string;
   export type __timestampUnix = Date;
   /**

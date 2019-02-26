@@ -84,11 +84,11 @@ declare class Discovery extends Service {
    */
   describeContinuousExports(callback?: (err: AWSError, data: Discovery.Types.DescribeContinuousExportsResponse) => void): Request<Discovery.Types.DescribeContinuousExportsResponse, AWSError>;
   /**
-   *  DescribeExportConfigurations is deprecated. Use instead  DescribeExportTasks .
+   *  DescribeExportConfigurations is deprecated. Use DescribeImportTasks, instead.
    */
   describeExportConfigurations(params: Discovery.Types.DescribeExportConfigurationsRequest, callback?: (err: AWSError, data: Discovery.Types.DescribeExportConfigurationsResponse) => void): Request<Discovery.Types.DescribeExportConfigurationsResponse, AWSError>;
   /**
-   *  DescribeExportConfigurations is deprecated. Use instead  DescribeExportTasks .
+   *  DescribeExportConfigurations is deprecated. Use DescribeImportTasks, instead.
    */
   describeExportConfigurations(callback?: (err: AWSError, data: Discovery.Types.DescribeExportConfigurationsResponse) => void): Request<Discovery.Types.DescribeExportConfigurationsResponse, AWSError>;
   /**
@@ -845,7 +845,7 @@ declare namespace Discovery {
      */
     applicationImportFailure?: Integer;
     /**
-     * A link to a compressed archive folder (in the ZIP format) that contains an error log and a file of failed records. You can use these two files to quickly identify records that failed, why they failed, and correct those records. Afterward, you can upload the corrected file to your Amazon S3 bucket and create another import task request. This field also includes authorization information so you can confirm the authenticity of the compressed archive before you download it. If some records failed to be imported we recommend that you correct the records in the failed entries file and then imports that failed entries file. This prevents you frmo having to correct and update the larger original file and attempt importing it again.
+     * A link to a compressed archive folder (in the ZIP format) that contains an error log and a file of failed records. You can use these two files to quickly identify records that failed, why they failed, and correct those records. Afterward, you can upload the corrected file to your Amazon S3 bucket and create another import task request. This field also includes authorization information so you can confirm the authenticity of the compressed archive before you download it. If some records failed to be imported we recommend that you correct the records in the failed entries file and then imports that failed entries file. This prevents you from having to correct and update the larger original file and attempt importing it again.
      */
     errorsAndFailedEntriesZip?: S3PresignedUrl;
   }

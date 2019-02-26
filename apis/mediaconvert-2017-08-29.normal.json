@@ -92,7 +92,7 @@
           "documentation": "The service couldn't complete your request because there is a conflict with the current state of the resource."
         }
       ],
-      "documentation": "Permanently remove a job from a queue. Once you have canceled a job, you can't start it again. You can't delete a running job."
+      "documentation": "Permanently cancel a job. Once you have canceled a job, you can't start it again."
     },
     "CreateJob": {
       "name": "CreateJob",
@@ -1299,7 +1299,7 @@
     },
     "AntiAlias": {
       "type": "string",
-      "documentation": "Enable Anti-alias (AntiAlias) to enhance sharp edges in video output when your input resolution is much larger than your output resolution. Default is enabled.",
+      "documentation": "You no longer need to specify the anti-alias filter. It's now automatically applied to all outputs. This property is deprecated.",
       "enum": [
         "DISABLED",
         "ENABLED"
@@ -2302,6 +2302,11 @@
           "shape": "JobSettings",
           "locationName": "settings"
         },
+        "StatusUpdateIntervalInSecs": {
+          "shape": "__integerMin10Max600",
+          "locationName": "statusUpdateIntervalInSecs",
+          "documentation": "Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error."
+        },
         "UserMetadata": {
           "shape": "__mapOf__string",
           "locationName": "userMetadata",
@@ -2353,6 +2358,11 @@
         "Settings": {
           "shape": "JobTemplateSettings",
           "locationName": "settings"
+        },
+        "StatusUpdateIntervalInSecs": {
+          "shape": "__integerMin10Max600",
+          "locationName": "statusUpdateIntervalInSecs",
+          "documentation": "Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error."
         },
         "Tags": {
           "shape": "__mapOf__string",
@@ -3167,7 +3177,7 @@
         "Destination608ChannelNumber": {
           "shape": "__integerMin1Max4",
           "locationName": "destination608ChannelNumber",
-          "documentation": "Ignore this setting unless your input captions are SCC format and your output container is MXF. With this combination of input captions format and output container, you can optionally use this setting to replace the input channel number with the track number that you specify. If you don't specify an output track number, the system uses the input channel number for the output channel number. This setting applies to each output individually. Channels must be unique and may only be combined in the following combinations: (1+3, 2+4, 1+4, 2+3)."
+          "documentation": "Ignore this setting unless your input captions are SCC format and your output container is MXF. With this combination of input captions format and output container, you can optionally use this setting to replace the input channel number with the track number that you specify. Specify a different number for each output captions track. If you don't specify an output track number, the system uses the input channel number for the output channel number. This setting applies to each output individually. You can optionally combine two captions channels in your output. The two output channel numbers can be one of the following pairs: 1,3; 2,4; 1,4; or 2,3."
         }
       },
       "documentation": "Settings specific to embedded/ancillary caption outputs, including 608/708 Channel destination number."
@@ -3202,6 +3212,49 @@
         }
       },
       "documentation": "Describes an account-specific API endpoint."
+    },
+    "EsamManifestConfirmConditionNotification": {
+      "type": "structure",
+      "members": {
+        "MccXml": {
+          "shape": "__stringPatternSNManifestConfirmConditionNotificationNS",
+          "locationName": "mccXml",
+          "documentation": "Provide your ESAM ManifestConfirmConditionNotification XML document inside your JSON job settings. Form the XML document as per OC-SP-ESAM-API-I03-131025. The transcoder will use the Manifest Conditioning instructions in the message that you supply."
+        }
+      },
+      "documentation": "ESAM ManifestConfirmConditionNotification defined by OC-SP-ESAM-API-I03-131025."
+    },
+    "EsamSettings": {
+      "type": "structure",
+      "members": {
+        "ManifestConfirmConditionNotification": {
+          "shape": "EsamManifestConfirmConditionNotification",
+          "locationName": "manifestConfirmConditionNotification",
+          "documentation": "Specifies an ESAM ManifestConfirmConditionNotification XML as per OC-SP-ESAM-API-I03-131025. The transcoder uses the manifest conditioning instructions that you provide in the setting MCC XML (mccXml)."
+        },
+        "ResponseSignalPreroll": {
+          "shape": "__integerMin0Max30000",
+          "locationName": "responseSignalPreroll",
+          "documentation": "Specifies the stream distance, in milliseconds, between the SCTE 35 messages that the transcoder places and the splice points that they refer to. If the time between the start of the asset and the SCTE-35 message is less than this value, then the transcoder places the SCTE-35 marker at the beginning of the stream."
+        },
+        "SignalProcessingNotification": {
+          "shape": "EsamSignalProcessingNotification",
+          "locationName": "signalProcessingNotification",
+          "documentation": "Specifies an ESAM SignalProcessingNotification XML as per OC-SP-ESAM-API-I03-131025. The transcoder uses the signal processing instructions that you provide in the setting SCC XML (sccXml)."
+        }
+      },
+      "documentation": "Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion, you can ignore these settings."
+    },
+    "EsamSignalProcessingNotification": {
+      "type": "structure",
+      "members": {
+        "SccXml": {
+          "shape": "__stringPatternSNSignalProcessingNotificationNS",
+          "locationName": "sccXml",
+          "documentation": "Provide your ESAM SignalProcessingNotification XML document inside your JSON job settings. Form the XML document as per OC-SP-ESAM-API-I03-131025. The transcoder will use the signal processing instructions in the message that you supply. Provide your ESAM SignalProcessingNotification XML document inside your JSON job settings. If you want the service to place SCTE-35 markers at the insertion points you specify in the XML document, you must also enable SCTE-35 ESAM (scte35Esam). Note that you can either specify an ESAM XML document or enable SCTE-35 passthrough. You can't do both."
+        }
+      },
+      "documentation": "ESAM SignalProcessingNotification data defined by OC-SP-ESAM-API-I03-131025."
     },
     "F4vMoovPlacement": {
       "type": "string",
@@ -4140,7 +4193,8 @@
         },
         "WriteMp4PackagingType": {
           "shape": "H265WriteMp4PackagingType",
-          "locationName": "writeMp4PackagingType"
+          "locationName": "writeMp4PackagingType",
+          "documentation": "Use this setting only for outputs encoded with H.265 that are in CMAF or DASH output groups. If you include writeMp4PackagingType in your JSON job specification for other outputs, your video might not work properly with downstream systems and video players. If the location of parameter set NAL units don't matter in your workflow, ignore this setting. The service defaults to marking your output as HEV1. Choose HVC1 to mark your output as HVC1. This makes your output compliant with this specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the samples directly. Keep the default HEV1 to mark your output as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples."
         }
       },
       "documentation": "Settings for H265 codec"
@@ -4204,7 +4258,7 @@
     },
     "H265WriteMp4PackagingType": {
       "type": "string",
-      "documentation": "If HVC1, output that is H.265 will be marked as HVC1 and adhere to the ISO-IECJTC1-SC29_N13798_Text_ISOIEC_FDIS_14496-15_3rd_E spec which states that parameter set NAL units will be stored in the sample headers but not in the samples directly. If HEV1, then H.265 will be marked as HEV1 and parameter set NAL units will be written into the samples.",
+      "documentation": "Use this setting only for outputs encoded with H.265 that are in CMAF or DASH output groups. If you include writeMp4PackagingType in your JSON job specification for other outputs, your video might not work properly with downstream systems and video players. If the location of parameter set NAL units don't matter in your workflow, ignore this setting. The service defaults to marking your output as HEV1. Choose HVC1 to mark your output as HVC1. This makes your output compliant with this specification: ISO IECJTC1 SC29 N13798 Text ISO/IEC FDIS 14496-15 3rd Edition. For these outputs, the service stores parameter set NAL units in the sample headers but not in the samples directly. Keep the default HEV1 to mark your output as HEV1. For these outputs, the service writes parameter set NAL units directly into the samples.",
       "enum": [
         "HVC1",
         "HEV1"
@@ -4366,6 +4420,10 @@
         "InitializationVectorInManifest": {
           "shape": "HlsInitializationVectorInManifest",
           "locationName": "initializationVectorInManifest"
+        },
+        "OfflineEncrypted": {
+          "shape": "HlsOfflineEncrypted",
+          "locationName": "offlineEncrypted"
         },
         "SpekeKeyProvider": {
           "shape": "SpekeKeyProvider",
@@ -4538,6 +4596,14 @@
       "enum": [
         "FLOATING_POINT",
         "INTEGER"
+      ]
+    },
+    "HlsOfflineEncrypted": {
+      "type": "string",
+      "documentation": "Enable this setting to insert the EXT-X-SESSION-KEY element into the master playlist. This allows for offline Apple HLS FairPlay content protection.",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
       ]
     },
     "HlsOutputSelection": {
@@ -4791,6 +4857,17 @@
         "USE_PSI"
       ]
     },
+    "InputRotate": {
+      "type": "string",
+      "documentation": "Use Rotate (InputRotate) to specify how the service rotates your video. You can choose automatic rotation or specify a rotation. You can specify a clockwise rotation of 0, 90, 180, or 270 degrees. If your input video container is .mov or .mp4 and your input has rotation metadata, you can choose Automatic to have the service rotate your video according to the rotation specified in the metadata. The rotation must be within one degree of 90, 180, or 270 degrees. If the rotation metadata specifies any other rotation, the service will default to no rotation. By default, the service does no rotation, even if your input video has rotation metadata. The service doesn't pass through rotation metadata.",
+      "enum": [
+        "DEGREE_0",
+        "DEGREES_90",
+        "DEGREES_180",
+        "DEGREES_270",
+        "AUTO"
+      ]
+    },
     "InputTemplate": {
       "type": "structure",
       "members": {
@@ -4991,6 +5068,11 @@
           "shape": "JobStatus",
           "locationName": "status"
         },
+        "StatusUpdateIntervalInSecs": {
+          "shape": "__integerMin10Max600",
+          "locationName": "statusUpdateIntervalInSecs",
+          "documentation": "Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error."
+        },
         "Timing": {
           "shape": "Timing",
           "locationName": "timing"
@@ -5019,6 +5101,11 @@
           "shape": "AvailBlanking",
           "locationName": "availBlanking",
           "documentation": "Settings for ad avail blanking.  Video can be blanked or overlaid with an image, and audio muted during SCTE-35 triggered ad avails."
+        },
+        "Esam": {
+          "shape": "EsamSettings",
+          "locationName": "esam",
+          "documentation": "Settings for Event Signaling And Messaging (ESAM)."
         },
         "Inputs": {
           "shape": "__listOfInput",
@@ -5109,6 +5196,11 @@
           "shape": "JobTemplateSettings",
           "locationName": "settings"
         },
+        "StatusUpdateIntervalInSecs": {
+          "shape": "__integerMin10Max600",
+          "locationName": "statusUpdateIntervalInSecs",
+          "documentation": "Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error."
+        },
         "Type": {
           "shape": "Type",
           "locationName": "type",
@@ -5142,6 +5234,11 @@
           "shape": "AvailBlanking",
           "locationName": "availBlanking",
           "documentation": "Settings for ad avail blanking.  Video can be blanked or overlaid with an image, and audio muted during SCTE-35 triggered ad avails."
+        },
+        "Esam": {
+          "shape": "EsamSettings",
+          "locationName": "esam",
+          "documentation": "Settings for Event Signaling And Messaging (ESAM)."
         },
         "Inputs": {
           "shape": "__listOfInputTemplate",
@@ -5622,7 +5719,7 @@
     },
     "M2tsForceTsVideoEbpOrder": {
       "type": "string",
-      "documentation": "Keep the default value (DEFAULT) unless you know that your audio EBP markers are incorrectly appearing before your video EBP markers. Set this value to Force (FORCE) to correct this problem.",
+      "documentation": "Keep the default value (DEFAULT) unless you know that your audio EBP markers are incorrectly appearing before your video EBP markers. To correct this problem, set this value to Force (FORCE).",
       "enum": [
         "FORCE",
         "DEFAULT"
@@ -5651,6 +5748,17 @@
         "VBR",
         "CBR"
       ]
+    },
+    "M2tsScte35Esam": {
+      "type": "structure",
+      "members": {
+        "Scte35EsamPid": {
+          "shape": "__integerMin32Max8182",
+          "locationName": "scte35EsamPid",
+          "documentation": "Packet Identifier (PID) of the SCTE-35 stream in the transport stream generated by ESAM."
+        }
+      },
+      "documentation": "Settings for SCTE-35 signals from ESAM. Include this in your job settings to put SCTE-35 markers in your HLS and transport stream outputs at the insertion points that you specify in an ESAM XML document. Provide the document in the setting SCC XML (sccXml)."
     },
     "M2tsScte35Source": {
       "type": "string",
@@ -5695,12 +5803,12 @@
         "AudioPids": {
           "shape": "__listOf__integerMin32Max8182",
           "locationName": "audioPids",
-          "documentation": "Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation."
+          "documentation": "Specify the packet identifiers (PIDs) for any elementary audio streams you include in this output. Specify multiple PIDs as a JSON array. Default is the range 482-492."
         },
         "Bitrate": {
           "shape": "__integerMin0Max2147483647",
           "locationName": "bitrate",
-          "documentation": "The output bitrate of the transport stream in bits per second. Setting to 0 lets the muxer automatically determine the appropriate bitrate. Other common values are 3750000, 7500000, and 15000000."
+          "documentation": "Specify the output bitrate of the transport stream in bits per second. Setting to 0 lets the muxer automatically determine the appropriate bitrate. Other common values are 3750000, 7500000, and 15000000."
         },
         "BufferModel": {
           "shape": "M2tsBufferModel",
@@ -5717,7 +5825,7 @@
         "DvbSubPids": {
           "shape": "__listOf__integerMin32Max8182",
           "locationName": "dvbSubPids",
-          "documentation": "Packet Identifier (PID) for input source DVB Subtitle data to this output. Multiple values are accepted, and can be entered in ranges and/or by comma separation."
+          "documentation": "Specify the packet identifiers (PIDs) for DVB subtitle data included in this output. Specify multiple PIDs as a JSON array. Default is the range 460-479."
         },
         "DvbTdtSettings": {
           "shape": "DvbTdtSettings",
@@ -5726,7 +5834,7 @@
         "DvbTeletextPid": {
           "shape": "__integerMin32Max8182",
           "locationName": "dvbTeletextPid",
-          "documentation": "Packet Identifier (PID) for input source DVB Teletext data to this output."
+          "documentation": "Specify the packet identifier (PID) for DVB teletext data you include in this output. Default is 499."
         },
         "EbpAudioInterval": {
           "shape": "M2tsEbpAudioInterval",
@@ -5742,17 +5850,18 @@
         },
         "ForceTsVideoEbpOrder": {
           "shape": "M2tsForceTsVideoEbpOrder",
-          "locationName": "forceTsVideoEbpOrder"
+          "locationName": "forceTsVideoEbpOrder",
+          "documentation": "Keep the default value (DEFAULT) unless you know that your audio EBP markers are incorrectly appearing before your video EBP markers. To correct this problem, set this value to Force (FORCE)."
         },
         "FragmentTime": {
           "shape": "__doubleMin0",
           "locationName": "fragmentTime",
-          "documentation": "The length in seconds of each fragment. Only used with EBP markers."
+          "documentation": "The length, in seconds, of each fragment. Only used with EBP markers."
         },
         "MaxPcrInterval": {
           "shape": "__integerMin0Max500",
           "locationName": "maxPcrInterval",
-          "documentation": "Maximum time in milliseconds between Program Clock References (PCRs) inserted into the transport stream."
+          "documentation": "Specify the maximum time, in milliseconds, between Program Clock References (PCRs) inserted into the transport stream."
         },
         "MinEbpInterval": {
           "shape": "__integerMin0Max10000",
@@ -5780,36 +5889,41 @@
         "PcrPid": {
           "shape": "__integerMin32Max8182",
           "locationName": "pcrPid",
-          "documentation": "Packet Identifier (PID) of the Program Clock Reference (PCR) in the transport stream. When no value is given, the encoder will assign the same value as the Video PID."
+          "documentation": "Specify the packet identifier (PID) for the program clock reference (PCR) in this output. If you do not specify a value, the service will use the value for Video PID (VideoPid)."
         },
         "PmtInterval": {
           "shape": "__integerMin0Max1000",
           "locationName": "pmtInterval",
-          "documentation": "The number of milliseconds between instances of this table in the output transport stream."
+          "documentation": "Specify the number of milliseconds between instances of the program map table (PMT) in the output transport stream."
         },
         "PmtPid": {
           "shape": "__integerMin32Max8182",
           "locationName": "pmtPid",
-          "documentation": "Packet Identifier (PID) for the Program Map Table (PMT) in the transport stream."
+          "documentation": "Specify the packet identifier (PID) for the program map table (PMT) itself. Default is 480."
         },
         "PrivateMetadataPid": {
           "shape": "__integerMin32Max8182",
           "locationName": "privateMetadataPid",
-          "documentation": "Packet Identifier (PID) of the private metadata stream in the transport stream."
+          "documentation": "Specify the packet identifier (PID) of the private metadata stream. Default is 503."
         },
         "ProgramNumber": {
           "shape": "__integerMin0Max65535",
           "locationName": "programNumber",
-          "documentation": "The value of the program number field in the Program Map Table."
+          "documentation": "Use Program number (programNumber) to specify the program number used in the program map table (PMT) for this output. Default is 1. Program numbers and program map tables are parts of MPEG-2 transport stream containers, used for organizing data."
         },
         "RateMode": {
           "shape": "M2tsRateMode",
           "locationName": "rateMode"
         },
+        "Scte35Esam": {
+          "shape": "M2tsScte35Esam",
+          "locationName": "scte35Esam",
+          "documentation": "Include this in your job settings to put SCTE-35 markers in your HLS and transport stream outputs at the insertion points that you specify in an ESAM XML document. Provide the document in the setting SCC XML (sccXml)."
+        },
         "Scte35Pid": {
           "shape": "__integerMin32Max8182",
           "locationName": "scte35Pid",
-          "documentation": "Packet Identifier (PID) of the SCTE-35 stream in the transport stream."
+          "documentation": "Specify the packet identifier (PID) of the SCTE-35 stream in the transport stream."
         },
         "Scte35Source": {
           "shape": "M2tsScte35Source",
@@ -5826,25 +5940,25 @@
         "SegmentationTime": {
           "shape": "__doubleMin0",
           "locationName": "segmentationTime",
-          "documentation": "The length in seconds of each segment. Required unless markers is set to _none_."
+          "documentation": "Specify the length, in seconds, of each segment. Required unless markers is set to _none_."
         },
         "TimedMetadataPid": {
           "shape": "__integerMin32Max8182",
           "locationName": "timedMetadataPid",
-          "documentation": "Packet Identifier (PID) of the timed metadata stream in the transport stream."
+          "documentation": "Specify the packet identifier (PID) for timed metadata in this output. Default is 502."
         },
         "TransportStreamId": {
           "shape": "__integerMin0Max65535",
           "locationName": "transportStreamId",
-          "documentation": "The value of the transport stream ID field in the Program Map Table."
+          "documentation": "Specify the ID for the transport stream itself in the program map table for this output. Transport stream IDs and program map tables are parts of MPEG-2 transport stream containers, used for organizing data."
         },
         "VideoPid": {
           "shape": "__integerMin32Max8182",
           "locationName": "videoPid",
-          "documentation": "Packet Identifier (PID) of the elementary video stream in the transport stream."
+          "documentation": "Specify the packet identifier (PID) of the elementary video stream in the transport stream."
         }
       },
-      "documentation": "Settings for M2TS Container."
+      "documentation": "MPEG-2 TS container settings. These apply to outputs in a File output group when the output's container (ContainerType) is MPEG-2 Transport Stream (M2TS). In these assets, data is organized by the program map table (PMT). Each transport stream program contains subsets of data, including audio, video, and metadata. Each of these subsets of data has a numerical label called a packet identifier (PID). Each transport stream program corresponds to one MediaConvert output. The PMT lists the types of data in a program along with their PID. Downstream systems and players use the program map table to look up the PID for each type of data it accesses and then uses the PIDs to locate specific data within the asset."
     },
     "M3u8NielsenId3": {
       "type": "string",
@@ -7538,6 +7652,11 @@
         "Settings": {
           "shape": "JobTemplateSettings",
           "locationName": "settings"
+        },
+        "StatusUpdateIntervalInSecs": {
+          "shape": "__integerMin10Max600",
+          "locationName": "statusUpdateIntervalInSecs",
+          "documentation": "Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error."
         }
       },
       "required": [
@@ -7679,7 +7798,8 @@
         },
         "AntiAlias": {
           "shape": "AntiAlias",
-          "locationName": "antiAlias"
+          "locationName": "antiAlias",
+          "documentation": "You no longer need to specify the anti-alias filter. It's now automatically applied to all outputs. This property is deprecated."
         },
         "CodecSettings": {
           "shape": "VideoCodecSettings",
@@ -7724,7 +7844,7 @@
         "Sharpness": {
           "shape": "__integerMin0Max100",
           "locationName": "sharpness",
-          "documentation": "Use Sharpness (Sharpness)setting to specify the strength of anti-aliasing. This setting changes the width of the anti-alias filter kernel used for scaling. Sharpness only applies if your output resolution is different from your input resolution, and if you set Anti-alias (AntiAlias) to ENABLED. 0 is the softest setting, 100 the sharpest, and 50 recommended for most content."
+          "documentation": "Use Sharpness (Sharpness) setting to specify the strength of anti-aliasing. This setting changes the width of the anti-alias filter kernel used for scaling. Sharpness only applies if your output resolution is different from your input resolution. 0 is the softest setting, 100 the sharpest, and 50 recommended for most content."
         },
         "TimecodeInsertion": {
           "shape": "VideoTimecodeInsertion",
@@ -7814,6 +7934,10 @@
           "shape": "__integerMinNegative2147483648Max2147483647",
           "locationName": "programNumber",
           "documentation": "Selects a specific program from within a multi-program transport stream. Note that Quad 4K is not currently supported."
+        },
+        "Rotate": {
+          "shape": "InputRotate",
+          "locationName": "rotate"
         }
       },
       "documentation": "Selector for video."
@@ -7942,6 +8066,11 @@
       "min": 0,
       "max": 30
     },
+    "__integerMin0Max30000": {
+      "type": "integer",
+      "min": 0,
+      "max": 30000
+    },
     "__integerMin0Max3600": {
       "type": "integer",
       "min": 0,
@@ -8021,6 +8150,11 @@
       "type": "integer",
       "min": 10,
       "max": 48
+    },
+    "__integerMin10Max600": {
+      "type": "long",
+      "min": 10,
+      "max": 600
     },
     "__integerMin16Max24": {
       "type": "integer",
@@ -8553,6 +8687,14 @@
     "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL": {
       "type": "string",
       "pattern": "^(s3:\\/\\/)([^\\/]+\\/)+([^\\/\\.]+|(([^\\/]*)\\.([mM]2[vV]|[mM][pP][eE][gG]|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[xX][mM][lL])))$"
+    },
+    "__stringPatternSNManifestConfirmConditionNotificationNS": {
+      "type": "string",
+      "pattern": "^\\s*<(.|\\n)*ManifestConfirmConditionNotification(.|\\n)*>\\s*$"
+    },
+    "__stringPatternSNSignalProcessingNotificationNS": {
+      "type": "string",
+      "pattern": "^\\s*<(.|\\n)*SignalProcessingNotification(.|\\n)*>\\s*$"
     },
     "__stringPatternWS": {
       "type": "string",
