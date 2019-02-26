@@ -219,7 +219,7 @@ class MethodDocumentor
       lines << "    try {"
       lines << "      const result = await #{klass.downcase}.#{method_name(operation_name)}({/** params **/}).promise();"
       lines << ""
-      lines << "      const events = data.#{@eventStreamOutputName};"
+      lines << "      const events = result.#{@eventStreamOutputName};"
       lines << ""
       lines << "      for await (const event of events) {"
       lines << "        // Check the top-level field to determine which event this is."
