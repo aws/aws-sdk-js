@@ -181,7 +181,7 @@ AWS DataSync | AWS.DataSync | 2018-11-09 |  |
 AWS RoboMaker | AWS.RoboMaker | 2018-06-29 |  |
 AWS Transfer for SFTP | AWS.Transfer | 2018-11-05 |  |
 AWS Global Accelerator | AWS.GlobalAccelerator | 2018-08-08 |  |
-AWS Comprehend Medical | AWS.ComprehendMedical | 2018-10-30 |  |
+AWS Comprehend Medical | AWS.ComprehendMedical | 2018-10-30 | :tada: |
 Amazon Kinesis Analytics | AWS.KinesisAnalyticsV2 | 2018-05-23 |  |
 AWS MediaConnect | AWS.MediaConnect | 2018-11-14 |  |
 Amazon FSx | AWS.FSx | 2018-03-01 |  |
@@ -191,3 +191,6 @@ AWS License Manager | AWS.LicenseManager | 2018-08-01 |  |
 Managed Streaming for Kafka | AWS.Kafka | 2018-11-14 |  |
 AmazonApiGatewayManagementApi | AWS.ApiGatewayManagementApi | 2018-11-29 |  |
 AmazonApiGatewayV2 | AWS.ApiGatewayV2 | 2018-11-29 |  |
+Amazon DocumentDB with MongoDB compatibility | AWS.DocDB | 2014-10-31 |  |
+AWS Backup | AWS.Backup | 2018-11-15 |  |
+Amazon WorkLink | AWS.WorkLink | 2018-09-25 |  |
