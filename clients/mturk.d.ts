@@ -204,11 +204,11 @@ declare class MTurk extends Service {
    */
   listQualificationRequests(callback?: (err: AWSError, data: MTurk.Types.ListQualificationRequestsResponse) => void): Request<MTurk.Types.ListQualificationRequestsResponse, AWSError>;
   /**
-   *  The ListQualificationRequests operation retrieves requests for Qualifications of a particular Qualification type. The owner of the Qualification type calls this operation to poll for pending requests, and accepts them using the AcceptQualification operation. 
+   *  The ListQualificationTypes operation returns a list of Qualification types, filtered by an optional search term. 
    */
   listQualificationTypes(params: MTurk.Types.ListQualificationTypesRequest, callback?: (err: AWSError, data: MTurk.Types.ListQualificationTypesResponse) => void): Request<MTurk.Types.ListQualificationTypesResponse, AWSError>;
   /**
-   *  The ListQualificationRequests operation retrieves requests for Qualifications of a particular Qualification type. The owner of the Qualification type calls this operation to poll for pending requests, and accepts them using the AcceptQualification operation. 
+   *  The ListQualificationTypes operation returns a list of Qualification types, filtered by an optional search term. 
    */
   listQualificationTypes(callback?: (err: AWSError, data: MTurk.Types.ListQualificationTypesResponse) => void): Request<MTurk.Types.ListQualificationTypesResponse, AWSError>;
   /**
@@ -507,7 +507,7 @@ declare namespace MTurk {
      */
     RequesterAnnotation?: String;
     /**
-     *  A condition that a Worker's Qualifications must meet before the Worker is allowed to accept and complete the HIT. 
+     *  Conditions that a Worker's Qualifications must meet in order to accept the HIT. A HIT can have between zero and ten Qualification requirements. All requirements must be met in order for a Worker to accept the HIT. Additionally, other actions can be restricted using the ActionsGuarded field on each QualificationRequirement structure. 
      */
     QualificationRequirements?: QualificationRequirementList;
     /**
@@ -563,7 +563,7 @@ declare namespace MTurk {
      */
     Description: String;
     /**
-     *  A condition that a Worker's Qualifications must meet before the Worker is allowed to accept and complete the HIT. 
+     *  Conditions that a Worker's Qualifications must meet in order to accept the HIT. A HIT can have between zero and ten Qualification requirements. All requirements must be met in order for a Worker to accept the HIT. Additionally, other actions can be restricted using the ActionsGuarded field on each QualificationRequirement structure. 
      */
     QualificationRequirements?: QualificationRequirementList;
   }
@@ -731,7 +731,6 @@ declare namespace MTurk {
   export type EntityId = string;
   export type EventType = "AssignmentAccepted"|"AssignmentAbandoned"|"AssignmentReturned"|"AssignmentSubmitted"|"AssignmentRejected"|"AssignmentApproved"|"HITCreated"|"HITExpired"|"HITReviewable"|"HITExtended"|"HITDisposed"|"Ping"|string;
   export type EventTypeList = EventType[];
-  export type ExceptionMessage = string;
   export interface GetAccountBalanceRequest {
   }
   export interface GetAccountBalanceResponse {
@@ -873,7 +872,7 @@ declare namespace MTurk {
      */
     RequesterAnnotation?: String;
     /**
-     *  A condition that a Worker's Qualifications must meet in order to accept the HIT. A HIT can have between zero and ten Qualification requirements. All requirements must be met by a Worker's Qualifications for the Worker to accept the HIT.
+     *  Conditions that a Worker's Qualifications must meet in order to accept the HIT. A HIT can have between zero and ten Qualification requirements. All requirements must be met in order for a Worker to accept the HIT. Additionally, other actions can be restricted using the ActionsGuarded field on each QualificationRequirement structure. 
      */
     QualificationRequirements?: QualificationRequirementList;
     /**
@@ -893,6 +892,7 @@ declare namespace MTurk {
      */
     NumberOfAssignmentsCompleted?: Integer;
   }
+  export type HITAccessActions = "Accept"|"PreviewAndAccept"|"DiscoverPreviewAndAccept"|string;
   export interface HITLayoutParameter {
     /**
      *  The name of the parameter in the HITLayout. 
@@ -1345,9 +1345,13 @@ declare namespace MTurk {
      */
     LocaleValues?: LocaleList;
     /**
-     *  If true, the question data for the HIT will not be shown when a Worker whose Qualifications do not meet this requirement tries to preview the HIT. That is, a Worker's Qualifications must meet all of the requirements for which RequiredToPreview is true in order to preview the HIT. If a Worker meets all of the requirements where RequiredToPreview is true (or if there are no such requirements), but does not meet all of the requirements for the HIT, the Worker will be allowed to preview the HIT's question data, but will not be allowed to accept and complete the HIT. The default is false. 
+     *  DEPRECATED: Use the ActionsGuarded field instead. If RequiredToPreview is true, the question data for the HIT will not be shown when a Worker whose Qualifications do not meet this requirement tries to preview the HIT. That is, a Worker's Qualifications must meet all of the requirements for which RequiredToPreview is true in order to preview the HIT. If a Worker meets all of the requirements where RequiredToPreview is true (or if there are no such requirements), but does not meet all of the requirements for the HIT, the Worker will be allowed to preview the HIT's question data, but will not be allowed to accept and complete the HIT. The default is false. This should not be used in combination with the ActionsGuarded field. 
      */
     RequiredToPreview?: Boolean;
+    /**
+     *  Setting this attribute prevents Workers whose Qualifications do not meet this QualificationRequirement from taking the specified action. Valid arguments include "Accept" (Worker cannot accept the HIT, but can preview the HIT and see it in their search results), "PreviewAndAccept" (Worker cannot accept or preview the HIT, but can see the HIT in their search results), and "DiscoverPreviewAndAccept" (Worker cannot accept, preview, or see the HIT in their search results). It's possible for you to create a HIT with multiple QualificationRequirements (which can have different values for the ActionGuarded attribute). In this case, the Worker is only permitted to perform an action when they have met all QualificationRequirements guarding the action. The actions in the order of least restrictive to most restrictive are Discover, Preview and Accept. For example, if a Worker meets all QualificationRequirements that are set to DiscoverPreviewAndAccept, but do not meet all requirements that are set with PreviewAndAccept, then the Worker will be able to Discover, i.e. see the HIT in their search result, but will not be able to Preview or Accept the HIT. ActionsGuarded should not be used in combination with the RequiredToPreview field. 
+     */
+    ActionsGuarded?: HITAccessActions;
   }
   export type QualificationRequirementList = QualificationRequirement[];
   export type QualificationStatus = "Granted"|"Revoked"|string;
@@ -1557,7 +1561,6 @@ declare namespace MTurk {
   export type String = string;
   export type StringList = String[];
   export type Timestamp = Date;
-  export type TurkErrorCode = string;
   export interface UpdateExpirationForHITRequest {
     /**
      *  The HIT to update. 

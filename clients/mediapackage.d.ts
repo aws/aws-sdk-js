@@ -76,13 +76,21 @@ declare class MediaPackage extends Service {
    */
   listOriginEndpoints(callback?: (err: AWSError, data: MediaPackage.Types.ListOriginEndpointsResponse) => void): Request<MediaPackage.Types.ListOriginEndpointsResponse, AWSError>;
   /**
-   * Changes the Channel ingest username and password.
+   * Changes the Channel's first IngestEndpoint's username and password. WARNING - This API is deprecated. Please use RotateIngestEndpointCredentials instead
    */
   rotateChannelCredentials(params: MediaPackage.Types.RotateChannelCredentialsRequest, callback?: (err: AWSError, data: MediaPackage.Types.RotateChannelCredentialsResponse) => void): Request<MediaPackage.Types.RotateChannelCredentialsResponse, AWSError>;
   /**
-   * Changes the Channel ingest username and password.
+   * Changes the Channel's first IngestEndpoint's username and password. WARNING - This API is deprecated. Please use RotateIngestEndpointCredentials instead
    */
   rotateChannelCredentials(callback?: (err: AWSError, data: MediaPackage.Types.RotateChannelCredentialsResponse) => void): Request<MediaPackage.Types.RotateChannelCredentialsResponse, AWSError>;
+  /**
+   * Rotate the IngestEndpoint's username and password, as specified by the IngestEndpoint's id.
+   */
+  rotateIngestEndpointCredentials(params: MediaPackage.Types.RotateIngestEndpointCredentialsRequest, callback?: (err: AWSError, data: MediaPackage.Types.RotateIngestEndpointCredentialsResponse) => void): Request<MediaPackage.Types.RotateIngestEndpointCredentialsResponse, AWSError>;
+  /**
+   * Rotate the IngestEndpoint's username and password, as specified by the IngestEndpoint's id.
+   */
+  rotateIngestEndpointCredentials(callback?: (err: AWSError, data: MediaPackage.Types.RotateIngestEndpointCredentialsResponse) => void): Request<MediaPackage.Types.RotateIngestEndpointCredentialsResponse, AWSError>;
   /**
    * Updates an existing Channel.
    */
@@ -117,33 +125,48 @@ declare namespace MediaPackage {
      */
     Id?: __string;
   }
-  export interface ChannelCreateParameters {
+  export interface CmafEncryption {
     /**
-     * A short text description of the Channel.
+     * Time (in seconds) between each encryption key rotation.
      */
-    Description?: __string;
+    KeyRotationIntervalSeconds?: __integer;
+    SpekeKeyProvider: SpekeKeyProvider;
+  }
+  export interface CmafPackage {
+    Encryption?: CmafEncryption;
     /**
-     * The ID of the Channel. The ID must be unique within the region and it
-cannot be changed after a Channel is created.
+     * A list of HLS manifest configurations
+     */
+    HlsManifests?: __listOfHlsManifest;
+    /**
+     * Duration (in seconds) of each segment. Actual segments will be
+rounded to the nearest multiple of the source segment duration.
 
      */
-    Id?: __string;
+    SegmentDurationSeconds?: __integer;
+    /**
+     * An optional custom string that is prepended to the name of each segment. If not specified, it defaults to the ChannelId.
+     */
+    SegmentPrefix?: __string;
+    StreamSelection?: StreamSelection;
   }
-  export interface ChannelList {
+  export interface CmafPackageCreateOrUpdateParameters {
+    Encryption?: CmafEncryption;
     /**
-     * A list of Channel records.
+     * A list of HLS manifest configurations
      */
-    Channels?: ListOfChannel;
+    HlsManifests?: __listOfHlsManifestCreateOrUpdateParameters;
     /**
-     * A token that can be used to resume pagination from the end of the collection.
+     * Duration (in seconds) of each segment. Actual segments will be
+rounded to the nearest multiple of the source segment duration.
+
      */
-    NextToken?: __string;
-  }
-  export interface ChannelUpdateParameters {
+    SegmentDurationSeconds?: __integer;
     /**
-     * A short text description of the Channel.
+     * An optional custom string that is prepended to the name of each segment. If not specified, it defaults to the ChannelId.
      */
-    Description?: __string;
+    SegmentPrefix?: __string;
+    StreamSelection?: StreamSelection;
   }
   export interface CreateChannelRequest {
     /**
@@ -179,6 +202,7 @@ This cannot be changed after the OriginEndpoint is created.
 
      */
     ChannelId: __string;
+    CmafPackage?: CmafPackageCreateOrUpdateParameters;
     DashPackage?: DashPackage;
     /**
      * A short text description of the OriginEndpoint.
@@ -211,7 +235,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
     /**
      * A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
      */
-    Whitelist?: ListOf__string;
+    Whitelist?: __listOf__string;
   }
   export interface CreateOriginEndpointResponse {
     /**
@@ -222,6 +246,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      * The ID of the Channel the OriginEndpoint is associated with.
      */
     ChannelId?: __string;
+    CmafPackage?: CmafPackage;
     DashPackage?: DashPackage;
     /**
      * A short text description of the OriginEndpoint.
@@ -256,7 +281,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
     /**
      * A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
      */
-    Whitelist?: ListOf__string;
+    Whitelist?: __listOf__string;
   }
   export interface DashEncryption {
     /**
@@ -267,6 +292,10 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
   }
   export interface DashPackage {
     Encryption?: DashEncryption;
+    /**
+     * Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.
+     */
+    ManifestLayout?: ManifestLayout;
     /**
      * Time window (in seconds) contained in each manifest.
      */
@@ -280,6 +309,14 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     MinUpdatePeriodSeconds?: __integer;
     /**
+     * A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH)
+Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not
+be partitioned into more than one period. If the list contains "ADS", new periods will be created where
+the Channel source contains SCTE-35 ad markers.
+
+     */
+    PeriodTriggers?: __listOf__PeriodTriggersElement;
+    /**
      * The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to "HBBTV_1_5", HbbTV 1.5 compliant output is enabled.
      */
     Profile?: Profile;
@@ -289,6 +326,10 @@ rounded to the nearest multiple of the source segment duration.
 
      */
     SegmentDurationSeconds?: __integer;
+    /**
+     * Determines the type of SegmentTimeline included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs.
+     */
+    SegmentTemplateFormat?: SegmentTemplateFormat;
     StreamSelection?: StreamSelection;
     /**
      * Duration (in seconds) to delay live content before presentation.
@@ -347,6 +388,7 @@ rounded to the nearest multiple of the source segment duration.
      * The ID of the Channel the OriginEndpoint is associated with.
      */
     ChannelId?: __string;
+    CmafPackage?: CmafPackage;
     DashPackage?: DashPackage;
     /**
      * A short text description of the OriginEndpoint.
@@ -381,7 +423,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
     /**
      * A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
      */
-    Whitelist?: ListOf__string;
+    Whitelist?: __listOf__string;
   }
   export type EncryptionMethod = "AES_128"|"SAMPLE_AES"|string;
   export interface HlsEncryption {
@@ -409,7 +451,107 @@ When not specified the initialization vector will be periodically rotated.
     /**
      * A list of endpoints to which the source stream should be sent.
      */
-    IngestEndpoints?: ListOfIngestEndpoint;
+    IngestEndpoints?: __listOfIngestEndpoint;
+  }
+  export interface HlsManifest {
+    /**
+     * This setting controls how ad markers are included in the packaged OriginEndpoint.
+"NONE" will omit all SCTE-35 ad markers from the output.
+"PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad
+markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest.
+"SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35
+messages in the input source.
+
+     */
+    AdMarkers?: AdMarkers;
+    /**
+     * The ID of the manifest. The ID must be unique within the OriginEndpoint and it cannot be changed after it is created.
+     */
+    Id: __string;
+    /**
+     * When enabled, an I-Frame only stream will be included in the output.
+     */
+    IncludeIframeOnlyStream?: __boolean;
+    /**
+     * An optional short string appended to the end of the OriginEndpoint URL. If not specified, defaults to the manifestName for the OriginEndpoint.
+     */
+    ManifestName?: __string;
+    /**
+     * The HTTP Live Streaming (HLS) playlist type.
+When either "EVENT" or "VOD" is specified, a corresponding EXT-X-PLAYLIST-TYPE
+entry will be included in the media playlist.
+
+     */
+    PlaylistType?: PlaylistType;
+    /**
+     * Time window (in seconds) contained in each parent manifest.
+     */
+    PlaylistWindowSeconds?: __integer;
+    /**
+     * The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag
+inserted into manifests. Additionally, when an interval is specified
+ID3Timed Metadata messages will be generated every 5 seconds using the
+ingest time of the content.
+If the interval is not specified, or set to 0, then
+no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no
+ID3Timed Metadata messages will be generated. Note that irrespective
+of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input,
+it will be passed through to HLS output.
+
+     */
+    ProgramDateTimeIntervalSeconds?: __integer;
+    /**
+     * The URL of the packaged OriginEndpoint for consumption.
+     */
+    Url?: __string;
+  }
+  export interface HlsManifestCreateOrUpdateParameters {
+    /**
+     * This setting controls how ad markers are included in the packaged OriginEndpoint.
+"NONE" will omit all SCTE-35 ad markers from the output.
+"PASSTHROUGH" causes the manifest to contain a copy of the SCTE-35 ad
+markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest.
+"SCTE35_ENHANCED" generates ad markers and blackout tags based on SCTE-35
+messages in the input source.
+
+     */
+    AdMarkers?: AdMarkers;
+    /**
+     * The ID of the manifest. The ID must be unique within the OriginEndpoint and it cannot be changed after it is created.
+     */
+    Id: __string;
+    /**
+     * When enabled, an I-Frame only stream will be included in the output.
+     */
+    IncludeIframeOnlyStream?: __boolean;
+    /**
+     * An optional short string appended to the end of the OriginEndpoint URL. If not specified, defaults to the manifestName for the OriginEndpoint.
+     */
+    ManifestName?: __string;
+    /**
+     * The HTTP Live Streaming (HLS) playlist type.
+When either "EVENT" or "VOD" is specified, a corresponding EXT-X-PLAYLIST-TYPE
+entry will be included in the media playlist.
+
+     */
+    PlaylistType?: PlaylistType;
+    /**
+     * Time window (in seconds) contained in each parent manifest.
+     */
+    PlaylistWindowSeconds?: __integer;
+    /**
+     * The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag
+inserted into manifests. Additionally, when an interval is specified
+ID3Timed Metadata messages will be generated every 5 seconds using the
+ingest time of the content.
+If the interval is not specified, or set to 0, then
+no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no
+ID3Timed Metadata messages will be generated. Note that irrespective
+of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input,
+it will be passed through to HLS output.
+
+     */
+    ProgramDateTimeIntervalSeconds?: __integer;
   }
   export interface HlsPackage {
     /**
@@ -441,7 +583,7 @@ entry will be included in the media playlist.
     /**
      * The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag
 inserted into manifests. Additionally, when an interval is specified
-ID3Timed Metadata messages will be generated every 5 seconds using the 
+ID3Timed Metadata messages will be generated every 5 seconds using the
 ingest time of the content.
 If the interval is not specified, or set to 0, then
 no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no
@@ -464,6 +606,10 @@ rounded to the nearest multiple of the source fragment duration.
     UseAudioRenditionGroup?: __boolean;
   }
   export interface IngestEndpoint {
+    /**
+     * The system generated unique identifier for the IngestEndpoint
+     */
+    Id?: __string;
     /**
      * The system generated password for ingest authentication.
      */
@@ -491,16 +637,12 @@ rounded to the nearest multiple of the source fragment duration.
     /**
      * A list of Channel records.
      */
-    Channels?: ListOfChannel;
+    Channels?: __listOfChannel;
     /**
      * A token that can be used to resume pagination from the end of the collection.
      */
     NextToken?: __string;
   }
-  export type ListOfChannel = Channel[];
-  export type ListOfIngestEndpoint = IngestEndpoint[];
-  export type ListOfOriginEndpoint = OriginEndpoint[];
-  export type ListOf__string = __string[];
   export interface ListOriginEndpointsRequest {
     /**
      * When specified, the request will return only OriginEndpoints associated with the given Channel ID.
@@ -523,8 +665,9 @@ rounded to the nearest multiple of the source fragment duration.
     /**
      * A list of OriginEndpoint records.
      */
-    OriginEndpoints?: ListOfOriginEndpoint;
+    OriginEndpoints?: __listOfOriginEndpoint;
   }
+  export type ManifestLayout = "FULL"|"COMPACT"|string;
   export type MaxResults = number;
   export interface MssEncryption {
     SpekeKeyProvider: SpekeKeyProvider;
@@ -550,6 +693,7 @@ rounded to the nearest multiple of the source fragment duration.
      * The ID of the Channel the OriginEndpoint is associated with.
      */
     ChannelId?: __string;
+    CmafPackage?: CmafPackage;
     DashPackage?: DashPackage;
     /**
      * A short text description of the OriginEndpoint.
@@ -584,87 +728,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
     /**
      * A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
      */
-    Whitelist?: ListOf__string;
-  }
-  export interface OriginEndpointCreateParameters {
-    /**
-     * The ID of the Channel that the OriginEndpoint will be associated with.
-This cannot be changed after the OriginEndpoint is created.
-
-     */
-    ChannelId?: __string;
-    DashPackage?: DashPackage;
-    /**
-     * A short text description of the OriginEndpoint.
-     */
-    Description?: __string;
-    HlsPackage?: HlsPackage;
-    /**
-     * The ID of the OriginEndpoint.  The ID must be unique within the region
-and it cannot be changed after the OriginEndpoint is created.
-
-     */
-    Id?: __string;
-    /**
-     * A short string that will be used as the filename of the OriginEndpoint URL (defaults to "index").
-     */
-    ManifestName?: __string;
-    MssPackage?: MssPackage;
-    /**
-     * Maximum duration (seconds) of content to retain for startover playback.
-If not specified, startover playback will be disabled for the OriginEndpoint.
-
-     */
-    StartoverWindowSeconds?: __integer;
-    /**
-     * Amount of delay (seconds) to enforce on the playback of live content.
-If not specified, there will be no time delay in effect for the OriginEndpoint.
-
-     */
-    TimeDelaySeconds?: __integer;
-    /**
-     * A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
-     */
-    Whitelist?: ListOf__string;
-  }
-  export interface OriginEndpointList {
-    /**
-     * A token that can be used to resume pagination from the end of the collection.
-     */
-    NextToken?: __string;
-    /**
-     * A list of OriginEndpoint records.
-     */
-    OriginEndpoints?: ListOfOriginEndpoint;
-  }
-  export interface OriginEndpointUpdateParameters {
-    DashPackage?: DashPackage;
-    /**
-     * A short text description of the OriginEndpoint.
-     */
-    Description?: __string;
-    HlsPackage?: HlsPackage;
-    /**
-     * A short string that will be appended to the end of the Endpoint URL.
-     */
-    ManifestName?: __string;
-    MssPackage?: MssPackage;
-    /**
-     * Maximum duration (in seconds) of content to retain for startover playback.
-If not specified, startover playback will be disabled for the OriginEndpoint.
-
-     */
-    StartoverWindowSeconds?: __integer;
-    /**
-     * Amount of delay (in seconds) to enforce on the playback of live content.
-If not specified, there will be no time delay in effect for the OriginEndpoint.
-
-     */
-    TimeDelaySeconds?: __integer;
-    /**
-     * A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
-     */
-    Whitelist?: ListOf__string;
+    Whitelist?: __listOf__string;
   }
   export type PlaylistType = "NONE"|"EVENT"|"VOD"|string;
   export type Profile = "NONE"|"HBBTV_1_5"|string;
@@ -689,7 +753,40 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     Id?: __string;
   }
+  export interface RotateIngestEndpointCredentialsRequest {
+    /**
+     * The ID of the channel the IngestEndpoint is on.
+     */
+    Id: __string;
+    /**
+     * The id of the IngestEndpoint whose credentials should be rotated
+     */
+    IngestEndpointId: __string;
+  }
+  export interface RotateIngestEndpointCredentialsResponse {
+    /**
+     * The Amazon Resource Name (ARN) assigned to the Channel.
+     */
+    Arn?: __string;
+    /**
+     * A short text description of the Channel.
+     */
+    Description?: __string;
+    HlsIngest?: HlsIngest;
+    /**
+     * The ID of the Channel.
+     */
+    Id?: __string;
+  }
+  export type SegmentTemplateFormat = "NUMBER_WITH_TIMELINE"|"TIME_WITH_TIMELINE"|string;
   export interface SpekeKeyProvider {
+    /**
+     * An Amazon Resource Name (ARN) of a Certificate Manager certificate
+that MediaPackage will use for enforcing secure end-to-end data
+transfer with the key provider service.
+
+     */
+    CertificateArn?: __string;
     /**
      * The resource ID to include in key requests.
      */
@@ -703,7 +800,7 @@ MediaPackage will assume when accessing the key provider service.
     /**
      * The system IDs to include in key requests.
      */
-    SystemIds: ListOf__string;
+    SystemIds: __listOf__string;
     /**
      * The URL of the external key provider service.
      */
@@ -750,6 +847,7 @@ MediaPackage will assume when accessing the key provider service.
     Id?: __string;
   }
   export interface UpdateOriginEndpointRequest {
+    CmafPackage?: CmafPackageCreateOrUpdateParameters;
     DashPackage?: DashPackage;
     /**
      * A short text description of the OriginEndpoint.
@@ -780,7 +878,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
     /**
      * A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
      */
-    Whitelist?: ListOf__string;
+    Whitelist?: __listOf__string;
   }
   export interface UpdateOriginEndpointResponse {
     /**
@@ -791,6 +889,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      * The ID of the Channel the OriginEndpoint is associated with.
      */
     ChannelId?: __string;
+    CmafPackage?: CmafPackage;
     DashPackage?: DashPackage;
     /**
      * A short text description of the OriginEndpoint.
@@ -825,13 +924,19 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
     /**
      * A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
      */
-    Whitelist?: ListOf__string;
+    Whitelist?: __listOf__string;
   }
+  export type __PeriodTriggersElement = "ADS"|string;
   export type __boolean = boolean;
-  export type __double = number;
   export type __integer = number;
+  export type __listOfChannel = Channel[];
+  export type __listOfHlsManifest = HlsManifest[];
+  export type __listOfHlsManifestCreateOrUpdateParameters = HlsManifestCreateOrUpdateParameters[];
+  export type __listOfIngestEndpoint = IngestEndpoint[];
+  export type __listOfOriginEndpoint = OriginEndpoint[];
+  export type __listOf__PeriodTriggersElement = __PeriodTriggersElement[];
+  export type __listOf__string = __string[];
   export type __string = string;
-  export type __timestamp = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

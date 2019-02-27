@@ -148,6 +148,14 @@ declare class ECR extends Service {
    */
   listImages(callback?: (err: AWSError, data: ECR.Types.ListImagesResponse) => void): Request<ECR.Types.ListImagesResponse, AWSError>;
   /**
+   * List the tags for an Amazon ECR resource.
+   */
+  listTagsForResource(params: ECR.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: ECR.Types.ListTagsForResourceResponse) => void): Request<ECR.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * List the tags for an Amazon ECR resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: ECR.Types.ListTagsForResourceResponse) => void): Request<ECR.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Creates or updates the image manifest and tags associated with an image.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
   putImage(params: ECR.Types.PutImageRequest, callback?: (err: AWSError, data: ECR.Types.PutImageResponse) => void): Request<ECR.Types.PutImageResponse, AWSError>;
@@ -156,11 +164,11 @@ declare class ECR extends Service {
    */
   putImage(callback?: (err: AWSError, data: ECR.Types.PutImageResponse) => void): Request<ECR.Types.PutImageResponse, AWSError>;
   /**
-   * Creates or updates a lifecycle policy.
+   * Creates or updates a lifecycle policy. For information about lifecycle policy syntax, see Lifecycle Policy Template.
    */
   putLifecyclePolicy(params: ECR.Types.PutLifecyclePolicyRequest, callback?: (err: AWSError, data: ECR.Types.PutLifecyclePolicyResponse) => void): Request<ECR.Types.PutLifecyclePolicyResponse, AWSError>;
   /**
-   * Creates or updates a lifecycle policy.
+   * Creates or updates a lifecycle policy. For information about lifecycle policy syntax, see Lifecycle Policy Template.
    */
   putLifecyclePolicy(callback?: (err: AWSError, data: ECR.Types.PutLifecyclePolicyResponse) => void): Request<ECR.Types.PutLifecyclePolicyResponse, AWSError>;
   /**
@@ -179,6 +187,22 @@ declare class ECR extends Service {
    * Starts a preview of the specified lifecycle policy. This allows you to see the results before creating the lifecycle policy.
    */
   startLifecyclePolicyPreview(callback?: (err: AWSError, data: ECR.Types.StartLifecyclePolicyPreviewResponse) => void): Request<ECR.Types.StartLifecyclePolicyPreviewResponse, AWSError>;
+  /**
+   * Adds specified tags to a resource with the specified ARN. Existing tags on a resource are not changed if they are not specified in the request parameters.
+   */
+  tagResource(params: ECR.Types.TagResourceRequest, callback?: (err: AWSError, data: ECR.Types.TagResourceResponse) => void): Request<ECR.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds specified tags to a resource with the specified ARN. Existing tags on a resource are not changed if they are not specified in the request parameters.
+   */
+  tagResource(callback?: (err: AWSError, data: ECR.Types.TagResourceResponse) => void): Request<ECR.Types.TagResourceResponse, AWSError>;
+  /**
+   * Deletes specified tags from a resource.
+   */
+  untagResource(params: ECR.Types.UntagResourceRequest, callback?: (err: AWSError, data: ECR.Types.UntagResourceResponse) => void): Request<ECR.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Deletes specified tags from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: ECR.Types.UntagResourceResponse) => void): Request<ECR.Types.UntagResourceResponse, AWSError>;
   /**
    * Uploads an image layer part to Amazon ECR.  This operation is used by the Amazon ECR proxy, and it is not intended for general use by customers for pulling and pushing images. In most cases, you should use the docker CLI to pull, tag, and push images. 
    */
@@ -325,6 +349,10 @@ declare namespace ECR {
      * The name to use for the repository. The repository name may be specified on its own (such as nginx-web-app) or it can be prepended with a namespace to group the repository into a category (such as project-a/nginx-web-app).
      */
     repositoryName: RepositoryName;
+    /**
+     * 
+     */
+    tags?: TagList;
   }
   export interface CreateRepositoryResponse {
     /**
@@ -339,7 +367,7 @@ declare namespace ECR {
      */
     registryId?: RegistryId;
     /**
-     * The name of the repository that is associated with the repository policy to&#8232; delete.
+     * The name of the repository.
      */
     repositoryName: RepositoryName;
   }
@@ -353,7 +381,7 @@ declare namespace ECR {
      */
     repositoryName?: RepositoryName;
     /**
-     * The JSON repository policy text.
+     * The JSON lifecycle policy text.
      */
     lifecyclePolicyText?: LifecyclePolicyText;
     /**
@@ -417,7 +445,7 @@ declare namespace ECR {
      */
     registryId?: RegistryId;
     /**
-     * A list of repositories to describe. If this parameter is omitted, then all repositories in a registry are described.
+     * A list of repositories to describe.
      */
     repositoryName: RepositoryName;
     /**
@@ -425,11 +453,11 @@ declare namespace ECR {
      */
     imageIds?: ImageIdentifierList;
     /**
-     * The nextToken value returned from a previous paginated DescribeImages request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.
+     * The nextToken value returned from a previous paginated DescribeImages request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return. This option cannot be used when you specify images with imageIds.
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of repository results returned by DescribeImages in paginated output. When this parameter is used, DescribeImages only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribeImages request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then DescribeImages returns up to 100 results and a nextToken value, if applicable.
+     * The maximum number of repository results returned by DescribeImages in paginated output. When this parameter is used, DescribeImages only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribeImages request with the returned nextToken value. This value can be between 1 and 1000. If this parameter is not used, then DescribeImages returns up to 100 results and a nextToken value, if applicable. This option cannot be used when you specify images with imageIds.
      */
     maxResults?: MaxResults;
     /**
@@ -457,11 +485,11 @@ declare namespace ECR {
      */
     repositoryNames?: RepositoryNameList;
     /**
-     * The nextToken value returned from a previous paginated DescribeRepositories request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return.  This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. 
+     * The nextToken value returned from a previous paginated DescribeRepositories request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value. This value is null when there are no more results to return. This option cannot be used when you specify repositories with repositoryNames.  This token should be treated as an opaque identifier that is only used to retrieve the next items in a list and not for other programmatic purposes. 
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of repository results returned by DescribeRepositories in paginated output. When this parameter is used, DescribeRepositories only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribeRepositories request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then DescribeRepositories returns up to 100 results and a nextToken value, if applicable.
+     * The maximum number of repository results returned by DescribeRepositories in paginated output. When this parameter is used, DescribeRepositories only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another DescribeRepositories request with the returned nextToken value. This value can be between 1 and 1000. If this parameter is not used, then DescribeRepositories returns up to 100 results and a nextToken value, if applicable. This option cannot be used when you specify repositories with repositoryNames.
      */
     maxResults?: MaxResults;
   }
@@ -476,7 +504,6 @@ declare namespace ECR {
     nextToken?: NextToken;
   }
   export type EvaluationTimestamp = Date;
-  export type ExceptionMessage = string;
   export type ExpirationTimestamp = Date;
   export type ForceFlag = boolean;
   export type GetAuthorizationTokenRegistryIdList = RegistryId[];
@@ -522,7 +549,7 @@ declare namespace ECR {
      */
     registryId?: RegistryId;
     /**
-     * The name of the repository with the policy to retrieve.
+     * The name of the repository.
      */
     repositoryName: RepositoryName;
     /**
@@ -530,13 +557,13 @@ declare namespace ECR {
      */
     imageIds?: ImageIdentifierList;
     /**
-     * The nextToken value returned from a previous paginated&#8232; GetLifecyclePolicyPreviewRequest request where maxResults was used and the&#8232; results exceeded the value of that parameter. Pagination continues from the end of the&#8232; previous results that returned the nextToken value. This value is&#8232; null when there are no more results to return.
+     * The nextToken value returned from a previous paginated&#x2028; GetLifecyclePolicyPreviewRequest request where maxResults was used and the&#x2028; results exceeded the value of that parameter. Pagination continues from the end of the&#x2028; previous results that returned the nextToken value. This value is&#x2028; null when there are no more results to return. This option cannot be used when you specify images with imageIds.
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of repository results returned by GetLifecyclePolicyPreviewRequest in&#8232; paginated output. When this parameter is used, GetLifecyclePolicyPreviewRequest only returns&#8232; maxResults results in a single page along with a nextToken&#8232; response element. The remaining results of the initial request can be seen by sending&#8232; another GetLifecyclePolicyPreviewRequest request with the returned nextToken&#8232; value. This value can be between 1 and 100. If this&#8232; parameter is not used, then GetLifecyclePolicyPreviewRequest returns up to&#8232; 100 results and a nextToken value, if&#8232; applicable.
+     * The maximum number of repository results returned by GetLifecyclePolicyPreviewRequest in&#x2028; paginated output. When this parameter is used, GetLifecyclePolicyPreviewRequest only returns&#x2028; maxResults results in a single page along with a nextToken&#x2028; response element. The remaining results of the initial request can be seen by sending&#x2028; another GetLifecyclePolicyPreviewRequest request with the returned nextToken&#x2028; value. This value can be between 1 and 1000. If this&#x2028; parameter is not used, then GetLifecyclePolicyPreviewRequest returns up to&#x2028; 100 results and a nextToken value, if&#x2028; applicable. This option cannot be used when you specify images with imageIds.
      */
-    maxResults?: MaxResults;
+    maxResults?: LifecyclePreviewMaxResults;
     /**
      * An optional parameter that filters results based on image tag status and all tags, if tagged.
      */
@@ -552,7 +579,7 @@ declare namespace ECR {
      */
     repositoryName?: RepositoryName;
     /**
-     * The JSON repository policy text.
+     * The JSON lifecycle policy text.
      */
     lifecyclePolicyText?: LifecyclePolicyText;
     /**
@@ -578,7 +605,7 @@ declare namespace ECR {
      */
     registryId?: RegistryId;
     /**
-     * The name of the repository with the policy to retrieve.
+     * The name of the repository.
      */
     repositoryName: RepositoryName;
   }
@@ -592,7 +619,7 @@ declare namespace ECR {
      */
     repositoryName?: RepositoryName;
     /**
-     * The JSON repository policy text.
+     * The JSON lifecycle policy text.
      */
     lifecyclePolicyText?: LifecyclePolicyText;
     /**
@@ -810,6 +837,7 @@ declare namespace ECR {
   }
   export type LifecyclePolicyRulePriority = number;
   export type LifecyclePolicyText = string;
+  export type LifecyclePreviewMaxResults = number;
   export interface ListImagesFilter {
     /**
      * The tag status with which to filter your ListImages results. You can filter results based on whether they are TAGGED or UNTAGGED.
@@ -830,7 +858,7 @@ declare namespace ECR {
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of image results returned by ListImages in paginated output. When this parameter is used, ListImages only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListImages request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListImages returns up to 100 results and a nextToken value, if applicable.
+     * The maximum number of image results returned by ListImages in paginated output. When this parameter is used, ListImages only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListImages request with the returned nextToken value. This value can be between 1 and 1000. If this parameter is not used, then ListImages returns up to 100 results and a nextToken value, if applicable.
      */
     maxResults?: MaxResults;
     /**
@@ -847,6 +875,18 @@ declare namespace ECR {
      * The nextToken value to include in a future ListImages request. When the results of a ListImages request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.
      */
     nextToken?: NextToken;
+  }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the only supported resource is an Amazon ECR repository.
+     */
+    resourceArn: Arn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags for the resource.
+     */
+    tags?: TagList;
   }
   export type MaxResults = number;
   export type MediaType = string;
@@ -881,7 +921,7 @@ declare namespace ECR {
   }
   export interface PutLifecyclePolicyRequest {
     /**
-     * The AWS account ID associated with the registry that contains the repository. If you do&#8232; not specify a registry, the default registry is assumed.
+     * The AWS account ID associated with the registry that contains the repository. If you do&#x2028; not specify a registry, the default registry is assumed.
      */
     registryId?: RegistryId;
     /**
@@ -998,7 +1038,45 @@ declare namespace ECR {
      */
     status?: LifecyclePolicyPreviewStatus;
   }
-  export type TagStatus = "TAGGED"|"UNTAGGED"|string;
+  export interface Tag {
+    /**
+     * One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values.
+     */
+    Key?: TagKey;
+    /**
+     * The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).
+     */
+    Value?: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the the resource to which to add tags. Currently, the only supported resource is an Amazon ECR repository.
+     */
+    resourceArn: Arn;
+    /**
+     * The tags to add to the resource. A tag is an array of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
+     */
+    tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagStatus = "TAGGED"|"UNTAGGED"|"ANY"|string;
+  export type TagValue = string;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource from which to remove tags. Currently, the only supported resource is an Amazon ECR repository.
+     */
+    resourceArn: Arn;
+    /**
+     * The keys of the tags to be removed.
+     */
+    tagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export type UploadId = string;
   export interface UploadLayerPartRequest {
     /**

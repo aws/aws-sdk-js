@@ -16,7 +16,7 @@ Feature: Amazon CloudFront
     Then the error code should be "NoSuchOrigin"
     And the error message should be:
     """
-    One or more of your origins do not exist.
+    One or more of your origins or origin groups do not exist.
     """
 
   Scenario: Error handling

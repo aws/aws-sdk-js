@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -100,6 +101,14 @@ declare class OpsWorksCM extends Service {
    */
   disassociateNode(callback?: (err: AWSError, data: OpsWorksCM.Types.DisassociateNodeResponse) => void): Request<OpsWorksCM.Types.DisassociateNodeResponse, AWSError>;
   /**
+   *  Exports a specified server engine attribute as a base64-encoded string. For example, you can export user data that you can use in EC2 to associate nodes with a server.   This operation is synchronous.   A ValidationException is raised when parameters of the request are not valid. A ResourceNotFoundException is thrown when the server does not exist. An InvalidStateException is thrown when the server is in any of the following states: CREATING, TERMINATED, FAILED or DELETING. 
+   */
+  exportServerEngineAttribute(params: OpsWorksCM.Types.ExportServerEngineAttributeRequest, callback?: (err: AWSError, data: OpsWorksCM.Types.ExportServerEngineAttributeResponse) => void): Request<OpsWorksCM.Types.ExportServerEngineAttributeResponse, AWSError>;
+  /**
+   *  Exports a specified server engine attribute as a base64-encoded string. For example, you can export user data that you can use in EC2 to associate nodes with a server.   This operation is synchronous.   A ValidationException is raised when parameters of the request are not valid. A ResourceNotFoundException is thrown when the server does not exist. An InvalidStateException is thrown when the server is in any of the following states: CREATING, TERMINATED, FAILED or DELETING. 
+   */
+  exportServerEngineAttribute(callback?: (err: AWSError, data: OpsWorksCM.Types.ExportServerEngineAttributeResponse) => void): Request<OpsWorksCM.Types.ExportServerEngineAttributeResponse, AWSError>;
+  /**
    *  Restores a backup to a server that is in a CONNECTION_LOST, HEALTHY, RUNNING, UNHEALTHY, or TERMINATED state. When you run RestoreServer, the server's EC2 instance is deleted, and a new EC2 instance is configured. RestoreServer maintains the existing server endpoint, so configuration management of the server's client devices (nodes) should continue to work.   This operation is asynchronous.   An InvalidStateException is thrown when the server is not in a valid state. A ResourceNotFoundException is thrown when the server does not exist. A ValidationException is raised when parameters of the request are not valid. 
    */
   restoreServer(params: OpsWorksCM.Types.RestoreServerRequest, callback?: (err: AWSError, data: OpsWorksCM.Types.RestoreServerResponse) => void): Request<OpsWorksCM.Types.RestoreServerResponse, AWSError>;
@@ -124,17 +133,17 @@ declare class OpsWorksCM extends Service {
    */
   updateServer(callback?: (err: AWSError, data: OpsWorksCM.Types.UpdateServerResponse) => void): Request<OpsWorksCM.Types.UpdateServerResponse, AWSError>;
   /**
-   *  Updates engine-specific attributes on a specified server. The server enters the MODIFYING state when this operation is in progress. Only one update can occur at a time. You can use this command to reset a Chef server's private key (CHEF_PIVOTAL_KEY), a Chef server's admin password (CHEF_DELIVERY_ADMIN_PASSWORD), or a Puppet server's admin password (PUPPET_ADMIN_PASSWORD).   This operation is asynchronous.   This operation can only be called for servers in HEALTHY or UNHEALTHY states. Otherwise, an InvalidStateException is raised. A ResourceNotFoundException is thrown when the server does not exist. A ValidationException is raised when parameters of the request are not valid. 
+   *  Updates engine-specific attributes on a specified server. The server enters the MODIFYING state when this operation is in progress. Only one update can occur at a time. You can use this command to reset a Chef server's public key (CHEF_PIVOTAL_KEY) or a Puppet server's admin password (PUPPET_ADMIN_PASSWORD).   This operation is asynchronous.   This operation can only be called for servers in HEALTHY or UNHEALTHY states. Otherwise, an InvalidStateException is raised. A ResourceNotFoundException is thrown when the server does not exist. A ValidationException is raised when parameters of the request are not valid. 
    */
   updateServerEngineAttributes(params: OpsWorksCM.Types.UpdateServerEngineAttributesRequest, callback?: (err: AWSError, data: OpsWorksCM.Types.UpdateServerEngineAttributesResponse) => void): Request<OpsWorksCM.Types.UpdateServerEngineAttributesResponse, AWSError>;
   /**
-   *  Updates engine-specific attributes on a specified server. The server enters the MODIFYING state when this operation is in progress. Only one update can occur at a time. You can use this command to reset a Chef server's private key (CHEF_PIVOTAL_KEY), a Chef server's admin password (CHEF_DELIVERY_ADMIN_PASSWORD), or a Puppet server's admin password (PUPPET_ADMIN_PASSWORD).   This operation is asynchronous.   This operation can only be called for servers in HEALTHY or UNHEALTHY states. Otherwise, an InvalidStateException is raised. A ResourceNotFoundException is thrown when the server does not exist. A ValidationException is raised when parameters of the request are not valid. 
+   *  Updates engine-specific attributes on a specified server. The server enters the MODIFYING state when this operation is in progress. Only one update can occur at a time. You can use this command to reset a Chef server's public key (CHEF_PIVOTAL_KEY) or a Puppet server's admin password (PUPPET_ADMIN_PASSWORD).   This operation is asynchronous.   This operation can only be called for servers in HEALTHY or UNHEALTHY states. Otherwise, an InvalidStateException is raised. A ResourceNotFoundException is thrown when the server does not exist. A ValidationException is raised when parameters of the request are not valid. 
    */
   updateServerEngineAttributes(callback?: (err: AWSError, data: OpsWorksCM.Types.UpdateServerEngineAttributesResponse) => void): Request<OpsWorksCM.Types.UpdateServerEngineAttributesResponse, AWSError>;
   /**
    * Waits for the nodeAssociated state by periodically calling the underlying OpsWorksCM.describeNodeAssociationStatusoperation every 15 seconds (at most 15 times). Wait until node is associated or disassociated.
    */
-  waitFor(state: "nodeAssociated", params: OpsWorksCM.Types.DescribeNodeAssociationStatusRequest, callback?: (err: AWSError, data: OpsWorksCM.Types.DescribeNodeAssociationStatusResponse) => void): Request<OpsWorksCM.Types.DescribeNodeAssociationStatusResponse, AWSError>;
+  waitFor(state: "nodeAssociated", params: OpsWorksCM.Types.DescribeNodeAssociationStatusRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: OpsWorksCM.Types.DescribeNodeAssociationStatusResponse) => void): Request<OpsWorksCM.Types.DescribeNodeAssociationStatusResponse, AWSError>;
   /**
    * Waits for the nodeAssociated state by periodically calling the underlying OpsWorksCM.describeNodeAssociationStatusoperation every 15 seconds (at most 15 times). Wait until node is associated or disassociated.
    */
@@ -320,7 +329,7 @@ declare namespace OpsWorksCM {
      */
     EngineVersion?: String;
     /**
-     * Optional engine attributes on a specified server.   Attributes accepted in a Chef createServer request:     CHEF_PIVOTAL_KEY: A base64-encoded RSA private key that is not stored by AWS OpsWorks for Chef Automate. This private key is required to access the Chef API. When no CHEF_PIVOTAL_KEY is set, one is generated and returned in the response.     CHEF_DELIVERY_ADMIN_PASSWORD: The password for the administrative user in the Chef Automate GUI. The password length is a minimum of eight characters, and a maximum of 32. The password can contain letters, numbers, and special characters (!/@#$%^&amp;+=_). The password must contain at least one lower case letter, one upper case letter, one number, and one special character. When no CHEF_DELIVERY_ADMIN_PASSWORD is set, one is generated and returned in the response.    Attributes accepted in a Puppet createServer request:     PUPPET_ADMIN_PASSWORD: To work with the Puppet Enterprise console, a password must use ASCII characters.  
+     * Optional engine attributes on a specified server.   Attributes accepted in a Chef createServer request:     CHEF_PIVOTAL_KEY: A base64-encoded RSA public key. The corresponding private key is required to access the Chef API. When no CHEF_PIVOTAL_KEY is set, a private key is generated and returned in the response.     CHEF_DELIVERY_ADMIN_PASSWORD: The password for the administrative user in the Chef Automate GUI. The password length is a minimum of eight characters, and a maximum of 32. The password can contain letters, numbers, and special characters (!/@#$%^&amp;+=_). The password must contain at least one lower case letter, one upper case letter, one number, and one special character. When no CHEF_DELIVERY_ADMIN_PASSWORD is set, one is generated and returned in the response.    Attributes accepted in a Puppet createServer request:     PUPPET_ADMIN_PASSWORD: To work with the Puppet Enterprise console, a password must use ASCII characters.    PUPPET_R10K_REMOTE: The r10k remote is the URL of your control repository (for example, ssh://git@your.git-repo.com:user/control-repo.git). Specifying an r10k remote opens TCP port 8170.    PUPPET_R10K_PRIVATE_KEY: If you are using a private Git repository, add PUPPET_R10K_PRIVATE_KEY to specify an SSH URL and a PEM-encoded private SSH key.  
      */
     EngineAttributes?: EngineAttributes;
     /**
@@ -408,11 +417,11 @@ declare namespace OpsWorksCM {
      */
     ServerName?: ServerName;
     /**
-     * NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call DescribeBackups again, and assign the token from the previous results as the value of the nextToken parameter. If there are no more results, the response object's nextToken parameter value is null. Setting a nextToken value that was not returned in your previous results causes an InvalidNextTokenException to occur.
+     * This is not currently implemented for DescribeBackups requests.
      */
     NextToken?: NextToken;
     /**
-     * To receive a paginated response, use this parameter to specify the maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a NextToken value that you can assign to the NextToken request parameter to get the next set of results. 
+     * This is not currently implemented for DescribeBackups requests.
      */
     MaxResults?: MaxResults;
   }
@@ -422,7 +431,7 @@ declare namespace OpsWorksCM {
      */
     Backups?: Backups;
     /**
-     * NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call DescribeBackups again, and assign the token from the previous results as the value of the nextToken parameter. If there are no more results, the response object's nextToken parameter value is null. Setting a nextToken value that was not returned in your previous results causes an InvalidNextTokenException to occur. 
+     * This is not currently implemented for DescribeBackups requests.
      */
     NextToken?: String;
   }
@@ -476,11 +485,11 @@ declare namespace OpsWorksCM {
      */
     ServerName?: ServerName;
     /**
-     * NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call DescribeServers again, and assign the token from the previous results as the value of the nextToken parameter. If there are no more results, the response object's nextToken parameter value is null. Setting a nextToken value that was not returned in your previous results causes an InvalidNextTokenException to occur. 
+     * This is not currently implemented for DescribeServers requests. 
      */
     NextToken?: NextToken;
     /**
-     * To receive a paginated response, use this parameter to specify the maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a NextToken value that you can assign to the NextToken request parameter to get the next set of results. 
+     * This is not currently implemented for DescribeServers requests. 
      */
     MaxResults?: MaxResults;
   }
@@ -490,7 +499,7 @@ declare namespace OpsWorksCM {
      */
     Servers?: Servers;
     /**
-     * NextToken is a string that is returned in some command responses. It indicates that not all entries have been returned, and that you must run at least one more request to get remaining items. To get remaining results, call DescribeServers again, and assign the token from the previous results as the value of the nextToken parameter. If there are no more results, the response object's nextToken parameter value is null. Setting a nextToken value that was not returned in your previous results causes an InvalidNextTokenException to occur. 
+     * This is not currently implemented for DescribeServers requests. 
      */
     NextToken?: String;
   }
@@ -527,6 +536,30 @@ declare namespace OpsWorksCM {
   export type EngineAttributeName = string;
   export type EngineAttributeValue = string;
   export type EngineAttributes = EngineAttribute[];
+  export interface ExportServerEngineAttributeRequest {
+    /**
+     * The name of the export attribute. Currently, the supported export attribute is Userdata. This exports a user data script that includes parameters and values provided in the InputAttributes list.
+     */
+    ExportAttributeName: String;
+    /**
+     * The name of the server from which you are exporting the attribute.
+     */
+    ServerName: ServerName;
+    /**
+     * The list of engine attributes. The list type is EngineAttribute. An EngineAttribute list item is a pair that includes an attribute name and its value. For the Userdata ExportAttributeName, the following are supported engine attribute names.    RunList In Chef, a list of roles or recipes that are run in the specified order. In Puppet, this parameter is ignored.    OrganizationName In Chef, an organization name. AWS OpsWorks for Chef Automate always creates the organization default. In Puppet, this parameter is ignored.    NodeEnvironment In Chef, a node environment (for example, development, staging, or one-box). In Puppet, this parameter is ignored.    NodeClientVersion In Chef, the version of the Chef engine (three numbers separated by dots, such as 13.8.5). If this attribute is empty, OpsWorks for Chef Automate uses the most current version. In Puppet, this parameter is ignored.  
+     */
+    InputAttributes?: EngineAttributes;
+  }
+  export interface ExportServerEngineAttributeResponse {
+    /**
+     * The requested engine attribute pair with attribute name and value.
+     */
+    EngineAttribute?: EngineAttribute;
+    /**
+     * The server name used in the request.
+     */
+    ServerName?: ServerName;
+  }
   export type InstanceProfileArn = string;
   export type Integer = number;
   export type KeyPair = string;

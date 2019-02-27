@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {CloudFrontCustomizations} from '../lib/services/cloudfront';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 import {Signer as signer} from '../lib/cloudfront/signer';
@@ -21,11 +22,11 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   createCloudFrontOriginAccessIdentity(callback?: (err: AWSError, data: CloudFront.Types.CreateCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.Types.CreateCloudFrontOriginAccessIdentityResult, AWSError>;
   /**
-   * Creates a new web distribution. Send a POST request to the /CloudFront API version/distribution/distribution ID resource.
+   * Creates a new web distribution. You create a CloudFront distribution to tell CloudFront where you want content to be delivered from, and the details about how to track and manage content delivery. Send a POST request to the /CloudFront API version/distribution/distribution ID resource.  When you update a distribution, there are more required fields than when you create a distribution. When you update your distribution by using UpdateDistribution, follow the steps included in the documentation to get the current configuration and then make your updates. This helps to make sure that you include all of the required fields. To view a summary, see Required Fields for Create Distribution and Update Distribution in the Amazon CloudFront Developer Guide.  If you are using Adobe Flash Media Server's RTMP protocol, you set up a different kind of CloudFront distribution. For more information, see CreateStreamingDistribution.
    */
   createDistribution(params: CloudFront.Types.CreateDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateDistributionResult) => void): Request<CloudFront.Types.CreateDistributionResult, AWSError>;
   /**
-   * Creates a new web distribution. Send a POST request to the /CloudFront API version/distribution/distribution ID resource.
+   * Creates a new web distribution. You create a CloudFront distribution to tell CloudFront where you want content to be delivered from, and the details about how to track and manage content delivery. Send a POST request to the /CloudFront API version/distribution/distribution ID resource.  When you update a distribution, there are more required fields than when you create a distribution. When you update your distribution by using UpdateDistribution, follow the steps included in the documentation to get the current configuration and then make your updates. This helps to make sure that you include all of the required fields. To view a summary, see Required Fields for Create Distribution and Update Distribution in the Amazon CloudFront Developer Guide.  If you are using Adobe Flash Media Server's RTMP protocol, you set up a different kind of CloudFront distribution. For more information, see CreateStreamingDistribution.
    */
   createDistribution(callback?: (err: AWSError, data: CloudFront.Types.CreateDistributionResult) => void): Request<CloudFront.Types.CreateDistributionResult, AWSError>;
   /**
@@ -37,6 +38,22 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   createDistributionWithTags(callback?: (err: AWSError, data: CloudFront.Types.CreateDistributionWithTagsResult) => void): Request<CloudFront.Types.CreateDistributionWithTagsResult, AWSError>;
   /**
+   * Create a new field-level encryption configuration.
+   */
+  createFieldLevelEncryptionConfig(params: CloudFront.Types.CreateFieldLevelEncryptionConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateFieldLevelEncryptionConfigResult) => void): Request<CloudFront.Types.CreateFieldLevelEncryptionConfigResult, AWSError>;
+  /**
+   * Create a new field-level encryption configuration.
+   */
+  createFieldLevelEncryptionConfig(callback?: (err: AWSError, data: CloudFront.Types.CreateFieldLevelEncryptionConfigResult) => void): Request<CloudFront.Types.CreateFieldLevelEncryptionConfigResult, AWSError>;
+  /**
+   * Create a field-level encryption profile.
+   */
+  createFieldLevelEncryptionProfile(params: CloudFront.Types.CreateFieldLevelEncryptionProfileRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateFieldLevelEncryptionProfileResult) => void): Request<CloudFront.Types.CreateFieldLevelEncryptionProfileResult, AWSError>;
+  /**
+   * Create a field-level encryption profile.
+   */
+  createFieldLevelEncryptionProfile(callback?: (err: AWSError, data: CloudFront.Types.CreateFieldLevelEncryptionProfileResult) => void): Request<CloudFront.Types.CreateFieldLevelEncryptionProfileResult, AWSError>;
+  /**
    * Create a new invalidation. 
    */
   createInvalidation(params: CloudFront.Types.CreateInvalidationRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateInvalidationResult) => void): Request<CloudFront.Types.CreateInvalidationResult, AWSError>;
@@ -44,6 +61,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Create a new invalidation. 
    */
   createInvalidation(callback?: (err: AWSError, data: CloudFront.Types.CreateInvalidationResult) => void): Request<CloudFront.Types.CreateInvalidationResult, AWSError>;
+  /**
+   * Add a new public key to CloudFront to use, for example, for field-level encryption. You can add a maximum of 10 public keys with one AWS account.
+   */
+  createPublicKey(params: CloudFront.Types.CreatePublicKeyRequest, callback?: (err: AWSError, data: CloudFront.Types.CreatePublicKeyResult) => void): Request<CloudFront.Types.CreatePublicKeyResult, AWSError>;
+  /**
+   * Add a new public key to CloudFront to use, for example, for field-level encryption. You can add a maximum of 10 public keys with one AWS account.
+   */
+  createPublicKey(callback?: (err: AWSError, data: CloudFront.Types.CreatePublicKeyResult) => void): Request<CloudFront.Types.CreatePublicKeyResult, AWSError>;
   /**
    * Creates a new RMTP distribution. An RTMP distribution is similar to a web distribution, but an RTMP distribution streams media files using the Adobe Real-Time Messaging Protocol (RTMP) instead of serving files using HTTP.  To create a new web distribution, submit a POST request to the CloudFront API version/distribution resource. The request body must include a document with a StreamingDistributionConfig element. The response echoes the StreamingDistributionConfig element and returns other information about the RTMP distribution. To get the status of your request, use the GET StreamingDistribution API action. When the value of Enabled is true and the value of Status is Deployed, your distribution is ready. A distribution usually deploys in less than 15 minutes. For more information about web distributions, see Working with RTMP Distributions in the Amazon CloudFront Developer Guide.  Beginning with the 2012-05-05 version of the CloudFront API, we made substantial changes to the format of the XML document that you include in the request body when you create or update a web distribution or an RTMP distribution, and when you invalidate objects. With previous versions of the API, we discovered that it was too easy to accidentally delete one or more values for an element that accepts multiple values, for example, CNAMEs and trusted signers. Our changes for the 2012-05-05 release are intended to prevent these accidental deletions and to notify you when there's a mismatch between the number of values you say you're specifying in the Quantity element and the number of values specified. 
    */
@@ -77,13 +102,29 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   deleteDistribution(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * 
+   * Remove a field-level encryption configuration.
    */
-  deleteServiceLinkedRole(params: CloudFront.Types.DeleteServiceLinkedRoleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteFieldLevelEncryptionConfig(params: CloudFront.Types.DeleteFieldLevelEncryptionConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * 
+   * Remove a field-level encryption configuration.
    */
-  deleteServiceLinkedRole(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  deleteFieldLevelEncryptionConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Remove a field-level encryption profile.
+   */
+  deleteFieldLevelEncryptionProfile(params: CloudFront.Types.DeleteFieldLevelEncryptionProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Remove a field-level encryption profile.
+   */
+  deleteFieldLevelEncryptionProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Remove a public key you previously added to CloudFront.
+   */
+  deletePublicKey(params: CloudFront.Types.DeletePublicKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Remove a public key you previously added to CloudFront.
+   */
+  deletePublicKey(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Delete a streaming distribution. To delete an RTMP distribution using the CloudFront API, perform the following steps.  To delete an RTMP distribution using the CloudFront API:   Disable the RTMP distribution.   Submit a GET Streaming Distribution Config request to get the current configuration and the Etag header for the distribution.    Update the XML document that was returned in the response to your GET Streaming Distribution Config request to change the value of Enabled to false.   Submit a PUT Streaming Distribution Config request to update the configuration for your distribution. In the request body, include the XML document that you updated in Step 3. Then set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GET Streaming Distribution Config request in Step 2.   Review the response to the PUT Streaming Distribution Config request to confirm that the distribution was successfully disabled.   Submit a GET Streaming Distribution Config request to confirm that your changes have propagated. When propagation is complete, the value of Status is Deployed.   Submit a DELETE Streaming Distribution request. Set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GET Streaming Distribution Config request in Step 2.   Review the response to your DELETE Streaming Distribution request to confirm that the distribution was successfully deleted.   For information about deleting a distribution using the CloudFront console, see Deleting a Distribution in the Amazon CloudFront Developer Guide.
    */
@@ -125,6 +166,38 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   getDistributionConfig(callback?: (err: AWSError, data: CloudFront.Types.GetDistributionConfigResult) => void): Request<CloudFront.Types.GetDistributionConfigResult, AWSError>;
   /**
+   * Get the field-level encryption configuration information.
+   */
+  getFieldLevelEncryption(params: CloudFront.Types.GetFieldLevelEncryptionRequest, callback?: (err: AWSError, data: CloudFront.Types.GetFieldLevelEncryptionResult) => void): Request<CloudFront.Types.GetFieldLevelEncryptionResult, AWSError>;
+  /**
+   * Get the field-level encryption configuration information.
+   */
+  getFieldLevelEncryption(callback?: (err: AWSError, data: CloudFront.Types.GetFieldLevelEncryptionResult) => void): Request<CloudFront.Types.GetFieldLevelEncryptionResult, AWSError>;
+  /**
+   * Get the field-level encryption configuration information.
+   */
+  getFieldLevelEncryptionConfig(params: CloudFront.Types.GetFieldLevelEncryptionConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetFieldLevelEncryptionConfigResult) => void): Request<CloudFront.Types.GetFieldLevelEncryptionConfigResult, AWSError>;
+  /**
+   * Get the field-level encryption configuration information.
+   */
+  getFieldLevelEncryptionConfig(callback?: (err: AWSError, data: CloudFront.Types.GetFieldLevelEncryptionConfigResult) => void): Request<CloudFront.Types.GetFieldLevelEncryptionConfigResult, AWSError>;
+  /**
+   * Get the field-level encryption profile information.
+   */
+  getFieldLevelEncryptionProfile(params: CloudFront.Types.GetFieldLevelEncryptionProfileRequest, callback?: (err: AWSError, data: CloudFront.Types.GetFieldLevelEncryptionProfileResult) => void): Request<CloudFront.Types.GetFieldLevelEncryptionProfileResult, AWSError>;
+  /**
+   * Get the field-level encryption profile information.
+   */
+  getFieldLevelEncryptionProfile(callback?: (err: AWSError, data: CloudFront.Types.GetFieldLevelEncryptionProfileResult) => void): Request<CloudFront.Types.GetFieldLevelEncryptionProfileResult, AWSError>;
+  /**
+   * Get the field-level encryption profile configuration information.
+   */
+  getFieldLevelEncryptionProfileConfig(params: CloudFront.Types.GetFieldLevelEncryptionProfileConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetFieldLevelEncryptionProfileConfigResult) => void): Request<CloudFront.Types.GetFieldLevelEncryptionProfileConfigResult, AWSError>;
+  /**
+   * Get the field-level encryption profile configuration information.
+   */
+  getFieldLevelEncryptionProfileConfig(callback?: (err: AWSError, data: CloudFront.Types.GetFieldLevelEncryptionProfileConfigResult) => void): Request<CloudFront.Types.GetFieldLevelEncryptionProfileConfigResult, AWSError>;
+  /**
    * Get the information about an invalidation. 
    */
   getInvalidation(params: CloudFront.Types.GetInvalidationRequest, callback?: (err: AWSError, data: CloudFront.Types.GetInvalidationResult) => void): Request<CloudFront.Types.GetInvalidationResult, AWSError>;
@@ -132,6 +205,22 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Get the information about an invalidation. 
    */
   getInvalidation(callback?: (err: AWSError, data: CloudFront.Types.GetInvalidationResult) => void): Request<CloudFront.Types.GetInvalidationResult, AWSError>;
+  /**
+   * Get the public key information.
+   */
+  getPublicKey(params: CloudFront.Types.GetPublicKeyRequest, callback?: (err: AWSError, data: CloudFront.Types.GetPublicKeyResult) => void): Request<CloudFront.Types.GetPublicKeyResult, AWSError>;
+  /**
+   * Get the public key information.
+   */
+  getPublicKey(callback?: (err: AWSError, data: CloudFront.Types.GetPublicKeyResult) => void): Request<CloudFront.Types.GetPublicKeyResult, AWSError>;
+  /**
+   * Return public key configuration informaation
+   */
+  getPublicKeyConfig(params: CloudFront.Types.GetPublicKeyConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.GetPublicKeyConfigResult) => void): Request<CloudFront.Types.GetPublicKeyConfigResult, AWSError>;
+  /**
+   * Return public key configuration informaation
+   */
+  getPublicKeyConfig(callback?: (err: AWSError, data: CloudFront.Types.GetPublicKeyConfigResult) => void): Request<CloudFront.Types.GetPublicKeyConfigResult, AWSError>;
   /**
    * Gets information about a specified RTMP distribution, including the distribution configuration.
    */
@@ -173,6 +262,22 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   listDistributionsByWebACLId(callback?: (err: AWSError, data: CloudFront.Types.ListDistributionsByWebACLIdResult) => void): Request<CloudFront.Types.ListDistributionsByWebACLIdResult, AWSError>;
   /**
+   * List all field-level encryption configurations that have been created in CloudFront for this account.
+   */
+  listFieldLevelEncryptionConfigs(params: CloudFront.Types.ListFieldLevelEncryptionConfigsRequest, callback?: (err: AWSError, data: CloudFront.Types.ListFieldLevelEncryptionConfigsResult) => void): Request<CloudFront.Types.ListFieldLevelEncryptionConfigsResult, AWSError>;
+  /**
+   * List all field-level encryption configurations that have been created in CloudFront for this account.
+   */
+  listFieldLevelEncryptionConfigs(callback?: (err: AWSError, data: CloudFront.Types.ListFieldLevelEncryptionConfigsResult) => void): Request<CloudFront.Types.ListFieldLevelEncryptionConfigsResult, AWSError>;
+  /**
+   * Request a list of field-level encryption profiles that have been created in CloudFront for this account.
+   */
+  listFieldLevelEncryptionProfiles(params: CloudFront.Types.ListFieldLevelEncryptionProfilesRequest, callback?: (err: AWSError, data: CloudFront.Types.ListFieldLevelEncryptionProfilesResult) => void): Request<CloudFront.Types.ListFieldLevelEncryptionProfilesResult, AWSError>;
+  /**
+   * Request a list of field-level encryption profiles that have been created in CloudFront for this account.
+   */
+  listFieldLevelEncryptionProfiles(callback?: (err: AWSError, data: CloudFront.Types.ListFieldLevelEncryptionProfilesResult) => void): Request<CloudFront.Types.ListFieldLevelEncryptionProfilesResult, AWSError>;
+  /**
    * Lists invalidation batches. 
    */
   listInvalidations(params: CloudFront.Types.ListInvalidationsRequest, callback?: (err: AWSError, data: CloudFront.Types.ListInvalidationsResult) => void): Request<CloudFront.Types.ListInvalidationsResult, AWSError>;
@@ -180,6 +285,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Lists invalidation batches. 
    */
   listInvalidations(callback?: (err: AWSError, data: CloudFront.Types.ListInvalidationsResult) => void): Request<CloudFront.Types.ListInvalidationsResult, AWSError>;
+  /**
+   * List all public keys that have been added to CloudFront for this account.
+   */
+  listPublicKeys(params: CloudFront.Types.ListPublicKeysRequest, callback?: (err: AWSError, data: CloudFront.Types.ListPublicKeysResult) => void): Request<CloudFront.Types.ListPublicKeysResult, AWSError>;
+  /**
+   * List all public keys that have been added to CloudFront for this account.
+   */
+  listPublicKeys(callback?: (err: AWSError, data: CloudFront.Types.ListPublicKeysResult) => void): Request<CloudFront.Types.ListPublicKeysResult, AWSError>;
   /**
    * List streaming distributions. 
    */
@@ -221,13 +334,37 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   updateCloudFrontOriginAccessIdentity(callback?: (err: AWSError, data: CloudFront.Types.UpdateCloudFrontOriginAccessIdentityResult) => void): Request<CloudFront.Types.UpdateCloudFrontOriginAccessIdentityResult, AWSError>;
   /**
-   * Updates the configuration for a web distribution. Perform the following steps. For information about updating a distribution using the CloudFront console, see Creating or Updating a Web Distribution Using the CloudFront Console  in the Amazon CloudFront Developer Guide.  To update a web distribution using the CloudFront API    Submit a GetDistributionConfig request to get the current configuration and an Etag header for the distribution.  If you update the distribution again, you need to get a new Etag header.    Update the XML document that was returned in the response to your GetDistributionConfig request to include the desired changes. You can't change the value of CallerReference. If you try to change this value, CloudFront returns an IllegalUpdate error.  The new configuration replaces the existing configuration; the values that you specify in an UpdateDistribution request are not merged into the existing configuration. When you add, delete, or replace values in an element that allows multiple values (for example, CNAME), you must specify all of the values that you want to appear in the updated distribution. In addition, you must update the corresponding Quantity element.    Submit an UpdateDistribution request to update the configuration for your distribution:   In the request body, include the XML document that you updated in Step 2. The request body must include an XML document with a DistributionConfig element.   Set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GetDistributionConfig request in Step 1.     Review the response to the UpdateDistribution request to confirm that the configuration was successfully updated.   Optional: Submit a GetDistribution request to confirm that your changes have propagated. When propagation is complete, the value of Status is Deployed.  Beginning with the 2012-05-05 version of the CloudFront API, we made substantial changes to the format of the XML document that you include in the request body when you create or update a distribution. With previous versions of the API, we discovered that it was too easy to accidentally delete one or more values for an element that accepts multiple values, for example, CNAMEs and trusted signers. Our changes for the 2012-05-05 release are intended to prevent these accidental deletions and to notify you when there's a mismatch between the number of values you say you're specifying in the Quantity element and the number of values you're actually specifying.   
+   * Updates the configuration for a web distribution.   When you update a distribution, there are more required fields than when you create a distribution. When you update your distribution by using this API action, follow the steps here to get the current configuration and then make your updates, to make sure that you include all of the required fields. To view a summary, see Required Fields for Create Distribution and Update Distribution in the Amazon CloudFront Developer Guide.  The update process includes getting the current distribution configuration, updating the XML document that is returned to make your changes, and then submitting an UpdateDistribution request to make the updates. For information about updating a distribution using the CloudFront console instead, see Creating a Distribution in the Amazon CloudFront Developer Guide.  To update a web distribution using the CloudFront API    Submit a GetDistributionConfig request to get the current configuration and an Etag header for the distribution.  If you update the distribution again, you must get a new Etag header.    Update the XML document that was returned in the response to your GetDistributionConfig request to include your changes.   When you edit the XML file, be aware of the following:   You must strip out the ETag parameter that is returned.   Additional fields are required when you update a distribution. There may be fields included in the XML file for features that you haven't configured for your distribution. This is expected and required to successfully update the distribution.   You can't change the value of CallerReference. If you try to change this value, CloudFront returns an IllegalUpdate error.    The new configuration replaces the existing configuration; the values that you specify in an UpdateDistribution request are not merged into your existing configuration. When you add, delete, or replace values in an element that allows multiple values (for example, CNAME), you must specify all of the values that you want to appear in the updated distribution. In addition, you must update the corresponding Quantity element.      Submit an UpdateDistribution request to update the configuration for your distribution:   In the request body, include the XML document that you updated in Step 2. The request body must include an XML document with a DistributionConfig element.   Set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GetDistributionConfig request in Step 1.     Review the response to the UpdateDistribution request to confirm that the configuration was successfully updated.   Optional: Submit a GetDistribution request to confirm that your changes have propagated. When propagation is complete, the value of Status is Deployed.  
    */
   updateDistribution(params: CloudFront.Types.UpdateDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateDistributionResult) => void): Request<CloudFront.Types.UpdateDistributionResult, AWSError>;
   /**
-   * Updates the configuration for a web distribution. Perform the following steps. For information about updating a distribution using the CloudFront console, see Creating or Updating a Web Distribution Using the CloudFront Console  in the Amazon CloudFront Developer Guide.  To update a web distribution using the CloudFront API    Submit a GetDistributionConfig request to get the current configuration and an Etag header for the distribution.  If you update the distribution again, you need to get a new Etag header.    Update the XML document that was returned in the response to your GetDistributionConfig request to include the desired changes. You can't change the value of CallerReference. If you try to change this value, CloudFront returns an IllegalUpdate error.  The new configuration replaces the existing configuration; the values that you specify in an UpdateDistribution request are not merged into the existing configuration. When you add, delete, or replace values in an element that allows multiple values (for example, CNAME), you must specify all of the values that you want to appear in the updated distribution. In addition, you must update the corresponding Quantity element.    Submit an UpdateDistribution request to update the configuration for your distribution:   In the request body, include the XML document that you updated in Step 2. The request body must include an XML document with a DistributionConfig element.   Set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GetDistributionConfig request in Step 1.     Review the response to the UpdateDistribution request to confirm that the configuration was successfully updated.   Optional: Submit a GetDistribution request to confirm that your changes have propagated. When propagation is complete, the value of Status is Deployed.  Beginning with the 2012-05-05 version of the CloudFront API, we made substantial changes to the format of the XML document that you include in the request body when you create or update a distribution. With previous versions of the API, we discovered that it was too easy to accidentally delete one or more values for an element that accepts multiple values, for example, CNAMEs and trusted signers. Our changes for the 2012-05-05 release are intended to prevent these accidental deletions and to notify you when there's a mismatch between the number of values you say you're specifying in the Quantity element and the number of values you're actually specifying.   
+   * Updates the configuration for a web distribution.   When you update a distribution, there are more required fields than when you create a distribution. When you update your distribution by using this API action, follow the steps here to get the current configuration and then make your updates, to make sure that you include all of the required fields. To view a summary, see Required Fields for Create Distribution and Update Distribution in the Amazon CloudFront Developer Guide.  The update process includes getting the current distribution configuration, updating the XML document that is returned to make your changes, and then submitting an UpdateDistribution request to make the updates. For information about updating a distribution using the CloudFront console instead, see Creating a Distribution in the Amazon CloudFront Developer Guide.  To update a web distribution using the CloudFront API    Submit a GetDistributionConfig request to get the current configuration and an Etag header for the distribution.  If you update the distribution again, you must get a new Etag header.    Update the XML document that was returned in the response to your GetDistributionConfig request to include your changes.   When you edit the XML file, be aware of the following:   You must strip out the ETag parameter that is returned.   Additional fields are required when you update a distribution. There may be fields included in the XML file for features that you haven't configured for your distribution. This is expected and required to successfully update the distribution.   You can't change the value of CallerReference. If you try to change this value, CloudFront returns an IllegalUpdate error.    The new configuration replaces the existing configuration; the values that you specify in an UpdateDistribution request are not merged into your existing configuration. When you add, delete, or replace values in an element that allows multiple values (for example, CNAME), you must specify all of the values that you want to appear in the updated distribution. In addition, you must update the corresponding Quantity element.      Submit an UpdateDistribution request to update the configuration for your distribution:   In the request body, include the XML document that you updated in Step 2. The request body must include an XML document with a DistributionConfig element.   Set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GetDistributionConfig request in Step 1.     Review the response to the UpdateDistribution request to confirm that the configuration was successfully updated.   Optional: Submit a GetDistribution request to confirm that your changes have propagated. When propagation is complete, the value of Status is Deployed.  
    */
   updateDistribution(callback?: (err: AWSError, data: CloudFront.Types.UpdateDistributionResult) => void): Request<CloudFront.Types.UpdateDistributionResult, AWSError>;
+  /**
+   * Update a field-level encryption configuration. 
+   */
+  updateFieldLevelEncryptionConfig(params: CloudFront.Types.UpdateFieldLevelEncryptionConfigRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateFieldLevelEncryptionConfigResult) => void): Request<CloudFront.Types.UpdateFieldLevelEncryptionConfigResult, AWSError>;
+  /**
+   * Update a field-level encryption configuration. 
+   */
+  updateFieldLevelEncryptionConfig(callback?: (err: AWSError, data: CloudFront.Types.UpdateFieldLevelEncryptionConfigResult) => void): Request<CloudFront.Types.UpdateFieldLevelEncryptionConfigResult, AWSError>;
+  /**
+   * Update a field-level encryption profile. 
+   */
+  updateFieldLevelEncryptionProfile(params: CloudFront.Types.UpdateFieldLevelEncryptionProfileRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateFieldLevelEncryptionProfileResult) => void): Request<CloudFront.Types.UpdateFieldLevelEncryptionProfileResult, AWSError>;
+  /**
+   * Update a field-level encryption profile. 
+   */
+  updateFieldLevelEncryptionProfile(callback?: (err: AWSError, data: CloudFront.Types.UpdateFieldLevelEncryptionProfileResult) => void): Request<CloudFront.Types.UpdateFieldLevelEncryptionProfileResult, AWSError>;
+  /**
+   * Update public key information. Note that the only value you can change is the comment.
+   */
+  updatePublicKey(params: CloudFront.Types.UpdatePublicKeyRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdatePublicKeyResult) => void): Request<CloudFront.Types.UpdatePublicKeyResult, AWSError>;
+  /**
+   * Update public key information. Note that the only value you can change is the comment.
+   */
+  updatePublicKey(callback?: (err: AWSError, data: CloudFront.Types.UpdatePublicKeyResult) => void): Request<CloudFront.Types.UpdatePublicKeyResult, AWSError>;
   /**
    * Update a streaming distribution. 
    */
@@ -239,7 +376,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Waits for the distributionDeployed state by periodically calling the underlying CloudFront.getDistributionoperation every 60 seconds (at most 25 times). Wait until a distribution is deployed.
    */
-  waitFor(state: "distributionDeployed", params: CloudFront.Types.GetDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.GetDistributionResult) => void): Request<CloudFront.Types.GetDistributionResult, AWSError>;
+  waitFor(state: "distributionDeployed", params: CloudFront.Types.GetDistributionRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: CloudFront.Types.GetDistributionResult) => void): Request<CloudFront.Types.GetDistributionResult, AWSError>;
   /**
    * Waits for the distributionDeployed state by periodically calling the underlying CloudFront.getDistributionoperation every 60 seconds (at most 25 times). Wait until a distribution is deployed.
    */
@@ -247,7 +384,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Waits for the invalidationCompleted state by periodically calling the underlying CloudFront.getInvalidationoperation every 20 seconds (at most 30 times). Wait until an invalidation has completed.
    */
-  waitFor(state: "invalidationCompleted", params: CloudFront.Types.GetInvalidationRequest, callback?: (err: AWSError, data: CloudFront.Types.GetInvalidationResult) => void): Request<CloudFront.Types.GetInvalidationResult, AWSError>;
+  waitFor(state: "invalidationCompleted", params: CloudFront.Types.GetInvalidationRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: CloudFront.Types.GetInvalidationResult) => void): Request<CloudFront.Types.GetInvalidationResult, AWSError>;
   /**
    * Waits for the invalidationCompleted state by periodically calling the underlying CloudFront.getInvalidationoperation every 20 seconds (at most 30 times). Wait until an invalidation has completed.
    */
@@ -255,7 +392,7 @@ declare class CloudFront extends CloudFrontCustomizations {
   /**
    * Waits for the streamingDistributionDeployed state by periodically calling the underlying CloudFront.getStreamingDistributionoperation every 60 seconds (at most 25 times). Wait until a streaming distribution is deployed.
    */
-  waitFor(state: "streamingDistributionDeployed", params: CloudFront.Types.GetStreamingDistributionRequest, callback?: (err: AWSError, data: CloudFront.Types.GetStreamingDistributionResult) => void): Request<CloudFront.Types.GetStreamingDistributionResult, AWSError>;
+  waitFor(state: "streamingDistributionDeployed", params: CloudFront.Types.GetStreamingDistributionRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: CloudFront.Types.GetStreamingDistributionResult) => void): Request<CloudFront.Types.GetStreamingDistributionResult, AWSError>;
   /**
    * Waits for the streamingDistributionDeployed state by periodically calling the underlying CloudFront.getStreamingDistributionoperation every 60 seconds (at most 25 times). Wait until a streaming distribution is deployed.
    */
@@ -308,7 +445,7 @@ declare namespace CloudFront {
      */
     PathPattern: string;
     /**
-     * The value of ID for the origin that you want CloudFront to route requests to when a request matches the path pattern either for a cache behavior or for the default cache behavior.
+     * The value of ID for the origin that you want CloudFront to route requests to when a request matches the path pattern either for a cache behavior or for the default cache behavior in your distribution.
      */
     TargetOriginId: string;
     /**
@@ -348,6 +485,10 @@ declare namespace CloudFront {
      * A complex type that contains zero or more Lambda function associations for a cache behavior.
      */
     LambdaFunctionAssociations?: LambdaFunctionAssociations;
+    /**
+     * The value of ID for the field-level encryption configuration that you want CloudFront to use for encrypting specific fields of data for a cache behavior or for the default cache behavior in your distribution.
+     */
+    FieldLevelEncryptionId?: string;
   }
   export type CacheBehaviorList = CacheBehavior[];
   export interface CacheBehaviors {
@@ -387,7 +528,7 @@ declare namespace CloudFront {
   }
   export interface CloudFrontOriginAccessIdentityConfig {
     /**
-     * A unique number that ensures the request can't be replayed. If the CallerReference is new (no matter the content of the CloudFrontOriginAccessIdentityConfig object), a new origin access identity is created. If the CallerReference is a value already sent in a previous identity request, and the content of the CloudFrontOriginAccessIdentityConfig is identical to the original request (ignoring white space), the response includes the same information returned to the original request.  If the CallerReference is a value you already sent in a previous request to create an identity, but the content of the CloudFrontOriginAccessIdentityConfig is different from the original request, CloudFront returns a CloudFrontOriginAccessIdentityAlreadyExists error. 
+     * A unique value (for example, a date-time stamp) that ensures that the request can't be replayed. If the value of CallerReference is new (regardless of the content of the CloudFrontOriginAccessIdentityConfig object), a new origin access identity is created. If the CallerReference is a value already sent in a previous identity request, and the content of the CloudFrontOriginAccessIdentityConfig is identical to the original request (ignoring white space), the response includes the same information returned to the original request.  If the CallerReference is a value you already sent in a previous request to create an identity, but the content of the CloudFrontOriginAccessIdentityConfig is different from the original request, CloudFront returns a CloudFrontOriginAccessIdentityAlreadyExists error. 
      */
     CallerReference: string;
     /**
@@ -436,6 +577,41 @@ declare namespace CloudFront {
     Comment: string;
   }
   export type CloudFrontOriginAccessIdentitySummaryList = CloudFrontOriginAccessIdentitySummary[];
+  export interface ContentTypeProfile {
+    /**
+     * The format for a field-level encryption content type-profile mapping. 
+     */
+    Format: Format;
+    /**
+     * The profile ID for a field-level encryption content type-profile mapping. 
+     */
+    ProfileId?: string;
+    /**
+     * The content type for a field-level encryption content type-profile mapping. 
+     */
+    ContentType: string;
+  }
+  export interface ContentTypeProfileConfig {
+    /**
+     * The setting in a field-level encryption content type-profile mapping that specifies what to do when an unknown content type is provided for the profile. If true, content is forwarded without being encrypted when the content type is unknown. If false (the default), an error is returned when the content type is unknown. 
+     */
+    ForwardWhenContentTypeIsUnknown: boolean;
+    /**
+     * The configuration for a field-level encryption content type-profile. 
+     */
+    ContentTypeProfiles?: ContentTypeProfiles;
+  }
+  export type ContentTypeProfileList = ContentTypeProfile[];
+  export interface ContentTypeProfiles {
+    /**
+     * The number of field-level encryption content type-profile mappings. 
+     */
+    Quantity: integer;
+    /**
+     * Items in a field-level encryption content type-profile mapping. 
+     */
+    Items?: ContentTypeProfileList;
+  }
   export type CookieNameList = string[];
   export interface CookieNames {
     /**
@@ -517,6 +693,46 @@ declare namespace CloudFront {
      */
     ETag?: string;
   }
+  export interface CreateFieldLevelEncryptionConfigRequest {
+    /**
+     * The request to create a new field-level encryption configuration.
+     */
+    FieldLevelEncryptionConfig: FieldLevelEncryptionConfig;
+  }
+  export interface CreateFieldLevelEncryptionConfigResult {
+    /**
+     * Returned when you create a new field-level encryption configuration.
+     */
+    FieldLevelEncryption?: FieldLevelEncryption;
+    /**
+     * The fully qualified URI of the new configuration resource just created. For example: https://cloudfront.amazonaws.com/2010-11-01/field-level-encryption-config/EDFDVBD632BHDS5.
+     */
+    Location?: string;
+    /**
+     * The current version of the field level encryption configuration. For example: E2QWRUHAPOMQZL.
+     */
+    ETag?: string;
+  }
+  export interface CreateFieldLevelEncryptionProfileRequest {
+    /**
+     * The request to create a field-level encryption profile.
+     */
+    FieldLevelEncryptionProfileConfig: FieldLevelEncryptionProfileConfig;
+  }
+  export interface CreateFieldLevelEncryptionProfileResult {
+    /**
+     * Returned when you create a new field-level encryption profile.
+     */
+    FieldLevelEncryptionProfile?: FieldLevelEncryptionProfile;
+    /**
+     * The fully qualified URI of the new profile resource just created. For example: https://cloudfront.amazonaws.com/2010-11-01/field-level-encryption-profile/EDFDVBD632BHDS5.
+     */
+    Location?: string;
+    /**
+     * The current version of the field level encryption profile. For example: E2QWRUHAPOMQZL.
+     */
+    ETag?: string;
+  }
   export interface CreateInvalidationRequest {
     /**
      * The distribution's id.
@@ -536,6 +752,26 @@ declare namespace CloudFront {
      * The invalidation's information.
      */
     Invalidation?: Invalidation;
+  }
+  export interface CreatePublicKeyRequest {
+    /**
+     * The request to add a public key to CloudFront.
+     */
+    PublicKeyConfig: PublicKeyConfig;
+  }
+  export interface CreatePublicKeyResult {
+    /**
+     * Returned when you add a public key.
+     */
+    PublicKey?: PublicKey;
+    /**
+     * The fully qualified URI of the new public key resource just created. For example: https://cloudfront.amazonaws.com/2010-11-01/cloudfront-public-key/EDFDVBD632BHDS5.
+     */
+    Location?: string;
+    /**
+     * The current version of the public key. For example: E2QWRUHAPOMQZL.
+     */
+    ETag?: string;
   }
   export interface CreateStreamingDistributionRequest {
     /**
@@ -572,6 +808,9 @@ declare namespace CloudFront {
      * The fully qualified URI of the new streaming distribution resource just created. For example: https://cloudfront.amazonaws.com/2010-11-01/streaming-distribution/EGTXBD79H29TRA8.
      */
     Location?: string;
+    /**
+     * The current version of the distribution created.
+     */
     ETag?: string;
   }
   export interface CustomErrorResponse {
@@ -641,7 +880,7 @@ declare namespace CloudFront {
   }
   export interface DefaultCacheBehavior {
     /**
-     * The value of ID for the origin that you want CloudFront to route requests to when a request matches the path pattern either for a cache behavior or for the default cache behavior.
+     * The value of ID for the origin that you want CloudFront to route requests to when a request matches the path pattern either for a cache behavior or for the default cache behavior in your distribution.
      */
     TargetOriginId: string;
     /**
@@ -678,6 +917,10 @@ declare namespace CloudFront {
      * A complex type that contains zero or more Lambda function associations for a cache behavior.
      */
     LambdaFunctionAssociations?: LambdaFunctionAssociations;
+    /**
+     * The value of ID for the field-level encryption configuration that you want CloudFront to use for encrypting specific fields of data for a cache behavior or for the default cache behavior in your distribution.
+     */
+    FieldLevelEncryptionId?: string;
   }
   export interface DeleteCloudFrontOriginAccessIdentityRequest {
     /**
@@ -699,8 +942,35 @@ declare namespace CloudFront {
      */
     IfMatch?: string;
   }
-  export interface DeleteServiceLinkedRoleRequest {
-    RoleName: string;
+  export interface DeleteFieldLevelEncryptionConfigRequest {
+    /**
+     * The ID of the configuration you want to delete from CloudFront.
+     */
+    Id: string;
+    /**
+     * The value of the ETag header that you received when retrieving the configuration identity to delete. For example: E2QWRUHAPOMQZL.
+     */
+    IfMatch?: string;
+  }
+  export interface DeleteFieldLevelEncryptionProfileRequest {
+    /**
+     * Request the ID of the profile you want to delete from CloudFront.
+     */
+    Id: string;
+    /**
+     * The value of the ETag header that you received when retrieving the profile to delete. For example: E2QWRUHAPOMQZL.
+     */
+    IfMatch?: string;
+  }
+  export interface DeletePublicKeyRequest {
+    /**
+     * The ID of the public key you want to remove from CloudFront.
+     */
+    Id: string;
+    /**
+     * The value of the ETag header that you received when retrieving the public key identity to delete. For example: E2QWRUHAPOMQZL.
+     */
+    IfMatch?: string;
   }
   export interface DeleteStreamingDistributionRequest {
     /**
@@ -748,7 +1018,7 @@ declare namespace CloudFront {
   }
   export interface DistributionConfig {
     /**
-     * A unique value (for example, a date-time stamp) that ensures that the request can't be replayed. If the value of CallerReference is new (regardless of the content of the DistributionConfig object), CloudFront creates a new distribution. If CallerReference is a value you already sent in a previous request to create a distribution, and if the content of the DistributionConfig is identical to the original request (ignoring white space), CloudFront returns the same the response that it returned to the original request. If CallerReference is a value you already sent in a previous request to create a distribution but the content of the DistributionConfig is different from the original request, CloudFront returns a DistributionAlreadyExists error.
+     * A unique value (for example, a date-time stamp) that ensures that the request can't be replayed. If the value of CallerReference is new (regardless of the content of the DistributionConfig object), CloudFront creates a new distribution. If CallerReference is a value that you already sent in a previous request to create a distribution, CloudFront returns a DistributionAlreadyExists error.
      */
     CallerReference: string;
     /**
@@ -763,6 +1033,10 @@ declare namespace CloudFront {
      * A complex type that contains information about origins for this distribution. 
      */
     Origins: Origins;
+    /**
+     *  A complex type that contains information about origin groups for this distribution.
+     */
+    OriginGroups?: OriginGroups;
     /**
      * A complex type that describes the default cache behavior if you don't specify a CacheBehavior element or if files don't match any of the values of PathPattern in CacheBehavior elements. You must create exactly one default cache behavior.
      */
@@ -784,14 +1058,20 @@ declare namespace CloudFront {
      */
     Logging?: LoggingConfig;
     /**
-     * The price class that corresponds with the maximum price that you want to pay for CloudFront service. If you specify PriceClass_All, CloudFront responds to requests for your objects from all CloudFront edge locations. If you specify a price class other than PriceClass_All, CloudFront serves your objects from the CloudFront edge location that has the lowest latency among the edge locations in your price class. Viewers who are in or near regions that are excluded from your specified price class may encounter slower performance. For more information about price classes, see Choosing the Price Class for a CloudFront Distribution in the Amazon CloudFront Developer Guide. For information about CloudFront pricing, including how price classes map to CloudFront regions, see Amazon CloudFront Pricing.
+     * The price class that corresponds with the maximum price that you want to pay for CloudFront service. If you specify PriceClass_All, CloudFront responds to requests for your objects from all CloudFront edge locations. If you specify a price class other than PriceClass_All, CloudFront serves your objects from the CloudFront edge location that has the lowest latency among the edge locations in your price class. Viewers who are in or near regions that are excluded from your specified price class may encounter slower performance. For more information about price classes, see Choosing the Price Class for a CloudFront Distribution in the Amazon CloudFront Developer Guide. For information about CloudFront pricing, including how price classes (such as Price Class 100) map to CloudFront regions, see Amazon CloudFront Pricing. For price class information, scroll down to see the table at the bottom of the page.
      */
     PriceClass?: PriceClass;
     /**
-     * From this field, you can enable or disable the selected distribution. If you specify false for Enabled but you specify values for Bucket and Prefix, the values are automatically deleted.
+     * From this field, you can enable or disable the selected distribution.
      */
     Enabled: boolean;
+    /**
+     * 
+     */
     ViewerCertificate?: ViewerCertificate;
+    /**
+     * 
+     */
     Restrictions?: Restrictions;
     /**
      * A unique identifier that specifies the AWS WAF web ACL, if any, to associate with this distribution. AWS WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to CloudFront, and lets you control access to your content. Based on conditions that you specify, such as the IP addresses that requests originate from or the values of query strings, CloudFront responds to requests either with the requested content or with an HTTP 403 status code (Forbidden). You can also configure CloudFront to return a custom error page when a request is blocked. For more information about AWS WAF, see the AWS WAF Developer Guide. 
@@ -872,6 +1152,10 @@ declare namespace CloudFront {
      */
     Origins: Origins;
     /**
+     *  A complex type that contains information about origin groups for this distribution.
+     */
+    OriginGroups?: OriginGroups;
+    /**
      * A complex type that describes the default cache behavior if you don't specify a CacheBehavior element or if files don't match any of the values of PathPattern in CacheBehavior elements. You must create exactly one default cache behavior.
      */
     DefaultCacheBehavior: DefaultCacheBehavior;
@@ -887,12 +1171,21 @@ declare namespace CloudFront {
      * The comment originally specified when this distribution was created.
      */
     Comment: string;
+    /**
+     * A complex type that contains information about price class for this streaming distribution. 
+     */
     PriceClass: PriceClass;
     /**
      * Whether the distribution is enabled to accept user requests for content.
      */
     Enabled: boolean;
+    /**
+     * 
+     */
     ViewerCertificate: ViewerCertificate;
+    /**
+     * 
+     */
     Restrictions: Restrictions;
     /**
      * The Web ACL Id (if any) associated with the distribution.
@@ -908,7 +1201,190 @@ declare namespace CloudFront {
     IsIPV6Enabled: boolean;
   }
   export type DistributionSummaryList = DistributionSummary[];
+  export interface EncryptionEntities {
+    /**
+     * Number of field pattern items in a field-level encryption content type-profile mapping. 
+     */
+    Quantity: integer;
+    /**
+     * An array of field patterns in a field-level encryption content type-profile mapping. 
+     */
+    Items?: EncryptionEntityList;
+  }
+  export interface EncryptionEntity {
+    /**
+     * The public key associated with a set of field-level encryption patterns, to be used when encrypting the fields that match the patterns. 
+     */
+    PublicKeyId: string;
+    /**
+     * The provider associated with the public key being used for encryption. This value must also be provided with the private key for applications to be able to decrypt data.
+     */
+    ProviderId: string;
+    /**
+     * Field patterns in a field-level encryption content type profile specify the fields that you want to be encrypted. You can provide the full field name, or any beginning characters followed by a wildcard (*). You can't overlap field patterns. For example, you can't have both ABC* and AB*. Note that field patterns are case-sensitive. 
+     */
+    FieldPatterns: FieldPatterns;
+  }
+  export type EncryptionEntityList = EncryptionEntity[];
   export type EventType = "viewer-request"|"viewer-response"|"origin-request"|"origin-response"|string;
+  export interface FieldLevelEncryption {
+    /**
+     * The configuration ID for a field-level encryption configuration which includes a set of profiles that specify certain selected data fields to be encrypted by specific public keys.
+     */
+    Id: string;
+    /**
+     * The last time the field-level encryption configuration was changed. 
+     */
+    LastModifiedTime: timestamp;
+    /**
+     * A complex data type that includes the profile configurations specified for field-level encryption. 
+     */
+    FieldLevelEncryptionConfig: FieldLevelEncryptionConfig;
+  }
+  export interface FieldLevelEncryptionConfig {
+    /**
+     * A unique number that ensures the request can't be replayed.
+     */
+    CallerReference: string;
+    /**
+     * An optional comment about the configuration.
+     */
+    Comment?: string;
+    /**
+     * A complex data type that specifies when to forward content if a profile isn't found and the profile that can be provided as a query argument in a request.
+     */
+    QueryArgProfileConfig?: QueryArgProfileConfig;
+    /**
+     * A complex data type that specifies when to forward content if a content type isn't recognized and profiles to use as by default in a request if a query argument doesn't specify a profile to use.
+     */
+    ContentTypeProfileConfig?: ContentTypeProfileConfig;
+  }
+  export interface FieldLevelEncryptionList {
+    /**
+     * If there are more elements to be listed, this element is present and contains the value that you can use for the Marker request parameter to continue listing your configurations where you left off.
+     */
+    NextMarker?: string;
+    /**
+     * The maximum number of elements you want in the response body. 
+     */
+    MaxItems: integer;
+    /**
+     * The number of field-level encryption items.
+     */
+    Quantity: integer;
+    /**
+     * An array of field-level encryption items.
+     */
+    Items?: FieldLevelEncryptionSummaryList;
+  }
+  export interface FieldLevelEncryptionProfile {
+    /**
+     * The ID for a field-level encryption profile configuration which includes a set of profiles that specify certain selected data fields to be encrypted by specific public keys.
+     */
+    Id: string;
+    /**
+     * The last time the field-level encryption profile was updated.
+     */
+    LastModifiedTime: timestamp;
+    /**
+     * A complex data type that includes the profile name and the encryption entities for the field-level encryption profile.
+     */
+    FieldLevelEncryptionProfileConfig: FieldLevelEncryptionProfileConfig;
+  }
+  export interface FieldLevelEncryptionProfileConfig {
+    /**
+     * Profile name for the field-level encryption profile.
+     */
+    Name: string;
+    /**
+     * A unique number that ensures that the request can't be replayed.
+     */
+    CallerReference: string;
+    /**
+     * An optional comment for the field-level encryption profile.
+     */
+    Comment?: string;
+    /**
+     * A complex data type of encryption entities for the field-level encryption profile that include the public key ID, provider, and field patterns for specifying which fields to encrypt with this key.
+     */
+    EncryptionEntities: EncryptionEntities;
+  }
+  export interface FieldLevelEncryptionProfileList {
+    /**
+     * If there are more elements to be listed, this element is present and contains the value that you can use for the Marker request parameter to continue listing your profiles where you left off.
+     */
+    NextMarker?: string;
+    /**
+     * The maximum number of field-level encryption profiles you want in the response body. 
+     */
+    MaxItems: integer;
+    /**
+     * The number of field-level encryption profiles.
+     */
+    Quantity: integer;
+    /**
+     * The field-level encryption profile items.
+     */
+    Items?: FieldLevelEncryptionProfileSummaryList;
+  }
+  export interface FieldLevelEncryptionProfileSummary {
+    /**
+     * ID for the field-level encryption profile summary.
+     */
+    Id: string;
+    /**
+     * The time when the the field-level encryption profile summary was last updated.
+     */
+    LastModifiedTime: timestamp;
+    /**
+     * Name for the field-level encryption profile summary.
+     */
+    Name: string;
+    /**
+     * A complex data type of encryption entities for the field-level encryption profile that include the public key ID, provider, and field patterns for specifying which fields to encrypt with this key.
+     */
+    EncryptionEntities: EncryptionEntities;
+    /**
+     * An optional comment for the field-level encryption profile summary.
+     */
+    Comment?: string;
+  }
+  export type FieldLevelEncryptionProfileSummaryList = FieldLevelEncryptionProfileSummary[];
+  export interface FieldLevelEncryptionSummary {
+    /**
+     * The unique ID of a field-level encryption item.
+     */
+    Id: string;
+    /**
+     * The last time that the summary of field-level encryption items was modified.
+     */
+    LastModifiedTime: timestamp;
+    /**
+     * An optional comment about the field-level encryption item.
+     */
+    Comment?: string;
+    /**
+     *  A summary of a query argument-profile mapping. 
+     */
+    QueryArgProfileConfig?: QueryArgProfileConfig;
+    /**
+     *  A summary of a content type-profile mapping. 
+     */
+    ContentTypeProfileConfig?: ContentTypeProfileConfig;
+  }
+  export type FieldLevelEncryptionSummaryList = FieldLevelEncryptionSummary[];
+  export type FieldPatternList = string[];
+  export interface FieldPatterns {
+    /**
+     * The number of field-level encryption field patterns.
+     */
+    Quantity: integer;
+    /**
+     * An array of the field-level encryption field patterns.
+     */
+    Items?: FieldPatternList;
+  }
+  export type Format = "URLEncoded"|string;
   export interface ForwardedValues {
     /**
      * Indicates whether you want CloudFront to forward query strings to the origin that is associated with this cache behavior and cache based on the query string parameters. CloudFront behavior depends on the value of QueryString and on the values that you specify for QueryStringCacheKeys, if any: If you specify true for QueryString and you don't specify any values for QueryStringCacheKeys, CloudFront forwards all query string parameters to the origin and caches based on all query string parameters. Depending on how many query string parameters and values you have, this can adversely affect performance because CloudFront must forward more requests to the origin. If you specify true for QueryString and you specify one or more values for QueryStringCacheKeys, CloudFront forwards all query string parameters to the origin, but it only caches based on the query string parameters that you specify. If you specify false for QueryString, CloudFront doesn't forward any query string parameters to the origin, and doesn't cache based on query string parameters. For more information, see Configuring CloudFront to Cache Based on Query String Parameters in the Amazon CloudFront Developer Guide.
@@ -1006,6 +1482,70 @@ declare namespace CloudFront {
      */
     ETag?: string;
   }
+  export interface GetFieldLevelEncryptionConfigRequest {
+    /**
+     * Request the ID for the field-level encryption configuration information.
+     */
+    Id: string;
+  }
+  export interface GetFieldLevelEncryptionConfigResult {
+    /**
+     * Return the field-level encryption configuration information.
+     */
+    FieldLevelEncryptionConfig?: FieldLevelEncryptionConfig;
+    /**
+     * The current version of the field level encryption configuration. For example: E2QWRUHAPOMQZL.
+     */
+    ETag?: string;
+  }
+  export interface GetFieldLevelEncryptionProfileConfigRequest {
+    /**
+     * Get the ID for the field-level encryption profile configuration information.
+     */
+    Id: string;
+  }
+  export interface GetFieldLevelEncryptionProfileConfigResult {
+    /**
+     * Return the field-level encryption profile configuration information.
+     */
+    FieldLevelEncryptionProfileConfig?: FieldLevelEncryptionProfileConfig;
+    /**
+     * The current version of the field-level encryption profile configuration result. For example: E2QWRUHAPOMQZL.
+     */
+    ETag?: string;
+  }
+  export interface GetFieldLevelEncryptionProfileRequest {
+    /**
+     * Get the ID for the field-level encryption profile information.
+     */
+    Id: string;
+  }
+  export interface GetFieldLevelEncryptionProfileResult {
+    /**
+     * Return the field-level encryption profile information.
+     */
+    FieldLevelEncryptionProfile?: FieldLevelEncryptionProfile;
+    /**
+     * The current version of the field level encryption profile. For example: E2QWRUHAPOMQZL.
+     */
+    ETag?: string;
+  }
+  export interface GetFieldLevelEncryptionRequest {
+    /**
+     * Request the ID for the field-level encryption configuration information.
+     */
+    Id: string;
+  }
+  export interface GetFieldLevelEncryptionResult {
+    /**
+     * Return the field-level encryption configuration information.
+     */
+    FieldLevelEncryption?: FieldLevelEncryption;
+    /**
+     * The current version of the field level encryption configuration. For example: E2QWRUHAPOMQZL.
+     */
+    ETag?: string;
+  }
   export interface GetInvalidationRequest {
     /**
      * The distribution's ID.
@@ -1021,6 +1561,38 @@ declare namespace CloudFront {
      * The invalidation's information. For more information, see Invalidation Complex Type. 
      */
     Invalidation?: Invalidation;
+  }
+  export interface GetPublicKeyConfigRequest {
+    /**
+     * Request the ID for the public key configuration.
+     */
+    Id: string;
+  }
+  export interface GetPublicKeyConfigResult {
+    /**
+     * Return the result for the public key configuration.
+     */
+    PublicKeyConfig?: PublicKeyConfig;
+    /**
+     * The current version of the public key configuration. For example: E2QWRUHAPOMQZL.
+     */
+    ETag?: string;
+  }
+  export interface GetPublicKeyRequest {
+    /**
+     * Request the ID for the public key.
+     */
+    Id: string;
+  }
+  export interface GetPublicKeyResult {
+    /**
+     * Return the public key.
+     */
+    PublicKey?: PublicKey;
+    /**
+     * The current version of the public key. For example: E2QWRUHAPOMQZL.
+     */
+    ETag?: string;
   }
   export interface GetStreamingDistributionConfigRequest {
     /**
@@ -1125,6 +1697,9 @@ declare namespace CloudFront {
      * The unique ID for an invalidation request.
      */
     Id: string;
+    /**
+     * The time that an invalidation request was created.
+     */
     CreateTime: timestamp;
     /**
      * The status of an invalidation request.
@@ -1144,15 +1719,20 @@ declare namespace CloudFront {
      */
     Items?: KeyPairIdList;
   }
+  export type LambdaFunctionARN = string;
   export interface LambdaFunctionAssociation {
     /**
      * The ARN of the Lambda function. You must specify the ARN of a function version; you can't specify a Lambda alias or $LATEST.
      */
-    LambdaFunctionARN?: string;
+    LambdaFunctionARN: LambdaFunctionARN;
     /**
-     * Specifies the event type that triggers a Lambda function invocation. You can specify the following values:    viewer-request: The function executes when CloudFront receives a request from a viewer and before it checks to see whether the requested object is in the edge cache.     origin-request: The function executes only when CloudFront forwards a request to your origin. When the requested object is in the edge cache, the function doesn't execute.    origin-response: The function executes after CloudFront receives a response from the origin and before it caches the object in the response. When the requested object is in the edge cache, the function doesn't execute. If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn't execute.    viewer-response: The function executes before CloudFront returns the requested object to the viewer. The function executes regardless of whether the object was already in the edge cache. If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn't execute.  
+     * Specifies the event type that triggers a Lambda function invocation. You can specify the following values:    viewer-request: The function executes when CloudFront receives a request from a viewer and before it checks to see whether the requested object is in the edge cache.     origin-request: The function executes only when CloudFront forwards a request to your origin. When the requested object is in the edge cache, the function doesn't execute.    origin-response: The function executes after CloudFront receives a response from the origin and before it caches the object in the response. When the requested object is in the edge cache, the function doesn't execute.    viewer-response: The function executes before CloudFront returns the requested object to the viewer. The function executes regardless of whether the object was already in the edge cache. If the origin returns an HTTP status code other than HTTP 200 (OK), the function doesn't execute.  
      */
-    EventType?: EventType;
+    EventType: EventType;
+    /**
+     * A flag that allows a Lambda function to have read access to the body content. For more information, see Accessing the Request Body by Choosing the Include Body Option in the Amazon CloudFront Developer Guide.
+     */
+    IncludeBody?: boolean;
   }
   export type LambdaFunctionAssociationList = LambdaFunctionAssociation[];
   export interface LambdaFunctionAssociations {
@@ -1217,6 +1797,38 @@ declare namespace CloudFront {
      */
     DistributionList?: DistributionList;
   }
+  export interface ListFieldLevelEncryptionConfigsRequest {
+    /**
+     * Use this when paginating results to indicate where to begin in your list of configurations. The results include configurations in the list that occur after the marker. To get the next page of results, set the Marker to the value of the NextMarker from the current page's response (which is also the ID of the last configuration on that page). 
+     */
+    Marker?: string;
+    /**
+     * The maximum number of field-level encryption configurations you want in the response body. 
+     */
+    MaxItems?: string;
+  }
+  export interface ListFieldLevelEncryptionConfigsResult {
+    /**
+     * Returns a list of all field-level encryption configurations that have been created in CloudFront for this account.
+     */
+    FieldLevelEncryptionList?: FieldLevelEncryptionList;
+  }
+  export interface ListFieldLevelEncryptionProfilesRequest {
+    /**
+     * Use this when paginating results to indicate where to begin in your list of profiles. The results include profiles in the list that occur after the marker. To get the next page of results, set the Marker to the value of the NextMarker from the current page's response (which is also the ID of the last profile on that page). 
+     */
+    Marker?: string;
+    /**
+     * The maximum number of field-level encryption profiles you want in the response body. 
+     */
+    MaxItems?: string;
+  }
+  export interface ListFieldLevelEncryptionProfilesResult {
+    /**
+     * Returns a list of the field-level encryption profiles that have been created in CloudFront for this account.
+     */
+    FieldLevelEncryptionProfileList?: FieldLevelEncryptionProfileList;
+  }
   export interface ListInvalidationsRequest {
     /**
      * The distribution's ID.
@@ -1236,6 +1848,22 @@ declare namespace CloudFront {
      * Information about invalidation batches. 
      */
     InvalidationList?: InvalidationList;
+  }
+  export interface ListPublicKeysRequest {
+    /**
+     * Use this when paginating results to indicate where to begin in your list of public keys. The results include public keys in the list that occur after the marker. To get the next page of results, set the Marker to the value of the NextMarker from the current page's response (which is also the ID of the last public key on that page). 
+     */
+    Marker?: string;
+    /**
+     * The maximum number of public keys you want in the response body. 
+     */
+    MaxItems?: string;
+  }
+  export interface ListPublicKeysResult {
+    /**
+     * Returns a list of all public keys that have been added to CloudFront for this account.
+     */
+    PublicKeyList?: PublicKeyList;
   }
   export interface ListStreamingDistributionsRequest {
     /**
@@ -1289,11 +1917,11 @@ declare namespace CloudFront {
   export type MinimumProtocolVersion = "SSLv3"|"TLSv1"|"TLSv1_2016"|"TLSv1.1_2016"|"TLSv1.2_2018"|string;
   export interface Origin {
     /**
-     * A unique identifier for the origin. The value of Id must be unique within the distribution. When you specify the value of TargetOriginId for the default cache behavior or for another cache behavior, you indicate the origin to which you want the cache behavior to route requests by specifying the value of the Id element for that origin. When a request matches the path pattern for that cache behavior, CloudFront routes the request to the specified origin. For more information, see Cache Behavior Settings in the Amazon CloudFront Developer Guide.
+     * A unique identifier for the origin or origin group. The value of Id must be unique within the distribution. When you specify the value of TargetOriginId for the default cache behavior or for another cache behavior, you indicate the origin to which you want the cache behavior to route requests by specifying the value of the Id element for that origin. When a request matches the path pattern for that cache behavior, CloudFront routes the request to the specified origin. For more information, see Cache Behavior Settings in the Amazon CloudFront Developer Guide.
      */
     Id: string;
     /**
-     *  Amazon S3 origins: The DNS name of the Amazon S3 bucket from which you want CloudFront to get objects for this origin, for example, myawsbucket.s3.amazonaws.com. Constraints for Amazon S3 origins:    If you configured Amazon S3 Transfer Acceleration for your bucket, don't specify the s3-accelerate endpoint for DomainName.   The bucket name must be between 3 and 63 characters long (inclusive).   The bucket name must contain only lowercase characters, numbers, periods, underscores, and dashes.   The bucket name must not contain adjacent periods.    Custom Origins: The DNS domain name for the HTTP server from which you want CloudFront to get objects for this origin, for example, www.example.com.  Constraints for custom origins:    DomainName must be a valid DNS name that contains only a-z, A-Z, 0-9, dot (.), hyphen (-), or underscore (_) characters.   The name cannot exceed 128 characters.  
+     *  Amazon S3 origins: The DNS name of the Amazon S3 bucket from which you want CloudFront to get objects for this origin, for example, myawsbucket.s3.amazonaws.com. If you set up your bucket to be configured as a website endpoint, enter the Amazon S3 static website hosting endpoint for the bucket. For more information about specifying this value for different types of origins, see Origin Domain Name in the Amazon CloudFront Developer Guide. Constraints for Amazon S3 origins:    If you configured Amazon S3 Transfer Acceleration for your bucket, don't specify the s3-accelerate endpoint for DomainName.   The bucket name must be between 3 and 63 characters long (inclusive).   The bucket name must contain only lowercase characters, numbers, periods, underscores, and dashes.   The bucket name must not contain adjacent periods.    Custom Origins: The DNS domain name for the HTTP server from which you want CloudFront to get objects for this origin, for example, www.example.com.  Constraints for custom origins:    DomainName must be a valid DNS name that contains only a-z, A-Z, 0-9, dot (.), hyphen (-), or underscore (_) characters.   The name cannot exceed 128 characters.  
      */
     DomainName: string;
     /**
@@ -1324,6 +1952,54 @@ declare namespace CloudFront {
     HeaderValue: string;
   }
   export type OriginCustomHeadersList = OriginCustomHeader[];
+  export interface OriginGroup {
+    /**
+     * The origin group's ID.
+     */
+    Id: string;
+    /**
+     * A complex type that contains information about the failover criteria for an origin group.
+     */
+    FailoverCriteria: OriginGroupFailoverCriteria;
+    /**
+     * A complex type that contains information about the origins in an origin group.
+     */
+    Members: OriginGroupMembers;
+  }
+  export interface OriginGroupFailoverCriteria {
+    /**
+     * The status codes that, when returned from the primary origin, will trigger CloudFront to failover to the second origin.
+     */
+    StatusCodes: StatusCodes;
+  }
+  export type OriginGroupList = OriginGroup[];
+  export interface OriginGroupMember {
+    /**
+     * The ID for an origin in an origin group.
+     */
+    OriginId: string;
+  }
+  export type OriginGroupMemberList = OriginGroupMember[];
+  export interface OriginGroupMembers {
+    /**
+     * The number of origins in an origin group.
+     */
+    Quantity: integer;
+    /**
+     * Items (origins) in an origin group.
+     */
+    Items: OriginGroupMemberList;
+  }
+  export interface OriginGroups {
+    /**
+     * The number of origin groups.
+     */
+    Quantity: integer;
+    /**
+     * The items (origin groups) in a distribution.
+     */
+    Items?: OriginGroupList;
+  }
   export type OriginList = Origin[];
   export type OriginProtocolPolicy = "http-only"|"match-viewer"|"https-only"|string;
   export interface OriginSslProtocols {
@@ -1338,13 +2014,13 @@ declare namespace CloudFront {
   }
   export interface Origins {
     /**
-     * The number of origins for this distribution.
+     * The number of origins or origin groups for this distribution.
      */
     Quantity: integer;
     /**
-     * A complex type that contains origins for this distribution.
+     * A complex type that contains origins or origin groups for this distribution.
      */
-    Items?: OriginList;
+    Items: OriginList;
   }
   export type PathList = string[];
   export interface Paths {
@@ -1358,6 +2034,110 @@ declare namespace CloudFront {
     Items?: PathList;
   }
   export type PriceClass = "PriceClass_100"|"PriceClass_200"|"PriceClass_All"|string;
+  export interface PublicKey {
+    /**
+     * A unique ID assigned to a public key you've added to CloudFront.
+     */
+    Id: string;
+    /**
+     * A time you added a public key to CloudFront.
+     */
+    CreatedTime: timestamp;
+    /**
+     * A complex data type for a public key you add to CloudFront to use with features like field-level encryption.
+     */
+    PublicKeyConfig: PublicKeyConfig;
+  }
+  export interface PublicKeyConfig {
+    /**
+     * A unique number that ensures that the request can't be replayed.
+     */
+    CallerReference: string;
+    /**
+     * The name for a public key you add to CloudFront to use with features like field-level encryption.
+     */
+    Name: string;
+    /**
+     * The encoded public key that you want to add to CloudFront to use with features like field-level encryption.
+     */
+    EncodedKey: string;
+    /**
+     * An optional comment about a public key.
+     */
+    Comment?: string;
+  }
+  export interface PublicKeyList {
+    /**
+     * If there are more elements to be listed, this element is present and contains the value that you can use for the Marker request parameter to continue listing your public keys where you left off.
+     */
+    NextMarker?: string;
+    /**
+     * The maximum number of public keys you want in the response body. 
+     */
+    MaxItems: integer;
+    /**
+     * The number of public keys you added to CloudFront to use with features like field-level encryption.
+     */
+    Quantity: integer;
+    /**
+     * An array of information about a public key you add to CloudFront to use with features like field-level encryption.
+     */
+    Items?: PublicKeySummaryList;
+  }
+  export interface PublicKeySummary {
+    /**
+     *  ID for public key information summary. 
+     */
+    Id: string;
+    /**
+     *  Name for public key information summary. 
+     */
+    Name: string;
+    /**
+     *  Creation time for public key information summary. 
+     */
+    CreatedTime: timestamp;
+    /**
+     *  Encoded key for public key information summary. 
+     */
+    EncodedKey: string;
+    /**
+     *  Comment for public key information summary. 
+     */
+    Comment?: string;
+  }
+  export type PublicKeySummaryList = PublicKeySummary[];
+  export interface QueryArgProfile {
+    /**
+     * Query argument for field-level encryption query argument-profile mapping.
+     */
+    QueryArg: string;
+    /**
+     * ID of profile to use for field-level encryption query argument-profile mapping
+     */
+    ProfileId: string;
+  }
+  export interface QueryArgProfileConfig {
+    /**
+     * Flag to set if you want a request to be forwarded to the origin even if the profile specified by the field-level encryption query argument, fle-profile, is unknown.
+     */
+    ForwardWhenQueryArgProfileIsUnknown: boolean;
+    /**
+     * Profiles specified for query argument-profile mapping for field-level encryption.
+     */
+    QueryArgProfiles?: QueryArgProfiles;
+  }
+  export type QueryArgProfileList = QueryArgProfile[];
+  export interface QueryArgProfiles {
+    /**
+     * Number of profiles for query argument-profile mapping for field-level encryption.
+     */
+    Quantity: integer;
+    /**
+     * Number of items for query argument-profile mapping for field-level encryption.
+     */
+    Items?: QueryArgProfileList;
+  }
   export interface QueryStringCacheKeys {
     /**
      * The number of whitelisted query string parameters for this cache behavior.
@@ -1403,11 +2183,25 @@ declare namespace CloudFront {
   export type SignerList = _Signer[];
   export type SslProtocol = "SSLv3"|"TLSv1"|"TLSv1.1"|"TLSv1.2"|string;
   export type SslProtocolsList = SslProtocol[];
+  export type StatusCodeList = integer[];
+  export interface StatusCodes {
+    /**
+     * The number of status codes.
+     */
+    Quantity: integer;
+    /**
+     * The items (status codes) for an origin group.
+     */
+    Items: StatusCodeList;
+  }
   export interface StreamingDistribution {
     /**
      * The identifier for the RTMP distribution. For example: EGTXBD79EXAMPLE.
      */
     Id: string;
+    /**
+     * The ARN (Amazon Resource Name) for the distribution. For example: arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where 123456789012 is your AWS account ID.
+     */
     ARN: string;
     /**
      * The current status of the RTMP distribution. When the status is Deployed, the distribution's information is propagated to all CloudFront edge locations.
@@ -1432,7 +2226,7 @@ declare namespace CloudFront {
   }
   export interface StreamingDistributionConfig {
     /**
-     * A unique number that ensures that the request can't be replayed. If the CallerReference is new (no matter the content of the StreamingDistributionConfig object), a new streaming distribution is created. If the CallerReference is a value that you already sent in a previous request to create a streaming distribution, and the content of the StreamingDistributionConfig is identical to the original request (ignoring white space), the response includes the same information returned to the original request. If the CallerReference is a value that you already sent in a previous request to create a streaming distribution but the content of the StreamingDistributionConfig is different from the original request, CloudFront returns a DistributionAlreadyExists error. 
+     * A unique value (for example, a date-time stamp) that ensures that the request can't be replayed. If the value of CallerReference is new (regardless of the content of the StreamingDistributionConfig object), CloudFront creates a new distribution. If CallerReference is a value that you already sent in a previous request to create a distribution, CloudFront returns a DistributionAlreadyExists error.
      */
     CallerReference: string;
     /**
@@ -1537,6 +2331,9 @@ declare namespace CloudFront {
      * The comment originally specified when this distribution was created.
      */
     Comment: string;
+    /**
+     * 
+     */
     PriceClass: PriceClass;
     /**
      * Whether the distribution is enabled to accept end user requests for content.
@@ -1666,6 +2463,78 @@ declare namespace CloudFront {
      */
     ETag?: string;
   }
+  export interface UpdateFieldLevelEncryptionConfigRequest {
+    /**
+     * Request to update a field-level encryption configuration. 
+     */
+    FieldLevelEncryptionConfig: FieldLevelEncryptionConfig;
+    /**
+     * The ID of the configuration you want to update.
+     */
+    Id: string;
+    /**
+     * The value of the ETag header that you received when retrieving the configuration identity to update. For example: E2QWRUHAPOMQZL.
+     */
+    IfMatch?: string;
+  }
+  export interface UpdateFieldLevelEncryptionConfigResult {
+    /**
+     * Return the results of updating the configuration.
+     */
+    FieldLevelEncryption?: FieldLevelEncryption;
+    /**
+     * The value of the ETag header that you received when updating the configuration. For example: E2QWRUHAPOMQZL.
+     */
+    ETag?: string;
+  }
+  export interface UpdateFieldLevelEncryptionProfileRequest {
+    /**
+     * Request to update a field-level encryption profile. 
+     */
+    FieldLevelEncryptionProfileConfig: FieldLevelEncryptionProfileConfig;
+    /**
+     * The ID of the field-level encryption profile request. 
+     */
+    Id: string;
+    /**
+     * The value of the ETag header that you received when retrieving the profile identity to update. For example: E2QWRUHAPOMQZL.
+     */
+    IfMatch?: string;
+  }
+  export interface UpdateFieldLevelEncryptionProfileResult {
+    /**
+     * Return the results of updating the profile.
+     */
+    FieldLevelEncryptionProfile?: FieldLevelEncryptionProfile;
+    /**
+     * The result of the field-level encryption profile request. 
+     */
+    ETag?: string;
+  }
+  export interface UpdatePublicKeyRequest {
+    /**
+     * Request to update public key information.
+     */
+    PublicKeyConfig: PublicKeyConfig;
+    /**
+     * ID of the public key to be updated.
+     */
+    Id: string;
+    /**
+     * The value of the ETag header that you received when retrieving the public key to update. For example: E2QWRUHAPOMQZL.
+     */
+    IfMatch?: string;
+  }
+  export interface UpdatePublicKeyResult {
+    /**
+     * Return the results of updating the public key.
+     */
+    PublicKey?: PublicKey;
+    /**
+     * The current version of the update public key result. For example: E2QWRUHAPOMQZL.
+     */
+    ETag?: string;
+  }
   export interface UpdateStreamingDistributionRequest {
     /**
      * The streaming distribution's configuration information.
@@ -1727,7 +2596,7 @@ declare namespace CloudFront {
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
-  export type apiVersion = "2013-05-12"|"2013-11-11"|"2014-05-31"|"2014-10-21"|"2014-11-06"|"2015-04-17"|"2015-07-27"|"2015-09-17"|"2016-01-13"|"2016-01-28"|"2016-08-01"|"2016-08-20"|"2016-09-07"|"2016-09-29"|"2016-11-25"|"2016-11-25"|"2017-03-25"|"latest"|string;
+  export type apiVersion = "2013-05-12"|"2013-11-11"|"2014-05-31"|"2014-10-21"|"2014-11-06"|"2015-04-17"|"2015-07-27"|"2015-09-17"|"2016-01-13"|"2016-01-28"|"2016-08-01"|"2016-08-20"|"2016-09-07"|"2016-09-29"|"2016-11-25"|"2016-11-25"|"2017-03-25"|"2017-03-25"|"2017-10-30"|"2017-10-30"|"2018-06-18"|"2018-06-18"|"2018-11-05"|"latest"|string;
   export interface ClientApiVersions {
     /**
      * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

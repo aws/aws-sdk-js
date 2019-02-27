@@ -20,11 +20,11 @@ declare class CodeStar extends Service {
    */
   associateTeamMember(callback?: (err: AWSError, data: CodeStar.Types.AssociateTeamMemberResult) => void): Request<CodeStar.Types.AssociateTeamMemberResult, AWSError>;
   /**
-   * Reserved for future use. To create a project, use the AWS CodeStar console.
+   * Creates a project, including project resources. This action creates a project based on a submitted project request. A set of source code files and a toolchain template file can be included with the project request. If these are not provided, an empty project is created.
    */
   createProject(params: CodeStar.Types.CreateProjectRequest, callback?: (err: AWSError, data: CodeStar.Types.CreateProjectResult) => void): Request<CodeStar.Types.CreateProjectResult, AWSError>;
   /**
-   * Reserved for future use. To create a project, use the AWS CodeStar console.
+   * Creates a project, including project resources. This action creates a project based on a submitted project request. A set of source code files and a toolchain template file can be included with the project request. If these are not provided, an empty project is created.
    */
   createProject(callback?: (err: AWSError, data: CodeStar.Types.CreateProjectResult) => void): Request<CodeStar.Types.CreateProjectResult, AWSError>;
   /**
@@ -185,36 +185,82 @@ declare namespace CodeStar {
      */
     clientRequestToken?: ClientRequestToken;
   }
+  export type BucketKey = string;
+  export type BucketName = string;
   export type ClientRequestToken = string;
+  export interface Code {
+    /**
+     * The location where the source code files provided with the project request are stored. AWS CodeStar retrieves the files during project creation.
+     */
+    source: CodeSource;
+    /**
+     * The repository to be created in AWS CodeStar. Valid values are AWS CodeCommit or GitHub. After AWS CodeStar provisions the new repository, the source code files provided with the project request are placed in the repository.
+     */
+    destination: CodeDestination;
+  }
+  export interface CodeCommitCodeDestination {
+    /**
+     * The name of the AWS CodeCommit repository to be created in AWS CodeStar.
+     */
+    name: RepositoryName;
+  }
+  export interface CodeDestination {
+    /**
+     * Information about the AWS CodeCommit repository to be created in AWS CodeStar. This is where the source code files provided with the project request will be uploaded after project creation.
+     */
+    codeCommit?: CodeCommitCodeDestination;
+    /**
+     * Information about the GitHub repository to be created in AWS CodeStar. This is where the source code files provided with the project request will be uploaded after project creation.
+     */
+    gitHub?: GitHubCodeDestination;
+  }
+  export interface CodeSource {
+    /**
+     * Information about the Amazon S3 location where the source code files provided with the project request are stored. 
+     */
+    s3: S3Location;
+  }
   export interface CreateProjectRequest {
     /**
-     * Reserved for future use.
+     * The display name for the project to be created in AWS CodeStar.
      */
     name: ProjectName;
     /**
-     * Reserved for future use.
+     * The ID of the project to be created in AWS CodeStar.
      */
     id: ProjectId;
     /**
-     * Reserved for future use.
+     * The description of the project, if any.
      */
     description?: ProjectDescription;
     /**
-     * Reserved for future use.
+     * A user- or system-generated token that identifies the entity that requested project creation. This token can be used to repeat the request.
      */
     clientRequestToken?: ClientRequestToken;
+    /**
+     * A list of the Code objects submitted with the project request. If this parameter is specified, the request must also include the toolchain parameter.
+     */
+    sourceCode?: SourceCode;
+    /**
+     * The name of the toolchain template file submitted with the project request. If this parameter is specified, the request must also include the sourceCode parameter.
+     */
+    toolchain?: Toolchain;
+    /**
+     * The tags created for the project.
+     */
+    tags?: Tags;
   }
   export interface CreateProjectResult {
     /**
-     * Reserved for future use.
+     * The ID of the project.
      */
     id: ProjectId;
     /**
-     * Reserved for future use.
+     * The Amazon Resource Name (ARN) of the created project.
      */
     arn: ProjectArn;
     /**
-     * Reserved for future use.
+     * A user- or system-generated token that identifies the entity that requested project creation.
      */
     clientRequestToken?: ClientRequestToken;
     /**
@@ -343,6 +389,10 @@ declare namespace CodeStar {
      * The ID for the AWS CodeStar project template used to create the project.
      */
     projectTemplateId?: ProjectTemplateId;
+    /**
+     * The project creation or deletion status.
+     */
+    status?: ProjectStatus;
   }
   export interface DescribeUserProfileRequest {
     /**
@@ -389,6 +439,37 @@ declare namespace CodeStar {
   export interface DisassociateTeamMemberResult {
   }
   export type Email = string;
+  export interface GitHubCodeDestination {
+    /**
+     * Name of the GitHub repository to be created in AWS CodeStar.
+     */
+    name: RepositoryName;
+    /**
+     * Description for the GitHub repository to be created in AWS CodeStar. This description displays in GitHub after the repository is created.
+     */
+    description?: RepositoryDescription;
+    /**
+     * The type of GitHub repository to be created in AWS CodeStar. Valid values are User or Organization.
+     */
+    type: RepositoryType;
+    /**
+     * The GitHub username for the owner of the GitHub repository to be created in AWS CodeStar. If this repository should be owned by a GitHub organization, provide its name.
+     */
+    owner: RepositoryOwner;
+    /**
+     * Whether the GitHub repository is to be a private repository.
+     */
+    privateRepository: RepositoryIsPrivate;
+    /**
+     * Whether to enable issues for the GitHub repository.
+     */
+    issuesEnabled: RepositoryEnableIssues;
+    /**
+     * The GitHub user's personal access token for the GitHub repository.
+     */
+    token: GitHubPersonalToken;
+  }
+  export type GitHubPersonalToken = string;
   export type LastModifiedTimestamp = Date;
   export interface ListProjectsRequest {
     /**
@@ -508,6 +589,16 @@ declare namespace CodeStar {
   export type ProjectDescription = string;
   export type ProjectId = string;
   export type ProjectName = string;
+  export interface ProjectStatus {
+    /**
+     * The phase of completion for a project creation or deletion.
+     */
+    state: State;
+    /**
+     * In the case of a project creation or deletion failure, a reason for the failure.
+     */
+    reason?: Reason;
+  }
   export interface ProjectSummary {
     /**
      * The ID of the project.
@@ -520,7 +611,14 @@ declare namespace CodeStar {
   }
   export type ProjectTemplateId = string;
   export type ProjectsList = ProjectSummary[];
+  export type Reason = string;
   export type RemoteAccessAllowed = boolean;
+  export type RepositoryDescription = string;
+  export type RepositoryEnableIssues = boolean;
+  export type RepositoryIsPrivate = boolean;
+  export type RepositoryName = string;
+  export type RepositoryOwner = string;
+  export type RepositoryType = string;
   export interface Resource {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -530,8 +628,21 @@ declare namespace CodeStar {
   export type ResourceId = string;
   export type ResourcesResult = Resource[];
   export type Role = string;
+  export type RoleArn = string;
+  export interface S3Location {
+    /**
+     * The Amazon S3 bucket name where the source code files provided with the project request are stored.
+     */
+    bucketName?: BucketName;
+    /**
+     * The Amazon S3 object key where the source code files provided with the project request are stored.
+     */
+    bucketKey?: BucketKey;
+  }
+  export type SourceCode = Code[];
   export type SshPublicKey = string;
   export type StackId = string;
+  export type State = string;
   export type TagKey = string;
   export type TagKeys = TagKey[];
   export interface TagProjectRequest {
@@ -567,6 +678,29 @@ declare namespace CodeStar {
     remoteAccessAllowed?: RemoteAccessAllowed;
   }
   export type TeamMemberResult = TeamMember[];
+  export type TemplateParameterKey = string;
+  export type TemplateParameterMap = {[key: string]: TemplateParameterValue};
+  export type TemplateParameterValue = string;
+  export interface Toolchain {
+    /**
+     * The Amazon S3 location where the toolchain template file provided with the project request is stored. AWS CodeStar retrieves the file during project creation.
+     */
+    source: ToolchainSource;
+    /**
+     * The service role ARN for AWS CodeStar to use for the toolchain template during stack provisioning.
+     */
+    roleArn?: RoleArn;
+    /**
+     * The list of parameter overrides to be passed into the toolchain template during stack provisioning, if any.
+     */
+    stackParameters?: TemplateParameterMap;
+  }
+  export interface ToolchainSource {
+    /**
+     * The Amazon S3 bucket where the toolchain template file provided with the project request is stored.
+     */
+    s3: S3Location;
+  }
   export interface UntagProjectRequest {
     /**
      * The ID of the project to remove tags from.

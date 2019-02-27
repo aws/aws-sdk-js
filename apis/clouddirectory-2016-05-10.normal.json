@@ -5,6 +5,7 @@
     "endpointPrefix":"clouddirectory",
     "protocol":"rest-json",
     "serviceFullName":"Amazon CloudDirectory",
+    "serviceId":"CloudDirectory",
     "signatureVersion":"v4",
     "signingName":"clouddirectory",
     "uid":"clouddirectory-2016-05-10"
@@ -30,7 +31,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"FacetValidationException"}
       ],
-      "documentation":"<p>Adds a new <a>Facet</a> to an object.</p>"
+      "documentation":"<p>Adds a new <a>Facet</a> to an object. An object can have more than one facet applied on it.</p>"
     },
     "ApplySchema":{
       "name":"ApplySchema",
@@ -95,7 +96,6 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
-        {"shape":"InvalidArnException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"NotPolicyException"}
       ],
@@ -118,6 +118,7 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
+        {"shape":"InvalidAttachmentException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"LinkNameAlreadyInUseException"},
         {"shape":"IndexedAttributeMissingException"},
@@ -207,7 +208,6 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryAlreadyExistsException"},
-        {"shape":"InvalidArnException"},
         {"shape":"ResourceNotFoundException"}
       ],
       "documentation":"<p>Creates a <a>Directory</a> by copying the published schema into the directory. A directory cannot be created without a schema.</p>"
@@ -276,7 +276,6 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
-        {"shape":"InvalidArnException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"FacetValidationException"},
         {"shape":"LinkNameAlreadyInUseException"},
@@ -476,7 +475,8 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
-        {"shape":"ResourceNotFoundException"}
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"NotNodeException"}
       ],
       "documentation":"<p>Detaches a given object from the parent object. The object that is to be detached from the parent is specified by the link name.</p>"
     },
@@ -497,7 +497,6 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
-        {"shape":"InvalidArnException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"NotPolicyException"}
       ],
@@ -625,6 +624,50 @@
         {"shape":"FacetNotFoundException"}
       ],
       "documentation":"<p>Gets details of the <a>Facet</a>, such as facet name, attributes, <a>Rule</a>s, or <code>ObjectType</code>. You can call this on all kinds of schema facets -- published, development, or applied.</p>"
+    },
+    "GetLinkAttributes":{
+      "name":"GetLinkAttributes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/amazonclouddirectory/2017-01-11/typedlink/attributes/get",
+        "responseCode":200
+      },
+      "input":{"shape":"GetLinkAttributesRequest"},
+      "output":{"shape":"GetLinkAttributesResponse"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"RetryableConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"DirectoryNotEnabledException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"FacetValidationException"}
+      ],
+      "documentation":"<p>Retrieves attributes that are associated with a typed link.</p>"
+    },
+    "GetObjectAttributes":{
+      "name":"GetObjectAttributes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/amazonclouddirectory/2017-01-11/object/attributes/get",
+        "responseCode":200
+      },
+      "input":{"shape":"GetObjectAttributesRequest"},
+      "output":{"shape":"GetObjectAttributesResponse"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"RetryableConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"DirectoryNotEnabledException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"FacetValidationException"}
+      ],
+      "documentation":"<p>Retrieves attributes within a facet that are associated with an object.</p>"
     },
     "GetObjectInformation":{
       "name":"GetObjectInformation",
@@ -852,14 +895,16 @@
         {"shape":"InternalServiceException"},
         {"shape":"InvalidArnException"},
         {"shape":"RetryableConflictException"},
+        {"shape":"FacetValidationException"},
         {"shape":"ValidationException"},
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
+        {"shape":"InvalidNextTokenException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"NotIndexException"}
       ],
-      "documentation":"<p>Lists objects and indexed values attached to the index.</p>"
+      "documentation":"<p>Lists objects attached to the specified index.</p>"
     },
     "ListObjectAttributes":{
       "name":"ListObjectAttributes",
@@ -878,7 +923,6 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
-        {"shape":"InvalidArnException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidNextTokenException"},
         {"shape":"FacetValidationException"}
@@ -902,7 +946,6 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
-        {"shape":"InvalidArnException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidNextTokenException"},
         {"shape":"NotNodeException"}
@@ -948,7 +991,6 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
-        {"shape":"InvalidArnException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidNextTokenException"},
         {"shape":"CannotListParentOfRootException"}
@@ -1017,7 +1059,6 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
-        {"shape":"InvalidArnException"},
         {"shape":"InvalidNextTokenException"},
         {"shape":"ResourceNotFoundException"},
         {"shape":"NotPolicyException"}
@@ -1043,7 +1084,7 @@
         {"shape":"ResourceNotFoundException"},
         {"shape":"InvalidNextTokenException"}
       ],
-      "documentation":"<p>Lists schema major versions for a published schema. If <code>SchemaArn</code> is provided, lists the minor version.</p>"
+      "documentation":"<p>Lists the major version families of each published schema. If a major version ARN is provided as <code>SchemaArn</code>, the minor version revisions in that family are listed instead.</p>"
     },
     "ListTagsForResource":{
       "name":"ListTagsForResource",
@@ -1126,7 +1167,6 @@
         {"shape":"LimitExceededException"},
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
-        {"shape":"InvalidArnException"},
         {"shape":"InvalidNextTokenException"},
         {"shape":"ResourceNotFoundException"}
       ],
@@ -1261,6 +1301,28 @@
       ],
       "documentation":"<p>Does the following:</p> <ol> <li> <p>Adds new <code>Attributes</code>, <code>Rules</code>, or <code>ObjectTypes</code>.</p> </li> <li> <p>Updates existing <code>Attributes</code>, <code>Rules</code>, or <code>ObjectTypes</code>.</p> </li> <li> <p>Deletes existing <code>Attributes</code>, <code>Rules</code>, or <code>ObjectTypes</code>.</p> </li> </ol>"
     },
+    "UpdateLinkAttributes":{
+      "name":"UpdateLinkAttributes",
+      "http":{
+        "method":"POST",
+        "requestUri":"/amazonclouddirectory/2017-01-11/typedlink/attributes/update",
+        "responseCode":200
+      },
+      "input":{"shape":"UpdateLinkAttributesRequest"},
+      "output":{"shape":"UpdateLinkAttributesResponse"},
+      "errors":[
+        {"shape":"InternalServiceException"},
+        {"shape":"InvalidArnException"},
+        {"shape":"RetryableConflictException"},
+        {"shape":"ValidationException"},
+        {"shape":"LimitExceededException"},
+        {"shape":"AccessDeniedException"},
+        {"shape":"DirectoryNotEnabledException"},
+        {"shape":"ResourceNotFoundException"},
+        {"shape":"FacetValidationException"}
+      ],
+      "documentation":"<p>Updates a given typed link’s attributes. Attributes to be updated must not contribute to the typed link’s identity, as defined by its <code>IdentityAttributeOrder</code>.</p>"
+    },
     "UpdateObjectAttributes":{
       "name":"UpdateObjectAttributes",
       "http":{
@@ -1279,6 +1341,7 @@
         {"shape":"AccessDeniedException"},
         {"shape":"DirectoryNotEnabledException"},
         {"shape":"ResourceNotFoundException"},
+        {"shape":"LinkNameAlreadyInUseException"},
         {"shape":"FacetValidationException"}
       ],
       "documentation":"<p>Updates a given object's attributes.</p>"
@@ -1492,6 +1555,7 @@
     "AttachPolicyRequest":{
       "type":"structure",
       "required":[
+        "DirectoryArn",
         "PolicyReference",
         "ObjectReference"
       ],
@@ -1870,10 +1934,7 @@
       "type":"structure",
       "required":[
         "SchemaFacet",
-        "ObjectAttributeList",
-        "ParentReference",
-        "LinkName",
-        "BatchReferenceName"
+        "ObjectAttributeList"
       ],
       "members":{
         "SchemaFacet":{
@@ -1958,8 +2019,7 @@
       "type":"structure",
       "required":[
         "ParentReference",
-        "LinkName",
-        "BatchReferenceName"
+        "LinkName"
       ],
       "members":{
         "ParentReference":{
@@ -2027,6 +2087,67 @@
       "members":{
       },
       "documentation":"<p>Represents the output of a <a>DetachTypedLink</a> response operation.</p>"
+    },
+    "BatchGetLinkAttributes":{
+      "type":"structure",
+      "required":[
+        "TypedLinkSpecifier",
+        "AttributeNames"
+      ],
+      "members":{
+        "TypedLinkSpecifier":{
+          "shape":"TypedLinkSpecifier",
+          "documentation":"<p>Allows a typed link specifier to be accepted as input.</p>"
+        },
+        "AttributeNames":{
+          "shape":"AttributeNameList",
+          "documentation":"<p>A list of attribute names whose values will be retrieved.</p>"
+        }
+      },
+      "documentation":"<p>Retrieves attributes that are associated with a typed link inside a <a>BatchRead</a> operation. For more information, see <a>GetLinkAttributes</a> and <a>BatchReadRequest$Operations</a>.</p>"
+    },
+    "BatchGetLinkAttributesResponse":{
+      "type":"structure",
+      "members":{
+        "Attributes":{
+          "shape":"AttributeKeyAndValueList",
+          "documentation":"<p>The attributes that are associated with the typed link.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a <a>GetLinkAttributes</a> response operation.</p>"
+    },
+    "BatchGetObjectAttributes":{
+      "type":"structure",
+      "required":[
+        "ObjectReference",
+        "SchemaFacet",
+        "AttributeNames"
+      ],
+      "members":{
+        "ObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>Reference that identifies the object whose attributes will be retrieved.</p>"
+        },
+        "SchemaFacet":{
+          "shape":"SchemaFacet",
+          "documentation":"<p>Identifier for the facet whose attributes will be retrieved. See <a>SchemaFacet</a> for details.</p>"
+        },
+        "AttributeNames":{
+          "shape":"AttributeNameList",
+          "documentation":"<p>List of attribute names whose values will be retrieved.</p>"
+        }
+      },
+      "documentation":"<p>Retrieves attributes within a facet that are associated with an object inside an <a>BatchRead</a> operation. For more information, see <a>GetObjectAttributes</a> and <a>BatchReadRequest$Operations</a>.</p>"
+    },
+    "BatchGetObjectAttributesResponse":{
+      "type":"structure",
+      "members":{
+        "Attributes":{
+          "shape":"AttributeKeyAndValueList",
+          "documentation":"<p>The attribute values that are associated with an object.</p>"
+        }
+      },
+      "documentation":"<p>Represents the output of a <a>GetObjectAttributes</a> response operation.</p>"
     },
     "BatchGetObjectInformation":{
       "type":"structure",
@@ -2463,6 +2584,10 @@
           "shape":"BatchGetObjectInformation",
           "documentation":"<p>Retrieves metadata about an object.</p>"
         },
+        "GetObjectAttributes":{
+          "shape":"BatchGetObjectAttributes",
+          "documentation":"<p>Retrieves attributes within a facet that are associated with an object.</p>"
+        },
         "ListObjectPolicies":{
           "shape":"BatchListObjectPolicies",
           "documentation":"<p>Returns policies attached to an object in pagination fashion.</p>"
@@ -2486,6 +2611,10 @@
         "ListIncomingTypedLinks":{
           "shape":"BatchListIncomingTypedLinks",
           "documentation":"<p>Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
+        },
+        "GetLinkAttributes":{
+          "shape":"BatchGetLinkAttributes",
+          "documentation":"<p>Retrieves attributes that are associated with a typed link.</p>"
         }
       },
       "documentation":"<p>Represents the output of a <code>BatchRead</code> operation.</p>"
@@ -2561,6 +2690,10 @@
           "shape":"BatchGetObjectInformationResponse",
           "documentation":"<p>Retrieves metadata about an object.</p>"
         },
+        "GetObjectAttributes":{
+          "shape":"BatchGetObjectAttributesResponse",
+          "documentation":"<p>Retrieves attributes within a facet that are associated with an object.</p>"
+        },
         "ListAttachedIndices":{
           "shape":"BatchListAttachedIndicesResponse",
           "documentation":"<p>Lists indices attached to an object.</p>"
@@ -2592,6 +2725,10 @@
         "ListIncomingTypedLinks":{
           "shape":"BatchListIncomingTypedLinksResponse",
           "documentation":"<p>Returns a paginated list of all the incoming <a>TypedLinkSpecifier</a> information for an object. It also supports filtering by typed link facet and identity attributes. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
+        },
+        "GetLinkAttributes":{
+          "shape":"BatchGetLinkAttributesResponse",
+          "documentation":"<p>The list of attributes to retrieve from the typed link.</p>"
         }
       },
       "documentation":"<p>Represents the output of a <code>BatchRead</code> success response operation.</p>"
@@ -2620,6 +2757,30 @@
       "members":{
       },
       "documentation":"<p>An empty result that represents success.</p>"
+    },
+    "BatchUpdateLinkAttributes":{
+      "type":"structure",
+      "required":[
+        "TypedLinkSpecifier",
+        "AttributeUpdates"
+      ],
+      "members":{
+        "TypedLinkSpecifier":{
+          "shape":"TypedLinkSpecifier",
+          "documentation":"<p>Allows a typed link specifier to be accepted as input.</p>"
+        },
+        "AttributeUpdates":{
+          "shape":"LinkAttributeUpdateList",
+          "documentation":"<p>The attributes update structure.</p>"
+        }
+      },
+      "documentation":"<p>Updates a given typed link’s attributes inside a <a>BatchRead</a> operation. Attributes to be updated must not contribute to the typed link’s identity, as defined by its <code>IdentityAttributeOrder</code>. For more information, see <a>UpdateLinkAttributes</a> and <a>BatchReadRequest$Operations</a>.</p>"
+    },
+    "BatchUpdateLinkAttributesResponse":{
+      "type":"structure",
+      "members":{
+      },
+      "documentation":"<p>Represents the output of a <a>UpdateLinkAttributes</a> response operation.</p>"
     },
     "BatchUpdateObjectAttributes":{
       "type":"structure",
@@ -2673,6 +2834,7 @@
         "AccessDeniedException",
         "InvalidAttachmentException",
         "NotIndexException",
+        "NotNodeException",
         "IndexedAttributeMissingException",
         "ObjectAlreadyDetachedException",
         "NotPolicyException",
@@ -2739,6 +2901,10 @@
         "DetachTypedLink":{
           "shape":"BatchDetachTypedLink",
           "documentation":"<p>Detaches a typed link from a specified source and target object. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
+        },
+        "UpdateLinkAttributes":{
+          "shape":"BatchUpdateLinkAttributes",
+          "documentation":"<p>Updates a given object's attributes.</p>"
         }
       },
       "documentation":"<p>Represents the output of a <code>BatchWrite</code> operation. </p>"
@@ -2805,6 +2971,10 @@
         "DetachTypedLink":{
           "shape":"BatchDetachTypedLinkResponse",
           "documentation":"<p>Detaches a typed link from a specified source and target object. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>"
+        },
+        "UpdateLinkAttributes":{
+          "shape":"BatchUpdateLinkAttributesResponse",
+          "documentation":"<p>Represents the output of a <code>BatchWrite</code> response operation.</p>"
         }
       },
       "documentation":"<p>Represents the output of a <code>BatchWrite</code> response operation.</p>"
@@ -3359,7 +3529,7 @@
       "members":{
         "Message":{"shape":"ExceptionMessage"}
       },
-      "documentation":"<p>An operation can only operate on a directory that is not enabled.</p>",
+      "documentation":"<p>Operations are only permitted on enabled directories.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
     },
@@ -3428,7 +3598,7 @@
           "documentation":"<p>The object type that is associated with the facet. See <a>CreateFacetRequest$ObjectType</a> for more details.</p>"
         }
       },
-      "documentation":"<p>A structure that contains <code>Name</code>, <code>ARN</code>, <code>Attributes</code>, <a>Rule</a>s, and <code>ObjectTypes</code>.</p>"
+      "documentation":"<p>A structure that contains <code>Name</code>, <code>ARN</code>, <code>Attributes</code>, <code> <a>Rule</a>s</code>, and <code>ObjectTypes</code>. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/whatarefacets.html\">Facets</a> for more information.</p>"
     },
     "FacetAlreadyExistsException":{
       "type":"structure",
@@ -3641,6 +3811,87 @@
         }
       }
     },
+    "GetLinkAttributesRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryArn",
+        "TypedLinkSpecifier",
+        "AttributeNames"
+      ],
+      "members":{
+        "DirectoryArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the Directory where the typed link resides. For more information, see <a>arns</a> or <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>",
+          "location":"header",
+          "locationName":"x-amz-data-partition"
+        },
+        "TypedLinkSpecifier":{
+          "shape":"TypedLinkSpecifier",
+          "documentation":"<p>Allows a typed link specifier to be accepted as input.</p>"
+        },
+        "AttributeNames":{
+          "shape":"AttributeNameList",
+          "documentation":"<p>A list of attribute names whose values will be retrieved.</p>"
+        },
+        "ConsistencyLevel":{
+          "shape":"ConsistencyLevel",
+          "documentation":"<p>The consistency level at which to retrieve the attributes on a typed link.</p>"
+        }
+      }
+    },
+    "GetLinkAttributesResponse":{
+      "type":"structure",
+      "members":{
+        "Attributes":{
+          "shape":"AttributeKeyAndValueList",
+          "documentation":"<p>The attributes that are associated with the typed link.</p>"
+        }
+      }
+    },
+    "GetObjectAttributesRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryArn",
+        "ObjectReference",
+        "SchemaFacet",
+        "AttributeNames"
+      ],
+      "members":{
+        "DirectoryArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the <a>Directory</a> where the object resides.</p>",
+          "location":"header",
+          "locationName":"x-amz-data-partition"
+        },
+        "ObjectReference":{
+          "shape":"ObjectReference",
+          "documentation":"<p>Reference that identifies the object whose attributes will be retrieved.</p>"
+        },
+        "ConsistencyLevel":{
+          "shape":"ConsistencyLevel",
+          "documentation":"<p>The consistency level at which to retrieve the attributes on an object.</p>",
+          "location":"header",
+          "locationName":"x-amz-consistency-level"
+        },
+        "SchemaFacet":{
+          "shape":"SchemaFacet",
+          "documentation":"<p>Identifier for the facet whose attributes will be retrieved. See <a>SchemaFacet</a> for details.</p>"
+        },
+        "AttributeNames":{
+          "shape":"AttributeNameList",
+          "documentation":"<p>List of attribute names whose values will be retrieved.</p>"
+        }
+      }
+    },
+    "GetObjectAttributesResponse":{
+      "type":"structure",
+      "members":{
+        "Attributes":{
+          "shape":"AttributeKeyAndValueList",
+          "documentation":"<p>The attributes that are associated with the object.</p>"
+        }
+      }
+    },
     "GetObjectInformationRequest":{
       "type":"structure",
       "required":[
@@ -3848,6 +4099,38 @@
       "documentation":"<p>Indicates that limits are exceeded. See <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/limits.html\">Limits</a> for more information.</p>",
       "error":{"httpStatusCode":400},
       "exception":true
+    },
+    "LinkAttributeAction":{
+      "type":"structure",
+      "members":{
+        "AttributeActionType":{
+          "shape":"UpdateActionType",
+          "documentation":"<p>A type that can be either <code>UPDATE_OR_CREATE</code> or <code>DELETE</code>.</p>"
+        },
+        "AttributeUpdateValue":{
+          "shape":"TypedAttributeValue",
+          "documentation":"<p>The value that you want to update to.</p>"
+        }
+      },
+      "documentation":"<p>The action to take on a typed link attribute value. Updates are only supported for attributes which don’t contribute to link identity.</p>"
+    },
+    "LinkAttributeUpdate":{
+      "type":"structure",
+      "members":{
+        "AttributeKey":{
+          "shape":"AttributeKey",
+          "documentation":"<p>The key of the attribute being updated.</p>"
+        },
+        "AttributeAction":{
+          "shape":"LinkAttributeAction",
+          "documentation":"<p>The action to perform as part of the attribute update.</p>"
+        }
+      },
+      "documentation":"<p>Structure that contains attribute update information.</p>"
+    },
+    "LinkAttributeUpdateList":{
+      "type":"list",
+      "member":{"shape":"LinkAttributeUpdate"}
     },
     "LinkName":{
       "type":"string",
@@ -5195,7 +5478,7 @@
           "documentation":"<p>The attribute value to terminate the range at.</p>"
         }
       },
-      "documentation":"<p>A range of attribute values.</p>"
+      "documentation":"<p>A range of attribute values. For more information, see <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#rangefilters\">Range Filters</a>.</p>"
     },
     "TypedLinkAttributeDefinition":{
       "type":"structure",
@@ -5424,6 +5707,35 @@
       }
     },
     "UpdateFacetResponse":{
+      "type":"structure",
+      "members":{
+      }
+    },
+    "UpdateLinkAttributesRequest":{
+      "type":"structure",
+      "required":[
+        "DirectoryArn",
+        "TypedLinkSpecifier",
+        "AttributeUpdates"
+      ],
+      "members":{
+        "DirectoryArn":{
+          "shape":"Arn",
+          "documentation":"<p>The Amazon Resource Name (ARN) that is associated with the Directory where the updated typed link resides. For more information, see <a>arns</a> or <a href=\"http://docs.aws.amazon.com/directoryservice/latest/admin-guide/objectsandlinks.html#typedlink\">Typed link</a>.</p>",
+          "location":"header",
+          "locationName":"x-amz-data-partition"
+        },
+        "TypedLinkSpecifier":{
+          "shape":"TypedLinkSpecifier",
+          "documentation":"<p>Allows a typed link specifier to be accepted as input.</p>"
+        },
+        "AttributeUpdates":{
+          "shape":"LinkAttributeUpdateList",
+          "documentation":"<p>The attributes update structure.</p>"
+        }
+      }
+    },
+    "UpdateLinkAttributesResponse":{
       "type":"structure",
       "members":{
       }

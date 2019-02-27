@@ -11,12 +11,10 @@ or Node.js backends
 
 For release notes, see the [CHANGELOG](https://github.com/aws/aws-sdk-js/blob/master/CHANGELOG.md). Prior to v2.4.8, release notes can be found at https://aws.amazon.com/releasenotes/?tag=releasenotes%23keywords%23javascript
 
-<p class="note">
 If you are upgrading from 1.x to 2.0 of the SDK, please see the
-[upgrading](https://github.com/aws/aws-sdk-js/blob/master/UPGRADING.md) notes
+[upgrading notes](https://github.com/aws/aws-sdk-js/blob/master/UPGRADING.md)
 for information on how to migrate existing code to work with the new major
 version.
-</p>
 
 ## Installing
 
@@ -25,7 +23,7 @@ version.
 To use the SDK in the browser, simply add the following script tag to your
 HTML pages:
 
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.196.0.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.411.0.min.js"></script>
 
 You can also build a custom browser SDK with your specified set of AWS services.
 This can allow you to reduce the SDK's size, specify different API versions of
@@ -35,6 +33,8 @@ working in an environment that does not enforce CORS. To get started:
 http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/building-sdk-for-browsers.html
 
 The AWS SDK is also compatible with [browserify](http://browserify.org).
+
+For browser-based web, mobile and hybrid apps, you can use [AWS Amplify Library](https://aws.github.io/aws-amplify/?utm_source=aws-js-sdk&utm_campaign=browser) which extends the AWS SDK and provides an easier and declarative interface.
 
 ### In Node.js
 
@@ -58,6 +58,8 @@ Then within your application, you can reference the react native compatible vers
 ```javascript
 var AWS = require('aws-sdk/dist/aws-sdk-react-native');
 ```
+
+Alternatively, you can use [AWS Amplify Library](https://aws.github.io/aws-amplify/media/react_native_guide?utm_source=aws-js-sdk&utm_campaign=react-native) which extends AWS SDK and provides React Native UI components and CLI support to work with AWS services.
 
 ### Using Bower
 
@@ -88,7 +90,7 @@ Before you can begin using these TypeScript definitions with your project, you n
     npm install --save-dev @types/node
     ```
 
- * Your `tsconfig.json` or `jsconfig.json` includes `'dom'` and `'es2015.promise'` under `compilerOptions.lib`.
+ * If you are targeting at es5 or older ECMA standards, your `tsconfig.json` has to include `'es5'` and `'es2015.promise'` under `compilerOptions.lib`.
  See [tsconfig.json](https://github.com/aws/aws-sdk-js/blob/master/ts/tsconfig.json) for an example.
 
 ### In the Browser
@@ -125,6 +127,10 @@ var AWS = require('aws-sdk/global');
 var S3 = require('aws-sdk/clients/s3');
 ```
 
+### With React
+
+To create React applications with AWS SDK, you can use [AWS Amplify Library](https://aws.github.io/aws-amplify/media/react_guide?utm_source=aws-js-sdk&utm_campaign=react) which provides React components and CLI support to work with AWS services.
+
 ### With Angular
 Due to the SDK's reliance on node.js typings, you may encounter compilation 
 [issues](https://github.com/aws/aws-sdk-js/issues/1271) when using the
@@ -132,6 +138,8 @@ typings provided by the SDK in an Angular project created using the Angular CLI.
 
 To resolve these issues, either add `"types": ["node"]` to the project's `tsconfig.app.json`
 file, or remove the `"types"` field entirely.
+
+[AWS Amplify Library](https://aws.github.io/aws-amplify/media/angular_guide?utm_source=aws-js-sdk&utm_campaign=angular) provides Angular components and CLI support to work with AWS services.
 
 ### Known Limitations
 There are a few known limitations with the bundled TypeScript definitions at this time:

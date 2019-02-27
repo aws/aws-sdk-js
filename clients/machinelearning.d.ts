@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -238,7 +239,7 @@ declare class MachineLearning extends Service {
   /**
    * Waits for the dataSourceAvailable state by periodically calling the underlying MachineLearning.describeDataSourcesoperation every 30 seconds (at most 60 times).
    */
-  waitFor(state: "dataSourceAvailable", params: MachineLearning.Types.DescribeDataSourcesInput, callback?: (err: AWSError, data: MachineLearning.Types.DescribeDataSourcesOutput) => void): Request<MachineLearning.Types.DescribeDataSourcesOutput, AWSError>;
+  waitFor(state: "dataSourceAvailable", params: MachineLearning.Types.DescribeDataSourcesInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MachineLearning.Types.DescribeDataSourcesOutput) => void): Request<MachineLearning.Types.DescribeDataSourcesOutput, AWSError>;
   /**
    * Waits for the dataSourceAvailable state by periodically calling the underlying MachineLearning.describeDataSourcesoperation every 30 seconds (at most 60 times).
    */
@@ -246,7 +247,7 @@ declare class MachineLearning extends Service {
   /**
    * Waits for the mLModelAvailable state by periodically calling the underlying MachineLearning.describeMLModelsoperation every 30 seconds (at most 60 times).
    */
-  waitFor(state: "mLModelAvailable", params: MachineLearning.Types.DescribeMLModelsInput, callback?: (err: AWSError, data: MachineLearning.Types.DescribeMLModelsOutput) => void): Request<MachineLearning.Types.DescribeMLModelsOutput, AWSError>;
+  waitFor(state: "mLModelAvailable", params: MachineLearning.Types.DescribeMLModelsInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MachineLearning.Types.DescribeMLModelsOutput) => void): Request<MachineLearning.Types.DescribeMLModelsOutput, AWSError>;
   /**
    * Waits for the mLModelAvailable state by periodically calling the underlying MachineLearning.describeMLModelsoperation every 30 seconds (at most 60 times).
    */
@@ -254,7 +255,7 @@ declare class MachineLearning extends Service {
   /**
    * Waits for the evaluationAvailable state by periodically calling the underlying MachineLearning.describeEvaluationsoperation every 30 seconds (at most 60 times).
    */
-  waitFor(state: "evaluationAvailable", params: MachineLearning.Types.DescribeEvaluationsInput, callback?: (err: AWSError, data: MachineLearning.Types.DescribeEvaluationsOutput) => void): Request<MachineLearning.Types.DescribeEvaluationsOutput, AWSError>;
+  waitFor(state: "evaluationAvailable", params: MachineLearning.Types.DescribeEvaluationsInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MachineLearning.Types.DescribeEvaluationsOutput) => void): Request<MachineLearning.Types.DescribeEvaluationsOutput, AWSError>;
   /**
    * Waits for the evaluationAvailable state by periodically calling the underlying MachineLearning.describeEvaluationsoperation every 30 seconds (at most 60 times).
    */
@@ -262,7 +263,7 @@ declare class MachineLearning extends Service {
   /**
    * Waits for the batchPredictionAvailable state by periodically calling the underlying MachineLearning.describeBatchPredictionsoperation every 30 seconds (at most 60 times).
    */
-  waitFor(state: "batchPredictionAvailable", params: MachineLearning.Types.DescribeBatchPredictionsInput, callback?: (err: AWSError, data: MachineLearning.Types.DescribeBatchPredictionsOutput) => void): Request<MachineLearning.Types.DescribeBatchPredictionsOutput, AWSError>;
+  waitFor(state: "batchPredictionAvailable", params: MachineLearning.Types.DescribeBatchPredictionsInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MachineLearning.Types.DescribeBatchPredictionsOutput) => void): Request<MachineLearning.Types.DescribeBatchPredictionsOutput, AWSError>;
   /**
    * Waits for the batchPredictionAvailable state by periodically calling the underlying MachineLearning.describeBatchPredictionsoperation every 30 seconds (at most 60 times).
    */
@@ -943,8 +944,6 @@ declare namespace MachineLearning {
   export type EntityName = string;
   export type EntityStatus = "PENDING"|"INPROGRESS"|"FAILED"|"COMPLETED"|"DELETED"|string;
   export type EpochTime = Date;
-  export type ErrorCode = number;
-  export type ErrorMessage = string;
   export interface Evaluation {
     /**
      * The ID that is assigned to the Evaluation at creation.

@@ -1,0 +1,52 @@
+[
+    {
+        "type": "feature",
+        "category": "AppSync",
+        "description": "AWS AppSync now supports: 1. Pipeline Resolvers - Enables execution of one or more operations against multiple data sources in order, on a single GraphQL field. This allows orchestration of actions by composing code into a single Resolver, or share code across Resolvers.  2. Aurora Serverless Data Source - Built-in resolver for executing GraphQL operations with the new Aurora Serverless Data API, including connection management functionality."
+    },
+    {
+        "type": "feature",
+        "category": "AutoScalingPlans",
+        "description": "In this release, AWS Auto Scaling adds three features: 1) Predictive scaling for EC2 Auto Scaling, which analyzes your application workload history to forecast future capacity requirements, 2) an option to replace existing scaling policies that are associated with the resources in your scaling plan, and 3) an option that allows you to use predictive scaling with or without your plan's dynamic scaling feature."
+    },
+    {
+        "type": "feature",
+        "category": "CloudFront",
+        "description": "With Origin Failover capability in CloudFront, you can setup two origins for your distributions - primary and secondary, such that your content is served from your secondary origin if CloudFront detects that your primary origin is unavailable. These origins can be any combination of AWS origins or non-AWS custom HTTP origins. For example, you can have two Amazon S3 buckets that serve as your origin that you independently upload your content to. If an object that CloudFront requests from your primary bucket is not present or if connection to your primary bucket times-out, CloudFront will request the object from your secondary bucket. So, you can configure CloudFront to trigger a failover in response to either HTTP 4xx or 5xx status codes."
+    },
+    {
+        "type": "feature",
+        "category": "CloudWatch",
+        "description": "Amazon CloudWatch now supports alarms on metric math expressions."
+    },
+    {
+        "type": "feature",
+        "category": "DeviceFarm",
+        "description": "Disabling device filters"
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "You can now include the media playlist(s) from both pipelines in the HLS master manifest for seamless failover."
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Amazon QuickSight is a fully managed, serverless, cloud business intelligence system that allows you to extend data and insights to every user in your organization. The first release of APIs for Amazon QuickSight introduces embedding and user/group management capabilities. The get-dashboard-embed-url API allows you to obtain an authenticated dashboard URL that can be embedded in application domains whitelisted for QuickSight dashboard embedding. User APIs allow you to programmatically expand and manage your QuickSight deployments while group APIs allow easier permissions management for resources within QuickSight."
+    },
+    {
+        "type": "feature",
+        "category": "RDSDataService",
+        "description": "The RDS Data API Beta is available for the MySQL-compatible edition of Amazon Aurora Serverless in the US East (N. Virginia) Region. This API enables you to easily access Aurora Serverless with web services-based applications including AWS Lambda and AWS AppSync."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "AWS Systems Manager Distributor helps you securely distribute and install software packages."
+    },
+    {
+        "type": "feature",
+        "category": "XRay",
+        "description": "Groups build upon X-Ray filter expressions to allow for fine tuning trace summaries and service graph results. You can configure groups by using the AWS X-Ray console or by using the CreateGroup API. The addition of groups has extended the available request fields to the GetServiceGraph API. You can now specify a group name or group ARN to retrieve its service graph."
+    }
+]

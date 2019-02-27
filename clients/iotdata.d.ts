@@ -57,7 +57,6 @@ declare namespace IotData {
      */
     payload: JsonDocument;
   }
-  export type ErrorMessage = string;
   export interface GetThingShadowRequest {
     /**
      * The name of the thing.
@@ -105,7 +104,6 @@ declare namespace IotData {
      */
     payload?: JsonDocument;
   }
-  export type errorMessage = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

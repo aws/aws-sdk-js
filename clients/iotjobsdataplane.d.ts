@@ -45,6 +45,7 @@ declare class IoTJobsDataPlane extends Service {
   updateJobExecution(callback?: (err: AWSError, data: IoTJobsDataPlane.Types.UpdateJobExecutionResponse) => void): Request<IoTJobsDataPlane.Types.UpdateJobExecutionResponse, AWSError>;
 }
 declare namespace IoTJobsDataPlane {
+  export type ApproximateSecondsBeforeTimedOut = number;
   export type DescribeJobExecutionJobId = string;
   export interface DescribeJobExecutionRequest {
     /**
@@ -124,6 +125,10 @@ declare namespace IoTJobsDataPlane {
      */
     lastUpdatedAt?: LastUpdatedAt;
     /**
+     * The estimated number of seconds that remain before the job execution status will be changed to TIMED_OUT.
+     */
+    approximateSecondsBeforeTimedOut?: ApproximateSecondsBeforeTimedOut;
+    /**
      * The version of the job execution. Job execution versions are incremented each time they are updated by a device.
      */
     versionNumber?: VersionNumber;
@@ -150,7 +155,7 @@ declare namespace IoTJobsDataPlane {
      */
     versionNumber?: VersionNumber;
   }
-  export type JobExecutionStatus = "QUEUED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"REJECTED"|"REMOVED"|"CANCELED"|string;
+  export type JobExecutionStatus = "QUEUED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"TIMED_OUT"|"REJECTED"|"REMOVED"|"CANCELED"|string;
   export interface JobExecutionSummary {
     /**
      * The unique identifier you assigned to this job when it was created.
@@ -190,6 +195,10 @@ declare namespace IoTJobsDataPlane {
      * A collection of name/value pairs that describe the status of the job execution. If not specified, the statusDetails are unchanged.
      */
     statusDetails?: DetailsMap;
+    /**
+     * Specifies the amount of time this device has to finish execution of this job. If the job execution status is not set to a terminal state before this timer expires, or before the timer is reset (by calling UpdateJobExecution, setting the status to IN_PROGRESS and specifying a new timeout value in field stepTimeoutInMinutes) the job execution status will be automatically set to TIMED_OUT. Note that setting this timeout has no effect on that job execution timeout which may have been specified when the job was created (CreateJob using field timeoutConfig).
+     */
+    stepTimeoutInMinutes?: StepTimeoutInMinutes;
   }
   export interface StartNextPendingJobExecutionResponse {
     /**
@@ -198,6 +207,7 @@ declare namespace IoTJobsDataPlane {
     execution?: JobExecution;
   }
   export type StartedAt = number;
+  export type StepTimeoutInMinutes = number;
   export type ThingName = string;
   export interface UpdateJobExecutionRequest {
     /**
@@ -216,6 +226,10 @@ declare namespace IoTJobsDataPlane {
      *  Optional. A collection of name/value pairs that describe the status of the job execution. If not specified, the statusDetails are unchanged.
      */
     statusDetails?: DetailsMap;
+    /**
+     * Specifies the amount of time this device has to finish execution of this job. If the job execution status is not set to a terminal state before this timer expires, or before the timer is reset (by again calling UpdateJobExecution, setting the status to IN_PROGRESS and specifying a new timeout value in this field) the job execution status will be automatically set to TIMED_OUT. Note that setting or resetting this timeout has no effect on that job execution timeout which may have been specified when the job was created (CreateJob using field timeoutConfig).
+     */
+    stepTimeoutInMinutes?: StepTimeoutInMinutes;
     /**
      * Optional. The expected current version of the job execution. Each time you update the job execution, its version is incremented. If the version of the job execution stored in Jobs does not match, the update is rejected with a VersionMismatch error, and an ErrorResponse that contains the current job execution status data is returned. (This makes it unnecessary to perform a separate DescribeJobExecution request in order to obtain the job execution status data.)
      */
@@ -244,7 +258,6 @@ declare namespace IoTJobsDataPlane {
     jobDocument?: JobDocument;
   }
   export type VersionNumber = number;
-  export type errorMessage = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

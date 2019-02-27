@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Adjust EC2's available instance types."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "AllocatedCapacity field is being deprecated and replaced with MaxCapacity field"
+    }
+]

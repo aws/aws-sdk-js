@@ -36,6 +36,14 @@ declare class ServiceCatalog extends Service {
    */
   associateProductWithPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateProductWithPortfolioOutput) => void): Request<ServiceCatalog.Types.AssociateProductWithPortfolioOutput, AWSError>;
   /**
+   * Associates a self-service action with a provisioning artifact.
+   */
+  associateServiceActionWithProvisioningArtifact(params: ServiceCatalog.Types.AssociateServiceActionWithProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateServiceActionWithProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.AssociateServiceActionWithProvisioningArtifactOutput, AWSError>;
+  /**
+   * Associates a self-service action with a provisioning artifact.
+   */
+  associateServiceActionWithProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateServiceActionWithProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.AssociateServiceActionWithProvisioningArtifactOutput, AWSError>;
+  /**
    * Associate the specified TagOption with the specified portfolio or product.
    */
   associateTagOptionWithResource(params: ServiceCatalog.Types.AssociateTagOptionWithResourceInput, callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateTagOptionWithResourceOutput) => void): Request<ServiceCatalog.Types.AssociateTagOptionWithResourceOutput, AWSError>;
@@ -43,6 +51,22 @@ declare class ServiceCatalog extends Service {
    * Associate the specified TagOption with the specified portfolio or product.
    */
   associateTagOptionWithResource(callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateTagOptionWithResourceOutput) => void): Request<ServiceCatalog.Types.AssociateTagOptionWithResourceOutput, AWSError>;
+  /**
+   * Associates multiple self-service actions with provisioning artifacts.
+   */
+  batchAssociateServiceActionWithProvisioningArtifact(params: ServiceCatalog.Types.BatchAssociateServiceActionWithProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.BatchAssociateServiceActionWithProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.BatchAssociateServiceActionWithProvisioningArtifactOutput, AWSError>;
+  /**
+   * Associates multiple self-service actions with provisioning artifacts.
+   */
+  batchAssociateServiceActionWithProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.BatchAssociateServiceActionWithProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.BatchAssociateServiceActionWithProvisioningArtifactOutput, AWSError>;
+  /**
+   * Disassociates a batch of self-service actions from the specified provisioning artifact.
+   */
+  batchDisassociateServiceActionFromProvisioningArtifact(params: ServiceCatalog.Types.BatchDisassociateServiceActionFromProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.BatchDisassociateServiceActionFromProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.BatchDisassociateServiceActionFromProvisioningArtifactOutput, AWSError>;
+  /**
+   * Disassociates a batch of self-service actions from the specified provisioning artifact.
+   */
+  batchDisassociateServiceActionFromProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.BatchDisassociateServiceActionFromProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.BatchDisassociateServiceActionFromProvisioningArtifactOutput, AWSError>;
   /**
    * Copies the specified source product to the specified target product or a new product. You can copy a product to the same account or another account. You can copy a product to the same region or another region. This operation is performed asynchronously. To track the progress of the operation, use DescribeCopyProductStatus.
    */
@@ -68,11 +92,11 @@ declare class ServiceCatalog extends Service {
    */
   createPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.CreatePortfolioOutput) => void): Request<ServiceCatalog.Types.CreatePortfolioOutput, AWSError>;
   /**
-   * Shares the specified portfolio with the specified account.
+   * Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the master account of an Organization. AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node.
    */
   createPortfolioShare(params: ServiceCatalog.Types.CreatePortfolioShareInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreatePortfolioShareOutput) => void): Request<ServiceCatalog.Types.CreatePortfolioShareOutput, AWSError>;
   /**
-   * Shares the specified portfolio with the specified account.
+   * Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the master account of an Organization. AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node.
    */
   createPortfolioShare(callback?: (err: AWSError, data: ServiceCatalog.Types.CreatePortfolioShareOutput) => void): Request<ServiceCatalog.Types.CreatePortfolioShareOutput, AWSError>;
   /**
@@ -84,11 +108,11 @@ declare class ServiceCatalog extends Service {
    */
   createProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProductOutput) => void): Request<ServiceCatalog.Types.CreateProductOutput, AWSError>;
   /**
-   * Creates a plan. A plan includes the list of resources that will be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed. You can create one plan per provisioned product. To create a plan for an existing provisioned product, it's status must be AVAILBLE or TAINTED. To view the resource changes in the change set, use DescribeProvisionedProductPlan. To create or modify the provisioned product, use ExecuteProvisionedProductPlan.
+   * Creates a plan. A plan includes the list of resources to be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed. You can create one plan per provisioned product. To create a plan for an existing provisioned product, the product status must be AVAILBLE or TAINTED. To view the resource changes in the change set, use DescribeProvisionedProductPlan. To create or modify the provisioned product, use ExecuteProvisionedProductPlan.
    */
   createProvisionedProductPlan(params: ServiceCatalog.Types.CreateProvisionedProductPlanInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.CreateProvisionedProductPlanOutput, AWSError>;
   /**
-   * Creates a plan. A plan includes the list of resources that will be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed. You can create one plan per provisioned product. To create a plan for an existing provisioned product, it's status must be AVAILBLE or TAINTED. To view the resource changes in the change set, use DescribeProvisionedProductPlan. To create or modify the provisioned product, use ExecuteProvisionedProductPlan.
+   * Creates a plan. A plan includes the list of resources to be created (when provisioning a new product) or modified (when updating a provisioned product) when the plan is executed. You can create one plan per provisioned product. To create a plan for an existing provisioned product, the product status must be AVAILBLE or TAINTED. To view the resource changes in the change set, use DescribeProvisionedProductPlan. To create or modify the provisioned product, use ExecuteProvisionedProductPlan.
    */
   createProvisionedProductPlan(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.CreateProvisionedProductPlanOutput, AWSError>;
   /**
@@ -99,6 +123,14 @@ declare class ServiceCatalog extends Service {
    * Creates a provisioning artifact (also known as a version) for the specified product. You cannot create a provisioning artifact for a product that was shared with you.
    */
   createProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.CreateProvisioningArtifactOutput, AWSError>;
+  /**
+   * Creates a self-service action.
+   */
+  createServiceAction(params: ServiceCatalog.Types.CreateServiceActionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateServiceActionOutput) => void): Request<ServiceCatalog.Types.CreateServiceActionOutput, AWSError>;
+  /**
+   * Creates a self-service action.
+   */
+  createServiceAction(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateServiceActionOutput) => void): Request<ServiceCatalog.Types.CreateServiceActionOutput, AWSError>;
   /**
    * Creates a TagOption.
    */
@@ -124,11 +156,11 @@ declare class ServiceCatalog extends Service {
    */
   deletePortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.DeletePortfolioOutput) => void): Request<ServiceCatalog.Types.DeletePortfolioOutput, AWSError>;
   /**
-   * Stops sharing the specified portfolio with the specified account.
+   * Stops sharing the specified portfolio with the specified account or organization node. Shares to an organization node can only be deleted by the master account of an Organization.
    */
   deletePortfolioShare(params: ServiceCatalog.Types.DeletePortfolioShareInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeletePortfolioShareOutput) => void): Request<ServiceCatalog.Types.DeletePortfolioShareOutput, AWSError>;
   /**
-   * Stops sharing the specified portfolio with the specified account.
+   * Stops sharing the specified portfolio with the specified account or organization node. Shares to an organization node can only be deleted by the master account of an Organization.
    */
   deletePortfolioShare(callback?: (err: AWSError, data: ServiceCatalog.Types.DeletePortfolioShareOutput) => void): Request<ServiceCatalog.Types.DeletePortfolioShareOutput, AWSError>;
   /**
@@ -156,6 +188,22 @@ declare class ServiceCatalog extends Service {
    */
   deleteProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DeleteProvisioningArtifactOutput, AWSError>;
   /**
+   * Deletes a self-service action.
+   */
+  deleteServiceAction(params: ServiceCatalog.Types.DeleteServiceActionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteServiceActionOutput) => void): Request<ServiceCatalog.Types.DeleteServiceActionOutput, AWSError>;
+  /**
+   * Deletes a self-service action.
+   */
+  deleteServiceAction(callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteServiceActionOutput) => void): Request<ServiceCatalog.Types.DeleteServiceActionOutput, AWSError>;
+  /**
+   * Deletes the specified TagOption. You cannot delete a TagOption if it is associated with a product or portfolio.
+   */
+  deleteTagOption(params: ServiceCatalog.Types.DeleteTagOptionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteTagOptionOutput) => void): Request<ServiceCatalog.Types.DeleteTagOptionOutput, AWSError>;
+  /**
+   * Deletes the specified TagOption. You cannot delete a TagOption if it is associated with a product or portfolio.
+   */
+  deleteTagOption(callback?: (err: AWSError, data: ServiceCatalog.Types.DeleteTagOptionOutput) => void): Request<ServiceCatalog.Types.DeleteTagOptionOutput, AWSError>;
+  /**
    * Gets information about the specified constraint.
    */
   describeConstraint(params: ServiceCatalog.Types.DescribeConstraintInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeConstraintOutput) => void): Request<ServiceCatalog.Types.DescribeConstraintOutput, AWSError>;
@@ -179,6 +227,14 @@ declare class ServiceCatalog extends Service {
    * Gets information about the specified portfolio.
    */
   describePortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribePortfolioOutput) => void): Request<ServiceCatalog.Types.DescribePortfolioOutput, AWSError>;
+  /**
+   * Gets the status of the specified portfolio share operation. This API can only be called by the master account in the organization.
+   */
+  describePortfolioShareStatus(params: ServiceCatalog.Types.DescribePortfolioShareStatusInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribePortfolioShareStatusOutput) => void): Request<ServiceCatalog.Types.DescribePortfolioShareStatusOutput, AWSError>;
+  /**
+   * Gets the status of the specified portfolio share operation. This API can only be called by the master account in the organization.
+   */
+  describePortfolioShareStatus(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribePortfolioShareStatusOutput) => void): Request<ServiceCatalog.Types.DescribePortfolioShareStatusOutput, AWSError>;
   /**
    * Gets information about the specified product.
    */
@@ -244,6 +300,14 @@ declare class ServiceCatalog extends Service {
    */
   describeRecord(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeRecordOutput) => void): Request<ServiceCatalog.Types.DescribeRecordOutput, AWSError>;
   /**
+   * Describes a self-service action.
+   */
+  describeServiceAction(params: ServiceCatalog.Types.DescribeServiceActionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeServiceActionOutput) => void): Request<ServiceCatalog.Types.DescribeServiceActionOutput, AWSError>;
+  /**
+   * Describes a self-service action.
+   */
+  describeServiceAction(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeServiceActionOutput) => void): Request<ServiceCatalog.Types.DescribeServiceActionOutput, AWSError>;
+  /**
    * Gets information about the specified TagOption.
    */
   describeTagOption(params: ServiceCatalog.Types.DescribeTagOptionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeTagOptionOutput) => void): Request<ServiceCatalog.Types.DescribeTagOptionOutput, AWSError>;
@@ -251,6 +315,14 @@ declare class ServiceCatalog extends Service {
    * Gets information about the specified TagOption.
    */
   describeTagOption(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeTagOptionOutput) => void): Request<ServiceCatalog.Types.DescribeTagOptionOutput, AWSError>;
+  /**
+   * Disable portfolio sharing through AWS Organizations feature. This feature will not delete your current shares but it will prevent you from creating new shares throughout your organization. Current shares will not be in sync with your organization structure if it changes after calling this API. This API can only be called by the master account in the organization.
+   */
+  disableAWSOrganizationsAccess(params: ServiceCatalog.Types.DisableAWSOrganizationsAccessInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DisableAWSOrganizationsAccessOutput) => void): Request<ServiceCatalog.Types.DisableAWSOrganizationsAccessOutput, AWSError>;
+  /**
+   * Disable portfolio sharing through AWS Organizations feature. This feature will not delete your current shares but it will prevent you from creating new shares throughout your organization. Current shares will not be in sync with your organization structure if it changes after calling this API. This API can only be called by the master account in the organization.
+   */
+  disableAWSOrganizationsAccess(callback?: (err: AWSError, data: ServiceCatalog.Types.DisableAWSOrganizationsAccessOutput) => void): Request<ServiceCatalog.Types.DisableAWSOrganizationsAccessOutput, AWSError>;
   /**
    * Disassociates a previously associated principal ARN from a specified portfolio.
    */
@@ -268,6 +340,14 @@ declare class ServiceCatalog extends Service {
    */
   disassociateProductFromPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateProductFromPortfolioOutput) => void): Request<ServiceCatalog.Types.DisassociateProductFromPortfolioOutput, AWSError>;
   /**
+   * Disassociates the specified self-service action association from the specified provisioning artifact.
+   */
+  disassociateServiceActionFromProvisioningArtifact(params: ServiceCatalog.Types.DisassociateServiceActionFromProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateServiceActionFromProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DisassociateServiceActionFromProvisioningArtifactOutput, AWSError>;
+  /**
+   * Disassociates the specified self-service action association from the specified provisioning artifact.
+   */
+  disassociateServiceActionFromProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateServiceActionFromProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.DisassociateServiceActionFromProvisioningArtifactOutput, AWSError>;
+  /**
    * Disassociates the specified TagOption from the specified resource.
    */
   disassociateTagOptionFromResource(params: ServiceCatalog.Types.DisassociateTagOptionFromResourceInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateTagOptionFromResourceOutput) => void): Request<ServiceCatalog.Types.DisassociateTagOptionFromResourceOutput, AWSError>;
@@ -276,6 +356,14 @@ declare class ServiceCatalog extends Service {
    */
   disassociateTagOptionFromResource(callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateTagOptionFromResourceOutput) => void): Request<ServiceCatalog.Types.DisassociateTagOptionFromResourceOutput, AWSError>;
   /**
+   * Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the master account in the organization. By calling this API Service Catalog will make a call to organizations:EnableAWSServiceAccess on your behalf so that your shares can be in sync with any changes in your AWS Organizations structure.
+   */
+  enableAWSOrganizationsAccess(params: ServiceCatalog.Types.EnableAWSOrganizationsAccessInput, callback?: (err: AWSError, data: ServiceCatalog.Types.EnableAWSOrganizationsAccessOutput) => void): Request<ServiceCatalog.Types.EnableAWSOrganizationsAccessOutput, AWSError>;
+  /**
+   * Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the master account in the organization. By calling this API Service Catalog will make a call to organizations:EnableAWSServiceAccess on your behalf so that your shares can be in sync with any changes in your AWS Organizations structure.
+   */
+  enableAWSOrganizationsAccess(callback?: (err: AWSError, data: ServiceCatalog.Types.EnableAWSOrganizationsAccessOutput) => void): Request<ServiceCatalog.Types.EnableAWSOrganizationsAccessOutput, AWSError>;
+  /**
    * Provisions or modifies a product based on the resource changes for the specified plan.
    */
   executeProvisionedProductPlan(params: ServiceCatalog.Types.ExecuteProvisionedProductPlanInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ExecuteProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.ExecuteProvisionedProductPlanOutput, AWSError>;
@@ -283,6 +371,22 @@ declare class ServiceCatalog extends Service {
    * Provisions or modifies a product based on the resource changes for the specified plan.
    */
   executeProvisionedProductPlan(callback?: (err: AWSError, data: ServiceCatalog.Types.ExecuteProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.ExecuteProvisionedProductPlanOutput, AWSError>;
+  /**
+   * Executes a self-service action against a provisioned product.
+   */
+  executeProvisionedProductServiceAction(params: ServiceCatalog.Types.ExecuteProvisionedProductServiceActionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ExecuteProvisionedProductServiceActionOutput) => void): Request<ServiceCatalog.Types.ExecuteProvisionedProductServiceActionOutput, AWSError>;
+  /**
+   * Executes a self-service action against a provisioned product.
+   */
+  executeProvisionedProductServiceAction(callback?: (err: AWSError, data: ServiceCatalog.Types.ExecuteProvisionedProductServiceActionOutput) => void): Request<ServiceCatalog.Types.ExecuteProvisionedProductServiceActionOutput, AWSError>;
+  /**
+   * Get the Access Status for AWS Organization portfolio share feature. This API can only be called by the master account in the organization.
+   */
+  getAWSOrganizationsAccessStatus(params: ServiceCatalog.Types.GetAWSOrganizationsAccessStatusInput, callback?: (err: AWSError, data: ServiceCatalog.Types.GetAWSOrganizationsAccessStatusOutput) => void): Request<ServiceCatalog.Types.GetAWSOrganizationsAccessStatusOutput, AWSError>;
+  /**
+   * Get the Access Status for AWS Organization portfolio share feature. This API can only be called by the master account in the organization.
+   */
+  getAWSOrganizationsAccessStatus(callback?: (err: AWSError, data: ServiceCatalog.Types.GetAWSOrganizationsAccessStatusOutput) => void): Request<ServiceCatalog.Types.GetAWSOrganizationsAccessStatusOutput, AWSError>;
   /**
    * Lists all portfolios for which sharing was accepted by this account.
    */
@@ -307,6 +411,14 @@ declare class ServiceCatalog extends Service {
    * Lists the paths to the specified product. A path is how the user has access to a specified product, and is necessary when provisioning a product. A path also determines the constraints put on the product.
    */
   listLaunchPaths(callback?: (err: AWSError, data: ServiceCatalog.Types.ListLaunchPathsOutput) => void): Request<ServiceCatalog.Types.ListLaunchPathsOutput, AWSError>;
+  /**
+   * Lists the organization nodes that have access to the specified portfolio. This API can only be called by the master account in the organization.
+   */
+  listOrganizationPortfolioAccess(params: ServiceCatalog.Types.ListOrganizationPortfolioAccessInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListOrganizationPortfolioAccessOutput) => void): Request<ServiceCatalog.Types.ListOrganizationPortfolioAccessOutput, AWSError>;
+  /**
+   * Lists the organization nodes that have access to the specified portfolio. This API can only be called by the master account in the organization.
+   */
+  listOrganizationPortfolioAccess(callback?: (err: AWSError, data: ServiceCatalog.Types.ListOrganizationPortfolioAccessOutput) => void): Request<ServiceCatalog.Types.ListOrganizationPortfolioAccessOutput, AWSError>;
   /**
    * Lists the account IDs that have access to the specified portfolio.
    */
@@ -340,11 +452,11 @@ declare class ServiceCatalog extends Service {
    */
   listPrincipalsForPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.ListPrincipalsForPortfolioOutput) => void): Request<ServiceCatalog.Types.ListPrincipalsForPortfolioOutput, AWSError>;
   /**
-   * Lists the plans for the specified provisioned product or all plans the user has access to.
+   * Lists the plans for the specified provisioned product or all plans to which the user has access.
    */
   listProvisionedProductPlans(params: ServiceCatalog.Types.ListProvisionedProductPlansInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisionedProductPlansOutput) => void): Request<ServiceCatalog.Types.ListProvisionedProductPlansOutput, AWSError>;
   /**
-   * Lists the plans for the specified provisioned product or all plans the user has access to.
+   * Lists the plans for the specified provisioned product or all plans to which the user has access.
    */
   listProvisionedProductPlans(callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisionedProductPlansOutput) => void): Request<ServiceCatalog.Types.ListProvisionedProductPlansOutput, AWSError>;
   /**
@@ -355,6 +467,14 @@ declare class ServiceCatalog extends Service {
    * Lists all provisioning artifacts (also known as versions) for the specified product.
    */
   listProvisioningArtifacts(callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisioningArtifactsOutput) => void): Request<ServiceCatalog.Types.ListProvisioningArtifactsOutput, AWSError>;
+  /**
+   * Lists all provisioning artifacts (also known as versions) for the specified self-service action.
+   */
+  listProvisioningArtifactsForServiceAction(params: ServiceCatalog.Types.ListProvisioningArtifactsForServiceActionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisioningArtifactsForServiceActionOutput) => void): Request<ServiceCatalog.Types.ListProvisioningArtifactsForServiceActionOutput, AWSError>;
+  /**
+   * Lists all provisioning artifacts (also known as versions) for the specified self-service action.
+   */
+  listProvisioningArtifactsForServiceAction(callback?: (err: AWSError, data: ServiceCatalog.Types.ListProvisioningArtifactsForServiceActionOutput) => void): Request<ServiceCatalog.Types.ListProvisioningArtifactsForServiceActionOutput, AWSError>;
   /**
    * Lists the specified requests or all performed requests.
    */
@@ -371,6 +491,22 @@ declare class ServiceCatalog extends Service {
    * Lists the resources associated with the specified TagOption.
    */
   listResourcesForTagOption(callback?: (err: AWSError, data: ServiceCatalog.Types.ListResourcesForTagOptionOutput) => void): Request<ServiceCatalog.Types.ListResourcesForTagOptionOutput, AWSError>;
+  /**
+   * Lists all self-service actions.
+   */
+  listServiceActions(params: ServiceCatalog.Types.ListServiceActionsInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListServiceActionsOutput) => void): Request<ServiceCatalog.Types.ListServiceActionsOutput, AWSError>;
+  /**
+   * Lists all self-service actions.
+   */
+  listServiceActions(callback?: (err: AWSError, data: ServiceCatalog.Types.ListServiceActionsOutput) => void): Request<ServiceCatalog.Types.ListServiceActionsOutput, AWSError>;
+  /**
+   * Returns a paginated list of self-service actions associated with the specified Product ID and Provisioning Artifact ID.
+   */
+  listServiceActionsForProvisioningArtifact(params: ServiceCatalog.Types.ListServiceActionsForProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListServiceActionsForProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.ListServiceActionsForProvisioningArtifactOutput, AWSError>;
+  /**
+   * Returns a paginated list of self-service actions associated with the specified Product ID and Provisioning Artifact ID.
+   */
+  listServiceActionsForProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.ListServiceActionsForProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.ListServiceActionsForProvisioningArtifactOutput, AWSError>;
   /**
    * Lists the specified TagOptions or all TagOptions.
    */
@@ -476,6 +612,14 @@ declare class ServiceCatalog extends Service {
    */
   updateProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.UpdateProvisioningArtifactOutput, AWSError>;
   /**
+   * Updates a self-service action.
+   */
+  updateServiceAction(params: ServiceCatalog.Types.UpdateServiceActionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateServiceActionOutput) => void): Request<ServiceCatalog.Types.UpdateServiceActionOutput, AWSError>;
+  /**
+   * Updates a self-service action.
+   */
+  updateServiceAction(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateServiceActionOutput) => void): Request<ServiceCatalog.Types.UpdateServiceActionOutput, AWSError>;
+  /**
    * Updates the specified TagOption.
    */
   updateTagOption(params: ServiceCatalog.Types.UpdateTagOptionInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateTagOptionOutput) => void): Request<ServiceCatalog.Types.UpdateTagOptionOutput, AWSError>;
@@ -495,6 +639,10 @@ declare namespace ServiceCatalog {
      * The portfolio identifier.
      */
     PortfolioId: Id;
+    /**
+     * The type of shared portfolios to accept. The default is to accept imported portfolios.    AWS_ORGANIZATIONS - Accept portfolios shared by the master account of your organization.    IMPORTED - Accept imported portfolios.    AWS_SERVICECATALOG - Not supported. (Throws ResourceNotFoundException.)   For example, aws servicecatalog accept-portfolio-share --portfolio-id "port-2qwzkwxt3y5fk" --portfolio-share-type AWS_ORGANIZATIONS 
+     */
+    PortfolioShareType?: PortfolioShareType;
   }
   export interface AcceptPortfolioShareOutput {
   }
@@ -510,6 +658,7 @@ declare namespace ServiceCatalog {
   }
   export type AccessLevelFilterKey = "Account"|"Role"|"User"|string;
   export type AccessLevelFilterValue = string;
+  export type AccessStatus = "ENABLED"|"UNDER_CHANGE"|"DISABLED"|string;
   export type AccountId = string;
   export type AccountIds = AccountId[];
   export type AddTags = Tag[];
@@ -556,6 +705,26 @@ declare namespace ServiceCatalog {
   }
   export interface AssociateProductWithPortfolioOutput {
   }
+  export interface AssociateServiceActionWithProvisioningArtifactInput {
+    /**
+     * The product identifier. For example, prod-abcdzk7xy33qa.
+     */
+    ProductId: Id;
+    /**
+     * The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
+     */
+    ProvisioningArtifactId: Id;
+    /**
+     * The self-service action identifier. For example, act-fs7abcd89wxyz.
+     */
+    ServiceActionId: Id;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface AssociateServiceActionWithProvisioningArtifactOutput {
+  }
   export interface AssociateTagOptionWithResourceInput {
     /**
      * The resource identifier.
@@ -569,6 +738,38 @@ declare namespace ServiceCatalog {
   export interface AssociateTagOptionWithResourceOutput {
   }
   export type AttributeValue = string;
+  export interface BatchAssociateServiceActionWithProvisioningArtifactInput {
+    /**
+     * One or more associations, each consisting of the Action ID, the Product ID, and the Provisioning Artifact ID.
+     */
+    ServiceActionAssociations: ServiceActionAssociations;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface BatchAssociateServiceActionWithProvisioningArtifactOutput {
+    /**
+     * An object that contains a list of errors, along with information to help you identify the self-service action.
+     */
+    FailedServiceActionAssociations?: FailedServiceActionAssociations;
+  }
+  export interface BatchDisassociateServiceActionFromProvisioningArtifactInput {
+    /**
+     * One or more associations, each consisting of the Action ID, the Product ID, and the Provisioning Artifact ID.
+     */
+    ServiceActionAssociations: ServiceActionAssociations;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface BatchDisassociateServiceActionFromProvisioningArtifactOutput {
+    /**
+     * An object that contains a list of errors, along with information to help you identify the self-service action.
+     */
+    FailedServiceActionAssociations?: FailedServiceActionAssociations;
+  }
   export type CausingEntity = string;
   export type ChangeAction = "ADD"|"MODIFY"|"REMOVE"|string;
   export interface CloudWatchDashboard {
@@ -586,7 +787,7 @@ declare namespace ServiceCatalog {
      */
     ConstraintId?: Id;
     /**
-     * The type of constraint.    LAUNCH     NOTIFICATION     TEMPLATE   
+     * The type of constraint.    LAUNCH     NOTIFICATION    STACKSET    TEMPLATE   
      */
     Type?: ConstraintType;
     /**
@@ -603,7 +804,7 @@ declare namespace ServiceCatalog {
   export type ConstraintSummaries = ConstraintSummary[];
   export interface ConstraintSummary {
     /**
-     * The type of constraint.    LAUNCH     NOTIFICATION     TEMPLATE   
+     * The type of constraint.    LAUNCH     NOTIFICATION    STACKSET    TEMPLATE   
      */
     Type?: ConstraintType;
     /**
@@ -665,11 +866,11 @@ declare namespace ServiceCatalog {
      */
     ProductId: Id;
     /**
-     * The constraint parameters, in JSON format. The syntax depends on the constraint type as follows:  LAUNCH  Specify the RoleArn property as follows: \"RoleArn\" : \"arn:aws:iam::123456789012:role/LaunchRole\"  NOTIFICATION  Specify the NotificationArns property as follows: \"NotificationArns\" : [\"arn:aws:sns:us-east-1:123456789012:Topic\"]  TEMPLATE  Specify the Rules property. For more information, see Template Constraint Rules.  
+     * The constraint parameters, in JSON format. The syntax depends on the constraint type as follows:  LAUNCH  Specify the RoleArn property as follows:  {"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"}  You cannot have both a LAUNCH and a STACKSET constraint. You also cannot have more than one LAUNCH constraint on a product and portfolio.  NOTIFICATION  Specify the NotificationArns property as follows:  {"NotificationArns" : ["arn:aws:sns:us-east-1:123456789012:Topic"]}   STACKSET  Specify the Parameters property as follows:  {"Version": "String", "Properties": {"AccountList": [ "String" ], "RegionList": [ "String" ], "AdminRole": "String", "ExecutionRole": "String"}}  You cannot have both a LAUNCH and a STACKSET constraint. You also cannot have more than one STACKSET constraint on a product and portfolio. Products with a STACKSET constraint will launch an AWS CloudFormation stack set.  TEMPLATE  Specify the Rules property. For more information, see Template Constraint Rules.  
      */
     Parameters: ConstraintParameters;
     /**
-     * The type of constraint.    LAUNCH     NOTIFICATION     TEMPLATE   
+     * The type of constraint.    LAUNCH     NOTIFICATION     STACKSET     TEMPLATE   
      */
     Type: ConstraintType;
     /**
@@ -741,11 +942,19 @@ declare namespace ServiceCatalog {
      */
     PortfolioId: Id;
     /**
-     * The AWS account ID.
+     * The AWS account ID. For example, 123456789012.
      */
-    AccountId: AccountId;
+    AccountId?: AccountId;
+    /**
+     * The organization node to whom you are going to share. If OrganizationNode is passed in, PortfolioShare will be created for the node and its children (when applies), and a PortfolioShareToken will be returned in the output in order for the administrator to monitor the status of the PortfolioShare creation process.
+     */
+    OrganizationNode?: OrganizationNode;
   }
   export interface CreatePortfolioShareOutput {
+    /**
+     * The portfolio share unique identifier. This will only be returned if portfolio is shared to an organization node.
+     */
+    PortfolioShareToken?: PortfolioShareToken;
   }
   export interface CreateProductInput {
     /**
@@ -911,6 +1120,38 @@ declare namespace ServiceCatalog {
      */
     Status?: Status;
   }
+  export interface CreateServiceActionInput {
+    /**
+     * The self-service action name.
+     */
+    Name: ServiceActionName;
+    /**
+     * The service action definition type. For example, SSM_AUTOMATION.
+     */
+    DefinitionType: ServiceActionDefinitionType;
+    /**
+     * The self-service action definition. Can be one of the following:  Name  The name of the AWS Systems Manager Document. For example, AWS-RestartEC2Instance.  Version  The AWS Systems Manager automation document version. For example, "Version": "1"   AssumeRole  The Amazon Resource Name (ARN) of the role that performs the self-service actions on your behalf. For example, "AssumeRole": "arn:aws:iam::12345678910:role/ActionRole". To reuse the provisioned product launch role, set to "AssumeRole": "LAUNCH_ROLE".  Parameters  The list of parameters in JSON format. For example: [{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}].  
+     */
+    Definition: ServiceActionDefinitionMap;
+    /**
+     * The self-service action description.
+     */
+    Description?: ServiceActionDescription;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.
+     */
+    IdempotencyToken: IdempotencyToken;
+  }
+  export interface CreateServiceActionOutput {
+    /**
+     * An object containing information about the self-service action.
+     */
+    ServiceActionDetail?: ServiceActionDetail;
+  }
   export interface CreateTagOptionInput {
     /**
      * The TagOption key.
@@ -966,9 +1207,17 @@ declare namespace ServiceCatalog {
     /**
      * The AWS account ID.
      */
-    AccountId: AccountId;
+    AccountId?: AccountId;
+    /**
+     * The organization node to whom you are going to stop sharing.
+     */
+    OrganizationNode?: OrganizationNode;
   }
   export interface DeletePortfolioShareOutput {
+    /**
+     * The portfolio share unique identifier. This will only be returned if delete is made to an organization node.
+     */
+    PortfolioShareToken?: PortfolioShareToken;
   }
   export interface DeleteProductInput {
     /**
@@ -1013,6 +1262,26 @@ declare namespace ServiceCatalog {
     ProvisioningArtifactId: Id;
   }
   export interface DeleteProvisioningArtifactOutput {
+  }
+  export interface DeleteServiceActionInput {
+    /**
+     * The self-service action identifier. For example, act-fs7abcd89wxyz.
+     */
+    Id: Id;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface DeleteServiceActionOutput {
+  }
+  export interface DeleteTagOptionInput {
+    /**
+     * The TagOption identifier.
+     */
+    Id: TagOptionId;
+  }
+  export interface DeleteTagOptionOutput {
   }
   export interface DescribeConstraintInput {
     /**
@@ -1085,6 +1354,34 @@ declare namespace ServiceCatalog {
      * Information about the TagOptions associated with the portfolio.
      */
     TagOptions?: TagOptionDetails;
+  }
+  export interface DescribePortfolioShareStatusInput {
+    /**
+     * The token for the portfolio share operation. This token is returned either by CreatePortfolioShare or by DeletePortfolioShare.
+     */
+    PortfolioShareToken: PortfolioShareToken;
+  }
+  export interface DescribePortfolioShareStatusOutput {
+    /**
+     * The token for the portfolio share operation. For example, share-6v24abcdefghi.
+     */
+    PortfolioShareToken?: PortfolioShareToken;
+    /**
+     * The portfolio identifier.
+     */
+    PortfolioId?: Id;
+    /**
+     * Organization node identifier. It can be either account id, organizational unit id or organization id.
+     */
+    OrganizationNodeValue?: OrganizationNodeValue;
+    /**
+     * Status of the portfolio share operation.
+     */
+    Status?: ShareStatus;
+    /**
+     * Information about the portfolio share operation.
+     */
+    ShareDetails?: ShareDetails;
   }
   export interface DescribeProductAsAdminInput {
     /**
@@ -1198,7 +1495,7 @@ declare namespace ServiceCatalog {
      */
     ProvisionedProductPlanDetails?: ProvisionedProductPlanDetails;
     /**
-     * Information about the resources changes that will occur when the plan is executed.
+     * Information about the resource changes that will occur when the plan is executed.
      */
     ResourceChanges?: ResourceChanges;
     /**
@@ -1273,6 +1570,10 @@ declare namespace ServiceCatalog {
      * Information about the TagOptions associated with the resource.
      */
     TagOptions?: TagOptionSummaries;
+    /**
+     * An object that contains information about preferences, such as regions and accounts, for the provisioning artifact.
+     */
+    ProvisioningArtifactPreferences?: ProvisioningArtifactPreferences;
   }
   export interface DescribeRecordInput {
     /**
@@ -1306,6 +1607,22 @@ declare namespace ServiceCatalog {
      */
     NextPageToken?: PageToken;
   }
+  export interface DescribeServiceActionInput {
+    /**
+     * The self-service action identifier.
+     */
+    Id: Id;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface DescribeServiceActionOutput {
+    /**
+     * Detailed information about the self-service action.
+     */
+    ServiceActionDetail?: ServiceActionDetail;
+  }
   export interface DescribeTagOptionInput {
     /**
      * The TagOption identifier.
@@ -1319,6 +1636,10 @@ declare namespace ServiceCatalog {
     TagOptionDetail?: TagOptionDetail;
   }
   export type Description = string;
+  export interface DisableAWSOrganizationsAccessInput {
+  }
+  export interface DisableAWSOrganizationsAccessOutput {
+  }
   export interface DisassociatePrincipalFromPortfolioInput {
     /**
      * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
@@ -1351,6 +1672,26 @@ declare namespace ServiceCatalog {
   }
   export interface DisassociateProductFromPortfolioOutput {
   }
+  export interface DisassociateServiceActionFromProvisioningArtifactInput {
+    /**
+     * The product identifier. For example, prod-abcdzk7xy33qa.
+     */
+    ProductId: Id;
+    /**
+     * The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
+     */
+    ProvisioningArtifactId: Id;
+    /**
+     * The self-service action identifier. For example, act-fs7abcd89wxyz.
+     */
+    ServiceActionId: Id;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface DisassociateServiceActionFromProvisioningArtifactOutput {
+  }
   export interface DisassociateTagOptionFromResourceInput {
     /**
      * The resource identifier.
@@ -1363,6 +1704,11 @@ declare namespace ServiceCatalog {
   }
   export interface DisassociateTagOptionFromResourceOutput {
   }
+  export interface EnableAWSOrganizationsAccessInput {
+  }
+  export interface EnableAWSOrganizationsAccessOutput {
+  }
+  export type Error = string;
   export type ErrorCode = string;
   export type ErrorDescription = string;
   export type EvaluationType = "STATIC"|"DYNAMIC"|string;
@@ -1385,6 +1731,61 @@ declare namespace ServiceCatalog {
      * Information about the result of provisioning the product.
      */
     RecordDetail?: RecordDetail;
+  }
+  export interface ExecuteProvisionedProductServiceActionInput {
+    /**
+     * The identifier of the provisioned product.
+     */
+    ProvisionedProductId: Id;
+    /**
+     * The self-service action identifier. For example, act-fs7abcd89wxyz.
+     */
+    ServiceActionId: Id;
+    /**
+     * An idempotency token that uniquely identifies the execute request.
+     */
+    ExecuteToken: IdempotencyToken;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface ExecuteProvisionedProductServiceActionOutput {
+    /**
+     * An object containing detailed information about the result of provisioning the product.
+     */
+    RecordDetail?: RecordDetail;
+  }
+  export interface FailedServiceActionAssociation {
+    /**
+     * The self-service action identifier. For example, act-fs7abcd89wxyz.
+     */
+    ServiceActionId?: Id;
+    /**
+     * The product identifier. For example, prod-abcdzk7xy33qa.
+     */
+    ProductId?: Id;
+    /**
+     * The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
+     */
+    ProvisioningArtifactId?: Id;
+    /**
+     * The error code. Valid values are listed below.
+     */
+    ErrorCode?: ServiceActionAssociationErrorCode;
+    /**
+     * A text description of the error.
+     */
+    ErrorMessage?: ServiceActionAssociationErrorMessage;
+  }
+  export type FailedServiceActionAssociations = FailedServiceActionAssociation[];
+  export interface GetAWSOrganizationsAccessStatusInput {
+  }
+  export interface GetAWSOrganizationsAccessStatusOutput {
+    /**
+     * The status of the portfolio share feature.
+     */
+    AccessStatus?: AccessStatus;
   }
   export type HasDefaultPath = boolean;
   export type Id = string;
@@ -1425,6 +1826,10 @@ declare namespace ServiceCatalog {
      * The maximum number of items to return with this call.
      */
     PageSize?: PageSize;
+    /**
+     * The type of shared portfolios to list. The default is to list imported portfolios.    AWS_ORGANIZATIONS - List portfolios shared by the master account of your organization    AWS_SERVICECATALOG - List default portfolios    IMPORTED - List imported portfolios  
+     */
+    PortfolioShareType?: PortfolioShareType;
   }
   export interface ListAcceptedPortfolioSharesOutput {
     /**
@@ -1491,6 +1896,38 @@ declare namespace ServiceCatalog {
      * Information about the launch path.
      */
     LaunchPathSummaries?: LaunchPathSummaries;
+    /**
+     * The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
+     */
+    NextPageToken?: PageToken;
+  }
+  export interface ListOrganizationPortfolioAccessInput {
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The portfolio identifier. For example, port-2abcdext3y5fk.
+     */
+    PortfolioId: Id;
+    /**
+     * The organization node type that will be returned in the output.    ORGANIZATION - Organization that has access to the portfolio.     ORGANIZATIONAL_UNIT - Organizational unit that has access to the portfolio within your organization.    ACCOUNT - Account that has access to the portfolio within your organization.  
+     */
+    OrganizationNodeType: OrganizationNodeType;
+    /**
+     * The page token for the next set of results. To retrieve the first set of results, use null.
+     */
+    PageToken?: PageToken;
+    /**
+     * The maximum number of items to return with this call.
+     */
+    PageSize?: PageSize;
+  }
+  export interface ListOrganizationPortfolioAccessOutput {
+    /**
+     * Displays information about the organization nodes.
+     */
+    OrganizationNodes?: OrganizationNodes;
     /**
      * The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
      */
@@ -1628,6 +2065,34 @@ declare namespace ServiceCatalog {
      */
     NextPageToken?: PageToken;
   }
+  export interface ListProvisioningArtifactsForServiceActionInput {
+    /**
+     * The self-service action identifier. For example, act-fs7abcd89wxyz.
+     */
+    ServiceActionId: Id;
+    /**
+     * The maximum number of items to return with this call.
+     */
+    PageSize?: PageSize;
+    /**
+     * The page token for the next set of results. To retrieve the first set of results, use null.
+     */
+    PageToken?: PageToken;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface ListProvisioningArtifactsForServiceActionOutput {
+    /**
+     * An array of objects with information about product views and provisioning artifacts.
+     */
+    ProvisioningArtifactViews?: ProvisioningArtifactViews;
+    /**
+     * The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
+     */
+    NextPageToken?: PageToken;
+  }
   export interface ListProvisioningArtifactsInput {
     /**
      * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
@@ -1718,6 +2183,62 @@ declare namespace ServiceCatalog {
      */
     PageToken?: PageToken;
   }
+  export interface ListServiceActionsForProvisioningArtifactInput {
+    /**
+     * The product identifier. For example, prod-abcdzk7xy33qa.
+     */
+    ProductId: Id;
+    /**
+     * The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
+     */
+    ProvisioningArtifactId: Id;
+    /**
+     * The maximum number of items to return with this call.
+     */
+    PageSize?: PageSize;
+    /**
+     * The page token for the next set of results. To retrieve the first set of results, use null.
+     */
+    PageToken?: PageToken;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface ListServiceActionsForProvisioningArtifactOutput {
+    /**
+     * An object containing information about the self-service actions associated with the provisioning artifact.
+     */
+    ServiceActionSummaries?: ServiceActionSummaries;
+    /**
+     * The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
+     */
+    NextPageToken?: PageToken;
+  }
+  export interface ListServiceActionsInput {
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The maximum number of items to return with this call.
+     */
+    PageSize?: PageSize;
+    /**
+     * The page token for the next set of results. To retrieve the first set of results, use null.
+     */
+    PageToken?: PageToken;
+  }
+  export interface ListServiceActionsOutput {
+    /**
+     * An object containing information about the service actions associated with the provisioning artifact.
+     */
+    ServiceActionSummaries?: ServiceActionSummaries;
+    /**
+     * The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
+     */
+    NextPageToken?: PageToken;
+  }
   export interface ListTagOptionsFilters {
     /**
      * The TagOption key.
@@ -1757,9 +2278,24 @@ declare namespace ServiceCatalog {
     PageToken?: PageToken;
   }
   export type LogicalResourceId = string;
+  export type Message = string;
+  export type Namespaces = AccountId[];
   export type NoEcho = boolean;
   export type NotificationArn = string;
   export type NotificationArns = NotificationArn[];
+  export interface OrganizationNode {
+    /**
+     * The organization node type.
+     */
+    Type?: OrganizationNodeType;
+    /**
+     * The identifier of the organization node.
+     */
+    Value?: OrganizationNodeValue;
+  }
+  export type OrganizationNodeType = "ORGANIZATION"|"ORGANIZATIONAL_UNIT"|"ACCOUNT"|string;
+  export type OrganizationNodeValue = string;
+  export type OrganizationNodes = OrganizationNode[];
   export type OutputKey = string;
   export type OutputValue = string;
   export type PageSize = number;
@@ -1806,6 +2342,8 @@ declare namespace ServiceCatalog {
   export type PortfolioDetails = PortfolioDetail[];
   export type PortfolioDisplayName = string;
   export type PortfolioName = string;
+  export type PortfolioShareToken = string;
+  export type PortfolioShareType = "IMPORTED"|"AWS_SERVICECATALOG"|"AWS_ORGANIZATIONS"|string;
   export interface Principal {
     /**
      * The ARN of the principal (IAM user, role, or group).
@@ -1938,6 +2476,10 @@ declare namespace ServiceCatalog {
      */
     ProvisioningParameters?: ProvisioningParameters;
     /**
+     * An object that contains information about the provisioning preferences for a stack set.
+     */
+    ProvisioningPreferences?: ProvisioningPreferences;
+    /**
      * One or more tags.
      */
     Tags?: Tags;
@@ -1966,7 +2508,7 @@ declare namespace ServiceCatalog {
      */
     Arn?: ProvisionedProductNameOrArn;
     /**
-     * The type of provisioned product. The supported value is CFN_STACK.
+     * The type of provisioned product. The supported values are CFN_STACK and CFN_STACKSET.
      */
     Type?: ProvisionedProductType;
     /**
@@ -1974,7 +2516,7 @@ declare namespace ServiceCatalog {
      */
     Id?: Id;
     /**
-     * The current status of the provisioned product.    AVAILABLE - Stable state, ready to perform any operation. The most recent operation succeeded and completed.    UNDER_CHANGE - Transitive state, operations performed might not have valid results. Wait for an AVAILABLE status before performing operations.    TAINTED - Stable state, ready to perform any operation. The stack has completed the requested operation but is not exactly what was requested. For example, a request to update to a new version failed and the stack rolled back to the current version.    ERROR - An unexpected error occurred, the provisioned product exists but the stack is not running. For example, CloudFormation received a parameter value that was not valid and could not launch the stack.  
+     * The current status of the provisioned product.    AVAILABLE - Stable state, ready to perform any operation. The most recent operation succeeded and completed.    UNDER_CHANGE - Transitive state. Operations performed might not have valid results. Wait for an AVAILABLE status before performing operations.    TAINTED - Stable state, ready to perform any operation. The stack has completed the requested operation but is not exactly what was requested. For example, a request to update to a new version failed and the stack rolled back to the current version.    ERROR - An unexpected error occurred. The provisioned product exists but the stack is not running. For example, CloudFormation received a parameter value that was not valid and could not launch the stack.    PLAN_IN_PROGRESS - Transitive state. The plan operations were performed to provision a new product, but resources have not yet been created. After reviewing the list of resources to be created, execute the plan. Wait for an AVAILABLE status before performing operations.  
      */
     Status?: ProvisionedProductStatus;
     /**
@@ -2029,7 +2571,7 @@ declare namespace ServiceCatalog {
      */
     Arn?: ProvisionedProductNameOrArn;
     /**
-     * The type of provisioned product. The supported value is CFN_STACK.
+     * The type of provisioned product. The supported values are CFN_STACK and CFN_STACKSET.
      */
     Type?: ProvisionedProductType;
     /**
@@ -2037,7 +2579,7 @@ declare namespace ServiceCatalog {
      */
     Id?: ProvisionedProductId;
     /**
-     * The current status of the provisioned product.    AVAILABLE - Stable state, ready to perform any operation. The most recent operation succeeded and completed.    UNDER_CHANGE - Transitive state, operations performed might not have valid results. Wait for an AVAILABLE status before performing operations.    TAINTED - Stable state, ready to perform any operation. The stack has completed the requested operation but is not exactly what was requested. For example, a request to update to a new version failed and the stack rolled back to the current version.    ERROR - An unexpected error occurred, the provisioned product exists but the stack is not running. For example, CloudFormation received a parameter value that was not valid and could not launch the stack.  
+     * The current status of the provisioned product.    AVAILABLE - Stable state, ready to perform any operation. The most recent operation succeeded and completed.    UNDER_CHANGE - Transitive state. Operations performed might not have valid results. Wait for an AVAILABLE status before performing operations.    TAINTED - Stable state, ready to perform any operation. The stack has completed the requested operation but is not exactly what was requested. For example, a request to update to a new version failed and the stack rolled back to the current version.    ERROR - An unexpected error occurred. The provisioned product exists but the stack is not running. For example, CloudFormation received a parameter value that was not valid and could not launch the stack.    PLAN_IN_PROGRESS - Transitive state. The plan operations were performed to provision a new product, but resources have not yet been created. After reviewing the list of resources to be created, execute the plan. Wait for an AVAILABLE status before performing operations.  
      */
     Status?: ProvisionedProductStatus;
     /**
@@ -2056,6 +2598,14 @@ declare namespace ServiceCatalog {
      * The record identifier of the last request performed on this provisioned product.
      */
     LastRecordId?: LastRequestId;
+    /**
+     * The product identifier. For example, prod-abcdzk7xy33qa.
+     */
+    ProductId?: Id;
+    /**
+     * The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
+     */
+    ProvisioningArtifactId?: Id;
   }
   export type ProvisionedProductDetails = ProvisionedProductDetail[];
   export type ProvisionedProductFilters = {[key: string]: ProvisionedProductViewFilterValues};
@@ -2239,6 +2789,16 @@ declare namespace ServiceCatalog {
     ParameterConstraints?: ParameterConstraints;
   }
   export type ProvisioningArtifactParameters = ProvisioningArtifactParameter[];
+  export interface ProvisioningArtifactPreferences {
+    /**
+     * One or more AWS accounts where stack instances are deployed from the stack set. These accounts can be scoped in ProvisioningPreferences$StackSetAccounts and UpdateProvisioningPreferences$StackSetAccounts. Applicable only to a CFN_STACKSET provisioned product type.
+     */
+    StackSetAccounts?: StackSetAccounts;
+    /**
+     * One or more AWS Regions where stack instances are deployed from the stack set. These regions can be scoped in ProvisioningPreferences$StackSetRegions and UpdateProvisioningPreferences$StackSetRegions. Applicable only to a CFN_STACKSET provisioned product type.
+     */
+    StackSetRegions?: StackSetRegions;
+  }
   export interface ProvisioningArtifactProperties {
     /**
      * The name of the provisioning artifact (for example, v1 v2beta). No spaces are allowed.
@@ -2283,6 +2843,17 @@ declare namespace ServiceCatalog {
     ProvisioningArtifactMetadata?: ProvisioningArtifactInfo;
   }
   export type ProvisioningArtifactType = "CLOUD_FORMATION_TEMPLATE"|"MARKETPLACE_AMI"|"MARKETPLACE_CAR"|string;
+  export interface ProvisioningArtifactView {
+    /**
+     * Summary information about a product view.
+     */
+    ProductViewSummary?: ProductViewSummary;
+    /**
+     * Information about a provisioning artifact. A provisioning artifact is also known as a product version.
+     */
+    ProvisioningArtifact?: ProvisioningArtifact;
+  }
+  export type ProvisioningArtifactViews = ProvisioningArtifactView[];
   export type ProvisioningArtifacts = ProvisioningArtifact[];
   export interface ProvisioningParameter {
     /**
@@ -2295,6 +2866,32 @@ declare namespace ServiceCatalog {
     Value?: ParameterValue;
   }
   export type ProvisioningParameters = ProvisioningParameter[];
+  export interface ProvisioningPreferences {
+    /**
+     * One or more AWS accounts that will have access to the provisioned product. Applicable only to a CFN_STACKSET provisioned product type. The AWS accounts specified should be within the list of accounts in the STACKSET constraint. To get the list of accounts in the STACKSET constraint, use the DescribeProvisioningParameters operation. If no values are specified, the default value is all accounts from the STACKSET constraint.
+     */
+    StackSetAccounts?: StackSetAccounts;
+    /**
+     * One or more AWS Regions where the provisioned product will be available. Applicable only to a CFN_STACKSET provisioned product type. The specified regions should be within the list of regions from the STACKSET constraint. To get the list of regions in the STACKSET constraint, use the DescribeProvisioningParameters operation. If no values are specified, the default value is all regions from the STACKSET constraint.
+     */
+    StackSetRegions?: StackSetRegions;
+    /**
+     * The number of accounts, per region, for which this operation can fail before AWS Service Catalog stops the operation in that region. If the operation is stopped in a region, AWS Service Catalog doesn't attempt the operation in any subsequent regions. Applicable only to a CFN_STACKSET provisioned product type. Conditional: You must specify either StackSetFailureToleranceCount or StackSetFailureTolerancePercentage, but not both. The default value is 0 if no value is specified.
+     */
+    StackSetFailureToleranceCount?: StackSetFailureToleranceCount;
+    /**
+     * The percentage of accounts, per region, for which this stack operation can fail before AWS Service Catalog stops the operation in that region. If the operation is stopped in a region, AWS Service Catalog doesn't attempt the operation in any subsequent regions. When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number. Applicable only to a CFN_STACKSET provisioned product type. Conditional: You must specify either StackSetFailureToleranceCount or StackSetFailureTolerancePercentage, but not both.
+     */
+    StackSetFailureTolerancePercentage?: StackSetFailureTolerancePercentage;
+    /**
+     * The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of StackSetFailureToleranceCount. StackSetMaxConcurrentCount is at most one more than the StackSetFailureToleranceCount. Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling. Applicable only to a CFN_STACKSET provisioned product type. Conditional: You must specify either StackSetMaxConcurrentCount or StackSetMaxConcurrentPercentage, but not both.
+     */
+    StackSetMaxConcurrencyCount?: StackSetMaxConcurrencyCount;
+    /**
+     * The maximum percentage of accounts in which to perform this operation at one time. When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, AWS Service Catalog sets the number as 1 instead. Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling. Applicable only to a CFN_STACKSET provisioned product type. Conditional: You must specify either StackSetMaxConcurrentCount or StackSetMaxConcurrentPercentage, but not both.
+     */
+    StackSetMaxConcurrencyPercentage?: StackSetMaxConcurrencyPercentage;
+  }
   export interface RecordDetail {
     /**
      * The identifier of the record.
@@ -2317,7 +2914,7 @@ declare namespace ServiceCatalog {
      */
     UpdatedTime?: UpdatedTime;
     /**
-     * The type of provisioned product. The supported value is CFN_STACK.
+     * The type of provisioned product. The supported values are CFN_STACK and CFN_STACKSET.
      */
     ProvisionedProductType?: ProvisionedProductType;
     /**
@@ -2391,6 +2988,7 @@ declare namespace ServiceCatalog {
   export type RecordTagValue = string;
   export type RecordTags = RecordTag[];
   export type RecordType = string;
+  export type Region = string;
   export interface RejectPortfolioShareInput {
     /**
      * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
@@ -2400,6 +2998,10 @@ declare namespace ServiceCatalog {
      * The portfolio identifier.
      */
     PortfolioId: Id;
+    /**
+     * The type of shared portfolios to reject. The default is to reject imported portfolios.    AWS_ORGANIZATIONS - Reject portfolios shared by the master account of your organization.    IMPORTED - Reject imported portfolios.    AWS_SERVICECATALOG - Not supported. (Throws ResourceNotFoundException.)   For example, aws servicecatalog reject-portfolio-share --portfolio-id "port-2qwzkwxt3y5fk" --portfolio-share-type AWS_ORGANIZATIONS 
+     */
+    PortfolioShareType?: PortfolioShareType;
   }
   export interface RejectPortfolioShareOutput {
   }
@@ -2439,11 +3041,11 @@ declare namespace ServiceCatalog {
   }
   export interface ResourceChangeDetail {
     /**
-     * Information about the resource attribute that will be modified.
+     * Information about the resource attribute to be modified.
      */
     Target?: ResourceTargetDefinition;
     /**
-     * For static evaluations, the value the resource attribute will change and the new value is known. For dynamic evaluations, the value might change, and any new value will be determined when the plan is updated.
+     * For static evaluations, the value of the resource attribute will change and the new value is known. For dynamic evaluations, the value might change, and any new value will be determined when the plan is updated.
      */
     Evaluation?: EvaluationType;
     /**
@@ -2484,7 +3086,7 @@ declare namespace ServiceCatalog {
   export type ResourceId = string;
   export interface ResourceTargetDefinition {
     /**
-     * The attribute that will change.
+     * The attribute to be changed.
      */
     Attribute?: ResourceAttribute;
     /**
@@ -2492,7 +3094,7 @@ declare namespace ServiceCatalog {
      */
     Name?: PropertyName;
     /**
-     * If the attribute is Properties, indicates whether a change to this property causes the resource to be recreated.
+     * If the attribute is Properties, indicates whether a change to this property causes the resource to be re-created.
      */
     RequiresRecreation?: RequiresRecreation;
   }
@@ -2657,13 +3259,99 @@ declare namespace ServiceCatalog {
     NextPageToken?: PageToken;
   }
   export type SearchProvisionedProductsPageSize = number;
+  export interface ServiceActionAssociation {
+    /**
+     * The self-service action identifier. For example, act-fs7abcd89wxyz.
+     */
+    ServiceActionId: Id;
+    /**
+     * The product identifier. For example, prod-abcdzk7xy33qa.
+     */
+    ProductId: Id;
+    /**
+     * The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
+     */
+    ProvisioningArtifactId: Id;
+  }
+  export type ServiceActionAssociationErrorCode = "DUPLICATE_RESOURCE"|"INTERNAL_FAILURE"|"LIMIT_EXCEEDED"|"RESOURCE_NOT_FOUND"|"THROTTLING"|string;
+  export type ServiceActionAssociationErrorMessage = string;
+  export type ServiceActionAssociations = ServiceActionAssociation[];
+  export type ServiceActionDefinitionKey = "Name"|"Version"|"AssumeRole"|"Parameters"|string;
+  export type ServiceActionDefinitionMap = {[key: string]: ServiceActionDefinitionValue};
+  export type ServiceActionDefinitionType = "SSM_AUTOMATION"|string;
+  export type ServiceActionDefinitionValue = string;
+  export type ServiceActionDescription = string;
+  export interface ServiceActionDetail {
+    /**
+     * Summary information about the self-service action.
+     */
+    ServiceActionSummary?: ServiceActionSummary;
+    /**
+     * A map that defines the self-service action.
+     */
+    Definition?: ServiceActionDefinitionMap;
+  }
+  export type ServiceActionName = string;
+  export type ServiceActionSummaries = ServiceActionSummary[];
+  export interface ServiceActionSummary {
+    /**
+     * The self-service action identifier.
+     */
+    Id?: Id;
+    /**
+     * The self-service action name.
+     */
+    Name?: ServiceActionName;
+    /**
+     * The self-service action description.
+     */
+    Description?: ServiceActionDescription;
+    /**
+     * The self-service action definition type. For example, SSM_AUTOMATION.
+     */
+    DefinitionType?: ServiceActionDefinitionType;
+  }
+  export interface ShareDetails {
+    /**
+     * List of accounts for whom the operation succeeded.
+     */
+    SuccessfulShares?: SuccessfulShares;
+    /**
+     * List of errors.
+     */
+    ShareErrors?: ShareErrors;
+  }
+  export interface ShareError {
+    /**
+     * List of accounts impacted by the error.
+     */
+    Accounts?: Namespaces;
+    /**
+     * Information about the error.
+     */
+    Message?: Message;
+    /**
+     * Error type that happened when processing the operation.
+     */
+    Error?: Error;
+  }
+  export type ShareErrors = ShareError[];
+  export type ShareStatus = "NOT_STARTED"|"IN_PROGRESS"|"COMPLETED"|"COMPLETED_WITH_ERRORS"|"ERROR"|string;
   export type SortField = string;
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export type SourceProvisioningArtifactProperties = SourceProvisioningArtifactPropertiesMap[];
   export type SourceProvisioningArtifactPropertiesMap = {[key: string]: ProvisioningArtifactPropertyValue};
+  export type StackSetAccounts = AccountId[];
+  export type StackSetFailureToleranceCount = number;
+  export type StackSetFailureTolerancePercentage = number;
+  export type StackSetMaxConcurrencyCount = number;
+  export type StackSetMaxConcurrencyPercentage = number;
+  export type StackSetOperationType = "CREATE"|"UPDATE"|"DELETE"|string;
+  export type StackSetRegions = Region[];
   export type Status = "AVAILABLE"|"CREATING"|"FAILED"|string;
   export type StatusDetail = string;
   export type StatusMessage = string;
+  export type SuccessfulShares = AccountId[];
   export type SupportDescription = string;
   export type SupportEmail = string;
   export type SupportUrl = string;
@@ -2883,7 +3571,7 @@ declare namespace ServiceCatalog {
      */
     ProvisionedProductId?: Id;
     /**
-     * The identifier of the provisioned product.
+     * The identifier of the product.
      */
     ProductId?: Id;
     /**
@@ -2898,6 +3586,10 @@ declare namespace ServiceCatalog {
      * The new parameters.
      */
     ProvisioningParameters?: UpdateProvisioningParameters;
+    /**
+     * An object that contains information about the provisioning preferences for a stack set.
+     */
+    ProvisioningPreferences?: UpdateProvisioningPreferences;
     /**
      * The idempotency token that uniquely identifies the provisioning update request.
      */
@@ -2964,6 +3656,64 @@ declare namespace ServiceCatalog {
     UsePreviousValue?: UsePreviousValue;
   }
   export type UpdateProvisioningParameters = UpdateProvisioningParameter[];
+  export interface UpdateProvisioningPreferences {
+    /**
+     * One or more AWS accounts that will have access to the provisioned product. Applicable only to a CFN_STACKSET provisioned product type. The AWS accounts specified should be within the list of accounts in the STACKSET constraint. To get the list of accounts in the STACKSET constraint, use the DescribeProvisioningParameters operation. If no values are specified, the default value is all accounts from the STACKSET constraint.
+     */
+    StackSetAccounts?: StackSetAccounts;
+    /**
+     * One or more AWS Regions where the provisioned product will be available. Applicable only to a CFN_STACKSET provisioned product type. The specified regions should be within the list of regions from the STACKSET constraint. To get the list of regions in the STACKSET constraint, use the DescribeProvisioningParameters operation. If no values are specified, the default value is all regions from the STACKSET constraint.
+     */
+    StackSetRegions?: StackSetRegions;
+    /**
+     * The number of accounts, per region, for which this operation can fail before AWS Service Catalog stops the operation in that region. If the operation is stopped in a region, AWS Service Catalog doesn't attempt the operation in any subsequent regions. Applicable only to a CFN_STACKSET provisioned product type. Conditional: You must specify either StackSetFailureToleranceCount or StackSetFailureTolerancePercentage, but not both. The default value is 0 if no value is specified.
+     */
+    StackSetFailureToleranceCount?: StackSetFailureToleranceCount;
+    /**
+     * The percentage of accounts, per region, for which this stack operation can fail before AWS Service Catalog stops the operation in that region. If the operation is stopped in a region, AWS Service Catalog doesn't attempt the operation in any subsequent regions. When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number. Applicable only to a CFN_STACKSET provisioned product type. Conditional: You must specify either StackSetFailureToleranceCount or StackSetFailureTolerancePercentage, but not both.
+     */
+    StackSetFailureTolerancePercentage?: StackSetFailureTolerancePercentage;
+    /**
+     * The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of StackSetFailureToleranceCount. StackSetMaxConcurrentCount is at most one more than the StackSetFailureToleranceCount. Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling. Applicable only to a CFN_STACKSET provisioned product type. Conditional: You must specify either StackSetMaxConcurrentCount or StackSetMaxConcurrentPercentage, but not both.
+     */
+    StackSetMaxConcurrencyCount?: StackSetMaxConcurrencyCount;
+    /**
+     * The maximum percentage of accounts in which to perform this operation at one time. When calculating the number of accounts based on the specified percentage, AWS Service Catalog rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, AWS Service Catalog sets the number as 1 instead. Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling. Applicable only to a CFN_STACKSET provisioned product type. Conditional: You must specify either StackSetMaxConcurrentCount or StackSetMaxConcurrentPercentage, but not both.
+     */
+    StackSetMaxConcurrencyPercentage?: StackSetMaxConcurrencyPercentage;
+    /**
+     * Determines what action AWS Service Catalog performs to a stack set or a stack instance represented by the provisioned product. The default value is UPDATE if nothing is specified. Applicable only to a CFN_STACKSET provisioned product type.  CREATE  Creates a new stack instance in the stack set represented by the provisioned product. In this case, only new stack instances are created based on accounts and regions; if new ProductId or ProvisioningArtifactID are passed, they will be ignored.  UPDATE  Updates the stack set represented by the provisioned product and also its stack instances.  DELETE  Deletes a stack instance in the stack set represented by the provisioned product.  
+     */
+    StackSetOperationType?: StackSetOperationType;
+  }
+  export interface UpdateServiceActionInput {
+    /**
+     * The self-service action identifier.
+     */
+    Id: Id;
+    /**
+     * The self-service action name.
+     */
+    Name?: ServiceActionName;
+    /**
+     * A map that defines the self-service action.
+     */
+    Definition?: ServiceActionDefinitionMap;
+    /**
+     * The self-service action description.
+     */
+    Description?: ServiceActionDescription;
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+  }
+  export interface UpdateServiceActionOutput {
+    /**
+     * Detailed information about the self-service action.
+     */
+    ServiceActionDetail?: ServiceActionDetail;
+  }
   export interface UpdateTagOptionInput {
     /**
      * The TagOption identifier.

@@ -8,6 +8,7 @@
 
   MockService = helpers.MockService;
   MockServiceFromApi = helpers.MockServiceFromApi;
+  var FooService = require('./foo-service.fixture').FooService;
 
   describe('AWS.EventListeners', function() {
     var completeHandler, config, delays, errorHandler, makeRequest, oldMathRandom, oldSetTimeout, randomValues, retryHandler, service, successHandler, totalWaited;
@@ -67,17 +68,17 @@
         return request;
       }
     };
-    
+
     describe('validate', function() {
       it('takes the request object as a parameter', function() {
         var request, response;
         request = makeRequest();
         request.on('validate', function(req) {
           expect(req).to.equal(request);
-          throw "ERROR";
+          throw 'ERROR';
         });
         response = request.send(function() {});
-        return expect(response.error.message).to.equal("ERROR");
+        return expect(response.error.message).to.equal('ERROR');
       });
       it('sends error event if credentials are not set', function() {
         service.config.credentialProvider = null;
@@ -85,10 +86,10 @@
         makeRequest(function() {});
         expect(errorHandler.calls.length).not.to.equal(0);
         return AWS.util.arrayEach(errorHandler.calls, function(call) {
-          expect(call["arguments"][0]).to.be.instanceOf(Error);
-          expect(call["arguments"][0].code).to.equal('CredentialsError');
-          expect(call["arguments"][0].name).to.equal('CredentialsError');
-          return expect(call["arguments"][0].message).to.match(/Missing credentials/);
+          expect(call['arguments'][0]).to.be.instanceOf(Error);
+          expect(call['arguments'][0].code).to.equal('CredentialsError');
+          expect(call['arguments'][0].name).to.equal('CredentialsError');
+          return expect(call['arguments'][0].message).to.match(/Missing credentials/);
         });
       });
       it('sends error event if credentials are not set', function() {
@@ -97,10 +98,10 @@
         makeRequest(function() {});
         expect(errorHandler.calls.length).not.to.equal(0);
         return AWS.util.arrayEach(errorHandler.calls, function(call) {
-          expect(call["arguments"][0]).to.be.instanceOf(Error);
-          expect(call["arguments"][0].code).to.equal('CredentialsError');
-          expect(call["arguments"][0].name).to.equal('CredentialsError');
-          return expect(call["arguments"][0].message).to.match(/Missing credentials/);
+          expect(call['arguments'][0]).to.be.instanceOf(Error);
+          expect(call['arguments'][0].code).to.equal('CredentialsError');
+          expect(call['arguments'][0].name).to.equal('CredentialsError');
+          return expect(call['arguments'][0].message).to.match(/Missing credentials/);
         });
       });
       it('does not validate credentials if request is not signed', function() {
@@ -124,9 +125,9 @@
         request = makeRequest(function() {});
         call = errorHandler.calls[0];
         expect(errorHandler.calls.length).not.to.equal(0);
-        expect(call["arguments"][0]).to.be.instanceOf(Error);
-        expect(call["arguments"][0].code).to.equal('ConfigError');
-        return expect(call["arguments"][0].message).to.match(/Missing region in config/);
+        expect(call['arguments'][0]).to.be.instanceOf(Error);
+        expect(call['arguments'][0].code).to.equal('ConfigError');
+        return expect(call['arguments'][0].message).to.match(/Missing region in config/);
       });
       return it('ignores region validation if service has global endpoint', function() {
         helpers.mockHttpResponse(200, {}, '');
@@ -145,10 +146,10 @@
         request = makeRequest();
         request.on('build', function(req) {
           expect(req).to.equal(request);
-          throw "ERROR";
+          throw 'ERROR';
         });
         response = request.send(function() {});
-        return expect(response.error.message).to.equal("ERROR");
+        return expect(response.error.message).to.equal('ERROR');
       });
     });
 
@@ -169,24 +170,63 @@
           return request;
         }
       };
-      return describe('adds Content-Length header', function() {
+
+      describe('adds Content-Length header', function() {
         var contentLength;
         contentLength = function(body) {
           return sendRequest(body).httpRequest.headers['Content-Length'];
         };
 
-        it('ignores Content-Length for operations with an unsigned authtype', function(done) {
-          var service = new AWS.Lambda();
-          service.api.operations.updateFunctionCode.authtype = 'v4-unsigned-body';
-          req = service.makeRequest('updateFunctionCode', {
-            FunctionName: 'fake',
-            ZipFile: new Buffer('fake')
+        describe('when using unsigned authtype', function() {
+          it('when paylaod is a buffer', function() {
+            var service = new FooService();
+            var req = service.putStream({
+              Body: new AWS.util.Buffer('test')
+            });
+
+            req.runTo('sign', function(err) {
+              expect(req.httpRequest.headers['Content-Length']).to.equal(4);
+              expect(!err).to.equal(true);
+            });
           });
-          req.runTo('sign', function(err) {
-            expect(typeof req.httpRequest.headers['Content-Length']).to.equal('undefined');
-            delete service.api.operations.updateFunctionCode.authtype;
-            done();
+
+          it('when paylaod is a string', function() {
+            var service = new FooService();
+            var req = service.putStream({
+              Body: 'test'
+            });
+
+            req.runTo('sign', function(err) {
+              expect(req.httpRequest.headers['Content-Length']).to.equal(4);
+              expect(!err).to.equal(true);
+            });
           });
+
+          if (AWS.util.isNode()) {
+            it('when paylaod is a file stream', function() {
+              var service = new FooService();
+              var req = service.putStream({
+                Body: require('fs').createReadStream(__filename)
+              });
+
+              req.runTo('sign', function(err) {
+                expect(req.httpRequest.headers['Content-Length'] > 0).to.equal(true);
+                expect(!err).to.equal(true);
+              });
+            });
+
+            it('unless payload is a non-file stream', function() {
+              var service = new FooService();
+              var req = service.putStream({
+                Body: new AWS.util.stream.Readable()
+              });
+
+              req.runTo('sign', function(err) {
+                expect(typeof req.httpRequest.headers['Content-Length']).to.equal('undefined');
+                expect(!err).to.equal(true);
+              });
+            });
+          }
         });
 
         it('builds Content-Length in the request headers for string content', function() {
@@ -206,12 +246,20 @@
         });
 
         if (AWS.util.isNode()) {
-          return it('builds Content-Length for file body', function(done) {
+          it('builds Content-Length for file body', function(done) {
             var file;
             fs = require('fs');
             file = fs.createReadStream(__filename);
             return sendRequest(file, function(err) {
               return done();
+            });
+          });
+
+          it('throws an error for non-file body', function(done) {
+            sendRequest(new AWS.util.stream.Readable(), function(err) {
+              expect(typeof err).not.to.equal('undefined');
+              expect(err.message).to.equal('Non-file stream objects are not supported with SigV4');
+              done();
             });
           });
         }
@@ -246,10 +294,10 @@
         request = makeRequest();
         request.on('sign', function(req) {
           expect(req).to.equal(request);
-          throw "ERROR";
+          throw 'ERROR';
         });
         response = request.send(function() {});
-        return expect(response.error.message).to.equal("ERROR");
+        return expect(response.error.message).to.equal('ERROR');
       });
       it('uses the api.signingName if provided', function() {
         var request, response;
@@ -817,10 +865,10 @@
           operations: {
             mockMethod: {
               input: {
-                type: "structure",
+                type: 'structure',
                 members: {
                   foo: {
-                    type: "string",
+                    type: 'string',
                     sensitive: true
                   }
                 }
@@ -828,8 +876,8 @@
               output: {}
             }
           }
-        }
-      })
+        };
+      });
 
       it('with sensitive trait in shape\'s own property', function() {
         var api = new AWS.Model.Api(apiJSON);
@@ -850,10 +898,10 @@
           operations: {
             mockMethod: {
               input: {
-                type: "structure",
+                type: 'structure',
                 members: {
                   foo: {
-                    shape: "S1"
+                    shape: 'S1'
                   },
                   baz: {
                     type: 'structure',
@@ -872,7 +920,7 @@
               sensitive: true
             }
           }
-        })
+        });
         var CustomMockService = MockServiceFromApi(api);
         service = new CustomMockService({logger: logger});
         helpers.mockHttpResponse(200, {}, []);
@@ -895,7 +943,7 @@
           member: {
             sensitive: true
           }
-        }
+        };
         var api = new AWS.Model.Api(apiJSON);
         var CustomMockService = MockServiceFromApi(api);
         service = new CustomMockService({logger: logger});
@@ -918,7 +966,7 @@
             type: 'string',
             sensitive: true
           }
-        }
+        };
         var api = new AWS.Model.Api(apiJSON);
         var CustomMockService = MockServiceFromApi(api);
         service = new CustomMockService({logger: logger});
@@ -948,7 +996,7 @@
               }
             }
           }
-        }
+        };
         var api = new AWS.Model.Api(apiJSON);
         var CustomMockService = MockServiceFromApi(api);
         service = new CustomMockService({logger: logger});
@@ -961,11 +1009,11 @@
         }).send();
         expect(data.indexOf('secret_key_id')).to.equal(-1);
         expect(data.indexOf('secret_access_key')).to.equal(-1);
-      })
+      });
 
       it('from input shape of scalars', function() {
         var allShapeTypes = ['boolean', 'timestamp', 'float','integer', 'string', 'base64', 'binary'];
-        Array.prototype.forEach.call(allShapeTypes, function(shapeType){
+        Array.prototype.forEach.call(allShapeTypes, function(shapeType) {
           apiJSON.operations.mockMethod.input.members.foo = {
             type: shapeType,
             sensitive: true
@@ -979,7 +1027,7 @@
             foo: '1234567'
           }).send();
           expect(data.indexOf('1234567')).to.equal(-1);
-        })
+        });
       });
 
       it('from input of undefined', function() {
@@ -1004,7 +1052,7 @@
         expect(data.indexOf('bar: \'bar\'') >= 0).to.equal(true);
         expect(data.indexOf('undefined') >= 0).to.equal(true);
         expect(data.indexOf('{}')).to.equal(-1);
-      })
+      });
     });
 
     describe('terminal callback error handling', function() {
@@ -1017,7 +1065,7 @@
             return makeRequest(function() {
               return invalidCode;
             });
-          }).to["throw"]();
+          }).to['throw']();
           expect(completeHandler.calls.length).to.equal(1);
           expect(errorHandler.calls.length).to.equal(0);
           return expect(retryHandler.calls.length).to.equal(0);
@@ -1031,100 +1079,108 @@
               return request.send(function() {
                 return invalidCode;
               });
-            }).to["throw"]();
+            }).to['throw']();
             return expect(completeHandler.calls.length).not.to.equal(0);
           });
         });
       });
       if (AWS.util.isNode()) {
-        return describe('with domains', function() {
-          var createDomain, domains;
-          domains = [];
-          createDomain = function() {
-            var domain;
-            domain = require('domain').create();
+        describe('with domains', function() {
+          var domains = [];
+
+          function createDomain() {
+            var domain = require('domain').create();
             domains.push(domain);
             return domain;
           };
+
           beforeEach(function() {
             return domains = [];
           });
+
           afterEach(function() {
-            return domains.forEach(function(d) {
+            domains.forEach(function(d) {
               d.exit();
-              return d.dispose();
             });
           });
+
           it('sends error raised from complete event to a domain', function() {
-            var d, result;
-            result = false;
-            d = createDomain();
-            d.enter();
+            var result = false;
+            var d = createDomain();
+
             d.on('error', function(e) {
-              return result = e;
+              result = e;
             });
-            return d.run(function() {
-              var request;
+
+            d.run(function() {
               helpers.mockHttpResponse(200, {}, []);
-              request = makeRequest();
+              var request = makeRequest();
+
               request.on('complete', function() {
-                return invalidCode;
+                // trigger a ReferenceError
+                invalidCode;
               });
+
               expect(function() {
-                return request.send();
-              }).not.to["throw"]();
+                request.send();
+              }).not.to['throw']();
+
               expect(completeHandler.calls.length).not.to.equal(0);
               expect(retryHandler.calls.length).to.equal(0);
               expect(result.code).to.equal('ReferenceError');
-              return d.exit();
             });
           });
+
           it('does not leak service error into domain', function() {
-            var d, result;
-            result = false;
-            d = createDomain();
+            var result = false;
+            var d = createDomain();
+
             d.on('error', function(e) {
-              return result = e;
+              result = e;
             });
-            d.enter();
-            return d.run(function() {
+
+            d.run(function() {
               helpers.mockHttpResponse(500, {}, []);
               makeRequest().send();
               expect(completeHandler.calls.length).not.to.equal(0);
               expect(result).to.equal(false);
-              return d.exit();
             });
           });
-          return it('supports inner domains', function(done) {
-            var err, gotInnerError, gotOuterError, outerDomain;
+
+          it('supports inner domains', function(done) {
             helpers.mockHttpResponse(200, {}, []);
-            err = new ReferenceError();
-            gotOuterError = false;
-            gotInnerError = false;
-            outerDomain = createDomain();
+
+            var err = new ReferenceError();
+            var gotOuterError = false;
+            var gotInnerError = false;
+            var outerDomain = createDomain();
+
             outerDomain.on('error', function() {
-              return gotOuterError = true;
+              gotOuterError = true;
             });
-            outerDomain.enter();
-            return outerDomain.run(function() {
-              var innerDomain, request;
-              request = makeRequest();
-              innerDomain = createDomain();
+
+            outerDomain.run(function() {
+              var request = makeRequest();
+              var innerDomain = createDomain();
+
               innerDomain.enter();
               innerDomain.add(request);
+
               innerDomain.on('error', function(domErr) {
                 gotInnerError = true;
                 expect(gotOuterError).to.equal(false);
                 expect(gotInnerError).to.equal(true);
                 expect(domErr.domainThrown).to.equal(false);
                 expect(domErr.domain).to.equal(innerDomain);
-                return done();
+                done();
               });
-              return request.send(function() {
-                return innerDomain.run(function() {
+
+              request.send(function() {
+                innerDomain.run(function() {
                   throw err;
                 });
               });
+
             });
           });
         });

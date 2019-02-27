@@ -191,7 +191,6 @@ declare namespace CloudHSM {
      */
     Status: String;
   }
-  export type Boolean = boolean;
   export type Certificate = string;
   export type CertificateFingerprint = string;
   export type ClientArn = string;

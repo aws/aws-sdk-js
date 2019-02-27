@@ -1,0 +1,549 @@
+{
+  "metadata": {
+    "apiVersion": "2018-04-23",
+    "endpointPrefix": "api.mediatailor",
+    "signingName": "mediatailor",
+    "serviceFullName": "AWS MediaTailor",
+    "serviceId": "MediaTailor",
+    "protocol": "rest-json",
+    "jsonVersion": "1.1",
+    "uid": "mediatailor-2018-04-23",
+    "signatureVersion": "v4",
+    "serviceAbbreviation": "MediaTailor"
+  },
+  "operations": {
+    "DeletePlaybackConfiguration": {
+      "name": "DeletePlaybackConfiguration",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/playbackConfiguration/{Name}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeletePlaybackConfigurationRequest"
+      },
+      "output": {
+        "shape": "DeletePlaybackConfigurationResponse"
+      },
+      "errors": [],
+      "documentation": "<p>Deletes the playback configuration for the specified name. </p>"
+    },
+    "GetPlaybackConfiguration": {
+      "name": "GetPlaybackConfiguration",
+      "http": {
+        "method": "GET",
+        "requestUri": "/playbackConfiguration/{Name}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetPlaybackConfigurationRequest"
+      },
+      "output": {
+        "shape": "GetPlaybackConfigurationResponse",
+        "documentation": "<p>Success.</p>"
+      },
+      "errors": [],
+      "documentation": "<p>Returns the playback configuration for the specified name. </p>"
+    },
+    "ListPlaybackConfigurations": {
+      "name": "ListPlaybackConfigurations",
+      "http": {
+        "method": "GET",
+        "requestUri": "/playbackConfigurations",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListPlaybackConfigurationsRequest"
+      },
+      "output": {
+        "shape": "ListPlaybackConfigurationsResponse",
+        "documentation": "<p>Success.</p>"
+      },
+      "errors": [],
+      "documentation": "<p>Returns a list of the playback configurations defined in AWS Elemental MediaTailor. You can specify a maximum number of configurations to return at a time. The default maximum is 50. Results are returned in pagefuls. If MediaTailor has more configurations than the specified maximum, it provides parameters in the response that you can use to retrieve the next pageful. </p>"
+    },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{ResourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse",
+        "documentation": "<p>Success. </p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>Invalid request parameters.</p>"
+        }
+      ],
+      "documentation": "<p>Returns a list of the tags assigned to the specified playback configuration resource. </p>"
+    },
+    "PutPlaybackConfiguration": {
+      "name": "PutPlaybackConfiguration",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/playbackConfiguration",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "PutPlaybackConfigurationRequest"
+      },
+      "output": {
+        "shape": "PutPlaybackConfigurationResponse",
+        "documentation": "<p>Success.</p>"
+      },
+      "errors": [],
+      "documentation": "<p>Adds a new playback configuration to AWS Elemental MediaTailor. </p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/tags/{ResourceArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>Invalid request parameters.</p>"
+        }
+      ],
+      "documentation": "<p>Adds tags to the specified playback configuration resource. You can specify one or more tags to add. </p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{ResourceArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>Invalid request parameters.</p>"
+        }
+      ],
+      "documentation": "<p>Removes tags from the specified playback configuration resource. You can specify one or more tags to remove. </p>"
+    }
+  },
+  "shapes": {
+    "CdnConfiguration": {
+      "type": "structure",
+      "members": {
+        "AdSegmentUrlPrefix": {
+          "shape": "__string",
+          "documentation": "<p>A non-default content delivery network (CDN) to serve ad segments. By default, AWS Elemental MediaTailor uses Amazon CloudFront with default cache settings as its CDN for ad segments. To set up an alternate CDN, create a rule in your CDN for the following origin: ads.mediatailor.&lt;region>.amazonaws.com. Then specify the rule's name in this AdSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for ad segments.</p>"
+        },
+        "ContentSegmentUrlPrefix": {
+          "shape": "__string",
+          "documentation": "<p>A content delivery network (CDN) to cache content segments, so that content requests don’t always have to go to the origin server. First, create a rule in your CDN for the content segment origin server. Then specify the rule's name in this ContentSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest, it reports your CDN as the source for content segments.</p>"
+        }
+      },
+      "documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>"
+    },
+    "HlsConfiguration": {
+      "type": "structure",
+      "members": {
+        "ManifestEndpointPrefix": {
+          "shape": "__string",
+          "documentation": "<p>The URL that is used to initiate a playback session for devices that support Apple HLS. The session uses server-side reporting.</p>"
+        }
+      },
+      "documentation": "<p>The configuration for HLS content. </p>"
+    },
+    "DashConfiguration": {
+      "type": "structure",
+      "members": {
+        "ManifestEndpointPrefix": {
+          "shape": "__string",
+          "documentation": "<p>The URL generated by MediaTailor to initiate a playback session. The session uses server-side reporting. This setting is ignored in PUT operations. </p>"
+        },
+        "MpdLocation": {
+          "shape": "__string",
+          "documentation": "<p>The setting that controls whether MediaTailor includes the Location tag in DASH manifests. MediaTailor populates the Location tag with the URL for manifest update requests, to be used by players that don't support sticky redirects. Disable this if you have CDN routing rules set up for accessing MediaTailor manifests and you are either using client-side reporting or your players support sticky HTTP redirects. Valid values are DISABLED and EMT_DEFAULT. The EMT_DEFAULT setting enables the inclusion of the tag and is the default value. </p>"
+        }
+      },
+      "documentation": "<p>The configuration for DASH content. </p>"
+    },
+    "DashConfigurationForPut": {
+      "type": "structure",
+      "members": {
+        "MpdLocation": {
+          "shape": "__string",
+          "documentation": "<p>The setting that controls whether MediaTailor includes the Location tag in DASH manifests. MediaTailor populates the Location tag with the URL for manifest update requests, to be used by players that don't support sticky redirects. Disable this if you have CDN routing rules set up for accessing MediaTailor manifests and you are either using client-side reporting or your players support sticky HTTP redirects. Valid values are DISABLED and EMT_DEFAULT. The EMT_DEFAULT setting enables the inclusion of the tag and is the default value. </p>"
+        }
+      },
+      "documentation": "<p>The configuration for DASH PUT operations. </p>"
+    },
+    "DeletePlaybackConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "Name",
+          "documentation": "<p>The identifier for the playback configuration.</p>"
+        }
+      },
+      "required": [
+        "Name"
+      ]
+    },
+    "DeletePlaybackConfigurationResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "GetPlaybackConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "Name",
+          "documentation": "<p>The identifier for the playback configuration.</p>"
+        }
+      },
+      "required": [
+        "Name"
+      ]
+    },
+    "GetPlaybackConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "AdDecisionServerUrl": {
+          "shape": "__string",
+          "documentation": "<p>The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.</p>"
+        },
+        "CdnConfiguration": {
+          "shape": "CdnConfiguration",
+          "documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>"
+        },
+        "DashConfiguration": {
+          "shape": "DashConfiguration",
+          "documentation": "<p>The configuration for DASH content. </p>"
+        },
+        "HlsConfiguration": {
+          "shape": "HlsConfiguration",
+          "documentation": "<p>The configuration for HLS content. </p>"
+        },
+        "Name": {
+          "shape": "__string",
+          "documentation": "<p>The identifier for the playback configuration.</p>"
+        },
+        "PlaybackConfigurationArn": {
+          "shape": "__string",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the playback configuration. </p>"
+        },
+        "PlaybackEndpointPrefix": {
+          "shape": "__string",
+          "documentation": "<p>The URL that the player accesses to get a manifest from AWS Elemental MediaTailor. This session will use server-side reporting. </p>"
+        },
+        "SessionInitializationEndpointPrefix": {
+          "shape": "__string",
+          "documentation": "<p>The URL that the player uses to initialize a session that uses client-side reporting. </p>"
+        },
+        "SlateAdUrl": {
+          "shape": "__string",
+          "documentation": "<p>The URL for a high-quality video asset to transcode and use to fill in time that's not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID playback configurations. For VPAID, the slate is required because MediaTailor provides it in the slots designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. </p>"
+        },
+        "Tags": {
+          "shape": "__mapOf__string",
+          "locationName": "tags",
+          "documentation": "<p>The tags assigned to the playback configuration. </p>"
+        },
+        "TranscodeProfileName": {
+          "shape": "__string",
+          "documentation": "<p>The name that is used to associate this playback configuration with a custom transcode profile. This overrides the dynamic transcoding defaults of MediaTailor. Use this only if you have already set up custom profiles with the help of AWS Support.</p>"
+        },
+        "VideoContentSourceUrl": {
+          "shape": "__string",
+          "documentation": "<p>The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.</p>"
+        }
+      }
+    },
+    "PlaybackConfiguration": {
+      "type": "structure",
+      "documentation": "<p>The AWSMediaTailor configuration.</p>",
+      "members": {
+        "AdDecisionServerUrl": {
+          "shape": "__string",
+          "documentation": "<p>The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.</p>"
+        },
+        "CdnConfiguration": {
+          "shape": "CdnConfiguration",
+          "documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>"
+        },
+        "DashConfiguration": {
+          "shape": "DashConfiguration",
+          "documentation": "<p>The configuration for DASH content. </p>"
+        },
+        "HlsConfiguration": {
+          "shape": "HlsConfiguration",
+          "documentation": "<p>The configuration for HLS content. </p>"
+        },
+        "Name": {
+          "shape": "__string",
+          "documentation": "<p>The identifier for the playback configuration.</p>"
+        },
+        "PlaybackConfigurationArn": {
+          "shape": "__string",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the playback configuration. </p>"
+        },
+        "PlaybackEndpointPrefix": {
+          "shape": "__string",
+          "documentation": "<p>The URL that the player accesses to get a manifest from AWS Elemental MediaTailor. This session will use server-side reporting. </p>"
+        },
+        "SessionInitializationEndpointPrefix": {
+          "shape": "__string",
+          "documentation": "<p>The URL that the player uses to initialize a session that uses client-side reporting. </p>"
+        },
+        "SlateAdUrl": {
+          "shape": "__string",
+          "documentation": "<p>The URL for a high-quality video asset to transcode and use to fill in time that's not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID playback configurations. For VPAID, the slate is required because MediaTailor provides it in the slots designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. </p>"
+        },
+        "Tags": {
+          "shape": "__mapOf__string",
+          "locationName": "tags",
+          "documentation": "<p>The tags assigned to the playback configuration. </p>"
+        },
+        "TranscodeProfileName": {
+          "shape": "__string",
+          "documentation": "<p>The name that is used to associate this playback configuration with a custom transcode profile. This overrides the dynamic transcoding defaults of MediaTailor. Use this only if you have already set up custom profiles with the help of AWS Support.</p>"
+        },
+        "VideoContentSourceUrl": {
+          "shape": "__string",
+          "documentation": "<p>The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.</p>"
+        }
+      }
+    },
+    "ListPlaybackConfigurationsRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "shape": "__integerMin1Max100",
+          "location": "querystring",
+          "locationName": "MaxResults",
+          "documentation": "<p>Maximum number of records to return. </p>"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "NextToken",
+          "documentation": "<p>Pagination token returned by the GET list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p>"
+        }
+      }
+    },
+    "ListPlaybackConfigurationsResponse": {
+      "type": "structure",
+      "members": {
+        "Items": {
+          "shape": "__listOfPlaybackConfigurations",
+          "documentation": "<p>Array of playback configurations. This might be all the available configurations or a subset, depending on the settings that you provide and the total number of configurations stored. </p>"
+        },
+        "NextToken": {
+          "shape": "__string",
+          "documentation": "<p>Pagination token returned by the GET list request when results exceed the maximum allowed. Use the token to fetch the next page of results.</p>"
+        }
+      }
+    },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "ResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the playback configuration. You can get this from the response to any playback configuration request. </p>"
+        }
+      },
+      "required": [
+        "ResourceArn"
+      ]
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "__mapOf__string",
+          "locationName": "tags",
+          "documentation": "<p>A comma-separated list of tag key:value pairs. For example: \n {\n \"Key1\": \"Value1\",\n \"Key2\": \"Value2\"\n }\n </p>"
+        }
+      }
+    },
+    "PutPlaybackConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "AdDecisionServerUrl": {
+          "shape": "__string",
+          "documentation": "<p>The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing you can provide a static VAST URL. The maximum length is 25,000 characters.</p>"
+        },
+        "CdnConfiguration": {
+          "shape": "CdnConfiguration",
+          "documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>"
+        },
+        "DashConfiguration": {
+          "shape": "DashConfigurationForPut",
+          "documentation": "<p>The configuration for DASH content. </p>"
+        },
+        "Name": {
+          "shape": "__string",
+          "documentation": "<p>The identifier for the playback configuration.</p>"
+        },
+        "SlateAdUrl": {
+          "shape": "__string",
+          "documentation": "<p>The URL for a high-quality video asset to transcode and use to fill in time that's not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID configurations. For VPAID, the slate is required because MediaTailor provides it in the slots that are designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. </p>"
+        },
+        "Tags": {
+          "shape": "__mapOf__string",
+          "locationName": "tags",
+          "documentation": "<p>The tags to assign to the playback configuration. </p>"
+        },
+        "TranscodeProfileName": {
+          "shape": "__string",
+          "documentation": "<p>The name that is used to associate this playback configuration with a custom transcode profile. This overrides the dynamic transcoding defaults of MediaTailor. Use this only if you have already set up custom profiles with the help of AWS Support.</p>"
+        },
+        "VideoContentSourceUrl": {
+          "shape": "__string",
+          "documentation": "<p>The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.</p>"
+        }
+      }
+    },
+    "PutPlaybackConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "AdDecisionServerUrl": {
+          "shape": "__string",
+          "documentation": "<p>The URL for the ad decision server (ADS). This includes the specification of static parameters and placeholders for dynamic parameters. AWS Elemental MediaTailor substitutes player-specific and session-specific parameters as needed when calling the ADS. Alternately, for testing, you can provide a static VAST URL. The maximum length is 25,000 characters.</p>"
+        },
+        "CdnConfiguration": {
+          "shape": "CdnConfiguration",
+          "documentation": "<p>The configuration for using a content delivery network (CDN), like Amazon CloudFront, for content and ad segment management. </p>"
+        },
+        "DashConfiguration": {
+          "shape": "DashConfiguration",
+          "documentation": "<p>The configuration for DASH content. </p>"
+        },
+        "HlsConfiguration": {
+          "shape": "HlsConfiguration",
+          "documentation": "<p>The configuration for HLS content. </p>"
+        },
+        "Name": {
+          "shape": "__string",
+          "documentation": "<p>The identifier for the playback configuration.</p>"
+        },
+        "PlaybackConfigurationArn": {
+          "shape": "__string",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the playback configuration. </p>"
+        },
+        "PlaybackEndpointPrefix": {
+          "shape": "__string",
+          "documentation": "<p>The URL that the player accesses to get a manifest from AWS Elemental MediaTailor. This session will use server-side reporting. </p>"
+        },
+        "SessionInitializationEndpointPrefix": {
+          "shape": "__string",
+          "documentation": "<p>The URL that the player uses to initialize a session that uses client-side reporting. </p>"
+        },
+        "SlateAdUrl": {
+          "shape": "__string",
+          "documentation": "<p>The URL for a high-quality video asset to transcode and use to fill in time that's not used by ads. AWS Elemental MediaTailor shows the slate to fill in gaps in media content. Configuring the slate is optional for non-VPAID playback configurations. For VPAID, the slate is required because MediaTailor provides it in the slots designated for dynamic ad content. The slate must be a high-quality asset that contains both audio and video. </p>"
+        },
+        "Tags": {
+          "shape": "__mapOf__string",
+          "locationName": "tags",
+          "documentation": "<p>The tags assigned to the playback configuration. </p>"
+        },
+        "TranscodeProfileName": {
+          "shape": "__string",
+          "documentation": "<p>The name that is used to associate this playback configuration with a custom transcode profile. This overrides the dynamic transcoding defaults of MediaTailor. Use this only if you have already set up custom profiles with the help of AWS Support.</p>"
+        },
+        "VideoContentSourceUrl": {
+          "shape": "__string",
+          "documentation": "<p>The URL prefix for the master playlist for the stream, minus the asset ID. The maximum length is 512 characters.</p>"
+        }
+      }
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "ResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the playback configuration. You can get this from the response to any playback configuration request. </p>"
+        },
+        "Tags": {
+          "shape": "__mapOf__string",
+          "locationName": "tags",
+          "documentation": "<p>A comma-separated list of tag key:value pairs. For example: \n {\n \"Key1\": \"Value1\",\n \"Key2\": \"Value2\"\n }\n </p>"
+        }
+      },
+      "required": [
+        "ResourceArn",
+        "Tags"
+      ]
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "ResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the playback configuration. You can get this from the response to any playback configuration request. </p>"
+        },
+        "TagKeys": {
+          "shape": "__listOf__string",
+          "location": "querystring",
+          "locationName": "tagKeys",
+          "documentation": "<p>A comma-separated list of the tag keys to remove from the playback configuration. </p>"
+        }
+      },
+      "required": [
+        "ResourceArn",
+        "TagKeys"
+      ]
+    },
+    "__listOfPlaybackConfigurations": {
+      "type": "list",
+      "member": {
+        "shape": "PlaybackConfiguration"
+      }
+    },
+    "__listOf__string": {
+      "type": "list",
+      "member": {
+        "shape": "__string"
+      }
+    },
+    "__mapOf__string": {
+      "type": "map",
+      "key": {
+        "shape": "__string"
+      },
+      "value": {
+        "shape": "__string"
+      }
+    },
+    "__string": {
+      "type": "string"
+    },
+    "__integerMin1Max100": {
+      "type": "integer",
+      "min": 1,
+      "max": 100
+    }
+  },
+  "documentation": "<p>Use the AWS Elemental MediaTailor SDK to configure scalable ad insertion for your live and VOD content. With AWS Elemental MediaTailor, you can serve targeted ads to viewers while maintaining broadcast quality in over-the-top (OTT) video applications. For information about using the service, including detailed information about the settings covered in this guide, see the AWS Elemental MediaTailor User Guide.<p>Through the SDK, you manage AWS Elemental MediaTailor configurations the same as you do through the console. For example, you specify ad insertion behavior and mapping information for the origin server and the ad decision server (ADS).</p>"
+}

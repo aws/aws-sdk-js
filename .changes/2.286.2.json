@@ -1,0 +1,7 @@
+[
+    {
+        "type": "bugfix",
+        "category": "type",
+        "description": "remove undefined exceptions from SubscribeToShardEventStream"
+    }
+]

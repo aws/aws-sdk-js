@@ -20,6 +20,14 @@ declare class DeviceFarm extends Service {
    */
   createDevicePool(callback?: (err: AWSError, data: DeviceFarm.Types.CreateDevicePoolResult) => void): Request<DeviceFarm.Types.CreateDevicePoolResult, AWSError>;
   /**
+   * Creates a profile that can be applied to one or more private fleet device instances.
+   */
+  createInstanceProfile(params: DeviceFarm.Types.CreateInstanceProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.CreateInstanceProfileResult) => void): Request<DeviceFarm.Types.CreateInstanceProfileResult, AWSError>;
+  /**
+   * Creates a profile that can be applied to one or more private fleet device instances.
+   */
+  createInstanceProfile(callback?: (err: AWSError, data: DeviceFarm.Types.CreateInstanceProfileResult) => void): Request<DeviceFarm.Types.CreateInstanceProfileResult, AWSError>;
+  /**
    * Creates a network profile.
    */
   createNetworkProfile(params: DeviceFarm.Types.CreateNetworkProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.CreateNetworkProfileResult) => void): Request<DeviceFarm.Types.CreateNetworkProfileResult, AWSError>;
@@ -52,6 +60,14 @@ declare class DeviceFarm extends Service {
    */
   createUpload(callback?: (err: AWSError, data: DeviceFarm.Types.CreateUploadResult) => void): Request<DeviceFarm.Types.CreateUploadResult, AWSError>;
   /**
+   * Creates a configuration record in Device Farm for your Amazon Virtual Private Cloud (VPC) endpoint.
+   */
+  createVPCEConfiguration(params: DeviceFarm.Types.CreateVPCEConfigurationRequest, callback?: (err: AWSError, data: DeviceFarm.Types.CreateVPCEConfigurationResult) => void): Request<DeviceFarm.Types.CreateVPCEConfigurationResult, AWSError>;
+  /**
+   * Creates a configuration record in Device Farm for your Amazon Virtual Private Cloud (VPC) endpoint.
+   */
+  createVPCEConfiguration(callback?: (err: AWSError, data: DeviceFarm.Types.CreateVPCEConfigurationResult) => void): Request<DeviceFarm.Types.CreateVPCEConfigurationResult, AWSError>;
+  /**
    * Deletes a device pool given the pool ARN. Does not allow deletion of curated pools owned by the system.
    */
   deleteDevicePool(params: DeviceFarm.Types.DeleteDevicePoolRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteDevicePoolResult) => void): Request<DeviceFarm.Types.DeleteDevicePoolResult, AWSError>;
@@ -59,6 +75,14 @@ declare class DeviceFarm extends Service {
    * Deletes a device pool given the pool ARN. Does not allow deletion of curated pools owned by the system.
    */
   deleteDevicePool(callback?: (err: AWSError, data: DeviceFarm.Types.DeleteDevicePoolResult) => void): Request<DeviceFarm.Types.DeleteDevicePoolResult, AWSError>;
+  /**
+   * Deletes a profile that can be applied to one or more private device instances.
+   */
+  deleteInstanceProfile(params: DeviceFarm.Types.DeleteInstanceProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteInstanceProfileResult) => void): Request<DeviceFarm.Types.DeleteInstanceProfileResult, AWSError>;
+  /**
+   * Deletes a profile that can be applied to one or more private device instances.
+   */
+  deleteInstanceProfile(callback?: (err: AWSError, data: DeviceFarm.Types.DeleteInstanceProfileResult) => void): Request<DeviceFarm.Types.DeleteInstanceProfileResult, AWSError>;
   /**
    * Deletes a network profile.
    */
@@ -100,6 +124,14 @@ declare class DeviceFarm extends Service {
    */
   deleteUpload(callback?: (err: AWSError, data: DeviceFarm.Types.DeleteUploadResult) => void): Request<DeviceFarm.Types.DeleteUploadResult, AWSError>;
   /**
+   * Deletes a configuration for your Amazon Virtual Private Cloud (VPC) endpoint.
+   */
+  deleteVPCEConfiguration(params: DeviceFarm.Types.DeleteVPCEConfigurationRequest, callback?: (err: AWSError, data: DeviceFarm.Types.DeleteVPCEConfigurationResult) => void): Request<DeviceFarm.Types.DeleteVPCEConfigurationResult, AWSError>;
+  /**
+   * Deletes a configuration for your Amazon Virtual Private Cloud (VPC) endpoint.
+   */
+  deleteVPCEConfiguration(callback?: (err: AWSError, data: DeviceFarm.Types.DeleteVPCEConfigurationResult) => void): Request<DeviceFarm.Types.DeleteVPCEConfigurationResult, AWSError>;
+  /**
    * Returns the number of unmetered iOS and/or unmetered Android devices that have been purchased by the account.
    */
   getAccountSettings(params: DeviceFarm.Types.GetAccountSettingsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetAccountSettingsResult) => void): Request<DeviceFarm.Types.GetAccountSettingsResult, AWSError>;
@@ -116,6 +148,14 @@ declare class DeviceFarm extends Service {
    */
   getDevice(callback?: (err: AWSError, data: DeviceFarm.Types.GetDeviceResult) => void): Request<DeviceFarm.Types.GetDeviceResult, AWSError>;
   /**
+   * Returns information about a device instance belonging to a private device fleet.
+   */
+  getDeviceInstance(params: DeviceFarm.Types.GetDeviceInstanceRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetDeviceInstanceResult) => void): Request<DeviceFarm.Types.GetDeviceInstanceResult, AWSError>;
+  /**
+   * Returns information about a device instance belonging to a private device fleet.
+   */
+  getDeviceInstance(callback?: (err: AWSError, data: DeviceFarm.Types.GetDeviceInstanceResult) => void): Request<DeviceFarm.Types.GetDeviceInstanceResult, AWSError>;
+  /**
    * Gets information about a device pool.
    */
   getDevicePool(params: DeviceFarm.Types.GetDevicePoolRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetDevicePoolResult) => void): Request<DeviceFarm.Types.GetDevicePoolResult, AWSError>;
@@ -131,6 +171,14 @@ declare class DeviceFarm extends Service {
    * Gets information about compatibility with a device pool.
    */
   getDevicePoolCompatibility(callback?: (err: AWSError, data: DeviceFarm.Types.GetDevicePoolCompatibilityResult) => void): Request<DeviceFarm.Types.GetDevicePoolCompatibilityResult, AWSError>;
+  /**
+   * Returns information about the specified instance profile.
+   */
+  getInstanceProfile(params: DeviceFarm.Types.GetInstanceProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetInstanceProfileResult) => void): Request<DeviceFarm.Types.GetInstanceProfileResult, AWSError>;
+  /**
+   * Returns information about the specified instance profile.
+   */
+  getInstanceProfile(callback?: (err: AWSError, data: DeviceFarm.Types.GetInstanceProfileResult) => void): Request<DeviceFarm.Types.GetInstanceProfileResult, AWSError>;
   /**
    * Gets information about a job.
    */
@@ -204,6 +252,14 @@ declare class DeviceFarm extends Service {
    */
   getUpload(callback?: (err: AWSError, data: DeviceFarm.Types.GetUploadResult) => void): Request<DeviceFarm.Types.GetUploadResult, AWSError>;
   /**
+   * Returns information about the configuration settings for your Amazon Virtual Private Cloud (VPC) endpoint.
+   */
+  getVPCEConfiguration(params: DeviceFarm.Types.GetVPCEConfigurationRequest, callback?: (err: AWSError, data: DeviceFarm.Types.GetVPCEConfigurationResult) => void): Request<DeviceFarm.Types.GetVPCEConfigurationResult, AWSError>;
+  /**
+   * Returns information about the configuration settings for your Amazon Virtual Private Cloud (VPC) endpoint.
+   */
+  getVPCEConfiguration(callback?: (err: AWSError, data: DeviceFarm.Types.GetVPCEConfigurationResult) => void): Request<DeviceFarm.Types.GetVPCEConfigurationResult, AWSError>;
+  /**
    * Installs an application to the device in a remote access session. For Android applications, the file must be in .apk format. For iOS applications, the file must be in .ipa format.
    */
   installToRemoteAccessSession(params: DeviceFarm.Types.InstallToRemoteAccessSessionRequest, callback?: (err: AWSError, data: DeviceFarm.Types.InstallToRemoteAccessSessionResult) => void): Request<DeviceFarm.Types.InstallToRemoteAccessSessionResult, AWSError>;
@@ -220,6 +276,14 @@ declare class DeviceFarm extends Service {
    */
   listArtifacts(callback?: (err: AWSError, data: DeviceFarm.Types.ListArtifactsResult) => void): Request<DeviceFarm.Types.ListArtifactsResult, AWSError>;
   /**
+   * Returns information about the private device instances associated with one or more AWS accounts.
+   */
+  listDeviceInstances(params: DeviceFarm.Types.ListDeviceInstancesRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListDeviceInstancesResult) => void): Request<DeviceFarm.Types.ListDeviceInstancesResult, AWSError>;
+  /**
+   * Returns information about the private device instances associated with one or more AWS accounts.
+   */
+  listDeviceInstances(callback?: (err: AWSError, data: DeviceFarm.Types.ListDeviceInstancesResult) => void): Request<DeviceFarm.Types.ListDeviceInstancesResult, AWSError>;
+  /**
    * Gets information about device pools.
    */
   listDevicePools(params: DeviceFarm.Types.ListDevicePoolsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListDevicePoolsResult) => void): Request<DeviceFarm.Types.ListDevicePoolsResult, AWSError>;
@@ -235,6 +299,14 @@ declare class DeviceFarm extends Service {
    * Gets information about unique device types.
    */
   listDevices(callback?: (err: AWSError, data: DeviceFarm.Types.ListDevicesResult) => void): Request<DeviceFarm.Types.ListDevicesResult, AWSError>;
+  /**
+   * Returns information about all the instance profiles in an AWS account.
+   */
+  listInstanceProfiles(params: DeviceFarm.Types.ListInstanceProfilesRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListInstanceProfilesResult) => void): Request<DeviceFarm.Types.ListInstanceProfilesResult, AWSError>;
+  /**
+   * Returns information about all the instance profiles in an AWS account.
+   */
+  listInstanceProfiles(callback?: (err: AWSError, data: DeviceFarm.Types.ListInstanceProfilesResult) => void): Request<DeviceFarm.Types.ListInstanceProfilesResult, AWSError>;
   /**
    * Gets information about jobs for a given test run.
    */
@@ -300,11 +372,11 @@ declare class DeviceFarm extends Service {
    */
   listRuns(callback?: (err: AWSError, data: DeviceFarm.Types.ListRunsResult) => void): Request<DeviceFarm.Types.ListRunsResult, AWSError>;
   /**
-   * Gets information about samples, given an AWS Device Farm project ARN
+   * Gets information about samples, given an AWS Device Farm job ARN.
    */
   listSamples(params: DeviceFarm.Types.ListSamplesRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListSamplesResult) => void): Request<DeviceFarm.Types.ListSamplesResult, AWSError>;
   /**
-   * Gets information about samples, given an AWS Device Farm project ARN
+   * Gets information about samples, given an AWS Device Farm job ARN.
    */
   listSamples(callback?: (err: AWSError, data: DeviceFarm.Types.ListSamplesResult) => void): Request<DeviceFarm.Types.ListSamplesResult, AWSError>;
   /**
@@ -340,6 +412,14 @@ declare class DeviceFarm extends Service {
    */
   listUploads(callback?: (err: AWSError, data: DeviceFarm.Types.ListUploadsResult) => void): Request<DeviceFarm.Types.ListUploadsResult, AWSError>;
   /**
+   * Returns information about all Amazon Virtual Private Cloud (VPC) endpoint configurations in the AWS account.
+   */
+  listVPCEConfigurations(params: DeviceFarm.Types.ListVPCEConfigurationsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListVPCEConfigurationsResult) => void): Request<DeviceFarm.Types.ListVPCEConfigurationsResult, AWSError>;
+  /**
+   * Returns information about all Amazon Virtual Private Cloud (VPC) endpoint configurations in the AWS account.
+   */
+  listVPCEConfigurations(callback?: (err: AWSError, data: DeviceFarm.Types.ListVPCEConfigurationsResult) => void): Request<DeviceFarm.Types.ListVPCEConfigurationsResult, AWSError>;
+  /**
    * Immediately purchases offerings for an AWS account. Offerings renew with the latest total purchased quantity for an offering, unless the renewal was overridden. The API returns a NotEligible error if the user is not permitted to invoke the operation. Please contact aws-devicefarm-support@amazon.com if you believe that you should be able to invoke this operation.
    */
   purchaseOffering(params: DeviceFarm.Types.PurchaseOfferingRequest, callback?: (err: AWSError, data: DeviceFarm.Types.PurchaseOfferingResult) => void): Request<DeviceFarm.Types.PurchaseOfferingResult, AWSError>;
@@ -364,6 +444,14 @@ declare class DeviceFarm extends Service {
    */
   scheduleRun(callback?: (err: AWSError, data: DeviceFarm.Types.ScheduleRunResult) => void): Request<DeviceFarm.Types.ScheduleRunResult, AWSError>;
   /**
+   * Initiates a stop request for the current job. AWS Device Farm will immediately stop the job on the device where tests have not started executing, and you will not be billed for this device. On the device where tests have started executing, Setup Suite and Teardown Suite tests will run to completion before stopping execution on the device. You will be billed for Setup, Teardown, and any tests that were in progress or already completed.
+   */
+  stopJob(params: DeviceFarm.Types.StopJobRequest, callback?: (err: AWSError, data: DeviceFarm.Types.StopJobResult) => void): Request<DeviceFarm.Types.StopJobResult, AWSError>;
+  /**
+   * Initiates a stop request for the current job. AWS Device Farm will immediately stop the job on the device where tests have not started executing, and you will not be billed for this device. On the device where tests have started executing, Setup Suite and Teardown Suite tests will run to completion before stopping execution on the device. You will be billed for Setup, Teardown, and any tests that were in progress or already completed.
+   */
+  stopJob(callback?: (err: AWSError, data: DeviceFarm.Types.StopJobResult) => void): Request<DeviceFarm.Types.StopJobResult, AWSError>;
+  /**
    * Ends a specified remote access session.
    */
   stopRemoteAccessSession(params: DeviceFarm.Types.StopRemoteAccessSessionRequest, callback?: (err: AWSError, data: DeviceFarm.Types.StopRemoteAccessSessionResult) => void): Request<DeviceFarm.Types.StopRemoteAccessSessionResult, AWSError>;
@@ -380,6 +468,14 @@ declare class DeviceFarm extends Service {
    */
   stopRun(callback?: (err: AWSError, data: DeviceFarm.Types.StopRunResult) => void): Request<DeviceFarm.Types.StopRunResult, AWSError>;
   /**
+   * Updates information about an existing private device instance.
+   */
+  updateDeviceInstance(params: DeviceFarm.Types.UpdateDeviceInstanceRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateDeviceInstanceResult) => void): Request<DeviceFarm.Types.UpdateDeviceInstanceResult, AWSError>;
+  /**
+   * Updates information about an existing private device instance.
+   */
+  updateDeviceInstance(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateDeviceInstanceResult) => void): Request<DeviceFarm.Types.UpdateDeviceInstanceResult, AWSError>;
+  /**
    * Modifies the name, description, and rules in a device pool given the attributes and the pool ARN. Rule updates are all-or-nothing, meaning they can only be updated as a whole (or not at all).
    */
   updateDevicePool(params: DeviceFarm.Types.UpdateDevicePoolRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateDevicePoolResult) => void): Request<DeviceFarm.Types.UpdateDevicePoolResult, AWSError>;
@@ -387,6 +483,14 @@ declare class DeviceFarm extends Service {
    * Modifies the name, description, and rules in a device pool given the attributes and the pool ARN. Rule updates are all-or-nothing, meaning they can only be updated as a whole (or not at all).
    */
   updateDevicePool(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateDevicePoolResult) => void): Request<DeviceFarm.Types.UpdateDevicePoolResult, AWSError>;
+  /**
+   * Updates information about an existing private device instance profile.
+   */
+  updateInstanceProfile(params: DeviceFarm.Types.UpdateInstanceProfileRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateInstanceProfileResult) => void): Request<DeviceFarm.Types.UpdateInstanceProfileResult, AWSError>;
+  /**
+   * Updates information about an existing private device instance profile.
+   */
+  updateInstanceProfile(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateInstanceProfileResult) => void): Request<DeviceFarm.Types.UpdateInstanceProfileResult, AWSError>;
   /**
    * Updates the network profile with specific settings.
    */
@@ -403,6 +507,22 @@ declare class DeviceFarm extends Service {
    * Modifies the specified project name, given the project ARN and a new name.
    */
   updateProject(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateProjectResult) => void): Request<DeviceFarm.Types.UpdateProjectResult, AWSError>;
+  /**
+   * Update an uploaded test specification (test spec).
+   */
+  updateUpload(params: DeviceFarm.Types.UpdateUploadRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateUploadResult) => void): Request<DeviceFarm.Types.UpdateUploadResult, AWSError>;
+  /**
+   * Update an uploaded test specification (test spec).
+   */
+  updateUpload(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateUploadResult) => void): Request<DeviceFarm.Types.UpdateUploadResult, AWSError>;
+  /**
+   * Updates information about an existing Amazon Virtual Private Cloud (VPC) endpoint configuration.
+   */
+  updateVPCEConfiguration(params: DeviceFarm.Types.UpdateVPCEConfigurationRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UpdateVPCEConfigurationResult) => void): Request<DeviceFarm.Types.UpdateVPCEConfigurationResult, AWSError>;
+  /**
+   * Updates information about an existing Amazon Virtual Private Cloud (VPC) endpoint configuration.
+   */
+  updateVPCEConfiguration(callback?: (err: AWSError, data: DeviceFarm.Types.UpdateVPCEConfigurationResult) => void): Request<DeviceFarm.Types.UpdateVPCEConfigurationResult, AWSError>;
 }
 declare namespace DeviceFarm {
   export type AWSAccountNumber = string;
@@ -435,6 +555,10 @@ declare namespace DeviceFarm {
      * The default number of minutes (at the account level) a test run will execute before it times out. Default value is 60 minutes.
      */
     defaultJobTimeoutMinutes?: JobTimeoutMinutes;
+    /**
+     * When set to true, for private devices, Device Farm will not sign your app again. For public devices, Device Farm always signs your apps again and this parameter has no effect. For more information about how Device Farm re-signs your app(s), see Do you modify my app? in the AWS Device Farm FAQs.
+     */
+    skipAppResign?: SkipAppResign;
   }
   export type AccountsCleanup = boolean;
   export type AmazonResourceName = string;
@@ -451,7 +575,7 @@ declare namespace DeviceFarm {
      */
     name?: Name;
     /**
-     * The artifact's type. Allowed values include the following:   UNKNOWN: An unknown type.   SCREENSHOT: The screenshot type.   DEVICE_LOG: The device log type.   MESSAGE_LOG: The message log type.   RESULT_LOG: The result log type.   SERVICE_LOG: The service log type.   WEBKIT_LOG: The web kit log type.   INSTRUMENTATION_OUTPUT: The instrumentation type.   EXERCISER_MONKEY_OUTPUT: For Android, the artifact (log) generated by an Android fuzz test.   CALABASH_JSON_OUTPUT: The Calabash JSON output type.   CALABASH_PRETTY_OUTPUT: The Calabash pretty output type.   CALABASH_STANDARD_OUTPUT: The Calabash standard output type.   CALABASH_JAVA_XML_OUTPUT: The Calabash Java XML output type.   AUTOMATION_OUTPUT: The automation output type.   APPIUM_SERVER_OUTPUT: The Appium server output type.   APPIUM_JAVA_OUTPUT: The Appium Java output type.   APPIUM_JAVA_XML_OUTPUT: The Appium Java XML output type.   APPIUM_PYTHON_OUTPUT: The Appium Python output type.   APPIUM_PYTHON_XML_OUTPUT: The Appium Python XML output type.   EXPLORER_EVENT_LOG: The Explorer event log output type.   EXPLORER_SUMMARY_LOG: The Explorer summary log output type.   APPLICATION_CRASH_REPORT: The application crash report output type.   XCTEST_LOG: The XCode test output type.  
+     * The artifact's type. Allowed values include the following:   UNKNOWN: An unknown type.   SCREENSHOT: The screenshot type.   DEVICE_LOG: The device log type.   MESSAGE_LOG: The message log type.   VIDEO_LOG: The video log type.   RESULT_LOG: The result log type.   SERVICE_LOG: The service log type.   WEBKIT_LOG: The web kit log type.   INSTRUMENTATION_OUTPUT: The instrumentation type.   EXERCISER_MONKEY_OUTPUT: For Android, the artifact (log) generated by an Android fuzz test.   CALABASH_JSON_OUTPUT: The Calabash JSON output type.   CALABASH_PRETTY_OUTPUT: The Calabash pretty output type.   CALABASH_STANDARD_OUTPUT: The Calabash standard output type.   CALABASH_JAVA_XML_OUTPUT: The Calabash Java XML output type.   AUTOMATION_OUTPUT: The automation output type.   APPIUM_SERVER_OUTPUT: The Appium server output type.   APPIUM_JAVA_OUTPUT: The Appium Java output type.   APPIUM_JAVA_XML_OUTPUT: The Appium Java XML output type.   APPIUM_PYTHON_OUTPUT: The Appium Python output type.   APPIUM_PYTHON_XML_OUTPUT: The Appium Python XML output type.   EXPLORER_EVENT_LOG: The Explorer event log output type.   EXPLORER_SUMMARY_LOG: The Explorer summary log output type.   APPLICATION_CRASH_REPORT: The application crash report output type.   XCTEST_LOG: The XCode test output type.   VIDEO: The Video output type.   CUSTOMER_ARTIFACT:The Customer Artifact output type.   CUSTOMER_ARTIFACT_LOG: The Customer Artifact Log output type.   TESTSPEC_OUTPUT: The Test Spec Output type.  
      */
     type?: ArtifactType;
     /**
@@ -464,7 +588,7 @@ declare namespace DeviceFarm {
     url?: URL;
   }
   export type ArtifactCategory = "SCREENSHOT"|"FILE"|"LOG"|string;
-  export type ArtifactType = "UNKNOWN"|"SCREENSHOT"|"DEVICE_LOG"|"MESSAGE_LOG"|"VIDEO_LOG"|"RESULT_LOG"|"SERVICE_LOG"|"WEBKIT_LOG"|"INSTRUMENTATION_OUTPUT"|"EXERCISER_MONKEY_OUTPUT"|"CALABASH_JSON_OUTPUT"|"CALABASH_PRETTY_OUTPUT"|"CALABASH_STANDARD_OUTPUT"|"CALABASH_JAVA_XML_OUTPUT"|"AUTOMATION_OUTPUT"|"APPIUM_SERVER_OUTPUT"|"APPIUM_JAVA_OUTPUT"|"APPIUM_JAVA_XML_OUTPUT"|"APPIUM_PYTHON_OUTPUT"|"APPIUM_PYTHON_XML_OUTPUT"|"EXPLORER_EVENT_LOG"|"EXPLORER_SUMMARY_LOG"|"APPLICATION_CRASH_REPORT"|"XCTEST_LOG"|"VIDEO"|"CUSTOMER_ARTIFACT"|"CUSTOMER_ARTIFACT_LOG"|string;
+  export type ArtifactType = "UNKNOWN"|"SCREENSHOT"|"DEVICE_LOG"|"MESSAGE_LOG"|"VIDEO_LOG"|"RESULT_LOG"|"SERVICE_LOG"|"WEBKIT_LOG"|"INSTRUMENTATION_OUTPUT"|"EXERCISER_MONKEY_OUTPUT"|"CALABASH_JSON_OUTPUT"|"CALABASH_PRETTY_OUTPUT"|"CALABASH_STANDARD_OUTPUT"|"CALABASH_JAVA_XML_OUTPUT"|"AUTOMATION_OUTPUT"|"APPIUM_SERVER_OUTPUT"|"APPIUM_JAVA_OUTPUT"|"APPIUM_JAVA_XML_OUTPUT"|"APPIUM_PYTHON_OUTPUT"|"APPIUM_PYTHON_XML_OUTPUT"|"EXPLORER_EVENT_LOG"|"EXPLORER_SUMMARY_LOG"|"APPLICATION_CRASH_REPORT"|"XCTEST_LOG"|"VIDEO"|"CUSTOMER_ARTIFACT"|"CUSTOMER_ARTIFACT_LOG"|"TESTSPEC_OUTPUT"|string;
   export type Artifacts = Artifact[];
   export type BillingMethod = "METERED"|"UNMETERED"|string;
   export type Boolean = boolean;
@@ -531,12 +655,44 @@ declare namespace DeviceFarm {
      * The device pool's rules.
      */
     rules: Rules;
+    /**
+     * The number of devices that Device Farm can add to your device pool. Device Farm adds devices that are available and that meet the criteria that you assign for the rules parameter. Depending on how many devices meet these constraints, your device pool might contain fewer devices than the value for this parameter. By specifying the maximum number of devices, you can control the costs that you incur by running tests.
+     */
+    maxDevices?: Integer;
   }
   export interface CreateDevicePoolResult {
     /**
      * The newly created device pool.
      */
     devicePool?: DevicePool;
+  }
+  export interface CreateInstanceProfileRequest {
+    /**
+     * The name of your instance profile.
+     */
+    name: Name;
+    /**
+     * The description of your instance profile.
+     */
+    description?: Message;
+    /**
+     * When set to true, Device Farm will remove app packages after a test run. The default value is false for private devices.
+     */
+    packageCleanup?: Boolean;
+    /**
+     * An array of strings specifying the list of app packages that should not be cleaned up from the device after a test run is over. The list of packages is only considered if you set packageCleanup to true.
+     */
+    excludeAppPackagesFromCleanup?: PackageIds;
+    /**
+     * When set to true, Device Farm will reboot the instance after a test run. The default value is true.
+     */
+    rebootAfterUse?: Boolean;
+  }
+  export interface CreateInstanceProfileResult {
+    /**
+     * An object containing information about your instance profile.
+     */
+    instanceProfile?: InstanceProfile;
   }
   export interface CreateNetworkProfileRequest {
     /**
@@ -612,9 +768,13 @@ declare namespace DeviceFarm {
   }
   export interface CreateRemoteAccessSessionConfiguration {
     /**
-     * Returns the billing method for purposes of configuring a remote access session.
+     * The billing method for the remote access session.
      */
     billingMethod?: BillingMethod;
+    /**
+     * An array of Amazon Resource Names (ARNs) included in the VPC endpoint configuration.
+     */
+    vpceConfigurationArns?: AmazonResourceNames;
   }
   export interface CreateRemoteAccessSessionRequest {
     /**
@@ -625,6 +785,10 @@ declare namespace DeviceFarm {
      * The Amazon Resource Name (ARN) of the device for which you want to create a remote access session.
      */
     deviceArn: AmazonResourceName;
+    /**
+     * The Amazon Resource Name (ARN) of the device instance for which you want to create a remote access session.
+     */
+    instanceArn?: AmazonResourceName;
     /**
      * The public key of the ssh key pair you want to use for connecting to remote devices in your remote debugging session. This is only required if remoteDebugEnabled is set to true.
      */
@@ -657,6 +821,10 @@ declare namespace DeviceFarm {
      * The interaction mode of the remote access session. Valid values are:   INTERACTIVE: You can interact with the iOS device by viewing, touching, and rotating the screen. You cannot run XCUITest framework-based tests in this mode.   NO_VIDEO: You are connected to the device but cannot interact with it or view the screen. This mode has the fastest test execution speed. You can run XCUITest framework-based tests in this mode.   VIDEO_ONLY: You can view the screen but cannot touch or rotate it. You can run XCUITest framework-based tests and watch the screen in this mode.  
      */
     interactionMode?: InteractionMode;
+    /**
+     * When set to true, for private devices, Device Farm will not sign your app again. For public devices, Device Farm always signs your apps again and this parameter has no effect. For more information about how Device Farm re-signs your app(s), see Do you modify my app? in the AWS Device Farm FAQs.
+     */
+    skipAppResign?: Boolean;
   }
   export interface CreateRemoteAccessSessionResult {
     /**
@@ -674,7 +842,7 @@ declare namespace DeviceFarm {
      */
     name: Name;
     /**
-     * The upload's upload type. Must be one of the following values:   ANDROID_APP: An Android upload.   IOS_APP: An iOS upload.   WEB_APP: A web appliction upload.   EXTERNAL_DATA: An external data upload.   APPIUM_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.   APPIUM_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.   APPIUM_PYTHON_TEST_PACKAGE: An Appium Python test package upload.   APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.   APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.   APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload.   CALABASH_TEST_PACKAGE: A Calabash test package upload.   INSTRUMENTATION_TEST_PACKAGE: An instrumentation upload.   UIAUTOMATION_TEST_PACKAGE: A uiautomation test package upload.   UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload.   XCTEST_TEST_PACKAGE: An XCode test package upload.   XCTEST_UI_TEST_PACKAGE: An XCode UI test package upload.    Note If you call CreateUpload with WEB_APP specified, AWS Device Farm throws an ArgumentException error.
+     * The upload's upload type. Must be one of the following values:   ANDROID_APP: An Android upload.   IOS_APP: An iOS upload.   WEB_APP: A web application upload.   EXTERNAL_DATA: An external data upload.   APPIUM_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.   APPIUM_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.   APPIUM_PYTHON_TEST_PACKAGE: An Appium Python test package upload.   APPIUM_NODE_TEST_PACKAGE: An Appium Node.js test package upload.   APPIUM_RUBY_TEST_PACKAGE: An Appium Ruby test package upload.   APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload for a web app.   APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload for a web app.   APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload for a web app.   APPIUM_WEB_NODE_TEST_PACKAGE: An Appium Node.js test package upload for a web app.   APPIUM_WEB_RUBY_TEST_PACKAGE: An Appium Ruby test package upload for a web app.   CALABASH_TEST_PACKAGE: A Calabash test package upload.   INSTRUMENTATION_TEST_PACKAGE: An instrumentation upload.   UIAUTOMATION_TEST_PACKAGE: A uiautomation test package upload.   UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload.   XCTEST_TEST_PACKAGE: An XCode test package upload.   XCTEST_UI_TEST_PACKAGE: An XCode UI test package upload.   APPIUM_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload.   APPIUM_JAVA_TESTNG_TEST_SPEC: An Appium Java TestNG test spec upload.   APPIUM_PYTHON_TEST_SPEC: An Appium Python test spec upload.   APPIUM_NODE_TEST_SPEC: An Appium Node.js test spec upload.   APPIUM_RUBY_TEST_SPEC: An Appium Ruby test spec upload.   APPIUM_WEB_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload for a web app.   APPIUM_WEB_JAVA_TESTNG_TEST_SPEC: An Appium Java TestNG test spec upload for a web app.   APPIUM_WEB_PYTHON_TEST_SPEC: An Appium Python test spec upload for a web app.   APPIUM_WEB_NODE_TEST_SPEC: An Appium Node.js test spec upload for a web app.   APPIUM_WEB_RUBY_TEST_SPEC: An Appium Ruby test spec upload for a web app.   INSTRUMENTATION_TEST_SPEC: An instrumentation test spec upload.   XCTEST_UI_TEST_SPEC: An XCode UI test spec upload.    Note If you call CreateUpload with WEB_APP specified, AWS Device Farm throws an ArgumentException error.
      */
     type: UploadType;
     /**
@@ -687,6 +855,30 @@ declare namespace DeviceFarm {
      * The newly created upload.
      */
     upload?: Upload;
+  }
+  export interface CreateVPCEConfigurationRequest {
+    /**
+     * The friendly name you give to your VPC endpoint configuration, to manage your configurations more easily.
+     */
+    vpceConfigurationName: VPCEConfigurationName;
+    /**
+     * The name of the VPC endpoint service running inside your AWS account that you want Device Farm to test.
+     */
+    vpceServiceName: VPCEServiceName;
+    /**
+     * The DNS name of the service running in your VPC that you want Device Farm to test.
+     */
+    serviceDnsName: ServiceDnsName;
+    /**
+     * An optional description, providing more details about your VPC endpoint configuration.
+     */
+    vpceConfigurationDescription?: VPCEConfigurationDescription;
+  }
+  export interface CreateVPCEConfigurationResult {
+    /**
+     * An object containing information about your VPC endpoint configuration.
+     */
+    vpceConfiguration?: VPCEConfiguration;
   }
   export type CurrencyCode = "USD"|string;
   export interface CustomerArtifactPaths {
@@ -711,6 +903,14 @@ declare namespace DeviceFarm {
     arn: AmazonResourceName;
   }
   export interface DeleteDevicePoolResult {
+  }
+  export interface DeleteInstanceProfileRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the instance profile you are requesting to delete.
+     */
+    arn: AmazonResourceName;
+  }
+  export interface DeleteInstanceProfileResult {
   }
   export interface DeleteNetworkProfileRequest {
     /**
@@ -751,6 +951,14 @@ declare namespace DeviceFarm {
     arn: AmazonResourceName;
   }
   export interface DeleteUploadResult {
+  }
+  export interface DeleteVPCEConfigurationRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to delete.
+     */
+    arn: AmazonResourceName;
+  }
+  export interface DeleteVPCEConfigurationResult {
   }
   export interface Device {
     /**
@@ -829,10 +1037,63 @@ declare namespace DeviceFarm {
      * The name of the fleet to which this device belongs.
      */
     fleetName?: String;
+    /**
+     * The instances belonging to this device.
+     */
+    instances?: DeviceInstances;
+    /**
+     * Reflects how likely a device will be available for a test run. It is currently available in the ListDevices and GetDevice API methods.
+     */
+    availability?: DeviceAvailability;
   }
-  export type DeviceAttribute = "ARN"|"PLATFORM"|"FORM_FACTOR"|"MANUFACTURER"|"REMOTE_ACCESS_ENABLED"|"REMOTE_DEBUG_ENABLED"|"APPIUM_VERSION"|string;
+  export type DeviceAttribute = "ARN"|"PLATFORM"|"FORM_FACTOR"|"MANUFACTURER"|"REMOTE_ACCESS_ENABLED"|"REMOTE_DEBUG_ENABLED"|"APPIUM_VERSION"|"INSTANCE_ARN"|"INSTANCE_LABELS"|"FLEET_TYPE"|"OS_VERSION"|"MODEL"|"AVAILABILITY"|string;
+  export type DeviceAvailability = "TEMPORARY_NOT_AVAILABLE"|"BUSY"|"AVAILABLE"|"HIGHLY_AVAILABLE"|string;
+  export interface DeviceFilter {
+    /**
+     * The aspect of a device such as platform or model used as the selection criteria in a device filter. The supported operators for each attribute are provided in the following list.  ARN  The Amazon Resource Name (ARN) of the device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".  Supported operators: EQUALS, IN, NOT_IN   PLATFORM  The device platform. Valid values are "ANDROID" or "IOS".  Supported operators: EQUALS   OS_VERSION  The operating system version. For example, "10.3.2".  Supported operators: EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, LESS_THAN, LESS_THAN_OR_EQUALS, NOT_IN   MODEL  The device model. For example, "iPad 5th Gen".  Supported operators: CONTAINS, EQUALS, IN, NOT_IN   AVAILABILITY  The current availability of the device. Valid values are "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".  Supported operators: EQUALS   FORM_FACTOR  The device form factor. Valid values are "PHONE" or "TABLET".  Supported operators: EQUALS   MANUFACTURER  The device manufacturer. For example, "Apple".  Supported operators: EQUALS, IN, NOT_IN   REMOTE_ACCESS_ENABLED  Whether the device is enabled for remote access. Valid values are "TRUE" or "FALSE".  Supported operators: EQUALS   REMOTE_DEBUG_ENABLED  Whether the device is enabled for remote debugging. Valid values are "TRUE" or "FALSE".  Supported operators: EQUALS   INSTANCE_ARN  The Amazon Resource Name (ARN) of the device instance.  Supported operators: EQUALS, IN, NOT_IN   INSTANCE_LABELS  The label of the device instance.  Supported operators: CONTAINS   FLEET_TYPE  The fleet type. Valid values are "PUBLIC" or "PRIVATE".  Supported operators: EQUALS   
+     */
+    attribute?: DeviceFilterAttribute;
+    /**
+     * Specifies how Device Farm compares the filter's attribute to the value. For the operators that are supported by each attribute, see the attribute descriptions.
+     */
+    operator?: RuleOperator;
+    /**
+     * An array of one or more filter values used in a device filter.  Operator Values    The IN and NOT_IN operators can take a values array that has more than one element.   The other operators require an array with a single element.    Attribute Values    The PLATFORM attribute can be set to "ANDROID" or "IOS".   The AVAILABILITY attribute can be set to "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".   The FORM_FACTOR attribute can be set to "PHONE" or "TABLET".   The FLEET_TYPE attribute can be set to "PUBLIC" or "PRIVATE".  
+     */
+    values?: DeviceFilterValues;
+  }
+  export type DeviceFilterAttribute = "ARN"|"PLATFORM"|"OS_VERSION"|"MODEL"|"AVAILABILITY"|"FORM_FACTOR"|"MANUFACTURER"|"REMOTE_ACCESS_ENABLED"|"REMOTE_DEBUG_ENABLED"|"INSTANCE_ARN"|"INSTANCE_LABELS"|"FLEET_TYPE"|string;
+  export type DeviceFilterValues = String[];
+  export type DeviceFilters = DeviceFilter[];
   export type DeviceFormFactor = "PHONE"|"TABLET"|string;
   export type DeviceHostPaths = String[];
+  export interface DeviceInstance {
+    /**
+     * The Amazon Resource Name (ARN) of the device instance.
+     */
+    arn?: AmazonResourceName;
+    /**
+     * The Amazon Resource Name (ARN) of the device.
+     */
+    deviceArn?: AmazonResourceName;
+    /**
+     * An array of strings describing the device instance.
+     */
+    labels?: InstanceLabels;
+    /**
+     * The status of the device instance. Valid values are listed below.
+     */
+    status?: InstanceStatus;
+    /**
+     * Unique device identifier for the device instance.
+     */
+    udid?: String;
+    /**
+     * A object containing information about the instance profile.
+     */
+    instanceProfile?: InstanceProfile;
+  }
+  export type DeviceInstances = DeviceInstance[];
   export interface DeviceMinutes {
     /**
      * When specified, represents the total minutes used by the resource to run tests.
@@ -869,6 +1130,10 @@ declare namespace DeviceFarm {
      * Information about the device pool's rules.
      */
     rules?: Rules;
+    /**
+     * The number of devices that Device Farm can add to your device pool. Device Farm adds devices that are available and that meet the criteria that you assign for the rules parameter. Depending on how many devices meet these constraints, your device pool might contain fewer devices than the value for this parameter. By specifying the maximum number of devices, you can control the costs that you incur by running tests.
+     */
+    maxDevices?: Integer;
   }
   export interface DevicePoolCompatibilityResult {
     /**
@@ -887,6 +1152,30 @@ declare namespace DeviceFarm {
   export type DevicePoolCompatibilityResults = DevicePoolCompatibilityResult[];
   export type DevicePoolType = "CURATED"|"PRIVATE"|string;
   export type DevicePools = DevicePool[];
+  export interface DeviceSelectionConfiguration {
+    /**
+     * Used to dynamically select a set of devices for a test run. A filter is made up of an attribute, an operator, and one or more values.    Attribute  The aspect of a device such as platform or model used as the selection criteria in a device filter. Allowed values include:   ARN: The Amazon Resource Name (ARN) of the device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".   PLATFORM: The device platform. Valid values are "ANDROID" or "IOS".   OS_VERSION: The operating system version. For example, "10.3.2".   MODEL: The device model. For example, "iPad 5th Gen".   AVAILABILITY: The current availability of the device. Valid values are "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".   FORM_FACTOR: The device form factor. Valid values are "PHONE" or "TABLET".   MANUFACTURER: The device manufacturer. For example, "Apple".   REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access. Valid values are "TRUE" or "FALSE".   REMOTE_DEBUG_ENABLED: Whether the device is enabled for remote debugging. Valid values are "TRUE" or "FALSE".   INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.   INSTANCE_LABELS: The label of the device instance.   FLEET_TYPE: The fleet type. Valid values are "PUBLIC" or "PRIVATE".      Operator  The filter operator.   The EQUALS operator is available for every attribute except INSTANCE_LABELS.   The CONTAINS operator is available for the INSTANCE_LABELS and MODEL attributes.   The IN and NOT_IN operators are available for the ARN, OS_VERSION, MODEL, MANUFACTURER, and INSTANCE_ARN attributes.   The LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUALS, and GREATER_THAN_OR_EQUALS operators are also available for the OS_VERSION attribute.      Values  An array of one or more filter values.  Operator Values    The IN and NOT_IN operators can take a values array that has more than one element.   The other operators require an array with a single element.    Attribute Values    The PLATFORM attribute can be set to "ANDROID" or "IOS".   The AVAILABILITY attribute can be set to "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".   The FORM_FACTOR attribute can be set to "PHONE" or "TABLET".   The FLEET_TYPE attribute can be set to "PUBLIC" or "PRIVATE".    
+     */
+    filters: DeviceFilters;
+    /**
+     * The maximum number of devices to be included in a test run.
+     */
+    maxDevices: Integer;
+  }
+  export interface DeviceSelectionResult {
+    /**
+     * The filters in a device selection result.
+     */
+    filters?: DeviceFilters;
+    /**
+     * The number of devices that matched the device filter selection criteria.
+     */
+    matchedDevicesCount?: Integer;
+    /**
+     * The maximum number of devices to be selected by a device filter and included in a test run.
+     */
+    maxDevices?: Integer;
+  }
   export type Devices = Device[];
   export type Double = number;
   export interface ExecutionConfiguration {
@@ -902,9 +1191,17 @@ declare namespace DeviceFarm {
      * True if app package cleanup is enabled at the beginning of the test; otherwise, false.
      */
     appPackagesCleanup?: AppPackagesCleanup;
+    /**
+     * Set to true to enable video capture; otherwise, set to false. The default is true.
+     */
+    videoCapture?: VideoCapture;
+    /**
+     * When set to true, for private devices, Device Farm will not sign your app again. For public devices, Device Farm always signs your apps again and this parameter has no effect. For more information about how Device Farm re-signs your app(s), see Do you modify my app? in the AWS Device Farm FAQs.
+     */
+    skipAppResign?: SkipAppResign;
   }
   export type ExecutionResult = "PENDING"|"PASSED"|"WARNED"|"FAILED"|"SKIPPED"|"ERRORED"|"STOPPED"|string;
-  export type ExecutionResultCode = "PARSING_FAILED"|string;
+  export type ExecutionResultCode = "PARSING_FAILED"|"VPC_ENDPOINT_SETUP_FAILED"|string;
   export type ExecutionStatus = "PENDING"|"PENDING_CONCURRENCY"|"PENDING_DEVICE"|"PROCESSING"|"SCHEDULING"|"PREPARING"|"RUNNING"|"COMPLETED"|"STOPPING"|string;
   export type Filter = string;
   export interface GetAccountSettingsRequest {
@@ -914,6 +1211,18 @@ declare namespace DeviceFarm {
      * The account settings.
      */
     accountSettings?: AccountSettings;
+  }
+  export interface GetDeviceInstanceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the instance you're requesting information about.
+     */
+    arn: AmazonResourceName;
+  }
+  export interface GetDeviceInstanceResult {
+    /**
+     * An object containing information about your device instance.
+     */
+    deviceInstance?: DeviceInstance;
   }
   export interface GetDevicePoolCompatibilityRequest {
     /**
@@ -925,13 +1234,17 @@ declare namespace DeviceFarm {
      */
     appArn?: AmazonResourceName;
     /**
-     * The test type for the specified device pool. Allowed values include the following:   BUILTIN_FUZZ: The built-in fuzz type.   BUILTIN_EXPLORER: For Android, an app explorer that will traverse an Android app, interacting with it and capturing screenshots at the same time.   APPIUM_JAVA_JUNIT: The Appium Java JUnit type.   APPIUM_JAVA_TESTNG: The Appium Java TestNG type.   APPIUM_PYTHON: The Appium Python type.   APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for Web apps.   APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for Web apps.   APPIUM_WEB_PYTHON: The Appium Python type for Web apps.   CALABASH: The Calabash type.   INSTRUMENTATION: The Instrumentation type.   UIAUTOMATION: The uiautomation type.   UIAUTOMATOR: The uiautomator type.   XCTEST: The XCode test type.   XCTEST_UI: The XCode UI test type.  
+     * The test type for the specified device pool. Allowed values include the following:   BUILTIN_FUZZ: The built-in fuzz type.   BUILTIN_EXPLORER: For Android, an app explorer that will traverse an Android app, interacting with it and capturing screenshots at the same time.   APPIUM_JAVA_JUNIT: The Appium Java JUnit type.   APPIUM_JAVA_TESTNG: The Appium Java TestNG type.   APPIUM_PYTHON: The Appium Python type.   APPIUM_NODE: The Appium Node.js type.   APPIUM_RUBY: The Appium Ruby type.   APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for web apps.   APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for web apps.   APPIUM_WEB_PYTHON: The Appium Python type for web apps.   APPIUM_WEB_NODE: The Appium Node.js type for web apps.   APPIUM_WEB_RUBY: The Appium Ruby type for web apps.   CALABASH: The Calabash type.   INSTRUMENTATION: The Instrumentation type.   UIAUTOMATION: The uiautomation type.   UIAUTOMATOR: The uiautomator type.   XCTEST: The XCode test type.   XCTEST_UI: The XCode UI test type.  
      */
     testType?: TestType;
     /**
      * Information about the uploaded test to be run against the device pool.
      */
     test?: ScheduleRunTest;
+    /**
+     * An object containing information about the settings for a run.
+     */
+    configuration?: ScheduleRunConfiguration;
   }
   export interface GetDevicePoolCompatibilityResult {
     /**
@@ -966,6 +1279,18 @@ declare namespace DeviceFarm {
      * An object containing information about the requested device.
      */
     device?: Device;
+  }
+  export interface GetInstanceProfileRequest {
+    /**
+     * The Amazon Resource Name (ARN) of your instance profile.
+     */
+    arn: AmazonResourceName;
+  }
+  export interface GetInstanceProfileResult {
+    /**
+     * An object containing information about your instance profile.
+     */
+    instanceProfile?: InstanceProfile;
   }
   export interface GetJobRequest {
     /**
@@ -1083,6 +1408,18 @@ declare namespace DeviceFarm {
      */
     upload?: Upload;
   }
+  export interface GetVPCEConfigurationRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to describe.
+     */
+    arn: AmazonResourceName;
+  }
+  export interface GetVPCEConfigurationResult {
+    /**
+     * An object containing information about your VPC endpoint configuration.
+     */
+    vpceConfiguration?: VPCEConfiguration;
+  }
   export type HostAddress = string;
   export interface IncompatibilityMessage {
     /**
@@ -1111,6 +1448,35 @@ declare namespace DeviceFarm {
      */
     appUpload?: Upload;
   }
+  export type InstanceLabels = String[];
+  export interface InstanceProfile {
+    /**
+     * The Amazon Resource Name (ARN) of the instance profile.
+     */
+    arn?: AmazonResourceName;
+    /**
+     * When set to true, Device Farm will remove app packages after a test run. The default value is false for private devices.
+     */
+    packageCleanup?: Boolean;
+    /**
+     * An array of strings specifying the list of app packages that should not be cleaned up from the device after a test run is over. The list of packages is only considered if you set packageCleanup to true.
+     */
+    excludeAppPackagesFromCleanup?: PackageIds;
+    /**
+     * When set to true, Device Farm will reboot the instance after a test run. The default value is true.
+     */
+    rebootAfterUse?: Boolean;
+    /**
+     * The name of the instance profile.
+     */
+    name?: Name;
+    /**
+     * The description of the instance profile.
+     */
+    description?: Message;
+  }
+  export type InstanceProfiles = InstanceProfile[];
+  export type InstanceStatus = "IN_USE"|"PREPARING"|"AVAILABLE"|"NOT_AVAILABLE"|string;
   export type Integer = number;
   export type InteractionMode = "INTERACTIVE"|"NO_VIDEO"|"VIDEO_ONLY"|string;
   export type IosPaths = String[];
@@ -1124,7 +1490,7 @@ declare namespace DeviceFarm {
      */
     name?: Name;
     /**
-     * The job's type. Allowed values include the following:   BUILTIN_FUZZ: The built-in fuzz type.   BUILTIN_EXPLORER: For Android, an app explorer that will traverse an Android app, interacting with it and capturing screenshots at the same time.   APPIUM_JAVA_JUNIT: The Appium Java JUnit type.   APPIUM_JAVA_TESTNG: The Appium Java TestNG type.   APPIUM_PYTHON: The Appium Python type.   APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for Web apps.   APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for Web apps.   APPIUM_WEB_PYTHON: The Appium Python type for Web apps.   CALABASH: The Calabash type.   INSTRUMENTATION: The Instrumentation type.   UIAUTOMATION: The uiautomation type.   UIAUTOMATOR: The uiautomator type.   XCTEST: The XCode test type.   XCTEST_UI: The XCode UI test type.  
+     * The job's type. Allowed values include the following:   BUILTIN_FUZZ: The built-in fuzz type.   BUILTIN_EXPLORER: For Android, an app explorer that will traverse an Android app, interacting with it and capturing screenshots at the same time.   APPIUM_JAVA_JUNIT: The Appium Java JUnit type.   APPIUM_JAVA_TESTNG: The Appium Java TestNG type.   APPIUM_PYTHON: The Appium Python type.   APPIUM_NODE: The Appium Node.js type.   APPIUM_RUBY: The Appium Ruby type.   APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for web apps.   APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for web apps.   APPIUM_WEB_PYTHON: The Appium Python type for web apps.   APPIUM_WEB_NODE: The Appium Node.js type for web apps.   APPIUM_WEB_RUBY: The Appium Ruby test type for web apps.   CALABASH: The Calabash type.   INSTRUMENTATION: The Instrumentation type.   UIAUTOMATION: The uiautomation type.   UIAUTOMATOR: The uiautomator type.   XCTEST: The XCode test type.   XCTEST_UI: The XCode UI test type.  
      */
     type?: TestType;
     /**
@@ -1160,9 +1526,21 @@ declare namespace DeviceFarm {
      */
     device?: Device;
     /**
+     * The Amazon Resource Name (ARN) of the instance.
+     */
+    instanceArn?: AmazonResourceName;
+    /**
      * Represents the total (metered or unmetered) minutes used by the job.
      */
     deviceMinutes?: DeviceMinutes;
+    /**
+     * The endpoint for streaming device video.
+     */
+    videoEndpoint?: String;
+    /**
+     * This value is set to true if video capture is enabled; otherwise, it is set to false.
+     */
+    videoCapture?: VideoCapture;
   }
   export type JobTimeoutMinutes = number;
   export type Jobs = Job[];
@@ -1187,6 +1565,26 @@ declare namespace DeviceFarm {
     artifacts?: Artifacts;
     /**
      * If the number of items that are returned is significantly large, this is an identifier that is also returned, which can be used in a subsequent call to this operation to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListDeviceInstancesRequest {
+    /**
+     * An integer specifying the maximum number of items you want to return in the API response.
+     */
+    maxResults?: Integer;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListDeviceInstancesResult {
+    /**
+     * An object containing information about your device instances.
+     */
+    deviceInstances?: DeviceInstances;
+    /**
+     * An identifier that can be used in the next call to this operation to return the next set of items in the list.
      */
     nextToken?: PaginationToken;
   }
@@ -1223,6 +1621,10 @@ declare namespace DeviceFarm {
      * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
      */
     nextToken?: PaginationToken;
+    /**
+     * Used to select a set of devices. A filter is made up of an attribute, an operator, and one or more values.   Attribute: The aspect of a device such as platform or model used as the selction criteria in a device filter. Allowed values include:   ARN: The Amazon Resource Name (ARN) of the device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".   PLATFORM: The device platform. Valid values are "ANDROID" or "IOS".   OS_VERSION: The operating system version. For example, "10.3.2".   MODEL: The device model. For example, "iPad 5th Gen".   AVAILABILITY: The current availability of the device. Valid values are "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".   FORM_FACTOR: The device form factor. Valid values are "PHONE" or "TABLET".   MANUFACTURER: The device manufacturer. For example, "Apple".   REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access. Valid values are "TRUE" or "FALSE".   REMOTE_DEBUG_ENABLED: Whether the device is enabled for remote debugging. Valid values are "TRUE" or "FALSE".   INSTANCE_ARN: The Amazon Resource Name (ARN) of the device instance.   INSTANCE_LABELS: The label of the device instance.   FLEET_TYPE: The fleet type. Valid values are "PUBLIC" or "PRIVATE".     Operator: The filter operator.   The EQUALS operator is available for every attribute except INSTANCE_LABELS.   The CONTAINS operator is available for the INSTANCE_LABELS and MODEL attributes.   The IN and NOT_IN operators are available for the ARN, OS_VERSION, MODEL, MANUFACTURER, and INSTANCE_ARN attributes.   The LESS_THAN, GREATER_THAN, LESS_THAN_OR_EQUALS, and GREATER_THAN_OR_EQUALS operators are also available for the OS_VERSION attribute.     Values: An array of one or more filter values.   The IN and NOT_IN operators take a values array that has one or more elements.   The other operators require an array with a single element.   In a request, the AVAILABILITY attribute takes "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE" as values.    
+     */
+    filters?: DeviceFilters;
   }
   export interface ListDevicesResult {
     /**
@@ -1231,6 +1633,26 @@ declare namespace DeviceFarm {
     devices?: Devices;
     /**
      * If the number of items that are returned is significantly large, this is an identifier that is also returned, which can be used in a subsequent call to this operation to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListInstanceProfilesRequest {
+    /**
+     * An integer specifying the maximum number of items you want to return in the API response.
+     */
+    maxResults?: Integer;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListInstanceProfilesResult {
+    /**
+     * An object containing information about your instance profiles.
+     */
+    instanceProfiles?: InstanceProfiles;
+    /**
+     * An identifier that can be used in the next call to this operation to return the next set of items in the list.
      */
     nextToken?: PaginationToken;
   }
@@ -1388,7 +1810,7 @@ declare namespace DeviceFarm {
   }
   export interface ListSamplesRequest {
     /**
-     * The Amazon Resource Name (ARN) of the project for which you want to list samples.
+     * The Amazon Resource Name (ARN) of the job used to list samples.
      */
     arn: AmazonResourceName;
     /**
@@ -1472,6 +1894,10 @@ declare namespace DeviceFarm {
      */
     arn: AmazonResourceName;
     /**
+     * The type of upload. Must be one of the following values:   ANDROID_APP: An Android upload.   IOS_APP: An iOS upload.   WEB_APP: A web appliction upload.   EXTERNAL_DATA: An external data upload.   APPIUM_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.   APPIUM_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.   APPIUM_PYTHON_TEST_PACKAGE: An Appium Python test package upload.   APPIUM_NODE_TEST_PACKAGE: An Appium Node.js test package upload.   APPIUM_RUBY_TEST_PACKAGE: An Appium Ruby test package upload.   APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload for a web app.   APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload for a web app.   APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload for a web app.   APPIUM_WEB_NODE_TEST_PACKAGE: An Appium Node.js test package upload for a web app.   APPIUM_WEB_RUBY_TEST_PACKAGE: An Appium Ruby test package upload for a web app.   CALABASH_TEST_PACKAGE: A Calabash test package upload.   INSTRUMENTATION_TEST_PACKAGE: An instrumentation upload.   UIAUTOMATION_TEST_PACKAGE: A uiautomation test package upload.   UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload.   XCTEST_TEST_PACKAGE: An XCode test package upload.   XCTEST_UI_TEST_PACKAGE: An XCode UI test package upload.   APPIUM_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload.   APPIUM_JAVA_TESTNG_TEST_SPEC: An Appium Java TestNG test spec upload.   APPIUM_PYTHON_TEST_SPEC: An Appium Python test spec upload.   APPIUM_NODE_TEST_SPEC: An Appium Node.js test spec upload.    APPIUM_RUBY_TEST_SPEC: An Appium Ruby test spec upload.   APPIUM_WEB_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload for a web app.   APPIUM_WEB_JAVA_TESTNG_TEST_SPEC: An Appium Java TestNG test spec upload for a web app.   APPIUM_WEB_PYTHON_TEST_SPEC: An Appium Python test spec upload for a web app.   APPIUM_WEB_NODE_TEST_SPEC: An Appium Node.js test spec upload for a web app.   APPIUM_WEB_RUBY_TEST_SPEC: An Appium Ruby test spec upload for a web app.   INSTRUMENTATION_TEST_SPEC: An instrumentation test spec upload.   XCTEST_UI_TEST_SPEC: An XCode UI test spec upload.  
+     */
+    type?: UploadType;
+    /**
      * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
      */
     nextToken?: PaginationToken;
@@ -1483,6 +1909,26 @@ declare namespace DeviceFarm {
     uploads?: Uploads;
     /**
      * If the number of items that are returned is significantly large, this is an identifier that is also returned, which can be used in a subsequent call to this operation to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListVPCEConfigurationsRequest {
+    /**
+     * An integer specifying the maximum number of items you want to return in the API response.
+     */
+    maxResults?: Integer;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface ListVPCEConfigurationsResult {
+    /**
+     * An array of VPCEConfiguration objects containing information about your VPC endpoint configuration.
+     */
+    vpceConfigurations?: VPCEConfigurations;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
      */
     nextToken?: PaginationToken;
   }
@@ -1643,6 +2089,7 @@ declare namespace DeviceFarm {
   export type OfferingTransactions = OfferingTransaction[];
   export type OfferingType = "RECURRING"|string;
   export type Offerings = Offering[];
+  export type PackageIds = String[];
   export type PaginationToken = string;
   export type PercentInteger = number;
   export interface Problem {
@@ -1794,6 +2241,10 @@ declare namespace DeviceFarm {
      */
     device?: Device;
     /**
+     * The Amazon Resource Name (ARN) of the instance.
+     */
+    instanceArn?: AmazonResourceName;
+    /**
      * This flag is set to true if remote debugging is enabled for the remote access session.
      */
     remoteDebugEnabled?: Boolean;
@@ -1833,6 +2284,10 @@ declare namespace DeviceFarm {
      * The interaction mode of the remote access session. Valid values are:   INTERACTIVE: You can interact with the iOS device by viewing, touching, and rotating the screen. You cannot run XCUITest framework-based tests in this mode.   NO_VIDEO: You are connected to the device but cannot interact with it or view the screen. This mode has the fastest test execution speed. You can run XCUITest framework-based tests in this mode.   VIDEO_ONLY: You can view the screen but cannot touch or rotate it. You can run XCUITest framework-based tests and watch the screen in this mode.  
      */
     interactionMode?: InteractionMode;
+    /**
+     * When set to true, for private devices, Device Farm will not sign your app again. For public devices, Device Farm always signs your apps again and this parameter has no effect. For more information about how Device Farm re-signs your app(s), see Do you modify my app? in the AWS Device Farm FAQs.
+     */
+    skipAppResign?: SkipAppResign;
   }
   export type RemoteAccessSessions = RemoteAccessSession[];
   export interface RenewOfferingRequest {
@@ -1863,11 +2318,11 @@ declare namespace DeviceFarm {
   }
   export interface Rule {
     /**
-     * The rule's stringified attribute. For example, specify the value as "\"abc\"". Allowed values include:   ARN: The ARN.   FORM_FACTOR: The form factor (for example, phone or tablet).   MANUFACTURER: The manufacturer.   PLATFORM: The platform (for example, Android or iOS).   REMOTE_ACCESS_ENABLED: Whether the device is enabled for remote access.   APPIUM_VERSION: The Appium version for the test.  
+     * The rule's stringified attribute. For example, specify the value as "\"abc\"". The supported operators for each attribute are provided in the following list.  APPIUM_VERSION  The Appium version for the test.  Supported operators: CONTAINS   ARN  The Amazon Resource Name (ARN) of the device. For example, "arn:aws:devicefarm:us-west-2::device:12345Example".  Supported operators: EQUALS, IN, NOT_IN   AVAILABILITY  The current availability of the device. Valid values are "AVAILABLE", "HIGHLY_AVAILABLE", "BUSY", or "TEMPORARY_NOT_AVAILABLE".  Supported operators: EQUALS   FLEET_TYPE  The fleet type. Valid values are "PUBLIC" or "PRIVATE".  Supported operators: EQUALS   FORM_FACTOR  The device form factor. Valid values are "PHONE" or "TABLET".  Supported operators: EQUALS, IN, NOT_IN   INSTANCE_ARN  The Amazon Resource Name (ARN) of the device instance.  Supported operators: IN, NOT_IN   INSTANCE_LABELS  The label of the device instance.  Supported operators: CONTAINS   MANUFACTURER  The device manufacturer. For example, "Apple".  Supported operators: EQUALS, IN, NOT_IN   MODEL  The device model, such as "Apple iPad Air 2" or "Google Pixel".  Supported operators: CONTAINS, EQUALS, IN, NOT_IN   OS_VERSION  The operating system version. For example, "10.3.2".  Supported operators: EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, LESS_THAN, LESS_THAN_OR_EQUALS, NOT_IN   PLATFORM  The device platform. Valid values are "ANDROID" or "IOS".  Supported operators: EQUALS, IN, NOT_IN   REMOTE_ACCESS_ENABLED  Whether the device is enabled for remote access. Valid values are "TRUE" or "FALSE".  Supported operators: EQUALS   REMOTE_DEBUG_ENABLED  Whether the device is enabled for remote debugging. Valid values are "TRUE" or "FALSE".  Supported operators: EQUALS   
      */
     attribute?: DeviceAttribute;
     /**
-     * The rule's operator.   EQUALS: The equals operator.   GREATER_THAN: The greater-than operator.   IN: The in operator.   LESS_THAN: The less-than operator.   NOT_IN: The not-in operator.   CONTAINS: The contains operator.  
+     * Specifies how Device Farm compares the rule's attribute to the value. For the operators that are supported by each attribute, see the attribute descriptions.
      */
     operator?: RuleOperator;
     /**
@@ -1875,7 +2330,7 @@ declare namespace DeviceFarm {
      */
     value?: String;
   }
-  export type RuleOperator = "EQUALS"|"LESS_THAN"|"GREATER_THAN"|"IN"|"NOT_IN"|"CONTAINS"|string;
+  export type RuleOperator = "EQUALS"|"LESS_THAN"|"LESS_THAN_OR_EQUALS"|"GREATER_THAN"|"GREATER_THAN_OR_EQUALS"|"IN"|"NOT_IN"|"CONTAINS"|string;
   export type Rules = Rule[];
   export interface Run {
     /**
@@ -1887,7 +2342,7 @@ declare namespace DeviceFarm {
      */
     name?: Name;
     /**
-     * The run's type. Must be one of the following values:   BUILTIN_FUZZ: The built-in fuzz type.   BUILTIN_EXPLORER: For Android, an app explorer that will traverse an Android app, interacting with it and capturing screenshots at the same time.   APPIUM_JAVA_JUNIT: The Appium Java JUnit type.   APPIUM_JAVA_TESTNG: The Appium Java TestNG type.   APPIUM_PYTHON: The Appium Python type.   APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for Web apps.   APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for Web apps.   APPIUM_WEB_PYTHON: The Appium Python type for Web apps.   CALABASH: The Calabash type.   INSTRUMENTATION: The Instrumentation type.   UIAUTOMATION: The uiautomation type.   UIAUTOMATOR: The uiautomator type.   XCTEST: The XCode test type.   XCTEST_UI: The XCode UI test type.  
+     * The run's type. Must be one of the following values:   BUILTIN_FUZZ: The built-in fuzz type.   BUILTIN_EXPLORER: For Android, an app explorer that will traverse an Android app, interacting with it and capturing screenshots at the same time.   APPIUM_JAVA_JUNIT: The Appium Java JUnit type.   APPIUM_JAVA_TESTNG: The Appium Java TestNG type.   APPIUM_PYTHON: The Appium Python type.   APPIUM_NODE: The Appium Node.js type.   APPIUM_RUBY: The Appium Ruby type.   APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for web apps.   APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for web apps.   APPIUM_WEB_PYTHON: The Appium Python type for web apps.   APPIUM_WEB_NODE: The Appium Node.js type for web apps.   APPIUM_WEB_RUBY: The Appium Ruby type for web apps.   CALABASH: The Calabash type.   INSTRUMENTATION: The Instrumentation type.   UIAUTOMATION: The uiautomation type.   UIAUTOMATOR: The uiautomator type.   XCTEST: The XCode test type.   XCTEST_UI: The XCode UI test type.  
      */
     type?: TestType;
     /**
@@ -1987,9 +2442,21 @@ declare namespace DeviceFarm {
      */
     customerArtifactPaths?: CustomerArtifactPaths;
     /**
-     * A pre-signed Amazon S3 URL that can be used with a corresponding GET request to download the symbol file for the run.
+     * The Device Farm console URL for the recording of the run.
      */
     webUrl?: String;
+    /**
+     * When set to true, for private devices, Device Farm will not sign your app again. For public devices, Device Farm always signs your apps again and this parameter has no effect. For more information about how Device Farm re-signs your app(s), see Do you modify my app? in the AWS Device Farm FAQs.
+     */
+    skipAppResign?: SkipAppResign;
+    /**
+     * The ARN of the YAML-formatted test specification for the run.
+     */
+    testSpecArn?: AmazonResourceName;
+    /**
+     * The results of a device filter used to select the devices for a test run.
+     */
+    deviceSelectionResult?: DeviceSelectionResult;
   }
   export type Runs = Run[];
   export interface Sample {
@@ -2026,6 +2493,10 @@ declare namespace DeviceFarm {
      */
     location?: Location;
     /**
+     * An array of Amazon Resource Names (ARNs) for your VPC endpoint configurations.
+     */
+    vpceConfigurationArns?: AmazonResourceNames;
+    /**
      * Input CustomerArtifactPaths object for the scheduled run configuration.
      */
     customerArtifactPaths?: CustomerArtifactPaths;
@@ -2054,7 +2525,11 @@ declare namespace DeviceFarm {
     /**
      * The ARN of the device pool for the run to be scheduled.
      */
-    devicePoolArn: AmazonResourceName;
+    devicePoolArn?: AmazonResourceName;
+    /**
+     * The filter criteria used to dynamically select a set of devices for a test run, as well as the maximum number of devices to be included in the run. Either  devicePoolArn  or  deviceSelectionConfiguration  is required in a request.
+     */
+    deviceSelectionConfiguration?: DeviceSelectionConfiguration;
     /**
      * The name for the run to be scheduled.
      */
@@ -2080,7 +2555,7 @@ declare namespace DeviceFarm {
   }
   export interface ScheduleRunTest {
     /**
-     * The test's type. Must be one of the following values:   BUILTIN_FUZZ: The built-in fuzz type.   BUILTIN_EXPLORER: For Android, an app explorer that will traverse an Android app, interacting with it and capturing screenshots at the same time.   APPIUM_JAVA_JUNIT: The Appium Java JUnit type.   APPIUM_JAVA_TESTNG: The Appium Java TestNG type.   APPIUM_PYTHON: The Appium Python type.   APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for Web apps.   APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for Web apps.   APPIUM_WEB_PYTHON: The Appium Python type for Web apps.   CALABASH: The Calabash type.   INSTRUMENTATION: The Instrumentation type.   UIAUTOMATION: The uiautomation type.   UIAUTOMATOR: The uiautomator type.   XCTEST: The XCode test type.   XCTEST_UI: The XCode UI test type.  
+     * The test's type. Must be one of the following values:   BUILTIN_FUZZ: The built-in fuzz type.   BUILTIN_EXPLORER: For Android, an app explorer that will traverse an Android app, interacting with it and capturing screenshots at the same time.   APPIUM_JAVA_JUNIT: The Appium Java JUnit type.   APPIUM_JAVA_TESTNG: The Appium Java TestNG type.   APPIUM_PYTHON: The Appium Python type.   APPIUM_NODE: The Appium Node.js type.   APPIUM_RUBY: The Appium Ruby type.   APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for web apps.   APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for web apps.   APPIUM_WEB_PYTHON: The Appium Python type for web apps.   APPIUM_WEB_NODE: The Appium Node.js type for web apps.   APPIUM_WEB_RUBY: The Appium Ruby type for web apps.   CALABASH: The Calabash type.   INSTRUMENTATION: The Instrumentation type.   UIAUTOMATION: The uiautomation type.   UIAUTOMATOR: The uiautomator type.   XCTEST: The XCode test type.   XCTEST_UI: The XCode UI test type.  
      */
     type: TestType;
     /**
@@ -2088,15 +2563,33 @@ declare namespace DeviceFarm {
      */
     testPackageArn?: AmazonResourceName;
     /**
+     * The ARN of the YAML-formatted test specification.
+     */
+    testSpecArn?: AmazonResourceName;
+    /**
      * The test's filter.
      */
     filter?: Filter;
     /**
-     * The test's parameters, such as the following test framework parameters and fixture settings: For Calabash tests:   profile: A cucumber profile, for example, "my_profile_name".   tags: You can limit execution to features or scenarios that have (or don't have) certain tags, for example, "@smoke" or "@smoke,~@wip".   For Appium tests (all types):   appium_version: The Appium version. Currently supported values are "1.4.16", "1.6.3", "latest", and "default".   “latest” will run the latest Appium version supported by Device Farm (1.6.3).   For “default”, Device Farm will choose a compatible version of Appium for the device. The current behavior is to run 1.4.16 on Android devices and iOS 9 and earlier, 1.6.3 for iOS 10 and later.   This behavior is subject to change.     For Fuzz tests (Android only):   event_count: The number of events, between 1 and 10000, that the UI fuzz test should perform.   throttle: The time, in ms, between 0 and 1000, that the UI fuzz test should wait between events.   seed: A seed to use for randomizing the UI fuzz test. Using the same seed value between tests ensures identical event sequences.   For Explorer tests:   username: A username to use if the Explorer encounters a login form. If not supplied, no username will be inserted.   password: A password to use if the Explorer encounters a login form. If not supplied, no password will be inserted.   For Instrumentation:   filter: A test filter string. Examples:   Running a single test case: "com.android.abc.Test1"   Running a single test: "com.android.abc.Test1#smoke"   Running multiple tests: "com.android.abc.Test1,com.android.abc.Test2"     For XCTest and XCTestUI:   filter: A test filter string. Examples:   Running a single test class: "LoginTests"   Running a multiple test classes: "LoginTests,SmokeTests"   Running a single test: "LoginTests/testValid"   Running multiple tests: "LoginTests/testValid,LoginTests/testInvalid"     For UIAutomator:   filter: A test filter string. Examples:   Running a single test case: "com.android.abc.Test1"   Running a single test: "com.android.abc.Test1#smoke"   Running multiple tests: "com.android.abc.Test1,com.android.abc.Test2"    
+     * The test's parameters, such as test framework parameters and fixture settings. Parameters are represented by name-value pairs of strings. For all tests:   app_performance_monitoring: Performance monitoring is enabled by default. Set this parameter to "false" to disable it.   For Calabash tests:   profile: A cucumber profile, for example, "my_profile_name".   tags: You can limit execution to features or scenarios that have (or don't have) certain tags, for example, "@smoke" or "@smoke,~@wip".   For Appium tests (all types):   appium_version: The Appium version. Currently supported values are "1.6.5" (and higher), "latest", and "default".   “latest” will run the latest Appium version supported by Device Farm (1.9.1).   For “default”, Device Farm will choose a compatible version of Appium for the device. The current behavior is to run 1.7.2 on Android devices and iOS 9 and earlier, 1.7.2 for iOS 10 and later.   This behavior is subject to change.     For Fuzz tests (Android only):   event_count: The number of events, between 1 and 10000, that the UI fuzz test should perform.   throttle: The time, in ms, between 0 and 1000, that the UI fuzz test should wait between events.   seed: A seed to use for randomizing the UI fuzz test. Using the same seed value between tests ensures identical event sequences.   For Explorer tests:   username: A username to use if the Explorer encounters a login form. If not supplied, no username will be inserted.   password: A password to use if the Explorer encounters a login form. If not supplied, no password will be inserted.   For Instrumentation:   filter: A test filter string. Examples:   Running a single test case: "com.android.abc.Test1"   Running a single test: "com.android.abc.Test1#smoke"   Running multiple tests: "com.android.abc.Test1,com.android.abc.Test2"     For XCTest and XCTestUI:   filter: A test filter string. Examples:   Running a single test class: "LoginTests"   Running a multiple test classes: "LoginTests,SmokeTests"   Running a single test: "LoginTests/testValid"   Running multiple tests: "LoginTests/testValid,LoginTests/testInvalid"     For UIAutomator:   filter: A test filter string. Examples:   Running a single test case: "com.android.abc.Test1"   Running a single test: "com.android.abc.Test1#smoke"   Running multiple tests: "com.android.abc.Test1,com.android.abc.Test2"    
      */
     parameters?: TestParameters;
   }
+  export type ServiceDnsName = string;
+  export type SkipAppResign = boolean;
   export type SshPublicKey = string;
+  export interface StopJobRequest {
+    /**
+     * Represents the Amazon Resource Name (ARN) of the Device Farm job you wish to stop.
+     */
+    arn: AmazonResourceName;
+  }
+  export interface StopJobResult {
+    /**
+     * The job that was stopped.
+     */
+    job?: Job;
+  }
   export interface StopRemoteAccessSessionRequest {
     /**
      * The Amazon Resource Name (ARN) of the remote access session you wish to stop.
@@ -2132,7 +2625,7 @@ declare namespace DeviceFarm {
      */
     name?: Name;
     /**
-     * The suite's type. Must be one of the following values:   BUILTIN_FUZZ: The built-in fuzz type.   BUILTIN_EXPLORER: For Android, an app explorer that will traverse an Android app, interacting with it and capturing screenshots at the same time.   APPIUM_JAVA_JUNIT: The Appium Java JUnit type.   APPIUM_JAVA_TESTNG: The Appium Java TestNG type.   APPIUM_PYTHON: The Appium Python type.   APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for Web apps.   APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for Web apps.   APPIUM_WEB_PYTHON: The Appium Python type for Web apps.   CALABASH: The Calabash type.   INSTRUMENTATION: The Instrumentation type.   UIAUTOMATION: The uiautomation type.   UIAUTOMATOR: The uiautomator type.   XCTEST: The XCode test type.   XCTEST_UI: The XCode UI test type.  
+     * The suite's type. Must be one of the following values:   BUILTIN_FUZZ: The built-in fuzz type.   BUILTIN_EXPLORER: For Android, an app explorer that will traverse an Android app, interacting with it and capturing screenshots at the same time.   APPIUM_JAVA_JUNIT: The Appium Java JUnit type.   APPIUM_JAVA_TESTNG: The Appium Java TestNG type.   APPIUM_PYTHON: The Appium Python type.   APPIUM_NODE: The Appium Node.js type.   APPIUM_RUBY: The Appium Ruby type.   APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for web apps.   APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for web apps.   APPIUM_WEB_PYTHON: The Appium Python type for web apps.   APPIUM_WEB_NODE: The Appium Node.js type for web apps.   APPIUM_WEB_RUBY: The Appium Ruby type for web apps.   CALABASH: The Calabash type.   INSTRUMENTATION: The Instrumentation type.   UIAUTOMATION: The uiautomation type.   UIAUTOMATOR: The uiautomator type.   XCTEST: The XCode test type.   XCTEST_UI: The XCode UI test type.  
      */
     type?: TestType;
     /**
@@ -2179,7 +2672,7 @@ declare namespace DeviceFarm {
      */
     name?: Name;
     /**
-     * The test's type. Must be one of the following values:   BUILTIN_FUZZ: The built-in fuzz type.   BUILTIN_EXPLORER: For Android, an app explorer that will traverse an Android app, interacting with it and capturing screenshots at the same time.   APPIUM_JAVA_JUNIT: The Appium Java JUnit type.   APPIUM_JAVA_TESTNG: The Appium Java TestNG type.   APPIUM_PYTHON: The Appium Python type.   APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for Web apps.   APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for Web apps.   APPIUM_WEB_PYTHON: The Appium Python type for Web apps.   CALABASH: The Calabash type.   INSTRUMENTATION: The Instrumentation type.   UIAUTOMATION: The uiautomation type.   UIAUTOMATOR: The uiautomator type.   XCTEST: The XCode test type.   XCTEST_UI: The XCode UI test type.  
+     * The test's type. Must be one of the following values:   BUILTIN_FUZZ: The built-in fuzz type.   BUILTIN_EXPLORER: For Android, an app explorer that will traverse an Android app, interacting with it and capturing screenshots at the same time.   APPIUM_JAVA_JUNIT: The Appium Java JUnit type.   APPIUM_JAVA_TESTNG: The Appium Java TestNG type.   APPIUM_PYTHON: The Appium Python type.   APPIUM_NODE: The Appium Node.js type.   APPIUM_RUBY: The Appium Ruby type.   APPIUM_WEB_JAVA_JUNIT: The Appium Java JUnit type for web apps.   APPIUM_WEB_JAVA_TESTNG: The Appium Java TestNG type for web apps.   APPIUM_WEB_PYTHON: The Appium Python type for web apps.   APPIUM_WEB_NODE: The Appium Node.js type for web apps.   APPIUM_WEB_RUBY: The Appium Ruby type for web apps.   CALABASH: The Calabash type.   INSTRUMENTATION: The Instrumentation type.   UIAUTOMATION: The uiautomation type.   UIAUTOMATOR: The uiautomator type.   XCTEST: The XCode test type.   XCTEST_UI: The XCode UI test type.  
      */
     type?: TestType;
     /**
@@ -2216,7 +2709,7 @@ declare namespace DeviceFarm {
     deviceMinutes?: DeviceMinutes;
   }
   export type TestParameters = {[key: string]: String};
-  export type TestType = "BUILTIN_FUZZ"|"BUILTIN_EXPLORER"|"WEB_PERFORMANCE_PROFILE"|"APPIUM_JAVA_JUNIT"|"APPIUM_JAVA_TESTNG"|"APPIUM_PYTHON"|"APPIUM_WEB_JAVA_JUNIT"|"APPIUM_WEB_JAVA_TESTNG"|"APPIUM_WEB_PYTHON"|"CALABASH"|"INSTRUMENTATION"|"UIAUTOMATION"|"UIAUTOMATOR"|"XCTEST"|"XCTEST_UI"|"REMOTE_ACCESS_RECORD"|"REMOTE_ACCESS_REPLAY"|string;
+  export type TestType = "BUILTIN_FUZZ"|"BUILTIN_EXPLORER"|"WEB_PERFORMANCE_PROFILE"|"APPIUM_JAVA_JUNIT"|"APPIUM_JAVA_TESTNG"|"APPIUM_PYTHON"|"APPIUM_NODE"|"APPIUM_RUBY"|"APPIUM_WEB_JAVA_JUNIT"|"APPIUM_WEB_JAVA_TESTNG"|"APPIUM_WEB_PYTHON"|"APPIUM_WEB_NODE"|"APPIUM_WEB_RUBY"|"CALABASH"|"INSTRUMENTATION"|"UIAUTOMATION"|"UIAUTOMATOR"|"XCTEST"|"XCTEST_UI"|"REMOTE_ACCESS_RECORD"|"REMOTE_ACCESS_REPLAY"|string;
   export type Tests = Test[];
   export type TransactionIdentifier = string;
   export interface TrialMinutes {
@@ -2242,6 +2735,26 @@ declare namespace DeviceFarm {
   }
   export type UniqueProblems = UniqueProblem[];
   export type UniqueProblemsByExecutionResultMap = {[key: string]: UniqueProblems};
+  export interface UpdateDeviceInstanceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the device instance.
+     */
+    arn: AmazonResourceName;
+    /**
+     * The Amazon Resource Name (ARN) of the profile that you want to associate with the device instance.
+     */
+    profileArn?: AmazonResourceName;
+    /**
+     * An array of strings that you want to associate with the device instance.
+     */
+    labels?: InstanceLabels;
+  }
+  export interface UpdateDeviceInstanceResult {
+    /**
+     * An object containing information about your device instance.
+     */
+    deviceInstance?: DeviceInstance;
+  }
   export interface UpdateDevicePoolRequest {
     /**
      * The Amazon Resourc Name (ARN) of the Device Farm device pool you wish to update.
@@ -2259,12 +2772,52 @@ declare namespace DeviceFarm {
      * Represents the rules you wish to modify for the device pool. Updating rules is optional; however, if you choose to update rules for your request, the update will replace the existing rules.
      */
     rules?: Rules;
+    /**
+     * The number of devices that Device Farm can add to your device pool. Device Farm adds devices that are available and that meet the criteria that you assign for the rules parameter. Depending on how many devices meet these constraints, your device pool might contain fewer devices than the value for this parameter. By specifying the maximum number of devices, you can control the costs that you incur by running tests. If you use this parameter in your request, you cannot use the clearMaxDevices parameter in the same request.
+     */
+    maxDevices?: Integer;
+    /**
+     * Sets whether the maxDevices parameter applies to your device pool. If you set this parameter to true, the maxDevices parameter does not apply, and Device Farm does not limit the number of devices that it adds to your device pool. In this case, Device Farm adds all available devices that meet the criteria that are specified for the rules parameter. If you use this parameter in your request, you cannot use the maxDevices parameter in the same request.
+     */
+    clearMaxDevices?: Boolean;
   }
   export interface UpdateDevicePoolResult {
     /**
      * The device pool you just updated.
      */
     devicePool?: DevicePool;
+  }
+  export interface UpdateInstanceProfileRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the instance profile.
+     */
+    arn: AmazonResourceName;
+    /**
+     * The updated name for your instance profile.
+     */
+    name?: Name;
+    /**
+     * The updated description for your instance profile.
+     */
+    description?: Message;
+    /**
+     * The updated choice for whether you want to specify package cleanup. The default value is false for private devices.
+     */
+    packageCleanup?: Boolean;
+    /**
+     * An array of strings specifying the list of app packages that should not be cleaned up from the device after a test run is over. The list of packages is only considered if you set packageCleanup to true.
+     */
+    excludeAppPackagesFromCleanup?: PackageIds;
+    /**
+     * The updated choice for whether you want to reboot the device after use. The default value is true.
+     */
+    rebootAfterUse?: Boolean;
+  }
+  export interface UpdateInstanceProfileResult {
+    /**
+     * An object containing information about your instance profile.
+     */
+    instanceProfile?: InstanceProfile;
   }
   export interface UpdateNetworkProfileRequest {
     /**
@@ -2342,6 +2895,58 @@ declare namespace DeviceFarm {
      */
     project?: Project;
   }
+  export interface UpdateUploadRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the uploaded test spec.
+     */
+    arn: AmazonResourceName;
+    /**
+     * The upload's test spec file name. The name should not contain the '/' character. The test spec file name must end with the .yaml or .yml file extension.
+     */
+    name?: Name;
+    /**
+     * The upload's content type (for example, "application/x-yaml").
+     */
+    contentType?: ContentType;
+    /**
+     * Set to true if the YAML file has changed and needs to be updated; otherwise, set to false.
+     */
+    editContent?: Boolean;
+  }
+  export interface UpdateUploadResult {
+    /**
+     * A test spec uploaded to Device Farm.
+     */
+    upload?: Upload;
+  }
+  export interface UpdateVPCEConfigurationRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the VPC endpoint configuration you want to update.
+     */
+    arn: AmazonResourceName;
+    /**
+     * The friendly name you give to your VPC endpoint configuration, to manage your configurations more easily.
+     */
+    vpceConfigurationName?: VPCEConfigurationName;
+    /**
+     * The name of the VPC endpoint service running inside your AWS account that you want Device Farm to test.
+     */
+    vpceServiceName?: VPCEServiceName;
+    /**
+     * The DNS (domain) name used to connect to your private service in your Amazon VPC. The DNS name must not already be in use on the Internet.
+     */
+    serviceDnsName?: ServiceDnsName;
+    /**
+     * An optional description, providing more details about your VPC endpoint configuration.
+     */
+    vpceConfigurationDescription?: VPCEConfigurationDescription;
+  }
+  export interface UpdateVPCEConfigurationResult {
+    /**
+     * An object containing information about your VPC endpoint configuration.
+     */
+    vpceConfiguration?: VPCEConfiguration;
+  }
   export interface Upload {
     /**
      * The upload's ARN.
@@ -2356,7 +2961,7 @@ declare namespace DeviceFarm {
      */
     created?: DateTime;
     /**
-     * The upload's type. Must be one of the following values:   ANDROID_APP: An Android upload.   IOS_APP: An iOS upload.   WEB_APP: A web appliction upload.   EXTERNAL_DATA: An external data upload.   APPIUM_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.   APPIUM_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.   APPIUM_PYTHON_TEST_PACKAGE: An Appium Python test package upload.   APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.   APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.   APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload.   CALABASH_TEST_PACKAGE: A Calabash test package upload.   INSTRUMENTATION_TEST_PACKAGE: An instrumentation upload.   UIAUTOMATION_TEST_PACKAGE: A uiautomation test package upload.   UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload.   XCTEST_TEST_PACKAGE: An XCode test package upload.   XCTEST_UI_TEST_PACKAGE: An XCode UI test package upload.  
+     * The upload's type. Must be one of the following values:   ANDROID_APP: An Android upload.   IOS_APP: An iOS upload.   WEB_APP: A web appliction upload.   EXTERNAL_DATA: An external data upload.   APPIUM_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload.   APPIUM_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload.   APPIUM_PYTHON_TEST_PACKAGE: An Appium Python test package upload.   APPIUM_NODE_TEST_PACKAGE: An Appium Node.js test package upload.   APPIUM_RUBY_TEST_PACKAGE: An Appium Ruby test package upload.   APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE: An Appium Java JUnit test package upload for web apps.   APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE: An Appium Java TestNG test package upload for web apps.   APPIUM_WEB_PYTHON_TEST_PACKAGE: An Appium Python test package upload for web apps.   APPIUM_WEB_NODE_TEST_PACKAGE: An Appium Node.js test package upload for web apps.   APPIUM_WEB_RUBY_TEST_PACKAGE: An Appium Ruby test package upload for web apps.   CALABASH_TEST_PACKAGE: A Calabash test package upload.   INSTRUMENTATION_TEST_PACKAGE: An instrumentation upload.   UIAUTOMATION_TEST_PACKAGE: A uiautomation test package upload.   UIAUTOMATOR_TEST_PACKAGE: A uiautomator test package upload.   XCTEST_TEST_PACKAGE: An XCode test package upload.   XCTEST_UI_TEST_PACKAGE: An XCode UI test package upload.   APPIUM_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload.   APPIUM_JAVA_TESTNG_TEST_SPEC: An Appium Java TestNG test spec upload.   APPIUM_PYTHON_TEST_SPEC: An Appium Python test spec upload.   APPIUM_NODE_TEST_SPEC: An Appium Node.js test spec upload.   APPIUM_RUBY_TEST_SPEC: An Appium Ruby test spec upload.   APPIUM_WEB_JAVA_JUNIT_TEST_SPEC: An Appium Java JUnit test spec upload for a web app.   APPIUM_WEB_JAVA_TESTNG_TEST_SPEC: An Appium Java TestNG test spec upload for a web app.   APPIUM_WEB_PYTHON_TEST_SPEC: An Appium Python test spec upload for a web app.   APPIUM_WEB_NODE_TEST_SPEC: An Appium Node.js test spec upload for a web app.   APPIUM_WEB_RUBY_TEST_SPEC: An Appium Ruby test spec upload for a web app.   INSTRUMENTATION_TEST_SPEC: An instrumentation test spec upload.   XCTEST_UI_TEST_SPEC: An XCode UI test spec upload.  
      */
     type?: UploadType;
     /**
@@ -2379,10 +2984,42 @@ declare namespace DeviceFarm {
      * A message about the upload's result.
      */
     message?: Message;
+    /**
+     * The upload's category. Allowed values include:   CURATED: An upload managed by AWS Device Farm.   PRIVATE: An upload managed by the AWS Device Farm customer.  
+     */
+    category?: UploadCategory;
   }
+  export type UploadCategory = "CURATED"|"PRIVATE"|string;
   export type UploadStatus = "INITIALIZED"|"PROCESSING"|"SUCCEEDED"|"FAILED"|string;
-  export type UploadType = "ANDROID_APP"|"IOS_APP"|"WEB_APP"|"EXTERNAL_DATA"|"APPIUM_JAVA_JUNIT_TEST_PACKAGE"|"APPIUM_JAVA_TESTNG_TEST_PACKAGE"|"APPIUM_PYTHON_TEST_PACKAGE"|"APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE"|"APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE"|"APPIUM_WEB_PYTHON_TEST_PACKAGE"|"CALABASH_TEST_PACKAGE"|"INSTRUMENTATION_TEST_PACKAGE"|"UIAUTOMATION_TEST_PACKAGE"|"UIAUTOMATOR_TEST_PACKAGE"|"XCTEST_TEST_PACKAGE"|"XCTEST_UI_TEST_PACKAGE"|string;
+  export type UploadType = "ANDROID_APP"|"IOS_APP"|"WEB_APP"|"EXTERNAL_DATA"|"APPIUM_JAVA_JUNIT_TEST_PACKAGE"|"APPIUM_JAVA_TESTNG_TEST_PACKAGE"|"APPIUM_PYTHON_TEST_PACKAGE"|"APPIUM_NODE_TEST_PACKAGE"|"APPIUM_RUBY_TEST_PACKAGE"|"APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE"|"APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE"|"APPIUM_WEB_PYTHON_TEST_PACKAGE"|"APPIUM_WEB_NODE_TEST_PACKAGE"|"APPIUM_WEB_RUBY_TEST_PACKAGE"|"CALABASH_TEST_PACKAGE"|"INSTRUMENTATION_TEST_PACKAGE"|"UIAUTOMATION_TEST_PACKAGE"|"UIAUTOMATOR_TEST_PACKAGE"|"XCTEST_TEST_PACKAGE"|"XCTEST_UI_TEST_PACKAGE"|"APPIUM_JAVA_JUNIT_TEST_SPEC"|"APPIUM_JAVA_TESTNG_TEST_SPEC"|"APPIUM_PYTHON_TEST_SPEC"|"APPIUM_NODE_TEST_SPEC"|"APPIUM_RUBY_TEST_SPEC"|"APPIUM_WEB_JAVA_JUNIT_TEST_SPEC"|"APPIUM_WEB_JAVA_TESTNG_TEST_SPEC"|"APPIUM_WEB_PYTHON_TEST_SPEC"|"APPIUM_WEB_NODE_TEST_SPEC"|"APPIUM_WEB_RUBY_TEST_SPEC"|"INSTRUMENTATION_TEST_SPEC"|"XCTEST_UI_TEST_SPEC"|string;
   export type Uploads = Upload[];
+  export interface VPCEConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of the VPC endpoint configuration.
+     */
+    arn?: AmazonResourceName;
+    /**
+     * The friendly name you give to your VPC endpoint configuration, to manage your configurations more easily.
+     */
+    vpceConfigurationName?: VPCEConfigurationName;
+    /**
+     * The name of the VPC endpoint service running inside your AWS account that you want Device Farm to test.
+     */
+    vpceServiceName?: VPCEServiceName;
+    /**
+     * The DNS name that maps to the private IP address of the service you want to access.
+     */
+    serviceDnsName?: ServiceDnsName;
+    /**
+     * An optional description, providing more details about your VPC endpoint configuration.
+     */
+    vpceConfigurationDescription?: VPCEConfigurationDescription;
+  }
+  export type VPCEConfigurationDescription = string;
+  export type VPCEConfigurationName = string;
+  export type VPCEConfigurations = VPCEConfiguration[];
+  export type VPCEServiceName = string;
+  export type VideoCapture = boolean;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

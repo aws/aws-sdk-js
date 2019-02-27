@@ -33,7 +33,7 @@
       it('validates type of set', function() {
         return expect(function() {
           return docClient.createSet([true, false, false]);
-        }).to["throw"]('Sets can contain string, number, or binary values');
+        }).to['throw']('Sets can contain string, number, or binary values');
       });
 
       it('detects type of sets', function() {
@@ -52,29 +52,29 @@
           return docClient.createSet([1, 2, 'string'], {
             validate: true
           });
-        }).to["throw"]('Number Set contains String value');
+        }).to['throw']('Number Set contains String value');
         expect(function() {
           return docClient.createSet(['string', 'string', 2], {
             validate: true
           });
-        }).to["throw"]('String Set contains Number value');
+        }).to['throw']('String Set contains Number value');
         expect(function() {
           return docClient.createSet([1, 2, new Buffer('foo')], {
             validate: true
           });
-        }).to["throw"]('Number Set contains Binary value');
+        }).to['throw']('Number Set contains Binary value');
       });
 
       it('does not validate set elements if validate: true unset', function() {
         expect(function() {
           return docClient.createSet([1, 2, 'string']);
-        }).to.not["throw"]('Number Set contains String value');
+        }).to.not['throw']('Number Set contains String value');
         expect(function() {
           return docClient.createSet(['string', 'string', 2]);
-        }).to.not["throw"]('String Set contains Number value');
+        }).to.not['throw']('String Set contains Number value');
         expect(function() {
           return docClient.createSet([1, 2, new Buffer('foo')]);
-        }).to.not["throw"]('Number Set contains Binary value');
+        }).to.not['throw']('Number Set contains Binary value');
       });
     });
 
@@ -1624,7 +1624,7 @@
         fill(new Error('error!'), null, true);
         expect(function() {
           response.nextPage();
-        }).to["throw"]('error!');
+        }).to['throw']('error!');
       });
 
       it('sends the request if passed with a callback', function(done) {
@@ -1653,6 +1653,29 @@
           expect(err).to.equal('error!');
           expect(data).to.equal(null);
         });
+      });
+    });
+  });
+
+  describe('validate supported operations', function() {
+    var serviceClientOperationsMap = {
+      batchGet: 'batchGetItem',
+      batchWrite: 'batchWriteItem',
+      delete: 'deleteItem',
+      get: 'getItem',
+      put: 'putItem',
+      query: 'query',
+      scan: 'scan',
+      update: 'updateItem',
+      transactGet: 'transactGetItems',
+      transactWrite: 'transactWriteItems'
+    };
+    var client = new AWS.DynamoDB.DocumentClient({paramValidation: false});
+    AWS.util.arrayEach(Object.keys(serviceClientOperationsMap), function(operation) {
+      var request = client[operation]({});
+      it('operation' + operation + ' is available', function() {
+        request.emit('validate', [request]);
+        expect(request.operation).to.eql(serviceClientOperationsMap[operation]);
       });
     });
   });

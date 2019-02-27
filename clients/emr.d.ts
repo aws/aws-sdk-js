@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -68,11 +69,11 @@ declare class EMR extends Service {
    */
   deleteSecurityConfiguration(callback?: (err: AWSError, data: EMR.Types.DeleteSecurityConfigurationOutput) => void): Request<EMR.Types.DeleteSecurityConfigurationOutput, AWSError>;
   /**
-   * Provides cluster-level details including status, hardware and software configuration, VPC settings, and so on. For information about the cluster steps, see ListSteps.
+   * Provides cluster-level details including status, hardware and software configuration, VPC settings, and so on. 
    */
   describeCluster(params: EMR.Types.DescribeClusterInput, callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
   /**
-   * Provides cluster-level details including status, hardware and software configuration, VPC settings, and so on. For information about the cluster steps, see ListSteps.
+   * Provides cluster-level details including status, hardware and software configuration, VPC settings, and so on. 
    */
   describeCluster(callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
   /**
@@ -230,7 +231,7 @@ declare class EMR extends Service {
   /**
    * Waits for the clusterRunning state by periodically calling the underlying EMR.describeClusteroperation every 30 seconds (at most 60 times).
    */
-  waitFor(state: "clusterRunning", params: EMR.Types.DescribeClusterInput, callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
+  waitFor(state: "clusterRunning", params: EMR.Types.DescribeClusterInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
   /**
    * Waits for the clusterRunning state by periodically calling the underlying EMR.describeClusteroperation every 30 seconds (at most 60 times).
    */
@@ -238,7 +239,7 @@ declare class EMR extends Service {
   /**
    * Waits for the stepComplete state by periodically calling the underlying EMR.describeStepoperation every 30 seconds (at most 60 times).
    */
-  waitFor(state: "stepComplete", params: EMR.Types.DescribeStepInput, callback?: (err: AWSError, data: EMR.Types.DescribeStepOutput) => void): Request<EMR.Types.DescribeStepOutput, AWSError>;
+  waitFor(state: "stepComplete", params: EMR.Types.DescribeStepInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EMR.Types.DescribeStepOutput) => void): Request<EMR.Types.DescribeStepOutput, AWSError>;
   /**
    * Waits for the stepComplete state by periodically calling the underlying EMR.describeStepoperation every 30 seconds (at most 60 times).
    */
@@ -246,7 +247,7 @@ declare class EMR extends Service {
   /**
    * Waits for the clusterTerminated state by periodically calling the underlying EMR.describeClusteroperation every 30 seconds (at most 60 times).
    */
-  waitFor(state: "clusterTerminated", params: EMR.Types.DescribeClusterInput, callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
+  waitFor(state: "clusterTerminated", params: EMR.Types.DescribeClusterInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
   /**
    * Waits for the clusterTerminated state by periodically calling the underlying EMR.describeClusteroperation every 30 seconds (at most 60 times).
    */
@@ -512,7 +513,7 @@ declare namespace EMR {
      */
     RunningAmiVersion?: String;
     /**
-     * The release label for the Amazon EMR release.
+     * The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form emr-x.x.x, where x.x.x is an Amazon EMR release version, for example, emr-5.14.0. For more information about Amazon EMR release versions and included application versions and features, see http://docs.aws.amazon.com/emr/latest/ReleaseGuide/. The release label applies only to Amazon EMR releases versions 4.x and later. Earlier versions use AmiVersion.
      */
     ReleaseLabel?: String;
     /**
@@ -848,7 +849,7 @@ declare namespace EMR {
      */
     EmrManagedMasterSecurityGroup?: String;
     /**
-     * The identifier of the Amazon EC2 security group for the slave nodes.
+     * The identifier of the Amazon EC2 security group for the core and task nodes.
      */
     EmrManagedSlaveSecurityGroup?: String;
     /**
@@ -860,12 +861,10 @@ declare namespace EMR {
      */
     AdditionalMasterSecurityGroups?: StringList;
     /**
-     * A list of additional Amazon EC2 security group IDs for the slave nodes.
+     * A list of additional Amazon EC2 security group IDs for the core and task nodes.
      */
     AdditionalSlaveSecurityGroups?: StringList;
   }
-  export type ErrorCode = string;
-  export type ErrorMessage = string;
   export interface FailureDetails {
     /**
      * The reason for the step failure. In the case where the service cannot successfully determine the root cause of the failure, it returns "Unknown Error" as a reason.
@@ -1117,7 +1116,7 @@ declare namespace EMR {
      */
     InstanceGroupType?: InstanceGroupType;
     /**
-     * The bid price for each EC2 instance in the instance group when launching nodes as Spot Instances, expressed in USD.
+     * The maximum Spot price your are willing to pay for EC2 instances. An optional, nullable field that applies if the MarketType for the instance group is specified as SPOT. Specify the maximum spot price in USD. If the value is NULL and SPOT is specified, the maximum Spot price is set equal to the On-Demand price.
      */
     BidPrice?: String;
     /**
@@ -1171,7 +1170,7 @@ declare namespace EMR {
      */
     InstanceRole: InstanceRoleType;
     /**
-     * Bid price for each EC2 instance in the instance group when launching nodes as Spot Instances, expressed in USD.
+     * The maximum Spot price your are willing to pay for EC2 instances. An optional, nullable field that applies if the MarketType for the instance group is specified as SPOT. Specify the maximum spot price in USD. If the value is NULL and SPOT is specified, the maximum Spot price is set equal to the On-Demand price.
      */
     BidPrice?: XmlStringMaxLen256;
     /**
@@ -1214,7 +1213,7 @@ declare namespace EMR {
      */
     InstanceRole: InstanceRoleType;
     /**
-     * Bid price for EC2 Instances when launching nodes as Spot Instances, expressed in USD.
+     * The maximum Spot price your are willing to pay for EC2 instances. An optional, nullable field that applies if the MarketType for the instance group is specified as SPOT. Specified in USD. If the value is NULL and SPOT is specified, the maximum Spot price is set equal to the On-Demand price.
      */
     BidPrice?: XmlStringMaxLen256;
     /**
@@ -1451,7 +1450,7 @@ declare namespace EMR {
      */
     LogUri?: XmlString;
     /**
-     * Used only for version 2.x and 3.x of Amazon EMR. The version of the AMI used to initialize Amazon EC2 instances in the job flow. For a list of AMI versions supported by Amazon EMR, see AMI Versions Supported in EMR in the Amazon EMR Developer Guide. 
+     * Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR releases 4.0 and later, ReleaseLabel is used. To specify a custom AMI, use CustomAmiID.
      */
     AmiVersion?: XmlStringMaxLen256;
     /**
@@ -1530,7 +1529,7 @@ declare namespace EMR {
      */
     MasterInstanceType?: InstanceType;
     /**
-     * The EC2 instance type of the slave nodes.
+     * The EC2 instance type of the core and task nodes.
      */
     SlaveInstanceType?: InstanceType;
     /**
@@ -1562,7 +1561,7 @@ declare namespace EMR {
      */
     TerminationProtected?: Boolean;
     /**
-     * The Hadoop version for the cluster. Valid inputs are "0.18" (deprecated), "0.20" (deprecated), "0.20.205" (deprecated), "1.0.3", "2.2.0", or "2.4.0". If you do not set this value, the default of 0.18 is used, unless the AmiVersion parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.
+     * Applies only to Amazon EMR release versions earlier than 4.0. The Hadoop version for the cluster. Valid inputs are "0.18" (deprecated), "0.20" (deprecated), "0.20.205" (deprecated), "1.0.3", "2.2.0", or "2.4.0". If you do not set this value, the default of 0.18 is used, unless the AmiVersion parameter is set in the RunJobFlow call, in which case the default version of Hadoop for that AMI version is used.
      */
     HadoopVersion?: XmlStringMaxLen256;
     /**
@@ -1578,7 +1577,7 @@ declare namespace EMR {
      */
     EmrManagedMasterSecurityGroup?: XmlStringMaxLen256;
     /**
-     * The identifier of the Amazon EC2 security group for the slave nodes.
+     * The identifier of the Amazon EC2 security group for the core and task nodes.
      */
     EmrManagedSlaveSecurityGroup?: XmlStringMaxLen256;
     /**
@@ -1590,7 +1589,7 @@ declare namespace EMR {
      */
     AdditionalMasterSecurityGroups?: SecurityGroupsList;
     /**
-     * A list of additional Amazon EC2 security group IDs for the slave nodes.
+     * A list of additional Amazon EC2 security group IDs for the core and task nodes.
      */
     AdditionalSlaveSecurityGroups?: SecurityGroupsList;
   }
@@ -1608,11 +1607,11 @@ declare namespace EMR {
      */
     MasterInstanceId?: XmlString;
     /**
-     * The Amazon EC2 slave node instance type.
+     * The Amazon EC2 core and task node instance type.
      */
     SlaveInstanceType: InstanceType;
     /**
-     * The number of Amazon EC2 instances in the cluster. If the value is 1, the same instance serves as both the master and slave node. If the value is greater than 1, one instance is the master node and all others are slave nodes.
+     * The number of Amazon EC2 instances in the cluster. If the value is 1, the same instance serves as both the master and core and task node. If the value is greater than 1, one instance is the master node and all others are core and task nodes.
      */
     InstanceCount: Integer;
     /**
@@ -1966,11 +1965,11 @@ declare namespace EMR {
      */
     AdditionalInfo?: XmlString;
     /**
-     * For Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR releases 4.0 and later, the Linux AMI is determined by the ReleaseLabel specified or by CustomAmiID. The version of the Amazon Machine Image (AMI) to use when launching Amazon EC2 instances in the job flow. For details about the AMI versions currently supported in EMR version 3.x and 2.x, see AMI Versions Supported in EMR in the Amazon EMR Developer Guide.  If the AMI supports multiple versions of Hadoop (for example, AMI 1.0 supports both Hadoop 0.18 and 0.20), you can use the JobFlowInstancesConfig HadoopVersion parameter to modify the version of Hadoop from the defaults shown above.  Previously, the EMR AMI version API parameter options allowed you to use latest for the latest AMI version rather than specify a numerical value. Some regions no longer support this deprecated option as they only have a newer release label version of EMR, which requires you to specify an EMR release label release (EMR 4.x or later). 
+     * Applies only to Amazon EMR AMI versions 3.x and 2.x. For Amazon EMR releases 4.0 and later, ReleaseLabel is used. To specify a custom AMI, use CustomAmiID.
      */
     AmiVersion?: XmlStringMaxLen256;
     /**
-     *  The release label for the Amazon EMR release. For Amazon EMR 3.x and 2.x AMIs, use AmiVersion instead.
+     * The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form emr-x.x.x, where x.x.x is an Amazon EMR release version, for example, emr-5.14.0. For more information about Amazon EMR release versions and included application versions and features, see http://docs.aws.amazon.com/emr/latest/ReleaseGuide/. The release label applies only to Amazon EMR releases versions 4.x and later. Earlier versions use AmiVersion.
      */
     ReleaseLabel?: XmlStringMaxLen256;
     /**
@@ -1994,7 +1993,7 @@ declare namespace EMR {
      */
     NewSupportedProducts?: NewSupportedProductsList;
     /**
-     * For Amazon EMR releases 4.0 and later. A list of applications for the cluster. Valid values are: "Hadoop", "Hive", "Mahout", "Pig", and "Spark." They are case insensitive.
+     * Applies to Amazon EMR releases 4.0 and later. A case-insensitive list of applications for Amazon EMR to install and configure when launching the cluster. For a list of applications available for each Amazon EMR release version, see the Amazon EMR Release Guide.
      */
     Applications?: ApplicationList;
     /**
@@ -2170,7 +2169,7 @@ declare namespace EMR {
      */
     TimeoutDurationMinutes: WholeNumber;
     /**
-     * The action to take when TargetSpotCapacity has not been fulfilled when the TimeoutDurationMinutes has expired. Spot instances are not uprovisioned within the Spot provisioining timeout. Valid values are TERMINATE_CLUSTER and SWITCH_TO_ON_DEMAND. SWITCH_TO_ON_DEMAND specifies that if no Spot instances are available, On-Demand Instances should be provisioned to fulfill any remaining Spot capacity.
+     * The action to take when TargetSpotCapacity has not been fulfilled when the TimeoutDurationMinutes has expired; that is, when all Spot instances could not be provisioned within the Spot provisioning timeout. Valid values are TERMINATE_CLUSTER and SWITCH_TO_ON_DEMAND. SWITCH_TO_ON_DEMAND specifies that if no Spot instances are available, On-Demand Instances should be provisioned to fulfill any remaining Spot capacity.
      */
     TimeoutAction: SpotProvisioningTimeoutAction;
     /**
@@ -2194,7 +2193,7 @@ declare namespace EMR {
      */
     Config?: HadoopStepConfig;
     /**
-     * This specifies what action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE.
+     * The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided for backward compatibility. We recommend using TERMINATE_CLUSTER instead.
      */
     ActionOnFailure?: ActionOnFailure;
     /**
@@ -2208,7 +2207,7 @@ declare namespace EMR {
      */
     Name: XmlStringMaxLen256;
     /**
-     * The action to take if the step fails.
+     * The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided for backward compatibility. We recommend using TERMINATE_CLUSTER instead.
      */
     ActionOnFailure?: ActionOnFailure;
     /**
@@ -2298,7 +2297,7 @@ declare namespace EMR {
      */
     Config?: HadoopStepConfig;
     /**
-     * This specifies what action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE.
+     * The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is available for backward compatibility. We recommend using TERMINATE_CLUSTER instead.
      */
     ActionOnFailure?: ActionOnFailure;
     /**

@@ -1841,17 +1841,6 @@ declare namespace LexModelBuildingService {
     valueSelectionStrategy?: SlotValueSelectionStrategy;
     createVersion?: Boolean;
   }
-  export type ReferenceType = "Intent"|"Bot"|"BotAlias"|"BotChannel"|string;
-  export interface ResourceReference {
-    /**
-     * The name of the resource that is using the resource that you are trying to delete.
-     */
-    name?: Name;
-    /**
-     * The version of the resource that is using the resource that you are trying to delete.
-     */
-    version?: Version;
-  }
   export type ResourceType = "BOT"|"INTENT"|"SLOT_TYPE"|string;
   export type ResponseCard = string;
   export type SessionTTL = number;
@@ -1972,7 +1961,7 @@ declare namespace LexModelBuildingService {
      */
     responseCard?: ResponseCard;
   }
-  export type Status = "BUILDING"|"READY"|"FAILED"|"NOT_BUILT"|string;
+  export type Status = "BUILDING"|"READY"|"READY_BASIC_TESTING"|"FAILED"|"NOT_BUILT"|string;
   export type StatusType = "Detected"|"Missed"|string;
   export type String = string;
   export type StringList = String[];

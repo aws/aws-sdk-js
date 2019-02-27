@@ -12,11 +12,11 @@ declare class StorageGateway extends Service {
   constructor(options?: StorageGateway.Types.ClientConfiguration)
   config: Config & StorageGateway.Types.ClientConfiguration;
   /**
-   * Activates the gateway you previously deployed on your host. For more information, see  Activate the AWS Storage Gateway. In the activation process, you specify information such as the region you want to use for storing snapshots or tapes, the time zone for scheduled snapshots the gateway snapshot schedule window, an activation key, and a name for your gateway. The activation process also associates your gateway with your account; for more information, see UpdateGatewayInformation.  You must turn on the gateway VM before you can activate your gateway. 
+   * Activates the gateway you previously deployed on your host. In the activation process, you specify information such as the region you want to use for storing snapshots or tapes, the time zone for scheduled snapshots the gateway snapshot schedule window, an activation key, and a name for your gateway. The activation process also associates your gateway with your account; for more information, see UpdateGatewayInformation.  You must turn on the gateway VM before you can activate your gateway. 
    */
   activateGateway(params: StorageGateway.Types.ActivateGatewayInput, callback?: (err: AWSError, data: StorageGateway.Types.ActivateGatewayOutput) => void): Request<StorageGateway.Types.ActivateGatewayOutput, AWSError>;
   /**
-   * Activates the gateway you previously deployed on your host. For more information, see  Activate the AWS Storage Gateway. In the activation process, you specify information such as the region you want to use for storing snapshots or tapes, the time zone for scheduled snapshots the gateway snapshot schedule window, an activation key, and a name for your gateway. The activation process also associates your gateway with your account; for more information, see UpdateGatewayInformation.  You must turn on the gateway VM before you can activate your gateway. 
+   * Activates the gateway you previously deployed on your host. In the activation process, you specify information such as the region you want to use for storing snapshots or tapes, the time zone for scheduled snapshots the gateway snapshot schedule window, an activation key, and a name for your gateway. The activation process also associates your gateway with your account; for more information, see UpdateGatewayInformation.  You must turn on the gateway VM before you can activate your gateway. 
    */
   activateGateway(callback?: (err: AWSError, data: StorageGateway.Types.ActivateGatewayOutput) => void): Request<StorageGateway.Types.ActivateGatewayOutput, AWSError>;
   /**
@@ -52,6 +52,14 @@ declare class StorageGateway extends Service {
    */
   addWorkingStorage(callback?: (err: AWSError, data: StorageGateway.Types.AddWorkingStorageOutput) => void): Request<StorageGateway.Types.AddWorkingStorageOutput, AWSError>;
   /**
+   * Connects a volume to an iSCSI connection and then attaches the volume to the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance.
+   */
+  attachVolume(params: StorageGateway.Types.AttachVolumeInput, callback?: (err: AWSError, data: StorageGateway.Types.AttachVolumeOutput) => void): Request<StorageGateway.Types.AttachVolumeOutput, AWSError>;
+  /**
+   * Connects a volume to an iSCSI connection and then attaches the volume to the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance.
+   */
+  attachVolume(callback?: (err: AWSError, data: StorageGateway.Types.AttachVolumeOutput) => void): Request<StorageGateway.Types.AttachVolumeOutput, AWSError>;
+  /**
    * Cancels archiving of a virtual tape to the virtual tape shelf (VTS) after the archiving process is initiated. This operation is only supported in the tape gateway type.
    */
   cancelArchival(params: StorageGateway.Types.CancelArchivalInput, callback?: (err: AWSError, data: StorageGateway.Types.CancelArchivalOutput) => void): Request<StorageGateway.Types.CancelArchivalOutput, AWSError>;
@@ -76,13 +84,21 @@ declare class StorageGateway extends Service {
    */
   createCachediSCSIVolume(callback?: (err: AWSError, data: StorageGateway.Types.CreateCachediSCSIVolumeOutput) => void): Request<StorageGateway.Types.CreateCachediSCSIVolumeOutput, AWSError>;
   /**
-   * Creates a file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using a Network File System (NFS) interface. This operation is only supported in the file gateway type.  File gateway requires AWS Security Token Service (AWS STS) to be activated to enable you create a file share. Make sure AWS STS is activated in the region you are creating your file gateway in. If AWS STS is not activated in the region, activate it. For information about how to activate AWS STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide.  File gateway does not support creating hard or symbolic links on a file share. 
+   * Creates a Network File System (NFS) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using a NFS interface. This operation is only supported for file gateways.  File gateway requires AWS Security Token Service (AWS STS) to be activated to enable you create a file share. Make sure AWS STS is activated in the region you are creating your file gateway in. If AWS STS is not activated in the region, activate it. For information about how to activate AWS STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide.  File gateway does not support creating hard or symbolic links on a file share. 
    */
   createNFSFileShare(params: StorageGateway.Types.CreateNFSFileShareInput, callback?: (err: AWSError, data: StorageGateway.Types.CreateNFSFileShareOutput) => void): Request<StorageGateway.Types.CreateNFSFileShareOutput, AWSError>;
   /**
-   * Creates a file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using a Network File System (NFS) interface. This operation is only supported in the file gateway type.  File gateway requires AWS Security Token Service (AWS STS) to be activated to enable you create a file share. Make sure AWS STS is activated in the region you are creating your file gateway in. If AWS STS is not activated in the region, activate it. For information about how to activate AWS STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide.  File gateway does not support creating hard or symbolic links on a file share. 
+   * Creates a Network File System (NFS) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway exposes file shares using a NFS interface. This operation is only supported for file gateways.  File gateway requires AWS Security Token Service (AWS STS) to be activated to enable you create a file share. Make sure AWS STS is activated in the region you are creating your file gateway in. If AWS STS is not activated in the region, activate it. For information about how to activate AWS STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide.  File gateway does not support creating hard or symbolic links on a file share. 
    */
   createNFSFileShare(callback?: (err: AWSError, data: StorageGateway.Types.CreateNFSFileShareOutput) => void): Request<StorageGateway.Types.CreateNFSFileShareOutput, AWSError>;
+  /**
+   * Creates a Server Message Block (SMB) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway expose file shares using a SMB interface. This operation is only supported for file gateways.  File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide.  File gateways don't support creating hard or symbolic links on a file share. 
+   */
+  createSMBFileShare(params: StorageGateway.Types.CreateSMBFileShareInput, callback?: (err: AWSError, data: StorageGateway.Types.CreateSMBFileShareOutput) => void): Request<StorageGateway.Types.CreateSMBFileShareOutput, AWSError>;
+  /**
+   * Creates a Server Message Block (SMB) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway expose file shares using a SMB interface. This operation is only supported for file gateways.  File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide.  File gateways don't support creating hard or symbolic links on a file share. 
+   */
+  createSMBFileShare(callback?: (err: AWSError, data: StorageGateway.Types.CreateSMBFileShareOutput) => void): Request<StorageGateway.Types.CreateSMBFileShareOutput, AWSError>;
   /**
    * Initiates a snapshot of a volume. AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad-hoc basis. This API enables you to take ad-hoc snapshot. For more information, see Editing a Snapshot Schedule. In the CreateSnapshot request you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway Console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see DescribeSnapshots or DeleteSnapshot in the EC2 API reference.   Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the Welcome page. 
    */
@@ -140,11 +156,11 @@ declare class StorageGateway extends Service {
    */
   deleteChapCredentials(callback?: (err: AWSError, data: StorageGateway.Types.DeleteChapCredentialsOutput) => void): Request<StorageGateway.Types.DeleteChapCredentialsOutput, AWSError>;
   /**
-   * Deletes a file share from a file gateway. This operation is only supported in the file gateway type.
+   * Deletes a file share from a file gateway. This operation is only supported for file gateways.
    */
   deleteFileShare(params: StorageGateway.Types.DeleteFileShareInput, callback?: (err: AWSError, data: StorageGateway.Types.DeleteFileShareOutput) => void): Request<StorageGateway.Types.DeleteFileShareOutput, AWSError>;
   /**
-   * Deletes a file share from a file gateway. This operation is only supported in the file gateway type.
+   * Deletes a file share from a file gateway. This operation is only supported for file gateways.
    */
   deleteFileShare(callback?: (err: AWSError, data: StorageGateway.Types.DeleteFileShareOutput) => void): Request<StorageGateway.Types.DeleteFileShareOutput, AWSError>;
   /**
@@ -236,13 +252,29 @@ declare class StorageGateway extends Service {
    */
   describeMaintenanceStartTime(callback?: (err: AWSError, data: StorageGateway.Types.DescribeMaintenanceStartTimeOutput) => void): Request<StorageGateway.Types.DescribeMaintenanceStartTimeOutput, AWSError>;
   /**
-   * Gets a description for one or more file shares from a file gateway. This operation is only supported in the file gateway type.
+   * Gets a description for one or more Network File System (NFS) file shares from a file gateway. This operation is only supported for file gateways.
    */
   describeNFSFileShares(params: StorageGateway.Types.DescribeNFSFileSharesInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeNFSFileSharesOutput) => void): Request<StorageGateway.Types.DescribeNFSFileSharesOutput, AWSError>;
   /**
-   * Gets a description for one or more file shares from a file gateway. This operation is only supported in the file gateway type.
+   * Gets a description for one or more Network File System (NFS) file shares from a file gateway. This operation is only supported for file gateways.
    */
   describeNFSFileShares(callback?: (err: AWSError, data: StorageGateway.Types.DescribeNFSFileSharesOutput) => void): Request<StorageGateway.Types.DescribeNFSFileSharesOutput, AWSError>;
+  /**
+   * Gets a description for one or more Server Message Block (SMB) file shares from a file gateway. This operation is only supported for file gateways.
+   */
+  describeSMBFileShares(params: StorageGateway.Types.DescribeSMBFileSharesInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeSMBFileSharesOutput) => void): Request<StorageGateway.Types.DescribeSMBFileSharesOutput, AWSError>;
+  /**
+   * Gets a description for one or more Server Message Block (SMB) file shares from a file gateway. This operation is only supported for file gateways.
+   */
+  describeSMBFileShares(callback?: (err: AWSError, data: StorageGateway.Types.DescribeSMBFileSharesOutput) => void): Request<StorageGateway.Types.DescribeSMBFileSharesOutput, AWSError>;
+  /**
+   * Gets a description of a Server Message Block (SMB) file share settings from a file gateway. This operation is only supported for file gateways.
+   */
+  describeSMBSettings(params: StorageGateway.Types.DescribeSMBSettingsInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeSMBSettingsOutput) => void): Request<StorageGateway.Types.DescribeSMBSettingsOutput, AWSError>;
+  /**
+   * Gets a description of a Server Message Block (SMB) file share settings from a file gateway. This operation is only supported for file gateways.
+   */
+  describeSMBSettings(callback?: (err: AWSError, data: StorageGateway.Types.DescribeSMBSettingsOutput) => void): Request<StorageGateway.Types.DescribeSMBSettingsOutput, AWSError>;
   /**
    * Describes the snapshot schedule for the specified gateway volume. The snapshot schedule information includes intervals at which snapshots are automatically initiated on the volume. This operation is only supported in the cached volume and stored volume types.
    */
@@ -308,6 +340,14 @@ declare class StorageGateway extends Service {
    */
   describeWorkingStorage(callback?: (err: AWSError, data: StorageGateway.Types.DescribeWorkingStorageOutput) => void): Request<StorageGateway.Types.DescribeWorkingStorageOutput, AWSError>;
   /**
+   * Disconnects a volume from an iSCSI connection and then detaches the volume from the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance.
+   */
+  detachVolume(params: StorageGateway.Types.DetachVolumeInput, callback?: (err: AWSError, data: StorageGateway.Types.DetachVolumeOutput) => void): Request<StorageGateway.Types.DetachVolumeOutput, AWSError>;
+  /**
+   * Disconnects a volume from an iSCSI connection and then detaches the volume from the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance.
+   */
+  detachVolume(callback?: (err: AWSError, data: StorageGateway.Types.DetachVolumeOutput) => void): Request<StorageGateway.Types.DetachVolumeOutput, AWSError>;
+  /**
    * Disables a tape gateway when the gateway is no longer functioning. For example, if your gateway VM is damaged, you can disable the gateway so you can recover virtual tapes. Use this operation for a tape gateway that is not reachable or not functioning. This operation is only supported in the tape gateway type.  Once a gateway is disabled it cannot be enabled. 
    */
   disableGateway(params: StorageGateway.Types.DisableGatewayInput, callback?: (err: AWSError, data: StorageGateway.Types.DisableGatewayOutput) => void): Request<StorageGateway.Types.DisableGatewayOutput, AWSError>;
@@ -316,11 +356,19 @@ declare class StorageGateway extends Service {
    */
   disableGateway(callback?: (err: AWSError, data: StorageGateway.Types.DisableGatewayOutput) => void): Request<StorageGateway.Types.DisableGatewayOutput, AWSError>;
   /**
-   * Gets a list of the file shares for a specific file gateway, or the list of file shares that belong to the calling user account. This operation is only supported in the file gateway type.
+   * Adds a file gateway to an Active Directory domain. This operation is only supported for file gateways that support the SMB file protocol.
+   */
+  joinDomain(params: StorageGateway.Types.JoinDomainInput, callback?: (err: AWSError, data: StorageGateway.Types.JoinDomainOutput) => void): Request<StorageGateway.Types.JoinDomainOutput, AWSError>;
+  /**
+   * Adds a file gateway to an Active Directory domain. This operation is only supported for file gateways that support the SMB file protocol.
+   */
+  joinDomain(callback?: (err: AWSError, data: StorageGateway.Types.JoinDomainOutput) => void): Request<StorageGateway.Types.JoinDomainOutput, AWSError>;
+  /**
+   * Gets a list of the file shares for a specific file gateway, or the list of file shares that belong to the calling user account. This operation is only supported for file gateways.
    */
   listFileShares(params: StorageGateway.Types.ListFileSharesInput, callback?: (err: AWSError, data: StorageGateway.Types.ListFileSharesOutput) => void): Request<StorageGateway.Types.ListFileSharesOutput, AWSError>;
   /**
-   * Gets a list of the file shares for a specific file gateway, or the list of file shares that belong to the calling user account. This operation is only supported in the file gateway type.
+   * Gets a list of the file shares for a specific file gateway, or the list of file shares that belong to the calling user account. This operation is only supported for file gateways.
    */
   listFileShares(callback?: (err: AWSError, data: StorageGateway.Types.ListFileSharesOutput) => void): Request<StorageGateway.Types.ListFileSharesOutput, AWSError>;
   /**
@@ -380,19 +428,19 @@ declare class StorageGateway extends Service {
    */
   listVolumes(callback?: (err: AWSError, data: StorageGateway.Types.ListVolumesOutput) => void): Request<StorageGateway.Types.ListVolumesOutput, AWSError>;
   /**
-   * Sends you notification when all file data written to the NFS file share has been uploaded to Amazon S3. AWS Storage Gateway can send a notification through Amazon CloudWatch Events when all files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the NFS file share up to the time that you make a request for notification. When the upload is done, Storage Gateway sends you notification through an Amazon CloudWatch event. You can configure CloudWatch Events to sent the notification through event targets such as email, SNS or a Lambda function. text or Lambda functions. This operation is only supported in the file gateway type.
+   * Sends you notification through CloudWatch Events when all files written to your NFS file share have been uploaded to Amazon S3. AWS Storage Gateway can send a notification through Amazon CloudWatch Events when all files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the NFS file share up to the time that you make a request for notification. When the upload is done, Storage Gateway sends you notification through an Amazon CloudWatch Event. You can configure CloudWatch Events to send the notification through event targets such as Amazon SNS or AWS Lambda function. This operation is only supported for file gateways. For more information, see Getting File Upload Notification in the Storage Gateway User Guide (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification). 
    */
   notifyWhenUploaded(params: StorageGateway.Types.NotifyWhenUploadedInput, callback?: (err: AWSError, data: StorageGateway.Types.NotifyWhenUploadedOutput) => void): Request<StorageGateway.Types.NotifyWhenUploadedOutput, AWSError>;
   /**
-   * Sends you notification when all file data written to the NFS file share has been uploaded to Amazon S3. AWS Storage Gateway can send a notification through Amazon CloudWatch Events when all files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the NFS file share up to the time that you make a request for notification. When the upload is done, Storage Gateway sends you notification through an Amazon CloudWatch event. You can configure CloudWatch Events to sent the notification through event targets such as email, SNS or a Lambda function. text or Lambda functions. This operation is only supported in the file gateway type.
+   * Sends you notification through CloudWatch Events when all files written to your NFS file share have been uploaded to Amazon S3. AWS Storage Gateway can send a notification through Amazon CloudWatch Events when all files written to your file share up to that point in time have been uploaded to Amazon S3. These files include files written to the NFS file share up to the time that you make a request for notification. When the upload is done, Storage Gateway sends you notification through an Amazon CloudWatch Event. You can configure CloudWatch Events to send the notification through event targets such as Amazon SNS or AWS Lambda function. This operation is only supported for file gateways. For more information, see Getting File Upload Notification in the Storage Gateway User Guide (https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-upload-notification). 
    */
   notifyWhenUploaded(callback?: (err: AWSError, data: StorageGateway.Types.NotifyWhenUploadedOutput) => void): Request<StorageGateway.Types.NotifyWhenUploadedOutput, AWSError>;
   /**
-   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type.
+   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see Getting Notified About File Operations.
    */
   refreshCache(params: StorageGateway.Types.RefreshCacheInput, callback?: (err: AWSError, data: StorageGateway.Types.RefreshCacheOutput) => void): Request<StorageGateway.Types.RefreshCacheOutput, AWSError>;
   /**
-   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type.
+   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see Getting Notified About File Operations.
    */
   refreshCache(callback?: (err: AWSError, data: StorageGateway.Types.RefreshCacheOutput) => void): Request<StorageGateway.Types.RefreshCacheOutput, AWSError>;
   /**
@@ -404,11 +452,11 @@ declare class StorageGateway extends Service {
    */
   removeTagsFromResource(callback?: (err: AWSError, data: StorageGateway.Types.RemoveTagsFromResourceOutput) => void): Request<StorageGateway.Types.RemoveTagsFromResourceOutput, AWSError>;
   /**
-   * Resets all cache disks that have encountered a error and makes the disks available for reconfiguration as cache storage. If your cache disk encounters a error, the gateway prevents read and write operations on virtual tapes in the gateway. For example, an error can occur when a disk is corrupted or removed from the gateway. When a cache is reset, the gateway loses its cache storage. At this point you can reconfigure the disks as cache disks. This operation is only supported in the cached volume, tape and file gateway types.  If the cache disk you are resetting contains data that has not been uploaded to Amazon S3 yet, that data can be lost. After you reset cache disks, there will be no configured cache disks left in the gateway, so you must configure at least one new cache disk for your gateway to function properly. 
+   * Resets all cache disks that have encountered a error and makes the disks available for reconfiguration as cache storage. If your cache disk encounters a error, the gateway prevents read and write operations on virtual tapes in the gateway. For example, an error can occur when a disk is corrupted or removed from the gateway. When a cache is reset, the gateway loses its cache storage. At this point you can reconfigure the disks as cache disks. This operation is only supported in the cached volume and tape types.  If the cache disk you are resetting contains data that has not been uploaded to Amazon S3 yet, that data can be lost. After you reset cache disks, there will be no configured cache disks left in the gateway, so you must configure at least one new cache disk for your gateway to function properly. 
    */
   resetCache(params: StorageGateway.Types.ResetCacheInput, callback?: (err: AWSError, data: StorageGateway.Types.ResetCacheOutput) => void): Request<StorageGateway.Types.ResetCacheOutput, AWSError>;
   /**
-   * Resets all cache disks that have encountered a error and makes the disks available for reconfiguration as cache storage. If your cache disk encounters a error, the gateway prevents read and write operations on virtual tapes in the gateway. For example, an error can occur when a disk is corrupted or removed from the gateway. When a cache is reset, the gateway loses its cache storage. At this point you can reconfigure the disks as cache disks. This operation is only supported in the cached volume, tape and file gateway types.  If the cache disk you are resetting contains data that has not been uploaded to Amazon S3 yet, that data can be lost. After you reset cache disks, there will be no configured cache disks left in the gateway, so you must configure at least one new cache disk for your gateway to function properly. 
+   * Resets all cache disks that have encountered a error and makes the disks available for reconfiguration as cache storage. If your cache disk encounters a error, the gateway prevents read and write operations on virtual tapes in the gateway. For example, an error can occur when a disk is corrupted or removed from the gateway. When a cache is reset, the gateway loses its cache storage. At this point you can reconfigure the disks as cache disks. This operation is only supported in the cached volume and tape types.  If the cache disk you are resetting contains data that has not been uploaded to Amazon S3 yet, that data can be lost. After you reset cache disks, there will be no configured cache disks left in the gateway, so you must configure at least one new cache disk for your gateway to function properly. 
    */
   resetCache(callback?: (err: AWSError, data: StorageGateway.Types.ResetCacheOutput) => void): Request<StorageGateway.Types.ResetCacheOutput, AWSError>;
   /**
@@ -435,6 +483,14 @@ declare class StorageGateway extends Service {
    * Sets the password for your VM local console. When you log in to the local console for the first time, you log in to the VM with the default credentials. We recommend that you set a new password. You don't need to know the default password to set a new password.
    */
   setLocalConsolePassword(callback?: (err: AWSError, data: StorageGateway.Types.SetLocalConsolePasswordOutput) => void): Request<StorageGateway.Types.SetLocalConsolePasswordOutput, AWSError>;
+  /**
+   * Sets the password for the guest user smbguest. The smbguest user is the user when the authentication method for the file share is set to GuestAccess.
+   */
+  setSMBGuestPassword(params: StorageGateway.Types.SetSMBGuestPasswordInput, callback?: (err: AWSError, data: StorageGateway.Types.SetSMBGuestPasswordOutput) => void): Request<StorageGateway.Types.SetSMBGuestPasswordOutput, AWSError>;
+  /**
+   * Sets the password for the guest user smbguest. The smbguest user is the user when the authentication method for the file share is set to GuestAccess.
+   */
+  setSMBGuestPassword(callback?: (err: AWSError, data: StorageGateway.Types.SetSMBGuestPasswordOutput) => void): Request<StorageGateway.Types.SetSMBGuestPasswordOutput, AWSError>;
   /**
    * Shuts down a gateway. To specify which gateway to shut down, use the Amazon Resource Name (ARN) of the gateway in the body of your request. The operation shuts down the gateway service component running in the gateway's virtual machine (VM) and not the host VM.  If you want to shut down the VM, it is recommended that you first shut down the gateway component in the VM to avoid unpredictable conditions.  After the gateway is shutdown, you cannot call any other API except StartGateway, DescribeGatewayInformation, and ListGateways. For more information, see ActivateGateway. Your applications cannot read from or write to the gateway's storage volumes, and there are no snapshots taken.  When you make a shutdown request, you will get a 200 OK success response immediately. However, it might take some time for the gateway to shut down. You can call the DescribeGatewayInformation API to check the status. For more information, see ActivateGateway.  If do not intend to use the gateway again, you must delete the gateway (using DeleteGateway) to no longer pay software charges associated with the gateway.
    */
@@ -492,13 +548,21 @@ declare class StorageGateway extends Service {
    */
   updateMaintenanceStartTime(callback?: (err: AWSError, data: StorageGateway.Types.UpdateMaintenanceStartTimeOutput) => void): Request<StorageGateway.Types.UpdateMaintenanceStartTimeOutput, AWSError>;
   /**
-   * Updates a file share. This operation is only supported in the file gateway type.  To leave a file share field unchanged, set the corresponding input field to null.  Updates the following file share setting:   Default storage class for your S3 bucket   Metadata defaults for your S3 bucket   Allowed NFS clients for your file share   Squash settings   Write status of your file share    To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported in file gateways. 
+   * Updates a Network File System (NFS) file share. This operation is only supported in the file gateway type.  To leave a file share field unchanged, set the corresponding input field to null.  Updates the following file share setting:   Default storage class for your S3 bucket   Metadata defaults for your S3 bucket   Allowed NFS clients for your file share   Squash settings   Write status of your file share    To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported in file gateways. 
    */
   updateNFSFileShare(params: StorageGateway.Types.UpdateNFSFileShareInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateNFSFileShareOutput) => void): Request<StorageGateway.Types.UpdateNFSFileShareOutput, AWSError>;
   /**
-   * Updates a file share. This operation is only supported in the file gateway type.  To leave a file share field unchanged, set the corresponding input field to null.  Updates the following file share setting:   Default storage class for your S3 bucket   Metadata defaults for your S3 bucket   Allowed NFS clients for your file share   Squash settings   Write status of your file share    To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported in file gateways. 
+   * Updates a Network File System (NFS) file share. This operation is only supported in the file gateway type.  To leave a file share field unchanged, set the corresponding input field to null.  Updates the following file share setting:   Default storage class for your S3 bucket   Metadata defaults for your S3 bucket   Allowed NFS clients for your file share   Squash settings   Write status of your file share    To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported in file gateways. 
    */
   updateNFSFileShare(callback?: (err: AWSError, data: StorageGateway.Types.UpdateNFSFileShareOutput) => void): Request<StorageGateway.Types.UpdateNFSFileShareOutput, AWSError>;
+  /**
+   * Updates a Server Message Block (SMB) file share.  To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported for file gateways.   File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide.  File gateways don't support creating hard or symbolic links on a file share. 
+   */
+  updateSMBFileShare(params: StorageGateway.Types.UpdateSMBFileShareInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateSMBFileShareOutput) => void): Request<StorageGateway.Types.UpdateSMBFileShareOutput, AWSError>;
+  /**
+   * Updates a Server Message Block (SMB) file share.  To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported for file gateways.   File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see Activating and Deactivating AWS STS in an AWS Region in the AWS Identity and Access Management User Guide.  File gateways don't support creating hard or symbolic links on a file share. 
+   */
+  updateSMBFileShare(callback?: (err: AWSError, data: StorageGateway.Types.UpdateSMBFileShareOutput) => void): Request<StorageGateway.Types.UpdateSMBFileShareOutput, AWSError>;
   /**
    * Updates a snapshot schedule configured for a gateway volume. This operation is only supported in the cached volume and stored volume gateway types. The default snapshot schedule for volume is once every 24 hours, starting at the creation time of the volume. You can use this API to change the snapshot schedule configured for the volume. In the request you must identify the gateway volume whose snapshot schedule you want to update, and the schedule information, including when you want the snapshot to begin on a day and the frequency (in hours) of snapshots.
    */
@@ -519,7 +583,7 @@ declare class StorageGateway extends Service {
 declare namespace StorageGateway {
   export interface ActivateGatewayInput {
     /**
-     * Your gateway activation key. You can obtain the activation key by sending an HTTP GET request with redirects enabled to the gateway IP address (port 80). The redirect URL returned in the response provides you the activation key for your gateway in the query string parameter activationKey. It may also include other activation-related parameters, however, these are merely defaults -- the arguments you pass to the ActivateGateway API call determine the actual configuration of your gateway.
+     * Your gateway activation key. You can obtain the activation key by sending an HTTP GET request with redirects enabled to the gateway IP address (port 80). The redirect URL returned in the response provides you the activation key for your gateway in the query string parameter activationKey. It may also include other activation-related parameters, however, these are merely defaults -- the arguments you pass to the ActivateGateway API call determine the actual configuration of your gateway.  For more information, see https://docs.aws.amazon.com/storagegateway/latest/userguide/get-activation-key.html in the Storage Gateway User Guide.
      */
     ActivationKey: ActivationKey;
     /**
@@ -531,11 +595,11 @@ declare namespace StorageGateway {
      */
     GatewayTimezone: GatewayTimezone;
     /**
-     * A value that indicates the region where you want to store your data. The gateway region specified must be the same region as the region in your Host header in the request. For more information about available regions and endpoints for AWS Storage Gateway, see Regions and Endpoints in the Amazon Web Services Glossary.  Valid Values: "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-west-1", "eu-central-1", "eu-west-2", "ap-northeast-1", "ap-northeast-2", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "sa-east-1"
+     * A value that indicates the region where you want to store your data. The gateway region specified must be the same region as the region in your Host header in the request. For more information about available regions and endpoints for AWS Storage Gateway, see Regions and Endpoints in the Amazon Web Services Glossary.  Valid Values: "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-west-1", "eu-central-1", "eu-west-2", "eu-west-3", "ap-northeast-1", "ap-northeast-2", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "sa-east-1"
      */
     GatewayRegion: RegionId;
     /**
-     * A value that defines the type of gateway to activate. The type specified is critical to all later functions of the gateway and cannot be changed after activation. The default value is STORED.   Valid Values: "STORED", "CACHED", "VTL", "FILE_S3"
+     * A value that defines the type of gateway to activate. The type specified is critical to all later functions of the gateway and cannot be changed after activation. The default value is CACHED.   Valid Values: "STORED", "CACHED", "VTL", "FILE_S3"
      */
     GatewayType?: GatewayType;
     /**
@@ -591,6 +655,39 @@ declare namespace StorageGateway {
   export interface AddWorkingStorageOutput {
     GatewayARN?: GatewayARN;
   }
+  export interface AttachVolumeInput {
+    /**
+     * The Amazon Resource Name (ARN) of the gateway that you want to attach the volume to.
+     */
+    GatewayARN: GatewayARN;
+    /**
+     * The name of the iSCSI target used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying TargetName as myvolume results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume. The target name must be unique across all volumes on a gateway. If you don't specify a value, Storage Gateway uses the value that was previously used for this volume as the new target name.
+     */
+    TargetName?: TargetName;
+    /**
+     * The Amazon Resource Name (ARN) of the volume to attach to the specified gateway.
+     */
+    VolumeARN: VolumeARN;
+    /**
+     * The network interface of the gateway on which to expose the iSCSI target. Only IPv4 addresses are accepted. Use DescribeGatewayInformation to get a list of the network interfaces available on a gateway.  Valid Values: A valid IP address.
+     */
+    NetworkInterfaceId: NetworkInterfaceId;
+    /**
+     * The unique device ID or other distinguishing data that identifies the local disk used to create the volume. This value is only required when you are attaching a stored volume.
+     */
+    DiskId?: DiskId;
+  }
+  export interface AttachVolumeOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the volume that was attached to the gateway.
+     */
+    VolumeARN?: VolumeARN;
+    /**
+     * The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI name for the initiator that was used to connect to the target.
+     */
+    TargetARN?: TargetARN;
+  }
+  export type Authentication = string;
   export type BandwidthDownloadRateLimit = number;
   export type BandwidthType = string;
   export type BandwidthUploadRateLimit = number;
@@ -612,6 +709,10 @@ declare namespace StorageGateway {
      * One of the VolumeStatus values that indicates the state of the storage volume.
      */
     VolumeStatus?: VolumeStatus;
+    /**
+     * A value that indicates whether a storage volume is attached to or detached from a gateway.
+     */
+    VolumeAttachmentStatus?: VolumeAttachmentStatus;
     /**
      * The size, in bytes, of the volume capacity.
      */
@@ -636,6 +737,11 @@ declare namespace StorageGateway {
      * The size of the data stored on the volume in bytes.  This value is not available for volumes created prior to May 13, 2015, until you store data on the volume. 
      */
     VolumeUsedInBytes?: VolumeUsedInBytes;
+    KMSKey?: KMSKey;
+    /**
+     * The name of the iSCSI target that is used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying TargetName as myvolume results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume.
+     */
+    TargetName?: TargetName;
   }
   export type CachediSCSIVolumes = CachediSCSIVolume[];
   export interface CancelArchivalInput {
@@ -687,18 +793,47 @@ declare namespace StorageGateway {
   export type ClientToken = string;
   export interface CreateCachediSCSIVolumeInput {
     GatewayARN: GatewayARN;
+    /**
+     * The size of the volume in bytes.
+     */
     VolumeSizeInBytes: long;
+    /**
+     * The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the new cached volume. Specify this field if you want to create the iSCSI storage volume from a snapshot otherwise do not include this field. To list snapshots for your account use DescribeSnapshots in the Amazon Elastic Compute Cloud API Reference.
+     */
     SnapshotId?: SnapshotId;
+    /**
+     * The name of the iSCSI target used by initiators to connect to the target and as a suffix for the target ARN. For example, specifying TargetName as myvolume results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume. The target name must be unique across all volumes of a gateway.
+     */
     TargetName: TargetName;
     /**
      * The ARN for an existing volume. Specifying this ARN makes the new volume into an exact copy of the specified existing volume's latest recovery point. The VolumeSizeInBytes value for this new volume must be equal to or larger than the size of the existing volume, in bytes.
      */
     SourceVolumeARN?: VolumeARN;
+    /**
+     * The network interface of the gateway on which to expose the iSCSI target. Only IPv4 addresses are accepted. Use DescribeGatewayInformation to get a list of the network interfaces available on a gateway.  Valid Values: A valid IP address.
+     */
     NetworkInterfaceId: NetworkInterfaceId;
+    /**
+     * A unique identifier that you use to retry a request. If you retry a request, use the same ClientToken you specified in the initial request.
+     */
     ClientToken: ClientToken;
+    /**
+     * True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.
+     */
+    KMSEncrypted?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+     */
+    KMSKey?: KMSKey;
   }
   export interface CreateCachediSCSIVolumeOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the configured volume.
+     */
     VolumeARN?: VolumeARN;
+    /**
+     * The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI name that initiators can use to connect to the target.
+     */
     TargetARN?: TargetARN;
   }
   export interface CreateNFSFileShareInput {
@@ -719,7 +854,7 @@ declare namespace StorageGateway {
      */
     KMSEncrypted?: Boolean;
     /**
-     * The KMS key used for Amazon S3 server side encryption. This value can only be set when KmsEncrypted is true. Optional.
+     * The Amazon Resource Name (ARN) AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
      */
     KMSKey?: KMSKey;
     /**
@@ -731,27 +866,99 @@ declare namespace StorageGateway {
      */
     LocationARN: LocationARN;
     /**
-     * The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.
+     * The default storage class for objects put into an Amazon S3 bucket by the file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA, or S3_ONEZONE_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.
      */
     DefaultStorageClass?: StorageClass;
+    /**
+     * A value that sets the access control list permission for objects in the S3 bucket that a file gateway puts objects into. The default value is "private".
+     */
+    ObjectACL?: ObjectACL;
     /**
      * The list of clients that are allowed to access the file gateway. The list must contain either valid IP addresses or valid CIDR blocks. 
      */
     ClientList?: FileShareClientList;
     /**
-     * Maps a user to anonymous user. Valid options are the following:    "RootSquash" - Only root is mapped to anonymous user.   "NoSquash" - No one is mapped to anonymous user.   "AllSquash" - Everyone is mapped to anonymous user.  
+     * Maps a user to anonymous user. Valid options are the following:     RootSquash - Only root is mapped to anonymous user.    NoSquash - No one is mapped to anonymous user    AllSquash - Everyone is mapped to anonymous user.  
      */
     Squash?: Squash;
     /**
-     * Sets the write status of a file share: "true" if the write status is read-only, and otherwise "false".
+     * A value that sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.
      */
     ReadOnly?: Boolean;
     /**
-     * Enables guessing of the MIME type for uploaded objects based on file extensions: "true" to enable MIME type guessing, and otherwise "false".
+     * A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.
      */
     GuessMIMETypeEnabled?: Boolean;
+    /**
+     * A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is private.
+     */
+    RequesterPays?: Boolean;
   }
   export interface CreateNFSFileShareOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the newly created file share. 
+     */
+    FileShareARN?: FileShareARN;
+  }
+  export interface CreateSMBFileShareInput {
+    /**
+     * A unique string value that you supply that is used by file gateway to ensure idempotent file share creation.
+     */
+    ClientToken: ClientToken;
+    /**
+     * The Amazon Resource Name (ARN) of the file gateway on which you want to create a file share.
+     */
+    GatewayARN: GatewayARN;
+    /**
+     * True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.
+     */
+    KMSEncrypted?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+     */
+    KMSKey?: KMSKey;
+    /**
+     * The ARN of the AWS Identity and Access Management (IAM) role that a file gateway assumes when it accesses the underlying storage. 
+     */
+    Role: Role;
+    /**
+     * The ARN of the backed storage used for storing file data. 
+     */
+    LocationARN: LocationARN;
+    /**
+     * The default storage class for objects put into an Amazon S3 bucket by the file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA, or S3_ONEZONE_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.
+     */
+    DefaultStorageClass?: StorageClass;
+    /**
+     * A value that sets the access control list permission for objects in the S3 bucket that a file gateway puts objects into. The default value is "private".
+     */
+    ObjectACL?: ObjectACL;
+    /**
+     * A value that sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.
+     */
+    ReadOnly?: Boolean;
+    /**
+     * A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.
+     */
+    GuessMIMETypeEnabled?: Boolean;
+    /**
+     * A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is private.
+     */
+    RequesterPays?: Boolean;
+    /**
+     * A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
+     */
+    ValidUserList?: FileShareUserList;
+    /**
+     * A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
+     */
+    InvalidUserList?: FileShareUserList;
+    /**
+     * The authentication method that users use to access the file share. Valid values are ActiveDirectory or GuestAccess. The default is ActiveDirectory.
+     */
+    Authentication?: Authentication;
+  }
+  export interface CreateSMBFileShareOutput {
     /**
      * The Amazon Resource Name (ARN) of the newly created file share. 
      */
@@ -808,6 +1015,14 @@ declare namespace StorageGateway {
      * The network interface of the gateway on which to expose the iSCSI target. Only IPv4 addresses are accepted. Use DescribeGatewayInformation to get a list of the network interfaces available on a gateway.  Valid Values: A valid IP address.
      */
     NetworkInterfaceId: NetworkInterfaceId;
+    /**
+     * True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.
+     */
+    KMSEncrypted?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+     */
+    KMSKey?: KMSKey;
   }
   export interface CreateStorediSCSIVolumeOutput {
     /**
@@ -819,7 +1034,7 @@ declare namespace StorageGateway {
      */
     VolumeSizeInBytes?: long;
     /**
-     * he Amazon Resource Name (ARN) of the volume target that includes the iSCSI name that initiators can use to connect to the target.
+     * The Amazon Resource Name (ARN) of the volume target, which includes the iSCSI name that initiators can use to connect to the target.
      */
     TargetARN?: TargetARN;
   }
@@ -836,6 +1051,14 @@ declare namespace StorageGateway {
      * The barcode that you want to assign to the tape.  Barcodes cannot be reused. This includes barcodes used for tapes that have been deleted. 
      */
     TapeBarcode: TapeBarcode;
+    /**
+     * True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.
+     */
+    KMSEncrypted?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS KMS Key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+     */
+    KMSKey?: KMSKey;
   }
   export interface CreateTapeWithBarcodeOutput {
     /**
@@ -864,6 +1087,14 @@ declare namespace StorageGateway {
      * A prefix that you append to the barcode of the virtual tape you are creating. This prefix makes the barcode unique.  The prefix must be 1 to 4 characters in length and must be one of the uppercase letters from A to Z. 
      */
     TapeBarcodePrefix: TapeBarcodePrefix;
+    /**
+     * True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.
+     */
+    KMSEncrypted?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+     */
+    KMSKey?: KMSKey;
   }
   export interface CreateTapesOutput {
     /**
@@ -1087,6 +1318,32 @@ declare namespace StorageGateway {
      */
     NFSFileShareInfoList?: NFSFileShareInfoList;
   }
+  export interface DescribeSMBFileSharesInput {
+    /**
+     * An array containing the Amazon Resource Name (ARN) of each file share to be described. 
+     */
+    FileShareARNList: FileShareARNList;
+  }
+  export interface DescribeSMBFileSharesOutput {
+    /**
+     * An array containing a description for each requested file share. 
+     */
+    SMBFileShareInfoList?: SMBFileShareInfoList;
+  }
+  export interface DescribeSMBSettingsInput {
+    GatewayARN: GatewayARN;
+  }
+  export interface DescribeSMBSettingsOutput {
+    GatewayARN?: GatewayARN;
+    /**
+     * The name of the domain that the gateway is joined to.
+     */
+    DomainName?: DomainName;
+    /**
+     * This value is true if a password for the guest user “smbguest” is set, and otherwise false.
+     */
+    SMBGuestPasswordSet?: Boolean;
+  }
   export interface DescribeSnapshotScheduleInput {
     /**
      * The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation to return a list of gateway volumes.
@@ -1125,7 +1382,7 @@ declare namespace StorageGateway {
   }
   export interface DescribeTapeArchivesOutput {
     /**
-     * An array of virtual tape objects in the virtual tape shelf (VTS). The description includes of the Amazon Resource Name(ARN) of the virtual tapes. The information returned includes the Amazon Resource Names (ARNs) of the tapes, size of the tapes, status of the tapes, progress of the description and tape barcode.
+     * An array of virtual tape objects in the virtual tape shelf (VTS). The description includes of the Amazon Resource Name (ARN) of the virtual tapes. The information returned includes the Amazon Resource Names (ARNs) of the tapes, size of the tapes, status of the tapes, progress of the description and tape barcode.
      */
     TapeArchives?: TapeArchives;
     /**
@@ -1234,10 +1491,26 @@ declare namespace StorageGateway {
     WorkingStorageAllocatedInBytes?: long;
   }
   export type Description = string;
+  export interface DetachVolumeInput {
+    /**
+     * The Amazon Resource Name (ARN) of the volume to detach from the gateway.
+     */
+    VolumeARN: VolumeARN;
+    /**
+     * Set to true to forcibly remove the iSCSI connection of the target volume and detach the volume. The default is false. If this value is set to false, you must manually disconnect the iSCSI connection from the target volume.
+     */
+    ForceDetach?: Boolean;
+  }
+  export interface DetachVolumeOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the volume that was detached.
+     */
+    VolumeARN?: VolumeARN;
+  }
   export type DeviceType = string;
   export interface DeviceiSCSIAttributes {
     /**
-     * Specifies the unique Amazon Resource Name(ARN) that encodes the iSCSI qualified name(iqn) of a tape drive or media changer target.
+     * Specifies the unique Amazon Resource Name (ARN) that encodes the iSCSI qualified name(iqn) of a tape drive or media changer target.
      */
     TargetARN?: TargetARN;
     /**
@@ -1258,30 +1531,54 @@ declare namespace StorageGateway {
   }
   export interface DisableGatewayOutput {
     /**
-     * The unique Amazon Resource Name of the disabled gateway.
+     * The unique Amazon Resource Name (ARN) of the disabled gateway.
      */
     GatewayARN?: GatewayARN;
   }
   export interface Disk {
+    /**
+     * The unique device ID or other distinguishing data that identifies a local disk.
+     */
     DiskId?: DiskId;
+    /**
+     * The path of a local disk in the gateway virtual machine (VM).
+     */
     DiskPath?: string;
+    /**
+     * The device node of a local disk as assigned by the virtualization environment.
+     */
     DiskNode?: string;
+    /**
+     * A value that represents the status of a local disk.
+     */
     DiskStatus?: string;
+    /**
+     * The local disk size in bytes.
+     */
     DiskSizeInBytes?: long;
     DiskAllocationType?: DiskAllocationType;
+    /**
+     * The iSCSI qualified name (IQN) that is defined for a disk. This field is not included in the response if the local disk is not defined as an iSCSI target. The format of this field is targetIqn::LUNNumber::region-volumeId. 
+     */
     DiskAllocationResource?: string;
+    DiskAttributeList?: DiskAttributeList;
   }
   export type DiskAllocationType = string;
+  export type DiskAttribute = string;
+  export type DiskAttributeList = DiskAttribute[];
   export type DiskId = string;
   export type DiskIds = DiskId[];
   export type Disks = Disk[];
+  export type DomainName = string;
+  export type DomainUserName = string;
+  export type DomainUserPassword = string;
   export type DoubleObject = number;
-  export type ErrorCode = "ActivationKeyExpired"|"ActivationKeyInvalid"|"ActivationKeyNotFound"|"GatewayInternalError"|"GatewayNotConnected"|"GatewayNotFound"|"GatewayProxyNetworkConnectionBusy"|"AuthenticationFailure"|"BandwidthThrottleScheduleNotFound"|"Blocked"|"CannotExportSnapshot"|"ChapCredentialNotFound"|"DiskAlreadyAllocated"|"DiskDoesNotExist"|"DiskSizeGreaterThanVolumeMaxSize"|"DiskSizeLessThanVolumeSize"|"DiskSizeNotGigAligned"|"DuplicateCertificateInfo"|"DuplicateSchedule"|"EndpointNotFound"|"IAMNotSupported"|"InitiatorInvalid"|"InitiatorNotFound"|"InternalError"|"InvalidGateway"|"InvalidEndpoint"|"InvalidParameters"|"InvalidSchedule"|"LocalStorageLimitExceeded"|"LunAlreadyAllocated "|"LunInvalid"|"MaximumContentLengthExceeded"|"MaximumTapeCartridgeCountExceeded"|"MaximumVolumeCountExceeded"|"NetworkConfigurationChanged"|"NoDisksAvailable"|"NotImplemented"|"NotSupported"|"OperationAborted"|"OutdatedGateway"|"ParametersNotImplemented"|"RegionInvalid"|"RequestTimeout"|"ServiceUnavailable"|"SnapshotDeleted"|"SnapshotIdInvalid"|"SnapshotInProgress"|"SnapshotNotFound"|"SnapshotScheduleNotFound"|"StagingAreaFull"|"StorageFailure"|"TapeCartridgeNotFound"|"TargetAlreadyExists"|"TargetInvalid"|"TargetNotFound"|"UnauthorizedOperation"|"VolumeAlreadyExists"|"VolumeIdInvalid"|"VolumeInUse"|"VolumeNotFound"|"VolumeNotReady"|string;
   export type FileShareARN = string;
   export type FileShareARNList = FileShareARN[];
   export type FileShareClientList = IPV4AddressCIDR[];
   export type FileShareId = string;
   export interface FileShareInfo {
+    FileShareType?: FileShareType;
     FileShareARN?: FileShareARN;
     FileShareId?: FileShareId;
     FileShareStatus?: FileShareStatus;
@@ -1289,6 +1586,11 @@ declare namespace StorageGateway {
   }
   export type FileShareInfoList = FileShareInfo[];
   export type FileShareStatus = string;
+  export type FileShareType = "NFS"|"SMB"|string;
+  export type FileShareUser = string;
+  export type FileShareUserList = FileShareUser[];
+  export type Folder = string;
+  export type FolderList = Folder[];
   export type GatewayARN = string;
   export type GatewayId = string;
   export interface GatewayInfo {
@@ -1320,11 +1622,45 @@ declare namespace StorageGateway {
   export type GatewayTimezone = string;
   export type GatewayType = string;
   export type Gateways = GatewayInfo[];
+  export type Host = string;
+  export type Hosts = Host[];
   export type HourOfDay = number;
   export type IPV4AddressCIDR = string;
   export type Initiator = string;
   export type Initiators = Initiator[];
   export type IqnName = string;
+  export interface JoinDomainInput {
+    /**
+     * The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.
+     */
+    GatewayARN: GatewayARN;
+    /**
+     * The name of the domain that you want the gateway to join.
+     */
+    DomainName: DomainName;
+    /**
+     * The organizational unit (OU) is a container with an Active Directory that can hold users, groups, computers, and other OUs and this parameter specifies the OU that the gateway will join within the AD domain.
+     */
+    OrganizationalUnit?: OrganizationalUnit;
+    /**
+     * List of IPv4 addresses, NetBIOS names, or host names of your domain server. If you need to specify the port number include it after the colon (“:”). For example, mydc.mydomain.com:389.
+     */
+    DomainControllers?: Hosts;
+    /**
+     * Sets the user name of user who has permission to add the gateway to the Active Directory domain.
+     */
+    UserName: DomainUserName;
+    /**
+     * Sets the password of the user who has permission to add the gateway to the Active Directory domain.
+     */
+    Password: DomainUserPassword;
+  }
+  export interface JoinDomainOutput {
+    /**
+     * The unique Amazon Resource Name (ARN) of the gateway that joined the domain.
+     */
+    GatewayARN?: GatewayARN;
+  }
   export type KMSKey = string;
   export type LastSoftwareUpdate = string;
   export interface ListFileSharesInput {
@@ -1487,7 +1823,7 @@ declare namespace StorageGateway {
     FileShareStatus?: FileShareStatus;
     GatewayARN?: GatewayARN;
     /**
-     * True to use Amazon S3 server side encryption with your own KMS key, or false to use a key managed by Amazon S3. Optional. 
+     * True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional. 
      */
     KMSEncrypted?: boolean;
     KMSKey?: KMSKey;
@@ -1495,16 +1831,24 @@ declare namespace StorageGateway {
     Role?: Role;
     LocationARN?: LocationARN;
     /**
-     * The default storage class for objects put into an Amazon S3 bucket by file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.
+     * The default storage class for objects put into an Amazon S3 bucket by the file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA, or S3_ONEZONE_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.
      */
     DefaultStorageClass?: StorageClass;
+    ObjectACL?: ObjectACL;
     ClientList?: FileShareClientList;
     Squash?: Squash;
+    /**
+     * A value that sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.
+     */
     ReadOnly?: Boolean;
     /**
-     * Enables guessing of the MIME type for uploaded objects based on file extensions: "true" to enable MIME type guessing, and otherwise "false".
+     * A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.
      */
     GuessMIMETypeEnabled?: Boolean;
+    /**
+     * A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is private.
+     */
+    RequesterPays?: Boolean;
   }
   export type NFSFileShareInfoList = NFSFileShareInfo[];
   export interface NetworkInterface {
@@ -1532,16 +1876,30 @@ declare namespace StorageGateway {
     NotificationId?: NotificationId;
   }
   export type NumTapesToCreate = number;
+  export type ObjectACL = "private"|"public-read"|"public-read-write"|"authenticated-read"|"bucket-owner-read"|"bucket-owner-full-control"|"aws-exec-read"|string;
+  export type OrganizationalUnit = string;
   export type Path = string;
   export type PermissionId = number;
   export type PermissionMode = string;
   export type PositiveIntObject = number;
   export type RecurrenceInHours = number;
   export interface RefreshCacheInput {
+    /**
+     * The Amazon Resource Name (ARN) of the file share you want to refresh.
+     */
     FileShareARN: FileShareARN;
+    /**
+     * A comma-separated list of the paths of folders to refresh in the cache. The default is ["/"]. The default refreshes objects and folders at the root of the Amazon S3 bucket. If Recursive is set to "true", the entire S3 bucket that the file share has access to is refreshed.
+     */
+    FolderList?: FolderList;
+    /**
+     * A value that specifies whether to recursively refresh folders in the cache. The refresh includes folders that were in the cache the last time the gateway listed the folder's contents. If this value set to "true", each folder that is listed in FolderList is recursively updated. Otherwise, subfolders listed in FolderList are not refreshed. Only objects that are in folders listed directly under FolderList are found and used for the update. The default is "true".
+     */
+    Recursive?: Boolean;
   }
   export interface RefreshCacheOutput {
     FileShareARN?: FileShareARN;
+    NotificationId?: NotificationId;
   }
   export type RegionId = string;
   export interface RemoveTagsFromResourceInput {
@@ -1597,6 +1955,51 @@ declare namespace StorageGateway {
     TapeARN?: TapeARN;
   }
   export type Role = string;
+  export interface SMBFileShareInfo {
+    FileShareARN?: FileShareARN;
+    FileShareId?: FileShareId;
+    FileShareStatus?: FileShareStatus;
+    GatewayARN?: GatewayARN;
+    /**
+     * True to use Amazon S3 server-side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional. 
+     */
+    KMSEncrypted?: boolean;
+    KMSKey?: KMSKey;
+    /**
+     * The file share path used by the SMB client to identify the mount point.
+     */
+    Path?: Path;
+    Role?: Role;
+    LocationARN?: LocationARN;
+    /**
+     * The default storage class for objects put into an Amazon S3 bucket by the file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA, or S3_ONEZONE_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.
+     */
+    DefaultStorageClass?: StorageClass;
+    ObjectACL?: ObjectACL;
+    /**
+     * A value that sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.
+     */
+    ReadOnly?: Boolean;
+    /**
+     * A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.
+     */
+    GuessMIMETypeEnabled?: Boolean;
+    /**
+     * A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is private.
+     */
+    RequesterPays?: Boolean;
+    /**
+     * A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
+     */
+    ValidUserList?: FileShareUserList;
+    /**
+     * A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
+     */
+    InvalidUserList?: FileShareUserList;
+    Authentication?: Authentication;
+  }
+  export type SMBFileShareInfoList = SMBFileShareInfo[];
+  export type SMBGuestPassword = string;
   export interface SetLocalConsolePasswordInput {
     GatewayARN: GatewayARN;
     /**
@@ -1605,6 +2008,19 @@ declare namespace StorageGateway {
     LocalConsolePassword: LocalConsolePassword;
   }
   export interface SetLocalConsolePasswordOutput {
+    GatewayARN?: GatewayARN;
+  }
+  export interface SetSMBGuestPasswordInput {
+    /**
+     * The Amazon Resource Name (ARN) of the file gateway the SMB file share is associated with.
+     */
+    GatewayARN: GatewayARN;
+    /**
+     * The password that you want to set for your SMB Server.
+     */
+    Password: SMBGuestPassword;
+  }
+  export interface SetSMBGuestPasswordOutput {
     GatewayARN?: GatewayARN;
   }
   export interface ShutdownGatewayInput {
@@ -1623,16 +2039,6 @@ declare namespace StorageGateway {
     GatewayARN?: GatewayARN;
   }
   export type StorageClass = string;
-  export interface StorageGatewayError {
-    /**
-     * Additional information about the error.
-     */
-    errorCode?: ErrorCode;
-    /**
-     * Human-readable text that provides detail about the error that occurred.
-     */
-    errorDetails?: errorDetails;
-  }
   export interface StorediSCSIVolume {
     /**
      * The Amazon Resource Name (ARN) of the storage volume.
@@ -1650,6 +2056,10 @@ declare namespace StorageGateway {
      * One of the VolumeStatus values that indicates the state of the storage volume.
      */
     VolumeStatus?: VolumeStatus;
+    /**
+     * A value that indicates whether a storage volume is attached to, detached from, or is in the process of detaching from a gateway.
+     */
+    VolumeAttachmentStatus?: VolumeAttachmentStatus;
     /**
      * The size of the volume in bytes.
      */
@@ -1682,6 +2092,11 @@ declare namespace StorageGateway {
      * The size of the data stored on the volume in bytes.   This value is not available for volumes created prior to May 13, 2015, until you store data on the volume. 
      */
     VolumeUsedInBytes?: VolumeUsedInBytes;
+    KMSKey?: KMSKey;
+    /**
+     * The name of the iSCSI target that is used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying TargetName as myvolume results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume.
+     */
+    TargetName?: TargetName;
   }
   export type StorediSCSIVolumes = StorediSCSIVolume[];
   export interface Tag {
@@ -1725,6 +2140,7 @@ declare namespace StorageGateway {
      * The size, in bytes, of data stored on the virtual tape.  This value is not available for tapes created prior to May 13, 2015. 
      */
     TapeUsedInBytes?: TapeUsage;
+    KMSKey?: KMSKey;
   }
   export type TapeARN = string;
   export type TapeARNs = TapeARN[];
@@ -1737,13 +2153,16 @@ declare namespace StorageGateway {
      * The barcode that identifies the archived virtual tape.
      */
     TapeBarcode?: TapeBarcode;
+    /**
+     * The date the virtual tape was created.
+     */
     TapeCreatedDate?: Time;
     /**
      * The size, in bytes, of the archived virtual tape.
      */
     TapeSizeInBytes?: TapeSize;
     /**
-     * The time that the archiving of the virtual tape was completed. The string format of the completion time is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
+     * The time that the archiving of the virtual tape was completed. The default time stamp format is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
      */
     CompletionTime?: Time;
     /**
@@ -1758,6 +2177,7 @@ declare namespace StorageGateway {
      * The size, in bytes, of data stored on the virtual tape.  This value is not available for tapes created prior to May 13, 2015. 
      */
     TapeUsedInBytes?: TapeUsage;
+    KMSKey?: KMSKey;
   }
   export type TapeArchiveStatus = string;
   export type TapeArchives = TapeArchive[];
@@ -1793,7 +2213,7 @@ declare namespace StorageGateway {
      */
     TapeARN?: TapeARN;
     /**
-     * The time when the point-in-time view of the virtual tape was replicated for later recovery. The string format of the tape recovery point time is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
+     * The time when the point-in-time view of the virtual tape was replicated for later recovery. The default time stamp format of the tape recovery point time is in the ISO8601 extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
      */
     TapeRecoveryPointTime?: Time;
     /**
@@ -1896,7 +2316,7 @@ declare namespace StorageGateway {
      */
     KMSEncrypted?: Boolean;
     /**
-     * The KMS key used for Amazon S3 server side encryption. This value can only be set when KmsEncrypted is true. Optional. 
+     * The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional. 
      */
     KMSKey?: KMSKey;
     /**
@@ -1904,29 +2324,85 @@ declare namespace StorageGateway {
      */
     NFSFileShareDefaults?: NFSFileShareDefaults;
     /**
-     * The default storage class for objects put into an Amazon S3 bucket by a file gateway. Possible values are S3_STANDARD or S3_STANDARD_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.
+     * The default storage class for objects put into an Amazon S3 bucket by the file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA, or S3_ONEZONE_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.
      */
     DefaultStorageClass?: StorageClass;
+    /**
+     * A value that sets the access control list permission for objects in the S3 bucket that a file gateway puts objects into. The default value is "private".
+     */
+    ObjectACL?: ObjectACL;
     /**
      * The list of clients that are allowed to access the file gateway. The list must contain either valid IP addresses or valid CIDR blocks.
      */
     ClientList?: FileShareClientList;
     /**
-     * The user mapped to anonymous user. Valid options are the following:   "RootSquash" - Only root is mapped to anonymous user.   "NoSquash" - No one is mapped to anonymous user   "AllSquash" - Everyone is mapped to anonymous user.  
+     * The user mapped to anonymous user. Valid options are the following:    RootSquash - Only root is mapped to anonymous user.    NoSquash - No one is mapped to anonymous user    AllSquash - Everyone is mapped to anonymous user.  
      */
     Squash?: Squash;
     /**
-     * Sets the write status of a file share: "true" if the write status is read-only, otherwise "false".
+     * A value that sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.
      */
     ReadOnly?: Boolean;
     /**
-     * Enables guessing of the MIME type for uploaded objects based on file extensions: "true" to enable MIME type guessing, and otherwise "false".
+     * A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.
      */
     GuessMIMETypeEnabled?: Boolean;
+    /**
+     * A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is private.
+     */
+    RequesterPays?: Boolean;
   }
   export interface UpdateNFSFileShareOutput {
     /**
      * The Amazon Resource Name (ARN) of the updated file share. 
+     */
+    FileShareARN?: FileShareARN;
+  }
+  export interface UpdateSMBFileShareInput {
+    /**
+     * The Amazon Resource Name (ARN) of the SMB file share that you want to update.
+     */
+    FileShareARN: FileShareARN;
+    /**
+     * True to use Amazon S3 server side encryption with your own AWS KMS key, or false to use a key managed by Amazon S3. Optional.
+     */
+    KMSEncrypted?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
+     */
+    KMSKey?: KMSKey;
+    /**
+     * The default storage class for objects put into an Amazon S3 bucket by the file gateway. Possible values are S3_STANDARD, S3_STANDARD_IA, or S3_ONEZONE_IA. If this field is not populated, the default value S3_STANDARD is used. Optional.
+     */
+    DefaultStorageClass?: StorageClass;
+    /**
+     * A value that sets the access control list permission for objects in the S3 bucket that a file gateway puts objects into. The default value is "private".
+     */
+    ObjectACL?: ObjectACL;
+    /**
+     * A value that sets the write status of a file share. This value is true if the write status is read-only, and otherwise false.
+     */
+    ReadOnly?: Boolean;
+    /**
+     * A value that enables guessing of the MIME type for uploaded objects based on file extensions. Set this value to true to enable MIME type guessing, and otherwise to false. The default value is true.
+     */
+    GuessMIMETypeEnabled?: Boolean;
+    /**
+     * A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is private.
+     */
+    RequesterPays?: Boolean;
+    /**
+     * A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
+     */
+    ValidUserList?: FileShareUserList;
+    /**
+     * A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
+     */
+    InvalidUserList?: FileShareUserList;
+  }
+  export interface UpdateSMBFileShareOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the updated SMB file share. 
      */
     FileShareARN?: FileShareARN;
   }
@@ -1991,6 +2467,7 @@ declare namespace StorageGateway {
   export type VTLDevices = VTLDevice[];
   export type VolumeARN = string;
   export type VolumeARNs = VolumeARN[];
+  export type VolumeAttachmentStatus = string;
   export type VolumeId = string;
   export interface VolumeInfo {
     /**
@@ -2011,6 +2488,7 @@ declare namespace StorageGateway {
      * The size of the volume in bytes. Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and hyphens (-).
      */
     VolumeSizeInBytes?: long;
+    VolumeAttachmentStatus?: VolumeAttachmentStatus;
   }
   export type VolumeInfos = VolumeInfo[];
   export interface VolumeRecoveryPointInfo {
@@ -2046,7 +2524,6 @@ declare namespace StorageGateway {
     ChapEnabled?: boolean;
   }
   export type double = number;
-  export type errorDetails = {[key: string]: string};
   export type integer = number;
   export type long = number;
   /**

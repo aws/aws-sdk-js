@@ -1,5 +1,6 @@
 var fs = require('fs');
 var path = require('path');
+var pruneShapes = require('./prune-shapes').pruneShapes;
 
 var CUSTOM_CONFIG_ENUMS = {
     DUALSTACK: {
@@ -139,7 +140,7 @@ TSGenerator.prototype.generateDocumentClientInterfaces = function generateDocume
             code += self.tabs(tabCount) + 'export type ' + shapeKey + ' = any;\n';
             return;
         }
-        code += self.generateTypingsFromShape(shapeKey, modelShape, tabCount, []);
+        code += self.generateTypingsFromShape(dynamodbModel, shapeKey, modelShape, tabCount, []);
     });
     return code;
 };
@@ -279,7 +280,7 @@ TSGenerator.prototype.addReadableType = function addReadableType(shapeKey) {
 /**
  * Generates a type or interface based on the shape.
  */
-TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromShape(shapeKey, shape, tabCount, customClassNames) {
+TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromShape(model, shapeKey, shape, tabCount, customClassNames) {
     // some shapes shouldn't be generated if they are javascript primitives
     var jsPrimitives = ['string', 'boolean', 'number'];
     if (jsPrimitives.indexOf(shapeKey) >= 0) {
@@ -297,6 +298,15 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
     tabCount = tabCount || 0;
     var tabs = this.tabs;
     var type = shape.type;
+    if (shape.eventstream) {
+        // eventstreams MUST be structures
+        var members = Object.keys(shape.members);
+        var events = members.map(function(member) {
+            // each member is an individual event type, so each must be optional
+            return member + '?:' + shape.members[member].shape;
+        });
+        return code += tabs(tabCount) + 'export type ' + shapeKey + ' = EventStream<{' + events.join(',') + '}>;\n'; 
+    }
     if (type === 'structure') {
         code += tabs(tabCount) + 'export interface ' + shapeKey + ' {\n';
         var members = shape.members;
@@ -310,6 +320,12 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
             }
             var required = self.checkRequired(shape.required || [], memberKey) ? '' : '?';
             var memberType = member.shape;
+            if (member.eventpayload) {
+                // eventpayloads are always either structures, or buffers
+                if (['blob', 'binary'].indexOf(model.shapes[memberType].type) >= 0) {
+                    memberType = 'Buffer';
+                }
+            }
             memberType = self.generateSafeShapeName(memberType, [].concat(customClassNames, ['Date', 'Blob']));
             code += tabs(tabCount + 1) + memberKey + required + ': ' + memberType + ';\n';
         });
@@ -332,7 +348,7 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
         code += tabs(tabCount) + 'export type ' + shapeKey + ' = Date;\n';
     } else if (type === 'boolean') {
         code += tabs(tabCount) + 'export type ' + shapeKey + ' = boolean;\n';
-    } else if (type === 'blob' || type === 'binary') {     
+    } else if (type === 'blob' || type === 'binary') {
         code += tabs(tabCount) + 'export type ' + shapeKey + ' = Buffer|Uint8Array|Blob|string'
             + self.addReadableType(shapeKey)
             +';\n';
@@ -425,7 +441,7 @@ TSGenerator.prototype.generateTypingsFromWaiters = function generateTypingsFromW
     }
 
     code += this.generateDocString(docString, tabCount);
-    code += this.tabs(tabCount) + 'waitFor(state: "' + waiterState + '", params: ' + inputShape + ', callback?: (err: AWSError, data: ' + outputShape + ') => void): Request<' + outputShape + ', AWSError>;\n';
+    code += this.tabs(tabCount) + 'waitFor(state: "' + waiterState + '", params: ' + inputShape + ' & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ' + outputShape + ') => void): Request<' + outputShape + ', AWSError>;\n';
     code += this.generateDocString(docString, tabCount);
     code += this.tabs(tabCount) + 'waitFor(state: "' + waiterState + '", callback?: (err: AWSError, data: ' + outputShape + ') => void): Request<' + outputShape + ', AWSError>;\n';
 
@@ -482,16 +498,30 @@ TSGenerator.prototype.generateCustomNamespaceTypes = function generateCustomName
     };
 };
 
+TSGenerator.prototype.containsEventStreams = function containsEventStreams(model) {
+    var shapeNames = Object.keys(model.shapes);
+    for (var name of shapeNames) {
+        if (model.shapes[name].eventstream) {
+            return true;
+        }
+    }
+    return false;
+};
+
 /**
  * Generates the typings for a service based on the serviceIdentifier.
  */
 TSGenerator.prototype.processServiceModel = function processServiceModel(serviceIdentifier) {
     var model = this.loadServiceApi(serviceIdentifier);
+    pruneShapes(model);
+
     var self = this;
     var code = '';
     var className = this.metadata[serviceIdentifier].name;
     var customNamespaces = this.generateCustomNamespaceTypes(serviceIdentifier, className);
     var customClassNames = customNamespaces ? customNamespaces.customClassNames : [];
+    var waiters = model.waiters || Object.create(null);
+    var waiterKeys = Object.keys(waiters);
     // generate imports
     code += 'import {Request} from \'../lib/request\';\n';
     code += 'import {Response} from \'../lib/response\';\n';
@@ -502,6 +532,9 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
         code += 'import {' + parentClass + '} from \'../lib/services/' + serviceIdentifier + '\';\n';
     } else {
         code += 'import {' + parentClass + '} from \'../lib/service\';\n';
+    }
+    if (waiterKeys.length) {
+        code += 'import {WaiterConfiguration} from \'../lib/service\';\n';
     }
     code += 'import {ServiceConfigurationOptions} from \'../lib/service\';\n';
     // get any custom config options
@@ -515,6 +548,9 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
             code += 'import {' + config.INTERFACE + '} from \'../lib/' + config.FILE_NAME + '\';\n';
             customConfigTypes.push(config.INTERFACE);
         });
+    }
+    if (this.containsEventStreams(model)) {
+        code += 'import {EventStream} from \'../lib/event-stream/event-stream\';\n';
     }
     // import custom namespaces
     if (customNamespaces) {
@@ -535,8 +571,6 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     });
 
     // generate waitFor methods
-    var waiters = model.waiters || Object.create(null);
-    var waiterKeys = Object.keys(waiters);
     waiterKeys.forEach(function (waitersKey) {
         var waiter = waiters[waitersKey];
         var operation = modelOperations[waiter.operation];
@@ -568,7 +602,7 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
         if (modelShape.exception) {
             return;
         }
-        code += self.generateTypingsFromShape(shapeKey, modelShape, 1, customClassNames);
+        code += self.generateTypingsFromShape(model, shapeKey, modelShape, 1, customClassNames);
     });
     //add extra dependencies like 'streaming'
     if (Object.keys(self.streamTypes).length !== 0) {

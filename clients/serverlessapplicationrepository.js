@@ -8,6 +8,7 @@ AWS.ServerlessApplicationRepository = Service.defineService('serverlessapplicati
 Object.defineProperty(apiLoader.services['serverlessapplicationrepository'], '2017-09-08', {
   get: function get() {
     var model = require('../apis/serverlessrepo-2017-09-08.min.json');
+    model.paginators = require('../apis/serverlessrepo-2017-09-08.paginators.json').pagination;
     return model;
   },
   enumerable: true,

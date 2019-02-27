@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "ec2.DescribeVpcPeeringConnections pagination support"
+    },
+    {
+        "type": "feature",
+        "category": "Shield",
+        "description": "The DescribeProtection request now accepts resource ARN as valid parameter."
+    }
+]

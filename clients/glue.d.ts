@@ -36,11 +36,11 @@ declare class Glue extends Service {
    */
   batchDeletePartition(callback?: (err: AWSError, data: Glue.Types.BatchDeletePartitionResponse) => void): Request<Glue.Types.BatchDeletePartitionResponse, AWSError>;
   /**
-   * Deletes multiple tables at once.
+   * Deletes multiple tables at once.  After completing this operation, you will no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure immediate deletion of all related resources, before calling BatchDeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
   batchDeleteTable(params: Glue.Types.BatchDeleteTableRequest, callback?: (err: AWSError, data: Glue.Types.BatchDeleteTableResponse) => void): Request<Glue.Types.BatchDeleteTableResponse, AWSError>;
   /**
-   * Deletes multiple tables at once.
+   * Deletes multiple tables at once.  After completing this operation, you will no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure immediate deletion of all related resources, before calling BatchDeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
   batchDeleteTable(callback?: (err: AWSError, data: Glue.Types.BatchDeleteTableResponse) => void): Request<Glue.Types.BatchDeleteTableResponse, AWSError>;
   /**
@@ -52,6 +52,30 @@ declare class Glue extends Service {
    */
   batchDeleteTableVersion(callback?: (err: AWSError, data: Glue.Types.BatchDeleteTableVersionResponse) => void): Request<Glue.Types.BatchDeleteTableVersionResponse, AWSError>;
   /**
+   * Returns a list of resource metadata for a given list of crawler names. After calling the ListCrawlers operation, you can call this operation to access the data to which you have been granted permissions to based on tags.
+   */
+  batchGetCrawlers(params: Glue.Types.BatchGetCrawlersRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetCrawlersResponse) => void): Request<Glue.Types.BatchGetCrawlersResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of crawler names. After calling the ListCrawlers operation, you can call this operation to access the data to which you have been granted permissions to based on tags.
+   */
+  batchGetCrawlers(callback?: (err: AWSError, data: Glue.Types.BatchGetCrawlersResponse) => void): Request<Glue.Types.BatchGetCrawlersResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of DevEndpoint names. After calling the ListDevEndpoints operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+   */
+  batchGetDevEndpoints(params: Glue.Types.BatchGetDevEndpointsRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetDevEndpointsResponse) => void): Request<Glue.Types.BatchGetDevEndpointsResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of DevEndpoint names. After calling the ListDevEndpoints operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+   */
+  batchGetDevEndpoints(callback?: (err: AWSError, data: Glue.Types.BatchGetDevEndpointsResponse) => void): Request<Glue.Types.BatchGetDevEndpointsResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of job names. After calling the ListJobs operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags. 
+   */
+  batchGetJobs(params: Glue.Types.BatchGetJobsRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetJobsResponse) => void): Request<Glue.Types.BatchGetJobsResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of job names. After calling the ListJobs operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags. 
+   */
+  batchGetJobs(callback?: (err: AWSError, data: Glue.Types.BatchGetJobsResponse) => void): Request<Glue.Types.BatchGetJobsResponse, AWSError>;
+  /**
    * Retrieves partitions in a batch request.
    */
   batchGetPartition(params: Glue.Types.BatchGetPartitionRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetPartitionResponse) => void): Request<Glue.Types.BatchGetPartitionResponse, AWSError>;
@@ -60,11 +84,19 @@ declare class Glue extends Service {
    */
   batchGetPartition(callback?: (err: AWSError, data: Glue.Types.BatchGetPartitionResponse) => void): Request<Glue.Types.BatchGetPartitionResponse, AWSError>;
   /**
-   * Stops one or more job runs for a specified Job.
+   * Returns a list of resource metadata for a given list of trigger names. After calling the ListTriggers operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+   */
+  batchGetTriggers(params: Glue.Types.BatchGetTriggersRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetTriggersResponse) => void): Request<Glue.Types.BatchGetTriggersResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of trigger names. After calling the ListTriggers operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+   */
+  batchGetTriggers(callback?: (err: AWSError, data: Glue.Types.BatchGetTriggersResponse) => void): Request<Glue.Types.BatchGetTriggersResponse, AWSError>;
+  /**
+   * Stops one or more job runs for a specified job definition.
    */
   batchStopJobRun(params: Glue.Types.BatchStopJobRunRequest, callback?: (err: AWSError, data: Glue.Types.BatchStopJobRunResponse) => void): Request<Glue.Types.BatchStopJobRunResponse, AWSError>;
   /**
-   * Stops one or more job runs for a specified Job.
+   * Stops one or more job runs for a specified job definition.
    */
   batchStopJobRun(callback?: (err: AWSError, data: Glue.Types.BatchStopJobRunResponse) => void): Request<Glue.Types.BatchStopJobRunResponse, AWSError>;
   /**
@@ -84,11 +116,11 @@ declare class Glue extends Service {
    */
   createConnection(callback?: (err: AWSError, data: Glue.Types.CreateConnectionResponse) => void): Request<Glue.Types.CreateConnectionResponse, AWSError>;
   /**
-   * Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in either the s3Targets or the jdbcTargets field.
+   * Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in the s3Targets field, the jdbcTargets field, or the DynamoDBTargets field.
    */
   createCrawler(params: Glue.Types.CreateCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.CreateCrawlerResponse) => void): Request<Glue.Types.CreateCrawlerResponse, AWSError>;
   /**
-   * Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in either the s3Targets or the jdbcTargets field.
+   * Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in the s3Targets field, the jdbcTargets field, or the DynamoDBTargets field.
    */
   createCrawler(callback?: (err: AWSError, data: Glue.Types.CreateCrawlerResponse) => void): Request<Glue.Types.CreateCrawlerResponse, AWSError>;
   /**
@@ -108,11 +140,11 @@ declare class Glue extends Service {
    */
   createDevEndpoint(callback?: (err: AWSError, data: Glue.Types.CreateDevEndpointResponse) => void): Request<Glue.Types.CreateDevEndpointResponse, AWSError>;
   /**
-   * Creates a new job.
+   * Creates a new job definition.
    */
   createJob(params: Glue.Types.CreateJobRequest, callback?: (err: AWSError, data: Glue.Types.CreateJobResponse) => void): Request<Glue.Types.CreateJobResponse, AWSError>;
   /**
-   * Creates a new job.
+   * Creates a new job definition.
    */
   createJob(callback?: (err: AWSError, data: Glue.Types.CreateJobResponse) => void): Request<Glue.Types.CreateJobResponse, AWSError>;
   /**
@@ -131,6 +163,14 @@ declare class Glue extends Service {
    * Transforms a directed acyclic graph (DAG) into code.
    */
   createScript(callback?: (err: AWSError, data: Glue.Types.CreateScriptResponse) => void): Request<Glue.Types.CreateScriptResponse, AWSError>;
+  /**
+   * Creates a new security configuration.
+   */
+  createSecurityConfiguration(params: Glue.Types.CreateSecurityConfigurationRequest, callback?: (err: AWSError, data: Glue.Types.CreateSecurityConfigurationResponse) => void): Request<Glue.Types.CreateSecurityConfigurationResponse, AWSError>;
+  /**
+   * Creates a new security configuration.
+   */
+  createSecurityConfiguration(callback?: (err: AWSError, data: Glue.Types.CreateSecurityConfigurationResponse) => void): Request<Glue.Types.CreateSecurityConfigurationResponse, AWSError>;
   /**
    * Creates a new table definition in the Data Catalog.
    */
@@ -180,11 +220,11 @@ declare class Glue extends Service {
    */
   deleteCrawler(callback?: (err: AWSError, data: Glue.Types.DeleteCrawlerResponse) => void): Request<Glue.Types.DeleteCrawlerResponse, AWSError>;
   /**
-   * Removes a specified Database from a Data Catalog.
+   * Removes a specified Database from a Data Catalog.  After completing this operation, you will no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure immediate deletion of all related resources, before calling DeleteDatabase, use DeleteTableVersion or BatchDeleteTableVersion, DeletePartition or BatchDeletePartition, DeleteUserDefinedFunction, and DeleteTable or BatchDeleteTable, to delete any resources that belong to the database. 
    */
   deleteDatabase(params: Glue.Types.DeleteDatabaseRequest, callback?: (err: AWSError, data: Glue.Types.DeleteDatabaseResponse) => void): Request<Glue.Types.DeleteDatabaseResponse, AWSError>;
   /**
-   * Removes a specified Database from a Data Catalog.
+   * Removes a specified Database from a Data Catalog.  After completing this operation, you will no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure immediate deletion of all related resources, before calling DeleteDatabase, use DeleteTableVersion or BatchDeleteTableVersion, DeletePartition or BatchDeletePartition, DeleteUserDefinedFunction, and DeleteTable or BatchDeleteTable, to delete any resources that belong to the database. 
    */
   deleteDatabase(callback?: (err: AWSError, data: Glue.Types.DeleteDatabaseResponse) => void): Request<Glue.Types.DeleteDatabaseResponse, AWSError>;
   /**
@@ -196,11 +236,11 @@ declare class Glue extends Service {
    */
   deleteDevEndpoint(callback?: (err: AWSError, data: Glue.Types.DeleteDevEndpointResponse) => void): Request<Glue.Types.DeleteDevEndpointResponse, AWSError>;
   /**
-   * Deletes a specified job. If the job is not found, no exception is thrown.
+   * Deletes a specified job definition. If the job definition is not found, no exception is thrown.
    */
   deleteJob(params: Glue.Types.DeleteJobRequest, callback?: (err: AWSError, data: Glue.Types.DeleteJobResponse) => void): Request<Glue.Types.DeleteJobResponse, AWSError>;
   /**
-   * Deletes a specified job. If the job is not found, no exception is thrown.
+   * Deletes a specified job definition. If the job definition is not found, no exception is thrown.
    */
   deleteJob(callback?: (err: AWSError, data: Glue.Types.DeleteJobResponse) => void): Request<Glue.Types.DeleteJobResponse, AWSError>;
   /**
@@ -212,11 +252,27 @@ declare class Glue extends Service {
    */
   deletePartition(callback?: (err: AWSError, data: Glue.Types.DeletePartitionResponse) => void): Request<Glue.Types.DeletePartitionResponse, AWSError>;
   /**
-   * Removes a table definition from the Data Catalog.
+   * Deletes a specified policy.
+   */
+  deleteResourcePolicy(params: Glue.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: Glue.Types.DeleteResourcePolicyResponse) => void): Request<Glue.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
+   * Deletes a specified policy.
+   */
+  deleteResourcePolicy(callback?: (err: AWSError, data: Glue.Types.DeleteResourcePolicyResponse) => void): Request<Glue.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
+   * Deletes a specified security configuration.
+   */
+  deleteSecurityConfiguration(params: Glue.Types.DeleteSecurityConfigurationRequest, callback?: (err: AWSError, data: Glue.Types.DeleteSecurityConfigurationResponse) => void): Request<Glue.Types.DeleteSecurityConfigurationResponse, AWSError>;
+  /**
+   * Deletes a specified security configuration.
+   */
+  deleteSecurityConfiguration(callback?: (err: AWSError, data: Glue.Types.DeleteSecurityConfigurationResponse) => void): Request<Glue.Types.DeleteSecurityConfigurationResponse, AWSError>;
+  /**
+   * Removes a table definition from the Data Catalog.  After completing this operation, you will no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure immediate deletion of all related resources, before calling DeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
   deleteTable(params: Glue.Types.DeleteTableRequest, callback?: (err: AWSError, data: Glue.Types.DeleteTableResponse) => void): Request<Glue.Types.DeleteTableResponse, AWSError>;
   /**
-   * Removes a table definition from the Data Catalog.
+   * Removes a table definition from the Data Catalog.  After completing this operation, you will no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure immediate deletion of all related resources, before calling DeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
   deleteTable(callback?: (err: AWSError, data: Glue.Types.DeleteTableResponse) => void): Request<Glue.Types.DeleteTableResponse, AWSError>;
   /**
@@ -308,6 +364,14 @@ declare class Glue extends Service {
    */
   getCrawlers(callback?: (err: AWSError, data: Glue.Types.GetCrawlersResponse) => void): Request<Glue.Types.GetCrawlersResponse, AWSError>;
   /**
+   * Retrieves the security configuration for a specified catalog.
+   */
+  getDataCatalogEncryptionSettings(params: Glue.Types.GetDataCatalogEncryptionSettingsRequest, callback?: (err: AWSError, data: Glue.Types.GetDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.GetDataCatalogEncryptionSettingsResponse, AWSError>;
+  /**
+   * Retrieves the security configuration for a specified catalog.
+   */
+  getDataCatalogEncryptionSettings(callback?: (err: AWSError, data: Glue.Types.GetDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.GetDataCatalogEncryptionSettingsResponse, AWSError>;
+  /**
    * Retrieves the definition of a specified database.
    */
   getDatabase(params: Glue.Types.GetDatabaseRequest, callback?: (err: AWSError, data: Glue.Types.GetDatabaseResponse) => void): Request<Glue.Types.GetDatabaseResponse, AWSError>;
@@ -332,19 +396,19 @@ declare class Glue extends Service {
    */
   getDataflowGraph(callback?: (err: AWSError, data: Glue.Types.GetDataflowGraphResponse) => void): Request<Glue.Types.GetDataflowGraphResponse, AWSError>;
   /**
-   * Retrieves information about a specified DevEndpoint.
+   * Retrieves information about a specified DevEndpoint.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
    */
   getDevEndpoint(params: Glue.Types.GetDevEndpointRequest, callback?: (err: AWSError, data: Glue.Types.GetDevEndpointResponse) => void): Request<Glue.Types.GetDevEndpointResponse, AWSError>;
   /**
-   * Retrieves information about a specified DevEndpoint.
+   * Retrieves information about a specified DevEndpoint.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
    */
   getDevEndpoint(callback?: (err: AWSError, data: Glue.Types.GetDevEndpointResponse) => void): Request<Glue.Types.GetDevEndpointResponse, AWSError>;
   /**
-   * Retrieves all the DevEndpoints in this AWS account.
+   * Retrieves all the DevEndpoints in this AWS account.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
    */
   getDevEndpoints(params: Glue.Types.GetDevEndpointsRequest, callback?: (err: AWSError, data: Glue.Types.GetDevEndpointsResponse) => void): Request<Glue.Types.GetDevEndpointsResponse, AWSError>;
   /**
-   * Retrieves all the DevEndpoints in this AWS account.
+   * Retrieves all the DevEndpoints in this AWS account.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
    */
   getDevEndpoints(callback?: (err: AWSError, data: Glue.Types.GetDevEndpointsResponse) => void): Request<Glue.Types.GetDevEndpointsResponse, AWSError>;
   /**
@@ -364,19 +428,19 @@ declare class Glue extends Service {
    */
   getJobRun(callback?: (err: AWSError, data: Glue.Types.GetJobRunResponse) => void): Request<Glue.Types.GetJobRunResponse, AWSError>;
   /**
-   * Retrieves metadata for all runs of a given job.
+   * Retrieves metadata for all runs of a given job definition.
    */
   getJobRuns(params: Glue.Types.GetJobRunsRequest, callback?: (err: AWSError, data: Glue.Types.GetJobRunsResponse) => void): Request<Glue.Types.GetJobRunsResponse, AWSError>;
   /**
-   * Retrieves metadata for all runs of a given job.
+   * Retrieves metadata for all runs of a given job definition.
    */
   getJobRuns(callback?: (err: AWSError, data: Glue.Types.GetJobRunsResponse) => void): Request<Glue.Types.GetJobRunsResponse, AWSError>;
   /**
-   * Retrieves all current jobs.
+   * Retrieves all current job definitions.
    */
   getJobs(params: Glue.Types.GetJobsRequest, callback?: (err: AWSError, data: Glue.Types.GetJobsResponse) => void): Request<Glue.Types.GetJobsResponse, AWSError>;
   /**
-   * Retrieves all current jobs.
+   * Retrieves all current job definitions.
    */
   getJobs(callback?: (err: AWSError, data: Glue.Types.GetJobsResponse) => void): Request<Glue.Types.GetJobsResponse, AWSError>;
   /**
@@ -412,6 +476,30 @@ declare class Glue extends Service {
    */
   getPlan(callback?: (err: AWSError, data: Glue.Types.GetPlanResponse) => void): Request<Glue.Types.GetPlanResponse, AWSError>;
   /**
+   * Retrieves a specified resource policy.
+   */
+  getResourcePolicy(params: Glue.Types.GetResourcePolicyRequest, callback?: (err: AWSError, data: Glue.Types.GetResourcePolicyResponse) => void): Request<Glue.Types.GetResourcePolicyResponse, AWSError>;
+  /**
+   * Retrieves a specified resource policy.
+   */
+  getResourcePolicy(callback?: (err: AWSError, data: Glue.Types.GetResourcePolicyResponse) => void): Request<Glue.Types.GetResourcePolicyResponse, AWSError>;
+  /**
+   * Retrieves a specified security configuration.
+   */
+  getSecurityConfiguration(params: Glue.Types.GetSecurityConfigurationRequest, callback?: (err: AWSError, data: Glue.Types.GetSecurityConfigurationResponse) => void): Request<Glue.Types.GetSecurityConfigurationResponse, AWSError>;
+  /**
+   * Retrieves a specified security configuration.
+   */
+  getSecurityConfiguration(callback?: (err: AWSError, data: Glue.Types.GetSecurityConfigurationResponse) => void): Request<Glue.Types.GetSecurityConfigurationResponse, AWSError>;
+  /**
+   * Retrieves a list of all security configurations.
+   */
+  getSecurityConfigurations(params: Glue.Types.GetSecurityConfigurationsRequest, callback?: (err: AWSError, data: Glue.Types.GetSecurityConfigurationsResponse) => void): Request<Glue.Types.GetSecurityConfigurationsResponse, AWSError>;
+  /**
+   * Retrieves a list of all security configurations.
+   */
+  getSecurityConfigurations(callback?: (err: AWSError, data: Glue.Types.GetSecurityConfigurationsResponse) => void): Request<Glue.Types.GetSecurityConfigurationsResponse, AWSError>;
+  /**
    * Retrieves the Table definition in a Data Catalog for a specified table.
    */
   getTable(params: Glue.Types.GetTableRequest, callback?: (err: AWSError, data: Glue.Types.GetTableResponse) => void): Request<Glue.Types.GetTableResponse, AWSError>;
@@ -443,6 +531,14 @@ declare class Glue extends Service {
    * Retrieves the definitions of some or all of the tables in a given Database.
    */
   getTables(callback?: (err: AWSError, data: Glue.Types.GetTablesResponse) => void): Request<Glue.Types.GetTablesResponse, AWSError>;
+  /**
+   * Retrieves a list of tags associated with a resource.
+   */
+  getTags(params: Glue.Types.GetTagsRequest, callback?: (err: AWSError, data: Glue.Types.GetTagsResponse) => void): Request<Glue.Types.GetTagsResponse, AWSError>;
+  /**
+   * Retrieves a list of tags associated with a resource.
+   */
+  getTags(callback?: (err: AWSError, data: Glue.Types.GetTagsResponse) => void): Request<Glue.Types.GetTagsResponse, AWSError>;
   /**
    * Retrieves the definition of a trigger.
    */
@@ -484,6 +580,54 @@ declare class Glue extends Service {
    */
   importCatalogToGlue(callback?: (err: AWSError, data: Glue.Types.ImportCatalogToGlueResponse) => void): Request<Glue.Types.ImportCatalogToGlueResponse, AWSError>;
   /**
+   * Retrieves the names of all crawler resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   */
+  listCrawlers(params: Glue.Types.ListCrawlersRequest, callback?: (err: AWSError, data: Glue.Types.ListCrawlersResponse) => void): Request<Glue.Types.ListCrawlersResponse, AWSError>;
+  /**
+   * Retrieves the names of all crawler resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   */
+  listCrawlers(callback?: (err: AWSError, data: Glue.Types.ListCrawlersResponse) => void): Request<Glue.Types.ListCrawlersResponse, AWSError>;
+  /**
+   * Retrieves the names of all DevEndpoint resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   */
+  listDevEndpoints(params: Glue.Types.ListDevEndpointsRequest, callback?: (err: AWSError, data: Glue.Types.ListDevEndpointsResponse) => void): Request<Glue.Types.ListDevEndpointsResponse, AWSError>;
+  /**
+   * Retrieves the names of all DevEndpoint resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   */
+  listDevEndpoints(callback?: (err: AWSError, data: Glue.Types.ListDevEndpointsResponse) => void): Request<Glue.Types.ListDevEndpointsResponse, AWSError>;
+  /**
+   * Retrieves the names of all job resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   */
+  listJobs(params: Glue.Types.ListJobsRequest, callback?: (err: AWSError, data: Glue.Types.ListJobsResponse) => void): Request<Glue.Types.ListJobsResponse, AWSError>;
+  /**
+   * Retrieves the names of all job resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   */
+  listJobs(callback?: (err: AWSError, data: Glue.Types.ListJobsResponse) => void): Request<Glue.Types.ListJobsResponse, AWSError>;
+  /**
+   * Retrieves the names of all trigger resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   */
+  listTriggers(params: Glue.Types.ListTriggersRequest, callback?: (err: AWSError, data: Glue.Types.ListTriggersResponse) => void): Request<Glue.Types.ListTriggersResponse, AWSError>;
+  /**
+   * Retrieves the names of all trigger resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   */
+  listTriggers(callback?: (err: AWSError, data: Glue.Types.ListTriggersResponse) => void): Request<Glue.Types.ListTriggersResponse, AWSError>;
+  /**
+   * Sets the security configuration for a specified catalog. After the configuration has been set, the specified encryption is applied to every catalog write thereafter.
+   */
+  putDataCatalogEncryptionSettings(params: Glue.Types.PutDataCatalogEncryptionSettingsRequest, callback?: (err: AWSError, data: Glue.Types.PutDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.PutDataCatalogEncryptionSettingsResponse, AWSError>;
+  /**
+   * Sets the security configuration for a specified catalog. After the configuration has been set, the specified encryption is applied to every catalog write thereafter.
+   */
+  putDataCatalogEncryptionSettings(callback?: (err: AWSError, data: Glue.Types.PutDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.PutDataCatalogEncryptionSettingsResponse, AWSError>;
+  /**
+   * Sets the Data Catalog resource policy for access control.
+   */
+  putResourcePolicy(params: Glue.Types.PutResourcePolicyRequest, callback?: (err: AWSError, data: Glue.Types.PutResourcePolicyResponse) => void): Request<Glue.Types.PutResourcePolicyResponse, AWSError>;
+  /**
+   * Sets the Data Catalog resource policy for access control.
+   */
+  putResourcePolicy(callback?: (err: AWSError, data: Glue.Types.PutResourcePolicyResponse) => void): Request<Glue.Types.PutResourcePolicyResponse, AWSError>;
+  /**
    * Resets a bookmark entry.
    */
   resetJobBookmark(params: Glue.Types.ResetJobBookmarkRequest, callback?: (err: AWSError, data: Glue.Types.ResetJobBookmarkResponse) => void): Request<Glue.Types.ResetJobBookmarkResponse, AWSError>;
@@ -492,11 +636,11 @@ declare class Glue extends Service {
    */
   resetJobBookmark(callback?: (err: AWSError, data: Glue.Types.ResetJobBookmarkResponse) => void): Request<Glue.Types.ResetJobBookmarkResponse, AWSError>;
   /**
-   * Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, does nothing.
+   * Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, returns a CrawlerRunningException.
    */
   startCrawler(params: Glue.Types.StartCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.StartCrawlerResponse) => void): Request<Glue.Types.StartCrawlerResponse, AWSError>;
   /**
-   * Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, does nothing.
+   * Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, returns a CrawlerRunningException.
    */
   startCrawler(callback?: (err: AWSError, data: Glue.Types.StartCrawlerResponse) => void): Request<Glue.Types.StartCrawlerResponse, AWSError>;
   /**
@@ -508,11 +652,11 @@ declare class Glue extends Service {
    */
   startCrawlerSchedule(callback?: (err: AWSError, data: Glue.Types.StartCrawlerScheduleResponse) => void): Request<Glue.Types.StartCrawlerScheduleResponse, AWSError>;
   /**
-   * Runs a job.
+   * Starts a job run using a job definition.
    */
   startJobRun(params: Glue.Types.StartJobRunRequest, callback?: (err: AWSError, data: Glue.Types.StartJobRunResponse) => void): Request<Glue.Types.StartJobRunResponse, AWSError>;
   /**
-   * Runs a job.
+   * Starts a job run using a job definition.
    */
   startJobRun(callback?: (err: AWSError, data: Glue.Types.StartJobRunResponse) => void): Request<Glue.Types.StartJobRunResponse, AWSError>;
   /**
@@ -547,6 +691,22 @@ declare class Glue extends Service {
    * Stops a specified trigger.
    */
   stopTrigger(callback?: (err: AWSError, data: Glue.Types.StopTriggerResponse) => void): Request<Glue.Types.StopTriggerResponse, AWSError>;
+  /**
+   * Adds tags to a resource. A tag is a label you can assign to an AWS resource. In AWS Glue, you can tag only certain resources. For information about what resources you can tag, see AWS Tags in AWS Glue.
+   */
+  tagResource(params: Glue.Types.TagResourceRequest, callback?: (err: AWSError, data: Glue.Types.TagResourceResponse) => void): Request<Glue.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds tags to a resource. A tag is a label you can assign to an AWS resource. In AWS Glue, you can tag only certain resources. For information about what resources you can tag, see AWS Tags in AWS Glue.
+   */
+  tagResource(callback?: (err: AWSError, data: Glue.Types.TagResourceResponse) => void): Request<Glue.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes tags from a resource.
+   */
+  untagResource(params: Glue.Types.UntagResourceRequest, callback?: (err: AWSError, data: Glue.Types.UntagResourceResponse) => void): Request<Glue.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes tags from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: Glue.Types.UntagResourceResponse) => void): Request<Glue.Types.UntagResourceResponse, AWSError>;
   /**
    * Modifies an existing classifier (a GrokClassifier, XMLClassifier, or JsonClassifier, depending on which field is present).
    */
@@ -643,9 +803,21 @@ declare namespace Glue {
      */
     JobName?: NameString;
     /**
-     * Arguments to be passed to the job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+     * The job arguments used when this trigger fires. For this job run, they replace the default arguments set in the job definition itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
+    /**
+     * The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.
+     */
+    Timeout?: Timeout;
+    /**
+     * Specifies configuration properties of a job run notification.
+     */
+    NotificationProperty?: NotificationProperty;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this action.
+     */
+    SecurityConfiguration?: NameString;
   }
   export type ActionList = Action[];
   export type AttemptCount = number;
@@ -675,7 +847,7 @@ declare namespace Glue {
   }
   export interface BatchDeleteConnectionRequest {
     /**
-     * The ID of the Data Catalog in which the connections reside. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the connections reside. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -754,7 +926,7 @@ declare namespace Glue {
      */
     TableName: NameString;
     /**
-     * A list of the IDs of versions to be deleted.
+     * A list of the IDs of versions to be deleted. A VersionId is a string representation of an integer. Each version is incremented by 1.
      */
     VersionIds: BatchDeleteTableVersionList;
   }
@@ -763,6 +935,54 @@ declare namespace Glue {
      * A list of errors encountered while trying to delete the specified table versions.
      */
     Errors?: TableVersionErrors;
+  }
+  export interface BatchGetCrawlersRequest {
+    /**
+     * A list of crawler names, which may be the names returned from the ListCrawlers operation.
+     */
+    CrawlerNames: CrawlerNameList;
+  }
+  export interface BatchGetCrawlersResponse {
+    /**
+     * A list of crawler definitions.
+     */
+    Crawlers?: CrawlerList;
+    /**
+     * A list of crawlers not found.
+     */
+    CrawlersNotFound?: CrawlerNameList;
+  }
+  export interface BatchGetDevEndpointsRequest {
+    /**
+     * The list of DevEndpoint names, which may be the names returned from the ListDevEndpoint operation.
+     */
+    DevEndpointNames: DevEndpointNames;
+  }
+  export interface BatchGetDevEndpointsResponse {
+    /**
+     * A list of DevEndpoint definitions.
+     */
+    DevEndpoints?: DevEndpointList;
+    /**
+     * A list of DevEndpoints not found.
+     */
+    DevEndpointsNotFound?: DevEndpointNames;
+  }
+  export interface BatchGetJobsRequest {
+    /**
+     * A list of job names, which may be the names returned from the ListJobs operation.
+     */
+    JobNames: JobNameList;
+  }
+  export interface BatchGetJobsResponse {
+    /**
+     * A list of job definitions.
+     */
+    Jobs?: JobList;
+    /**
+     * A list of names of jobs not found.
+     */
+    JobsNotFound?: JobNameList;
   }
   export interface BatchGetPartitionRequest {
     /**
@@ -793,13 +1013,29 @@ declare namespace Glue {
     UnprocessedKeys?: BatchGetPartitionValueList;
   }
   export type BatchGetPartitionValueList = PartitionValueList[];
+  export interface BatchGetTriggersRequest {
+    /**
+     * A list of trigger names, which may be the names returned from the ListTriggers operation.
+     */
+    TriggerNames: TriggerNameList;
+  }
+  export interface BatchGetTriggersResponse {
+    /**
+     * A list of trigger definitions.
+     */
+    Triggers?: TriggerList;
+    /**
+     * A list of names of triggers not found.
+     */
+    TriggersNotFound?: TriggerNameList;
+  }
   export interface BatchStopJobRunError {
     /**
-     * The name of the Job in question.
+     * The name of the job definition used in the job run in question.
      */
     JobName?: NameString;
     /**
-     * The JobRunId of the JobRun in question.
+     * The JobRunId of the job run in question.
      */
     JobRunId?: IdString;
     /**
@@ -811,11 +1047,11 @@ declare namespace Glue {
   export type BatchStopJobRunJobRunIdList = IdString[];
   export interface BatchStopJobRunRequest {
     /**
-     * The name of the Job in question.
+     * The name of the job definition for which to stop job runs.
      */
     JobName: NameString;
     /**
-     * A list of the JobRunIds that should be stopped for that Job.
+     * A list of the JobRunIds that should be stopped for that job definition.
      */
     JobRunIds: BatchStopJobRunJobRunIdList;
   }
@@ -831,11 +1067,11 @@ declare namespace Glue {
   }
   export interface BatchStopJobRunSuccessfulSubmission {
     /**
-     * The Name of the Job in question.
+     * The name of the job definition used in the job run that was stopped.
      */
     JobName?: NameString;
     /**
-     * The JobRunId of the JobRun in question.
+     * The JobRunId of the job run that was stopped.
      */
     JobRunId?: IdString;
   }
@@ -844,6 +1080,7 @@ declare namespace Glue {
   export type BooleanNullable = boolean;
   export type BooleanValue = boolean;
   export type BoundedPartitionValueList = ValueString[];
+  export type CatalogEncryptionMode = "DISABLED"|"SSE-KMS"|string;
   export type CatalogEntries = CatalogEntry[];
   export interface CatalogEntry {
     /**
@@ -887,6 +1124,17 @@ declare namespace Glue {
   }
   export type ClassifierList = Classifier[];
   export type ClassifierNameList = NameString[];
+  export interface CloudWatchEncryption {
+    /**
+     * The encryption mode to use for CloudWatch data.
+     */
+    CloudWatchEncryptionMode?: CloudWatchEncryptionMode;
+    /**
+     * The AWS ARN of the KMS key to be used to encrypt the data.
+     */
+    KmsKeyArn?: KmsKeyArn;
+  }
+  export type CloudWatchEncryptionMode = "DISABLED"|"SSE-KMS"|string;
   export type CodeGenArgName = string;
   export type CodeGenArgValue = string;
   export interface CodeGenEdge {
@@ -967,7 +1215,7 @@ declare namespace Glue {
      */
     JobName?: NameString;
     /**
-     * The condition state. Currently, the values supported are SUCCEEDED, STOPPED and FAILED.
+     * The condition state. Currently, the values supported are SUCCEEDED, STOPPED, TIMEOUT and FAILED.
      */
     State?: JobRunState;
   }
@@ -978,7 +1226,7 @@ declare namespace Glue {
      */
     Name?: NameString;
     /**
-     * Description of the connection.
+     * The description of the connection.
      */
     Description?: DescriptionString;
     /**
@@ -990,23 +1238,23 @@ declare namespace Glue {
      */
     MatchCriteria?: MatchCriteria;
     /**
-     * A list of key-value pairs used as parameters for this connection.
+     * These key-value pairs define parameters for the connection:    HOST - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.    PORT - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.    USER_NAME - The name under which to log in to the database. The value string for USER_NAME is "USERNAME".    PASSWORD - A password, if one is used, for the user name.    ENCRYPTED_PASSWORD - When you enable connection password protection by setting ConnectionPasswordEncryption in the Data Catalog encryption settings, this field stores the encrypted password.    JDBC_DRIVER_JAR_URI - The Amazon S3 path of the JAR file that contains the JDBC driver to use.    JDBC_DRIVER_CLASS_NAME - The class name of the JDBC driver to use.    JDBC_ENGINE - The name of the JDBC engine to use.    JDBC_ENGINE_VERSION - The version of the JDBC engine to use.    CONFIG_FILES - (Reserved for future use).    INSTANCE_ID - The instance ID to use.    JDBC_CONNECTION_URL - The URL for the JDBC connection.    JDBC_ENFORCE_SSL - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with hostname matching will be enforced for the JDBC connection on the client. The default is false.  
      */
     ConnectionProperties?: ConnectionProperties;
     /**
-     * A map of physical connection requirements, such as VPC and SecurityGroup, needed for making this connection successfully.
+     * A map of physical connection requirements, such as virtual private cloud (VPC) and SecurityGroup, that are needed to make this connection successfully.
      */
     PhysicalConnectionRequirements?: PhysicalConnectionRequirements;
     /**
-     * The time this connection definition was created.
+     * The time that this connection definition was created.
      */
     CreationTime?: Timestamp;
     /**
-     * The last time this connection definition was updated.
+     * The last time that this connection definition was updated.
      */
     LastUpdatedTime?: Timestamp;
     /**
-     * The user, group or role that last updated this connection definition.
+     * The user, group, or role that last updated this connection definition.
      */
     LastUpdatedBy?: NameString;
   }
@@ -1016,7 +1264,7 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * Description of the connection.
+     * The description of the connection.
      */
     Description?: DescriptionString;
     /**
@@ -1028,18 +1276,28 @@ declare namespace Glue {
      */
     MatchCriteria?: MatchCriteria;
     /**
-     * A list of key-value pairs used as parameters for this connection.
+     * These key-value pairs define parameters for the connection.
      */
     ConnectionProperties: ConnectionProperties;
     /**
-     * A map of physical connection requirements, such as VPC and SecurityGroup, needed for making this connection successfully.
+     * A map of physical connection requirements, such as virtual private cloud (VPC) and SecurityGroup, that are needed to successfully make this connection.
      */
     PhysicalConnectionRequirements?: PhysicalConnectionRequirements;
   }
   export type ConnectionList = Connection[];
   export type ConnectionName = string;
+  export interface ConnectionPasswordEncryption {
+    /**
+     * When the ReturnConnectionPasswordEncrypted flag is set to "true", passwords remain encrypted in the responses of GetConnection and GetConnections. This encryption takes effect independently from catalog encryption. 
+     */
+    ReturnConnectionPasswordEncrypted: Boolean;
+    /**
+     * An AWS KMS key that is used to encrypt the connection password.  If connection password protection is enabled, the caller of CreateConnection and UpdateConnection needs at least kms:Encrypt permission on the specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog.  You can set the decrypt permission to enable or restrict access on the password key according to your security requirements.
+     */
+    AwsKmsKeyId?: NameString;
+  }
   export type ConnectionProperties = {[key: string]: ValueString};
-  export type ConnectionPropertyKey = "HOST"|"PORT"|"USERNAME"|"PASSWORD"|"JDBC_DRIVER_JAR_URI"|"JDBC_DRIVER_CLASS_NAME"|"JDBC_ENGINE"|"JDBC_ENGINE_VERSION"|"CONFIG_FILES"|"INSTANCE_ID"|"JDBC_CONNECTION_URL"|string;
+  export type ConnectionPropertyKey = "HOST"|"PORT"|"USERNAME"|"PASSWORD"|"ENCRYPTED_PASSWORD"|"JDBC_DRIVER_JAR_URI"|"JDBC_DRIVER_CLASS_NAME"|"JDBC_ENGINE"|"JDBC_ENGINE_VERSION"|"CONFIG_FILES"|"INSTANCE_ID"|"JDBC_CONNECTION_URL"|"JDBC_ENFORCE_SSL"|string;
   export type ConnectionType = "JDBC"|"SFTP"|string;
   export interface ConnectionsList {
     /**
@@ -1109,9 +1367,13 @@ declare namespace Glue {
      */
     Version?: VersionId;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }' 
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
     Configuration?: CrawlerConfiguration;
+    /**
+     * The name of the SecurityConfiguration structure to be used by this Crawler.
+     */
+    CrawlerSecurityConfiguration?: CrawlerSecurityConfiguration;
   }
   export type CrawlerConfiguration = string;
   export type CrawlerList = Crawler[];
@@ -1151,6 +1413,7 @@ declare namespace Glue {
   }
   export type CrawlerMetricsList = CrawlerMetrics[];
   export type CrawlerNameList = NameString[];
+  export type CrawlerSecurityConfiguration = string;
   export type CrawlerState = "READY"|"RUNNING"|"STOPPING"|string;
   export interface CrawlerTargets {
     /**
@@ -1161,6 +1424,10 @@ declare namespace Glue {
      * Specifies JDBC targets.
      */
     JdbcTargets?: JdbcTargetList;
+    /**
+     * Specifies DynamoDB targets.
+     */
+    DynamoDBTargets?: DynamoDBTargetList;
   }
   export interface CreateClassifierRequest {
     /**
@@ -1180,7 +1447,7 @@ declare namespace Glue {
   }
   export interface CreateConnectionRequest {
     /**
-     * The ID of the Data Catalog in which to create the connection. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which to create the connection. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -1216,7 +1483,7 @@ declare namespace Glue {
      */
     Schedule?: CronExpression;
     /**
-     * A list of custom classifiers that the user has registered. By default, all AWS classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.
+     * A list of custom classifiers that the user has registered. By default, all built-in classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.
      */
     Classifiers?: ClassifierNameList;
     /**
@@ -1228,9 +1495,17 @@ declare namespace Glue {
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }' 
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
     Configuration?: CrawlerConfiguration;
+    /**
+     * The name of the SecurityConfiguration structure to be used by this Crawler.
+     */
+    CrawlerSecurityConfiguration?: CrawlerSecurityConfiguration;
+    /**
+     * The tags to use with this crawler request. You may use tags to limit access to the crawler. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.
+     */
+    Tags?: TagsMap;
   }
   export interface CreateCrawlerResponse {
   }
@@ -1264,9 +1539,13 @@ declare namespace Glue {
      */
     SubnetId?: GenericString;
     /**
-     * The public key to use for authentication.
+     * The public key to be used by this DevEndpoint for authentication. This attribute is provided for backward compatibility, as the recommended attribute to use is public keys.
      */
-    PublicKey: GenericString;
+    PublicKey?: GenericString;
+    /**
+     * A list of public keys to be used by the DevEndpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.  If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys: call the UpdateDevEndpoint API with the public key content in the deletePublicKeys attribute, and the list of new keys in the addPublicKeys attribute. 
+     */
+    PublicKeys?: PublicKeysList;
     /**
      * The number of AWS Glue Data Processing Units (DPUs) to allocate to this DevEndpoint.
      */
@@ -1279,6 +1558,14 @@ declare namespace Glue {
      * Path to one or more Java Jars in an S3 bucket that should be loaded in your DevEndpoint.
      */
     ExtraJarsS3Path?: GenericString;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this DevEndpoint.
+     */
+    SecurityConfiguration?: NameString;
+    /**
+     * The tags to use with this DevEndpoint. You may use tags to limit access to the DevEndpoint. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.
+     */
+    Tags?: TagsMap;
   }
   export interface CreateDevEndpointResponse {
     /**
@@ -1334,6 +1621,10 @@ declare namespace Glue {
      */
     FailureReason?: GenericString;
     /**
+     * The name of the SecurityConfiguration structure being used with this DevEndpoint.
+     */
+    SecurityConfiguration?: NameString;
+    /**
      * The point in time at which this DevEndpoint was created.
      */
     CreatedTimestamp?: TimestampValue;
@@ -1358,11 +1649,11 @@ declare namespace Glue {
   }
   export interface CreateJobRequest {
     /**
-     * The name you assign to this job. It must be unique in your account.
+     * The name you assign to this job definition. It must be unique in your account.
      */
     Name: NameString;
     /**
-     * Description of the job.
+     * Description of the job being defined.
      */
     Description?: DescriptionString;
     /**
@@ -1370,7 +1661,7 @@ declare namespace Glue {
      */
     LogUri?: UriString;
     /**
-     * The name of the IAM role associated with this job.
+     * The name or ARN of the IAM role associated with this job.
      */
     Role: RoleString;
     /**
@@ -1394,13 +1685,33 @@ declare namespace Glue {
      */
     MaxRetries?: MaxRetries;
     /**
-     * The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This parameter is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
+    /**
+     * The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
+     */
+    Timeout?: Timeout;
+    /**
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. The value that can be allocated for MaxCapacity depends on whether you are running a python shell job, or an Apache Spark ETL job:   When you specify a python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     */
+    MaxCapacity?: NullableDouble;
+    /**
+     * Specifies configuration properties of a job notification.
+     */
+    NotificationProperty?: NotificationProperty;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this job.
+     */
+    SecurityConfiguration?: NameString;
+    /**
+     * The tags to use with this job. You may use tags to limit access to the job. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.
+     */
+    Tags?: TagsMap;
   }
   export interface CreateJobResponse {
     /**
-     * The unique name that was provided.
+     * The unique name that was provided for this job definition.
      */
     Name?: NameString;
   }
@@ -1458,6 +1769,26 @@ declare namespace Glue {
      */
     ScalaCode?: ScalaCode;
   }
+  export interface CreateSecurityConfigurationRequest {
+    /**
+     * The name for the new security configuration.
+     */
+    Name: NameString;
+    /**
+     * The encryption configuration for the new security configuration.
+     */
+    EncryptionConfiguration: EncryptionConfiguration;
+  }
+  export interface CreateSecurityConfigurationResponse {
+    /**
+     * The name assigned to the new security configuration.
+     */
+    Name?: NameString;
+    /**
+     * The time at which the new security configuration was created.
+     */
+    CreatedTimestamp?: TimestampValue;
+  }
   export interface CreateTableRequest {
     /**
      * The ID of the Data Catalog in which to create the Table. If none is supplied, the AWS account ID is used by default.
@@ -1499,6 +1830,14 @@ declare namespace Glue {
      * A description of the new trigger.
      */
     Description?: DescriptionString;
+    /**
+     * Set to true to start SCHEDULED and CONDITIONAL triggers when created. True not supported for ON_DEMAND triggers.
+     */
+    StartOnCreation?: BooleanValue;
+    /**
+     * The tags to use with this trigger. You may use tags to limit access to the trigger. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide. 
+     */
+    Tags?: TagsMap;
   }
   export interface CreateTriggerResponse {
     /**
@@ -1540,6 +1879,16 @@ declare namespace Glue {
   export type CustomPatterns = string;
   export type DagEdges = CodeGenEdge[];
   export type DagNodes = CodeGenNode[];
+  export interface DataCatalogEncryptionSettings {
+    /**
+     * Specifies the encryption-at-rest configuration for the Data Catalog.
+     */
+    EncryptionAtRest?: EncryptionAtRest;
+    /**
+     * When connection password protection is enabled, the Data Catalog uses a customer-provided key to encrypt the password as part of CreateConnection or UpdateConnection and store it in the ENCRYPTED_PASSWORD field in the connection properties. You can enable catalog encryption or only password encryption.
+     */
+    ConnectionPasswordEncryption?: ConnectionPasswordEncryption;
+  }
   export interface Database {
     /**
      * Name of the database. For Hive compatibility, this is folded to lowercase when it is stored.
@@ -1554,7 +1903,7 @@ declare namespace Glue {
      */
     LocationUri?: URI;
     /**
-     * A list of key-value pairs that define parameters and properties of the database.
+     * These key-value pairs define parameters and properties of the database.
      */
     Parameters?: ParametersMap;
     /**
@@ -1576,7 +1925,7 @@ declare namespace Glue {
      */
     LocationUri?: URI;
     /**
-     * A list of key-value pairs that define parameters and properties of the database.
+     * Thes key-value pairs define parameters and properties of the database.
      */
     Parameters?: ParametersMap;
   }
@@ -1594,7 +1943,7 @@ declare namespace Glue {
   export type DeleteConnectionNameList = NameString[];
   export interface DeleteConnectionRequest {
     /**
-     * The ID of the Data Catalog in which the connection resides. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -1634,13 +1983,13 @@ declare namespace Glue {
   }
   export interface DeleteJobRequest {
     /**
-     * The name of the job to delete.
+     * The name of the job definition to delete.
      */
     JobName: NameString;
   }
   export interface DeleteJobResponse {
     /**
-     * The name of the job that was deleted.
+     * The name of the job definition that was deleted.
      */
     JobName?: NameString;
   }
@@ -1663,6 +2012,22 @@ declare namespace Glue {
     PartitionValues: ValueStringList;
   }
   export interface DeletePartitionResponse {
+  }
+  export interface DeleteResourcePolicyRequest {
+    /**
+     * The hash value returned when this policy was set.
+     */
+    PolicyHashCondition?: HashString;
+  }
+  export interface DeleteResourcePolicyResponse {
+  }
+  export interface DeleteSecurityConfigurationRequest {
+    /**
+     * The name of the security configuration to delete.
+     */
+    Name: NameString;
+  }
+  export interface DeleteSecurityConfigurationResponse {
   }
   export interface DeleteTableRequest {
     /**
@@ -1694,7 +2059,7 @@ declare namespace Glue {
      */
     TableName: NameString;
     /**
-     * The ID of the table version to be deleted.
+     * The ID of the table version to be deleted. A VersionID is a string representation of an integer. Each version is incremented by 1.
      */
     VersionId: VersionString;
   }
@@ -1752,11 +2117,15 @@ declare namespace Glue {
      */
     YarnEndpointAddress?: GenericString;
     /**
+     * A private IP address to access the DevEndpoint within a VPC, if the DevEndpoint is created within one. The PrivateAddress field is present only when you create the DevEndpoint within your virtual private cloud (VPC).
+     */
+    PrivateAddress?: GenericString;
+    /**
      * The Apache Zeppelin port for the remote Apache Spark interpreter.
      */
     ZeppelinRemoteSparkInterpreterPort?: IntegerValue;
     /**
-     * The public address used by this DevEndpoint.
+     * The public IP address used by this DevEndpoint. The PublicAddress field is present only when you create a non-VPC (virtual private cloud) DevEndpoint.
      */
     PublicAddress?: GenericString;
     /**
@@ -1800,9 +2169,17 @@ declare namespace Glue {
      */
     LastModifiedTimestamp?: TimestampValue;
     /**
-     * The public key to be used by this DevEndpoint for authentication.
+     * The public key to be used by this DevEndpoint for authentication. This attribute is provided for backward compatibility, as the recommended attribute to use is public keys.
      */
     PublicKey?: GenericString;
+    /**
+     * A list of public keys to be used by the DevEndpoints for authentication. The use of this attribute is preferred over a single public key because the public keys allow you to have a different private key per client.  If you previously created an endpoint with a public key, you must remove that key to be able to set a list of public keys: call the UpdateDevEndpoint API with the public key content in the deletePublicKeys attribute, and the list of new keys in the addPublicKeys attribute. 
+     */
+    PublicKeys?: PublicKeysList;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this DevEndpoint.
+     */
+    SecurityConfiguration?: NameString;
   }
   export interface DevEndpointCustomLibraries {
     /**
@@ -1815,6 +2192,39 @@ declare namespace Glue {
     ExtraJarsS3Path?: GenericString;
   }
   export type DevEndpointList = DevEndpoint[];
+  export type DevEndpointNameList = NameString[];
+  export type DevEndpointNames = GenericString[];
+  export interface DynamoDBTarget {
+    /**
+     * The name of the DynamoDB table to crawl.
+     */
+    Path?: Path;
+  }
+  export type DynamoDBTargetList = DynamoDBTarget[];
+  export interface EncryptionAtRest {
+    /**
+     * The encryption-at-rest mode for encrypting Data Catalog data.
+     */
+    CatalogEncryptionMode: CatalogEncryptionMode;
+    /**
+     * The ID of the AWS KMS key to use for encryption at rest.
+     */
+    SseAwsKmsKeyId?: NameString;
+  }
+  export interface EncryptionConfiguration {
+    /**
+     * The encryption configuration for S3 data.
+     */
+    S3Encryption?: S3EncryptionList;
+    /**
+     * The encryption configuration for CloudWatch.
+     */
+    CloudWatchEncryption?: CloudWatchEncryption;
+    /**
+     * The encryption configuration for Job Bookmarks.
+     */
+    JobBookmarksEncryption?: JobBookmarksEncryption;
+  }
   export type ErrorByName = {[key: string]: ErrorDetail};
   export interface ErrorDetail {
     /**
@@ -1829,10 +2239,12 @@ declare namespace Glue {
   export type ErrorString = string;
   export interface ExecutionProperty {
     /**
-     * The maximum number of concurrent runs allowed for a job. The default is 1. An error is returned when this threshold is reached. The maximum value you can specify is controlled by a service limit.
+     * The maximum number of concurrent runs allowed for the job. The default is 1. An error is returned when this threshold is reached. The maximum value you can specify is controlled by a service limit.
      */
     MaxConcurrentRuns?: MaxConcurrentRuns;
   }
+  export type ExecutionTime = number;
+  export type ExistCondition = "MUST_EXIST"|"NOT_EXIST"|"NONE"|string;
   export type FieldType = string;
   export type FilterString = string;
   export type FormatString = string;
@@ -1884,13 +2296,17 @@ declare namespace Glue {
   }
   export interface GetConnectionRequest {
     /**
-     * The ID of the Data Catalog in which the connection resides. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
      * The name of the connection definition to retrieve.
      */
     Name: NameString;
+    /**
+     * Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but does have permission to access the rest of the connection properties.
+     */
+    HidePassword?: Boolean;
   }
   export interface GetConnectionResponse {
     /**
@@ -1910,13 +2326,17 @@ declare namespace Glue {
   }
   export interface GetConnectionsRequest {
     /**
-     * The ID of the Data Catalog in which the connections reside. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the connections reside. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
      * A filter that controls which connections will be returned.
      */
     Filter?: GetConnectionsFilter;
+    /**
+     * Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but does have permission to access the rest of the connection properties.
+     */
+    HidePassword?: Boolean;
     /**
      * A continuation token, if this is a continuation call.
      */
@@ -1991,6 +2411,18 @@ declare namespace Glue {
      * A continuation token, if the returned list has not reached the end of those defined in this customer account.
      */
     NextToken?: Token;
+  }
+  export interface GetDataCatalogEncryptionSettingsRequest {
+    /**
+     * The ID of the Data Catalog for which to retrieve the security configuration. If none is provided, the AWS account ID is used by default.
+     */
+    CatalogId?: CatalogIdString;
+  }
+  export interface GetDataCatalogEncryptionSettingsResponse {
+    /**
+     * The requested security configuration.
+     */
+    DataCatalogEncryptionSettings?: DataCatalogEncryptionSettings;
   }
   export interface GetDatabaseRequest {
     /**
@@ -2082,7 +2514,7 @@ declare namespace Glue {
   }
   export interface GetJobRequest {
     /**
-     * The name of the job to retrieve.
+     * The name of the job definition to retrieve.
      */
     JobName: NameString;
   }
@@ -2094,7 +2526,7 @@ declare namespace Glue {
   }
   export interface GetJobRunRequest {
     /**
-     * Name of the job being run.
+     * Name of the job definition being run.
      */
     JobName: NameString;
     /**
@@ -2114,7 +2546,7 @@ declare namespace Glue {
   }
   export interface GetJobRunsRequest {
     /**
-     * The name of the job for which to retrieve all job runs.
+     * The name of the job definition for which to retrieve all job runs.
      */
     JobName: NameString;
     /**
@@ -2148,11 +2580,11 @@ declare namespace Glue {
   }
   export interface GetJobsResponse {
     /**
-     * A list of jobs.
+     * A list of job definitions.
      */
     Jobs?: JobList;
     /**
-     * A continuation token, if not all jobs have yet been returned.
+     * A continuation token, if not all job definitions have yet been returned.
      */
     NextToken?: GenericString;
   }
@@ -2214,7 +2646,7 @@ declare namespace Glue {
      */
     TableName: NameString;
     /**
-     * An expression filtering the partitions to be returned.
+     * An expression filtering the partitions to be returned. The expression uses SQL syntax similar to the SQL WHERE filter clause. The SQL statement parser JSQLParser parses the expression.   Operators: The following are the operators that you can use in the Expression API call:  =  Checks if the values of the two operands are equal or not; if yes, then the condition becomes true. Example: Assume 'variable a' holds 10 and 'variable b' holds 20.  (a = b) is not true.  &lt; &gt;  Checks if the values of two operands are equal or not; if the values are not equal, then the condition becomes true. Example: (a &lt; &gt; b) is true.  &gt;  Checks if the value of the left operand is greater than the value of the right operand; if yes, then the condition becomes true. Example: (a &gt; b) is not true.  &lt;  Checks if the value of the left operand is less than the value of the right operand; if yes, then the condition becomes true. Example: (a &lt; b) is true.  &gt;=  Checks if the value of the left operand is greater than or equal to the value of the right operand; if yes, then the condition becomes true. Example: (a &gt;= b) is not true.  &lt;=  Checks if the value of the left operand is less than or equal to the value of the right operand; if yes, then the condition becomes true. Example: (a &lt;= b) is true.  AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL  Logical operators.    Supported Partition Key Types: The following are the the supported partition keys.    string     date     timestamp     int     bigint     long     tinyint     smallint     decimal    If an invalid type is encountered, an exception is thrown.  The following list shows the valid operators on each type. When you define a crawler, the partitionKey type is created as a STRING, to be compatible with the catalog partitions.   Sample API Call: 
      */
     Expression?: PredicateString;
     /**
@@ -2272,6 +2704,58 @@ declare namespace Glue {
      */
     ScalaCode?: ScalaCode;
   }
+  export interface GetResourcePolicyRequest {
+  }
+  export interface GetResourcePolicyResponse {
+    /**
+     * Contains the requested policy document, in JSON format.
+     */
+    PolicyInJson?: PolicyJsonString;
+    /**
+     * Contains the hash value associated with this policy.
+     */
+    PolicyHash?: HashString;
+    /**
+     * The date and time at which the policy was created.
+     */
+    CreateTime?: Timestamp;
+    /**
+     * The date and time at which the policy was last updated.
+     */
+    UpdateTime?: Timestamp;
+  }
+  export interface GetSecurityConfigurationRequest {
+    /**
+     * The name of the security configuration to retrieve.
+     */
+    Name: NameString;
+  }
+  export interface GetSecurityConfigurationResponse {
+    /**
+     * The requested security configuration
+     */
+    SecurityConfiguration?: SecurityConfiguration;
+  }
+  export interface GetSecurityConfigurationsRequest {
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * A continuation token, if this is a continuation call.
+     */
+    NextToken?: GenericString;
+  }
+  export interface GetSecurityConfigurationsResponse {
+    /**
+     * A list of security configurations.
+     */
+    SecurityConfigurations?: SecurityConfigurationList;
+    /**
+     * A continuation token, if there are more security configurations to return.
+     */
+    NextToken?: GenericString;
+  }
   export interface GetTableRequest {
     /**
      * The ID of the Data Catalog where the table resides. If none is supplied, the AWS account ID is used by default.
@@ -2306,7 +2790,7 @@ declare namespace Glue {
      */
     TableName: NameString;
     /**
-     * The ID value of the table version to be retrieved.
+     * The ID value of the table version to be retrieved. A VersionID is a string representation of an integer. Each version is incremented by 1. 
      */
     VersionId?: VersionString;
   }
@@ -2380,6 +2864,18 @@ declare namespace Glue {
      * A continuation token, present if the current list segment is not the last.
      */
     NextToken?: Token;
+  }
+  export interface GetTagsRequest {
+    /**
+     * The Amazon ARN of the resource for which to retrieve tags.
+     */
+    ResourceArn: GlueResourceArn;
+  }
+  export interface GetTagsResponse {
+    /**
+     * The requested tags.
+     */
+    Tags?: TagsMap;
   }
   export interface GetTriggerRequest {
     /**
@@ -2469,6 +2965,7 @@ declare namespace Glue {
      */
     NextToken?: Token;
   }
+  export type GlueResourceArn = string;
   export interface GrokClassifier {
     /**
      * The name of the classifier.
@@ -2500,6 +2997,7 @@ declare namespace Glue {
     CustomPatterns?: CustomPatterns;
   }
   export type GrokPattern = string;
+  export type HashString = string;
   export type IdString = string;
   export interface ImportCatalogToGlueRequest {
     /**
@@ -2529,11 +3027,11 @@ declare namespace Glue {
   export type JdbcTargetList = JdbcTarget[];
   export interface Job {
     /**
-     * The name you assign to this job.
+     * The name you assign to this job definition.
      */
     Name?: NameString;
     /**
-     * Description of this job.
+     * Description of the job being defined.
      */
     Description?: DescriptionString;
     /**
@@ -2541,15 +3039,15 @@ declare namespace Glue {
      */
     LogUri?: UriString;
     /**
-     * The name of the IAM role associated with this job.
+     * The name or ARN of the IAM role associated with this job.
      */
     Role?: RoleString;
     /**
-     * The time and date that this job specification was created.
+     * The time and date that this job definition was created.
      */
     CreatedOn?: TimestampValue;
     /**
-     * The last point in time when this job specification was modified.
+     * The last point in time when this job definition was modified.
      */
     LastModifiedOn?: TimestampValue;
     /**
@@ -2569,13 +3067,29 @@ declare namespace Glue {
      */
     Connections?: ConnectionsList;
     /**
-     * The maximum number of times to retry this job if it fails.
+     * The maximum number of times to retry this job after a JobRun fails.
      */
     MaxRetries?: MaxRetries;
     /**
-     * The number of AWS Glue data processing units (DPUs) allocated to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This field is deprecated, use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) allocated to runs of this job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. 
      */
     AllocatedCapacity?: IntegerValue;
+    /**
+     * The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
+     */
+    Timeout?: Timeout;
+    /**
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. The value that can be allocated for MaxCapacity depends on whether you are running a python shell job, or an Apache Spark ETL job:   When you specify a python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     */
+    MaxCapacity?: NullableDouble;
+    /**
+     * Specifies configuration properties of a job notification.
+     */
+    NotificationProperty?: NotificationProperty;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this job.
+     */
+    SecurityConfiguration?: NameString;
   }
   export interface JobBookmarkEntry {
     /**
@@ -2599,9 +3113,20 @@ declare namespace Glue {
      */
     JobBookmark?: JsonValue;
   }
+  export interface JobBookmarksEncryption {
+    /**
+     * The encryption mode to use for Job bookmarks data.
+     */
+    JobBookmarksEncryptionMode?: JobBookmarksEncryptionMode;
+    /**
+     * The AWS ARN of the KMS key to be used to encrypt the data.
+     */
+    KmsKeyArn?: KmsKeyArn;
+  }
+  export type JobBookmarksEncryptionMode = "DISABLED"|"CSE-KMS"|string;
   export interface JobCommand {
     /**
-     * The name of the job command: this must be glueetl.
+     * The name of the job command: this must be glueetl, for an Apache Spark ETL job, or pythonshell, for a Python shell job.
      */
     Name?: GenericString;
     /**
@@ -2611,6 +3136,7 @@ declare namespace Glue {
   }
   export type JobList = Job[];
   export type JobName = string;
+  export type JobNameList = NameString[];
   export interface JobRun {
     /**
      * The ID of this job run.
@@ -2629,7 +3155,7 @@ declare namespace Glue {
      */
     TriggerName?: NameString;
     /**
-     * The name of the job being run.
+     * The name of the job definition being used in this run.
      */
     JobName?: NameString;
     /**
@@ -2649,7 +3175,7 @@ declare namespace Glue {
      */
     JobRunState?: JobRunState;
     /**
-     * The job arguments associated with this run. These override equivalent default arguments set for the job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+     * The job arguments associated with this run. For this job run, they replace the default arguments set in the job definition itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
     /**
@@ -2661,15 +3187,39 @@ declare namespace Glue {
      */
     PredecessorRuns?: PredecessorList;
     /**
-     * The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This field is deprecated, use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
+    /**
+     * The amount of time (in seconds) that the job run consumed resources.
+     */
+    ExecutionTime?: ExecutionTime;
+    /**
+     * The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.
+     */
+    Timeout?: Timeout;
+    /**
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. The value that can be allocated for MaxCapacity depends on whether you are running a python shell job, or an Apache Spark ETL job:   When you specify a python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     */
+    MaxCapacity?: NullableDouble;
+    /**
+     * Specifies configuration properties of a job run notification.
+     */
+    NotificationProperty?: NotificationProperty;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this job run.
+     */
+    SecurityConfiguration?: NameString;
+    /**
+     * The name of the log group for secure logging, that can be server-side encrypted in CloudWatch using KMS. This name can be /aws-glue/jobs/, in which case the default encryption is NONE. If you add a role name and SecurityConfiguration name (in other words, /aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/), then that security configuration will be used to encrypt the log group.
+     */
+    LogGroupName?: GenericString;
   }
   export type JobRunList = JobRun[];
-  export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|string;
+  export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|"TIMEOUT"|string;
   export interface JobUpdate {
     /**
-     * Description of the job.
+     * Description of the job being defined.
      */
     Description?: DescriptionString;
     /**
@@ -2677,7 +3227,7 @@ declare namespace Glue {
      */
     LogUri?: UriString;
     /**
-     * The name of the IAM role associated with this job (required).
+     * The name or ARN of the IAM role associated with this job (required).
      */
     Role?: RoleString;
     /**
@@ -2701,9 +3251,25 @@ declare namespace Glue {
      */
     MaxRetries?: MaxRetries;
     /**
-     * The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
+    /**
+     * The job timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours).
+     */
+    Timeout?: Timeout;
+    /**
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. The value that can be allocated for MaxCapacity depends on whether you are running a python shell job, or an Apache Spark ETL job:   When you specify a python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     */
+    MaxCapacity?: NullableDouble;
+    /**
+     * Specifies configuration properties of a job notification.
+     */
+    NotificationProperty?: NotificationProperty;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this job.
+     */
+    SecurityConfiguration?: NameString;
   }
   export interface JsonClassifier {
     /**
@@ -2730,6 +3296,7 @@ declare namespace Glue {
   export type JsonPath = string;
   export type JsonValue = string;
   export type KeyString = string;
+  export type KmsKeyArn = string;
   export type Language = "PYTHON"|"SCALA"|string;
   export interface LastCrawlInfo {
     /**
@@ -2758,6 +3325,106 @@ declare namespace Glue {
     StartTime?: Timestamp;
   }
   export type LastCrawlStatus = "SUCCEEDED"|"CANCELLED"|"FAILED"|string;
+  export interface ListCrawlersRequest {
+    /**
+     * The maximum size of a list to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * A continuation token, if this is a continuation request.
+     */
+    NextToken?: Token;
+    /**
+     * Specifies to return only these tagged resources.
+     */
+    Tags?: TagsMap;
+  }
+  export interface ListCrawlersResponse {
+    /**
+     * The names of all crawlers in the account, or the crawlers with the specified tags.
+     */
+    CrawlerNames?: CrawlerNameList;
+    /**
+     * A continuation token, if the returned list does not contain the last metric available.
+     */
+    NextToken?: Token;
+  }
+  export interface ListDevEndpointsRequest {
+    /**
+     * A continuation token, if this is a continuation request.
+     */
+    NextToken?: GenericString;
+    /**
+     * The maximum size of a list to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * Specifies to return only these tagged resources.
+     */
+    Tags?: TagsMap;
+  }
+  export interface ListDevEndpointsResponse {
+    /**
+     * The names of all DevEndpoints in the account, or the DevEndpoints with the specified tags.
+     */
+    DevEndpointNames?: DevEndpointNameList;
+    /**
+     * A continuation token, if the returned list does not contain the last metric available.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListJobsRequest {
+    /**
+     * A continuation token, if this is a continuation request.
+     */
+    NextToken?: GenericString;
+    /**
+     * The maximum size of a list to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * Specifies to return only these tagged resources.
+     */
+    Tags?: TagsMap;
+  }
+  export interface ListJobsResponse {
+    /**
+     * The names of all jobs in the account, or the jobs with the specified tags.
+     */
+    JobNames?: JobNameList;
+    /**
+     * A continuation token, if the returned list does not contain the last metric available.
+     */
+    NextToken?: GenericString;
+  }
+  export interface ListTriggersRequest {
+    /**
+     * A continuation token, if this is a continuation request.
+     */
+    NextToken?: GenericString;
+    /**
+     *  The name of the job for which to retrieve triggers. The trigger that can start this job will be returned, and if there is no such trigger, all triggers will be returned.
+     */
+    DependentJobName?: NameString;
+    /**
+     * The maximum size of a list to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * Specifies to return only these tagged resources.
+     */
+    Tags?: TagsMap;
+  }
+  export interface ListTriggersResponse {
+    /**
+     * The names of all triggers in the account, or the triggers with the specified tags.
+     */
+    TriggerNames?: TriggerNameList;
+    /**
+     * A continuation token, if the returned list does not contain the last metric available.
+     */
+    NextToken?: GenericString;
+  }
   export interface Location {
     /**
      * A JDBC location.
@@ -2767,6 +3434,10 @@ declare namespace Glue {
      * An Amazon S3 location.
      */
     S3?: CodeGenNodeArgs;
+    /**
+     * A DynamoDB Table location.
+     */
+    DynamoDB?: CodeGenNodeArgs;
   }
   export type LocationMap = {[key: string]: ColumnValuesString};
   export type LocationString = string;
@@ -2805,12 +3476,19 @@ declare namespace Glue {
   export type MaxConcurrentRuns = number;
   export type MaxRetries = number;
   export type MessagePrefix = string;
-  export type MessageString = string;
   export type MillisecondsCount = number;
   export type NameString = string;
   export type NameStringList = NameString[];
   export type NonNegativeDouble = number;
   export type NonNegativeInteger = number;
+  export interface NotificationProperty {
+    /**
+     * After a job run starts, the number of minutes to wait before sending a job run delay notification.
+     */
+    NotifyDelayAfter?: NotifyDelayAfter;
+  }
+  export type NotifyDelayAfter = number;
+  export type NullableDouble = number;
   export interface Order {
     /**
      * The name of the column.
@@ -2851,7 +3529,7 @@ declare namespace Glue {
      */
     StorageDescriptor?: StorageDescriptor;
     /**
-     * Partition parameters, in the form of a list of key-value pairs.
+     * These key-value pairs define partition parameters.
      */
     Parameters?: ParametersMap;
     /**
@@ -2872,7 +3550,7 @@ declare namespace Glue {
   export type PartitionErrors = PartitionError[];
   export interface PartitionInput {
     /**
-     * The values of the partition.
+     * The values of the partition. Although this parameter is not required by the SDK, you must specify this parameter for a valid input.
      */
     Values?: ValueStringList;
     /**
@@ -2884,7 +3562,7 @@ declare namespace Glue {
      */
     StorageDescriptor?: StorageDescriptor;
     /**
-     * Partition parameters, in the form of a list of key-value pairs.
+     * These key-value pairs define partition parameters.
      */
     Parameters?: ParametersMap;
     /**
@@ -2912,13 +3590,14 @@ declare namespace Glue {
      */
     SecurityGroupIdList?: SecurityGroupIdList;
     /**
-     * The connection's availability zone. This field is deprecated and has no effect.
+     * The connection's Availability Zone. This field is redundant because the specified subnet implies the Availability Zone to be used. Currently the field must be populated, but it will be deprecated in the future.
      */
     AvailabilityZone?: NameString;
   }
+  export type PolicyJsonString = string;
   export interface Predecessor {
     /**
-     * The name of the predecessor job.
+     * The name of the job definition used by the predecessor job run.
      */
     JobName?: NameString;
     /**
@@ -2929,7 +3608,7 @@ declare namespace Glue {
   export type PredecessorList = Predecessor[];
   export interface Predicate {
     /**
-     * Currently "OR" is not supported.
+     * Optional field if only one condition is listed. If multiple conditions are listed, then this field is required.
      */
     Logical?: Logical;
     /**
@@ -2939,6 +3618,39 @@ declare namespace Glue {
   }
   export type PredicateString = string;
   export type PrincipalType = "USER"|"ROLE"|"GROUP"|string;
+  export type PublicKeysList = GenericString[];
+  export interface PutDataCatalogEncryptionSettingsRequest {
+    /**
+     * The ID of the Data Catalog for which to set the security configuration. If none is provided, the AWS account ID is used by default.
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The security configuration to set.
+     */
+    DataCatalogEncryptionSettings: DataCatalogEncryptionSettings;
+  }
+  export interface PutDataCatalogEncryptionSettingsResponse {
+  }
+  export interface PutResourcePolicyRequest {
+    /**
+     * Contains the policy document to set, in JSON format.
+     */
+    PolicyInJson: PolicyJsonString;
+    /**
+     * The hash value returned when the previous policy was set using PutResourcePolicy. Its purpose is to prevent concurrent modifications of a policy. Do not use this parameter if no previous policy has been set.
+     */
+    PolicyHashCondition?: HashString;
+    /**
+     * A value of MUST_EXIST is used to update a policy. A value of NOT_EXIST is used to create a new policy. If a value of NONE or a null value is used, the call will not depend on the existence of a policy.
+     */
+    PolicyExistsCondition?: ExistCondition;
+  }
+  export interface PutResourcePolicyResponse {
+    /**
+     * A hash of the policy that has just been set. This must be included in a subsequent call that overwrites or updates this policy.
+     */
+    PolicyHash?: HashString;
+  }
   export type PythonScript = string;
   export interface ResetJobBookmarkRequest {
     /**
@@ -2968,6 +3680,18 @@ declare namespace Glue {
   export type RoleArn = string;
   export type RoleString = string;
   export type RowTag = string;
+  export interface S3Encryption {
+    /**
+     * The encryption mode to use for S3 data.
+     */
+    S3EncryptionMode?: S3EncryptionMode;
+    /**
+     * The AWS ARN of the KMS key to be used to encrypt the data.
+     */
+    KmsKeyArn?: KmsKeyArn;
+  }
+  export type S3EncryptionList = S3Encryption[];
+  export type S3EncryptionMode = "DISABLED"|"SSE-KMS"|"SSE-S3"|string;
   export interface S3Target {
     /**
      * The path to the Amazon S3 target.
@@ -3003,6 +3727,21 @@ declare namespace Glue {
   }
   export type SchemaPathString = string;
   export type ScriptLocationString = string;
+  export interface SecurityConfiguration {
+    /**
+     * The name of the security configuration.
+     */
+    Name?: NameString;
+    /**
+     * The time at which this security configuration was created.
+     */
+    CreatedTimeStamp?: TimestampValue;
+    /**
+     * The encryption configuration associated with this security configuration.
+     */
+    EncryptionConfiguration?: EncryptionConfiguration;
+  }
+  export type SecurityConfigurationList = SecurityConfiguration[];
   export type SecurityGroupIdList = NameString[];
   export interface Segment {
     /**
@@ -3024,7 +3763,7 @@ declare namespace Glue {
      */
     SerializationLibrary?: NameString;
     /**
-     * A list of initialization parameters for the SerDe, in key-value form.
+     * These key-value pairs define initialization parameters for the SerDe.
      */
     Parameters?: ParametersMap;
   }
@@ -3060,7 +3799,7 @@ declare namespace Glue {
   }
   export interface StartJobRunRequest {
     /**
-     * The name of the job to start.
+     * The name of the job definition to use.
      */
     JobName: NameString;
     /**
@@ -3068,13 +3807,29 @@ declare namespace Glue {
      */
     JobRunId?: IdString;
     /**
-     * The job arguments specifically for this run. They override the equivalent default arguments set for the job itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+     * The job arguments specifically for this run. For this job run, they replace the default arguments set in the job definition itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
     /**
-     * The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This field is deprecated, use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
+    /**
+     * The JobRun timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters TIMEOUT status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.
+     */
+    Timeout?: Timeout;
+    /**
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. The value that can be allocated for MaxCapacity depends on whether you are running a python shell job, or an Apache Spark ETL job:   When you specify a python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     */
+    MaxCapacity?: NullableDouble;
+    /**
+     * Specifies configuration properties of a job run notification.
+     */
+    NotificationProperty?: NotificationProperty;
+    /**
+     * The name of the SecurityConfiguration structure to be used with this job run.
+     */
+    SecurityConfiguration?: NameString;
   }
   export interface StartJobRunResponse {
     /**
@@ -3215,7 +3970,7 @@ declare namespace Glue {
      */
     StorageDescriptor?: StorageDescriptor;
     /**
-     * A list of columns by which the table is partitioned. Only primitive types are supported as partition keys.
+     * A list of columns by which the table is partitioned. Only primitive types are supported as partition keys. When creating a table used by Athena, and you do not specify any partitionKeys, you must at least set the value of partitionKeys to an empty list. For example:  "PartitionKeys": [] 
      */
     PartitionKeys?: ColumnList;
     /**
@@ -3231,7 +3986,7 @@ declare namespace Glue {
      */
     TableType?: TableTypeString;
     /**
-     * Properties associated with this table, as a list of key-value pairs.
+     * These key-value pairs define properties associated with the table.
      */
     Parameters?: ParametersMap;
     /**
@@ -3280,7 +4035,7 @@ declare namespace Glue {
      */
     StorageDescriptor?: StorageDescriptor;
     /**
-     * A list of columns by which the table is partitioned. Only primitive types are supported as partition keys.
+     * A list of columns by which the table is partitioned. Only primitive types are supported as partition keys. When creating a table used by Athena, and you do not specify any partitionKeys, you must at least set the value of partitionKeys to an empty list. For example:  "PartitionKeys": [] 
      */
     PartitionKeys?: ColumnList;
     /**
@@ -3296,7 +4051,7 @@ declare namespace Glue {
      */
     TableType?: TableTypeString;
     /**
-     * Properties associated with this table, as a list of key-value pairs.
+     * These key-value pairs define properties associated with the table.
      */
     Parameters?: ParametersMap;
   }
@@ -3310,7 +4065,7 @@ declare namespace Glue {
      */
     Table?: Table;
     /**
-     * The ID value that identifies this table version.
+     * The ID value that identifies this table version. A VersionId is a string representation of an integer. Each version is incremented by 1.
      */
     VersionId?: VersionString;
   }
@@ -3320,7 +4075,7 @@ declare namespace Glue {
      */
     TableName?: NameString;
     /**
-     * The ID value of the version in question.
+     * The ID value of the version in question. A VersionID is a string representation of an integer. Each version is incremented by 1.
      */
     VersionId?: VersionString;
     /**
@@ -3329,6 +4084,23 @@ declare namespace Glue {
     ErrorDetail?: ErrorDetail;
   }
   export type TableVersionErrors = TableVersionError[];
+  export type TagKey = string;
+  export type TagKeysList = TagKey[];
+  export interface TagResourceRequest {
+    /**
+     * The ARN of the AWS Glue resource to which to add the tags. For more information about AWS Glue resource ARNs, see the AWS Glue ARN string pattern.
+     */
+    ResourceArn: GlueResourceArn;
+    /**
+     * Tags to add to this resource.
+     */
+    TagsToAdd: TagsMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export type TagsMap = {[key: string]: TagValue};
+  export type Timeout = number;
   export type Timestamp = Date;
   export type TimestampValue = Date;
   export type Token = string;
@@ -3368,6 +4140,7 @@ declare namespace Glue {
     Predicate?: Predicate;
   }
   export type TriggerList = Trigger[];
+  export type TriggerNameList = NameString[];
   export type TriggerState = "CREATING"|"CREATED"|"ACTIVATING"|"ACTIVATED"|"DEACTIVATING"|"DEACTIVATED"|"DELETING"|"UPDATING"|string;
   export type TriggerType = "SCHEDULED"|"CONDITIONAL"|"ON_DEMAND"|string;
   export interface TriggerUpdate {
@@ -3393,6 +4166,18 @@ declare namespace Glue {
     Predicate?: Predicate;
   }
   export type URI = string;
+  export interface UntagResourceRequest {
+    /**
+     * The ARN of the resource from which to remove the tags.
+     */
+    ResourceArn: GlueResourceArn;
+    /**
+     * Tags to remove from this resource.
+     */
+    TagsToRemove: TagKeysList;
+  }
+  export interface UntagResourceResponse {
+  }
   export type UpdateBehavior = "LOG"|"UPDATE_IN_DATABASE"|string;
   export interface UpdateClassifierRequest {
     /**
@@ -3412,7 +4197,7 @@ declare namespace Glue {
   }
   export interface UpdateConnectionRequest {
     /**
-     * The ID of the Data Catalog in which the connection resides. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -3452,7 +4237,7 @@ declare namespace Glue {
      */
     Schedule?: CronExpression;
     /**
-     * A list of custom classifiers that the user has registered. By default, all classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.
+     * A list of custom classifiers that the user has registered. By default, all built-in classifiers are included in a crawl, but these custom classifiers always override the default classifiers for a given classification.
      */
     Classifiers?: ClassifierNameList;
     /**
@@ -3464,9 +4249,13 @@ declare namespace Glue {
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a Crawler's behavior. You can use this field to force partitions to inherit metadata such as classification, input format, output format, serde information, and schema from their parent table, rather than detect this information separately for each partition. Use the following JSON string to specify that behavior: Example: '{ "Version": 1.0, "CrawlerOutput": { "Partitions": { "AddOrUpdateBehavior": "InheritFromTable" } } }' 
+     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
     Configuration?: CrawlerConfiguration;
+    /**
+     * The name of the SecurityConfiguration structure to be used by this Crawler.
+     */
+    CrawlerSecurityConfiguration?: CrawlerSecurityConfiguration;
   }
   export interface UpdateCrawlerResponse {
   }
@@ -3508,6 +4297,14 @@ declare namespace Glue {
      */
     PublicKey?: GenericString;
     /**
+     * The list of public keys for the DevEndpoint to use.
+     */
+    AddPublicKeys?: PublicKeysList;
+    /**
+     * The list of public keys to be deleted from the DevEndpoint.
+     */
+    DeletePublicKeys?: PublicKeysList;
+    /**
      * Custom Python or Java libraries to be loaded in the DevEndpoint.
      */
     CustomLibraries?: DevEndpointCustomLibraries;
@@ -3542,13 +4339,13 @@ declare namespace Glue {
      */
     JobName: NameString;
     /**
-     * Specifies the values with which to update the job.
+     * Specifies the values with which to update the job definition.
      */
     JobUpdate: JobUpdate;
   }
   export interface UpdateJobResponse {
     /**
-     * Returns the name of the updated job.
+     * Returns the name of the updated job definition.
      */
     JobName?: NameString;
   }

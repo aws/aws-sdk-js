@@ -1,0 +1,147 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2018-10-30",
+    "endpointPrefix": "comprehendmedical",
+    "jsonVersion": "1.1",
+    "protocol": "json",
+    "serviceAbbreviation": "ComprehendMedical",
+    "serviceFullName": "AWS Comprehend Medical",
+    "serviceId": "ComprehendMedical",
+    "signatureVersion": "v4",
+    "signingName": "comprehendmedical",
+    "targetPrefix": "ComprehendMedical_20181030",
+    "uid": "comprehendmedical-2018-10-30"
+  },
+  "operations": {
+    "DetectEntities": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Text"
+        ],
+        "members": {
+          "Text": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Entities"
+        ],
+        "members": {
+          "Entities": {
+            "shape": "S4"
+          },
+          "UnmappedAttributes": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "Type": {},
+                "Attribute": {
+                  "shape": "Sf"
+                }
+              }
+            }
+          },
+          "PaginationToken": {}
+        }
+      }
+    },
+    "DetectPHI": {
+      "input": {
+        "type": "structure",
+        "required": [
+          "Text"
+        ],
+        "members": {
+          "Text": {}
+        }
+      },
+      "output": {
+        "type": "structure",
+        "required": [
+          "Entities"
+        ],
+        "members": {
+          "Entities": {
+            "shape": "S4"
+          },
+          "PaginationToken": {}
+        }
+      }
+    }
+  },
+  "shapes": {
+    "S4": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "Id": {
+            "type": "integer"
+          },
+          "BeginOffset": {
+            "type": "integer"
+          },
+          "EndOffset": {
+            "type": "integer"
+          },
+          "Score": {
+            "type": "float"
+          },
+          "Text": {},
+          "Category": {},
+          "Type": {},
+          "Traits": {
+            "shape": "Sb"
+          },
+          "Attributes": {
+            "type": "list",
+            "member": {
+              "shape": "Sf"
+            }
+          }
+        }
+      }
+    },
+    "Sb": {
+      "type": "list",
+      "member": {
+        "type": "structure",
+        "members": {
+          "Name": {},
+          "Score": {
+            "type": "float"
+          }
+        }
+      }
+    },
+    "Sf": {
+      "type": "structure",
+      "members": {
+        "Type": {},
+        "Score": {
+          "type": "float"
+        },
+        "RelationshipScore": {
+          "type": "float"
+        },
+        "Id": {
+          "type": "integer"
+        },
+        "BeginOffset": {
+          "type": "integer"
+        },
+        "EndOffset": {
+          "type": "integer"
+        },
+        "Text": {},
+        "Traits": {
+          "shape": "Sb"
+        }
+      }
+    }
+  }
+}

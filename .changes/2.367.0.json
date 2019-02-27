@@ -1,0 +1,42 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudWatchEvents",
+        "description": "Support for Managed Rules (rules that are created and maintained by the AWS services in your account) is added."
+    },
+    {
+        "type": "feature",
+        "category": "ELBv2",
+        "description": "This release allows Application Load Balancers to route traffic to Lambda functions, in addition to instances and IP addresses."
+    },
+    {
+        "type": "feature",
+        "category": "Kafka",
+        "description": "This is the initial SDK release for Amazon Managed Streaming for Kafka (Amazon MSK). Amazon MSK is a service that you can use to easily build, monitor, and manage Apache Kafka clusters in the cloud."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "AWS Lambda now supports Lambda Layers and Ruby as a runtime. Lambda Layers are a new type of artifact that contains arbitrary code and data, and may be referenced by zero, one, or more functions at the same time.  You can also now develop your AWS Lambda function code using the Ruby programming language."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Fixed issue with ObjectLockRetainUntilDate in S3 PutObject"
+    },
+    {
+        "type": "feature",
+        "category": "ServerlessApplicationRepository",
+        "description": "AWS Serverless Application Repository now supports nested applications. You can nest individual applications as components of a larger application to make it easy to assemble and deploy new serverless architectures. "
+    },
+    {
+        "type": "feature",
+        "category": "StepFunctions",
+        "description": "AWS Step Functions is now integrated with eight additional AWS services: Amazon ECS, AWS Fargate, Amazon DynamoDB, Amazon SNS, Amazon SQS, AWS Batch, AWS Glue, and Amazon SageMaker. To learn more, please see https://docs.aws.amazon.com/step-functions/index.html"
+    },
+    {
+        "type": "feature",
+        "category": "XRay",
+        "description": "GetTraceSummaries - Now provides additional information regarding your application traces such as Availability Zone, Instance ID, Resource ARN details, Revision, Entry Point, Root Cause Exceptions and Root Causes for Fault, Error and Response Time."
+    }
+]

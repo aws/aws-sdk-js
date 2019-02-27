@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config';
 interface Blob {}
@@ -12,67 +13,67 @@ declare class ELB extends Service {
   constructor(options?: ELB.Types.ClientConfiguration)
   config: Config & ELB.Types.ClientConfiguration;
   /**
-   * Adds the specified tags to the specified load balancer. Each load balancer can have a maximum of 10 tags. Each tag consists of a key and an optional value. If a tag with the same key is already associated with the load balancer, AddTags updates its value. For more information, see Tag Your Classic Load Balancer in the Classic Load Balancer Guide.
+   * Adds the specified tags to the specified load balancer. Each load balancer can have a maximum of 10 tags. Each tag consists of a key and an optional value. If a tag with the same key is already associated with the load balancer, AddTags updates its value. For more information, see Tag Your Classic Load Balancer in the Classic Load Balancers Guide.
    */
   addTags(params: ELB.Types.AddTagsInput, callback?: (err: AWSError, data: ELB.Types.AddTagsOutput) => void): Request<ELB.Types.AddTagsOutput, AWSError>;
   /**
-   * Adds the specified tags to the specified load balancer. Each load balancer can have a maximum of 10 tags. Each tag consists of a key and an optional value. If a tag with the same key is already associated with the load balancer, AddTags updates its value. For more information, see Tag Your Classic Load Balancer in the Classic Load Balancer Guide.
+   * Adds the specified tags to the specified load balancer. Each load balancer can have a maximum of 10 tags. Each tag consists of a key and an optional value. If a tag with the same key is already associated with the load balancer, AddTags updates its value. For more information, see Tag Your Classic Load Balancer in the Classic Load Balancers Guide.
    */
   addTags(callback?: (err: AWSError, data: ELB.Types.AddTagsOutput) => void): Request<ELB.Types.AddTagsOutput, AWSError>;
   /**
-   * Associates one or more security groups with your load balancer in a virtual private cloud (VPC). The specified security groups override the previously associated security groups. For more information, see Security Groups for Load Balancers in a VPC in the Classic Load Balancer Guide.
+   * Associates one or more security groups with your load balancer in a virtual private cloud (VPC). The specified security groups override the previously associated security groups. For more information, see Security Groups for Load Balancers in a VPC in the Classic Load Balancers Guide.
    */
   applySecurityGroupsToLoadBalancer(params: ELB.Types.ApplySecurityGroupsToLoadBalancerInput, callback?: (err: AWSError, data: ELB.Types.ApplySecurityGroupsToLoadBalancerOutput) => void): Request<ELB.Types.ApplySecurityGroupsToLoadBalancerOutput, AWSError>;
   /**
-   * Associates one or more security groups with your load balancer in a virtual private cloud (VPC). The specified security groups override the previously associated security groups. For more information, see Security Groups for Load Balancers in a VPC in the Classic Load Balancer Guide.
+   * Associates one or more security groups with your load balancer in a virtual private cloud (VPC). The specified security groups override the previously associated security groups. For more information, see Security Groups for Load Balancers in a VPC in the Classic Load Balancers Guide.
    */
   applySecurityGroupsToLoadBalancer(callback?: (err: AWSError, data: ELB.Types.ApplySecurityGroupsToLoadBalancerOutput) => void): Request<ELB.Types.ApplySecurityGroupsToLoadBalancerOutput, AWSError>;
   /**
-   * Adds one or more subnets to the set of configured subnets for the specified load balancer. The load balancer evenly distributes requests across all registered subnets. For more information, see Add or Remove Subnets for Your Load Balancer in a VPC in the Classic Load Balancer Guide.
+   * Adds one or more subnets to the set of configured subnets for the specified load balancer. The load balancer evenly distributes requests across all registered subnets. For more information, see Add or Remove Subnets for Your Load Balancer in a VPC in the Classic Load Balancers Guide.
    */
   attachLoadBalancerToSubnets(params: ELB.Types.AttachLoadBalancerToSubnetsInput, callback?: (err: AWSError, data: ELB.Types.AttachLoadBalancerToSubnetsOutput) => void): Request<ELB.Types.AttachLoadBalancerToSubnetsOutput, AWSError>;
   /**
-   * Adds one or more subnets to the set of configured subnets for the specified load balancer. The load balancer evenly distributes requests across all registered subnets. For more information, see Add or Remove Subnets for Your Load Balancer in a VPC in the Classic Load Balancer Guide.
+   * Adds one or more subnets to the set of configured subnets for the specified load balancer. The load balancer evenly distributes requests across all registered subnets. For more information, see Add or Remove Subnets for Your Load Balancer in a VPC in the Classic Load Balancers Guide.
    */
   attachLoadBalancerToSubnets(callback?: (err: AWSError, data: ELB.Types.AttachLoadBalancerToSubnetsOutput) => void): Request<ELB.Types.AttachLoadBalancerToSubnetsOutput, AWSError>;
   /**
-   * Specifies the health check settings to use when evaluating the health state of your EC2 instances. For more information, see Configure Health Checks for Your Load Balancer in the Classic Load Balancer Guide.
+   * Specifies the health check settings to use when evaluating the health state of your EC2 instances. For more information, see Configure Health Checks for Your Load Balancer in the Classic Load Balancers Guide.
    */
   configureHealthCheck(params: ELB.Types.ConfigureHealthCheckInput, callback?: (err: AWSError, data: ELB.Types.ConfigureHealthCheckOutput) => void): Request<ELB.Types.ConfigureHealthCheckOutput, AWSError>;
   /**
-   * Specifies the health check settings to use when evaluating the health state of your EC2 instances. For more information, see Configure Health Checks for Your Load Balancer in the Classic Load Balancer Guide.
+   * Specifies the health check settings to use when evaluating the health state of your EC2 instances. For more information, see Configure Health Checks for Your Load Balancer in the Classic Load Balancers Guide.
    */
   configureHealthCheck(callback?: (err: AWSError, data: ELB.Types.ConfigureHealthCheckOutput) => void): Request<ELB.Types.ConfigureHealthCheckOutput, AWSError>;
   /**
-   * Generates a stickiness policy with sticky session lifetimes that follow that of an application-generated cookie. This policy can be associated only with HTTP/HTTPS listeners. This policy is similar to the policy created by CreateLBCookieStickinessPolicy, except that the lifetime of the special Elastic Load Balancing cookie, AWSELB, follows the lifetime of the application-generated cookie specified in the policy configuration. The load balancer only inserts a new stickiness cookie when the application response includes a new application cookie. If the application cookie is explicitly removed or expires, the session stops being sticky until a new application cookie is issued. For more information, see Application-Controlled Session Stickiness in the Classic Load Balancer Guide.
+   * Generates a stickiness policy with sticky session lifetimes that follow that of an application-generated cookie. This policy can be associated only with HTTP/HTTPS listeners. This policy is similar to the policy created by CreateLBCookieStickinessPolicy, except that the lifetime of the special Elastic Load Balancing cookie, AWSELB, follows the lifetime of the application-generated cookie specified in the policy configuration. The load balancer only inserts a new stickiness cookie when the application response includes a new application cookie. If the application cookie is explicitly removed or expires, the session stops being sticky until a new application cookie is issued. For more information, see Application-Controlled Session Stickiness in the Classic Load Balancers Guide.
    */
   createAppCookieStickinessPolicy(params: ELB.Types.CreateAppCookieStickinessPolicyInput, callback?: (err: AWSError, data: ELB.Types.CreateAppCookieStickinessPolicyOutput) => void): Request<ELB.Types.CreateAppCookieStickinessPolicyOutput, AWSError>;
   /**
-   * Generates a stickiness policy with sticky session lifetimes that follow that of an application-generated cookie. This policy can be associated only with HTTP/HTTPS listeners. This policy is similar to the policy created by CreateLBCookieStickinessPolicy, except that the lifetime of the special Elastic Load Balancing cookie, AWSELB, follows the lifetime of the application-generated cookie specified in the policy configuration. The load balancer only inserts a new stickiness cookie when the application response includes a new application cookie. If the application cookie is explicitly removed or expires, the session stops being sticky until a new application cookie is issued. For more information, see Application-Controlled Session Stickiness in the Classic Load Balancer Guide.
+   * Generates a stickiness policy with sticky session lifetimes that follow that of an application-generated cookie. This policy can be associated only with HTTP/HTTPS listeners. This policy is similar to the policy created by CreateLBCookieStickinessPolicy, except that the lifetime of the special Elastic Load Balancing cookie, AWSELB, follows the lifetime of the application-generated cookie specified in the policy configuration. The load balancer only inserts a new stickiness cookie when the application response includes a new application cookie. If the application cookie is explicitly removed or expires, the session stops being sticky until a new application cookie is issued. For more information, see Application-Controlled Session Stickiness in the Classic Load Balancers Guide.
    */
   createAppCookieStickinessPolicy(callback?: (err: AWSError, data: ELB.Types.CreateAppCookieStickinessPolicyOutput) => void): Request<ELB.Types.CreateAppCookieStickinessPolicyOutput, AWSError>;
   /**
-   * Generates a stickiness policy with sticky session lifetimes controlled by the lifetime of the browser (user-agent) or a specified expiration period. This policy can be associated only with HTTP/HTTPS listeners. When a load balancer implements this policy, the load balancer uses a special cookie to track the instance for each request. When the load balancer receives a request, it first checks to see if this cookie is present in the request. If so, the load balancer sends the request to the application server specified in the cookie. If not, the load balancer sends the request to a server that is chosen based on the existing load-balancing algorithm. A cookie is inserted into the response for binding subsequent requests from the same user to that server. The validity of the cookie is based on the cookie expiration time, which is specified in the policy configuration. For more information, see Duration-Based Session Stickiness in the Classic Load Balancer Guide.
+   * Generates a stickiness policy with sticky session lifetimes controlled by the lifetime of the browser (user-agent) or a specified expiration period. This policy can be associated only with HTTP/HTTPS listeners. When a load balancer implements this policy, the load balancer uses a special cookie to track the instance for each request. When the load balancer receives a request, it first checks to see if this cookie is present in the request. If so, the load balancer sends the request to the application server specified in the cookie. If not, the load balancer sends the request to a server that is chosen based on the existing load-balancing algorithm. A cookie is inserted into the response for binding subsequent requests from the same user to that server. The validity of the cookie is based on the cookie expiration time, which is specified in the policy configuration. For more information, see Duration-Based Session Stickiness in the Classic Load Balancers Guide.
    */
   createLBCookieStickinessPolicy(params: ELB.Types.CreateLBCookieStickinessPolicyInput, callback?: (err: AWSError, data: ELB.Types.CreateLBCookieStickinessPolicyOutput) => void): Request<ELB.Types.CreateLBCookieStickinessPolicyOutput, AWSError>;
   /**
-   * Generates a stickiness policy with sticky session lifetimes controlled by the lifetime of the browser (user-agent) or a specified expiration period. This policy can be associated only with HTTP/HTTPS listeners. When a load balancer implements this policy, the load balancer uses a special cookie to track the instance for each request. When the load balancer receives a request, it first checks to see if this cookie is present in the request. If so, the load balancer sends the request to the application server specified in the cookie. If not, the load balancer sends the request to a server that is chosen based on the existing load-balancing algorithm. A cookie is inserted into the response for binding subsequent requests from the same user to that server. The validity of the cookie is based on the cookie expiration time, which is specified in the policy configuration. For more information, see Duration-Based Session Stickiness in the Classic Load Balancer Guide.
+   * Generates a stickiness policy with sticky session lifetimes controlled by the lifetime of the browser (user-agent) or a specified expiration period. This policy can be associated only with HTTP/HTTPS listeners. When a load balancer implements this policy, the load balancer uses a special cookie to track the instance for each request. When the load balancer receives a request, it first checks to see if this cookie is present in the request. If so, the load balancer sends the request to the application server specified in the cookie. If not, the load balancer sends the request to a server that is chosen based on the existing load-balancing algorithm. A cookie is inserted into the response for binding subsequent requests from the same user to that server. The validity of the cookie is based on the cookie expiration time, which is specified in the policy configuration. For more information, see Duration-Based Session Stickiness in the Classic Load Balancers Guide.
    */
   createLBCookieStickinessPolicy(callback?: (err: AWSError, data: ELB.Types.CreateLBCookieStickinessPolicyOutput) => void): Request<ELB.Types.CreateLBCookieStickinessPolicyOutput, AWSError>;
   /**
-   * Creates a Classic Load Balancer. You can add listeners, security groups, subnets, and tags when you create your load balancer, or you can add them later using CreateLoadBalancerListeners, ApplySecurityGroupsToLoadBalancer, AttachLoadBalancerToSubnets, and AddTags. To describe your current load balancers, see DescribeLoadBalancers. When you are finished with a load balancer, you can delete it using DeleteLoadBalancer. You can create up to 20 load balancers per region per account. You can request an increase for the number of load balancers for your account. For more information, see Limits for Your Classic Load Balancer in the Classic Load Balancer Guide.
+   * Creates a Classic Load Balancer. You can add listeners, security groups, subnets, and tags when you create your load balancer, or you can add them later using CreateLoadBalancerListeners, ApplySecurityGroupsToLoadBalancer, AttachLoadBalancerToSubnets, and AddTags. To describe your current load balancers, see DescribeLoadBalancers. When you are finished with a load balancer, you can delete it using DeleteLoadBalancer. You can create up to 20 load balancers per region per account. You can request an increase for the number of load balancers for your account. For more information, see Limits for Your Classic Load Balancer in the Classic Load Balancers Guide.
    */
   createLoadBalancer(params: ELB.Types.CreateAccessPointInput, callback?: (err: AWSError, data: ELB.Types.CreateAccessPointOutput) => void): Request<ELB.Types.CreateAccessPointOutput, AWSError>;
   /**
-   * Creates a Classic Load Balancer. You can add listeners, security groups, subnets, and tags when you create your load balancer, or you can add them later using CreateLoadBalancerListeners, ApplySecurityGroupsToLoadBalancer, AttachLoadBalancerToSubnets, and AddTags. To describe your current load balancers, see DescribeLoadBalancers. When you are finished with a load balancer, you can delete it using DeleteLoadBalancer. You can create up to 20 load balancers per region per account. You can request an increase for the number of load balancers for your account. For more information, see Limits for Your Classic Load Balancer in the Classic Load Balancer Guide.
+   * Creates a Classic Load Balancer. You can add listeners, security groups, subnets, and tags when you create your load balancer, or you can add them later using CreateLoadBalancerListeners, ApplySecurityGroupsToLoadBalancer, AttachLoadBalancerToSubnets, and AddTags. To describe your current load balancers, see DescribeLoadBalancers. When you are finished with a load balancer, you can delete it using DeleteLoadBalancer. You can create up to 20 load balancers per region per account. You can request an increase for the number of load balancers for your account. For more information, see Limits for Your Classic Load Balancer in the Classic Load Balancers Guide.
    */
   createLoadBalancer(callback?: (err: AWSError, data: ELB.Types.CreateAccessPointOutput) => void): Request<ELB.Types.CreateAccessPointOutput, AWSError>;
   /**
-   * Creates one or more listeners for the specified load balancer. If a listener with the specified port does not already exist, it is created; otherwise, the properties of the new listener must match the properties of the existing listener. For more information, see Listeners for Your Classic Load Balancer in the Classic Load Balancer Guide.
+   * Creates one or more listeners for the specified load balancer. If a listener with the specified port does not already exist, it is created; otherwise, the properties of the new listener must match the properties of the existing listener. For more information, see Listeners for Your Classic Load Balancer in the Classic Load Balancers Guide.
    */
   createLoadBalancerListeners(params: ELB.Types.CreateLoadBalancerListenerInput, callback?: (err: AWSError, data: ELB.Types.CreateLoadBalancerListenerOutput) => void): Request<ELB.Types.CreateLoadBalancerListenerOutput, AWSError>;
   /**
-   * Creates one or more listeners for the specified load balancer. If a listener with the specified port does not already exist, it is created; otherwise, the properties of the new listener must match the properties of the existing listener. For more information, see Listeners for Your Classic Load Balancer in the Classic Load Balancer Guide.
+   * Creates one or more listeners for the specified load balancer. If a listener with the specified port does not already exist, it is created; otherwise, the properties of the new listener must match the properties of the existing listener. For more information, see Listeners for Your Classic Load Balancer in the Classic Load Balancers Guide.
    */
   createLoadBalancerListeners(callback?: (err: AWSError, data: ELB.Types.CreateLoadBalancerListenerOutput) => void): Request<ELB.Types.CreateLoadBalancerListenerOutput, AWSError>;
   /**
@@ -108,19 +109,19 @@ declare class ELB extends Service {
    */
   deleteLoadBalancerPolicy(callback?: (err: AWSError, data: ELB.Types.DeleteLoadBalancerPolicyOutput) => void): Request<ELB.Types.DeleteLoadBalancerPolicyOutput, AWSError>;
   /**
-   * Deregisters the specified instances from the specified load balancer. After the instance is deregistered, it no longer receives traffic from the load balancer. You can use DescribeLoadBalancers to verify that the instance is deregistered from the load balancer. For more information, see Register or De-Register EC2 Instances in the Classic Load Balancer Guide.
+   * Deregisters the specified instances from the specified load balancer. After the instance is deregistered, it no longer receives traffic from the load balancer. You can use DescribeLoadBalancers to verify that the instance is deregistered from the load balancer. For more information, see Register or De-Register EC2 Instances in the Classic Load Balancers Guide.
    */
   deregisterInstancesFromLoadBalancer(params: ELB.Types.DeregisterEndPointsInput, callback?: (err: AWSError, data: ELB.Types.DeregisterEndPointsOutput) => void): Request<ELB.Types.DeregisterEndPointsOutput, AWSError>;
   /**
-   * Deregisters the specified instances from the specified load balancer. After the instance is deregistered, it no longer receives traffic from the load balancer. You can use DescribeLoadBalancers to verify that the instance is deregistered from the load balancer. For more information, see Register or De-Register EC2 Instances in the Classic Load Balancer Guide.
+   * Deregisters the specified instances from the specified load balancer. After the instance is deregistered, it no longer receives traffic from the load balancer. You can use DescribeLoadBalancers to verify that the instance is deregistered from the load balancer. For more information, see Register or De-Register EC2 Instances in the Classic Load Balancers Guide.
    */
   deregisterInstancesFromLoadBalancer(callback?: (err: AWSError, data: ELB.Types.DeregisterEndPointsOutput) => void): Request<ELB.Types.DeregisterEndPointsOutput, AWSError>;
   /**
-   * Describes the current Elastic Load Balancing resource limits for your AWS account. For more information, see Limits for Your Classic Load Balancer in the Classic Load Balancer Guide.
+   * Describes the current Elastic Load Balancing resource limits for your AWS account. For more information, see Limits for Your Classic Load Balancer in the Classic Load Balancers Guide.
    */
   describeAccountLimits(params: ELB.Types.DescribeAccountLimitsInput, callback?: (err: AWSError, data: ELB.Types.DescribeAccountLimitsOutput) => void): Request<ELB.Types.DescribeAccountLimitsOutput, AWSError>;
   /**
-   * Describes the current Elastic Load Balancing resource limits for your AWS account. For more information, see Limits for Your Classic Load Balancer in the Classic Load Balancer Guide.
+   * Describes the current Elastic Load Balancing resource limits for your AWS account. For more information, see Limits for Your Classic Load Balancer in the Classic Load Balancers Guide.
    */
   describeAccountLimits(callback?: (err: AWSError, data: ELB.Types.DescribeAccountLimitsOutput) => void): Request<ELB.Types.DescribeAccountLimitsOutput, AWSError>;
   /**
@@ -180,35 +181,35 @@ declare class ELB extends Service {
    */
   detachLoadBalancerFromSubnets(callback?: (err: AWSError, data: ELB.Types.DetachLoadBalancerFromSubnetsOutput) => void): Request<ELB.Types.DetachLoadBalancerFromSubnetsOutput, AWSError>;
   /**
-   * Removes the specified Availability Zones from the set of Availability Zones for the specified load balancer. There must be at least one Availability Zone registered with a load balancer at all times. After an Availability Zone is removed, all instances registered with the load balancer that are in the removed Availability Zone go into the OutOfService state. Then, the load balancer attempts to equally balance the traffic among its remaining Availability Zones. For more information, see Add or Remove Availability Zones in the Classic Load Balancer Guide.
+   * Removes the specified Availability Zones from the set of Availability Zones for the specified load balancer in EC2-Classic or a default VPC. For load balancers in a non-default VPC, use DetachLoadBalancerFromSubnets. There must be at least one Availability Zone registered with a load balancer at all times. After an Availability Zone is removed, all instances registered with the load balancer that are in the removed Availability Zone go into the OutOfService state. Then, the load balancer attempts to equally balance the traffic among its remaining Availability Zones. For more information, see Add or Remove Availability Zones in the Classic Load Balancers Guide.
    */
   disableAvailabilityZonesForLoadBalancer(params: ELB.Types.RemoveAvailabilityZonesInput, callback?: (err: AWSError, data: ELB.Types.RemoveAvailabilityZonesOutput) => void): Request<ELB.Types.RemoveAvailabilityZonesOutput, AWSError>;
   /**
-   * Removes the specified Availability Zones from the set of Availability Zones for the specified load balancer. There must be at least one Availability Zone registered with a load balancer at all times. After an Availability Zone is removed, all instances registered with the load balancer that are in the removed Availability Zone go into the OutOfService state. Then, the load balancer attempts to equally balance the traffic among its remaining Availability Zones. For more information, see Add or Remove Availability Zones in the Classic Load Balancer Guide.
+   * Removes the specified Availability Zones from the set of Availability Zones for the specified load balancer in EC2-Classic or a default VPC. For load balancers in a non-default VPC, use DetachLoadBalancerFromSubnets. There must be at least one Availability Zone registered with a load balancer at all times. After an Availability Zone is removed, all instances registered with the load balancer that are in the removed Availability Zone go into the OutOfService state. Then, the load balancer attempts to equally balance the traffic among its remaining Availability Zones. For more information, see Add or Remove Availability Zones in the Classic Load Balancers Guide.
    */
   disableAvailabilityZonesForLoadBalancer(callback?: (err: AWSError, data: ELB.Types.RemoveAvailabilityZonesOutput) => void): Request<ELB.Types.RemoveAvailabilityZonesOutput, AWSError>;
   /**
-   * Adds the specified Availability Zones to the set of Availability Zones for the specified load balancer. The load balancer evenly distributes requests across all its registered Availability Zones that contain instances. For more information, see Add or Remove Availability Zones in the Classic Load Balancer Guide.
+   * Adds the specified Availability Zones to the set of Availability Zones for the specified load balancer in EC2-Classic or a default VPC. For load balancers in a non-default VPC, use AttachLoadBalancerToSubnets. The load balancer evenly distributes requests across all its registered Availability Zones that contain instances. For more information, see Add or Remove Availability Zones in the Classic Load Balancers Guide.
    */
   enableAvailabilityZonesForLoadBalancer(params: ELB.Types.AddAvailabilityZonesInput, callback?: (err: AWSError, data: ELB.Types.AddAvailabilityZonesOutput) => void): Request<ELB.Types.AddAvailabilityZonesOutput, AWSError>;
   /**
-   * Adds the specified Availability Zones to the set of Availability Zones for the specified load balancer. The load balancer evenly distributes requests across all its registered Availability Zones that contain instances. For more information, see Add or Remove Availability Zones in the Classic Load Balancer Guide.
+   * Adds the specified Availability Zones to the set of Availability Zones for the specified load balancer in EC2-Classic or a default VPC. For load balancers in a non-default VPC, use AttachLoadBalancerToSubnets. The load balancer evenly distributes requests across all its registered Availability Zones that contain instances. For more information, see Add or Remove Availability Zones in the Classic Load Balancers Guide.
    */
   enableAvailabilityZonesForLoadBalancer(callback?: (err: AWSError, data: ELB.Types.AddAvailabilityZonesOutput) => void): Request<ELB.Types.AddAvailabilityZonesOutput, AWSError>;
   /**
-   * Modifies the attributes of the specified load balancer. You can modify the load balancer attributes, such as AccessLogs, ConnectionDraining, and CrossZoneLoadBalancing by either enabling or disabling them. Or, you can modify the load balancer attribute ConnectionSettings by specifying an idle connection timeout value for your load balancer. For more information, see the following in the Classic Load Balancer Guide:    Cross-Zone Load Balancing     Connection Draining     Access Logs     Idle Connection Timeout   
+   * Modifies the attributes of the specified load balancer. You can modify the load balancer attributes, such as AccessLogs, ConnectionDraining, and CrossZoneLoadBalancing by either enabling or disabling them. Or, you can modify the load balancer attribute ConnectionSettings by specifying an idle connection timeout value for your load balancer. For more information, see the following in the Classic Load Balancers Guide:    Cross-Zone Load Balancing     Connection Draining     Access Logs     Idle Connection Timeout   
    */
   modifyLoadBalancerAttributes(params: ELB.Types.ModifyLoadBalancerAttributesInput, callback?: (err: AWSError, data: ELB.Types.ModifyLoadBalancerAttributesOutput) => void): Request<ELB.Types.ModifyLoadBalancerAttributesOutput, AWSError>;
   /**
-   * Modifies the attributes of the specified load balancer. You can modify the load balancer attributes, such as AccessLogs, ConnectionDraining, and CrossZoneLoadBalancing by either enabling or disabling them. Or, you can modify the load balancer attribute ConnectionSettings by specifying an idle connection timeout value for your load balancer. For more information, see the following in the Classic Load Balancer Guide:    Cross-Zone Load Balancing     Connection Draining     Access Logs     Idle Connection Timeout   
+   * Modifies the attributes of the specified load balancer. You can modify the load balancer attributes, such as AccessLogs, ConnectionDraining, and CrossZoneLoadBalancing by either enabling or disabling them. Or, you can modify the load balancer attribute ConnectionSettings by specifying an idle connection timeout value for your load balancer. For more information, see the following in the Classic Load Balancers Guide:    Cross-Zone Load Balancing     Connection Draining     Access Logs     Idle Connection Timeout   
    */
   modifyLoadBalancerAttributes(callback?: (err: AWSError, data: ELB.Types.ModifyLoadBalancerAttributesOutput) => void): Request<ELB.Types.ModifyLoadBalancerAttributesOutput, AWSError>;
   /**
-   * Adds the specified instances to the specified load balancer. The instance must be a running instance in the same network as the load balancer (EC2-Classic or the same VPC). If you have EC2-Classic instances and a load balancer in a VPC with ClassicLink enabled, you can link the EC2-Classic instances to that VPC and then register the linked EC2-Classic instances with the load balancer in the VPC. Note that RegisterInstanceWithLoadBalancer completes when the request has been registered. Instance registration takes a little time to complete. To check the state of the registered instances, use DescribeLoadBalancers or DescribeInstanceHealth. After the instance is registered, it starts receiving traffic and requests from the load balancer. Any instance that is not in one of the Availability Zones registered for the load balancer is moved to the OutOfService state. If an Availability Zone is added to the load balancer later, any instances registered with the load balancer move to the InService state. To deregister instances from a load balancer, use DeregisterInstancesFromLoadBalancer. For more information, see Register or De-Register EC2 Instances in the Classic Load Balancer Guide.
+   * Adds the specified instances to the specified load balancer. The instance must be a running instance in the same network as the load balancer (EC2-Classic or the same VPC). If you have EC2-Classic instances and a load balancer in a VPC with ClassicLink enabled, you can link the EC2-Classic instances to that VPC and then register the linked EC2-Classic instances with the load balancer in the VPC. Note that RegisterInstanceWithLoadBalancer completes when the request has been registered. Instance registration takes a little time to complete. To check the state of the registered instances, use DescribeLoadBalancers or DescribeInstanceHealth. After the instance is registered, it starts receiving traffic and requests from the load balancer. Any instance that is not in one of the Availability Zones registered for the load balancer is moved to the OutOfService state. If an Availability Zone is added to the load balancer later, any instances registered with the load balancer move to the InService state. To deregister instances from a load balancer, use DeregisterInstancesFromLoadBalancer. For more information, see Register or De-Register EC2 Instances in the Classic Load Balancers Guide.
    */
   registerInstancesWithLoadBalancer(params: ELB.Types.RegisterEndPointsInput, callback?: (err: AWSError, data: ELB.Types.RegisterEndPointsOutput) => void): Request<ELB.Types.RegisterEndPointsOutput, AWSError>;
   /**
-   * Adds the specified instances to the specified load balancer. The instance must be a running instance in the same network as the load balancer (EC2-Classic or the same VPC). If you have EC2-Classic instances and a load balancer in a VPC with ClassicLink enabled, you can link the EC2-Classic instances to that VPC and then register the linked EC2-Classic instances with the load balancer in the VPC. Note that RegisterInstanceWithLoadBalancer completes when the request has been registered. Instance registration takes a little time to complete. To check the state of the registered instances, use DescribeLoadBalancers or DescribeInstanceHealth. After the instance is registered, it starts receiving traffic and requests from the load balancer. Any instance that is not in one of the Availability Zones registered for the load balancer is moved to the OutOfService state. If an Availability Zone is added to the load balancer later, any instances registered with the load balancer move to the InService state. To deregister instances from a load balancer, use DeregisterInstancesFromLoadBalancer. For more information, see Register or De-Register EC2 Instances in the Classic Load Balancer Guide.
+   * Adds the specified instances to the specified load balancer. The instance must be a running instance in the same network as the load balancer (EC2-Classic or the same VPC). If you have EC2-Classic instances and a load balancer in a VPC with ClassicLink enabled, you can link the EC2-Classic instances to that VPC and then register the linked EC2-Classic instances with the load balancer in the VPC. Note that RegisterInstanceWithLoadBalancer completes when the request has been registered. Instance registration takes a little time to complete. To check the state of the registered instances, use DescribeLoadBalancers or DescribeInstanceHealth. After the instance is registered, it starts receiving traffic and requests from the load balancer. Any instance that is not in one of the Availability Zones registered for the load balancer is moved to the OutOfService state. If an Availability Zone is added to the load balancer later, any instances registered with the load balancer move to the InService state. To deregister instances from a load balancer, use DeregisterInstancesFromLoadBalancer. For more information, see Register or De-Register EC2 Instances in the Classic Load Balancers Guide.
    */
   registerInstancesWithLoadBalancer(callback?: (err: AWSError, data: ELB.Types.RegisterEndPointsOutput) => void): Request<ELB.Types.RegisterEndPointsOutput, AWSError>;
   /**
@@ -220,33 +221,33 @@ declare class ELB extends Service {
    */
   removeTags(callback?: (err: AWSError, data: ELB.Types.RemoveTagsOutput) => void): Request<ELB.Types.RemoveTagsOutput, AWSError>;
   /**
-   * Sets the certificate that terminates the specified listener's SSL connections. The specified certificate replaces any prior certificate that was used on the same load balancer and port. For more information about updating your SSL certificate, see Replace the SSL Certificate for Your Load Balancer in the Classic Load Balancer Guide.
+   * Sets the certificate that terminates the specified listener's SSL connections. The specified certificate replaces any prior certificate that was used on the same load balancer and port. For more information about updating your SSL certificate, see Replace the SSL Certificate for Your Load Balancer in the Classic Load Balancers Guide.
    */
   setLoadBalancerListenerSSLCertificate(params: ELB.Types.SetLoadBalancerListenerSSLCertificateInput, callback?: (err: AWSError, data: ELB.Types.SetLoadBalancerListenerSSLCertificateOutput) => void): Request<ELB.Types.SetLoadBalancerListenerSSLCertificateOutput, AWSError>;
   /**
-   * Sets the certificate that terminates the specified listener's SSL connections. The specified certificate replaces any prior certificate that was used on the same load balancer and port. For more information about updating your SSL certificate, see Replace the SSL Certificate for Your Load Balancer in the Classic Load Balancer Guide.
+   * Sets the certificate that terminates the specified listener's SSL connections. The specified certificate replaces any prior certificate that was used on the same load balancer and port. For more information about updating your SSL certificate, see Replace the SSL Certificate for Your Load Balancer in the Classic Load Balancers Guide.
    */
   setLoadBalancerListenerSSLCertificate(callback?: (err: AWSError, data: ELB.Types.SetLoadBalancerListenerSSLCertificateOutput) => void): Request<ELB.Types.SetLoadBalancerListenerSSLCertificateOutput, AWSError>;
   /**
-   * Replaces the set of policies associated with the specified port on which the EC2 instance is listening with a new set of policies. At this time, only the back-end server authentication policy type can be applied to the instance ports; this policy type is composed of multiple public key policies. Each time you use SetLoadBalancerPoliciesForBackendServer to enable the policies, use the PolicyNames parameter to list the policies that you want to enable. You can use DescribeLoadBalancers or DescribeLoadBalancerPolicies to verify that the policy is associated with the EC2 instance. For more information about enabling back-end instance authentication, see Configure Back-end Instance Authentication in the Classic Load Balancer Guide. For more information about Proxy Protocol, see Configure Proxy Protocol Support in the Classic Load Balancer Guide.
+   * Replaces the set of policies associated with the specified port on which the EC2 instance is listening with a new set of policies. At this time, only the back-end server authentication policy type can be applied to the instance ports; this policy type is composed of multiple public key policies. Each time you use SetLoadBalancerPoliciesForBackendServer to enable the policies, use the PolicyNames parameter to list the policies that you want to enable. You can use DescribeLoadBalancers or DescribeLoadBalancerPolicies to verify that the policy is associated with the EC2 instance. For more information about enabling back-end instance authentication, see Configure Back-end Instance Authentication in the Classic Load Balancers Guide. For more information about Proxy Protocol, see Configure Proxy Protocol Support in the Classic Load Balancers Guide.
    */
   setLoadBalancerPoliciesForBackendServer(params: ELB.Types.SetLoadBalancerPoliciesForBackendServerInput, callback?: (err: AWSError, data: ELB.Types.SetLoadBalancerPoliciesForBackendServerOutput) => void): Request<ELB.Types.SetLoadBalancerPoliciesForBackendServerOutput, AWSError>;
   /**
-   * Replaces the set of policies associated with the specified port on which the EC2 instance is listening with a new set of policies. At this time, only the back-end server authentication policy type can be applied to the instance ports; this policy type is composed of multiple public key policies. Each time you use SetLoadBalancerPoliciesForBackendServer to enable the policies, use the PolicyNames parameter to list the policies that you want to enable. You can use DescribeLoadBalancers or DescribeLoadBalancerPolicies to verify that the policy is associated with the EC2 instance. For more information about enabling back-end instance authentication, see Configure Back-end Instance Authentication in the Classic Load Balancer Guide. For more information about Proxy Protocol, see Configure Proxy Protocol Support in the Classic Load Balancer Guide.
+   * Replaces the set of policies associated with the specified port on which the EC2 instance is listening with a new set of policies. At this time, only the back-end server authentication policy type can be applied to the instance ports; this policy type is composed of multiple public key policies. Each time you use SetLoadBalancerPoliciesForBackendServer to enable the policies, use the PolicyNames parameter to list the policies that you want to enable. You can use DescribeLoadBalancers or DescribeLoadBalancerPolicies to verify that the policy is associated with the EC2 instance. For more information about enabling back-end instance authentication, see Configure Back-end Instance Authentication in the Classic Load Balancers Guide. For more information about Proxy Protocol, see Configure Proxy Protocol Support in the Classic Load Balancers Guide.
    */
   setLoadBalancerPoliciesForBackendServer(callback?: (err: AWSError, data: ELB.Types.SetLoadBalancerPoliciesForBackendServerOutput) => void): Request<ELB.Types.SetLoadBalancerPoliciesForBackendServerOutput, AWSError>;
   /**
-   * Replaces the current set of policies for the specified load balancer port with the specified set of policies. To enable back-end server authentication, use SetLoadBalancerPoliciesForBackendServer. For more information about setting policies, see Update the SSL Negotiation Configuration, Duration-Based Session Stickiness, and Application-Controlled Session Stickiness in the Classic Load Balancer Guide.
+   * Replaces the current set of policies for the specified load balancer port with the specified set of policies. To enable back-end server authentication, use SetLoadBalancerPoliciesForBackendServer. For more information about setting policies, see Update the SSL Negotiation Configuration, Duration-Based Session Stickiness, and Application-Controlled Session Stickiness in the Classic Load Balancers Guide.
    */
   setLoadBalancerPoliciesOfListener(params: ELB.Types.SetLoadBalancerPoliciesOfListenerInput, callback?: (err: AWSError, data: ELB.Types.SetLoadBalancerPoliciesOfListenerOutput) => void): Request<ELB.Types.SetLoadBalancerPoliciesOfListenerOutput, AWSError>;
   /**
-   * Replaces the current set of policies for the specified load balancer port with the specified set of policies. To enable back-end server authentication, use SetLoadBalancerPoliciesForBackendServer. For more information about setting policies, see Update the SSL Negotiation Configuration, Duration-Based Session Stickiness, and Application-Controlled Session Stickiness in the Classic Load Balancer Guide.
+   * Replaces the current set of policies for the specified load balancer port with the specified set of policies. To enable back-end server authentication, use SetLoadBalancerPoliciesForBackendServer. For more information about setting policies, see Update the SSL Negotiation Configuration, Duration-Based Session Stickiness, and Application-Controlled Session Stickiness in the Classic Load Balancers Guide.
    */
   setLoadBalancerPoliciesOfListener(callback?: (err: AWSError, data: ELB.Types.SetLoadBalancerPoliciesOfListenerOutput) => void): Request<ELB.Types.SetLoadBalancerPoliciesOfListenerOutput, AWSError>;
   /**
    * Waits for the instanceDeregistered state by periodically calling the underlying ELB.describeInstanceHealthoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "instanceDeregistered", params: ELB.Types.DescribeEndPointStateInput, callback?: (err: AWSError, data: ELB.Types.DescribeEndPointStateOutput) => void): Request<ELB.Types.DescribeEndPointStateOutput, AWSError>;
+  waitFor(state: "instanceDeregistered", params: ELB.Types.DescribeEndPointStateInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ELB.Types.DescribeEndPointStateOutput) => void): Request<ELB.Types.DescribeEndPointStateOutput, AWSError>;
   /**
    * Waits for the instanceDeregistered state by periodically calling the underlying ELB.describeInstanceHealthoperation every 15 seconds (at most 40 times).
    */
@@ -254,7 +255,7 @@ declare class ELB extends Service {
   /**
    * Waits for the anyInstanceInService state by periodically calling the underlying ELB.describeInstanceHealthoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "anyInstanceInService", params: ELB.Types.DescribeEndPointStateInput, callback?: (err: AWSError, data: ELB.Types.DescribeEndPointStateOutput) => void): Request<ELB.Types.DescribeEndPointStateOutput, AWSError>;
+  waitFor(state: "anyInstanceInService", params: ELB.Types.DescribeEndPointStateInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ELB.Types.DescribeEndPointStateOutput) => void): Request<ELB.Types.DescribeEndPointStateOutput, AWSError>;
   /**
    * Waits for the anyInstanceInService state by periodically calling the underlying ELB.describeInstanceHealthoperation every 15 seconds (at most 40 times).
    */
@@ -262,7 +263,7 @@ declare class ELB extends Service {
   /**
    * Waits for the instanceInService state by periodically calling the underlying ELB.describeInstanceHealthoperation every 15 seconds (at most 40 times).
    */
-  waitFor(state: "instanceInService", params: ELB.Types.DescribeEndPointStateInput, callback?: (err: AWSError, data: ELB.Types.DescribeEndPointStateOutput) => void): Request<ELB.Types.DescribeEndPointStateOutput, AWSError>;
+  waitFor(state: "instanceInService", params: ELB.Types.DescribeEndPointStateInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: ELB.Types.DescribeEndPointStateOutput) => void): Request<ELB.Types.DescribeEndPointStateOutput, AWSError>;
   /**
    * Waits for the instanceInService state by periodically calling the underlying ELB.describeInstanceHealthoperation every 15 seconds (at most 40 times).
    */
@@ -435,7 +436,7 @@ declare namespace ELB {
      */
     LoadBalancerName: AccessPointName;
     /**
-     * The listeners. For more information, see Listeners for Your Classic Load Balancer in the Classic Load Balancer Guide.
+     * The listeners. For more information, see Listeners for Your Classic Load Balancer in the Classic Load Balancers Guide.
      */
     Listeners: Listeners;
     /**
@@ -455,7 +456,7 @@ declare namespace ELB {
      */
     Scheme?: LoadBalancerScheme;
     /**
-     * A list of tags to assign to the load balancer. For more information about tagging your load balancer, see Tag Your Classic Load Balancer in the Classic Load Balancer Guide.
+     * A list of tags to assign to the load balancer. For more information about tagging your load balancer, see Tag Your Classic Load Balancer in the Classic Load Balancers Guide.
      */
     Tags?: TagList;
   }
@@ -785,7 +786,7 @@ declare namespace ELB {
   }
   export interface Limit {
     /**
-     * The name of the limit. The possible values are:   classic-listeners   classic-load-balancers  
+     * The name of the limit. The possible values are:   classic-listeners   classic-load-balancers   classic-registered-instances  
      */
     Name?: Name;
     /**
@@ -830,19 +831,19 @@ declare namespace ELB {
   export type Listeners = Listener[];
   export interface LoadBalancerAttributes {
     /**
-     * If enabled, the load balancer routes the request traffic evenly across all instances regardless of the Availability Zones. For more information, see Configure Cross-Zone Load Balancing in the Classic Load Balancer Guide.
+     * If enabled, the load balancer routes the request traffic evenly across all instances regardless of the Availability Zones. For more information, see Configure Cross-Zone Load Balancing in the Classic Load Balancers Guide.
      */
     CrossZoneLoadBalancing?: CrossZoneLoadBalancing;
     /**
-     * If enabled, the load balancer captures detailed information of all requests and delivers the information to the Amazon S3 bucket that you specify. For more information, see Enable Access Logs in the Classic Load Balancer Guide.
+     * If enabled, the load balancer captures detailed information of all requests and delivers the information to the Amazon S3 bucket that you specify. For more information, see Enable Access Logs in the Classic Load Balancers Guide.
      */
     AccessLog?: AccessLog;
     /**
-     * If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy instance. For more information, see Configure Connection Draining in the Classic Load Balancer Guide.
+     * If enabled, the load balancer allows existing requests to complete before the load balancer shifts traffic away from a deregistered or unhealthy instance. For more information, see Configure Connection Draining in the Classic Load Balancers Guide.
      */
     ConnectionDraining?: ConnectionDraining;
     /**
-     * If enabled, the load balancer allows the connections to remain idle (no data is sent over the connection) for the specified duration. By default, Elastic Load Balancing maintains a 60-second idle connection timeout for both front-end and back-end connections of your load balancer. For more information, see Configure Idle Connection Timeout in the Classic Load Balancer Guide.
+     * If enabled, the load balancer allows the connections to remain idle (no data is sent over the connection) for the specified duration. By default, Elastic Load Balancing maintains a 60-second idle connection timeout for both front-end and back-end connections of your load balancer. For more information, see Configure Idle Connection Timeout in the Classic Load Balancers Guide.
      */
     ConnectionSettings?: ConnectionSettings;
     /**
@@ -860,7 +861,7 @@ declare namespace ELB {
      */
     DNSName?: DNSName;
     /**
-     * The DNS name of the load balancer. For more information, see Configure a Custom Domain Name in the Classic Load Balancer Guide.
+     * The DNS name of the load balancer. For more information, see Configure a Custom Domain Name in the Classic Load Balancers Guide.
      */
     CanonicalHostedZoneName?: DNSName;
     /**

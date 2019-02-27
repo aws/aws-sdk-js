@@ -1,353 +1,826 @@
 {
-  "version":"2.0",
-  "metadata":{
-    "apiVersion":"2017-10-26",
-    "endpointPrefix":"transcribe",
-    "jsonVersion":"1.1",
-    "protocol":"json",
-    "serviceFullName":"Amazon Transcribe Service",
-    "signatureVersion":"v4",
-    "signingName":"transcribe",
-    "targetPrefix":"Transcribe",
-    "uid":"transcribe-2017-10-26"
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2017-10-26",
+    "endpointPrefix": "transcribe",
+    "jsonVersion": "1.1",
+    "protocol": "json",
+    "serviceFullName": "Amazon Transcribe Service",
+    "serviceId": "Transcribe",
+    "signatureVersion": "v4",
+    "signingName": "transcribe",
+    "targetPrefix": "Transcribe",
+    "uid": "transcribe-2017-10-26"
   },
-  "operations":{
-    "GetTranscriptionJob":{
-      "name":"GetTranscriptionJob",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
+  "operations": {
+    "CreateVocabulary": {
+      "name": "CreateVocabulary",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
       },
-      "input":{"shape":"GetTranscriptionJobRequest"},
-      "output":{"shape":"GetTranscriptionJobResponse"},
-      "errors":[
-        {"shape":"BadRequestException"},
-        {"shape":"LimitExceededException"},
-        {"shape":"InternalFailureException"},
-        {"shape":"NotFoundException"}
+      "input": {
+        "shape": "CreateVocabularyRequest"
+      },
+      "output": {
+        "shape": "CreateVocabularyResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ConflictException"
+        }
       ],
-      "documentation":"<p>Returns information about a transcription job. To see the status of the job, check the <code>Status</code> field. If the status is <code>COMPLETE</code>, the job is finished and you can find the results at the location specified in the <code>TranscriptionFileUri</code> field.</p>"
+      "documentation": "<p>Creates a new custom vocabulary that you can use to change the way Amazon Transcribe handles transcription of an audio file. </p>"
     },
-    "ListTranscriptionJobs":{
-      "name":"ListTranscriptionJobs",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
+    "DeleteTranscriptionJob": {
+      "name": "DeleteTranscriptionJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
       },
-      "input":{"shape":"ListTranscriptionJobsRequest"},
-      "output":{"shape":"ListTranscriptionJobsResponse"},
-      "errors":[
-        {"shape":"BadRequestException"},
-        {"shape":"LimitExceededException"},
-        {"shape":"InternalFailureException"}
+      "input": {
+        "shape": "DeleteTranscriptionJobRequest"
+      },
+      "errors": [
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
       ],
-      "documentation":"<p>Lists transcription jobs with the specified status.</p>"
+      "documentation": "<p>Deletes a previously submitted transcription job along with any other generated results such as the transcription, models, and so on.</p>"
     },
-    "StartTranscriptionJob":{
-      "name":"StartTranscriptionJob",
-      "http":{
-        "method":"POST",
-        "requestUri":"/"
+    "DeleteVocabulary": {
+      "name": "DeleteVocabulary",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
       },
-      "input":{"shape":"StartTranscriptionJobRequest"},
-      "output":{"shape":"StartTranscriptionJobResponse"},
-      "errors":[
-        {"shape":"BadRequestException"},
-        {"shape":"LimitExceededException"},
-        {"shape":"InternalFailureException"},
-        {"shape":"ConflictException"}
+      "input": {
+        "shape": "DeleteVocabularyRequest"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
       ],
-      "documentation":"<p>Starts an asynchronous job to transcribe speech to text.</p>"
+      "documentation": "<p>Deletes a vocabulary from Amazon Transcribe. </p>"
+    },
+    "GetTranscriptionJob": {
+      "name": "GetTranscriptionJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetTranscriptionJobRequest"
+      },
+      "output": {
+        "shape": "GetTranscriptionJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "NotFoundException"
+        }
+      ],
+      "documentation": "<p>Returns information about a transcription job. To see the status of the job, check the <code>TranscriptionJobStatus</code> field. If the status is <code>COMPLETED</code>, the job is finished and you can find the results at the location specified in the <code>TranscriptionFileUri</code> field.</p>"
+    },
+    "GetVocabulary": {
+      "name": "GetVocabulary",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetVocabularyRequest"
+      },
+      "output": {
+        "shape": "GetVocabularyResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "BadRequestException"
+        }
+      ],
+      "documentation": "<p>Gets information about a vocabulary. </p>"
+    },
+    "ListTranscriptionJobs": {
+      "name": "ListTranscriptionJobs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTranscriptionJobsRequest"
+      },
+      "output": {
+        "shape": "ListTranscriptionJobsResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Lists transcription jobs with the specified status.</p>"
+    },
+    "ListVocabularies": {
+      "name": "ListVocabularies",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListVocabulariesRequest"
+      },
+      "output": {
+        "shape": "ListVocabulariesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Returns a list of vocabularies that match the specified criteria. If no criteria are specified, returns the entire list of vocabularies.</p>"
+    },
+    "StartTranscriptionJob": {
+      "name": "StartTranscriptionJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartTranscriptionJobRequest"
+      },
+      "output": {
+        "shape": "StartTranscriptionJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Starts an asynchronous job to transcribe speech to text. </p>"
+    },
+    "UpdateVocabulary": {
+      "name": "UpdateVocabulary",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateVocabularyRequest"
+      },
+      "output": {
+        "shape": "UpdateVocabularyResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Updates an existing vocabulary with new values. The <code>UpdateVocabulary</code> operation overwrites all of the existing information with the values that you provide in the request. </p>"
     }
   },
-  "shapes":{
-    "BadRequestException":{
-      "type":"structure",
-      "members":{
-        "Message":{"shape":"FailureReason"}
-      },
-      "documentation":"<p>There is a problem with one of the input fields. Check the S3 bucket name, make sure that the job name is not a duplicate, and confirm that you are using the correct file format. Then resend your request.</p>",
-      "exception":true
+  "shapes": {
+    "Boolean": {
+      "type": "boolean"
     },
-    "ConflictException":{
-      "type":"structure",
-      "members":{
-        "Message":{"shape":"String"}
-      },
-      "documentation":"<p>The <code>JobName</code> field is a duplicate of a previously entered job name. Resend your request with a different name.</p>",
-      "exception":true
-    },
-    "DateTime":{"type":"timestamp"},
-    "FailureReason":{"type":"string"},
-    "GetTranscriptionJobRequest":{
-      "type":"structure",
-      "required":["TranscriptionJobName"],
-      "members":{
-        "TranscriptionJobName":{
-          "shape":"TranscriptionJobName",
-          "documentation":"<p>The name of the job.</p>"
+    "CreateVocabularyRequest": {
+      "type": "structure",
+      "required": [
+        "VocabularyName",
+        "LanguageCode",
+        "Phrases"
+      ],
+      "members": {
+        "VocabularyName": {
+          "shape": "VocabularyName",
+          "documentation": "<p>The name of the vocabulary. The name must be unique within an AWS account. The name is case-sensitive.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language code of the vocabulary entries.</p>"
+        },
+        "Phrases": {
+          "shape": "Phrases",
+          "documentation": "<p>An array of strings that contains the vocabulary entries. </p>"
         }
       }
     },
-    "GetTranscriptionJobResponse":{
-      "type":"structure",
-      "members":{
-        "TranscriptionJob":{
-          "shape":"TranscriptionJob",
-          "documentation":"<p>An object that contains the results of the transcription job.</p>"
+    "CreateVocabularyResponse": {
+      "type": "structure",
+      "members": {
+        "VocabularyName": {
+          "shape": "VocabularyName",
+          "documentation": "<p>The name of the vocabulary.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language code of the vocabulary entries.</p>"
+        },
+        "VocabularyState": {
+          "shape": "VocabularyState",
+          "documentation": "<p>The processing state of the vocabulary. When the <code>VocabularyState</code> field contains <code>READY</code> the vocabulary is ready to be used in a <code>StartTranscriptionJob</code> request.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The date and time that the vocabulary was created.</p>"
+        },
+        "FailureReason": {
+          "shape": "FailureReason",
+          "documentation": "<p>If the <code>VocabularyState</code> field is <code>FAILED</code>, this field contains information about why the job failed.</p>"
         }
       }
     },
-    "InternalFailureException":{
-      "type":"structure",
-      "members":{
-        "Message":{"shape":"String"}
-      },
-      "documentation":"<p>There was an internal error. Check the error message and try your request again.</p>",
-      "exception":true,
-      "fault":true
+    "DateTime": {
+      "type": "timestamp"
     },
-    "LanguageCode":{
-      "type":"string",
-      "enum":[
+    "DeleteTranscriptionJobRequest": {
+      "type": "structure",
+      "required": [
+        "TranscriptionJobName"
+      ],
+      "members": {
+        "TranscriptionJobName": {
+          "shape": "TranscriptionJobName",
+          "documentation": "<p>The name of the transcription job to be deleted.</p>"
+        }
+      }
+    },
+    "DeleteVocabularyRequest": {
+      "type": "structure",
+      "required": [
+        "VocabularyName"
+      ],
+      "members": {
+        "VocabularyName": {
+          "shape": "VocabularyName",
+          "documentation": "<p>The name of the vocabulary to delete. </p>"
+        }
+      }
+    },
+    "FailureReason": {
+      "type": "string"
+    },
+    "GetTranscriptionJobRequest": {
+      "type": "structure",
+      "required": [
+        "TranscriptionJobName"
+      ],
+      "members": {
+        "TranscriptionJobName": {
+          "shape": "TranscriptionJobName",
+          "documentation": "<p>The name of the job.</p>"
+        }
+      }
+    },
+    "GetTranscriptionJobResponse": {
+      "type": "structure",
+      "members": {
+        "TranscriptionJob": {
+          "shape": "TranscriptionJob",
+          "documentation": "<p>An object that contains the results of the transcription job.</p>"
+        }
+      }
+    },
+    "GetVocabularyRequest": {
+      "type": "structure",
+      "required": [
+        "VocabularyName"
+      ],
+      "members": {
+        "VocabularyName": {
+          "shape": "VocabularyName",
+          "documentation": "<p>The name of the vocabulary to return information about. The name is case-sensitive.</p>"
+        }
+      }
+    },
+    "GetVocabularyResponse": {
+      "type": "structure",
+      "members": {
+        "VocabularyName": {
+          "shape": "VocabularyName",
+          "documentation": "<p>The name of the vocabulary to return.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language code of the vocabulary entries.</p>"
+        },
+        "VocabularyState": {
+          "shape": "VocabularyState",
+          "documentation": "<p>The processing state of the vocabulary.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The date and time that the vocabulary was last modified.</p>"
+        },
+        "FailureReason": {
+          "shape": "FailureReason",
+          "documentation": "<p>If the <code>VocabularyState</code> field is <code>FAILED</code>, this field contains information about why the job failed.</p>"
+        },
+        "DownloadUri": {
+          "shape": "Uri",
+          "documentation": "<p>The S3 location where the vocabulary is stored. Use this URI to get the contents of the vocabulary. The URI is available for a limited time.</p>"
+        }
+      }
+    },
+    "LanguageCode": {
+      "type": "string",
+      "enum": [
         "en-US",
-        "es-US"
+        "es-US",
+        "en-AU",
+        "fr-CA",
+        "en-GB",
+        "de-DE",
+        "pt-BR",
+        "fr-FR",
+        "it-IT"
       ]
     },
-    "LimitExceededException":{
-      "type":"structure",
-      "members":{
-        "Message":{"shape":"String"}
-      },
-      "documentation":"<p>Either you have sent too many requests or your input file is longer than 2 hours. Wait before you resend your request, or use a smaller file and resend the request.</p>",
-      "exception":true
-    },
-    "ListTranscriptionJobsRequest":{
-      "type":"structure",
-      "required":["Status"],
-      "members":{
-        "Status":{
-          "shape":"TranscriptionJobStatus",
-          "documentation":"<p>When specified, returns only transcription jobs with the specified status.</p>"
+    "ListTranscriptionJobsRequest": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "TranscriptionJobStatus",
+          "documentation": "<p>When specified, returns only transcription jobs with the specified status. Jobs are ordered by creation date, with the newest jobs returned first. If you don’t specify a status, Amazon Transcribe returns all transcription jobs ordered by creation date. </p>"
         },
-        "NextToken":{
-          "shape":"NextToken",
-          "documentation":"<p>If the result of the previous request to <code>ListTranscriptionJobs</code> was truncated, include the <code>NextToken</code> to fetch the next set of jobs.</p>"
+        "JobNameContains": {
+          "shape": "TranscriptionJobName",
+          "documentation": "<p>When specified, the jobs returned in the list are limited to jobs whose name contains the specified string.</p>"
         },
-        "MaxResults":{
-          "shape":"MaxResults",
-          "documentation":"<p>The maximum number of jobs to return in the response.</p>"
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the result of the previous request to <code>ListTranscriptionJobs</code> was truncated, include the <code>NextToken</code> to fetch the next set of jobs.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of jobs to return in the response. If there are fewer results in the list, this response contains only the actual results.</p>"
         }
       }
     },
-    "ListTranscriptionJobsResponse":{
-      "type":"structure",
-      "members":{
-        "Status":{
-          "shape":"TranscriptionJobStatus",
-          "documentation":"<p>The requested status of the jobs returned.</p>"
+    "ListTranscriptionJobsResponse": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "TranscriptionJobStatus",
+          "documentation": "<p>The requested status of the jobs returned.</p>"
         },
-        "NextToken":{
-          "shape":"NextToken",
-          "documentation":"<p>The <code>ListTranscriptionJobs</code> operation returns a page of jobs at a time. The size of the page is set by the <code>MaxResults</code> parameter. If there are more jobs in the list than the page size, Amazon Transcribe returns the <code>NextPage</code> token. Include the token in the next request to the <code>ListTranscriptionJobs</code> operation to return in the next page of jobs.</p>"
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The <code>ListTranscriptionJobs</code> operation returns a page of jobs at a time. The maximum size of the page is set by the <code>MaxResults</code> parameter. If there are more jobs in the list than the page size, Amazon Transcribe returns the <code>NextPage</code> token. Include the token in the next request to the <code>ListTranscriptionJobs</code> operation to return in the next page of jobs.</p>"
         },
-        "TranscriptionJobSummaries":{
-          "shape":"TranscriptionJobSummaries",
-          "documentation":"<p>A list of objects containing summary information for a transcription job.</p>"
+        "TranscriptionJobSummaries": {
+          "shape": "TranscriptionJobSummaries",
+          "documentation": "<p>A list of objects containing summary information for a transcription job.</p>"
         }
       }
     },
-    "MaxResults":{
-      "type":"integer",
-      "max":100,
-      "min":1
+    "ListVocabulariesRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the result of the previous request to <code>ListVocabularies</code> was truncated, include the <code>NextToken</code> to fetch the next set of jobs.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of vocabularies to return in the response. If there are fewer results in the list, this response contains only the actual results.</p>"
+        },
+        "StateEquals": {
+          "shape": "VocabularyState",
+          "documentation": "<p>When specified, only returns vocabularies with the <code>VocabularyState</code> field equal to the specified state.</p>"
+        },
+        "NameContains": {
+          "shape": "VocabularyName",
+          "documentation": "<p>When specified, the vocabularies returned in the list are limited to vocabularies whose name contains the specified string. The search is case-insensitive, <code>ListVocabularies</code> will return both \"vocabularyname\" and \"VocabularyName\" in the response list.</p>"
+        }
+      }
     },
-    "Media":{
-      "type":"structure",
-      "members":{
-        "MediaFileUri":{
-          "shape":"Uri",
-          "documentation":"<p>The S3 location of the input media file. The general form is:</p> <p> <code> https://&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt; </code> </p> <p>For example:</p> <p> <code>https://s3-us-west-2.amazonaws.com/examplebucket/example.mp4</code> </p> <p> <code>https://s3-us-west-2.amazonaws.com/examplebucket/mediadocs/example.mp4</code> </p>"
+    "ListVocabulariesResponse": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "TranscriptionJobStatus",
+          "documentation": "<p>The requested vocabulary state.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The <code>ListVocabularies</code> operation returns a page of vocabularies at a time. The maximum size of the page is set by the <code>MaxResults</code> parameter. If there are more jobs in the list than the page size, Amazon Transcribe returns the <code>NextPage</code> token. Include the token in the next request to the <code>ListVocabularies</code> operation to return in the next page of jobs.</p>"
+        },
+        "Vocabularies": {
+          "shape": "Vocabularies",
+          "documentation": "<p>A list of objects that describe the vocabularies that match the search criteria in the request.</p>"
+        }
+      }
+    },
+    "MaxResults": {
+      "type": "integer",
+      "max": 100,
+      "min": 1
+    },
+    "MaxSpeakers": {
+      "type": "integer",
+      "max": 10,
+      "min": 2
+    },
+    "Media": {
+      "type": "structure",
+      "members": {
+        "MediaFileUri": {
+          "shape": "Uri",
+          "documentation": "<p>The S3 location of the input media file. The URI must be in the same region as the API endpoint that you are calling. The general form is:</p> <p> <code> https://s3-&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt; </code> </p> <p>For example:</p> <p> <code>https://s3-us-east-1.amazonaws.com/examplebucket/example.mp4</code> </p> <p> <code>https://s3-us-east-1.amazonaws.com/examplebucket/mediadocs/example.mp4</code> </p> <p>For more information about S3 object names, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys\">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p>"
         }
       },
-      "documentation":"<p>Describes the input media file in a transcription request.</p>"
+      "documentation": "<p>Describes the input media file in a transcription request.</p>"
     },
-    "MediaFormat":{
-      "type":"string",
-      "enum":[
+    "MediaFormat": {
+      "type": "string",
+      "enum": [
         "mp3",
         "mp4",
         "wav",
         "flac"
       ]
     },
-    "MediaSampleRateHertz":{
-      "type":"integer",
-      "max":48000,
-      "min":8000
+    "MediaSampleRateHertz": {
+      "type": "integer",
+      "max": 48000,
+      "min": 8000
     },
-    "NextToken":{
-      "type":"string",
-      "max":8192
+    "NextToken": {
+      "type": "string",
+      "max": 8192
     },
-    "NotFoundException":{
-      "type":"structure",
-      "members":{
-        "Message":{"shape":"String"}
+    "OutputBucketName": {
+      "type": "string",
+      "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]"
+    },
+    "OutputLocationType": {
+      "type": "string",
+      "enum": [
+        "CUSTOMER_BUCKET",
+        "SERVICE_BUCKET"
+      ]
+    },
+    "Phrase": {
+      "type": "string",
+      "max": 256,
+      "min": 0
+    },
+    "Phrases": {
+      "type": "list",
+      "member": {
+        "shape": "Phrase"
+      }
+    },
+    "Settings": {
+      "type": "structure",
+      "members": {
+        "VocabularyName": {
+          "shape": "VocabularyName",
+          "documentation": "<p>The name of a vocabulary to use when processing the transcription job.</p>"
+        },
+        "ShowSpeakerLabels": {
+          "shape": "Boolean",
+          "documentation": "<p>Determines whether the transcription job uses speaker recognition to identify different speakers in the input audio. Speaker recognition labels individual speakers in the audio file. If you set the <code>ShowSpeakerLabels</code> field to true, you must also set the maximum number of speaker labels <code>MaxSpeakerLabels</code> field.</p> <p>You can't set both <code>ShowSpeakerLabels</code> and <code>ChannelIdentification</code> in the same request. If you set both, your request returns a <code>BadRequestException</code>.</p>"
+        },
+        "MaxSpeakerLabels": {
+          "shape": "MaxSpeakers",
+          "documentation": "<p>The maximum number of speakers to identify in the input audio. If there are more speakers in the audio than this number, multiple speakers will be identified as a single speaker. If you specify the <code>MaxSpeakerLabels</code> field, you must set the <code>ShowSpeakerLabels</code> field to true.</p>"
+        },
+        "ChannelIdentification": {
+          "shape": "Boolean",
+          "documentation": "<p>Instructs Amazon Transcribe to process each audio channel separately and then merge the transcription output of each channel into a single transcription. </p> <p>Amazon Transcribe also produces a transcription of each item detected on an audio channel, including the start time and end time of the item and alternative transcriptions of the item including the confidence that Amazon Transcribe has in the transcription.</p> <p>You can't set both <code>ShowSpeakerLabels</code> and <code>ChannelIdentification</code> in the same request. If you set both, your request returns a <code>BadRequestException</code>.</p>"
+        }
       },
-      "documentation":"<p>We can't find the requested job. Check the job name and try your request again.</p>",
-      "exception":true
+      "documentation": "<p>Provides optional settings for the <code>StartTranscriptionJob</code> operation.</p>"
     },
-    "StartTranscriptionJobRequest":{
-      "type":"structure",
-      "required":[
+    "StartTranscriptionJobRequest": {
+      "type": "structure",
+      "required": [
         "TranscriptionJobName",
         "LanguageCode",
         "MediaFormat",
         "Media"
       ],
-      "members":{
-        "TranscriptionJobName":{
-          "shape":"TranscriptionJobName",
-          "documentation":"<p>The name of the job. The name must be unique within an AWS account.</p>"
+      "members": {
+        "TranscriptionJobName": {
+          "shape": "TranscriptionJobName",
+          "documentation": "<p>The name of the job. Note that you can't use the strings \".\" or \"..\" by themselves as the job name. The name must also be unique within an AWS account.</p>"
         },
-        "LanguageCode":{
-          "shape":"LanguageCode",
-          "documentation":"<p>The language code for the language used in the input media file.</p>"
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language code for the language used in the input media file.</p>"
         },
-        "MediaSampleRateHertz":{
-          "shape":"MediaSampleRateHertz",
-          "documentation":"<p>The sample rate, in Hertz, of the audio track in the input media file. </p>"
+        "MediaSampleRateHertz": {
+          "shape": "MediaSampleRateHertz",
+          "documentation": "<p>The sample rate, in Hertz, of the audio track in the input media file. </p>"
         },
-        "MediaFormat":{
-          "shape":"MediaFormat",
-          "documentation":"<p>The format of the input media file.</p>"
+        "MediaFormat": {
+          "shape": "MediaFormat",
+          "documentation": "<p>The format of the input media file.</p>"
         },
-        "Media":{
-          "shape":"Media",
-          "documentation":"<p>An object that describes the input media for a transcription job.</p>"
+        "Media": {
+          "shape": "Media",
+          "documentation": "<p>An object that describes the input media for a transcription job.</p>"
+        },
+        "OutputBucketName": {
+          "shape": "OutputBucketName",
+          "documentation": "<p>The location where the transcription is stored.</p> <p>If you set the <code>OutputBucketName</code>, Amazon Transcribe puts the transcription in the specified S3 bucket. When you call the <a>GetTranscriptionJob</a> operation, the operation returns this location in the <code>TranscriptFileUri</code> field. The S3 bucket must have permissions that allow Amazon Transcribe to put files in the bucket. For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/access-control-managing-permissions.html#auth-role-iam-user\">Permissions Required for IAM User Roles</a>.</p> <p>If you don't set the <code>OutputBucketName</code>, Amazon Transcribe generates a pre-signed URL, a shareable URL that provides secure access to your transcription, and returns it in the <code>TranscriptFileUri</code> field. Use this URL to download the transcription.</p>"
+        },
+        "Settings": {
+          "shape": "Settings",
+          "documentation": "<p>A <code>Settings</code> object that provides optional settings for a transcription job.</p>"
         }
       }
     },
-    "StartTranscriptionJobResponse":{
-      "type":"structure",
-      "members":{
-        "TranscriptionJob":{
-          "shape":"TranscriptionJob",
-          "documentation":"<p>An object containing details of the asynchronous transcription job.</p>"
+    "StartTranscriptionJobResponse": {
+      "type": "structure",
+      "members": {
+        "TranscriptionJob": {
+          "shape": "TranscriptionJob",
+          "documentation": "<p>An object containing details of the asynchronous transcription job.</p>"
         }
       }
     },
-    "String":{"type":"string"},
-    "Transcript":{
-      "type":"structure",
-      "members":{
-        "TranscriptFileUri":{
-          "shape":"Uri",
-          "documentation":"<p>The S3 location where the transcription result is stored. The general form of this Uri is:</p> <p> <code> https://&lt;aws-region&gt;.amazonaws.com/&lt;bucket-name&gt;/&lt;keyprefix&gt;/&lt;objectkey&gt; </code> </p> <p>For example:</p> <p> <code>https://s3-us-west-2.amazonaws.com/examplebucket/example.json</code> </p> <p> <code>https://s3-us-west-2.amazonaws.com/examplebucket/mediadocs/example.json</code> </p>"
+    "Transcript": {
+      "type": "structure",
+      "members": {
+        "TranscriptFileUri": {
+          "shape": "Uri",
+          "documentation": "<p>The location where the transcription is stored.</p> <p>Use this URI to access the transcription. If you specified an S3 bucket in the <code>OutputBucketName</code> field when you created the job, this is the URI of that bucket. If you chose to store the transcription in Amazon Transcribe, this is a shareable URL that provides secure access to that location.</p>"
         }
       },
-      "documentation":"<p>Describes the output of a transcription job.</p>"
+      "documentation": "<p>Identifies the location of a transcription.</p>"
     },
-    "TranscriptionJob":{
-      "type":"structure",
-      "members":{
-        "TranscriptionJobName":{
-          "shape":"TranscriptionJobName",
-          "documentation":"<p>A name to identify the transcription job.</p>"
+    "TranscriptionJob": {
+      "type": "structure",
+      "members": {
+        "TranscriptionJobName": {
+          "shape": "TranscriptionJobName",
+          "documentation": "<p>The name of the transcription job.</p>"
         },
-        "TranscriptionJobStatus":{
-          "shape":"TranscriptionJobStatus",
-          "documentation":"<p>The identifier assigned to the job when it was created.</p>"
+        "TranscriptionJobStatus": {
+          "shape": "TranscriptionJobStatus",
+          "documentation": "<p>The status of the transcription job.</p>"
         },
-        "LanguageCode":{
-          "shape":"LanguageCode",
-          "documentation":"<p>The language code for the input speech.</p>"
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language code for the input speech.</p>"
         },
-        "MediaSampleRateHertz":{
-          "shape":"MediaSampleRateHertz",
-          "documentation":"<p>The sample rate, in Hertz, of the audio track in the input media file. </p>"
+        "MediaSampleRateHertz": {
+          "shape": "MediaSampleRateHertz",
+          "documentation": "<p>The sample rate, in Hertz, of the audio track in the input media file. </p>"
         },
-        "MediaFormat":{
-          "shape":"MediaFormat",
-          "documentation":"<p>The format of the input media file.</p>"
+        "MediaFormat": {
+          "shape": "MediaFormat",
+          "documentation": "<p>The format of the input media file.</p>"
         },
-        "Media":{
-          "shape":"Media",
-          "documentation":"<p>An object that describes the input media for a transcription job.</p>"
+        "Media": {
+          "shape": "Media",
+          "documentation": "<p>An object that describes the input media for the transcription job.</p>"
         },
-        "Transcript":{
-          "shape":"Transcript",
-          "documentation":"<p>An object that describes the output of the transcription job.</p>"
+        "Transcript": {
+          "shape": "Transcript",
+          "documentation": "<p>An object that describes the output of the transcription job.</p>"
         },
-        "CreationTime":{
-          "shape":"DateTime",
-          "documentation":"<p>Timestamp of the date and time that the job was created.</p>"
+        "CreationTime": {
+          "shape": "DateTime",
+          "documentation": "<p>A timestamp that shows when the job was created.</p>"
         },
-        "CompletionTime":{
-          "shape":"DateTime",
-          "documentation":"<p>Timestamp of the date and time that the job completed.</p>"
+        "CompletionTime": {
+          "shape": "DateTime",
+          "documentation": "<p>A timestamp that shows when the job was completed.</p>"
         },
-        "FailureReason":{
-          "shape":"FailureReason",
-          "documentation":"<p>If the <code>TranscriptionJobStatus</code> field is <code>FAILED</code>, this field contains information about why the job failed.</p>"
+        "FailureReason": {
+          "shape": "FailureReason",
+          "documentation": "<p>If the <code>TranscriptionJobStatus</code> field is <code>FAILED</code>, this field contains information about why the job failed.</p>"
+        },
+        "Settings": {
+          "shape": "Settings",
+          "documentation": "<p>Optional settings for the transcription job. Use these settings to turn on speaker recognition, to set the maximum number of speakers that should be identified and to specify a custom vocabulary to use when processing the transcription job.</p>"
         }
       },
-      "documentation":"<p>Describes an asynchronous transcription job that was created with the <code>StartTranscriptionJob</code> operation.</p>"
+      "documentation": "<p>Describes an asynchronous transcription job that was created with the <code>StartTranscriptionJob</code> operation. </p>"
     },
-    "TranscriptionJobName":{
-      "type":"string",
-      "max":200,
-      "min":1,
-      "pattern":"^[0-9a-zA-Z._-]+"
+    "TranscriptionJobName": {
+      "type": "string",
+      "max": 200,
+      "min": 1,
+      "pattern": "^[0-9a-zA-Z._-]+"
     },
-    "TranscriptionJobStatus":{
-      "type":"string",
-      "enum":[
+    "TranscriptionJobStatus": {
+      "type": "string",
+      "enum": [
         "IN_PROGRESS",
         "FAILED",
         "COMPLETED"
       ]
     },
-    "TranscriptionJobSummaries":{
-      "type":"list",
-      "member":{"shape":"TranscriptionJobSummary"}
+    "TranscriptionJobSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "TranscriptionJobSummary"
+      }
     },
-    "TranscriptionJobSummary":{
-      "type":"structure",
-      "members":{
-        "TranscriptionJobName":{
-          "shape":"TranscriptionJobName",
-          "documentation":"<p>The name assigned to the transcription job when it was created.</p>"
+    "TranscriptionJobSummary": {
+      "type": "structure",
+      "members": {
+        "TranscriptionJobName": {
+          "shape": "TranscriptionJobName",
+          "documentation": "<p>The name of the transcription job.</p>"
         },
-        "CreationTime":{
-          "shape":"DateTime",
-          "documentation":"<p>Timestamp of the date and time that the job was created.</p>"
+        "CreationTime": {
+          "shape": "DateTime",
+          "documentation": "<p>A timestamp that shows when the job was created.</p>"
         },
-        "CompletionTime":{
-          "shape":"DateTime",
-          "documentation":"<p>Timestamp of the date and time that the job completed.</p>"
+        "CompletionTime": {
+          "shape": "DateTime",
+          "documentation": "<p>A timestamp that shows when the job was completed.</p>"
         },
-        "LanguageCode":{
-          "shape":"LanguageCode",
-          "documentation":"<p>The language code for the input speech.</p>"
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language code for the input speech.</p>"
         },
-        "TranscriptionJobStatus":{
-          "shape":"TranscriptionJobStatus",
-          "documentation":"<p>The status of the transcription job. When the status is <code>COMPLETED</code>, use the <code>GetTranscriptionJob</code> operation to get the results of the transcription.</p>"
+        "TranscriptionJobStatus": {
+          "shape": "TranscriptionJobStatus",
+          "documentation": "<p>The status of the transcription job. When the status is <code>COMPLETED</code>, use the <code>GetTranscriptionJob</code> operation to get the results of the transcription.</p>"
         },
-        "FailureReason":{
-          "shape":"FailureReason",
-          "documentation":"<p>If the <code>TranscriptionJobStatus</code> field is <code>FAILED</code>, this field contains a description of the error.</p>"
+        "FailureReason": {
+          "shape": "FailureReason",
+          "documentation": "<p>If the <code>TranscriptionJobStatus</code> field is <code>FAILED</code>, a description of the error.</p>"
+        },
+        "OutputLocationType": {
+          "shape": "OutputLocationType",
+          "documentation": "<p>Indicates the location of the output of the transcription job.</p> <p>If the value is <code>CUSTOMER_BUCKET</code> then the location is the S3 bucket specified in the <code>outputBucketName</code> field when the transcription job was started with the <code>StartTranscriptionJob</code> operation.</p> <p>If the value is <code>SERVICE_BUCKET</code> then the output is stored by Amazon Transcribe and can be retrieved using the URI in the <code>GetTranscriptionJob</code> response's <code>TranscriptFileUri</code> field.</p>"
         }
       },
-      "documentation":"<p>Provides a summary of information about a transcription job.</p>"
+      "documentation": "<p>Provides a summary of information about a transcription job. .</p>"
     },
-    "Uri":{
-      "type":"string",
-      "max":2000,
-      "min":1
+    "UpdateVocabularyRequest": {
+      "type": "structure",
+      "required": [
+        "VocabularyName",
+        "LanguageCode",
+        "Phrases"
+      ],
+      "members": {
+        "VocabularyName": {
+          "shape": "VocabularyName",
+          "documentation": "<p>The name of the vocabulary to update. The name is case-sensitive.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language code of the vocabulary entries.</p>"
+        },
+        "Phrases": {
+          "shape": "Phrases",
+          "documentation": "<p>An array of strings containing the vocabulary entries.</p>"
+        }
+      }
+    },
+    "UpdateVocabularyResponse": {
+      "type": "structure",
+      "members": {
+        "VocabularyName": {
+          "shape": "VocabularyName",
+          "documentation": "<p>The name of the vocabulary that was updated.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language code of the vocabulary entries.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The date and time that the vocabulary was updated.</p>"
+        },
+        "VocabularyState": {
+          "shape": "VocabularyState",
+          "documentation": "<p>The processing state of the vocabulary. When the <code>VocabularyState</code> field contains <code>READY</code> the vocabulary is ready to be used in a <code>StartTranscriptionJob</code> request.</p>"
+        }
+      }
+    },
+    "Uri": {
+      "type": "string",
+      "max": 2000,
+      "min": 1
+    },
+    "Vocabularies": {
+      "type": "list",
+      "member": {
+        "shape": "VocabularyInfo"
+      }
+    },
+    "VocabularyInfo": {
+      "type": "structure",
+      "members": {
+        "VocabularyName": {
+          "shape": "VocabularyName",
+          "documentation": "<p>The name of the vocabulary.</p>"
+        },
+        "LanguageCode": {
+          "shape": "LanguageCode",
+          "documentation": "<p>The language code of the vocabulary entries.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The date and time that the vocabulary was last modified.</p>"
+        },
+        "VocabularyState": {
+          "shape": "VocabularyState",
+          "documentation": "<p>The processing state of the vocabulary. If the state is <code>READY</code> you can use the vocabulary in a <code>StartTranscriptionJob</code> request.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about a custom vocabulary. </p>"
+    },
+    "VocabularyName": {
+      "type": "string",
+      "max": 200,
+      "min": 1,
+      "pattern": "^[0-9a-zA-Z._-]+"
+    },
+    "VocabularyState": {
+      "type": "string",
+      "enum": [
+        "PENDING",
+        "READY",
+        "FAILED"
+      ]
     }
   },
-  "documentation":"<p>Operations and objects for transcribing speech to text.</p>"
+  "documentation": "<p>Operations and objects for transcribing speech to text.</p>"
 }

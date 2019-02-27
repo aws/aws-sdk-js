@@ -8,6 +8,9 @@
 
   ignoreRequire = require;
 
+  // import SDK for tests that do not access the AWS namespace
+  require('../index');
+
   if (typeof window === 'undefined') {
     AWS = ignoreRequire('../lib/aws');
     topLevelScope = global;
@@ -72,7 +75,7 @@
     spy = function() {
       spy.calls.push({
         object: this,
-        "arguments": Array.prototype.slice.call(arguments)
+        'arguments': Array.prototype.slice.call(arguments)
       });
       if (spy.callFn) {
         return spy.callFn.apply(spy.object, arguments);
@@ -168,10 +171,11 @@
   });
 
   MockServiceFromApi = function(customApi) {
-    customApi.metadata = {
-      endpointPrefix: 'mockservice',
-      signatureVersion: 'v4'
-    };
+    if (!customApi.metadata) {
+      customApi.metadata = {};
+      customApi.metadata.endpointPrefix = 'mockservice';
+      customApi.metadata.signatureVersion = 'v4';
+    }
     return AWS.Service.defineService('mock', {
       serviceIdentifier: 'mock',
       initialize: function(config) {
@@ -180,22 +184,11 @@
           accessKeyId: 'akid',
           secretAccessKey: 'secret'
         };
-        return this.config.region = 'mock-region';
-      },
-      setupRequestListeners: function(request) {
-        request.on('extractData', function(resp) {
-          return resp.data = (resp.httpResponse.body || '').toString();
-        });
-        return request.on('extractError', function(resp) {
-          return resp.error = {
-            code: (resp.httpResponse.body || '').toString() || resp.httpResponse.statusCode,
-            message: null
-          };
-        });
+        this.config.region = this.config.region || 'mock-region';
       },
       api: new AWS.Model.Api(customApi)
     });
-  }
+  };
 
   mockHttpSuccessfulResponse = function(status, headers, data, cb) {
     var httpResp;

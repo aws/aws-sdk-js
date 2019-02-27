@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "Amazon Elastic Container Service (ECS) now supports container health checks. Customers can now specify a docker container health check command and parameters in their task definition. ECS will monitor, report and take scheduling action based on the health status."
+    },
+    {
+        "type": "feature",
+        "category": "MigrationHub",
+        "description": "Unused key LABEL removed from ResourceAttrbute"
+    },
+    {
+        "type": "feature",
+        "category": "Pinpoint",
+        "description": "With this release, you can export endpoints from your Amazon Pinpoint projects. You can export a) all of the endpoints assigned to a project or b) the subset of endpoints assigned to a segment."
+    }
+]

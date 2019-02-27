@@ -420,11 +420,11 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   describeUserPool(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeUserPoolResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeUserPoolResponse, AWSError>;
   /**
-   * Client method for returning the configuration information and metadata of the specified user pool client.
+   * Client method for returning the configuration information and metadata of the specified user pool app client.
    */
   describeUserPoolClient(params: CognitoIdentityServiceProvider.Types.DescribeUserPoolClientRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeUserPoolClientResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeUserPoolClientResponse, AWSError>;
   /**
-   * Client method for returning the configuration information and metadata of the specified user pool client.
+   * Client method for returning the configuration information and metadata of the specified user pool app client.
    */
   describeUserPoolClient(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.DescribeUserPoolClientResponse) => void): Request<CognitoIdentityServiceProvider.Types.DescribeUserPoolClientResponse, AWSError>;
   /**
@@ -740,27 +740,35 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   updateUserAttributes(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateUserAttributesResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateUserAttributesResponse, AWSError>;
   /**
-   * Updates the specified user pool with the specified attributes.
+   * Updates the specified user pool with the specified attributes. If you don't provide a value for an attribute, it will be set to the default value. You can get a list of the current user pool settings with .
    */
   updateUserPool(params: CognitoIdentityServiceProvider.Types.UpdateUserPoolRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateUserPoolResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateUserPoolResponse, AWSError>;
   /**
-   * Updates the specified user pool with the specified attributes.
+   * Updates the specified user pool with the specified attributes. If you don't provide a value for an attribute, it will be set to the default value. You can get a list of the current user pool settings with .
    */
   updateUserPool(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateUserPoolResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateUserPoolResponse, AWSError>;
   /**
-   * Allows the developer to update the specified user pool client and password policy.
+   * Updates the specified user pool app client with the specified attributes. If you don't provide a value for an attribute, it will be set to the default value. You can get a list of the current user pool app client settings with .
    */
   updateUserPoolClient(params: CognitoIdentityServiceProvider.Types.UpdateUserPoolClientRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateUserPoolClientResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateUserPoolClientResponse, AWSError>;
   /**
-   * Allows the developer to update the specified user pool client and password policy.
+   * Updates the specified user pool app client with the specified attributes. If you don't provide a value for an attribute, it will be set to the default value. You can get a list of the current user pool app client settings with .
    */
   updateUserPoolClient(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateUserPoolClientResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateUserPoolClientResponse, AWSError>;
   /**
-   * Use this API to register a user's entered TOTP code and mark the user's software token MFA status as "verified" if successful,
+   * Updates the Secure Sockets Layer (SSL) certificate for the custom domain for your user pool. You can use this operation to provide the Amazon Resource Name (ARN) of a new certificate to Amazon Cognito. You cannot use it to change the domain for a user pool. A custom domain is used to host the Amazon Cognito hosted UI, which provides sign-up and sign-in pages for your application. When you set up a custom domain, you provide a certificate that you manage with AWS Certificate Manager (ACM). When necessary, you can use this operation to change the certificate that you applied to your custom domain. Usually, this is unnecessary following routine certificate renewal with ACM. When you renew your existing certificate in ACM, the ARN for your certificate remains the same, and your custom domain uses the new certificate automatically. However, if you replace your existing certificate with a new one, ACM gives the new certificate a new ARN. To apply the new certificate to your custom domain, you must provide this ARN to Amazon Cognito. When you add your new certificate in ACM, you must choose US East (N. Virginia) as the AWS Region. After you submit your request, Amazon Cognito requires up to 1 hour to distribute your new certificate to your custom domain. For more information about adding a custom domain to your user pool, see Using Your Own Domain for the Hosted UI.
+   */
+  updateUserPoolDomain(params: CognitoIdentityServiceProvider.Types.UpdateUserPoolDomainRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateUserPoolDomainResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateUserPoolDomainResponse, AWSError>;
+  /**
+   * Updates the Secure Sockets Layer (SSL) certificate for the custom domain for your user pool. You can use this operation to provide the Amazon Resource Name (ARN) of a new certificate to Amazon Cognito. You cannot use it to change the domain for a user pool. A custom domain is used to host the Amazon Cognito hosted UI, which provides sign-up and sign-in pages for your application. When you set up a custom domain, you provide a certificate that you manage with AWS Certificate Manager (ACM). When necessary, you can use this operation to change the certificate that you applied to your custom domain. Usually, this is unnecessary following routine certificate renewal with ACM. When you renew your existing certificate in ACM, the ARN for your certificate remains the same, and your custom domain uses the new certificate automatically. However, if you replace your existing certificate with a new one, ACM gives the new certificate a new ARN. To apply the new certificate to your custom domain, you must provide this ARN to Amazon Cognito. When you add your new certificate in ACM, you must choose US East (N. Virginia) as the AWS Region. After you submit your request, Amazon Cognito requires up to 1 hour to distribute your new certificate to your custom domain. For more information about adding a custom domain to your user pool, see Using Your Own Domain for the Hosted UI.
+   */
+  updateUserPoolDomain(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.UpdateUserPoolDomainResponse) => void): Request<CognitoIdentityServiceProvider.Types.UpdateUserPoolDomainResponse, AWSError>;
+  /**
+   * Use this API to register a user's entered TOTP code and mark the user's software token MFA status as "verified" if successful. The request takes an access token or a session string, but not both.
    */
   verifySoftwareToken(params: CognitoIdentityServiceProvider.Types.VerifySoftwareTokenRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.VerifySoftwareTokenResponse) => void): Request<CognitoIdentityServiceProvider.Types.VerifySoftwareTokenResponse, AWSError>;
   /**
-   * Use this API to register a user's entered TOTP code and mark the user's software token MFA status as "verified" if successful,
+   * Use this API to register a user's entered TOTP code and mark the user's software token MFA status as "verified" if successful. The request takes an access token or a session string, but not both.
    */
   verifySoftwareToken(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.VerifySoftwareTokenResponse) => void): Request<CognitoIdentityServiceProvider.Types.VerifySoftwareTokenResponse, AWSError>;
   /**
@@ -1079,7 +1087,7 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export interface AdminInitiateAuthResponse {
     /**
-     * The name of the challenge which you are responding to with this call. This is returned to you in the AdminInitiateAuth response if you need to pass another challenge.    SMS_MFA: Next challenge is to supply an SMS_MFA_CODE, delivered via SMS.    PASSWORD_VERIFIER: Next challenge is to supply PASSWORD_CLAIM_SIGNATURE, PASSWORD_CLAIM_SECRET_BLOCK, and TIMESTAMP after the client-side SRP calculations.    CUSTOM_CHALLENGE: This is returned if your custom authentication flow determines that the user should pass another challenge before tokens are issued.    DEVICE_SRP_AUTH: If device tracking was enabled on your user pool and the previous challenges were passed, this challenge is returned so that Amazon Cognito can start tracking this device.    DEVICE_PASSWORD_VERIFIER: Similar to PASSWORD_VERIFIER, but for devices only.    ADMIN_NO_SRP_AUTH: This is returned if you need to authenticate with USERNAME and PASSWORD directly. An app client must be enabled to use this flow.    NEW_PASSWORD_REQUIRED: For users which are required to change their passwords after successful first login. This challenge should be passed with NEW_PASSWORD and any other required attributes.  
+     * The name of the challenge which you are responding to with this call. This is returned to you in the AdminInitiateAuth response if you need to pass another challenge.    MFA_SETUP: If MFA is required, users who do not have at least one of the MFA methods set up are presented with an MFA_SETUP challenge. The user must set up at least one MFA type to continue to authenticate.    SELECT_MFA_TYPE: Selects the MFA type. Valid MFA options are SMS_MFA for text SMS MFA, and SOFTWARE_TOKEN_MFA for TOTP software token MFA.    SMS_MFA: Next challenge is to supply an SMS_MFA_CODE, delivered via SMS.    PASSWORD_VERIFIER: Next challenge is to supply PASSWORD_CLAIM_SIGNATURE, PASSWORD_CLAIM_SECRET_BLOCK, and TIMESTAMP after the client-side SRP calculations.    CUSTOM_CHALLENGE: This is returned if your custom authentication flow determines that the user should pass another challenge before tokens are issued.    DEVICE_SRP_AUTH: If device tracking was enabled on your user pool and the previous challenges were passed, this challenge is returned so that Amazon Cognito can start tracking this device.    DEVICE_PASSWORD_VERIFIER: Similar to PASSWORD_VERIFIER, but for devices only.    ADMIN_NO_SRP_AUTH: This is returned if you need to authenticate with USERNAME and PASSWORD directly. An app client must be enabled to use this flow.    NEW_PASSWORD_REQUIRED: For users which are required to change their passwords after successful first login. This challenge should be passed with NEW_PASSWORD and any other required attributes.  
      */
     ChallengeName?: ChallengeNameType;
     /**
@@ -1481,7 +1489,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     AccessToken?: TokenModelType;
     /**
-     * The expiration period of the authentication result.
+     * The expiration period of the authentication result in seconds.
      */
     ExpiresIn?: IntegerType;
     /**
@@ -1814,7 +1822,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     ReadAttributes?: ClientPermissionListType;
     /**
-     * The write attributes.
+     * The user pool attributes that the app client can write to. If your app client allows users to sign in through an identity provider, this array must include all attributes that are mapped to identity provider attributes. Amazon Cognito updates mapped attributes when users sign in to your application through an identity provider. If your app client lacks write access to a mapped attribute, Amazon Cognito throws an error when it attempts to update the attribute. For more information, see Specifying Identity Provider Attribute Mappings for Your User Pool.
      */
     WriteAttributes?: ClientPermissionListType;
     /**
@@ -1826,7 +1834,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SupportedIdentityProviders?: SupportedIdentityProvidersListType;
     /**
-     * A list of allowed callback URLs for the identity providers.
+     * A list of allowed redirect (callback) URLs for the identity providers. A redirect URI must:   Be an absolute URI.   Be registered with the authorization server.   Not include a fragment component.   See OAuth 2.0 - Redirection Endpoint. Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing purposes only. App callback URLs such as myapp://example are also supported.
      */
     CallbackURLs?: CallbackURLsListType;
     /**
@@ -1834,7 +1842,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     LogoutURLs?: LogoutURLsListType;
     /**
-     * The default redirect URI. Must be in the CallbackURLs list.
+     * The default redirect URI. Must be in the CallbackURLs list. A redirect URI must:   Be an absolute URI.   Be registered with the authorization server.   Not include a fragment component.   See OAuth 2.0 - Redirection Endpoint. Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing purposes only. App callback URLs such as myapp://example are also supported.
      */
     DefaultRedirectURI?: RedirectUrlType;
     /**
@@ -1869,8 +1877,16 @@ declare namespace CognitoIdentityServiceProvider {
      * The user pool ID.
      */
     UserPoolId: UserPoolIdType;
+    /**
+     * The configuration for a custom domain that hosts the sign-up and sign-in webpages for your application. Provide this parameter only if you want to use a custom domain for your user pool. Otherwise, you can exclude this parameter and use the Amazon Cognito hosted domain instead. For more information about the hosted domain and custom domains, see Configuring a User Pool Domain.
+     */
+    CustomDomainConfig?: CustomDomainConfigType;
   }
   export interface CreateUserPoolDomainResponse {
+    /**
+     * The Amazon CloudFront endpoint that you use as the target of the alias that you set up with your Domain Name Service (DNS) provider.
+     */
+    CloudFrontDomain?: DomainType;
   }
   export interface CreateUserPoolRequest {
     /**
@@ -1958,6 +1974,12 @@ declare namespace CognitoIdentityServiceProvider {
   }
   export type CustomAttributeNameType = string;
   export type CustomAttributesListType = SchemaAttributeType[];
+  export interface CustomDomainConfigType {
+    /**
+     * The Amazon Resource Name (ARN) of an AWS Certificate Manager SSL certificate. You use this certificate for the subdomain of your custom domain.
+     */
+    CertificateArn: ArnType;
+  }
   export type DateType = Date;
   export type DefaultEmailOptionType = "CONFIRM_WITH_LINK"|"CONFIRM_WITH_CODE"|string;
   export interface DeleteGroupRequest {
@@ -2209,7 +2231,7 @@ declare namespace CognitoIdentityServiceProvider {
     /**
      * The ARN of the CloudFront distribution.
      */
-    CloudFrontDistribution?: ArnType;
+    CloudFrontDistribution?: StringType;
     /**
      * The app version.
      */
@@ -2218,6 +2240,7 @@ declare namespace CognitoIdentityServiceProvider {
      * The domain status.
      */
     Status?: DomainStatusType;
+    CustomDomainConfig?: CustomDomainConfigType;
   }
   export type DomainStatusType = "CREATING"|"DELETING"|"UPDATING"|"ACTIVE"|"FAILED"|string;
   export type DomainType = string;
@@ -2575,7 +2598,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     CreationDate?: DateType;
   }
-  export type IdentityProviderTypeType = "SAML"|"Facebook"|"Google"|"LoginWithAmazon"|string;
+  export type IdentityProviderTypeType = "SAML"|"Facebook"|"Google"|"LoginWithAmazon"|"OIDC"|string;
   export type IdpIdentifierType = string;
   export type IdpIdentifiersListType = IdpIdentifierType[];
   export type ImageFileType = Buffer|Uint8Array|Blob|string;
@@ -2880,7 +2903,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     PaginationToken?: SearchPaginationTokenType;
     /**
-     * A filter string of the form "AttributeName Filter-Type "AttributeValue"". Quotation marks within the filter string must be escaped using the backslash (\) character. For example, "family_name = \"Reddy\"".    AttributeName: The name of the attribute to search for. You can only search for one attribute at a time.    Filter-Type: For an exact match, use =, for example, "given_name = \"Jon\"". For a prefix ("starts with") match, use ^=, for example, "given_name ^= \"Jon\"".     AttributeValue: The attribute value that must be matched for each user.   If the filter string is empty, ListUsers returns all users in the user pool. You can only search for the following standard attributes:    username (case-sensitive)    email     phone_number     name     given_name     family_name     preferred_username     cognito:user_status (called Enabled in the Console) (case-sensitive)    status (case-insensitive)    sub    Custom attributes are not searchable. For more information, see Searching for Users Using the ListUsers API and Examples of Using the ListUsers API in the Amazon Cognito Developer Guide.
+     * A filter string of the form "AttributeName Filter-Type "AttributeValue"". Quotation marks within the filter string must be escaped using the backslash (\) character. For example, "family_name = \"Reddy\"".    AttributeName: The name of the attribute to search for. You can only search for one attribute at a time.    Filter-Type: For an exact match, use =, for example, "given_name = \"Jon\"". For a prefix ("starts with") match, use ^=, for example, "given_name ^= \"Jon\"".     AttributeValue: The attribute value that must be matched for each user.   If the filter string is empty, ListUsers returns all users in the user pool. You can only search for the following standard attributes:    username (case-sensitive)    email     phone_number     name     given_name     family_name     preferred_username     cognito:user_status (called Status in the Console) (case-insensitive)    status (called Enabled in the Console) (case-sensitive)     sub    Custom attributes are not searchable. For more information, see Searching for Users Using the ListUsers API and Examples of Using the ListUsers API in the Amazon Cognito Developer Guide.
      */
     Filter?: UserFilterType;
   }
@@ -2922,7 +2945,6 @@ declare namespace CognitoIdentityServiceProvider {
      */
     EmailSubject?: EmailVerificationSubjectType;
   }
-  export type MessageType = string;
   export interface NewDeviceMetadataType {
     /**
      * The device key.
@@ -3223,7 +3245,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     DeveloperOnlyAttribute?: BooleanType;
     /**
-     * Specifies whether the attribute can be changed once it has been created.
+     * Specifies whether the value of the attribute can be changed. For any user pool attribute that's mapped to an identity provider attribute, you must set this parameter to true. Amazon Cognito updates mapped attributes when users sign in to your application through an identity provider. If an attribute is immutable, Amazon Cognito throws an error when it attempts to update the attribute. For more information, see Specifying Identity Provider Attribute Mappings for Your User Pool.
      */
     Mutable?: BooleanType;
     /**
@@ -3692,7 +3714,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SupportedIdentityProviders?: SupportedIdentityProvidersListType;
     /**
-     * A list of allowed callback URLs for the identity providers.
+     * A list of allowed redirect (callback) URLs for the identity providers. A redirect URI must:   Be an absolute URI.   Be registered with the authorization server.   Not include a fragment component.   See OAuth 2.0 - Redirection Endpoint. Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing purposes only. App callback URLs such as myapp://example are also supported.
      */
     CallbackURLs?: CallbackURLsListType;
     /**
@@ -3700,7 +3722,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     LogoutURLs?: LogoutURLsListType;
     /**
-     * The default redirect URI. Must be in the CallbackURLs list.
+     * The default redirect URI. Must be in the CallbackURLs list. A redirect URI must:   Be an absolute URI.   Be registered with the authorization server.   Not include a fragment component.   See OAuth 2.0 - Redirection Endpoint. Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing purposes only. App callback URLs such as myapp://example are also supported.
      */
     DefaultRedirectURI?: RedirectUrlType;
     /**
@@ -3725,6 +3747,26 @@ declare namespace CognitoIdentityServiceProvider {
      * The user pool client value from the response from the server when an update user pool client request is made.
      */
     UserPoolClient?: UserPoolClientType;
+  }
+  export interface UpdateUserPoolDomainRequest {
+    /**
+     * The domain name for the custom domain that hosts the sign-up and sign-in pages for your application. For example: auth.example.com.  This string can include only lowercase letters, numbers, and hyphens. Do not use a hyphen for the first or last character. Use periods to separate subdomain names.
+     */
+    Domain: DomainType;
+    /**
+     * The ID of the user pool that is associated with the custom domain that you are updating the certificate for.
+     */
+    UserPoolId: UserPoolIdType;
+    /**
+     * The configuration for a custom domain that hosts the sign-up and sign-in pages for your application. Use this object to specify an SSL certificate that is managed by ACM.
+     */
+    CustomDomainConfig: CustomDomainConfigType;
+  }
+  export interface UpdateUserPoolDomainResponse {
+    /**
+     * The Amazon CloudFront endpoint that Amazon Cognito set up when you added the custom domain to your user pool.
+     */
+    CloudFrontDomain?: DomainType;
   }
   export interface UpdateUserPoolRequest {
     /**
@@ -3927,7 +3969,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     SupportedIdentityProviders?: SupportedIdentityProvidersListType;
     /**
-     * A list of allowed callback URLs for the identity providers.
+     * A list of allowed redirect (callback) URLs for the identity providers. A redirect URI must:   Be an absolute URI.   Be registered with the authorization server.   Not include a fragment component.   See OAuth 2.0 - Redirection Endpoint. Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing purposes only. App callback URLs such as myapp://example are also supported.
      */
     CallbackURLs?: CallbackURLsListType;
     /**
@@ -3935,7 +3977,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     LogoutURLs?: LogoutURLsListType;
     /**
-     * The default redirect URI. Must be in the CallbackURLs list.
+     * The default redirect URI. Must be in the CallbackURLs list. A redirect URI must:   Be an absolute URI.   Be registered with the authorization server.   Not include a fragment component.   See OAuth 2.0 - Redirection Endpoint. Amazon Cognito requires HTTPS over HTTP except for http://localhost for testing purposes only. App callback URLs such as myapp://example are also supported.
      */
     DefaultRedirectURI?: RedirectUrlType;
     /**
@@ -4006,7 +4048,7 @@ declare namespace CognitoIdentityServiceProvider {
      */
     Policies?: UserPoolPolicyType;
     /**
-     * The AWS Lambda triggers associated with tue user pool.
+     * The AWS Lambda triggers associated with the user pool.
      */
     LambdaConfig?: LambdaConfigType;
     /**
@@ -4093,6 +4135,7 @@ declare namespace CognitoIdentityServiceProvider {
      * Holds the domain prefix if the user pool has a domain associated with it.
      */
     Domain?: DomainType;
+    CustomDomain?: DomainType;
     /**
      * The configuration for AdminCreateUser requests.
      */
@@ -4101,6 +4144,10 @@ declare namespace CognitoIdentityServiceProvider {
      * The user pool add-ons.
      */
     UserPoolAddOns?: UserPoolAddOnsType;
+    /**
+     * The Amazon Resource Name (ARN) for the user pool.
+     */
+    Arn?: ArnType;
   }
   export type UserStatusType = "UNCONFIRMED"|"CONFIRMED"|"ARCHIVED"|"COMPROMISED"|"UNKNOWN"|"RESET_REQUIRED"|"FORCE_CHANGE_PASSWORD"|string;
   export interface UserType {

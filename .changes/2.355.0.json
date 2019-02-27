@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Chime",
+        "description": "This release adds support in ListUsers API to filter the list by an email address."
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "Amazon Redshift provides the option to defer non-mandatory maintenance updates to a later date."
+    }
+]

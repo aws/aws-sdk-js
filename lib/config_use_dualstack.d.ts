@@ -4,5 +4,5 @@ export interface UseDualstackConfigOptions {
      * In most cases the network stack in the client environment will automatically prefer the AAAA record and make a connection using the IPv6 address. 
      * Note, however, that currently on Windows, the IPv4 address will be preferred.
      */
-    useDualStack?: boolean;
+    useDualstack?: boolean;
 }

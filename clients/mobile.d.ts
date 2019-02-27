@@ -171,7 +171,6 @@ declare namespace Mobile {
     details?: ProjectDetails;
   }
   export type DownloadUrl = string;
-  export type ErrorMessage = string;
   export interface ExportBundleRequest {
     /**
      *  Unique bundle identifier. 

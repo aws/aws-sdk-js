@@ -41,7 +41,7 @@
           Name: 'abc',
           State: 'Enabled'
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Name>abc</Name>\n  <State>Enabled</State>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Name>abc</Name>\n  <State>Enabled</State>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
       it('ignores null input', function() {
@@ -76,7 +76,7 @@
             State: null
           }
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Struct/>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Struct/>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
       it('orders xml members by the order they appear in the rules', function() {
@@ -94,7 +94,7 @@
           State: 'Disabled',
           Count: 123
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Count>123</Count>\n  <State>Disabled</State>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Count>123</Count>\n  <State>Disabled</State>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
       it('can serializes structures into XML', function() {
@@ -118,7 +118,7 @@
           },
           Name: 'john'
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Name>john</Name>\n  <Details>\n    <Abc>abc</Abc>\n    <Xyz>xyz</Xyz>\n  </Details>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Name>john</Name>\n  <Details>\n    <Abc>abc</Abc>\n    <Xyz>xyz</Xyz>\n  </Details>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
       it('serializes empty structures as empty element', function() {
@@ -137,7 +137,7 @@
         params = {
           Config: {}
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Config/>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Config/>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
       return it('does not serialize missing members', function() {
@@ -158,7 +158,7 @@
             Foo: 'abc'
           }
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Config>\n    <Foo>abc</Foo>\n  </Config>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Config>\n    <Foo>abc</Foo>\n  </Config>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
     });
@@ -176,7 +176,7 @@
         params = {
           Aliases: ['abc', 'mno', 'xyz']
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Aliases>\n    <member>abc</member>\n    <member>mno</member>\n    <member>xyz</member>\n  </Aliases>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Aliases>\n    <member>abc</member>\n    <member>mno</member>\n    <member>xyz</member>\n  </Aliases>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
       it('serializes lists (custom member names)', function() {
@@ -194,7 +194,7 @@
         params = {
           Aliases: ['abc', 'mno', 'xyz']
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Aliases>\n    <Alias>abc</Alias>\n    <Alias>mno</Alias>\n    <Alias>xyz</Alias>\n  </Aliases>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Aliases>\n    <Alias>abc</Alias>\n    <Alias>mno</Alias>\n    <Alias>xyz</Alias>\n  </Aliases>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
       it('includes lists elements even if they have no members', function() {
@@ -212,7 +212,7 @@
         params = {
           Aliases: []
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Aliases/>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Aliases/>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
       return it('serializes lists of structures', function() {
@@ -247,7 +247,7 @@
             }
           ]
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Points>\n    <Point>\n      <X>1.2</X>\n      <Y>2.1</Y>\n    </Point>\n    <Point>\n      <X>3.4</X>\n      <Y>4.3</Y>\n    </Point>\n  </Points>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Points>\n    <Point>\n      <X>1.2</X>\n      <Y>2.1</Y>\n    </Point>\n    <Point>\n      <X>3.4</X>\n      <Y>4.3</Y>\n    </Point>\n  </Points>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
     });
@@ -266,7 +266,7 @@
         params = {
           Aliases: ['abc', 'mno', 'xyz']
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Aliases>abc</Aliases>\n  <Aliases>mno</Aliases>\n  <Aliases>xyz</Aliases>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Aliases>abc</Aliases>\n  <Aliases>mno</Aliases>\n  <Aliases>xyz</Aliases>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
       it('serializes lists (custom member names)', function() {
@@ -285,7 +285,7 @@
         params = {
           Aliases: ['abc', 'mno', 'xyz']
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Alias>abc</Alias>\n  <Alias>mno</Alias>\n  <Alias>xyz</Alias>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Alias>abc</Alias>\n  <Alias>mno</Alias>\n  <Alias>xyz</Alias>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
       it('omits lists elements when no members are given', function() {
@@ -341,7 +341,7 @@
             }
           ]
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Point>\n    <X>1.2</X>\n    <Y>2.1</Y>\n  </Point>\n  <Point>\n    <X>3.4</X>\n    <Y>4.3</Y>\n  </Point>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Point>\n    <X>1.2</X>\n    <Y>2.1</Y>\n  </Point>\n  <Point>\n    <X>3.4</X>\n    <Y>4.3</Y>\n  </Point>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
     });
@@ -369,7 +369,7 @@
             B: 'b'
           }
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Items>\n    <entry>\n      <key>A</key>\n      <value>a</value>\n    </entry>\n    <entry>\n      <key>B</key>\n      <value>b</value>\n    </entry>\n  </Items>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Items>\n    <entry>\n      <key>A</key>\n      <value>a</value>\n    </entry>\n    <entry>\n      <key>B</key>\n      <value>b</value>\n    </entry>\n  </Items>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
       it('allows renamed map keys and values', function() {
@@ -396,7 +396,7 @@
             }
           }
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Items>\n    <entry>\n      <MKEY>A</MKEY>\n      <MVALUE>a</MVALUE>\n    </entry>\n    <entry>\n      <MKEY>B</MKEY>\n      <MVALUE>b</MVALUE>\n    </entry>\n  </Items>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Items>\n    <entry>\n      <MKEY>A</MKEY>\n      <MVALUE>a</MVALUE>\n    </entry>\n    <entry>\n      <MKEY>B</MKEY>\n      <MVALUE>b</MVALUE>\n    </entry>\n  </Items>\n</Data>';
         return matchXML(toXML(otherRules, params), xml);
       });
       it('ignores null', function() {
@@ -436,7 +436,7 @@
             B: 'b'
           }
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Item>\n    <key>A</key>\n    <value>a</value>\n  </Item>\n  <Item>\n    <key>B</key>\n    <value>b</value>\n  </Item>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Item>\n    <key>A</key>\n    <value>a</value>\n  </Item>\n  <Item>\n    <key>B</key>\n    <value>b</value>\n  </Item>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
       it('allows renamed map keys and values', function() {
@@ -465,7 +465,7 @@
             }
           }
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Item>\n    <MKEY>A</MKEY>\n    <MVALUE>a</MVALUE>\n  </Item>\n  <Item>\n    <MKEY>B</MKEY>\n    <MVALUE>b</MVALUE>\n  </Item>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Item>\n    <MKEY>A</MKEY>\n    <MVALUE>a</MVALUE>\n  </Item>\n  <Item>\n    <MKEY>B</MKEY>\n    <MVALUE>b</MVALUE>\n  </Item>\n</Data>';
         return matchXML(toXML(otherRules, params), xml);
       });
       it('ignores null', function() {
@@ -492,7 +492,7 @@
         params = {
           Count: 123.0
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Count>123</Count>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Count>123</Count>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
       it('floats', function() {
@@ -507,7 +507,7 @@
         params = {
           Count: 123.123
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Count>123.123</Count>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Count>123.123</Count>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
       return it('ints and floats formatted as numbers', function() {
@@ -526,7 +526,7 @@
           CountI: '123',
           CountF: '1.23'
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <CountI>123</CountI>\n  <CountF>1.23</CountF>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <CountI>123</CountI>\n  <CountF>1.23</CountF>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
     });
@@ -543,7 +543,7 @@
         params = {
           Enabled: true
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Enabled>true</Enabled>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Enabled>true</Enabled>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
       return it('false', function() {
@@ -558,7 +558,7 @@
         params = {
           Enabled: false
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Enabled>false</Enabled>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Enabled>false</Enabled>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
     });
@@ -568,55 +568,22 @@
       time.setMilliseconds(0);
       it('iso8601', function() {
         var params, rules, xml;
-        api.timestampFormat = 'iso8601';
         rules = {
           members: {
             Expires: {
-              type: 'timestamp'
+              type: 'timestamp',
+              timestampFormat: 'iso8601'
             }
           }
         };
         params = {
           Expires: time
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Expires>" + (AWS.util.date.iso8601(time)) + "</Expires>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Expires>' + (AWS.util.date.iso8601(time)) + '</Expires>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
       it('rfc822', function() {
         var params, rules, xml;
-        api.timestampFormat = 'rfc822';
-        rules = {
-          members: {
-            Expires: {
-              type: 'timestamp'
-            }
-          }
-        };
-        params = {
-          Expires: time
-        };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Expires>" + (AWS.util.date.rfc822(time)) + "</Expires>\n</Data>";
-        return matchXML(toXML(rules, params), xml);
-      });
-      it('unix timestamp', function() {
-        var params, rules, xml;
-        api.timestampFormat = 'unixTimestamp';
-        rules = {
-          members: {
-            Expires: {
-              type: 'timestamp'
-            }
-          }
-        };
-        params = {
-          Expires: time
-        };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Expires>" + (AWS.util.date.unixTimestamp(time)) + "</Expires>\n</Data>";
-        return matchXML(toXML(rules, params), xml);
-      });
-      return it('follows the forat given on the shape', function() {
-        var params, rules, xml;
-        api.timestampFormat = 'unixTimestamp';
         rules = {
           members: {
             Expires: {
@@ -628,7 +595,39 @@
         params = {
           Expires: time
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Expires>" + (AWS.util.date.rfc822(time)) + "</Expires>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Expires>' + (AWS.util.date.rfc822(time)) + '</Expires>\n</Data>';
+        return matchXML(toXML(rules, params), xml);
+      });
+      it('unix timestamp', function() {
+        var params, rules, xml;
+        rules = {
+          members: {
+            Expires: {
+              type: 'timestamp',
+              timestampFormat: 'unixTimestamp'
+            }
+          }
+        };
+        params = {
+          Expires: time
+        };
+        xml = '<Data xmlns="' + xmlns + '">\n  <Expires>' + (AWS.util.date.unixTimestamp(time)) + '</Expires>\n</Data>';
+        return matchXML(toXML(rules, params), xml);
+      });
+      return it('follows the forat given on the shape', function() {
+        var params, rules, xml;
+        rules = {
+          members: {
+            Expires: {
+              type: 'timestamp',
+              timestampFormat: 'rfc822'
+            }
+          }
+        };
+        params = {
+          Expires: time
+        };
+        xml = '<Data xmlns="' + xmlns + '">\n  <Expires>' + (AWS.util.date.rfc822(time)) + '</Expires>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
     });
@@ -658,7 +657,7 @@
             Attr: 'abc'
           }
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Config attr:name=\"abc\"><Foo>bar</Foo></Config>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Config attr:name="abc"><Foo>bar</Foo></Config>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
     });
@@ -685,7 +684,7 @@
             Foo: 'bar'
           }
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Config xmlns=\"URI\"><Foo>bar</Foo></Config>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Config xmlns="URI"><Foo>bar</Foo></Config>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
       it('applies namespace prefixes to the xmlns attribute', function() {
@@ -711,7 +710,7 @@
             Foo: 'bar'
           }
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Config xmlns:xsi=\"URI\"><Foo>bar</Foo></Config>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Config xmlns:xsi="URI"><Foo>bar</Foo></Config>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
       return it('can apply namespaces to elements that have other attributes', function() {
@@ -743,7 +742,7 @@
             Bar: 'xyz'
           }
         };
-        xml = "<Data xmlns=\"" + xmlns + "\">\n  <Config xmlns:xsi=\"URI\" xsi:label=\"xyz\"><Foo>abc</Foo></Config>\n</Data>";
+        xml = '<Data xmlns="' + xmlns + '">\n  <Config xmlns:xsi="URI" xsi:label="xyz"><Foo>abc</Foo></Config>\n</Data>';
         return matchXML(toXML(rules, params), xml);
       });
     });

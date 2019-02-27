@@ -64,7 +64,6 @@ declare namespace MarketplaceEntitlementService {
      */
     StringValue?: String;
   }
-  export type ErrorMessage = string;
   export type FilterValue = string;
   export type FilterValueList = FilterValue[];
   export type GetEntitlementFilterName = "CUSTOMER_IDENTIFIER"|"DIMENSION"|string;

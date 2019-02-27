@@ -60,11 +60,11 @@ declare class ElasticBeanstalk extends Service {
    */
   createApplicationVersion(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage) => void): Request<ElasticBeanstalk.Types.ApplicationVersionDescriptionMessage, AWSError>;
   /**
-   * Creates a configuration template. Templates are associated with a specific application and are used to deploy different versions of the application with the same configuration settings. Related Topics    DescribeConfigurationOptions     DescribeConfigurationSettings     ListAvailableSolutionStacks   
+   * Creates a configuration template. Templates are associated with a specific application and are used to deploy different versions of the application with the same configuration settings. Templates aren't associated with any environment. The EnvironmentName response element is always null. Related Topics    DescribeConfigurationOptions     DescribeConfigurationSettings     ListAvailableSolutionStacks   
    */
   createConfigurationTemplate(params: ElasticBeanstalk.Types.CreateConfigurationTemplateMessage, callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsDescription) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsDescription, AWSError>;
   /**
-   * Creates a configuration template. Templates are associated with a specific application and are used to deploy different versions of the application with the same configuration settings. Related Topics    DescribeConfigurationOptions     DescribeConfigurationSettings     ListAvailableSolutionStacks   
+   * Creates a configuration template. Templates are associated with a specific application and are used to deploy different versions of the application with the same configuration settings. Templates aren't associated with any environment. The EnvironmentName response element is always null. Related Topics    DescribeConfigurationOptions     DescribeConfigurationSettings     ListAvailableSolutionStacks   
    */
   createConfigurationTemplate(callback?: (err: AWSError, data: ElasticBeanstalk.Types.ConfigurationSettingsDescription) => void): Request<ElasticBeanstalk.Types.ConfigurationSettingsDescription, AWSError>;
   /**
@@ -127,6 +127,10 @@ declare class ElasticBeanstalk extends Service {
    * Deletes the specified version of a custom platform.
    */
   deletePlatformVersion(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DeletePlatformVersionResult) => void): Request<ElasticBeanstalk.Types.DeletePlatformVersionResult, AWSError>;
+  /**
+   * Returns attributes related to AWS Elastic Beanstalk that are associated with the calling AWS account. The result currently has one set of attributes—resource quotas.
+   */
+  describeAccountAttributes(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeAccountAttributesResult) => void): Request<ElasticBeanstalk.Types.DescribeAccountAttributesResult, AWSError>;
   /**
    * Retrieve a list of application versions.
    */
@@ -208,11 +212,11 @@ declare class ElasticBeanstalk extends Service {
    */
   describeEvents(callback?: (err: AWSError, data: ElasticBeanstalk.Types.EventDescriptionsMessage) => void): Request<ElasticBeanstalk.Types.EventDescriptionsMessage, AWSError>;
   /**
-   * Retrives detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires enhanced health reporting.
+   * Retrieves detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires enhanced health reporting.
    */
   describeInstancesHealth(params: ElasticBeanstalk.Types.DescribeInstancesHealthRequest, callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeInstancesHealthResult) => void): Request<ElasticBeanstalk.Types.DescribeInstancesHealthResult, AWSError>;
   /**
-   * Retrives detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires enhanced health reporting.
+   * Retrieves detailed information about the health of instances in your AWS Elastic Beanstalk. This operation requires enhanced health reporting.
    */
   describeInstancesHealth(callback?: (err: AWSError, data: ElasticBeanstalk.Types.DescribeInstancesHealthResult) => void): Request<ElasticBeanstalk.Types.DescribeInstancesHealthResult, AWSError>;
   /**
@@ -364,7 +368,12 @@ declare namespace ElasticBeanstalk {
   export type ActionHistoryStatus = "Completed"|"Failed"|"Unknown"|string;
   export type ActionStatus = "Scheduled"|"Pending"|"Running"|"Unknown"|string;
   export type ActionType = "InstanceRefresh"|"PlatformUpdate"|"Unknown"|string;
+  export type ApplicationArn = string;
   export interface ApplicationDescription {
+    /**
+     * The Amazon Resource Name (ARN) of the application.
+     */
+    ApplicationArn?: ApplicationArn;
     /**
      * The name of the application.
      */
@@ -429,7 +438,7 @@ declare namespace ElasticBeanstalk {
   export type ApplicationNamesList = ApplicationName[];
   export interface ApplicationResourceLifecycleConfig {
     /**
-     * The ARN of an IAM service role that Elastic Beanstalk has permission to assume.
+     * The ARN of an IAM service role that Elastic Beanstalk has permission to assume. The ServiceRole property is required the first time that you provide a VersionLifecycleConfig for the application in one of the supporting calls (CreateApplication or UpdateApplicationResourceLifecycle). After you provide it once, in either one of the calls, Elastic Beanstalk persists the Service Role with the application, and you don't need to specify it again in subsequent UpdateApplicationResourceLifecycle calls. You can, however, specify it in subsequent calls to change the Service Role to another value.
      */
     ServiceRole?: String;
     /**
@@ -447,7 +456,12 @@ declare namespace ElasticBeanstalk {
      */
     ResourceLifecycleConfig?: ApplicationResourceLifecycleConfig;
   }
+  export type ApplicationVersionArn = string;
   export interface ApplicationVersionDescription {
+    /**
+     * The Amazon Resource Name (ARN) of the application version.
+     */
+    ApplicationVersionArn?: ApplicationVersionArn;
     /**
      * The name of the application to which the application version belongs.
      */
@@ -481,7 +495,7 @@ declare namespace ElasticBeanstalk {
      */
     DateUpdated?: UpdateDate;
     /**
-     * The processing status of the application version.
+     * The processing status of the application version. Reflects the state of the application version during its creation. Many of the values are only applicable if you specified True for the Process parameter of the CreateApplicationVersion action. The following list describes the possible values.    Unprocessed – Application version wasn't pre-processed or validated. Elastic Beanstalk will validate configuration files during deployment of the application version to an environment.    Processing – Elastic Beanstalk is currently processing the application version.    Building – Application version is currently undergoing an AWS CodeBuild build.    Processed – Elastic Beanstalk was successfully pre-processed and validated.    Failed – Either the AWS CodeBuild build failed or configuration files didn't pass validation. This application version isn't usable.  
      */
     Status?: ApplicationVersionStatus;
   }
@@ -592,11 +606,11 @@ declare namespace ElasticBeanstalk {
      */
     User?: NullableDouble;
     /**
-     * Percentage of time that the CPU has spent in the Nice state over the last 10 seconds.
+     * Available on Linux environments only. Percentage of time that the CPU has spent in the Nice state over the last 10 seconds.
      */
     Nice?: NullableDouble;
     /**
-     * Percentage of time that the CPU has spent in the System state over the last 10 seconds.
+     * Available on Linux environments only. Percentage of time that the CPU has spent in the System state over the last 10 seconds.
      */
     System?: NullableDouble;
     /**
@@ -604,17 +618,21 @@ declare namespace ElasticBeanstalk {
      */
     Idle?: NullableDouble;
     /**
-     * Percentage of time that the CPU has spent in the I/O Wait state over the last 10 seconds.
+     * Available on Linux environments only. Percentage of time that the CPU has spent in the I/O Wait state over the last 10 seconds.
      */
     IOWait?: NullableDouble;
     /**
-     * Percentage of time that the CPU has spent in the IRQ state over the last 10 seconds.
+     * Available on Linux environments only. Percentage of time that the CPU has spent in the IRQ state over the last 10 seconds.
      */
     IRQ?: NullableDouble;
     /**
-     * Percentage of time that the CPU has spent in the SoftIRQ state over the last 10 seconds.
+     * Available on Linux environments only. Percentage of time that the CPU has spent in the SoftIRQ state over the last 10 seconds.
      */
     SoftIRQ?: NullableDouble;
+    /**
+     * Available on Windows environments only. Percentage of time that the CPU has spent in the Privileged state over the last 10 seconds.
+     */
+    Privileged?: NullableDouble;
   }
   export type Cause = string;
   export type Causes = Cause[];
@@ -839,7 +857,7 @@ declare namespace ElasticBeanstalk {
      */
     AutoCreateApplication?: AutoCreateApplication;
     /**
-     * Preprocesses and validates the environment manifest (env.yaml) and configuration files (*.config files in the .ebextensions folder) in the source bundle. Validating configuration files can identify issues prior to deploying the application version to an environment.  The Process option validates Elastic Beanstalk configuration files. It doesn't validate your application's configuration files, like proxy server or Docker configuration. 
+     * Pre-processes and validates the environment manifest (env.yaml) and configuration files (*.config files in the .ebextensions folder) in the source bundle. Validating configuration files can identify issues prior to deploying the application version to an environment. You must turn processing on for application versions that you create using AWS CodeBuild or AWS CodeCommit. For application versions built from a source bundle in Amazon S3, processing is optional.  The Process option validates Elastic Beanstalk configuration files. It doesn't validate your application's configuration files, like proxy server or Docker configuration. 
      */
     Process?: ApplicationVersionProccess;
   }
@@ -915,7 +933,7 @@ declare namespace ElasticBeanstalk {
      */
     TemplateName?: ConfigurationTemplateName;
     /**
-     * This is an alternative to specifying a template name. If specified, AWS Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack.
+     * This is an alternative to specifying a template name. If specified, AWS Elastic Beanstalk sets the configuration values to the default values associated with the specified solution stack. For a list of current solution stacks, see Elastic Beanstalk Supported Platforms.
      */
     SolutionStackName?: SolutionStackName;
     /**
@@ -1059,6 +1077,12 @@ declare namespace ElasticBeanstalk {
     DeploymentTime?: DeploymentTimestamp;
   }
   export type DeploymentTimestamp = Date;
+  export interface DescribeAccountAttributesResult {
+    /**
+     * The Elastic Beanstalk resource quotas associated with the calling AWS account.
+     */
+    ResourceQuotas?: ResourceQuotas;
+  }
   export interface DescribeApplicationVersionsMessage {
     /**
      * Specify an application name to show only application versions for that application.
@@ -1333,7 +1357,7 @@ declare namespace ElasticBeanstalk {
   }
   export interface DescribeInstancesHealthResult {
     /**
-     * Detailed health information about each instance.
+     * Detailed health information about each instance. The output differs slightly between Linux and Windows environments. There is a difference in the members that are supported under the &lt;CPUUtilization&gt; type.
      */
     InstanceHealthList?: InstanceHealthList;
     /**
@@ -1419,7 +1443,7 @@ declare namespace ElasticBeanstalk {
      */
     AbortableOperationInProgress?: AbortableOperationInProgress;
     /**
-     * Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment:    Red: Indicates the environment is not responsive. Occurs when three or more consecutive failures occur for an environment.    Yellow: Indicates that something is wrong. Occurs when two consecutive failures occur for an environment.    Green: Indicates the environment is healthy and fully functional.    Grey: Default health for a new environment. The environment is not fully launched and health checks have not started or health checks are suspended during an UpdateEnvironment or RestartEnvironement request.    Default: Grey 
+     * Describes the health status of the environment. AWS Elastic Beanstalk indicates the failure levels for a running environment:    Red: Indicates the environment is not responsive. Occurs when three or more consecutive failures occur for an environment.    Yellow: Indicates that something is wrong. Occurs when two consecutive failures occur for an environment.    Green: Indicates the environment is healthy and fully functional.    Grey: Default health for a new environment. The environment is not fully launched and health checks have not started or health checks are suspended during an UpdateEnvironment or RestartEnvironment request.    Default: Grey 
      */
     Health?: EnvironmentHealth;
     /**
@@ -1439,7 +1463,7 @@ declare namespace ElasticBeanstalk {
      */
     EnvironmentLinks?: EnvironmentLinks;
     /**
-     * The environment's Amazon Resource Name (ARN), which can be used in other API reuqests that require an ARN.
+     * The environment's Amazon Resource Name (ARN), which can be used in other API requests that require an ARN.
      */
     EnvironmentArn?: EnvironmentArn;
   }
@@ -1457,7 +1481,7 @@ declare namespace ElasticBeanstalk {
   export type EnvironmentHealth = "Green"|"Yellow"|"Red"|"Grey"|string;
   export type EnvironmentHealthAttribute = "Status"|"Color"|"Causes"|"ApplicationMetrics"|"InstancesHealth"|"All"|"HealthStatus"|"RefreshedAt"|string;
   export type EnvironmentHealthAttributes = EnvironmentHealthAttribute[];
-  export type EnvironmentHealthStatus = "NoData"|"Unknown"|"Pending"|"Ok"|"Info"|"Warning"|"Degraded"|"Severe"|string;
+  export type EnvironmentHealthStatus = "NoData"|"Unknown"|"Pending"|"Ok"|"Info"|"Warning"|"Degraded"|"Severe"|"Suspended"|string;
   export type EnvironmentId = string;
   export type EnvironmentIdList = EnvironmentId[];
   export interface EnvironmentInfoDescription {
@@ -1474,7 +1498,7 @@ declare namespace ElasticBeanstalk {
      */
     SampleTimestamp?: SampleTimestamp;
     /**
-     * The retrieved information.
+     * The retrieved information. Currently contains a presigned Amazon S3 URL. The files are deleted after 15 minutes. Anyone in possession of this URL can access the files before they are deleted. Make the URL available only to trusted parties.
      */
     Message?: Message;
   }
@@ -1511,6 +1535,10 @@ declare namespace ElasticBeanstalk {
      */
     LaunchConfigurations?: LaunchConfigurationList;
     /**
+     * The Amazon EC2 launch templates in use by this environment.
+     */
+    LaunchTemplates?: LaunchTemplateList;
+    /**
      * The LoadBalancers in use by this environment.
      */
     LoadBalancers?: LoadBalancerList;
@@ -1538,15 +1566,15 @@ declare namespace ElasticBeanstalk {
   export type EnvironmentStatus = "Launching"|"Updating"|"Ready"|"Terminating"|"Terminated"|string;
   export interface EnvironmentTier {
     /**
-     * The name of this environment tier.
+     * The name of this environment tier. Valid values:   For Web server tier – WebServer    For Worker tier – Worker   
      */
     Name?: String;
     /**
-     * The type of this environment tier.
+     * The type of this environment tier. Valid values:   For Web server tier – Standard    For Worker tier – SQS/HTTP   
      */
     Type?: String;
     /**
-     * The version of this environment tier.
+     * The version of this environment tier. When you don't set a value to it, Elastic Beanstalk uses the latest compatible worker tier version.  This member is deprecated. Any specific version that you set may become out of date. We recommend leaving it unspecified. 
      */
     Version?: String;
   }
@@ -1602,7 +1630,6 @@ declare namespace ElasticBeanstalk {
   }
   export type EventMessage = string;
   export type EventSeverity = "TRACE"|"DEBUG"|"INFO"|"WARN"|"ERROR"|"FATAL"|string;
-  export type ExceptionMessage = string;
   export type FailureType = "UpdateCancelled"|"CancellationFailed"|"RollbackFailed"|"RollbackSuccessful"|"InternalFailure"|"InvalidEnvironmentState"|"PermissionsError"|string;
   export type FileTypeExtension = string;
   export type ForceTerminate = boolean;
@@ -1697,6 +1724,13 @@ declare namespace ElasticBeanstalk {
     Name?: ResourceId;
   }
   export type LaunchConfigurationList = LaunchConfiguration[];
+  export interface LaunchTemplate {
+    /**
+     * The ID of the launch template.
+     */
+    Id?: ResourceId;
+  }
+  export type LaunchTemplateList = LaunchTemplate[];
   export type LaunchedAt = Date;
   export interface ListAvailableSolutionStacksResultMessage {
     /**
@@ -2097,6 +2131,34 @@ declare namespace ElasticBeanstalk {
   export type ResourceArn = string;
   export type ResourceId = string;
   export type ResourceName = string;
+  export interface ResourceQuota {
+    /**
+     * The maximum number of instances of this Elastic Beanstalk resource type that an AWS account can use.
+     */
+    Maximum?: BoxedInt;
+  }
+  export interface ResourceQuotas {
+    /**
+     * The quota for applications in the AWS account.
+     */
+    ApplicationQuota?: ResourceQuota;
+    /**
+     * The quota for application versions in the AWS account.
+     */
+    ApplicationVersionQuota?: ResourceQuota;
+    /**
+     * The quota for environments in the AWS account.
+     */
+    EnvironmentQuota?: ResourceQuota;
+    /**
+     * The quota for configuration templates in the AWS account.
+     */
+    ConfigurationTemplateQuota?: ResourceQuota;
+    /**
+     * The quota for custom platforms in the AWS account.
+     */
+    CustomPlatformQuota?: ResourceQuota;
+  }
   export interface ResourceTagsDescriptionMessage {
     /**
      * The Amazon Resource Name (ARN) of the resouce for which a tag list was requested.

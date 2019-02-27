@@ -1,0 +1,12 @@
+[
+    {
+        "type": "bugfix",
+        "category": "md5",
+        "description": "enable SDK to calculate content MD5 for more new S3 operations"
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Fixed issue with Content-MD5 for S3 PutObjectLegalHold, PutObjectRetention and PutObjectLockConfiguration."
+    }
+]

@@ -35,7 +35,6 @@ declare namespace MarketplaceCommerceAnalytics {
   export type DataSetType = "customer_subscriber_hourly_monthly_subscriptions"|"customer_subscriber_annual_subscriptions"|"daily_business_usage_by_instance_type"|"daily_business_fees"|"daily_business_free_trial_conversions"|"daily_business_new_instances"|"daily_business_new_product_subscribers"|"daily_business_canceled_product_subscribers"|"monthly_revenue_billing_and_revenue_data"|"monthly_revenue_annual_subscriptions"|"disbursed_amount_by_product"|"disbursed_amount_by_product_with_uncollected_funds"|"disbursed_amount_by_instance_hours"|"disbursed_amount_by_customer_geo"|"disbursed_amount_by_age_of_uncollected_funds"|"disbursed_amount_by_age_of_disbursed_funds"|"customer_profile_by_industry"|"customer_profile_by_revenue"|"customer_profile_by_geography"|"sales_compensation_billed_revenue"|"us_sales_and_use_tax_records"|string;
   export type DestinationS3BucketName = string;
   export type DestinationS3Prefix = string;
-  export type ExceptionMessage = string;
   export type FromDate = Date;
   export interface GenerateDataSetRequest {
     /**

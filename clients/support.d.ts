@@ -508,7 +508,6 @@ declare namespace Support {
   }
   export type DisplayId = string;
   export type Double = number;
-  export type ErrorMessage = string;
   export type ExpiryTime = string;
   export type FileName = string;
   export type IncludeCommunications = boolean;

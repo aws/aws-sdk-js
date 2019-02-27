@@ -112,7 +112,7 @@ if (AWS.util.isNode()) {
         });
         service = new AWS.MetadataService(options);
         service.loadCredentials(function(err, data) {
-          expect(err).to.be["null"];
+          expect(err).to.be['null'];
           expect(data.AccessKeyId).to.equal('KEY');
           expect(spy.calls.length).to.equal(3);
           done();
@@ -130,7 +130,7 @@ if (AWS.util.isNode()) {
         service = new AWS.MetadataService(options);
         service.loadCredentials(function(err, data) {
           expect(data).to.be.undefined;
-          expect(err).to.not.be["null"];
+          expect(err).to.not.be['null'];
           expect(err.code).to.equal('TimeoutError');
           expect(spy.calls.length).to.equal(6);
           done();

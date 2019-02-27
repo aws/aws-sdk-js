@@ -214,7 +214,7 @@ Feature: Working with Objects in S3
   @error
   Scenario: Error handling
     Given I put "data" to the invalid key ""
-    Then the status code should be 400
+    Then the error code should be "UriParameterError"
 
   @bucket-slashes
   Scenario: Sigv4 Bucket with trailing slash

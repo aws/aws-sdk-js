@@ -117,80 +117,80 @@
         return headers['X-Amz-Date'] = 'DATE-STRING';
       });
       it('builds a basic string to sign', function() {
-        return expect(stringToSign()).to.equal("POST\n\n\n\nx-amz-date:DATE-STRING\n/");
+        return expect(stringToSign()).to.equal('POST\n\n\n\nx-amz-date:DATE-STRING\n/');
       });
       it('includes content md5 and content type when present', function() {
         headers['Content-Type'] = 'CONTENT-TYPE';
         headers['Content-MD5'] = 'CONTENT-MD5';
-        return expect(stringToSign()).to.equal("POST\nCONTENT-MD5\nCONTENT-TYPE\n\nx-amz-date:DATE-STRING\n/");
+        return expect(stringToSign()).to.equal('POST\nCONTENT-MD5\nCONTENT-TYPE\n\nx-amz-date:DATE-STRING\n/');
       });
       it('includes the http method, whatever it is', function() {
         method = 'VERB';
-        return expect(stringToSign()).to.equal("VERB\n\n\n\nx-amz-date:DATE-STRING\n/");
+        return expect(stringToSign()).to.equal('VERB\n\n\n\nx-amz-date:DATE-STRING\n/');
       });
       it('includes any x-amz- style headers, but not others', function() {
         headers['X-Amz-Abc'] = 'abc';
         headers['X-Amz-Xyz'] = 'xyz';
         headers['random-header'] = 'random';
-        return expect(stringToSign()).to.equal("POST\n\n\n\nx-amz-abc:abc\nx-amz-date:DATE-STRING\nx-amz-xyz:xyz\n/");
+        return expect(stringToSign()).to.equal('POST\n\n\n\nx-amz-abc:abc\nx-amz-date:DATE-STRING\nx-amz-xyz:xyz\n/');
       });
       it('includes x-amz- headers that are lower-cased', function() {
         headers['x-amz-Abc'] = 'abc';
         headers['x-amz-Xyz'] = 'xyz';
         headers['random-header'] = 'random';
-        return expect(stringToSign()).to.equal("POST\n\n\n\nx-amz-abc:abc\nx-amz-date:DATE-STRING\nx-amz-xyz:xyz\n/");
+        return expect(stringToSign()).to.equal('POST\n\n\n\nx-amz-abc:abc\nx-amz-date:DATE-STRING\nx-amz-xyz:xyz\n/');
       });
       it('sorts headers by their name', function() {
         headers['x-amz-mno'] = 'mno';
         headers['x-amz-Xyz'] = 'xyz';
         headers['x-amz-Abc'] = 'abc';
-        return expect(stringToSign()).to.equal("POST\n\n\n\nx-amz-abc:abc\nx-amz-date:DATE-STRING\nx-amz-mno:mno\nx-amz-xyz:xyz\n/");
+        return expect(stringToSign()).to.equal('POST\n\n\n\nx-amz-abc:abc\nx-amz-date:DATE-STRING\nx-amz-mno:mno\nx-amz-xyz:xyz\n/');
       });
       it('builds a canonical resource from the path', function() {
         path = '/bucket_name/key';
-        return expect(stringToSign()).to.equal("POST\n\n\n\nx-amz-date:DATE-STRING\n/bucket_name/key");
+        return expect(stringToSign()).to.equal('POST\n\n\n\nx-amz-date:DATE-STRING\n/bucket_name/key');
       });
       it('appends the bucket to the path when it is part of the hostname', function() {
         path = '/';
         virtualHostedBucket = 'bucket-name';
-        return expect(stringToSign()).to.equal("POST\n\n\n\nx-amz-date:DATE-STRING\n/bucket-name/");
+        return expect(stringToSign()).to.equal('POST\n\n\n\nx-amz-date:DATE-STRING\n/bucket-name/');
       });
       it('appends the subresource portion of the path querystring', function() {
         path = '/?acl';
         virtualHostedBucket = 'bucket-name';
-        return expect(stringToSign()).to.equal("POST\n\n\n\nx-amz-date:DATE-STRING\n/bucket-name/?acl");
+        return expect(stringToSign()).to.equal('POST\n\n\n\nx-amz-date:DATE-STRING\n/bucket-name/?acl');
       });
       it('includes the sub resource value when present', function() {
         path = '/bucket_name/key?versionId=123';
-        return expect(stringToSign()).to.equal("POST\n\n\n\nx-amz-date:DATE-STRING\n/bucket_name/key?versionId=123");
+        return expect(stringToSign()).to.equal('POST\n\n\n\nx-amz-date:DATE-STRING\n/bucket_name/key?versionId=123');
       });
       it('omits non-sub-resource querystring params from the resource string', function() {
         path = '/?versionId=abc&next-marker=xyz';
-        return expect(stringToSign()).to.equal("POST\n\n\n\nx-amz-date:DATE-STRING\n/?versionId=abc");
+        return expect(stringToSign()).to.equal('POST\n\n\n\nx-amz-date:DATE-STRING\n/?versionId=abc');
       });
       it('sorts sub resources by name', function() {
         path = '/?logging&acl&website&torrent=123';
-        return expect(stringToSign()).to.equal("POST\n\n\n\nx-amz-date:DATE-STRING\n/?acl&logging&torrent=123&website");
+        return expect(stringToSign()).to.equal('POST\n\n\n\nx-amz-date:DATE-STRING\n/?acl&logging&torrent=123&website');
       });
       it('sorts sub resources by name', function() {
         path = '/?logging&acl&website&torrent=123';
-        return expect(stringToSign()).to.equal("POST\n\n\n\nx-amz-date:DATE-STRING\n/?acl&logging&torrent=123&website");
+        return expect(stringToSign()).to.equal('POST\n\n\n\nx-amz-date:DATE-STRING\n/?acl&logging&torrent=123&website');
       });
       it('includes the un-decoded query string param for sub resources', function() {
         path = '/?versionId=a%2Bb';
-        return expect(stringToSign()).to.equal("POST\n\n\n\nx-amz-date:DATE-STRING\n/?versionId=a%2Bb");
+        return expect(stringToSign()).to.equal('POST\n\n\n\nx-amz-date:DATE-STRING\n/?versionId=a%2Bb');
       });
       it('includes the replication subresource without a value', function() {
         path = '/?replication';
-        return expect(stringToSign()).to.equal("POST\n\n\n\nx-amz-date:DATE-STRING\n/?replication");
+        return expect(stringToSign()).to.equal('POST\n\n\n\nx-amz-date:DATE-STRING\n/?replication');
       });
       it('includes the non-encoded query string get header overrides', function() {
         path = '/?response-content-type=a%2Bb';
-        return expect(stringToSign()).to.equal("POST\n\n\n\nx-amz-date:DATE-STRING\n/?response-content-type=a+b");
+        return expect(stringToSign()).to.equal('POST\n\n\n\nx-amz-date:DATE-STRING\n/?response-content-type=a+b');
       });
       return it('omits the date header when not present', function() {
         delete headers['X-Amz-Date'];
-        return expect(stringToSign()).to.equal("POST\n\n\n\n/");
+        return expect(stringToSign()).to.equal('POST\n\n\n\n/');
       });
     });
   });

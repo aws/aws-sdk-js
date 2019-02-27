@@ -113,7 +113,6 @@ declare namespace DynamoDBStreams {
      */
     StreamDescription?: StreamDescription;
   }
-  export type ErrorMessage = string;
   export interface GetRecordsInput {
     /**
      * A shard iterator that was retrieved from a previous GetShardIterator operation. This iterator can be used to access the stream records in this shard.

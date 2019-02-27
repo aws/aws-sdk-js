@@ -26,7 +26,10 @@
     "name": "Budgets"
   },
   "clouddirectory": {
-    "name": "CloudDirectory"
+    "name": "CloudDirectory",
+    "versions": [
+      "2016-05-10*"
+    ]
   },
   "cloudformation": {
     "name": "CloudFormation",
@@ -49,7 +52,10 @@
       "2016-08-20*",
       "2016-09-07*",
       "2016-09-29*",
-      "2016-11-25*"
+      "2016-11-25*",
+      "2017-03-25*",
+      "2017-10-30*",
+      "2018-06-18*"
     ],
     "cors": true
   },
@@ -86,7 +92,8 @@
     "cors": true
   },
   "codebuild": {
-    "name": "CodeBuild"
+    "name": "CodeBuild",
+    "cors": true
   },
   "codecommit": {
     "name": "CodeCommit",
@@ -349,6 +356,10 @@
     "dualstackAvailable": true,
     "cors": true
   },
+  "s3control": {
+    "name": "S3Control",
+    "dualstackAvailable": true
+  },
   "servicecatalog": {
     "name": "ServiceCatalog",
     "cors": true
@@ -454,7 +465,8 @@
     "name": "Mobile"
   },
   "pricing": {
-    "name": "Pricing"
+    "name": "Pricing",
+    "cors": true
   },
   "costexplorer": {
     "prefix": "ce",
@@ -474,7 +486,8 @@
   },
   "mediastoredata": {
     "prefix": "mediastore-data",
-    "name": "MediaStoreData"
+    "name": "MediaStoreData",
+    "cors": true
   },
   "appsync": {
     "name": "AppSync"
@@ -486,7 +499,8 @@
     "name": "MQ"
   },
   "comprehend": {
-    "name": "Comprehend"
+    "name": "Comprehend",
+    "cors": true
   },
   "iotjobsdataplane": {
     "prefix": "iot-jobs-data",
@@ -494,14 +508,17 @@
   },
   "kinesisvideoarchivedmedia": {
     "prefix": "kinesis-video-archived-media",
-    "name": "KinesisVideoArchivedMedia"
+    "name": "KinesisVideoArchivedMedia",
+    "cors": true
   },
   "kinesisvideomedia": {
     "prefix": "kinesis-video-media",
-    "name": "KinesisVideoMedia"
+    "name": "KinesisVideoMedia",
+    "cors": true
   },
   "kinesisvideo": {
-    "name": "KinesisVideo"
+    "name": "KinesisVideo",
+    "cors": true
   },
   "sagemakerruntime": {
     "prefix": "runtime.sagemaker",
@@ -511,7 +528,8 @@
     "name": "SageMaker"
   },
   "translate": {
-    "name": "Translate"
+    "name": "Translate",
+    "cors": true
   },
   "resourcegroups": {
     "prefix": "resource-groups",
@@ -540,5 +558,131 @@
   "transcribeservice": {
     "prefix": "transcribe",
     "name": "TranscribeService"
+  },
+  "connect": {
+    "name": "Connect"
+  },
+  "acmpca": {
+    "prefix": "acm-pca",
+    "name": "ACMPCA"
+  },
+  "fms": {
+    "name": "FMS"
+  },
+  "secretsmanager": {
+    "name": "SecretsManager",
+    "cors": true
+  },
+  "iotanalytics": {
+    "name": "IoTAnalytics"
+  },
+  "iot1clickdevicesservice": {
+    "prefix": "iot1click-devices",
+    "name": "IoT1ClickDevicesService"
+  },
+  "iot1clickprojects": {
+    "prefix": "iot1click-projects",
+    "name": "IoT1ClickProjects"
+  },
+  "pi": {
+    "name": "PI"
+  },
+  "neptune": {
+    "name": "Neptune"
+  },
+  "mediatailor": {
+    "name": "MediaTailor"
+  },
+  "eks": {
+    "name": "EKS"
+  },
+  "macie": {
+    "name": "Macie"
+  },
+  "dlm": {
+    "name": "DLM"
+  },
+  "signer": {
+    "name": "Signer"
+  },
+  "chime": {
+    "name": "Chime"
+  },
+  "pinpointemail": {
+    "prefix": "pinpoint-email",
+    "name": "PinpointEmail"
+  },
+  "ram": {
+    "name": "RAM"
+  },
+  "route53resolver": {
+    "name": "Route53Resolver"
+  },
+  "pinpointsmsvoice": {
+    "prefix": "sms-voice",
+    "name": "PinpointSMSVoice"
+  },
+  "quicksight": {
+    "name": "QuickSight"
+  },
+  "rdsdataservice": {
+    "prefix": "rds-data",
+    "name": "RDSDataService"
+  },
+  "amplify": {
+    "name": "Amplify"
+  },
+  "datasync": {
+    "name": "DataSync"
+  },
+  "robomaker": {
+    "name": "RoboMaker"
+  },
+  "transfer": {
+    "name": "Transfer"
+  },
+  "globalaccelerator": {
+    "name": "GlobalAccelerator"
+  },
+  "comprehendmedical": {
+    "name": "ComprehendMedical",
+    "cors": true
+  },
+  "kinesisanalyticsv2": {
+    "name": "KinesisAnalyticsV2"
+  },
+  "mediaconnect": {
+    "name": "MediaConnect"
+  },
+  "fsx": {
+    "name": "FSx"
+  },
+  "securityhub": {
+    "name": "SecurityHub"
+  },
+  "appmesh": {
+    "name": "AppMesh"
+  },
+  "licensemanager": {
+    "prefix": "license-manager",
+    "name": "LicenseManager"
+  },
+  "kafka": {
+    "name": "Kafka"
+  },
+  "apigatewaymanagementapi": {
+    "name": "ApiGatewayManagementApi"
+  },
+  "apigatewayv2": {
+    "name": "ApiGatewayV2"
+  },
+  "docdb": {
+    "name": "DocDB"
+  },
+  "backup": {
+    "name": "Backup"
+  },
+  "worklink": {
+    "name": "WorkLink"
   }
 }

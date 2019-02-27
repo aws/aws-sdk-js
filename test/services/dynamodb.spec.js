@@ -108,7 +108,7 @@ describe('AWS.DynamoDB', function() {
         err = null;
         helpers.mockHttpResponse(200, {
           'x-amz-crc32': '0'
-        }, "{\"TableNames\":[\"mock-table\"]}");
+        }, '{"TableNames":["mock-table"]}');
         request = dynamo.listTables();
         s = request.createReadStream();
         s.on('error', function(e) {
@@ -126,7 +126,7 @@ describe('AWS.DynamoDB', function() {
       var request;
       helpers.mockHttpResponse(200, {
         'x-amz-crc32': '1575962599'
-      }, "{\"TableNames\":[\"mock-table\"]}");
+      }, '{"TableNames":["mock-table"]}');
       request = dynamo.listTables();
       return request.send(function(err, data) {
         return expect(err).to.eql(null);
@@ -135,7 +135,7 @@ describe('AWS.DynamoDB', function() {
 
     it('does not verify response checksum when no [x-amz-crc32] header', function() {
       var request;
-      helpers.mockHttpResponse(200, {}, "{\"TableNames\":[\"mock-table\"]}");
+      helpers.mockHttpResponse(200, {}, '{"TableNames":["mock-table"]}');
       request = dynamo.listTables();
       return request.send(function(err, data) {
         return expect(err).to.eql(null);
@@ -146,7 +146,7 @@ describe('AWS.DynamoDB', function() {
       var request;
       helpers.mockHttpResponse(200, {
         'x-amz-crc32': '0'
-      }, "{\"TableNames\":[\"mock-table\"]}");
+      }, '{"TableNames":["mock-table"]}');
       request = dynamo.listTables();
       return request.send(function(err, data) {
         expect(err.code).to.eql('CRC32CheckFailed');
@@ -158,7 +158,7 @@ describe('AWS.DynamoDB', function() {
       var request;
       helpers.mockHttpResponse(200, {
         'x-amz-crc32': '0'
-      }, "{\"TableNames\":[\"mock-table\"]}");
+      }, '{"TableNames":["mock-table"]}');
       request = dynamo.listTables();
       return request.send(function(err, data) {
         return expect(this.retryCount).to.eql(10);

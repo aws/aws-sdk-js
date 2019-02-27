@@ -76,11 +76,11 @@ declare class ResourceGroups extends Service {
    */
   searchResources(callback?: (err: AWSError, data: ResourceGroups.Types.SearchResourcesOutput) => void): Request<ResourceGroups.Types.SearchResourcesOutput, AWSError>;
   /**
-   * Adds specified tags to a resource with the specified ARN. Existing tags on a resource are not changed if they are not specified in the request parameters.
+   * Adds tags to a resource group with the specified ARN. Existing tags on a resource group are not changed if they are not specified in the request parameters.
    */
   tag(params: ResourceGroups.Types.TagInput, callback?: (err: AWSError, data: ResourceGroups.Types.TagOutput) => void): Request<ResourceGroups.Types.TagOutput, AWSError>;
   /**
-   * Adds specified tags to a resource with the specified ARN. Existing tags on a resource are not changed if they are not specified in the request parameters.
+   * Adds tags to a resource group with the specified ARN. Existing tags on a resource group are not changed if they are not specified in the request parameters.
    */
   tag(callback?: (err: AWSError, data: ResourceGroups.Types.TagOutput) => void): Request<ResourceGroups.Types.TagOutput, AWSError>;
   /**
@@ -111,7 +111,7 @@ declare class ResourceGroups extends Service {
 declare namespace ResourceGroups {
   export interface CreateGroupInput {
     /**
-     * The name of the group, which is the identifier of the group in other operations. A resource group name cannot be updated after it is created. A resource group name can have a maximum of 127 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with AWS or aws; these are reserved. A resource group name must be unique within your account.
+     * The name of the group, which is the identifier of the group in other operations. A resource group name cannot be updated after it is created. A resource group name can have a maximum of 128 characters, including letters, numbers, hyphens, dots, and underscores. The name cannot start with AWS or aws; these are reserved. A resource group name must be unique within your account.
      */
     Name: GroupName;
     /**
@@ -123,7 +123,7 @@ declare namespace ResourceGroups {
      */
     ResourceQuery: ResourceQuery;
     /**
-     * The tags to add to the group. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 127 characters, and tag values can have a maximum length of 255 characters.
+     * The tags to add to the group. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
      */
     Tags?: Tags;
   }
@@ -153,7 +153,6 @@ declare namespace ResourceGroups {
      */
     Group?: Group;
   }
-  export type ErrorMessage = string;
   export interface GetGroupInput {
     /**
      * The name of the resource group.
@@ -210,6 +209,31 @@ declare namespace ResourceGroups {
   }
   export type GroupArn = string;
   export type GroupDescription = string;
+  export interface GroupFilter {
+    /**
+     * The name of the filter. Filter names are case-sensitive.
+     */
+    Name: GroupFilterName;
+    /**
+     * One or more filter values. Allowed filter values vary by group filter name, and are case-sensitive.
+     */
+    Values: GroupFilterValues;
+  }
+  export type GroupFilterList = GroupFilter[];
+  export type GroupFilterName = "resource-type"|string;
+  export type GroupFilterValue = string;
+  export type GroupFilterValues = GroupFilterValue[];
+  export interface GroupIdentifier {
+    /**
+     * The name of a resource group.
+     */
+    GroupName?: GroupName;
+    /**
+     * The ARN of a resource group.
+     */
+    GroupArn?: GroupArn;
+  }
+  export type GroupIdentifierList = GroupIdentifier[];
   export type GroupList = Group[];
   export type GroupName = string;
   export interface GroupQuery {
@@ -228,6 +252,10 @@ declare namespace ResourceGroups {
      */
     GroupName: GroupName;
     /**
+     * Filters, formatted as ResourceFilter objects, that you want to apply to a ListGroupResources operation.    resource-type - Filter resources by their type. Specify up to five resource types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.  
+     */
+    Filters?: ResourceFilterList;
+    /**
      * The maximum number of group member ARNs that are returned in a single call by ListGroupResources, in paginated output. By default, this number is 50.
      */
     MaxResults?: MaxResults;
@@ -245,8 +273,16 @@ declare namespace ResourceGroups {
      * The NextToken value to include in a subsequent ListGroupResources request, to get more results.
      */
     NextToken?: NextToken;
+    /**
+     * A list of QueryError objects. Each error is an object that contains ErrorCode and Message structures. Possible values for ErrorCode are CLOUDFORMATION_STACK_INACTIVE and CLOUDFORMATION_STACK_NOT_EXISTING.
+     */
+    QueryErrors?: QueryErrorList;
   }
   export interface ListGroupsInput {
+    /**
+     * Filters, formatted as GroupFilter objects, that you want to apply to a ListGroups operation.    resource-type - Filter groups by resource type. Specify up to five resource types in the format AWS::ServiceCode::ResourceType. For example, AWS::EC2::Instance, or AWS::S3::Bucket.  
+     */
+    Filters?: GroupFilterList;
     /**
      * The maximum number of resource group results that are returned by ListGroups in paginated output. By default, this number is 50.
      */
@@ -257,6 +293,10 @@ declare namespace ResourceGroups {
     NextToken?: NextToken;
   }
   export interface ListGroupsOutput {
+    /**
+     * A list of GroupIdentifier objects. Each identifier is an object that contains both the GroupName and the GroupArn.
+     */
+    GroupIdentifiers?: GroupIdentifierList;
     /**
      * A list of resource groups.
      */
@@ -269,8 +309,35 @@ declare namespace ResourceGroups {
   export type MaxResults = number;
   export type NextToken = string;
   export type Query = string;
-  export type QueryType = "TAG_FILTERS_1_0"|string;
+  export interface QueryError {
+    /**
+     * Possible values are CLOUDFORMATION_STACK_INACTIVE and CLOUDFORMATION_STACK_NOT_EXISTING.
+     */
+    ErrorCode?: QueryErrorCode;
+    /**
+     * A message that explains the ErrorCode value. Messages might state that the specified CloudFormation stack does not exist (or no longer exists). For CLOUDFORMATION_STACK_INACTIVE, the message typically states that the CloudFormation stack has a status that is not (or no longer) active, such as CREATE_FAILED.
+     */
+    Message?: QueryErrorMessage;
+  }
+  export type QueryErrorCode = "CLOUDFORMATION_STACK_INACTIVE"|"CLOUDFORMATION_STACK_NOT_EXISTING"|string;
+  export type QueryErrorList = QueryError[];
+  export type QueryErrorMessage = string;
+  export type QueryType = "TAG_FILTERS_1_0"|"CLOUDFORMATION_STACK_1_0"|string;
   export type ResourceArn = string;
+  export interface ResourceFilter {
+    /**
+     * The name of the filter. Filter names are case-sensitive.
+     */
+    Name: ResourceFilterName;
+    /**
+     * One or more filter values. Allowed filter values vary by resource filter name, and are case-sensitive.
+     */
+    Values: ResourceFilterValues;
+  }
+  export type ResourceFilterList = ResourceFilter[];
+  export type ResourceFilterName = "resource-type"|string;
+  export type ResourceFilterValue = string;
+  export type ResourceFilterValues = ResourceFilterValue[];
   export interface ResourceIdentifier {
     /**
      * The ARN of a resource.
@@ -284,7 +351,7 @@ declare namespace ResourceGroups {
   export type ResourceIdentifierList = ResourceIdentifier[];
   export interface ResourceQuery {
     /**
-     * The type of the query. The valid value in this release is TAG_FILTERS_1_0.   TAG_FILTERS_1_0:  A JSON syntax that lets you specify a collection of simple tag filters for resource types and tags, as supported by the AWS Tagging API GetResources operation. When more than one element is present, only resources that match all filters are part of the result. If a filter specifies more than one value for a key, a resource matches the filter if its tag value matches any of the specified values.
+     * The type of the query. The valid values in this release are TAG_FILTERS_1_0 and CLOUDFORMATION_STACK_1_0.   TAG_FILTERS_1_0:  A JSON syntax that lets you specify a collection of simple tag filters for resource types and tags, as supported by the AWS Tagging API GetResources operation. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches any of the specified values. For example, consider the following sample query for resources that have two tags, Stage and Version, with two values each. ([{"Key":"Stage","Values":["Test","Deploy"]},{"Key":"Version","Values":["1","2"]}]) The results of this query might include the following.   An EC2 instance that has the following two tags: {"Key":"Stage","Values":["Deploy"]}, and {"Key":"Version","Values":["2"]}    An S3 bucket that has the following two tags: {"Key":"Stage","Values":["Test","Deploy"]}, and {"Key":"Version","Values":["1"]}   The query would not return the following results, however. The following EC2 instance does not have all tag keys specified in the filter, so it is rejected. The RDS database has all of the tag keys, but no values that match at least one of the specified tag key values in the filter.   An EC2 instance that has only the following tag: {"Key":"Stage","Values":["Deploy"]}.   An RDS database that has the following two tags: {"Key":"Stage","Values":["Archived"]}, and {"Key":"Version","Values":["4"]}      CLOUDFORMATION_STACK_1_0:  A JSON syntax that lets you specify a CloudFormation stack ARN.
      */
     Type: QueryType;
     /**
@@ -316,6 +383,10 @@ declare namespace ResourceGroups {
      * The NextToken value to include in a subsequent SearchResources request, to get more results.
      */
     NextToken?: NextToken;
+    /**
+     * A list of QueryError objects. Each error is an object that contains ErrorCode and Message structures. Possible values for ErrorCode are CLOUDFORMATION_STACK_INACTIVE and CLOUDFORMATION_STACK_NOT_EXISTING.
+     */
+    QueryErrors?: QueryErrorList;
   }
   export interface TagInput {
     /**
@@ -323,7 +394,7 @@ declare namespace ResourceGroups {
      */
     Arn: GroupArn;
     /**
-     * The tags to add to the specified resource. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 127 characters, and tag values can have a maximum length of 255 characters.
+     * The tags to add to the specified resource. A tag is a string-to-string map of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
      */
     Tags: Tags;
   }

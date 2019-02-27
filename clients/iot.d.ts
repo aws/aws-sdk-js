@@ -20,6 +20,14 @@ declare class Iot extends Service {
    */
   acceptCertificateTransfer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Adds a thing to a billing group.
+   */
+  addThingToBillingGroup(params: Iot.Types.AddThingToBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.AddThingToBillingGroupResponse) => void): Request<Iot.Types.AddThingToBillingGroupResponse, AWSError>;
+  /**
+   * Adds a thing to a billing group.
+   */
+  addThingToBillingGroup(callback?: (err: AWSError, data: Iot.Types.AddThingToBillingGroupResponse) => void): Request<Iot.Types.AddThingToBillingGroupResponse, AWSError>;
+  /**
    * Adds a thing to a thing group.
    */
   addThingToThingGroup(params: Iot.Types.AddThingToThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.AddThingToThingGroupResponse) => void): Request<Iot.Types.AddThingToThingGroupResponse, AWSError>;
@@ -52,13 +60,29 @@ declare class Iot extends Service {
    */
   attachPrincipalPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Attaches the specified principal to the specified thing.
+   * Associates a Device Defender security profile with a thing group or with this account. Each thing group or account can have up to five security profiles associated with it.
+   */
+  attachSecurityProfile(params: Iot.Types.AttachSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.AttachSecurityProfileResponse) => void): Request<Iot.Types.AttachSecurityProfileResponse, AWSError>;
+  /**
+   * Associates a Device Defender security profile with a thing group or with this account. Each thing group or account can have up to five security profiles associated with it.
+   */
+  attachSecurityProfile(callback?: (err: AWSError, data: Iot.Types.AttachSecurityProfileResponse) => void): Request<Iot.Types.AttachSecurityProfileResponse, AWSError>;
+  /**
+   * Attaches the specified principal to the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.
    */
   attachThingPrincipal(params: Iot.Types.AttachThingPrincipalRequest, callback?: (err: AWSError, data: Iot.Types.AttachThingPrincipalResponse) => void): Request<Iot.Types.AttachThingPrincipalResponse, AWSError>;
   /**
-   * Attaches the specified principal to the specified thing.
+   * Attaches the specified principal to the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.
    */
   attachThingPrincipal(callback?: (err: AWSError, data: Iot.Types.AttachThingPrincipalResponse) => void): Request<Iot.Types.AttachThingPrincipalResponse, AWSError>;
+  /**
+   * Cancels an audit that is in progress. The audit can be either scheduled or on-demand. If the audit is not in progress, an "InvalidRequestException" occurs.
+   */
+  cancelAuditTask(params: Iot.Types.CancelAuditTaskRequest, callback?: (err: AWSError, data: Iot.Types.CancelAuditTaskResponse) => void): Request<Iot.Types.CancelAuditTaskResponse, AWSError>;
+  /**
+   * Cancels an audit that is in progress. The audit can be either scheduled or on-demand. If the audit is not in progress, an "InvalidRequestException" occurs.
+   */
+  cancelAuditTask(callback?: (err: AWSError, data: Iot.Types.CancelAuditTaskResponse) => void): Request<Iot.Types.CancelAuditTaskResponse, AWSError>;
   /**
    * Cancels a pending transfer for the specified certificate.  Note Only the transfer source account can use this operation to cancel a transfer. (Transfer destinations can use RejectCertificateTransfer instead.) After transfer, AWS IoT returns the certificate to the source account in the INACTIVE state. After the destination account has accepted the transfer, the transfer cannot be cancelled. After a certificate transfer is cancelled, the status of the certificate changes from PENDING_TRANSFER to INACTIVE.
    */
@@ -76,6 +100,14 @@ declare class Iot extends Service {
    */
   cancelJob(callback?: (err: AWSError, data: Iot.Types.CancelJobResponse) => void): Request<Iot.Types.CancelJobResponse, AWSError>;
   /**
+   * Cancels the execution of a job for a given thing.
+   */
+  cancelJobExecution(params: Iot.Types.CancelJobExecutionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Cancels the execution of a job for a given thing.
+   */
+  cancelJobExecution(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Clears the default authorizer.
    */
   clearDefaultAuthorizer(params: Iot.Types.ClearDefaultAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.ClearDefaultAuthorizerResponse) => void): Request<Iot.Types.ClearDefaultAuthorizerResponse, AWSError>;
@@ -92,6 +124,14 @@ declare class Iot extends Service {
    */
   createAuthorizer(callback?: (err: AWSError, data: Iot.Types.CreateAuthorizerResponse) => void): Request<Iot.Types.CreateAuthorizerResponse, AWSError>;
   /**
+   * Creates a billing group.
+   */
+  createBillingGroup(params: Iot.Types.CreateBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.CreateBillingGroupResponse) => void): Request<Iot.Types.CreateBillingGroupResponse, AWSError>;
+  /**
+   * Creates a billing group.
+   */
+  createBillingGroup(callback?: (err: AWSError, data: Iot.Types.CreateBillingGroupResponse) => void): Request<Iot.Types.CreateBillingGroupResponse, AWSError>;
+  /**
    * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves.   Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr AWS CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
    */
   createCertificateFromCsr(params: Iot.Types.CreateCertificateFromCsrRequest, callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
@@ -99,6 +139,14 @@ declare class Iot extends Service {
    * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves.   Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr AWS CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
    */
   createCertificateFromCsr(callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
+  /**
+   * Creates a dynamic thing group.
+   */
+  createDynamicThingGroup(params: Iot.Types.CreateDynamicThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.CreateDynamicThingGroupResponse) => void): Request<Iot.Types.CreateDynamicThingGroupResponse, AWSError>;
+  /**
+   * Creates a dynamic thing group.
+   */
+  createDynamicThingGroup(callback?: (err: AWSError, data: Iot.Types.CreateDynamicThingGroupResponse) => void): Request<Iot.Types.CreateDynamicThingGroupResponse, AWSError>;
   /**
    * Creates a job.
    */
@@ -148,6 +196,22 @@ declare class Iot extends Service {
    */
   createRoleAlias(callback?: (err: AWSError, data: Iot.Types.CreateRoleAliasResponse) => void): Request<Iot.Types.CreateRoleAliasResponse, AWSError>;
   /**
+   * Creates a scheduled audit that is run at a specified time interval.
+   */
+  createScheduledAudit(params: Iot.Types.CreateScheduledAuditRequest, callback?: (err: AWSError, data: Iot.Types.CreateScheduledAuditResponse) => void): Request<Iot.Types.CreateScheduledAuditResponse, AWSError>;
+  /**
+   * Creates a scheduled audit that is run at a specified time interval.
+   */
+  createScheduledAudit(callback?: (err: AWSError, data: Iot.Types.CreateScheduledAuditResponse) => void): Request<Iot.Types.CreateScheduledAuditResponse, AWSError>;
+  /**
+   * Creates a Device Defender security profile.
+   */
+  createSecurityProfile(params: Iot.Types.CreateSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.CreateSecurityProfileResponse) => void): Request<Iot.Types.CreateSecurityProfileResponse, AWSError>;
+  /**
+   * Creates a Device Defender security profile.
+   */
+  createSecurityProfile(callback?: (err: AWSError, data: Iot.Types.CreateSecurityProfileResponse) => void): Request<Iot.Types.CreateSecurityProfileResponse, AWSError>;
+  /**
    * Creates a stream for delivering one or more large files in chunks over MQTT. A stream transports data bytes in chunks or blocks packaged as MQTT messages from a source like S3. You can have one or more files associated with a stream. The total size of a file associated with the stream cannot exceed more than 2 MB. The stream will be created with version 0. If a stream is created with the same streamID as a stream that existed and was deleted within last 90 days, we will resurrect that old stream by incrementing the version by 1.
    */
   createStream(params: Iot.Types.CreateStreamRequest, callback?: (err: AWSError, data: Iot.Types.CreateStreamResponse) => void): Request<Iot.Types.CreateStreamResponse, AWSError>;
@@ -156,19 +220,19 @@ declare class Iot extends Service {
    */
   createStream(callback?: (err: AWSError, data: Iot.Types.CreateStreamResponse) => void): Request<Iot.Types.CreateStreamResponse, AWSError>;
   /**
-   * Creates a thing record in the thing registry.
+   * Creates a thing record in the registry.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
    */
   createThing(params: Iot.Types.CreateThingRequest, callback?: (err: AWSError, data: Iot.Types.CreateThingResponse) => void): Request<Iot.Types.CreateThingResponse, AWSError>;
   /**
-   * Creates a thing record in the thing registry.
+   * Creates a thing record in the registry.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
    */
   createThing(callback?: (err: AWSError, data: Iot.Types.CreateThingResponse) => void): Request<Iot.Types.CreateThingResponse, AWSError>;
   /**
-   * Create a thing group.
+   * Create a thing group.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
    */
   createThingGroup(params: Iot.Types.CreateThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.CreateThingGroupResponse) => void): Request<Iot.Types.CreateThingGroupResponse, AWSError>;
   /**
-   * Create a thing group.
+   * Create a thing group.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
    */
   createThingGroup(callback?: (err: AWSError, data: Iot.Types.CreateThingGroupResponse) => void): Request<Iot.Types.CreateThingGroupResponse, AWSError>;
   /**
@@ -188,6 +252,14 @@ declare class Iot extends Service {
    */
   createTopicRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Restores the default settings for Device Defender audits for this account. Any configuration data you entered is deleted and all audit checks are reset to disabled. 
+   */
+  deleteAccountAuditConfiguration(params: Iot.Types.DeleteAccountAuditConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.DeleteAccountAuditConfigurationResponse) => void): Request<Iot.Types.DeleteAccountAuditConfigurationResponse, AWSError>;
+  /**
+   * Restores the default settings for Device Defender audits for this account. Any configuration data you entered is deleted and all audit checks are reset to disabled. 
+   */
+  deleteAccountAuditConfiguration(callback?: (err: AWSError, data: Iot.Types.DeleteAccountAuditConfigurationResponse) => void): Request<Iot.Types.DeleteAccountAuditConfigurationResponse, AWSError>;
+  /**
    * Deletes an authorizer.
    */
   deleteAuthorizer(params: Iot.Types.DeleteAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.DeleteAuthorizerResponse) => void): Request<Iot.Types.DeleteAuthorizerResponse, AWSError>;
@@ -195,6 +267,14 @@ declare class Iot extends Service {
    * Deletes an authorizer.
    */
   deleteAuthorizer(callback?: (err: AWSError, data: Iot.Types.DeleteAuthorizerResponse) => void): Request<Iot.Types.DeleteAuthorizerResponse, AWSError>;
+  /**
+   * Deletes the billing group.
+   */
+  deleteBillingGroup(params: Iot.Types.DeleteBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.DeleteBillingGroupResponse) => void): Request<Iot.Types.DeleteBillingGroupResponse, AWSError>;
+  /**
+   * Deletes the billing group.
+   */
+  deleteBillingGroup(callback?: (err: AWSError, data: Iot.Types.DeleteBillingGroupResponse) => void): Request<Iot.Types.DeleteBillingGroupResponse, AWSError>;
   /**
    * Deletes a registered CA certificate.
    */
@@ -211,6 +291,30 @@ declare class Iot extends Service {
    * Deletes the specified certificate. A certificate cannot be deleted if it has a policy attached to it or if its status is set to ACTIVE. To delete a certificate, first use the DetachPrincipalPolicy API to detach all policies. Next, use the UpdateCertificate API to set the certificate to the INACTIVE status.
    */
   deleteCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a dynamic thing group.
+   */
+  deleteDynamicThingGroup(params: Iot.Types.DeleteDynamicThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.DeleteDynamicThingGroupResponse) => void): Request<Iot.Types.DeleteDynamicThingGroupResponse, AWSError>;
+  /**
+   * Deletes a dynamic thing group.
+   */
+  deleteDynamicThingGroup(callback?: (err: AWSError, data: Iot.Types.DeleteDynamicThingGroupResponse) => void): Request<Iot.Types.DeleteDynamicThingGroupResponse, AWSError>;
+  /**
+   * Deletes a job and its related job executions. Deleting a job may take time, depending on the number of job executions created for the job and various other factors. While the job is being deleted, the status of the job will be shown as "DELETION_IN_PROGRESS". Attempting to delete or cancel a job whose status is already "DELETION_IN_PROGRESS" will result in an error. Only 10 jobs may have status "DELETION_IN_PROGRESS" at the same time, or a LimitExceededException will occur.
+   */
+  deleteJob(params: Iot.Types.DeleteJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a job and its related job executions. Deleting a job may take time, depending on the number of job executions created for the job and various other factors. While the job is being deleted, the status of the job will be shown as "DELETION_IN_PROGRESS". Attempting to delete or cancel a job whose status is already "DELETION_IN_PROGRESS" will result in an error. Only 10 jobs may have status "DELETION_IN_PROGRESS" at the same time, or a LimitExceededException will occur.
+   */
+  deleteJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a job execution.
+   */
+  deleteJobExecution(params: Iot.Types.DeleteJobExecutionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a job execution.
+   */
+  deleteJobExecution(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Delete an OTA update.
    */
@@ -252,6 +356,22 @@ declare class Iot extends Service {
    */
   deleteRoleAlias(callback?: (err: AWSError, data: Iot.Types.DeleteRoleAliasResponse) => void): Request<Iot.Types.DeleteRoleAliasResponse, AWSError>;
   /**
+   * Deletes a scheduled audit.
+   */
+  deleteScheduledAudit(params: Iot.Types.DeleteScheduledAuditRequest, callback?: (err: AWSError, data: Iot.Types.DeleteScheduledAuditResponse) => void): Request<Iot.Types.DeleteScheduledAuditResponse, AWSError>;
+  /**
+   * Deletes a scheduled audit.
+   */
+  deleteScheduledAudit(callback?: (err: AWSError, data: Iot.Types.DeleteScheduledAuditResponse) => void): Request<Iot.Types.DeleteScheduledAuditResponse, AWSError>;
+  /**
+   * Deletes a Device Defender security profile.
+   */
+  deleteSecurityProfile(params: Iot.Types.DeleteSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.DeleteSecurityProfileResponse) => void): Request<Iot.Types.DeleteSecurityProfileResponse, AWSError>;
+  /**
+   * Deletes a Device Defender security profile.
+   */
+  deleteSecurityProfile(callback?: (err: AWSError, data: Iot.Types.DeleteSecurityProfileResponse) => void): Request<Iot.Types.DeleteSecurityProfileResponse, AWSError>;
+  /**
    * Deletes a stream.
    */
   deleteStream(params: Iot.Types.DeleteStreamRequest, callback?: (err: AWSError, data: Iot.Types.DeleteStreamResponse) => void): Request<Iot.Types.DeleteStreamResponse, AWSError>;
@@ -260,11 +380,11 @@ declare class Iot extends Service {
    */
   deleteStream(callback?: (err: AWSError, data: Iot.Types.DeleteStreamResponse) => void): Request<Iot.Types.DeleteStreamResponse, AWSError>;
   /**
-   * Deletes the specified thing.
+   * Deletes the specified thing. Returns successfully with no error if the deletion is successful or you specify a thing that doesn't exist.
    */
   deleteThing(params: Iot.Types.DeleteThingRequest, callback?: (err: AWSError, data: Iot.Types.DeleteThingResponse) => void): Request<Iot.Types.DeleteThingResponse, AWSError>;
   /**
-   * Deletes the specified thing.
+   * Deletes the specified thing. Returns successfully with no error if the deletion is successful or you specify a thing that doesn't exist.
    */
   deleteThing(callback?: (err: AWSError, data: Iot.Types.DeleteThingResponse) => void): Request<Iot.Types.DeleteThingResponse, AWSError>;
   /**
@@ -276,11 +396,11 @@ declare class Iot extends Service {
    */
   deleteThingGroup(callback?: (err: AWSError, data: Iot.Types.DeleteThingGroupResponse) => void): Request<Iot.Types.DeleteThingGroupResponse, AWSError>;
   /**
-   * Deletes the specified thing type . You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling DeprecateThingType, then remove any associated things by calling UpdateThing to change the thing type on any associated thing, and finally use DeleteThingType to delete the thing type.
+   * Deletes the specified thing type. You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling DeprecateThingType, then remove any associated things by calling UpdateThing to change the thing type on any associated thing, and finally use DeleteThingType to delete the thing type.
    */
   deleteThingType(params: Iot.Types.DeleteThingTypeRequest, callback?: (err: AWSError, data: Iot.Types.DeleteThingTypeResponse) => void): Request<Iot.Types.DeleteThingTypeResponse, AWSError>;
   /**
-   * Deletes the specified thing type . You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling DeprecateThingType, then remove any associated things by calling UpdateThing to change the thing type on any associated thing, and finally use DeleteThingType to delete the thing type.
+   * Deletes the specified thing type. You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling DeprecateThingType, then remove any associated things by calling UpdateThing to change the thing type on any associated thing, and finally use DeleteThingType to delete the thing type.
    */
   deleteThingType(callback?: (err: AWSError, data: Iot.Types.DeleteThingTypeResponse) => void): Request<Iot.Types.DeleteThingTypeResponse, AWSError>;
   /**
@@ -308,6 +428,22 @@ declare class Iot extends Service {
    */
   deprecateThingType(callback?: (err: AWSError, data: Iot.Types.DeprecateThingTypeResponse) => void): Request<Iot.Types.DeprecateThingTypeResponse, AWSError>;
   /**
+   * Gets information about the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.
+   */
+  describeAccountAuditConfiguration(params: Iot.Types.DescribeAccountAuditConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.DescribeAccountAuditConfigurationResponse) => void): Request<Iot.Types.DescribeAccountAuditConfigurationResponse, AWSError>;
+  /**
+   * Gets information about the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.
+   */
+  describeAccountAuditConfiguration(callback?: (err: AWSError, data: Iot.Types.DescribeAccountAuditConfigurationResponse) => void): Request<Iot.Types.DescribeAccountAuditConfigurationResponse, AWSError>;
+  /**
+   * Gets information about a Device Defender audit.
+   */
+  describeAuditTask(params: Iot.Types.DescribeAuditTaskRequest, callback?: (err: AWSError, data: Iot.Types.DescribeAuditTaskResponse) => void): Request<Iot.Types.DescribeAuditTaskResponse, AWSError>;
+  /**
+   * Gets information about a Device Defender audit.
+   */
+  describeAuditTask(callback?: (err: AWSError, data: Iot.Types.DescribeAuditTaskResponse) => void): Request<Iot.Types.DescribeAuditTaskResponse, AWSError>;
+  /**
    * Describes an authorizer.
    */
   describeAuthorizer(params: Iot.Types.DescribeAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.DescribeAuthorizerResponse) => void): Request<Iot.Types.DescribeAuthorizerResponse, AWSError>;
@@ -315,6 +451,14 @@ declare class Iot extends Service {
    * Describes an authorizer.
    */
   describeAuthorizer(callback?: (err: AWSError, data: Iot.Types.DescribeAuthorizerResponse) => void): Request<Iot.Types.DescribeAuthorizerResponse, AWSError>;
+  /**
+   * Returns information about a billing group.
+   */
+  describeBillingGroup(params: Iot.Types.DescribeBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.DescribeBillingGroupResponse) => void): Request<Iot.Types.DescribeBillingGroupResponse, AWSError>;
+  /**
+   * Returns information about a billing group.
+   */
+  describeBillingGroup(callback?: (err: AWSError, data: Iot.Types.DescribeBillingGroupResponse) => void): Request<Iot.Types.DescribeBillingGroupResponse, AWSError>;
   /**
    * Describes a registered CA certificate.
    */
@@ -388,6 +532,22 @@ declare class Iot extends Service {
    */
   describeRoleAlias(callback?: (err: AWSError, data: Iot.Types.DescribeRoleAliasResponse) => void): Request<Iot.Types.DescribeRoleAliasResponse, AWSError>;
   /**
+   * Gets information about a scheduled audit.
+   */
+  describeScheduledAudit(params: Iot.Types.DescribeScheduledAuditRequest, callback?: (err: AWSError, data: Iot.Types.DescribeScheduledAuditResponse) => void): Request<Iot.Types.DescribeScheduledAuditResponse, AWSError>;
+  /**
+   * Gets information about a scheduled audit.
+   */
+  describeScheduledAudit(callback?: (err: AWSError, data: Iot.Types.DescribeScheduledAuditResponse) => void): Request<Iot.Types.DescribeScheduledAuditResponse, AWSError>;
+  /**
+   * Gets information about a Device Defender security profile.
+   */
+  describeSecurityProfile(params: Iot.Types.DescribeSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.DescribeSecurityProfileResponse) => void): Request<Iot.Types.DescribeSecurityProfileResponse, AWSError>;
+  /**
+   * Gets information about a Device Defender security profile.
+   */
+  describeSecurityProfile(callback?: (err: AWSError, data: Iot.Types.DescribeSecurityProfileResponse) => void): Request<Iot.Types.DescribeSecurityProfileResponse, AWSError>;
+  /**
    * Gets information about a stream.
    */
   describeStream(params: Iot.Types.DescribeStreamRequest, callback?: (err: AWSError, data: Iot.Types.DescribeStreamResponse) => void): Request<Iot.Types.DescribeStreamResponse, AWSError>;
@@ -444,11 +604,19 @@ declare class Iot extends Service {
    */
   detachPrincipalPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Detaches the specified principal from the specified thing.
+   * Disassociates a Device Defender security profile from a thing group or from this account.
+   */
+  detachSecurityProfile(params: Iot.Types.DetachSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.DetachSecurityProfileResponse) => void): Request<Iot.Types.DetachSecurityProfileResponse, AWSError>;
+  /**
+   * Disassociates a Device Defender security profile from a thing group or from this account.
+   */
+  detachSecurityProfile(callback?: (err: AWSError, data: Iot.Types.DetachSecurityProfileResponse) => void): Request<Iot.Types.DetachSecurityProfileResponse, AWSError>;
+  /**
+   * Detaches the specified principal from the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.  This call is asynchronous. It might take several seconds for the detachment to propagate. 
    */
   detachThingPrincipal(params: Iot.Types.DetachThingPrincipalRequest, callback?: (err: AWSError, data: Iot.Types.DetachThingPrincipalResponse) => void): Request<Iot.Types.DetachThingPrincipalResponse, AWSError>;
   /**
-   * Detaches the specified principal from the specified thing.
+   * Detaches the specified principal from the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.  This call is asynchronous. It might take several seconds for the detachment to propagate. 
    */
   detachThingPrincipal(callback?: (err: AWSError, data: Iot.Types.DetachThingPrincipalResponse) => void): Request<Iot.Types.DetachThingPrincipalResponse, AWSError>;
   /**
@@ -468,11 +636,11 @@ declare class Iot extends Service {
    */
   enableTopicRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Gets effective policies.
+   * Gets a list of the policies that have an effect on the authorization behavior of the specified device when it connects to the AWS IoT device gateway.
    */
   getEffectivePolicies(params: Iot.Types.GetEffectivePoliciesRequest, callback?: (err: AWSError, data: Iot.Types.GetEffectivePoliciesResponse) => void): Request<Iot.Types.GetEffectivePoliciesResponse, AWSError>;
   /**
-   * Gets effective policies.
+   * Gets a list of the policies that have an effect on the authorization behavior of the specified device when it connects to the AWS IoT device gateway.
    */
   getEffectivePolicies(callback?: (err: AWSError, data: Iot.Types.GetEffectivePoliciesResponse) => void): Request<Iot.Types.GetEffectivePoliciesResponse, AWSError>;
   /**
@@ -492,11 +660,11 @@ declare class Iot extends Service {
    */
   getJobDocument(callback?: (err: AWSError, data: Iot.Types.GetJobDocumentResponse) => void): Request<Iot.Types.GetJobDocumentResponse, AWSError>;
   /**
-   * Gets the logging options.
+   * Gets the logging options. NOTE: use of this command is not recommended. Use GetV2LoggingOptions instead.
    */
   getLoggingOptions(params: Iot.Types.GetLoggingOptionsRequest, callback?: (err: AWSError, data: Iot.Types.GetLoggingOptionsResponse) => void): Request<Iot.Types.GetLoggingOptionsResponse, AWSError>;
   /**
-   * Gets the logging options.
+   * Gets the logging options. NOTE: use of this command is not recommended. Use GetV2LoggingOptions instead.
    */
   getLoggingOptions(callback?: (err: AWSError, data: Iot.Types.GetLoggingOptionsResponse) => void): Request<Iot.Types.GetLoggingOptionsResponse, AWSError>;
   /**
@@ -548,6 +716,14 @@ declare class Iot extends Service {
    */
   getV2LoggingOptions(callback?: (err: AWSError, data: Iot.Types.GetV2LoggingOptionsResponse) => void): Request<Iot.Types.GetV2LoggingOptionsResponse, AWSError>;
   /**
+   * Lists the active violations for a given Device Defender security profile.
+   */
+  listActiveViolations(params: Iot.Types.ListActiveViolationsRequest, callback?: (err: AWSError, data: Iot.Types.ListActiveViolationsResponse) => void): Request<Iot.Types.ListActiveViolationsResponse, AWSError>;
+  /**
+   * Lists the active violations for a given Device Defender security profile.
+   */
+  listActiveViolations(callback?: (err: AWSError, data: Iot.Types.ListActiveViolationsResponse) => void): Request<Iot.Types.ListActiveViolationsResponse, AWSError>;
+  /**
    * Lists the policies attached to the specified thing group.
    */
   listAttachedPolicies(params: Iot.Types.ListAttachedPoliciesRequest, callback?: (err: AWSError, data: Iot.Types.ListAttachedPoliciesResponse) => void): Request<Iot.Types.ListAttachedPoliciesResponse, AWSError>;
@@ -556,6 +732,22 @@ declare class Iot extends Service {
    */
   listAttachedPolicies(callback?: (err: AWSError, data: Iot.Types.ListAttachedPoliciesResponse) => void): Request<Iot.Types.ListAttachedPoliciesResponse, AWSError>;
   /**
+   * Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 180 days.)
+   */
+  listAuditFindings(params: Iot.Types.ListAuditFindingsRequest, callback?: (err: AWSError, data: Iot.Types.ListAuditFindingsResponse) => void): Request<Iot.Types.ListAuditFindingsResponse, AWSError>;
+  /**
+   * Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 180 days.)
+   */
+  listAuditFindings(callback?: (err: AWSError, data: Iot.Types.ListAuditFindingsResponse) => void): Request<Iot.Types.ListAuditFindingsResponse, AWSError>;
+  /**
+   * Lists the Device Defender audits that have been performed during a given time period.
+   */
+  listAuditTasks(params: Iot.Types.ListAuditTasksRequest, callback?: (err: AWSError, data: Iot.Types.ListAuditTasksResponse) => void): Request<Iot.Types.ListAuditTasksResponse, AWSError>;
+  /**
+   * Lists the Device Defender audits that have been performed during a given time period.
+   */
+  listAuditTasks(callback?: (err: AWSError, data: Iot.Types.ListAuditTasksResponse) => void): Request<Iot.Types.ListAuditTasksResponse, AWSError>;
+  /**
    * Lists the authorizers registered in your account.
    */
   listAuthorizers(params: Iot.Types.ListAuthorizersRequest, callback?: (err: AWSError, data: Iot.Types.ListAuthorizersResponse) => void): Request<Iot.Types.ListAuthorizersResponse, AWSError>;
@@ -563,6 +755,14 @@ declare class Iot extends Service {
    * Lists the authorizers registered in your account.
    */
   listAuthorizers(callback?: (err: AWSError, data: Iot.Types.ListAuthorizersResponse) => void): Request<Iot.Types.ListAuthorizersResponse, AWSError>;
+  /**
+   * Lists the billing groups you have created.
+   */
+  listBillingGroups(params: Iot.Types.ListBillingGroupsRequest, callback?: (err: AWSError, data: Iot.Types.ListBillingGroupsResponse) => void): Request<Iot.Types.ListBillingGroupsResponse, AWSError>;
+  /**
+   * Lists the billing groups you have created.
+   */
+  listBillingGroups(callback?: (err: AWSError, data: Iot.Types.ListBillingGroupsResponse) => void): Request<Iot.Types.ListBillingGroupsResponse, AWSError>;
   /**
    * Lists the CA certificates registered for your AWS account. The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results.
    */
@@ -668,11 +868,11 @@ declare class Iot extends Service {
    */
   listPrincipalPolicies(callback?: (err: AWSError, data: Iot.Types.ListPrincipalPoliciesResponse) => void): Request<Iot.Types.ListPrincipalPoliciesResponse, AWSError>;
   /**
-   * Lists the things associated with the specified principal.
+   * Lists the things associated with the specified principal. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities. 
    */
   listPrincipalThings(params: Iot.Types.ListPrincipalThingsRequest, callback?: (err: AWSError, data: Iot.Types.ListPrincipalThingsResponse) => void): Request<Iot.Types.ListPrincipalThingsResponse, AWSError>;
   /**
-   * Lists the things associated with the specified principal.
+   * Lists the things associated with the specified principal. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities. 
    */
   listPrincipalThings(callback?: (err: AWSError, data: Iot.Types.ListPrincipalThingsResponse) => void): Request<Iot.Types.ListPrincipalThingsResponse, AWSError>;
   /**
@@ -684,6 +884,30 @@ declare class Iot extends Service {
    */
   listRoleAliases(callback?: (err: AWSError, data: Iot.Types.ListRoleAliasesResponse) => void): Request<Iot.Types.ListRoleAliasesResponse, AWSError>;
   /**
+   * Lists all of your scheduled audits.
+   */
+  listScheduledAudits(params: Iot.Types.ListScheduledAuditsRequest, callback?: (err: AWSError, data: Iot.Types.ListScheduledAuditsResponse) => void): Request<Iot.Types.ListScheduledAuditsResponse, AWSError>;
+  /**
+   * Lists all of your scheduled audits.
+   */
+  listScheduledAudits(callback?: (err: AWSError, data: Iot.Types.ListScheduledAuditsResponse) => void): Request<Iot.Types.ListScheduledAuditsResponse, AWSError>;
+  /**
+   * Lists the Device Defender security profiles you have created. You can use filters to list only those security profiles associated with a thing group or only those associated with your account.
+   */
+  listSecurityProfiles(params: Iot.Types.ListSecurityProfilesRequest, callback?: (err: AWSError, data: Iot.Types.ListSecurityProfilesResponse) => void): Request<Iot.Types.ListSecurityProfilesResponse, AWSError>;
+  /**
+   * Lists the Device Defender security profiles you have created. You can use filters to list only those security profiles associated with a thing group or only those associated with your account.
+   */
+  listSecurityProfiles(callback?: (err: AWSError, data: Iot.Types.ListSecurityProfilesResponse) => void): Request<Iot.Types.ListSecurityProfilesResponse, AWSError>;
+  /**
+   * Lists the Device Defender security profiles attached to a target (thing group).
+   */
+  listSecurityProfilesForTarget(params: Iot.Types.ListSecurityProfilesForTargetRequest, callback?: (err: AWSError, data: Iot.Types.ListSecurityProfilesForTargetResponse) => void): Request<Iot.Types.ListSecurityProfilesForTargetResponse, AWSError>;
+  /**
+   * Lists the Device Defender security profiles attached to a target (thing group).
+   */
+  listSecurityProfilesForTarget(callback?: (err: AWSError, data: Iot.Types.ListSecurityProfilesForTargetResponse) => void): Request<Iot.Types.ListSecurityProfilesForTargetResponse, AWSError>;
+  /**
    * Lists all of the streams in your AWS account.
    */
   listStreams(params: Iot.Types.ListStreamsRequest, callback?: (err: AWSError, data: Iot.Types.ListStreamsResponse) => void): Request<Iot.Types.ListStreamsResponse, AWSError>;
@@ -692,6 +916,14 @@ declare class Iot extends Service {
    */
   listStreams(callback?: (err: AWSError, data: Iot.Types.ListStreamsResponse) => void): Request<Iot.Types.ListStreamsResponse, AWSError>;
   /**
+   * Lists the tags (metadata) you have assigned to the resource.
+   */
+  listTagsForResource(params: Iot.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Iot.Types.ListTagsForResourceResponse) => void): Request<Iot.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags (metadata) you have assigned to the resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Iot.Types.ListTagsForResourceResponse) => void): Request<Iot.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * List targets for the specified policy.
    */
   listTargetsForPolicy(params: Iot.Types.ListTargetsForPolicyRequest, callback?: (err: AWSError, data: Iot.Types.ListTargetsForPolicyResponse) => void): Request<Iot.Types.ListTargetsForPolicyResponse, AWSError>;
@@ -699,6 +931,14 @@ declare class Iot extends Service {
    * List targets for the specified policy.
    */
   listTargetsForPolicy(callback?: (err: AWSError, data: Iot.Types.ListTargetsForPolicyResponse) => void): Request<Iot.Types.ListTargetsForPolicyResponse, AWSError>;
+  /**
+   * Lists the targets (thing groups) associated with a given Device Defender security profile.
+   */
+  listTargetsForSecurityProfile(params: Iot.Types.ListTargetsForSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.ListTargetsForSecurityProfileResponse) => void): Request<Iot.Types.ListTargetsForSecurityProfileResponse, AWSError>;
+  /**
+   * Lists the targets (thing groups) associated with a given Device Defender security profile.
+   */
+  listTargetsForSecurityProfile(callback?: (err: AWSError, data: Iot.Types.ListTargetsForSecurityProfileResponse) => void): Request<Iot.Types.ListTargetsForSecurityProfileResponse, AWSError>;
   /**
    * List the thing groups in your account.
    */
@@ -716,11 +956,11 @@ declare class Iot extends Service {
    */
   listThingGroupsForThing(callback?: (err: AWSError, data: Iot.Types.ListThingGroupsForThingResponse) => void): Request<Iot.Types.ListThingGroupsForThingResponse, AWSError>;
   /**
-   * Lists the principals associated with the specified thing.
+   * Lists the principals associated with the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.
    */
   listThingPrincipals(params: Iot.Types.ListThingPrincipalsRequest, callback?: (err: AWSError, data: Iot.Types.ListThingPrincipalsResponse) => void): Request<Iot.Types.ListThingPrincipalsResponse, AWSError>;
   /**
-   * Lists the principals associated with the specified thing.
+   * Lists the principals associated with the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.
    */
   listThingPrincipals(callback?: (err: AWSError, data: Iot.Types.ListThingPrincipalsResponse) => void): Request<Iot.Types.ListThingPrincipalsResponse, AWSError>;
   /**
@@ -756,6 +996,14 @@ declare class Iot extends Service {
    */
   listThings(callback?: (err: AWSError, data: Iot.Types.ListThingsResponse) => void): Request<Iot.Types.ListThingsResponse, AWSError>;
   /**
+   * Lists the things you have added to the given billing group.
+   */
+  listThingsInBillingGroup(params: Iot.Types.ListThingsInBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.ListThingsInBillingGroupResponse) => void): Request<Iot.Types.ListThingsInBillingGroupResponse, AWSError>;
+  /**
+   * Lists the things you have added to the given billing group.
+   */
+  listThingsInBillingGroup(callback?: (err: AWSError, data: Iot.Types.ListThingsInBillingGroupResponse) => void): Request<Iot.Types.ListThingsInBillingGroupResponse, AWSError>;
+  /**
    * Lists the things in the specified group.
    */
   listThingsInThingGroup(params: Iot.Types.ListThingsInThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.ListThingsInThingGroupResponse) => void): Request<Iot.Types.ListThingsInThingGroupResponse, AWSError>;
@@ -779,6 +1027,14 @@ declare class Iot extends Service {
    * Lists logging levels.
    */
   listV2LoggingLevels(callback?: (err: AWSError, data: Iot.Types.ListV2LoggingLevelsResponse) => void): Request<Iot.Types.ListV2LoggingLevelsResponse, AWSError>;
+  /**
+   * Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior or thing (device).
+   */
+  listViolationEvents(params: Iot.Types.ListViolationEventsRequest, callback?: (err: AWSError, data: Iot.Types.ListViolationEventsResponse) => void): Request<Iot.Types.ListViolationEventsResponse, AWSError>;
+  /**
+   * Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior or thing (device).
+   */
+  listViolationEvents(callback?: (err: AWSError, data: Iot.Types.ListViolationEventsResponse) => void): Request<Iot.Types.ListViolationEventsResponse, AWSError>;
   /**
    * Registers a CA certificate with AWS IoT. This CA certificate can then be used to sign device certificates, which can be then registered with AWS IoT. You can register up to 10 CA certificates per AWS account that have the same subject field. This enables you to have up to 10 certificate authorities sign your device certificates. If you have more than one CA certificate registered, make sure you pass the CA certificate when you register your device certificates with the RegisterCertificate API.
    */
@@ -811,6 +1067,14 @@ declare class Iot extends Service {
    * Rejects a pending certificate transfer. After AWS IoT rejects a certificate transfer, the certificate status changes from PENDING_TRANSFER to INACTIVE. To check for pending certificate transfers, call ListCertificates to enumerate your certificates. This operation can only be called by the transfer destination. After it is called, the certificate will be returned to the source's account in the INACTIVE state.
    */
   rejectCertificateTransfer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the given thing from the billing group.
+   */
+  removeThingFromBillingGroup(params: Iot.Types.RemoveThingFromBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.RemoveThingFromBillingGroupResponse) => void): Request<Iot.Types.RemoveThingFromBillingGroupResponse, AWSError>;
+  /**
+   * Removes the given thing from the billing group.
+   */
+  removeThingFromBillingGroup(callback?: (err: AWSError, data: Iot.Types.RemoveThingFromBillingGroupResponse) => void): Request<Iot.Types.RemoveThingFromBillingGroupResponse, AWSError>;
   /**
    * Remove the specified thing from the specified group.
    */
@@ -852,11 +1116,11 @@ declare class Iot extends Service {
    */
   setDefaultPolicyVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the logging options.
+   * Sets the logging options. NOTE: use of this command is not recommended. Use SetV2LoggingOptions instead.
    */
   setLoggingOptions(params: Iot.Types.SetLoggingOptionsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the logging options.
+   * Sets the logging options. NOTE: use of this command is not recommended. Use SetV2LoggingOptions instead.
    */
   setLoggingOptions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -876,6 +1140,14 @@ declare class Iot extends Service {
    */
   setV2LoggingOptions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Starts an on-demand Device Defender audit.
+   */
+  startOnDemandAuditTask(params: Iot.Types.StartOnDemandAuditTaskRequest, callback?: (err: AWSError, data: Iot.Types.StartOnDemandAuditTaskResponse) => void): Request<Iot.Types.StartOnDemandAuditTaskResponse, AWSError>;
+  /**
+   * Starts an on-demand Device Defender audit.
+   */
+  startOnDemandAuditTask(callback?: (err: AWSError, data: Iot.Types.StartOnDemandAuditTaskResponse) => void): Request<Iot.Types.StartOnDemandAuditTaskResponse, AWSError>;
+  /**
    * Creates a bulk thing provisioning task.
    */
   startThingRegistrationTask(params: Iot.Types.StartThingRegistrationTaskRequest, callback?: (err: AWSError, data: Iot.Types.StartThingRegistrationTaskResponse) => void): Request<Iot.Types.StartThingRegistrationTaskResponse, AWSError>;
@@ -892,19 +1164,27 @@ declare class Iot extends Service {
    */
   stopThingRegistrationTask(callback?: (err: AWSError, data: Iot.Types.StopThingRegistrationTaskResponse) => void): Request<Iot.Types.StopThingRegistrationTaskResponse, AWSError>;
   /**
-   * Test custom authorization.
+   * Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.
+   */
+  tagResource(params: Iot.Types.TagResourceRequest, callback?: (err: AWSError, data: Iot.Types.TagResourceResponse) => void): Request<Iot.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.
+   */
+  tagResource(callback?: (err: AWSError, data: Iot.Types.TagResourceResponse) => void): Request<Iot.Types.TagResourceResponse, AWSError>;
+  /**
+   * Tests if a specified principal is authorized to perform an AWS IoT action on a specified resource. Use this to test and debug the authorization behavior of devices that connect to the AWS IoT device gateway.
    */
   testAuthorization(params: Iot.Types.TestAuthorizationRequest, callback?: (err: AWSError, data: Iot.Types.TestAuthorizationResponse) => void): Request<Iot.Types.TestAuthorizationResponse, AWSError>;
   /**
-   * Test custom authorization.
+   * Tests if a specified principal is authorized to perform an AWS IoT action on a specified resource. Use this to test and debug the authorization behavior of devices that connect to the AWS IoT device gateway.
    */
   testAuthorization(callback?: (err: AWSError, data: Iot.Types.TestAuthorizationResponse) => void): Request<Iot.Types.TestAuthorizationResponse, AWSError>;
   /**
-   * Invoke the specified custom authorizer for testing purposes.
+   * Tests a custom authorization behavior by invoking a specified custom authorizer. Use this to test and debug the custom authorization behavior of devices that connect to the AWS IoT device gateway.
    */
   testInvokeAuthorizer(params: Iot.Types.TestInvokeAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.TestInvokeAuthorizerResponse) => void): Request<Iot.Types.TestInvokeAuthorizerResponse, AWSError>;
   /**
-   * Invoke the specified custom authorizer for testing purposes.
+   * Tests a custom authorization behavior by invoking a specified custom authorizer. Use this to test and debug the custom authorization behavior of devices that connect to the AWS IoT device gateway.
    */
   testInvokeAuthorizer(callback?: (err: AWSError, data: Iot.Types.TestInvokeAuthorizerResponse) => void): Request<Iot.Types.TestInvokeAuthorizerResponse, AWSError>;
   /**
@@ -916,6 +1196,22 @@ declare class Iot extends Service {
    */
   transferCertificate(callback?: (err: AWSError, data: Iot.Types.TransferCertificateResponse) => void): Request<Iot.Types.TransferCertificateResponse, AWSError>;
   /**
+   * Removes the given tags (metadata) from the resource.
+   */
+  untagResource(params: Iot.Types.UntagResourceRequest, callback?: (err: AWSError, data: Iot.Types.UntagResourceResponse) => void): Request<Iot.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes the given tags (metadata) from the resource.
+   */
+  untagResource(callback?: (err: AWSError, data: Iot.Types.UntagResourceResponse) => void): Request<Iot.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Configures or reconfigures the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.
+   */
+  updateAccountAuditConfiguration(params: Iot.Types.UpdateAccountAuditConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.UpdateAccountAuditConfigurationResponse) => void): Request<Iot.Types.UpdateAccountAuditConfigurationResponse, AWSError>;
+  /**
+   * Configures or reconfigures the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.
+   */
+  updateAccountAuditConfiguration(callback?: (err: AWSError, data: Iot.Types.UpdateAccountAuditConfigurationResponse) => void): Request<Iot.Types.UpdateAccountAuditConfigurationResponse, AWSError>;
+  /**
    * Updates an authorizer.
    */
   updateAuthorizer(params: Iot.Types.UpdateAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.UpdateAuthorizerResponse) => void): Request<Iot.Types.UpdateAuthorizerResponse, AWSError>;
@@ -923,6 +1219,14 @@ declare class Iot extends Service {
    * Updates an authorizer.
    */
   updateAuthorizer(callback?: (err: AWSError, data: Iot.Types.UpdateAuthorizerResponse) => void): Request<Iot.Types.UpdateAuthorizerResponse, AWSError>;
+  /**
+   * Updates information about the billing group.
+   */
+  updateBillingGroup(params: Iot.Types.UpdateBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.UpdateBillingGroupResponse) => void): Request<Iot.Types.UpdateBillingGroupResponse, AWSError>;
+  /**
+   * Updates information about the billing group.
+   */
+  updateBillingGroup(callback?: (err: AWSError, data: Iot.Types.UpdateBillingGroupResponse) => void): Request<Iot.Types.UpdateBillingGroupResponse, AWSError>;
   /**
    * Updates a registered CA certificate.
    */
@@ -940,6 +1244,14 @@ declare class Iot extends Service {
    */
   updateCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Updates a dynamic thing group.
+   */
+  updateDynamicThingGroup(params: Iot.Types.UpdateDynamicThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.UpdateDynamicThingGroupResponse) => void): Request<Iot.Types.UpdateDynamicThingGroupResponse, AWSError>;
+  /**
+   * Updates a dynamic thing group.
+   */
+  updateDynamicThingGroup(callback?: (err: AWSError, data: Iot.Types.UpdateDynamicThingGroupResponse) => void): Request<Iot.Types.UpdateDynamicThingGroupResponse, AWSError>;
+  /**
    * Updates the event configurations.
    */
   updateEventConfigurations(params: Iot.Types.UpdateEventConfigurationsRequest, callback?: (err: AWSError, data: Iot.Types.UpdateEventConfigurationsResponse) => void): Request<Iot.Types.UpdateEventConfigurationsResponse, AWSError>;
@@ -956,6 +1268,14 @@ declare class Iot extends Service {
    */
   updateIndexingConfiguration(callback?: (err: AWSError, data: Iot.Types.UpdateIndexingConfigurationResponse) => void): Request<Iot.Types.UpdateIndexingConfigurationResponse, AWSError>;
   /**
+   * Updates supported fields of the specified job.
+   */
+  updateJob(params: Iot.Types.UpdateJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates supported fields of the specified job.
+   */
+  updateJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Updates a role alias.
    */
   updateRoleAlias(params: Iot.Types.UpdateRoleAliasRequest, callback?: (err: AWSError, data: Iot.Types.UpdateRoleAliasResponse) => void): Request<Iot.Types.UpdateRoleAliasResponse, AWSError>;
@@ -963,6 +1283,22 @@ declare class Iot extends Service {
    * Updates a role alias.
    */
   updateRoleAlias(callback?: (err: AWSError, data: Iot.Types.UpdateRoleAliasResponse) => void): Request<Iot.Types.UpdateRoleAliasResponse, AWSError>;
+  /**
+   * Updates a scheduled audit, including what checks are performed and how often the audit takes place.
+   */
+  updateScheduledAudit(params: Iot.Types.UpdateScheduledAuditRequest, callback?: (err: AWSError, data: Iot.Types.UpdateScheduledAuditResponse) => void): Request<Iot.Types.UpdateScheduledAuditResponse, AWSError>;
+  /**
+   * Updates a scheduled audit, including what checks are performed and how often the audit takes place.
+   */
+  updateScheduledAudit(callback?: (err: AWSError, data: Iot.Types.UpdateScheduledAuditResponse) => void): Request<Iot.Types.UpdateScheduledAuditResponse, AWSError>;
+  /**
+   * Updates a Device Defender security profile.
+   */
+  updateSecurityProfile(params: Iot.Types.UpdateSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.UpdateSecurityProfileResponse) => void): Request<Iot.Types.UpdateSecurityProfileResponse, AWSError>;
+  /**
+   * Updates a Device Defender security profile.
+   */
+  updateSecurityProfile(callback?: (err: AWSError, data: Iot.Types.UpdateSecurityProfileResponse) => void): Request<Iot.Types.UpdateSecurityProfileResponse, AWSError>;
   /**
    * Updates an existing stream. The stream version will be incremented by one.
    */
@@ -995,11 +1331,46 @@ declare class Iot extends Service {
    * Updates the groups to which the thing belongs.
    */
   updateThingGroupsForThing(callback?: (err: AWSError, data: Iot.Types.UpdateThingGroupsForThingResponse) => void): Request<Iot.Types.UpdateThingGroupsForThingResponse, AWSError>;
+  /**
+   * Validates a Device Defender security profile behaviors specification.
+   */
+  validateSecurityProfileBehaviors(params: Iot.Types.ValidateSecurityProfileBehaviorsRequest, callback?: (err: AWSError, data: Iot.Types.ValidateSecurityProfileBehaviorsResponse) => void): Request<Iot.Types.ValidateSecurityProfileBehaviorsResponse, AWSError>;
+  /**
+   * Validates a Device Defender security profile behaviors specification.
+   */
+  validateSecurityProfileBehaviors(callback?: (err: AWSError, data: Iot.Types.ValidateSecurityProfileBehaviorsResponse) => void): Request<Iot.Types.ValidateSecurityProfileBehaviorsResponse, AWSError>;
 }
 declare namespace Iot {
+  export type AbortAction = "CANCEL"|string;
+  export interface AbortConfig {
+    /**
+     * The list of abort criteria to define rules to abort the job.
+     */
+    criteriaList: AbortCriteriaList;
+  }
+  export interface AbortCriteria {
+    /**
+     * The type of job execution failure to define a rule to initiate a job abort.
+     */
+    failureType: JobExecutionFailureType;
+    /**
+     * The type of abort action to initiate a job abort.
+     */
+    action: AbortAction;
+    /**
+     * The threshold as a percentage of the total number of executed things that will initiate a job abort. AWS IoT supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).
+     */
+    thresholdPercentage: AbortThresholdPercentage;
+    /**
+     * Minimum number of executed things before evaluating an abort rule.
+     */
+    minNumberOfExecutedThings: MinimumNumberOfExecutedThings;
+  }
+  export type AbortCriteriaList = AbortCriteria[];
+  export type AbortThresholdPercentage = number;
   export interface AcceptCertificateTransferRequest {
     /**
-     * The ID of the certificate.
+     * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
      */
     certificateId: CertificateId;
     /**
@@ -1060,9 +1431,72 @@ declare namespace Iot {
      * Send a message to a Salesforce IoT Cloud Input Stream.
      */
     salesforce?: SalesforceAction;
+    /**
+     * Sends message data to an AWS IoT Analytics channel.
+     */
+    iotAnalytics?: IotAnalyticsAction;
+    /**
+     * Sends an input to an AWS IoT Events detector.
+     */
+    iotEvents?: IotEventsAction;
+    /**
+     * Starts execution of a Step Functions state machine.
+     */
+    stepFunctions?: StepFunctionsAction;
   }
   export type ActionList = Action[];
   export type ActionType = "PUBLISH"|"SUBSCRIBE"|"RECEIVE"|"CONNECT"|string;
+  export interface ActiveViolation {
+    /**
+     * The ID of the active violation.
+     */
+    violationId?: ViolationId;
+    /**
+     * The name of the thing responsible for the active violation.
+     */
+    thingName?: ThingName;
+    /**
+     * The security profile whose behavior is in violation.
+     */
+    securityProfileName?: SecurityProfileName;
+    /**
+     * The behavior which is being violated.
+     */
+    behavior?: Behavior;
+    /**
+     * The value of the metric (the measurement) which caused the most recent violation.
+     */
+    lastViolationValue?: MetricValue;
+    /**
+     * The time the most recent violation occurred.
+     */
+    lastViolationTime?: Timestamp;
+    /**
+     * The time the violation started.
+     */
+    violationStartTime?: Timestamp;
+  }
+  export type ActiveViolations = ActiveViolation[];
+  export interface AddThingToBillingGroupRequest {
+    /**
+     * The name of the billing group.
+     */
+    billingGroupName?: BillingGroupName;
+    /**
+     * The ARN of the billing group.
+     */
+    billingGroupArn?: BillingGroupArn;
+    /**
+     * The name of the thing to be added to the billing group.
+     */
+    thingName?: ThingName;
+    /**
+     * The ARN of the thing to be added to the billing group.
+     */
+    thingArn?: ThingArn;
+  }
+  export interface AddThingToBillingGroupResponse {
+  }
   export interface AddThingToThingGroupRequest {
     /**
      * The name of the group to which you are adding a thing.
@@ -1080,11 +1514,29 @@ declare namespace Iot {
      * The ARN of the thing to add to a group.
      */
     thingArn?: ThingArn;
+    /**
+     * Override dynamic thing groups with static thing groups when 10-group limit is reached. If a thing belongs to 10 thing groups, and one or more of those groups are dynamic thing groups, adding a thing to a static group removes the thing from the last dynamic group.
+     */
+    overrideDynamicGroups?: OverrideDynamicGroups;
   }
   export interface AddThingToThingGroupResponse {
   }
+  export type AdditionalMetricsToRetainList = BehaviorMetric[];
   export type AdditionalParameterMap = {[key: string]: Value};
   export type AlarmName = string;
+  export interface AlertTarget {
+    /**
+     * The ARN of the notification target to which alerts are sent.
+     */
+    alertTargetArn: AlertTargetArn;
+    /**
+     * The ARN of the role that grants permission to send alerts to the notification target.
+     */
+    roleArn: RoleArn;
+  }
+  export type AlertTargetArn = string;
+  export type AlertTargetType = "SNS"|string;
+  export type AlertTargets = {[key: string]: AlertTarget};
   export type AllowAutoRegistration = boolean;
   export interface Allowed {
     /**
@@ -1092,6 +1544,7 @@ declare namespace Iot {
      */
     policies?: Policies;
   }
+  export type ApproximateSecondsBeforeTimedOut = number;
   export type AscendingOrder = boolean;
   export interface AssociateTargetsWithJobRequest {
     /**
@@ -1141,6 +1594,18 @@ declare namespace Iot {
      */
     principal: Principal;
   }
+  export interface AttachSecurityProfileRequest {
+    /**
+     * The security profile that is attached.
+     */
+    securityProfileName: SecurityProfileName;
+    /**
+     * The ARN of the target (thing group) to which the security profile is attached.
+     */
+    securityProfileTargetArn: SecurityProfileTargetArn;
+  }
+  export interface AttachSecurityProfileResponse {
+  }
   export interface AttachThingPrincipalRequest {
     /**
      * The name of the thing.
@@ -1153,6 +1618,7 @@ declare namespace Iot {
   }
   export interface AttachThingPrincipalResponse {
   }
+  export type AttributeKey = string;
   export type AttributeName = string;
   export interface AttributePayload {
     /**
@@ -1167,6 +1633,117 @@ declare namespace Iot {
   export type AttributeValue = string;
   export type Attributes = {[key: string]: AttributeValue};
   export type AttributesMap = {[key: string]: Value};
+  export interface AuditCheckConfiguration {
+    /**
+     * True if this audit check is enabled for this account.
+     */
+    enabled?: Enabled;
+  }
+  export type AuditCheckConfigurations = {[key: string]: AuditCheckConfiguration};
+  export interface AuditCheckDetails {
+    /**
+     * The completion status of this check, one of "IN_PROGRESS", "WAITING_FOR_DATA_COLLECTION", "CANCELED", "COMPLETED_COMPLIANT", "COMPLETED_NON_COMPLIANT", or "FAILED".
+     */
+    checkRunStatus?: AuditCheckRunStatus;
+    /**
+     * True if the check completed and found all resources compliant.
+     */
+    checkCompliant?: CheckCompliant;
+    /**
+     * The number of resources on which the check was performed.
+     */
+    totalResourcesCount?: TotalResourcesCount;
+    /**
+     * The number of resources that the check found non-compliant.
+     */
+    nonCompliantResourcesCount?: NonCompliantResourcesCount;
+    /**
+     * The code of any error encountered when performing this check during this audit. One of "INSUFFICIENT_PERMISSIONS", or "AUDIT_CHECK_DISABLED".
+     */
+    errorCode?: ErrorCode;
+    /**
+     * The message associated with any error encountered when performing this check during this audit.
+     */
+    message?: ErrorMessage;
+  }
+  export type AuditCheckName = string;
+  export type AuditCheckRunStatus = "IN_PROGRESS"|"WAITING_FOR_DATA_COLLECTION"|"CANCELED"|"COMPLETED_COMPLIANT"|"COMPLETED_NON_COMPLIANT"|"FAILED"|string;
+  export type AuditDetails = {[key: string]: AuditCheckDetails};
+  export interface AuditFinding {
+    /**
+     * The ID of the audit that generated this result (finding)
+     */
+    taskId?: AuditTaskId;
+    /**
+     * The audit check that generated this result.
+     */
+    checkName?: AuditCheckName;
+    /**
+     * The time the audit started.
+     */
+    taskStartTime?: Timestamp;
+    /**
+     * The time the result (finding) was discovered.
+     */
+    findingTime?: Timestamp;
+    /**
+     * The severity of the result (finding).
+     */
+    severity?: AuditFindingSeverity;
+    /**
+     * The resource that was found to be non-compliant with the audit check.
+     */
+    nonCompliantResource?: NonCompliantResource;
+    /**
+     * The list of related resources.
+     */
+    relatedResources?: RelatedResources;
+    /**
+     * The reason the resource was non-compliant.
+     */
+    reasonForNonCompliance?: ReasonForNonCompliance;
+    /**
+     * A code which indicates the reason that the resource was non-compliant.
+     */
+    reasonForNonComplianceCode?: ReasonForNonComplianceCode;
+  }
+  export type AuditFindingSeverity = "CRITICAL"|"HIGH"|"MEDIUM"|"LOW"|string;
+  export type AuditFindings = AuditFinding[];
+  export type AuditFrequency = "DAILY"|"WEEKLY"|"BIWEEKLY"|"MONTHLY"|string;
+  export interface AuditNotificationTarget {
+    /**
+     * The ARN of the target (SNS topic) to which audit notifications are sent.
+     */
+    targetArn?: TargetArn;
+    /**
+     * The ARN of the role that grants permission to send notifications to the target.
+     */
+    roleArn?: RoleArn;
+    /**
+     * True if notifications to the target are enabled.
+     */
+    enabled?: Enabled;
+  }
+  export type AuditNotificationTargetConfigurations = {[key: string]: AuditNotificationTarget};
+  export type AuditNotificationType = "SNS"|string;
+  export type AuditTaskId = string;
+  export interface AuditTaskMetadata {
+    /**
+     * The ID of this audit.
+     */
+    taskId?: AuditTaskId;
+    /**
+     * The status of this audit: one of "IN_PROGRESS", "COMPLETED", "FAILED" or "CANCELED".
+     */
+    taskStatus?: AuditTaskStatus;
+    /**
+     * The type of this audit: one of "ON_DEMAND_AUDIT_TASK" or "SCHEDULED_AUDIT_TASK".
+     */
+    taskType?: AuditTaskType;
+  }
+  export type AuditTaskMetadataList = AuditTaskMetadata[];
+  export type AuditTaskStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|"CANCELED"|string;
+  export type AuditTaskType = "ON_DEMAND_AUDIT_TASK"|"SCHEDULED_AUDIT_TASK"|string;
   export type AuthDecision = "ALLOWED"|"EXPLICIT_DENY"|"IMPLICIT_DENY"|string;
   export interface AuthInfo {
     /**
@@ -1257,6 +1834,72 @@ declare namespace Iot {
   export type AwsIotJobArn = string;
   export type AwsIotJobId = string;
   export type AwsIotSqlVersion = string;
+  export interface AwsJobExecutionsRolloutConfig {
+    /**
+     * The maximum number of OTA update job executions started per minute.
+     */
+    maximumPerMinute?: MaximumPerMinute;
+  }
+  export interface Behavior {
+    /**
+     * The name you have given to the behavior.
+     */
+    name: BehaviorName;
+    /**
+     * What is measured by the behavior.
+     */
+    metric?: BehaviorMetric;
+    /**
+     * The criteria that determine if a device is behaving normally in regard to the metric.
+     */
+    criteria?: BehaviorCriteria;
+  }
+  export interface BehaviorCriteria {
+    /**
+     * The operator that relates the thing measured (metric) to the criteria (containing a value or statisticalThreshold).
+     */
+    comparisonOperator?: ComparisonOperator;
+    /**
+     * The value to be compared with the metric.
+     */
+    value?: MetricValue;
+    /**
+     * Use this to specify the time duration over which the behavior is evaluated, for those criteria which have a time dimension (for example, NUM_MESSAGES_SENT). For a statisticalThreshhold metric comparison, measurements from all devices are accumulated over this time duration before being used to calculate percentiles, and later, measurements from an individual device are also accumulated over this time duration before being given a percentile rank.
+     */
+    durationSeconds?: DurationSeconds;
+    /**
+     * If a device is in violation of the behavior for the specified number of consecutive datapoints, an alarm occurs. If not specified, the default is 1.
+     */
+    consecutiveDatapointsToAlarm?: ConsecutiveDatapointsToAlarm;
+    /**
+     * If an alarm has occurred and the offending device is no longer in violation of the behavior for the specified number of consecutive datapoints, the alarm is cleared. If not specified, the default is 1.
+     */
+    consecutiveDatapointsToClear?: ConsecutiveDatapointsToClear;
+    /**
+     * A statistical ranking (percentile) which indicates a threshold value by which a behavior is determined to be in compliance or in violation of the behavior.
+     */
+    statisticalThreshold?: StatisticalThreshold;
+  }
+  export type BehaviorMetric = string;
+  export type BehaviorName = string;
+  export type Behaviors = Behavior[];
+  export type BillingGroupArn = string;
+  export type BillingGroupDescription = string;
+  export type BillingGroupId = string;
+  export interface BillingGroupMetadata {
+    /**
+     * The date the billing group was created.
+     */
+    creationDate?: CreationDate;
+  }
+  export type BillingGroupName = string;
+  export type BillingGroupNameAndArnList = GroupNameAndArn[];
+  export interface BillingGroupProperties {
+    /**
+     * The description of the billing group.
+     */
+    billingGroupDescription?: BillingGroupDescription;
+  }
   export type Boolean = boolean;
   export type BucketName = string;
   export interface CACertificate {
@@ -1306,14 +1949,60 @@ declare namespace Iot {
      * Whether the CA certificate configured for auto registration of device certificates. Valid values are "ENABLE" and "DISABLE"
      */
     autoRegistrationStatus?: AutoRegistrationStatus;
+    /**
+     * The date the CA certificate was last modified.
+     */
+    lastModifiedDate?: DateType;
+    /**
+     * The customer version of the CA certificate.
+     */
+    customerVersion?: CustomerVersion;
+    /**
+     * The generation ID of the CA certificate.
+     */
+    generationId?: GenerationId;
+    /**
+     * When the CA certificate is valid.
+     */
+    validity?: CertificateValidity;
   }
   export type CACertificateStatus = "ACTIVE"|"INACTIVE"|string;
   export type CACertificates = CACertificate[];
+  export interface CancelAuditTaskRequest {
+    /**
+     * The ID of the audit you want to cancel. You can only cancel an audit that is "IN_PROGRESS".
+     */
+    taskId: AuditTaskId;
+  }
+  export interface CancelAuditTaskResponse {
+  }
   export interface CancelCertificateTransferRequest {
     /**
-     * The ID of the certificate.
+     * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
      */
     certificateId: CertificateId;
+  }
+  export interface CancelJobExecutionRequest {
+    /**
+     * The ID of the job to be canceled.
+     */
+    jobId: JobId;
+    /**
+     * The name of the thing whose execution of the job will be canceled.
+     */
+    thingName: ThingName;
+    /**
+     * (Optional) If true the job execution will be canceled if it has status IN_PROGRESS or QUEUED, otherwise the job execution will be canceled only if it has status QUEUED. If you attempt to cancel a job execution that is IN_PROGRESS, and you do not set force to true, then an InvalidStateTransitionException will be thrown. The default is false. Canceling a job execution which is "IN_PROGRESS", will cause the device to be unable to update the job execution status. Use caution and ensure that the device is able to recover to a valid state.
+     */
+    force?: ForceFlag;
+    /**
+     * (Optional) The expected current version of the job execution. Each time you update the job execution, its version is incremented. If the version of the job execution stored in Jobs does not match, the update is rejected with a VersionMismatch error, and an ErrorResponse that contains the current job execution status data is returned. (This makes it unnecessary to perform a separate DescribeJobExecution request in order to obtain the job execution status data.)
+     */
+    expectedVersion?: ExpectedVersion;
+    /**
+     * A collection of name/value pairs that describe the status of the job execution. If not specified, the statusDetails are unchanged. You can specify at most 10 name/value pairs.
+     */
+    statusDetails?: DetailsMap;
   }
   export interface CancelJobRequest {
     /**
@@ -1321,9 +2010,17 @@ declare namespace Iot {
      */
     jobId: JobId;
     /**
+     * (Optional)A reason code string that explains why the job was canceled.
+     */
+    reasonCode?: ReasonCode;
+    /**
      * An optional comment string describing why the job was canceled.
      */
     comment?: Comment;
+    /**
+     * (Optional) If true job executions with status "IN_PROGRESS" and "QUEUED" are canceled, otherwise only job executions with status "QUEUED" are canceled. The default is false. Canceling a job which is "IN_PROGRESS", will cause a device which is executing the job to be unable to update the job execution status. Use caution and ensure that each device executing a job which is canceled is able to recover to a valid state.
+     */
+    force?: ForceFlag;
   }
   export interface CancelJobResponse {
     /**
@@ -1339,6 +2036,7 @@ declare namespace Iot {
      */
     description?: JobDescription;
   }
+  export type CanceledChecksCount = number;
   export type CanceledThings = number;
   export type CannedAccessControlList = "private"|"public-read"|"public-read-write"|"aws-exec-read"|"authenticated-read"|"bucket-owner-read"|"bucket-owner-full-control"|"log-delivery-write"|string;
   export interface Certificate {
@@ -1347,7 +2045,7 @@ declare namespace Iot {
      */
     certificateArn?: CertificateArn;
     /**
-     * The ID of the certificate.
+     * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
      */
     certificateId?: CertificateId;
     /**
@@ -1398,16 +2096,43 @@ declare namespace Iot {
      */
     lastModifiedDate?: DateType;
     /**
+     * The customer version of the certificate.
+     */
+    customerVersion?: CustomerVersion;
+    /**
      * The transfer data.
      */
     transferData?: TransferData;
+    /**
+     * The generation ID of the certificate.
+     */
+    generationId?: GenerationId;
+    /**
+     * When the certificate is valid.
+     */
+    validity?: CertificateValidity;
   }
   export type CertificateId = string;
   export type CertificateName = string;
+  export type CertificatePathOnDevice = string;
   export type CertificatePem = string;
   export type CertificateSigningRequest = string;
   export type CertificateStatus = "ACTIVE"|"INACTIVE"|"REVOKED"|"PENDING_TRANSFER"|"REGISTER_INACTIVE"|"PENDING_ACTIVATION"|string;
+  export interface CertificateValidity {
+    /**
+     * The certificate is not valid before this date.
+     */
+    notBefore?: DateType;
+    /**
+     * The certificate is not valid after this date.
+     */
+    notAfter?: DateType;
+  }
   export type Certificates = Certificate[];
+  export type ChannelName = string;
+  export type CheckCompliant = boolean;
+  export type Cidr = string;
+  export type Cidrs = Cidr[];
   export interface ClearDefaultAuthorizerRequest {
   }
   export interface ClearDefaultAuthorizerResponse {
@@ -1439,23 +2164,23 @@ declare namespace Iot {
     /**
      * The CloudWatch metric namespace name.
      */
-    metricNamespace: MetricNamespace;
+    metricNamespace: String;
     /**
      * The CloudWatch metric name.
      */
-    metricName: MetricName;
+    metricName: String;
     /**
      * The CloudWatch metric value.
      */
-    metricValue: MetricValue;
+    metricValue: String;
     /**
      * The metric unit supported by CloudWatch.
      */
-    metricUnit: MetricUnit;
+    metricUnit: String;
     /**
      * An optional Unix timestamp.
      */
-    metricTimestamp?: MetricTimestamp;
+    metricTimestamp?: String;
   }
   export type Code = string;
   export interface CodeSigning {
@@ -1464,15 +2189,15 @@ declare namespace Iot {
      */
     awsSignerJobId?: SigningJobId;
     /**
+     * Describes the code-signing job.
+     */
+    startSigningJobParameter?: StartSigningJobParameter;
+    /**
      * A custom method for code signing a file.
      */
     customCodeSigning?: CustomCodeSigning;
   }
   export interface CodeSigningCertificateChain {
-    /**
-     * A stream of the certificate chain files.
-     */
-    stream?: Stream;
     /**
      * The name of the certificate.
      */
@@ -1484,22 +2209,23 @@ declare namespace Iot {
   }
   export interface CodeSigningSignature {
     /**
-     * A stream of the code signing signature.
-     */
-    stream?: Stream;
-    /**
      * A base64 encoded binary representation of the code signing signature.
      */
     inlineDocument?: Signature;
   }
   export type CognitoIdentityPoolId = string;
   export type Comment = string;
+  export type ComparisonOperator = "less-than"|"less-than-equals"|"greater-than"|"greater-than-equals"|"in-cidr-set"|"not-in-cidr-set"|"in-port-set"|"not-in-port-set"|string;
+  export type CompliantChecksCount = number;
   export interface Configuration {
     /**
      * True to enable the configuration.
      */
     Enabled?: Enabled;
   }
+  export type ConnectivityTimestamp = number;
+  export type ConsecutiveDatapointsToAlarm = number;
+  export type ConsecutiveDatapointsToClear = number;
   export type Count = number;
   export interface CreateAuthorizerRequest {
     /**
@@ -1533,6 +2259,34 @@ declare namespace Iot {
      */
     authorizerArn?: AuthorizerArn;
   }
+  export interface CreateBillingGroupRequest {
+    /**
+     * The name you wish to give to the billing group.
+     */
+    billingGroupName: BillingGroupName;
+    /**
+     * The properties of the billing group.
+     */
+    billingGroupProperties?: BillingGroupProperties;
+    /**
+     * Metadata which can be used to manage the billing group.
+     */
+    tags?: TagList;
+  }
+  export interface CreateBillingGroupResponse {
+    /**
+     * The name you gave to the billing group.
+     */
+    billingGroupName?: BillingGroupName;
+    /**
+     * The ARN of the billing group.
+     */
+    billingGroupArn?: BillingGroupArn;
+    /**
+     * The ID of the billing group.
+     */
+    billingGroupId?: BillingGroupId;
+  }
   export interface CreateCertificateFromCsrRequest {
     /**
      * The certificate signing request (CSR).
@@ -1557,6 +2311,58 @@ declare namespace Iot {
      */
     certificatePem?: CertificatePem;
   }
+  export interface CreateDynamicThingGroupRequest {
+    /**
+     * The dynamic thing group name to create.
+     */
+    thingGroupName: ThingGroupName;
+    /**
+     * The dynamic thing group properties.
+     */
+    thingGroupProperties?: ThingGroupProperties;
+    /**
+     * The dynamic thing group index name.  Currently one index is supported: "AWS_Things". 
+     */
+    indexName?: IndexName;
+    /**
+     * The dynamic thing group search query string. See Query Syntax for information about query string syntax.
+     */
+    queryString: QueryString;
+    /**
+     * The dynamic thing group query version.  Currently one query version is supported: "2017-09-30". If not specified, the query version defaults to this value. 
+     */
+    queryVersion?: QueryVersion;
+    /**
+     * Metadata which can be used to manage the dynamic thing group.
+     */
+    tags?: TagList;
+  }
+  export interface CreateDynamicThingGroupResponse {
+    /**
+     * The dynamic thing group name.
+     */
+    thingGroupName?: ThingGroupName;
+    /**
+     * The dynamic thing group ARN.
+     */
+    thingGroupArn?: ThingGroupArn;
+    /**
+     * The dynamic thing group ID.
+     */
+    thingGroupId?: ThingGroupId;
+    /**
+     * The dynamic thing group index name.
+     */
+    indexName?: IndexName;
+    /**
+     * The dynamic thing group search query string.
+     */
+    queryString?: QueryString;
+    /**
+     * The dynamic thing group query version.
+     */
+    queryVersion?: QueryVersion;
+  }
   export interface CreateJobRequest {
     /**
      * A job identifier which must be unique for your AWS account. We recommend using a UUID. Alpha-numeric characters, "-" and "_" are valid for use here.
@@ -1571,7 +2377,7 @@ declare namespace Iot {
      */
     documentSource?: JobDocumentSource;
     /**
-     * The job document.
+     * The job document.  If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document. The placeholder link is of the following form:  ${aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key}  where bucket is your bucket name and key is the object in the bucket to which you are linking. 
      */
     document?: JobDocument;
     /**
@@ -1591,9 +2397,17 @@ declare namespace Iot {
      */
     jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig;
     /**
-     * Parameters for the job document.
+     * Allows you to create criteria to abort a job.
      */
-    documentParameters?: JobDocumentParameters;
+    abortConfig?: AbortConfig;
+    /**
+     * Specifies the amount of time each device has to finish its execution of the job. The timer is started when the job execution status is set to IN_PROGRESS. If the job execution status is not set to another terminal state before the time expires, it will be automatically set to TIMED_OUT.
+     */
+    timeoutConfig?: TimeoutConfig;
+    /**
+     * Metadata which can be used to manage the job.
+     */
+    tags?: TagList;
   }
   export interface CreateJobResponse {
     /**
@@ -1650,6 +2464,10 @@ declare namespace Iot {
      * Specifies whether the update will continue to run (CONTINUOUS), or will be complete after all the things specified as targets have completed the update (SNAPSHOT). If continuous, the update may also be run on a thing when a change is detected in a target. For example, an update will run on a thing when the thing is added to a target group, even after the update was completed by all things originally in the group. Valid values: CONTINUOUS | SNAPSHOT.
      */
     targetSelection?: TargetSelection;
+    /**
+     * Configuration for the rollout of OTA updates.
+     */
+    awsJobExecutionsRolloutConfig?: AwsJobExecutionsRolloutConfig;
     /**
      * The files to be streamed by the OTA update.
      */
@@ -1769,6 +2587,74 @@ declare namespace Iot {
      */
     roleAliasArn?: RoleAliasArn;
   }
+  export interface CreateScheduledAuditRequest {
+    /**
+     * How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each audit is determined by the system.
+     */
+    frequency: AuditFrequency;
+    /**
+     * The day of the month on which the scheduled audit takes place. Can be "1" through "31" or "LAST". This field is required if the "frequency" parameter is set to "MONTHLY". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.
+     */
+    dayOfMonth?: DayOfMonth;
+    /**
+     * The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".
+     */
+    dayOfWeek?: DayOfWeek;
+    /**
+     * Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use DescribeAccountAuditConfiguration to see the list of all checks including those that are enabled or UpdateAccountAuditConfiguration to select which checks are enabled.)
+     */
+    targetCheckNames: TargetAuditCheckNames;
+    /**
+     * Metadata which can be used to manage the scheduled audit.
+     */
+    tags?: TagList;
+    /**
+     * The name you want to give to the scheduled audit. (Max. 128 chars)
+     */
+    scheduledAuditName: ScheduledAuditName;
+  }
+  export interface CreateScheduledAuditResponse {
+    /**
+     * The ARN of the scheduled audit.
+     */
+    scheduledAuditArn?: ScheduledAuditArn;
+  }
+  export interface CreateSecurityProfileRequest {
+    /**
+     * The name you are giving to the security profile.
+     */
+    securityProfileName: SecurityProfileName;
+    /**
+     * A description of the security profile.
+     */
+    securityProfileDescription?: SecurityProfileDescription;
+    /**
+     * Specifies the behaviors that, when violated by a device (thing), cause an alert.
+     */
+    behaviors?: Behaviors;
+    /**
+     * Specifies the destinations to which alerts are sent. (Alerts are always sent to the console.) Alerts are generated when a device (thing) violates a behavior.
+     */
+    alertTargets?: AlertTargets;
+    /**
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors but it is also retained for any metric specified here.
+     */
+    additionalMetricsToRetain?: AdditionalMetricsToRetainList;
+    /**
+     * Metadata which can be used to manage the security profile.
+     */
+    tags?: TagList;
+  }
+  export interface CreateSecurityProfileResponse {
+    /**
+     * The name you gave to the security profile.
+     */
+    securityProfileName?: SecurityProfileName;
+    /**
+     * The ARN of the security profile.
+     */
+    securityProfileArn?: SecurityProfileArn;
+  }
   export interface CreateStreamRequest {
     /**
      * The stream ID.
@@ -1818,6 +2704,10 @@ declare namespace Iot {
      * The thing group properties.
      */
     thingGroupProperties?: ThingGroupProperties;
+    /**
+     * Metadata which can be used to manage the thing group.
+     */
+    tags?: TagList;
   }
   export interface CreateThingGroupResponse {
     /**
@@ -1846,6 +2736,10 @@ declare namespace Iot {
      * The attribute payload, which consists of up to three name/value pairs in a JSON document. For example:  {\"attributes\":{\"string1\":\"string2\"}} 
      */
     attributePayload?: AttributePayload;
+    /**
+     * The name of the billing group the thing will be added to.
+     */
+    billingGroupName?: BillingGroupName;
   }
   export interface CreateThingResponse {
     /**
@@ -1870,6 +2764,10 @@ declare namespace Iot {
      * The ThingTypeProperties for the thing type to create. It contains information about the new thing type including a description, and a list of searchable thing attribute names.
      */
     thingTypeProperties?: ThingTypeProperties;
+    /**
+     * Metadata which can be used to manage the thing type.
+     */
+    tags?: TagList;
   }
   export interface CreateThingTypeResponse {
     /**
@@ -1894,6 +2792,10 @@ declare namespace Iot {
      * The rule payload.
      */
     topicRulePayload: TopicRulePayload;
+    /**
+     * Metadata which can be used to manage the topic rule.  For URI Request parameters use format: ...key1=value1&amp;key2=value2... For the CLI command-line parameter use format: --tags "key1=value1&amp;key2=value2..." For the cli-input-json file use format: "tags": "key1=value1&amp;key2=value2..." 
+     */
+    tags?: String;
   }
   export type CreatedAtDate = Date;
   export type CreationDate = Date;
@@ -1916,7 +2818,20 @@ declare namespace Iot {
      */
     signatureAlgorithm?: SignatureAlgorithm;
   }
+  export type CustomerVersion = number;
   export type DateType = Date;
+  export type DayOfMonth = string;
+  export type DayOfWeek = "SUN"|"MON"|"TUE"|"WED"|"THU"|"FRI"|"SAT"|string;
+  export interface DeleteAccountAuditConfigurationRequest {
+    /**
+     * If true, all scheduled audits are deleted.
+     */
+    deleteScheduledAudits?: DeleteScheduledAudits;
+  }
+  export interface DeleteAccountAuditConfigurationResponse {
+  }
+  export type DeleteAdditionalMetricsToRetain = boolean;
+  export type DeleteAlertTargets = boolean;
   export interface DeleteAuthorizerRequest {
     /**
      * The name of the authorizer to delete.
@@ -1925,9 +2840,22 @@ declare namespace Iot {
   }
   export interface DeleteAuthorizerResponse {
   }
+  export type DeleteBehaviors = boolean;
+  export interface DeleteBillingGroupRequest {
+    /**
+     * The name of the billing group.
+     */
+    billingGroupName: BillingGroupName;
+    /**
+     * The expected version of the billing group. If the version of the billing group does not match the expected version specified in the request, the DeleteBillingGroup request is rejected with a VersionConflictException.
+     */
+    expectedVersion?: OptionalVersion;
+  }
+  export interface DeleteBillingGroupResponse {
+  }
   export interface DeleteCACertificateRequest {
     /**
-     * The ID of the certificate to delete.
+     * The ID of the certificate to delete. (The last part of the certificate ARN contains the certificate ID.)
      */
     certificateId: CertificateId;
   }
@@ -1935,7 +2863,7 @@ declare namespace Iot {
   }
   export interface DeleteCertificateRequest {
     /**
-     * The ID of the certificate.
+     * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
      */
     certificateId: CertificateId;
     /**
@@ -1943,11 +2871,59 @@ declare namespace Iot {
      */
     forceDelete?: ForceDelete;
   }
+  export interface DeleteDynamicThingGroupRequest {
+    /**
+     * The name of the dynamic thing group to delete.
+     */
+    thingGroupName: ThingGroupName;
+    /**
+     * The expected version of the dynamic thing group to delete.
+     */
+    expectedVersion?: OptionalVersion;
+  }
+  export interface DeleteDynamicThingGroupResponse {
+  }
+  export interface DeleteJobExecutionRequest {
+    /**
+     * The ID of the job whose execution on a particular device will be deleted.
+     */
+    jobId: JobId;
+    /**
+     * The name of the thing whose job execution will be deleted.
+     */
+    thingName: ThingName;
+    /**
+     * The ID of the job execution to be deleted. The executionNumber refers to the execution of a particular job on a particular device. Note that once a job execution is deleted, the executionNumber may be reused by IoT, so be sure you get and use the correct value here.
+     */
+    executionNumber: ExecutionNumber;
+    /**
+     * (Optional) When true, you can delete a job execution which is "IN_PROGRESS". Otherwise, you can only delete a job execution which is in a terminal state ("SUCCEEDED", "FAILED", "REJECTED", "REMOVED" or "CANCELED") or an exception will occur. The default is false.  Deleting a job execution which is "IN_PROGRESS", will cause the device to be unable to access job information or update the job execution status. Use caution and ensure that the device is able to recover to a valid state. 
+     */
+    force?: ForceFlag;
+  }
+  export interface DeleteJobRequest {
+    /**
+     * The ID of the job to be deleted. After a job deletion is completed, you may reuse this jobId when you create a new job. However, this is not recommended, and you must ensure that your devices are not using the jobId to refer to the deleted job.
+     */
+    jobId: JobId;
+    /**
+     * (Optional) When true, you can delete a job which is "IN_PROGRESS". Otherwise, you can only delete a job which is in a terminal state ("COMPLETED" or "CANCELED") or an exception will occur. The default is false.  Deleting a job which is "IN_PROGRESS", will cause a device which is executing the job to be unable to access job information or update the job execution status. Use caution and ensure that each device executing a job which is deleted is able to recover to a valid state. 
+     */
+    force?: ForceFlag;
+  }
   export interface DeleteOTAUpdateRequest {
     /**
      * The OTA update ID to delete.
      */
     otaUpdateId: OTAUpdateId;
+    /**
+     * Specifies if the stream associated with an OTA update should be deleted when the OTA update is deleted.
+     */
+    deleteStream?: DeleteStream;
+    /**
+     * Specifies if the AWS Job associated with the OTA update should be deleted with the OTA update is deleted.
+     */
+    forceDeleteAWSJob?: ForceDeleteAWSJob;
   }
   export interface DeleteOTAUpdateResponse {
   }
@@ -1979,6 +2955,28 @@ declare namespace Iot {
   }
   export interface DeleteRoleAliasResponse {
   }
+  export interface DeleteScheduledAuditRequest {
+    /**
+     * The name of the scheduled audit you want to delete.
+     */
+    scheduledAuditName: ScheduledAuditName;
+  }
+  export interface DeleteScheduledAuditResponse {
+  }
+  export type DeleteScheduledAudits = boolean;
+  export interface DeleteSecurityProfileRequest {
+    /**
+     * The name of the security profile to be deleted.
+     */
+    securityProfileName: SecurityProfileName;
+    /**
+     * The expected version of the security profile. A new version is generated whenever the security profile is updated. If you specify a value that is different than the actual version, a VersionConflictException is thrown.
+     */
+    expectedVersion?: OptionalVersion;
+  }
+  export interface DeleteSecurityProfileResponse {
+  }
+  export type DeleteStream = boolean;
   export interface DeleteStreamRequest {
     /**
      * The stream ID.
@@ -2059,6 +3057,54 @@ declare namespace Iot {
   export interface DeprecateThingTypeResponse {
   }
   export type DeprecationDate = Date;
+  export interface DescribeAccountAuditConfigurationRequest {
+  }
+  export interface DescribeAccountAuditConfigurationResponse {
+    /**
+     * The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as necessary when performing an audit. On the first call to UpdateAccountAuditConfiguration this parameter is required.
+     */
+    roleArn?: RoleArn;
+    /**
+     * Information about the targets to which audit notifications are sent for this account.
+     */
+    auditNotificationTargetConfigurations?: AuditNotificationTargetConfigurations;
+    /**
+     * Which audit checks are enabled and disabled for this account.
+     */
+    auditCheckConfigurations?: AuditCheckConfigurations;
+  }
+  export interface DescribeAuditTaskRequest {
+    /**
+     * The ID of the audit whose information you want to get.
+     */
+    taskId: AuditTaskId;
+  }
+  export interface DescribeAuditTaskResponse {
+    /**
+     * The status of the audit: one of "IN_PROGRESS", "COMPLETED", "FAILED", or "CANCELED".
+     */
+    taskStatus?: AuditTaskStatus;
+    /**
+     * The type of audit: "ON_DEMAND_AUDIT_TASK" or "SCHEDULED_AUDIT_TASK".
+     */
+    taskType?: AuditTaskType;
+    /**
+     * The time the audit started.
+     */
+    taskStartTime?: Timestamp;
+    /**
+     * Statistical information about the audit.
+     */
+    taskStatistics?: TaskStatistics;
+    /**
+     * The name of the scheduled audit (only if the audit was a scheduled audit).
+     */
+    scheduledAuditName?: ScheduledAuditName;
+    /**
+     * Detailed information about each check performed during this audit.
+     */
+    auditDetails?: AuditDetails;
+  }
   export interface DescribeAuthorizerRequest {
     /**
      * The name of the authorizer to describe.
@@ -2070,6 +3116,38 @@ declare namespace Iot {
      * The authorizer description.
      */
     authorizerDescription?: AuthorizerDescription;
+  }
+  export interface DescribeBillingGroupRequest {
+    /**
+     * The name of the billing group.
+     */
+    billingGroupName: BillingGroupName;
+  }
+  export interface DescribeBillingGroupResponse {
+    /**
+     * The name of the billing group.
+     */
+    billingGroupName?: BillingGroupName;
+    /**
+     * The ID of the billing group.
+     */
+    billingGroupId?: BillingGroupId;
+    /**
+     * The ARN of the billing group.
+     */
+    billingGroupArn?: BillingGroupArn;
+    /**
+     * The version of the billing group.
+     */
+    version?: Version;
+    /**
+     * The properties of the billing group.
+     */
+    billingGroupProperties?: BillingGroupProperties;
+    /**
+     * Additional information about the billing group.
+     */
+    billingGroupMetadata?: BillingGroupMetadata;
   }
   export interface DescribeCACertificateRequest {
     /**
@@ -2089,7 +3167,7 @@ declare namespace Iot {
   }
   export interface DescribeCertificateRequest {
     /**
-     * The ID of the certificate.
+     * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
      */
     certificateId: CertificateId;
   }
@@ -2109,7 +3187,7 @@ declare namespace Iot {
   }
   export interface DescribeEndpointRequest {
     /**
-     * The endpoint type.
+     * The endpoint type. Valid endpoint types include:    iot:Data - Returns a VeriSign signed data endpoint.      iot:Data-ATS - Returns an ATS signed data endpoint.      iot:CredentialProvider - Returns an AWS IoT credentials provider API endpoint.      iot:Jobs - Returns an AWS IoT device management Jobs API endpoint.  
      */
     endpointType?: EndpointType;
   }
@@ -2151,7 +3229,7 @@ declare namespace Iot {
      */
     indexStatus?: IndexStatus;
     /**
-     * Contains a value that specifies the type of indexing performed. Valid values are:   REGISTRY – Your thing index will contain only registry data.   REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.  
+     * Contains a value that specifies the type of indexing performed. Valid values are:   REGISTRY – Your thing index will contain only registry data.   REGISTRY_AND_SHADOW - Your thing index will contain registry data and shadow data.   REGISTRY_AND_CONNECTIVITY_STATUS - Your thing index will contain registry data and thing connectivity status data.   REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index will contain registry data, shadow data, and thing connectivity status data.  
      */
     schema?: IndexSchema;
   }
@@ -2203,6 +3281,82 @@ declare namespace Iot {
      */
     roleAliasDescription?: RoleAliasDescription;
   }
+  export interface DescribeScheduledAuditRequest {
+    /**
+     * The name of the scheduled audit whose information you want to get.
+     */
+    scheduledAuditName: ScheduledAuditName;
+  }
+  export interface DescribeScheduledAuditResponse {
+    /**
+     * How often the scheduled audit takes place. One of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each audit is determined by the system.
+     */
+    frequency?: AuditFrequency;
+    /**
+     * The day of the month on which the scheduled audit takes place. Will be "1" through "31" or "LAST". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.
+     */
+    dayOfMonth?: DayOfMonth;
+    /**
+     * The day of the week on which the scheduled audit takes place. One of "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT".
+     */
+    dayOfWeek?: DayOfWeek;
+    /**
+     * Which checks are performed during the scheduled audit. (Note that checks must be enabled for your account. (Use DescribeAccountAuditConfiguration to see the list of all checks including those that are enabled or UpdateAccountAuditConfiguration to select which checks are enabled.)
+     */
+    targetCheckNames?: TargetAuditCheckNames;
+    /**
+     * The name of the scheduled audit.
+     */
+    scheduledAuditName?: ScheduledAuditName;
+    /**
+     * The ARN of the scheduled audit.
+     */
+    scheduledAuditArn?: ScheduledAuditArn;
+  }
+  export interface DescribeSecurityProfileRequest {
+    /**
+     * The name of the security profile whose information you want to get.
+     */
+    securityProfileName: SecurityProfileName;
+  }
+  export interface DescribeSecurityProfileResponse {
+    /**
+     * The name of the security profile.
+     */
+    securityProfileName?: SecurityProfileName;
+    /**
+     * The ARN of the security profile.
+     */
+    securityProfileArn?: SecurityProfileArn;
+    /**
+     * A description of the security profile (associated with the security profile when it was created or updated).
+     */
+    securityProfileDescription?: SecurityProfileDescription;
+    /**
+     * Specifies the behaviors that, when violated by a device (thing), cause an alert.
+     */
+    behaviors?: Behaviors;
+    /**
+     * Where the alerts are sent. (Alerts are always sent to the console.)
+     */
+    alertTargets?: AlertTargets;
+    /**
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors but it is also retained for any metric specified here.
+     */
+    additionalMetricsToRetain?: AdditionalMetricsToRetainList;
+    /**
+     * The version of the security profile. A new version is generated whenever the security profile is updated.
+     */
+    version?: Version;
+    /**
+     * The time the security profile was created.
+     */
+    creationDate?: Timestamp;
+    /**
+     * The time the security profile was last modified.
+     */
+    lastModifiedDate?: Timestamp;
+  }
   export interface DescribeStreamRequest {
     /**
      * The stream ID.
@@ -2246,6 +3400,22 @@ declare namespace Iot {
      * Thing group metadata.
      */
     thingGroupMetadata?: ThingGroupMetadata;
+    /**
+     * The dynamic thing group index name.
+     */
+    indexName?: IndexName;
+    /**
+     * The dynamic thing group search query string.
+     */
+    queryString?: QueryString;
+    /**
+     * The dynamic thing group query version.
+     */
+    queryVersion?: QueryVersion;
+    /**
+     * The dynamic thing group status.
+     */
+    status?: DynamicGroupStatus;
   }
   export interface DescribeThingRegistrationTaskRequest {
     /**
@@ -2338,6 +3508,10 @@ declare namespace Iot {
      * The current version of the thing record in the registry.  To avoid unintentional changes to the information in the registry, you can pass the version information in the expectedVersion parameter of the UpdateThing and DeleteThing calls. 
      */
     version?: Version;
+    /**
+     * The name of the billing group the thing belongs to.
+     */
+    billingGroupName?: BillingGroupName;
   }
   export interface DescribeThingTypeRequest {
     /**
@@ -2368,6 +3542,12 @@ declare namespace Iot {
     thingTypeMetadata?: ThingTypeMetadata;
   }
   export type Description = string;
+  export interface Destination {
+    /**
+     * Describes the location in S3 of the updated firmware.
+     */
+    s3Destination?: S3Destination;
+  }
   export interface DetachPolicyRequest {
     /**
      * The policy to detach.
@@ -2387,6 +3567,18 @@ declare namespace Iot {
      * The principal. If the principal is a certificate, specify the certificate ARN. If the principal is an Amazon Cognito identity, specify the identity ID.
      */
     principal: Principal;
+  }
+  export interface DetachSecurityProfileRequest {
+    /**
+     * The security profile that is detached.
+     */
+    securityProfileName: SecurityProfileName;
+    /**
+     * The ARN of the thing group from which the security profile is detached.
+     */
+    securityProfileTargetArn: SecurityProfileTargetArn;
+  }
+  export interface DetachSecurityProfileResponse {
   }
   export interface DetachThingPrincipalRequest {
     /**
@@ -2410,6 +3602,8 @@ declare namespace Iot {
      */
     ruleName: RuleName;
   }
+  export type DurationSeconds = number;
+  export type DynamicGroupStatus = "ACTIVE"|"BUILDING"|"REBUILDING"|string;
   export interface DynamoDBAction {
     /**
      * The name of the DynamoDB table.
@@ -2456,11 +3650,11 @@ declare namespace Iot {
     /**
      * The ARN of the IAM role that grants access to the DynamoDB table.
      */
-    roleArn?: AwsArn;
+    roleArn: AwsArn;
     /**
      * Specifies the DynamoDB table to which the message data will be written. For example:  { "dynamoDBv2": { "roleArn": "aws:iam:12341251:my-role" "putItem": { "tableName": "my-table" } } }  Each attribute in the message payload will be written to a separate column in the DynamoDB database.
      */
-    putItem?: PutItemInput;
+    putItem: PutItemInput;
   }
   export type DynamoKeyType = "STRING"|"NUMBER"|string;
   export type DynamoOperation = string;
@@ -2514,6 +3708,7 @@ declare namespace Iot {
   export type Enabled = boolean;
   export type EndpointAddress = string;
   export type EndpointType = string;
+  export type ErrorCode = string;
   export interface ErrorInfo {
     /**
      * The error code.
@@ -2525,9 +3720,12 @@ declare namespace Iot {
     message?: OTAUpdateErrorMessage;
   }
   export type ErrorMessage = string;
+  export type EvaluationStatistic = string;
   export type EventConfigurations = {[key: string]: Configuration};
-  export type EventType = "THING"|"THING_GROUP"|"THING_TYPE"|"THING_GROUP_MEMBERSHIP"|"THING_GROUP_HIERARCHY"|"THING_TYPE_ASSOCIATION"|"JOB"|"JOB_EXECUTION"|string;
+  export type EventType = "THING"|"THING_GROUP"|"THING_TYPE"|"THING_GROUP_MEMBERSHIP"|"THING_GROUP_HIERARCHY"|"THING_TYPE_ASSOCIATION"|"JOB"|"JOB_EXECUTION"|"POLICY"|"CERTIFICATE"|"CA_CERTIFICATE"|string;
+  export type ExecutionNamePrefix = string;
   export type ExecutionNumber = number;
+  export type ExpectedVersion = number;
   export type ExpiresInSec = number;
   export interface ExplicitDeny {
     /**
@@ -2535,8 +3733,33 @@ declare namespace Iot {
      */
     policies?: Policies;
   }
+  export interface ExponentialRolloutRate {
+    /**
+     * The minimum number of things that will be notified of a pending job, per minute at the start of job rollout. This parameter allows you to define the initial rate of rollout.
+     */
+    baseRatePerMinute: RolloutRatePerMinute;
+    /**
+     * The exponential factor to increase the rate of rollout for a job.
+     */
+    incrementFactor: IncrementFactor;
+    /**
+     * The criteria to initiate the increase in rate of rollout for a job. AWS IoT supports up to one digit after the decimal (for example, 1.5, but not 1.55).
+     */
+    rateIncreaseCriteria: RateIncreaseCriteria;
+  }
+  export type FailedChecksCount = number;
   export type FailedThings = number;
   export type FileId = number;
+  export interface FileLocation {
+    /**
+     * The stream that contains the OTA update.
+     */
+    stream?: Stream;
+    /**
+     * The location of the updated firmware in S3.
+     */
+    s3Location?: S3Location;
+  }
   export type FileName = string;
   export interface FirehoseAction {
     /**
@@ -2555,8 +3778,12 @@ declare namespace Iot {
   export type FirehoseSeparator = string;
   export type Flag = boolean;
   export type ForceDelete = boolean;
+  export type ForceDeleteAWSJob = boolean;
+  export type ForceFlag = boolean;
+  export type Forced = boolean;
   export type FunctionArn = string;
   export type GEMaxResults = number;
+  export type GenerationId = string;
   export interface GetEffectivePoliciesRequest {
     /**
      * The principal.
@@ -2584,6 +3811,10 @@ declare namespace Iot {
      * Thing indexing configuration.
      */
     thingIndexingConfiguration?: ThingIndexingConfiguration;
+    /**
+     * The index configuration.
+     */
+    thingGroupIndexingConfiguration?: ThingGroupIndexingConfiguration;
   }
   export interface GetJobDocumentRequest {
     /**
@@ -2644,6 +3875,18 @@ declare namespace Iot {
      * The default policy version ID.
      */
     defaultVersionId?: PolicyVersionId;
+    /**
+     * The date the policy was created.
+     */
+    creationDate?: DateType;
+    /**
+     * The date the policy was last modified.
+     */
+    lastModifiedDate?: DateType;
+    /**
+     * The generation ID of the policy.
+     */
+    generationId?: GenerationId;
   }
   export interface GetPolicyVersionRequest {
     /**
@@ -2676,6 +3919,18 @@ declare namespace Iot {
      * Specifies whether the policy version is the default.
      */
     isDefaultVersion?: IsDefaultVersion;
+    /**
+     * The date the policy version was created.
+     */
+    creationDate?: DateType;
+    /**
+     * The date the policy version was last modified.
+     */
+    lastModifiedDate?: DateType;
+    /**
+     * The generation ID of the policy version.
+     */
+    generationId?: GenerationId;
   }
   export interface GetRegistrationCodeRequest {
   }
@@ -2736,12 +3991,44 @@ declare namespace Iot {
      */
     policies?: Policies;
   }
+  export type InProgressChecksCount = number;
   export type InProgressThings = number;
+  export type InProgressTimeoutInMinutes = number;
+  export type IncrementFactor = number;
   export type IndexName = string;
   export type IndexNamesList = IndexName[];
   export type IndexSchema = string;
   export type IndexStatus = "ACTIVE"|"BUILDING"|"REBUILDING"|string;
   export type InlineDocument = string;
+  export type InputName = string;
+  export interface IotAnalyticsAction {
+    /**
+     * (deprecated) The ARN of the IoT Analytics channel to which message data will be sent.
+     */
+    channelArn?: AwsArn;
+    /**
+     * The name of the IoT Analytics channel to which message data will be sent.
+     */
+    channelName?: ChannelName;
+    /**
+     * The ARN of the role which has a policy that grants IoT Analytics permission to send message data via IoT Analytics (iotanalytics:BatchPutMessage).
+     */
+    roleArn?: AwsArn;
+  }
+  export interface IotEventsAction {
+    /**
+     * The name of the AWS IoT Events input.
+     */
+    inputName: InputName;
+    /**
+     * [Optional] Use this to ensure that only one input (message) with a given messageId will be processed by an AWS IoT Events detector.
+     */
+    messageId?: MessageId;
+    /**
+     * The ARN of the role that grants AWS IoT permission to send an input to an AWS IoT Events detector. ("Action":"iotevents:BatchPutMessage").
+     */
+    roleArn: AwsArn;
+  }
   export type IsAuthenticated = boolean;
   export type IsDefaultVersion = boolean;
   export type IsDisabled = boolean;
@@ -2759,9 +4046,17 @@ declare namespace Iot {
      */
     targetSelection?: TargetSelection;
     /**
-     * The status of the job, one of IN_PROGRESS, CANCELED, or COMPLETED. 
+     * The status of the job, one of IN_PROGRESS, CANCELED, DELETION_IN_PROGRESS or COMPLETED. 
      */
     status?: JobStatus;
+    /**
+     * Will be true if the job was canceled with the optional force parameter set to true.
+     */
+    forceCanceled?: Forced;
+    /**
+     * If the job was updated, provides the reason code for the update.
+     */
+    reasonCode?: ReasonCode;
     /**
      * If the job was updated, describes the reason for the update.
      */
@@ -2783,15 +4078,19 @@ declare namespace Iot {
      */
     jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig;
     /**
-     * The time, in milliseconds since the epoch, when the job was created.
+     * Configuration for criteria to abort the job.
+     */
+    abortConfig?: AbortConfig;
+    /**
+     * The time, in seconds since the epoch, when the job was created.
      */
     createdAt?: DateType;
     /**
-     * The time, in milliseconds since the epoch, when the job was last updated.
+     * The time, in seconds since the epoch, when the job was last updated.
      */
     lastUpdatedAt?: DateType;
     /**
-     * The time, in milliseconds since the epoch, when the job was completed.
+     * The time, in seconds since the epoch, when the job was completed.
      */
     completedAt?: DateType;
     /**
@@ -2799,14 +4098,13 @@ declare namespace Iot {
      */
     jobProcessDetails?: JobProcessDetails;
     /**
-     * The parameters specified for the job document.
+     * Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to IN_PROGRESS. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to TIMED_OUT.
      */
-    documentParameters?: JobDocumentParameters;
+    timeoutConfig?: TimeoutConfig;
   }
   export type JobArn = string;
   export type JobDescription = string;
   export type JobDocument = string;
-  export type JobDocumentParameters = {[key: string]: ParameterValue};
   export type JobDocumentSource = string;
   export interface JobExecution {
     /**
@@ -2814,9 +4112,13 @@ declare namespace Iot {
      */
     jobId?: JobId;
     /**
-     * The status of the job execution (IN_PROGRESS, QUEUED, FAILED, SUCCESS, CANCELED, or REJECTED).
+     * The status of the job execution (IN_PROGRESS, QUEUED, FAILED, SUCCEEDED, TIMED_OUT, CANCELED, or REJECTED).
      */
     status?: JobExecutionStatus;
+    /**
+     * Will be true if the job execution was canceled with the optional force parameter set to true.
+     */
+    forceCanceled?: Forced;
     /**
      * A collection of name/value pairs that describe the status of the job execution.
      */
@@ -2826,23 +4128,32 @@ declare namespace Iot {
      */
     thingArn?: ThingArn;
     /**
-     * The time, in milliseconds since the epoch, when the job execution was queued.
+     * The time, in seconds since the epoch, when the job execution was queued.
      */
     queuedAt?: DateType;
     /**
-     * The time, in milliseconds since the epoch, when the job execution started.
+     * The time, in seconds since the epoch, when the job execution started.
      */
     startedAt?: DateType;
     /**
-     * The time, in milliseconds since the epoch, when the job execution was last updated.
+     * The time, in seconds since the epoch, when the job execution was last updated.
      */
     lastUpdatedAt?: DateType;
     /**
      * A string (consisting of the digits "0" through "9") which identifies this particular job execution on this particular device. It can be used in commands which return or update job execution information. 
      */
     executionNumber?: ExecutionNumber;
+    /**
+     * The version of the job execution. Job execution versions are incremented each time they are updated by a device.
+     */
+    versionNumber?: VersionNumber;
+    /**
+     * The estimated number of seconds that remain before the job execution status will be changed to TIMED_OUT. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The actual job execution timeout can occur up to 60 seconds later than the estimated duration. This value will not be included if the job execution has reached a terminal status.
+     */
+    approximateSecondsBeforeTimedOut?: ApproximateSecondsBeforeTimedOut;
   }
-  export type JobExecutionStatus = "QUEUED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"REJECTED"|"REMOVED"|"CANCELED"|string;
+  export type JobExecutionFailureType = "FAILED"|"REJECTED"|"TIMED_OUT"|"ALL"|string;
+  export type JobExecutionStatus = "QUEUED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"TIMED_OUT"|"REJECTED"|"REMOVED"|"CANCELED"|string;
   export interface JobExecutionStatusDetails {
     /**
      * The job execution status.
@@ -2855,15 +4166,15 @@ declare namespace Iot {
      */
     status?: JobExecutionStatus;
     /**
-     * The time, in milliseconds since the epoch, when the job execution was queued.
+     * The time, in seconds since the epoch, when the job execution was queued.
      */
     queuedAt?: DateType;
     /**
-     * The time, in milliseconds since the epoch, when the job execution started.
+     * The time, in seconds since the epoch, when the job execution started.
      */
     startedAt?: DateType;
     /**
-     * The time, in milliseconds since the epoch, when the job execution was last updated.
+     * The time, in seconds since the epoch, when the job execution was last updated.
      */
     lastUpdatedAt?: DateType;
     /**
@@ -2898,11 +4209,15 @@ declare namespace Iot {
      * The maximum number of things that will be notified of a pending job, per minute. This parameter allows you to create a staged rollout.
      */
     maximumPerMinute?: MaxJobExecutionsPerMin;
+    /**
+     * The rate of increase for a job rollout. This parameter allows you to define an exponential rate for a job rollout.
+     */
+    exponentialRate?: ExponentialRolloutRate;
   }
   export type JobId = string;
   export interface JobProcessDetails {
     /**
-     * The devices on which the job is executing.
+     * The target devices to which the job execution is being rolled out. This value will be null after the job execution has finished rolling out to all the target devices.
      */
     processingTargets?: ProcessingTargetNameList;
     /**
@@ -2933,8 +4248,12 @@ declare namespace Iot {
      * The number of things that are no longer scheduled to execute the job because they have been deleted or have been removed from the group that was a target of the job.
      */
     numberOfRemovedThings?: RemovedThings;
+    /**
+     * The number of things whose job execution status is TIMED_OUT.
+     */
+    numberOfTimedOutThings?: TimedOutThings;
   }
-  export type JobStatus = "IN_PROGRESS"|"CANCELED"|"COMPLETED"|string;
+  export type JobStatus = "IN_PROGRESS"|"CANCELED"|"COMPLETED"|"DELETION_IN_PROGRESS"|string;
   export interface JobSummary {
     /**
      * The job ARN.
@@ -2957,15 +4276,15 @@ declare namespace Iot {
      */
     status?: JobStatus;
     /**
-     * The time, in milliseconds since the epoch, when the job was created.
+     * The time, in seconds since the epoch, when the job was created.
      */
     createdAt?: DateType;
     /**
-     * The time, in milliseconds since the epoch, when the job was last updated.
+     * The time, in seconds since the epoch, when the job was last updated.
      */
     lastUpdatedAt?: DateType;
     /**
-     * The time, in milliseconds since the epoch, when the job completed.
+     * The time, in seconds since the epoch, when the job completed.
      */
     completedAt?: DateType;
   }
@@ -3007,6 +4326,34 @@ declare namespace Iot {
   }
   export type LaserMaxResults = number;
   export type LastModifiedDate = Date;
+  export interface ListActiveViolationsRequest {
+    /**
+     * The name of the thing whose active violations are listed.
+     */
+    thingName?: ThingName;
+    /**
+     * The name of the Device Defender security profile for which violations are listed.
+     */
+    securityProfileName?: SecurityProfileName;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return at one time.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListActiveViolationsResponse {
+    /**
+     * The list of active violations.
+     */
+    activeViolations?: ActiveViolations;
+    /**
+     * A token that can be used to retrieve the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListAttachedPoliciesRequest {
     /**
      * The group for which the policies will be listed.
@@ -3035,6 +4382,82 @@ declare namespace Iot {
      */
     nextMarker?: Marker;
   }
+  export interface ListAuditFindingsRequest {
+    /**
+     * A filter to limit results to the audit with the specified ID. You must specify either the taskId or the startTime and endTime, but not both.
+     */
+    taskId?: AuditTaskId;
+    /**
+     * A filter to limit results to the findings for the specified audit check.
+     */
+    checkName?: AuditCheckName;
+    /**
+     * Information identifying the non-compliant resource.
+     */
+    resourceIdentifier?: ResourceIdentifier;
+    /**
+     * The maximum number of results to return at one time. The default is 25.
+     */
+    maxResults?: MaxResults;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * A filter to limit results to those found after the specified time. You must specify either the startTime and endTime or the taskId, but not both.
+     */
+    startTime?: Timestamp;
+    /**
+     * A filter to limit results to those found before the specified time. You must specify either the startTime and endTime or the taskId, but not both.
+     */
+    endTime?: Timestamp;
+  }
+  export interface ListAuditFindingsResponse {
+    /**
+     * The findings (results) of the audit.
+     */
+    findings?: AuditFindings;
+    /**
+     * A token that can be used to retrieve the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListAuditTasksRequest {
+    /**
+     * The beginning of the time period. Note that audit information is retained for a limited time (180 days). Requesting a start time prior to what is retained results in an "InvalidRequestException".
+     */
+    startTime: Timestamp;
+    /**
+     * The end of the time period.
+     */
+    endTime: Timestamp;
+    /**
+     * A filter to limit the output to the specified type of audit: can be one of "ON_DEMAND_AUDIT_TASK" or "SCHEDULED__AUDIT_TASK".
+     */
+    taskType?: AuditTaskType;
+    /**
+     * A filter to limit the output to audits with the specified completion status: can be one of "IN_PROGRESS", "COMPLETED", "FAILED" or "CANCELED".
+     */
+    taskStatus?: AuditTaskStatus;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return at one time. The default is 25.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListAuditTasksResponse {
+    /**
+     * The audits that were performed during the specified time period.
+     */
+    tasks?: AuditTaskMetadataList;
+    /**
+     * A token that can be used to retrieve the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListAuthorizersRequest {
     /**
      * The maximum number of results to return at one time.
@@ -3062,6 +4485,30 @@ declare namespace Iot {
      * A marker used to get the next set of results.
      */
     nextMarker?: Marker;
+  }
+  export interface ListBillingGroupsRequest {
+    /**
+     * The token to retrieve the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return per request.
+     */
+    maxResults?: RegistryMaxResults;
+    /**
+     * Limit the results to billing groups whose names have the given prefix.
+     */
+    namePrefixFilter?: BillingGroupName;
+  }
+  export interface ListBillingGroupsResponse {
+    /**
+     * The list of billing groups.
+     */
+    billingGroups?: BillingGroupNameAndArnList;
+    /**
+     * The token used to get the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
   }
   export interface ListCACertificatesRequest {
     /**
@@ -3257,7 +4704,7 @@ declare namespace Iot {
      */
     maxResults?: MaxResults;
     /**
-     * A token used to retreive the next set of results.
+     * A token used to retrieve the next set of results.
      */
     nextToken?: NextToken;
     /**
@@ -3393,7 +4840,7 @@ declare namespace Iot {
   }
   export interface ListPrincipalThingsRequest {
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to retrieve the next set of results.
      */
     nextToken?: NextToken;
     /**
@@ -3439,6 +4886,74 @@ declare namespace Iot {
      */
     nextMarker?: Marker;
   }
+  export interface ListScheduledAuditsRequest {
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return at one time. The default is 25.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListScheduledAuditsResponse {
+    /**
+     * The list of scheduled audits.
+     */
+    scheduledAudits?: ScheduledAuditMetadataList;
+    /**
+     * A token that can be used to retrieve the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListSecurityProfilesForTargetRequest {
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return at one time.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If true, return child groups as well.
+     */
+    recursive?: Recursive;
+    /**
+     * The ARN of the target (thing group) whose attached security profiles you want to get.
+     */
+    securityProfileTargetArn: SecurityProfileTargetArn;
+  }
+  export interface ListSecurityProfilesForTargetResponse {
+    /**
+     * A list of security profiles and their associated targets.
+     */
+    securityProfileTargetMappings?: SecurityProfileTargetMappings;
+    /**
+     * A token that can be used to retrieve the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListSecurityProfilesRequest {
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return at one time.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListSecurityProfilesResponse {
+    /**
+     * A list of security profile identifiers (names and ARNs).
+     */
+    securityProfileIdentifiers?: SecurityProfileIdentifiers;
+    /**
+     * A token that can be used to retrieve the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListStreamsRequest {
     /**
      * The maximum number of results to return at a time.
@@ -3460,6 +4975,26 @@ declare namespace Iot {
     streams?: StreamsSummary;
     /**
      * A token used to get the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The ARN of the resource.
+     */
+    resourceArn: ResourceArn;
+    /**
+     * The token to retrieve the next set of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The list of tags assigned to the resource.
+     */
+    tags?: TagList;
+    /**
+     * The token used to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
@@ -3487,13 +5022,37 @@ declare namespace Iot {
      */
     nextMarker?: Marker;
   }
+  export interface ListTargetsForSecurityProfileRequest {
+    /**
+     * The security profile.
+     */
+    securityProfileName: SecurityProfileName;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return at one time.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListTargetsForSecurityProfileResponse {
+    /**
+     * The thing groups to which the security profile is attached.
+     */
+    securityProfileTargets?: SecurityProfileTargets;
+    /**
+     * A token that can be used to retrieve the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListThingGroupsForThingRequest {
     /**
      * The thing name.
      */
     thingName: ThingName;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to retrieve the next set of results.
      */
     nextToken?: NextToken;
     /**
@@ -3513,7 +5072,7 @@ declare namespace Iot {
   }
   export interface ListThingGroupsRequest {
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to retrieve the next set of results.
      */
     nextToken?: NextToken;
     /**
@@ -3583,13 +5142,13 @@ declare namespace Iot {
      */
     reportType?: ReportType;
     /**
-     * The token to retrieve the next set of results.
+     * The token used to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
   export interface ListThingRegistrationTasksRequest {
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to retrieve the next set of results.
      */
     nextToken?: NextToken;
     /**
@@ -3613,7 +5172,7 @@ declare namespace Iot {
   }
   export interface ListThingTypesRequest {
     /**
-     * The token for the next set of results, or null if there are no additional results.
+     * The token to retrieve the next set of results.
      */
     nextToken?: NextToken;
     /**
@@ -3635,6 +5194,30 @@ declare namespace Iot {
      */
     nextToken?: NextToken;
   }
+  export interface ListThingsInBillingGroupRequest {
+    /**
+     * The name of the billing group.
+     */
+    billingGroupName: BillingGroupName;
+    /**
+     * The token to retrieve the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return per request.
+     */
+    maxResults?: RegistryMaxResults;
+  }
+  export interface ListThingsInBillingGroupResponse {
+    /**
+     * A list of things in the billing group.
+     */
+    things?: ThingNameList;
+    /**
+     * The token used to get the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListThingsInThingGroupRequest {
     /**
      * The thing group name.
@@ -3645,7 +5228,7 @@ declare namespace Iot {
      */
     recursive?: Recursive;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to retrieve the next set of results.
      */
     nextToken?: NextToken;
     /**
@@ -3665,7 +5248,7 @@ declare namespace Iot {
   }
   export interface ListThingsRequest {
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to retrieve the next set of results.
      */
     nextToken?: NextToken;
     /**
@@ -3747,6 +5330,42 @@ declare namespace Iot {
      */
     nextToken?: NextToken;
   }
+  export interface ListViolationEventsRequest {
+    /**
+     * The start time for the alerts to be listed.
+     */
+    startTime: Timestamp;
+    /**
+     * The end time for the alerts to be listed.
+     */
+    endTime: Timestamp;
+    /**
+     * A filter to limit results to those alerts caused by the specified thing.
+     */
+    thingName?: ThingName;
+    /**
+     * A filter to limit results to those alerts generated by the specified security profile.
+     */
+    securityProfileName?: SecurityProfileName;
+    /**
+     * The token for the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return at one time.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListViolationEventsResponse {
+    /**
+     * The security profile violation alerts issued for this account during the given time frame, potentially filtered by security profile, behavior violated, or thing (device) violating.
+     */
+    violationEvents?: ViolationEvents;
+    /**
+     * A token that can be used to retrieve the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
   export type LogLevel = "DEBUG"|"INFO"|"ERROR"|"WARN"|"DISABLED"|string;
   export interface LogTarget {
     /**
@@ -3784,16 +5403,45 @@ declare namespace Iot {
   export type Marker = string;
   export type MaxJobExecutionsPerMin = number;
   export type MaxResults = number;
+  export type MaximumPerMinute = number;
   export type Message = string;
   export type MessageFormat = "RAW"|"JSON"|string;
-  export type MetricName = string;
-  export type MetricNamespace = string;
-  export type MetricTimestamp = string;
-  export type MetricUnit = string;
-  export type MetricValue = string;
+  export type MessageId = string;
+  export interface MetricValue {
+    /**
+     * If the comparisonOperator calls for a numeric value, use this to specify that numeric value to be compared with the metric.
+     */
+    count?: UnsignedLong;
+    /**
+     * If the comparisonOperator calls for a set of CIDRs, use this to specify that set to be compared with the metric.
+     */
+    cidrs?: Cidrs;
+    /**
+     * If the comparisonOperator calls for a set of ports, use this to specify that set to be compared with the metric.
+     */
+    ports?: Ports;
+  }
+  export type MinimumNumberOfExecutedThings = number;
   export type MissingContextValue = string;
   export type MissingContextValues = MissingContextValue[];
   export type NextToken = string;
+  export type NonCompliantChecksCount = number;
+  export interface NonCompliantResource {
+    /**
+     * The type of the non-compliant resource.
+     */
+    resourceType?: ResourceType;
+    /**
+     * Information identifying the non-compliant resource.
+     */
+    resourceIdentifier?: ResourceIdentifier;
+    /**
+     * Additional information about the non-compliant resource.
+     */
+    additionalInfo?: StringMap;
+  }
+  export type NonCompliantResourcesCount = number;
+  export type NumberOfThings = number;
   export type OTAUpdateArn = string;
   export type OTAUpdateDescription = string;
   export type OTAUpdateErrorMessage = string;
@@ -3807,9 +5455,9 @@ declare namespace Iot {
      */
     fileVersion?: OTAUpdateFileVersion;
     /**
-     * The source of the file.
+     * The location of the updated firmware.
      */
-    fileSource?: Stream;
+    fileLocation?: FileLocation;
     /**
      * The code signing method of the file.
      */
@@ -3847,6 +5495,10 @@ declare namespace Iot {
      * The targets of the OTA update.
      */
     targets?: Targets;
+    /**
+     * Configuration for the rollout of OTA updates.
+     */
+    awsJobExecutionsRolloutConfig?: AwsJobExecutionsRolloutConfig;
     /**
      * Specifies whether the OTA update will continue to run (CONTINUOUS), or will be complete after all those things specified as targets have completed the OTA update (SNAPSHOT). If continuous, the OTA update may also be run on a thing when a change is detected in a target. For example, an OTA update will run on a thing when the thing is added to a target group, even after the OTA update was completed by all things originally in the group. 
      */
@@ -3920,14 +5572,14 @@ declare namespace Iot {
     creationDate?: DateType;
   }
   export type OutgoingCertificates = OutgoingCertificate[];
+  export type OverrideDynamicGroups = boolean;
   export type PageSize = number;
   export type Parameter = string;
-  export type ParameterKey = string;
-  export type ParameterValue = string;
   export type Parameters = {[key: string]: Value};
   export type PartitionKey = string;
   export type PayloadField = string;
   export type Percentage = number;
+  export type Platform = string;
   export type Policies = Policy[];
   export interface Policy {
     /**
@@ -3961,7 +5613,20 @@ declare namespace Iot {
     createDate?: DateType;
   }
   export type PolicyVersionId = string;
+  export interface PolicyVersionIdentifier {
+    /**
+     * The name of the policy.
+     */
+    policyName?: PolicyName;
+    /**
+     * The ID of the version of the policy associated with the resource.
+     */
+    policyVersionId?: PolicyVersionId;
+  }
   export type PolicyVersions = PolicyVersion[];
+  export type Port = number;
+  export type Ports = Port[];
+  export type Prefix = string;
   export interface PresignedUrlConfig {
     /**
      * The ARN of an IAM role that grants grants permission to download files from the S3 bucket where the job data/updates are stored. The role must also grant permission for IoT to download the files.
@@ -3994,6 +5659,19 @@ declare namespace Iot {
   export type QueuedThings = number;
   export type RangeKeyField = string;
   export type RangeKeyValue = string;
+  export interface RateIncreaseCriteria {
+    /**
+     * The threshold for number of notified things that will initiate the increase in rate of rollout.
+     */
+    numberOfNotifiedThings?: NumberOfThings;
+    /**
+     * The threshold for number of succeeded things that will initiate the increase in rate of rollout.
+     */
+    numberOfSucceededThings?: NumberOfThings;
+  }
+  export type ReasonCode = string;
+  export type ReasonForNonCompliance = string;
+  export type ReasonForNonComplianceCode = string;
   export type Recursive = boolean;
   export type RecursiveWithoutDefault = boolean;
   export interface RegisterCACertificateRequest {
@@ -4058,15 +5736,18 @@ declare namespace Iot {
   }
   export interface RegisterThingRequest {
     /**
-     * The provisioning template. 
+     * The provisioning template. See Programmatic Provisioning for more information.
      */
     templateBody: TemplateBody;
     /**
-     * The parameters for provisioning a thing.
+     * The parameters for provisioning a thing. See Programmatic Provisioning for more information.
      */
     parameters?: Parameters;
   }
   export interface RegisterThingResponse {
+    /**
+     * .
+     */
     certificatePem?: CertificatePem;
     /**
      * ARNs for the generated resources.
@@ -4089,7 +5770,7 @@ declare namespace Iot {
   export type RegistryS3KeyName = string;
   export interface RejectCertificateTransferRequest {
     /**
-     * The ID of the certificate.
+     * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
      */
     certificateId: CertificateId;
     /**
@@ -4098,7 +5779,42 @@ declare namespace Iot {
     rejectReason?: Message;
   }
   export type RejectedThings = number;
+  export interface RelatedResource {
+    /**
+     * The type of resource.
+     */
+    resourceType?: ResourceType;
+    /**
+     * Information identifying the resource.
+     */
+    resourceIdentifier?: ResourceIdentifier;
+    /**
+     * Additional information about the resource.
+     */
+    additionalInfo?: StringMap;
+  }
+  export type RelatedResources = RelatedResource[];
   export type RemoveAutoRegistration = boolean;
+  export interface RemoveThingFromBillingGroupRequest {
+    /**
+     * The name of the billing group.
+     */
+    billingGroupName?: BillingGroupName;
+    /**
+     * The ARN of the billing group.
+     */
+    billingGroupArn?: BillingGroupArn;
+    /**
+     * The name of the thing to be removed from the billing group.
+     */
+    thingName?: ThingName;
+    /**
+     * The ARN of the thing to be removed from the billing group.
+     */
+    thingArn?: ThingArn;
+  }
+  export interface RemoveThingFromBillingGroupResponse {
+  }
   export interface RemoveThingFromThingGroupRequest {
     /**
      * The group name.
@@ -4145,7 +5861,34 @@ declare namespace Iot {
   export type Resource = string;
   export type ResourceArn = string;
   export type ResourceArns = {[key: string]: ResourceArn};
+  export interface ResourceIdentifier {
+    /**
+     * The ID of the certificate attached to the resource.
+     */
+    deviceCertificateId?: CertificateId;
+    /**
+     * The ID of the CA certificate used to authorize the certificate.
+     */
+    caCertificateId?: CertificateId;
+    /**
+     * The ID of the Cognito Identity Pool.
+     */
+    cognitoIdentityPoolId?: CognitoIdentityPoolId;
+    /**
+     * The client ID.
+     */
+    clientId?: ClientId;
+    /**
+     * The version of the policy associated with the resource.
+     */
+    policyVersionIdentifier?: PolicyVersionIdentifier;
+    /**
+     * The account with which the resource is associated.
+     */
+    account?: AwsAccountId;
+  }
   export type ResourceLogicalId = string;
+  export type ResourceType = "DEVICE_CERTIFICATE"|"CA_CERTIFICATE"|"IOT_POLICY"|"COGNITO_IDENTITY_POOL"|"CLIENT_ID"|"ACCOUNT_SETTINGS"|string;
   export type Resources = Resource[];
   export type RoleAlias = string;
   export type RoleAliasArn = string;
@@ -4154,6 +5897,10 @@ declare namespace Iot {
      * The role alias.
      */
     roleAlias?: RoleAlias;
+    /**
+     * The ARN of the role alias.
+     */
+    roleAliasArn?: RoleAliasArn;
     /**
      * The role ARN.
      */
@@ -4177,6 +5924,7 @@ declare namespace Iot {
   }
   export type RoleAliases = RoleAlias[];
   export type RoleArn = string;
+  export type RolloutRatePerMinute = number;
   export type RuleArn = string;
   export type RuleName = string;
   export interface S3Action {
@@ -4198,20 +5946,30 @@ declare namespace Iot {
     cannedAcl?: CannedAccessControlList;
   }
   export type S3Bucket = string;
+  export interface S3Destination {
+    /**
+     * The S3 bucket that contains the updated firmware.
+     */
+    bucket?: S3Bucket;
+    /**
+     * The S3 prefix.
+     */
+    prefix?: Prefix;
+  }
   export type S3FileUrl = string;
   export type S3FileUrlList = S3FileUrl[];
   export type S3Key = string;
   export interface S3Location {
     /**
-     * The S3 bucket that contains the file to stream.
+     * The S3 bucket.
      */
-    bucket: S3Bucket;
+    bucket?: S3Bucket;
     /**
-     * The name of the file within the S3 bucket to stream.
+     * The S3 key.
      */
-    key: S3Key;
+    key?: S3Key;
     /**
-     * The file version.
+     * The S3 bucket version.
      */
     version?: S3Version;
   }
@@ -4229,6 +5987,31 @@ declare namespace Iot {
   }
   export type SalesforceEndpoint = string;
   export type SalesforceToken = string;
+  export type ScheduledAuditArn = string;
+  export interface ScheduledAuditMetadata {
+    /**
+     * The name of the scheduled audit.
+     */
+    scheduledAuditName?: ScheduledAuditName;
+    /**
+     * The ARN of the scheduled audit.
+     */
+    scheduledAuditArn?: ScheduledAuditArn;
+    /**
+     * How often the scheduled audit takes place.
+     */
+    frequency?: AuditFrequency;
+    /**
+     * The day of the month on which the scheduled audit is run (if the frequency is "MONTHLY"). If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.
+     */
+    dayOfMonth?: DayOfMonth;
+    /**
+     * The day of the week on which the scheduled audit is run (if the frequency is "WEEKLY" or "BIWEEKLY").
+     */
+    dayOfWeek?: DayOfWeek;
+  }
+  export type ScheduledAuditMetadataList = ScheduledAuditMetadata[];
+  export type ScheduledAuditName = string;
   export interface SearchIndexRequest {
     /**
      * The search index name.
@@ -4260,9 +6043,46 @@ declare namespace Iot {
      * The things that match the search query.
      */
     things?: ThingDocumentList;
+    /**
+     * The thing groups that match the search query.
+     */
+    thingGroups?: ThingGroupDocumentList;
   }
   export type SearchableAttributes = AttributeName[];
   export type Seconds = number;
+  export type SecurityProfileArn = string;
+  export type SecurityProfileDescription = string;
+  export interface SecurityProfileIdentifier {
+    /**
+     * The name you have given to the security profile.
+     */
+    name: SecurityProfileName;
+    /**
+     * The ARN of the security profile.
+     */
+    arn: SecurityProfileArn;
+  }
+  export type SecurityProfileIdentifiers = SecurityProfileIdentifier[];
+  export type SecurityProfileName = string;
+  export interface SecurityProfileTarget {
+    /**
+     * The ARN of the security profile.
+     */
+    arn: SecurityProfileTargetArn;
+  }
+  export type SecurityProfileTargetArn = string;
+  export interface SecurityProfileTargetMapping {
+    /**
+     * Information that identifies the security profile.
+     */
+    securityProfileIdentifier?: SecurityProfileIdentifier;
+    /**
+     * Information about the target (thing group) associated with the security profile.
+     */
+    target?: SecurityProfileTarget;
+  }
+  export type SecurityProfileTargetMappings = SecurityProfileTargetMapping[];
+  export type SecurityProfileTargets = SecurityProfileTarget[];
   export type SetAsActive = boolean;
   export type SetAsActiveFlag = boolean;
   export type SetAsDefault = boolean;
@@ -4310,7 +6130,7 @@ declare namespace Iot {
   }
   export interface SetV2LoggingOptionsRequest {
     /**
-     * The role ARN that allows IoT to write to Cloudwatch logs.
+     * The ARN of the role that allows IoT to write to Cloudwatch logs.
      */
     roleArn?: AwsArn;
     /**
@@ -4318,13 +6138,28 @@ declare namespace Iot {
      */
     defaultLogLevel?: LogLevel;
     /**
-     * Set to true to disable all logs, otherwise set to false.
+     * If true all logs are disabled. The default is false.
      */
     disableAllLogs?: DisableAllLogs;
   }
   export type Signature = Buffer|Uint8Array|Blob|string;
   export type SignatureAlgorithm = string;
   export type SigningJobId = string;
+  export type SigningProfileName = string;
+  export interface SigningProfileParameter {
+    /**
+     * Certificate ARN.
+     */
+    certificateArn?: CertificateArn;
+    /**
+     * The hardware platform of your device.
+     */
+    platform?: Platform;
+    /**
+     * The location of the code-signing certificate on your device.
+     */
+    certificatePathOnDevice?: CertificatePathOnDevice;
+  }
   export type SkyfallMaxResults = number;
   export interface SnsAction {
     /**
@@ -4336,7 +6171,7 @@ declare namespace Iot {
      */
     roleArn: AwsArn;
     /**
-     * The message format of the message to publish. Optional. Accepted values are "JSON" and "RAW". The default value of the attribute is "RAW". SNS uses this setting to determine if the payload should be parsed and relevant platform-specific bits of the payload should be extracted. To read more about SNS message formats, see http://docs.aws.amazon.com/sns/latest/dg/json-formats.html refer to their official documentation.
+     * (Optional) The message format of the message to publish. Accepted values are "JSON" and "RAW". The default value of the attribute is "RAW". SNS uses this setting to determine if the payload should be parsed and relevant platform-specific bits of the payload should be extracted. To read more about SNS message formats, see https://docs.aws.amazon.com/sns/latest/dg/json-formats.html refer to their official documentation.
      */
     messageFormat?: MessageFormat;
   }
@@ -4353,6 +6188,32 @@ declare namespace Iot {
      * Specifies whether to use Base64 encoding.
      */
     useBase64?: UseBase64;
+  }
+  export interface StartOnDemandAuditTaskRequest {
+    /**
+     * Which checks are performed during the audit. The checks you specify must be enabled for your account or an exception occurs. Use DescribeAccountAuditConfiguration to see the list of all checks including those that are enabled or UpdateAccountAuditConfiguration to select which checks are enabled.
+     */
+    targetCheckNames: TargetAuditCheckNames;
+  }
+  export interface StartOnDemandAuditTaskResponse {
+    /**
+     * The ID of the on-demand audit you started.
+     */
+    taskId?: AuditTaskId;
+  }
+  export interface StartSigningJobParameter {
+    /**
+     * Describes the code-signing profile.
+     */
+    signingProfileParameter?: SigningProfileParameter;
+    /**
+     * The code-signing profile name.
+     */
+    signingProfileName?: SigningProfileName;
+    /**
+     * The location to write the code-signed file.
+     */
+    destination?: Destination;
   }
   export interface StartThingRegistrationTaskRequest {
     /**
@@ -4378,9 +6239,30 @@ declare namespace Iot {
      */
     taskId?: TaskId;
   }
+  export type StateMachineName = string;
   export type StateReason = string;
   export type StateValue = string;
+  export interface StatisticalThreshold {
+    /**
+     * The percentile which resolves to a threshold value by which compliance with a behavior is determined. Metrics are collected over the specified period (durationSeconds) from all reporting devices in your account and statistical ranks are calculated. Then, the measurements from a device are collected over the same period. If the accumulated measurements from the device fall above or below (comparisonOperator) the value associated with the percentile specified, then the device is considered to be in compliance with the behavior, otherwise a violation occurs.
+     */
+    statistic?: EvaluationStatistic;
+  }
   export type Status = "InProgress"|"Completed"|"Failed"|"Cancelled"|"Cancelling"|string;
+  export interface StepFunctionsAction {
+    /**
+     * (Optional) A name will be given to the state machine execution consisting of this prefix followed by a UUID. Step Functions automatically creates a unique name for each state machine execution if one is not provided.
+     */
+    executionNamePrefix?: ExecutionNamePrefix;
+    /**
+     * The name of the Step Functions state machine whose execution will be started.
+     */
+    stateMachineName: StateMachineName;
+    /**
+     * The ARN of the role that grants IoT permission to start execution of a state machine ("Action":"states:StartExecution").
+     */
+    roleArn: AwsArn;
+  }
   export interface StopThingRegistrationTaskRequest {
     /**
      * The bulk thing provisioning task ID.
@@ -4468,14 +6350,73 @@ declare namespace Iot {
   }
   export type StreamVersion = number;
   export type StreamsSummary = StreamSummary[];
+  export type String = string;
+  export type StringMap = {[key: string]: String};
   export type SucceededThings = number;
   export type TableName = string;
+  export interface Tag {
+    /**
+     * The tag's key.
+     */
+    Key?: TagKey;
+    /**
+     * The tag's value.
+     */
+    Value?: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The ARN of the resource.
+     */
+    resourceArn: ResourceArn;
+    /**
+     * The new or modified tags for the resource.
+     */
+    tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type Target = string;
   export type TargetArn = string;
+  export type TargetAuditCheckNames = AuditCheckName[];
   export type TargetSelection = "CONTINUOUS"|"SNAPSHOT"|string;
   export type Targets = Target[];
   export type TaskId = string;
   export type TaskIdList = TaskId[];
+  export interface TaskStatistics {
+    /**
+     * The number of checks in this audit.
+     */
+    totalChecks?: TotalChecksCount;
+    /**
+     * The number of checks in progress.
+     */
+    inProgressChecks?: InProgressChecksCount;
+    /**
+     * The number of checks waiting for data collection.
+     */
+    waitingForDataCollectionChecks?: WaitingForDataCollectionChecksCount;
+    /**
+     * The number of checks that found compliant resources.
+     */
+    compliantChecks?: CompliantChecksCount;
+    /**
+     * The number of checks that found non-compliant resources.
+     */
+    nonCompliantChecks?: NonCompliantChecksCount;
+    /**
+     * The number of checks 
+     */
+    failedChecks?: FailedChecksCount;
+    /**
+     * The number of checks that did not run because the audit was canceled.
+     */
+    canceledChecks?: CanceledChecksCount;
+  }
   export type TemplateBody = string;
   export interface TestAuthorizationRequest {
     /**
@@ -4569,6 +6510,17 @@ declare namespace Iot {
     version?: Version;
   }
   export type ThingAttributeList = ThingAttribute[];
+  export interface ThingConnectivity {
+    /**
+     * True if the thing is connected to the AWS IoT service, false if it is not connected.
+     */
+    connected?: Boolean;
+    /**
+     * The epoch time (in milliseconds) when the thing last connected or disconnected. Note that if the thing has been disconnected for more than a few weeks, the time value can be missing.
+     */
+    timestamp?: ConnectivityTimestamp;
+  }
+  export type ThingConnectivityIndexingMode = "OFF"|"STATUS"|string;
   export interface ThingDocument {
     /**
      * The thing name.
@@ -4591,14 +6543,48 @@ declare namespace Iot {
      */
     attributes?: Attributes;
     /**
-     * The thing shadow.
+     * The shadow.
      */
     shadow?: JsonDocument;
+    /**
+     * Indicates whether or not the thing is connected to the AWS IoT service.
+     */
+    connectivity?: ThingConnectivity;
   }
   export type ThingDocumentList = ThingDocument[];
   export type ThingGroupArn = string;
   export type ThingGroupDescription = string;
+  export interface ThingGroupDocument {
+    /**
+     * The thing group name.
+     */
+    thingGroupName?: ThingGroupName;
+    /**
+     * The thing group ID.
+     */
+    thingGroupId?: ThingGroupId;
+    /**
+     * The thing group description.
+     */
+    thingGroupDescription?: ThingGroupDescription;
+    /**
+     * The thing group attributes.
+     */
+    attributes?: Attributes;
+    /**
+     * Parent group names.
+     */
+    parentGroupNames?: ThingGroupNameList;
+  }
+  export type ThingGroupDocumentList = ThingGroupDocument[];
   export type ThingGroupId = string;
+  export interface ThingGroupIndexingConfiguration {
+    /**
+     * Thing group indexing mode.
+     */
+    thingGroupIndexingMode: ThingGroupIndexingMode;
+  }
+  export type ThingGroupIndexingMode = "OFF"|"ON"|string;
   export type ThingGroupList = ThingGroupName[];
   export interface ThingGroupMetadata {
     /**
@@ -4630,9 +6616,13 @@ declare namespace Iot {
   export type ThingId = string;
   export interface ThingIndexingConfiguration {
     /**
-     * Thing indexing mode. Valid values are:    REGISTRY – Your thing index will contain only registry data.   REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.   OFF - Thing indexing is disabled.  
+     * Thing indexing mode. Valid values are:   REGISTRY – Your thing index will contain only registry data.   REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.   OFF - Thing indexing is disabled.  
      */
-    thingIndexingMode?: ThingIndexingMode;
+    thingIndexingMode: ThingIndexingMode;
+    /**
+     * Thing connectivity indexing mode. Valid values are:    STATUS – Your thing index will contain connectivity status. In order to enable thing connectivity indexing, thingIndexMode must not be set to OFF.   OFF - Thing connectivity status indexing is disabled.  
+     */
+    thingConnectivityIndexingMode?: ThingConnectivityIndexingMode;
   }
   export type ThingIndexingMode = "OFF"|"REGISTRY"|"REGISTRY_AND_SHADOW"|string;
   export type ThingName = string;
@@ -4684,6 +6674,14 @@ declare namespace Iot {
      */
     searchableAttributes?: SearchableAttributes;
   }
+  export type TimedOutThings = number;
+  export interface TimeoutConfig {
+    /**
+     * Specifies the amount of time, in minutes, this device has to finish execution of this job. The timeout interval can be anywhere between 1 minute and 7 days (1 to 10080 minutes). The in progress timer can't be updated and will apply to all job executions for the job. Whenever a job execution remains in the IN_PROGRESS status for longer than this interval, the job execution will fail and switch to the terminal TIMED_OUT status.
+     */
+    inProgressTimeoutInMinutes?: InProgressTimeoutInMinutes;
+  }
+  export type Timestamp = Date;
   export type Token = string;
   export type TokenKeyName = string;
   export type TokenSignature = string;
@@ -4772,9 +6770,11 @@ declare namespace Iot {
      */
     errorAction?: Action;
   }
+  export type TotalChecksCount = number;
+  export type TotalResourcesCount = number;
   export interface TransferCertificateRequest {
     /**
-     * The ID of the certificate.
+     * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
      */
     certificateId: CertificateId;
     /**
@@ -4815,6 +6815,35 @@ declare namespace Iot {
     rejectDate?: DateType;
   }
   export type UndoDeprecate = boolean;
+  export type UnsignedLong = number;
+  export interface UntagResourceRequest {
+    /**
+     * The ARN of the resource.
+     */
+    resourceArn: ResourceArn;
+    /**
+     * A list of the keys of the tags to be removed from the resource.
+     */
+    tagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
+  export interface UpdateAccountAuditConfigurationRequest {
+    /**
+     * The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as necessary when performing an audit.
+     */
+    roleArn?: RoleArn;
+    /**
+     * Information about the targets to which audit notifications are sent.
+     */
+    auditNotificationTargetConfigurations?: AuditNotificationTargetConfigurations;
+    /**
+     * Specifies which audit checks are enabled and disabled for this account. Use DescribeAccountAuditConfiguration to see the list of all checks including those that are currently enabled. Note that some data collection may begin immediately when certain checks are enabled. When a check is disabled, any data collected so far in relation to the check is deleted. You cannot disable a check if it is used by any scheduled audit. You must first delete the check from the scheduled audit or delete the scheduled audit itself. On the first call to UpdateAccountAuditConfiguration this parameter is required and must specify at least one enabled check.
+     */
+    auditCheckConfigurations?: AuditCheckConfigurations;
+  }
+  export interface UpdateAccountAuditConfigurationResponse {
+  }
   export interface UpdateAuthorizerRequest {
     /**
      * The authorizer name.
@@ -4847,6 +6876,26 @@ declare namespace Iot {
      */
     authorizerArn?: AuthorizerArn;
   }
+  export interface UpdateBillingGroupRequest {
+    /**
+     * The name of the billing group.
+     */
+    billingGroupName: BillingGroupName;
+    /**
+     * The properties of the billing group.
+     */
+    billingGroupProperties: BillingGroupProperties;
+    /**
+     * The expected version of the billing group. If the version of the billing group does not match the expected version specified in the request, the UpdateBillingGroup request is rejected with a VersionConflictException.
+     */
+    expectedVersion?: OptionalVersion;
+  }
+  export interface UpdateBillingGroupResponse {
+    /**
+     * The latest version of the billing group.
+     */
+    version?: Version;
+  }
   export interface UpdateCACertificateRequest {
     /**
      * The CA certificate identifier.
@@ -4871,13 +6920,45 @@ declare namespace Iot {
   }
   export interface UpdateCertificateRequest {
     /**
-     * The ID of the certificate.
+     * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
      */
     certificateId: CertificateId;
     /**
      * The new status.  Note: Setting the status to PENDING_TRANSFER will result in an exception being thrown. PENDING_TRANSFER is a status used internally by AWS IoT. It is not intended for developer use.  Note: The status value REGISTER_INACTIVE is deprecated and should not be used.
      */
     newStatus: CertificateStatus;
+  }
+  export interface UpdateDynamicThingGroupRequest {
+    /**
+     * The name of the dynamic thing group to update.
+     */
+    thingGroupName: ThingGroupName;
+    /**
+     * The dynamic thing group properties to update.
+     */
+    thingGroupProperties: ThingGroupProperties;
+    /**
+     * The expected version of the dynamic thing group to update.
+     */
+    expectedVersion?: OptionalVersion;
+    /**
+     * The dynamic thing group index to update.  Currently one index is supported: 'AWS_Things'. 
+     */
+    indexName?: IndexName;
+    /**
+     * The dynamic thing group search query string to update.
+     */
+    queryString?: QueryString;
+    /**
+     * The dynamic thing group query version to update.  Currently one query version is supported: "2017-09-30". If not specified, the query version defaults to this value. 
+     */
+    queryVersion?: QueryVersion;
+  }
+  export interface UpdateDynamicThingGroupResponse {
+    /**
+     * The dynamic thing group version.
+     */
+    version?: Version;
   }
   export interface UpdateEventConfigurationsRequest {
     /**
@@ -4892,8 +6973,38 @@ declare namespace Iot {
      * Thing indexing configuration.
      */
     thingIndexingConfiguration?: ThingIndexingConfiguration;
+    /**
+     * Thing group indexing configuration.
+     */
+    thingGroupIndexingConfiguration?: ThingGroupIndexingConfiguration;
   }
   export interface UpdateIndexingConfigurationResponse {
+  }
+  export interface UpdateJobRequest {
+    /**
+     * The ID of the job to be updated.
+     */
+    jobId: JobId;
+    /**
+     * A short text description of the job.
+     */
+    description?: JobDescription;
+    /**
+     * Configuration information for pre-signed S3 URLs.
+     */
+    presignedUrlConfig?: PresignedUrlConfig;
+    /**
+     * Allows you to create a staged rollout of the job.
+     */
+    jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig;
+    /**
+     * Allows you to create criteria to abort a job.
+     */
+    abortConfig?: AbortConfig;
+    /**
+     * Specifies the amount of time each device has to finish its execution of the job. The timer is started when the job execution status is set to IN_PROGRESS. If the job execution status is not set to another terminal state before the time expires, it will be automatically set to TIMED_OUT. 
+     */
+    timeoutConfig?: TimeoutConfig;
   }
   export interface UpdateRoleAliasRequest {
     /**
@@ -4918,6 +7029,110 @@ declare namespace Iot {
      * The role alias ARN.
      */
     roleAliasArn?: RoleAliasArn;
+  }
+  export interface UpdateScheduledAuditRequest {
+    /**
+     * How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The actual start time of each audit is determined by the system.
+     */
+    frequency?: AuditFrequency;
+    /**
+     * The day of the month on which the scheduled audit takes place. Can be "1" through "31" or "LAST". This field is required if the "frequency" parameter is set to "MONTHLY". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.
+     */
+    dayOfMonth?: DayOfMonth;
+    /**
+     * The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI" or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".
+     */
+    dayOfWeek?: DayOfWeek;
+    /**
+     * Which checks are performed during the scheduled audit. Checks must be enabled for your account. (Use DescribeAccountAuditConfiguration to see the list of all checks including those that are enabled or UpdateAccountAuditConfiguration to select which checks are enabled.)
+     */
+    targetCheckNames?: TargetAuditCheckNames;
+    /**
+     * The name of the scheduled audit. (Max. 128 chars)
+     */
+    scheduledAuditName: ScheduledAuditName;
+  }
+  export interface UpdateScheduledAuditResponse {
+    /**
+     * The ARN of the scheduled audit.
+     */
+    scheduledAuditArn?: ScheduledAuditArn;
+  }
+  export interface UpdateSecurityProfileRequest {
+    /**
+     * The name of the security profile you want to update.
+     */
+    securityProfileName: SecurityProfileName;
+    /**
+     * A description of the security profile.
+     */
+    securityProfileDescription?: SecurityProfileDescription;
+    /**
+     * Specifies the behaviors that, when violated by a device (thing), cause an alert.
+     */
+    behaviors?: Behaviors;
+    /**
+     * Where the alerts are sent. (Alerts are always sent to the console.)
+     */
+    alertTargets?: AlertTargets;
+    /**
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors but it is also retained for any metric specified here.
+     */
+    additionalMetricsToRetain?: AdditionalMetricsToRetainList;
+    /**
+     * If true, delete all behaviors defined for this security profile. If any behaviors are defined in the current invocation an exception occurs.
+     */
+    deleteBehaviors?: DeleteBehaviors;
+    /**
+     * If true, delete all alertTargets defined for this security profile. If any alertTargets are defined in the current invocation an exception occurs.
+     */
+    deleteAlertTargets?: DeleteAlertTargets;
+    /**
+     * If true, delete all additionalMetricsToRetain defined for this security profile. If any additionalMetricsToRetain are defined in the current invocation an exception occurs.
+     */
+    deleteAdditionalMetricsToRetain?: DeleteAdditionalMetricsToRetain;
+    /**
+     * The expected version of the security profile. A new version is generated whenever the security profile is updated. If you specify a value that is different than the actual version, a VersionConflictException is thrown.
+     */
+    expectedVersion?: OptionalVersion;
+  }
+  export interface UpdateSecurityProfileResponse {
+    /**
+     * The name of the security profile that was updated.
+     */
+    securityProfileName?: SecurityProfileName;
+    /**
+     * The ARN of the security profile that was updated.
+     */
+    securityProfileArn?: SecurityProfileArn;
+    /**
+     * The description of the security profile.
+     */
+    securityProfileDescription?: SecurityProfileDescription;
+    /**
+     * Specifies the behaviors that, when violated by a device (thing), cause an alert.
+     */
+    behaviors?: Behaviors;
+    /**
+     * Where the alerts are sent. (Alerts are always sent to the console.)
+     */
+    alertTargets?: AlertTargets;
+    /**
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the security profile's behaviors but it is also retained for any metric specified here.
+     */
+    additionalMetricsToRetain?: AdditionalMetricsToRetainList;
+    /**
+     * The updated version of the security profile.
+     */
+    version?: Version;
+    /**
+     * The time the security profile was created.
+     */
+    creationDate?: Timestamp;
+    /**
+     * The time the security profile was last modified.
+     */
+    lastModifiedDate?: Timestamp;
   }
   export interface UpdateStreamRequest {
     /**
@@ -4988,6 +7203,10 @@ declare namespace Iot {
      * The groups from which the thing will be removed.
      */
     thingGroupsToRemove?: ThingGroupList;
+    /**
+     * Override dynamic thing groups with static thing groups when 10-group limit is reached. If a thing belongs to 10 thing groups, and one or more of those groups are dynamic thing groups, adding a thing to a static group removes the thing from the last dynamic group.
+     */
+    overrideDynamicGroups?: OverrideDynamicGroups;
   }
   export interface UpdateThingGroupsForThingResponse {
   }
@@ -5016,11 +7235,67 @@ declare namespace Iot {
   export interface UpdateThingResponse {
   }
   export type UseBase64 = boolean;
+  export type Valid = boolean;
+  export interface ValidateSecurityProfileBehaviorsRequest {
+    /**
+     * Specifies the behaviors that, when violated by a device (thing), cause an alert.
+     */
+    behaviors: Behaviors;
+  }
+  export interface ValidateSecurityProfileBehaviorsResponse {
+    /**
+     * True if the behaviors were valid.
+     */
+    valid?: Valid;
+    /**
+     * The list of any errors found in the behaviors.
+     */
+    validationErrors?: ValidationErrors;
+  }
+  export interface ValidationError {
+    /**
+     * The description of an error found in the behaviors.
+     */
+    errorMessage?: ErrorMessage;
+  }
+  export type ValidationErrors = ValidationError[];
   export type Value = string;
   export type Version = number;
-  export type errorMessage = string;
-  export type resourceArn = string;
-  export type resourceId = string;
+  export type VersionNumber = number;
+  export interface ViolationEvent {
+    /**
+     * The ID of the violation event.
+     */
+    violationId?: ViolationId;
+    /**
+     * The name of the thing responsible for the violation event.
+     */
+    thingName?: ThingName;
+    /**
+     * The name of the security profile whose behavior was violated.
+     */
+    securityProfileName?: SecurityProfileName;
+    /**
+     * The behavior which was violated.
+     */
+    behavior?: Behavior;
+    /**
+     * The value of the metric (the measurement).
+     */
+    metricValue?: MetricValue;
+    /**
+     * The type of violation event.
+     */
+    violationEventType?: ViolationEventType;
+    /**
+     * The time the violation event occurred.
+     */
+    violationEventTime?: Timestamp;
+  }
+  export type ViolationEventType = "in-alarm"|"alarm-cleared"|"alarm-invalidated"|string;
+  export type ViolationEvents = ViolationEvent[];
+  export type ViolationId = string;
+  export type WaitingForDataCollectionChecksCount = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
