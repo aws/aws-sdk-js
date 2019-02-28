@@ -460,12 +460,12 @@
           helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
           var creds = new AWS.SharedIniFileCredentials({ profile: 'foo' });
           creds.refresh(function(e) {
-            if(e) {
+            if (e) {
               expect(e.message).to.eql('credential_process does not return Version == 1 for profile foo');
               done();
             }
-          })
-        })
+          });
+        });
         it('prefers static INI credentials over credentials process', function() {
           var mockProcess, mockConfig, creds;
           mockProcess = '{"Version": 1,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": ""}';
