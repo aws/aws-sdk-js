@@ -84,11 +84,11 @@ declare class SSM extends Service {
    */
   createPatchBaseline(callback?: (err: AWSError, data: SSM.Types.CreatePatchBaselineResult) => void): Request<SSM.Types.CreatePatchBaselineResult, AWSError>;
   /**
-   * Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the ListResourceDataSync. By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see Create a Resource Data Sync for Inventory in the AWS Systems Manager User Guide.
+   * Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the ListResourceDataSync. By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. For more information, see Configuring Resource Data Sync for Inventory in the AWS Systems Manager User Guide.
    */
   createResourceDataSync(params: SSM.Types.CreateResourceDataSyncRequest, callback?: (err: AWSError, data: SSM.Types.CreateResourceDataSyncResult) => void): Request<SSM.Types.CreateResourceDataSyncResult, AWSError>;
   /**
-   * Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the ListResourceDataSync. By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. To view an example of a restrictive Amazon S3 bucket policy for Resource Data Sync, see Create a Resource Data Sync for Inventory in the AWS Systems Manager User Guide.
+   * Creates a resource data sync configuration to a single bucket in Amazon S3. This is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data to the Amazon S3 bucket. To check the status of the sync, use the ListResourceDataSync. By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy. For more information, see Configuring Resource Data Sync for Inventory in the AWS Systems Manager User Guide.
    */
   createResourceDataSync(callback?: (err: AWSError, data: SSM.Types.CreateResourceDataSyncResult) => void): Request<SSM.Types.CreateResourceDataSyncResult, AWSError>;
   /**
@@ -975,7 +975,7 @@ declare namespace SSM {
     /**
      * The name of the Systems Manager document.
      */
-    Name?: DocumentName;
+    Name?: DocumentARN;
     /**
      * The ID of the instance.
      */
@@ -1018,7 +1018,7 @@ declare namespace SSM {
     /**
      * The name of the Systems Manager document.
      */
-    Name?: DocumentName;
+    Name?: DocumentARN;
     /**
      * The ID of the instance.
      */
@@ -1273,7 +1273,7 @@ declare namespace SSM {
     /**
      * The name specified when the association was created.
      */
-    Name?: DocumentName;
+    Name?: DocumentARN;
     /**
      * The version of a Systems Manager document used when the association version was created.
      */
@@ -2034,9 +2034,9 @@ declare namespace SSM {
   export type CreateAssociationBatchRequestEntries = CreateAssociationBatchRequestEntry[];
   export interface CreateAssociationBatchRequestEntry {
     /**
-     * The name of the configuration document. 
+     * The name of the SSM document that contains the configuration information for the instance. You can specify Command, Policy, or Automation documents. You can specify AWS-predefined documents, documents you created, or a document that is shared with you from another account. For SSM documents that are shared with you from other AWS accounts, you must specify the complete SSM document ARN, in the following format:  arn:aws:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For AWS-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
      */
-    Name: DocumentName;
+    Name: DocumentARN;
     /**
      * The ID of the instance. 
      */
@@ -2094,9 +2094,9 @@ declare namespace SSM {
   }
   export interface CreateAssociationRequest {
     /**
-     * The name of the Systems Manager document.
+     * The name of the SSM document that contains the configuration information for the instance. You can specify Command, Policy, or Automation documents. You can specify AWS-predefined documents, documents you created, or a document that is shared with you from another account. For SSM documents that are shared with you from other AWS accounts, you must specify the complete SSM document ARN, in the following format:  arn:partition:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For AWS-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
      */
-    Name: DocumentName;
+    Name: DocumentARN;
     /**
      * The document version you want to associate with the target(s). Can be a specific version or the default version.
      */
@@ -2250,7 +2250,7 @@ declare namespace SSM {
      */
     Name: BaselineName;
     /**
-     * A set of global filters used to exclude patches from the baseline.
+     * A set of global filters used to include patches in the baseline.
      */
     GlobalFilters?: PatchFilterGroup;
     /**
@@ -2328,7 +2328,7 @@ declare namespace SSM {
     /**
      * The name of the Systems Manager document.
      */
-    Name?: DocumentName;
+    Name?: DocumentARN;
     /**
      * The ID of the instance.
      */
@@ -2609,7 +2609,7 @@ declare namespace SSM {
     /**
      * The name of the Systems Manager document.
      */
-    Name?: DocumentName;
+    Name?: DocumentARN;
     /**
      * The instance ID.
      */
@@ -4430,7 +4430,7 @@ declare namespace SSM {
     /**
      * The name of the association.
      */
-    Name?: DocumentName;
+    Name?: DocumentARN;
     /**
      * The association document verions.
      */
@@ -7077,9 +7077,9 @@ declare namespace SSM {
      */
     OutputLocation?: InstanceAssociationOutputLocation;
     /**
-     * The name of the association document.
+     * The name of the SSM document that contains the configuration information for the instance. You can specify Command, Policy, or Automation documents. You can specify AWS-predefined documents, documents you created, or a document that is shared with you from another account. For SSM documents that are shared with you from other AWS accounts, you must specify the complete SSM document ARN, in the following format:  arn:aws:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For AWS-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
      */
-    Name?: DocumentName;
+    Name?: DocumentARN;
     /**
      * The targets of the association.
      */
@@ -7119,7 +7119,7 @@ declare namespace SSM {
     /**
      * The name of the Systems Manager document.
      */
-    Name: DocumentName;
+    Name: DocumentARN;
     /**
      * The ID of the instance.
      */
@@ -7473,7 +7473,7 @@ declare namespace SSM {
      */
     Name?: BaselineName;
     /**
-     * A set of global filters used to exclude patches from the baseline.
+     * A set of global filters used to include patches in the baseline.
      */
     GlobalFilters?: PatchFilterGroup;
     /**

@@ -300,6 +300,14 @@ declare class AlexaForBusiness extends Service {
    */
   getDevice(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetDeviceResponse) => void): Request<AlexaForBusiness.Types.GetDeviceResponse, AWSError>;
   /**
+   * Retrieves the configured values for the user enrollment invitation email template.
+   */
+  getInvitationConfiguration(params: AlexaForBusiness.Types.GetInvitationConfigurationRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetInvitationConfigurationResponse) => void): Request<AlexaForBusiness.Types.GetInvitationConfigurationResponse, AWSError>;
+  /**
+   * Retrieves the configured values for the user enrollment invitation email template.
+   */
+  getInvitationConfiguration(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetInvitationConfigurationResponse) => void): Request<AlexaForBusiness.Types.GetInvitationConfigurationResponse, AWSError>;
+  /**
    * Gets the details of a room profile by profile ARN.
    */
   getProfile(params: AlexaForBusiness.Types.GetProfileRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetProfileResponse) => void): Request<AlexaForBusiness.Types.GetProfileResponse, AWSError>;
@@ -403,6 +411,14 @@ declare class AlexaForBusiness extends Service {
    * Sets the conference preferences on a specific conference provider at the account level.
    */
   putConferencePreference(callback?: (err: AWSError, data: AlexaForBusiness.Types.PutConferencePreferenceResponse) => void): Request<AlexaForBusiness.Types.PutConferencePreferenceResponse, AWSError>;
+  /**
+   * Configures the email template for the user enrollment invitation with the specified attributes.
+   */
+  putInvitationConfiguration(params: AlexaForBusiness.Types.PutInvitationConfigurationRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.PutInvitationConfigurationResponse) => void): Request<AlexaForBusiness.Types.PutInvitationConfigurationResponse, AWSError>;
+  /**
+   * Configures the email template for the user enrollment invitation with the specified attributes.
+   */
+  putInvitationConfiguration(callback?: (err: AWSError, data: AlexaForBusiness.Types.PutInvitationConfigurationResponse) => void): Request<AlexaForBusiness.Types.PutInvitationConfigurationResponse, AWSError>;
   /**
    * Updates room skill parameter details by room, skill, and parameter key ID. Not all skills have a room skill parameter.
    */
@@ -708,11 +724,7 @@ declare namespace AlexaForBusiness {
   }
   export interface AssociateSkillWithUsersRequest {
     /**
-     * The ARN of the organization.
-     */
-    OrganizationArn?: Arn;
-    /**
-     * The private skill ID you want to make available to enrolled users.&gt;
+     * The private skill ID you want to make available to enrolled users.
      */
     SkillId: SkillId;
   }
@@ -933,7 +945,7 @@ declare namespace AlexaForBusiness {
      */
     ScheduleName?: BusinessReportScheduleName;
     /**
-     * The S3 bucket name of the output reports.
+     * The S3 bucket name of the output reports. If this isn't specified, the report can be retrieved from a download link by calling ListBusinessReportSchedule. 
      */
     S3BucketName?: CustomerS3BucketName;
     /**
@@ -949,7 +961,7 @@ declare namespace AlexaForBusiness {
      */
     ContentRange: BusinessReportContentRange;
     /**
-     * The recurrence of the reports.
+     * The recurrence of the reports. If this isn't specified, the report will only be delivered one time when the API is called. 
      */
     Recurrence?: BusinessReportRecurrence;
     /**
@@ -1435,10 +1447,6 @@ declare namespace AlexaForBusiness {
   }
   export interface DisassociateSkillFromUsersRequest {
     /**
-     * The ARN of the organization.
-     */
-    OrganizationArn?: Arn;
-    /**
      *  The private skill ID you want to make unavailable for enrolled users.
      */
     SkillId: SkillId;
@@ -1547,6 +1555,22 @@ declare namespace AlexaForBusiness {
      * The details of the device requested. Required.
      */
     Device?: Device;
+  }
+  export interface GetInvitationConfigurationRequest {
+  }
+  export interface GetInvitationConfigurationResponse {
+    /**
+     * The name of the organization sending the enrollment invite to a user.
+     */
+    OrganizationName?: OrganizationName;
+    /**
+     * The email ID of the organization or individual contact that the enrolled user can use. 
+     */
+    ContactEmail?: Email;
+    /**
+     * The list of private skill IDs that you want to recommend to the user to enable in the invitation.
+     */
+    PrivateSkillIds?: ShortSkillIdList;
   }
   export interface GetProfileRequest {
     /**
@@ -1687,7 +1711,7 @@ declare namespace AlexaForBusiness {
   }
   export interface ListSkillsRequest {
     /**
-     * The ARN of the skill group for which to list enabled skills.
+     * The ARN of the skill group for which to list enabled skills. Required.
      */
     SkillGroupArn?: Arn;
     /**
@@ -1699,11 +1723,11 @@ declare namespace AlexaForBusiness {
      */
     SkillType?: SkillTypeFilter;
     /**
-     * An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.
+     * An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults. Required.
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved.
+     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved. Required.
      */
     MaxResults?: SkillListMaxResults;
   }
@@ -1822,6 +1846,7 @@ declare namespace AlexaForBusiness {
   export type NextToken = string;
   export type OneClickIdDelay = string;
   export type OneClickPinDelay = string;
+  export type OrganizationName = string;
   export type OutboundPhoneNumber = string;
   export interface PSTNDialIn {
     /**
@@ -1938,6 +1963,22 @@ declare namespace AlexaForBusiness {
     ConferencePreference: ConferencePreference;
   }
   export interface PutConferencePreferenceResponse {
+  }
+  export interface PutInvitationConfigurationRequest {
+    /**
+     * The name of the organization sending the enrollment invite to a user.
+     */
+    OrganizationName: OrganizationName;
+    /**
+     * The email ID of the organization or individual contact that the enrolled user can use. 
+     */
+    ContactEmail?: Email;
+    /**
+     * The list of private skill IDs that you want to recommend to the user to enable in the invitation.
+     */
+    PrivateSkillIds?: ShortSkillIdList;
+  }
+  export interface PutInvitationConfigurationResponse {
   }
   export interface PutRoomSkillParameterRequest {
     /**
@@ -2347,6 +2388,7 @@ declare namespace AlexaForBusiness {
   export interface SendInvitationResponse {
   }
   export type ShortDescription = string;
+  export type ShortSkillIdList = SkillId[];
   export interface SkillDetails {
     /**
      * The description of the product.

@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.411.0-->
+<!--LATEST=2.412.0-->
 <!--ENTRYINSERT-->
+
+## 2.412.0
+* bugfix: ComprehendMedical: enable cors on ComprehendMedical, update SERVICES.md
+* feature: AlexaForBusiness: This release adds the PutInvitationConfiguration API to configure the user invitation email template with custom attributes, and the GetInvitationConfiguration API to retrieve the configured values.
+* feature: ApiGatewayV2: Marking certain properties as explicitly required and fixing an issue with the GetApiMappings operation for ApiMapping resources.
+* feature: SSM: AWS Systems Manager State Manager now supports associations using documents shared by other AWS accounts.
 
 ## 2.411.0
 * feature: CUR: Adding support for Athena and new report preferences to the Cost and Usage Report API.

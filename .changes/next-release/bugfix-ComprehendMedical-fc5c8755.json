@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "ComprehendMedical",
-  "description": "enable cors on ComprehendMedical, update SERVICES.md"
-}

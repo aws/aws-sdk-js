@@ -373,7 +373,7 @@ declare namespace ApplicationAutoScaling {
      */
     ScalableDimension: ScalableDimension;
     /**
-     * The policy type. This parameter is required if you are creating a scaling policy. For information on which services do not support StepScaling or TargetTrackingScaling, see Step Scaling Policies for Application Auto Scaling and Target Tracking Scaling Policies for Application Auto Scaling in the Application Auto Scaling User Guide.
+     * The policy type. This parameter is required if you are creating a scaling policy. For information on which services do not support StepScaling or TargetTrackingScaling, see the information about Limits in Step Scaling Policies and Target Tracking Scaling Policies in the Application Auto Scaling User Guide.
      */
     PolicyType?: PolicyType;
     /**

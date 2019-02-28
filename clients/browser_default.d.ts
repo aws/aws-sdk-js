@@ -71,3 +71,4 @@ export import KinesisVideoMedia = require('./kinesisvideomedia');
 export import KinesisVideo = require('./kinesisvideo');
 export import Translate = require('./translate');
 export import SecretsManager = require('./secretsmanager');
+export import ComprehendMedical = require('./comprehendmedical');

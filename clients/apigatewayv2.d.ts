@@ -54,11 +54,11 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Creates an Integration.
    */
-  createIntegration(params: ApiGatewayV2.Types.CreateIntegrationRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateIntegrationResult) => void): Request<ApiGatewayV2.Types.CreateIntegrationResult, AWSError>;
+  createIntegration(params: ApiGatewayV2.Types.CreateIntegrationRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateIntegrationResponse) => void): Request<ApiGatewayV2.Types.CreateIntegrationResponse, AWSError>;
   /**
    * Creates an Integration.
    */
-  createIntegration(callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateIntegrationResult) => void): Request<ApiGatewayV2.Types.CreateIntegrationResult, AWSError>;
+  createIntegration(callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateIntegrationResponse) => void): Request<ApiGatewayV2.Types.CreateIntegrationResponse, AWSError>;
   /**
    * Creates an IntegrationResponses.
    */
@@ -78,11 +78,11 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Creates a Route for an API.
    */
-  createRoute(params: ApiGatewayV2.Types.CreateRouteRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateRouteResult) => void): Request<ApiGatewayV2.Types.CreateRouteResult, AWSError>;
+  createRoute(params: ApiGatewayV2.Types.CreateRouteRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateRouteResponse) => void): Request<ApiGatewayV2.Types.CreateRouteResponse, AWSError>;
   /**
    * Creates a Route for an API.
    */
-  createRoute(callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateRouteResult) => void): Request<ApiGatewayV2.Types.CreateRouteResult, AWSError>;
+  createRoute(callback?: (err: AWSError, data: ApiGatewayV2.Types.CreateRouteResponse) => void): Request<ApiGatewayV2.Types.CreateRouteResponse, AWSError>;
   /**
    * Creates a RouteResponse for a Route.
    */
@@ -270,11 +270,11 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets an Integration.
    */
-  getIntegration(params: ApiGatewayV2.Types.GetIntegrationRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationResult) => void): Request<ApiGatewayV2.Types.GetIntegrationResult, AWSError>;
+  getIntegration(params: ApiGatewayV2.Types.GetIntegrationRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationResponse) => void): Request<ApiGatewayV2.Types.GetIntegrationResponse, AWSError>;
   /**
    * Gets an Integration.
    */
-  getIntegration(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationResult) => void): Request<ApiGatewayV2.Types.GetIntegrationResult, AWSError>;
+  getIntegration(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetIntegrationResponse) => void): Request<ApiGatewayV2.Types.GetIntegrationResponse, AWSError>;
   /**
    * Gets an IntegrationResponses.
    */
@@ -326,11 +326,11 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Gets a Route.
    */
-  getRoute(params: ApiGatewayV2.Types.GetRouteRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRouteResult) => void): Request<ApiGatewayV2.Types.GetRouteResult, AWSError>;
+  getRoute(params: ApiGatewayV2.Types.GetRouteRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRouteResponse) => void): Request<ApiGatewayV2.Types.GetRouteResponse, AWSError>;
   /**
    * Gets a Route.
    */
-  getRoute(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRouteResult) => void): Request<ApiGatewayV2.Types.GetRouteResult, AWSError>;
+  getRoute(callback?: (err: AWSError, data: ApiGatewayV2.Types.GetRouteResponse) => void): Request<ApiGatewayV2.Types.GetRouteResponse, AWSError>;
   /**
    * Gets a RouteResponse.
    */
@@ -414,11 +414,11 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Updates an Integration.
    */
-  updateIntegration(params: ApiGatewayV2.Types.UpdateIntegrationRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateIntegrationResult) => void): Request<ApiGatewayV2.Types.UpdateIntegrationResult, AWSError>;
+  updateIntegration(params: ApiGatewayV2.Types.UpdateIntegrationRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateIntegrationResponse) => void): Request<ApiGatewayV2.Types.UpdateIntegrationResponse, AWSError>;
   /**
    * Updates an Integration.
    */
-  updateIntegration(callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateIntegrationResult) => void): Request<ApiGatewayV2.Types.UpdateIntegrationResult, AWSError>;
+  updateIntegration(callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateIntegrationResponse) => void): Request<ApiGatewayV2.Types.UpdateIntegrationResponse, AWSError>;
   /**
    * Updates an IntegrationResponses.
    */
@@ -438,11 +438,11 @@ declare class ApiGatewayV2 extends Service {
   /**
    * Updates a Route.
    */
-  updateRoute(params: ApiGatewayV2.Types.UpdateRouteRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateRouteResult) => void): Request<ApiGatewayV2.Types.UpdateRouteResult, AWSError>;
+  updateRoute(params: ApiGatewayV2.Types.UpdateRouteRequest, callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateRouteResponse) => void): Request<ApiGatewayV2.Types.UpdateRouteResponse, AWSError>;
   /**
    * Updates a Route.
    */
-  updateRoute(callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateRouteResult) => void): Request<ApiGatewayV2.Types.UpdateRouteResult, AWSError>;
+  updateRoute(callback?: (err: AWSError, data: ApiGatewayV2.Types.UpdateRouteResponse) => void): Request<ApiGatewayV2.Types.UpdateRouteResponse, AWSError>;
   /**
    * Updates a RouteResponse.
    */
@@ -467,13 +467,16 @@ declare namespace ApiGatewayV2 {
      */
     DestinationArn?: Arn;
     /**
-     * A single line format of the access logs of data, as specified by selected $context variables. The format must include at least $context.requestId.
+     * A single line format of the access logs of data, as specified by selected $context
+ variables. The format must include at least $context.requestId.
      */
     Format?: StringWithLengthBetween1And1024;
   }
   export interface Api {
     /**
-     * The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The stage name is typically appended to this URI to form a complete path to a deployed API stage.
+     * The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The
+ stage name is typically appended to this URI to form a complete path to a deployed
+ API stage.
      */
     ApiEndpoint?: __string;
     /**
@@ -501,7 +504,7 @@ declare namespace ApiGatewayV2 {
      */
     Name: StringWithLengthBetween1And128;
     /**
-     * The API protocol: HTTP or WEBSOCKET.
+     * The API protocol: Currently only WEBSOCKET is supported.
      */
     ProtocolType: ProtocolType;
     /**
@@ -513,16 +516,38 @@ declare namespace ApiGatewayV2 {
      */
     Version?: StringWithLengthBetween1And64;
     /**
-     * The warning messages reported when failonwarnings is turned on during API import.
+     * The warning messages reported when failonwarnings is turned on during
+ API import.
      */
     Warnings?: __listOf__string;
+  }
+  export interface ApiMapping {
+    /**
+     * The API identifier.
+     */
+    ApiId: Id;
+    /**
+     * The API mapping identifier.
+     */
+    ApiMappingId?: Id;
+    /**
+     * The API mapping key.
+     */
+    ApiMappingKey?: SelectionKey;
+    /**
+     * The API stage.
+     */
+    Stage: StringWithLengthBetween1And128;
   }
   export type Arn = string;
   export type AuthorizationScopes = StringWithLengthBetween1And64[];
   export type AuthorizationType = "NONE"|"AWS_IAM"|"CUSTOM"|string;
   export interface Authorizer {
     /**
-     * Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.
+     * Specifies the required credentials as an IAM role for API Gateway to invoke the
+ authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon
+ Resource Name (ARN). To use resource-based permissions on the Lambda function,
+ specify null.
      */
     AuthorizerCredentialsArn?: Arn;
     /**
@@ -530,23 +555,51 @@ declare namespace ApiGatewayV2 {
      */
     AuthorizerId?: Id;
     /**
-     * The time to live (TTL), in seconds, of cached authorizer results. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.
+     * The time to live (TTL), in seconds, of cached authorizer results. If it equals 0,
+ authorization caching is disabled. If it is greater than 0, API Gateway will cache
+ authorizer responses. If this field is not set, the default value is 300. The maximum
+ value is 3600, or 1 hour.
      */
     AuthorizerResultTtlInSeconds?: IntegerWithLengthBetween0And3600;
     /**
-     * The authorizer type. Currently the only valid value is REQUEST, for a Lambda function using incoming request parameters.
+     * The authorizer type. Currently the only valid value is REQUEST, for a
+ Lambda function using incoming request parameters.
      */
     AuthorizerType?: AuthorizerType;
     /**
-     * The authorizer's Uniform Resource Identifier (URI). ForREQUEST authorizers, this must be a well-formed Lambda function URI, for example, arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations. In general, the URI has this form: arn:aws:apigateway:{region}:lambda:path/{service_api} , where {region} is the same as the region hosting the Lambda function, path indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial /. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations.
+     * The authorizer's Uniform Resource Identifier (URI).
+ ForREQUEST authorizers, this must be a
+ well-formed Lambda function URI, for example,
+ arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
+ In general, the URI has this form:
+ arn:aws:apigateway:{region}:lambda:path/{service_api}
+ , where {region} is the same as the region hosting the Lambda
+ function, path indicates that the remaining substring in the URI should be treated as
+ the path to the resource, including the initial /. For Lambda functions,
+ this is usually of the form
+ /2015-03-31/functions/[FunctionARN]/invocations.
      */
     AuthorizerUri?: UriWithLengthBetween1And2048;
     /**
-     * The identity source for which authorization is requested.For the REQUEST authorizer, this is required when authorization caching is enabled. The value is a comma-separated string of one or more mapping expressions of the specified request parameters. For example, if an Auth header and a Name query string parameters are defined as identity sources, this value is method.request.header.Auth, method.request.querystring.Name. These parameters will be used to derive the authorization caching key and to perform runtime validation of the REQUEST authorizer by verifying all of the identity-related request parameters are present, not null, and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized response without calling the Lambda function. The valid value is a string of comma-separated mapping expressions of the specified request parameters. When the authorization caching is not enabled, this property is optional.
+     * The identity source for which authorization is requested.For the REQUEST authorizer, this is required when authorization
+ caching is enabled. The value is a comma-separated string of one or more mapping
+ expressions of the specified request parameters. For example, if an Auth
+ header and a Name query string parameters are defined as identity
+ sources, this value is method.request.header.Auth,
+ method.request.querystring.Name. These parameters will be used to
+ derive the authorization caching key and to perform runtime validation of the
+ REQUEST authorizer by verifying all of the identity-related request
+ parameters are present, not null, and non-empty. Only when this is true does the
+ authorizer invoke the authorizer Lambda function, otherwise, it returns a 401
+ Unauthorized response without calling the Lambda function. The valid value
+ is a string of comma-separated mapping expressions of the specified request
+ parameters. When the authorization caching is not enabled, this property is
+ optional.
      */
     IdentitySource?: IdentitySourceList;
     /**
-     * The validation expression does not apply to the REQUEST authorizer.
+     * The
+ validation expression does not apply to the REQUEST authorizer.
      */
     IdentityValidationExpression?: StringWithLengthBetween0And1024;
     /**
@@ -554,7 +607,9 @@ declare namespace ApiGatewayV2 {
      */
     Name: StringWithLengthBetween1And128;
     /**
-     * For REQUEST authorizer, this is not defined.
+     * For
+ REQUEST authorizer, this is not
+ defined.
      */
     ProviderArns?: ProviderArnList;
   }
@@ -612,7 +667,7 @@ declare namespace ApiGatewayV2 {
      */
     Name: StringWithLengthBetween1And128;
     /**
-     * The API protocol: HTTP or WEBSOCKET.
+     * The API protocol: Currently only WEBSOCKET is supported.
      */
     ProtocolType: ProtocolType;
     /**
@@ -626,7 +681,9 @@ declare namespace ApiGatewayV2 {
   }
   export interface CreateApiResponse {
     /**
-     * The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The stage name is typically appended to this URI to form a complete path to a deployed API stage.
+     * The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The
+ stage name is typically appended to this URI to form a complete path to a deployed
+ API stage.
      */
     ApiEndpoint?: __string;
     /**
@@ -654,7 +711,7 @@ declare namespace ApiGatewayV2 {
      */
     Name?: StringWithLengthBetween1And128;
     /**
-     * The API protocol: HTTP or WEBSOCKET.
+     * The API protocol: Currently only WEBSOCKET is supported.
      */
     ProtocolType?: ProtocolType;
     /**
@@ -666,7 +723,8 @@ declare namespace ApiGatewayV2 {
      */
     Version?: StringWithLengthBetween1And64;
     /**
-     * The warning messages reported when failonwarnings is turned on during API import.
+     * The warning messages reported when failonwarnings is turned on during
+ API import.
      */
     Warnings?: __listOf__string;
   }
@@ -676,27 +734,58 @@ declare namespace ApiGatewayV2 {
      */
     ApiId: __string;
     /**
-     * Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.
+     * Specifies the required credentials as an IAM role for API Gateway to invoke the
+ authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon
+ Resource Name (ARN). To use resource-based permissions on the Lambda function,
+ specify null.
      */
     AuthorizerCredentialsArn?: Arn;
     /**
-     * The time to live (TTL), in seconds, of cached authorizer results. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.
+     * The time to live (TTL), in seconds, of cached authorizer results. If it equals 0,
+ authorization caching is disabled. If it is greater than 0, API Gateway will cache
+ authorizer responses. If this field is not set, the default value is 300. The maximum
+ value is 3600, or 1 hour.
      */
     AuthorizerResultTtlInSeconds?: IntegerWithLengthBetween0And3600;
     /**
-     * The authorizer type. Currently the only valid value is REQUEST, for a Lambda function using incoming request parameters.
+     * The authorizer type. Currently the only valid value is REQUEST, for a
+ Lambda function using incoming request parameters.
      */
     AuthorizerType: AuthorizerType;
     /**
-     * The authorizer's Uniform Resource Identifier (URI). For REQUEST authorizers, this must be a well-formed Lambda function URI, for example, arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations. In general, the URI has this form: arn:aws:apigateway:{region}:lambda:path/{service_api} , where {region} is the same as the region hosting the Lambda function, path indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial /. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations.
+     * The authorizer's Uniform Resource Identifier (URI). For
+ REQUEST authorizers, this must be a
+ well-formed Lambda function URI, for example,
+ arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
+ In general, the URI has this form:
+ arn:aws:apigateway:{region}:lambda:path/{service_api}
+ , where {region} is the same as the region hosting the Lambda
+ function, path indicates that the remaining substring in the URI should be treated as
+ the path to the resource, including the initial /. For Lambda functions,
+ this is usually of the form
+ /2015-03-31/functions/[FunctionARN]/invocations.
      */
     AuthorizerUri: UriWithLengthBetween1And2048;
     /**
-     * The identity source for which authorization is requested.For the REQUEST authorizer, this is required when authorization caching is enabled. The value is a comma-separated string of one or more mapping expressions of the specified request parameters. For example, if an Auth header and a Name query string parameters are defined as identity sources, this value is method.request.header.Auth, method.request.querystring.Name. These parameters will be used to derive the authorization caching key and to perform runtime validation of the REQUEST authorizer by verifying all of the identity-related request parameters are present, not null, and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized response without calling the Lambda function. The valid value is a string of comma-separated mapping expressions of the specified request parameters. When the authorization caching is not enabled, this property is optional.
+     * The identity source for which authorization is requested.For the REQUEST authorizer, this is required when authorization
+ caching is enabled. The value is a comma-separated string of one or more mapping
+ expressions of the specified request parameters. For example, if an Auth
+ header and a Name query string parameters are defined as identity
+ sources, this value is method.request.header.Auth,
+ method.request.querystring.Name. These parameters will be used to
+ derive the authorization caching key and to perform runtime validation of the
+ REQUEST authorizer by verifying all of the identity-related request
+ parameters are present, not null, and non-empty. Only when this is true does the
+ authorizer invoke the authorizer Lambda function, otherwise, it returns a 401
+ Unauthorized response without calling the Lambda function. The valid value
+ is a string of comma-separated mapping expressions of the specified request
+ parameters. When the authorization caching is not enabled, this property is
+ optional.
      */
     IdentitySource: IdentitySourceList;
     /**
-     * The validation expression does not apply to the REQUEST authorizer.
+     * The
+ validation expression does not apply to the REQUEST authorizer.
      */
     IdentityValidationExpression?: StringWithLengthBetween0And1024;
     /**
@@ -704,13 +793,18 @@ declare namespace ApiGatewayV2 {
      */
     Name: StringWithLengthBetween1And128;
     /**
-     * For REQUEST authorizer, this is not defined.
+     * For
+ REQUEST authorizer, this is not
+ defined.
      */
     ProviderArns?: ProviderArnList;
   }
   export interface CreateAuthorizerResponse {
     /**
-     * Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.
+     * Specifies the required credentials as an IAM role for API Gateway to invoke the
+ authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon
+ Resource Name (ARN). To use resource-based permissions on the Lambda function,
+ specify null.
      */
     AuthorizerCredentialsArn?: Arn;
     /**
@@ -718,23 +812,51 @@ declare namespace ApiGatewayV2 {
      */
     AuthorizerId?: Id;
     /**
-     * The time to live (TTL), in seconds, of cached authorizer results. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.
+     * The time to live (TTL), in seconds, of cached authorizer results. If it equals 0,
+ authorization caching is disabled. If it is greater than 0, API Gateway will cache
+ authorizer responses. If this field is not set, the default value is 300. The maximum
+ value is 3600, or 1 hour.
      */
     AuthorizerResultTtlInSeconds?: IntegerWithLengthBetween0And3600;
     /**
-     * The authorizer type. Currently the only valid value is REQUEST, for a Lambda function using incoming request parameters.
+     * The authorizer type. Currently the only valid value is REQUEST, for a
+ Lambda function using incoming request parameters.
      */
     AuthorizerType?: AuthorizerType;
     /**
-     * The authorizer's Uniform Resource Identifier (URI). ForREQUEST authorizers, this must be a well-formed Lambda function URI, for example, arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations. In general, the URI has this form: arn:aws:apigateway:{region}:lambda:path/{service_api} , where {region} is the same as the region hosting the Lambda function, path indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial /. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations.
+     * The authorizer's Uniform Resource Identifier (URI).
+ ForREQUEST authorizers, this must be a
+ well-formed Lambda function URI, for example,
+ arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
+ In general, the URI has this form:
+ arn:aws:apigateway:{region}:lambda:path/{service_api}
+ , where {region} is the same as the region hosting the Lambda
+ function, path indicates that the remaining substring in the URI should be treated as
+ the path to the resource, including the initial /. For Lambda functions,
+ this is usually of the form
+ /2015-03-31/functions/[FunctionARN]/invocations.
      */
     AuthorizerUri?: UriWithLengthBetween1And2048;
     /**
-     * The identity source for which authorization is requested.For the REQUEST authorizer, this is required when authorization caching is enabled. The value is a comma-separated string of one or more mapping expressions of the specified request parameters. For example, if an Auth header and a Name query string parameters are defined as identity sources, this value is method.request.header.Auth, method.request.querystring.Name. These parameters will be used to derive the authorization caching key and to perform runtime validation of the REQUEST authorizer by verifying all of the identity-related request parameters are present, not null, and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized response without calling the Lambda function. The valid value is a string of comma-separated mapping expressions of the specified request parameters. When the authorization caching is not enabled, this property is optional.
+     * The identity source for which authorization is requested.For the REQUEST authorizer, this is required when authorization
+ caching is enabled. The value is a comma-separated string of one or more mapping
+ expressions of the specified request parameters. For example, if an Auth
+ header and a Name query string parameters are defined as identity
+ sources, this value is method.request.header.Auth,
+ method.request.querystring.Name. These parameters will be used to
+ derive the authorization caching key and to perform runtime validation of the
+ REQUEST authorizer by verifying all of the identity-related request
+ parameters are present, not null, and non-empty. Only when this is true does the
+ authorizer invoke the authorizer Lambda function, otherwise, it returns a 401
+ Unauthorized response without calling the Lambda function. The valid value
+ is a string of comma-separated mapping expressions of the specified request
+ parameters. When the authorization caching is not enabled, this property is
+ optional.
      */
     IdentitySource?: IdentitySourceList;
     /**
-     * The validation expression does not apply to the REQUEST authorizer.
+     * The
+ validation expression does not apply to the REQUEST authorizer.
      */
     IdentityValidationExpression?: StringWithLengthBetween0And1024;
     /**
@@ -742,7 +864,9 @@ declare namespace ApiGatewayV2 {
      */
     Name?: StringWithLengthBetween1And128;
     /**
-     * For REQUEST authorizer, this is not defined.
+     * For
+ REQUEST authorizer, this is not
+ defined.
      */
     ProviderArns?: ProviderArnList;
   }
@@ -756,7 +880,8 @@ declare namespace ApiGatewayV2 {
      */
     Description?: StringWithLengthBetween0And1024;
     /**
-     * The name of the Stage resource for the Deployment resource to create.
+     * The name of the Stage resource for the Deployment
+ resource to create.
      */
     StageName?: StringWithLengthBetween1And128;
   }
@@ -770,7 +895,8 @@ declare namespace ApiGatewayV2 {
      */
     DeploymentId?: Id;
     /**
-     * The status of the deployment: PENDING, FAILED, or SUCCEEDED.
+     * The status of the deployment: PENDING, FAILED, or
+ SUCCEEDED.
      */
     DeploymentStatus?: DeploymentStatus;
     /**
@@ -812,19 +938,34 @@ declare namespace ApiGatewayV2 {
      */
     ApiId: __string;
     /**
-     * The identifier of the VpcLink used for the integration when the connectionType is VPC_LINK; otherwise undefined.
+     * The connection ID.
      */
     ConnectionId?: StringWithLengthBetween1And1024;
     /**
-     * The type of the network connection to the integration endpoint. The valid value is INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and a network load balancer in a VPC. The default value is INTERNET.
+     * The type of the network connection to the integration endpoint. Currently the only
+ valid value is INTERNET, for connections through the public routable
+ internet.
      */
     ConnectionType?: ConnectionType;
     /**
-     * Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob. CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.
+     * Specifies how to handle response payload content type conversions. Supported
+ values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+ following behaviors:
+ CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+ string to the corresponding binary blob.
+ CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+ Base64-encoded string.If this property is not defined, the response payload will be passed through from
+ the integration response to the route response or method response without
+ modification.
      */
     ContentHandlingStrategy?: ContentHandlingStrategy;
     /**
-     * Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To require that the caller's identity be passed through from the request, specify the string arn:aws:iam::*:user/*. To use resource-based permissions on supported AWS services, specify null.
+     * Specifies the credentials required for the integration, if any. For AWS
+ integrations, three options are available. To specify an IAM Role for API Gateway to
+ assume, use the role's Amazon Resource Name (ARN). To require that the caller's
+ identity be passed through from the request, specify the string
+ arn:aws:iam::*:user/*. To use resource-based permissions on supported
+ AWS services, specify null.
      */
     CredentialsArn?: Arn;
     /**
@@ -836,23 +977,64 @@ declare namespace ApiGatewayV2 {
      */
     IntegrationMethod?: StringWithLengthBetween1And64;
     /**
-     * The integration type of an integration. One of the following: AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration. HTTP: for integrating the route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC. This integration is also referred to as the HTTP custom integration. HTTP_PROXY: for integrating route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC, with the client request passed through as-is. This is also referred to as HTTP proxy integration. MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend.
+     * The integration type of an integration. One of the following:
+ AWS: for integrating the route or method request with an AWS service
+ action, including the Lambda function-invoking action. With the Lambda
+ function-invoking action, this is referred to as the Lambda custom integration. With
+ any other AWS service action, this is known as AWS integration.
+ AWS_PROXY: for integrating the route or method request with the Lambda
+ function-invoking action with the client request passed through as-is. This
+ integration is also referred to as Lambda proxy integration.
+ HTTP: for integrating the route or method request with an HTTP
+ endpoint. This
+ integration is also referred to as HTTP custom integration.
+ HTTP_PROXY: for integrating route or method request with an HTTP
+ endpoint, with the client
+ request passed through as-is. This is also referred to as HTTP proxy
+ integration.
+ MOCK: for integrating the route or method request with API Gateway as a
+ "loopback" endpoint without invoking any backend.
      */
-    IntegrationType?: IntegrationType;
+    IntegrationType: IntegrationType;
     /**
-     * Specifies the Uniform Resource Identifier (URI) of the integration endpoint.For HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification, for either standard integration, where connectionType is not VPC_LINK, or private integration, where connectionType is VPC_LINK. For a private HTTP integration, the URI is not used for routing.For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}. Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the integrated AWS service (e.g., s3); and {subdomain} is a designated subdomain supported by certain AWS service for fast host-name lookup. action can be used for an AWS service action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing {service_api} refers to a supported action {name} plus any required input parameters. Alternatively, path can be used for an AWS service path-based API. The ensuing service_api refers to the path to an AWS service resource, including the region of the integrated AWS service, if applicable. For example, for integration with the S3 API of GetObject, the URI can be either arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key} or arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}
+     * For a Lambda proxy integration, this is the URI of the Lambda function.
      */
     IntegrationUri?: UriWithLengthBetween1And2048;
     /**
-     * Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER. WHEN_NO_MATCH passes the request body for unmapped content types through to the integration backend without transformation. NEVER rejects unmapped content types with an HTTP 415 Unsupported Media Type response. WHEN_NO_TEMPLATES allows pass-through when the integration has no content types mapped to templates. However, if there is at least one content type defined, unmapped content types will be rejected with the same HTTP 415 Unsupported Media Type response.
+     * Specifies the pass-through behavior for incoming requests based on the
+ Content-Type header in the request, and the available mapping
+ templates specified as the requestTemplates property on the
+ Integration resource. There are three valid values:
+ WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and
+ NEVER.
+ WHEN_NO_MATCH passes the request body for unmapped content types through
+ to the integration backend without transformation.
+ NEVER rejects unmapped content types with an HTTP 415 Unsupported
+ Media Type response.
+ WHEN_NO_TEMPLATES allows pass-through when the integration has no
+ content types mapped to templates. However, if there is at least one content type
+ defined, unmapped content types will be rejected with the same HTTP 415
+ Unsupported Media Type response.
      */
     PassthroughBehavior?: PassthroughBehavior;
     /**
-     * A key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.{location}.{name} , where  {location}  is querystring, path, or header; and  {name}  must be a valid and unique method request parameter name.
+     * A key-value map specifying request parameters that are passed from the method
+ request to the backend. The key is an integration request parameter name and the
+ associated value is a method request parameter value or static value that must be
+ enclosed within single quotes and pre-encoded as required by the backend. The method
+ request parameter value must match the pattern of
+ method.request.{location}.{name}
+ , where 
+ {location}
+  is querystring, path, or header; and 
+ {name}
+  must be a valid and unique method request parameter name.
      */
     RequestParameters?: IntegrationParameters;
     /**
-     * Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value.
+     * Represents a map of Velocity templates that are applied on the request payload
+ based on the value of the Content-Type header sent by the client. The content type
+ value is the key in this map, and the template (as a String) is the value.
      */
     RequestTemplates?: TemplateMap;
     /**
@@ -860,25 +1042,41 @@ declare namespace ApiGatewayV2 {
      */
     TemplateSelectionExpression?: SelectionExpression;
     /**
-     * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.
+     * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
+ milliseconds or 29 seconds.
      */
     TimeoutInMillis?: IntegerWithLengthBetween50And29000;
   }
-  export interface CreateIntegrationResult {
+  export interface CreateIntegrationResponse {
     /**
-     * The identifier of the VpcLink used for the integration when the connectionType is VPC_LINK; otherwise undefined.
+     * The connection ID.
      */
     ConnectionId?: StringWithLengthBetween1And1024;
     /**
-     * The type of the network connection to the integration endpoint. The valid value is INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and a network load balancer in a VPC. The default value is INTERNET.
+     * The type of the network connection to the integration endpoint. Currently the only
+ valid value is INTERNET, for connections through the public routable
+ internet.
      */
     ConnectionType?: ConnectionType;
     /**
-     * Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob. CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.
+     * Specifies how to handle response payload content type conversions. Supported
+ values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+ following behaviors:
+ CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+ string to the corresponding binary blob.
+ CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+ Base64-encoded string.If this property is not defined, the response payload will be passed through from
+ the integration response to the route response or method response without
+ modification.
      */
     ContentHandlingStrategy?: ContentHandlingStrategy;
     /**
-     * Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To require that the caller's identity be passed through from the request, specify the string arn:aws:iam::*:user/*. To use resource-based permissions on supported AWS services, specify null.
+     * Specifies the credentials required for the integration, if any. For AWS
+ integrations, three options are available. To specify an IAM Role for API Gateway to
+ assume, use the role's Amazon Resource Name (ARN). To require that the caller's
+ identity be passed through from the request, specify the string
+ arn:aws:iam::*:user/*. To use resource-based permissions on supported
+ AWS services, specify null.
      */
     CredentialsArn?: Arn;
     /**
@@ -893,25 +1091,69 @@ declare namespace ApiGatewayV2 {
      * Specifies the integration's HTTP method type.
      */
     IntegrationMethod?: StringWithLengthBetween1And64;
+    /**
+     * The integration response selection expression for the integration. See Integration Response Selection Expressions.
+     */
     IntegrationResponseSelectionExpression?: SelectionExpression;
     /**
-     * The integration type of an integration. One of the following: AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration. HTTP: for integrating the route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC. This integration is also referred to as the HTTP custom integration. HTTP_PROXY: for integrating route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC, with the client request passed through as-is. This is also referred to as HTTP proxy integration. MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend.
+     * The integration type of an integration. One of the following:
+ AWS: for integrating the route or method request with an AWS service
+ action, including the Lambda function-invoking action. With the Lambda
+ function-invoking action, this is referred to as the Lambda custom integration. With
+ any other AWS service action, this is known as AWS integration.
+ AWS_PROXY: for integrating the route or method request with the Lambda
+ function-invoking action with the client request passed through as-is. This
+ integration is also referred to as Lambda proxy integration.
+ HTTP: for integrating the route or method request with an HTTP
+ endpoint. This
+ integration is also referred to as the HTTP custom integration.
+ HTTP_PROXY: for integrating route or method request with an HTTP
+ endpoint, with the client
+ request passed through as-is. This is also referred to as HTTP proxy
+ integration.
+ MOCK: for integrating the route or method request with API Gateway as a
+ "loopback" endpoint without invoking any backend.
      */
     IntegrationType?: IntegrationType;
     /**
-     * Specifies the Uniform Resource Identifier (URI) of the integration endpoint.For HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification, for either standard integration, where connectionType is not VPC_LINK, or private integration, where connectionType is VPC_LINK. For a private HTTP integration, the URI is not used for routing.For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}. Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the integrated AWS service (e.g., s3); and {subdomain} is a designated subdomain supported by certain AWS service for fast host-name lookup. action can be used for an AWS service action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing {service_api} refers to a supported action {name} plus any required input parameters. Alternatively, path can be used for an AWS service path-based API. The ensuing service_api refers to the path to an AWS service resource, including the region of the integrated AWS service, if applicable. For example, for integration with the S3 API of GetObject, the URI can be either arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key} or arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}
+     * For a Lambda proxy integration, this is the URI of the Lambda function.
      */
     IntegrationUri?: UriWithLengthBetween1And2048;
     /**
-     * Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER. WHEN_NO_MATCH passes the request body for unmapped content types through to the integration backend without transformation. NEVER rejects unmapped content types with an HTTP 415 Unsupported Media Type response. WHEN_NO_TEMPLATES allows pass-through when the integration has no content types mapped to templates. However, if there is at least one content type defined, unmapped content types will be rejected with the same HTTP 415 Unsupported Media Type response.
+     * Specifies the pass-through behavior for incoming requests based on the
+ Content-Type header in the request, and the available mapping
+ templates specified as the requestTemplates property on the
+ Integration resource. There are three valid values:
+ WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and
+ NEVER.
+ WHEN_NO_MATCH passes the request body for unmapped content types through
+ to the integration backend without transformation.
+ NEVER rejects unmapped content types with an HTTP 415 Unsupported
+ Media Type response.
+ WHEN_NO_TEMPLATES allows pass-through when the integration has no
+ content types mapped to templates. However, if there is at least one content type
+ defined, unmapped content types will be rejected with the same HTTP 415
+ Unsupported Media Type response.
      */
     PassthroughBehavior?: PassthroughBehavior;
     /**
-     * A key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.{location}.{name} , where  {location}  is querystring, path, or header; and  {name}  must be a valid and unique method request parameter name.
+     * A key-value map specifying request parameters that are passed from the method
+ request to the backend. The key is an integration request parameter name and the
+ associated value is a method request parameter value or static value that must be
+ enclosed within single quotes and pre-encoded as required by the backend. The method
+ request parameter value must match the pattern of
+ method.request.{location}.{name}
+ , where 
+ {location}
+  is querystring, path, or header; and 
+ {name}
+  must be a valid and unique method request parameter name.
      */
     RequestParameters?: IntegrationParameters;
     /**
-     * Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value.
+     * Represents a map of Velocity templates that are applied on the request payload
+ based on the value of the Content-Type header sent by the client. The content type
+ value is the key in this map, and the template (as a String) is the value.
      */
     RequestTemplates?: TemplateMap;
     /**
@@ -919,7 +1161,8 @@ declare namespace ApiGatewayV2 {
      */
     TemplateSelectionExpression?: SelectionExpression;
     /**
-     * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.
+     * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
+ milliseconds or 29 seconds.
      */
     TimeoutInMillis?: IntegerWithLengthBetween50And29000;
   }
@@ -929,7 +1172,15 @@ declare namespace ApiGatewayV2 {
      */
     ApiId: __string;
     /**
-     * Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob. CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.
+     * Specifies how to handle response payload content type conversions. Supported
+ values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+ following behaviors:
+ CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+ string to the corresponding binary blob.
+ CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+ Base64-encoded string.If this property is not defined, the response payload will be passed through from
+ the integration response to the route response or method response without
+ modification.
      */
     ContentHandlingStrategy?: ContentHandlingStrategy;
     /**
@@ -941,11 +1192,23 @@ declare namespace ApiGatewayV2 {
      */
     IntegrationResponseKey: SelectionKey;
     /**
-     * A key-value map specifying response parameters that are passed to the method response from the backend. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of method.response.header.{name}, where {name} is a valid and unique header name. The mapped non-static value must match the pattern of integration.response.header.{name} or integration.response.body.{JSON-expression}, where {name} is a valid and unique response header name and {JSON-expression} is a valid JSON expression without the $ prefix.
+     * A key-value map specifying response parameters that are passed to the method
+ response from the backend. The key is a method response header parameter name and the
+ mapped value is an integration response header value, a static value enclosed within
+ a pair of single quotes, or a JSON expression from the integration response body. The
+ mapping key must match the pattern of method.response.header.{name},
+ where {name} is a valid and unique header name. The mapped non-static
+ value must match the pattern of integration.response.header.{name} or
+ integration.response.body.{JSON-expression}, where
+ {name} is a valid and unique response header name and
+ {JSON-expression} is a valid JSON expression without the $
+ prefix.
      */
     ResponseParameters?: IntegrationParameters;
     /**
-     * The collection of response templates for the integration response as a string-to-string map of key-value pairs. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.
+     * The collection of response templates for the integration response as a
+ string-to-string map of key-value pairs. Response templates are represented as a
+ key/value map, with a content-type as the key and a template as the value.
      */
     ResponseTemplates?: TemplateMap;
     /**
@@ -955,7 +1218,15 @@ declare namespace ApiGatewayV2 {
   }
   export interface CreateIntegrationResponseResponse {
     /**
-     * Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob. CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.
+     * Specifies how to handle response payload content type conversions. Supported
+ values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+ following behaviors:
+ CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+ string to the corresponding binary blob.
+ CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+ Base64-encoded string.If this property is not defined, the response payload will be passed through from
+ the integration response to the route response or method response without
+ modification.
      */
     ContentHandlingStrategy?: ContentHandlingStrategy;
     /**
@@ -967,11 +1238,21 @@ declare namespace ApiGatewayV2 {
      */
     IntegrationResponseKey?: SelectionKey;
     /**
-     * A key-value map specifying response parameters that are passed to the method response from the backend. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of method.response.header.{name}, where name is a valid and unique header name. The mapped non-static value must match the pattern of integration.response.header.{name} or integration.response.body.{JSON-expression}, where name is a valid and unique response header name and JSON-expression is a valid JSON expression without the $ prefix.
+     * A key-value map specifying response parameters that are passed to the method
+ response from the backend. The key is a method response header parameter name and the
+ mapped value is an integration response header value, a static value enclosed within
+ a pair of single quotes, or a JSON expression from the integration response body. The
+ mapping key must match the pattern of method.response.header.{name}, where name is a
+ valid and unique header name. The mapped non-static value must match the pattern of
+ integration.response.header.{name} or integration.response.body.{JSON-expression},
+ where name is a valid and unique response header name and JSON-expression is a valid
+ JSON expression without the $ prefix.
      */
     ResponseParameters?: IntegrationParameters;
     /**
-     * The collection of response templates for the integration response as a string-to-string map of key-value pairs. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.
+     * The collection of response templates for the integration response as a
+ string-to-string map of key-value pairs. Response templates are represented as a
+ key/value map, with a content-type as the key and a template as the value.
      */
     ResponseTemplates?: TemplateMap;
     /**
@@ -997,9 +1278,10 @@ declare namespace ApiGatewayV2 {
      */
     Name: StringWithLengthBetween1And128;
     /**
-     * The schema for the model. For application/json models, this should be JSON schema draft 4 model.
+     * The schema for the model. For application/json models, this should be JSON schema
+ draft 4 model.
      */
-    Schema?: StringWithLengthBetween0And32K;
+    Schema: StringWithLengthBetween0And32K;
   }
   export interface CreateModelResponse {
     /**
@@ -1019,7 +1301,8 @@ declare namespace ApiGatewayV2 {
      */
     Name?: StringWithLengthBetween1And128;
     /**
-     * The schema for the model. For application/json models, this should be JSON schema draft 4 model.
+     * The schema for the model. For application/json models, this should be JSON schema
+ draft 4 model.
      */
     Schema?: StringWithLengthBetween0And32K;
   }
@@ -1033,15 +1316,22 @@ declare namespace ApiGatewayV2 {
      */
     ApiKeyRequired?: __boolean;
     /**
-     * The authorization scopes supported by this route.
+     * The authorization scopes supported by this
+ route.
      */
     AuthorizationScopes?: AuthorizationScopes;
     /**
-     * The authorization type for the route. Valid values are NONE for open access, AWS_IAM for using AWS IAM permissions.
+     * The authorization type for the route. Valid values are NONE for open
+ access, AWS_IAM for using AWS IAM permissions, and CUSTOM
+ for using a Lambda
+ authorizer.
      */
     AuthorizationType?: AuthorizationType;
     /**
-     * The identifier of the Authorizer resource to be associated with this route.
+     * The identifier of the Authorizer resource to be associated with this
+ route, if the authorizationType is CUSTOM
+ . The authorizer identifier is generated by API Gateway
+ when you created the authorizer.
      */
     AuthorizerId?: Id;
     /**
@@ -1073,21 +1363,33 @@ declare namespace ApiGatewayV2 {
      */
     Target?: StringWithLengthBetween1And128;
   }
-  export interface CreateRouteResult {
+  export interface CreateRouteResponse {
     /**
      * Specifies whether an API key is required for this route.
      */
     ApiKeyRequired?: __boolean;
     /**
-     * The authorization scopes supported by this route. 
+     * A list of authorization scopes configured on a route. The scopes are used with a
+ COGNITO_USER_POOLS authorizer to authorize the method invocation. The authorization
+ works by matching the route scopes against the scopes parsed from the access token in
+ the incoming request. The method invocation is authorized if any route scope matches
+ a claimed scope in the access token. Otherwise, the invocation is not authorized.
+ When the route scope is configured, the client must provide an access token instead
+ of an identity token for authorization purposes.
      */
     AuthorizationScopes?: AuthorizationScopes;
     /**
-     * The authorization type for the route. Valid values are NONE for open access, AWS_IAM for using AWS IAM permissions.
+     * The authorization type for the route. Valid values are NONE for open
+ access, AWS_IAM for using AWS IAM permissions, and CUSTOM
+ for using a Lambda
+ authorizer
      */
     AuthorizationType?: AuthorizationType;
     /**
-     * The identifier of the Authorizer resource to be associated with this route.
+     * The identifier of the Authorizer resource to be associated with this
+ route, if the authorizationType is CUSTOM
+ . The authorizer identifier is generated by API Gateway
+ when you created the authorizer.
      */
     AuthorizerId?: Id;
     /**
@@ -1205,7 +1507,9 @@ declare namespace ApiGatewayV2 {
      */
     StageName: StringWithLengthBetween1And128;
     /**
-     * A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.
+     * A map that defines the stage variables for a Stage. Variable names
+ can have alphanumeric and underscore characters, and the values must match
+ [A-Za-z0-9-._~:/?#&=,]+.
      */
     StageVariables?: StageVariablesMap;
   }
@@ -1227,7 +1531,8 @@ declare namespace ApiGatewayV2 {
      */
     DefaultRouteSettings?: RouteSettings;
     /**
-     * The identifier of the Deployment that the Stage is associated with.
+     * The identifier of the Deployment that the Stage is
+ associated with.
      */
     DeploymentId?: Id;
     /**
@@ -1247,15 +1552,13 @@ declare namespace ApiGatewayV2 {
      */
     StageName?: StringWithLengthBetween1And128;
     /**
-     * A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.
+     * A map that defines the stage variables for a stage resource. Variable names can
+ have alphanumeric and underscore characters, and the values must match
+ [A-Za-z0-9-._~:/?#&=,]+.
      */
     StageVariables?: StageVariablesMap;
   }
   export interface DeleteApiMappingRequest {
-    /**
-     * The identifier of the API.
-     */
-    ApiId: __string;
     /**
      * The API mapping identifier.
      */
@@ -1375,7 +1678,8 @@ declare namespace ApiGatewayV2 {
      */
     DeploymentId?: Id;
     /**
-     * The status of the deployment: PENDING, FAILED, or SUCCEEDED.
+     * The status of the deployment: PENDING, FAILED, or
+ SUCCEEDED.
      */
     DeploymentStatus?: DeploymentStatus;
     /**
@@ -1408,15 +1712,18 @@ declare namespace ApiGatewayV2 {
      */
     ApiGatewayDomainName?: __string;
     /**
-     * An AWS-managed certificate that will be used by the edge-optimized endpoint for this domain name. AWS Certificate Manager is the only supported source.
+     * An AWS-managed certificate that will be used by the edge-optimized endpoint for
+ this domain name. AWS Certificate Manager is the only supported source.
      */
     CertificateArn?: Arn;
     /**
-     * The user-friendly name of the certificate that will be used by the edge-optimized endpoint for this domain name.
+     * The user-friendly name of the certificate that will be used by the edge-optimized
+ endpoint for this domain name.
      */
     CertificateName?: StringWithLengthBetween1And128;
     /**
-     * The timestamp when the certificate that was used by edge-optimized endpoint for this domain name was uploaded.
+     * The timestamp when the certificate that was used by edge-optimized endpoint for
+ this domain name was uploaded.
      */
     CertificateUploadDate?: __timestampIso8601;
     /**
@@ -1424,17 +1731,13 @@ declare namespace ApiGatewayV2 {
      */
     EndpointType?: EndpointType;
     /**
-     * The Amazon Route 53 Hosted Zone ID of the endpoint. See AWS Regions and Endpoints for API Gateway.
+     * The Amazon Route 53 Hosted Zone ID of the endpoint.
      */
     HostedZoneId?: __string;
   }
   export type DomainNameConfigurations = DomainNameConfiguration[];
   export type EndpointType = "REGIONAL"|"EDGE"|string;
   export interface GetApiMappingRequest {
-    /**
-     * The identifier of the API.
-     */
-    ApiId: __string;
     /**
      * The API mapping identifier.
      */
@@ -1472,27 +1775,21 @@ declare namespace ApiGatewayV2 {
      */
     MaxResults?: __string;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: __string;
   }
   export interface GetApiMappingsResponse {
     /**
-     * The API identifier.
+     * The elements from this collection.
      */
-    ApiId?: Id;
+    Items?: __listOfApiMapping;
     /**
-     * The API mapping identifier.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
-    ApiMappingId?: Id;
-    /**
-     * The API mapping key.
-     */
-    ApiMappingKey?: SelectionKey;
-    /**
-     * The API stage.
-     */
-    Stage?: StringWithLengthBetween1And128;
+    NextToken?: NextToken;
   }
   export interface GetApiRequest {
     /**
@@ -1502,7 +1799,9 @@ declare namespace ApiGatewayV2 {
   }
   export interface GetApiResponse {
     /**
-     * The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The stage name is typically appended to this URI to form a complete path to a deployed API stage.
+     * The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The
+ stage name is typically appended to this URI to form a complete path to a deployed
+ API stage.
      */
     ApiEndpoint?: __string;
     /**
@@ -1530,7 +1829,7 @@ declare namespace ApiGatewayV2 {
      */
     Name?: StringWithLengthBetween1And128;
     /**
-     * The API protocol: HTTP or WEBSOCKET.
+     * The API protocol: Currently only WEBSOCKET is supported.
      */
     ProtocolType?: ProtocolType;
     /**
@@ -1542,7 +1841,8 @@ declare namespace ApiGatewayV2 {
      */
     Version?: StringWithLengthBetween1And64;
     /**
-     * The warning messages reported when failonwarnings is turned on during API import.
+     * The warning messages reported when failonwarnings is turned on during
+ API import.
      */
     Warnings?: __listOf__string;
   }
@@ -1552,7 +1852,8 @@ declare namespace ApiGatewayV2 {
      */
     MaxResults?: __string;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: __string;
   }
@@ -1562,7 +1863,8 @@ declare namespace ApiGatewayV2 {
      */
     Items?: __listOfApi;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: NextToken;
   }
@@ -1578,7 +1880,10 @@ declare namespace ApiGatewayV2 {
   }
   export interface GetAuthorizerResponse {
     /**
-     * Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.
+     * Specifies the required credentials as an IAM role for API Gateway to invoke the
+ authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon
+ Resource Name (ARN). To use resource-based permissions on the Lambda function,
+ specify null.
      */
     AuthorizerCredentialsArn?: Arn;
     /**
@@ -1586,23 +1891,51 @@ declare namespace ApiGatewayV2 {
      */
     AuthorizerId?: Id;
     /**
-     * The time to live (TTL), in seconds, of cached authorizer results. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.
+     * The time to live (TTL), in seconds, of cached authorizer results. If it equals 0,
+ authorization caching is disabled. If it is greater than 0, API Gateway will cache
+ authorizer responses. If this field is not set, the default value is 300. The maximum
+ value is 3600, or 1 hour.
      */
     AuthorizerResultTtlInSeconds?: IntegerWithLengthBetween0And3600;
     /**
-     * The authorizer type. Currently the only valid value is REQUEST, for a Lambda function using incoming request parameters.
+     * The authorizer type. Currently the only valid value is REQUEST, for a
+ Lambda function using incoming request parameters.
      */
     AuthorizerType?: AuthorizerType;
     /**
-     * The authorizer's Uniform Resource Identifier (URI). ForREQUEST authorizers, this must be a well-formed Lambda function URI, for example, arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations. In general, the URI has this form: arn:aws:apigateway:{region}:lambda:path/{service_api} , where {region} is the same as the region hosting the Lambda function, path indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial /. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations.
+     * The authorizer's Uniform Resource Identifier (URI).
+ ForREQUEST authorizers, this must be a
+ well-formed Lambda function URI, for example,
+ arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
+ In general, the URI has this form:
+ arn:aws:apigateway:{region}:lambda:path/{service_api}
+ , where {region} is the same as the region hosting the Lambda
+ function, path indicates that the remaining substring in the URI should be treated as
+ the path to the resource, including the initial /. For Lambda functions,
+ this is usually of the form
+ /2015-03-31/functions/[FunctionARN]/invocations.
      */
     AuthorizerUri?: UriWithLengthBetween1And2048;
     /**
-     * The identity source for which authorization is requested.For the REQUEST authorizer, this is required when authorization caching is enabled. The value is a comma-separated string of one or more mapping expressions of the specified request parameters. For example, if an Auth header and a Name query string parameters are defined as identity sources, this value is method.request.header.Auth, method.request.querystring.Name. These parameters will be used to derive the authorization caching key and to perform runtime validation of the REQUEST authorizer by verifying all of the identity-related request parameters are present, not null, and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized response without calling the Lambda function. The valid value is a string of comma-separated mapping expressions of the specified request parameters. When the authorization caching is not enabled, this property is optional.
+     * The identity source for which authorization is requested.For the REQUEST authorizer, this is required when authorization
+ caching is enabled. The value is a comma-separated string of one or more mapping
+ expressions of the specified request parameters. For example, if an Auth
+ header and a Name query string parameters are defined as identity
+ sources, this value is method.request.header.Auth,
+ method.request.querystring.Name. These parameters will be used to
+ derive the authorization caching key and to perform runtime validation of the
+ REQUEST authorizer by verifying all of the identity-related request
+ parameters are present, not null, and non-empty. Only when this is true does the
+ authorizer invoke the authorizer Lambda function, otherwise, it returns a 401
+ Unauthorized response without calling the Lambda function. The valid value
+ is a string of comma-separated mapping expressions of the specified request
+ parameters. When the authorization caching is not enabled, this property is
+ optional.
      */
     IdentitySource?: IdentitySourceList;
     /**
-     * The validation expression does not apply to the REQUEST authorizer.
+     * The
+ validation expression does not apply to the REQUEST authorizer.
      */
     IdentityValidationExpression?: StringWithLengthBetween0And1024;
     /**
@@ -1610,7 +1943,9 @@ declare namespace ApiGatewayV2 {
      */
     Name?: StringWithLengthBetween1And128;
     /**
-     * For REQUEST authorizer, this is not defined.
+     * For
+ REQUEST authorizer, this is not
+ defined.
      */
     ProviderArns?: ProviderArnList;
   }
@@ -1624,7 +1959,8 @@ declare namespace ApiGatewayV2 {
      */
     MaxResults?: __string;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: __string;
   }
@@ -1634,7 +1970,8 @@ declare namespace ApiGatewayV2 {
      */
     Items?: __listOfAuthorizer;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: NextToken;
   }
@@ -1658,7 +1995,8 @@ declare namespace ApiGatewayV2 {
      */
     DeploymentId?: Id;
     /**
-     * The status of the deployment: PENDING, FAILED, or SUCCEEDED.
+     * The status of the deployment: PENDING, FAILED, or
+ SUCCEEDED.
      */
     DeploymentStatus?: DeploymentStatus;
     /**
@@ -1680,7 +2018,8 @@ declare namespace ApiGatewayV2 {
      */
     MaxResults?: __string;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: __string;
   }
@@ -1690,7 +2029,8 @@ declare namespace ApiGatewayV2 {
      */
     Items?: __listOfDeployment;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: NextToken;
   }
@@ -1720,7 +2060,8 @@ declare namespace ApiGatewayV2 {
      */
     MaxResults?: __string;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: __string;
   }
@@ -1730,7 +2071,8 @@ declare namespace ApiGatewayV2 {
      */
     Items?: __listOfDomainName;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: NextToken;
   }
@@ -1744,21 +2086,36 @@ declare namespace ApiGatewayV2 {
      */
     IntegrationId: __string;
   }
-  export interface GetIntegrationResult {
+  export interface GetIntegrationResponse {
     /**
-     * The identifier of the VpcLink used for the integration when the connectionType is VPC_LINK; otherwise undefined.
+     * The connection ID.
      */
     ConnectionId?: StringWithLengthBetween1And1024;
     /**
-     * The type of the network connection to the integration endpoint. The valid value is INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and a network load balancer in a VPC. The default value is INTERNET.
+     * The type of the network connection to the integration endpoint. Currently the only
+ valid value is INTERNET, for connections through the public routable
+ internet.
      */
     ConnectionType?: ConnectionType;
     /**
-     * Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob. CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.
+     * Specifies how to handle response payload content type conversions. Supported
+ values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+ following behaviors:
+ CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+ string to the corresponding binary blob.
+ CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+ Base64-encoded string.If this property is not defined, the response payload will be passed through from
+ the integration response to the route response or method response without
+ modification.
      */
     ContentHandlingStrategy?: ContentHandlingStrategy;
     /**
-     * Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To require that the caller's identity be passed through from the request, specify the string arn:aws:iam::*:user/*. To use resource-based permissions on supported AWS services, specify null.
+     * Specifies the credentials required for the integration, if any. For AWS
+ integrations, three options are available. To specify an IAM Role for API Gateway to
+ assume, use the role's Amazon Resource Name (ARN). To require that the caller's
+ identity be passed through from the request, specify the string
+ arn:aws:iam::*:user/*. To use resource-based permissions on supported
+ AWS services, specify null.
      */
     CredentialsArn?: Arn;
     /**
@@ -1773,25 +2130,69 @@ declare namespace ApiGatewayV2 {
      * Specifies the integration's HTTP method type.
      */
     IntegrationMethod?: StringWithLengthBetween1And64;
+    /**
+     * The integration response selection expression for the integration. See Integration Response Selection Expressions.
+     */
     IntegrationResponseSelectionExpression?: SelectionExpression;
     /**
-     * The integration type of an integration. One of the following: AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration. HTTP: for integrating the route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC. This integration is also referred to as the HTTP custom integration. HTTP_PROXY: for integrating route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC, with the client request passed through as-is. This is also referred to as HTTP proxy integration. MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend.
+     * The integration type of an integration. One of the following:
+ AWS: for integrating the route or method request with an AWS service
+ action, including the Lambda function-invoking action. With the Lambda
+ function-invoking action, this is referred to as the Lambda custom integration. With
+ any other AWS service action, this is known as AWS integration.
+ AWS_PROXY: for integrating the route or method request with the Lambda
+ function-invoking action with the client request passed through as-is. This
+ integration is also referred to as Lambda proxy integration.
+ HTTP: for integrating the route or method request with an HTTP
+ endpoint. This
+ integration is also referred to as the HTTP custom integration.
+ HTTP_PROXY: for integrating route or method request with an HTTP
+ endpoint, with the client
+ request passed through as-is. This is also referred to as HTTP proxy
+ integration.
+ MOCK: for integrating the route or method request with API Gateway as a
+ "loopback" endpoint without invoking any backend.
      */
     IntegrationType?: IntegrationType;
     /**
-     * Specifies the Uniform Resource Identifier (URI) of the integration endpoint.For HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification, for either standard integration, where connectionType is not VPC_LINK, or private integration, where connectionType is VPC_LINK. For a private HTTP integration, the URI is not used for routing.For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}. Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the integrated AWS service (e.g., s3); and {subdomain} is a designated subdomain supported by certain AWS service for fast host-name lookup. action can be used for an AWS service action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing {service_api} refers to a supported action {name} plus any required input parameters. Alternatively, path can be used for an AWS service path-based API. The ensuing service_api refers to the path to an AWS service resource, including the region of the integrated AWS service, if applicable. For example, for integration with the S3 API of GetObject, the URI can be either arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key} or arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}
+     * For a Lambda proxy integration, this is the URI of the Lambda function.
      */
     IntegrationUri?: UriWithLengthBetween1And2048;
     /**
-     * Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER. WHEN_NO_MATCH passes the request body for unmapped content types through to the integration backend without transformation. NEVER rejects unmapped content types with an HTTP 415 Unsupported Media Type response. WHEN_NO_TEMPLATES allows pass-through when the integration has no content types mapped to templates. However, if there is at least one content type defined, unmapped content types will be rejected with the same HTTP 415 Unsupported Media Type response.
+     * Specifies the pass-through behavior for incoming requests based on the
+ Content-Type header in the request, and the available mapping
+ templates specified as the requestTemplates property on the
+ Integration resource. There are three valid values:
+ WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and
+ NEVER.
+ WHEN_NO_MATCH passes the request body for unmapped content types through
+ to the integration backend without transformation.
+ NEVER rejects unmapped content types with an HTTP 415 Unsupported
+ Media Type response.
+ WHEN_NO_TEMPLATES allows pass-through when the integration has no
+ content types mapped to templates. However, if there is at least one content type
+ defined, unmapped content types will be rejected with the same HTTP 415
+ Unsupported Media Type response.
      */
     PassthroughBehavior?: PassthroughBehavior;
     /**
-     * A key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.{location}.{name} , where  {location}  is querystring, path, or header; and  {name}  must be a valid and unique method request parameter name.
+     * A key-value map specifying request parameters that are passed from the method
+ request to the backend. The key is an integration request parameter name and the
+ associated value is a method request parameter value or static value that must be
+ enclosed within single quotes and pre-encoded as required by the backend. The method
+ request parameter value must match the pattern of
+ method.request.{location}.{name}
+ , where 
+ {location}
+  is querystring, path, or header; and 
+ {name}
+  must be a valid and unique method request parameter name.
      */
     RequestParameters?: IntegrationParameters;
     /**
-     * Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value.
+     * Represents a map of Velocity templates that are applied on the request payload
+ based on the value of the Content-Type header sent by the client. The content type
+ value is the key in this map, and the template (as a String) is the value.
      */
     RequestTemplates?: TemplateMap;
     /**
@@ -1799,7 +2200,8 @@ declare namespace ApiGatewayV2 {
      */
     TemplateSelectionExpression?: SelectionExpression;
     /**
-     * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.
+     * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
+ milliseconds or 29 seconds.
      */
     TimeoutInMillis?: IntegerWithLengthBetween50And29000;
   }
@@ -1819,7 +2221,15 @@ declare namespace ApiGatewayV2 {
   }
   export interface GetIntegrationResponseResponse {
     /**
-     * Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob. CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.
+     * Specifies how to handle response payload content type conversions. Supported
+ values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+ following behaviors:
+ CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+ string to the corresponding binary blob.
+ CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+ Base64-encoded string.If this property is not defined, the response payload will be passed through from
+ the integration response to the route response or method response without
+ modification.
      */
     ContentHandlingStrategy?: ContentHandlingStrategy;
     /**
@@ -1831,11 +2241,21 @@ declare namespace ApiGatewayV2 {
      */
     IntegrationResponseKey?: SelectionKey;
     /**
-     * A key-value map specifying response parameters that are passed to the method response from the backend. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of method.response.header.{name}, where name is a valid and unique header name. The mapped non-static value must match the pattern of integration.response.header.{name} or integration.response.body.{JSON-expression}, where name is a valid and unique response header name and JSON-expression is a valid JSON expression without the $ prefix.
+     * A key-value map specifying response parameters that are passed to the method
+ response from the backend. The key is a method response header parameter name and the
+ mapped value is an integration response header value, a static value enclosed within
+ a pair of single quotes, or a JSON expression from the integration response body. The
+ mapping key must match the pattern of method.response.header.{name}, where name is a
+ valid and unique header name. The mapped non-static value must match the pattern of
+ integration.response.header.{name} or integration.response.body.{JSON-expression},
+ where name is a valid and unique response header name and JSON-expression is a valid
+ JSON expression without the $ prefix.
      */
     ResponseParameters?: IntegrationParameters;
     /**
-     * The collection of response templates for the integration response as a string-to-string map of key-value pairs. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.
+     * The collection of response templates for the integration response as a
+ string-to-string map of key-value pairs. Response templates are represented as a
+ key/value map, with a content-type as the key and a template as the value.
      */
     ResponseTemplates?: TemplateMap;
     /**
@@ -1857,7 +2277,8 @@ declare namespace ApiGatewayV2 {
      */
     MaxResults?: __string;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: __string;
   }
@@ -1867,7 +2288,8 @@ declare namespace ApiGatewayV2 {
      */
     Items?: __listOfIntegrationResponse;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: NextToken;
   }
@@ -1881,7 +2303,8 @@ declare namespace ApiGatewayV2 {
      */
     MaxResults?: __string;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: __string;
   }
@@ -1891,7 +2314,8 @@ declare namespace ApiGatewayV2 {
      */
     Items?: __listOfIntegration;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: NextToken;
   }
@@ -1923,7 +2347,8 @@ declare namespace ApiGatewayV2 {
      */
     Name?: StringWithLengthBetween1And128;
     /**
-     * The schema for the model. For application/json models, this should be JSON schema draft 4 model.
+     * The schema for the model. For application/json models, this should be JSON schema
+ draft 4 model.
      */
     Schema?: StringWithLengthBetween0And32K;
   }
@@ -1953,7 +2378,8 @@ declare namespace ApiGatewayV2 {
      */
     MaxResults?: __string;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: __string;
   }
@@ -1963,7 +2389,8 @@ declare namespace ApiGatewayV2 {
      */
     Items?: __listOfModel;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: NextToken;
   }
@@ -1977,21 +2404,33 @@ declare namespace ApiGatewayV2 {
      */
     RouteId: __string;
   }
-  export interface GetRouteResult {
+  export interface GetRouteResponse {
     /**
      * Specifies whether an API key is required for this route.
      */
     ApiKeyRequired?: __boolean;
     /**
-     * The authorization scopes supported by this route. 
+     * A list of authorization scopes configured on a route. The scopes are used with a
+ COGNITO_USER_POOLS authorizer to authorize the method invocation. The authorization
+ works by matching the route scopes against the scopes parsed from the access token in
+ the incoming request. The method invocation is authorized if any route scope matches
+ a claimed scope in the access token. Otherwise, the invocation is not authorized.
+ When the route scope is configured, the client must provide an access token instead
+ of an identity token for authorization purposes.
      */
     AuthorizationScopes?: AuthorizationScopes;
     /**
-     * The authorization type for the route. Valid values are NONE for open access, AWS_IAM for using AWS IAM permissions.
+     * The authorization type for the route. Valid values are NONE for open
+ access, AWS_IAM for using AWS IAM permissions, and CUSTOM
+ for using a Lambda
+ authorizer
      */
     AuthorizationType?: AuthorizationType;
     /**
-     * The identifier of the Authorizer resource to be associated with this route.
+     * The identifier of the Authorizer resource to be associated with this
+ route, if the authorizationType is CUSTOM
+ . The authorizer identifier is generated by API Gateway
+ when you created the authorizer.
      */
     AuthorizerId?: Id;
     /**
@@ -2073,7 +2512,8 @@ declare namespace ApiGatewayV2 {
      */
     MaxResults?: __string;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: __string;
     /**
@@ -2087,7 +2527,8 @@ declare namespace ApiGatewayV2 {
      */
     Items?: __listOfRouteResponse;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: NextToken;
   }
@@ -2101,7 +2542,8 @@ declare namespace ApiGatewayV2 {
      */
     MaxResults?: __string;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: __string;
   }
@@ -2111,7 +2553,8 @@ declare namespace ApiGatewayV2 {
      */
     Items?: __listOfRoute;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: NextToken;
   }
@@ -2143,7 +2586,8 @@ declare namespace ApiGatewayV2 {
      */
     DefaultRouteSettings?: RouteSettings;
     /**
-     * The identifier of the Deployment that the Stage is associated with.
+     * The identifier of the Deployment that the Stage is
+ associated with.
      */
     DeploymentId?: Id;
     /**
@@ -2163,7 +2607,9 @@ declare namespace ApiGatewayV2 {
      */
     StageName?: StringWithLengthBetween1And128;
     /**
-     * A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.
+     * A map that defines the stage variables for a stage resource. Variable names can
+ have alphanumeric and underscore characters, and the values must match
+ [A-Za-z0-9-._~:/?#&=,]+.
      */
     StageVariables?: StageVariablesMap;
   }
@@ -2177,7 +2623,8 @@ declare namespace ApiGatewayV2 {
      */
     MaxResults?: __string;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: __string;
   }
@@ -2187,7 +2634,8 @@ declare namespace ApiGatewayV2 {
      */
     Items?: __listOfStage;
     /**
-     * The next page of elements from this collection. Not valid for the last element of the collection.
+     * The next page of elements from this collection. Not valid for the last element of
+ the collection.
      */
     NextToken?: NextToken;
   }
@@ -2197,19 +2645,34 @@ declare namespace ApiGatewayV2 {
   export type IntegerWithLengthBetween50And29000 = number;
   export interface Integration {
     /**
-     * The identifier of the VpcLink used for the integration when the connectionType is VPC_LINK; otherwise undefined.
+     * The connection ID.
      */
     ConnectionId?: StringWithLengthBetween1And1024;
     /**
-     * The type of the network connection to the integration endpoint. The valid value is INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and a network load balancer in a VPC. The default value is INTERNET.
+     * The type of the network connection to the integration endpoint. Currently the only
+ valid value is INTERNET, for connections through the public routable
+ internet.
      */
     ConnectionType?: ConnectionType;
     /**
-     * Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob. CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.
+     * Specifies how to handle response payload content type conversions. Supported
+ values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+ following behaviors:
+ CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+ string to the corresponding binary blob.
+ CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+ Base64-encoded string.If this property is not defined, the response payload will be passed through from
+ the integration response to the route response or method response without
+ modification.
      */
     ContentHandlingStrategy?: ContentHandlingStrategy;
     /**
-     * Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To require that the caller's identity be passed through from the request, specify the string arn:aws:iam::*:user/*. To use resource-based permissions on supported AWS services, specify null.
+     * Specifies the credentials required for the integration, if any. For AWS
+ integrations, three options are available. To specify an IAM Role for API Gateway to
+ assume, use the role's Amazon Resource Name (ARN). To require that the caller's
+ identity be passed through from the request, specify the string
+ arn:aws:iam::*:user/*. To use resource-based permissions on supported
+ AWS services, specify null.
      */
     CredentialsArn?: Arn;
     /**
@@ -2224,25 +2687,69 @@ declare namespace ApiGatewayV2 {
      * Specifies the integration's HTTP method type.
      */
     IntegrationMethod?: StringWithLengthBetween1And64;
+    /**
+     * The integration response selection expression for the integration. See Integration Response Selection Expressions.
+     */
     IntegrationResponseSelectionExpression?: SelectionExpression;
     /**
-     * The integration type of an integration. One of the following: AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration. HTTP: for integrating the route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC. This integration is also referred to as the HTTP custom integration. HTTP_PROXY: for integrating route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC, with the client request passed through as-is. This is also referred to as HTTP proxy integration. MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend.
+     * The integration type of an integration. One of the following:
+ AWS: for integrating the route or method request with an AWS service
+ action, including the Lambda function-invoking action. With the Lambda
+ function-invoking action, this is referred to as the Lambda custom integration. With
+ any other AWS service action, this is known as AWS integration.
+ AWS_PROXY: for integrating the route or method request with the Lambda
+ function-invoking action with the client request passed through as-is. This
+ integration is also referred to as Lambda proxy integration.
+ HTTP: for integrating the route or method request with an HTTP
+ endpoint. This
+ integration is also referred to as the HTTP custom integration.
+ HTTP_PROXY: for integrating route or method request with an HTTP
+ endpoint, with the client
+ request passed through as-is. This is also referred to as HTTP proxy
+ integration.
+ MOCK: for integrating the route or method request with API Gateway as a
+ "loopback" endpoint without invoking any backend.
      */
     IntegrationType?: IntegrationType;
     /**
-     * Specifies the Uniform Resource Identifier (URI) of the integration endpoint.For HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification, for either standard integration, where connectionType is not VPC_LINK, or private integration, where connectionType is VPC_LINK. For a private HTTP integration, the URI is not used for routing.For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}. Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the integrated AWS service (e.g., s3); and {subdomain} is a designated subdomain supported by certain AWS service for fast host-name lookup. action can be used for an AWS service action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing {service_api} refers to a supported action {name} plus any required input parameters. Alternatively, path can be used for an AWS service path-based API. The ensuing service_api refers to the path to an AWS service resource, including the region of the integrated AWS service, if applicable. For example, for integration with the S3 API of GetObject, the URI can be either arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key} or arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}
+     * For a Lambda proxy integration, this is the URI of the Lambda function.
      */
     IntegrationUri?: UriWithLengthBetween1And2048;
     /**
-     * Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER. WHEN_NO_MATCH passes the request body for unmapped content types through to the integration backend without transformation. NEVER rejects unmapped content types with an HTTP 415 Unsupported Media Type response. WHEN_NO_TEMPLATES allows pass-through when the integration has no content types mapped to templates. However, if there is at least one content type defined, unmapped content types will be rejected with the same HTTP 415 Unsupported Media Type response.
+     * Specifies the pass-through behavior for incoming requests based on the
+ Content-Type header in the request, and the available mapping
+ templates specified as the requestTemplates property on the
+ Integration resource. There are three valid values:
+ WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and
+ NEVER.
+ WHEN_NO_MATCH passes the request body for unmapped content types through
+ to the integration backend without transformation.
+ NEVER rejects unmapped content types with an HTTP 415 Unsupported
+ Media Type response.
+ WHEN_NO_TEMPLATES allows pass-through when the integration has no
+ content types mapped to templates. However, if there is at least one content type
+ defined, unmapped content types will be rejected with the same HTTP 415
+ Unsupported Media Type response.
      */
     PassthroughBehavior?: PassthroughBehavior;
     /**
-     * A key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.{location}.{name} , where  {location}  is querystring, path, or header; and  {name}  must be a valid and unique method request parameter name.
+     * A key-value map specifying request parameters that are passed from the method
+ request to the backend. The key is an integration request parameter name and the
+ associated value is a method request parameter value or static value that must be
+ enclosed within single quotes and pre-encoded as required by the backend. The method
+ request parameter value must match the pattern of
+ method.request.{location}.{name}
+ , where 
+ {location}
+  is querystring, path, or header; and 
+ {name}
+  must be a valid and unique method request parameter name.
      */
     RequestParameters?: IntegrationParameters;
     /**
-     * Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value.
+     * Represents a map of Velocity templates that are applied on the request payload
+ based on the value of the Content-Type header sent by the client. The content type
+ value is the key in this map, and the template (as a String) is the value.
      */
     RequestTemplates?: TemplateMap;
     /**
@@ -2250,14 +2757,23 @@ declare namespace ApiGatewayV2 {
      */
     TemplateSelectionExpression?: SelectionExpression;
     /**
-     * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.
+     * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
+ milliseconds or 29 seconds.
      */
     TimeoutInMillis?: IntegerWithLengthBetween50And29000;
   }
   export type IntegrationParameters = {[key: string]: StringWithLengthBetween1And512};
   export interface IntegrationResponse {
     /**
-     * Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob. CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.
+     * Specifies how to handle response payload content type conversions. Supported
+ values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+ following behaviors:
+ CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+ string to the corresponding binary blob.
+ CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+ Base64-encoded string.If this property is not defined, the response payload will be passed through from
+ the integration response to the route response or method response without
+ modification.
      */
     ContentHandlingStrategy?: ContentHandlingStrategy;
     /**
@@ -2269,11 +2785,21 @@ declare namespace ApiGatewayV2 {
      */
     IntegrationResponseKey: SelectionKey;
     /**
-     * A key-value map specifying response parameters that are passed to the method response from the backend. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of method.response.header.{name}, where name is a valid and unique header name. The mapped non-static value must match the pattern of integration.response.header.{name} or integration.response.body.{JSON-expression}, where name is a valid and unique response header name and JSON-expression is a valid JSON expression without the $ prefix.
+     * A key-value map specifying response parameters that are passed to the method
+ response from the backend. The key is a method response header parameter name and the
+ mapped value is an integration response header value, a static value enclosed within
+ a pair of single quotes, or a JSON expression from the integration response body. The
+ mapping key must match the pattern of method.response.header.{name}, where name is a
+ valid and unique header name. The mapped non-static value must match the pattern of
+ integration.response.header.{name} or integration.response.body.{JSON-expression},
+ where name is a valid and unique response header name and JSON-expression is a valid
+ JSON expression without the $ prefix.
      */
     ResponseParameters?: IntegrationParameters;
     /**
-     * The collection of response templates for the integration response as a string-to-string map of key-value pairs. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.
+     * The collection of response templates for the integration response as a
+ string-to-string map of key-value pairs. Response templates are represented as a
+ key/value map, with a content-type as the key and a template as the value.
      */
     ResponseTemplates?: TemplateMap;
     /**
@@ -2301,7 +2827,8 @@ declare namespace ApiGatewayV2 {
      */
     Name: StringWithLengthBetween1And128;
     /**
-     * The schema for the model. For application/json models, this should be JSON schema draft 4 model.
+     * The schema for the model. For application/json models, this should be JSON schema
+ draft 4 model.
      */
     Schema?: StringWithLengthBetween0And32K;
   }
@@ -2321,15 +2848,27 @@ declare namespace ApiGatewayV2 {
      */
     ApiKeyRequired?: __boolean;
     /**
-     * The authorization scopes supported by this route. 
+     * A list of authorization scopes configured on a route. The scopes are used with a
+ COGNITO_USER_POOLS authorizer to authorize the method invocation. The authorization
+ works by matching the route scopes against the scopes parsed from the access token in
+ the incoming request. The method invocation is authorized if any route scope matches
+ a claimed scope in the access token. Otherwise, the invocation is not authorized.
+ When the route scope is configured, the client must provide an access token instead
+ of an identity token for authorization purposes.
      */
     AuthorizationScopes?: AuthorizationScopes;
     /**
-     * The authorization type for the route. Valid values are NONE for open access, AWS_IAM for using AWS IAM permissions.
+     * The authorization type for the route. Valid values are NONE for open
+ access, AWS_IAM for using AWS IAM permissions, and CUSTOM
+ for using a Lambda
+ authorizer
      */
     AuthorizationType?: AuthorizationType;
     /**
-     * The identifier of the Authorizer resource to be associated with this route.
+     * The identifier of the Authorizer resource to be associated with this
+ route, if the authorizationType is CUSTOM
+ . The authorizer identifier is generated by API Gateway
+ when you created the authorizer.
      */
     AuthorizerId?: Id;
     /**
@@ -2391,7 +2930,9 @@ declare namespace ApiGatewayV2 {
   }
   export interface RouteSettings {
     /**
-     * Specifies whether (true) or not (false) data trace logging is enabled for this route. This property affects the log entries pushed to Amazon CloudWatch Logs.
+     * Specifies whether (true) or not (false) data trace
+ logging is enabled for this route. This property affects the log entries pushed to
+ Amazon CloudWatch Logs.
      */
     DataTraceEnabled?: __boolean;
     /**
@@ -2399,7 +2940,9 @@ declare namespace ApiGatewayV2 {
      */
     DetailedMetricsEnabled?: __boolean;
     /**
-     * Specifies the logging level for this route: DEBUG, INFO, or WARN. This property affects the log entries pushed to Amazon CloudWatch Logs.
+     * Specifies the logging level for this route: DEBUG, INFO,
+ or WARN. This property affects the log entries pushed to Amazon
+ CloudWatch Logs.
      */
     LoggingLevel?: LoggingLevel;
     /**
@@ -2432,7 +2975,8 @@ declare namespace ApiGatewayV2 {
      */
     DefaultRouteSettings?: RouteSettings;
     /**
-     * The identifier of the Deployment that the Stage is associated with.
+     * The identifier of the Deployment that the Stage is
+ associated with.
      */
     DeploymentId?: Id;
     /**
@@ -2452,7 +2996,9 @@ declare namespace ApiGatewayV2 {
      */
     StageName: StringWithLengthBetween1And128;
     /**
-     * A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.
+     * A map that defines the stage variables for a stage resource. Variable names can
+ have alphanumeric and underscore characters, and the values must match
+ [A-Za-z0-9-._~:/?#&=,]+.
      */
     StageVariables?: StageVariablesMap;
   }
@@ -2538,7 +3084,9 @@ declare namespace ApiGatewayV2 {
   }
   export interface UpdateApiResponse {
     /**
-     * The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The stage name is typically appended to this URI to form a complete path to a deployed API stage.
+     * The URI of the API, of the form {api-id}.execute-api.{region}.amazonaws.com. The
+ stage name is typically appended to this URI to form a complete path to a deployed
+ API stage.
      */
     ApiEndpoint?: __string;
     /**
@@ -2566,7 +3114,7 @@ declare namespace ApiGatewayV2 {
      */
     Name?: StringWithLengthBetween1And128;
     /**
-     * The API protocol: HTTP or WEBSOCKET.
+     * The API protocol: Currently only WEBSOCKET is supported.
      */
     ProtocolType?: ProtocolType;
     /**
@@ -2578,7 +3126,8 @@ declare namespace ApiGatewayV2 {
      */
     Version?: StringWithLengthBetween1And64;
     /**
-     * The warning messages reported when failonwarnings is turned on during API import.
+     * The warning messages reported when failonwarnings is turned on during
+ API import.
      */
     Warnings?: __listOf__string;
   }
@@ -2588,7 +3137,10 @@ declare namespace ApiGatewayV2 {
      */
     ApiId: __string;
     /**
-     * Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.
+     * Specifies the required credentials as an IAM role for API Gateway to invoke the
+ authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon
+ Resource Name (ARN). To use resource-based permissions on the Lambda function,
+ specify null.
      */
     AuthorizerCredentialsArn?: Arn;
     /**
@@ -2596,23 +3148,50 @@ declare namespace ApiGatewayV2 {
      */
     AuthorizerId: __string;
     /**
-     * The time to live (TTL), in seconds, of cached authorizer results. If it is zero, authorization caching is disabled. If it is greater than zero, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.
+     * The time to live (TTL), in seconds, of cached authorizer results. If it is zero,
+ authorization caching is disabled. If it is greater than zero, API Gateway will cache
+ authorizer responses. If this field is not set, the default value is 300. The maximum
+ value is 3600, or 1 hour.
      */
     AuthorizerResultTtlInSeconds?: IntegerWithLengthBetween0And3600;
     /**
-     * The authorizer type. Currently the only valid value is REQUEST, for a Lambda function using incoming request parameters.
+     * The authorizer type. Currently the only valid value is REQUEST, for a
+ Lambda function using incoming request parameters.
      */
     AuthorizerType?: AuthorizerType;
     /**
-     * The authorizer's Uniform Resource Identifier (URI). For REQUEST authorizers, this must be a well-formed Lambda function URI, for example, arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations. In general, the URI has this form: arn:aws:apigateway:{region}:lambda:path/{service_api} , where {region} is the same as the region hosting the Lambda function, path indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial /. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations.
+     * The authorizer's Uniform Resource Identifier (URI). For
+ REQUEST authorizers, this must be a
+ well-formed Lambda function URI, for example,
+ arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
+ In general, the URI has this form:
+ arn:aws:apigateway:{region}:lambda:path/{service_api}
+ , where {region} is the same as the region hosting the Lambda
+ function, path indicates that the remaining substring in the URI should be treated as
+ the path to the resource, including the initial /. For Lambda functions,
+ this is usually of the form
+ /2015-03-31/functions/[FunctionARN]/invocations.
      */
     AuthorizerUri?: UriWithLengthBetween1And2048;
     /**
-     * The identity source for which authorization is requested.For the REQUEST authorizer, this is required when authorization caching is enabled. The value is a comma-separated string of one or more mapping expressions of the specified request parameters. For example, if an Auth header, a Name query string parameter are defined as identity sources, this value is $method.request.header.Auth, $method.request.querystring.Name. These parameters will be used to derive the authorization caching key and to perform runtime validation of the REQUEST authorizer by verifying all of the identity-related request parameters are present, not null and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized response without calling the Lambda function. The valid value is a string of comma-separated mapping expressions of the specified request parameters. When the authorization caching is not enabled, this property is optional.
+     * The identity source for which authorization is requested.For the REQUEST authorizer, this is required when authorization
+ caching is enabled. The value is a comma-separated string of one or more mapping
+ expressions of the specified request parameters. For example, if an Auth header, a
+ Name query string parameter are defined as identity sources, this value is
+ $method.request.header.Auth, $method.request.querystring.Name. These
+ parameters will be used to derive the authorization caching key and to perform
+ runtime validation of the REQUEST authorizer by verifying all of the
+ identity-related request parameters are present, not null and non-empty. Only when
+ this is true does the authorizer invoke the authorizer Lambda function, otherwise, it
+ returns a 401 Unauthorized response without calling the Lambda function.
+ The valid value is a string of comma-separated mapping expressions of the specified
+ request parameters. When the authorization caching is not enabled, this property is
+ optional.
      */
     IdentitySource?: IdentitySourceList;
     /**
-     * The validation expression does not apply to the REQUEST authorizer.
+     * The
+ validation expression does not apply to the REQUEST authorizer.
      */
     IdentityValidationExpression?: StringWithLengthBetween0And1024;
     /**
@@ -2620,13 +3199,18 @@ declare namespace ApiGatewayV2 {
      */
     Name?: StringWithLengthBetween1And128;
     /**
-     * For REQUEST authorizer, this is not defined.
+     * For
+ REQUEST authorizer, this is not
+ defined.
      */
     ProviderArns?: ProviderArnList;
   }
   export interface UpdateAuthorizerResponse {
     /**
-     * Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To use resource-based permissions on the Lambda function, specify null.
+     * Specifies the required credentials as an IAM role for API Gateway to invoke the
+ authorizer. To specify an IAM role for API Gateway to assume, use the role's Amazon
+ Resource Name (ARN). To use resource-based permissions on the Lambda function,
+ specify null.
      */
     AuthorizerCredentialsArn?: Arn;
     /**
@@ -2634,23 +3218,51 @@ declare namespace ApiGatewayV2 {
      */
     AuthorizerId?: Id;
     /**
-     * The time to live (TTL), in seconds, of cached authorizer results. If it equals 0, authorization caching is disabled. If it is greater than 0, API Gateway will cache authorizer responses. If this field is not set, the default value is 300. The maximum value is 3600, or 1 hour.
+     * The time to live (TTL), in seconds, of cached authorizer results. If it equals 0,
+ authorization caching is disabled. If it is greater than 0, API Gateway will cache
+ authorizer responses. If this field is not set, the default value is 300. The maximum
+ value is 3600, or 1 hour.
      */
     AuthorizerResultTtlInSeconds?: IntegerWithLengthBetween0And3600;
     /**
-     * The authorizer type. Currently the only valid value is REQUEST, for a Lambda function using incoming request parameters.
+     * The authorizer type. Currently the only valid value is REQUEST, for a
+ Lambda function using incoming request parameters.
      */
     AuthorizerType?: AuthorizerType;
     /**
-     * The authorizer's Uniform Resource Identifier (URI). ForREQUEST authorizers, this must be a well-formed Lambda function URI, for example, arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations. In general, the URI has this form: arn:aws:apigateway:{region}:lambda:path/{service_api} , where {region} is the same as the region hosting the Lambda function, path indicates that the remaining substring in the URI should be treated as the path to the resource, including the initial /. For Lambda functions, this is usually of the form /2015-03-31/functions/[FunctionARN]/invocations.
+     * The authorizer's Uniform Resource Identifier (URI).
+ ForREQUEST authorizers, this must be a
+ well-formed Lambda function URI, for example,
+ arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:{account_id}:function:{lambda_function_name}/invocations.
+ In general, the URI has this form:
+ arn:aws:apigateway:{region}:lambda:path/{service_api}
+ , where {region} is the same as the region hosting the Lambda
+ function, path indicates that the remaining substring in the URI should be treated as
+ the path to the resource, including the initial /. For Lambda functions,
+ this is usually of the form
+ /2015-03-31/functions/[FunctionARN]/invocations.
      */
     AuthorizerUri?: UriWithLengthBetween1And2048;
     /**
-     * The identity source for which authorization is requested.For the REQUEST authorizer, this is required when authorization caching is enabled. The value is a comma-separated string of one or more mapping expressions of the specified request parameters. For example, if an Auth header and a Name query string parameters are defined as identity sources, this value is method.request.header.Auth, method.request.querystring.Name. These parameters will be used to derive the authorization caching key and to perform runtime validation of the REQUEST authorizer by verifying all of the identity-related request parameters are present, not null, and non-empty. Only when this is true does the authorizer invoke the authorizer Lambda function, otherwise, it returns a 401 Unauthorized response without calling the Lambda function. The valid value is a string of comma-separated mapping expressions of the specified request parameters. When the authorization caching is not enabled, this property is optional.
+     * The identity source for which authorization is requested.For the REQUEST authorizer, this is required when authorization
+ caching is enabled. The value is a comma-separated string of one or more mapping
+ expressions of the specified request parameters. For example, if an Auth
+ header and a Name query string parameters are defined as identity
+ sources, this value is method.request.header.Auth,
+ method.request.querystring.Name. These parameters will be used to
+ derive the authorization caching key and to perform runtime validation of the
+ REQUEST authorizer by verifying all of the identity-related request
+ parameters are present, not null, and non-empty. Only when this is true does the
+ authorizer invoke the authorizer Lambda function, otherwise, it returns a 401
+ Unauthorized response without calling the Lambda function. The valid value
+ is a string of comma-separated mapping expressions of the specified request
+ parameters. When the authorization caching is not enabled, this property is
+ optional.
      */
     IdentitySource?: IdentitySourceList;
     /**
-     * The validation expression does not apply to the REQUEST authorizer.
+     * The
+ validation expression does not apply to the REQUEST authorizer.
      */
     IdentityValidationExpression?: StringWithLengthBetween0And1024;
     /**
@@ -2658,7 +3270,9 @@ declare namespace ApiGatewayV2 {
      */
     Name?: StringWithLengthBetween1And128;
     /**
-     * For REQUEST authorizer, this is not defined.
+     * For
+ REQUEST authorizer, this is not
+ defined.
      */
     ProviderArns?: ProviderArnList;
   }
@@ -2686,7 +3300,8 @@ declare namespace ApiGatewayV2 {
      */
     DeploymentId?: Id;
     /**
-     * The status of the deployment: PENDING, FAILED, or SUCCEEDED.
+     * The status of the deployment: PENDING, FAILED, or
+ SUCCEEDED.
      */
     DeploymentStatus?: DeploymentStatus;
     /**
@@ -2728,19 +3343,34 @@ declare namespace ApiGatewayV2 {
      */
     ApiId: __string;
     /**
-     * The identifier of the VpcLink used for the integration when the connectionType is VPC_LINK; otherwise undefined.
+     * The connection ID.
      */
     ConnectionId?: StringWithLengthBetween1And1024;
     /**
-     * The type of the network connection to the integration endpoint. The valid value is INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and a network load balancer in a VPC. The default value is INTERNET.
+     * The type of the network connection to the integration endpoint. Currently the only
+ valid value is INTERNET, for connections through the public routable
+ internet.
      */
     ConnectionType?: ConnectionType;
     /**
-     * Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob. CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.
+     * Specifies how to handle response payload content type conversions. Supported
+ values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+ following behaviors:
+ CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+ string to the corresponding binary blob.
+ CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+ Base64-encoded string.If this property is not defined, the response payload will be passed through from
+ the integration response to the route response or method response without
+ modification.
      */
     ContentHandlingStrategy?: ContentHandlingStrategy;
     /**
-     * Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To require that the caller's identity be passed through from the request, specify the string arn:aws:iam::*:user/*. To use resource-based permissions on supported AWS services, specify null.
+     * Specifies the credentials required for the integration, if any. For AWS
+ integrations, three options are available. To specify an IAM Role for API Gateway to
+ assume, use the role's Amazon Resource Name (ARN). To require that the caller's
+ identity be passed through from the request, specify the string
+ arn:aws:iam::*:user/*. To use resource-based permissions on supported
+ AWS services, specify null.
      */
     CredentialsArn?: Arn;
     /**
@@ -2756,23 +3386,64 @@ declare namespace ApiGatewayV2 {
      */
     IntegrationMethod?: StringWithLengthBetween1And64;
     /**
-     * The integration type of an integration. One of the following: AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration. HTTP: for integrating the route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC. This integration is also referred to as the HTTP custom integration. HTTP_PROXY: for integrating route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC, with the client request passed through as-is. This is also referred to as HTTP proxy integration. MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend.
+     * The integration type of an integration. One of the following:
+ AWS: for integrating the route or method request with an AWS service
+ action, including the Lambda function-invoking action. With the Lambda
+ function-invoking action, this is referred to as the Lambda custom integration. With
+ any other AWS service action, this is known as AWS integration.
+ AWS_PROXY: for integrating the route or method request with the Lambda
+ function-invoking action with the client request passed through as-is. This
+ integration is also referred to as Lambda proxy integration.
+ HTTP: for integrating the route or method request with an HTTP
+ endpoint. This
+ integration is also referred to as the HTTP custom integration.
+ HTTP_PROXY: for integrating route or method request with an HTTP
+ endpoint, with the client
+ request passed through as-is. This is also referred to as HTTP proxy
+ integration.
+ MOCK: for integrating the route or method request with API Gateway as a
+ "loopback" endpoint without invoking any backend.
      */
     IntegrationType?: IntegrationType;
     /**
-     * Specifies the Uniform Resource Identifier (URI) of the integration endpoint.For HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification, for either standard integration, where connectionType is not VPC_LINK, or private integration, where connectionType is VPC_LINK. For a private HTTP integration, the URI is not used for routing.For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}. Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the integrated AWS service (e.g., s3); and {subdomain} is a designated subdomain supported by certain AWS service for fast host-name lookup. action can be used for an AWS service action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing {service_api} refers to a supported action {name} plus any required input parameters. Alternatively, path can be used for an AWS service path-based API. The ensuing service_api refers to the path to an AWS service resource, including the region of the integrated AWS service, if applicable. For example, for integration with the S3 API of GetObject, the URI can be either arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key} or arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}
+     * For a Lambda proxy integration, this is the URI of the Lambda function.
      */
     IntegrationUri?: UriWithLengthBetween1And2048;
     /**
-     * Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER. WHEN_NO_MATCH passes the request body for unmapped content types through to the integration backend without transformation. NEVER rejects unmapped content types with an HTTP 415 Unsupported Media Type response. WHEN_NO_TEMPLATES allows pass-through when the integration has no content types mapped to templates. However, if there is at least one content type defined, unmapped content types will be rejected with the same HTTP 415 Unsupported Media Type response.
+     * Specifies the pass-through behavior for incoming requests based on the
+ Content-Type header in the request, and the available mapping
+ templates specified as the requestTemplates property on the
+ Integration resource. There are three valid values:
+ WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and
+ NEVER.
+ WHEN_NO_MATCH passes the request body for unmapped content types through
+ to the integration backend without transformation.
+ NEVER rejects unmapped content types with an HTTP 415 Unsupported
+ Media Type response.
+ WHEN_NO_TEMPLATES allows pass-through when the integration has no
+ content types mapped to templates. However, if there is at least one content type
+ defined, unmapped content types will be rejected with the same HTTP 415
+ Unsupported Media Type response.
      */
     PassthroughBehavior?: PassthroughBehavior;
     /**
-     * A key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.{location}.{name} , where  {location}  is querystring, path, or header; and  {name}  must be a valid and unique method request parameter name.
+     * A key-value map specifying request parameters that are passed from the method
+ request to the backend. The key is an integration request parameter name and the
+ associated value is a method request parameter value or static value that must be
+ enclosed within single quotes and pre-encoded as required by the backend. The method
+ request parameter value must match the pattern of
+ method.request.{location}.{name}
+ , where 
+ {location}
+  is querystring, path, or header; and 
+ {name}
+  must be a valid and unique method request parameter name.
      */
     RequestParameters?: IntegrationParameters;
     /**
-     * Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value.
+     * Represents a map of Velocity templates that are applied on the request payload
+ based on the value of the Content-Type header sent by the client. The content type
+ value is the key in this map, and the template (as a String) is the value.
      */
     RequestTemplates?: TemplateMap;
     /**
@@ -2780,25 +3451,41 @@ declare namespace ApiGatewayV2 {
      */
     TemplateSelectionExpression?: SelectionExpression;
     /**
-     * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.
+     * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
+ milliseconds or 29 seconds.
      */
     TimeoutInMillis?: IntegerWithLengthBetween50And29000;
   }
-  export interface UpdateIntegrationResult {
+  export interface UpdateIntegrationResponse {
     /**
-     * The identifier of the VpcLink used for the integration when the connectionType is VPC_LINK; otherwise undefined.
+     * The connection ID.
      */
     ConnectionId?: StringWithLengthBetween1And1024;
     /**
-     * The type of the network connection to the integration endpoint. The valid value is INTERNET for connections through the public routable internet or VPC_LINK for private connections between API Gateway and a network load balancer in a VPC. The default value is INTERNET.
+     * The type of the network connection to the integration endpoint. Currently the only
+ valid value is INTERNET, for connections through the public routable
+ internet.
      */
     ConnectionType?: ConnectionType;
     /**
-     * Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob. CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.
+     * Specifies how to handle response payload content type conversions. Supported
+ values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+ following behaviors:
+ CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+ string to the corresponding binary blob.
+ CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+ Base64-encoded string.If this property is not defined, the response payload will be passed through from
+ the integration response to the route response or method response without
+ modification.
      */
     ContentHandlingStrategy?: ContentHandlingStrategy;
     /**
-     * Specifies the credentials required for the integration, if any. For AWS integrations, three options are available. To specify an IAM Role for API Gateway to assume, use the role's Amazon Resource Name (ARN). To require that the caller's identity be passed through from the request, specify the string arn:aws:iam::*:user/*. To use resource-based permissions on supported AWS services, specify null.
+     * Specifies the credentials required for the integration, if any. For AWS
+ integrations, three options are available. To specify an IAM Role for API Gateway to
+ assume, use the role's Amazon Resource Name (ARN). To require that the caller's
+ identity be passed through from the request, specify the string
+ arn:aws:iam::*:user/*. To use resource-based permissions on supported
+ AWS services, specify null.
      */
     CredentialsArn?: Arn;
     /**
@@ -2813,25 +3500,69 @@ declare namespace ApiGatewayV2 {
      * Specifies the integration's HTTP method type.
      */
     IntegrationMethod?: StringWithLengthBetween1And64;
+    /**
+     * The integration response selection expression for the integration. See Integration Response Selection Expressions.
+     */
     IntegrationResponseSelectionExpression?: SelectionExpression;
     /**
-     * The integration type of an integration. One of the following: AWS: for integrating the route or method request with an AWS service action, including the Lambda function-invoking action. With the Lambda function-invoking action, this is referred to as the Lambda custom integration. With any other AWS service action, this is known as AWS integration. AWS_PROXY: for integrating the route or method request with the Lambda function-invoking action with the client request passed through as-is. This integration is also referred to as Lambda proxy integration. HTTP: for integrating the route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC. This integration is also referred to as the HTTP custom integration. HTTP_PROXY: for integrating route or method request with an HTTP endpoint, including a private HTTP endpoint within a VPC, with the client request passed through as-is. This is also referred to as HTTP proxy integration. MOCK: for integrating the route or method request with API Gateway as a "loopback" endpoint without invoking any backend.
+     * The integration type of an integration. One of the following:
+ AWS: for integrating the route or method request with an AWS service
+ action, including the Lambda function-invoking action. With the Lambda
+ function-invoking action, this is referred to as the Lambda custom integration. With
+ any other AWS service action, this is known as AWS integration.
+ AWS_PROXY: for integrating the route or method request with the Lambda
+ function-invoking action with the client request passed through as-is. This
+ integration is also referred to as Lambda proxy integration.
+ HTTP: for integrating the route or method request with an HTTP
+ endpoint. This
+ integration is also referred to as the HTTP custom integration.
+ HTTP_PROXY: for integrating route or method request with an HTTP
+ endpoint, with the client
+ request passed through as-is. This is also referred to as HTTP proxy
+ integration.
+ MOCK: for integrating the route or method request with API Gateway as a
+ "loopback" endpoint without invoking any backend.
      */
     IntegrationType?: IntegrationType;
     /**
-     * Specifies the Uniform Resource Identifier (URI) of the integration endpoint.For HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded HTTP(S) URL according to the RFC-3986 specification, for either standard integration, where connectionType is not VPC_LINK, or private integration, where connectionType is VPC_LINK. For a private HTTP integration, the URI is not used for routing.For AWS or AWS_PROXY integrations, the URI is of the form arn:aws:apigateway:{region}:{subdomain.service|service}:path|action/{service_api}. Here, {Region} is the API Gateway region (e.g., us-east-1); {service} is the name of the integrated AWS service (e.g., s3); and {subdomain} is a designated subdomain supported by certain AWS service for fast host-name lookup. action can be used for an AWS service action-based API, using an Action={name}&{p1}={v1}&p2={v2}... query string. The ensuing {service_api} refers to a supported action {name} plus any required input parameters. Alternatively, path can be used for an AWS service path-based API. The ensuing service_api refers to the path to an AWS service resource, including the region of the integrated AWS service, if applicable. For example, for integration with the S3 API of GetObject, the URI can be either arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key} or arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}
+     * For a Lambda proxy integration, this is the URI of the Lambda function.
      */
     IntegrationUri?: UriWithLengthBetween1And2048;
     /**
-     * Specifies the pass-through behavior for incoming requests based on the Content-Type header in the request, and the available mapping templates specified as the requestTemplates property on the Integration resource. There are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER. WHEN_NO_MATCH passes the request body for unmapped content types through to the integration backend without transformation. NEVER rejects unmapped content types with an HTTP 415 Unsupported Media Type response. WHEN_NO_TEMPLATES allows pass-through when the integration has no content types mapped to templates. However, if there is at least one content type defined, unmapped content types will be rejected with the same HTTP 415 Unsupported Media Type response.
+     * Specifies the pass-through behavior for incoming requests based on the
+ Content-Type header in the request, and the available mapping
+ templates specified as the requestTemplates property on the
+ Integration resource. There are three valid values:
+ WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and
+ NEVER.
+ WHEN_NO_MATCH passes the request body for unmapped content types through
+ to the integration backend without transformation.
+ NEVER rejects unmapped content types with an HTTP 415 Unsupported
+ Media Type response.
+ WHEN_NO_TEMPLATES allows pass-through when the integration has no
+ content types mapped to templates. However, if there is at least one content type
+ defined, unmapped content types will be rejected with the same HTTP 415
+ Unsupported Media Type response.
      */
     PassthroughBehavior?: PassthroughBehavior;
     /**
-     * A key-value map specifying request parameters that are passed from the method request to the backend. The key is an integration request parameter name and the associated value is a method request parameter value or static value that must be enclosed within single quotes and pre-encoded as required by the backend. The method request parameter value must match the pattern of method.request.{location}.{name} , where  {location}  is querystring, path, or header; and  {name}  must be a valid and unique method request parameter name.
+     * A key-value map specifying request parameters that are passed from the method
+ request to the backend. The key is an integration request parameter name and the
+ associated value is a method request parameter value or static value that must be
+ enclosed within single quotes and pre-encoded as required by the backend. The method
+ request parameter value must match the pattern of
+ method.request.{location}.{name}
+ , where 
+ {location}
+  is querystring, path, or header; and 
+ {name}
+  must be a valid and unique method request parameter name.
      */
     RequestParameters?: IntegrationParameters;
     /**
-     * Represents a map of Velocity templates that are applied on the request payload based on the value of the Content-Type header sent by the client. The content type value is the key in this map, and the template (as a String) is the value.
+     * Represents a map of Velocity templates that are applied on the request payload
+ based on the value of the Content-Type header sent by the client. The content type
+ value is the key in this map, and the template (as a String) is the value.
      */
     RequestTemplates?: TemplateMap;
     /**
@@ -2839,7 +3570,8 @@ declare namespace ApiGatewayV2 {
      */
     TemplateSelectionExpression?: SelectionExpression;
     /**
-     * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.
+     * Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000
+ milliseconds or 29 seconds.
      */
     TimeoutInMillis?: IntegerWithLengthBetween50And29000;
   }
@@ -2849,7 +3581,15 @@ declare namespace ApiGatewayV2 {
      */
     ApiId: __string;
     /**
-     * Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob. CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.
+     * Specifies how to handle response payload content type conversions. Supported
+ values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+ following behaviors:
+ CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+ string to the corresponding binary blob.
+ CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+ Base64-encoded string.If this property is not defined, the response payload will be passed through from
+ the integration response to the route response or method response without
+ modification.
      */
     ContentHandlingStrategy?: ContentHandlingStrategy;
     /**
@@ -2865,11 +3605,28 @@ declare namespace ApiGatewayV2 {
      */
     IntegrationResponseKey?: SelectionKey;
     /**
-     * A key-value map specifying response parameters that are passed to the method response from the backend. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of method.response.header.{name} , where name is a valid and unique header name. The mapped non-static value must match the pattern of integration.response.header.{name}  or integration.response.body.{JSON-expression} , where  {name}  is a valid and unique response header name and  {JSON-expression}  is a valid JSON expression without the $ prefix.
+     * A key-value map specifying response parameters that are passed to the method
+ response from the backend. The key is a method response header parameter name and the
+ mapped value is an integration response header value, a static value enclosed within
+ a pair of single quotes, or a JSON expression from the integration response body. The
+ mapping key must match the pattern of
+ method.response.header.{name}
+ , where name is a valid and unique header name. The mapped non-static value
+ must match the pattern of
+ integration.response.header.{name}
+  or
+ integration.response.body.{JSON-expression}
+ , where 
+ {name}
+  is a valid and unique response header name and 
+ {JSON-expression}
+  is a valid JSON expression without the $ prefix.
      */
     ResponseParameters?: IntegrationParameters;
     /**
-     * The collection of response templates for the integration response as a string-to-string map of key-value pairs. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.
+     * The collection of response templates for the integration response as a
+ string-to-string map of key-value pairs. Response templates are represented as a
+ key/value map, with a content-type as the key and a template as the value.
      */
     ResponseTemplates?: TemplateMap;
     /**
@@ -2879,7 +3636,15 @@ declare namespace ApiGatewayV2 {
   }
   export interface UpdateIntegrationResponseResponse {
     /**
-     * Specifies how to handle response payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to the corresponding binary blob. CONVERT_TO_TEXT: Converts a response payload from a binary blob to a Base64-encoded string.If this property is not defined, the response payload will be passed through from the integration response to the route response or method response without modification.
+     * Specifies how to handle response payload content type conversions. Supported
+ values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the
+ following behaviors:
+ CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded
+ string to the corresponding binary blob.
+ CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
+ Base64-encoded string.If this property is not defined, the response payload will be passed through from
+ the integration response to the route response or method response without
+ modification.
      */
     ContentHandlingStrategy?: ContentHandlingStrategy;
     /**
@@ -2891,11 +3656,21 @@ declare namespace ApiGatewayV2 {
      */
     IntegrationResponseKey?: SelectionKey;
     /**
-     * A key-value map specifying response parameters that are passed to the method response from the backend. The key is a method response header parameter name and the mapped value is an integration response header value, a static value enclosed within a pair of single quotes, or a JSON expression from the integration response body. The mapping key must match the pattern of method.response.header.{name}, where name is a valid and unique header name. The mapped non-static value must match the pattern of integration.response.header.{name} or integration.response.body.{JSON-expression}, where name is a valid and unique response header name and JSON-expression is a valid JSON expression without the $ prefix.
+     * A key-value map specifying response parameters that are passed to the method
+ response from the backend. The key is a method response header parameter name and the
+ mapped value is an integration response header value, a static value enclosed within
+ a pair of single quotes, or a JSON expression from the integration response body. The
+ mapping key must match the pattern of method.response.header.{name}, where name is a
+ valid and unique header name. The mapped non-static value must match the pattern of
+ integration.response.header.{name} or integration.response.body.{JSON-expression},
+ where name is a valid and unique response header name and JSON-expression is a valid
+ JSON expression without the $ prefix.
      */
     ResponseParameters?: IntegrationParameters;
     /**
-     * The collection of response templates for the integration response as a string-to-string map of key-value pairs. Response templates are represented as a key/value map, with a content-type as the key and a template as the value.
+     * The collection of response templates for the integration response as a
+ string-to-string map of key-value pairs. Response templates are represented as a
+ key/value map, with a content-type as the key and a template as the value.
      */
     ResponseTemplates?: TemplateMap;
     /**
@@ -2925,7 +3700,8 @@ declare namespace ApiGatewayV2 {
      */
     Name?: StringWithLengthBetween1And128;
     /**
-     * The schema for the model. For application/json models, this should be JSON schema draft 4 model.
+     * The schema for the model. For application/json models, this should be JSON schema
+ draft 4 model.
      */
     Schema?: StringWithLengthBetween0And32K;
   }
@@ -2947,7 +3723,8 @@ declare namespace ApiGatewayV2 {
      */
     Name?: StringWithLengthBetween1And128;
     /**
-     * The schema for the model. For application/json models, this should be JSON schema draft 4 model.
+     * The schema for the model. For application/json models, this should be JSON schema
+ draft 4 model.
      */
     Schema?: StringWithLengthBetween0And32K;
   }
@@ -2961,15 +3738,22 @@ declare namespace ApiGatewayV2 {
      */
     ApiKeyRequired?: __boolean;
     /**
-     * The authorization scopes supported by this route.
+     * The authorization scopes supported by this
+ route.
      */
     AuthorizationScopes?: AuthorizationScopes;
     /**
-     * The authorization type for the route. Valid values are NONE for open access, AWS_IAM for using AWS IAM permissions.
+     * The authorization type for the route. Valid values are NONE for open
+ access, AWS_IAM for using AWS IAM permissions, and CUSTOM
+ for using a Lambda
+ authorizer.
      */
     AuthorizationType?: AuthorizationType;
     /**
-     * The identifier of the Authorizer resource to be associated with this route.
+     * The identifier of the Authorizer resource to be associated with this
+ route, if the authorizationType is CUSTOM
+ . The authorizer identifier is generated by API Gateway
+ when you created the authorizer.
      */
     AuthorizerId?: Id;
     /**
@@ -3005,21 +3789,33 @@ declare namespace ApiGatewayV2 {
      */
     Target?: StringWithLengthBetween1And128;
   }
-  export interface UpdateRouteResult {
+  export interface UpdateRouteResponse {
     /**
      * Specifies whether an API key is required for this route.
      */
     ApiKeyRequired?: __boolean;
     /**
-     * The authorization scopes supported by this route. 
+     * A list of authorization scopes configured on a route. The scopes are used with a
+ COGNITO_USER_POOLS authorizer to authorize the method invocation. The authorization
+ works by matching the route scopes against the scopes parsed from the access token in
+ the incoming request. The method invocation is authorized if any route scope matches
+ a claimed scope in the access token. Otherwise, the invocation is not authorized.
+ When the route scope is configured, the client must provide an access token instead
+ of an identity token for authorization purposes.
      */
     AuthorizationScopes?: AuthorizationScopes;
     /**
-     * The authorization type for the route. Valid values are NONE for open access, AWS_IAM for using AWS IAM permissions.
+     * The authorization type for the route. Valid values are NONE for open
+ access, AWS_IAM for using AWS IAM permissions, and CUSTOM
+ for using a Lambda
+ authorizer
      */
     AuthorizationType?: AuthorizationType;
     /**
-     * The identifier of the Authorizer resource to be associated with this route.
+     * The identifier of the Authorizer resource to be associated with this
+ route, if the authorizationType is CUSTOM
+ . The authorizer identifier is generated by API Gateway
+ when you created the authorizer.
      */
     AuthorizerId?: Id;
     /**
@@ -3141,7 +3937,9 @@ declare namespace ApiGatewayV2 {
      */
     StageName: __string;
     /**
-     * A map that defines the stage variables for a Stage. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.
+     * A map that defines the stage variables for a Stage. Variable names
+ can have alphanumeric and underscore characters, and the values must match
+ [A-Za-z0-9-._~:/?#&=,]+.
      */
     StageVariables?: StageVariablesMap;
   }
@@ -3163,7 +3961,8 @@ declare namespace ApiGatewayV2 {
      */
     DefaultRouteSettings?: RouteSettings;
     /**
-     * The identifier of the Deployment that the Stage is associated with.
+     * The identifier of the Deployment that the Stage is
+ associated with.
      */
     DeploymentId?: Id;
     /**
@@ -3183,7 +3982,9 @@ declare namespace ApiGatewayV2 {
      */
     StageName?: StringWithLengthBetween1And128;
     /**
-     * A map that defines the stage variables for a stage resource. Variable names can have alphanumeric and underscore characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.
+     * A map that defines the stage variables for a stage resource. Variable names can
+ have alphanumeric and underscore characters, and the values must match
+ [A-Za-z0-9-._~:/?#&=,]+.
      */
     StageVariables?: StageVariablesMap;
   }
@@ -3192,6 +3993,7 @@ declare namespace ApiGatewayV2 {
   export type __double = number;
   export type __integer = number;
   export type __listOfApi = Api[];
+  export type __listOfApiMapping = ApiMapping[];
   export type __listOfAuthorizer = Authorizer[];
   export type __listOfDeployment = Deployment[];
   export type __listOfDomainName = DomainName[];

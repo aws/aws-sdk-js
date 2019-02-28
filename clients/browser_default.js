@@ -72,5 +72,6 @@ module.exports = {
   KinesisVideoMedia: require('./kinesisvideomedia'),
   KinesisVideo: require('./kinesisvideo'),
   Translate: require('./translate'),
-  SecretsManager: require('./secretsmanager')
+  SecretsManager: require('./secretsmanager'),
+  ComprehendMedical: require('./comprehendmedical')
 };

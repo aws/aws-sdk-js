@@ -140,6 +140,9 @@
       "errors": [
         {
           "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "NotFoundException"
         }
       ],
       "documentation": "<p>Makes a private skill available for enrolled users to enable on their devices.</p>"
@@ -635,6 +638,9 @@
       "errors": [
         {
           "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "NotFoundException"
         }
       ],
       "documentation": "<p>Makes a private skill unavailable for enrolled users and prevents them from enabling it on their devices.</p>"
@@ -771,6 +777,25 @@
         }
       ],
       "documentation": "<p>Gets the details of a device by device ARN.</p>"
+    },
+    "GetInvitationConfiguration": {
+      "name": "GetInvitationConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetInvitationConfigurationRequest"
+      },
+      "output": {
+        "shape": "GetInvitationConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        }
+      ],
+      "documentation": "<p>Retrieves the configured values for the user enrollment invitation email template.</p>"
     },
     "GetProfile": {
       "name": "GetProfile",
@@ -993,6 +1018,28 @@
         }
       ],
       "documentation": "<p>Sets the conference preferences on a specific conference provider at the account level.</p>"
+    },
+    "PutInvitationConfiguration": {
+      "name": "PutInvitationConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutInvitationConfigurationRequest"
+      },
+      "output": {
+        "shape": "PutInvitationConfigurationResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        }
+      ],
+      "documentation": "<p>Configures the email template for the user enrollment invitation with the specified attributes.</p>"
     },
     "PutRoomSkillParameter": {
       "name": "PutRoomSkillParameter",
@@ -1682,13 +1729,9 @@
         "SkillId"
       ],
       "members": {
-        "OrganizationArn": {
-          "shape": "Arn",
-          "documentation": "<p>The ARN of the organization.</p>"
-        },
         "SkillId": {
           "shape": "SkillId",
-          "documentation": "<p>The private skill ID you want to make available to enrolled users.&gt;</p>"
+          "documentation": "<p>The private skill ID you want to make available to enrolled users.</p>"
         }
       }
     },
@@ -1897,7 +1940,6 @@
     },
     "ClientRequestToken": {
       "type": "string",
-      "documentation": "User specified token that is used to support idempotency during Create Resource",
       "max": 150,
       "min": 10,
       "pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
@@ -2095,7 +2137,7 @@
         },
         "S3BucketName": {
           "shape": "CustomerS3BucketName",
-          "documentation": "<p>The S3 bucket name of the output reports.</p>"
+          "documentation": "<p>The S3 bucket name of the output reports. If this isn't specified, the report can be retrieved from a download link by calling ListBusinessReportSchedule. </p>"
         },
         "S3KeyPrefix": {
           "shape": "S3KeyPrefix",
@@ -2111,7 +2153,7 @@
         },
         "Recurrence": {
           "shape": "BusinessReportRecurrence",
-          "documentation": "<p>The recurrence of the reports.</p>"
+          "documentation": "<p>The recurrence of the reports. If this isn't specified, the report will only be delivered one time when the API is called. </p>"
         },
         "ClientRequestToken": {
           "shape": "ClientRequestToken",
@@ -2857,10 +2899,6 @@
         "SkillId"
       ],
       "members": {
-        "OrganizationArn": {
-          "shape": "Arn",
-          "documentation": "<p>The ARN of the organization.</p>"
-        },
         "SkillId": {
           "shape": "SkillId",
           "documentation": "<p> The private skill ID you want to make unavailable for enrolled users.</p>"
@@ -3121,6 +3159,27 @@
         }
       }
     },
+    "GetInvitationConfigurationRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "GetInvitationConfigurationResponse": {
+      "type": "structure",
+      "members": {
+        "OrganizationName": {
+          "shape": "OrganizationName",
+          "documentation": "<p>The name of the organization sending the enrollment invite to a user.</p>"
+        },
+        "ContactEmail": {
+          "shape": "Email",
+          "documentation": "<p>The email ID of the organization or individual contact that the enrolled user can use. </p>"
+        },
+        "PrivateSkillIds": {
+          "shape": "ShortSkillIdList",
+          "documentation": "<p>The list of private skill IDs that you want to recommend to the user to enable in the invitation.</p>"
+        }
+      }
+    },
     "GetProfileRequest": {
       "type": "structure",
       "members": {
@@ -3327,7 +3386,7 @@
       "members": {
         "SkillGroupArn": {
           "shape": "Arn",
-          "documentation": "<p>The ARN of the skill group for which to list enabled skills.</p>"
+          "documentation": "<p>The ARN of the skill group for which to list enabled skills. Required.</p>"
         },
         "EnablementType": {
           "shape": "EnablementTypeFilter",
@@ -3339,11 +3398,11 @@
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>.</p>"
+          "documentation": "<p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by <code>MaxResults</code>. Required.</p>"
         },
         "MaxResults": {
           "shape": "SkillListMaxResults",
-          "documentation": "<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved.</p>"
+          "documentation": "<p>The maximum number of results to include in the response. If more results exist than the specified <code>MaxResults</code> value, a token is included in the response so that the remaining results can be retrieved. Required.</p>"
         }
       }
     },
@@ -3530,6 +3589,12 @@
       "max": 2,
       "min": 1
     },
+    "OrganizationName": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "([A-Za-z\\-' 0-9._]|\\p{IsLetter})*"
+    },
     "OutboundPhoneNumber": {
       "type": "string",
       "pattern": "\\d{10}"
@@ -3694,6 +3759,30 @@
       }
     },
     "PutConferencePreferenceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "PutInvitationConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationName"
+      ],
+      "members": {
+        "OrganizationName": {
+          "shape": "OrganizationName",
+          "documentation": "<p>The name of the organization sending the enrollment invite to a user.</p>"
+        },
+        "ContactEmail": {
+          "shape": "Email",
+          "documentation": "<p>The email ID of the organization or individual contact that the enrolled user can use. </p>"
+        },
+        "PrivateSkillIds": {
+          "shape": "ShortSkillIdList",
+          "documentation": "<p>The list of private skill IDs that you want to recommend to the user to enable in the invitation.</p>"
+        }
+      }
+    },
+    "PutInvitationConfigurationResponse": {
       "type": "structure",
       "members": {}
     },
@@ -4282,6 +4371,14 @@
     },
     "ShortDescription": {
       "type": "string"
+    },
+    "ShortSkillIdList": {
+      "type": "list",
+      "member": {
+        "shape": "SkillId"
+      },
+      "max": 3,
+      "min": 0
     },
     "SkillDetails": {
       "type": "structure",
