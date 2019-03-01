@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.412.0-->
+<!--LATEST=2.413.0-->
 <!--ENTRYINSERT-->
+
+## 2.413.0
+* feature: EC2: This release adds support for modifying instance event start time which allows users to reschedule EC2 events.
 
 ## 2.412.0
 * bugfix: ComprehendMedical: enable cors on ComprehendMedical, update SERVICES.md

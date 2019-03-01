@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support for modifying instance event start time which allows users to reschedule EC2 events."
+    }
+]

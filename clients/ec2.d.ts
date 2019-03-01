@@ -317,11 +317,11 @@ declare class EC2 extends Service {
    */
   copyImage(callback?: (err: AWSError, data: EC2.Types.CopyImageResult) => void): Request<EC2.Types.CopyImageResult, AWSError>;
   /**
-   * Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the snapshot within the same region or from one region to another. You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs). The snapshot is copied to the regional endpoint that you send the HTTP request to. Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted, unless the Encrypted flag is specified during the snapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (AWS KMS) customer master key (CMK); however, you can specify a non-default CMK with the KmsKeyId parameter. To copy an encrypted snapshot that has been shared from another account, you must have permissions for the CMK used to encrypt the snapshot. Snapshots created by copying another snapshot have an arbitrary volume ID that should not be used for any purpose. For more information, see Copying an Amazon EBS Snapshot in the Amazon Elastic Compute Cloud User Guide.
+   * Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the snapshot within the same Region or from one Region to another. You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs). The snapshot is copied to the regional endpoint that you send the HTTP request to. Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted, unless the Encrypted flag is specified during the snapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (AWS KMS) customer master key (CMK); however, you can specify a non-default CMK with the KmsKeyId parameter. To copy an encrypted snapshot that has been shared from another account, you must have permissions for the CMK used to encrypt the snapshot. Snapshots created by copying another snapshot have an arbitrary volume ID that should not be used for any purpose. For more information, see Copying an Amazon EBS Snapshot in the Amazon Elastic Compute Cloud User Guide.
    */
   copySnapshot(params: EC2.Types.CopySnapshotRequest, callback?: (err: AWSError, data: EC2.Types.CopySnapshotResult) => void): Request<EC2.Types.CopySnapshotResult, AWSError>;
   /**
-   * Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the snapshot within the same region or from one region to another. You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs). The snapshot is copied to the regional endpoint that you send the HTTP request to. Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted, unless the Encrypted flag is specified during the snapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (AWS KMS) customer master key (CMK); however, you can specify a non-default CMK with the KmsKeyId parameter. To copy an encrypted snapshot that has been shared from another account, you must have permissions for the CMK used to encrypt the snapshot. Snapshots created by copying another snapshot have an arbitrary volume ID that should not be used for any purpose. For more information, see Copying an Amazon EBS Snapshot in the Amazon Elastic Compute Cloud User Guide.
+   * Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the snapshot within the same Region or from one Region to another. You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs). The snapshot is copied to the regional endpoint that you send the HTTP request to. Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted, unless the Encrypted flag is specified during the snapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (AWS KMS) customer master key (CMK); however, you can specify a non-default CMK with the KmsKeyId parameter. To copy an encrypted snapshot that has been shared from another account, you must have permissions for the CMK used to encrypt the snapshot. Snapshots created by copying another snapshot have an arbitrary volume ID that should not be used for any purpose. For more information, see Copying an Amazon EBS Snapshot in the Amazon Elastic Compute Cloud User Guide.
    */
   copySnapshot(callback?: (err: AWSError, data: EC2.Types.CopySnapshotResult) => void): Request<EC2.Types.CopySnapshotResult, AWSError>;
   /**
@@ -509,11 +509,11 @@ declare class EC2 extends Service {
    */
   createPlacementGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a listing for Amazon EC2 Standard Reserved Instances to be sold in the Reserved Instance Marketplace. You can submit one Standard Reserved Instance listing at a time. To get a list of your Standard Reserved Instances, you can use the DescribeReservedInstances operation.  Only Standard Reserved Instances with a capacity reservation can be sold in the Reserved Instance Marketplace. Convertible Reserved Instances and Standard Reserved Instances with a regional benefit cannot be sold.  The Reserved Instance Marketplace matches sellers who want to resell Standard Reserved Instance capacity that they no longer need with buyers who want to purchase additional capacity. Reserved Instances bought and sold through the Reserved Instance Marketplace work like any other Reserved Instances. To sell your Standard Reserved Instances, you must first register as a seller in the Reserved Instance Marketplace. After completing the registration process, you can create a Reserved Instance Marketplace listing of some or all of your Standard Reserved Instances, and specify the upfront price to receive for them. Your Standard Reserved Instance listings then become available for purchase. To view the details of your Standard Reserved Instance listing, you can use the DescribeReservedInstancesListings operation. For more information, see Reserved Instance Marketplace in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a listing for Amazon EC2 Standard Reserved Instances to be sold in the Reserved Instance Marketplace. You can submit one Standard Reserved Instance listing at a time. To get a list of your Standard Reserved Instances, you can use the DescribeReservedInstances operation.  Only Standard Reserved Instances can be sold in the Reserved Instance Marketplace. Convertible Reserved Instances cannot be sold.  The Reserved Instance Marketplace matches sellers who want to resell Standard Reserved Instance capacity that they no longer need with buyers who want to purchase additional capacity. Reserved Instances bought and sold through the Reserved Instance Marketplace work like any other Reserved Instances. To sell your Standard Reserved Instances, you must first register as a seller in the Reserved Instance Marketplace. After completing the registration process, you can create a Reserved Instance Marketplace listing of some or all of your Standard Reserved Instances, and specify the upfront price to receive for them. Your Standard Reserved Instance listings then become available for purchase. To view the details of your Standard Reserved Instance listing, you can use the DescribeReservedInstancesListings operation. For more information, see Reserved Instance Marketplace in the Amazon Elastic Compute Cloud User Guide.
    */
   createReservedInstancesListing(params: EC2.Types.CreateReservedInstancesListingRequest, callback?: (err: AWSError, data: EC2.Types.CreateReservedInstancesListingResult) => void): Request<EC2.Types.CreateReservedInstancesListingResult, AWSError>;
   /**
-   * Creates a listing for Amazon EC2 Standard Reserved Instances to be sold in the Reserved Instance Marketplace. You can submit one Standard Reserved Instance listing at a time. To get a list of your Standard Reserved Instances, you can use the DescribeReservedInstances operation.  Only Standard Reserved Instances with a capacity reservation can be sold in the Reserved Instance Marketplace. Convertible Reserved Instances and Standard Reserved Instances with a regional benefit cannot be sold.  The Reserved Instance Marketplace matches sellers who want to resell Standard Reserved Instance capacity that they no longer need with buyers who want to purchase additional capacity. Reserved Instances bought and sold through the Reserved Instance Marketplace work like any other Reserved Instances. To sell your Standard Reserved Instances, you must first register as a seller in the Reserved Instance Marketplace. After completing the registration process, you can create a Reserved Instance Marketplace listing of some or all of your Standard Reserved Instances, and specify the upfront price to receive for them. Your Standard Reserved Instance listings then become available for purchase. To view the details of your Standard Reserved Instance listing, you can use the DescribeReservedInstancesListings operation. For more information, see Reserved Instance Marketplace in the Amazon Elastic Compute Cloud User Guide.
+   * Creates a listing for Amazon EC2 Standard Reserved Instances to be sold in the Reserved Instance Marketplace. You can submit one Standard Reserved Instance listing at a time. To get a list of your Standard Reserved Instances, you can use the DescribeReservedInstances operation.  Only Standard Reserved Instances can be sold in the Reserved Instance Marketplace. Convertible Reserved Instances cannot be sold.  The Reserved Instance Marketplace matches sellers who want to resell Standard Reserved Instance capacity that they no longer need with buyers who want to purchase additional capacity. Reserved Instances bought and sold through the Reserved Instance Marketplace work like any other Reserved Instances. To sell your Standard Reserved Instances, you must first register as a seller in the Reserved Instance Marketplace. After completing the registration process, you can create a Reserved Instance Marketplace listing of some or all of your Standard Reserved Instances, and specify the upfront price to receive for them. Your Standard Reserved Instance listings then become available for purchase. To view the details of your Standard Reserved Instance listing, you can use the DescribeReservedInstancesListings operation. For more information, see Reserved Instance Marketplace in the Amazon Elastic Compute Cloud User Guide.
    */
   createReservedInstancesListing(callback?: (err: AWSError, data: EC2.Types.CreateReservedInstancesListingResult) => void): Request<EC2.Types.CreateReservedInstancesListingResult, AWSError>;
   /**
@@ -1509,11 +1509,11 @@ declare class EC2 extends Service {
    */
   describeSnapshotAttribute(callback?: (err: AWSError, data: EC2.Types.DescribeSnapshotAttributeResult) => void): Request<EC2.Types.DescribeSnapshotAttributeResult, AWSError>;
   /**
-   * Describes one or more of the EBS snapshots available to you. Available snapshots include public snapshots available for any AWS account to launch, private snapshots that you own, and private snapshots owned by another AWS account but for which you've been given explicit create volume permissions. The create volume permissions fall into the following categories:    public: The owner of the snapshot granted create volume permissions for the snapshot to the all group. All AWS accounts have create volume permissions for these snapshots.    explicit: The owner of the snapshot granted create volume permissions to a specific AWS account.    implicit: An AWS account has implicit create volume permissions for all snapshots it owns.   The list of snapshots returned can be modified by specifying snapshot IDs, snapshot owners, or AWS accounts with create volume permissions. If no options are specified, Amazon EC2 returns all snapshots for which you have create volume permissions. If you specify one or more snapshot IDs, only snapshots that have the specified IDs are returned. If you specify an invalid snapshot ID, an error is returned. If you specify a snapshot ID for which you do not have access, it is not included in the returned results. If you specify one or more snapshot owners using the OwnerIds option, only snapshots from the specified owners and for which you have access are returned. The results can include the AWS account IDs of the specified owners, amazon for snapshots owned by Amazon, or self for snapshots that you own. If you specify a list of restorable users, only snapshots with create snapshot permissions for those users are returned. You can specify AWS account IDs (if you own the snapshots), self for snapshots for which you own or have explicit permissions, or all for public snapshots. If you are describing a long list of snapshots, you can paginate the output to make the list more manageable. The MaxResults parameter sets the maximum number of results returned in a single page. If the list of results exceeds your MaxResults value, then that number of results is returned along with a NextToken value that can be passed to a subsequent DescribeSnapshots request to retrieve the remaining results. For more information about EBS snapshots, see Amazon EBS Snapshots in the Amazon Elastic Compute Cloud User Guide.
+   * Describes one or more of the EBS snapshots available to you. Available snapshots include public snapshots available for use by any AWS account, private snapshots that you own, and private snapshots owned by another AWS account for which you've been given explicit create volume permissions. The create volume permissions fall into the following categories:    public: The owner of the snapshot granted create volume permissions for the snapshot to the all group. All AWS accounts have create volume permissions for these snapshots.    explicit: The owner of the snapshot granted create volume permissions to a specific AWS account.    implicit: An AWS account has implicit create volume permissions for all snapshots it owns.   The list of snapshots returned can be modified by specifying snapshot IDs, snapshot owners, or AWS accounts with create volume permissions. If no options are specified, Amazon EC2 returns all snapshots for which you have create volume permissions. If you specify one or more snapshot IDs, only snapshots that have the specified IDs are returned. If you specify an invalid snapshot ID, an error is returned. If you specify a snapshot ID for which you do not have access, it is not included in the returned results. If you specify one or more snapshot owners using the OwnerIds option, only snapshots from the specified owners and for which you have access are returned. The results can include the AWS account IDs of the specified owners, amazon for snapshots owned by Amazon, or self for snapshots that you own. If you specify a list of restorable users, only snapshots with create snapshot permissions for those users are returned. You can specify AWS account IDs (if you own the snapshots), self for snapshots for which you own or have explicit permissions, or all for public snapshots. If you are describing a long list of snapshots, you can paginate the output to make the list more manageable. The MaxResults parameter sets the maximum number of results returned in a single page. If the list of results exceeds your MaxResults value, then that number of results is returned along with a NextToken value that can be passed to a subsequent DescribeSnapshots request to retrieve the remaining results. For more information about EBS snapshots, see Amazon EBS Snapshots in the Amazon Elastic Compute Cloud User Guide.
    */
   describeSnapshots(params: EC2.Types.DescribeSnapshotsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSnapshotsResult) => void): Request<EC2.Types.DescribeSnapshotsResult, AWSError>;
   /**
-   * Describes one or more of the EBS snapshots available to you. Available snapshots include public snapshots available for any AWS account to launch, private snapshots that you own, and private snapshots owned by another AWS account but for which you've been given explicit create volume permissions. The create volume permissions fall into the following categories:    public: The owner of the snapshot granted create volume permissions for the snapshot to the all group. All AWS accounts have create volume permissions for these snapshots.    explicit: The owner of the snapshot granted create volume permissions to a specific AWS account.    implicit: An AWS account has implicit create volume permissions for all snapshots it owns.   The list of snapshots returned can be modified by specifying snapshot IDs, snapshot owners, or AWS accounts with create volume permissions. If no options are specified, Amazon EC2 returns all snapshots for which you have create volume permissions. If you specify one or more snapshot IDs, only snapshots that have the specified IDs are returned. If you specify an invalid snapshot ID, an error is returned. If you specify a snapshot ID for which you do not have access, it is not included in the returned results. If you specify one or more snapshot owners using the OwnerIds option, only snapshots from the specified owners and for which you have access are returned. The results can include the AWS account IDs of the specified owners, amazon for snapshots owned by Amazon, or self for snapshots that you own. If you specify a list of restorable users, only snapshots with create snapshot permissions for those users are returned. You can specify AWS account IDs (if you own the snapshots), self for snapshots for which you own or have explicit permissions, or all for public snapshots. If you are describing a long list of snapshots, you can paginate the output to make the list more manageable. The MaxResults parameter sets the maximum number of results returned in a single page. If the list of results exceeds your MaxResults value, then that number of results is returned along with a NextToken value that can be passed to a subsequent DescribeSnapshots request to retrieve the remaining results. For more information about EBS snapshots, see Amazon EBS Snapshots in the Amazon Elastic Compute Cloud User Guide.
+   * Describes one or more of the EBS snapshots available to you. Available snapshots include public snapshots available for use by any AWS account, private snapshots that you own, and private snapshots owned by another AWS account for which you've been given explicit create volume permissions. The create volume permissions fall into the following categories:    public: The owner of the snapshot granted create volume permissions for the snapshot to the all group. All AWS accounts have create volume permissions for these snapshots.    explicit: The owner of the snapshot granted create volume permissions to a specific AWS account.    implicit: An AWS account has implicit create volume permissions for all snapshots it owns.   The list of snapshots returned can be modified by specifying snapshot IDs, snapshot owners, or AWS accounts with create volume permissions. If no options are specified, Amazon EC2 returns all snapshots for which you have create volume permissions. If you specify one or more snapshot IDs, only snapshots that have the specified IDs are returned. If you specify an invalid snapshot ID, an error is returned. If you specify a snapshot ID for which you do not have access, it is not included in the returned results. If you specify one or more snapshot owners using the OwnerIds option, only snapshots from the specified owners and for which you have access are returned. The results can include the AWS account IDs of the specified owners, amazon for snapshots owned by Amazon, or self for snapshots that you own. If you specify a list of restorable users, only snapshots with create snapshot permissions for those users are returned. You can specify AWS account IDs (if you own the snapshots), self for snapshots for which you own or have explicit permissions, or all for public snapshots. If you are describing a long list of snapshots, you can paginate the output to make the list more manageable. The MaxResults parameter sets the maximum number of results returned in a single page. If the list of results exceeds your MaxResults value, then that number of results is returned along with a NextToken value that can be passed to a subsequent DescribeSnapshots request to retrieve the remaining results. For more information about EBS snapshots, see Amazon EBS Snapshots in the Amazon Elastic Compute Cloud User Guide.
    */
   describeSnapshots(callback?: (err: AWSError, data: EC2.Types.DescribeSnapshotsResult) => void): Request<EC2.Types.DescribeSnapshotsResult, AWSError>;
   /**
@@ -2156,6 +2156,14 @@ declare class EC2 extends Service {
    * Modifies the credit option for CPU usage on a running or stopped T2 or T3 instance. The credit options are standard and unlimited. For more information, see Burstable Performance Instances in the Amazon Elastic Compute Cloud User Guide.
    */
   modifyInstanceCreditSpecification(callback?: (err: AWSError, data: EC2.Types.ModifyInstanceCreditSpecificationResult) => void): Request<EC2.Types.ModifyInstanceCreditSpecificationResult, AWSError>;
+  /**
+   * Modifies the start time for a scheduled Amazon EC2 instance event.
+   */
+  modifyInstanceEventStartTime(params: EC2.Types.ModifyInstanceEventStartTimeRequest, callback?: (err: AWSError, data: EC2.Types.ModifyInstanceEventStartTimeResult) => void): Request<EC2.Types.ModifyInstanceEventStartTimeResult, AWSError>;
+  /**
+   * Modifies the start time for a scheduled Amazon EC2 instance event.
+   */
+  modifyInstanceEventStartTime(callback?: (err: AWSError, data: EC2.Types.ModifyInstanceEventStartTimeResult) => void): Request<EC2.Types.ModifyInstanceEventStartTimeResult, AWSError>;
   /**
    * Modifies the placement attributes for a specified instance. You can do the following:   Modify the affinity between an instance and a Dedicated Host. When affinity is set to host and the instance is not associated with a specific Dedicated Host, the next time the instance is launched, it is automatically associated with the host on which it lands. If the instance is restarted or rebooted, this relationship persists.   Change the Dedicated Host with which an instance is associated.   Change the instance tenancy of an instance from host to dedicated, or from dedicated to host.   Move an instance to or from a placement group.   At least one attribute for affinity, host ID, tenancy, or placement group name must be specified in the request. Affinity and tenancy can be modified in the same request. To modify the host ID, tenancy, placement group, or partition for an instance, the instance must be in the stopped state.
    */
@@ -3396,11 +3404,11 @@ declare namespace EC2 {
   export type AssociatedNetworkType = "vpc"|string;
   export interface AssociatedTargetNetwork {
     /**
-     *  The ID of the subnet. 
+     * The ID of the subnet.
      */
     NetworkId?: String;
     /**
-     *  The target network type. 
+     * The target network type.
      */
     NetworkType?: AssociatedNetworkType;
   }
@@ -4110,13 +4118,13 @@ declare namespace EC2 {
   export type CapacityReservationTenancy = "default"|"dedicated"|string;
   export interface CertificateAuthentication {
     /**
-     *  The ARN of the client certificate.  
+     * The ARN of the client certificate. 
      */
     ClientRootCertificateChain?: String;
   }
   export interface CertificateAuthenticationRequest {
     /**
-     *  The ARN of the client certificate. The certificate must be signed by a certificate authority (CA) and it must be provisioned in AWS Certificate Manager (ACM). 
+     * The ARN of the client certificate. The certificate must be signed by a certificate authority (CA) and it must be provisioned in AWS Certificate Manager (ACM).
      */
     ClientRootCertificateChainArn?: String;
   }
@@ -4257,7 +4265,7 @@ declare namespace EC2 {
      */
     ClientVpnEndpointId?: String;
     /**
-     *  The current date and time. 
+     * The current date and time.
      */
     Timestamp?: String;
     /**
@@ -4293,7 +4301,7 @@ declare namespace EC2 {
      */
     ClientIp?: String;
     /**
-     *  The common name associated with the client. This is either the name of the client certificate, or the Active Directory user name. 
+     * The common name associated with the client. This is either the name of the client certificate, or the Active Directory user name.
      */
     CommonName?: String;
     /**
@@ -4359,7 +4367,7 @@ declare namespace EC2 {
      */
     VpnProtocol?: VpnProtocol;
     /**
-     *  The transport protocol used by the Client VPN endpoint. 
+     * The transport protocol used by the Client VPN endpoint.
      */
     TransportProtocol?: TransportProtocol;
     /**
@@ -4408,7 +4416,7 @@ declare namespace EC2 {
      */
     TargetSubnet?: String;
     /**
-     *  The route type. 
+     * The route type.
      */
     Type?: String;
     /**
@@ -4633,7 +4641,7 @@ declare namespace EC2 {
      */
     Description?: String;
     /**
-     * The destination region to use in the PresignedUrl parameter of a snapshot copy operation. This parameter is only valid for specifying the destination region in a PresignedUrl parameter, where it is required. The snapshot copy is sent to the regional endpoint that you sent the HTTP request to (for example, ec2.us-east-1.amazonaws.com). With the AWS CLI, this is specified using the --region parameter or the default region in your AWS configuration file.
+     * The destination Region to use in the PresignedUrl parameter of a snapshot copy operation. This parameter is only valid for specifying the destination Region in a PresignedUrl parameter, where it is required. The snapshot copy is sent to the regional endpoint that you sent the HTTP request to (for example, ec2.us-east-1.amazonaws.com). With the AWS CLI, this is specified using the --region parameter or the default Region in your AWS configuration file.
      */
     DestinationRegion?: String;
     /**
@@ -4649,7 +4657,7 @@ declare namespace EC2 {
      */
     PresignedUrl?: String;
     /**
-     * The ID of the region that contains the snapshot to be copied.
+     * The ID of the Region that contains the snapshot to be copied.
      */
     SourceRegion: String;
     /**
@@ -4753,7 +4761,7 @@ declare namespace EC2 {
      */
     ClientCidrBlock: String;
     /**
-     * The ARN of the server certificate. For more information, see the AWS Certificate Manager User Guide .
+     * The ARN of the server certificate. For more information, see the AWS Certificate Manager User Guide.
      */
     ServerCertificateArn: String;
     /**
@@ -5007,7 +5015,7 @@ declare namespace EC2 {
      */
     ValidFrom?: DateTime;
     /**
-     * The end date and time of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). At this point, no new EC2 Fleet requests are placed or able to fulfill the request. The default end date is 7 days from the current date.
+     * The end date and time of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). At this point, no new EC2 Fleet requests are placed or able to fulfill the request. If no value is specified, the request remains until you cancel it.
      */
     ValidUntil?: DateTime;
     /**
@@ -5751,22 +5759,22 @@ declare namespace EC2 {
   }
   export interface CreateVolumePermission {
     /**
-     * The specific group that is to be added or removed from a volume's list of create volume permissions.
+     * The group to be added or removed. The possible value is all.
      */
     Group?: PermissionGroup;
     /**
-     * The specific AWS account ID that is to be added or removed from a volume's list of create volume permissions.
+     * The AWS account ID to be added or removed.
      */
     UserId?: String;
   }
   export type CreateVolumePermissionList = CreateVolumePermission[];
   export interface CreateVolumePermissionModifications {
     /**
-     * Adds a specific AWS account ID or group to a volume's list of create volume permissions.
+     * Adds the specified AWS account ID or group to the list.
      */
     Add?: CreateVolumePermissionList;
     /**
-     * Removes a specific AWS account ID or group from a volume's list of create volume permissions.
+     * Removes the specified AWS account ID or group from the list.
      */
     Remove?: CreateVolumePermissionList;
   }
@@ -5780,7 +5788,7 @@ declare namespace EC2 {
      */
     Encrypted?: Boolean;
     /**
-     * The number of I/O operations per second (IOPS) to provision for the volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000 IOPS for volumes in most regions. Maximum IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
+     * The number of I/O operations per second (IOPS) to provision for the volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000 IOPS for volumes in most Regions. Maximum IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. This parameter is valid only for Provisioned IOPS SSD (io1) volumes.
      */
     Iops?: Integer;
     /**
@@ -5796,7 +5804,7 @@ declare namespace EC2 {
      */
     SnapshotId?: String;
     /**
-     * The volume type. This can be gp2 for General Purpose SSD, io1 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for Magnetic volumes. Defaults: If no volume type is specified, the default is standard in us-east-1, eu-west-1, eu-central-1, us-west-2, us-west-1, sa-east-1, ap-northeast-1, ap-northeast-2, ap-southeast-1, ap-southeast-2, ap-south-1, us-gov-west-1, and cn-north-1. In all other regions, EBS defaults to gp2.
+     * The volume type. This can be gp2 for General Purpose SSD, io1 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for Magnetic volumes. Defaults: If no volume type is specified, the default is standard in us-east-1, eu-west-1, eu-central-1, us-west-2, us-west-1, sa-east-1, ap-northeast-1, ap-northeast-2, ap-southeast-1, ap-southeast-2, ap-south-1, us-gov-west-1, and cn-north-1. In all other Regions, EBS defaults to gp2.
      */
     VolumeType?: VolumeType;
     /**
@@ -5862,7 +5870,7 @@ declare namespace EC2 {
      */
     ServiceName: String;
     /**
-     * (Gateway endpoint) A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.
+     * A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.
      */
     PolicyDocument?: String;
     /**
@@ -7728,6 +7736,7 @@ declare namespace EC2 {
      */
     InstanceId: String;
   }
+  export type DescribeInstanceCreditSpecificationsMaxResults = number;
   export interface DescribeInstanceCreditSpecificationsRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -7744,7 +7753,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. This value can be between 5 and 1000. You cannot specify this parameter and the instance IDs parameter in the same call.
      */
-    MaxResults?: Integer;
+    MaxResults?: DescribeInstanceCreditSpecificationsMaxResults;
     /**
      * The token to retrieve the next page of results.
      */
@@ -7762,7 +7771,7 @@ declare namespace EC2 {
   }
   export interface DescribeInstanceStatusRequest {
     /**
-     * One or more filters.    availability-zone - The Availability Zone of the instance.    event.code - The code for the scheduled event (instance-reboot | system-reboot | system-maintenance | instance-retirement | instance-stop).    event.description - A description of the event.    event.not-after - The latest end time for the scheduled event (for example, 2014-09-15T17:15:20.000Z).    event.not-before - The earliest start time for the scheduled event (for example, 2014-09-15T17:15:20.000Z).    instance-state-code - The code for the instance state, as a 16-bit unsigned integer. The high byte is used for internal purposes and should be ignored. The low byte is set based on the state represented. The valid values are 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).    instance-state-name - The state of the instance (pending | running | shutting-down | terminated | stopping | stopped).    instance-status.reachability - Filters on instance status where the name is reachability (passed | failed | initializing | insufficient-data).    instance-status.status - The status of the instance (ok | impaired | initializing | insufficient-data | not-applicable).    system-status.reachability - Filters on system status where the name is reachability (passed | failed | initializing | insufficient-data).    system-status.status - The system status of the instance (ok | impaired | initializing | insufficient-data | not-applicable).  
+     * One or more filters.    availability-zone - The Availability Zone of the instance.    event.code - The code for the scheduled event (instance-reboot | system-reboot | system-maintenance | instance-retirement | instance-stop).    event.description - A description of the event.    event.instance-event-id - The ID of the event whose date and time you are modifying.    event.not-after - The latest end time for the scheduled event (for example, 2014-09-15T17:15:20.000Z).    event.not-before - The earliest start time for the scheduled event (for example, 2014-09-15T17:15:20.000Z).    event.not-before-deadline - The deadline for starting the event (for example, 2014-09-15T17:15:20.000Z).    instance-state-code - The code for the instance state, as a 16-bit unsigned integer. The high byte is used for internal purposes and should be ignored. The low byte is set based on the state represented. The valid values are 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).    instance-state-name - The state of the instance (pending | running | shutting-down | terminated | stopping | stopped).    instance-status.reachability - Filters on instance status where the name is reachability (passed | failed | initializing | insufficient-data).    instance-status.status - The status of the instance (ok | impaired | initializing | insufficient-data | not-applicable).    system-status.reachability - Filters on system status where the name is reachability (passed | failed | initializing | insufficient-data).    system-status.status - The system status of the instance (ok | impaired | initializing | insufficient-data | not-applicable).  
      */
     Filters?: FilterList;
     /**
@@ -8576,11 +8585,11 @@ declare namespace EC2 {
   }
   export interface DescribeSnapshotAttributeResult {
     /**
-     * A list of permissions for creating volumes from the snapshot.
+     * The users and groups that have the permissions for creating volumes from the snapshot.
      */
     CreateVolumePermissions?: CreateVolumePermissionList;
     /**
-     * A list of product codes.
+     * The product codes.
      */
     ProductCodes?: ProductCodeList;
     /**
@@ -8602,7 +8611,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
     /**
-     * Returns the snapshots owned by the specified owner. Multiple owners can be specified.
+     * Describes the snapshots owned by one or more owners.
      */
     OwnerIds?: OwnerStringList;
     /**
@@ -8610,7 +8619,7 @@ declare namespace EC2 {
      */
     RestorableByUserIds?: RestorableByStringList;
     /**
-     * One or more snapshot IDs. Default: Describes snapshots for which you have launch permissions.
+     * One or more snapshot IDs. Default: Describes the snapshots for which you have create volume permissions.
      */
     SnapshotIds?: SnapshotIdStringList;
     /**
@@ -9904,7 +9913,7 @@ declare namespace EC2 {
      */
     DeleteOnTermination?: Boolean;
     /**
-     * The number of I/O operations per second (IOPS) that the volume supports. For io1, this represents the number of IOPS that are provisioned for the volume. For gp2, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-16,000 IOPS for gp2 volumes and 100 to 64,000IOPS for io1 volumes in most Regions. Maximum io1IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Condition: This parameter is required for requests to create io1 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
+     * The number of I/O operations per second (IOPS) that the volume supports. For io1 volumes, this represents the number of IOPS that are provisioned for the volume. For gp2 volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-16,000 IOPS for gp2 volumes and 100 to 64,000IOPS for io1 volumes, in most Regions. The maximum IOPS for io1 of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. Condition: This parameter is required for requests to create io1 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
      */
     Iops?: Integer;
     /**
@@ -9920,7 +9929,7 @@ declare namespace EC2 {
      */
     VolumeType?: VolumeType;
     /**
-     * Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption.  If you are creating a volume from a snapshot, you cannot specify an encryption value. This is because only blank volumes can be encrypted on creation. If you are creating a snapshot from an existing EBS volume, you cannot specify an encryption value that differs from that of the EBS volume. We recommend that you omit the encryption value from the block device mappings when creating an image from an instance.
+     * Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. If you are creating a volume from a snapshot, you cannot specify an encryption value. This is because only blank volumes can be encrypted on creation. If you are creating a snapshot from an existing EBS volume, you cannot specify an encryption value that differs from that of the EBS volume. We recommend that you omit the encryption value from the block device mappings when creating an image from an instance.
      */
     Encrypted?: Boolean;
     /**
@@ -10142,7 +10151,7 @@ declare namespace EC2 {
      */
     EventDescription?: String;
     /**
-     * The event. The following are the error events:    iamFleetRoleInvalid - The Spot Fleet did not have the required permissions either to launch or terminate an instance.    launchSpecTemporarilyBlacklisted - The configuration is not valid and several attempts to launch instances have failed. For more information, see the description of the event.    spotFleetRequestConfigurationInvalid - The configuration is not valid. For more information, see the description of the event.    spotInstanceCountLimitExceeded - You've reached the limit on the number of Spot Instances that you can launch.   The following are the fleetRequestChange events:    active - The Spot Fleet has been validated and Amazon EC2 is attempting to maintain the target number of running Spot Instances.    cancelled - The Spot Fleet is canceled and has no running Spot Instances. The Spot Fleet will be deleted two days after its instances were terminated.    cancelled_running - The Spot Fleet is canceled and does not launch additional Spot Instances. Existing Spot Instances continue to run until they are interrupted or terminated.    cancelled_terminating - The Spot Fleet is canceled and its Spot Instances are terminating.    expired - The Spot Fleet request has expired. A subsequent event indicates that the instances were terminated, if the request was created with TerminateInstancesWithExpiration set.    modify_in_progress - A request to modify the Spot Fleet request was accepted and is in progress.    modify_successful - The Spot Fleet request was modified.    price_update - The price for a launch configuration was adjusted because it was too high. This change is permanent.    submitted - The Spot Fleet request is being evaluated and Amazon EC2 is preparing to launch the target number of Spot Instances.   The following are the instanceChange events:    launched - A request was fulfilled and a new instance was launched.    terminated - An instance was terminated by the user.   The following are the Information events:    launchSpecUnusable - The price in a launch specification is not valid because it is below the Spot price or the Spot price is above the On-Demand price.    fleetProgressHalted - The price in every launch specification is not valid. A launch specification might become valid if the Spot price changes.  
+     * The event. The following are the error events:    iamFleetRoleInvalid - The Spot Fleet did not have the required permissions either to launch or terminate an instance.    spotFleetRequestConfigurationInvalid - The configuration is not valid. For more information, see the description of the event.    spotInstanceCountLimitExceeded - You've reached the limit on the number of Spot Instances that you can launch.   The following are the fleetRequestChange events:    active - The Spot Fleet has been validated and Amazon EC2 is attempting to maintain the target number of running Spot Instances.    cancelled - The Spot Fleet is canceled and has no running Spot Instances. The Spot Fleet will be deleted two days after its instances were terminated.    cancelled_running - The Spot Fleet is canceled and does not launch additional Spot Instances. Existing Spot Instances continue to run until they are interrupted or terminated.    cancelled_terminating - The Spot Fleet is canceled and its Spot Instances are terminating.    expired - The Spot Fleet request has expired. A subsequent event indicates that the instances were terminated, if the request was created with TerminateInstancesWithExpiration set.    modify_in_progress - A request to modify the Spot Fleet request was accepted and is in progress.    modify_successful - The Spot Fleet request was modified.    price_update - The price for a launch configuration was adjusted because it was too high. This change is permanent.    submitted - The Spot Fleet request is being evaluated and Amazon EC2 is preparing to launch the target number of Spot Instances.   The following are the instanceChange events:    launched - A request was fulfilled and a new instance was launched.    terminated - An instance was terminated by the user.   The following are the Information events:    launchSpecTemporarilyBlacklisted - The configuration is not valid and several attempts to launch instances have failed. For more information, see the description of the event.    launchSpecUnusable - The price in a launch specification is not valid because it is below the Spot price or the Spot price is above the On-Demand price.    fleetProgressHalted - The price in every launch specification is not valid. A launch specification might become valid if the Spot price changes.  
      */
     EventSubType?: String;
     /**
@@ -11370,7 +11379,7 @@ declare namespace EC2 {
      */
     ClientVpnEndpointId: String;
     /**
-     * The client certificate revocation list file. For more information, see Generate a Client Certificate Revocation List in the AWS Client VPN Admin Guide.
+     * The client certificate revocation list file. For more information, see Generate a Client Certificate Revocation List in the AWS Client VPN Administrator Guide.
      */
     CertificateRevocationList: String;
     /**
@@ -12126,6 +12135,7 @@ declare namespace EC2 {
      */
     CpuCredits?: String;
   }
+  export type InstanceEventId = string;
   export interface InstanceExportDetails {
     /**
      * The ID of the resource being exported.
@@ -12352,7 +12362,7 @@ declare namespace EC2 {
   export type InstancePrivateIpAddressList = InstancePrivateIpAddress[];
   export interface InstanceState {
     /**
-     * The low byte represents the state. The high byte is used for internal purposes and should be ignored.    0 : pending     16 : running     32 : shutting-down     48 : terminated     64 : stopping     80 : stopped   
+     * The state of the instance as a 16-bit unsigned integer.  The high byte is all of the bits between 2^8 and (2^16)-1, which equals decimal values between 256 and 65,535. These numerical values are used for internal purposes and should be ignored. The low byte is all of the bits between 2^0 and (2^8)-1, which equals decimal values between 0 and 255.  The valid values for instance-state-code will all be in the range of the low byte and they are:    0 : pending     16 : running     32 : shutting-down     48 : terminated     64 : stopping     80 : stopped    You can ignore the high byte value by zeroing out all of the bits above 2^8 or 256 in decimal.
      */
     Code?: Integer;
     /**
@@ -12419,6 +12429,10 @@ declare namespace EC2 {
   export type InstanceStatusDetailsList = InstanceStatusDetails[];
   export interface InstanceStatusEvent {
     /**
+     * The ID of the event.
+     */
+    InstanceEventId?: InstanceEventId;
+    /**
      * The event code.
      */
     Code?: EventCode;
@@ -12434,6 +12448,10 @@ declare namespace EC2 {
      * The earliest scheduled start time for the event.
      */
     NotBefore?: DateTime;
+    /**
+     * The deadline for starting the event.
+     */
+    NotBeforeDeadline?: DateTime;
   }
   export type InstanceStatusEventList = InstanceStatusEvent[];
   export type InstanceStatusList = InstanceStatus[];
@@ -13623,6 +13641,27 @@ declare namespace EC2 {
      */
     UnsuccessfulInstanceCreditSpecifications?: UnsuccessfulInstanceCreditSpecificationSet;
   }
+  export interface ModifyInstanceEventStartTimeRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation. 
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the instance with the scheduled event.
+     */
+    InstanceId: String;
+    /**
+     * The ID of the event whose date and time you are modifying.
+     */
+    InstanceEventId: String;
+    /**
+     * The new date and time when the event will take place.
+     */
+    NotBefore: DateTime;
+  }
+  export interface ModifyInstanceEventStartTimeResult {
+    Event?: InstanceStatusEvent;
+  }
   export interface ModifyInstancePlacementRequest {
     /**
      * The affinity setting for the instance.
@@ -13925,7 +13964,7 @@ declare namespace EC2 {
      */
     ResetPolicy?: Boolean;
     /**
-     * (Gateway endpoint) A policy document to attach to the endpoint. The policy must be in valid JSON format.
+     * A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.
      */
     PolicyDocument?: String;
     /**
@@ -17479,7 +17518,7 @@ declare namespace EC2 {
      */
     ValidFrom?: DateTime;
     /**
-     * The end date and time of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). At this point, no new Spot Instance requests are placed or able to fulfill the request. The default end date is 7 days from the current date.
+     * The end date and time of the request, in UTC format (for example, YYYY-MM-DDTHH:MM:SSZ). At this point, no new Spot Instance requests are placed or able to fulfill the request. If no value is specified, the Spot Fleet request remains until you cancel it.
      */
     ValidUntil?: DateTime;
     /**
@@ -18800,7 +18839,7 @@ declare namespace EC2 {
      */
     VolumeId?: String;
     /**
-     * The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS SSD volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose SSD volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-16,000 IOPS for gp2 volumes and 100 to 64,000IOPS for io1 volumes in most regions. Maximum io1IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Condition: This parameter is required for requests to create io1 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
+     * The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS SSD volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose SSD volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-16,000 IOPS for gp2 volumes and 100 to 64,000IOPS for io1 volumes, in most Regions. The maximum IOPS for io1 of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. Condition: This parameter is required for requests to create io1 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
      */
     Iops?: Integer;
     /**

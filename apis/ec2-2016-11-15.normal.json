@@ -535,7 +535,7 @@
       "output": {
         "shape": "CopySnapshotResult"
       },
-      "documentation": "<p>Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the snapshot within the same region or from one region to another. You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs). The snapshot is copied to the regional endpoint that you send the HTTP request to.</p> <p>Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted, unless the <code>Encrypted</code> flag is specified during the snapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (AWS KMS) customer master key (CMK); however, you can specify a non-default CMK with the <code>KmsKeyId</code> parameter.</p> <p>To copy an encrypted snapshot that has been shared from another account, you must have permissions for the CMK used to encrypt the snapshot.</p> <p>Snapshots created by copying another snapshot have an arbitrary volume ID that should not be used for any purpose.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html\">Copying an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the snapshot within the same Region or from one Region to another. You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs). The snapshot is copied to the regional endpoint that you send the HTTP request to.</p> <p>Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain unencrypted, unless the <code>Encrypted</code> flag is specified during the snapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (AWS KMS) customer master key (CMK); however, you can specify a non-default CMK with the <code>KmsKeyId</code> parameter.</p> <p>To copy an encrypted snapshot that has been shared from another account, you must have permissions for the CMK used to encrypt the snapshot.</p> <p>Snapshots created by copying another snapshot have an arbitrary volume ID that should not be used for any purpose.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html\">Copying an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateCapacityReservation": {
       "name": "CreateCapacityReservation",
@@ -865,7 +865,7 @@
       "output": {
         "shape": "CreateReservedInstancesListingResult"
       },
-      "documentation": "<p>Creates a listing for Amazon EC2 Standard Reserved Instances to be sold in the Reserved Instance Marketplace. You can submit one Standard Reserved Instance listing at a time. To get a list of your Standard Reserved Instances, you can use the <a>DescribeReservedInstances</a> operation.</p> <note> <p>Only Standard Reserved Instances with a capacity reservation can be sold in the Reserved Instance Marketplace. Convertible Reserved Instances and Standard Reserved Instances with a regional benefit cannot be sold.</p> </note> <p>The Reserved Instance Marketplace matches sellers who want to resell Standard Reserved Instance capacity that they no longer need with buyers who want to purchase additional capacity. Reserved Instances bought and sold through the Reserved Instance Marketplace work like any other Reserved Instances.</p> <p>To sell your Standard Reserved Instances, you must first register as a seller in the Reserved Instance Marketplace. After completing the registration process, you can create a Reserved Instance Marketplace listing of some or all of your Standard Reserved Instances, and specify the upfront price to receive for them. Your Standard Reserved Instance listings then become available for purchase. To view the details of your Standard Reserved Instance listing, you can use the <a>DescribeReservedInstancesListings</a> operation.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Creates a listing for Amazon EC2 Standard Reserved Instances to be sold in the Reserved Instance Marketplace. You can submit one Standard Reserved Instance listing at a time. To get a list of your Standard Reserved Instances, you can use the <a>DescribeReservedInstances</a> operation.</p> <note> <p>Only Standard Reserved Instances can be sold in the Reserved Instance Marketplace. Convertible Reserved Instances cannot be sold.</p> </note> <p>The Reserved Instance Marketplace matches sellers who want to resell Standard Reserved Instance capacity that they no longer need with buyers who want to purchase additional capacity. Reserved Instances bought and sold through the Reserved Instance Marketplace work like any other Reserved Instances.</p> <p>To sell your Standard Reserved Instances, you must first register as a seller in the Reserved Instance Marketplace. After completing the registration process, you can create a Reserved Instance Marketplace listing of some or all of your Standard Reserved Instances, and specify the upfront price to receive for them. Your Standard Reserved Instance listings then become available for purchase. To view the details of your Standard Reserved Instance listing, you can use the <a>DescribeReservedInstancesListings</a> operation.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html\">Reserved Instance Marketplace</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateRoute": {
       "name": "CreateRoute",
@@ -2546,7 +2546,7 @@
       "output": {
         "shape": "DescribeSnapshotsResult"
       },
-      "documentation": "<p>Describes one or more of the EBS snapshots available to you. Available snapshots include public snapshots available for any AWS account to launch, private snapshots that you own, and private snapshots owned by another AWS account but for which you've been given explicit create volume permissions.</p> <p>The create volume permissions fall into the following categories:</p> <ul> <li> <p> <i>public</i>: The owner of the snapshot granted create volume permissions for the snapshot to the <code>all</code> group. All AWS accounts have create volume permissions for these snapshots.</p> </li> <li> <p> <i>explicit</i>: The owner of the snapshot granted create volume permissions to a specific AWS account.</p> </li> <li> <p> <i>implicit</i>: An AWS account has implicit create volume permissions for all snapshots it owns.</p> </li> </ul> <p>The list of snapshots returned can be modified by specifying snapshot IDs, snapshot owners, or AWS accounts with create volume permissions. If no options are specified, Amazon EC2 returns all snapshots for which you have create volume permissions.</p> <p>If you specify one or more snapshot IDs, only snapshots that have the specified IDs are returned. If you specify an invalid snapshot ID, an error is returned. If you specify a snapshot ID for which you do not have access, it is not included in the returned results.</p> <p>If you specify one or more snapshot owners using the <code>OwnerIds</code> option, only snapshots from the specified owners and for which you have access are returned. The results can include the AWS account IDs of the specified owners, <code>amazon</code> for snapshots owned by Amazon, or <code>self</code> for snapshots that you own.</p> <p>If you specify a list of restorable users, only snapshots with create snapshot permissions for those users are returned. You can specify AWS account IDs (if you own the snapshots), <code>self</code> for snapshots for which you own or have explicit permissions, or <code>all</code> for public snapshots.</p> <p>If you are describing a long list of snapshots, you can paginate the output to make the list more manageable. The <code>MaxResults</code> parameter sets the maximum number of results returned in a single page. If the list of results exceeds your <code>MaxResults</code> value, then that number of results is returned along with a <code>NextToken</code> value that can be passed to a subsequent <code>DescribeSnapshots</code> request to retrieve the remaining results.</p> <p>For more information about EBS snapshots, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html\">Amazon EBS Snapshots</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Describes one or more of the EBS snapshots available to you. Available snapshots include public snapshots available for use by any AWS account, private snapshots that you own, and private snapshots owned by another AWS account for which you've been given explicit create volume permissions.</p> <p>The create volume permissions fall into the following categories:</p> <ul> <li> <p> <i>public</i>: The owner of the snapshot granted create volume permissions for the snapshot to the <code>all</code> group. All AWS accounts have create volume permissions for these snapshots.</p> </li> <li> <p> <i>explicit</i>: The owner of the snapshot granted create volume permissions to a specific AWS account.</p> </li> <li> <p> <i>implicit</i>: An AWS account has implicit create volume permissions for all snapshots it owns.</p> </li> </ul> <p>The list of snapshots returned can be modified by specifying snapshot IDs, snapshot owners, or AWS accounts with create volume permissions. If no options are specified, Amazon EC2 returns all snapshots for which you have create volume permissions.</p> <p>If you specify one or more snapshot IDs, only snapshots that have the specified IDs are returned. If you specify an invalid snapshot ID, an error is returned. If you specify a snapshot ID for which you do not have access, it is not included in the returned results.</p> <p>If you specify one or more snapshot owners using the <code>OwnerIds</code> option, only snapshots from the specified owners and for which you have access are returned. The results can include the AWS account IDs of the specified owners, <code>amazon</code> for snapshots owned by Amazon, or <code>self</code> for snapshots that you own.</p> <p>If you specify a list of restorable users, only snapshots with create snapshot permissions for those users are returned. You can specify AWS account IDs (if you own the snapshots), <code>self</code> for snapshots for which you own or have explicit permissions, or <code>all</code> for public snapshots.</p> <p>If you are describing a long list of snapshots, you can paginate the output to make the list more manageable. The <code>MaxResults</code> parameter sets the maximum number of results returned in a single page. If the list of results exceeds your <code>MaxResults</code> value, then that number of results is returned along with a <code>NextToken</code> value that can be passed to a subsequent <code>DescribeSnapshots</code> request to retrieve the remaining results.</p> <p>For more information about EBS snapshots, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html\">Amazon EBS Snapshots</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "DescribeSpotDatafeedSubscription": {
       "name": "DescribeSpotDatafeedSubscription",
@@ -3631,6 +3631,20 @@
         "shape": "ModifyInstanceCreditSpecificationResult"
       },
       "documentation": "<p>Modifies the credit option for CPU usage on a running or stopped T2 or T3 instance. The credit options are <code>standard</code> and <code>unlimited</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html\">Burstable Performance Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
+    "ModifyInstanceEventStartTime": {
+      "name": "ModifyInstanceEventStartTime",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyInstanceEventStartTimeRequest"
+      },
+      "output": {
+        "shape": "ModifyInstanceEventStartTimeResult"
+      },
+      "documentation": "<p>Modifies the start time for a scheduled Amazon EC2 instance event.</p>"
     },
     "ModifyInstancePlacement": {
       "name": "ModifyInstancePlacement",
@@ -5288,12 +5302,12 @@
       "members": {
         "NetworkId": {
           "shape": "String",
-          "documentation": "<p> <b>The ID of the subnet.</b> </p>",
+          "documentation": "<p>The ID of the subnet.</p>",
           "locationName": "networkId"
         },
         "NetworkType": {
           "shape": "AssociatedNetworkType",
-          "documentation": "<p> <b>The target network type.</b> </p>",
+          "documentation": "<p>The target network type.</p>",
           "locationName": "networkType"
         }
       },
@@ -5572,7 +5586,7 @@
           "locationName": "status"
         }
       },
-      "documentation": "<p> <b>Information about an authorization rule.</b> </p>"
+      "documentation": "<p>Information about an authorization rule.</p>"
     },
     "AuthorizationRuleSet": {
       "type": "list",
@@ -6594,21 +6608,21 @@
       "members": {
         "ClientRootCertificateChain": {
           "shape": "String",
-          "documentation": "<p> <b>The ARN of the client certificate. </b> </p>",
+          "documentation": "<p>The ARN of the client certificate. </p>",
           "locationName": "clientRootCertificateChain"
         }
       },
-      "documentation": "<p> <b>Information about the client certificate used for authentication.</b> </p>"
+      "documentation": "<p>Information about the client certificate used for authentication.</p>"
     },
     "CertificateAuthenticationRequest": {
       "type": "structure",
       "members": {
         "ClientRootCertificateChainArn": {
           "shape": "String",
-          "documentation": "<p> <b>The ARN of the client certificate. The certificate must be signed by a certificate authority (CA) and it must be provisioned in AWS Certificate Manager (ACM).</b> </p>"
+          "documentation": "<p>The ARN of the client certificate. The certificate must be signed by a certificate authority (CA) and it must be provisioned in AWS Certificate Manager (ACM).</p>"
         }
       },
-      "documentation": "<p> <b>Information about the client certificate to be used for authentication.</b> </p>"
+      "documentation": "<p>Information about the client certificate to be used for authentication.</p>"
     },
     "CidrAuthorizationContext": {
       "type": "structure",
@@ -6797,7 +6811,7 @@
           "locationName": "mutualAuthentication"
         }
       },
-      "documentation": "<p>Describes the authentication methods used by a Client VPN endpoint. Client VPN supports Active Directory and mutual authentication. For more information, see <a href=\"vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication\">Authentication</a> in the <i>AWS Client VPN Admin Guide</i>.</p>"
+      "documentation": "<p>Describes the authentication methods used by a Client VPN endpoint. Client VPN supports Active Directory and mutual authentication. For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication\">Authentication</a> in the <i>AWS Client VPN Administrator Guide</i>.</p>"
     },
     "ClientVpnAuthenticationList": {
       "type": "list",
@@ -6822,7 +6836,7 @@
           "documentation": "<p>Information about the authentication certificates to be used, if applicable. You must provide this information if <b>Type</b> is <code>certificate-authentication</code>.</p>"
         }
       },
-      "documentation": "<p>Describes the authentication method to be used by a Client VPN endpoint. Client VPN supports Active Directory and mutual authentication. For more information, see <a href=\"vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication\">Authentication</a> in the <i>AWS Client VPN Admin Guide</i>.</p>"
+      "documentation": "<p>Describes the authentication method to be used by a Client VPN endpoint. Client VPN supports Active Directory and mutual authentication. For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication\">Authentication</a> in the <i>AWS Client VPN Administrator Guide</i>.</p>"
     },
     "ClientVpnAuthenticationRequestList": {
       "type": "list",
@@ -6872,7 +6886,7 @@
         },
         "Timestamp": {
           "shape": "String",
-          "documentation": "<p> <b>The current date and time.</b> </p>",
+          "documentation": "<p>The current date and time.</p>",
           "locationName": "timestamp"
         },
         "ConnectionId": {
@@ -6917,7 +6931,7 @@
         },
         "CommonName": {
           "shape": "String",
-          "documentation": "<p> <b>The common name associated with the client. This is either the name of the client certificate, or the Active Directory user name.</b> </p>",
+          "documentation": "<p>The common name associated with the client. This is either the name of the client certificate, or the Active Directory user name.</p>",
           "locationName": "commonName"
         },
         "Status": {
@@ -7020,7 +7034,7 @@
         },
         "TransportProtocol": {
           "shape": "TransportProtocol",
-          "documentation": "<p> <b>The transport protocol used by the Client VPN endpoint.</b> </p>",
+          "documentation": "<p>The transport protocol used by the Client VPN endpoint.</p>",
           "locationName": "transportProtocol"
         },
         "AssociatedTargetNetworks": {
@@ -7098,7 +7112,7 @@
         },
         "Type": {
           "shape": "String",
-          "documentation": "<p> <b>The route type.</b> </p>",
+          "documentation": "<p>The route type.</p>",
           "locationName": "type"
         },
         "Origin": {
@@ -7117,7 +7131,7 @@
           "locationName": "description"
         }
       },
-      "documentation": "<p> <b>Information about a Client VPN endpoint route.</b> </p>"
+      "documentation": "<p>Information about a Client VPN endpoint route.</p>"
     },
     "ClientVpnRouteSet": {
       "type": "list",
@@ -7468,7 +7482,7 @@
         },
         "DestinationRegion": {
           "shape": "String",
-          "documentation": "<p>The destination region to use in the <code>PresignedUrl</code> parameter of a snapshot copy operation. This parameter is only valid for specifying the destination region in a <code>PresignedUrl</code> parameter, where it is required.</p> <p>The snapshot copy is sent to the regional endpoint that you sent the HTTP request to (for example, <code>ec2.us-east-1.amazonaws.com</code>). With the AWS CLI, this is specified using the <code>--region</code> parameter or the default region in your AWS configuration file.</p>",
+          "documentation": "<p>The destination Region to use in the <code>PresignedUrl</code> parameter of a snapshot copy operation. This parameter is only valid for specifying the destination Region in a <code>PresignedUrl</code> parameter, where it is required.</p> <p>The snapshot copy is sent to the regional endpoint that you sent the HTTP request to (for example, <code>ec2.us-east-1.amazonaws.com</code>). With the AWS CLI, this is specified using the <code>--region</code> parameter or the default Region in your AWS configuration file.</p>",
           "locationName": "destinationRegion"
         },
         "Encrypted": {
@@ -7488,7 +7502,7 @@
         },
         "SourceRegion": {
           "shape": "String",
-          "documentation": "<p>The ID of the region that contains the snapshot to be copied.</p>"
+          "documentation": "<p>The ID of the Region that contains the snapshot to be copied.</p>"
         },
         "SourceSnapshotId": {
           "shape": "String",
@@ -7631,7 +7645,7 @@
         },
         "ServerCertificateArn": {
           "shape": "String",
-          "documentation": "<p>The ARN of the server certificate. For more information, see the <a href=\"acm/latest/userguide/acm-overview.html\">AWS Certificate Manager User Guide</a> .</p>"
+          "documentation": "<p>The ARN of the server certificate. For more information, see the <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/\">AWS Certificate Manager User Guide</a>.</p>"
         },
         "AuthenticationOptions": {
           "shape": "ClientVpnAuthenticationRequestList",
@@ -7998,7 +8012,7 @@
         },
         "ValidUntil": {
           "shape": "DateTime",
-          "documentation": "<p>The end date and time of the request, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z). At this point, no new EC2 Fleet requests are placed or able to fulfill the request. The default end date is 7 days from the current date.</p>"
+          "documentation": "<p>The end date and time of the request, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z). At this point, no new EC2 Fleet requests are placed or able to fulfill the request. If no value is specified, the request remains until you cancel it.</p>"
         },
         "ReplaceUnhealthyInstances": {
           "shape": "Boolean",
@@ -9088,16 +9102,16 @@
       "members": {
         "Group": {
           "shape": "PermissionGroup",
-          "documentation": "<p>The specific group that is to be added or removed from a volume's list of create volume permissions.</p>",
+          "documentation": "<p>The group to be added or removed. The possible value is <code>all</code>.</p>",
           "locationName": "group"
         },
         "UserId": {
           "shape": "String",
-          "documentation": "<p>The specific AWS account ID that is to be added or removed from a volume's list of create volume permissions.</p>",
+          "documentation": "<p>The AWS account ID to be added or removed.</p>",
           "locationName": "userId"
         }
       },
-      "documentation": "<p>Describes the user or group to be added or removed from the permissions for a volume.</p>"
+      "documentation": "<p>Describes the user or group to be added or removed from the list of create volume permissions for a volume.</p>"
     },
     "CreateVolumePermissionList": {
       "type": "list",
@@ -9111,14 +9125,14 @@
       "members": {
         "Add": {
           "shape": "CreateVolumePermissionList",
-          "documentation": "<p>Adds a specific AWS account ID or group to a volume's list of create volume permissions.</p>"
+          "documentation": "<p>Adds the specified AWS account ID or group to the list.</p>"
         },
         "Remove": {
           "shape": "CreateVolumePermissionList",
-          "documentation": "<p>Removes a specific AWS account ID or group from a volume's list of create volume permissions.</p>"
+          "documentation": "<p>Removes the specified AWS account ID or group from the list.</p>"
         }
       },
-      "documentation": "<p>Describes modifications to the permissions for a volume.</p>"
+      "documentation": "<p>Describes modifications to the list of create volume permissions for a volume.</p>"
     },
     "CreateVolumeRequest": {
       "type": "structure",
@@ -9137,7 +9151,7 @@
         },
         "Iops": {
           "shape": "Integer",
-          "documentation": "<p>The number of I/O operations per second (IOPS) to provision for the volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000 IOPS for volumes in most regions. Maximum IOPS of 64,000 is guaranteed only on <a href=\"AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>This parameter is valid only for Provisioned IOPS SSD (io1) volumes.</p>"
+          "documentation": "<p>The number of I/O operations per second (IOPS) to provision for the volume, with a maximum ratio of 50 IOPS/GiB. Range is 100 to 64,000 IOPS for volumes in most Regions. Maximum IOPS of 64,000 is guaranteed only on <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>This parameter is valid only for Provisioned IOPS SSD (io1) volumes.</p>"
         },
         "KmsKeyId": {
           "shape": "String",
@@ -9153,7 +9167,7 @@
         },
         "VolumeType": {
           "shape": "VolumeType",
-          "documentation": "<p>The volume type. This can be <code>gp2</code> for General Purpose SSD, <code>io1</code> for Provisioned IOPS SSD, <code>st1</code> for Throughput Optimized HDD, <code>sc1</code> for Cold HDD, or <code>standard</code> for Magnetic volumes.</p> <p>Defaults: If no volume type is specified, the default is <code>standard</code> in us-east-1, eu-west-1, eu-central-1, us-west-2, us-west-1, sa-east-1, ap-northeast-1, ap-northeast-2, ap-southeast-1, ap-southeast-2, ap-south-1, us-gov-west-1, and cn-north-1. In all other regions, EBS defaults to <code>gp2</code>.</p>"
+          "documentation": "<p>The volume type. This can be <code>gp2</code> for General Purpose SSD, <code>io1</code> for Provisioned IOPS SSD, <code>st1</code> for Throughput Optimized HDD, <code>sc1</code> for Cold HDD, or <code>standard</code> for Magnetic volumes.</p> <p>Defaults: If no volume type is specified, the default is <code>standard</code> in us-east-1, eu-west-1, eu-central-1, us-west-2, us-west-1, sa-east-1, ap-northeast-1, ap-northeast-2, ap-southeast-1, ap-southeast-2, ap-south-1, us-gov-west-1, and cn-north-1. In all other Regions, EBS defaults to <code>gp2</code>.</p>"
         },
         "DryRun": {
           "shape": "Boolean",
@@ -9241,7 +9255,7 @@
         },
         "PolicyDocument": {
           "shape": "String",
-          "documentation": "<p>(Gateway endpoint) A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.</p>"
+          "documentation": "<p>A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.</p>"
         },
         "RouteTableIds": {
           "shape": "ValueStringList",
@@ -12111,6 +12125,11 @@
         }
       }
     },
+    "DescribeInstanceCreditSpecificationsMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 5
+    },
     "DescribeInstanceCreditSpecificationsRequest": {
       "type": "structure",
       "members": {
@@ -12129,7 +12148,7 @@
           "locationName": "InstanceId"
         },
         "MaxResults": {
-          "shape": "Integer",
+          "shape": "DescribeInstanceCreditSpecificationsMaxResults",
           "documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 5 and 1000. You cannot specify this parameter and the instance IDs parameter in the same call.</p>"
         },
         "NextToken": {
@@ -12158,7 +12177,7 @@
       "members": {
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>availability-zone</code> - The Availability Zone of the instance.</p> </li> <li> <p> <code>event.code</code> - The code for the scheduled event (<code>instance-reboot</code> | <code>system-reboot</code> | <code>system-maintenance</code> | <code>instance-retirement</code> | <code>instance-stop</code>).</p> </li> <li> <p> <code>event.description</code> - A description of the event.</p> </li> <li> <p> <code>event.not-after</code> - The latest end time for the scheduled event (for example, <code>2014-09-15T17:15:20.000Z</code>).</p> </li> <li> <p> <code>event.not-before</code> - The earliest start time for the scheduled event (for example, <code>2014-09-15T17:15:20.000Z</code>).</p> </li> <li> <p> <code>instance-state-code</code> - The code for the instance state, as a 16-bit unsigned integer. The high byte is used for internal purposes and should be ignored. The low byte is set based on the state represented. The valid values are 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).</p> </li> <li> <p> <code>instance-state-name</code> - The state of the instance (<code>pending</code> | <code>running</code> | <code>shutting-down</code> | <code>terminated</code> | <code>stopping</code> | <code>stopped</code>).</p> </li> <li> <p> <code>instance-status.reachability</code> - Filters on instance status where the name is <code>reachability</code> (<code>passed</code> | <code>failed</code> | <code>initializing</code> | <code>insufficient-data</code>).</p> </li> <li> <p> <code>instance-status.status</code> - The status of the instance (<code>ok</code> | <code>impaired</code> | <code>initializing</code> | <code>insufficient-data</code> | <code>not-applicable</code>).</p> </li> <li> <p> <code>system-status.reachability</code> - Filters on system status where the name is <code>reachability</code> (<code>passed</code> | <code>failed</code> | <code>initializing</code> | <code>insufficient-data</code>).</p> </li> <li> <p> <code>system-status.status</code> - The system status of the instance (<code>ok</code> | <code>impaired</code> | <code>initializing</code> | <code>insufficient-data</code> | <code>not-applicable</code>).</p> </li> </ul>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>availability-zone</code> - The Availability Zone of the instance.</p> </li> <li> <p> <code>event.code</code> - The code for the scheduled event (<code>instance-reboot</code> | <code>system-reboot</code> | <code>system-maintenance</code> | <code>instance-retirement</code> | <code>instance-stop</code>).</p> </li> <li> <p> <code>event.description</code> - A description of the event.</p> </li> <li> <p> <code>event.instance-event-id</code> - The ID of the event whose date and time you are modifying.</p> </li> <li> <p> <code>event.not-after</code> - The latest end time for the scheduled event (for example, <code>2014-09-15T17:15:20.000Z</code>).</p> </li> <li> <p> <code>event.not-before</code> - The earliest start time for the scheduled event (for example, <code>2014-09-15T17:15:20.000Z</code>).</p> </li> <li> <p> <code>event.not-before-deadline</code> - The deadline for starting the event (for example, <code>2014-09-15T17:15:20.000Z</code>).</p> </li> <li> <p> <code>instance-state-code</code> - The code for the instance state, as a 16-bit unsigned integer. The high byte is used for internal purposes and should be ignored. The low byte is set based on the state represented. The valid values are 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).</p> </li> <li> <p> <code>instance-state-name</code> - The state of the instance (<code>pending</code> | <code>running</code> | <code>shutting-down</code> | <code>terminated</code> | <code>stopping</code> | <code>stopped</code>).</p> </li> <li> <p> <code>instance-status.reachability</code> - Filters on instance status where the name is <code>reachability</code> (<code>passed</code> | <code>failed</code> | <code>initializing</code> | <code>insufficient-data</code>).</p> </li> <li> <p> <code>instance-status.status</code> - The status of the instance (<code>ok</code> | <code>impaired</code> | <code>initializing</code> | <code>insufficient-data</code> | <code>not-applicable</code>).</p> </li> <li> <p> <code>system-status.reachability</code> - Filters on system status where the name is <code>reachability</code> (<code>passed</code> | <code>failed</code> | <code>initializing</code> | <code>insufficient-data</code>).</p> </li> <li> <p> <code>system-status.status</code> - The system status of the instance (<code>ok</code> | <code>impaired</code> | <code>initializing</code> | <code>insufficient-data</code> | <code>not-applicable</code>).</p> </li> </ul>",
           "locationName": "Filter"
         },
         "InstanceIds": {
@@ -13287,12 +13306,12 @@
       "members": {
         "CreateVolumePermissions": {
           "shape": "CreateVolumePermissionList",
-          "documentation": "<p>A list of permissions for creating volumes from the snapshot.</p>",
+          "documentation": "<p>The users and groups that have the permissions for creating volumes from the snapshot.</p>",
           "locationName": "createVolumePermission"
         },
         "ProductCodes": {
           "shape": "ProductCodeList",
-          "documentation": "<p>A list of product codes.</p>",
+          "documentation": "<p>The product codes.</p>",
           "locationName": "productCodes"
         },
         "SnapshotId": {
@@ -13321,7 +13340,7 @@
         },
         "OwnerIds": {
           "shape": "OwnerStringList",
-          "documentation": "<p>Returns the snapshots owned by the specified owner. Multiple owners can be specified.</p>",
+          "documentation": "<p>Describes the snapshots owned by one or more owners.</p>",
           "locationName": "Owner"
         },
         "RestorableByUserIds": {
@@ -13331,7 +13350,7 @@
         },
         "SnapshotIds": {
           "shape": "SnapshotIdStringList",
-          "documentation": "<p>One or more snapshot IDs.</p> <p>Default: Describes snapshots for which you have launch permissions.</p>",
+          "documentation": "<p>One or more snapshot IDs.</p> <p>Default: Describes the snapshots for which you have create volume permissions.</p>",
           "locationName": "SnapshotId"
         },
         "DryRun": {
@@ -15290,7 +15309,7 @@
         },
         "Iops": {
           "shape": "Integer",
-          "documentation": "<p>The number of I/O operations per second (IOPS) that the volume supports. For <code>io1</code>, this represents the number of IOPS that are provisioned for the volume. For <code>gp2</code>, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraints: Range is 100-16,000 IOPS for <code>gp2</code> volumes and 100 to 64,000IOPS for <code>io1</code> volumes in most Regions. Maximum <code>io1</code>IOPS of 64,000 is guaranteed only on <a href=\"AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>",
+          "documentation": "<p>The number of I/O operations per second (IOPS) that the volume supports. For <code>io1</code> volumes, this represents the number of IOPS that are provisioned for the volume. For <code>gp2</code> volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraints: Range is 100-16,000 IOPS for <code>gp2</code> volumes and 100 to 64,000IOPS for <code>io1</code> volumes, in most Regions. The maximum IOPS for <code>io1</code> of 64,000 is guaranteed only on <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>",
           "locationName": "iops"
         },
         "SnapshotId": {
@@ -15310,7 +15329,7 @@
         },
         "Encrypted": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. </p> <p>If you are creating a volume from a snapshot, you cannot specify an encryption value. This is because only blank volumes can be encrypted on creation. If you are creating a snapshot from an existing EBS volume, you cannot specify an encryption value that differs from that of the EBS volume. We recommend that you omit the encryption value from the block device mappings when creating an image from an instance.</p>",
+          "documentation": "<p>Indicates whether the EBS volume is encrypted. Encrypted volumes can only be attached to instances that support Amazon EBS encryption.</p> <p>If you are creating a volume from a snapshot, you cannot specify an encryption value. This is because only blank volumes can be encrypted on creation. If you are creating a snapshot from an existing EBS volume, you cannot specify an encryption value that differs from that of the EBS volume. We recommend that you omit the encryption value from the block device mappings when creating an image from an instance.</p>",
           "locationName": "encrypted"
         },
         "KmsKeyId": {
@@ -15749,7 +15768,7 @@
         },
         "EventSubType": {
           "shape": "String",
-          "documentation": "<p>The event.</p> <p>The following are the <code>error</code> events:</p> <ul> <li> <p> <code>iamFleetRoleInvalid</code> - The Spot Fleet did not have the required permissions either to launch or terminate an instance.</p> </li> <li> <p> <code>launchSpecTemporarilyBlacklisted</code> - The configuration is not valid and several attempts to launch instances have failed. For more information, see the description of the event.</p> </li> <li> <p> <code>spotFleetRequestConfigurationInvalid</code> - The configuration is not valid. For more information, see the description of the event.</p> </li> <li> <p> <code>spotInstanceCountLimitExceeded</code> - You've reached the limit on the number of Spot Instances that you can launch.</p> </li> </ul> <p>The following are the <code>fleetRequestChange</code> events:</p> <ul> <li> <p> <code>active</code> - The Spot Fleet has been validated and Amazon EC2 is attempting to maintain the target number of running Spot Instances.</p> </li> <li> <p> <code>cancelled</code> - The Spot Fleet is canceled and has no running Spot Instances. The Spot Fleet will be deleted two days after its instances were terminated.</p> </li> <li> <p> <code>cancelled_running</code> - The Spot Fleet is canceled and does not launch additional Spot Instances. Existing Spot Instances continue to run until they are interrupted or terminated.</p> </li> <li> <p> <code>cancelled_terminating</code> - The Spot Fleet is canceled and its Spot Instances are terminating.</p> </li> <li> <p> <code>expired</code> - The Spot Fleet request has expired. A subsequent event indicates that the instances were terminated, if the request was created with <code>TerminateInstancesWithExpiration</code> set.</p> </li> <li> <p> <code>modify_in_progress</code> - A request to modify the Spot Fleet request was accepted and is in progress.</p> </li> <li> <p> <code>modify_successful</code> - The Spot Fleet request was modified.</p> </li> <li> <p> <code>price_update</code> - The price for a launch configuration was adjusted because it was too high. This change is permanent.</p> </li> <li> <p> <code>submitted</code> - The Spot Fleet request is being evaluated and Amazon EC2 is preparing to launch the target number of Spot Instances.</p> </li> </ul> <p>The following are the <code>instanceChange</code> events:</p> <ul> <li> <p> <code>launched</code> - A request was fulfilled and a new instance was launched.</p> </li> <li> <p> <code>terminated</code> - An instance was terminated by the user.</p> </li> </ul> <p>The following are the <code>Information</code> events:</p> <ul> <li> <p> <code>launchSpecUnusable</code> - The price in a launch specification is not valid because it is below the Spot price or the Spot price is above the On-Demand price.</p> </li> <li> <p> <code>fleetProgressHalted</code> - The price in every launch specification is not valid. A launch specification might become valid if the Spot price changes.</p> </li> </ul>",
+          "documentation": "<p>The event.</p> <p>The following are the <code>error</code> events:</p> <ul> <li> <p> <code>iamFleetRoleInvalid</code> - The Spot Fleet did not have the required permissions either to launch or terminate an instance.</p> </li> <li> <p> <code>spotFleetRequestConfigurationInvalid</code> - The configuration is not valid. For more information, see the description of the event.</p> </li> <li> <p> <code>spotInstanceCountLimitExceeded</code> - You've reached the limit on the number of Spot Instances that you can launch.</p> </li> </ul> <p>The following are the <code>fleetRequestChange</code> events:</p> <ul> <li> <p> <code>active</code> - The Spot Fleet has been validated and Amazon EC2 is attempting to maintain the target number of running Spot Instances.</p> </li> <li> <p> <code>cancelled</code> - The Spot Fleet is canceled and has no running Spot Instances. The Spot Fleet will be deleted two days after its instances were terminated.</p> </li> <li> <p> <code>cancelled_running</code> - The Spot Fleet is canceled and does not launch additional Spot Instances. Existing Spot Instances continue to run until they are interrupted or terminated.</p> </li> <li> <p> <code>cancelled_terminating</code> - The Spot Fleet is canceled and its Spot Instances are terminating.</p> </li> <li> <p> <code>expired</code> - The Spot Fleet request has expired. A subsequent event indicates that the instances were terminated, if the request was created with <code>TerminateInstancesWithExpiration</code> set.</p> </li> <li> <p> <code>modify_in_progress</code> - A request to modify the Spot Fleet request was accepted and is in progress.</p> </li> <li> <p> <code>modify_successful</code> - The Spot Fleet request was modified.</p> </li> <li> <p> <code>price_update</code> - The price for a launch configuration was adjusted because it was too high. This change is permanent.</p> </li> <li> <p> <code>submitted</code> - The Spot Fleet request is being evaluated and Amazon EC2 is preparing to launch the target number of Spot Instances.</p> </li> </ul> <p>The following are the <code>instanceChange</code> events:</p> <ul> <li> <p> <code>launched</code> - A request was fulfilled and a new instance was launched.</p> </li> <li> <p> <code>terminated</code> - An instance was terminated by the user.</p> </li> </ul> <p>The following are the <code>Information</code> events:</p> <ul> <li> <p> <code>launchSpecTemporarilyBlacklisted</code> - The configuration is not valid and several attempts to launch instances have failed. For more information, see the description of the event.</p> </li> <li> <p> <code>launchSpecUnusable</code> - The price in a launch specification is not valid because it is below the Spot price or the Spot price is above the On-Demand price.</p> </li> <li> <p> <code>fleetProgressHalted</code> - The price in every launch specification is not valid. A launch specification might become valid if the Spot price changes.</p> </li> </ul>",
           "locationName": "eventSubType"
         },
         "InstanceId": {
@@ -17778,7 +17797,7 @@
         },
         "CertificateRevocationList": {
           "shape": "String",
-          "documentation": "<p>The client certificate revocation list file. For more information, see <a href=\"vpn/latest/clientvpn-admin/cvpn-working-certificates.html#cvpn-working-certificates-generate\">Generate a Client Certificate Revocation List</a> in the <i>AWS Client VPN Admin Guide</i>.</p>"
+          "documentation": "<p>The client certificate revocation list file. For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-working-certificates.html#cvpn-working-certificates-generate\">Generate a Client Certificate Revocation List</a> in the <i>AWS Client VPN Administrator Guide</i>.</p>"
         },
         "DryRun": {
           "shape": "Boolean",
@@ -18866,6 +18885,9 @@
       },
       "documentation": "<p>Describes the credit option for CPU usage of a T2 or T3 instance.</p>"
     },
+    "InstanceEventId": {
+      "type": "string"
+    },
     "InstanceExportDetails": {
       "type": "structure",
       "members": {
@@ -19274,7 +19296,7 @@
       "members": {
         "Code": {
           "shape": "Integer",
-          "documentation": "<p>The low byte represents the state. The high byte is used for internal purposes and should be ignored.</p> <ul> <li> <p> <code>0</code> : <code>pending</code> </p> </li> <li> <p> <code>16</code> : <code>running</code> </p> </li> <li> <p> <code>32</code> : <code>shutting-down</code> </p> </li> <li> <p> <code>48</code> : <code>terminated</code> </p> </li> <li> <p> <code>64</code> : <code>stopping</code> </p> </li> <li> <p> <code>80</code> : <code>stopped</code> </p> </li> </ul>",
+          "documentation": "<p>The state of the instance as a 16-bit unsigned integer. </p> <p>The high byte is all of the bits between 2^8 and (2^16)-1, which equals decimal values between 256 and 65,535. These numerical values are used for internal purposes and should be ignored.</p> <p>The low byte is all of the bits between 2^0 and (2^8)-1, which equals decimal values between 0 and 255. </p> <p>The valid values for instance-state-code will all be in the range of the low byte and they are:</p> <ul> <li> <p> <code>0</code> : <code>pending</code> </p> </li> <li> <p> <code>16</code> : <code>running</code> </p> </li> <li> <p> <code>32</code> : <code>shutting-down</code> </p> </li> <li> <p> <code>48</code> : <code>terminated</code> </p> </li> <li> <p> <code>64</code> : <code>stopping</code> </p> </li> <li> <p> <code>80</code> : <code>stopped</code> </p> </li> </ul> <p>You can ignore the high byte value by zeroing out all of the bits above 2^8 or 256 in decimal.</p>",
           "locationName": "code"
         },
         "Name": {
@@ -19391,6 +19413,11 @@
     "InstanceStatusEvent": {
       "type": "structure",
       "members": {
+        "InstanceEventId": {
+          "shape": "InstanceEventId",
+          "documentation": "<p>The ID of the event.</p>",
+          "locationName": "instanceEventId"
+        },
         "Code": {
           "shape": "EventCode",
           "documentation": "<p>The event code.</p>",
@@ -19410,6 +19437,11 @@
           "shape": "DateTime",
           "documentation": "<p>The earliest scheduled start time for the event.</p>",
           "locationName": "notBefore"
+        },
+        "NotBeforeDeadline": {
+          "shape": "DateTime",
+          "documentation": "<p>The deadline for starting the event.</p>",
+          "locationName": "notBeforeDeadline"
         }
       },
       "documentation": "<p>Describes a scheduled event for an instance.</p>"
@@ -21516,6 +21548,41 @@
         }
       }
     },
+    "ModifyInstanceEventStartTimeRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "InstanceEventId",
+        "NotBefore"
+      ],
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation.</code> </p>"
+        },
+        "InstanceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the instance with the scheduled event.</p>"
+        },
+        "InstanceEventId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the event whose date and time you are modifying.</p>"
+        },
+        "NotBefore": {
+          "shape": "DateTime",
+          "documentation": "<p>The new date and time when the event will take place.</p>"
+        }
+      }
+    },
+    "ModifyInstanceEventStartTimeResult": {
+      "type": "structure",
+      "members": {
+        "Event": {
+          "shape": "InstanceStatusEvent",
+          "locationName": "event"
+        }
+      }
+    },
     "ModifyInstancePlacementRequest": {
       "type": "structure",
       "required": [
@@ -21956,7 +22023,7 @@
         },
         "PolicyDocument": {
           "shape": "String",
-          "documentation": "<p>(Gateway endpoint) A policy document to attach to the endpoint. The policy must be in valid JSON format.</p>"
+          "documentation": "<p>A policy to attach to the endpoint that controls access to the service. The policy must be in valid JSON format. If this parameter is not specified, we attach a default policy that allows full access to the service.</p>"
         },
         "AddRouteTableIds": {
           "shape": "ValueStringList",
@@ -27614,7 +27681,7 @@
         },
         "ValidUntil": {
           "shape": "DateTime",
-          "documentation": "<p>The end date and time of the request, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z). At this point, no new Spot Instance requests are placed or able to fulfill the request. The default end date is 7 days from the current date.</p>",
+          "documentation": "<p>The end date and time of the request, in UTC format (for example, <i>YYYY</i>-<i>MM</i>-<i>DD</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>Z). At this point, no new Spot Instance requests are placed or able to fulfill the request. If no value is specified, the Spot Fleet request remains until you cancel it.</p>",
           "locationName": "validUntil"
         },
         "ReplaceUnhealthyInstances": {
@@ -29928,7 +29995,7 @@
         },
         "Iops": {
           "shape": "Integer",
-          "documentation": "<p>The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS SSD volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose SSD volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information about General Purpose SSD baseline performance, I/O credits, and bursting, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraints: Range is 100-16,000 IOPS for <code>gp2</code> volumes and 100 to 64,000IOPS for <code>io1</code> volumes in most regions. Maximum <code>io1</code>IOPS of 64,000 is guaranteed only on <a href=\"AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>",
+          "documentation": "<p>The number of I/O operations per second (IOPS) that the volume supports. For Provisioned IOPS SSD volumes, this represents the number of IOPS that are provisioned for the volume. For General Purpose SSD volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS Volume Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>Constraints: Range is 100-16,000 IOPS for <code>gp2</code> volumes and 100 to 64,000IOPS for <code>io1</code> volumes, in most Regions. The maximum IOPS for <code>io1</code> of 64,000 is guaranteed only on <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Nitro-based instances</a>. Other instance families guarantee performance up to 32,000 IOPS.</p> <p>Condition: This parameter is required for requests to create <code>io1</code> volumes; it is not used in requests to create <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>",
           "locationName": "iops"
         },
         "Tags": {

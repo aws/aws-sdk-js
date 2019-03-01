@@ -103,7 +103,7 @@ declare namespace AutoScalingPlans {
      */
     Namespace: MetricNamespace;
     /**
-     * The dimensions of the metric.
+     * The dimensions of the metric. Conditional: If you published your metric with dimensions, you must specify the same dimensions in your customized load metric specification.
      */
     Dimensions?: MetricDimensions;
     /**
@@ -125,7 +125,7 @@ declare namespace AutoScalingPlans {
      */
     Namespace: MetricNamespace;
     /**
-     * The dimensions of the metric.
+     * The dimensions of the metric. Conditional: If you published your metric with dimensions, you must specify the same dimensions in your customized scaling metric specification.
      */
     Dimensions?: MetricDimensions;
     /**
@@ -322,7 +322,7 @@ declare namespace AutoScalingPlans {
      */
     ResourceId: ResourceIdMaxLen1600;
     /**
-     * The scalable dimension associated with the resource.    autoscaling:autoScalingGroup:DesiredCapacity - The desired capacity of an Auto Scaling group.    ecs:service:DesiredCount - The desired task count of an ECS service.    ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet request.    dynamodb:table:ReadCapacityUnits - The provisioned read capacity for a DynamoDB table.    dynamodb:table:WriteCapacityUnits - The provisioned write capacity for a DynamoDB table.    dynamodb:index:ReadCapacityUnits - The provisioned read capacity for a DynamoDB global secondary index.    dynamodb:index:WriteCapacityUnits - The provisioned write capacity for a DynamoDB global secondary index.    rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible edition.  
+     * The scalable dimension associated with the resource.    autoscaling:autoScalingGroup:DesiredCapacity - The desired capacity of an Auto Scaling group.    ecs:service:DesiredCount - The desired task count of an ECS service.    ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet request.    dynamodb:table:ReadCapacityUnits - The provisioned read capacity for a DynamoDB table.    dynamodb:table:WriteCapacityUnits - The provisioned write capacity for a DynamoDB table.    dynamodb:index:ReadCapacityUnits - The provisioned read capacity for a DynamoDB global secondary index.    dynamodb:index:WriteCapacityUnits - The provisioned write capacity for a DynamoDB global secondary index.    rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible edition and Aurora PostgreSQL-compatible edition.  
      */
     ScalableDimension: ScalableDimension;
     /**
@@ -426,7 +426,7 @@ declare namespace AutoScalingPlans {
      */
     ResourceId: ResourceIdMaxLen1600;
     /**
-     * The scalable dimension for the resource.    autoscaling:autoScalingGroup:DesiredCapacity - The desired capacity of an Auto Scaling group.    ecs:service:DesiredCount - The desired task count of an ECS service.    ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet request.    dynamodb:table:ReadCapacityUnits - The provisioned read capacity for a DynamoDB table.    dynamodb:table:WriteCapacityUnits - The provisioned write capacity for a DynamoDB table.    dynamodb:index:ReadCapacityUnits - The provisioned read capacity for a DynamoDB global secondary index.    dynamodb:index:WriteCapacityUnits - The provisioned write capacity for a DynamoDB global secondary index.    rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible edition.  
+     * The scalable dimension for the resource.    autoscaling:autoScalingGroup:DesiredCapacity - The desired capacity of an Auto Scaling group.    ecs:service:DesiredCount - The desired task count of an ECS service.    ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet request.    dynamodb:table:ReadCapacityUnits - The provisioned read capacity for a DynamoDB table.    dynamodb:table:WriteCapacityUnits - The provisioned write capacity for a DynamoDB table.    dynamodb:index:ReadCapacityUnits - The provisioned read capacity for a DynamoDB global secondary index.    dynamodb:index:WriteCapacityUnits - The provisioned write capacity for a DynamoDB global secondary index.    rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible edition and Aurora PostgreSQL-compatible edition.  
      */
     ScalableDimension: ScalableDimension;
     /**
@@ -457,7 +457,7 @@ declare namespace AutoScalingPlans {
      */
     PolicyType: PolicyType;
     /**
-     * The target tracking scaling policy. 
+     * The target tracking scaling policy. Includes support for predefined or customized metrics.
      */
     TargetTrackingConfiguration?: TargetTrackingConfiguration;
   }
@@ -479,11 +479,11 @@ declare namespace AutoScalingPlans {
   export type TagValues = XmlStringMaxLen256[];
   export interface TargetTrackingConfiguration {
     /**
-     * A predefined metric.
+     * A predefined metric. You can specify either a predefined metric or a customized metric.
      */
     PredefinedScalingMetricSpecification?: PredefinedScalingMetricSpecification;
     /**
-     * A customized metric.
+     * A customized metric. You can specify either a predefined metric or a customized metric. 
      */
     CustomizedScalingMetricSpecification?: CustomizedScalingMetricSpecification;
     /**
