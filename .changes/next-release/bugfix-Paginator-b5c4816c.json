@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Paginator",
-  "description": "fix the issue where paginator keys are ignored in GET requests"
-}

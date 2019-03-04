@@ -296,7 +296,7 @@
       });
 
       describe('body', function() {
-        ['HEAD', 'DELETE'].forEach(function(method) {
+        ['GET', 'HEAD', 'DELETE'].forEach(function(method) {
           it('does not populate a body on a ' + method + ' request', function() {
             request.params = {
               Data: 'abc'
