@@ -1831,6 +1831,28 @@
       ],
       "documentation": "<p>Retrieves the patch baseline that should be used for the specified patch group.</p>"
     },
+    "GetServiceSetting": {
+      "name": "GetServiceSetting",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetServiceSettingRequest"
+      },
+      "output": {
+        "shape": "GetServiceSettingResult"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "ServiceSettingNotFound"
+        }
+      ],
+      "documentation": "<p> <code>ServiceSetting</code> is an account-level setting for an AWS service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an AWS service charges money to the account based on feature or service usage, then the AWS service team might create a default setting of \"false\". This means the user can't use this feature unless they change the setting to \"true\" and intentionally opt in for a paid feature.</p> <p>Services map a <code>SettingId</code> object to a setting value. AWS services teams define the default value for a <code>SettingId</code>. You can't create a new <code>SettingId</code>, but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code> permission for the setting. Use the <a>UpdateServiceSetting</a> API action to change the default setting. Or use the <a>ResetServiceSetting</a> to change the value back to the original value defined by the AWS service team.</p> <p>Query the current service setting for the account. </p>"
+    },
     "LabelParameterVersion": {
       "name": "LabelParameterVersion",
       "http": {
@@ -2492,6 +2514,31 @@
       ],
       "documentation": "<p>Removes all tags from the specified resource.</p>"
     },
+    "ResetServiceSetting": {
+      "name": "ResetServiceSetting",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ResetServiceSettingRequest"
+      },
+      "output": {
+        "shape": "ResetServiceSettingResult"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "ServiceSettingNotFound"
+        },
+        {
+          "shape": "TooManyUpdates"
+        }
+      ],
+      "documentation": "<p> <code>ServiceSetting</code> is an account-level setting for an AWS service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an AWS service charges money to the account based on feature or service usage, then the AWS service team might create a default setting of \"false\". This means the user can't use this feature unless they change the setting to \"true\" and intentionally opt in for a paid feature.</p> <p>Services map a <code>SettingId</code> object to a setting value. AWS services teams define the default value for a <code>SettingId</code>. You can't create a new <code>SettingId</code>, but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code> permission for the setting. Use the <a>GetServiceSetting</a> API action to view the current value. Use the <a>UpdateServiceSetting</a> API action to change the default setting. </p> <p>Reset the service setting for the account to the default value as provisioned by the AWS service team. </p>"
+    },
     "ResumeSession": {
       "name": "ResumeSession",
       "http": {
@@ -2991,6 +3038,31 @@
         }
       ],
       "documentation": "<p>Modifies an existing patch baseline. Fields not specified in the request are left unchanged.</p> <note> <p>For information about valid key and value pairs in <code>PatchFilters</code> for each supported operating system type, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/APIReference/API_PatchFilter.html\">PatchFilter</a>.</p> </note>"
+    },
+    "UpdateServiceSetting": {
+      "name": "UpdateServiceSetting",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateServiceSettingRequest"
+      },
+      "output": {
+        "shape": "UpdateServiceSettingResult"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "ServiceSettingNotFound"
+        },
+        {
+          "shape": "TooManyUpdates"
+        }
+      ],
+      "documentation": "<p> <code>ServiceSetting</code> is an account-level setting for an AWS service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an AWS service charges money to the account based on feature or service usage, then the AWS service team might create a default setting of \"false\". This means the user can't use this feature unless they change the setting to \"true\" and intentionally opt in for a paid feature.</p> <p>Services map a <code>SettingId</code> object to a setting value. AWS services teams define the default value for a <code>SettingId</code>. You can't create a new <code>SettingId</code>, but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code> permission for the setting. Use the <a>GetServiceSetting</a> API action to view the current value. Or, use the <a>ResetServiceSetting</a> to change the value back to the original value defined by the AWS service team.</p> <p>Update the service setting for the account. </p>"
     }
   },
   "shapes": {
@@ -8107,6 +8179,29 @@
         }
       }
     },
+    "GetServiceSettingRequest": {
+      "type": "structure",
+      "required": [
+        "SettingId"
+      ],
+      "members": {
+        "SettingId": {
+          "shape": "ServiceSettingId",
+          "documentation": "<p>The ID of the service setting to get.</p>"
+        }
+      },
+      "documentation": "<p>The request body of the GetServiceSetting API action.</p>"
+    },
+    "GetServiceSettingResult": {
+      "type": "structure",
+      "members": {
+        "ServiceSetting": {
+          "shape": "ServiceSetting",
+          "documentation": "<p>The query result of the current service setting.</p>"
+        }
+      },
+      "documentation": "<p>The query result body of the GetServiceSetting API action.</p>"
+    },
     "IPAddress": {
       "type": "string",
       "max": 46,
@@ -11660,6 +11755,29 @@
       "type": "structure",
       "members": {}
     },
+    "ResetServiceSettingRequest": {
+      "type": "structure",
+      "required": [
+        "SettingId"
+      ],
+      "members": {
+        "SettingId": {
+          "shape": "ServiceSettingId",
+          "documentation": "<p>The ID of the service setting to reset.</p>"
+        }
+      },
+      "documentation": "<p>The request body of the ResetServiceSetting API action.</p>"
+    },
+    "ResetServiceSettingResult": {
+      "type": "structure",
+      "members": {
+        "ServiceSetting": {
+          "shape": "ServiceSetting",
+          "documentation": "<p>The current, effective service setting after calling the ResetServiceSetting API action.</p>"
+        }
+      },
+      "documentation": "<p>The result body of the ResetServiceSetting API action.</p>"
+    },
     "ResolvedTargets": {
       "type": "structure",
       "members": {
@@ -12088,6 +12206,46 @@
     },
     "ServiceRole": {
       "type": "string"
+    },
+    "ServiceSetting": {
+      "type": "structure",
+      "members": {
+        "SettingId": {
+          "shape": "ServiceSettingId",
+          "documentation": "<p>The ID of the service setting.</p>"
+        },
+        "SettingValue": {
+          "shape": "ServiceSettingValue",
+          "documentation": "<p>The value of the service setting.</p>"
+        },
+        "LastModifiedDate": {
+          "shape": "DateTime",
+          "documentation": "<p>The last time the service setting was modified.</p>"
+        },
+        "LastModifiedUser": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the last modified user. This field is populated only if the setting value was overwritten.</p>"
+        },
+        "ARN": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the service setting.</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>The status of the service setting. The value can be Default, Customized or PendingUpdate.</p> <ul> <li> <p>Default: The current setting uses a default value provisioned by the AWS service team.</p> </li> <li> <p>Customized: The current setting use a custom value specified by the customer.</p> </li> <li> <p>PendingUpdate: The current setting uses a default or custom value, but a setting change request is pending approval.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>The service setting data structure.</p> <p> <code>ServiceSetting</code> is an account-level setting for an AWS service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an AWS service charges money to the account based on feature or service usage, then the AWS service team might create a default setting of \"false\". This means the user can't use this feature unless they change the setting to \"true\" and intentionally opt in for a paid feature.</p> <p>Services map a <code>SettingId</code> object to a setting value. AWS services teams define the default value for a <code>SettingId</code>. You can't create a new <code>SettingId</code>, but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code> permission for the setting. Use the <a>UpdateServiceSetting</a> API action to change the default setting. Or, use the <a>ResetServiceSetting</a> to change the value back to the original value defined by the AWS service team.</p>"
+    },
+    "ServiceSettingId": {
+      "type": "string",
+      "max": 1000,
+      "min": 1
+    },
+    "ServiceSettingValue": {
+      "type": "string",
+      "max": 4096,
+      "min": 1
     },
     "Session": {
       "type": "structure",
@@ -13471,6 +13629,29 @@
           "documentation": "<p>Information about the patches to use to update the instances, including target operating systems and source repositories. Applies to Linux instances only.</p>"
         }
       }
+    },
+    "UpdateServiceSettingRequest": {
+      "type": "structure",
+      "required": [
+        "SettingId",
+        "SettingValue"
+      ],
+      "members": {
+        "SettingId": {
+          "shape": "ServiceSettingId",
+          "documentation": "<p>The ID of the service setting to update.</p>"
+        },
+        "SettingValue": {
+          "shape": "ServiceSettingValue",
+          "documentation": "<p>The new value to specify for the service setting.</p>"
+        }
+      },
+      "documentation": "<p>The request body of the UpdateServiceSetting API action.</p>"
+    },
+    "UpdateServiceSettingResult": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p>The result body of the UpdateServiceSetting API action.</p>"
     },
     "Url": {
       "type": "string"

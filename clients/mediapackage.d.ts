@@ -76,6 +76,14 @@ declare class MediaPackage extends Service {
    */
   listOriginEndpoints(callback?: (err: AWSError, data: MediaPackage.Types.ListOriginEndpointsResponse) => void): Request<MediaPackage.Types.ListOriginEndpointsResponse, AWSError>;
   /**
+   * 
+   */
+  listTagsForResource(params: MediaPackage.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaPackage.Types.ListTagsForResourceResponse) => void): Request<MediaPackage.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * 
+   */
+  listTagsForResource(callback?: (err: AWSError, data: MediaPackage.Types.ListTagsForResourceResponse) => void): Request<MediaPackage.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Changes the Channel's first IngestEndpoint's username and password. WARNING - This API is deprecated. Please use RotateIngestEndpointCredentials instead
    */
   rotateChannelCredentials(params: MediaPackage.Types.RotateChannelCredentialsRequest, callback?: (err: AWSError, data: MediaPackage.Types.RotateChannelCredentialsResponse) => void): Request<MediaPackage.Types.RotateChannelCredentialsResponse, AWSError>;
@@ -91,6 +99,22 @@ declare class MediaPackage extends Service {
    * Rotate the IngestEndpoint's username and password, as specified by the IngestEndpoint's id.
    */
   rotateIngestEndpointCredentials(callback?: (err: AWSError, data: MediaPackage.Types.RotateIngestEndpointCredentialsResponse) => void): Request<MediaPackage.Types.RotateIngestEndpointCredentialsResponse, AWSError>;
+  /**
+   * 
+   */
+  tagResource(params: MediaPackage.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  untagResource(params: MediaPackage.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * 
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates an existing Channel.
    */
@@ -124,6 +148,7 @@ declare namespace MediaPackage {
      * The ID of the Channel.
      */
     Id?: __string;
+    Tags?: Tags;
   }
   export interface CmafEncryption {
     /**
@@ -179,6 +204,7 @@ cannot be changed after a Channel is created.
 
      */
     Id: __string;
+    Tags?: Tags;
   }
   export interface CreateChannelResponse {
     /**
@@ -194,6 +220,7 @@ cannot be changed after a Channel is created.
      * The ID of the Channel.
      */
     Id?: __string;
+    Tags?: Tags;
   }
   export interface CreateOriginEndpointRequest {
     /**
@@ -226,6 +253,7 @@ If not specified, startover playback will be disabled for the OriginEndpoint.
 
      */
     StartoverWindowSeconds?: __integer;
+    Tags?: Tags;
     /**
      * Amount of delay (seconds) to enforce on the playback of live content.
 If not specified, there will be no time delay in effect for the OriginEndpoint.
@@ -268,6 +296,7 @@ If not specified, startover playback will be disabled for the OriginEndpoint.
 
      */
     StartoverWindowSeconds?: __integer;
+    Tags?: Tags;
     /**
      * Amount of delay (seconds) to enforce on the playback of live content.
 If not specified, there will be no time delay in effect for the OriginEndpoint.
@@ -372,6 +401,7 @@ rounded to the nearest multiple of the source segment duration.
      * The ID of the Channel.
      */
     Id?: __string;
+    Tags?: Tags;
   }
   export interface DescribeOriginEndpointRequest {
     /**
@@ -410,6 +440,7 @@ If not specified, startover playback will be disabled for the OriginEndpoint.
 
      */
     StartoverWindowSeconds?: __integer;
+    Tags?: Tags;
     /**
      * Amount of delay (seconds) to enforce on the playback of live content.
 If not specified, there will be no time delay in effect for the OriginEndpoint.
@@ -667,6 +698,12 @@ rounded to the nearest multiple of the source fragment duration.
      */
     OriginEndpoints?: __listOfOriginEndpoint;
   }
+  export interface ListTagsForResourceRequest {
+    ResourceArn: __string;
+  }
+  export interface ListTagsForResourceResponse {
+    Tags?: __mapOf__string;
+  }
   export type ManifestLayout = "FULL"|"COMPACT"|string;
   export type MaxResults = number;
   export interface MssEncryption {
@@ -715,6 +752,7 @@ If not specified, startover playback will be disabled for the OriginEndpoint.
 
      */
     StartoverWindowSeconds?: __integer;
+    Tags?: Tags;
     /**
      * Amount of delay (seconds) to enforce on the playback of live content.
 If not specified, there will be no time delay in effect for the OriginEndpoint.
@@ -752,6 +790,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      * The ID of the Channel.
      */
     Id?: __string;
+    Tags?: Tags;
   }
   export interface RotateIngestEndpointCredentialsRequest {
     /**
@@ -777,6 +816,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      * The ID of the Channel.
      */
     Id?: __string;
+    Tags?: Tags;
   }
   export type SegmentTemplateFormat = "NUMBER_WITH_TIMELINE"|"TIME_WITH_TIMELINE"|string;
   export interface SpekeKeyProvider {
@@ -821,6 +861,18 @@ MediaPackage will assume when accessing the key provider service.
      */
     StreamOrder?: StreamOrder;
   }
+  export interface TagResourceRequest {
+    ResourceArn: __string;
+    Tags: __mapOf__string;
+  }
+  export type Tags = {[key: string]: __string};
+  export interface UntagResourceRequest {
+    ResourceArn: __string;
+    /**
+     * The key(s) of tag to be deleted
+     */
+    TagKeys: __listOf__string;
+  }
   export interface UpdateChannelRequest {
     /**
      * A short text description of the Channel.
@@ -845,6 +897,7 @@ MediaPackage will assume when accessing the key provider service.
      * The ID of the Channel.
      */
     Id?: __string;
+    Tags?: Tags;
   }
   export interface UpdateOriginEndpointRequest {
     CmafPackage?: CmafPackageCreateOrUpdateParameters;
@@ -911,6 +964,7 @@ If not specified, startover playback will be disabled for the OriginEndpoint.
 
      */
     StartoverWindowSeconds?: __integer;
+    Tags?: Tags;
     /**
      * Amount of delay (seconds) to enforce on the playback of live content.
 If not specified, there will be no time delay in effect for the OriginEndpoint.
@@ -936,6 +990,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
   export type __listOfOriginEndpoint = OriginEndpoint[];
   export type __listOf__PeriodTriggersElement = __PeriodTriggersElement[];
   export type __listOf__string = __string[];
+  export type __mapOf__string = {[key: string]: __string};
   export type __string = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
