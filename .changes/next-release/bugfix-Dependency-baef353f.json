@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Dependency",
+  "description": "Fixed npm dependency with high vulnerability"
+}
