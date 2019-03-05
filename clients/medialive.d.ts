@@ -829,6 +829,10 @@ one destination per packager.
      */
     RoleArn?: __string;
     State?: ChannelState;
+    /**
+     * A collection of key-value pairs.
+     */
+    Tags?: Tags;
   }
   export interface CreateChannelRequest {
     Destinations?: __listOfOutputDestination;
@@ -2039,7 +2043,7 @@ omit: Omit any CLOSED-CAPTIONS line from the manifest.
      */
     IvSource?: HlsIvSource;
     /**
-     * If mode is "live", the number of TS segments to retain in the destination directory. If mode is "vod", this parameter has no effect.
+     * Applies only if Mode field is LIVE. Specifies the number of media segments (.ts files) to retain in the destination directory.
      */
     KeepSegments?: __integerMin1;
     /**
@@ -2073,7 +2077,9 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
      */
     Mode?: HlsMode;
     /**
-     * Generates the .m3u8 playlist file for this HLS output group. The segmentsOnly option will output segments without the .m3u8 file.
+     * MANIFESTSANDSEGMENTS: Generates manifests (master manifest, if applicable, and media manifests) for this output group.
+
+SEGMENTSONLY: Does not generate any manifests for this output group.
      */
     OutputSelection?: HlsOutputSelection;
     /**
@@ -2117,7 +2123,9 @@ VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running, con
      */
     TimestampDeltaMilliseconds?: __integerMin0;
     /**
-     * When set to "singleFile", emits the program as a single media resource (.ts) file, and uses #EXT-X-BYTERANGE tags to index segment for playback. Playback of VOD mode content during event is not guaranteed due to HTTP server caching.
+     * SEGMENTEDFILES: Emit the program as segments - multiple .ts media files.
+
+SINGLEFILE: Applies only if Mode field is VOD. Emit the program as a single .ts media file. The media manifest includes #EXT-X-BYTERANGE tags to index segments for playback. A typical use for this value is when sending the output to AWS Elemental MediaConvert, which can accept only a single media file. Playback while the channel is running is not guaranteed due to HTTP server caching.
      */
     TsFileMode?: HlsTsFileMode;
   }
@@ -3196,6 +3204,16 @@ Options:
   }
   export interface PassThroughSettings {
   }
+  export interface PauseStateScheduleActionSettings {
+    Pipelines?: __listOfPipelinePauseStateSettings;
+  }
+  export type PipelineId = "PIPELINE_0"|"PIPELINE_1"|string;
+  export interface PipelinePauseStateSettings {
+    /**
+     * Pipeline ID to pause ("PIPELINE_0" or "PIPELINE_1").
+     */
+    PipelineId: PipelineId;
+  }
   export interface PurchaseOfferingRequest {
     /**
      * Number of resources
@@ -3412,31 +3430,35 @@ Valid values: 1, 2, 4, 6, 8
   }
   export interface ScheduleActionSettings {
     /**
-     * Settings to emit HLS metadata
+     * Action to insert HLS metadata
      */
     HlsTimedMetadataSettings?: HlsTimedMetadataScheduleActionSettings;
     /**
-     * Settings to switch an input
+     * Action to switch the input
      */
     InputSwitchSettings?: InputSwitchScheduleActionSettings;
     /**
-     * Settings for SCTE-35 return_to_network message
+     * Action to pause or unpause one or both channel pipelines
+     */
+    PauseStateSettings?: PauseStateScheduleActionSettings;
+    /**
+     * Action to insert SCTE-35 return_to_network message
      */
     Scte35ReturnToNetworkSettings?: Scte35ReturnToNetworkScheduleActionSettings;
     /**
-     * Settings for SCTE-35 splice_insert message
+     * Action to insert SCTE-35 splice_insert message
      */
     Scte35SpliceInsertSettings?: Scte35SpliceInsertScheduleActionSettings;
     /**
-     * Settings for SCTE-35 time_signal message
+     * Action to insert SCTE-35 time_signal message
      */
     Scte35TimeSignalSettings?: Scte35TimeSignalScheduleActionSettings;
     /**
-     * Settings to activate a static image overlay
+     * Action to activate a static image overlay
      */
     StaticImageActivateSettings?: StaticImageActivateScheduleActionSettings;
     /**
-     * Settings to deactivate a static image overlay
+     * Action to deactivate a static image overlay
      */
     StaticImageDeactivateSettings?: StaticImageDeactivateScheduleActionSettings;
   }
@@ -4094,6 +4116,7 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __listOfOutputDestination = OutputDestination[];
   export type __listOfOutputDestinationSettings = OutputDestinationSettings[];
   export type __listOfOutputGroup = OutputGroup[];
+  export type __listOfPipelinePauseStateSettings = PipelinePauseStateSettings[];
   export type __listOfReservation = Reservation[];
   export type __listOfScheduleAction = ScheduleAction[];
   export type __listOfScte35Descriptor = Scte35Descriptor[];

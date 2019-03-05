@@ -172,6 +172,7 @@ export abstract class ConfigurationServicePlaceholders {
   docdb?: AWS.DocDB.Types.ClientConfiguration;
   backup?: AWS.Backup.Types.ClientConfiguration;
   worklink?: AWS.WorkLink.Types.ClientConfiguration;
+  textract?: AWS.Textract.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -346,4 +347,5 @@ export interface ConfigurationServiceApiVersions {
   docdb?: AWS.DocDB.Types.apiVersion;
   backup?: AWS.Backup.Types.apiVersion;
   worklink?: AWS.WorkLink.Types.apiVersion;
+  textract?: AWS.Textract.Types.apiVersion;
 }

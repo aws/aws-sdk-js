@@ -2478,6 +2478,11 @@
         "State": {
           "shape": "ChannelState",
           "locationName": "state"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "A collection of key-value pairs."
         }
       },
       "documentation": "Placeholder documentation for ChannelSummary"
@@ -4704,7 +4709,7 @@
         "KeepSegments": {
           "shape": "__integerMin1",
           "locationName": "keepSegments",
-          "documentation": "If mode is \"live\", the number of TS segments to retain in the destination directory. If mode is \"vod\", this parameter has no effect."
+          "documentation": "Applies only if Mode field is LIVE. Specifies the number of media segments (.ts files) to retain in the destination directory."
         },
         "KeyFormat": {
           "shape": "__string",
@@ -4744,7 +4749,7 @@
         "OutputSelection": {
           "shape": "HlsOutputSelection",
           "locationName": "outputSelection",
-          "documentation": "Generates the .m3u8 playlist file for this HLS output group. The segmentsOnly option will output segments without the .m3u8 file."
+          "documentation": "MANIFESTSANDSEGMENTS: Generates manifests (master manifest, if applicable, and media manifests) for this output group.\n\nSEGMENTSONLY: Does not generate any manifests for this output group."
         },
         "ProgramDateTime": {
           "shape": "HlsProgramDateTime",
@@ -4799,7 +4804,7 @@
         "TsFileMode": {
           "shape": "HlsTsFileMode",
           "locationName": "tsFileMode",
-          "documentation": "When set to \"singleFile\", emits the program as a single media resource (.ts) file, and uses #EXT-X-BYTERANGE tags to index segment for playback. Playback of VOD mode content during event is not guaranteed due to HTTP server caching."
+          "documentation": "SEGMENTEDFILES: Emit the program as segments - multiple .ts media files.\n\nSINGLEFILE: Applies only if Mode field is VOD. Emit the program as a single .ts media file. The media manifest includes #EXT-X-BYTERANGE tags to index segments for playback. A typical use for this value is when sending the output to AWS Elemental MediaConvert, which can accept only a single media file. Playback while the channel is running is not guaranteed due to HTTP server caching."
         }
       },
       "required": [
@@ -6849,6 +6854,38 @@
       "members": {},
       "documentation": "Placeholder documentation for PassThroughSettings"
     },
+    "PauseStateScheduleActionSettings": {
+      "type": "structure",
+      "members": {
+        "Pipelines": {
+          "shape": "__listOfPipelinePauseStateSettings",
+          "locationName": "pipelines"
+        }
+      },
+      "documentation": "Settings for the action to set pause state of a channel."
+    },
+    "PipelineId": {
+      "type": "string",
+      "documentation": "Pipeline ID",
+      "enum": [
+        "PIPELINE_0",
+        "PIPELINE_1"
+      ]
+    },
+    "PipelinePauseStateSettings": {
+      "type": "structure",
+      "members": {
+        "PipelineId": {
+          "shape": "PipelineId",
+          "locationName": "pipelineId",
+          "documentation": "Pipeline ID to pause (\"PIPELINE_0\" or \"PIPELINE_1\")."
+        }
+      },
+      "documentation": "Settings for pausing a pipeline.",
+      "required": [
+        "PipelineId"
+      ]
+    },
     "PurchaseOfferingRequest": {
       "type": "structure",
       "members": {
@@ -7251,37 +7288,42 @@
         "HlsTimedMetadataSettings": {
           "shape": "HlsTimedMetadataScheduleActionSettings",
           "locationName": "hlsTimedMetadataSettings",
-          "documentation": "Settings to emit HLS metadata"
+          "documentation": "Action to insert HLS metadata"
         },
         "InputSwitchSettings": {
           "shape": "InputSwitchScheduleActionSettings",
           "locationName": "inputSwitchSettings",
-          "documentation": "Settings to switch an input"
+          "documentation": "Action to switch the input"
+        },
+        "PauseStateSettings": {
+          "shape": "PauseStateScheduleActionSettings",
+          "locationName": "pauseStateSettings",
+          "documentation": "Action to pause or unpause one or both channel pipelines"
         },
         "Scte35ReturnToNetworkSettings": {
           "shape": "Scte35ReturnToNetworkScheduleActionSettings",
           "locationName": "scte35ReturnToNetworkSettings",
-          "documentation": "Settings for SCTE-35 return_to_network message"
+          "documentation": "Action to insert SCTE-35 return_to_network message"
         },
         "Scte35SpliceInsertSettings": {
           "shape": "Scte35SpliceInsertScheduleActionSettings",
           "locationName": "scte35SpliceInsertSettings",
-          "documentation": "Settings for SCTE-35 splice_insert message"
+          "documentation": "Action to insert SCTE-35 splice_insert message"
         },
         "Scte35TimeSignalSettings": {
           "shape": "Scte35TimeSignalScheduleActionSettings",
           "locationName": "scte35TimeSignalSettings",
-          "documentation": "Settings for SCTE-35 time_signal message"
+          "documentation": "Action to insert SCTE-35 time_signal message"
         },
         "StaticImageActivateSettings": {
           "shape": "StaticImageActivateScheduleActionSettings",
           "locationName": "staticImageActivateSettings",
-          "documentation": "Settings to activate a static image overlay"
+          "documentation": "Action to activate a static image overlay"
         },
         "StaticImageDeactivateSettings": {
           "shape": "StaticImageDeactivateScheduleActionSettings",
           "locationName": "staticImageDeactivateSettings",
-          "documentation": "Settings to deactivate a static image overlay"
+          "documentation": "Action to deactivate a static image overlay"
         }
       },
       "documentation": "Holds the settings for a single schedule action."
@@ -8881,6 +8923,13 @@
         "shape": "OutputGroup"
       },
       "documentation": "Placeholder documentation for __listOfOutputGroup"
+    },
+    "__listOfPipelinePauseStateSettings": {
+      "type": "list",
+      "member": {
+        "shape": "PipelinePauseStateSettings"
+      },
+      "documentation": "Placeholder documentation for __listOfPipelinePauseStateSettings"
     },
     "__listOfReservation": {
       "type": "list",

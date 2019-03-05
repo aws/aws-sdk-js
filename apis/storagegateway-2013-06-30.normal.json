@@ -54,7 +54,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Configures one or more gateway local disks as cache for a gateway. This operation is only supported in the cached volume, tape and file gateway type (see <a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/StorageGatewayConcepts.html\">Storage Gateway Concepts</a>).</p> <p>In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add cache, and one or more disk IDs that you want to configure as cache.</p>"
+      "documentation": "<p>Configures one or more gateway local disks as cache for a gateway. This operation is only supported in the cached volume, tape and file gateway type (see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/StorageGatewayConcepts.html\">Storage Gateway Concepts</a>).</p> <p>In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add cache, and one or more disk IDs that you want to configure as cache.</p>"
     },
     "AddTagsToResource": {
       "name": "AddTagsToResource",
@@ -76,7 +76,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Adds one or more tags to the specified resource. You use tags to add metadata to resources, which you can use to categorize these resources. For example, you can categorize resources by purpose, owner, environment, or team. Each tag consists of a key and a value, which you define. You can add tags to the following AWS Storage Gateway resources:</p> <ul> <li> <p>Storage gateways of all types</p> </li> </ul> <ul> <li> <p>Storage Volumes</p> </li> </ul> <ul> <li> <p>Virtual Tapes</p> </li> </ul> <p>You can create a maximum of 10 tags for each resource. Virtual tapes and storage volumes that are recovered to a new gateway maintain their tags.</p>"
+      "documentation": "<p>Adds one or more tags to the specified resource. You use tags to add metadata to resources, which you can use to categorize these resources. For example, you can categorize resources by purpose, owner, environment, or team. Each tag consists of a key and a value, which you define. You can add tags to the following AWS Storage Gateway resources:</p> <ul> <li> <p>Storage gateways of all types</p> </li> <li> <p>Storage Volumes</p> </li> <li> <p>Virtual Tapes</p> </li> <li> <p>NFS and SMB File Shares</p> </li> </ul> <p>You can create a maximum of 10 tags for each resource. Virtual tapes and storage volumes that are recovered to a new gateway maintain their tags.</p>"
     },
     "AddUploadBuffer": {
       "name": "AddUploadBuffer",
@@ -252,7 +252,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Creates a Server Message Block (SMB) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway expose file shares using a SMB interface. This operation is only supported for file gateways.</p> <important> <p>File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide.</i> </p> <p>File gateways don't support creating hard or symbolic links on a file share.</p> </important>"
+      "documentation": "<p>Creates a Server Message Block (SMB) file share on an existing file gateway. In Storage Gateway, a file share is a file system mount point backed by Amazon S3 cloud storage. Storage Gateway expose file shares using a SMB interface. This operation is only supported for file gateways.</p> <important> <p>File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide.</i> </p> <p>File gateways don't support creating hard or symbolic links on a file share.</p> </important>"
     },
     "CreateSnapshot": {
       "name": "CreateSnapshot",
@@ -277,7 +277,7 @@
           "shape": "ServiceUnavailableError"
         }
       ],
-      "documentation": "<p>Initiates a snapshot of a volume.</p> <p>AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad-hoc basis. This API enables you to take ad-hoc snapshot. For more information, see <a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot\">Editing a Snapshot Schedule</a>.</p> <p>In the CreateSnapshot request you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway Console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see DescribeSnapshots or DeleteSnapshot in the <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Operations.html\">EC2 API reference</a>.</p> </note> <important> <p>Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the <a href=\"http://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html\">Welcome</a> page.</p> </important>"
+      "documentation": "<p>Initiates a snapshot of a volume.</p> <p>AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad-hoc basis. This API enables you to take ad-hoc snapshot. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot\">Editing a Snapshot Schedule</a>.</p> <p>In the CreateSnapshot request you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway Console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see DescribeSnapshots or DeleteSnapshot in the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Operations.html\">EC2 API reference</a>.</p> </note> <important> <p>Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the <a href=\"https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html\">Welcome</a> page.</p> </important>"
     },
     "CreateSnapshotFromVolumeRecoveryPoint": {
       "name": "CreateSnapshotFromVolumeRecoveryPoint",
@@ -478,7 +478,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Deletes a snapshot of a volume.</p> <p>You can take snapshots of your gateway volumes on a scheduled or ad hoc basis. This API action enables you to delete a snapshot schedule for a volume. For more information, see <a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/WorkingWithSnapshots.html\">Working with Snapshots</a>. In the <code>DeleteSnapshotSchedule</code> request, you identify the volume by providing its Amazon Resource Name (ARN). This operation is only supported in stored and cached volume gateway types.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. in <i>Amazon Elastic Compute Cloud API Reference</i>.</p> </note>"
+      "documentation": "<p>Deletes a snapshot of a volume.</p> <p>You can take snapshots of your gateway volumes on a scheduled or ad hoc basis. This API action enables you to delete a snapshot schedule for a volume. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/WorkingWithSnapshots.html\">Working with Snapshots</a>. In the <code>DeleteSnapshotSchedule</code> request, you identify the volume by providing its Amazon Resource Name (ARN). This operation is only supported in stored and cached volume gateway types.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. in <i>Amazon Elastic Compute Cloud API Reference</i>.</p> </note>"
     },
     "DeleteTape": {
       "name": "DeleteTape",
@@ -544,7 +544,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Deletes the specified storage volume that you previously created using the <a>CreateCachediSCSIVolume</a> or <a>CreateStorediSCSIVolume</a> API. This operation is only supported in the cached volume and stored volume types. For stored volume gateways, the local disk that was configured as the storage volume is not deleted. You can reuse the local disk to create another storage volume. </p> <p>Before you delete a volume, make sure there are no iSCSI connections to the volume you are deleting. You should also make sure there is no snapshot in progress. You can use the Amazon Elastic Compute Cloud (Amazon EC2) API to query snapshots on the volume you are deleting and check the snapshot status. For more information, go to <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html\">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> <p>In the request, you must provide the Amazon Resource Name (ARN) of the storage volume you want to delete.</p>"
+      "documentation": "<p>Deletes the specified storage volume that you previously created using the <a>CreateCachediSCSIVolume</a> or <a>CreateStorediSCSIVolume</a> API. This operation is only supported in the cached volume and stored volume types. For stored volume gateways, the local disk that was configured as the storage volume is not deleted. You can reuse the local disk to create another storage volume. </p> <p>Before you delete a volume, make sure there are no iSCSI connections to the volume you are deleting. You should also make sure there is no snapshot in progress. You can use the Amazon Elastic Compute Cloud (Amazon EC2) API to query snapshots on the volume you are deleting and check the snapshot status. For more information, go to <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html\">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> <p>In the request, you must provide the Amazon Resource Name (ARN) of the storage volume you want to delete.</p>"
     },
     "DescribeBandwidthRateLimit": {
       "name": "DescribeBandwidthRateLimit",
@@ -1468,7 +1468,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Updates the gateway virtual machine (VM) software. The request immediately triggers the software update.</p> <note> <p>When you make this request, you get a <code>200 OK</code> success response immediately. However, it might take some time for the update to complete. You can call <a>DescribeGatewayInformation</a> to verify the gateway is in the <code>STATE_RUNNING</code> state.</p> </note> <important> <p>A software update forces a system restart of your gateway. You can minimize the chance of any disruption to your applications by increasing your iSCSI Initiators' timeouts. For more information about increasing iSCSI Initiator timeouts for Windows and Linux, see <a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorWindowsClient.html#CustomizeWindowsiSCSISettings\">Customizing Your Windows iSCSI Settings</a> and <a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorRedHatClient.html#CustomizeLinuxiSCSISettings\">Customizing Your Linux iSCSI Settings</a>, respectively.</p> </important>"
+      "documentation": "<p>Updates the gateway virtual machine (VM) software. The request immediately triggers the software update.</p> <note> <p>When you make this request, you get a <code>200 OK</code> success response immediately. However, it might take some time for the update to complete. You can call <a>DescribeGatewayInformation</a> to verify the gateway is in the <code>STATE_RUNNING</code> state.</p> </note> <important> <p>A software update forces a system restart of your gateway. You can minimize the chance of any disruption to your applications by increasing your iSCSI Initiators' timeouts. For more information about increasing iSCSI Initiator timeouts for Windows and Linux, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorWindowsClient.html#CustomizeWindowsiSCSISettings\">Customizing Your Windows iSCSI Settings</a> and <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorRedHatClient.html#CustomizeLinuxiSCSISettings\">Customizing Your Linux iSCSI Settings</a>, respectively.</p> </important>"
     },
     "UpdateMaintenanceStartTime": {
       "name": "UpdateMaintenanceStartTime",
@@ -1534,7 +1534,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Updates a Server Message Block (SMB) file share.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported for file gateways.</p> </note> <important> <p>File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see <a href=\"http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide.</i> </p> <p>File gateways don't support creating hard or symbolic links on a file share.</p> </important>"
+      "documentation": "<p>Updates a Server Message Block (SMB) file share.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported for file gateways.</p> </note> <important> <p>File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide.</i> </p> <p>File gateways don't support creating hard or symbolic links on a file share.</p> </important>"
     },
     "UpdateSnapshotSchedule": {
       "name": "UpdateSnapshotSchedule",
@@ -1605,7 +1605,7 @@
         },
         "GatewayRegion": {
           "shape": "RegionId",
-          "documentation": "<p>A value that indicates the region where you want to store your data. The gateway region specified must be the same region as the region in your <code>Host</code> header in the request. For more information about available regions and endpoints for AWS Storage Gateway, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region\">Regions and Endpoints</a> in the <i>Amazon Web Services Glossary</i>.</p> <p> Valid Values: \"us-east-1\", \"us-east-2\", \"us-west-1\", \"us-west-2\", \"ca-central-1\", \"eu-west-1\", \"eu-central-1\", \"eu-west-2\", \"eu-west-3\", \"ap-northeast-1\", \"ap-northeast-2\", \"ap-southeast-1\", \"ap-southeast-2\", \"ap-south-1\", \"sa-east-1\"</p>"
+          "documentation": "<p>A value that indicates the region where you want to store your data. The gateway region specified must be the same region as the region in your <code>Host</code> header in the request. For more information about available regions and endpoints for AWS Storage Gateway, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region\">Regions and Endpoints</a> in the <i>Amazon Web Services Glossary</i>.</p> <p> Valid Values: See <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region\">AWS Storage Gateway Regions and Endpoints</a> in the AWS General Reference. </p>"
         },
         "GatewayType": {
           "shape": "GatewayType",
@@ -1618,6 +1618,10 @@
         "MediumChangerType": {
           "shape": "MediumChangerType",
           "documentation": "<p>The value that indicates the type of medium changer to use for tape gateway. This field is optional.</p> <p> Valid Values: \"STK-L700\", \"AWS-Gateway-VTL\"</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>A list of up to ten (10) tags assigned to the gateway may be specified. Every tag is a key-value pair.</p> <note> <p>Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256.</p> </note>"
         }
       },
       "documentation": "<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>ActivateGatewayInput$ActivationKey</a> </p> </li> <li> <p> <a>ActivateGatewayInput$GatewayName</a> </p> </li> <li> <p> <a>ActivateGatewayInput$GatewayRegion</a> </p> </li> <li> <p> <a>ActivateGatewayInput$GatewayTimezone</a> </p> </li> <li> <p> <a>ActivateGatewayInput$GatewayType</a> </p> </li> <li> <p> <a>ActivateGatewayInput$TapeDriveType</a> </p> </li> <li> <p> <a>ActivateGatewayInput$MediumChangerType</a> </p> </li> </ul>"
@@ -1647,7 +1651,8 @@
           "shape": "GatewayARN"
         },
         "DiskIds": {
-          "shape": "DiskIds"
+          "shape": "DiskIds",
+          "documentation": "<p>An array of strings that identify disks that are to be configured as working storage. Each string have a minimum length of 1 and maximum length of 300. You can get the disk IDs from the <a>ListLocalDisks</a> API.</p>"
         }
       }
     },
@@ -1672,7 +1677,7 @@
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p>The key-value pair that represents the tag you want to add to the resource. The value can be an empty string.</p> <note> <p>Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @.</p> </note>"
+          "documentation": "<p>The key-value pair that represents the tag you want to add to the resource. The value can be an empty string.</p> <note> <p>Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256.</p> </note>"
         }
       },
       "documentation": "<p>AddTagsToResourceInput</p>"
@@ -1698,7 +1703,8 @@
           "shape": "GatewayARN"
         },
         "DiskIds": {
-          "shape": "DiskIds"
+          "shape": "DiskIds",
+          "documentation": "<p>An array of strings that identify disks that are to be configured as working storage. Each string have a minimum length of 1 and maximum length of 300. You can get the disk IDs from the <a>ListLocalDisks</a> API.</p>"
         }
       }
     },
@@ -1824,7 +1830,7 @@
         },
         "VolumeAttachmentStatus": {
           "shape": "VolumeAttachmentStatus",
-          "documentation": "<p>A value that indicates whether a storage volume is attached to or detached from a gateway.</p>"
+          "documentation": "<p>A value that indicates whether a storage volume is attached to or detached from a gateway. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#attach-detach-volume\">Moving Your Volumes to a Different Gateway</a>.</p>"
         },
         "VolumeSizeInBytes": {
           "shape": "long",
@@ -1855,7 +1861,7 @@
         },
         "TargetName": {
           "shape": "TargetName",
-          "documentation": "<p>The name of the iSCSI target that is used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying <code>TargetName</code> as <i>myvolume</i> results in the target ARN of <code>arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume</code>.</p>"
+          "documentation": "<p>The name of the iSCSI target used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying <code>TargetName</code> as <i>myvolume</i> results in the target ARN of <code>arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume</code>. The target name must be unique across all volumes on a gateway.</p> <p>If you don't specify a value, Storage Gateway uses the value that was previously used for this volume as the new target name.</p>"
         }
       },
       "documentation": "<p>Describes an iSCSI cached volume.</p>"
@@ -1977,11 +1983,11 @@
         },
         "SnapshotId": {
           "shape": "SnapshotId",
-          "documentation": "<p>The snapshot ID (e.g. \"snap-1122aabb\") of the snapshot to restore as the new cached volume. Specify this field if you want to create the iSCSI storage volume from a snapshot otherwise do not include this field. To list snapshots for your account use <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html\">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p>"
+          "documentation": "<p>The snapshot ID (e.g. \"snap-1122aabb\") of the snapshot to restore as the new cached volume. Specify this field if you want to create the iSCSI storage volume from a snapshot otherwise do not include this field. To list snapshots for your account use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html\">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p>"
         },
         "TargetName": {
           "shape": "TargetName",
-          "documentation": "<p>The name of the iSCSI target used by initiators to connect to the target and as a suffix for the target ARN. For example, specifying <code>TargetName</code> as <i>myvolume</i> results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume. The target name must be unique across all volumes of a gateway.</p>"
+          "documentation": "<p>The name of the iSCSI target used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying <code>TargetName</code> as <i>myvolume</i> results in the target ARN of <code>arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume</code>. The target name must be unique across all volumes on a gateway.</p> <p>If you don't specify a value, Storage Gateway uses the value that was previously used for this volume as the new target name.</p>"
         },
         "SourceVolumeARN": {
           "shape": "VolumeARN",
@@ -2082,6 +2088,10 @@
         "RequesterPays": {
           "shape": "Boolean",
           "documentation": "<p>A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is <code>private</code>.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>A list of up to ten (10) tags can be assigned to the NFS file share. Every tag is a key-value pair.</p> <note> <p>Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256.</p> </note>"
         }
       },
       "documentation": "<p>CreateNFSFileShareInput</p>"
@@ -2160,6 +2170,10 @@
         "Authentication": {
           "shape": "Authentication",
           "documentation": "<p>The authentication method that users use to access the file share.</p> <p>Valid values are <code>ActiveDirectory</code> or <code>GuestAccess</code>. The default is <code>ActiveDirectory</code>.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>A list of up to ten (10) tags can be assigned to the NFS file share. Every tag is a key-value pair.</p> <note> <p>Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256.</p> </note>"
         }
       },
       "documentation": "<p>CreateSMBFileShareInput</p>"
@@ -2182,10 +2196,12 @@
       ],
       "members": {
         "VolumeARN": {
-          "shape": "VolumeARN"
+          "shape": "VolumeARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the iSCSI volume target. Use the <a>DescribeStorediSCSIVolumes</a> operation to return to retrieve the TargetARN for specified VolumeARN.</p>"
         },
         "SnapshotDescription": {
-          "shape": "SnapshotDescription"
+          "shape": "SnapshotDescription",
+          "documentation": "<p>Textual description of the snapshot that appears in the Amazon EC2 console, Elastic Block Store snapshots panel in the <b>Description</b> field, and in the AWS Storage Gateway snapshot <b>Details</b> pane, <b>Description</b> field</p>"
         }
       }
     },
@@ -2193,13 +2209,16 @@
       "type": "structure",
       "members": {
         "SnapshotId": {
-          "shape": "SnapshotId"
+          "shape": "SnapshotId",
+          "documentation": "<p>The ID of the snapshot.</p>"
         },
         "VolumeARN": {
-          "shape": "VolumeARN"
+          "shape": "VolumeARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the iSCSI volume target. Use the <a>DescribeStorediSCSIVolumes</a> operation to return to retrieve the TargetARN for specified VolumeARN.</p>"
         },
         "VolumeRecoveryPointTime": {
-          "shape": "string"
+          "shape": "string",
+          "documentation": "<p>The time the volume was created from the recovery point.</p>"
         }
       }
     },
@@ -2250,11 +2269,11 @@
         },
         "DiskId": {
           "shape": "DiskId",
-          "documentation": "<p>The unique identifier for the gateway local disk that is configured as a stored volume. Use <a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/API_ListLocalDisks.html\">ListLocalDisks</a> to list disk IDs for a gateway.</p>"
+          "documentation": "<p>The unique identifier for the gateway local disk that is configured as a stored volume. Use <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/API_ListLocalDisks.html\">ListLocalDisks</a> to list disk IDs for a gateway.</p>"
         },
         "SnapshotId": {
           "shape": "SnapshotId",
-          "documentation": "<p>The snapshot ID (e.g. \"snap-1122aabb\") of the snapshot to restore as the new stored volume. Specify this field if you want to create the iSCSI storage volume from a snapshot otherwise do not include this field. To list snapshots for your account use <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html\">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p>"
+          "documentation": "<p>The snapshot ID (e.g. \"snap-1122aabb\") of the snapshot to restore as the new stored volume. Specify this field if you want to create the iSCSI storage volume from a snapshot otherwise do not include this field. To list snapshots for your account use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html\">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p>"
         },
         "PreserveExistingData": {
           "shape": "boolean",
@@ -2262,7 +2281,7 @@
         },
         "TargetName": {
           "shape": "TargetName",
-          "documentation": "<p>The name of the iSCSI target used by initiators to connect to the target and as a suffix for the target ARN. For example, specifying <code>TargetName</code> as <i>myvolume</i> results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume. The target name must be unique across all volumes of a gateway.</p>"
+          "documentation": "<p>The name of the iSCSI target used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying <code>TargetName</code> as <i>myvolume</i> results in the target ARN of <code>arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume</code>. The target name must be unique across all volumes on a gateway.</p> <p>If you don't specify a value, Storage Gateway uses the value that was previously used for this volume as the new target name.</p>"
         },
         "NetworkInterfaceId": {
           "shape": "NetworkInterfaceId",
@@ -2510,7 +2529,8 @@
       ],
       "members": {
         "VolumeARN": {
-          "shape": "VolumeARN"
+          "shape": "VolumeARN",
+          "documentation": "<p>The volume which snapshot schedule to delete.</p>"
         }
       }
     },
@@ -2518,7 +2538,8 @@
       "type": "structure",
       "members": {
         "VolumeARN": {
-          "shape": "VolumeARN"
+          "shape": "VolumeARN",
+          "documentation": "<p>The volume which snapshot schedule was deleted.</p>"
         }
       }
     },
@@ -2643,22 +2664,28 @@
           "shape": "GatewayARN"
         },
         "DiskIds": {
-          "shape": "DiskIds"
+          "shape": "DiskIds",
+          "documentation": "<p>An array of strings that identify disks that are to be configured as working storage. Each string have a minimum length of 1 and maximum length of 300. You can get the disk IDs from the <a>ListLocalDisks</a> API.</p>"
         },
         "CacheAllocatedInBytes": {
-          "shape": "long"
+          "shape": "long",
+          "documentation": "<p>The amount of cache in bytes allocated to the a gateway.</p>"
         },
         "CacheUsedPercentage": {
-          "shape": "double"
+          "shape": "double",
+          "documentation": "<p>Percent use of the gateway's cache storage. This metric applies only to the gateway-cached volume setup. The sample is taken at the end of the reporting period.</p>"
         },
         "CacheDirtyPercentage": {
-          "shape": "double"
+          "shape": "double",
+          "documentation": "<p>The file share's contribution to the overall percentage of the gateway's cache that has not been persisted to AWS. The sample is taken at the end of the reporting period.</p>"
         },
         "CacheHitPercentage": {
-          "shape": "double"
+          "shape": "double",
+          "documentation": "<p>Percent of application read operations from the file shares that are served from cache. The sample is taken at the end of the reporting period.</p>"
         },
         "CacheMissPercentage": {
-          "shape": "double"
+          "shape": "double",
+          "documentation": "<p/>"
         }
       }
     },
@@ -2669,7 +2696,8 @@
       ],
       "members": {
         "VolumeARNs": {
-          "shape": "VolumeARNs"
+          "shape": "VolumeARNs",
+          "documentation": "<p>An array of strings where each string represents the Amazon Resource Name (ARN) of a cached volume. All of the specified cached volumes must from the same gateway. Use <a>ListVolumes</a> to get volume ARNs for a gateway.</p>"
         }
       }
     },
@@ -2755,6 +2783,10 @@
         "LastSoftwareUpdate": {
           "shape": "LastSoftwareUpdate",
           "documentation": "<p>The date on which the last software update was applied to the gateway. If the gateway has never been updated, this field does not return a value in the response.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>A list of up to ten (10) tags assigned to the gateway are returned, sorted alphabetically by key name. Every tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the <code>ListTagsForResource</code> API.</p>"
         }
       },
       "documentation": "<p>A JSON object containing the following fields:</p>"
@@ -2790,7 +2822,8 @@
           "documentation": "<p>An ordinal number between 0 and 6 that represents the day of the week, where 0 represents Sunday and 6 represents Saturday. The day of week is in the time zone of the gateway.</p>"
         },
         "Timezone": {
-          "shape": "GatewayTimezone"
+          "shape": "GatewayTimezone",
+          "documentation": "<p>A value that indicates the time zone that is set for the gateway. The start time and day of week specified should be in the time zone of the gateway.</p>"
         }
       },
       "documentation": "<p>A JSON object containing the following fields:</p> <ul> <li> <p> <a>DescribeMaintenanceStartTimeOutput$DayOfWeek</a> </p> </li> <li> <p> <a>DescribeMaintenanceStartTimeOutput$HourOfDay</a> </p> </li> <li> <p> <a>DescribeMaintenanceStartTimeOutput$MinuteOfHour</a> </p> </li> <li> <p> <a>DescribeMaintenanceStartTimeOutput$Timezone</a> </p> </li> </ul>"
@@ -2885,19 +2918,24 @@
       "type": "structure",
       "members": {
         "VolumeARN": {
-          "shape": "VolumeARN"
+          "shape": "VolumeARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the volume that was specified in the request.</p>"
         },
         "StartAt": {
-          "shape": "HourOfDay"
+          "shape": "HourOfDay",
+          "documentation": "<p>The hour of the day at which the snapshot schedule begins represented as <i>hh</i>, where <i>hh</i> is the hour (0 to 23). The hour of the day is in the time zone of the gateway.</p>"
         },
         "RecurrenceInHours": {
-          "shape": "RecurrenceInHours"
+          "shape": "RecurrenceInHours",
+          "documentation": "<p>The number of hours between snapshots.</p>"
         },
         "Description": {
-          "shape": "Description"
+          "shape": "Description",
+          "documentation": "<p>The snapshot description.</p>"
         },
         "Timezone": {
-          "shape": "GatewayTimezone"
+          "shape": "GatewayTimezone",
+          "documentation": "<p>A value that indicates the time zone of the gateway.</p>"
         }
       }
     },
@@ -2918,7 +2956,8 @@
       "type": "structure",
       "members": {
         "StorediSCSIVolumes": {
-          "shape": "StorediSCSIVolumes"
+          "shape": "StorediSCSIVolumes",
+          "documentation": "<p>Describes a single unit of output from <a>DescribeStorediSCSIVolumes</a>. The following fields are returned:</p> <ul> <li> <p> <b>ChapEnabled</b>: Indicates whether mutual CHAP is enabled for the iSCSI target.</p> </li> <li> <p> <b>LunNumber</b>: The logical disk number.</p> </li> <li> <p> <b>NetworkInterfaceId</b>: The network interface ID of the stored volume that initiator use to map the stored volume as an iSCSI target.</p> </li> <li> <p> <b>NetworkInterfacePort</b>: The port used to communicate with iSCSI targets.</p> </li> <li> <p> <b>PreservedExistingData</b>: Indicates if when the stored volume was created, existing data on the underlying local disk was preserved.</p> </li> <li> <p> <b>SourceSnapshotId</b>: If the stored volume was created from a snapshot, this field contains the snapshot ID used, e.g. snap-1122aabb. Otherwise, this field is not included.</p> </li> <li> <p> <b>StorediSCSIVolumes</b>: An array of StorediSCSIVolume objects where each object contains metadata about one stored volume.</p> </li> <li> <p> <b>TargetARN</b>: The Amazon Resource Name (ARN) of the volume target.</p> </li> <li> <p> <b>VolumeARN</b>: The Amazon Resource Name (ARN) of the stored volume.</p> </li> <li> <p> <b>VolumeDiskId</b>: The disk ID of the local disk that was specified in the <a>CreateStorediSCSIVolume</a> operation.</p> </li> <li> <p> <b>VolumeId</b>: The unique identifier of the storage volume, e.g. vol-1122AABB.</p> </li> <li> <p> <b>VolumeiSCSIAttributes</b>: An <a>VolumeiSCSIAttributes</a> object that represents a collection of iSCSI attributes for one stored volume.</p> </li> <li> <p> <b>VolumeProgress</b>: Represents the percentage complete if the volume is restoring or bootstrapping that represents the percent of data transferred. This field does not appear in the response if the stored volume is not restoring or bootstrapping.</p> </li> <li> <p> <b>VolumeSizeInBytes</b>: The size of the volume in bytes.</p> </li> <li> <p> <b>VolumeStatus</b>: One of the <code>VolumeStatus</code> values that indicates the state of the volume.</p> </li> <li> <p> <b>VolumeType</b>: One of the enumeration values describing the type of the volume. Currently, on STORED volumes are supported.</p> </li> </ul>"
         }
       }
     },
@@ -3047,13 +3086,16 @@
           "shape": "GatewayARN"
         },
         "DiskIds": {
-          "shape": "DiskIds"
+          "shape": "DiskIds",
+          "documentation": "<p>An array of the gateway's local disk IDs that are configured as working storage. Each local disk ID is specified as a string (minimum length of 1 and maximum length of 300). If no local disks are configured as working storage, then the DiskIds array is empty.</p>"
         },
         "UploadBufferUsedInBytes": {
-          "shape": "long"
+          "shape": "long",
+          "documentation": "<p>The total number of bytes being used in the gateway's upload buffer.</p>"
         },
         "UploadBufferAllocatedInBytes": {
-          "shape": "long"
+          "shape": "long",
+          "documentation": "<p>The total number of bytes allocated in the gateway's as upload buffer.</p>"
         }
       }
     },
@@ -3565,7 +3607,7 @@
       "type": "string",
       "documentation": "<p>The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.</p>",
       "max": 2048,
-      "min": 20
+      "min": 7
     },
     "LastSoftwareUpdate": {
       "type": "string",
@@ -3626,10 +3668,12 @@
       "type": "structure",
       "members": {
         "Gateways": {
-          "shape": "Gateways"
+          "shape": "Gateways",
+          "documentation": "<p>An array of <a>GatewayInfo</a> objects.</p>"
         },
         "Marker": {
-          "shape": "Marker"
+          "shape": "Marker",
+          "documentation": "<p>Use the marker in your next request to fetch the next set of gateways in the list. If there are no more gateways to list, this field does not appear in the response.</p>"
         }
       }
     },
@@ -3652,7 +3696,8 @@
           "shape": "GatewayARN"
         },
         "Disks": {
-          "shape": "Disks"
+          "shape": "Disks",
+          "documentation": "<p>A JSON object containing the following fields:</p> <ul> <li> <p> <a>ListLocalDisksOutput$Disks</a> </p> </li> </ul>"
         }
       }
     },
@@ -3766,7 +3811,8 @@
           "shape": "GatewayARN"
         },
         "VolumeRecoveryPointInfos": {
-          "shape": "VolumeRecoveryPointInfos"
+          "shape": "VolumeRecoveryPointInfos",
+          "documentation": "<p>An array of <a>VolumeRecoveryPointInfo</a> objects.</p>"
         }
       }
     },
@@ -3794,12 +3840,15 @@
           "shape": "GatewayARN"
         },
         "Marker": {
-          "shape": "Marker"
+          "shape": "Marker",
+          "documentation": "<p>Use the marker in your next request to continue pagination of iSCSI volumes. If there are no more volumes to list, this field does not appear in the response body.</p>"
         },
         "VolumeInfos": {
-          "shape": "VolumeInfos"
+          "shape": "VolumeInfos",
+          "documentation": "<p>An array of <a>VolumeInfo</a> objects, where each object describes an iSCSI volume. If no volumes are defined for the gateway, then <code>VolumeInfos</code> is an empty array \"[]\".</p>"
         }
-      }
+      },
+      "documentation": "<p>A JSON object containing the following fields:</p> <ul> <li> <p> <a>ListVolumesOutput$Marker</a> </p> </li> <li> <p> <a>ListVolumesOutput$VolumeInfos</a> </p> </li> </ul>"
     },
     "LocalConsolePassword": {
       "type": "string",
@@ -3909,6 +3958,10 @@
         "RequesterPays": {
           "shape": "Boolean",
           "documentation": "<p>A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is <code>private</code>.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>A list of up to ten (10) tags assigned to the NFS file share are returned, sorted alphabetically by key name. Every tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the <code>ListTagsForResource</code> API.</p>"
         }
       },
       "documentation": "<p>The Unix file permissions and ownership information assigned, by default, to native S3 objects when file gateway discovers them in S3 buckets. This operation is only supported in file gateways.</p>"
@@ -4233,6 +4286,10 @@
         },
         "Authentication": {
           "shape": "Authentication"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>A list of up to ten (10) tags assigned to the SMB file share are returned, sorted alphabetically by key name. Every tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the <code>ListTagsForResource</code> API.</p>"
         }
       },
       "documentation": "<p>The Windows file permissions and ownership information assigned, by default, to native S3 objects when file gateway discovers them in S3 buckets. This operation is only supported for file gateways.</p>"
@@ -4385,7 +4442,7 @@
         },
         "VolumeAttachmentStatus": {
           "shape": "VolumeAttachmentStatus",
-          "documentation": "<p>A value that indicates whether a storage volume is attached to, detached from, or is in the process of detaching from a gateway.</p>"
+          "documentation": "<p>A value that indicates whether a storage volume is attached to, detached from, or is in the process of detaching from a gateway. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#attach-detach-volume\">Moving Your Volumes to a Different Gateway</a>.</p>"
         },
         "VolumeSizeInBytes": {
           "shape": "long",
@@ -4424,7 +4481,7 @@
         },
         "TargetName": {
           "shape": "TargetName",
-          "documentation": "<p>The name of the iSCSI target that is used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying <code>TargetName</code> as <i>myvolume</i> results in the target ARN of <code>arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume</code>.</p>"
+          "documentation": "<p>The name of the iSCSI target used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying <code>TargetName</code> as <i>myvolume</i> results in the target ARN of <code>arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume</code>. The target name must be unique across all volumes on a gateway.</p> <p>If you don't specify a value, Storage Gateway uses the value that was previously used for this volume as the new target name.</p>"
         }
       },
       "documentation": "<p>Describes an iSCSI stored volume.</p>"
@@ -4443,12 +4500,15 @@
       ],
       "members": {
         "Key": {
-          "shape": "TagKey"
+          "shape": "TagKey",
+          "documentation": "<p>Tag key (String). The key can't start with aws:. </p>"
         },
         "Value": {
-          "shape": "TagValue"
+          "shape": "TagValue",
+          "documentation": "<p>Value of the tag key.</p>"
         }
-      }
+      },
+      "documentation": "<p>A key-value pair that helps you manage, filter, and search for your resource. Allowed characters: letters, white space, and numbers, representable in UTF-8, and the following characters: + - = . _ : /</p>"
     },
     "TagKey": {
       "type": "string",
@@ -4642,7 +4702,8 @@
           "documentation": "<p>The size, in bytes, of the virtual tapes to recover.</p>"
         },
         "TapeStatus": {
-          "shape": "TapeRecoveryPointStatus"
+          "shape": "TapeRecoveryPointStatus",
+          "documentation": "<p>The status of the virtual tapes.</p>"
         }
       },
       "documentation": "<p>Describes a recovery point.</p>"
@@ -4768,7 +4829,8 @@
           "shape": "GatewayName"
         },
         "GatewayTimezone": {
-          "shape": "GatewayTimezone"
+          "shape": "GatewayTimezone",
+          "documentation": "<p>A value that indicates the time zone of the gateway.</p>"
         }
       }
     },
@@ -4779,7 +4841,8 @@
           "shape": "GatewayARN"
         },
         "GatewayName": {
-          "shape": "string"
+          "shape": "string",
+          "documentation": "<p>The name you configured for your gateway.</p>"
         }
       },
       "documentation": "<p>A JSON object containing the ARN of the gateway that was updated.</p>"
@@ -4995,7 +5058,7 @@
       "members": {
         "VolumeARN": {
           "shape": "VolumeARN",
-          "documentation": "<p/>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the volume. Use the <a>ListVolumes</a> operation to return a list of gateway volumes.</p>"
         }
       },
       "documentation": "<p>A JSON object containing the of the updated storage volume.</p>"
@@ -5035,13 +5098,16 @@
           "documentation": "<p>Specifies the unique Amazon Resource Name (ARN) of the device (tape drive or media changer).</p>"
         },
         "VTLDeviceType": {
-          "shape": "VTLDeviceType"
+          "shape": "VTLDeviceType",
+          "documentation": "<p>Specifies the type of device that the VTL device emulates.</p>"
         },
         "VTLDeviceVendor": {
-          "shape": "VTLDeviceVendor"
+          "shape": "VTLDeviceVendor",
+          "documentation": "<p>Specifies the vendor of the device that the VTL device object emulates.</p>"
         },
         "VTLDeviceProductIdentifier": {
-          "shape": "VTLDeviceProductIdentifier"
+          "shape": "VTLDeviceProductIdentifier",
+          "documentation": "<p>Specifies the model number of device that the VTL device emulates.</p>"
         },
         "DeviceiSCSIAttributes": {
           "shape": "DeviceiSCSIAttributes",
@@ -5116,14 +5182,16 @@
           "documentation": "<p>The unique identifier assigned to your gateway during activation. This ID becomes part of the gateway Amazon Resource Name (ARN), which you use as input for other operations.</p> <p> Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and hyphens (-).</p>"
         },
         "VolumeType": {
-          "shape": "VolumeType"
+          "shape": "VolumeType",
+          "documentation": "<p>One of the VolumeType enumeration values describing the type of the volume.</p>"
         },
         "VolumeSizeInBytes": {
           "shape": "long",
           "documentation": "<p>The size of the volume in bytes.</p> <p>Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and hyphens (-).</p>"
         },
         "VolumeAttachmentStatus": {
-          "shape": "VolumeAttachmentStatus"
+          "shape": "VolumeAttachmentStatus",
+          "documentation": "<p>One of the VolumeStatus values that indicates the state of the storage volume. </p>"
         }
       },
       "documentation": "<p>Describes a storage volume object.</p>"
@@ -5138,18 +5206,23 @@
       "type": "structure",
       "members": {
         "VolumeARN": {
-          "shape": "VolumeARN"
+          "shape": "VolumeARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the volume target.</p>"
         },
         "VolumeSizeInBytes": {
-          "shape": "long"
+          "shape": "long",
+          "documentation": "<p>The size of the volume in bytes.</p>"
         },
         "VolumeUsageInBytes": {
-          "shape": "long"
+          "shape": "long",
+          "documentation": "<p>The size of the data stored on the volume in bytes.</p> <note> <p>This value is not available for volumes created prior to May 13, 2015, until you store data on the volume.</p> </note>"
         },
         "VolumeRecoveryPointTime": {
-          "shape": "string"
+          "shape": "string",
+          "documentation": "<p>The time the recovery point was taken.</p>"
         }
-      }
+      },
+      "documentation": "<p>Describes a storage volume recovery point object.</p>"
     },
     "VolumeRecoveryPointInfos": {
       "type": "list",
@@ -5212,5 +5285,5 @@
       "type": "string"
     }
   },
-  "documentation": "<fullname>AWS Storage Gateway Service</fullname> <p>AWS Storage Gateway is the service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between an organization's on-premises IT environment and AWS's storage infrastructure. The service enables you to securely upload data to the AWS cloud for cost effective backup and rapid disaster recovery.</p> <p>Use the following links to get started using the <i>AWS Storage Gateway Service API Reference</i>:</p> <ul> <li> <p> <a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders\">AWS Storage Gateway Required Request Headers</a>: Describes the required headers that you must send with every POST request to AWS Storage Gateway.</p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests\">Signing Requests</a>: AWS Storage Gateway requires that you authenticate every request you send; this topic describes how sign such a request.</p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses\">Error Responses</a>: Provides reference information about AWS Storage Gateway errors.</p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html\">Operations in AWS Storage Gateway</a>: Contains detailed descriptions of all AWS Storage Gateway operations, their request parameters, response elements, possible errors, and examples of requests and responses.</p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region\">AWS Storage Gateway Regions and Endpoints:</a> Provides a list of each AWS region and endpoints available for use with AWS Storage Gateway. </p> </li> </ul> <note> <p>AWS Storage Gateway resource IDs are in uppercase. When you use these resource IDs with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change your resource ID to lowercase to use it with the EC2 API. For example, in Storage Gateway the ID for a volume might be <code>vol-AA22BB012345DAF670</code>. When you use this ID with the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>. Otherwise, the EC2 API might not behave as expected.</p> </note> <important> <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway volumes are changing to a longer format. Starting in December 2016, all new volumes and snapshots will be created with a 17-character string. Starting in April 2016, you will be able to use these longer IDs so you can test your systems with the new format. For more information, see <a href=\"https://aws.amazon.com/ec2/faqs/#longer-ids\">Longer EC2 and EBS Resource IDs</a>. </p> <p> For example, a volume Amazon Resource Name (ARN) with the longer volume ID format looks like the following:</p> <p> <code>arn:aws:storagegateway:us-west-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABBCCDDEEFFG</code>.</p> <p>A snapshot ID with the longer ID format looks like the following: <code>snap-78e226633445566ee</code>.</p> <p>For more information, see <a href=\"https://forums.aws.amazon.com/ann.jspa?annID=3557\">Announcement: Heads-up – Longer AWS Storage Gateway volume and snapshot IDs coming in 2016</a>.</p> </important>"
+  "documentation": "<fullname>AWS Storage Gateway Service</fullname> <p>AWS Storage Gateway is the service that connects an on-premises software appliance with cloud-based storage to provide seamless and secure integration between an organization's on-premises IT environment and AWS's storage infrastructure. The service enables you to securely upload data to the AWS cloud for cost effective backup and rapid disaster recovery.</p> <p>Use the following links to get started using the <i>AWS Storage Gateway Service API Reference</i>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewayHTTPRequestsHeaders\">AWS Storage Gateway Required Request Headers</a>: Describes the required headers that you must send with every POST request to AWS Storage Gateway.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#AWSStorageGatewaySigningRequests\">Signing Requests</a>: AWS Storage Gateway requires that you authenticate every request you send; this topic describes how sign such a request.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/AWSStorageGatewayAPI.html#APIErrorResponses\">Error Responses</a>: Provides reference information about AWS Storage Gateway errors.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/storagegateway/latest/APIReference/API_Operations.html\">Operations in AWS Storage Gateway</a>: Contains detailed descriptions of all AWS Storage Gateway operations, their request parameters, response elements, possible errors, and examples of requests and responses.</p> </li> <li> <p> <a href=\"http://docs.aws.amazon.com/general/latest/gr/rande.html#sg_region\">AWS Storage Gateway Regions and Endpoints:</a> Provides a list of each AWS region and endpoints available for use with AWS Storage Gateway. </p> </li> </ul> <note> <p>AWS Storage Gateway resource IDs are in uppercase. When you use these resource IDs with the Amazon EC2 API, EC2 expects resource IDs in lowercase. You must change your resource ID to lowercase to use it with the EC2 API. For example, in Storage Gateway the ID for a volume might be <code>vol-AA22BB012345DAF670</code>. When you use this ID with the EC2 API, you must change it to <code>vol-aa22bb012345daf670</code>. Otherwise, the EC2 API might not behave as expected.</p> </note> <important> <p>IDs for Storage Gateway volumes and Amazon EBS snapshots created from gateway volumes are changing to a longer format. Starting in December 2016, all new volumes and snapshots will be created with a 17-character string. Starting in April 2016, you will be able to use these longer IDs so you can test your systems with the new format. For more information, see <a href=\"https://aws.amazon.com/ec2/faqs/#longer-ids\">Longer EC2 and EBS Resource IDs</a>. </p> <p> For example, a volume Amazon Resource Name (ARN) with the longer volume ID format looks like the following:</p> <p> <code>arn:aws:storagegateway:us-west-2:111122223333:gateway/sgw-12A3456B/volume/vol-1122AABBCCDDEEFFG</code>.</p> <p>A snapshot ID with the longer ID format looks like the following: <code>snap-78e226633445566ee</code>.</p> <p>For more information, see <a href=\"https://forums.aws.amazon.com/ann.jspa?annID=3557\">Announcement: Heads-up – Longer AWS Storage Gateway volume and snapshot IDs coming in 2016</a>.</p> </important>"
 }

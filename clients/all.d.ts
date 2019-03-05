@@ -170,3 +170,4 @@ export import ApiGatewayV2 = require('./apigatewayv2');
 export import DocDB = require('./docdb');
 export import Backup = require('./backup');
 export import WorkLink = require('./worklink');
+export import Textract = require('./textract');

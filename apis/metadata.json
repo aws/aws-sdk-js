@@ -684,5 +684,8 @@
   },
   "worklink": {
     "name": "WorkLink"
+  },
+  "textract": {
+    "name": "Textract"
   }
 }

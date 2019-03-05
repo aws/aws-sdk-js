@@ -28,11 +28,11 @@ declare class StorageGateway extends Service {
    */
   addCache(callback?: (err: AWSError, data: StorageGateway.Types.AddCacheOutput) => void): Request<StorageGateway.Types.AddCacheOutput, AWSError>;
   /**
-   * Adds one or more tags to the specified resource. You use tags to add metadata to resources, which you can use to categorize these resources. For example, you can categorize resources by purpose, owner, environment, or team. Each tag consists of a key and a value, which you define. You can add tags to the following AWS Storage Gateway resources:   Storage gateways of all types     Storage Volumes     Virtual Tapes   You can create a maximum of 10 tags for each resource. Virtual tapes and storage volumes that are recovered to a new gateway maintain their tags.
+   * Adds one or more tags to the specified resource. You use tags to add metadata to resources, which you can use to categorize these resources. For example, you can categorize resources by purpose, owner, environment, or team. Each tag consists of a key and a value, which you define. You can add tags to the following AWS Storage Gateway resources:   Storage gateways of all types   Storage Volumes   Virtual Tapes   NFS and SMB File Shares   You can create a maximum of 10 tags for each resource. Virtual tapes and storage volumes that are recovered to a new gateway maintain their tags.
    */
   addTagsToResource(params: StorageGateway.Types.AddTagsToResourceInput, callback?: (err: AWSError, data: StorageGateway.Types.AddTagsToResourceOutput) => void): Request<StorageGateway.Types.AddTagsToResourceOutput, AWSError>;
   /**
-   * Adds one or more tags to the specified resource. You use tags to add metadata to resources, which you can use to categorize these resources. For example, you can categorize resources by purpose, owner, environment, or team. Each tag consists of a key and a value, which you define. You can add tags to the following AWS Storage Gateway resources:   Storage gateways of all types     Storage Volumes     Virtual Tapes   You can create a maximum of 10 tags for each resource. Virtual tapes and storage volumes that are recovered to a new gateway maintain their tags.
+   * Adds one or more tags to the specified resource. You use tags to add metadata to resources, which you can use to categorize these resources. For example, you can categorize resources by purpose, owner, environment, or team. Each tag consists of a key and a value, which you define. You can add tags to the following AWS Storage Gateway resources:   Storage gateways of all types   Storage Volumes   Virtual Tapes   NFS and SMB File Shares   You can create a maximum of 10 tags for each resource. Virtual tapes and storage volumes that are recovered to a new gateway maintain their tags.
    */
   addTagsToResource(callback?: (err: AWSError, data: StorageGateway.Types.AddTagsToResourceOutput) => void): Request<StorageGateway.Types.AddTagsToResourceOutput, AWSError>;
   /**
@@ -595,7 +595,7 @@ declare namespace StorageGateway {
      */
     GatewayTimezone: GatewayTimezone;
     /**
-     * A value that indicates the region where you want to store your data. The gateway region specified must be the same region as the region in your Host header in the request. For more information about available regions and endpoints for AWS Storage Gateway, see Regions and Endpoints in the Amazon Web Services Glossary.  Valid Values: "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ca-central-1", "eu-west-1", "eu-central-1", "eu-west-2", "eu-west-3", "ap-northeast-1", "ap-northeast-2", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "sa-east-1"
+     * A value that indicates the region where you want to store your data. The gateway region specified must be the same region as the region in your Host header in the request. For more information about available regions and endpoints for AWS Storage Gateway, see Regions and Endpoints in the Amazon Web Services Glossary.  Valid Values: See AWS Storage Gateway Regions and Endpoints in the AWS General Reference. 
      */
     GatewayRegion: RegionId;
     /**
@@ -610,6 +610,10 @@ declare namespace StorageGateway {
      * The value that indicates the type of medium changer to use for tape gateway. This field is optional.  Valid Values: "STK-L700", "AWS-Gateway-VTL"
      */
     MediumChangerType?: MediumChangerType;
+    /**
+     * A list of up to ten (10) tags assigned to the gateway may be specified. Every tag is a key-value pair.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256. 
+     */
+    Tags?: Tags;
   }
   export interface ActivateGatewayOutput {
     GatewayARN?: GatewayARN;
@@ -617,6 +621,9 @@ declare namespace StorageGateway {
   export type ActivationKey = string;
   export interface AddCacheInput {
     GatewayARN: GatewayARN;
+    /**
+     * An array of strings that identify disks that are to be configured as working storage. Each string have a minimum length of 1 and maximum length of 300. You can get the disk IDs from the ListLocalDisks API.
+     */
     DiskIds: DiskIds;
   }
   export interface AddCacheOutput {
@@ -628,7 +635,7 @@ declare namespace StorageGateway {
      */
     ResourceARN: ResourceARN;
     /**
-     * The key-value pair that represents the tag you want to add to the resource. The value can be an empty string.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. 
+     * The key-value pair that represents the tag you want to add to the resource. The value can be an empty string.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256. 
      */
     Tags: Tags;
   }
@@ -640,6 +647,9 @@ declare namespace StorageGateway {
   }
   export interface AddUploadBufferInput {
     GatewayARN: GatewayARN;
+    /**
+     * An array of strings that identify disks that are to be configured as working storage. Each string have a minimum length of 1 and maximum length of 300. You can get the disk IDs from the ListLocalDisks API.
+     */
     DiskIds: DiskIds;
   }
   export interface AddUploadBufferOutput {
@@ -710,7 +720,7 @@ declare namespace StorageGateway {
      */
     VolumeStatus?: VolumeStatus;
     /**
-     * A value that indicates whether a storage volume is attached to or detached from a gateway.
+     * A value that indicates whether a storage volume is attached to or detached from a gateway. For more information, see Moving Your Volumes to a Different Gateway.
      */
     VolumeAttachmentStatus?: VolumeAttachmentStatus;
     /**
@@ -739,7 +749,7 @@ declare namespace StorageGateway {
     VolumeUsedInBytes?: VolumeUsedInBytes;
     KMSKey?: KMSKey;
     /**
-     * The name of the iSCSI target that is used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying TargetName as myvolume results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume.
+     * The name of the iSCSI target used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying TargetName as myvolume results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume. The target name must be unique across all volumes on a gateway. If you don't specify a value, Storage Gateway uses the value that was previously used for this volume as the new target name.
      */
     TargetName?: TargetName;
   }
@@ -802,7 +812,7 @@ declare namespace StorageGateway {
      */
     SnapshotId?: SnapshotId;
     /**
-     * The name of the iSCSI target used by initiators to connect to the target and as a suffix for the target ARN. For example, specifying TargetName as myvolume results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume. The target name must be unique across all volumes of a gateway.
+     * The name of the iSCSI target used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying TargetName as myvolume results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume. The target name must be unique across all volumes on a gateway. If you don't specify a value, Storage Gateway uses the value that was previously used for this volume as the new target name.
      */
     TargetName: TargetName;
     /**
@@ -893,6 +903,10 @@ declare namespace StorageGateway {
      * A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is private.
      */
     RequesterPays?: Boolean;
+    /**
+     * A list of up to ten (10) tags can be assigned to the NFS file share. Every tag is a key-value pair.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256. 
+     */
+    Tags?: Tags;
   }
   export interface CreateNFSFileShareOutput {
     /**
@@ -957,6 +971,10 @@ declare namespace StorageGateway {
      * The authentication method that users use to access the file share. Valid values are ActiveDirectory or GuestAccess. The default is ActiveDirectory.
      */
     Authentication?: Authentication;
+    /**
+     * A list of up to ten (10) tags can be assigned to the NFS file share. Every tag is a key-value pair.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256. 
+     */
+    Tags?: Tags;
   }
   export interface CreateSMBFileShareOutput {
     /**
@@ -965,12 +983,27 @@ declare namespace StorageGateway {
     FileShareARN?: FileShareARN;
   }
   export interface CreateSnapshotFromVolumeRecoveryPointInput {
+    /**
+     * The Amazon Resource Name (ARN) of the iSCSI volume target. Use the DescribeStorediSCSIVolumes operation to return to retrieve the TargetARN for specified VolumeARN.
+     */
     VolumeARN: VolumeARN;
+    /**
+     * Textual description of the snapshot that appears in the Amazon EC2 console, Elastic Block Store snapshots panel in the Description field, and in the AWS Storage Gateway snapshot Details pane, Description field
+     */
     SnapshotDescription: SnapshotDescription;
   }
   export interface CreateSnapshotFromVolumeRecoveryPointOutput {
+    /**
+     * The ID of the snapshot.
+     */
     SnapshotId?: SnapshotId;
+    /**
+     * The Amazon Resource Name (ARN) of the iSCSI volume target. Use the DescribeStorediSCSIVolumes operation to return to retrieve the TargetARN for specified VolumeARN.
+     */
     VolumeARN?: VolumeARN;
+    /**
+     * The time the volume was created from the recovery point.
+     */
     VolumeRecoveryPointTime?: string;
   }
   export interface CreateSnapshotInput {
@@ -1008,7 +1041,7 @@ declare namespace StorageGateway {
      */
     PreserveExistingData: boolean;
     /**
-     * The name of the iSCSI target used by initiators to connect to the target and as a suffix for the target ARN. For example, specifying TargetName as myvolume results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume. The target name must be unique across all volumes of a gateway.
+     * The name of the iSCSI target used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying TargetName as myvolume results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume. The target name must be unique across all volumes on a gateway. If you don't specify a value, Storage Gateway uses the value that was previously used for this volume as the new target name.
      */
     TargetName: TargetName;
     /**
@@ -1157,9 +1190,15 @@ declare namespace StorageGateway {
     GatewayARN?: GatewayARN;
   }
   export interface DeleteSnapshotScheduleInput {
+    /**
+     * The volume which snapshot schedule to delete.
+     */
     VolumeARN: VolumeARN;
   }
   export interface DeleteSnapshotScheduleOutput {
+    /**
+     * The volume which snapshot schedule was deleted.
+     */
     VolumeARN?: VolumeARN;
   }
   export interface DeleteTapeArchiveInput {
@@ -1221,14 +1260,35 @@ declare namespace StorageGateway {
   }
   export interface DescribeCacheOutput {
     GatewayARN?: GatewayARN;
+    /**
+     * An array of strings that identify disks that are to be configured as working storage. Each string have a minimum length of 1 and maximum length of 300. You can get the disk IDs from the ListLocalDisks API.
+     */
     DiskIds?: DiskIds;
+    /**
+     * The amount of cache in bytes allocated to the a gateway.
+     */
     CacheAllocatedInBytes?: long;
+    /**
+     * Percent use of the gateway's cache storage. This metric applies only to the gateway-cached volume setup. The sample is taken at the end of the reporting period.
+     */
     CacheUsedPercentage?: double;
+    /**
+     * The file share's contribution to the overall percentage of the gateway's cache that has not been persisted to AWS. The sample is taken at the end of the reporting period.
+     */
     CacheDirtyPercentage?: double;
+    /**
+     * Percent of application read operations from the file shares that are served from cache. The sample is taken at the end of the reporting period.
+     */
     CacheHitPercentage?: double;
+    /**
+     * 
+     */
     CacheMissPercentage?: double;
   }
   export interface DescribeCachediSCSIVolumesInput {
+    /**
+     * An array of strings where each string represents the Amazon Resource Name (ARN) of a cached volume. All of the specified cached volumes must from the same gateway. Use ListVolumes to get volume ARNs for a gateway.
+     */
     VolumeARNs: VolumeARNs;
   }
   export interface DescribeCachediSCSIVolumesOutput {
@@ -1286,6 +1346,10 @@ declare namespace StorageGateway {
      * The date on which the last software update was applied to the gateway. If the gateway has never been updated, this field does not return a value in the response.
      */
     LastSoftwareUpdate?: LastSoftwareUpdate;
+    /**
+     * A list of up to ten (10) tags assigned to the gateway are returned, sorted alphabetically by key name. Every tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the ListTagsForResource API.
+     */
+    Tags?: Tags;
   }
   export interface DescribeMaintenanceStartTimeInput {
     GatewayARN: GatewayARN;
@@ -1304,6 +1368,9 @@ declare namespace StorageGateway {
      * An ordinal number between 0 and 6 that represents the day of the week, where 0 represents Sunday and 6 represents Saturday. The day of week is in the time zone of the gateway.
      */
     DayOfWeek?: DayOfWeek;
+    /**
+     * A value that indicates the time zone that is set for the gateway. The start time and day of week specified should be in the time zone of the gateway.
+     */
     Timezone?: GatewayTimezone;
   }
   export interface DescribeNFSFileSharesInput {
@@ -1351,10 +1418,25 @@ declare namespace StorageGateway {
     VolumeARN: VolumeARN;
   }
   export interface DescribeSnapshotScheduleOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the volume that was specified in the request.
+     */
     VolumeARN?: VolumeARN;
+    /**
+     * The hour of the day at which the snapshot schedule begins represented as hh, where hh is the hour (0 to 23). The hour of the day is in the time zone of the gateway.
+     */
     StartAt?: HourOfDay;
+    /**
+     * The number of hours between snapshots.
+     */
     RecurrenceInHours?: RecurrenceInHours;
+    /**
+     * The snapshot description.
+     */
     Description?: Description;
+    /**
+     * A value that indicates the time zone of the gateway.
+     */
     Timezone?: GatewayTimezone;
   }
   export interface DescribeStorediSCSIVolumesInput {
@@ -1364,6 +1446,9 @@ declare namespace StorageGateway {
     VolumeARNs: VolumeARNs;
   }
   export interface DescribeStorediSCSIVolumesOutput {
+    /**
+     * Describes a single unit of output from DescribeStorediSCSIVolumes. The following fields are returned:    ChapEnabled: Indicates whether mutual CHAP is enabled for the iSCSI target.    LunNumber: The logical disk number.    NetworkInterfaceId: The network interface ID of the stored volume that initiator use to map the stored volume as an iSCSI target.    NetworkInterfacePort: The port used to communicate with iSCSI targets.    PreservedExistingData: Indicates if when the stored volume was created, existing data on the underlying local disk was preserved.    SourceSnapshotId: If the stored volume was created from a snapshot, this field contains the snapshot ID used, e.g. snap-1122aabb. Otherwise, this field is not included.    StorediSCSIVolumes: An array of StorediSCSIVolume objects where each object contains metadata about one stored volume.    TargetARN: The Amazon Resource Name (ARN) of the volume target.    VolumeARN: The Amazon Resource Name (ARN) of the stored volume.    VolumeDiskId: The disk ID of the local disk that was specified in the CreateStorediSCSIVolume operation.    VolumeId: The unique identifier of the storage volume, e.g. vol-1122AABB.    VolumeiSCSIAttributes: An VolumeiSCSIAttributes object that represents a collection of iSCSI attributes for one stored volume.    VolumeProgress: Represents the percentage complete if the volume is restoring or bootstrapping that represents the percent of data transferred. This field does not appear in the response if the stored volume is not restoring or bootstrapping.    VolumeSizeInBytes: The size of the volume in bytes.    VolumeStatus: One of the VolumeStatus values that indicates the state of the volume.    VolumeType: One of the enumeration values describing the type of the volume. Currently, on STORED volumes are supported.  
+     */
     StorediSCSIVolumes?: StorediSCSIVolumes;
   }
   export interface DescribeTapeArchivesInput {
@@ -1442,8 +1527,17 @@ declare namespace StorageGateway {
   }
   export interface DescribeUploadBufferOutput {
     GatewayARN?: GatewayARN;
+    /**
+     * An array of the gateway's local disk IDs that are configured as working storage. Each local disk ID is specified as a string (minimum length of 1 and maximum length of 300). If no local disks are configured as working storage, then the DiskIds array is empty.
+     */
     DiskIds?: DiskIds;
+    /**
+     * The total number of bytes being used in the gateway's upload buffer.
+     */
     UploadBufferUsedInBytes?: long;
+    /**
+     * The total number of bytes allocated in the gateway's as upload buffer.
+     */
     UploadBufferAllocatedInBytes?: long;
   }
   export interface DescribeVTLDevicesInput {
@@ -1702,7 +1796,13 @@ declare namespace StorageGateway {
     Limit?: PositiveIntObject;
   }
   export interface ListGatewaysOutput {
+    /**
+     * An array of GatewayInfo objects.
+     */
     Gateways?: Gateways;
+    /**
+     * Use the marker in your next request to fetch the next set of gateways in the list. If there are no more gateways to list, this field does not appear in the response.
+     */
     Marker?: Marker;
   }
   export interface ListLocalDisksInput {
@@ -1710,6 +1810,9 @@ declare namespace StorageGateway {
   }
   export interface ListLocalDisksOutput {
     GatewayARN?: GatewayARN;
+    /**
+     * A JSON object containing the following fields:    ListLocalDisksOutput$Disks   
+     */
     Disks?: Disks;
   }
   export interface ListTagsForResourceInput {
@@ -1775,6 +1878,9 @@ declare namespace StorageGateway {
   }
   export interface ListVolumeRecoveryPointsOutput {
     GatewayARN?: GatewayARN;
+    /**
+     * An array of VolumeRecoveryPointInfo objects.
+     */
     VolumeRecoveryPointInfos?: VolumeRecoveryPointInfos;
   }
   export interface ListVolumesInput {
@@ -1790,7 +1896,13 @@ declare namespace StorageGateway {
   }
   export interface ListVolumesOutput {
     GatewayARN?: GatewayARN;
+    /**
+     * Use the marker in your next request to continue pagination of iSCSI volumes. If there are no more volumes to list, this field does not appear in the response body.
+     */
     Marker?: Marker;
+    /**
+     * An array of VolumeInfo objects, where each object describes an iSCSI volume. If no volumes are defined for the gateway, then VolumeInfos is an empty array "[]".
+     */
     VolumeInfos?: VolumeInfos;
   }
   export type LocalConsolePassword = string;
@@ -1849,6 +1961,10 @@ declare namespace StorageGateway {
      * A value that sets the access control list permission for objects in the Amazon S3 bucket that a file gateway puts objects into. The default value is private.
      */
     RequesterPays?: Boolean;
+    /**
+     * A list of up to ten (10) tags assigned to the NFS file share are returned, sorted alphabetically by key name. Every tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the ListTagsForResource API.
+     */
+    Tags?: Tags;
   }
   export type NFSFileShareInfoList = NFSFileShareInfo[];
   export interface NetworkInterface {
@@ -1997,6 +2113,10 @@ declare namespace StorageGateway {
      */
     InvalidUserList?: FileShareUserList;
     Authentication?: Authentication;
+    /**
+     * A list of up to ten (10) tags assigned to the SMB file share are returned, sorted alphabetically by key name. Every tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the ListTagsForResource API.
+     */
+    Tags?: Tags;
   }
   export type SMBFileShareInfoList = SMBFileShareInfo[];
   export type SMBGuestPassword = string;
@@ -2057,7 +2177,7 @@ declare namespace StorageGateway {
      */
     VolumeStatus?: VolumeStatus;
     /**
-     * A value that indicates whether a storage volume is attached to, detached from, or is in the process of detaching from a gateway.
+     * A value that indicates whether a storage volume is attached to, detached from, or is in the process of detaching from a gateway. For more information, see Moving Your Volumes to a Different Gateway.
      */
     VolumeAttachmentStatus?: VolumeAttachmentStatus;
     /**
@@ -2094,13 +2214,19 @@ declare namespace StorageGateway {
     VolumeUsedInBytes?: VolumeUsedInBytes;
     KMSKey?: KMSKey;
     /**
-     * The name of the iSCSI target that is used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying TargetName as myvolume results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume.
+     * The name of the iSCSI target used by an initiator to connect to a volume and used as a suffix for the target ARN. For example, specifying TargetName as myvolume results in the target ARN of arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume. The target name must be unique across all volumes on a gateway. If you don't specify a value, Storage Gateway uses the value that was previously used for this volume as the new target name.
      */
     TargetName?: TargetName;
   }
   export type StorediSCSIVolumes = StorediSCSIVolume[];
   export interface Tag {
+    /**
+     * Tag key (String). The key can't start with aws:. 
+     */
     Key: TagKey;
+    /**
+     * Value of the tag key.
+     */
     Value: TagValue;
   }
   export type TagKey = string;
@@ -2220,6 +2346,9 @@ declare namespace StorageGateway {
      * The size, in bytes, of the virtual tapes to recover.
      */
     TapeSizeInBytes?: TapeSize;
+    /**
+     * The status of the virtual tapes.
+     */
     TapeStatus?: TapeRecoveryPointStatus;
   }
   export type TapeRecoveryPointInfos = TapeRecoveryPointInfo[];
@@ -2276,10 +2405,16 @@ declare namespace StorageGateway {
   export interface UpdateGatewayInformationInput {
     GatewayARN: GatewayARN;
     GatewayName?: GatewayName;
+    /**
+     * A value that indicates the time zone of the gateway.
+     */
     GatewayTimezone?: GatewayTimezone;
   }
   export interface UpdateGatewayInformationOutput {
     GatewayARN?: GatewayARN;
+    /**
+     * The name you configured for your gateway.
+     */
     GatewayName?: string;
   }
   export interface UpdateGatewaySoftwareNowInput {
@@ -2426,7 +2561,7 @@ declare namespace StorageGateway {
   }
   export interface UpdateSnapshotScheduleOutput {
     /**
-     * 
+     * The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation to return a list of gateway volumes.
      */
     VolumeARN?: VolumeARN;
   }
@@ -2451,8 +2586,17 @@ declare namespace StorageGateway {
      * Specifies the unique Amazon Resource Name (ARN) of the device (tape drive or media changer).
      */
     VTLDeviceARN?: VTLDeviceARN;
+    /**
+     * Specifies the type of device that the VTL device emulates.
+     */
     VTLDeviceType?: VTLDeviceType;
+    /**
+     * Specifies the vendor of the device that the VTL device object emulates.
+     */
     VTLDeviceVendor?: VTLDeviceVendor;
+    /**
+     * Specifies the model number of device that the VTL device emulates.
+     */
     VTLDeviceProductIdentifier?: VTLDeviceProductIdentifier;
     /**
      * A list of iSCSI information about a VTL device.
@@ -2483,18 +2627,36 @@ declare namespace StorageGateway {
      * The unique identifier assigned to your gateway during activation. This ID becomes part of the gateway Amazon Resource Name (ARN), which you use as input for other operations.  Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and hyphens (-).
      */
     GatewayId?: GatewayId;
+    /**
+     * One of the VolumeType enumeration values describing the type of the volume.
+     */
     VolumeType?: VolumeType;
     /**
      * The size of the volume in bytes. Valid Values: 50 to 500 lowercase letters, numbers, periods (.), and hyphens (-).
      */
     VolumeSizeInBytes?: long;
+    /**
+     * One of the VolumeStatus values that indicates the state of the storage volume. 
+     */
     VolumeAttachmentStatus?: VolumeAttachmentStatus;
   }
   export type VolumeInfos = VolumeInfo[];
   export interface VolumeRecoveryPointInfo {
+    /**
+     * The Amazon Resource Name (ARN) of the volume target.
+     */
     VolumeARN?: VolumeARN;
+    /**
+     * The size of the volume in bytes.
+     */
     VolumeSizeInBytes?: long;
+    /**
+     * The size of the data stored on the volume in bytes.  This value is not available for volumes created prior to May 13, 2015, until you store data on the volume. 
+     */
     VolumeUsageInBytes?: long;
+    /**
+     * The time the recovery point was taken.
+     */
     VolumeRecoveryPointTime?: string;
   }
   export type VolumeRecoveryPointInfos = VolumeRecoveryPointInfo[];
