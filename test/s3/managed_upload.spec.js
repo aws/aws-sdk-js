@@ -201,6 +201,30 @@
         expect(data).not.to.exist;
         return expect(err.message).to.equal('ERROR');
       });
+
+      it('can abort a single part', function(done) {
+        helpers.mockHttpResponse(200, {}, '');
+        function WAIT_WHEN_SEND(req, done) {
+          setImmediate(function() {
+            done();
+          });
+        }
+        AWS.events.onAsync('send', WAIT_WHEN_SEND, true);
+        var upload = new AWS.S3.ManagedUpload({
+          service: s3,
+          params: {
+            Body: smallbody
+          }
+        });
+        upload.send(function(err, data) {
+          expect(err).to.exist;
+          expect(err.message).to.eql('Request aborted by user');
+          AWS.events.removeListener('send', WAIT_WHEN_SEND);
+          done();
+        });
+        upload.abort();
+      });
+
       it('uploads multipart if size is greater than min multipart size', function(done) {
         var reqs;
         reqs = helpers.mockResponses([

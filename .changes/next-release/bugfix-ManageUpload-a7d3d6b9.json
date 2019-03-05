@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "ManageUpload",
+  "description": "abort request stream when body is smaller than 5MB"
+}
