@@ -6640,7 +6640,7 @@
           "documentation": "<p>The signed authorization message for the prefix and account.</p>"
         }
       },
-      "documentation": "<p>Provides authorization for Amazon to bring a specific IP address range to a specific AWS account using bring your own IP addresses (BYOIP).</p>"
+      "documentation": "<p>Provides authorization for Amazon to bring a specific IP address range to a specific AWS account using bring your own IP addresses (BYOIP). For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#prepare-for-byoip\">Prepare to Bring Your Address Range to Your AWS Account</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CidrBlock": {
       "type": "structure",
@@ -10952,12 +10952,12 @@
         },
         "MaxResults": {
           "shape": "Integer",
-          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000. If <code>MaxResults</code> is given a value larger than 1000, only 1000 results are returned. You cannot specify this parameter and the instance IDs parameter in the same request.</p> <p>Constraint: If the value is greater than 1000, we return only 1000 items.</p>",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p> <p>Constraint: If the value is greater than 1000, we return only 1000 items.</p>",
           "locationName": "maxResults"
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The token to retrieve the next page of results.</p>",
+          "documentation": "<p>The token for the next page of results.</p>",
           "locationName": "nextToken"
         }
       }
@@ -11309,11 +11309,11 @@
         },
         "MaxResults": {
           "shape": "Integer",
-          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000. If <code>MaxResults</code> is given a value larger than 1000, only 1000 results are returned.</p>"
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The token to retrieve the next page of results.</p>"
+          "documentation": "<p>The token for the next page of results.</p>"
         }
       }
     },
@@ -11327,7 +11327,7 @@
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The token to use to retrieve the next page of results.</p>",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
           "locationName": "nextToken"
         }
       }
@@ -11644,11 +11644,11 @@
         },
         "MaxResults": {
           "shape": "Integer",
-          "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000. If <code>MaxResults</code> is given a value larger than 1000, only 1000 results are returned. You cannot specify this parameter and the flow log IDs parameter in the same request.</p>"
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The token to retrieve the next page of results.</p>"
+          "documentation": "<p>The token for the next page of results.</p>"
         }
       }
     },
@@ -12265,6 +12265,11 @@
         }
       }
     },
+    "DescribeInternetGatewaysMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 5
+    },
     "DescribeInternetGatewaysRequest": {
       "type": "structure",
       "members": {
@@ -12282,6 +12287,14 @@
           "shape": "ValueStringList",
           "documentation": "<p>One or more internet gateway IDs.</p> <p>Default: Describes all your internet gateways.</p>",
           "locationName": "internetGatewayId"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next page of results.</p>"
+        },
+        "MaxResults": {
+          "shape": "DescribeInternetGatewaysMaxResults",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
         }
       }
     },
@@ -12292,6 +12305,11 @@
           "shape": "InternetGatewayList",
           "documentation": "<p>Information about one or more internet gateways.</p>",
           "locationName": "internetGatewaySet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
         }
       }
     },
@@ -12484,7 +12502,7 @@
         },
         "MaxResults": {
           "shape": "Integer",
-          "documentation": "<p>The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.</p> <p>Constraint: If the value specified is greater than 1000, we return only 1000 items.</p>"
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
         },
         "NatGatewayIds": {
           "shape": "ValueStringList",
@@ -12493,7 +12511,7 @@
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The token to retrieve the next page of results.</p>"
+          "documentation": "<p>The token for the next page of results.</p>"
         }
       }
     },
@@ -12512,6 +12530,11 @@
         }
       }
     },
+    "DescribeNetworkAclsMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 5
+    },
     "DescribeNetworkAclsRequest": {
       "type": "structure",
       "members": {
@@ -12529,6 +12552,14 @@
           "shape": "ValueStringList",
           "documentation": "<p>One or more network ACL IDs.</p> <p>Default: Describes all your network ACLs.</p>",
           "locationName": "NetworkAclId"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next page of results.</p>"
+        },
+        "MaxResults": {
+          "shape": "DescribeNetworkAclsMaxResults",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
         }
       }
     },
@@ -12539,6 +12570,11 @@
           "shape": "NetworkAclList",
           "documentation": "<p>Information about one or more network ACLs.</p>",
           "locationName": "networkAclSet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
         }
       }
     },
@@ -12726,11 +12762,11 @@
         },
         "MaxResults": {
           "shape": "Integer",
-          "documentation": "<p>The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.</p> <p>Constraint: If the value specified is greater than 1000, we return only 1000 items.</p>"
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The token for the next set of items to return. (You received this token from a prior call.)</p>"
+          "documentation": "<p>The token for the next page of results.</p>"
         },
         "PrefixListIds": {
           "shape": "ValueStringList",
@@ -12744,7 +12780,7 @@
       "members": {
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
           "locationName": "nextToken"
         },
         "PrefixLists": {
@@ -13073,11 +13109,11 @@
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The token to retrieve the next page of results.</p>"
+          "documentation": "<p>The token for the next page of results.</p>"
         },
         "MaxResults": {
           "shape": "Integer",
-          "documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <b>NextToken</b> value. This value can be between 5 and 100.</p>"
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
         }
       }
     },
@@ -14172,12 +14208,12 @@
       "members": {
         "MaxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.</p>",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>",
           "locationName": "maxResults"
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token for the next set of items to return. (You received this token from a prior call.)</p>",
+          "documentation": "<p>The token for the next page of results.</p>",
           "locationName": "nextToken"
         },
         "VpcIds": {
@@ -14191,7 +14227,7 @@
       "members": {
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token to use when requesting the next set of items.</p>",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
           "locationName": "nextToken"
         },
         "Vpcs": {
@@ -14513,11 +14549,11 @@
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The token to request the next page of results. (You received this token from a prior call.)</p>"
+          "documentation": "<p>The token for the next page of results.</p>"
         },
         "MaxResults": {
           "shape": "DescribeVpcPeeringConnectionsMaxResults",
-          "documentation": "<p>The maximum number of results to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.</p>"
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
         }
       }
     },
@@ -14536,6 +14572,11 @@
         }
       }
     },
+    "DescribeVpcsMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 5
+    },
     "DescribeVpcsRequest": {
       "type": "structure",
       "members": {
@@ -14553,6 +14594,14 @@
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next page of results.</p>"
+        },
+        "MaxResults": {
+          "shape": "DescribeVpcsMaxResults",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
         }
       }
     },
@@ -14563,6 +14612,11 @@
           "shape": "VpcList",
           "documentation": "<p>Information about one or more VPCs.</p>",
           "locationName": "vpcSet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
         }
       }
     },

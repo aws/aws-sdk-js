@@ -381,7 +381,7 @@ declare namespace DirectConnect {
      */
     ownerAccount: OwnerAccount;
     /**
-     * The ID of the interconnect on which the connection will be provisioned. For example, dxcon-456abc78.
+     * The ID of the interconnect on which the connection will be provisioned.
      */
     interconnectId: InterconnectId;
     /**
@@ -442,11 +442,11 @@ declare namespace DirectConnect {
   export type AmazonAddress = string;
   export interface AssociateConnectionWithLagRequest {
     /**
-     * The ID of the connection. For example, dxcon-abc123.
+     * The ID of the connection.
      */
     connectionId: ConnectionId;
     /**
-     * The ID of the LAG with which to associate the connection. For example, dxlag-abc123.
+     * The ID of the LAG with which to associate the connection.
      */
     lagId: LagId;
   }
@@ -470,6 +470,7 @@ declare namespace DirectConnect {
      */
     connectionId: ConnectionId;
   }
+  export type AvailablePortSpeeds = PortSpeed[];
   export type AwsDevice = string;
   export type AwsDeviceV2 = string;
   export type BGPAuthKey = string;
@@ -1124,11 +1125,11 @@ declare namespace DirectConnect {
   export type DirectConnectGatewayState = "pending"|"available"|"deleting"|"deleted"|string;
   export interface DisassociateConnectionFromLagRequest {
     /**
-     * The ID of the connection. For example, dxcon-abc123.
+     * The ID of the connection.
      */
     connectionId: ConnectionId;
     /**
-     * The ID of the LAG. For example, dxlag-abc123.
+     * The ID of the LAG.
      */
     lagId: LagId;
   }
@@ -1292,6 +1293,10 @@ declare namespace DirectConnect {
      * The AWS Region for the location.
      */
     region?: Region;
+    /**
+     * The available port speeds for the location.
+     */
+    availablePortSpeeds?: AvailablePortSpeeds;
   }
   export type LocationCode = string;
   export type LocationList = Location[];
@@ -1474,6 +1479,7 @@ declare namespace DirectConnect {
   export type OwnerAccount = string;
   export type PaginationToken = string;
   export type PartnerName = string;
+  export type PortSpeed = string;
   export type ProviderName = string;
   export type Region = string;
   export type ResourceArn = string;

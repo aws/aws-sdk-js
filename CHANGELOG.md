@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.415.0-->
+<!--LATEST=2.416.0-->
 <!--ENTRYINSERT-->
+
+## 2.416.0
+* feature: DirectConnect: Exposed a new available port speeds field in the DescribeLocation api call.
+* feature: EC2: This release adds pagination support for ec2.DescribeVpcs, ec2.DescribeInternetGateways and ec2.DescribeNetworkAcls APIs
 
 ## 2.415.0
 * feature: MediaLive: This release adds support for pausing and unpausing one or both pipelines at scheduled times.

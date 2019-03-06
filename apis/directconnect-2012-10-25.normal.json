@@ -1042,7 +1042,7 @@
         },
         "interconnectId": {
           "shape": "InterconnectId",
-          "documentation": "<p>The ID of the interconnect on which the connection will be provisioned. For example, dxcon-456abc78.</p>"
+          "documentation": "<p>The ID of the interconnect on which the connection will be provisioned.</p>"
         },
         "vlan": {
           "shape": "VLAN",
@@ -1138,11 +1138,11 @@
       "members": {
         "connectionId": {
           "shape": "ConnectionId",
-          "documentation": "<p>The ID of the connection. For example, dxcon-abc123.</p>"
+          "documentation": "<p>The ID of the connection.</p>"
         },
         "lagId": {
           "shape": "LagId",
-          "documentation": "<p>The ID of the LAG with which to associate the connection. For example, dxlag-abc123.</p>"
+          "documentation": "<p>The ID of the LAG with which to associate the connection.</p>"
         }
       }
     },
@@ -1178,6 +1178,12 @@
           "shape": "ConnectionId",
           "documentation": "<p>The ID of the LAG or connection.</p>"
         }
+      }
+    },
+    "AvailablePortSpeeds": {
+      "type": "list",
+      "member": {
+        "shape": "PortSpeed"
       }
     },
     "AwsDevice": {
@@ -2190,11 +2196,11 @@
       "members": {
         "connectionId": {
           "shape": "ConnectionId",
-          "documentation": "<p>The ID of the connection. For example, dxcon-abc123.</p>"
+          "documentation": "<p>The ID of the connection.</p>"
         },
         "lagId": {
           "shape": "LagId",
-          "documentation": "<p>The ID of the LAG. For example, dxlag-abc123.</p>"
+          "documentation": "<p>The ID of the LAG.</p>"
         }
       }
     },
@@ -2435,6 +2441,10 @@
         "region": {
           "shape": "Region",
           "documentation": "<p>The AWS Region for the location.</p>"
+        },
+        "availablePortSpeeds": {
+          "shape": "AvailablePortSpeeds",
+          "documentation": "<p>The available port speeds for the location.</p>"
         }
       },
       "documentation": "<p>Information about an AWS Direct Connect location.</p>"
@@ -2683,6 +2693,9 @@
       "type": "string"
     },
     "PartnerName": {
+      "type": "string"
+    },
+    "PortSpeed": {
       "type": "string"
     },
     "ProviderName": {

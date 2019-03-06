@@ -6907,11 +6907,11 @@ declare namespace EC2 {
      */
     InstanceIds?: InstanceIdStringList;
     /**
-     * The maximum number of results to return for the request in a single page. The remaining results of the initial request can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1000. If MaxResults is given a value larger than 1000, only 1000 results are returned. You cannot specify this parameter and the instance IDs parameter in the same request. Constraint: If the value is greater than 1000, we return only 1000 items.
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. Constraint: If the value is greater than 1000, we return only 1000 items.
      */
     MaxResults?: Integer;
     /**
-     * The token to retrieve the next page of results.
+     * The token for the next page of results.
      */
     NextToken?: String;
   }
@@ -7156,11 +7156,11 @@ declare namespace EC2 {
      */
     EgressOnlyInternetGatewayIds?: EgressOnlyInternetGatewayIdList;
     /**
-     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1000. If MaxResults is given a value larger than 1000, only 1000 results are returned.
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
      */
     MaxResults?: Integer;
     /**
-     * The token to retrieve the next page of results.
+     * The token for the next page of results.
      */
     NextToken?: String;
   }
@@ -7170,7 +7170,7 @@ declare namespace EC2 {
      */
     EgressOnlyInternetGateways?: EgressOnlyInternetGatewayList;
     /**
-     * The token to use to retrieve the next page of results.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
     NextToken?: String;
   }
@@ -7394,11 +7394,11 @@ declare namespace EC2 {
      */
     FlowLogIds?: ValueStringList;
     /**
-     * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned NextToken value. This value can be between 5 and 1000. If MaxResults is given a value larger than 1000, only 1000 results are returned. You cannot specify this parameter and the flow log IDs parameter in the same request.
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
      */
     MaxResults?: Integer;
     /**
-     * The token to retrieve the next page of results.
+     * The token for the next page of results.
      */
     NextToken?: String;
   }
@@ -7837,6 +7837,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export type DescribeInternetGatewaysMaxResults = number;
   export interface DescribeInternetGatewaysRequest {
     /**
      * One or more filters.    attachment.state - The current state of the attachment between the gateway and the VPC (available). Present only if a VPC is attached.    attachment.vpc-id - The ID of an attached VPC.    internet-gateway-id - The ID of the Internet gateway.    owner-id - The ID of the AWS account that owns the internet gateway.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
@@ -7850,12 +7851,24 @@ declare namespace EC2 {
      * One or more internet gateway IDs. Default: Describes all your internet gateways.
      */
     InternetGatewayIds?: ValueStringList;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: DescribeInternetGatewaysMaxResults;
   }
   export interface DescribeInternetGatewaysResult {
     /**
      * Information about one or more internet gateways.
      */
     InternetGateways?: InternetGatewayList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
   }
   export interface DescribeKeyPairsRequest {
     /**
@@ -7999,7 +8012,7 @@ declare namespace EC2 {
      */
     Filter?: FilterList;
     /**
-     * The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results. Constraint: If the value specified is greater than 1000, we return only 1000 items.
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
      */
     MaxResults?: Integer;
     /**
@@ -8007,7 +8020,7 @@ declare namespace EC2 {
      */
     NatGatewayIds?: ValueStringList;
     /**
-     * The token to retrieve the next page of results.
+     * The token for the next page of results.
      */
     NextToken?: String;
   }
@@ -8021,6 +8034,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export type DescribeNetworkAclsMaxResults = number;
   export interface DescribeNetworkAclsRequest {
     /**
      * One or more filters.    association.association-id - The ID of an association ID for the ACL.    association.network-acl-id - The ID of the network ACL involved in the association.    association.subnet-id - The ID of the subnet involved in the association.    default - Indicates whether the ACL is the default network ACL for the VPC.    entry.cidr - The IPv4 CIDR range specified in the entry.    entry.icmp.code - The ICMP code specified in the entry, if any.    entry.icmp.type - The ICMP type specified in the entry, if any.    entry.ipv6-cidr - The IPv6 CIDR range specified in the entry.    entry.port-range.from - The start of the port range specified in the entry.     entry.port-range.to - The end of the port range specified in the entry.     entry.protocol - The protocol specified in the entry (tcp | udp | icmp or a protocol number).    entry.rule-action - Allows or denies the matching traffic (allow | deny).    entry.rule-number - The number of an entry (in other words, rule) in the set of ACL entries.    network-acl-id - The ID of the network ACL.    owner-id - The ID of the AWS account that owns the network ACL.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC for the network ACL.  
@@ -8034,12 +8048,24 @@ declare namespace EC2 {
      * One or more network ACL IDs. Default: Describes all your network ACLs.
      */
     NetworkAclIds?: ValueStringList;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: DescribeNetworkAclsMaxResults;
   }
   export interface DescribeNetworkAclsResult {
     /**
      * Information about one or more network ACLs.
      */
     NetworkAcls?: NetworkAclList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
   }
   export interface DescribeNetworkInterfaceAttributeRequest {
     /**
@@ -8167,11 +8193,11 @@ declare namespace EC2 {
      */
     Filters?: FilterList;
     /**
-     * The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results. Constraint: If the value specified is greater than 1000, we return only 1000 items.
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
      */
     MaxResults?: Integer;
     /**
-     * The token for the next set of items to return. (You received this token from a prior call.)
+     * The token for the next page of results.
      */
     NextToken?: String;
     /**
@@ -8181,7 +8207,7 @@ declare namespace EC2 {
   }
   export interface DescribePrefixListsResult {
     /**
-     * The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
     NextToken?: String;
     /**
@@ -8419,11 +8445,11 @@ declare namespace EC2 {
      */
     RouteTableIds?: ValueStringList;
     /**
-     * The token to retrieve the next page of results.
+     * The token for the next page of results.
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. This value can be between 5 and 100.
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
      */
     MaxResults?: Integer;
   }
@@ -9195,11 +9221,11 @@ declare namespace EC2 {
   }
   export interface DescribeVpcClassicLinkDnsSupportRequest {
     /**
-     * The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
      */
     MaxResults?: MaxResults;
     /**
-     * The token for the next set of items to return. (You received this token from a prior call.)
+     * The token for the next page of results.
      */
     NextToken?: NextToken;
     /**
@@ -9209,7 +9235,7 @@ declare namespace EC2 {
   }
   export interface DescribeVpcClassicLinkDnsSupportResult {
     /**
-     * The token to use when requesting the next set of items.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
      */
     NextToken?: NextToken;
     /**
@@ -9444,11 +9470,11 @@ declare namespace EC2 {
      */
     VpcPeeringConnectionIds?: ValueStringList;
     /**
-     * The token to request the next page of results. (You received this token from a prior call.)
+     * The token for the next page of results.
      */
     NextToken?: String;
     /**
-     * The maximum number of results to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
      */
     MaxResults?: DescribeVpcPeeringConnectionsMaxResults;
   }
@@ -9462,6 +9488,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export type DescribeVpcsMaxResults = number;
   export interface DescribeVpcsRequest {
     /**
      * One or more filters.    cidr - The primary IPv4 CIDR block of the VPC. The CIDR block you specify must exactly match the VPC's CIDR block for information to be returned for the VPC. Must contain the slash followed by one or two digits (for example, /28).    cidr-block-association.cidr-block - An IPv4 CIDR block associated with the VPC.    cidr-block-association.association-id - The association ID for an IPv4 CIDR block associated with the VPC.    cidr-block-association.state - The state of an IPv4 CIDR block associated with the VPC.    dhcp-options-id - The ID of a set of DHCP options.    ipv6-cidr-block-association.ipv6-cidr-block - An IPv6 CIDR block associated with the VPC.    ipv6-cidr-block-association.association-id - The association ID for an IPv6 CIDR block associated with the VPC.    ipv6-cidr-block-association.state - The state of an IPv6 CIDR block associated with the VPC.    isDefault - Indicates whether the VPC is the default VPC.    owner-id - The ID of the AWS account that owns the VPC.    state - The state of the VPC (pending | available).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC.  
@@ -9475,12 +9502,24 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: DescribeVpcsMaxResults;
   }
   export interface DescribeVpcsResult {
     /**
      * Information about one or more VPCs.
      */
     Vpcs?: VpcList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: String;
   }
   export interface DescribeVpnConnectionsRequest {
     /**
