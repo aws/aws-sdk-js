@@ -13,7 +13,7 @@ module.exports = {
         library: 'AWS'
     },
     resolve: {
-      packageAlias: 'react-native'
+        aliasFields: ['react-native']
     },
     module: {
         /**
@@ -27,7 +27,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.json$/,
-                loaders: ['json']
+                loaders: ['json-loader']
             }
         ]
     }

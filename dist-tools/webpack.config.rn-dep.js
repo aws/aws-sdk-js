@@ -24,7 +24,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.json$/,
-                loaders: ['json']
+                loaders: ['json-loader']
             }
         ]
     }
