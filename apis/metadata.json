@@ -661,7 +661,10 @@
     "name": "SecurityHub"
   },
   "appmesh": {
-    "name": "AppMesh"
+    "name": "AppMesh",
+    "versions": [
+      "2018-10-01*"
+    ]
   },
   "licensemanager": {
     "prefix": "license-manager",

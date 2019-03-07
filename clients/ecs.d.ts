@@ -517,6 +517,7 @@ declare namespace ECS {
      */
     gpuIds?: GpuIds;
   }
+  export type ContainerCondition = "START"|"COMPLETE"|"SUCCESS"|"HEALTHY"|string;
   export interface ContainerDefinition {
     /**
      * The name of a container. If you are linking multiple containers together in a task definition, the name of one container can be entered in the links of another container to connect the containers. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. This parameter maps to name in the Create a container section of the Docker Remote API and the --name option to docker run. 
@@ -583,11 +584,23 @@ declare namespace ECS {
      */
     secrets?: SecretList;
     /**
+     * The dependencies defined for container startup. A container can contain multiple dependencies.
+     */
+    dependsOn?: ContainerDependencies;
+    /**
+     * Time duration to wait before giving up on starting the container.  The startTimeout value for the container will take precedence over the ECS_CONTAINER_START_TIMEOUT container agent configuration parameter, if used. 
+     */
+    startTimeout?: BoxedInteger;
+    /**
+     * Time duration to wait before the container is forcefully killed if it does not exit normally on its own.  The stopTimeout value for the container will take precedence over the ECS_CONTAINER_STOP_TIMEOUT container agent configuration parameter, if used. 
+     */
+    stopTimeout?: BoxedInteger;
+    /**
      * The hostname to use for your container. This parameter maps to Hostname in the Create a container section of the Docker Remote API and the --hostname option to docker run.  The hostname parameter is not supported if you are using the awsvpc network mode. 
      */
     hostname?: String;
     /**
-     * The user name to use inside the container. This parameter maps to User in the Create a container section of the Docker Remote API and the --user option to docker run.  This parameter is not supported for Windows containers. 
+     * The username to use inside the container. This parameter maps to User in the Create a container section of the Docker Remote API and the --user option to docker run. This following formats can be used. If specifying a UID or GID, it must be specified as a positive integer.    user     user:group     uid     uid:gid     user:gid     uid:group     This parameter is not supported for Windows containers. 
      */
     user?: String;
     /**
@@ -656,6 +669,17 @@ declare namespace ECS {
     resourceRequirements?: ResourceRequirements;
   }
   export type ContainerDefinitions = ContainerDefinition[];
+  export type ContainerDependencies = ContainerDependency[];
+  export interface ContainerDependency {
+    /**
+     * The name of a container.
+     */
+    containerName: String;
+    /**
+     * The dependency condition of the container. The following are the available conditions and their behavior:    START - This condition emulates the behavior of links and volumes today. It validates that a dependent container is started before permitting other containers to start.    COMPLETE - This condition validates that a dependent container runs to completion (exits) before permitting other containers to start. This can be useful for non-essential containers that run a script and then subsequently exit.    SUCCESS - This condition is the same as COMPLETE, but it will also require that the container exits with a zero status.    HEALTHY - This condition validates that the dependent container passes its Docker health check before permitting other containers to start. This requires that the dependent container has health checks configured. This condition will only be confirmed at task startup.  
+     */
+    condition: ContainerCondition;
+  }
   export interface ContainerInstance {
     /**
      * The Amazon Resource Name (ARN) of the container instance. The ARN contains the arn:aws:ecs namespace, followed by the Region of the container instance, the AWS account ID of the container instance owner, the container-instance namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID .
@@ -851,7 +875,7 @@ declare namespace ECS {
      */
     networkConfiguration?: NetworkConfiguration;
     /**
-     * The period of time, in seconds, that the Amazon ECS service scheduler should ignore unhealthy Elastic Load Balancing target health checks after a task has first started. This is only valid if your service is configured to use a load balancer. If your service's tasks take a while to start and respond to Elastic Load Balancing health checks, you can specify a health check grace period of up to 7,200 seconds. During that time, the ECS service scheduler ignores health check status. This grace period can prevent the ECS service scheduler from marking tasks as unhealthy and stopping them before they have time to come up.
+     * The period of time, in seconds, that the Amazon ECS service scheduler should ignore unhealthy Elastic Load Balancing target health checks after a task has first started. This is only valid if your service is configured to use a load balancer. If your service's tasks take a while to start and respond to Elastic Load Balancing health checks, you can specify a health check grace period of up to 2,147,483,647 seconds. During that time, the ECS service scheduler ignores health check status. This grace period can prevent the ECS service scheduler from marking tasks as unhealthy and stopping them before they have time to come up.
      */
     healthCheckGracePeriodSeconds?: BoxedInteger;
     /**
@@ -1730,6 +1754,22 @@ declare namespace ECS {
   }
   export type PortMappingList = PortMapping[];
   export type PropagateTags = "TASK_DEFINITION"|"SERVICE"|string;
+  export interface ProxyConfiguration {
+    /**
+     * The proxy type. The only supported value is APPMESH.
+     */
+    type?: ProxyConfigurationType;
+    /**
+     * The name of the container that will serve as the App Mesh proxy.
+     */
+    containerName: String;
+    /**
+     * The set of network configuration parameters to provide the Container Network Interface (CNI) plugin, specified as key-value pairs.    IgnoredUID - (Required) The user ID (UID) of the proxy container as defined by the user parameter in a container definition. This is used to ensure the proxy ignores its own traffic. If IgnoredGID is specified, this field can be empty.    IgnoredGID - (Required) The group ID (GID) of the proxy container as defined by the user parameter in a container definition. This is used to ensure the proxy ignores its own traffic. If IgnoredGID is specified, this field can be empty.    AppPorts - (Required) The list of ports that the application uses. Network traffic to these ports will be forwarded to the ProxyIngressPort and ProxyEgressPort.    ProxyIngressPort - (Required) Specifies the port that incoming traffic to the AppPorts is directed to.    ProxyEgressPort - (Required) Specifies the port that outgoing traffic from the AppPorts is directed to.    EgressIgnoredPorts - (Required) The egress traffic going to these specified ports will be ignored and not redirected to the ProxyEgressPort. It can be empty list.    EgressIgnoredIPs - (Required) The egress traffic going to these specified IP addresses will be ignored and not redirected to the ProxyEgressPort. It can be empty list.  
+     */
+    properties?: ProxyConfigurationProperties;
+  }
+  export type ProxyConfigurationProperties = KeyValuePair[];
+  export type ProxyConfigurationType = "APPMESH"|string;
   export interface PutAccountSettingDefaultRequest {
     /**
      * The resource type to enable the new format for. If serviceLongArnFormat is specified, the ARN for your Amazon ECS services is affected. If taskLongArnFormat is specified, the ARN and resource ID for your Amazon ECS tasks are affected. If containerInstanceLongArnFormat is specified, the ARN and resource ID for your Amazon ECS container instances are affected.
@@ -1876,6 +1916,7 @@ declare namespace ECS {
      * The IPC resource namespace to use for the containers in the task. The valid values are host, task, or none. If host is specified, then all containers within the tasks that specified the host IPC mode on the same container instance share the same IPC resources with the host Amazon EC2 instance. If task is specified, all containers within the specified task share the same IPC resources. If none is specified, then IPC resources within the containers of a task are private and not shared with other containers in a task or on the container instance. If no value is specified, then the IPC resource namespace sharing depends on the Docker daemon setting on the container instance. For more information, see IPC settings in the Docker run reference. If the host IPC mode is used, be aware that there is a heightened risk of undesired IPC namespace expose. For more information, see Docker security. If you are setting namespaced kernel parameters using systemControls for the containers in the task, the following will apply to your IPC resource namespace. For more information, see System Controls in the Amazon Elastic Container Service Developer Guide.   For tasks that use the host IPC mode, IPC namespace related systemControls are not supported.   For tasks that use the task IPC mode, IPC namespace related systemControls will apply to all containers within a task.    This parameter is not supported for Windows containers or tasks using the Fargate launch type. 
      */
     ipcMode?: IpcMode;
+    proxyConfiguration?: ProxyConfiguration;
   }
   export interface RegisterTaskDefinitionResponse {
     /**
@@ -2575,6 +2616,10 @@ declare namespace ECS {
      * The IPC resource namespace to use for the containers in the task. The valid values are host, task, or none. If host is specified, then all containers within the tasks that specified the host IPC mode on the same container instance share the same IPC resources with the host Amazon EC2 instance. If task is specified, all containers within the specified task share the same IPC resources. If none is specified, then IPC resources within the containers of a task are private and not shared with other containers in a task or on the container instance. If no value is specified, then the IPC resource namespace sharing depends on the Docker daemon setting on the container instance. For more information, see IPC settings in the Docker run reference. If the host IPC mode is used, be aware that there is a heightened risk of undesired IPC namespace expose. For more information, see Docker security. If you are setting namespaced kernel parameters using systemControls for the containers in the task, the following will apply to your IPC resource namespace. For more information, see System Controls in the Amazon Elastic Container Service Developer Guide.   For tasks that use the host IPC mode, IPC namespace related systemControls are not supported.   For tasks that use the task IPC mode, IPC namespace related systemControls will apply to all containers within a task.    This parameter is not supported for Windows containers or tasks using the Fargate launch type. 
      */
     ipcMode?: IpcMode;
+    /**
+     * 
+     */
+    proxyConfiguration?: ProxyConfiguration;
   }
   export type TaskDefinitionFamilyStatus = "ACTIVE"|"INACTIVE"|"ALL"|string;
   export type TaskDefinitionField = "TAGS"|string;

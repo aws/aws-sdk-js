@@ -14,15 +14,17 @@ declare class AppMesh extends Service {
   /**
    * Creates a new service mesh. A service mesh is a logical boundary for network traffic
          between the services that reside within it.
-         After you create your service mesh, you can create virtual nodes, virtual routers, and
-         routes to distribute traffic between the applications in your mesh.
+         After you create your service mesh, you can create virtual services, virtual nodes,
+         virtual routers, and routes to distribute traffic between the applications in your
+         mesh.
    */
   createMesh(params: AppMesh.Types.CreateMeshInput, callback?: (err: AWSError, data: AppMesh.Types.CreateMeshOutput) => void): Request<AppMesh.Types.CreateMeshOutput, AWSError>;
   /**
    * Creates a new service mesh. A service mesh is a logical boundary for network traffic
          between the services that reside within it.
-         After you create your service mesh, you can create virtual nodes, virtual routers, and
-         routes to distribute traffic between the applications in your mesh.
+         After you create your service mesh, you can create virtual services, virtual nodes,
+         virtual routers, and routes to distribute traffic between the applications in your
+         mesh.
    */
   createMesh(callback?: (err: AWSError, data: AppMesh.Types.CreateMeshOutput) => void): Request<AppMesh.Types.CreateMeshOutput, AWSError>;
   /**
@@ -51,7 +53,7 @@ declare class AppMesh extends Service {
    * Creates a new virtual node within a service mesh.
          A virtual node acts as logical pointer to a particular task group, such as an Amazon ECS
          service or a Kubernetes deployment. When you create a virtual node, you must specify the
-         DNS service discovery name for your task group.
+         DNS service discovery hostname for your task group.
          Any inbound traffic that your virtual node expects should be specified as a
             listener. Any outbound traffic that your virtual node expects to reach
          should be specified as a backend.
@@ -73,7 +75,7 @@ declare class AppMesh extends Service {
    * Creates a new virtual node within a service mesh.
          A virtual node acts as logical pointer to a particular task group, such as an Amazon ECS
          service or a Kubernetes deployment. When you create a virtual node, you must specify the
-         DNS service discovery name for your task group.
+         DNS service discovery hostname for your task group.
          Any inbound traffic that your virtual node expects should be specified as a
             listener. Any outbound traffic that your virtual node expects to reach
          should be specified as a backend.
@@ -93,6 +95,8 @@ declare class AppMesh extends Service {
   createVirtualNode(callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualNodeOutput) => void): Request<AppMesh.Types.CreateVirtualNodeOutput, AWSError>;
   /**
    * Creates a new virtual router within a service mesh.
+         Any inbound traffic that your virtual router expects should be specified as a
+            listener. 
          Virtual routers handle traffic for one or more service names within your mesh. After you
          create your virtual router, create and associate routes for your virtual router that direct
          incoming requests to different virtual nodes.
@@ -100,21 +104,41 @@ declare class AppMesh extends Service {
   createVirtualRouter(params: AppMesh.Types.CreateVirtualRouterInput, callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualRouterOutput) => void): Request<AppMesh.Types.CreateVirtualRouterOutput, AWSError>;
   /**
    * Creates a new virtual router within a service mesh.
+         Any inbound traffic that your virtual router expects should be specified as a
+            listener. 
          Virtual routers handle traffic for one or more service names within your mesh. After you
          create your virtual router, create and associate routes for your virtual router that direct
          incoming requests to different virtual nodes.
    */
   createVirtualRouter(callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualRouterOutput) => void): Request<AppMesh.Types.CreateVirtualRouterOutput, AWSError>;
   /**
+   * Creates a virtual service within a service mesh.
+         A virtual service is an abstraction of a real service that is either provided by a
+         virtual node directly, or indirectly by means of a virtual router. Dependent services call
+         your virtual service by its virtualServiceName, and those requests are routed
+         to the virtual node or virtual router that is specified as the provider for the virtual
+         service.
+   */
+  createVirtualService(params: AppMesh.Types.CreateVirtualServiceInput, callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualServiceOutput) => void): Request<AppMesh.Types.CreateVirtualServiceOutput, AWSError>;
+  /**
+   * Creates a virtual service within a service mesh.
+         A virtual service is an abstraction of a real service that is either provided by a
+         virtual node directly, or indirectly by means of a virtual router. Dependent services call
+         your virtual service by its virtualServiceName, and those requests are routed
+         to the virtual node or virtual router that is specified as the provider for the virtual
+         service.
+   */
+  createVirtualService(callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualServiceOutput) => void): Request<AppMesh.Types.CreateVirtualServiceOutput, AWSError>;
+  /**
    * Deletes an existing service mesh.
-         You must delete all resources (routes, virtual routers, virtual nodes) in the service
-         mesh before you can delete the mesh itself.
+         You must delete all resources (virtual services, routes, virtual routers, virtual nodes)
+         in the service mesh before you can delete the mesh itself.
    */
   deleteMesh(params: AppMesh.Types.DeleteMeshInput, callback?: (err: AWSError, data: AppMesh.Types.DeleteMeshOutput) => void): Request<AppMesh.Types.DeleteMeshOutput, AWSError>;
   /**
    * Deletes an existing service mesh.
-         You must delete all resources (routes, virtual routers, virtual nodes) in the service
-         mesh before you can delete the mesh itself.
+         You must delete all resources (virtual services, routes, virtual routers, virtual nodes)
+         in the service mesh before you can delete the mesh itself.
    */
   deleteMesh(callback?: (err: AWSError, data: AppMesh.Types.DeleteMeshOutput) => void): Request<AppMesh.Types.DeleteMeshOutput, AWSError>;
   /**
@@ -127,10 +151,14 @@ declare class AppMesh extends Service {
   deleteRoute(callback?: (err: AWSError, data: AppMesh.Types.DeleteRouteOutput) => void): Request<AppMesh.Types.DeleteRouteOutput, AWSError>;
   /**
    * Deletes an existing virtual node.
+         You must delete any virtual services that list a virtual node as a service provider
+         before you can delete the virtual node itself.
    */
   deleteVirtualNode(params: AppMesh.Types.DeleteVirtualNodeInput, callback?: (err: AWSError, data: AppMesh.Types.DeleteVirtualNodeOutput) => void): Request<AppMesh.Types.DeleteVirtualNodeOutput, AWSError>;
   /**
    * Deletes an existing virtual node.
+         You must delete any virtual services that list a virtual node as a service provider
+         before you can delete the virtual node itself.
    */
   deleteVirtualNode(callback?: (err: AWSError, data: AppMesh.Types.DeleteVirtualNodeOutput) => void): Request<AppMesh.Types.DeleteVirtualNodeOutput, AWSError>;
   /**
@@ -145,6 +173,14 @@ declare class AppMesh extends Service {
          router itself.
    */
   deleteVirtualRouter(callback?: (err: AWSError, data: AppMesh.Types.DeleteVirtualRouterOutput) => void): Request<AppMesh.Types.DeleteVirtualRouterOutput, AWSError>;
+  /**
+   * Deletes an existing virtual service.
+   */
+  deleteVirtualService(params: AppMesh.Types.DeleteVirtualServiceInput, callback?: (err: AWSError, data: AppMesh.Types.DeleteVirtualServiceOutput) => void): Request<AppMesh.Types.DeleteVirtualServiceOutput, AWSError>;
+  /**
+   * Deletes an existing virtual service.
+   */
+  deleteVirtualService(callback?: (err: AWSError, data: AppMesh.Types.DeleteVirtualServiceOutput) => void): Request<AppMesh.Types.DeleteVirtualServiceOutput, AWSError>;
   /**
    * Describes an existing service mesh.
    */
@@ -178,6 +214,14 @@ declare class AppMesh extends Service {
    */
   describeVirtualRouter(callback?: (err: AWSError, data: AppMesh.Types.DescribeVirtualRouterOutput) => void): Request<AppMesh.Types.DescribeVirtualRouterOutput, AWSError>;
   /**
+   * Describes an existing virtual service.
+   */
+  describeVirtualService(params: AppMesh.Types.DescribeVirtualServiceInput, callback?: (err: AWSError, data: AppMesh.Types.DescribeVirtualServiceOutput) => void): Request<AppMesh.Types.DescribeVirtualServiceOutput, AWSError>;
+  /**
+   * Describes an existing virtual service.
+   */
+  describeVirtualService(callback?: (err: AWSError, data: AppMesh.Types.DescribeVirtualServiceOutput) => void): Request<AppMesh.Types.DescribeVirtualServiceOutput, AWSError>;
+  /**
    * Returns a list of existing service meshes.
    */
   listMeshes(params: AppMesh.Types.ListMeshesInput, callback?: (err: AWSError, data: AppMesh.Types.ListMeshesOutput) => void): Request<AppMesh.Types.ListMeshesOutput, AWSError>;
@@ -210,6 +254,14 @@ declare class AppMesh extends Service {
    */
   listVirtualRouters(callback?: (err: AWSError, data: AppMesh.Types.ListVirtualRoutersOutput) => void): Request<AppMesh.Types.ListVirtualRoutersOutput, AWSError>;
   /**
+   * Returns a list of existing virtual services in a service mesh.
+   */
+  listVirtualServices(params: AppMesh.Types.ListVirtualServicesInput, callback?: (err: AWSError, data: AppMesh.Types.ListVirtualServicesOutput) => void): Request<AppMesh.Types.ListVirtualServicesOutput, AWSError>;
+  /**
+   * Returns a list of existing virtual services in a service mesh.
+   */
+  listVirtualServices(callback?: (err: AWSError, data: AppMesh.Types.ListVirtualServicesOutput) => void): Request<AppMesh.Types.ListVirtualServicesOutput, AWSError>;
+  /**
    * Updates an existing route for a specified service mesh and virtual router.
    */
   updateRoute(params: AppMesh.Types.UpdateRouteInput, callback?: (err: AWSError, data: AppMesh.Types.UpdateRouteOutput) => void): Request<AppMesh.Types.UpdateRouteOutput, AWSError>;
@@ -233,285 +285,19 @@ declare class AppMesh extends Service {
    * Updates an existing virtual router in a specified service mesh.
    */
   updateVirtualRouter(callback?: (err: AWSError, data: AppMesh.Types.UpdateVirtualRouterOutput) => void): Request<AppMesh.Types.UpdateVirtualRouterOutput, AWSError>;
+  /**
+   * Updates an existing virtual service in a specified service mesh.
+   */
+  updateVirtualService(params: AppMesh.Types.UpdateVirtualServiceInput, callback?: (err: AWSError, data: AppMesh.Types.UpdateVirtualServiceOutput) => void): Request<AppMesh.Types.UpdateVirtualServiceOutput, AWSError>;
+  /**
+   * Updates an existing virtual service in a specified service mesh.
+   */
+  updateVirtualService(callback?: (err: AWSError, data: AppMesh.Types.UpdateVirtualServiceOutput) => void): Request<AppMesh.Types.UpdateVirtualServiceOutput, AWSError>;
 }
 declare namespace AppMesh {
-  export type ServiceName = string;
-  export type HealthCheckThreshold = number;
-  export interface DeleteMeshOutput {
-    /**
-     * The service mesh that was deleted.
-     */
-    mesh?: MeshData;
+  export interface VirtualRouterListener {
+    portMapping: PortMapping;
   }
-  export type Long = number;
-  export interface UpdateVirtualRouterOutput {
-    /**
-     * A full description of the virtual router that was updated.
-     */
-    virtualRouter?: VirtualRouterData;
-  }
-  export type MeshStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
-  export type PortNumber = number;
-  export interface WeightedTarget {
-    /**
-     * The virtual node to associate with the weighted target.
-     */
-    virtualNode?: ResourceName;
-    /**
-     * The relative weight of the weighted target.
-     */
-    weight?: PercentInt;
-  }
-  export type VirtualNodeList = VirtualNodeRef[];
-  export interface CreateRouteOutput {
-    /**
-     * The full description of your mesh following the create call.
-     */
-    route?: RouteData;
-  }
-  export type RouteList = RouteRef[];
-  export interface DeleteVirtualNodeInput {
-    /**
-     * The name of the service mesh in which to delete the virtual node.
-     */
-    meshName: ResourceName;
-    /**
-     * The name of the virtual node to delete.
-     */
-    virtualNodeName: ResourceName;
-  }
-  export type ListVirtualRoutersLimit = number;
-  export interface DnsServiceDiscovery {
-    /**
-     * The DNS service name for your virtual node.
-     */
-    serviceName?: ServiceName;
-  }
-  export type HealthCheckIntervalMillis = number;
-  export interface VirtualNodeRef {
-    /**
-     * The full Amazon Resource Name (ARN) for the virtual node.
-     */
-    arn?: Arn;
-    /**
-     * The name of the service mesh in which the virtual node resides.
-     */
-    meshName?: ResourceName;
-    /**
-     * The name of the virtual node.
-     */
-    virtualNodeName?: ResourceName;
-  }
-  export interface DescribeRouteOutput {
-    /**
-     * The full description of your route.
-     */
-    route?: RouteData;
-  }
-  export interface ServiceDiscovery {
-    /**
-     * Specifies the DNS service name for the virtual node.
-     */
-    dns?: DnsServiceDiscovery;
-  }
-  export interface MeshStatus {
-    /**
-     * The current mesh status.
-     */
-    status?: MeshStatusCode;
-  }
-  export interface VirtualNodeData {
-    /**
-     * The name of the service mesh in which the virtual node resides.
-     */
-    meshName: ResourceName;
-    /**
-     * The associated metadata for the virtual node.
-     */
-    metadata?: ResourceMetadata;
-    /**
-     * The specifications of the virtual node.
-     */
-    spec?: VirtualNodeSpec;
-    /**
-     * The current status for the virtual node.
-     */
-    status?: VirtualNodeStatus;
-    /**
-     * The name of the virtual node.
-     */
-    virtualNodeName: ResourceName;
-  }
-  export interface VirtualNodeSpec {
-    /**
-     * The backends to which the virtual node is expected to send outbound traffic.
-     */
-    backends?: Backends;
-    /**
-     * The listeners from which the virtual node is expected to receive inbound traffic.
-     */
-    listeners?: Listeners;
-    /**
-     * The service discovery information for the virtual node.
-     */
-    serviceDiscovery?: ServiceDiscovery;
-  }
-  export type ServiceNames = ServiceName[];
-  export interface MeshRef {
-    /**
-     * The full Amazon Resource Name (ARN) of the service mesh.
-     */
-    arn?: Arn;
-    /**
-     * The name of the service mesh.
-     */
-    meshName?: ResourceName;
-  }
-  export interface DescribeVirtualRouterInput {
-    /**
-     * The name of the service mesh in which the virtual router resides.
-     */
-    meshName: ResourceName;
-    /**
-     * The name of the virtual router to describe.
-     */
-    virtualRouterName: ResourceName;
-  }
-  export interface DescribeVirtualRouterOutput {
-    /**
-     * The full description of your virtual router.
-     */
-    virtualRouter?: VirtualRouterData;
-  }
-  export interface UpdateRouteOutput {
-    /**
-     * A full description of the route that was updated.
-     */
-    route?: RouteData;
-  }
-  export interface HttpRouteAction {
-    /**
-     * The targets that traffic is routed to when a request matches the route. You can specify
-         one or more targets and their relative weights with which to distribute traffic.
-     */
-    weightedTargets?: WeightedTargets;
-  }
-  export interface CreateVirtualRouterOutput {
-    /**
-     * The full description of your virtual router following the create call.
-     */
-    virtualRouter?: VirtualRouterData;
-  }
-  export type HealthCheckTimeoutMillis = number;
-  export interface CreateVirtualRouterInput {
-    /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
-     */
-    clientToken?: String;
-    /**
-     * The name of the service mesh in which to create the virtual router.
-     */
-    meshName: ResourceName;
-    /**
-     * The virtual router specification to apply.
-     */
-    spec: VirtualRouterSpec;
-    /**
-     * The name to use for the virtual router.
-     */
-    virtualRouterName: ResourceName;
-  }
-  export interface RouteStatus {
-    /**
-     * The current status for the route.
-     */
-    status?: RouteStatusCode;
-  }
-  export interface ListMeshesInput {
-    /**
-     * The maximum number of mesh results returned by ListMeshes in paginated
-         output. When this parameter is used, ListMeshes only returns
-            limit results in a single page along with a nextToken response
-         element. The remaining results of the initial request can be seen by sending another
-            ListMeshes request with the returned nextToken value. This
-         value can be between 1 and 100. If this parameter is not
-         used, then ListMeshes returns up to 100 results and a
-            nextToken value if applicable.
-     */
-    limit?: ListMeshesLimit;
-    /**
-     * The nextToken value returned from a previous paginated
-         ListMeshes request where limit was used and the
-         results exceeded the value of that parameter. Pagination continues from the end of the
-         previous results that returned the nextToken value.
-         
-            This token should be treated as an opaque identifier that is only used to
-                retrieve the next items in a list and not for other programmatic purposes.
-        
-     */
-    nextToken?: String;
-  }
-  export interface VirtualRouterStatus {
-    /**
-     * The current status of the virtual router.
-     */
-    status?: VirtualRouterStatusCode;
-  }
-  export interface ListMeshesOutput {
-    /**
-     * The list of existing service meshes.
-     */
-    meshes: MeshList;
-    /**
-     * The nextToken value to include in a future ListMeshes
-         request. When the results of a ListMeshes request exceed
-         limit, this value can be used to retrieve the next page of
-         results. This value is null when there are no more results to
-         return.
-     */
-    nextToken?: String;
-  }
-  export interface DescribeVirtualNodeOutput {
-    /**
-     * The full description of your virtual node.
-     */
-    virtualNode?: VirtualNodeData;
-  }
-  export interface CreateMeshOutput {
-    /**
-     * The full description of your service mesh following the create call.
-     */
-    mesh?: MeshData;
-  }
-  export type ResourceName = string;
-  export interface RouteData {
-    /**
-     * The name of the service mesh in which the route resides.
-     */
-    meshName: ResourceName;
-    /**
-     * The associated metadata for the route.
-     */
-    metadata?: ResourceMetadata;
-    /**
-     * The name of the route.
-     */
-    routeName: ResourceName;
-    /**
-     * The specifications of the route.
-     */
-    spec?: RouteSpec;
-    /**
-     * The status of the route.
-     */
-    status?: RouteStatus;
-    /**
-     * The virtual router with which the route is associated.
-     */
-    virtualRouterName: ResourceName;
-  }
-  export type Arn = string;
   export interface UpdateVirtualNodeInput {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
@@ -519,7 +305,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     clientToken?: String;
     /**
-     * The name of the service mesh in which the virtual node resides.
+     * The name of the service mesh that the virtual node resides in.
      */
     meshName: ResourceName;
     /**
@@ -531,125 +317,32 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualNodeName: ResourceName;
   }
-  export interface DeleteRouteInput {
+  export interface DeleteMeshInput {
     /**
-     * The name of the service mesh in which to delete the route.
+     * The name of the service mesh to delete.
+     */
+    meshName: ResourceName;
+  }
+  export interface CreateVirtualServiceInput {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+     */
+    clientToken?: String;
+    /**
+     * The name of the service mesh in which to create the virtual service.
      */
     meshName: ResourceName;
     /**
-     * The name of the route to delete.
+     * The virtual service specification to apply.
      */
-    routeName: ResourceName;
+    spec: VirtualServiceSpec;
     /**
-     * The name of the virtual router in which to delete the route.
+     * The name to use for the virtual service.
      */
-    virtualRouterName: ResourceName;
-  }
-  export type Listeners = Listener[];
-  export interface ListRoutesInput {
-    /**
-     * The maximum number of mesh results returned by ListRoutes in paginated
-         output. When this parameter is used, ListRoutes only returns
-            limit results in a single page along with a nextToken response
-         element. The remaining results of the initial request can be seen by sending another
-            ListRoutes request with the returned nextToken value. This
-         value can be between 1 and 100. If this parameter is not
-         used, then ListRoutes returns up to 100 results and a
-            nextToken value if applicable.
-     */
-    limit?: ListRoutesLimit;
-    /**
-     * The name of the service mesh in which to list routes.
-     */
-    meshName: ResourceName;
-    /**
-     * The nextToken value returned from a previous paginated
-         ListRoutes request where limit was used and the
-         results exceeded the value of that parameter. Pagination continues from the end of the
-         previous results that returned the nextToken value.
-     */
-    nextToken?: String;
-    /**
-     * The name of the virtual router in which to list routes.
-     */
-    virtualRouterName: ResourceName;
-  }
-  export interface HttpRoute {
-    /**
-     * The action to take if a match is determined.
-     */
-    action?: HttpRouteAction;
-    /**
-     * The criteria for determining an HTTP request match.
-     */
-    match?: HttpRouteMatch;
-  }
-  export type Timestamp = Date;
-  export interface ListRoutesOutput {
-    /**
-     * The nextToken value to include in a future ListRoutes
-         request. When the results of a ListRoutes request exceed
-         limit, this value can be used to retrieve the next page of
-         results. This value is null when there are no more results to
-         return.
-     */
-    nextToken?: String;
-    /**
-     * The list of existing routes for the specified service mesh and virtual router.
-     */
-    routes: RouteList;
-  }
-  export interface RouteSpec {
-    /**
-     * The HTTP routing information for the route.
-     */
-    httpRoute?: HttpRoute;
-  }
-  export interface DescribeVirtualNodeInput {
-    /**
-     * The name of the service mesh in which the virtual node resides.
-     */
-    meshName: ResourceName;
-    /**
-     * The name of the virtual node to describe.
-     */
-    virtualNodeName: ResourceName;
-  }
-  export interface VirtualRouterRef {
-    /**
-     * The full Amazon Resource Name (ARN) for the virtual router.
-     */
-    arn?: Arn;
-    /**
-     * The name of the service mesh in which the virtual router resides.
-     */
-    meshName?: ResourceName;
-    /**
-     * The name of the virtual router.
-     */
-    virtualRouterName?: ResourceName;
+    virtualServiceName: ServiceName;
   }
   export type VirtualRouterStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
-  export interface ListVirtualNodesOutput {
-    /**
-     * The nextToken value to include in a future ListVirtualNodes
-         request. When the results of a ListVirtualNodes request exceed
-         limit, this value can be used to retrieve the next page of
-         results. This value is null when there are no more results to
-         return.
-     */
-    nextToken?: String;
-    /**
-     * The list of existing virtual nodes for the specified service mesh.
-     */
-    virtualNodes: VirtualNodeList;
-  }
-  export interface DeleteVirtualNodeOutput {
-    /**
-     * The virtual node that was deleted.
-     */
-    virtualNode?: VirtualNodeData;
-  }
   export interface UpdateVirtualRouterInput {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
@@ -657,7 +350,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     clientToken?: String;
     /**
-     * The name of the service mesh in which the virtual router resides.
+     * The name of the service mesh that the virtual router resides in.
      */
     meshName: ResourceName;
     /**
@@ -669,17 +362,32 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualRouterName: ResourceName;
   }
-  export interface DescribeRouteInput {
+  export interface CreateVirtualNodeOutput {
     /**
-     * The name of the service mesh in which the route resides.
+     * The full description of your virtual node following the create call.
+     */
+    virtualNode: VirtualNodeData;
+  }
+  export type Long = number;
+  export interface UpdateVirtualRouterOutput {
+    /**
+     * A full description of the virtual router that was updated.
+     */
+    virtualRouter: VirtualRouterData;
+  }
+  export interface DescribeMeshOutput {
+    /**
+     * The full description of your service mesh.
+     */
+    mesh: MeshData;
+  }
+  export interface DeleteVirtualRouterInput {
+    /**
+     * The name of the service mesh to delete the virtual router in.
      */
     meshName: ResourceName;
     /**
-     * The name of the route to describe.
-     */
-    routeName: ResourceName;
-    /**
-     * The name of the virtual router with which the route is associated.
+     * The name of the virtual router to delete.
      */
     virtualRouterName: ResourceName;
   }
@@ -687,7 +395,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     /**
      * The nextToken value to include in a future ListVirtualRouters
          request. When the results of a ListVirtualRouters request exceed
-         limit, this value can be used to retrieve the next page of
+         limit, you can use this value to retrieve the next page of
          results. This value is null when there are no more results to
          return.
      */
@@ -697,21 +405,26 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualRouters: VirtualRouterList;
   }
-  export interface CreateVirtualNodeOutput {
+  export interface DescribeRouteInput {
     /**
-     * The full description of your virtual node following the create call.
+     * The name of the service mesh that the route resides in.
      */
-    virtualNode?: VirtualNodeData;
-  }
-  export interface DeleteVirtualRouterOutput {
+    meshName: ResourceName;
     /**
-     * The virtual router that was deleted.
+     * The name of the route to describe.
      */
-    virtualRouter?: VirtualRouterData;
+    routeName: ResourceName;
+    /**
+     * The name of the virtual router that the route is associated with.
+     */
+    virtualRouterName: ResourceName;
   }
-  export type ListRoutesLimit = number;
-  export type PortProtocol = "http"|"tcp"|string;
-  export type MeshList = MeshRef[];
+  export interface DeleteRouteOutput {
+    /**
+     * The route that was deleted.
+     */
+    route: RouteData;
+  }
   export interface ResourceMetadata {
     /**
      * The full Amazon Resource Name (ARN) for the resource.
@@ -727,134 +440,119 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
                APPMESH_VIRTUAL_NODE_CLUSTER environment variable.
          
      */
-    arn?: Arn;
+    arn: Arn;
     /**
      * The Unix epoch timestamp in seconds for when the resource was created.
      */
-    createdAt?: Timestamp;
+    createdAt: Timestamp;
     /**
      * The Unix epoch timestamp in seconds for when the resource was last updated.
      */
-    lastUpdatedAt?: Timestamp;
+    lastUpdatedAt: Timestamp;
     /**
      * The unique identifier for the resource.
      */
-    uid?: String;
+    uid: String;
     /**
      * The version of the resource. Resources are created at version 1, and this version is
-         incremented each time they are updated.
+         incremented each time that they're updated.
      */
-    version?: Long;
+    version: Long;
   }
-  export interface CreateMeshInput {
+  export type Listeners = Listener[];
+  export type Backends = Backend[];
+  export type PortProtocol = "http"|"tcp"|string;
+  export interface UpdateVirtualNodeOutput {
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
-request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+     * A full description of the virtual node that was updated.
      */
-    clientToken?: String;
-    /**
-     * The name to use for the service mesh.
-     */
-    meshName: ResourceName;
+    virtualNode: VirtualNodeData;
   }
-  export interface PortMapping {
+  export interface ListRoutesOutput {
     /**
-     * The port used for the port mapping.
+     * The nextToken value to include in a future ListRoutes
+         request. When the results of a ListRoutes request exceed
+         limit, you can use this value to retrieve the next page of
+         results. This value is null when there are no more results to
+         return.
      */
-    port?: PortNumber;
+    nextToken?: String;
     /**
-     * The protocol used for the port mapping.
+     * The list of existing routes for the specified service mesh and virtual router.
      */
-    protocol?: PortProtocol;
+    routes: RouteList;
+  }
+  export interface VirtualServiceBackend {
+    /**
+     * The name of the virtual service that is acting as a virtual node backend.
+     */
+    virtualServiceName: ServiceName;
   }
   export type VirtualNodeStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
-  export interface DeleteVirtualRouterInput {
-    /**
-     * The name of the service mesh in which to delete the virtual router.
-     */
-    meshName: ResourceName;
-    /**
-     * The name of the virtual router to delete.
-     */
-    virtualRouterName: ResourceName;
-  }
-  export interface VirtualRouterSpec {
-    /**
-     * The service mesh service names to associate with the virtual router.
-     */
-    serviceNames?: ServiceNames;
-  }
-  export interface UpdateRouteInput {
+  export type ServiceName = string;
+  export interface UpdateVirtualServiceInput {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
 request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     clientToken?: String;
     /**
-     * The name of the service mesh in which the route resides.
+     * The name of the service mesh that the virtual service resides in.
      */
     meshName: ResourceName;
     /**
-     * The name of the route to update.
+     * The new virtual service specification to apply. This overwrites the existing
+         data.
      */
-    routeName: ResourceName;
+    spec: VirtualServiceSpec;
     /**
-     * The new route specification to apply. This overwrites the existing data.
+     * The name of the virtual service to update.
      */
-    spec: RouteSpec;
+    virtualServiceName: ServiceName;
+  }
+  export type HealthCheckThreshold = number;
+  export interface UpdateRouteOutput {
     /**
-     * The name of the virtual router with which the route is associated.
+     * A full description of the route that was updated.
      */
-    virtualRouterName: ResourceName;
+    route: RouteData;
   }
   export type PercentInt = number;
-  export type ListMeshesLimit = number;
-  export interface DescribeMeshInput {
+  export interface HttpRouteAction {
     /**
-     * The name of the service mesh to describe.
+     * The targets that traffic is routed to when a request matches the route. You can specify
+         one or more targets and their relative weights to distribute traffic with.
+     */
+    weightedTargets: WeightedTargets;
+  }
+  export interface ListRoutesInput {
+    /**
+     * The maximum number of results returned by ListRoutes in paginated output.
+         When you use this parameter, ListRoutes returns only limit
+         results in a single page along with a nextToken response element. You can see the
+         remaining results of the initial request by sending another
+            ListRoutes request with the returned nextToken value. This
+         value can be between 1 and 100. If you don't use this parameter,
+         ListRoutes returns up to 100 results and a
+            nextToken value if applicable.
+     */
+    limit?: ListRoutesLimit;
+    /**
+     * The name of the service mesh in which to list routes.
      */
     meshName: ResourceName;
-  }
-  export interface DescribeMeshOutput {
     /**
-     * The full description of your service mesh.
+     * The nextToken value returned from a previous paginated
+         ListRoutes request where limit was used and the
+         results exceeded the value of that parameter. Pagination continues from the end of the
+         previous results that returned the nextToken value.
      */
-    mesh?: MeshData;
-  }
-  export interface VirtualRouterData {
+    nextToken?: String;
     /**
-     * The name of the service mesh in which the virtual router resides.
-     */
-    meshName: ResourceName;
-    /**
-     * The associated metadata for the virtual router.
-     */
-    metadata?: ResourceMetadata;
-    /**
-     * The specifications of the virtual router.
-     */
-    spec?: VirtualRouterSpec;
-    /**
-     * The current status of the virtual router.
-     */
-    status?: VirtualRouterStatus;
-    /**
-     * The name of the virtual router.
+     * The name of the virtual router to list routes in.
      */
     virtualRouterName: ResourceName;
   }
-  export type VirtualRouterList = VirtualRouterRef[];
-  export interface Listener {
-    /**
-     * The health check information for the listener.
-     */
-    healthCheck?: HealthCheckPolicy;
-    /**
-     * The port mapping information for the listener.
-     */
-    portMapping?: PortMapping;
-  }
-  export type String = string;
   export interface HealthCheckPolicy {
     /**
      * The number of consecutive successful health checks that must occur before declaring
@@ -866,8 +564,8 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     intervalMillis: HealthCheckIntervalMillis;
     /**
-     * The destination path for the health check request. This is only required if the
-         specified protocol is HTTP; if the protocol is TCP, then this parameter is ignored.
+     * The destination path for the health check request. This is required only if the
+         specified protocol is HTTP. If the protocol is TCP, this parameter is ignored.
      */
     path?: String;
     /**
@@ -890,20 +588,212 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     unhealthyThreshold: HealthCheckThreshold;
   }
+  export interface VirtualServiceRef {
+    /**
+     * The full Amazon Resource Name (ARN) for the virtual service.
+     */
+    arn: Arn;
+    /**
+     * The name of the service mesh that the virtual service resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The name of the virtual service.
+     */
+    virtualServiceName: ServiceName;
+  }
+  export type VirtualServiceList = VirtualServiceRef[];
+  export interface VirtualNodeStatus {
+    /**
+     * The current status of the virtual node.
+     */
+    status: VirtualNodeStatusCode;
+  }
+  export interface VirtualRouterRef {
+    /**
+     * The full Amazon Resource Name (ARN) for the virtual router.
+     */
+    arn: Arn;
+    /**
+     * The name of the service mesh that the virtual router resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The name of the virtual router.
+     */
+    virtualRouterName: ResourceName;
+  }
+  export interface VirtualServiceData {
+    /**
+     * The name of the service mesh that the virtual service resides in.
+     */
+    meshName: ResourceName;
+    metadata: ResourceMetadata;
+    /**
+     * The specifications of the virtual service.
+     */
+    spec: VirtualServiceSpec;
+    /**
+     * The current status of the virtual service.
+     */
+    status: VirtualServiceStatus;
+    /**
+     * The name of the virtual service.
+     */
+    virtualServiceName: ServiceName;
+  }
+  export interface DescribeVirtualServiceOutput {
+    /**
+     * The full description of your virtual service.
+     */
+    virtualService: VirtualServiceData;
+  }
+  export interface VirtualNodeRef {
+    /**
+     * The full Amazon Resource Name (ARN) for the virtual node.
+     */
+    arn: Arn;
+    /**
+     * The name of the service mesh that the virtual node resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The name of the virtual node.
+     */
+    virtualNodeName: ResourceName;
+  }
+  export interface CreateMeshInput {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+     */
+    clientToken?: String;
+    /**
+     * The name to use for the service mesh.
+     */
+    meshName: ResourceName;
+  }
+  export interface DescribeVirtualNodeOutput {
+    /**
+     * The full description of your virtual node.
+     */
+    virtualNode: VirtualNodeData;
+  }
+  export interface CreateRouteOutput {
+    /**
+     * The full description of your mesh following the create call.
+     */
+    route: RouteData;
+  }
+  export interface DnsServiceDiscovery {
+    /**
+     * Specifies the DNS service discovery hostname for the virtual node. 
+     */
+    hostname: Hostname;
+  }
+  export interface DescribeVirtualServiceInput {
+    /**
+     * The name of the service mesh that the virtual service resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The name of the virtual service to describe.
+     */
+    virtualServiceName: ServiceName;
+  }
+  export type ListVirtualServicesLimit = number;
+  export interface DeleteRouteInput {
+    /**
+     * The name of the service mesh to delete the route in.
+     */
+    meshName: ResourceName;
+    /**
+     * The name of the route to delete.
+     */
+    routeName: ResourceName;
+    /**
+     * The name of the virtual router to delete the route in.
+     */
+    virtualRouterName: ResourceName;
+  }
+  export interface VirtualNodeData {
+    /**
+     * The name of the service mesh that the virtual node resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The associated metadata for the virtual node.
+     */
+    metadata: ResourceMetadata;
+    /**
+     * The specifications of the virtual node.
+     */
+    spec: VirtualNodeSpec;
+    /**
+     * The current status for the virtual node.
+     */
+    status: VirtualNodeStatus;
+    /**
+     * The name of the virtual node.
+     */
+    virtualNodeName: ResourceName;
+  }
+  export interface VirtualServiceSpec {
+    /**
+     * The App Mesh object that is acting as the provider for a virtual service. You can specify
+         a single virtual node or virtual router.
+     */
+    provider?: VirtualServiceProvider;
+  }
+  export interface Backend {
+    /**
+     * Specifies a virtual service to use as a backend for a virtual node. 
+     */
+    virtualService?: VirtualServiceBackend;
+  }
+  export type ListVirtualRoutersLimit = number;
+  export type HealthCheckIntervalMillis = number;
+  export type VirtualRouterList = VirtualRouterRef[];
+  export interface ListMeshesInput {
+    /**
+     * The maximum number of results returned by ListMeshes in paginated output.
+         When you use this parameter, ListMeshes returns only limit
+         results in a single page along with a nextToken response element. You can see the
+         remaining results of the initial request by sending another
+            ListMeshes request with the returned nextToken value. This
+         value can be between 1 and 100. If you don't use this parameter,
+         ListMeshes returns up to 100 results and a
+            nextToken value if applicable.
+     */
+    limit?: ListMeshesLimit;
+    /**
+     * The nextToken value returned from a previous paginated
+         ListMeshes request where limit was used and the
+         results exceeded the value of that parameter. Pagination continues from the end of the
+         previous results that returned the nextToken value.
+         
+            This token should be treated as an opaque identifier that is only used to
+                retrieve the next items in a list and not for other programmatic purposes.
+        
+     */
+    nextToken?: String;
+  }
+  export type Arn = string;
+  export type VirtualNodeList = VirtualNodeRef[];
   export interface ListVirtualRoutersInput {
     /**
-     * The maximum number of mesh results returned by ListVirtualRouters in
-         paginated output. When this parameter is used, ListVirtualRouters only returns
-         limit results in a single page along with a nextToken
-         response element. The remaining results of the initial request can be seen by sending
-         another ListVirtualRouters request with the returned nextToken
-         value. This value can be between 1 and 100. If this
-         parameter is not used, then ListVirtualRouters returns up to
-         100 results and a nextToken value if applicable.
+     * The maximum number of results returned by ListVirtualRouters in paginated
+         output. When you use this parameter, ListVirtualRouters returns only
+            limit results in a single page along with a nextToken response
+         element. You can see the remaining results of the initial request  by sending another
+            ListVirtualRouters request with the returned nextToken value.
+         This value can be between 1 and 100. If you don't use this parameter, 
+         ListVirtualRouters returns up to 100 results and
+         a nextToken value if applicable.
      */
     limit?: ListVirtualRoutersLimit;
     /**
-     * The name of the service mesh in which to list virtual routers.
+     * The name of the service mesh to list virtual routers in.
      */
     meshName: ResourceName;
     /**
@@ -914,24 +804,197 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     nextToken?: String;
   }
-  export interface CreateVirtualNodeInput {
+  export interface VirtualRouterData {
+    /**
+     * The name of the service mesh that the virtual router resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The associated metadata for the virtual router.
+     */
+    metadata: ResourceMetadata;
+    /**
+     * The specifications of the virtual router.
+     */
+    spec: VirtualRouterSpec;
+    /**
+     * The current status of the virtual router.
+     */
+    status: VirtualRouterStatus;
+    /**
+     * The name of the virtual router.
+     */
+    virtualRouterName: ResourceName;
+  }
+  export interface ListVirtualServicesInput {
+    /**
+     * The maximum number of results returned by ListVirtualServices in paginated
+         output. When you use this parameter, ListVirtualServices returns only
+            limit results in a single page along with a nextToken response
+         element. You can see the remaining results of the initial request by sending another
+            ListVirtualServices request with the returned nextToken value.
+         This value can be between 1 and 100. If you don't use this parameter,
+         ListVirtualServices returns up to 100 results and
+         a nextToken value if applicable.
+     */
+    limit?: ListVirtualServicesLimit;
+    /**
+     * The name of the service mesh to list virtual services in.
+     */
+    meshName: ResourceName;
+    /**
+     * The nextToken value returned from a previous paginated
+            ListVirtualServices request where limit was used and the
+         results exceeded the value of that parameter. Pagination continues from the end of the
+         previous results that returned the nextToken value.
+     */
+    nextToken?: String;
+  }
+  export interface CreateVirtualRouterInput {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
 request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     clientToken?: String;
     /**
-     * The name of the service mesh in which to create the virtual node.
+     * The name of the service mesh to create the virtual router in.
      */
     meshName: ResourceName;
     /**
-     * The virtual node specification to apply.
+     * The virtual router specification to apply.
      */
-    spec: VirtualNodeSpec;
+    spec: VirtualRouterSpec;
     /**
-     * The name to use for the virtual node.
+     * The name to use for the virtual router.
      */
-    virtualNodeName: ResourceName;
+    virtualRouterName: ResourceName;
+  }
+  export interface ListVirtualNodesInput {
+    /**
+     * The maximum number of results returned by ListVirtualNodes in paginated
+         output. When you use this parameter, ListVirtualNodes returns only
+            limit results in a single page along with a nextToken response
+         element. You can see the remaining results of the initial request by sending another
+            ListVirtualNodes request with the returned nextToken value.
+         This value can be between 1 and 100. If you don't use this parameter,
+         ListVirtualNodes returns up to 100 results and a
+            nextToken value if applicable.
+     */
+    limit?: ListVirtualNodesLimit;
+    /**
+     * The name of the service mesh to list virtual nodes in.
+     */
+    meshName: ResourceName;
+    /**
+     * The nextToken value returned from a previous paginated
+         ListVirtualNodes request where limit was used and the
+         results exceeded the value of that parameter. Pagination continues from the end of the
+         previous results that returned the nextToken value.
+     */
+    nextToken?: String;
+  }
+  export interface DescribeVirtualRouterOutput {
+    /**
+     * The full description of your virtual router.
+     */
+    virtualRouter: VirtualRouterData;
+  }
+  export interface CreateMeshOutput {
+    /**
+     * The full description of your service mesh following the create call.
+     */
+    mesh: MeshData;
+  }
+  export interface CreateVirtualRouterOutput {
+    /**
+     * The full description of your virtual router following the create call.
+     */
+    virtualRouter: VirtualRouterData;
+  }
+  export interface VirtualServiceStatus {
+    /**
+     * The current status of the virtual service.
+     */
+    status: VirtualServiceStatusCode;
+  }
+  export type ListVirtualNodesLimit = number;
+  export type HealthCheckTimeoutMillis = number;
+  export type ListMeshesLimit = number;
+  export type ResourceName = string;
+  export interface VirtualRouterSpec {
+    /**
+     * The listeners that the virtual router is expected to receive inbound traffic from. Currently only one listener is supported per virtual router.
+     */
+    listeners: VirtualRouterListeners;
+  }
+  export type Timestamp = Date;
+  export interface VirtualNodeSpec {
+    /**
+     * The backends that the virtual node is expected to send outbound traffic to.
+     */
+    backends?: Backends;
+    /**
+     * The listeners that the virtual node is expected to receive inbound traffic from. Currently only one listener is supported per virtual node.
+     */
+    listeners?: Listeners;
+    /**
+     * The service discovery information for the virtual node.
+     */
+    serviceDiscovery?: ServiceDiscovery;
+  }
+  export interface ListMeshesOutput {
+    /**
+     * The list of existing service meshes.
+     */
+    meshes: MeshList;
+    /**
+     * The nextToken value to include in a future ListMeshes
+         request. When the results of a ListMeshes request exceed
+         limit, you can use this value to retrieve the next page of
+         results. This value is null when there are no more results to
+         return.
+     */
+    nextToken?: String;
+  }
+  export type VirtualRouterListeners = VirtualRouterListener[];
+  export interface DescribeRouteOutput {
+    /**
+     * The full description of your route.
+     */
+    route: RouteData;
+  }
+  export interface HttpRouteMatch {
+    /**
+     * Specifies the path to match requests with. This parameter must always start with
+            /, which by itself matches all requests to the virtual router service name.
+         You can also match for path-based routing of requests. For example, if your virtual router
+         service name is my-service.local and you want the route to match requests to
+            my-service.local/metrics, your prefix should be
+         /metrics.
+     */
+    prefix: String;
+  }
+  export type MeshList = MeshRef[];
+  export interface MeshRef {
+    /**
+     * The full Amazon Resource Name (ARN) of the service mesh.
+     */
+    arn: Arn;
+    /**
+     * The name of the service mesh.
+     */
+    meshName: ResourceName;
+  }
+  export type MeshStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
+  export interface PortMapping {
+    /**
+     * The port used for the port mapping.
+     */
+    port: PortNumber;
+    /**
+     * The protocol used for the port mapping.
+     */
+    protocol: PortProtocol;
   }
   export interface MeshData {
     /**
@@ -945,34 +1008,150 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     /**
      * The status of the service mesh.
      */
-    status?: MeshStatus;
+    status: MeshStatus;
   }
-  export type ListVirtualNodesLimit = number;
-  export type WeightedTargets = WeightedTarget[];
-  export interface DeleteMeshInput {
+  export interface VirtualRouterStatus {
     /**
-     * The name of the service mesh to delete.
+     * The current status of the virtual router.
+     */
+    status: VirtualRouterStatusCode;
+  }
+  export interface ListVirtualServicesOutput {
+    /**
+     * The nextToken value to include in a future ListVirtualServices
+         request. When the results of a ListVirtualServices request exceed
+            limit, you can use this value to retrieve the next page of results. This
+         value is null when there are no more results to return.
+     */
+    nextToken?: String;
+    /**
+     * The list of existing virtual services for the specified service mesh.
+     */
+    virtualServices: VirtualServiceList;
+  }
+  export interface WeightedTarget {
+    /**
+     * The virtual node to associate with the weighted target.
+     */
+    virtualNode: ResourceName;
+    /**
+     * The relative weight of the weighted target.
+     */
+    weight: PercentInt;
+  }
+  export interface DescribeVirtualNodeInput {
+    /**
+     * The name of the service mesh that the virtual node resides in.
      */
     meshName: ResourceName;
-  }
-  export interface HttpRouteMatch {
     /**
-     * Specifies the path with which to match requests. This parameter must always start with
-            /, which by itself matches all requests to the virtual router service name.
-         You can also match for path-based routing of requests. For example, if your virtual router
-         service name is my-service.local, and you want the route to match requests to
-            my-service.local/metrics, then your prefix should be
-         /metrics.
+     * The name of the virtual node to describe.
      */
-    prefix?: String;
+    virtualNodeName: ResourceName;
   }
-  export interface DeleteRouteOutput {
+  export interface RouteStatus {
     /**
-     * The route that was deleted.
+     * The current status for the route.
      */
-    route?: RouteData;
+    status: RouteStatusCode;
   }
-  export type Backends = ServiceName[];
+  export interface RouteRef {
+    /**
+     * The full Amazon Resource Name (ARN) for the route.
+     */
+    arn: Arn;
+    /**
+     * The name of the service mesh that the route resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The name of the route.
+     */
+    routeName: ResourceName;
+    /**
+     * The virtual router that the route is associated with.
+     */
+    virtualRouterName: ResourceName;
+  }
+  export interface Listener {
+    /**
+     * The health check information for the listener.
+     */
+    healthCheck?: HealthCheckPolicy;
+    /**
+     * The port mapping information for the listener.
+     */
+    portMapping: PortMapping;
+  }
+  export interface DeleteVirtualNodeInput {
+    /**
+     * The name of the service mesh to delete the virtual node in.
+     */
+    meshName: ResourceName;
+    /**
+     * The name of the virtual node to delete.
+     */
+    virtualNodeName: ResourceName;
+  }
+  export interface RouteData {
+    /**
+     * The name of the service mesh that the route resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The associated metadata for the route.
+     */
+    metadata: ResourceMetadata;
+    /**
+     * The name of the route.
+     */
+    routeName: ResourceName;
+    /**
+     * The specifications of the route.
+     */
+    spec: RouteSpec;
+    /**
+     * The status of the route.
+     */
+    status: RouteStatus;
+    /**
+     * The virtual router that the route is associated with.
+     */
+    virtualRouterName: ResourceName;
+  }
+  export type RouteStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
+  export type ListRoutesLimit = number;
+  export interface DeleteVirtualServiceOutput {
+    /**
+     * The virtual service that was deleted.
+     */
+    virtualService: VirtualServiceData;
+  }
+  export interface VirtualNodeServiceProvider {
+    /**
+     * The name of the virtual node that is acting as a service provider.
+     */
+    virtualNodeName: ResourceName;
+  }
+  export interface DescribeVirtualRouterInput {
+    /**
+     * The name of the service mesh that the virtual router resides in.
+     */
+    meshName: ResourceName;
+    /**
+     * The name of the virtual router to describe.
+     */
+    virtualRouterName: ResourceName;
+  }
+  export type RouteList = RouteRef[];
+  export interface DeleteMeshOutput {
+    /**
+     * The service mesh that was deleted.
+     */
+    mesh: MeshData;
+  }
+  export type Hostname = string;
+  export type PortNumber = number;
   export interface CreateRouteInput {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
@@ -996,65 +1175,153 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualRouterName: ResourceName;
   }
-  export interface VirtualNodeStatus {
+  export type WeightedTargets = WeightedTarget[];
+  export interface VirtualServiceProvider {
     /**
-     * The current status of the virtual node.
+     * The virtual node associated with a virtual service.
      */
-    status?: VirtualNodeStatusCode;
+    virtualNode?: VirtualNodeServiceProvider;
+    /**
+     * The virtual router associated with a virtual service.
+     */
+    virtualRouter?: VirtualRouterServiceProvider;
   }
-  export interface ListVirtualNodesInput {
+  export type String = string;
+  export interface UpdateVirtualServiceOutput {
     /**
-     * The maximum number of mesh results returned by ListVirtualNodes in
-         paginated output. When this parameter is used, ListVirtualNodes only returns
-         limit results in a single page along with a nextToken
-         response element. The remaining results of the initial request can be seen by sending
-         another ListVirtualNodes request with the returned nextToken
-         value. This value can be between 1 and 100. If this
-         parameter is not used, then ListVirtualNodes returns up to
-         100 results and a nextToken value if applicable.
+     * A full description of the virtual service that was updated.
      */
-    limit?: ListVirtualNodesLimit;
+    virtualService: VirtualServiceData;
+  }
+  export interface UpdateRouteInput {
     /**
-     * The name of the service mesh in which to list virtual nodes.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+     */
+    clientToken?: String;
+    /**
+     * The name of the service mesh that the route resides in.
      */
     meshName: ResourceName;
     /**
-     * The nextToken value returned from a previous paginated
-         ListVirtualNodes request where limit was used and the
-         results exceeded the value of that parameter. Pagination continues from the end of the
-         previous results that returned the nextToken value.
+     * The name of the route to update.
+     */
+    routeName: ResourceName;
+    /**
+     * The new route specification to apply. This overwrites the existing data.
+     */
+    spec: RouteSpec;
+    /**
+     * The name of the virtual router that the route is associated with.
+     */
+    virtualRouterName: ResourceName;
+  }
+  export interface MeshStatus {
+    /**
+     * The current mesh status.
+     */
+    status?: MeshStatusCode;
+  }
+  export interface CreateVirtualNodeInput {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+     */
+    clientToken?: String;
+    /**
+     * The name of the service mesh in which to create the virtual node.
+     */
+    meshName: ResourceName;
+    /**
+     * The virtual node specification to apply.
+     */
+    spec: VirtualNodeSpec;
+    /**
+     * The name to use for the virtual node.
+     */
+    virtualNodeName: ResourceName;
+  }
+  export interface RouteSpec {
+    /**
+     * The HTTP routing information for the route.
+     */
+    httpRoute?: HttpRoute;
+  }
+  export interface HttpRoute {
+    /**
+     * The action to take if a match is determined.
+     */
+    action: HttpRouteAction;
+    /**
+     * The criteria for determining an HTTP request match.
+     */
+    match: HttpRouteMatch;
+  }
+  export interface DescribeMeshInput {
+    /**
+     * The name of the service mesh to describe.
+     */
+    meshName: ResourceName;
+  }
+  export interface CreateVirtualServiceOutput {
+    /**
+     * The full description of your virtual service following the create call.
+     */
+    virtualService: VirtualServiceData;
+  }
+  export interface VirtualRouterServiceProvider {
+    /**
+     * The name of the virtual router that is acting as a service provider.
+     */
+    virtualRouterName: ResourceName;
+  }
+  export interface DeleteVirtualServiceInput {
+    /**
+     * The name of the service mesh to delete the virtual service in.
+     */
+    meshName: ResourceName;
+    /**
+     * The name of the virtual service to delete.
+     */
+    virtualServiceName: ServiceName;
+  }
+  export interface ServiceDiscovery {
+    /**
+     * Specifies the DNS information for the virtual node.
+     */
+    dns?: DnsServiceDiscovery;
+  }
+  export interface ListVirtualNodesOutput {
+    /**
+     * The nextToken value to include in a future ListVirtualNodes
+         request. When the results of a ListVirtualNodes request exceed
+         limit, you can use this value to retrieve the next page of
+         results. This value is null when there are no more results to
+         return.
      */
     nextToken?: String;
+    /**
+     * The list of existing virtual nodes for the specified service mesh.
+     */
+    virtualNodes: VirtualNodeList;
   }
-  export interface RouteRef {
+  export interface DeleteVirtualRouterOutput {
     /**
-     * The full Amazon Resource Name (ARN) for the route.
+     * The virtual router that was deleted.
      */
-    arn?: Arn;
-    /**
-     * The name of the service mesh in which the route resides.
-     */
-    meshName?: ResourceName;
-    /**
-     * The name of the route.
-     */
-    routeName?: ResourceName;
-    /**
-     * The virtual router with which the route is associated.
-     */
-    virtualRouterName?: ResourceName;
+    virtualRouter: VirtualRouterData;
   }
-  export type RouteStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
-  export interface UpdateVirtualNodeOutput {
+  export type VirtualServiceStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
+  export interface DeleteVirtualNodeOutput {
     /**
-     * A full description of the virtual node that was updated.
+     * The virtual node that was deleted.
      */
-    virtualNode?: VirtualNodeData;
+    virtualNode: VirtualNodeData;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
-  export type apiVersion = "2018-10-01"|"latest"|string;
+  export type apiVersion = "2018-10-01"|"2018-10-01"|"2019-01-25"|"latest"|string;
   export interface ClientApiVersions {
     /**
      * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

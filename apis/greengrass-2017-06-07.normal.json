@@ -2000,7 +2000,7 @@
         },
         "DeploymentStatus": {
           "shape": "__string",
-          "documentation": "The current status of the group deployment: ''Pending'', ''InProgress'', ''Success'', or ''Failure''."
+          "documentation": "The current status of the group deployment: ''InProgress'', ''Building'', ''Success'', or ''Failure''."
         },
         "DeploymentType": {
           "shape": "DeploymentType",
@@ -2339,7 +2339,7 @@
         },
         "DeploymentType": {
           "shape": "DeploymentType",
-          "documentation": "The type of deployment. When used in ''CreateDeployment'', only ''NewDeployment'' and ''Redeployment'' are valid."
+          "documentation": "The type of deployment. When used for ''CreateDeployment'', only ''NewDeployment'' and ''Redeployment'' are valid."
         },
         "GroupId": {
           "shape": "__string",
@@ -2529,7 +2529,7 @@
         },
         "DefaultConfig": {
           "shape": "FunctionDefaultConfig",
-          "documentation": "Default configuration that will apply to all Lambda functions in this function definition version"
+          "documentation": "The default configuration that applies to all Lambda functions in this function definition version. Individual Lambda functions can override these settings."
         },
         "FunctionDefinitionId": {
           "shape": "__string",
@@ -3257,7 +3257,7 @@
     },
     "DeploymentType": {
       "type": "string",
-      "documentation": "The type of deployment.",
+      "documentation": "The type of deployment. When used for ''CreateDeployment'', only ''NewDeployment'' and ''Redeployment'' are valid.",
       "enum": [
         "NewDeployment",
         "Redeployment",
@@ -3450,23 +3450,26 @@
           "shape": "FunctionDefaultExecutionConfig"
         }
       },
-      "documentation": "Default configuration that will apply to all Lambda functions in the group."
+      "documentation": "The default configuration that applies to all Lambda functions in the group. Individual Lambda functions can override these settings."
     },
     "FunctionDefaultExecutionConfig": {
       "type": "structure",
       "members": {
         "IsolationMode": {
           "shape": "FunctionIsolationMode"
+        },
+        "RunAs": {
+          "shape": "FunctionRunAsConfig"
         }
       },
-      "documentation": "Configuration that defines the default containerization used for when running Lambda functions in the group. Individual Lambda functions can be override this setting."
+      "documentation": "Configuration information that specifies how a Lambda function runs. "
     },
     "FunctionDefinitionVersion": {
       "type": "structure",
       "members": {
         "DefaultConfig": {
           "shape": "FunctionDefaultConfig",
-          "documentation": "Default configuration that will apply to all Lambda functions in this function definition version"
+          "documentation": "The default configuration that applies to all Lambda functions in this function definition version. Individual Lambda functions can override these settings."
         },
         "Functions": {
           "shape": "__listOfFunction",
@@ -3485,7 +3488,7 @@
           "shape": "FunctionRunAsConfig"
         }
       },
-      "documentation": "Configuration information that specifies how the Lambda function runs. "
+      "documentation": "Configuration information that specifies how a Lambda function runs. "
     },
     "FunctionIsolationMode": {
       "type": "string",
@@ -3500,14 +3503,14 @@
       "members": {
         "Gid": {
           "shape": "__integer",
-          "documentation": "The Group ID whose permissions are used to run a Lambda function."
+          "documentation": "The group ID whose permissions are used to run a Lambda function."
         },
         "Uid": {
           "shape": "__integer",
-          "documentation": "The User ID whose permissions are used to run a Lambda function."
+          "documentation": "The user ID whose permissions are used to run a Lambda function."
         }
       },
-      "documentation": "Specifies the user and/or group whose permissions are used when running the Lambda function. You can specify one or both values to override the default values (ggc_user/ggc_group). We recommend that you avoid running as root unless absolutely necessary to minimize the risk of unintended changes or malicious attacks. To run as root, you must set IsolationMode to NoContainer and you must update config.json in greengrass-root/config to set allowFunctionsToRunAsRoot to yes."
+      "documentation": "Specifies the user and group whose permissions are used when running the Lambda function. You can specify one or both values to override the default values. We recommend that you avoid running as root unless absolutely necessary to minimize the risk of unintended changes or malicious attacks. To run as root, you must set ''IsolationMode'' to ''NoContainer'' and update config.json in ''greengrass-root/config'' to set ''allowFunctionsToRunAsRoot'' to ''yes''."
     },
     "GetAssociatedRoleRequest": {
       "type": "structure",
@@ -3829,7 +3832,7 @@
       "members": {
         "DeploymentStatus": {
           "shape": "__string",
-          "documentation": "The status of the deployment: ''Pending'', ''InProgress'', ''Success'', or ''Failure''."
+          "documentation": "The status of the deployment: ''InProgress'', ''Building'', ''Success'', or ''Failure''."
         },
         "DeploymentType": {
           "shape": "DeploymentType",
@@ -5634,7 +5637,7 @@
         },
         "Subject": {
           "shape": "__string",
-          "documentation": "The subject of the message."
+          "documentation": "The MQTT topic used to route the message."
         },
         "Target": {
           "shape": "__string",

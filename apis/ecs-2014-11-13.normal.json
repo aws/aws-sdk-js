@@ -1369,6 +1369,15 @@
       },
       "documentation": "<p>A Docker container that is part of a task.</p>"
     },
+    "ContainerCondition": {
+      "type": "string",
+      "enum": [
+        "START",
+        "COMPLETE",
+        "SUCCESS",
+        "HEALTHY"
+      ]
+    },
     "ContainerDefinition": {
       "type": "structure",
       "members": {
@@ -1436,13 +1445,25 @@
           "shape": "SecretList",
           "documentation": "<p>The secrets to pass to the container. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html\">Specifying Sensitive Data</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
         },
+        "dependsOn": {
+          "shape": "ContainerDependencies",
+          "documentation": "<p>The dependencies defined for container startup. A container can contain multiple dependencies.</p>"
+        },
+        "startTimeout": {
+          "shape": "BoxedInteger",
+          "documentation": "<p>Time duration to wait before giving up on starting the container.</p> <note> <p>The <code>startTimeout</code> value for the container will take precedence over the <code>ECS_CONTAINER_START_TIMEOUT</code> container agent configuration parameter, if used.</p> </note>"
+        },
+        "stopTimeout": {
+          "shape": "BoxedInteger",
+          "documentation": "<p>Time duration to wait before the container is forcefully killed if it does not exit normally on its own.</p> <note> <p>The <code>stopTimeout</code> value for the container will take precedence over the <code>ECS_CONTAINER_STOP_TIMEOUT</code> container agent configuration parameter, if used.</p> </note>"
+        },
         "hostname": {
           "shape": "String",
           "documentation": "<p>The hostname to use for your container. This parameter maps to <code>Hostname</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--hostname</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p> <note> <p>The <code>hostname</code> parameter is not supported if you are using the <code>awsvpc</code> network mode.</p> </note>"
         },
         "user": {
           "shape": "String",
-          "documentation": "<p>The user name to use inside the container. This parameter maps to <code>User</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--user</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p> <note> <p>This parameter is not supported for Windows containers.</p> </note>"
+          "documentation": "<p>The username to use inside the container. This parameter maps to <code>User</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--user</code> option to <a href=\"https://docs.docker.com/engine/reference/run/\">docker run</a>.</p> <p>This following formats can be used. If specifying a UID or GID, it must be specified as a positive integer.</p> <ul> <li> <p> <code>user</code> </p> </li> <li> <p> <code>user:group</code> </p> </li> <li> <p> <code>uid</code> </p> </li> <li> <p> <code>uid:gid</code> </p> </li> <li> <p> <code>user:gid</code> </p> </li> <li> <p> <code>uid:group</code> </p> </li> </ul> <note> <p>This parameter is not supported for Windows containers.</p> </note>"
         },
         "workingDirectory": {
           "shape": "String",
@@ -1516,6 +1537,30 @@
       "member": {
         "shape": "ContainerDefinition"
       }
+    },
+    "ContainerDependencies": {
+      "type": "list",
+      "member": {
+        "shape": "ContainerDependency"
+      }
+    },
+    "ContainerDependency": {
+      "type": "structure",
+      "required": [
+        "containerName",
+        "condition"
+      ],
+      "members": {
+        "containerName": {
+          "shape": "String",
+          "documentation": "<p>The name of a container.</p>"
+        },
+        "condition": {
+          "shape": "ContainerCondition",
+          "documentation": "<p>The dependency condition of the container. The following are the available conditions and their behavior:</p> <ul> <li> <p> <code>START</code> - This condition emulates the behavior of links and volumes today. It validates that a dependent container is started before permitting other containers to start.</p> </li> <li> <p> <code>COMPLETE</code> - This condition validates that a dependent container runs to completion (exits) before permitting other containers to start. This can be useful for non-essential containers that run a script and then subsequently exit.</p> </li> <li> <p> <code>SUCCESS</code> - This condition is the same as <code>COMPLETE</code>, but it will also require that the container exits with a <code>zero</code> status.</p> </li> <li> <p> <code>HEALTHY</code> - This condition validates that the dependent container passes its Docker health check before permitting other containers to start. This requires that the dependent container has health checks configured. This condition will only be confirmed at task startup.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>The dependencies defined for container startup. A container can contain multiple dependencies.</p>"
     },
     "ContainerInstance": {
       "type": "structure",
@@ -1773,7 +1818,7 @@
         },
         "healthCheckGracePeriodSeconds": {
           "shape": "BoxedInteger",
-          "documentation": "<p>The period of time, in seconds, that the Amazon ECS service scheduler should ignore unhealthy Elastic Load Balancing target health checks after a task has first started. This is only valid if your service is configured to use a load balancer. If your service's tasks take a while to start and respond to Elastic Load Balancing health checks, you can specify a health check grace period of up to 7,200 seconds. During that time, the ECS service scheduler ignores health check status. This grace period can prevent the ECS service scheduler from marking tasks as unhealthy and stopping them before they have time to come up.</p>"
+          "documentation": "<p>The period of time, in seconds, that the Amazon ECS service scheduler should ignore unhealthy Elastic Load Balancing target health checks after a task has first started. This is only valid if your service is configured to use a load balancer. If your service's tasks take a while to start and respond to Elastic Load Balancing health checks, you can specify a health check grace period of up to 2,147,483,647 seconds. During that time, the ECS service scheduler ignores health check status. This grace period can prevent the ECS service scheduler from marking tasks as unhealthy and stopping them before they have time to come up.</p>"
         },
         "schedulingStrategy": {
           "shape": "SchedulingStrategy",
@@ -3111,6 +3156,39 @@
         "SERVICE"
       ]
     },
+    "ProxyConfiguration": {
+      "type": "structure",
+      "required": [
+        "containerName"
+      ],
+      "members": {
+        "type": {
+          "shape": "ProxyConfigurationType",
+          "documentation": "<p>The proxy type. The only supported value is <code>APPMESH</code>.</p>"
+        },
+        "containerName": {
+          "shape": "String",
+          "documentation": "<p>The name of the container that will serve as the App Mesh proxy.</p>"
+        },
+        "properties": {
+          "shape": "ProxyConfigurationProperties",
+          "documentation": "<p>The set of network configuration parameters to provide the Container Network Interface (CNI) plugin, specified as key-value pairs.</p> <ul> <li> <p> <code>IgnoredUID</code> - (Required) The user ID (UID) of the proxy container as defined by the <code>user</code> parameter in a container definition. This is used to ensure the proxy ignores its own traffic. If <code>IgnoredGID</code> is specified, this field can be empty.</p> </li> <li> <p> <code>IgnoredGID</code> - (Required) The group ID (GID) of the proxy container as defined by the <code>user</code> parameter in a container definition. This is used to ensure the proxy ignores its own traffic. If <code>IgnoredGID</code> is specified, this field can be empty.</p> </li> <li> <p> <code>AppPorts</code> - (Required) The list of ports that the application uses. Network traffic to these ports will be forwarded to the <code>ProxyIngressPort</code> and <code>ProxyEgressPort</code>.</p> </li> <li> <p> <code>ProxyIngressPort</code> - (Required) Specifies the port that incoming traffic to the <code>AppPorts</code> is directed to.</p> </li> <li> <p> <code>ProxyEgressPort</code> - (Required) Specifies the port that outgoing traffic from the <code>AppPorts</code> is directed to.</p> </li> <li> <p> <code>EgressIgnoredPorts</code> - (Required) The egress traffic going to these specified ports will be ignored and not redirected to the <code>ProxyEgressPort</code>. It can be empty list.</p> </li> <li> <p> <code>EgressIgnoredIPs</code> - (Required) The egress traffic going to these specified IP addresses will be ignored and not redirected to the <code>ProxyEgressPort</code>. It can be empty list.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>The configuration details for the App Mesh proxy.</p>"
+    },
+    "ProxyConfigurationProperties": {
+      "type": "list",
+      "member": {
+        "shape": "KeyValuePair"
+      }
+    },
+    "ProxyConfigurationType": {
+      "type": "string",
+      "enum": [
+        "APPMESH"
+      ]
+    },
     "PutAccountSettingDefaultRequest": {
       "type": "structure",
       "required": [
@@ -3299,6 +3377,9 @@
         "ipcMode": {
           "shape": "IpcMode",
           "documentation": "<p>The IPC resource namespace to use for the containers in the task. The valid values are <code>host</code>, <code>task</code>, or <code>none</code>. If <code>host</code> is specified, then all containers within the tasks that specified the <code>host</code> IPC mode on the same container instance share the same IPC resources with the host Amazon EC2 instance. If <code>task</code> is specified, all containers within the specified task share the same IPC resources. If <code>none</code> is specified, then IPC resources within the containers of a task are private and not shared with other containers in a task or on the container instance. If no value is specified, then the IPC resource namespace sharing depends on the Docker daemon setting on the container instance. For more information, see <a href=\"https://docs.docker.com/engine/reference/run/#ipc-settings---ipc\">IPC settings</a> in the <i>Docker run reference</i>.</p> <p>If the <code>host</code> IPC mode is used, be aware that there is a heightened risk of undesired IPC namespace expose. For more information, see <a href=\"https://docs.docker.com/engine/security/security/\">Docker security</a>.</p> <p>If you are setting namespaced kernel parameters using <code>systemControls</code> for the containers in the task, the following will apply to your IPC resource namespace. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html\">System Controls</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <ul> <li> <p>For tasks that use the <code>host</code> IPC mode, IPC namespace related <code>systemControls</code> are not supported.</p> </li> <li> <p>For tasks that use the <code>task</code> IPC mode, IPC namespace related <code>systemControls</code> will apply to all containers within a task.</p> </li> </ul> <note> <p>This parameter is not supported for Windows containers or tasks using the Fargate launch type.</p> </note>"
+        },
+        "proxyConfiguration": {
+          "shape": "ProxyConfiguration"
         }
       }
     },
@@ -4255,6 +4336,10 @@
         "ipcMode": {
           "shape": "IpcMode",
           "documentation": "<p>The IPC resource namespace to use for the containers in the task. The valid values are <code>host</code>, <code>task</code>, or <code>none</code>. If <code>host</code> is specified, then all containers within the tasks that specified the <code>host</code> IPC mode on the same container instance share the same IPC resources with the host Amazon EC2 instance. If <code>task</code> is specified, all containers within the specified task share the same IPC resources. If <code>none</code> is specified, then IPC resources within the containers of a task are private and not shared with other containers in a task or on the container instance. If no value is specified, then the IPC resource namespace sharing depends on the Docker daemon setting on the container instance. For more information, see <a href=\"https://docs.docker.com/engine/reference/run/#ipc-settings---ipc\">IPC settings</a> in the <i>Docker run reference</i>.</p> <p>If the <code>host</code> IPC mode is used, be aware that there is a heightened risk of undesired IPC namespace expose. For more information, see <a href=\"https://docs.docker.com/engine/security/security/\">Docker security</a>.</p> <p>If you are setting namespaced kernel parameters using <code>systemControls</code> for the containers in the task, the following will apply to your IPC resource namespace. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html\">System Controls</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p> <ul> <li> <p>For tasks that use the <code>host</code> IPC mode, IPC namespace related <code>systemControls</code> are not supported.</p> </li> <li> <p>For tasks that use the <code>task</code> IPC mode, IPC namespace related <code>systemControls</code> will apply to all containers within a task.</p> </li> </ul> <note> <p>This parameter is not supported for Windows containers or tasks using the Fargate launch type.</p> </note>"
+        },
+        "proxyConfiguration": {
+          "shape": "ProxyConfiguration",
+          "documentation": "<p/>"
         }
       },
       "documentation": "<p>Details of a task definition.</p>"
@@ -4723,5 +4808,5 @@
       }
     }
   },
-  "documentation": "<p>Amazon Elastic Container Service (Amazon ECS) is a highly scalable, fast, container management service that makes it easy to run, stop, and manage Docker containers on a cluster. You can host your cluster on a serverless infrastructure that is managed by Amazon ECS by launching your services or tasks using the Fargate launch type. For more control, you can host your tasks on a cluster of Amazon Elastic Compute Cloud (Amazon EC2) instances that you manage by using the EC2 launch type. For more information about launch types, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html\">Amazon ECS Launch Types</a>.</p> <p>Amazon ECS lets you launch and stop container-based applications with simple API calls, allows you to get the state of your cluster from a centralized service, and gives you access to many familiar Amazon EC2 features.</p> <p>You can use Amazon ECS to schedule the placement of containers across your cluster based on your resource needs, isolation policies, and availability requirements. Amazon ECS eliminates the need for you to operate your own cluster management and configuration management systems or worry about scaling your management infrastructure.</p>"
+  "documentation": "<fullname>Amazon Elastic Container Service</fullname> <p>Amazon Elastic Container Service (Amazon ECS) is a highly scalable, fast, container management service that makes it easy to run, stop, and manage Docker containers on a cluster. You can host your cluster on a serverless infrastructure that is managed by Amazon ECS by launching your services or tasks using the Fargate launch type. For more control, you can host your tasks on a cluster of Amazon Elastic Compute Cloud (Amazon EC2) instances that you manage by using the EC2 launch type. For more information about launch types, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html\">Amazon ECS Launch Types</a>.</p> <p>Amazon ECS lets you launch and stop container-based applications with simple API calls, allows you to get the state of your cluster from a centralized service, and gives you access to many familiar Amazon EC2 features.</p> <p>You can use Amazon ECS to schedule the placement of containers across your cluster based on your resource needs, isolation policies, and availability requirements. Amazon ECS eliminates the need for you to operate your own cluster management and configuration management systems or worry about scaling your management infrastructure.</p>"
 }

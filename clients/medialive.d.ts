@@ -2023,11 +2023,13 @@ omit: Omit any CLOSED-CAPTIONS line from the manifest.
      */
     HlsCdnSettings?: HlsCdnSettings;
     /**
-     * If enabled, writes out I-Frame only playlists in addition to media playlists.
+     * DISABLED: Do not create an I-frame-only manifest, but do create the master and media manifests (according to the Output Selection field).
+
+STANDARD: Create an I-frame-only manifest for each output that contains video, as well as the other manifests (according to the Output Selection field). The I-frame manifest contains a #EXT-X-I-FRAMES-ONLY tag to indicate it is I-frame only, and one or more #EXT-X-BYTERANGE entries identifying the I-frame position. For example, #EXT-X-BYTERANGE:160364@1461888"
      */
     IFrameOnlyPlaylists?: IFrameOnlyPlaylistType;
     /**
-     * If mode is "live", the number of segments to retain in the manifest (.m3u8) file. This number must be less than or equal to keepSegments. If mode is "vod", this parameter has no effect.
+     * Applies only if Mode field is LIVE. Specifies the maximum number of segments in the media manifest file. After this maximum, older segments are removed from the media manifest. This number must be less than or equal to the Keep Segments field.
      */
     IndexNSegments?: __integerMin3;
     /**
@@ -2091,7 +2093,11 @@ SEGMENTSONLY: Does not generate any manifests for this output group.
      */
     ProgramDateTimePeriod?: __integerMin0Max3600;
     /**
-     * When set to "enabled", includes the media playlists from both pipelines in the master manifest (.m3u8) file.
+     * ENABLED: The master manifest (.m3u8 file) for each pipeline includes information about both pipelines: first its own media files, then the media files of the other pipeline. This feature allows playout device that support stale manifest detection to switch from one manifest to the other, when the current manifest seems to be stale. There are still two destinations and two master manifests, but both master manifests reference the media files from both pipelines.
+
+DISABLED: The master manifest (.m3u8 file) for each pipeline includes information about its own pipeline only.
+
+For an HLS output group with MediaPackage as the destination, the DISABLED behavior is always followed. MediaPackage regenerates the manifests it serves to players so a redundant manifest from MediaLive is irrelevant.
      */
     RedundantManifest?: HlsRedundantManifest;
     /**
@@ -2955,6 +2961,20 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
      */
     FlowArn?: __string;
   }
+  export interface MediaPackageGroupSettings {
+    /**
+     * MediaPackage channel destination.
+     */
+    Destination: OutputLocationRef;
+  }
+  export interface MediaPackageOutputDestinationSettings {
+    /**
+     * ID of the channel in MediaPackage that is the destination for this output group. You do not need to specify the individual inputs in MediaPackage; MediaLive will handle the connection of the two MediaLive pipelines to the two MediaPackage inputs. The MediaPackage channel and MediaLive channel must be in the same region.
+     */
+    ChannelId?: __stringMin1;
+  }
+  export interface MediaPackageOutputSettings {
+  }
   export type Mp2CodingMode = "CODING_MODE_1_0"|"CODING_MODE_2_0"|string;
   export interface Mp2Settings {
     /**
@@ -3150,7 +3170,11 @@ Options:
      */
     Id?: __string;
     /**
-     * Destination settings for output; one for each redundant encoder.
+     * Destination settings for a MediaPackage output; one destination for both encoders.
+     */
+    MediaPackageSettings?: __listOfMediaPackageOutputDestinationSettings;
+    /**
+     * Destination settings for a standard output; one destination for each redundant encoder.
      */
     Settings?: __listOfOutputDestinationSettings;
   }
@@ -3187,6 +3211,7 @@ Options:
     ArchiveGroupSettings?: ArchiveGroupSettings;
     FrameCaptureGroupSettings?: FrameCaptureGroupSettings;
     HlsGroupSettings?: HlsGroupSettings;
+    MediaPackageGroupSettings?: MediaPackageGroupSettings;
     MsSmoothGroupSettings?: MsSmoothGroupSettings;
     RtmpGroupSettings?: RtmpGroupSettings;
     UdpGroupSettings?: UdpGroupSettings;
@@ -3198,6 +3223,7 @@ Options:
     ArchiveOutputSettings?: ArchiveOutputSettings;
     FrameCaptureOutputSettings?: FrameCaptureOutputSettings;
     HlsOutputSettings?: HlsOutputSettings;
+    MediaPackageOutputSettings?: MediaPackageOutputSettings;
     MsSmoothOutputSettings?: MsSmoothOutputSettings;
     RtmpOutputSettings?: RtmpOutputSettings;
     UdpOutputSettings?: UdpOutputSettings;
@@ -4111,6 +4137,7 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   export type __listOfInputWhitelistRuleCidr = InputWhitelistRuleCidr[];
   export type __listOfMediaConnectFlow = MediaConnectFlow[];
   export type __listOfMediaConnectFlowRequest = MediaConnectFlowRequest[];
+  export type __listOfMediaPackageOutputDestinationSettings = MediaPackageOutputDestinationSettings[];
   export type __listOfOffering = Offering[];
   export type __listOfOutput = Output[];
   export type __listOfOutputDestination = OutputDestination[];

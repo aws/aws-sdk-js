@@ -779,7 +779,7 @@ declare namespace Greengrass {
      */
     DeploymentId?: __string;
     /**
-     * The current status of the group deployment: ''Pending'', ''InProgress'', ''Success'', or ''Failure''.
+     * The current status of the group deployment: ''InProgress'', ''Building'', ''Success'', or ''Failure''.
      */
     DeploymentStatus?: __string;
     /**
@@ -1026,7 +1026,7 @@ declare namespace Greengrass {
      */
     DeploymentId?: __string;
     /**
-     * The type of deployment. When used in ''CreateDeployment'', only ''NewDeployment'' and ''Redeployment'' are valid.
+     * The type of deployment. When used for ''CreateDeployment'', only ''NewDeployment'' and ''Redeployment'' are valid.
      */
     DeploymentType?: DeploymentType;
     /**
@@ -1174,7 +1174,7 @@ declare namespace Greengrass {
      */
     AmznClientToken?: __string;
     /**
-     * Default configuration that will apply to all Lambda functions in this function definition version
+     * The default configuration that applies to all Lambda functions in this function definition version. Individual Lambda functions can override these settings.
      */
     DefaultConfig?: FunctionDefaultConfig;
     /**
@@ -1811,10 +1811,11 @@ declare namespace Greengrass {
   }
   export interface FunctionDefaultExecutionConfig {
     IsolationMode?: FunctionIsolationMode;
+    RunAs?: FunctionRunAsConfig;
   }
   export interface FunctionDefinitionVersion {
     /**
-     * Default configuration that will apply to all Lambda functions in this function definition version
+     * The default configuration that applies to all Lambda functions in this function definition version. Individual Lambda functions can override these settings.
      */
     DefaultConfig?: FunctionDefaultConfig;
     /**
@@ -1829,11 +1830,11 @@ declare namespace Greengrass {
   export type FunctionIsolationMode = "GreengrassContainer"|"NoContainer"|string;
   export interface FunctionRunAsConfig {
     /**
-     * The Group ID whose permissions are used to run a Lambda function.
+     * The group ID whose permissions are used to run a Lambda function.
      */
     Gid?: __integer;
     /**
-     * The User ID whose permissions are used to run a Lambda function.
+     * The user ID whose permissions are used to run a Lambda function.
      */
     Uid?: __integer;
   }
@@ -2057,7 +2058,7 @@ declare namespace Greengrass {
   }
   export interface GetDeploymentStatusResponse {
     /**
-     * The status of the deployment: ''Pending'', ''InProgress'', ''Success'', or ''Failure''.
+     * The status of the deployment: ''InProgress'', ''Building'', ''Success'', or ''Failure''.
      */
     DeploymentStatus?: __string;
     /**
@@ -3287,7 +3288,7 @@ declare namespace Greengrass {
      */
     Source?: __string;
     /**
-     * The subject of the message.
+     * The MQTT topic used to route the message.
      */
     Subject?: __string;
     /**
