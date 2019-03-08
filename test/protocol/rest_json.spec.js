@@ -318,6 +318,21 @@
           });
         });
 
+        it('does not send empty object string', function() {
+          request.params = {};
+          defop({
+            input: {
+              payload: 'Data',
+              members: {
+                Data: {
+                  type: 'string'
+                }
+              }
+            }
+          });
+          expect(build().httpRequest.body).to.eql('');
+        });
+
         it('builds root element if rules contains root', function() {
           request.params = {
             Config: {
