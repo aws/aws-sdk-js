@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.417.0-->
+<!--LATEST=2.418.0-->
 <!--ENTRYINSERT-->
+
+## 2.418.0
+* bugfix: cloudfront: Fix whitespace removal on custom policy
+* feature: CodeBuild: CodeBuild also now supports Git Submodules.  CodeBuild now supports opting out of Encryption for S3 Build Logs.  By default these logs are encrypted.
+* feature: SageMaker: SageMaker notebook instances now support enabling or disabling root access for notebook users. SageMaker Neo now supports rk3399 and rk3288 as compilation target devices.
 
 ## 2.417.0
 * feature: AppMesh: This release includes a new version of the AWS App Mesh APIs. You can read more about the new APIs here: https://docs.aws.amazon.com/app-mesh/latest/APIReference/Welcome.html.

@@ -629,7 +629,7 @@
         },
         "encryptionKey": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <p>This is expressed either as the Amazon Resource Name (ARN) of the CMK or, if specified, the CMK's alias (using the format <code>alias/<i>alias-name</i> </code>).</p>"
+          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/<i>alias-name</i> </code>).</p>"
         }
       },
       "documentation": "<p>Information about a build.</p>"
@@ -859,7 +859,7 @@
         },
         "encryptionKey": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/<i>alias-name</i> </code>).</p>"
+          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/<i>alias-name</i> </code>).</p>"
         },
         "tags": {
           "shape": "TagList",
@@ -1098,6 +1098,19 @@
       "type": "integer",
       "min": 0
     },
+    "GitSubmodulesConfig": {
+      "type": "structure",
+      "required": [
+        "fetchSubmodules"
+      ],
+      "members": {
+        "fetchSubmodules": {
+          "shape": "WrapperBoolean",
+          "documentation": "<p> Set to true to fetch Git submodules for your AWS CodeBuild build project. </p>"
+        }
+      },
+      "documentation": "<p> Information about the Git submodules configuration for an AWS CodeBuild build project. </p>"
+    },
     "ImagePullCredentialsType": {
       "type": "string",
       "enum": [
@@ -1166,7 +1179,7 @@
       "type": "string",
       "max": 127,
       "min": 1,
-      "pattern": "^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=@+\\\\-]*)$"
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=@+\\-]*)$"
     },
     "LanguageType": {
       "type": "string",
@@ -1449,7 +1462,7 @@
         },
         "encryptionKey": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <p>This is expressed either as the Amazon Resource Name (ARN) of the CMK or, if specified, the CMK's alias (using the format <code>alias/<i>alias-name</i> </code>).</p>"
+          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/<i>alias-name</i> </code>).</p>"
         },
         "tags": {
           "shape": "TagList",
@@ -1565,7 +1578,7 @@
         },
         "modes": {
           "shape": "ProjectCacheModes",
-          "documentation": "<p> If you use a <code>LOCAL</code> cache, the local cache mode. You can use one or more local cache modes at the same time. </p> <ul> <li> <p> <code>LOCAL_SOURCE_CACHE</code> mode caches Git metadata for primary and secondary sources. After the cache is created, subsequent builds pull only the change between commits. This mode is a good choice for projects with a clean working directory and a source that is a large Git repository. If your project does not use a Git repository (GitHub, GitHub Enterprise, or Bitbucket) and you choose this option, then it is ignored. </p> </li> <li> <p> <code>LOCAL_DOCKER_LAYER_CACHE</code> mode caches existing Docker layers. This mode is a good choice for projects that build or pull large Docker images. It can prevent the performance hit that would be caused by pulling large Docker images down from the network. </p> <note> <ul> <li> <p> You can only use a Docker layer cache in the Linux enviornment. </p> </li> <li> <p> The <code>privileged</code> flag must be set so that your project has the necessary Docker privileges. </p> </li> <li> <p> You should consider the security implications before using a Docker layer cache. </p> </li> </ul> </note> </li> </ul> <ul> <li> <p> <code>LOCAL_CUSTOM_CACHE</code> mode caches directories you specify in the buildspec file. This mode is a good choice if your build scenario does not match one that works well with one of the other three local cache modes. If you use a custom cache: </p> <ul> <li> <p> Only directories can be specified for caching. You cannot specify individual files. </p> </li> <li> <p> Symlinks are used to reference cached directories. </p> </li> <li> <p> Cached directories are linked to your build before it downloads its project sources. Cached items are overriden if a source item has the same name. Directories are specified using cache paths in the buildspec file. </p> </li> </ul> </li> </ul>"
+          "documentation": "<p> If you use a <code>LOCAL</code> cache, the local cache mode. You can use one or more local cache modes at the same time. </p> <ul> <li> <p> <code>LOCAL_SOURCE_CACHE</code> mode caches Git metadata for primary and secondary sources. After the cache is created, subsequent builds pull only the change between commits. This mode is a good choice for projects with a clean working directory and a source that is a large Git repository. If you choose this option and your project does not use a Git repository (GitHub, GitHub Enterprise, or Bitbucket), the option is ignored. </p> </li> <li> <p> <code>LOCAL_DOCKER_LAYER_CACHE</code> mode caches existing Docker layers. This mode is a good choice for projects that build or pull large Docker images. It can prevent the performance issues caused by pulling large Docker images down from the network. </p> <note> <ul> <li> <p> You can use a Docker layer cache in the Linux enviornment only. </p> </li> <li> <p> The <code>privileged</code> flag must be set so that your project has the required Docker permissions. </p> </li> <li> <p> You should consider the security implications before you use a Docker layer cache. </p> </li> </ul> </note> </li> </ul> <ul> <li> <p> <code>LOCAL_CUSTOM_CACHE</code> mode caches directories you specify in the buildspec file. This mode is a good choice if your build scenario is not suited to one of the other three local cache modes. If you use a custom cache: </p> <ul> <li> <p> Only directories can be specified for caching. You cannot specify individual files. </p> </li> <li> <p> Symlinks are used to reference cached directories. </p> </li> <li> <p> Cached directories are linked to your build before it downloads its project sources. Cached items are overriden if a source item has the same name. Directories are specified using cache paths in the buildspec file. </p> </li> </ul> </li> </ul>"
         }
       },
       "documentation": "<p>Information about the cache for the build project.</p>"
@@ -1670,7 +1683,11 @@
         },
         "gitCloneDepth": {
           "shape": "GitCloneDepth",
-          "documentation": "<p>Information about the git clone depth for the build project.</p>"
+          "documentation": "<p>Information about the Git clone depth for the build project.</p>"
+        },
+        "gitSubmodulesConfig": {
+          "shape": "GitSubmodulesConfig",
+          "documentation": "<p> Information about the Git submodules configuration for the build project. </p>"
         },
         "buildspec": {
           "shape": "String",
@@ -1758,6 +1775,10 @@
         "location": {
           "shape": "String",
           "documentation": "<p> The ARN of an S3 bucket and the path prefix for S3 logs. If your Amazon S3 bucket name is <code>my-bucket</code>, and your path prefix is <code>build-log</code>, then acceptable formats are <code>my-bucket/build-log</code> or <code>arn:aws:s3:::my-bucket/build-log</code>. </p>"
+        },
+        "encryptionDisabled": {
+          "shape": "WrapperBoolean",
+          "documentation": "<p> Set to true if you do not want your S3 build log output encrypted. By default S3 build logs are encrypted. </p>"
         }
       },
       "documentation": "<p> Information about S3 logs for a build project. </p>"
@@ -1897,6 +1918,10 @@
         "gitCloneDepthOverride": {
           "shape": "GitCloneDepth",
           "documentation": "<p>The user-defined depth of history, with a minimum value of 0, that overrides, for this build only, any previous depth of history defined in the build project.</p>"
+        },
+        "gitSubmodulesConfigOverride": {
+          "shape": "GitSubmodulesConfig",
+          "documentation": "<p> Information about the Git submodules configuration for this build of an AWS CodeBuild build project. </p>"
         },
         "buildspecOverride": {
           "shape": "String",
@@ -2097,7 +2122,7 @@
         },
         "encryptionKey": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The replacement AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <p>You can specify either the Amazon Resource Name (ARN)of the CMK or, if available, the CMK's alias (using the format <code>alias/<i>alias-name</i> </code>).</p>"
+          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/<i>alias-name</i> </code>).</p>"
         },
         "tags": {
           "shape": "TagList",
@@ -2163,7 +2188,7 @@
       "type": "string",
       "max": 255,
       "min": 1,
-      "pattern": "^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=@+\\\\-]*)$"
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=@+\\-]*)$"
     },
     "VpcConfig": {
       "type": "structure",

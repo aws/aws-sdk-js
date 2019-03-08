@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "cloudfront",
-  "description": "Fix whitespace removal on custom policy"
-}

@@ -226,11 +226,11 @@ declare class S3 extends S3Customizations {
    */
   getBucketInventoryConfiguration(callback?: (err: AWSError, data: S3.Types.GetBucketInventoryConfigurationOutput) => void): Request<S3.Types.GetBucketInventoryConfigurationOutput, AWSError>;
   /**
-   * Deprecated, see the GetBucketLifecycleConfiguration operation.
+   *  No longer used, see the GetBucketLifecycleConfiguration operation.
    */
   getBucketLifecycle(params: S3.Types.GetBucketLifecycleRequest, callback?: (err: AWSError, data: S3.Types.GetBucketLifecycleOutput) => void): Request<S3.Types.GetBucketLifecycleOutput, AWSError>;
   /**
-   * Deprecated, see the GetBucketLifecycleConfiguration operation.
+   *  No longer used, see the GetBucketLifecycleConfiguration operation.
    */
   getBucketLifecycle(callback?: (err: AWSError, data: S3.Types.GetBucketLifecycleOutput) => void): Request<S3.Types.GetBucketLifecycleOutput, AWSError>;
   /**
@@ -266,11 +266,11 @@ declare class S3 extends S3Customizations {
    */
   getBucketMetricsConfiguration(callback?: (err: AWSError, data: S3.Types.GetBucketMetricsConfigurationOutput) => void): Request<S3.Types.GetBucketMetricsConfigurationOutput, AWSError>;
   /**
-   * Deprecated, see the GetBucketNotificationConfiguration operation.
+   *  No longer used, see the GetBucketNotificationConfiguration operation.
    */
   getBucketNotification(params: S3.Types.GetBucketNotificationConfigurationRequest, callback?: (err: AWSError, data: S3.Types.NotificationConfigurationDeprecated) => void): Request<S3.Types.NotificationConfigurationDeprecated, AWSError>;
   /**
-   * Deprecated, see the GetBucketNotificationConfiguration operation.
+   *  No longer used, see the GetBucketNotificationConfiguration operation.
    */
   getBucketNotification(callback?: (err: AWSError, data: S3.Types.NotificationConfigurationDeprecated) => void): Request<S3.Types.NotificationConfigurationDeprecated, AWSError>;
   /**
@@ -534,11 +534,11 @@ declare class S3 extends S3Customizations {
    */
   putBucketInventoryConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deprecated, see the PutBucketLifecycleConfiguration operation.
+   *  No longer used, see the PutBucketLifecycleConfiguration operation.
    */
   putBucketLifecycle(params: S3.Types.PutBucketLifecycleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deprecated, see the PutBucketLifecycleConfiguration operation.
+   *  No longer used, see the PutBucketLifecycleConfiguration operation.
    */
   putBucketLifecycle(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -566,11 +566,11 @@ declare class S3 extends S3Customizations {
    */
   putBucketMetricsConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deprecated, see the PutBucketNotificationConfiguraiton operation.
+   *  No longer used, see the PutBucketNotificationConfiguration operation.
    */
   putBucketNotification(params: S3.Types.PutBucketNotificationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deprecated, see the PutBucketNotificationConfiguraiton operation.
+   *  No longer used, see the PutBucketNotificationConfiguration operation.
    */
   putBucketNotification(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -766,8 +766,17 @@ declare namespace S3 {
     RequestCharged?: RequestCharged;
   }
   export interface AbortMultipartUploadRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     Key: ObjectKey;
+    /**
+     * 
+     */
     UploadId: MultipartUploadId;
     RequestPayer?: RequestPayer;
   }
@@ -784,6 +793,9 @@ declare namespace S3 {
      * A list of grants.
      */
     Grants?: Grants;
+    /**
+     * 
+     */
     Owner?: Owner;
   }
   export interface AccessControlTranslation {
@@ -879,6 +891,9 @@ declare namespace S3 {
   export type BucketAccelerateStatus = "Enabled"|"Suspended"|string;
   export type BucketCannedACL = "private"|"public-read"|"public-read-write"|"authenticated-read"|string;
   export interface BucketLifecycleConfiguration {
+    /**
+     * 
+     */
     Rules: LifecycleRules;
   }
   export type BucketLocationConstraint = "EU"|"eu-west-1"|"us-west-1"|"us-west-2"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"sa-east-1"|"cn-north-1"|"eu-central-1"|string;
@@ -894,6 +909,9 @@ declare namespace S3 {
   export type BytesReturned = number;
   export type BytesScanned = number;
   export interface CORSConfiguration {
+    /**
+     * 
+     */
     CORSRules: CORSRules;
   }
   export interface CORSRule {
@@ -976,20 +994,41 @@ declare namespace S3 {
   export interface CloudFunctionConfiguration {
     Id?: NotificationId;
     Event?: Event;
+    /**
+     * 
+     */
     Events?: EventList;
+    /**
+     * 
+     */
     CloudFunction?: CloudFunction;
+    /**
+     * 
+     */
     InvocationRole?: CloudFunctionInvocationRole;
   }
   export type CloudFunctionInvocationRole = string;
   export type Code = string;
   export type Comments = string;
   export interface CommonPrefix {
+    /**
+     * 
+     */
     Prefix?: Prefix;
   }
   export type CommonPrefixList = CommonPrefix[];
   export interface CompleteMultipartUploadOutput {
+    /**
+     * 
+     */
     Location?: Location;
+    /**
+     * 
+     */
     Bucket?: BucketName;
+    /**
+     * 
+     */
     Key?: ObjectKey;
     /**
      * If the object expiration is configured, this will contain the expiration date (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded.
@@ -1014,13 +1053,28 @@ declare namespace S3 {
     RequestCharged?: RequestCharged;
   }
   export interface CompleteMultipartUploadRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     Key: ObjectKey;
+    /**
+     * 
+     */
     MultipartUpload?: CompletedMultipartUpload;
+    /**
+     * 
+     */
     UploadId: MultipartUploadId;
     RequestPayer?: RequestPayer;
   }
   export interface CompletedMultipartUpload {
+    /**
+     * 
+     */
     Parts?: CompletedPartList;
   }
   export interface CompletedPart {
@@ -1056,11 +1110,17 @@ declare namespace S3 {
   export interface ContinuationEvent {
   }
   export interface CopyObjectOutput {
+    /**
+     * 
+     */
     CopyObjectResult?: CopyObjectResult;
     /**
      * If the object expiration is configured, the response includes this header.
      */
     Expiration?: Expiration;
+    /**
+     * 
+     */
     CopySourceVersionId?: CopySourceVersionId;
     /**
      * Version ID of the newly created copy.
@@ -1089,6 +1149,9 @@ declare namespace S3 {
      * The canned ACL to apply to the object.
      */
     ACL?: ObjectCannedACL;
+    /**
+     * 
+     */
     Bucket: BucketName;
     /**
      * Specifies caching behavior along the request/reply chain.
@@ -1150,6 +1213,9 @@ declare namespace S3 {
      * Allows grantee to write the ACL for the applicable object.
      */
     GrantWriteACP?: GrantWriteACP;
+    /**
+     * 
+     */
     Key: ObjectKey;
     /**
      * A map of metadata to store with the object in S3.
@@ -1222,7 +1288,13 @@ declare namespace S3 {
     ObjectLockLegalHoldStatus?: ObjectLockLegalHoldStatus;
   }
   export interface CopyObjectResult {
+    /**
+     * 
+     */
     ETag?: ETag;
+    /**
+     * 
+     */
     LastModified?: LastModified;
   }
   export interface CopyPartResult {
@@ -1247,11 +1319,14 @@ declare namespace S3 {
   export type CopySourceVersionId = string;
   export interface CreateBucketConfiguration {
     /**
-     * Specifies the region where the bucket will be created. If you don't specify a region, the bucket will be created in US Standard.
+     * Specifies the region where the bucket will be created. If you don't specify a region, the bucket is created in US East (N. Virginia) Region (us-east-1).
      */
     LocationConstraint?: BucketLocationConstraint;
   }
   export interface CreateBucketOutput {
+    /**
+     * 
+     */
     Location?: Location;
   }
   export interface CreateBucketRequest {
@@ -1259,7 +1334,13 @@ declare namespace S3 {
      * The canned ACL to apply to the bucket.
      */
     ACL?: BucketCannedACL;
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     CreateBucketConfiguration?: CreateBucketConfiguration;
     /**
      * Allows grantee the read, write, read ACP, and write ACP permissions on the bucket.
@@ -1330,6 +1411,9 @@ declare namespace S3 {
      * The canned ACL to apply to the object.
      */
     ACL?: ObjectCannedACL;
+    /**
+     * 
+     */
     Bucket: BucketName;
     /**
      * Specifies caching behavior along the request/reply chain.
@@ -1371,6 +1455,9 @@ declare namespace S3 {
      * Allows grantee to write the ACL for the applicable object.
      */
     GrantWriteACP?: GrantWriteACP;
+    /**
+     * 
+     */
     Key: ObjectKey;
     /**
      * A map of metadata to store with the object in S3.
@@ -1441,6 +1528,9 @@ declare namespace S3 {
     Years?: Years;
   }
   export interface Delete {
+    /**
+     * 
+     */
     Objects: ObjectIdentifierList;
     /**
      * Element to enable quiet mode for the request. When you add this element, you must set its value to true.
@@ -1458,6 +1548,9 @@ declare namespace S3 {
     Id: AnalyticsId;
   }
   export interface DeleteBucketCorsRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
   }
   export interface DeleteBucketEncryptionRequest {
@@ -1477,6 +1570,9 @@ declare namespace S3 {
     Id: InventoryId;
   }
   export interface DeleteBucketLifecycleRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
   }
   export interface DeleteBucketMetricsConfigurationRequest {
@@ -1490,6 +1586,9 @@ declare namespace S3 {
     Id: MetricsId;
   }
   export interface DeleteBucketPolicyRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
   }
   export interface DeleteBucketReplicationRequest {
@@ -1499,16 +1598,28 @@ declare namespace S3 {
     Bucket: BucketName;
   }
   export interface DeleteBucketRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
   }
   export interface DeleteBucketTaggingRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
   }
   export interface DeleteBucketWebsiteRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
   }
   export type DeleteMarker = boolean;
   export interface DeleteMarkerEntry {
+    /**
+     * 
+     */
     Owner?: Owner;
     /**
      * The object key.
@@ -1548,7 +1659,13 @@ declare namespace S3 {
     RequestCharged?: RequestCharged;
   }
   export interface DeleteObjectRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     Key: ObjectKey;
     /**
      * The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
@@ -1571,7 +1688,13 @@ declare namespace S3 {
     VersionId?: ObjectVersionId;
   }
   export interface DeleteObjectTaggingRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     Key: ObjectKey;
     /**
      * The versionId of the object that the tag-set will be removed from.
@@ -1579,12 +1702,24 @@ declare namespace S3 {
     VersionId?: ObjectVersionId;
   }
   export interface DeleteObjectsOutput {
+    /**
+     * 
+     */
     Deleted?: DeletedObjects;
     RequestCharged?: RequestCharged;
+    /**
+     * 
+     */
     Errors?: Errors;
   }
   export interface DeleteObjectsRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     Delete: Delete;
     /**
      * The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
@@ -1603,9 +1738,21 @@ declare namespace S3 {
     Bucket: BucketName;
   }
   export interface DeletedObject {
+    /**
+     * 
+     */
     Key?: ObjectKey;
+    /**
+     * 
+     */
     VersionId?: ObjectVersionId;
+    /**
+     * 
+     */
     DeleteMarker?: DeleteMarker;
+    /**
+     * 
+     */
     DeleteMarkerVersionId?: DeleteMarkerVersionId;
   }
   export type DeletedObjects = DeletedObject[];
@@ -1661,9 +1808,21 @@ declare namespace S3 {
   export interface EndEvent {
   }
   export interface Error {
+    /**
+     * 
+     */
     Key?: ObjectKey;
+    /**
+     * 
+     */
     VersionId?: ObjectVersionId;
+    /**
+     * 
+     */
     Code?: Code;
+    /**
+     * 
+     */
     Message?: Message;
   }
   export interface ErrorDocument {
@@ -1691,6 +1850,9 @@ declare namespace S3 {
      * The object key name prefix or suffix identifying one or more objects to which the filtering rule applies. The maximum prefix length is 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, see Configuring Event Notifications in the Amazon Simple Storage Service Developer Guide.
      */
     Name?: FilterRuleName;
+    /**
+     * 
+     */
     Value?: FilterRuleValue;
   }
   export type FilterRuleList = FilterRule[];
@@ -1709,6 +1871,9 @@ declare namespace S3 {
     Bucket: BucketName;
   }
   export interface GetBucketAclOutput {
+    /**
+     * 
+     */
     Owner?: Owner;
     /**
      * A list of grants.
@@ -1716,6 +1881,9 @@ declare namespace S3 {
     Grants?: Grants;
   }
   export interface GetBucketAclRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
   }
   export interface GetBucketAnalyticsConfigurationOutput {
@@ -1735,9 +1903,15 @@ declare namespace S3 {
     Id: AnalyticsId;
   }
   export interface GetBucketCorsOutput {
+    /**
+     * 
+     */
     CORSRules?: CORSRules;
   }
   export interface GetBucketCorsRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
   }
   export interface GetBucketEncryptionOutput {
@@ -1766,27 +1940,48 @@ declare namespace S3 {
     Id: InventoryId;
   }
   export interface GetBucketLifecycleConfigurationOutput {
+    /**
+     * 
+     */
     Rules?: LifecycleRules;
   }
   export interface GetBucketLifecycleConfigurationRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
   }
   export interface GetBucketLifecycleOutput {
+    /**
+     * 
+     */
     Rules?: Rules;
   }
   export interface GetBucketLifecycleRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
   }
   export interface GetBucketLocationOutput {
+    /**
+     * 
+     */
     LocationConstraint?: BucketLocationConstraint;
   }
   export interface GetBucketLocationRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
   }
   export interface GetBucketLoggingOutput {
     LoggingEnabled?: LoggingEnabled;
   }
   export interface GetBucketLoggingRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
   }
   export interface GetBucketMetricsConfigurationOutput {
@@ -1818,6 +2013,9 @@ declare namespace S3 {
     Policy?: Policy;
   }
   export interface GetBucketPolicyRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
   }
   export interface GetBucketPolicyStatusOutput {
@@ -1836,6 +2034,9 @@ declare namespace S3 {
     ReplicationConfiguration?: ReplicationConfiguration;
   }
   export interface GetBucketReplicationRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
   }
   export interface GetBucketRequestPaymentOutput {
@@ -1845,12 +2046,21 @@ declare namespace S3 {
     Payer?: Payer;
   }
   export interface GetBucketRequestPaymentRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
   }
   export interface GetBucketTaggingOutput {
+    /**
+     * 
+     */
     TagSet: TagSet;
   }
   export interface GetBucketTaggingRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
   }
   export interface GetBucketVersioningOutput {
@@ -1864,18 +2074,39 @@ declare namespace S3 {
     MFADelete?: MFADeleteStatus;
   }
   export interface GetBucketVersioningRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
   }
   export interface GetBucketWebsiteOutput {
+    /**
+     * 
+     */
     RedirectAllRequestsTo?: RedirectAllRequestsTo;
+    /**
+     * 
+     */
     IndexDocument?: IndexDocument;
+    /**
+     * 
+     */
     ErrorDocument?: ErrorDocument;
+    /**
+     * 
+     */
     RoutingRules?: RoutingRules;
   }
   export interface GetBucketWebsiteRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
   }
   export interface GetObjectAclOutput {
+    /**
+     * 
+     */
     Owner?: Owner;
     /**
      * A list of grants.
@@ -1884,7 +2115,13 @@ declare namespace S3 {
     RequestCharged?: RequestCharged;
   }
   export interface GetObjectAclRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     Key: ObjectKey;
     /**
      * VersionId used to reference a specific version of the object.
@@ -1934,6 +2171,9 @@ declare namespace S3 {
      * Specifies whether the object retrieved was (true) or was not (false) a Delete Marker. If false, this response header does not appear in the response.
      */
     DeleteMarker?: DeleteMarker;
+    /**
+     * 
+     */
     AcceptRanges?: AcceptRanges;
     /**
      * If the object expiration is configured (see PUT Bucket lifecycle), the response includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded.
@@ -2015,8 +2255,14 @@ declare namespace S3 {
      * If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object.
      */
     SSEKMSKeyId?: SSEKMSKeyId;
+    /**
+     * 
+     */
     StorageClass?: StorageClass;
     RequestCharged?: RequestCharged;
+    /**
+     * 
+     */
     ReplicationStatus?: ReplicationStatus;
     /**
      * The count of parts this object has.
@@ -2040,6 +2286,9 @@ declare namespace S3 {
     ObjectLockLegalHoldStatus?: ObjectLockLegalHoldStatus;
   }
   export interface GetObjectRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
     /**
      * Return the object only if its entity tag (ETag) is the same as the one specified, otherwise return a 412 (precondition failed).
@@ -2057,6 +2306,9 @@ declare namespace S3 {
      * Return the object only if it has not been modified since the specified time, otherwise return a 412 (precondition failed).
      */
     IfUnmodifiedSince?: IfUnmodifiedSince;
+    /**
+     * 
+     */
     Key: ObjectKey;
     /**
      * Downloads the specified range bytes of an object. For more information about the HTTP Range header, go to http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.
@@ -2130,20 +2382,44 @@ declare namespace S3 {
     RequestPayer?: RequestPayer;
   }
   export interface GetObjectTaggingOutput {
+    /**
+     * 
+     */
     VersionId?: ObjectVersionId;
+    /**
+     * 
+     */
     TagSet: TagSet;
   }
   export interface GetObjectTaggingRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     Key: ObjectKey;
+    /**
+     * 
+     */
     VersionId?: ObjectVersionId;
   }
   export interface GetObjectTorrentOutput {
+    /**
+     * 
+     */
     Body?: Body;
     RequestCharged?: RequestCharged;
   }
   export interface GetObjectTorrentRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     Key: ObjectKey;
     RequestPayer?: RequestPayer;
   }
@@ -2166,6 +2442,9 @@ declare namespace S3 {
     Tier: Tier;
   }
   export interface Grant {
+    /**
+     * 
+     */
     Grantee?: Grantee;
     /**
      * Specifies the permission given to the grantee.
@@ -2201,6 +2480,9 @@ declare namespace S3 {
   }
   export type Grants = Grant[];
   export interface HeadBucketRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
   }
   export interface HeadObjectOutput {
@@ -2208,6 +2490,9 @@ declare namespace S3 {
      * Specifies whether the object retrieved was (true) or was not (false) a Delete Marker. If false, this response header does not appear in the response.
      */
     DeleteMarker?: DeleteMarker;
+    /**
+     * 
+     */
     AcceptRanges?: AcceptRanges;
     /**
      * If the object expiration is configured (see PUT Bucket lifecycle), the response includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded.
@@ -2285,8 +2570,14 @@ declare namespace S3 {
      * If present, specifies the ID of the AWS Key Management Service (KMS) master encryption key that was used for the object.
      */
     SSEKMSKeyId?: SSEKMSKeyId;
+    /**
+     * 
+     */
     StorageClass?: StorageClass;
     RequestCharged?: RequestCharged;
+    /**
+     * 
+     */
     ReplicationStatus?: ReplicationStatus;
     /**
      * The count of parts this object has.
@@ -2306,6 +2597,9 @@ declare namespace S3 {
     ObjectLockLegalHoldStatus?: ObjectLockLegalHoldStatus;
   }
   export interface HeadObjectRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
     /**
      * Return the object only if its entity tag (ETag) is the same as the one specified, otherwise return a 412 (precondition failed).
@@ -2323,6 +2617,9 @@ declare namespace S3 {
      * Return the object only if it has not been modified since the specified time, otherwise return a 412 (precondition failed).
      */
     IfUnmodifiedSince?: IfUnmodifiedSince;
+    /**
+     * 
+     */
     Key: ObjectKey;
     /**
      * Downloads the specified range bytes of an object. For more information about the HTTP Range header, go to http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35.
@@ -2508,12 +2805,18 @@ declare namespace S3 {
      * The Amazon Resource Name (ARN) of the Lambda cloud function that Amazon S3 can invoke when it detects events of the specified type.
      */
     LambdaFunctionArn: LambdaFunctionArn;
+    /**
+     * 
+     */
     Events: EventList;
     Filter?: NotificationConfigurationFilter;
   }
   export type LambdaFunctionConfigurationList = LambdaFunctionConfiguration[];
   export type LastModified = Date;
   export interface LifecycleConfiguration {
+    /**
+     * 
+     */
     Rules: Rules;
   }
   export interface LifecycleExpiration {
@@ -2531,13 +2834,16 @@ declare namespace S3 {
     ExpiredObjectDeleteMarker?: ExpiredObjectDeleteMarker;
   }
   export interface LifecycleRule {
+    /**
+     * 
+     */
     Expiration?: LifecycleExpiration;
     /**
      * Unique identifier for the rule. The value cannot be longer than 255 characters.
      */
     ID?: ID;
     /**
-     * Prefix identifying one or more objects to which the rule applies. This is deprecated; use Filter instead.
+     * Prefix identifying one or more objects to which the rule applies. This is No longer used; use Filter instead.
      */
     Prefix?: Prefix;
     Filter?: LifecycleRuleFilter;
@@ -2545,12 +2851,21 @@ declare namespace S3 {
      * If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied.
      */
     Status: ExpirationStatus;
+    /**
+     * 
+     */
     Transitions?: TransitionList;
+    /**
+     * 
+     */
     NoncurrentVersionTransitions?: NoncurrentVersionTransitionList;
     NoncurrentVersionExpiration?: NoncurrentVersionExpiration;
     AbortIncompleteMultipartUpload?: AbortIncompleteMultipartUpload;
   }
   export interface LifecycleRuleAndOperator {
+    /**
+     * 
+     */
     Prefix?: Prefix;
     /**
      * All of these tags must exist in the object's tag set in order for the rule to apply.
@@ -2654,7 +2969,13 @@ declare namespace S3 {
     ContinuationToken?: Token;
   }
   export interface ListBucketsOutput {
+    /**
+     * 
+     */
     Buckets?: Buckets;
+    /**
+     * 
+     */
     Owner?: Owner;
   }
   export interface ListMultipartUploadsOutput {
@@ -2678,6 +2999,9 @@ declare namespace S3 {
      * When a prefix is provided in the request, this field contains the specified prefix. The result contains only keys starting with the specified prefix.
      */
     Prefix?: Prefix;
+    /**
+     * 
+     */
     Delimiter?: Delimiter;
     /**
      * When a list is truncated, this element specifies the value that should be used for the upload-id-marker request parameter in a subsequent request.
@@ -2691,7 +3015,13 @@ declare namespace S3 {
      * Indicates whether the returned list of multipart uploads is truncated. A value of true indicates that the list was truncated. The list can be truncated if the number of multipart uploads exceeds the limit allowed or specified by max uploads.
      */
     IsTruncated?: IsTruncated;
+    /**
+     * 
+     */
     Uploads?: MultipartUploadList;
+    /**
+     * 
+     */
     CommonPrefixes?: CommonPrefixList;
     /**
      * Encoding type used by Amazon S3 to encode object keys in the response.
@@ -2699,6 +3029,9 @@ declare namespace S3 {
     EncodingType?: EncodingType;
   }
   export interface ListMultipartUploadsRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
     /**
      * Character you use to group keys.
@@ -2731,6 +3064,9 @@ declare namespace S3 {
      * Marks the last Key returned in a truncated response.
      */
     KeyMarker?: KeyMarker;
+    /**
+     * 
+     */
     VersionIdMarker?: VersionIdMarker;
     /**
      * Use this value for the key marker request parameter in a subsequent request.
@@ -2740,12 +3076,33 @@ declare namespace S3 {
      * Use this value for the next version id marker parameter in a subsequent request.
      */
     NextVersionIdMarker?: NextVersionIdMarker;
+    /**
+     * 
+     */
     Versions?: ObjectVersionList;
+    /**
+     * 
+     */
     DeleteMarkers?: DeleteMarkers;
+    /**
+     * 
+     */
     Name?: BucketName;
+    /**
+     * 
+     */
     Prefix?: Prefix;
+    /**
+     * 
+     */
     Delimiter?: Delimiter;
+    /**
+     * 
+     */
     MaxKeys?: MaxKeys;
+    /**
+     * 
+     */
     CommonPrefixes?: CommonPrefixList;
     /**
      * Encoding type used by Amazon S3 to encode object keys in the response.
@@ -2753,6 +3110,9 @@ declare namespace S3 {
     EncodingType?: EncodingType;
   }
   export interface ListObjectVersionsRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
     /**
      * A delimiter is a character you use to group keys.
@@ -2781,16 +3141,37 @@ declare namespace S3 {
      * A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria.
      */
     IsTruncated?: IsTruncated;
+    /**
+     * 
+     */
     Marker?: Marker;
     /**
      * When response is truncated (the IsTruncated element value in the response is true), you can use the key name in this field as marker in the subsequent request to get next set of objects. Amazon S3 lists objects in alphabetical order Note: This element is returned only if you have delimiter request parameter specified. If response does not include the NextMaker and it is truncated, you can use the value of the last Key in the response as the marker in the subsequent request to get the next set of object keys.
      */
     NextMarker?: NextMarker;
+    /**
+     * 
+     */
     Contents?: ObjectList;
+    /**
+     * 
+     */
     Name?: BucketName;
+    /**
+     * 
+     */
     Prefix?: Prefix;
+    /**
+     * 
+     */
     Delimiter?: Delimiter;
+    /**
+     * 
+     */
     MaxKeys?: MaxKeys;
+    /**
+     * 
+     */
     CommonPrefixes?: CommonPrefixList;
     /**
      * Encoding type used by Amazon S3 to encode object keys in the response.
@@ -2798,6 +3179,9 @@ declare namespace S3 {
     EncodingType?: EncodingType;
   }
   export interface ListObjectsRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
     /**
      * A delimiter is a character you use to group keys.
@@ -2946,11 +3330,17 @@ declare namespace S3 {
      * Indicates whether the returned list of parts is truncated.
      */
     IsTruncated?: IsTruncated;
+    /**
+     * 
+     */
     Parts?: Parts;
     /**
      * Identifies who initiated the multipart upload.
      */
     Initiator?: Initiator;
+    /**
+     * 
+     */
     Owner?: Owner;
     /**
      * The class of storage used to store the object.
@@ -2959,7 +3349,13 @@ declare namespace S3 {
     RequestCharged?: RequestCharged;
   }
   export interface ListPartsRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     Key: ObjectKey;
     /**
      * Sets the maximum number of parts to return.
@@ -2982,6 +3378,9 @@ declare namespace S3 {
      * Specifies the bucket where you want Amazon S3 to store server access logs. You can have your logs delivered to any bucket that you own, including the same bucket that is being logged. You can also configure multiple buckets to deliver their logs to the same target bucket. In this case you should choose a different TargetPrefix for each source bucket so that the delivered log files can be distinguished by key.
      */
     TargetBucket: TargetBucket;
+    /**
+     * 
+     */
     TargetGrants?: TargetGrants;
     /**
      * This element lets you specify a prefix for the keys that the log files will be stored under.
@@ -3000,7 +3399,13 @@ declare namespace S3 {
   export type Metadata = {[key: string]: MetadataValue};
   export type MetadataDirective = "COPY"|"REPLACE"|string;
   export interface MetadataEntry {
+    /**
+     * 
+     */
     Name?: MetadataKey;
+    /**
+     * 
+     */
     Value?: MetadataValue;
   }
   export type MetadataKey = string;
@@ -3059,6 +3464,9 @@ declare namespace S3 {
      * The class of storage used to store the object.
      */
     StorageClass?: StorageClass;
+    /**
+     * 
+     */
     Owner?: Owner;
     /**
      * Identifies who initiated the multipart upload.
@@ -3091,13 +3499,31 @@ declare namespace S3 {
   }
   export type NoncurrentVersionTransitionList = NoncurrentVersionTransition[];
   export interface NotificationConfiguration {
+    /**
+     * 
+     */
     TopicConfigurations?: TopicConfigurationList;
+    /**
+     * 
+     */
     QueueConfigurations?: QueueConfigurationList;
+    /**
+     * 
+     */
     LambdaFunctionConfigurations?: LambdaFunctionConfigurationList;
   }
   export interface NotificationConfigurationDeprecated {
+    /**
+     * 
+     */
     TopicConfiguration?: TopicConfigurationDeprecated;
+    /**
+     * 
+     */
     QueueConfiguration?: QueueConfigurationDeprecated;
+    /**
+     * 
+     */
     CloudFunctionConfiguration?: CloudFunctionConfiguration;
   }
   export interface NotificationConfigurationFilter {
@@ -3105,14 +3531,29 @@ declare namespace S3 {
   }
   export type NotificationId = string;
   export interface Object {
+    /**
+     * 
+     */
     Key?: ObjectKey;
+    /**
+     * 
+     */
     LastModified?: LastModified;
+    /**
+     * 
+     */
     ETag?: ETag;
+    /**
+     * 
+     */
     Size?: Size;
     /**
      * The class of storage used to store the object.
      */
     StorageClass?: ObjectStorageClass;
+    /**
+     * 
+     */
     Owner?: Owner;
   }
   export type ObjectCannedACL = "private"|"public-read"|"public-read-write"|"authenticated-read"|"aws-exec-read"|"bucket-owner-read"|"bucket-owner-full-control"|string;
@@ -3170,6 +3611,9 @@ declare namespace S3 {
   export type ObjectLockToken = string;
   export type ObjectStorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|string;
   export interface ObjectVersion {
+    /**
+     * 
+     */
     ETag?: ETag;
     /**
      * Size in bytes of the object.
@@ -3195,6 +3639,9 @@ declare namespace S3 {
      * Date and time the object was last modified.
      */
     LastModified?: LastModified;
+    /**
+     * 
+     */
     Owner?: Owner;
   }
   export type ObjectVersionId = string;
@@ -3217,7 +3664,13 @@ declare namespace S3 {
     JSON?: JSONOutput;
   }
   export interface Owner {
+    /**
+     * 
+     */
     DisplayName?: DisplayName;
+    /**
+     * 
+     */
     ID?: ID;
   }
   export type OwnerOverride = "Destination"|string;
@@ -3310,8 +3763,17 @@ declare namespace S3 {
      * The canned ACL to apply to the bucket.
      */
     ACL?: BucketCannedACL;
+    /**
+     * 
+     */
     AccessControlPolicy?: AccessControlPolicy;
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     ContentMD5?: ContentMD5;
     /**
      * Allows grantee the read, write, read ACP, and write ACP permissions on the bucket.
@@ -3349,8 +3811,17 @@ declare namespace S3 {
     AnalyticsConfiguration: AnalyticsConfiguration;
   }
   export interface PutBucketCorsRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     CORSConfiguration: CORSConfiguration;
+    /**
+     * 
+     */
     ContentMD5?: ContentMD5;
   }
   export interface PutBucketEncryptionRequest {
@@ -3359,7 +3830,7 @@ declare namespace S3 {
      */
     Bucket: BucketName;
     /**
-     * The base64-encoded 128-bit MD5 digest of the server-side encryption configuration.
+     * The base64-encoded 128-bit MD5 digest of the server-side encryption configuration. This parameter is auto-populated when using the command from the CLI
      */
     ContentMD5?: ContentMD5;
     ServerSideEncryptionConfiguration: ServerSideEncryptionConfiguration;
@@ -3379,17 +3850,41 @@ declare namespace S3 {
     InventoryConfiguration: InventoryConfiguration;
   }
   export interface PutBucketLifecycleConfigurationRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     LifecycleConfiguration?: BucketLifecycleConfiguration;
   }
   export interface PutBucketLifecycleRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     ContentMD5?: ContentMD5;
+    /**
+     * 
+     */
     LifecycleConfiguration?: LifecycleConfiguration;
   }
   export interface PutBucketLoggingRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     BucketLoggingStatus: BucketLoggingStatus;
+    /**
+     * 
+     */
     ContentMD5?: ContentMD5;
   }
   export interface PutBucketMetricsConfigurationRequest {
@@ -3407,16 +3902,34 @@ declare namespace S3 {
     MetricsConfiguration: MetricsConfiguration;
   }
   export interface PutBucketNotificationConfigurationRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
     NotificationConfiguration: NotificationConfiguration;
   }
   export interface PutBucketNotificationRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     ContentMD5?: ContentMD5;
+    /**
+     * 
+     */
     NotificationConfiguration: NotificationConfigurationDeprecated;
   }
   export interface PutBucketPolicyRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     ContentMD5?: ContentMD5;
     /**
      * Set this parameter to true to confirm that you want to remove your permissions to change this bucket policy in the future.
@@ -3428,32 +3941,74 @@ declare namespace S3 {
     Policy: Policy;
   }
   export interface PutBucketReplicationRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     ContentMD5?: ContentMD5;
     ReplicationConfiguration: ReplicationConfiguration;
   }
   export interface PutBucketRequestPaymentRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     ContentMD5?: ContentMD5;
+    /**
+     * 
+     */
     RequestPaymentConfiguration: RequestPaymentConfiguration;
   }
   export interface PutBucketTaggingRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     ContentMD5?: ContentMD5;
+    /**
+     * 
+     */
     Tagging: Tagging;
   }
   export interface PutBucketVersioningRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     ContentMD5?: ContentMD5;
     /**
      * The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
      */
     MFA?: MFA;
+    /**
+     * 
+     */
     VersioningConfiguration: VersioningConfiguration;
   }
   export interface PutBucketWebsiteRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     ContentMD5?: ContentMD5;
+    /**
+     * 
+     */
     WebsiteConfiguration: WebsiteConfiguration;
   }
   export interface PutObjectAclOutput {
@@ -3464,8 +4019,17 @@ declare namespace S3 {
      * The canned ACL to apply to the object.
      */
     ACL?: ObjectCannedACL;
+    /**
+     * 
+     */
     AccessControlPolicy?: AccessControlPolicy;
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     ContentMD5?: ContentMD5;
     /**
      * Allows grantee the read, write, read ACP, and write ACP permissions on the bucket.
@@ -3487,6 +4051,9 @@ declare namespace S3 {
      * Allows grantee to write the ACL for the applicable bucket.
      */
     GrantWriteACP?: GrantWriteACP;
+    /**
+     * 
+     */
     Key: ObjectKey;
     RequestPayer?: RequestPayer;
     /**
@@ -3533,6 +4100,9 @@ declare namespace S3 {
      */
     ObjectLockConfiguration?: ObjectLockConfiguration;
     RequestPayer?: RequestPayer;
+    /**
+     * A token to allow Object Lock to be enabled for an existing bucket.
+     */
     Token?: ObjectLockToken;
     /**
      * The MD5 hash for the request body.
@@ -3604,7 +4174,7 @@ declare namespace S3 {
      */
     ContentLength?: ContentLength;
     /**
-     * The base64-encoded 128-bit MD5 digest of the part data.
+     * The base64-encoded 128-bit MD5 digest of the part data. This parameter is auto-populated when using the command from the CLI
      */
     ContentMD5?: ContentMD5;
     /**
@@ -3716,13 +4286,31 @@ declare namespace S3 {
     ContentMD5?: ContentMD5;
   }
   export interface PutObjectTaggingOutput {
+    /**
+     * 
+     */
     VersionId?: ObjectVersionId;
   }
   export interface PutObjectTaggingRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     Key: ObjectKey;
+    /**
+     * 
+     */
     VersionId?: ObjectVersionId;
+    /**
+     * 
+     */
     ContentMD5?: ContentMD5;
+    /**
+     * 
+     */
     Tagging: Tagging;
   }
   export interface PutPublicAccessBlockRequest {
@@ -3746,13 +4334,22 @@ declare namespace S3 {
      * The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3 will publish a message when it detects events of the specified type.
      */
     QueueArn: QueueArn;
+    /**
+     * 
+     */
     Events: EventList;
     Filter?: NotificationConfigurationFilter;
   }
   export interface QueueConfigurationDeprecated {
     Id?: NotificationId;
     Event?: Event;
+    /**
+     * 
+     */
     Events?: EventList;
+    /**
+     * 
+     */
     Queue?: QueueArn;
   }
   export type QueueConfigurationList = QueueConfiguration[];
@@ -3842,7 +4439,13 @@ declare namespace S3 {
     DeleteMarkerReplication?: DeleteMarkerReplication;
   }
   export interface ReplicationRuleAndOperator {
+    /**
+     * 
+     */
     Prefix?: Prefix;
+    /**
+     * 
+     */
     Tags?: TagSet;
   }
   export interface ReplicationRuleFilter {
@@ -3891,8 +4494,17 @@ declare namespace S3 {
     RestoreOutputPath?: RestoreOutputPath;
   }
   export interface RestoreObjectRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
+    /**
+     * 
+     */
     Key: ObjectKey;
+    /**
+     * 
+     */
     VersionId?: ObjectVersionId;
     RestoreRequest?: RestoreRequest;
     RequestPayer?: RequestPayer;
@@ -3942,6 +4554,9 @@ declare namespace S3 {
   }
   export type RoutingRules = RoutingRule[];
   export interface Rule {
+    /**
+     * 
+     */
     Expiration?: LifecycleExpiration;
     /**
      * Unique identifier for the rule. The value cannot be longer than 255 characters.
@@ -3955,6 +4570,9 @@ declare namespace S3 {
      * If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied.
      */
     Status: ExpirationStatus;
+    /**
+     * 
+     */
     Transition?: Transition;
     NoncurrentVersionTransition?: NoncurrentVersionTransition;
     NoncurrentVersionExpiration?: NoncurrentVersionExpiration;
@@ -4009,6 +4627,9 @@ declare namespace S3 {
   }
   export type SelectObjectContentEventStream = EventStream<{Records?:RecordsEvent,Stats?:StatsEvent,Progress?:ProgressEvent,Cont?:ContinuationEvent,End?:EndEvent}>;
   export interface SelectObjectContentOutput {
+    /**
+     * 
+     */
     Payload?: SelectObjectContentEventStream;
   }
   export interface SelectObjectContentRequest {
@@ -4163,12 +4784,18 @@ declare namespace S3 {
   export type TagCount = number;
   export type TagSet = Tag[];
   export interface Tagging {
+    /**
+     * 
+     */
     TagSet: TagSet;
   }
   export type TaggingDirective = "COPY"|"REPLACE"|string;
   export type TaggingHeader = string;
   export type TargetBucket = string;
   export interface TargetGrant {
+    /**
+     * 
+     */
     Grantee?: Grantee;
     /**
      * Logging permissions assigned to the Grantee for the bucket.
@@ -4186,11 +4813,17 @@ declare namespace S3 {
      * The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3 will publish a message when it detects events of the specified type.
      */
     TopicArn: TopicArn;
+    /**
+     * 
+     */
     Events: EventList;
     Filter?: NotificationConfigurationFilter;
   }
   export interface TopicConfigurationDeprecated {
     Id?: NotificationId;
+    /**
+     * 
+     */
     Events?: EventList;
     /**
      * Bucket event for which to send notifications.
@@ -4226,6 +4859,9 @@ declare namespace S3 {
      * The version of the source object that was copied, if you have enabled versioning on the source bucket.
      */
     CopySourceVersionId?: CopySourceVersionId;
+    /**
+     * 
+     */
     CopyPartResult?: CopyPartResult;
     /**
      * The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms).
@@ -4246,6 +4882,9 @@ declare namespace S3 {
     RequestCharged?: RequestCharged;
   }
   export interface UploadPartCopyRequest {
+    /**
+     * 
+     */
     Bucket: BucketName;
     /**
      * The name of the source bucket and key name of the source object, separated by a slash (/). Must be URL-encoded.
@@ -4268,9 +4907,12 @@ declare namespace S3 {
      */
     CopySourceIfUnmodifiedSince?: CopySourceIfUnmodifiedSince;
     /**
-     * The range of bytes to copy from the source object. The range value must use the form bytes=first-last, where the first and last are the zero-based byte offsets to copy. For example, bytes=0-9 indicates that you want to copy the first ten bytes of the source. You can copy a range only if the source object is greater than 5 GB.
+     * The range of bytes to copy from the source object. The range value must use the form bytes=first-last, where the first and last are the zero-based byte offsets to copy. For example, bytes=0-9 indicates that you want to copy the first ten bytes of the source. You can copy a range only if the source object is greater than 5 MB.
      */
     CopySourceRange?: CopySourceRange;
+    /**
+     * 
+     */
     Key: ObjectKey;
     /**
      * Part number of part being copied. This is a positive integer between 1 and 10,000.
@@ -4386,9 +5028,21 @@ declare namespace S3 {
     Status?: BucketVersioningStatus;
   }
   export interface WebsiteConfiguration {
+    /**
+     * 
+     */
     ErrorDocument?: ErrorDocument;
+    /**
+     * 
+     */
     IndexDocument?: IndexDocument;
+    /**
+     * 
+     */
     RedirectAllRequestsTo?: RedirectAllRequestsTo;
+    /**
+     * 
+     */
     RoutingRules?: RoutingRules;
   }
   export type WebsiteRedirectLocation = string;
