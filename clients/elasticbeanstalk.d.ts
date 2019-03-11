@@ -826,6 +826,10 @@ declare namespace ElasticBeanstalk {
      * Specify an application resource lifecycle configuration to prevent your application from accumulating too many versions.
      */
     ResourceLifecycleConfig?: ApplicationResourceLifecycleConfig;
+    /**
+     * Specifies the tags applied to the application. Elastic Beanstalk applies these tags only to the application. Environments that you create in the application don't inherit the tags.
+     */
+    Tags?: Tags;
   }
   export interface CreateApplicationVersionMessage {
     /**
@@ -860,6 +864,10 @@ declare namespace ElasticBeanstalk {
      * Pre-processes and validates the environment manifest (env.yaml) and configuration files (*.config files in the .ebextensions folder) in the source bundle. Validating configuration files can identify issues prior to deploying the application version to an environment. You must turn processing on for application versions that you create using AWS CodeBuild or AWS CodeCommit. For application versions built from a source bundle in Amazon S3, processing is optional.  The Process option validates Elastic Beanstalk configuration files. It doesn't validate your application's configuration files, like proxy server or Docker configuration. 
      */
     Process?: ApplicationVersionProccess;
+    /**
+     * Specifies the tags applied to the application version. Elastic Beanstalk applies these tags only to the application version. Environments that use the application version don't inherit the tags.
+     */
+    Tags?: Tags;
   }
   export interface CreateConfigurationTemplateMessage {
     /**
@@ -894,6 +902,10 @@ declare namespace ElasticBeanstalk {
      * If specified, AWS Elastic Beanstalk sets the specified configuration option to the requested value. The new value overrides the value obtained from the solution stack or the source configuration template.
      */
     OptionSettings?: ConfigurationOptionSettingsList;
+    /**
+     * Specifies the tags applied to the configuration template.
+     */
+    Tags?: Tags;
   }
   export interface CreateEnvironmentMessage {
     /**
@@ -921,7 +933,7 @@ declare namespace ElasticBeanstalk {
      */
     Tier?: EnvironmentTier;
     /**
-     * This specifies the tags applied to resources in the environment.
+     * Specifies the tags applied to resources in the environment.
      */
     Tags?: Tags;
     /**
@@ -970,6 +982,10 @@ declare namespace ElasticBeanstalk {
      * The configuration option settings to apply to the builder environment.
      */
     OptionSettings?: ConfigurationOptionSettingsList;
+    /**
+     * Specifies the tags applied to the new platform version. Elastic Beanstalk applies these tags only to the platform version. Environments that you create using the platform version don't inherit the tags.
+     */
+    Tags?: Tags;
   }
   export interface CreatePlatformVersionResult {
     /**

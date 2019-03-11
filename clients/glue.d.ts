@@ -1566,6 +1566,10 @@ declare namespace Glue {
      * The tags to use with this DevEndpoint. You may use tags to limit access to the DevEndpoint. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.
      */
     Tags?: TagsMap;
+    /**
+     * A map of arguments used to configure the DevEndpoint.
+     */
+    Arguments?: MapValue;
   }
   export interface CreateDevEndpointResponse {
     /**
@@ -1628,6 +1632,10 @@ declare namespace Glue {
      * The point in time at which this DevEndpoint was created.
      */
     CreatedTimestamp?: TimestampValue;
+    /**
+     * The map of arguments used to configure this DevEndpoint.
+     */
+    Arguments?: MapValue;
   }
   export interface CreateGrokClassifierRequest {
     /**
@@ -2180,6 +2188,10 @@ declare namespace Glue {
      * The name of the SecurityConfiguration structure to be used with this DevEndpoint.
      */
     SecurityConfiguration?: NameString;
+    /**
+     * A map of arguments used to configure the DevEndpoint. Note that currently, we only support "--enable-glue-datacatalog": "" as a valid argument.
+     */
+    Arguments?: MapValue;
   }
   export interface DevEndpointCustomLibraries {
     /**
@@ -3445,6 +3457,7 @@ declare namespace Glue {
   export type LogStream = string;
   export type Logical = "AND"|"ANY"|string;
   export type LogicalOperator = "EQUALS"|string;
+  export type MapValue = {[key: string]: GenericString};
   export interface MappingEntry {
     /**
      * The name of the source table.
@@ -4312,6 +4325,14 @@ declare namespace Glue {
      * True if the list of custom libraries to be loaded in the development endpoint needs to be updated, or False otherwise.
      */
     UpdateEtlLibraries?: BooleanValue;
+    /**
+     * The list of argument keys to be deleted from the map of arguments used to configure the DevEndpoint.
+     */
+    DeleteArguments?: StringList;
+    /**
+     * The map of arguments to add the map of arguments used to configure the DevEndpoint.
+     */
+    AddArguments?: MapValue;
   }
   export interface UpdateDevEndpointResponse {
   }

@@ -4042,6 +4042,10 @@
         "Tags": {
           "shape": "TagsMap",
           "documentation": "<p>The tags to use with this DevEndpoint. You may use tags to limit access to the DevEndpoint. For more information about tags in AWS Glue, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">AWS Tags in AWS Glue</a> in the developer guide.</p>"
+        },
+        "Arguments": {
+          "shape": "MapValue",
+          "documentation": "<p>A map of arguments used to configure the DevEndpoint.</p>"
         }
       }
     },
@@ -4107,6 +4111,10 @@
         "CreatedTimestamp": {
           "shape": "TimestampValue",
           "documentation": "<p>The point in time at which this DevEndpoint was created.</p>"
+        },
+        "Arguments": {
+          "shape": "MapValue",
+          "documentation": "<p>The map of arguments used to configure this DevEndpoint.</p>"
         }
       }
     },
@@ -4930,6 +4938,10 @@
         "SecurityConfiguration": {
           "shape": "NameString",
           "documentation": "<p>The name of the SecurityConfiguration structure to be used with this DevEndpoint.</p>"
+        },
+        "Arguments": {
+          "shape": "MapValue",
+          "documentation": "<p>A map of arguments used to configure the DevEndpoint.</p> <p>Note that currently, we only support \"--enable-glue-datacatalog\": \"\" as a valid argument.</p>"
         }
       },
       "documentation": "<p>A development endpoint where a developer can remotely debug ETL scripts.</p>"
@@ -6791,6 +6803,17 @@
         "EQUALS"
       ]
     },
+    "MapValue": {
+      "type": "map",
+      "key": {
+        "shape": "GenericString"
+      },
+      "value": {
+        "shape": "GenericString"
+      },
+      "max": 100,
+      "min": 0
+    },
     "MappingEntry": {
       "type": "structure",
       "members": {
@@ -8224,6 +8247,14 @@
         "UpdateEtlLibraries": {
           "shape": "BooleanValue",
           "documentation": "<p>True if the list of custom libraries to be loaded in the development endpoint needs to be updated, or False otherwise.</p>"
+        },
+        "DeleteArguments": {
+          "shape": "StringList",
+          "documentation": "<p>The list of argument keys to be deleted from the map of arguments used to configure the DevEndpoint.</p>"
+        },
+        "AddArguments": {
+          "shape": "MapValue",
+          "documentation": "<p>The map of arguments to add the map of arguments used to configure the DevEndpoint.</p>"
         }
       }
     },

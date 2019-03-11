@@ -52,6 +52,14 @@ declare class QuickSight extends Service {
    */
   deleteUser(callback?: (err: AWSError, data: QuickSight.Types.DeleteUserResponse) => void): Request<QuickSight.Types.DeleteUserResponse, AWSError>;
   /**
+   * Deletes a user after locating the user by its principal ID.
+   */
+  deleteUserByPrincipalId(params: QuickSight.Types.DeleteUserByPrincipalIdRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteUserByPrincipalIdResponse) => void): Request<QuickSight.Types.DeleteUserByPrincipalIdResponse, AWSError>;
+  /**
+   * Deletes a user after locating the user by its principal ID.
+   */
+  deleteUserByPrincipalId(callback?: (err: AWSError, data: QuickSight.Types.DeleteUserByPrincipalIdResponse) => void): Request<QuickSight.Types.DeleteUserByPrincipalIdResponse, AWSError>;
+  /**
    * Returns an Amazon QuickSight group's description and Amazon Resource Name (ARN).  The permissions resource is arn:aws:quicksight:us-east-1:&lt;relevant-aws-account-id&gt;:group/default/&lt;group-name&gt; . The response is the group object.   CLI Sample:   aws quicksight describe-group -\-aws-account-id=11112222333 -\-namespace=default -\-group-name=Sales  
    */
   describeGroup(params: QuickSight.Types.DescribeGroupRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeGroupResponse) => void): Request<QuickSight.Types.DescribeGroupResponse, AWSError>;
@@ -252,6 +260,30 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
   }
+  export interface DeleteUserByPrincipalIdRequest {
+    /**
+     * The principal ID of the user.
+     */
+    PrincipalId: String;
+    /**
+     * The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The namespace. Currently, you should set this to default.
+     */
+    Namespace: Namespace;
+  }
+  export interface DeleteUserByPrincipalIdResponse {
+    /**
+     * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+    /**
+     * The http status of the request.
+     */
+    Status?: StatusCode;
+  }
   export interface DeleteUserRequest {
     /**
      * The name of the user that you want to delete.
@@ -386,6 +418,10 @@ declare namespace QuickSight {
      * The group description.
      */
     Description?: GroupDescription;
+    /**
+     * The principal ID of the group.
+     */
+    PrincipalId?: String;
   }
   export type GroupDescription = string;
   export type GroupList = Group[];
@@ -577,7 +613,7 @@ declare namespace QuickSight {
     /**
      * The name of the session with the assumed IAM role. By using this parameter, you can register multiple users with the same IAM role, provided that each has a different session name. For more information on assuming IAM roles, see  assume-role  in the AWS CLI Reference. 
      */
-    SessionName?: String;
+    SessionName?: RoleSessionName;
     /**
      * The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
      */
@@ -609,6 +645,7 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
   }
+  export type RoleSessionName = string;
   export type SessionLifetimeInMinutes = number;
   export type StatusCode = number;
   export type String = string;
@@ -705,6 +742,10 @@ declare namespace QuickSight {
      * Active status of user. When you create an Amazon QuickSight user that’s not an IAM user or an AD user, that user is inactive until they sign in and provide a password
      */
     Active?: Boolean;
+    /**
+     * The principal ID of the user.
+     */
+    PrincipalId?: String;
   }
   export type UserList = User[];
   export type UserName = string;

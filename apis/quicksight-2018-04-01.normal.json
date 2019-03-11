@@ -199,6 +199,40 @@
       ],
       "documentation": "<p>Deletes the Amazon QuickSight user that is associated with the identity of the AWS Identity and Access Management (IAM) user or role that's making the call. The IAM user isn't deleted as a result of this call. </p> <p>The permission resource is <code>arn:aws:quicksight:us-east-1:<i>&lt;aws-account-id&gt;</i>:user/default/<i>&lt;user-name&gt; </i> </code>.</p> <p> <b>CLI Sample:</b> </p> <p> <code>aws quicksight delete-user --aws-account-id=111122223333 --namespace=default --user-name=Pat </code> </p>"
     },
+    "DeleteUserByPrincipalId": {
+      "name": "DeleteUserByPrincipalId",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/accounts/{AwsAccountId}/namespaces/{Namespace}/user-principals/{PrincipalId}"
+      },
+      "input": {
+        "shape": "DeleteUserByPrincipalIdRequest"
+      },
+      "output": {
+        "shape": "DeleteUserByPrincipalIdResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ResourceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Deletes a user after locating the user by its principal ID.</p>"
+    },
     "DescribeGroup": {
       "name": "DescribeGroup",
       "http": {
@@ -798,6 +832,48 @@
         }
       }
     },
+    "DeleteUserByPrincipalIdRequest": {
+      "type": "structure",
+      "required": [
+        "PrincipalId",
+        "AwsAccountId",
+        "Namespace"
+      ],
+      "members": {
+        "PrincipalId": {
+          "shape": "String",
+          "documentation": "<p>The principal ID of the user.</p>",
+          "location": "uri",
+          "locationName": "PrincipalId"
+        },
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "Namespace": {
+          "shape": "Namespace",
+          "documentation": "<p>The namespace. Currently, you should set this to <code>default</code>.</p>",
+          "location": "uri",
+          "locationName": "Namespace"
+        }
+      }
+    },
+    "DeleteUserByPrincipalIdResponse": {
+      "type": "structure",
+      "members": {
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The AWS request ID for this operation.</p>"
+        },
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The http status of the request.</p>",
+          "location": "statusCode"
+        }
+      }
+    },
     "DeleteUserRequest": {
       "type": "structure",
       "required": [
@@ -1014,6 +1090,10 @@
         "Description": {
           "shape": "GroupDescription",
           "documentation": "<p>The group description.</p>"
+        },
+        "PrincipalId": {
+          "shape": "String",
+          "documentation": "<p>The principal ID of the group.</p>"
         }
       },
       "documentation": "<p>A <i>group</i> in Amazon QuickSight consists of a set of users. You can use groups to make it easier to manage access and security. Currently, an Amazon QuickSight subscription can't contain more than 500 Amazon QuickSight groups.</p>"
@@ -1341,7 +1421,7 @@
           "documentation": "<p>The ARN of the IAM user or role that you are registering with Amazon QuickSight. </p>"
         },
         "SessionName": {
-          "shape": "String",
+          "shape": "RoleSessionName",
           "documentation": "<p>The name of the session with the assumed IAM role. By using this parameter, you can register multiple users with the same IAM role, provided that each has a different session name. For more information on assuming IAM roles, see <a href=\"https://docs.aws.amazon.com/cli/latest/reference/sts/assume-role.html\"> <code>assume-role</code> </a> in the <i>AWS CLI Reference.</i> </p>"
         },
         "AwsAccountId": {
@@ -1383,6 +1463,12 @@
           "location": "statusCode"
         }
       }
+    },
+    "RoleSessionName": {
+      "type": "string",
+      "max": 64,
+      "min": 2,
+      "pattern": "[\\w+=.@-]*"
     },
     "SessionLifetimeInMinutes": {
       "type": "long",
@@ -1527,6 +1613,10 @@
         "Active": {
           "shape": "Boolean",
           "documentation": "<p>Active status of user. When you create an Amazon QuickSight user that’s not an IAM user or an AD user, that user is inactive until they sign in and provide a password</p>"
+        },
+        "PrincipalId": {
+          "shape": "String",
+          "documentation": "<p>The principal ID of the user.</p>"
         }
       },
       "documentation": "<p>A registered user of Amazon QuickSight. Currently, an Amazon QuickSight subscription can't contain more than 20 million users.</p>"

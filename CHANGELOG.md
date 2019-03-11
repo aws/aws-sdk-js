@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.418.0-->
+<!--LATEST=2.419.0-->
 <!--ENTRYINSERT-->
+
+## 2.419.0
+* feature: CostExplorer: The only change in this release is to make TimePeriod a required parameter in GetCostAndUsageRequest.
+* feature: ElasticBeanstalk: Elastic Beanstalk added support for tagging, and tag-based access control, of all Elastic Beanstalk resources.
+* feature: Glue: CreateDevEndpoint and UpdateDevEndpoint now support Arguments to configure the DevEndpoint. 
+* feature: QuickSight: Amazon QuickSight user and group operation results now include group principal IDs and user principal IDs. This release also adds "DeleteUserByPrincipalId", which deletes users given their principal ID. The update also improves role session name validation.
 
 ## 2.418.0
 * bugfix: cloudfront: Fix whitespace removal on custom policy
