@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.419.0-->
+<!--LATEST=2.420.0-->
 <!--ENTRYINSERT-->
+
+## 2.420.0
+* bugfix: ManageUpload: abort request stream when body is smaller than 5MB
+* feature: ServerlessApplicationRepository: The AWS Serverless Application Repository now supports associating a ZIP source code archive with versions of an application.
 
 ## 2.419.0
 * feature: CostExplorer: The only change in this release is to make TimePeriod a required parameter in GetCostAndUsageRequest.

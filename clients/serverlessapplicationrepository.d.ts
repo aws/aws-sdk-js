@@ -140,7 +140,7 @@ declare namespace ServerlessApplicationRepository {
      */
     Actions: __listOf__string;
     /**
-     * An AWS account ID, or * to make the application public.
+     * An array of AWS account IDs, or * to make the application public.
      */
     Principals: __listOf__string;
     /**
@@ -166,8 +166,7 @@ declare namespace ServerlessApplicationRepository {
      */
     Description: __string;
     /**
-     * A URL with more information about the application, for example
- the location of your GitHub repository for the application.
+     * A URL with more information about the application, for example the location of your GitHub repository for the application.
      */
     HomePageUrl?: __string;
     /**
@@ -194,8 +193,7 @@ declare namespace ServerlessApplicationRepository {
      */
     Description: __string;
     /**
-     * A URL with more information about the application, for example
- the location of your GitHub repository for the application.
+     * A URL with more information about the application, for example the location of your GitHub repository for the application.
      */
     HomePageUrl?: __string;
     /**
@@ -231,7 +229,11 @@ declare namespace ServerlessApplicationRepository {
      */
     SemanticVersion?: __string;
     /**
-     * A link to a public repository for the source code of your application.
+     * A link to the S3 object that contains the ZIP archive of the source code for this version of your application.Maximum size 50 MB
+     */
+    SourceCodeArchiveUrl?: __string;
+    /**
+     * A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.
      */
     SourceCodeUrl?: __string;
     /**
@@ -266,8 +268,7 @@ declare namespace ServerlessApplicationRepository {
      */
     Description?: __string;
     /**
-     * A URL with more information about the application, for example
- the location of your GitHub repository for the application.
+     * A URL with more information about the application, for example the location of your GitHub repository for the application.
      */
     HomePageUrl?: __string;
     /**
@@ -305,7 +306,11 @@ declare namespace ServerlessApplicationRepository {
      */
     SemanticVersion: __string;
     /**
-     * A link to a public repository for the source code of your application.
+     * A link to the S3 object that contains the ZIP archive of the source code for this version of your application.Maximum size 50 MB
+     */
+    SourceCodeArchiveUrl?: __string;
+    /**
+     * A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.
      */
     SourceCodeUrl?: __string;
     /**
@@ -336,7 +341,7 @@ declare namespace ServerlessApplicationRepository {
  account, for example, by creating new AWS Identity and Access Management (IAM) users.
  For those applications, you must explicitly acknowledge their capabilities by
  specifying this parameter.The only valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM,
- and CAPABILITY_RESOURCE_POLICY.The following resources require you to specify CAPABILITY_IAM or
+ CAPABILITY_RESOURCE_POLICY, and CAPABILITY_AUTO_EXPAND.The following resources require you to specify CAPABILITY_IAM or
  CAPABILITY_NAMED_IAM:
  AWS::IAM::Group,
  AWS::IAM::InstanceProfile,
@@ -350,10 +355,10 @@ declare namespace ServerlessApplicationRepository {
  AWS::ApplicationAutoScaling::ScalingPolicy,
  AWS::S3::BucketPolicy,
  AWS::SQS::QueuePolicy, and
- AWS::SNS::TopicPolicy.If your application template contains any of the above resources, we recommend that you review
+ AWS::SNS::TopicPolicy.Applications that contain one or more nested applications require you to specify
+ CAPABILITY_AUTO_EXPAND.If your application template contains any of the above resources, we recommend that you review
  all permissions associated with the application before deploying. If you don't specify
- this parameter for an application that requires capabilities, the call will fail.Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY
- 
+ this parameter for an application that requires capabilities, the call will fail.
      */
     RequiredCapabilities?: __listOfCapability;
     /**
@@ -368,7 +373,11 @@ declare namespace ServerlessApplicationRepository {
      */
     SemanticVersion?: __string;
     /**
-     * A link to a public repository for the source code of your application.
+     * A link to the S3 object that contains the ZIP archive of the source code for this version of your application.Maximum size 50 MB
+     */
+    SourceCodeArchiveUrl?: __string;
+    /**
+     * A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.
      */
     SourceCodeUrl?: __string;
     /**
@@ -387,7 +396,7 @@ declare namespace ServerlessApplicationRepository {
  account, for example, by creating new AWS Identity and Access Management (IAM) users.
  For those applications, you must explicitly acknowledge their capabilities by
  specifying this parameter.The only valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM,
- and CAPABILITY_RESOURCE_POLICY.The following resources require you to specify CAPABILITY_IAM or
+ CAPABILITY_RESOURCE_POLICY, and CAPABILITY_AUTO_EXPAND.The following resources require you to specify CAPABILITY_IAM or
  CAPABILITY_NAMED_IAM:
  AWS::IAM::Group,
  AWS::IAM::InstanceProfile,
@@ -401,26 +410,30 @@ declare namespace ServerlessApplicationRepository {
  AWS::ApplicationAutoScaling::ScalingPolicy,
  AWS::S3::BucketPolicy,
  AWS::SQS::QueuePolicy, and
- AWS::SNS:TopicPolicy.If your application template contains any of the above resources, we recommend that you review
+ AWS::SNS:TopicPolicy.Applications that contain one or more nested applications require you to specify
+ CAPABILITY_AUTO_EXPAND.If your application template contains any of the above resources, we recommend that you review
  all permissions associated with the application before deploying. If you don't specify
- this parameter for an application that requires capabilities, the call will fail.Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY
- 
+ this parameter for an application that requires capabilities, the call will fail.
      */
     Capabilities?: __listOf__string;
     /**
-     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet API.
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet
+  API.
      */
     ChangeSetName?: __string;
     /**
-     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet API.
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet
+  API.
      */
     ClientToken?: __string;
     /**
-     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet API.
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet
+  API.
      */
     Description?: __string;
     /**
-     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet API.
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet
+  API.
      */
     NotificationArns?: __listOf__string;
     /**
@@ -428,11 +441,13 @@ declare namespace ServerlessApplicationRepository {
      */
     ParameterOverrides?: __listOfParameterValue;
     /**
-     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet API.
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet
+  API.
      */
     ResourceTypes?: __listOf__string;
     /**
-     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet API.
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet
+  API.
      */
     RollbackConfiguration?: RollbackConfiguration;
     /**
@@ -442,11 +457,13 @@ declare namespace ServerlessApplicationRepository {
      */
     SemanticVersion?: __string;
     /**
-     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet API.
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet
+  API.
      */
     StackName: __string;
     /**
-     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet API.
+     * This property corresponds to the parameter of the same name for the AWS CloudFormation CreateChangeSet
+  API.
      */
     Tags?: __listOfTag;
     /**
@@ -508,6 +525,7 @@ declare namespace ServerlessApplicationRepository {
     SemanticVersion?: __string;
     /**
      * Status of the template creation workflow.Possible values: PREPARING | ACTIVE | EXPIRED
+ 
      */
     Status?: Status;
     /**
@@ -566,8 +584,7 @@ declare namespace ServerlessApplicationRepository {
      */
     Description?: __string;
     /**
-     * A URL with more information about the application, for example
- the location of your GitHub repository for the application.
+     * A URL with more information about the application, for example the location of your GitHub repository for the application.
      */
     HomePageUrl?: __string;
     /**
@@ -627,6 +644,7 @@ declare namespace ServerlessApplicationRepository {
     SemanticVersion?: __string;
     /**
      * Status of the template creation workflow.Possible values: PREPARING | ACTIVE | EXPIRED
+ 
      */
     Status?: Status;
     /**
@@ -812,28 +830,33 @@ declare namespace ServerlessApplicationRepository {
   }
   export interface RollbackConfiguration {
     /**
-     * This property corresponds to the content of the same name for the AWS CloudFormation RollbackConfiguration Data Type.
+     * This property corresponds to the content of the same name for the AWS CloudFormation RollbackConfiguration
+  Data Type.
      */
     MonitoringTimeInMinutes?: __integer;
     /**
-     * This property corresponds to the content of the same name for the AWS CloudFormation RollbackConfiguration Data Type.
+     * This property corresponds to the content of the same name for the AWS CloudFormation RollbackConfiguration
+  Data Type.
      */
     RollbackTriggers?: __listOfRollbackTrigger;
   }
   export interface RollbackTrigger {
     /**
-     * This property corresponds to the content of the same name for the AWS CloudFormation RollbackTrigger Data Type.
+     * This property corresponds to the content of the same name for the AWS CloudFormation RollbackTrigger
+  Data Type.
      */
     Arn: __string;
     /**
-     * This property corresponds to the content of the same name for the AWS CloudFormation RollbackTrigger Data Type.
+     * This property corresponds to the content of the same name for the AWS CloudFormation RollbackTrigger
+  Data Type.
      */
     Type: __string;
   }
   export type Status = "PREPARING"|"ACTIVE"|"EXPIRED"|string;
   export interface Tag {
     /**
-     * This property corresponds to the content of the same name for the AWS CloudFormation Tag Data Type.
+     * This property corresponds to the content of the same name for the AWS CloudFormation Tag
+  Data Type.
      */
     Key: __string;
     /**
@@ -858,8 +881,7 @@ declare namespace ServerlessApplicationRepository {
      */
     Description?: __string;
     /**
-     * A URL with more information about the application, for example
- the location of your GitHub repository for the application.
+     * A URL with more information about the application, for example the location of your GitHub repository for the application.
      */
     HomePageUrl?: __string;
     /**
@@ -893,8 +915,7 @@ declare namespace ServerlessApplicationRepository {
      */
     Description?: __string;
     /**
-     * A URL with more information about the application, for example
- the location of your GitHub repository for the application.
+     * A URL with more information about the application, for example the location of your GitHub repository for the application.
      */
     HomePageUrl?: __string;
     /**
@@ -941,7 +962,7 @@ declare namespace ServerlessApplicationRepository {
  account, for example, by creating new AWS Identity and Access Management (IAM) users.
  For those applications, you must explicitly acknowledge their capabilities by
  specifying this parameter.The only valid values are CAPABILITY_IAM, CAPABILITY_NAMED_IAM,
- and CAPABILITY_RESOURCE_POLICY.The following resources require you to specify CAPABILITY_IAM or
+ CAPABILITY_RESOURCE_POLICY, and CAPABILITY_AUTO_EXPAND.The following resources require you to specify CAPABILITY_IAM or
  CAPABILITY_NAMED_IAM:
  AWS::IAM::Group,
  AWS::IAM::InstanceProfile,
@@ -955,10 +976,10 @@ declare namespace ServerlessApplicationRepository {
  AWS::ApplicationAutoScaling::ScalingPolicy,
  AWS::S3::BucketPolicy,
  AWS::SQS::QueuePolicy, and
- AWS::SNS::TopicPolicy.If your application template contains any of the above resources, we recommend that you review
+ AWS::SNS::TopicPolicy.Applications that contain one or more nested applications require you to specify
+ CAPABILITY_AUTO_EXPAND.If your application template contains any of the above resources, we recommend that you review
  all permissions associated with the application before deploying. If you don't specify
- this parameter for an application that requires capabilities, the call will fail.Valid values: CAPABILITY_IAM | CAPABILITY_NAMED_IAM | CAPABILITY_RESOURCE_POLICY
- 
+ this parameter for an application that requires capabilities, the call will fail.
      */
     RequiredCapabilities: __listOfCapability;
     /**
@@ -973,7 +994,11 @@ declare namespace ServerlessApplicationRepository {
      */
     SemanticVersion: __string;
     /**
-     * A link to a public repository for the source code of your application.
+     * A link to the S3 object that contains the ZIP archive of the source code for this version of your application.Maximum size 50 MB
+     */
+    SourceCodeArchiveUrl?: __string;
+    /**
+     * A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.
      */
     SourceCodeUrl?: __string;
     /**
@@ -997,7 +1022,7 @@ declare namespace ServerlessApplicationRepository {
      */
     SemanticVersion: __string;
     /**
-     * A link to a public repository for the source code of your application.
+     * A link to a public repository for the source code of your application, for example the URL of a specific GitHub commit.
      */
     SourceCodeUrl?: __string;
   }
