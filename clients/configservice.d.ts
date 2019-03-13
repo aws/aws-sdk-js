@@ -84,6 +84,14 @@ declare class ConfigService extends Service {
    */
   deletePendingAggregationRequest(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the remediation configuration.
+   */
+  deleteRemediationConfiguration(params: ConfigService.Types.DeleteRemediationConfigurationRequest, callback?: (err: AWSError, data: ConfigService.Types.DeleteRemediationConfigurationResponse) => void): Request<ConfigService.Types.DeleteRemediationConfigurationResponse, AWSError>;
+  /**
+   * Deletes the remediation configuration.
+   */
+  deleteRemediationConfiguration(callback?: (err: AWSError, data: ConfigService.Types.DeleteRemediationConfigurationResponse) => void): Request<ConfigService.Types.DeleteRemediationConfigurationResponse, AWSError>;
+  /**
    * Deletes the retention configuration.
    */
   deleteRetentionConfiguration(params: ConfigService.Types.DeleteRetentionConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -148,11 +156,11 @@ declare class ConfigService extends Service {
    */
   describeConfigRules(callback?: (err: AWSError, data: ConfigService.Types.DescribeConfigRulesResponse) => void): Request<ConfigService.Types.DescribeConfigRulesResponse, AWSError>;
   /**
-   * Returns status information for sources within an aggregator. The status includes information about the last time AWS Config aggregated data from source accounts or AWS Config failed to aggregate data from source accounts with the related error code or message. 
+   *  Returns status information for sources within an aggregator. The status includes information about the last time AWS Config verified authorization between the source account and an aggregator account. In case of a failure, the status contains the related error code or message. 
    */
   describeConfigurationAggregatorSourcesStatus(params: ConfigService.Types.DescribeConfigurationAggregatorSourcesStatusRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeConfigurationAggregatorSourcesStatusResponse) => void): Request<ConfigService.Types.DescribeConfigurationAggregatorSourcesStatusResponse, AWSError>;
   /**
-   * Returns status information for sources within an aggregator. The status includes information about the last time AWS Config aggregated data from source accounts or AWS Config failed to aggregate data from source accounts with the related error code or message. 
+   *  Returns status information for sources within an aggregator. The status includes information about the last time AWS Config verified authorization between the source account and an aggregator account. In case of a failure, the status contains the related error code or message. 
    */
   describeConfigurationAggregatorSourcesStatus(callback?: (err: AWSError, data: ConfigService.Types.DescribeConfigurationAggregatorSourcesStatusResponse) => void): Request<ConfigService.Types.DescribeConfigurationAggregatorSourcesStatusResponse, AWSError>;
   /**
@@ -203,6 +211,22 @@ declare class ConfigService extends Service {
    * Returns a list of all pending aggregation requests.
    */
   describePendingAggregationRequests(callback?: (err: AWSError, data: ConfigService.Types.DescribePendingAggregationRequestsResponse) => void): Request<ConfigService.Types.DescribePendingAggregationRequestsResponse, AWSError>;
+  /**
+   * Returns the details of one or more remediation configuration.
+   */
+  describeRemediationConfigurations(params: ConfigService.Types.DescribeRemediationConfigurationsRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeRemediationConfigurationsResponse) => void): Request<ConfigService.Types.DescribeRemediationConfigurationsResponse, AWSError>;
+  /**
+   * Returns the details of one or more remediation configuration.
+   */
+  describeRemediationConfigurations(callback?: (err: AWSError, data: ConfigService.Types.DescribeRemediationConfigurationsResponse) => void): Request<ConfigService.Types.DescribeRemediationConfigurationsResponse, AWSError>;
+  /**
+   * Provides a detailed view of a Remediation Execution for a set of resources including state, timestamps for when steps for the remediation execution happen, and any error messages for steps that have failed. When you specify the limit and the next token, you receive a paginated response.
+   */
+  describeRemediationExecutionStatus(params: ConfigService.Types.DescribeRemediationExecutionStatusRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeRemediationExecutionStatusResponse) => void): Request<ConfigService.Types.DescribeRemediationExecutionStatusResponse, AWSError>;
+  /**
+   * Provides a detailed view of a Remediation Execution for a set of resources including state, timestamps for when steps for the remediation execution happen, and any error messages for steps that have failed. When you specify the limit and the next token, you receive a paginated response.
+   */
+  describeRemediationExecutionStatus(callback?: (err: AWSError, data: ConfigService.Types.DescribeRemediationExecutionStatusResponse) => void): Request<ConfigService.Types.DescribeRemediationExecutionStatusResponse, AWSError>;
   /**
    * Returns the details of one or more retention configurations. If the retention configuration name is not specified, this action returns the details for all the retention configurations for that account.  Currently, AWS Config supports only one retention configuration per region in your account. 
    */
@@ -312,11 +336,11 @@ declare class ConfigService extends Service {
    */
   putAggregationAuthorization(callback?: (err: AWSError, data: ConfigService.Types.PutAggregationAuthorizationResponse) => void): Request<ConfigService.Types.PutAggregationAuthorizationResponse, AWSError>;
   /**
-   * Adds or updates an AWS Config rule for evaluating whether your AWS resources comply with your desired configurations. You can use this action for custom AWS Config rules and AWS managed Config rules. A custom AWS Config rule is a rule that you develop and maintain. An AWS managed Config rule is a customizable, predefined rule that AWS Config provides. If you are adding a new custom AWS Config rule, you must first create the AWS Lambda function that the rule invokes to evaluate your resources. When you use the PutConfigRule action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. Specify the ARN for the SourceIdentifier key. This key is part of the Source object, which is part of the ConfigRule object.  If you are adding an AWS managed Config rule, specify the rule's identifier for the SourceIdentifier key. To reference AWS managed Config rule identifiers, see About AWS Managed Config Rules. For any new rule that you add, specify the ConfigRuleName in the ConfigRule object. Do not specify the ConfigRuleArn or the ConfigRuleId. These values are generated by AWS Config for new rules. If you are updating a rule that you added previously, you can specify the rule by ConfigRuleName, ConfigRuleId, or ConfigRuleArn in the ConfigRule data type that you use in this request. The maximum number of rules that AWS Config supports is 50. For information about requesting a rule limit increase, see AWS Config Limits in the AWS General Reference Guide. For more information about developing and using AWS Config rules, see Evaluating AWS Resource Configurations with AWS Config in the AWS Config Developer Guide.
+   * Adds or updates an AWS Config rule for evaluating whether your AWS resources comply with your desired configurations. You can use this action for custom AWS Config rules and AWS managed Config rules. A custom AWS Config rule is a rule that you develop and maintain. An AWS managed Config rule is a customizable, predefined rule that AWS Config provides. If you are adding a new custom AWS Config rule, you must first create the AWS Lambda function that the rule invokes to evaluate your resources. When you use the PutConfigRule action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. Specify the ARN for the SourceIdentifier key. This key is part of the Source object, which is part of the ConfigRule object.  If you are adding an AWS managed Config rule, specify the rule's identifier for the SourceIdentifier key. To reference AWS managed Config rule identifiers, see About AWS Managed Config Rules. For any new rule that you add, specify the ConfigRuleName in the ConfigRule object. Do not specify the ConfigRuleArn or the ConfigRuleId. These values are generated by AWS Config for new rules. If you are updating a rule that you added previously, you can specify the rule by ConfigRuleName, ConfigRuleId, or ConfigRuleArn in the ConfigRule data type that you use in this request. The maximum number of rules that AWS Config supports is 150. For information about requesting a rule limit increase, see AWS Config Limits in the AWS General Reference Guide. For more information about developing and using AWS Config rules, see Evaluating AWS Resource Configurations with AWS Config in the AWS Config Developer Guide.
    */
   putConfigRule(params: ConfigService.Types.PutConfigRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds or updates an AWS Config rule for evaluating whether your AWS resources comply with your desired configurations. You can use this action for custom AWS Config rules and AWS managed Config rules. A custom AWS Config rule is a rule that you develop and maintain. An AWS managed Config rule is a customizable, predefined rule that AWS Config provides. If you are adding a new custom AWS Config rule, you must first create the AWS Lambda function that the rule invokes to evaluate your resources. When you use the PutConfigRule action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. Specify the ARN for the SourceIdentifier key. This key is part of the Source object, which is part of the ConfigRule object.  If you are adding an AWS managed Config rule, specify the rule's identifier for the SourceIdentifier key. To reference AWS managed Config rule identifiers, see About AWS Managed Config Rules. For any new rule that you add, specify the ConfigRuleName in the ConfigRule object. Do not specify the ConfigRuleArn or the ConfigRuleId. These values are generated by AWS Config for new rules. If you are updating a rule that you added previously, you can specify the rule by ConfigRuleName, ConfigRuleId, or ConfigRuleArn in the ConfigRule data type that you use in this request. The maximum number of rules that AWS Config supports is 50. For information about requesting a rule limit increase, see AWS Config Limits in the AWS General Reference Guide. For more information about developing and using AWS Config rules, see Evaluating AWS Resource Configurations with AWS Config in the AWS Config Developer Guide.
+   * Adds or updates an AWS Config rule for evaluating whether your AWS resources comply with your desired configurations. You can use this action for custom AWS Config rules and AWS managed Config rules. A custom AWS Config rule is a rule that you develop and maintain. An AWS managed Config rule is a customizable, predefined rule that AWS Config provides. If you are adding a new custom AWS Config rule, you must first create the AWS Lambda function that the rule invokes to evaluate your resources. When you use the PutConfigRule action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. Specify the ARN for the SourceIdentifier key. This key is part of the Source object, which is part of the ConfigRule object.  If you are adding an AWS managed Config rule, specify the rule's identifier for the SourceIdentifier key. To reference AWS managed Config rule identifiers, see About AWS Managed Config Rules. For any new rule that you add, specify the ConfigRuleName in the ConfigRule object. Do not specify the ConfigRuleArn or the ConfigRuleId. These values are generated by AWS Config for new rules. If you are updating a rule that you added previously, you can specify the rule by ConfigRuleName, ConfigRuleId, or ConfigRuleArn in the ConfigRule data type that you use in this request. The maximum number of rules that AWS Config supports is 150. For information about requesting a rule limit increase, see AWS Config Limits in the AWS General Reference Guide. For more information about developing and using AWS Config rules, see Evaluating AWS Resource Configurations with AWS Config in the AWS Config Developer Guide.
    */
   putConfigRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -352,6 +376,14 @@ declare class ConfigService extends Service {
    */
   putEvaluations(callback?: (err: AWSError, data: ConfigService.Types.PutEvaluationsResponse) => void): Request<ConfigService.Types.PutEvaluationsResponse, AWSError>;
   /**
+   * Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the RemediationConfiguration object for the AWS Config rule. AWS Config rule must already exist for you to add a remeduation configuration. The target (SSM document) must exist and have permissions to use the target. 
+   */
+  putRemediationConfigurations(params: ConfigService.Types.PutRemediationConfigurationsRequest, callback?: (err: AWSError, data: ConfigService.Types.PutRemediationConfigurationsResponse) => void): Request<ConfigService.Types.PutRemediationConfigurationsResponse, AWSError>;
+  /**
+   * Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the RemediationConfiguration object for the AWS Config rule. AWS Config rule must already exist for you to add a remeduation configuration. The target (SSM document) must exist and have permissions to use the target. 
+   */
+  putRemediationConfigurations(callback?: (err: AWSError, data: ConfigService.Types.PutRemediationConfigurationsResponse) => void): Request<ConfigService.Types.PutRemediationConfigurationsResponse, AWSError>;
+  /**
    * Creates and updates the retention configuration with details about retention period (number of days) that AWS Config stores your historical information. The API creates the RetentionConfiguration object and names the object as default. When you have a RetentionConfiguration object named default, calling the API modifies the default object.   Currently, AWS Config supports only one retention configuration per region in your account. 
    */
   putRetentionConfiguration(params: ConfigService.Types.PutRetentionConfigurationRequest, callback?: (err: AWSError, data: ConfigService.Types.PutRetentionConfigurationResponse) => void): Request<ConfigService.Types.PutRetentionConfigurationResponse, AWSError>;
@@ -375,6 +407,14 @@ declare class ConfigService extends Service {
    * Starts recording configurations of the AWS resources you have selected to record in your AWS account. You must have created at least one delivery channel to successfully start the configuration recorder.
    */
   startConfigurationRecorder(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Runs an on-demand remediation for the specified AWS Config rules against the last known remediation configuration. It runs an execution against the current state of your resources. Remediation execution is asynchronous. You can specify up to 100 resource keys per request. An existing StartRemediationExecution call for the specified resource keys must complete before you can call the API again.
+   */
+  startRemediationExecution(params: ConfigService.Types.StartRemediationExecutionRequest, callback?: (err: AWSError, data: ConfigService.Types.StartRemediationExecutionResponse) => void): Request<ConfigService.Types.StartRemediationExecutionResponse, AWSError>;
+  /**
+   * Runs an on-demand remediation for the specified AWS Config rules against the last known remediation configuration. It runs an execution against the current state of your resources. Remediation execution is asynchronous. You can specify up to 100 resource keys per request. An existing StartRemediationExecution call for the specified resource keys must complete before you can call the API again.
+   */
+  startRemediationExecution(callback?: (err: AWSError, data: ConfigService.Types.StartRemediationExecutionResponse) => void): Request<ConfigService.Types.StartRemediationExecutionResponse, AWSError>;
   /**
    * Stops recording configurations of the AWS resources you have selected to record in your AWS account.
    */
@@ -1102,6 +1142,18 @@ declare namespace ConfigService {
      */
     RequesterAwsRegion: AwsRegion;
   }
+  export interface DeleteRemediationConfigurationRequest {
+    /**
+     * The name of the AWS Config rule for which you want to delete remediation configuration for.
+     */
+    ConfigRuleName: StringWithCharLimit64;
+    /**
+     * The type of a resource.
+     */
+    ResourceType?: String;
+  }
+  export interface DeleteRemediationConfigurationResponse {
+  }
   export interface DeleteRetentionConfigurationRequest {
     /**
      * The name of the retention configuration to delete.
@@ -1218,7 +1270,7 @@ declare namespace ConfigService {
      */
     ConfigRuleNames?: ConfigRuleNames;
     /**
-     * Filters the results by compliance. The allowed values are COMPLIANT, NON_COMPLIANT, and INSUFFICIENT_DATA.
+     * Filters the results by compliance. The allowed values are COMPLIANT and NON_COMPLIANT.
      */
     ComplianceTypes?: ComplianceTypes;
     /**
@@ -1246,7 +1298,7 @@ declare namespace ConfigService {
      */
     ResourceId?: BaseResourceId;
     /**
-     * Filters the results by compliance. The allowed values are COMPLIANT and NON_COMPLIANT.
+     * Filters the results by compliance. The allowed values are COMPLIANT, NON_COMPLIANT, and INSUFFICIENT_DATA.
      */
     ComplianceTypes?: ComplianceTypes;
     /**
@@ -1433,6 +1485,46 @@ declare namespace ConfigService {
      */
     NextToken?: String;
   }
+  export interface DescribeRemediationConfigurationsRequest {
+    /**
+     * A list of AWS Config rule names of remediation configurations for which you want details. 
+     */
+    ConfigRuleNames: ConfigRuleNames;
+  }
+  export interface DescribeRemediationConfigurationsResponse {
+    /**
+     * Returns a remediation configuration object.
+     */
+    RemediationConfigurations?: RemediationConfigurations;
+  }
+  export interface DescribeRemediationExecutionStatusRequest {
+    /**
+     * A list of config rule names.
+     */
+    ConfigRuleName: StringWithCharLimit64;
+    /**
+     * A list of resource keys object. 
+     */
+    ResourceKeys?: ResourceKeys;
+    /**
+     * The maximum number of RemediationExecutionStatuses returned on each page. The default is maximum. If you specify 0, AWS Config uses the default. 
+     */
+    Limit?: Limit;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
+    NextToken?: StringWithCharLimit256;
+  }
+  export interface DescribeRemediationExecutionStatusResponse {
+    /**
+     * Returns a list of remediation execution statuses object.
+     */
+    RemediationExecutionStatuses?: RemediationExecutionStatuses;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
+     */
+    NextToken?: StringWithCharLimit256;
+  }
   export interface DescribeRetentionConfigurationsRequest {
     /**
      * A list of names of retention configurations for which you want details. If you do not specify a name, AWS Config returns details for all the retention configurations for that account.  Currently, AWS Config supports only one retention configuration per region in your account. 
@@ -1531,6 +1623,17 @@ declare namespace ConfigService {
   export type EvaluationResults = EvaluationResult[];
   export type Evaluations = Evaluation[];
   export type EventSource = "aws.config"|string;
+  export interface FailedRemediationBatch {
+    /**
+     * Returns a failure message. For example, the resource is compliant.
+     */
+    FailureMessage?: String;
+    /**
+     * Returns remediation configurations of the failed items.
+     */
+    FailedItems?: RemediationConfigurations;
+  }
+  export type FailedRemediationBatches = FailedRemediationBatch[];
   export interface GetAggregateComplianceDetailsByConfigRuleRequest {
     /**
      * The name of the configuration aggregator.
@@ -1995,6 +2098,18 @@ declare namespace ConfigService {
      */
     FailedEvaluations?: Evaluations;
   }
+  export interface PutRemediationConfigurationsRequest {
+    /**
+     * A list of remediation configuration objects.
+     */
+    RemediationConfigurations: RemediationConfigurations;
+  }
+  export interface PutRemediationConfigurationsResponse {
+    /**
+     * Returns a list of failed remediation batch objects.
+     */
+    FailedBatches?: FailedRemediationBatches;
+  }
   export interface PutRetentionConfigurationRequest {
     /**
      * Number of days AWS Config stores your historical information.  Currently, only applicable to the configuration item history. 
@@ -2046,6 +2161,90 @@ declare namespace ConfigService {
   }
   export type RelationshipList = Relationship[];
   export type RelationshipName = string;
+  export interface RemediationConfiguration {
+    /**
+     * The name of the AWS Config rule.
+     */
+    ConfigRuleName: StringWithCharLimit64;
+    /**
+     * The type of the target. Target executes remediation. For example, SSM document.
+     */
+    TargetType: RemediationTargetType;
+    /**
+     * Public ID is document.
+     */
+    TargetId: StringWithCharLimit256;
+    /**
+     * Version of the target. For example, version of the SSM document.
+     */
+    TargetVersion?: String;
+    /**
+     * An object of the RemediationParameterValue.
+     */
+    Parameters?: RemediationParameters;
+    /**
+     * The type of a resource. 
+     */
+    ResourceType?: String;
+  }
+  export type RemediationConfigurations = RemediationConfiguration[];
+  export type RemediationExecutionState = "QUEUED"|"IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
+  export interface RemediationExecutionStatus {
+    ResourceKey?: ResourceKey;
+    /**
+     * ENUM of the values.
+     */
+    State?: RemediationExecutionState;
+    /**
+     * Details of every step.
+     */
+    StepDetails?: RemediationExecutionSteps;
+    /**
+     * Start time when the remediation was executed.
+     */
+    InvocationTime?: _Date;
+    /**
+     * The time when the remediation execution was last updated.
+     */
+    LastUpdatedTime?: _Date;
+  }
+  export type RemediationExecutionStatuses = RemediationExecutionStatus[];
+  export interface RemediationExecutionStep {
+    /**
+     * The details of the step.
+     */
+    Name?: String;
+    /**
+     * The valid status of the step.
+     */
+    State?: RemediationExecutionStepState;
+    /**
+     * An error message if the step was interupted during execution.
+     */
+    ErrorMessage?: String;
+    /**
+     * The time when the step started.
+     */
+    StartTime?: _Date;
+    /**
+     * The time when the step stopped.
+     */
+    StopTime?: _Date;
+  }
+  export type RemediationExecutionStepState = "SUCCEEDED"|"PENDING"|"FAILED"|string;
+  export type RemediationExecutionSteps = RemediationExecutionStep[];
+  export interface RemediationParameterValue {
+    /**
+     * The value is dynamic and changes at run-time.
+     */
+    ResourceValue?: ResourceValue;
+    /**
+     * The value is static and does not change at run-time.
+     */
+    StaticValue?: StaticValue;
+  }
+  export type RemediationParameters = {[key: string]: RemediationParameterValue};
+  export type RemediationTargetType = "SSM_DOCUMENT"|string;
   export interface ResourceCount {
     /**
      * The resource type (for example, "AWS::EC2::Instance").
@@ -2129,6 +2328,13 @@ declare namespace ConfigService {
   export type ResourceType = "AWS::EC2::CustomerGateway"|"AWS::EC2::EIP"|"AWS::EC2::Host"|"AWS::EC2::Instance"|"AWS::EC2::InternetGateway"|"AWS::EC2::NetworkAcl"|"AWS::EC2::NetworkInterface"|"AWS::EC2::RouteTable"|"AWS::EC2::SecurityGroup"|"AWS::EC2::Subnet"|"AWS::CloudTrail::Trail"|"AWS::EC2::Volume"|"AWS::EC2::VPC"|"AWS::EC2::VPNConnection"|"AWS::EC2::VPNGateway"|"AWS::IAM::Group"|"AWS::IAM::Policy"|"AWS::IAM::Role"|"AWS::IAM::User"|"AWS::ACM::Certificate"|"AWS::RDS::DBInstance"|"AWS::RDS::DBSubnetGroup"|"AWS::RDS::DBSecurityGroup"|"AWS::RDS::DBSnapshot"|"AWS::RDS::EventSubscription"|"AWS::ElasticLoadBalancingV2::LoadBalancer"|"AWS::S3::Bucket"|"AWS::SSM::ManagedInstanceInventory"|"AWS::Redshift::Cluster"|"AWS::Redshift::ClusterSnapshot"|"AWS::Redshift::ClusterParameterGroup"|"AWS::Redshift::ClusterSecurityGroup"|"AWS::Redshift::ClusterSubnetGroup"|"AWS::Redshift::EventSubscription"|"AWS::CloudWatch::Alarm"|"AWS::CloudFormation::Stack"|"AWS::DynamoDB::Table"|"AWS::AutoScaling::AutoScalingGroup"|"AWS::AutoScaling::LaunchConfiguration"|"AWS::AutoScaling::ScalingPolicy"|"AWS::AutoScaling::ScheduledAction"|"AWS::CodeBuild::Project"|"AWS::WAF::RateBasedRule"|"AWS::WAF::Rule"|"AWS::WAF::WebACL"|"AWS::WAFRegional::RateBasedRule"|"AWS::WAFRegional::Rule"|"AWS::WAFRegional::WebACL"|"AWS::CloudFront::Distribution"|"AWS::CloudFront::StreamingDistribution"|"AWS::WAF::RuleGroup"|"AWS::WAFRegional::RuleGroup"|"AWS::Lambda::Function"|"AWS::ElasticBeanstalk::Application"|"AWS::ElasticBeanstalk::ApplicationVersion"|"AWS::ElasticBeanstalk::Environment"|"AWS::ElasticLoadBalancing::LoadBalancer"|"AWS::XRay::EncryptionConfig"|"AWS::SSM::AssociationCompliance"|"AWS::SSM::PatchCompliance"|"AWS::Shield::Protection"|"AWS::ShieldRegional::Protection"|"AWS::Config::ResourceCompliance"|"AWS::CodePipeline::Pipeline"|string;
   export type ResourceTypeList = ResourceType[];
   export type ResourceTypes = StringWithCharLimit256[];
+  export interface ResourceValue {
+    /**
+     * The value is a resource ID.
+     */
+    Value?: ResourceValueType;
+  }
+  export type ResourceValueType = "RESOURCE_ID"|string;
   export interface RetentionConfiguration {
     /**
      * The name of the retention configuration object.
@@ -2204,6 +2410,33 @@ declare namespace ConfigService {
      * The name of the recorder object that records each configuration change made to the resources.
      */
     ConfigurationRecorderName: RecorderName;
+  }
+  export interface StartRemediationExecutionRequest {
+    /**
+     * The list of names of AWS Config rules that you want to run remediation execution for.
+     */
+    ConfigRuleName: StringWithCharLimit64;
+    /**
+     * A list of resource key object.
+     */
+    ResourceKeys: ResourceKeys;
+  }
+  export interface StartRemediationExecutionResponse {
+    /**
+     * Returns a failure message. For example, the resource is compliant.
+     */
+    FailureMessage?: String;
+    /**
+     * For resources that have failed to start execuition the API returns a resource key object.
+     */
+    FailedItems?: ResourceKeys;
+  }
+  export type StaticParameterValues = StringWithCharLimit256[];
+  export interface StaticValue {
+    /**
+     * A list of values. For example, the ARN of the assumed role. 
+     */
+    Values?: StaticParameterValues;
   }
   export interface StopConfigurationRecorderRequest {
     /**

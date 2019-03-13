@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.420.0-->
+<!--LATEST=2.421.0-->
 <!--ENTRYINSERT-->
+
+## 2.421.0
+* feature: ConfigService: Config released Remediation APIs allowing Remediation of Config Rules
 
 ## 2.420.0
 * bugfix: ManageUpload: abort request stream when body is smaller than 5MB
