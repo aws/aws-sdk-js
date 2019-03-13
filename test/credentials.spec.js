@@ -475,7 +475,7 @@
         it('throws error if credential_process returns expired credentials', function(done) {
           var mockProcess, mockConfig, creds, expired;
           expired = AWS.util.date.iso8601(new Date(0));
-          mockProcess = `{"Version": 1,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": "${expired}"}`;
+          mockProcess = '{"Version": 1,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": "' + expired +'"}';
           mockConfig = '[foo]\ncredential_process=federated_cli_mock';
           var child_process = require('child_process');
           helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
@@ -496,22 +496,6 @@
           var child_process = require('child_process');
           helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
             cb(mockErr, undefined, undefined);
-          });
-          helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
-          var creds = new AWS.SharedIniFileCredentials({ profile: 'foo' });
-          creds.refresh(function(err) {
-            expect(err).to.not.be.null;
-            expect(creds.accessKeyId).to.be.undefined;
-            done();
-          });
-        });
-        it('thorws error if credential_process returns stdErr', function(done) {
-          var mockStdErr, mockConfig, creds;
-          mockStdErr = 'foo stdErr';
-          mockConfig = '[foo]\ncredential_process=federated_cli_mock';
-          var child_process = require('child_process');
-          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
-            cb(undefined, undefined, mockStdErr);
           });
           helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
           var creds = new AWS.SharedIniFileCredentials({ profile: 'foo' });
@@ -543,7 +527,7 @@
           var mockProcess, mockConfig, creds, futureExpiration;
           futureExpiration = AWS.util.date.unixTimestamp() + 900;
           futureExpiration = AWS.util.date.iso8601(new Date(futureExpiration * 1000));
-          mockProcess = `{"Version": 1,"AccessKeyId": "akid","SecretAccessKey": "secret","SessionToken": "session","Expiration": "${futureExpiration}"}`;
+          mockProcess = '{"Version": 1,"AccessKeyId": "akid","SecretAccessKey": "secret","SessionToken": "session","Expiration": "' + futureExpiration + '"}';
           mockConfig = '[foo]\ncredential_process=federated_cli_mock';
           var child_process = require('child_process');
           helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
