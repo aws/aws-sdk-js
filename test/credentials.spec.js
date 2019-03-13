@@ -489,6 +489,38 @@
             done();
           });
         });
+        it('thorws error if credential_process returns err', function(done) {
+          var mockErr, mockConfig, creds;
+          mockErr = 'foo Error';
+          mockConfig = '[foo]\ncredential_process=federated_cli_mock';
+          var child_process = require('child_process');
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+            cb(mockErr, undefined, undefined);
+          });
+          helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
+          var creds = new AWS.SharedIniFileCredentials({ profile: 'foo' });
+          creds.refresh(function(err) {
+            expect(err).to.not.be.null;
+            expect(creds.accessKeyId).to.be.undefined;
+            done();
+          });
+        });
+        it('thorws error if credential_process returns stdErr', function(done) {
+          var mockStdErr, mockConfig, creds;
+          mockStdErr = 'foo stdErr';
+          mockConfig = '[foo]\ncredential_process=federated_cli_mock';
+          var child_process = require('child_process');
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+            cb(undefined, undefined, mockStdErr);
+          });
+          helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
+          var creds = new AWS.SharedIniFileCredentials({ profile: 'foo' });
+          creds.refresh(function(err) {
+            expect(err).to.not.be.null;
+            expect(creds.accessKeyId).to.be.undefined;
+            done();
+          });
+        });
         it('prefers static INI credentials over credentials process', function(done) {
           var mockProcess, mockConfig, creds;
           mockProcess = '{"Version": 1,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": ""}';
