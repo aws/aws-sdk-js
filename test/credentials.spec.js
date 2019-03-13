@@ -438,17 +438,17 @@
           creds.get();
           return validateCredentials(creds);
         });
-        it('loads via credential_process', (done) => {
+        it('loads via credential_process', function(done) {
           var mockProcess, mockConfig, creds;
           mockProcess = '{"Version": 1,"AccessKeyId": "akid","SecretAccessKey": "secret","SessionToken": "session","Expiration": ""}';
           mockConfig = '[foo]\ncredential_process=federated_cli_mock';
           var child_process = require('child_process');
-          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
-            process.nextTick(cb(_, mockProcess, undefined));
+          helpers.spyOn(child_process, 'exec').andCallFake(function (__, cb) {
+            cb(undefined, mockProcess, undefined);
           });
           helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
           creds = new AWS.SharedIniFileCredentials({ profile: 'foo' });
-          creds.refresh(function(e) {
+          creds.refresh(function(err) {
             expect(creds.accessKeyId).to.equal('akid');
             expect(creds.secretAccessKey).to.equal('secret');
             expect(creds.sessionToken).to.equal('session');
@@ -456,68 +456,86 @@
             done();
           });
         });
-        it('throws error if credential_process is not Version 1', function() {
+        it('throws error if credential_process is not Version 1', function(done) {
           var mockProcess, mockConfig, creds;
           mockProcess = '{"Version": 2,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": ""}';
           mockConfig = '[foo]\ncredential_process=federated_cli_mock';
           var child_process = require('child_process');
-          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
-            cb(_, mockProcess, undefined);
+          helpers.spyOn(child_process, 'exec').andCallFake(function (__, cb) {
+            cb(undefined, mockProcess, undefined);
           });
           helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
           var creds = new AWS.SharedIniFileCredentials({ profile: 'foo' });
-          creds.refresh(function(e) {
-            if (e) {
-              expect(e.message).to.eql('credential_process does not return Version == 1 for profile foo');
-              done();
-            }
+          creds.refresh(function(err) {
+            expect(err).to.exist;
+            expect(err.message).to.match(/^credential_process does not return Version == 1/);
+            done();
           });
         });
-        it('prefers static INI credentials over credentials process', function() {
+        it('throws error if credential_process returns expired credentials', function(done) {
+          var mockProcess, mockConfig, creds, expired;
+          expired = AWS.util.date.iso8601(new Date(0));
+          mockProcess = `{"Version": 1,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": "${expired}"}`;
+          mockConfig = '[foo]\ncredential_process=federated_cli_mock';
+          var child_process = require('child_process');
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+            cb(undefined, mockProcess, undefined);
+          });
+          helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
+          var creds = new AWS.SharedIniFileCredentials({ profile: 'foo' });
+          creds.refresh(function(err) {
+            expect(err.message).to.eql('credential_process returned expired credentials');
+            expect(err).to.not.be.null;
+            done();
+          });
+        });
+        it('prefers static INI credentials over credentials process', function(done) {
           var mockProcess, mockConfig, creds;
           mockProcess = '{"Version": 1,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": ""}';
           mockConfig = '[foo]\ncredential_process=federated_cli_mock\naws_access_key_id = akid\naws_secret_access_key = secret\naws_session_token = session';
           var child_process = require('child_process');
           helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
-            cb(_, mockProcess, undefined);
+            cb(undefined, mockProcess, undefined);
           });
           helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
           creds = new AWS.SharedIniFileCredentials({ profile: 'foo' });
-          creds.refresh(function(e) {
-            expect(creds.accessKeyId).to.equal('xxx');
-            expect(creds.secretAccessKey).to.equal('yyy');
-            expect(creds.sessionToken).to.equal('zzz');
+          creds.refresh(function(err) {
+            expect(creds.accessKeyId).to.equal('akid');
+            expect(creds.secretAccessKey).to.equal('secret');
+            expect(creds.sessionToken).to.equal('session');
             expect(creds.expireTime).to.be.null;
             done();
           });
         });
-        it('sets expireTime if credential process includes an expiration', function() {
-          var mockProcess, mockConfig, creds;
-          mockProcess = `{"Version": 1,"AccessKeyId": "akid","SecretAccessKey": "secret","SessionToken": "session","Expiration": "1970-01-01T00:00:00.000Z"}`;
+        it('sets expireTime if credential process includes an expiration', function(done) {
+          var mockProcess, mockConfig, creds, futureExpiration;
+          futureExpiration = AWS.util.date.unixTimestamp() + 900;
+          futureExpiration = AWS.util.date.iso8601(new Date(futureExpiration * 1000));
+          mockProcess = `{"Version": 1,"AccessKeyId": "akid","SecretAccessKey": "secret","SessionToken": "session","Expiration": "${futureExpiration}"}`;
           mockConfig = '[foo]\ncredential_process=federated_cli_mock';
           var child_process = require('child_process');
           helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
-            cb(_, mockProcess, undefined);
+            cb(undefined, mockProcess, undefined);
           });
           helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
           creds = new AWS.SharedIniFileCredentials({ profile: 'foo' });
-          creds.refresh(function(e) {
-            expect(creds.expireTime).to.eql(new Date(0));
+          creds.refresh(function(err) {
+            expect(creds.expireTime).to.eql(AWS.util.date.from(futureExpiration));
             done();
           });
         });
-        it('does not set expireTime if credential process expiration is empty', function() {
+        return it('does not set expireTime if credential process expiration is empty', function(done) {
           var mockProcess, mockConfig, creds;
-          mockProcess = `{"Version": 1,"AccessKeyId": "akid","SecretAccessKey": "secret","SessionToken": "session","Expiration": ""}`;
+          mockProcess = '{"Version": 1,"AccessKeyId": "akid","SecretAccessKey": "secret","SessionToken": "session","Expiration": ""}';
           mockConfig = '[foo]\ncredential_process=federated_cli_mock';
           var child_process = require('child_process');
           helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
-            cb(_, mockProcess, undefined);
+            cb(undefined, mockProcess, undefined);
           });
           helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
           creds = new AWS.SharedIniFileCredentials({ profile: 'foo' });
           creds.get();
-          creds.refresh(function(e) {
+          creds.refresh(function(err) {
             expect(creds.expireTime).to.be.null;
             done();
           });
