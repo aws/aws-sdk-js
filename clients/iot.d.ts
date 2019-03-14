@@ -220,11 +220,11 @@ declare class Iot extends Service {
    */
   createStream(callback?: (err: AWSError, data: Iot.Types.CreateStreamResponse) => void): Request<Iot.Types.CreateStreamResponse, AWSError>;
   /**
-   * Creates a thing record in the registry. If this call is made multiple times using the same thing name and configuration, the call will succeed. If this call is made with the same thing name but different configuration a ResourceAlreadyExistsException is thrown.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
+   * Creates a thing record in the registry.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
    */
   createThing(params: Iot.Types.CreateThingRequest, callback?: (err: AWSError, data: Iot.Types.CreateThingResponse) => void): Request<Iot.Types.CreateThingResponse, AWSError>;
   /**
-   * Creates a thing record in the registry. If this call is made multiple times using the same thing name and configuration, the call will succeed. If this call is made with the same thing name but different configuration a ResourceAlreadyExistsException is thrown.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
+   * Creates a thing record in the registry.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
    */
   createThing(callback?: (err: AWSError, data: Iot.Types.CreateThingResponse) => void): Request<Iot.Types.CreateThingResponse, AWSError>;
   /**
@@ -2480,6 +2480,10 @@ declare namespace Iot {
      * A list of additional OTA update parameters which are name-value pairs.
      */
     additionalParameters?: AdditionalParameterMap;
+    /**
+     * Metadata which can be used to manage updates.
+     */
+    tags?: TagList;
   }
   export interface CreateOTAUpdateResponse {
     /**
@@ -2672,6 +2676,10 @@ declare namespace Iot {
      * An IAM role that allows the IoT service principal assumes to access your S3 files.
      */
     roleArn: RoleArn;
+    /**
+     * Metadata which can be used to manage streams.
+     */
+    tags?: TagList;
   }
   export interface CreateStreamResponse {
     /**
@@ -5716,7 +5724,7 @@ declare namespace Iot {
      */
     caCertificatePem?: CertificatePem;
     /**
-     * A boolean value that specifies if the certificate is set to active.
+     * A boolean value that specifies if the CA certificate is set to active.
      */
     setAsActive?: SetAsActiveFlag;
     /**

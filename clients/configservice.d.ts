@@ -212,19 +212,19 @@ declare class ConfigService extends Service {
    */
   describePendingAggregationRequests(callback?: (err: AWSError, data: ConfigService.Types.DescribePendingAggregationRequestsResponse) => void): Request<ConfigService.Types.DescribePendingAggregationRequestsResponse, AWSError>;
   /**
-   * Returns the details of one or more remediation configuration.
+   * Returns the details of one or more remediation configurations.
    */
   describeRemediationConfigurations(params: ConfigService.Types.DescribeRemediationConfigurationsRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeRemediationConfigurationsResponse) => void): Request<ConfigService.Types.DescribeRemediationConfigurationsResponse, AWSError>;
   /**
-   * Returns the details of one or more remediation configuration.
+   * Returns the details of one or more remediation configurations.
    */
   describeRemediationConfigurations(callback?: (err: AWSError, data: ConfigService.Types.DescribeRemediationConfigurationsResponse) => void): Request<ConfigService.Types.DescribeRemediationConfigurationsResponse, AWSError>;
   /**
-   * Provides a detailed view of a Remediation Execution for a set of resources including state, timestamps for when steps for the remediation execution happen, and any error messages for steps that have failed. When you specify the limit and the next token, you receive a paginated response.
+   * Provides a detailed view of a Remediation Execution for a set of resources including state, timestamps for when steps for the remediation execution occur, and any error messages for steps that have failed. When you specify the limit and the next token, you receive a paginated response.
    */
   describeRemediationExecutionStatus(params: ConfigService.Types.DescribeRemediationExecutionStatusRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeRemediationExecutionStatusResponse) => void): Request<ConfigService.Types.DescribeRemediationExecutionStatusResponse, AWSError>;
   /**
-   * Provides a detailed view of a Remediation Execution for a set of resources including state, timestamps for when steps for the remediation execution happen, and any error messages for steps that have failed. When you specify the limit and the next token, you receive a paginated response.
+   * Provides a detailed view of a Remediation Execution for a set of resources including state, timestamps for when steps for the remediation execution occur, and any error messages for steps that have failed. When you specify the limit and the next token, you receive a paginated response.
    */
   describeRemediationExecutionStatus(callback?: (err: AWSError, data: ConfigService.Types.DescribeRemediationExecutionStatusResponse) => void): Request<ConfigService.Types.DescribeRemediationExecutionStatusResponse, AWSError>;
   /**
@@ -328,6 +328,14 @@ declare class ConfigService extends Service {
    */
   listDiscoveredResources(callback?: (err: AWSError, data: ConfigService.Types.ListDiscoveredResourcesResponse) => void): Request<ConfigService.Types.ListDiscoveredResourcesResponse, AWSError>;
   /**
+   * List the tags for AWS Config resource.
+   */
+  listTagsForResource(params: ConfigService.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: ConfigService.Types.ListTagsForResourceResponse) => void): Request<ConfigService.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * List the tags for AWS Config resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: ConfigService.Types.ListTagsForResourceResponse) => void): Request<ConfigService.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Authorizes the aggregator account and region to collect data from the source account and region. 
    */
   putAggregationAuthorization(params: ConfigService.Types.PutAggregationAuthorizationRequest, callback?: (err: AWSError, data: ConfigService.Types.PutAggregationAuthorizationResponse) => void): Request<ConfigService.Types.PutAggregationAuthorizationResponse, AWSError>;
@@ -376,11 +384,11 @@ declare class ConfigService extends Service {
    */
   putEvaluations(callback?: (err: AWSError, data: ConfigService.Types.PutEvaluationsResponse) => void): Request<ConfigService.Types.PutEvaluationsResponse, AWSError>;
   /**
-   * Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the RemediationConfiguration object for the AWS Config rule. AWS Config rule must already exist for you to add a remeduation configuration. The target (SSM document) must exist and have permissions to use the target. 
+   * Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the RemediationConfiguration object for the AWS Config rule. The AWS Config rule must already exist for you to add a remediation configuration. The target (SSM document) must exist and have permissions to use the target. 
    */
   putRemediationConfigurations(params: ConfigService.Types.PutRemediationConfigurationsRequest, callback?: (err: AWSError, data: ConfigService.Types.PutRemediationConfigurationsResponse) => void): Request<ConfigService.Types.PutRemediationConfigurationsResponse, AWSError>;
   /**
-   * Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the RemediationConfiguration object for the AWS Config rule. AWS Config rule must already exist for you to add a remeduation configuration. The target (SSM document) must exist and have permissions to use the target. 
+   * Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the RemediationConfiguration object for the AWS Config rule. The AWS Config rule must already exist for you to add a remediation configuration. The target (SSM document) must exist and have permissions to use the target. 
    */
   putRemediationConfigurations(callback?: (err: AWSError, data: ConfigService.Types.PutRemediationConfigurationsResponse) => void): Request<ConfigService.Types.PutRemediationConfigurationsResponse, AWSError>;
   /**
@@ -423,6 +431,22 @@ declare class ConfigService extends Service {
    * Stops recording configurations of the AWS resources you have selected to record in your AWS account.
    */
   stopConfigurationRecorder(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.
+   */
+  tagResource(params: ConfigService.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes specified tags from a resource.
+   */
+  untagResource(params: ConfigService.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes specified tags from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace ConfigService {
   export type ARN = string;
@@ -581,6 +605,7 @@ declare namespace ConfigService {
   export type AggregationAuthorizationList = AggregationAuthorization[];
   export type AggregatorRegionList = String[];
   export type AllSupported = boolean;
+  export type AmazonResourceName = string;
   export type AvailabilityZone = string;
   export type AwsRegion = string;
   export interface BaseConfigurationItem {
@@ -985,7 +1010,7 @@ declare namespace ConfigService {
      */
     configurationItemMD5Hash?: ConfigurationItemMD5Hash;
     /**
-     * The Amazon Resource Name (ARN) of the resource.
+     * accoun
      */
     arn?: ARN;
     /**
@@ -1144,7 +1169,7 @@ declare namespace ConfigService {
   }
   export interface DeleteRemediationConfigurationRequest {
     /**
-     * The name of the AWS Config rule for which you want to delete remediation configuration for.
+     * The name of the AWS Config rule for which you want to delete remediation configuration.
      */
     ConfigRuleName: StringWithCharLimit64;
     /**
@@ -1499,11 +1524,11 @@ declare namespace ConfigService {
   }
   export interface DescribeRemediationExecutionStatusRequest {
     /**
-     * A list of config rule names.
+     * A list of AWS Config rule names.
      */
     ConfigRuleName: StringWithCharLimit64;
     /**
-     * A list of resource keys object. 
+     * A list of resource keys to be processed with the current request. Each element in the list consists of the resource type and resource ID. 
      */
     ResourceKeys?: ResourceKeys;
     /**
@@ -1517,7 +1542,7 @@ declare namespace ConfigService {
   }
   export interface DescribeRemediationExecutionStatusResponse {
     /**
-     * Returns a list of remediation execution statuses object.
+     * Returns a list of remediation execution statuses objects.
      */
     RemediationExecutionStatuses?: RemediationExecutionStatuses;
     /**
@@ -1625,7 +1650,7 @@ declare namespace ConfigService {
   export type EventSource = "aws.config"|string;
   export interface FailedRemediationBatch {
     /**
-     * Returns a failure message. For example, the resource is compliant.
+     * Returns a failure message. For example, the resource is already compliant.
      */
     FailureMessage?: String;
     /**
@@ -1992,6 +2017,30 @@ declare namespace ConfigService {
      */
     nextToken?: NextToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are ConfigRule, ConfigurationAggregator and AggregatorAuthorization.
+     */
+    ResourceArn: AmazonResourceName;
+    /**
+     * The maximum number of tags returned on each page. The limit maximum is 50. You cannot specify a number greater than 50. If you specify 0, AWS Config uses the default. 
+     */
+    Limit?: Limit;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags for the resource.
+     */
+    Tags?: TagList;
+    /**
+     * The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. 
+     */
+    NextToken?: NextToken;
+  }
   export type Long = number;
   export type MaximumExecutionFrequency = "One_Hour"|"Three_Hours"|"Six_Hours"|"Twelve_Hours"|"TwentyFour_Hours"|string;
   export type MessageType = "ConfigurationItemChangeNotification"|"ConfigurationSnapshotDeliveryCompleted"|"ScheduledNotification"|"OversizedConfigurationItemChangeNotification"|string;
@@ -2171,7 +2220,7 @@ declare namespace ConfigService {
      */
     TargetType: RemediationTargetType;
     /**
-     * Public ID is document.
+     * Target ID is the name of the public document.
      */
     TargetId: StringWithCharLimit256;
     /**
@@ -2219,7 +2268,7 @@ declare namespace ConfigService {
      */
     State?: RemediationExecutionStepState;
     /**
-     * An error message if the step was interupted during execution.
+     * An error message if the step was interrupted during execution.
      */
     ErrorMessage?: String;
     /**
@@ -2417,17 +2466,17 @@ declare namespace ConfigService {
      */
     ConfigRuleName: StringWithCharLimit64;
     /**
-     * A list of resource key object.
+     * A list of resource keys to be processed with the current request. Each element in the list consists of the resource type and resource ID. 
      */
     ResourceKeys: ResourceKeys;
   }
   export interface StartRemediationExecutionResponse {
     /**
-     * Returns a failure message. For example, the resource is compliant.
+     * Returns a failure message. For example, the resource is already compliant.
      */
     FailureMessage?: String;
     /**
-     * For resources that have failed to start execuition the API returns a resource key object.
+     * For resources that have failed to start execution, the API returns a resource key object.
      */
     FailedItems?: ResourceKeys;
   }
@@ -2452,8 +2501,42 @@ declare namespace ConfigService {
   export type SupplementaryConfiguration = {[key: string]: SupplementaryConfigurationValue};
   export type SupplementaryConfigurationName = string;
   export type SupplementaryConfigurationValue = string;
+  export interface Tag {
+    /**
+     * One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values.
+     */
+    Key?: TagKey;
+    /**
+     * The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).
+     */
+    Value?: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are ConfigRule, ConfigurationAggregator and AggregatorAuthorization.
+     */
+    ResourceArn: AmazonResourceName;
+    /**
+     * An array of tag object.
+     */
+    Tags: TagList;
+  }
+  export type TagValue = string;
   export type Tags = {[key: string]: Value};
   export type UnprocessedResourceIdentifierList = AggregateResourceIdentifier[];
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are ConfigRule, ConfigurationAggregator and AggregatorAuthorization.
+     */
+    ResourceArn: AmazonResourceName;
+    /**
+     * The keys of the tags to be removed.
+     */
+    TagKeys: TagKeyList;
+  }
   export type Value = string;
   export type Version = string;
   /**

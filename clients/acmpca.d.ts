@@ -21,21 +21,37 @@ declare class ACMPCA extends Service {
    */
   createCertificateAuthority(callback?: (err: AWSError, data: ACMPCA.Types.CreateCertificateAuthorityResponse) => void): Request<ACMPCA.Types.CreateCertificateAuthorityResponse, AWSError>;
   /**
-   * Creates an audit report that lists every time that the your CA private key is used. The report is saved in the Amazon S3 bucket that you specify on input. The IssueCertificate and RevokeCertificate operations use the private key. You can generate a new report every 30 minutes.
+   * Creates an audit report that lists every time that your CA private key is used. The report is saved in the Amazon S3 bucket that you specify on input. The IssueCertificate and RevokeCertificate operations use the private key. You can generate a new report every 30 minutes.
    */
   createCertificateAuthorityAuditReport(params: ACMPCA.Types.CreateCertificateAuthorityAuditReportRequest, callback?: (err: AWSError, data: ACMPCA.Types.CreateCertificateAuthorityAuditReportResponse) => void): Request<ACMPCA.Types.CreateCertificateAuthorityAuditReportResponse, AWSError>;
   /**
-   * Creates an audit report that lists every time that the your CA private key is used. The report is saved in the Amazon S3 bucket that you specify on input. The IssueCertificate and RevokeCertificate operations use the private key. You can generate a new report every 30 minutes.
+   * Creates an audit report that lists every time that your CA private key is used. The report is saved in the Amazon S3 bucket that you specify on input. The IssueCertificate and RevokeCertificate operations use the private key. You can generate a new report every 30 minutes.
    */
   createCertificateAuthorityAuditReport(callback?: (err: AWSError, data: ACMPCA.Types.CreateCertificateAuthorityAuditReportResponse) => void): Request<ACMPCA.Types.CreateCertificateAuthorityAuditReportResponse, AWSError>;
   /**
-   * Deletes a private certificate authority (CA). You must provide the ARN (Amazon Resource Name) of the private CA that you want to delete. You can find the ARN by calling the ListCertificateAuthorities operation. Before you can delete a CA, you must disable it. Call the UpdateCertificateAuthority operation and set the CertificateAuthorityStatus parameter to DISABLED.  Additionally, you can delete a CA if you are waiting for it to be created (the Status field of the CertificateAuthority is CREATING). You can also delete it if the CA has been created but you haven't yet imported the signed certificate (the Status is PENDING_CERTIFICATE) into ACM PCA.  If the CA is in one of the aforementioned states and you call DeleteCertificateAuthority, the CA's status changes to DELETED. However, the CA won't be permentantly deleted until the restoration period has passed. By default, if you do not set the PermanentDeletionTimeInDays parameter, the CA remains restorable for 30 days. You can set the parameter from 7 to 30 days. The DescribeCertificateAuthority operation returns the time remaining in the restoration window of a Private CA in the DELETED state. To restore an eligable CA, call the RestoreCertificateAuthority operation.
+   * Assigns permissions from a private CA to a designated AWS service. Services are specified by their service principals and can be given permission to create and retrieve certificates on a private CA. Services can also be given permission to list the active permissions that the private CA has granted. For ACM to automatically renew your private CA's certificates, you must assign all possible permissions from the CA to the ACM service principal. At this time, you can only assign permissions to ACM (acm.amazonaws.com). Permissions can be revoked with the DeletePermission operation and listed with the ListPermissions operation.
+   */
+  createPermission(params: ACMPCA.Types.CreatePermissionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Assigns permissions from a private CA to a designated AWS service. Services are specified by their service principals and can be given permission to create and retrieve certificates on a private CA. Services can also be given permission to list the active permissions that the private CA has granted. For ACM to automatically renew your private CA's certificates, you must assign all possible permissions from the CA to the ACM service principal. At this time, you can only assign permissions to ACM (acm.amazonaws.com). Permissions can be revoked with the DeletePermission operation and listed with the ListPermissions operation.
+   */
+  createPermission(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a private certificate authority (CA). You must provide the ARN (Amazon Resource Name) of the private CA that you want to delete. You can find the ARN by calling the ListCertificateAuthorities operation. Before you can delete a CA, you must disable it. Call the UpdateCertificateAuthority operation and set the CertificateAuthorityStatus parameter to DISABLED.  Additionally, you can delete a CA if you are waiting for it to be created (the Status field of the CertificateAuthority is CREATING). You can also delete it if the CA has been created but you haven't yet imported the signed certificate (the Status is PENDING_CERTIFICATE) into ACM PCA.  If the CA is in one of the previously mentioned states and you call DeleteCertificateAuthority, the CA's status changes to DELETED. However, the CA won't be permanently deleted until the restoration period has passed. By default, if you do not set the PermanentDeletionTimeInDays parameter, the CA remains restorable for 30 days. You can set the parameter from 7 to 30 days. The DescribeCertificateAuthority operation returns the time remaining in the restoration window of a Private CA in the DELETED state. To restore an eligible CA, call the RestoreCertificateAuthority operation.
    */
   deleteCertificateAuthority(params: ACMPCA.Types.DeleteCertificateAuthorityRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a private certificate authority (CA). You must provide the ARN (Amazon Resource Name) of the private CA that you want to delete. You can find the ARN by calling the ListCertificateAuthorities operation. Before you can delete a CA, you must disable it. Call the UpdateCertificateAuthority operation and set the CertificateAuthorityStatus parameter to DISABLED.  Additionally, you can delete a CA if you are waiting for it to be created (the Status field of the CertificateAuthority is CREATING). You can also delete it if the CA has been created but you haven't yet imported the signed certificate (the Status is PENDING_CERTIFICATE) into ACM PCA.  If the CA is in one of the aforementioned states and you call DeleteCertificateAuthority, the CA's status changes to DELETED. However, the CA won't be permentantly deleted until the restoration period has passed. By default, if you do not set the PermanentDeletionTimeInDays parameter, the CA remains restorable for 30 days. You can set the parameter from 7 to 30 days. The DescribeCertificateAuthority operation returns the time remaining in the restoration window of a Private CA in the DELETED state. To restore an eligable CA, call the RestoreCertificateAuthority operation.
+   * Deletes a private certificate authority (CA). You must provide the ARN (Amazon Resource Name) of the private CA that you want to delete. You can find the ARN by calling the ListCertificateAuthorities operation. Before you can delete a CA, you must disable it. Call the UpdateCertificateAuthority operation and set the CertificateAuthorityStatus parameter to DISABLED.  Additionally, you can delete a CA if you are waiting for it to be created (the Status field of the CertificateAuthority is CREATING). You can also delete it if the CA has been created but you haven't yet imported the signed certificate (the Status is PENDING_CERTIFICATE) into ACM PCA.  If the CA is in one of the previously mentioned states and you call DeleteCertificateAuthority, the CA's status changes to DELETED. However, the CA won't be permanently deleted until the restoration period has passed. By default, if you do not set the PermanentDeletionTimeInDays parameter, the CA remains restorable for 30 days. You can set the parameter from 7 to 30 days. The DescribeCertificateAuthority operation returns the time remaining in the restoration window of a Private CA in the DELETED state. To restore an eligible CA, call the RestoreCertificateAuthority operation.
    */
   deleteCertificateAuthority(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Revokes permissions that a private CA assigned to a designated AWS service. Permissions can be created with the CreatePermission operation and listed with the ListPermissions operation. 
+   */
+  deletePermission(params: ACMPCA.Types.DeletePermissionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Revokes permissions that a private CA assigned to a designated AWS service. Permissions can be created with the CreatePermission operation and listed with the ListPermissions operation. 
+   */
+  deletePermission(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Lists information about your private certificate authority (CA). You specify the private CA on input by its ARN (Amazon Resource Name). The output contains the status of your CA. This can be any of the following:     CREATING - ACM PCA is creating your private certificate authority.    PENDING_CERTIFICATE - The certificate is pending. You must use your on-premises root or subordinate CA to sign your private CA CSR and then import it into PCA.     ACTIVE - Your private CA is active.    DISABLED - Your private CA has been disabled.    EXPIRED - Your private CA certificate has expired.    FAILED - Your private CA has failed. Your CA can fail because of problems such a network outage or backend AWS failure or other errors. A failed CA can never return to the pending state. You must create a new CA.     DELETED - Your private CA is within the restoration period, after which it is permanently deleted. The length of time remaining in the CA's restoration period is also included in this operation's output.  
    */
@@ -100,6 +116,14 @@ declare class ACMPCA extends Service {
    * Lists the private certificate authorities that you created by using the CreateCertificateAuthority operation.
    */
   listCertificateAuthorities(callback?: (err: AWSError, data: ACMPCA.Types.ListCertificateAuthoritiesResponse) => void): Request<ACMPCA.Types.ListCertificateAuthoritiesResponse, AWSError>;
+  /**
+   * Lists all the permissions, if any, that have been assigned by a private CA. Permissions can be granted with the CreatePermission operation and revoked with the DeletePermission operation.
+   */
+  listPermissions(params: ACMPCA.Types.ListPermissionsRequest, callback?: (err: AWSError, data: ACMPCA.Types.ListPermissionsResponse) => void): Request<ACMPCA.Types.ListPermissionsResponse, AWSError>;
+  /**
+   * Lists all the permissions, if any, that have been assigned by a private CA. Permissions can be granted with the CreatePermission operation and revoked with the DeletePermission operation.
+   */
+  listPermissions(callback?: (err: AWSError, data: ACMPCA.Types.ListPermissionsResponse) => void): Request<ACMPCA.Types.ListPermissionsResponse, AWSError>;
   /**
    * Lists the tags, if any, that are associated with your private CA. Tags are labels that you can use to identify and organize your CAs. Each tag consists of a key and an optional value. Call the TagCertificateAuthority operation to add one or more tags to your CA. Call the UntagCertificateAuthority operation to remove tags. 
    */
@@ -232,6 +256,9 @@ declare namespace ACMPCA {
      */
     GenerationQualifier?: String3;
   }
+  export type AccountId = string;
+  export type ActionList = ActionType[];
+  export type ActionType = "IssueCertificate"|"GetCertificate"|"ListPermissions"|string;
   export type Arn = string;
   export type AuditReportId = string;
   export type AuditReportResponseFormat = "JSON"|"CSV"|string;
@@ -311,15 +338,15 @@ declare namespace ACMPCA {
   export type CountryCodeString = string;
   export interface CreateCertificateAuthorityAuditReportRequest {
     /**
-     * Amazon Resource Name (ARN) of the CA to be audited. This is of the form:  arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 .
+     * The Amazon Resource Name (ARN) of the CA to be audited. This is of the form:  arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 .
      */
     CertificateAuthorityArn: Arn;
     /**
-     * Name of the S3 bucket that will contain the audit report.
+     * The name of the S3 bucket that will contain the audit report.
      */
     S3BucketName: String;
     /**
-     * Format in which to create the report. This can be either JSON or CSV.
+     * The format in which to create the report. This can be either JSON or CSV.
      */
     AuditReportResponseFormat: AuditReportResponseFormat;
   }
@@ -361,6 +388,24 @@ declare namespace ACMPCA {
      */
     CertificateAuthorityArn?: Arn;
   }
+  export interface CreatePermissionRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the CA that grants the permissions. You can find the ARN by calling the ListCertificateAuthorities operation. This must have the following form:   arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 . 
+     */
+    CertificateAuthorityArn: Arn;
+    /**
+     * The AWS service or identity that receives the permission. At this time, the only valid principal is acm.amazonaws.com.
+     */
+    Principal: Principal;
+    /**
+     * The ID of the calling account.
+     */
+    SourceAccount?: AccountId;
+    /**
+     * The actions that the specified AWS service principal can use. These include IssueCertificate, GetCertificate, and ListPermissions.
+     */
+    Actions: ActionList;
+  }
   export interface CrlConfiguration {
     /**
      * Boolean value that specifies whether certificate revocation lists (CRLs) are enabled. You can use this value to enable certificate revocation for a new CA when you call the CreateCertificateAuthority operation or for an existing CA when you call the UpdateCertificateAuthority operation. 
@@ -390,6 +435,20 @@ declare namespace ACMPCA {
      * The number of days to make a CA restorable after it has been deleted. This can be anywhere from 7 to 30 days, with 30 being the default.
      */
     PermanentDeletionTimeInDays?: PermanentDeletionTimeInDays;
+  }
+  export interface DeletePermissionRequest {
+    /**
+     * The Amazon Resource Number (ARN) of the private CA that issued the permissions. You can find the CA's ARN by calling the ListCertificateAuthorities operation. This must have the following form:   arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 . 
+     */
+    CertificateAuthorityArn: Arn;
+    /**
+     * The AWS service or identity that will have its CA permissions revoked. At this time, the only valid service principal is acm.amazonaws.com 
+     */
+    Principal: Principal;
+    /**
+     * The AWS account that calls this operation.
+     */
+    SourceAccount?: AccountId;
   }
   export interface DescribeCertificateAuthorityAuditReportRequest {
     /**
@@ -546,6 +605,30 @@ declare namespace ACMPCA {
      */
     NextToken?: NextToken;
   }
+  export interface ListPermissionsRequest {
+    /**
+     * The Amazon Resource Number (ARN) of the private CA to inspect. You can find the ARN by calling the ListCertificateAuthorities operation. This must be of the form: arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012 You can get a private CA's ARN by running the ListCertificateAuthorities operation.
+     */
+    CertificateAuthorityArn: Arn;
+    /**
+     * When paginating results, use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of NextToken from the response you just received.
+     */
+    NextToken?: NextToken;
+    /**
+     * When paginating results, use this parameter to specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the NextToken element is sent in the response. Use this NextToken value in a subsequent request to retrieve additional items.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListPermissionsResponse {
+    /**
+     * Summary information about each permission assigned by the specified private CA, including the action enabled, the policy provided, and the time of creation.
+     */
+    Permissions?: PermissionList;
+    /**
+     * When the list is truncated, this value is present and should be used for the NextToken parameter in a subsequent pagination request. 
+     */
+    NextToken?: NextToken;
+  }
   export interface ListTagsRequest {
     /**
      * The Amazon Resource Name (ARN) that was returned when you called the CreateCertificateAuthority operation. This must be of the form:   arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012  
@@ -573,7 +656,35 @@ declare namespace ACMPCA {
   export type MaxResults = number;
   export type NextToken = string;
   export type PermanentDeletionTimeInDays = number;
+  export interface Permission {
+    /**
+     * The Amazon Resource Number (ARN) of the private CA from which the permission was issued.
+     */
+    CertificateAuthorityArn?: Arn;
+    /**
+     * The time at which the permission was created.
+     */
+    CreatedAt?: TStamp;
+    /**
+     * The AWS service or entity that holds the permission. At this time, the only valid principal is acm.amazonaws.com.
+     */
+    Principal?: String;
+    /**
+     * The ID of the account that assigned the permission.
+     */
+    SourceAccount?: String;
+    /**
+     * The private CA operations that can be performed by the designated AWS service.
+     */
+    Actions?: ActionList;
+    /**
+     * The name of the policy that is associated with the permission.
+     */
+    Policy?: String;
+  }
+  export type PermissionList = Permission[];
   export type PositiveLong = number;
+  export type Principal = string;
   export interface RestoreCertificateAuthorityRequest {
     /**
      * The Amazon Resource Name (ARN) that was returned when you called the CreateCertificateAuthority operation. This must be of the form:   arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012  

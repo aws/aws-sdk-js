@@ -1001,6 +1001,10 @@ declare namespace SageMaker {
      * The maximum value for the hyperparameter. The tuning job uses floating-point values between MinValue value and this value for tuning.
      */
     MaxValue: ParameterValue;
+    /**
+     * The scale that hyperparameter tuning uses to search the hyperparameter range. For information about choosing a hyperparameter scale, see Hyperparameter Range Scaling. One of the following values:  Auto  Amazon SageMaker hyperparameter tuning chooses the best scale for the hyperparameter.  Linear  Hyperparameter tuning searches the values in the hyperparameter range by using a linear scale.  Logarithmic  Hyperparemeter tuning searches the values in the hyperparameter range by using a logarithmic scale. Logarithmic scaling works only for ranges that have only values greater than 0.  ReverseLogarithmic  Hyperparemeter tuning searches the values in the hyperparameter range by using a reverse logarithmic scale. Reverse logarithmic scaling works only for ranges that are entirely within the range 0&lt;=x&lt;1.0.  
+     */
+    ScalingType?: HyperParameterScalingType;
   }
   export interface ContinuousParameterRangeSpecification {
     /**
@@ -2574,6 +2578,7 @@ declare namespace SageMaker {
      */
     MetricDefinitions?: MetricDefinitionList;
   }
+  export type HyperParameterScalingType = "Auto"|"Linear"|"Logarithmic"|"ReverseLogarithmic"|string;
   export interface HyperParameterSpecification {
     /**
      * The name of this hyperparameter. The name must be unique.
@@ -2697,7 +2702,7 @@ declare namespace SageMaker {
   export type HyperParameterTuningJobArn = string;
   export interface HyperParameterTuningJobConfig {
     /**
-     * Specifies the search strategy for hyperparameters. Currently, the only valid value is Bayesian.
+     * Specifies how hyperparameter tuning chooses the combinations of hyperparameter values to use for the training job it launches. To use the Bayesian search stategy, set this to Bayesian. To randomly search, set it to Random. For information about search strategies, see How Hyperparameter Tuning Works.
      */
     Strategy: HyperParameterTuningJobStrategyType;
     /**
@@ -2732,7 +2737,7 @@ declare namespace SageMaker {
   export type HyperParameterTuningJobObjectives = HyperParameterTuningJobObjective[];
   export type HyperParameterTuningJobSortByOptions = "Name"|"Status"|"CreationTime"|string;
   export type HyperParameterTuningJobStatus = "Completed"|"InProgress"|"Failed"|"Stopped"|"Stopping"|string;
-  export type HyperParameterTuningJobStrategyType = "Bayesian"|string;
+  export type HyperParameterTuningJobStrategyType = "Bayesian"|"Random"|string;
   export type HyperParameterTuningJobSummaries = HyperParameterTuningJobSummary[];
   export interface HyperParameterTuningJobSummary {
     /**
@@ -2842,6 +2847,10 @@ declare namespace SageMaker {
      * The maximum value of the hyperparameter to search.
      */
     MaxValue: ParameterValue;
+    /**
+     * The scale that hyperparameter tuning uses to search the hyperparameter range. For information about choosing a hyperparameter scale, see Hyperparameter Range Scaling. One of the following values:  Auto  Amazon SageMaker hyperparameter tuning chooses the best scale for the hyperparameter.  Linear  Hyperparameter tuning searches the values in the hyperparameter range by using a linear scale.  Logarithmic  Hyperparemeter tuning searches the values in the hyperparameter range by using a logarithmic scale. Logarithmic scaling works only for ranges that have only values greater than 0.  
+     */
+    ScalingType?: HyperParameterScalingType;
   }
   export interface IntegerParameterRangeSpecification {
     /**

@@ -74,8 +74,39 @@
           "shape": "InvalidStateException"
         }
       ],
-      "documentation": "<p>Creates an audit report that lists every time that the your CA private key is used. The report is saved in the Amazon S3 bucket that you specify on input. The <a>IssueCertificate</a> and <a>RevokeCertificate</a> operations use the private key. You can generate a new report every 30 minutes.</p>",
+      "documentation": "<p>Creates an audit report that lists every time that your CA private key is used. The report is saved in the Amazon S3 bucket that you specify on input. The <a>IssueCertificate</a> and <a>RevokeCertificate</a> operations use the private key. You can generate a new report every 30 minutes.</p>",
       "idempotent": true
+    },
+    "CreatePermission": {
+      "name": "CreatePermission",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreatePermissionRequest"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidArnException"
+        },
+        {
+          "shape": "PermissionAlreadyExistsException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InvalidStateException"
+        },
+        {
+          "shape": "RequestFailedException"
+        }
+      ],
+      "documentation": "<p>Assigns permissions from a private CA to a designated AWS service. Services are specified by their service principals and can be given permission to create and retrieve certificates on a private CA. Services can also be given permission to list the active permissions that the private CA has granted. For ACM to automatically renew your private CA's certificates, you must assign all possible permissions from the CA to the ACM service principal.</p> <p>At this time, you can only assign permissions to ACM (<code>acm.amazonaws.com</code>). Permissions can be revoked with the <a>DeletePermission</a> operation and listed with the <a>ListPermissions</a> operation.</p>"
     },
     "DeleteCertificateAuthority": {
       "name": "DeleteCertificateAuthority",
@@ -100,7 +131,32 @@
           "shape": "InvalidStateException"
         }
       ],
-      "documentation": "<p>Deletes a private certificate authority (CA). You must provide the ARN (Amazon Resource Name) of the private CA that you want to delete. You can find the ARN by calling the <a>ListCertificateAuthorities</a> operation. Before you can delete a CA, you must disable it. Call the <a>UpdateCertificateAuthority</a> operation and set the <b>CertificateAuthorityStatus</b> parameter to <code>DISABLED</code>. </p> <p>Additionally, you can delete a CA if you are waiting for it to be created (the <b>Status</b> field of the <a>CertificateAuthority</a> is <code>CREATING</code>). You can also delete it if the CA has been created but you haven't yet imported the signed certificate (the <b>Status</b> is <code>PENDING_CERTIFICATE</code>) into ACM PCA. </p> <p>If the CA is in one of the aforementioned states and you call <a>DeleteCertificateAuthority</a>, the CA's status changes to <code>DELETED</code>. However, the CA won't be permentantly deleted until the restoration period has passed. By default, if you do not set the <code>PermanentDeletionTimeInDays</code> parameter, the CA remains restorable for 30 days. You can set the parameter from 7 to 30 days. The <a>DescribeCertificateAuthority</a> operation returns the time remaining in the restoration window of a Private CA in the <code>DELETED</code> state. To restore an eligable CA, call the <a>RestoreCertificateAuthority</a> operation.</p>"
+      "documentation": "<p>Deletes a private certificate authority (CA). You must provide the ARN (Amazon Resource Name) of the private CA that you want to delete. You can find the ARN by calling the <a>ListCertificateAuthorities</a> operation. Before you can delete a CA, you must disable it. Call the <a>UpdateCertificateAuthority</a> operation and set the <b>CertificateAuthorityStatus</b> parameter to <code>DISABLED</code>. </p> <p>Additionally, you can delete a CA if you are waiting for it to be created (the <b>Status</b> field of the <a>CertificateAuthority</a> is <code>CREATING</code>). You can also delete it if the CA has been created but you haven't yet imported the signed certificate (the <b>Status</b> is <code>PENDING_CERTIFICATE</code>) into ACM PCA. </p> <p>If the CA is in one of the previously mentioned states and you call <a>DeleteCertificateAuthority</a>, the CA's status changes to <code>DELETED</code>. However, the CA won't be permanently deleted until the restoration period has passed. By default, if you do not set the <code>PermanentDeletionTimeInDays</code> parameter, the CA remains restorable for 30 days. You can set the parameter from 7 to 30 days. The <a>DescribeCertificateAuthority</a> operation returns the time remaining in the restoration window of a Private CA in the <code>DELETED</code> state. To restore an eligible CA, call the <a>RestoreCertificateAuthority</a> operation.</p>"
+    },
+    "DeletePermission": {
+      "name": "DeletePermission",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeletePermissionRequest"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidArnException"
+        },
+        {
+          "shape": "InvalidStateException"
+        },
+        {
+          "shape": "RequestFailedException"
+        }
+      ],
+      "documentation": "<p>Revokes permissions that a private CA assigned to a designated AWS service. Permissions can be created with the <a>CreatePermission</a> operation and listed with the <a>ListPermissions</a> operation. </p>"
     },
     "DescribeCertificateAuthority": {
       "name": "DescribeCertificateAuthority",
@@ -326,6 +382,37 @@
         }
       ],
       "documentation": "<p>Lists the private certificate authorities that you created by using the <a>CreateCertificateAuthority</a> operation.</p>"
+    },
+    "ListPermissions": {
+      "name": "ListPermissions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListPermissionsRequest"
+      },
+      "output": {
+        "shape": "ListPermissionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidArnException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        },
+        {
+          "shape": "InvalidStateException"
+        },
+        {
+          "shape": "RequestFailedException"
+        }
+      ],
+      "documentation": "<p>Lists all the permissions, if any, that have been assigned by a private CA. Permissions can be granted with the <a>CreatePermission</a> operation and revoked with the <a>DeletePermission</a> operation.</p>"
     },
     "ListTags": {
       "name": "ListTags",
@@ -556,6 +643,28 @@
       },
       "documentation": "<p>Contains information about the certificate subject. The certificate can be one issued by your private certificate authority (CA) or it can be your private CA certificate. The <b>Subject</b> field in the certificate identifies the entity that owns or controls the public key in the certificate. The entity can be a user, computer, device, or service. The <b>Subject</b> must contain an X.500 distinguished name (DN). A DN is a sequence of relative distinguished names (RDNs). The RDNs are separated by commas in the certificate. The DN must be unique for each entity, but your private CA can issue more than one certificate with the same DN to the same entity. </p>"
     },
+    "AccountId": {
+      "type": "string",
+      "max": 12,
+      "min": 12,
+      "pattern": "[0-9]+"
+    },
+    "ActionList": {
+      "type": "list",
+      "member": {
+        "shape": "ActionType"
+      },
+      "max": 3,
+      "min": 1
+    },
+    "ActionType": {
+      "type": "string",
+      "enum": [
+        "IssueCertificate",
+        "GetCertificate",
+        "ListPermissions"
+      ]
+    },
     "Arn": {
       "type": "string",
       "max": 200,
@@ -667,7 +776,7 @@
           "documentation": "<p>Structure that contains X.500 distinguished name information for your private CA.</p>"
         }
       },
-      "documentation": "<p>Contains configuration information for your private certificate authority (CA). This includes information about the class of public key algorithm and the key pair that your private CA creates when it issues a certificate, the signature algorithm it uses used when issuing certificates, and its X.500 distinguished name. You must specify this information when you call the <a>CreateCertificateAuthority</a> operation. </p>"
+      "documentation": "<p>Contains configuration information for your private certificate authority (CA). This includes information about the class of public key algorithm and the key pair that your private CA creates when it issues a certificate. It also includes the signature algorithm that it uses when issuing certificates, and its X.500 distinguished name. You must specify this information when you call the <a>CreateCertificateAuthority</a> operation. </p>"
     },
     "CertificateAuthorityStatus": {
       "type": "string",
@@ -717,15 +826,15 @@
       "members": {
         "CertificateAuthorityArn": {
           "shape": "Arn",
-          "documentation": "<p>Amazon Resource Name (ARN) of the CA to be audited. This is of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the CA to be audited. This is of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>.</p>"
         },
         "S3BucketName": {
           "shape": "String",
-          "documentation": "<p>Name of the S3 bucket that will contain the audit report.</p>"
+          "documentation": "<p>The name of the S3 bucket that will contain the audit report.</p>"
         },
         "AuditReportResponseFormat": {
           "shape": "AuditReportResponseFormat",
-          "documentation": "<p>Format in which to create the report. This can be either <b>JSON</b> or <b>CSV</b>.</p>"
+          "documentation": "<p>The format in which to create the report. This can be either <b>JSON</b> or <b>CSV</b>.</p>"
         }
       }
     },
@@ -780,6 +889,32 @@
         }
       }
     },
+    "CreatePermissionRequest": {
+      "type": "structure",
+      "required": [
+        "CertificateAuthorityArn",
+        "Principal",
+        "Actions"
+      ],
+      "members": {
+        "CertificateAuthorityArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the CA that grants the permissions. You can find the ARN by calling the <a>ListCertificateAuthorities</a> operation. This must have the following form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>"
+        },
+        "Principal": {
+          "shape": "Principal",
+          "documentation": "<p>The AWS service or identity that receives the permission. At this time, the only valid principal is <code>acm.amazonaws.com</code>.</p>"
+        },
+        "SourceAccount": {
+          "shape": "AccountId",
+          "documentation": "<p>The ID of the calling account.</p>"
+        },
+        "Actions": {
+          "shape": "ActionList",
+          "documentation": "<p>The actions that the specified AWS service principal can use. These include <code>IssueCertificate</code>, <code>GetCertificate</code>, and <code>ListPermissions</code>.</p>"
+        }
+      }
+    },
     "CrlConfiguration": {
       "type": "structure",
       "required": [
@@ -828,6 +963,27 @@
         "PermanentDeletionTimeInDays": {
           "shape": "PermanentDeletionTimeInDays",
           "documentation": "<p>The number of days to make a CA restorable after it has been deleted. This can be anywhere from 7 to 30 days, with 30 being the default.</p>"
+        }
+      }
+    },
+    "DeletePermissionRequest": {
+      "type": "structure",
+      "required": [
+        "CertificateAuthorityArn",
+        "Principal"
+      ],
+      "members": {
+        "CertificateAuthorityArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Number (ARN) of the private CA that issued the permissions. You can find the CA's ARN by calling the <a>ListCertificateAuthorities</a> operation. This must have the following form: </p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code>. </p>"
+        },
+        "Principal": {
+          "shape": "Principal",
+          "documentation": "<p>The AWS service or identity that will have its CA permissions revoked. At this time, the only valid service principal is <code>acm.amazonaws.com</code> </p>"
+        },
+        "SourceAccount": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS account that calls this operation.</p>"
         }
       }
     },
@@ -1088,6 +1244,39 @@
         }
       }
     },
+    "ListPermissionsRequest": {
+      "type": "structure",
+      "required": [
+        "CertificateAuthorityArn"
+      ],
+      "members": {
+        "CertificateAuthorityArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Number (ARN) of the private CA to inspect. You can find the ARN by calling the <a>ListCertificateAuthorities</a> operation. This must be of the form: <code>arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012</code> You can get a private CA's ARN by running the <a>ListCertificateAuthorities</a> operation.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>When paginating results, use this parameter in a subsequent request after you receive a response with truncated results. Set it to the value of <b>NextToken</b> from the response you just received.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>When paginating results, use this parameter to specify the maximum number of items to return in the response. If additional items exist beyond the number you specify, the <b>NextToken</b> element is sent in the response. Use this <b>NextToken</b> value in a subsequent request to retrieve additional items.</p>"
+        }
+      }
+    },
+    "ListPermissionsResponse": {
+      "type": "structure",
+      "members": {
+        "Permissions": {
+          "shape": "PermissionList",
+          "documentation": "<p>Summary information about each permission assigned by the specified private CA, including the action enabled, the policy provided, and the time of creation.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>When the list is truncated, this value is present and should be used for the <b>NextToken</b> parameter in a subsequent pagination request. </p>"
+        }
+      }
+    },
     "ListTagsRequest": {
       "type": "structure",
       "required": [
@@ -1136,9 +1325,52 @@
       "max": 30,
       "min": 7
     },
+    "Permission": {
+      "type": "structure",
+      "members": {
+        "CertificateAuthorityArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Number (ARN) of the private CA from which the permission was issued.</p>"
+        },
+        "CreatedAt": {
+          "shape": "TStamp",
+          "documentation": "<p>The time at which the permission was created.</p>"
+        },
+        "Principal": {
+          "shape": "String",
+          "documentation": "<p>The AWS service or entity that holds the permission. At this time, the only valid principal is <code>acm.amazonaws.com</code>.</p>"
+        },
+        "SourceAccount": {
+          "shape": "String",
+          "documentation": "<p>The ID of the account that assigned the permission.</p>"
+        },
+        "Actions": {
+          "shape": "ActionList",
+          "documentation": "<p>The private CA operations that can be performed by the designated AWS service.</p>"
+        },
+        "Policy": {
+          "shape": "String",
+          "documentation": "<p>The name of the policy that is associated with the permission.</p>"
+        }
+      },
+      "documentation": "<p>Permissions designate which private CA operations can be performed by an AWS service or entity. In order for ACM to automatically renew private certificates, you must give the ACM service principal all available permissions (<code>IssueCertificate</code>, <code>GetCertificate</code>, and <code>ListPermissions</code>). Permissions can be assigned with the <a>CreatePermission</a> operation, removed with the <a>DeletePermission</a> operation, and listed with the <a>ListPermissions</a> operation.</p>"
+    },
+    "PermissionList": {
+      "type": "list",
+      "member": {
+        "shape": "Permission"
+      },
+      "min": 0
+    },
     "PositiveLong": {
       "type": "long",
       "min": 1
+    },
+    "Principal": {
+      "type": "string",
+      "max": 128,
+      "min": 0,
+      "pattern": "^[^*]+$"
     },
     "RestoreCertificateAuthorityRequest": {
       "type": "structure",
@@ -1375,5 +1607,5 @@
       ]
     }
   },
-  "documentation": "<p>You can use the ACM PCA API to create a private certificate authority (CA). You must first call the <a>CreateCertificateAuthority</a> operation. If successful, the operation returns an Amazon Resource Name (ARN) for your private CA. Use this ARN as input to the <a>GetCertificateAuthorityCsr</a> operation to retrieve the certificate signing request (CSR) for your private CA certificate. Sign the CSR using the root or an intermediate CA in your on-premises PKI hierarchy, and call the <a>ImportCertificateAuthorityCertificate</a> to import your signed private CA certificate into ACM PCA. </p> <p>Use your private CA to issue and revoke certificates. These are private certificates that identify and secure client computers, servers, applications, services, devices, and users over SSLS/TLS connections within your organization. Call the <a>IssueCertificate</a> operation to issue a certificate. Call the <a>RevokeCertificate</a> operation to revoke a certificate. </p> <note> <p>Certificates issued by your private CA can be trusted only within your organization, not publicly.</p> </note> <p>Your private CA can optionally create a certificate revocation list (CRL) to track the certificates you revoke. To create a CRL, you must specify a <a>RevocationConfiguration</a> object when you call the <a>CreateCertificateAuthority</a> operation. ACM PCA writes the CRL to an S3 bucket that you specify. You must specify a bucket policy that grants ACM PCA write permission. </p> <p>You can also call the <a>CreateCertificateAuthorityAuditReport</a> to create an optional audit report, which enumerates all of the issued, valid, expired, and revoked certificates from the CA.</p> <note> <p>Each ACM PCA API operation has a throttling limit which determines the number of times the operation can be called per second. For more information, see <a href=\"acm-pca/latest/userguide/PcaLimits.html#PcaLimits-api\">API Rate Limits in ACM PCA</a> in the ACM PCA user guide.</p> </note>"
+  "documentation": "<p>You can use the ACM PCA API to create a private certificate authority (CA). You must first call the <a>CreateCertificateAuthority</a> operation. If successful, the operation returns an Amazon Resource Name (ARN) for your private CA. Use this ARN as input to the <a>GetCertificateAuthorityCsr</a> operation to retrieve the certificate signing request (CSR) for your private CA certificate. Sign the CSR using the root or an intermediate CA in your on-premises PKI hierarchy, and call the <a>ImportCertificateAuthorityCertificate</a> to import your signed private CA certificate into ACM PCA. </p> <p>Use your private CA to issue and revoke certificates. These are private certificates that identify and secure client computers, servers, applications, services, devices, and users over SSLS/TLS connections within your organization. Call the <a>IssueCertificate</a> operation to issue a certificate. Call the <a>RevokeCertificate</a> operation to revoke a certificate. </p> <note> <p>Certificates issued by your private CA can be trusted only within your organization, not publicly.</p> </note> <p>Your private CA can optionally create a certificate revocation list (CRL) to track the certificates you revoke. To create a CRL, you must specify a <a>RevocationConfiguration</a> object when you call the <a>CreateCertificateAuthority</a> operation. ACM PCA writes the CRL to an S3 bucket that you specify. You must specify a bucket policy that grants ACM PCA write permission. </p> <p>You can also call the <a>CreateCertificateAuthorityAuditReport</a> to create an optional audit report, which enumerates all of the issued, valid, expired, and revoked certificates from the CA.</p> <note> <p>Each ACM PCA API operation has a throttling limit which determines the number of times the operation can be called per second. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaLimits.html#PcaLimits-api\">API Rate Limits in ACM PCA</a> in the ACM PCA user guide.</p> </note>"
 }

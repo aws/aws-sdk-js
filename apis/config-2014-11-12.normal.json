@@ -560,7 +560,7 @@
       "output": {
         "shape": "DescribeRemediationConfigurationsResponse"
       },
-      "documentation": "<p>Returns the details of one or more remediation configuration.</p>"
+      "documentation": "<p>Returns the details of one or more remediation configurations.</p>"
     },
     "DescribeRemediationExecutionStatus": {
       "name": "DescribeRemediationExecutionStatus",
@@ -579,7 +579,7 @@
           "shape": "NoSuchRemediationConfigurationException"
         }
       ],
-      "documentation": "<p>Provides a detailed view of a Remediation Execution for a set of resources including state, timestamps for when steps for the remediation execution happen, and any error messages for steps that have failed. When you specify the limit and the next token, you receive a paginated response.</p>"
+      "documentation": "<p>Provides a detailed view of a Remediation Execution for a set of resources including state, timestamps for when steps for the remediation execution occur, and any error messages for steps that have failed. When you specify the limit and the next token, you receive a paginated response.</p>"
     },
     "DescribeRetentionConfigurations": {
       "name": "DescribeRetentionConfigurations",
@@ -907,6 +907,34 @@
       ],
       "documentation": "<p>Accepts a resource type and returns a list of resource identifiers for the resources of that type. A resource identifier includes the resource type, ID, and (if available) the custom resource name. The results consist of resources that AWS Config has discovered, including those that AWS Config is not currently recording. You can narrow the results to include only resources that have specific resource IDs or a resource name.</p> <note> <p>You can specify either resource IDs or a resource name, but not both, in the same request.</p> </note> <p>The response is paginated. By default, AWS Config lists 100 resource identifiers on each page. You can customize this number with the <code>limit</code> parameter. The response includes a <code>nextToken</code> string. To get the next page of results, run the request again and specify the string for the <code>nextToken</code> parameter.</p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InvalidLimitException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        }
+      ],
+      "documentation": "<p>List the tags for AWS Config resource.</p>"
+    },
     "PutAggregationAuthorization": {
       "name": "PutAggregationAuthorization",
       "http": {
@@ -1092,7 +1120,7 @@
           "shape": "InvalidParameterValueException"
         }
       ],
-      "documentation": "<p>Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the <code>RemediationConfiguration</code> object for the AWS Config rule. AWS Config rule must already exist for you to add a remeduation configuration. The target (SSM document) must exist and have permissions to use the target. </p>"
+      "documentation": "<p>Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the <code>RemediationConfiguration</code> object for the AWS Config rule. The AWS Config rule must already exist for you to add a remediation configuration. The target (SSM document) must exist and have permissions to use the target. </p>"
     },
     "PutRetentionConfiguration": {
       "name": "PutRetentionConfiguration",
@@ -1200,6 +1228,47 @@
         }
       ],
       "documentation": "<p>Stops recording configurations of the AWS resources you have selected to record in your AWS account.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TooManyTagsException"
+        }
+      ],
+      "documentation": "<p>Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Deletes specified tags from a resource.</p>"
     }
   },
   "shapes": {
@@ -1465,6 +1534,11 @@
     },
     "AllSupported": {
       "type": "boolean"
+    },
+    "AmazonResourceName": {
+      "type": "string",
+      "max": 256,
+      "min": 1
     },
     "AvailabilityZone": {
       "type": "string"
@@ -2076,7 +2150,7 @@
         },
         "arn": {
           "shape": "ARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>"
+          "documentation": "<p>accoun</p>"
         },
         "resourceType": {
           "shape": "ResourceType",
@@ -2338,7 +2412,7 @@
       "members": {
         "ConfigRuleName": {
           "shape": "StringWithCharLimit64",
-          "documentation": "<p>The name of the AWS Config rule for which you want to delete remediation configuration for.</p>"
+          "documentation": "<p>The name of the AWS Config rule for which you want to delete remediation configuration.</p>"
         },
         "ResourceType": {
           "shape": "String",
@@ -2861,11 +2935,11 @@
       "members": {
         "ConfigRuleName": {
           "shape": "StringWithCharLimit64",
-          "documentation": "<p>A list of config rule names.</p>"
+          "documentation": "<p>A list of AWS Config rule names.</p>"
         },
         "ResourceKeys": {
           "shape": "ResourceKeys",
-          "documentation": "<p>A list of resource keys object. </p>"
+          "documentation": "<p>A list of resource keys to be processed with the current request. Each element in the list consists of the resource type and resource ID. </p>"
         },
         "Limit": {
           "shape": "Limit",
@@ -2882,7 +2956,7 @@
       "members": {
         "RemediationExecutionStatuses": {
           "shape": "RemediationExecutionStatuses",
-          "documentation": "<p>Returns a list of remediation execution statuses object.</p>"
+          "documentation": "<p>Returns a list of remediation execution statuses objects.</p>"
         },
         "NextToken": {
           "shape": "StringWithCharLimit256",
@@ -3049,14 +3123,14 @@
       "members": {
         "FailureMessage": {
           "shape": "String",
-          "documentation": "<p>Returns a failure message. For example, the resource is compliant.</p>"
+          "documentation": "<p>Returns a failure message. For example, the resource is already compliant.</p>"
         },
         "FailedItems": {
           "shape": "RemediationConfigurations",
           "documentation": "<p>Returns remediation configurations of the failed items.</p>"
         }
       },
-      "documentation": "<p>List of each of the failed remediation with specific reasons.</p>"
+      "documentation": "<p>List of each of the failed remediations with specific reasons.</p>"
     },
     "FailedRemediationBatches": {
       "type": "list",
@@ -3566,6 +3640,39 @@
       },
       "documentation": "<p/>"
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are <code>ConfigRule</code>, <code>ConfigurationAggregator</code> and <code>AggregatorAuthorization</code>.</p>"
+        },
+        "Limit": {
+          "shape": "Limit",
+          "documentation": "<p>The maximum number of tags returned on each page. The limit maximum is 50. You cannot specify a number greater than 50. If you specify 0, AWS Config uses the default. </p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. </p>"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags for the resource.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The nextToken string returned on a previous page that you use to get the next page of results in a paginated response. </p>"
+        }
+      }
+    },
     "Long": {
       "type": "long"
     },
@@ -3908,7 +4015,7 @@
         },
         "TargetId": {
           "shape": "StringWithCharLimit256",
-          "documentation": "<p>Public ID is document.</p>"
+          "documentation": "<p>Target ID is the name of the public document.</p>"
         },
         "TargetVersion": {
           "shape": "String",
@@ -3986,7 +4093,7 @@
         },
         "ErrorMessage": {
           "shape": "String",
-          "documentation": "<p>An error message if the step was interupted during execution.</p>"
+          "documentation": "<p>An error message if the step was interrupted during execution.</p>"
         },
         "StartTime": {
           "shape": "Date",
@@ -4452,7 +4559,7 @@
         },
         "ResourceKeys": {
           "shape": "ResourceKeys",
-          "documentation": "<p>A list of resource key object.</p>"
+          "documentation": "<p>A list of resource keys to be processed with the current request. Each element in the list consists of the resource type and resource ID. </p>"
         }
       }
     },
@@ -4461,11 +4568,11 @@
       "members": {
         "FailureMessage": {
           "shape": "String",
-          "documentation": "<p>Returns a failure message. For example, the resource is compliant.</p>"
+          "documentation": "<p>Returns a failure message. For example, the resource is already compliant.</p>"
         },
         "FailedItems": {
           "shape": "ResourceKeys",
-          "documentation": "<p>For resources that have failed to start execuition the API returns a resource key object.</p>"
+          "documentation": "<p>For resources that have failed to start execution, the API returns a resource key object.</p>"
         }
       }
     },
@@ -4538,6 +4645,63 @@
     "SupplementaryConfigurationValue": {
       "type": "string"
     },
+    "Tag": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "TagKey",
+          "documentation": "<p>One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values.</p>"
+        },
+        "Value": {
+          "shape": "TagValue",
+          "documentation": "<p>The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).</p>"
+        }
+      },
+      "documentation": "<p>The tags for the resource. The metadata that you apply to a resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>"
+    },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "max": 50,
+      "min": 1
+    },
+    "TagList": {
+      "type": "list",
+      "member": {
+        "shape": "Tag"
+      },
+      "max": 50,
+      "min": 1
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "Tags"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are <code>ConfigRule</code>, <code>ConfigurationAggregator</code> and <code>AggregatorAuthorization</code>.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>An array of tag object.</p>"
+        }
+      }
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0
+    },
     "Tags": {
       "type": "map",
       "key": {
@@ -4551,6 +4715,23 @@
       "type": "list",
       "member": {
         "shape": "AggregateResourceIdentifier"
+      }
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "TagKeys"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the supported resources are <code>ConfigRule</code>, <code>ConfigurationAggregator</code> and <code>AggregatorAuthorization</code>.</p>"
+        },
+        "TagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>The keys of the tags to be removed.</p>"
+        }
       }
     },
     "Value": {
