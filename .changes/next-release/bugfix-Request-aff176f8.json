@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Request",
+  "description": "Fix nextPage() method signature"
+}
