@@ -243,7 +243,8 @@
     "name": "Health"
   },
   "iam": {
-    "name": "IAM"
+    "name": "IAM",
+    "cors": true
   },
   "importexport": {
     "name": "ImportExport"
@@ -533,7 +534,8 @@
   },
   "resourcegroups": {
     "prefix": "resource-groups",
-    "name": "ResourceGroups"
+    "name": "ResourceGroups",
+    "cors": true
   },
   "alexaforbusiness": {
     "name": "AlexaForBusiness"

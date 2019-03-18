@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "cors",
+  "description": "add cors support for IAM and ResouceGroups services"
+}
