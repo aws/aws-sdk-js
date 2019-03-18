@@ -110,7 +110,6 @@
         req = build('suggest', params);
         expect(req.method).to.equal('GET');
         expect(req.path.split('?')[1]).to.equal('format=sdk&pretty=true&q=foo&suggester=bar');
-        return expect(!!req.body).to.be['false'];
       });
     });
   });

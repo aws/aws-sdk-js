@@ -296,7 +296,7 @@
       });
 
       describe('body', function() {
-        ['GET', 'HEAD', 'DELETE'].forEach(function(method) {
+        ['HEAD', 'DELETE'].forEach(function(method) {
           it('does not populate a body on a ' + method + ' request', function() {
             request.params = {
               Data: 'abc'
@@ -316,6 +316,21 @@
             });
             expect(build().httpRequest.body).to.equal('');
           });
+        });
+
+        it('does not send empty object string', function() {
+          request.params = {};
+          defop({
+            input: {
+              payload: 'Data',
+              members: {
+                Data: {
+                  type: 'string'
+                }
+              }
+            }
+          });
+          expect(build().httpRequest.body).to.eql('');
         });
 
         it('builds root element if rules contains root', function() {
