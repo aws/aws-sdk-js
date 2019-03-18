@@ -10648,6 +10648,10 @@ declare namespace EC2 {
      * Indicates whether the AFI is public.
      */
     Public?: Boolean;
+    /**
+     * Indicates whether data retention support is enabled for the AFI.
+     */
+    DataRetentionSupport?: Boolean;
   }
   export interface FpgaImageAttribute {
     /**

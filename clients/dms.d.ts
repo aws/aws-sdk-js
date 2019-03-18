@@ -21,6 +21,14 @@ declare class DMS extends Service {
    */
   addTagsToResource(callback?: (err: AWSError, data: DMS.Types.AddTagsToResourceResponse) => void): Request<DMS.Types.AddTagsToResourceResponse, AWSError>;
   /**
+   * Applies a pending maintenance action to a resource (for example, to a replication instance).
+   */
+  applyPendingMaintenanceAction(params: DMS.Types.ApplyPendingMaintenanceActionMessage, callback?: (err: AWSError, data: DMS.Types.ApplyPendingMaintenanceActionResponse) => void): Request<DMS.Types.ApplyPendingMaintenanceActionResponse, AWSError>;
+  /**
+   * Applies a pending maintenance action to a resource (for example, to a replication instance).
+   */
+  applyPendingMaintenanceAction(callback?: (err: AWSError, data: DMS.Types.ApplyPendingMaintenanceActionResponse) => void): Request<DMS.Types.ApplyPendingMaintenanceActionResponse, AWSError>;
+  /**
    * Creates an endpoint using the provided settings.
    */
   createEndpoint(params: DMS.Types.CreateEndpointMessage, callback?: (err: AWSError, data: DMS.Types.CreateEndpointResponse) => void): Request<DMS.Types.CreateEndpointResponse, AWSError>;
@@ -180,6 +188,14 @@ declare class DMS extends Service {
    * Returns information about the replication instance types that can be created in the specified region.
    */
   describeOrderableReplicationInstances(callback?: (err: AWSError, data: DMS.Types.DescribeOrderableReplicationInstancesResponse) => void): Request<DMS.Types.DescribeOrderableReplicationInstancesResponse, AWSError>;
+  /**
+   * For internal use only
+   */
+  describePendingMaintenanceActions(params: DMS.Types.DescribePendingMaintenanceActionsMessage, callback?: (err: AWSError, data: DMS.Types.DescribePendingMaintenanceActionsResponse) => void): Request<DMS.Types.DescribePendingMaintenanceActionsResponse, AWSError>;
+  /**
+   * For internal use only
+   */
+  describePendingMaintenanceActions(callback?: (err: AWSError, data: DMS.Types.DescribePendingMaintenanceActionsResponse) => void): Request<DMS.Types.DescribePendingMaintenanceActionsResponse, AWSError>;
   /**
    * Returns the status of the RefreshSchemas operation.
    */
@@ -457,6 +473,26 @@ declare namespace DMS {
   }
   export interface AddTagsToResourceResponse {
   }
+  export interface ApplyPendingMaintenanceActionMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the AWS DMS resource that the pending maintenance action applies to.
+     */
+    ReplicationInstanceArn: String;
+    /**
+     * The pending maintenance action to apply to this resource.
+     */
+    ApplyAction: String;
+    /**
+     * A value that specifies the type of opt-in request, or undoes an opt-in request. An opt-in request of type immediate cannot be undone. Valid values:    immediate - Apply the maintenance action immediately.    next-maintenance - Apply the maintenance action during the next maintenance window for the resource.    undo-opt-in - Cancel any existing next-maintenance opt-in requests.  
+     */
+    OptInType: String;
+  }
+  export interface ApplyPendingMaintenanceActionResponse {
+    /**
+     * The AWS DMS resource that the pending maintenance action will be applied to.
+     */
+    ResourcePendingMaintenanceActions?: ResourcePendingMaintenanceActions;
+  }
   export type AuthMechanismValue = "default"|"mongodb_cr"|"scram_sha_1"|string;
   export type AuthTypeValue = "no"|"password"|string;
   export interface AvailabilityZone {
@@ -465,6 +501,7 @@ declare namespace DMS {
      */
     Name?: String;
   }
+  export type AvailabilityZonesList = String[];
   export type Boolean = boolean;
   export type BooleanOptional = boolean;
   export interface Certificate {
@@ -624,6 +661,7 @@ declare namespace DMS {
      * Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS in the AWS Database Migration User Guide. 
      */
     ElasticsearchSettings?: ElasticsearchSettings;
+    RedshiftSettings?: RedshiftSettings;
   }
   export interface CreateEndpointResponse {
     /**
@@ -807,6 +845,7 @@ declare namespace DMS {
      */
     ReplicationTask?: ReplicationTask;
   }
+  export type DataFormatValue = "csv"|"parquet"|string;
   export interface DeleteCertificateMessage {
     /**
      * The Amazon Resource Name (ARN) of the deleted certificate.
@@ -1091,6 +1130,34 @@ declare namespace DMS {
      */
     Marker?: String;
   }
+  export interface DescribePendingMaintenanceActionsMessage {
+    /**
+     * The ARN of the replication instance.
+     */
+    ReplicationInstanceArn?: String;
+    /**
+     * 
+     */
+    Filters?: FilterList;
+    /**
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+    /**
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.  Default: 100 Constraints: Minimum 20, maximum 100.
+     */
+    MaxRecords?: IntegerOptional;
+  }
+  export interface DescribePendingMaintenanceActionsResponse {
+    /**
+     * The pending maintenance action.
+     */
+    PendingMaintenanceActions?: PendingMaintenanceActions;
+    /**
+     *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
+     */
+    Marker?: String;
+  }
   export interface DescribeRefreshSchemasStatusMessage {
     /**
      * The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
@@ -1220,6 +1287,10 @@ declare namespace DMS {
      *  An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords. 
      */
     Marker?: String;
+    /**
+     * Set this flag to avoid returning setting information. Use this to reduce overhead when settings are too large. Choose TRUE to use this flag, otherwise choose FALSE (default).
+     */
+    WithoutSettings?: BooleanOptional;
   }
   export interface DescribeReplicationTasksResponse {
     /**
@@ -1322,6 +1393,8 @@ declare namespace DMS {
      */
     ErrorRetryDuration?: IntegerOptional;
   }
+  export type EncodingTypeValue = "plain"|"plain-dictionary"|"rle-dictionary"|string;
+  export type EncryptionModeValue = "sse-s3"|"sse-kms"|string;
   export interface Endpoint {
     /**
      * The database endpoint identifier. Identifiers must begin with a letter; must contain only ASCII letters, digits, and hyphens; and must not end with a hyphen or contain two consecutive hyphens.
@@ -1400,7 +1473,7 @@ declare namespace DMS {
      */
     S3Settings?: S3Settings;
     /**
-     * The settings in JSON format for the DMS transfer type of source endpoint.  Possible attributes include the following:    serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.    bucketName - The name of the S3 bucket to use.    compressionType - An optional parameter to use GZIP to compress the target files. To use GZIP, set this value to NONE (the default). To keep the files uncompressed, don't use this value.    Shorthand syntax for these attributes is as follows: ServiceAccessRoleArn=string,BucketName=string,CompressionType=string  JSON syntax for these attributes is as follows: { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" }  
+     * The settings in JSON format for the DMS transfer type of source endpoint.  Possible attributes include the following:    serviceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket.    bucketName - The name of the S3 bucket to use.    compressionType - An optional parameter to use GZIP to compress the target files. To use GZIP, set this value to NONE (the default). To keep the files uncompressed, don't use this value.   Shorthand syntax for these attributes is as follows: ServiceAccessRoleArn=string,BucketName=string,CompressionType=string  JSON syntax for these attributes is as follows: { "ServiceAccessRoleArn": "string", "BucketName": "string", "CompressionType": "none"|"gzip" }  
      */
     DmsTransferSettings?: DmsTransferSettings;
     /**
@@ -1415,6 +1488,10 @@ declare namespace DMS {
      * The settings for the Elasticsearch source endpoint. For more information, see the ElasticsearchSettings structure.
      */
     ElasticsearchSettings?: ElasticsearchSettings;
+    /**
+     * Settings for the Amazon Redshift endpoint
+     */
+    RedshiftSettings?: RedshiftSettings;
   }
   export type EndpointList = Endpoint[];
   export interface Event {
@@ -1640,6 +1717,7 @@ declare namespace DMS {
      * Settings in JSON format for the target Elasticsearch endpoint. For more information about the available settings, see Extra Connection Attributes When Using Elasticsearch as a Target for AWS DMS in the AWS Database Migration User Guide. 
      */
     ElasticsearchSettings?: ElasticsearchSettings;
+    RedshiftSettings?: RedshiftSettings;
   }
   export interface ModifyEndpointResponse {
     /**
@@ -1867,8 +1945,41 @@ declare namespace DMS {
      * The amount of storage (in gigabytes) that is allocated for the replication instance.
      */
     IncludedAllocatedStorage?: Integer;
+    /**
+     * List of availability zones for this replication instance.
+     */
+    AvailabilityZones?: AvailabilityZonesList;
   }
   export type OrderableReplicationInstanceList = OrderableReplicationInstance[];
+  export type ParquetVersionValue = "parquet-1-0"|"parquet-2-0"|string;
+  export interface PendingMaintenanceAction {
+    /**
+     * The type of pending maintenance action that is available for the resource.
+     */
+    Action?: String;
+    /**
+     * The date of the maintenance window when the action will be applied. The maintenance action will be applied to the resource during its first maintenance window after this date. If this date is specified, any next-maintenance opt-in requests are ignored.
+     */
+    AutoAppliedAfterDate?: TStamp;
+    /**
+     * The date when the maintenance action will be automatically applied. The maintenance action will be applied to the resource on this date regardless of the maintenance window for the resource. If this date is specified, any immediate opt-in requests are ignored.
+     */
+    ForcedApplyDate?: TStamp;
+    /**
+     * Indicates the type of opt-in request that has been received for the resource.
+     */
+    OptInStatus?: String;
+    /**
+     * The effective date when the pending maintenance action will be applied to the resource. This date takes into account opt-in requests received from the ApplyPendingMaintenanceAction API, the AutoAppliedAfterDate, and the ForcedApplyDate. This value is blank if an opt-in request has not been received and nothing has been specified as AutoAppliedAfterDate or ForcedApplyDate.
+     */
+    CurrentApplyDate?: TStamp;
+    /**
+     * A description providing more detail about the maintenance action.
+     */
+    Description?: String;
+  }
+  export type PendingMaintenanceActionDetails = PendingMaintenanceAction[];
+  export type PendingMaintenanceActions = ResourcePendingMaintenanceActions[];
   export interface RebootReplicationInstanceMessage {
     /**
      * The Amazon Resource Name (ARN) of the replication instance.
@@ -1884,6 +1995,108 @@ declare namespace DMS {
      * The replication instance that is being rebooted. 
      */
     ReplicationInstance?: ReplicationInstance;
+  }
+  export interface RedshiftSettings {
+    /**
+     * Allows any date format, including invalid formats such as 00/00/00 00:00:00, to be loaded without generating an error. You can choose TRUE or FALSE (default). This parameter applies only to TIMESTAMP and DATE columns. Always use ACCEPTANYDATE with the DATEFORMAT parameter. If the date format for the data does not match the DATEFORMAT specification, Amazon Redshift inserts a NULL value into that field. 
+     */
+    AcceptAnyDate?: BooleanOptional;
+    /**
+     * Code to run after connecting. This should be the code, not a filename.
+     */
+    AfterConnectScript?: String;
+    /**
+     * The location where the CSV files are stored before being uploaded to the S3 bucket. 
+     */
+    BucketFolder?: String;
+    /**
+     * The name of the S3 bucket you want to use
+     */
+    BucketName?: String;
+    /**
+     * Sets the amount of time to wait (in milliseconds) before timing out, beginning from when you initially establish a connection.
+     */
+    ConnectionTimeout?: IntegerOptional;
+    /**
+     * The name of the Amazon Redshift data warehouse (service) you are working with.
+     */
+    DatabaseName?: String;
+    /**
+     * The date format you are using. Valid values are auto (case-sensitive), your date format string enclosed in quotes, or NULL. If this is left unset (NULL), it defaults to a format of 'YYYY-MM-DD'. Using auto recognizes most strings, even some that are not supported when you use a date format string.  If your date and time values use formats different from each other, set this to auto. 
+     */
+    DateFormat?: String;
+    /**
+     * Specifies whether AWS DMS should migrate empty CHAR and VARCHAR fields as NULL. A value of TRUE sets empty CHAR and VARCHAR fields to null. The default is FALSE.
+     */
+    EmptyAsNull?: BooleanOptional;
+    /**
+     * The type of server side encryption you want to use for your data. This is part of the endpoint settings or the extra connections attributes for Amazon S3. You can choose either SSE_S3 (default) or SSE_KMS. To use SSE_S3, create an IAM role with a policy that allows "arn:aws:s3:::*" to use the following actions: "s3:PutObject", "s3:ListBucket".
+     */
+    EncryptionMode?: EncryptionModeValue;
+    /**
+     * Specifies the number of threads used to upload a single file. This accepts a value between 1 and 64. It defaults to 10.
+     */
+    FileTransferUploadStreams?: IntegerOptional;
+    /**
+     * Sets the amount of time to wait (in milliseconds) before timing out, beginning from when you begin loading.
+     */
+    LoadTimeout?: IntegerOptional;
+    /**
+     * Specifies the maximum size (in KB) of any CSV file used to transfer data to Amazon Redshift. This accepts a value between 1 and 1048576. It defaults to 32768 KB (32 MB).
+     */
+    MaxFileSize?: IntegerOptional;
+    /**
+     * The password for the user named in the username property.
+     */
+    Password?: SecretString;
+    /**
+     * The port number for Amazon Redshift. The default value is 5439.
+     */
+    Port?: IntegerOptional;
+    /**
+     * Removes surrounding quotation marks from strings in the incoming data. All characters within the quotation marks, including delimiters, are retained. Choose TRUE to remove quotation marks. The default is FALSE.
+     */
+    RemoveQuotes?: BooleanOptional;
+    /**
+     * A list of chars you want to replace. Use with ReplaceChars.
+     */
+    ReplaceInvalidChars?: String;
+    /**
+     * Replaces invalid characters specified in ReplaceInvalidChars, substituting the specified value instead. The default is "?".
+     */
+    ReplaceChars?: String;
+    /**
+     * The name of the Amazon Redshift cluster you are using.
+     */
+    ServerName?: String;
+    /**
+     * The ARN of the role that has access to the Redshift service.
+     */
+    ServiceAccessRoleArn?: String;
+    /**
+     * If you are using SSE_KMS for the EncryptionMode, provide the KMS Key ID. The key you use needs an attached policy that enables IAM user permissions and allows use of the key.
+     */
+    ServerSideEncryptionKmsKeyId?: String;
+    /**
+     * The time format you want to use. Valid values are auto (case-sensitive), 'timeformat_string', 'epochsecs', or 'epochmillisecs'. It defaults to 10. Using auto recognizes most strings, even some that are not supported when you use a time format string.  If your date and time values use formats different from each other, set this to auto. 
+     */
+    TimeFormat?: String;
+    /**
+     * Removes the trailing white space characters from a VARCHAR string. This parameter applies only to columns with a VARCHAR data type. Choose TRUE to remove unneeded white space. The default is FALSE.
+     */
+    TrimBlanks?: BooleanOptional;
+    /**
+     * Truncates data in columns to the appropriate number of characters, so that it fits in the column. Applies only to columns with a VARCHAR or CHAR data type, and rows with a size of 4 MB or less. Choose TRUE to truncate data. The default is FALSE.
+     */
+    TruncateColumns?: BooleanOptional;
+    /**
+     * An Amazon Redshift user name for a registered user.
+     */
+    Username?: String;
+    /**
+     * The size of the write buffer to use in rows. Valid values range from 1 to 2048. Defaults to 1024. Use this setting to tune performance. 
+     */
+    WriteBufferSize?: IntegerOptional;
   }
   export interface RefreshSchemasMessage {
     /**
@@ -2239,6 +2452,16 @@ declare namespace DMS {
      */
     TablesErrored?: Integer;
   }
+  export interface ResourcePendingMaintenanceActions {
+    /**
+     * The Amazon Resource Name (ARN) of the DMS resource that the pending maintenance action applies to. For information about creating an ARN, see  Constructing an Amazon Resource Name (ARN) in the DMS documentation.
+     */
+    ResourceIdentifier?: String;
+    /**
+     * Detailed information about the pending maintenance action.
+     */
+    PendingMaintenanceActionDetails?: PendingMaintenanceActionDetails;
+  }
   export interface S3Settings {
     /**
      *  The Amazon Resource Name (ARN) used by the service access IAM role. 
@@ -2265,9 +2488,49 @@ declare namespace DMS {
      */
     BucketName?: String;
     /**
-     *  An optional parameter to use GZIP to compress the target files. Set to GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed. 
+     *  An optional parameter to use GZIP to compress the target files. Set to GZIP to compress the target files. Set to NONE (the default) or do not use to leave the files uncompressed. Applies to both CSV and PARQUET data formats. 
      */
     CompressionType?: CompressionTypeValue;
+    /**
+     * The type of server side encryption you want to use for your data. This is part of the endpoint settings or the extra connections attributes for Amazon S3. You can choose either SSE_S3 (default) or SSE_KMS. To use SSE_S3, you need an IAM role with permission to allow "arn:aws:s3:::dms-*" to use the following actions:   s3:CreateBucket   s3:ListBucket   s3:DeleteBucket   s3:GetBucketLocation   s3:GetObject   s3:PutObject   s3:DeleteObject   s3:GetObjectVersion   s3:GetBucketPolicy   s3:PutBucketPolicy   s3:DeleteBucketPolicy  
+     */
+    EncryptionMode?: EncryptionModeValue;
+    /**
+     * If you are using SSE_KMS for the EncryptionMode, provide the KMS Key ID. The key you use needs an attached policy that enables IAM user permissions and allows use of the key. Here is a CLI example: aws dms create-endpoint --endpoint-identifier &lt;value&gt; --endpoint-type target --engine-name s3 --s3-settings ServiceAccessRoleArn=&lt;value&gt;,BucketFolder=&lt;value&gt;,BucketName=&lt;value&gt;,EncryptionMode=SSE_KMS,ServerSideEncryptionKmsKeyId=&lt;value&gt;  
+     */
+    ServerSideEncryptionKmsKeyId?: String;
+    /**
+     * The format of the data which you want to use for output. You can choose one of the following:     CSV : This is a row-based format with comma-separated values.     PARQUET : Apache Parquet is a columnar storage format that features efficient compression and provides faster query response.   
+     */
+    DataFormat?: DataFormatValue;
+    /**
+     * The type of encoding you are using: RLE_DICTIONARY (default), PLAIN, or PLAIN_DICTIONARY.    RLE_DICTIONARY uses a combination of bit-packing and run-length encoding to store repeated values more efficiently.    PLAIN does not use encoding at all. Values are stored as they are.    PLAIN_DICTIONARY builds a dictionary of the values encountered in a given column. The dictionary is stored in a dictionary page for each column chunk.  
+     */
+    EncodingType?: EncodingTypeValue;
+    /**
+     * The maximum size of an encoded dictionary page of a column. If the dictionary page exceeds this, this column is stored using an encoding type of PLAIN. Defaults to 1024 * 1024 bytes (1MiB), the maximum size of a dictionary page before it reverts to PLAIN encoding. For PARQUET format only. 
+     */
+    DictPageSizeLimit?: IntegerOptional;
+    /**
+     * The number of rows in a row group. A smaller row group size provides faster reads. But as the number of row groups grows, the slower writes become. Defaults to 10,000 (ten thousand) rows. For PARQUET format only.  If you choose a value larger than the maximum, RowGroupLength is set to the max row group length in bytes (64 * 1024 * 1024). 
+     */
+    RowGroupLength?: IntegerOptional;
+    /**
+     * The size of one data page in bytes. Defaults to 1024 * 1024 bytes (1MiB). For PARQUET format only. 
+     */
+    DataPageSize?: IntegerOptional;
+    /**
+     * The version of Apache Parquet format you want to use: PARQUET_1_0 (default) or PARQUET_2_0.
+     */
+    ParquetVersion?: ParquetVersionValue;
+    /**
+     * Enables statistics for Parquet pages and rowGroups. Choose TRUE to enable statistics, choose FALSE to disable. Statistics include NULL, DISTINCT, MAX, and MIN values. Defaults to TRUE. For PARQUET format only.
+     */
+    EnableStatistics?: BooleanOptional;
+    /**
+     * Option to write only INSERT operations to the comma-separated value (CSV) output files. By default, the first field in a CSV record contains the letter I (insert), U (update) or D (delete) to indicate whether the row was inserted, updated, or deleted at the source database. If cdcInsertsOnly is set to true, then only INSERTs are recorded in the CSV file, without the I annotation on each line. Valid values are TRUE and FALSE.
+     */
+    CdcInsertsOnly?: BooleanOptional;
   }
   export type SchemaList = String[];
   export type SecretString = string;

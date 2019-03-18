@@ -16592,6 +16592,11 @@
           "shape": "Boolean",
           "documentation": "<p>Indicates whether the AFI is public.</p>",
           "locationName": "public"
+        },
+        "DataRetentionSupport": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether data retention support is enabled for the AFI.</p>",
+          "locationName": "dataRetentionSupport"
         }
       },
       "documentation": "<p>Describes an Amazon FPGA image (AFI).</p>"

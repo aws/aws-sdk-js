@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.422.0-->
+<!--LATEST=2.423.0-->
 <!--ENTRYINSERT-->
+
+## 2.423.0
+* feature: Chime: This release adds support for the Amazon Chime Business Calling and Voice Connector features.
+* feature: DMS: S3 Endpoint Settings added support for 1) Migrating to Amazon S3 as a target in Parquet format 2) Encrypting S3 objects after migration with custom KMS Server-Side encryption. Redshift Endpoint Settings added support for encrypting intermediate S3 objects during migration with custom KMS Server-Side encryption. 
+* feature: EC2: DescribeFpgaImages API now returns a new DataRetentionSupport attribute to indicate if the AFI meets the requirements to support DRAM data retention. DataRetentionSupport is a read-only attribute.
 
 ## 2.422.0
 * feature: ACM: AWS Certificate Manager has added a new API action, RenewCertificate. RenewCertificate causes ACM to force the renewal of any private certificate which has been exported.
