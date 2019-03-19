@@ -61,6 +61,14 @@ declare class EKS extends Service {
    */
   listUpdates(callback?: (err: AWSError, data: EKS.Types.ListUpdatesResponse) => void): Request<EKS.Types.ListUpdatesResponse, AWSError>;
   /**
+   * Updates an Amazon EKS cluster configuration. Your cluster continues to function during the update. The response output includes an update ID that you can use to track the status of your cluster update with the DescribeUpdate API operation. Currently, the only cluster configuration changes supported are to enable or disable Amazon EKS public and private API server endpoints. For more information, see Amazon EKS Cluster Endpoint Access Control in the  Amazon EKS User Guide . Cluster updates are asynchronous, and they should finish within a few minutes. During an update, the cluster status moves to UPDATING (this status transition is eventually consistent). When the update is complete (either Failed or Successful), the cluster status moves to Active.
+   */
+  updateClusterConfig(params: EKS.Types.UpdateClusterConfigRequest, callback?: (err: AWSError, data: EKS.Types.UpdateClusterConfigResponse) => void): Request<EKS.Types.UpdateClusterConfigResponse, AWSError>;
+  /**
+   * Updates an Amazon EKS cluster configuration. Your cluster continues to function during the update. The response output includes an update ID that you can use to track the status of your cluster update with the DescribeUpdate API operation. Currently, the only cluster configuration changes supported are to enable or disable Amazon EKS public and private API server endpoints. For more information, see Amazon EKS Cluster Endpoint Access Control in the  Amazon EKS User Guide . Cluster updates are asynchronous, and they should finish within a few minutes. During an update, the cluster status moves to UPDATING (this status transition is eventually consistent). When the update is complete (either Failed or Successful), the cluster status moves to Active.
+   */
+  updateClusterConfig(callback?: (err: AWSError, data: EKS.Types.UpdateClusterConfigResponse) => void): Request<EKS.Types.UpdateClusterConfigResponse, AWSError>;
+  /**
    * Updates an Amazon EKS cluster to the specified Kubernetes version. Your cluster continues to function during the update. The response output includes an update ID that you can use to track the status of your cluster update with the DescribeUpdate API operation. Cluster updates are asynchronous, and they should finish within a few minutes. During an update, the cluster status moves to UPDATING (this status transition is eventually consistent). When the update is complete (either Failed or Successful), the cluster status moves to Active.
    */
   updateClusterVersion(params: EKS.Types.UpdateClusterVersionRequest, callback?: (err: AWSError, data: EKS.Types.UpdateClusterVersionResponse) => void): Request<EKS.Types.UpdateClusterVersionResponse, AWSError>;
@@ -86,6 +94,8 @@ declare class EKS extends Service {
   waitFor(state: "clusterDeleted", callback?: (err: AWSError, data: EKS.Types.DescribeClusterResponse) => void): Request<EKS.Types.DescribeClusterResponse, AWSError>;
 }
 declare namespace EKS {
+  export type Boolean = boolean;
+  export type BoxedBoolean = boolean;
   export interface Certificate {
     /**
      * The base64 encoded certificate data required to communicate with your cluster. Add this to the certificate-authority-data section of the kubeconfig file for your cluster.
@@ -118,7 +128,7 @@ declare namespace EKS {
      */
     roleArn?: String;
     /**
-     * The VPC subnets and security groups used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide.
+     * The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide.
      */
     resourcesVpcConfig?: VpcConfigResponse;
     /**
@@ -154,7 +164,7 @@ declare namespace EKS {
      */
     roleArn: String;
     /**
-     * The VPC subnets and security groups used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide. You must specify at least two subnets. You may specify up to five security groups, but we recommend that you use a dedicated security group for your cluster control plane.
+     * The VPC configuration used by the cluster control plane. Amazon EKS VPC resources have specific requirements to work properly with Kubernetes. For more information, see Cluster VPC Considerations and Cluster Security Group Considerations in the Amazon EKS User Guide. You must specify at least two subnets. You may specify up to five security groups, but we recommend that you use a dedicated security group for your cluster control plane.
      */
     resourcesVpcConfig: VpcConfigRequest;
     /**
@@ -299,6 +309,20 @@ declare namespace EKS {
      */
     errors?: ErrorDetails;
   }
+  export interface UpdateClusterConfigRequest {
+    /**
+     * The name of the Amazon EKS cluster to update.
+     */
+    name: String;
+    resourcesVpcConfig?: VpcConfigRequest;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientRequestToken?: String;
+  }
+  export interface UpdateClusterConfigResponse {
+    update?: Update;
+  }
   export interface UpdateClusterVersionRequest {
     /**
      * The name of the Amazon EKS cluster to update.
@@ -329,19 +353,27 @@ declare namespace EKS {
      */
     value?: String;
   }
-  export type UpdateParamType = "Version"|"PlatformVersion"|string;
+  export type UpdateParamType = "Version"|"PlatformVersion"|"EndpointPrivateAccess"|"EndpointPublicAccess"|string;
   export type UpdateParams = UpdateParam[];
   export type UpdateStatus = "InProgress"|"Failed"|"Cancelled"|"Successful"|string;
-  export type UpdateType = "VersionUpdate"|string;
+  export type UpdateType = "VersionUpdate"|"EndpointAccessUpdate"|string;
   export interface VpcConfigRequest {
     /**
      * Specify subnets for your Amazon EKS worker nodes. Amazon EKS creates cross-account elastic network interfaces in these subnets to allow communication between your worker nodes and the Kubernetes control plane.
      */
-    subnetIds: StringList;
+    subnetIds?: StringList;
     /**
      * Specify one or more security groups for the cross-account elastic network interfaces that Amazon EKS creates to use to allow communication between your worker nodes and the Kubernetes control plane. If you do not specify a security group, the default security group for your VPC is used.
      */
     securityGroupIds?: StringList;
+    /**
+     * Set this value to false to disable public access for your cluster's Kubernetes API server endpoint. If you disable public access, your cluster's Kubernetes API server can only receive requests from within the cluster VPC. The default value for this parameter is true, which enables public access for your Kubernetes API server. For more information, see Amazon EKS Cluster Endpoint Access Control in the  Amazon EKS User Guide .
+     */
+    endpointPublicAccess?: BoxedBoolean;
+    /**
+     * Set this value to true to enable private access for your cluster's Kubernetes API server endpoint. If you enable private access, Kubernetes API requests from within your cluster's VPC will use the private VPC endpoint. The default value for this parameter is false, which disables private access for your Kubernetes API server. For more information, see Amazon EKS Cluster Endpoint Access Control in the  Amazon EKS User Guide .
+     */
+    endpointPrivateAccess?: BoxedBoolean;
   }
   export interface VpcConfigResponse {
     /**
@@ -356,6 +388,14 @@ declare namespace EKS {
      * The VPC associated with your cluster.
      */
     vpcId?: String;
+    /**
+     * This parameter indicates whether the Amazon EKS public API server endpoint is enabled. If the Amazon EKS public API server endpoint is disabled, your cluster's Kubernetes API server can only receive requests that originate from within the cluster VPC. 
+     */
+    endpointPublicAccess?: Boolean;
+    /**
+     * This parameter indicates whether the Amazon EKS private API server endpoint is enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes API requests that originate from within your cluster's VPC will use the private VPC endpoint instead of traversing the internet.
+     */
+    endpointPrivateAccess?: Boolean;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

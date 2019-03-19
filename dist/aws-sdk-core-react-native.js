@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.423.0',
+	  VERSION: '2.424.0',
 
 	  /**
 	   * @api private
@@ -2947,7 +2947,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    }
 	  } else {
-	    req.httpRequest.body = builder.build(req.params, input);
+	    var body = builder.build(req.params, input);
+	    if (body !== '{}') { //don't send empty object
+	      req.httpRequest.body = body;
+	    }
 	    applyContentTypeHeader(req);
 	  }
 	}
@@ -2965,8 +2968,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	function buildRequest(req) {
 	  Rest.buildRequest(req);
 
-	  // never send body payload on GET/HEAD/DELETE
-	  if (['GET', 'HEAD', 'DELETE'].indexOf(req.httpRequest.method) < 0) {
+	  // never send body payload on HEAD/DELETE
+	  if (['HEAD', 'DELETE'].indexOf(req.httpRequest.method) < 0) {
 	    populateBody(req);
 	  }
 	}

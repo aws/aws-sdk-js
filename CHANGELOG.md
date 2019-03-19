@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.423.0-->
+<!--LATEST=2.424.0-->
 <!--ENTRYINSERT-->
+
+## 2.424.0
+* bugfix: Paginator: fix the issue where paginator keys are ignored in GET requests
+* bugfix: Request: Fix nextPage() method signature
+* feature: ConfigService: AWS Config adds a new API called SelectResourceConfig to run advanced queries based on resource configuration properties.
+* feature: EKS: Added support to control private/public access to the Kubernetes API-server endpoint
 
 ## 2.423.0
 * feature: Chime: This release adds support for the Amazon Chime Business Calling and Voice Connector features.

@@ -156,11 +156,11 @@ declare class ConfigService extends Service {
    */
   describeConfigRules(callback?: (err: AWSError, data: ConfigService.Types.DescribeConfigRulesResponse) => void): Request<ConfigService.Types.DescribeConfigRulesResponse, AWSError>;
   /**
-   *  Returns status information for sources within an aggregator. The status includes information about the last time AWS Config verified authorization between the source account and an aggregator account. In case of a failure, the status contains the related error code or message. 
+   * Returns status information for sources within an aggregator. The status includes information about the last time AWS Config verified authorization between the source account and an aggregator account. In case of a failure, the status contains the related error code or message. 
    */
   describeConfigurationAggregatorSourcesStatus(params: ConfigService.Types.DescribeConfigurationAggregatorSourcesStatusRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeConfigurationAggregatorSourcesStatusResponse) => void): Request<ConfigService.Types.DescribeConfigurationAggregatorSourcesStatusResponse, AWSError>;
   /**
-   *  Returns status information for sources within an aggregator. The status includes information about the last time AWS Config verified authorization between the source account and an aggregator account. In case of a failure, the status contains the related error code or message. 
+   * Returns status information for sources within an aggregator. The status includes information about the last time AWS Config verified authorization between the source account and an aggregator account. In case of a failure, the status contains the related error code or message. 
    */
   describeConfigurationAggregatorSourcesStatus(callback?: (err: AWSError, data: ConfigService.Types.DescribeConfigurationAggregatorSourcesStatusResponse) => void): Request<ConfigService.Types.DescribeConfigurationAggregatorSourcesStatusResponse, AWSError>;
   /**
@@ -399,6 +399,14 @@ declare class ConfigService extends Service {
    * Creates and updates the retention configuration with details about retention period (number of days) that AWS Config stores your historical information. The API creates the RetentionConfiguration object and names the object as default. When you have a RetentionConfiguration object named default, calling the API modifies the default object.   Currently, AWS Config supports only one retention configuration per region in your account. 
    */
   putRetentionConfiguration(callback?: (err: AWSError, data: ConfigService.Types.PutRetentionConfigurationResponse) => void): Request<ConfigService.Types.PutRetentionConfigurationResponse, AWSError>;
+  /**
+   * Accepts a structured query language (SQL) SELECT command, performs the corresponding search, and returns resource configurations matching the properties. For more information about query components, see the  Query Components  section in the AWS Config Developer Guide.
+   */
+  selectResourceConfig(params: ConfigService.Types.SelectResourceConfigRequest, callback?: (err: AWSError, data: ConfigService.Types.SelectResourceConfigResponse) => void): Request<ConfigService.Types.SelectResourceConfigResponse, AWSError>;
+  /**
+   * Accepts a structured query language (SQL) SELECT command, performs the corresponding search, and returns resource configurations matching the properties. For more information about query components, see the  Query Components  section in the AWS Config Developer Guide.
+   */
+  selectResourceConfig(callback?: (err: AWSError, data: ConfigService.Types.SelectResourceConfigResponse) => void): Request<ConfigService.Types.SelectResourceConfigResponse, AWSError>;
   /**
    * Runs an on-demand evaluation for the specified AWS Config rules against the last known configuration state of the resources. Use StartConfigRulesEvaluation when you want to test that a rule you updated is working as expected. StartConfigRulesEvaluation does not re-record the latest configuration state for your resources. It re-runs an evaluation against the last known state of your resources.  You can specify up to 25 AWS Config rules per request.  An existing StartConfigRulesEvaluation call for the specified rules must complete before you can call the API again. If you chose to have AWS Config stream to an Amazon SNS topic, you will receive a ConfigRuleEvaluationStarted notification when the evaluation starts.  You don't need to call the StartConfigRulesEvaluation API to run an evaluation for a new rule. When you create a rule, AWS Config evaluates your resources against the rule automatically.   The StartConfigRulesEvaluation API is useful if you want to run on-demand evaluations, such as the following example:   You have a custom rule that evaluates your IAM resources every 24 hours.   You update your Lambda function to add additional conditions to your rule.   Instead of waiting for the next periodic evaluation, you call the StartConfigRulesEvaluation API.   AWS Config invokes your Lambda function and evaluates your IAM resources.   Your custom rule will still run periodic evaluations every 24 hours.  
    */
@@ -1648,6 +1656,7 @@ declare namespace ConfigService {
   export type EvaluationResults = EvaluationResult[];
   export type Evaluations = Evaluation[];
   export type EventSource = "aws.config"|string;
+  export type Expression = string;
   export interface FailedRemediationBatch {
     /**
      * Returns a failure message. For example, the resource is already compliant.
@@ -1659,6 +1668,14 @@ declare namespace ConfigService {
     FailedItems?: RemediationConfigurations;
   }
   export type FailedRemediationBatches = FailedRemediationBatch[];
+  export interface FieldInfo {
+    /**
+     * Name of the field.
+     */
+    Name?: FieldName;
+  }
+  export type FieldInfoList = FieldInfo[];
+  export type FieldName = string;
   export interface GetAggregateComplianceDetailsByConfigRuleRequest {
     /**
      * The name of the configuration aggregator.
@@ -2171,6 +2188,12 @@ declare namespace ConfigService {
      */
     RetentionConfiguration?: RetentionConfiguration;
   }
+  export interface QueryInfo {
+    /**
+     * Returns a FieldInfo object.
+     */
+    SelectFields?: FieldInfoList;
+  }
   export type RecorderName = string;
   export type RecorderStatus = "Pending"|"Success"|"Failure"|string;
   export interface RecordingGroup {
@@ -2384,6 +2407,7 @@ declare namespace ConfigService {
     Value?: ResourceValueType;
   }
   export type ResourceValueType = "RESOURCE_ID"|string;
+  export type Results = String[];
   export interface RetentionConfiguration {
     /**
      * The name of the retention configuration object.
@@ -2416,6 +2440,34 @@ declare namespace ConfigService {
      * The ID of the only AWS resource that you want to trigger an evaluation for the rule. If you specify a resource ID, you must specify one resource type for ComplianceResourceTypes.
      */
     ComplianceResourceId?: BaseResourceId;
+  }
+  export interface SelectResourceConfigRequest {
+    /**
+     * The SQL query SELECT command.
+     */
+    Expression: Expression;
+    /**
+     * The maximum number of query results returned on each page. 
+     */
+    Limit?: Limit;
+    /**
+     * The nextToken string returned in a previous request that you use to request the next page of results in a paginated response. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface SelectResourceConfigResponse {
+    /**
+     * Returns the results for the SQL query.
+     */
+    Results?: Results;
+    /**
+     * Returns the QueryInfo object.
+     */
+    QueryInfo?: QueryInfo;
+    /**
+     * The nextToken string returned in a previous request that you use to request the next page of results in a paginated response. 
+     */
+    NextToken?: NextToken;
   }
   export interface Source {
     /**

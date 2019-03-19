@@ -417,7 +417,7 @@
           "shape": "InvalidLimitException"
         }
       ],
-      "documentation": "<p> Returns status information for sources within an aggregator. The status includes information about the last time AWS Config verified authorization between the source account and an aggregator account. In case of a failure, the status contains the related error code or message. </p>"
+      "documentation": "<p>Returns status information for sources within an aggregator. The status includes information about the last time AWS Config verified authorization between the source account and an aggregator account. In case of a failure, the status contains the related error code or message. </p>"
     },
     "DescribeConfigurationAggregators": {
       "name": "DescribeConfigurationAggregators",
@@ -1143,6 +1143,31 @@
         }
       ],
       "documentation": "<p>Creates and updates the retention configuration with details about retention period (number of days) that AWS Config stores your historical information. The API creates the <code>RetentionConfiguration</code> object and names the object as <b>default</b>. When you have a <code>RetentionConfiguration</code> object named <b>default</b>, calling the API modifies the default object. </p> <note> <p>Currently, AWS Config supports only one retention configuration per region in your account.</p> </note>"
+    },
+    "SelectResourceConfig": {
+      "name": "SelectResourceConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "SelectResourceConfigRequest"
+      },
+      "output": {
+        "shape": "SelectResourceConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidExpressionException"
+        },
+        {
+          "shape": "InvalidLimitException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        }
+      ],
+      "documentation": "<p>Accepts a structured query language (SQL) <code>SELECT</code> command, performs the corresponding search, and returns resource configurations matching the properties.</p> <p>For more information about query components, see the <a href=\"https://docs.aws.amazon.com/config/latest/developerguide/query-components.html\"> <b>Query Components</b> </a> section in the AWS Config Developer Guide.</p>"
     },
     "StartConfigRulesEvaluation": {
       "name": "StartConfigRulesEvaluation",
@@ -3118,6 +3143,11 @@
         "aws.config"
       ]
     },
+    "Expression": {
+      "type": "string",
+      "max": 4096,
+      "min": 1
+    },
     "FailedRemediationBatch": {
       "type": "structure",
       "members": {
@@ -3137,6 +3167,25 @@
       "member": {
         "shape": "FailedRemediationBatch"
       }
+    },
+    "FieldInfo": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "FieldName",
+          "documentation": "<p>Name of the field.</p>"
+        }
+      },
+      "documentation": "<p>Details about the fields such as name of the field.</p>"
+    },
+    "FieldInfoList": {
+      "type": "list",
+      "member": {
+        "shape": "FieldInfo"
+      }
+    },
+    "FieldName": {
+      "type": "string"
     },
     "GetAggregateComplianceDetailsByConfigRuleRequest": {
       "type": "structure",
@@ -3918,6 +3967,16 @@
         }
       }
     },
+    "QueryInfo": {
+      "type": "structure",
+      "members": {
+        "SelectFields": {
+          "shape": "FieldInfoList",
+          "documentation": "<p>Returns a <code>FieldInfo</code> object.</p>"
+        }
+      },
+      "documentation": "<p>Details about the query.</p>"
+    },
     "RecorderName": {
       "type": "string",
       "max": 256,
@@ -4400,6 +4459,12 @@
         "RESOURCE_ID"
       ]
     },
+    "Results": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
     "RetentionConfiguration": {
       "type": "structure",
       "required": [
@@ -4469,6 +4534,43 @@
         }
       },
       "documentation": "<p>Defines which resources trigger an evaluation for an AWS Config rule. The scope can include one or more resource types, a combination of a tag key and value, or a combination of one resource type and one resource ID. Specify a scope to constrain which resources trigger an evaluation for a rule. Otherwise, evaluations for the rule are triggered when any resource in your recording group changes in configuration.</p>"
+    },
+    "SelectResourceConfigRequest": {
+      "type": "structure",
+      "required": [
+        "Expression"
+      ],
+      "members": {
+        "Expression": {
+          "shape": "Expression",
+          "documentation": "<p>The SQL query <code>SELECT</code> command.</p>"
+        },
+        "Limit": {
+          "shape": "Limit",
+          "documentation": "<p>The maximum number of query results returned on each page. </p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response. </p>"
+        }
+      }
+    },
+    "SelectResourceConfigResponse": {
+      "type": "structure",
+      "members": {
+        "Results": {
+          "shape": "Results",
+          "documentation": "<p>Returns the results for the SQL query.</p>"
+        },
+        "QueryInfo": {
+          "shape": "QueryInfo",
+          "documentation": "<p>Returns the <code>QueryInfo</code> object.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The <code>nextToken</code> string returned in a previous request that you use to request the next page of results in a paginated response. </p>"
+        }
+      }
     },
     "Source": {
       "type": "structure",
