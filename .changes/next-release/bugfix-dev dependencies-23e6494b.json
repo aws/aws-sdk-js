@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "dev dependencies",
+  "description": "bump versions of cucumber, karma, mocha and webpack"
+}
