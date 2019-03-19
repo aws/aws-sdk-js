@@ -24,11 +24,8 @@ module.exports = {
          * where a json file is being imported, it will use
          * the json-loader.
          */
-        loaders: [
-            {
-                test: /\.json$/,
-                loaders: ['json-loader']
-            }
+        rules: [
+            { test: /\.json&/, use: 'json-loader' }
         ]
     }
 };
