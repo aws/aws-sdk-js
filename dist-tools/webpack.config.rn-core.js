@@ -1,7 +1,7 @@
 // import path for resolving file paths
 var path = require('path');
 module.exports = {
-    mode: 'none',
+    mode: 'production',
     // Specify the entry point for our app.
     entry: [
         path.join(__dirname, '..', 'lib', 'core.js'),
