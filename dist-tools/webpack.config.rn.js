@@ -13,7 +13,7 @@ module.exports = {
         library: 'AWS'
     },
     resolve: {
-        aliasFields: ['react-native']
+      packageAlias: 'react-native'
     },
     module: {
         /**
@@ -24,8 +24,11 @@ module.exports = {
          * where a json file is being imported, it will use
          * the json-loader.
          */
-        rules: [
-            { test: /\.json&/, use: 'json-loader' }
+        loaders: [
+            {
+                test: /\.json$/,
+                loaders: ['json']
+            }
         ]
     }
 };
