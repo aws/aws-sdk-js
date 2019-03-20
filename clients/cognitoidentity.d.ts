@@ -28,11 +28,11 @@ declare class CognitoIdentity extends Service {
    */
   deleteIdentities(callback?: (err: AWSError, data: CognitoIdentity.Types.DeleteIdentitiesResponse) => void): Request<CognitoIdentity.Types.DeleteIdentitiesResponse, AWSError>;
   /**
-   * Deletes a user pool. Once a pool is deleted, users will not be able to authenticate with the pool. You must use AWS Developer credentials to call this API.
+   * Deletes an identity pool. Once a pool is deleted, users will not be able to authenticate with the pool. You must use AWS Developer credentials to call this API.
    */
   deleteIdentityPool(params: CognitoIdentity.Types.DeleteIdentityPoolInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a user pool. Once a pool is deleted, users will not be able to authenticate with the pool. You must use AWS Developer credentials to call this API.
+   * Deletes an identity pool. Once a pool is deleted, users will not be able to authenticate with the pool. You must use AWS Developer credentials to call this API.
    */
   deleteIdentityPool(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class CognitoIdentity extends Service {
    */
   getIdentityPoolRoles(callback?: (err: AWSError, data: CognitoIdentity.Types.GetIdentityPoolRolesResponse) => void): Request<CognitoIdentity.Types.GetIdentityPoolRolesResponse, AWSError>;
   /**
-   * Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned by GetId. You can optionally add additional logins for the identity. Supplying multiple logins creates an implicit link. The OpenId token is valid for 15 minutes. This is a public API. You do not need any credentials to call this API.
+   * Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned by GetId. You can optionally add additional logins for the identity. Supplying multiple logins creates an implicit link. The OpenId token is valid for 10 minutes. This is a public API. You do not need any credentials to call this API.
    */
   getOpenIdToken(params: CognitoIdentity.Types.GetOpenIdTokenInput, callback?: (err: AWSError, data: CognitoIdentity.Types.GetOpenIdTokenResponse) => void): Request<CognitoIdentity.Types.GetOpenIdTokenResponse, AWSError>;
   /**
-   * Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned by GetId. You can optionally add additional logins for the identity. Supplying multiple logins creates an implicit link. The OpenId token is valid for 15 minutes. This is a public API. You do not need any credentials to call this API.
+   * Gets an OpenID token, using a known Cognito ID. This known Cognito ID is returned by GetId. You can optionally add additional logins for the identity. Supplying multiple logins creates an implicit link. The OpenId token is valid for 10 minutes. This is a public API. You do not need any credentials to call this API.
    */
   getOpenIdToken(callback?: (err: AWSError, data: CognitoIdentity.Types.GetOpenIdTokenResponse) => void): Request<CognitoIdentity.Types.GetOpenIdTokenResponse, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class CognitoIdentity extends Service {
    */
   getOpenIdTokenForDeveloperIdentity(callback?: (err: AWSError, data: CognitoIdentity.Types.GetOpenIdTokenForDeveloperIdentityResponse) => void): Request<CognitoIdentity.Types.GetOpenIdTokenForDeveloperIdentityResponse, AWSError>;
   /**
-   * Lists the identities in a pool. You must use AWS Developer credentials to call this API.
+   * Lists the identities in an identity pool. You must use AWS Developer credentials to call this API.
    */
   listIdentities(params: CognitoIdentity.Types.ListIdentitiesInput, callback?: (err: AWSError, data: CognitoIdentity.Types.ListIdentitiesResponse) => void): Request<CognitoIdentity.Types.ListIdentitiesResponse, AWSError>;
   /**
-   * Lists the identities in a pool. You must use AWS Developer credentials to call this API.
+   * Lists the identities in an identity pool. You must use AWS Developer credentials to call this API.
    */
   listIdentities(callback?: (err: AWSError, data: CognitoIdentity.Types.ListIdentitiesResponse) => void): Request<CognitoIdentity.Types.ListIdentitiesResponse, AWSError>;
   /**
@@ -108,19 +108,27 @@ declare class CognitoIdentity extends Service {
    */
   listIdentityPools(callback?: (err: AWSError, data: CognitoIdentity.Types.ListIdentityPoolsResponse) => void): Request<CognitoIdentity.Types.ListIdentityPoolsResponse, AWSError>;
   /**
-   * Retrieves the IdentityID associated with a DeveloperUserIdentifier or the list of DeveloperUserIdentifiers associated with an IdentityId for an existing identity. Either IdentityID or DeveloperUserIdentifier must not be null. If you supply only one of these values, the other value will be searched in the database and returned as a part of the response. If you supply both, DeveloperUserIdentifier will be matched against IdentityID. If the values are verified against the database, the response returns both values and is the same as the request. Otherwise a ResourceConflictException is thrown. You must use AWS Developer credentials to call this API.
+   * Lists the tags that are assigned to an Amazon Cognito identity pool. A tag is a label that you can apply to identity pools to categorize and manage them in different ways, such as by purpose, owner, environment, or other criteria. You can use this action up to 10 times per second, per account.
+   */
+  listTagsForResource(params: CognitoIdentity.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: CognitoIdentity.Types.ListTagsForResourceResponse) => void): Request<CognitoIdentity.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags that are assigned to an Amazon Cognito identity pool. A tag is a label that you can apply to identity pools to categorize and manage them in different ways, such as by purpose, owner, environment, or other criteria. You can use this action up to 10 times per second, per account.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: CognitoIdentity.Types.ListTagsForResourceResponse) => void): Request<CognitoIdentity.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Retrieves the IdentityID associated with a DeveloperUserIdentifier or the list of DeveloperUserIdentifier values associated with an IdentityId for an existing identity. Either IdentityID or DeveloperUserIdentifier must not be null. If you supply only one of these values, the other value will be searched in the database and returned as a part of the response. If you supply both, DeveloperUserIdentifier will be matched against IdentityID. If the values are verified against the database, the response returns both values and is the same as the request. Otherwise a ResourceConflictException is thrown.  LookupDeveloperIdentity is intended for low-throughput control plane operations: for example, to enable customer service to locate an identity ID by username. If you are using it for higher-volume operations such as user authentication, your requests are likely to be throttled. GetOpenIdTokenForDeveloperIdentity is a better option for higher-volume operations for user authentication. You must use AWS Developer credentials to call this API.
    */
   lookupDeveloperIdentity(params: CognitoIdentity.Types.LookupDeveloperIdentityInput, callback?: (err: AWSError, data: CognitoIdentity.Types.LookupDeveloperIdentityResponse) => void): Request<CognitoIdentity.Types.LookupDeveloperIdentityResponse, AWSError>;
   /**
-   * Retrieves the IdentityID associated with a DeveloperUserIdentifier or the list of DeveloperUserIdentifiers associated with an IdentityId for an existing identity. Either IdentityID or DeveloperUserIdentifier must not be null. If you supply only one of these values, the other value will be searched in the database and returned as a part of the response. If you supply both, DeveloperUserIdentifier will be matched against IdentityID. If the values are verified against the database, the response returns both values and is the same as the request. Otherwise a ResourceConflictException is thrown. You must use AWS Developer credentials to call this API.
+   * Retrieves the IdentityID associated with a DeveloperUserIdentifier or the list of DeveloperUserIdentifier values associated with an IdentityId for an existing identity. Either IdentityID or DeveloperUserIdentifier must not be null. If you supply only one of these values, the other value will be searched in the database and returned as a part of the response. If you supply both, DeveloperUserIdentifier will be matched against IdentityID. If the values are verified against the database, the response returns both values and is the same as the request. Otherwise a ResourceConflictException is thrown.  LookupDeveloperIdentity is intended for low-throughput control plane operations: for example, to enable customer service to locate an identity ID by username. If you are using it for higher-volume operations such as user authentication, your requests are likely to be throttled. GetOpenIdTokenForDeveloperIdentity is a better option for higher-volume operations for user authentication. You must use AWS Developer credentials to call this API.
    */
   lookupDeveloperIdentity(callback?: (err: AWSError, data: CognitoIdentity.Types.LookupDeveloperIdentityResponse) => void): Request<CognitoIdentity.Types.LookupDeveloperIdentityResponse, AWSError>;
   /**
-   * Merges two users having different IdentityIds, existing in the same identity pool, and identified by the same developer provider. You can use this action to request that discrete users be merged and identified as a single user in the Cognito environment. Cognito associates the given source user (SourceUserIdentifier) with the IdentityId of the DestinationUserIdentifier. Only developer-authenticated users can be merged. If the users to be merged are associated with the same public provider, but as two different users, an exception will be thrown. You must use AWS Developer credentials to call this API.
+   * Merges two users having different IdentityIds, existing in the same identity pool, and identified by the same developer provider. You can use this action to request that discrete users be merged and identified as a single user in the Cognito environment. Cognito associates the given source user (SourceUserIdentifier) with the IdentityId of the DestinationUserIdentifier. Only developer-authenticated users can be merged. If the users to be merged are associated with the same public provider, but as two different users, an exception will be thrown. The number of linked logins is limited to 20. So, the number of linked logins for the source user, SourceUserIdentifier, and the destination user, DestinationUserIdentifier, together should not be larger than 20. Otherwise, an exception will be thrown. You must use AWS Developer credentials to call this API.
    */
   mergeDeveloperIdentities(params: CognitoIdentity.Types.MergeDeveloperIdentitiesInput, callback?: (err: AWSError, data: CognitoIdentity.Types.MergeDeveloperIdentitiesResponse) => void): Request<CognitoIdentity.Types.MergeDeveloperIdentitiesResponse, AWSError>;
   /**
-   * Merges two users having different IdentityIds, existing in the same identity pool, and identified by the same developer provider. You can use this action to request that discrete users be merged and identified as a single user in the Cognito environment. Cognito associates the given source user (SourceUserIdentifier) with the IdentityId of the DestinationUserIdentifier. Only developer-authenticated users can be merged. If the users to be merged are associated with the same public provider, but as two different users, an exception will be thrown. You must use AWS Developer credentials to call this API.
+   * Merges two users having different IdentityIds, existing in the same identity pool, and identified by the same developer provider. You can use this action to request that discrete users be merged and identified as a single user in the Cognito environment. Cognito associates the given source user (SourceUserIdentifier) with the IdentityId of the DestinationUserIdentifier. Only developer-authenticated users can be merged. If the users to be merged are associated with the same public provider, but as two different users, an exception will be thrown. The number of linked logins is limited to 20. So, the number of linked logins for the source user, SourceUserIdentifier, and the destination user, DestinationUserIdentifier, together should not be larger than 20. Otherwise, an exception will be thrown. You must use AWS Developer credentials to call this API.
    */
   mergeDeveloperIdentities(callback?: (err: AWSError, data: CognitoIdentity.Types.MergeDeveloperIdentitiesResponse) => void): Request<CognitoIdentity.Types.MergeDeveloperIdentitiesResponse, AWSError>;
   /**
@@ -131,6 +139,14 @@ declare class CognitoIdentity extends Service {
    * Sets the roles for an identity pool. These roles are used when making calls to GetCredentialsForIdentity action. You must use AWS Developer credentials to call this API.
    */
   setIdentityPoolRoles(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Assigns a set of tags to an Amazon Cognito identity pool. A tag is a label that you can use to categorize and manage identity pools in different ways, such as by purpose, owner, environment, or other criteria. Each tag consists of a key and value, both of which you define. A key is a general category for more specific values. For example, if you have two versions of an identity pool, one for testing and another for production, you might assign an Environment tag key to both identity pools. The value of this key might be Test for one identity pool and Production for the other. Tags are useful for cost tracking and access control. You can activate your tags so that they appear on the Billing and Cost Management console, where you can track the costs associated with your identity pools. In an IAM policy, you can constrain permissions for identity pools based on specific tags or tag values. You can use this action up to 5 times per second, per account. An identity pool can have as many as 50 tags.
+   */
+  tagResource(params: CognitoIdentity.Types.TagResourceInput, callback?: (err: AWSError, data: CognitoIdentity.Types.TagResourceResponse) => void): Request<CognitoIdentity.Types.TagResourceResponse, AWSError>;
+  /**
+   * Assigns a set of tags to an Amazon Cognito identity pool. A tag is a label that you can use to categorize and manage identity pools in different ways, such as by purpose, owner, environment, or other criteria. Each tag consists of a key and value, both of which you define. A key is a general category for more specific values. For example, if you have two versions of an identity pool, one for testing and another for production, you might assign an Environment tag key to both identity pools. The value of this key might be Test for one identity pool and Production for the other. Tags are useful for cost tracking and access control. You can activate your tags so that they appear on the Billing and Cost Management console, where you can track the costs associated with your identity pools. In an IAM policy, you can constrain permissions for identity pools based on specific tags or tag values. You can use this action up to 5 times per second, per account. An identity pool can have as many as 50 tags.
+   */
+  tagResource(callback?: (err: AWSError, data: CognitoIdentity.Types.TagResourceResponse) => void): Request<CognitoIdentity.Types.TagResourceResponse, AWSError>;
   /**
    * Unlinks a DeveloperUserIdentifier from an existing identity. Unlinked developer users will be considered new identities next time they are seen. If, for a given Cognito identity, you remove all federated identities as well as the developer user identifier, the Cognito identity becomes inaccessible. You must use AWS Developer credentials to call this API.
    */
@@ -148,11 +164,19 @@ declare class CognitoIdentity extends Service {
    */
   unlinkIdentity(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates a user pool. You must use AWS Developer credentials to call this API.
+   * Removes the specified tags from an Amazon Cognito identity pool. You can use this action up to 5 times per second, per account
+   */
+  untagResource(params: CognitoIdentity.Types.UntagResourceInput, callback?: (err: AWSError, data: CognitoIdentity.Types.UntagResourceResponse) => void): Request<CognitoIdentity.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes the specified tags from an Amazon Cognito identity pool. You can use this action up to 5 times per second, per account
+   */
+  untagResource(callback?: (err: AWSError, data: CognitoIdentity.Types.UntagResourceResponse) => void): Request<CognitoIdentity.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates an identity pool. You must use AWS Developer credentials to call this API.
    */
   updateIdentityPool(params: CognitoIdentity.Types.IdentityPool, callback?: (err: AWSError, data: CognitoIdentity.Types.IdentityPool) => void): Request<CognitoIdentity.Types.IdentityPool, AWSError>;
   /**
-   * Updates a user pool. You must use AWS Developer credentials to call this API.
+   * Updates an identity pool. You must use AWS Developer credentials to call this API.
    */
   updateIdentityPool(callback?: (err: AWSError, data: CognitoIdentity.Types.IdentityPool) => void): Request<CognitoIdentity.Types.IdentityPool, AWSError>;
 }
@@ -165,15 +189,15 @@ declare namespace CognitoIdentity {
   export type ClaimValue = string;
   export interface CognitoIdentityProvider {
     /**
-     * The provider name for an Amazon Cognito Identity User Pool. For example, cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789.
+     * The provider name for an Amazon Cognito user pool. For example, cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789.
      */
     ProviderName?: CognitoIdentityProviderName;
     /**
-     * The client ID for the Amazon Cognito Identity User Pool.
+     * The client ID for the Amazon Cognito user pool.
      */
     ClientId?: CognitoIdentityProviderClientId;
     /**
-     * TRUE if server-side token validation is enabled for the identity provider’s token.
+     * TRUE if server-side token validation is enabled for the identity provider’s token. Once you set ServerSideTokenCheck to TRUE for an identity pool, that identity pool will check with the integrated user pools to make sure that the user has not been globally signed out or deleted before the identity pool provides an OIDC token or AWS credentials for the user. If the user is signed out or deleted, the identity pool will return a 400 Not Authorized error.
      */
     ServerSideTokenCheck?: CognitoIdentityProviderTokenCheck;
   }
@@ -203,13 +227,17 @@ declare namespace CognitoIdentity {
      */
     OpenIdConnectProviderARNs?: OIDCProviderList;
     /**
-     * An array of Amazon Cognito Identity user pools and their client IDs.
+     * An array of Amazon Cognito user pools and their client IDs.
      */
     CognitoIdentityProviders?: CognitoIdentityProviderList;
     /**
      * An array of Amazon Resource Names (ARNs) of the SAML provider for your identity pool.
      */
     SamlProviderARNs?: SAMLProviderList;
+    /**
+     * Tags to assign to the identity pool. A tag is a label that you can apply to identity pools to categorize and manage them in different ways, such as by purpose, owner, environment, or other criteria.
+     */
+    IdentityPoolTags?: IdentityPoolTagsType;
   }
   export interface Credentials {
     /**
@@ -270,7 +298,7 @@ declare namespace CognitoIdentity {
      */
     IdentityId: IdentityId;
     /**
-     * A set of optional name-value pairs that map provider names to provider tokens.
+     * A set of optional name-value pairs that map provider names to provider tokens. The name-value pair will follow the syntax "provider_name": "provider_user_identifier". Logins should not be specified when trying to get credentials for an unauthenticated identity. The Logins parameter is required when using identities associated with external identity providers such as FaceBook. For examples of Logins maps, see the code examples in the External Identity Providers section of the Amazon Cognito Developer Guide.
      */
     Logins?: LoginsMap;
     /**
@@ -298,7 +326,7 @@ declare namespace CognitoIdentity {
      */
     IdentityPoolId: IdentityPoolId;
     /**
-     * A set of optional name-value pairs that map provider names to provider tokens. The available provider names for Logins are as follows:   Facebook: graph.facebook.com    Amazon Cognito Identity Provider: cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789    Google: accounts.google.com    Amazon: www.amazon.com    Twitter: api.twitter.com    Digits: www.digits.com   
+     * A set of optional name-value pairs that map provider names to provider tokens. The available provider names for Logins are as follows:   Facebook: graph.facebook.com    Amazon Cognito user pool: cognito-idp.&lt;region&gt;.amazonaws.com/&lt;YOUR_USER_POOL_ID&gt;, for example, cognito-idp.us-east-1.amazonaws.com/us-east-1_123456789.    Google: accounts.google.com    Amazon: www.amazon.com    Twitter: api.twitter.com    Digits: www.digits.com   
      */
     Logins?: LoginsMap;
   }
@@ -324,7 +352,7 @@ declare namespace CognitoIdentity {
      */
     Roles?: RolesMap;
     /**
-     * How users for a specific identity provider are to mapped to roles. This is a String-to-RoleMapping object map. The string identifies the identity provider, for example, "graph.facebook.com" or "cognito-idp-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id".
+     * How users for a specific identity provider are to mapped to roles. This is a String-to-RoleMapping object map. The string identifies the identity provider, for example, "graph.facebook.com" or "cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id".
      */
     RoleMappings?: RoleMappingMap;
   }
@@ -362,7 +390,7 @@ declare namespace CognitoIdentity {
      */
     IdentityId: IdentityId;
     /**
-     * A set of optional name-value pairs that map provider names to provider tokens. When using graph.facebook.com and www.amazon.com, supply the access_token returned from the provider's authflow. For accounts.google.com, an Amazon Cognito Identity Provider, or any other OpenId Connect provider, always include the id_token.
+     * A set of optional name-value pairs that map provider names to provider tokens. When using graph.facebook.com and www.amazon.com, supply the access_token returned from the provider's authflow. For accounts.google.com, an Amazon Cognito user pool provider, or any other OpenId Connect provider, always include the id_token.
      */
     Logins?: LoginsMap;
   }
@@ -372,7 +400,7 @@ declare namespace CognitoIdentity {
      */
     IdentityId?: IdentityId;
     /**
-     * An OpenID token, valid for 15 minutes.
+     * An OpenID token, valid for 10 minutes.
      */
     Token?: OIDCToken;
   }
@@ -384,7 +412,7 @@ declare namespace CognitoIdentity {
      */
     IdentityId?: IdentityId;
     /**
-     * A set of optional name-value pairs that map provider names to provider tokens.
+     * The provider names.
      */
     Logins?: LoginsList;
     /**
@@ -424,13 +452,17 @@ declare namespace CognitoIdentity {
      */
     OpenIdConnectProviderARNs?: OIDCProviderList;
     /**
-     * A list representing an Amazon Cognito Identity User Pool and its client ID.
+     * A list representing an Amazon Cognito user pool and its client ID.
      */
     CognitoIdentityProviders?: CognitoIdentityProviderList;
     /**
      * An array of Amazon Resource Names (ARNs) of the SAML provider for your identity pool.
      */
     SamlProviderARNs?: SAMLProviderList;
+    /**
+     * The tags that are assigned to the identity pool. A tag is a label that you can apply to identity pools to categorize and manage them in different ways, such as by purpose, owner, environment, or other criteria.
+     */
+    IdentityPoolTags?: IdentityPoolTagsType;
   }
   export type IdentityPoolId = string;
   export type IdentityPoolName = string;
@@ -444,6 +476,8 @@ declare namespace CognitoIdentity {
      */
     IdentityPoolName?: IdentityPoolName;
   }
+  export type IdentityPoolTagsListType = TagKeysType[];
+  export type IdentityPoolTagsType = {[key: string]: TagValueType};
   export type IdentityPoolUnauthenticated = boolean;
   export type IdentityPoolsList = IdentityPoolShortDescription[];
   export type IdentityProviderId = string;
@@ -501,6 +535,18 @@ declare namespace CognitoIdentity {
      * A pagination token.
      */
     NextToken?: PaginationKey;
+  }
+  export interface ListTagsForResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) of the identity pool that the tags are assigned to.
+     */
+    ResourceArn: ARNString;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags that are assigned to the identity pool.
+     */
+    Tags?: IdentityPoolTagsType;
   }
   export type LoginsList = IdentityProviderName[];
   export type LoginsMap = {[key: string]: IdentityProviderToken};
@@ -629,6 +675,20 @@ declare namespace CognitoIdentity {
      */
     RoleMappings?: RoleMappingMap;
   }
+  export type TagKeysType = string;
+  export interface TagResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) of the identity pool to assign the tags to.
+     */
+    ResourceArn: ARNString;
+    /**
+     * The tags to assign to the identity pool.
+     */
+    Tags?: IdentityPoolTagsType;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValueType = string;
   export type TokenDuration = number;
   export interface UnlinkDeveloperIdentityInput {
     /**
@@ -673,6 +733,18 @@ declare namespace CognitoIdentity {
     ErrorCode?: ErrorCode;
   }
   export type UnprocessedIdentityIdList = UnprocessedIdentityId[];
+  export interface UntagResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) of the identity pool that the tags are assigned to.
+     */
+    ResourceArn: ARNString;
+    /**
+     * The keys of the tags to remove from the user pool.
+     */
+    TagKeys?: IdentityPoolTagsListType;
+  }
+  export interface UntagResourceResponse {
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -116,11 +116,11 @@ declare class CodePipeline extends Service {
    */
   getPipelineExecution(callback?: (err: AWSError, data: CodePipeline.Types.GetPipelineExecutionOutput) => void): Request<CodePipeline.Types.GetPipelineExecutionOutput, AWSError>;
   /**
-   * Returns information about the state of a pipeline, including the stages and actions.
+   * Returns information about the state of a pipeline, including the stages and actions.  Values returned in the revisionId and revisionUrl fields indicate the source revision information, such as the commit ID, for the current state. 
    */
   getPipelineState(params: CodePipeline.Types.GetPipelineStateInput, callback?: (err: AWSError, data: CodePipeline.Types.GetPipelineStateOutput) => void): Request<CodePipeline.Types.GetPipelineStateOutput, AWSError>;
   /**
-   * Returns information about the state of a pipeline, including the stages and actions.
+   * Returns information about the state of a pipeline, including the stages and actions.  Values returned in the revisionId and revisionUrl fields indicate the source revision information, such as the commit ID, for the current state. 
    */
   getPipelineState(callback?: (err: AWSError, data: CodePipeline.Types.GetPipelineStateOutput) => void): Request<CodePipeline.Types.GetPipelineStateOutput, AWSError>;
   /**
@@ -131,6 +131,14 @@ declare class CodePipeline extends Service {
    * Requests the details of a job for a third party action. Only used for partner actions.  When this API is called, AWS CodePipeline returns temporary credentials for the Amazon S3 bucket used to store artifacts for the pipeline, if the action requires access to that Amazon S3 bucket for input or output artifacts. Additionally, this API returns any secret values defined for the action. 
    */
   getThirdPartyJobDetails(callback?: (err: AWSError, data: CodePipeline.Types.GetThirdPartyJobDetailsOutput) => void): Request<CodePipeline.Types.GetThirdPartyJobDetailsOutput, AWSError>;
+  /**
+   * Lists the action executions that have occurred in a pipeline.
+   */
+  listActionExecutions(params: CodePipeline.Types.ListActionExecutionsInput, callback?: (err: AWSError, data: CodePipeline.Types.ListActionExecutionsOutput) => void): Request<CodePipeline.Types.ListActionExecutionsOutput, AWSError>;
+  /**
+   * Lists the action executions that have occurred in a pipeline.
+   */
+  listActionExecutions(callback?: (err: AWSError, data: CodePipeline.Types.ListActionExecutionsOutput) => void): Request<CodePipeline.Types.ListActionExecutionsOutput, AWSError>;
   /**
    * Gets a summary of all AWS CodePipeline action types associated with your account.
    */
@@ -443,6 +451,99 @@ declare namespace CodePipeline {
      */
     errorDetails?: ErrorDetails;
   }
+  export interface ActionExecutionDetail {
+    /**
+     * The pipeline execution ID for the action execution.
+     */
+    pipelineExecutionId?: PipelineExecutionId;
+    /**
+     * The action execution ID.
+     */
+    actionExecutionId?: ActionExecutionId;
+    /**
+     * The version of the pipeline where the action was run.
+     */
+    pipelineVersion?: PipelineVersion;
+    /**
+     * The name of the stage that contains the action.
+     */
+    stageName?: StageName;
+    /**
+     * The name of the action.
+     */
+    actionName?: ActionName;
+    /**
+     * The start time of the action execution.
+     */
+    startTime?: Timestamp;
+    /**
+     * The last update time of the action execution.
+     */
+    lastUpdateTime?: Timestamp;
+    /**
+     *  The status of the action execution. Status categories are InProgress, Succeeded, and Failed.
+     */
+    status?: ActionExecutionStatus;
+    /**
+     * Input details for the action execution, such as role ARN, Region, and input artifacts.
+     */
+    input?: ActionExecutionInput;
+    /**
+     * Output details for the action execution, such as the action execution result.
+     */
+    output?: ActionExecutionOutput;
+  }
+  export type ActionExecutionDetailList = ActionExecutionDetail[];
+  export interface ActionExecutionFilter {
+    /**
+     * The pipeline execution ID used to filter action execution history.
+     */
+    pipelineExecutionId?: PipelineExecutionId;
+  }
+  export type ActionExecutionId = string;
+  export interface ActionExecutionInput {
+    actionTypeId?: ActionTypeId;
+    /**
+     * Configuration data for an action execution.
+     */
+    configuration?: ActionConfigurationMap;
+    /**
+     * The ARN of the IAM service role that performs the declared action. This is assumed through the roleArn for the pipeline. 
+     */
+    roleArn?: RoleArn;
+    /**
+     * The AWS Region for the action, such as us-east-1.
+     */
+    region?: AWSRegionName;
+    /**
+     * Details of input artifacts of the action that correspond to the action execution.
+     */
+    inputArtifacts?: ArtifactDetailList;
+  }
+  export interface ActionExecutionOutput {
+    /**
+     * Details of output artifacts of the action that correspond to the action execution.
+     */
+    outputArtifacts?: ArtifactDetailList;
+    /**
+     * Execution result information listed in the output details for an action execution.
+     */
+    executionResult?: ActionExecutionResult;
+  }
+  export interface ActionExecutionResult {
+    /**
+     * The action provider's external ID for the action execution.
+     */
+    externalExecutionId?: ExternalExecutionId;
+    /**
+     * The action provider's summary for the action execution.
+     */
+    externalExecutionSummary?: ExternalExecutionSummary;
+    /**
+     * The deepest external link to the external resource (for example, a repository URL or deployment endpoint) that is used when running the action.
+     */
+    externalExecutionUrl?: Url;
+  }
   export type ActionExecutionStatus = "InProgress"|"Succeeded"|"Failed"|string;
   export type ActionExecutionToken = string;
   export type ActionName = string;
@@ -518,7 +619,7 @@ declare namespace CodePipeline {
      */
     owner: ActionOwner;
     /**
-     * The provider of the service being called by the action. Valid providers are determined by the action category. For example, an action in the Deploy category type might have a provider of AWS CodeDeploy, which would be specified as CodeDeploy.
+     * The provider of the service being called by the action. Valid providers are determined by the action category. For example, an action in the Deploy category type might have a provider of AWS CodeDeploy, which would be specified as CodeDeploy. To reference a list of action providers by action type, see Valid Action Types and Providers in CodePipeline.
      */
     provider: ActionProvider;
     /**
@@ -572,6 +673,17 @@ declare namespace CodePipeline {
      */
     location?: ArtifactLocation;
   }
+  export interface ArtifactDetail {
+    /**
+     * The artifact object name for the action execution.
+     */
+    name?: ArtifactName;
+    /**
+     * The Amazon S3 artifact location for the action execution.
+     */
+    s3location?: S3Location;
+  }
+  export type ArtifactDetailList = ArtifactDetail[];
   export interface ArtifactDetails {
     /**
      * The minimum number of artifacts allowed for the action type.
@@ -832,6 +944,8 @@ declare namespace CodePipeline {
   }
   export type ExecutionId = string;
   export type ExecutionSummary = string;
+  export type ExternalExecutionId = string;
+  export type ExternalExecutionSummary = string;
   export interface FailureDetails {
     /**
      * The type of the failure.
@@ -1019,6 +1133,34 @@ declare namespace CodePipeline {
   export type LastChangedAt = Date;
   export type LastChangedBy = string;
   export type LastUpdatedBy = string;
+  export interface ListActionExecutionsInput {
+    /**
+     *  The name of the pipeline for which you want to list action execution history.
+     */
+    pipelineName: PipelineName;
+    /**
+     * Input information used to filter action execution history.
+     */
+    filter?: ActionExecutionFilter;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value. The action execution history is limited to the most recent 12 months, based on action execution start times. Default value is 100. 
+     */
+    maxResults?: MaxResults;
+    /**
+     * The token that was returned from the previous ListActionExecutions call, which can be used to return the next set of action executions in the list.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListActionExecutionsOutput {
+    /**
+     * The details for a list of recent executions, such as action execution ID.
+     */
+    actionExecutionDetails?: ActionExecutionDetailList;
+    /**
+     * If the amount of returned information is significantly large, an identifier is also returned and can be used in a subsequent ListActionExecutions call to return the next set of action executions in the list.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListActionTypesInput {
     /**
      * Filters the list of action types to those created by a specified entity.
@@ -1480,7 +1622,19 @@ declare namespace CodePipeline {
      */
     objectKey: S3ObjectKey;
   }
+  export type S3Bucket = string;
   export type S3BucketName = string;
+  export type S3Key = string;
+  export interface S3Location {
+    /**
+     * The Amazon S3 artifact bucket for an action's artifacts.
+     */
+    bucket?: S3Bucket;
+    /**
+     * The artifact name.
+     */
+    key?: S3Key;
+  }
   export type S3ObjectKey = string;
   export type SecretAccessKey = string;
   export type SessionToken = string;

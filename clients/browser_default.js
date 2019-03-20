@@ -36,6 +36,7 @@ module.exports = {
   ElasticTranscoder: require('./elastictranscoder'),
   Firehose: require('./firehose'),
   GameLift: require('./gamelift'),
+  IAM: require('./iam'),
   Inspector: require('./inspector'),
   Iot: require('./iot'),
   IotData: require('./iotdata'),
@@ -72,6 +73,7 @@ module.exports = {
   KinesisVideoMedia: require('./kinesisvideomedia'),
   KinesisVideo: require('./kinesisvideo'),
   Translate: require('./translate'),
+  ResourceGroups: require('./resourcegroups'),
   SecretsManager: require('./secretsmanager'),
   ComprehendMedical: require('./comprehendmedical')
 };

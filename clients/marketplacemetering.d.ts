@@ -81,13 +81,13 @@ declare namespace MarketplaceMetering {
      */
     UsageDimension: UsageDimension;
     /**
-     * Consumption value for the hour.
+     * Consumption value for the hour. Defaults to 0 if not specified.
      */
-    UsageQuantity: UsageQuantity;
+    UsageQuantity?: UsageQuantity;
     /**
-     * Checks whether you have the permissions required for the action, but does not make the request. If you have the permissions, the request returns DryRunOperation; otherwise, it returns UnauthorizedException.
+     * Checks whether you have the permissions required for the action, but does not make the request. If you have the permissions, the request returns DryRunOperation; otherwise, it returns UnauthorizedException. Defaults to false if not specified.
      */
-    DryRun: Boolean;
+    DryRun?: Boolean;
   }
   export interface MeterUsageResult {
     /**
@@ -156,9 +156,9 @@ declare namespace MarketplaceMetering {
      */
     Dimension: UsageDimension;
     /**
-     * The quantity of usage consumed by the customer for the given dimension and time.
+     * The quantity of usage consumed by the customer for the given dimension and time. Defaults to 0 if not specified.
      */
-    Quantity: UsageQuantity;
+    Quantity?: UsageQuantity;
   }
   export type UsageRecordList = UsageRecord[];
   export interface UsageRecordResult {

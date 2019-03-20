@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.424.0-->
+<!--LATEST=2.425.0-->
 <!--ENTRYINSERT-->
+
+## 2.425.0
+* feature: CodePipeline: Add support for viewing details of each action execution belonging to past and latest pipeline executions that have occurred in customer's pipeline. The details include start/updated times, action execution results, input/output artifacts information, etc. Customers also have the option to add pipelineExecutionId in the input to filter the results down to a single pipeline execution.
+* feature: CognitoIdentity: This release adds tags and tag-based access control support to Amazon Cognito Identity Pools (Federated Identities). 
+* feature: MarketplaceMetering: This release increases AWS Marketplace Metering Service maximum usage quantity to 2147483647 and makes parameters usage quantity and dryrun optional.
+* feature: cors: add cors support for IAM and ResouceGroups services
 
 ## 2.424.0
 * bugfix: Paginator: fix the issue where paginator keys are ignored in GET requests
