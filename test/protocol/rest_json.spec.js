@@ -318,11 +318,13 @@
           });
         });
 
-        it('does not send empty object string', function() {
+        it('does not send empty for GET methods', function() {
           request.params = {};
           defop({
+            http: {
+              method: 'GET'
+            },
             input: {
-              payload: 'Data',
               members: {
                 Data: {
                   type: 'string'
@@ -331,6 +333,22 @@
             }
           });
           expect(build().httpRequest.body).to.eql('');
+
+          ['POST', 'PUT'].forEach(function(method) {
+            defop({
+              http: {
+                method: method
+              },
+              input: {
+                members: {
+                  Data: {
+                    type: 'string'
+                  }
+                }
+              }
+            });
+            expect(build().httpRequest.body).to.eql('{}');
+          });
         });
 
         it('builds root element if rules contains root', function() {
