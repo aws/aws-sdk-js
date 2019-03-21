@@ -220,11 +220,11 @@ declare class Iot extends Service {
    */
   createStream(callback?: (err: AWSError, data: Iot.Types.CreateStreamResponse) => void): Request<Iot.Types.CreateStreamResponse, AWSError>;
   /**
-   * Creates a thing record in the registry.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
+   * Creates a thing record in the registry. If this call is made multiple times using the same thing name and configuration, the call will succeed. If this call is made with the same thing name but different configuration a ResourceAlreadyExistsException is thrown.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
    */
   createThing(params: Iot.Types.CreateThingRequest, callback?: (err: AWSError, data: Iot.Types.CreateThingResponse) => void): Request<Iot.Types.CreateThingResponse, AWSError>;
   /**
-   * Creates a thing record in the registry.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
+   * Creates a thing record in the registry. If this call is made multiple times using the same thing name and configuration, the call will succeed. If this call is made with the same thing name but different configuration a ResourceAlreadyExistsException is thrown.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
    */
   createThing(callback?: (err: AWSError, data: Iot.Types.CreateThingResponse) => void): Request<Iot.Types.CreateThingResponse, AWSError>;
   /**
@@ -699,6 +699,14 @@ declare class Iot extends Service {
    * Gets a registration code used to register a CA certificate with AWS IoT.
    */
   getRegistrationCode(callback?: (err: AWSError, data: Iot.Types.GetRegistrationCodeResponse) => void): Request<Iot.Types.GetRegistrationCodeResponse, AWSError>;
+  /**
+   * Gets statistics about things that match the specified query.
+   */
+  getStatistics(params: Iot.Types.GetStatisticsRequest, callback?: (err: AWSError, data: Iot.Types.GetStatisticsResponse) => void): Request<Iot.Types.GetStatisticsResponse, AWSError>;
+  /**
+   * Gets statistics about things that match the specified query.
+   */
+  getStatistics(callback?: (err: AWSError, data: Iot.Types.GetStatisticsResponse) => void): Request<Iot.Types.GetStatisticsResponse, AWSError>;
   /**
    * Gets information about the rule.
    */
@@ -1523,6 +1531,7 @@ declare namespace Iot {
   }
   export type AdditionalMetricsToRetainList = BehaviorMetric[];
   export type AdditionalParameterMap = {[key: string]: Value};
+  export type AggregationField = string;
   export type AlarmName = string;
   export interface AlertTarget {
     /**
@@ -3237,7 +3246,7 @@ declare namespace Iot {
      */
     indexStatus?: IndexStatus;
     /**
-     * Contains a value that specifies the type of indexing performed. Valid values are:   REGISTRY – Your thing index will contain only registry data.   REGISTRY_AND_SHADOW - Your thing index will contain registry data and shadow data.   REGISTRY_AND_CONNECTIVITY_STATUS - Your thing index will contain registry data and thing connectivity status data.   REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index will contain registry data, shadow data, and thing connectivity status data.  
+     * Contains a value that specifies the type of indexing performed. Valid values are:   REGISTRY – Your thing index contains only registry data.   REGISTRY_AND_SHADOW - Your thing index contains registry data and shadow data.   REGISTRY_AND_CONNECTIVITY_STATUS - Your thing index contains registry data and thing connectivity status data.   REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index contains registry data, shadow data, and thing connectivity status data.  
      */
     schema?: IndexSchema;
   }
@@ -3947,6 +3956,30 @@ declare namespace Iot {
      * The CA certificate registration code.
      */
     registrationCode?: RegistrationCode;
+  }
+  export interface GetStatisticsRequest {
+    /**
+     * The name of the index to search. The default value is AWS_Things.
+     */
+    indexName?: IndexName;
+    /**
+     * The query used to search. You can specify "*" for the query string to get the count of all indexed things in your AWS account.
+     */
+    queryString: QueryString;
+    /**
+     * The aggregation field name. Currently not supported.
+     */
+    aggregationField?: AggregationField;
+    /**
+     * The version of the query used to search.
+     */
+    queryVersion?: QueryVersion;
+  }
+  export interface GetStatisticsResponse {
+    /**
+     * The statistics returned by the Fleet Indexing service based on the query and aggregation field.
+     */
+    statistics?: Statistics;
   }
   export interface GetTopicRuleRequest {
     /**
@@ -5724,7 +5757,7 @@ declare namespace Iot {
      */
     caCertificatePem?: CertificatePem;
     /**
-     * A boolean value that specifies if the CA certificate is set to active.
+     * A boolean value that specifies if the certificate is set to active.
      */
     setAsActive?: SetAsActiveFlag;
     /**
@@ -6256,6 +6289,12 @@ declare namespace Iot {
      */
     statistic?: EvaluationStatistic;
   }
+  export interface Statistics {
+    /**
+     * The count of things that match the query.
+     */
+    count?: Count;
+  }
   export type Status = "InProgress"|"Completed"|"Failed"|"Cancelled"|"Cancelling"|string;
   export interface StepFunctionsAction {
     /**
@@ -6520,11 +6559,11 @@ declare namespace Iot {
   export type ThingAttributeList = ThingAttribute[];
   export interface ThingConnectivity {
     /**
-     * True if the thing is connected to the AWS IoT service, false if it is not connected.
+     * True if the thing is connected to the AWS IoT service; false if it is not connected.
      */
     connected?: Boolean;
     /**
-     * The epoch time (in milliseconds) when the thing last connected or disconnected. Note that if the thing has been disconnected for more than a few weeks, the time value can be missing.
+     * The epoch time (in milliseconds) when the thing last connected or disconnected. If the thing has been disconnected for more than a few weeks, the time value might be missing.
      */
     timestamp?: ConnectivityTimestamp;
   }
@@ -6555,7 +6594,7 @@ declare namespace Iot {
      */
     shadow?: JsonDocument;
     /**
-     * Indicates whether or not the thing is connected to the AWS IoT service.
+     * Indicates whether the thing is connected to the AWS IoT service.
      */
     connectivity?: ThingConnectivity;
   }
@@ -6624,11 +6663,11 @@ declare namespace Iot {
   export type ThingId = string;
   export interface ThingIndexingConfiguration {
     /**
-     * Thing indexing mode. Valid values are:   REGISTRY – Your thing index will contain only registry data.   REGISTRY_AND_SHADOW - Your thing index will contain registry and shadow data.   OFF - Thing indexing is disabled.  
+     * Thing indexing mode. Valid values are:   REGISTRY – Your thing index contains registry data only.   REGISTRY_AND_SHADOW - Your thing index contains registry and shadow data.   OFF - Thing indexing is disabled.  
      */
     thingIndexingMode: ThingIndexingMode;
     /**
-     * Thing connectivity indexing mode. Valid values are:    STATUS – Your thing index will contain connectivity status. In order to enable thing connectivity indexing, thingIndexMode must not be set to OFF.   OFF - Thing connectivity status indexing is disabled.  
+     * Thing connectivity indexing mode. Valid values are:    STATUS – Your thing index contains connectivity status. To enable thing connectivity indexing, thingIndexMode must not be set to OFF.   OFF - Thing connectivity status indexing is disabled.  
      */
     thingConnectivityIndexingMode?: ThingConnectivityIndexingMode;
   }

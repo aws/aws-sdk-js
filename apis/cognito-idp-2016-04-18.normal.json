@@ -2685,6 +2685,37 @@
       ],
       "documentation": "<p>Lists the resource servers for a user pool.</p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "NotAuthorizedException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InternalErrorException"
+        }
+      ],
+      "documentation": "<p>Lists the tags that are assigned to an Amazon Cognito user pool.</p> <p>A tag is a label that you can apply to user pools to categorize and manage them in different ways, such as by purpose, owner, environment, or other criteria.</p> <p>You can use this action up to 10 times per second, per account.</p>"
+    },
     "ListUserImportJobs": {
       "name": "ListUserImportJobs",
       "http": {
@@ -3282,6 +3313,68 @@
       ],
       "documentation": "<p>Stops the user import job.</p>"
     },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "NotAuthorizedException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InternalErrorException"
+        }
+      ],
+      "documentation": "<p>Assigns a set of tags to an Amazon Cognito user pool. A tag is a label that you can use to categorize and manage user pools in different ways, such as by purpose, owner, environment, or other criteria.</p> <p>Each tag consists of a key and value, both of which you define. A key is a general category for more specific values. For example, if you have two versions of a user pool, one for testing and another for production, you might assign an <code>Environment</code> tag key to both user pools. The value of this key might be <code>Test</code> for one user pool and <code>Production</code> for the other.</p> <p>Tags are useful for cost tracking and access control. You can activate your tags so that they appear on the Billing and Cost Management console, where you can track the costs associated with your user pools. In an IAM policy, you can constrain permissions for user pools based on specific tags or tag values.</p> <p>You can use this action up to 5 times per second, per account. A user pool can have as many as 50 tags.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "NotAuthorizedException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InternalErrorException"
+        }
+      ],
+      "documentation": "<p>Removes the specified tags from an Amazon Cognito user pool. You can use this action up to 5 times per second, per account</p>"
+    },
     "UpdateAuthEventFeedback": {
       "name": "UpdateAuthEventFeedback",
       "http": {
@@ -3647,7 +3740,7 @@
           "shape": "InternalErrorException"
         }
       ],
-      "documentation": "<p>Updates the Secure Sockets Layer (SSL) certificate for the custom domain for your user pool.</p> <p>You can use this operation to provide the Amazon Resource Name (ARN) of a new certificate to Amazon Cognito. You cannot use it to change the domain for a user pool.</p> <p>A custom domain is used to host the Amazon Cognito hosted UI, which provides sign-up and sign-in pages for your application. When you set up a custom domain, you provide a certificate that you manage with AWS Certificate Manager (ACM). When necessary, you can use this operation to change the certificate that you applied to your custom domain.</p> <p>Usually, this is unnecessary following routine certificate renewal with ACM. When you renew your existing certificate in ACM, the ARN for your certificate remains the same, and your custom domain uses the new certificate automatically.</p> <p>However, if you replace your existing certificate with a new one, ACM gives the new certificate a new ARN. To apply the new certificate to your custom domain, you must provide this ARN to Amazon Cognito.</p> <p>When you add your new certificate in ACM, you must choose US East (N. Virginia) as the AWS Region.</p> <p>After you submit your request, Amazon Cognito requires up to 1 hour to distribute your new certificate to your custom domain.</p> <p>For more information about adding a custom domain to your user pool, see <a href=\"http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html\">Using Your Own Domain for the Hosted UI</a>.</p>"
+      "documentation": "<p>Updates the Secure Sockets Layer (SSL) certificate for the custom domain for your user pool.</p> <p>You can use this operation to provide the Amazon Resource Name (ARN) of a new certificate to Amazon Cognito. You cannot use it to change the domain for a user pool.</p> <p>A custom domain is used to host the Amazon Cognito hosted UI, which provides sign-up and sign-in pages for your application. When you set up a custom domain, you provide a certificate that you manage with AWS Certificate Manager (ACM). When necessary, you can use this operation to change the certificate that you applied to your custom domain.</p> <p>Usually, this is unnecessary following routine certificate renewal with ACM. When you renew your existing certificate in ACM, the ARN for your certificate remains the same, and your custom domain uses the new certificate automatically.</p> <p>However, if you replace your existing certificate with a new one, ACM gives the new certificate a new ARN. To apply the new certificate to your custom domain, you must provide this ARN to Amazon Cognito.</p> <p>When you add your new certificate in ACM, you must choose US East (N. Virginia) as the AWS Region.</p> <p>After you submit your request, Amazon Cognito requires up to 1 hour to distribute your new certificate to your custom domain.</p> <p>For more information about adding a custom domain to your user pool, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html\">Using Your Own Domain for the Hosted UI</a>.</p>"
     },
     "VerifySoftwareToken": {
       "name": "VerifySoftwareToken",
@@ -5504,7 +5597,7 @@
         },
         "WriteAttributes": {
           "shape": "ClientPermissionListType",
-          "documentation": "<p>The user pool attributes that the app client can write to.</p> <p>If your app client allows users to sign in through an identity provider, this array must include all attributes that are mapped to identity provider attributes. Amazon Cognito updates mapped attributes when users sign in to your application through an identity provider. If your app client lacks write access to a mapped attribute, Amazon Cognito throws an error when it attempts to update the attribute. For more information, see <a href=\"http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html\">Specifying Identity Provider Attribute Mappings for Your User Pool</a>.</p>"
+          "documentation": "<p>The user pool attributes that the app client can write to.</p> <p>If your app client allows users to sign in through an identity provider, this array must include all attributes that are mapped to identity provider attributes. Amazon Cognito updates mapped attributes when users sign in to your application through an identity provider. If your app client lacks write access to a mapped attribute, Amazon Cognito throws an error when it attempts to update the attribute. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html\">Specifying Identity Provider Attribute Mappings for Your User Pool</a>.</p>"
         },
         "ExplicitAuthFlows": {
           "shape": "ExplicitAuthFlowsListType",
@@ -5572,7 +5665,7 @@
         },
         "CustomDomainConfig": {
           "shape": "CustomDomainConfigType",
-          "documentation": "<p>The configuration for a custom domain that hosts the sign-up and sign-in webpages for your application.</p> <p>Provide this parameter only if you want to use a custom domain for your user pool. Otherwise, you can exclude this parameter and use the Amazon Cognito hosted domain instead.</p> <p>For more information about the hosted domain and custom domains, see <a href=\"http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain.html\">Configuring a User Pool Domain</a>.</p>"
+          "documentation": "<p>The configuration for a custom domain that hosts the sign-up and sign-in webpages for your application.</p> <p>Provide this parameter only if you want to use a custom domain for your user pool. Otherwise, you can exclude this parameter and use the Amazon Cognito hosted domain instead.</p> <p>For more information about the hosted domain and custom domains, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain.html\">Configuring a User Pool Domain</a>.</p>"
         }
       }
     },
@@ -5653,7 +5746,7 @@
         },
         "UserPoolTags": {
           "shape": "UserPoolTagsType",
-          "documentation": "<p>The cost allocation tags for the user pool. For more information, see <a href=\"http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html\">Adding Cost Allocation Tags to Your User Pool</a> </p>"
+          "documentation": "<p>The tag keys and values to assign to the user pool. A tag is a label that you can use to categorize and manage user pools in different ways, such as by purpose, owner, environment, or other criteria.</p>"
         },
         "AdminCreateUserConfig": {
           "shape": "AdminCreateUserConfigType",
@@ -6169,7 +6262,8 @@
           "documentation": "<p>The domain status.</p>"
         },
         "CustomDomainConfig": {
-          "shape": "CustomDomainConfigType"
+          "shape": "CustomDomainConfigType",
+          "documentation": "<p>The configuration for a custom domain that hosts the sign-up and sign-in webpages for your application.</p>"
         }
       },
       "documentation": "<p>A container for information about a domain.</p>"
@@ -7110,6 +7204,27 @@
         }
       }
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "ArnType",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the user pool that the tags are assigned to.</p>"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "UserPoolTagsType",
+          "documentation": "<p>The tags that are assigned to the user pool.</p>"
+        }
+      }
+    },
     "ListUserImportJobsRequest": {
       "type": "structure",
       "required": [
@@ -7869,7 +7984,7 @@
         },
         "Mutable": {
           "shape": "BooleanType",
-          "documentation": "<p>Specifies whether the value of the attribute can be changed.</p> <p>For any user pool attribute that's mapped to an identity provider attribute, you must set this parameter to <code>true</code>. Amazon Cognito updates mapped attributes when users sign in to your application through an identity provider. If an attribute is immutable, Amazon Cognito throws an error when it attempts to update the attribute. For more information, see <a href=\"http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html\">Specifying Identity Provider Attribute Mappings for Your User Pool</a>.</p>",
+          "documentation": "<p>Specifies whether the value of the attribute can be changed.</p> <p>For any user pool attribute that's mapped to an identity provider attribute, you must set this parameter to <code>true</code>. Amazon Cognito updates mapped attributes when users sign in to your application through an identity provider. If an attribute is immutable, Amazon Cognito throws an error when it attempts to update the attribute. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html\">Specifying Identity Provider Attribute Mappings for Your User Pool</a>.</p>",
           "box": true
         },
         "Required": {
@@ -8327,6 +8442,36 @@
         "shape": "ProviderNameType"
       }
     },
+    "TagKeysType": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "ArnType",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the user pool to assign the tags to.</p>"
+        },
+        "Tags": {
+          "shape": "UserPoolTagsType",
+          "documentation": "<p>The tags to assign to the user pool.</p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValueType": {
+      "type": "string",
+      "max": 256,
+      "min": 0
+    },
     "TokenModelType": {
       "type": "string",
       "pattern": "[A-Za-z0-9-_=.]+",
@@ -8365,6 +8510,26 @@
         }
       },
       "documentation": "<p>A container for the UI customization information for a user pool's built-in app UI.</p>"
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "ArnType",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the user pool that the tags are assigned to.</p>"
+        },
+        "TagKeys": {
+          "shape": "UserPoolTagsListType",
+          "documentation": "<p>The keys of the tags to remove from the user pool.</p>"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateAuthEventFeedbackRequest": {
       "type": "structure",
@@ -8747,7 +8912,7 @@
         },
         "UserPoolTags": {
           "shape": "UserPoolTagsType",
-          "documentation": "<p>The cost allocation tags for the user pool. For more information, see <a href=\"http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html\">Adding Cost Allocation Tags to Your User Pool</a> </p>"
+          "documentation": "<p>The tag keys and values to assign to the user pool. A tag is a label that you can use to categorize and manage user pools in different ways, such as by purpose, owner, environment, or other criteria.</p>"
         },
         "AdminCreateUserConfig": {
           "shape": "AdminCreateUserConfigType",
@@ -9058,13 +9223,19 @@
       },
       "documentation": "<p>The policy associated with a user pool.</p>"
     },
+    "UserPoolTagsListType": {
+      "type": "list",
+      "member": {
+        "shape": "TagKeysType"
+      }
+    },
     "UserPoolTagsType": {
       "type": "map",
       "key": {
-        "shape": "StringType"
+        "shape": "TagKeysType"
       },
       "value": {
-        "shape": "StringType"
+        "shape": "TagValueType"
       }
     },
     "UserPoolType": {
@@ -9156,7 +9327,7 @@
         },
         "UserPoolTags": {
           "shape": "UserPoolTagsType",
-          "documentation": "<p>The cost allocation tags for the user pool. For more information, see <a href=\"http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-cost-allocation-tagging.html\">Adding Cost Allocation Tags to Your User Pool</a> </p>"
+          "documentation": "<p>The tags that are assigned to the user pool. A tag is a label that you can apply to user pools to categorize and manage them in different ways, such as by purpose, owner, environment, or other criteria.</p>"
         },
         "SmsConfigurationFailure": {
           "shape": "StringType",
@@ -9171,7 +9342,8 @@
           "documentation": "<p>Holds the domain prefix if the user pool has a domain associated with it.</p>"
         },
         "CustomDomain": {
-          "shape": "DomainType"
+          "shape": "DomainType",
+          "documentation": "<p>A custom domain name that you provide to Amazon Cognito. This parameter applies only if you use a custom domain to host the sign-up and sign-in pages for your application. For example: <code>auth.example.com</code>.</p> <p>For more information about adding a custom domain to your user pool, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-add-custom-domain.html\">Using Your Own Domain for the Hosted UI</a>.</p>"
         },
         "AdminCreateUserConfig": {
           "shape": "AdminCreateUserConfigType",

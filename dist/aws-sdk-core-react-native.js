@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.425.0',
+	  VERSION: '2.426.0',
 
 	  /**
 	   * @api private
@@ -2948,7 +2948,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	  } else {
 	    var body = builder.build(req.params, input);
-	    if (body !== '{}') { //don't send empty object
+	    if (body !== '{}' || req.httpRequest.method !== 'GET') { //don't send empty body for GET method
 	      req.httpRequest.body = body;
 	    }
 	    applyContentTypeHeader(req);

@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.425.0-->
+<!--LATEST=2.426.0-->
 <!--ENTRYINSERT-->
+
+## 2.426.0
+* bugfix: Paginator: still send '{}' in body for requests other than GET
+* feature: CloudWatchEvents: Added 3 new APIs, and one additional parameter to the PutRule API, to support tagging of CloudWatch Events rules.
+* feature: CognitoIdentityServiceProvider: This release adds tags and tag-based access control support to Amazon Cognito User Pools.
+* feature: Iot: This release adds the GetStatistics API for the AWS IoT Fleet Indexing Service, which allows customers to query for statistics about registered devices that match a search query. This release only supports the count statistics. For more information about this API, see https://docs.aws.amazon.com/iot/latest/apireference/API_GetStatistics.html
+* feature: Lightsail: This release adds the DeleteKnownHostKeys API, which enables Lightsail's browser-based SSH or RDP clients to connect to the instance after a host key mismatch.
 
 ## 2.425.0
 * feature: CodePipeline: Add support for viewing details of each action execution belonging to past and latest pipeline executions that have occurred in customer's pipeline. The details include start/updated times, action execution results, input/output artifacts information, etc. Customers also have the option to add pipelineExecutionId in the input to filter the results down to a single pipeline execution.

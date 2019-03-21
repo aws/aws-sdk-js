@@ -1374,7 +1374,7 @@
         },
         "HealthCheckType": {
           "shape": "XmlStringMaxLen32",
-          "documentation": "<p>The service to use for the health checks. The valid values are <code>EC2</code> and <code>ELB</code>.</p>"
+          "documentation": "<p>The service to use for the health checks. The valid values are <code>EC2</code> and <code>ELB</code>. If you configure an Auto Scaling group to use ELB health checks, it considers the instance unhealthy if it fails either the EC2 status checks or the load balancer health checks.</p>"
         },
         "HealthCheckGracePeriod": {
           "shape": "HealthCheckGracePeriod",
@@ -1728,7 +1728,7 @@
         },
         "MixedInstancesPolicy": {
           "shape": "MixedInstancesPolicy",
-          "documentation": "<p>The mixed instances policy to use to launch instances. This parameter, a launch template, a launch configuration, or an EC2 instance must be specified.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html#asg-purchase-options\">Using Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+          "documentation": "<p>The mixed instances policy to use to launch instances. This parameter, a launch template, a launch configuration, or an EC2 instance must be specified.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html\">Auto Scaling Groups with Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
         },
         "InstanceId": {
           "shape": "XmlStringMaxLen19",
@@ -1764,7 +1764,7 @@
         },
         "HealthCheckType": {
           "shape": "XmlStringMaxLen32",
-          "documentation": "<p>The service to use for the health checks. The valid values are <code>EC2</code> and <code>ELB</code>. The default value is <code>EC2</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html\">Health Checks for Auto Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+          "documentation": "<p>The service to use for the health checks. The valid values are <code>EC2</code> and <code>ELB</code>. The default value is <code>EC2</code>. If you configure an Auto Scaling group to use ELB health checks, it considers the instance unhealthy if it fails either the EC2 status checks or the load balancer health checks.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html\">Health Checks for Auto Scaling Instances</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
         },
         "HealthCheckGracePeriod": {
           "shape": "HealthCheckGracePeriod",
@@ -2321,7 +2321,7 @@
       "members": {
         "TerminationPolicyTypes": {
           "shape": "TerminationPolicies",
-          "documentation": "<p>The termination policies supported by Amazon EC2 Auto Scaling: <code>OldestInstance</code>, <code>OldestLaunchConfiguration</code>, <code>NewestInstance</code>, <code>ClosestToNextInstanceHour</code>, <code>Default</code>, <code>OldestLaunchTemplate</code>, and <code>AllocationStrategy</code>. Currently, the <code>OldestLaunchTemplate</code> and <code>AllocationStrategy</code> policies are only supported for Auto Scaling groups with <a>MixedInstancesPolicy</a>.</p>"
+          "documentation": "<p>The termination policies supported by Amazon EC2 Auto Scaling: <code>OldestInstance</code>, <code>OldestLaunchConfiguration</code>, <code>NewestInstance</code>, <code>ClosestToNextInstanceHour</code>, <code>Default</code>, <code>OldestLaunchTemplate</code>, and <code>AllocationStrategy</code>.</p>"
         }
       }
     },
@@ -3233,7 +3233,7 @@
           "documentation": "<p>The instances distribution to use. </p> <p>If you leave this parameter unspecified when creating the group, the default values are used.</p>"
         }
       },
-      "documentation": "<p>Describes a mixed instances policy for an Auto Scaling group. With mixed instances, your Auto Scaling group can provision a combination of On-Demand Instances and Spot Instances across multiple instance types. Used in combination with <a>CreateAutoScalingGroup</a>. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html#asg-purchase-options\">Using Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>When you create your Auto Scaling group, you can specify a launch configuration or template as a parameter for the top-level object, or you can specify a mixed instances policy, but not both at the same time.</p>"
+      "documentation": "<p>Describes a mixed instances policy for an Auto Scaling group. With mixed instances, your Auto Scaling group can provision a combination of On-Demand Instances and Spot Instances across multiple instance types. Used in combination with <a>CreateAutoScalingGroup</a>. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html\">Auto Scaling Groups with Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p> <p>When you create your Auto Scaling group, you can specify a launch configuration or template as a parameter for the top-level object, or you can specify a mixed instances policy, but not both at the same time.</p>"
     },
     "MonitoringEnabled": {
       "type": "boolean"
@@ -4114,7 +4114,7 @@
         },
         "MixedInstancesPolicy": {
           "shape": "MixedInstancesPolicy",
-          "documentation": "<p>The mixed instances policy to use to specify the updates. If you specify this parameter, you can't specify a launch configuration or a launch template. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroup.html#asg-purchase-options\">Using Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+          "documentation": "<p>The mixed instances policy to use to specify the updates. If you specify this parameter, you can't specify a launch configuration or a launch template. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html\">Auto Scaling Groups with Multiple Instance Types and Purchase Options</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
         },
         "MinSize": {
           "shape": "AutoScalingGroupMinSize",
@@ -4138,7 +4138,7 @@
         },
         "HealthCheckType": {
           "shape": "XmlStringMaxLen32",
-          "documentation": "<p>The service to use for the health checks. The valid values are <code>EC2</code> and <code>ELB</code>.</p>"
+          "documentation": "<p>The service to use for the health checks. The valid values are <code>EC2</code> and <code>ELB</code>. If you configure an Auto Scaling group to use ELB health checks, it considers the instance unhealthy if it fails either the EC2 status checks or the load balancer health checks.</p>"
         },
         "HealthCheckGracePeriod": {
           "shape": "HealthCheckGracePeriod",

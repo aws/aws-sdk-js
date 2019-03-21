@@ -491,7 +491,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Creates one of the following entry records associated with the domain: A record, CNAME record, TXT record, or MX record.</p> <p>The <code>create domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by domainName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Creates one of the following entry records associated with the domain: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT).</p> <p>The <code>create domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by domainName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
     },
     "CreateInstanceSnapshot": {
       "name": "CreateInstanceSnapshot",
@@ -1084,6 +1084,43 @@
         }
       ],
       "documentation": "<p>Deletes a specific SSH key pair.</p> <p>The <code>delete key pair</code> operation supports tag-based access control via resource tags applied to the resource identified by keyPairName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+    },
+    "DeleteKnownHostKeys": {
+      "name": "DeleteKnownHostKeys",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteKnownHostKeysRequest"
+      },
+      "output": {
+        "shape": "DeleteKnownHostKeysResult"
+      },
+      "errors": [
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "OperationFailureException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "AccountSetupInProgressException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Deletes the known host key or certificate used by the Amazon Lightsail browser-based SSH or RDP clients to authenticate an instance. This operation enables the Lightsail browser-based SSH or RDP clients to connect to the instance after a host key mismatch.</p> <important> <p>Perform this operation only if you were expecting the host key or certificate mismatch or if you are familiar with the new host key or certificate on the instance. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-troubleshooting-browser-based-ssh-rdp-client-connection\">Troubleshooting connection issues when using the Amazon Lightsail browser-based SSH or RDP client</a>.</p> </important>"
     },
     "DeleteLoadBalancer": {
       "name": "DeleteLoadBalancer",
@@ -4874,6 +4911,27 @@
         }
       }
     },
+    "DeleteKnownHostKeysRequest": {
+      "type": "structure",
+      "required": [
+        "instanceName"
+      ],
+      "members": {
+        "instanceName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the instance for which you want to reset the host key or certificate.</p>"
+        }
+      }
+    },
+    "DeleteKnownHostKeysResult": {
+      "type": "structure",
+      "members": {
+        "operations": {
+          "shape": "OperationList",
+          "documentation": "<p>A list of objects describing the API operation.</p>"
+        }
+      }
+    },
     "DeleteLoadBalancerRequest": {
       "type": "structure",
       "required": [
@@ -5339,7 +5397,7 @@
         },
         "type": {
           "shape": "DomainEntryType",
-          "documentation": "<p>The type of domain entry (e.g., <code>SOA</code> or <code>NS</code>).</p>"
+          "documentation": "<p>The type of domain entry, such as address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT).</p> <p>The following domain entry types can be used:</p> <ul> <li> <p> <code>A</code> </p> </li> <li> <p> <code>CNAME</code> </p> </li> <li> <p> <code>MX</code> </p> </li> <li> <p> <code>NS</code> </p> </li> <li> <p> <code>SOA</code> </p> </li> <li> <p> <code>SRV</code> </p> </li> <li> <p> <code>TXT</code> </p> </li> </ul>"
         },
         "options": {
           "shape": "DomainEntryOptions",
@@ -6618,6 +6676,46 @@
         }
       }
     },
+    "HostKeyAttributes": {
+      "type": "structure",
+      "members": {
+        "algorithm": {
+          "shape": "string",
+          "documentation": "<p>The SSH host key algorithm or the RDP certificate format.</p> <p>For SSH host keys, the algorithm may be <code>ssh-rsa</code>, <code>ecdsa-sha2-nistp256</code>, <code>ssh-ed25519</code>, etc. For RDP certificates, the algorithm is always <code>x509-cert</code>.</p>"
+        },
+        "publicKey": {
+          "shape": "string",
+          "documentation": "<p>The public SSH host key or the RDP certificate.</p>"
+        },
+        "witnessedAt": {
+          "shape": "IsoDate",
+          "documentation": "<p>The time that the SSH host key or RDP certificate was recorded by Lightsail.</p>"
+        },
+        "fingerprintSHA1": {
+          "shape": "string",
+          "documentation": "<p>The SHA-1 fingerprint of the returned SSH host key or RDP certificate.</p> <ul> <li> <p>Example of an SHA-1 SSH fingerprint:</p> <p> <code>SHA1:1CHH6FaAaXjtFOsR/t83vf91SR0</code> </p> </li> <li> <p>Example of an SHA-1 RDP fingerprint:</p> <p> <code>af:34:51:fe:09:f0:e0:da:b8:4e:56:ca:60:c2:10:ff:38:06:db:45</code> </p> </li> </ul>"
+        },
+        "fingerprintSHA256": {
+          "shape": "string",
+          "documentation": "<p>The SHA-256 fingerprint of the returned SSH host key or RDP certificate.</p> <ul> <li> <p>Example of an SHA-256 SSH fingerprint:</p> <p> <code>SHA256:KTsMnRBh1IhD17HpdfsbzeGA4jOijm5tyXsMjKVbB8o</code> </p> </li> <li> <p>Example of an SHA-256 RDP fingerprint:</p> <p> <code>03:9b:36:9f:4b:de:4e:61:70:fc:7c:c9:78:e7:d2:1a:1c:25:a8:0c:91:f6:7c:e4:d6:a0:85:c8:b4:53:99:68</code> </p> </li> </ul>"
+        },
+        "notValidBefore": {
+          "shape": "IsoDate",
+          "documentation": "<p>The returned RDP certificate is valid after this point in time.</p> <p>This value is listed only for RDP certificates.</p>"
+        },
+        "notValidAfter": {
+          "shape": "IsoDate",
+          "documentation": "<p>The returned RDP certificate is not valid after this point in time.</p> <p>This value is listed only for RDP certificates.</p>"
+        }
+      },
+      "documentation": "<p>Describes the public SSH host keys or the RDP certificate.</p>"
+    },
+    "HostKeysList": {
+      "type": "list",
+      "member": {
+        "shape": "HostKeyAttributes"
+      }
+    },
     "ImportKeyPairRequest": {
       "type": "structure",
       "required": [
@@ -6764,6 +6862,10 @@
         "username": {
           "shape": "string",
           "documentation": "<p>The user name to use when logging in to the Amazon Lightsail instance.</p>"
+        },
+        "hostKeys": {
+          "shape": "HostKeysList",
+          "documentation": "<p>Describes the public SSH host keys or the RDP certificate.</p>"
         }
       },
       "documentation": "<p>The parameters for gaining temporary access to one of your Amazon Lightsail instances.</p>"
@@ -7788,6 +7890,7 @@
     "OperationType": {
       "type": "string",
       "enum": [
+        "DeleteKnownHostKeys",
         "DeleteInstance",
         "CreateInstance",
         "StopInstance",
@@ -8960,5 +9063,5 @@
       "type": "timestamp"
     }
   },
-  "documentation": "<p>Amazon Lightsail is the easiest way to get started with AWS for developers who just need virtual private servers. Lightsail includes everything you need to launch your project quickly - a virtual machine, SSD-based storage, data transfer, DNS management, and a static IP - for a low, predictable price. You manage those Lightsail servers through the Lightsail console or by using the API or command-line interface (CLI).</p> <p>For more information about Lightsail concepts and tasks, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/all\">Lightsail Dev Guide</a>.</p> <p>To use the Lightsail API or the CLI, you will need to use AWS Identity and Access Management (IAM) to generate access keys. For details about how to set this up, see the <a href=\"http://lightsail.aws.amazon.com/ls/docs/how-to/article/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli\">Lightsail Dev Guide</a>.</p>"
+  "documentation": "<p>Amazon Lightsail is the easiest way to get started with AWS for developers who just need virtual private servers. Lightsail includes everything you need to launch your project quickly - a virtual machine, a managed database, SSD-based storage, data transfer, DNS management, and a static IP - for a low, predictable price. You manage those Lightsail servers through the Lightsail console or by using the API or command-line interface (CLI).</p> <p>For more information about Lightsail concepts and tasks, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/all\">Lightsail Dev Guide</a>.</p> <p>To use the Lightsail API or the CLI, you will need to use AWS Identity and Access Management (IAM) to generate access keys. For details about how to set this up, see the <a href=\"http://lightsail.aws.amazon.com/ls/docs/how-to/article/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli\">Lightsail Dev Guide</a>.</p>"
 }

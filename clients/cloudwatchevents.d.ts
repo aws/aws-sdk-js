@@ -68,6 +68,14 @@ declare class CloudWatchEvents extends Service {
    */
   listRules(callback?: (err: AWSError, data: CloudWatchEvents.Types.ListRulesResponse) => void): Request<CloudWatchEvents.Types.ListRulesResponse, AWSError>;
   /**
+   * Displays the tags associated with a CloudWatch Events resource. In CloudWatch Events, rules can be tagged.
+   */
+  listTagsForResource(params: CloudWatchEvents.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.ListTagsForResourceResponse) => void): Request<CloudWatchEvents.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Displays the tags associated with a CloudWatch Events resource. In CloudWatch Events, rules can be tagged.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: CloudWatchEvents.Types.ListTagsForResourceResponse) => void): Request<CloudWatchEvents.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Lists the targets assigned to the specified rule.
    */
   listTargetsByRule(params: CloudWatchEvents.Types.ListTargetsByRuleRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.ListTargetsByRuleResponse) => void): Request<CloudWatchEvents.Types.ListTargetsByRuleResponse, AWSError>;
@@ -92,11 +100,11 @@ declare class CloudWatchEvents extends Service {
    */
   putPermission(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates the specified rule. Rules are enabled by default, or based on value of the state. You can disable a rule using DisableRule. If you are updating an existing rule, the rule is replaced with what you specify in this PutRule command. If you omit arguments in PutRule, the old values for those arguments are not kept. Instead, they are replaced with null values. When you create or update a rule, incoming events might not immediately start matching to new or updated rules. Allow a short period of time for changes to take effect. A rule must contain at least an EventPattern or ScheduleExpression. Rules with EventPatterns are triggered when a matching event is observed. Rules with ScheduleExpressions self-trigger based on the given schedule. A rule can have both an EventPattern and a ScheduleExpression, in which case the rule triggers on matching events as well as on a schedule. Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, CloudWatch Events uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match. In CloudWatch Events, it is possible to create rules that lead to infinite loops, where a rule is fired repeatedly. For example, a rule might detect that ACLs have changed on an S3 bucket, and trigger software to change them to the desired state. If the rule is not written carefully, the subsequent change to the ACLs fires the rule again, creating an infinite loop. To prevent this, write the rules so that the triggered actions do not re-fire the same rule. For example, your rule could fire only if ACLs are found to be in a bad state, instead of after any change.  An infinite loop can quickly cause higher than expected charges. We recommend that you use budgeting, which alerts you when charges exceed your specified limit. For more information, see Managing Your Costs with Budgets.
+   * Creates or updates the specified rule. Rules are enabled by default, or based on value of the state. You can disable a rule using DisableRule. If you are updating an existing rule, the rule is replaced with what you specify in this PutRule command. If you omit arguments in PutRule, the old values for those arguments are not kept. Instead, they are replaced with null values. When you create or update a rule, incoming events might not immediately start matching to new or updated rules. Allow a short period of time for changes to take effect. A rule must contain at least an EventPattern or ScheduleExpression. Rules with EventPatterns are triggered when a matching event is observed. Rules with ScheduleExpressions self-trigger based on the given schedule. A rule can have both an EventPattern and a ScheduleExpression, in which case the rule triggers on matching events as well as on a schedule. When you initially create a rule, you can optionally assign one or more tags to the rule. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only rules with certain tag values. To use the PutRule operation and assign tags, you must have both the events:PutRule and events:TagResource permissions. If you are updating an existing rule, any tags you specify in the PutRule operation are ignored. To update the tags of an existing rule, use TagResource and UntagResource. Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, CloudWatch Events uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match. In CloudWatch Events, it is possible to create rules that lead to infinite loops, where a rule is fired repeatedly. For example, a rule might detect that ACLs have changed on an S3 bucket, and trigger software to change them to the desired state. If the rule is not written carefully, the subsequent change to the ACLs fires the rule again, creating an infinite loop. To prevent this, write the rules so that the triggered actions do not re-fire the same rule. For example, your rule could fire only if ACLs are found to be in a bad state, instead of after any change.  An infinite loop can quickly cause higher than expected charges. We recommend that you use budgeting, which alerts you when charges exceed your specified limit. For more information, see Managing Your Costs with Budgets.
    */
   putRule(params: CloudWatchEvents.Types.PutRuleRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.PutRuleResponse) => void): Request<CloudWatchEvents.Types.PutRuleResponse, AWSError>;
   /**
-   * Creates or updates the specified rule. Rules are enabled by default, or based on value of the state. You can disable a rule using DisableRule. If you are updating an existing rule, the rule is replaced with what you specify in this PutRule command. If you omit arguments in PutRule, the old values for those arguments are not kept. Instead, they are replaced with null values. When you create or update a rule, incoming events might not immediately start matching to new or updated rules. Allow a short period of time for changes to take effect. A rule must contain at least an EventPattern or ScheduleExpression. Rules with EventPatterns are triggered when a matching event is observed. Rules with ScheduleExpressions self-trigger based on the given schedule. A rule can have both an EventPattern and a ScheduleExpression, in which case the rule triggers on matching events as well as on a schedule. Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, CloudWatch Events uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match. In CloudWatch Events, it is possible to create rules that lead to infinite loops, where a rule is fired repeatedly. For example, a rule might detect that ACLs have changed on an S3 bucket, and trigger software to change them to the desired state. If the rule is not written carefully, the subsequent change to the ACLs fires the rule again, creating an infinite loop. To prevent this, write the rules so that the triggered actions do not re-fire the same rule. For example, your rule could fire only if ACLs are found to be in a bad state, instead of after any change.  An infinite loop can quickly cause higher than expected charges. We recommend that you use budgeting, which alerts you when charges exceed your specified limit. For more information, see Managing Your Costs with Budgets.
+   * Creates or updates the specified rule. Rules are enabled by default, or based on value of the state. You can disable a rule using DisableRule. If you are updating an existing rule, the rule is replaced with what you specify in this PutRule command. If you omit arguments in PutRule, the old values for those arguments are not kept. Instead, they are replaced with null values. When you create or update a rule, incoming events might not immediately start matching to new or updated rules. Allow a short period of time for changes to take effect. A rule must contain at least an EventPattern or ScheduleExpression. Rules with EventPatterns are triggered when a matching event is observed. Rules with ScheduleExpressions self-trigger based on the given schedule. A rule can have both an EventPattern and a ScheduleExpression, in which case the rule triggers on matching events as well as on a schedule. When you initially create a rule, you can optionally assign one or more tags to the rule. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only rules with certain tag values. To use the PutRule operation and assign tags, you must have both the events:PutRule and events:TagResource permissions. If you are updating an existing rule, any tags you specify in the PutRule operation are ignored. To update the tags of an existing rule, use TagResource and UntagResource. Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, CloudWatch Events uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match. In CloudWatch Events, it is possible to create rules that lead to infinite loops, where a rule is fired repeatedly. For example, a rule might detect that ACLs have changed on an S3 bucket, and trigger software to change them to the desired state. If the rule is not written carefully, the subsequent change to the ACLs fires the rule again, creating an infinite loop. To prevent this, write the rules so that the triggered actions do not re-fire the same rule. For example, your rule could fire only if ACLs are found to be in a bad state, instead of after any change.  An infinite loop can quickly cause higher than expected charges. We recommend that you use budgeting, which alerts you when charges exceed your specified limit. For more information, see Managing Your Costs with Budgets.
    */
   putRule(callback?: (err: AWSError, data: CloudWatchEvents.Types.PutRuleResponse) => void): Request<CloudWatchEvents.Types.PutRuleResponse, AWSError>;
   /**
@@ -124,6 +132,14 @@ declare class CloudWatchEvents extends Service {
    */
   removeTargets(callback?: (err: AWSError, data: CloudWatchEvents.Types.RemoveTargetsResponse) => void): Request<CloudWatchEvents.Types.RemoveTargetsResponse, AWSError>;
   /**
+   * Assigns one or more tags (key-value pairs) to the specified CloudWatch Events resource. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. In CloudWatch Events, rules can be tagged. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters. You can use the TagResource action with a rule that already has tags. If you specify a new tag key for the rule, this tag is appended to the list of tags associated with the rule. If you specify a tag key that is already associated with the rule, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource.
+   */
+  tagResource(params: CloudWatchEvents.Types.TagResourceRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.TagResourceResponse) => void): Request<CloudWatchEvents.Types.TagResourceResponse, AWSError>;
+  /**
+   * Assigns one or more tags (key-value pairs) to the specified CloudWatch Events resource. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. In CloudWatch Events, rules can be tagged. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters. You can use the TagResource action with a rule that already has tags. If you specify a new tag key for the rule, this tag is appended to the list of tags associated with the rule. If you specify a tag key that is already associated with the rule, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource.
+   */
+  tagResource(callback?: (err: AWSError, data: CloudWatchEvents.Types.TagResourceResponse) => void): Request<CloudWatchEvents.Types.TagResourceResponse, AWSError>;
+  /**
    * Tests whether the specified event pattern matches the provided event. Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, CloudWatch Events uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match.
    */
   testEventPattern(params: CloudWatchEvents.Types.TestEventPatternRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.TestEventPatternResponse) => void): Request<CloudWatchEvents.Types.TestEventPatternResponse, AWSError>;
@@ -131,6 +147,14 @@ declare class CloudWatchEvents extends Service {
    * Tests whether the specified event pattern matches the provided event. Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, CloudWatch Events uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match.
    */
   testEventPattern(callback?: (err: AWSError, data: CloudWatchEvents.Types.TestEventPatternResponse) => void): Request<CloudWatchEvents.Types.TestEventPatternResponse, AWSError>;
+  /**
+   * Removes one or more tags from the specified CloudWatch Events resource. In CloudWatch Events, rules can be tagged.
+   */
+  untagResource(params: CloudWatchEvents.Types.UntagResourceRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.UntagResourceResponse) => void): Request<CloudWatchEvents.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes one or more tags from the specified CloudWatch Events resource. In CloudWatch Events, rules can be tagged.
+   */
+  untagResource(callback?: (err: AWSError, data: CloudWatchEvents.Types.UntagResourceResponse) => void): Request<CloudWatchEvents.Types.UntagResourceResponse, AWSError>;
 }
 declare namespace CloudWatchEvents {
   export type Action = string;
@@ -375,6 +399,18 @@ declare namespace CloudWatchEvents {
      */
     NextToken?: NextToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The ARN of the CloudWatch Events rule for which you want to view tags.
+     */
+    ResourceARN: Arn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The list of tag keys and values associated with the rule you specified
+     */
+    Tags?: TagList;
+  }
   export interface ListTargetsByRuleRequest {
     /**
      * The name of the rule.
@@ -506,6 +542,10 @@ declare namespace CloudWatchEvents {
      * The Amazon Resource Name (ARN) of the IAM role associated with the rule.
      */
     RoleArn?: RoleArn;
+    /**
+     * The list of key-value pairs to associate with the rule.
+     */
+    Tags?: TagList;
   }
   export interface PutRuleResponse {
     /**
@@ -664,6 +704,32 @@ declare namespace CloudWatchEvents {
   export type StatementId = string;
   export type String = string;
   export type StringList = String[];
+  export interface Tag {
+    /**
+     * A string you can use to assign a value. The combination of tag keys and values can help you organize and categorize your resources.
+     */
+    Key: TagKey;
+    /**
+     * The value for the specified tag key.
+     */
+    Value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The ARN of the CloudWatch Events rule that you're adding tags to.
+     */
+    ResourceARN: Arn;
+    /**
+     * The list of key-value pairs to associate with the rule.
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export interface Target {
     /**
      * The ID of the target.
@@ -735,6 +801,18 @@ declare namespace CloudWatchEvents {
   }
   export type TransformerInput = string;
   export type TransformerPaths = {[key: string]: TargetInputPath};
+  export interface UntagResourceRequest {
+    /**
+     * The ARN of the CloudWatch Events rule from which you are removing tags.
+     */
+    ResourceARN: Arn;
+    /**
+     * The list of tag keys to remove from the resource.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Paginator",
-  "description": "still send '{}' in body for requests other than GET"
-}
