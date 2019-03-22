@@ -517,6 +517,10 @@
           statusCode: 400
         }, true);
         retryableError({
+          code: 'RequestThrottledException',
+          statusCode: 400
+        }, true);
+        retryableError({
           code: 'TooManyRequestsException',
           statusCode: 400
         }, true);

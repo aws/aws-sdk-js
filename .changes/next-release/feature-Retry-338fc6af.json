@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "Retry",
+  "description": "make RequestThrottleException retryable"
+}
