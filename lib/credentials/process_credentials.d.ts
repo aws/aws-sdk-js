@@ -10,7 +10,5 @@ export class ProcessCredentials extends Credentials {
 interface ProcessCredentialsOptions {
     profile?: string
     filename?: string
-    disableAssumeRole?: boolean
-    tokenCodeFn?: (mfaSerial: string, callback: (err?: Error, token?: string) => void) => void
     httpOptions?: HTTPOptions
 }

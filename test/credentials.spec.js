@@ -624,9 +624,9 @@
           helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
             cb(mockErr, undefined, undefined);
           });
-          var creds = new AWS.ProcessCredentials({ profile: 'foo' });
+          var creds = new AWS.ProcessCredentials();
           creds.refresh(function(err) {
-            expect(err).to.not.be.null;
+            expect(err.message).to.eql('credential_process returned error');
             expect(creds.accessKeyId).to.be.undefined;
             done();
           });
