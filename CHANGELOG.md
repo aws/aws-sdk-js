@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.426.0-->
+<!--LATEST=2.427.0-->
 <!--ENTRYINSERT-->
+
+## 2.427.0
+* feature: IoT1ClickProjects: This release adds tagging support for AWS IoT 1-Click Project resources. Use these APIs to add, remove, or list tags on Projects, and leverage the tags for various authorization and billing scenarios. This release also adds the ARN property to projects for DescribeProject and ListProject responses.
+* feature: TranscribeService: Amazon Transcribe - support transcriptions from audio sources in German (de-DE) and Korean (ko-KR).
 
 ## 2.426.0
 * bugfix: Paginator: still send '{}' in body for requests other than GET

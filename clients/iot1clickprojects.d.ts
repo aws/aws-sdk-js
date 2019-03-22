@@ -100,6 +100,30 @@ declare class IoT1ClickProjects extends Service {
    */
   listProjects(callback?: (err: AWSError, data: IoT1ClickProjects.Types.ListProjectsResponse) => void): Request<IoT1ClickProjects.Types.ListProjectsResponse, AWSError>;
   /**
+   * Lists the tags (metadata key/value pairs) which you have assigned to the resource.
+   */
+  listTagsForResource(params: IoT1ClickProjects.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.ListTagsForResourceResponse) => void): Request<IoT1ClickProjects.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags (metadata key/value pairs) which you have assigned to the resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: IoT1ClickProjects.Types.ListTagsForResourceResponse) => void): Request<IoT1ClickProjects.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Creates or modifies tags for a resource. Tags are key/value pairs (metadata) that can be used to manage a resource. For more information, see AWS Tagging Strategies.
+   */
+  tagResource(params: IoT1ClickProjects.Types.TagResourceRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.TagResourceResponse) => void): Request<IoT1ClickProjects.Types.TagResourceResponse, AWSError>;
+  /**
+   * Creates or modifies tags for a resource. Tags are key/value pairs (metadata) that can be used to manage a resource. For more information, see AWS Tagging Strategies.
+   */
+  tagResource(callback?: (err: AWSError, data: IoT1ClickProjects.Types.TagResourceResponse) => void): Request<IoT1ClickProjects.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes one or more tags (metadata key/value pairs) from a resource.
+   */
+  untagResource(params: IoT1ClickProjects.Types.UntagResourceRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.UntagResourceResponse) => void): Request<IoT1ClickProjects.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes one or more tags (metadata key/value pairs) from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: IoT1ClickProjects.Types.UntagResourceResponse) => void): Request<IoT1ClickProjects.Types.UntagResourceResponse, AWSError>;
+  /**
    * Updates a placement with the given attributes. To clear an attribute, pass an empty value (i.e., "").
    */
   updatePlacement(params: IoT1ClickProjects.Types.UpdatePlacementRequest, callback?: (err: AWSError, data: IoT1ClickProjects.Types.UpdatePlacementResponse) => void): Request<IoT1ClickProjects.Types.UpdatePlacementResponse, AWSError>;
@@ -169,6 +193,10 @@ declare namespace IoT1ClickProjects {
      * The schema defining the placement to be created. A placement template defines placement default attributes and device templates. You cannot add or remove device templates after the project has been created. However, you can update callbackOverrides for the device templates using the UpdateProject API.
      */
     placementTemplate?: PlacementTemplate;
+    /**
+     * Optional tags (metadata key/value pairs) to be associated with the project. For example, { {"key1": "value1", "key2": "value2"} }. For more information, see AWS Tagging Strategies.
+     */
+    tags?: TagMap;
   }
   export interface CreateProjectResponse {
   }
@@ -316,6 +344,18 @@ declare namespace IoT1ClickProjects {
      */
     nextToken?: NextToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The ARN of the resource whose tags you want to list.
+     */
+    resourceArn: ProjectArn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags (metadata key/value pairs) which you have assigned to the resource.
+     */
+    tags?: TagMap;
+  }
   export type MaxResults = number;
   export type NextToken = string;
   export type PlacementAttributeMap = {[key: string]: AttributeValue};
@@ -371,7 +411,12 @@ declare namespace IoT1ClickProjects {
      */
     deviceTemplates?: DeviceTemplateMap;
   }
+  export type ProjectArn = string;
   export interface ProjectDescription {
+    /**
+     * The ARN of the project.
+     */
+    arn?: ProjectArn;
     /**
      * The name of the project for which to obtain information from.
      */
@@ -392,9 +437,17 @@ declare namespace IoT1ClickProjects {
      * An object describing the project's placement specifications.
      */
     placementTemplate?: PlacementTemplate;
+    /**
+     * The tags (metadata key/value pairs) associated with the project.
+     */
+    tags?: TagMap;
   }
   export type ProjectName = string;
   export interface ProjectSummary {
+    /**
+     * The ARN of the project.
+     */
+    arn?: ProjectArn;
     /**
      * The name of the project being summarized.
      */
@@ -407,9 +460,41 @@ declare namespace IoT1ClickProjects {
      * The date when the project was last updated, in UNIX epoch time format. If the project was not updated, then createdDate and updatedDate are the same.
      */
     updatedDate: Time;
+    /**
+     * The tags (metadata key/value pairs) associated with the project.
+     */
+    tags?: TagMap;
   }
   export type ProjectSummaryList = ProjectSummary[];
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceRequest {
+    /**
+     * The ARN of the resouce for which tag(s) should be added or modified.
+     */
+    resourceArn: ProjectArn;
+    /**
+     * The new or modifying tag(s) for the resource. See AWS IoT 1-Click Service Limits for the maximum number of tags allowed per resource.
+     */
+    tags: TagMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type Time = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The ARN of the resource whose tag you want to remove.
+     */
+    resourceArn: ProjectArn;
+    /**
+     * The keys of those tags which you want to remove.
+     */
+    tagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdatePlacementRequest {
     /**
      * The name of the placement to update.
