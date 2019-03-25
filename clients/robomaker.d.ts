@@ -28,11 +28,11 @@ declare class RoboMaker extends Service {
    */
   cancelSimulationJob(callback?: (err: AWSError, data: RoboMaker.Types.CancelSimulationJobResponse) => void): Request<RoboMaker.Types.CancelSimulationJobResponse, AWSError>;
   /**
-   * Deploys a specific version of a robot application to robots in a fleet. The robot application must have a numbered applicationVersion for consistency reasons. To create a new version, use CreateRobotApplicationVersion or see Creating a Robot Application Version. 
+   * Deploys a specific version of a robot application to robots in a fleet. The robot application must have a numbered applicationVersion for consistency reasons. To create a new version, use CreateRobotApplicationVersion or see Creating a Robot Application Version.   After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible.  
    */
   createDeploymentJob(params: RoboMaker.Types.CreateDeploymentJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateDeploymentJobResponse) => void): Request<RoboMaker.Types.CreateDeploymentJobResponse, AWSError>;
   /**
-   * Deploys a specific version of a robot application to robots in a fleet. The robot application must have a numbered applicationVersion for consistency reasons. To create a new version, use CreateRobotApplicationVersion or see Creating a Robot Application Version. 
+   * Deploys a specific version of a robot application to robots in a fleet. The robot application must have a numbered applicationVersion for consistency reasons. To create a new version, use CreateRobotApplicationVersion or see Creating a Robot Application Version.   After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible.  
    */
   createDeploymentJob(callback?: (err: AWSError, data: RoboMaker.Types.CreateDeploymentJobResponse) => void): Request<RoboMaker.Types.CreateDeploymentJobResponse, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class RoboMaker extends Service {
    */
   createSimulationApplicationVersion(callback?: (err: AWSError, data: RoboMaker.Types.CreateSimulationApplicationVersionResponse) => void): Request<RoboMaker.Types.CreateSimulationApplicationVersionResponse, AWSError>;
   /**
-   * Creates a simulation job.
+   * Creates a simulation job.  After 90 days, simulation jobs expire and will be deleted. They will no longer be accessible.  
    */
   createSimulationJob(params: RoboMaker.Types.CreateSimulationJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.CreateSimulationJobResponse) => void): Request<RoboMaker.Types.CreateSimulationJobResponse, AWSError>;
   /**
-   * Creates a simulation job.
+   * Creates a simulation job.  After 90 days, simulation jobs expire and will be deleted. They will no longer be accessible.  
    */
   createSimulationJob(callback?: (err: AWSError, data: RoboMaker.Types.CreateSimulationJobResponse) => void): Request<RoboMaker.Types.CreateSimulationJobResponse, AWSError>;
   /**
@@ -180,19 +180,19 @@ declare class RoboMaker extends Service {
    */
   describeSimulationJob(callback?: (err: AWSError, data: RoboMaker.Types.DescribeSimulationJobResponse) => void): Request<RoboMaker.Types.DescribeSimulationJobResponse, AWSError>;
   /**
-   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.
+   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.     
    */
   listDeploymentJobs(params: RoboMaker.Types.ListDeploymentJobsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListDeploymentJobsResponse) => void): Request<RoboMaker.Types.ListDeploymentJobsResponse, AWSError>;
   /**
-   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.
+   * Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.     
    */
   listDeploymentJobs(callback?: (err: AWSError, data: RoboMaker.Types.ListDeploymentJobsResponse) => void): Request<RoboMaker.Types.ListDeploymentJobsResponse, AWSError>;
   /**
-   * Returns a list of fleets. You can optionally provide filters to retrieve specific fleets.
+   * Returns a list of fleets. You can optionally provide filters to retrieve specific fleets. 
    */
   listFleets(params: RoboMaker.Types.ListFleetsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListFleetsResponse) => void): Request<RoboMaker.Types.ListFleetsResponse, AWSError>;
   /**
-   * Returns a list of fleets. You can optionally provide filters to retrieve specific fleets.
+   * Returns a list of fleets. You can optionally provide filters to retrieve specific fleets. 
    */
   listFleets(callback?: (err: AWSError, data: RoboMaker.Types.ListFleetsResponse) => void): Request<RoboMaker.Types.ListFleetsResponse, AWSError>;
   /**
@@ -212,19 +212,19 @@ declare class RoboMaker extends Service {
    */
   listRobots(callback?: (err: AWSError, data: RoboMaker.Types.ListRobotsResponse) => void): Request<RoboMaker.Types.ListRobotsResponse, AWSError>;
   /**
-   * Returns a list of simulation applications. You can optionally provide filters to retrieve specific simulation applications.
+   * Returns a list of simulation applications. You can optionally provide filters to retrieve specific simulation applications. 
    */
   listSimulationApplications(params: RoboMaker.Types.ListSimulationApplicationsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListSimulationApplicationsResponse) => void): Request<RoboMaker.Types.ListSimulationApplicationsResponse, AWSError>;
   /**
-   * Returns a list of simulation applications. You can optionally provide filters to retrieve specific simulation applications.
+   * Returns a list of simulation applications. You can optionally provide filters to retrieve specific simulation applications. 
    */
   listSimulationApplications(callback?: (err: AWSError, data: RoboMaker.Types.ListSimulationApplicationsResponse) => void): Request<RoboMaker.Types.ListSimulationApplicationsResponse, AWSError>;
   /**
-   * Returns a list of simulation jobs. You can optionally provide filters to retrieve specific simulation jobs.
+   * Returns a list of simulation jobs. You can optionally provide filters to retrieve specific simulation jobs. 
    */
   listSimulationJobs(params: RoboMaker.Types.ListSimulationJobsRequest, callback?: (err: AWSError, data: RoboMaker.Types.ListSimulationJobsResponse) => void): Request<RoboMaker.Types.ListSimulationJobsResponse, AWSError>;
   /**
-   * Returns a list of simulation jobs. You can optionally provide filters to retrieve specific simulation jobs.
+   * Returns a list of simulation jobs. You can optionally provide filters to retrieve specific simulation jobs. 
    */
   listSimulationJobs(callback?: (err: AWSError, data: RoboMaker.Types.ListSimulationJobsResponse) => void): Request<RoboMaker.Types.ListSimulationJobsResponse, AWSError>;
   /**
@@ -322,6 +322,7 @@ declare namespace RoboMaker {
   export interface CancelSimulationJobResponse {
   }
   export type ClientRequestToken = string;
+  export type Command = string;
   export interface CreateDeploymentJobRequest {
     /**
      * The requested deployment configuration.
@@ -730,7 +731,7 @@ declare namespace RoboMaker {
      */
     outputLocation?: OutputLocation;
     /**
-     * The maximum simulation job duration in seconds. The value must be 8 days (691,200 seconds) or less. 
+     * The maximum simulation job duration in seconds. 
      */
     maxJobDurationInSeconds?: JobDuration;
     /**
@@ -858,25 +859,25 @@ declare namespace RoboMaker {
      */
     createdAt?: CreatedAt;
   }
-  export type DeploymentJobErrorCode = "ResourceNotFound"|"FailureThresholdBreached"|"RobotDeploymentNoResponse"|"GreengrassDeploymentFailed"|"MissingRobotArchitecture"|"MissingRobotApplicationArchitecture"|"MissingRobotDeploymentResource"|"GreengrassGroupVersionDoesNotExist"|"ExtractingBundleFailure"|"PreLaunchFileFailure"|"PostLaunchFileFailure"|"BadPermissionError"|"InternalServerError"|string;
+  export type DeploymentJobErrorCode = "ResourceNotFound"|"EnvironmentSetupError"|"EtagMismatch"|"FailureThresholdBreached"|"RobotDeploymentNoResponse"|"RobotAgentConnectionTimeout"|"GreengrassDeploymentFailed"|"MissingRobotArchitecture"|"MissingRobotApplicationArchitecture"|"MissingRobotDeploymentResource"|"GreengrassGroupVersionDoesNotExist"|"ExtractingBundleFailure"|"PreLaunchFileFailure"|"PostLaunchFileFailure"|"BadPermissionError"|"InternalServerError"|string;
   export type DeploymentJobs = DeploymentJob[];
   export interface DeploymentLaunchConfig {
     /**
      * The package name.
      */
-    packageName: GenericString;
+    packageName: Command;
     /**
      * The deployment pre-launch file. This file will be executed prior to the launch file.
      */
-    preLaunchFile?: GenericString;
+    preLaunchFile?: Path;
     /**
      * The launch file name.
      */
-    launchFile: GenericString;
+    launchFile: Command;
     /**
      * The deployment post-launch file. This file will be executed after the launch file.
      */
-    postLaunchFile?: GenericString;
+    postLaunchFile?: Path;
     /**
      * An array of key/value pairs specifying environment variables for the robot application
      */
@@ -1251,6 +1252,7 @@ declare namespace RoboMaker {
     lastDeploymentTime?: CreatedAt;
   }
   export type Fleets = Fleet[];
+  export type GenericInteger = number;
   export type GenericString = string;
   export type IamRole = string;
   export type Id = string;
@@ -1260,11 +1262,11 @@ declare namespace RoboMaker {
     /**
      * The package name.
      */
-    packageName: GenericString;
+    packageName: Command;
     /**
      * The launch file name.
      */
-    launchFile: GenericString;
+    launchFile: Command;
     /**
      * The environment variables for the application launch.
      */
@@ -1272,7 +1274,7 @@ declare namespace RoboMaker {
   }
   export interface ListDeploymentJobsRequest {
     /**
-     * Optional filters to limit results.
+     * Optional filters to limit results. The filter names status and fleetName are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status InProgress or the status Pending.
      */
     filters?: Filters;
     /**
@@ -1304,7 +1306,7 @@ declare namespace RoboMaker {
      */
     maxResults?: MaxResults;
     /**
-     * Optional filters to limit results.
+     * Optional filters to limit results. The filter name name is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.
      */
     filters?: Filters;
   }
@@ -1328,11 +1330,11 @@ declare namespace RoboMaker {
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of deployment job results returned by ListRobotApplications in paginated output. When this parameter is used, ListRobotApplications only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListFleets request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListRobotApplications returns up to 100 results and a nextToken value if applicable. 
+     * The maximum number of deployment job results returned by ListRobotApplications in paginated output. When this parameter is used, ListRobotApplications only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListRobotApplications request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListRobotApplications returns up to 100 results and a nextToken value if applicable. 
      */
     maxResults?: MaxResults;
     /**
-     * Optional filters to limit results.
+     * Optional filters to limit results. The filter name name is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.
      */
     filters?: Filters;
   }
@@ -1352,11 +1354,11 @@ declare namespace RoboMaker {
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of deployment job results returned by ListRobots in paginated output. When this parameter is used, ListRobots only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListFleets request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListRobots returns up to 100 results and a nextToken value if applicable. 
+     * The maximum number of deployment job results returned by ListRobots in paginated output. When this parameter is used, ListRobots only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListRobots request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListRobots returns up to 100 results and a nextToken value if applicable. 
      */
     maxResults?: MaxResults;
     /**
-     * Optional filters to limit results.
+     * Optional filters to limit results. The filter names status and fleetName are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status Registered or the status Available.
      */
     filters?: Filters;
   }
@@ -1380,11 +1382,11 @@ declare namespace RoboMaker {
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of deployment job results returned by ListSimulationApplications in paginated output. When this parameter is used, ListSimulationApplications only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListFleets request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListSimulationApplications returns up to 100 results and a nextToken value if applicable. 
+     * The maximum number of deployment job results returned by ListSimulationApplications in paginated output. When this parameter is used, ListSimulationApplications only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListSimulationApplications request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListSimulationApplications returns up to 100 results and a nextToken value if applicable. 
      */
     maxResults?: MaxResults;
     /**
-     * Optional list of filters to limit results. The only valid filter name is name.
+     * Optional list of filters to limit results. The filter name name is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.
      */
     filters?: Filters;
   }
@@ -1404,11 +1406,11 @@ declare namespace RoboMaker {
      */
     nextToken?: PaginationToken;
     /**
-     * The maximum number of deployment job results returned by ListSimulationJobs in paginated output. When this parameter is used, ListSimulationJobs only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListFleets request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListSimulationJobs returns up to 100 results and a nextToken value if applicable. 
+     * The maximum number of deployment job results returned by ListSimulationJobs in paginated output. When this parameter is used, ListSimulationJobs only returns maxResults results in a single page along with a nextToken response element. The remaining results of the initial request can be seen by sending another ListSimulationJobs request with the returned nextToken value. This value can be between 1 and 100. If this parameter is not used, then ListSimulationJobs returns up to 100 results and a nextToken value if applicable. 
      */
     maxResults?: MaxResults;
     /**
-     * Optional filters to limit results.
+     * Optional filters to limit results. The filter names status and simulationApplicationName and robotApplicationName are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status Preparing or the status Running.
      */
     filters?: Filters;
   }
@@ -1447,12 +1449,22 @@ declare namespace RoboMaker {
     s3Prefix?: S3Key;
   }
   export type PaginationToken = string;
+  export type Path = string;
+  export type PercentDone = number;
   export type Percentage = number;
   export interface ProgressDetail {
     /**
-     * The current progress status.
+     * The current progress status.  Validating  Validating the deployment.  Downloading/Extracting  Downloading and extracting the bundle on the robot.  Executing pre-launch script(s)  Executing pre-launch script(s) if provided.  Launching  Launching the robot application.  Executing post-launch script(s)  Executing post-launch script(s) if provided.  Finished  Deployment is complete.  
      */
-    currentProgress?: GenericString;
+    currentProgress?: RobotDeploymentStep;
+    /**
+     * Precentage of the step that is done. This currently only applies to the Downloading/Extracting step of the deployment. It is empty for other steps.
+     */
+    percentDone?: PercentDone;
+    /**
+     * Estimated amount of time in seconds remaining in the step. This currently only applies to the Downloading/Extracting step of the deployment. It is empty for other steps.
+     */
+    estimatedTimeRemainingSeconds?: GenericInteger;
     /**
      * The Amazon Resource Name (ARN) of the deployment job.
      */
@@ -1602,6 +1614,7 @@ declare namespace RoboMaker {
      */
     failureCode?: DeploymentJobErrorCode;
   }
+  export type RobotDeploymentStep = "Validating"|"DownloadingExtracting"|"ExecutingPreLaunch"|"Launching"|"ExecutingPostLaunch"|"Finished"|string;
   export type RobotDeploymentSummary = RobotDeployment[];
   export interface RobotSoftwareSuite {
     /**

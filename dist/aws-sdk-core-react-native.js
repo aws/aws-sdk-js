@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.427.0',
+	  VERSION: '2.428.0',
 
 	  /**
 	   * @api private
@@ -4682,6 +4682,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      case 'ThrottlingException':
 	      case 'RequestLimitExceeded':
 	      case 'RequestThrottled':
+	      case 'RequestThrottledException':
 	      case 'TooManyRequestsException':
 	      case 'TransactionInProgressException': //dynamodb
 	        return true;

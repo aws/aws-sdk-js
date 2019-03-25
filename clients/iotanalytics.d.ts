@@ -60,11 +60,11 @@ declare class IoTAnalytics extends Service {
    */
   createDatastore(callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatastoreResponse) => void): Request<IoTAnalytics.Types.CreateDatastoreResponse, AWSError>;
   /**
-   * Creates a pipeline. A pipeline consumes messages from one or more channels and allows you to process the messages before storing them in a data store.
+   * Creates a pipeline. A pipeline consumes messages from one or more channels and allows you to process the messages before storing them in a data store. You must specify both a channel and a datastore activity and, optionally, as many as 23 additional activities in the pipelineActivities array.
    */
   createPipeline(params: IoTAnalytics.Types.CreatePipelineRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CreatePipelineResponse) => void): Request<IoTAnalytics.Types.CreatePipelineResponse, AWSError>;
   /**
-   * Creates a pipeline. A pipeline consumes messages from one or more channels and allows you to process the messages before storing them in a data store.
+   * Creates a pipeline. A pipeline consumes messages from one or more channels and allows you to process the messages before storing them in a data store. You must specify both a channel and a datastore activity and, optionally, as many as 23 additional activities in the pipelineActivities array.
    */
   createPipeline(callback?: (err: AWSError, data: IoTAnalytics.Types.CreatePipelineResponse) => void): Request<IoTAnalytics.Types.CreatePipelineResponse, AWSError>;
   /**
@@ -276,11 +276,11 @@ declare class IoTAnalytics extends Service {
    */
   updateDatastore(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the settings of a pipeline.
+   * Updates the settings of a pipeline. You must specify both a channel and a datastore activity and, optionally, as many as 23 additional activities in the pipelineActivities array.
    */
   updatePipeline(params: IoTAnalytics.Types.UpdatePipelineRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the settings of a pipeline.
+   * Updates the settings of a pipeline. You must specify both a channel and a datastore activity and, optionally, as many as 23 additional activities in the pipelineActivities array.
    */
   updatePipeline(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
@@ -492,9 +492,13 @@ declare namespace IoTAnalytics {
      */
     contentDeliveryRules?: DatasetContentDeliveryRules;
     /**
-     * [Optional] How long, in days, message data is kept for the data set. If not given or set to null, the latest version of the dataset content plus the latest succeeded version (if they are different) are retained for at most 90 days.
+     * [Optional] How long, in days, versions of data set contents are kept for the data set. If not specified or set to null, versions of data set contents are retained for at most 90 days. The number of versions of data set contents retained is determined by the versioningConfiguration parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
      */
     retentionPeriod?: RetentionPeriod;
+    /**
+     * [Optional] How many versions of data set contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the "retentionPeriod" parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+     */
+    versioningConfiguration?: VersioningConfiguration;
     /**
      * Metadata which can be used to manage the data set.
      */
@@ -510,7 +514,7 @@ declare namespace IoTAnalytics {
      */
     datasetArn?: DatasetArn;
     /**
-     * How long, in days, message data is kept for the data set.
+     * How long, in days, data set contents are kept for the data set.
      */
     retentionPeriod?: RetentionPeriod;
   }
@@ -548,7 +552,7 @@ declare namespace IoTAnalytics {
      */
     pipelineName: PipelineName;
     /**
-     * A list of pipeline activities. The list can be 1-25 PipelineActivity objects. Activities perform transformations on your messages, such as removing, renaming, or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.
+     * A list of "PipelineActivity" objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data. The list can be 2-25 PipelineActivity objects and must contain both a channel and a datastore activity. Each entry in the list must contain only one activity, for example:  pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } }, ... ] 
      */
     pipelineActivities: PipelineActivities;
     /**
@@ -603,6 +607,10 @@ declare namespace IoTAnalytics {
      * [Optional] How long, in days, message data is kept for the data set.
      */
     retentionPeriod?: RetentionPeriod;
+    /**
+     * [Optional] How many versions of data set contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the "retentionPeriod" parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+     */
+    versioningConfiguration?: VersioningConfiguration;
   }
   export interface DatasetAction {
     /**
@@ -1210,6 +1218,7 @@ declare namespace IoTAnalytics {
   export type MathExpression = string;
   export type MaxMessages = number;
   export type MaxResults = number;
+  export type MaxVersions = number;
   export interface Message {
     /**
      * The ID you wish to assign to the message. Each "messageId" must be unique within each batch sent.
@@ -1438,7 +1447,7 @@ declare namespace IoTAnalytics {
   }
   export interface Schedule {
     /**
-     * The expression that defines when to trigger an update. For more information, see  Schedule Expressions for Rules in the Amazon CloudWatch documentation.
+     * The expression that defines when to trigger an update. For more information, see  Schedule Expressions for Rules in the Amazon CloudWatch Events User Guide.
      */
     expression?: ScheduleExpression;
   }
@@ -1526,6 +1535,7 @@ declare namespace IoTAnalytics {
     name: DatasetName;
   }
   export type UnlimitedRetentionPeriod = boolean;
+  export type UnlimitedVersioning = boolean;
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource whose tags you want to remove.
@@ -1566,9 +1576,13 @@ declare namespace IoTAnalytics {
      */
     contentDeliveryRules?: DatasetContentDeliveryRules;
     /**
-     * How long, in days, message data is kept for the data set.
+     * How long, in days, data set contents are kept for the data set.
      */
     retentionPeriod?: RetentionPeriod;
+    /**
+     * [Optional] How many versions of data set contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the "retentionPeriod" parameter. (For more information, see https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
+     */
+    versioningConfiguration?: VersioningConfiguration;
   }
   export interface UpdateDatastoreRequest {
     /**
@@ -1586,7 +1600,7 @@ declare namespace IoTAnalytics {
      */
     pipelineName: PipelineName;
     /**
-     * A list of "PipelineActivity" objects. The list can be 1-25 PipelineActivity objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.
+     * A list of "PipelineActivity" objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data. The list can be 2-25 PipelineActivity objects and must contain both a channel and a datastore activity. Each entry in the list must contain only one activity, for example:  pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } }, ... ] 
      */
     pipelineActivities: PipelineActivities;
   }
@@ -1614,6 +1628,16 @@ declare namespace IoTAnalytics {
   }
   export type VariableName = string;
   export type Variables = Variable[];
+  export interface VersioningConfiguration {
+    /**
+     * If true, unlimited versions of data set contents will be kept.
+     */
+    unlimited?: UnlimitedVersioning;
+    /**
+     * How many versions of data set contents will be kept. The "unlimited" parameter must be false.
+     */
+    maxVersions?: MaxVersions;
+  }
   export type VolumeSizeInGB = number;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

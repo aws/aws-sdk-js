@@ -204,6 +204,31 @@
       ],
       "documentation": "<p>Returns information about the specified AWS Firewall Manager policy.</p>"
     },
+    "GetProtectionStatus": {
+      "name": "GetProtectionStatus",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetProtectionStatusRequest"
+      },
+      "output": {
+        "shape": "GetProtectionStatusResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalErrorException"
+        }
+      ],
+      "documentation": "<p>If you created a Shield Advanced policy, returns policy-level attack summary information in the event of a potential DDoS attack.</p>"
+    },
     "ListComplianceStatus": {
       "name": "ListComplianceStatus",
       "http": {
@@ -330,14 +355,15 @@
           "shape": "InvalidTypeException"
         }
       ],
-      "documentation": "<p>Creates an AWS Firewall Manager policy.</p>"
+      "documentation": "<p>Creates an AWS Firewall Manager policy.</p> <p>Firewall Manager provides two types of policies: A Shield Advanced policy, which applies Shield Advanced protection to specified accounts and resources, or a WAF policy, which contains a rule group and defines which resources are to be protected by that rule group. A policy is specific to either WAF or Shield Advanced. If you want to enforce both WAF rules and Shield Advanced protection across accounts, you can create multiple policies. You can create one or more policies for WAF rules, and one or more policies for Shield Advanced.</p> <p>You must be subscribed to Shield Advanced to create a Shield Advanced policy. For more information on subscribing to Shield Advanced, see <a href=\"https://docs.aws.amazon.com/waf/latest/DDOSAPIReference/API_CreateSubscription.html\">CreateSubscription</a>.</p>"
     }
   },
   "shapes": {
     "AWSAccountId": {
       "type": "string",
       "max": 1024,
-      "min": 1
+      "min": 1,
+      "pattern": "^[0-9]+$"
     },
     "AccountRoleStatus": {
       "type": "string",
@@ -377,7 +403,7 @@
         },
         "ResourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>The resource type. This is in the format shown in <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS Resource Types Reference</a>. Valid values are <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> or <code>AWS::CloudFront::Distribution</code>.</p>"
+          "documentation": "<p>The resource type. This is in the format shown in <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS Resource Types Reference</a>. For example: <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> or <code>AWS::CloudFront::Distribution</code>.</p>"
         }
       },
       "documentation": "<p>Details of the resource that is not protected by the policy.</p>"
@@ -391,7 +417,8 @@
     "CustomerPolicyScopeId": {
       "type": "string",
       "max": 1024,
-      "min": 1
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
     },
     "CustomerPolicyScopeIdList": {
       "type": "list",
@@ -430,7 +457,7 @@
         },
         "DeleteAllPolicyResources": {
           "shape": "Boolean",
-          "documentation": "<p>If <code>True</code>, the request will also delete all web ACLs in this policy. Associated resources will no longer be protected by web ACLs in this policy.</p>"
+          "documentation": "<p>If <code>True</code>, the request will also perform a clean-up process that will:</p> <ul> <li> <p>Delete rule groups created by AWS Firewall Manager</p> </li> <li> <p>Remove web ACLs from in-scope resources</p> </li> <li> <p>Delete web ACLs that contain no rules or rule groups</p> </li> </ul> <p>After the cleanup, in-scope resources will no longer be protected by web ACLs in this policy. Protection of out-of-scope resources will remain unchanged. Scope is determined by tags and accounts associated with the policy. When creating the policy, if you specified that only resources in specific accounts or with specific tags be protected by the policy, those resources are in-scope. All others are out of scope. If you did not specify tags or accounts, all resources are in-scope. </p>"
         }
       }
     },
@@ -438,13 +465,15 @@
       "type": "string",
       "enum": [
         "AWSCONFIG",
-        "AWSWAF"
+        "AWSWAF",
+        "AWSSHIELD_ADVANCED"
       ]
     },
     "DetailedInfo": {
       "type": "string",
       "max": 1024,
-      "min": 1
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
     },
     "DisassociateAdminAccountRequest": {
       "type": "structure",
@@ -556,6 +585,59 @@
         "PolicyArn": {
           "shape": "ResourceArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the specified policy.</p>"
+        }
+      }
+    },
+    "GetProtectionStatusRequest": {
+      "type": "structure",
+      "required": [
+        "PolicyId"
+      ],
+      "members": {
+        "PolicyId": {
+          "shape": "PolicyId",
+          "documentation": "<p>The ID of the policy for which you want to get the attack information.</p>"
+        },
+        "MemberAccountId": {
+          "shape": "AWSAccountId",
+          "documentation": "<p>The AWS account that is in scope of the policy that you want to get the details for.</p>"
+        },
+        "StartTime": {
+          "shape": "TimeStamp",
+          "documentation": "<p>The start of the time period to query for the attacks. This is a <code>timestamp</code> type. The sample request above indicates a number type because the default used by AWS Firewall Manager is Unix time in seconds. However, any valid <code>timestamp</code> format is allowed.</p>"
+        },
+        "EndTime": {
+          "shape": "TimeStamp",
+          "documentation": "<p>The end of the time period to query for the attacks. This is a <code>timestamp</code> type. The sample request above indicates a number type because the default used by AWS Firewall Manager is Unix time in seconds. However, any valid <code>timestamp</code> format is allowed.</p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>If you specify a value for <code>MaxResults</code> and you have more objects than the number that you specify for <code>MaxResults</code>, AWS Firewall Manager returns a <code>NextToken</code> value in the response that allows you to list another group of objects. For the second and subsequent <code>GetProtectionStatus</code> requests, specify the value of <code>NextToken</code> from the previous response to get information about another batch of objects.</p>"
+        },
+        "MaxResults": {
+          "shape": "PaginationMaxResults",
+          "documentation": "<p>Specifies the number of objects that you want AWS Firewall Manager to return for this request. If you have more objects than the number that you specify for <code>MaxResults</code>, the response includes a <code>NextToken</code> value that you can use to get another batch of objects.</p>"
+        }
+      }
+    },
+    "GetProtectionStatusResponse": {
+      "type": "structure",
+      "members": {
+        "AdminAccountId": {
+          "shape": "AWSAccountId",
+          "documentation": "<p>The ID of the AWS Firewall administrator account for this policy.</p>"
+        },
+        "ServiceType": {
+          "shape": "SecurityServiceType",
+          "documentation": "<p>The service type that is protected by the policy. Currently, this is always <code>SHIELD_ADVANCED</code>.</p>"
+        },
+        "Data": {
+          "shape": "ProtectionData",
+          "documentation": "<p>Details about the attack, including the following:</p> <ul> <li> <p>Attack type</p> </li> <li> <p>Account ID</p> </li> <li> <p>ARN of the resource attacked</p> </li> <li> <p>Start time of the attack</p> </li> <li> <p>End time of the attack (ongoing attacks will not have an end time)</p> </li> </ul> <p>The details are in JSON format. An example is shown in the Examples section below.</p>"
+        },
+        "NextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>If you have more objects than the number that you specified for <code>MaxResults</code> in the request, the response includes a <code>NextToken</code> value. To list more objects, submit another <code>GetProtectionStatus</code> request, and specify the <code>NextToken</code> value from the response in the <code>NextToken</code> value in the next request.</p> <p>AWS SDKs provide auto-pagination that identify <code>NextToken</code> in a response and make subsequent request calls automatically on your behalf. However, this feature is not supported by <code>GetProtectionStatus</code>. You must submit subsequent requests with <code>NextToken</code> using your own processes. </p>"
         }
       }
     },
@@ -671,7 +753,8 @@
     },
     "PaginationToken": {
       "type": "string",
-      "min": 1
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
     },
     "Policy": {
       "type": "structure",
@@ -701,7 +784,11 @@
         },
         "ResourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>The type of resource to protect with the policy, either an Application Load Balancer or a CloudFront distribution. This is in the format shown in <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS Resource Types Reference</a>. Valid values are <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> or <code>AWS::CloudFront::Distribution</code>.</p>"
+          "documentation": "<p>The type of resource to protect with the policy. This is in the format shown in <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS Resource Types Reference</a>. For example: <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> or <code>AWS::CloudFront::Distribution</code>.</p>"
+        },
+        "ResourceTypeList": {
+          "shape": "ResourceTypeList",
+          "documentation": "<p>An array of <code>ResourceType</code>.</p>"
         },
         "ResourceTags": {
           "shape": "ResourceTags",
@@ -810,7 +897,8 @@
     "PolicyId": {
       "type": "string",
       "max": 36,
-      "min": 36
+      "min": 36,
+      "pattern": "^[a-z0-9A-Z-]{36}$"
     },
     "PolicySummary": {
       "type": "structure",
@@ -829,11 +917,11 @@
         },
         "ResourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>The type of resource to protect with the policy, either an Application Load Balancer or a CloudFront distribution. This is in the format shown in <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS Resource Types Reference</a>. Valid values are <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> or <code>AWS::CloudFront::Distribution</code>.</p>"
+          "documentation": "<p>The type of resource to protect with the policy. This is in the format shown in <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS Resource Types Reference</a>. For example: <code>AWS::ElasticLoadBalancingV2::LoadBalancer</code> or <code>AWS::CloudFront::Distribution</code>.</p>"
         },
         "SecurityServiceType": {
           "shape": "SecurityServiceType",
-          "documentation": "<p>The service that the policy is using to protect the resources. This value is <code>WAF</code>.</p>"
+          "documentation": "<p>The service that the policy is using to protect the resources. This specifies the type of policy that is created, either a WAF policy or Shield Advanced policy.</p>"
         },
         "RemediationEnabled": {
           "shape": "Boolean",
@@ -851,7 +939,11 @@
     "PolicyUpdateToken": {
       "type": "string",
       "max": 1024,
-      "min": 1
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "ProtectionData": {
+      "type": "string"
     },
     "PutNotificationChannelRequest": {
       "type": "structure",
@@ -898,7 +990,8 @@
     "ResourceArn": {
       "type": "string",
       "max": 1024,
-      "min": 1
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
     },
     "ResourceCount": {
       "type": "long",
@@ -907,12 +1000,14 @@
     "ResourceId": {
       "type": "string",
       "max": 1024,
-      "min": 1
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
     },
     "ResourceName": {
       "type": "string",
       "max": 128,
-      "min": 1
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
     },
     "ResourceTag": {
       "type": "structure",
@@ -942,7 +1037,14 @@
     "ResourceType": {
       "type": "string",
       "max": 128,
-      "min": 1
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "ResourceTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "ResourceType"
+      }
     },
     "SecurityServicePolicyData": {
       "type": "structure",
@@ -952,11 +1054,11 @@
       "members": {
         "Type": {
           "shape": "SecurityServiceType",
-          "documentation": "<p>The service that the policy is using to protect the resources. This value is <code>WAF</code>.</p>"
+          "documentation": "<p>The service that the policy is using to protect the resources. This specifies the type of policy that is created, either a WAF policy or Shield Advanced policy.</p>"
         },
         "ManagedServiceData": {
           "shape": "ManagedServiceData",
-          "documentation": "<p>Details about the service. This contains <code>WAF</code> data in JSON format, as shown in the following example:</p> <p> <code>ManagedServiceData\": \"{\\\"type\\\": \\\"WAF\\\", \\\"ruleGroups\\\": [{\\\"id\\\": \\\"12345678-1bcd-9012-efga-0987654321ab\\\", \\\"overrideAction\\\" : {\\\"type\\\": \\\"COUNT\\\"}}], \\\"defaultAction\\\": {\\\"type\\\": \\\"BLOCK\\\"}}</code> </p>"
+          "documentation": "<p>Details about the service. This contains <code>WAF</code> data in JSON format, as shown in the following example:</p> <p> <code>ManagedServiceData\": \"{\\\"type\\\": \\\"WAF\\\", \\\"ruleGroups\\\": [{\\\"id\\\": \\\"12345678-1bcd-9012-efga-0987654321ab\\\", \\\"overrideAction\\\" : {\\\"type\\\": \\\"COUNT\\\"}}], \\\"defaultAction\\\": {\\\"type\\\": \\\"BLOCK\\\"}}</code> </p> <p>If this is a Shield Advanced policy, this string will be empty.</p>"
         }
       },
       "documentation": "<p>Details about the security service that is being used to protect the resources.</p>"
@@ -964,7 +1066,8 @@
     "SecurityServiceType": {
       "type": "string",
       "enum": [
-        "WAF"
+        "WAF",
+        "SHIELD_ADVANCED"
       ]
     },
     "TagKey": {
@@ -986,9 +1089,10 @@
       "enum": [
         "WEB_ACL_MISSING_RULE_GROUP",
         "RESOURCE_MISSING_WEB_ACL",
-        "RESOURCE_INCORRECT_WEB_ACL"
+        "RESOURCE_INCORRECT_WEB_ACL",
+        "RESOURCE_MISSING_SHIELD_PROTECTION"
       ]
     }
   },
-  "documentation": "<fullname>AWS Firewall Manager</fullname> <p>This is the <i>AWS Firewall Manager API Reference</i>. This guide is for developers who need detailed information about the AWS Firewall Manager API actions, data types, and errors. For detailed information about AWS Firewall Manager features, see the <a href=\"http://docs.aws.amazon.com/waf/latest/developerguide/fms-chapter.html\">AWS Firewall Manager Developer Guide</a>.</p>"
+  "documentation": "<fullname>AWS Firewall Manager</fullname> <p>This is the <i>AWS Firewall Manager API Reference</i>. This guide is for developers who need detailed information about the AWS Firewall Manager API actions, data types, and errors. For detailed information about AWS Firewall Manager features, see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/fms-chapter.html\">AWS Firewall Manager Developer Guide</a>.</p>"
 }

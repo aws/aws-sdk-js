@@ -12,6 +12,28 @@
     "uid": "directconnect-2012-10-25"
   },
   "operations": {
+    "AcceptDirectConnectGatewayAssociationProposal": {
+      "name": "AcceptDirectConnectGatewayAssociationProposal",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AcceptDirectConnectGatewayAssociationProposalRequest"
+      },
+      "output": {
+        "shape": "AcceptDirectConnectGatewayAssociationProposalResult"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p>Accepts a proposal request to attach a virtual private gateway to a Direct Connect gateway.</p>"
+    },
     "AllocateConnectionOnInterconnect": {
       "name": "AllocateConnectionOnInterconnect",
       "http": {
@@ -32,7 +54,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Deprecated. Use <a>AllocateHostedConnection</a> instead.</p> <p>Creates a hosted connection on an interconnect.</p> <p>Allocates a VLAN number and a specified amount of bandwidth for use by a hosted connection on the specified interconnect.</p> <note> <p>Intended for use by AWS Direct Connect partners only.</p> </note>",
+      "documentation": "<p>Deprecated. Use <a>AllocateHostedConnection</a> instead.</p> <p>Creates a hosted connection on an interconnect.</p> <p>Allocates a VLAN number and a specified amount of bandwidth for use by a hosted connection on the specified interconnect.</p> <note> <p>Intended for use by AWS Direct Connect Partners only.</p> </note>",
       "deprecated": true
     },
     "AllocateHostedConnection": {
@@ -55,7 +77,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Creates a hosted connection on the specified interconnect or a link aggregation group (LAG).</p> <p>Allocates a VLAN number and a specified amount of bandwidth for use by a hosted connection on the specified interconnect or LAG.</p> <note> <p>Intended for use by AWS Direct Connect partners only.</p> </note>"
+      "documentation": "<p>Creates a hosted connection on the specified interconnect or a link aggregation group (LAG) of interconnects.</p> <p>Allocates a VLAN number and a specified amount of capacity (bandwidth) for use by a hosted connection on the specified interconnect or LAG of interconnects. AWS polices the hosted connection for the specified capacity and the AWS Direct Connect Partner must also police the hosted connection for the specified capacity.</p> <note> <p>Intended for use by AWS Direct Connect Partners only.</p> </note>"
     },
     "AllocatePrivateVirtualInterface": {
       "name": "AllocatePrivateVirtualInterface",
@@ -143,7 +165,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Associates a hosted connection and its virtual interfaces with a link aggregation group (LAG) or interconnect. If the target interconnect or LAG has an existing hosted connection with a conflicting VLAN number or IP address, the operation fails. This action temporarily interrupts the hosted connection's connectivity to AWS as it is being migrated.</p> <note> <p>Intended for use by AWS Direct Connect partners only.</p> </note>"
+      "documentation": "<p>Associates a hosted connection and its virtual interfaces with a link aggregation group (LAG) or interconnect. If the target interconnect or LAG has an existing hosted connection with a conflicting VLAN number or IP address, the operation fails. This action temporarily interrupts the hosted connection's connectivity to AWS as it is being migrated.</p> <note> <p>Intended for use by AWS Direct Connect Partners only.</p> </note>"
     },
     "AssociateVirtualInterface": {
       "name": "AssociateVirtualInterface",
@@ -321,6 +343,28 @@
       ],
       "documentation": "<p>Creates an association between a Direct Connect gateway and a virtual private gateway. The virtual private gateway must be attached to a VPC and must not be associated with another Direct Connect gateway.</p>"
     },
+    "CreateDirectConnectGatewayAssociationProposal": {
+      "name": "CreateDirectConnectGatewayAssociationProposal",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateDirectConnectGatewayAssociationProposalRequest"
+      },
+      "output": {
+        "shape": "CreateDirectConnectGatewayAssociationProposalResult"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p>Creates a proposal to associate the specified virtual private gateway with the specified Direct Connect gateway.</p> <p>You can only associate a Direct Connect gateway and virtual private gateway when the account that owns the Direct Connect gateway and the account that owns the virtual private gateway have the same payer ID.</p>"
+    },
     "CreateInterconnect": {
       "name": "CreateInterconnect",
       "http": {
@@ -341,7 +385,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Creates an interconnect between an AWS Direct Connect partner's network and a specific AWS Direct Connect location.</p> <p>An interconnect is a connection which is capable of hosting other connections. The partner can use an interconnect to provide sub-1Gbps AWS Direct Connect service to tier 2 customers who do not have their own connections. Like a standard connection, an interconnect links the partner's network to an AWS Direct Connect location over a standard Ethernet fiber-optic cable. One end is connected to the partner's router, the other to an AWS Direct Connect router.</p> <p>You can automatically add the new interconnect to a link aggregation group (LAG) by specifying a LAG ID in the request. This ensures that the new interconnect is allocated on the same AWS Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, the request fails and no interconnect is created.</p> <p>For each end customer, the AWS Direct Connect partner provisions a connection on their interconnect by calling <a>AllocateConnectionOnInterconnect</a>. The end customer can then connect to AWS resources by creating a virtual interface on their connection, using the VLAN assigned to them by the partner.</p> <note> <p>Intended for use by AWS Direct Connect partners only.</p> </note>"
+      "documentation": "<p>Creates an interconnect between an AWS Direct Connect Partner's network and a specific AWS Direct Connect location.</p> <p>An interconnect is a connection that is capable of hosting other connections. The AWS Direct Connect partner can use an interconnect to provide AWS Direct Connect hosted connections to customers through their own network services. Like a standard connection, an interconnect links the partner's network to an AWS Direct Connect location over a standard Ethernet fiber-optic cable. One end is connected to the partner's router, the other to an AWS Direct Connect router.</p> <p>You can automatically add the new interconnect to a link aggregation group (LAG) by specifying a LAG ID in the request. This ensures that the new interconnect is allocated on the same AWS Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, the request fails and no interconnect is created.</p> <p>For each end customer, the AWS Direct Connect Partner provisions a connection on their interconnect by calling <a>AllocateHostedConnection</a>. The end customer can then connect to AWS resources by creating a virtual interface on their connection, using the VLAN assigned to them by the AWS Direct Connect Partner.</p> <note> <p>Intended for use by AWS Direct Connect Partners only.</p> </note>"
     },
     "CreateLag": {
       "name": "CreateLag",
@@ -363,7 +407,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Creates a link aggregation group (LAG) with the specified number of bundled physical connections between the customer network and a specific AWS Direct Connect location. A LAG is a logical interface that uses the Link Aggregation Control Protocol (LACP) to aggregate multiple interfaces, enabling you to treat them as a single interface.</p> <p>All connections in a LAG must use the same bandwidth and must terminate at the same AWS Direct Connect endpoint.</p> <p>You can have up to 10 connections per LAG. Regardless of this limit, if you request more connections for the LAG than AWS Direct Connect can allocate on a single endpoint, no LAG is created.</p> <p>You can specify an existing physical connection or interconnect to include in the LAG (which counts towards the total number of connections). Doing so interrupts the current physical connection or hosted connections, and re-establishes them as a member of the LAG. The LAG will be created on the same AWS Direct Connect endpoint to which the connection terminates. Any virtual interfaces associated with the connection are automatically disassociated and re-associated with the LAG. The connection ID does not change.</p> <p>If the AWS account used to create a LAG is a registered AWS Direct Connect partner, the LAG is automatically enabled to host sub-connections. For a LAG owned by a partner, any associated virtual interfaces cannot be directly configured.</p>"
+      "documentation": "<p>Creates a link aggregation group (LAG) with the specified number of bundled physical connections between the customer network and a specific AWS Direct Connect location. A LAG is a logical interface that uses the Link Aggregation Control Protocol (LACP) to aggregate multiple interfaces, enabling you to treat them as a single interface.</p> <p>All connections in a LAG must use the same bandwidth and must terminate at the same AWS Direct Connect endpoint.</p> <p>You can have up to 10 connections per LAG. Regardless of this limit, if you request more connections for the LAG than AWS Direct Connect can allocate on a single endpoint, no LAG is created.</p> <p>You can specify an existing physical connection or interconnect to include in the LAG (which counts towards the total number of connections). Doing so interrupts the current physical connection or hosted connections, and re-establishes them as a member of the LAG. The LAG will be created on the same AWS Direct Connect endpoint to which the connection terminates. Any virtual interfaces associated with the connection are automatically disassociated and re-associated with the LAG. The connection ID does not change.</p> <p>If the AWS account used to create a LAG is a registered AWS Direct Connect Partner, the LAG is automatically enabled to host sub-connections. For a LAG owned by a partner, any associated virtual interfaces cannot be directly configured.</p>"
     },
     "CreatePrivateVirtualInterface": {
       "name": "CreatePrivateVirtualInterface",
@@ -497,6 +541,28 @@
       ],
       "documentation": "<p>Deletes the association between the specified Direct Connect gateway and virtual private gateway.</p>"
     },
+    "DeleteDirectConnectGatewayAssociationProposal": {
+      "name": "DeleteDirectConnectGatewayAssociationProposal",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteDirectConnectGatewayAssociationProposalRequest"
+      },
+      "output": {
+        "shape": "DeleteDirectConnectGatewayAssociationProposalResult"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p>Deletes the association proposal request between the specified Direct Connect gateway and virtual private gateway.</p>"
+    },
     "DeleteInterconnect": {
       "name": "DeleteInterconnect",
       "http": {
@@ -517,7 +583,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Deletes the specified interconnect.</p> <note> <p>Intended for use by AWS Direct Connect partners only.</p> </note>"
+      "documentation": "<p>Deletes the specified interconnect.</p> <note> <p>Intended for use by AWS Direct Connect Partners only.</p> </note>"
     },
     "DeleteLag": {
       "name": "DeleteLag",
@@ -628,8 +694,30 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Deprecated. Use <a>DescribeHostedConnections</a> instead.</p> <p>Lists the connections that have been provisioned on the specified interconnect.</p> <note> <p>Intended for use by AWS Direct Connect partners only.</p> </note>",
+      "documentation": "<p>Deprecated. Use <a>DescribeHostedConnections</a> instead.</p> <p>Lists the connections that have been provisioned on the specified interconnect.</p> <note> <p>Intended for use by AWS Direct Connect Partners only.</p> </note>",
       "deprecated": true
+    },
+    "DescribeDirectConnectGatewayAssociationProposals": {
+      "name": "DescribeDirectConnectGatewayAssociationProposals",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeDirectConnectGatewayAssociationProposalsRequest"
+      },
+      "output": {
+        "shape": "DescribeDirectConnectGatewayAssociationProposalsResult"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p>Describes one or more association proposals for connection between a virtual private gateway and a Direct Connect gateway. </p>"
     },
     "DescribeDirectConnectGatewayAssociations": {
       "name": "DescribeDirectConnectGatewayAssociations",
@@ -717,7 +805,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Lists the hosted connections that have been provisioned on the specified interconnect or link aggregation group (LAG).</p> <note> <p>Intended for use by AWS Direct Connect partners only.</p> </note>"
+      "documentation": "<p>Lists the hosted connections that have been provisioned on the specified interconnect or link aggregation group (LAG).</p> <note> <p>Intended for use by AWS Direct Connect Partners only.</p> </note>"
     },
     "DescribeInterconnectLoa": {
       "name": "DescribeInterconnectLoa",
@@ -910,7 +998,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Disassociates a connection from a link aggregation group (LAG). The connection is interrupted and re-established as a standalone connection (the connection is not deleted; to delete the connection, use the <a>DeleteConnection</a> request). If the LAG has associated virtual interfaces or hosted connections, they remain associated with the LAG. A disassociated connection owned by an AWS Direct Connect partner is automatically converted to an interconnect.</p> <p>If disassociating the connection would cause the LAG to fall below its setting for minimum number of operational connections, the request fails, except when it's the last member of the LAG. If all connections are disassociated, the LAG continues to exist as an empty LAG with no physical connections. </p>"
+      "documentation": "<p>Disassociates a connection from a link aggregation group (LAG). The connection is interrupted and re-established as a standalone connection (the connection is not deleted; to delete the connection, use the <a>DeleteConnection</a> request). If the LAG has associated virtual interfaces or hosted connections, they remain associated with the LAG. A disassociated connection owned by an AWS Direct Connect Partner is automatically converted to an interconnect.</p> <p>If disassociating the connection would cause the LAG to fall below its setting for minimum number of operational connections, the request fails, except when it's the last member of the LAG. If all connections are disassociated, the LAG continues to exist as an empty LAG with no physical connections. </p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -962,6 +1050,28 @@
       ],
       "documentation": "<p>Removes one or more tags from the specified AWS Direct Connect resource.</p>"
     },
+    "UpdateDirectConnectGatewayAssociation": {
+      "name": "UpdateDirectConnectGatewayAssociation",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateDirectConnectGatewayAssociationRequest"
+      },
+      "output": {
+        "shape": "UpdateDirectConnectGatewayAssociationResult"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p>Updates the specified attributes of the Direct Connect gateway association.</p> <p>Add or remove prefixes from the association.</p>"
+    },
     "UpdateLag": {
       "name": "UpdateLag",
       "http": {
@@ -1011,6 +1121,40 @@
     "ASN": {
       "type": "integer"
     },
+    "AcceptDirectConnectGatewayAssociationProposalRequest": {
+      "type": "structure",
+      "required": [
+        "directConnectGatewayId",
+        "proposalId",
+        "associatedGatewayOwnerAccount"
+      ],
+      "members": {
+        "directConnectGatewayId": {
+          "shape": "DirectConnectGatewayId",
+          "documentation": "<p>The ID of the Direct Connect gateway.</p>"
+        },
+        "proposalId": {
+          "shape": "DirectConnectGatewayAssociationProposalId",
+          "documentation": "<p>The ID of the request proposal.</p>"
+        },
+        "associatedGatewayOwnerAccount": {
+          "shape": "OwnerAccount",
+          "documentation": "<p>The ID of the AWS account that owns the virtual private gateway.</p>"
+        },
+        "overrideAllowedPrefixesToDirectConnectGateway": {
+          "shape": "RouteFilterPrefixList",
+          "documentation": "<p>Overrides the Amazon VPC prefixes advertised to the Direct Connect gateway.</p>"
+        }
+      }
+    },
+    "AcceptDirectConnectGatewayAssociationProposalResult": {
+      "type": "structure",
+      "members": {
+        "directConnectGatewayAssociation": {
+          "shape": "DirectConnectGatewayAssociation"
+        }
+      }
+    },
     "AddressFamily": {
       "type": "string",
       "enum": [
@@ -1030,7 +1174,7 @@
       "members": {
         "bandwidth": {
           "shape": "Bandwidth",
-          "documentation": "<p>The bandwidth of the connection, in Mbps. The possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, and 500Mbps.</p>"
+          "documentation": "<p>The bandwidth of the connection. The possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps. Note that only those AWS Direct Connect Partners who have met specific requirements are allowed to create a 1Gbps, 2Gbps, 5Gbps or 10Gbps hosted connection.</p>"
         },
         "connectionName": {
           "shape": "ConnectionName",
@@ -1070,7 +1214,7 @@
         },
         "bandwidth": {
           "shape": "Bandwidth",
-          "documentation": "<p>The bandwidth of the hosted connection, in Mbps. The possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, and 500Mbps.</p>"
+          "documentation": "<p>The bandwidth of the connection. The possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps. Note that only those AWS Direct Connect Partners who have met specific requirements are allowed to create a 1Gbps, 2Gbps, 5Gbps or 10Gbps hosted connection. </p>"
         },
         "connectionName": {
           "shape": "ConnectionName",
@@ -1179,6 +1323,31 @@
           "documentation": "<p>The ID of the LAG or connection.</p>"
         }
       }
+    },
+    "AssociatedGateway": {
+      "type": "structure",
+      "members": {
+        "id": {
+          "shape": "GatewayIdentifier",
+          "documentation": "<p>The ID of the associated gateway.</p>"
+        },
+        "type": {
+          "shape": "GatewayType",
+          "documentation": "<p>The type of associated gateway.</p>"
+        },
+        "ownerAccount": {
+          "shape": "OwnerAccount",
+          "documentation": "<p>The ID of the AWS account that owns the associated virtual private gateway.</p>"
+        },
+        "region": {
+          "shape": "Region",
+          "documentation": "<p>The Region where the associated gateway is located.</p>"
+        }
+      },
+      "documentation": "<p>Information about the associated gateway.</p>"
+    },
+    "AssociatedGatewayId": {
+      "type": "string"
     },
     "AvailablePortSpeeds": {
       "type": "list",
@@ -1497,16 +1666,62 @@
         }
       }
     },
-    "CreateDirectConnectGatewayAssociationRequest": {
+    "CreateDirectConnectGatewayAssociationProposalRequest": {
       "type": "structure",
       "required": [
         "directConnectGatewayId",
-        "virtualGatewayId"
+        "directConnectGatewayOwnerAccount",
+        "gatewayId"
       ],
       "members": {
         "directConnectGatewayId": {
           "shape": "DirectConnectGatewayId",
           "documentation": "<p>The ID of the Direct Connect gateway.</p>"
+        },
+        "directConnectGatewayOwnerAccount": {
+          "shape": "OwnerAccount",
+          "documentation": "<p>The ID of the AWS account that owns the Direct Connect gateway.</p>"
+        },
+        "gatewayId": {
+          "shape": "GatewayIdToAssociate",
+          "documentation": "<p>The ID of the virtual private gateway.</p>"
+        },
+        "addAllowedPrefixesToDirectConnectGateway": {
+          "shape": "RouteFilterPrefixList",
+          "documentation": "<p>The Amazon VPC prefixes to advertise to the Direct Connect gateway.</p>"
+        },
+        "removeAllowedPrefixesToDirectConnectGateway": {
+          "shape": "RouteFilterPrefixList",
+          "documentation": "<p>The Amazon VPC prefixes to no longer advertise to the Direct Connect gateway.</p>"
+        }
+      }
+    },
+    "CreateDirectConnectGatewayAssociationProposalResult": {
+      "type": "structure",
+      "members": {
+        "directConnectGatewayAssociationProposal": {
+          "shape": "DirectConnectGatewayAssociationProposal",
+          "documentation": "<p>Information about the Direct Connect gateway proposal.</p>"
+        }
+      }
+    },
+    "CreateDirectConnectGatewayAssociationRequest": {
+      "type": "structure",
+      "required": [
+        "directConnectGatewayId"
+      ],
+      "members": {
+        "directConnectGatewayId": {
+          "shape": "DirectConnectGatewayId",
+          "documentation": "<p>The ID of the Direct Connect gateway.</p>"
+        },
+        "gatewayId": {
+          "shape": "GatewayIdToAssociate",
+          "documentation": "<p>The ID of the virtual private gateway.</p>"
+        },
+        "addAllowedPrefixesToDirectConnectGateway": {
+          "shape": "RouteFilterPrefixList",
+          "documentation": "<p>The Amazon VPC prefixes to advertise to the Direct Connect gateway</p>"
         },
         "virtualGatewayId": {
           "shape": "VirtualGatewayId",
@@ -1593,7 +1808,7 @@
         },
         "connectionsBandwidth": {
           "shape": "Bandwidth",
-          "documentation": "<p>The bandwidth of the individual physical connections bundled by the LAG. The possible values are 1Gbps and 10Gbps.</p>"
+          "documentation": "<p>The bandwidth of the individual physical connections bundled by the LAG. The possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps. </p>"
         },
         "lagName": {
           "shape": "LagName",
@@ -1684,13 +1899,34 @@
         }
       }
     },
-    "DeleteDirectConnectGatewayAssociationRequest": {
+    "DeleteDirectConnectGatewayAssociationProposalRequest": {
       "type": "structure",
       "required": [
-        "directConnectGatewayId",
-        "virtualGatewayId"
+        "proposalId"
       ],
       "members": {
+        "proposalId": {
+          "shape": "DirectConnectGatewayAssociationProposalId",
+          "documentation": "<p>The ID of the proposal.</p>"
+        }
+      }
+    },
+    "DeleteDirectConnectGatewayAssociationProposalResult": {
+      "type": "structure",
+      "members": {
+        "directConnectGatewayAssociationProposal": {
+          "shape": "DirectConnectGatewayAssociationProposal",
+          "documentation": "<p>The ID of the virtual private gateway.</p>"
+        }
+      }
+    },
+    "DeleteDirectConnectGatewayAssociationRequest": {
+      "type": "structure",
+      "members": {
+        "associationId": {
+          "shape": "DirectConnectGatewayAssociationId",
+          "documentation": "<p>The ID of the Direct Connect gateway association.</p>"
+        },
         "directConnectGatewayId": {
           "shape": "DirectConnectGatewayId",
           "documentation": "<p>The ID of the Direct Connect gateway.</p>"
@@ -1706,7 +1942,7 @@
       "members": {
         "directConnectGatewayAssociation": {
           "shape": "DirectConnectGatewayAssociation",
-          "documentation": "<p>The association to be deleted.</p>"
+          "documentation": "<p>Information about the deleted association.</p>"
         }
       }
     },
@@ -1835,24 +2071,70 @@
         }
       }
     },
-    "DescribeDirectConnectGatewayAssociationsRequest": {
+    "DescribeDirectConnectGatewayAssociationProposalsRequest": {
       "type": "structure",
       "members": {
         "directConnectGatewayId": {
           "shape": "DirectConnectGatewayId",
           "documentation": "<p>The ID of the Direct Connect gateway.</p>"
         },
-        "virtualGatewayId": {
-          "shape": "VirtualGatewayId",
-          "documentation": "<p>The ID of the virtual private gateway.</p>"
+        "proposalId": {
+          "shape": "DirectConnectGatewayAssociationProposalId",
+          "documentation": "<p>The ID of the proposal.</p>"
+        },
+        "associatedGatewayId": {
+          "shape": "AssociatedGatewayId",
+          "documentation": "<p>The ID of the associated virtual private gateway.</p>"
         },
         "maxResults": {
           "shape": "MaxResultSetSize",
-          "documentation": "<p>The maximum number of associations to return per page.</p>"
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p> <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are returned.</p>"
+        },
+        "nextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>The token for the next page of results.</p>"
+        }
+      }
+    },
+    "DescribeDirectConnectGatewayAssociationProposalsResult": {
+      "type": "structure",
+      "members": {
+        "directConnectGatewayAssociationProposals": {
+          "shape": "DirectConnectGatewayAssociationProposalList",
+          "documentation": "<p>Describes the Direct Connect gateway association proposals.</p>"
+        },
+        "nextToken": {
+          "shape": "PaginationToken",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>"
+        }
+      }
+    },
+    "DescribeDirectConnectGatewayAssociationsRequest": {
+      "type": "structure",
+      "members": {
+        "associationId": {
+          "shape": "DirectConnectGatewayAssociationId",
+          "documentation": "<p>The ID of the Direct Connect gateway association.</p>"
+        },
+        "associatedGatewayId": {
+          "shape": "AssociatedGatewayId",
+          "documentation": "<p>The ID of the associated gateway.</p>"
+        },
+        "directConnectGatewayId": {
+          "shape": "DirectConnectGatewayId",
+          "documentation": "<p>The ID of the Direct Connect gateway.</p>"
+        },
+        "maxResults": {
+          "shape": "MaxResultSetSize",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p> <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are returned.</p>"
         },
         "nextToken": {
           "shape": "PaginationToken",
           "documentation": "<p>The token provided in the previous call to retrieve the next page.</p>"
+        },
+        "virtualGatewayId": {
+          "shape": "VirtualGatewayId",
+          "documentation": "<p>The ID of the virtual private gateway.</p>"
         }
       }
     },
@@ -1861,7 +2143,7 @@
       "members": {
         "directConnectGatewayAssociations": {
           "shape": "DirectConnectGatewayAssociationList",
-          "documentation": "<p>The associations.</p>"
+          "documentation": "<p>Information about the associations.</p>"
         },
         "nextToken": {
           "shape": "PaginationToken",
@@ -1882,7 +2164,7 @@
         },
         "maxResults": {
           "shape": "MaxResultSetSize",
-          "documentation": "<p>The maximum number of attachments to return per page.</p>"
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p> <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are returned.</p>"
         },
         "nextToken": {
           "shape": "PaginationToken",
@@ -1912,7 +2194,7 @@
         },
         "maxResults": {
           "shape": "MaxResultSetSize",
-          "documentation": "<p>The maximum number of Direct Connect gateways to return per page.</p>"
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p> <p>If <code>MaxResults</code> is given a value larger than 100, only 100 results are returned.</p>"
         },
         "nextToken": {
           "shape": "PaginationToken",
@@ -2083,6 +2365,30 @@
           "shape": "DirectConnectGatewayId",
           "documentation": "<p>The ID of the Direct Connect gateway.</p>"
         },
+        "directConnectGatewayOwnerAccount": {
+          "shape": "OwnerAccount",
+          "documentation": "<p>The ID of the AWS account that owns the associated gateway.</p>"
+        },
+        "associationState": {
+          "shape": "DirectConnectGatewayAssociationState",
+          "documentation": "<p>The state of the association. The following are the possible values:</p> <ul> <li> <p> <code>associating</code>: The initial state after calling <a>CreateDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <code>associated</code>: The Direct Connect gateway and virtual private gateway are successfully associated and ready to pass traffic.</p> </li> <li> <p> <code>disassociating</code>: The initial state after calling <a>DeleteDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <code>disassociated</code>: The virtual private gateway is disassociated from the Direct Connect gateway. Traffic flow between the Direct Connect gateway and virtual private gateway is stopped.</p> </li> </ul>"
+        },
+        "stateChangeError": {
+          "shape": "StateChangeError",
+          "documentation": "<p>The error message if the state of an object failed to advance.</p>"
+        },
+        "associatedGateway": {
+          "shape": "AssociatedGateway",
+          "documentation": "<p>Information about the associated virtual private gateway.</p>"
+        },
+        "associationId": {
+          "shape": "DirectConnectGatewayAssociationId",
+          "documentation": "<p>The ID of the Direct Connect gateway association.</p>"
+        },
+        "allowedPrefixesToDirectConnectGateway": {
+          "shape": "RouteFilterPrefixList",
+          "documentation": "<p>The Amazon VPC prefixes to advertise to the Direct Connect gateway.</p>"
+        },
         "virtualGatewayId": {
           "shape": "VirtualGatewayId",
           "documentation": "<p>The ID of the virtual private gateway. Applies only to private virtual interfaces.</p>"
@@ -2094,17 +2400,12 @@
         "virtualGatewayOwnerAccount": {
           "shape": "OwnerAccount",
           "documentation": "<p>The ID of the AWS account that owns the virtual private gateway.</p>"
-        },
-        "associationState": {
-          "shape": "DirectConnectGatewayAssociationState",
-          "documentation": "<p>The state of the association. The following are the possible values:</p> <ul> <li> <p> <code>associating</code>: The initial state after calling <a>CreateDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <code>associated</code>: The Direct Connect gateway and virtual private gateway are successfully associated and ready to pass traffic.</p> </li> <li> <p> <code>disassociating</code>: The initial state after calling <a>DeleteDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <code>disassociated</code>: The virtual private gateway is disassociated from the Direct Connect gateway. Traffic flow between the Direct Connect gateway and virtual private gateway is stopped.</p> </li> </ul>"
-        },
-        "stateChangeError": {
-          "shape": "StateChangeError",
-          "documentation": "<p>The error message if the state of an object failed to advance.</p>"
         }
       },
       "documentation": "<p>Information about an association between a Direct Connect gateway and a virtual private gateway.</p>"
+    },
+    "DirectConnectGatewayAssociationId": {
+      "type": "string"
     },
     "DirectConnectGatewayAssociationList": {
       "type": "list",
@@ -2112,13 +2413,65 @@
         "shape": "DirectConnectGatewayAssociation"
       }
     },
+    "DirectConnectGatewayAssociationProposal": {
+      "type": "structure",
+      "members": {
+        "proposalId": {
+          "shape": "DirectConnectGatewayAssociationProposalId",
+          "documentation": "<p>The ID of the association proposal.</p>"
+        },
+        "directConnectGatewayId": {
+          "shape": "DirectConnectGatewayId",
+          "documentation": "<p>The ID of the Direct Connect gateway.</p>"
+        },
+        "directConnectGatewayOwnerAccount": {
+          "shape": "OwnerAccount",
+          "documentation": "<p>The ID of the AWS account that owns the Direct Connect gateway.</p>"
+        },
+        "proposalState": {
+          "shape": "DirectConnectGatewayAssociationProposalState",
+          "documentation": "<p>The state of the proposal. The following are possible values:</p> <ul> <li> <p> <code>accepted</code>: The proposal has been accepted. The Direct Connect gateway association is available to use in this state.</p> </li> <li> <p> <code>deleted</code>: The proposal has been deleted by the owner that made the proposal. The Direct Connect gateway association cannot be used in this state.</p> </li> <li> <p> <code>requested</code>: The proposal has been requested. The Direct Connect gateway association cannot be used in this state.</p> </li> </ul>"
+        },
+        "associatedGateway": {
+          "shape": "AssociatedGateway",
+          "documentation": "<p>Information about the associated virtual private gateway.</p>"
+        },
+        "existingAllowedPrefixesToDirectConnectGateway": {
+          "shape": "RouteFilterPrefixList",
+          "documentation": "<p>The existing Amazon VPC prefixes advertised to the Direct Connect gateway.</p>"
+        },
+        "requestedAllowedPrefixesToDirectConnectGateway": {
+          "shape": "RouteFilterPrefixList",
+          "documentation": "<p>The Amazon VPC prefixes to advertise to the Direct Connect gateway.</p>"
+        }
+      },
+      "documentation": "<p>Information about the proposal request to attach a virtual private gateway to a DDirect Connect gateway. </p>"
+    },
+    "DirectConnectGatewayAssociationProposalId": {
+      "type": "string"
+    },
+    "DirectConnectGatewayAssociationProposalList": {
+      "type": "list",
+      "member": {
+        "shape": "DirectConnectGatewayAssociationProposal"
+      }
+    },
+    "DirectConnectGatewayAssociationProposalState": {
+      "type": "string",
+      "enum": [
+        "requested",
+        "accepted",
+        "deleted"
+      ]
+    },
     "DirectConnectGatewayAssociationState": {
       "type": "string",
       "enum": [
         "associating",
         "associated",
         "disassociating",
-        "disassociated"
+        "disassociated",
+        "updating"
       ]
     },
     "DirectConnectGatewayAttachment": {
@@ -2203,6 +2556,18 @@
           "documentation": "<p>The ID of the LAG.</p>"
         }
       }
+    },
+    "GatewayIdToAssociate": {
+      "type": "string"
+    },
+    "GatewayIdentifier": {
+      "type": "string"
+    },
+    "GatewayType": {
+      "type": "string",
+      "enum": [
+        "virtualPrivateGateway"
+      ]
     },
     "HasLogicalRedundancy": {
       "type": "string",
@@ -2307,7 +2672,7 @@
       "members": {
         "connectionsBandwidth": {
           "shape": "Bandwidth",
-          "documentation": "<p>The individual bandwidth of the physical connections bundled by the LAG. The possible values are 1Gbps and 10Gbps.</p>"
+          "documentation": "<p>The individual bandwidth of the physical connections bundled by the LAG. The possible values are 1Gbps and 10Gbps. </p>"
         },
         "numberOfConnections": {
           "shape": "Count",
@@ -2343,11 +2708,11 @@
         },
         "awsDevice": {
           "shape": "AwsDevice",
-          "documentation": "<p>The Direct Connect endpoint that hosts the LAG.</p>"
+          "documentation": "<p>The AWS Direct Connect endpoint that hosts the LAG.</p>"
         },
         "awsDeviceV2": {
           "shape": "AwsDeviceV2",
-          "documentation": "<p>The Direct Connect endpoint that hosts the LAG.</p>"
+          "documentation": "<p>The AWS Direct Connect endpoint that hosts the LAG.</p>"
         },
         "connections": {
           "shape": "ConnectionList",
@@ -2839,6 +3204,31 @@
       "type": "structure",
       "members": {}
     },
+    "UpdateDirectConnectGatewayAssociationRequest": {
+      "type": "structure",
+      "members": {
+        "associationId": {
+          "shape": "DirectConnectGatewayAssociationId",
+          "documentation": "<p>The ID of the Direct Connect gateway association.</p>"
+        },
+        "addAllowedPrefixesToDirectConnectGateway": {
+          "shape": "RouteFilterPrefixList",
+          "documentation": "<p>The Amazon VPC prefixes to advertise to the Direct Connect gateway.</p>"
+        },
+        "removeAllowedPrefixesToDirectConnectGateway": {
+          "shape": "RouteFilterPrefixList",
+          "documentation": "<p>The Amazon VPC prefixes to no longer advertise to the Direct Connect gateway.</p>"
+        }
+      }
+    },
+    "UpdateDirectConnectGatewayAssociationResult": {
+      "type": "structure",
+      "members": {
+        "directConnectGatewayAssociation": {
+          "shape": "DirectConnectGatewayAssociation"
+        }
+      }
+    },
     "UpdateLagRequest": {
       "type": "structure",
       "required": [
@@ -2893,7 +3283,8 @@
       "documentation": "<p>Information about a virtual private gateway for a private virtual interface.</p>"
     },
     "VirtualGatewayId": {
-      "type": "string"
+      "type": "string",
+      "deprecated": true
     },
     "VirtualGatewayList": {
       "type": "list",
@@ -2902,7 +3293,8 @@
       }
     },
     "VirtualGatewayRegion": {
-      "type": "string"
+      "type": "string",
+      "deprecated": true
     },
     "VirtualGatewayState": {
       "type": "string"

@@ -1088,7 +1088,8 @@
       "members": {
         "AudioDescriptionBroadcasterMix": {
           "shape": "AacAudioDescriptionBroadcasterMix",
-          "locationName": "audioDescriptionBroadcasterMix"
+          "locationName": "audioDescriptionBroadcasterMix",
+          "documentation": "Choose BROADCASTER_MIXED_AD when the input contains pre-mixed main audio + audio description (AD) as a stereo pair. The value for AudioType will be set to 3, which signals to downstream systems that this stream contains \"broadcaster mixed AD\". Note that the input received by the encoder must contain pre-mixed audio; the encoder does not perform the mixing. When you choose BROADCASTER_MIXED_AD, the encoder ignores any values you provide in AudioType and  FollowInputAudioType. Choose NORMAL when the input does not contain pre-mixed audio + audio description (AD). In this case, the encoder will use any values you provide for AudioType and FollowInputAudioType."
         },
         "Bitrate": {
           "shape": "__integerMin6000Max1024000",
@@ -1097,19 +1098,23 @@
         },
         "CodecProfile": {
           "shape": "AacCodecProfile",
-          "locationName": "codecProfile"
+          "locationName": "codecProfile",
+          "documentation": "AAC Profile."
         },
         "CodingMode": {
           "shape": "AacCodingMode",
-          "locationName": "codingMode"
+          "locationName": "codingMode",
+          "documentation": "Mono (Audio Description), Mono, Stereo, or 5.1 channel layout. Valid values depend on rate control mode and profile. \"1.0 - Audio Description (Receiver Mix)\" setting receives a stereo description plus control track and emits a mono AAC encode of the description track, with control data emitted in the PES header as per ETSI TS 101 154 Annex E."
         },
         "RateControlMode": {
           "shape": "AacRateControlMode",
-          "locationName": "rateControlMode"
+          "locationName": "rateControlMode",
+          "documentation": "Rate Control Mode."
         },
         "RawFormat": {
           "shape": "AacRawFormat",
-          "locationName": "rawFormat"
+          "locationName": "rawFormat",
+          "documentation": "Enables LATM/LOAS AAC output. Note that if you use LATM/LOAS AAC in an output, you must choose \"No container\" for the output container."
         },
         "SampleRate": {
           "shape": "__integerMin8000Max96000",
@@ -1118,11 +1123,13 @@
         },
         "Specification": {
           "shape": "AacSpecification",
-          "locationName": "specification"
+          "locationName": "specification",
+          "documentation": "Use MPEG-2 AAC instead of MPEG-4 AAC audio for raw or MPEG-2 Transport Stream containers."
         },
         "VbrQuality": {
           "shape": "AacVbrQuality",
-          "locationName": "vbrQuality"
+          "locationName": "vbrQuality",
+          "documentation": "VBR Quality Level - Only used if rate_control_mode is VBR."
         }
       },
       "documentation": "Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value AAC. The service accepts one of two mutually exclusive groups of AAC settings--VBR and CBR. To select one of these modes, set the value of Bitrate control mode (rateControlMode) to \"VBR\" or \"CBR\".  In VBR mode, you control the audio quality with the setting VBR quality (vbrQuality). In CBR mode, you use the setting Bitrate (bitrate). Defaults and valid values depend on the rate control mode."
@@ -1203,11 +1210,13 @@
         },
         "BitstreamMode": {
           "shape": "Ac3BitstreamMode",
-          "locationName": "bitstreamMode"
+          "locationName": "bitstreamMode",
+          "documentation": "Specifies the \"Bitstream Mode\" (bsmod) for the emitted AC-3 stream. See ATSC A/52-2012 for background on these values."
         },
         "CodingMode": {
           "shape": "Ac3CodingMode",
-          "locationName": "codingMode"
+          "locationName": "codingMode",
+          "documentation": "Dolby Digital coding mode. Determines number of channels."
         },
         "Dialnorm": {
           "shape": "__integerMin1Max31",
@@ -1216,15 +1225,18 @@
         },
         "DynamicRangeCompressionProfile": {
           "shape": "Ac3DynamicRangeCompressionProfile",
-          "locationName": "dynamicRangeCompressionProfile"
+          "locationName": "dynamicRangeCompressionProfile",
+          "documentation": "If set to FILM_STANDARD, adds dynamic range compression signaling to the output bitstream as defined in the Dolby Digital specification."
         },
         "LfeFilter": {
           "shape": "Ac3LfeFilter",
-          "locationName": "lfeFilter"
+          "locationName": "lfeFilter",
+          "documentation": "Applies a 120Hz lowpass filter to the LFE channel prior to encoding. Only valid with 3_2_LFE coding mode."
         },
         "MetadataControl": {
           "shape": "Ac3MetadataControl",
-          "locationName": "metadataControl"
+          "locationName": "metadataControl",
+          "documentation": "When set to FOLLOW_INPUT, encoder metadata will be sourced from the DD, DD+, or DolbyE decoder that supplied this audio data. If audio was not supplied from one of these streams, then the static metadata settings will be used."
         },
         "SampleRate": {
           "shape": "__integerMin48000Max48000",
@@ -1251,7 +1263,7 @@
           "documentation": "Acceleration configuration for the job."
         }
       },
-      "documentation": "Acceleration settings for job execution.",
+      "documentation": "Accelerated transcoding is currently in private preview. Contact AWS for more information.",
       "required": [
         "Mode"
       ]
@@ -1299,7 +1311,7 @@
     },
     "AntiAlias": {
       "type": "string",
-      "documentation": "You no longer need to specify the anti-alias filter. It's now automatically applied to all outputs. This property is deprecated.",
+      "documentation": "The anti-alias filter is automatically applied to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting.",
       "enum": [
         "DISABLED",
         "ENABLED"
@@ -1340,31 +1352,38 @@
       "members": {
         "AacSettings": {
           "shape": "AacSettings",
-          "locationName": "aacSettings"
+          "locationName": "aacSettings",
+          "documentation": "Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value AAC. The service accepts one of two mutually exclusive groups of AAC settings--VBR and CBR. To select one of these modes, set the value of Bitrate control mode (rateControlMode) to \"VBR\" or \"CBR\".  In VBR mode, you control the audio quality with the setting VBR quality (vbrQuality). In CBR mode, you use the setting Bitrate (bitrate). Defaults and valid values depend on the rate control mode."
         },
         "Ac3Settings": {
           "shape": "Ac3Settings",
-          "locationName": "ac3Settings"
+          "locationName": "ac3Settings",
+          "documentation": "Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value AC3."
         },
         "AiffSettings": {
           "shape": "AiffSettings",
-          "locationName": "aiffSettings"
+          "locationName": "aiffSettings",
+          "documentation": "Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value AIFF."
         },
         "Codec": {
           "shape": "AudioCodec",
-          "locationName": "codec"
+          "locationName": "codec",
+          "documentation": "Type of Audio codec."
         },
         "Eac3Settings": {
           "shape": "Eac3Settings",
-          "locationName": "eac3Settings"
+          "locationName": "eac3Settings",
+          "documentation": "Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value EAC3."
         },
         "Mp2Settings": {
           "shape": "Mp2Settings",
-          "locationName": "mp2Settings"
+          "locationName": "mp2Settings",
+          "documentation": "Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value MP2."
         },
         "WavSettings": {
           "shape": "WavSettings",
-          "locationName": "wavSettings"
+          "locationName": "wavSettings",
+          "documentation": "Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value WAV."
         }
       },
       "documentation": "Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value you choose for Audio codec (Codec). For each codec enum you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings"
@@ -1382,7 +1401,8 @@
       "members": {
         "AudioNormalizationSettings": {
           "shape": "AudioNormalizationSettings",
-          "locationName": "audioNormalizationSettings"
+          "locationName": "audioNormalizationSettings",
+          "documentation": "Advanced audio normalization settings."
         },
         "AudioSourceName": {
           "shape": "__string",
@@ -1396,11 +1416,13 @@
         },
         "AudioTypeControl": {
           "shape": "AudioTypeControl",
-          "locationName": "audioTypeControl"
+          "locationName": "audioTypeControl",
+          "documentation": "When set to FOLLOW_INPUT, if the input contains an ISO 639 audio_type, then that value is passed through to the output. If the input contains no ISO 639 audio_type, the value in Audio Type is included in the output. Otherwise the value in Audio Type is included in the output. Note that this field and audioType are both ignored if audioDescriptionBroadcasterMix is set to BROADCASTER_MIXED_AD."
         },
         "CodecSettings": {
           "shape": "AudioCodecSettings",
-          "locationName": "codecSettings"
+          "locationName": "codecSettings",
+          "documentation": "Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value you choose for Audio codec (Codec). For each codec enum you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings"
         },
         "CustomLanguageCode": {
           "shape": "__stringMin3Max3PatternAZaZ3",
@@ -1414,7 +1436,8 @@
         },
         "LanguageCodeControl": {
           "shape": "AudioLanguageCodeControl",
-          "locationName": "languageCodeControl"
+          "locationName": "languageCodeControl",
+          "documentation": "Choosing FOLLOW_INPUT will cause the ISO 639 language code of the output to follow the ISO 639 language code of the input. The language specified for languageCode' will be used when USE_CONFIGURED is selected or when FOLLOW_INPUT is selected but there is no ISO 639 language code specified by the input."
         },
         "RemixSettings": {
           "shape": "RemixSettings",
@@ -1474,11 +1497,13 @@
       "members": {
         "Algorithm": {
           "shape": "AudioNormalizationAlgorithm",
-          "locationName": "algorithm"
+          "locationName": "algorithm",
+          "documentation": "Audio normalization algorithm to use. 1770-1 conforms to the CALM Act specification, 1770-2 conforms to the EBU R-128 specification."
         },
         "AlgorithmControl": {
           "shape": "AudioNormalizationAlgorithmControl",
-          "locationName": "algorithmControl"
+          "locationName": "algorithmControl",
+          "documentation": "When enabled the output audio is corrected using the chosen algorithm. If disabled, the audio will be measured but not adjusted."
         },
         "CorrectionGateLevel": {
           "shape": "__integerMinNegative70Max0",
@@ -1487,11 +1512,13 @@
         },
         "LoudnessLogging": {
           "shape": "AudioNormalizationLoudnessLogging",
-          "locationName": "loudnessLogging"
+          "locationName": "loudnessLogging",
+          "documentation": "If set to LOG, log each output's audio track loudness to a CSV file."
         },
         "PeakCalculation": {
           "shape": "AudioNormalizationPeakCalculation",
-          "locationName": "peakCalculation"
+          "locationName": "peakCalculation",
+          "documentation": "If set to TRUE_PEAK, calculate and log the TruePeak for each output's audio track loudness."
         },
         "TargetLkfs": {
           "shape": "__doubleMinNegative59Max0",
@@ -1511,7 +1538,8 @@
         },
         "DefaultSelection": {
           "shape": "AudioDefaultSelection",
-          "locationName": "defaultSelection"
+          "locationName": "defaultSelection",
+          "documentation": "Enable this setting on one audio selector to set it as the default for the job. The service uses this default for outputs where it can't find the specified input audio. If you don't set a default, those outputs have no audio."
         },
         "ExternalAudioFileInput": {
           "shape": "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
@@ -1545,7 +1573,8 @@
         },
         "SelectorType": {
           "shape": "AudioSelectorType",
-          "locationName": "selectorType"
+          "locationName": "selectorType",
+          "documentation": "Specifies the type of the audio selector."
         },
         "Tracks": {
           "shape": "__listOf__integerMin1Max2147483647",
@@ -1608,11 +1637,13 @@
       "members": {
         "Alignment": {
           "shape": "BurninSubtitleAlignment",
-          "locationName": "alignment"
+          "locationName": "alignment",
+          "documentation": "If no explicit x_position or y_position is provided, setting alignment to centered will place the captions at the bottom center of the output. Similarly, setting a left alignment will align captions to the bottom left of the output. If x and y positions are given in conjunction with the alignment parameter, the font will be justified (either left or centered) relative to those coordinates. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
         },
         "BackgroundColor": {
           "shape": "BurninSubtitleBackgroundColor",
-          "locationName": "backgroundColor"
+          "locationName": "backgroundColor",
+          "documentation": "Specifies the color of the rectangle behind the captions.\nAll burn-in and DVB-Sub font settings must match."
         },
         "BackgroundOpacity": {
           "shape": "__integerMin0Max255",
@@ -1621,7 +1652,8 @@
         },
         "FontColor": {
           "shape": "BurninSubtitleFontColor",
-          "locationName": "fontColor"
+          "locationName": "fontColor",
+          "documentation": "Specifies the color of the burned-in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
         },
         "FontOpacity": {
           "shape": "__integerMin0Max255",
@@ -1645,7 +1677,8 @@
         },
         "OutlineColor": {
           "shape": "BurninSubtitleOutlineColor",
-          "locationName": "outlineColor"
+          "locationName": "outlineColor",
+          "documentation": "Specifies font outline color. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
         },
         "OutlineSize": {
           "shape": "__integerMin0Max10",
@@ -1654,7 +1687,8 @@
         },
         "ShadowColor": {
           "shape": "BurninSubtitleShadowColor",
-          "locationName": "shadowColor"
+          "locationName": "shadowColor",
+          "documentation": "Specifies the color of the shadow cast by the captions.\nAll burn-in and DVB-Sub font settings must match."
         },
         "ShadowOpacity": {
           "shape": "__integerMin0Max255",
@@ -1673,7 +1707,8 @@
         },
         "TeletextSpacing": {
           "shape": "BurninSubtitleTeletextSpacing",
-          "locationName": "teletextSpacing"
+          "locationName": "teletextSpacing",
+          "documentation": "Only applies to jobs with input captions in Teletext or STL formats. Specify whether the spacing between letters in your captions is set by the captions grid or varies depending on letter width. Choose fixed grid to conform to the spacing specified in the captions file more accurately. Choose proportional to make the text easier to read if the captions are closed caption."
         },
         "XPosition": {
           "shape": "__integerMin0Max2147483647",
@@ -1779,7 +1814,8 @@
         },
         "DestinationSettings": {
           "shape": "CaptionDestinationSettings",
-          "locationName": "destinationSettings"
+          "locationName": "destinationSettings",
+          "documentation": "Specific settings required by destination type. Note that burnin_destination_settings are not available if the source of the caption data is Embedded or Teletext."
         },
         "LanguageCode": {
           "shape": "LanguageCode",
@@ -1804,7 +1840,8 @@
         },
         "DestinationSettings": {
           "shape": "CaptionDestinationSettings",
-          "locationName": "destinationSettings"
+          "locationName": "destinationSettings",
+          "documentation": "Specific settings required by destination type. Note that burnin_destination_settings are not available if the source of the caption data is Embedded or Teletext."
         },
         "LanguageCode": {
           "shape": "LanguageCode",
@@ -1824,31 +1861,38 @@
       "members": {
         "BurninDestinationSettings": {
           "shape": "BurninDestinationSettings",
-          "locationName": "burninDestinationSettings"
+          "locationName": "burninDestinationSettings",
+          "documentation": "Burn-In Destination Settings."
         },
         "DestinationType": {
           "shape": "CaptionDestinationType",
-          "locationName": "destinationType"
+          "locationName": "destinationType",
+          "documentation": "Specify the format for this set of captions on this output. The default format is embedded without SCTE-20. Other options are embedded with SCTE-20, burn-in, DVB-sub, SCC, SRT, teletext, TTML, and web-VTT. If you are using SCTE-20, choose SCTE-20 plus embedded (SCTE20_PLUS_EMBEDDED) to create an output that complies with the SCTE-43 spec. To create a non-compliant output where the embedded captions come first, choose Embedded plus SCTE-20 (EMBEDDED_PLUS_SCTE20)."
         },
         "DvbSubDestinationSettings": {
           "shape": "DvbSubDestinationSettings",
-          "locationName": "dvbSubDestinationSettings"
+          "locationName": "dvbSubDestinationSettings",
+          "documentation": "DVB-Sub Destination Settings"
         },
         "EmbeddedDestinationSettings": {
           "shape": "EmbeddedDestinationSettings",
-          "locationName": "embeddedDestinationSettings"
+          "locationName": "embeddedDestinationSettings",
+          "documentation": "Settings specific to embedded/ancillary caption outputs, including 608/708 Channel destination number."
         },
         "SccDestinationSettings": {
           "shape": "SccDestinationSettings",
-          "locationName": "sccDestinationSettings"
+          "locationName": "sccDestinationSettings",
+          "documentation": "Settings for SCC caption output."
         },
         "TeletextDestinationSettings": {
           "shape": "TeletextDestinationSettings",
-          "locationName": "teletextDestinationSettings"
+          "locationName": "teletextDestinationSettings",
+          "documentation": "Settings for Teletext caption output"
         },
         "TtmlDestinationSettings": {
           "shape": "TtmlDestinationSettings",
-          "locationName": "ttmlDestinationSettings"
+          "locationName": "ttmlDestinationSettings",
+          "documentation": "Settings specific to TTML caption outputs, including Pass style information (TtmlStylePassthrough)."
         }
       },
       "documentation": "Specific settings required by destination type. Note that burnin_destination_settings are not available if the source of the caption data is Embedded or Teletext."
@@ -1885,7 +1929,8 @@
         },
         "SourceSettings": {
           "shape": "CaptionSourceSettings",
-          "locationName": "sourceSettings"
+          "locationName": "sourceSettings",
+          "documentation": "Source settings (SourceSettings) contains the group of settings for captions in the input."
         }
       },
       "documentation": "Set up captions in your outputs by first selecting them from your input here."
@@ -1895,31 +1940,38 @@
       "members": {
         "AncillarySourceSettings": {
           "shape": "AncillarySourceSettings",
-          "locationName": "ancillarySourceSettings"
+          "locationName": "ancillarySourceSettings",
+          "documentation": "Settings for ancillary captions source."
         },
         "DvbSubSourceSettings": {
           "shape": "DvbSubSourceSettings",
-          "locationName": "dvbSubSourceSettings"
+          "locationName": "dvbSubSourceSettings",
+          "documentation": "DVB Sub Source Settings"
         },
         "EmbeddedSourceSettings": {
           "shape": "EmbeddedSourceSettings",
-          "locationName": "embeddedSourceSettings"
+          "locationName": "embeddedSourceSettings",
+          "documentation": "Settings for embedded captions Source"
         },
         "FileSourceSettings": {
           "shape": "FileSourceSettings",
-          "locationName": "fileSourceSettings"
+          "locationName": "fileSourceSettings",
+          "documentation": "Settings for File-based Captions in Source"
         },
         "SourceType": {
           "shape": "CaptionSourceType",
-          "locationName": "sourceType"
+          "locationName": "sourceType",
+          "documentation": "Use Source (SourceType) to identify the format of your input captions.  The service cannot auto-detect caption format."
         },
         "TeletextSourceSettings": {
           "shape": "TeletextSourceSettings",
-          "locationName": "teletextSourceSettings"
+          "locationName": "teletextSourceSettings",
+          "documentation": "Settings specific to Teletext caption sources, including Page number."
         },
         "TrackSourceSettings": {
           "shape": "TrackSourceSettings",
-          "locationName": "trackSourceSettings"
+          "locationName": "trackSourceSettings",
+          "documentation": "Settings specific to caption sources that are specfied by track number. Sources include IMSC in IMF."
         }
       },
       "documentation": "Source settings (SourceSettings) contains the group of settings for captions in the input."
@@ -1979,19 +2031,23 @@
         },
         "EncryptionMethod": {
           "shape": "CmafEncryptionType",
-          "locationName": "encryptionMethod"
+          "locationName": "encryptionMethod",
+          "documentation": "Encrypts the segments with the given encryption scheme. Leave blank to disable. Selecting 'Disabled' in the web interface also disables encryption."
         },
         "InitializationVectorInManifest": {
           "shape": "CmafInitializationVectorInManifest",
-          "locationName": "initializationVectorInManifest"
+          "locationName": "initializationVectorInManifest",
+          "documentation": "The Initialization Vector is a 128-bit number used in conjunction with the key for encrypting blocks. If set to INCLUDE, Initialization Vector is listed in the manifest. Otherwise Initialization Vector is not in the manifest."
         },
         "StaticKeyProvider": {
           "shape": "StaticKeyProvider",
-          "locationName": "staticKeyProvider"
+          "locationName": "staticKeyProvider",
+          "documentation": "Use these settings to set up encryption with a static key provider."
         },
         "Type": {
           "shape": "CmafKeyProviderType",
-          "locationName": "type"
+          "locationName": "type",
+          "documentation": "Indicates which type of key provider is used for encryption."
         }
       },
       "documentation": "Settings for CMAF encryption"
@@ -2013,16 +2069,23 @@
         },
         "ClientCache": {
           "shape": "CmafClientCache",
-          "locationName": "clientCache"
+          "locationName": "clientCache",
+          "documentation": "When set to ENABLED, sets #EXT-X-ALLOW-CACHE:no tag, which prevents client from saving media segments for later replay."
         },
         "CodecSpecification": {
           "shape": "CmafCodecSpecification",
-          "locationName": "codecSpecification"
+          "locationName": "codecSpecification",
+          "documentation": "Specification to use (RFC-6381 or the default RFC-4281) during m3u8 playlist generation."
         },
         "Destination": {
           "shape": "__stringPatternS3",
           "locationName": "destination",
           "documentation": "Use Destination (Destination) to specify the S3 output location and the output filename base. Destination accepts format identifiers. If you do not specify the base filename in the URI, the service will use the filename of the input file. If your job has multiple inputs, the service uses the filename of the first input file."
+        },
+        "DestinationSettings": {
+          "shape": "DestinationSettings",
+          "locationName": "destinationSettings",
+          "documentation": "Settings associated with the destination. Will vary based on the type of destination"
         },
         "Encryption": {
           "shape": "CmafEncryptionSettings",
@@ -2036,11 +2099,13 @@
         },
         "ManifestCompression": {
           "shape": "CmafManifestCompression",
-          "locationName": "manifestCompression"
+          "locationName": "manifestCompression",
+          "documentation": "When set to GZIP, compresses HLS playlist."
         },
         "ManifestDurationFormat": {
           "shape": "CmafManifestDurationFormat",
-          "locationName": "manifestDurationFormat"
+          "locationName": "manifestDurationFormat",
+          "documentation": "Indicates whether the output manifest should use floating point values for segment duration."
         },
         "MinBufferTime": {
           "shape": "__integerMin0Max2147483647",
@@ -2054,7 +2119,8 @@
         },
         "SegmentControl": {
           "shape": "CmafSegmentControl",
-          "locationName": "segmentControl"
+          "locationName": "segmentControl",
+          "documentation": "When set to SINGLE_FILE, a single output file is generated, which is internally segmented using the Fragment Length and Segment Length. When set to SEGMENTED_FILES, separate segment files will be created."
         },
         "SegmentLength": {
           "shape": "__integerMin1Max2147483647",
@@ -2063,15 +2129,18 @@
         },
         "StreamInfResolution": {
           "shape": "CmafStreamInfResolution",
-          "locationName": "streamInfResolution"
+          "locationName": "streamInfResolution",
+          "documentation": "Include or exclude RESOLUTION attribute for video in EXT-X-STREAM-INF tag of variant manifest."
         },
         "WriteDashManifest": {
           "shape": "CmafWriteDASHManifest",
-          "locationName": "writeDashManifest"
+          "locationName": "writeDashManifest",
+          "documentation": "When set to ENABLED, a DASH MPD manifest will be generated for this output."
         },
         "WriteHlsManifest": {
           "shape": "CmafWriteHLSManifest",
-          "locationName": "writeHlsManifest"
+          "locationName": "writeHlsManifest",
+          "documentation": "When set to ENABLED, an Apple HLS manifest will be generated for this output."
         }
       },
       "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to CMAF_GROUP_SETTINGS. Each output in a CMAF Output Group may only contain a single video, audio, or caption output."
@@ -2149,7 +2218,8 @@
         },
         "ColorSpaceConversion": {
           "shape": "ColorSpaceConversion",
-          "locationName": "colorSpaceConversion"
+          "locationName": "colorSpaceConversion",
+          "documentation": "Determines if colorspace conversion will be performed. If set to _None_, no conversion will be performed. If _Force 601_ or _Force 709_ are selected, conversion will be performed for inputs with differing colorspaces. An input's colorspace can be specified explicitly in the \"Video Selector\":#inputs-video_selector if necessary."
         },
         "Contrast": {
           "shape": "__integerMin1Max100",
@@ -2224,27 +2294,33 @@
       "members": {
         "Container": {
           "shape": "ContainerType",
-          "locationName": "container"
+          "locationName": "container",
+          "documentation": "Container for this output. Some containers require a container settings object. If not specified, the default object will be created."
         },
         "F4vSettings": {
           "shape": "F4vSettings",
-          "locationName": "f4vSettings"
+          "locationName": "f4vSettings",
+          "documentation": "Settings for F4v container"
         },
         "M2tsSettings": {
           "shape": "M2tsSettings",
-          "locationName": "m2tsSettings"
+          "locationName": "m2tsSettings",
+          "documentation": "MPEG-2 TS container settings. These apply to outputs in a File output group when the output's container (ContainerType) is MPEG-2 Transport Stream (M2TS). In these assets, data is organized by the program map table (PMT). Each transport stream program contains subsets of data, including audio, video, and metadata. Each of these subsets of data has a numerical label called a packet identifier (PID). Each transport stream program corresponds to one MediaConvert output. The PMT lists the types of data in a program along with their PID. Downstream systems and players use the program map table to look up the PID for each type of data it accesses and then uses the PIDs to locate specific data within the asset."
         },
         "M3u8Settings": {
           "shape": "M3u8Settings",
-          "locationName": "m3u8Settings"
+          "locationName": "m3u8Settings",
+          "documentation": "Settings for TS segments in HLS"
         },
         "MovSettings": {
           "shape": "MovSettings",
-          "locationName": "movSettings"
+          "locationName": "movSettings",
+          "documentation": "Settings for MOV Container."
         },
         "Mp4Settings": {
           "shape": "Mp4Settings",
-          "locationName": "mp4Settings"
+          "locationName": "mp4Settings",
+          "documentation": "Settings for MP4 Container"
         }
       },
       "documentation": "Container specific settings."
@@ -2275,7 +2351,8 @@
         },
         "BillingTagsSource": {
           "shape": "BillingTagsSource",
-          "locationName": "billingTagsSource"
+          "locationName": "billingTagsSource",
+          "documentation": "Optional. Choose a tag type that AWS Billing and Cost Management will use to sort your AWS Elemental MediaConvert costs on any billing report that you set up. Any transcoding outputs that don't have an associated tag will appear in your billing report unsorted. If you don't choose a valid value for this field, your job outputs will appear on the billing report unsorted."
         },
         "ClientRequestToken": {
           "shape": "__string",
@@ -2300,11 +2377,12 @@
         },
         "Settings": {
           "shape": "JobSettings",
-          "locationName": "settings"
+          "locationName": "settings",
+          "documentation": "JobSettings contains all the transcode settings for a job."
         },
-        "StatusUpdateIntervalInSecs": {
-          "shape": "__integerMin10Max600",
-          "locationName": "statusUpdateIntervalInSecs",
+        "StatusUpdateInterval": {
+          "shape": "StatusUpdateInterval",
+          "locationName": "statusUpdateInterval",
           "documentation": "Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error."
         },
         "UserMetadata": {
@@ -2323,7 +2401,8 @@
       "members": {
         "Job": {
           "shape": "Job",
-          "locationName": "job"
+          "locationName": "job",
+          "documentation": "Each job converts an input file into an output file or files. For more information, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html"
         }
       }
     },
@@ -2357,11 +2436,12 @@
         },
         "Settings": {
           "shape": "JobTemplateSettings",
-          "locationName": "settings"
+          "locationName": "settings",
+          "documentation": "JobTemplateSettings contains all the transcode settings saved in the template that will be applied to jobs created from it."
         },
-        "StatusUpdateIntervalInSecs": {
-          "shape": "__integerMin10Max600",
-          "locationName": "statusUpdateIntervalInSecs",
+        "StatusUpdateInterval": {
+          "shape": "StatusUpdateInterval",
+          "locationName": "statusUpdateInterval",
           "documentation": "Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error."
         },
         "Tags": {
@@ -2380,7 +2460,8 @@
       "members": {
         "JobTemplate": {
           "shape": "JobTemplate",
-          "locationName": "jobTemplate"
+          "locationName": "jobTemplate",
+          "documentation": "A job template is a pre-made set of encoding instructions that you can use to quickly create a job."
         }
       }
     },
@@ -2404,7 +2485,8 @@
         },
         "Settings": {
           "shape": "PresetSettings",
-          "locationName": "settings"
+          "locationName": "settings",
+          "documentation": "Settings for preset"
         },
         "Tags": {
           "shape": "__mapOf__string",
@@ -2422,7 +2504,8 @@
       "members": {
         "Preset": {
           "shape": "Preset",
-          "locationName": "preset"
+          "locationName": "preset",
+          "documentation": "A preset is a collection of preconfigured media conversion settings that you want MediaConvert to apply to the output during the conversion process."
         }
       }
     },
@@ -2464,7 +2547,8 @@
       "members": {
         "Queue": {
           "shape": "Queue",
-          "locationName": "queue"
+          "locationName": "queue",
+          "documentation": "You can use queues to manage the resources that are available to your AWS account for running multiple transcoding jobs at the same time. If you don't specify a queue, the service sends all jobs through the default queue. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html."
         }
       }
     },
@@ -2473,7 +2557,8 @@
       "members": {
         "SpekeKeyProvider": {
           "shape": "SpekeKeyProvider",
-          "locationName": "spekeKeyProvider"
+          "locationName": "spekeKeyProvider",
+          "documentation": "Settings for use with a SPEKE key provider"
         }
       },
       "documentation": "Specifies DRM settings for DASH outputs."
@@ -2491,6 +2576,11 @@
           "locationName": "destination",
           "documentation": "Use Destination (Destination) to specify the S3 output location and the output filename base. Destination accepts format identifiers. If you do not specify the base filename in the URI, the service will use the filename of the input file. If your job has multiple inputs, the service uses the filename of the first input file."
         },
+        "DestinationSettings": {
+          "shape": "DestinationSettings",
+          "locationName": "destinationSettings",
+          "documentation": "Settings associated with the destination. Will vary based on the type of destination"
+        },
         "Encryption": {
           "shape": "DashIsoEncryptionSettings",
           "locationName": "encryption",
@@ -2503,7 +2593,8 @@
         },
         "HbbtvCompliance": {
           "shape": "DashIsoHbbtvCompliance",
-          "locationName": "hbbtvCompliance"
+          "locationName": "hbbtvCompliance",
+          "documentation": "Supports HbbTV specification as indicated"
         },
         "MinBufferTime": {
           "shape": "__integerMin0Max2147483647",
@@ -2512,7 +2603,8 @@
         },
         "SegmentControl": {
           "shape": "DashIsoSegmentControl",
-          "locationName": "segmentControl"
+          "locationName": "segmentControl",
+          "documentation": "When set to SINGLE_FILE, a single output file is generated, which is internally segmented using the Fragment Length and Segment Length. When set to SEGMENTED_FILES, separate segment files will be created."
         },
         "SegmentLength": {
           "shape": "__integerMin1Max2147483647",
@@ -2553,7 +2645,7 @@
     },
     "DecryptionMode": {
       "type": "string",
-      "documentation": "This specifies how the encrypted file needs to be decrypted.",
+      "documentation": "Specify the encryption mode that you used to encrypt your input files.",
       "enum": [
         "AES_CTR",
         "AES_CBC",
@@ -2575,15 +2667,18 @@
       "members": {
         "Algorithm": {
           "shape": "DeinterlaceAlgorithm",
-          "locationName": "algorithm"
+          "locationName": "algorithm",
+          "documentation": "Only applies when you set Deinterlacer (DeinterlaceMode) to Deinterlace (DEINTERLACE) or Adaptive (ADAPTIVE). Motion adaptive interpolate (INTERPOLATE) produces sharper pictures, while blend (BLEND) produces smoother motion. Use (INTERPOLATE_TICKER) OR (BLEND_TICKER) if your source file includes a ticker, such as a scrolling headline at the bottom of the frame."
         },
         "Control": {
           "shape": "DeinterlacerControl",
-          "locationName": "control"
+          "locationName": "control",
+          "documentation": "- When set to NORMAL (default), the deinterlacer does not convert frames that are tagged  in metadata as progressive. It will only convert those that are tagged as some other type. - When set to FORCE_ALL_FRAMES, the deinterlacer converts every frame to progressive - even those that are already tagged as progressive. Turn Force mode on only if there is  a good chance that the metadata has tagged frames as progressive when they are not  progressive. Do not turn on otherwise; processing frames that are already progressive  into progressive will probably result in lower quality video."
         },
         "Mode": {
           "shape": "DeinterlacerMode",
-          "locationName": "mode"
+          "locationName": "mode",
+          "documentation": "Use Deinterlacer (DeinterlaceMode) to choose how the service will do deinterlacing. Default is Deinterlace. - Deinterlace converts interlaced to progressive. - Inverse telecine converts Hard Telecine 29.97i to progressive 23.976p. - Adaptive auto-detects and converts to progressive."
         }
       },
       "documentation": "Settings for deinterlacer"
@@ -2677,7 +2772,8 @@
         },
         "Mode": {
           "shape": "DescribeEndpointsMode",
-          "locationName": "mode"
+          "locationName": "mode",
+          "documentation": "Optional field, defaults to DEFAULT. Specify DEFAULT for this operation to return your endpoints if any exist, or to create an endpoint for you and return it if one doesn't already exist. Specify GET_ONLY to return your endpoints if any exist, or an empty list if none exist."
         },
         "NextToken": {
           "shape": "__string",
@@ -2701,6 +2797,17 @@
           "documentation": "Use this string to request the next batch of endpoints."
         }
       }
+    },
+    "DestinationSettings": {
+      "type": "structure",
+      "members": {
+        "S3Settings": {
+          "shape": "S3DestinationSettings",
+          "locationName": "s3Settings",
+          "documentation": "Settings associated with S3 destination"
+        }
+      },
+      "documentation": "Settings associated with the destination. Will vary based on the type of destination"
     },
     "DisassociateCertificateRequest": {
       "type": "structure",
@@ -2753,7 +2860,8 @@
       "members": {
         "OutputSdt": {
           "shape": "OutputSdt",
-          "locationName": "outputSdt"
+          "locationName": "outputSdt",
+          "documentation": "Selects method of inserting SDT information into output stream.  \"Follow input SDT\" copies SDT information from input stream to  output stream. \"Follow input SDT if present\" copies SDT information from  input stream to output stream if SDT information is present in the input, otherwise it will fall back on the user-defined values. Enter \"SDT  Manually\" means user will enter the SDT information. \"No SDT\" means output  stream will not contain SDT information."
         },
         "SdtInterval": {
           "shape": "__integerMin25Max2000",
@@ -2778,11 +2886,13 @@
       "members": {
         "Alignment": {
           "shape": "DvbSubtitleAlignment",
-          "locationName": "alignment"
+          "locationName": "alignment",
+          "documentation": "If no explicit x_position or y_position is provided, setting alignment to centered will place the captions at the bottom center of the output. Similarly, setting a left alignment will align captions to the bottom left of the output. If x and y positions are given in conjunction with the alignment parameter, the font will be justified (either left or centered) relative to those coordinates. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
         },
         "BackgroundColor": {
           "shape": "DvbSubtitleBackgroundColor",
-          "locationName": "backgroundColor"
+          "locationName": "backgroundColor",
+          "documentation": "Specifies the color of the rectangle behind the captions.\nAll burn-in and DVB-Sub font settings must match."
         },
         "BackgroundOpacity": {
           "shape": "__integerMin0Max255",
@@ -2791,7 +2901,8 @@
         },
         "FontColor": {
           "shape": "DvbSubtitleFontColor",
-          "locationName": "fontColor"
+          "locationName": "fontColor",
+          "documentation": "Specifies the color of the burned-in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
         },
         "FontOpacity": {
           "shape": "__integerMin0Max255",
@@ -2815,7 +2926,8 @@
         },
         "OutlineColor": {
           "shape": "DvbSubtitleOutlineColor",
-          "locationName": "outlineColor"
+          "locationName": "outlineColor",
+          "documentation": "Specifies font outline color. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
         },
         "OutlineSize": {
           "shape": "__integerMin0Max10",
@@ -2824,7 +2936,8 @@
         },
         "ShadowColor": {
           "shape": "DvbSubtitleShadowColor",
-          "locationName": "shadowColor"
+          "locationName": "shadowColor",
+          "documentation": "Specifies the color of the shadow cast by the captions.\nAll burn-in and DVB-Sub font settings must match."
         },
         "ShadowOpacity": {
           "shape": "__integerMin0Max255",
@@ -2843,7 +2956,8 @@
         },
         "TeletextSpacing": {
           "shape": "DvbSubtitleTeletextSpacing",
-          "locationName": "teletextSpacing"
+          "locationName": "teletextSpacing",
+          "documentation": "Only applies to jobs with input captions in Teletext or STL formats. Specify whether the spacing between letters in your captions is set by the captions grid or varies depending on letter width. Choose fixed grid to conform to the spacing specified in the captions file more accurately. Choose proportional to make the text easier to read if the captions are closed caption."
         },
         "XPosition": {
           "shape": "__integerMin0Max2147483647",
@@ -3043,7 +3157,8 @@
       "members": {
         "AttenuationControl": {
           "shape": "Eac3AttenuationControl",
-          "locationName": "attenuationControl"
+          "locationName": "attenuationControl",
+          "documentation": "If set to ATTENUATE_3_DB, applies a 3 dB attenuation to the surround channels. Only used for 3/2 coding mode."
         },
         "Bitrate": {
           "shape": "__integerMin64000Max640000",
@@ -3052,15 +3167,18 @@
         },
         "BitstreamMode": {
           "shape": "Eac3BitstreamMode",
-          "locationName": "bitstreamMode"
+          "locationName": "bitstreamMode",
+          "documentation": "Specifies the \"Bitstream Mode\" (bsmod) for the emitted E-AC-3 stream. See ATSC A/52-2012 (Annex E) for background on these values."
         },
         "CodingMode": {
           "shape": "Eac3CodingMode",
-          "locationName": "codingMode"
+          "locationName": "codingMode",
+          "documentation": "Dolby Digital Plus coding mode. Determines number of channels."
         },
         "DcFilter": {
           "shape": "Eac3DcFilter",
-          "locationName": "dcFilter"
+          "locationName": "dcFilter",
+          "documentation": "Activates a DC highpass filter for all input channels."
         },
         "Dialnorm": {
           "shape": "__integerMin1Max31",
@@ -3069,19 +3187,23 @@
         },
         "DynamicRangeCompressionLine": {
           "shape": "Eac3DynamicRangeCompressionLine",
-          "locationName": "dynamicRangeCompressionLine"
+          "locationName": "dynamicRangeCompressionLine",
+          "documentation": "Enables Dynamic Range Compression that restricts the absolute peak level for a signal."
         },
         "DynamicRangeCompressionRf": {
           "shape": "Eac3DynamicRangeCompressionRf",
-          "locationName": "dynamicRangeCompressionRf"
+          "locationName": "dynamicRangeCompressionRf",
+          "documentation": "Enables Heavy Dynamic Range Compression, ensures that the instantaneous signal peaks do not exceed specified levels."
         },
         "LfeControl": {
           "shape": "Eac3LfeControl",
-          "locationName": "lfeControl"
+          "locationName": "lfeControl",
+          "documentation": "When encoding 3/2 audio, controls whether the LFE channel is enabled"
         },
         "LfeFilter": {
           "shape": "Eac3LfeFilter",
-          "locationName": "lfeFilter"
+          "locationName": "lfeFilter",
+          "documentation": "Applies a 120Hz lowpass filter to the LFE channel prior to encoding. Only valid with 3_2_LFE coding mode."
         },
         "LoRoCenterMixLevel": {
           "shape": "__doubleMinNegative60Max3",
@@ -3105,15 +3227,18 @@
         },
         "MetadataControl": {
           "shape": "Eac3MetadataControl",
-          "locationName": "metadataControl"
+          "locationName": "metadataControl",
+          "documentation": "When set to FOLLOW_INPUT, encoder metadata will be sourced from the DD, DD+, or DolbyE decoder that supplied this audio data. If audio was not supplied from one of these streams, then the static metadata settings will be used."
         },
         "PassthroughControl": {
           "shape": "Eac3PassthroughControl",
-          "locationName": "passthroughControl"
+          "locationName": "passthroughControl",
+          "documentation": "When set to WHEN_POSSIBLE, input DD+ audio will be passed through if it is present on the input. this detection is dynamic over the life of the transcode. Inputs that alternate between DD+ and non-DD+ content will have a consistent DD+ output as the system alternates between passthrough and encoding."
         },
         "PhaseControl": {
           "shape": "Eac3PhaseControl",
-          "locationName": "phaseControl"
+          "locationName": "phaseControl",
+          "documentation": "Controls the amount of phase-shift applied to the surround channels. Only used for 3/2 coding mode."
         },
         "SampleRate": {
           "shape": "__integerMin48000Max48000",
@@ -3122,15 +3247,18 @@
         },
         "StereoDownmix": {
           "shape": "Eac3StereoDownmix",
-          "locationName": "stereoDownmix"
+          "locationName": "stereoDownmix",
+          "documentation": "Stereo downmix preference. Only used for 3/2 coding mode."
         },
         "SurroundExMode": {
           "shape": "Eac3SurroundExMode",
-          "locationName": "surroundExMode"
+          "locationName": "surroundExMode",
+          "documentation": "When encoding 3/2 audio, sets whether an extra center back surround channel is matrix encoded into the left and right surround channels."
         },
         "SurroundMode": {
           "shape": "Eac3SurroundMode",
-          "locationName": "surroundMode"
+          "locationName": "surroundMode",
+          "documentation": "When encoding 2/0 audio, sets whether Dolby Surround is matrix encoded into the two channels."
         }
       },
       "documentation": "Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value EAC3."
@@ -3187,7 +3315,8 @@
       "members": {
         "Convert608To708": {
           "shape": "EmbeddedConvert608To708",
-          "locationName": "convert608To708"
+          "locationName": "convert608To708",
+          "documentation": "When set to UPCONVERT, 608 data is both passed through via the \"608 compatibility bytes\" fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded."
         },
         "Source608ChannelNumber": {
           "shape": "__integerMin1Max4",
@@ -3269,7 +3398,8 @@
       "members": {
         "MoovPlacement": {
           "shape": "F4vMoovPlacement",
-          "locationName": "moovPlacement"
+          "locationName": "moovPlacement",
+          "documentation": "If set to PROGRESSIVE_DOWNLOAD, the MOOV atom is relocated to the beginning of the archive as required for progressive downloading. Otherwise it is placed normally at the end."
         }
       },
       "documentation": "Settings for F4v container"
@@ -3281,6 +3411,11 @@
           "shape": "__stringPatternS3",
           "locationName": "destination",
           "documentation": "Use Destination (Destination) to specify the S3 output location and the output filename base. Destination accepts format identifiers. If you do not specify the base filename in the URI, the service will use the filename of the input file. If your job has multiple inputs, the service uses the filename of the first input file."
+        },
+        "DestinationSettings": {
+          "shape": "DestinationSettings",
+          "locationName": "destinationSettings",
+          "documentation": "Settings associated with the destination. Will vary based on the type of destination"
         }
       },
       "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to FILE_GROUP_SETTINGS."
@@ -3298,7 +3433,8 @@
       "members": {
         "Convert608To708": {
           "shape": "FileSourceConvert608To708",
-          "locationName": "convert608To708"
+          "locationName": "convert608To708",
+          "documentation": "If set to UPCONVERT, 608 caption data is both passed through via the \"608 compatibility bytes\" fields of the 708 wrapper as well as translated into 708. 708 data present in the source content will be discarded."
         },
         "SourceFile": {
           "shape": "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTSmiSMI",
@@ -3367,7 +3503,8 @@
       "members": {
         "Job": {
           "shape": "Job",
-          "locationName": "job"
+          "locationName": "job",
+          "documentation": "Each job converts an input file into an output file or files. For more information, see the User Guide at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html"
         }
       }
     },
@@ -3390,7 +3527,8 @@
       "members": {
         "JobTemplate": {
           "shape": "JobTemplate",
-          "locationName": "jobTemplate"
+          "locationName": "jobTemplate",
+          "documentation": "A job template is a pre-made set of encoding instructions that you can use to quickly create a job."
         }
       }
     },
@@ -3413,7 +3551,8 @@
       "members": {
         "Preset": {
           "shape": "Preset",
-          "locationName": "preset"
+          "locationName": "preset",
+          "documentation": "A preset is a collection of preconfigured media conversion settings that you want MediaConvert to apply to the output during the conversion process."
         }
       }
     },
@@ -3436,7 +3575,8 @@
       "members": {
         "Queue": {
           "shape": "Queue",
-          "locationName": "queue"
+          "locationName": "queue",
+          "documentation": "You can use queues to manage the resources that are available to your AWS account for running multiple transcoding jobs at the same time. If you don't specify a queue, the service sends all jobs through the default queue. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html."
         }
       }
     },
@@ -3625,7 +3765,8 @@
       "members": {
         "AdaptiveQuantization": {
           "shape": "H264AdaptiveQuantization",
-          "locationName": "adaptiveQuantization"
+          "locationName": "adaptiveQuantization",
+          "documentation": "Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality."
         },
         "Bitrate": {
           "shape": "__integerMin1000Max1152000000",
@@ -3634,11 +3775,13 @@
         },
         "CodecLevel": {
           "shape": "H264CodecLevel",
-          "locationName": "codecLevel"
+          "locationName": "codecLevel",
+          "documentation": "Specify an H.264 level that is consistent with your output video settings. If you aren't sure what level to specify, choose Auto (AUTO)."
         },
         "CodecProfile": {
           "shape": "H264CodecProfile",
-          "locationName": "codecProfile"
+          "locationName": "codecProfile",
+          "documentation": "H.264 Profile. High 4:2:2 and 10-bit profiles are only available with the AVC-I License."
         },
         "DynamicSubGop": {
           "shape": "H264DynamicSubGop",
@@ -3647,23 +3790,28 @@
         },
         "EntropyEncoding": {
           "shape": "H264EntropyEncoding",
-          "locationName": "entropyEncoding"
+          "locationName": "entropyEncoding",
+          "documentation": "Entropy encoding mode. Use CABAC (must be in Main or High profile) or CAVLC."
         },
         "FieldEncoding": {
           "shape": "H264FieldEncoding",
-          "locationName": "fieldEncoding"
+          "locationName": "fieldEncoding",
+          "documentation": "Choosing FORCE_FIELD disables PAFF encoding for interlaced outputs."
         },
         "FlickerAdaptiveQuantization": {
           "shape": "H264FlickerAdaptiveQuantization",
-          "locationName": "flickerAdaptiveQuantization"
+          "locationName": "flickerAdaptiveQuantization",
+          "documentation": "Adjust quantization within each frame to reduce flicker or 'pop' on I-frames."
         },
         "FramerateControl": {
           "shape": "H264FramerateControl",
-          "locationName": "framerateControl"
+          "locationName": "framerateControl",
+          "documentation": "If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job specification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator."
         },
         "FramerateConversionAlgorithm": {
           "shape": "H264FramerateConversionAlgorithm",
-          "locationName": "framerateConversionAlgorithm"
+          "locationName": "framerateConversionAlgorithm",
+          "documentation": "When set to INTERPOLATE, produces smoother motion during frame rate conversion."
         },
         "FramerateDenominator": {
           "shape": "__integerMin1Max2147483647",
@@ -3677,7 +3825,8 @@
         },
         "GopBReference": {
           "shape": "H264GopBReference",
-          "locationName": "gopBReference"
+          "locationName": "gopBReference",
+          "documentation": "If enable, use reference B frames for GOP structures that have B frames > 1."
         },
         "GopClosedCadence": {
           "shape": "__integerMin0Max2147483647",
@@ -3691,7 +3840,8 @@
         },
         "GopSizeUnits": {
           "shape": "H264GopSizeUnits",
-          "locationName": "gopSizeUnits"
+          "locationName": "gopSizeUnits",
+          "documentation": "Indicates if the GOP Size in H264 is specified in frames or seconds. If seconds the system will convert the GOP Size into a frame count at run time."
         },
         "HrdBufferInitialFillPercentage": {
           "shape": "__integerMin0Max100",
@@ -3705,7 +3855,8 @@
         },
         "InterlaceMode": {
           "shape": "H264InterlaceMode",
-          "locationName": "interlaceMode"
+          "locationName": "interlaceMode",
+          "documentation": "Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First (TOP_FIELD) and Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having the same field polarity (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) use the same field polarity as the source. Therefore, behavior depends on the input scan type, as follows.\n  - If the source is interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The output could therefore be a mix of \"top field first\" and \"bottom field first\".\n  - If the source is progressive, the output will be interlaced with \"top field first\" or \"bottom field first\" polarity, depending on which of the Follow options you chose."
         },
         "MaxBitrate": {
           "shape": "__integerMin1000Max1152000000",
@@ -3729,7 +3880,8 @@
         },
         "ParControl": {
           "shape": "H264ParControl",
-          "locationName": "parControl"
+          "locationName": "parControl",
+          "documentation": "Using the API, enable ParFollowSource if you want the service to use the pixel aspect ratio from the input. Using the console, do this by choosing Follow source for Pixel aspect ratio."
         },
         "ParDenominator": {
           "shape": "__integerMin1Max2147483647",
@@ -3743,7 +3895,8 @@
         },
         "QualityTuningLevel": {
           "shape": "H264QualityTuningLevel",
-          "locationName": "qualityTuningLevel"
+          "locationName": "qualityTuningLevel",
+          "documentation": "Use Quality tuning level (H264QualityTuningLevel) to specifiy whether to use fast single-pass, high-quality singlepass, or high-quality multipass video encoding."
         },
         "QvbrSettings": {
           "shape": "H264QvbrSettings",
@@ -3752,15 +3905,18 @@
         },
         "RateControlMode": {
           "shape": "H264RateControlMode",
-          "locationName": "rateControlMode"
+          "locationName": "rateControlMode",
+          "documentation": "Use this setting to specify whether this output has a variable bitrate (VBR), constant bitrate (CBR) or quality-defined variable bitrate (QVBR)."
         },
         "RepeatPps": {
           "shape": "H264RepeatPps",
-          "locationName": "repeatPps"
+          "locationName": "repeatPps",
+          "documentation": "Places a PPS header on each encoded picture, even if repeated."
         },
         "SceneChangeDetect": {
           "shape": "H264SceneChangeDetect",
-          "locationName": "sceneChangeDetect"
+          "locationName": "sceneChangeDetect",
+          "documentation": "Scene change detection (inserts I-frames on scene changes)."
         },
         "Slices": {
           "shape": "__integerMin1Max32",
@@ -3769,7 +3925,8 @@
         },
         "SlowPal": {
           "shape": "H264SlowPal",
-          "locationName": "slowPal"
+          "locationName": "slowPal",
+          "documentation": "Enables Slow PAL rate conversion. 23.976fps and 24fps input is relabeled as 25fps, and audio is sped up correspondingly."
         },
         "Softness": {
           "shape": "__integerMin0Max128",
@@ -3778,23 +3935,28 @@
         },
         "SpatialAdaptiveQuantization": {
           "shape": "H264SpatialAdaptiveQuantization",
-          "locationName": "spatialAdaptiveQuantization"
+          "locationName": "spatialAdaptiveQuantization",
+          "documentation": "Adjust quantization within each frame based on spatial variation of content complexity."
         },
         "Syntax": {
           "shape": "H264Syntax",
-          "locationName": "syntax"
+          "locationName": "syntax",
+          "documentation": "Produces a bitstream compliant with SMPTE RP-2027."
         },
         "Telecine": {
           "shape": "H264Telecine",
-          "locationName": "telecine"
+          "locationName": "telecine",
+          "documentation": "This field applies only if the Streams > Advanced > Framerate (framerate) field  is set to 29.970. This field works with the Streams > Advanced > Preprocessors > Deinterlacer  field (deinterlace_mode) and the Streams > Advanced > Interlaced Mode field (interlace_mode)  to identify the scan type for the output: Progressive, Interlaced, Hard Telecine or Soft Telecine. - Hard: produces 29.97i output from 23.976 input. - Soft: produces 23.976; the player converts this output to 29.97i."
         },
         "TemporalAdaptiveQuantization": {
           "shape": "H264TemporalAdaptiveQuantization",
-          "locationName": "temporalAdaptiveQuantization"
+          "locationName": "temporalAdaptiveQuantization",
+          "documentation": "Adjust quantization within each frame based on temporal variation of content complexity."
         },
         "UnregisteredSeiTimecode": {
           "shape": "H264UnregisteredSeiTimecode",
-          "locationName": "unregisteredSeiTimecode"
+          "locationName": "unregisteredSeiTimecode",
+          "documentation": "Inserts timecode for each frame as 4 bytes of an unregistered SEI message."
         }
       },
       "documentation": "Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value H_264."
@@ -4025,11 +4187,13 @@
       "members": {
         "AdaptiveQuantization": {
           "shape": "H265AdaptiveQuantization",
-          "locationName": "adaptiveQuantization"
+          "locationName": "adaptiveQuantization",
+          "documentation": "Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality."
         },
         "AlternateTransferFunctionSei": {
           "shape": "H265AlternateTransferFunctionSei",
-          "locationName": "alternateTransferFunctionSei"
+          "locationName": "alternateTransferFunctionSei",
+          "documentation": "Enables Alternate Transfer Function SEI message for outputs using Hybrid Log Gamma (HLG) Electro-Optical Transfer Function (EOTF)."
         },
         "Bitrate": {
           "shape": "__integerMin1000Max1466400000",
@@ -4038,11 +4202,13 @@
         },
         "CodecLevel": {
           "shape": "H265CodecLevel",
-          "locationName": "codecLevel"
+          "locationName": "codecLevel",
+          "documentation": "H.265 Level."
         },
         "CodecProfile": {
           "shape": "H265CodecProfile",
-          "locationName": "codecProfile"
+          "locationName": "codecProfile",
+          "documentation": "Represents the Profile and Tier, per the HEVC (H.265) specification. Selections are grouped as [Profile] / [Tier], so \"Main/High\" represents Main Profile with High Tier. 4:2:2 profiles are only available with the HEVC 4:2:2 License."
         },
         "DynamicSubGop": {
           "shape": "H265DynamicSubGop",
@@ -4051,15 +4217,18 @@
         },
         "FlickerAdaptiveQuantization": {
           "shape": "H265FlickerAdaptiveQuantization",
-          "locationName": "flickerAdaptiveQuantization"
+          "locationName": "flickerAdaptiveQuantization",
+          "documentation": "Adjust quantization within each frame to reduce flicker or 'pop' on I-frames."
         },
         "FramerateControl": {
           "shape": "H265FramerateControl",
-          "locationName": "framerateControl"
+          "locationName": "framerateControl",
+          "documentation": "If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job sepecification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator."
         },
         "FramerateConversionAlgorithm": {
           "shape": "H265FramerateConversionAlgorithm",
-          "locationName": "framerateConversionAlgorithm"
+          "locationName": "framerateConversionAlgorithm",
+          "documentation": "When set to INTERPOLATE, produces smoother motion during frame rate conversion."
         },
         "FramerateDenominator": {
           "shape": "__integerMin1Max2147483647",
@@ -4073,7 +4242,8 @@
         },
         "GopBReference": {
           "shape": "H265GopBReference",
-          "locationName": "gopBReference"
+          "locationName": "gopBReference",
+          "documentation": "If enable, use reference B frames for GOP structures that have B frames > 1."
         },
         "GopClosedCadence": {
           "shape": "__integerMin0Max2147483647",
@@ -4087,7 +4257,8 @@
         },
         "GopSizeUnits": {
           "shape": "H265GopSizeUnits",
-          "locationName": "gopSizeUnits"
+          "locationName": "gopSizeUnits",
+          "documentation": "Indicates if the GOP Size in H265 is specified in frames or seconds. If seconds the system will convert the GOP Size into a frame count at run time."
         },
         "HrdBufferInitialFillPercentage": {
           "shape": "__integerMin0Max100",
@@ -4101,7 +4272,8 @@
         },
         "InterlaceMode": {
           "shape": "H265InterlaceMode",
-          "locationName": "interlaceMode"
+          "locationName": "interlaceMode",
+          "documentation": "Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First (TOP_FIELD) and Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having the same field polarity (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) use the same field polarity as the source. Therefore, behavior depends on the input scan type.\n  - If the source is interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The output could therefore be a mix of \"top field first\" and \"bottom field first\".\n  - If the source is progressive, the output will be interlaced with \"top field first\" or \"bottom field first\" polarity, depending on which of the Follow options you chose."
         },
         "MaxBitrate": {
           "shape": "__integerMin1000Max1466400000",
@@ -4125,7 +4297,8 @@
         },
         "ParControl": {
           "shape": "H265ParControl",
-          "locationName": "parControl"
+          "locationName": "parControl",
+          "documentation": "Using the API, enable ParFollowSource if you want the service to use the pixel aspect ratio from the input. Using the console, do this by choosing Follow source for Pixel aspect ratio."
         },
         "ParDenominator": {
           "shape": "__integerMin1Max2147483647",
@@ -4139,7 +4312,8 @@
         },
         "QualityTuningLevel": {
           "shape": "H265QualityTuningLevel",
-          "locationName": "qualityTuningLevel"
+          "locationName": "qualityTuningLevel",
+          "documentation": "Use Quality tuning level (H265QualityTuningLevel) to specifiy whether to use fast single-pass, high-quality singlepass, or high-quality multipass video encoding."
         },
         "QvbrSettings": {
           "shape": "H265QvbrSettings",
@@ -4148,15 +4322,18 @@
         },
         "RateControlMode": {
           "shape": "H265RateControlMode",
-          "locationName": "rateControlMode"
+          "locationName": "rateControlMode",
+          "documentation": "Use this setting to specify whether this output has a variable bitrate (VBR), constant bitrate (CBR) or quality-defined variable bitrate (QVBR)."
         },
         "SampleAdaptiveOffsetFilterMode": {
           "shape": "H265SampleAdaptiveOffsetFilterMode",
-          "locationName": "sampleAdaptiveOffsetFilterMode"
+          "locationName": "sampleAdaptiveOffsetFilterMode",
+          "documentation": "Specify Sample Adaptive Offset (SAO) filter strength.  Adaptive mode dynamically selects best strength based on content"
         },
         "SceneChangeDetect": {
           "shape": "H265SceneChangeDetect",
-          "locationName": "sceneChangeDetect"
+          "locationName": "sceneChangeDetect",
+          "documentation": "Scene change detection (inserts I-frames on scene changes)."
         },
         "Slices": {
           "shape": "__integerMin1Max32",
@@ -4165,31 +4342,38 @@
         },
         "SlowPal": {
           "shape": "H265SlowPal",
-          "locationName": "slowPal"
+          "locationName": "slowPal",
+          "documentation": "Enables Slow PAL rate conversion. 23.976fps and 24fps input is relabeled as 25fps, and audio is sped up correspondingly."
         },
         "SpatialAdaptiveQuantization": {
           "shape": "H265SpatialAdaptiveQuantization",
-          "locationName": "spatialAdaptiveQuantization"
+          "locationName": "spatialAdaptiveQuantization",
+          "documentation": "Adjust quantization within each frame based on spatial variation of content complexity."
         },
         "Telecine": {
           "shape": "H265Telecine",
-          "locationName": "telecine"
+          "locationName": "telecine",
+          "documentation": "This field applies only if the Streams > Advanced > Framerate (framerate) field  is set to 29.970. This field works with the Streams > Advanced > Preprocessors > Deinterlacer  field (deinterlace_mode) and the Streams > Advanced > Interlaced Mode field (interlace_mode)  to identify the scan type for the output: Progressive, Interlaced, Hard Telecine or Soft Telecine. - Hard: produces 29.97i output from 23.976 input. - Soft: produces 23.976; the player converts this output to 29.97i."
         },
         "TemporalAdaptiveQuantization": {
           "shape": "H265TemporalAdaptiveQuantization",
-          "locationName": "temporalAdaptiveQuantization"
+          "locationName": "temporalAdaptiveQuantization",
+          "documentation": "Adjust quantization within each frame based on temporal variation of content complexity."
         },
         "TemporalIds": {
           "shape": "H265TemporalIds",
-          "locationName": "temporalIds"
+          "locationName": "temporalIds",
+          "documentation": "Enables temporal layer identifiers in the encoded bitstream. Up to 3 layers are supported depending on GOP structure: I- and P-frames form one layer, reference B-frames can form a second layer and non-reference b-frames can form a third layer. Decoders can optionally decode only the lower temporal layers to generate a lower frame rate output. For example, given a bitstream with temporal IDs and with b-frames = 1 (i.e. IbPbPb display order), a decoder could decode all the frames for full frame rate output or only the I and P frames (lowest temporal layer) for a half frame rate output."
         },
         "Tiles": {
           "shape": "H265Tiles",
-          "locationName": "tiles"
+          "locationName": "tiles",
+          "documentation": "Enable use of tiles, allowing horizontal as well as vertical subdivision of the encoded pictures."
         },
         "UnregisteredSeiTimecode": {
           "shape": "H265UnregisteredSeiTimecode",
-          "locationName": "unregisteredSeiTimecode"
+          "locationName": "unregisteredSeiTimecode",
+          "documentation": "Inserts timecode for each frame as 4 bytes of an unregistered SEI message."
         },
         "WriteMp4PackagingType": {
           "shape": "H265WriteMp4PackagingType",
@@ -4362,7 +4546,8 @@
         },
         "LanguageCode": {
           "shape": "LanguageCode",
-          "locationName": "languageCode"
+          "locationName": "languageCode",
+          "documentation": "Specify the language, using the ISO 639-2 three-letter code listed at https://www.loc.gov/standards/iso639-2/php/code_list.php."
         },
         "LanguageDescription": {
           "shape": "__string",
@@ -4415,27 +4600,33 @@
         },
         "EncryptionMethod": {
           "shape": "HlsEncryptionType",
-          "locationName": "encryptionMethod"
+          "locationName": "encryptionMethod",
+          "documentation": "Encrypts the segments with the given encryption scheme. Leave blank to disable. Selecting 'Disabled' in the web interface also disables encryption."
         },
         "InitializationVectorInManifest": {
           "shape": "HlsInitializationVectorInManifest",
-          "locationName": "initializationVectorInManifest"
+          "locationName": "initializationVectorInManifest",
+          "documentation": "The Initialization Vector is a 128-bit number used in conjunction with the key for encrypting blocks. If set to INCLUDE, Initialization Vector is listed in the manifest. Otherwise Initialization Vector is not in the manifest."
         },
         "OfflineEncrypted": {
           "shape": "HlsOfflineEncrypted",
-          "locationName": "offlineEncrypted"
+          "locationName": "offlineEncrypted",
+          "documentation": "Enable this setting to insert the EXT-X-SESSION-KEY element into the master playlist. This allows for offline Apple HLS FairPlay content protection."
         },
         "SpekeKeyProvider": {
           "shape": "SpekeKeyProvider",
-          "locationName": "spekeKeyProvider"
+          "locationName": "spekeKeyProvider",
+          "documentation": "Settings for use with a SPEKE key provider"
         },
         "StaticKeyProvider": {
           "shape": "StaticKeyProvider",
-          "locationName": "staticKeyProvider"
+          "locationName": "staticKeyProvider",
+          "documentation": "Use these settings to set up encryption with a static key provider."
         },
         "Type": {
           "shape": "HlsKeyProviderType",
-          "locationName": "type"
+          "locationName": "type",
+          "documentation": "Indicates which type of key provider is used for encryption."
         }
       },
       "documentation": "Settings for HLS encryption"
@@ -4468,24 +4659,33 @@
         },
         "CaptionLanguageSetting": {
           "shape": "HlsCaptionLanguageSetting",
-          "locationName": "captionLanguageSetting"
+          "locationName": "captionLanguageSetting",
+          "documentation": "Applies only to 608 Embedded output captions. Insert: Include CLOSED-CAPTIONS lines in the manifest. Specify at least one language in the CC1 Language Code field. One CLOSED-CAPTION line is added for each Language Code you specify. Make sure to specify the languages in the order in which they appear in the original source (if the source is embedded format) or the order of the caption selectors (if the source is other than embedded). Otherwise, languages in the manifest will not match up properly with the output captions. None: Include CLOSED-CAPTIONS=NONE line in the manifest. Omit: Omit any CLOSED-CAPTIONS line from the manifest."
         },
         "ClientCache": {
           "shape": "HlsClientCache",
-          "locationName": "clientCache"
+          "locationName": "clientCache",
+          "documentation": "When set to ENABLED, sets #EXT-X-ALLOW-CACHE:no tag, which prevents client from saving media segments for later replay."
         },
         "CodecSpecification": {
           "shape": "HlsCodecSpecification",
-          "locationName": "codecSpecification"
+          "locationName": "codecSpecification",
+          "documentation": "Specification to use (RFC-6381 or the default RFC-4281) during m3u8 playlist generation."
         },
         "Destination": {
           "shape": "__stringPatternS3",
           "locationName": "destination",
           "documentation": "Use Destination (Destination) to specify the S3 output location and the output filename base. Destination accepts format identifiers. If you do not specify the base filename in the URI, the service will use the filename of the input file. If your job has multiple inputs, the service uses the filename of the first input file."
         },
+        "DestinationSettings": {
+          "shape": "DestinationSettings",
+          "locationName": "destinationSettings",
+          "documentation": "Settings associated with the destination. Will vary based on the type of destination"
+        },
         "DirectoryStructure": {
           "shape": "HlsDirectoryStructure",
-          "locationName": "directoryStructure"
+          "locationName": "directoryStructure",
+          "documentation": "Indicates whether segments should be placed in subdirectories."
         },
         "Encryption": {
           "shape": "HlsEncryptionSettings",
@@ -4494,11 +4694,13 @@
         },
         "ManifestCompression": {
           "shape": "HlsManifestCompression",
-          "locationName": "manifestCompression"
+          "locationName": "manifestCompression",
+          "documentation": "When set to GZIP, compresses HLS playlist."
         },
         "ManifestDurationFormat": {
           "shape": "HlsManifestDurationFormat",
-          "locationName": "manifestDurationFormat"
+          "locationName": "manifestDurationFormat",
+          "documentation": "Indicates whether the output manifest should use floating point values for segment duration."
         },
         "MinFinalSegmentLength": {
           "shape": "__doubleMin0Max2147483647",
@@ -4512,11 +4714,13 @@
         },
         "OutputSelection": {
           "shape": "HlsOutputSelection",
-          "locationName": "outputSelection"
+          "locationName": "outputSelection",
+          "documentation": "Indicates whether the .m3u8 manifest file should be generated for this HLS output group."
         },
         "ProgramDateTime": {
           "shape": "HlsProgramDateTime",
-          "locationName": "programDateTime"
+          "locationName": "programDateTime",
+          "documentation": "Includes or excludes EXT-X-PROGRAM-DATE-TIME tag in .m3u8 manifest files. The value is calculated as follows: either the program date and time are initialized using the input timecode source, or the time is initialized using the input timecode source and the date is initialized using the timestamp_offset."
         },
         "ProgramDateTimePeriod": {
           "shape": "__integerMin0Max3600",
@@ -4525,7 +4729,8 @@
         },
         "SegmentControl": {
           "shape": "HlsSegmentControl",
-          "locationName": "segmentControl"
+          "locationName": "segmentControl",
+          "documentation": "When set to SINGLE_FILE, emits program as a single media resource (.ts) file, uses #EXT-X-BYTERANGE tags to index segment for playback."
         },
         "SegmentLength": {
           "shape": "__integerMin1Max2147483647",
@@ -4539,11 +4744,13 @@
         },
         "StreamInfResolution": {
           "shape": "HlsStreamInfResolution",
-          "locationName": "streamInfResolution"
+          "locationName": "streamInfResolution",
+          "documentation": "Include or exclude RESOLUTION attribute for video in EXT-X-STREAM-INF tag of variant manifest."
         },
         "TimedMetadataId3Frame": {
           "shape": "HlsTimedMetadataId3Frame",
-          "locationName": "timedMetadataId3Frame"
+          "locationName": "timedMetadataId3Frame",
+          "documentation": "Indicates ID3 frame that has the timecode."
         },
         "TimedMetadataId3Period": {
           "shape": "__integerMinNegative2147483648Max2147483647",
@@ -4645,11 +4852,13 @@
         },
         "AudioTrackType": {
           "shape": "HlsAudioTrackType",
-          "locationName": "audioTrackType"
+          "locationName": "audioTrackType",
+          "documentation": "Four types of audio-only tracks are supported: Audio-Only Variant Stream The client can play back this audio-only stream instead of video in low-bandwidth scenarios. Represented as an EXT-X-STREAM-INF in the HLS manifest. Alternate Audio, Auto Select, Default Alternate rendition that the client should try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=YES, AUTOSELECT=YES Alternate Audio, Auto Select, Not Default Alternate rendition that the client may try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=YES Alternate Audio, not Auto Select Alternate rendition that the client will not try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=NO"
         },
         "IFrameOnlyManifest": {
           "shape": "HlsIFrameOnlyManifest",
-          "locationName": "iFrameOnlyManifest"
+          "locationName": "iFrameOnlyManifest",
+          "documentation": "When set to INCLUDE, writes I-Frame Only Manifest in addition to the HLS manifest"
         },
         "SegmentModifier": {
           "shape": "__string",
@@ -4723,16 +4932,18 @@
         },
         "DeblockFilter": {
           "shape": "InputDeblockFilter",
-          "locationName": "deblockFilter"
+          "locationName": "deblockFilter",
+          "documentation": "Enable Deblock (InputDeblockFilter) to produce smoother motion in the output. Default is disabled. Only manaully controllable for MPEG2 and uncompressed video inputs."
         },
         "DecryptionSettings": {
           "shape": "InputDecryptionSettings",
           "locationName": "decryptionSettings",
-          "documentation": "Settings for decrypting any input files that are encrypted."
+          "documentation": "Settings for decrypting any input files that you encrypt before you upload them to Amazon S3. MediaConvert can decrypt files only when you use AWS Key Management Service (KMS) to encrypt the data key that you use to encrypt your content."
         },
         "DenoiseFilter": {
           "shape": "InputDenoiseFilter",
-          "locationName": "denoiseFilter"
+          "locationName": "denoiseFilter",
+          "documentation": "Enable Denoise (InputDenoiseFilter) to filter noise from the input.  Default is disabled. Only applicable to MPEG2, H.264, H.265, and uncompressed video inputs."
         },
         "FileInput": {
           "shape": "__stringPatternS3MM2VVMMPPEEGGAAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLL",
@@ -4741,7 +4952,8 @@
         },
         "FilterEnable": {
           "shape": "InputFilterEnable",
-          "locationName": "filterEnable"
+          "locationName": "filterEnable",
+          "documentation": "Use Filter enable (InputFilterEnable) to specify how the transcoding service applies the denoise and deblock filters. You must also enable the filters separately, with Denoise (InputDenoiseFilter) and Deblock (InputDeblockFilter). * Auto - The transcoding service determines whether to apply filtering, depending on input type and quality. * Disable - The input is not filtered. This is true even if you use the API to enable them in (InputDeblockFilter) and (InputDeblockFilter). * Force - The in put is filtered regardless of input type."
         },
         "FilterStrength": {
           "shape": "__integerMinNegative5Max5",
@@ -4765,7 +4977,8 @@
         },
         "PsiControl": {
           "shape": "InputPsiControl",
-          "locationName": "psiControl"
+          "locationName": "psiControl",
+          "documentation": "Set PSI control (InputPsiControl) for transport stream inputs to specify which data the demux process to scans. * Ignore PSI - Scan all PIDs for audio and video. * Use PSI - Scan only PSI data."
         },
         "SupplementalImps": {
           "shape": "__listOf__stringPatternS3ASSETMAPXml",
@@ -4774,11 +4987,13 @@
         },
         "TimecodeSource": {
           "shape": "InputTimecodeSource",
-          "locationName": "timecodeSource"
+          "locationName": "timecodeSource",
+          "documentation": "Timecode source under input settings (InputTimecodeSource) only affects the behavior of features that apply to a single input at a time, such as input clipping and synchronizing some captions formats. Use this setting to specify whether the service counts frames by timecodes embedded in the video (EMBEDDED) or by starting the first frame at zero (ZEROBASED). In both cases, the timecode format is HH:MM:SS:FF or HH:MM:SS;FF, where FF is the frame number. Only set this to EMBEDDED if your source video has embedded timecodes."
         },
         "VideoSelector": {
           "shape": "VideoSelector",
-          "locationName": "videoSelector"
+          "locationName": "videoSelector",
+          "documentation": "Selector for video."
         }
       },
       "documentation": "Specifies media input"
@@ -4812,25 +5027,26 @@
       "members": {
         "DecryptionMode": {
           "shape": "DecryptionMode",
-          "locationName": "decryptionMode"
+          "locationName": "decryptionMode",
+          "documentation": "Specify the encryption mode that you used to encrypt your input files."
         },
         "EncryptedDecryptionKey": {
           "shape": "__stringMin24Max512PatternAZaZ0902",
           "locationName": "encryptedDecryptionKey",
-          "documentation": "Decryption key either 128 or 192 or 256 bits encrypted with KMS"
+          "documentation": "Warning! Don't provide your encryption key in plaintext. Your job settings could be intercepted, making your encrypted content vulnerable. Specify the encrypted version of the data key that you used to encrypt your content. The data key must be encrypted by AWS Key Management Service (KMS). The key can be 128, 192, or 256 bits."
         },
         "InitializationVector": {
           "shape": "__stringMin16Max24PatternAZaZ0922AZaZ0916",
           "locationName": "initializationVector",
-          "documentation": "Initialization Vector 96 bits (CTR/GCM mode only) or 128 bits."
+          "documentation": "Specify the initialization vector that you used when you encrypted your content before uploading it to Amazon S3. You can use a 16-byte initialization vector with any encryption mode. Or, you can use a 12-byte initialization vector with GCM or CTR. MediaConvert accepts only initialization vectors that are base64-encoded."
         },
         "KmsKeyRegion": {
           "shape": "__stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912",
           "locationName": "kmsKeyRegion",
-          "documentation": "The AWS region in which decryption key was encrypted with KMS"
+          "documentation": "Specify the AWS Region for AWS Key Management Service (KMS) that you used to encrypt your data key, if that Region is different from the one you are using for AWS Elemental MediaConvert."
         }
       },
-      "documentation": "Specify the decryption settings used to decrypt encrypted input"
+      "documentation": "Settings for decrypting any input files that you encrypt before you upload them to Amazon S3. MediaConvert can decrypt files only when you use AWS Key Management Service (KMS) to encrypt the data key that you use to encrypt your content."
     },
     "InputDenoiseFilter": {
       "type": "string",
@@ -4888,15 +5104,18 @@
         },
         "DeblockFilter": {
           "shape": "InputDeblockFilter",
-          "locationName": "deblockFilter"
+          "locationName": "deblockFilter",
+          "documentation": "Enable Deblock (InputDeblockFilter) to produce smoother motion in the output. Default is disabled. Only manaully controllable for MPEG2 and uncompressed video inputs."
         },
         "DenoiseFilter": {
           "shape": "InputDenoiseFilter",
-          "locationName": "denoiseFilter"
+          "locationName": "denoiseFilter",
+          "documentation": "Enable Denoise (InputDenoiseFilter) to filter noise from the input.  Default is disabled. Only applicable to MPEG2, H.264, H.265, and uncompressed video inputs."
         },
         "FilterEnable": {
           "shape": "InputFilterEnable",
-          "locationName": "filterEnable"
+          "locationName": "filterEnable",
+          "documentation": "Use Filter enable (InputFilterEnable) to specify how the transcoding service applies the denoise and deblock filters. You must also enable the filters separately, with Denoise (InputDenoiseFilter) and Deblock (InputDeblockFilter). * Auto - The transcoding service determines whether to apply filtering, depending on input type and quality. * Disable - The input is not filtered. This is true even if you use the API to enable them in (InputDeblockFilter) and (InputDeblockFilter). * Force - The in put is filtered regardless of input type."
         },
         "FilterStrength": {
           "shape": "__integerMinNegative5Max5",
@@ -4920,15 +5139,18 @@
         },
         "PsiControl": {
           "shape": "InputPsiControl",
-          "locationName": "psiControl"
+          "locationName": "psiControl",
+          "documentation": "Set PSI control (InputPsiControl) for transport stream inputs to specify which data the demux process to scans. * Ignore PSI - Scan all PIDs for audio and video. * Use PSI - Scan only PSI data."
         },
         "TimecodeSource": {
           "shape": "InputTimecodeSource",
-          "locationName": "timecodeSource"
+          "locationName": "timecodeSource",
+          "documentation": "Timecode source under input settings (InputTimecodeSource) only affects the behavior of features that apply to a single input at a time, such as input clipping and synchronizing some captions formats. Use this setting to specify whether the service counts frames by timecodes embedded in the video (EMBEDDED) or by starting the first frame at zero (ZEROBASED). In both cases, the timecode format is HH:MM:SS:FF or HH:MM:SS;FF, where FF is the frame number. Only set this to EMBEDDED if your source video has embedded timecodes."
         },
         "VideoSelector": {
           "shape": "VideoSelector",
-          "locationName": "videoSelector"
+          "locationName": "videoSelector",
+          "documentation": "Selector for video."
         }
       },
       "documentation": "Specified video input in a template."
@@ -5009,7 +5231,7 @@
         "AccelerationSettings": {
           "shape": "AccelerationSettings",
           "locationName": "accelerationSettings",
-          "documentation": "Acceleration settings for job execution."
+          "documentation": "Accelerated transcoding is currently in private preview. Contact AWS for more information."
         },
         "Arn": {
           "shape": "__string",
@@ -5018,12 +5240,18 @@
         },
         "BillingTagsSource": {
           "shape": "BillingTagsSource",
-          "locationName": "billingTagsSource"
+          "locationName": "billingTagsSource",
+          "documentation": "Optional. Choose a tag type that AWS Billing and Cost Management will use to sort your AWS Elemental MediaConvert costs on any billing report that you set up. Any transcoding outputs that don't have an associated tag will appear in your billing report unsorted. If you don't choose a valid value for this field, your job outputs will appear on the billing report unsorted."
         },
         "CreatedAt": {
           "shape": "__timestampUnix",
           "locationName": "createdAt",
           "documentation": "The time, in Unix epoch format in seconds, when the job got created."
+        },
+        "CurrentPhase": {
+          "shape": "JobPhase",
+          "locationName": "currentPhase",
+          "documentation": "A job's phase can be PROBING, TRANSCODING OR UPLOADING"
         },
         "ErrorCode": {
           "shape": "__integer",
@@ -5040,6 +5268,11 @@
           "locationName": "id",
           "documentation": "A portion of the job's ARN, unique within your AWS Elemental MediaConvert resources"
         },
+        "JobPercentComplete": {
+          "shape": "__integer",
+          "locationName": "jobPercentComplete",
+          "documentation": "An estimate of how far your job has progressed. This estimate is shown as a percentage of the total time from when your job leaves its queue to when your output files appear in your output Amazon S3 bucket. AWS Elemental MediaConvert provides jobPercentComplete in CloudWatch STATUS_UPDATE events and in the response to GetJob and ListJobs requests. The jobPercentComplete estimate is reliable for the following input containers: Quicktime, Transport Stream, MP4, and MXF. For some jobs, including audio-only jobs and jobs that use input clipping, the service can't provide information about job progress. In those cases, jobPercentComplete returns a null value."
+        },
         "JobTemplate": {
           "shape": "__string",
           "locationName": "jobTemplate",
@@ -5055,6 +5288,11 @@
           "locationName": "queue",
           "documentation": "Optional. When you create a job, you can specify a queue to send it to. If you don't specify, the job will go to the default queue. For more about queues, see the User Guide topic at http://docs.aws.amazon.com/mediaconvert/latest/ug/what-is.html"
         },
+        "RetryCount": {
+          "shape": "__integer",
+          "locationName": "retryCount",
+          "documentation": "The number of times that the service automatically attempted to process your job after encountering an error."
+        },
         "Role": {
           "shape": "__string",
           "locationName": "role",
@@ -5062,20 +5300,23 @@
         },
         "Settings": {
           "shape": "JobSettings",
-          "locationName": "settings"
+          "locationName": "settings",
+          "documentation": "JobSettings contains all the transcode settings for a job."
         },
         "Status": {
           "shape": "JobStatus",
-          "locationName": "status"
+          "locationName": "status",
+          "documentation": "A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR."
         },
-        "StatusUpdateIntervalInSecs": {
-          "shape": "__integerMin10Max600",
-          "locationName": "statusUpdateIntervalInSecs",
+        "StatusUpdateInterval": {
+          "shape": "StatusUpdateInterval",
+          "locationName": "statusUpdateInterval",
           "documentation": "Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error."
         },
         "Timing": {
           "shape": "Timing",
-          "locationName": "timing"
+          "locationName": "timing",
+          "documentation": "Information about when jobs are submitted, started, and finished is specified in Unix epoch format in seconds."
         },
         "UserMetadata": {
           "shape": "__mapOf__string",
@@ -5087,6 +5328,15 @@
       "required": [
         "Role",
         "Settings"
+      ]
+    },
+    "JobPhase": {
+      "type": "string",
+      "documentation": "A job's phase can be PROBING, TRANSCODING OR UPLOADING",
+      "enum": [
+        "PROBING",
+        "TRANSCODING",
+        "UPLOADING"
       ]
     },
     "JobSettings": {
@@ -5119,7 +5369,8 @@
         },
         "NielsenConfiguration": {
           "shape": "NielsenConfiguration",
-          "locationName": "nielsenConfiguration"
+          "locationName": "nielsenConfiguration",
+          "documentation": "Settings for Nielsen Configuration"
         },
         "OutputGroups": {
           "shape": "__listOfOutputGroup",
@@ -5133,7 +5384,8 @@
         },
         "TimedMetadataInsertion": {
           "shape": "TimedMetadataInsertion",
-          "locationName": "timedMetadataInsertion"
+          "locationName": "timedMetadataInsertion",
+          "documentation": "Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in your job. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects."
         }
       },
       "documentation": "JobSettings contains all the transcode settings for a job."
@@ -5155,7 +5407,7 @@
         "AccelerationSettings": {
           "shape": "AccelerationSettings",
           "locationName": "accelerationSettings",
-          "documentation": "Acceleration settings for job execution."
+          "documentation": "Accelerated transcoding is currently in private preview. Contact AWS for more information."
         },
         "Arn": {
           "shape": "__string",
@@ -5194,11 +5446,12 @@
         },
         "Settings": {
           "shape": "JobTemplateSettings",
-          "locationName": "settings"
+          "locationName": "settings",
+          "documentation": "JobTemplateSettings contains all the transcode settings saved in the template that will be applied to jobs created from it."
         },
-        "StatusUpdateIntervalInSecs": {
-          "shape": "__integerMin10Max600",
-          "locationName": "statusUpdateIntervalInSecs",
+        "StatusUpdateInterval": {
+          "shape": "StatusUpdateInterval",
+          "locationName": "statusUpdateInterval",
           "documentation": "Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error."
         },
         "Type": {
@@ -5252,7 +5505,8 @@
         },
         "NielsenConfiguration": {
           "shape": "NielsenConfiguration",
-          "locationName": "nielsenConfiguration"
+          "locationName": "nielsenConfiguration",
+          "documentation": "Settings for Nielsen Configuration"
         },
         "OutputGroups": {
           "shape": "__listOfOutputGroup",
@@ -5266,7 +5520,8 @@
         },
         "TimedMetadataInsertion": {
           "shape": "TimedMetadataInsertion",
-          "locationName": "timedMetadataInsertion"
+          "locationName": "timedMetadataInsertion",
+          "documentation": "Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in your job. To include timed metadata, you must enable it here, enable it in each output container, and specify tags and timecodes in ID3 insertion (Id3Insertion) objects."
         }
       },
       "documentation": "JobTemplateSettings contains all the transcode settings saved in the template that will be applied to jobs created from it."
@@ -5480,6 +5735,7 @@
         "ListBy": {
           "shape": "JobTemplateListBy",
           "locationName": "listBy",
+          "documentation": "Optional. When you request a list of job templates, you can choose to list them alphabetically by NAME or chronologically by CREATION_DATE. If you don't specify, the service will list them by name.",
           "location": "querystring"
         },
         "MaxResults": {
@@ -5497,6 +5753,7 @@
         "Order": {
           "shape": "Order",
           "locationName": "order",
+          "documentation": "When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.",
           "location": "querystring"
         }
       }
@@ -5534,6 +5791,7 @@
         "Order": {
           "shape": "Order",
           "locationName": "order",
+          "documentation": "When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.",
           "location": "querystring"
         },
         "Queue": {
@@ -5545,6 +5803,7 @@
         "Status": {
           "shape": "JobStatus",
           "locationName": "status",
+          "documentation": "A job's status can be SUBMITTED, PROGRESSING, COMPLETE, CANCELED, or ERROR.",
           "location": "querystring"
         }
       }
@@ -5576,6 +5835,7 @@
         "ListBy": {
           "shape": "PresetListBy",
           "locationName": "listBy",
+          "documentation": "Optional. When you request a list of presets, you can choose to list them alphabetically by NAME or chronologically by CREATION_DATE. If you don't specify, the service will list them by name.",
           "location": "querystring"
         },
         "MaxResults": {
@@ -5593,6 +5853,7 @@
         "Order": {
           "shape": "Order",
           "locationName": "order",
+          "documentation": "When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.",
           "location": "querystring"
         }
       }
@@ -5618,6 +5879,7 @@
         "ListBy": {
           "shape": "QueueListBy",
           "locationName": "listBy",
+          "documentation": "Optional. When you request a list of queues, you can choose to list them alphabetically by NAME or chronologically by CREATION_DATE. If you don't specify, the service will list them by creation date.",
           "location": "querystring"
         },
         "MaxResults": {
@@ -5635,6 +5897,7 @@
         "Order": {
           "shape": "Order",
           "locationName": "order",
+          "documentation": "When you request lists of resources, you can optionally specify whether they are sorted in ASCENDING or DESCENDING order. Default varies by resource.",
           "location": "querystring"
         }
       }
@@ -5673,7 +5936,8 @@
       "members": {
         "ResourceTags": {
           "shape": "ResourceTags",
-          "locationName": "resourceTags"
+          "locationName": "resourceTags",
+          "documentation": "The Amazon Resource Name (ARN) and tags for an AWS Elemental MediaConvert resource."
         }
       }
     },
@@ -5793,7 +6057,8 @@
       "members": {
         "AudioBufferModel": {
           "shape": "M2tsAudioBufferModel",
-          "locationName": "audioBufferModel"
+          "locationName": "audioBufferModel",
+          "documentation": "Selects between the DVB and ATSC buffer models for Dolby Digital audio."
         },
         "AudioFramesPerPes": {
           "shape": "__integerMin0Max2147483647",
@@ -5812,15 +6077,18 @@
         },
         "BufferModel": {
           "shape": "M2tsBufferModel",
-          "locationName": "bufferModel"
+          "locationName": "bufferModel",
+          "documentation": "Controls what buffer model to use for accurate interleaving. If set to MULTIPLEX, use multiplex  buffer model. If set to NONE, this can lead to lower latency, but low-memory devices may not be able to play back the stream without interruptions."
         },
         "DvbNitSettings": {
           "shape": "DvbNitSettings",
-          "locationName": "dvbNitSettings"
+          "locationName": "dvbNitSettings",
+          "documentation": "Inserts DVB Network Information Table (NIT) at the specified table repetition interval."
         },
         "DvbSdtSettings": {
           "shape": "DvbSdtSettings",
-          "locationName": "dvbSdtSettings"
+          "locationName": "dvbSdtSettings",
+          "documentation": "Inserts DVB Service Description Table (NIT) at the specified table repetition interval."
         },
         "DvbSubPids": {
           "shape": "__listOf__integerMin32Max8182",
@@ -5829,7 +6097,8 @@
         },
         "DvbTdtSettings": {
           "shape": "DvbTdtSettings",
-          "locationName": "dvbTdtSettings"
+          "locationName": "dvbTdtSettings",
+          "documentation": "Inserts DVB Time and Date Table (TDT) at the specified table repetition interval."
         },
         "DvbTeletextPid": {
           "shape": "__integerMin32Max8182",
@@ -5838,15 +6107,18 @@
         },
         "EbpAudioInterval": {
           "shape": "M2tsEbpAudioInterval",
-          "locationName": "ebpAudioInterval"
+          "locationName": "ebpAudioInterval",
+          "documentation": "When set to VIDEO_AND_FIXED_INTERVALS, audio EBP markers will be added to partitions 3 and 4. The interval between these additional markers will be fixed, and will be slightly shorter than the video EBP marker interval. When set to VIDEO_INTERVAL, these additional markers will not be inserted. Only applicable when EBP segmentation markers are is selected (segmentationMarkers is EBP or EBP_LEGACY)."
         },
         "EbpPlacement": {
           "shape": "M2tsEbpPlacement",
-          "locationName": "ebpPlacement"
+          "locationName": "ebpPlacement",
+          "documentation": "Selects which PIDs to place EBP markers on. They can either be placed only on the video PID, or on both the video PID and all audio PIDs. Only applicable when EBP segmentation markers are is selected (segmentationMarkers is EBP or EBP_LEGACY)."
         },
         "EsRateInPes": {
           "shape": "M2tsEsRateInPes",
-          "locationName": "esRateInPes"
+          "locationName": "esRateInPes",
+          "documentation": "Controls whether to include the ES Rate field in the PES header."
         },
         "ForceTsVideoEbpOrder": {
           "shape": "M2tsForceTsVideoEbpOrder",
@@ -5870,7 +6142,8 @@
         },
         "NielsenId3": {
           "shape": "M2tsNielsenId3",
-          "locationName": "nielsenId3"
+          "locationName": "nielsenId3",
+          "documentation": "If INSERT, Nielsen inaudible tones for media tracking will be detected in the input audio and an equivalent ID3 tag will be inserted in the output."
         },
         "NullPacketBitrate": {
           "shape": "__doubleMin0",
@@ -5884,7 +6157,8 @@
         },
         "PcrControl": {
           "shape": "M2tsPcrControl",
-          "locationName": "pcrControl"
+          "locationName": "pcrControl",
+          "documentation": "When set to PCR_EVERY_PES_PACKET, a Program Clock Reference value is inserted for every Packetized Elementary Stream (PES) header. This is effective only when the PCR PID is the same as the video or audio elementary stream."
         },
         "PcrPid": {
           "shape": "__integerMin32Max8182",
@@ -5913,7 +6187,8 @@
         },
         "RateMode": {
           "shape": "M2tsRateMode",
-          "locationName": "rateMode"
+          "locationName": "rateMode",
+          "documentation": "When set to CBR, inserts null packets into transport stream to fill specified bitrate. When set to VBR, the bitrate setting acts as the maximum bitrate, but the output will not be padded up to that bitrate."
         },
         "Scte35Esam": {
           "shape": "M2tsScte35Esam",
@@ -5927,15 +6202,18 @@
         },
         "Scte35Source": {
           "shape": "M2tsScte35Source",
-          "locationName": "scte35Source"
+          "locationName": "scte35Source",
+          "documentation": "Enables SCTE-35 passthrough (scte35Source) to pass any SCTE-35 signals from input to output."
         },
         "SegmentationMarkers": {
           "shape": "M2tsSegmentationMarkers",
-          "locationName": "segmentationMarkers"
+          "locationName": "segmentationMarkers",
+          "documentation": "Inserts segmentation markers at each segmentation_time period. rai_segstart sets the Random Access Indicator bit in the adaptation field. rai_adapt sets the RAI bit and adds the current timecode in the private data bytes. psi_segstart inserts PAT and PMT tables at the start of segments. ebp adds Encoder Boundary Point information to the adaptation field as per OpenCable specification OC-SP-EBP-I01-130118. ebp_legacy adds Encoder Boundary Point information to the adaptation field using a legacy proprietary format."
         },
         "SegmentationStyle": {
           "shape": "M2tsSegmentationStyle",
-          "locationName": "segmentationStyle"
+          "locationName": "segmentationStyle",
+          "documentation": "The segmentation style parameter controls how segmentation markers are inserted into the transport stream. With avails, it is possible that segments may be truncated, which can influence where future segmentation markers are inserted. When a segmentation style of \"reset_cadence\" is selected and a segment is truncated due to an avail, we will reset the segmentation cadence. This means the subsequent segment will have a duration of of $segmentation_time seconds. When a segmentation style of \"maintain_cadence\" is selected and a segment is truncated due to an avail, we will not reset the segmentation cadence. This means the subsequent segment will likely be truncated as well. However, all segments after that will have a duration of $segmentation_time seconds. Note that EBP lookahead is a slight exception to this rule."
         },
         "SegmentationTime": {
           "shape": "__doubleMin0",
@@ -5999,7 +6277,8 @@
         },
         "NielsenId3": {
           "shape": "M3u8NielsenId3",
-          "locationName": "nielsenId3"
+          "locationName": "nielsenId3",
+          "documentation": "If INSERT, Nielsen inaudible tones for media tracking will be detected in the input audio and an equivalent ID3 tag will be inserted in the output."
         },
         "PatInterval": {
           "shape": "__integerMin0Max1000",
@@ -6008,7 +6287,8 @@
         },
         "PcrControl": {
           "shape": "M3u8PcrControl",
-          "locationName": "pcrControl"
+          "locationName": "pcrControl",
+          "documentation": "When set to PCR_EVERY_PES_PACKET a Program Clock Reference value is inserted for every Packetized Elementary Stream (PES) header. This parameter is effective only when the PCR PID is the same as the video or audio elementary stream."
         },
         "PcrPid": {
           "shape": "__integerMin32Max8182",
@@ -6042,11 +6322,13 @@
         },
         "Scte35Source": {
           "shape": "M3u8Scte35Source",
-          "locationName": "scte35Source"
+          "locationName": "scte35Source",
+          "documentation": "Enables SCTE-35 passthrough (scte35Source) to pass any SCTE-35 signals from input to output."
         },
         "TimedMetadata": {
           "shape": "TimedMetadata",
-          "locationName": "timedMetadata"
+          "locationName": "timedMetadata",
+          "documentation": "Applies only to HLS outputs. Use this setting to specify whether the service inserts the ID3 timed metadata from the input in this output."
         },
         "TimedMetadataPid": {
           "shape": "__integerMin32Max8182",
@@ -6195,23 +6477,28 @@
       "members": {
         "ClapAtom": {
           "shape": "MovClapAtom",
-          "locationName": "clapAtom"
+          "locationName": "clapAtom",
+          "documentation": "When enabled, include 'clap' atom if appropriate for the video output settings."
         },
         "CslgAtom": {
           "shape": "MovCslgAtom",
-          "locationName": "cslgAtom"
+          "locationName": "cslgAtom",
+          "documentation": "When enabled, file composition times will start at zero, composition times in the 'ctts' (composition time to sample) box for B-frames will be negative, and a 'cslg' (composition shift least greatest) box will be included per 14496-1 amendment 1. This improves compatibility with Apple players and tools."
         },
         "Mpeg2FourCCControl": {
           "shape": "MovMpeg2FourCCControl",
-          "locationName": "mpeg2FourCCControl"
+          "locationName": "mpeg2FourCCControl",
+          "documentation": "When set to XDCAM, writes MPEG2 video streams into the QuickTime file using XDCAM fourcc codes. This increases compatibility with Apple editors and players, but may decrease compatibility with other players. Only applicable when the video codec is MPEG2."
         },
         "PaddingControl": {
           "shape": "MovPaddingControl",
-          "locationName": "paddingControl"
+          "locationName": "paddingControl",
+          "documentation": "If set to OMNEON, inserts Omneon-compatible padding"
         },
         "Reference": {
           "shape": "MovReference",
-          "locationName": "reference"
+          "locationName": "reference",
+          "documentation": "Always keep the default value (SELF_CONTAINED) for this setting."
         }
       },
       "documentation": "Settings for MOV Container."
@@ -6266,15 +6553,18 @@
       "members": {
         "CslgAtom": {
           "shape": "Mp4CslgAtom",
-          "locationName": "cslgAtom"
+          "locationName": "cslgAtom",
+          "documentation": "When enabled, file composition times will start at zero, composition times in the 'ctts' (composition time to sample) box for B-frames will be negative, and a 'cslg' (composition shift least greatest) box will be included per 14496-1 amendment 1. This improves compatibility with Apple players and tools."
         },
         "FreeSpaceBox": {
           "shape": "Mp4FreeSpaceBox",
-          "locationName": "freeSpaceBox"
+          "locationName": "freeSpaceBox",
+          "documentation": "Inserts a free-space box immediately after the moov box."
         },
         "MoovPlacement": {
           "shape": "Mp4MoovPlacement",
-          "locationName": "moovPlacement"
+          "locationName": "moovPlacement",
+          "documentation": "If set to PROGRESSIVE_DOWNLOAD, the MOOV atom is relocated to the beginning of the archive as required for progressive downloading. Otherwise it is placed normally at the end."
         },
         "Mp4MajorBrand": {
           "shape": "__string",
@@ -6404,7 +6694,8 @@
       "members": {
         "AdaptiveQuantization": {
           "shape": "Mpeg2AdaptiveQuantization",
-          "locationName": "adaptiveQuantization"
+          "locationName": "adaptiveQuantization",
+          "documentation": "Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality."
         },
         "Bitrate": {
           "shape": "__integerMin1000Max288000000",
@@ -6413,11 +6704,13 @@
         },
         "CodecLevel": {
           "shape": "Mpeg2CodecLevel",
-          "locationName": "codecLevel"
+          "locationName": "codecLevel",
+          "documentation": "Use Level (Mpeg2CodecLevel) to set the MPEG-2 level for the video output."
         },
         "CodecProfile": {
           "shape": "Mpeg2CodecProfile",
-          "locationName": "codecProfile"
+          "locationName": "codecProfile",
+          "documentation": "Use Profile (Mpeg2CodecProfile) to set the MPEG-2 profile for the video output."
         },
         "DynamicSubGop": {
           "shape": "Mpeg2DynamicSubGop",
@@ -6426,11 +6719,13 @@
         },
         "FramerateControl": {
           "shape": "Mpeg2FramerateControl",
-          "locationName": "framerateControl"
+          "locationName": "framerateControl",
+          "documentation": "If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job sepecification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator."
         },
         "FramerateConversionAlgorithm": {
           "shape": "Mpeg2FramerateConversionAlgorithm",
-          "locationName": "framerateConversionAlgorithm"
+          "locationName": "framerateConversionAlgorithm",
+          "documentation": "When set to INTERPOLATE, produces smoother motion during frame rate conversion."
         },
         "FramerateDenominator": {
           "shape": "__integerMin1Max1001",
@@ -6454,7 +6749,8 @@
         },
         "GopSizeUnits": {
           "shape": "Mpeg2GopSizeUnits",
-          "locationName": "gopSizeUnits"
+          "locationName": "gopSizeUnits",
+          "documentation": "Indicates if the GOP Size in MPEG2 is specified in frames or seconds. If seconds the system will convert the GOP Size into a frame count at run time."
         },
         "HrdBufferInitialFillPercentage": {
           "shape": "__integerMin0Max100",
@@ -6468,11 +6764,13 @@
         },
         "InterlaceMode": {
           "shape": "Mpeg2InterlaceMode",
-          "locationName": "interlaceMode"
+          "locationName": "interlaceMode",
+          "documentation": "Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First (TOP_FIELD) and Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having the same field polarity (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) use the same field polarity as the source. Therefore, behavior depends on the input scan type.\n  - If the source is interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The output could therefore be a mix of \"top field first\" and \"bottom field first\".\n  - If the source is progressive, the output will be interlaced with \"top field first\" or \"bottom field first\" polarity, depending on which of the Follow options you chose."
         },
         "IntraDcPrecision": {
           "shape": "Mpeg2IntraDcPrecision",
-          "locationName": "intraDcPrecision"
+          "locationName": "intraDcPrecision",
+          "documentation": "Use Intra DC precision (Mpeg2IntraDcPrecision) to set quantization precision for intra-block DC coefficients. If you choose the value auto, the service will automatically select the precision based on the per-frame compression ratio."
         },
         "MaxBitrate": {
           "shape": "__integerMin1000Max300000000",
@@ -6491,7 +6789,8 @@
         },
         "ParControl": {
           "shape": "Mpeg2ParControl",
-          "locationName": "parControl"
+          "locationName": "parControl",
+          "documentation": "Using the API, enable ParFollowSource if you want the service to use the pixel aspect ratio from the input. Using the console, do this by choosing Follow source for Pixel aspect ratio."
         },
         "ParDenominator": {
           "shape": "__integerMin1Max2147483647",
@@ -6505,19 +6804,23 @@
         },
         "QualityTuningLevel": {
           "shape": "Mpeg2QualityTuningLevel",
-          "locationName": "qualityTuningLevel"
+          "locationName": "qualityTuningLevel",
+          "documentation": "Use Quality tuning level (Mpeg2QualityTuningLevel) to specifiy whether to use single-pass or multipass video encoding."
         },
         "RateControlMode": {
           "shape": "Mpeg2RateControlMode",
-          "locationName": "rateControlMode"
+          "locationName": "rateControlMode",
+          "documentation": "Use Rate control mode (Mpeg2RateControlMode) to specifiy whether the bitrate is variable (vbr) or constant (cbr)."
         },
         "SceneChangeDetect": {
           "shape": "Mpeg2SceneChangeDetect",
-          "locationName": "sceneChangeDetect"
+          "locationName": "sceneChangeDetect",
+          "documentation": "Scene change detection (inserts I-frames on scene changes)."
         },
         "SlowPal": {
           "shape": "Mpeg2SlowPal",
-          "locationName": "slowPal"
+          "locationName": "slowPal",
+          "documentation": "Enables Slow PAL rate conversion. 23.976fps and 24fps input is relabeled as 25fps, and audio is sped up correspondingly."
         },
         "Softness": {
           "shape": "__integerMin0Max128",
@@ -6526,19 +6829,23 @@
         },
         "SpatialAdaptiveQuantization": {
           "shape": "Mpeg2SpatialAdaptiveQuantization",
-          "locationName": "spatialAdaptiveQuantization"
+          "locationName": "spatialAdaptiveQuantization",
+          "documentation": "Adjust quantization within each frame based on spatial variation of content complexity."
         },
         "Syntax": {
           "shape": "Mpeg2Syntax",
-          "locationName": "syntax"
+          "locationName": "syntax",
+          "documentation": "Produces a Type D-10 compatible bitstream (SMPTE 356M-2001)."
         },
         "Telecine": {
           "shape": "Mpeg2Telecine",
-          "locationName": "telecine"
+          "locationName": "telecine",
+          "documentation": "Only use Telecine (Mpeg2Telecine) when you set Framerate (Framerate) to 29.970. Set Telecine (Mpeg2Telecine) to Hard (hard) to produce a 29.97i output from a 23.976 input. Set it to Soft (soft) to produce 23.976 output and leave converstion to the player."
         },
         "TemporalAdaptiveQuantization": {
           "shape": "Mpeg2TemporalAdaptiveQuantization",
-          "locationName": "temporalAdaptiveQuantization"
+          "locationName": "temporalAdaptiveQuantization",
+          "documentation": "Adjust quantization within each frame based on temporal variation of content complexity."
         }
       },
       "documentation": "Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value MPEG2."
@@ -6597,7 +6904,8 @@
       "members": {
         "SpekeKeyProvider": {
           "shape": "SpekeKeyProvider",
-          "locationName": "spekeKeyProvider"
+          "locationName": "spekeKeyProvider",
+          "documentation": "Settings for use with a SPEKE key provider"
         }
       },
       "documentation": "If you are using DRM, set DRM System (MsSmoothEncryptionSettings) to specify the value SpekeKeyProvider."
@@ -6607,16 +6915,23 @@
       "members": {
         "AudioDeduplication": {
           "shape": "MsSmoothAudioDeduplication",
-          "locationName": "audioDeduplication"
+          "locationName": "audioDeduplication",
+          "documentation": "COMBINE_DUPLICATE_STREAMS combines identical audio encoding settings across a Microsoft Smooth output group into a single audio stream."
         },
         "Destination": {
           "shape": "__stringPatternS3",
           "locationName": "destination",
           "documentation": "Use Destination (Destination) to specify the S3 output location and the output filename base. Destination accepts format identifiers. If you do not specify the base filename in the URI, the service will use the filename of the input file. If your job has multiple inputs, the service uses the filename of the first input file."
         },
+        "DestinationSettings": {
+          "shape": "DestinationSettings",
+          "locationName": "destinationSettings",
+          "documentation": "Settings associated with the destination. Will vary based on the type of destination"
+        },
         "Encryption": {
           "shape": "MsSmoothEncryptionSettings",
-          "locationName": "encryption"
+          "locationName": "encryption",
+          "documentation": "If you are using DRM, set DRM System (MsSmoothEncryptionSettings) to specify the value SpekeKeyProvider."
         },
         "FragmentLength": {
           "shape": "__integerMin1Max2147483647",
@@ -6625,7 +6940,8 @@
         },
         "ManifestEncoding": {
           "shape": "MsSmoothManifestEncoding",
-          "locationName": "manifestEncoding"
+          "locationName": "manifestEncoding",
+          "documentation": "Use Manifest encoding (MsSmoothManifestEncoding) to specify the encoding format for the server and client manifest. Valid options are utf8 and utf16."
         }
       },
       "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to MS_SMOOTH_GROUP_SETTINGS."
@@ -6659,15 +6975,18 @@
       "members": {
         "Filter": {
           "shape": "NoiseReducerFilter",
-          "locationName": "filter"
+          "locationName": "filter",
+          "documentation": "Use Noise reducer filter (NoiseReducerFilter) to select one of the following spatial image filtering functions. To use this setting, you must also enable Noise reducer (NoiseReducer). * Bilateral is an edge preserving noise reduction filter. * Mean (softest), Gaussian, Lanczos, and Sharpen (sharpest) are convolution filters. * Conserve is a min/max noise reduction filter. * Spatial is a frequency-domain filter based on JND principles."
         },
         "FilterSettings": {
           "shape": "NoiseReducerFilterSettings",
-          "locationName": "filterSettings"
+          "locationName": "filterSettings",
+          "documentation": "Settings for a noise reducer filter"
         },
         "SpatialFilterSettings": {
           "shape": "NoiseReducerSpatialFilterSettings",
-          "locationName": "spatialFilterSettings"
+          "locationName": "spatialFilterSettings",
+          "documentation": "Noise reducer filter settings for spatial filter."
         }
       },
       "documentation": "Enable the Noise reducer (NoiseReducer) feature to remove noise from your video output if necessary. Enable or disable this feature for each output individually. This setting is disabled by default. When you enable Noise reducer (NoiseReducer), you must also select a value for Noise reducer filter (NoiseReducerFilter)."
@@ -6740,7 +7059,8 @@
         },
         "ContainerSettings": {
           "shape": "ContainerSettings",
-          "locationName": "containerSettings"
+          "locationName": "containerSettings",
+          "documentation": "Container specific settings."
         },
         "Extension": {
           "shape": "__string",
@@ -6754,7 +7074,8 @@
         },
         "OutputSettings": {
           "shape": "OutputSettings",
-          "locationName": "outputSettings"
+          "locationName": "outputSettings",
+          "documentation": "Specific settings for this type of output."
         },
         "Preset": {
           "shape": "__stringMin0",
@@ -6790,7 +7111,8 @@
         },
         "VideoDetails": {
           "shape": "VideoDetail",
-          "locationName": "videoDetails"
+          "locationName": "videoDetails",
+          "documentation": "Contains details about the output's video stream"
         }
       },
       "documentation": "Details regarding output"
@@ -6810,7 +7132,8 @@
         },
         "OutputGroupSettings": {
           "shape": "OutputGroupSettings",
-          "locationName": "outputGroupSettings"
+          "locationName": "outputGroupSettings",
+          "documentation": "Output Group settings, including type"
         },
         "Outputs": {
           "shape": "__listOfOutput",
@@ -6836,27 +7159,33 @@
       "members": {
         "CmafGroupSettings": {
           "shape": "CmafGroupSettings",
-          "locationName": "cmafGroupSettings"
+          "locationName": "cmafGroupSettings",
+          "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to CMAF_GROUP_SETTINGS. Each output in a CMAF Output Group may only contain a single video, audio, or caption output."
         },
         "DashIsoGroupSettings": {
           "shape": "DashIsoGroupSettings",
-          "locationName": "dashIsoGroupSettings"
+          "locationName": "dashIsoGroupSettings",
+          "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to DASH_ISO_GROUP_SETTINGS."
         },
         "FileGroupSettings": {
           "shape": "FileGroupSettings",
-          "locationName": "fileGroupSettings"
+          "locationName": "fileGroupSettings",
+          "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to FILE_GROUP_SETTINGS."
         },
         "HlsGroupSettings": {
           "shape": "HlsGroupSettings",
-          "locationName": "hlsGroupSettings"
+          "locationName": "hlsGroupSettings",
+          "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to HLS_GROUP_SETTINGS."
         },
         "MsSmoothGroupSettings": {
           "shape": "MsSmoothGroupSettings",
-          "locationName": "msSmoothGroupSettings"
+          "locationName": "msSmoothGroupSettings",
+          "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to MS_SMOOTH_GROUP_SETTINGS."
         },
         "Type": {
           "shape": "OutputGroupType",
-          "locationName": "type"
+          "locationName": "type",
+          "documentation": "Type of output group (File group, Apple HLS, DASH ISO, Microsoft Smooth Streaming, CMAF)"
         }
       },
       "documentation": "Output Group settings, including type"
@@ -6887,7 +7216,8 @@
       "members": {
         "HlsSettings": {
           "shape": "HlsSettings",
-          "locationName": "hlsSettings"
+          "locationName": "hlsSettings",
+          "documentation": "Settings for HLS output groups"
         }
       },
       "documentation": "Specific settings for this type of output."
@@ -6927,7 +7257,8 @@
         },
         "Settings": {
           "shape": "PresetSettings",
-          "locationName": "settings"
+          "locationName": "settings",
+          "documentation": "Settings for preset"
         },
         "Type": {
           "shape": "Type",
@@ -6965,7 +7296,8 @@
         },
         "ContainerSettings": {
           "shape": "ContainerSettings",
-          "locationName": "containerSettings"
+          "locationName": "containerSettings",
+          "documentation": "Container specific settings."
         },
         "VideoDescription": {
           "shape": "VideoDescription",
@@ -7033,15 +7365,18 @@
       "members": {
         "CodecProfile": {
           "shape": "ProresCodecProfile",
-          "locationName": "codecProfile"
+          "locationName": "codecProfile",
+          "documentation": "Use Profile (ProResCodecProfile) to specifiy the type of Apple ProRes codec to use for this output."
         },
         "FramerateControl": {
           "shape": "ProresFramerateControl",
-          "locationName": "framerateControl"
+          "locationName": "framerateControl",
+          "documentation": "If you are using the console, use the Framerate setting to specify the frame rate for this output. If you want to keep the same frame rate as the input video, choose Follow source. If you want to do frame rate conversion, choose a frame rate from the dropdown list or choose Custom. The framerates shown in the dropdown list are decimal approximations of fractions. If you choose Custom, specify your frame rate as a fraction. If you are creating your transcoding job sepecification as a JSON file without the console, use FramerateControl to specify which value the service uses for the frame rate for this output. Choose INITIALIZE_FROM_SOURCE if you want the service to use the frame rate from the input. Choose SPECIFIED if you want the service to use the frame rate you specify in the settings FramerateNumerator and FramerateDenominator."
         },
         "FramerateConversionAlgorithm": {
           "shape": "ProresFramerateConversionAlgorithm",
-          "locationName": "framerateConversionAlgorithm"
+          "locationName": "framerateConversionAlgorithm",
+          "documentation": "When set to INTERPOLATE, produces smoother motion during frame rate conversion."
         },
         "FramerateDenominator": {
           "shape": "__integerMin1Max2147483647",
@@ -7055,11 +7390,13 @@
         },
         "InterlaceMode": {
           "shape": "ProresInterlaceMode",
-          "locationName": "interlaceMode"
+          "locationName": "interlaceMode",
+          "documentation": "Use Interlace mode (InterlaceMode) to choose the scan line type for the output. * Top Field First (TOP_FIELD) and Bottom Field First (BOTTOM_FIELD) produce interlaced output with the entire output having the same field polarity (top or bottom first). * Follow, Default Top (FOLLOW_TOP_FIELD) and Follow, Default Bottom (FOLLOW_BOTTOM_FIELD) use the same field polarity as the source. Therefore, behavior depends on the input scan type.\n  - If the source is interlaced, the output will be interlaced with the same polarity as the source (it will follow the source). The output could therefore be a mix of \"top field first\" and \"bottom field first\".\n  - If the source is progressive, the output will be interlaced with \"top field first\" or \"bottom field first\" polarity, depending on which of the Follow options you chose."
         },
         "ParControl": {
           "shape": "ProresParControl",
-          "locationName": "parControl"
+          "locationName": "parControl",
+          "documentation": "Use (ProresParControl) to specify how the service determines the pixel aspect ratio. Set to Follow source (INITIALIZE_FROM_SOURCE) to use the pixel aspect ratio from the input.  To specify a different pixel aspect ratio: Using the console, choose it from the dropdown menu. Using the API, set ProresParControl to (SPECIFIED) and provide  for (ParNumerator) and (ParDenominator)."
         },
         "ParDenominator": {
           "shape": "__integerMin1Max2147483647",
@@ -7073,11 +7410,13 @@
         },
         "SlowPal": {
           "shape": "ProresSlowPal",
-          "locationName": "slowPal"
+          "locationName": "slowPal",
+          "documentation": "Enables Slow PAL rate conversion. 23.976fps and 24fps input is relabeled as 25fps, and audio is sped up correspondingly."
         },
         "Telecine": {
           "shape": "ProresTelecine",
-          "locationName": "telecine"
+          "locationName": "telecine",
+          "documentation": "Only use Telecine (ProresTelecine) when you set Framerate (Framerate) to 29.970. Set Telecine (ProresTelecine) to Hard (hard) to produce a 29.97i output from a 23.976 input. Set it to Soft (soft) to produce 23.976 output and leave converstion to the player."
         }
       },
       "documentation": "Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value PRORES."
@@ -7209,7 +7548,8 @@
       "members": {
         "ChannelMapping": {
           "shape": "ChannelMapping",
-          "locationName": "channelMapping"
+          "locationName": "channelMapping",
+          "documentation": "Channel mapping (ChannelMapping) contains the group of fields that hold the remixing value for each channel. Units are in dB. Acceptable values are within the range from -60 (mute) through 6. A setting of 0 passes the input channel unchanged to the output channel (no attenuation or amplification)."
         },
         "ChannelsIn": {
           "shape": "__integerMin1Max16",
@@ -7327,6 +7667,41 @@
         "PASSTHROUGH"
       ]
     },
+    "S3DestinationSettings": {
+      "type": "structure",
+      "members": {
+        "Encryption": {
+          "shape": "S3EncryptionSettings",
+          "locationName": "encryption",
+          "documentation": "Settings for how your job outputs are encrypted as they are uploaded to Amazon S3."
+        }
+      },
+      "documentation": "Settings associated with S3 destination"
+    },
+    "S3EncryptionSettings": {
+      "type": "structure",
+      "members": {
+        "EncryptionType": {
+          "shape": "S3ServerSideEncryptionType",
+          "locationName": "encryptionType",
+          "documentation": "Specify how you want your data keys managed. AWS uses data keys to encrypt your content. AWS also encrypts the data keys themselves, using a customer master key (CMK), and then stores the encrypted data keys alongside your encrypted content. Use this setting to specify which AWS service manages the CMK. For simplest set up, choose Amazon S3 (SERVER_SIDE_ENCRYPTION_S3). If you want your master key to be managed by AWS Key Management Service (KMS), choose AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). By default, when you choose AWS KMS, KMS uses the AWS managed customer master key (CMK) associated with Amazon S3 to encrypt your data keys. You can optionally choose to specify a different, customer managed CMK. Do so by specifying the Amazon Resource Name (ARN) of the key for the setting  KMS ARN (kmsKeyArn)."
+        },
+        "KmsKeyArn": {
+          "shape": "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912",
+          "locationName": "kmsKeyArn",
+          "documentation": "Optionally, specify the customer master key (CMK) that you want to use to encrypt the data key that AWS uses to encrypt your output content. Enter the Amazon Resource Name (ARN) of the CMK. To use this setting, you must also set Server-side encryption (S3ServerSideEncryptionType) to AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). If you set Server-side encryption to AWS KMS but don't specify a CMK here, AWS uses the AWS managed CMK associated with Amazon S3."
+        }
+      },
+      "documentation": "Settings for how your job outputs are encrypted as they are uploaded to Amazon S3."
+    },
+    "S3ServerSideEncryptionType": {
+      "type": "string",
+      "documentation": "Specify how you want your data keys managed. AWS uses data keys to encrypt your content. AWS also encrypts the data keys themselves, using a customer master key (CMK), and then stores the encrypted data keys alongside your encrypted content. Use this setting to specify which AWS service manages the CMK. For simplest set up, choose Amazon S3 (SERVER_SIDE_ENCRYPTION_S3). If you want your master key to be managed by AWS Key Management Service (KMS), choose AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). By default, when you choose AWS KMS, KMS uses the AWS managed customer master key (CMK) associated with Amazon S3 to encrypt your data keys. You can optionally choose to specify a different, customer managed CMK. Do so by specifying the Amazon Resource Name (ARN) of the key for the setting  KMS ARN (kmsKeyArn).",
+      "enum": [
+        "SERVER_SIDE_ENCRYPTION_S3",
+        "SERVER_SIDE_ENCRYPTION_KMS"
+      ]
+    },
     "ScalingBehavior": {
       "type": "string",
       "documentation": "Applies only if your input aspect ratio is different from your output aspect ratio. Choose \"Stretch to output\" to have the service stretch your video image to fit. Keep the setting \"Default\" to allow the service to letterbox your video instead. This setting overrides any positioning value you specify elsewhere in the job.",
@@ -7350,7 +7725,8 @@
       "members": {
         "Framerate": {
           "shape": "SccDestinationFramerate",
-          "locationName": "framerate"
+          "locationName": "framerate",
+          "documentation": "Set Framerate (SccDestinationFramerate) to make sure that the captions and the video are synchronized in the output. Specify a frame rate that matches the frame rate of the associated video. If the video frame rate is 29.97, choose 29.97 dropframe (FRAMERATE_29_97_DROPFRAME) only if the video has video_insertion=true and drop_frame_timecode=true; otherwise, choose 29.97 non-dropframe (FRAMERATE_29_97_NON_DROPFRAME)."
         }
       },
       "documentation": "Settings for SCC caption output."
@@ -7407,6 +7783,27 @@
       },
       "documentation": "Use these settings to set up encryption with a static key provider."
     },
+    "StatusUpdateInterval": {
+      "type": "string",
+      "documentation": "Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error.",
+      "enum": [
+        "SECONDS_10",
+        "SECONDS_12",
+        "SECONDS_15",
+        "SECONDS_20",
+        "SECONDS_30",
+        "SECONDS_60",
+        "SECONDS_120",
+        "SECONDS_180",
+        "SECONDS_240",
+        "SECONDS_300",
+        "SECONDS_360",
+        "SECONDS_420",
+        "SECONDS_480",
+        "SECONDS_540",
+        "SECONDS_600"
+      ]
+    },
     "TagResourceRequest": {
       "type": "structure",
       "members": {
@@ -7462,7 +7859,8 @@
         },
         "Position": {
           "shape": "TimecodeBurninPosition",
-          "locationName": "position"
+          "locationName": "position",
+          "documentation": "Use Position (Position) under under Timecode burn-in (TimecodeBurnIn) to specify the location the burned-in timecode on output video."
         },
         "Prefix": {
           "shape": "__stringPattern",
@@ -7497,7 +7895,8 @@
         },
         "Source": {
           "shape": "TimecodeSource",
-          "locationName": "source"
+          "locationName": "source",
+          "documentation": "Use Source (TimecodeSource) to set how timecodes are handled within this job. To make sure that your video, audio, captions, and markers are synchronized and that time-based features, such as image inserter, work correctly, choose the Timecode source option that matches your assets. All timecodes are in a 24-hour format with frame number (HH:MM:SS:FF). * Embedded (EMBEDDED) - Use the timecode that is in the input video. If no embedded timecode is in the source, the service will use Start at 0 (ZEROBASED) instead. * Start at 0 (ZEROBASED) - Set the timecode of the initial frame to 00:00:00:00. * Specified Start (SPECIFIEDSTART) - Set the timecode of the initial frame to a value other than zero. You use Start timecode (Start) to provide this value."
         },
         "Start": {
           "shape": "__stringPattern010920405090509092",
@@ -7577,7 +7976,8 @@
       "members": {
         "StylePassthrough": {
           "shape": "TtmlStylePassthrough",
-          "locationName": "stylePassthrough"
+          "locationName": "stylePassthrough",
+          "documentation": "Pass through style and position information from a TTML-like input source (TTML, SMPTE-TT, CFF-TT) to the CFF-TT output or TTML output."
         }
       },
       "documentation": "Settings specific to TTML caption outputs, including Pass style information (TtmlStylePassthrough)."
@@ -7651,11 +8051,12 @@
         },
         "Settings": {
           "shape": "JobTemplateSettings",
-          "locationName": "settings"
+          "locationName": "settings",
+          "documentation": "JobTemplateSettings contains all the transcode settings saved in the template that will be applied to jobs created from it."
         },
-        "StatusUpdateIntervalInSecs": {
-          "shape": "__integerMin10Max600",
-          "locationName": "statusUpdateIntervalInSecs",
+        "StatusUpdateInterval": {
+          "shape": "StatusUpdateInterval",
+          "locationName": "statusUpdateInterval",
           "documentation": "Specify how often MediaConvert sends STATUS_UPDATE events to Amazon CloudWatch Events. Set the interval, in seconds, between status updates. MediaConvert sends an update at this interval from the time the service begins processing your job to the time it completes the transcode or encounters an error."
         }
       },
@@ -7668,7 +8069,8 @@
       "members": {
         "JobTemplate": {
           "shape": "JobTemplate",
-          "locationName": "jobTemplate"
+          "locationName": "jobTemplate",
+          "documentation": "A job template is a pre-made set of encoding instructions that you can use to quickly create a job."
         }
       }
     },
@@ -7693,7 +8095,8 @@
         },
         "Settings": {
           "shape": "PresetSettings",
-          "locationName": "settings"
+          "locationName": "settings",
+          "documentation": "Settings for preset"
         }
       },
       "required": [
@@ -7705,7 +8108,8 @@
       "members": {
         "Preset": {
           "shape": "Preset",
-          "locationName": "preset"
+          "locationName": "preset",
+          "documentation": "A preset is a collection of preconfigured media conversion settings that you want MediaConvert to apply to the output during the conversion process."
         }
       }
     },
@@ -7743,7 +8147,8 @@
       "members": {
         "Queue": {
           "shape": "Queue",
-          "locationName": "queue"
+          "locationName": "queue",
+          "documentation": "You can use queues to manage the resources that are available to your AWS account for running multiple transcoding jobs at the same time. If you don't specify a queue, the service sends all jobs through the default queue. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-queues.html."
         }
       }
     },
@@ -7768,23 +8173,28 @@
         },
         "FrameCaptureSettings": {
           "shape": "FrameCaptureSettings",
-          "locationName": "frameCaptureSettings"
+          "locationName": "frameCaptureSettings",
+          "documentation": "Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value FRAME_CAPTURE."
         },
         "H264Settings": {
           "shape": "H264Settings",
-          "locationName": "h264Settings"
+          "locationName": "h264Settings",
+          "documentation": "Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value H_264."
         },
         "H265Settings": {
           "shape": "H265Settings",
-          "locationName": "h265Settings"
+          "locationName": "h265Settings",
+          "documentation": "Settings for H265 codec"
         },
         "Mpeg2Settings": {
           "shape": "Mpeg2Settings",
-          "locationName": "mpeg2Settings"
+          "locationName": "mpeg2Settings",
+          "documentation": "Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value MPEG2."
         },
         "ProresSettings": {
           "shape": "ProresSettings",
-          "locationName": "proresSettings"
+          "locationName": "proresSettings",
+          "documentation": "Required when you set (Codec) under (VideoDescription)>(CodecSettings) to the value PRORES."
         }
       },
       "documentation": "Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value you choose for Video codec (Codec). For each codec enum you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE, FrameCaptureSettings"
@@ -7794,20 +8204,23 @@
       "members": {
         "AfdSignaling": {
           "shape": "AfdSignaling",
-          "locationName": "afdSignaling"
+          "locationName": "afdSignaling",
+          "documentation": "This setting only applies to H.264, H.265, and MPEG2 outputs. Use Insert AFD signaling (AfdSignaling) to specify whether the service includes AFD values in the output video data and what those values are. * Choose None to remove all AFD values from this output. * Choose Fixed to ignore input AFD values and instead encode the value specified in the job. * Choose Auto to calculate output AFD values based on the input AFD scaler data."
         },
         "AntiAlias": {
           "shape": "AntiAlias",
           "locationName": "antiAlias",
-          "documentation": "You no longer need to specify the anti-alias filter. It's now automatically applied to all outputs. This property is deprecated."
+          "documentation": "The anti-alias filter is automatically applied to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting."
         },
         "CodecSettings": {
           "shape": "VideoCodecSettings",
-          "locationName": "codecSettings"
+          "locationName": "codecSettings",
+          "documentation": "Video codec settings, (CodecSettings) under (VideoDescription), contains the group of settings related to video encoding. The settings in this group vary depending on the value you choose for Video codec (Codec). For each codec enum you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * H_264, H264Settings * H_265, H265Settings * MPEG2, Mpeg2Settings * PRORES, ProresSettings * FRAME_CAPTURE, FrameCaptureSettings"
         },
         "ColorMetadata": {
           "shape": "ColorMetadata",
-          "locationName": "colorMetadata"
+          "locationName": "colorMetadata",
+          "documentation": "Enable Insert color metadata (ColorMetadata) to include color metadata in this output. This setting is enabled by default."
         },
         "Crop": {
           "shape": "Rectangle",
@@ -7816,7 +8229,8 @@
         },
         "DropFrameTimecode": {
           "shape": "DropFrameTimecode",
-          "locationName": "dropFrameTimecode"
+          "locationName": "dropFrameTimecode",
+          "documentation": "Applies only to 29.97 fps outputs. When this feature is enabled, the service will use drop-frame timecode on outputs. If it is not possible to use drop-frame timecode, the system will fall back to non-drop-frame. This setting is enabled by default when Timecode insertion (TimecodeInsertion) is enabled."
         },
         "FixedAfd": {
           "shape": "__integerMin0Max15",
@@ -7835,11 +8249,13 @@
         },
         "RespondToAfd": {
           "shape": "RespondToAfd",
-          "locationName": "respondToAfd"
+          "locationName": "respondToAfd",
+          "documentation": "Use Respond to AFD (RespondToAfd) to specify how the service changes the video itself in response to AFD values in the input. * Choose Respond to clip the input video frame according to the AFD value, input display aspect ratio, and output display aspect ratio. * Choose Passthrough to include the input AFD values. Do not choose this when AfdSignaling is set to (NONE). A preferred implementation of this workflow is to set RespondToAfd to (NONE) and set AfdSignaling to (AUTO). * Choose None to remove all input AFD values from this output."
         },
         "ScalingBehavior": {
           "shape": "ScalingBehavior",
-          "locationName": "scalingBehavior"
+          "locationName": "scalingBehavior",
+          "documentation": "Applies only if your input aspect ratio is different from your output aspect ratio. Choose \"Stretch to output\" to have the service stretch your video image to fit. Keep the setting \"Default\" to allow the service to letterbox your video instead. This setting overrides any positioning value you specify elsewhere in the job."
         },
         "Sharpness": {
           "shape": "__integerMin0Max100",
@@ -7848,7 +8264,8 @@
         },
         "TimecodeInsertion": {
           "shape": "VideoTimecodeInsertion",
-          "locationName": "timecodeInsertion"
+          "locationName": "timecodeInsertion",
+          "documentation": "Applies only to H.264, H.265, MPEG2, and ProRes outputs. Only enable Timecode insertion when the input frame rate is identical to the output frame rate. To include timecodes in this output, set Timecode insertion (VideoTimecodeInsertion) to PIC_TIMING_SEI. To leave them out, set it to DISABLED. Default is DISABLED. When the service inserts timecodes in an output, by default, it uses any embedded timecodes from the input. If none are present, the service will set the timecode for the first output frame to zero. To change this default behavior, adjust the settings under Timecode configuration (TimecodeConfig). In the console, these settings are located under Job > Job settings > Timecode configuration. Note - Timecode source under input settings (InputTimecodeSource) does not affect the timecodes that are inserted in the output. Source under Job settings > Timecode configuration (TimecodeSource) does."
         },
         "VideoPreprocessors": {
           "shape": "VideoPreprocessor",
@@ -7915,15 +8332,18 @@
       "members": {
         "ColorSpace": {
           "shape": "ColorSpace",
-          "locationName": "colorSpace"
+          "locationName": "colorSpace",
+          "documentation": "If your input video has accurate color space metadata, or if you don't know about color space, leave this set to the default value FOLLOW. The service will automatically detect your input color space. If your input video has metadata indicating the wrong color space, or if your input video is missing color space metadata that should be there, specify the accurate color space here. If you choose HDR10, you can also correct inaccurate color space coefficients, using the HDR master display information controls. You must also set Color space usage (ColorSpaceUsage) to FORCE for the service to use these values."
         },
         "ColorSpaceUsage": {
           "shape": "ColorSpaceUsage",
-          "locationName": "colorSpaceUsage"
+          "locationName": "colorSpaceUsage",
+          "documentation": "There are two sources for color metadata, the input file and the job configuration (in the Color space and HDR master display informaiton settings). The Color space usage setting controls which takes precedence. FORCE: The system will use color metadata supplied by user, if any. If the user does not supply color metadata, the system will use data from the source. FALLBACK: The system will use color metadata from the source. If source has no color metadata, the system will use user-supplied color metadata values if available."
         },
         "Hdr10Metadata": {
           "shape": "Hdr10Metadata",
-          "locationName": "hdr10Metadata"
+          "locationName": "hdr10Metadata",
+          "documentation": "Use the \"HDR master display information\" (Hdr10Metadata) settings to correct HDR metadata or to provide missing metadata. These values vary depending on the input video and must be provided by a color grader. Range is 0 to 50,000; each increment represents 0.00002 in CIE1931 color coordinate. Note that these settings are not color correction. Note that if you are creating HDR outputs inside of an HLS CMAF package, to comply with the Apple specification, you must use the following settings. Set \"MP4 packaging type\" (writeMp4PackagingType) to HVC1 (HVC1). Set \"Profile\" (H265Settings > codecProfile) to Main10/High (MAIN10_HIGH). Set \"Level\" (H265Settings > codecLevel) to 5 (LEVEL_5)."
         },
         "Pid": {
           "shape": "__integerMin1Max2147483647",
@@ -7937,7 +8357,8 @@
         },
         "Rotate": {
           "shape": "InputRotate",
-          "locationName": "rotate"
+          "locationName": "rotate",
+          "documentation": "Use Rotate (InputRotate) to specify how the service rotates your video. You can choose automatic rotation or specify a rotation. You can specify a clockwise rotation of 0, 90, 180, or 270 degrees. If your input video container is .mov or .mp4 and your input has rotation metadata, you can choose Automatic to have the service rotate your video according to the rotation specified in the metadata. The rotation must be within one degree of 90, 180, or 270 degrees. If the rotation metadata specifies any other rotation, the service will default to no rotation. By default, the service does no rotation, even if your input video has rotation metadata. The service doesn't pass through rotation metadata."
         }
       },
       "documentation": "Selector for video."
@@ -7973,7 +8394,8 @@
         },
         "Format": {
           "shape": "WavFormat",
-          "locationName": "format"
+          "locationName": "format",
+          "documentation": "The service defaults to using RIFF for WAV outputs. If your output audio is likely to exceed 4 GB in file size, or if you otherwise need the extended support of the RF64 format, set your output WAV file format to RF64."
         },
         "SampleRate": {
           "shape": "__integerMin8000Max192000",
@@ -8150,11 +8572,6 @@
       "type": "integer",
       "min": 10,
       "max": 48
-    },
-    "__integerMin10Max600": {
-      "type": "long",
-      "min": 10,
-      "max": 600
     },
     "__integerMin16Max24": {
       "type": "integer",
@@ -8659,6 +9076,10 @@
     "__stringPatternArnAwsUsGovAcm": {
       "type": "string",
       "pattern": "^arn:aws(-us-gov)?:acm:"
+    },
+    "__stringPatternArnAwsUsGovKmsAZ26EastWestCentralNorthSouthEastWest1912D12KeyAFAF098AFAF094AFAF094AFAF094AFAF0912": {
+      "type": "string",
+      "pattern": "^arn:aws(-us-gov)?:kms:[a-z-]{2,6}-(east|west|central|((north|south)(east|west)?))-[1-9]{1,2}:\\d{12}:key/[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
     },
     "__stringPatternDD": {
       "type": "string",

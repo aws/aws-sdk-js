@@ -104,7 +104,7 @@
           "shape": "IdempotentParameterMismatchException"
         }
       ],
-      "documentation": "<p>Deploys a specific version of a robot application to robots in a fleet.</p> <p>The robot application must have a numbered <code>applicationVersion</code> for consistency reasons. To create a new version, use <code>CreateRobotApplicationVersion</code> or see <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html\">Creating a Robot Application Version</a>. </p>"
+      "documentation": "<p>Deploys a specific version of a robot application to robots in a fleet.</p> <p>The robot application must have a numbered <code>applicationVersion</code> for consistency reasons. To create a new version, use <code>CreateRobotApplicationVersion</code> or see <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html\">Creating a Robot Application Version</a>. </p> <note> <p>After 90 days, deployment jobs expire and will be deleted. They will no longer be accessible. </p> </note>"
     },
     "CreateFleet": {
       "name": "CreateFleet",
@@ -327,7 +327,7 @@
           "shape": "IdempotentParameterMismatchException"
         }
       ],
-      "documentation": "<p>Creates a simulation job.</p>"
+      "documentation": "<p>Creates a simulation job.</p> <note> <p>After 90 days, simulation jobs expire and will be deleted. They will no longer be accessible. </p> </note>"
     },
     "DeleteFleet": {
       "name": "DeleteFleet",
@@ -651,7 +651,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs.</p>"
+      "documentation": "<p>Returns a list of deployment jobs for a fleet. You can optionally provide filters to retrieve specific deployment jobs. </p> <note> <p> </p> </note>"
     },
     "ListFleets": {
       "name": "ListFleets",
@@ -679,7 +679,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Returns a list of fleets. You can optionally provide filters to retrieve specific fleets.</p>"
+      "documentation": "<p>Returns a list of fleets. You can optionally provide filters to retrieve specific fleets. </p>"
     },
     "ListRobotApplications": {
       "name": "ListRobotApplications",
@@ -757,7 +757,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Returns a list of simulation applications. You can optionally provide filters to retrieve specific simulation applications.</p>"
+      "documentation": "<p>Returns a list of simulation applications. You can optionally provide filters to retrieve specific simulation applications. </p>"
     },
     "ListSimulationJobs": {
       "name": "ListSimulationJobs",
@@ -782,7 +782,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Returns a list of simulation jobs. You can optionally provide filters to retrieve specific simulation jobs.</p>"
+      "documentation": "<p>Returns a list of simulation jobs. You can optionally provide filters to retrieve specific simulation jobs. </p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -965,7 +965,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Removes the specified tags from the specified AWS RoboMaker resource.</p> <p>To remove a tag, specify the tag key. To change the tag value of an existing tag key, use <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg//API_Reference.htmlAPI_TagResource.html\"> <code>TagResource</code> </a>. </p>"
+      "documentation": "<p>Removes the specified tags from the specified AWS RoboMaker resource.</p> <p>To remove a tag, specify the tag key. To change the tag value of an existing tag key, use <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/API_TagResource.html\"> <code>TagResource</code> </a>. </p>"
     },
     "UpdateRobotApplication": {
       "name": "UpdateRobotApplication",
@@ -1102,6 +1102,12 @@
       "max": 64,
       "min": 1,
       "pattern": "[a-zA-Z0-9_\\-=]*"
+    },
+    "Command": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9_.\\-]*"
     },
     "CreateDeploymentJobRequest": {
       "type": "structure",
@@ -1596,7 +1602,7 @@
         },
         "maxJobDurationInSeconds": {
           "shape": "JobDuration",
-          "documentation": "<p>The maximum simulation job duration in seconds. The value must be 8 days (691,200 seconds) or less. </p>"
+          "documentation": "<p>The maximum simulation job duration in seconds. </p>"
         },
         "simulationTimeMillis": {
           "shape": "SimulationTimeMillis",
@@ -1786,8 +1792,11 @@
       "type": "string",
       "enum": [
         "ResourceNotFound",
+        "EnvironmentSetupError",
+        "EtagMismatch",
         "FailureThresholdBreached",
         "RobotDeploymentNoResponse",
+        "RobotAgentConnectionTimeout",
         "GreengrassDeploymentFailed",
         "MissingRobotArchitecture",
         "MissingRobotApplicationArchitecture",
@@ -1816,19 +1825,19 @@
       ],
       "members": {
         "packageName": {
-          "shape": "GenericString",
+          "shape": "Command",
           "documentation": "<p>The package name.</p>"
         },
         "preLaunchFile": {
-          "shape": "GenericString",
+          "shape": "Path",
           "documentation": "<p>The deployment pre-launch file. This file will be executed prior to the launch file.</p>"
         },
         "launchFile": {
-          "shape": "GenericString",
+          "shape": "Command",
           "documentation": "<p>The launch file name.</p>"
         },
         "postLaunchFile": {
-          "shape": "GenericString",
+          "shape": "Path",
           "documentation": "<p>The deployment post-launch file. This file will be executed after the launch file.</p>"
         },
         "environmentVariables": {
@@ -2339,6 +2348,9 @@
       "max": 200,
       "min": 0
     },
+    "GenericInteger": {
+      "type": "integer"
+    },
     "GenericString": {
       "type": "string"
     },
@@ -2367,11 +2379,11 @@
       ],
       "members": {
         "packageName": {
-          "shape": "GenericString",
+          "shape": "Command",
           "documentation": "<p>The package name.</p>"
         },
         "launchFile": {
-          "shape": "GenericString",
+          "shape": "Command",
           "documentation": "<p>The launch file name.</p>"
         },
         "environmentVariables": {
@@ -2386,7 +2398,7 @@
       "members": {
         "filters": {
           "shape": "Filters",
-          "documentation": "<p>Optional filters to limit results.</p>"
+          "documentation": "<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>InProgress</code> or the status <code>Pending</code>.</p>"
         },
         "nextToken": {
           "shape": "PaginationToken",
@@ -2424,7 +2436,7 @@
         },
         "filters": {
           "shape": "Filters",
-          "documentation": "<p>Optional filters to limit results.</p>"
+          "documentation": "<p>Optional filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>"
         }
       }
     },
@@ -2454,11 +2466,11 @@
         },
         "maxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum number of deployment job results returned by <code>ListRobotApplications</code> in paginated output. When this parameter is used, <code>ListRobotApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobotApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>"
+          "documentation": "<p>The maximum number of deployment job results returned by <code>ListRobotApplications</code> in paginated output. When this parameter is used, <code>ListRobotApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobotApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobotApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>"
         },
         "filters": {
           "shape": "Filters",
-          "documentation": "<p>Optional filters to limit results.</p>"
+          "documentation": "<p>Optional filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>"
         }
       }
     },
@@ -2484,11 +2496,11 @@
         },
         "maxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum number of deployment job results returned by <code>ListRobots</code> in paginated output. When this parameter is used, <code>ListRobots</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobots</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>"
+          "documentation": "<p>The maximum number of deployment job results returned by <code>ListRobots</code> in paginated output. When this parameter is used, <code>ListRobots</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListRobots</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListRobots</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>"
         },
         "filters": {
           "shape": "Filters",
-          "documentation": "<p>Optional filters to limit results.</p>"
+          "documentation": "<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>fleetName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>Registered</code> or the status <code>Available</code>.</p>"
         }
       }
     },
@@ -2518,11 +2530,11 @@
         },
         "maxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum number of deployment job results returned by <code>ListSimulationApplications</code> in paginated output. When this parameter is used, <code>ListSimulationApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>"
+          "documentation": "<p>The maximum number of deployment job results returned by <code>ListSimulationApplications</code> in paginated output. When this parameter is used, <code>ListSimulationApplications</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationApplications</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationApplications</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>"
         },
         "filters": {
           "shape": "Filters",
-          "documentation": "<p>Optional list of filters to limit results. The only valid filter name is <code>name</code>.</p>"
+          "documentation": "<p>Optional list of filters to limit results.</p> <p>The filter name <code>name</code> is supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters.</p>"
         }
       }
     },
@@ -2548,11 +2560,11 @@
         },
         "maxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum number of deployment job results returned by <code>ListSimulationJobs</code> in paginated output. When this parameter is used, <code>ListSimulationJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListFleets</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>"
+          "documentation": "<p>The maximum number of deployment job results returned by <code>ListSimulationJobs</code> in paginated output. When this parameter is used, <code>ListSimulationJobs</code> only returns <code>maxResults</code> results in a single page along with a <code>nextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>ListSimulationJobs</code> request with the returned <code>nextToken</code> value. This value can be between 1 and 100. If this parameter is not used, then <code>ListSimulationJobs</code> returns up to 100 results and a <code>nextToken</code> value if applicable. </p>"
         },
         "filters": {
           "shape": "Filters",
-          "documentation": "<p>Optional filters to limit results.</p>"
+          "documentation": "<p>Optional filters to limit results.</p> <p>The filter names <code>status</code> and <code>simulationApplicationName</code> and <code>robotApplicationName</code> are supported. When filtering, you must use the complete value of the filtered item. You can use up to three filters, but they must be for the same named item. For example, if you are looking for items with the status <code>Preparing</code> or the status <code>Running</code>.</p>"
         }
       }
     },
@@ -2624,6 +2636,16 @@
       "min": 1,
       "pattern": "[a-zA-Z0-9_.\\-\\/+=]*"
     },
+    "Path": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
+    },
+    "PercentDone": {
+      "type": "float",
+      "max": 100,
+      "min": 0
+    },
     "Percentage": {
       "type": "integer",
       "max": 100,
@@ -2633,8 +2655,16 @@
       "type": "structure",
       "members": {
         "currentProgress": {
-          "shape": "GenericString",
-          "documentation": "<p>The current progress status.</p>"
+          "shape": "RobotDeploymentStep",
+          "documentation": "<p>The current progress status.</p> <dl> <dt>Validating</dt> <dd> <p>Validating the deployment.</p> </dd> <dt>Downloading/Extracting</dt> <dd> <p>Downloading and extracting the bundle on the robot.</p> </dd> <dt>Executing pre-launch script(s)</dt> <dd> <p>Executing pre-launch script(s) if provided.</p> </dd> <dt>Launching</dt> <dd> <p>Launching the robot application.</p> </dd> <dt>Executing post-launch script(s)</dt> <dd> <p>Executing post-launch script(s) if provided.</p> </dd> <dt>Finished</dt> <dd> <p>Deployment is complete.</p> </dd> </dl>"
+        },
+        "percentDone": {
+          "shape": "PercentDone",
+          "documentation": "<p>Precentage of the step that is done. This currently only applies to the <code>Downloading/Extracting</code> step of the deployment. It is empty for other steps.</p>"
+        },
+        "estimatedTimeRemainingSeconds": {
+          "shape": "GenericInteger",
+          "documentation": "<p>Estimated amount of time in seconds remaining in the step. This currently only applies to the <code>Downloading/Extracting</code> step of the deployment. It is empty for other steps.</p>"
         },
         "targetResource": {
           "shape": "GenericString",
@@ -2862,6 +2892,17 @@
         }
       },
       "documentation": "<p>Information about a robot deployment.</p>"
+    },
+    "RobotDeploymentStep": {
+      "type": "string",
+      "enum": [
+        "Validating",
+        "DownloadingExtracting",
+        "ExecutingPreLaunch",
+        "Launching",
+        "ExecutingPostLaunch",
+        "Finished"
+      ]
     },
     "RobotDeploymentSummary": {
       "type": "list",
@@ -3179,7 +3220,7 @@
     },
     "SimulationSoftwareSuiteVersionType": {
       "type": "string",
-      "pattern": "7"
+      "pattern": "7|9"
     },
     "SimulationTimeMillis": {
       "type": "long"
@@ -3566,5 +3607,5 @@
       "pattern": "ALL"
     }
   },
-  "documentation": "<p>his section provides documentation for the AWS RoboMaker API operations.</p>"
+  "documentation": "<p>This section provides documentation for the AWS RoboMaker API operations.</p>"
 }

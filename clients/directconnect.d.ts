@@ -12,19 +12,27 @@ declare class DirectConnect extends Service {
   constructor(options?: DirectConnect.Types.ClientConfiguration)
   config: Config & DirectConnect.Types.ClientConfiguration;
   /**
-   * Deprecated. Use AllocateHostedConnection instead. Creates a hosted connection on an interconnect. Allocates a VLAN number and a specified amount of bandwidth for use by a hosted connection on the specified interconnect.  Intended for use by AWS Direct Connect partners only. 
+   * Accepts a proposal request to attach a virtual private gateway to a Direct Connect gateway.
+   */
+  acceptDirectConnectGatewayAssociationProposal(params: DirectConnect.Types.AcceptDirectConnectGatewayAssociationProposalRequest, callback?: (err: AWSError, data: DirectConnect.Types.AcceptDirectConnectGatewayAssociationProposalResult) => void): Request<DirectConnect.Types.AcceptDirectConnectGatewayAssociationProposalResult, AWSError>;
+  /**
+   * Accepts a proposal request to attach a virtual private gateway to a Direct Connect gateway.
+   */
+  acceptDirectConnectGatewayAssociationProposal(callback?: (err: AWSError, data: DirectConnect.Types.AcceptDirectConnectGatewayAssociationProposalResult) => void): Request<DirectConnect.Types.AcceptDirectConnectGatewayAssociationProposalResult, AWSError>;
+  /**
+   * Deprecated. Use AllocateHostedConnection instead. Creates a hosted connection on an interconnect. Allocates a VLAN number and a specified amount of bandwidth for use by a hosted connection on the specified interconnect.  Intended for use by AWS Direct Connect Partners only. 
    */
   allocateConnectionOnInterconnect(params: DirectConnect.Types.AllocateConnectionOnInterconnectRequest, callback?: (err: AWSError, data: DirectConnect.Types.Connection) => void): Request<DirectConnect.Types.Connection, AWSError>;
   /**
-   * Deprecated. Use AllocateHostedConnection instead. Creates a hosted connection on an interconnect. Allocates a VLAN number and a specified amount of bandwidth for use by a hosted connection on the specified interconnect.  Intended for use by AWS Direct Connect partners only. 
+   * Deprecated. Use AllocateHostedConnection instead. Creates a hosted connection on an interconnect. Allocates a VLAN number and a specified amount of bandwidth for use by a hosted connection on the specified interconnect.  Intended for use by AWS Direct Connect Partners only. 
    */
   allocateConnectionOnInterconnect(callback?: (err: AWSError, data: DirectConnect.Types.Connection) => void): Request<DirectConnect.Types.Connection, AWSError>;
   /**
-   * Creates a hosted connection on the specified interconnect or a link aggregation group (LAG). Allocates a VLAN number and a specified amount of bandwidth for use by a hosted connection on the specified interconnect or LAG.  Intended for use by AWS Direct Connect partners only. 
+   * Creates a hosted connection on the specified interconnect or a link aggregation group (LAG) of interconnects. Allocates a VLAN number and a specified amount of capacity (bandwidth) for use by a hosted connection on the specified interconnect or LAG of interconnects. AWS polices the hosted connection for the specified capacity and the AWS Direct Connect Partner must also police the hosted connection for the specified capacity.  Intended for use by AWS Direct Connect Partners only. 
    */
   allocateHostedConnection(params: DirectConnect.Types.AllocateHostedConnectionRequest, callback?: (err: AWSError, data: DirectConnect.Types.Connection) => void): Request<DirectConnect.Types.Connection, AWSError>;
   /**
-   * Creates a hosted connection on the specified interconnect or a link aggregation group (LAG). Allocates a VLAN number and a specified amount of bandwidth for use by a hosted connection on the specified interconnect or LAG.  Intended for use by AWS Direct Connect partners only. 
+   * Creates a hosted connection on the specified interconnect or a link aggregation group (LAG) of interconnects. Allocates a VLAN number and a specified amount of capacity (bandwidth) for use by a hosted connection on the specified interconnect or LAG of interconnects. AWS polices the hosted connection for the specified capacity and the AWS Direct Connect Partner must also police the hosted connection for the specified capacity.  Intended for use by AWS Direct Connect Partners only. 
    */
   allocateHostedConnection(callback?: (err: AWSError, data: DirectConnect.Types.Connection) => void): Request<DirectConnect.Types.Connection, AWSError>;
   /**
@@ -52,11 +60,11 @@ declare class DirectConnect extends Service {
    */
   associateConnectionWithLag(callback?: (err: AWSError, data: DirectConnect.Types.Connection) => void): Request<DirectConnect.Types.Connection, AWSError>;
   /**
-   * Associates a hosted connection and its virtual interfaces with a link aggregation group (LAG) or interconnect. If the target interconnect or LAG has an existing hosted connection with a conflicting VLAN number or IP address, the operation fails. This action temporarily interrupts the hosted connection's connectivity to AWS as it is being migrated.  Intended for use by AWS Direct Connect partners only. 
+   * Associates a hosted connection and its virtual interfaces with a link aggregation group (LAG) or interconnect. If the target interconnect or LAG has an existing hosted connection with a conflicting VLAN number or IP address, the operation fails. This action temporarily interrupts the hosted connection's connectivity to AWS as it is being migrated.  Intended for use by AWS Direct Connect Partners only. 
    */
   associateHostedConnection(params: DirectConnect.Types.AssociateHostedConnectionRequest, callback?: (err: AWSError, data: DirectConnect.Types.Connection) => void): Request<DirectConnect.Types.Connection, AWSError>;
   /**
-   * Associates a hosted connection and its virtual interfaces with a link aggregation group (LAG) or interconnect. If the target interconnect or LAG has an existing hosted connection with a conflicting VLAN number or IP address, the operation fails. This action temporarily interrupts the hosted connection's connectivity to AWS as it is being migrated.  Intended for use by AWS Direct Connect partners only. 
+   * Associates a hosted connection and its virtual interfaces with a link aggregation group (LAG) or interconnect. If the target interconnect or LAG has an existing hosted connection with a conflicting VLAN number or IP address, the operation fails. This action temporarily interrupts the hosted connection's connectivity to AWS as it is being migrated.  Intended for use by AWS Direct Connect Partners only. 
    */
   associateHostedConnection(callback?: (err: AWSError, data: DirectConnect.Types.Connection) => void): Request<DirectConnect.Types.Connection, AWSError>;
   /**
@@ -124,19 +132,27 @@ declare class DirectConnect extends Service {
    */
   createDirectConnectGatewayAssociation(callback?: (err: AWSError, data: DirectConnect.Types.CreateDirectConnectGatewayAssociationResult) => void): Request<DirectConnect.Types.CreateDirectConnectGatewayAssociationResult, AWSError>;
   /**
-   * Creates an interconnect between an AWS Direct Connect partner's network and a specific AWS Direct Connect location. An interconnect is a connection which is capable of hosting other connections. The partner can use an interconnect to provide sub-1Gbps AWS Direct Connect service to tier 2 customers who do not have their own connections. Like a standard connection, an interconnect links the partner's network to an AWS Direct Connect location over a standard Ethernet fiber-optic cable. One end is connected to the partner's router, the other to an AWS Direct Connect router. You can automatically add the new interconnect to a link aggregation group (LAG) by specifying a LAG ID in the request. This ensures that the new interconnect is allocated on the same AWS Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, the request fails and no interconnect is created. For each end customer, the AWS Direct Connect partner provisions a connection on their interconnect by calling AllocateConnectionOnInterconnect. The end customer can then connect to AWS resources by creating a virtual interface on their connection, using the VLAN assigned to them by the partner.  Intended for use by AWS Direct Connect partners only. 
+   * Creates a proposal to associate the specified virtual private gateway with the specified Direct Connect gateway. You can only associate a Direct Connect gateway and virtual private gateway when the account that owns the Direct Connect gateway and the account that owns the virtual private gateway have the same payer ID.
+   */
+  createDirectConnectGatewayAssociationProposal(params: DirectConnect.Types.CreateDirectConnectGatewayAssociationProposalRequest, callback?: (err: AWSError, data: DirectConnect.Types.CreateDirectConnectGatewayAssociationProposalResult) => void): Request<DirectConnect.Types.CreateDirectConnectGatewayAssociationProposalResult, AWSError>;
+  /**
+   * Creates a proposal to associate the specified virtual private gateway with the specified Direct Connect gateway. You can only associate a Direct Connect gateway and virtual private gateway when the account that owns the Direct Connect gateway and the account that owns the virtual private gateway have the same payer ID.
+   */
+  createDirectConnectGatewayAssociationProposal(callback?: (err: AWSError, data: DirectConnect.Types.CreateDirectConnectGatewayAssociationProposalResult) => void): Request<DirectConnect.Types.CreateDirectConnectGatewayAssociationProposalResult, AWSError>;
+  /**
+   * Creates an interconnect between an AWS Direct Connect Partner's network and a specific AWS Direct Connect location. An interconnect is a connection that is capable of hosting other connections. The AWS Direct Connect partner can use an interconnect to provide AWS Direct Connect hosted connections to customers through their own network services. Like a standard connection, an interconnect links the partner's network to an AWS Direct Connect location over a standard Ethernet fiber-optic cable. One end is connected to the partner's router, the other to an AWS Direct Connect router. You can automatically add the new interconnect to a link aggregation group (LAG) by specifying a LAG ID in the request. This ensures that the new interconnect is allocated on the same AWS Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, the request fails and no interconnect is created. For each end customer, the AWS Direct Connect Partner provisions a connection on their interconnect by calling AllocateHostedConnection. The end customer can then connect to AWS resources by creating a virtual interface on their connection, using the VLAN assigned to them by the AWS Direct Connect Partner.  Intended for use by AWS Direct Connect Partners only. 
    */
   createInterconnect(params: DirectConnect.Types.CreateInterconnectRequest, callback?: (err: AWSError, data: DirectConnect.Types.Interconnect) => void): Request<DirectConnect.Types.Interconnect, AWSError>;
   /**
-   * Creates an interconnect between an AWS Direct Connect partner's network and a specific AWS Direct Connect location. An interconnect is a connection which is capable of hosting other connections. The partner can use an interconnect to provide sub-1Gbps AWS Direct Connect service to tier 2 customers who do not have their own connections. Like a standard connection, an interconnect links the partner's network to an AWS Direct Connect location over a standard Ethernet fiber-optic cable. One end is connected to the partner's router, the other to an AWS Direct Connect router. You can automatically add the new interconnect to a link aggregation group (LAG) by specifying a LAG ID in the request. This ensures that the new interconnect is allocated on the same AWS Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, the request fails and no interconnect is created. For each end customer, the AWS Direct Connect partner provisions a connection on their interconnect by calling AllocateConnectionOnInterconnect. The end customer can then connect to AWS resources by creating a virtual interface on their connection, using the VLAN assigned to them by the partner.  Intended for use by AWS Direct Connect partners only. 
+   * Creates an interconnect between an AWS Direct Connect Partner's network and a specific AWS Direct Connect location. An interconnect is a connection that is capable of hosting other connections. The AWS Direct Connect partner can use an interconnect to provide AWS Direct Connect hosted connections to customers through their own network services. Like a standard connection, an interconnect links the partner's network to an AWS Direct Connect location over a standard Ethernet fiber-optic cable. One end is connected to the partner's router, the other to an AWS Direct Connect router. You can automatically add the new interconnect to a link aggregation group (LAG) by specifying a LAG ID in the request. This ensures that the new interconnect is allocated on the same AWS Direct Connect endpoint that hosts the specified LAG. If there are no available ports on the endpoint, the request fails and no interconnect is created. For each end customer, the AWS Direct Connect Partner provisions a connection on their interconnect by calling AllocateHostedConnection. The end customer can then connect to AWS resources by creating a virtual interface on their connection, using the VLAN assigned to them by the AWS Direct Connect Partner.  Intended for use by AWS Direct Connect Partners only. 
    */
   createInterconnect(callback?: (err: AWSError, data: DirectConnect.Types.Interconnect) => void): Request<DirectConnect.Types.Interconnect, AWSError>;
   /**
-   * Creates a link aggregation group (LAG) with the specified number of bundled physical connections between the customer network and a specific AWS Direct Connect location. A LAG is a logical interface that uses the Link Aggregation Control Protocol (LACP) to aggregate multiple interfaces, enabling you to treat them as a single interface. All connections in a LAG must use the same bandwidth and must terminate at the same AWS Direct Connect endpoint. You can have up to 10 connections per LAG. Regardless of this limit, if you request more connections for the LAG than AWS Direct Connect can allocate on a single endpoint, no LAG is created. You can specify an existing physical connection or interconnect to include in the LAG (which counts towards the total number of connections). Doing so interrupts the current physical connection or hosted connections, and re-establishes them as a member of the LAG. The LAG will be created on the same AWS Direct Connect endpoint to which the connection terminates. Any virtual interfaces associated with the connection are automatically disassociated and re-associated with the LAG. The connection ID does not change. If the AWS account used to create a LAG is a registered AWS Direct Connect partner, the LAG is automatically enabled to host sub-connections. For a LAG owned by a partner, any associated virtual interfaces cannot be directly configured.
+   * Creates a link aggregation group (LAG) with the specified number of bundled physical connections between the customer network and a specific AWS Direct Connect location. A LAG is a logical interface that uses the Link Aggregation Control Protocol (LACP) to aggregate multiple interfaces, enabling you to treat them as a single interface. All connections in a LAG must use the same bandwidth and must terminate at the same AWS Direct Connect endpoint. You can have up to 10 connections per LAG. Regardless of this limit, if you request more connections for the LAG than AWS Direct Connect can allocate on a single endpoint, no LAG is created. You can specify an existing physical connection or interconnect to include in the LAG (which counts towards the total number of connections). Doing so interrupts the current physical connection or hosted connections, and re-establishes them as a member of the LAG. The LAG will be created on the same AWS Direct Connect endpoint to which the connection terminates. Any virtual interfaces associated with the connection are automatically disassociated and re-associated with the LAG. The connection ID does not change. If the AWS account used to create a LAG is a registered AWS Direct Connect Partner, the LAG is automatically enabled to host sub-connections. For a LAG owned by a partner, any associated virtual interfaces cannot be directly configured.
    */
   createLag(params: DirectConnect.Types.CreateLagRequest, callback?: (err: AWSError, data: DirectConnect.Types.Lag) => void): Request<DirectConnect.Types.Lag, AWSError>;
   /**
-   * Creates a link aggregation group (LAG) with the specified number of bundled physical connections between the customer network and a specific AWS Direct Connect location. A LAG is a logical interface that uses the Link Aggregation Control Protocol (LACP) to aggregate multiple interfaces, enabling you to treat them as a single interface. All connections in a LAG must use the same bandwidth and must terminate at the same AWS Direct Connect endpoint. You can have up to 10 connections per LAG. Regardless of this limit, if you request more connections for the LAG than AWS Direct Connect can allocate on a single endpoint, no LAG is created. You can specify an existing physical connection or interconnect to include in the LAG (which counts towards the total number of connections). Doing so interrupts the current physical connection or hosted connections, and re-establishes them as a member of the LAG. The LAG will be created on the same AWS Direct Connect endpoint to which the connection terminates. Any virtual interfaces associated with the connection are automatically disassociated and re-associated with the LAG. The connection ID does not change. If the AWS account used to create a LAG is a registered AWS Direct Connect partner, the LAG is automatically enabled to host sub-connections. For a LAG owned by a partner, any associated virtual interfaces cannot be directly configured.
+   * Creates a link aggregation group (LAG) with the specified number of bundled physical connections between the customer network and a specific AWS Direct Connect location. A LAG is a logical interface that uses the Link Aggregation Control Protocol (LACP) to aggregate multiple interfaces, enabling you to treat them as a single interface. All connections in a LAG must use the same bandwidth and must terminate at the same AWS Direct Connect endpoint. You can have up to 10 connections per LAG. Regardless of this limit, if you request more connections for the LAG than AWS Direct Connect can allocate on a single endpoint, no LAG is created. You can specify an existing physical connection or interconnect to include in the LAG (which counts towards the total number of connections). Doing so interrupts the current physical connection or hosted connections, and re-establishes them as a member of the LAG. The LAG will be created on the same AWS Direct Connect endpoint to which the connection terminates. Any virtual interfaces associated with the connection are automatically disassociated and re-associated with the LAG. The connection ID does not change. If the AWS account used to create a LAG is a registered AWS Direct Connect Partner, the LAG is automatically enabled to host sub-connections. For a LAG owned by a partner, any associated virtual interfaces cannot be directly configured.
    */
   createLag(callback?: (err: AWSError, data: DirectConnect.Types.Lag) => void): Request<DirectConnect.Types.Lag, AWSError>;
   /**
@@ -188,11 +204,19 @@ declare class DirectConnect extends Service {
    */
   deleteDirectConnectGatewayAssociation(callback?: (err: AWSError, data: DirectConnect.Types.DeleteDirectConnectGatewayAssociationResult) => void): Request<DirectConnect.Types.DeleteDirectConnectGatewayAssociationResult, AWSError>;
   /**
-   * Deletes the specified interconnect.  Intended for use by AWS Direct Connect partners only. 
+   * Deletes the association proposal request between the specified Direct Connect gateway and virtual private gateway.
+   */
+  deleteDirectConnectGatewayAssociationProposal(params: DirectConnect.Types.DeleteDirectConnectGatewayAssociationProposalRequest, callback?: (err: AWSError, data: DirectConnect.Types.DeleteDirectConnectGatewayAssociationProposalResult) => void): Request<DirectConnect.Types.DeleteDirectConnectGatewayAssociationProposalResult, AWSError>;
+  /**
+   * Deletes the association proposal request between the specified Direct Connect gateway and virtual private gateway.
+   */
+  deleteDirectConnectGatewayAssociationProposal(callback?: (err: AWSError, data: DirectConnect.Types.DeleteDirectConnectGatewayAssociationProposalResult) => void): Request<DirectConnect.Types.DeleteDirectConnectGatewayAssociationProposalResult, AWSError>;
+  /**
+   * Deletes the specified interconnect.  Intended for use by AWS Direct Connect Partners only. 
    */
   deleteInterconnect(params: DirectConnect.Types.DeleteInterconnectRequest, callback?: (err: AWSError, data: DirectConnect.Types.DeleteInterconnectResponse) => void): Request<DirectConnect.Types.DeleteInterconnectResponse, AWSError>;
   /**
-   * Deletes the specified interconnect.  Intended for use by AWS Direct Connect partners only. 
+   * Deletes the specified interconnect.  Intended for use by AWS Direct Connect Partners only. 
    */
   deleteInterconnect(callback?: (err: AWSError, data: DirectConnect.Types.DeleteInterconnectResponse) => void): Request<DirectConnect.Types.DeleteInterconnectResponse, AWSError>;
   /**
@@ -228,13 +252,21 @@ declare class DirectConnect extends Service {
    */
   describeConnections(callback?: (err: AWSError, data: DirectConnect.Types.Connections) => void): Request<DirectConnect.Types.Connections, AWSError>;
   /**
-   * Deprecated. Use DescribeHostedConnections instead. Lists the connections that have been provisioned on the specified interconnect.  Intended for use by AWS Direct Connect partners only. 
+   * Deprecated. Use DescribeHostedConnections instead. Lists the connections that have been provisioned on the specified interconnect.  Intended for use by AWS Direct Connect Partners only. 
    */
   describeConnectionsOnInterconnect(params: DirectConnect.Types.DescribeConnectionsOnInterconnectRequest, callback?: (err: AWSError, data: DirectConnect.Types.Connections) => void): Request<DirectConnect.Types.Connections, AWSError>;
   /**
-   * Deprecated. Use DescribeHostedConnections instead. Lists the connections that have been provisioned on the specified interconnect.  Intended for use by AWS Direct Connect partners only. 
+   * Deprecated. Use DescribeHostedConnections instead. Lists the connections that have been provisioned on the specified interconnect.  Intended for use by AWS Direct Connect Partners only. 
    */
   describeConnectionsOnInterconnect(callback?: (err: AWSError, data: DirectConnect.Types.Connections) => void): Request<DirectConnect.Types.Connections, AWSError>;
+  /**
+   * Describes one or more association proposals for connection between a virtual private gateway and a Direct Connect gateway. 
+   */
+  describeDirectConnectGatewayAssociationProposals(params: DirectConnect.Types.DescribeDirectConnectGatewayAssociationProposalsRequest, callback?: (err: AWSError, data: DirectConnect.Types.DescribeDirectConnectGatewayAssociationProposalsResult) => void): Request<DirectConnect.Types.DescribeDirectConnectGatewayAssociationProposalsResult, AWSError>;
+  /**
+   * Describes one or more association proposals for connection between a virtual private gateway and a Direct Connect gateway. 
+   */
+  describeDirectConnectGatewayAssociationProposals(callback?: (err: AWSError, data: DirectConnect.Types.DescribeDirectConnectGatewayAssociationProposalsResult) => void): Request<DirectConnect.Types.DescribeDirectConnectGatewayAssociationProposalsResult, AWSError>;
   /**
    * Lists the associations between your Direct Connect gateways and virtual private gateways. You must specify a Direct Connect gateway, a virtual private gateway, or both. If you specify a Direct Connect gateway, the response contains all virtual private gateways associated with the Direct Connect gateway. If you specify a virtual private gateway, the response contains all Direct Connect gateways associated with the virtual private gateway. If you specify both, the response contains the association between the Direct Connect gateway and the virtual private gateway.
    */
@@ -260,11 +292,11 @@ declare class DirectConnect extends Service {
    */
   describeDirectConnectGateways(callback?: (err: AWSError, data: DirectConnect.Types.DescribeDirectConnectGatewaysResult) => void): Request<DirectConnect.Types.DescribeDirectConnectGatewaysResult, AWSError>;
   /**
-   * Lists the hosted connections that have been provisioned on the specified interconnect or link aggregation group (LAG).  Intended for use by AWS Direct Connect partners only. 
+   * Lists the hosted connections that have been provisioned on the specified interconnect or link aggregation group (LAG).  Intended for use by AWS Direct Connect Partners only. 
    */
   describeHostedConnections(params: DirectConnect.Types.DescribeHostedConnectionsRequest, callback?: (err: AWSError, data: DirectConnect.Types.Connections) => void): Request<DirectConnect.Types.Connections, AWSError>;
   /**
-   * Lists the hosted connections that have been provisioned on the specified interconnect or link aggregation group (LAG).  Intended for use by AWS Direct Connect partners only. 
+   * Lists the hosted connections that have been provisioned on the specified interconnect or link aggregation group (LAG).  Intended for use by AWS Direct Connect Partners only. 
    */
   describeHostedConnections(callback?: (err: AWSError, data: DirectConnect.Types.Connections) => void): Request<DirectConnect.Types.Connections, AWSError>;
   /**
@@ -324,11 +356,11 @@ declare class DirectConnect extends Service {
    */
   describeVirtualInterfaces(callback?: (err: AWSError, data: DirectConnect.Types.VirtualInterfaces) => void): Request<DirectConnect.Types.VirtualInterfaces, AWSError>;
   /**
-   * Disassociates a connection from a link aggregation group (LAG). The connection is interrupted and re-established as a standalone connection (the connection is not deleted; to delete the connection, use the DeleteConnection request). If the LAG has associated virtual interfaces or hosted connections, they remain associated with the LAG. A disassociated connection owned by an AWS Direct Connect partner is automatically converted to an interconnect. If disassociating the connection would cause the LAG to fall below its setting for minimum number of operational connections, the request fails, except when it's the last member of the LAG. If all connections are disassociated, the LAG continues to exist as an empty LAG with no physical connections. 
+   * Disassociates a connection from a link aggregation group (LAG). The connection is interrupted and re-established as a standalone connection (the connection is not deleted; to delete the connection, use the DeleteConnection request). If the LAG has associated virtual interfaces or hosted connections, they remain associated with the LAG. A disassociated connection owned by an AWS Direct Connect Partner is automatically converted to an interconnect. If disassociating the connection would cause the LAG to fall below its setting for minimum number of operational connections, the request fails, except when it's the last member of the LAG. If all connections are disassociated, the LAG continues to exist as an empty LAG with no physical connections. 
    */
   disassociateConnectionFromLag(params: DirectConnect.Types.DisassociateConnectionFromLagRequest, callback?: (err: AWSError, data: DirectConnect.Types.Connection) => void): Request<DirectConnect.Types.Connection, AWSError>;
   /**
-   * Disassociates a connection from a link aggregation group (LAG). The connection is interrupted and re-established as a standalone connection (the connection is not deleted; to delete the connection, use the DeleteConnection request). If the LAG has associated virtual interfaces or hosted connections, they remain associated with the LAG. A disassociated connection owned by an AWS Direct Connect partner is automatically converted to an interconnect. If disassociating the connection would cause the LAG to fall below its setting for minimum number of operational connections, the request fails, except when it's the last member of the LAG. If all connections are disassociated, the LAG continues to exist as an empty LAG with no physical connections. 
+   * Disassociates a connection from a link aggregation group (LAG). The connection is interrupted and re-established as a standalone connection (the connection is not deleted; to delete the connection, use the DeleteConnection request). If the LAG has associated virtual interfaces or hosted connections, they remain associated with the LAG. A disassociated connection owned by an AWS Direct Connect Partner is automatically converted to an interconnect. If disassociating the connection would cause the LAG to fall below its setting for minimum number of operational connections, the request fails, except when it's the last member of the LAG. If all connections are disassociated, the LAG continues to exist as an empty LAG with no physical connections. 
    */
   disassociateConnectionFromLag(callback?: (err: AWSError, data: DirectConnect.Types.Connection) => void): Request<DirectConnect.Types.Connection, AWSError>;
   /**
@@ -348,6 +380,14 @@ declare class DirectConnect extends Service {
    */
   untagResource(callback?: (err: AWSError, data: DirectConnect.Types.UntagResourceResponse) => void): Request<DirectConnect.Types.UntagResourceResponse, AWSError>;
   /**
+   * Updates the specified attributes of the Direct Connect gateway association. Add or remove prefixes from the association.
+   */
+  updateDirectConnectGatewayAssociation(params: DirectConnect.Types.UpdateDirectConnectGatewayAssociationRequest, callback?: (err: AWSError, data: DirectConnect.Types.UpdateDirectConnectGatewayAssociationResult) => void): Request<DirectConnect.Types.UpdateDirectConnectGatewayAssociationResult, AWSError>;
+  /**
+   * Updates the specified attributes of the Direct Connect gateway association. Add or remove prefixes from the association.
+   */
+  updateDirectConnectGatewayAssociation(callback?: (err: AWSError, data: DirectConnect.Types.UpdateDirectConnectGatewayAssociationResult) => void): Request<DirectConnect.Types.UpdateDirectConnectGatewayAssociationResult, AWSError>;
+  /**
    * Updates the attributes of the specified link aggregation group (LAG). You can update the following attributes:   The name of the LAG.   The value for the minimum number of connections that must be operational for the LAG itself to be operational.    When you create a LAG, the default value for the minimum number of operational connections is zero (0). If you update this value and the number of operational connections falls below the specified value, the LAG automatically goes down to avoid over-utilization of the remaining connections. Adjust this value with care, as it could force the LAG down if it is set higher than the current number of operational connections.
    */
   updateLag(params: DirectConnect.Types.UpdateLagRequest, callback?: (err: AWSError, data: DirectConnect.Types.Lag) => void): Request<DirectConnect.Types.Lag, AWSError>;
@@ -366,10 +406,31 @@ declare class DirectConnect extends Service {
 }
 declare namespace DirectConnect {
   export type ASN = number;
+  export interface AcceptDirectConnectGatewayAssociationProposalRequest {
+    /**
+     * The ID of the Direct Connect gateway.
+     */
+    directConnectGatewayId: DirectConnectGatewayId;
+    /**
+     * The ID of the request proposal.
+     */
+    proposalId: DirectConnectGatewayAssociationProposalId;
+    /**
+     * The ID of the AWS account that owns the virtual private gateway.
+     */
+    associatedGatewayOwnerAccount: OwnerAccount;
+    /**
+     * Overrides the Amazon VPC prefixes advertised to the Direct Connect gateway.
+     */
+    overrideAllowedPrefixesToDirectConnectGateway?: RouteFilterPrefixList;
+  }
+  export interface AcceptDirectConnectGatewayAssociationProposalResult {
+    directConnectGatewayAssociation?: DirectConnectGatewayAssociation;
+  }
   export type AddressFamily = "ipv4"|"ipv6"|string;
   export interface AllocateConnectionOnInterconnectRequest {
     /**
-     * The bandwidth of the connection, in Mbps. The possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, and 500Mbps.
+     * The bandwidth of the connection. The possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps. Note that only those AWS Direct Connect Partners who have met specific requirements are allowed to create a 1Gbps, 2Gbps, 5Gbps or 10Gbps hosted connection.
      */
     bandwidth: Bandwidth;
     /**
@@ -399,7 +460,7 @@ declare namespace DirectConnect {
      */
     ownerAccount: OwnerAccount;
     /**
-     * The bandwidth of the hosted connection, in Mbps. The possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, and 500Mbps.
+     * The bandwidth of the connection. The possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps. Note that only those AWS Direct Connect Partners who have met specific requirements are allowed to create a 1Gbps, 2Gbps, 5Gbps or 10Gbps hosted connection. 
      */
     bandwidth: Bandwidth;
     /**
@@ -470,6 +531,25 @@ declare namespace DirectConnect {
      */
     connectionId: ConnectionId;
   }
+  export interface AssociatedGateway {
+    /**
+     * The ID of the associated gateway.
+     */
+    id?: GatewayIdentifier;
+    /**
+     * The type of associated gateway.
+     */
+    type?: GatewayType;
+    /**
+     * The ID of the AWS account that owns the associated virtual private gateway.
+     */
+    ownerAccount?: OwnerAccount;
+    /**
+     * The Region where the associated gateway is located.
+     */
+    region?: Region;
+  }
+  export type AssociatedGatewayId = string;
   export type AvailablePortSpeeds = PortSpeed[];
   export type AwsDevice = string;
   export type AwsDeviceV2 = string;
@@ -670,6 +750,34 @@ declare namespace DirectConnect {
      */
     lagId?: LagId;
   }
+  export interface CreateDirectConnectGatewayAssociationProposalRequest {
+    /**
+     * The ID of the Direct Connect gateway.
+     */
+    directConnectGatewayId: DirectConnectGatewayId;
+    /**
+     * The ID of the AWS account that owns the Direct Connect gateway.
+     */
+    directConnectGatewayOwnerAccount: OwnerAccount;
+    /**
+     * The ID of the virtual private gateway.
+     */
+    gatewayId: GatewayIdToAssociate;
+    /**
+     * The Amazon VPC prefixes to advertise to the Direct Connect gateway.
+     */
+    addAllowedPrefixesToDirectConnectGateway?: RouteFilterPrefixList;
+    /**
+     * The Amazon VPC prefixes to no longer advertise to the Direct Connect gateway.
+     */
+    removeAllowedPrefixesToDirectConnectGateway?: RouteFilterPrefixList;
+  }
+  export interface CreateDirectConnectGatewayAssociationProposalResult {
+    /**
+     * Information about the Direct Connect gateway proposal.
+     */
+    directConnectGatewayAssociationProposal?: DirectConnectGatewayAssociationProposal;
+  }
   export interface CreateDirectConnectGatewayAssociationRequest {
     /**
      * The ID of the Direct Connect gateway.
@@ -678,7 +786,15 @@ declare namespace DirectConnect {
     /**
      * The ID of the virtual private gateway.
      */
-    virtualGatewayId: VirtualGatewayId;
+    gatewayId?: GatewayIdToAssociate;
+    /**
+     * The Amazon VPC prefixes to advertise to the Direct Connect gateway
+     */
+    addAllowedPrefixesToDirectConnectGateway?: RouteFilterPrefixList;
+    /**
+     * The ID of the virtual private gateway.
+     */
+    virtualGatewayId?: VirtualGatewayId;
   }
   export interface CreateDirectConnectGatewayAssociationResult {
     /**
@@ -730,7 +846,7 @@ declare namespace DirectConnect {
      */
     location: LocationCode;
     /**
-     * The bandwidth of the individual physical connections bundled by the LAG. The possible values are 1Gbps and 10Gbps.
+     * The bandwidth of the individual physical connections bundled by the LAG. The possible values are 50Mbps, 100Mbps, 200Mbps, 300Mbps, 400Mbps, 500Mbps, 1Gbps, 2Gbps, 5Gbps, and 10Gbps. 
      */
     connectionsBandwidth: Bandwidth;
     /**
@@ -793,19 +909,35 @@ declare namespace DirectConnect {
      */
     connectionId: ConnectionId;
   }
-  export interface DeleteDirectConnectGatewayAssociationRequest {
+  export interface DeleteDirectConnectGatewayAssociationProposalRequest {
     /**
-     * The ID of the Direct Connect gateway.
+     * The ID of the proposal.
      */
-    directConnectGatewayId: DirectConnectGatewayId;
+    proposalId: DirectConnectGatewayAssociationProposalId;
+  }
+  export interface DeleteDirectConnectGatewayAssociationProposalResult {
     /**
      * The ID of the virtual private gateway.
      */
-    virtualGatewayId: VirtualGatewayId;
+    directConnectGatewayAssociationProposal?: DirectConnectGatewayAssociationProposal;
+  }
+  export interface DeleteDirectConnectGatewayAssociationRequest {
+    /**
+     * The ID of the Direct Connect gateway association.
+     */
+    associationId?: DirectConnectGatewayAssociationId;
+    /**
+     * The ID of the Direct Connect gateway.
+     */
+    directConnectGatewayId?: DirectConnectGatewayId;
+    /**
+     * The ID of the virtual private gateway.
+     */
+    virtualGatewayId?: VirtualGatewayId;
   }
   export interface DeleteDirectConnectGatewayAssociationResult {
     /**
-     * The association to be deleted.
+     * Information about the deleted association.
      */
     directConnectGatewayAssociation?: DirectConnectGatewayAssociation;
   }
@@ -883,27 +1015,67 @@ declare namespace DirectConnect {
      */
     connectionId?: ConnectionId;
   }
-  export interface DescribeDirectConnectGatewayAssociationsRequest {
+  export interface DescribeDirectConnectGatewayAssociationProposalsRequest {
     /**
      * The ID of the Direct Connect gateway.
      */
     directConnectGatewayId?: DirectConnectGatewayId;
     /**
-     * The ID of the virtual private gateway.
+     * The ID of the proposal.
      */
-    virtualGatewayId?: VirtualGatewayId;
+    proposalId?: DirectConnectGatewayAssociationProposalId;
     /**
-     * The maximum number of associations to return per page.
+     * The ID of the associated virtual private gateway.
+     */
+    associatedGatewayId?: AssociatedGatewayId;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If MaxResults is given a value larger than 100, only 100 results are returned.
+     */
+    maxResults?: MaxResultSetSize;
+    /**
+     * The token for the next page of results.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface DescribeDirectConnectGatewayAssociationProposalsResult {
+    /**
+     * Describes the Direct Connect gateway association proposals.
+     */
+    directConnectGatewayAssociationProposals?: DirectConnectGatewayAssociationProposalList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    nextToken?: PaginationToken;
+  }
+  export interface DescribeDirectConnectGatewayAssociationsRequest {
+    /**
+     * The ID of the Direct Connect gateway association.
+     */
+    associationId?: DirectConnectGatewayAssociationId;
+    /**
+     * The ID of the associated gateway.
+     */
+    associatedGatewayId?: AssociatedGatewayId;
+    /**
+     * The ID of the Direct Connect gateway.
+     */
+    directConnectGatewayId?: DirectConnectGatewayId;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If MaxResults is given a value larger than 100, only 100 results are returned.
      */
     maxResults?: MaxResultSetSize;
     /**
      * The token provided in the previous call to retrieve the next page.
      */
     nextToken?: PaginationToken;
+    /**
+     * The ID of the virtual private gateway.
+     */
+    virtualGatewayId?: VirtualGatewayId;
   }
   export interface DescribeDirectConnectGatewayAssociationsResult {
     /**
-     * The associations.
+     * Information about the associations.
      */
     directConnectGatewayAssociations?: DirectConnectGatewayAssociationList;
     /**
@@ -921,7 +1093,7 @@ declare namespace DirectConnect {
      */
     virtualInterfaceId?: VirtualInterfaceId;
     /**
-     * The maximum number of attachments to return per page.
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If MaxResults is given a value larger than 100, only 100 results are returned.
      */
     maxResults?: MaxResultSetSize;
     /**
@@ -945,7 +1117,7 @@ declare namespace DirectConnect {
      */
     directConnectGatewayId?: DirectConnectGatewayId;
     /**
-     * The maximum number of Direct Connect gateways to return per page.
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value. If MaxResults is given a value larger than 100, only 100 results are returned.
      */
     maxResults?: MaxResultSetSize;
     /**
@@ -1069,6 +1241,30 @@ declare namespace DirectConnect {
      */
     directConnectGatewayId?: DirectConnectGatewayId;
     /**
+     * The ID of the AWS account that owns the associated gateway.
+     */
+    directConnectGatewayOwnerAccount?: OwnerAccount;
+    /**
+     * The state of the association. The following are the possible values:    associating: The initial state after calling CreateDirectConnectGatewayAssociation.    associated: The Direct Connect gateway and virtual private gateway are successfully associated and ready to pass traffic.    disassociating: The initial state after calling DeleteDirectConnectGatewayAssociation.    disassociated: The virtual private gateway is disassociated from the Direct Connect gateway. Traffic flow between the Direct Connect gateway and virtual private gateway is stopped.  
+     */
+    associationState?: DirectConnectGatewayAssociationState;
+    /**
+     * The error message if the state of an object failed to advance.
+     */
+    stateChangeError?: StateChangeError;
+    /**
+     * Information about the associated virtual private gateway.
+     */
+    associatedGateway?: AssociatedGateway;
+    /**
+     * The ID of the Direct Connect gateway association.
+     */
+    associationId?: DirectConnectGatewayAssociationId;
+    /**
+     * The Amazon VPC prefixes to advertise to the Direct Connect gateway.
+     */
+    allowedPrefixesToDirectConnectGateway?: RouteFilterPrefixList;
+    /**
      * The ID of the virtual private gateway. Applies only to private virtual interfaces.
      */
     virtualGatewayId?: VirtualGatewayId;
@@ -1080,17 +1276,43 @@ declare namespace DirectConnect {
      * The ID of the AWS account that owns the virtual private gateway.
      */
     virtualGatewayOwnerAccount?: OwnerAccount;
-    /**
-     * The state of the association. The following are the possible values:    associating: The initial state after calling CreateDirectConnectGatewayAssociation.    associated: The Direct Connect gateway and virtual private gateway are successfully associated and ready to pass traffic.    disassociating: The initial state after calling DeleteDirectConnectGatewayAssociation.    disassociated: The virtual private gateway is disassociated from the Direct Connect gateway. Traffic flow between the Direct Connect gateway and virtual private gateway is stopped.  
-     */
-    associationState?: DirectConnectGatewayAssociationState;
-    /**
-     * The error message if the state of an object failed to advance.
-     */
-    stateChangeError?: StateChangeError;
   }
+  export type DirectConnectGatewayAssociationId = string;
   export type DirectConnectGatewayAssociationList = DirectConnectGatewayAssociation[];
-  export type DirectConnectGatewayAssociationState = "associating"|"associated"|"disassociating"|"disassociated"|string;
+  export interface DirectConnectGatewayAssociationProposal {
+    /**
+     * The ID of the association proposal.
+     */
+    proposalId?: DirectConnectGatewayAssociationProposalId;
+    /**
+     * The ID of the Direct Connect gateway.
+     */
+    directConnectGatewayId?: DirectConnectGatewayId;
+    /**
+     * The ID of the AWS account that owns the Direct Connect gateway.
+     */
+    directConnectGatewayOwnerAccount?: OwnerAccount;
+    /**
+     * The state of the proposal. The following are possible values:    accepted: The proposal has been accepted. The Direct Connect gateway association is available to use in this state.    deleted: The proposal has been deleted by the owner that made the proposal. The Direct Connect gateway association cannot be used in this state.    requested: The proposal has been requested. The Direct Connect gateway association cannot be used in this state.  
+     */
+    proposalState?: DirectConnectGatewayAssociationProposalState;
+    /**
+     * Information about the associated virtual private gateway.
+     */
+    associatedGateway?: AssociatedGateway;
+    /**
+     * The existing Amazon VPC prefixes advertised to the Direct Connect gateway.
+     */
+    existingAllowedPrefixesToDirectConnectGateway?: RouteFilterPrefixList;
+    /**
+     * The Amazon VPC prefixes to advertise to the Direct Connect gateway.
+     */
+    requestedAllowedPrefixesToDirectConnectGateway?: RouteFilterPrefixList;
+  }
+  export type DirectConnectGatewayAssociationProposalId = string;
+  export type DirectConnectGatewayAssociationProposalList = DirectConnectGatewayAssociationProposal[];
+  export type DirectConnectGatewayAssociationProposalState = "requested"|"accepted"|"deleted"|string;
+  export type DirectConnectGatewayAssociationState = "associating"|"associated"|"disassociating"|"disassociated"|"updating"|string;
   export interface DirectConnectGatewayAttachment {
     /**
      * The ID of the Direct Connect gateway.
@@ -1133,6 +1355,9 @@ declare namespace DirectConnect {
      */
     lagId: LagId;
   }
+  export type GatewayIdToAssociate = string;
+  export type GatewayIdentifier = string;
+  export type GatewayType = "virtualPrivateGateway"|string;
   export type HasLogicalRedundancy = "unknown"|"yes"|"no"|string;
   export interface Interconnect {
     /**
@@ -1197,7 +1422,7 @@ declare namespace DirectConnect {
   export type JumboFrameCapable = boolean;
   export interface Lag {
     /**
-     * The individual bandwidth of the physical connections bundled by the LAG. The possible values are 1Gbps and 10Gbps.
+     * The individual bandwidth of the physical connections bundled by the LAG. The possible values are 1Gbps and 10Gbps. 
      */
     connectionsBandwidth?: Bandwidth;
     /**
@@ -1233,11 +1458,11 @@ declare namespace DirectConnect {
      */
     minimumLinks?: Count;
     /**
-     * The Direct Connect endpoint that hosts the LAG.
+     * The AWS Direct Connect endpoint that hosts the LAG.
      */
     awsDevice?: AwsDevice;
     /**
-     * The Direct Connect endpoint that hosts the LAG.
+     * The AWS Direct Connect endpoint that hosts the LAG.
      */
     awsDeviceV2?: AwsDeviceV2;
     /**
@@ -1541,6 +1766,23 @@ declare namespace DirectConnect {
     tagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateDirectConnectGatewayAssociationRequest {
+    /**
+     * The ID of the Direct Connect gateway association.
+     */
+    associationId?: DirectConnectGatewayAssociationId;
+    /**
+     * The Amazon VPC prefixes to advertise to the Direct Connect gateway.
+     */
+    addAllowedPrefixesToDirectConnectGateway?: RouteFilterPrefixList;
+    /**
+     * The Amazon VPC prefixes to no longer advertise to the Direct Connect gateway.
+     */
+    removeAllowedPrefixesToDirectConnectGateway?: RouteFilterPrefixList;
+  }
+  export interface UpdateDirectConnectGatewayAssociationResult {
+    directConnectGatewayAssociation?: DirectConnectGatewayAssociation;
   }
   export interface UpdateLagRequest {
     /**

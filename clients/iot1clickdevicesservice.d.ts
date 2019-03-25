@@ -102,6 +102,22 @@ declare class IoT1ClickDevicesService extends Service {
    */
   listDevices(callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.ListDevicesResponse) => void): Request<IoT1ClickDevicesService.Types.ListDevicesResponse, AWSError>;
   /**
+   * List all tags on an AWS IoT 1-Click resource.
+   */
+  listTagsForResource(params: IoT1ClickDevicesService.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.ListTagsForResourceResponse) => void): Request<IoT1ClickDevicesService.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * List all tags on an AWS IoT 1-Click resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.ListTagsForResourceResponse) => void): Request<IoT1ClickDevicesService.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Associate a set of tags with an AWS IoT 1-Click resource. You can then activate these user-defined tags so that they appear on the Billing and Cost Management console for cost allocation tracking.
+   */
+  tagResource(params: IoT1ClickDevicesService.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Associate a set of tags with an AWS IoT 1-Click resource. You can then activate these user-defined tags so that they appear on the Billing and Cost Management console for cost allocation tracking.
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Disassociates a device from your AWS account using its device ID.
    */
   unclaimDevice(params: IoT1ClickDevicesService.Types.UnclaimDeviceRequest, callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.UnclaimDeviceResponse) => void): Request<IoT1ClickDevicesService.Types.UnclaimDeviceResponse, AWSError>;
@@ -109,6 +125,14 @@ declare class IoT1ClickDevicesService extends Service {
    * Disassociates a device from your AWS account using its device ID.
    */
   unclaimDevice(callback?: (err: AWSError, data: IoT1ClickDevicesService.Types.UnclaimDeviceResponse) => void): Request<IoT1ClickDevicesService.Types.UnclaimDeviceResponse, AWSError>;
+  /**
+   * Removes the association of tags from an AWS IoT 1-Click resource.
+   */
+  untagResource(params: IoT1ClickDevicesService.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes the association of tags from an AWS IoT 1-Click resource.
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Using a Boolean value (true or false), this operation
  enables or disables the device given a device ID.
@@ -169,6 +193,10 @@ declare namespace IoT1ClickDevicesService {
   export type DeviceAttributes = {[key: string]: __string};
   export interface DeviceDescription {
     /**
+     * The ARN of the device.
+     */
+    Arn?: __string;
+    /**
      * An array of zero or more elements of DeviceAttribute objects
  providing user specified device attributes.
      */
@@ -190,6 +218,10 @@ declare namespace IoT1ClickDevicesService {
      * The type of the device, such as "button".
      */
     Type?: __string;
+    /**
+     * The tags currently associated with the AWS IoT 1-Click device.
+     */
+    Tags?: __mapOf__string;
   }
   export interface DeviceEvent {
     /**
@@ -216,6 +248,10 @@ declare namespace IoT1ClickDevicesService {
      * The unique identifier of the device.
      */
     DeviceId: __string;
+    /**
+     * The tags to be assigned to the AWS IoT 1-Click device.
+     */
+    Tags?: __mapOf__string;
   }
   export interface FinalizeDeviceClaimResponse {
     /**
@@ -330,7 +366,29 @@ declare namespace IoT1ClickDevicesService {
      */
     NextToken?: __string;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The AWS IoT 1-Click resource with tags to be listed. This value is an Amazon Resource Name (ARN).
+     */
+    ResourceArn: __string;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags currently associated with the AWS IoT 1-Click resource.
+     */
+    Tags?: __mapOf__string;
+  }
   export type MaxResults = number;
+  export interface TagResourceRequest {
+    /**
+     * Identifies the AWS IoT 1-Click resource to which tags should be added. This value is an Amazon Resource Name (ARN).
+     */
+    ResourceArn: __string;
+    /**
+     * The tags to be assigned to the AWS IoT 1-Click resource.
+     */
+    Tags: __mapOf__string;
+  }
   export interface UnclaimDeviceRequest {
     /**
      * The unique identifier of the device.
@@ -342,6 +400,16 @@ declare namespace IoT1ClickDevicesService {
      * The device's final claim state.
      */
     State?: __string;
+  }
+  export interface UntagResourceRequest {
+    /**
+     * The AWS IoT 1-Click resource the tags will be removed from. This value is an Amazon Resource Name (ARN).
+     */
+    ResourceArn: __string;
+    /**
+     * A list of tag keys. Existing tags of the resource whose keys are members of this list will be removed from the AWS IoT 1-Click resource.
+     */
+    TagKeys: __listOf__string;
   }
   export interface UpdateDeviceStateRequest {
     /**
@@ -362,6 +430,8 @@ declare namespace IoT1ClickDevicesService {
   export type __listOfDeviceDescription = DeviceDescription[];
   export type __listOfDeviceEvent = DeviceEvent[];
   export type __listOfDeviceMethod = DeviceMethod[];
+  export type __listOf__string = __string[];
+  export type __mapOf__string = {[key: string]: __string};
   export type __string = string;
   export type __stringMin12Max40 = string;
   export type __timestampIso8601 = Date;

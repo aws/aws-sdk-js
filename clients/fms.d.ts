@@ -76,6 +76,14 @@ declare class FMS extends Service {
    */
   getPolicy(callback?: (err: AWSError, data: FMS.Types.GetPolicyResponse) => void): Request<FMS.Types.GetPolicyResponse, AWSError>;
   /**
+   * If you created a Shield Advanced policy, returns policy-level attack summary information in the event of a potential DDoS attack.
+   */
+  getProtectionStatus(params: FMS.Types.GetProtectionStatusRequest, callback?: (err: AWSError, data: FMS.Types.GetProtectionStatusResponse) => void): Request<FMS.Types.GetProtectionStatusResponse, AWSError>;
+  /**
+   * If you created a Shield Advanced policy, returns policy-level attack summary information in the event of a potential DDoS attack.
+   */
+  getProtectionStatus(callback?: (err: AWSError, data: FMS.Types.GetProtectionStatusResponse) => void): Request<FMS.Types.GetProtectionStatusResponse, AWSError>;
+  /**
    * Returns an array of PolicyComplianceStatus objects in the response. Use PolicyComplianceStatus to get a summary of which member accounts are protected by the specified policy. 
    */
   listComplianceStatus(params: FMS.Types.ListComplianceStatusRequest, callback?: (err: AWSError, data: FMS.Types.ListComplianceStatusResponse) => void): Request<FMS.Types.ListComplianceStatusResponse, AWSError>;
@@ -108,11 +116,11 @@ declare class FMS extends Service {
    */
   putNotificationChannel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates an AWS Firewall Manager policy.
+   * Creates an AWS Firewall Manager policy. Firewall Manager provides two types of policies: A Shield Advanced policy, which applies Shield Advanced protection to specified accounts and resources, or a WAF policy, which contains a rule group and defines which resources are to be protected by that rule group. A policy is specific to either WAF or Shield Advanced. If you want to enforce both WAF rules and Shield Advanced protection across accounts, you can create multiple policies. You can create one or more policies for WAF rules, and one or more policies for Shield Advanced. You must be subscribed to Shield Advanced to create a Shield Advanced policy. For more information on subscribing to Shield Advanced, see CreateSubscription.
    */
   putPolicy(params: FMS.Types.PutPolicyRequest, callback?: (err: AWSError, data: FMS.Types.PutPolicyResponse) => void): Request<FMS.Types.PutPolicyResponse, AWSError>;
   /**
-   * Creates an AWS Firewall Manager policy.
+   * Creates an AWS Firewall Manager policy. Firewall Manager provides two types of policies: A Shield Advanced policy, which applies Shield Advanced protection to specified accounts and resources, or a WAF policy, which contains a rule group and defines which resources are to be protected by that rule group. A policy is specific to either WAF or Shield Advanced. If you want to enforce both WAF rules and Shield Advanced protection across accounts, you can create multiple policies. You can create one or more policies for WAF rules, and one or more policies for Shield Advanced. You must be subscribed to Shield Advanced to create a Shield Advanced policy. For more information on subscribing to Shield Advanced, see CreateSubscription.
    */
   putPolicy(callback?: (err: AWSError, data: FMS.Types.PutPolicyResponse) => void): Request<FMS.Types.PutPolicyResponse, AWSError>;
 }
@@ -136,7 +144,7 @@ declare namespace FMS {
      */
     ViolationReason?: ViolationReason;
     /**
-     * The resource type. This is in the format shown in AWS Resource Types Reference. Valid values are AWS::ElasticLoadBalancingV2::LoadBalancer or AWS::CloudFront::Distribution.
+     * The resource type. This is in the format shown in AWS Resource Types Reference. For example: AWS::ElasticLoadBalancingV2::LoadBalancer or AWS::CloudFront::Distribution.
      */
     ResourceType?: ResourceType;
   }
@@ -153,11 +161,11 @@ declare namespace FMS {
      */
     PolicyId: PolicyId;
     /**
-     * If True, the request will also delete all web ACLs in this policy. Associated resources will no longer be protected by web ACLs in this policy.
+     * If True, the request will also perform a clean-up process that will:   Delete rule groups created by AWS Firewall Manager   Remove web ACLs from in-scope resources   Delete web ACLs that contain no rules or rule groups   After the cleanup, in-scope resources will no longer be protected by web ACLs in this policy. Protection of out-of-scope resources will remain unchanged. Scope is determined by tags and accounts associated with the policy. When creating the policy, if you specified that only resources in specific accounts or with specific tags be protected by the policy, those resources are in-scope. All others are out of scope. If you did not specify tags or accounts, all resources are in-scope. 
      */
     DeleteAllPolicyResources?: Boolean;
   }
-  export type DependentServiceName = "AWSCONFIG"|"AWSWAF"|string;
+  export type DependentServiceName = "AWSCONFIG"|"AWSWAF"|"AWSSHIELD_ADVANCED"|string;
   export type DetailedInfo = string;
   export interface DisassociateAdminAccountRequest {
   }
@@ -231,6 +239,50 @@ declare namespace FMS {
      * The Amazon Resource Name (ARN) of the specified policy.
      */
     PolicyArn?: ResourceArn;
+  }
+  export interface GetProtectionStatusRequest {
+    /**
+     * The ID of the policy for which you want to get the attack information.
+     */
+    PolicyId: PolicyId;
+    /**
+     * The AWS account that is in scope of the policy that you want to get the details for.
+     */
+    MemberAccountId?: AWSAccountId;
+    /**
+     * The start of the time period to query for the attacks. This is a timestamp type. The sample request above indicates a number type because the default used by AWS Firewall Manager is Unix time in seconds. However, any valid timestamp format is allowed.
+     */
+    StartTime?: TimeStamp;
+    /**
+     * The end of the time period to query for the attacks. This is a timestamp type. The sample request above indicates a number type because the default used by AWS Firewall Manager is Unix time in seconds. However, any valid timestamp format is allowed.
+     */
+    EndTime?: TimeStamp;
+    /**
+     * If you specify a value for MaxResults and you have more objects than the number that you specify for MaxResults, AWS Firewall Manager returns a NextToken value in the response that allows you to list another group of objects. For the second and subsequent GetProtectionStatus requests, specify the value of NextToken from the previous response to get information about another batch of objects.
+     */
+    NextToken?: PaginationToken;
+    /**
+     * Specifies the number of objects that you want AWS Firewall Manager to return for this request. If you have more objects than the number that you specify for MaxResults, the response includes a NextToken value that you can use to get another batch of objects.
+     */
+    MaxResults?: PaginationMaxResults;
+  }
+  export interface GetProtectionStatusResponse {
+    /**
+     * The ID of the AWS Firewall administrator account for this policy.
+     */
+    AdminAccountId?: AWSAccountId;
+    /**
+     * The service type that is protected by the policy. Currently, this is always SHIELD_ADVANCED.
+     */
+    ServiceType?: SecurityServiceType;
+    /**
+     * Details about the attack, including the following:   Attack type   Account ID   ARN of the resource attacked   Start time of the attack   End time of the attack (ongoing attacks will not have an end time)   The details are in JSON format. An example is shown in the Examples section below.
+     */
+    Data?: ProtectionData;
+    /**
+     * If you have more objects than the number that you specified for MaxResults in the request, the response includes a NextToken value. To list more objects, submit another GetProtectionStatus request, and specify the NextToken value from the response in the NextToken value in the next request. AWS SDKs provide auto-pagination that identify NextToken in a response and make subsequent request calls automatically on your behalf. However, this feature is not supported by GetProtectionStatus. You must submit subsequent requests with NextToken using your own processes. 
+     */
+    NextToken?: PaginationToken;
   }
   export type IssueInfoMap = {[key: string]: DetailedInfo};
   export interface ListComplianceStatusRequest {
@@ -319,9 +371,13 @@ declare namespace FMS {
      */
     SecurityServicePolicyData: SecurityServicePolicyData;
     /**
-     * The type of resource to protect with the policy, either an Application Load Balancer or a CloudFront distribution. This is in the format shown in AWS Resource Types Reference. Valid values are AWS::ElasticLoadBalancingV2::LoadBalancer or AWS::CloudFront::Distribution.
+     * The type of resource to protect with the policy. This is in the format shown in AWS Resource Types Reference. For example: AWS::ElasticLoadBalancingV2::LoadBalancer or AWS::CloudFront::Distribution.
      */
     ResourceType: ResourceType;
+    /**
+     * An array of ResourceType.
+     */
+    ResourceTypeList?: ResourceTypeList;
     /**
      * An array of ResourceTag objects.
      */
@@ -420,11 +476,11 @@ declare namespace FMS {
      */
     PolicyName?: ResourceName;
     /**
-     * The type of resource to protect with the policy, either an Application Load Balancer or a CloudFront distribution. This is in the format shown in AWS Resource Types Reference. Valid values are AWS::ElasticLoadBalancingV2::LoadBalancer or AWS::CloudFront::Distribution.
+     * The type of resource to protect with the policy. This is in the format shown in AWS Resource Types Reference. For example: AWS::ElasticLoadBalancingV2::LoadBalancer or AWS::CloudFront::Distribution.
      */
     ResourceType?: ResourceType;
     /**
-     * The service that the policy is using to protect the resources. This value is WAF.
+     * The service that the policy is using to protect the resources. This specifies the type of policy that is created, either a WAF policy or Shield Advanced policy.
      */
     SecurityServiceType?: SecurityServiceType;
     /**
@@ -434,6 +490,7 @@ declare namespace FMS {
   }
   export type PolicySummaryList = PolicySummary[];
   export type PolicyUpdateToken = string;
+  export type ProtectionData = string;
   export interface PutNotificationChannelRequest {
     /**
      * The Amazon Resource Name (ARN) of the SNS topic that collects notifications from AWS Firewall Manager.
@@ -476,21 +533,22 @@ declare namespace FMS {
   }
   export type ResourceTags = ResourceTag[];
   export type ResourceType = string;
+  export type ResourceTypeList = ResourceType[];
   export interface SecurityServicePolicyData {
     /**
-     * The service that the policy is using to protect the resources. This value is WAF.
+     * The service that the policy is using to protect the resources. This specifies the type of policy that is created, either a WAF policy or Shield Advanced policy.
      */
     Type: SecurityServiceType;
     /**
-     * Details about the service. This contains WAF data in JSON format, as shown in the following example:  ManagedServiceData": "{\"type\": \"WAF\", \"ruleGroups\": [{\"id\": \"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\" : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}} 
+     * Details about the service. This contains WAF data in JSON format, as shown in the following example:  ManagedServiceData": "{\"type\": \"WAF\", \"ruleGroups\": [{\"id\": \"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\" : {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}  If this is a Shield Advanced policy, this string will be empty.
      */
     ManagedServiceData?: ManagedServiceData;
   }
-  export type SecurityServiceType = "WAF"|string;
+  export type SecurityServiceType = "WAF"|"SHIELD_ADVANCED"|string;
   export type TagKey = string;
   export type TagValue = string;
   export type TimeStamp = Date;
-  export type ViolationReason = "WEB_ACL_MISSING_RULE_GROUP"|"RESOURCE_MISSING_WEB_ACL"|"RESOURCE_INCORRECT_WEB_ACL"|string;
+  export type ViolationReason = "WEB_ACL_MISSING_RULE_GROUP"|"RESOURCE_MISSING_WEB_ACL"|"RESOURCE_INCORRECT_WEB_ACL"|"RESOURCE_MISSING_SHIELD_PROTECTION"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
