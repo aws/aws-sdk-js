@@ -175,7 +175,7 @@
           "shape": "OperationTimeoutException"
         }
       ],
-      "documentation": "<p>Returns a list of resource metadata for a given list of crawler names. After calling the <code>ListCrawlers</code> operation, you can call this operation to access the data to which you have been granted permissions to based on tags.</p>"
+      "documentation": "<p>Returns a list of resource metadata for a given list of crawler names. After calling the <code>ListCrawlers</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.</p>"
     },
     "BatchGetDevEndpoints": {
       "name": "BatchGetDevEndpoints",
@@ -334,7 +334,7 @@
           "shape": "OperationTimeoutException"
         }
       ],
-      "documentation": "<p>Creates a classifier in the user's account. This may be a <code>GrokClassifier</code>, an <code>XMLClassifier</code>, or abbrev <code>JsonClassifier</code>, depending on which field of the request is present.</p>"
+      "documentation": "<p>Creates a classifier in the user's account. This may be a <code>GrokClassifier</code>, an <code>XMLClassifier</code>, a <code>JsonClassifier</code>, or a <code>CsvClassifier</code>, depending on which field of the request is present.</p>"
     },
     "CreateConnection": {
       "name": "CreateConnection",
@@ -2489,7 +2489,7 @@
           "shape": "OperationTimeoutException"
         }
       ],
-      "documentation": "<p>Modifies an existing classifier (a <code>GrokClassifier</code>, <code>XMLClassifier</code>, or <code>JsonClassifier</code>, depending on which field is present).</p>"
+      "documentation": "<p>Modifies an existing classifier (a <code>GrokClassifier</code>, an <code>XMLClassifier</code>, a <code>JsonClassifier</code>, or a <code>CsvClassifier</code>, depending on which field is present).</p>"
     },
     "UpdateConnection": {
       "name": "UpdateConnection",
@@ -3053,7 +3053,7 @@
         },
         "CrawlersNotFound": {
           "shape": "CrawlerNameList",
-          "documentation": "<p>A list of crawlers not found.</p>"
+          "documentation": "<p>A list of names of crawlers not found.</p>"
         }
       }
     },
@@ -3350,9 +3350,13 @@
         "JsonClassifier": {
           "shape": "JsonClassifier",
           "documentation": "<p>A <code>JsonClassifier</code> object.</p>"
+        },
+        "CsvClassifier": {
+          "shape": "CsvClassifier",
+          "documentation": "<p>A <code>CSVClassifier</code> object.</p>"
         }
       },
-      "documentation": "<p>Classifiers are triggered during a crawl task. A classifier checks whether a given file is in a format it can handle, and if it is, the classifier creates a schema in the form of a <code>StructType</code> object that matches that data format.</p> <p>You can use the standard classifiers that AWS Glue supplies, or you can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A classifier can be a <code>grok</code> classifier, an <code>XML</code> classifier, or a <code>JSON</code> classifier, as specified in one of the fields in the <code>Classifier</code> object.</p>"
+      "documentation": "<p>Classifiers are triggered during a crawl task. A classifier checks whether a given file is in a format it can handle, and if it is, the classifier creates a schema in the form of a <code>StructType</code> object that matches that data format.</p> <p>You can use the standard classifiers that AWS Glue supplies, or you can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A classifier can be a <code>grok</code> classifier, an <code>XML</code> classifier, a <code>JSON</code> classifier, or a custom <code>CSV</code> classifier as specified in one of the fields in the <code>Classifier</code> object.</p>"
     },
     "ClassifierList": {
       "type": "list",
@@ -3882,6 +3886,10 @@
         "JsonClassifier": {
           "shape": "CreateJsonClassifierRequest",
           "documentation": "<p>A <code>JsonClassifier</code> object specifying the classifier to create.</p>"
+        },
+        "CsvClassifier": {
+          "shape": "CreateCsvClassifierRequest",
+          "documentation": "<p>A <code>CsvClassifier</code> object specifying the classifier to create.</p>"
         }
       }
     },
@@ -3971,6 +3979,43 @@
     "CreateCrawlerResponse": {
       "type": "structure",
       "members": {}
+    },
+    "CreateCsvClassifierRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the classifier.</p>"
+        },
+        "Delimiter": {
+          "shape": "CsvColumnDelimiter",
+          "documentation": "<p>A custom symbol to denote what separates each column entry in the row.</p>"
+        },
+        "QuoteSymbol": {
+          "shape": "CsvQuoteSymbol",
+          "documentation": "<p>A custom symbol to denote what combines content into a single column value. Must be different from the column delimiter.</p>"
+        },
+        "ContainsHeader": {
+          "shape": "CsvHeaderOption",
+          "documentation": "<p>Indicates whether the CSV file contains a header.</p>"
+        },
+        "Header": {
+          "shape": "CsvHeader",
+          "documentation": "<p>A list of strings representing column names.</p>"
+        },
+        "DisableValueTrimming": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Specifies not to trim values before identifying the type of column values. The default value is true.</p>"
+        },
+        "AllowSingleColumn": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Enables the processing of files that contain only one column.</p>"
+        }
+      },
+      "documentation": "<p>Specifies a custom CSV classifier for <code>CreateClassifier</code> to create.</p>"
     },
     "CreateDatabaseRequest": {
       "type": "structure",
@@ -4459,6 +4504,81 @@
     },
     "CronExpression": {
       "type": "string"
+    },
+    "CsvClassifier": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the classifier.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time this classifier was registered.</p>"
+        },
+        "LastUpdated": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time this classifier was last updated.</p>"
+        },
+        "Version": {
+          "shape": "VersionId",
+          "documentation": "<p>The version of this classifier.</p>"
+        },
+        "Delimiter": {
+          "shape": "CsvColumnDelimiter",
+          "documentation": "<p>A custom symbol to denote what separates each column entry in the row.</p>"
+        },
+        "QuoteSymbol": {
+          "shape": "CsvQuoteSymbol",
+          "documentation": "<p>A custom symbol to denote what combines content into a single column value. Must be different from the column delimiter.</p>"
+        },
+        "ContainsHeader": {
+          "shape": "CsvHeaderOption",
+          "documentation": "<p>Indicates whether the CSV file contains a header.</p>"
+        },
+        "Header": {
+          "shape": "CsvHeader",
+          "documentation": "<p>A list of strings representing column names.</p>"
+        },
+        "DisableValueTrimming": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Specifies not to trim values before identifying the type of column values. The default value is true.</p>"
+        },
+        "AllowSingleColumn": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Enables the processing of files that contain only one column.</p>"
+        }
+      },
+      "documentation": "<p>A classifier for custom <code>CSV</code> content.</p>"
+    },
+    "CsvColumnDelimiter": {
+      "type": "string",
+      "max": 1,
+      "min": 1,
+      "pattern": "[^\\r\\n]"
+    },
+    "CsvHeader": {
+      "type": "list",
+      "member": {
+        "shape": "NameString"
+      }
+    },
+    "CsvHeaderOption": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "PRESENT",
+        "ABSENT"
+      ]
+    },
+    "CsvQuoteSymbol": {
+      "type": "string",
+      "max": 1,
+      "min": 1,
+      "pattern": "[^\\r\\n]"
     },
     "CustomPatterns": {
       "type": "string",
@@ -6908,6 +7028,10 @@
       "box": true,
       "min": 1
     },
+    "NullableBoolean": {
+      "type": "boolean",
+      "box": true
+    },
     "NullableDouble": {
       "type": "double",
       "box": true
@@ -8085,6 +8209,10 @@
         "JsonClassifier": {
           "shape": "UpdateJsonClassifierRequest",
           "documentation": "<p>A <code>JsonClassifier</code> object with updated fields.</p>"
+        },
+        "CsvClassifier": {
+          "shape": "UpdateCsvClassifierRequest",
+          "documentation": "<p>A <code>CsvClassifier</code> object with updated fields.</p>"
         }
       }
     },
@@ -8192,6 +8320,43 @@
     "UpdateCrawlerScheduleResponse": {
       "type": "structure",
       "members": {}
+    },
+    "UpdateCsvClassifierRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the classifier.</p>"
+        },
+        "Delimiter": {
+          "shape": "CsvColumnDelimiter",
+          "documentation": "<p>A custom symbol to denote what separates each column entry in the row.</p>"
+        },
+        "QuoteSymbol": {
+          "shape": "CsvQuoteSymbol",
+          "documentation": "<p>A custom symbol to denote what combines content into a single column value. Must be different from the column delimiter.</p>"
+        },
+        "ContainsHeader": {
+          "shape": "CsvHeaderOption",
+          "documentation": "<p>Indicates whether the CSV file contains a header.</p>"
+        },
+        "Header": {
+          "shape": "CsvHeader",
+          "documentation": "<p>A list of strings representing column names.</p>"
+        },
+        "DisableValueTrimming": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Specifies not to trim values before identifying the type of column values. The default value is true.</p>"
+        },
+        "AllowSingleColumn": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Enables the processing of files that contain only one column.</p>"
+        }
+      },
+      "documentation": "<p>Specifies a custom CSV classifier to be updated.</p>"
     },
     "UpdateDatabaseRequest": {
       "type": "structure",

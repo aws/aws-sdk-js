@@ -52,11 +52,11 @@ declare class Glue extends Service {
    */
   batchDeleteTableVersion(callback?: (err: AWSError, data: Glue.Types.BatchDeleteTableVersionResponse) => void): Request<Glue.Types.BatchDeleteTableVersionResponse, AWSError>;
   /**
-   * Returns a list of resource metadata for a given list of crawler names. After calling the ListCrawlers operation, you can call this operation to access the data to which you have been granted permissions to based on tags.
+   * Returns a list of resource metadata for a given list of crawler names. After calling the ListCrawlers operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
    */
   batchGetCrawlers(params: Glue.Types.BatchGetCrawlersRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetCrawlersResponse) => void): Request<Glue.Types.BatchGetCrawlersResponse, AWSError>;
   /**
-   * Returns a list of resource metadata for a given list of crawler names. After calling the ListCrawlers operation, you can call this operation to access the data to which you have been granted permissions to based on tags.
+   * Returns a list of resource metadata for a given list of crawler names. After calling the ListCrawlers operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
    */
   batchGetCrawlers(callback?: (err: AWSError, data: Glue.Types.BatchGetCrawlersResponse) => void): Request<Glue.Types.BatchGetCrawlersResponse, AWSError>;
   /**
@@ -100,11 +100,11 @@ declare class Glue extends Service {
    */
   batchStopJobRun(callback?: (err: AWSError, data: Glue.Types.BatchStopJobRunResponse) => void): Request<Glue.Types.BatchStopJobRunResponse, AWSError>;
   /**
-   * Creates a classifier in the user's account. This may be a GrokClassifier, an XMLClassifier, or abbrev JsonClassifier, depending on which field of the request is present.
+   * Creates a classifier in the user's account. This may be a GrokClassifier, an XMLClassifier, a JsonClassifier, or a CsvClassifier, depending on which field of the request is present.
    */
   createClassifier(params: Glue.Types.CreateClassifierRequest, callback?: (err: AWSError, data: Glue.Types.CreateClassifierResponse) => void): Request<Glue.Types.CreateClassifierResponse, AWSError>;
   /**
-   * Creates a classifier in the user's account. This may be a GrokClassifier, an XMLClassifier, or abbrev JsonClassifier, depending on which field of the request is present.
+   * Creates a classifier in the user's account. This may be a GrokClassifier, an XMLClassifier, a JsonClassifier, or a CsvClassifier, depending on which field of the request is present.
    */
   createClassifier(callback?: (err: AWSError, data: Glue.Types.CreateClassifierResponse) => void): Request<Glue.Types.CreateClassifierResponse, AWSError>;
   /**
@@ -708,11 +708,11 @@ declare class Glue extends Service {
    */
   untagResource(callback?: (err: AWSError, data: Glue.Types.UntagResourceResponse) => void): Request<Glue.Types.UntagResourceResponse, AWSError>;
   /**
-   * Modifies an existing classifier (a GrokClassifier, XMLClassifier, or JsonClassifier, depending on which field is present).
+   * Modifies an existing classifier (a GrokClassifier, an XMLClassifier, a JsonClassifier, or a CsvClassifier, depending on which field is present).
    */
   updateClassifier(params: Glue.Types.UpdateClassifierRequest, callback?: (err: AWSError, data: Glue.Types.UpdateClassifierResponse) => void): Request<Glue.Types.UpdateClassifierResponse, AWSError>;
   /**
-   * Modifies an existing classifier (a GrokClassifier, XMLClassifier, or JsonClassifier, depending on which field is present).
+   * Modifies an existing classifier (a GrokClassifier, an XMLClassifier, a JsonClassifier, or a CsvClassifier, depending on which field is present).
    */
   updateClassifier(callback?: (err: AWSError, data: Glue.Types.UpdateClassifierResponse) => void): Request<Glue.Types.UpdateClassifierResponse, AWSError>;
   /**
@@ -948,7 +948,7 @@ declare namespace Glue {
      */
     Crawlers?: CrawlerList;
     /**
-     * A list of crawlers not found.
+     * A list of names of crawlers not found.
      */
     CrawlersNotFound?: CrawlerNameList;
   }
@@ -1121,6 +1121,10 @@ declare namespace Glue {
      * A JsonClassifier object.
      */
     JsonClassifier?: JsonClassifier;
+    /**
+     * A CSVClassifier object.
+     */
+    CsvClassifier?: CsvClassifier;
   }
   export type ClassifierList = Classifier[];
   export type ClassifierNameList = NameString[];
@@ -1442,6 +1446,10 @@ declare namespace Glue {
      * A JsonClassifier object specifying the classifier to create.
      */
     JsonClassifier?: CreateJsonClassifierRequest;
+    /**
+     * A CsvClassifier object specifying the classifier to create.
+     */
+    CsvClassifier?: CreateCsvClassifierRequest;
   }
   export interface CreateClassifierResponse {
   }
@@ -1508,6 +1516,36 @@ declare namespace Glue {
     Tags?: TagsMap;
   }
   export interface CreateCrawlerResponse {
+  }
+  export interface CreateCsvClassifierRequest {
+    /**
+     * The name of the classifier.
+     */
+    Name: NameString;
+    /**
+     * A custom symbol to denote what separates each column entry in the row.
+     */
+    Delimiter?: CsvColumnDelimiter;
+    /**
+     * A custom symbol to denote what combines content into a single column value. Must be different from the column delimiter.
+     */
+    QuoteSymbol?: CsvQuoteSymbol;
+    /**
+     * Indicates whether the CSV file contains a header.
+     */
+    ContainsHeader?: CsvHeaderOption;
+    /**
+     * A list of strings representing column names.
+     */
+    Header?: CsvHeader;
+    /**
+     * Specifies not to trim values before identifying the type of column values. The default value is true.
+     */
+    DisableValueTrimming?: NullableBoolean;
+    /**
+     * Enables the processing of files that contain only one column.
+     */
+    AllowSingleColumn?: NullableBoolean;
   }
   export interface CreateDatabaseRequest {
     /**
@@ -1884,6 +1922,52 @@ declare namespace Glue {
     RowTag?: RowTag;
   }
   export type CronExpression = string;
+  export interface CsvClassifier {
+    /**
+     * The name of the classifier.
+     */
+    Name: NameString;
+    /**
+     * The time this classifier was registered.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * The time this classifier was last updated.
+     */
+    LastUpdated?: Timestamp;
+    /**
+     * The version of this classifier.
+     */
+    Version?: VersionId;
+    /**
+     * A custom symbol to denote what separates each column entry in the row.
+     */
+    Delimiter?: CsvColumnDelimiter;
+    /**
+     * A custom symbol to denote what combines content into a single column value. Must be different from the column delimiter.
+     */
+    QuoteSymbol?: CsvQuoteSymbol;
+    /**
+     * Indicates whether the CSV file contains a header.
+     */
+    ContainsHeader?: CsvHeaderOption;
+    /**
+     * A list of strings representing column names.
+     */
+    Header?: CsvHeader;
+    /**
+     * Specifies not to trim values before identifying the type of column values. The default value is true.
+     */
+    DisableValueTrimming?: NullableBoolean;
+    /**
+     * Enables the processing of files that contain only one column.
+     */
+    AllowSingleColumn?: NullableBoolean;
+  }
+  export type CsvColumnDelimiter = string;
+  export type CsvHeader = NameString[];
+  export type CsvHeaderOption = "UNKNOWN"|"PRESENT"|"ABSENT"|string;
+  export type CsvQuoteSymbol = string;
   export type CustomPatterns = string;
   export type DagEdges = CodeGenEdge[];
   export type DagNodes = CodeGenNode[];
@@ -3501,6 +3585,7 @@ declare namespace Glue {
     NotifyDelayAfter?: NotifyDelayAfter;
   }
   export type NotifyDelayAfter = number;
+  export type NullableBoolean = boolean;
   export type NullableDouble = number;
   export interface Order {
     /**
@@ -4205,6 +4290,10 @@ declare namespace Glue {
      * A JsonClassifier object with updated fields.
      */
     JsonClassifier?: UpdateJsonClassifierRequest;
+    /**
+     * A CsvClassifier object with updated fields.
+     */
+    CsvClassifier?: UpdateCsvClassifierRequest;
   }
   export interface UpdateClassifierResponse {
   }
@@ -4283,6 +4372,36 @@ declare namespace Glue {
     Schedule?: CronExpression;
   }
   export interface UpdateCrawlerScheduleResponse {
+  }
+  export interface UpdateCsvClassifierRequest {
+    /**
+     * The name of the classifier.
+     */
+    Name: NameString;
+    /**
+     * A custom symbol to denote what separates each column entry in the row.
+     */
+    Delimiter?: CsvColumnDelimiter;
+    /**
+     * A custom symbol to denote what combines content into a single column value. Must be different from the column delimiter.
+     */
+    QuoteSymbol?: CsvQuoteSymbol;
+    /**
+     * Indicates whether the CSV file contains a header.
+     */
+    ContainsHeader?: CsvHeaderOption;
+    /**
+     * A list of strings representing column names.
+     */
+    Header?: CsvHeader;
+    /**
+     * Specifies not to trim values before identifying the type of column values. The default value is true.
+     */
+    DisableValueTrimming?: NullableBoolean;
+    /**
+     * Enables the processing of files that contain only one column.
+     */
+    AllowSingleColumn?: NullableBoolean;
   }
   export interface UpdateDatabaseRequest {
     /**

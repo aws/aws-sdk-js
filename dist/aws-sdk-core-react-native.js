@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.428.0',
+	  VERSION: '2.429.0',
 
 	  /**
 	   * @api private
@@ -5970,12 +5970,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *   function () { return new AWS.EnvironmentCredentials('AWS'); },
 	 *   function () { return new AWS.EnvironmentCredentials('AMAZON'); },
 	 *   function () { return new AWS.SharedIniFileCredentials(); },
-	 *   function () {
-	 *     // if AWS_CONTAINER_CREDENTIALS_RELATIVE_URI is set
-	 *       return new AWS.ECSCredentials();
-	 *     // else
-	 *       return new AWS.EC2MetadataCredentials();
-	 *   }
+	 *   function () { return new AWS.ECSCredentials(); },
+	 *   function () { return new AWS.ProcessCredentials(); },
+	 *   function () { return new AWS.EC2MetadataCredentials() }
 	 * ]
 	 * ```
 	 */
