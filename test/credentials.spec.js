@@ -124,6 +124,7 @@
         'RemoteCredentials',
         'SAMLCredentials',
         'SharedIniFileCredentials',
+        'ProcessCredentials',
         'WebIdentityCredentials'
       ],
       function(credClass) {
@@ -462,6 +463,213 @@
           process.env.HOME = '/home/user';
           helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
           new AWS.SharedIniFileCredentials().refresh(function(err) {
+            expect(err.message).to.match(/^Profile default not found/);
+            done();
+          });
+        });
+      });
+    });
+    describe('AWS.ProcessCredentials', function() {
+      var os = require('os');
+      var homedir = os.homedir;
+      var env;
+      afterEach(function() {
+        process.env = env;
+      });
+      beforeEach(function() {
+        env = process.env;
+        process.env = {};
+        delete os.homedir;
+      });
+      afterEach(function() {
+        iniLoader.clearCachedFiles();
+        os.homedir = homedir;
+      });
+      describe('constructor', function() {
+        beforeEach(function() {
+          var mock;
+          mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\naws_session_token = session';
+          return helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+        });
+        it('should use os.homedir if available', function() {
+          helpers.spyOn(os, 'homedir').andReturn('/foo/bar/baz');
+          new AWS.ProcessCredentials();
+          expect(os.homedir.calls.length).to.equal(1);
+          expect(AWS.util.readFileSync.calls.length).to.equal(1);
+          return expect(AWS.util.readFileSync.calls[0]['arguments'][0]).to.match(/[\/\\]foo[\/\\]bar[\/\\]baz[\/\\].aws[\/\\]credentials/);
+        });
+        it('should prefer $HOME to os.homedir', function() {
+          process.env.HOME = '/home/user';
+          helpers.spyOn(os, 'homedir').andReturn(process.env.HOME + '/foo/bar');
+
+          new AWS.ProcessCredentials();
+          expect(os.homedir.calls.length).to.equal(0);
+          expect(AWS.util.readFileSync.calls.length).to.equal(1);
+          return expect(AWS.util.readFileSync.calls[0].arguments[0]).to
+            .match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]credentials/);
+        });
+        it('passes an error to callback if HOME/HOMEPATH/USERPROFILE are not set', function(done) {
+          new AWS.ProcessCredentials({
+            callback: function (err) {
+              expect(err).to.be.instanceof(Error);
+              expect(err.message).to.equal('Cannot load credentials, HOME path not set');
+              done();
+            }
+          });
+        });
+        it('uses HOMEDRIVE\\HOMEPATH if HOME and USERPROFILE are not set', function() {
+          var creds;
+          process.env.HOMEDRIVE = 'd:/';
+          process.env.HOMEPATH = 'homepath';
+          creds = new AWS.ProcessCredentials();
+          creds.get();
+          expect(AWS.util.readFileSync.calls.length).to.equal(1);
+          return expect(AWS.util.readFileSync.calls[0]['arguments'][0]).to.match(/d:[\/\\]homepath[\/\\].aws[\/\\]credentials/);
+        });
+        it('uses default HOMEDRIVE of C:/', function() {
+          var creds;
+          process.env.HOMEPATH = 'homepath';
+          creds = new AWS.ProcessCredentials();
+          creds.get();
+          expect(AWS.util.readFileSync.calls.length).to.equal(1);
+          return expect(AWS.util.readFileSync.calls[0]['arguments'][0]).to.match(/C:[\/\\]homepath[\/\\].aws[\/\\]credentials/);
+        });
+        it('uses USERPROFILE if HOME is not set', function() {
+          var creds;
+          process.env.USERPROFILE = '/userprofile';
+          creds = new AWS.ProcessCredentials();
+          creds.get();
+          expect(AWS.util.readFileSync.calls.length).to.equal(1);
+          return expect(AWS.util.readFileSync.calls[0]['arguments'][0]).to.match(/[\/\\]userprofile[\/\\].aws[\/\\]credentials/);
+        });
+        return it('can override filename as a constructor argument', function() {
+          var creds;
+          creds = new AWS.ProcessCredentials({
+            filename: '/etc/creds'
+          });
+          creds.get();
+          expect(AWS.util.readFileSync.calls.length).to.equal(1);
+          return expect(AWS.util.readFileSync.calls[0]['arguments'][0]).to.equal('/etc/creds');
+        });
+      });
+      describe('loading', function() {
+        beforeEach(function() {
+          process.env.HOME = '/home/user';
+          var child_process = require('child_process');
+          var mockConfig, mockProcess, creds;
+          mockConfig = '[default]\ncredential_process=federated_cli_mock';
+          helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
+          mockProcess = '{"Version": 1,"AccessKeyId": "akid","SecretAccessKey": "secret","SessionToken": "session","Expiration": ""}';
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+            cb(undefined, mockProcess, undefined);
+          });
+        });
+        afterEach(function() {
+          iniLoader.clearCachedFiles();
+        });
+        it('loads successfully using default profile', function(done) {
+          creds = new AWS.ProcessCredentials();
+          creds.refresh(function(err) {
+            expect(creds.accessKeyId).to.equal('akid');
+            expect(creds.secretAccessKey).to.equal('secret');
+            expect(creds.sessionToken).to.equal('session');
+            expect(creds.expireTime).to.be.null;
+            done();
+          });
+        });
+        it('loads successfully using named profile', function(done) {
+          mockConfig = '[foo]\ncredential_process=federated_cli_mock';
+          helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
+          creds = new AWS.ProcessCredentials({profile: 'foo'});
+          creds.refresh(function(err) {
+            expect(creds.accessKeyId).to.equal('akid');
+            expect(creds.secretAccessKey).to.equal('secret');
+            expect(creds.sessionToken).to.equal('session');
+            expect(creds.expireTime).to.be.null;
+            done();
+          });
+        });
+        it('throws error if version is not 1', function(done) {
+          var child_process = require('child_process');
+          mockProcess = '{"Version": 2,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": ""}';
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+            cb(undefined, mockProcess, undefined);
+          });
+          var creds = new AWS.ProcessCredentials();
+          creds.refresh(function(err) {
+            expect(err).to.exist;
+            expect(err.message).to.match(/^credential_process does not return Version == 1/);
+            done();
+          });
+        });
+        it('throws error if credentials are expired', function(done) {
+          var child_process = require('child_process');
+          var expired;
+          expired = AWS.util.date.iso8601(new Date(0));
+          mockProcess = '{"Version": 1,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": "' + expired +'"}';
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+            cb(undefined, mockProcess, undefined);
+          });
+          var creds = new AWS.ProcessCredentials();
+          creds.refresh(function(err) {
+            expect(err.message).to.eql('credential_process returned expired credentials');
+            expect(err).to.not.be.null;
+            done();
+          });
+        });
+        it('thorws error if an error is returned', function(done) {
+          var child_process = require('child_process');
+          var mockErr;
+          mockErr = 'foo Error';
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+            cb(mockErr, undefined, undefined);
+          });
+          var creds = new AWS.ProcessCredentials();
+          creds.refresh(function(err) {
+            expect(err.message).to.eql('credential_process returned error');
+            expect(creds.accessKeyId).to.be.undefined;
+            done();
+          });
+        });
+        it('sets expireTime if an expiration is included', function(done) {
+          var child_process = require('child_process');
+          var futureExpiration;
+          futureExpiration = AWS.util.date.unixTimestamp() + 900;
+          futureExpiration = AWS.util.date.iso8601(new Date(futureExpiration * 1000));
+          mockProcess = '{"Version": 1,"AccessKeyId": "akid","SecretAccessKey": "secret","SessionToken": "session","Expiration": "' + futureExpiration + '"}';
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+            cb(undefined, mockProcess, undefined);
+          });
+          creds = new AWS.ProcessCredentials();
+          creds.refresh(function(err) {
+            expect(creds.expireTime).to.eql(AWS.util.date.from(futureExpiration));
+            done();
+          });
+        });
+        return it('does not set expireTime if expiration is empty', function(done) {
+          var child_process = require('child_process');
+          creds = new AWS.ProcessCredentials({ profile: 'foo' });
+          creds.get();
+          creds.refresh(function(err) {
+            expect(creds.expireTime).to.be.null;
+            done();
+          });
+        });
+      });
+      describe('refresh', function() {
+        var origEnv = process.env;
+        beforeEach(function() {
+          process.env = {};
+        });
+        afterEach(function() {
+          process.env = origEnv;
+          iniLoader.clearCachedFiles();
+        });
+        return it('fails if credentials are not in the file', function(done) {
+          var mock = '';
+          process.env.HOME = '/home/user';
+          helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+          new AWS.ProcessCredentials().refresh(function(err) {
             expect(err.message).to.match(/^Profile default not found/);
             done();
           });
