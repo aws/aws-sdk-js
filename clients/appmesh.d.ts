@@ -12,7 +12,7 @@ declare class AppMesh extends Service {
   constructor(options?: AppMesh.Types.ClientConfiguration)
   config: Config & AppMesh.Types.ClientConfiguration;
   /**
-   * Creates a new service mesh. A service mesh is a logical boundary for network traffic
+   * Creates a service mesh. A service mesh is a logical boundary for network traffic
          between the services that reside within it.
          After you create your service mesh, you can create virtual services, virtual nodes,
          virtual routers, and routes to distribute traffic between the applications in your
@@ -20,7 +20,7 @@ declare class AppMesh extends Service {
    */
   createMesh(params: AppMesh.Types.CreateMeshInput, callback?: (err: AWSError, data: AppMesh.Types.CreateMeshOutput) => void): Request<AppMesh.Types.CreateMeshOutput, AWSError>;
   /**
-   * Creates a new service mesh. A service mesh is a logical boundary for network traffic
+   * Creates a service mesh. A service mesh is a logical boundary for network traffic
          between the services that reside within it.
          After you create your service mesh, you can create virtual services, virtual nodes,
          virtual routers, and routes to distribute traffic between the applications in your
@@ -28,30 +28,30 @@ declare class AppMesh extends Service {
    */
   createMesh(callback?: (err: AWSError, data: AppMesh.Types.CreateMeshOutput) => void): Request<AppMesh.Types.CreateMeshOutput, AWSError>;
   /**
-   * Creates a new route that is associated with a virtual router.
+   * Creates a route that is associated with a virtual router.
          You can use the prefix parameter in your route specification for path-based
-         routing of requests. For example, if your virtual router service name is
-            my-service.local, and you want the route to match requests to
-            my-service.local/metrics, then your prefix should be
+         routing of requests. For example, if your virtual service name is
+            my-service.local and you want the route to match requests to
+            my-service.local/metrics, your prefix should be
          /metrics.
          If your route matches a request, you can distribute traffic to one or more target
          virtual nodes with relative weighting.
    */
   createRoute(params: AppMesh.Types.CreateRouteInput, callback?: (err: AWSError, data: AppMesh.Types.CreateRouteOutput) => void): Request<AppMesh.Types.CreateRouteOutput, AWSError>;
   /**
-   * Creates a new route that is associated with a virtual router.
+   * Creates a route that is associated with a virtual router.
          You can use the prefix parameter in your route specification for path-based
-         routing of requests. For example, if your virtual router service name is
-            my-service.local, and you want the route to match requests to
-            my-service.local/metrics, then your prefix should be
+         routing of requests. For example, if your virtual service name is
+            my-service.local and you want the route to match requests to
+            my-service.local/metrics, your prefix should be
          /metrics.
          If your route matches a request, you can distribute traffic to one or more target
          virtual nodes with relative weighting.
    */
   createRoute(callback?: (err: AWSError, data: AppMesh.Types.CreateRouteOutput) => void): Request<AppMesh.Types.CreateRouteOutput, AWSError>;
   /**
-   * Creates a new virtual node within a service mesh.
-         A virtual node acts as logical pointer to a particular task group, such as an Amazon ECS
+   * Creates a virtual node within a service mesh.
+         A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS
          service or a Kubernetes deployment. When you create a virtual node, you must specify the
          DNS service discovery hostname for your task group.
          Any inbound traffic that your virtual node expects should be specified as a
@@ -59,7 +59,7 @@ declare class AppMesh extends Service {
          should be specified as a backend.
          The response metadata for your new virtual node contains the arn that is
          associated with the virtual node. Set this value (either the full ARN or the truncated
-         resource name, for example, mesh/default/virtualNode/simpleapp, as the
+         resource name: for example, mesh/default/virtualNode/simpleapp) as the
             APPMESH_VIRTUAL_NODE_NAME environment variable for your task group's Envoy
          proxy container in your task definition or pod spec. This is then mapped to the
             node.id and node.cluster Envoy parameters.
@@ -72,8 +72,8 @@ declare class AppMesh extends Service {
    */
   createVirtualNode(params: AppMesh.Types.CreateVirtualNodeInput, callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualNodeOutput) => void): Request<AppMesh.Types.CreateVirtualNodeOutput, AWSError>;
   /**
-   * Creates a new virtual node within a service mesh.
-         A virtual node acts as logical pointer to a particular task group, such as an Amazon ECS
+   * Creates a virtual node within a service mesh.
+         A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS
          service or a Kubernetes deployment. When you create a virtual node, you must specify the
          DNS service discovery hostname for your task group.
          Any inbound traffic that your virtual node expects should be specified as a
@@ -81,7 +81,7 @@ declare class AppMesh extends Service {
          should be specified as a backend.
          The response metadata for your new virtual node contains the arn that is
          associated with the virtual node. Set this value (either the full ARN or the truncated
-         resource name, for example, mesh/default/virtualNode/simpleapp, as the
+         resource name: for example, mesh/default/virtualNode/simpleapp) as the
             APPMESH_VIRTUAL_NODE_NAME environment variable for your task group's Envoy
          proxy container in your task definition or pod spec. This is then mapped to the
             node.id and node.cluster Envoy parameters.
@@ -94,27 +94,27 @@ declare class AppMesh extends Service {
    */
   createVirtualNode(callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualNodeOutput) => void): Request<AppMesh.Types.CreateVirtualNodeOutput, AWSError>;
   /**
-   * Creates a new virtual router within a service mesh.
+   * Creates a virtual router within a service mesh.
          Any inbound traffic that your virtual router expects should be specified as a
             listener. 
-         Virtual routers handle traffic for one or more service names within your mesh. After you
-         create your virtual router, create and associate routes for your virtual router that direct
-         incoming requests to different virtual nodes.
+         Virtual routers handle traffic for one or more virtual services within your mesh. After
+         you create your virtual router, create and associate routes for your virtual router that
+         direct incoming requests to different virtual nodes.
    */
   createVirtualRouter(params: AppMesh.Types.CreateVirtualRouterInput, callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualRouterOutput) => void): Request<AppMesh.Types.CreateVirtualRouterOutput, AWSError>;
   /**
-   * Creates a new virtual router within a service mesh.
+   * Creates a virtual router within a service mesh.
          Any inbound traffic that your virtual router expects should be specified as a
             listener. 
-         Virtual routers handle traffic for one or more service names within your mesh. After you
-         create your virtual router, create and associate routes for your virtual router that direct
-         incoming requests to different virtual nodes.
+         Virtual routers handle traffic for one or more virtual services within your mesh. After
+         you create your virtual router, create and associate routes for your virtual router that
+         direct incoming requests to different virtual nodes.
    */
   createVirtualRouter(callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualRouterOutput) => void): Request<AppMesh.Types.CreateVirtualRouterOutput, AWSError>;
   /**
    * Creates a virtual service within a service mesh.
-         A virtual service is an abstraction of a real service that is either provided by a
-         virtual node directly, or indirectly by means of a virtual router. Dependent services call
+         A virtual service is an abstraction of a real service that is provided by a
+         virtual node directly or indirectly by means of a virtual router. Dependent services call
          your virtual service by its virtualServiceName, and those requests are routed
          to the virtual node or virtual router that is specified as the provider for the virtual
          service.
@@ -122,8 +122,8 @@ declare class AppMesh extends Service {
   createVirtualService(params: AppMesh.Types.CreateVirtualServiceInput, callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualServiceOutput) => void): Request<AppMesh.Types.CreateVirtualServiceOutput, AWSError>;
   /**
    * Creates a virtual service within a service mesh.
-         A virtual service is an abstraction of a real service that is either provided by a
-         virtual node directly, or indirectly by means of a virtual router. Dependent services call
+         A virtual service is an abstraction of a real service that is provided by a
+         virtual node directly or indirectly by means of a virtual router. Dependent services call
          your virtual service by its virtualServiceName, and those requests are routed
          to the virtual node or virtual router that is specified as the provider for the virtual
          service.
@@ -131,13 +131,13 @@ declare class AppMesh extends Service {
   createVirtualService(callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualServiceOutput) => void): Request<AppMesh.Types.CreateVirtualServiceOutput, AWSError>;
   /**
    * Deletes an existing service mesh.
-         You must delete all resources (virtual services, routes, virtual routers, virtual nodes)
+         You must delete all resources (virtual services, routes, virtual routers, and virtual nodes)
          in the service mesh before you can delete the mesh itself.
    */
   deleteMesh(params: AppMesh.Types.DeleteMeshInput, callback?: (err: AWSError, data: AppMesh.Types.DeleteMeshOutput) => void): Request<AppMesh.Types.DeleteMeshOutput, AWSError>;
   /**
    * Deletes an existing service mesh.
-         You must delete all resources (virtual services, routes, virtual routers, virtual nodes)
+         You must delete all resources (virtual services, routes, virtual routers, and virtual nodes)
          in the service mesh before you can delete the mesh itself.
    */
   deleteMesh(callback?: (err: AWSError, data: AppMesh.Types.DeleteMeshOutput) => void): Request<AppMesh.Types.DeleteMeshOutput, AWSError>;
@@ -238,6 +238,14 @@ declare class AppMesh extends Service {
    */
   listRoutes(callback?: (err: AWSError, data: AppMesh.Types.ListRoutesOutput) => void): Request<AppMesh.Types.ListRoutesOutput, AWSError>;
   /**
+   * List the tags for an App Mesh resource.
+   */
+  listTagsForResource(params: AppMesh.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: AppMesh.Types.ListTagsForResourceOutput) => void): Request<AppMesh.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   * List the tags for an App Mesh resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: AppMesh.Types.ListTagsForResourceOutput) => void): Request<AppMesh.Types.ListTagsForResourceOutput, AWSError>;
+  /**
    * Returns a list of existing virtual nodes.
    */
   listVirtualNodes(params: AppMesh.Types.ListVirtualNodesInput, callback?: (err: AWSError, data: AppMesh.Types.ListVirtualNodesOutput) => void): Request<AppMesh.Types.ListVirtualNodesOutput, AWSError>;
@@ -261,6 +269,36 @@ declare class AppMesh extends Service {
    * Returns a list of existing virtual services in a service mesh.
    */
   listVirtualServices(callback?: (err: AWSError, data: AppMesh.Types.ListVirtualServicesOutput) => void): Request<AppMesh.Types.ListVirtualServicesOutput, AWSError>;
+  /**
+   * Associates the specified tags to a resource with the specified
+         resourceArn. If existing tags on a resource aren't specified in the
+         request parameters, they aren't changed. When a resource is deleted, the tags
+         associated with that resource are also deleted.
+   */
+  tagResource(params: AppMesh.Types.TagResourceInput, callback?: (err: AWSError, data: AppMesh.Types.TagResourceOutput) => void): Request<AppMesh.Types.TagResourceOutput, AWSError>;
+  /**
+   * Associates the specified tags to a resource with the specified
+         resourceArn. If existing tags on a resource aren't specified in the
+         request parameters, they aren't changed. When a resource is deleted, the tags
+         associated with that resource are also deleted.
+   */
+  tagResource(callback?: (err: AWSError, data: AppMesh.Types.TagResourceOutput) => void): Request<AppMesh.Types.TagResourceOutput, AWSError>;
+  /**
+   * Deletes specified tags from a resource.
+   */
+  untagResource(params: AppMesh.Types.UntagResourceInput, callback?: (err: AWSError, data: AppMesh.Types.UntagResourceOutput) => void): Request<AppMesh.Types.UntagResourceOutput, AWSError>;
+  /**
+   * Deletes specified tags from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: AppMesh.Types.UntagResourceOutput) => void): Request<AppMesh.Types.UntagResourceOutput, AWSError>;
+  /**
+   * Updates an existing service mesh.
+   */
+  updateMesh(params: AppMesh.Types.UpdateMeshInput, callback?: (err: AWSError, data: AppMesh.Types.UpdateMeshOutput) => void): Request<AppMesh.Types.UpdateMeshOutput, AWSError>;
+  /**
+   * Updates an existing service mesh.
+   */
+  updateMesh(callback?: (err: AWSError, data: AppMesh.Types.UpdateMeshOutput) => void): Request<AppMesh.Types.UpdateMeshOutput, AWSError>;
   /**
    * Updates an existing route for a specified service mesh and virtual router.
    */
@@ -330,13 +368,20 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     clientToken?: String;
     /**
-     * The name of the service mesh in which to create the virtual service.
+     * The name of the service mesh to create the virtual service in.
      */
     meshName: ResourceName;
     /**
      * The virtual service specification to apply.
      */
     spec: VirtualServiceSpec;
+    /**
+     * Optional metadata that you can apply to the virtual service to assist with categorization and organization.
+         Each tag consists of a key and an optional value, both of which you define.
+         Tag keys can have a maximum character length of 128 characters, and tag values can have
+            a maximum length of 256 characters.
+     */
+    tags?: TagList;
     /**
      * The name to use for the virtual service.
      */
@@ -362,11 +407,42 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualRouterName: ResourceName;
   }
+  export type TagKeyList = TagKey[];
+  export interface ListTagsForResourceInput {
+    /**
+     * The maximum number of tag results returned by ListTagsForResource in
+         paginated output. When this parameter is used, ListTagsForResource returns only
+         limit results in a single page along with a nextToken
+         response element. You can see the remaining results of the initial request by sending
+         another ListTagsForResource request with the returned nextToken
+         value. This value can be between 1 and 100. If you don't use this
+         parameter, ListTagsForResource returns up to
+         100 results and a nextToken value if applicable.
+     */
+    limit?: TagsLimit;
+    /**
+     * The nextToken value returned from a previous paginated
+         ListTagsForResource request where limit was used and the
+         results exceeded the value of that parameter. Pagination continues from the end of the
+         previous results that returned the nextToken value.
+     */
+    nextToken?: String;
+    /**
+     * The Amazon Resource Name (ARN) that identifies the resource to list the tags for.
+     */
+    resourceArn: Arn;
+  }
   export interface CreateVirtualNodeOutput {
     /**
      * The full description of your virtual node following the create call.
      */
     virtualNode: VirtualNodeData;
+  }
+  export interface Logging {
+    /**
+     * The access log configuration for a virtual node.
+     */
+    accessLog?: AccessLog;
   }
   export type Long = number;
   export interface UpdateVirtualRouterOutput {
@@ -428,17 +504,6 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   export interface ResourceMetadata {
     /**
      * The full Amazon Resource Name (ARN) for the resource.
-         
-            After you create a virtual node, set this value (either the full ARN or the
-            truncated resource name, for example, mesh/default/virtualNode/simpleapp,
-            as the APPMESH_VIRTUAL_NODE_NAME environment variable for your task group's
-            Envoy proxy container in your task definition or pod spec. This is then mapped to the
-               node.id and node.cluster Envoy parameters.
-            If you require your Envoy stats or tracing to use a different name, you can override
-            the node.cluster value that is set by
-               APPMESH_VIRTUAL_NODE_NAME with the
-               APPMESH_VIRTUAL_NODE_CLUSTER environment variable.
-         
      */
     arn: Arn;
     /**
@@ -518,6 +583,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
     route: RouteData;
   }
   export type PercentInt = number;
+  export type TagValue = string;
   export interface HttpRouteAction {
     /**
      * The targets that traffic is routed to when a request matches the route. You can specify
@@ -538,7 +604,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     limit?: ListRoutesLimit;
     /**
-     * The name of the service mesh in which to list routes.
+     * The name of the service mesh to list routes in.
      */
     meshName: ResourceName;
     /**
@@ -602,6 +668,16 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualServiceName: ServiceName;
   }
+  export interface EgressFilter {
+    /**
+     * The egress filter type. By default, the type is DROP_ALL, which allows
+         egress only from virtual nodes to other defined resources in the service mesh (and any traffic
+         to *.amazonaws.com for AWS API calls). You can set the egress filter type to
+            ALLOW_ALL to allow egress to any endpoint inside or outside of the service
+         mesh.
+     */
+    type: EgressFilterType;
+  }
   export type VirtualServiceList = VirtualServiceRef[];
   export interface VirtualNodeStatus {
     /**
@@ -648,6 +724,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualService: VirtualServiceData;
   }
+  export type FilePath = string;
   export interface VirtualNodeRef {
     /**
      * The full Amazon Resource Name (ARN) for the virtual node.
@@ -672,12 +749,26 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The name to use for the service mesh.
      */
     meshName: ResourceName;
+    /**
+     * The service mesh specification to apply.
+     */
+    spec?: MeshSpec;
+    /**
+     * Optional metadata that you can apply to the service mesh to assist with categorization and organization.
+         Each tag consists of a key and an optional value, both of which you define.
+         Tag keys can have a maximum character length of 128 characters, and tag values can have
+            a maximum length of 256 characters.
+     */
+    tags?: TagList;
   }
   export interface DescribeVirtualNodeOutput {
     /**
      * The full description of your virtual node.
      */
     virtualNode: VirtualNodeData;
+  }
+  export interface UpdateMeshOutput {
+    mesh: MeshData;
   }
   export interface CreateRouteOutput {
     /**
@@ -738,6 +829,8 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualNodeName: ResourceName;
   }
+  export interface UntagResourceOutput {
+  }
   export interface VirtualServiceSpec {
     /**
      * The App Mesh object that is acting as the provider for a virtual service. You can specify
@@ -772,20 +865,26 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
          results exceeded the value of that parameter. Pagination continues from the end of the
          previous results that returned the nextToken value.
          
-            This token should be treated as an opaque identifier that is only used to
+            This token should be treated as an opaque identifier that is used only to
                 retrieve the next items in a list and not for other programmatic purposes.
         
      */
     nextToken?: String;
   }
   export type Arn = string;
+  export interface TcpRoute {
+    /**
+     * The action to take if a match is determined.
+     */
+    action: TcpRouteAction;
+  }
   export type VirtualNodeList = VirtualNodeRef[];
   export interface ListVirtualRoutersInput {
     /**
      * The maximum number of results returned by ListVirtualRouters in paginated
          output. When you use this parameter, ListVirtualRouters returns only
             limit results in a single page along with a nextToken response
-         element. You can see the remaining results of the initial request  by sending another
+         element. You can see the remaining results of the initial request by sending another
             ListVirtualRouters request with the returned nextToken value.
          This value can be between 1 and 100. If you don't use this parameter, 
          ListVirtualRouters returns up to 100 results and
@@ -826,6 +925,21 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualRouterName: ResourceName;
   }
+  export interface UpdateMeshInput {
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
+request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
+     */
+    clientToken?: String;
+    /**
+     * The name of the service mesh to update.
+     */
+    meshName: ResourceName;
+    /**
+     * The service mesh specification to apply.
+     */
+    spec?: MeshSpec;
+  }
   export interface ListVirtualServicesInput {
     /**
      * The maximum number of results returned by ListVirtualServices in paginated
@@ -865,9 +979,22 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     spec: VirtualRouterSpec;
     /**
+     * Optional metadata that you can apply to the virtual router to assist with categorization and organization.
+         Each tag consists of a key and an optional value, both of which you define.
+         Tag keys can have a maximum character length of 128 characters, and tag values can have
+            a maximum length of 256 characters.
+     */
+    tags?: TagList;
+    /**
      * The name to use for the virtual router.
      */
     virtualRouterName: ResourceName;
+  }
+  export interface AccessLog {
+    /**
+     * The file object to send virtual node access logs to.
+     */
+    file?: FileAccessLog;
   }
   export interface ListVirtualNodesInput {
     /**
@@ -938,7 +1065,12 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     listeners?: Listeners;
     /**
-     * The service discovery information for the virtual node.
+     * The inbound and outbound access logging information for the virtual node.
+     */
+    logging?: Logging;
+    /**
+     * The service discovery information for the virtual node. If your virtual node does not
+         expect ingress traffic, you can omit this parameter.
      */
     serviceDiscovery?: ServiceDiscovery;
   }
@@ -966,15 +1098,27 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
   export interface HttpRouteMatch {
     /**
      * Specifies the path to match requests with. This parameter must always start with
-            /, which by itself matches all requests to the virtual router service name.
-         You can also match for path-based routing of requests. For example, if your virtual router
-         service name is my-service.local and you want the route to match requests to
+            /, which by itself matches all requests to the virtual service name. You
+         can also match for path-based routing of requests. For example, if your virtual service
+         name is my-service.local and you want the route to match requests to
             my-service.local/metrics, your prefix should be
          /metrics.
      */
     prefix: String;
   }
   export type MeshList = MeshRef[];
+  export interface TagRef {
+    /**
+     * One part of a key-value pair that make up a tag. A key is a general label
+         that acts like a category for more specific tag values.
+     */
+    key: TagKey;
+    /**
+     * The optional part of a key-value pair that make up a tag. A value acts as
+         a descriptor within a tag category (key).
+     */
+    value?: TagValue;
+  }
   export interface MeshRef {
     /**
      * The full Amazon Resource Name (ARN) of the service mesh.
@@ -1005,6 +1149,10 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The associated metadata for the service mesh.
      */
     metadata: ResourceMetadata;
+    /**
+     * The associated specification for the service mesh.
+     */
+    spec: MeshSpec;
     /**
      * The status of the service mesh.
      */
@@ -1038,6 +1186,13 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The relative weight of the weighted target.
      */
     weight: PercentInt;
+  }
+  export interface TcpRouteAction {
+    /**
+     * The targets that traffic is routed to when a request matches the route. You can specify
+         one or more targets and their relative weights to distribute traffic with.
+     */
+    weightedTargets: WeightedTargets;
   }
   export interface DescribeVirtualNodeInput {
     /**
@@ -1133,6 +1288,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualNodeName: ResourceName;
   }
+  export type TagList = TagRef[];
   export interface DescribeVirtualRouterInput {
     /**
      * The name of the service mesh that the virtual router resides in.
@@ -1143,6 +1299,8 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualRouterName: ResourceName;
   }
+  export interface TagResourceOutput {
+  }
   export type RouteList = RouteRef[];
   export interface DeleteMeshOutput {
     /**
@@ -1150,8 +1308,21 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     mesh: MeshData;
   }
+  export type EgressFilterType = "ALLOW_ALL"|"DROP_ALL"|string;
   export type Hostname = string;
   export type PortNumber = number;
+  export interface TagResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource to add tags to.
+     */
+    resourceArn: Arn;
+    /**
+     * The tags to add to the resource. A tag is an array of key-value pairs.
+         Tag keys can have a maximum character length of 128 characters, and tag values can have
+            a maximum length of 256 characters.
+     */
+    tags: TagList;
+  }
   export interface CreateRouteInput {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the
@@ -1159,7 +1330,7 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     clientToken?: String;
     /**
-     * The name of the service mesh in which to create the route.
+     * The name of the service mesh to create the route in.
      */
     meshName: ResourceName;
     /**
@@ -1170,6 +1341,13 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The route specification to apply.
      */
     spec: RouteSpec;
+    /**
+     * Optional metadata that you can apply to the route to assist with categorization and organization.
+         Each tag consists of a key and an optional value, both of which you define.
+         Tag keys can have a maximum character length of 128 characters, and tag values can have
+            a maximum length of 256 characters.
+     */
+    tags?: TagList;
     /**
      * The name of the virtual router in which to create the route.
      */
@@ -1229,13 +1407,20 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     clientToken?: String;
     /**
-     * The name of the service mesh in which to create the virtual node.
+     * The name of the service mesh to create the virtual node in.
      */
     meshName: ResourceName;
     /**
      * The virtual node specification to apply.
      */
     spec: VirtualNodeSpec;
+    /**
+     * Optional metadata that you can apply to the virtual node to assist with categorization and organization.
+         Each tag consists of a key and an optional value, both of which you define.
+         Tag keys can have a maximum character length of 128 characters, and tag values can have
+            a maximum length of 256 characters.
+     */
+    tags?: TagList;
     /**
      * The name to use for the virtual node.
      */
@@ -1246,6 +1431,10 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The HTTP routing information for the route.
      */
     httpRoute?: HttpRoute;
+    /**
+     * The TCP routing information for the route.
+     */
+    tcpRoute?: TcpRoute;
   }
   export interface HttpRoute {
     /**
@@ -1263,11 +1452,31 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     meshName: ResourceName;
   }
+  export interface MeshSpec {
+    /**
+     * The egress filter rules for the service mesh.
+     */
+    egressFilter?: EgressFilter;
+  }
   export interface CreateVirtualServiceOutput {
     /**
      * The full description of your virtual service following the create call.
      */
     virtualService: VirtualServiceData;
+  }
+  export interface FileAccessLog {
+    /**
+     * The file path to write access logs to. You can use /dev/stdout to send
+         access logs to standard out and configure your Envoy container to use a log driver, such as
+            awslogs, to export the access logs to a log storage service such as Amazon CloudWatch
+         Logs. You can also specify a path in the Envoy container's file system to write the files
+         to disk.
+         
+            The Envoy process must have write permissions to the path that you specify here.
+            Otherwise, Envoy fails to bootstrap properly.
+         
+     */
+    path: FilePath;
   }
   export interface VirtualRouterServiceProvider {
     /**
@@ -1284,6 +1493,20 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      * The name of the virtual service to delete.
      */
     virtualServiceName: ServiceName;
+  }
+  export interface ListTagsForResourceOutput {
+    /**
+     * The nextToken value to include in a future ListTagsForResource
+         request. When the results of a ListTagsForResource request exceed
+         limit, you can use this value to retrieve the next page of
+         results. This value is null when there are no more results to
+         return.
+     */
+    nextToken?: String;
+    /**
+     * The tags for the resource.
+     */
+    tags: TagList;
   }
   export interface ServiceDiscovery {
     /**
@@ -1305,12 +1528,24 @@ request. Up to 36 letters, numbers, hyphens, and underscores are allowed.
      */
     virtualNodes: VirtualNodeList;
   }
+  export interface UntagResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource to delete tags from.
+     */
+    resourceArn: Arn;
+    /**
+     * The keys of the tags to be removed.
+     */
+    tagKeys: TagKeyList;
+  }
   export interface DeleteVirtualRouterOutput {
     /**
      * The virtual router that was deleted.
      */
     virtualRouter: VirtualRouterData;
   }
+  export type TagsLimit = number;
+  export type TagKey = string;
   export type VirtualServiceStatusCode = "ACTIVE"|"DELETED"|"INACTIVE"|string;
   export interface DeleteVirtualNodeOutput {
     /**

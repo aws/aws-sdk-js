@@ -1004,7 +1004,18 @@ declare namespace ELBv2 {
   export type HealthCheckPort = string;
   export type HealthCheckThresholdCount = number;
   export type HealthCheckTimeoutSeconds = number;
+  export interface HostHeaderConditionConfig {
+    Values?: ListOfString;
+  }
   export type HttpCode = string;
+  export interface HttpHeaderConditionConfig {
+    HttpHeaderName?: HttpHeaderConditionName;
+    Values?: ListOfString;
+  }
+  export type HttpHeaderConditionName = string;
+  export interface HttpRequestMethodConditionConfig {
+    Values?: ListOfString;
+  }
   export type IpAddress = string;
   export type IpAddressType = "ipv4"|"dualstack"|string;
   export type IsDefault = boolean;
@@ -1288,8 +1299,19 @@ declare namespace ELBv2 {
   export type Name = string;
   export type PageSize = number;
   export type Path = string;
+  export interface PathPatternConditionConfig {
+    Values?: ListOfString;
+  }
   export type Port = number;
   export type ProtocolEnum = "HTTP"|"HTTPS"|"TCP"|"TLS"|string;
+  export interface QueryStringConditionConfig {
+    Values?: QueryStringKeyValuePairList;
+  }
+  export interface QueryStringKeyValuePair {
+    Key?: StringValue;
+    Value?: StringValue;
+  }
+  export type QueryStringKeyValuePairList = QueryStringKeyValuePair[];
   export interface RedirectActionConfig {
     /**
      * The protocol. You can specify HTTP, HTTPS, or #{protocol}. You can redirect HTTP to HTTP, HTTP to HTTPS, and HTTPS to HTTPS. You cannot redirect HTTPS to HTTP.
@@ -1393,6 +1415,12 @@ declare namespace ELBv2 {
      * The condition value. If the field name is host-header, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.   A-Z, a-z, 0-9   - .   * (matches 0 or more characters)   ? (matches exactly 1 character)   If the field name is path-pattern, you can specify a single path pattern (for example, /img/*). A path pattern is case-sensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.   A-Z, a-z, 0-9   _ - . $ / ~ " ' @ : +   &amp; (using &amp;amp;)   * (matches 0 or more characters)   ? (matches exactly 1 character)  
      */
     Values?: ListOfString;
+    HostHeaderConfig?: HostHeaderConditionConfig;
+    PathPatternConfig?: PathPatternConditionConfig;
+    HttpHeaderConfig?: HttpHeaderConditionConfig;
+    QueryStringConfig?: QueryStringConditionConfig;
+    HttpRequestMethodConfig?: HttpRequestMethodConditionConfig;
+    SourceIpConfig?: SourceIpConditionConfig;
   }
   export type RuleConditionList = RuleCondition[];
   export type RulePriority = number;
@@ -1473,6 +1501,9 @@ declare namespace ELBv2 {
      * Information about the subnet and Availability Zone.
      */
     AvailabilityZones?: AvailabilityZones;
+  }
+  export interface SourceIpConditionConfig {
+    Values?: ListOfString;
   }
   export type SslPolicies = SslPolicy[];
   export interface SslPolicy {

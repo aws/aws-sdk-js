@@ -28,11 +28,11 @@ declare class StorageGateway extends Service {
    */
   addCache(callback?: (err: AWSError, data: StorageGateway.Types.AddCacheOutput) => void): Request<StorageGateway.Types.AddCacheOutput, AWSError>;
   /**
-   * Adds one or more tags to the specified resource. You use tags to add metadata to resources, which you can use to categorize these resources. For example, you can categorize resources by purpose, owner, environment, or team. Each tag consists of a key and a value, which you define. You can add tags to the following AWS Storage Gateway resources:   Storage gateways of all types   Storage Volumes   Virtual Tapes   NFS and SMB File Shares   You can create a maximum of 10 tags for each resource. Virtual tapes and storage volumes that are recovered to a new gateway maintain their tags.
+   * Adds one or more tags to the specified resource. You use tags to add metadata to resources, which you can use to categorize these resources. For example, you can categorize resources by purpose, owner, environment, or team. Each tag consists of a key and a value, which you define. You can add tags to the following AWS Storage Gateway resources:   Storage gateways of all types   Storage volumes   Virtual tapes   NFS and SMB file shares   You can create a maximum of 10 tags for each resource. Virtual tapes and storage volumes that are recovered to a new gateway maintain their tags.
    */
   addTagsToResource(params: StorageGateway.Types.AddTagsToResourceInput, callback?: (err: AWSError, data: StorageGateway.Types.AddTagsToResourceOutput) => void): Request<StorageGateway.Types.AddTagsToResourceOutput, AWSError>;
   /**
-   * Adds one or more tags to the specified resource. You use tags to add metadata to resources, which you can use to categorize these resources. For example, you can categorize resources by purpose, owner, environment, or team. Each tag consists of a key and a value, which you define. You can add tags to the following AWS Storage Gateway resources:   Storage gateways of all types   Storage Volumes   Virtual Tapes   NFS and SMB File Shares   You can create a maximum of 10 tags for each resource. Virtual tapes and storage volumes that are recovered to a new gateway maintain their tags.
+   * Adds one or more tags to the specified resource. You use tags to add metadata to resources, which you can use to categorize these resources. For example, you can categorize resources by purpose, owner, environment, or team. Each tag consists of a key and a value, which you define. You can add tags to the following AWS Storage Gateway resources:   Storage gateways of all types   Storage volumes   Virtual tapes   NFS and SMB file shares   You can create a maximum of 10 tags for each resource. Virtual tapes and storage volumes that are recovered to a new gateway maintain their tags.
    */
   addTagsToResource(callback?: (err: AWSError, data: StorageGateway.Types.AddTagsToResourceOutput) => void): Request<StorageGateway.Types.AddTagsToResourceOutput, AWSError>;
   /**
@@ -611,7 +611,7 @@ declare namespace StorageGateway {
      */
     MediumChangerType?: MediumChangerType;
     /**
-     * A list of up to ten (10) tags assigned to the gateway may be specified. Every tag is a key-value pair.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256. 
+     * A list of up to 10 tags that can be assigned to the gateway. Each tag is a key-value pair.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256. 
      */
     Tags?: Tags;
   }
@@ -888,7 +888,7 @@ declare namespace StorageGateway {
      */
     ClientList?: FileShareClientList;
     /**
-     * Maps a user to anonymous user. Valid options are the following:     RootSquash - Only root is mapped to anonymous user.    NoSquash - No one is mapped to anonymous user    AllSquash - Everyone is mapped to anonymous user.  
+     * A value that maps a user to anonymous user. Valid options are the following:     RootSquash - Only root is mapped to anonymous user.    NoSquash - No one is mapped to anonymous user    AllSquash - Everyone is mapped to anonymous user.  
      */
     Squash?: Squash;
     /**
@@ -904,7 +904,7 @@ declare namespace StorageGateway {
      */
     RequesterPays?: Boolean;
     /**
-     * A list of up to ten (10) tags can be assigned to the NFS file share. Every tag is a key-value pair.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256. 
+     * A list of up to 10 tags that can be assigned to the NFS file share. Each tag is a key-value pair.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256. 
      */
     Tags?: Tags;
   }
@@ -972,7 +972,7 @@ declare namespace StorageGateway {
      */
     Authentication?: Authentication;
     /**
-     * A list of up to ten (10) tags can be assigned to the NFS file share. Every tag is a key-value pair.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256. 
+     * A list of up to 10 tags that can be assigned to the NFS file share. Each tag is a key-value pair.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256. 
      */
     Tags?: Tags;
   }
@@ -1092,6 +1092,10 @@ declare namespace StorageGateway {
      * The Amazon Resource Name (ARN) of the AWS KMS Key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
      */
     KMSKey?: KMSKey;
+    /**
+     * The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (Glacier or Deep Archive) that corresponds to the pool. Valid values: "GLACIER", "DEEP_ARCHIVE"
+     */
+    PoolId?: PoolId;
   }
   export interface CreateTapeWithBarcodeOutput {
     /**
@@ -1128,6 +1132,10 @@ declare namespace StorageGateway {
      * The Amazon Resource Name (ARN) of the AWS KMS key used for Amazon S3 server side encryption. This value can only be set when KMSEncrypted is true. Optional.
      */
     KMSKey?: KMSKey;
+    /**
+     * The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class you chose when you created the tape. When you use your backup application to eject the tape, the tape is archived directly into the storage class (Glacier or Deep Archive). Valid values: "GLACIER", "DEEP_ARCHIVE"
+     */
+    PoolId?: PoolId;
   }
   export interface CreateTapesOutput {
     /**
@@ -1347,7 +1355,7 @@ declare namespace StorageGateway {
      */
     LastSoftwareUpdate?: LastSoftwareUpdate;
     /**
-     * A list of up to ten (10) tags assigned to the gateway are returned, sorted alphabetically by key name. Every tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the ListTagsForResource API.
+     * A list of up to 10 tags assigned to the gateway, sorted alphabetically by key name. Each tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the ListTagsForResource API operation.
      */
     Tags?: Tags;
   }
@@ -1962,7 +1970,7 @@ declare namespace StorageGateway {
      */
     RequesterPays?: Boolean;
     /**
-     * A list of up to ten (10) tags assigned to the NFS file share are returned, sorted alphabetically by key name. Every tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the ListTagsForResource API.
+     * A list of up to 10 tags assigned to the NFS file share, sorted alphabetically by key name. Each tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the ListTagsForResource API operation.
      */
     Tags?: Tags;
   }
@@ -1997,6 +2005,7 @@ declare namespace StorageGateway {
   export type Path = string;
   export type PermissionId = number;
   export type PermissionMode = string;
+  export type PoolId = string;
   export type PositiveIntObject = number;
   export type RecurrenceInHours = number;
   export interface RefreshCacheInput {
@@ -2114,7 +2123,7 @@ declare namespace StorageGateway {
     InvalidUserList?: FileShareUserList;
     Authentication?: Authentication;
     /**
-     * A list of up to ten (10) tags assigned to the SMB file share are returned, sorted alphabetically by key name. Every tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the ListTagsForResource API.
+     * A list of up to 10 tags assigned to the SMB file share, sorted alphabetically by key name. Each tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the ListTagsForResource API operation.
      */
     Tags?: Tags;
   }
@@ -2267,6 +2276,10 @@ declare namespace StorageGateway {
      */
     TapeUsedInBytes?: TapeUsage;
     KMSKey?: KMSKey;
+    /**
+     * The ID of the pool that contains tapes that will be archived. The tapes in this pool are archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (Glacier or Deep Archive) that corresponds to the pool. Valid values: "GLACIER", "DEEP_ARCHIVE"
+     */
+    PoolId?: PoolId;
   }
   export type TapeARN = string;
   export type TapeARNs = TapeARN[];
@@ -2304,6 +2317,10 @@ declare namespace StorageGateway {
      */
     TapeUsedInBytes?: TapeUsage;
     KMSKey?: KMSKey;
+    /**
+     * The ID of the pool that was used to archive the tape. The tapes in this pool are archived in the S3 storage class that is associated with the pool. Valid values: "GLACIER", "DEEP_ARCHIVE"
+     */
+    PoolId?: PoolId;
   }
   export type TapeArchiveStatus = string;
   export type TapeArchives = TapeArchive[];
@@ -2331,6 +2348,10 @@ declare namespace StorageGateway {
      * The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a list of gateways for your account and region.
      */
     GatewayARN?: GatewayARN;
+    /**
+     * The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (Glacier or Deep Archive) that corresponds to the pool. Valid values: "GLACIER", "DEEP_ARCHIVE"
+     */
+    PoolId?: PoolId;
   }
   export type TapeInfos = TapeInfo[];
   export interface TapeRecoveryPointInfo {

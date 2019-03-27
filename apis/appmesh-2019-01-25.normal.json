@@ -11,7 +11,7 @@
     "signingName": "appmesh",
     "uid": "appmesh-2019-01-25"
   },
-  "documentation": "<p>AWS App Mesh is a service mesh based on the Envoy proxy that makes it easy to monitor and\n         control containerized microservices. App Mesh standardizes how your microservices\n         communicate, giving you end-to-end visibility and helping to ensure high-availability for\n         your applications.</p>\n         <p>App Mesh gives you consistent visibility and network traffic controls for every\n         microservice in an application. You can use App Mesh with Amazon ECS\n         (using the Amazon EC2 launch type), Amazon EKS, and Kubernetes on AWS.</p>\n         <note>\n            <p>App Mesh supports containerized microservice applications that use service discovery\n            naming for their components. To use App Mesh, you must have a containerized application\n            running on Amazon EC2 instances, hosted in either Amazon ECS, Amazon EKS, or Kubernetes on AWS. For\n            more information about service discovery on Amazon ECS, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service Discovery</a> in the\n               <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes <code>kube-dns</code> and\n               <code>coredns</code> are supported. For more information, see <a href=\"https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/\">DNS\n               for Services and Pods</a> in the Kubernetes documentation.</p>\n         </note>",
+  "documentation": "<p>AWS App Mesh is a service mesh based on the Envoy proxy that makes it easy to monitor and\n         control microservices. App Mesh standardizes how your microservices communicate, giving you\n         end-to-end visibility and helping to ensure high availability for your applications.</p>\n         <p>App Mesh gives you consistent visibility and network traffic controls for every\n         microservice in an application. You can use App Mesh with AWS Fargate, Amazon ECS, Amazon EKS, and\n         Kubernetes on AWS.</p>\n         <note>\n            <p>App Mesh supports microservice applications that use service discovery naming for their\n            components. To use App Mesh, you must have an application running on Amazon EC2 instances,\n            hosted in either Amazon ECS, Amazon EKS, or Kubernetes on AWS. For more information about\n            service discovery on Amazon ECS, see <a href=\"http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service\n               Discovery</a> in the <i>Amazon Elastic Container Service Developer Guide</i>. Kubernetes\n               <code>kube-dns</code> and <code>coredns</code> are supported. For more information,\n            see <a href=\"https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/\">DNS\n               for Services and Pods</a> in the Kubernetes documentation.</p>\n         </note>",
   "operations": {
     "CreateMesh": {
       "name": "CreateMesh",
@@ -52,7 +52,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a new service mesh. A service mesh is a logical boundary for network traffic\n         between the services that reside within it.</p>\n         <p>After you create your service mesh, you can create virtual services, virtual nodes,\n         virtual routers, and routes to distribute traffic between the applications in your\n         mesh.</p>",
+      "documentation": "<p>Creates a service mesh. A service mesh is a logical boundary for network traffic\n         between the services that reside within it.</p>\n         <p>After you create your service mesh, you can create virtual services, virtual nodes,\n         virtual routers, and routes to distribute traffic between the applications in your\n         mesh.</p>",
       "idempotent": true
     },
     "CreateRoute": {
@@ -94,7 +94,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a new route that is associated with a virtual router.</p>\n         <p>You can use the <code>prefix</code> parameter in your route specification for path-based\n         routing of requests. For example, if your virtual router service name is\n            <code>my-service.local</code>, and you want the route to match requests to\n            <code>my-service.local/metrics</code>, then your prefix should be\n         <code>/metrics</code>.</p>\n         <p>If your route matches a request, you can distribute traffic to one or more target\n         virtual nodes with relative weighting.</p>",
+      "documentation": "<p>Creates a route that is associated with a virtual router.</p>\n         <p>You can use the <code>prefix</code> parameter in your route specification for path-based\n         routing of requests. For example, if your virtual service name is\n            <code>my-service.local</code> and you want the route to match requests to\n            <code>my-service.local/metrics</code>, your prefix should be\n         <code>/metrics</code>.</p>\n         <p>If your route matches a request, you can distribute traffic to one or more target\n         virtual nodes with relative weighting.</p>",
       "idempotent": true
     },
     "CreateVirtualNode": {
@@ -136,7 +136,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a new virtual node within a service mesh.</p>\n         <p>A virtual node acts as logical pointer to a particular task group, such as an Amazon ECS\n         service or a Kubernetes deployment. When you create a virtual node, you must specify the\n         DNS service discovery hostname for your task group.</p>\n         <p>Any inbound traffic that your virtual node expects should be specified as a\n            <code>listener</code>. Any outbound traffic that your virtual node expects to reach\n         should be specified as a <code>backend</code>.</p>\n         <p>The response metadata for your new virtual node contains the <code>arn</code> that is\n         associated with the virtual node. Set this value (either the full ARN or the truncated\n         resource name, for example, <code>mesh/default/virtualNode/simpleapp</code>, as the\n            <code>APPMESH_VIRTUAL_NODE_NAME</code> environment variable for your task group's Envoy\n         proxy container in your task definition or pod spec. This is then mapped to the\n            <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p>\n         <note>\n            <p>If you require your Envoy stats or tracing to use a different name, you can override\n            the <code>node.cluster</code> value that is set by\n               <code>APPMESH_VIRTUAL_NODE_NAME</code> with the\n               <code>APPMESH_VIRTUAL_NODE_CLUSTER</code> environment variable.</p>\n         </note>",
+      "documentation": "<p>Creates a virtual node within a service mesh.</p>\n         <p>A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS\n         service or a Kubernetes deployment. When you create a virtual node, you must specify the\n         DNS service discovery hostname for your task group.</p>\n         <p>Any inbound traffic that your virtual node expects should be specified as a\n            <code>listener</code>. Any outbound traffic that your virtual node expects to reach\n         should be specified as a <code>backend</code>.</p>\n         <p>The response metadata for your new virtual node contains the <code>arn</code> that is\n         associated with the virtual node. Set this value (either the full ARN or the truncated\n         resource name: for example, <code>mesh/default/virtualNode/simpleapp</code>) as the\n            <code>APPMESH_VIRTUAL_NODE_NAME</code> environment variable for your task group's Envoy\n         proxy container in your task definition or pod spec. This is then mapped to the\n            <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p>\n         <note>\n            <p>If you require your Envoy stats or tracing to use a different name, you can override\n            the <code>node.cluster</code> value that is set by\n               <code>APPMESH_VIRTUAL_NODE_NAME</code> with the\n               <code>APPMESH_VIRTUAL_NODE_CLUSTER</code> environment variable.</p>\n         </note>",
       "idempotent": true
     },
     "CreateVirtualRouter": {
@@ -178,7 +178,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a new virtual router within a service mesh.</p>\n         <p>Any inbound traffic that your virtual router expects should be specified as a\n            <code>listener</code>. </p>\n         <p>Virtual routers handle traffic for one or more service names within your mesh. After you\n         create your virtual router, create and associate routes for your virtual router that direct\n         incoming requests to different virtual nodes.</p>",
+      "documentation": "<p>Creates a virtual router within a service mesh.</p>\n         <p>Any inbound traffic that your virtual router expects should be specified as a\n            <code>listener</code>. </p>\n         <p>Virtual routers handle traffic for one or more virtual services within your mesh. After\n         you create your virtual router, create and associate routes for your virtual router that\n         direct incoming requests to different virtual nodes.</p>",
       "idempotent": true
     },
     "CreateVirtualService": {
@@ -220,7 +220,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Creates a virtual service within a service mesh.</p>\n         <p>A virtual service is an abstraction of a real service that is either provided by a\n         virtual node directly, or indirectly by means of a virtual router. Dependent services call\n         your virtual service by its <code>virtualServiceName</code>, and those requests are routed\n         to the virtual node or virtual router that is specified as the provider for the virtual\n         service.</p>",
+      "documentation": "<p>Creates a virtual service within a service mesh.</p>\n         <p>A virtual service is an abstraction of a real service that is provided by a\n         virtual node directly or indirectly by means of a virtual router. Dependent services call\n         your virtual service by its <code>virtualServiceName</code>, and those requests are routed\n         to the virtual node or virtual router that is specified as the provider for the virtual\n         service.</p>",
       "idempotent": true
     },
     "DeleteMesh": {
@@ -259,7 +259,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Deletes an existing service mesh.</p>\n         <p>You must delete all resources (virtual services, routes, virtual routers, virtual nodes)\n         in the service mesh before you can delete the mesh itself.</p>",
+      "documentation": "<p>Deletes an existing service mesh.</p>\n         <p>You must delete all resources (virtual services, routes, virtual routers, and virtual nodes)\n         in the service mesh before you can delete the mesh itself.</p>",
       "idempotent": true
     },
     "DeleteRoute": {
@@ -660,6 +660,35 @@
       ],
       "documentation": "<p>Returns a list of existing routes in a service mesh.</p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v20190125/tags",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListTagsForResourceInput"
+      },
+      "output": {
+        "shape": "ListTagsForResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>List the tags for an App Mesh resource.</p>"
+    },
     "ListVirtualNodes": {
       "name": "ListVirtualNodes",
       "http": {
@@ -764,6 +793,108 @@
         }
       ],
       "documentation": "<p>Returns a list of existing virtual services in a service mesh.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v20190125/tag",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "TagResourceInput"
+      },
+      "output": {
+        "shape": "TagResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "TooManyTagsException"
+        }
+      ],
+      "documentation": "<p>Associates the specified tags to a resource with the specified\n         <code>resourceArn</code>. If existing tags on a resource aren't specified in the\n         request parameters, they aren't changed. When a resource is deleted, the tags\n         associated with that resource are also deleted.</p>",
+      "idempotent": true
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v20190125/untag",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UntagResourceInput"
+      },
+      "output": {
+        "shape": "UntagResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Deletes specified tags from a resource.</p>",
+      "idempotent": true
+    },
+    "UpdateMesh": {
+      "name": "UpdateMesh",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v20190125/meshes/{meshName}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateMeshInput"
+      },
+      "output": {
+        "shape": "UpdateMeshOutput"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Updates an existing service mesh.</p>",
+      "idempotent": true
     },
     "UpdateRoute": {
       "name": "UpdateRoute",
@@ -1009,13 +1140,17 @@
         },
         "meshName": {
           "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh in which to create the virtual service.</p>",
+          "documentation": "<p>The name of the service mesh to create the virtual service in.</p>",
           "location": "uri",
           "locationName": "meshName"
         },
         "spec": {
           "shape": "VirtualServiceSpec",
           "documentation": "<p>The virtual service specification to apply.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Optional metadata that you can apply to the virtual service to assist with categorization and organization.\n         Each tag consists of a key and an optional value, both of which you define.\n         Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>"
         },
         "virtualServiceName": {
           "shape": "ServiceName",
@@ -1064,6 +1199,41 @@
       },
       "documentation": ""
     },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "min": 0,
+      "max": 50
+    },
+    "ListTagsForResourceInput": {
+      "type": "structure",
+      "required": [
+        "resourceArn"
+      ],
+      "members": {
+        "limit": {
+          "shape": "TagsLimit",
+          "documentation": "<p>The maximum number of tag results returned by <code>ListTagsForResource</code> in\n         paginated output. When this parameter is used, <code>ListTagsForResource</code> returns only\n         <code>limit</code> results in a single page along with a <code>nextToken</code>\n         response element. You can see the remaining results of the initial request by sending\n         another <code>ListTagsForResource</code> request with the returned <code>nextToken</code>\n         value. This value can be between 1 and 100. If you don't use this\n         parameter, <code>ListTagsForResource</code> returns up to\n         100 results and a <code>nextToken</code> value if applicable.</p>",
+          "location": "querystring",
+          "locationName": "limit"
+        },
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n         <code>ListTagsForResource</code> request where <code>limit</code> was used and the\n         results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>nextToken</code> value.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "resourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource to list the tags for.</p>",
+          "location": "querystring",
+          "locationName": "resourceArn"
+        }
+      },
+      "documentation": ""
+    },
     "CreateVirtualNodeOutput": {
       "type": "structure",
       "required": [
@@ -1077,6 +1247,16 @@
       },
       "documentation": "",
       "payload": "virtualNode"
+    },
+    "Logging": {
+      "type": "structure",
+      "members": {
+        "accessLog": {
+          "shape": "AccessLog",
+          "documentation": "<p>The access log configuration for a virtual node.</p>"
+        }
+      },
+      "documentation": "<p>An object representing the logging information for a virtual node.</p>"
     },
     "Long": {
       "type": "long",
@@ -1204,7 +1384,7 @@
       "members": {
         "arn": {
           "shape": "Arn",
-          "documentation": "<p>The full Amazon Resource Name (ARN) for the resource.</p>\n         <note>\n            <p>After you create a virtual node, set this value (either the full ARN or the\n            truncated resource name, for example, <code>mesh/default/virtualNode/simpleapp</code>,\n            as the <code>APPMESH_VIRTUAL_NODE_NAME</code> environment variable for your task group's\n            Envoy proxy container in your task definition or pod spec. This is then mapped to the\n               <code>node.id</code> and <code>node.cluster</code> Envoy parameters.</p>\n            <p>If you require your Envoy stats or tracing to use a different name, you can override\n            the <code>node.cluster</code> value that is set by\n               <code>APPMESH_VIRTUAL_NODE_NAME</code> with the\n               <code>APPMESH_VIRTUAL_NODE_CLUSTER</code> environment variable.</p>\n         </note>"
+          "documentation": "<p>The full Amazon Resource Name (ARN) for the resource.</p>"
         },
         "createdAt": {
           "shape": "Timestamp",
@@ -1229,13 +1409,17 @@
       "type": "list",
       "member": {
         "shape": "Listener"
-      }
+      },
+      "min": 0,
+      "max": 1
     },
     "Backends": {
       "type": "list",
       "member": {
         "shape": "Backend"
-      }
+      },
+      "min": 0,
+      "max": 25
     },
     "PortProtocol": {
       "type": "string",
@@ -1355,6 +1539,11 @@
       "min": 0,
       "max": 100
     },
+    "TagValue": {
+      "type": "string",
+      "min": 0,
+      "max": 256
+    },
     "HttpRouteAction": {
       "type": "structure",
       "required": [
@@ -1383,7 +1572,7 @@
         },
         "meshName": {
           "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh in which to list routes.</p>",
+          "documentation": "<p>The name of the service mesh to list routes in.</p>",
           "location": "uri",
           "locationName": "meshName"
         },
@@ -1465,6 +1654,19 @@
         }
       },
       "documentation": "<p>An object representing a virtual service returned by a list operation.</p>"
+    },
+    "EgressFilter": {
+      "type": "structure",
+      "required": [
+        "type"
+      ],
+      "members": {
+        "type": {
+          "shape": "EgressFilterType",
+          "documentation": "<p>The egress filter type. By default, the type is <code>DROP_ALL</code>, which allows\n         egress only from virtual nodes to other defined resources in the service mesh (and any traffic\n         to <code>*.amazonaws.com</code> for AWS API calls). You can set the egress filter type to\n            <code>ALLOW_ALL</code> to allow egress to any endpoint inside or outside of the service\n         mesh.</p>"
+        }
+      },
+      "documentation": "<p>An object representing the egress filter rules for a service mesh.</p>"
     },
     "VirtualServiceList": {
       "type": "list",
@@ -1554,6 +1756,11 @@
       "documentation": "",
       "payload": "virtualService"
     },
+    "FilePath": {
+      "type": "string",
+      "min": 1,
+      "max": 255
+    },
     "VirtualNodeRef": {
       "type": "structure",
       "required": [
@@ -1591,6 +1798,14 @@
         "meshName": {
           "shape": "ResourceName",
           "documentation": "<p>The name to use for the service mesh.</p>"
+        },
+        "spec": {
+          "shape": "MeshSpec",
+          "documentation": "<p>The service mesh specification to apply.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Optional metadata that you can apply to the service mesh to assist with categorization and organization.\n         Each tag consists of a key and an optional value, both of which you define.\n         Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>"
         }
       },
       "documentation": ""
@@ -1608,6 +1823,19 @@
       },
       "documentation": "",
       "payload": "virtualNode"
+    },
+    "UpdateMeshOutput": {
+      "type": "structure",
+      "required": [
+        "mesh"
+      ],
+      "members": {
+        "mesh": {
+          "shape": "MeshData"
+        }
+      },
+      "documentation": "",
+      "payload": "mesh"
     },
     "CreateRouteOutput": {
       "type": "structure",
@@ -1726,6 +1954,11 @@
       },
       "documentation": "<p>An object representing a virtual node returned by a describe operation.</p>"
     },
+    "UntagResourceOutput": {
+      "type": "structure",
+      "members": {},
+      "documentation": ""
+    },
     "VirtualServiceSpec": {
       "type": "structure",
       "members": {
@@ -1775,7 +2008,7 @@
         },
         "nextToken": {
           "shape": "String",
-          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n         <code>ListMeshes</code> request where <code>limit</code> was used and the\n         results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>nextToken</code> value.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is only used to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n        </note>",
+          "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n         <code>ListMeshes</code> request where <code>limit</code> was used and the\n         results exceeded the value of that parameter. Pagination continues from the end of the\n         previous results that returned the <code>nextToken</code> value.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n        </note>",
           "location": "querystring",
           "locationName": "nextToken"
         }
@@ -1784,6 +2017,19 @@
     },
     "Arn": {
       "type": "string"
+    },
+    "TcpRoute": {
+      "type": "structure",
+      "required": [
+        "action"
+      ],
+      "members": {
+        "action": {
+          "shape": "TcpRouteAction",
+          "documentation": "<p>The action to take if a match is determined.</p>"
+        }
+      },
+      "documentation": "<p>An object representing the TCP routing specification for a route.</p>"
     },
     "VirtualNodeList": {
       "type": "list",
@@ -1799,7 +2045,7 @@
       "members": {
         "limit": {
           "shape": "ListVirtualRoutersLimit",
-          "documentation": "<p>The maximum number of results returned by <code>ListVirtualRouters</code> in paginated\n         output. When you use this parameter, <code>ListVirtualRouters</code> returns only\n            <code>limit</code> results in a single page along with a <code>nextToken</code> response\n         element. You can see the remaining results of the initial request  by sending another\n            <code>ListVirtualRouters</code> request with the returned <code>nextToken</code> value.\n         This value can be between 1 and 100. If you don't use this parameter, \n         <code>ListVirtualRouters</code> returns up to 100 results and\n         a <code>nextToken</code> value if applicable.</p>",
+          "documentation": "<p>The maximum number of results returned by <code>ListVirtualRouters</code> in paginated\n         output. When you use this parameter, <code>ListVirtualRouters</code> returns only\n            <code>limit</code> results in a single page along with a <code>nextToken</code> response\n         element. You can see the remaining results of the initial request by sending another\n            <code>ListVirtualRouters</code> request with the returned <code>nextToken</code> value.\n         This value can be between 1 and 100. If you don't use this parameter, \n         <code>ListVirtualRouters</code> returns up to 100 results and\n         a <code>nextToken</code> value if applicable.</p>",
           "location": "querystring",
           "locationName": "limit"
         },
@@ -1851,6 +2097,30 @@
       },
       "documentation": "<p>An object representing a virtual router returned by a describe operation.</p>"
     },
+    "UpdateMeshInput": {
+      "type": "structure",
+      "required": [
+        "meshName"
+      ],
+      "members": {
+        "clientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\nrequest. Up to 36 letters, numbers, hyphens, and underscores are allowed.</p>",
+          "idempotencyToken": true
+        },
+        "meshName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the service mesh to update.</p>",
+          "location": "uri",
+          "locationName": "meshName"
+        },
+        "spec": {
+          "shape": "MeshSpec",
+          "documentation": "<p>The service mesh specification to apply.</p>"
+        }
+      },
+      "documentation": ""
+    },
     "ListVirtualServicesInput": {
       "type": "structure",
       "required": [
@@ -1901,12 +2171,26 @@
           "shape": "VirtualRouterSpec",
           "documentation": "<p>The virtual router specification to apply.</p>"
         },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Optional metadata that you can apply to the virtual router to assist with categorization and organization.\n         Each tag consists of a key and an optional value, both of which you define.\n         Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>"
+        },
         "virtualRouterName": {
           "shape": "ResourceName",
           "documentation": "<p>The name to use for the virtual router.</p>"
         }
       },
       "documentation": ""
+    },
+    "AccessLog": {
+      "type": "structure",
+      "members": {
+        "file": {
+          "shape": "FileAccessLog",
+          "documentation": "<p>The file object to send virtual node access logs to.</p>"
+        }
+      },
+      "documentation": "<p>An object representing the access logging information for a virtual node.</p>"
     },
     "ListVirtualNodesInput": {
       "type": "structure",
@@ -2040,9 +2324,13 @@
           "shape": "Listeners",
           "documentation": "<p>The listeners that the virtual node is expected to receive inbound traffic from. Currently only one listener is supported per virtual node.</p>"
         },
+        "logging": {
+          "shape": "Logging",
+          "documentation": "<p>The inbound and outbound access logging information for the virtual node.</p>"
+        },
         "serviceDiscovery": {
           "shape": "ServiceDiscovery",
-          "documentation": "<p>The service discovery information for the virtual node.</p>"
+          "documentation": "<p>The service discovery information for the virtual node. If your virtual node does not\n         expect ingress traffic, you can omit this parameter.</p>"
         }
       },
       "documentation": "<p>An object representing the specification of a virtual node.</p>"
@@ -2068,7 +2356,9 @@
       "type": "list",
       "member": {
         "shape": "VirtualRouterListener"
-      }
+      },
+      "min": 1,
+      "max": 1
     },
     "DescribeRouteOutput": {
       "type": "structure",
@@ -2092,7 +2382,7 @@
       "members": {
         "prefix": {
           "shape": "String",
-          "documentation": "<p>Specifies the path to match requests with. This parameter must always start with\n            <code>/</code>, which by itself matches all requests to the virtual router service name.\n         You can also match for path-based routing of requests. For example, if your virtual router\n         service name is <code>my-service.local</code> and you want the route to match requests to\n            <code>my-service.local/metrics</code>, your prefix should be\n         <code>/metrics</code>.</p>"
+          "documentation": "<p>Specifies the path to match requests with. This parameter must always start with\n            <code>/</code>, which by itself matches all requests to the virtual service name. You\n         can also match for path-based routing of requests. For example, if your virtual service\n         name is <code>my-service.local</code> and you want the route to match requests to\n            <code>my-service.local/metrics</code>, your prefix should be\n         <code>/metrics</code>.</p>"
         }
       },
       "documentation": "<p>An object representing the requirements for a route to match HTTP requests for a virtual\n         router.</p>"
@@ -2102,6 +2392,23 @@
       "member": {
         "shape": "MeshRef"
       }
+    },
+    "TagRef": {
+      "type": "structure",
+      "required": [
+        "key"
+      ],
+      "members": {
+        "key": {
+          "shape": "TagKey",
+          "documentation": "<p>One part of a key-value pair that make up a tag. A <code>key</code> is a general label\n         that acts like a category for more specific tag values.</p>"
+        },
+        "value": {
+          "shape": "TagValue",
+          "documentation": "<p>The optional part of a key-value pair that make up a tag. A <code>value</code> acts as\n         a descriptor within a tag category (key).</p>"
+        }
+      },
+      "documentation": "<p>Optional metadata that you apply to a resource to assist with categorization and organization.\n         Each tag consists of a key and an optional value, both of which you define.\n         Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>"
     },
     "MeshRef": {
       "type": "structure",
@@ -2152,6 +2459,7 @@
       "required": [
         "meshName",
         "metadata",
+        "spec",
         "status"
       ],
       "members": {
@@ -2162,6 +2470,10 @@
         "metadata": {
           "shape": "ResourceMetadata",
           "documentation": "<p>The associated metadata for the service mesh.</p>"
+        },
+        "spec": {
+          "shape": "MeshSpec",
+          "documentation": "<p>The associated specification for the service mesh.</p>"
         },
         "status": {
           "shape": "MeshStatus",
@@ -2217,6 +2529,19 @@
         }
       },
       "documentation": "<p>An object representing a target and its relative weight. Traffic is distributed across\n         targets according to their relative weight. For example, a weighted target with a relative\n         weight of 50 receives five times as much traffic as one with a relative weight of\n         10.</p>"
+    },
+    "TcpRouteAction": {
+      "type": "structure",
+      "required": [
+        "weightedTargets"
+      ],
+      "members": {
+        "weightedTargets": {
+          "shape": "WeightedTargets",
+          "documentation": "<p>The targets that traffic is routed to when a request matches the route. You can specify\n         one or more targets and their relative weights to distribute traffic with.</p>"
+        }
+      },
+      "documentation": "<p>An object representing the traffic distribution requirements for matched TCP\n         requests.</p>"
     },
     "DescribeVirtualNodeInput": {
       "type": "structure",
@@ -2399,6 +2724,14 @@
       },
       "documentation": "<p>An object representing a virtual node service provider.</p>"
     },
+    "TagList": {
+      "type": "list",
+      "member": {
+        "shape": "TagRef"
+      },
+      "min": 0,
+      "max": 50
+    },
     "DescribeVirtualRouterInput": {
       "type": "structure",
       "required": [
@@ -2421,6 +2754,11 @@
       },
       "documentation": ""
     },
+    "TagResourceOutput": {
+      "type": "structure",
+      "members": {},
+      "documentation": ""
+    },
     "RouteList": {
       "type": "list",
       "member": {
@@ -2441,6 +2779,13 @@
       "documentation": "",
       "payload": "mesh"
     },
+    "EgressFilterType": {
+      "type": "string",
+      "enum": [
+        "ALLOW_ALL",
+        "DROP_ALL"
+      ]
+    },
     "Hostname": {
       "type": "string"
     },
@@ -2448,6 +2793,26 @@
       "type": "integer",
       "min": 1,
       "max": 65535
+    },
+    "TagResourceInput": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tags"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource to add tags to.</p>",
+          "location": "querystring",
+          "locationName": "resourceArn"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags to add to the resource. A tag is an array of key-value pairs.\n         Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>"
+        }
+      },
+      "documentation": ""
     },
     "CreateRouteInput": {
       "type": "structure",
@@ -2465,7 +2830,7 @@
         },
         "meshName": {
           "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh in which to create the route.</p>",
+          "documentation": "<p>The name of the service mesh to create the route in.</p>",
           "location": "uri",
           "locationName": "meshName"
         },
@@ -2476,6 +2841,10 @@
         "spec": {
           "shape": "RouteSpec",
           "documentation": "<p>The route specification to apply.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Optional metadata that you can apply to the route to assist with categorization and organization.\n         Each tag consists of a key and an optional value, both of which you define.\n         Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>"
         },
         "virtualRouterName": {
           "shape": "ResourceName",
@@ -2490,7 +2859,9 @@
       "type": "list",
       "member": {
         "shape": "WeightedTarget"
-      }
+      },
+      "min": 1,
+      "max": 10
     },
     "VirtualServiceProvider": {
       "type": "structure",
@@ -2587,13 +2958,17 @@
         },
         "meshName": {
           "shape": "ResourceName",
-          "documentation": "<p>The name of the service mesh in which to create the virtual node.</p>",
+          "documentation": "<p>The name of the service mesh to create the virtual node in.</p>",
           "location": "uri",
           "locationName": "meshName"
         },
         "spec": {
           "shape": "VirtualNodeSpec",
           "documentation": "<p>The virtual node specification to apply.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>Optional metadata that you can apply to the virtual node to assist with categorization and organization.\n         Each tag consists of a key and an optional value, both of which you define.\n         Tag keys can have a maximum character length of 128 characters, and tag values can have\n            a maximum length of 256 characters.</p>"
         },
         "virtualNodeName": {
           "shape": "ResourceName",
@@ -2608,6 +2983,10 @@
         "httpRoute": {
           "shape": "HttpRoute",
           "documentation": "<p>The HTTP routing information for the route.</p>"
+        },
+        "tcpRoute": {
+          "shape": "TcpRoute",
+          "documentation": "<p>The TCP routing information for the route.</p>"
         }
       },
       "documentation": "<p>An object representing the specification of a route.</p>"
@@ -2645,6 +3024,16 @@
       },
       "documentation": ""
     },
+    "MeshSpec": {
+      "type": "structure",
+      "members": {
+        "egressFilter": {
+          "shape": "EgressFilter",
+          "documentation": "<p>The egress filter rules for the service mesh.</p>"
+        }
+      },
+      "documentation": "<p>An object representing the specification of a service mesh.</p>"
+    },
     "CreateVirtualServiceOutput": {
       "type": "structure",
       "required": [
@@ -2658,6 +3047,19 @@
       },
       "documentation": "",
       "payload": "virtualService"
+    },
+    "FileAccessLog": {
+      "type": "structure",
+      "required": [
+        "path"
+      ],
+      "members": {
+        "path": {
+          "shape": "FilePath",
+          "documentation": "<p>The file path to write access logs to. You can use <code>/dev/stdout</code> to send\n         access logs to standard out and configure your Envoy container to use a log driver, such as\n            <code>awslogs</code>, to export the access logs to a log storage service such as Amazon CloudWatch\n         Logs. You can also specify a path in the Envoy container's file system to write the files\n         to disk.</p>\n         <note>\n            <p>The Envoy process must have write permissions to the path that you specify here.\n            Otherwise, Envoy fails to bootstrap properly.</p>\n         </note>"
+        }
+      },
+      "documentation": "<p>An object representing an access log file.</p>"
     },
     "VirtualRouterServiceProvider": {
       "type": "structure",
@@ -2694,6 +3096,23 @@
       },
       "documentation": ""
     },
+    "ListTagsForResourceOutput": {
+      "type": "structure",
+      "required": [
+        "tags"
+      ],
+      "members": {
+        "nextToken": {
+          "shape": "String",
+          "documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListTagsForResource</code>\n         request. When the results of a <code>ListTagsForResource</code> request exceed\n         <code>limit</code>, you can use this value to retrieve the next page of\n         results. This value is <code>null</code> when there are no more results to\n         return.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags for the resource.</p>"
+        }
+      },
+      "documentation": ""
+    },
     "ServiceDiscovery": {
       "type": "structure",
       "members": {
@@ -2721,6 +3140,26 @@
       },
       "documentation": ""
     },
+    "UntagResourceInput": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tagKeys"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource to delete tags from.</p>",
+          "location": "querystring",
+          "locationName": "resourceArn"
+        },
+        "tagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>The keys of the tags to be removed.</p>"
+        }
+      },
+      "documentation": ""
+    },
     "DeleteVirtualRouterOutput": {
       "type": "structure",
       "required": [
@@ -2734,6 +3173,17 @@
       },
       "documentation": "",
       "payload": "virtualRouter"
+    },
+    "TagsLimit": {
+      "type": "integer",
+      "box": true,
+      "min": 1,
+      "max": 50
+    },
+    "TagKey": {
+      "type": "string",
+      "min": 1,
+      "max": 128
     },
     "VirtualServiceStatusCode": {
       "type": "string",

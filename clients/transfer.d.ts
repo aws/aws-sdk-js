@@ -159,6 +159,8 @@ declare class Transfer extends Service {
 declare namespace Transfer {
   export type Arn = string;
   export interface CreateServerRequest {
+    EndpointDetails?: EndpointDetails;
+    EndpointType?: EndpointType;
     /**
      * An array containing all of the information required to call a customer-supplied authentication API. This parameter is not required when the IdentityProviderType value of server that is created uses the SERVICE_MANAGED authentication method.
      */
@@ -168,7 +170,7 @@ declare namespace Transfer {
      */
     IdentityProviderType?: IdentityProviderType;
     /**
-     * A value that allows the service to write your SFTP users’ activity to your Amazon CloudWatch logs for monitoring and auditing purposes.
+     * A value that allows the service to write your SFTP users' activity to your Amazon CloudWatch logs for monitoring and auditing purposes.
      */
     LoggingRole?: Role;
     /**
@@ -192,7 +194,7 @@ declare namespace Transfer {
      */
     Policy?: Policy;
     /**
-     * The IAM role that controls your user’s access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the SFTP server to access your resources when servicing your SFTP user’s transfer requests.
+     * The IAM role that controls your user's access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the SFTP server to access your resources when servicing your SFTP user's transfer requests.
      */
     Role: Role;
     /**
@@ -235,7 +237,7 @@ declare namespace Transfer {
      */
     ServerId: ServerId;
     /**
-     * A unique identifier used to reference your user’s specific SSH key.
+     * A unique identifier used to reference your user's specific SSH key.
      */
     SshPublicKeyId: SshPublicKeyId;
     /**
@@ -290,6 +292,8 @@ declare namespace Transfer {
      * Specifies the unique Amazon Resource Name (ARN) for the server to be described.
      */
     Arn: Arn;
+    EndpointDetails?: EndpointDetails;
+    EndpointType?: EndpointType;
     /**
      * Specifies information to call a customer-supplied authentication API. This field is not populated when the IdentityProviderType of the server is SERVICE_MANAGED&gt;.
      */
@@ -333,7 +337,7 @@ declare namespace Transfer {
      */
     Policy?: Policy;
     /**
-     * This property specifies the IAM role that controls your user’s access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the SFTP server to access your resources when servicing your SFTP user’s transfer requests.
+     * This property specifies the IAM role that controls your user's access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the SFTP server to access your resources when servicing your SFTP user's transfer requests.
      */
     Role?: Role;
     /**
@@ -349,6 +353,10 @@ declare namespace Transfer {
      */
     UserName?: UserName;
   }
+  export interface EndpointDetails {
+    VpcEndpointId?: VpcEndpointId;
+  }
+  export type EndpointType = "PUBLIC"|"VPC_ENDPOINT"|string;
   export type HomeDirectory = string;
   export interface IdentityProviderDetails {
     /**
@@ -474,6 +482,7 @@ declare namespace Transfer {
      * The authentication method used to validate a user for the server that was specified. listed. This can include Secure Shell (SSH), user name and password combinations, or your own custom authentication method. Valid values include SERVICE_MANAGED or API_GATEWAY.
      */
     IdentityProviderType?: IdentityProviderType;
+    EndpointType?: EndpointType;
     /**
      * The AWS Identity and Access Management entity that allows the server to turn on Amazon CloudWatch logging.
      */
@@ -617,6 +626,8 @@ declare namespace Transfer {
     TagKeys: TagKeys;
   }
   export interface UpdateServerRequest {
+    EndpointDetails?: EndpointDetails;
+    EndpointType?: EndpointType;
     /**
      * This response parameter is an array containing all of the information required to call a customer's authentication API method.
      */
@@ -646,7 +657,7 @@ declare namespace Transfer {
      */
     Policy?: Policy;
     /**
-     * The IAM role that controls your user’s access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the Secure File Transfer Protocol (SFTP) server to access your resources when servicing your SFTP user’s transfer requests.
+     * The IAM role that controls your user's access to your Amazon S3 bucket. The policies attached to this role will determine the level of access you want to provide your users when transferring files into and out of your Amazon S3 bucket or buckets. The IAM role should also contain a trust relationship that allows the Secure File Transfer Protocol (SFTP) server to access your resources when servicing your SFTP user's transfer requests.
      */
     Role?: Role;
     /**
@@ -672,6 +683,7 @@ declare namespace Transfer {
   export type UserCount = number;
   export type UserName = string;
   export type UserPassword = string;
+  export type VpcEndpointId = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

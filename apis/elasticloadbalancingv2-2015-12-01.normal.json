@@ -2059,8 +2059,38 @@
       "max": 120,
       "min": 2
     },
+    "HostHeaderConditionConfig": {
+      "type": "structure",
+      "members": {
+        "Values": {
+          "shape": "ListOfString"
+        }
+      }
+    },
     "HttpCode": {
       "type": "string"
+    },
+    "HttpHeaderConditionConfig": {
+      "type": "structure",
+      "members": {
+        "HttpHeaderName": {
+          "shape": "HttpHeaderConditionName"
+        },
+        "Values": {
+          "shape": "ListOfString"
+        }
+      }
+    },
+    "HttpHeaderConditionName": {
+      "type": "string"
+    },
+    "HttpRequestMethodConditionConfig": {
+      "type": "structure",
+      "members": {
+        "Values": {
+          "shape": "ListOfString"
+        }
+      }
     },
     "IpAddress": {
       "type": "string"
@@ -2526,6 +2556,14 @@
       "max": 1024,
       "min": 1
     },
+    "PathPatternConditionConfig": {
+      "type": "structure",
+      "members": {
+        "Values": {
+          "shape": "ListOfString"
+        }
+      }
+    },
     "Port": {
       "type": "integer",
       "max": 65535,
@@ -2539,6 +2577,31 @@
         "TCP",
         "TLS"
       ]
+    },
+    "QueryStringConditionConfig": {
+      "type": "structure",
+      "members": {
+        "Values": {
+          "shape": "QueryStringKeyValuePairList"
+        }
+      }
+    },
+    "QueryStringKeyValuePair": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "StringValue"
+        },
+        "Value": {
+          "shape": "StringValue"
+        }
+      }
+    },
+    "QueryStringKeyValuePairList": {
+      "type": "list",
+      "member": {
+        "shape": "QueryStringKeyValuePair"
+      }
     },
     "RedirectActionConfig": {
       "type": "structure",
@@ -2719,6 +2782,24 @@
         "Values": {
           "shape": "ListOfString",
           "documentation": "<p>The condition value.</p> <p>If the field name is <code>host-header</code>, you can specify a single host name (for example, my.example.com). A host name is case insensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>- .</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul> <p>If the field name is <code>path-pattern</code>, you can specify a single path pattern (for example, /img/*). A path pattern is case-sensitive, can be up to 128 characters in length, and can contain any of the following characters. You can include up to three wildcard characters.</p> <ul> <li> <p>A-Z, a-z, 0-9</p> </li> <li> <p>_ - . $ / ~ \" ' @ : +</p> </li> <li> <p>&amp; (using &amp;amp;)</p> </li> <li> <p>* (matches 0 or more characters)</p> </li> <li> <p>? (matches exactly 1 character)</p> </li> </ul>"
+        },
+        "HostHeaderConfig": {
+          "shape": "HostHeaderConditionConfig"
+        },
+        "PathPatternConfig": {
+          "shape": "PathPatternConditionConfig"
+        },
+        "HttpHeaderConfig": {
+          "shape": "HttpHeaderConditionConfig"
+        },
+        "QueryStringConfig": {
+          "shape": "QueryStringConditionConfig"
+        },
+        "HttpRequestMethodConfig": {
+          "shape": "HttpRequestMethodConditionConfig"
+        },
+        "SourceIpConfig": {
+          "shape": "SourceIpConditionConfig"
         }
       },
       "documentation": "<p>Information about a condition for a rule.</p>"
@@ -2868,6 +2949,14 @@
         "AvailabilityZones": {
           "shape": "AvailabilityZones",
           "documentation": "<p>Information about the subnet and Availability Zone.</p>"
+        }
+      }
+    },
+    "SourceIpConditionConfig": {
+      "type": "structure",
+      "members": {
+        "Values": {
+          "shape": "ListOfString"
         }
       }
     },
