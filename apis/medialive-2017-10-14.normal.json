@@ -6,10 +6,10 @@
     "serviceFullName": "AWS Elemental MediaLive",
     "serviceId": "MediaLive",
     "protocol": "rest-json",
-    "jsonVersion": "1.1",
     "uid": "medialive-2017-10-14",
     "signatureVersion": "v4",
-    "serviceAbbreviation": "MediaLive"
+    "serviceAbbreviation": "MediaLive",
+    "jsonVersion": "1.1"
   },
   "operations": {
     "BatchUpdateSchedule": {
@@ -1264,47 +1264,47 @@
   "shapes": {
     "AacCodingMode": {
       "type": "string",
+      "documentation": "Aac Coding Mode",
       "enum": [
         "AD_RECEIVER_MIX",
         "CODING_MODE_1_0",
         "CODING_MODE_1_1",
         "CODING_MODE_2_0",
         "CODING_MODE_5_1"
-      ],
-      "documentation": "Placeholder documentation for AacCodingMode"
+      ]
     },
     "AacInputType": {
       "type": "string",
+      "documentation": "Aac Input Type",
       "enum": [
         "BROADCASTER_MIXED_AD",
         "NORMAL"
-      ],
-      "documentation": "Placeholder documentation for AacInputType"
+      ]
     },
     "AacProfile": {
       "type": "string",
+      "documentation": "Aac Profile",
       "enum": [
         "HEV1",
         "HEV2",
         "LC"
-      ],
-      "documentation": "Placeholder documentation for AacProfile"
+      ]
     },
     "AacRateControlMode": {
       "type": "string",
+      "documentation": "Aac Rate Control Mode",
       "enum": [
         "CBR",
         "VBR"
-      ],
-      "documentation": "Placeholder documentation for AacRateControlMode"
+      ]
     },
     "AacRawFormat": {
       "type": "string",
+      "documentation": "Aac Raw Format",
       "enum": [
         "LATM_LOAS",
         "NONE"
-      ],
-      "documentation": "Placeholder documentation for AacRawFormat"
+      ]
     },
     "AacSettings": {
       "type": "structure",
@@ -1355,28 +1355,29 @@
           "documentation": "VBR Quality Level - Only used if rateControlMode is VBR."
         }
       },
-      "documentation": "Placeholder documentation for AacSettings"
+      "documentation": "Aac Settings"
     },
     "AacSpec": {
       "type": "string",
+      "documentation": "Aac Spec",
       "enum": [
         "MPEG2",
         "MPEG4"
-      ],
-      "documentation": "Placeholder documentation for AacSpec"
+      ]
     },
     "AacVbrQuality": {
       "type": "string",
+      "documentation": "Aac Vbr Quality",
       "enum": [
         "HIGH",
         "LOW",
         "MEDIUM_HIGH",
         "MEDIUM_LOW"
-      ],
-      "documentation": "Placeholder documentation for AacVbrQuality"
+      ]
     },
     "Ac3BitstreamMode": {
       "type": "string",
+      "documentation": "Ac3 Bitstream Mode",
       "enum": [
         "COMMENTARY",
         "COMPLETE_MAIN",
@@ -1386,42 +1387,41 @@
         "MUSIC_AND_EFFECTS",
         "VISUALLY_IMPAIRED",
         "VOICE_OVER"
-      ],
-      "documentation": "Placeholder documentation for Ac3BitstreamMode"
+      ]
     },
     "Ac3CodingMode": {
       "type": "string",
+      "documentation": "Ac3 Coding Mode",
       "enum": [
         "CODING_MODE_1_0",
         "CODING_MODE_1_1",
         "CODING_MODE_2_0",
         "CODING_MODE_3_2_LFE"
-      ],
-      "documentation": "Placeholder documentation for Ac3CodingMode"
+      ]
     },
     "Ac3DrcProfile": {
       "type": "string",
+      "documentation": "Ac3 Drc Profile",
       "enum": [
         "FILM_STANDARD",
         "NONE"
-      ],
-      "documentation": "Placeholder documentation for Ac3DrcProfile"
+      ]
     },
     "Ac3LfeFilter": {
       "type": "string",
+      "documentation": "Ac3 Lfe Filter",
       "enum": [
         "DISABLED",
         "ENABLED"
-      ],
-      "documentation": "Placeholder documentation for Ac3LfeFilter"
+      ]
     },
     "Ac3MetadataControl": {
       "type": "string",
+      "documentation": "Ac3 Metadata Control",
       "enum": [
         "FOLLOW_INPUT",
         "USE_CONFIGURED"
-      ],
-      "documentation": "Placeholder documentation for Ac3MetadataControl"
+      ]
     },
     "Ac3Settings": {
       "type": "structure",
@@ -1462,16 +1462,16 @@
           "documentation": "When set to \"followInput\", encoder metadata will be sourced from the DD, DD+, or DolbyE decoder that supplied this audio data. If audio was not supplied from one of these streams, then the static metadata settings will be used."
         }
       },
-      "documentation": "Placeholder documentation for Ac3Settings"
+      "documentation": "Ac3 Settings"
     },
     "AfdSignaling": {
       "type": "string",
+      "documentation": "Afd Signaling",
       "enum": [
         "AUTO",
         "FIXED",
         "NONE"
-      ],
-      "documentation": "Placeholder documentation for AfdSignaling"
+      ]
     },
     "ArchiveContainerSettings": {
       "type": "structure",
@@ -1481,7 +1481,7 @@
           "locationName": "m2tsSettings"
         }
       },
-      "documentation": "Placeholder documentation for ArchiveContainerSettings"
+      "documentation": "Archive Container Settings"
     },
     "ArchiveGroupSettings": {
       "type": "structure",
@@ -1497,10 +1497,10 @@
           "documentation": "Number of seconds to write to archive file before closing and starting a new one."
         }
       },
+      "documentation": "Archive Group Settings",
       "required": [
         "Destination"
-      ],
-      "documentation": "Placeholder documentation for ArchiveGroupSettings"
+      ]
     },
     "ArchiveOutputSettings": {
       "type": "structure",
@@ -1521,20 +1521,20 @@
           "documentation": "String concatenated to the end of the destination filename.  Required for multiple outputs of the same type."
         }
       },
+      "documentation": "Archive Output Settings",
       "required": [
         "ContainerSettings"
-      ],
-      "documentation": "Placeholder documentation for ArchiveOutputSettings"
+      ]
     },
     "AribDestinationSettings": {
       "type": "structure",
       "members": {},
-      "documentation": "Placeholder documentation for AribDestinationSettings"
+      "documentation": "Arib Destination Settings"
     },
     "AribSourceSettings": {
       "type": "structure",
       "members": {},
-      "documentation": "Placeholder documentation for AribSourceSettings"
+      "documentation": "Arib Source Settings"
     },
     "AudioChannelMapping": {
       "type": "structure",
@@ -1550,11 +1550,11 @@
           "documentation": "The index of the output channel being produced."
         }
       },
+      "documentation": "Audio Channel Mapping",
       "required": [
         "OutputChannel",
         "InputChannelLevels"
-      ],
-      "documentation": "Placeholder documentation for AudioChannelMapping"
+      ]
     },
     "AudioCodecSettings": {
       "type": "structure",
@@ -1580,7 +1580,7 @@
           "locationName": "passThroughSettings"
         }
       },
-      "documentation": "Placeholder documentation for AudioCodecSettings"
+      "documentation": "Audio Codec Settings"
     },
     "AudioDescription": {
       "type": "structure",
@@ -1636,27 +1636,27 @@
           "documentation": "Used for MS Smooth and Apple HLS outputs. Indicates the name displayed by the player (eg. English, or Director Commentary)."
         }
       },
+      "documentation": "Audio Description",
       "required": [
         "AudioSelectorName",
         "Name"
-      ],
-      "documentation": "Placeholder documentation for AudioDescription"
+      ]
     },
     "AudioDescriptionAudioTypeControl": {
       "type": "string",
+      "documentation": "Audio Description Audio Type Control",
       "enum": [
         "FOLLOW_INPUT",
         "USE_CONFIGURED"
-      ],
-      "documentation": "Placeholder documentation for AudioDescriptionAudioTypeControl"
+      ]
     },
     "AudioDescriptionLanguageCodeControl": {
       "type": "string",
+      "documentation": "Audio Description Language Code Control",
       "enum": [
         "FOLLOW_INPUT",
         "USE_CONFIGURED"
-      ],
-      "documentation": "Placeholder documentation for AudioDescriptionLanguageCodeControl"
+      ]
     },
     "AudioLanguageSelection": {
       "type": "structure",
@@ -1672,33 +1672,33 @@
           "documentation": "When set to \"strict\", the transport stream demux strictly identifies audio streams by their language descriptor. If a PMT update occurs such that an audio stream matching the initially selected language is no longer present then mute will be encoded until the language returns. If \"loose\", then on a PMT update the demux will choose another audio stream in the program with the same stream type if it can't find one with the same language."
         }
       },
+      "documentation": "Audio Language Selection",
       "required": [
         "LanguageCode"
-      ],
-      "documentation": "Placeholder documentation for AudioLanguageSelection"
+      ]
     },
     "AudioLanguageSelectionPolicy": {
       "type": "string",
+      "documentation": "Audio Language Selection Policy",
       "enum": [
         "LOOSE",
         "STRICT"
-      ],
-      "documentation": "Placeholder documentation for AudioLanguageSelectionPolicy"
+      ]
     },
     "AudioNormalizationAlgorithm": {
       "type": "string",
+      "documentation": "Audio Normalization Algorithm",
       "enum": [
         "ITU_1770_1",
         "ITU_1770_2"
-      ],
-      "documentation": "Placeholder documentation for AudioNormalizationAlgorithm"
+      ]
     },
     "AudioNormalizationAlgorithmControl": {
       "type": "string",
+      "documentation": "Audio Normalization Algorithm Control",
       "enum": [
         "CORRECT_AUDIO"
-      ],
-      "documentation": "Placeholder documentation for AudioNormalizationAlgorithmControl"
+      ]
     },
     "AudioNormalizationSettings": {
       "type": "structure",
@@ -1719,7 +1719,7 @@
           "documentation": "Target LKFS(loudness) to adjust volume to. If no value is entered, a default value will be used according to the chosen algorithm.  The CALM Act (1770-1) recommends a target of -24 LKFS. The EBU R-128 specification (1770-2) recommends a target of -23 LKFS."
         }
       },
-      "documentation": "Placeholder documentation for AudioNormalizationSettings"
+      "documentation": "Audio Normalization Settings"
     },
     "AudioOnlyHlsSettings": {
       "type": "structure",
@@ -1740,17 +1740,17 @@
           "documentation": "Four types of audio-only tracks are supported:\n\nAudio-Only Variant Stream\nThe client can play back this audio-only stream instead of video in low-bandwidth scenarios. Represented as an EXT-X-STREAM-INF in the HLS manifest.\n\nAlternate Audio, Auto Select, Default\nAlternate rendition that the client should try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=YES, AUTOSELECT=YES\n\nAlternate Audio, Auto Select, Not Default\nAlternate rendition that the client may try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=YES\n\nAlternate Audio, not Auto Select\nAlternate rendition that the client will not try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=NO"
         }
       },
-      "documentation": "Placeholder documentation for AudioOnlyHlsSettings"
+      "documentation": "Audio Only Hls Settings"
     },
     "AudioOnlyHlsTrackType": {
       "type": "string",
+      "documentation": "Audio Only Hls Track Type",
       "enum": [
         "ALTERNATE_AUDIO_AUTO_SELECT",
         "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT",
         "ALTERNATE_AUDIO_NOT_AUTO_SELECT",
         "AUDIO_ONLY_VARIANT_STREAM"
-      ],
-      "documentation": "Placeholder documentation for AudioOnlyHlsTrackType"
+      ]
     },
     "AudioPidSelection": {
       "type": "structure",
@@ -1761,10 +1761,10 @@
           "documentation": "Selects a specific PID from within a source."
         }
       },
+      "documentation": "Audio Pid Selection",
       "required": [
         "Pid"
-      ],
-      "documentation": "Placeholder documentation for AudioPidSelection"
+      ]
     },
     "AudioSelector": {
       "type": "structure",
@@ -1780,10 +1780,10 @@
           "documentation": "The audio selector settings."
         }
       },
+      "documentation": "Audio Selector",
       "required": [
         "Name"
-      ],
-      "documentation": "Placeholder documentation for AudioSelector"
+      ]
     },
     "AudioSelectorSettings": {
       "type": "structure",
@@ -1797,25 +1797,25 @@
           "locationName": "audioPidSelection"
         }
       },
-      "documentation": "Placeholder documentation for AudioSelectorSettings"
+      "documentation": "Audio Selector Settings"
     },
     "AudioType": {
       "type": "string",
+      "documentation": "Audio Type",
       "enum": [
         "CLEAN_EFFECTS",
         "HEARING_IMPAIRED",
         "UNDEFINED",
         "VISUAL_IMPAIRED_COMMENTARY"
-      ],
-      "documentation": "Placeholder documentation for AudioType"
+      ]
     },
     "AuthenticationScheme": {
       "type": "string",
+      "documentation": "Authentication Scheme",
       "enum": [
         "AKAMAI",
         "COMMON"
-      ],
-      "documentation": "Placeholder documentation for AuthenticationScheme"
+      ]
     },
     "AvailBlanking": {
       "type": "structure",
@@ -1831,15 +1831,15 @@
           "documentation": "When set to enabled, causes video, audio and captions to be blanked when insertion metadata is added."
         }
       },
-      "documentation": "Placeholder documentation for AvailBlanking"
+      "documentation": "Avail Blanking"
     },
     "AvailBlankingState": {
       "type": "string",
+      "documentation": "Avail Blanking State",
       "enum": [
         "DISABLED",
         "ENABLED"
-      ],
-      "documentation": "Placeholder documentation for AvailBlankingState"
+      ]
     },
     "AvailConfiguration": {
       "type": "structure",
@@ -1850,7 +1850,7 @@
           "documentation": "Ad avail settings."
         }
       },
-      "documentation": "Placeholder documentation for AvailConfiguration"
+      "documentation": "Avail Configuration"
     },
     "AvailSettings": {
       "type": "structure",
@@ -1864,7 +1864,7 @@
           "locationName": "scte35TimeSignalApos"
         }
       },
-      "documentation": "Placeholder documentation for AvailSettings"
+      "documentation": "Avail Settings"
     },
     "BatchScheduleActionCreateRequest": {
       "type": "structure",
@@ -1992,41 +1992,41 @@
           "documentation": "When set to enabled, causes video, audio and captions to be blanked when indicated by program metadata."
         }
       },
-      "documentation": "Placeholder documentation for BlackoutSlate"
+      "documentation": "Blackout Slate"
     },
     "BlackoutSlateNetworkEndBlackout": {
       "type": "string",
+      "documentation": "Blackout Slate Network End Blackout",
       "enum": [
         "DISABLED",
         "ENABLED"
-      ],
-      "documentation": "Placeholder documentation for BlackoutSlateNetworkEndBlackout"
+      ]
     },
     "BlackoutSlateState": {
       "type": "string",
+      "documentation": "Blackout Slate State",
       "enum": [
         "DISABLED",
         "ENABLED"
-      ],
-      "documentation": "Placeholder documentation for BlackoutSlateState"
+      ]
     },
     "BurnInAlignment": {
       "type": "string",
+      "documentation": "Burn In Alignment",
       "enum": [
         "CENTERED",
         "LEFT",
         "SMART"
-      ],
-      "documentation": "Placeholder documentation for BurnInAlignment"
+      ]
     },
     "BurnInBackgroundColor": {
       "type": "string",
+      "documentation": "Burn In Background Color",
       "enum": [
         "BLACK",
         "NONE",
         "WHITE"
-      ],
-      "documentation": "Placeholder documentation for BurnInBackgroundColor"
+      ]
     },
     "BurnInDestinationSettings": {
       "type": "structure",
@@ -2117,10 +2117,11 @@
           "documentation": "Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit yPosition is provided, the caption will be positioned towards the bottom of the output.  All burn-in and DVB-Sub font settings must match."
         }
       },
-      "documentation": "Placeholder documentation for BurnInDestinationSettings"
+      "documentation": "Burn In Destination Settings"
     },
     "BurnInFontColor": {
       "type": "string",
+      "documentation": "Burn In Font Color",
       "enum": [
         "BLACK",
         "BLUE",
@@ -2128,11 +2129,11 @@
         "RED",
         "WHITE",
         "YELLOW"
-      ],
-      "documentation": "Placeholder documentation for BurnInFontColor"
+      ]
     },
     "BurnInOutlineColor": {
       "type": "string",
+      "documentation": "Burn In Outline Color",
       "enum": [
         "BLACK",
         "BLUE",
@@ -2140,25 +2141,24 @@
         "RED",
         "WHITE",
         "YELLOW"
-      ],
-      "documentation": "Placeholder documentation for BurnInOutlineColor"
+      ]
     },
     "BurnInShadowColor": {
       "type": "string",
+      "documentation": "Burn In Shadow Color",
       "enum": [
         "BLACK",
         "NONE",
         "WHITE"
-      ],
-      "documentation": "Placeholder documentation for BurnInShadowColor"
+      ]
     },
     "BurnInTeletextGridControl": {
       "type": "string",
+      "documentation": "Burn In Teletext Grid Control",
       "enum": [
         "FIXED",
         "SCALED"
-      ],
-      "documentation": "Placeholder documentation for BurnInTeletextGridControl"
+      ]
     },
     "CaptionDescription": {
       "type": "structure",
@@ -2247,7 +2247,7 @@
           "locationName": "webvttDestinationSettings"
         }
       },
-      "documentation": "Placeholder documentation for CaptionDestinationSettings"
+      "documentation": "Caption Destination Settings"
     },
     "CaptionLanguageMapping": {
       "type": "structure",
@@ -2327,7 +2327,7 @@
           "locationName": "teletextSourceSettings"
         }
       },
-      "documentation": "Placeholder documentation for CaptionSelectorSettings"
+      "documentation": "Caption Selector Settings"
     },
     "Channel": {
       "type": "structure",
@@ -3375,13 +3375,13 @@
     },
     "DvbSdtOutputSdt": {
       "type": "string",
+      "documentation": "Dvb Sdt Output Sdt",
       "enum": [
         "SDT_FOLLOW",
         "SDT_FOLLOW_IF_PRESENT",
         "SDT_MANUAL",
         "SDT_NONE"
-      ],
-      "documentation": "Placeholder documentation for DvbSdtOutputSdt"
+      ]
     },
     "DvbSdtSettings": {
       "type": "structure",
@@ -3411,24 +3411,25 @@
     },
     "DvbSubDestinationAlignment": {
       "type": "string",
+      "documentation": "Dvb Sub Destination Alignment",
       "enum": [
         "CENTERED",
         "LEFT",
         "SMART"
-      ],
-      "documentation": "Placeholder documentation for DvbSubDestinationAlignment"
+      ]
     },
     "DvbSubDestinationBackgroundColor": {
       "type": "string",
+      "documentation": "Dvb Sub Destination Background Color",
       "enum": [
         "BLACK",
         "NONE",
         "WHITE"
-      ],
-      "documentation": "Placeholder documentation for DvbSubDestinationBackgroundColor"
+      ]
     },
     "DvbSubDestinationFontColor": {
       "type": "string",
+      "documentation": "Dvb Sub Destination Font Color",
       "enum": [
         "BLACK",
         "BLUE",
@@ -3436,11 +3437,11 @@
         "RED",
         "WHITE",
         "YELLOW"
-      ],
-      "documentation": "Placeholder documentation for DvbSubDestinationFontColor"
+      ]
     },
     "DvbSubDestinationOutlineColor": {
       "type": "string",
+      "documentation": "Dvb Sub Destination Outline Color",
       "enum": [
         "BLACK",
         "BLUE",
@@ -3448,8 +3449,7 @@
         "RED",
         "WHITE",
         "YELLOW"
-      ],
-      "documentation": "Placeholder documentation for DvbSubDestinationOutlineColor"
+      ]
     },
     "DvbSubDestinationSettings": {
       "type": "structure",
@@ -3540,24 +3540,24 @@
           "documentation": "Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit yPosition is provided, the caption will be positioned towards the bottom of the output.  This option is not valid for source captions that are STL, 608/embedded or teletext.  These source settings are already pre-defined by the caption stream.  All burn-in and DVB-Sub font settings must match."
         }
       },
-      "documentation": "Placeholder documentation for DvbSubDestinationSettings"
+      "documentation": "Dvb Sub Destination Settings"
     },
     "DvbSubDestinationShadowColor": {
       "type": "string",
+      "documentation": "Dvb Sub Destination Shadow Color",
       "enum": [
         "BLACK",
         "NONE",
         "WHITE"
-      ],
-      "documentation": "Placeholder documentation for DvbSubDestinationShadowColor"
+      ]
     },
     "DvbSubDestinationTeletextGridControl": {
       "type": "string",
+      "documentation": "Dvb Sub Destination Teletext Grid Control",
       "enum": [
         "FIXED",
         "SCALED"
-      ],
-      "documentation": "Placeholder documentation for DvbSubDestinationTeletextGridControl"
+      ]
     },
     "DvbSubSourceSettings": {
       "type": "structure",
@@ -3568,7 +3568,7 @@
           "documentation": "When using DVB-Sub with Burn-In or SMPTE-TT, use this PID for the source content. Unused for DVB-Sub passthrough. All DVB-Sub content is passed through, regardless of selectors."
         }
       },
-      "documentation": "Placeholder documentation for DvbSubSourceSettings"
+      "documentation": "Dvb Sub Source Settings"
     },
     "DvbTdtSettings": {
       "type": "structure",
@@ -3583,42 +3583,43 @@
     },
     "Eac3AttenuationControl": {
       "type": "string",
+      "documentation": "Eac3 Attenuation Control",
       "enum": [
         "ATTENUATE_3_DB",
         "NONE"
-      ],
-      "documentation": "Placeholder documentation for Eac3AttenuationControl"
+      ]
     },
     "Eac3BitstreamMode": {
       "type": "string",
+      "documentation": "Eac3 Bitstream Mode",
       "enum": [
         "COMMENTARY",
         "COMPLETE_MAIN",
         "EMERGENCY",
         "HEARING_IMPAIRED",
         "VISUALLY_IMPAIRED"
-      ],
-      "documentation": "Placeholder documentation for Eac3BitstreamMode"
+      ]
     },
     "Eac3CodingMode": {
       "type": "string",
+      "documentation": "Eac3 Coding Mode",
       "enum": [
         "CODING_MODE_1_0",
         "CODING_MODE_2_0",
         "CODING_MODE_3_2"
-      ],
-      "documentation": "Placeholder documentation for Eac3CodingMode"
+      ]
     },
     "Eac3DcFilter": {
       "type": "string",
+      "documentation": "Eac3 Dc Filter",
       "enum": [
         "DISABLED",
         "ENABLED"
-      ],
-      "documentation": "Placeholder documentation for Eac3DcFilter"
+      ]
     },
     "Eac3DrcLine": {
       "type": "string",
+      "documentation": "Eac3 Drc Line",
       "enum": [
         "FILM_LIGHT",
         "FILM_STANDARD",
@@ -3626,11 +3627,11 @@
         "MUSIC_STANDARD",
         "NONE",
         "SPEECH"
-      ],
-      "documentation": "Placeholder documentation for Eac3DrcLine"
+      ]
     },
     "Eac3DrcRf": {
       "type": "string",
+      "documentation": "Eac3 Drc Rf",
       "enum": [
         "FILM_LIGHT",
         "FILM_STANDARD",
@@ -3638,48 +3639,47 @@
         "MUSIC_STANDARD",
         "NONE",
         "SPEECH"
-      ],
-      "documentation": "Placeholder documentation for Eac3DrcRf"
+      ]
     },
     "Eac3LfeControl": {
       "type": "string",
+      "documentation": "Eac3 Lfe Control",
       "enum": [
         "LFE",
         "NO_LFE"
-      ],
-      "documentation": "Placeholder documentation for Eac3LfeControl"
+      ]
     },
     "Eac3LfeFilter": {
       "type": "string",
+      "documentation": "Eac3 Lfe Filter",
       "enum": [
         "DISABLED",
         "ENABLED"
-      ],
-      "documentation": "Placeholder documentation for Eac3LfeFilter"
+      ]
     },
     "Eac3MetadataControl": {
       "type": "string",
+      "documentation": "Eac3 Metadata Control",
       "enum": [
         "FOLLOW_INPUT",
         "USE_CONFIGURED"
-      ],
-      "documentation": "Placeholder documentation for Eac3MetadataControl"
+      ]
     },
     "Eac3PassthroughControl": {
       "type": "string",
+      "documentation": "Eac3 Passthrough Control",
       "enum": [
         "NO_PASSTHROUGH",
         "WHEN_POSSIBLE"
-      ],
-      "documentation": "Placeholder documentation for Eac3PassthroughControl"
+      ]
     },
     "Eac3PhaseControl": {
       "type": "string",
+      "documentation": "Eac3 Phase Control",
       "enum": [
         "NO_SHIFT",
         "SHIFT_90_DEGREES"
-      ],
-      "documentation": "Placeholder documentation for Eac3PhaseControl"
+      ]
     },
     "Eac3Settings": {
       "type": "structure",
@@ -3785,61 +3785,61 @@
           "documentation": "When encoding 2/0 audio, sets whether Dolby Surround is matrix encoded into the two channels."
         }
       },
-      "documentation": "Placeholder documentation for Eac3Settings"
+      "documentation": "Eac3 Settings"
     },
     "Eac3StereoDownmix": {
       "type": "string",
+      "documentation": "Eac3 Stereo Downmix",
       "enum": [
         "DPL2",
         "LO_RO",
         "LT_RT",
         "NOT_INDICATED"
-      ],
-      "documentation": "Placeholder documentation for Eac3StereoDownmix"
+      ]
     },
     "Eac3SurroundExMode": {
       "type": "string",
+      "documentation": "Eac3 Surround Ex Mode",
       "enum": [
         "DISABLED",
         "ENABLED",
         "NOT_INDICATED"
-      ],
-      "documentation": "Placeholder documentation for Eac3SurroundExMode"
+      ]
     },
     "Eac3SurroundMode": {
       "type": "string",
+      "documentation": "Eac3 Surround Mode",
       "enum": [
         "DISABLED",
         "ENABLED",
         "NOT_INDICATED"
-      ],
-      "documentation": "Placeholder documentation for Eac3SurroundMode"
+      ]
     },
     "EmbeddedConvert608To708": {
       "type": "string",
+      "documentation": "Embedded Convert608 To708",
       "enum": [
         "DISABLED",
         "UPCONVERT"
-      ],
-      "documentation": "Placeholder documentation for EmbeddedConvert608To708"
+      ]
     },
     "EmbeddedDestinationSettings": {
       "type": "structure",
       "members": {},
-      "documentation": "Placeholder documentation for EmbeddedDestinationSettings"
+      "documentation": "Embedded Destination Settings"
     },
     "EmbeddedPlusScte20DestinationSettings": {
       "type": "structure",
       "members": {},
-      "documentation": "Placeholder documentation for EmbeddedPlusScte20DestinationSettings"
+      "documentation": "Embedded Plus Scte20 Destination Settings"
     },
     "EmbeddedScte20Detection": {
       "type": "string",
+      "documentation": "Embedded Scte20 Detection",
       "enum": [
         "AUTO",
         "OFF"
-      ],
-      "documentation": "Placeholder documentation for EmbeddedScte20Detection"
+      ]
     },
     "EmbeddedSourceSettings": {
       "type": "structure",
@@ -3865,7 +3865,7 @@
           "documentation": "This field is unused and deprecated."
         }
       },
-      "documentation": "Placeholder documentation for EmbeddedSourceSettings"
+      "documentation": "Embedded Source Settings"
     },
     "EncoderSettings": {
       "type": "structure",
@@ -3913,21 +3913,21 @@
           "locationName": "videoDescriptions"
         }
       },
+      "documentation": "Encoder Settings",
       "required": [
         "VideoDescriptions",
         "AudioDescriptions",
         "OutputGroups",
         "TimecodeConfig"
-      ],
-      "documentation": "Placeholder documentation for EncoderSettings"
+      ]
     },
     "FecOutputIncludeFec": {
       "type": "string",
+      "documentation": "Fec Output Include Fec",
       "enum": [
         "COLUMN",
         "COLUMN_AND_ROW"
-      ],
-      "documentation": "Placeholder documentation for FecOutputIncludeFec"
+      ]
     },
     "FecOutputSettings": {
       "type": "structure",
@@ -3948,10 +3948,11 @@
           "documentation": "Parameter L from SMPTE 2022-1. The width of the FEC protection matrix.  Must be between 1 and 20, inclusive. If only Column FEC is used, then larger values increase robustness.  If Row FEC is used, then this is the number of transport stream packets per row error correction packet, and the value must be between 4 and 20, inclusive, if includeFec is columnAndRow. If includeFec is column, this value must be 1 to 20, inclusive."
         }
       },
-      "documentation": "Placeholder documentation for FecOutputSettings"
+      "documentation": "Fec Output Settings"
     },
     "FixedAfd": {
       "type": "string",
+      "documentation": "Fixed Afd",
       "enum": [
         "AFD_0000",
         "AFD_0010",
@@ -3964,8 +3965,7 @@
         "AFD_1101",
         "AFD_1110",
         "AFD_1111"
-      ],
-      "documentation": "Placeholder documentation for FixedAfd"
+      ]
     },
     "FixedModeScheduleActionStartSettings": {
       "type": "structure",
@@ -4066,6 +4066,11 @@
           "locationName": "inputLossBehavior",
           "documentation": "Settings for system actions when input is lost."
         },
+        "OutputLockingMode": {
+          "shape": "GlobalConfigurationOutputLockingMode",
+          "locationName": "outputLockingMode",
+          "documentation": "Indicates how MediaLive pipelines are synchronized.\n\nPIPELINELOCKING - MediaLive will attempt to synchronize the output of each pipeline to the other.\nEPOCHLOCKING - MediaLive will attempt to synchronize the output of each pipeline to the Unix epoch."
+        },
         "OutputTimingSource": {
           "shape": "GlobalConfigurationOutputTimingSource",
           "locationName": "outputTimingSource",
@@ -4077,34 +4082,43 @@
           "documentation": "Adjusts video input buffer for streams with very low video framerates. This is commonly set to enabled for music channels with less than one video frame per second."
         }
       },
-      "documentation": "Placeholder documentation for GlobalConfiguration"
+      "documentation": "Global Configuration"
     },
     "GlobalConfigurationInputEndAction": {
       "type": "string",
+      "documentation": "Global Configuration Input End Action",
       "enum": [
         "NONE",
         "SWITCH_AND_LOOP_INPUTS"
-      ],
-      "documentation": "Placeholder documentation for GlobalConfigurationInputEndAction"
+      ]
     },
     "GlobalConfigurationLowFramerateInputs": {
       "type": "string",
+      "documentation": "Global Configuration Low Framerate Inputs",
       "enum": [
         "DISABLED",
         "ENABLED"
-      ],
-      "documentation": "Placeholder documentation for GlobalConfigurationLowFramerateInputs"
+      ]
+    },
+    "GlobalConfigurationOutputLockingMode": {
+      "type": "string",
+      "documentation": "Global Configuration Output Locking Mode",
+      "enum": [
+        "EPOCH_LOCKING",
+        "PIPELINE_LOCKING"
+      ]
     },
     "GlobalConfigurationOutputTimingSource": {
       "type": "string",
+      "documentation": "Global Configuration Output Timing Source",
       "enum": [
         "INPUT_CLOCK",
         "SYSTEM_CLOCK"
-      ],
-      "documentation": "Placeholder documentation for GlobalConfigurationOutputTimingSource"
+      ]
     },
     "H264AdaptiveQuantization": {
       "type": "string",
+      "documentation": "H264 Adaptive Quantization",
       "enum": [
         "HIGH",
         "HIGHER",
@@ -4112,59 +4126,59 @@
         "MAX",
         "MEDIUM",
         "OFF"
-      ],
-      "documentation": "Placeholder documentation for H264AdaptiveQuantization"
+      ]
     },
     "H264ColorMetadata": {
       "type": "string",
+      "documentation": "H264 Color Metadata",
       "enum": [
         "IGNORE",
         "INSERT"
-      ],
-      "documentation": "Placeholder documentation for H264ColorMetadata"
+      ]
     },
     "H264EntropyEncoding": {
       "type": "string",
+      "documentation": "H264 Entropy Encoding",
       "enum": [
         "CABAC",
         "CAVLC"
-      ],
-      "documentation": "Placeholder documentation for H264EntropyEncoding"
+      ]
     },
     "H264FlickerAq": {
       "type": "string",
+      "documentation": "H264 Flicker Aq",
       "enum": [
         "DISABLED",
         "ENABLED"
-      ],
-      "documentation": "Placeholder documentation for H264FlickerAq"
+      ]
     },
     "H264FramerateControl": {
       "type": "string",
+      "documentation": "H264 Framerate Control",
       "enum": [
         "INITIALIZE_FROM_SOURCE",
         "SPECIFIED"
-      ],
-      "documentation": "Placeholder documentation for H264FramerateControl"
+      ]
     },
     "H264GopBReference": {
       "type": "string",
+      "documentation": "H264 Gop BReference",
       "enum": [
         "DISABLED",
         "ENABLED"
-      ],
-      "documentation": "Placeholder documentation for H264GopBReference"
+      ]
     },
     "H264GopSizeUnits": {
       "type": "string",
+      "documentation": "H264 Gop Size Units",
       "enum": [
         "FRAMES",
         "SECONDS"
-      ],
-      "documentation": "Placeholder documentation for H264GopSizeUnits"
+      ]
     },
     "H264Level": {
       "type": "string",
+      "documentation": "H264 Level",
       "enum": [
         "H264_LEVEL_1",
         "H264_LEVEL_1_1",
@@ -4183,28 +4197,28 @@
         "H264_LEVEL_5_1",
         "H264_LEVEL_5_2",
         "H264_LEVEL_AUTO"
-      ],
-      "documentation": "Placeholder documentation for H264Level"
+      ]
     },
     "H264LookAheadRateControl": {
       "type": "string",
+      "documentation": "H264 Look Ahead Rate Control",
       "enum": [
         "HIGH",
         "LOW",
         "MEDIUM"
-      ],
-      "documentation": "Placeholder documentation for H264LookAheadRateControl"
+      ]
     },
     "H264ParControl": {
       "type": "string",
+      "documentation": "H264 Par Control",
       "enum": [
         "INITIALIZE_FROM_SOURCE",
         "SPECIFIED"
-      ],
-      "documentation": "Placeholder documentation for H264ParControl"
+      ]
     },
     "H264Profile": {
       "type": "string",
+      "documentation": "H264 Profile",
       "enum": [
         "BASELINE",
         "HIGH",
@@ -4212,33 +4226,32 @@
         "HIGH_422",
         "HIGH_422_10BIT",
         "MAIN"
-      ],
-      "documentation": "Placeholder documentation for H264Profile"
+      ]
     },
     "H264RateControlMode": {
       "type": "string",
+      "documentation": "H264 Rate Control Mode",
       "enum": [
         "CBR",
         "QVBR",
         "VBR"
-      ],
-      "documentation": "Placeholder documentation for H264RateControlMode"
+      ]
     },
     "H264ScanType": {
       "type": "string",
+      "documentation": "H264 Scan Type",
       "enum": [
         "INTERLACED",
         "PROGRESSIVE"
-      ],
-      "documentation": "Placeholder documentation for H264ScanType"
+      ]
     },
     "H264SceneChangeDetect": {
       "type": "string",
+      "documentation": "H264 Scene Change Detect",
       "enum": [
         "DISABLED",
         "ENABLED"
-      ],
-      "documentation": "Placeholder documentation for H264SceneChangeDetect"
+      ]
     },
     "H264Settings": {
       "type": "structure",
@@ -4429,64 +4442,64 @@
           "documentation": "Determines how timecodes should be inserted into the video elementary stream.\n- 'disabled': Do not include timecodes\n- 'picTimingSei': Pass through picture timing SEI messages from the source specified in Timecode Config"
         }
       },
-      "documentation": "Placeholder documentation for H264Settings"
+      "documentation": "H264 Settings"
     },
     "H264SpatialAq": {
       "type": "string",
+      "documentation": "H264 Spatial Aq",
       "enum": [
         "DISABLED",
         "ENABLED"
-      ],
-      "documentation": "Placeholder documentation for H264SpatialAq"
+      ]
     },
     "H264SubGopLength": {
       "type": "string",
+      "documentation": "H264 Sub Gop Length",
       "enum": [
         "DYNAMIC",
         "FIXED"
-      ],
-      "documentation": "Placeholder documentation for H264SubGopLength"
+      ]
     },
     "H264Syntax": {
       "type": "string",
+      "documentation": "H264 Syntax",
       "enum": [
         "DEFAULT",
         "RP2027"
-      ],
-      "documentation": "Placeholder documentation for H264Syntax"
+      ]
     },
     "H264TemporalAq": {
       "type": "string",
+      "documentation": "H264 Temporal Aq",
       "enum": [
         "DISABLED",
         "ENABLED"
-      ],
-      "documentation": "Placeholder documentation for H264TemporalAq"
+      ]
     },
     "H264TimecodeInsertionBehavior": {
       "type": "string",
+      "documentation": "H264 Timecode Insertion Behavior",
       "enum": [
         "DISABLED",
         "PIC_TIMING_SEI"
-      ],
-      "documentation": "Placeholder documentation for H264TimecodeInsertionBehavior"
+      ]
     },
     "HlsAdMarkers": {
       "type": "string",
+      "documentation": "Hls Ad Markers",
       "enum": [
         "ADOBE",
         "ELEMENTAL",
         "ELEMENTAL_SCTE35"
-      ],
-      "documentation": "Placeholder documentation for HlsAdMarkers"
+      ]
     },
     "HlsAkamaiHttpTransferMode": {
       "type": "string",
+      "documentation": "Hls Akamai Http Transfer Mode",
       "enum": [
         "CHUNKED",
         "NON_CHUNKED"
-      ],
-      "documentation": "Placeholder documentation for HlsAkamaiHttpTransferMode"
+      ]
     },
     "HlsAkamaiSettings": {
       "type": "structure",
@@ -4527,7 +4540,7 @@
           "documentation": "Token parameter for authenticated akamai. If not specified, _gda_ is used."
         }
       },
-      "documentation": "Placeholder documentation for HlsAkamaiSettings"
+      "documentation": "Hls Akamai Settings"
     },
     "HlsBasicPutSettings": {
       "type": "structure",
@@ -4553,16 +4566,16 @@
           "documentation": "If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart."
         }
       },
-      "documentation": "Placeholder documentation for HlsBasicPutSettings"
+      "documentation": "Hls Basic Put Settings"
     },
     "HlsCaptionLanguageSetting": {
       "type": "string",
+      "documentation": "Hls Caption Language Setting",
       "enum": [
         "INSERT",
         "NONE",
         "OMIT"
-      ],
-      "documentation": "Placeholder documentation for HlsCaptionLanguageSetting"
+      ]
     },
     "HlsCdnSettings": {
       "type": "structure",
@@ -4584,39 +4597,39 @@
           "locationName": "hlsWebdavSettings"
         }
       },
-      "documentation": "Placeholder documentation for HlsCdnSettings"
+      "documentation": "Hls Cdn Settings"
     },
     "HlsClientCache": {
       "type": "string",
+      "documentation": "Hls Client Cache",
       "enum": [
         "DISABLED",
         "ENABLED"
-      ],
-      "documentation": "Placeholder documentation for HlsClientCache"
+      ]
     },
     "HlsCodecSpecification": {
       "type": "string",
+      "documentation": "Hls Codec Specification",
       "enum": [
         "RFC_4281",
         "RFC_6381"
-      ],
-      "documentation": "Placeholder documentation for HlsCodecSpecification"
+      ]
     },
     "HlsDirectoryStructure": {
       "type": "string",
+      "documentation": "Hls Directory Structure",
       "enum": [
         "SINGLE_DIRECTORY",
         "SUBDIRECTORY_PER_STREAM"
-      ],
-      "documentation": "Placeholder documentation for HlsDirectoryStructure"
+      ]
     },
     "HlsEncryptionType": {
       "type": "string",
+      "documentation": "Hls Encryption Type",
       "enum": [
         "AES128",
         "SAMPLE_AES"
-      ],
-      "documentation": "Placeholder documentation for HlsEncryptionType"
+      ]
     },
     "HlsGroupSettings": {
       "type": "structure",
@@ -4807,10 +4820,10 @@
           "documentation": "SEGMENTEDFILES: Emit the program as segments - multiple .ts media files.\n\nSINGLEFILE: Applies only if Mode field is VOD. Emit the program as a single .ts media file. The media manifest includes #EXT-X-BYTERANGE tags to index segments for playback. A typical use for this value is when sending the output to AWS Elemental MediaConvert, which can accept only a single media file. Playback while the channel is running is not guaranteed due to HTTP server caching."
         }
       },
+      "documentation": "Hls Group Settings",
       "required": [
         "Destination"
-      ],
-      "documentation": "Placeholder documentation for HlsGroupSettings"
+      ]
     },
     "HlsInputSettings": {
       "type": "structure",
@@ -4836,39 +4849,39 @@
           "documentation": "The number of seconds between retries when an attempt to read a manifest or segment fails."
         }
       },
-      "documentation": "Placeholder documentation for HlsInputSettings"
+      "documentation": "Hls Input Settings"
     },
     "HlsIvInManifest": {
       "type": "string",
+      "documentation": "Hls Iv In Manifest",
       "enum": [
         "EXCLUDE",
         "INCLUDE"
-      ],
-      "documentation": "Placeholder documentation for HlsIvInManifest"
+      ]
     },
     "HlsIvSource": {
       "type": "string",
+      "documentation": "Hls Iv Source",
       "enum": [
         "EXPLICIT",
         "FOLLOWS_SEGMENT_NUMBER"
-      ],
-      "documentation": "Placeholder documentation for HlsIvSource"
+      ]
     },
     "HlsManifestCompression": {
       "type": "string",
+      "documentation": "Hls Manifest Compression",
       "enum": [
         "GZIP",
         "NONE"
-      ],
-      "documentation": "Placeholder documentation for HlsManifestCompression"
+      ]
     },
     "HlsManifestDurationFormat": {
       "type": "string",
+      "documentation": "Hls Manifest Duration Format",
       "enum": [
         "FLOATING_POINT",
         "INTEGER"
-      ],
-      "documentation": "Placeholder documentation for HlsManifestDurationFormat"
+      ]
     },
     "HlsMediaStoreSettings": {
       "type": "structure",
@@ -4899,30 +4912,30 @@
           "documentation": "If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart."
         }
       },
-      "documentation": "Placeholder documentation for HlsMediaStoreSettings"
+      "documentation": "Hls Media Store Settings"
     },
     "HlsMediaStoreStorageClass": {
       "type": "string",
+      "documentation": "Hls Media Store Storage Class",
       "enum": [
         "TEMPORAL"
-      ],
-      "documentation": "Placeholder documentation for HlsMediaStoreStorageClass"
+      ]
     },
     "HlsMode": {
       "type": "string",
+      "documentation": "Hls Mode",
       "enum": [
         "LIVE",
         "VOD"
-      ],
-      "documentation": "Placeholder documentation for HlsMode"
+      ]
     },
     "HlsOutputSelection": {
       "type": "string",
+      "documentation": "Hls Output Selection",
       "enum": [
         "MANIFESTS_AND_SEGMENTS",
         "SEGMENTS_ONLY"
-      ],
-      "documentation": "Placeholder documentation for HlsOutputSelection"
+      ]
     },
     "HlsOutputSettings": {
       "type": "structure",
@@ -4943,34 +4956,34 @@
           "documentation": "String concatenated to end of segment filenames."
         }
       },
+      "documentation": "Hls Output Settings",
       "required": [
         "HlsSettings"
-      ],
-      "documentation": "Placeholder documentation for HlsOutputSettings"
+      ]
     },
     "HlsProgramDateTime": {
       "type": "string",
+      "documentation": "Hls Program Date Time",
       "enum": [
         "EXCLUDE",
         "INCLUDE"
-      ],
-      "documentation": "Placeholder documentation for HlsProgramDateTime"
+      ]
     },
     "HlsRedundantManifest": {
       "type": "string",
+      "documentation": "Hls Redundant Manifest",
       "enum": [
         "DISABLED",
         "ENABLED"
-      ],
-      "documentation": "HLS Redundant Manifest"
+      ]
     },
     "HlsSegmentationMode": {
       "type": "string",
+      "documentation": "Hls Segmentation Mode",
       "enum": [
         "USE_INPUT_SEGMENTATION",
         "USE_SEGMENT_DURATION"
-      ],
-      "documentation": "Placeholder documentation for HlsSegmentationMode"
+      ]
     },
     "HlsSettings": {
       "type": "structure",
@@ -4984,24 +4997,24 @@
           "locationName": "standardHlsSettings"
         }
       },
-      "documentation": "Placeholder documentation for HlsSettings"
+      "documentation": "Hls Settings"
     },
     "HlsStreamInfResolution": {
       "type": "string",
+      "documentation": "Hls Stream Inf Resolution",
       "enum": [
         "EXCLUDE",
         "INCLUDE"
-      ],
-      "documentation": "Placeholder documentation for HlsStreamInfResolution"
+      ]
     },
     "HlsTimedMetadataId3Frame": {
       "type": "string",
+      "documentation": "Hls Timed Metadata Id3 Frame",
       "enum": [
         "NONE",
         "PRIV",
         "TDRL"
-      ],
-      "documentation": "Placeholder documentation for HlsTimedMetadataId3Frame"
+      ]
     },
     "HlsTimedMetadataScheduleActionSettings": {
       "type": "structure",
@@ -5019,19 +5032,19 @@
     },
     "HlsTsFileMode": {
       "type": "string",
+      "documentation": "Hls Ts File Mode",
       "enum": [
         "SEGMENTED_FILES",
         "SINGLE_FILE"
-      ],
-      "documentation": "Placeholder documentation for HlsTsFileMode"
+      ]
     },
     "HlsWebdavHttpTransferMode": {
       "type": "string",
+      "documentation": "Hls Webdav Http Transfer Mode",
       "enum": [
         "CHUNKED",
         "NON_CHUNKED"
-      ],
-      "documentation": "Placeholder documentation for HlsWebdavHttpTransferMode"
+      ]
     },
     "HlsWebdavSettings": {
       "type": "structure",
@@ -5062,7 +5075,7 @@
           "documentation": "If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart."
         }
       },
-      "documentation": "Placeholder documentation for HlsWebdavSettings"
+      "documentation": "Hls Webdav Settings"
     },
     "IFrameOnlyPlaylistType": {
       "type": "string",
@@ -5171,11 +5184,11 @@
           "documentation": "The index of the input channel used as a source."
         }
       },
+      "documentation": "Input Channel Level",
       "required": [
         "InputChannel",
         "Gain"
-      ],
-      "documentation": "Placeholder documentation for InputChannelLevel"
+      ]
     },
     "InputCodec": {
       "type": "string",
@@ -5188,19 +5201,19 @@
     },
     "InputDeblockFilter": {
       "type": "string",
+      "documentation": "Input Deblock Filter",
       "enum": [
         "DISABLED",
         "ENABLED"
-      ],
-      "documentation": "Placeholder documentation for InputDeblockFilter"
+      ]
     },
     "InputDenoiseFilter": {
       "type": "string",
+      "documentation": "Input Denoise Filter",
       "enum": [
         "DISABLED",
         "ENABLED"
-      ],
-      "documentation": "Placeholder documentation for InputDenoiseFilter"
+      ]
     },
     "InputDestination": {
       "type": "structure",
@@ -5256,12 +5269,12 @@
     },
     "InputFilter": {
       "type": "string",
+      "documentation": "Input Filter",
       "enum": [
         "AUTO",
         "DISABLED",
         "FORCED"
-      ],
-      "documentation": "Placeholder documentation for InputFilter"
+      ]
     },
     "InputLocation": {
       "type": "structure",
@@ -5282,43 +5295,43 @@
           "documentation": "Documentation update needed"
         }
       },
+      "documentation": "Input Location",
       "required": [
         "Uri"
-      ],
-      "documentation": "Placeholder documentation for InputLocation"
+      ]
     },
     "InputLossActionForHlsOut": {
       "type": "string",
+      "documentation": "Input Loss Action For Hls Out",
       "enum": [
         "EMIT_OUTPUT",
         "PAUSE_OUTPUT"
-      ],
-      "documentation": "Placeholder documentation for InputLossActionForHlsOut"
+      ]
     },
     "InputLossActionForMsSmoothOut": {
       "type": "string",
+      "documentation": "Input Loss Action For Ms Smooth Out",
       "enum": [
         "EMIT_OUTPUT",
         "PAUSE_OUTPUT"
-      ],
-      "documentation": "Placeholder documentation for InputLossActionForMsSmoothOut"
+      ]
     },
     "InputLossActionForRtmpOut": {
       "type": "string",
+      "documentation": "Input Loss Action For Rtmp Out",
       "enum": [
         "EMIT_OUTPUT",
         "PAUSE_OUTPUT"
-      ],
-      "documentation": "Input Loss Action"
+      ]
     },
     "InputLossActionForUdpOut": {
       "type": "string",
+      "documentation": "Input Loss Action For Udp Out",
       "enum": [
         "DROP_PROGRAM",
         "DROP_TS",
         "EMIT_PROGRAM"
-      ],
-      "documentation": "Placeholder documentation for InputLossActionForUdpOut"
+      ]
     },
     "InputLossBehavior": {
       "type": "structure",
@@ -5349,15 +5362,15 @@
           "documentation": "Documentation update needed"
         }
       },
-      "documentation": "Placeholder documentation for InputLossBehavior"
+      "documentation": "Input Loss Behavior"
     },
     "InputLossImageType": {
       "type": "string",
+      "documentation": "Input Loss Image Type",
       "enum": [
         "COLOR",
         "SLATE"
-      ],
-      "documentation": "Placeholder documentation for InputLossImageType"
+      ]
     },
     "InputMaximumBitrate": {
       "type": "string",
@@ -5497,11 +5510,11 @@
     },
     "InputSourceEndBehavior": {
       "type": "string",
+      "documentation": "Input Source End Behavior",
       "enum": [
         "CONTINUE",
         "LOOP"
-      ],
-      "documentation": "Placeholder documentation for InputSourceEndBehavior"
+      ]
     },
     "InputSourceRequest": {
       "type": "structure",
@@ -5632,7 +5645,7 @@
           "locationName": "staticKeySettings"
         }
       },
-      "documentation": "Placeholder documentation for KeyProviderSettings"
+      "documentation": "Key Provider Settings"
     },
     "ListChannelsRequest": {
       "type": "structure",
@@ -5916,126 +5929,127 @@
     },
     "M2tsAbsentInputAudioBehavior": {
       "type": "string",
+      "documentation": "M2ts Absent Input Audio Behavior",
       "enum": [
         "DROP",
         "ENCODE_SILENCE"
-      ],
-      "documentation": "Placeholder documentation for M2tsAbsentInputAudioBehavior"
+      ]
     },
     "M2tsArib": {
       "type": "string",
+      "documentation": "M2ts Arib",
       "enum": [
         "DISABLED",
         "ENABLED"
-      ],
-      "documentation": "Placeholder documentation for M2tsArib"
+      ]
     },
     "M2tsAribCaptionsPidControl": {
       "type": "string",
+      "documentation": "M2ts Arib Captions Pid Control",
       "enum": [
         "AUTO",
         "USE_CONFIGURED"
-      ],
-      "documentation": "Placeholder documentation for M2tsAribCaptionsPidControl"
+      ]
     },
     "M2tsAudioBufferModel": {
       "type": "string",
+      "documentation": "M2ts Audio Buffer Model",
       "enum": [
         "ATSC",
         "DVB"
-      ],
-      "documentation": "Placeholder documentation for M2tsAudioBufferModel"
+      ]
     },
     "M2tsAudioInterval": {
       "type": "string",
+      "documentation": "M2ts Audio Interval",
       "enum": [
         "VIDEO_AND_FIXED_INTERVALS",
         "VIDEO_INTERVAL"
-      ],
-      "documentation": "Placeholder documentation for M2tsAudioInterval"
+      ]
     },
     "M2tsAudioStreamType": {
       "type": "string",
+      "documentation": "M2ts Audio Stream Type",
       "enum": [
         "ATSC",
         "DVB"
-      ],
-      "documentation": "Placeholder documentation for M2tsAudioStreamType"
+      ]
     },
     "M2tsBufferModel": {
       "type": "string",
+      "documentation": "M2ts Buffer Model",
       "enum": [
         "MULTIPLEX",
         "NONE"
-      ],
-      "documentation": "Placeholder documentation for M2tsBufferModel"
+      ]
     },
     "M2tsCcDescriptor": {
       "type": "string",
+      "documentation": "M2ts Cc Descriptor",
       "enum": [
         "DISABLED",
         "ENABLED"
-      ],
-      "documentation": "Placeholder documentation for M2tsCcDescriptor"
+      ]
     },
     "M2tsEbifControl": {
       "type": "string",
+      "documentation": "M2ts Ebif Control",
       "enum": [
         "NONE",
         "PASSTHROUGH"
-      ],
-      "documentation": "Placeholder documentation for M2tsEbifControl"
+      ]
     },
     "M2tsEbpPlacement": {
       "type": "string",
+      "documentation": "M2ts Ebp Placement",
       "enum": [
         "VIDEO_AND_AUDIO_PIDS",
         "VIDEO_PID"
-      ],
-      "documentation": "Placeholder documentation for M2tsEbpPlacement"
+      ]
     },
     "M2tsEsRateInPes": {
       "type": "string",
+      "documentation": "M2ts Es Rate In Pes",
       "enum": [
         "EXCLUDE",
         "INCLUDE"
-      ],
-      "documentation": "Placeholder documentation for M2tsEsRateInPes"
+      ]
     },
     "M2tsKlv": {
       "type": "string",
+      "documentation": "M2ts Klv",
       "enum": [
         "NONE",
         "PASSTHROUGH"
-      ],
-      "documentation": "Placeholder documentation for M2tsKlv"
+      ]
     },
     "M2tsPcrControl": {
       "type": "string",
+      "documentation": "M2ts Pcr Control",
       "enum": [
         "CONFIGURED_PCR_PERIOD",
         "PCR_EVERY_PES_PACKET"
-      ],
-      "documentation": "Placeholder documentation for M2tsPcrControl"
+      ]
     },
     "M2tsRateMode": {
       "type": "string",
+      "documentation": "M2ts Rate Mode",
       "enum": [
         "CBR",
         "VBR"
-      ],
-      "documentation": "Placeholder documentation for M2tsRateMode"
+      ]
     },
     "M2tsScte35Control": {
       "type": "string",
+      "documentation": "M2ts Scte35 Control",
       "enum": [
         "NONE",
         "PASSTHROUGH"
-      ],
-      "documentation": "Placeholder documentation for M2tsScte35Control"
+      ]
     },
     "M2tsSegmentationMarkers": {
       "type": "string",
+      "documentation": "M2ts Segmentation Markers",
       "enum": [
         "EBP",
         "EBP_LEGACY",
@@ -6043,16 +6057,15 @@
         "PSI_SEGSTART",
         "RAI_ADAPT",
         "RAI_SEGSTART"
-      ],
-      "documentation": "Placeholder documentation for M2tsSegmentationMarkers"
+      ]
     },
     "M2tsSegmentationStyle": {
       "type": "string",
+      "documentation": "M2ts Segmentation Style",
       "enum": [
         "MAINTAIN_CADENCE",
         "RESET_CADENCE"
-      ],
-      "documentation": "Placeholder documentation for M2tsSegmentationStyle"
+      ]
     },
     "M2tsSettings": {
       "type": "structure",
@@ -6288,31 +6301,31 @@
           "documentation": "Packet Identifier (PID) of the elementary video stream in the transport stream. Can be entered as a decimal or hexadecimal value.  Valid values are 32 (or 0x20)..8182 (or 0x1ff6)."
         }
       },
-      "documentation": "Placeholder documentation for M2tsSettings"
+      "documentation": "M2ts Settings"
     },
     "M2tsTimedMetadataBehavior": {
       "type": "string",
+      "documentation": "M2ts Timed Metadata Behavior",
       "enum": [
         "NO_PASSTHROUGH",
         "PASSTHROUGH"
-      ],
-      "documentation": "Placeholder documentation for M2tsTimedMetadataBehavior"
+      ]
     },
     "M3u8PcrControl": {
       "type": "string",
+      "documentation": "M3u8 Pcr Control",
       "enum": [
         "CONFIGURED_PCR_PERIOD",
         "PCR_EVERY_PES_PACKET"
-      ],
-      "documentation": "Placeholder documentation for M3u8PcrControl"
+      ]
     },
     "M3u8Scte35Behavior": {
       "type": "string",
+      "documentation": "M3u8 Scte35 Behavior",
       "enum": [
         "NO_PASSTHROUGH",
         "PASSTHROUGH"
-      ],
-      "documentation": "Placeholder documentation for M3u8Scte35Behavior"
+      ]
     },
     "M3u8Settings": {
       "type": "structure",
@@ -6402,11 +6415,11 @@
     },
     "M3u8TimedMetadataBehavior": {
       "type": "string",
+      "documentation": "M3u8 Timed Metadata Behavior",
       "enum": [
         "NO_PASSTHROUGH",
         "PASSTHROUGH"
-      ],
-      "documentation": "Placeholder documentation for M3u8TimedMetadataBehavior"
+      ]
     },
     "MaxResults": {
       "type": "integer",
@@ -6468,11 +6481,11 @@
     },
     "Mp2CodingMode": {
       "type": "string",
+      "documentation": "Mp2 Coding Mode",
       "enum": [
         "CODING_MODE_1_0",
         "CODING_MODE_2_0"
-      ],
-      "documentation": "Placeholder documentation for Mp2CodingMode"
+      ]
     },
     "Mp2Settings": {
       "type": "structure",
@@ -6493,7 +6506,7 @@
           "documentation": "Sample rate in Hz."
         }
       },
-      "documentation": "Placeholder documentation for Mp2Settings"
+      "documentation": "Mp2 Settings"
     },
     "MsSmoothGroupSettings": {
       "type": "structure",
@@ -6594,10 +6607,10 @@
           "documentation": "Type of timestamp date offset to use.\n- useEventStartDate: Use the date the event was started as the offset\n- useConfiguredOffset: Use an explicitly configured date as the offset"
         }
       },
+      "documentation": "Ms Smooth Group Settings",
       "required": [
         "Destination"
-      ],
-      "documentation": "Placeholder documentation for MsSmoothGroupSettings"
+      ]
     },
     "MsSmoothOutputSettings": {
       "type": "structure",
@@ -6608,15 +6621,15 @@
           "documentation": "String concatenated to the end of the destination filename.  Required for multiple outputs of the same type."
         }
       },
-      "documentation": "Placeholder documentation for MsSmoothOutputSettings"
+      "documentation": "Ms Smooth Output Settings"
     },
     "NetworkInputServerValidation": {
       "type": "string",
+      "documentation": "Network Input Server Validation",
       "enum": [
         "CHECK_CRYPTOGRAPHY_AND_VALIDATE_NAME",
         "CHECK_CRYPTOGRAPHY_ONLY"
-      ],
-      "documentation": "Placeholder documentation for NetworkInputServerValidation"
+      ]
     },
     "NetworkInputSettings": {
       "type": "structure",
@@ -6846,7 +6859,7 @@
           "locationName": "udpGroupSettings"
         }
       },
-      "documentation": "Placeholder documentation for OutputGroupSettings"
+      "documentation": "Output Group Settings"
     },
     "OutputLocationRef": {
       "type": "structure",
@@ -6890,12 +6903,12 @@
           "locationName": "udpOutputSettings"
         }
       },
-      "documentation": "Placeholder documentation for OutputSettings"
+      "documentation": "Output Settings"
     },
     "PassThroughSettings": {
       "type": "structure",
       "members": {},
-      "documentation": "Placeholder documentation for PassThroughSettings"
+      "documentation": "Pass Through Settings"
     },
     "PauseStateScheduleActionSettings": {
       "type": "structure",
@@ -6995,10 +7008,10 @@
           "documentation": "Number of output channels to be produced.\nValid values: 1, 2, 4, 6, 8"
         }
       },
+      "documentation": "Remix Settings",
       "required": [
         "ChannelMappings"
-      ],
-      "documentation": "Placeholder documentation for RemixSettings"
+      ]
     },
     "Reservation": {
       "type": "structure",
@@ -7206,25 +7219,25 @@
     },
     "RtmpCacheFullBehavior": {
       "type": "string",
+      "documentation": "Rtmp Cache Full Behavior",
       "enum": [
         "DISCONNECT_IMMEDIATELY",
         "WAIT_FOR_SERVER"
-      ],
-      "documentation": "Placeholder documentation for RtmpCacheFullBehavior"
+      ]
     },
     "RtmpCaptionData": {
       "type": "string",
+      "documentation": "Rtmp Caption Data",
       "enum": [
         "ALL",
         "FIELD1_608",
         "FIELD1_AND_FIELD2_608"
-      ],
-      "documentation": "Placeholder documentation for RtmpCaptionData"
+      ]
     },
     "RtmpCaptionInfoDestinationSettings": {
       "type": "structure",
       "members": {},
-      "documentation": "Placeholder documentation for RtmpCaptionInfoDestinationSettings"
+      "documentation": "Rtmp Caption Info Destination Settings"
     },
     "RtmpGroupSettings": {
       "type": "structure",
@@ -7260,15 +7273,15 @@
           "documentation": "If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart."
         }
       },
-      "documentation": "Placeholder documentation for RtmpGroupSettings"
+      "documentation": "Rtmp Group Settings"
     },
     "RtmpOutputCertificateMode": {
       "type": "string",
+      "documentation": "Rtmp Output Certificate Mode",
       "enum": [
         "SELF_SIGNED",
         "VERIFY_AUTHENTICITY"
-      ],
-      "documentation": "Placeholder documentation for RtmpOutputCertificateMode"
+      ]
     },
     "RtmpOutputSettings": {
       "type": "structure",
@@ -7294,10 +7307,10 @@
           "documentation": "Number of retry attempts."
         }
       },
+      "documentation": "Rtmp Output Settings",
       "required": [
         "Destination"
-      ],
-      "documentation": "Placeholder documentation for RtmpOutputSettings"
+      ]
     },
     "ScheduleAction": {
       "type": "structure",
@@ -7389,16 +7402,16 @@
     },
     "Scte20Convert608To708": {
       "type": "string",
+      "documentation": "Scte20 Convert608 To708",
       "enum": [
         "DISABLED",
         "UPCONVERT"
-      ],
-      "documentation": "Placeholder documentation for Scte20Convert608To708"
+      ]
     },
     "Scte20PlusEmbeddedDestinationSettings": {
       "type": "structure",
       "members": {},
-      "documentation": "Placeholder documentation for Scte20PlusEmbeddedDestinationSettings"
+      "documentation": "Scte20 Plus Embedded Destination Settings"
     },
     "Scte20SourceSettings": {
       "type": "structure",
@@ -7414,12 +7427,12 @@
           "documentation": "Specifies the 608/708 channel number within the video track from which to extract captions. Unused for passthrough."
         }
       },
-      "documentation": "Placeholder documentation for Scte20SourceSettings"
+      "documentation": "Scte20 Source Settings"
     },
     "Scte27DestinationSettings": {
       "type": "structure",
       "members": {},
-      "documentation": "Placeholder documentation for Scte27DestinationSettings"
+      "documentation": "Scte27 Destination Settings"
     },
     "Scte27SourceSettings": {
       "type": "structure",
@@ -7430,23 +7443,23 @@
           "documentation": "The pid field is used in conjunction with the caption selector languageCode field as follows:\n  - Specify PID and Language: Extracts captions from that PID; the language is \"informational\".\n  - Specify PID and omit Language: Extracts the specified PID.\n  - Omit PID and specify Language: Extracts the specified language, whichever PID that happens to be.\n  - Omit PID and omit Language: Valid only if source is DVB-Sub that is being passed through; all languages will be passed through."
         }
       },
-      "documentation": "Placeholder documentation for Scte27SourceSettings"
+      "documentation": "Scte27 Source Settings"
     },
     "Scte35AposNoRegionalBlackoutBehavior": {
       "type": "string",
+      "documentation": "Scte35 Apos No Regional Blackout Behavior",
       "enum": [
         "FOLLOW",
         "IGNORE"
-      ],
-      "documentation": "Placeholder documentation for Scte35AposNoRegionalBlackoutBehavior"
+      ]
     },
     "Scte35AposWebDeliveryAllowedBehavior": {
       "type": "string",
+      "documentation": "Scte35 Apos Web Delivery Allowed Behavior",
       "enum": [
         "FOLLOW",
         "IGNORE"
-      ],
-      "documentation": "Placeholder documentation for Scte35AposWebDeliveryAllowedBehavior"
+      ]
     },
     "Scte35ArchiveAllowedFlag": {
       "type": "string",
@@ -7640,15 +7653,15 @@
           "documentation": "When set to ignore, Segment Descriptors with webDeliveryAllowedFlag set to 0 will no longer trigger blackouts or Ad Avail slates"
         }
       },
-      "documentation": "Placeholder documentation for Scte35SpliceInsert"
+      "documentation": "Scte35 Splice Insert"
     },
     "Scte35SpliceInsertNoRegionalBlackoutBehavior": {
       "type": "string",
+      "documentation": "Scte35 Splice Insert No Regional Blackout Behavior",
       "enum": [
         "FOLLOW",
         "IGNORE"
-      ],
-      "documentation": "Placeholder documentation for Scte35SpliceInsertNoRegionalBlackoutBehavior"
+      ]
     },
     "Scte35SpliceInsertScheduleActionSettings": {
       "type": "structure",
@@ -7671,11 +7684,11 @@
     },
     "Scte35SpliceInsertWebDeliveryAllowedBehavior": {
       "type": "string",
+      "documentation": "Scte35 Splice Insert Web Delivery Allowed Behavior",
       "enum": [
         "FOLLOW",
         "IGNORE"
-      ],
-      "documentation": "Placeholder documentation for Scte35SpliceInsertWebDeliveryAllowedBehavior"
+      ]
     },
     "Scte35TimeSignalApos": {
       "type": "structure",
@@ -7696,7 +7709,7 @@
           "documentation": "When set to ignore, Segment Descriptors with webDeliveryAllowedFlag set to 0 will no longer trigger blackouts or Ad Avail slates"
         }
       },
-      "documentation": "Placeholder documentation for Scte35TimeSignalApos"
+      "documentation": "Scte35 Time Signal Apos"
     },
     "Scte35TimeSignalScheduleActionSettings": {
       "type": "structure",
@@ -7722,73 +7735,73 @@
     },
     "SmoothGroupAudioOnlyTimecodeControl": {
       "type": "string",
+      "documentation": "Smooth Group Audio Only Timecode Control",
       "enum": [
         "PASSTHROUGH",
         "USE_CONFIGURED_CLOCK"
-      ],
-      "documentation": "Placeholder documentation for SmoothGroupAudioOnlyTimecodeControl"
+      ]
     },
     "SmoothGroupCertificateMode": {
       "type": "string",
+      "documentation": "Smooth Group Certificate Mode",
       "enum": [
         "SELF_SIGNED",
         "VERIFY_AUTHENTICITY"
-      ],
-      "documentation": "Placeholder documentation for SmoothGroupCertificateMode"
+      ]
     },
     "SmoothGroupEventIdMode": {
       "type": "string",
+      "documentation": "Smooth Group Event Id Mode",
       "enum": [
         "NO_EVENT_ID",
         "USE_CONFIGURED",
         "USE_TIMESTAMP"
-      ],
-      "documentation": "Placeholder documentation for SmoothGroupEventIdMode"
+      ]
     },
     "SmoothGroupEventStopBehavior": {
       "type": "string",
+      "documentation": "Smooth Group Event Stop Behavior",
       "enum": [
         "NONE",
         "SEND_EOS"
-      ],
-      "documentation": "Placeholder documentation for SmoothGroupEventStopBehavior"
+      ]
     },
     "SmoothGroupSegmentationMode": {
       "type": "string",
+      "documentation": "Smooth Group Segmentation Mode",
       "enum": [
         "USE_INPUT_SEGMENTATION",
         "USE_SEGMENT_DURATION"
-      ],
-      "documentation": "Placeholder documentation for SmoothGroupSegmentationMode"
+      ]
     },
     "SmoothGroupSparseTrackType": {
       "type": "string",
+      "documentation": "Smooth Group Sparse Track Type",
       "enum": [
         "NONE",
         "SCTE_35"
-      ],
-      "documentation": "Placeholder documentation for SmoothGroupSparseTrackType"
+      ]
     },
     "SmoothGroupStreamManifestBehavior": {
       "type": "string",
+      "documentation": "Smooth Group Stream Manifest Behavior",
       "enum": [
         "DO_NOT_SEND",
         "SEND"
-      ],
-      "documentation": "Placeholder documentation for SmoothGroupStreamManifestBehavior"
+      ]
     },
     "SmoothGroupTimestampOffsetMode": {
       "type": "string",
+      "documentation": "Smooth Group Timestamp Offset Mode",
       "enum": [
         "USE_CONFIGURED_OFFSET",
         "USE_EVENT_START_DATE"
-      ],
-      "documentation": "Placeholder documentation for SmoothGroupTimestampOffsetMode"
+      ]
     },
     "SmpteTtDestinationSettings": {
       "type": "structure",
       "members": {},
-      "documentation": "Placeholder documentation for SmpteTtDestinationSettings"
+      "documentation": "Smpte Tt Destination Settings"
     },
     "StandardHlsSettings": {
       "type": "structure",
@@ -7803,10 +7816,10 @@
           "locationName": "m3u8Settings"
         }
       },
+      "documentation": "Standard Hls Settings",
       "required": [
         "M3u8Settings"
-      ],
-      "documentation": "Placeholder documentation for StandardHlsSettings"
+      ]
     },
     "StartChannelRequest": {
       "type": "structure",
@@ -7980,10 +7993,10 @@
           "documentation": "Static key value as a 32 character hexadecimal string."
         }
       },
+      "documentation": "Static Key Settings",
       "required": [
         "StaticKeyValue"
-      ],
-      "documentation": "Placeholder documentation for StaticKeySettings"
+      ]
     },
     "StopChannelRequest": {
       "type": "structure",
@@ -8081,7 +8094,7 @@
     "TeletextDestinationSettings": {
       "type": "structure",
       "members": {},
-      "documentation": "Placeholder documentation for TeletextDestinationSettings"
+      "documentation": "Teletext Destination Settings"
     },
     "TeletextSourceSettings": {
       "type": "structure",
@@ -8092,7 +8105,7 @@
           "documentation": "Specifies the teletext page number within the data stream from which to extract captions. Range of 0x100 (256) to 0x8FF (2303). Unused for passthrough. Should be specified as a hexadecimal string with no \"0x\" prefix."
         }
       },
-      "documentation": "Placeholder documentation for TeletextSourceSettings"
+      "documentation": "Teletext Source Settings"
     },
     "TimecodeConfig": {
       "type": "structure",
@@ -8108,19 +8121,19 @@
           "documentation": "Threshold in frames beyond which output timecode is resynchronized to the input timecode. Discrepancies below this threshold are permitted to avoid unnecessary discontinuities in the output timecode. No timecode sync when this is not specified."
         }
       },
+      "documentation": "Timecode Config",
       "required": [
         "Source"
-      ],
-      "documentation": "Placeholder documentation for TimecodeConfig"
+      ]
     },
     "TimecodeConfigSource": {
       "type": "string",
+      "documentation": "Timecode Config Source",
       "enum": [
         "EMBEDDED",
         "SYSTEMCLOCK",
         "ZEROBASED"
-      ],
-      "documentation": "Placeholder documentation for TimecodeConfigSource"
+      ]
     },
     "TtmlDestinationSettings": {
       "type": "structure",
@@ -8131,15 +8144,15 @@
           "documentation": "When set to passthrough, passes through style and position information from a TTML-like input source (TTML, SMPTE-TT, CFF-TT) to the CFF-TT output or TTML output."
         }
       },
-      "documentation": "Placeholder documentation for TtmlDestinationSettings"
+      "documentation": "Ttml Destination Settings"
     },
     "TtmlDestinationStyleControl": {
       "type": "string",
+      "documentation": "Ttml Destination Style Control",
       "enum": [
         "PASSTHROUGH",
         "USE_CONFIGURED"
-      ],
-      "documentation": "Placeholder documentation for TtmlDestinationStyleControl"
+      ]
     },
     "UdpContainerSettings": {
       "type": "structure",
@@ -8149,7 +8162,7 @@
           "locationName": "m2tsSettings"
         }
       },
-      "documentation": "Placeholder documentation for UdpContainerSettings"
+      "documentation": "Udp Container Settings"
     },
     "UdpGroupSettings": {
       "type": "structure",
@@ -8170,7 +8183,7 @@
           "documentation": "Timed Metadata interval in seconds."
         }
       },
-      "documentation": "Placeholder documentation for UdpGroupSettings"
+      "documentation": "Udp Group Settings"
     },
     "UdpOutputSettings": {
       "type": "structure",
@@ -8195,20 +8208,20 @@
           "documentation": "Settings for enabling and adjusting Forward Error Correction on UDP outputs."
         }
       },
+      "documentation": "Udp Output Settings",
       "required": [
         "Destination",
         "ContainerSettings"
-      ],
-      "documentation": "Placeholder documentation for UdpOutputSettings"
+      ]
     },
     "UdpTimedMetadataId3Frame": {
       "type": "string",
+      "documentation": "Udp Timed Metadata Id3 Frame",
       "enum": [
         "NONE",
         "PRIV",
         "TDRL"
-      ],
-      "documentation": "Placeholder documentation for UdpTimedMetadataId3Frame"
+      ]
     },
     "UpdateChannelRequest": {
       "type": "structure",
@@ -8371,7 +8384,7 @@
           "locationName": "h264Settings"
         }
       },
-      "documentation": "Placeholder documentation for VideoCodecSettings"
+      "documentation": "Video Codec Settings"
     },
     "VideoDescription": {
       "type": "structure",
@@ -8419,20 +8432,20 @@
     },
     "VideoDescriptionRespondToAfd": {
       "type": "string",
+      "documentation": "Video Description Respond To Afd",
       "enum": [
         "NONE",
         "PASSTHROUGH",
         "RESPOND"
-      ],
-      "documentation": "Placeholder documentation for VideoDescriptionRespondToAfd"
+      ]
     },
     "VideoDescriptionScalingBehavior": {
       "type": "string",
+      "documentation": "Video Description Scaling Behavior",
       "enum": [
         "DEFAULT",
         "STRETCH_TO_OUTPUT"
-      ],
-      "documentation": "Placeholder documentation for VideoDescriptionScalingBehavior"
+      ]
     },
     "VideoSelector": {
       "type": "structure",
@@ -8457,20 +8470,20 @@
     },
     "VideoSelectorColorSpace": {
       "type": "string",
+      "documentation": "Video Selector Color Space",
       "enum": [
         "FOLLOW",
         "REC_601",
         "REC_709"
-      ],
-      "documentation": "Placeholder documentation for VideoSelectorColorSpace"
+      ]
     },
     "VideoSelectorColorSpaceUsage": {
       "type": "string",
+      "documentation": "Video Selector Color Space Usage",
       "enum": [
         "FALLBACK",
         "FORCE"
-      ],
-      "documentation": "Placeholder documentation for VideoSelectorColorSpaceUsage"
+      ]
     },
     "VideoSelectorPid": {
       "type": "structure",
@@ -8481,7 +8494,7 @@
           "documentation": "Selects a specific PID from within a video source."
         }
       },
-      "documentation": "Placeholder documentation for VideoSelectorPid"
+      "documentation": "Video Selector Pid"
     },
     "VideoSelectorProgramId": {
       "type": "structure",
@@ -8492,7 +8505,7 @@
           "documentation": "Selects a specific program from within a multi-program transport stream. If the program doesn't exist, the first program within the transport stream will be selected by default."
         }
       },
-      "documentation": "Placeholder documentation for VideoSelectorProgramId"
+      "documentation": "Video Selector Program Id"
     },
     "VideoSelectorSettings": {
       "type": "structure",
@@ -8506,12 +8519,12 @@
           "locationName": "videoSelectorProgramId"
         }
       },
-      "documentation": "Placeholder documentation for VideoSelectorSettings"
+      "documentation": "Video Selector Settings"
     },
     "WebvttDestinationSettings": {
       "type": "structure",
       "members": {},
-      "documentation": "Placeholder documentation for WebvttDestinationSettings"
+      "documentation": "Webvtt Destination Settings"
     },
     "__double": {
       "type": "double",
@@ -8707,7 +8720,8 @@
     "__integerMin1Max3600": {
       "type": "integer",
       "min": 1,
-      "max": 3600
+      "max": 3600,
+      "documentation": "Placeholder documentation for __integerMin1Max3600"
     },
     "__integerMin1Max4": {
       "type": "integer",

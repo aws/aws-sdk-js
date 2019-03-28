@@ -188,11 +188,11 @@ declare class WorkSpaces extends Service {
    */
   modifyAccount(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyAccountResult) => void): Request<WorkSpaces.Types.ModifyAccountResult, AWSError>;
   /**
-   * Modifies the properties of the specified Amazon WorkSpaces client.
+   * Modifies the properties of the specified Amazon WorkSpaces clients.
    */
   modifyClientProperties(params: WorkSpaces.Types.ModifyClientPropertiesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ModifyClientPropertiesResult) => void): Request<WorkSpaces.Types.ModifyClientPropertiesResult, AWSError>;
   /**
-   * Modifies the properties of the specified Amazon WorkSpaces client.
+   * Modifies the properties of the specified Amazon WorkSpaces clients.
    */
   modifyClientProperties(callback?: (err: AWSError, data: WorkSpaces.Types.ModifyClientPropertiesResult) => void): Request<WorkSpaces.Types.ModifyClientPropertiesResult, AWSError>;
   /**
@@ -366,6 +366,10 @@ declare namespace WorkSpaces {
      * The rules to add to the group.
      */
     UserRules?: IpRuleList;
+    /**
+     * The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+     */
+    Tags?: TagList;
   }
   export interface CreateIpGroupResult {
     /**
@@ -487,7 +491,7 @@ declare namespace WorkSpaces {
   }
   export interface DescribeClientPropertiesRequest {
     /**
-     * The resource identifiers, in the form of directory IDs.
+     * The resource identifier, in the form of directory IDs.
      */
     ResourceIds: ResourceIdList;
   }
@@ -728,6 +732,10 @@ declare namespace WorkSpaces {
      * The description of the WorkSpace image.
      */
     ImageDescription: WorkspaceImageDescription;
+    /**
+     * The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+     */
+    Tags?: TagList;
   }
   export interface ImportWorkspaceImageResult {
     /**

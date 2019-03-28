@@ -41,6 +41,9 @@
         },
         {
           "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
         }
       ],
       "documentation": "<p>Create a configuration set. <i>Configuration sets</i> are groups of rules that you can apply to the emails you send using Amazon Pinpoint. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email. </p>"
@@ -100,6 +103,9 @@
         },
         {
           "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
         }
       ],
       "documentation": "<p>Create a new pool of dedicated IP addresses. A pool can include one or more dedicated IP addresses that are associated with your Amazon Pinpoint account. You can associate a pool with a configuration set. When you send an email that uses that configuration set, Amazon Pinpoint sends it using only the IP addresses in the associated pool.</p>"
@@ -140,6 +146,9 @@
         },
         {
           "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
         }
       ],
       "documentation": "<p>Create a new predictive inbox placement test. Predictive inbox placement tests can help you predict how your messages will be handled by various email providers around the world. When you perform a predictive inbox placement test, you provide a sample message that contains the content that you plan to send to your customers. Amazon Pinpoint then sends that message to special email addresses spread across several major email providers. After about 24 hours, the test is complete, and you can use the <code>GetDeliverabilityTestReport</code> operation to view the results of the test.</p>"
@@ -165,6 +174,9 @@
         },
         {
           "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
         }
       ],
       "documentation": "<p>Verifies an email identity for use with Amazon Pinpoint. In Amazon Pinpoint, an identity is an email address or domain that you use when you send email. Before you can use an identity to send email with Amazon Pinpoint, you first have to verify it. By verifying an address, you demonstrate that you're the owner of the address, and that you've given Amazon Pinpoint permission to send email from the address.</p> <p>When you verify an email address, Amazon Pinpoint sends an email to the address. Your email address is verified as soon as you follow the link in the verification email. </p> <p>When you verify a domain, this operation provides a set of DKIM tokens, which you can convert into CNAME tokens. You add these CNAME tokens to the DNS configuration for your domain. Your domain is verified when Amazon Pinpoint detects these records in the DNS configuration for your domain. It usually takes around 72 hours to complete the domain verification process.</p>"
@@ -190,6 +202,9 @@
         },
         {
           "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
         }
       ],
       "documentation": "<p>Delete an existing configuration set.</p> <p>In Amazon Pinpoint, <i>configuration sets</i> are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.</p>"
@@ -240,6 +255,9 @@
         },
         {
           "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
         }
       ],
       "documentation": "<p>Delete a dedicated IP pool.</p>"
@@ -265,6 +283,9 @@
         },
         {
           "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
         }
       ],
       "documentation": "<p>Deletes an email identity that you previously verified for use with Amazon Pinpoint. An identity can be either an email address or a domain name.</p>"
@@ -607,6 +628,31 @@
       ],
       "documentation": "<p>Returns a list of all of the email identities that are associated with your Amazon Pinpoint account. An identity can be either an email address or a domain. This operation returns identities that are verified as well as those that aren't.</p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/email/tags"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Retrieve a list of the tags (keys and values) that are associated with a specific resource. A <i>tag</i> is a label that you optionally define and associate with a resource in Amazon Pinpoint. Each tag consists of a required <i>tag key</i> and an optional associated <i>tag value</i>. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.</p>"
+    },
     "PutAccountDedicatedIpWarmupAttributes": {
       "name": "PutAccountDedicatedIpWarmupAttributes",
       "http": {
@@ -947,6 +993,62 @@
       ],
       "documentation": "<p>Sends an email message. You can use the Amazon Pinpoint Email API to send two types of messages:</p> <ul> <li> <p> <b>Simple</b> – A standard email message. When you create this type of message, you specify the sender, the recipient, and the message body, and Amazon Pinpoint assembles the message for you.</p> </li> <li> <p> <b>Raw</b> – A raw, MIME-formatted email message. When you send this type of email, you have to specify all of the message headers, as well as the message body. You can use this message type to send messages that contain attachments. The message that you specify has to be a valid MIME message.</p> </li> </ul>"
     },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/email/tags"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Add one or more tags (keys and values) to one or more specified resources. A <i>tag</i> is a label that you optionally define and associate with a resource in Amazon Pinpoint. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria. A resource can have as many as 50 tags.</p> <p>Each tag consists of a required <i>tag key</i> and an associated <i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/email/tags"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Remove one or more tags (keys and values) from a specified resource.</p>"
+    },
     "UpdateConfigurationSetEventDestination": {
       "name": "UpdateConfigurationSetEventDestination",
       "http": {
@@ -1170,6 +1272,10 @@
         "SendingOptions": {
           "shape": "SendingOptions",
           "documentation": "<p>An object that defines whether or not Amazon Pinpoint can send email that you send using the configuration set.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>An object that defines the tags (keys and values) that you want to associate with the configuration set.</p>"
         }
       },
       "documentation": "<p>A request to create a configuration set.</p>"
@@ -1188,6 +1294,10 @@
         "PoolName": {
           "shape": "PoolName",
           "documentation": "<p>The name of the dedicated IP pool.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>An object that defines the tags (keys and values) that you want to associate with the pool.</p>"
         }
       },
       "documentation": "<p>A request to create a new dedicated IP pool.</p>"
@@ -1215,6 +1325,10 @@
         "Content": {
           "shape": "EmailContent",
           "documentation": "<p>The HTML body of the message that you sent when you performed the predictive inbox placement test.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>An object that defines the tags (keys and values) that you want to associate with the predictive inbox placement test.</p>"
         }
       },
       "documentation": "<p>A request to perform a predictive inbox placement test. Predictive inbox placement tests can help you predict how your messages will be handled by various email providers around the world. When you perform a predictive inbox placement test, you provide a sample message that contains the content that you plan to send to your customers. Amazon Pinpoint then sends that message to special email addresses spread across several major email providers. After about 24 hours, the test is complete, and you can use the <code>GetDeliverabilityTestReport</code> operation to view the results of the test.</p>"
@@ -1246,6 +1360,10 @@
         "EmailIdentity": {
           "shape": "Identity",
           "documentation": "<p>The email address or domain that you want to verify.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>An object that defines the tags (keys and values) that you want to associate with the email identity.</p>"
         }
       },
       "documentation": "<p>A request to begin the verification process for an email identity (an email address or domain).</p>"
@@ -1259,7 +1377,7 @@
         },
         "VerifiedForSendingStatus": {
           "shape": "Enabled",
-          "documentation": "<p>Specifies whether or not the identity is verified. In Amazon Pinpoint, you can only send email from verified email addresses or domains. For more information about verifying identities, see the <a href=\"http://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html\">Amazon Pinpoint User Guide</a>.</p>"
+          "documentation": "<p>Specifies whether or not the identity is verified. In Amazon Pinpoint, you can only send email from verified email addresses or domains. For more information about verifying identities, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html\">Amazon Pinpoint User Guide</a>.</p>"
         },
         "DkimAttributes": {
           "shape": "DkimAttributes",
@@ -2018,7 +2136,7 @@
         },
         "VerifiedForSendingStatus": {
           "shape": "Enabled",
-          "documentation": "<p>Specifies whether or not the identity is verified. In Amazon Pinpoint, you can only send email from verified email addresses or domains. For more information about verifying identities, see the <a href=\"http://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html\">Amazon Pinpoint User Guide</a>.</p>"
+          "documentation": "<p>Specifies whether or not the identity is verified. In Amazon Pinpoint, you can only send email from verified email addresses or domains. For more information about verifying identities, see the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html\">Amazon Pinpoint User Guide</a>.</p>"
         },
         "DkimAttributes": {
           "shape": "DkimAttributes",
@@ -2238,6 +2356,30 @@
         "shape": "PoolName"
       },
       "documentation": "<p>A list of dedicated IP pools that are associated with your Amazon Pinpoint account.</p>"
+    },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to retrieve tag information for.</p>"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "required": [
+        "Tags"
+      ],
+      "members": {
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>An array that lists all the tags that are associated with the resource. Each tag consists of a required tag key (<code>Key</code>) and an associated tag value (<code>Value</code>)</p>"
+        }
+      }
     },
     "MailFromAttributes": {
       "type": "structure",
@@ -2818,10 +2960,67 @@
       "members": {
         "TopicArn": {
           "shape": "AmazonResourceName",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish email events to. For more information about Amazon SNS topics, see the <a href=\"http://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html\">Amazon SNS Developer Guide</a>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish email events to. For more information about Amazon SNS topics, see the <a href=\"https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html\">Amazon SNS Developer Guide</a>.</p>"
         }
       },
       "documentation": "<p>An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to send notification when certain email events occur.</p>"
+    },
+    "Tag": {
+      "type": "structure",
+      "required": [
+        "Key",
+        "Value"
+      ],
+      "members": {
+        "Key": {
+          "shape": "TagKey",
+          "documentation": "<p>One part of a key-value pair that defines a tag. The maximum length of a tag key is 128 characters. The minimum length is 1 character.</p>"
+        },
+        "Value": {
+          "shape": "TagValue",
+          "documentation": "<p>The optional part of a key-value pair that defines a tag. The maximum length of a tag value is 256 characters. The minimum length is 0 characters. If you don’t want a resource to have a specific tag value, don’t specify a value for this parameter. Amazon Pinpoint will set the value to an empty string.</p>"
+        }
+      },
+      "documentation": "<p>An object that defines the tags that are associated with a resource. A <i>tag</i> is a label that you optionally define and associate with a resource in Amazon Pinpoint. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria. A resource can have as many as 50 tags.</p> <p>Each tag consists of a required <i>tag key</i> and an associated <i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for a more specific tag value. A tag value acts as a descriptor within a tag key. For example, if you have two versions of an Amazon Pinpoint project, one for internal testing and another for external use, you might assign a <code>Stack</code> tag key to both projects. The value of the <code>Stack</code> tag key might be <code>Test</code> for one project and <code>Production</code> for the other project.</p> <p>A tag key can contain as many as 128 characters. A tag value can contain as many as 256 characters. The characters can be Unicode letters, digits, white space, or one of the following symbols: _ . : / = + -. The following additional restrictions apply to tags:</p> <ul> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>For each associated resource, each tag key must be unique and it can have only one value.</p> </li> <li> <p>The <code>aws:</code> prefix is reserved for use by AWS; you can’t use it in any tag keys or values that you define. In addition, you can't edit or remove tag keys or values that use this prefix. Tags that use this prefix don’t count against the limit of 50 tags per resource.</p> </li> <li> <p>You can associate tags with public or shared resources, but the tags are available only for your AWS account, not any other accounts that share the resource. In addition, the tags are available only for resources that are located in the specified AWS Region for your AWS account.</p> </li> </ul>"
+    },
+    "TagKey": {
+      "type": "string"
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      }
+    },
+    "TagList": {
+      "type": "list",
+      "member": {
+        "shape": "Tag"
+      }
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "Tags"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to add one or more tags to.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of the tags that you want to add to the resource. A tag consists of a required tag key (<code>Key</code>) and an associated tag value (<code>Value</code>). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.</p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string"
     },
     "Timestamp": {
       "type": "timestamp"
@@ -2838,6 +3037,31 @@
         }
       },
       "documentation": "<p>An object that defines the tracking options for a configuration set. When you use Amazon Pinpoint to send an email, it contains an invisible image that's used to track when recipients open your email. If your email contains links, those links are changed slightly in order to track when recipients click them.</p> <p>These images and links include references to a domain operated by AWS. You can optionally configure Amazon Pinpoint to use a domain that you operate for these images and links.</p>"
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "TagKeys"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "AmazonResourceName",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to remove one or more tags from.</p>",
+          "location": "querystring",
+          "locationName": "ResourceArn"
+        },
+        "TagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>The tags (tag keys) that you want to remove from the resource. When you specify a tag key, the action removes both that key and its associated tag value.</p> <p>To remove more than one tag from the resource, append the <code>TagKeys</code> parameter and argument for each additional tag to remove, separated by an ampersand. For example: <code>/v1/email/tags?ResourceArn=ResourceArn&amp;TagKeys=Key1&amp;TagKeys=Key2</code> </p>",
+          "location": "querystring",
+          "locationName": "TagKeys"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateConfigurationSetEventDestinationRequest": {
       "type": "structure",
@@ -2906,5 +3130,5 @@
       ]
     }
   },
-  "documentation": "<fullname>Amazon Pinpoint Email Service</fullname> <p> This document contains reference information for the <a href=\"https://aws.amazon.com/pinpoint\">Amazon Pinpoint</a> Email API, version 1.0. This document is best used in conjunction with the <a href=\"http://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html\">Amazon Pinpoint Developer Guide</a>.</p> <p>The Amazon Pinpoint Email API is available in the US East (N. Virginia), US West (Oregon) and the EU (Ireland) Regions at the following endpoints:</p> <ul> <li> <p> <b>US East (N. Virginia)</b>: <code>email.us-east-1.amazonaws.com</code> </p> </li> <li> <p> <b>US West (Oregon)</b>: <code>email.us-west-2.amazonaws.com</code> </p> </li> <li> <p> <b>EU (Ireland)</b>: <code>email.eu-west-1.amazonaws.com</code> </p> </li> </ul>"
+  "documentation": "<fullname>Amazon Pinpoint Email Service</fullname> <p> This document contains reference information for the <a href=\"https://aws.amazon.com/pinpoint\">Amazon Pinpoint</a> Email API, version 1.0. This document is best used in conjunction with the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html\">Amazon Pinpoint Developer Guide</a>.</p> <p>The Amazon Pinpoint Email API is available in the US East (N. Virginia), US West (Oregon), EU (Frankfurt), and EU (Ireland) Regions at the following endpoints:</p> <ul> <li> <p> <b>US East (N. Virginia)</b>: <code>email.us-east-1.amazonaws.com</code> </p> </li> <li> <p> <b>US West (Oregon)</b>: <code>email.us-west-2.amazonaws.com</code> </p> </li> <li> <p> <b>EU (Frankfurt)</b>: <code>email.eu-central-1.amazonaws.com</code> </p> </li> <li> <p> <b>EU (Ireland)</b>: <code>email.eu-west-1.amazonaws.com</code> </p> </li> </ul>"
 }

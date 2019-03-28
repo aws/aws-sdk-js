@@ -196,6 +196,14 @@ declare class PinpointEmail extends Service {
    */
   listEmailIdentities(callback?: (err: AWSError, data: PinpointEmail.Types.ListEmailIdentitiesResponse) => void): Request<PinpointEmail.Types.ListEmailIdentitiesResponse, AWSError>;
   /**
+   * Retrieve a list of the tags (keys and values) that are associated with a specific resource. A tag is a label that you optionally define and associate with a resource in Amazon Pinpoint. Each tag consists of a required tag key and an optional associated tag value. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.
+   */
+  listTagsForResource(params: PinpointEmail.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: PinpointEmail.Types.ListTagsForResourceResponse) => void): Request<PinpointEmail.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Retrieve a list of the tags (keys and values) that are associated with a specific resource. A tag is a label that you optionally define and associate with a resource in Amazon Pinpoint. Each tag consists of a required tag key and an optional associated tag value. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: PinpointEmail.Types.ListTagsForResourceResponse) => void): Request<PinpointEmail.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Enable or disable the automatic warm-up feature for dedicated IP addresses.
    */
   putAccountDedicatedIpWarmupAttributes(params: PinpointEmail.Types.PutAccountDedicatedIpWarmupAttributesRequest, callback?: (err: AWSError, data: PinpointEmail.Types.PutAccountDedicatedIpWarmupAttributesResponse) => void): Request<PinpointEmail.Types.PutAccountDedicatedIpWarmupAttributesResponse, AWSError>;
@@ -299,6 +307,22 @@ declare class PinpointEmail extends Service {
    * Sends an email message. You can use the Amazon Pinpoint Email API to send two types of messages:    Simple – A standard email message. When you create this type of message, you specify the sender, the recipient, and the message body, and Amazon Pinpoint assembles the message for you.    Raw – A raw, MIME-formatted email message. When you send this type of email, you have to specify all of the message headers, as well as the message body. You can use this message type to send messages that contain attachments. The message that you specify has to be a valid MIME message.  
    */
   sendEmail(callback?: (err: AWSError, data: PinpointEmail.Types.SendEmailResponse) => void): Request<PinpointEmail.Types.SendEmailResponse, AWSError>;
+  /**
+   * Add one or more tags (keys and values) to one or more specified resources. A tag is a label that you optionally define and associate with a resource in Amazon Pinpoint. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria. A resource can have as many as 50 tags. Each tag consists of a required tag key and an associated tag value, both of which you define. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.
+   */
+  tagResource(params: PinpointEmail.Types.TagResourceRequest, callback?: (err: AWSError, data: PinpointEmail.Types.TagResourceResponse) => void): Request<PinpointEmail.Types.TagResourceResponse, AWSError>;
+  /**
+   * Add one or more tags (keys and values) to one or more specified resources. A tag is a label that you optionally define and associate with a resource in Amazon Pinpoint. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria. A resource can have as many as 50 tags. Each tag consists of a required tag key and an associated tag value, both of which you define. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.
+   */
+  tagResource(callback?: (err: AWSError, data: PinpointEmail.Types.TagResourceResponse) => void): Request<PinpointEmail.Types.TagResourceResponse, AWSError>;
+  /**
+   * Remove one or more tags (keys and values) from a specified resource.
+   */
+  untagResource(params: PinpointEmail.Types.UntagResourceRequest, callback?: (err: AWSError, data: PinpointEmail.Types.UntagResourceResponse) => void): Request<PinpointEmail.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Remove one or more tags (keys and values) from a specified resource.
+   */
+  untagResource(callback?: (err: AWSError, data: PinpointEmail.Types.UntagResourceResponse) => void): Request<PinpointEmail.Types.UntagResourceResponse, AWSError>;
   /**
    * Update the configuration of an event destination for a configuration set. In Amazon Pinpoint, events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.
    */
@@ -411,6 +435,10 @@ declare namespace PinpointEmail {
      * An object that defines whether or not Amazon Pinpoint can send email that you send using the configuration set.
      */
     SendingOptions?: SendingOptions;
+    /**
+     * An object that defines the tags (keys and values) that you want to associate with the configuration set.
+     */
+    Tags?: TagList;
   }
   export interface CreateConfigurationSetResponse {
   }
@@ -419,6 +447,10 @@ declare namespace PinpointEmail {
      * The name of the dedicated IP pool.
      */
     PoolName: PoolName;
+    /**
+     * An object that defines the tags (keys and values) that you want to associate with the pool.
+     */
+    Tags?: TagList;
   }
   export interface CreateDedicatedIpPoolResponse {
   }
@@ -435,6 +467,10 @@ declare namespace PinpointEmail {
      * The HTML body of the message that you sent when you performed the predictive inbox placement test.
      */
     Content: EmailContent;
+    /**
+     * An object that defines the tags (keys and values) that you want to associate with the predictive inbox placement test.
+     */
+    Tags?: TagList;
   }
   export interface CreateDeliverabilityTestReportResponse {
     /**
@@ -451,6 +487,10 @@ declare namespace PinpointEmail {
      * The email address or domain that you want to verify.
      */
     EmailIdentity: Identity;
+    /**
+     * An object that defines the tags (keys and values) that you want to associate with the email identity.
+     */
+    Tags?: TagList;
   }
   export interface CreateEmailIdentityResponse {
     /**
@@ -1021,6 +1061,18 @@ declare namespace PinpointEmail {
     NextToken?: NextToken;
   }
   export type ListOfDedicatedIpPools = PoolName[];
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource that you want to retrieve tag information for.
+     */
+    ResourceArn: AmazonResourceName;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * An array that lists all the tags that are associated with the resource. Each tag consists of a required tag key (Key) and an associated tag value (Value)
+     */
+    Tags: TagList;
+  }
   export interface MailFromAttributes {
     /**
      * The name of a domain that an email identity uses as a custom MAIL FROM domain.
@@ -1332,12 +1384,50 @@ declare namespace PinpointEmail {
      */
     TopicArn: AmazonResourceName;
   }
+  export interface Tag {
+    /**
+     * One part of a key-value pair that defines a tag. The maximum length of a tag key is 128 characters. The minimum length is 1 character.
+     */
+    Key: TagKey;
+    /**
+     * The optional part of a key-value pair that defines a tag. The maximum length of a tag value is 256 characters. The minimum length is 0 characters. If you don’t want a resource to have a specific tag value, don’t specify a value for this parameter. Amazon Pinpoint will set the value to an empty string.
+     */
+    Value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource that you want to add one or more tags to.
+     */
+    ResourceArn: AmazonResourceName;
+    /**
+     * A list of the tags that you want to add to the resource. A tag consists of a required tag key (Key) and an associated tag value (Value). The maximum length of a tag key is 128 characters. The maximum length of a tag value is 256 characters.
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type Timestamp = Date;
   export interface TrackingOptions {
     /**
      * The domain that you want to use for tracking open and click events.
      */
     CustomRedirectDomain: CustomRedirectDomain;
+  }
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource that you want to remove one or more tags from.
+     */
+    ResourceArn: AmazonResourceName;
+    /**
+     * The tags (tag keys) that you want to remove from the resource. When you specify a tag key, the action removes both that key and its associated tag value. To remove more than one tag from the resource, append the TagKeys parameter and argument for each additional tag to remove, separated by an ampersand. For example: /v1/email/tags?ResourceArn=ResourceArn&amp;TagKeys=Key1&amp;TagKeys=Key2 
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
   }
   export interface UpdateConfigurationSetEventDestinationRequest {
     /**

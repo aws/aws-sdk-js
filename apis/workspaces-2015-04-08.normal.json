@@ -567,7 +567,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Modifies the properties of the specified Amazon WorkSpaces client.</p>"
+      "documentation": "<p>Modifies the properties of the specified Amazon WorkSpaces clients.</p>"
     },
     "ModifyWorkspaceProperties": {
       "name": "ModifyWorkspaceProperties",
@@ -657,7 +657,7 @@
       "output": {
         "shape": "RebuildWorkspacesResult"
       },
-      "documentation": "<p>Rebuilds the specified WorkSpace.</p> <p>You cannot rebuild a WorkSpace unless its state is <code>AVAILABLE</code>, <code>ERROR</code>, or <code>UNHEALTHY</code>.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href=\"http://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html\">Rebuild a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.</p>"
+      "documentation": "<p>Rebuilds the specified WorkSpace.</p> <p>You cannot rebuild a WorkSpace unless its state is <code>AVAILABLE</code>, <code>ERROR</code>, or <code>UNHEALTHY</code>.</p> <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss of data. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html\">Rebuild a WorkSpace</a>.</p> <p>This operation is asynchronous and returns before the WorkSpaces have been completely rebuilt.</p>"
     },
     "RevokeIpRules": {
       "name": "RevokeIpRules",
@@ -951,6 +951,10 @@
         "UserRules": {
           "shape": "IpRuleList",
           "documentation": "<p>The rules to add to the group.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags. Each WorkSpaces resource can have a maximum of 50 tags.</p>"
         }
       }
     },
@@ -1169,7 +1173,7 @@
       "members": {
         "ResourceIds": {
           "shape": "ResourceIdList",
-          "documentation": "<p>The resource identifiers, in the form of directory IDs.</p>"
+          "documentation": "<p>The resource identifier, in the form of directory IDs.</p>"
         }
       }
     },
@@ -1541,6 +1545,10 @@
         "ImageDescription": {
           "shape": "WorkspaceImageDescription",
           "documentation": "<p>The description of the WorkSpace image.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags. Each WorkSpaces resource can have a maximum of 50 tags.</p>"
         }
       }
     },
@@ -2487,7 +2495,7 @@
       "members": {
         "RunningMode": {
           "shape": "RunningMode",
-          "documentation": "<p>The running mode. For more information, see <a href=\"http://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html\">Manage the WorkSpace Running Mode</a>.</p>"
+          "documentation": "<p>The running mode. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/running-mode.html\">Manage the WorkSpace Running Mode</a>.</p>"
         },
         "RunningModeAutoStopTimeoutInMinutes": {
           "shape": "RunningModeAutoStopTimeoutInMinutes",

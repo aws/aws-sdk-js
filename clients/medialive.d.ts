@@ -1709,6 +1709,13 @@ one destination per packager.
      */
     InputLossBehavior?: InputLossBehavior;
     /**
+     * Indicates how MediaLive pipelines are synchronized.
+
+PIPELINELOCKING - MediaLive will attempt to synchronize the output of each pipeline to the other.
+EPOCHLOCKING - MediaLive will attempt to synchronize the output of each pipeline to the Unix epoch.
+     */
+    OutputLockingMode?: GlobalConfigurationOutputLockingMode;
+    /**
      * Indicates whether the rate of frames emitted by the Live encoder should be paced by its system clock (which optionally may be locked to another source via NTP) or should be locked to the clock of the source that is providing the input stream.
      */
     OutputTimingSource?: GlobalConfigurationOutputTimingSource;
@@ -1719,6 +1726,7 @@ one destination per packager.
   }
   export type GlobalConfigurationInputEndAction = "NONE"|"SWITCH_AND_LOOP_INPUTS"|string;
   export type GlobalConfigurationLowFramerateInputs = "DISABLED"|"ENABLED"|string;
+  export type GlobalConfigurationOutputLockingMode = "EPOCH_LOCKING"|"PIPELINE_LOCKING"|string;
   export type GlobalConfigurationOutputTimingSource = "INPUT_CLOCK"|"SYSTEM_CLOCK"|string;
   export type H264AdaptiveQuantization = "HIGH"|"HIGHER"|"LOW"|"MAX"|"MEDIUM"|"OFF"|string;
   export type H264ColorMetadata = "IGNORE"|"INSERT"|string;
