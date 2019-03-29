@@ -574,6 +574,10 @@ declare namespace Comprehend {
      * The language of the input documents. You can specify English ("en") or Spanish ("es"). All documents must be in the same language.
      */
     LanguageCode: LanguageCode;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
   }
   export interface CreateDocumentClassifierResponse {
     /**
@@ -602,6 +606,10 @@ declare namespace Comprehend {
      *  The language of the input documents. All documents must be in the same language. Only English ("en") is currently supported. 
      */
     LanguageCode: LanguageCode;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
   }
   export interface CreateEntityRecognizerResponse {
     /**
@@ -860,6 +868,10 @@ declare namespace Comprehend {
      * The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
   }
   export type DocumentClassificationJobPropertiesList = DocumentClassificationJobProperties[];
   export type DocumentClassifierArn = string;
@@ -928,6 +940,10 @@ declare namespace Comprehend {
      * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
   }
   export type DocumentClassifierPropertiesList = DocumentClassifierProperties[];
   export interface DominantLanguage {
@@ -995,6 +1011,10 @@ declare namespace Comprehend {
      * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
   }
   export type DominantLanguageDetectionJobPropertiesList = DominantLanguageDetectionJobProperties[];
   export type Double = number;
@@ -1061,6 +1081,10 @@ declare namespace Comprehend {
      * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
   }
   export type EntitiesDetectionJobPropertiesList = EntitiesDetectionJobProperties[];
   export interface Entity {
@@ -1220,6 +1244,10 @@ declare namespace Comprehend {
      *  The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
   }
   export type EntityRecognizerPropertiesList = EntityRecognizerProperties[];
   export type EntityType = "PERSON"|"LOCATION"|"ORGANIZATION"|"COMMERCIAL_ITEM"|"EVENT"|"DATE"|"QUANTITY"|"TITLE"|"OTHER"|string;
@@ -1325,8 +1353,13 @@ declare namespace Comprehend {
      * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
   }
   export type KeyPhrasesDetectionJobPropertiesList = KeyPhrasesDetectionJobProperties[];
+  export type KmsKeyId = string;
   export type LanguageCode = "en"|"es"|"fr"|"de"|"it"|"pt"|string;
   export interface ListDocumentClassificationJobsRequest {
     /**
@@ -1537,6 +1570,10 @@ declare namespace Comprehend {
      * When you use the OutputDataConfig object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data. The URI must be in the same region as the API endpoint that you are calling. The location is used as the prefix for the actual location of the output file. When the topic detection job is finished, the service creates an output file in a directory specific to the job. The S3Uri field contains the location of the output file, called output.tar.gz. It is a compressed archive that contains the ouput of the operation.
      */
     S3Uri: S3Uri;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt the output results from an analysis job. The KmsKeyId can be one of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"    KMS Key Alias: "alias/ExampleAlias"    ARN of a KMS Key Alias: "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"   
+     */
+    KmsKeyId?: KmsKeyId;
   }
   export interface PartOfSpeechTag {
     /**
@@ -1609,6 +1646,10 @@ declare namespace Comprehend {
      * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn?: IamRoleArn;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
   }
   export type SentimentDetectionJobPropertiesList = SentimentDetectionJobProperties[];
   export interface SentimentScore {
@@ -1655,6 +1696,10 @@ declare namespace Comprehend {
      * A unique identifier for the request. If you do not set the client request token, Amazon Comprehend generates one.
      */
     ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
   }
   export interface StartDocumentClassificationJobResponse {
     /**
@@ -1687,6 +1732,10 @@ declare namespace Comprehend {
      * A unique identifier for the request. If you do not set the client request token, Amazon Comprehend generates one.
      */
     ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
   }
   export interface StartDominantLanguageDetectionJobResponse {
     /**
@@ -1727,6 +1776,10 @@ declare namespace Comprehend {
      * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
      */
     ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
   }
   export interface StartEntitiesDetectionJobResponse {
     /**
@@ -1763,6 +1816,10 @@ declare namespace Comprehend {
      * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
      */
     ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
   }
   export interface StartKeyPhrasesDetectionJobResponse {
     /**
@@ -1799,6 +1856,10 @@ declare namespace Comprehend {
      * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
      */
     ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
   }
   export interface StartSentimentDetectionJobResponse {
     /**
@@ -1835,6 +1896,10 @@ declare namespace Comprehend {
      * A unique identifier for the request. If you do not set the client request token, Amazon Comprehend generates one.
      */
     ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
   }
   export interface StartTopicsDetectionJobResponse {
     /**
@@ -2007,6 +2072,14 @@ declare namespace Comprehend {
      * The number of topics to detect supplied when you created the topic detection job. The default is 10. 
      */
     NumberOfTopics?: Integer;
+    /**
+     *  The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn?: IamRoleArn;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job. The VolumeKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    VolumeKmsKeyId?: KmsKeyId;
   }
   export type TopicsDetectionJobPropertiesList = TopicsDetectionJobProperties[];
   /**

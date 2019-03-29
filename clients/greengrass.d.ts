@@ -180,6 +180,14 @@ declare class Greengrass extends Service {
    */
   createSubscriptionDefinitionVersion(callback?: (err: AWSError, data: Greengrass.Types.CreateSubscriptionDefinitionVersionResponse) => void): Request<Greengrass.Types.CreateSubscriptionDefinitionVersionResponse, AWSError>;
   /**
+   * Add tags to a resource.
+   */
+  tagResource(params: Greengrass.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Add tags to a resource.
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes a connector definition.
    */
   deleteConnectorDefinition(params: Greengrass.Types.DeleteConnectorDefinitionRequest, callback?: (err: AWSError, data: Greengrass.Types.DeleteConnectorDefinitionResponse) => void): Request<Greengrass.Types.DeleteConnectorDefinitionResponse, AWSError>;
@@ -243,6 +251,14 @@ declare class Greengrass extends Service {
    * Deletes a subscription definition.
    */
   deleteSubscriptionDefinition(callback?: (err: AWSError, data: Greengrass.Types.DeleteSubscriptionDefinitionResponse) => void): Request<Greengrass.Types.DeleteSubscriptionDefinitionResponse, AWSError>;
+  /**
+   * Remove tags with specified keys from a resource.
+   */
+  untagResource(params: Greengrass.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Remove tags with specified keys from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Disassociates the role from a group.
    */
@@ -604,6 +620,14 @@ declare class Greengrass extends Service {
    */
   listSubscriptionDefinitions(callback?: (err: AWSError, data: Greengrass.Types.ListSubscriptionDefinitionsResponse) => void): Request<Greengrass.Types.ListSubscriptionDefinitionsResponse, AWSError>;
   /**
+   * Retrieves the tags for a resource.
+   */
+  listTagsForResource(params: Greengrass.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Greengrass.Types.ListTagsForResourceResponse) => void): Request<Greengrass.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Retrieves the tags for a resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Greengrass.Types.ListTagsForResourceResponse) => void): Request<Greengrass.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Resets a group's deployments.
    */
   resetDeployments(params: Greengrass.Types.ResetDeploymentsRequest, callback?: (err: AWSError, data: Greengrass.Types.ResetDeploymentsResponse) => void): Request<Greengrass.Types.ResetDeploymentsResponse, AWSError>;
@@ -877,6 +901,10 @@ declare namespace Greengrass {
      * The name of the connector definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) to add to the new resource
+     */
+    tags?: Tags;
   }
   export interface CreateConnectorDefinitionResponse {
     /**
@@ -953,6 +981,10 @@ declare namespace Greengrass {
      * The name of the core definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) to add to the new resource
+     */
+    tags?: Tags;
   }
   export interface CreateCoreDefinitionResponse {
     /**
@@ -1061,6 +1093,10 @@ declare namespace Greengrass {
      * The name of the device definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) to add to the new resource
+     */
+    tags?: Tags;
   }
   export interface CreateDeviceDefinitionResponse {
     /**
@@ -1137,6 +1173,10 @@ declare namespace Greengrass {
      * The name of the function definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) to add to the new resource
+     */
+    tags?: Tags;
   }
   export interface CreateFunctionDefinitionResponse {
     /**
@@ -1233,6 +1273,10 @@ declare namespace Greengrass {
      * The name of the group.
      */
     Name?: __string;
+    /**
+     * Tag(s) to add to the new resource
+     */
+    tags?: Tags;
   }
   export interface CreateGroupResponse {
     /**
@@ -1333,6 +1377,10 @@ declare namespace Greengrass {
      * The name of the logger definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) to add to the new resource
+     */
+    tags?: Tags;
   }
   export interface CreateLoggerDefinitionResponse {
     /**
@@ -1409,6 +1457,10 @@ declare namespace Greengrass {
      * The name of the resource definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) to add to the new resource
+     */
+    tags?: Tags;
   }
   export interface CreateResourceDefinitionResponse {
     /**
@@ -1507,6 +1559,10 @@ declare namespace Greengrass {
      * The name of the subscription definition.
      */
     Name?: __string;
+    /**
+     * Tag(s) to add to the new resource
+     */
+    tags?: Tags;
   }
   export interface CreateSubscriptionDefinitionResponse {
     /**
@@ -1570,6 +1626,16 @@ declare namespace Greengrass {
      */
     Version?: __string;
   }
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: __string;
+    /**
+     * A map of the key-value pairs for the resource tag.
+     */
+    tags: __mapOf__string;
+  }
   export interface DefinitionInformation {
     /**
      * The ARN of the definition.
@@ -1599,6 +1665,10 @@ declare namespace Greengrass {
      * The name of the definition.
      */
     Name?: __string;
+    /**
+     * The tags for the definition.
+     */
+    Tags?: Tags;
   }
   export interface DeleteConnectorDefinitionRequest {
     /**
@@ -1663,6 +1733,16 @@ declare namespace Greengrass {
     SubscriptionDefinitionId: __string;
   }
   export interface DeleteSubscriptionDefinitionResponse {
+  }
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: __string;
+    /**
+     * A list of the keys to remove from the resource tags.
+     */
+    TagKeys: __listOf__string;
   }
   export interface Deployment {
     /**
@@ -1881,6 +1961,10 @@ declare namespace Greengrass {
      * Error message
      */
     ErrorMessage?: __string;
+    /**
+     * The tags for the definition.
+     */
+    tags?: __mapOf__string;
   }
   export interface GetConnectivityInfoRequest {
     /**
@@ -1933,6 +2017,10 @@ declare namespace Greengrass {
      * The name of the definition.
      */
     Name?: __string;
+    /**
+     * The tags for the definition.
+     */
+    tags?: __mapOf__string;
   }
   export interface GetConnectorDefinitionVersionRequest {
     /**
@@ -2009,6 +2097,10 @@ declare namespace Greengrass {
      * The name of the definition.
      */
     Name?: __string;
+    /**
+     * The tags for the definition.
+     */
+    tags?: __mapOf__string;
   }
   export interface GetCoreDefinitionVersionRequest {
     /**
@@ -2113,6 +2205,10 @@ declare namespace Greengrass {
      * The name of the definition.
      */
     Name?: __string;
+    /**
+     * The tags for the definition.
+     */
+    tags?: __mapOf__string;
   }
   export interface GetDeviceDefinitionVersionRequest {
     /**
@@ -2189,6 +2285,10 @@ declare namespace Greengrass {
      * The name of the definition.
      */
     Name?: __string;
+    /**
+     * The tags for the definition.
+     */
+    tags?: __mapOf__string;
   }
   export interface GetFunctionDefinitionVersionRequest {
     /**
@@ -2309,6 +2409,10 @@ declare namespace Greengrass {
      * The name of the definition.
      */
     Name?: __string;
+    /**
+     * The tags for the definition.
+     */
+    tags?: __mapOf__string;
   }
   export interface GetGroupVersionRequest {
     /**
@@ -2377,6 +2481,10 @@ declare namespace Greengrass {
      * The name of the definition.
      */
     Name?: __string;
+    /**
+     * The tags for the definition.
+     */
+    tags?: __mapOf__string;
   }
   export interface GetLoggerDefinitionVersionRequest {
     /**
@@ -2449,6 +2557,10 @@ declare namespace Greengrass {
      * The name of the definition.
      */
     Name?: __string;
+    /**
+     * The tags for the definition.
+     */
+    tags?: __mapOf__string;
   }
   export interface GetResourceDefinitionVersionRequest {
     /**
@@ -2529,6 +2641,10 @@ declare namespace Greengrass {
      * The name of the definition.
      */
     Name?: __string;
+    /**
+     * The tags for the definition.
+     */
+    tags?: __mapOf__string;
   }
   export interface GetSubscriptionDefinitionVersionRequest {
     /**
@@ -3082,6 +3198,18 @@ declare namespace Greengrass {
      */
     NextToken?: __string;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: __string;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * A map of the key-value pairs for the resource tag.
+     */
+    tags?: __mapOf__string;
+  }
   export interface LocalDeviceResourceData {
     /**
      * Group/owner related settings for local resources.
@@ -3259,6 +3387,10 @@ declare namespace Greengrass {
      * The URI of the input file contained in the S3 bucket. The execution role must have ''getObject'' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100 MB. Currently, AWS IoT Greengrass supports only ''NewDeployment'' deployment types.
      */
     InputFileUri?: __string;
+    /**
+     * Tag(s) to add to the new resource
+     */
+    tags?: Tags;
   }
   export interface StartBulkDeploymentResponse {
     /**
@@ -3302,6 +3434,7 @@ declare namespace Greengrass {
      */
     Subscriptions?: __listOfSubscription;
   }
+  export type Tags = {[key: string]: __string};
   export type UpdateAgentLogLevel = "NONE"|"TRACE"|"DEBUG"|"VERBOSE"|"INFO"|"WARN"|"ERROR"|"FATAL"|string;
   export interface UpdateConnectivityInfoRequest {
     /**

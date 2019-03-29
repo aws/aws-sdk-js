@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudWatch",
+        "description": "Added 3 new APIs, and one additional parameter to PutMetricAlarm API, to support tagging of CloudWatch Alarms."
+    },
+    {
+        "type": "feature",
+        "category": "Comprehend",
+        "description": "With this release AWS Comprehend supports encryption of output results of analysis jobs and volume data on the storage volume attached to the compute instance that processes the analysis job."
+    },
+    {
+        "type": "feature",
+        "category": "Greengrass",
+        "description": "Greengrass APIs now support tagging operations on resources"
+    }
+]

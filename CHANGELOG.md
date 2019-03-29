@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.431.0-->
+<!--LATEST=2.432.0-->
 <!--ENTRYINSERT-->
+
+## 2.432.0
+* feature: CloudWatch: Added 3 new APIs, and one additional parameter to PutMetricAlarm API, to support tagging of CloudWatch Alarms.
+* feature: Comprehend: With this release AWS Comprehend supports encryption of output results of analysis jobs and volume data on the storage volume attached to the compute instance that processes the analysis job.
+* feature: Greengrass: Greengrass APIs now support tagging operations on resources
 
 ## 2.431.0
 * feature: MediaLive: This release adds a new output locking mode synchronized to the Unix epoch.

@@ -475,6 +475,24 @@
       ],
       "documentation": "Creates a version of a subscription definition which has already been defined."
     },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/tags/{resource-arn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "invalid request"
+        }
+      ],
+      "documentation": "Add tags to a resource."
+    },
     "DeleteConnectorDefinition": {
       "name": "DeleteConnectorDefinition",
       "http": {
@@ -650,6 +668,24 @@
         }
       ],
       "documentation": "Deletes a subscription definition."
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resource-arn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "invalid request"
+        }
+      ],
+      "documentation": "Remove tags with specified keys from a resource."
     },
     "DisassociateRoleFromGroup": {
       "name": "DisassociateRoleFromGroup",
@@ -1606,6 +1642,27 @@
       "errors": [],
       "documentation": "Retrieves a list of subscription definitions."
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resource-arn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "invalid request"
+        }
+      ],
+      "documentation": "Retrieves the tags for a resource."
+    },
     "ResetDeployments": {
       "name": "ResetDeployments",
       "http": {
@@ -2145,6 +2202,10 @@
         "Name": {
           "shape": "__string",
           "documentation": "The name of the connector definition."
+        },
+        "tags": {
+          "shape": "Tags",
+          "documentation": "Tag(s) to add to the new resource"
         }
       }
     },
@@ -2242,6 +2303,10 @@
         "Name": {
           "shape": "__string",
           "documentation": "The name of the core definition."
+        },
+        "tags": {
+          "shape": "Tags",
+          "documentation": "Tag(s) to add to the new resource"
         }
       },
       "documentation": "Information needed to create a core definition."
@@ -2385,6 +2450,10 @@
         "Name": {
           "shape": "__string",
           "documentation": "The name of the device definition."
+        },
+        "tags": {
+          "shape": "Tags",
+          "documentation": "Tag(s) to add to the new resource"
         }
       }
     },
@@ -2482,6 +2551,10 @@
         "Name": {
           "shape": "__string",
           "documentation": "The name of the function definition."
+        },
+        "tags": {
+          "shape": "Tags",
+          "documentation": "Tag(s) to add to the new resource"
         }
       }
     },
@@ -2613,6 +2686,10 @@
         "Name": {
           "shape": "__string",
           "documentation": "The name of the group."
+        },
+        "tags": {
+          "shape": "Tags",
+          "documentation": "Tag(s) to add to the new resource"
         }
       }
     },
@@ -2734,6 +2811,10 @@
         "Name": {
           "shape": "__string",
           "documentation": "The name of the logger definition."
+        },
+        "tags": {
+          "shape": "Tags",
+          "documentation": "Tag(s) to add to the new resource"
         }
       }
     },
@@ -2831,6 +2912,10 @@
         "Name": {
           "shape": "__string",
           "documentation": "The name of the resource definition."
+        },
+        "tags": {
+          "shape": "Tags",
+          "documentation": "Tag(s) to add to the new resource"
         }
       }
     },
@@ -2970,6 +3055,10 @@
         "Name": {
           "shape": "__string",
           "documentation": "The name of the subscription definition."
+        },
+        "tags": {
+          "shape": "Tags",
+          "documentation": "Tag(s) to add to the new resource"
         }
       }
     },
@@ -3051,6 +3140,25 @@
         }
       }
     },
+    "TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "resource-arn",
+          "documentation": "The Amazon Resource Name (ARN) of the resource."
+        },
+        "tags": {
+          "shape": "__mapOf__string",
+          "documentation": "A map of the key-value pairs for the resource tag."
+        }
+      },
+      "required": [
+        "ResourceArn",
+        "tags"
+      ]
+    },
     "DefinitionInformation": {
       "type": "structure",
       "members": {
@@ -3081,6 +3189,11 @@
         "Name": {
           "shape": "__string",
           "documentation": "The name of the definition."
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "The tags for the definition."
         }
       },
       "documentation": "Information about a definition."
@@ -3228,6 +3341,27 @@
     "DeleteSubscriptionDefinitionResponse": {
       "type": "structure",
       "members": {}
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "resource-arn",
+          "documentation": "The Amazon Resource Name (ARN) of the resource."
+        },
+        "TagKeys": {
+          "shape": "__listOf__string",
+          "location": "querystring",
+          "locationName": "tagKeys",
+          "documentation": "A list of the keys to remove from the resource tags."
+        }
+      },
+      "required": [
+        "TagKeys",
+        "ResourceArn"
+      ]
     },
     "Deployment": {
       "type": "structure",
@@ -3575,6 +3709,10 @@
         "ErrorMessage": {
           "shape": "__string",
           "documentation": "Error message"
+        },
+        "tags": {
+          "shape": "__mapOf__string",
+          "documentation": "The tags for the definition."
         }
       }
     },
@@ -3650,6 +3788,10 @@
         "Name": {
           "shape": "__string",
           "documentation": "The name of the definition."
+        },
+        "tags": {
+          "shape": "__mapOf__string",
+          "documentation": "The tags for the definition."
         }
       }
     },
@@ -3753,6 +3895,10 @@
         "Name": {
           "shape": "__string",
           "documentation": "The name of the definition."
+        },
+        "tags": {
+          "shape": "__mapOf__string",
+          "documentation": "The tags for the definition."
         }
       }
     },
@@ -3896,6 +4042,10 @@
         "Name": {
           "shape": "__string",
           "documentation": "The name of the definition."
+        },
+        "tags": {
+          "shape": "__mapOf__string",
+          "documentation": "The tags for the definition."
         }
       }
     },
@@ -3999,6 +4149,10 @@
         "Name": {
           "shape": "__string",
           "documentation": "The name of the definition."
+        },
+        "tags": {
+          "shape": "__mapOf__string",
+          "documentation": "The tags for the definition."
         }
       }
     },
@@ -4171,6 +4325,10 @@
         "Name": {
           "shape": "__string",
           "documentation": "The name of the definition."
+        },
+        "tags": {
+          "shape": "__mapOf__string",
+          "documentation": "The tags for the definition."
         }
       }
     },
@@ -4264,6 +4422,10 @@
         "Name": {
           "shape": "__string",
           "documentation": "The name of the definition."
+        },
+        "tags": {
+          "shape": "__mapOf__string",
+          "documentation": "The tags for the definition."
         }
       }
     },
@@ -4363,6 +4525,10 @@
         "Name": {
           "shape": "__string",
           "documentation": "The name of the definition."
+        },
+        "tags": {
+          "shape": "__mapOf__string",
+          "documentation": "The tags for the definition."
         }
       }
     },
@@ -4473,6 +4639,10 @@
         "Name": {
           "shape": "__string",
           "documentation": "The name of the definition."
+        },
+        "tags": {
+          "shape": "__mapOf__string",
+          "documentation": "The tags for the definition."
         }
       }
     },
@@ -5311,6 +5481,29 @@
         }
       }
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "resource-arn",
+          "documentation": "The Amazon Resource Name (ARN) of the resource."
+        }
+      },
+      "required": [
+        "ResourceArn"
+      ]
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "shape": "__mapOf__string",
+          "documentation": "A map of the key-value pairs for the resource tag."
+        }
+      }
+    },
     "LocalDeviceResourceData": {
       "type": "structure",
       "members": {
@@ -5590,6 +5783,10 @@
         "InputFileUri": {
           "shape": "__string",
           "documentation": "The URI of the input file contained in the S3 bucket. The execution role must have ''getObject'' permissions on this bucket to access the input file. The input file is a JSON-serialized, line delimited file with UTF-8 encoding that provides a list of group and version IDs and the deployment type. This file must be less than 100 MB. Currently, AWS IoT Greengrass supports only ''NewDeployment'' deployment types."
+        },
+        "tags": {
+          "shape": "Tags",
+          "documentation": "Tag(s) to add to the new resource"
         }
       }
     },
@@ -5656,6 +5853,15 @@
         }
       },
       "documentation": "Information about a subscription definition version."
+    },
+    "Tags": {
+      "type": "map",
+      "key": {
+        "shape": "__string"
+      },
+      "value": {
+        "shape": "__string"
+      }
     },
     "UpdateAgentLogLevel": {
       "type": "string",
