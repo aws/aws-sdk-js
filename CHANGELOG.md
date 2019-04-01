@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.432.0-->
+<!--LATEST=2.433.0-->
 <!--ENTRYINSERT-->
+
+## 2.433.0
+* feature: EMR: Amazon EMR adds the ability to modify instance group configurations on a running cluster through the new "configurations" field in the ModifyInstanceGroups API.
 
 ## 2.432.0
 * feature: CloudWatch: Added 3 new APIs, and one additional parameter to PutMetricAlarm API, to support tagging of CloudWatch Alarms.

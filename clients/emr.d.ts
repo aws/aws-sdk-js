@@ -513,7 +513,7 @@ declare namespace EMR {
      */
     RunningAmiVersion?: String;
     /**
-     * The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form emr-x.x.x, where x.x.x is an Amazon EMR release version, for example, emr-5.14.0. For more information about Amazon EMR release versions and included application versions and features, see http://docs.aws.amazon.com/emr/latest/ReleaseGuide/. The release label applies only to Amazon EMR releases versions 4.x and later. Earlier versions use AmiVersion.
+     * The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form emr-x.x.x, where x.x.x is an Amazon EMR release version, for example, emr-5.14.0. For more information about Amazon EMR release versions and included application versions and features, see https://docs.aws.amazon.com/emr/latest/ReleaseGuide/. The release label applies only to Amazon EMR releases versions 4.x and later. Earlier versions use AmiVersion.
      */
     ReleaseLabel?: String;
     /**
@@ -1140,6 +1140,18 @@ declare namespace EMR {
      */
     Configurations?: ConfigurationList;
     /**
+     * The version number of the requested configuration specification for this instance group.
+     */
+    ConfigurationsVersion?: Long;
+    /**
+     * A list of configurations that were successfully applied for an instance group last time.
+     */
+    LastSuccessfullyAppliedConfigurations?: ConfigurationList;
+    /**
+     * The version number of a configuration specification that was successfully applied for an instance group last time. 
+     */
+    LastSuccessfullyAppliedConfigurationsVersion?: Long;
+    /**
      * The EBS block devices that are mapped to this instance group.
      */
     EbsBlockDevices?: EbsBlockDeviceList;
@@ -1274,9 +1286,13 @@ declare namespace EMR {
      * Policy for customizing shrink operations.
      */
     ShrinkPolicy?: ShrinkPolicy;
+    /**
+     * A list of new or modified configurations to apply for an instance group.
+     */
+    Configurations?: ConfigurationList;
   }
   export type InstanceGroupModifyConfigList = InstanceGroupModifyConfig[];
-  export type InstanceGroupState = "PROVISIONING"|"BOOTSTRAPPING"|"RUNNING"|"RESIZING"|"SUSPENDED"|"TERMINATING"|"TERMINATED"|"ARRESTED"|"SHUTTING_DOWN"|"ENDED"|string;
+  export type InstanceGroupState = "PROVISIONING"|"BOOTSTRAPPING"|"RUNNING"|"RECONFIGURING"|"RESIZING"|"SUSPENDED"|"TERMINATING"|"TERMINATED"|"ARRESTED"|"SHUTTING_DOWN"|"ENDED"|string;
   export interface InstanceGroupStateChangeReason {
     /**
      * The programmable code for the state change reason.
@@ -1852,6 +1868,7 @@ declare namespace EMR {
      */
     Marker?: Marker;
   }
+  export type Long = number;
   export type Marker = string;
   export type MarketType = "ON_DEMAND"|"SPOT"|string;
   export interface MetricDimension {
@@ -1969,7 +1986,7 @@ declare namespace EMR {
      */
     AmiVersion?: XmlStringMaxLen256;
     /**
-     * The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form emr-x.x.x, where x.x.x is an Amazon EMR release version, for example, emr-5.14.0. For more information about Amazon EMR release versions and included application versions and features, see http://docs.aws.amazon.com/emr/latest/ReleaseGuide/. The release label applies only to Amazon EMR releases versions 4.x and later. Earlier versions use AmiVersion.
+     * The Amazon EMR release label, which determines the version of open-source application packages installed on the cluster. Release labels are in the form emr-x.x.x, where x.x.x is an Amazon EMR release version, for example, emr-5.14.0. For more information about Amazon EMR release versions and included application versions and features, see https://docs.aws.amazon.com/emr/latest/ReleaseGuide/. The release label applies only to Amazon EMR releases versions 4.x and later. Earlier versions use AmiVersion.
      */
     ReleaseLabel?: XmlStringMaxLen256;
     /**
