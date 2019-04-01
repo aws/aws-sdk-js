@@ -879,7 +879,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   */
 	  computeSha256: function computeSha256(body, done) {
 	    if (util.isNode()) {
-	      var Stream = util.stream.Stream;
+	      var Stream = util.stream.Stream || {};
 	      var fs = __webpack_require__(6);
 	      if (body instanceof Stream) {
 	        if (typeof body.path === 'string') { // assume file object
