@@ -1,3 +1,5 @@
+var jmespath = require('jmespath');
+
 module.exports = function() {
   this.Before("@rds", function (callback) {
     this.service = new this.AWS.RDS();
@@ -10,26 +12,17 @@ module.exports = function() {
     this.request(null, 'createDBSecurityGroup', params, callback, false);
   });
 
-  this.Given(/^the RDS security group name is in the result$/, function(callback) {
-    var name = this.data.DBSecurityGroup.DBSecurityGroupName;
-    this.assert.equal(name, this.dbGroupName);
+  this.Then(/the value at "([^"]*)" should contain "([^"]*)" with "([^"]*)"/, function (path, key, value, callback) {
+    var member = jmespath.search(this.data, path);
+    var containDefault = false;
+    member.forEach(function(config) {
+      console.log(config[key], value)
+      if (config[key] === value) {
+        containDefault = true
+      }
+    });
+    this.assert.ok(containDefault === true, `No ${path} has member key ${key} of the value ${value}`);
     callback();
-  });
-
-  this.Given(/^I describe the RDS security group$/, function(callback) {
-    var params = {DBSecurityGroupName: this.dbGroupName};
-    this.request(null, 'describeDBSecurityGroups', params, callback);
-  });
-
-  this.Then(/^the RDS security group should be described$/, function(callback) {
-    var item = this.data.DBSecurityGroups[0];
-    this.assert.equal(item.DBSecurityGroupName, this.dbGroupName);
-    callback();
-  });
-
-  this.Then(/^I delete the RDS security group$/, function(callback) {
-    var params = {DBSecurityGroupName: this.dbGroupName};
-    this.request(null, 'deleteDBSecurityGroup', params, callback);
   });
 
   this.Given(/^I paginate the "([^"]*)" operation asynchronously with limit (\d+)$/, function (operation, limit, callback) {
