@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "utility",
+  "description": "Guard against undefined util.stream.Stream"
+}
