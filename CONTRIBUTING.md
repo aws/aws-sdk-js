@@ -87,6 +87,15 @@ npm run unit
 
 See the implementation of the `test` script in `package.json` for more options.
 
+*Optional*: run integration tests located in [features folder](./features):
+
+Make sure you have valid AWS credentials available and run then the the integration test for 
+specific service, for example:
+
+```
+AWS_REGION=[set region] node node_modules/cucumber/bin/cucumber.js --tag @s3
+```
+
 ### Changelog
 
 We have moved to using a changelog to document changes between SDK versions instead of [release notes][releasenotes].
