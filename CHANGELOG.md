@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.433.0-->
+<!--LATEST=2.434.0-->
 <!--ENTRYINSERT-->
+
+## 2.434.0
+* feature: EC2: Add paginators.
+* feature: SecurityHub: This update includes 3 additional error codes: AccessDeniedException, InvalidAccessException, and ResourceConflictException. This update also removes the error code ResourceNotFoundException from the GetFindings, GetInvitationsCount, ListInvitations, and ListMembers operations. 
 
 ## 2.433.0
 * feature: EMR: Amazon EMR adds the ability to modify instance group configurations on a running cluster through the new "configurations" field in the ModifyInstanceGroups API.
