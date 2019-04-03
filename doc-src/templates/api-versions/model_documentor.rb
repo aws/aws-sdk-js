@@ -591,12 +591,12 @@ class ExampleShapeVisitor
   end
 
   def visit_integer(node, required = false)
-    "0"
+    "'NUMBER_VALUE'"
   end
   alias visit_long visit_integer
 
   def visit_float(node, required = false)
-    "0.0"
+    "'NUMBER_VALUE'"
   end
   alias visit_double visit_float
   alias visit_bigdecimal visit_float
