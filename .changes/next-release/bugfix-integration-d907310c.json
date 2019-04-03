@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "integration",
-  "description": "remove rds create DB security group test"
-}

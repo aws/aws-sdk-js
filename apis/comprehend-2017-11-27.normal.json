@@ -185,6 +185,9 @@
           "shape": "ResourceInUseException"
         },
         {
+          "shape": "TooManyTagsException"
+        },
+        {
           "shape": "TooManyRequestsException"
         },
         {
@@ -220,6 +223,9 @@
         },
         {
           "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "TooManyTagsException"
         },
         {
           "shape": "TooManyRequestsException"
@@ -864,6 +870,31 @@
       ],
       "documentation": "<p>Gets a list of sentiment detection jobs that you have submitted.</p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Lists all tags associated with a given Amazon Comprehend resource. Up to the maximum number of tags allowed per resource will be displayed. </p>"
+    },
     "ListTopicsDetectionJobs": {
       "name": "ListTopicsDetectionJobs",
       "http": {
@@ -1227,6 +1258,68 @@
         }
       ],
       "documentation": "<p>Stops an entity recognizer training job while in progress.</p> <p>If the training job state is <code>TRAINING</code>, the job is marked for termination and put into the <code>STOP_REQUESTED</code> state. If the training job completes before it can be stopped, it is put into the <code>TRAINED</code>; otherwise the training job is stopped and putted into the <code>STOPPED</code> state and the service sends back an HTTP 200 response with an empty HTTP body.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TooManyTagsException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Associates a specific tag with an Amazon Comprehend resource. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with the key-value pair ‘Department’:’Sales’ might be added to a resource to indicate its use by a particular department. </p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "TooManyTagKeysException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Removes a specific tag associated with an Amazon Comprehend resource. </p>"
     }
   },
   "shapes": {
@@ -1546,6 +1639,11 @@
       "min": 1,
       "pattern": "^[a-zA-Z0-9-]+$"
     },
+    "ComprehendArn": {
+      "type": "string",
+      "max": 256,
+      "pattern": "arn:aws(-[^:]+)?:comprehend:[a-zA-Z0-9-]*:[0-9]{12}:[a-zA-Z0-9-]{1,64}/[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+    },
     "ComprehendArnName": {
       "type": "string",
       "max": 63,
@@ -1567,6 +1665,10 @@
         "DataAccessRoleArn": {
           "shape": "IamRoleArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Tags to be associated with the document classifier being created. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with the key-value pair ‘Department’:’Sales’ might be added to a resource to indicate its use by a particular department. </p>"
         },
         "InputDataConfig": {
           "shape": "DocumentClassifierInputDataConfig",
@@ -1612,6 +1714,10 @@
         "DataAccessRoleArn": {
           "shape": "IamRoleArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Tags to be associated with the entity recognizer being created. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with the key-value pair ‘Department’:’Sales’ might be added to a resource to indicate its use by a particular department. </p>"
         },
         "InputDataConfig": {
           "shape": "EntityRecognizerInputDataConfig",
@@ -3023,6 +3129,31 @@
         }
       }
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "ComprehendArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the given Amazon Comprehend resource you are querying. </p>"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "ComprehendArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the given Amazon Comprehend resource you are querying.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Tags associated with the Amazon Comprehend resource being queried. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with the key-value pair ‘Department’:’Sales’ might be added to a resource to indicate its use by a particular department. </p>"
+        }
+      }
+    },
     "ListTopicsDetectionJobsRequest": {
       "type": "structure",
       "members": {
@@ -3738,6 +3869,66 @@
       },
       "documentation": "<p>Represents a work in the input text that was recognized and assigned a part of speech. There is one syntax token record for each word in the source text.</p>"
     },
+    "Tag": {
+      "type": "structure",
+      "required": [
+        "Key"
+      ],
+      "members": {
+        "Key": {
+          "shape": "TagKey",
+          "documentation": "<p>The initial part of a key-value pair that forms a tag associated with a given resource. For instance, if you want to show which resources are used by which departments, you might use “Department” as the key portion of the pair, with multiple possible values such as “sales,” “legal,” and “administration.” </p>"
+        },
+        "Value": {
+          "shape": "TagValue",
+          "documentation": "<p> The second part of a key-value pair that forms a tag associated with a given resource. For instance, if you want to show which resources are used by which departments, you might use “Department” as the initial (key) portion of the pair, with a value of “sales” to indicate the sales department. </p>"
+        }
+      },
+      "documentation": "<p>A key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with the key-value pair ‘Department’:’Sales’ might be added to a resource to indicate its use by a particular department. </p>"
+    },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      }
+    },
+    "TagList": {
+      "type": "list",
+      "member": {
+        "shape": "Tag"
+      }
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "Tags"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "ComprehendArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the given Amazon Comprehend resource to which you want to associate the tags. </p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Tags being associated with a specific Amazon Comprehend resource. </p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0
+    },
     "Timestamp": {
       "type": "timestamp"
     },
@@ -3804,7 +3995,7 @@
         },
         "DataAccessRoleArn": {
           "shape": "IamRoleArn",
-          "documentation": "<p> The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your job data. </p>"
         },
         "VolumeKmsKeyId": {
           "shape": "KmsKeyId",
@@ -3818,6 +4009,27 @@
       "member": {
         "shape": "TopicsDetectionJobProperties"
       }
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "TagKeys"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "ComprehendArn",
+          "documentation": "<p> The Amazon Resource Name (ARN) of the given Amazon Comprehend resource from which you want to remove the tags. </p>"
+        },
+        "TagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>The initial part of a key-value pair that forms a tag being removed from a given resource. For instance, “Department” might be used as the key portion of the pair, with multiple values such as “sales,” “legal,” and “administration.” </p>"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     }
   },
   "documentation": "<p>Amazon Comprehend is an AWS service for gaining insight into the content of documents. Use these actions to determine the topics contained in your documents, the topics they discuss, the predominant sentiment expressed in them, the predominant language used, and more.</p>"

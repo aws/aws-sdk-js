@@ -438,6 +438,10 @@ declare namespace Batch {
      * The network interfaces associated with the job.
      */
     networkInterfaces?: NetworkInterfaceList;
+    /**
+     * The type and amount of a resource to assign to a container. Currently, the only supported resource is GPU.
+     */
+    resourceRequirements?: ResourceRequirements;
   }
   export interface ContainerOverrides {
     /**
@@ -460,6 +464,10 @@ declare namespace Batch {
      * The environment variables to send to the container. You can add new environment variables, which are added to the container at launch, or you can override the existing environment variables from the Docker image or the job definition.  Environment variables must not start with AWS_BATCH; this naming convention is reserved for variables that are set by the AWS Batch service. 
      */
     environment?: EnvironmentVariables;
+    /**
+     * The type and amount of a resource to assign to a container. This value overrides the value set in the job definition. Currently, the only supported resource is GPU.
+     */
+    resourceRequirements?: ResourceRequirements;
   }
   export interface ContainerProperties {
     /**
@@ -514,6 +522,10 @@ declare namespace Batch {
      * The instance type to use for a multi-node parallel job. Currently all node groups in a multi-node parallel job must use the same instance type. This parameter is not valid for single-node container jobs.
      */
     instanceType?: String;
+    /**
+     * The type and amount of a resource to assign to a container. Currently, the only supported resource is GPU.
+     */
+    resourceRequirements?: ResourceRequirements;
   }
   export interface ContainerSummary {
     /**
@@ -733,7 +745,7 @@ declare namespace Batch {
      */
     type: String;
     /**
-     * Default parameters or parameter substitution placeholders that are set in the job definition. Parameters are specified as a key-value pair mapping. Parameters in a SubmitJob request override any corresponding parameter defaults from the job definition.
+     * Default parameters or parameter substitution placeholders that are set in the job definition. Parameters are specified as a key-value pair mapping. Parameters in a SubmitJob request override any corresponding parameter defaults from the job definition. For more information about specifying parameters, see Job Definition Parameters in the AWS Batch User Guide.
      */
     parameters?: ParametersMap;
     /**
@@ -1025,6 +1037,10 @@ declare namespace Batch {
   }
   export interface NodeOverrides {
     /**
+     * The number of nodes to use with a multi-node parallel job. This value overrides the number of nodes that are specified in the job definition. To use this override:   There must be at least one node range in your job definition that has an open upper boundary (such as : or n:).   The lower boundary of the node range specified in the job definition must be fewer than the number of nodes specified in the override.   The main node index specified in the job definition must be fewer than the number of nodes specified in the override.  
+     */
+    numNodes?: Integer;
+    /**
      * The node property overrides for the job.
      */
     nodePropertyOverrides?: NodePropertyOverrides;
@@ -1035,7 +1051,7 @@ declare namespace Batch {
      */
     numNodes: Integer;
     /**
-     * Specifies the node index for the main node of a multi-node parallel job.
+     * Specifies the node index for the main node of a multi-node parallel job. This node index value must be fewer than the number of nodes.
      */
     mainNode: Integer;
     /**
@@ -1124,6 +1140,18 @@ declare namespace Batch {
      */
     revision: Integer;
   }
+  export interface ResourceRequirement {
+    /**
+     * The number of physical GPUs to reserve for the container. The number of GPUs reserved for all containers in a job should not exceed the number of available GPUs on the compute resource that the job is launched on.
+     */
+    value: String;
+    /**
+     * The type of resource to assign to a container. Currently, the only supported resource type is GPU.
+     */
+    type: ResourceType;
+  }
+  export type ResourceRequirements = ResourceRequirement[];
+  export type ResourceType = "GPU"|string;
   export interface RetryStrategy {
     /**
      * The number of times to move a job to the RUNNABLE status. You may specify between 1 and 10 attempts. If the value of attempts is greater than one, the job is retried on failure the same number of attempts as the value.

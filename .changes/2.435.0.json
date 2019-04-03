@@ -1,0 +1,17 @@
+[
+    {
+        "type": "bugfix",
+        "category": "integration",
+        "description": "remove rds create DB security group test"
+    },
+    {
+        "type": "feature",
+        "category": "Batch",
+        "description": "Support for GPU resource requirement in RegisterJobDefinition and SubmitJob"
+    },
+    {
+        "type": "feature",
+        "category": "Comprehend",
+        "description": "With this release AWS Comprehend  adds tagging support for document-classifiers and entity-recognizers."
+    }
+]

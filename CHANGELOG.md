@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.434.0-->
+<!--LATEST=2.435.0-->
 <!--ENTRYINSERT-->
+
+## 2.435.0
+* bugfix: integration: remove rds create DB security group test
+* feature: Batch: Support for GPU resource requirement in RegisterJobDefinition and SubmitJob
+* feature: Comprehend: With this release AWS Comprehend  adds tagging support for document-classifiers and entity-recognizers.
 
 ## 2.434.0
 * feature: EC2: Add paginators.

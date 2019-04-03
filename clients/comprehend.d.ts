@@ -244,6 +244,14 @@ declare class Comprehend extends Service {
    */
   listSentimentDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListSentimentDetectionJobsResponse) => void): Request<Comprehend.Types.ListSentimentDetectionJobsResponse, AWSError>;
   /**
+   * Lists all tags associated with a given Amazon Comprehend resource. Up to the maximum number of tags allowed per resource will be displayed. 
+   */
+  listTagsForResource(params: Comprehend.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Comprehend.Types.ListTagsForResourceResponse) => void): Request<Comprehend.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists all tags associated with a given Amazon Comprehend resource. Up to the maximum number of tags allowed per resource will be displayed. 
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Comprehend.Types.ListTagsForResourceResponse) => void): Request<Comprehend.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Gets a list of the topic detection jobs that you have submitted.
    */
   listTopicsDetectionJobs(params: Comprehend.Types.ListTopicsDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListTopicsDetectionJobsResponse) => void): Request<Comprehend.Types.ListTopicsDetectionJobsResponse, AWSError>;
@@ -347,6 +355,22 @@ declare class Comprehend extends Service {
    * Stops an entity recognizer training job while in progress. If the training job state is TRAINING, the job is marked for termination and put into the STOP_REQUESTED state. If the training job completes before it can be stopped, it is put into the TRAINED; otherwise the training job is stopped and putted into the STOPPED state and the service sends back an HTTP 200 response with an empty HTTP body.
    */
   stopTrainingEntityRecognizer(callback?: (err: AWSError, data: Comprehend.Types.StopTrainingEntityRecognizerResponse) => void): Request<Comprehend.Types.StopTrainingEntityRecognizerResponse, AWSError>;
+  /**
+   * Associates a specific tag with an Amazon Comprehend resource. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with the key-value pair ‘Department’:’Sales’ might be added to a resource to indicate its use by a particular department. 
+   */
+  tagResource(params: Comprehend.Types.TagResourceRequest, callback?: (err: AWSError, data: Comprehend.Types.TagResourceResponse) => void): Request<Comprehend.Types.TagResourceResponse, AWSError>;
+  /**
+   * Associates a specific tag with an Amazon Comprehend resource. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with the key-value pair ‘Department’:’Sales’ might be added to a resource to indicate its use by a particular department. 
+   */
+  tagResource(callback?: (err: AWSError, data: Comprehend.Types.TagResourceResponse) => void): Request<Comprehend.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes a specific tag associated with an Amazon Comprehend resource. 
+   */
+  untagResource(params: Comprehend.Types.UntagResourceRequest, callback?: (err: AWSError, data: Comprehend.Types.UntagResourceResponse) => void): Request<Comprehend.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes a specific tag associated with an Amazon Comprehend resource. 
+   */
+  untagResource(callback?: (err: AWSError, data: Comprehend.Types.UntagResourceResponse) => void): Request<Comprehend.Types.UntagResourceResponse, AWSError>;
 }
 declare namespace Comprehend {
   export type AnyLengthString = string;
@@ -552,6 +576,7 @@ declare namespace Comprehend {
     EvaluationMetrics?: ClassifierEvaluationMetrics;
   }
   export type ClientRequestTokenString = string;
+  export type ComprehendArn = string;
   export type ComprehendArnName = string;
   export interface CreateDocumentClassifierRequest {
     /**
@@ -562,6 +587,10 @@ declare namespace Comprehend {
      * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn: IamRoleArn;
+    /**
+     * Tags to be associated with the document classifier being created. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with the key-value pair ‘Department’:’Sales’ might be added to a resource to indicate its use by a particular department. 
+     */
+    Tags?: TagList;
     /**
      * Specifies the format and location of the input data for the job.
      */
@@ -594,6 +623,10 @@ declare namespace Comprehend {
      * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn: IamRoleArn;
+    /**
+     * Tags to be associated with the entity recognizer being created. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with the key-value pair ‘Department’:’Sales’ might be added to a resource to indicate its use by a particular department. 
+     */
+    Tags?: TagList;
     /**
      * Specifies the format and location of the input data. The S3 bucket containing the input data must be located in the same region as the entity recognizer being created. 
      */
@@ -1538,6 +1571,22 @@ declare namespace Comprehend {
      */
     NextToken?: String;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the given Amazon Comprehend resource you are querying. 
+     */
+    ResourceArn: ComprehendArn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the given Amazon Comprehend resource you are querying.
+     */
+    ResourceArn?: ComprehendArn;
+    /**
+     * Tags associated with the Amazon Comprehend resource being queried. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with the key-value pair ‘Department’:’Sales’ might be added to a resource to indicate its use by a particular department. 
+     */
+    Tags?: TagList;
+  }
   export interface ListTopicsDetectionJobsRequest {
     /**
      * Filters the jobs that are returned. Jobs can be filtered on their name, status, or the date and time that they were submitted. You can set only one filter at a time.
@@ -2016,6 +2065,32 @@ declare namespace Comprehend {
      */
     PartOfSpeech?: PartOfSpeechTag;
   }
+  export interface Tag {
+    /**
+     * The initial part of a key-value pair that forms a tag associated with a given resource. For instance, if you want to show which resources are used by which departments, you might use “Department” as the key portion of the pair, with multiple possible values such as “sales,” “legal,” and “administration.” 
+     */
+    Key: TagKey;
+    /**
+     *  The second part of a key-value pair that forms a tag associated with a given resource. For instance, if you want to show which resources are used by which departments, you might use “Department” as the initial (key) portion of the pair, with a value of “sales” to indicate the sales department. 
+     */
+    Value?: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the given Amazon Comprehend resource to which you want to associate the tags. 
+     */
+    ResourceArn: ComprehendArn;
+    /**
+     * Tags being associated with a specific Amazon Comprehend resource. 
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type Timestamp = Date;
   export interface TopicsDetectionJobFilter {
     /**
@@ -2073,7 +2148,7 @@ declare namespace Comprehend {
      */
     NumberOfTopics?: Integer;
     /**
-     *  The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your job data. 
      */
     DataAccessRoleArn?: IamRoleArn;
     /**
@@ -2082,6 +2157,18 @@ declare namespace Comprehend {
     VolumeKmsKeyId?: KmsKeyId;
   }
   export type TopicsDetectionJobPropertiesList = TopicsDetectionJobProperties[];
+  export interface UntagResourceRequest {
+    /**
+     *  The Amazon Resource Name (ARN) of the given Amazon Comprehend resource from which you want to remove the tags. 
+     */
+    ResourceArn: ComprehendArn;
+    /**
+     * The initial part of a key-value pair that forms a tag being removed from a given resource. For instance, “Department” might be used as the key portion of the pair, with multiple values such as “sales,” “legal,” and “administration.” 
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
