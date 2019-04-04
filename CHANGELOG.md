@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.435.0-->
+<!--LATEST=2.436.0-->
 <!--ENTRYINSERT-->
+
+## 2.436.0
+* feature: EKS: Added support to enable or disable publishing Kubernetes cluster logs in AWS CloudWatch
 
 ## 2.435.0
 * bugfix: integration: remove rds create DB security group test
