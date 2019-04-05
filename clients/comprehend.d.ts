@@ -244,11 +244,11 @@ declare class Comprehend extends Service {
    */
   listSentimentDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListSentimentDetectionJobsResponse) => void): Request<Comprehend.Types.ListSentimentDetectionJobsResponse, AWSError>;
   /**
-   * Lists all tags associated with a given Amazon Comprehend resource. Up to the maximum number of tags allowed per resource will be displayed. 
+   * Lists all tags associated with a given Amazon Comprehend resource. 
    */
   listTagsForResource(params: Comprehend.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Comprehend.Types.ListTagsForResourceResponse) => void): Request<Comprehend.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists all tags associated with a given Amazon Comprehend resource. Up to the maximum number of tags allowed per resource will be displayed. 
+   * Lists all tags associated with a given Amazon Comprehend resource. 
    */
   listTagsForResource(callback?: (err: AWSError, data: Comprehend.Types.ListTagsForResourceResponse) => void): Request<Comprehend.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -356,11 +356,11 @@ declare class Comprehend extends Service {
    */
   stopTrainingEntityRecognizer(callback?: (err: AWSError, data: Comprehend.Types.StopTrainingEntityRecognizerResponse) => void): Request<Comprehend.Types.StopTrainingEntityRecognizerResponse, AWSError>;
   /**
-   * Associates a specific tag with an Amazon Comprehend resource. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with the key-value pair ‘Department’:’Sales’ might be added to a resource to indicate its use by a particular department. 
+   * Associates a specific tag with an Amazon Comprehend resource. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. 
    */
   tagResource(params: Comprehend.Types.TagResourceRequest, callback?: (err: AWSError, data: Comprehend.Types.TagResourceResponse) => void): Request<Comprehend.Types.TagResourceResponse, AWSError>;
   /**
-   * Associates a specific tag with an Amazon Comprehend resource. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with the key-value pair ‘Department’:’Sales’ might be added to a resource to indicate its use by a particular department. 
+   * Associates a specific tag with an Amazon Comprehend resource. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. 
    */
   tagResource(callback?: (err: AWSError, data: Comprehend.Types.TagResourceResponse) => void): Request<Comprehend.Types.TagResourceResponse, AWSError>;
   /**
@@ -588,13 +588,17 @@ declare namespace Comprehend {
      */
     DataAccessRoleArn: IamRoleArn;
     /**
-     * Tags to be associated with the document classifier being created. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with the key-value pair ‘Department’:’Sales’ might be added to a resource to indicate its use by a particular department. 
+     * Tags to be associated with the document classifier being created. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. 
      */
     Tags?: TagList;
     /**
      * Specifies the format and location of the input data for the job.
      */
     InputDataConfig: DocumentClassifierInputDataConfig;
+    /**
+     * Enables the addition of output results configuration parameters for custom classifier jobs.
+     */
+    OutputDataConfig?: DocumentClassifierOutputDataConfig;
     /**
      * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
      */
@@ -624,7 +628,7 @@ declare namespace Comprehend {
      */
     DataAccessRoleArn: IamRoleArn;
     /**
-     * Tags to be associated with the entity recognizer being created. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with the key-value pair ‘Department’:’Sales’ might be added to a resource to indicate its use by a particular department. 
+     * Tags to be associated with the entity recognizer being created. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. 
      */
     Tags?: TagList;
     /**
@@ -928,6 +932,16 @@ declare namespace Comprehend {
      */
     S3Uri: S3Uri;
   }
+  export interface DocumentClassifierOutputDataConfig {
+    /**
+     * When you use the OutputDataConfig object while creating a custom classifier, you specify the Amazon S3 location where you want to write the confusion matrix. The URI must be in the same region as the API endpoint that you are calling. The location is used as the prefix for the actual location of this output file. When the custom classifier job is finished, the service creates the output file in a directory specific to the job. The S3Uri field contains the location of the output file, called output.tar.gz. It is a compressed archive that contains the confusion matrix.
+     */
+    S3Uri?: S3Uri;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt the output results from an analysis job. The KmsKeyId can be one of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"    KMS Key Alias: "alias/ExampleAlias"    ARN of a KMS Key Alias: "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"   
+     */
+    KmsKeyId?: KmsKeyId;
+  }
   export interface DocumentClassifierProperties {
     /**
      * The Amazon Resource Name (ARN) that identifies the document classifier.
@@ -965,6 +979,10 @@ declare namespace Comprehend {
      * The input data configuration that you supplied when you created the document classifier for training.
      */
     InputDataConfig?: DocumentClassifierInputDataConfig;
+    /**
+     *  Provides output results configuration parameters for custom classifier jobs.
+     */
+    OutputDataConfig?: DocumentClassifierOutputDataConfig;
     /**
      * Information about the document classifier, including the number of documents used for training the classifier, the number of documents used for test the classifier, and an accuracy rating.
      */
@@ -1583,7 +1601,7 @@ declare namespace Comprehend {
      */
     ResourceArn?: ComprehendArn;
     /**
-     * Tags associated with the Amazon Comprehend resource being queried. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with the key-value pair ‘Department’:’Sales’ might be added to a resource to indicate its use by a particular department. 
+     * Tags associated with the Amazon Comprehend resource being queried. A tag is a key-value pair that adds as a metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. 
      */
     Tags?: TagList;
   }
@@ -2084,7 +2102,7 @@ declare namespace Comprehend {
      */
     ResourceArn: ComprehendArn;
     /**
-     * Tags being associated with a specific Amazon Comprehend resource. 
+     * Tags being associated with a specific Amazon Comprehend resource. There can be a maximum of 50 tags (both existing and pending) associated with a specific resource. 
      */
     Tags: TagList;
   }
@@ -2163,7 +2181,7 @@ declare namespace Comprehend {
      */
     ResourceArn: ComprehendArn;
     /**
-     * The initial part of a key-value pair that forms a tag being removed from a given resource. For instance, “Department” might be used as the key portion of the pair, with multiple values such as “sales,” “legal,” and “administration.” 
+     * The initial part of a key-value pair that forms a tag being removed from a given resource. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department. Keys must be unique and cannot be duplicated for a particular resource. 
      */
     TagKeys: TagKeyList;
   }

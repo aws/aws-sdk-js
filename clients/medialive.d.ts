@@ -235,6 +235,14 @@ declare class MediaLive extends Service {
    * Update an Input Security Group's Whilelists.
    */
   updateInputSecurityGroup(callback?: (err: AWSError, data: MediaLive.Types.UpdateInputSecurityGroupResponse) => void): Request<MediaLive.Types.UpdateInputSecurityGroupResponse, AWSError>;
+  /**
+   * Update reservation.
+   */
+  updateReservation(params: MediaLive.Types.UpdateReservationRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateReservationResponse) => void): Request<MediaLive.Types.UpdateReservationResponse, AWSError>;
+  /**
+   * Update reservation.
+   */
+  updateReservation(callback?: (err: AWSError, data: MediaLive.Types.UpdateReservationResponse) => void): Request<MediaLive.Types.UpdateReservationResponse, AWSError>;
 }
 declare namespace MediaLive {
   export type AacCodingMode = "AD_RECEIVER_MIX"|"CODING_MODE_1_0"|"CODING_MODE_1_1"|"CODING_MODE_2_0"|"CODING_MODE_5_1"|string;
@@ -738,6 +746,10 @@ Alternate rendition that the client will not try to play back by default. Repres
      */
     Arn?: __string;
     /**
+     * The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
+     */
+    ChannelClass?: ChannelClass;
+    /**
      * A list of destinations of the channel. For UDP outputs, there is one
 destination per output. For other types (HLS, for example), there is
 one destination per packager.
@@ -780,6 +792,7 @@ one destination per packager.
      */
     Tags?: Tags;
   }
+  export type ChannelClass = "STANDARD"|"SINGLE_PIPELINE"|string;
   export interface ChannelEgressEndpoint {
     /**
      * Public IP of where a channel's output comes from
@@ -792,6 +805,10 @@ one destination per packager.
      * The unique arn of the channel.
      */
     Arn?: __string;
+    /**
+     * The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
+     */
+    ChannelClass?: ChannelClass;
     /**
      * A list of destinations of the channel. For UDP outputs, there is one
 destination per output. For other types (HLS, for example), there is
@@ -835,6 +852,10 @@ one destination per packager.
     Tags?: Tags;
   }
   export interface CreateChannelRequest {
+    /**
+     * The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
+     */
+    ChannelClass?: ChannelClass;
     Destinations?: __listOfOutputDestination;
     EncoderSettings?: EncoderSettings;
     /**
@@ -950,6 +971,10 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
      * The unique arn of the channel.
      */
     Arn?: __string;
+    /**
+     * The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
+     */
+    ChannelClass?: ChannelClass;
     /**
      * A list of destinations of the channel. For UDP outputs, there is one
 destination per output. For other types (HLS, for example), there is
@@ -1081,6 +1106,10 @@ one destination per packager.
      */
     State?: ReservationState;
     /**
+     * A collection of key-value pairs
+     */
+    Tags?: Tags;
+    /**
      * Recurring usage charge for each reserved resource, e.g. '157.0'
      */
     UsagePrice?: __double;
@@ -1103,6 +1132,10 @@ one destination per packager.
      * The unique arn of the channel.
      */
     Arn?: __string;
+    /**
+     * The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
+     */
+    ChannelClass?: ChannelClass;
     /**
      * A list of destinations of the channel. For UDP outputs, there is one
 destination per output. For other types (HLS, for example), there is
@@ -1169,6 +1202,12 @@ one destination per packager.
      * The generated ID of the input (unique for user account, immutable).
      */
     Id?: __string;
+    /**
+     * STANDARD - MediaLive expects two sources to be connected to this input. If the channel is also STANDARD, both sources will be ingested. If the channel is SINGLE_PIPELINE, only the first source will be ingested; the second source will always be ignored, even if the first source fails.
+SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelClass is also  SINGLE_PIPELINE, this value is valid. If the ChannelClass is STANDARD, this value is not valid because the channel requires two sources in the input.
+
+     */
+    InputClass?: InputClass;
     /**
      * A list of MediaConnect Flows for this input.
      */
@@ -1351,6 +1390,10 @@ one destination per packager.
      * Current state of reservation, e.g. 'ACTIVE'
      */
     State?: ReservationState;
+    /**
+     * A collection of key-value pairs
+     */
+    Tags?: Tags;
     /**
      * Recurring usage charge for each reserved resource, e.g. '157.0'
      */
@@ -2262,6 +2305,12 @@ SINGLEFILE: Applies only if Mode field is VOD. Emit the program as a single .ts 
      */
     Id?: __string;
     /**
+     * STANDARD - MediaLive expects two sources to be connected to this input. If the channel is also STANDARD, both sources will be ingested. If the channel is SINGLE_PIPELINE, only the first source will be ingested; the second source will always be ignored, even if the first source fails.
+SINGLE_PIPELINE - You can connect only one source to this input. If the ChannelClass is also  SINGLE_PIPELINE, this value is valid. If the ChannelClass is STANDARD, this value is not valid because the channel requires two sources in the input.
+
+     */
+    InputClass?: InputClass;
+    /**
      * A list of MediaConnect Flows for this input.
      */
     MediaConnectFlows?: __listOfMediaConnectFlow;
@@ -2312,6 +2361,7 @@ SINGLEFILE: Applies only if Mode field is VOD. Emit the program as a single .ts 
      */
     InputChannel: __integerMin0Max15;
   }
+  export type InputClass = "STANDARD"|"SINGLE_PIPELINE"|string;
   export type InputCodec = "MPEG2"|"AVC"|"HEVC"|string;
   export type InputDeblockFilter = "DISABLED"|"ENABLED"|string;
   export type InputDenoiseFilter = "DISABLED"|"ENABLED"|string;
@@ -2579,6 +2629,11 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
   }
   export interface ListOfferingsRequest {
     /**
+     * Filter by channel class, 'STANDARD' or 'SINGLE_PIPELINE'
+
+     */
+    ChannelClass?: __string;
+    /**
      * Filter to offerings that match the configuration of an existing channel, e.g. '2345678' (a channel ID)
 
      */
@@ -2628,6 +2683,11 @@ Subnet IDs must be mapped to two unique availability zones (AZ).
     Offerings?: __listOfOffering;
   }
   export interface ListReservationsRequest {
+    /**
+     * Filter by channel class, 'STANDARD' or 'SINGLE_PIPELINE'
+
+     */
+    ChannelClass?: __string;
     /**
      * Filter by codec, 'AVC', 'HEVC', 'MPEG2', or 'AUDIO'
      */
@@ -3269,6 +3329,10 @@ Options:
      * Requested reservation start time (UTC) in ISO-8601 format. The specified time must be between the first day of the current month and one year from now. If no value is given, the default is now.
      */
     Start?: __string;
+    /**
+     * A collection of key-value pairs
+     */
+    Tags?: Tags;
   }
   export interface PurchaseOfferingResponse {
     Reservation?: Reservation;
@@ -3354,6 +3418,10 @@ Valid values: 1, 2, 4, 6, 8
      */
     State?: ReservationState;
     /**
+     * A collection of key-value pairs
+     */
+    Tags?: Tags;
+    /**
      * Recurring usage charge for each reserved resource, e.g. '157.0'
      */
     UsagePrice?: __double;
@@ -3363,6 +3431,10 @@ Valid values: 1, 2, 4, 6, 8
   export type ReservationMaximumFramerate = "MAX_30_FPS"|"MAX_60_FPS"|string;
   export type ReservationResolution = "SD"|"HD"|"UHD"|string;
   export interface ReservationResourceSpecification {
+    /**
+     * Channel class, e.g. 'STANDARD'
+     */
+    ChannelClass?: ChannelClass;
     /**
      * Codec, e.g. 'AVC'
      */
@@ -3695,6 +3767,10 @@ Valid values: 1, 2, 4, 6, 8
      */
     Arn?: __string;
     /**
+     * The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
+     */
+    ChannelClass?: ChannelClass;
+    /**
      * A list of destinations of the channel. For UDP outputs, there is one
 destination per output. For other types (HLS, for example), there is
 one destination per packager.
@@ -3810,6 +3886,10 @@ one destination per packager.
      * The unique arn of the channel.
      */
     Arn?: __string;
+    /**
+     * The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline.
+     */
+    ChannelClass?: ChannelClass;
     /**
      * A list of destinations of the channel. For UDP outputs, there is one
 destination per output. For other types (HLS, for example), there is
@@ -4005,6 +4085,19 @@ Only specify sources for PULL type Inputs. Leave Destinations empty.
   }
   export interface UpdateInputSecurityGroupResponse {
     SecurityGroup?: InputSecurityGroup;
+  }
+  export interface UpdateReservationRequest {
+    /**
+     * Name of the reservation
+     */
+    Name?: __string;
+    /**
+     * Unique reservation ID, e.g. '1234567'
+     */
+    ReservationId: __string;
+  }
+  export interface UpdateReservationResponse {
+    Reservation?: Reservation;
   }
   export interface VideoCodecSettings {
     FrameCaptureSettings?: FrameCaptureSettings;

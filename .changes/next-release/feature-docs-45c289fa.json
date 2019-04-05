@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "docs",
-  "description": "update doc operation example to use 'NUMBER_VALUE' instead of 0 in input"
-}

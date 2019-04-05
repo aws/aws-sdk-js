@@ -39,7 +39,7 @@
           "documentation": "<p>403 response</p>"
         }
       ],
-      "documentation": "<p>Adds device(s) to your account (i.e., claim one or more devices) if and only if\n you received a claim code with the device(s).</p>"
+      "documentation": "<p>Adds device(s) to your account (i.e., claim one or more devices) if and only if you\n received a claim code with the device(s).</p>"
     },
     "DescribeDevice": {
       "name": "DescribeDevice",
@@ -69,7 +69,7 @@
           "documentation": "<p>500 response</p>"
         }
       ],
-      "documentation": "<p>Given a device ID, returns a DescribeDeviceResponse object describing\n the details of the device.</p>"
+      "documentation": "<p>Given a device ID, returns a DescribeDeviceResponse object describing the\n details of the device.</p>"
     },
     "FinalizeDeviceClaim": {
       "name": "FinalizeDeviceClaim",
@@ -107,7 +107,7 @@
           "documentation": "<p>409 response</p>"
         }
       ],
-      "documentation": "<p>Given a device ID, finalizes the claim request for the associated device.</p><note>\n <p>Claiming a device consists of initiating a claim, then publishing a device\n event, and finalizing the claim. For a device of type button, a\n device event can be published by simply clicking the device.</p>\n </note>"
+      "documentation": "<p>Given a device ID, finalizes the claim request for the associated device.</p><note>\n <p>Claiming a device consists of initiating a claim, then publishing a device event,\n and finalizing the claim. For a device of type button, a device event can\n be published by simply clicking the device.</p>\n </note>"
     },
     "GetDeviceMethods": {
       "name": "GetDeviceMethods",
@@ -137,7 +137,7 @@
           "documentation": "<p>500 response</p>"
         }
       ],
-      "documentation": "<p>Given a device ID, returns the invokable methods associated with the\n device.</p>"
+      "documentation": "<p>Given a device ID, returns the invokable methods associated with the device.</p>"
     },
     "InitiateDeviceClaim": {
       "name": "InitiateDeviceClaim",
@@ -171,7 +171,7 @@
           "documentation": "<p>409 response</p>"
         }
       ],
-      "documentation": "<p>Given a device ID, initiates a claim request for the associated device.</p><note>\n <p>Claiming a device consists of initiating a claim, then publishing a device\n event, and finalizing the claim. For a device of type button, a\n device event can be published by simply clicking the device.</p>\n </note>"
+      "documentation": "<p>Given a device ID, initiates a claim request for the associated device.</p><note>\n <p>Claiming a device consists of initiating a claim, then publishing a device event,\n and finalizing the claim. For a device of type button, a device event can\n be published by simply clicking the device.</p>\n </note>"
     },
     "InvokeDeviceMethod": {
       "name": "InvokeDeviceMethod",
@@ -247,7 +247,7 @@
           "documentation": "<p>500 response</p>"
         }
       ],
-      "documentation": "<p>Using a device ID, returns a DeviceEventsResponse object containing\n an array of events for the device.</p>"
+      "documentation": "<p>Using a device ID, returns a DeviceEventsResponse object containing an\n array of events for the device.</p>"
     },
     "ListDevices": {
       "name": "ListDevices",
@@ -302,7 +302,7 @@
           "documentation": "<p>500 response</p>"
         }
       ],
-      "documentation": "<p>List all tags on an AWS IoT 1-Click resource.</p>"
+      "documentation": "<p>Lists the tags associated with the specified resource ARN.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -328,7 +328,7 @@
           "documentation": "<p>500 response</p>"
         }
       ],
-      "documentation": "<p>Associate a set of tags with an AWS IoT 1-Click resource. You can then activate these user-defined tags so that they appear on the Billing and Cost Management console for cost allocation tracking.</p>"
+      "documentation": "<p>Adds or updates the tags associated with the resource ARN. See <a href=\"https://docs.aws.amazon.com/iot-1-click/latest/developerguide/1click-appendix.html#1click-limits\">AWS IoT 1-Click Service Limits</a> for the maximum number of tags allowed per\n resource.</p>"
     },
     "UnclaimDevice": {
       "name": "UnclaimDevice",
@@ -384,7 +384,7 @@
           "documentation": "<p>500 response</p>"
         }
       ],
-      "documentation": "<p>Removes the association of tags from an AWS IoT 1-Click resource.</p>"
+      "documentation": "<p>Using tag keys, deletes the tags (key/value pairs) associated with the specified\n resource ARN.</p>"
     },
     "UpdateDeviceState": {
       "name": "UpdateDeviceState",
@@ -447,7 +447,7 @@
         "Total": {
           "shape": "__integer",
           "locationName": "total",
-          "documentation": "<p>The total number of devices associated with the claim code that has been processed\n in the claim request.</p>"
+          "documentation": "<p>The total number of devices associated with the claim code that has been processed in\n the claim request.</p>"
         }
       }
     },
@@ -516,7 +516,7 @@
         "Attributes": {
           "shape": "DeviceAttributes",
           "locationName": "attributes",
-          "documentation": "<p>An array of zero or more elements of DeviceAttribute objects\n providing user specified device attributes.</p>"
+          "documentation": "<p>An array of zero or more elements of DeviceAttribute objects providing\n user specified device attributes.</p>"
         },
         "DeviceId": {
           "shape": "__string",
@@ -531,7 +531,7 @@
         "RemainingLife": {
           "shape": "__doubleMin0Max100",
           "locationName": "remainingLife",
-          "documentation": "<p>A value between 0 and 1 inclusive, representing the fraction of life remaining for\n the device.</p>"
+          "documentation": "<p>A value between 0 and 1 inclusive, representing the fraction of life remaining for the\n device.</p>"
         },
         "Type": {
           "shape": "__string",
@@ -587,7 +587,7 @@
         "Tags": {
           "shape": "__mapOf__string",
           "locationName": "tags",
-          "documentation": "<p>The tags to be assigned to the AWS IoT 1-Click device.</p>"
+          "documentation": "<p>A collection of key/value pairs defining the resource tags. For example, {\n \"tags\": {\"key1\": \"value1\", \"key2\": \"value2\"} }. For more information, see <a href=\"https://aws.amazon.com/answers/account-management/aws-tagging-strategies/\">AWS\n Tagging Strategies</a>.</p><p>\n \n </p>"
         }
       },
       "required": [
@@ -705,7 +705,7 @@
           "shape": "MaxResults",
           "location": "querystring",
           "locationName": "maxResults",
-          "documentation": "<p>The maximum number of results to return per request. If not set, a default value\n of 100 is used.</p>"
+          "documentation": "<p>The maximum number of results to return per request. If not set, a default value of\n 100 is used.</p>"
         },
         "NextToken": {
           "shape": "__string",
@@ -754,7 +754,7 @@
           "shape": "MaxResults",
           "location": "querystring",
           "locationName": "maxResults",
-          "documentation": "<p>The maximum number of results to return per request. If not set, a default value\n of 100 is used.</p>"
+          "documentation": "<p>The maximum number of results to return per request. If not set, a default value of\n 100 is used.</p>"
         },
         "NextToken": {
           "shape": "__string",
@@ -786,7 +786,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "resource-arn",
-          "documentation": "<p>The AWS IoT 1-Click resource with tags to be listed. This value is an Amazon Resource Name (ARN).</p>"
+          "documentation": "<p>The ARN of the resource.</p>"
         }
       },
       "required": [
@@ -799,7 +799,7 @@
         "Tags": {
           "shape": "__mapOf__string",
           "locationName": "tags",
-          "documentation": "<p>The tags currently associated with the AWS IoT 1-Click resource.</p>"
+          "documentation": "<p>A collection of key/value pairs defining the resource tags. For example, {\n \"tags\": {\"key1\": \"value1\", \"key2\": \"value2\"} }. For more information, see <a href=\"https://aws.amazon.com/answers/account-management/aws-tagging-strategies/\">AWS\n Tagging Strategies</a>.</p><p>\n \n </p>"
         }
       }
     },
@@ -815,12 +815,12 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "resource-arn",
-          "documentation": "<p>Identifies the AWS IoT 1-Click resource to which tags should be added. This value is an Amazon Resource Name (ARN).</p>"
+          "documentation": "<p>The ARN of the resource.</p>"
         },
         "Tags": {
           "shape": "__mapOf__string",
           "locationName": "tags",
-          "documentation": "<p>The tags to be assigned to the AWS IoT 1-Click resource.</p>"
+          "documentation": "<p>A collection of key/value pairs defining the resource tags. For example, {\n \"tags\": {\"key1\": \"value1\", \"key2\": \"value2\"} }. For more information, see <a href=\"https://aws.amazon.com/answers/account-management/aws-tagging-strategies/\">AWS\n Tagging Strategies</a>.</p><p>\n \n </p>"
         }
       },
       "required": [
@@ -859,13 +859,13 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "resource-arn",
-          "documentation": "<p>The AWS IoT 1-Click resource the tags will be removed from. This value is an Amazon Resource Name (ARN).</p>"
+          "documentation": "<p>The ARN of the resource.</p>"
         },
         "TagKeys": {
           "shape": "__listOf__string",
           "location": "querystring",
           "locationName": "tagKeys",
-          "documentation": "<p>A list of tag keys. Existing tags of the resource whose keys are members of this list will be removed from the AWS IoT 1-Click resource.</p>"
+          "documentation": "<p>A collections of tag keys. For example, {\"key1\",\"key2\"}</p>"
         }
       },
       "required": [
@@ -951,5 +951,5 @@
       "timestampFormat": "iso8601"
     }
   },
-  "documentation": "<p>Stub description</p>"
+  "documentation": "<p>Describes all of the AWS IoT 1-Click device-related API operations for the service.\n Also provides sample requests, responses, and errors for the supported web services\n protocols.</p>"
 }

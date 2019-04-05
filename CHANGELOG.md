@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.436.0-->
+<!--LATEST=2.437.0-->
 <!--ENTRYINSERT-->
+
+## 2.437.0
+* feature: Comprehend: With this release AWS Comprehend provides confusion matrix for custom document classifier.
+* feature: Glue: AWS Glue now supports workerType choices in the CreateJob, UpdateJob, and StartJobRun APIs, to be used for memory-intensive jobs.
+* feature: MediaConvert: Rectify incorrect modelling of DisassociateCertificate method
+* feature: MediaLive: Today AWS Elemental MediaLive (https://aws.amazon.com/medialive/) adds the option to create "Single Pipeline" channels, which offers a lower-cost option compared to Standard channels. MediaLive Single Pipeline channels have a single encoding pipeline rather than the redundant dual Availability Zone (AZ) pipelines that MediaLive provides with a "Standard" channel.
+* feature: docs: update doc operation example to use 'NUMBER_VALUE' instead of 0 in input
 
 ## 2.436.0
 * feature: EKS: Added support to enable or disable publishing Kubernetes cluster logs in AWS CloudWatch

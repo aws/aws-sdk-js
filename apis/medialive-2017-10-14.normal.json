@@ -6,10 +6,10 @@
     "serviceFullName": "AWS Elemental MediaLive",
     "serviceId": "MediaLive",
     "protocol": "rest-json",
+    "jsonVersion": "1.1",
     "uid": "medialive-2017-10-14",
     "signatureVersion": "v4",
-    "serviceAbbreviation": "MediaLive",
-    "jsonVersion": "1.1"
+    "serviceAbbreviation": "MediaLive"
   },
   "operations": {
     "BatchUpdateSchedule": {
@@ -1259,6 +1259,56 @@
         }
       ],
       "documentation": "Update an Input Security Group's Whilelists."
+    },
+    "UpdateReservation": {
+      "name": "UpdateReservation",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/prod/reservations/{reservationId}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateReservationRequest"
+      },
+      "output": {
+        "shape": "UpdateReservationResponse",
+        "documentation": "Updated reservation"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request was invalid"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Internal service error"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to update reservation"
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad gateway error"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "Reservation not found"
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway timeout error"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded"
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The reservation could not be updated"
+        }
+      ],
+      "documentation": "Update reservation."
     }
   },
   "shapes": {
@@ -2337,6 +2387,11 @@
           "locationName": "arn",
           "documentation": "The unique arn of the channel."
         },
+        "ChannelClass": {
+          "shape": "ChannelClass",
+          "locationName": "channelClass",
+          "documentation": "The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline."
+        },
         "Destinations": {
           "shape": "__listOfOutputDestination",
           "locationName": "destinations",
@@ -2397,6 +2452,14 @@
       },
       "documentation": "Placeholder documentation for Channel"
     },
+    "ChannelClass": {
+      "type": "string",
+      "documentation": "A standard channel has two encoding pipelines and a single pipeline channel only has one.",
+      "enum": [
+        "STANDARD",
+        "SINGLE_PIPELINE"
+      ]
+    },
     "ChannelEgressEndpoint": {
       "type": "structure",
       "members": {
@@ -2430,6 +2493,11 @@
           "shape": "__string",
           "locationName": "arn",
           "documentation": "The unique arn of the channel."
+        },
+        "ChannelClass": {
+          "shape": "ChannelClass",
+          "locationName": "channelClass",
+          "documentation": "The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline."
         },
         "Destinations": {
           "shape": "__listOfOutputDestination",
@@ -2490,6 +2558,11 @@
     "CreateChannelRequest": {
       "type": "structure",
       "members": {
+        "ChannelClass": {
+          "shape": "ChannelClass",
+          "locationName": "channelClass",
+          "documentation": "The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline."
+        },
         "Destinations": {
           "shape": "__listOfOutputDestination",
           "locationName": "destinations"
@@ -2684,6 +2757,11 @@
           "shape": "__string",
           "locationName": "arn",
           "documentation": "The unique arn of the channel."
+        },
+        "ChannelClass": {
+          "shape": "ChannelClass",
+          "locationName": "channelClass",
+          "documentation": "The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline."
         },
         "Destinations": {
           "shape": "__listOfOutputDestination",
@@ -2883,6 +2961,11 @@
           "locationName": "state",
           "documentation": "Current state of reservation, e.g. 'ACTIVE'"
         },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "A collection of key-value pairs"
+        },
         "UsagePrice": {
           "shape": "__double",
           "locationName": "usagePrice",
@@ -2934,6 +3017,11 @@
           "shape": "__string",
           "locationName": "arn",
           "documentation": "The unique arn of the channel."
+        },
+        "ChannelClass": {
+          "shape": "ChannelClass",
+          "locationName": "channelClass",
+          "documentation": "The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline."
         },
         "Destinations": {
           "shape": "__listOfOutputDestination",
@@ -3032,6 +3120,11 @@
           "shape": "__string",
           "locationName": "id",
           "documentation": "The generated ID of the input (unique for user account, immutable)."
+        },
+        "InputClass": {
+          "shape": "InputClass",
+          "locationName": "inputClass",
+          "documentation": "STANDARD - MediaLive expects two sources to be connected to this input. If the channel is also STANDARD, both sources will be ingested. If the channel is SINGLE_PIPELINE, only the first source will be ingested; the second source will always be ignored, even if the first source fails.\nSINGLE_PIPELINE - You can connect only one source to this input. If the ChannelClass is also  SINGLE_PIPELINE, this value is valid. If the ChannelClass is STANDARD, this value is not valid because the channel requires two sources in the input.\n"
         },
         "MediaConnectFlows": {
           "shape": "__listOfMediaConnectFlow",
@@ -3298,6 +3391,11 @@
           "shape": "ReservationState",
           "locationName": "state",
           "documentation": "Current state of reservation, e.g. 'ACTIVE'"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "A collection of key-value pairs"
         },
         "UsagePrice": {
           "shape": "__double",
@@ -5108,6 +5206,11 @@
           "locationName": "id",
           "documentation": "The generated ID of the input (unique for user account, immutable)."
         },
+        "InputClass": {
+          "shape": "InputClass",
+          "locationName": "inputClass",
+          "documentation": "STANDARD - MediaLive expects two sources to be connected to this input. If the channel is also STANDARD, both sources will be ingested. If the channel is SINGLE_PIPELINE, only the first source will be ingested; the second source will always be ignored, even if the first source fails.\nSINGLE_PIPELINE - You can connect only one source to this input. If the ChannelClass is also  SINGLE_PIPELINE, this value is valid. If the ChannelClass is STANDARD, this value is not valid because the channel requires two sources in the input.\n"
+        },
         "MediaConnectFlows": {
           "shape": "__listOfMediaConnectFlow",
           "locationName": "mediaConnectFlows",
@@ -5188,6 +5291,14 @@
       "required": [
         "InputChannel",
         "Gain"
+      ]
+    },
+    "InputClass": {
+      "type": "string",
+      "documentation": "A standard input has two sources and a single pipeline input only has one.",
+      "enum": [
+        "STANDARD",
+        "SINGLE_PIPELINE"
       ]
     },
     "InputCodec": {
@@ -5741,6 +5852,12 @@
     "ListOfferingsRequest": {
       "type": "structure",
       "members": {
+        "ChannelClass": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "channelClass",
+          "documentation": "Filter by channel class, 'STANDARD' or 'SINGLE_PIPELINE'\n"
+        },
         "ChannelConfiguration": {
           "shape": "__string",
           "location": "querystring",
@@ -5821,6 +5938,12 @@
     "ListReservationsRequest": {
       "type": "structure",
       "members": {
+        "ChannelClass": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "channelClass",
+          "documentation": "Filter by channel class, 'STANDARD' or 'SINGLE_PIPELINE'\n"
+        },
         "Codec": {
           "shape": "__string",
           "location": "querystring",
@@ -6971,6 +7094,11 @@
           "shape": "__string",
           "locationName": "start",
           "documentation": "Requested reservation start time (UTC) in ISO-8601 format. The specified time must be between the first day of the current month and one year from now. If no value is given, the default is now."
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "A collection of key-value pairs"
         }
       },
       "required": [
@@ -7096,6 +7224,11 @@
           "locationName": "state",
           "documentation": "Current state of reservation, e.g. 'ACTIVE'"
         },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "A collection of key-value pairs"
+        },
         "UsagePrice": {
           "shape": "__double",
           "locationName": "usagePrice",
@@ -7143,6 +7276,11 @@
     "ReservationResourceSpecification": {
       "type": "structure",
       "members": {
+        "ChannelClass": {
+          "shape": "ChannelClass",
+          "locationName": "channelClass",
+          "documentation": "Channel class, e.g. 'STANDARD'"
+        },
         "Codec": {
           "shape": "ReservationCodec",
           "locationName": "codec",
@@ -7844,6 +7982,11 @@
           "locationName": "arn",
           "documentation": "The unique arn of the channel."
         },
+        "ChannelClass": {
+          "shape": "ChannelClass",
+          "locationName": "channelClass",
+          "documentation": "The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline."
+        },
         "Destinations": {
           "shape": "__listOfOutputDestination",
           "locationName": "destinations",
@@ -8020,6 +8163,11 @@
           "shape": "__string",
           "locationName": "arn",
           "documentation": "The unique arn of the channel."
+        },
+        "ChannelClass": {
+          "shape": "ChannelClass",
+          "locationName": "channelClass",
+          "documentation": "The class for this channel. STANDARD for a channel with two pipelines or SINGLE_PIPELINE for a channel with one pipeline."
         },
         "Destinations": {
           "shape": "__listOfOutputDestination",
@@ -8371,6 +8519,36 @@
         }
       },
       "documentation": "Placeholder documentation for UpdateInputSecurityGroupResponse"
+    },
+    "UpdateReservationRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "Name of the reservation"
+        },
+        "ReservationId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "reservationId",
+          "documentation": "Unique reservation ID, e.g. '1234567'"
+        }
+      },
+      "documentation": "Request to update a reservation",
+      "required": [
+        "ReservationId"
+      ]
+    },
+    "UpdateReservationResponse": {
+      "type": "structure",
+      "members": {
+        "Reservation": {
+          "shape": "Reservation",
+          "locationName": "reservation"
+        }
+      },
+      "documentation": "Placeholder documentation for UpdateReservationResponse"
     },
     "VideoCodecSettings": {
       "type": "structure",
