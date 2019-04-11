@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "stream",
+  "description": "Verify instanceof operand"
+}
