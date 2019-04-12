@@ -54,7 +54,7 @@
 
     if (AWS.util.isNode() && AWS.util.Buffer.alloc) {
       describe('Sensitive binary data', function() {
-        it('should not use Buffer.from() for sensitive data', function() {
+        it('should not use Buffer.from() for decoding sensitive data', function() {
           var binaryTypes = ['blob', 'binary', 'base64'];
           for (var i = 0; i < binaryTypes.length; i++) {
               api = new AWS.Model.Api({
@@ -72,7 +72,7 @@
               expect(bufferSpace[buf.byteOffset]).to.not.eql(0x11);
               expect(bufferSpace[buf.byteOffset+1]).to.not.eql(0x12);
           };
-        })
+        });
       });
     }
 
