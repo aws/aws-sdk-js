@@ -66,7 +66,7 @@ Amazon Kinesis Firehose | AWS.Firehose | 2015-08-04 | :tada: |
 Amazon GameLift | AWS.GameLift | 2015-10-01 | :tada: |
 Amazon Glacier | AWS.Glacier | 2012-06-01 |  |
 AWS Health APIs and Notifications | AWS.Health | 2016-08-04 |  |
-AWS Identity and Access Management | AWS.IAM | 2010-05-08 |  |
+AWS Identity and Access Management | AWS.IAM | 2010-05-08 | :tada: |
 AWS Import/Export | AWS.ImportExport | 2010-06-01 |  |
 Amazon Inspector | AWS.Inspector | 2016-02-16 | :tada: |
 AWS IoT | AWS.Iot | 2015-05-28 | :tada: |
@@ -130,7 +130,7 @@ AWS CloudHSM V2 | AWS.CloudHSMV2 | 2017-04-28 |  |
 AWS Glue | AWS.Glue | 2017-03-31 |  |
 AWS Mobile | AWS.Mobile | 2017-07-01 |  |
 AWS Price List Service | AWS.Pricing | 2017-10-15 | :tada: |
-AWS Cost Explorer Service | AWS.CostExplorer | 2017-10-25 |  |
+AWS Cost Explorer Service | AWS.CostExplorer | 2017-10-25 | :tada: |
 AWS Elemental MediaConvert | AWS.MediaConvert | 2017-08-29 |  |
 AWS Elemental MediaLive | AWS.MediaLive | 2017-10-14 |  |
 AWS Elemental MediaPackage | AWS.MediaPackage | 2017-10-12 |  |
@@ -147,7 +147,7 @@ Amazon Kinesis Video Streams | AWS.KinesisVideo | 2017-09-30 | :tada: |
 Amazon SageMaker Runtime | AWS.SageMakerRuntime | 2017-05-13 |  |
 Amazon SageMaker Service | AWS.SageMaker | 2017-07-24 |  |
 Amazon Translate | AWS.Translate | 2017-07-01 | :tada: |
-AWS Resource Groups | AWS.ResourceGroups | 2017-11-27 |  |
+AWS Resource Groups | AWS.ResourceGroups | 2017-11-27 | :tada: |
 Alexa For Business | AWS.AlexaForBusiness | 2017-11-09 |  |
 AWS Cloud9 | AWS.Cloud9 | 2017-09-23 |  |
 AWSServerlessApplicationRepository | AWS.ServerlessApplicationRepository | 2017-09-08 |  |
@@ -186,6 +186,7 @@ Amazon Kinesis Analytics | AWS.KinesisAnalyticsV2 | 2018-05-23 |  |
 AWS MediaConnect | AWS.MediaConnect | 2018-11-14 |  |
 Amazon FSx | AWS.FSx | 2018-03-01 |  |
 AWS SecurityHub | AWS.SecurityHub | 2018-10-26 |  |
+AWS App Mesh | AWS.AppMesh | 2019-01-25 |  |
 AWS App Mesh | AWS.AppMesh | 2018-10-01 |  |
 AWS License Manager | AWS.LicenseManager | 2018-08-01 |  |
 Managed Streaming for Kafka | AWS.Kafka | 2018-11-14 |  |
@@ -194,3 +195,4 @@ AmazonApiGatewayV2 | AWS.ApiGatewayV2 | 2018-11-29 |  |
 Amazon DocumentDB with MongoDB compatibility | AWS.DocDB | 2014-10-31 |  |
 AWS Backup | AWS.Backup | 2018-11-15 |  |
 Amazon WorkLink | AWS.WorkLink | 2018-09-25 |  |
+Amazon Textract | AWS.Textract | 2018-06-27 |  |
