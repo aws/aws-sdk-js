@@ -1405,7 +1405,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Lists all the roots, organizaitonal units (OUs), and accounts to which the specified policy is attached.</p> <note> <p>Always check the <code>NextToken</code> response parameter for a <code>null</code> value when calling a <code>List*</code> operation. These operations can occasionally return an empty set of results even when there are more results available. The <code>NextToken</code> response parameter value is <code>null</code> <i>only</i> when there are no more results to display.</p> </note> <p>This operation can be called only from the organization's master account.</p>"
+      "documentation": "<p>Lists all the roots, organizational units (OUs), and accounts to which the specified policy is attached.</p> <note> <p>Always check the <code>NextToken</code> response parameter for a <code>null</code> value when calling a <code>List*</code> operation. These operations can occasionally return an empty set of results even when there are more results available. The <code>NextToken</code> response parameter value is <code>null</code> <i>only</i> when there are no more results to display.</p> </note> <p>This operation can be called only from the organization's master account.</p>"
     },
     "MoveAccount": {
       "name": "MoveAccount",
@@ -2874,7 +2874,7 @@
         },
         "FeatureSet": {
           "shape": "OrganizationFeatureSet",
-          "documentation": "<p>Specifies the functionality that currently is available to the organization. If set to \"ALL\", then all features are enabled and policies can be applied to accounts in the organization. If set to \"CONSOLIDATED_BILLING\", then only consolidated billing functionality is available. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/orgs_manage_org_support-all-features.html\">Enabling All Features in Your Organization</a> in the <i>AWS Organizations User Guide</i>.</p>"
+          "documentation": "<p>Specifies the functionality that currently is available to the organization. If set to \"ALL\", then all features are enabled and policies can be applied to accounts in the organization. If set to \"CONSOLIDATED_BILLING\", then only consolidated billing functionality is available. For more information, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html\">Enabling All Features in Your Organization</a> in the <i>AWS Organizations User Guide</i>.</p>"
         },
         "MasterAccountArn": {
           "shape": "AccountArn",

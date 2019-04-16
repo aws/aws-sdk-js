@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.437.0-->
+<!--LATEST=2.438.0-->
 <!--ENTRYINSERT-->
+
+## 2.438.0
+* bugfix: Parser: Alloc new buffers from 0 offset when parsing the sensitive blob data and zero out the node shared buffer pool.
+* bugfix: computeSha256: Before running instanceof, verify that the operand is a function
+* feature: CognitoIdentityServiceProvider: This release adds support for the new email configuration in Amazon Cognito User Pools. You can now specify whether Amazon Cognito emails your users by using its built-in email functionality or your Amazon SES email configuration.
+* feature: MQ: This release adds the ability to retrieve information about broker engines and broker instance options. See Broker Engine Types and Broker Instance Options in the Amazon MQ REST API Reference.
+* feature: Redshift: DescribeResize can now return percent of data transferred from source cluster to target cluster for a classic resize.
+* feature: StorageGateway: This change allows you to select either a weekly or monthly maintenance window for your volume or tape gateway. It also allows you to tag your tape and volume resources on creation by adding a Tag value on calls to the respective api endpoints.
 
 ## 2.437.0
 * feature: Comprehend: With this release AWS Comprehend provides confusion matrix for custom document classifier.

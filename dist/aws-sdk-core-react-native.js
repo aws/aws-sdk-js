@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.437.0',
+	  VERSION: '2.438.0',
 
 	  /**
 	   * @api private
@@ -881,7 +881,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (util.isNode()) {
 	      var Stream = util.stream.Stream;
 	      var fs = __webpack_require__(6);
-	      if (body instanceof Stream) {
+	      if (typeof Stream === 'function' && body instanceof Stream) {
 	        if (typeof body.path === 'string') { // assume file object
 	          var settings = {};
 	          if (typeof body.start === 'number') {
@@ -2697,7 +2697,22 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function BinaryShape() {
 	  Shape.apply(this, arguments);
-	  this.toType = util.base64.decode;
+	  this.toType = function(value) {
+	    var buf = util.base64.decode(value);
+	    if (this.isSensitive && util.isNode() && typeof util.Buffer.alloc === 'function') {
+	  /* Node.js can create a Buffer that is not isolated.
+	   * i.e. buf.byteLength !== buf.buffer.byteLength
+	   * This means that the sensitive data is accessible to anyone with access to buf.buffer.
+	   * If this is the node shared Buffer, then other code within this process _could_ find this secret.
+	   * Copy sensitive data to an isolated Buffer and zero the sensitive data.
+	   * While this is safe to do here, copying this code somewhere else may produce unexpected results.
+	   */
+	      var secureBuf = util.Buffer.alloc(buf.length, buf);
+	      buf.fill(0);
+	      buf = secureBuf;
+	    }
+	    return buf;
+	  };
 	  this.toWireFormat = util.base64.encode;
 	}
 

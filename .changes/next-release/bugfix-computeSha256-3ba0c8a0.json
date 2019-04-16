@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "computeSha256",
-  "description": "Before running instanceof, verify that the operand is a function"
-}

@@ -701,6 +701,9 @@ declare namespace Redshift {
     TargetReservedNodeOfferingId: String;
   }
   export interface AcceptReservedNodeExchangeOutputMessage {
+    /**
+     * 
+     */
     ExchangedReservedNode?: ReservedNode;
   }
   export interface AccountAttribute {
@@ -783,6 +786,9 @@ declare namespace Redshift {
      * The name of the availability zone.
      */
     Name?: String;
+    /**
+     * 
+     */
     SupportedPlatforms?: SupportedPlatformsList;
   }
   export type AvailabilityZoneList = AvailabilityZone[];
@@ -933,6 +939,9 @@ declare namespace Redshift {
      * A value that describes the status of a cluster restore action. This parameter returns null if the cluster was not created by restoring a snapshot.
      */
     RestoreStatus?: RestoreStatus;
+    /**
+     * 
+     */
     DataTransferProgress?: DataTransferProgress;
     /**
      * A value that reports whether the Amazon Redshift cluster has finished applying any hardware security module (HSM) settings changes specified in a modify cluster command. Values: active, applying
@@ -1004,7 +1013,13 @@ declare namespace Redshift {
     ResizeInfo?: ResizeInfo;
   }
   export interface ClusterAssociatedToSchedule {
+    /**
+     * 
+     */
     ClusterIdentifier?: String;
+    /**
+     * 
+     */
     ScheduleAssociationState?: ScheduleState;
   }
   export interface ClusterCredentials {
@@ -1629,8 +1644,17 @@ declare namespace Redshift {
      * The description of the snapshot schedule.
      */
     ScheduleDescription?: String;
+    /**
+     * An optional set of tags you can use to search for the schedule.
+     */
     Tags?: TagList;
+    /**
+     * 
+     */
     DryRun?: BooleanOptional;
+    /**
+     * 
+     */
     NextInvocations?: IntegerOptional;
   }
   export interface CreateTagsMessage {
@@ -1886,7 +1910,7 @@ declare namespace Redshift {
   }
   export interface DescribeClusterSnapshotsMessage {
     /**
-     * The identifier of the cluster for which information about snapshots is requested.
+     * The identifier of the cluster which generated the requested snapshots.
      */
     ClusterIdentifier?: String;
     /**
@@ -1926,9 +1950,12 @@ declare namespace Redshift {
      */
     TagValues?: TagValueList;
     /**
-     * A value that indicates whether to return snapshots only for an existing cluster. Table-level restore can be performed only using a snapshot of an existing cluster, that is, a cluster that has not been deleted. If ClusterExists is set to true, ClusterIdentifier is required.
+     * A value that indicates whether to return snapshots only for an existing cluster. You can perform table-level restore only by using a snapshot of an existing cluster, that is, a cluster that has not been deleted. Values for this parameter work as follows:    If ClusterExists is set to true, ClusterIdentifier is required.   If ClusterExists is set to false and ClusterIdentifier isn't specified, all snapshots associated with deleted clusters (orphaned snapshots) are returned.    If ClusterExists is set to false and ClusterIdentifier is specified for a deleted cluster, snapshots associated with that cluster are returned.   If ClusterExists is set to false and ClusterIdentifier is specified for an existing cluster, no snapshots are returned.   
      */
     ClusterExists?: BooleanOptional;
+    /**
+     * 
+     */
     SortingEntities?: SnapshotSortingEntityList;
   }
   export interface DescribeClusterSubnetGroupsMessage {
@@ -2754,7 +2781,7 @@ declare namespace Redshift {
      */
     DeferMaintenanceEndTime?: TStamp;
     /**
-     * An integer indicating the duration of the maintenance window in days. If you specify a duration, you can't specify an end time. The duration must be 14 days or less.
+     * An integer indicating the duration of the maintenance window in days. If you specify a duration, you can't specify an end time. The duration must be 45 days or less.
      */
     DeferMaintenanceDuration?: IntegerOptional;
   }
@@ -3171,6 +3198,9 @@ declare namespace Redshift {
      * The recurring charges for the reserved node.
      */
     RecurringCharges?: RecurringChargeList;
+    /**
+     * 
+     */
     ReservedNodeOfferingType?: ReservedNodeOfferingType;
   }
   export type ReservedNodeList = ReservedNode[];
@@ -3207,6 +3237,9 @@ declare namespace Redshift {
      * The charge to your account regardless of whether you are creating any clusters using the node offering. Recurring charges are only in effect for heavy-utilization reserved nodes.
      */
     RecurringCharges?: RecurringChargeList;
+    /**
+     * 
+     */
     ReservedNodeOfferingType?: ReservedNodeOfferingType;
   }
   export type ReservedNodeOfferingList = ReservedNodeOffering[];
@@ -3341,6 +3374,10 @@ declare namespace Redshift {
      * The type of encryption for the cluster after the resize is complete. Possible values are KMS and None. In the China region possible values are: Legacy and None.
      */
     TargetEncryptionType?: String;
+    /**
+     * The percent of data transferred from source cluster to target cluster.
+     */
+    DataTransferProgressPercent?: DoubleOptional;
   }
   export type RestorableNodeTypeList = String[];
   export interface RestoreFromClusterSnapshotMessage {
@@ -3412,6 +3449,9 @@ declare namespace Redshift {
      * The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with CreateClusterSnapshot.  Default: The value selected for the cluster from which the snapshot was taken. Constraints: Must be a value from 0 to 35.
      */
     AutomatedSnapshotRetentionPeriod?: IntegerOptional;
+    /**
+     * The default number of days to retain a manual snapshot. If the value is -1, the snapshot is retained indefinitely. This setting doesn't change the retention period of existing snapshots. The value must be either -1 or an integer between 1 and 3,653.
+     */
     ManualSnapshotRetentionPeriod?: IntegerOptional;
     /**
      * The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster that you restore from a shared snapshot.
@@ -3766,7 +3806,7 @@ declare namespace Redshift {
   }
   export interface SnapshotSchedule {
     /**
-     * A list of ScheduleDefinitions
+     * A list of ScheduleDefinitions.
      */
     ScheduleDefinitions?: ScheduleDefinitionList;
     /**
@@ -3781,8 +3821,17 @@ declare namespace Redshift {
      * An optional set of tags describing the schedule.
      */
     Tags?: TagList;
+    /**
+     * 
+     */
     NextInvocations?: ScheduledSnapshotTimeList;
+    /**
+     * The number of clusters associated with the schedule.
+     */
     AssociatedClusterCount?: IntegerOptional;
+    /**
+     * A list of clusters associated with the schedule. A maximum of 100 clusters is returned.
+     */
     AssociatedClusters?: AssociatedClusterList;
   }
   export type SnapshotScheduleList = SnapshotSchedule[];
@@ -3806,6 +3855,9 @@ declare namespace Redshift {
      * The identifier of the subnet.
      */
     SubnetIdentifier?: String;
+    /**
+     * 
+     */
     SubnetAvailabilityZone?: AvailabilityZone;
     /**
      * The status of the subnet.
@@ -3822,6 +3874,9 @@ declare namespace Redshift {
   }
   export type SupportedOperationList = SupportedOperation[];
   export interface SupportedPlatform {
+    /**
+     * 
+     */
     Name?: String;
   }
   export type SupportedPlatformsList = SupportedPlatform[];

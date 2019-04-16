@@ -296,11 +296,11 @@ declare class Organizations extends Service {
    */
   listRoots(callback?: (err: AWSError, data: Organizations.Types.ListRootsResponse) => void): Request<Organizations.Types.ListRootsResponse, AWSError>;
   /**
-   * Lists all the roots, organizaitonal units (OUs), and accounts to which the specified policy is attached.  Always check the NextToken response parameter for a null value when calling a List* operation. These operations can occasionally return an empty set of results even when there are more results available. The NextToken response parameter value is null only when there are no more results to display.  This operation can be called only from the organization's master account.
+   * Lists all the roots, organizational units (OUs), and accounts to which the specified policy is attached.  Always check the NextToken response parameter for a null value when calling a List* operation. These operations can occasionally return an empty set of results even when there are more results available. The NextToken response parameter value is null only when there are no more results to display.  This operation can be called only from the organization's master account.
    */
   listTargetsForPolicy(params: Organizations.Types.ListTargetsForPolicyRequest, callback?: (err: AWSError, data: Organizations.Types.ListTargetsForPolicyResponse) => void): Request<Organizations.Types.ListTargetsForPolicyResponse, AWSError>;
   /**
-   * Lists all the roots, organizaitonal units (OUs), and accounts to which the specified policy is attached.  Always check the NextToken response parameter for a null value when calling a List* operation. These operations can occasionally return an empty set of results even when there are more results available. The NextToken response parameter value is null only when there are no more results to display.  This operation can be called only from the organization's master account.
+   * Lists all the roots, organizational units (OUs), and accounts to which the specified policy is attached.  Always check the NextToken response parameter for a null value when calling a List* operation. These operations can occasionally return an empty set of results even when there are more results available. The NextToken response parameter value is null only when there are no more results to display.  This operation can be called only from the organization's master account.
    */
   listTargetsForPolicy(callback?: (err: AWSError, data: Organizations.Types.ListTargetsForPolicyResponse) => void): Request<Organizations.Types.ListTargetsForPolicyResponse, AWSError>;
   /**

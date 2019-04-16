@@ -52,11 +52,11 @@ declare class MQ extends Service {
    */
   deleteBroker(callback?: (err: AWSError, data: MQ.Types.DeleteBrokerResponse) => void): Request<MQ.Types.DeleteBrokerResponse, AWSError>;
   /**
-   * Remove a tag from a resource.
+   * Removes a tag from a resource.
    */
   deleteTags(params: MQ.Types.DeleteTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Remove a tag from a resource.
+   * Removes a tag from a resource.
    */
   deleteTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -75,6 +75,22 @@ declare class MQ extends Service {
    * Returns information about the specified broker.
    */
   describeBroker(callback?: (err: AWSError, data: MQ.Types.DescribeBrokerResponse) => void): Request<MQ.Types.DescribeBrokerResponse, AWSError>;
+  /**
+   * Describe available engine types and versions.
+   */
+  describeBrokerEngineTypes(params: MQ.Types.DescribeBrokerEngineTypesRequest, callback?: (err: AWSError, data: MQ.Types.DescribeBrokerEngineTypesResponse) => void): Request<MQ.Types.DescribeBrokerEngineTypesResponse, AWSError>;
+  /**
+   * Describe available engine types and versions.
+   */
+  describeBrokerEngineTypes(callback?: (err: AWSError, data: MQ.Types.DescribeBrokerEngineTypesResponse) => void): Request<MQ.Types.DescribeBrokerEngineTypesResponse, AWSError>;
+  /**
+   * Describe available broker instance options.
+   */
+  describeBrokerInstanceOptions(params: MQ.Types.DescribeBrokerInstanceOptionsRequest, callback?: (err: AWSError, data: MQ.Types.DescribeBrokerInstanceOptionsResponse) => void): Request<MQ.Types.DescribeBrokerInstanceOptionsResponse, AWSError>;
+  /**
+   * Describe available broker instance options.
+   */
+  describeBrokerInstanceOptions(callback?: (err: AWSError, data: MQ.Types.DescribeBrokerInstanceOptionsResponse) => void): Request<MQ.Types.DescribeBrokerInstanceOptionsResponse, AWSError>;
   /**
    * Returns information about the specified configuration.
    */
@@ -173,6 +189,22 @@ declare class MQ extends Service {
   updateUser(callback?: (err: AWSError, data: MQ.Types.UpdateUserResponse) => void): Request<MQ.Types.UpdateUserResponse, AWSError>;
 }
 declare namespace MQ {
+  export interface AvailabilityZone {
+    /**
+     * Id for the availability zone.
+     */
+    Name?: __string;
+  }
+  export interface BrokerEngineType {
+    /**
+     * The type of broker engine.
+     */
+    EngineType?: EngineType;
+    /**
+     * The list of engine versions.
+     */
+    EngineVersions?: __listOfEngineVersion;
+  }
   export interface BrokerInstance {
     /**
      * The URL of the broker's ActiveMQ Web Console.
@@ -186,6 +218,24 @@ declare namespace MQ {
      * The IP address of the Elastic Network Interface (ENI) attached to the broker.
      */
     IpAddress?: __string;
+  }
+  export interface BrokerInstanceOption {
+    /**
+     * The list of available az.
+     */
+    AvailabilityZones?: __listOfAvailabilityZone;
+    /**
+     * The type of broker engine.
+     */
+    EngineType?: EngineType;
+    /**
+     * The type of broker instance.
+     */
+    HostInstanceType?: __string;
+    /**
+     * The list of supported engine versions.
+     */
+    SupportedEngineVersions?: __listOf__string;
   }
   export type BrokerState = "CREATION_IN_PROGRESS"|"CREATION_FAILED"|"DELETION_IN_PROGRESS"|"RUNNING"|"REBOOT_IN_PROGRESS"|string;
   export interface BrokerSummary {
@@ -409,7 +459,7 @@ declare namespace MQ {
   }
   export interface CreateTagsRequest {
     /**
-     * the Amazon Resource Name (ARN)
+     * The Amazon Resource Name (ARN) of the resource tag.
      */
     ResourceArn: __string;
     /**
@@ -456,7 +506,7 @@ declare namespace MQ {
   }
   export interface DeleteTagsRequest {
     /**
-     * the Amazon Resource Name (ARN)
+     * The Amazon Resource Name (ARN) of the resource tag.
      */
     ResourceArn: __string;
     /**
@@ -477,6 +527,66 @@ declare namespace MQ {
   export interface DeleteUserResponse {
   }
   export type DeploymentMode = "SINGLE_INSTANCE"|"ACTIVE_STANDBY_MULTI_AZ"|string;
+  export interface DescribeBrokerEngineTypesRequest {
+    /**
+     * Filter response by engine type.
+     */
+    EngineType?: __string;
+    /**
+     * The maximum number of engine types that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+     */
+    NextToken?: __string;
+  }
+  export interface DescribeBrokerEngineTypesResponse {
+    /**
+     * List of available engine types and versions.
+     */
+    BrokerEngineTypes?: __listOfBrokerEngineType;
+    /**
+     * Required. The maximum number of engine types that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+     */
+    MaxResults?: __integerMin5Max100;
+    /**
+     * The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+     */
+    NextToken?: __string;
+  }
+  export interface DescribeBrokerInstanceOptionsRequest {
+    /**
+     * Filter response by engine type.
+     */
+    EngineType?: __string;
+    /**
+     * Filter response by host instance type.
+     */
+    HostInstanceType?: __string;
+    /**
+     * The maximum number of instance options that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+     */
+    NextToken?: __string;
+  }
+  export interface DescribeBrokerInstanceOptionsResponse {
+    /**
+     * List of available broker instance options.
+     */
+    BrokerInstanceOptions?: __listOfBrokerInstanceOption;
+    /**
+     * Required. The maximum number of instance options that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+     */
+    MaxResults?: __integerMin5Max100;
+    /**
+     * The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty.
+     */
+    NextToken?: __string;
+  }
   export interface DescribeBrokerRequest {
     /**
      * The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.
@@ -670,6 +780,12 @@ declare namespace MQ {
     Username?: __string;
   }
   export type EngineType = "ACTIVEMQ"|string;
+  export interface EngineVersion {
+    /**
+     * Id for the version.
+     */
+    Name?: __string;
+  }
   export interface ListBrokersRequest {
     /**
      * The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
@@ -748,7 +864,7 @@ declare namespace MQ {
   }
   export interface ListTagsRequest {
     /**
-     * the Amazon Resource Name (ARN)
+     * The Amazon Resource Name (ARN) of the resource tag.
      */
     ResourceArn: __string;
   }
@@ -1023,11 +1139,15 @@ declare namespace MQ {
   export type __boolean = boolean;
   export type __integer = number;
   export type __integerMin5Max100 = number;
+  export type __listOfAvailabilityZone = AvailabilityZone[];
+  export type __listOfBrokerEngineType = BrokerEngineType[];
   export type __listOfBrokerInstance = BrokerInstance[];
+  export type __listOfBrokerInstanceOption = BrokerInstanceOption[];
   export type __listOfBrokerSummary = BrokerSummary[];
   export type __listOfConfiguration = Configuration[];
   export type __listOfConfigurationId = ConfigurationId[];
   export type __listOfConfigurationRevision = ConfigurationRevision[];
+  export type __listOfEngineVersion = EngineVersion[];
   export type __listOfSanitizationWarning = SanitizationWarning[];
   export type __listOfUser = User[];
   export type __listOfUserSummary = UserSummary[];

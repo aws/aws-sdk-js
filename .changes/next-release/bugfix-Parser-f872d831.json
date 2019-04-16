@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "Parser",
-  "description": "Alloc new buffers from 0 offset when parsing the sensitive blob data and zero out the node shared buffer pool."
-}

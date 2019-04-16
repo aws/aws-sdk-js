@@ -213,7 +213,7 @@
           "documentation": "HTTP Status Code 403: Access forbidden. Correct your credentials and then retry your request."
         }
       ],
-      "documentation": "Remove a tag from a resource."
+      "documentation": "Removes a tag from a resource."
     },
     "DeleteUser": {
       "name": "DeleteUser",
@@ -282,6 +282,66 @@
         }
       ],
       "documentation": "Returns information about the specified broker."
+    },
+    "DescribeBrokerEngineTypes": {
+      "name": "DescribeBrokerEngineTypes",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/broker-engine-types",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeBrokerEngineTypesRequest"
+      },
+      "output": {
+        "shape": "DescribeBrokerEngineTypesResponse",
+        "documentation": "HTTP Status Code 200: OK."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "HTTP Status Code 400: Bad request due to incorrect input. Correct your request and then retry it."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "HTTP Status Code 500: Unexpected internal server error. Retrying your request might resolve the issue."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "HTTP Status Code 403: Access forbidden. Correct your credentials and then retry your request."
+        }
+      ],
+      "documentation": "Describe available engine types and versions."
+    },
+    "DescribeBrokerInstanceOptions": {
+      "name": "DescribeBrokerInstanceOptions",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/broker-instance-options",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DescribeBrokerInstanceOptionsRequest"
+      },
+      "output": {
+        "shape": "DescribeBrokerInstanceOptionsResponse",
+        "documentation": "HTTP Status Code 200: OK."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "HTTP Status Code 400: Bad request due to incorrect input. Correct your request and then retry it."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "HTTP Status Code 500: Unexpected internal server error. Retrying your request might resolve the issue."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "HTTP Status Code 403: Access forbidden. Correct your credentials and then retry your request."
+        }
+      ],
+      "documentation": "Describe available broker instance options."
     },
     "DescribeConfiguration": {
       "name": "DescribeConfiguration",
@@ -697,6 +757,33 @@
     }
   },
   "shapes": {
+    "AvailabilityZone": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "Id for the availability zone."
+        }
+      },
+      "documentation": "Name of the availability zone."
+    },
+    "BrokerEngineType": {
+      "type": "structure",
+      "members": {
+        "EngineType": {
+          "shape": "EngineType",
+          "locationName": "engineType",
+          "documentation": "The type of broker engine."
+        },
+        "EngineVersions": {
+          "shape": "__listOfEngineVersion",
+          "locationName": "engineVersions",
+          "documentation": "The list of engine versions."
+        }
+      },
+      "documentation": "Types of broker engines."
+    },
     "BrokerInstance": {
       "type": "structure",
       "members": {
@@ -717,6 +804,32 @@
         }
       },
       "documentation": "Returns information about all brokers."
+    },
+    "BrokerInstanceOption": {
+      "type": "structure",
+      "members": {
+        "AvailabilityZones": {
+          "shape": "__listOfAvailabilityZone",
+          "locationName": "availabilityZones",
+          "documentation": "The list of available az."
+        },
+        "EngineType": {
+          "shape": "EngineType",
+          "locationName": "engineType",
+          "documentation": "The type of broker engine."
+        },
+        "HostInstanceType": {
+          "shape": "__string",
+          "locationName": "hostInstanceType",
+          "documentation": "The type of broker instance."
+        },
+        "SupportedEngineVersions": {
+          "shape": "__listOf__string",
+          "locationName": "supportedEngineVersions",
+          "documentation": "The list of supported engine versions."
+        }
+      },
+      "documentation": "Option for host instance type."
     },
     "BrokerState": {
       "type": "string",
@@ -1048,7 +1161,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "resource-arn",
-          "documentation": "the Amazon Resource Name (ARN)"
+          "documentation": "The Amazon Resource Name (ARN) of the resource tag."
         },
         "Tags": {
           "shape": "__mapOf__string",
@@ -1145,7 +1258,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "resource-arn",
-          "documentation": "the Amazon Resource Name (ARN)"
+          "documentation": "The Amazon Resource Name (ARN) of the resource tag."
         },
         "TagKeys": {
           "shape": "__listOf__string",
@@ -1191,6 +1304,98 @@
         "SINGLE_INSTANCE",
         "ACTIVE_STANDBY_MULTI_AZ"
       ]
+    },
+    "DescribeBrokerEngineTypesRequest": {
+      "type": "structure",
+      "members": {
+        "EngineType": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "engineType",
+          "documentation": "Filter response by engine type."
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults",
+          "documentation": "The maximum number of engine types that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100."
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken",
+          "documentation": "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty."
+        }
+      }
+    },
+    "DescribeBrokerEngineTypesResponse": {
+      "type": "structure",
+      "members": {
+        "BrokerEngineTypes": {
+          "shape": "__listOfBrokerEngineType",
+          "locationName": "brokerEngineTypes",
+          "documentation": "List of available engine types and versions."
+        },
+        "MaxResults": {
+          "shape": "__integerMin5Max100",
+          "locationName": "maxResults",
+          "documentation": "Required. The maximum number of engine types that can be returned per page (20 by default). This value must be an integer from 5 to 100."
+        },
+        "NextToken": {
+          "shape": "__string",
+          "locationName": "nextToken",
+          "documentation": "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty."
+        }
+      }
+    },
+    "DescribeBrokerInstanceOptionsRequest": {
+      "type": "structure",
+      "members": {
+        "EngineType": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "engineType",
+          "documentation": "Filter response by engine type."
+        },
+        "HostInstanceType": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "hostInstanceType",
+          "documentation": "Filter response by host instance type."
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults",
+          "documentation": "The maximum number of instance options that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100."
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken",
+          "documentation": "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty."
+        }
+      }
+    },
+    "DescribeBrokerInstanceOptionsResponse": {
+      "type": "structure",
+      "members": {
+        "BrokerInstanceOptions": {
+          "shape": "__listOfBrokerInstanceOption",
+          "locationName": "brokerInstanceOptions",
+          "documentation": "List of available broker instance options."
+        },
+        "MaxResults": {
+          "shape": "__integerMin5Max100",
+          "locationName": "maxResults",
+          "documentation": "Required. The maximum number of instance options that can be returned per page (20 by default). This value must be an integer from 5 to 100."
+        },
+        "NextToken": {
+          "shape": "__string",
+          "locationName": "nextToken",
+          "documentation": "The token that specifies the next page of results Amazon MQ should return. To request the first page, leave nextToken empty."
+        }
+      }
     },
     "DescribeBrokerRequest": {
       "type": "structure",
@@ -1479,6 +1684,17 @@
         "ACTIVEMQ"
       ]
     },
+    "EngineVersion": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "Id for the version."
+        }
+      },
+      "documentation": "Id of the engine version."
+    },
     "ListBrokersRequest": {
       "type": "structure",
       "members": {
@@ -1606,7 +1822,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "resource-arn",
-          "documentation": "the Amazon Resource Name (ARN)"
+          "documentation": "The Amazon Resource Name (ARN) of the resource tag."
         }
       },
       "required": [
@@ -2051,10 +2267,28 @@
       "min": 5,
       "max": 100
     },
+    "__listOfAvailabilityZone": {
+      "type": "list",
+      "member": {
+        "shape": "AvailabilityZone"
+      }
+    },
+    "__listOfBrokerEngineType": {
+      "type": "list",
+      "member": {
+        "shape": "BrokerEngineType"
+      }
+    },
     "__listOfBrokerInstance": {
       "type": "list",
       "member": {
         "shape": "BrokerInstance"
+      }
+    },
+    "__listOfBrokerInstanceOption": {
+      "type": "list",
+      "member": {
+        "shape": "BrokerInstanceOption"
       }
     },
     "__listOfBrokerSummary": {
@@ -2079,6 +2313,12 @@
       "type": "list",
       "member": {
         "shape": "ConfigurationRevision"
+      }
+    },
+    "__listOfEngineVersion": {
+      "type": "list",
+      "member": {
+        "shape": "EngineVersion"
       }
     },
     "__listOfSanitizationWarning": {
