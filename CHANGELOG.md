@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.438.0-->
+<!--LATEST=2.439.0-->
 <!--ENTRYINSERT-->
+
+## 2.439.0
+* feature: EC2: This release adds support for requester-managed Interface VPC Endpoints (powered by AWS PrivateLink). The feature prevents VPC endpoint owners from accidentally deleting or otherwise mismanaging the VPC endpoints of some AWS VPC endpoint services.
+* feature: Polly: Amazon Polly adds Arabic language support with new female voice - "Zeina"
 
 ## 2.438.0
 * bugfix: Parser: Alloc new buffers from 0 offset when parsing the sensitive blob data and zero out the node shared buffer pool.
