@@ -12,6 +12,14 @@ declare class WorkLink extends Service {
   constructor(options?: WorkLink.Types.ClientConfiguration)
   config: Config & WorkLink.Types.ClientConfiguration;
   /**
+   * Specifies a domain to be associated to Amazon WorkLink.
+   */
+  associateDomain(params: WorkLink.Types.AssociateDomainRequest, callback?: (err: AWSError, data: WorkLink.Types.AssociateDomainResponse) => void): Request<WorkLink.Types.AssociateDomainResponse, AWSError>;
+  /**
+   * Specifies a domain to be associated to Amazon WorkLink.
+   */
+  associateDomain(callback?: (err: AWSError, data: WorkLink.Types.AssociateDomainResponse) => void): Request<WorkLink.Types.AssociateDomainResponse, AWSError>;
+  /**
    * Imports the root certificate of a certificate authority (CA) used to obtain TLS certificates used by associated websites within the company network.
    */
   associateWebsiteCertificateAuthority(params: WorkLink.Types.AssociateWebsiteCertificateAuthorityRequest, callback?: (err: AWSError, data: WorkLink.Types.AssociateWebsiteCertificateAuthorityResponse) => void): Request<WorkLink.Types.AssociateWebsiteCertificateAuthorityResponse, AWSError>;
@@ -68,6 +76,14 @@ declare class WorkLink extends Service {
    */
   describeDevicePolicyConfiguration(callback?: (err: AWSError, data: WorkLink.Types.DescribeDevicePolicyConfigurationResponse) => void): Request<WorkLink.Types.DescribeDevicePolicyConfigurationResponse, AWSError>;
   /**
+   * Provides information about the domain.
+   */
+  describeDomain(params: WorkLink.Types.DescribeDomainRequest, callback?: (err: AWSError, data: WorkLink.Types.DescribeDomainResponse) => void): Request<WorkLink.Types.DescribeDomainResponse, AWSError>;
+  /**
+   * Provides information about the domain.
+   */
+  describeDomain(callback?: (err: AWSError, data: WorkLink.Types.DescribeDomainResponse) => void): Request<WorkLink.Types.DescribeDomainResponse, AWSError>;
+  /**
    * Provides basic information for the specified fleet, excluding identity provider, networking, and device configuration details.
    */
   describeFleetMetadata(params: WorkLink.Types.DescribeFleetMetadataRequest, callback?: (err: AWSError, data: WorkLink.Types.DescribeFleetMetadataResponse) => void): Request<WorkLink.Types.DescribeFleetMetadataResponse, AWSError>;
@@ -92,6 +108,14 @@ declare class WorkLink extends Service {
    */
   describeWebsiteCertificateAuthority(callback?: (err: AWSError, data: WorkLink.Types.DescribeWebsiteCertificateAuthorityResponse) => void): Request<WorkLink.Types.DescribeWebsiteCertificateAuthorityResponse, AWSError>;
   /**
+   * Disassociates a domain from Amazon WorkLink. End users lose the ability to access the domain with Amazon WorkLink. 
+   */
+  disassociateDomain(params: WorkLink.Types.DisassociateDomainRequest, callback?: (err: AWSError, data: WorkLink.Types.DisassociateDomainResponse) => void): Request<WorkLink.Types.DisassociateDomainResponse, AWSError>;
+  /**
+   * Disassociates a domain from Amazon WorkLink. End users lose the ability to access the domain with Amazon WorkLink. 
+   */
+  disassociateDomain(callback?: (err: AWSError, data: WorkLink.Types.DisassociateDomainResponse) => void): Request<WorkLink.Types.DisassociateDomainResponse, AWSError>;
+  /**
    * Removes a certificate authority (CA).
    */
   disassociateWebsiteCertificateAuthority(params: WorkLink.Types.DisassociateWebsiteCertificateAuthorityRequest, callback?: (err: AWSError, data: WorkLink.Types.DisassociateWebsiteCertificateAuthorityResponse) => void): Request<WorkLink.Types.DisassociateWebsiteCertificateAuthorityResponse, AWSError>;
@@ -108,6 +132,14 @@ declare class WorkLink extends Service {
    */
   listDevices(callback?: (err: AWSError, data: WorkLink.Types.ListDevicesResponse) => void): Request<WorkLink.Types.ListDevicesResponse, AWSError>;
   /**
+   * Retrieves a list of domains associated to a specified fleet.
+   */
+  listDomains(params: WorkLink.Types.ListDomainsRequest, callback?: (err: AWSError, data: WorkLink.Types.ListDomainsResponse) => void): Request<WorkLink.Types.ListDomainsResponse, AWSError>;
+  /**
+   * Retrieves a list of domains associated to a specified fleet.
+   */
+  listDomains(callback?: (err: AWSError, data: WorkLink.Types.ListDomainsResponse) => void): Request<WorkLink.Types.ListDomainsResponse, AWSError>;
+  /**
    * Retrieves a list of fleets for the current account and Region.
    */
   listFleets(params: WorkLink.Types.ListFleetsRequest, callback?: (err: AWSError, data: WorkLink.Types.ListFleetsResponse) => void): Request<WorkLink.Types.ListFleetsResponse, AWSError>;
@@ -123,6 +155,22 @@ declare class WorkLink extends Service {
    * Retrieves a list of certificate authorities added for the current account and Region.
    */
   listWebsiteCertificateAuthorities(callback?: (err: AWSError, data: WorkLink.Types.ListWebsiteCertificateAuthoritiesResponse) => void): Request<WorkLink.Types.ListWebsiteCertificateAuthoritiesResponse, AWSError>;
+  /**
+   * Moves a domain to ACTIVE status if it was in the INACTIVE status.
+   */
+  restoreDomainAccess(params: WorkLink.Types.RestoreDomainAccessRequest, callback?: (err: AWSError, data: WorkLink.Types.RestoreDomainAccessResponse) => void): Request<WorkLink.Types.RestoreDomainAccessResponse, AWSError>;
+  /**
+   * Moves a domain to ACTIVE status if it was in the INACTIVE status.
+   */
+  restoreDomainAccess(callback?: (err: AWSError, data: WorkLink.Types.RestoreDomainAccessResponse) => void): Request<WorkLink.Types.RestoreDomainAccessResponse, AWSError>;
+  /**
+   * Moves a domain to INACTIVE status if it was in the ACTIVE status.
+   */
+  revokeDomainAccess(params: WorkLink.Types.RevokeDomainAccessRequest, callback?: (err: AWSError, data: WorkLink.Types.RevokeDomainAccessResponse) => void): Request<WorkLink.Types.RevokeDomainAccessResponse, AWSError>;
+  /**
+   * Moves a domain to INACTIVE status if it was in the ACTIVE status.
+   */
+  revokeDomainAccess(callback?: (err: AWSError, data: WorkLink.Types.RevokeDomainAccessResponse) => void): Request<WorkLink.Types.RevokeDomainAccessResponse, AWSError>;
   /**
    * Signs the user out from all of their devices. The user can sign in again if they have valid credentials.
    */
@@ -156,6 +204,14 @@ declare class WorkLink extends Service {
    */
   updateDevicePolicyConfiguration(callback?: (err: AWSError, data: WorkLink.Types.UpdateDevicePolicyConfigurationResponse) => void): Request<WorkLink.Types.UpdateDevicePolicyConfigurationResponse, AWSError>;
   /**
+   * Updates domain metadata, such as DisplayName.
+   */
+  updateDomainMetadata(params: WorkLink.Types.UpdateDomainMetadataRequest, callback?: (err: AWSError, data: WorkLink.Types.UpdateDomainMetadataResponse) => void): Request<WorkLink.Types.UpdateDomainMetadataResponse, AWSError>;
+  /**
+   * Updates domain metadata, such as DisplayName.
+   */
+  updateDomainMetadata(callback?: (err: AWSError, data: WorkLink.Types.UpdateDomainMetadataResponse) => void): Request<WorkLink.Types.UpdateDomainMetadataResponse, AWSError>;
+  /**
    * Updates fleet metadata, such as DisplayName.
    */
   updateFleetMetadata(params: WorkLink.Types.UpdateFleetMetadataRequest, callback?: (err: AWSError, data: WorkLink.Types.UpdateFleetMetadataResponse) => void): Request<WorkLink.Types.UpdateFleetMetadataResponse, AWSError>;
@@ -173,6 +229,27 @@ declare class WorkLink extends Service {
   updateIdentityProviderConfiguration(callback?: (err: AWSError, data: WorkLink.Types.UpdateIdentityProviderConfigurationResponse) => void): Request<WorkLink.Types.UpdateIdentityProviderConfigurationResponse, AWSError>;
 }
 declare namespace WorkLink {
+  export type AcmCertificateArn = string;
+  export interface AssociateDomainRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the fleet.
+     */
+    FleetArn: FleetArn;
+    /**
+     * The fully qualified domain name (FQDN).
+     */
+    DomainName: DomainName;
+    /**
+     * The ARN of an issued ACM certificate that is valid for the domain being associated. 
+     */
+    AcmCertificateArn: AcmCertificateArn;
+    /**
+     * The name to display.
+     */
+    DisplayName?: DisplayName;
+  }
+  export interface AssociateDomainResponse {
+  }
   export interface AssociateWebsiteCertificateAuthorityRequest {
     /**
      * The ARN of the fleet.
@@ -319,6 +396,30 @@ declare namespace WorkLink {
      */
     Username?: Username;
   }
+  export interface DescribeDomainRequest {
+    /**
+     * The ARN of the fleet.
+     */
+    FleetArn: FleetArn;
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+  }
+  export interface DescribeDomainResponse {
+    /**
+     * The name to display.
+     */
+    DisplayName?: DisplayName;
+    /**
+     * The time that the domain was added.
+     */
+    CreatedTime?: DateTime;
+    /**
+     * The current state for the domain.
+     */
+    DomainStatus?: DomainStatus;
+  }
   export interface DescribeFleetMetadataRequest {
     /**
      * The ARN of the fleet.
@@ -416,6 +517,18 @@ declare namespace WorkLink {
     DeviceStatus?: DeviceStatus;
   }
   export type DeviceSummaryList = DeviceSummary[];
+  export interface DisassociateDomainRequest {
+    /**
+     * The ARN of the fleet.
+     */
+    FleetArn: FleetArn;
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+  }
+  export interface DisassociateDomainResponse {
+  }
   export interface DisassociateWebsiteCertificateAuthorityRequest {
     /**
      * The ARN of the fleet.
@@ -429,6 +542,27 @@ declare namespace WorkLink {
   export interface DisassociateWebsiteCertificateAuthorityResponse {
   }
   export type DisplayName = string;
+  export type DomainName = string;
+  export type DomainStatus = "PENDING_VALIDATION"|"ASSOCIATING"|"ACTIVE"|"INACTIVE"|"DISASSOCIATING"|"DISASSOCIATED"|"FAILED_TO_ASSOCIATE"|"FAILED_TO_DISASSOCIATE"|string;
+  export interface DomainSummary {
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+    /**
+     * The time that the domain was created.
+     */
+    CreatedTime: DateTime;
+    /**
+     * The status of the domain.
+     */
+    DomainStatus: DomainStatus;
+    /**
+     * The name to display.
+     */
+    DisplayName?: DisplayName;
+  }
+  export type DomainSummaryList = DomainSummary[];
   export type FleetArn = string;
   export type FleetName = string;
   export type FleetStatus = "CREATING"|"ACTIVE"|"DELETING"|"DELETED"|"FAILED_TO_CREATE"|"FAILED_TO_DELETE"|string;
@@ -489,6 +623,30 @@ declare namespace WorkLink {
      */
     NextToken?: NextToken;
   }
+  export interface ListDomainsRequest {
+    /**
+     * The ARN of the fleet.
+     */
+    FleetArn: FleetArn;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to be included in the next page.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListDomainsResponse {
+    /**
+     * Information about the domains.
+     */
+    Domains?: DomainSummaryList;
+    /**
+     * The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListFleetsRequest {
     /**
      * The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
@@ -535,6 +693,30 @@ declare namespace WorkLink {
   }
   export type MaxResults = number;
   export type NextToken = string;
+  export interface RestoreDomainAccessRequest {
+    /**
+     * The ARN of the fleet.
+     */
+    FleetArn: FleetArn;
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+  }
+  export interface RestoreDomainAccessResponse {
+  }
+  export interface RevokeDomainAccessRequest {
+    /**
+     * The ARN of the fleet.
+     */
+    FleetArn: FleetArn;
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+  }
+  export interface RevokeDomainAccessResponse {
+  }
   export type SamlMetadata = string;
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
@@ -595,6 +777,22 @@ declare namespace WorkLink {
     DeviceCaCertificate?: CertificateChain;
   }
   export interface UpdateDevicePolicyConfigurationResponse {
+  }
+  export interface UpdateDomainMetadataRequest {
+    /**
+     * The ARN of the fleet.
+     */
+    FleetArn: FleetArn;
+    /**
+     * The name of the domain.
+     */
+    DomainName: DomainName;
+    /**
+     * The name to display.
+     */
+    DisplayName?: DisplayName;
+  }
+  export interface UpdateDomainMetadataResponse {
   }
   export interface UpdateFleetMetadataRequest {
     /**

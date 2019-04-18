@@ -309,7 +309,7 @@ declare namespace Discovery {
      */
     errorDescription?: BatchDeleteImportDataErrorDescription;
   }
-  export type BatchDeleteImportDataErrorCode = "NOT_FOUND"|"INTERNAL_SERVER_ERROR"|string;
+  export type BatchDeleteImportDataErrorCode = "NOT_FOUND"|"INTERNAL_SERVER_ERROR"|"OVER_LIMIT"|string;
   export type BatchDeleteImportDataErrorDescription = string;
   export type BatchDeleteImportDataErrorList = BatchDeleteImportDataError[];
   export interface BatchDeleteImportDataRequest {
@@ -794,7 +794,7 @@ declare namespace Discovery {
      */
     connectorSummary?: CustomerConnectorInfo;
   }
-  export type ImportStatus = "IMPORT_IN_PROGRESS"|"IMPORT_COMPLETE"|"IMPORT_FAILED"|"IMPORT_FAILED_SERVER_LIMIT_EXCEEDED"|"IMPORT_FAILED_RECORD_LIMIT_EXCEEDED"|"DELETE_IN_PROGRESS"|"DELETE_COMPLETE"|"DELETE_FAILED"|"DELETE_FAILED_LIMIT_EXCEEDED"|string;
+  export type ImportStatus = "IMPORT_IN_PROGRESS"|"IMPORT_COMPLETE"|"IMPORT_COMPLETE_WITH_ERRORS"|"IMPORT_FAILED"|"IMPORT_FAILED_SERVER_LIMIT_EXCEEDED"|"IMPORT_FAILED_RECORD_LIMIT_EXCEEDED"|"DELETE_IN_PROGRESS"|"DELETE_COMPLETE"|"DELETE_FAILED"|"DELETE_FAILED_LIMIT_EXCEEDED"|"INTERNAL_ERROR"|string;
   export interface ImportTask {
     /**
      * The unique ID for a specific import task. These IDs aren't globally unique, but they are unique within an AWS account.

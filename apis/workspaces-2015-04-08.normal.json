@@ -131,7 +131,7 @@
           "shape": "ResourceLimitExceededException"
         }
       ],
-      "documentation": "<p>Creates the specified tags for the specified WorkSpace.</p>"
+      "documentation": "<p>Creates the specified tags for the specified WorkSpaces resource.</p>"
     },
     "CreateWorkspaces": {
       "name": "CreateWorkspaces",
@@ -203,7 +203,7 @@
           "shape": "InvalidParameterValuesException"
         }
       ],
-      "documentation": "<p>Deletes the specified tags from the specified WorkSpace.</p>"
+      "documentation": "<p>Deletes the specified tags from the specified WorkSpaces resource.</p>"
     },
     "DeleteWorkspaceImage": {
       "name": "DeleteWorkspaceImage",
@@ -332,7 +332,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Describes the specified tags for the specified WorkSpace.</p>"
+      "documentation": "<p>Describes the specified tags for the specified WorkSpaces resource.</p>"
     },
     "DescribeWorkspaceBundles": {
       "name": "DescribeWorkspaceBundles",
@@ -976,11 +976,11 @@
       "members": {
         "ResourceId": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The identifier of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.</p>"
+          "documentation": "<p>The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.</p>"
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>The tags. Each WorkSpace can have a maximum of 50 tags.</p>"
+          "documentation": "<p>The tags. Each WorkSpaces resource can have a maximum of 50 tags.</p>"
         }
       }
     },
@@ -1098,7 +1098,7 @@
       "members": {
         "ResourceId": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The identifier of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.</p>"
+          "documentation": "<p>The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.</p>"
         },
         "TagKeys": {
           "shape": "TagKeyList",
@@ -1224,7 +1224,7 @@
       "members": {
         "ResourceId": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The identifier of the WorkSpace. To find this ID, use <a>DescribeWorkspaces</a>.</p>"
+          "documentation": "<p>The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.</p>"
         }
       }
     },

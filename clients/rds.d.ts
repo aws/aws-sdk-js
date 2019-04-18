@@ -150,11 +150,11 @@ declare class RDS extends Service {
    */
   createDBInstance(callback?: (err: AWSError, data: RDS.Types.CreateDBInstanceResult) => void): Request<RDS.Types.CreateDBInstanceResult, AWSError>;
   /**
-   * Creates a new DB instance that acts as a Read Replica for an existing source DB instance. You can create a Read Replica for a DB instance running MySQL, MariaDB, or PostgreSQL. For more information, see Working with PostgreSQL, MySQL, and MariaDB Read Replicas in the Amazon RDS User Guide.  Amazon Aurora doesn't support this action. You must call the CreateDBInstance action to create a DB instance for an Aurora DB cluster.  All Read Replica DB instances are created with backups disabled. All other DB instance attributes (including DB security groups and DB parameter groups) are inherited from the source DB instance, except as specified following.   Your source DB instance must have backup retention enabled.  
+   * Creates a new DB instance that acts as a Read Replica for an existing source DB instance. You can create a Read Replica for a DB instance running MySQL, MariaDB, Oracle, or PostgreSQL. For more information, see Working with Read Replicas in the Amazon RDS User Guide.  Amazon Aurora doesn't support this action. You must call the CreateDBInstance action to create a DB instance for an Aurora DB cluster.  All Read Replica DB instances are created with backups disabled. All other DB instance attributes (including DB security groups and DB parameter groups) are inherited from the source DB instance, except as specified following.   Your source DB instance must have backup retention enabled.  
    */
   createDBInstanceReadReplica(params: RDS.Types.CreateDBInstanceReadReplicaMessage, callback?: (err: AWSError, data: RDS.Types.CreateDBInstanceReadReplicaResult) => void): Request<RDS.Types.CreateDBInstanceReadReplicaResult, AWSError>;
   /**
-   * Creates a new DB instance that acts as a Read Replica for an existing source DB instance. You can create a Read Replica for a DB instance running MySQL, MariaDB, or PostgreSQL. For more information, see Working with PostgreSQL, MySQL, and MariaDB Read Replicas in the Amazon RDS User Guide.  Amazon Aurora doesn't support this action. You must call the CreateDBInstance action to create a DB instance for an Aurora DB cluster.  All Read Replica DB instances are created with backups disabled. All other DB instance attributes (including DB security groups and DB parameter groups) are inherited from the source DB instance, except as specified following.   Your source DB instance must have backup retention enabled.  
+   * Creates a new DB instance that acts as a Read Replica for an existing source DB instance. You can create a Read Replica for a DB instance running MySQL, MariaDB, Oracle, or PostgreSQL. For more information, see Working with Read Replicas in the Amazon RDS User Guide.  Amazon Aurora doesn't support this action. You must call the CreateDBInstance action to create a DB instance for an Aurora DB cluster.  All Read Replica DB instances are created with backups disabled. All other DB instance attributes (including DB security groups and DB parameter groups) are inherited from the source DB instance, except as specified following.   Your source DB instance must have backup retention enabled.  
    */
   createDBInstanceReadReplica(callback?: (err: AWSError, data: RDS.Types.CreateDBInstanceReadReplicaResult) => void): Request<RDS.Types.CreateDBInstanceReadReplicaResult, AWSError>;
   /**
@@ -997,7 +997,7 @@ declare namespace RDS {
      */
     ResourceIdentifier: String;
     /**
-     * The pending maintenance action to apply to this resource. Valid values: system-update, db-upgrade 
+     * The pending maintenance action to apply to this resource. Valid values: system-update, db-upgrade, hardware-maintenance 
      */
     ApplyAction: String;
     /**
@@ -1616,7 +1616,7 @@ declare namespace RDS {
      */
     DBInstanceIdentifier: String;
     /**
-     * The identifier of the DB instance that will act as the source for the Read Replica. Each DB instance can have up to five Read Replicas. Constraints:   Must be the identifier of an existing MySQL, MariaDB, or PostgreSQL DB instance.   Can specify a DB instance that is a MySQL Read Replica only if the source is running MySQL 5.6 or later.   Can specify a DB instance that is a PostgreSQL DB instance only if the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher for cross-region replication).   The specified DB instance must have automatic backups enabled, its backup retention period must be greater than 0.   If the source DB instance is in the same AWS Region as the Read Replica, specify a valid DB instance identifier.   If the source DB instance is in a different AWS Region than the Read Replica, specify a valid DB instance ARN. For more information, go to  Constructing an ARN for Amazon RDS in the Amazon RDS User Guide.  
+     * The identifier of the DB instance that will act as the source for the Read Replica. Each DB instance can have up to five Read Replicas. Constraints:   Must be the identifier of an existing MySQL, MariaDB, Oracle, or PostgreSQL DB instance.   Can specify a DB instance that is a MySQL Read Replica only if the source is running MySQL 5.6 or later.   For the limitations of Oracle Read Replicas, see Read Replica Limitations with Oracle in the Amazon RDS User Guide.   Can specify a DB instance that is a PostgreSQL DB instance only if the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher for cross-region replication).   The specified DB instance must have automatic backups enabled, its backup retention period must be greater than 0.   If the source DB instance is in the same AWS Region as the Read Replica, specify a valid DB instance identifier.   If the source DB instance is in a different AWS Region than the Read Replica, specify a valid DB instance ARN. For more information, go to  Constructing an ARN for Amazon RDS in the Amazon RDS User Guide.  
      */
     SourceDBInstanceIdentifier: String;
     /**
@@ -1644,7 +1644,7 @@ declare namespace RDS {
      */
     Iops?: IntegerOptional;
     /**
-     * The option group the DB instance is associated with. If omitted, the default option group for the engine specified is used.
+     * The option group the DB instance is associated with. If omitted, the option group associated with the source instance is used.
      */
     OptionGroupName?: String;
     /**
@@ -1689,7 +1689,7 @@ declare namespace RDS {
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
-     * True to enable Performance Insights for the read replica, and otherwise false.  For more information, see Using Amazon Performance Insights in the Amazon RDS User Guide. 
+     * True to enable Performance Insights for the Read Replica, and otherwise false.  For more information, see Using Amazon Performance Insights in the Amazon RDS User Guide. 
      */
     EnablePerformanceInsights?: BooleanOptional;
     /**
@@ -2429,7 +2429,7 @@ declare namespace RDS {
      */
     SupportsLogExportsToCloudwatchLogs?: Boolean;
     /**
-     * Indicates whether the database engine version supports read replicas.
+     * Indicates whether the database engine version supports Read Replicas.
      */
     SupportsReadReplica?: Boolean;
     /**
@@ -2474,7 +2474,7 @@ declare namespace RDS {
      */
     MasterUsername?: String;
     /**
-     * The meaning of this parameter differs according to the database engine you use. For example, this value returns MySQL, MariaDB, or PostgreSQL information when returning values from CreateDBInstanceReadReplica since Read Replicas are only supported for these engines.  MySQL, MariaDB, SQL Server, PostgreSQL  Contains the name of the initial database of this instance that was provided at create time, if one was specified when the DB instance was created. This same name is returned for the life of the DB instance. Type: String  Oracle  Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to an Oracle DB instance.
+     * The meaning of this parameter differs according to the database engine you use.  MySQL, MariaDB, SQL Server, PostgreSQL  Contains the name of the initial database of this instance that was provided at create time, if one was specified when the DB instance was created. This same name is returned for the life of the DB instance. Type: String  Oracle  Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to an Oracle DB instance.
      */
     DBName?: String;
     /**
@@ -2823,7 +2823,7 @@ declare namespace RDS {
      */
     Normal?: Boolean;
     /**
-     * Status of the DB instance. For a StatusType of read replica, the values can be replicating, replication stop point set, replication stop point reached, error, stopped, or terminated.
+     * Status of the DB instance. For a StatusType of Read Replica, the values can be replicating, replication stop point set, replication stop point reached, error, stopped, or terminated.
      */
     Status?: String;
     /**
@@ -4355,7 +4355,7 @@ declare namespace RDS {
      */
     DBClusterIdentifier: String;
     /**
-     * The DB cluster capacity. Constraints:   Value must be 2, 4, 8, 16, 32, 64, 128, or 256.  
+     * The DB cluster capacity. When you change the capacity of a paused Aurora Serverless DB cluster, it automatically resumes. Constraints:   Value must be 2, 4, 8, 16, 32, 64, 128, or 256.  
      */
     Capacity?: IntegerOptional;
     /**
@@ -4842,11 +4842,11 @@ declare namespace RDS {
      */
     OptionVersion?: String;
     /**
-     * A list of DBSecurityGroupMemebrship name strings used for this option.
+     * A list of DBSecurityGroupMembership name strings used for this option.
      */
     DBSecurityGroupMemberships?: DBSecurityGroupNameList;
     /**
-     * A list of VpcSecurityGroupMemebrship name strings used for this option.
+     * A list of VpcSecurityGroupMembership name strings used for this option.
      */
     VpcSecurityGroupMemberships?: VpcSecurityGroupIdList;
     /**
@@ -5235,7 +5235,7 @@ declare namespace RDS {
   }
   export interface PendingMaintenanceAction {
     /**
-     * The type of pending maintenance action that is available for the resource. Valid actions are system-update and db-upgrade.
+     * The type of pending maintenance action that is available for the resource. Valid actions are system-update, db-upgrade, and hardware-maintenance.
      */
     Action?: String;
     /**
@@ -6394,6 +6394,10 @@ declare namespace RDS {
      * The time, in seconds, before an Aurora DB cluster in serverless mode is paused.
      */
     SecondsUntilAutoPause?: IntegerOptional;
+    /**
+     * The action to take when the timeout is reached, either ForceApplyCapacityChange or RollbackCapacityChange.  ForceApplyCapacityChange, the default, sets the capacity to the specified value as soon as possible.  RollbackCapacityChange ignores the capacity change if a scaling point is not found in the timeout period. For more information, see  Autoscaling for Aurora Serverless in the Amazon Aurora User Guide.
+     */
+    TimeoutAction?: String;
   }
   export interface ScalingConfigurationInfo {
     /**
@@ -6405,13 +6409,17 @@ declare namespace RDS {
      */
     MaxCapacity?: IntegerOptional;
     /**
-     * A value that indicates whether automatic pause is allowed for the Aurora DB cluster in serverless DB engine mode. 
+     * A value that indicates whether automatic pause is allowed for the Aurora DB cluster in serverless DB engine mode. When the value is set to false for an Aurora Serverless DB cluster, the DB cluster automatically resumes.
      */
     AutoPause?: BooleanOptional;
     /**
      * The remaining amount of time, in seconds, before the Aurora DB cluster in serverless mode is paused. A DB cluster can be paused only when it's idle (it has no connections).
      */
     SecondsUntilAutoPause?: IntegerOptional;
+    /**
+     * The timeout action of a call to ModifyCurrentDBClusterCapacity, either ForceApplyCapacityChange or RollbackCapacityChange.
+     */
+    TimeoutAction?: String;
   }
   export type SourceIdsList = String[];
   export interface SourceRegion {

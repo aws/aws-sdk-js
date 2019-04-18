@@ -234,6 +234,88 @@
         }
       ],
       "documentation": "<p>Returns a list of the broker nodes in the cluster.</p>"
+    },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse",
+        "documentation": "<p>Successful response.</p>"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The resource could not be found due to incorrect input. Correct your request and then retry it.</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>Bad request due to incorrect input. Correct your request and then retry it.</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>There was an unexpected internal server error. Retrying your request might resolve the issue.</p>"
+        }
+      ],
+      "documentation": "<p>Returns a list of tags attached to a resource.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/tags/{resourceArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The resource could not be found due to incorrect input. Correct your request and then retry it.</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>Bad request due to incorrect input. Correct your request and then retry it.</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>There was an unexpected internal server error. Retrying your request might resolve the issue.</p>"
+        }
+      ],
+      "documentation": "<p>Tag a resource with given tags.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/tags/{resourceArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The resource could not be found due to incorrect input. Correct your request and then retry it.</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>Bad request due to incorrect input. Correct your request and then retry it.</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>There was an unexpected internal server error. Retrying your request might resolve the issue.</p>"
+        }
+      ],
+      "documentation": "<p>Remove tags of a resource by given tag keys.</p>"
     }
   },
   "shapes": {
@@ -670,6 +752,30 @@
         }
       }
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "resourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the resource.</p>"
+        }
+      },
+      "required": [
+        "ResourceArn"
+      ]
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "__mapOf__string",
+          "locationName": "tags",
+          "documentation": "<p>The key-value pairs for the resource tags</p>"
+        }
+      }
+    },
     "MaxResults": {
       "type": "integer",
       "min": 1,
@@ -729,6 +835,47 @@
       },
       "documentation": "<p>Contains information about storage volumes attached to MSK broker nodes.</p>"
     },
+    "TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "resourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the resource.</p>"
+        },
+        "Tags": {
+          "shape": "__mapOf__string",
+          "locationName": "tags",
+          "documentation": "<p>The key-value pairs for the resource tags</p>"
+        }
+      },
+      "required": [
+        "ResourceArn",
+        "Tags"
+      ]
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "resourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies the resource.</p>"
+        },
+        "TagKeys": {
+          "shape": "__listOf__string",
+          "location": "querystring",
+          "locationName": "tagKeys",
+          "documentation": "<p>The list of tag keys.</p>"
+        }
+      },
+      "required": [
+        "TagKeys",
+        "ResourceArn"
+      ]
+    },
     "ZookeeperNodeInfo": {
       "type": "structure",
       "members": {
@@ -786,6 +933,15 @@
     "__listOf__string": {
       "type": "list",
       "member": {
+        "shape": "__string"
+      }
+    },
+    "__mapOf__string": {
+      "type": "map",
+      "key": {
+        "shape": "__string"
+      },
+      "value": {
         "shape": "__string"
       }
     },

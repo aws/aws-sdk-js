@@ -59,6 +59,30 @@ declare class Kafka extends Service {
    * Returns a list of the broker nodes in the cluster.
    */
   listNodes(callback?: (err: AWSError, data: Kafka.Types.ListNodesResponse) => void): Request<Kafka.Types.ListNodesResponse, AWSError>;
+  /**
+   * Returns a list of tags attached to a resource.
+   */
+  listTagsForResource(params: Kafka.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Kafka.Types.ListTagsForResourceResponse) => void): Request<Kafka.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Returns a list of tags attached to a resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Kafka.Types.ListTagsForResourceResponse) => void): Request<Kafka.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Tag a resource with given tags.
+   */
+  tagResource(params: Kafka.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Tag a resource with given tags.
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Remove tags of a resource by given tag keys.
+   */
+  untagResource(params: Kafka.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Remove tags of a resource by given tag keys.
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace Kafka {
   export type BrokerAZDistribution = "DEFAULT"|string;
@@ -323,6 +347,18 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     NodeInfoList?: __listOfNodeInfo;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) that uniquely identifies the resource.
+     */
+    ResourceArn: __string;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The key-value pairs for the resource tags
+     */
+    Tags?: __mapOf__string;
+  }
   export type MaxResults = number;
   export interface NodeInfo {
     /**
@@ -357,6 +393,26 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     EbsStorageInfo?: EBSStorageInfo;
   }
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) that uniquely identifies the resource.
+     */
+    ResourceArn: __string;
+    /**
+     * The key-value pairs for the resource tags
+     */
+    Tags: __mapOf__string;
+  }
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) that uniquely identifies the resource.
+     */
+    ResourceArn: __string;
+    /**
+     * The list of tag keys.
+     */
+    TagKeys: __listOf__string;
+  }
   export interface ZookeeperNodeInfo {
     /**
      * The attached elastic network interface of the broker.
@@ -382,6 +438,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   export type __listOfClusterInfo = ClusterInfo[];
   export type __listOfNodeInfo = NodeInfo[];
   export type __listOf__string = __string[];
+  export type __mapOf__string = {[key: string]: __string};
   export type __string = string;
   export type __stringMin1Max128 = string;
   export type __stringMin1Max64 = string;

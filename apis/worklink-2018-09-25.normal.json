@@ -13,6 +13,40 @@
     "uid": "worklink-2018-09-25"
   },
   "operations": {
+    "AssociateDomain": {
+      "name": "AssociateDomain",
+      "http": {
+        "method": "POST",
+        "requestUri": "/associateDomain"
+      },
+      "input": {
+        "shape": "AssociateDomainRequest"
+      },
+      "output": {
+        "shape": "AssociateDomainResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Specifies a domain to be associated to Amazon WorkLink.</p>"
+    },
     "AssociateWebsiteCertificateAuthority": {
       "name": "AssociateWebsiteCertificateAuthority",
       "http": {
@@ -236,6 +270,37 @@
       ],
       "documentation": "<p>Describes the device policy configuration for the specified fleet.</p>"
     },
+    "DescribeDomain": {
+      "name": "DescribeDomain",
+      "http": {
+        "method": "POST",
+        "requestUri": "/describeDomain"
+      },
+      "input": {
+        "shape": "DescribeDomainRequest"
+      },
+      "output": {
+        "shape": "DescribeDomainResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Provides information about the domain.</p>"
+    },
     "DescribeFleetMetadata": {
       "name": "DescribeFleetMetadata",
       "http": {
@@ -329,6 +394,37 @@
       ],
       "documentation": "<p>Provides information about the certificate authority.</p>"
     },
+    "DisassociateDomain": {
+      "name": "DisassociateDomain",
+      "http": {
+        "method": "POST",
+        "requestUri": "/disassociateDomain"
+      },
+      "input": {
+        "shape": "DisassociateDomainRequest"
+      },
+      "output": {
+        "shape": "DisassociateDomainResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Disassociates a domain from Amazon WorkLink. End users lose the ability to access the domain with Amazon WorkLink. </p>"
+    },
     "DisassociateWebsiteCertificateAuthority": {
       "name": "DisassociateWebsiteCertificateAuthority",
       "http": {
@@ -391,6 +487,34 @@
       ],
       "documentation": "<p>Retrieves a list of devices registered with the specified fleet.</p>"
     },
+    "ListDomains": {
+      "name": "ListDomains",
+      "http": {
+        "method": "POST",
+        "requestUri": "/listDomains"
+      },
+      "input": {
+        "shape": "ListDomainsRequest"
+      },
+      "output": {
+        "shape": "ListDomainsResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Retrieves a list of domains associated to a specified fleet.</p>"
+    },
     "ListFleets": {
       "name": "ListFleets",
       "http": {
@@ -446,6 +570,68 @@
         }
       ],
       "documentation": "<p>Retrieves a list of certificate authorities added for the current account and Region.</p>"
+    },
+    "RestoreDomainAccess": {
+      "name": "RestoreDomainAccess",
+      "http": {
+        "method": "POST",
+        "requestUri": "/restoreDomainAccess"
+      },
+      "input": {
+        "shape": "RestoreDomainAccessRequest"
+      },
+      "output": {
+        "shape": "RestoreDomainAccessResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Moves a domain to ACTIVE status if it was in the INACTIVE status.</p>"
+    },
+    "RevokeDomainAccess": {
+      "name": "RevokeDomainAccess",
+      "http": {
+        "method": "POST",
+        "requestUri": "/revokeDomainAccess"
+      },
+      "input": {
+        "shape": "RevokeDomainAccessRequest"
+      },
+      "output": {
+        "shape": "RevokeDomainAccessResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Moves a domain to INACTIVE status if it was in the ACTIVE status.</p>"
     },
     "SignOutUser": {
       "name": "SignOutUser",
@@ -571,6 +757,37 @@
       ],
       "documentation": "<p>Updates the device policy configuration for the fleet.</p>"
     },
+    "UpdateDomainMetadata": {
+      "name": "UpdateDomainMetadata",
+      "http": {
+        "method": "POST",
+        "requestUri": "/updateDomainMetadata"
+      },
+      "input": {
+        "shape": "UpdateDomainMetadataRequest"
+      },
+      "output": {
+        "shape": "UpdateDomainMetadataResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Updates domain metadata, such as DisplayName.</p>"
+    },
     "UpdateFleetMetadata": {
       "name": "UpdateFleetMetadata",
       "http": {
@@ -635,6 +852,40 @@
     }
   },
   "shapes": {
+    "AcmCertificateArn": {
+      "type": "string",
+      "pattern": "arn:[\\w+=/,.@-]+:[\\w+=/,.@-]+:[\\w+=/,.@-]*:[0-9]+:[\\w+=,.@-]+(/[\\w+=/,.@-]+)*"
+    },
+    "AssociateDomainRequest": {
+      "type": "structure",
+      "required": [
+        "FleetArn",
+        "DomainName",
+        "AcmCertificateArn"
+      ],
+      "members": {
+        "FleetArn": {
+          "shape": "FleetArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the fleet.</p>"
+        },
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The fully qualified domain name (FQDN).</p>"
+        },
+        "AcmCertificateArn": {
+          "shape": "AcmCertificateArn",
+          "documentation": "<p>The ARN of an issued ACM certificate that is valid for the domain being associated. </p>"
+        },
+        "DisplayName": {
+          "shape": "DisplayName",
+          "documentation": "<p>The name to display.</p>"
+        }
+      }
+    },
+    "AssociateDomainResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "AssociateWebsiteCertificateAuthorityRequest": {
       "type": "structure",
       "required": [
@@ -865,6 +1116,40 @@
         }
       }
     },
+    "DescribeDomainRequest": {
+      "type": "structure",
+      "required": [
+        "FleetArn",
+        "DomainName"
+      ],
+      "members": {
+        "FleetArn": {
+          "shape": "FleetArn",
+          "documentation": "<p>The ARN of the fleet.</p>"
+        },
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The name of the domain.</p>"
+        }
+      }
+    },
+    "DescribeDomainResponse": {
+      "type": "structure",
+      "members": {
+        "DisplayName": {
+          "shape": "DisplayName",
+          "documentation": "<p>The name to display.</p>"
+        },
+        "CreatedTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The time that the domain was added.</p>"
+        },
+        "DomainStatus": {
+          "shape": "DomainStatus",
+          "documentation": "<p>The current state for the domain.</p>"
+        }
+      }
+    },
     "DescribeFleetMetadataRequest": {
       "type": "structure",
       "required": [
@@ -1025,6 +1310,27 @@
         "shape": "DeviceSummary"
       }
     },
+    "DisassociateDomainRequest": {
+      "type": "structure",
+      "required": [
+        "FleetArn",
+        "DomainName"
+      ],
+      "members": {
+        "FleetArn": {
+          "shape": "FleetArn",
+          "documentation": "<p>The ARN of the fleet.</p>"
+        },
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The name of the domain.</p>"
+        }
+      }
+    },
+    "DisassociateDomainResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DisassociateWebsiteCertificateAuthorityRequest": {
       "type": "structure",
       "required": [
@@ -1049,6 +1355,58 @@
     "DisplayName": {
       "type": "string",
       "max": 100
+    },
+    "DomainName": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\\.)+[a-zA-Z0-9]+$"
+    },
+    "DomainStatus": {
+      "type": "string",
+      "enum": [
+        "PENDING_VALIDATION",
+        "ASSOCIATING",
+        "ACTIVE",
+        "INACTIVE",
+        "DISASSOCIATING",
+        "DISASSOCIATED",
+        "FAILED_TO_ASSOCIATE",
+        "FAILED_TO_DISASSOCIATE"
+      ]
+    },
+    "DomainSummary": {
+      "type": "structure",
+      "required": [
+        "DomainName",
+        "CreatedTime",
+        "DomainStatus"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The name of the domain.</p>"
+        },
+        "CreatedTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The time that the domain was created.</p>"
+        },
+        "DomainStatus": {
+          "shape": "DomainStatus",
+          "documentation": "<p>The status of the domain.</p>"
+        },
+        "DisplayName": {
+          "shape": "DisplayName",
+          "documentation": "<p>The name to display.</p>"
+        }
+      },
+      "documentation": "<p>The summary of the domain.</p>"
+    },
+    "DomainSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "DomainSummary"
+      }
     },
     "FleetArn": {
       "type": "string",
@@ -1156,6 +1514,39 @@
         }
       }
     },
+    "ListDomainsRequest": {
+      "type": "structure",
+      "required": [
+        "FleetArn"
+      ],
+      "members": {
+        "FleetArn": {
+          "shape": "FleetArn",
+          "documentation": "<p>The ARN of the fleet.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The pagination token used to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to be included in the next page.</p>"
+        }
+      }
+    },
+    "ListDomainsResponse": {
+      "type": "structure",
+      "members": {
+        "Domains": {
+          "shape": "DomainSummaryList",
+          "documentation": "<p>Information about the domains.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+        }
+      }
+    },
     "ListFleetsRequest": {
       "type": "structure",
       "members": {
@@ -1224,6 +1615,48 @@
       "max": 4096,
       "min": 1,
       "pattern": "[\\w\\-]+"
+    },
+    "RestoreDomainAccessRequest": {
+      "type": "structure",
+      "required": [
+        "FleetArn",
+        "DomainName"
+      ],
+      "members": {
+        "FleetArn": {
+          "shape": "FleetArn",
+          "documentation": "<p>The ARN of the fleet.</p>"
+        },
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The name of the domain.</p>"
+        }
+      }
+    },
+    "RestoreDomainAccessResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "RevokeDomainAccessRequest": {
+      "type": "structure",
+      "required": [
+        "FleetArn",
+        "DomainName"
+      ],
+      "members": {
+        "FleetArn": {
+          "shape": "FleetArn",
+          "documentation": "<p>The ARN of the fleet.</p>"
+        },
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The name of the domain.</p>"
+        }
+      }
+    },
+    "RevokeDomainAccessResponse": {
+      "type": "structure",
+      "members": {}
     },
     "SamlMetadata": {
       "type": "string",
@@ -1339,6 +1772,31 @@
       }
     },
     "UpdateDevicePolicyConfigurationResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateDomainMetadataRequest": {
+      "type": "structure",
+      "required": [
+        "FleetArn",
+        "DomainName"
+      ],
+      "members": {
+        "FleetArn": {
+          "shape": "FleetArn",
+          "documentation": "<p>The ARN of the fleet.</p>"
+        },
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The name of the domain.</p>"
+        },
+        "DisplayName": {
+          "shape": "DisplayName",
+          "documentation": "<p>The name to display.</p>"
+        }
+      }
+    },
+    "UpdateDomainMetadataResponse": {
       "type": "structure",
       "members": {}
     },

@@ -631,7 +631,7 @@
           "shape": "KMSKeyNotAccessibleFault"
         }
       ],
-      "documentation": "<p>Creates a new DB instance that acts as a Read Replica for an existing source DB instance. You can create a Read Replica for a DB instance running MySQL, MariaDB, or PostgreSQL. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html\">Working with PostgreSQL, MySQL, and MariaDB Read Replicas</a> in the <i>Amazon RDS User Guide</i>. </p> <p>Amazon Aurora doesn't support this action. You must call the <code>CreateDBInstance</code> action to create a DB instance for an Aurora DB cluster. </p> <p>All Read Replica DB instances are created with backups disabled. All other DB instance attributes (including DB security groups and DB parameter groups) are inherited from the source DB instance, except as specified following. </p> <important> <p>Your source DB instance must have backup retention enabled. </p> </important>"
+      "documentation": "<p>Creates a new DB instance that acts as a Read Replica for an existing source DB instance. You can create a Read Replica for a DB instance running MySQL, MariaDB, Oracle, or PostgreSQL. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReadRepl.html\">Working with Read Replicas</a> in the <i>Amazon RDS User Guide</i>. </p> <p>Amazon Aurora doesn't support this action. You must call the <code>CreateDBInstance</code> action to create a DB instance for an Aurora DB cluster. </p> <p>All Read Replica DB instances are created with backups disabled. All other DB instance attributes (including DB security groups and DB parameter groups) are inherited from the source DB instance, except as specified following. </p> <important> <p>Your source DB instance must have backup retention enabled. </p> </important>"
     },
     "CreateDBParameterGroup": {
       "name": "CreateDBParameterGroup",
@@ -3223,7 +3223,7 @@
         },
         "ApplyAction": {
           "shape": "String",
-          "documentation": "<p>The pending maintenance action to apply to this resource.</p> <p>Valid values: <code>system-update</code>, <code>db-upgrade</code> </p>"
+          "documentation": "<p>The pending maintenance action to apply to this resource.</p> <p>Valid values: <code>system-update</code>, <code>db-upgrade</code>, <code>hardware-maintenance</code> </p>"
         },
         "OptInType": {
           "shape": "String",
@@ -4075,7 +4075,7 @@
         },
         "SourceDBInstanceIdentifier": {
           "shape": "String",
-          "documentation": "<p>The identifier of the DB instance that will act as the source for the Read Replica. Each DB instance can have up to five Read Replicas.</p> <p>Constraints:</p> <ul> <li> <p>Must be the identifier of an existing MySQL, MariaDB, or PostgreSQL DB instance.</p> </li> <li> <p>Can specify a DB instance that is a MySQL Read Replica only if the source is running MySQL 5.6 or later.</p> </li> <li> <p>Can specify a DB instance that is a PostgreSQL DB instance only if the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher for cross-region replication).</p> </li> <li> <p>The specified DB instance must have automatic backups enabled, its backup retention period must be greater than 0.</p> </li> <li> <p>If the source DB instance is in the same AWS Region as the Read Replica, specify a valid DB instance identifier.</p> </li> <li> <p>If the source DB instance is in a different AWS Region than the Read Replica, specify a valid DB instance ARN. For more information, go to <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\"> Constructing an ARN for Amazon RDS</a> in the <i>Amazon RDS User Guide</i>.</p> </li> </ul>"
+          "documentation": "<p>The identifier of the DB instance that will act as the source for the Read Replica. Each DB instance can have up to five Read Replicas.</p> <p>Constraints:</p> <ul> <li> <p>Must be the identifier of an existing MySQL, MariaDB, Oracle, or PostgreSQL DB instance.</p> </li> <li> <p>Can specify a DB instance that is a MySQL Read Replica only if the source is running MySQL 5.6 or later.</p> </li> <li> <p>For the limitations of Oracle Read Replicas, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html\">Read Replica Limitations with Oracle</a> in the <i>Amazon RDS User Guide</i>.</p> </li> <li> <p>Can specify a DB instance that is a PostgreSQL DB instance only if the source is running PostgreSQL 9.3.5 or later (9.4.7 and higher for cross-region replication).</p> </li> <li> <p>The specified DB instance must have automatic backups enabled, its backup retention period must be greater than 0.</p> </li> <li> <p>If the source DB instance is in the same AWS Region as the Read Replica, specify a valid DB instance identifier.</p> </li> <li> <p>If the source DB instance is in a different AWS Region than the Read Replica, specify a valid DB instance ARN. For more information, go to <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.ARN.html#USER_Tagging.ARN.Constructing\"> Constructing an ARN for Amazon RDS</a> in the <i>Amazon RDS User Guide</i>.</p> </li> </ul>"
         },
         "DBInstanceClass": {
           "shape": "String",
@@ -4103,7 +4103,7 @@
         },
         "OptionGroupName": {
           "shape": "String",
-          "documentation": "<p>The option group the DB instance is associated with. If omitted, the default option group for the engine specified is used.</p>"
+          "documentation": "<p>The option group the DB instance is associated with. If omitted, the option group associated with the source instance is used.</p>"
         },
         "PubliclyAccessible": {
           "shape": "BooleanOptional",
@@ -4150,7 +4150,7 @@
         },
         "EnablePerformanceInsights": {
           "shape": "BooleanOptional",
-          "documentation": "<p>True to enable Performance Insights for the read replica, and otherwise false. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html\">Using Amazon Performance Insights</a> in the <i>Amazon RDS User Guide</i>. </p>"
+          "documentation": "<p>True to enable Performance Insights for the Read Replica, and otherwise false. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PerfInsights.html\">Using Amazon Performance Insights</a> in the <i>Amazon RDS User Guide</i>. </p>"
         },
         "PerformanceInsightsKMSKeyId": {
           "shape": "String",
@@ -5138,7 +5138,7 @@
         },
         "SupportsReadReplica": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether the database engine version supports read replicas.</p>"
+          "documentation": "<p>Indicates whether the database engine version supports Read Replicas.</p>"
         },
         "SupportedEngineModes": {
           "shape": "EngineModeList",
@@ -5197,7 +5197,7 @@
         },
         "DBName": {
           "shape": "String",
-          "documentation": "<p>The meaning of this parameter differs according to the database engine you use. For example, this value returns MySQL, MariaDB, or PostgreSQL information when returning values from CreateDBInstanceReadReplica since Read Replicas are only supported for these engines.</p> <p> <b>MySQL, MariaDB, SQL Server, PostgreSQL</b> </p> <p>Contains the name of the initial database of this instance that was provided at create time, if one was specified when the DB instance was created. This same name is returned for the life of the DB instance.</p> <p>Type: String</p> <p> <b>Oracle</b> </p> <p>Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to an Oracle DB instance.</p>"
+          "documentation": "<p>The meaning of this parameter differs according to the database engine you use.</p> <p> <b>MySQL, MariaDB, SQL Server, PostgreSQL</b> </p> <p>Contains the name of the initial database of this instance that was provided at create time, if one was specified when the DB instance was created. This same name is returned for the life of the DB instance.</p> <p>Type: String</p> <p> <b>Oracle</b> </p> <p>Contains the Oracle System ID (SID) of the created DB instance. Not shown when the returned parameters do not apply to an Oracle DB instance.</p>"
         },
         "Endpoint": {
           "shape": "Endpoint",
@@ -5586,7 +5586,7 @@
         },
         "Status": {
           "shape": "String",
-          "documentation": "<p>Status of the DB instance. For a StatusType of read replica, the values can be replicating, replication stop point set, replication stop point reached, error, stopped, or terminated.</p>"
+          "documentation": "<p>Status of the DB instance. For a StatusType of Read Replica, the values can be replicating, replication stop point set, replication stop point reached, error, stopped, or terminated.</p>"
         },
         "Message": {
           "shape": "String",
@@ -7782,7 +7782,7 @@
         },
         "Capacity": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The DB cluster capacity.</p> <p>Constraints:</p> <ul> <li> <p>Value must be <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>, <code>32</code>, <code>64</code>, <code>128</code>, or <code>256</code>.</p> </li> </ul>"
+          "documentation": "<p>The DB cluster capacity.</p> <p>When you change the capacity of a paused Aurora Serverless DB cluster, it automatically resumes.</p> <p>Constraints:</p> <ul> <li> <p>Value must be <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>, <code>32</code>, <code>64</code>, <code>128</code>, or <code>256</code>.</p> </li> </ul>"
         },
         "SecondsBeforeTimeout": {
           "shape": "IntegerOptional",
@@ -8407,11 +8407,11 @@
         },
         "DBSecurityGroupMemberships": {
           "shape": "DBSecurityGroupNameList",
-          "documentation": "<p>A list of DBSecurityGroupMemebrship name strings used for this option.</p>"
+          "documentation": "<p>A list of DBSecurityGroupMembership name strings used for this option.</p>"
         },
         "VpcSecurityGroupMemberships": {
           "shape": "VpcSecurityGroupIdList",
-          "documentation": "<p>A list of VpcSecurityGroupMemebrship name strings used for this option.</p>"
+          "documentation": "<p>A list of VpcSecurityGroupMembership name strings used for this option.</p>"
         },
         "OptionSettings": {
           "shape": "OptionSettingsList",
@@ -8940,7 +8940,7 @@
       "members": {
         "Action": {
           "shape": "String",
-          "documentation": "<p>The type of pending maintenance action that is available for the resource. Valid actions are <code>system-update</code> and <code>db-upgrade</code>.</p>"
+          "documentation": "<p>The type of pending maintenance action that is available for the resource. Valid actions are <code>system-update</code>, <code>db-upgrade</code>, and <code>hardware-maintenance</code>.</p>"
         },
         "AutoAppliedAfterDate": {
           "shape": "TStamp",
@@ -10431,6 +10431,10 @@
         "SecondsUntilAutoPause": {
           "shape": "IntegerOptional",
           "documentation": "<p>The time, in seconds, before an Aurora DB cluster in <code>serverless</code> mode is paused.</p>"
+        },
+        "TimeoutAction": {
+          "shape": "String",
+          "documentation": "<p>The action to take when the timeout is reached, either <code>ForceApplyCapacityChange</code> or <code>RollbackCapacityChange</code>.</p> <p> <code>ForceApplyCapacityChange</code>, the default, sets the capacity to the specified value as soon as possible.</p> <p> <code>RollbackCapacityChange</code> ignores the capacity change if a scaling point is not found in the timeout period.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.how-it-works.html#aurora-serverless.how-it-works.auto-scaling\"> Autoscaling for Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>"
         }
       },
       "documentation": "<p>Contains the scaling configuration of an Aurora Serverless DB cluster.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html\">Using Amazon Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>"
@@ -10448,11 +10452,15 @@
         },
         "AutoPause": {
           "shape": "BooleanOptional",
-          "documentation": "<p>A value that indicates whether automatic pause is allowed for the Aurora DB cluster in <code>serverless</code> DB engine mode. </p>"
+          "documentation": "<p>A value that indicates whether automatic pause is allowed for the Aurora DB cluster in <code>serverless</code> DB engine mode.</p> <p>When the value is set to false for an Aurora Serverless DB cluster, the DB cluster automatically resumes.</p>"
         },
         "SecondsUntilAutoPause": {
           "shape": "IntegerOptional",
           "documentation": "<p>The remaining amount of time, in seconds, before the Aurora DB cluster in <code>serverless</code> mode is paused. A DB cluster can be paused only when it's idle (it has no connections).</p>"
+        },
+        "TimeoutAction": {
+          "shape": "String",
+          "documentation": "<p>The timeout action of a call to <code>ModifyCurrentDBClusterCapacity</code>, either <code>ForceApplyCapacityChange</code> or <code>RollbackCapacityChange</code>.</p>"
         }
       },
       "documentation": "<p>Shows the scaling configuration for an Aurora DB cluster in <code>serverless</code> DB engine mode.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html\">Using Amazon Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>"
