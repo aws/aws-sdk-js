@@ -261,6 +261,9 @@ class MethodDocumentor
     desc = documentation(operation)
     desc ||= "Calls the #{method_name(operation_name, false)} API operation."
     desc = desc.gsub(/^\s+/, '').strip
+    if klass === 'S3' && (['CreateBucket', 'ListBuckets', 'DeleteBucket'].include? operation_name)
+      desc = desc + '<p>Note: This operation cannot be used in a browser. S3 does not support CORS on this operation.</p>'
+    end
 
     event_stream_output(operation, api)
 
