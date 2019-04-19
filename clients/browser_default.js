@@ -67,6 +67,7 @@ module.exports = {
   WorkDocs: require('./workdocs'),
   LexModelBuildingService: require('./lexmodelbuildingservice'),
   Pricing: require('./pricing'),
+  CostExplorer: require('./costexplorer'),
   MediaStoreData: require('./mediastoredata'),
   Comprehend: require('./comprehend'),
   KinesisVideoArchivedMedia: require('./kinesisvideoarchivedmedia'),

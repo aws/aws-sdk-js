@@ -36,11 +36,11 @@ declare class WorkSpaces extends Service {
    */
   createIpGroup(callback?: (err: AWSError, data: WorkSpaces.Types.CreateIpGroupResult) => void): Request<WorkSpaces.Types.CreateIpGroupResult, AWSError>;
   /**
-   * Creates the specified tags for the specified WorkSpaces resource.
+   * Creates the specified tags for the specified WorkSpace.
    */
   createTags(params: WorkSpaces.Types.CreateTagsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateTagsResult) => void): Request<WorkSpaces.Types.CreateTagsResult, AWSError>;
   /**
-   * Creates the specified tags for the specified WorkSpaces resource.
+   * Creates the specified tags for the specified WorkSpace.
    */
   createTags(callback?: (err: AWSError, data: WorkSpaces.Types.CreateTagsResult) => void): Request<WorkSpaces.Types.CreateTagsResult, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class WorkSpaces extends Service {
    */
   deleteIpGroup(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteIpGroupResult) => void): Request<WorkSpaces.Types.DeleteIpGroupResult, AWSError>;
   /**
-   * Deletes the specified tags from the specified WorkSpaces resource.
+   * Deletes the specified tags from the specified WorkSpace.
    */
   deleteTags(params: WorkSpaces.Types.DeleteTagsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteTagsResult) => void): Request<WorkSpaces.Types.DeleteTagsResult, AWSError>;
   /**
-   * Deletes the specified tags from the specified WorkSpaces resource.
+   * Deletes the specified tags from the specified WorkSpace.
    */
   deleteTags(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteTagsResult) => void): Request<WorkSpaces.Types.DeleteTagsResult, AWSError>;
   /**
@@ -108,11 +108,11 @@ declare class WorkSpaces extends Service {
    */
   describeIpGroups(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeIpGroupsResult) => void): Request<WorkSpaces.Types.DescribeIpGroupsResult, AWSError>;
   /**
-   * Describes the specified tags for the specified WorkSpaces resource.
+   * Describes the specified tags for the specified WorkSpace.
    */
   describeTags(params: WorkSpaces.Types.DescribeTagsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeTagsResult) => void): Request<WorkSpaces.Types.DescribeTagsResult, AWSError>;
   /**
-   * Describes the specified tags for the specified WorkSpaces resource.
+   * Describes the specified tags for the specified WorkSpace.
    */
   describeTags(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeTagsResult) => void): Request<WorkSpaces.Types.DescribeTagsResult, AWSError>;
   /**
@@ -297,6 +297,7 @@ declare namespace WorkSpaces {
     ErrorMessage?: Description;
   }
   export type AccountModificationList = AccountModification[];
+  export type AdditionalInfo = string;
   export type Alias = string;
   export interface AssociateIpGroupsRequest {
     /**
@@ -379,11 +380,11 @@ declare namespace WorkSpaces {
   }
   export interface CreateTagsRequest {
     /**
-     * The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.
+     * The identifier of the WorkSpace. To find this ID, use DescribeWorkspaces.
      */
     ResourceId: NonEmptyString;
     /**
-     * The tags. Each WorkSpaces resource can have a maximum of 50 tags.
+     * The tags. Each WorkSpace can have a maximum of 50 tags.
      */
     Tags: TagList;
   }
@@ -443,7 +444,7 @@ declare namespace WorkSpaces {
   }
   export interface DeleteTagsRequest {
     /**
-     * The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.
+     * The identifier of the WorkSpace. To find this ID, use DescribeWorkspaces.
      */
     ResourceId: NonEmptyString;
     /**
@@ -527,7 +528,7 @@ declare namespace WorkSpaces {
   }
   export interface DescribeTagsRequest {
     /**
-     * The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.
+     * The identifier of the WorkSpace. To find this ID, use DescribeWorkspaces.
      */
     ResourceId: NonEmptyString;
   }
@@ -890,6 +891,10 @@ declare namespace WorkSpaces {
      * The WorkSpace to rebuild. You can specify a single WorkSpace.
      */
     RebuildWorkspaceRequests: RebuildWorkspaceRequests;
+    /**
+     * Reserved.
+     */
+    AdditionalInfo?: AdditionalInfo;
   }
   export interface RebuildWorkspacesResult {
     /**

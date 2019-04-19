@@ -184,7 +184,7 @@ declare namespace TranscribeService {
      */
     DownloadUri?: Uri;
   }
-  export type LanguageCode = "en-US"|"es-US"|"en-AU"|"fr-CA"|"en-GB"|"de-DE"|"pt-BR"|"fr-FR"|"it-IT"|"ko-KR"|string;
+  export type LanguageCode = "en-US"|"es-US"|"en-AU"|"fr-CA"|"en-GB"|"de-DE"|"pt-BR"|"fr-FR"|"it-IT"|"ko-KR"|"es-ES"|string;
   export interface ListTranscriptionJobsRequest {
     /**
      * When specified, returns only transcription jobs with the specified status. Jobs are ordered by creation date, with the newest jobs returned first. If you don’t specify a status, Amazon Transcribe returns all transcription jobs ordered by creation date. 

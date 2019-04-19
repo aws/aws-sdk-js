@@ -65,6 +65,7 @@ export import WAF = require('./waf');
 export import WorkDocs = require('./workdocs');
 export import LexModelBuildingService = require('./lexmodelbuildingservice');
 export import Pricing = require('./pricing');
+export import CostExplorer = require('./costexplorer');
 export import MediaStoreData = require('./mediastoredata');
 export import Comprehend = require('./comprehend');
 export import KinesisVideoArchivedMedia = require('./kinesisvideoarchivedmedia');

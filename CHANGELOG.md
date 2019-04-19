@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.440.0-->
+<!--LATEST=2.441.0-->
 <!--ENTRYINSERT-->
+
+## 2.441.0
+* feature: CostExplorer: enable cors
+* feature: ResourceGroups: The AWS Resource Groups service increased the query size limit to 4096 bytes.
+* feature: TranscribeService: Amazon Transcribe - support transcriptions from audio sources in Spanish Spanish (es-ES).
+* feature: WorkSpaces: Added a new reserved field.
 
 ## 2.440.0
 * feature: Discovery: The Application Discovery Service's DescribeImportTasks and BatchDeleteImportData APIs now return additional statuses for error reporting.

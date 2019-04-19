@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "enable cors"
+    },
+    {
+        "type": "feature",
+        "category": "ResourceGroups",
+        "description": "The AWS Resource Groups service increased the query size limit to 4096 bytes."
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "Amazon Transcribe - support transcriptions from audio sources in Spanish Spanish (es-ES)."
+    },
+    {
+        "type": "feature",
+        "category": "WorkSpaces",
+        "description": "Added a new reserved field."
+    }
+]

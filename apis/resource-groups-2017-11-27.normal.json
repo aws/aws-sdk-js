@@ -177,7 +177,7 @@
           "shape": "InternalServerErrorException"
         }
       ],
-      "documentation": "<p>Returns a list of tags that are associated with a resource, specified by an ARN.</p>"
+      "documentation": "<p>Returns a list of tags that are associated with a resource group, specified by an ARN.</p>"
     },
     "ListGroupResources": {
       "name": "ListGroupResources",
@@ -538,7 +538,7 @@
       "members": {
         "Arn": {
           "shape": "GroupArn",
-          "documentation": "<p>The ARN of the resource for which you want a list of tags. The resource must exist within the account you are using.</p>",
+          "documentation": "<p>The ARN of the resource group for which you want a list of tags. The resource must exist within the account you are using.</p>",
           "location": "uri",
           "locationName": "Arn"
         }
@@ -549,11 +549,11 @@
       "members": {
         "Arn": {
           "shape": "GroupArn",
-          "documentation": "<p>The ARN of the tagged resource.</p>"
+          "documentation": "<p>The ARN of the tagged resource group.</p>"
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p>The tags associated with the specified resource.</p>"
+          "documentation": "<p>The tags associated with the specified resource group.</p>"
         }
       }
     },
@@ -581,7 +581,9 @@
     },
     "GroupArn": {
       "type": "string",
-      "pattern": "arn:aws:resource-groups:[a-z]{2}-[a-z]+-\\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\\.-]{1,128}"
+      "max": 1600,
+      "min": 12,
+      "pattern": "arn:aws(-[a-z]+)*:resource-groups:[a-z]{2}-[a-z]+-\\d{1}:[0-9]{12}:group/[a-zA-Z0-9_\\.-]{1,128}"
     },
     "GroupDescription": {
       "type": "string",
@@ -621,7 +623,8 @@
     "GroupFilterValue": {
       "type": "string",
       "max": 128,
-      "min": 1
+      "min": 1,
+      "pattern": "AWS::(AllSupported|[a-zA-Z0-9]+::[a-zA-Z0-9]+)"
     },
     "GroupFilterValues": {
       "type": "list",
@@ -774,11 +777,15 @@
       "min": 1
     },
     "NextToken": {
-      "type": "string"
+      "type": "string",
+      "max": 8192,
+      "min": 0,
+      "pattern": "^[a-zA-Z0-9+/]*={0,2}$"
     },
     "Query": {
       "type": "string",
-      "max": 2048
+      "max": 4096,
+      "pattern": "[\\s\\S]*"
     },
     "QueryError": {
       "type": "structure",
@@ -815,11 +822,14 @@
       "enum": [
         "TAG_FILTERS_1_0",
         "CLOUDFORMATION_STACK_1_0"
-      ]
+      ],
+      "max": 128,
+      "min": 1,
+      "pattern": "^\\w+$"
     },
     "ResourceArn": {
       "type": "string",
-      "pattern": "arn:aws:[a-z0-9\\-]*:([a-z]{2}-[a-z]+-\\d{1})?:([0-9]{12})?:.+"
+      "pattern": "arn:aws(-[a-z]+)*:[a-z0-9\\-]*:([a-z]{2}-[a-z]+-\\d{1})?:([0-9]{12})?:.+"
     },
     "ResourceFilter": {
       "type": "structure",
@@ -894,7 +904,7 @@
       "members": {
         "Type": {
           "shape": "QueryType",
-          "documentation": "<p>The type of the query. The valid values in this release are <code>TAG_FILTERS_1_0</code> and <code>CLOUDFORMATION_STACK_1_0</code>.</p> <p> <i> <code>TAG_FILTERS_1_0:</code> </i> A JSON syntax that lets you specify a collection of simple tag filters for resource types and tags, as supported by the AWS Tagging API <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html\">GetResources</a> operation. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each. (<code>[{\"Key\":\"Stage\",\"Values\":[\"Test\",\"Deploy\"]},{\"Key\":\"Version\",\"Values\":[\"1\",\"2\"]}]</code>) The results of this query might include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{\"Key\":\"Stage\",\"Values\":[\"Deploy\"]}</code>, and <code>{\"Key\":\"Version\",\"Values\":[\"2\"]}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: {\"Key\":\"Stage\",\"Values\":[\"Test\",\"Deploy\"]}, and {\"Key\":\"Version\",\"Values\":[\"1\"]}</p> </li> </ul> <p>The query would not return the following results, however. The following EC2 instance does not have all tag keys specified in the filter, so it is rejected. The RDS database has all of the tag keys, but no values that match at least one of the specified tag key values in the filter.</p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{\"Key\":\"Stage\",\"Values\":[\"Deploy\"]}</code>.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{\"Key\":\"Stage\",\"Values\":[\"Archived\"]}</code>, and <code>{\"Key\":\"Version\",\"Values\":[\"4\"]}</code> </p> </li> </ul> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i> A JSON syntax that lets you specify a CloudFormation stack ARN.</p>"
+          "documentation": "<p>The type of the query. The valid values in this release are <code>TAG_FILTERS_1_0</code> and <code>CLOUDFORMATION_STACK_1_0</code>.</p> <p> <i> <code>TAG_FILTERS_1_0:</code> </i> A JSON syntax that lets you specify a collection of simple tag filters for resource types and tags, as supported by the AWS Tagging API <a href=\"https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_GetResources.html\">GetResources</a> operation. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches <i>any</i> of the specified values.</p> <p>For example, consider the following sample query for resources that have two tags, <code>Stage</code> and <code>Version</code>, with two values each. (<code>[{\"Key\":\"Stage\",\"Values\":[\"Test\",\"Deploy\"]},{\"Key\":\"Version\",\"Values\":[\"1\",\"2\"]}]</code>) The results of this query might include the following.</p> <ul> <li> <p>An EC2 instance that has the following two tags: <code>{\"Key\":\"Stage\",\"Value\":\"Deploy\"}</code>, and <code>{\"Key\":\"Version\",\"Value\":\"2\"}</code> </p> </li> <li> <p>An S3 bucket that has the following two tags: {\"Key\":\"Stage\",\"Value\":\"Test\"}, and {\"Key\":\"Version\",\"Value\":\"1\"}</p> </li> </ul> <p>The query would not return the following results, however. The following EC2 instance does not have all tag keys specified in the filter, so it is rejected. The RDS database has all of the tag keys, but no values that match at least one of the specified tag key values in the filter.</p> <ul> <li> <p>An EC2 instance that has only the following tag: <code>{\"Key\":\"Stage\",\"Value\":\"Deploy\"}</code>.</p> </li> <li> <p>An RDS database that has the following two tags: <code>{\"Key\":\"Stage\",\"Value\":\"Archived\"}</code>, and <code>{\"Key\":\"Version\",\"Value\":\"4\"}</code> </p> </li> </ul> <p> <i> <code>CLOUDFORMATION_STACK_1_0:</code> </i> A JSON syntax that lets you specify a CloudFormation stack ARN.</p>"
         },
         "Query": {
           "shape": "Query",
