@@ -471,7 +471,8 @@
   },
   "costexplorer": {
     "prefix": "ce",
-    "name": "CostExplorer"
+    "name": "CostExplorer",
+    "cors": true
   },
   "mediaconvert": {
     "name": "MediaConvert"
