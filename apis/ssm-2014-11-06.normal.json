@@ -2367,6 +2367,18 @@
         },
         {
           "shape": "UnsupportedParameterType"
+        },
+        {
+          "shape": "PoliciesLimitExceededException"
+        },
+        {
+          "shape": "InvalidPolicyTypeException"
+        },
+        {
+          "shape": "InvalidPolicyAttributeException"
+        },
+        {
+          "shape": "IncompatiblePolicyException"
         }
       ],
       "documentation": "<p>Add a parameter to the system.</p>"
@@ -3358,7 +3370,7 @@
         },
         "ExecutionId": {
           "shape": "AssociationExecutionId",
-          "documentation": "<p>The execution ID for the association. If the association does not run at intervals or according to a schedule, then the ExecutionID is the same as the AssociationID.</p>"
+          "documentation": "<p>The execution ID for the association.</p>"
         },
         "Status": {
           "shape": "StatusName",
@@ -3442,7 +3454,7 @@
         },
         "ExecutionId": {
           "shape": "AssociationExecutionId",
-          "documentation": "<p>The execution ID. If the association does not run at intervals or according to a schedule, then the ExecutionID is the same as the AssociationID.</p>"
+          "documentation": "<p>The execution ID.</p>"
         },
         "ResourceId": {
           "shape": "AssociationResourceId",
@@ -5051,7 +5063,7 @@
         },
         "Parameters": {
           "shape": "Parameters",
-          "documentation": "<p>The parameters for the documents runtime configuration. </p>"
+          "documentation": "<p>The parameters for the runtime configuration of the document. </p>"
         },
         "Targets": {
           "shape": "Targets",
@@ -5236,7 +5248,7 @@
         },
         "ApprovedPatches": {
           "shape": "PatchIdList",
-          "documentation": "<p>A list of explicitly approved patches for the baseline.</p> <p>For information about accepted formats for lists of approved patches and rejected patches, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">Package Name Formats for Approved and Rejected Patch Lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+          "documentation": "<p>A list of explicitly approved patches for the baseline.</p> <p>For information about accepted formats for lists of approved patches and rejected patches, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">Package Name Formats for Approved and Rejected Patch Lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         },
         "ApprovedPatchesComplianceLevel": {
           "shape": "PatchComplianceLevel",
@@ -5249,7 +5261,7 @@
         },
         "RejectedPatches": {
           "shape": "PatchIdList",
-          "documentation": "<p>A list of explicitly rejected patches for the baseline.</p> <p>For information about accepted formats for lists of approved patches and rejected patches, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">Package Name Formats for Approved and Rejected Patch Lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+          "documentation": "<p>A list of explicitly rejected patches for the baseline.</p> <p>For information about accepted formats for lists of approved patches and rejected patches, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">Package Name Formats for Approved and Rejected Patch Lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         },
         "RejectedPatchesAction": {
           "shape": "PatchAction",
@@ -10147,7 +10159,7 @@
       "members": {
         "WindowId": {
           "shape": "MaintenanceWindowId",
-          "documentation": "<p>The Maintenance Window ID where the target is registered.</p>"
+          "documentation": "<p>The ID of the Maintenance Window to register the target with.</p>"
         },
         "WindowTargetId": {
           "shape": "MaintenanceWindowTargetId",
@@ -10155,15 +10167,15 @@
         },
         "ResourceType": {
           "shape": "MaintenanceWindowResourceType",
-          "documentation": "<p>The type of target.</p>"
+          "documentation": "<p>The type of target that is being registered with the Maintenance Window.</p>"
         },
         "Targets": {
           "shape": "Targets",
-          "documentation": "<p>The targets (either instances or tags). Instances are specified using Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.</p>"
+          "documentation": "<p>The targets, either instances or tags.</p> <p>Specify instances using the following format:</p> <p> <code>Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;</code> </p> <p>Tags are specified using the following format:</p> <p> <code>Key=&lt;tag name&gt;,Values=&lt;tag value&gt;</code>.</p>"
         },
         "OwnerInformation": {
           "shape": "OwnerInformation",
-          "documentation": "<p>User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window.</p>"
+          "documentation": "<p>A user-provided value that will be included in any CloudWatch events that are raised while running tasks for these targets in this Maintenance Window.</p>"
         },
         "Name": {
           "shape": "MaintenanceWindowName",
@@ -10171,7 +10183,7 @@
         },
         "Description": {
           "shape": "MaintenanceWindowDescription",
-          "documentation": "<p>A description of the target.</p>"
+          "documentation": "<p>A description for the target.</p>"
         }
       },
       "documentation": "<p>The target registered with the Maintenance Window.</p>"
@@ -10193,7 +10205,7 @@
       "members": {
         "WindowId": {
           "shape": "MaintenanceWindowId",
-          "documentation": "<p>The Maintenance Window ID where the task is registered.</p>"
+          "documentation": "<p>The ID of the Maintenance Window where the task is registered.</p>"
         },
         "WindowTaskId": {
           "shape": "MaintenanceWindowTaskId",
@@ -10229,7 +10241,7 @@
         },
         "MaxConcurrency": {
           "shape": "MaxConcurrency",
-          "documentation": "<p>The maximum number of targets this task can be run for in parallel.</p>"
+          "documentation": "<p>The maximum number of targets this task can be run for, in parallel.</p>"
         },
         "MaxErrors": {
           "shape": "MaxErrors",
@@ -10534,9 +10546,7 @@
       "min": 0
     },
     "PSParameterValue": {
-      "type": "string",
-      "max": 4096,
-      "min": 1
+      "type": "string"
     },
     "PSParameterVersion": {
       "type": "long"
@@ -10626,6 +10636,14 @@
         "Labels": {
           "shape": "ParameterLabelList",
           "documentation": "<p>Labels assigned to the parameter version.</p>"
+        },
+        "Tier": {
+          "shape": "ParameterTier",
+          "documentation": "<p>The parameter tier.</p>"
+        },
+        "Policies": {
+          "shape": "ParameterPolicyList",
+          "documentation": "<p>Information about the policies assigned to a parameter.</p>"
         }
       },
       "documentation": "<p>Information about parameter usage.</p>"
@@ -10635,6 +10653,24 @@
       "member": {
         "shape": "ParameterHistory"
       }
+    },
+    "ParameterInlinePolicy": {
+      "type": "structure",
+      "members": {
+        "PolicyText": {
+          "shape": "String",
+          "documentation": "<p>The JSON text of the policy.</p>"
+        },
+        "PolicyType": {
+          "shape": "String",
+          "documentation": "<p>The type of policy. Parameter Store supports the following policy types: Expiration, ExpirationNotification, and NoChangeNotification. </p>"
+        },
+        "PolicyStatus": {
+          "shape": "String",
+          "documentation": "<p>The status of the policy. Policies report the following statuses: Pending (the policy has not been enforced or applied yet), Finished (the policy was applied), Failed (the policy was not applied), or InProgress (the policy is being applied now). </p>"
+        }
+      },
+      "documentation": "<p>One or more policies assigned to a parameter.</p>"
     },
     "ParameterKeyId": {
       "type": "string",
@@ -10695,6 +10731,14 @@
         "Version": {
           "shape": "PSParameterVersion",
           "documentation": "<p>The parameter version.</p>"
+        },
+        "Tier": {
+          "shape": "ParameterTier",
+          "documentation": "<p>The parameter tier.</p>"
+        },
+        "Policies": {
+          "shape": "ParameterPolicyList",
+          "documentation": "<p>A list of policies associated with a parameter.</p>"
         }
       },
       "documentation": "<p>Metada includes information like the ARN of the last user and the date/time the parameter was last used.</p>"
@@ -10716,6 +10760,17 @@
       "max": 10,
       "min": 1
     },
+    "ParameterPolicies": {
+      "type": "string",
+      "max": 4096,
+      "min": 1
+    },
+    "ParameterPolicyList": {
+      "type": "list",
+      "member": {
+        "shape": "ParameterInlinePolicy"
+      }
+    },
     "ParameterStringFilter": {
       "type": "structure",
       "required": [
@@ -10735,13 +10790,13 @@
           "documentation": "<p>The value you want to search for.</p>"
         }
       },
-      "documentation": "<p>One or more filters. Use a filter to return a more specific list of results.</p> <note> <p>The <code>Name</code> field can't be used with the <a>GetParametersByPath</a> API action.</p> </note>"
+      "documentation": "<p>One or more filters. Use a filter to return a more specific list of results.</p> <note> <p>The <code>Name</code> and <code>Tier</code> filter keys can't be used with the <a>GetParametersByPath</a> API action. Also, the <code>Label</code> filter key can't be used with the <a>DescribeParameters</a> API action.</p> </note>"
     },
     "ParameterStringFilterKey": {
       "type": "string",
       "max": 132,
       "min": 1,
-      "pattern": "tag:.+|Name|Type|KeyId|Path|Label"
+      "pattern": "tag:.+|Name|Type|KeyId|Path|Label|Tier"
     },
     "ParameterStringFilterList": {
       "type": "list",
@@ -10766,6 +10821,13 @@
       "type": "string",
       "max": 10,
       "min": 1
+    },
+    "ParameterTier": {
+      "type": "string",
+      "enum": [
+        "Standard",
+        "Advanced"
+      ]
     },
     "ParameterType": {
       "type": "string",
@@ -11492,7 +11554,7 @@
         },
         "Value": {
           "shape": "PSParameterValue",
-          "documentation": "<p>The parameter value that you want to add to the system.</p>"
+          "documentation": "<p>The parameter value that you want to add to the system. Standard parameters have a value limit of 4 KB. Advanced parameters have a value limit of 8 KB.</p>"
         },
         "Type": {
           "shape": "ParameterType",
@@ -11514,6 +11576,14 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a Systems Manager parameter to identify the type of resource to which it applies, the environment, or the type of configuration data referenced by the parameter. In this case, you could specify the following key name/value pairs:</p> <ul> <li> <p> <code>Key=Resource,Value=S3bucket</code> </p> </li> <li> <p> <code>Key=OS,Value=Windows</code> </p> </li> <li> <p> <code>Key=ParameterType,Value=LicenseKey</code> </p> </li> </ul> <note> <p>To add tags to an existing Systems Manager parameter, use the <a>AddTagsToResource</a> action.</p> </note>"
+        },
+        "Tier": {
+          "shape": "ParameterTier",
+          "documentation": "<p>Parameter Store offers a standard tier and an advanced tier for parameters. Standard parameters have a value limit of 4 KB and can't be configured to use parameter policies. You can create a maximum of 10,000 standard parameters per account and per Region. Standard parameters are offered at no additional cost.</p> <p>Advanced parameters have a value limit of 8 KB and can be configured to use parameter policies. You can create a maximum of 100,000 advanced parameters per account and per Region. Advanced parameters incur a charge.</p> <p>If you don't specify a parameter tier when you create a new parameter, the parameter defaults to using the standard tier. You can change a standard parameter to an advanced parameter at any time. But you can't revert an advanced parameter to a standard parameter. Reverting an advanced parameter to a standard parameter would result in data loss because the system would truncate the size of the parameter from 8 KB to 4 KB. Reverting would also remove any policies attached to the parameter. Lastly, advanced parameters use a different form of encryption than standard parameters.</p> <p>If you no longer need an advanced parameter, or if you no longer want to incur charges for an advanced parameter, you must delete it and recreate it as a new standard parameter. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html\">About Advanced Parameters</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+        },
+        "Policies": {
+          "shape": "ParameterPolicies",
+          "documentation": "<p>One or more policies to apply to a parameter. This action takes a JSON array. Parameter Store supports the following policy types:</p> <p>Expiration: This policy deletes the parameter after it expires. When you create the policy, you specify the expiration date. You can update the expiration date and time by updating the policy. Updating the <i>parameter</i> does not affect the expiration date and time. When the expiration time is reached, Parameter Store deletes the parameter.</p> <p>ExpirationNotification: This policy triggers an event in Amazon CloudWatch Events that notifies you about the expiration. By using this policy, you can receive notification before or after the expiration time is reached, in units of days or hours.</p> <p>NoChangeNotification: This policy triggers a CloudWatch event if a parameter has not been modified for a specified period of time. This policy type is useful when, for example, a secret needs to be changed within a period of time, but it has not been changed.</p> <p>All existing policies are preserved until you send new policies or an empty policy. For more information about parameter policies, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-policies.html\">Working with Parameter Policies</a>. </p>"
         }
       }
     },
@@ -12860,11 +12930,11 @@
       "members": {
         "Key": {
           "shape": "TargetKey",
-          "documentation": "<p>User-defined criteria for sending commands that target instances that meet the criteria. Key can be tag:&lt;Amazon EC2 tag&gt; or InstanceIds. For more information about how to send commands that target instances using Key,Value parameters, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting\">Targeting Multiple Instances</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+          "documentation": "<p>User-defined criteria for sending commands that target instances that meet the criteria. <code>Key</code> can be <code>tag:&lt;Amazon EC2 tag&gt;</code> or <code>InstanceIds</code>. For more information about how to send commands that target instances using <code>Key,Value</code> parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting\">Using Targets and Rate Controls to Send Commands to a Fleet</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         },
         "Values": {
           "shape": "TargetValues",
-          "documentation": "<p>User-defined criteria that maps to Key. For example, if you specified tag:ServerRole, you could specify value:WebServer to run a command on instances that include Amazon EC2 tags of ServerRole,WebServer. For more information about how to send commands that target instances using Key,Value parameters, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html\">Sending Commands to a Fleet</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+          "documentation": "<p>User-defined criteria that maps to <code>Key</code>. For example, if you specified <code>tag:ServerRole</code>, you could specify <code>value:WebServer</code> to run a command on instances that include Amazon EC2 tags of <code>ServerRole,WebServer</code>. For more information about how to send commands that target instances using <code>Key,Value</code> parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html\">Using Targets and Rate Controls to Send Commands to a Fleet</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         }
       },
       "documentation": "<p>An array of search criteria that targets instances using a Key,Value combination that you specify. <code>Targets</code> is required if you don't provide one or more instance IDs in the call.</p> <p/>"
@@ -13534,7 +13604,7 @@
         },
         "ApprovedPatches": {
           "shape": "PatchIdList",
-          "documentation": "<p>A list of explicitly approved patches for the baseline.</p> <p>For information about accepted formats for lists of approved patches and rejected patches, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">Package Name Formats for Approved and Rejected Patch Lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+          "documentation": "<p>A list of explicitly approved patches for the baseline.</p> <p>For information about accepted formats for lists of approved patches and rejected patches, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">Package Name Formats for Approved and Rejected Patch Lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         },
         "ApprovedPatchesComplianceLevel": {
           "shape": "PatchComplianceLevel",
@@ -13547,7 +13617,7 @@
         },
         "RejectedPatches": {
           "shape": "PatchIdList",
-          "documentation": "<p>A list of explicitly rejected patches for the baseline.</p> <p>For information about accepted formats for lists of approved patches and rejected patches, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">Package Name Formats for Approved and Rejected Patch Lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+          "documentation": "<p>A list of explicitly rejected patches for the baseline.</p> <p>For information about accepted formats for lists of approved patches and rejected patches, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">Package Name Formats for Approved and Rejected Patch Lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         },
         "RejectedPatchesAction": {
           "shape": "PatchAction",

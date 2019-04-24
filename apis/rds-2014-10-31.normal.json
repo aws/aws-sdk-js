@@ -60,7 +60,7 @@
           "shape": "DBInstanceRoleQuotaExceededFault"
         }
       ],
-      "documentation": "<p>Associates an AWS Identity and Access Management (IAM) role with a DB instance.</p>"
+      "documentation": "<p>Associates an AWS Identity and Access Management (IAM) role with a DB instance.</p> <note> <p>To add a role to a DB instance, the status of the DB instance must be <code>available</code>.</p> </note>"
     },
     "AddSourceIdentifierToSubscription": {
       "name": "AddSourceIdentifierToSubscription",
@@ -3133,6 +3133,10 @@
         "RoleArn": {
           "shape": "String",
           "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to associate with the Aurora DB cluster, for example <code>arn:aws:iam::123456789012:role/AuroraAccessRole</code>.</p>"
+        },
+        "FeatureName": {
+          "shape": "String",
+          "documentation": "<p>The name of the feature for the DB cluster that the IAM role is to be associated with. For the list of supported feature names, see <a>DBEngineVersion</a>.</p>"
         }
       }
     },
@@ -4933,7 +4937,8 @@
           "documentation": "<p>Describes the state of association between the IAM role and the DB cluster. The Status property returns one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - the IAM role ARN is associated with the DB cluster and can be used to access other AWS services on your behalf.</p> </li> <li> <p> <code>PENDING</code> - the IAM role ARN is being associated with the DB cluster.</p> </li> <li> <p> <code>INVALID</code> - the IAM role ARN is associated with the DB cluster, but the DB cluster is unable to assume the IAM role in order to access other AWS services on your behalf.</p> </li> </ul>"
         },
         "FeatureName": {
-          "shape": "String"
+          "shape": "String",
+          "documentation": "<p>The name of the feature associated with the AWS Identity and Access Management (IAM) role. For the list of supported feature names, see <a>DBEngineVersion</a>. </p>"
         }
       },
       "documentation": "<p>Describes an AWS Identity and Access Management (IAM) role that is associated with a DB cluster.</p>"
@@ -9295,6 +9300,10 @@
         "RoleArn": {
           "shape": "String",
           "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role to disassociate from the Aurora DB cluster, for example <code>arn:aws:iam::123456789012:role/AuroraAccessRole</code>.</p>"
+        },
+        "FeatureName": {
+          "shape": "String",
+          "documentation": "<p>The name of the feature for the DB cluster that the IAM role is to be disassociated from. For the list of supported feature names, see <a>DBEngineVersion</a>.</p>"
         }
       }
     },

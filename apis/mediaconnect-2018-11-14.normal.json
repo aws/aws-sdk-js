@@ -309,7 +309,7 @@
       },
       "output": {
         "shape": "ListTagsForResourceResponse",
-        "documentation": "AWS Elemental MediaConnect listed the tags associated with the resource."
+        "documentation": "The tags for the resource"
       },
       "errors": [
         {
@@ -325,7 +325,7 @@
           "documentation": "Internal service error"
         }
       ],
-      "documentation": "Lists all tags associated with the resource."
+      "documentation": "List all tags on an AWS Elemental MediaConnect resource"
     },
     "RemoveFlowOutput": {
       "name": "RemoveFlowOutput",
@@ -519,7 +519,7 @@
           "documentation": "Internal service error"
         }
       ],
-      "documentation": "Associates the specified tags to a resource. If the request does not mention an existing tag associated with the resource, that tag is not changed."
+      "documentation": "Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well."
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -545,7 +545,7 @@
           "documentation": "Internal service error"
         }
       ],
-      "documentation": "Deletes the specified tags from a resource."
+      "documentation": "Deletes specified tags from a resource."
     },
     "UpdateFlowEntitlement": {
       "name": "UpdateFlowEntitlement",
@@ -1142,7 +1142,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "resourceArn",
-          "documentation": "The Amazon Resource Name (ARN) of the resource that you want to view tags for."
+          "documentation": "The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect resource for which to list the tags."
         }
       },
       "required": [
@@ -1572,7 +1572,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "resourceArn",
-          "documentation": "The Amazon Resource Name (ARN) of the resource that you want to add tags to."
+          "documentation": "The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect resource to which to add tags."
         },
         "Tags": {
           "shape": "__mapOf__string",
@@ -1580,7 +1580,7 @@
           "documentation": "A map from tag keys to values. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters."
         }
       },
-      "documentation": "The tags to add to the resource. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.",
+      "documentation": "The tags to add to the resource. A tag is an array of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.",
       "required": [
         "ResourceArn",
         "Tags"
@@ -1627,7 +1627,7 @@
           "shape": "__string",
           "location": "uri",
           "locationName": "resourceArn",
-          "documentation": "The Amazon Resource Name (ARN) of the resource that you want to remove tags from."
+          "documentation": "The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect resource from which to delete tags."
         },
         "TagKeys": {
           "shape": "__listOf__string",

@@ -92,6 +92,14 @@ declare class AlexaForBusiness extends Service {
    */
   createContact(callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateContactResponse) => void): Request<AlexaForBusiness.Types.CreateContactResponse, AWSError>;
   /**
+   * Creates a gateway group with the specified details.
+   */
+  createGatewayGroup(params: AlexaForBusiness.Types.CreateGatewayGroupRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateGatewayGroupResponse) => void): Request<AlexaForBusiness.Types.CreateGatewayGroupResponse, AWSError>;
+  /**
+   * Creates a gateway group with the specified details.
+   */
+  createGatewayGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateGatewayGroupResponse) => void): Request<AlexaForBusiness.Types.CreateGatewayGroupResponse, AWSError>;
+  /**
    * Creates a new room profile with the specified details.
    */
   createProfile(params: AlexaForBusiness.Types.CreateProfileRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateProfileResponse) => void): Request<AlexaForBusiness.Types.CreateProfileResponse, AWSError>;
@@ -163,6 +171,14 @@ declare class AlexaForBusiness extends Service {
    * Removes a device from Alexa For Business.
    */
   deleteDevice(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteDeviceResponse) => void): Request<AlexaForBusiness.Types.DeleteDeviceResponse, AWSError>;
+  /**
+   * Deletes a gateway group.
+   */
+  deleteGatewayGroup(params: AlexaForBusiness.Types.DeleteGatewayGroupRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteGatewayGroupResponse) => void): Request<AlexaForBusiness.Types.DeleteGatewayGroupResponse, AWSError>;
+  /**
+   * Deletes a gateway group.
+   */
+  deleteGatewayGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteGatewayGroupResponse) => void): Request<AlexaForBusiness.Types.DeleteGatewayGroupResponse, AWSError>;
   /**
    * Deletes a room profile by the profile ARN.
    */
@@ -300,6 +316,22 @@ declare class AlexaForBusiness extends Service {
    */
   getDevice(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetDeviceResponse) => void): Request<AlexaForBusiness.Types.GetDeviceResponse, AWSError>;
   /**
+   * Retrieves the details of a gateway.
+   */
+  getGateway(params: AlexaForBusiness.Types.GetGatewayRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetGatewayResponse) => void): Request<AlexaForBusiness.Types.GetGatewayResponse, AWSError>;
+  /**
+   * Retrieves the details of a gateway.
+   */
+  getGateway(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetGatewayResponse) => void): Request<AlexaForBusiness.Types.GetGatewayResponse, AWSError>;
+  /**
+   * Retrieves the details of a gateway group.
+   */
+  getGatewayGroup(params: AlexaForBusiness.Types.GetGatewayGroupRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetGatewayGroupResponse) => void): Request<AlexaForBusiness.Types.GetGatewayGroupResponse, AWSError>;
+  /**
+   * Retrieves the details of a gateway group.
+   */
+  getGatewayGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetGatewayGroupResponse) => void): Request<AlexaForBusiness.Types.GetGatewayGroupResponse, AWSError>;
+  /**
    * Retrieves the configured values for the user enrollment invitation email template.
    */
   getInvitationConfiguration(params: AlexaForBusiness.Types.GetInvitationConfigurationRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetInvitationConfigurationResponse) => void): Request<AlexaForBusiness.Types.GetInvitationConfigurationResponse, AWSError>;
@@ -363,6 +395,22 @@ declare class AlexaForBusiness extends Service {
    * Lists the device event history, including device connection status, for up to 30 days.
    */
   listDeviceEvents(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListDeviceEventsResponse) => void): Request<AlexaForBusiness.Types.ListDeviceEventsResponse, AWSError>;
+  /**
+   * Retrieves a list of gateway group summaries. Use GetGatewayGroup to retrieve details of a specific gateway group.
+   */
+  listGatewayGroups(params: AlexaForBusiness.Types.ListGatewayGroupsRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListGatewayGroupsResponse) => void): Request<AlexaForBusiness.Types.ListGatewayGroupsResponse, AWSError>;
+  /**
+   * Retrieves a list of gateway group summaries. Use GetGatewayGroup to retrieve details of a specific gateway group.
+   */
+  listGatewayGroups(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListGatewayGroupsResponse) => void): Request<AlexaForBusiness.Types.ListGatewayGroupsResponse, AWSError>;
+  /**
+   * Retrieves a list of gateway summaries. Use GetGateway to retrieve details of a specific gateway. An optional gateway group ARN can be provided to only retrieve gateway summaries of gateways that are associated with that gateway group ARN.
+   */
+  listGateways(params: AlexaForBusiness.Types.ListGatewaysRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ListGatewaysResponse) => void): Request<AlexaForBusiness.Types.ListGatewaysResponse, AWSError>;
+  /**
+   * Retrieves a list of gateway summaries. Use GetGateway to retrieve details of a specific gateway. An optional gateway group ARN can be provided to only retrieve gateway summaries of gateways that are associated with that gateway group ARN.
+   */
+  listGateways(callback?: (err: AWSError, data: AlexaForBusiness.Types.ListGatewaysResponse) => void): Request<AlexaForBusiness.Types.ListGatewaysResponse, AWSError>;
   /**
    * Lists all enabled skills in a specific skill group.
    */
@@ -603,6 +651,22 @@ declare class AlexaForBusiness extends Service {
    * Updates the device name by device ARN.
    */
   updateDevice(callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateDeviceResponse) => void): Request<AlexaForBusiness.Types.UpdateDeviceResponse, AWSError>;
+  /**
+   * Updates the details of a gateway. If any optional field is not provided, the existing corresponding value is left unmodified.
+   */
+  updateGateway(params: AlexaForBusiness.Types.UpdateGatewayRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateGatewayResponse) => void): Request<AlexaForBusiness.Types.UpdateGatewayResponse, AWSError>;
+  /**
+   * Updates the details of a gateway. If any optional field is not provided, the existing corresponding value is left unmodified.
+   */
+  updateGateway(callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateGatewayResponse) => void): Request<AlexaForBusiness.Types.UpdateGatewayResponse, AWSError>;
+  /**
+   * Updates the details of a gateway group. If any optional field is not provided, the existing corresponding value is left unmodified.
+   */
+  updateGatewayGroup(params: AlexaForBusiness.Types.UpdateGatewayGroupRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateGatewayGroupResponse) => void): Request<AlexaForBusiness.Types.UpdateGatewayGroupResponse, AWSError>;
+  /**
+   * Updates the details of a gateway group. If any optional field is not provided, the existing corresponding value is left unmodified.
+   */
+  updateGatewayGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateGatewayGroupResponse) => void): Request<AlexaForBusiness.Types.UpdateGatewayGroupResponse, AWSError>;
   /**
    * Updates an existing room profile by room profile ARN.
    */
@@ -1035,6 +1099,26 @@ declare namespace AlexaForBusiness {
      */
     ContactArn?: Arn;
   }
+  export interface CreateGatewayGroupRequest {
+    /**
+     * The name of the gateway group.
+     */
+    Name: GatewayGroupName;
+    /**
+     * The description of the gateway group.
+     */
+    Description?: GatewayGroupDescription;
+    /**
+     *  A unique, user-specified identifier for the request that ensures idempotency.
+     */
+    ClientRequestToken: ClientRequestToken;
+  }
+  export interface CreateGatewayGroupResponse {
+    /**
+     * The ARN of the created gateway group.
+     */
+    GatewayGroupArn?: Arn;
+  }
   export interface CreateProfileRequest {
     /**
      * The name of a room profile.
@@ -1208,6 +1292,14 @@ declare namespace AlexaForBusiness {
     DeviceArn: Arn;
   }
   export interface DeleteDeviceResponse {
+  }
+  export interface DeleteGatewayGroupRequest {
+    /**
+     * The ARN of the gateway group to delete.
+     */
+    GatewayGroupArn: Arn;
+  }
+  export interface DeleteGatewayGroupResponse {
   }
   export interface DeleteProfileRequest {
     /**
@@ -1498,6 +1590,85 @@ declare namespace AlexaForBusiness {
   }
   export interface ForgetSmartHomeAppliancesResponse {
   }
+  export interface Gateway {
+    /**
+     * The ARN of the gateway.
+     */
+    Arn?: Arn;
+    /**
+     * The name of the gateway.
+     */
+    Name?: GatewayName;
+    /**
+     * The description of the gateway.
+     */
+    Description?: GatewayDescription;
+    /**
+     * The ARN of the gateway group that the gateway is associated to.
+     */
+    GatewayGroupArn?: Arn;
+    /**
+     * The software version of the gateway. The gateway automatically updates its software version during normal operation.
+     */
+    SoftwareVersion?: GatewayVersion;
+  }
+  export type GatewayDescription = string;
+  export interface GatewayGroup {
+    /**
+     * The ARN of the gateway group.
+     */
+    Arn?: Arn;
+    /**
+     * The name of the gateway group.
+     */
+    Name?: GatewayGroupName;
+    /**
+     * The description of the gateway group.
+     */
+    Description?: GatewayGroupDescription;
+  }
+  export type GatewayGroupDescription = string;
+  export type GatewayGroupName = string;
+  export type GatewayGroupSummaries = GatewayGroupSummary[];
+  export interface GatewayGroupSummary {
+    /**
+     * The ARN of the gateway group.
+     */
+    Arn?: Arn;
+    /**
+     * The name of the gateway group.
+     */
+    Name?: GatewayGroupName;
+    /**
+     * The description of the gateway group.
+     */
+    Description?: GatewayGroupDescription;
+  }
+  export type GatewayName = string;
+  export type GatewaySummaries = GatewaySummary[];
+  export interface GatewaySummary {
+    /**
+     * The ARN of the gateway.
+     */
+    Arn?: Arn;
+    /**
+     * The name of the gateway.
+     */
+    Name?: GatewayName;
+    /**
+     * The description of the gateway.
+     */
+    Description?: GatewayDescription;
+    /**
+     * The ARN of the gateway group that the gateway is associated to.
+     */
+    GatewayGroupArn?: Arn;
+    /**
+     * The software version of the gateway. The gateway automatically updates its software version during normal operation.
+     */
+    SoftwareVersion?: GatewayVersion;
+  }
+  export type GatewayVersion = string;
   export type GenericKeyword = string;
   export type GenericKeywords = GenericKeyword[];
   export interface GetAddressBookRequest {
@@ -1555,6 +1726,27 @@ declare namespace AlexaForBusiness {
      * The details of the device requested. Required.
      */
     Device?: Device;
+  }
+  export interface GetGatewayGroupRequest {
+    /**
+     * The ARN of the gateway group to get.
+     */
+    GatewayGroupArn: Arn;
+  }
+  export interface GetGatewayGroupResponse {
+    GatewayGroup?: GatewayGroup;
+  }
+  export interface GetGatewayRequest {
+    /**
+     * The ARN of the gateway to get.
+     */
+    GatewayArn: Arn;
+  }
+  export interface GetGatewayResponse {
+    /**
+     * The details of the gateway.
+     */
+    Gateway?: Gateway;
   }
   export interface GetInvitationConfigurationRequest {
   }
@@ -1706,6 +1898,50 @@ declare namespace AlexaForBusiness {
     DeviceEvents?: DeviceEventList;
     /**
      * The token returned to indicate that there is more data available.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListGatewayGroupsRequest {
+    /**
+     * The token used to paginate though multiple pages of gateway group summaries.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of gateway group summaries to return. The default is 50.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListGatewayGroupsResponse {
+    /**
+     * The gateway groups in the list.
+     */
+    GatewayGroups?: GatewayGroupSummaries;
+    /**
+     * The token used to paginate though multiple pages of gateway group summaries.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListGatewaysRequest {
+    /**
+     * The gateway group ARN for which to list gateways.
+     */
+    GatewayGroupArn?: Arn;
+    /**
+     * The token used to paginate though multiple pages of gateway summaries.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of gateway summaries to return. The default is 50.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListGatewaysResponse {
+    /**
+     * The gateways in the list.
+     */
+    Gateways?: GatewaySummaries;
+    /**
+     * The token used to paginate though multiple pages of gateway summaries.
      */
     NextToken?: NextToken;
   }
@@ -2721,6 +2957,42 @@ declare namespace AlexaForBusiness {
     DeviceName?: DeviceName;
   }
   export interface UpdateDeviceResponse {
+  }
+  export interface UpdateGatewayGroupRequest {
+    /**
+     * The ARN of the gateway group to update.
+     */
+    GatewayGroupArn: Arn;
+    /**
+     * The updated name of the gateway group.
+     */
+    Name?: GatewayGroupName;
+    /**
+     * The updated description of the gateway group.
+     */
+    Description?: GatewayGroupDescription;
+  }
+  export interface UpdateGatewayGroupResponse {
+  }
+  export interface UpdateGatewayRequest {
+    /**
+     * The ARN of the gateway to update.
+     */
+    GatewayArn: Arn;
+    /**
+     * The updated name of the gateway.
+     */
+    Name?: GatewayName;
+    /**
+     * The updated description of the gateway.
+     */
+    Description?: GatewayDescription;
+    /**
+     * The updated software version of the gateway. The gateway automatically updates its software version during normal operation.
+     */
+    SoftwareVersion?: GatewayVersion;
+  }
+  export interface UpdateGatewayResponse {
   }
   export interface UpdateProfileRequest {
     /**

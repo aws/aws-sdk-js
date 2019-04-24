@@ -1131,7 +1131,7 @@ declare namespace SSM {
      */
     AssociationVersion?: AssociationVersion;
     /**
-     * The execution ID for the association. If the association does not run at intervals or according to a schedule, then the ExecutionID is the same as the AssociationID.
+     * The execution ID for the association.
      */
     ExecutionId?: AssociationExecutionId;
     /**
@@ -1183,7 +1183,7 @@ declare namespace SSM {
      */
     AssociationVersion?: AssociationVersion;
     /**
-     * The execution ID. If the association does not run at intervals or according to a schedule, then the ExecutionID is the same as the AssociationID.
+     * The execution ID.
      */
     ExecutionId?: AssociationExecutionId;
     /**
@@ -2130,7 +2130,7 @@ declare namespace SSM {
      */
     InstanceId?: InstanceId;
     /**
-     * The parameters for the documents runtime configuration. 
+     * The parameters for the runtime configuration of the document. 
      */
     Parameters?: Parameters;
     /**
@@ -5577,7 +5577,7 @@ declare namespace SSM {
   export type MaintenanceWindowStringDateTime = string;
   export interface MaintenanceWindowTarget {
     /**
-     * The Maintenance Window ID where the target is registered.
+     * The ID of the Maintenance Window to register the target with.
      */
     WindowId?: MaintenanceWindowId;
     /**
@@ -5585,15 +5585,15 @@ declare namespace SSM {
      */
     WindowTargetId?: MaintenanceWindowTargetId;
     /**
-     * The type of target.
+     * The type of target that is being registered with the Maintenance Window.
      */
     ResourceType?: MaintenanceWindowResourceType;
     /**
-     * The targets (either instances or tags). Instances are specified using Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
+     * The targets, either instances or tags. Specify instances using the following format:  Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;  Tags are specified using the following format:  Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
      */
     Targets?: Targets;
     /**
-     * User-provided value that will be included in any CloudWatch events raised while running tasks for these targets in this Maintenance Window.
+     * A user-provided value that will be included in any CloudWatch events that are raised while running tasks for these targets in this Maintenance Window.
      */
     OwnerInformation?: OwnerInformation;
     /**
@@ -5601,7 +5601,7 @@ declare namespace SSM {
      */
     Name?: MaintenanceWindowName;
     /**
-     * A description of the target.
+     * A description for the target.
      */
     Description?: MaintenanceWindowDescription;
   }
@@ -5609,7 +5609,7 @@ declare namespace SSM {
   export type MaintenanceWindowTargetList = MaintenanceWindowTarget[];
   export interface MaintenanceWindowTask {
     /**
-     * The Maintenance Window ID where the task is registered.
+     * The ID of the Maintenance Window where the task is registered.
      */
     WindowId?: MaintenanceWindowId;
     /**
@@ -5645,7 +5645,7 @@ declare namespace SSM {
      */
     ServiceRoleArn?: ServiceRole;
     /**
-     * The maximum number of targets this task can be run for in parallel.
+     * The maximum number of targets this task can be run for, in parallel.
      */
     MaxConcurrency?: MaxConcurrency;
     /**
@@ -5847,8 +5847,30 @@ declare namespace SSM {
      * Labels assigned to the parameter version.
      */
     Labels?: ParameterLabelList;
+    /**
+     * The parameter tier.
+     */
+    Tier?: ParameterTier;
+    /**
+     * Information about the policies assigned to a parameter.
+     */
+    Policies?: ParameterPolicyList;
   }
   export type ParameterHistoryList = ParameterHistory[];
+  export interface ParameterInlinePolicy {
+    /**
+     * The JSON text of the policy.
+     */
+    PolicyText?: String;
+    /**
+     * The type of policy. Parameter Store supports the following policy types: Expiration, ExpirationNotification, and NoChangeNotification. 
+     */
+    PolicyType?: String;
+    /**
+     * The status of the policy. Policies report the following statuses: Pending (the policy has not been enforced or applied yet), Finished (the policy was applied), Failed (the policy was not applied), or InProgress (the policy is being applied now). 
+     */
+    PolicyStatus?: String;
+  }
   export type ParameterKeyId = string;
   export type ParameterLabel = string;
   export type ParameterLabelList = ParameterLabel[];
@@ -5886,10 +5908,20 @@ declare namespace SSM {
      * The parameter version.
      */
     Version?: PSParameterVersion;
+    /**
+     * The parameter tier.
+     */
+    Tier?: ParameterTier;
+    /**
+     * A list of policies associated with a parameter.
+     */
+    Policies?: ParameterPolicyList;
   }
   export type ParameterMetadataList = ParameterMetadata[];
   export type ParameterName = string;
   export type ParameterNameList = PSParameterName[];
+  export type ParameterPolicies = string;
+  export type ParameterPolicyList = ParameterInlinePolicy[];
   export interface ParameterStringFilter {
     /**
      * The name of the filter.
@@ -5909,6 +5941,7 @@ declare namespace SSM {
   export type ParameterStringFilterValue = string;
   export type ParameterStringFilterValueList = ParameterStringFilterValue[];
   export type ParameterStringQueryOption = string;
+  export type ParameterTier = "Standard"|"Advanced"|string;
   export type ParameterType = "String"|"StringList"|"SecureString"|string;
   export type ParameterValue = string;
   export type ParameterValueList = ParameterValue[];
@@ -6245,7 +6278,7 @@ declare namespace SSM {
      */
     Description?: ParameterDescription;
     /**
-     * The parameter value that you want to add to the system.
+     * The parameter value that you want to add to the system. Standard parameters have a value limit of 4 KB. Advanced parameters have a value limit of 8 KB.
      */
     Value: PSParameterValue;
     /**
@@ -6268,6 +6301,14 @@ declare namespace SSM {
      * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a Systems Manager parameter to identify the type of resource to which it applies, the environment, or the type of configuration data referenced by the parameter. In this case, you could specify the following key name/value pairs:    Key=Resource,Value=S3bucket     Key=OS,Value=Windows     Key=ParameterType,Value=LicenseKey     To add tags to an existing Systems Manager parameter, use the AddTagsToResource action. 
      */
     Tags?: TagList;
+    /**
+     * Parameter Store offers a standard tier and an advanced tier for parameters. Standard parameters have a value limit of 4 KB and can't be configured to use parameter policies. You can create a maximum of 10,000 standard parameters per account and per Region. Standard parameters are offered at no additional cost. Advanced parameters have a value limit of 8 KB and can be configured to use parameter policies. You can create a maximum of 100,000 advanced parameters per account and per Region. Advanced parameters incur a charge. If you don't specify a parameter tier when you create a new parameter, the parameter defaults to using the standard tier. You can change a standard parameter to an advanced parameter at any time. But you can't revert an advanced parameter to a standard parameter. Reverting an advanced parameter to a standard parameter would result in data loss because the system would truncate the size of the parameter from 8 KB to 4 KB. Reverting would also remove any policies attached to the parameter. Lastly, advanced parameters use a different form of encryption than standard parameters. If you no longer need an advanced parameter, or if you no longer want to incur charges for an advanced parameter, you must delete it and recreate it as a new standard parameter. For more information, see About Advanced Parameters in the AWS Systems Manager User Guide.
+     */
+    Tier?: ParameterTier;
+    /**
+     * One or more policies to apply to a parameter. This action takes a JSON array. Parameter Store supports the following policy types: Expiration: This policy deletes the parameter after it expires. When you create the policy, you specify the expiration date. You can update the expiration date and time by updating the policy. Updating the parameter does not affect the expiration date and time. When the expiration time is reached, Parameter Store deletes the parameter. ExpirationNotification: This policy triggers an event in Amazon CloudWatch Events that notifies you about the expiration. By using this policy, you can receive notification before or after the expiration time is reached, in units of days or hours. NoChangeNotification: This policy triggers a CloudWatch event if a parameter has not been modified for a specified period of time. This policy type is useful when, for example, a secret needs to be changed within a period of time, but it has not been changed. All existing policies are preserved until you send new policies or an empty policy. For more information about parameter policies, see Working with Parameter Policies. 
+     */
+    Policies?: ParameterPolicies;
   }
   export interface PutParameterResult {
     /**
@@ -7073,11 +7114,11 @@ declare namespace SSM {
   export type TagValue = string;
   export interface Target {
     /**
-     * User-defined criteria for sending commands that target instances that meet the criteria. Key can be tag:&lt;Amazon EC2 tag&gt; or InstanceIds. For more information about how to send commands that target instances using Key,Value parameters, see Targeting Multiple Instances in the AWS Systems Manager User Guide.
+     * User-defined criteria for sending commands that target instances that meet the criteria. Key can be tag:&lt;Amazon EC2 tag&gt; or InstanceIds. For more information about how to send commands that target instances using Key,Value parameters, see Using Targets and Rate Controls to Send Commands to a Fleet in the AWS Systems Manager User Guide.
      */
     Key?: TargetKey;
     /**
-     * User-defined criteria that maps to Key. For example, if you specified tag:ServerRole, you could specify value:WebServer to run a command on instances that include Amazon EC2 tags of ServerRole,WebServer. For more information about how to send commands that target instances using Key,Value parameters, see Sending Commands to a Fleet in the AWS Systems Manager User Guide.
+     * User-defined criteria that maps to Key. For example, if you specified tag:ServerRole, you could specify value:WebServer to run a command on instances that include Amazon EC2 tags of ServerRole,WebServer. For more information about how to send commands that target instances using Key,Value parameters, see Using Targets and Rate Controls to Send Commands to a Fleet in the AWS Systems Manager User Guide.
      */
     Values?: TargetValues;
   }

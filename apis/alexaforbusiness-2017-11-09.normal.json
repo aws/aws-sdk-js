@@ -229,6 +229,28 @@
       ],
       "documentation": "<p>Creates a contact with the specified details.</p>"
     },
+    "CreateGatewayGroup": {
+      "name": "CreateGatewayGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateGatewayGroupRequest"
+      },
+      "output": {
+        "shape": "CreateGatewayGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "AlreadyExistsException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Creates a gateway group with the specified details.</p>"
+    },
     "CreateProfile": {
       "name": "CreateProfile",
       "http": {
@@ -435,6 +457,25 @@
         }
       ],
       "documentation": "<p>Removes a device from Alexa For Business.</p>"
+    },
+    "DeleteGatewayGroup": {
+      "name": "DeleteGatewayGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteGatewayGroupRequest"
+      },
+      "output": {
+        "shape": "DeleteGatewayGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceAssociatedException"
+        }
+      ],
+      "documentation": "<p>Deletes a gateway group.</p>"
     },
     "DeleteProfile": {
       "name": "DeleteProfile",
@@ -778,6 +819,44 @@
       ],
       "documentation": "<p>Gets the details of a device by device ARN.</p>"
     },
+    "GetGateway": {
+      "name": "GetGateway",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetGatewayRequest"
+      },
+      "output": {
+        "shape": "GetGatewayResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        }
+      ],
+      "documentation": "<p>Retrieves the details of a gateway.</p>"
+    },
+    "GetGatewayGroup": {
+      "name": "GetGatewayGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetGatewayGroupRequest"
+      },
+      "output": {
+        "shape": "GetGatewayGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        }
+      ],
+      "documentation": "<p>Retrieves the details of a gateway group.</p>"
+    },
     "GetInvitationConfiguration": {
       "name": "GetInvitationConfiguration",
       "http": {
@@ -919,6 +998,34 @@
         }
       ],
       "documentation": "<p>Lists the device event history, including device connection status, for up to 30 days.</p>"
+    },
+    "ListGatewayGroups": {
+      "name": "ListGatewayGroups",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListGatewayGroupsRequest"
+      },
+      "output": {
+        "shape": "ListGatewayGroupsResponse"
+      },
+      "documentation": "<p>Retrieves a list of gateway group summaries. Use GetGatewayGroup to retrieve details of a specific gateway group.</p>"
+    },
+    "ListGateways": {
+      "name": "ListGateways",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListGatewaysRequest"
+      },
+      "output": {
+        "shape": "ListGatewaysResponse"
+      },
+      "documentation": "<p>Retrieves a list of gateway summaries. Use GetGateway to retrieve details of a specific gateway. An optional gateway group ARN can be provided to only retrieve gateway summaries of gateways that are associated with that gateway group ARN.</p>"
     },
     "ListSkills": {
       "name": "ListSkills",
@@ -1482,6 +1589,50 @@
       ],
       "documentation": "<p>Updates the device name by device ARN.</p>"
     },
+    "UpdateGateway": {
+      "name": "UpdateGateway",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateGatewayRequest"
+      },
+      "output": {
+        "shape": "UpdateGatewayResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "NameInUseException"
+        }
+      ],
+      "documentation": "<p>Updates the details of a gateway. If any optional field is not provided, the existing corresponding value is left unmodified.</p>"
+    },
+    "UpdateGatewayGroup": {
+      "name": "UpdateGatewayGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateGatewayGroupRequest"
+      },
+      "output": {
+        "shape": "UpdateGatewayGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "NameInUseException"
+        }
+      ],
+      "documentation": "<p>Updates the details of a gateway group. If any optional field is not provided, the existing corresponding value is left unmodified.</p>"
+    },
     "UpdateProfile": {
       "name": "UpdateProfile",
       "http": {
@@ -1940,6 +2091,7 @@
     },
     "ClientRequestToken": {
       "type": "string",
+      "documentation": "<p>A unique, user-specified identifier for the request that ensures idempotency.</p>",
       "max": 150,
       "min": 10,
       "pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
@@ -2253,6 +2405,37 @@
         }
       }
     },
+    "CreateGatewayGroupRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "ClientRequestToken"
+      ],
+      "members": {
+        "Name": {
+          "shape": "GatewayGroupName",
+          "documentation": "<p>The name of the gateway group.</p>"
+        },
+        "Description": {
+          "shape": "GatewayGroupDescription",
+          "documentation": "<p>The description of the gateway group.</p>"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p> A unique, user-specified identifier for the request that ensures idempotency.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "CreateGatewayGroupResponse": {
+      "type": "structure",
+      "members": {
+        "GatewayGroupArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the created gateway group.</p>"
+        }
+      }
+    },
     "CreateProfileRequest": {
       "type": "structure",
       "required": [
@@ -2515,6 +2698,22 @@
       }
     },
     "DeleteDeviceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteGatewayGroupRequest": {
+      "type": "structure",
+      "required": [
+        "GatewayGroupArn"
+      ],
+      "members": {
+        "GatewayGroupArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the gateway group to delete.</p>"
+        }
+      }
+    },
+    "DeleteGatewayGroupResponse": {
       "type": "structure",
       "members": {}
     },
@@ -3038,7 +3237,7 @@
       "member": {
         "shape": "FilterValue"
       },
-      "max": 5
+      "max": 50
     },
     "ForgetSmartHomeAppliancesRequest": {
       "type": "structure",
@@ -3055,6 +3254,134 @@
     "ForgetSmartHomeAppliancesResponse": {
       "type": "structure",
       "members": {}
+    },
+    "Gateway": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the gateway.</p>"
+        },
+        "Name": {
+          "shape": "GatewayName",
+          "documentation": "<p>The name of the gateway.</p>"
+        },
+        "Description": {
+          "shape": "GatewayDescription",
+          "documentation": "<p>The description of the gateway.</p>"
+        },
+        "GatewayGroupArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the gateway group that the gateway is associated to.</p>"
+        },
+        "SoftwareVersion": {
+          "shape": "GatewayVersion",
+          "documentation": "<p>The software version of the gateway. The gateway automatically updates its software version during normal operation.</p>"
+        }
+      },
+      "documentation": "<p>The details of the gateway. </p>"
+    },
+    "GatewayDescription": {
+      "type": "string",
+      "max": 200,
+      "min": 0,
+      "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+    },
+    "GatewayGroup": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the gateway group.</p>"
+        },
+        "Name": {
+          "shape": "GatewayGroupName",
+          "documentation": "<p>The name of the gateway group.</p>"
+        },
+        "Description": {
+          "shape": "GatewayGroupDescription",
+          "documentation": "<p>The description of the gateway group.</p>"
+        }
+      },
+      "documentation": "<p>The details of the gateway group.</p>"
+    },
+    "GatewayGroupDescription": {
+      "type": "string",
+      "max": 200,
+      "min": 0
+    },
+    "GatewayGroupName": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+    },
+    "GatewayGroupSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "GatewayGroupSummary"
+      }
+    },
+    "GatewayGroupSummary": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the gateway group.</p>"
+        },
+        "Name": {
+          "shape": "GatewayGroupName",
+          "documentation": "<p>The name of the gateway group.</p>"
+        },
+        "Description": {
+          "shape": "GatewayGroupDescription",
+          "documentation": "<p>The description of the gateway group.</p>"
+        }
+      },
+      "documentation": "<p>The summary of a gateway group.</p>"
+    },
+    "GatewayName": {
+      "type": "string",
+      "max": 253,
+      "min": 1,
+      "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+    },
+    "GatewaySummaries": {
+      "type": "list",
+      "member": {
+        "shape": "GatewaySummary"
+      }
+    },
+    "GatewaySummary": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the gateway.</p>"
+        },
+        "Name": {
+          "shape": "GatewayName",
+          "documentation": "<p>The name of the gateway.</p>"
+        },
+        "Description": {
+          "shape": "GatewayDescription",
+          "documentation": "<p>The description of the gateway.</p>"
+        },
+        "GatewayGroupArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the gateway group that the gateway is associated to.</p>"
+        },
+        "SoftwareVersion": {
+          "shape": "GatewayVersion",
+          "documentation": "<p>The software version of the gateway. The gateway automatically updates its software version during normal operation.</p>"
+        }
+      },
+      "documentation": "<p>The summary of a gateway.</p>"
+    },
+    "GatewayVersion": {
+      "type": "string",
+      "max": 50,
+      "min": 1
     },
     "GenericKeyword": {
       "type": "string"
@@ -3156,6 +3483,47 @@
         "Device": {
           "shape": "Device",
           "documentation": "<p>The details of the device requested. Required.</p>"
+        }
+      }
+    },
+    "GetGatewayGroupRequest": {
+      "type": "structure",
+      "required": [
+        "GatewayGroupArn"
+      ],
+      "members": {
+        "GatewayGroupArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the gateway group to get.</p>"
+        }
+      }
+    },
+    "GetGatewayGroupResponse": {
+      "type": "structure",
+      "members": {
+        "GatewayGroup": {
+          "shape": "GatewayGroup"
+        }
+      }
+    },
+    "GetGatewayRequest": {
+      "type": "structure",
+      "required": [
+        "GatewayArn"
+      ],
+      "members": {
+        "GatewayArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the gateway to get.</p>"
+        }
+      }
+    },
+    "GetGatewayResponse": {
+      "type": "structure",
+      "members": {
+        "Gateway": {
+          "shape": "Gateway",
+          "documentation": "<p>The details of the gateway.</p>"
         }
       }
     },
@@ -3378,6 +3746,62 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>The token returned to indicate that there is more data available.</p>"
+        }
+      }
+    },
+    "ListGatewayGroupsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token used to paginate though multiple pages of gateway group summaries.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of gateway group summaries to return. The default is 50.</p>"
+        }
+      }
+    },
+    "ListGatewayGroupsResponse": {
+      "type": "structure",
+      "members": {
+        "GatewayGroups": {
+          "shape": "GatewayGroupSummaries",
+          "documentation": "<p>The gateway groups in the list.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token used to paginate though multiple pages of gateway group summaries.</p>"
+        }
+      }
+    },
+    "ListGatewaysRequest": {
+      "type": "structure",
+      "members": {
+        "GatewayGroupArn": {
+          "shape": "Arn",
+          "documentation": "<p>The gateway group ARN for which to list gateways.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token used to paginate though multiple pages of gateway summaries.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of gateway summaries to return. The default is 50.</p>"
+        }
+      }
+    },
+    "ListGatewaysResponse": {
+      "type": "structure",
+      "members": {
+        "Gateways": {
+          "shape": "GatewaySummaries",
+          "documentation": "<p>The gateways in the list.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token used to paginate though multiple pages of gateway summaries.</p>"
         }
       }
     },
@@ -4940,6 +5364,58 @@
       }
     },
     "UpdateDeviceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateGatewayGroupRequest": {
+      "type": "structure",
+      "required": [
+        "GatewayGroupArn"
+      ],
+      "members": {
+        "GatewayGroupArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the gateway group to update.</p>"
+        },
+        "Name": {
+          "shape": "GatewayGroupName",
+          "documentation": "<p>The updated name of the gateway group.</p>"
+        },
+        "Description": {
+          "shape": "GatewayGroupDescription",
+          "documentation": "<p>The updated description of the gateway group.</p>"
+        }
+      }
+    },
+    "UpdateGatewayGroupResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateGatewayRequest": {
+      "type": "structure",
+      "required": [
+        "GatewayArn"
+      ],
+      "members": {
+        "GatewayArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the gateway to update.</p>"
+        },
+        "Name": {
+          "shape": "GatewayName",
+          "documentation": "<p>The updated name of the gateway.</p>"
+        },
+        "Description": {
+          "shape": "GatewayDescription",
+          "documentation": "<p>The updated description of the gateway.</p>"
+        },
+        "SoftwareVersion": {
+          "shape": "GatewayVersion",
+          "documentation": "<p>The updated software version of the gateway. The gateway automatically updates its software version during normal operation.</p>"
+        }
+      }
+    },
+    "UpdateGatewayResponse": {
       "type": "structure",
       "members": {}
     },

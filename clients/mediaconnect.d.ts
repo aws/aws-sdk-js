@@ -68,11 +68,11 @@ declare class MediaConnect extends Service {
    */
   listFlows(callback?: (err: AWSError, data: MediaConnect.Types.ListFlowsResponse) => void): Request<MediaConnect.Types.ListFlowsResponse, AWSError>;
   /**
-   * Lists all tags associated with the resource.
+   * List all tags on an AWS Elemental MediaConnect resource
    */
   listTagsForResource(params: MediaConnect.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListTagsForResourceResponse) => void): Request<MediaConnect.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists all tags associated with the resource.
+   * List all tags on an AWS Elemental MediaConnect resource
    */
   listTagsForResource(callback?: (err: AWSError, data: MediaConnect.Types.ListTagsForResourceResponse) => void): Request<MediaConnect.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -108,19 +108,19 @@ declare class MediaConnect extends Service {
    */
   stopFlow(callback?: (err: AWSError, data: MediaConnect.Types.StopFlowResponse) => void): Request<MediaConnect.Types.StopFlowResponse, AWSError>;
   /**
-   * Associates the specified tags to a resource. If the request does not mention an existing tag associated with the resource, that tag is not changed.
+   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.
    */
   tagResource(params: MediaConnect.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Associates the specified tags to a resource. If the request does not mention an existing tag associated with the resource, that tag is not changed.
+   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified tags from a resource.
+   * Deletes specified tags from a resource.
    */
   untagResource(params: MediaConnect.Types.UntagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified tags from a resource.
+   * Deletes specified tags from a resource.
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -412,7 +412,7 @@ declare namespace MediaConnect {
   }
   export interface ListTagsForResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource that you want to view tags for.
+     * The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect resource for which to list the tags.
      */
     ResourceArn: __string;
   }
@@ -660,7 +660,7 @@ declare namespace MediaConnect {
   }
   export interface TagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource that you want to add tags to.
+     * The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect resource to which to add tags.
      */
     ResourceArn: __string;
     /**
@@ -692,7 +692,7 @@ declare namespace MediaConnect {
   }
   export interface UntagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource that you want to remove tags from.
+     * The Amazon Resource Name (ARN) that identifies the AWS Elemental MediaConnect resource from which to delete tags.
      */
     ResourceArn: __string;
     /**
