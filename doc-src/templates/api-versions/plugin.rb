@@ -50,8 +50,8 @@ end
 
 YARD::Parser::SourceParser.after_parse_list do
   $dynamodb_model['operations'].each do |op_name, operation|
-    next unless op_name =~ /^(?:Scan|Query|.+Item)$/
-    obj_name = op_name.sub(/Item$/, '').sub(/^./) {|m| m.downcase}
+    next unless op_name =~ /^(?:Scan|Query|.+Item[s]?)$/
+    obj_name = op_name.sub(/Item[s]?$/, '').sub(/^./) {|m| m.downcase}
     obj_path = "AWS.DynamoDB.DocumentClient.#{obj_name}"
 
     if obj = YARD::Registry.at(obj_path)
