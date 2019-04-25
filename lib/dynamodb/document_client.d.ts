@@ -608,6 +608,10 @@ export namespace DocumentClient {
      * Represents the settings used to enable server-side encryption.
      */
     SSESpecification?: SSESpecification;
+    /**
+     * A list of key-value pairs to label the table. For more information, see Tagging for DynamoDB.
+     */
+    Tags?: TagList;
   }
   export interface CreateTableOutput {
     /**

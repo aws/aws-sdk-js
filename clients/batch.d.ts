@@ -287,7 +287,7 @@ declare namespace Batch {
   export type ComputeEnvironmentOrders = ComputeEnvironmentOrder[];
   export interface ComputeResource {
     /**
-     * The type of compute environment.
+     * The type of compute environment: EC2 or SPOT.
      */
     type: CRType;
     /**
@@ -303,7 +303,7 @@ declare namespace Batch {
      */
     desiredvCpus?: Integer;
     /**
-     * The instances types that may be launched. You can specify instance families to launch any instance type within those families (for example, c4 or p3), or you can specify specific sizes within a family (such as c4.8xlarge). You can also choose optimal to pick instance types (from the latest C, M, and R instance families) on the fly that match the demand of your job queues.
+     * The instances types that may be launched. You can specify instance families to launch any instance type within those families (for example, c4 or p3), or you can specify specific sizes within a family (such as c4.8xlarge). You can also choose optimal to pick instance types (from the C, M, and R instance families) on the fly that match the demand of your job queues.
      */
     instanceTypes: StringList;
     /**
@@ -323,11 +323,11 @@ declare namespace Batch {
      */
     ec2KeyPair?: String;
     /**
-     * The Amazon ECS instance profile applied to Amazon EC2 instances in a compute environment. You can specify the short name or full Amazon Resource Name (ARN) of an instance profile. For example, ecsInstanceRole or arn:aws:iam::&lt;aws_account_id&gt;:instance-profile/ecsInstanceRole. For more information, see Amazon ECS Instance Role in the AWS Batch User Guide.
+     * The Amazon ECS instance profile applied to Amazon EC2 instances in a compute environment. You can specify the short name or full Amazon Resource Name (ARN) of an instance profile. For example,  ecsInstanceRole  or arn:aws:iam::&lt;aws_account_id&gt;:instance-profile/ecsInstanceRole . For more information, see Amazon ECS Instance Role in the AWS Batch User Guide.
      */
     instanceRole: String;
     /**
-     * Key-value pair tags to be applied to resources that are launched in the compute environment. 
+     * Key-value pair tags to be applied to resources that are launched in the compute environment. For AWS Batch, these take the form of "String1": "String2", where String1 is the tag key and String2 is the tag value—for example, { "Name": "AWS Batch Instance - C4OnDemand" }.
      */
     tags?: TagsMap;
     /**
@@ -339,11 +339,11 @@ declare namespace Batch {
      */
     bidPercentage?: Integer;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a SPOT compute environment.
+     * The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to a SPOT compute environment. For more information, see Amazon EC2 Spot Fleet Role in the AWS Batch User Guide.
      */
     spotIamFleetRole?: String;
     /**
-     * The launch template to use for your compute resources. Any other compute resource parameters that you specify in a CreateComputeEnvironment API operation override the same parameters in the launch template. You must specify either the launch template ID or launch template name in the request, but not both. 
+     * The launch template to use for your compute resources. Any other compute resource parameters that you specify in a CreateComputeEnvironment API operation override the same parameters in the launch template. You must specify either the launch template ID or launch template name in the request, but not both. For more information, see Launch Template Support in the AWS Batch User Guide.
      */
     launchTemplate?: LaunchTemplateSpecification;
   }
@@ -471,7 +471,7 @@ declare namespace Batch {
   }
   export interface ContainerProperties {
     /**
-     * The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with  repository-url/image:tag . Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to Image in the Create a container section of the Docker Remote API and the IMAGE parameter of docker run.   Images in Amazon ECR repositories use the full registry and repository URI (for example, 012345678910.dkr.ecr.&lt;region-name&gt;.amazonaws.com/&lt;repository-name&gt;).    Images in official repositories on Docker Hub use a single name (for example, ubuntu or mongo).   Images in other repositories on Docker Hub are qualified with an organization name (for example, amazon/amazon-ecs-agent).   Images in other online repositories are qualified further by a domain name (for example, quay.io/assemblyline/ubuntu).  
+     * The image used to start a container. This string is passed directly to the Docker daemon. Images in the Docker Hub registry are available by default. Other repositories are specified with  repository-url/image:tag . Up to 255 letters (uppercase and lowercase), numbers, hyphens, underscores, colons, periods, forward slashes, and number signs are allowed. This parameter maps to Image in the Create a container section of the Docker Remote API and the IMAGE parameter of docker run.   Images in Amazon ECR repositories use the full registry and repository URI (for example, 012345678910.dkr.ecr.&lt;region-name&gt;.amazonaws.com/&lt;repository-name&gt;).   Images in official repositories on Docker Hub use a single name (for example, ubuntu or mongo).   Images in other repositories on Docker Hub are qualified with an organization name (for example, amazon/amazon-ecs-agent).   Images in other online repositories are qualified further by a domain name (for example, quay.io/assemblyline/ubuntu).  
      */
     image?: String;
     /**
@@ -551,7 +551,7 @@ declare namespace Batch {
      */
     state?: CEState;
     /**
-     * Details of the compute resources managed by the compute environment. This parameter is required for managed compute environments.
+     * Details of the compute resources managed by the compute environment. This parameter is required for managed compute environments. For more information, see Compute Environments in the AWS Batch User Guide.
      */
     computeResources?: ComputeResource;
     /**
@@ -647,7 +647,7 @@ declare namespace Batch {
   }
   export interface DescribeJobDefinitionsRequest {
     /**
-     * A space-separated list of up to 100 job definition names or full Amazon Resource Name (ARN) entries.
+     * A list of up to 100 job definition names or full Amazon Resource Name (ARN) entries.
      */
     jobDefinitions?: StringList;
     /**
@@ -703,7 +703,7 @@ declare namespace Batch {
   }
   export interface DescribeJobsRequest {
     /**
-     * A space-separated list of up to 100 job IDs.
+     * A list of up to 100 job IDs.
      */
     jobs: StringList;
   }
@@ -716,7 +716,7 @@ declare namespace Batch {
   export type EnvironmentVariables = KeyValuePair[];
   export interface Host {
     /**
-     * The path on the host container instance that is presented to the container. If this parameter is empty, then the Docker daemon has assigned a host path for you. If the host parameter contains a sourcePath file location, then the data volume persists at the specified location on the host container instance until you delete it manually. If the sourcePath value does not exist on the host container instance, the Docker daemon creates it. If the location does exist, the contents of the source path folder are exported.
+     * The path on the host container instance that is presented to the container. If this parameter is empty, then the Docker daemon has assigned a host path for you. If this parameter contains a file location, then the data volume persists at the specified location on the host container instance until you delete it manually. If the source path location does not exist on the host container instance, the Docker daemon creates it. If the location does exist, the contents of the source path folder are exported.
      */
     sourcePath?: String;
   }

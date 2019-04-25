@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.442.0-->
+<!--LATEST=2.443.0-->
 <!--ENTRYINSERT-->
+
+## 2.443.0
+* feature: DynamoDB: This update allows you to tag Amazon DynamoDB tables when you create them. Tags are labels you can attach to AWS resources to make them easier to manage, search, and filter. 
+* feature: GameLift: This release introduces the new Realtime Servers feature, giving game developers a lightweight yet flexible solution that eliminates the need to build a fully custom game server. The AWS SDK updates provide support for scripts, which are used to configure and customize Realtime Servers.
+* feature: Inspector: AWS Inspector - Improve the ListFindings API response time and decreases the maximum number of agentIDs from 500 to 99.
+* feature: Lambda: AWS Lambda now supports the GetLayerVersionByArn API.
 
 ## 2.442.0
 * feature: AlexaForBusiness: This release adds support for the Alexa for Business gateway and gateway group APIs.
