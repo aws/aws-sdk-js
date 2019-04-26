@@ -109,11 +109,11 @@ declare class IAM extends Service {
    */
   createLoginProfile(callback?: (err: AWSError, data: IAM.Types.CreateLoginProfileResponse) => void): Request<IAM.Types.CreateLoginProfileResponse, AWSError>;
   /**
-   * Creates an IAM entity to describe an identity provider (IdP) that supports OpenID Connect (OIDC). The OIDC provider that you create with this operation can be used as a principal in a role's trust policy. Such a policy establishes a trust relationship between AWS and the OIDC provider. When you create the IAM OIDC provider, you specify the following:   The URL of the OIDC identity provider (IdP) to trust   A list of client IDs (also known as audiences) that identify the application or applications that are allowed to authenticate using the OIDC provider   A list of thumbprints of the server certificate(s) that the IdP uses.   You get all of this information from the OIDC IdP that you want to use to access AWS.  Because trust for the OIDC provider is derived from the IAM provider that this operation creates, it is best to limit access to the CreateOpenIDConnectProvider operation to highly privileged users. 
+   * Creates an IAM entity to describe an identity provider (IdP) that supports OpenID Connect (OIDC). The OIDC provider that you create with this operation can be used as a principal in a role's trust policy. Such a policy establishes a trust relationship between AWS and the OIDC provider. When you create the IAM OIDC provider, you specify the following:   The URL of the OIDC identity provider (IdP) to trust   A list of client IDs (also known as audiences) that identify the application or applications that are allowed to authenticate using the OIDC provider   A list of thumbprints of the server certificate(s) that the IdP uses   You get all of this information from the OIDC IdP that you want to use to access AWS.  The trust for the OIDC provider is derived from the IAM provider that this operation creates. Therefore, it is best to limit access to the CreateOpenIDConnectProvider operation to highly privileged users. 
    */
   createOpenIDConnectProvider(params: IAM.Types.CreateOpenIDConnectProviderRequest, callback?: (err: AWSError, data: IAM.Types.CreateOpenIDConnectProviderResponse) => void): Request<IAM.Types.CreateOpenIDConnectProviderResponse, AWSError>;
   /**
-   * Creates an IAM entity to describe an identity provider (IdP) that supports OpenID Connect (OIDC). The OIDC provider that you create with this operation can be used as a principal in a role's trust policy. Such a policy establishes a trust relationship between AWS and the OIDC provider. When you create the IAM OIDC provider, you specify the following:   The URL of the OIDC identity provider (IdP) to trust   A list of client IDs (also known as audiences) that identify the application or applications that are allowed to authenticate using the OIDC provider   A list of thumbprints of the server certificate(s) that the IdP uses.   You get all of this information from the OIDC IdP that you want to use to access AWS.  Because trust for the OIDC provider is derived from the IAM provider that this operation creates, it is best to limit access to the CreateOpenIDConnectProvider operation to highly privileged users. 
+   * Creates an IAM entity to describe an identity provider (IdP) that supports OpenID Connect (OIDC). The OIDC provider that you create with this operation can be used as a principal in a role's trust policy. Such a policy establishes a trust relationship between AWS and the OIDC provider. When you create the IAM OIDC provider, you specify the following:   The URL of the OIDC identity provider (IdP) to trust   A list of client IDs (also known as audiences) that identify the application or applications that are allowed to authenticate using the OIDC provider   A list of thumbprints of the server certificate(s) that the IdP uses   You get all of this information from the OIDC IdP that you want to use to access AWS.  The trust for the OIDC provider is derived from the IAM provider that this operation creates. Therefore, it is best to limit access to the CreateOpenIDConnectProvider operation to highly privileged users. 
    */
   createOpenIDConnectProvider(callback?: (err: AWSError, data: IAM.Types.CreateOpenIDConnectProviderResponse) => void): Request<IAM.Types.CreateOpenIDConnectProviderResponse, AWSError>;
   /**
@@ -141,11 +141,11 @@ declare class IAM extends Service {
    */
   createRole(callback?: (err: AWSError, data: IAM.Types.CreateRoleResponse) => void): Request<IAM.Types.CreateRoleResponse, AWSError>;
   /**
-   * Creates an IAM resource that describes an identity provider (IdP) that supports SAML 2.0. The SAML provider resource that you create with this operation can be used as a principal in an IAM role's trust policy. Such a policy can enable federated users who sign-in using the SAML IdP to assume the role. You can create an IAM role that supports Web-based single sign-on (SSO) to the AWS Management Console or one that supports API access to AWS. When you create the SAML provider resource, you upload a SAML metadata document that you get from your IdP. That document includes the issuer's name, expiration information, and keys that can be used to validate the SAML authentication response (assertions) that the IdP sends. You must generate the metadata document using the identity management software that is used as your organization's IdP.   This operation requires Signature Version 4.   For more information, see Enabling SAML 2.0 Federated Users to Access the AWS Management Console and About SAML 2.0-based Federation in the IAM User Guide.
+   * Creates an IAM resource that describes an identity provider (IdP) that supports SAML 2.0. The SAML provider resource that you create with this operation can be used as a principal in an IAM role's trust policy. Such a policy can enable federated users who sign in using the SAML IdP to assume the role. You can create an IAM role that supports Web-based single sign-on (SSO) to the AWS Management Console or one that supports API access to AWS. When you create the SAML provider resource, you upload a SAML metadata document that you get from your IdP. That document includes the issuer's name, expiration information, and keys that can be used to validate the SAML authentication response (assertions) that the IdP sends. You must generate the metadata document using the identity management software that is used as your organization's IdP.   This operation requires Signature Version 4.   For more information, see Enabling SAML 2.0 Federated Users to Access the AWS Management Console and About SAML 2.0-based Federation in the IAM User Guide.
    */
   createSAMLProvider(params: IAM.Types.CreateSAMLProviderRequest, callback?: (err: AWSError, data: IAM.Types.CreateSAMLProviderResponse) => void): Request<IAM.Types.CreateSAMLProviderResponse, AWSError>;
   /**
-   * Creates an IAM resource that describes an identity provider (IdP) that supports SAML 2.0. The SAML provider resource that you create with this operation can be used as a principal in an IAM role's trust policy. Such a policy can enable federated users who sign-in using the SAML IdP to assume the role. You can create an IAM role that supports Web-based single sign-on (SSO) to the AWS Management Console or one that supports API access to AWS. When you create the SAML provider resource, you upload a SAML metadata document that you get from your IdP. That document includes the issuer's name, expiration information, and keys that can be used to validate the SAML authentication response (assertions) that the IdP sends. You must generate the metadata document using the identity management software that is used as your organization's IdP.   This operation requires Signature Version 4.   For more information, see Enabling SAML 2.0 Federated Users to Access the AWS Management Console and About SAML 2.0-based Federation in the IAM User Guide.
+   * Creates an IAM resource that describes an identity provider (IdP) that supports SAML 2.0. The SAML provider resource that you create with this operation can be used as a principal in an IAM role's trust policy. Such a policy can enable federated users who sign in using the SAML IdP to assume the role. You can create an IAM role that supports Web-based single sign-on (SSO) to the AWS Management Console or one that supports API access to AWS. When you create the SAML provider resource, you upload a SAML metadata document that you get from your IdP. That document includes the issuer's name, expiration information, and keys that can be used to validate the SAML authentication response (assertions) that the IdP sends. You must generate the metadata document using the identity management software that is used as your organization's IdP.   This operation requires Signature Version 4.   For more information, see Enabling SAML 2.0 Federated Users to Access the AWS Management Console and About SAML 2.0-based Federation in the IAM User Guide.
    */
   createSAMLProvider(callback?: (err: AWSError, data: IAM.Types.CreateSAMLProviderResponse) => void): Request<IAM.Types.CreateSAMLProviderResponse, AWSError>;
   /**
@@ -173,11 +173,11 @@ declare class IAM extends Service {
    */
   createUser(callback?: (err: AWSError, data: IAM.Types.CreateUserResponse) => void): Request<IAM.Types.CreateUserResponse, AWSError>;
   /**
-   * Creates a new virtual MFA device for the AWS account. After creating the virtual MFA, use EnableMFADevice to attach the MFA device to an IAM user. For more information about creating and working with virtual MFA devices, go to Using a Virtual MFA Device in the IAM User Guide. For information about limits on the number of MFA devices you can create, see Limitations on Entities in the IAM User Guide.  The seed information contained in the QR code and the Base32 string should be treated like any other secret access information, such as your AWS access keys or your passwords. After you provision your virtual device, you should ensure that the information is destroyed following secure procedures. 
+   * Creates a new virtual MFA device for the AWS account. After creating the virtual MFA, use EnableMFADevice to attach the MFA device to an IAM user. For more information about creating and working with virtual MFA devices, go to Using a Virtual MFA Device in the IAM User Guide. For information about limits on the number of MFA devices you can create, see Limitations on Entities in the IAM User Guide.  The seed information contained in the QR code and the Base32 string should be treated like any other secret access information. In other words, protect the seed information as you would your AWS access keys or your passwords. After you provision your virtual device, you should ensure that the information is destroyed following secure procedures. 
    */
   createVirtualMFADevice(params: IAM.Types.CreateVirtualMFADeviceRequest, callback?: (err: AWSError, data: IAM.Types.CreateVirtualMFADeviceResponse) => void): Request<IAM.Types.CreateVirtualMFADeviceResponse, AWSError>;
   /**
-   * Creates a new virtual MFA device for the AWS account. After creating the virtual MFA, use EnableMFADevice to attach the MFA device to an IAM user. For more information about creating and working with virtual MFA devices, go to Using a Virtual MFA Device in the IAM User Guide. For information about limits on the number of MFA devices you can create, see Limitations on Entities in the IAM User Guide.  The seed information contained in the QR code and the Base32 string should be treated like any other secret access information, such as your AWS access keys or your passwords. After you provision your virtual device, you should ensure that the information is destroyed following secure procedures. 
+   * Creates a new virtual MFA device for the AWS account. After creating the virtual MFA, use EnableMFADevice to attach the MFA device to an IAM user. For more information about creating and working with virtual MFA devices, go to Using a Virtual MFA Device in the IAM User Guide. For information about limits on the number of MFA devices you can create, see Limitations on Entities in the IAM User Guide.  The seed information contained in the QR code and the Base32 string should be treated like any other secret access information. In other words, protect the seed information as you would your AWS access keys or your passwords. After you provision your virtual device, you should ensure that the information is destroyed following secure procedures. 
    */
   createVirtualMFADevice(callback?: (err: AWSError, data: IAM.Types.CreateVirtualMFADeviceResponse) => void): Request<IAM.Types.CreateVirtualMFADeviceResponse, AWSError>;
   /**
@@ -273,11 +273,11 @@ declare class IAM extends Service {
    */
   deleteRole(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the permissions boundary for the specified IAM role.   Deleting the permissions boundary for a role might increase its permissions by allowing anyone who assumes the role to perform all the actions granted in its permissions policies.  
+   * Deletes the permissions boundary for the specified IAM role.   Deleting the permissions boundary for a role might increase its permissions. For example, it might allow anyone who assumes the role to perform all the actions granted in its permissions policies.  
    */
   deleteRolePermissionsBoundary(params: IAM.Types.DeleteRolePermissionsBoundaryRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the permissions boundary for the specified IAM role.   Deleting the permissions boundary for a role might increase its permissions by allowing anyone who assumes the role to perform all the actions granted in its permissions policies.  
+   * Deletes the permissions boundary for the specified IAM role.   Deleting the permissions boundary for a role might increase its permissions. For example, it might allow anyone who assumes the role to perform all the actions granted in its permissions policies.  
    */
   deleteRolePermissionsBoundary(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -337,11 +337,11 @@ declare class IAM extends Service {
    */
   deleteSigningCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified IAM user. The user must not belong to any groups or have any access keys, signing certificates, MFA devices enabled for AWS, or attached policies.
+   * Deletes the specified IAM user. Unlike the AWS Management Console, when you delete a user programmatically, you must delete the items attached to the user manually, or the deletion fails. For more information, see Deleting an IAM User. Before attempting to delete a user, remove the following items:   Password (DeleteLoginProfile)   Access keys (DeleteAccessKey)   Signing certificate (DeleteSigningCertificate)   SSH public key (DeleteSSHPublicKey)   Git credentials (DeleteServiceSpecificCredential)   Multi-factor authentication (MFA) device (DeactivateMFADevice, DeleteVirtualMFADevice)   Inline policies (DeleteUserPolicy)   Attached managed policies (DetachUserPolicy)   Group memberships (RemoveUserFromGroup)  
    */
   deleteUser(params: IAM.Types.DeleteUserRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified IAM user. The user must not belong to any groups or have any access keys, signing certificates, MFA devices enabled for AWS, or attached policies.
+   * Deletes the specified IAM user. Unlike the AWS Management Console, when you delete a user programmatically, you must delete the items attached to the user manually, or the deletion fails. For more information, see Deleting an IAM User. Before attempting to delete a user, remove the following items:   Password (DeleteLoginProfile)   Access keys (DeleteAccessKey)   Signing certificate (DeleteSigningCertificate)   SSH public key (DeleteSSHPublicKey)   Git credentials (DeleteServiceSpecificCredential)   Multi-factor authentication (MFA) device (DeactivateMFADevice, DeleteVirtualMFADevice)   Inline policies (DeleteUserPolicy)   Attached managed policies (DetachUserPolicy)   Group memberships (RemoveUserFromGroup)  
    */
   deleteUser(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -405,19 +405,19 @@ declare class IAM extends Service {
    */
   generateCredentialReport(callback?: (err: AWSError, data: IAM.Types.GenerateCredentialReportResponse) => void): Request<IAM.Types.GenerateCredentialReportResponse, AWSError>;
   /**
-   * Generates a request for a report that includes details about when an IAM resource (user, group, role, or policy) was last used in an attempt to access AWS services. Recent activity usually appears within four hours. IAM reports activity for the last 365 days, or less if your region began supporting this feature within the last year. For more information, see Regions Where Data Is Tracked.  The service last accessed data includes all attempts to access an AWS API, not just the successful ones. This includes all attempts that were made using the AWS Management Console, the AWS API through any of the SDKs, or any of the command line tools. An unexpected entry in the service last accessed data does not mean that your account has been compromised, because the request might have been denied. Refer to your CloudTrail logs as the authoritative source for information about all API calls and whether they were successful or denied access. For more information, see Logging IAM Events with CloudTrail in the IAM User Guide.  The GenerateServiceLastAccessedDetails operation returns a JobId. Use this parameter in the following operations to retrieve the following details from your report:     GetServiceLastAccessedDetails – Use this operation for users, groups, roles, or policies to list every AWS service that the resource could access using permissions policies. For each service, the response includes information about the most recent access attempt.     GetServiceLastAccessedDetailsWithEntities – Use this operation for groups and policies to list information about the associated entities (users or roles) that attempted to access a specific AWS service.    To check the status of the GenerateServiceLastAccessedDetails request, use the JobId parameter in the same operations and test the JobStatus response parameter. For additional information about the permissions policies that allow an identity (user, group, or role) to access specific services, use the ListPoliciesGrantingServiceAccess operation.  Service last accessed data does not use other policy types when determining whether a resource could access a service. These other policy types include resource-based policies, access control lists, AWS Organizations policies, IAM permissions boundaries, and AWS STS assume role policies. It only applies permissions policy logic. For more about the evaluation of policy types, see Evaluating Policies in the IAM User Guide.  For more information about service last accessed data, see Reducing Policy Scope by Viewing User Activity in the IAM User Guide.
+   * Generates a request for a report that includes details about when an IAM resource (user, group, role, or policy) was last used in an attempt to access AWS services. Recent activity usually appears within four hours. IAM reports activity for the last 365 days, or less if your Region began supporting this feature within the last year. For more information, see Regions Where Data Is Tracked.  The service last accessed data includes all attempts to access an AWS API, not just the successful ones. This includes all attempts that were made using the AWS Management Console, the AWS API through any of the SDKs, or any of the command line tools. An unexpected entry in the service last accessed data does not mean that your account has been compromised, because the request might have been denied. Refer to your CloudTrail logs as the authoritative source for information about all API calls and whether they were successful or denied access. For more information, see Logging IAM Events with CloudTrail in the IAM User Guide.  The GenerateServiceLastAccessedDetails operation returns a JobId. Use this parameter in the following operations to retrieve the following details from your report:     GetServiceLastAccessedDetails – Use this operation for users, groups, roles, or policies to list every AWS service that the resource could access using permissions policies. For each service, the response includes information about the most recent access attempt.     GetServiceLastAccessedDetailsWithEntities – Use this operation for groups and policies to list information about the associated entities (users or roles) that attempted to access a specific AWS service.    To check the status of the GenerateServiceLastAccessedDetails request, use the JobId parameter in the same operations and test the JobStatus response parameter. For additional information about the permissions policies that allow an identity (user, group, or role) to access specific services, use the ListPoliciesGrantingServiceAccess operation.  Service last accessed data does not use other policy types when determining whether a resource could access a service. These other policy types include resource-based policies, access control lists, AWS Organizations policies, IAM permissions boundaries, and AWS STS assume role policies. It only applies permissions policy logic. For more about the evaluation of policy types, see Evaluating Policies in the IAM User Guide.  For more information about service last accessed data, see Reducing Policy Scope by Viewing User Activity in the IAM User Guide.
    */
   generateServiceLastAccessedDetails(params: IAM.Types.GenerateServiceLastAccessedDetailsRequest, callback?: (err: AWSError, data: IAM.Types.GenerateServiceLastAccessedDetailsResponse) => void): Request<IAM.Types.GenerateServiceLastAccessedDetailsResponse, AWSError>;
   /**
-   * Generates a request for a report that includes details about when an IAM resource (user, group, role, or policy) was last used in an attempt to access AWS services. Recent activity usually appears within four hours. IAM reports activity for the last 365 days, or less if your region began supporting this feature within the last year. For more information, see Regions Where Data Is Tracked.  The service last accessed data includes all attempts to access an AWS API, not just the successful ones. This includes all attempts that were made using the AWS Management Console, the AWS API through any of the SDKs, or any of the command line tools. An unexpected entry in the service last accessed data does not mean that your account has been compromised, because the request might have been denied. Refer to your CloudTrail logs as the authoritative source for information about all API calls and whether they were successful or denied access. For more information, see Logging IAM Events with CloudTrail in the IAM User Guide.  The GenerateServiceLastAccessedDetails operation returns a JobId. Use this parameter in the following operations to retrieve the following details from your report:     GetServiceLastAccessedDetails – Use this operation for users, groups, roles, or policies to list every AWS service that the resource could access using permissions policies. For each service, the response includes information about the most recent access attempt.     GetServiceLastAccessedDetailsWithEntities – Use this operation for groups and policies to list information about the associated entities (users or roles) that attempted to access a specific AWS service.    To check the status of the GenerateServiceLastAccessedDetails request, use the JobId parameter in the same operations and test the JobStatus response parameter. For additional information about the permissions policies that allow an identity (user, group, or role) to access specific services, use the ListPoliciesGrantingServiceAccess operation.  Service last accessed data does not use other policy types when determining whether a resource could access a service. These other policy types include resource-based policies, access control lists, AWS Organizations policies, IAM permissions boundaries, and AWS STS assume role policies. It only applies permissions policy logic. For more about the evaluation of policy types, see Evaluating Policies in the IAM User Guide.  For more information about service last accessed data, see Reducing Policy Scope by Viewing User Activity in the IAM User Guide.
+   * Generates a request for a report that includes details about when an IAM resource (user, group, role, or policy) was last used in an attempt to access AWS services. Recent activity usually appears within four hours. IAM reports activity for the last 365 days, or less if your Region began supporting this feature within the last year. For more information, see Regions Where Data Is Tracked.  The service last accessed data includes all attempts to access an AWS API, not just the successful ones. This includes all attempts that were made using the AWS Management Console, the AWS API through any of the SDKs, or any of the command line tools. An unexpected entry in the service last accessed data does not mean that your account has been compromised, because the request might have been denied. Refer to your CloudTrail logs as the authoritative source for information about all API calls and whether they were successful or denied access. For more information, see Logging IAM Events with CloudTrail in the IAM User Guide.  The GenerateServiceLastAccessedDetails operation returns a JobId. Use this parameter in the following operations to retrieve the following details from your report:     GetServiceLastAccessedDetails – Use this operation for users, groups, roles, or policies to list every AWS service that the resource could access using permissions policies. For each service, the response includes information about the most recent access attempt.     GetServiceLastAccessedDetailsWithEntities – Use this operation for groups and policies to list information about the associated entities (users or roles) that attempted to access a specific AWS service.    To check the status of the GenerateServiceLastAccessedDetails request, use the JobId parameter in the same operations and test the JobStatus response parameter. For additional information about the permissions policies that allow an identity (user, group, or role) to access specific services, use the ListPoliciesGrantingServiceAccess operation.  Service last accessed data does not use other policy types when determining whether a resource could access a service. These other policy types include resource-based policies, access control lists, AWS Organizations policies, IAM permissions boundaries, and AWS STS assume role policies. It only applies permissions policy logic. For more about the evaluation of policy types, see Evaluating Policies in the IAM User Guide.  For more information about service last accessed data, see Reducing Policy Scope by Viewing User Activity in the IAM User Guide.
    */
   generateServiceLastAccessedDetails(callback?: (err: AWSError, data: IAM.Types.GenerateServiceLastAccessedDetailsResponse) => void): Request<IAM.Types.GenerateServiceLastAccessedDetailsResponse, AWSError>;
   /**
-   * Retrieves information about when the specified access key was last used. The information includes the date and time of last use, along with the AWS service and region that were specified in the last request made with that key.
+   * Retrieves information about when the specified access key was last used. The information includes the date and time of last use, along with the AWS service and Region that were specified in the last request made with that key.
    */
   getAccessKeyLastUsed(params: IAM.Types.GetAccessKeyLastUsedRequest, callback?: (err: AWSError, data: IAM.Types.GetAccessKeyLastUsedResponse) => void): Request<IAM.Types.GetAccessKeyLastUsedResponse, AWSError>;
   /**
-   * Retrieves information about when the specified access key was last used. The information includes the date and time of last use, along with the AWS service and region that were specified in the last request made with that key.
+   * Retrieves information about when the specified access key was last used. The information includes the date and time of last use, along with the AWS service and Region that were specified in the last request made with that key.
    */
   getAccessKeyLastUsed(callback?: (err: AWSError, data: IAM.Types.GetAccessKeyLastUsedResponse) => void): Request<IAM.Types.GetAccessKeyLastUsedResponse, AWSError>;
   /**
@@ -553,11 +553,11 @@ declare class IAM extends Service {
    */
   getServerCertificate(callback?: (err: AWSError, data: IAM.Types.GetServerCertificateResponse) => void): Request<IAM.Types.GetServerCertificateResponse, AWSError>;
   /**
-   * After you generate a user, group, role, or policy report using the GenerateServiceLastAccessedDetails operation, you can use the JobId parameter in GetServiceLastAccessedDetails. This operation retrieves the status of your report job and a list of AWS services that the resource (user, group, role, or managed policy) can access.  Service last accessed data does not use other policy types when determining whether a resource could access a service. These other policy types include resource-based policies, access control lists, AWS Organizations policies, IAM permissions boundaries, and AWS STS assume role policies. It only applies permissions policy logic. For more about the evaluation of policy types, see Evaluating Policies in the IAM User Guide.  For each service that the resource could access using permissions policies, the operation returns details about the most recent access attempt. If there was no attempt, the service is listed without details about the most recent attempt to access the service. If the operation fails, the GetServiceLastAccessedDetails operation returns the reason that it failed. The GetServiceLastAccessedDetails operation returns a list of services that includes the number of entities that have attempted to access the service and the date and time of the last attempt. It also returns the ARN of the following entity, depending on the resource ARN that you used to generate the report:    User – Returns the user ARN that you used to generate the report    Group – Returns the ARN of the group member (user) that last attempted to access the service    Role – Returns the role ARN that you used to generate the report    Policy – Returns the ARN of the user or role that last used the policy to attempt to access the service   By default, the list is sorted by service namespace.
+   * After you generate a user, group, role, or policy report using the GenerateServiceLastAccessedDetails operation, you can use the JobId parameter in GetServiceLastAccessedDetails. This operation retrieves the status of your report job and a list of AWS services that the resource (user, group, role, or managed policy) can access.  Service last accessed data does not use other policy types when determining whether a resource could access a service. These other policy types include resource-based policies, access control lists, AWS Organizations policies, IAM permissions boundaries, and AWS STS assume role policies. It only applies permissions policy logic. For more about the evaluation of policy types, see Evaluating Policies in the IAM User Guide.  For each service that the resource could access using permissions policies, the operation returns details about the most recent access attempt. If there was no attempt, the service is listed without details about the most recent attempt to access the service. If the operation fails, the GetServiceLastAccessedDetails operation returns the reason that it failed. The GetServiceLastAccessedDetails operation returns a list of services. This list includes the number of entities that have attempted to access the service and the date and time of the last attempt. It also returns the ARN of the following entity, depending on the resource ARN that you used to generate the report:    User – Returns the user ARN that you used to generate the report    Group – Returns the ARN of the group member (user) that last attempted to access the service    Role – Returns the role ARN that you used to generate the report    Policy – Returns the ARN of the user or role that last used the policy to attempt to access the service   By default, the list is sorted by service namespace.
    */
   getServiceLastAccessedDetails(params: IAM.Types.GetServiceLastAccessedDetailsRequest, callback?: (err: AWSError, data: IAM.Types.GetServiceLastAccessedDetailsResponse) => void): Request<IAM.Types.GetServiceLastAccessedDetailsResponse, AWSError>;
   /**
-   * After you generate a user, group, role, or policy report using the GenerateServiceLastAccessedDetails operation, you can use the JobId parameter in GetServiceLastAccessedDetails. This operation retrieves the status of your report job and a list of AWS services that the resource (user, group, role, or managed policy) can access.  Service last accessed data does not use other policy types when determining whether a resource could access a service. These other policy types include resource-based policies, access control lists, AWS Organizations policies, IAM permissions boundaries, and AWS STS assume role policies. It only applies permissions policy logic. For more about the evaluation of policy types, see Evaluating Policies in the IAM User Guide.  For each service that the resource could access using permissions policies, the operation returns details about the most recent access attempt. If there was no attempt, the service is listed without details about the most recent attempt to access the service. If the operation fails, the GetServiceLastAccessedDetails operation returns the reason that it failed. The GetServiceLastAccessedDetails operation returns a list of services that includes the number of entities that have attempted to access the service and the date and time of the last attempt. It also returns the ARN of the following entity, depending on the resource ARN that you used to generate the report:    User – Returns the user ARN that you used to generate the report    Group – Returns the ARN of the group member (user) that last attempted to access the service    Role – Returns the role ARN that you used to generate the report    Policy – Returns the ARN of the user or role that last used the policy to attempt to access the service   By default, the list is sorted by service namespace.
+   * After you generate a user, group, role, or policy report using the GenerateServiceLastAccessedDetails operation, you can use the JobId parameter in GetServiceLastAccessedDetails. This operation retrieves the status of your report job and a list of AWS services that the resource (user, group, role, or managed policy) can access.  Service last accessed data does not use other policy types when determining whether a resource could access a service. These other policy types include resource-based policies, access control lists, AWS Organizations policies, IAM permissions boundaries, and AWS STS assume role policies. It only applies permissions policy logic. For more about the evaluation of policy types, see Evaluating Policies in the IAM User Guide.  For each service that the resource could access using permissions policies, the operation returns details about the most recent access attempt. If there was no attempt, the service is listed without details about the most recent attempt to access the service. If the operation fails, the GetServiceLastAccessedDetails operation returns the reason that it failed. The GetServiceLastAccessedDetails operation returns a list of services. This list includes the number of entities that have attempted to access the service and the date and time of the last attempt. It also returns the ARN of the following entity, depending on the resource ARN that you used to generate the report:    User – Returns the user ARN that you used to generate the report    Group – Returns the ARN of the group member (user) that last attempted to access the service    Role – Returns the role ARN that you used to generate the report    Policy – Returns the ARN of the user or role that last used the policy to attempt to access the service   By default, the list is sorted by service namespace.
    */
   getServiceLastAccessedDetails(callback?: (err: AWSError, data: IAM.Types.GetServiceLastAccessedDetailsResponse) => void): Request<IAM.Types.GetServiceLastAccessedDetailsResponse, AWSError>;
   /**
@@ -585,11 +585,11 @@ declare class IAM extends Service {
    */
   getUser(callback?: (err: AWSError, data: IAM.Types.GetUserResponse) => void): Request<IAM.Types.GetUserResponse, AWSError>;
   /**
-   * Retrieves the specified inline policy document that is embedded in the specified IAM user.  Policies returned by this API are URL-encoded compliant with RFC 3986. You can use a URL decoding method to convert the policy back to plain JSON text. For example, if you use Java, you can use the decode method of the java.net.URLDecoder utility class in the Java SDK. Other languages and SDKs provide similar functionality.  An IAM user can also have managed policies attached to it. To retrieve a managed policy document that is attached to a user, use GetPolicy to determine the policy's default version, then use GetPolicyVersion to retrieve the policy document. For more information about policies, see Managed Policies and Inline Policies in the IAM User Guide.
+   * Retrieves the specified inline policy document that is embedded in the specified IAM user.  Policies returned by this API are URL-encoded compliant with RFC 3986. You can use a URL decoding method to convert the policy back to plain JSON text. For example, if you use Java, you can use the decode method of the java.net.URLDecoder utility class in the Java SDK. Other languages and SDKs provide similar functionality.  An IAM user can also have managed policies attached to it. To retrieve a managed policy document that is attached to a user, use GetPolicy to determine the policy's default version. Then use GetPolicyVersion to retrieve the policy document. For more information about policies, see Managed Policies and Inline Policies in the IAM User Guide.
    */
   getUserPolicy(params: IAM.Types.GetUserPolicyRequest, callback?: (err: AWSError, data: IAM.Types.GetUserPolicyResponse) => void): Request<IAM.Types.GetUserPolicyResponse, AWSError>;
   /**
-   * Retrieves the specified inline policy document that is embedded in the specified IAM user.  Policies returned by this API are URL-encoded compliant with RFC 3986. You can use a URL decoding method to convert the policy back to plain JSON text. For example, if you use Java, you can use the decode method of the java.net.URLDecoder utility class in the Java SDK. Other languages and SDKs provide similar functionality.  An IAM user can also have managed policies attached to it. To retrieve a managed policy document that is attached to a user, use GetPolicy to determine the policy's default version, then use GetPolicyVersion to retrieve the policy document. For more information about policies, see Managed Policies and Inline Policies in the IAM User Guide.
+   * Retrieves the specified inline policy document that is embedded in the specified IAM user.  Policies returned by this API are URL-encoded compliant with RFC 3986. You can use a URL decoding method to convert the policy back to plain JSON text. For example, if you use Java, you can use the decode method of the java.net.URLDecoder utility class in the Java SDK. Other languages and SDKs provide similar functionality.  An IAM user can also have managed policies attached to it. To retrieve a managed policy document that is attached to a user, use GetPolicy to determine the policy's default version. Then use GetPolicyVersion to retrieve the policy document. For more information about policies, see Managed Policies and Inline Policies in the IAM User Guide.
    */
   getUserPolicy(callback?: (err: AWSError, data: IAM.Types.GetUserPolicyResponse) => void): Request<IAM.Types.GetUserPolicyResponse, AWSError>;
   /**
@@ -753,11 +753,11 @@ declare class IAM extends Service {
    */
   listSAMLProviders(callback?: (err: AWSError, data: IAM.Types.ListSAMLProvidersResponse) => void): Request<IAM.Types.ListSAMLProvidersResponse, AWSError>;
   /**
-   * Returns information about the SSH public keys associated with the specified IAM user. If there none exists, the operation returns an empty list. The SSH public keys returned by this operation are used only for authenticating the IAM user to an AWS CodeCommit repository. For more information about using SSH keys to authenticate to an AWS CodeCommit repository, see Set up AWS CodeCommit for SSH Connections in the AWS CodeCommit User Guide. Although each user is limited to a small number of keys, you can still paginate the results using the MaxItems and Marker parameters.
+   * Returns information about the SSH public keys associated with the specified IAM user. If none exists, the operation returns an empty list. The SSH public keys returned by this operation are used only for authenticating the IAM user to an AWS CodeCommit repository. For more information about using SSH keys to authenticate to an AWS CodeCommit repository, see Set up AWS CodeCommit for SSH Connections in the AWS CodeCommit User Guide. Although each user is limited to a small number of keys, you can still paginate the results using the MaxItems and Marker parameters.
    */
   listSSHPublicKeys(params: IAM.Types.ListSSHPublicKeysRequest, callback?: (err: AWSError, data: IAM.Types.ListSSHPublicKeysResponse) => void): Request<IAM.Types.ListSSHPublicKeysResponse, AWSError>;
   /**
-   * Returns information about the SSH public keys associated with the specified IAM user. If there none exists, the operation returns an empty list. The SSH public keys returned by this operation are used only for authenticating the IAM user to an AWS CodeCommit repository. For more information about using SSH keys to authenticate to an AWS CodeCommit repository, see Set up AWS CodeCommit for SSH Connections in the AWS CodeCommit User Guide. Although each user is limited to a small number of keys, you can still paginate the results using the MaxItems and Marker parameters.
+   * Returns information about the SSH public keys associated with the specified IAM user. If none exists, the operation returns an empty list. The SSH public keys returned by this operation are used only for authenticating the IAM user to an AWS CodeCommit repository. For more information about using SSH keys to authenticate to an AWS CodeCommit repository, see Set up AWS CodeCommit for SSH Connections in the AWS CodeCommit User Guide. Although each user is limited to a small number of keys, you can still paginate the results using the MaxItems and Marker parameters.
    */
   listSSHPublicKeys(callback?: (err: AWSError, data: IAM.Types.ListSSHPublicKeysResponse) => void): Request<IAM.Types.ListSSHPublicKeysResponse, AWSError>;
   /**
@@ -777,11 +777,11 @@ declare class IAM extends Service {
    */
   listServiceSpecificCredentials(callback?: (err: AWSError, data: IAM.Types.ListServiceSpecificCredentialsResponse) => void): Request<IAM.Types.ListServiceSpecificCredentialsResponse, AWSError>;
   /**
-   * Returns information about the signing certificates associated with the specified IAM user. If there none exists, the operation returns an empty list. Although each user is limited to a small number of signing certificates, you can still paginate the results using the MaxItems and Marker parameters. If the UserName field is not specified, the user name is determined implicitly based on the AWS access key ID used to sign the request for this API. This operation works for access keys under the AWS account. Consequently, you can use this operation to manage AWS account root user credentials even if the AWS account has no associated users.
+   * Returns information about the signing certificates associated with the specified IAM user. If none exists, the operation returns an empty list. Although each user is limited to a small number of signing certificates, you can still paginate the results using the MaxItems and Marker parameters. If the UserName field is not specified, the user name is determined implicitly based on the AWS access key ID used to sign the request for this API. This operation works for access keys under the AWS account. Consequently, you can use this operation to manage AWS account root user credentials even if the AWS account has no associated users.
    */
   listSigningCertificates(params: IAM.Types.ListSigningCertificatesRequest, callback?: (err: AWSError, data: IAM.Types.ListSigningCertificatesResponse) => void): Request<IAM.Types.ListSigningCertificatesResponse, AWSError>;
   /**
-   * Returns information about the signing certificates associated with the specified IAM user. If there none exists, the operation returns an empty list. Although each user is limited to a small number of signing certificates, you can still paginate the results using the MaxItems and Marker parameters. If the UserName field is not specified, the user name is determined implicitly based on the AWS access key ID used to sign the request for this API. This operation works for access keys under the AWS account. Consequently, you can use this operation to manage AWS account root user credentials even if the AWS account has no associated users.
+   * Returns information about the signing certificates associated with the specified IAM user. If none exists, the operation returns an empty list. Although each user is limited to a small number of signing certificates, you can still paginate the results using the MaxItems and Marker parameters. If the UserName field is not specified, the user name is determined implicitly based on the AWS access key ID used to sign the request for this API. This operation works for access keys under the AWS account. Consequently, you can use this operation to manage AWS account root user credentials even if the AWS account has no associated users.
    */
   listSigningCertificates(callback?: (err: AWSError, data: IAM.Types.ListSigningCertificatesResponse) => void): Request<IAM.Types.ListSigningCertificatesResponse, AWSError>;
   /**
@@ -905,6 +905,14 @@ declare class IAM extends Service {
    */
   setDefaultPolicyVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Sets the specified version of the global endpoint token as the token version used for the AWS account. By default, AWS Security Token Service (STS) is available as a global service, and all STS requests go to a single endpoint at https://sts.amazonaws.com. AWS recommends using Regional STS endpoints to reduce latency, build in redundancy, and increase session token availability. For information about Regional endpoints for STS, see AWS Regions and Endpoints in the AWS General Reference. If you make an STS call to the global endpoint, the resulting session tokens might be valid in some Regions but not others. It depends on the version that is set in this operation. Version 1 tokens are valid only in AWS Regions that are available by default. These tokens do not work in manually enabled Regions, such as Asia Pacific (Hong Kong). Version 2 tokens are valid in all Regions. However, version 2 tokens are longer and might affect systems where you temporarily store tokens. For information, see Activating and Deactivating STS in an AWS Region in the IAM User Guide. To view the current session token version, see the GlobalEndpointTokenVersion entry in the response of the GetAccountSummary operation.
+   */
+  setSecurityTokenServicePreferences(params: IAM.Types.SetSecurityTokenServicePreferencesRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Sets the specified version of the global endpoint token as the token version used for the AWS account. By default, AWS Security Token Service (STS) is available as a global service, and all STS requests go to a single endpoint at https://sts.amazonaws.com. AWS recommends using Regional STS endpoints to reduce latency, build in redundancy, and increase session token availability. For information about Regional endpoints for STS, see AWS Regions and Endpoints in the AWS General Reference. If you make an STS call to the global endpoint, the resulting session tokens might be valid in some Regions but not others. It depends on the version that is set in this operation. Version 1 tokens are valid only in AWS Regions that are available by default. These tokens do not work in manually enabled Regions, such as Asia Pacific (Hong Kong). Version 2 tokens are valid in all Regions. However, version 2 tokens are longer and might affect systems where you temporarily store tokens. For information, see Activating and Deactivating STS in an AWS Region in the IAM User Guide. To view the current session token version, see the GlobalEndpointTokenVersion entry in the response of the GetAccountSummary operation.
+   */
+  setSecurityTokenServicePreferences(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Simulate how a set of IAM policies and optionally a resource-based policy works with a list of API operations and AWS resources to determine the policies' effective permissions. The policies are provided as strings. The simulation does not perform the API operations; it only checks the authorization to determine if the simulated policies allow or deny the operations. If you want to simulate existing policies attached to an IAM user, group, or role, use SimulatePrincipalPolicy instead. Context keys are variables maintained by AWS and its services that provide details about the context of an API query request. You can use the Condition element of an IAM policy to evaluate context keys. To get the list of context keys that the policies require for correct simulation, use GetContextKeysForCustomPolicy. If the output is long, you can use MaxItems and Marker parameters to paginate the results.
    */
   simulateCustomPolicy(params: IAM.Types.SimulateCustomPolicyRequest, callback?: (err: AWSError, data: IAM.Types.SimulatePolicyResponse) => void): Request<IAM.Types.SimulatePolicyResponse, AWSError>;
@@ -913,11 +921,11 @@ declare class IAM extends Service {
    */
   simulateCustomPolicy(callback?: (err: AWSError, data: IAM.Types.SimulatePolicyResponse) => void): Request<IAM.Types.SimulatePolicyResponse, AWSError>;
   /**
-   * Simulate how a set of IAM policies attached to an IAM entity works with a list of API operations and AWS resources to determine the policies' effective permissions. The entity can be an IAM user, group, or role. If you specify a user, then the simulation also includes all of the policies that are attached to groups that the user belongs to. You can optionally include a list of one or more additional policies specified as strings to include in the simulation. If you want to simulate only policies specified as strings, use SimulateCustomPolicy instead. You can also optionally include one resource-based policy to be evaluated with each of the resources included in the simulation. The simulation does not perform the API operations, it only checks the authorization to determine if the simulated policies allow or deny the operations.  Note: This API discloses information about the permissions granted to other users. If you do not want users to see other user's permissions, then consider allowing them to use SimulateCustomPolicy instead. Context keys are variables maintained by AWS and its services that provide details about the context of an API query request. You can use the Condition element of an IAM policy to evaluate context keys. To get the list of context keys that the policies require for correct simulation, use GetContextKeysForPrincipalPolicy. If the output is long, you can use the MaxItems and Marker parameters to paginate the results.
+   * Simulate how a set of IAM policies attached to an IAM entity works with a list of API operations and AWS resources to determine the policies' effective permissions. The entity can be an IAM user, group, or role. If you specify a user, then the simulation also includes all of the policies that are attached to groups that the user belongs to. You can optionally include a list of one or more additional policies specified as strings to include in the simulation. If you want to simulate only policies specified as strings, use SimulateCustomPolicy instead. You can also optionally include one resource-based policy to be evaluated with each of the resources included in the simulation. The simulation does not perform the API operations; it only checks the authorization to determine if the simulated policies allow or deny the operations.  Note: This API discloses information about the permissions granted to other users. If you do not want users to see other user's permissions, then consider allowing them to use SimulateCustomPolicy instead. Context keys are variables maintained by AWS and its services that provide details about the context of an API query request. You can use the Condition element of an IAM policy to evaluate context keys. To get the list of context keys that the policies require for correct simulation, use GetContextKeysForPrincipalPolicy. If the output is long, you can use the MaxItems and Marker parameters to paginate the results.
    */
   simulatePrincipalPolicy(params: IAM.Types.SimulatePrincipalPolicyRequest, callback?: (err: AWSError, data: IAM.Types.SimulatePolicyResponse) => void): Request<IAM.Types.SimulatePolicyResponse, AWSError>;
   /**
-   * Simulate how a set of IAM policies attached to an IAM entity works with a list of API operations and AWS resources to determine the policies' effective permissions. The entity can be an IAM user, group, or role. If you specify a user, then the simulation also includes all of the policies that are attached to groups that the user belongs to. You can optionally include a list of one or more additional policies specified as strings to include in the simulation. If you want to simulate only policies specified as strings, use SimulateCustomPolicy instead. You can also optionally include one resource-based policy to be evaluated with each of the resources included in the simulation. The simulation does not perform the API operations, it only checks the authorization to determine if the simulated policies allow or deny the operations.  Note: This API discloses information about the permissions granted to other users. If you do not want users to see other user's permissions, then consider allowing them to use SimulateCustomPolicy instead. Context keys are variables maintained by AWS and its services that provide details about the context of an API query request. You can use the Condition element of an IAM policy to evaluate context keys. To get the list of context keys that the policies require for correct simulation, use GetContextKeysForPrincipalPolicy. If the output is long, you can use the MaxItems and Marker parameters to paginate the results.
+   * Simulate how a set of IAM policies attached to an IAM entity works with a list of API operations and AWS resources to determine the policies' effective permissions. The entity can be an IAM user, group, or role. If you specify a user, then the simulation also includes all of the policies that are attached to groups that the user belongs to. You can optionally include a list of one or more additional policies specified as strings to include in the simulation. If you want to simulate only policies specified as strings, use SimulateCustomPolicy instead. You can also optionally include one resource-based policy to be evaluated with each of the resources included in the simulation. The simulation does not perform the API operations; it only checks the authorization to determine if the simulated policies allow or deny the operations.  Note: This API discloses information about the permissions granted to other users. If you do not want users to see other user's permissions, then consider allowing them to use SimulateCustomPolicy instead. Context keys are variables maintained by AWS and its services that provide details about the context of an API query request. You can use the Condition element of an IAM policy to evaluate context keys. To get the list of context keys that the policies require for correct simulation, use GetContextKeysForPrincipalPolicy. If the output is long, you can use the MaxItems and Marker parameters to paginate the results.
    */
   simulatePrincipalPolicy(callback?: (err: AWSError, data: IAM.Types.SimulatePolicyResponse) => void): Request<IAM.Types.SimulatePolicyResponse, AWSError>;
   /**
@@ -953,11 +961,11 @@ declare class IAM extends Service {
    */
   untagUser(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Changes the status of the specified access key from Active to Inactive, or vice versa. This operation can be used to disable a user's key as part of a key rotation workflow. If the UserName field is not specified, the user name is determined implicitly based on the AWS access key ID used to sign the request. This operation works for access keys under the AWS account. Consequently, you can use this operation to manage AWS account root user credentials even if the AWS account has no associated users. For information about rotating keys, see Managing Keys and Certificates in the IAM User Guide.
+   * Changes the status of the specified access key from Active to Inactive, or vice versa. This operation can be used to disable a user's key as part of a key rotation workflow. If the UserName is not specified, the user name is determined implicitly based on the AWS access key ID used to sign the request. This operation works for access keys under the AWS account. Consequently, you can use this operation to manage AWS account root user credentials even if the AWS account has no associated users. For information about rotating keys, see Managing Keys and Certificates in the IAM User Guide.
    */
   updateAccessKey(params: IAM.Types.UpdateAccessKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Changes the status of the specified access key from Active to Inactive, or vice versa. This operation can be used to disable a user's key as part of a key rotation workflow. If the UserName field is not specified, the user name is determined implicitly based on the AWS access key ID used to sign the request. This operation works for access keys under the AWS account. Consequently, you can use this operation to manage AWS account root user credentials even if the AWS account has no associated users. For information about rotating keys, see Managing Keys and Certificates in the IAM User Guide.
+   * Changes the status of the specified access key from Active to Inactive, or vice versa. This operation can be used to disable a user's key as part of a key rotation workflow. If the UserName is not specified, the user name is determined implicitly based on the AWS access key ID used to sign the request. This operation works for access keys under the AWS account. Consequently, you can use this operation to manage AWS account root user credentials even if the AWS account has no associated users. For information about rotating keys, see Managing Keys and Certificates in the IAM User Guide.
    */
   updateAccessKey(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1081,11 +1089,11 @@ declare class IAM extends Service {
    */
   uploadServerCertificate(callback?: (err: AWSError, data: IAM.Types.UploadServerCertificateResponse) => void): Request<IAM.Types.UploadServerCertificateResponse, AWSError>;
   /**
-   * Uploads an X.509 signing certificate and associates it with the specified IAM user. Some AWS services use X.509 signing certificates to validate requests that are signed with a corresponding private key. When you upload the certificate, its default status is Active. If the UserName field is not specified, the IAM user name is determined implicitly based on the AWS access key ID used to sign the request. This operation works for access keys under the AWS account. Consequently, you can use this operation to manage AWS account root user credentials even if the AWS account has no associated users.  Because the body of an X.509 certificate can be large, you should use POST rather than GET when calling UploadSigningCertificate. For information about setting up signatures and authorization through the API, go to Signing AWS API Requests in the AWS General Reference. For general information about using the Query API with IAM, go to Making Query Requests in the IAM User Guide. 
+   * Uploads an X.509 signing certificate and associates it with the specified IAM user. Some AWS services use X.509 signing certificates to validate requests that are signed with a corresponding private key. When you upload the certificate, its default status is Active. If the UserName is not specified, the IAM user name is determined implicitly based on the AWS access key ID used to sign the request. This operation works for access keys under the AWS account. Consequently, you can use this operation to manage AWS account root user credentials even if the AWS account has no associated users.  Because the body of an X.509 certificate can be large, you should use POST rather than GET when calling UploadSigningCertificate. For information about setting up signatures and authorization through the API, go to Signing AWS API Requests in the AWS General Reference. For general information about using the Query API with IAM, go to Making Query Requests in the IAM User Guide. 
    */
   uploadSigningCertificate(params: IAM.Types.UploadSigningCertificateRequest, callback?: (err: AWSError, data: IAM.Types.UploadSigningCertificateResponse) => void): Request<IAM.Types.UploadSigningCertificateResponse, AWSError>;
   /**
-   * Uploads an X.509 signing certificate and associates it with the specified IAM user. Some AWS services use X.509 signing certificates to validate requests that are signed with a corresponding private key. When you upload the certificate, its default status is Active. If the UserName field is not specified, the IAM user name is determined implicitly based on the AWS access key ID used to sign the request. This operation works for access keys under the AWS account. Consequently, you can use this operation to manage AWS account root user credentials even if the AWS account has no associated users.  Because the body of an X.509 certificate can be large, you should use POST rather than GET when calling UploadSigningCertificate. For information about setting up signatures and authorization through the API, go to Signing AWS API Requests in the AWS General Reference. For general information about using the Query API with IAM, go to Making Query Requests in the IAM User Guide. 
+   * Uploads an X.509 signing certificate and associates it with the specified IAM user. Some AWS services use X.509 signing certificates to validate requests that are signed with a corresponding private key. When you upload the certificate, its default status is Active. If the UserName is not specified, the IAM user name is determined implicitly based on the AWS access key ID used to sign the request. This operation works for access keys under the AWS account. Consequently, you can use this operation to manage AWS account root user credentials even if the AWS account has no associated users.  Because the body of an X.509 certificate can be large, you should use POST rather than GET when calling UploadSigningCertificate. For information about setting up signatures and authorization through the API, go to Signing AWS API Requests in the AWS General Reference. For general information about using the Query API with IAM, go to Making Query Requests in the IAM User Guide. 
    */
   uploadSigningCertificate(callback?: (err: AWSError, data: IAM.Types.UploadSigningCertificateResponse) => void): Request<IAM.Types.UploadSigningCertificateResponse, AWSError>;
   /**
@@ -1104,6 +1112,22 @@ declare class IAM extends Service {
    * Waits for the userExists state by periodically calling the underlying IAM.getUseroperation every 1 seconds (at most 20 times).
    */
   waitFor(state: "userExists", callback?: (err: AWSError, data: IAM.Types.GetUserResponse) => void): Request<IAM.Types.GetUserResponse, AWSError>;
+  /**
+   * Waits for the roleExists state by periodically calling the underlying IAM.getRoleoperation every 1 seconds (at most 20 times).
+   */
+  waitFor(state: "roleExists", params: IAM.Types.GetRoleRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: IAM.Types.GetRoleResponse) => void): Request<IAM.Types.GetRoleResponse, AWSError>;
+  /**
+   * Waits for the roleExists state by periodically calling the underlying IAM.getRoleoperation every 1 seconds (at most 20 times).
+   */
+  waitFor(state: "roleExists", callback?: (err: AWSError, data: IAM.Types.GetRoleResponse) => void): Request<IAM.Types.GetRoleResponse, AWSError>;
+  /**
+   * Waits for the policyExists state by periodically calling the underlying IAM.getPolicyoperation every 1 seconds (at most 20 times).
+   */
+  waitFor(state: "policyExists", params: IAM.Types.GetPolicyRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: IAM.Types.GetPolicyResponse) => void): Request<IAM.Types.GetPolicyResponse, AWSError>;
+  /**
+   * Waits for the policyExists state by periodically calling the underlying IAM.getPolicyoperation every 1 seconds (at most 20 times).
+   */
+  waitFor(state: "policyExists", callback?: (err: AWSError, data: IAM.Types.GetPolicyResponse) => void): Request<IAM.Types.GetPolicyResponse, AWSError>;
 }
 declare namespace IAM {
   export interface AccessKey {
@@ -1460,7 +1484,7 @@ declare namespace IAM {
   }
   export interface CreateServiceLinkedRoleRequest {
     /**
-     * The service principal for the AWS service to which this role is attached. You use a string similar to a URL but without the http:// in front. For example: elasticbeanstalk.amazonaws.com.  Service principals are unique and case-sensitive. To find the exact service principal for your service-linked role, see AWS Services That Work with IAM in the IAM User Guide and look for the services that have Yes in the Service-Linked Role column. Choose the Yes link to view the service-linked role documentation for that service.
+     * The service principal for the AWS service to which this role is attached. You use a string similar to a URL but without the http:// in front. For example: elasticbeanstalk.amazonaws.com.  Service principals are unique and case-sensitive. To find the exact service principal for your service-linked role, see AWS Services That Work with IAM in the IAM User Guide. Look for the services that have Yes in the Service-Linked Role column. Choose the Yes link to view the service-linked role documentation for that service.
      */
     AWSServiceName: groupNameType;
     /**
@@ -1490,7 +1514,7 @@ declare namespace IAM {
   }
   export interface CreateServiceSpecificCredentialResponse {
     /**
-     * A structure that contains information about the newly created service-specific credential.  This is the only time that the password for this credential set is available. It cannot be recovered later. Instead, you will have to reset the password with ResetServiceSpecificCredential. 
+     * A structure that contains information about the newly created service-specific credential.  This is the only time that the password for this credential set is available. It cannot be recovered later. Instead, you must reset the password with ResetServiceSpecificCredential. 
      */
     ServiceSpecificCredential?: ServiceSpecificCredential;
   }
@@ -1927,7 +1951,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface GetAccountPasswordPolicyResponse {
     /**
@@ -2031,7 +2055,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface GetInstanceProfileRequest {
     /**
@@ -2235,7 +2259,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
     /**
      * An object that contains details about the reason the operation failed.
      */
@@ -2247,7 +2271,7 @@ declare namespace IAM {
      */
     JobId: jobIDType;
     /**
-     * The service namespace for an AWS service. Provide the service namespace to learn when the IAM entity last attempted to access the specified service. To learn the service namespace for a service, go to Actions, Resources, and Condition Keys for AWS Services in the IAM User Guide and choose the name of the service to view details for that service. In the first paragraph, find the service prefix. For example, (service prefix: a4b). For more information about service namespaces, see AWS Service Namespaces in the AWS General Reference.
+     * The service namespace for an AWS service. Provide the service namespace to learn when the IAM entity last attempted to access the specified service. To learn the service namespace for a service, go to Actions, Resources, and Condition Keys for AWS Services in the IAM User Guide. Choose the name of the service to view details for that service. In the first paragraph, find the service prefix. For example, (service prefix: a4b). For more information about service namespaces, see AWS Service Namespaces in the AWS General Reference.
      */
     ServiceNamespace: serviceNamespaceType;
     /**
@@ -2283,7 +2307,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
     /**
      * An object that contains details about the reason the operation failed.
      */
@@ -2443,7 +2467,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListAccountAliasesRequest {
     /**
@@ -2467,7 +2491,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListAttachedGroupPoliciesRequest {
     /**
@@ -2499,7 +2523,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListAttachedRolePoliciesRequest {
     /**
@@ -2531,7 +2555,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListAttachedUserPoliciesRequest {
     /**
@@ -2563,7 +2587,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListEntitiesForPolicyRequest {
     /**
@@ -2611,7 +2635,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListGroupPoliciesRequest {
     /**
@@ -2639,7 +2663,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListGroupsForUserRequest {
     /**
@@ -2667,7 +2691,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListGroupsRequest {
     /**
@@ -2695,7 +2719,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListInstanceProfilesForRoleRequest {
     /**
@@ -2723,7 +2747,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListInstanceProfilesRequest {
     /**
@@ -2751,7 +2775,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListMFADevicesRequest {
     /**
@@ -2779,7 +2803,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListOpenIDConnectProvidersRequest {
   }
@@ -2825,7 +2849,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListPoliciesRequest {
     /**
@@ -2865,7 +2889,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListPolicyVersionsRequest {
     /**
@@ -2893,7 +2917,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListRolePoliciesRequest {
     /**
@@ -2921,7 +2945,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListRoleTagsRequest {
     /**
@@ -2929,7 +2953,7 @@ declare namespace IAM {
      */
     RoleName: roleNameType;
     /**
-     * Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the Marker element in the response to indicate where the next call should start.
+     * Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the Marker element in the response that you received to indicate where the next call should start.
      */
     Marker?: markerType;
     /**
@@ -2949,7 +2973,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListRolesRequest {
     /**
@@ -2977,7 +3001,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListSAMLProvidersRequest {
   }
@@ -3013,7 +3037,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListServerCertificatesRequest {
     /**
@@ -3041,7 +3065,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListServiceSpecificCredentialsRequest {
     /**
@@ -3085,7 +3109,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListUserPoliciesRequest {
     /**
@@ -3113,7 +3137,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListUserTagsRequest {
     /**
@@ -3121,7 +3145,7 @@ declare namespace IAM {
      */
     UserName: existingUserNameType;
     /**
-     * Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the Marker element in the response to indicate where the next call should start.
+     * Use this parameter only when paginating results and only after you receive a response indicating that the results are truncated. Set it to the value of the Marker element in the response that you received to indicate where the next call should start.
      */
     Marker?: markerType;
     /**
@@ -3141,7 +3165,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListUsersRequest {
     /**
@@ -3169,7 +3193,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface ListVirtualMFADevicesRequest {
     /**
@@ -3197,7 +3221,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface LoginProfile {
     /**
@@ -3912,6 +3936,12 @@ declare namespace IAM {
      */
     VersionId: policyVersionIdType;
   }
+  export interface SetSecurityTokenServicePreferencesRequest {
+    /**
+     * The version of the global endpoint token. Version 1 tokens are valid only in AWS Regions that are available by default. These tokens do not work in manually enabled Regions, such as Asia Pacific (Hong Kong). Version 2 tokens are valid in all Regions. However, version 2 tokens are longer and might affect systems where you temporarily store tokens. For information, see Activating and Deactivating STS in an AWS Region in the IAM User Guide.
+     */
+    GlobalEndpointTokenVersion: globalEndpointTokenVersion;
+  }
   export interface SigningCertificate {
     /**
      * The name of the user the signing certificate is associated with.
@@ -3940,7 +3970,7 @@ declare namespace IAM {
      */
     PolicyInputList: SimulationPolicyListType;
     /**
-     * A list of names of API operations to evaluate in the simulation. Each operation is evaluated against each resource. Each operation must include the service identifier, such as iam:CreateUser.
+     * A list of names of API operations to evaluate in the simulation. Each operation is evaluated against each resource. Each operation must include the service identifier, such as iam:CreateUser. This operation does not support using wildcards (*) in an action name.
      */
     ActionNames: ActionNameListType;
     /**
@@ -3952,7 +3982,7 @@ declare namespace IAM {
      */
     ResourcePolicy?: policyDocumentType;
     /**
-     * An ARN representing the AWS account ID that specifies the owner of any simulated resource that does not identify its owner in the resource ARN, such as an S3 bucket or object. If ResourceOwner is specified, it is also used as the account owner of any ResourcePolicy included in the simulation. If the ResourceOwner parameter is not specified, then the owner of the resources and the resource policy defaults to the account of the identity provided in CallerArn. This parameter is required only if you specify a resource-based policy and account that owns the resource is different from the account that owns the simulated calling user CallerArn. The ARN for an account uses the following syntax: arn:aws:iam::AWS-account-ID:root. For example, to represent the account with the 112233445566 ID, use the following ARN: arn:aws:iam::112233445566-ID:root. 
+     * An ARN representing the AWS account ID that specifies the owner of any simulated resource that does not identify its owner in the resource ARN. Examples of resource ARNs include an S3 bucket or object. If ResourceOwner is specified, it is also used as the account owner of any ResourcePolicy included in the simulation. If the ResourceOwner parameter is not specified, then the owner of the resources and the resource policy defaults to the account of the identity provided in CallerArn. This parameter is required only if you specify a resource-based policy and account that owns the resource is different from the account that owns the simulated calling user CallerArn. The ARN for an account uses the following syntax: arn:aws:iam::AWS-account-ID:root. For example, to represent the account with the 112233445566 ID, use the following ARN: arn:aws:iam::112233445566-ID:root. 
      */
     ResourceOwner?: ResourceNameType;
     /**
@@ -3960,7 +3990,7 @@ declare namespace IAM {
      */
     CallerArn?: ResourceNameType;
     /**
-     * A list of context keys and corresponding values for the simulation to use. Whenever a context key is evaluated in one of the simulated IAM permission policies, the corresponding value is supplied.
+     * A list of context keys and corresponding values for the simulation to use. Whenever a context key is evaluated in one of the simulated IAM permissions policies, the corresponding value is supplied.
      */
     ContextEntries?: ContextEntryListType;
     /**
@@ -3988,7 +4018,7 @@ declare namespace IAM {
     /**
      * When IsTruncated is true, this element is present and contains the value to use for the Marker parameter in a subsequent pagination request.
      */
-    Marker?: markerType;
+    Marker?: responseMarkerType;
   }
   export interface SimulatePrincipalPolicyRequest {
     /**
@@ -4012,7 +4042,7 @@ declare namespace IAM {
      */
     ResourcePolicy?: policyDocumentType;
     /**
-     * An AWS account ID that specifies the owner of any simulated resource that does not identify its owner in the resource ARN, such as an S3 bucket or object. If ResourceOwner is specified, it is also used as the account owner of any ResourcePolicy included in the simulation. If the ResourceOwner parameter is not specified, then the owner of the resources and the resource policy defaults to the account of the identity provided in CallerArn. This parameter is required only if you specify a resource-based policy and account that owns the resource is different from the account that owns the simulated calling user CallerArn.
+     * An AWS account ID that specifies the owner of any simulated resource that does not identify its owner in the resource ARN. Examples of resource ARNs include an S3 bucket or object. If ResourceOwner is specified, it is also used as the account owner of any ResourcePolicy included in the simulation. If the ResourceOwner parameter is not specified, then the owner of the resources and the resource policy defaults to the account of the identity provided in CallerArn. This parameter is required only if you specify a resource-based policy and account that owns the resource is different from the account that owns the simulated calling user CallerArn.
      */
     ResourceOwner?: ResourceNameType;
     /**
@@ -4504,6 +4534,7 @@ declare namespace IAM {
   export type entityListType = EntityType[];
   export type entityNameType = string;
   export type existingUserNameType = string;
+  export type globalEndpointTokenVersion = "v1Token"|"v2Token"|string;
   export type groupDetailListType = GroupDetail[];
   export type groupListType = Group[];
   export type groupNameListType = groupNameType[];
@@ -4541,6 +4572,7 @@ declare namespace IAM {
   export type publicKeyFingerprintType = string;
   export type publicKeyIdType = string;
   export type publicKeyMaterialType = string;
+  export type responseMarkerType = string;
   export type roleDescriptionType = string;
   export type roleDetailListType = RoleDetail[];
   export type roleListType = Role[];
@@ -4558,7 +4590,7 @@ declare namespace IAM {
   export type serviceUserName = string;
   export type statusType = "Active"|"Inactive"|string;
   export type stringType = string;
-  export type summaryKeyType = "Users"|"UsersQuota"|"Groups"|"GroupsQuota"|"ServerCertificates"|"ServerCertificatesQuota"|"UserPolicySizeQuota"|"GroupPolicySizeQuota"|"GroupsPerUserQuota"|"SigningCertificatesPerUserQuota"|"AccessKeysPerUserQuota"|"MFADevices"|"MFADevicesInUse"|"AccountMFAEnabled"|"AccountAccessKeysPresent"|"AccountSigningCertificatesPresent"|"AttachedPoliciesPerGroupQuota"|"AttachedPoliciesPerRoleQuota"|"AttachedPoliciesPerUserQuota"|"Policies"|"PoliciesQuota"|"PolicySizeQuota"|"PolicyVersionsInUse"|"PolicyVersionsInUseQuota"|"VersionsPerPolicyQuota"|string;
+  export type summaryKeyType = "Users"|"UsersQuota"|"Groups"|"GroupsQuota"|"ServerCertificates"|"ServerCertificatesQuota"|"UserPolicySizeQuota"|"GroupPolicySizeQuota"|"GroupsPerUserQuota"|"SigningCertificatesPerUserQuota"|"AccessKeysPerUserQuota"|"MFADevices"|"MFADevicesInUse"|"AccountMFAEnabled"|"AccountAccessKeysPresent"|"AccountSigningCertificatesPresent"|"AttachedPoliciesPerGroupQuota"|"AttachedPoliciesPerRoleQuota"|"AttachedPoliciesPerUserQuota"|"Policies"|"PoliciesQuota"|"PolicySizeQuota"|"PolicyVersionsInUse"|"PolicyVersionsInUseQuota"|"VersionsPerPolicyQuota"|"GlobalEndpointTokenVersion"|string;
   export type summaryMapType = {[key: string]: summaryValueType};
   export type summaryValueType = number;
   export type tagKeyListType = tagKeyType[];

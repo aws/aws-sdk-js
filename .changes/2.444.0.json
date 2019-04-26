@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "IAM",
+        "description": "AWS Security Token Service (STS) enables you to request session tokens from the global STS endpoint that work in all AWS Regions. You can configure the global STS endpoint to vend session tokens that are compatible with all AWS Regions using the new IAM SetSecurityTokenServicePreferences API. "
+    },
+    {
+        "type": "feature",
+        "category": "SNS",
+        "description": "With this release AWS SNS adds tagging support for Topics."
+    }
+]

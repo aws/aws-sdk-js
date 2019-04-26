@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.443.0-->
+<!--LATEST=2.444.0-->
 <!--ENTRYINSERT-->
+
+## 2.444.0
+* feature: IAM: AWS Security Token Service (STS) enables you to request session tokens from the global STS endpoint that work in all AWS Regions. You can configure the global STS endpoint to vend session tokens that are compatible with all AWS Regions using the new IAM SetSecurityTokenServicePreferences API. 
+* feature: SNS: With this release AWS SNS adds tagging support for Topics.
 
 ## 2.443.0
 * feature: DynamoDB: This update allows you to tag Amazon DynamoDB tables when you create them. Tags are labels you can attach to AWS resources to make them easier to manage, search, and filter. 
