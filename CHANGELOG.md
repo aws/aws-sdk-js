@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.444.0-->
+<!--LATEST=2.445.0-->
 <!--ENTRYINSERT-->
+
+## 2.445.0
+* feature: EC2: Adds support for Elastic Fabric Adapter (EFA) ENIs. 
+* feature: Transfer: This release adds support for per-server host-key management. You can now specify the SSH RSA private key used by your SFTP server.
 
 ## 2.444.0
 * feature: IAM: AWS Security Token Service (STS) enables you to request session tokens from the global STS endpoint that work in all AWS Regions. You can configure the global STS endpoint to vend session tokens that are compatible with all AWS Regions using the new IAM SetSecurityTokenServicePreferences API. 

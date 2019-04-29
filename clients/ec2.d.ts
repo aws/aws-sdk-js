@@ -205,19 +205,19 @@ declare class EC2 extends Service {
    */
   authorizeClientVpnIngress(callback?: (err: AWSError, data: EC2.Types.AuthorizeClientVpnIngressResult) => void): Request<EC2.Types.AuthorizeClientVpnIngressResult, AWSError>;
   /**
-   * [EC2-VPC only] Adds the specified egress rules to a security group for use with a VPC. Specifically, this action permits instances to send traffic to the specified destination IPv4 or IPv6 CIDR address ranges, or to the specified destination security groups for the same VPC. This action doesn't apply to security groups for use in EC2-Classic. For more information, see Security Groups for Your VPC in the Amazon Virtual Private Cloud User Guide. For more information about security group limits, see Amazon VPC Limits. Each rule consists of the protocol (for example, TCP), plus either a CIDR range or a source group. For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. You can optionally specify a description for the rule. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.
+   * [VPC only] Adds the specified egress rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified destination IPv4 or IPv6 CIDR address ranges, or to the specified destination security groups for the same VPC. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For more information about VPC security group limits, see Amazon VPC Limits.
    */
   authorizeSecurityGroupEgress(params: EC2.Types.AuthorizeSecurityGroupEgressRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * [EC2-VPC only] Adds the specified egress rules to a security group for use with a VPC. Specifically, this action permits instances to send traffic to the specified destination IPv4 or IPv6 CIDR address ranges, or to the specified destination security groups for the same VPC. This action doesn't apply to security groups for use in EC2-Classic. For more information, see Security Groups for Your VPC in the Amazon Virtual Private Cloud User Guide. For more information about security group limits, see Amazon VPC Limits. Each rule consists of the protocol (for example, TCP), plus either a CIDR range or a source group. For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. You can optionally specify a description for the rule. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.
+   * [VPC only] Adds the specified egress rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified destination IPv4 or IPv6 CIDR address ranges, or to the specified destination security groups for the same VPC. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For more information about VPC security group limits, see Amazon VPC Limits.
    */
   authorizeSecurityGroupEgress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds the specified ingress rules to a security group. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. [EC2-Classic] This action gives the IPv4 CIDR address ranges permission to access a security group in your account, or gives the security groups (called the source groups) permission to access a security group for your account. A source group can be for your own AWS account, or another. You can have up to 100 rules per group. [EC2-VPC] This action gives the specified IPv4 or IPv6 CIDR address ranges permission to access a security group in your VPC, or gives the specified security groups (called the source groups) permission to access a security group for your VPC. The security groups must all be for the same VPC or a peer VPC in a VPC peering connection. For more information about VPC security group limits, see Amazon VPC Limits. You can optionally specify a description for the security group rule.
+   * Adds the specified ingress rules to a security group. An inbound rule permits instances to receive traffic from the specified destination IPv4 or IPv6 CIDR address ranges, or from the specified destination security groups. You specify a protocol for each rule (for example, TCP). For TCP and UDP, you must also specify the destination port or port range. For ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. You can use -1 to mean all types or all codes. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. For more information about VPC security group limits, see Amazon VPC Limits.
    */
   authorizeSecurityGroupIngress(params: EC2.Types.AuthorizeSecurityGroupIngressRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds the specified ingress rules to a security group. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. [EC2-Classic] This action gives the IPv4 CIDR address ranges permission to access a security group in your account, or gives the security groups (called the source groups) permission to access a security group for your account. A source group can be for your own AWS account, or another. You can have up to 100 rules per group. [EC2-VPC] This action gives the specified IPv4 or IPv6 CIDR address ranges permission to access a security group in your VPC, or gives the specified security groups (called the source groups) permission to access a security group for your VPC. The security groups must all be for the same VPC or a peer VPC in a VPC peering connection. For more information about VPC security group limits, see Amazon VPC Limits. You can optionally specify a description for the security group rule.
+   * Adds the specified ingress rules to a security group. An inbound rule permits instances to receive traffic from the specified destination IPv4 or IPv6 CIDR address ranges, or from the specified destination security groups. You specify a protocol for each rule (for example, TCP). For TCP and UDP, you must also specify the destination port or port range. For ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. You can use -1 to mean all types or all codes. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. For more information about VPC security group limits, see Amazon VPC Limits.
    */
   authorizeSecurityGroupIngress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -405,11 +405,11 @@ declare class EC2 extends Service {
    */
   createFlowLogs(callback?: (err: AWSError, data: EC2.Types.CreateFlowLogsResult) => void): Request<EC2.Types.CreateFlowLogsResult, AWSError>;
   /**
-   * Creates an Amazon FPGA Image (AFI) from the specified design checkpoint (DCP). The create operation is asynchronous. To verify that the AFI is ready for use, check the output logs. An AFI contains the FPGA bitstream that is ready to download to an FPGA. You can securely deploy an AFI on one or more FPGA-accelerated instances. For more information, see the AWS FPGA Hardware Development Kit.
+   * Creates an Amazon FPGA Image (AFI) from the specified design checkpoint (DCP). The create operation is asynchronous. To verify that the AFI is ready for use, check the output logs. An AFI contains the FPGA bitstream that is ready to download to an FPGA. You can securely deploy an AFI on multiple FPGA-accelerated instances. For more information, see the AWS FPGA Hardware Development Kit.
    */
   createFpgaImage(params: EC2.Types.CreateFpgaImageRequest, callback?: (err: AWSError, data: EC2.Types.CreateFpgaImageResult) => void): Request<EC2.Types.CreateFpgaImageResult, AWSError>;
   /**
-   * Creates an Amazon FPGA Image (AFI) from the specified design checkpoint (DCP). The create operation is asynchronous. To verify that the AFI is ready for use, check the output logs. An AFI contains the FPGA bitstream that is ready to download to an FPGA. You can securely deploy an AFI on one or more FPGA-accelerated instances. For more information, see the AWS FPGA Hardware Development Kit.
+   * Creates an Amazon FPGA Image (AFI) from the specified design checkpoint (DCP). The create operation is asynchronous. To verify that the AFI is ready for use, check the output logs. An AFI contains the FPGA bitstream that is ready to download to an FPGA. You can securely deploy an AFI on multiple FPGA-accelerated instances. For more information, see the AWS FPGA Hardware Development Kit.
    */
   createFpgaImage(callback?: (err: AWSError, data: EC2.Types.CreateFpgaImageResult) => void): Request<EC2.Types.CreateFpgaImageResult, AWSError>;
   /**
@@ -533,11 +533,11 @@ declare class EC2 extends Service {
    */
   createRouteTable(callback?: (err: AWSError, data: EC2.Types.CreateRouteTableResult) => void): Request<EC2.Types.CreateRouteTableResult, AWSError>;
   /**
-   * Creates a security group. A security group is for use with instances either in the EC2-Classic platform or in a specific VPC. For more information, see Amazon EC2 Security Groups in the Amazon Elastic Compute Cloud User Guide and Security Groups for Your VPC in the Amazon Virtual Private Cloud User Guide.  EC2-Classic: You can have up to 500 security groups. EC2-VPC: You can create up to 500 security groups per VPC.  When you create a security group, you specify a friendly name of your choice. You can have a security group for use in EC2-Classic with the same name as a security group for use in a VPC. However, you can't have two security groups for use in EC2-Classic with the same name or two security groups for use in a VPC with the same name. You have a default security group for use in EC2-Classic and a default security group for use in your VPC. If you don't specify a security group when you launch an instance, the instance is launched into the appropriate default security group. A default security group includes a default rule that grants instances unrestricted network access to each other. You can add or remove rules from your security groups using AuthorizeSecurityGroupIngress, AuthorizeSecurityGroupEgress, RevokeSecurityGroupIngress, and RevokeSecurityGroupEgress.
+   * Creates a security group. A security group acts as a virtual firewall for your instance to control inbound and outbound traffic. For more information, see Amazon EC2 Security Groups in the Amazon Elastic Compute Cloud User Guide and Security Groups for Your VPC in the Amazon Virtual Private Cloud User Guide. When you create a security group, you specify a friendly name of your choice. You can have a security group for use in EC2-Classic with the same name as a security group for use in a VPC. However, you can't have two security groups for use in EC2-Classic with the same name or two security groups for use in a VPC with the same name. You have a default security group for use in EC2-Classic and a default security group for use in your VPC. If you don't specify a security group when you launch an instance, the instance is launched into the appropriate default security group. A default security group includes a default rule that grants instances unrestricted network access to each other. You can add or remove rules from your security groups using AuthorizeSecurityGroupIngress, AuthorizeSecurityGroupEgress, RevokeSecurityGroupIngress, and RevokeSecurityGroupEgress. For more information about VPC security group limits, see Amazon VPC Limits.
    */
   createSecurityGroup(params: EC2.Types.CreateSecurityGroupRequest, callback?: (err: AWSError, data: EC2.Types.CreateSecurityGroupResult) => void): Request<EC2.Types.CreateSecurityGroupResult, AWSError>;
   /**
-   * Creates a security group. A security group is for use with instances either in the EC2-Classic platform or in a specific VPC. For more information, see Amazon EC2 Security Groups in the Amazon Elastic Compute Cloud User Guide and Security Groups for Your VPC in the Amazon Virtual Private Cloud User Guide.  EC2-Classic: You can have up to 500 security groups. EC2-VPC: You can create up to 500 security groups per VPC.  When you create a security group, you specify a friendly name of your choice. You can have a security group for use in EC2-Classic with the same name as a security group for use in a VPC. However, you can't have two security groups for use in EC2-Classic with the same name or two security groups for use in a VPC with the same name. You have a default security group for use in EC2-Classic and a default security group for use in your VPC. If you don't specify a security group when you launch an instance, the instance is launched into the appropriate default security group. A default security group includes a default rule that grants instances unrestricted network access to each other. You can add or remove rules from your security groups using AuthorizeSecurityGroupIngress, AuthorizeSecurityGroupEgress, RevokeSecurityGroupIngress, and RevokeSecurityGroupEgress.
+   * Creates a security group. A security group acts as a virtual firewall for your instance to control inbound and outbound traffic. For more information, see Amazon EC2 Security Groups in the Amazon Elastic Compute Cloud User Guide and Security Groups for Your VPC in the Amazon Virtual Private Cloud User Guide. When you create a security group, you specify a friendly name of your choice. You can have a security group for use in EC2-Classic with the same name as a security group for use in a VPC. However, you can't have two security groups for use in EC2-Classic with the same name or two security groups for use in a VPC with the same name. You have a default security group for use in EC2-Classic and a default security group for use in your VPC. If you don't specify a security group when you launch an instance, the instance is launched into the appropriate default security group. A default security group includes a default rule that grants instances unrestricted network access to each other. You can add or remove rules from your security groups using AuthorizeSecurityGroupIngress, AuthorizeSecurityGroupEgress, RevokeSecurityGroupIngress, and RevokeSecurityGroupEgress. For more information about VPC security group limits, see Amazon VPC Limits.
    */
   createSecurityGroup(callback?: (err: AWSError, data: EC2.Types.CreateSecurityGroupResult) => void): Request<EC2.Types.CreateSecurityGroupResult, AWSError>;
   /**
@@ -1101,11 +1101,11 @@ declare class EC2 extends Service {
    */
   describeClientVpnTargetNetworks(callback?: (err: AWSError, data: EC2.Types.DescribeClientVpnTargetNetworksResult) => void): Request<EC2.Types.DescribeClientVpnTargetNetworksResult, AWSError>;
   /**
-   * Describes one or more of your conversion tasks. For more information, see the VM Import/Export User Guide. For information about the import manifest referenced by this API action, see VM Import Manifest.
+   * Describes the specified conversion tasks or all your conversion tasks. For more information, see the VM Import/Export User Guide. For information about the import manifest referenced by this API action, see VM Import Manifest.
    */
   describeConversionTasks(params: EC2.Types.DescribeConversionTasksRequest, callback?: (err: AWSError, data: EC2.Types.DescribeConversionTasksResult) => void): Request<EC2.Types.DescribeConversionTasksResult, AWSError>;
   /**
-   * Describes one or more of your conversion tasks. For more information, see the VM Import/Export User Guide. For information about the import manifest referenced by this API action, see VM Import Manifest.
+   * Describes the specified conversion tasks or all your conversion tasks. For more information, see the VM Import/Export User Guide. For information about the import manifest referenced by this API action, see VM Import Manifest.
    */
   describeConversionTasks(callback?: (err: AWSError, data: EC2.Types.DescribeConversionTasksResult) => void): Request<EC2.Types.DescribeConversionTasksResult, AWSError>;
   /**
@@ -1141,11 +1141,11 @@ declare class EC2 extends Service {
    */
   describeElasticGpus(callback?: (err: AWSError, data: EC2.Types.DescribeElasticGpusResult) => void): Request<EC2.Types.DescribeElasticGpusResult, AWSError>;
   /**
-   * Describes one or more of your export tasks.
+   * Describes the specified export tasks or all your export tasks.
    */
   describeExportTasks(params: EC2.Types.DescribeExportTasksRequest, callback?: (err: AWSError, data: EC2.Types.DescribeExportTasksResult) => void): Request<EC2.Types.DescribeExportTasksResult, AWSError>;
   /**
-   * Describes one or more of your export tasks.
+   * Describes the specified export tasks or all your export tasks.
    */
   describeExportTasks(callback?: (err: AWSError, data: EC2.Types.DescribeExportTasksResult) => void): Request<EC2.Types.DescribeExportTasksResult, AWSError>;
   /**
@@ -1165,11 +1165,11 @@ declare class EC2 extends Service {
    */
   describeFleetInstances(callback?: (err: AWSError, data: EC2.Types.DescribeFleetInstancesResult) => void): Request<EC2.Types.DescribeFleetInstancesResult, AWSError>;
   /**
-   * Describes one or more of your EC2 Fleets.
+   * Describes the specified EC2 Fleets or all your EC2 Fleets.
    */
   describeFleets(params: EC2.Types.DescribeFleetsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFleetsResult) => void): Request<EC2.Types.DescribeFleetsResult, AWSError>;
   /**
-   * Describes one or more of your EC2 Fleets.
+   * Describes the specified EC2 Fleets or all your EC2 Fleets.
    */
   describeFleets(callback?: (err: AWSError, data: EC2.Types.DescribeFleetsResult) => void): Request<EC2.Types.DescribeFleetsResult, AWSError>;
   /**
@@ -1189,11 +1189,11 @@ declare class EC2 extends Service {
    */
   describeFpgaImageAttribute(callback?: (err: AWSError, data: EC2.Types.DescribeFpgaImageAttributeResult) => void): Request<EC2.Types.DescribeFpgaImageAttributeResult, AWSError>;
   /**
-   * Describes one or more available Amazon FPGA Images (AFIs). These include public AFIs, private AFIs that you own, and AFIs owned by other AWS accounts for which you have load permissions.
+   * Describes the Amazon FPGA Images (AFIs) available to you. These include public AFIs, private AFIs that you own, and AFIs owned by other AWS accounts for which you have load permissions.
    */
   describeFpgaImages(params: EC2.Types.DescribeFpgaImagesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeFpgaImagesResult) => void): Request<EC2.Types.DescribeFpgaImagesResult, AWSError>;
   /**
-   * Describes one or more available Amazon FPGA Images (AFIs). These include public AFIs, private AFIs that you own, and AFIs owned by other AWS accounts for which you have load permissions.
+   * Describes the Amazon FPGA Images (AFIs) available to you. These include public AFIs, private AFIs that you own, and AFIs owned by other AWS accounts for which you have load permissions.
    */
   describeFpgaImages(callback?: (err: AWSError, data: EC2.Types.DescribeFpgaImagesResult) => void): Request<EC2.Types.DescribeFpgaImagesResult, AWSError>;
   /**
@@ -1213,11 +1213,11 @@ declare class EC2 extends Service {
    */
   describeHostReservations(callback?: (err: AWSError, data: EC2.Types.DescribeHostReservationsResult) => void): Request<EC2.Types.DescribeHostReservationsResult, AWSError>;
   /**
-   * Describes one or more of your Dedicated Hosts. The results describe only the Dedicated Hosts in the Region you're currently using. All listed instances consume capacity on your Dedicated Host. Dedicated Hosts that have recently been released are listed with the state released.
+   * Describes the specified Dedicated Hosts or all your Dedicated Hosts. The results describe only the Dedicated Hosts in the Region you're currently using. All listed instances consume capacity on your Dedicated Host. Dedicated Hosts that have recently been released are listed with the state released.
    */
   describeHosts(params: EC2.Types.DescribeHostsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeHostsResult) => void): Request<EC2.Types.DescribeHostsResult, AWSError>;
   /**
-   * Describes one or more of your Dedicated Hosts. The results describe only the Dedicated Hosts in the Region you're currently using. All listed instances consume capacity on your Dedicated Host. Dedicated Hosts that have recently been released are listed with the state released.
+   * Describes the specified Dedicated Hosts or all your Dedicated Hosts. The results describe only the Dedicated Hosts in the Region you're currently using. All listed instances consume capacity on your Dedicated Host. Dedicated Hosts that have recently been released are listed with the state released.
    */
   describeHosts(callback?: (err: AWSError, data: EC2.Types.DescribeHostsResult) => void): Request<EC2.Types.DescribeHostsResult, AWSError>;
   /**
@@ -1253,11 +1253,11 @@ declare class EC2 extends Service {
    */
   describeImageAttribute(callback?: (err: AWSError, data: EC2.Types.ImageAttribute) => void): Request<EC2.Types.ImageAttribute, AWSError>;
   /**
-   * Describes the specified images (AMIs, AKIs, and ARIs) available to you or all of the images available to you. The images available to you include public images, private images that you own, and private images owned by other AWS accounts for which you have explicit launch permissions.  Deregistered images are included in the returned results for an unspecified interval after deregistration. 
+   * Describes the specified images (AMIs, AKIs, and ARIs) available to you or all of the images available to you. The images available to you include public images, private images that you own, and private images owned by other AWS accounts for which you have explicit launch permissions. Recently deregistered images might appear in the returned results for a short interval.
    */
   describeImages(params: EC2.Types.DescribeImagesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeImagesResult) => void): Request<EC2.Types.DescribeImagesResult, AWSError>;
   /**
-   * Describes the specified images (AMIs, AKIs, and ARIs) available to you or all of the images available to you. The images available to you include public images, private images that you own, and private images owned by other AWS accounts for which you have explicit launch permissions.  Deregistered images are included in the returned results for an unspecified interval after deregistration. 
+   * Describes the specified images (AMIs, AKIs, and ARIs) available to you or all of the images available to you. The images available to you include public images, private images that you own, and private images owned by other AWS accounts for which you have explicit launch permissions. Recently deregistered images might appear in the returned results for a short interval.
    */
   describeImages(callback?: (err: AWSError, data: EC2.Types.DescribeImagesResult) => void): Request<EC2.Types.DescribeImagesResult, AWSError>;
   /**
@@ -1477,19 +1477,19 @@ declare class EC2 extends Service {
    */
   describeScheduledInstanceAvailability(callback?: (err: AWSError, data: EC2.Types.DescribeScheduledInstanceAvailabilityResult) => void): Request<EC2.Types.DescribeScheduledInstanceAvailabilityResult, AWSError>;
   /**
-   * Describes one or more of your Scheduled Instances.
+   * Describes the specified Scheduled Instances or all your Scheduled Instances.
    */
   describeScheduledInstances(params: EC2.Types.DescribeScheduledInstancesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeScheduledInstancesResult) => void): Request<EC2.Types.DescribeScheduledInstancesResult, AWSError>;
   /**
-   * Describes one or more of your Scheduled Instances.
+   * Describes the specified Scheduled Instances or all your Scheduled Instances.
    */
   describeScheduledInstances(callback?: (err: AWSError, data: EC2.Types.DescribeScheduledInstancesResult) => void): Request<EC2.Types.DescribeScheduledInstancesResult, AWSError>;
   /**
-   * [EC2-VPC only] Describes the VPCs on the other side of a VPC peering connection that are referencing the security groups you've specified in this request.
+   * [VPC only] Describes the VPCs on the other side of a VPC peering connection that are referencing the security groups you've specified in this request.
    */
   describeSecurityGroupReferences(params: EC2.Types.DescribeSecurityGroupReferencesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeSecurityGroupReferencesResult) => void): Request<EC2.Types.DescribeSecurityGroupReferencesResult, AWSError>;
   /**
-   * [EC2-VPC only] Describes the VPCs on the other side of a VPC peering connection that are referencing the security groups you've specified in this request.
+   * [VPC only] Describes the VPCs on the other side of a VPC peering connection that are referencing the security groups you've specified in this request.
    */
   describeSecurityGroupReferences(callback?: (err: AWSError, data: EC2.Types.DescribeSecurityGroupReferencesResult) => void): Request<EC2.Types.DescribeSecurityGroupReferencesResult, AWSError>;
   /**
@@ -1565,11 +1565,11 @@ declare class EC2 extends Service {
    */
   describeSpotPriceHistory(callback?: (err: AWSError, data: EC2.Types.DescribeSpotPriceHistoryResult) => void): Request<EC2.Types.DescribeSpotPriceHistoryResult, AWSError>;
   /**
-   * [EC2-VPC only] Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in a peer VPC, or a security group in a peer VPC for which the VPC peering connection has been deleted.
+   * [VPC only] Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in a peer VPC, or a security group in a peer VPC for which the VPC peering connection has been deleted.
    */
   describeStaleSecurityGroups(params: EC2.Types.DescribeStaleSecurityGroupsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeStaleSecurityGroupsResult) => void): Request<EC2.Types.DescribeStaleSecurityGroupsResult, AWSError>;
   /**
-   * [EC2-VPC only] Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in a peer VPC, or a security group in a peer VPC for which the VPC peering connection has been deleted.
+   * [VPC only] Describes the stale security group rules for security groups in a specified VPC. Rules are stale when they reference a deleted security group in a peer VPC, or a security group in a peer VPC for which the VPC peering connection has been deleted.
    */
   describeStaleSecurityGroups(callback?: (err: AWSError, data: EC2.Types.DescribeStaleSecurityGroupsResult) => void): Request<EC2.Types.DescribeStaleSecurityGroupsResult, AWSError>;
   /**
@@ -2341,11 +2341,11 @@ declare class EC2 extends Service {
    */
   purchaseReservedInstancesOffering(callback?: (err: AWSError, data: EC2.Types.PurchaseReservedInstancesOfferingResult) => void): Request<EC2.Types.PurchaseReservedInstancesOfferingResult, AWSError>;
   /**
-   * Purchases one or more Scheduled Instances with the specified schedule. Scheduled Instances enable you to purchase Amazon EC2 compute capacity by the hour for a one-year term. Before you can purchase a Scheduled Instance, you must call DescribeScheduledInstanceAvailability to check for available schedules and obtain a purchase token. After you purchase a Scheduled Instance, you must call RunScheduledInstances during each scheduled time period. After you purchase a Scheduled Instance, you can't cancel, modify, or resell your purchase.
+   * Purchases the Scheduled Instances with the specified schedule. Scheduled Instances enable you to purchase Amazon EC2 compute capacity by the hour for a one-year term. Before you can purchase a Scheduled Instance, you must call DescribeScheduledInstanceAvailability to check for available schedules and obtain a purchase token. After you purchase a Scheduled Instance, you must call RunScheduledInstances during each scheduled time period. After you purchase a Scheduled Instance, you can't cancel, modify, or resell your purchase.
    */
   purchaseScheduledInstances(params: EC2.Types.PurchaseScheduledInstancesRequest, callback?: (err: AWSError, data: EC2.Types.PurchaseScheduledInstancesResult) => void): Request<EC2.Types.PurchaseScheduledInstancesResult, AWSError>;
   /**
-   * Purchases one or more Scheduled Instances with the specified schedule. Scheduled Instances enable you to purchase Amazon EC2 compute capacity by the hour for a one-year term. Before you can purchase a Scheduled Instance, you must call DescribeScheduledInstanceAvailability to check for available schedules and obtain a purchase token. After you purchase a Scheduled Instance, you must call RunScheduledInstances during each scheduled time period. After you purchase a Scheduled Instance, you can't cancel, modify, or resell your purchase.
+   * Purchases the Scheduled Instances with the specified schedule. Scheduled Instances enable you to purchase Amazon EC2 compute capacity by the hour for a one-year term. Before you can purchase a Scheduled Instance, you must call DescribeScheduledInstanceAvailability to check for available schedules and obtain a purchase token. After you purchase a Scheduled Instance, you must call RunScheduledInstances during each scheduled time period. After you purchase a Scheduled Instance, you can't cancel, modify, or resell your purchase.
    */
   purchaseScheduledInstances(callback?: (err: AWSError, data: EC2.Types.PurchaseScheduledInstancesResult) => void): Request<EC2.Types.PurchaseScheduledInstancesResult, AWSError>;
   /**
@@ -2533,19 +2533,19 @@ declare class EC2 extends Service {
    */
   revokeClientVpnIngress(callback?: (err: AWSError, data: EC2.Types.RevokeClientVpnIngressResult) => void): Request<EC2.Types.RevokeClientVpnIngressResult, AWSError>;
   /**
-   * [EC2-VPC only] Removes the specified egress rules from a security group for EC2-VPC. This action doesn't apply to security groups for use in EC2-Classic. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly. Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
+   * [VPC only] Removes the specified egress rules from a security group for EC2-VPC. This action doesn't apply to security groups for use in EC2-Classic. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly. Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
    */
   revokeSecurityGroupEgress(params: EC2.Types.RevokeSecurityGroupEgressRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * [EC2-VPC only] Removes the specified egress rules from a security group for EC2-VPC. This action doesn't apply to security groups for use in EC2-Classic. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly. Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
+   * [VPC only] Removes the specified egress rules from a security group for EC2-VPC. This action doesn't apply to security groups for use in EC2-Classic. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly. Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
    */
   revokeSecurityGroupEgress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the specified ingress rules from a security group. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly.  [EC2-Classic security groups only] If the values you specify do not match the existing rule's values, no error is returned. Use DescribeSecurityGroups to verify that the rule has been removed.  Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
+   * Removes the specified ingress rules from a security group. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly.  [EC2-Classic only] If the values you specify do not match the existing rule's values, no error is returned. Use DescribeSecurityGroups to verify that the rule has been removed.  Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
    */
   revokeSecurityGroupIngress(params: EC2.Types.RevokeSecurityGroupIngressRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the specified ingress rules from a security group. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly.  [EC2-Classic security groups only] If the values you specify do not match the existing rule's values, no error is returned. Use DescribeSecurityGroups to verify that the rule has been removed.  Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
+   * Removes the specified ingress rules from a security group. To remove a rule, the values that you specify (for example, ports) must match the existing rule's values exactly.  [EC2-Classic only] If the values you specify do not match the existing rule's values, no error is returned. Use DescribeSecurityGroups to verify that the rule has been removed.  Each rule consists of the protocol and the CIDR range or source security group. For the TCP and UDP protocols, you must also specify the destination port or range of ports. For the ICMP protocol, you must also specify the ICMP type and code. If the security group rule has a description, you do not have to specify the description to revoke the rule. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.
    */
   revokeSecurityGroupIngress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -2629,11 +2629,11 @@ declare class EC2 extends Service {
    */
   unmonitorInstances(callback?: (err: AWSError, data: EC2.Types.UnmonitorInstancesResult) => void): Request<EC2.Types.UnmonitorInstancesResult, AWSError>;
   /**
-   * [EC2-VPC only] Updates the description of an egress (outbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously. You specify the description as part of the IP permissions structure. You can remove a description for a security group rule by omitting the description parameter in the request.
+   * [VPC only] Updates the description of an egress (outbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously. You specify the description as part of the IP permissions structure. You can remove a description for a security group rule by omitting the description parameter in the request.
    */
   updateSecurityGroupRuleDescriptionsEgress(params: EC2.Types.UpdateSecurityGroupRuleDescriptionsEgressRequest, callback?: (err: AWSError, data: EC2.Types.UpdateSecurityGroupRuleDescriptionsEgressResult) => void): Request<EC2.Types.UpdateSecurityGroupRuleDescriptionsEgressResult, AWSError>;
   /**
-   * [EC2-VPC only] Updates the description of an egress (outbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously. You specify the description as part of the IP permissions structure. You can remove a description for a security group rule by omitting the description parameter in the request.
+   * [VPC only] Updates the description of an egress (outbound) security group rule. You can replace an existing description, or add a description to a rule that did not have one previously. You specify the description as part of the IP permissions structure. You can remove a description for a security group rule by omitting the description parameter in the request.
    */
   updateSecurityGroupRuleDescriptionsEgress(callback?: (err: AWSError, data: EC2.Types.UpdateSecurityGroupRuleDescriptionsEgressResult) => void): Request<EC2.Types.UpdateSecurityGroupRuleDescriptionsEgressResult, AWSError>;
   /**
@@ -3112,11 +3112,11 @@ declare namespace EC2 {
   }
   export interface AllocateHostsRequest {
     /**
-     * This is enabled by default. This property allows instances to be automatically placed onto available Dedicated Hosts, when you are launching instances without specifying a host ID. Default: Enabled
+     * Indicates whether the host accepts any untargeted instance launches that match its instance type configuration, or if it only accepts Host tenancy instance launches that specify its unique host ID. For more information, see  Understanding Instance Placement and Host Affinity in the Amazon EC2 User Guide for Linux Instances. Default: on 
      */
     AutoPlacement?: AutoPlacement;
     /**
-     * The Availability Zone for the Dedicated Hosts.
+     * The Availability Zone in which to allocate the Dedicated Host.
      */
     AvailabilityZone: String;
     /**
@@ -3124,7 +3124,7 @@ declare namespace EC2 {
      */
     ClientToken?: String;
     /**
-     * Specify the instance type for which to configure your Dedicated Hosts. When you specify the instance type, that is the only instance type that you can launch onto that host.
+     * Specifies the instance type for which to configure your Dedicated Hosts. When you specify the instance type, that is the only instance type that you can launch onto that host.
      */
     InstanceType: String;
     /**
@@ -3233,7 +3233,7 @@ declare namespace EC2 {
      */
     InstanceId?: String;
     /**
-     * The Elastic IP address. This is required for EC2-Classic.
+     * The Elastic IP address to associate with the instance. This is required for EC2-Classic.
      */
     PublicIp?: String;
     /**
@@ -3245,7 +3245,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * [EC2-VPC] The ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID.
+     * [EC2-VPC] The ID of the network interface. If the instance has more than one network interface, you must specify a network interface ID. For EC2-VPC, you can specify either the instance ID or the network interface ID, but not both. 
      */
     NetworkInterfaceId?: String;
     /**
@@ -3637,11 +3637,11 @@ declare namespace EC2 {
   }
   export interface AuthorizeSecurityGroupIngressRequest {
     /**
-     * The CIDR IPv4 address range. You can't specify this parameter when specifying a source security group.
+     * The IPv4 address range, in CIDR format. You can't specify this parameter when specifying a source security group. To specify an IPv6 address range, use a set of IP permissions. Alternatively, use a set of IP permissions to specify multiple rules and a description for the rule.
      */
     CidrIp?: String;
     /**
-     * The start of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 type number. For the ICMP/ICMPv6 type number, use -1 to specify all types. If you specify all ICMP/ICMPv6 types, you must specify all codes.
+     * The start of port range for the TCP and UDP protocols, or an ICMP type number. For the ICMP type number, use -1 to specify all types. If you specify all ICMP types, you must specify all codes. Alternatively, use a set of IP permissions to specify multiple rules and a description for the rule.
      */
     FromPort?: Integer;
     /**
@@ -3653,11 +3653,11 @@ declare namespace EC2 {
      */
     GroupName?: String;
     /**
-     * The sets of IP permissions. Can be used to specify multiple rules in a single command.
+     * The sets of IP permissions.
      */
     IpPermissions?: IpPermissionList;
     /**
-     * The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers). (VPC only) Use -1 to specify all protocols. If you specify -1, or a protocol number other than tcp, udp, icmp, or 58 (ICMPv6), traffic on all ports is allowed, regardless of any ports you specify. For tcp, udp, and icmp, you must specify a port range. For protocol 58 (ICMPv6), you can optionally specify a port range; if you don't, traffic for all types and codes is allowed.
+     * The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers). To specify icmpv6, use a set of IP permissions. [VPC only] Use -1 to specify all protocols. If you specify -1 or a protocol other than tcp, udp, or icmp, traffic on all ports is allowed, regardless of any ports you specify. Alternatively, use a set of IP permissions to specify multiple rules and a description for the rule.
      */
     IpProtocol?: String;
     /**
@@ -3669,7 +3669,7 @@ declare namespace EC2 {
      */
     SourceSecurityGroupOwnerId?: String;
     /**
-     * The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code number. For the ICMP/ICMPv6 code number, use -1 to specify all codes. If you specify all ICMP/ICMPv6 types, you must specify all codes.
+     * The end of port range for the TCP and UDP protocols, or an ICMP code number. For the ICMP code number, use -1 to specify all codes. If you specify all ICMP types, you must specify all codes. Alternatively, use a set of IP permissions to specify multiple rules and a description for the rule.
      */
     ToPort?: Integer;
     /**
@@ -5051,31 +5051,31 @@ declare namespace EC2 {
      */
     ClientToken?: String;
     /**
-     * The ARN for the IAM role that's used to post flow logs to a log group.
+     * The ARN for the IAM role that permits Amazon EC2 to publish flow logs to a CloudWatch Logs log group in your account. If you specify LogDestinationType as s3, do not specify DeliverLogsPermissionArn or LogGroupName.
      */
     DeliverLogsPermissionArn?: String;
     /**
-     * The name of the log group.
+     * The name of a new or existing CloudWatch Logs log group where Amazon EC2 publishes your flow logs. If you specify LogDestinationType as s3, do not specify DeliverLogsPermissionArn or LogGroupName.
      */
     LogGroupName?: String;
     /**
-     * One or more subnet, network interface, or VPC IDs. Constraints: Maximum of 1000 resources
+     * The ID of the subnet, network interface, or VPC for which you want to create a flow log. Constraints: Maximum of 1000 resources
      */
     ResourceIds: ValueStringList;
     /**
-     * The type of resource on which to create the flow log.
+     * The type of resource for which to create the flow log. For example, if you specified a VPC ID for the ResourceId property, specify VPC for this property.
      */
     ResourceType: FlowLogsResourceType;
     /**
-     * The type of traffic to log.
+     * The type of traffic to log. You can log traffic that the resource accepts or rejects, or all traffic.
      */
     TrafficType: TrafficType;
     /**
-     * Specifies the type of destination to which the flow log data is to be published. Flow log data can be published to CloudWatch Logs or Amazon S3. To publish flow log data to CloudWatch Logs, specify cloud-watch-logs. To publish flow log data to Amazon S3, specify s3. Default: cloud-watch-logs 
+     * Specifies the type of destination to which the flow log data is to be published. Flow log data can be published to CloudWatch Logs or Amazon S3. To publish flow log data to CloudWatch Logs, specify cloud-watch-logs. To publish flow log data to Amazon S3, specify s3. If you specify LogDestinationType as s3, do not specify DeliverLogsPermissionArn or LogGroupName. Default: cloud-watch-logs 
      */
     LogDestinationType?: LogDestinationType;
     /**
-     * Specifies the destination to which the flow log data is to be published. Flow log data can be published to an CloudWatch Logs log group or an Amazon S3 bucket. The value specified for this parameter depends on the value specified for LogDestinationType. If LogDestinationType is not specified or cloud-watch-logs, specify the Amazon Resource Name (ARN) of the CloudWatch Logs log group. If LogDestinationType is s3, specify the ARN of the Amazon S3 bucket. You can also specify a subfolder in the bucket. To specify a subfolder in the bucket, use the following ARN format: bucket_ARN/subfolder_name/. For example, to specify a subfolder named my-logs in a bucket named my-bucket, use the following ARN: arn:aws:s3:::my-bucket/my-logs/. You cannot use AWSLogs as a subfolder name. This is a reserved term.
+     * Specifies the destination to which the flow log data is to be published. Flow log data can be published to a CloudWatch Logs log group or an Amazon S3 bucket. The value specified for this parameter depends on the value specified for LogDestinationType. If LogDestinationType is not specified or cloud-watch-logs, specify the Amazon Resource Name (ARN) of the CloudWatch Logs log group. If LogDestinationType is s3, specify the ARN of the Amazon S3 bucket. You can also specify a subfolder in the bucket. To specify a subfolder in the bucket, use the following ARN format: bucket_ARN/subfolder_name/. For example, to specify a subfolder named my-logs in a bucket named my-bucket, use the following ARN: arn:aws:s3:::my-bucket/my-logs/. You cannot use AWSLogs as a subfolder name. This is a reserved term.
      */
     LogDestination?: String;
   }
@@ -5415,6 +5415,10 @@ declare namespace EC2 {
      */
     SecondaryPrivateIpAddressCount?: Integer;
     /**
+     * Indicates whether the network interface is an Elastic Fabric Adapter (EFA). Only specify this parameter to create an EFA. For more information, see Elastic Fabric Adapter in the Amazon Elastic Compute Cloud User Guide. If you are not creating an EFA ENI, omit this parameter. 
+     */
+    InterfaceType?: NetworkInterfaceCreationType;
+    /**
      * The ID of the subnet to associate with the network interface.
      */
     SubnetId: String;
@@ -5639,7 +5643,7 @@ declare namespace EC2 {
      */
     Resources: ResourceIdList;
     /**
-     * One or more tags. The value parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string. 
+     * The tags. The value parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string.
      */
     Tags: TagList;
   }
@@ -5681,7 +5685,7 @@ declare namespace EC2 {
      */
     TransitGatewayAttachmentId?: String;
     /**
-     * Indicates whether traffic matching this route is to be dropped.
+     * Indicates whether to drop traffic if the target isn't available.
      */
     Blackhole?: Boolean;
     /**
@@ -6525,7 +6529,7 @@ declare namespace EC2 {
      */
     Resources: ResourceIdList;
     /**
-     * One or more tags to delete. Specify a tag key and an optional tag value to delete specific tags. If you specify a tag key without a tag value, we delete any tag with this key regardless of its value. If you specify a tag key with an empty string as the tag value, we delete the tag only if its value is an empty string. If you omit this parameter, we delete all user-defined tags for the specified resources. We do not delete AWS-generated tags (tags that have the aws: prefix).
+     * The tags to delete. Specify a tag key and an optional tag value to delete specific tags. If you specify a tag key without a tag value, we delete any tag with this key regardless of its value. If you specify a tag key with an empty string as the tag value, we delete the tag only if its value is an empty string. If you omit this parameter, we delete all user-defined tags for the specified resources. We do not delete AWS-generated tags (tags that have the aws: prefix).
      */
     Tags?: TagList;
   }
@@ -6819,11 +6823,11 @@ declare namespace EC2 {
   }
   export interface DescribeBundleTasksRequest {
     /**
-     * One or more bundle task IDs. Default: Describes all your bundle tasks.
+     * The bundle task IDs. Default: Describes all your bundle tasks.
      */
     BundleIds?: BundleIdStringList;
     /**
-     * One or more filters.    bundle-id - The ID of the bundle task.    error-code - If the task failed, the error code returned.    error-message - If the task failed, the error message returned.    instance-id - The ID of the instance.    progress - The level of task completion, as a percentage (for example, 20%).    s3-bucket - The Amazon S3 bucket to store the AMI.    s3-prefix - The beginning of the AMI name.    start-time - The time the task started (for example, 2013-09-15T17:15:20.000Z).    state - The state of the task (pending | waiting-for-shutdown | bundling | storing | cancelling | complete | failed).    update-time - The time of the most recent update for the task.  
+     * The filters.    bundle-id - The ID of the bundle task.    error-code - If the task failed, the error code returned.    error-message - If the task failed, the error message returned.    instance-id - The ID of the instance.    progress - The level of task completion, as a percentage (for example, 20%).    s3-bucket - The Amazon S3 bucket to store the AMI.    s3-prefix - The beginning of the AMI name.    start-time - The time the task started (for example, 2013-09-15T17:15:20.000Z).    state - The state of the task (pending | waiting-for-shutdown | bundling | storing | cancelling | complete | failed).    update-time - The time of the most recent update for the task.  
      */
     Filters?: FilterList;
     /**
@@ -7092,7 +7096,7 @@ declare namespace EC2 {
   export type DescribeConversionTaskList = ConversionTask[];
   export interface DescribeConversionTasksRequest {
     /**
-     * One or more conversion task IDs.
+     * The conversion task IDs.
      */
     ConversionTaskIds?: ConversionIdStringList;
     /**
@@ -7176,7 +7180,7 @@ declare namespace EC2 {
   }
   export interface DescribeElasticGpusRequest {
     /**
-     * One or more Elastic Graphics accelerator IDs.
+     * The Elastic Graphics accelerator IDs.
      */
     ElasticGpuIds?: ElasticGpuIdSet;
     /**
@@ -7184,7 +7188,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more filters.    availability-zone - The Availability Zone in which the Elastic Graphics accelerator resides.    elastic-gpu-health - The status of the Elastic Graphics accelerator (OK | IMPAIRED).    elastic-gpu-state - The state of the Elastic Graphics accelerator (ATTACHED).    elastic-gpu-type - The type of Elastic Graphics accelerator; for example, eg1.medium.    instance-id - The ID of the instance to which the Elastic Graphics accelerator is associated.  
+     * The filters.    availability-zone - The Availability Zone in which the Elastic Graphics accelerator resides.    elastic-gpu-health - The status of the Elastic Graphics accelerator (OK | IMPAIRED).    elastic-gpu-state - The state of the Elastic Graphics accelerator (ATTACHED).    elastic-gpu-type - The type of Elastic Graphics accelerator; for example, eg1.medium.    instance-id - The ID of the instance to which the Elastic Graphics accelerator is associated.  
      */
     Filters?: FilterList;
     /**
@@ -7212,7 +7216,7 @@ declare namespace EC2 {
   }
   export interface DescribeExportTasksRequest {
     /**
-     * One or more export task IDs.
+     * The export task IDs.
      */
     ExportTaskIds?: ExportTaskIdStringList;
   }
@@ -7306,7 +7310,7 @@ declare namespace EC2 {
      */
     FleetId: FleetIdentifier;
     /**
-     * One or more filters.    instance-type - The instance type.  
+     * The filters.    instance-type - The instance type.  
      */
     Filters?: FilterList;
   }
@@ -7366,7 +7370,7 @@ declare namespace EC2 {
      */
     FleetIds?: FleetIdSet;
     /**
-     * One or more filters.    activity-status - The progress of the EC2 Fleet ( error | pending-fulfillment | pending-termination | fulfilled).    excess-capacity-termination-policy - Indicates whether to terminate running instances if the target capacity is decreased below the current EC2 Fleet size (true | false).    fleet-state - The state of the EC2 Fleet (submitted | active | deleted | failed | deleted-running | deleted-terminating | modifying).    replace-unhealthy-instances - Indicates whether EC2 Fleet should replace unhealthy instances (true | false).    type - The type of request (instant | request | maintain).  
+     * The filters.    activity-status - The progress of the EC2 Fleet ( error | pending-fulfillment | pending-termination | fulfilled).    excess-capacity-termination-policy - Indicates whether to terminate running instances if the target capacity is decreased below the current EC2 Fleet size (true | false).    fleet-state - The state of the EC2 Fleet (submitted | active | deleted | failed | deleted-running | deleted-terminating | modifying).    replace-unhealthy-instances - Indicates whether EC2 Fleet should replace unhealthy instances (true | false).    type - The type of request (instant | request | maintain).  
      */
     Filters?: FilterList;
   }
@@ -7438,7 +7442,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more AFI IDs.
+     * The AFI IDs.
      */
     FpgaImageIds?: FpgaImageIdList;
     /**
@@ -7446,7 +7450,7 @@ declare namespace EC2 {
      */
     Owners?: OwnerStringList;
     /**
-     * One or more filters.    create-time - The creation time of the AFI.    fpga-image-id - The FPGA image identifier (AFI ID).    fpga-image-global-id - The global FPGA image identifier (AGFI ID).    name - The name of the AFI.    owner-id - The AWS account ID of the AFI owner.    product-code - The product code.    shell-version - The version of the AWS Shell that was used to create the bitstream.    state - The state of the AFI (pending | failed | available | unavailable).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    update-time - The time of the most recent update.  
+     * The filters.    create-time - The creation time of the AFI.    fpga-image-id - The FPGA image identifier (AFI ID).    fpga-image-global-id - The global FPGA image identifier (AGFI ID).    name - The name of the AFI.    owner-id - The AWS account ID of the AFI owner.    product-code - The product code.    shell-version - The version of the AWS Shell that was used to create the bitstream.    state - The state of the AFI (pending | failed | available | unavailable).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    update-time - The time of the most recent update.  
      */
     Filters?: FilterList;
     /**
@@ -7460,7 +7464,7 @@ declare namespace EC2 {
   }
   export interface DescribeFpgaImagesResult {
     /**
-     * Information about one or more FPGA images.
+     * Information about the FPGA images.
      */
     FpgaImages?: FpgaImageList;
     /**
@@ -7470,7 +7474,7 @@ declare namespace EC2 {
   }
   export interface DescribeHostReservationOfferingsRequest {
     /**
-     * One or more filters.    instance-family - The instance family of the offering (for example, m4).    payment-option - The payment option (NoUpfront | PartialUpfront | AllUpfront).  
+     * The filters.    instance-family - The instance family of the offering (for example, m4).    payment-option - The payment option (NoUpfront | PartialUpfront | AllUpfront).  
      */
     Filter?: FilterList;
     /**
@@ -7507,11 +7511,11 @@ declare namespace EC2 {
   export type DescribeHostReservationsMaxResults = number;
   export interface DescribeHostReservationsRequest {
     /**
-     * One or more filters.    instance-family - The instance family (for example, m4).    payment-option - The payment option (NoUpfront | PartialUpfront | AllUpfront).    state - The state of the reservation (payment-pending | payment-failed | active | retired).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * The filters.    instance-family - The instance family (for example, m4).    payment-option - The payment option (NoUpfront | PartialUpfront | AllUpfront).    state - The state of the reservation (payment-pending | payment-failed | active | retired).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filter?: FilterList;
     /**
-     * One or more host reservation IDs.
+     * The host reservation IDs.
      */
     HostReservationIdSet?: HostReservationIdSet;
     /**
@@ -7535,7 +7539,7 @@ declare namespace EC2 {
   }
   export interface DescribeHostsRequest {
     /**
-     * One or more filters.    auto-placement - Whether auto-placement is enabled or disabled (on | off).    availability-zone - The Availability Zone of the host.    client-token - The idempotency token that you provided when you allocated the host.    host-reservation-id - The ID of the reservation assigned to this host.    instance-type - The instance type size that the Dedicated Host is configured to support.    state - The allocation state of the Dedicated Host (available | under-assessment | permanent-failure | released | released-permanent-failure).    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
+     * The filters.    auto-placement - Whether auto-placement is enabled or disabled (on | off).    availability-zone - The Availability Zone of the host.    client-token - The idempotency token that you provided when you allocated the host.    host-reservation-id - The ID of the reservation assigned to this host.    instance-type - The instance type size that the Dedicated Host is configured to support.    state - The allocation state of the Dedicated Host (available | under-assessment | permanent-failure | released | released-permanent-failure).    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filter?: FilterList;
     /**
@@ -7563,11 +7567,11 @@ declare namespace EC2 {
   }
   export interface DescribeIamInstanceProfileAssociationsRequest {
     /**
-     * One or more IAM instance profile associations.
+     * The IAM instance profile associations.
      */
     AssociationIds?: AssociationIdList;
     /**
-     * One or more filters.    instance-id - The ID of the instance.    state - The state of the association (associating | associated | disassociating | disassociated).  
+     * The filters.    instance-id - The ID of the instance.    state - The state of the association (associating | associated | disassociating | disassociated).  
      */
     Filters?: FilterList;
     /**
@@ -7581,7 +7585,7 @@ declare namespace EC2 {
   }
   export interface DescribeIamInstanceProfileAssociationsResult {
     /**
-     * Information about one or more IAM instance profile associations.
+     * Information about the IAM instance profile associations.
      */
     IamInstanceProfileAssociations?: IamInstanceProfileAssociationSet;
     /**
@@ -7637,11 +7641,11 @@ declare namespace EC2 {
      */
     ExecutableUsers?: ExecutableByStringList;
     /**
-     * One or more filters.    architecture - The image architecture (i386 | x86_64).    block-device-mapping.delete-on-termination - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name specified in the block device mapping (for example, /dev/sdh or xvdh).    block-device-mapping.snapshot-id - The ID of the snapshot used for the EBS volume.    block-device-mapping.volume-size - The volume size of the EBS volume, in GiB.    block-device-mapping.volume-type - The volume type of the EBS volume (gp2 | io1 | st1 | sc1 | standard).    block-device-mapping.encrypted - A Boolean that indicates whether the EBS volume is encrypted.    description - The description of the image (provided during image creation).    ena-support - A Boolean that indicates whether enhanced networking with ENA is enabled.    hypervisor - The hypervisor type (ovm | xen).    image-id - The ID of the image.    image-type - The image type (machine | kernel | ramdisk).    is-public - A Boolean that indicates whether the image is public.    kernel-id - The kernel ID.    manifest-location - The location of the image manifest.    name - The name of the AMI (provided during image creation).    owner-alias - String value from an Amazon-maintained list (amazon | aws-marketplace | microsoft) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console.    owner-id - The AWS account ID of the image owner.    platform - The platform. To only list Windows-based AMIs, use windows.    product-code - The product code.    product-code.type - The type of the product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    root-device-name - The device name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    state - The state of the image (available | pending | failed).    state-reason-code - The reason code for the state change.    state-reason-message - The message for the state change.    sriov-net-support - A value of simple indicates that enhanced networking with the Intel 82599 VF interface is enabled.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    virtualization-type - The virtualization type (paravirtual | hvm).  
+     * The filters.    architecture - The image architecture (i386 | x86_64).    block-device-mapping.delete-on-termination - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name specified in the block device mapping (for example, /dev/sdh or xvdh).    block-device-mapping.snapshot-id - The ID of the snapshot used for the EBS volume.    block-device-mapping.volume-size - The volume size of the EBS volume, in GiB.    block-device-mapping.volume-type - The volume type of the EBS volume (gp2 | io1 | st1 | sc1 | standard).    block-device-mapping.encrypted - A Boolean that indicates whether the EBS volume is encrypted.    description - The description of the image (provided during image creation).    ena-support - A Boolean that indicates whether enhanced networking with ENA is enabled.    hypervisor - The hypervisor type (ovm | xen).    image-id - The ID of the image.    image-type - The image type (machine | kernel | ramdisk).    is-public - A Boolean that indicates whether the image is public.    kernel-id - The kernel ID.    manifest-location - The location of the image manifest.    name - The name of the AMI (provided during image creation).    owner-alias - String value from an Amazon-maintained list (amazon | aws-marketplace | microsoft) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console.    owner-id - The AWS account ID of the image owner.    platform - The platform. To only list Windows-based AMIs, use windows.    product-code - The product code.    product-code.type - The type of the product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    root-device-name - The device name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    state - The state of the image (available | pending | failed).    state-reason-code - The reason code for the state change.    state-reason-message - The message for the state change.    sriov-net-support - A value of simple indicates that enhanced networking with the Intel 82599 VF interface is enabled.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    virtualization-type - The virtualization type (paravirtual | hvm).  
      */
     Filters?: FilterList;
     /**
-     * One or more image IDs. Default: Describes all images available to you.
+     * The image IDs. Default: Describes all images available to you.
      */
     ImageIds?: ImageIdStringList;
     /**
@@ -7697,7 +7701,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more filters.
+     * The filters.
      */
     Filters?: FilterList;
     /**
@@ -7808,7 +7812,7 @@ declare namespace EC2 {
   }
   export interface DescribeInstancesRequest {
     /**
-     * The filters.    affinity - The affinity setting for an instance running on a Dedicated Host (default | host).    architecture - The instance architecture (i386 | x86_64).    availability-zone - The Availability Zone of the instance.    block-device-mapping.attach-time - The attach time for an EBS volume mapped to the instance, for example, 2010-09-15T17:15:20.000Z.    block-device-mapping.delete-on-termination - A Boolean that indicates whether the EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name specified in the block device mapping (for example, /dev/sdh or xvdh).    block-device-mapping.status - The status for the EBS volume (attaching | attached | detaching | detached).    block-device-mapping.volume-id - The volume ID of the EBS volume.    client-token - The idempotency token you provided when you launched the instance.    dns-name - The public DNS name of the instance.    group-id - The ID of the security group for the instance. EC2-Classic only.    group-name - The name of the security group for the instance. EC2-Classic only.    hibernation-options.configured - A Boolean that indicates whether the instance is enabled for hibernation. A value of true means that the instance is enabled for hibernation.     host-id - The ID of the Dedicated Host on which the instance is running, if applicable.    hypervisor - The hypervisor type of the instance (ovm | xen).    iam-instance-profile.arn - The instance profile associated with the instance. Specified as an ARN.    image-id - The ID of the image used to launch the instance.    instance-id - The ID of the instance.    instance-lifecycle - Indicates whether this is a Spot Instance or a Scheduled Instance (spot | scheduled).    instance-state-code - The state of the instance, as a 16-bit unsigned integer. The high byte is used for internal purposes and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).    instance-state-name - The state of the instance (pending | running | shutting-down | terminated | stopping | stopped).    instance-type - The type of instance (for example, t2.micro).    instance.group-id - The ID of the security group for the instance.     instance.group-name - The name of the security group for the instance.     ip-address - The public IPv4 address of the instance.    kernel-id - The kernel ID.    key-name - The name of the key pair used when the instance was launched.    launch-index - When launching multiple instances, this is the index for the instance in the launch group (for example, 0, 1, 2, and so on).     launch-time - The time when the instance was launched.    monitoring-state - Indicates whether detailed monitoring is enabled (disabled | enabled).    network-interface.addresses.private-ip-address - The private IPv4 address associated with the network interface.    network-interface.addresses.primary - Specifies whether the IPv4 address of the network interface is the primary private IPv4 address.    network-interface.addresses.association.public-ip - The ID of the association of an Elastic IP address (IPv4) with a network interface.    network-interface.addresses.association.ip-owner-id - The owner ID of the private IPv4 address associated with the network interface.    network-interface.association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    network-interface.association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    network-interface.association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    network-interface.association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    network-interface.attachment.attachment-id - The ID of the interface attachment.    network-interface.attachment.instance-id - The ID of the instance to which the network interface is attached.    network-interface.attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    network-interface.attachment.device-index - The device index to which the network interface is attached.    network-interface.attachment.status - The status of the attachment (attaching | attached | detaching | detached).    network-interface.attachment.attach-time - The time that the network interface was attached to an instance.    network-interface.attachment.delete-on-termination - Specifies whether the attachment is deleted when an instance is terminated.    network-interface.availability-zone - The Availability Zone for the network interface.    network-interface.description - The description of the network interface.    network-interface.group-id - The ID of a security group associated with the network interface.    network-interface.group-name - The name of a security group associated with the network interface.    network-interface.ipv6-addresses.ipv6-address - The IPv6 address associated with the network interface.    network-interface.mac-address - The MAC address of the network interface.    network-interface.network-interface-id - The ID of the network interface.    network-interface.owner-id - The ID of the owner of the network interface.    network-interface.private-dns-name - The private DNS name of the network interface.    network-interface.requester-id - The requester ID for the network interface.    network-interface.requester-managed - Indicates whether the network interface is being managed by AWS.    network-interface.status - The status of the network interface (available) | in-use).    network-interface.source-dest-check - Whether the network interface performs source/destination checking. A value of true means that checking is enabled, and false means that checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.    network-interface.subnet-id - The ID of the subnet for the network interface.    network-interface.vpc-id - The ID of the VPC for the network interface.    owner-id - The AWS account ID of the instance owner.    placement-group-name - The name of the placement group for the instance.    placement-partition-number - The partition in which the instance is located.    platform - The platform. Use windows if you have Windows instances; otherwise, leave blank.    private-dns-name - The private IPv4 DNS name of the instance.    private-ip-address - The private IPv4 address of the instance.    product-code - The product code associated with the AMI used to launch the instance.    product-code.type - The type of product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    reason - The reason for the current state of the instance (for example, shows "User Initiated [date]" when you stop or terminate the instance). Similar to the state-reason-code filter.    requester-id - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).    reservation-id - The ID of the instance's reservation. A reservation ID is created any time you launch an instance. A reservation ID has a one-to-one relationship with an instance launch request, but can be associated with more than one instance if you launch multiple instances using the same launch request. For example, if you launch one instance, you get one reservation ID. If you launch ten instances using the same launch request, you also get one reservation ID.    root-device-name - The device name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    source-dest-check - Indicates whether the instance performs source/destination checking. A value of true means that checking is enabled, and false means that checking is disabled. The value must be false for the instance to perform network address translation (NAT) in your VPC.     spot-instance-request-id - The ID of the Spot Instance request.    state-reason-code - The reason code for the state change.    state-reason-message - A message that describes the state change.    subnet-id - The ID of the subnet for the instance.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.    tenancy - The tenancy of an instance (dedicated | default | host).    virtualization-type - The virtualization type of the instance (paravirtual | hvm).    vpc-id - The ID of the VPC that the instance is running in.  
+     * The filters.    affinity - The affinity setting for an instance running on a Dedicated Host (default | host).    architecture - The instance architecture (i386 | x86_64).    availability-zone - The Availability Zone of the instance.    block-device-mapping.attach-time - The attach time for an EBS volume mapped to the instance, for example, 2010-09-15T17:15:20.000Z.    block-device-mapping.delete-on-termination - A Boolean that indicates whether the EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name specified in the block device mapping (for example, /dev/sdh or xvdh).    block-device-mapping.status - The status for the EBS volume (attaching | attached | detaching | detached).    block-device-mapping.volume-id - The volume ID of the EBS volume.    client-token - The idempotency token you provided when you launched the instance.    dns-name - The public DNS name of the instance.    group-id - The ID of the security group for the instance. EC2-Classic only.    group-name - The name of the security group for the instance. EC2-Classic only.    hibernation-options.configured - A Boolean that indicates whether the instance is enabled for hibernation. A value of true means that the instance is enabled for hibernation.     host-id - The ID of the Dedicated Host on which the instance is running, if applicable.    hypervisor - The hypervisor type of the instance (ovm | xen).    iam-instance-profile.arn - The instance profile associated with the instance. Specified as an ARN.    image-id - The ID of the image used to launch the instance.    instance-id - The ID of the instance.    instance-lifecycle - Indicates whether this is a Spot Instance or a Scheduled Instance (spot | scheduled).    instance-state-code - The state of the instance, as a 16-bit unsigned integer. The high byte is used for internal purposes and should be ignored. The low byte is set based on the state represented. The valid values are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64 (stopping), and 80 (stopped).    instance-state-name - The state of the instance (pending | running | shutting-down | terminated | stopping | stopped).    instance-type - The type of instance (for example, t2.micro).    instance.group-id - The ID of the security group for the instance.     instance.group-name - The name of the security group for the instance.     ip-address - The public IPv4 address of the instance.    kernel-id - The kernel ID.    key-name - The name of the key pair used when the instance was launched.    launch-index - When launching multiple instances, this is the index for the instance in the launch group (for example, 0, 1, 2, and so on).     launch-time - The time when the instance was launched.    monitoring-state - Indicates whether detailed monitoring is enabled (disabled | enabled).    network-interface.addresses.private-ip-address - The private IPv4 address associated with the network interface.    network-interface.addresses.primary - Specifies whether the IPv4 address of the network interface is the primary private IPv4 address.    network-interface.addresses.association.public-ip - The ID of the association of an Elastic IP address (IPv4) with a network interface.    network-interface.addresses.association.ip-owner-id - The owner ID of the private IPv4 address associated with the network interface.    network-interface.association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    network-interface.association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    network-interface.association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    network-interface.association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    network-interface.attachment.attachment-id - The ID of the interface attachment.    network-interface.attachment.instance-id - The ID of the instance to which the network interface is attached.    network-interface.attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    network-interface.attachment.device-index - The device index to which the network interface is attached.    network-interface.attachment.status - The status of the attachment (attaching | attached | detaching | detached).    network-interface.attachment.attach-time - The time that the network interface was attached to an instance.    network-interface.attachment.delete-on-termination - Specifies whether the attachment is deleted when an instance is terminated.    network-interface.availability-zone - The Availability Zone for the network interface.    network-interface.description - The description of the network interface.    network-interface.group-id - The ID of a security group associated with the network interface.    network-interface.group-name - The name of a security group associated with the network interface.    network-interface.ipv6-addresses.ipv6-address - The IPv6 address associated with the network interface.    network-interface.mac-address - The MAC address of the network interface.    network-interface.network-interface-id - The ID of the network interface.    network-interface.owner-id - The ID of the owner of the network interface.    network-interface.private-dns-name - The private DNS name of the network interface.    network-interface.requester-id - The requester ID for the network interface.    network-interface.requester-managed - Indicates whether the network interface is being managed by AWS.    network-interface.status - The status of the network interface (available) | in-use).    network-interface.source-dest-check - Whether the network interface performs source/destination checking. A value of true means that checking is enabled, and false means that checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.    network-interface.subnet-id - The ID of the subnet for the network interface.    network-interface.vpc-id - The ID of the VPC for the network interface.    owner-id - The AWS account ID of the instance owner.    placement-group-name - The name of the placement group for the instance.    placement-partition-number - The partition in which the instance is located.    platform - The platform. To list only Windows instances, use windows.    private-dns-name - The private IPv4 DNS name of the instance.    private-ip-address - The private IPv4 address of the instance.    product-code - The product code associated with the AMI used to launch the instance.    product-code.type - The type of product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    reason - The reason for the current state of the instance (for example, shows "User Initiated [date]" when you stop or terminate the instance). Similar to the state-reason-code filter.    requester-id - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).    reservation-id - The ID of the instance's reservation. A reservation ID is created any time you launch an instance. A reservation ID has a one-to-one relationship with an instance launch request, but can be associated with more than one instance if you launch multiple instances using the same launch request. For example, if you launch one instance, you get one reservation ID. If you launch ten instances using the same launch request, you also get one reservation ID.    root-device-name - The device name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    source-dest-check - Indicates whether the instance performs source/destination checking. A value of true means that checking is enabled, and false means that checking is disabled. The value must be false for the instance to perform network address translation (NAT) in your VPC.     spot-instance-request-id - The ID of the Spot Instance request.    state-reason-code - The reason code for the state change.    state-reason-message - A message that describes the state change.    subnet-id - The ID of the subnet for the instance.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.    tenancy - The tenancy of an instance (dedicated | default | host).    virtualization-type - The virtualization type of the instance (paravirtual | hvm).    vpc-id - The ID of the VPC that the instance is running in.  
      */
     Filters?: FilterList;
     /**
@@ -8134,7 +8138,7 @@ declare namespace EC2 {
   }
   export interface DescribeNetworkInterfacesRequest {
     /**
-     * One or more filters.    addresses.private-ip-address - The private IPv4 addresses associated with the network interface.    addresses.primary - Whether the private IPv4 address is the primary IP address associated with the network interface.     addresses.association.public-ip - The association ID returned when the network interface was associated with the Elastic IP address (IPv4).    addresses.association.owner-id - The owner ID of the addresses associated with the network interface.    association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    association.public-dns-name - The public DNS name for the network interface (IPv4).    attachment.attachment-id - The ID of the interface attachment.    attachment.attach.time - The time that the network interface was attached to an instance.    attachment.delete-on-termination - Indicates whether the attachment is deleted when an instance is terminated.    attachment.device-index - The device index to which the network interface is attached.    attachment.instance-id - The ID of the instance to which the network interface is attached.    attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    attachment.nat-gateway-id - The ID of the NAT gateway to which the network interface is attached.    attachment.status - The status of the attachment (attaching | attached | detaching | detached).    availability-zone - The Availability Zone of the network interface.    description - The description of the network interface.    group-id - The ID of a security group associated with the network interface.    group-name - The name of a security group associated with the network interface.    ipv6-addresses.ipv6-address - An IPv6 address associated with the network interface.    mac-address - The MAC address of the network interface.    network-interface-id - The ID of the network interface.    owner-id - The AWS account ID of the network interface owner.    private-ip-address - The private IPv4 address or addresses of the network interface.    private-dns-name - The private DNS name of the network interface (IPv4).    requester-id - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).    requester-managed - Indicates whether the network interface is being managed by an AWS service (for example, AWS Management Console, Auto Scaling, and so on).    source-desk-check - Indicates whether the network interface performs source/destination checking. A value of true means checking is enabled, and false means checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.     status - The status of the network interface. If the network interface is not attached to an instance, the status is available; if a network interface is attached to an instance the status is in-use.    subnet-id - The ID of the subnet for the network interface.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC for the network interface.  
+     * One or more filters.    addresses.private-ip-address - The private IPv4 addresses associated with the network interface.    addresses.primary - Whether the private IPv4 address is the primary IP address associated with the network interface.     addresses.association.public-ip - The association ID returned when the network interface was associated with the Elastic IP address (IPv4).    addresses.association.owner-id - The owner ID of the addresses associated with the network interface.    association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    association.public-dns-name - The public DNS name for the network interface (IPv4).    attachment.attachment-id - The ID of the interface attachment.    attachment.attach.time - The time that the network interface was attached to an instance.    attachment.delete-on-termination - Indicates whether the attachment is deleted when an instance is terminated.    attachment.device-index - The device index to which the network interface is attached.    attachment.instance-id - The ID of the instance to which the network interface is attached.    attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    attachment.nat-gateway-id - The ID of the NAT gateway to which the network interface is attached.    attachment.status - The status of the attachment (attaching | attached | detaching | detached).    availability-zone - The Availability Zone of the network interface.    description - The description of the network interface.    group-id - The ID of a security group associated with the network interface.    group-name - The name of a security group associated with the network interface.    ipv6-addresses.ipv6-address - An IPv6 address associated with the network interface.    mac-address - The MAC address of the network interface.    network-interface-id - The ID of the network interface.    owner-id - The AWS account ID of the network interface owner.    private-ip-address - The private IPv4 address or addresses of the network interface.    private-dns-name - The private DNS name of the network interface (IPv4).    requester-id - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).    requester-managed - Indicates whether the network interface is being managed by an AWS service (for example, AWS Management Console, Auto Scaling, and so on).    source-dest-check - Indicates whether the network interface performs source/destination checking. A value of true means checking is enabled, and false means checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.     status - The status of the network interface. If the network interface is not attached to an instance, the status is available; if a network interface is attached to an instance the status is in-use.    subnet-id - The ID of the subnet for the network interface.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC for the network interface.  
      */
     Filters?: FilterList;
     /**
@@ -8470,7 +8474,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more filters.    availability-zone - The Availability Zone (for example, us-west-2a).    instance-type - The instance type (for example, c4.large).    network-platform - The network platform (EC2-Classic or EC2-VPC).    platform - The platform (Linux/UNIX or Windows).  
+     * The filters.    availability-zone - The Availability Zone (for example, us-west-2a).    instance-type - The instance type (for example, c4.large).    network-platform - The network platform (EC2-Classic or EC2-VPC).    platform - The platform (Linux/UNIX or Windows).  
      */
     Filters?: FilterList;
     /**
@@ -8514,7 +8518,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more filters.    availability-zone - The Availability Zone (for example, us-west-2a).    instance-type - The instance type (for example, c4.large).    network-platform - The network platform (EC2-Classic or EC2-VPC).    platform - The platform (Linux/UNIX or Windows).  
+     * The filters.    availability-zone - The Availability Zone (for example, us-west-2a).    instance-type - The instance type (for example, c4.large).    network-platform - The network platform (EC2-Classic or EC2-VPC).    platform - The platform (Linux/UNIX or Windows).  
      */
     Filters?: FilterList;
     /**
@@ -8526,7 +8530,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
     /**
-     * One or more Scheduled Instance IDs.
+     * The Scheduled Instance IDs.
      */
     ScheduledInstanceIds?: ScheduledInstanceIdRequestSet;
     /**
@@ -8626,7 +8630,7 @@ declare namespace EC2 {
   }
   export interface DescribeSnapshotsRequest {
     /**
-     * The filters.    description - A description of the snapshot.    owner-alias - Value from an Amazon-maintained list (amazon | self | all | aws-marketplace | microsoft) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console.    owner-id - The ID of the AWS account that owns the snapshot.    progress - The progress of the snapshot, as a percentage (for example, 80%).    snapshot-id - The snapshot ID.    start-time - The time stamp when the snapshot was initiated.    status - The status of the snapshot (pending | completed | error).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    volume-id - The ID of the volume the snapshot is for.    volume-size - The size of the volume, in GiB.  
+     * The filters.    description - A description of the snapshot.    encrypted - Indicates whether the snapshot is encrypted (true | false)    owner-alias - Value from an Amazon-maintained list (amazon | self | all | aws-marketplace | microsoft) of snapshot owners. Not to be confused with the user-configured AWS account alias, which is set from the IAM console.    owner-id - The ID of the AWS account that owns the snapshot.    progress - The progress of the snapshot, as a percentage (for example, 80%).    snapshot-id - The snapshot ID.    start-time - The time stamp when the snapshot was initiated.    status - The status of the snapshot (pending | completed | error).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    volume-id - The ID of the volume the snapshot is for.    volume-size - The size of the volume, in GiB.  
      */
     Filters?: FilterList;
     /**
@@ -8918,7 +8922,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more filters.    key - The tag key.    resource-id - The ID of the resource.    resource-type - The resource type (customer-gateway | dedicated-host | dhcp-options | elastic-ip | fleet | fpga-image | image | instance | host-reservation | internet-gateway | launch-template | natgateway | network-acl | network-interface | reserved-instances | route-table | security-group | snapshot | spot-instances-request | subnet | volume | vpc | vpc-peering-connection | vpn-connection | vpn-gateway).    tag:&lt;key&gt; - The key/value combination of the tag. For example, specify "tag:Owner" for the filter name and "TeamA" for the filter value to find resources with the tag "Owner=TeamA".    value - The tag value.  
+     * The filters.    key - The tag key.    resource-id - The ID of the resource.    resource-type - The resource type (customer-gateway | dedicated-host | dhcp-options | elastic-ip | fleet | fpga-image | image | instance | host-reservation | internet-gateway | launch-template | natgateway | network-acl | network-interface | reserved-instances | route-table | security-group | snapshot | spot-instances-request | subnet | volume | vpc | vpc-peering-connection | vpn-connection | vpn-gateway).    tag:&lt;key&gt; - The key/value combination of the tag. For example, specify "tag:Owner" for the filter name and "TeamA" for the filter value to find resources with the tag "Owner=TeamA".    value - The tag value.  
      */
     Filters?: FilterList;
     /**
@@ -9162,7 +9166,7 @@ declare namespace EC2 {
   }
   export interface DescribeVolumesRequest {
     /**
-     * The filters.    attachment.attach-time - The time stamp when the attachment initiated.    attachment.delete-on-termination - Whether the volume is deleted on instance termination.    attachment.device - The device name specified in the block device mapping (for example, /dev/sda1).    attachment.instance-id - The ID of the instance the volume is attached to.    attachment.status - The attachment state (attaching | attached | detaching).    availability-zone - The Availability Zone in which the volume was created.    create-time - The time stamp when the volume was created.    encrypted - The encryption status of the volume.    size - The size of the volume, in GiB.    snapshot-id - The snapshot from which the volume was created.    status - The status of the volume (creating | available | in-use | deleting | deleted | error).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    volume-id - The volume ID.    volume-type - The Amazon EBS volume type. This can be gp2 for General Purpose SSD, io1 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for Magnetic volumes.  
+     * The filters.    attachment.attach-time - The time stamp when the attachment initiated.    attachment.delete-on-termination - Whether the volume is deleted on instance termination.    attachment.device - The device name specified in the block device mapping (for example, /dev/sda1).    attachment.instance-id - The ID of the instance the volume is attached to.    attachment.status - The attachment state (attaching | attached | detaching).    availability-zone - The Availability Zone in which the volume was created.    create-time - The time stamp when the volume was created.    encrypted - Indicates whether the volume is encrypted (true | false)    size - The size of the volume, in GiB.    snapshot-id - The snapshot from which the volume was created.    status - The status of the volume (creating | available | in-use | deleting | deleted | error).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    volume-id - The volume ID.    volume-type - The Amazon EBS volume type. This can be gp2 for General Purpose SSD, io1 for Provisioned IOPS SSD, st1 for Throughput Optimized HDD, sc1 for Cold HDD, or standard for Magnetic volumes.  
      */
     Filters?: FilterList;
     /**
@@ -9961,11 +9965,11 @@ declare namespace EC2 {
      */
     SnapshotId?: String;
     /**
-     * The size of the volume, in GiB. Constraints: 1-16384 for General Purpose SSD (gp2), 4-16384 for Provisioned IOPS SSD (io1), 500-16384 for Throughput Optimized HDD (st1), 500-16384 for Cold HDD (sc1), and 1-1024 for Magnetic (standard) volumes. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size. Default: If you're creating the volume from a snapshot and don't specify a volume size, the default is the snapshot size.
+     * The size of the volume, in GiB. Default: If you're creating the volume from a snapshot and don't specify a volume size, the default is the snapshot size. Constraints: 1-16384 for General Purpose SSD (gp2), 4-16384 for Provisioned IOPS SSD (io1), 500-16384 for Throughput Optimized HDD (st1), 500-16384 for Cold HDD (sc1), and 1-1024 for Magnetic (standard) volumes. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size.
      */
     VolumeSize?: Integer;
     /**
-     * The volume type: gp2, io1, st1, sc1, or standard. Default: standard 
+     * The volume type. If you set the type to io1, you must also set the Iops property. Default: standard 
      */
     VolumeType?: VolumeType;
     /**
@@ -10136,11 +10140,11 @@ declare namespace EC2 {
   }
   export interface EnableVgwRoutePropagationRequest {
     /**
-     * The ID of the virtual private gateway.
+     * The ID of the virtual private gateway that is attached to a VPC. The virtual private gateway must be attached to the same VPC that the routing tables are associated with. 
      */
     GatewayId: String;
     /**
-     * The ID of the route table.
+     * The ID of the route table. The routing table must be associated with the same VPC that the virtual private gateway is attached to. 
      */
     RouteTableId: String;
   }
@@ -10191,7 +10195,7 @@ declare namespace EC2 {
      */
     EventDescription?: String;
     /**
-     * The event. The following are the error events:    iamFleetRoleInvalid - The Spot Fleet did not have the required permissions either to launch or terminate an instance.    spotFleetRequestConfigurationInvalid - The configuration is not valid. For more information, see the description of the event.    spotInstanceCountLimitExceeded - You've reached the limit on the number of Spot Instances that you can launch.   The following are the fleetRequestChange events:    active - The Spot Fleet has been validated and Amazon EC2 is attempting to maintain the target number of running Spot Instances.    cancelled - The Spot Fleet is canceled and has no running Spot Instances. The Spot Fleet will be deleted two days after its instances were terminated.    cancelled_running - The Spot Fleet is canceled and does not launch additional Spot Instances. Existing Spot Instances continue to run until they are interrupted or terminated.    cancelled_terminating - The Spot Fleet is canceled and its Spot Instances are terminating.    expired - The Spot Fleet request has expired. A subsequent event indicates that the instances were terminated, if the request was created with TerminateInstancesWithExpiration set.    modify_in_progress - A request to modify the Spot Fleet request was accepted and is in progress.    modify_successful - The Spot Fleet request was modified.    price_update - The price for a launch configuration was adjusted because it was too high. This change is permanent.    submitted - The Spot Fleet request is being evaluated and Amazon EC2 is preparing to launch the target number of Spot Instances.   The following are the instanceChange events:    launched - A request was fulfilled and a new instance was launched.    terminated - An instance was terminated by the user.   The following are the Information events:    launchSpecTemporarilyBlacklisted - The configuration is not valid and several attempts to launch instances have failed. For more information, see the description of the event.    launchSpecUnusable - The price in a launch specification is not valid because it is below the Spot price or the Spot price is above the On-Demand price.    fleetProgressHalted - The price in every launch specification is not valid. A launch specification might become valid if the Spot price changes.  
+     * The event. The following are the error events:    iamFleetRoleInvalid - The EC2 Fleet or Spot Fleet did not have the required permissions either to launch or terminate an instance.    spotFleetRequestConfigurationInvalid - The configuration is not valid. For more information, see the description of the event.    spotInstanceCountLimitExceeded - You've reached the limit on the number of Spot Instances that you can launch.   The following are the fleetRequestChange events:    active - The EC2 Fleet or Spot Fleet request has been validated and Amazon EC2 is attempting to maintain the target number of running Spot Instances.    cancelled - The EC2 Fleet or Spot Fleet request is canceled and has no running Spot Instances. The EC2 Fleet or Spot Fleet will be deleted two days after its instances were terminated.    cancelled_running - The EC2 Fleet or Spot Fleet request is canceled and does not launch additional Spot Instances. Existing Spot Instances continue to run until they are interrupted or terminated.    cancelled_terminating - The EC2 Fleet or Spot Fleet request is canceled and its Spot Instances are terminating.    expired - The EC2 Fleet or Spot Fleet request has expired. A subsequent event indicates that the instances were terminated, if the request was created with TerminateInstancesWithExpiration set.    modify_in_progress - A request to modify the EC2 Fleet or Spot Fleet request was accepted and is in progress.    modify_successful - The EC2 Fleet or Spot Fleet request was modified.    price_update - The price for a launch configuration was adjusted because it was too high. This change is permanent.    submitted - The EC2 Fleet or Spot Fleet request is being evaluated and Amazon EC2 is preparing to launch the target number of Spot Instances.   The following are the instanceChange events:    launched - A request was fulfilled and a new instance was launched.    terminated - An instance was terminated by the user.   The following are the Information events:    launchSpecTemporarilyBlacklisted - The configuration is not valid and several attempts to launch instances have failed. For more information, see the description of the event.    launchSpecUnusable - The price in a launch specification is not valid because it is below the Spot price or the Spot price is above the On-Demand price.    fleetProgressHalted - The price in every launch specification is not valid. A launch specification might become valid if the Spot price changes.  
      */
     EventSubType?: String;
     /**
@@ -10667,11 +10671,11 @@ declare namespace EC2 {
      */
     Description?: String;
     /**
-     * One or more load permissions.
+     * The load permissions.
      */
     LoadPermissions?: LoadPermissionList;
     /**
-     * One or more product codes.
+     * The product codes.
      */
     ProductCodes?: ProductCodeList;
   }
@@ -11357,7 +11361,7 @@ declare namespace EC2 {
   }
   export interface ImageAttribute {
     /**
-     * One or more block device mapping entries.
+     * The block device mapping entries.
      */
     BlockDeviceMappings?: BlockDeviceMappingList;
     /**
@@ -11365,11 +11369,11 @@ declare namespace EC2 {
      */
     ImageId?: String;
     /**
-     * One or more launch permissions.
+     * The launch permissions.
      */
     LaunchPermissions?: LaunchPermissionList;
     /**
-     * One or more product codes.
+     * The product codes.
      */
     ProductCodes?: ProductCodeList;
     /**
@@ -11610,11 +11614,11 @@ declare namespace EC2 {
      */
     Architecture?: ArchitectureValues;
     /**
-     * One or more security group IDs.
+     * The security group IDs.
      */
     GroupIds?: SecurityGroupIdStringList;
     /**
-     * One or more security group names.
+     * The security group names.
      */
     GroupNames?: SecurityGroupStringList;
     /**
@@ -11688,7 +11692,7 @@ declare namespace EC2 {
      */
     Platform?: PlatformValues;
     /**
-     * One or more volumes.
+     * The volumes.
      */
     Volumes?: ImportInstanceVolumeDetailSet;
   }
@@ -12300,6 +12304,10 @@ declare namespace EC2 {
      * The ID of the VPC.
      */
     VpcId?: String;
+    /**
+     * Describes the type of network interface.
+     */
+    InterfaceType?: String;
   }
   export interface InstanceNetworkInterfaceAssociation {
     /**
@@ -12387,6 +12395,10 @@ declare namespace EC2 {
      * The ID of the subnet associated with the network string. Applies only if creating a network interface when launching an instance.
      */
     SubnetId?: String;
+    /**
+     * The type of interface.
+     */
+    InterfaceType?: String;
   }
   export type InstanceNetworkInterfaceSpecificationList = InstanceNetworkInterfaceSpecification[];
   export interface InstancePrivateIpAddress {
@@ -12553,7 +12565,7 @@ declare namespace EC2 {
      */
     FromPort?: Integer;
     /**
-     * The IP protocol name (tcp, udp, icmp) or number (see Protocol Numbers).  [EC2-VPC only] Use -1 to specify all protocols. When authorizing security group rules, specifying -1 or a protocol number other than tcp, udp, icmp, or 58 (ICMPv6) allows traffic on all ports, regardless of any port range you specify. For tcp, udp, and icmp, you must specify a port range. For 58 (ICMPv6), you can optionally specify a port range; if you don't, traffic for all types and codes is allowed when authorizing rules. 
+     * The IP protocol name (tcp, udp, icmp, icmpv6) or number (see Protocol Numbers). [VPC only] Use -1 to specify all protocols. When authorizing security group rules, specifying -1 or a protocol number other than tcp, udp, icmp, or icmpv6 allows traffic on all ports, regardless of any port range you specify. For tcp, udp, and icmp, you must specify a port range. For icmpv6, the port range is optional; if you omit the port range, traffic for all types and codes is allowed.
      */
     IpProtocol?: String;
     /**
@@ -12561,15 +12573,15 @@ declare namespace EC2 {
      */
     IpRanges?: IpRangeList;
     /**
-     * [EC2-VPC only] The IPv6 ranges.
+     * [VPC only] The IPv6 ranges.
      */
     Ipv6Ranges?: Ipv6RangeList;
     /**
-     * [EC2-VPC only] The prefix list IDs for an AWS service. With AuthorizeSecurityGroupEgress, this is the AWS service that you want to access through a VPC endpoint from instances associated with the security group.
+     * [VPC only] The prefix list IDs for an AWS service. With outbound rules, this is the AWS service to access through a VPC endpoint from instances associated with the security group.
      */
     PrefixListIds?: PrefixListIdList;
     /**
-     * The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of -1 indicates all ICMP/ICMPv6 codes for the specified ICMP type. If you specify all ICMP/ICMPv6 types, you must specify all codes.
+     * The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code. A value of -1 indicates all ICMP/ICMPv6 codes. If you specify all ICMP/ICMPv6 types, you must specify all codes.
      */
     ToPort?: Integer;
     /**
@@ -12996,6 +13008,10 @@ declare namespace EC2 {
      */
     Groups?: GroupIdStringList;
     /**
+     * The type of network interface.
+     */
+    InterfaceType?: String;
+    /**
      * The number of IPv6 addresses for the network interface.
      */
     Ipv6AddressCount?: Integer;
@@ -13046,6 +13062,10 @@ declare namespace EC2 {
      * The IDs of one or more security groups.
      */
     Groups?: SecurityGroupIdStringList;
+    /**
+     * The type of networking interface.
+     */
+    InterfaceType?: String;
     /**
      * The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. You can't use this option if specifying specific IPv6 addresses.
      */
@@ -13464,15 +13484,15 @@ declare namespace EC2 {
      */
     OperationType?: OperationType;
     /**
-     * One or more AWS account IDs. This parameter is valid only when modifying the loadPermission attribute.
+     * The AWS account IDs. This parameter is valid only when modifying the loadPermission attribute.
      */
     UserIds?: UserIdStringList;
     /**
-     * One or more user groups. This parameter is valid only when modifying the loadPermission attribute.
+     * The user groups. This parameter is valid only when modifying the loadPermission attribute.
      */
     UserGroups?: UserGroupStringList;
     /**
-     * One or more product codes. After you add a product code to an AFI, it can't be removed. This parameter is valid only when modifying the productCodes attribute.
+     * The product codes. After you add a product code to an AFI, it can't be removed. This parameter is valid only when modifying the productCodes attribute.
      */
     ProductCodes?: ProductCodeStringList;
     /**
@@ -13560,15 +13580,15 @@ declare namespace EC2 {
      */
     OperationType?: OperationType;
     /**
-     * One or more DevPay product codes. After you add a product code to an AMI, it can't be removed.
+     * The DevPay product codes. After you add a product code to an AMI, it can't be removed.
      */
     ProductCodes?: ProductCodeStringList;
     /**
-     * One or more user groups. This parameter can be used only when the Attribute parameter is launchPermission.
+     * The user groups. This parameter can be used only when the Attribute parameter is launchPermission.
      */
     UserGroups?: UserGroupStringList;
     /**
-     * One or more AWS account IDs. This parameter can be used only when the Attribute parameter is launchPermission.
+     * The AWS account IDs. This parameter can be used only when the Attribute parameter is launchPermission.
      */
     UserIds?: UserIdStringList;
     /**
@@ -13692,7 +13712,7 @@ declare namespace EC2 {
   }
   export interface ModifyInstanceEventStartTimeRequest {
     /**
-     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation. 
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
     /**
@@ -14376,7 +14396,7 @@ declare namespace EC2 {
      */
     Groups?: GroupIdentifierList;
     /**
-     * The type of interface.
+     * The type of network interface.
      */
     InterfaceType?: NetworkInterfaceType;
     /**
@@ -14499,6 +14519,7 @@ declare namespace EC2 {
     DeleteOnTermination?: Boolean;
   }
   export type NetworkInterfaceAttribute = "description"|"groupSet"|"sourceDestCheck"|"attachment"|string;
+  export type NetworkInterfaceCreationType = "efa"|string;
   export type NetworkInterfaceIdList = String[];
   export interface NetworkInterfaceIpv6Address {
     /**
@@ -14567,7 +14588,7 @@ declare namespace EC2 {
   }
   export type NetworkInterfacePrivateIpAddressList = NetworkInterfacePrivateIpAddress[];
   export type NetworkInterfaceStatus = "available"|"associated"|"attaching"|"in-use"|"detaching"|string;
-  export type NetworkInterfaceType = "interface"|"natGateway"|string;
+  export type NetworkInterfaceType = "interface"|"natGateway"|"efa"|string;
   export interface NewDhcpConfiguration {
     Key?: String;
     Values?: ValueStringList;
@@ -14667,7 +14688,7 @@ declare namespace EC2 {
   export type PermissionGroup = "all"|string;
   export interface Placement {
     /**
-     * The Availability Zone of the instance.
+     * The Availability Zone of the instance. If not specified, an Availability Zone will be automatically chosen for you based on the load balancing criteria for the region.
      */
     AvailabilityZone?: String;
     /**
@@ -15065,7 +15086,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more purchase requests.
+     * The purchase requests.
      */
     PurchaseRequests: PurchaseRequestSet;
   }
@@ -15123,7 +15144,7 @@ declare namespace EC2 {
      */
     Architecture?: ArchitectureValues;
     /**
-     * One or more block device mapping entries.
+     * The block device mapping entries.
      */
     BlockDeviceMappings?: BlockDeviceMappingRequestList;
     /**
@@ -15507,7 +15528,7 @@ declare namespace EC2 {
      */
     RamDiskId?: String;
     /**
-     * If set to true, you can't terminate the instance using the Amazon EC2 console, CLI, or API. To change this attribute to false after launch, use ModifyInstanceAttribute.
+     * If set to true, you can't terminate the instance using the Amazon EC2 console, CLI, or API. To change this attribute to false after launch, use  ModifyInstanceAttribute.
      */
     DisableApiTermination?: Boolean;
     /**
@@ -15555,13 +15576,13 @@ declare namespace EC2 {
      */
     CapacityReservationSpecification?: LaunchTemplateCapacityReservationSpecificationRequest;
     /**
-     * Indicates whether an instance is enabled for hibernation. This parameter is valid only if the instance meets the hibernation prerequisites. Hibernation is currently supported only for Amazon Linux. For more information, see Hibernate Your Instance in the Amazon Elastic Compute Cloud User Guide.
-     */
-    HibernationOptions?: LaunchTemplateHibernationOptionsRequest;
-    /**
      * The license configurations.
      */
     LicenseSpecifications?: LaunchTemplateLicenseSpecificationListRequest;
+    /**
+     * Indicates whether an instance is enabled for hibernation. This parameter is valid only if the instance meets the hibernation prerequisites. Hibernation is currently supported only for Amazon Linux. For more information, see Hibernate Your Instance in the Amazon Elastic Compute Cloud User Guide.
+     */
+    HibernationOptions?: LaunchTemplateHibernationOptionsRequest;
   }
   export interface RequestSpotFleetRequest {
     /**
@@ -15697,7 +15718,7 @@ declare namespace EC2 {
      */
     SubnetId?: String;
     /**
-     * The Base64-encoded user data for the instance.
+     * The Base64-encoded user data for the instance. User data is limited to 16 KB.
      */
     UserData?: String;
   }
@@ -16213,13 +16234,13 @@ declare namespace EC2 {
      */
     CapacityReservationSpecification?: LaunchTemplateCapacityReservationSpecificationResponse;
     /**
-     * Indicates whether an instance is configured for hibernation. For more information, see Hibernate Your Instance in the Amazon Elastic Compute Cloud User Guide.
-     */
-    HibernationOptions?: LaunchTemplateHibernationOptions;
-    /**
      * The license configurations.
      */
     LicenseSpecifications?: LaunchTemplateLicenseList;
+    /**
+     * Indicates whether an instance is configured for hibernation. For more information, see Hibernate Your Instance in the Amazon Elastic Compute Cloud User Guide.
+     */
+    HibernationOptions?: LaunchTemplateHibernationOptions;
   }
   export type RestorableByStringList = String[];
   export interface RestoreAddressToClassicRequest {
@@ -16470,7 +16491,7 @@ declare namespace EC2 {
      */
     BlockDeviceMappings?: BlockDeviceMappingRequestList;
     /**
-     * The ID of the AMI, which you can get by calling DescribeImages. An AMI is required to launch an instance and must be specified here or in a launch template.
+     * The ID of the AMI. An AMI is required to launch an instance and must be specified here or in a launch template.
      */
     ImageId?: String;
     /**
@@ -16478,7 +16499,7 @@ declare namespace EC2 {
      */
     InstanceType?: InstanceType;
     /**
-     * [EC2-VPC] A number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet. You cannot specify this option and the option to assign specific IPv6 addresses in the same request. You can specify this option if you've specified a minimum number of instances to launch. You cannot specify this option and the network interfaces option in the same request.
+     * [EC2-VPC] The number of IPv6 addresses to associate with the primary network interface. Amazon EC2 chooses the IPv6 addresses from the range of your subnet. You cannot specify this option and the option to assign specific IPv6 addresses in the same request. You can specify this option if you've specified a minimum number of instances to launch. You cannot specify this option and the network interfaces option in the same request.
      */
     Ipv6AddressCount?: Integer;
     /**
@@ -16502,7 +16523,7 @@ declare namespace EC2 {
      */
     MinCount: Integer;
     /**
-     * The monitoring for the instance.
+     * Specifies whether detailed monitoring is enabled for the instance.
      */
     Monitoring?: RunInstancesMonitoringEnabled;
     /**
@@ -16510,7 +16531,7 @@ declare namespace EC2 {
      */
     Placement?: Placement;
     /**
-     * The ID of the RAM disk.  We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see  PV-GRUB in the Amazon Elastic Compute Cloud User Guide. 
+     * The ID of the RAM disk to select. Some kernels require additional drivers at launch. Check the kernel requirements for information about whether you need to specify a RAM disk. To find kernel requirements, go to the AWS Resource Center and search for the kernel ID.  We recommend that you use PV-GRUB instead of kernels and RAM disks. For more information, see  PV-GRUB in the Amazon Elastic Compute Cloud User Guide. 
      */
     RamdiskId?: String;
     /**
@@ -16526,7 +16547,7 @@ declare namespace EC2 {
      */
     SubnetId?: String;
     /**
-     * The user data to make available to the instance. For more information, see Running Commands on Your Linux Instance at Launch (Linux) and Adding User Data (Windows). If you are using a command line tool, base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide base64-encoded text.
+     * The user data to make available to the instance. For more information, see Running Commands on Your Linux Instance at Launch (Linux) and Adding User Data (Windows). If you are using a command line tool, base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide base64-encoded text. User data is limited to 16 KB.
      */
     UserData?: String;
     /**
@@ -16558,7 +16579,7 @@ declare namespace EC2 {
      */
     InstanceInitiatedShutdownBehavior?: ShutdownBehavior;
     /**
-     * The network interfaces. You cannot specify this option and the network interfaces option in the same request.
+     * The network interfaces to associate with the instance.
      */
     NetworkInterfaces?: InstanceNetworkInterfaceSpecificationList;
     /**
@@ -16566,11 +16587,11 @@ declare namespace EC2 {
      */
     PrivateIpAddress?: String;
     /**
-     * An elastic GPU to associate with the instance.
+     * An elastic GPU to associate with the instance. An Elastic GPU is a GPU resource that you can attach to your Windows instance to accelerate the graphics performance of your applications. For more information, see  Amazon EC2 Elastic GPUs in the Amazon Elastic Compute Cloud User Guide.
      */
     ElasticGpuSpecification?: ElasticGpuSpecifications;
     /**
-     *  An elastic inference accelerator. 
+     * An elastic inference accelerator to associate with the instance. Elastic inference accelerators are a resource you can attach to your Amazon EC2 instances to accelerate your Deep Learning (DL) inference workloads.
      */
     ElasticInferenceAccelerators?: ElasticInferenceAccelerators;
     /**
@@ -16586,7 +16607,7 @@ declare namespace EC2 {
      */
     InstanceMarketOptions?: InstanceMarketOptionsRequest;
     /**
-     * The credit option for CPU usage of the instance. Valid values are standard and unlimited. To change this attribute after launch, use ModifyInstanceCreditSpecification. For more information, see Burstable Performance Instances in the Amazon Elastic Compute Cloud User Guide. Default: standard (T2 instances) or unlimited (T3 instances)
+     * The credit option for CPU usage of the T2 or T3 instance. Valid values are standard and unlimited. To change this attribute after launch, use ModifyInstanceCreditSpecification. For more information, see Burstable Performance Instances in the Amazon Elastic Compute Cloud User Guide. Default: standard (T2 instances) or unlimited (T3 instances)
      */
     CreditSpecification?: CreditSpecificationRequest;
     /**
@@ -16883,7 +16904,7 @@ declare namespace EC2 {
   export type ScheduledInstancesIpv6AddressList = ScheduledInstancesIpv6Address[];
   export interface ScheduledInstancesLaunchSpecification {
     /**
-     * One or more block device mapping entries.
+     * The block device mapping entries.
      */
     BlockDeviceMappings?: ScheduledInstancesBlockDeviceMappingSet;
     /**
@@ -16915,7 +16936,7 @@ declare namespace EC2 {
      */
     Monitoring?: ScheduledInstancesMonitoring;
     /**
-     * One or more network interfaces.
+     * The network interfaces.
      */
     NetworkInterfaces?: ScheduledInstancesNetworkInterfaceSet;
     /**
@@ -16927,7 +16948,7 @@ declare namespace EC2 {
      */
     RamdiskId?: String;
     /**
-     * The IDs of one or more security groups.
+     * The IDs of the security groups.
      */
     SecurityGroupIds?: ScheduledInstancesSecurityGroupIdSet;
     /**
@@ -16963,7 +16984,7 @@ declare namespace EC2 {
      */
     DeviceIndex?: Integer;
     /**
-     * The IDs of one or more security groups.
+     * The IDs of the security groups.
      */
     Groups?: ScheduledInstancesSecurityGroupIdSet;
     /**
@@ -16971,7 +16992,7 @@ declare namespace EC2 {
      */
     Ipv6AddressCount?: Integer;
     /**
-     * One or more specific IPv6 addresses from the subnet range.
+     * The specific IPv6 addresses from the subnet range.
      */
     Ipv6Addresses?: ScheduledInstancesIpv6AddressList;
     /**
@@ -17067,7 +17088,7 @@ declare namespace EC2 {
      */
     GroupId?: String;
     /**
-     * [EC2-VPC] The outbound rules associated with the security group.
+     * [VPC only] The outbound rules associated with the security group.
      */
     IpPermissionsEgress?: IpPermissionList;
     /**
@@ -17075,7 +17096,7 @@ declare namespace EC2 {
      */
     Tags?: TagList;
     /**
-     * [EC2-VPC] The ID of the VPC for the security group.
+     * [VPC only] The ID of the VPC for the security group.
      */
     VpcId?: String;
   }
@@ -17133,7 +17154,7 @@ declare namespace EC2 {
      */
     AcceptanceRequired?: Boolean;
     /**
-     * Indicates whether the service manages it's VPC Endpoints. Management of the service VPC Endpoints using the VPC Endpoint API is restricted.
+     * Indicates whether the service manages it's VPC endpoints. Management of the service VPC endpoints using the VPC endpoint API is restricted.
      */
     ManagesVpcEndpoints?: Boolean;
     /**
@@ -17184,7 +17205,7 @@ declare namespace EC2 {
      */
     AcceptanceRequired?: Boolean;
     /**
-     * Indicates whether the service manages it's VPC Endpoints. Management of the service VPC Endpoints using the VPC Endpoint API is restricted.
+     * Indicates whether the service manages it's VPC endpoints. Management of the service VPC endpoints using the VPC endpoint API is restricted.
      */
     ManagesVpcEndpoints?: Boolean;
   }
@@ -17543,11 +17564,11 @@ declare namespace EC2 {
      */
     IamFleetRole: String;
     /**
-     * The launch specifications for the Spot Fleet request.
+     * The launch specifications for the Spot Fleet request. If you specify LaunchSpecifications, you can't specify LaunchTemplateConfigs.
      */
     LaunchSpecifications?: LaunchSpecsList;
     /**
-     * The launch template and overrides.
+     * The launch template and overrides. If you specify LaunchTemplateConfigs, you can't specify LaunchSpecifications.
      */
     LaunchTemplateConfigs?: LaunchTemplateConfigList;
     /**
@@ -19225,7 +19246,7 @@ declare namespace EC2 {
      */
     PrivateDnsEnabled?: Boolean;
     /**
-     * Indicates whether the VPC Endpoint is being managed by its service.
+     * Indicates whether the VPC endpoint is being managed by its service.
      */
     RequesterManaged?: Boolean;
     /**
