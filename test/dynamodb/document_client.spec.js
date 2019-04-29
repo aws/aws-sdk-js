@@ -1327,6 +1327,9 @@
           }
         });
         outputString = '{"Item":{"foo":[{"type":"Buffer","data":[98,97,114]},{"type":"Buffer","data":[98,97,122]},{"type":"Buffer","data":[113,117,117,120]}]}}';
+        if (process.version < 'v0.12') {
+          outputString = '{"Item":{"foo":[[98,97,114],[98,97,122],[113,117,117,120]]}}'
+        }
         helpers.mockHttpResponse(200, {}, wire);
         docClient.get({
           Key: {
