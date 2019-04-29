@@ -4,6 +4,7 @@
   var AWS = helpers.AWS;
   var Buffer = AWS.util.Buffer;
   var encode = AWS.util.base64.encode;
+  var isBrowser = AWS.util.isBrowser;
   var docClient = null;
   var NumberValue = require('../../lib/dynamodb/numberValue');
 
@@ -1327,8 +1328,8 @@
           }
         });
         outputString = '{"Item":{"foo":[{"type":"Buffer","data":[98,97,114]},{"type":"Buffer","data":[98,97,122]},{"type":"Buffer","data":[113,117,117,120]}]}}';
-        if (process.version < 'v0.12') {
-          outputString = '{"Item":{"foo":[[98,97,114],[98,97,122],[113,117,117,120]]}}'
+        if (process.version < 'v0.12' && !isBrowser()) {
+          outputString = '{"Item":{"foo":[[98,97,114],[98,97,122],[113,117,117,120]]}}';
         }
         helpers.mockHttpResponse(200, {}, wire);
         docClient.get({
