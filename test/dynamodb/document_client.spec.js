@@ -4,6 +4,7 @@
   var AWS = helpers.AWS;
   var Buffer = AWS.util.Buffer;
   var encode = AWS.util.base64.encode;
+  var isBrowser = AWS.util.isBrowser;
   var docClient = null;
   var NumberValue = require('../../lib/dynamodb/numberValue');
 
@@ -1268,6 +1269,75 @@
           }
         }, function(err, data) {
           expect(data).to.eql(output);
+          done();
+        });
+      });
+
+      it('stringifies string sets', function(done) {
+        var outputString, wire;
+        wire = JSON.stringify({
+          Item: {
+            foo: {
+              'SS': ['bar', 'baz', 'quux']
+            }
+          }
+        });
+        outputString = '{"Item":{"foo":["bar","baz","quux"]}}';
+        helpers.mockHttpResponse(200, {}, wire);
+        docClient.get({
+          Key: {
+            foo: 1
+          }
+        }, function(err, data) {
+          expect(JSON.stringify(data)).to.eql(outputString);
+          done();
+        });
+      });
+
+      it('stringifies number sets', function(done) {
+        var outputString, wire;
+        wire = JSON.stringify({
+          Item: {
+            foo: {
+              'NS': ['1', '2', '3']
+            }
+          }
+        });
+        outputString = '{"Item":{"foo":[1,2,3]}}';
+        helpers.mockHttpResponse(200, {}, wire);
+        docClient.get({
+          Key: {
+            foo: 1
+          }
+        }, function(err, data) {
+          expect(JSON.stringify(data)).to.eql(outputString);
+          done();
+        });
+      });
+
+      it('stringifies binary sets', function(done) {
+        var bar, baz, outputString, quux, wire;
+        bar = new Buffer('bar');
+        baz = new Buffer('baz');
+        quux = new Buffer('quux');
+        wire = JSON.stringify({
+          Item: {
+            foo: {
+              'BS': [encode(bar), encode(baz), encode(quux)]
+            }
+          }
+        });
+        outputString = '{"Item":{"foo":[{"type":"Buffer","data":[98,97,114]},{"type":"Buffer","data":[98,97,122]},{"type":"Buffer","data":[113,117,117,120]}]}}';
+        if (process.version < 'v0.12' && !isBrowser()) {
+          outputString = '{"Item":{"foo":[[98,97,114],[98,97,122],[113,117,117,120]]}}';
+        }
+        helpers.mockHttpResponse(200, {}, wire);
+        docClient.get({
+          Key: {
+            foo: 1
+          }
+        }, function(err, data) {
+          expect(JSON.stringify(data)).to.eql(outputString);
           done();
         });
       });
