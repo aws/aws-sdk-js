@@ -378,6 +378,10 @@ declare namespace CodePipeline {
      * The name of the action within the context of a job.
      */
     name?: ActionName;
+    /**
+     * The system-generated unique ID that corresponds to an action's execution.
+     */
+    actionExecutionId?: ActionExecutionId;
   }
   export interface ActionDeclaration {
     /**
@@ -1088,7 +1092,7 @@ declare namespace CodePipeline {
      */
     actionConfiguration?: ActionConfiguration;
     /**
-     * Represents information about a pipeline to a job worker.
+     * Represents information about a pipeline to a job worker.  Includes pipelineArn and pipelineExecutionId for Custom jobs. 
      */
     pipelineContext?: PipelineContext;
     /**
@@ -1143,7 +1147,7 @@ declare namespace CodePipeline {
      */
     filter?: ActionExecutionFilter;
     /**
-     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value. The action execution history is limited to the most recent 12 months, based on action execution start times. Default value is 100. 
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value. Action execution history is retained for up to 12 months, based on action execution start times. Default value is 100.   Detailed execution history is available for executions run on or after February 21, 2019. 
      */
     maxResults?: MaxResults;
     /**
@@ -1187,7 +1191,7 @@ declare namespace CodePipeline {
      */
     pipelineName: PipelineName;
     /**
-     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value. The available pipeline execution history is limited to the most recent 12 months, based on pipeline execution start times. Default value is 100.
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned nextToken value. Pipeline history is limited to the most recent 12 months, based on pipeline execution start times. Default value is 100.
      */
     maxResults?: MaxResults;
     /**
@@ -1297,6 +1301,14 @@ declare namespace CodePipeline {
      * The context of an action to a job worker within the stage of a pipeline.
      */
     action?: ActionContext;
+    /**
+     * The pipeline execution ID provided to the job worker.
+     */
+    pipelineArn?: PipelineArn;
+    /**
+     * The pipeline Amazon Resource Name (ARN) provided to the job worker.
+     */
+    pipelineExecutionId?: PipelineExecutionId;
   }
   export interface PipelineDeclaration {
     /**
@@ -1748,7 +1760,7 @@ declare namespace CodePipeline {
      */
     actionConfiguration?: ActionConfiguration;
     /**
-     * Represents information about a pipeline to a job worker.
+     * Represents information about a pipeline to a job worker.  Does not include pipelineArn and pipelineExecutionId for ThirdParty jobs. 
      */
     pipelineContext?: PipelineContext;
     /**

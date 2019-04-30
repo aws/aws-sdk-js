@@ -171,3 +171,4 @@ export import DocDB = require('./docdb');
 export import Backup = require('./backup');
 export import WorkLink = require('./worklink');
 export import Textract = require('./textract');
+export import ManagedBlockchain = require('./managedblockchain');

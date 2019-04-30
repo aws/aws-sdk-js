@@ -37,6 +37,34 @@
       ],
       "documentation": "<p>Accepts an offer to share the specified portfolio.</p>"
     },
+    "AssociateBudgetWithResource": {
+      "name": "AssociateBudgetWithResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AssociateBudgetWithResourceInput"
+      },
+      "output": {
+        "shape": "AssociateBudgetWithResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParametersException"
+        },
+        {
+          "shape": "DuplicateResourceException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Associates the specified budget with the specified resource.</p>"
+    },
     "AssociatePrincipalWithPortfolio": {
       "name": "AssociatePrincipalWithPortfolio",
       "http": {
@@ -918,6 +946,25 @@
       ],
       "documentation": "<p>Disable portfolio sharing through AWS Organizations feature. This feature will not delete your current shares but it will prevent you from creating new shares throughout your organization. Current shares will not be in sync with your organization structure if it changes after calling this API. This API can only be called by the master account in the organization.</p>"
     },
+    "DisassociateBudgetFromResource": {
+      "name": "DisassociateBudgetFromResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DisassociateBudgetFromResourceInput"
+      },
+      "output": {
+        "shape": "DisassociateBudgetFromResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Disassociates the specified budget from the specified resource.</p>"
+    },
     "DisassociatePrincipalFromPortfolio": {
       "name": "DisassociatePrincipalFromPortfolio",
       "http": {
@@ -1124,6 +1171,28 @@
         }
       ],
       "documentation": "<p>Lists all portfolios for which sharing was accepted by this account.</p>"
+    },
+    "ListBudgetsForResource": {
+      "name": "ListBudgetsForResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListBudgetsForResourceInput"
+      },
+      "output": {
+        "shape": "ListBudgetsForResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParametersException"
+        }
+      ],
+      "documentation": "<p>Lists all the budgets associated to the specified resource.</p>"
     },
     "ListConstraintsForPortfolio": {
       "name": "ListConstraintsForPortfolio",
@@ -1852,6 +1921,27 @@
     "ApproximateCount": {
       "type": "integer"
     },
+    "AssociateBudgetWithResourceInput": {
+      "type": "structure",
+      "required": [
+        "BudgetName",
+        "ResourceId"
+      ],
+      "members": {
+        "BudgetName": {
+          "shape": "BudgetName",
+          "documentation": "<p>The name of the budget you want to associate.</p>"
+        },
+        "ResourceId": {
+          "shape": "Id",
+          "documentation": "<p> The resource identifier. Either a portfolio-id or a product-id.</p>"
+        }
+      }
+    },
+    "AssociateBudgetWithResourceOutput": {
+      "type": "structure",
+      "members": {}
+    },
     "AssociatePrincipalWithPortfolioInput": {
       "type": "structure",
       "required": [
@@ -2013,6 +2103,27 @@
           "shape": "FailedServiceActionAssociations",
           "documentation": "<p>An object that contains a list of errors, along with information to help you identify the self-service action.</p>"
         }
+      }
+    },
+    "BudgetDetail": {
+      "type": "structure",
+      "members": {
+        "BudgetName": {
+          "shape": "BudgetName",
+          "documentation": "<p>Name of the associated budget.</p>"
+        }
+      },
+      "documentation": "<p>Information about a budget.</p>"
+    },
+    "BudgetName": {
+      "type": "string",
+      "max": 100,
+      "min": 1
+    },
+    "Budgets": {
+      "type": "list",
+      "member": {
+        "shape": "BudgetDetail"
       }
     },
     "CausingEntity": {
@@ -2196,7 +2307,7 @@
         },
         "Parameters": {
           "shape": "ConstraintParameters",
-          "documentation": "<p>The constraint parameters, in JSON format. The syntax depends on the constraint type as follows:</p> <dl> <dt>LAUNCH</dt> <dd> <p>Specify the <code>RoleArn</code> property as follows:</p> <p> <code>{\"RoleArn\" : \"arn:aws:iam::123456789012:role/LaunchRole\"}</code> </p> <p>You cannot have both a <code>LAUNCH</code> and a <code>STACKSET</code> constraint.</p> <p>You also cannot have more than one <code>LAUNCH</code> constraint on a product and portfolio.</p> </dd> <dt>NOTIFICATION</dt> <dd> <p>Specify the <code>NotificationArns</code> property as follows:</p> <p> <code>{\"NotificationArns\" : [\"arn:aws:sns:us-east-1:123456789012:Topic\"]}</code> </p> </dd> <dt>RESOUCE_UPDATE</dt> <dd> <p>Specify the <code>TagUpdatesOnProvisionedProduct</code> property as follows:</p> <p> <code>{\"Version\":\"2.0\",\"Properties\":{\"TagUpdateOnProvisionedProduct\":\"String\"}}</code> </p> <p>The <code>TagUpdatesOnProvisionedProduct</code> property accepts a string value of <code>ALLOWED</code> or <code>NOT_ALLOWED</code>.</p> </dd> <dt>STACKSET</dt> <dd> <p>Specify the <code>Parameters</code> property as follows:</p> <p> <code>{\"Version\": \"String\", \"Properties\": {\"AccountList\": [ \"String\" ], \"RegionList\": [ \"String\" ], \"AdminRole\": \"String\", \"ExecutionRole\": \"String\"}}</code> </p> <p>You cannot have both a <code>LAUNCH</code> and a <code>STACKSET</code> constraint.</p> <p>You also cannot have more than one <code>STACKSET</code> constraint on a product and portfolio.</p> <p>Products with a <code>STACKSET</code> constraint will launch an AWS CloudFormation stack set.</p> </dd> <dt>TEMPLATE</dt> <dd> <p>Specify the <code>Rules</code> property. For more information, see <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html\">Template Constraint Rules</a>.</p> </dd> </dl>"
+          "documentation": "<p>The constraint parameters, in JSON format. The syntax depends on the constraint type as follows:</p> <dl> <dt>LAUNCH</dt> <dd> <p>Specify the <code>RoleArn</code> property as follows:</p> <p> <code>{\"RoleArn\" : \"arn:aws:iam::123456789012:role/LaunchRole\"}</code> </p> <p>You cannot have both a <code>LAUNCH</code> and a <code>STACKSET</code> constraint.</p> <p>You also cannot have more than one <code>LAUNCH</code> constraint on a product and portfolio.</p> </dd> <dt>NOTIFICATION</dt> <dd> <p>Specify the <code>NotificationArns</code> property as follows:</p> <p> <code>{\"NotificationArns\" : [\"arn:aws:sns:us-east-1:123456789012:Topic\"]}</code> </p> </dd> <dt>RESOURCE_UPDATE</dt> <dd> <p>Specify the <code>TagUpdatesOnProvisionedProduct</code> property as follows:</p> <p> <code>{\"Version\":\"2.0\",\"Properties\":{\"TagUpdateOnProvisionedProduct\":\"String\"}}</code> </p> <p>The <code>TagUpdatesOnProvisionedProduct</code> property accepts a string value of <code>ALLOWED</code> or <code>NOT_ALLOWED</code>.</p> </dd> <dt>STACKSET</dt> <dd> <p>Specify the <code>Parameters</code> property as follows:</p> <p> <code>{\"Version\": \"String\", \"Properties\": {\"AccountList\": [ \"String\" ], \"RegionList\": [ \"String\" ], \"AdminRole\": \"String\", \"ExecutionRole\": \"String\"}}</code> </p> <p>You cannot have both a <code>LAUNCH</code> and a <code>STACKSET</code> constraint.</p> <p>You also cannot have more than one <code>STACKSET</code> constraint on a product and portfolio.</p> <p>Products with a <code>STACKSET</code> constraint will launch an AWS CloudFormation stack set.</p> </dd> <dt>TEMPLATE</dt> <dd> <p>Specify the <code>Rules</code> property. For more information, see <a href=\"http://docs.aws.amazon.com/servicecatalog/latest/adminguide/reference-template_constraint_rules.html\">Template Constraint Rules</a>.</p> </dd> </dl>"
         },
         "Type": {
           "shape": "ConstraintType",
@@ -2306,7 +2417,7 @@
       "type": "structure",
       "members": {
         "PortfolioShareToken": {
-          "shape": "PortfolioShareToken",
+          "shape": "Id",
           "documentation": "<p>The portfolio share unique identifier. This will only be returned if portfolio is shared to an organization node.</p>"
         }
       }
@@ -2664,7 +2775,7 @@
       "type": "structure",
       "members": {
         "PortfolioShareToken": {
-          "shape": "PortfolioShareToken",
+          "shape": "Id",
           "documentation": "<p>The portfolio share unique identifier. This will only be returned if delete is made to an organization node.</p>"
         }
       }
@@ -2870,6 +2981,10 @@
         "TagOptions": {
           "shape": "TagOptionDetails",
           "documentation": "<p>Information about the TagOptions associated with the portfolio.</p>"
+        },
+        "Budgets": {
+          "shape": "Budgets",
+          "documentation": "<p>Information about the associated budgets.</p>"
         }
       }
     },
@@ -2880,7 +2995,7 @@
       ],
       "members": {
         "PortfolioShareToken": {
-          "shape": "PortfolioShareToken",
+          "shape": "Id",
           "documentation": "<p>The token for the portfolio share operation. This token is returned either by CreatePortfolioShare or by DeletePortfolioShare.</p>"
         }
       }
@@ -2889,7 +3004,7 @@
       "type": "structure",
       "members": {
         "PortfolioShareToken": {
-          "shape": "PortfolioShareToken",
+          "shape": "Id",
           "documentation": "<p>The token for the portfolio share operation. For example, <code>share-6v24abcdefghi</code>.</p>"
         },
         "PortfolioId": {
@@ -2944,6 +3059,10 @@
         "TagOptions": {
           "shape": "TagOptionDetails",
           "documentation": "<p>Information about the TagOptions associated with the product.</p>"
+        },
+        "Budgets": {
+          "shape": "Budgets",
+          "documentation": "<p>Information about the associated budgets.</p>"
         }
       }
     },
@@ -2973,6 +3092,10 @@
         "ProvisioningArtifacts": {
           "shape": "ProvisioningArtifacts",
           "documentation": "<p>Information about the provisioning artifacts for the specified product.</p>"
+        },
+        "Budgets": {
+          "shape": "Budgets",
+          "documentation": "<p>Information about the associated budgets.</p>"
         }
       }
     },
@@ -3262,6 +3385,30 @@
       "members": {}
     },
     "DisableAWSOrganizationsAccessOutput": {
+      "type": "structure",
+      "members": {}
+    },
+    "DisableTemplateValidation": {
+      "type": "boolean"
+    },
+    "DisassociateBudgetFromResourceInput": {
+      "type": "structure",
+      "required": [
+        "BudgetName",
+        "ResourceId"
+      ],
+      "members": {
+        "BudgetName": {
+          "shape": "BudgetName",
+          "documentation": "<p>The name of the budget you want to disassociate.</p>"
+        },
+        "ResourceId": {
+          "shape": "Id",
+          "documentation": "<p>The resource identifier you want to disassociate from. Either a portfolio-id or a product-id.</p>"
+        }
+      }
+    },
+    "DisassociateBudgetFromResourceOutput": {
       "type": "structure",
       "members": {}
     },
@@ -3585,6 +3732,43 @@
         "PortfolioDetails": {
           "shape": "PortfolioDetails",
           "documentation": "<p>Information about the portfolios.</p>"
+        },
+        "NextPageToken": {
+          "shape": "PageToken",
+          "documentation": "<p>The page token to use to retrieve the next set of results. If there are no additional results, this value is null.</p>"
+        }
+      }
+    },
+    "ListBudgetsForResourceInput": {
+      "type": "structure",
+      "required": [
+        "ResourceId"
+      ],
+      "members": {
+        "AcceptLanguage": {
+          "shape": "AcceptLanguage",
+          "documentation": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
+        },
+        "ResourceId": {
+          "shape": "Id",
+          "documentation": "<p>The resource identifier.</p>"
+        },
+        "PageSize": {
+          "shape": "PageSize",
+          "documentation": "<p>The maximum number of items to return with this call.</p>"
+        },
+        "PageToken": {
+          "shape": "PageToken",
+          "documentation": "<p>The page token for the next set of results. To retrieve the first set of results, use null.</p>"
+        }
+      }
+    },
+    "ListBudgetsForResourceOutput": {
+      "type": "structure",
+      "members": {
+        "Budgets": {
+          "shape": "Budgets",
+          "documentation": "<p>Information about the associated budgets.</p>"
         },
         "NextPageToken": {
           "shape": "PageToken",
@@ -4313,9 +4497,6 @@
       "min": 1
     },
     "PortfolioName": {
-      "type": "string"
-    },
-    "PortfolioShareToken": {
       "type": "string"
     },
     "PortfolioShareType": {
@@ -5075,6 +5256,10 @@
         "Type": {
           "shape": "ProvisioningArtifactType",
           "documentation": "<p>The type of provisioning artifact.</p> <ul> <li> <p> <code>CLOUD_FORMATION_TEMPLATE</code> - AWS CloudFormation template</p> </li> <li> <p> <code>MARKETPLACE_AMI</code> - AWS Marketplace AMI</p> </li> <li> <p> <code>MARKETPLACE_CAR</code> - AWS Marketplace Clusters and AWS Resources</p> </li> </ul>"
+        },
+        "DisableTemplateValidation": {
+          "shape": "DisableTemplateValidation",
+          "documentation": "<p>If set to true, AWS Service Catalog stops validating the specified provisioning artifact even if it is invalid.</p>"
         }
       },
       "documentation": "<p>Information about a provisioning artifact (also known as a version) for a product.</p>"

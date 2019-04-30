@@ -172,5 +172,6 @@ module.exports = {
   DocDB: require('./docdb'),
   Backup: require('./backup'),
   WorkLink: require('./worklink'),
-  Textract: require('./textract')
+  Textract: require('./textract'),
+  ManagedBlockchain: require('./managedblockchain')
 };

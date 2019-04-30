@@ -20,6 +20,14 @@ declare class ServiceCatalog extends Service {
    */
   acceptPortfolioShare(callback?: (err: AWSError, data: ServiceCatalog.Types.AcceptPortfolioShareOutput) => void): Request<ServiceCatalog.Types.AcceptPortfolioShareOutput, AWSError>;
   /**
+   * Associates the specified budget with the specified resource.
+   */
+  associateBudgetWithResource(params: ServiceCatalog.Types.AssociateBudgetWithResourceInput, callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateBudgetWithResourceOutput) => void): Request<ServiceCatalog.Types.AssociateBudgetWithResourceOutput, AWSError>;
+  /**
+   * Associates the specified budget with the specified resource.
+   */
+  associateBudgetWithResource(callback?: (err: AWSError, data: ServiceCatalog.Types.AssociateBudgetWithResourceOutput) => void): Request<ServiceCatalog.Types.AssociateBudgetWithResourceOutput, AWSError>;
+  /**
    * Associates the specified principal ARN with the specified portfolio.
    */
   associatePrincipalWithPortfolio(params: ServiceCatalog.Types.AssociatePrincipalWithPortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.AssociatePrincipalWithPortfolioOutput) => void): Request<ServiceCatalog.Types.AssociatePrincipalWithPortfolioOutput, AWSError>;
@@ -324,6 +332,14 @@ declare class ServiceCatalog extends Service {
    */
   disableAWSOrganizationsAccess(callback?: (err: AWSError, data: ServiceCatalog.Types.DisableAWSOrganizationsAccessOutput) => void): Request<ServiceCatalog.Types.DisableAWSOrganizationsAccessOutput, AWSError>;
   /**
+   * Disassociates the specified budget from the specified resource.
+   */
+  disassociateBudgetFromResource(params: ServiceCatalog.Types.DisassociateBudgetFromResourceInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateBudgetFromResourceOutput) => void): Request<ServiceCatalog.Types.DisassociateBudgetFromResourceOutput, AWSError>;
+  /**
+   * Disassociates the specified budget from the specified resource.
+   */
+  disassociateBudgetFromResource(callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateBudgetFromResourceOutput) => void): Request<ServiceCatalog.Types.DisassociateBudgetFromResourceOutput, AWSError>;
+  /**
    * Disassociates a previously associated principal ARN from a specified portfolio.
    */
   disassociatePrincipalFromPortfolio(params: ServiceCatalog.Types.DisassociatePrincipalFromPortfolioInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociatePrincipalFromPortfolioOutput) => void): Request<ServiceCatalog.Types.DisassociatePrincipalFromPortfolioOutput, AWSError>;
@@ -395,6 +411,14 @@ declare class ServiceCatalog extends Service {
    * Lists all portfolios for which sharing was accepted by this account.
    */
   listAcceptedPortfolioShares(callback?: (err: AWSError, data: ServiceCatalog.Types.ListAcceptedPortfolioSharesOutput) => void): Request<ServiceCatalog.Types.ListAcceptedPortfolioSharesOutput, AWSError>;
+  /**
+   * Lists all the budgets associated to the specified resource.
+   */
+  listBudgetsForResource(params: ServiceCatalog.Types.ListBudgetsForResourceInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListBudgetsForResourceOutput) => void): Request<ServiceCatalog.Types.ListBudgetsForResourceOutput, AWSError>;
+  /**
+   * Lists all the budgets associated to the specified resource.
+   */
+  listBudgetsForResource(callback?: (err: AWSError, data: ServiceCatalog.Types.ListBudgetsForResourceOutput) => void): Request<ServiceCatalog.Types.ListBudgetsForResourceOutput, AWSError>;
   /**
    * Lists the constraints for the specified portfolio and product.
    */
@@ -665,6 +689,18 @@ declare namespace ServiceCatalog {
   export type AllowedValue = string;
   export type AllowedValues = AllowedValue[];
   export type ApproximateCount = number;
+  export interface AssociateBudgetWithResourceInput {
+    /**
+     * The name of the budget you want to associate.
+     */
+    BudgetName: BudgetName;
+    /**
+     *  The resource identifier. Either a portfolio-id or a product-id.
+     */
+    ResourceId: Id;
+  }
+  export interface AssociateBudgetWithResourceOutput {
+  }
   export interface AssociatePrincipalWithPortfolioInput {
     /**
      * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
@@ -770,6 +806,14 @@ declare namespace ServiceCatalog {
      */
     FailedServiceActionAssociations?: FailedServiceActionAssociations;
   }
+  export interface BudgetDetail {
+    /**
+     * Name of the associated budget.
+     */
+    BudgetName?: BudgetName;
+  }
+  export type BudgetName = string;
+  export type Budgets = BudgetDetail[];
   export type CausingEntity = string;
   export type ChangeAction = "ADD"|"MODIFY"|"REMOVE"|string;
   export interface CloudWatchDashboard {
@@ -866,7 +910,7 @@ declare namespace ServiceCatalog {
      */
     ProductId: Id;
     /**
-     * The constraint parameters, in JSON format. The syntax depends on the constraint type as follows:  LAUNCH  Specify the RoleArn property as follows:  {"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"}  You cannot have both a LAUNCH and a STACKSET constraint. You also cannot have more than one LAUNCH constraint on a product and portfolio.  NOTIFICATION  Specify the NotificationArns property as follows:  {"NotificationArns" : ["arn:aws:sns:us-east-1:123456789012:Topic"]}   RESOUCE_UPDATE  Specify the TagUpdatesOnProvisionedProduct property as follows:  {"Version":"2.0","Properties":{"TagUpdateOnProvisionedProduct":"String"}}  The TagUpdatesOnProvisionedProduct property accepts a string value of ALLOWED or NOT_ALLOWED.  STACKSET  Specify the Parameters property as follows:  {"Version": "String", "Properties": {"AccountList": [ "String" ], "RegionList": [ "String" ], "AdminRole": "String", "ExecutionRole": "String"}}  You cannot have both a LAUNCH and a STACKSET constraint. You also cannot have more than one STACKSET constraint on a product and portfolio. Products with a STACKSET constraint will launch an AWS CloudFormation stack set.  TEMPLATE  Specify the Rules property. For more information, see Template Constraint Rules.  
+     * The constraint parameters, in JSON format. The syntax depends on the constraint type as follows:  LAUNCH  Specify the RoleArn property as follows:  {"RoleArn" : "arn:aws:iam::123456789012:role/LaunchRole"}  You cannot have both a LAUNCH and a STACKSET constraint. You also cannot have more than one LAUNCH constraint on a product and portfolio.  NOTIFICATION  Specify the NotificationArns property as follows:  {"NotificationArns" : ["arn:aws:sns:us-east-1:123456789012:Topic"]}   RESOURCE_UPDATE  Specify the TagUpdatesOnProvisionedProduct property as follows:  {"Version":"2.0","Properties":{"TagUpdateOnProvisionedProduct":"String"}}  The TagUpdatesOnProvisionedProduct property accepts a string value of ALLOWED or NOT_ALLOWED.  STACKSET  Specify the Parameters property as follows:  {"Version": "String", "Properties": {"AccountList": [ "String" ], "RegionList": [ "String" ], "AdminRole": "String", "ExecutionRole": "String"}}  You cannot have both a LAUNCH and a STACKSET constraint. You also cannot have more than one STACKSET constraint on a product and portfolio. Products with a STACKSET constraint will launch an AWS CloudFormation stack set.  TEMPLATE  Specify the Rules property. For more information, see Template Constraint Rules.  
      */
     Parameters: ConstraintParameters;
     /**
@@ -954,7 +998,7 @@ declare namespace ServiceCatalog {
     /**
      * The portfolio share unique identifier. This will only be returned if portfolio is shared to an organization node.
      */
-    PortfolioShareToken?: PortfolioShareToken;
+    PortfolioShareToken?: Id;
   }
   export interface CreateProductInput {
     /**
@@ -1217,7 +1261,7 @@ declare namespace ServiceCatalog {
     /**
      * The portfolio share unique identifier. This will only be returned if delete is made to an organization node.
      */
-    PortfolioShareToken?: PortfolioShareToken;
+    PortfolioShareToken?: Id;
   }
   export interface DeleteProductInput {
     /**
@@ -1354,18 +1398,22 @@ declare namespace ServiceCatalog {
      * Information about the TagOptions associated with the portfolio.
      */
     TagOptions?: TagOptionDetails;
+    /**
+     * Information about the associated budgets.
+     */
+    Budgets?: Budgets;
   }
   export interface DescribePortfolioShareStatusInput {
     /**
      * The token for the portfolio share operation. This token is returned either by CreatePortfolioShare or by DeletePortfolioShare.
      */
-    PortfolioShareToken: PortfolioShareToken;
+    PortfolioShareToken: Id;
   }
   export interface DescribePortfolioShareStatusOutput {
     /**
      * The token for the portfolio share operation. For example, share-6v24abcdefghi.
      */
-    PortfolioShareToken?: PortfolioShareToken;
+    PortfolioShareToken?: Id;
     /**
      * The portfolio identifier.
      */
@@ -1410,6 +1458,10 @@ declare namespace ServiceCatalog {
      * Information about the TagOptions associated with the product.
      */
     TagOptions?: TagOptionDetails;
+    /**
+     * Information about the associated budgets.
+     */
+    Budgets?: Budgets;
   }
   export interface DescribeProductInput {
     /**
@@ -1430,6 +1482,10 @@ declare namespace ServiceCatalog {
      * Information about the provisioning artifacts for the specified product.
      */
     ProvisioningArtifacts?: ProvisioningArtifacts;
+    /**
+     * Information about the associated budgets.
+     */
+    Budgets?: Budgets;
   }
   export interface DescribeProductViewInput {
     /**
@@ -1640,6 +1696,19 @@ declare namespace ServiceCatalog {
   }
   export interface DisableAWSOrganizationsAccessOutput {
   }
+  export type DisableTemplateValidation = boolean;
+  export interface DisassociateBudgetFromResourceInput {
+    /**
+     * The name of the budget you want to disassociate.
+     */
+    BudgetName: BudgetName;
+    /**
+     * The resource identifier you want to disassociate from. Either a portfolio-id or a product-id.
+     */
+    ResourceId: Id;
+  }
+  export interface DisassociateBudgetFromResourceOutput {
+  }
   export interface DisassociatePrincipalFromPortfolioInput {
     /**
      * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
@@ -1836,6 +1905,34 @@ declare namespace ServiceCatalog {
      * Information about the portfolios.
      */
     PortfolioDetails?: PortfolioDetails;
+    /**
+     * The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
+     */
+    NextPageToken?: PageToken;
+  }
+  export interface ListBudgetsForResourceInput {
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The resource identifier.
+     */
+    ResourceId: Id;
+    /**
+     * The maximum number of items to return with this call.
+     */
+    PageSize?: PageSize;
+    /**
+     * The page token for the next set of results. To retrieve the first set of results, use null.
+     */
+    PageToken?: PageToken;
+  }
+  export interface ListBudgetsForResourceOutput {
+    /**
+     * Information about the associated budgets.
+     */
+    Budgets?: Budgets;
     /**
      * The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
      */
@@ -2342,7 +2439,6 @@ declare namespace ServiceCatalog {
   export type PortfolioDetails = PortfolioDetail[];
   export type PortfolioDisplayName = string;
   export type PortfolioName = string;
-  export type PortfolioShareToken = string;
   export type PortfolioShareType = "IMPORTED"|"AWS_SERVICECATALOG"|"AWS_ORGANIZATIONS"|string;
   export interface Principal {
     /**
@@ -2816,6 +2912,10 @@ declare namespace ServiceCatalog {
      * The type of provisioning artifact.    CLOUD_FORMATION_TEMPLATE - AWS CloudFormation template    MARKETPLACE_AMI - AWS Marketplace AMI    MARKETPLACE_CAR - AWS Marketplace Clusters and AWS Resources  
      */
     Type?: ProvisioningArtifactType;
+    /**
+     * If set to true, AWS Service Catalog stops validating the specified provisioning artifact even if it is invalid.
+     */
+    DisableTemplateValidation?: DisableTemplateValidation;
   }
   export type ProvisioningArtifactPropertyName = "Id"|string;
   export type ProvisioningArtifactPropertyValue = string;

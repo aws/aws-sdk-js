@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "DocumentClient",
-  "description": "Fixes issue stringifying sets by only including values."
-}

@@ -693,5 +693,8 @@
   },
   "textract": {
     "name": "Textract"
+  },
+  "managedblockchain": {
+    "name": "ManagedBlockchain"
   }
 }

@@ -12,11 +12,11 @@ declare class DirectConnect extends Service {
   constructor(options?: DirectConnect.Types.ClientConfiguration)
   config: Config & DirectConnect.Types.ClientConfiguration;
   /**
-   * Accepts a proposal request to attach a virtual private gateway to a Direct Connect gateway.
+   * Accepts a proposal request to attach a virtual private gateway or transit gateway to a Direct Connect gateway.
    */
   acceptDirectConnectGatewayAssociationProposal(params: DirectConnect.Types.AcceptDirectConnectGatewayAssociationProposalRequest, callback?: (err: AWSError, data: DirectConnect.Types.AcceptDirectConnectGatewayAssociationProposalResult) => void): Request<DirectConnect.Types.AcceptDirectConnectGatewayAssociationProposalResult, AWSError>;
   /**
-   * Accepts a proposal request to attach a virtual private gateway to a Direct Connect gateway.
+   * Accepts a proposal request to attach a virtual private gateway or transit gateway to a Direct Connect gateway.
    */
   acceptDirectConnectGatewayAssociationProposal(callback?: (err: AWSError, data: DirectConnect.Types.AcceptDirectConnectGatewayAssociationProposalResult) => void): Request<DirectConnect.Types.AcceptDirectConnectGatewayAssociationProposalResult, AWSError>;
   /**
@@ -51,6 +51,14 @@ declare class DirectConnect extends Service {
    * Provisions a public virtual interface to be owned by the specified AWS account. The owner of a connection calls this function to provision a public virtual interface to be owned by the specified AWS account. Virtual interfaces created using this function must be confirmed by the owner using ConfirmPublicVirtualInterface. Until this step has been completed, the virtual interface is in the confirming state and is not available to handle traffic. When creating an IPv6 public virtual interface, omit the Amazon address and customer address. IPv6 addresses are automatically assigned from the Amazon pool of IPv6 addresses; you cannot specify custom IPv6 addresses.
    */
   allocatePublicVirtualInterface(callback?: (err: AWSError, data: DirectConnect.Types.VirtualInterface) => void): Request<DirectConnect.Types.VirtualInterface, AWSError>;
+  /**
+   * Provisions a transit virtual interface to be owned by the specified AWS account. Use this type of interface to connect a transit gateway to your Direct Connect gateway. The owner of a connection provisions a transit virtual interface to be owned by the specified AWS account. After you create a transit virtual interface, it must be confirmed by the owner using ConfirmTransitVirtualInterface. Until this step has been completed, the transit virtual interface is in the requested state and is not available to handle traffic.
+   */
+  allocateTransitVirtualInterface(params: DirectConnect.Types.AllocateTransitVirtualInterfaceRequest, callback?: (err: AWSError, data: DirectConnect.Types.AllocateTransitVirtualInterfaceResult) => void): Request<DirectConnect.Types.AllocateTransitVirtualInterfaceResult, AWSError>;
+  /**
+   * Provisions a transit virtual interface to be owned by the specified AWS account. Use this type of interface to connect a transit gateway to your Direct Connect gateway. The owner of a connection provisions a transit virtual interface to be owned by the specified AWS account. After you create a transit virtual interface, it must be confirmed by the owner using ConfirmTransitVirtualInterface. Until this step has been completed, the transit virtual interface is in the requested state and is not available to handle traffic.
+   */
+  allocateTransitVirtualInterface(callback?: (err: AWSError, data: DirectConnect.Types.AllocateTransitVirtualInterfaceResult) => void): Request<DirectConnect.Types.AllocateTransitVirtualInterfaceResult, AWSError>;
   /**
    * Associates an existing connection with a link aggregation group (LAG). The connection is interrupted and re-established as a member of the LAG (connectivity to AWS is interrupted). The connection must be hosted on the same AWS Direct Connect endpoint as the LAG, and its bandwidth must match the bandwidth for the LAG. You can re-associate a connection that's currently associated with a different LAG; however, if removing the connection would cause the original LAG to fall below its setting for minimum number of operational connections, the request fails. Any virtual interfaces that are directly associated with the connection are automatically re-associated with the LAG. If the connection was originally associated with a different LAG, the virtual interfaces remain associated with the original LAG. For interconnects, any hosted connections are automatically re-associated with the LAG. If the interconnect was originally associated with a different LAG, the hosted connections remain associated with the original LAG.
    */
@@ -100,6 +108,14 @@ declare class DirectConnect extends Service {
    */
   confirmPublicVirtualInterface(callback?: (err: AWSError, data: DirectConnect.Types.ConfirmPublicVirtualInterfaceResponse) => void): Request<DirectConnect.Types.ConfirmPublicVirtualInterfaceResponse, AWSError>;
   /**
+   * Accepts ownership of a transit virtual interface created by another AWS account.  After the owner of the transit virtual interface makes this call, the specified transit virtual interface is created and made available to handle traffic.
+   */
+  confirmTransitVirtualInterface(params: DirectConnect.Types.ConfirmTransitVirtualInterfaceRequest, callback?: (err: AWSError, data: DirectConnect.Types.ConfirmTransitVirtualInterfaceResponse) => void): Request<DirectConnect.Types.ConfirmTransitVirtualInterfaceResponse, AWSError>;
+  /**
+   * Accepts ownership of a transit virtual interface created by another AWS account.  After the owner of the transit virtual interface makes this call, the specified transit virtual interface is created and made available to handle traffic.
+   */
+  confirmTransitVirtualInterface(callback?: (err: AWSError, data: DirectConnect.Types.ConfirmTransitVirtualInterfaceResponse) => void): Request<DirectConnect.Types.ConfirmTransitVirtualInterfaceResponse, AWSError>;
+  /**
    * Creates a BGP peer on the specified virtual interface. You must create a BGP peer for the corresponding address family (IPv4/IPv6) in order to access AWS resources that also use that address family. If logical redundancy is not supported by the connection, interconnect, or LAG, the BGP peer cannot be in the same address family as an existing BGP peer on the virtual interface. When creating a IPv6 BGP peer, omit the Amazon address and customer address. IPv6 addresses are automatically assigned from the Amazon pool of IPv6 addresses; you cannot specify custom IPv6 addresses. For a public virtual interface, the Autonomous System Number (ASN) must be private or already whitelisted for the virtual interface.
    */
   createBGPPeer(params: DirectConnect.Types.CreateBGPPeerRequest, callback?: (err: AWSError, data: DirectConnect.Types.CreateBGPPeerResponse) => void): Request<DirectConnect.Types.CreateBGPPeerResponse, AWSError>;
@@ -132,11 +148,11 @@ declare class DirectConnect extends Service {
    */
   createDirectConnectGatewayAssociation(callback?: (err: AWSError, data: DirectConnect.Types.CreateDirectConnectGatewayAssociationResult) => void): Request<DirectConnect.Types.CreateDirectConnectGatewayAssociationResult, AWSError>;
   /**
-   * Creates a proposal to associate the specified virtual private gateway with the specified Direct Connect gateway. You can only associate a Direct Connect gateway and virtual private gateway when the account that owns the Direct Connect gateway and the account that owns the virtual private gateway have the same payer ID.
+   * Creates a proposal to associate the specified virtual private gateway or transit gateway with the specified Direct Connect gateway. You can only associate a Direct Connect gateway and virtual private gateway or transit gateway when the account that owns the Direct Connect gateway and the account that owns the virtual private gateway or transit gateway have the same AWS Payer ID.
    */
   createDirectConnectGatewayAssociationProposal(params: DirectConnect.Types.CreateDirectConnectGatewayAssociationProposalRequest, callback?: (err: AWSError, data: DirectConnect.Types.CreateDirectConnectGatewayAssociationProposalResult) => void): Request<DirectConnect.Types.CreateDirectConnectGatewayAssociationProposalResult, AWSError>;
   /**
-   * Creates a proposal to associate the specified virtual private gateway with the specified Direct Connect gateway. You can only associate a Direct Connect gateway and virtual private gateway when the account that owns the Direct Connect gateway and the account that owns the virtual private gateway have the same payer ID.
+   * Creates a proposal to associate the specified virtual private gateway or transit gateway with the specified Direct Connect gateway. You can only associate a Direct Connect gateway and virtual private gateway or transit gateway when the account that owns the Direct Connect gateway and the account that owns the virtual private gateway or transit gateway have the same AWS Payer ID.
    */
   createDirectConnectGatewayAssociationProposal(callback?: (err: AWSError, data: DirectConnect.Types.CreateDirectConnectGatewayAssociationProposalResult) => void): Request<DirectConnect.Types.CreateDirectConnectGatewayAssociationProposalResult, AWSError>;
   /**
@@ -172,6 +188,14 @@ declare class DirectConnect extends Service {
    */
   createPublicVirtualInterface(callback?: (err: AWSError, data: DirectConnect.Types.VirtualInterface) => void): Request<DirectConnect.Types.VirtualInterface, AWSError>;
   /**
+   * Creates a transit virtual interface. A transit virtual interface is a VLAN that transports traffic from a Direct Connect gateway to one or more transit gateways. A transit virtual interface enables the connection of multiple VPCs attached to a transit gateway to a Direct Connect gateway.
+   */
+  createTransitVirtualInterface(params: DirectConnect.Types.CreateTransitVirtualInterfaceRequest, callback?: (err: AWSError, data: DirectConnect.Types.CreateTransitVirtualInterfaceResult) => void): Request<DirectConnect.Types.CreateTransitVirtualInterfaceResult, AWSError>;
+  /**
+   * Creates a transit virtual interface. A transit virtual interface is a VLAN that transports traffic from a Direct Connect gateway to one or more transit gateways. A transit virtual interface enables the connection of multiple VPCs attached to a transit gateway to a Direct Connect gateway.
+   */
+  createTransitVirtualInterface(callback?: (err: AWSError, data: DirectConnect.Types.CreateTransitVirtualInterfaceResult) => void): Request<DirectConnect.Types.CreateTransitVirtualInterfaceResult, AWSError>;
+  /**
    * Deletes the specified BGP peer on the specified virtual interface with the specified customer address and ASN. You cannot delete the last BGP peer from a virtual interface.
    */
   deleteBGPPeer(params: DirectConnect.Types.DeleteBGPPeerRequest, callback?: (err: AWSError, data: DirectConnect.Types.DeleteBGPPeerResponse) => void): Request<DirectConnect.Types.DeleteBGPPeerResponse, AWSError>;
@@ -204,11 +228,11 @@ declare class DirectConnect extends Service {
    */
   deleteDirectConnectGatewayAssociation(callback?: (err: AWSError, data: DirectConnect.Types.DeleteDirectConnectGatewayAssociationResult) => void): Request<DirectConnect.Types.DeleteDirectConnectGatewayAssociationResult, AWSError>;
   /**
-   * Deletes the association proposal request between the specified Direct Connect gateway and virtual private gateway.
+   * Deletes the association proposal request between the specified Direct Connect gateway and virtual private gateway or transit gateway.
    */
   deleteDirectConnectGatewayAssociationProposal(params: DirectConnect.Types.DeleteDirectConnectGatewayAssociationProposalRequest, callback?: (err: AWSError, data: DirectConnect.Types.DeleteDirectConnectGatewayAssociationProposalResult) => void): Request<DirectConnect.Types.DeleteDirectConnectGatewayAssociationProposalResult, AWSError>;
   /**
-   * Deletes the association proposal request between the specified Direct Connect gateway and virtual private gateway.
+   * Deletes the association proposal request between the specified Direct Connect gateway and virtual private gateway or transit gateway.
    */
   deleteDirectConnectGatewayAssociationProposal(callback?: (err: AWSError, data: DirectConnect.Types.DeleteDirectConnectGatewayAssociationProposalResult) => void): Request<DirectConnect.Types.DeleteDirectConnectGatewayAssociationProposalResult, AWSError>;
   /**
@@ -260,11 +284,11 @@ declare class DirectConnect extends Service {
    */
   describeConnectionsOnInterconnect(callback?: (err: AWSError, data: DirectConnect.Types.Connections) => void): Request<DirectConnect.Types.Connections, AWSError>;
   /**
-   * Describes one or more association proposals for connection between a virtual private gateway and a Direct Connect gateway. 
+   * Describes one or more association proposals for connection between a virtual private gateway or transit gateway and a Direct Connect gateway. 
    */
   describeDirectConnectGatewayAssociationProposals(params: DirectConnect.Types.DescribeDirectConnectGatewayAssociationProposalsRequest, callback?: (err: AWSError, data: DirectConnect.Types.DescribeDirectConnectGatewayAssociationProposalsResult) => void): Request<DirectConnect.Types.DescribeDirectConnectGatewayAssociationProposalsResult, AWSError>;
   /**
-   * Describes one or more association proposals for connection between a virtual private gateway and a Direct Connect gateway. 
+   * Describes one or more association proposals for connection between a virtual private gateway or transit gateway and a Direct Connect gateway. 
    */
   describeDirectConnectGatewayAssociationProposals(callback?: (err: AWSError, data: DirectConnect.Types.DescribeDirectConnectGatewayAssociationProposalsResult) => void): Request<DirectConnect.Types.DescribeDirectConnectGatewayAssociationProposalsResult, AWSError>;
   /**
@@ -416,11 +440,11 @@ declare namespace DirectConnect {
      */
     proposalId: DirectConnectGatewayAssociationProposalId;
     /**
-     * The ID of the AWS account that owns the virtual private gateway.
+     * The ID of the AWS account that owns the virtual private gateway or transit gateway.
      */
     associatedGatewayOwnerAccount: OwnerAccount;
     /**
-     * Overrides the Amazon VPC prefixes advertised to the Direct Connect gateway.
+     * Overrides the existing Amazon VPC prefixes advertised to the Direct Connect gateway.
      */
     overrideAllowedPrefixesToDirectConnectGateway?: RouteFilterPrefixList;
   }
@@ -500,6 +524,23 @@ declare namespace DirectConnect {
      */
     newPublicVirtualInterfaceAllocation: NewPublicVirtualInterfaceAllocation;
   }
+  export interface AllocateTransitVirtualInterfaceRequest {
+    /**
+     * The ID of the connection on which the transit virtual interface is provisioned.
+     */
+    connectionId: ConnectionId;
+    /**
+     * The ID of the AWS account that owns the transit virtual interface.
+     */
+    ownerAccount: OwnerAccount;
+    /**
+     * Information about the transit virtual interface.
+     */
+    newTransitVirtualInterfaceAllocation: NewTransitVirtualInterfaceAllocation;
+  }
+  export interface AllocateTransitVirtualInterfaceResult {
+    virtualInterface?: VirtualInterface;
+  }
   export type AmazonAddress = string;
   export interface AssociateConnectionWithLagRequest {
     /**
@@ -541,7 +582,7 @@ declare namespace DirectConnect {
      */
     type?: GatewayType;
     /**
-     * The ID of the AWS account that owns the associated virtual private gateway.
+     * The ID of the AWS account that owns the associated virtual private gateway or transit gateway.
      */
     ownerAccount?: OwnerAccount;
     /**
@@ -638,6 +679,22 @@ declare namespace DirectConnect {
     virtualInterfaceId: VirtualInterfaceId;
   }
   export interface ConfirmPublicVirtualInterfaceResponse {
+    /**
+     * The state of the virtual interface. The following are the possible values:    confirming: The creation of the virtual interface is pending confirmation from the virtual interface owner. If the owner of the virtual interface is different from the owner of the connection on which it is provisioned, then the virtual interface will remain in this state until it is confirmed by the virtual interface owner.    verifying: This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.    pending: A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.    available: A virtual interface that is able to forward traffic.    down: A virtual interface that is BGP down.    deleting: A virtual interface is in this state immediately after calling DeleteVirtualInterface until it can no longer forward traffic.    deleted: A virtual interface that cannot forward traffic.    rejected: The virtual interface owner has declined creation of the virtual interface. If a virtual interface in the Confirming state is deleted by the virtual interface owner, the virtual interface enters the Rejected state.    unknown: The state of the virtual interface is not available.  
+     */
+    virtualInterfaceState?: VirtualInterfaceState;
+  }
+  export interface ConfirmTransitVirtualInterfaceRequest {
+    /**
+     * The ID of the virtual interface.
+     */
+    virtualInterfaceId: VirtualInterfaceId;
+    /**
+     * The ID of the Direct Connect gateway.
+     */
+    directConnectGatewayId: DirectConnectGatewayId;
+  }
+  export interface ConfirmTransitVirtualInterfaceResponse {
     /**
      * The state of the virtual interface. The following are the possible values:    confirming: The creation of the virtual interface is pending confirmation from the virtual interface owner. If the owner of the virtual interface is different from the owner of the connection on which it is provisioned, then the virtual interface will remain in this state until it is confirmed by the virtual interface owner.    verifying: This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.    pending: A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.    available: A virtual interface that is able to forward traffic.    down: A virtual interface that is BGP down.    deleting: A virtual interface is in this state immediately after calling DeleteVirtualInterface until it can no longer forward traffic.    deleted: A virtual interface that cannot forward traffic.    rejected: The virtual interface owner has declined creation of the virtual interface. If a virtual interface in the Confirming state is deleted by the virtual interface owner, the virtual interface enters the Rejected state.    unknown: The state of the virtual interface is not available.  
      */
@@ -760,7 +817,7 @@ declare namespace DirectConnect {
      */
     directConnectGatewayOwnerAccount: OwnerAccount;
     /**
-     * The ID of the virtual private gateway.
+     * The ID of the virtual private gateway or transit gateway.
      */
     gatewayId: GatewayIdToAssociate;
     /**
@@ -784,7 +841,7 @@ declare namespace DirectConnect {
      */
     directConnectGatewayId: DirectConnectGatewayId;
     /**
-     * The ID of the virtual private gateway.
+     * The ID of the virtual private gateway or transit gateway.
      */
     gatewayId?: GatewayIdToAssociate;
     /**
@@ -878,6 +935,19 @@ declare namespace DirectConnect {
      */
     newPublicVirtualInterface: NewPublicVirtualInterface;
   }
+  export interface CreateTransitVirtualInterfaceRequest {
+    /**
+     * The ID of the connection.
+     */
+    connectionId: ConnectionId;
+    /**
+     * Information about the transit virtual interface.
+     */
+    newTransitVirtualInterface: NewTransitVirtualInterface;
+  }
+  export interface CreateTransitVirtualInterfaceResult {
+    virtualInterface?: VirtualInterface;
+  }
   export type CustomerAddress = string;
   export interface DeleteBGPPeerRequest {
     /**
@@ -917,7 +987,7 @@ declare namespace DirectConnect {
   }
   export interface DeleteDirectConnectGatewayAssociationProposalResult {
     /**
-     * The ID of the virtual private gateway.
+     * The ID of the associated gateway.
      */
     directConnectGatewayAssociationProposal?: DirectConnectGatewayAssociationProposal;
   }
@@ -1025,7 +1095,7 @@ declare namespace DirectConnect {
      */
     proposalId?: DirectConnectGatewayAssociationProposalId;
     /**
-     * The ID of the associated virtual private gateway.
+     * The ID of the associated gateway.
      */
     associatedGatewayId?: AssociatedGatewayId;
     /**
@@ -1245,7 +1315,7 @@ declare namespace DirectConnect {
      */
     directConnectGatewayOwnerAccount?: OwnerAccount;
     /**
-     * The state of the association. The following are the possible values:    associating: The initial state after calling CreateDirectConnectGatewayAssociation.    associated: The Direct Connect gateway and virtual private gateway are successfully associated and ready to pass traffic.    disassociating: The initial state after calling DeleteDirectConnectGatewayAssociation.    disassociated: The virtual private gateway is disassociated from the Direct Connect gateway. Traffic flow between the Direct Connect gateway and virtual private gateway is stopped.  
+     * The state of the association. The following are the possible values:    associating: The initial state after calling CreateDirectConnectGatewayAssociation.    associated: The Direct Connect gateway and virtual private gateway or transit gateway are successfully associated and ready to pass traffic.    disassociating: The initial state after calling DeleteDirectConnectGatewayAssociation.    disassociated: The virtual private gateway or transit gateway is disassociated from the Direct Connect gateway. Traffic flow between the Direct Connect gateway and virtual private gateway or transit gateway is stopped.  
      */
     associationState?: DirectConnectGatewayAssociationState;
     /**
@@ -1253,7 +1323,7 @@ declare namespace DirectConnect {
      */
     stateChangeError?: StateChangeError;
     /**
-     * Information about the associated virtual private gateway.
+     * Information about the associated gateway.
      */
     associatedGateway?: AssociatedGateway;
     /**
@@ -1297,7 +1367,7 @@ declare namespace DirectConnect {
      */
     proposalState?: DirectConnectGatewayAssociationProposalState;
     /**
-     * Information about the associated virtual private gateway.
+     * Information about the associated gateway.
      */
     associatedGateway?: AssociatedGateway;
     /**
@@ -1335,12 +1405,17 @@ declare namespace DirectConnect {
      */
     attachmentState?: DirectConnectGatewayAttachmentState;
     /**
+     * The type of attachment.
+     */
+    attachmentType?: DirectConnectGatewayAttachmentType;
+    /**
      * The error message if the state of an object failed to advance.
      */
     stateChangeError?: StateChangeError;
   }
   export type DirectConnectGatewayAttachmentList = DirectConnectGatewayAttachment[];
   export type DirectConnectGatewayAttachmentState = "attaching"|"attached"|"detaching"|"detached"|string;
+  export type DirectConnectGatewayAttachmentType = "TransitVirtualInterface"|"PrivateVirtualInterface"|string;
   export type DirectConnectGatewayId = string;
   export type DirectConnectGatewayList = DirectConnectGateway[];
   export type DirectConnectGatewayName = string;
@@ -1357,7 +1432,7 @@ declare namespace DirectConnect {
   }
   export type GatewayIdToAssociate = string;
   export type GatewayIdentifier = string;
-  export type GatewayType = "virtualPrivateGateway"|string;
+  export type GatewayType = "virtualPrivateGateway"|"transitGateway"|string;
   export type HasLogicalRedundancy = "unknown"|"yes"|"no"|string;
   export interface Interconnect {
     /**
@@ -1700,6 +1775,78 @@ declare namespace DirectConnect {
      * The routes to be advertised to the AWS network in this Region. Applies to public virtual interfaces.
      */
     routeFilterPrefixes?: RouteFilterPrefixList;
+  }
+  export interface NewTransitVirtualInterface {
+    /**
+     * The name of the virtual interface assigned by the customer network.
+     */
+    virtualInterfaceName?: VirtualInterfaceName;
+    /**
+     * The ID of the VLAN.
+     */
+    vlan?: VLAN;
+    /**
+     * The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+     */
+    asn?: ASN;
+    /**
+     * The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.
+     */
+    mtu?: MTU;
+    /**
+     * The authentication key for BGP configuration.
+     */
+    authKey?: BGPAuthKey;
+    /**
+     * The IP address assigned to the Amazon interface.
+     */
+    amazonAddress?: AmazonAddress;
+    /**
+     * The IP address assigned to the customer interface.
+     */
+    customerAddress?: CustomerAddress;
+    /**
+     * The address family for the BGP peer.
+     */
+    addressFamily?: AddressFamily;
+    /**
+     * The ID of the Direct Connect gateway.
+     */
+    directConnectGatewayId?: DirectConnectGatewayId;
+  }
+  export interface NewTransitVirtualInterfaceAllocation {
+    /**
+     * The name of the virtual interface assigned by the customer network.
+     */
+    virtualInterfaceName?: VirtualInterfaceName;
+    /**
+     * The ID of the VLAN.
+     */
+    vlan?: VLAN;
+    /**
+     * The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.
+     */
+    asn?: ASN;
+    /**
+     * The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500. 
+     */
+    mtu?: MTU;
+    /**
+     * The authentication key for BGP configuration.
+     */
+    authKey?: BGPAuthKey;
+    /**
+     * The IP address assigned to the Amazon interface.
+     */
+    amazonAddress?: AmazonAddress;
+    /**
+     * The IP address assigned to the customer interface.
+     */
+    customerAddress?: CustomerAddress;
+    /**
+     * The address family for the BGP peer.
+     */
+    addressFamily?: AddressFamily;
   }
   export type OwnerAccount = string;
   export type PaginationToken = string;

@@ -173,6 +173,7 @@ export abstract class ConfigurationServicePlaceholders {
   backup?: AWS.Backup.Types.ClientConfiguration;
   worklink?: AWS.WorkLink.Types.ClientConfiguration;
   textract?: AWS.Textract.Types.ClientConfiguration;
+  managedblockchain?: AWS.ManagedBlockchain.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -348,4 +349,5 @@ export interface ConfigurationServiceApiVersions {
   backup?: AWS.Backup.Types.apiVersion;
   worklink?: AWS.WorkLink.Types.apiVersion;
   textract?: AWS.Textract.Types.apiVersion;
+  managedblockchain?: AWS.ManagedBlockchain.Types.apiVersion;
 }

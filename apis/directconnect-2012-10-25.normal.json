@@ -32,7 +32,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Accepts a proposal request to attach a virtual private gateway to a Direct Connect gateway.</p>"
+      "documentation": "<p>Accepts a proposal request to attach a virtual private gateway or transit gateway to a Direct Connect gateway.</p>"
     },
     "AllocateConnectionOnInterconnect": {
       "name": "AllocateConnectionOnInterconnect",
@@ -122,6 +122,28 @@
         }
       ],
       "documentation": "<p>Provisions a public virtual interface to be owned by the specified AWS account.</p> <p>The owner of a connection calls this function to provision a public virtual interface to be owned by the specified AWS account.</p> <p>Virtual interfaces created using this function must be confirmed by the owner using <a>ConfirmPublicVirtualInterface</a>. Until this step has been completed, the virtual interface is in the <code>confirming</code> state and is not available to handle traffic.</p> <p>When creating an IPv6 public virtual interface, omit the Amazon address and customer address. IPv6 addresses are automatically assigned from the Amazon pool of IPv6 addresses; you cannot specify custom IPv6 addresses.</p>"
+    },
+    "AllocateTransitVirtualInterface": {
+      "name": "AllocateTransitVirtualInterface",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AllocateTransitVirtualInterfaceRequest"
+      },
+      "output": {
+        "shape": "AllocateTransitVirtualInterfaceResult"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p>Provisions a transit virtual interface to be owned by the specified AWS account. Use this type of interface to connect a transit gateway to your Direct Connect gateway.</p> <p>The owner of a connection provisions a transit virtual interface to be owned by the specified AWS account.</p> <p>After you create a transit virtual interface, it must be confirmed by the owner using <a>ConfirmTransitVirtualInterface</a>. Until this step has been completed, the transit virtual interface is in the <code>requested</code> state and is not available to handle traffic.</p>"
     },
     "AssociateConnectionWithLag": {
       "name": "AssociateConnectionWithLag",
@@ -255,6 +277,28 @@
       ],
       "documentation": "<p>Accepts ownership of a public virtual interface created by another AWS account.</p> <p>After the virtual interface owner makes this call, the specified virtual interface is created and made available to handle traffic.</p>"
     },
+    "ConfirmTransitVirtualInterface": {
+      "name": "ConfirmTransitVirtualInterface",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ConfirmTransitVirtualInterfaceRequest"
+      },
+      "output": {
+        "shape": "ConfirmTransitVirtualInterfaceResponse"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p>Accepts ownership of a transit virtual interface created by another AWS account.</p> <p> After the owner of the transit virtual interface makes this call, the specified transit virtual interface is created and made available to handle traffic.</p>"
+    },
     "CreateBGPPeer": {
       "name": "CreateBGPPeer",
       "http": {
@@ -363,7 +407,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Creates a proposal to associate the specified virtual private gateway with the specified Direct Connect gateway.</p> <p>You can only associate a Direct Connect gateway and virtual private gateway when the account that owns the Direct Connect gateway and the account that owns the virtual private gateway have the same payer ID.</p>"
+      "documentation": "<p>Creates a proposal to associate the specified virtual private gateway or transit gateway with the specified Direct Connect gateway.</p> <p>You can only associate a Direct Connect gateway and virtual private gateway or transit gateway when the account that owns the Direct Connect gateway and the account that owns the virtual private gateway or transit gateway have the same AWS Payer ID.</p>"
     },
     "CreateInterconnect": {
       "name": "CreateInterconnect",
@@ -452,6 +496,28 @@
         }
       ],
       "documentation": "<p>Creates a public virtual interface. A virtual interface is the VLAN that transports AWS Direct Connect traffic. A public virtual interface supports sending traffic to public services of AWS such as Amazon S3.</p> <p>When creating an IPv6 public virtual interface (<code>addressFamily</code> is <code>ipv6</code>), leave the <code>customer</code> and <code>amazon</code> address fields blank to use auto-assigned IPv6 space. Custom IPv6 addresses are not supported.</p>"
+    },
+    "CreateTransitVirtualInterface": {
+      "name": "CreateTransitVirtualInterface",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateTransitVirtualInterfaceRequest"
+      },
+      "output": {
+        "shape": "CreateTransitVirtualInterfaceResult"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p>Creates a transit virtual interface. A transit virtual interface is a VLAN that transports traffic from a Direct Connect gateway to one or more transit gateways. A transit virtual interface enables the connection of multiple VPCs attached to a transit gateway to a Direct Connect gateway.</p>"
     },
     "DeleteBGPPeer": {
       "name": "DeleteBGPPeer",
@@ -561,7 +627,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Deletes the association proposal request between the specified Direct Connect gateway and virtual private gateway.</p>"
+      "documentation": "<p>Deletes the association proposal request between the specified Direct Connect gateway and virtual private gateway or transit gateway.</p>"
     },
     "DeleteInterconnect": {
       "name": "DeleteInterconnect",
@@ -717,7 +783,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Describes one or more association proposals for connection between a virtual private gateway and a Direct Connect gateway. </p>"
+      "documentation": "<p>Describes one or more association proposals for connection between a virtual private gateway or transit gateway and a Direct Connect gateway. </p>"
     },
     "DescribeDirectConnectGatewayAssociations": {
       "name": "DescribeDirectConnectGatewayAssociations",
@@ -1139,11 +1205,11 @@
         },
         "associatedGatewayOwnerAccount": {
           "shape": "OwnerAccount",
-          "documentation": "<p>The ID of the AWS account that owns the virtual private gateway.</p>"
+          "documentation": "<p>The ID of the AWS account that owns the virtual private gateway or transit gateway.</p>"
         },
         "overrideAllowedPrefixesToDirectConnectGateway": {
           "shape": "RouteFilterPrefixList",
-          "documentation": "<p>Overrides the Amazon VPC prefixes advertised to the Direct Connect gateway.</p>"
+          "documentation": "<p>Overrides the existing Amazon VPC prefixes advertised to the Direct Connect gateway.</p>"
         }
       }
     },
@@ -1270,6 +1336,36 @@
         }
       }
     },
+    "AllocateTransitVirtualInterfaceRequest": {
+      "type": "structure",
+      "required": [
+        "connectionId",
+        "ownerAccount",
+        "newTransitVirtualInterfaceAllocation"
+      ],
+      "members": {
+        "connectionId": {
+          "shape": "ConnectionId",
+          "documentation": "<p>The ID of the connection on which the transit virtual interface is provisioned.</p>"
+        },
+        "ownerAccount": {
+          "shape": "OwnerAccount",
+          "documentation": "<p>The ID of the AWS account that owns the transit virtual interface.</p>"
+        },
+        "newTransitVirtualInterfaceAllocation": {
+          "shape": "NewTransitVirtualInterfaceAllocation",
+          "documentation": "<p>Information about the transit virtual interface.</p>"
+        }
+      }
+    },
+    "AllocateTransitVirtualInterfaceResult": {
+      "type": "structure",
+      "members": {
+        "virtualInterface": {
+          "shape": "VirtualInterface"
+        }
+      }
+    },
     "AmazonAddress": {
       "type": "string"
     },
@@ -1337,7 +1433,7 @@
         },
         "ownerAccount": {
           "shape": "OwnerAccount",
-          "documentation": "<p>The ID of the AWS account that owns the associated virtual private gateway.</p>"
+          "documentation": "<p>The ID of the AWS account that owns the associated virtual private gateway or transit gateway.</p>"
         },
         "region": {
           "shape": "Region",
@@ -1506,6 +1602,32 @@
       }
     },
     "ConfirmPublicVirtualInterfaceResponse": {
+      "type": "structure",
+      "members": {
+        "virtualInterfaceState": {
+          "shape": "VirtualInterfaceState",
+          "documentation": "<p>The state of the virtual interface. The following are the possible values:</p> <ul> <li> <p> <code>confirming</code>: The creation of the virtual interface is pending confirmation from the virtual interface owner. If the owner of the virtual interface is different from the owner of the connection on which it is provisioned, then the virtual interface will remain in this state until it is confirmed by the virtual interface owner.</p> </li> <li> <p> <code>verifying</code>: This state only applies to public virtual interfaces. Each public virtual interface needs validation before the virtual interface can be created.</p> </li> <li> <p> <code>pending</code>: A virtual interface is in this state from the time that it is created until the virtual interface is ready to forward traffic.</p> </li> <li> <p> <code>available</code>: A virtual interface that is able to forward traffic.</p> </li> <li> <p> <code>down</code>: A virtual interface that is BGP down.</p> </li> <li> <p> <code>deleting</code>: A virtual interface is in this state immediately after calling <a>DeleteVirtualInterface</a> until it can no longer forward traffic.</p> </li> <li> <p> <code>deleted</code>: A virtual interface that cannot forward traffic.</p> </li> <li> <p> <code>rejected</code>: The virtual interface owner has declined creation of the virtual interface. If a virtual interface in the <code>Confirming</code> state is deleted by the virtual interface owner, the virtual interface enters the <code>Rejected</code> state.</p> </li> <li> <p> <code>unknown</code>: The state of the virtual interface is not available.</p> </li> </ul>"
+        }
+      }
+    },
+    "ConfirmTransitVirtualInterfaceRequest": {
+      "type": "structure",
+      "required": [
+        "virtualInterfaceId",
+        "directConnectGatewayId"
+      ],
+      "members": {
+        "virtualInterfaceId": {
+          "shape": "VirtualInterfaceId",
+          "documentation": "<p>The ID of the virtual interface.</p>"
+        },
+        "directConnectGatewayId": {
+          "shape": "DirectConnectGatewayId",
+          "documentation": "<p>The ID of the Direct Connect gateway.</p>"
+        }
+      }
+    },
+    "ConfirmTransitVirtualInterfaceResponse": {
       "type": "structure",
       "members": {
         "virtualInterfaceState": {
@@ -1684,7 +1806,7 @@
         },
         "gatewayId": {
           "shape": "GatewayIdToAssociate",
-          "documentation": "<p>The ID of the virtual private gateway.</p>"
+          "documentation": "<p>The ID of the virtual private gateway or transit gateway.</p>"
         },
         "addAllowedPrefixesToDirectConnectGateway": {
           "shape": "RouteFilterPrefixList",
@@ -1717,7 +1839,7 @@
         },
         "gatewayId": {
           "shape": "GatewayIdToAssociate",
-          "documentation": "<p>The ID of the virtual private gateway.</p>"
+          "documentation": "<p>The ID of the virtual private gateway or transit gateway.</p>"
         },
         "addAllowedPrefixesToDirectConnectGateway": {
           "shape": "RouteFilterPrefixList",
@@ -1854,6 +1976,31 @@
         }
       }
     },
+    "CreateTransitVirtualInterfaceRequest": {
+      "type": "structure",
+      "required": [
+        "connectionId",
+        "newTransitVirtualInterface"
+      ],
+      "members": {
+        "connectionId": {
+          "shape": "ConnectionId",
+          "documentation": "<p>The ID of the connection.</p>"
+        },
+        "newTransitVirtualInterface": {
+          "shape": "NewTransitVirtualInterface",
+          "documentation": "<p>Information about the transit virtual interface.</p>"
+        }
+      }
+    },
+    "CreateTransitVirtualInterfaceResult": {
+      "type": "structure",
+      "members": {
+        "virtualInterface": {
+          "shape": "VirtualInterface"
+        }
+      }
+    },
     "CustomerAddress": {
       "type": "string"
     },
@@ -1916,7 +2063,7 @@
       "members": {
         "directConnectGatewayAssociationProposal": {
           "shape": "DirectConnectGatewayAssociationProposal",
-          "documentation": "<p>The ID of the virtual private gateway.</p>"
+          "documentation": "<p>The ID of the associated gateway.</p>"
         }
       }
     },
@@ -2084,7 +2231,7 @@
         },
         "associatedGatewayId": {
           "shape": "AssociatedGatewayId",
-          "documentation": "<p>The ID of the associated virtual private gateway.</p>"
+          "documentation": "<p>The ID of the associated gateway.</p>"
         },
         "maxResults": {
           "shape": "MaxResultSetSize",
@@ -2356,7 +2503,7 @@
           "documentation": "<p>The error message if the state of an object failed to advance.</p>"
         }
       },
-      "documentation": "<p>Information about a Direct Connect gateway, which enables you to connect virtual interfaces and virtual private gateways.</p>"
+      "documentation": "<p>Information about a Direct Connect gateway, which enables you to connect virtual interfaces and virtual private gateway or transit gateways.</p>"
     },
     "DirectConnectGatewayAssociation": {
       "type": "structure",
@@ -2371,7 +2518,7 @@
         },
         "associationState": {
           "shape": "DirectConnectGatewayAssociationState",
-          "documentation": "<p>The state of the association. The following are the possible values:</p> <ul> <li> <p> <code>associating</code>: The initial state after calling <a>CreateDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <code>associated</code>: The Direct Connect gateway and virtual private gateway are successfully associated and ready to pass traffic.</p> </li> <li> <p> <code>disassociating</code>: The initial state after calling <a>DeleteDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <code>disassociated</code>: The virtual private gateway is disassociated from the Direct Connect gateway. Traffic flow between the Direct Connect gateway and virtual private gateway is stopped.</p> </li> </ul>"
+          "documentation": "<p>The state of the association. The following are the possible values:</p> <ul> <li> <p> <code>associating</code>: The initial state after calling <a>CreateDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <code>associated</code>: The Direct Connect gateway and virtual private gateway or transit gateway are successfully associated and ready to pass traffic.</p> </li> <li> <p> <code>disassociating</code>: The initial state after calling <a>DeleteDirectConnectGatewayAssociation</a>.</p> </li> <li> <p> <code>disassociated</code>: The virtual private gateway or transit gateway is disassociated from the Direct Connect gateway. Traffic flow between the Direct Connect gateway and virtual private gateway or transit gateway is stopped.</p> </li> </ul>"
         },
         "stateChangeError": {
           "shape": "StateChangeError",
@@ -2379,7 +2526,7 @@
         },
         "associatedGateway": {
           "shape": "AssociatedGateway",
-          "documentation": "<p>Information about the associated virtual private gateway.</p>"
+          "documentation": "<p>Information about the associated gateway.</p>"
         },
         "associationId": {
           "shape": "DirectConnectGatewayAssociationId",
@@ -2402,7 +2549,7 @@
           "documentation": "<p>The ID of the AWS account that owns the virtual private gateway.</p>"
         }
       },
-      "documentation": "<p>Information about an association between a Direct Connect gateway and a virtual private gateway.</p>"
+      "documentation": "<p>Information about an association between a Direct Connect gateway and a virtual private gateway or transit gateway.</p>"
     },
     "DirectConnectGatewayAssociationId": {
       "type": "string"
@@ -2434,7 +2581,7 @@
         },
         "associatedGateway": {
           "shape": "AssociatedGateway",
-          "documentation": "<p>Information about the associated virtual private gateway.</p>"
+          "documentation": "<p>Information about the associated gateway.</p>"
         },
         "existingAllowedPrefixesToDirectConnectGateway": {
           "shape": "RouteFilterPrefixList",
@@ -2445,7 +2592,7 @@
           "documentation": "<p>The Amazon VPC prefixes to advertise to the Direct Connect gateway.</p>"
         }
       },
-      "documentation": "<p>Information about the proposal request to attach a virtual private gateway to a DDirect Connect gateway. </p>"
+      "documentation": "<p>Information about the proposal request to attach a virtual private gateway to a Direct Connect gateway. </p>"
     },
     "DirectConnectGatewayAssociationProposalId": {
       "type": "string"
@@ -2497,6 +2644,10 @@
           "shape": "DirectConnectGatewayAttachmentState",
           "documentation": "<p>The state of the attachment. The following are the possible values:</p> <ul> <li> <p> <code>attaching</code>: The initial state after a virtual interface is created using the Direct Connect gateway.</p> </li> <li> <p> <code>attached</code>: The Direct Connect gateway and virtual interface are attached and ready to pass traffic.</p> </li> <li> <p> <code>detaching</code>: The initial state after calling <a>DeleteVirtualInterface</a>.</p> </li> <li> <p> <code>detached</code>: The virtual interface is detached from the Direct Connect gateway. Traffic flow between the Direct Connect gateway and virtual interface is stopped.</p> </li> </ul>"
         },
+        "attachmentType": {
+          "shape": "DirectConnectGatewayAttachmentType",
+          "documentation": "<p>The type of attachment.</p>"
+        },
         "stateChangeError": {
           "shape": "StateChangeError",
           "documentation": "<p>The error message if the state of an object failed to advance.</p>"
@@ -2517,6 +2668,13 @@
         "attached",
         "detaching",
         "detached"
+      ]
+    },
+    "DirectConnectGatewayAttachmentType": {
+      "type": "string",
+      "enum": [
+        "TransitVirtualInterface",
+        "PrivateVirtualInterface"
       ]
     },
     "DirectConnectGatewayId": {
@@ -2566,7 +2724,8 @@
     "GatewayType": {
       "type": "string",
       "enum": [
-        "virtualPrivateGateway"
+        "virtualPrivateGateway",
+        "transitGateway"
       ]
     },
     "HasLogicalRedundancy": {
@@ -3050,6 +3209,86 @@
         }
       },
       "documentation": "<p>Information about a public virtual interface to be provisioned on a connection.</p>"
+    },
+    "NewTransitVirtualInterface": {
+      "type": "structure",
+      "members": {
+        "virtualInterfaceName": {
+          "shape": "VirtualInterfaceName",
+          "documentation": "<p>The name of the virtual interface assigned by the customer network.</p>"
+        },
+        "vlan": {
+          "shape": "VLAN",
+          "documentation": "<p>The ID of the VLAN.</p>"
+        },
+        "asn": {
+          "shape": "ASN",
+          "documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>"
+        },
+        "mtu": {
+          "shape": "MTU",
+          "documentation": "<p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500.</p>"
+        },
+        "authKey": {
+          "shape": "BGPAuthKey",
+          "documentation": "<p>The authentication key for BGP configuration.</p>"
+        },
+        "amazonAddress": {
+          "shape": "AmazonAddress",
+          "documentation": "<p>The IP address assigned to the Amazon interface.</p>"
+        },
+        "customerAddress": {
+          "shape": "CustomerAddress",
+          "documentation": "<p>The IP address assigned to the customer interface.</p>"
+        },
+        "addressFamily": {
+          "shape": "AddressFamily",
+          "documentation": "<p>The address family for the BGP peer.</p>"
+        },
+        "directConnectGatewayId": {
+          "shape": "DirectConnectGatewayId",
+          "documentation": "<p>The ID of the Direct Connect gateway.</p>"
+        }
+      },
+      "documentation": "<p>Information about a transit virtual interface.</p>"
+    },
+    "NewTransitVirtualInterfaceAllocation": {
+      "type": "structure",
+      "members": {
+        "virtualInterfaceName": {
+          "shape": "VirtualInterfaceName",
+          "documentation": "<p>The name of the virtual interface assigned by the customer network.</p>"
+        },
+        "vlan": {
+          "shape": "VLAN",
+          "documentation": "<p>The ID of the VLAN.</p>"
+        },
+        "asn": {
+          "shape": "ASN",
+          "documentation": "<p>The autonomous system (AS) number for Border Gateway Protocol (BGP) configuration.</p>"
+        },
+        "mtu": {
+          "shape": "MTU",
+          "documentation": "<p>The maximum transmission unit (MTU), in bytes. The supported values are 1500 and 9001. The default value is 1500. </p>"
+        },
+        "authKey": {
+          "shape": "BGPAuthKey",
+          "documentation": "<p>The authentication key for BGP configuration.</p>"
+        },
+        "amazonAddress": {
+          "shape": "AmazonAddress",
+          "documentation": "<p>The IP address assigned to the Amazon interface.</p>"
+        },
+        "customerAddress": {
+          "shape": "CustomerAddress",
+          "documentation": "<p>The IP address assigned to the customer interface.</p>"
+        },
+        "addressFamily": {
+          "shape": "AddressFamily",
+          "documentation": "<p>The address family for the BGP peer.</p>"
+        }
+      },
+      "documentation": "<p>Information about a transit virtual interface to be provisioned on a connection.</p>"
     },
     "OwnerAccount": {
       "type": "string"
