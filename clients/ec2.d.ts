@@ -2301,6 +2301,14 @@ declare class EC2 extends Service {
    */
   modifyVpcTenancy(callback?: (err: AWSError, data: EC2.Types.ModifyVpcTenancyResult) => void): Request<EC2.Types.ModifyVpcTenancyResult, AWSError>;
   /**
+   * 
+   */
+  modifyVpnConnection(params: EC2.Types.ModifyVpnConnectionRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpnConnectionResult) => void): Request<EC2.Types.ModifyVpnConnectionResult, AWSError>;
+  /**
+   * 
+   */
+  modifyVpnConnection(callback?: (err: AWSError, data: EC2.Types.ModifyVpnConnectionResult) => void): Request<EC2.Types.ModifyVpnConnectionResult, AWSError>;
+  /**
    * Enables detailed monitoring for a running instance. Otherwise, basic monitoring is enabled. For more information, see Monitoring Your Instances and Volumes in the Amazon Elastic Compute Cloud User Guide. To disable detailed monitoring, see .
    */
   monitorInstances(params: EC2.Types.MonitorInstancesRequest, callback?: (err: AWSError, data: EC2.Types.MonitorInstancesResult) => void): Request<EC2.Types.MonitorInstancesResult, AWSError>;
@@ -14170,6 +14178,15 @@ declare namespace EC2 {
      * Returns true if the request succeeds; otherwise, returns an error.
      */
     ReturnValue?: Boolean;
+  }
+  export interface ModifyVpnConnectionRequest {
+    VpnConnectionId: String;
+    TransitGatewayId?: String;
+    VpnGatewayId?: String;
+    DryRun?: Boolean;
+  }
+  export interface ModifyVpnConnectionResult {
+    VpnConnection?: VpnConnection;
   }
   export interface MonitorInstancesRequest {
     /**

@@ -108,6 +108,14 @@ declare class XRay extends Service {
    */
   getServiceGraph(callback?: (err: AWSError, data: XRay.Types.GetServiceGraphResult) => void): Request<XRay.Types.GetServiceGraphResult, AWSError>;
   /**
+   * Get an aggregation of service statistics defined by a specific time range.
+   */
+  getTimeSeriesServiceStatistics(params: XRay.Types.GetTimeSeriesServiceStatisticsRequest, callback?: (err: AWSError, data: XRay.Types.GetTimeSeriesServiceStatisticsResult) => void): Request<XRay.Types.GetTimeSeriesServiceStatisticsResult, AWSError>;
+  /**
+   * Get an aggregation of service statistics defined by a specific time range.
+   */
+  getTimeSeriesServiceStatistics(callback?: (err: AWSError, data: XRay.Types.GetTimeSeriesServiceStatisticsResult) => void): Request<XRay.Types.GetTimeSeriesServiceStatisticsResult, AWSError>;
+  /**
    * Retrieves a service graph for one or more specific trace IDs.
    */
   getTraceGraph(params: XRay.Types.GetTraceGraphRequest, callback?: (err: AWSError, data: XRay.Types.GetTraceGraphResult) => void): Request<XRay.Types.GetTraceGraphResult, AWSError>;
@@ -383,6 +391,7 @@ declare namespace XRay {
   export type EncryptionKeyId = string;
   export type EncryptionStatus = "UPDATING"|"ACTIVE"|string;
   export type EncryptionType = "NONE"|"KMS"|string;
+  export type EntitySelectorExpression = string;
   export interface ErrorRootCause {
     /**
      * A list of services corresponding to an error. A service identifies a segment and it contains a name, account ID, type, and inferred flag.
@@ -644,6 +653,50 @@ declare namespace XRay {
      */
     NextToken?: String;
   }
+  export interface GetTimeSeriesServiceStatisticsRequest {
+    /**
+     * The start of the time frame for which to aggregate statistics.
+     */
+    StartTime: Timestamp;
+    /**
+     * The end of the time frame for which to aggregate statistics.
+     */
+    EndTime: Timestamp;
+    /**
+     * The case-sensitive name of the group for which to pull statistics from.
+     */
+    GroupName?: GroupName;
+    /**
+     * The ARN of the group for which to pull statistics from.
+     */
+    GroupARN?: GroupARN;
+    /**
+     * A filter expression defining entities that will be aggregated for statistics. Supports ID, service, and edge functions. If no selector expression is specified, edge statistics are returned. 
+     */
+    EntitySelectorExpression?: EntitySelectorExpression;
+    /**
+     * Aggregation period in seconds.
+     */
+    Period?: NullableInteger;
+    /**
+     * Pagination token. Not used.
+     */
+    NextToken?: String;
+  }
+  export interface GetTimeSeriesServiceStatisticsResult {
+    /**
+     * The collection of statistics.
+     */
+    TimeSeriesServiceStatistics?: TimeSeriesServiceStatisticsList;
+    /**
+     * A flag indicating whether or not a group's filter expression has been consistent, or if a returned aggregation may show statistics from an older version of the group's filter expression.
+     */
+    ContainsOldGroupVersions?: Boolean;
+    /**
+     * Pagination token. Not used.
+     */
+    NextToken?: String;
+  }
   export interface GetTraceGraphRequest {
     /**
      * Trace IDs of requests for which to generate a service graph.
@@ -674,9 +727,17 @@ declare namespace XRay {
      */
     EndTime: Timestamp;
     /**
+     * A parameter to indicate whether to query trace summaries by TraceId or Event time.
+     */
+    TimeRangeType?: TimeRangeType;
+    /**
      * Set to true to get summaries for only a subset of available traces.
      */
     Sampling?: NullableBoolean;
+    /**
+     * A paramater to indicate whether to enable sampling on trace summaries. Input parameters are Name and Value.
+     */
+    SamplingStrategy?: SamplingStrategy;
     /**
      * Specify a filter expression to retrieve trace summaries for services or requests that meet certain requirements.
      */
@@ -1071,6 +1132,17 @@ declare namespace XRay {
     BorrowCount?: BorrowCount;
   }
   export type SamplingStatisticsDocumentList = SamplingStatisticsDocument[];
+  export interface SamplingStrategy {
+    /**
+     * The name of a sampling rule.
+     */
+    Name?: SamplingStrategyName;
+    /**
+     * The value of a sampling rule.
+     */
+    Value?: NullableDouble;
+  }
+  export type SamplingStrategyName = "PartialScan"|"FixedRate"|string;
   export interface SamplingTargetDocument {
     /**
      * The name of the sampling rule.
@@ -1234,6 +1306,20 @@ declare namespace XRay {
     BackendConnectionErrors?: BackendConnectionErrors;
   }
   export type TelemetryRecordList = TelemetryRecord[];
+  export type TimeRangeType = "TraceId"|"Event"|string;
+  export interface TimeSeriesServiceStatistics {
+    /**
+     * Timestamp of the window for which statistics are aggregated.
+     */
+    Timestamp?: Timestamp;
+    EdgeSummaryStatistics?: EdgeStatistics;
+    ServiceSummaryStatistics?: ServiceStatistics;
+    /**
+     * The response time histogram for the selected entities.
+     */
+    ResponseTimeHistogram?: Histogram;
+  }
+  export type TimeSeriesServiceStatisticsList = TimeSeriesServiceStatistics[];
   export type Timestamp = Date;
   export interface Trace {
     /**
@@ -1334,6 +1420,10 @@ declare namespace XRay {
      * The revision number of a trace.
      */
     Revision?: Integer;
+    /**
+     * The matched time stamp of a defined event.
+     */
+    MatchedEventTime?: Timestamp;
   }
   export type TraceSummaryList = TraceSummary[];
   export interface TraceUser {

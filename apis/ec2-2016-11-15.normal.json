@@ -3869,6 +3869,19 @@
       },
       "documentation": "<p>Modifies the instance tenancy attribute of the specified VPC. You can change the instance tenancy attribute of a VPC to <code>default</code> only. You cannot change the instance tenancy attribute to <code>dedicated</code>.</p> <p>After you modify the tenancy of the VPC, any new instances that you launch into the VPC have a tenancy of <code>default</code>, unless you specify otherwise during launch. The tenancy of any existing instances in the VPC is not affected.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html\">Dedicated Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
+    "ModifyVpnConnection": {
+      "name": "ModifyVpnConnection",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyVpnConnectionRequest"
+      },
+      "output": {
+        "shape": "ModifyVpnConnectionResult"
+      }
+    },
     "MonitorInstances": {
       "name": "MonitorInstances",
       "http": {
@@ -22318,6 +22331,35 @@
           "shape": "Boolean",
           "documentation": "<p>Returns <code>true</code> if the request succeeds; otherwise, returns an error.</p>",
           "locationName": "return"
+        }
+      }
+    },
+    "ModifyVpnConnectionRequest": {
+      "type": "structure",
+      "required": [
+        "VpnConnectionId"
+      ],
+      "members": {
+        "VpnConnectionId": {
+          "shape": "String"
+        },
+        "TransitGatewayId": {
+          "shape": "String"
+        },
+        "VpnGatewayId": {
+          "shape": "String"
+        },
+        "DryRun": {
+          "shape": "Boolean"
+        }
+      }
+    },
+    "ModifyVpnConnectionResult": {
+      "type": "structure",
+      "members": {
+        "VpnConnection": {
+          "shape": "VpnConnection",
+          "locationName": "vpnConnection"
         }
       }
     },

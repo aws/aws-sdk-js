@@ -277,6 +277,28 @@
       ],
       "documentation": "<p>Retrieves a document that describes services that process incoming requests, and downstream services that they call as a result. Root services process incoming requests and make calls to downstream services. Root services are applications that use the AWS X-Ray SDK. Downstream services can be other applications, AWS resources, HTTP web APIs, or SQL databases.</p>"
     },
+    "GetTimeSeriesServiceStatistics": {
+      "name": "GetTimeSeriesServiceStatistics",
+      "http": {
+        "method": "POST",
+        "requestUri": "/TimeSeriesServiceStatistics"
+      },
+      "input": {
+        "shape": "GetTimeSeriesServiceStatisticsRequest"
+      },
+      "output": {
+        "shape": "GetTimeSeriesServiceStatisticsResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottledException"
+        }
+      ],
+      "documentation": "<p>Get an aggregation of service statistics defined by a specific time range.</p>"
+    },
     "GetTraceGraph": {
       "name": "GetTraceGraph",
       "http": {
@@ -319,7 +341,7 @@
           "shape": "ThrottledException"
         }
       ],
-      "documentation": "<p>Retrieves IDs and metadata for traces available for a specified time frame using an optional filter. To get the full traces, pass the trace IDs to <code>BatchGetTraces</code>.</p> <p>A filter expression can target traced requests that hit specific service nodes or edges, have errors, or come from a known user. For example, the following filter expression targets traces that pass through <code>api.example.com</code>:</p> <p> <code>service(\"api.example.com\")</code> </p> <p>This filter expression finds traces that have an annotation named <code>account</code> with the value <code>12345</code>:</p> <p> <code>annotation.account = \"12345\"</code> </p> <p>For a full list of indexed fields and keywords that you can use in filter expressions, see <a href=\"http://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html\">Using Filter Expressions</a> in the <i>AWS X-Ray Developer Guide</i>.</p>"
+      "documentation": "<p>Retrieves IDs and metadata for traces available for a specified time frame using an optional filter. To get the full traces, pass the trace IDs to <code>BatchGetTraces</code>.</p> <p>A filter expression can target traced requests that hit specific service nodes or edges, have errors, or come from a known user. For example, the following filter expression targets traces that pass through <code>api.example.com</code>:</p> <p> <code>service(\"api.example.com\")</code> </p> <p>This filter expression finds traces that have an annotation named <code>account</code> with the value <code>12345</code>:</p> <p> <code>annotation.account = \"12345\"</code> </p> <p>For a full list of indexed fields and keywords that you can use in filter expressions, see <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html\">Using Filter Expressions</a> in the <i>AWS X-Ray Developer Guide</i>.</p>"
     },
     "PutEncryptionConfig": {
       "name": "PutEncryptionConfig",
@@ -789,6 +811,11 @@
         "KMS"
       ]
     },
+    "EntitySelectorExpression": {
+      "type": "string",
+      "max": 500,
+      "min": 1
+    },
     "ErrorRootCause": {
       "type": "structure",
       "members": {
@@ -974,9 +1001,7 @@
       "documentation": "<p>Information about requests that failed with a 5xx Server Error status code.</p>"
     },
     "FilterExpression": {
-      "type": "string",
-      "max": 2000,
-      "min": 1
+      "type": "string"
     },
     "FixedRate": {
       "type": "double",
@@ -1172,6 +1197,60 @@
         }
       }
     },
+    "GetTimeSeriesServiceStatisticsRequest": {
+      "type": "structure",
+      "required": [
+        "StartTime",
+        "EndTime"
+      ],
+      "members": {
+        "StartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The start of the time frame for which to aggregate statistics.</p>"
+        },
+        "EndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The end of the time frame for which to aggregate statistics.</p>"
+        },
+        "GroupName": {
+          "shape": "GroupName",
+          "documentation": "<p>The case-sensitive name of the group for which to pull statistics from.</p>"
+        },
+        "GroupARN": {
+          "shape": "GroupARN",
+          "documentation": "<p>The ARN of the group for which to pull statistics from.</p>"
+        },
+        "EntitySelectorExpression": {
+          "shape": "EntitySelectorExpression",
+          "documentation": "<p>A filter expression defining entities that will be aggregated for statistics. Supports ID, service, and edge functions. If no selector expression is specified, edge statistics are returned. </p>"
+        },
+        "Period": {
+          "shape": "NullableInteger",
+          "documentation": "<p>Aggregation period in seconds.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>Pagination token. Not used.</p>"
+        }
+      }
+    },
+    "GetTimeSeriesServiceStatisticsResult": {
+      "type": "structure",
+      "members": {
+        "TimeSeriesServiceStatistics": {
+          "shape": "TimeSeriesServiceStatisticsList",
+          "documentation": "<p>The collection of statistics.</p>"
+        },
+        "ContainsOldGroupVersions": {
+          "shape": "Boolean",
+          "documentation": "<p>A flag indicating whether or not a group's filter expression has been consistent, or if a returned aggregation may show statistics from an older version of the group's filter expression.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>Pagination token. Not used.</p>"
+        }
+      }
+    },
     "GetTraceGraphRequest": {
       "type": "structure",
       "required": [
@@ -1216,9 +1295,17 @@
           "shape": "Timestamp",
           "documentation": "<p>The end of the time frame for which to retrieve traces.</p>"
         },
+        "TimeRangeType": {
+          "shape": "TimeRangeType",
+          "documentation": "<p>A parameter to indicate whether to query trace summaries by TraceId or Event time.</p>"
+        },
         "Sampling": {
           "shape": "NullableBoolean",
           "documentation": "<p>Set to <code>true</code> to get summaries for only a subset of available traces.</p>"
+        },
+        "SamplingStrategy": {
+          "shape": "SamplingStrategy",
+          "documentation": "<p>A paramater to indicate whether to enable sampling on trace summaries. Input parameters are Name and Value.</p>"
         },
         "FilterExpression": {
           "shape": "FilterExpression",
@@ -1816,6 +1903,27 @@
       },
       "max": 25
     },
+    "SamplingStrategy": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "SamplingStrategyName",
+          "documentation": "<p>The name of a sampling rule.</p>"
+        },
+        "Value": {
+          "shape": "NullableDouble",
+          "documentation": "<p>The value of a sampling rule.</p>"
+        }
+      },
+      "documentation": "<p>The name and value of a sampling rule to apply to a trace summary.</p>"
+    },
+    "SamplingStrategyName": {
+      "type": "string",
+      "enum": [
+        "PartialScan",
+        "FixedRate"
+      ]
+    },
     "SamplingTargetDocument": {
       "type": "structure",
       "members": {
@@ -2049,6 +2157,39 @@
         "shape": "TelemetryRecord"
       }
     },
+    "TimeRangeType": {
+      "type": "string",
+      "enum": [
+        "TraceId",
+        "Event"
+      ]
+    },
+    "TimeSeriesServiceStatistics": {
+      "type": "structure",
+      "members": {
+        "Timestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>Timestamp of the window for which statistics are aggregated.</p>"
+        },
+        "EdgeSummaryStatistics": {
+          "shape": "EdgeStatistics"
+        },
+        "ServiceSummaryStatistics": {
+          "shape": "ServiceStatistics"
+        },
+        "ResponseTimeHistogram": {
+          "shape": "Histogram",
+          "documentation": "<p>The response time histogram for the selected entities.</p>"
+        }
+      },
+      "documentation": "<p>A list of TimeSeriesStatistic structures.</p>"
+    },
+    "TimeSeriesServiceStatisticsList": {
+      "type": "list",
+      "member": {
+        "shape": "TimeSeriesServiceStatistics"
+      }
+    },
     "Timestamp": {
       "type": "timestamp"
     },
@@ -2192,6 +2333,10 @@
         "Revision": {
           "shape": "Integer",
           "documentation": "<p>The revision number of a trace.</p>"
+        },
+        "MatchedEventTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The matched time stamp of a defined event.</p>"
         }
       },
       "documentation": "<p>Metadata generated from the segment documents in a trace.</p>"
