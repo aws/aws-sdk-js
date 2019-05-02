@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.447.0-->
+<!--LATEST=2.448.0-->
 <!--ENTRYINSERT-->
+
+## 2.448.0
+* feature: AlexaForBusiness: This release allows developers and customers to send text and audio announcements to rooms.
+* feature: KMS: AWS Key Management Service (KMS) can return an INTERNAL_ERROR connection error code if it cannot connect a custom key store to its AWS CloudHSM cluster. INTERNAL_ERROR is one of several connection error codes that help you to diagnose and fix a problem with your custom key store.
 
 ## 2.447.0
 * feature: EC2: This release adds an API for the modification of a VPN Connection, enabling migration from a Virtual Private Gateway (VGW) to a Transit Gateway (TGW), while preserving the VPN endpoint IP addresses on the AWS side as well as the tunnel options.

@@ -572,6 +572,14 @@ declare class AlexaForBusiness extends Service {
    */
   searchUsers(callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchUsersResponse) => void): Request<AlexaForBusiness.Types.SearchUsersResponse, AWSError>;
   /**
+   * Triggers an asynchronous flow to send text, SSML, or audio announcements to multiple rooms, identified by a search, such as filter. 
+   */
+  sendAnnouncement(params: AlexaForBusiness.Types.SendAnnouncementRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SendAnnouncementResponse) => void): Request<AlexaForBusiness.Types.SendAnnouncementResponse, AWSError>;
+  /**
+   * Triggers an asynchronous flow to send text, SSML, or audio announcements to multiple rooms, identified by a search, such as filter. 
+   */
+  sendAnnouncement(callback?: (err: AWSError, data: AlexaForBusiness.Types.SendAnnouncementResponse) => void): Request<AlexaForBusiness.Types.SendAnnouncementResponse, AWSError>;
+  /**
    * Sends an enrollment invitation email with a URL to a user. The URL is valid for 72 hours or until you call this operation again, whichever comes first. 
    */
   sendInvitation(params: AlexaForBusiness.Types.SendInvitationRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SendInvitationResponse) => void): Request<AlexaForBusiness.Types.SendInvitationResponse, AWSError>;
@@ -794,6 +802,18 @@ declare namespace AlexaForBusiness {
   }
   export interface AssociateSkillWithUsersResponse {
   }
+  export interface Audio {
+    /**
+     * The locale of the audio message. Currently, en-US is supported.
+     */
+    Locale: Locale;
+    /**
+     * The location of the audio file. Currently, S3 URLs are supported. Only S3 locations comprised of safe character are valid. For more information, see Safe Characters.
+     */
+    Location: AudioLocation;
+  }
+  export type AudioList = Audio[];
+  export type AudioLocation = string;
   export type AuthorizationResult = {[key: string]: Value};
   export type Boolean = boolean;
   export type BulletPoint = string;
@@ -814,7 +834,7 @@ declare namespace AlexaForBusiness {
     /**
      * The time of report delivery.
      */
-    DeliveryTime?: Timestamp;
+    DeliveryTime?: BusinessReportDeliveryTime;
     /**
      * The download link where a user can download the report.
      */
@@ -826,6 +846,7 @@ declare namespace AlexaForBusiness {
      */
     Interval?: BusinessReportInterval;
   }
+  export type BusinessReportDeliveryTime = Date;
   export type BusinessReportDownloadUrl = string;
   export type BusinessReportFailureCode = "ACCESS_DENIED"|"NO_SUCH_BUCKET"|"INTERNAL_FAILURE"|string;
   export type BusinessReportFormat = "CSV"|"CSV_ZIP"|string;
@@ -982,6 +1003,20 @@ declare namespace AlexaForBusiness {
   }
   export type ContactDataList = ContactData[];
   export type ContactName = string;
+  export interface Content {
+    /**
+     * The list of text messages.
+     */
+    TextList?: TextList;
+    /**
+     * The list of SSML messages.
+     */
+    SsmlList?: SsmlList;
+    /**
+     * The list of audio messages.
+     */
+    AudioList?: AudioList;
+  }
   export type CountryCode = string;
   export interface CreateAddressBookRequest {
     /**
@@ -1477,9 +1512,10 @@ declare namespace AlexaForBusiness {
     /**
      * The time (in epoch) when the event occurred. 
      */
-    Timestamp?: Timestamp;
+    Timestamp?: DeviceEventTime;
   }
   export type DeviceEventList = DeviceEvent[];
+  export type DeviceEventTime = Date;
   export type DeviceEventType = "CONNECTION_STATUS"|"DEVICE_STATUS"|string;
   export type DeviceEventValue = string;
   export type DeviceName = string;
@@ -2069,6 +2105,7 @@ declare namespace AlexaForBusiness {
      */
     NextToken?: NextToken;
   }
+  export type Locale = "en-US"|string;
   export type MacAddress = string;
   export type MaxResults = number;
   export type MaxVolumeLimit = number;
@@ -2615,6 +2652,30 @@ declare namespace AlexaForBusiness {
      */
     TotalCount?: TotalCount;
   }
+  export interface SendAnnouncementRequest {
+    /**
+     * The filters to use to send an announcement to a specified list of rooms. The supported filter keys are RoomName, ProfileName, RoomArn, and ProfileArn. To send to all rooms, specify an empty RoomFilters list.
+     */
+    RoomFilters: FilterList;
+    /**
+     * The announcement content. This can contain only one of the three possible announcement types (text, SSML or audio).
+     */
+    Content: Content;
+    /**
+     * The time to live for an announcement. If delivery doesn't occur within this time, the announcement will not be delivered.
+     */
+    TimeToLiveInSeconds?: TimeToLiveInSeconds;
+    /**
+     * The unique, user-specified identifier for the request that ensures idempotency.
+     */
+    ClientRequestToken: ClientRequestToken;
+  }
+  export interface SendAnnouncementResponse {
+    /**
+     * The identifier of the announcement.
+     */
+    AnnouncementArn?: Arn;
+  }
   export interface SendInvitationRequest {
     /**
      * The ARN of the user to whom to send an invitation. Required.
@@ -2788,6 +2849,18 @@ declare namespace AlexaForBusiness {
   export type SortKey = string;
   export type SortList = Sort[];
   export type SortValue = "ASC"|"DESC"|string;
+  export interface Ssml {
+    /**
+     * The locale of the SSML message. Currently, en-US is supported.
+     */
+    Locale: Locale;
+    /**
+     * The value of the SSML message in the correct SSML format. The audio tag is not supported.
+     */
+    Value: SsmlValue;
+  }
+  export type SsmlList = Ssml[];
+  export type SsmlValue = string;
   export interface StartDeviceSyncRequest {
     /**
      * The ARN of the room with which the device to sync is associated. Required.
@@ -2839,7 +2912,19 @@ declare namespace AlexaForBusiness {
   }
   export type TagValue = string;
   export type TemperatureUnit = "FAHRENHEIT"|"CELSIUS"|string;
-  export type Timestamp = Date;
+  export interface Text {
+    /**
+     * The locale of the text message. Currently, en-US is supported.
+     */
+    Locale: Locale;
+    /**
+     * The value of the text message.
+     */
+    Value: TextValue;
+  }
+  export type TextList = Text[];
+  export type TextValue = string;
+  export type TimeToLiveInSeconds = number;
   export type Timezone = string;
   export type TotalCount = number;
   export interface UntagResourceRequest {

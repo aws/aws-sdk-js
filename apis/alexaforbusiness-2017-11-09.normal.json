@@ -1375,6 +1375,28 @@
       },
       "documentation": "<p>Searches users and lists the ones that meet a set of filter and sort criteria.</p>"
     },
+    "SendAnnouncement": {
+      "name": "SendAnnouncement",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "SendAnnouncementRequest"
+      },
+      "output": {
+        "shape": "SendAnnouncementResponse"
+      },
+      "errors": [
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "AlreadyExistsException"
+        }
+      ],
+      "documentation": "<p>Triggers an asynchronous flow to send text, SSML, or audio announcements to multiple rooms, identified by a search, such as filter. </p>"
+    },
     "SendInvitation": {
       "name": "SendInvitation",
       "http": {
@@ -1890,6 +1912,37 @@
       "type": "structure",
       "members": {}
     },
+    "Audio": {
+      "type": "structure",
+      "required": [
+        "Locale",
+        "Location"
+      ],
+      "members": {
+        "Locale": {
+          "shape": "Locale",
+          "documentation": "<p>The locale of the audio message. Currently, en-US is supported.</p>"
+        },
+        "Location": {
+          "shape": "AudioLocation",
+          "documentation": "<p>The location of the audio file. Currently, S3 URLs are supported. Only S3 locations comprised of safe character are valid. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#Safe%20Characters\">Safe Characters</a>.</p>"
+        }
+      },
+      "documentation": "<p>The audio message. There is a 1 MB limit on the audio file input, and the only supported format is MP3. You must convert audio files to an Alexa-friendly format. </p> <p>You might need to use converter software to convert your MP3 files to the required codec version (MPEG version 2) and bit rate (48 kbps). One option for this is a command-line tool, FFmpeg. For more information, see <a href=\"https://www.ffmpeg.org/\">FFmpeg</a>. The following command converts the provided &lt;input-file&gt; to an MP3 file that will be played in the announcement:</p> <p> <code>ffmpeg -i &lt;input-file&gt; -ac 2 -codec:a libmp3lame -b:a 48k -ar 16000 &lt;output-file.mp3&gt;</code> </p>"
+    },
+    "AudioList": {
+      "type": "list",
+      "member": {
+        "shape": "Audio"
+      },
+      "max": 1
+    },
+    "AudioLocation": {
+      "type": "string",
+      "max": 1200,
+      "min": 0,
+      "pattern": "https://([A-Za-z0-9_.-]+)?(s3-[A-Za-z0-9-]+|s3\\.([A-Za-z0-9-])+|s3|s3.dualstack\\.([A-Za-z0-9-])+)+.amazonaws.com/.*"
+    },
     "AuthorizationResult": {
       "type": "map",
       "key": {
@@ -1928,7 +1981,7 @@
           "documentation": "<p>The S3 location of the output reports.</p>"
         },
         "DeliveryTime": {
-          "shape": "Timestamp",
+          "shape": "BusinessReportDeliveryTime",
           "documentation": "<p>The time of report delivery.</p>"
         },
         "DownloadUrl": {
@@ -1947,6 +2000,9 @@
         }
       },
       "documentation": "<p>The content range of the report.</p>"
+    },
+    "BusinessReportDeliveryTime": {
+      "type": "timestamp"
     },
     "BusinessReportDownloadUrl": {
       "type": "string"
@@ -2241,6 +2297,24 @@
       "max": 100,
       "min": 1,
       "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+    },
+    "Content": {
+      "type": "structure",
+      "members": {
+        "TextList": {
+          "shape": "TextList",
+          "documentation": "<p>The list of text messages.</p>"
+        },
+        "SsmlList": {
+          "shape": "SsmlList",
+          "documentation": "<p>The list of SSML messages.</p>"
+        },
+        "AudioList": {
+          "shape": "AudioList",
+          "documentation": "<p>The list of audio messages.</p>"
+        }
+      },
+      "documentation": "<p>The content definition. It can contain only one text, SSML, or audio list object.</p>"
     },
     "CountryCode": {
       "type": "string",
@@ -2952,7 +3026,7 @@
           "documentation": "<p>The value of the event.</p>"
         },
         "Timestamp": {
-          "shape": "Timestamp",
+          "shape": "DeviceEventTime",
           "documentation": "<p>The time (in epoch) when the event occurred. </p>"
         }
       },
@@ -2963,6 +3037,9 @@
       "member": {
         "shape": "DeviceEvent"
       }
+    },
+    "DeviceEventTime": {
+      "type": "timestamp"
     },
     "DeviceEventType": {
       "type": "string",
@@ -3968,6 +4045,12 @@
         }
       }
     },
+    "Locale": {
+      "type": "string",
+      "enum": [
+        "en-US"
+      ]
+    },
     "MacAddress": {
       "type": "string"
     },
@@ -4780,6 +4863,42 @@
         }
       }
     },
+    "SendAnnouncementRequest": {
+      "type": "structure",
+      "required": [
+        "RoomFilters",
+        "Content",
+        "ClientRequestToken"
+      ],
+      "members": {
+        "RoomFilters": {
+          "shape": "FilterList",
+          "documentation": "<p>The filters to use to send an announcement to a specified list of rooms. The supported filter keys are RoomName, ProfileName, RoomArn, and ProfileArn. To send to all rooms, specify an empty RoomFilters list.</p>"
+        },
+        "Content": {
+          "shape": "Content",
+          "documentation": "<p>The announcement content. This can contain only one of the three possible announcement types (text, SSML or audio).</p>"
+        },
+        "TimeToLiveInSeconds": {
+          "shape": "TimeToLiveInSeconds",
+          "documentation": "<p>The time to live for an announcement. If delivery doesn't occur within this time, the announcement will not be delivered.</p>"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "documentation": "<p>The unique, user-specified identifier for the request that ensures idempotency.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "SendAnnouncementResponse": {
+      "type": "structure",
+      "members": {
+        "AnnouncementArn": {
+          "shape": "Arn",
+          "documentation": "<p>The identifier of the announcement.</p>"
+        }
+      }
+    },
     "SendInvitationRequest": {
       "type": "structure",
       "members": {
@@ -5082,6 +5201,37 @@
         "DESC"
       ]
     },
+    "Ssml": {
+      "type": "structure",
+      "required": [
+        "Locale",
+        "Value"
+      ],
+      "members": {
+        "Locale": {
+          "shape": "Locale",
+          "documentation": "<p>The locale of the SSML message. Currently, en-US is supported.</p>"
+        },
+        "Value": {
+          "shape": "SsmlValue",
+          "documentation": "<p>The value of the SSML message in the correct SSML format. The audio tag is not supported.</p>"
+        }
+      },
+      "documentation": "<p>The SSML message. For more information, see <a href=\"https://developer.amazon.com/docs/custom-skills/speech-synthesis-markup-language-ssml-reference.html\">SSML Reference</a>.</p>"
+    },
+    "SsmlList": {
+      "type": "list",
+      "member": {
+        "shape": "Ssml"
+      },
+      "max": 1
+    },
+    "SsmlValue": {
+      "type": "string",
+      "max": 4096,
+      "min": 0,
+      "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+    },
     "StartDeviceSyncRequest": {
       "type": "structure",
       "required": [
@@ -5192,8 +5342,41 @@
         "CELSIUS"
       ]
     },
-    "Timestamp": {
-      "type": "timestamp"
+    "Text": {
+      "type": "structure",
+      "required": [
+        "Locale",
+        "Value"
+      ],
+      "members": {
+        "Locale": {
+          "shape": "Locale",
+          "documentation": "<p>The locale of the text message. Currently, en-US is supported.</p>"
+        },
+        "Value": {
+          "shape": "TextValue",
+          "documentation": "<p>The value of the text message.</p>"
+        }
+      },
+      "documentation": "<p>The text message.</p>"
+    },
+    "TextList": {
+      "type": "list",
+      "member": {
+        "shape": "Text"
+      },
+      "max": 1
+    },
+    "TextValue": {
+      "type": "string",
+      "max": 4096,
+      "min": 0,
+      "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+    },
+    "TimeToLiveInSeconds": {
+      "type": "integer",
+      "max": 3600,
+      "min": 1
     },
     "Timezone": {
       "type": "string",
