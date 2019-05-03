@@ -1248,7 +1248,7 @@
     },
     "AccelerationMode": {
       "type": "string",
-      "documentation": "Acceleration configuration for the job.",
+      "documentation": "Enable Acceleration (AccelerationMode) on any job that you want processed with accelerated transcoding.",
       "enum": [
         "DISABLED",
         "ENABLED"
@@ -1263,7 +1263,7 @@
           "documentation": "Acceleration configuration for the job."
         }
       },
-      "documentation": "Accelerated transcoding is currently in private preview. Contact AWS for more information.",
+      "documentation": "Accelerated transcoding can significantly speed up jobs with long, visually complex content. Outputs that use this feature incur pro-tier pricing. For information about feature limitations, see the AWS Elemental MediaConvert User Guide.",
       "required": [
         "Mode"
       ]
@@ -1311,7 +1311,7 @@
     },
     "AntiAlias": {
       "type": "string",
-      "documentation": "The anti-alias filter is automatically applied to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting.",
+      "documentation": "The service automatically applies the anti-alias filter to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting.",
       "enum": [
         "DISABLED",
         "ENABLED"
@@ -2347,7 +2347,7 @@
         "AccelerationSettings": {
           "shape": "AccelerationSettings",
           "locationName": "accelerationSettings",
-          "documentation": "This is a beta feature. If you are interested in using this feature, please contact AWS customer support."
+          "documentation": "Accelerated transcoding can significantly speed up jobs with long, visually complex content. Outputs that use this feature incur pro-tier pricing. For information about feature limitations, see the AWS Elemental MediaConvert User Guide."
         },
         "BillingTagsSource": {
           "shape": "BillingTagsSource",
@@ -2412,7 +2412,7 @@
         "AccelerationSettings": {
           "shape": "AccelerationSettings",
           "locationName": "accelerationSettings",
-          "documentation": "This is a beta feature. If you are interested in using this feature please contact AWS customer support."
+          "documentation": "Accelerated transcoding can significantly speed up jobs with long, visually complex content. Outputs that use this feature incur pro-tier pricing. For information about feature limitations, see the AWS Elemental MediaConvert User Guide."
         },
         "Category": {
           "shape": "__string",
@@ -2555,6 +2555,11 @@
     "DashIsoEncryptionSettings": {
       "type": "structure",
       "members": {
+        "PlaybackDeviceCompatibility": {
+          "shape": "DashIsoPlaybackDeviceCompatibility",
+          "locationName": "playbackDeviceCompatibility",
+          "documentation": "This setting can improve the compatibility of your output with video players on obsolete devices. It applies only to DASH H.264 outputs with DRM encryption. Choose Unencrypted SEI (UNENCRYPTED_SEI) only to correct problems with playback on older devices. Otherwise, keep the default setting CENC v1 (CENC_V1). If you choose Unencrypted SEI, for that output, the service will exclude the access unit delimiter and will leave the SEI NAL units unencrypted."
+        },
         "SpekeKeyProvider": {
           "shape": "SpekeKeyProvider",
           "locationName": "spekeKeyProvider",
@@ -2625,6 +2630,14 @@
       "enum": [
         "HBBTV_1_5",
         "NONE"
+      ]
+    },
+    "DashIsoPlaybackDeviceCompatibility": {
+      "type": "string",
+      "documentation": "This setting can improve the compatibility of your output with video players on obsolete devices. It applies only to DASH H.264 outputs with DRM encryption. Choose Unencrypted SEI (UNENCRYPTED_SEI) only to correct problems with playback on older devices. Otherwise, keep the default setting CENC v1 (CENC_V1). If you choose Unencrypted SEI, for that output, the service will exclude the access unit delimiter and will leave the SEI NAL units unencrypted.",
+      "enum": [
+        "CENC_V1",
+        "UNENCRYPTED_SEI"
       ]
     },
     "DashIsoSegmentControl": {
@@ -5232,7 +5245,7 @@
         "AccelerationSettings": {
           "shape": "AccelerationSettings",
           "locationName": "accelerationSettings",
-          "documentation": "Accelerated transcoding is currently in private preview. Contact AWS for more information."
+          "documentation": "Accelerated transcoding can significantly speed up jobs with long, visually complex content."
         },
         "Arn": {
           "shape": "__string",
@@ -8027,7 +8040,7 @@
         "AccelerationSettings": {
           "shape": "AccelerationSettings",
           "locationName": "accelerationSettings",
-          "documentation": "This is a beta feature. If you are interested in using this feature, please contact AWS customer support."
+          "documentation": "Accelerated transcoding can significantly speed up jobs with long, visually complex content. Outputs that use this feature incur pro-tier pricing. For information about feature limitations, see the AWS Elemental MediaConvert User Guide."
         },
         "Category": {
           "shape": "__string",
@@ -8211,7 +8224,7 @@
         "AntiAlias": {
           "shape": "AntiAlias",
           "locationName": "antiAlias",
-          "documentation": "The anti-alias filter is automatically applied to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting."
+          "documentation": "The service automatically applies the anti-alias filter to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting."
         },
         "CodecSettings": {
           "shape": "VideoCodecSettings",

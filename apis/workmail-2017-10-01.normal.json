@@ -633,6 +633,32 @@
       "documentation": "<p>Removes a member from a group.</p>",
       "idempotent": true
     },
+    "GetMailboxDetails": {
+      "name": "GetMailboxDetails",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetMailboxDetailsRequest"
+      },
+      "output": {
+        "shape": "GetMailboxDetailsResponse"
+      },
+      "errors": [
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        }
+      ],
+      "documentation": "<p>Requests a user's mailbox details for a specified organization and user.</p>",
+      "idempotent": true
+    },
     "ListAliases": {
       "name": "ListAliases",
       "http": {
@@ -983,6 +1009,38 @@
         }
       ],
       "documentation": "<p>Allows the administrator to reset the password for a user.</p>",
+      "idempotent": true
+    },
+    "UpdateMailboxQuota": {
+      "name": "UpdateMailboxQuota",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateMailboxQuotaRequest"
+      },
+      "output": {
+        "shape": "UpdateMailboxQuotaResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "EntityStateException"
+        }
+      ],
+      "documentation": "<p>Updates a user's current mailbox quota for a specified organization and user.</p>",
       "idempotent": true
     },
     "UpdatePrimaryEmailAddress": {
@@ -1708,6 +1766,36 @@
         "DELETED"
       ]
     },
+    "GetMailboxDetailsRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "UserId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The identifier for the organization that contains the user whose mailbox details are being requested.</p>"
+        },
+        "UserId": {
+          "shape": "WorkMailIdentifier",
+          "documentation": "<p>The identifier for the user whose mailbox details are being requested.</p>"
+        }
+      }
+    },
+    "GetMailboxDetailsResponse": {
+      "type": "structure",
+      "members": {
+        "MailboxQuota": {
+          "shape": "MailboxQuota",
+          "documentation": "<p>The maximum allowed mailbox size, in MB, for the specified user.</p>"
+        },
+        "MailboxSize": {
+          "shape": "MailboxSize",
+          "documentation": "<p>The current mailbox size, in MB, for the specified user.</p>"
+        }
+      }
+    },
     "Group": {
       "type": "structure",
       "members": {
@@ -2027,6 +2115,15 @@
         }
       }
     },
+    "MailboxQuota": {
+      "type": "integer",
+      "box": true,
+      "min": 1
+    },
+    "MailboxSize": {
+      "type": "double",
+      "min": 0
+    },
     "MaxResults": {
       "type": "integer",
       "box": true,
@@ -2320,6 +2417,32 @@
     },
     "Timestamp": {
       "type": "timestamp"
+    },
+    "UpdateMailboxQuotaRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "UserId",
+        "MailboxQuota"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The identifier for the organization that contains the user for whom to update the mailbox quota.</p>"
+        },
+        "UserId": {
+          "shape": "WorkMailIdentifier",
+          "documentation": "<p>The identifer for the user for whom to update the mailbox quota.</p>"
+        },
+        "MailboxQuota": {
+          "shape": "MailboxQuota",
+          "documentation": "<p>The updated mailbox quota, in MB, for the specified user.</p>"
+        }
+      }
+    },
+    "UpdateMailboxQuotaResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UpdatePrimaryEmailAddressRequest": {
       "type": "structure",

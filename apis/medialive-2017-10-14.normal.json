@@ -422,6 +422,52 @@
       ],
       "documentation": "Delete an expired reservation."
     },
+    "DeleteSchedule": {
+      "name": "DeleteSchedule",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/prod/channels/{channelId}/schedule",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "DeleteScheduleRequest"
+      },
+      "output": {
+        "shape": "DeleteScheduleResponse",
+        "documentation": "Successful delete of the schedule."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request to delete the schedule on this channel was invalid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Unexpected internal service error."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to delete the channel schedule."
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad Gateway Error"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "The specified channel does not exist to have its schedule deleted."
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway Timeout Error"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded on delete schedule calls."
+        }
+      ],
+      "documentation": "Delete all schedule actions on a channel."
+    },
     "DeleteTags": {
       "name": "DeleteTags",
       "http": {
@@ -1167,6 +1213,60 @@
         }
       ],
       "documentation": "Updates a channel."
+    },
+    "UpdateChannelClass": {
+      "name": "UpdateChannelClass",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/prod/channels/{channelId}/channelClass",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateChannelClassRequest"
+      },
+      "output": {
+        "shape": "UpdateChannelClassResponse",
+        "documentation": "The class of the channel has been successfully updated."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "This request to update the channel class was invalid."
+        },
+        {
+          "shape": "UnprocessableEntityException",
+          "documentation": "The channel configuration failed validation when attempting to update the channel class."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "Unexpected internal service error."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You do not have permission to update the class of this channel."
+        },
+        {
+          "shape": "BadGatewayException",
+          "documentation": "Bad Gateway Error"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "The channel you're trying to update the class on does not exist."
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "Gateway Timeout Error"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "Request limit exceeded on update channel class calls."
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "The channel class cannot be updated due to an issue with channel resources."
+        }
+      ],
+      "documentation": "Changes the class of the channel."
     },
     "UpdateInput": {
       "name": "UpdateInput",
@@ -2482,7 +2582,9 @@
         "RECOVERING",
         "STOPPING",
         "DELETING",
-        "DELETED"
+        "DELETED",
+        "UPDATING",
+        "UPDATE_FAILED"
       ],
       "documentation": "Placeholder documentation for ChannelState"
     },
@@ -2973,6 +3075,26 @@
         }
       },
       "documentation": "Placeholder documentation for DeleteReservationResponse"
+    },
+    "DeleteScheduleRequest": {
+      "type": "structure",
+      "members": {
+        "ChannelId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "channelId",
+          "documentation": "Id of the channel whose schedule is being deleted."
+        }
+      },
+      "required": [
+        "ChannelId"
+      ],
+      "documentation": "Placeholder documentation for DeleteScheduleRequest"
+    },
+    "DeleteScheduleResponse": {
+      "type": "structure",
+      "members": {},
+      "documentation": "Placeholder documentation for DeleteScheduleResponse"
     },
     "DeleteTagsRequest": {
       "type": "structure",
@@ -8370,6 +8492,42 @@
         "PRIV",
         "TDRL"
       ]
+    },
+    "UpdateChannelClassRequest": {
+      "type": "structure",
+      "members": {
+        "ChannelClass": {
+          "shape": "ChannelClass",
+          "locationName": "channelClass",
+          "documentation": "The channel class that you wish to update this channel to use."
+        },
+        "ChannelId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "channelId",
+          "documentation": "Channel Id of the channel whose class should be updated."
+        },
+        "Destinations": {
+          "shape": "__listOfOutputDestination",
+          "locationName": "destinations",
+          "documentation": "A list of output destinations for this channel."
+        }
+      },
+      "documentation": "Channel class that the channel should be updated to.",
+      "required": [
+        "ChannelId",
+        "ChannelClass"
+      ]
+    },
+    "UpdateChannelClassResponse": {
+      "type": "structure",
+      "members": {
+        "Channel": {
+          "shape": "Channel",
+          "locationName": "channel"
+        }
+      },
+      "documentation": "Placeholder documentation for UpdateChannelClassResponse"
     },
     "UpdateChannelRequest": {
       "type": "structure",

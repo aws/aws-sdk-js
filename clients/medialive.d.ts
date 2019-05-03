@@ -84,6 +84,14 @@ declare class MediaLive extends Service {
    */
   deleteReservation(callback?: (err: AWSError, data: MediaLive.Types.DeleteReservationResponse) => void): Request<MediaLive.Types.DeleteReservationResponse, AWSError>;
   /**
+   * Delete all schedule actions on a channel.
+   */
+  deleteSchedule(params: MediaLive.Types.DeleteScheduleRequest, callback?: (err: AWSError, data: MediaLive.Types.DeleteScheduleResponse) => void): Request<MediaLive.Types.DeleteScheduleResponse, AWSError>;
+  /**
+   * Delete all schedule actions on a channel.
+   */
+  deleteSchedule(callback?: (err: AWSError, data: MediaLive.Types.DeleteScheduleResponse) => void): Request<MediaLive.Types.DeleteScheduleResponse, AWSError>;
+  /**
    * Removes tags for a resource
    */
   deleteTags(params: MediaLive.Types.DeleteTagsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -219,6 +227,14 @@ declare class MediaLive extends Service {
    * Updates a channel.
    */
   updateChannel(callback?: (err: AWSError, data: MediaLive.Types.UpdateChannelResponse) => void): Request<MediaLive.Types.UpdateChannelResponse, AWSError>;
+  /**
+   * Changes the class of the channel.
+   */
+  updateChannelClass(params: MediaLive.Types.UpdateChannelClassRequest, callback?: (err: AWSError, data: MediaLive.Types.UpdateChannelClassResponse) => void): Request<MediaLive.Types.UpdateChannelClassResponse, AWSError>;
+  /**
+   * Changes the class of the channel.
+   */
+  updateChannelClass(callback?: (err: AWSError, data: MediaLive.Types.UpdateChannelClassResponse) => void): Request<MediaLive.Types.UpdateChannelClassResponse, AWSError>;
   /**
    * Updates an input.
    */
@@ -799,7 +815,7 @@ one destination per packager.
      */
     SourceIp?: __string;
   }
-  export type ChannelState = "CREATING"|"CREATE_FAILED"|"IDLE"|"STARTING"|"RUNNING"|"RECOVERING"|"STOPPING"|"DELETING"|"DELETED"|string;
+  export type ChannelState = "CREATING"|"CREATE_FAILED"|"IDLE"|"STARTING"|"RUNNING"|"RECOVERING"|"STOPPING"|"DELETING"|"DELETED"|"UPDATING"|"UPDATE_FAILED"|string;
   export interface ChannelSummary {
     /**
      * The unique arn of the channel.
@@ -1113,6 +1129,14 @@ one destination per packager.
      * Recurring usage charge for each reserved resource, e.g. '157.0'
      */
     UsagePrice?: __double;
+  }
+  export interface DeleteScheduleRequest {
+    /**
+     * Id of the channel whose schedule is being deleted.
+     */
+    ChannelId: __string;
+  }
+  export interface DeleteScheduleResponse {
   }
   export interface DeleteTagsRequest {
     ResourceArn: __string;
@@ -3996,6 +4020,23 @@ one destination per packager.
     FecOutputSettings?: FecOutputSettings;
   }
   export type UdpTimedMetadataId3Frame = "NONE"|"PRIV"|"TDRL"|string;
+  export interface UpdateChannelClassRequest {
+    /**
+     * The channel class that you wish to update this channel to use.
+     */
+    ChannelClass: ChannelClass;
+    /**
+     * Channel Id of the channel whose class should be updated.
+     */
+    ChannelId: __string;
+    /**
+     * A list of output destinations for this channel.
+     */
+    Destinations?: __listOfOutputDestination;
+  }
+  export interface UpdateChannelClassResponse {
+    Channel?: Channel;
+  }
   export interface UpdateChannelRequest {
     /**
      * channel ID

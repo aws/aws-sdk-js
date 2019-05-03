@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.448.0-->
+<!--LATEST=2.449.0-->
 <!--ENTRYINSERT-->
+
+## 2.449.0
+* feature: CognitoIdentityServiceProvider: This release of Amazon Cognito User Pools introduces the new AdminSetUserPassword API that allows administrators of a user pool to change a user's password. The new password can be temporary or permanent.
+* feature: MediaConvert: DASH output groups using DRM encryption can now enable a playback device compatibility mode to correct problems with playback on older devices. 
+* feature: MediaLive: You can now switch the channel mode of your channels from standard to single pipeline and from single pipeline to standard. In order to switch a channel from single pipeline to standard all inputs attached to the channel must support two encoder pipelines.
+* feature: WorkMail: Amazon WorkMail is releasing two new actions: 'GetMailboxDetails' and 'UpdateMailboxQuota'. They add insight into how much space is used by a given mailbox (size) and what its limit is (quota). A mailbox quota can be updated, but lowering the value will not influence WorkMail per user charges. For a closer look at the actions please visit https://docs.aws.amazon.com/workmail/latest/APIReference/API_Operations.html
 
 ## 2.448.0
 * feature: AlexaForBusiness: This release allows developers and customers to send text and audio announcements to rooms.

@@ -865,7 +865,7 @@ All burn-in and DVB-Sub font settings must match.
   export type ContainerType = "F4V"|"ISMV"|"M2TS"|"M3U8"|"CMFC"|"MOV"|"MP4"|"MPD"|"MXF"|"RAW"|string;
   export interface CreateJobRequest {
     /**
-     * This is a beta feature. If you are interested in using this feature, please contact AWS customer support.
+     * Accelerated transcoding can significantly speed up jobs with long, visually complex content. Outputs that use this feature incur pro-tier pricing. For information about feature limitations, see the AWS Elemental MediaConvert User Guide.
      */
     AccelerationSettings?: AccelerationSettings;
     /**
@@ -909,7 +909,7 @@ All burn-in and DVB-Sub font settings must match.
   }
   export interface CreateJobTemplateRequest {
     /**
-     * This is a beta feature. If you are interested in using this feature please contact AWS customer support.
+     * Accelerated transcoding can significantly speed up jobs with long, visually complex content. Outputs that use this feature incur pro-tier pricing. For information about feature limitations, see the AWS Elemental MediaConvert User Guide.
      */
     AccelerationSettings?: AccelerationSettings;
     /**
@@ -1005,6 +1005,10 @@ All burn-in and DVB-Sub font settings must match.
   }
   export interface DashIsoEncryptionSettings {
     /**
+     * This setting can improve the compatibility of your output with video players on obsolete devices. It applies only to DASH H.264 outputs with DRM encryption. Choose Unencrypted SEI (UNENCRYPTED_SEI) only to correct problems with playback on older devices. Otherwise, keep the default setting CENC v1 (CENC_V1). If you choose Unencrypted SEI, for that output, the service will exclude the access unit delimiter and will leave the SEI NAL units unencrypted.
+     */
+    PlaybackDeviceCompatibility?: DashIsoPlaybackDeviceCompatibility;
+    /**
      * Settings for use with a SPEKE key provider
      */
     SpekeKeyProvider?: SpekeKeyProvider;
@@ -1052,6 +1056,7 @@ All burn-in and DVB-Sub font settings must match.
     WriteSegmentTimelineInRepresentation?: DashIsoWriteSegmentTimelineInRepresentation;
   }
   export type DashIsoHbbtvCompliance = "HBBTV_1_5"|"NONE"|string;
+  export type DashIsoPlaybackDeviceCompatibility = "CENC_V1"|"UNENCRYPTED_SEI"|string;
   export type DashIsoSegmentControl = "SINGLE_FILE"|"SEGMENTED_FILES"|string;
   export type DashIsoWriteSegmentTimelineInRepresentation = "ENABLED"|"DISABLED"|string;
   export type DecryptionMode = "AES_CTR"|"AES_CBC"|"AES_GCM"|string;
@@ -2357,7 +2362,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   }
   export interface Job {
     /**
-     * Accelerated transcoding is currently in private preview. Contact AWS for more information.
+     * Accelerated transcoding can significantly speed up jobs with long, visually complex content.
      */
     AccelerationSettings?: AccelerationSettings;
     /**
@@ -3783,7 +3788,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
   }
   export interface UpdateJobTemplateRequest {
     /**
-     * This is a beta feature. If you are interested in using this feature, please contact AWS customer support.
+     * Accelerated transcoding can significantly speed up jobs with long, visually complex content. Outputs that use this feature incur pro-tier pricing. For information about feature limitations, see the AWS Elemental MediaConvert User Guide.
      */
     AccelerationSettings?: AccelerationSettings;
     /**
@@ -3898,7 +3903,7 @@ Valid values: -1.5 -3.0 -4.5 -6.0 -60
      */
     AfdSignaling?: AfdSignaling;
     /**
-     * The anti-alias filter is automatically applied to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting.
+     * The service automatically applies the anti-alias filter to all outputs. The service no longer accepts the value DISABLED for AntiAlias. If you specify that in your job, the service will ignore the setting.
      */
     AntiAlias?: AntiAlias;
     /**

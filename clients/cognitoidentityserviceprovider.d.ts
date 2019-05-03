@@ -180,6 +180,14 @@ declare class CognitoIdentityServiceProvider extends Service {
    */
   adminSetUserMFAPreference(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminSetUserMFAPreferenceResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminSetUserMFAPreferenceResponse, AWSError>;
   /**
+   * 
+   */
+  adminSetUserPassword(params: CognitoIdentityServiceProvider.Types.AdminSetUserPasswordRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminSetUserPasswordResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminSetUserPasswordResponse, AWSError>;
+  /**
+   * 
+   */
+  adminSetUserPassword(callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminSetUserPasswordResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminSetUserPasswordResponse, AWSError>;
+  /**
    * Sets all the user settings for a specified user name. Works on any user. Requires developer credentials.
    */
   adminSetUserSettings(params: CognitoIdentityServiceProvider.Types.AdminSetUserSettingsRequest, callback?: (err: AWSError, data: CognitoIdentityServiceProvider.Types.AdminSetUserSettingsResponse) => void): Request<CognitoIdentityServiceProvider.Types.AdminSetUserSettingsResponse, AWSError>;
@@ -1320,6 +1328,14 @@ declare namespace CognitoIdentityServiceProvider {
     UserPoolId: UserPoolIdType;
   }
   export interface AdminSetUserMFAPreferenceResponse {
+  }
+  export interface AdminSetUserPasswordRequest {
+    UserPoolId: UserPoolIdType;
+    Username: UsernameType;
+    Password: PasswordType;
+    Permanent?: BooleanType;
+  }
+  export interface AdminSetUserPasswordResponse {
   }
   export interface AdminSetUserSettingsRequest {
     /**
@@ -3075,6 +3091,7 @@ declare namespace CognitoIdentityServiceProvider {
      * In the password policy that you have set, refers to whether you have required users to use at least one symbol in their password.
      */
     RequireSymbols?: BooleanType;
+    TemporaryPasswordValidityDays?: TemporaryPasswordValidityDaysType;
   }
   export type PasswordType = string;
   export type PoolQueryLimitType = number;
@@ -3571,6 +3588,7 @@ declare namespace CognitoIdentityServiceProvider {
   export interface TagResourceResponse {
   }
   export type TagValueType = string;
+  export type TemporaryPasswordValidityDaysType = number;
   export type TokenModelType = string;
   export interface UICustomizationType {
     /**

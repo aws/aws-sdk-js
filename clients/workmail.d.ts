@@ -156,6 +156,14 @@ declare class WorkMail extends Service {
    */
   disassociateMemberFromGroup(callback?: (err: AWSError, data: WorkMail.Types.DisassociateMemberFromGroupResponse) => void): Request<WorkMail.Types.DisassociateMemberFromGroupResponse, AWSError>;
   /**
+   * Requests a user's mailbox details for a specified organization and user.
+   */
+  getMailboxDetails(params: WorkMail.Types.GetMailboxDetailsRequest, callback?: (err: AWSError, data: WorkMail.Types.GetMailboxDetailsResponse) => void): Request<WorkMail.Types.GetMailboxDetailsResponse, AWSError>;
+  /**
+   * Requests a user's mailbox details for a specified organization and user.
+   */
+  getMailboxDetails(callback?: (err: AWSError, data: WorkMail.Types.GetMailboxDetailsResponse) => void): Request<WorkMail.Types.GetMailboxDetailsResponse, AWSError>;
+  /**
    * Creates a paginated call to list the aliases associated with a given entity.
    */
   listAliases(params: WorkMail.Types.ListAliasesRequest, callback?: (err: AWSError, data: WorkMail.Types.ListAliasesResponse) => void): Request<WorkMail.Types.ListAliasesResponse, AWSError>;
@@ -243,6 +251,14 @@ declare class WorkMail extends Service {
    * Allows the administrator to reset the password for a user.
    */
   resetPassword(callback?: (err: AWSError, data: WorkMail.Types.ResetPasswordResponse) => void): Request<WorkMail.Types.ResetPasswordResponse, AWSError>;
+  /**
+   * Updates a user's current mailbox quota for a specified organization and user.
+   */
+  updateMailboxQuota(params: WorkMail.Types.UpdateMailboxQuotaRequest, callback?: (err: AWSError, data: WorkMail.Types.UpdateMailboxQuotaResponse) => void): Request<WorkMail.Types.UpdateMailboxQuotaResponse, AWSError>;
+  /**
+   * Updates a user's current mailbox quota for a specified organization and user.
+   */
+  updateMailboxQuota(callback?: (err: AWSError, data: WorkMail.Types.UpdateMailboxQuotaResponse) => void): Request<WorkMail.Types.UpdateMailboxQuotaResponse, AWSError>;
   /**
    * Updates the primary email for a user, group, or resource. The current email is moved into the list of aliases (or swapped between an existing alias and the current primary email), and the email provided in the input is promoted as the primary.
    */
@@ -673,6 +689,26 @@ declare namespace WorkMail {
   }
   export type EmailAddress = string;
   export type EntityState = "ENABLED"|"DISABLED"|"DELETED"|string;
+  export interface GetMailboxDetailsRequest {
+    /**
+     * The identifier for the organization that contains the user whose mailbox details are being requested.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The identifier for the user whose mailbox details are being requested.
+     */
+    UserId: WorkMailIdentifier;
+  }
+  export interface GetMailboxDetailsResponse {
+    /**
+     * The maximum allowed mailbox size, in MB, for the specified user.
+     */
+    MailboxQuota?: MailboxQuota;
+    /**
+     * The current mailbox size, in MB, for the specified user.
+     */
+    MailboxSize?: MailboxSize;
+  }
   export interface Group {
     /**
      * The identifier of the group.
@@ -905,6 +941,8 @@ declare namespace WorkMail {
      */
     NextToken?: NextToken;
   }
+  export type MailboxQuota = number;
+  export type MailboxSize = number;
   export type MaxResults = number;
   export interface Member {
     /**
@@ -1063,6 +1101,22 @@ declare namespace WorkMail {
   export type Resources = Resource[];
   export type String = string;
   export type Timestamp = Date;
+  export interface UpdateMailboxQuotaRequest {
+    /**
+     * The identifier for the organization that contains the user for whom to update the mailbox quota.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The identifer for the user for whom to update the mailbox quota.
+     */
+    UserId: WorkMailIdentifier;
+    /**
+     * The updated mailbox quota, in MB, for the specified user.
+     */
+    MailboxQuota: MailboxQuota;
+  }
+  export interface UpdateMailboxQuotaResponse {
+  }
   export interface UpdatePrimaryEmailAddressRequest {
     /**
      * The organization that contains the user, group, or resource to update.
