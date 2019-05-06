@@ -2065,7 +2065,7 @@
           "documentation": "<p>The frequency with which AWS Config delivers configuration snapshots.</p>"
         }
       },
-      "documentation": "<p>Provides options for how often AWS Config delivers configuration snapshots to the Amazon S3 bucket in your delivery channel.</p> <note> <p>If you want to create a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot, see the following:</p> </note> <p>The frequency for a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot is set by one of two values, depending on which is less frequent:</p> <ul> <li> <p>The value for the <code>deliveryFrequency</code> parameter within the delivery channel configuration, which sets how often AWS Config delivers configuration snapshots. This value also sets how often AWS Config invokes evaluations for AWS Config rules.</p> </li> <li> <p>The value for the <code>MaximumExecutionFrequency</code> parameter, which sets the maximum frequency with which AWS Config invokes evaluations for the rule. For more information, see <a>ConfigRule</a>.</p> </li> </ul> <p>If the <code>deliveryFrequency</code> value is less frequent than the <code>MaximumExecutionFrequency</code> value for a rule, AWS Config invokes the rule only as often as the <code>deliveryFrequency</code> value.</p> <ol> <li> <p>For example, you want your rule to run evaluations when AWS Config delivers the configuration snapshot.</p> </li> <li> <p>You specify the <code>MaximumExecutionFrequency</code> value for <code>Six_Hours</code>. </p> </li> <li> <p>You then specify the delivery channel <code>deliveryFrequency</code> value for <code>TwentyFour_Hours</code>.</p> </li> <li> <p>Because the value for <code>deliveryFrequency</code> is less frequent than <code>MaximumExecutionFrequency</code>, AWS Config invokes evaluations for the rule every 24 hours. </p> </li> </ol> <p>You should set the <code>MaximumExecutionFrequency</code> value to be at least as frequent as the <code>deliveryFrequency</code> value. You can view the <code>deliveryFrequency</code> value by using the <code>DescribeDeliveryChannnels</code> action.</p> <p>To update the <code>deliveryFrequency</code> with which AWS Config delivers your configuration snapshots, use the <code>PutDeliveryChannel</code> action.</p>"
+      "documentation": "<p>Provides options for how often AWS Config delivers configuration snapshots to the Amazon S3 bucket in your delivery channel.</p> <p>The frequency for a rule that triggers evaluations for your resources when AWS Config delivers the configuration snapshot is set by one of two values, depending on which is less frequent:</p> <ul> <li> <p>The value for the <code>deliveryFrequency</code> parameter within the delivery channel configuration, which sets how often AWS Config delivers configuration snapshots. This value also sets how often AWS Config invokes evaluations for AWS Config rules.</p> </li> <li> <p>The value for the <code>MaximumExecutionFrequency</code> parameter, which sets the maximum frequency with which AWS Config invokes evaluations for the rule. For more information, see <a>ConfigRule</a>.</p> </li> </ul> <p>If the <code>deliveryFrequency</code> value is less frequent than the <code>MaximumExecutionFrequency</code> value for a rule, AWS Config invokes the rule only as often as the <code>deliveryFrequency</code> value.</p> <ol> <li> <p>For example, you want your rule to run evaluations when AWS Config delivers the configuration snapshot.</p> </li> <li> <p>You specify the <code>MaximumExecutionFrequency</code> value for <code>Six_Hours</code>. </p> </li> <li> <p>You then specify the delivery channel <code>deliveryFrequency</code> value for <code>TwentyFour_Hours</code>.</p> </li> <li> <p>Because the value for <code>deliveryFrequency</code> is less frequent than <code>MaximumExecutionFrequency</code>, AWS Config invokes evaluations for the rule every 24 hours. </p> </li> </ol> <p>You should set the <code>MaximumExecutionFrequency</code> value to be at least as frequent as the <code>deliveryFrequency</code> value. You can view the <code>deliveryFrequency</code> value by using the <code>DescribeDeliveryChannnels</code> action.</p> <p>To update the <code>deliveryFrequency</code> with which AWS Config delivers your configuration snapshots, use the <code>PutDeliveryChannel</code> action.</p>"
     },
     "ConfigStreamDeliveryInfo": {
       "type": "structure",
@@ -2706,7 +2706,7 @@
         },
         "Limit": {
           "shape": "RuleLimit",
-          "documentation": "<p>The number of rule evaluation results that you want returned.</p> <p>This parameter is required if the rule limit for your account is more than the default of 50 rules.</p> <p>For information about requesting a rule limit increase, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config\">AWS Config Limits</a> in the <i>AWS General Reference Guide</i>.</p>"
+          "documentation": "<p>The number of rule evaluation results that you want returned.</p> <p>This parameter is required if the rule limit for your account is more than the default of 150 rules.</p> <p>For information about requesting a rule limit increase, see <a href=\"http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config\">AWS Config Limits</a> in the <i>AWS General Reference Guide</i>.</p>"
         }
       },
       "documentation": "<p/>"
@@ -3761,7 +3761,7 @@
       "members": {
         "RoleArn": {
           "shape": "String",
-          "documentation": "<p>ARN of the IAM role used to retreive AWS Organization details associated with the aggregator account.</p>"
+          "documentation": "<p>ARN of the IAM role used to retrieve AWS Organization details associated with the aggregator account.</p>"
         },
         "AwsRegions": {
           "shape": "AggregatorRegionList",
@@ -3772,7 +3772,7 @@
           "documentation": "<p>If true, aggregate existing AWS Config regions and future regions.</p>"
         }
       },
-      "documentation": "<p>This object contains regions to setup the aggregator and an IAM role to retrieve organization details.</p>"
+      "documentation": "<p>This object contains regions to set up the aggregator and an IAM role to retrieve organization details.</p>"
     },
     "Owner": {
       "type": "string",
@@ -3815,6 +3815,9 @@
         "AuthorizedAwsRegion": {
           "shape": "AwsRegion",
           "documentation": "<p>The region authorized to collect aggregated data.</p>"
+        },
+        "Tags": {
+          "shape": "TagsList"
         }
       }
     },
@@ -3836,6 +3839,9 @@
         "ConfigRule": {
           "shape": "ConfigRule",
           "documentation": "<p>The rule that you want to add to your account.</p>"
+        },
+        "Tags": {
+          "shape": "TagsList"
         }
       }
     },
@@ -3856,6 +3862,9 @@
         "OrganizationAggregationSource": {
           "shape": "OrganizationAggregationSource",
           "documentation": "<p>An OrganizationAggregationSource object.</p>"
+        },
+        "Tags": {
+          "shape": "TagsList"
         }
       }
     },
@@ -4812,6 +4821,14 @@
       "value": {
         "shape": "Value"
       }
+    },
+    "TagsList": {
+      "type": "list",
+      "member": {
+        "shape": "Tag"
+      },
+      "max": 50,
+      "min": 0
     },
     "UnprocessedResourceIdentifierList": {
       "type": "list",

@@ -787,7 +787,7 @@ declare namespace CodePipeline {
      */
     version: Version;
     /**
-     * Returns information about the settings for an action type.
+     * URLs that provide users information about this custom action.
      */
     settings?: ActionTypeSettings;
     /**
@@ -1104,7 +1104,7 @@ declare namespace CodePipeline {
      */
     outputArtifacts?: ArtifactList;
     /**
-     * Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the Amazon S3 bucket used to store artifact for the pipeline in AWS CodePipeline.
+     * Represents an AWS session credentials object. These credentials are temporary credentials that are issued by AWS Secure Token Service (STS). They can be used to access input and output artifacts in the Amazon S3 bucket used to store artifacts for the pipeline in AWS CodePipeline.
      */
     artifactCredentials?: AWSSessionCredentials;
     /**
@@ -1302,11 +1302,11 @@ declare namespace CodePipeline {
      */
     action?: ActionContext;
     /**
-     * The pipeline execution ID provided to the job worker.
+     * The Amazon Resource Name (ARN) of the pipeline.
      */
     pipelineArn?: PipelineArn;
     /**
-     * The pipeline Amazon Resource Name (ARN) provided to the job worker.
+     * The execution ID of the pipeline.
      */
     pipelineExecutionId?: PipelineExecutionId;
   }
@@ -1867,7 +1867,7 @@ declare namespace CodePipeline {
      */
     filters: WebhookFilters;
     /**
-     * Supported options are GITHUB_HMAC, IP and UNAUTHENTICATED.    GITHUB_HMAC implements the authentication scheme described here: https://developer.github.com/webhooks/securing/    IP will reject webhooks trigger requests unless they originate from an IP within the IP range whitelisted in the authentication configuration.    UNAUTHENTICATED will accept all webhook trigger requests regardless of origin.  
+     * Supported options are GITHUB_HMAC, IP and UNAUTHENTICATED.   For information about the authentication scheme implemented by GITHUB_HMAC, see Securing your webhooks on the GitHub Developer website.    IP will reject webhooks trigger requests unless they originate from an IP within the IP range whitelisted in the authentication configuration.    UNAUTHENTICATED will accept all webhook trigger requests regardless of origin.  
      */
     authentication: WebhookAuthenticationType;
     /**
@@ -1879,11 +1879,11 @@ declare namespace CodePipeline {
   export type WebhookErrorMessage = string;
   export interface WebhookFilterRule {
     /**
-     * A JsonPath expression that will be applied to the body/payload of the webhook. The value selected by JsonPath expression must match the value specified in the matchEquals field, otherwise the request will be ignored. More information on JsonPath expressions can be found here: https://github.com/json-path/JsonPath.
+     * A JsonPath expression that will be applied to the body/payload of the webhook. The value selected by the JsonPath expression must match the value specified in the MatchEquals field, otherwise the request will be ignored. For more information about JsonPath expressions, see Java JsonPath implementation in GitHub.
      */
     jsonPath: JsonPath;
     /**
-     * The value selected by the JsonPath expression must match what is supplied in the MatchEquals field, otherwise the request will be ignored. Properties from the target action configuration can be included as placeholders in this value by surrounding the action configuration key with curly braces. For example, if the value supplied here is "refs/heads/{Branch}" and the target action has an action configuration property called "Branch" with a value of "master", the MatchEquals value will be evaluated as "refs/heads/master". A list of action configuration properties for built-in action types can be found here: Pipeline Structure Reference Action Requirements.
+     * The value selected by the JsonPath expression must match what is supplied in the MatchEquals field, otherwise the request will be ignored. Properties from the target action configuration can be included as placeholders in this value by surrounding the action configuration key with curly braces. For example, if the value supplied here is "refs/heads/{Branch}" and the target action has an action configuration property called "Branch" with a value of "master", the MatchEquals value will be evaluated as "refs/heads/master". For a list of action configuration properties for built-in action types, see Pipeline Structure Reference Action Requirements.
      */
     matchEquals?: MatchEquals;
   }

@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.449.0-->
+<!--LATEST=2.450.0-->
 <!--ENTRYINSERT-->
+
+## 2.450.0
+* feature: ConfigService: AWS Config now supports tagging on PutConfigRule, PutConfigurationAggregator and PutAggregationAuthorization APIs.
 
 ## 2.449.0
 * feature: CognitoIdentityServiceProvider: This release of Amazon Cognito User Pools introduces the new AdminSetUserPassword API that allows administrators of a user pool to change a user's password. The new password can be temporary or permanent.

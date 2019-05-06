@@ -3738,7 +3738,7 @@
         },
         "GroupName": {
           "shape": "groupNameType",
-          "documentation": "<p>The name of the group to create. Do not include the path in this value.</p> <p>This parameter allows (through its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-. The group name must be unique within the account. Group names are not distinguished by case. For example, you cannot create groups named both \"ADMINS\" and \"admins\".</p>"
+          "documentation": "<p>The name of the group to create. Do not include the path in this value.</p> <p>IAM user, group, role, and policy names must be unique within the account. Names are not distinguished by case. For example, you cannot create resources named both \"MyResource\" and \"myresource\".</p>"
         }
       }
     },
@@ -3858,7 +3858,7 @@
       "members": {
         "PolicyName": {
           "shape": "policyNameType",
-          "documentation": "<p>The friendly name of the policy.</p> <p>This parameter allows (through its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-</p>"
+          "documentation": "<p>The friendly name of the policy.</p> <p>IAM user, group, role, and policy names must be unique within the account. Names are not distinguished by case. For example, you cannot create resources named both \"MyResource\" and \"myresource\".</p>"
         },
         "Path": {
           "shape": "policyPathType",
@@ -3866,7 +3866,7 @@
         },
         "PolicyDocument": {
           "shape": "policyDocumentType",
-          "documentation": "<p>The JSON policy document that you want to use as the content for the new policy.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF)</p> </li> <li> <p>The special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D)</p> </li> </ul>"
+          "documentation": "<p>The JSON policy document that you want to use as the content for the new policy.</p> <p>You must provide policies in JSON format in IAM. However, for AWS CloudFormation templates formatted in YAML, you can provide the policy in JSON or YAML format. AWS CloudFormation always converts a YAML policy to JSON format before submitting it to IAM.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF)</p> </li> <li> <p>The special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D)</p> </li> </ul>"
         },
         "Description": {
           "shape": "policyDescriptionType",
@@ -3897,7 +3897,7 @@
         },
         "PolicyDocument": {
           "shape": "policyDocumentType",
-          "documentation": "<p>The JSON policy document that you want to use as the content for this new version of the policy.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF)</p> </li> <li> <p>The special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D)</p> </li> </ul>"
+          "documentation": "<p>The JSON policy document that you want to use as the content for this new version of the policy.</p> <p>You must provide policies in JSON format in IAM. However, for AWS CloudFormation templates formatted in YAML, you can provide the policy in JSON or YAML format. AWS CloudFormation always converts a YAML policy to JSON format before submitting it to IAM.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF)</p> </li> <li> <p>The special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D)</p> </li> </ul>"
         },
         "SetAsDefault": {
           "shape": "booleanType",
@@ -3928,11 +3928,11 @@
         },
         "RoleName": {
           "shape": "roleNameType",
-          "documentation": "<p>The name of the role to create.</p> <p>This parameter allows (through its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-</p> <p>Role names are not distinguished by case. For example, you cannot create roles named both \"PRODROLE\" and \"prodrole\".</p>"
+          "documentation": "<p>The name of the role to create.</p> <p>IAM user, group, role, and policy names must be unique within the account. Names are not distinguished by case. For example, you cannot create resources named both \"MyResource\" and \"myresource\".</p>"
         },
         "AssumeRolePolicyDocument": {
           "shape": "policyDocumentType",
-          "documentation": "<p>The trust relationship policy document that grants an entity permission to assume the role.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF)</p> </li> <li> <p>The special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D)</p> </li> </ul>"
+          "documentation": "<p>The trust relationship policy document that grants an entity permission to assume the role.</p> <p>You must provide policies in JSON format in IAM. However, for AWS CloudFormation templates formatted in YAML, you can provide the policy in JSON or YAML format. AWS CloudFormation always converts a YAML policy to JSON format before submitting it to IAM.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF)</p> </li> <li> <p>The special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D)</p> </li> </ul>"
         },
         "Description": {
           "shape": "roleDescriptionType",
@@ -4059,7 +4059,7 @@
         },
         "UserName": {
           "shape": "userNameType",
-          "documentation": "<p>The name of the user to create.</p> <p>This parameter allows (through its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-. User names are not distinguished by case. For example, you cannot create users named both \"TESTUSER\" and \"testuser\".</p>"
+          "documentation": "<p>The name of the user to create.</p> <p>IAM user, group, role, and policy names must be unique within the account. Names are not distinguished by case. For example, you cannot create resources named both \"MyResource\" and \"myresource\".</p>"
         },
         "PermissionsBoundary": {
           "shape": "arnType",
@@ -4906,7 +4906,7 @@
         },
         "PolicyDocument": {
           "shape": "policyDocumentType",
-          "documentation": "<p>The policy document.</p>"
+          "documentation": "<p>The policy document.</p> <p>IAM stores policies in JSON format. However, resources that were created using AWS CloudFormation templates can be formatted in YAML. AWS CloudFormation always converts a YAML policy to JSON format before submitting it to IAM.</p>"
         }
       },
       "documentation": "<p>Contains the response to a successful <a>GetGroupPolicy</a> request. </p>"
@@ -5125,7 +5125,7 @@
         },
         "PolicyDocument": {
           "shape": "policyDocumentType",
-          "documentation": "<p>The policy document.</p>"
+          "documentation": "<p>The policy document.</p> <p>IAM stores policies in JSON format. However, resources that were created using AWS CloudFormation templates can be formatted in YAML. AWS CloudFormation always converts a YAML policy to JSON format before submitting it to IAM.</p>"
         }
       },
       "documentation": "<p>Contains the response to a successful <a>GetRolePolicy</a> request. </p>"
@@ -5428,7 +5428,7 @@
         },
         "PolicyDocument": {
           "shape": "policyDocumentType",
-          "documentation": "<p>The policy document.</p>"
+          "documentation": "<p>The policy document.</p> <p>IAM stores policies in JSON format. However, resources that were created using AWS CloudFormation templates can be formatted in YAML. AWS CloudFormation always converts a YAML policy to JSON format before submitting it to IAM.</p>"
         }
       },
       "documentation": "<p>Contains the response to a successful <a>GetUserPolicy</a> request. </p>"
@@ -7049,7 +7049,7 @@
       "members": {
         "GroupName": {
           "shape": "groupNameType",
-          "documentation": "<p>The name of the group to associate the policy with.</p> <p>This parameter allows (through its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-</p>"
+          "documentation": "<p>The name of the group to associate the policy with.</p> <p>&amp;regex-name;.</p>"
         },
         "PolicyName": {
           "shape": "policyNameType",
@@ -7057,7 +7057,7 @@
         },
         "PolicyDocument": {
           "shape": "policyDocumentType",
-          "documentation": "<p>The policy document.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF)</p> </li> <li> <p>The special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D)</p> </li> </ul>"
+          "documentation": "<p>The policy document.</p> <p>You must provide policies in JSON format in IAM. However, for AWS CloudFormation templates formatted in YAML, you can provide the policy in JSON or YAML format. AWS CloudFormation always converts a YAML policy to JSON format before submitting it to IAM.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF)</p> </li> <li> <p>The special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D)</p> </li> </ul>"
         }
       }
     },
@@ -7096,7 +7096,7 @@
         },
         "PolicyDocument": {
           "shape": "policyDocumentType",
-          "documentation": "<p>The policy document.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF)</p> </li> <li> <p>The special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D)</p> </li> </ul>"
+          "documentation": "<p>The policy document.</p> <p>You must provide policies in JSON format in IAM. However, for AWS CloudFormation templates formatted in YAML, you can provide the policy in JSON or YAML format. AWS CloudFormation always converts a YAML policy to JSON format before submitting it to IAM.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF)</p> </li> <li> <p>The special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D)</p> </li> </ul>"
         }
       }
     },
@@ -7135,7 +7135,7 @@
         },
         "PolicyDocument": {
           "shape": "policyDocumentType",
-          "documentation": "<p>The policy document.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF)</p> </li> <li> <p>The special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D)</p> </li> </ul>"
+          "documentation": "<p>The policy document.</p> <p>You must provide policies in JSON format in IAM. However, for AWS CloudFormation templates formatted in YAML, you can provide the policy in JSON or YAML format. AWS CloudFormation always converts a YAML policy to JSON format before submitting it to IAM.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF)</p> </li> <li> <p>The special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D)</p> </li> </ul>"
         }
       }
     },
@@ -8108,7 +8108,7 @@
         },
         "PolicyDocument": {
           "shape": "policyDocumentType",
-          "documentation": "<p>The policy that grants an entity permission to assume the role.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF)</p> </li> <li> <p>The special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D)</p> </li> </ul>"
+          "documentation": "<p>The policy that grants an entity permission to assume the role.</p> <p>You must provide policies in JSON format in IAM. However, for AWS CloudFormation templates formatted in YAML, you can provide the policy in JSON or YAML format. AWS CloudFormation always converts a YAML policy to JSON format before submitting it to IAM.</p> <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> used to validate this parameter is a string of characters consisting of the following:</p> <ul> <li> <p>Any printable ASCII character ranging from the space character (\\u0020) through the end of the ASCII character range</p> </li> <li> <p>The printable characters in the Basic Latin and Latin-1 Supplement character set (through \\u00FF)</p> </li> <li> <p>The special characters tab (\\u0009), line feed (\\u000A), and carriage return (\\u000D)</p> </li> </ul>"
         }
       }
     },
@@ -8128,7 +8128,7 @@
         },
         "NewGroupName": {
           "shape": "groupNameType",
-          "documentation": "<p>New name for the IAM group. Only include this if changing the group's name.</p> <p>This parameter allows (through its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-</p>"
+          "documentation": "<p>New name for the IAM group. Only include this if changing the group's name.</p> <p>IAM user, group, role, and policy names must be unique within the account. Names are not distinguished by case. For example, you cannot create resources named both \"MyResource\" and \"myresource\".</p>"
         }
       }
     },
@@ -8346,7 +8346,7 @@
         },
         "NewUserName": {
           "shape": "userNameType",
-          "documentation": "<p>New name for the user. Include this parameter only if you're changing the user's name.</p> <p>This parameter allows (through its <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a>) a string of characters consisting of upper and lowercase alphanumeric characters with no spaces. You can also include any of the following characters: _+=,.@-</p>"
+          "documentation": "<p>New name for the user. Include this parameter only if you're changing the user's name.</p> <p>IAM user, group, role, and policy names must be unique within the account. Names are not distinguished by case. For example, you cannot create resources named both \"MyResource\" and \"myresource\".</p>"
         }
       }
     },

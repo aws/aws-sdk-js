@@ -1363,7 +1363,7 @@ declare namespace ConfigService {
      */
     NextToken?: String;
     /**
-     * The number of rule evaluation results that you want returned. This parameter is required if the rule limit for your account is more than the default of 50 rules. For information about requesting a rule limit increase, see AWS Config Limits in the AWS General Reference Guide.
+     * The number of rule evaluation results that you want returned. This parameter is required if the rule limit for your account is more than the default of 150 rules. For information about requesting a rule limit increase, see AWS Config Limits in the AWS General Reference Guide.
      */
     Limit?: RuleLimit;
   }
@@ -2066,7 +2066,7 @@ declare namespace ConfigService {
   export type OrderingTimestamp = Date;
   export interface OrganizationAggregationSource {
     /**
-     * ARN of the IAM role used to retreive AWS Organization details associated with the aggregator account.
+     * ARN of the IAM role used to retrieve AWS Organization details associated with the aggregator account.
      */
     RoleArn: String;
     /**
@@ -2099,6 +2099,7 @@ declare namespace ConfigService {
      * The region authorized to collect aggregated data.
      */
     AuthorizedAwsRegion: AwsRegion;
+    Tags?: TagsList;
   }
   export interface PutAggregationAuthorizationResponse {
     /**
@@ -2111,6 +2112,7 @@ declare namespace ConfigService {
      * The rule that you want to add to your account.
      */
     ConfigRule: ConfigRule;
+    Tags?: TagsList;
   }
   export interface PutConfigurationAggregatorRequest {
     /**
@@ -2125,6 +2127,7 @@ declare namespace ConfigService {
      * An OrganizationAggregationSource object.
      */
     OrganizationAggregationSource?: OrganizationAggregationSource;
+    Tags?: TagsList;
   }
   export interface PutConfigurationAggregatorResponse {
     /**
@@ -2578,6 +2581,7 @@ declare namespace ConfigService {
   }
   export type TagValue = string;
   export type Tags = {[key: string]: Value};
+  export type TagsList = Tag[];
   export type UnprocessedResourceIdentifierList = AggregateResourceIdentifier[];
   export interface UntagResourceRequest {
     /**
