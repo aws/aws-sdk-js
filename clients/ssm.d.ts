@@ -428,6 +428,14 @@ declare class SSM extends Service {
    */
   describePatchGroups(callback?: (err: AWSError, data: SSM.Types.DescribePatchGroupsResult) => void): Request<SSM.Types.DescribePatchGroupsResult, AWSError>;
   /**
+   * Lists the properties of available patches organized by product, product family, classification, severity, and other properties of available patches. You can use the reported properties in the filters you specify in requests for actions such as CreatePatchBaseline, UpdatePatchBaseline, DescribeAvailablePatches, and DescribePatchBaselines. The following section lists the properties that can be used in filters for each major operating system type:  WINDOWS  Valid properties: PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY  AMAZON_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  AMAZON_LINUX_2  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  UBUNTU   Valid properties: PRODUCT, PRIORITY  REDHAT_ENTERPRISE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  SUSE  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  CENTOS  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  
+   */
+  describePatchProperties(params: SSM.Types.DescribePatchPropertiesRequest, callback?: (err: AWSError, data: SSM.Types.DescribePatchPropertiesResult) => void): Request<SSM.Types.DescribePatchPropertiesResult, AWSError>;
+  /**
+   * Lists the properties of available patches organized by product, product family, classification, severity, and other properties of available patches. You can use the reported properties in the filters you specify in requests for actions such as CreatePatchBaseline, UpdatePatchBaseline, DescribeAvailablePatches, and DescribePatchBaselines. The following section lists the properties that can be used in filters for each major operating system type:  WINDOWS  Valid properties: PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY  AMAZON_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  AMAZON_LINUX_2  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  UBUNTU   Valid properties: PRODUCT, PRIORITY  REDHAT_ENTERPRISE_LINUX  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  SUSE  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  CENTOS  Valid properties: PRODUCT, CLASSIFICATION, SEVERITY  
+   */
+  describePatchProperties(callback?: (err: AWSError, data: SSM.Types.DescribePatchPropertiesResult) => void): Request<SSM.Types.DescribePatchPropertiesResult, AWSError>;
+  /**
    * Retrieves a list of all active sessions (both connected and disconnected) or terminated sessions from the past 30 days.
    */
   describeSessions(params: SSM.Types.DescribeSessionsRequest, callback?: (err: AWSError, data: SSM.Types.DescribeSessionsResponse) => void): Request<SSM.Types.DescribeSessionsResponse, AWSError>;
@@ -3292,6 +3300,10 @@ declare namespace SSM {
      * The number of instances with patches that aren't applicable.
      */
     InstancesWithNotApplicablePatches?: Integer;
+    /**
+     * The number of instances with NotApplicable patches beyond the supported limit, which are not reported by name to Systems Manager Inventory.
+     */
+    InstancesWithUnreportedNotApplicablePatches?: Integer;
   }
   export interface DescribePatchGroupsRequest {
     /**
@@ -3314,6 +3326,38 @@ declare namespace SSM {
     Mappings?: PatchGroupPatchBaselineMappingList;
     /**
      * The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribePatchPropertiesRequest {
+    /**
+     * The operating system type for which to list patches.
+     */
+    OperatingSystem: OperatingSystem;
+    /**
+     * The patch property for which you want to view patch details. 
+     */
+    Property: PatchProperty;
+    /**
+     * Indicates whether to list patches for the Windows operating system or for Microsoft applications. Not applicable for Linux operating systems.
+     */
+    PatchSet?: PatchSet;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token for the next set of items to return. (You received this token from a previous call.)
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribePatchPropertiesResult {
+    /**
+     * A list of the properties for patches matching the filter request parameters.
+     */
+    Properties?: PatchPropertiesList;
+    /**
+     * The token for the next set of items to return. (You use this token in the next call.)
      */
     NextToken?: NextToken;
   }
@@ -4663,7 +4707,11 @@ declare namespace SSM {
      */
     FailedCount?: PatchFailedCount;
     /**
-     * The number of patches from the patch baseline that aren't applicable for the instance and hence aren't installed on the instance.
+     * The number of patches beyond the supported limit of NotApplicableCount that are not reported by name to Systems Manager Inventory.
+     */
+    UnreportedNotApplicableCount?: PatchUnreportedNotApplicableCount;
+    /**
+     * The number of patches from the patch baseline that aren't applicable for the instance and therefore aren't installed on the instance. This number may be truncated if the list of patch names is very large. The number of patches beyond this limit are reported in UnreportedNotApplicableCount.
      */
     NotApplicableCount?: PatchNotApplicableCount;
     /**
@@ -6076,11 +6124,11 @@ declare namespace SSM {
   export type PatchFailedCount = number;
   export interface PatchFilter {
     /**
-     * The key for the filter. See PatchFilter for lists of valid keys for each operating system type.
+     * The key for the filter. Run the DescribePatchProperties command to view lists of valid keys for each operating system type.
      */
     Key: PatchFilterKey;
     /**
-     * The value for the filter key. See PatchFilter for lists of valid values for each key based on operating system type.
+     * The value for the filter key. Run the DescribePatchProperties command to view lists of valid values for each key based on operating system type.
      */
     Values: PatchFilterValueList;
   }
@@ -6090,7 +6138,7 @@ declare namespace SSM {
      */
     PatchFilters: PatchFilterList;
   }
-  export type PatchFilterKey = "PRODUCT"|"CLASSIFICATION"|"MSRC_SEVERITY"|"PATCH_ID"|"SECTION"|"PRIORITY"|"SEVERITY"|string;
+  export type PatchFilterKey = "PATCH_SET"|"PRODUCT"|"PRODUCT_FAMILY"|"CLASSIFICATION"|"MSRC_SEVERITY"|"PATCH_ID"|"SECTION"|"PRIORITY"|"SEVERITY"|string;
   export type PatchFilterList = PatchFilter[];
   export type PatchFilterValue = string;
   export type PatchFilterValueList = PatchFilterValue[];
@@ -6136,6 +6184,9 @@ declare namespace SSM {
   export type PatchOrchestratorFilterValues = PatchOrchestratorFilterValue[];
   export type PatchProduct = string;
   export type PatchProductFamily = string;
+  export type PatchPropertiesList = PatchPropertyEntry[];
+  export type PatchProperty = "PRODUCT"|"PRODUCT_FAMILY"|"CLASSIFICATION"|"MSRC_SEVERITY"|"PRIORITY"|"SEVERITY"|string;
+  export type PatchPropertyEntry = {[key: string]: AttributeValue};
   export interface PatchRule {
     /**
      * The patch filter group that defines the criteria for the rule.
@@ -6161,6 +6212,7 @@ declare namespace SSM {
     PatchRules: PatchRuleList;
   }
   export type PatchRuleList = PatchRule[];
+  export type PatchSet = "OS"|"APPLICATION"|string;
   export type PatchSeverity = string;
   export interface PatchSource {
     /**
@@ -6196,6 +6248,7 @@ declare namespace SSM {
     ApprovalDate?: DateTime;
   }
   export type PatchTitle = string;
+  export type PatchUnreportedNotApplicableCount = number;
   export type PatchVendor = string;
   export type PingStatus = "Online"|"ConnectionLost"|"Inactive"|string;
   export type PlatformType = "Windows"|"Linux"|string;

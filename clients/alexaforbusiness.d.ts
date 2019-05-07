@@ -172,6 +172,14 @@ declare class AlexaForBusiness extends Service {
    */
   deleteDevice(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteDeviceResponse) => void): Request<AlexaForBusiness.Types.DeleteDeviceResponse, AWSError>;
   /**
+   * When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device.
+   */
+  deleteDeviceUsageData(params: AlexaForBusiness.Types.DeleteDeviceUsageDataRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteDeviceUsageDataResponse) => void): Request<AlexaForBusiness.Types.DeleteDeviceUsageDataResponse, AWSError>;
+  /**
+   * When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device.
+   */
+  deleteDeviceUsageData(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteDeviceUsageDataResponse) => void): Request<AlexaForBusiness.Types.DeleteDeviceUsageDataResponse, AWSError>;
+  /**
    * Deletes a gateway group.
    */
   deleteGatewayGroup(params: AlexaForBusiness.Types.DeleteGatewayGroupRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteGatewayGroupResponse) => void): Request<AlexaForBusiness.Types.DeleteGatewayGroupResponse, AWSError>;
@@ -572,11 +580,11 @@ declare class AlexaForBusiness extends Service {
    */
   searchUsers(callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchUsersResponse) => void): Request<AlexaForBusiness.Types.SearchUsersResponse, AWSError>;
   /**
-   * Triggers an asynchronous flow to send text, SSML, or audio announcements to multiple rooms, identified by a search, such as filter. 
+   * Triggers an asynchronous flow to send text, SSML, or audio announcements to rooms that are identified by a search or filter. 
    */
   sendAnnouncement(params: AlexaForBusiness.Types.SendAnnouncementRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SendAnnouncementResponse) => void): Request<AlexaForBusiness.Types.SendAnnouncementResponse, AWSError>;
   /**
-   * Triggers an asynchronous flow to send text, SSML, or audio announcements to multiple rooms, identified by a search, such as filter. 
+   * Triggers an asynchronous flow to send text, SSML, or audio announcements to rooms that are identified by a search or filter. 
    */
   sendAnnouncement(callback?: (err: AWSError, data: AlexaForBusiness.Types.SendAnnouncementResponse) => void): Request<AlexaForBusiness.Types.SendAnnouncementResponse, AWSError>;
   /**
@@ -808,7 +816,7 @@ declare namespace AlexaForBusiness {
      */
     Locale: Locale;
     /**
-     * The location of the audio file. Currently, S3 URLs are supported. Only S3 locations comprised of safe character are valid. For more information, see Safe Characters.
+     * The location of the audio file. Currently, S3 URLs are supported. Only S3 locations comprised of safe characters are valid. For more information, see Safe Characters.
      */
     Location: AudioLocation;
   }
@@ -1328,6 +1336,18 @@ declare namespace AlexaForBusiness {
   }
   export interface DeleteDeviceResponse {
   }
+  export interface DeleteDeviceUsageDataRequest {
+    /**
+     * The ARN of the device.
+     */
+    DeviceArn: Arn;
+    /**
+     * The type of usage data to delete.
+     */
+    DeviceUsageType: DeviceUsageType;
+  }
+  export interface DeleteDeviceUsageDataResponse {
+  }
   export interface DeleteGatewayGroupRequest {
     /**
      * The ARN of the gateway group to delete.
@@ -1528,7 +1548,7 @@ declare namespace AlexaForBusiness {
      */
     Code?: DeviceStatusDetailCode;
   }
-  export type DeviceStatusDetailCode = "DEVICE_SOFTWARE_UPDATE_NEEDED"|"DEVICE_WAS_OFFLINE"|string;
+  export type DeviceStatusDetailCode = "DEVICE_SOFTWARE_UPDATE_NEEDED"|"DEVICE_WAS_OFFLINE"|"CREDENTIALS_ACCESS_FAILURE"|"TLS_VERSION_MISMATCH"|"ASSOCIATION_REJECTION"|"AUTHENTICATION_FAILURE"|"DHCP_FAILURE"|"INTERNET_UNAVAILABLE"|"DNS_FAILURE"|"UNKNOWN_FAILURE"|"CERTIFICATE_ISSUING_LIMIT_EXCEEDED"|"INVALID_CERTIFICATE_AUTHORITY"|"NETWORK_PROFILE_NOT_FOUND"|"INVALID_PASSWORD_STATE"|"PASSWORD_NOT_FOUND"|string;
   export type DeviceStatusDetails = DeviceStatusDetail[];
   export interface DeviceStatusInfo {
     /**
@@ -1541,6 +1561,7 @@ declare namespace AlexaForBusiness {
     ConnectionStatus?: ConnectionStatus;
   }
   export type DeviceType = string;
+  export type DeviceUsageType = "VOICE"|string;
   export interface DisassociateContactFromAddressBookRequest {
     /**
      * The ARN of the contact to disassociate from an address book.
@@ -2662,7 +2683,7 @@ declare namespace AlexaForBusiness {
      */
     Content: Content;
     /**
-     * The time to live for an announcement. If delivery doesn't occur within this time, the announcement will not be delivered.
+     * The time to live for an announcement. Default is 300. If delivery doesn't occur within this time, the announcement is not delivered.
      */
     TimeToLiveInSeconds?: TimeToLiveInSeconds;
     /**

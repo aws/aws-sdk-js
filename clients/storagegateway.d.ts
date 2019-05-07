@@ -968,6 +968,10 @@ declare namespace StorageGateway {
      */
     SMBACLEnabled?: Boolean;
     /**
+     * A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
+     */
+    AdminUserList?: FileShareUserList;
+    /**
      * A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
      */
     ValidUserList?: FileShareUserList;
@@ -2161,6 +2165,10 @@ declare namespace StorageGateway {
      */
     SMBACLEnabled?: Boolean;
     /**
+     * A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
+     */
+    AdminUserList?: FileShareUserList;
+    /**
      * A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
      */
     ValidUserList?: FileShareUserList;
@@ -2602,6 +2610,10 @@ declare namespace StorageGateway {
      * Set this value to "true to enable ACL (access control list) on the SMB file share. Set it to "false" to map file and directory permissions to the POSIX permissions.
      */
     SMBACLEnabled?: Boolean;
+    /**
+     * A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
+     */
+    AdminUserList?: FileShareUserList;
     /**
      * A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. For example @group1. Can only be set if Authentication is set to ActiveDirectory.
      */

@@ -458,6 +458,31 @@
       ],
       "documentation": "<p>Removes a device from Alexa For Business.</p>"
     },
+    "DeleteDeviceUsageData": {
+      "name": "DeleteDeviceUsageData",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteDeviceUsageDataRequest"
+      },
+      "output": {
+        "shape": "DeleteDeviceUsageDataResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "DeviceNotRegisteredException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device.</p>"
+    },
     "DeleteGatewayGroup": {
       "name": "DeleteGatewayGroup",
       "http": {
@@ -1395,7 +1420,7 @@
           "shape": "AlreadyExistsException"
         }
       ],
-      "documentation": "<p>Triggers an asynchronous flow to send text, SSML, or audio announcements to multiple rooms, identified by a search, such as filter. </p>"
+      "documentation": "<p>Triggers an asynchronous flow to send text, SSML, or audio announcements to rooms that are identified by a search or filter. </p>"
     },
     "SendInvitation": {
       "name": "SendInvitation",
@@ -1925,10 +1950,10 @@
         },
         "Location": {
           "shape": "AudioLocation",
-          "documentation": "<p>The location of the audio file. Currently, S3 URLs are supported. Only S3 locations comprised of safe character are valid. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#Safe%20Characters\">Safe Characters</a>.</p>"
+          "documentation": "<p>The location of the audio file. Currently, S3 URLs are supported. Only S3 locations comprised of safe characters are valid. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#Safe%20Characters\">Safe Characters</a>.</p>"
         }
       },
-      "documentation": "<p>The audio message. There is a 1 MB limit on the audio file input, and the only supported format is MP3. You must convert audio files to an Alexa-friendly format. </p> <p>You might need to use converter software to convert your MP3 files to the required codec version (MPEG version 2) and bit rate (48 kbps). One option for this is a command-line tool, FFmpeg. For more information, see <a href=\"https://www.ffmpeg.org/\">FFmpeg</a>. The following command converts the provided &lt;input-file&gt; to an MP3 file that will be played in the announcement:</p> <p> <code>ffmpeg -i &lt;input-file&gt; -ac 2 -codec:a libmp3lame -b:a 48k -ar 16000 &lt;output-file.mp3&gt;</code> </p>"
+      "documentation": "<p>The audio message. There is a 1 MB limit on the audio file input and the only supported format is MP3. To convert your MP3 audio files to an Alexa-friendly, </p> <p>required codec version (MPEG version 2) and bit rate (48 kbps), you might use converter software. One option for this is a command-line tool, FFmpeg. For more information, see <a href=\"https://www.ffmpeg.org/\">FFmpeg</a>. The following command converts the provided &lt;input-file&gt; to an MP3 file that is played in the announcement:</p> <p> <code>ffmpeg -i &lt;input-file&gt; -ac 2 -codec:a libmp3lame -b:a 48k -ar 16000 &lt;output-file.mp3&gt;</code> </p>"
     },
     "AudioList": {
       "type": "list",
@@ -2314,7 +2339,7 @@
           "documentation": "<p>The list of audio messages.</p>"
         }
       },
-      "documentation": "<p>The content definition. It can contain only one text, SSML, or audio list object.</p>"
+      "documentation": "<p>The content definition. This can contain only one text, SSML, or audio list object.</p>"
     },
     "CountryCode": {
       "type": "string",
@@ -2775,6 +2800,27 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteDeviceUsageDataRequest": {
+      "type": "structure",
+      "required": [
+        "DeviceArn",
+        "DeviceUsageType"
+      ],
+      "members": {
+        "DeviceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the device.</p>"
+        },
+        "DeviceUsageType": {
+          "shape": "DeviceUsageType",
+          "documentation": "<p>The type of usage data to delete.</p>"
+        }
+      }
+    },
+    "DeleteDeviceUsageDataResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteGatewayGroupRequest": {
       "type": "structure",
       "required": [
@@ -3088,7 +3134,20 @@
       "type": "string",
       "enum": [
         "DEVICE_SOFTWARE_UPDATE_NEEDED",
-        "DEVICE_WAS_OFFLINE"
+        "DEVICE_WAS_OFFLINE",
+        "CREDENTIALS_ACCESS_FAILURE",
+        "TLS_VERSION_MISMATCH",
+        "ASSOCIATION_REJECTION",
+        "AUTHENTICATION_FAILURE",
+        "DHCP_FAILURE",
+        "INTERNET_UNAVAILABLE",
+        "DNS_FAILURE",
+        "UNKNOWN_FAILURE",
+        "CERTIFICATE_ISSUING_LIMIT_EXCEEDED",
+        "INVALID_CERTIFICATE_AUTHORITY",
+        "NETWORK_PROFILE_NOT_FOUND",
+        "INVALID_PASSWORD_STATE",
+        "PASSWORD_NOT_FOUND"
       ]
     },
     "DeviceStatusDetails": {
@@ -3114,6 +3173,12 @@
     "DeviceType": {
       "type": "string",
       "pattern": "[a-zA-Z0-9]{1,200}"
+    },
+    "DeviceUsageType": {
+      "type": "string",
+      "enum": [
+        "VOICE"
+      ]
     },
     "DisassociateContactFromAddressBookRequest": {
       "type": "structure",
@@ -4881,7 +4946,7 @@
         },
         "TimeToLiveInSeconds": {
           "shape": "TimeToLiveInSeconds",
-          "documentation": "<p>The time to live for an announcement. If delivery doesn't occur within this time, the announcement will not be delivered.</p>"
+          "documentation": "<p>The time to live for an announcement. Default is 300. If delivery doesn't occur within this time, the announcement is not delivered.</p>"
         },
         "ClientRequestToken": {
           "shape": "ClientRequestToken",

@@ -319,6 +319,9 @@
         },
         {
           "shape": "InternalFailureException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Deletes a <code>GraphqlApi</code> object.</p>"
@@ -462,6 +465,9 @@
         },
         {
           "shape": "InternalFailureException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Retrieves a <code>GraphqlApi</code> object.</p>"
@@ -743,6 +749,40 @@
       ],
       "documentation": "<p>List the resolvers that are associated with a specific function.</p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/tags/{resourceArn}"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Lists the tags for a resource.</p>"
+    },
     "ListTypes": {
       "name": "ListTypes",
       "http": {
@@ -804,6 +844,74 @@
         }
       ],
       "documentation": "<p>Adds a new schema to your GraphQL API.</p> <p>This operation is asynchronous. Use to determine when it has completed.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/tags/{resourceArn}"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Tags a resource with user-supplied tags.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/tags/{resourceArn}"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Untags a resource.</p>"
     },
     "UpdateApiKey": {
       "name": "UpdateApiKey",
@@ -925,6 +1033,9 @@
         },
         {
           "shape": "InternalFailureException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Updates a <code>GraphqlApi</code> object.</p>"
@@ -990,6 +1101,30 @@
     }
   },
   "shapes": {
+    "AdditionalAuthenticationProvider": {
+      "type": "structure",
+      "members": {
+        "authenticationType": {
+          "shape": "AuthenticationType",
+          "documentation": "<p>The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.</p>"
+        },
+        "openIDConnectConfig": {
+          "shape": "OpenIDConnectConfig",
+          "documentation": "<p>The OpenID Connect configuration.</p>"
+        },
+        "userPoolConfig": {
+          "shape": "CognitoUserPoolConfig",
+          "documentation": "<p>The Amazon Cognito user pool configuration.</p>"
+        }
+      },
+      "documentation": "<p>Describes an additional authentication provider.</p>"
+    },
+    "AdditionalAuthenticationProviders": {
+      "type": "list",
+      "member": {
+        "shape": "AdditionalAuthenticationProvider"
+      }
+    },
     "ApiKey": {
       "type": "structure",
       "members": {
@@ -1065,6 +1200,31 @@
     },
     "Boolean": {
       "type": "boolean"
+    },
+    "BooleanValue": {
+      "type": "boolean"
+    },
+    "CognitoUserPoolConfig": {
+      "type": "structure",
+      "required": [
+        "userPoolId",
+        "awsRegion"
+      ],
+      "members": {
+        "userPoolId": {
+          "shape": "String",
+          "documentation": "<p>The user pool ID.</p>"
+        },
+        "awsRegion": {
+          "shape": "String",
+          "documentation": "<p>The AWS Region in which the user pool was created.</p>"
+        },
+        "appIdClientRegex": {
+          "shape": "String",
+          "documentation": "<p>A regular expression for validating the incoming Amazon Cognito user pool app client ID.</p>"
+        }
+      },
+      "documentation": "<p>Describes an Amazon Cognito user pool configuration.</p>"
     },
     "CreateApiKeyRequest": {
       "type": "structure",
@@ -1226,7 +1386,7 @@
         },
         "authenticationType": {
           "shape": "AuthenticationType",
-          "documentation": "<p>The authentication type: API key, AWS IAM, or Amazon Cognito user pools.</p>"
+          "documentation": "<p>The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.</p>"
         },
         "userPoolConfig": {
           "shape": "UserPoolConfig",
@@ -1235,6 +1395,14 @@
         "openIDConnectConfig": {
           "shape": "OpenIDConnectConfig",
           "documentation": "<p>The OpenID Connect configuration.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A <code>TagMap</code> object.</p>"
+        },
+        "additionalAuthenticationProviders": {
+          "shape": "AdditionalAuthenticationProviders",
+          "documentation": "<p>A list of additional authentication providers for the <code>GraphqlApi</code> API.</p>"
         }
       }
     },
@@ -1755,6 +1923,12 @@
           "documentation": "<p>The schema format: SDL or JSON.</p>",
           "location": "querystring",
           "locationName": "format"
+        },
+        "includeDirectives": {
+          "shape": "BooleanValue",
+          "documentation": "<p>A flag that specifies whether the schema introspection should contain directives.</p>",
+          "location": "querystring",
+          "locationName": "includeDirectives"
         }
       }
     },
@@ -1824,7 +1998,7 @@
       "members": {
         "status": {
           "shape": "SchemaStatus",
-          "documentation": "<p>The current state of the schema (PROCESSING, ACTIVE, or DELETING). Once the schema is in the ACTIVE state, you can add data.</p>"
+          "documentation": "<p>The current state of the schema (PROCESSING, FAILED, SUCCESS, or NOT_APPLICABLE). When the schema is in the ACTIVE state, you can add data.</p>"
         },
         "details": {
           "shape": "String",
@@ -1903,6 +2077,14 @@
         "uris": {
           "shape": "MapOfStringToString",
           "documentation": "<p>The URIs.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags.</p>"
+        },
+        "additionalAuthenticationProviders": {
+          "shape": "AdditionalAuthenticationProviders",
+          "documentation": "<p>A list of additional authentication providers for the <code>GraphqlApi</code> API.</p>"
         }
       },
       "documentation": "<p>Describes a GraphQL API.</p>"
@@ -2179,6 +2361,29 @@
         }
       }
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The <code>GraphqlApi</code> ARN.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A <code>TagMap</code> object.</p>"
+        }
+      }
+    },
     "ListTypesRequest": {
       "type": "structure",
       "required": [
@@ -2408,6 +2613,12 @@
         "shape": "Resolver"
       }
     },
+    "ResourceArn": {
+      "type": "string",
+      "max": 75,
+      "min": 70,
+      "pattern": "^arn:aws:appsync:[A-Za-z0-9_/.-]{0,63}:\\d{12}:apis/[0-9A-Za-z_-]{26}$"
+    },
     "ResourceName": {
       "type": "string",
       "pattern": "[_A-Za-z][_0-9A-Za-z]*"
@@ -2417,7 +2628,10 @@
       "enum": [
         "PROCESSING",
         "ACTIVE",
-        "DELETING"
+        "DELETING",
+        "FAILED",
+        "SUCCESS",
+        "NOT_APPLICABLE"
       ]
     },
     "StartSchemaCreationRequest": {
@@ -2444,12 +2658,67 @@
       "members": {
         "status": {
           "shape": "SchemaStatus",
-          "documentation": "<p>The current state of the schema (PROCESSING, ACTIVE, or DELETING). When the schema is in the ACTIVE state, you can add data.</p>"
+          "documentation": "<p>The current state of the schema (PROCESSING, FAILED, SUCCESS, or NOT_APPLICABLE). When the schema is in the ACTIVE state, you can add data.</p>"
         }
       }
     },
     "String": {
       "type": "string"
+    },
+    "TagKey": {
+      "type": "string",
+      "documentation": "<p>The key for the tag.</p>",
+      "max": 128,
+      "min": 1,
+      "pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "max": 50,
+      "min": 1
+    },
+    "TagMap": {
+      "type": "map",
+      "key": {
+        "shape": "TagKey"
+      },
+      "value": {
+        "shape": "TagValue"
+      },
+      "documentation": "<p>A map with keys of <code>TagKey</code> objects and values of <code>TagValue</code> objects.</p>",
+      "max": 50,
+      "min": 1
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tags"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The <code>GraphqlApi</code> ARN.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>A <code>TagMap</code> object.</p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "documentation": "<p>The value for the tag.</p>",
+      "max": 256
     },
     "Type": {
       "type": "structure",
@@ -2489,6 +2758,31 @@
       "member": {
         "shape": "Type"
       }
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tagKeys"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The <code>GraphqlApi</code> ARN.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "tagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>A list of <code>TagKey</code> objects.</p>",
+          "location": "querystring",
+          "locationName": "tagKeys"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateApiKeyRequest": {
       "type": "structure",
@@ -2681,6 +2975,10 @@
         "openIDConnectConfig": {
           "shape": "OpenIDConnectConfig",
           "documentation": "<p>The OpenID Connect configuration for the <code>GraphqlApi</code> object.</p>"
+        },
+        "additionalAuthenticationProviders": {
+          "shape": "AdditionalAuthenticationProviders",
+          "documentation": "<p>A list of additional authentication providers for the <code>GraphqlApi</code> API.</p>"
         }
       }
     },

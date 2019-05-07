@@ -212,6 +212,14 @@ declare class AppSync extends Service {
    */
   listResolversByFunction(callback?: (err: AWSError, data: AppSync.Types.ListResolversByFunctionResponse) => void): Request<AppSync.Types.ListResolversByFunctionResponse, AWSError>;
   /**
+   * Lists the tags for a resource.
+   */
+  listTagsForResource(params: AppSync.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: AppSync.Types.ListTagsForResourceResponse) => void): Request<AppSync.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags for a resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: AppSync.Types.ListTagsForResourceResponse) => void): Request<AppSync.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Lists the types for a given API.
    */
   listTypes(params: AppSync.Types.ListTypesRequest, callback?: (err: AWSError, data: AppSync.Types.ListTypesResponse) => void): Request<AppSync.Types.ListTypesResponse, AWSError>;
@@ -227,6 +235,22 @@ declare class AppSync extends Service {
    * Adds a new schema to your GraphQL API. This operation is asynchronous. Use to determine when it has completed.
    */
   startSchemaCreation(callback?: (err: AWSError, data: AppSync.Types.StartSchemaCreationResponse) => void): Request<AppSync.Types.StartSchemaCreationResponse, AWSError>;
+  /**
+   * Tags a resource with user-supplied tags.
+   */
+  tagResource(params: AppSync.Types.TagResourceRequest, callback?: (err: AWSError, data: AppSync.Types.TagResourceResponse) => void): Request<AppSync.Types.TagResourceResponse, AWSError>;
+  /**
+   * Tags a resource with user-supplied tags.
+   */
+  tagResource(callback?: (err: AWSError, data: AppSync.Types.TagResourceResponse) => void): Request<AppSync.Types.TagResourceResponse, AWSError>;
+  /**
+   * Untags a resource.
+   */
+  untagResource(params: AppSync.Types.UntagResourceRequest, callback?: (err: AWSError, data: AppSync.Types.UntagResourceResponse) => void): Request<AppSync.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Untags a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: AppSync.Types.UntagResourceResponse) => void): Request<AppSync.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates an API key.
    */
@@ -277,6 +301,21 @@ declare class AppSync extends Service {
   updateType(callback?: (err: AWSError, data: AppSync.Types.UpdateTypeResponse) => void): Request<AppSync.Types.UpdateTypeResponse, AWSError>;
 }
 declare namespace AppSync {
+  export interface AdditionalAuthenticationProvider {
+    /**
+     * The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.
+     */
+    authenticationType?: AuthenticationType;
+    /**
+     * The OpenID Connect configuration.
+     */
+    openIDConnectConfig?: OpenIDConnectConfig;
+    /**
+     * The Amazon Cognito user pool configuration.
+     */
+    userPoolConfig?: CognitoUserPoolConfig;
+  }
+  export type AdditionalAuthenticationProviders = AdditionalAuthenticationProvider[];
   export interface ApiKey {
     /**
      * The API key ID.
@@ -316,6 +355,21 @@ declare namespace AppSync {
   }
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export type Boolean = boolean;
+  export type BooleanValue = boolean;
+  export interface CognitoUserPoolConfig {
+    /**
+     * The user pool ID.
+     */
+    userPoolId: String;
+    /**
+     * The AWS Region in which the user pool was created.
+     */
+    awsRegion: String;
+    /**
+     * A regular expression for validating the incoming Amazon Cognito user pool app client ID.
+     */
+    appIdClientRegex?: String;
+  }
   export interface CreateApiKeyRequest {
     /**
      * The ID for your GraphQL API.
@@ -430,7 +484,7 @@ declare namespace AppSync {
      */
     logConfig?: LogConfig;
     /**
-     * The authentication type: API key, AWS IAM, or Amazon Cognito user pools.
+     * The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.
      */
     authenticationType: AuthenticationType;
     /**
@@ -441,6 +495,14 @@ declare namespace AppSync {
      * The OpenID Connect configuration.
      */
     openIDConnectConfig?: OpenIDConnectConfig;
+    /**
+     * A TagMap object.
+     */
+    tags?: TagMap;
+    /**
+     * A list of additional authentication providers for the GraphqlApi API.
+     */
+    additionalAuthenticationProviders?: AdditionalAuthenticationProviders;
   }
   export interface CreateGraphqlApiResponse {
     /**
@@ -739,6 +801,10 @@ declare namespace AppSync {
      * The schema format: SDL or JSON.
      */
     format: OutputType;
+    /**
+     * A flag that specifies whether the schema introspection should contain directives.
+     */
+    includeDirectives?: BooleanValue;
   }
   export interface GetIntrospectionSchemaResponse {
     /**
@@ -774,7 +840,7 @@ declare namespace AppSync {
   }
   export interface GetSchemaCreationStatusResponse {
     /**
-     * The current state of the schema (PROCESSING, ACTIVE, or DELETING). Once the schema is in the ACTIVE state, you can add data.
+     * The current state of the schema (PROCESSING, FAILED, SUCCESS, or NOT_APPLICABLE). When the schema is in the ACTIVE state, you can add data.
      */
     status?: SchemaStatus;
     /**
@@ -835,6 +901,14 @@ declare namespace AppSync {
      * The URIs.
      */
     uris?: MapOfStringToString;
+    /**
+     * The tags.
+     */
+    tags?: TagMap;
+    /**
+     * A list of additional authentication providers for the GraphqlApi API.
+     */
+    additionalAuthenticationProviders?: AdditionalAuthenticationProviders;
   }
   export type GraphqlApis = GraphqlApi[];
   export interface HttpDataSourceConfig {
@@ -1001,6 +1075,18 @@ declare namespace AppSync {
      */
     nextToken?: PaginationToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The GraphqlApi ARN.
+     */
+    resourceArn: ResourceArn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * A TagMap object.
+     */
+    tags?: TagMap;
+  }
   export interface ListTypesRequest {
     /**
      * The API ID.
@@ -1138,8 +1224,9 @@ declare namespace AppSync {
   }
   export type ResolverKind = "UNIT"|"PIPELINE"|string;
   export type Resolvers = Resolver[];
+  export type ResourceArn = string;
   export type ResourceName = string;
-  export type SchemaStatus = "PROCESSING"|"ACTIVE"|"DELETING"|string;
+  export type SchemaStatus = "PROCESSING"|"ACTIVE"|"DELETING"|"FAILED"|"SUCCESS"|"NOT_APPLICABLE"|string;
   export interface StartSchemaCreationRequest {
     /**
      * The API ID.
@@ -1152,11 +1239,27 @@ declare namespace AppSync {
   }
   export interface StartSchemaCreationResponse {
     /**
-     * The current state of the schema (PROCESSING, ACTIVE, or DELETING). When the schema is in the ACTIVE state, you can add data.
+     * The current state of the schema (PROCESSING, FAILED, SUCCESS, or NOT_APPLICABLE). When the schema is in the ACTIVE state, you can add data.
      */
     status?: SchemaStatus;
   }
   export type String = string;
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceRequest {
+    /**
+     * The GraphqlApi ARN.
+     */
+    resourceArn: ResourceArn;
+    /**
+     * A TagMap object.
+     */
+    tags: TagMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export interface Type {
     /**
      * The type name.
@@ -1181,6 +1284,18 @@ declare namespace AppSync {
   }
   export type TypeDefinitionFormat = "SDL"|"JSON"|string;
   export type TypeList = Type[];
+  export interface UntagResourceRequest {
+    /**
+     * The GraphqlApi ARN.
+     */
+    resourceArn: ResourceArn;
+    /**
+     * A list of TagKey objects.
+     */
+    tagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateApiKeyRequest {
     /**
      * The ID for the GraphQL API.
@@ -1318,6 +1433,10 @@ declare namespace AppSync {
      * The OpenID Connect configuration for the GraphqlApi object.
      */
     openIDConnectConfig?: OpenIDConnectConfig;
+    /**
+     * A list of additional authentication providers for the GraphqlApi API.
+     */
+    additionalAuthenticationProviders?: AdditionalAuthenticationProviders;
   }
   export interface UpdateGraphqlApiResponse {
     /**

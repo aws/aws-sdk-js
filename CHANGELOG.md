@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.450.0-->
+<!--LATEST=2.451.0-->
 <!--ENTRYINSERT-->
+
+## 2.451.0
+* feature: AlexaForBusiness: This release adds an API allowing authorized users to delete a shared device's history of voice recordings and associated response data.
+* feature: AppSync: AWS AppSync now supports the ability to add additional authentication providers to your AWS AppSync GraphQL API as well as the ability to retrieve directives configured against fields or object type definitions during schema introspection.
+* feature: SSM: Patch Manager adds support for Microsoft Application Patching.
+* feature: StorageGateway: Add optional field AdminUserList to CreateSMBFileShare and UpdateSMBFileShare APIs.
 
 ## 2.450.0
 * feature: ConfigService: AWS Config now supports tagging on PutConfigRule, PutConfigurationAggregator and PutAggregationAuthorization APIs.
