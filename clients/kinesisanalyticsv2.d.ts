@@ -52,11 +52,11 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   addApplicationReferenceDataSource(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.AddApplicationReferenceDataSourceResponse) => void): Request<KinesisAnalyticsV2.Types.AddApplicationReferenceDataSourceResponse, AWSError>;
   /**
-   * Creates an Amazon Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see Creating an Application.   SQL is not enabled for this private beta release. Using SQL parameters (such as SqlApplicationConfiguration) will result in an error. 
+   * Creates an Amazon Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see Creating an Application. 
    */
   createApplication(params: KinesisAnalyticsV2.Types.CreateApplicationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.CreateApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.CreateApplicationResponse, AWSError>;
   /**
-   * Creates an Amazon Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see Creating an Application.   SQL is not enabled for this private beta release. Using SQL parameters (such as SqlApplicationConfiguration) will result in an error. 
+   * Creates an Amazon Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see Creating an Application. 
    */
   createApplication(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.CreateApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.CreateApplicationResponse, AWSError>;
   /**
@@ -156,11 +156,19 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   listApplications(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListApplicationsResponse) => void): Request<KinesisAnalyticsV2.Types.ListApplicationsResponse, AWSError>;
   /**
-   * Starts the specified Amazon Kinesis Data Analytics application. After creating an application, you must exclusively call this operation to start your application.  SQL is not enabled for this private beta. Using SQL parameters (such as RunConfiguration$SqlRunConfigurations) will result in an error. 
+   * Retrieves the list of key-value tags assigned to the application.
+   */
+  listTagsForResource(params: KinesisAnalyticsV2.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListTagsForResourceResponse) => void): Request<KinesisAnalyticsV2.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Retrieves the list of key-value tags assigned to the application.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListTagsForResourceResponse) => void): Request<KinesisAnalyticsV2.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Starts the specified Amazon Kinesis Data Analytics application. After creating an application, you must exclusively call this operation to start your application.
    */
   startApplication(params: KinesisAnalyticsV2.Types.StartApplicationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.StartApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.StartApplicationResponse, AWSError>;
   /**
-   * Starts the specified Amazon Kinesis Data Analytics application. After creating an application, you must exclusively call this operation to start your application.  SQL is not enabled for this private beta. Using SQL parameters (such as RunConfiguration$SqlRunConfigurations) will result in an error. 
+   * Starts the specified Amazon Kinesis Data Analytics application. After creating an application, you must exclusively call this operation to start your application.
    */
   startApplication(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.StartApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.StartApplicationResponse, AWSError>;
   /**
@@ -172,11 +180,27 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   stopApplication(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.StopApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.StopApplicationResponse, AWSError>;
   /**
-   * Updates an existing Amazon Kinesis Data Analytics application. Using this operation, you can update application code, input configuration, and output configuration.  Kinesis Data Analytics updates the ApplicationVersionId each time you update your application.   SQL is not enabled for this private beta. Using SQL parameters (such as SqlApplicationConfigurationUpdate) will result in an error. 
+   * Adds one or more key-value tags to a Kinesis Analytics application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50.
+   */
+  tagResource(params: KinesisAnalyticsV2.Types.TagResourceRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.TagResourceResponse) => void): Request<KinesisAnalyticsV2.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds one or more key-value tags to a Kinesis Analytics application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50.
+   */
+  tagResource(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.TagResourceResponse) => void): Request<KinesisAnalyticsV2.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes one or more tags from a Kinesis Analytics application.
+   */
+  untagResource(params: KinesisAnalyticsV2.Types.UntagResourceRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UntagResourceResponse) => void): Request<KinesisAnalyticsV2.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes one or more tags from a Kinesis Analytics application.
+   */
+  untagResource(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UntagResourceResponse) => void): Request<KinesisAnalyticsV2.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates an existing Amazon Kinesis Data Analytics application. Using this operation, you can update application code, input configuration, and output configuration.  Kinesis Data Analytics updates the ApplicationVersionId each time you update your application. 
    */
   updateApplication(params: KinesisAnalyticsV2.Types.UpdateApplicationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UpdateApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.UpdateApplicationResponse, AWSError>;
   /**
-   * Updates an existing Amazon Kinesis Data Analytics application. Using this operation, you can update application code, input configuration, and output configuration.  Kinesis Data Analytics updates the ApplicationVersionId each time you update your application.   SQL is not enabled for this private beta. Using SQL parameters (such as SqlApplicationConfigurationUpdate) will result in an error. 
+   * Updates an existing Amazon Kinesis Data Analytics application. Using this operation, you can update application code, input configuration, and output configuration.  Kinesis Data Analytics updates the ApplicationVersionId each time you update your application. 
    */
   updateApplication(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UpdateApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.UpdateApplicationResponse, AWSError>;
 }
@@ -444,7 +468,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The runtime environment for the application (SQL-1.0 or JAVA-8-FLINK-1.5).
+     * The runtime environment for the application (SQL-1.0 or FLINK-1_6).
      */
     RuntimeEnvironment: RuntimeEnvironment;
     /**
@@ -526,7 +550,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationVersionId: ApplicationVersionId;
     /**
-     * The runtime environment for the application (SQL-1.0 or JAVA-8-FLINK-1.5).
+     * The runtime environment for the application (SQL-1.0 or FLINK-1_6).
      */
     RuntimeEnvironment: RuntimeEnvironment;
   }
@@ -691,7 +715,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationDescription?: ApplicationDescription;
     /**
-     * The runtime environment for the application (SQL-1.0 or JAVA-8-FLINK-1.5).
+     * The runtime environment for the application (SQL-1.0 or FLINK-1_6).
      */
     RuntimeEnvironment: RuntimeEnvironment;
     /**
@@ -706,6 +730,10 @@ declare namespace KinesisAnalyticsV2 {
      * Use this parameter to configure an Amazon CloudWatch log stream to monitor application configuration errors. 
      */
     CloudWatchLoggingOptions?: CloudWatchLoggingOptions;
+    /**
+     * A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management Guide.
+     */
+    Tags?: Tags;
   }
   export interface CreateApplicationResponse {
     /**
@@ -1067,13 +1095,13 @@ declare namespace KinesisAnalyticsV2 {
   export type InputDescriptions = InputDescription[];
   export interface InputLambdaProcessor {
     /**
-     * The ARN of the AWS Lambda function that operates on records in the stream.
+     * The ARN of the AWS Lambda function that operates on records in the stream.  To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see Example ARNs: AWS Lambda  
      */
     ResourceARN: ResourceARN;
   }
   export interface InputLambdaProcessorDescription {
     /**
-     * The ARN of the AWS Lambda function that is used to preprocess the records in the stream.
+     * The ARN of the AWS Lambda function that is used to preprocess the records in the stream.  To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see Example ARNs: AWS Lambda  
      */
     ResourceARN: ResourceARN;
     /**
@@ -1083,7 +1111,7 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface InputLambdaProcessorUpdate {
     /**
-     * The Amazon Resource Name (ARN) of the new AWS Lambda function that is used to preprocess the records in the stream.
+     * The Amazon Resource Name (ARN) of the new AWS Lambda function that is used to preprocess the records in the stream.  To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see Example ARNs: AWS Lambda  
      */
     ResourceARNUpdate: ResourceARN;
   }
@@ -1178,6 +1206,7 @@ declare namespace KinesisAnalyticsV2 {
     RecordRowPath: RecordRowPath;
   }
   export type JobPlanDescription = string;
+  export type KinesisAnalyticsARN = string;
   export interface KinesisFirehoseInput {
     /**
      * The Amazon Resource Name (ARN) of the delivery stream.
@@ -1268,7 +1297,7 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface LambdaOutput {
     /**
-     * The Amazon Resource Name (ARN) of the destination Lambda function to write to.
+     * The Amazon Resource Name (ARN) of the destination Lambda function to write to.  To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see Example ARNs: AWS Lambda  
      */
     ResourceARN: ResourceARN;
   }
@@ -1284,7 +1313,7 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface LambdaOutputUpdate {
     /**
-     * The Amazon Resource Name (ARN) of the destination AWS Lambda function.
+     * The Amazon Resource Name (ARN) of the destination AWS Lambda function.  To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see Example ARNs: AWS Lambda  
      */
     ResourceARNUpdate: ResourceARN;
   }
@@ -1334,6 +1363,18 @@ declare namespace KinesisAnalyticsV2 {
     NextToken?: ApplicationName;
   }
   export type ListSnapshotsInputLimit = number;
+  export interface ListTagsForResourceRequest {
+    /**
+     * The ARN of the application for which to retrieve tags.
+     */
+    ResourceARN: KinesisAnalyticsARN;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The key-value tags assigned to the application.
+     */
+    Tags?: Tags;
+  }
   export type LogLevel = "INFO"|"WARN"|"ERROR"|"DEBUG"|string;
   export type LogStreamARN = string;
   export interface MappingParameters {
@@ -1556,7 +1597,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     Name: RecordColumnName;
     /**
-     * A reference to the data element in the streaming input of the reference data source.
+     * A reference to the data element in the streaming input or the reference data source.
      */
     Mapping?: RecordColumnMapping;
     /**
@@ -1855,8 +1896,46 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface StopApplicationResponse {
   }
+  export interface Tag {
+    /**
+     * The key of the key-value tag.
+     */
+    Key: TagKey;
+    /**
+     * The value of the key-value tag. The value is optional.
+     */
+    Value?: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeys = TagKey[];
+  export interface TagResourceRequest {
+    /**
+     * The ARN of the application to assign the tags.
+     */
+    ResourceARN: KinesisAnalyticsARN;
+    /**
+     * The key-value tags to assign to the application.
+     */
+    Tags: Tags;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
+  export type Tags = Tag[];
   export type TextContent = string;
   export type Timestamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The ARN of the Kinesis Analytics application from which to remove the tags.
+     */
+    ResourceARN: KinesisAnalyticsARN;
+    /**
+     * A list of keys of tags to remove from the specified application.
+     */
+    TagKeys: TagKeys;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateApplicationRequest {
     /**
      * The name of the application to update.

@@ -42,7 +42,7 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p>Adds a CloudWatch log stream to monitor application configuration errors. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html\">Working with Amazon CloudWatch Logs</a>.</p>"
+      "documentation": "<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href=\"/kinesisanalytics/latest/apiv2/Welcome.html\">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p>Adds a CloudWatch log stream to monitor application configuration errors. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html\">Working with Amazon CloudWatch Logs</a>.</p>"
     },
     "AddApplicationInput": {
       "name": "AddApplicationInput",
@@ -76,7 +76,7 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p> Adds a streaming source to your Amazon Kinesis application. For conceptual information, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>. </p> <p>You can add a streaming source either when you create an application or you can use this operation to add a streaming source after you create an application. For more information, see <a>CreateApplication</a>.</p> <p>Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the <a>DescribeApplication</a> operation to find the current application version. </p> <p>This operation requires permissions to perform the <code>kinesisanalytics:AddApplicationInput</code> action.</p>"
+      "documentation": "<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href=\"/kinesisanalytics/latest/apiv2/Welcome.html\">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p> Adds a streaming source to your Amazon Kinesis application. For conceptual information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>. </p> <p>You can add a streaming source either when you create an application or you can use this operation to add a streaming source after you create an application. For more information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_CreateApplication.html\">CreateApplication</a>.</p> <p>Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html\">DescribeApplication</a> operation to find the current application version. </p> <p>This operation requires permissions to perform the <code>kinesisanalytics:AddApplicationInput</code> action.</p>"
     },
     "AddApplicationInputProcessingConfiguration": {
       "name": "AddApplicationInputProcessingConfiguration",
@@ -107,7 +107,7 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p>Adds an <a>InputProcessingConfiguration</a> to an application. An input processor preprocesses records on the input stream before the application's SQL code executes. Currently, the only input processor available is <a href=\"https://aws.amazon.com/documentation/lambda/\">AWS Lambda</a>.</p>"
+      "documentation": "<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href=\"/kinesisanalytics/latest/apiv2/Welcome.html\">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p>Adds an <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html\">InputProcessingConfiguration</a> to an application. An input processor preprocesses records on the input stream before the application's SQL code executes. Currently, the only input processor available is <a href=\"https://docs.aws.amazon.com/lambda/\">AWS Lambda</a>.</p>"
     },
     "AddApplicationOutput": {
       "name": "AddApplicationOutput",
@@ -138,7 +138,7 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p>Adds an external destination to your Amazon Kinesis Analytics application.</p> <p>If you want Amazon Kinesis Analytics to deliver data from an in-application stream within your application to an external destination (such as an Amazon Kinesis stream, an Amazon Kinesis Firehose delivery stream, or an AWS Lambda function), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.</p> <p> You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors. For more information, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html\">Understanding Application Output (Destination)</a>. </p> <p> Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the <a>DescribeApplication</a> operation to find the current application version.</p> <p>For the limits on the number of application inputs and outputs you can configure, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html\">Limits</a>.</p> <p>This operation requires permissions to perform the <code>kinesisanalytics:AddApplicationOutput</code> action.</p>"
+      "documentation": "<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href=\"/kinesisanalytics/latest/apiv2/Welcome.html\">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p>Adds an external destination to your Amazon Kinesis Analytics application.</p> <p>If you want Amazon Kinesis Analytics to deliver data from an in-application stream within your application to an external destination (such as an Amazon Kinesis stream, an Amazon Kinesis Firehose delivery stream, or an AWS Lambda function), you add the relevant configuration to your application using this operation. You can configure one or more outputs for your application. Each output configuration maps an in-application stream and an external destination.</p> <p> You can use one of the output configurations to deliver data from your in-application error stream to an external destination so that you can analyze the errors. For more information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html\">Understanding Application Output (Destination)</a>. </p> <p> Any configuration update, including adding a streaming source using this operation, results in a new version of the application. You can use the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html\">DescribeApplication</a> operation to find the current application version.</p> <p>For the limits on the number of application inputs and outputs you can configure, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html\">Limits</a>.</p> <p>This operation requires permissions to perform the <code>kinesisanalytics:AddApplicationOutput</code> action.</p>"
     },
     "AddApplicationReferenceDataSource": {
       "name": "AddApplicationReferenceDataSource",
@@ -169,7 +169,7 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p>Adds a reference data source to an existing application.</p> <p>Amazon Kinesis Analytics reads reference data (that is, an Amazon S3 object) and creates an in-application table within your application. In the request, you provide the source (S3 bucket name and object key name), name of the in-application table to create, and the necessary mapping information that describes how data in Amazon S3 object maps to columns in the resulting in-application table.</p> <p> For conceptual information, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>. For the limits on data sources you can add to your application, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html\">Limits</a>. </p> <p> This operation requires permissions to perform the <code>kinesisanalytics:AddApplicationOutput</code> action. </p>"
+      "documentation": "<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href=\"/kinesisanalytics/latest/apiv2/Welcome.html\">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p>Adds a reference data source to an existing application.</p> <p>Amazon Kinesis Analytics reads reference data (that is, an Amazon S3 object) and creates an in-application table within your application. In the request, you provide the source (S3 bucket name and object key name), name of the in-application table to create, and the necessary mapping information that describes how data in Amazon S3 object maps to columns in the resulting in-application table.</p> <p> For conceptual information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>. For the limits on data sources you can add to your application, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html\">Limits</a>. </p> <p> This operation requires permissions to perform the <code>kinesisanalytics:AddApplicationOutput</code> action. </p>"
     },
     "CreateApplication": {
       "name": "CreateApplication",
@@ -195,9 +195,15 @@
         },
         {
           "shape": "InvalidArgumentException"
+        },
+        {
+          "shape": "TooManyTagsException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
         }
       ],
-      "documentation": "<p> Creates an Amazon Kinesis Analytics application. You can configure each application with one streaming source as input, application code to process the input, and up to three destinations where you want Amazon Kinesis Analytics to write the output data from your application. For an overview, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works.html\">How it Works</a>. </p> <p>In the input configuration, you map the streaming source to an in-application stream, which you can think of as a constantly updating table. In the mapping, you must provide a schema for the in-application stream and map each data column in the in-application stream to a data element in the streaming source.</p> <p>Your application code is one or more SQL statements that read input data, transform it, and generate output. Your application code can create one or more SQL artifacts like SQL streams or pumps.</p> <p>In the output configuration, you can configure the application to write data from in-application streams created in your applications to up to three destinations.</p> <p> To read data from your source stream or write data to destination streams, Amazon Kinesis Analytics needs your permissions. You grant these permissions by creating IAM roles. This operation requires permissions to perform the <code>kinesisanalytics:CreateApplication</code> action. </p> <p> For introductory exercises to create an Amazon Kinesis Analytics application, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/getting-started.html\">Getting Started</a>. </p>"
+      "documentation": "<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href=\"/kinesisanalytics/latest/apiv2/Welcome.html\">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p> Creates an Amazon Kinesis Analytics application. You can configure each application with one streaming source as input, application code to process the input, and up to three destinations where you want Amazon Kinesis Analytics to write the output data from your application. For an overview, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works.html\">How it Works</a>. </p> <p>In the input configuration, you map the streaming source to an in-application stream, which you can think of as a constantly updating table. In the mapping, you must provide a schema for the in-application stream and map each data column in the in-application stream to a data element in the streaming source.</p> <p>Your application code is one or more SQL statements that read input data, transform it, and generate output. Your application code can create one or more SQL artifacts like SQL streams or pumps.</p> <p>In the output configuration, you can configure the application to write data from in-application streams created in your applications to up to three destinations.</p> <p> To read data from your source stream or write data to destination streams, Amazon Kinesis Analytics needs your permissions. You grant these permissions by creating IAM roles. This operation requires permissions to perform the <code>kinesisanalytics:CreateApplication</code> action. </p> <p> For introductory exercises to create an Amazon Kinesis Analytics application, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/getting-started.html\">Getting Started</a>. </p>"
     },
     "DeleteApplication": {
       "name": "DeleteApplication",
@@ -225,7 +231,7 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p>Deletes the specified application. Amazon Kinesis Analytics halts application execution and deletes the application, including any application artifacts (such as in-application streams, reference table, and application code).</p> <p>This operation requires permissions to perform the <code>kinesisanalytics:DeleteApplication</code> action.</p>"
+      "documentation": "<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href=\"/kinesisanalytics/latest/apiv2/Welcome.html\">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p>Deletes the specified application. Amazon Kinesis Analytics halts application execution and deletes the application, including any application artifacts (such as in-application streams, reference table, and application code).</p> <p>This operation requires permissions to perform the <code>kinesisanalytics:DeleteApplication</code> action.</p>"
     },
     "DeleteApplicationCloudWatchLoggingOption": {
       "name": "DeleteApplicationCloudWatchLoggingOption",
@@ -256,7 +262,7 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p>Deletes a CloudWatch log stream from an application. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html\">Working with Amazon CloudWatch Logs</a>.</p>"
+      "documentation": "<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href=\"/kinesisanalytics/latest/apiv2/Welcome.html\">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p>Deletes a CloudWatch log stream from an application. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html\">Working with Amazon CloudWatch Logs</a>.</p>"
     },
     "DeleteApplicationInputProcessingConfiguration": {
       "name": "DeleteApplicationInputProcessingConfiguration",
@@ -287,7 +293,7 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p>Deletes an <a>InputProcessingConfiguration</a> from an input.</p>"
+      "documentation": "<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href=\"/kinesisanalytics/latest/apiv2/Welcome.html\">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p>Deletes an <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html\">InputProcessingConfiguration</a> from an input.</p>"
     },
     "DeleteApplicationOutput": {
       "name": "DeleteApplicationOutput",
@@ -318,7 +324,7 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p>Deletes output destination configuration from your application configuration. Amazon Kinesis Analytics will no longer write data from the corresponding in-application stream to the external output destination.</p> <p>This operation requires permissions to perform the <code>kinesisanalytics:DeleteApplicationOutput</code> action.</p>"
+      "documentation": "<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href=\"/kinesisanalytics/latest/apiv2/Welcome.html\">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p>Deletes output destination configuration from your application configuration. Amazon Kinesis Analytics will no longer write data from the corresponding in-application stream to the external output destination.</p> <p>This operation requires permissions to perform the <code>kinesisanalytics:DeleteApplicationOutput</code> action.</p>"
     },
     "DeleteApplicationReferenceDataSource": {
       "name": "DeleteApplicationReferenceDataSource",
@@ -349,7 +355,7 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p>Deletes a reference data source configuration from the specified application configuration.</p> <p>If the application is running, Amazon Kinesis Analytics immediately removes the in-application table that you created using the <a>AddApplicationReferenceDataSource</a> operation. </p> <p>This operation requires permissions to perform the <code>kinesisanalytics.DeleteApplicationReferenceDataSource</code> action.</p>"
+      "documentation": "<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href=\"/kinesisanalytics/latest/apiv2/Welcome.html\">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p>Deletes a reference data source configuration from the specified application configuration.</p> <p>If the application is running, Amazon Kinesis Analytics immediately removes the in-application table that you created using the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html\">AddApplicationReferenceDataSource</a> operation. </p> <p>This operation requires permissions to perform the <code>kinesisanalytics.DeleteApplicationReferenceDataSource</code> action.</p>"
     },
     "DescribeApplication": {
       "name": "DescribeApplication",
@@ -371,7 +377,7 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p>Returns information about a specific Amazon Kinesis Analytics application.</p> <p>If you want to retrieve a list of all applications in your account, use the <a>ListApplications</a> operation.</p> <p>This operation requires permissions to perform the <code>kinesisanalytics:DescribeApplication</code> action. You can use <code>DescribeApplication</code> to get the current application versionId, which you need to call other operations such as <code>Update</code>. </p>"
+      "documentation": "<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href=\"/kinesisanalytics/latest/apiv2/Welcome.html\">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p>Returns information about a specific Amazon Kinesis Analytics application.</p> <p>If you want to retrieve a list of all applications in your account, use the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_ListApplications.html\">ListApplications</a> operation.</p> <p>This operation requires permissions to perform the <code>kinesisanalytics:DescribeApplication</code> action. You can use <code>DescribeApplication</code> to get the current application versionId, which you need to call other operations such as <code>Update</code>. </p>"
     },
     "DiscoverInputSchema": {
       "name": "DiscoverInputSchema",
@@ -399,7 +405,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Infers a schema by evaluating sample records on the specified streaming source (Amazon Kinesis stream or Amazon Kinesis Firehose delivery stream) or S3 object. In the response, the operation returns the inferred schema and also the sample records that the operation used to infer the schema.</p> <p> You can use the inferred schema when configuring a streaming source for your application. For conceptual information, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>. Note that when you create an application using the Amazon Kinesis Analytics console, the console uses this operation to infer a schema and show it in the console user interface. </p> <p> This operation requires permissions to perform the <code>kinesisanalytics:DiscoverInputSchema</code> action. </p>"
+      "documentation": "<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href=\"/kinesisanalytics/latest/apiv2/Welcome.html\">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p>Infers a schema by evaluating sample records on the specified streaming source (Amazon Kinesis stream or Amazon Kinesis Firehose delivery stream) or S3 object. In the response, the operation returns the inferred schema and also the sample records that the operation used to infer the schema.</p> <p> You can use the inferred schema when configuring a streaming source for your application. For conceptual information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>. Note that when you create an application using the Amazon Kinesis Analytics console, the console uses this operation to infer a schema and show it in the console user interface. </p> <p> This operation requires permissions to perform the <code>kinesisanalytics:DiscoverInputSchema</code> action. </p>"
     },
     "ListApplications": {
       "name": "ListApplications",
@@ -413,7 +419,32 @@
       "output": {
         "shape": "ListApplicationsResponse"
       },
-      "documentation": "<p>Returns a list of Amazon Kinesis Analytics applications in your account. For each application, the response includes the application name, Amazon Resource Name (ARN), and status. If the response returns the <code>HasMoreApplications</code> value as true, you can send another request by adding the <code>ExclusiveStartApplicationName</code> in the request body, and set the value of this to the last application name from the previous response. </p> <p>If you want detailed information about a specific application, use <a>DescribeApplication</a>.</p> <p>This operation requires permissions to perform the <code>kinesisanalytics:ListApplications</code> action.</p>"
+      "documentation": "<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href=\"/kinesisanalytics/latest/apiv2/Welcome.html\">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p>Returns a list of Amazon Kinesis Analytics applications in your account. For each application, the response includes the application name, Amazon Resource Name (ARN), and status. If the response returns the <code>HasMoreApplications</code> value as true, you can send another request by adding the <code>ExclusiveStartApplicationName</code> in the request body, and set the value of this to the last application name from the previous response. </p> <p>If you want detailed information about a specific application, use <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html\">DescribeApplication</a>.</p> <p>This operation requires permissions to perform the <code>kinesisanalytics:ListApplications</code> action.</p>"
+    },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidArgumentException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        }
+      ],
+      "documentation": "<p>Retrieves the list of key-value tags assigned to the application.</p>"
     },
     "StartApplication": {
       "name": "StartApplication",
@@ -444,7 +475,7 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p>Starts the specified Amazon Kinesis Analytics application. After creating an application, you must exclusively call this operation to start your application.</p> <p>After the application starts, it begins consuming the input data, processes it, and writes the output to the configured destination.</p> <p> The application status must be <code>READY</code> for you to start an application. You can get the application status in the console or using the <a>DescribeApplication</a> operation.</p> <p>After you start the application, you can stop the application from processing the input by calling the <a>StopApplication</a> operation.</p> <p>This operation requires permissions to perform the <code>kinesisanalytics:StartApplication</code> action.</p>"
+      "documentation": "<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href=\"/kinesisanalytics/latest/apiv2/Welcome.html\">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p>Starts the specified Amazon Kinesis Analytics application. After creating an application, you must exclusively call this operation to start your application.</p> <p>After the application starts, it begins consuming the input data, processes it, and writes the output to the configured destination.</p> <p> The application status must be <code>READY</code> for you to start an application. You can get the application status in the console or using the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html\">DescribeApplication</a> operation.</p> <p>After you start the application, you can stop the application from processing the input by calling the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_StopApplication.html\">StopApplication</a> operation.</p> <p>This operation requires permissions to perform the <code>kinesisanalytics:StartApplication</code> action.</p>"
     },
     "StopApplication": {
       "name": "StopApplication",
@@ -469,7 +500,69 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p>Stops the application from processing input data. You can stop an application only if it is in the running state. You can use the <a>DescribeApplication</a> operation to find the application state. After the application is stopped, Amazon Kinesis Analytics stops reading data from the input, the application stops processing data, and there is no output written to the destination. </p> <p>This operation requires permissions to perform the <code>kinesisanalytics:StopApplication</code> action.</p>"
+      "documentation": "<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href=\"/kinesisanalytics/latest/apiv2/Welcome.html\">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p>Stops the application from processing input data. You can stop an application only if it is in the running state. You can use the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html\">DescribeApplication</a> operation to find the application state. After the application is stopped, Amazon Kinesis Analytics stops reading data from the input, the application stops processing data, and there is no output written to the destination. </p> <p>This operation requires permissions to perform the <code>kinesisanalytics:StopApplication</code> action.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "TooManyTagsException"
+        },
+        {
+          "shape": "InvalidArgumentException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        }
+      ],
+      "documentation": "<p>Adds one or more key-value tags to a Kinesis Analytics application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "TooManyTagsException"
+        },
+        {
+          "shape": "InvalidArgumentException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        }
+      ],
+      "documentation": "<p>Removes one or more tags from a Kinesis Analytics application.</p>"
     },
     "UpdateApplication": {
       "name": "UpdateApplication",
@@ -503,7 +596,7 @@
           "shape": "UnsupportedOperationException"
         }
       ],
-      "documentation": "<p>Updates an existing Amazon Kinesis Analytics application. Using this API, you can update application code, input configuration, and output configuration. </p> <p>Note that Amazon Kinesis Analytics updates the <code>CurrentApplicationVersionId</code> each time you update your application. </p> <p>This operation requires permission for the <code>kinesisanalytics:UpdateApplication</code> action.</p>"
+      "documentation": "<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href=\"/kinesisanalytics/latest/apiv2/Welcome.html\">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p>Updates an existing Amazon Kinesis Analytics application. Using this API, you can update application code, input configuration, and output configuration. </p> <p>Note that Amazon Kinesis Analytics updates the <code>CurrentApplicationVersionId</code> each time you update your application. </p> <p>This operation requires permission for the <code>kinesisanalytics:UpdateApplication</code> action.</p>"
     }
   },
   "shapes": {
@@ -548,15 +641,15 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>Version of the application to which you want to add the input processing configuration. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.</p>"
+          "documentation": "<p>Version of the application to which you want to add the input processing configuration. You can use the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html\">DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.</p>"
         },
         "InputId": {
           "shape": "Id",
-          "documentation": "<p>The ID of the input configuration to add the input processing configuration to. You can get a list of the input IDs for an application using the <a>DescribeApplication</a> operation.</p>"
+          "documentation": "<p>The ID of the input configuration to add the input processing configuration to. You can get a list of the input IDs for an application using the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html\">DescribeApplication</a> operation.</p>"
         },
         "InputProcessingConfiguration": {
           "shape": "InputProcessingConfiguration",
-          "documentation": "<p>The <a>InputProcessingConfiguration</a> to add to the application.</p>"
+          "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html\">InputProcessingConfiguration</a> to add to the application.</p>"
         }
       }
     },
@@ -578,11 +671,11 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>Current version of your Amazon Kinesis Analytics application. You can use the <a>DescribeApplication</a> operation to find the current application version.</p>"
+          "documentation": "<p>Current version of your Amazon Kinesis Analytics application. You can use the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html\">DescribeApplication</a> operation to find the current application version.</p>"
         },
         "Input": {
           "shape": "Input",
-          "documentation": "<p>The <a>Input</a> to add.</p>"
+          "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_Input.html\">Input</a> to add.</p>"
         }
       },
       "documentation": "<p/>"
@@ -606,7 +699,7 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>Version of the application to which you want to add the output configuration. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned. </p>"
+          "documentation": "<p>Version of the application to which you want to add the output configuration. You can use the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html\">DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned. </p>"
         },
         "Output": {
           "shape": "Output",
@@ -634,7 +727,7 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>Version of the application for which you are adding the reference data source. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.</p>"
+          "documentation": "<p>Version of the application for which you are adding the reference data source. You can use the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html\">DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.</p>"
         },
         "ReferenceDataSource": {
           "shape": "ReferenceDataSource",
@@ -693,19 +786,19 @@
         },
         "InputDescriptions": {
           "shape": "InputDescriptions",
-          "documentation": "<p>Describes the application input configuration. For more information, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>. </p>"
+          "documentation": "<p>Describes the application input configuration. For more information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>. </p>"
         },
         "OutputDescriptions": {
           "shape": "OutputDescriptions",
-          "documentation": "<p>Describes the application output configuration. For more information, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html\">Configuring Application Output</a>. </p>"
+          "documentation": "<p>Describes the application output configuration. For more information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html\">Configuring Application Output</a>. </p>"
         },
         "ReferenceDataSourceDescriptions": {
           "shape": "ReferenceDataSourceDescriptions",
-          "documentation": "<p>Describes reference data sources configured for the application. For more information, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>. </p>"
+          "documentation": "<p>Describes reference data sources configured for the application. For more information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>. </p>"
         },
         "CloudWatchLoggingOptionDescriptions": {
           "shape": "CloudWatchLoggingOptionDescriptions",
-          "documentation": "<p>Describes the CloudWatch log streams that are configured to receive application messages. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html\">Working with Amazon CloudWatch Logs</a>. </p>"
+          "documentation": "<p>Describes the CloudWatch log streams that are configured to receive application messages. For more information about using CloudWatch log streams with Amazon Kinesis Analytics applications, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html\">Working with Amazon CloudWatch Logs</a>. </p>"
         },
         "ApplicationCode": {
           "shape": "ApplicationCode",
@@ -716,7 +809,7 @@
           "documentation": "<p>Provides the current application version.</p>"
         }
       },
-      "documentation": "<p>Provides a description of the application, including the application Amazon Resource Name (ARN), status, latest version, and input and output configuration.</p>"
+      "documentation": "<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href=\"/kinesisanalytics/latest/apiv2/Welcome.html\">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p>Provides a description of the application, including the application Amazon Resource Name (ARN), status, latest version, and input and output configuration.</p>"
     },
     "ApplicationName": {
       "type": "string",
@@ -762,7 +855,7 @@
           "documentation": "<p>Status of the application.</p>"
         }
       },
-      "documentation": "<p>Provides application summary information, including the application Amazon Resource Name (ARN), name, and status.</p>"
+      "documentation": "<note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href=\"/kinesisanalytics/latest/apiv2/Welcome.html\">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p>Provides application summary information, including the application Amazon Resource Name (ARN), name, and status.</p>"
     },
     "ApplicationUpdate": {
       "type": "structure",
@@ -925,11 +1018,15 @@
         },
         "CloudWatchLoggingOptions": {
           "shape": "CloudWatchLoggingOptions",
-          "documentation": "<p>Use this parameter to configure a CloudWatch log stream to monitor application configuration errors. For more information, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html\">Working with Amazon CloudWatch Logs</a>.</p>"
+          "documentation": "<p>Use this parameter to configure a CloudWatch log stream to monitor application configuration errors. For more information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/cloudwatch-logs.html\">Working with Amazon CloudWatch Logs</a>.</p>"
         },
         "ApplicationCode": {
           "shape": "ApplicationCode",
-          "documentation": "<p>One or more SQL statements that read input data, transform it, and generate output. For example, you can write a SQL statement that reads data from one in-application stream, generates a running average of the number of advertisement clicks by vendor, and insert resulting rows in another in-application stream using pumps. For more information about the typical pattern, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-app-code.html\">Application Code</a>. </p> <p>You can provide such series of SQL statements, where output of one statement can be used as the input for the next statement. You store intermediate results by creating in-application streams and pumps.</p> <p>Note that the application code must create the streams with names specified in the <code>Outputs</code>. For example, if your <code>Outputs</code> defines output streams named <code>ExampleOutputStream1</code> and <code>ExampleOutputStream2</code>, then your application code must create these streams. </p>"
+          "documentation": "<p>One or more SQL statements that read input data, transform it, and generate output. For example, you can write a SQL statement that reads data from one in-application stream, generates a running average of the number of advertisement clicks by vendor, and insert resulting rows in another in-application stream using pumps. For more information about the typical pattern, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-app-code.html\">Application Code</a>. </p> <p>You can provide such series of SQL statements, where output of one statement can be used as the input for the next statement. You store intermediate results by creating in-application streams and pumps.</p> <p>Note that the application code must create the streams with names specified in the <code>Outputs</code>. For example, if your <code>Outputs</code> defines output streams named <code>ExampleOutputStream1</code> and <code>ExampleOutputStream2</code>, then your application code must create these streams. </p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management Guide</i>.</p>"
         }
       },
       "documentation": "<p>TBD</p>"
@@ -965,7 +1062,7 @@
         },
         "CloudWatchLoggingOptionId": {
           "shape": "Id",
-          "documentation": "<p>The <code>CloudWatchLoggingOptionId</code> of the CloudWatch logging option to delete. You can get the <code>CloudWatchLoggingOptionId</code> by using the <a>DescribeApplication</a> operation. </p>"
+          "documentation": "<p>The <code>CloudWatchLoggingOptionId</code> of the CloudWatch logging option to delete. You can get the <code>CloudWatchLoggingOptionId</code> by using the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html\">DescribeApplication</a> operation. </p>"
         }
       }
     },
@@ -991,7 +1088,7 @@
         },
         "InputId": {
           "shape": "Id",
-          "documentation": "<p>The ID of the input configuration from which to delete the input processing configuration. You can get a list of the input IDs for an application by using the <a>DescribeApplication</a> operation.</p>"
+          "documentation": "<p>The ID of the input configuration from which to delete the input processing configuration. You can get a list of the input IDs for an application by using the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html\">DescribeApplication</a> operation.</p>"
         }
       }
     },
@@ -1013,11 +1110,11 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>Amazon Kinesis Analytics application version. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned. </p>"
+          "documentation": "<p>Amazon Kinesis Analytics application version. You can use the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html\">DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned. </p>"
         },
         "OutputId": {
           "shape": "Id",
-          "documentation": "<p>The ID of the configuration to delete. Each output configuration that is added to the application, either when the application is created or later using the <a>AddApplicationOutput</a> operation, has a unique ID. You need to provide the ID to uniquely identify the output configuration that you want to delete from the application configuration. You can use the <a>DescribeApplication</a> operation to get the specific <code>OutputId</code>. </p>"
+          "documentation": "<p>The ID of the configuration to delete. Each output configuration that is added to the application, either when the application is created or later using the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationOutput.html\">AddApplicationOutput</a> operation, has a unique ID. You need to provide the ID to uniquely identify the output configuration that you want to delete from the application configuration. You can use the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html\">DescribeApplication</a> operation to get the specific <code>OutputId</code>. </p>"
         }
       },
       "documentation": "<p/>"
@@ -1041,11 +1138,11 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>Version of the application. You can use the <a>DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.</p>"
+          "documentation": "<p>Version of the application. You can use the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html\">DescribeApplication</a> operation to get the current application version. If the version specified is not the current version, the <code>ConcurrentModificationException</code> is returned.</p>"
         },
         "ReferenceId": {
           "shape": "Id",
-          "documentation": "<p>ID of the reference data source. When you add a reference data source to your application using the <a>AddApplicationReferenceDataSource</a>, Amazon Kinesis Analytics assigns an ID. You can use the <a>DescribeApplication</a> operation to get the reference ID. </p>"
+          "documentation": "<p>ID of the reference data source. When you add a reference data source to your application using the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html\">AddApplicationReferenceDataSource</a>, Amazon Kinesis Analytics assigns an ID. You can use the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html\">DescribeApplication</a> operation to get the reference ID. </p>"
         }
       }
     },
@@ -1113,7 +1210,7 @@
           "documentation": "<p>Specifies the format of the records on the output stream.</p>"
         }
       },
-      "documentation": "<p>Describes the data format when records are written to the destination. For more information, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html\">Configuring Application Output</a>. </p>"
+      "documentation": "<p>Describes the data format when records are written to the destination. For more information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html\">Configuring Application Output</a>. </p>"
     },
     "DiscoverInputSchemaRequest": {
       "type": "structure",
@@ -1136,7 +1233,7 @@
         },
         "InputProcessingConfiguration": {
           "shape": "InputProcessingConfiguration",
-          "documentation": "<p>The <a>InputProcessingConfiguration</a> to use to preprocess the records before discovering the schema of the records.</p>"
+          "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html\">InputProcessingConfiguration</a> to use to preprocess the records before discovering the schema of the records.</p>"
         }
       }
     },
@@ -1176,8 +1273,7 @@
     "InAppStreamName": {
       "type": "string",
       "max": 32,
-      "min": 1,
-      "pattern": "[a-zA-Z][a-zA-Z0-9_]+"
+      "min": 1
     },
     "InAppStreamNames": {
       "type": "list",
@@ -1188,8 +1284,7 @@
     "InAppTableName": {
       "type": "string",
       "max": 32,
-      "min": 1,
-      "pattern": "[a-zA-Z][a-zA-Z0-9_]+"
+      "min": 1
     },
     "Input": {
       "type": "structure",
@@ -1204,7 +1299,7 @@
         },
         "InputProcessingConfiguration": {
           "shape": "InputProcessingConfiguration",
-          "documentation": "<p>The <a>InputProcessingConfiguration</a> for the input. An input processor transforms records as they are received from the stream, before the application's SQL code executes. Currently, the only input processing configuration available is <a>InputLambdaProcessor</a>.</p>"
+          "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html\">InputProcessingConfiguration</a> for the input. An input processor transforms records as they are received from the stream, before the application's SQL code executes. Currently, the only input processing configuration available is <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html\">InputLambdaProcessor</a>.</p>"
         },
         "KinesisStreamsInput": {
           "shape": "KinesisStreamsInput",
@@ -1216,14 +1311,14 @@
         },
         "InputParallelism": {
           "shape": "InputParallelism",
-          "documentation": "<p>Describes the number of in-application streams to create. </p> <p>Data from your source is routed to these in-application input streams.</p> <p> (see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>.</p>"
+          "documentation": "<p>Describes the number of in-application streams to create. </p> <p>Data from your source is routed to these in-application input streams.</p> <p> (see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>.</p>"
         },
         "InputSchema": {
           "shape": "SourceSchema",
           "documentation": "<p>Describes the format of the data in the streaming source, and how each data element maps to corresponding columns in the in-application stream that is being created.</p> <p>Also used to describe the format of the reference data source.</p>"
         }
       },
-      "documentation": "<p>When you configure the application input, you specify the streaming source, the in-application stream name that is created, and the mapping between the two. For more information, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>. </p>"
+      "documentation": "<p>When you configure the application input, you specify the streaming source, the in-application stream name that is created, and the mapping between the two. For more information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>. </p>"
     },
     "InputConfiguration": {
       "type": "structure",
@@ -1234,7 +1329,7 @@
       "members": {
         "Id": {
           "shape": "Id",
-          "documentation": "<p>Input source ID. You can get this ID by calling the <a>DescribeApplication</a> operation.</p>"
+          "documentation": "<p>Input source ID. You can get this ID by calling the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html\">DescribeApplication</a> operation.</p>"
         },
         "InputStartingPositionConfiguration": {
           "shape": "InputStartingPositionConfiguration",
@@ -1289,7 +1384,7 @@
           "documentation": "<p>Point at which the application is configured to read from the input stream.</p>"
         }
       },
-      "documentation": "<p>Describes the application input configuration. For more information, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>. </p>"
+      "documentation": "<p>Describes the application input configuration. For more information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>. </p>"
     },
     "InputDescriptions": {
       "type": "list",
@@ -1306,52 +1401,52 @@
       "members": {
         "ResourceARN": {
           "shape": "ResourceARN",
-          "documentation": "<p>The ARN of the <a href=\"https://aws.amazon.com/documentation/lambda/\">AWS Lambda</a> function that operates on records in the stream.</p>"
+          "documentation": "<p>The ARN of the <a href=\"https://docs.aws.amazon.com/lambda/\">AWS Lambda</a> function that operates on records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: AWS Lambda</a> </p> </note>"
         },
         "RoleARN": {
           "shape": "RoleARN",
           "documentation": "<p>The ARN of the IAM role that is used to access the AWS Lambda function.</p>"
         }
       },
-      "documentation": "<p>An object that contains the Amazon Resource Name (ARN) of the <a href=\"https://aws.amazon.com/documentation/lambda/\">AWS Lambda</a> function that is used to preprocess records in the stream, and the ARN of the IAM role that is used to access the AWS Lambda function. </p>"
+      "documentation": "<p>An object that contains the Amazon Resource Name (ARN) of the <a href=\"https://docs.aws.amazon.com/lambda/\">AWS Lambda</a> function that is used to preprocess records in the stream, and the ARN of the IAM role that is used to access the AWS Lambda function. </p>"
     },
     "InputLambdaProcessorDescription": {
       "type": "structure",
       "members": {
         "ResourceARN": {
           "shape": "ResourceARN",
-          "documentation": "<p>The ARN of the <a href=\"https://aws.amazon.com/documentation/lambda/\">AWS Lambda</a> function that is used to preprocess the records in the stream.</p>"
+          "documentation": "<p>The ARN of the <a href=\"https://docs.aws.amazon.com/lambda/\">AWS Lambda</a> function that is used to preprocess the records in the stream.</p>"
         },
         "RoleARN": {
           "shape": "RoleARN",
           "documentation": "<p>The ARN of the IAM role that is used to access the AWS Lambda function.</p>"
         }
       },
-      "documentation": "<p>An object that contains the Amazon Resource Name (ARN) of the <a href=\"https://aws.amazon.com/documentation/lambda/\">AWS Lambda</a> function that is used to preprocess records in the stream, and the ARN of the IAM role that is used to access the AWS Lambda expression.</p>"
+      "documentation": "<p>An object that contains the Amazon Resource Name (ARN) of the <a href=\"https://docs.aws.amazon.com/lambda/\">AWS Lambda</a> function that is used to preprocess records in the stream, and the ARN of the IAM role that is used to access the AWS Lambda expression.</p>"
     },
     "InputLambdaProcessorUpdate": {
       "type": "structure",
       "members": {
         "ResourceARNUpdate": {
           "shape": "ResourceARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the new <a href=\"https://aws.amazon.com/documentation/lambda/\">AWS Lambda</a> function that is used to preprocess the records in the stream.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the new <a href=\"https://docs.aws.amazon.com/ambda/\">AWS Lambda</a> function that is used to preprocess the records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: AWS Lambda</a> </p> </note>"
         },
         "RoleARNUpdate": {
           "shape": "RoleARN",
           "documentation": "<p>The ARN of the new IAM role that is used to access the AWS Lambda function.</p>"
         }
       },
-      "documentation": "<p>Represents an update to the <a>InputLambdaProcessor</a> that is used to preprocess the records in the stream.</p>"
+      "documentation": "<p>Represents an update to the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html\">InputLambdaProcessor</a> that is used to preprocess the records in the stream.</p>"
     },
     "InputParallelism": {
       "type": "structure",
       "members": {
         "Count": {
           "shape": "InputParallelismCount",
-          "documentation": "<p>Number of in-application streams to create. For more information, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html\">Limits</a>. </p>"
+          "documentation": "<p>Number of in-application streams to create. For more information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html\">Limits</a>. </p>"
         }
       },
-      "documentation": "<p>Describes the number of in-application streams to create for a given streaming source. For information about parallelism, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>. </p>"
+      "documentation": "<p>Describes the number of in-application streams to create for a given streaming source. For information about parallelism, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html\">Configuring Application Input</a>. </p>"
     },
     "InputParallelismCount": {
       "type": "integer",
@@ -1376,20 +1471,20 @@
       "members": {
         "InputLambdaProcessor": {
           "shape": "InputLambdaProcessor",
-          "documentation": "<p>The <a>InputLambdaProcessor</a> that is used to preprocess the records in the stream before being processed by your application code.</p>"
+          "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html\">InputLambdaProcessor</a> that is used to preprocess the records in the stream before being processed by your application code.</p>"
         }
       },
-      "documentation": "<p>Provides a description of a processor that is used to preprocess the records in the stream before being processed by your application code. Currently, the only input processor available is <a href=\"https://aws.amazon.com/documentation/lambda/\">AWS Lambda</a>.</p>"
+      "documentation": "<p>Provides a description of a processor that is used to preprocess the records in the stream before being processed by your application code. Currently, the only input processor available is <a href=\"https://docs.aws.amazon.com/lambda/\">AWS Lambda</a>.</p>"
     },
     "InputProcessingConfigurationDescription": {
       "type": "structure",
       "members": {
         "InputLambdaProcessorDescription": {
           "shape": "InputLambdaProcessorDescription",
-          "documentation": "<p>Provides configuration information about the associated <a>InputLambdaProcessorDescription</a>.</p>"
+          "documentation": "<p>Provides configuration information about the associated <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessorDescription.html\">InputLambdaProcessorDescription</a>.</p>"
         }
       },
-      "documentation": "<p>Provides configuration information about an input processor. Currently, the only input processor available is <a href=\"https://aws.amazon.com/documentation/lambda/\">AWS Lambda</a>.</p>"
+      "documentation": "<p>Provides configuration information about an input processor. Currently, the only input processor available is <a href=\"https://docs.aws.amazon.com/lambda/\">AWS Lambda</a>.</p>"
     },
     "InputProcessingConfigurationUpdate": {
       "type": "structure",
@@ -1399,10 +1494,10 @@
       "members": {
         "InputLambdaProcessorUpdate": {
           "shape": "InputLambdaProcessorUpdate",
-          "documentation": "<p>Provides update information for an <a>InputLambdaProcessor</a>.</p>"
+          "documentation": "<p>Provides update information for an <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputLambdaProcessor.html\">InputLambdaProcessor</a>.</p>"
         }
       },
-      "documentation": "<p>Describes updates to an <a>InputProcessingConfiguration</a>. </p>"
+      "documentation": "<p>Describes updates to an <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_InputProcessingConfiguration.html\">InputProcessingConfiguration</a>. </p>"
     },
     "InputSchemaUpdate": {
       "type": "structure",
@@ -1502,6 +1597,12 @@
       },
       "documentation": "<p>Provides additional mapping information when JSON is the record format on the streaming source.</p>"
     },
+    "KinesisAnalyticsARN": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "arn:aws:kinesisanalytics:[a-z]{2}-[a-z]+-\\d{1}+:\\d{12}+:application/[a-zA-Z0-9_.-]{1,128}"
+    },
     "KinesisFirehoseInput": {
       "type": "structure",
       "required": [
@@ -1592,7 +1693,7 @@
           "documentation": "<p>ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to grant the necessary permissions to this role.</p>"
         }
       },
-      "documentation": "<p> When updating an output configuration using the <a>UpdateApplication</a> operation, provides information about an Amazon Kinesis Firehose delivery stream configured as the destination. </p>"
+      "documentation": "<p> When updating an output configuration using the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html\">UpdateApplication</a> operation, provides information about an Amazon Kinesis Firehose delivery stream configured as the destination. </p>"
     },
     "KinesisStreamsInput": {
       "type": "structure",
@@ -1684,7 +1785,7 @@
           "documentation": "<p>ARN of the IAM role that Amazon Kinesis Analytics can assume to access the stream on your behalf. You need to grant the necessary permissions to this role.</p>"
         }
       },
-      "documentation": "<p> When updating an output configuration using the <a>UpdateApplication</a> operation, provides information about an Amazon Kinesis stream configured as the destination. </p>"
+      "documentation": "<p> When updating an output configuration using the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html\">UpdateApplication</a> operation, provides information about an Amazon Kinesis stream configured as the destination. </p>"
     },
     "LambdaOutput": {
       "type": "structure",
@@ -1695,7 +1796,7 @@
       "members": {
         "ResourceARN": {
           "shape": "ResourceARN",
-          "documentation": "<p>Amazon Resource Name (ARN) of the destination Lambda function to write to.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of the destination Lambda function to write to.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: AWS Lambda</a> </p> </note>"
         },
         "RoleARN": {
           "shape": "RoleARN",
@@ -1723,14 +1824,14 @@
       "members": {
         "ResourceARNUpdate": {
           "shape": "ResourceARN",
-          "documentation": "<p>Amazon Resource Name (ARN) of the destination Lambda function.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) of the destination Lambda function.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: AWS Lambda</a> </p> </note>"
         },
         "RoleARNUpdate": {
           "shape": "RoleARN",
           "documentation": "<p>ARN of the IAM role that Amazon Kinesis Analytics can assume to write to the destination function on your behalf. You need to grant the necessary permissions to this role. </p>"
         }
       },
-      "documentation": "<p>When updating an output configuration using the <a>UpdateApplication</a> operation, provides information about an AWS Lambda function configured as the destination.</p>"
+      "documentation": "<p>When updating an output configuration using the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html\">UpdateApplication</a> operation, provides information about an AWS Lambda function configured as the destination.</p>"
     },
     "ListApplicationsInputLimit": {
       "type": "integer",
@@ -1768,6 +1869,27 @@
         }
       },
       "documentation": "<p/>"
+    },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceARN"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "KinesisAnalyticsARN",
+          "documentation": "<p>The ARN of the application for which to retrieve tags.</p>"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>The key-value tags assigned to the application.</p>"
+        }
+      }
     },
     "LogStreamARN": {
       "type": "string",
@@ -1814,10 +1936,10 @@
         },
         "DestinationSchema": {
           "shape": "DestinationSchema",
-          "documentation": "<p>Describes the data format when records are written to the destination. For more information, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html\">Configuring Application Output</a>.</p>"
+          "documentation": "<p>Describes the data format when records are written to the destination. For more information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html\">Configuring Application Output</a>.</p>"
         }
       },
-      "documentation": "<p> Describes application output configuration in which you identify an in-application stream and a destination where you want the in-application stream data to be written. The destination can be an Amazon Kinesis stream or an Amazon Kinesis Firehose delivery stream. </p> <p/> <p>For limits on how many destinations an application can write and other limitations, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html\">Limits</a>. </p>"
+      "documentation": "<p> Describes application output configuration in which you identify an in-application stream and a destination where you want the in-application stream data to be written. The destination can be an Amazon Kinesis stream or an Amazon Kinesis Firehose delivery stream. </p> <p/> <p>For limits on how many destinations an application can write and other limitations, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html\">Limits</a>. </p>"
     },
     "OutputDescription": {
       "type": "structure",
@@ -1883,7 +2005,7 @@
         },
         "DestinationSchemaUpdate": {
           "shape": "DestinationSchema",
-          "documentation": "<p>Describes the data format when records are written to the destination. For more information, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html\">Configuring Application Output</a>.</p>"
+          "documentation": "<p>Describes the data format when records are written to the destination. For more information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html\">Configuring Application Output</a>.</p>"
         }
       },
       "documentation": "<p> Describes updates to the output configuration identified by the <code>OutputId</code>. </p>"
@@ -1946,7 +2068,7 @@
         },
         "Mapping": {
           "shape": "RecordColumnMapping",
-          "documentation": "<p>Reference to the data element in the streaming input of the reference data source.</p>"
+          "documentation": "<p>Reference to the data element in the streaming input or the reference data source. This element is required if the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_RecordFormat.html#analytics-Type-RecordFormat-RecordFormatTypel\">RecordFormatType</a> is <code>JSON</code>.</p>"
         },
         "SqlType": {
           "shape": "RecordColumnSqlType",
@@ -1963,8 +2085,7 @@
       "type": "string"
     },
     "RecordColumnName": {
-      "type": "string",
-      "pattern": "[a-zA-Z_][a-zA-Z0-9_]*"
+      "type": "string"
     },
     "RecordColumnSqlType": {
       "type": "string",
@@ -2027,7 +2148,7 @@
         },
         "S3ReferenceDataSource": {
           "shape": "S3ReferenceDataSource",
-          "documentation": "<p>Identifies the S3 bucket and object that contains the reference data. Also identifies the IAM role Amazon Kinesis Analytics can assume to read this object on your behalf. An Amazon Kinesis Analytics application loads reference data only once. If the data changes, you call the <a>UpdateApplication</a> operation to trigger reloading of data into your application. </p>"
+          "documentation": "<p>Identifies the S3 bucket and object that contains the reference data. Also identifies the IAM role Amazon Kinesis Analytics can assume to read this object on your behalf. An Amazon Kinesis Analytics application loads reference data only once. If the data changes, you call the <code>UpdateApplication</code> operation to trigger reloading of data into your application. </p>"
         },
         "ReferenceSchema": {
           "shape": "SourceSchema",
@@ -2046,7 +2167,7 @@
       "members": {
         "ReferenceId": {
           "shape": "Id",
-          "documentation": "<p>ID of the reference data source. This is the ID that Amazon Kinesis Analytics assigns when you add the reference data source to your application using the <a>AddApplicationReferenceDataSource</a> operation.</p>"
+          "documentation": "<p>ID of the reference data source. This is the ID that Amazon Kinesis Analytics assigns when you add the reference data source to your application using the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html\">AddApplicationReferenceDataSource</a> operation.</p>"
         },
         "TableName": {
           "shape": "InAppTableName",
@@ -2077,7 +2198,7 @@
       "members": {
         "ReferenceId": {
           "shape": "Id",
-          "documentation": "<p>ID of the reference data source being updated. You can use the <a>DescribeApplication</a> operation to get this value.</p>"
+          "documentation": "<p>ID of the reference data source being updated. You can use the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html\">DescribeApplication</a> operation to get this value.</p>"
         },
         "TableNameUpdate": {
           "shape": "InAppTableName",
@@ -2156,7 +2277,7 @@
           "documentation": "<p>ARN of the IAM role that the service can assume to read data on your behalf. This role must have permission for the <code>s3:GetObject</code> action on the object and trust policy that allows Amazon Kinesis Analytics service principal to assume this role.</p>"
         }
       },
-      "documentation": "<p>Identifies the S3 bucket and object that contains the reference data. Also identifies the IAM role Amazon Kinesis Analytics can assume to read this object on your behalf.</p> <p>An Amazon Kinesis Analytics application loads reference data only once. If the data changes, you call the <a>UpdateApplication</a> operation to trigger reloading of data into your application.</p>"
+      "documentation": "<p>Identifies the S3 bucket and object that contains the reference data. Also identifies the IAM role Amazon Kinesis Analytics can assume to read this object on your behalf.</p> <p>An Amazon Kinesis Analytics application loads reference data only once. If the data changes, you call the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_UpdateApplication.html\">UpdateApplication</a> operation to trigger reloading of data into your application.</p>"
     },
     "S3ReferenceDataSourceDescription": {
       "type": "structure",
@@ -2262,8 +2383,93 @@
       "members": {},
       "documentation": "<p/>"
     },
+    "Tag": {
+      "type": "structure",
+      "required": [
+        "Key"
+      ],
+      "members": {
+        "Key": {
+          "shape": "TagKey",
+          "documentation": "<p>The key of the key-value tag.</p>"
+        },
+        "Value": {
+          "shape": "TagValue",
+          "documentation": "<p>The value of the key-value tag. The value is optional.</p>"
+        }
+      },
+      "documentation": "<p>A key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management Guide</i>.</p>"
+    },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "TagKeys": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "max": 200,
+      "min": 1
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceARN",
+        "Tags"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "KinesisAnalyticsARN",
+          "documentation": "<p>The ARN of the application to assign the tags.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>The key-value tags to assign to the application.</p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0
+    },
+    "Tags": {
+      "type": "list",
+      "member": {
+        "shape": "Tag"
+      },
+      "max": 200,
+      "min": 1
+    },
     "Timestamp": {
       "type": "timestamp"
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceARN",
+        "TagKeys"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "KinesisAnalyticsARN",
+          "documentation": "<p>The ARN of the Kinesis Analytics application from which to remove the tags.</p>"
+        },
+        "TagKeys": {
+          "shape": "TagKeys",
+          "documentation": "<p>A list of keys of tags to remove from the specified application.</p>"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateApplicationRequest": {
       "type": "structure",
@@ -2279,7 +2485,7 @@
         },
         "CurrentApplicationVersionId": {
           "shape": "ApplicationVersionId",
-          "documentation": "<p>The current application version ID. You can use the <a>DescribeApplication</a> operation to get this value.</p>"
+          "documentation": "<p>The current application version ID. You can use the <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html\">DescribeApplication</a> operation to get this value.</p>"
         },
         "ApplicationUpdate": {
           "shape": "ApplicationUpdate",
@@ -2291,5 +2497,6 @@
       "type": "structure",
       "members": {}
     }
-  }
+  },
+  "documentation": "<fullname>Amazon Kinesis Analytics</fullname> <p> <b>Overview</b> </p> <note> <p>This documentation is for version 1 of the Amazon Kinesis Data Analytics API, which only supports SQL applications. Version 2 of the API supports SQL and Java applications. For more information about version 2, see <a href=\"/kinesisanalytics/latest/apiv2/Welcome.html\">Amazon Kinesis Data Analytics API V2 Documentation</a>.</p> </note> <p>This is the <i>Amazon Kinesis Analytics v1 API Reference</i>. The Amazon Kinesis Analytics Developer Guide provides additional information. </p>"
 }

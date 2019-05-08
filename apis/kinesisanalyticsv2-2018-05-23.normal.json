@@ -41,6 +41,9 @@
         },
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidApplicationConfigurationException"
         }
       ],
       "documentation": "<p>Adds an Amazon CloudWatch log stream to monitor application configuration errors.</p>"
@@ -199,9 +202,15 @@
         },
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "TooManyTagsException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
         }
       ],
-      "documentation": "<p>Creates an Amazon Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/Java/creating-app.html\">Creating an Application</a>. </p> <note> <p>SQL is not enabled for this private beta release. Using SQL parameters (such as <a>SqlApplicationConfiguration</a>) will result in an error.</p> </note>"
+      "documentation": "<p>Creates an Amazon Kinesis Data Analytics application. For information about creating a Kinesis Data Analytics application, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/java/getting-started.html\">Creating an Application</a>. </p>"
     },
     "CreateApplicationSnapshot": {
       "name": "CreateApplicationSnapshot",
@@ -264,6 +273,9 @@
         },
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidApplicationConfigurationException"
         }
       ],
       "documentation": "<p>Deletes the specified application. Kinesis Data Analytics halts application execution and deletes the application.</p>"
@@ -295,6 +307,9 @@
         },
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidApplicationConfigurationException"
         }
       ],
       "documentation": "<p>Deletes an Amazon CloudWatch log stream from an Amazon Kinesis Data Analytics application. </p>"
@@ -545,6 +560,31 @@
       ],
       "documentation": "<p>Returns a list of Amazon Kinesis Data Analytics applications in your account. For each application, the response includes the application name, Amazon Resource Name (ARN), and status. </p> <p>If you want detailed information about a specific application, use <a>DescribeApplication</a>.</p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidArgumentException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        }
+      ],
+      "documentation": "<p>Retrieves the list of key-value tags assigned to the application.</p>"
+    },
     "StartApplication": {
       "name": "StartApplication",
       "http": {
@@ -574,7 +614,7 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Starts the specified Amazon Kinesis Data Analytics application. After creating an application, you must exclusively call this operation to start your application.</p> <note> <p>SQL is not enabled for this private beta. Using SQL parameters (such as <a>RunConfiguration$SqlRunConfigurations</a>) will result in an error.</p> </note>"
+      "documentation": "<p>Starts the specified Amazon Kinesis Data Analytics application. After creating an application, you must exclusively call this operation to start your application.</p>"
     },
     "StopApplication": {
       "name": "StopApplication",
@@ -600,9 +640,74 @@
         },
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidApplicationConfigurationException"
         }
       ],
       "documentation": "<p>Stops the application from processing data. You can stop an application only if it is in the running state. You can use the <a>DescribeApplication</a> operation to find the application state. </p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "TooManyTagsException"
+        },
+        {
+          "shape": "InvalidArgumentException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        }
+      ],
+      "documentation": "<p>Adds one or more key-value tags to a Kinesis Analytics application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "TooManyTagsException"
+        },
+        {
+          "shape": "InvalidArgumentException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        }
+      ],
+      "documentation": "<p>Removes one or more tags from a Kinesis Analytics application.</p>"
     },
     "UpdateApplication": {
       "name": "UpdateApplication",
@@ -634,9 +739,12 @@
         },
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidApplicationConfigurationException"
         }
       ],
-      "documentation": "<p>Updates an existing Amazon Kinesis Data Analytics application. Using this operation, you can update application code, input configuration, and output configuration. </p> <p>Kinesis Data Analytics updates the <code>ApplicationVersionId</code> each time you update your application. </p> <note> <p>SQL is not enabled for this private beta. Using SQL parameters (such as <a>SqlApplicationConfigurationUpdate</a>) will result in an error.</p> </note>"
+      "documentation": "<p>Updates an existing Amazon Kinesis Data Analytics application. Using this operation, you can update application code, input configuration, and output configuration. </p> <p>Kinesis Data Analytics updates the <code>ApplicationVersionId</code> each time you update your application. </p>"
     }
   },
   "shapes": {
@@ -801,7 +909,7 @@
         },
         "OutputDescriptions": {
           "shape": "OutputDescriptions",
-          "documentation": "<p>Describes the application output configuration. For more information, see <a href=\"http://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html\">Configuring Application Output</a>. </p>"
+          "documentation": "<p>Describes the application output configuration. For more information, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-output.html\">Configuring Application Output</a>. </p>"
         }
       }
     },
@@ -1006,7 +1114,7 @@
         },
         "RuntimeEnvironment": {
           "shape": "RuntimeEnvironment",
-          "documentation": "<p>The runtime environment for the application (<code>SQL-1.0</code> or <code>JAVA-8-FLINK-1.5</code>).</p>"
+          "documentation": "<p>The runtime environment for the application (<code>SQL-1.0</code> or <code>FLINK-1_6</code>).</p>"
         },
         "ServiceExecutionRole": {
           "shape": "RoleARN",
@@ -1154,7 +1262,7 @@
         },
         "RuntimeEnvironment": {
           "shape": "RuntimeEnvironment",
-          "documentation": "<p>The runtime environment for the application (<code>SQL-1.0</code> or <code>JAVA-8-FLINK-1.5</code>).</p>"
+          "documentation": "<p>The runtime environment for the application (<code>SQL-1.0</code> or <code>FLINK-1_6</code>).</p>"
         }
       },
       "documentation": "<p>Provides application summary information, including the application Amazon Resource Name (ARN), name, and status.</p>"
@@ -1433,7 +1541,7 @@
         },
         "RuntimeEnvironment": {
           "shape": "RuntimeEnvironment",
-          "documentation": "<p>The runtime environment for the application (<code>SQL-1.0</code> or <code>JAVA-8-FLINK-1.5</code>).</p>"
+          "documentation": "<p>The runtime environment for the application (<code>SQL-1.0</code> or <code>FLINK-1_6</code>).</p>"
         },
         "ServiceExecutionRole": {
           "shape": "RoleARN",
@@ -1446,6 +1554,10 @@
         "CloudWatchLoggingOptions": {
           "shape": "CloudWatchLoggingOptions",
           "documentation": "<p>Use this parameter to configure an Amazon CloudWatch log stream to monitor application configuration errors. </p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management Guide</i>.</p>"
         }
       }
     },
@@ -1900,8 +2012,7 @@
     "InAppStreamName": {
       "type": "string",
       "max": 32,
-      "min": 1,
-      "pattern": "[a-zA-Z][a-zA-Z0-9_]+"
+      "min": 1
     },
     "InAppStreamNames": {
       "type": "list",
@@ -1912,8 +2023,7 @@
     "InAppTableName": {
       "type": "string",
       "max": 32,
-      "min": 1,
-      "pattern": "[a-zA-Z][a-zA-Z0-9_]+"
+      "min": 1
     },
     "Input": {
       "type": "structure",
@@ -2005,7 +2115,7 @@
       "members": {
         "ResourceARN": {
           "shape": "ResourceARN",
-          "documentation": "<p>The ARN of the AWS Lambda function that operates on records in the stream.</p>"
+          "documentation": "<p>The ARN of the AWS Lambda function that operates on records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: AWS Lambda</a> </p> </note>"
         }
       },
       "documentation": "<p>An object that contains the Amazon Resource Name (ARN) of the AWS Lambda function that is used to preprocess records in the stream in an SQL-based Amazon Kinesis Data Analytics application. </p>"
@@ -2018,7 +2128,7 @@
       "members": {
         "ResourceARN": {
           "shape": "ResourceARN",
-          "documentation": "<p>The ARN of the AWS Lambda function that is used to preprocess the records in the stream.</p>"
+          "documentation": "<p>The ARN of the AWS Lambda function that is used to preprocess the records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: AWS Lambda</a> </p> </note>"
         },
         "RoleARN": {
           "shape": "RoleARN",
@@ -2035,7 +2145,7 @@
       "members": {
         "ResourceARNUpdate": {
           "shape": "ResourceARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the new AWS Lambda function that is used to preprocess the records in the stream.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the new AWS Lambda function that is used to preprocess the records in the stream.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: AWS Lambda</a> </p> </note>"
         }
       },
       "documentation": "<p>For an SQL-based Amazon Kinesis Data Analytics application, represents an update to the <a>InputLambdaProcessor</a> that is used to preprocess the records in the stream.</p>"
@@ -2204,6 +2314,12 @@
     },
     "JobPlanDescription": {
       "type": "string"
+    },
+    "KinesisAnalyticsARN": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "arn:aws:kinesisanalytics:[a-z]{2}-[a-z]+-\\d{1}+:\\d{12}+:application/[a-zA-Z0-9_.-]{1,128}"
     },
     "KinesisFirehoseInput": {
       "type": "structure",
@@ -2385,7 +2501,7 @@
       "members": {
         "ResourceARN": {
           "shape": "ResourceARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the destination Lambda function to write to.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the destination Lambda function to write to.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: AWS Lambda</a> </p> </note>"
         }
       },
       "documentation": "<p>When you configure an SQL-based Amazon Kinesis Data Analytics application's output, identifies an AWS Lambda function as the destination. You provide the function Amazon Resource Name (ARN) of the Lambda function. </p>"
@@ -2415,7 +2531,7 @@
       "members": {
         "ResourceARNUpdate": {
           "shape": "ResourceARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the destination AWS Lambda function.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the destination AWS Lambda function.</p> <note> <p>To specify an earlier version of the Lambda function than the latest, include the Lambda function version in the Lambda function ARN. For more information about Lambda ARNs, see <a href=\"/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-lambda\">Example ARNs: AWS Lambda</a> </p> </note>"
         }
       },
       "documentation": "<p>When you update an SQL-based Amazon Kinesis Data Analytics application's output configuration using the <a>UpdateApplication</a> operation, provides information about an AWS Lambda function that is configured as the destination.</p>"
@@ -2492,6 +2608,27 @@
       "max": 50,
       "min": 1
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceARN"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "KinesisAnalyticsARN",
+          "documentation": "<p>The ARN of the application for which to retrieve tags.</p>"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>The key-value tags assigned to the application.</p>"
+        }
+      }
+    },
     "LogLevel": {
       "type": "string",
       "enum": [
@@ -2553,7 +2690,7 @@
           "documentation": "<p>Describes the verbosity of the CloudWatch Logs for an application.</p>"
         }
       },
-      "documentation": "<p>Describes configuration parameters for Amazon CloudWatch logging for a Java-based Kinesis Data Analytics application. For more information about CloudWatch logging, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/Java/monitoring-overview.html\">Monitoring</a>.</p>"
+      "documentation": "<p>Describes configuration parameters for Amazon CloudWatch logging for a Java-based Kinesis Data Analytics application. For more information about CloudWatch logging, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html\">Monitoring</a>.</p>"
     },
     "MonitoringConfigurationDescription": {
       "type": "structure",
@@ -2883,7 +3020,7 @@
         },
         "Mapping": {
           "shape": "RecordColumnMapping",
-          "documentation": "<p>A reference to the data element in the streaming input of the reference data source.</p>"
+          "documentation": "<p>A reference to the data element in the streaming input or the reference data source.</p>"
         },
         "SqlType": {
           "shape": "RecordColumnSqlType",
@@ -2900,8 +3037,7 @@
       "type": "string"
     },
     "RecordColumnName": {
-      "type": "string",
-      "pattern": "[a-zA-Z_][a-zA-Z0-9_]*"
+      "type": "string"
     },
     "RecordColumnSqlType": {
       "type": "string",
@@ -3411,6 +3547,70 @@
       "type": "structure",
       "members": {}
     },
+    "Tag": {
+      "type": "structure",
+      "required": [
+        "Key"
+      ],
+      "members": {
+        "Key": {
+          "shape": "TagKey",
+          "documentation": "<p>The key of the key-value tag.</p>"
+        },
+        "Value": {
+          "shape": "TagValue",
+          "documentation": "<p>The value of the key-value tag. The value is optional.</p>"
+        }
+      },
+      "documentation": "<p>A key-value pair (the value is optional) that you can define and assign to AWS resources. If you specify a tag that already exists, the tag value is replaced with the value that you specify in the request. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management Guide</i>.</p>"
+    },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "TagKeys": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "max": 200,
+      "min": 1
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceARN",
+        "Tags"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "KinesisAnalyticsARN",
+          "documentation": "<p>The ARN of the application to assign the tags.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>The key-value tags to assign to the application.</p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0
+    },
+    "Tags": {
+      "type": "list",
+      "member": {
+        "shape": "Tag"
+      },
+      "max": 200,
+      "min": 1
+    },
     "TextContent": {
       "type": "string",
       "max": 102400,
@@ -3418,6 +3618,27 @@
     },
     "Timestamp": {
       "type": "timestamp"
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceARN",
+        "TagKeys"
+      ],
+      "members": {
+        "ResourceARN": {
+          "shape": "KinesisAnalyticsARN",
+          "documentation": "<p>The ARN of the Kinesis Analytics application from which to remove the tags.</p>"
+        },
+        "TagKeys": {
+          "shape": "TagKeys",
+          "documentation": "<p>A list of keys of tags to remove from the specified application.</p>"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateApplicationRequest": {
       "type": "structure",
@@ -3470,5 +3691,5 @@
       "min": 0
     }
   },
-  "documentation": "<p>Documentation for Kinesis Data Analytics API v2</p>"
+  "documentation": "<p>Amazon Kinesis Data Analytics is a fully managed service that you can use to process and analyze streaming data using SQL or Java. The service enables you to quickly author and run SQL or Java code against streaming sources to perform time series analytics, feed real-time dashboards, and create real-time metrics.</p>"
 }

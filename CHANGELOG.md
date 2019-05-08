@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.451.0-->
+<!--LATEST=2.452.0-->
 <!--ENTRYINSERT-->
+
+## 2.452.0
+* feature: IoT1ClickProjects: Added automatic pagination support for ListProjects and ListPlacements APIs.
+* feature: KinesisAnalytics: Kinesis Data Analytics APIs now support tagging on applications.
+* feature: KinesisAnalyticsV2: Kinesis Data Analytics APIs now support tagging on applications.
+* feature: SageMaker: Workteams now supports notification configurations. Neo now supports Jetson Nano as a target device and NumberOfHumanWorkersPerDataObject is now included in the ListLabelingJobsForWorkteam response.
+* feature: ServiceCatalog: Adds "Parameters" field in UpdateConstraint API, which will allow Admin user to update "Parameters" in created Constraints.
 
 ## 2.451.0
 * feature: AlexaForBusiness: This release adds an API allowing authorized users to delete a shared device's history of voice recordings and associated response data.

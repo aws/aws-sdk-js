@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "IoT1ClickProjects",
+        "description": "Added automatic pagination support for ListProjects and ListPlacements APIs."
+    },
+    {
+        "type": "feature",
+        "category": "KinesisAnalytics",
+        "description": "Kinesis Data Analytics APIs now support tagging on applications."
+    },
+    {
+        "type": "feature",
+        "category": "KinesisAnalyticsV2",
+        "description": "Kinesis Data Analytics APIs now support tagging on applications."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Workteams now supports notification configurations. Neo now supports Jetson Nano as a target device and NumberOfHumanWorkersPerDataObject is now included in the ListLabelingJobsForWorkteam response."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalog",
+        "description": "Adds \"Parameters\" field in UpdateConstraint API, which will allow Admin user to update \"Parameters\" in created Constraints."
+    }
+]
