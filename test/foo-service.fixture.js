@@ -80,6 +80,20 @@ var model = {
       },
       'authtype': 'v4-unsigned-body'
     },
+    'PutNonStream': {
+      'http': {
+        'method': 'PUT',
+        'requestUri': '/'
+      },
+      'input': {
+        'type': 'structure',
+        'members': {
+          'Body': {
+            'shape': 'StringShape'
+          }
+        },
+      },
+    },
   },
   'shapes': {
     'StreamingBody': {
@@ -90,7 +104,8 @@ var model = {
       'type': 'blob',
       'streaming': true,
       'requiresLength': true
-    }
+    },
+    'StringShape': {'type': 'string'}
   }
 };
 

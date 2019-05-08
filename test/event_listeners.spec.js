@@ -267,6 +267,7 @@
 
         describe ('when has requiresLength trait exists', function() {
           var oldByteLength = AWS.util.string.byteLength;
+          var service = new FooService();
           beforeEach(function() {
             helpers.spyOn(AWS.util.string, 'byteLength').andCallFake(function(chunk) {
               throw new Error('Cannot determine length of ' + chunk);
@@ -277,7 +278,6 @@
           });
 
           it('throws error when content length is required in payload shape but length is not available', function(done) {
-            var service = new FooService();
             var req = service.putBoundedStream({
               Body: 'NoLengthBody'
             });
@@ -290,7 +290,6 @@
           });
 
           it('throws error when content length is required in unsigned payload shape but length is not available', function(done) {
-            var service = new FooService();
             var req = service.putUnsignedBoundedStream({
               Body: 'NoLengthBody'
             });
@@ -298,6 +297,22 @@
               expect(err.message).to.contain('Cannot determine length of');
               done();
             });
+          });
+        });
+
+        it('throws error when non-streaming body has no length', function(done) {
+          var oldByteLength = AWS.util.string.byteLength;
+          var service = new FooService();
+          helpers.spyOn(AWS.util.string, 'byteLength').andCallFake(function(chunk) {
+            throw new Error('Cannot determine length of ' + chunk);
+          });
+          var req = service.putNonStream({
+            Body: 'NoLengthBody'
+          });
+          req.runTo('sign', function(err) {
+            AWS.util.string.byteLength = oldByteLength;
+            expect(err.message).to.contain('Cannot determine length of');
+            done();
           });
         });
 
