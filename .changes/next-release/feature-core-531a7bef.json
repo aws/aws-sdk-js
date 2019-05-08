@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "core",
+  "description": "Add support for requiresLength trait for streaming payload and send chunked transfer encode when allowed"
+}
