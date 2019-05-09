@@ -12006,7 +12006,7 @@
         },
         "ImageIds": {
           "shape": "ImageIdStringList",
-          "documentation": "<p>The image IDs.</p> <p>Default: Describes all images available to you.</p>",
+          "documentation": "<p>The image IDs. Example: <code>{Name: 'image-id', Values: ['ami-xxxxxxxxxxx']}</code></p> <p>Default: Describes all images available to you.</p>",
           "locationName": "ImageId"
         },
         "Owners": {
