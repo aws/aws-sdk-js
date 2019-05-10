@@ -171,6 +171,26 @@
         }
       };
 
+      describe('add Transfer-Encoding header', function() {
+        it('when streaming payload is unsigned payload if content length is not available', function(done) {
+          var oldByteLength = AWS.util.string.byteLength;
+          helpers.spyOn(AWS.util.string, 'byteLength').andCallFake(function(chunk) {
+            throw new Error('Cannot determine length of ' + chunk);
+          });
+          var service = new FooService();
+          var req = service.putStream({
+            Body: 'NoLengthBody'
+          });
+
+          req.runTo('sign', function(err) {
+            expect(req.httpRequest.headers['Transfer-Encoding']).to.equal('chunked');
+            expect(!err).to.equal(true);
+            AWS.util.string.byteLength = oldByteLength;
+            done();
+          });
+        });
+      });
+
       describe('adds Content-Length header', function() {
         var contentLength;
         contentLength = function(body) {
@@ -243,6 +263,57 @@
 
         it('builds Content-Length for buffer body', function() {
           return expect(contentLength(new AWS.util.Buffer('tï№'))).to.equal(6);
+        });
+
+        describe ('when has requiresLength trait exists', function() {
+          var oldByteLength = AWS.util.string.byteLength;
+          var service = new FooService();
+          beforeEach(function() {
+            helpers.spyOn(AWS.util.string, 'byteLength').andCallFake(function(chunk) {
+              throw new Error('Cannot determine length of ' + chunk);
+            });
+          });
+          afterEach(function() {
+            AWS.util.string.byteLength = oldByteLength;
+          });
+
+          it('throws error when content length is required in payload shape but length is not available', function(done) {
+            var req = service.putBoundedStream({
+              Body: 'NoLengthBody'
+            });
+            //this event listener will raise error even before setting content length
+            req.removeListener('afterBuild', AWS.EventListeners.Core.COMPUTE_SHA256);
+            req.runTo('sign', function(err) {
+              expect(err.message).to.contain('Cannot determine length of');
+              done();
+            });
+          });
+
+          it('throws error when content length is required in unsigned payload shape but length is not available', function(done) {
+            var req = service.putUnsignedBoundedStream({
+              Body: 'NoLengthBody'
+            });
+            req.runTo('sign', function(err) {
+              expect(err.message).to.contain('Cannot determine length of');
+              done();
+            });
+          });
+        });
+
+        it('throws error when non-streaming body has no length', function(done) {
+          var oldByteLength = AWS.util.string.byteLength;
+          var service = new FooService();
+          helpers.spyOn(AWS.util.string, 'byteLength').andCallFake(function(chunk) {
+            throw new Error('Cannot determine length of ' + chunk);
+          });
+          var req = service.putNonStream({
+            Body: 'NoLengthBody'
+          });
+          req.runTo('sign', function(err) {
+            AWS.util.string.byteLength = oldByteLength;
+            expect(err.message).to.contain('Cannot determine length of');
+            done();
+          });
         });
 
         if (AWS.util.isNode()) {

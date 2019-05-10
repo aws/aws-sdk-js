@@ -33,13 +33,79 @@ var model = {
         'payload': 'Body'
       },
       'authtype': 'v4-unsigned-body'
-    }
+    },
+    'PutSignedStream': {
+      'http': {
+        'method': 'PUT',
+        'requestUri': '/'
+      },
+      'input': {
+        'type': 'structure',
+        'members': {
+          'Body': {
+            'shape': 'StreamingBody'
+          }
+        },
+        'payload': 'Body'
+      },
+    },
+    'PutBoundedStream': {
+      'http': {
+        'method': 'PUT',
+        'requestUri': '/'
+      },
+      'input': {
+        'type': 'structure',
+        'members': {
+          'Body': {
+            'shape': 'BoundedStreamingBody'
+          }
+        },
+        'payload': 'Body'
+      },
+    },
+    'PutUnsignedBoundedStream': {
+      'http': {
+        'method': 'PUT',
+        'requestUri': '/'
+      },
+      'input': {
+        'type': 'structure',
+        'members': {
+          'Body': {
+            'shape': 'BoundedStreamingBody'
+          }
+        },
+        'payload': 'Body'
+      },
+      'authtype': 'v4-unsigned-body'
+    },
+    'PutNonStream': {
+      'http': {
+        'method': 'PUT',
+        'requestUri': '/'
+      },
+      'input': {
+        'type': 'structure',
+        'members': {
+          'Body': {
+            'shape': 'StringShape'
+          }
+        },
+      },
+    },
   },
   'shapes': {
     'StreamingBody': {
       'type': 'blob',
       'streaming': true
-    }
+    },
+    'BoundedStreamingBody': {
+      'type': 'blob',
+      'streaming': true,
+      'requiresLength': true
+    },
+    'StringShape': {'type': 'string'}
   }
 };
 
