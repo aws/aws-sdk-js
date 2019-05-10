@@ -334,7 +334,7 @@
           "shape": "OperationTimeoutException"
         }
       ],
-      "documentation": "<p>Creates a classifier in the user's account. This may be a <code>GrokClassifier</code>, an <code>XMLClassifier</code>, a <code>JsonClassifier</code>, or a <code>CsvClassifier</code>, depending on which field of the request is present.</p>"
+      "documentation": "<p>Creates a classifier in the user's account. This can be a <code>GrokClassifier</code>, an <code>XMLClassifier</code>, a <code>JsonClassifier</code>, or a <code>CsvClassifier</code>, depending on which field of the request is present.</p>"
     },
     "CreateConnection": {
       "name": "CreateConnection",
@@ -393,7 +393,7 @@
           "shape": "ResourceNumberLimitExceededException"
         }
       ],
-      "documentation": "<p>Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in the <i>s3Targets</i> field, the <i>jdbcTargets</i> field, or the <i>DynamoDBTargets</i> field.</p>"
+      "documentation": "<p>Creates a new crawler with specified targets, role, configuration, and optional schedule. At least one crawl target must be specified, in the <code>s3Targets</code> field, the <code>jdbcTargets</code> field, or the <code>DynamoDBTargets</code> field.</p>"
     },
     "CreateDatabase": {
       "name": "CreateDatabase",
@@ -780,7 +780,7 @@
           "shape": "OperationTimeoutException"
         }
       ],
-      "documentation": "<p>Removes a specified crawler from the Data Catalog, unless the crawler state is <code>RUNNING</code>.</p>"
+      "documentation": "<p>Removes a specified crawler from the AWS Glue Data Catalog, unless the crawler state is <code>RUNNING</code>.</p>"
     },
     "DeleteDatabase": {
       "name": "DeleteDatabase",
@@ -3040,7 +3040,7 @@
       "members": {
         "CrawlerNames": {
           "shape": "CrawlerNameList",
-          "documentation": "<p>A list of crawler names, which may be the names returned from the <code>ListCrawlers</code> operation.</p>"
+          "documentation": "<p>A list of crawler names, which might be the names returned from the <code>ListCrawlers</code> operation.</p>"
         }
       }
     },
@@ -3053,7 +3053,7 @@
         },
         "CrawlersNotFound": {
           "shape": "CrawlerNameList",
-          "documentation": "<p>A list of names of crawlers not found.</p>"
+          "documentation": "<p>A list of names of crawlers that were not found.</p>"
         }
       }
     },
@@ -3307,7 +3307,7 @@
           "documentation": "<p>The name of the table in question.</p>"
         }
       },
-      "documentation": "<p>Specifies a table definition in the Data Catalog.</p>"
+      "documentation": "<p>Specifies a table definition in the AWS Glue Data Catalog.</p>"
     },
     "CatalogIdString": {
       "type": "string",
@@ -3333,6 +3333,37 @@
       },
       "documentation": "<p>A structure containing migration status information.</p>"
     },
+    "CatalogTablesList": {
+      "type": "list",
+      "member": {
+        "shape": "NameString"
+      },
+      "min": 1
+    },
+    "CatalogTarget": {
+      "type": "structure",
+      "required": [
+        "DatabaseName",
+        "Tables"
+      ],
+      "members": {
+        "DatabaseName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the database to be synchronized.</p>"
+        },
+        "Tables": {
+          "shape": "CatalogTablesList",
+          "documentation": "<p>A list of the tables to be synchronized.</p>"
+        }
+      },
+      "documentation": "<p>Specifies an AWS Glue Data Catalog target.</p>"
+    },
+    "CatalogTargetList": {
+      "type": "list",
+      "member": {
+        "shape": "CatalogTarget"
+      }
+    },
     "Classification": {
       "type": "string"
     },
@@ -3341,22 +3372,22 @@
       "members": {
         "GrokClassifier": {
           "shape": "GrokClassifier",
-          "documentation": "<p>A <code>GrokClassifier</code> object.</p>"
+          "documentation": "<p>A classifier that uses <code>grok</code>.</p>"
         },
         "XMLClassifier": {
           "shape": "XMLClassifier",
-          "documentation": "<p>An <code>XMLClassifier</code> object.</p>"
+          "documentation": "<p>A classifier for XML content.</p>"
         },
         "JsonClassifier": {
           "shape": "JsonClassifier",
-          "documentation": "<p>A <code>JsonClassifier</code> object.</p>"
+          "documentation": "<p>A classifier for JSON content.</p>"
         },
         "CsvClassifier": {
           "shape": "CsvClassifier",
-          "documentation": "<p>A <code>CSVClassifier</code> object.</p>"
+          "documentation": "<p>A classifier for comma-separated values (CSV).</p>"
         }
       },
-      "documentation": "<p>Classifiers are triggered during a crawl task. A classifier checks whether a given file is in a format it can handle, and if it is, the classifier creates a schema in the form of a <code>StructType</code> object that matches that data format.</p> <p>You can use the standard classifiers that AWS Glue supplies, or you can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A classifier can be a <code>grok</code> classifier, an <code>XML</code> classifier, a <code>JSON</code> classifier, or a custom <code>CSV</code> classifier as specified in one of the fields in the <code>Classifier</code> object.</p>"
+      "documentation": "<p>Classifiers are triggered during a crawl task. A classifier checks whether a given file is in a format it can handle. If it is, the classifier creates a schema in the form of a <code>StructType</code> object that matches that data format.</p> <p>You can use the standard classifiers that AWS Glue provides, or you can write your own classifiers to best categorize your data sources and specify the appropriate schemas to use for them. A classifier can be a <code>grok</code> classifier, an <code>XML</code> classifier, a <code>JSON</code> classifier, or a custom <code>CSV</code> classifier, as specified in one of the fields in the <code>Classifier</code> object.</p>"
     },
     "ClassifierList": {
       "type": "list",
@@ -3439,7 +3470,7 @@
         },
         "NodeType": {
           "shape": "CodeGenNodeType",
-          "documentation": "<p>The type of node this is.</p>"
+          "documentation": "<p>The type of node that this is.</p>"
         },
         "Args": {
           "shape": "CodeGenNodeArgs",
@@ -3711,11 +3742,11 @@
       "members": {
         "Name": {
           "shape": "NameString",
-          "documentation": "<p>The crawler name.</p>"
+          "documentation": "<p>The name of the crawler.</p>"
         },
         "Role": {
           "shape": "Role",
-          "documentation": "<p>The IAM role (or ARN of an IAM role) used to access customer resources, such as data in Amazon S3.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that's used to access customer resources, such as Amazon Simple Storage Service (Amazon S3) data.</p>"
         },
         "Targets": {
           "shape": "CrawlerTargets",
@@ -3723,7 +3754,7 @@
         },
         "DatabaseName": {
           "shape": "DatabaseName",
-          "documentation": "<p>The database where metadata is written by this crawler.</p>"
+          "documentation": "<p>The name of the database in which the crawler's output is stored.</p>"
         },
         "Description": {
           "shape": "DescriptionString",
@@ -3731,11 +3762,11 @@
         },
         "Classifiers": {
           "shape": "ClassifierNameList",
-          "documentation": "<p>A list of custom classifiers associated with the crawler.</p>"
+          "documentation": "<p>A list of UTF-8 strings that specify the custom classifiers that are associated with the crawler.</p>"
         },
         "SchemaChangePolicy": {
           "shape": "SchemaChangePolicy",
-          "documentation": "<p>Sets the behavior when the crawler finds a changed or deleted object.</p>"
+          "documentation": "<p>The policy that specifies update and delete behaviors for the crawler.</p>"
         },
         "State": {
           "shape": "CrawlerState",
@@ -3755,11 +3786,11 @@
         },
         "CreationTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The time when the crawler was created.</p>"
+          "documentation": "<p>The time that the crawler was created.</p>"
         },
         "LastUpdated": {
           "shape": "Timestamp",
-          "documentation": "<p>The time the crawler was last updated.</p>"
+          "documentation": "<p>The time that the crawler was last updated.</p>"
         },
         "LastCrawl": {
           "shape": "LastCrawlInfo",
@@ -3775,7 +3806,7 @@
         },
         "CrawlerSecurityConfiguration": {
           "shape": "CrawlerSecurityConfiguration",
-          "documentation": "<p>The name of the SecurityConfiguration structure to be used by this Crawler.</p>"
+          "documentation": "<p>The name of the <code>SecurityConfiguration</code> structure to be used by this crawler.</p>"
         }
       },
       "documentation": "<p>Specifies a crawler program that examines a data source and uses classifiers to try to determine its schema. If successful, the crawler records metadata concerning the data source in the AWS Glue Data Catalog.</p>"
@@ -3859,7 +3890,7 @@
       "members": {
         "S3Targets": {
           "shape": "S3TargetList",
-          "documentation": "<p>Specifies Amazon S3 targets.</p>"
+          "documentation": "<p>Specifies Amazon Simple Storage Service (Amazon S3) targets.</p>"
         },
         "JdbcTargets": {
           "shape": "JdbcTargetList",
@@ -3867,7 +3898,11 @@
         },
         "DynamoDBTargets": {
           "shape": "DynamoDBTargetList",
-          "documentation": "<p>Specifies DynamoDB targets.</p>"
+          "documentation": "<p>Specifies Amazon DynamoDB targets.</p>"
+        },
+        "CatalogTargets": {
+          "shape": "CatalogTargetList",
+          "documentation": "<p>Specifies AWS Glue Data Catalog targets.</p>"
         }
       },
       "documentation": "<p>Specifies data stores to crawl.</p>"
@@ -3922,7 +3957,6 @@
       "required": [
         "Name",
         "Role",
-        "DatabaseName",
         "Targets"
       ],
       "members": {
@@ -3932,7 +3966,7 @@
         },
         "Role": {
           "shape": "Role",
-          "documentation": "<p>The IAM role (or ARN of an IAM role) used by the new crawler to access customer resources.</p>"
+          "documentation": "<p>The IAM role or Amazon Resource Name (ARN) of an IAM role used by the new crawler to access customer resources.</p>"
         },
         "DatabaseName": {
           "shape": "DatabaseName",
@@ -3948,7 +3982,7 @@
         },
         "Schedule": {
           "shape": "CronExpression",
-          "documentation": "<p>A <code>cron</code> expression used to specify the schedule (see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>"
+          "documentation": "<p>A <code>cron</code> expression used to specify the schedule. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, specify <code>cron(15 12 * * ? *)</code>.</p>"
         },
         "Classifiers": {
           "shape": "ClassifierNameList",
@@ -3960,19 +3994,19 @@
         },
         "SchemaChangePolicy": {
           "shape": "SchemaChangePolicy",
-          "documentation": "<p>Policy for the crawler's update and deletion behavior.</p>"
+          "documentation": "<p>The policy for the crawler's update and deletion behavior.</p>"
         },
         "Configuration": {
           "shape": "CrawlerConfiguration",
-          "documentation": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Configuring a Crawler</a>.</p>"
+          "documentation": "<p>The crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Configuring a Crawler</a>.</p>"
         },
         "CrawlerSecurityConfiguration": {
           "shape": "CrawlerSecurityConfiguration",
-          "documentation": "<p>The name of the SecurityConfiguration structure to be used by this Crawler.</p>"
+          "documentation": "<p>The name of the <code>SecurityConfiguration</code> structure to be used by this crawler.</p>"
         },
         "Tags": {
           "shape": "TagsMap",
-          "documentation": "<p>The tags to use with this crawler request. You may use tags to limit access to the crawler. For more information about tags in AWS Glue, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">AWS Tags in AWS Glue</a> in the developer guide.</p>"
+          "documentation": "<p>The tags to use with this crawler request. You can use tags to limit access to the crawler. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">AWS Tags in AWS Glue</a>.</p>"
         }
       }
     },
@@ -4292,7 +4326,7 @@
         },
         "JsonPath": {
           "shape": "JsonPath",
-          "documentation": "<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>"
+          "documentation": "<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of <code>JsonPath</code>, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>"
         }
       },
       "documentation": "<p>Specifies a JSON classifier for <code>CreateClassifier</code> to create.</p>"
@@ -4505,7 +4539,7 @@
         },
         "RowTag": {
           "shape": "RowTag",
-          "documentation": "<p>The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by <code>/&gt;</code>). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <code>&lt;row item_a=\"A\" item_b=\"B\"&gt;&lt;/row&gt;</code> is okay, but <code>&lt;row item_a=\"A\" item_b=\"B\" /&gt;</code> is not).</p>"
+          "documentation": "<p>The XML tag designating the element that contains each record in an XML document being parsed. This can't identify a self-closing element (closed by <code>/&gt;</code>). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <code>&lt;row item_a=\"A\" item_b=\"B\"&gt;&lt;/row&gt;</code> is okay, but <code>&lt;row item_a=\"A\" item_b=\"B\" /&gt;</code> is not).</p>"
         }
       },
       "documentation": "<p>Specifies an XML classifier for <code>CreateClassifier</code> to create.</p>"
@@ -4525,11 +4559,11 @@
         },
         "CreationTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The time this classifier was registered.</p>"
+          "documentation": "<p>The time that this classifier was registered.</p>"
         },
         "LastUpdated": {
           "shape": "Timestamp",
-          "documentation": "<p>The time this classifier was last updated.</p>"
+          "documentation": "<p>The time that this classifier was last updated.</p>"
         },
         "Version": {
           "shape": "VersionId",
@@ -4541,7 +4575,7 @@
         },
         "QuoteSymbol": {
           "shape": "CsvQuoteSymbol",
-          "documentation": "<p>A custom symbol to denote what combines content into a single column value. Must be different from the column delimiter.</p>"
+          "documentation": "<p>A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.</p>"
         },
         "ContainsHeader": {
           "shape": "CsvHeaderOption",
@@ -4553,7 +4587,7 @@
         },
         "DisableValueTrimming": {
           "shape": "NullableBoolean",
-          "documentation": "<p>Specifies not to trim values before identifying the type of column values. The default value is true.</p>"
+          "documentation": "<p>Specifies not to trim values before identifying the type of column values. The default value is <code>true</code>.</p>"
         },
         "AllowSingleColumn": {
           "shape": "NullableBoolean",
@@ -4743,7 +4777,7 @@
       "members": {
         "Name": {
           "shape": "NameString",
-          "documentation": "<p>Name of the crawler to remove.</p>"
+          "documentation": "<p>The name of the crawler to remove.</p>"
         }
       }
     },
@@ -5116,7 +5150,7 @@
           "documentation": "<p>The name of the DynamoDB table to crawl.</p>"
         }
       },
-      "documentation": "<p>Specifies a DynamoDB table to crawl.</p>"
+      "documentation": "<p>Specifies an Amazon DynamoDB table to crawl.</p>"
     },
     "DynamoDBTargetList": {
       "type": "list",
@@ -5276,7 +5310,7 @@
       "members": {
         "MaxResults": {
           "shape": "PageSize",
-          "documentation": "<p>Size of the list to return (optional).</p>"
+          "documentation": "<p>The size of the list to return (optional).</p>"
         },
         "NextToken": {
           "shape": "Token",
@@ -5416,7 +5450,7 @@
       "members": {
         "Name": {
           "shape": "NameString",
-          "documentation": "<p>Name of the crawler to retrieve metadata for.</p>"
+          "documentation": "<p>The name of the crawler to retrieve metadata for.</p>"
         }
       }
     },
@@ -5848,7 +5882,7 @@
         },
         "Location": {
           "shape": "Location",
-          "documentation": "<p>Parameters for the mapping.</p>"
+          "documentation": "<p>The parameters for the mapping.</p>"
         },
         "Language": {
           "shape": "Language",
@@ -5865,7 +5899,7 @@
         },
         "ScalaCode": {
           "shape": "ScalaCode",
-          "documentation": "<p>Scala code to perform the mapping.</p>"
+          "documentation": "<p>The Scala code to perform the mapping.</p>"
         }
       }
     },
@@ -6262,11 +6296,11 @@
         },
         "CreationTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The time this classifier was registered.</p>"
+          "documentation": "<p>The time that this classifier was registered.</p>"
         },
         "LastUpdated": {
           "shape": "Timestamp",
-          "documentation": "<p>The time this classifier was last updated.</p>"
+          "documentation": "<p>The time that this classifier was last updated.</p>"
         },
         "Version": {
           "shape": "VersionId",
@@ -6274,11 +6308,11 @@
         },
         "GrokPattern": {
           "shape": "GrokPattern",
-          "documentation": "<p>The grok pattern applied to a data store by this classifier. For more information, see built-in patterns in <a href=\"http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html\">Writing Custom Classifers</a>.</p>"
+          "documentation": "<p>The grok pattern applied to a data store by this classifier. For more information, see built-in patterns in <a href=\"http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html\">Writing Custom Classifiers</a>.</p>"
         },
         "CustomPatterns": {
           "shape": "CustomPatterns",
-          "documentation": "<p>Optional custom grok patterns defined by this classifier. For more information, see custom patterns in <a href=\"http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html\">Writing Custom Classifers</a>.</p>"
+          "documentation": "<p>Optional custom grok patterns defined by this classifier. For more information, see custom patterns in <a href=\"http://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html\">Writing Custom Classifiers</a>.</p>"
         }
       },
       "documentation": "<p>A classifier that uses <code>grok</code> patterns.</p>"
@@ -6696,11 +6730,11 @@
         },
         "CreationTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The time this classifier was registered.</p>"
+          "documentation": "<p>The time that this classifier was registered.</p>"
         },
         "LastUpdated": {
           "shape": "Timestamp",
-          "documentation": "<p>The time this classifier was last updated.</p>"
+          "documentation": "<p>The time that this classifier was last updated.</p>"
         },
         "Version": {
           "shape": "VersionId",
@@ -6708,7 +6742,7 @@
         },
         "JsonPath": {
           "shape": "JsonPath",
-          "documentation": "<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>"
+          "documentation": "<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of <code>JsonPath</code>, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>"
         }
       },
       "documentation": "<p>A classifier for <code>JSON</code> content.</p>"
@@ -6907,11 +6941,11 @@
         },
         "S3": {
           "shape": "CodeGenNodeArgs",
-          "documentation": "<p>An Amazon S3 location.</p>"
+          "documentation": "<p>An Amazon Simple Storage Service (Amazon S3) location.</p>"
         },
         "DynamoDB": {
           "shape": "CodeGenNodeArgs",
-          "documentation": "<p>A DynamoDB Table location.</p>"
+          "documentation": "<p>An Amazon DynamoDB table location.</p>"
         }
       },
       "documentation": "<p>The location of resources.</p>"
@@ -7469,7 +7503,7 @@
           "documentation": "<p>A list of glob patterns used to exclude from the crawl. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/add-crawler.html\">Catalog Tables with a Crawler</a>.</p>"
         }
       },
-      "documentation": "<p>Specifies a data store in Amazon S3.</p>"
+      "documentation": "<p>Specifies a data store in Amazon Simple Storage Service (Amazon S3).</p>"
     },
     "S3TargetList": {
       "type": "list",
@@ -7485,7 +7519,7 @@
       "members": {
         "ScheduleExpression": {
           "shape": "CronExpression",
-          "documentation": "<p>A <code>cron</code> expression used to specify the schedule (see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>"
+          "documentation": "<p>A <code>cron</code> expression used to specify the schedule. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, specify <code>cron(15 12 * * ? *)</code>.</p>"
         },
         "State": {
           "shape": "ScheduleState",
@@ -7514,7 +7548,7 @@
           "documentation": "<p>The deletion behavior when the crawler finds a deleted object.</p>"
         }
       },
-      "documentation": "<p>Crawler policy for update and deletion behavior.</p>"
+      "documentation": "<p>A policy that specifies update and deletion behaviors for the crawler.</p>"
     },
     "SchemaPathString": {
       "type": "string"
@@ -8301,7 +8335,7 @@
         },
         "Role": {
           "shape": "Role",
-          "documentation": "<p>The IAM role (or ARN of an IAM role) used by the new crawler to access customer resources.</p>"
+          "documentation": "<p>The IAM role or Amazon Resource Name (ARN) of an IAM role that is used by the new crawler to access customer resources.</p>"
         },
         "DatabaseName": {
           "shape": "DatabaseName",
@@ -8317,7 +8351,7 @@
         },
         "Schedule": {
           "shape": "CronExpression",
-          "documentation": "<p>A <code>cron</code> expression used to specify the schedule (see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>"
+          "documentation": "<p>A <code>cron</code> expression used to specify the schedule. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, specify <code>cron(15 12 * * ? *)</code>.</p>"
         },
         "Classifiers": {
           "shape": "ClassifierNameList",
@@ -8329,15 +8363,15 @@
         },
         "SchemaChangePolicy": {
           "shape": "SchemaChangePolicy",
-          "documentation": "<p>Policy for the crawler's update and deletion behavior.</p>"
+          "documentation": "<p>The policy for the crawler's update and deletion behavior.</p>"
         },
         "Configuration": {
           "shape": "CrawlerConfiguration",
-          "documentation": "<p>Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Configuring a Crawler</a>.</p>"
+          "documentation": "<p>The crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html\">Configuring a Crawler</a>.</p>"
         },
         "CrawlerSecurityConfiguration": {
           "shape": "CrawlerSecurityConfiguration",
-          "documentation": "<p>The name of the SecurityConfiguration structure to be used by this Crawler.</p>"
+          "documentation": "<p>The name of the <code>SecurityConfiguration</code> structure to be used by this crawler.</p>"
         }
       }
     },
@@ -8353,11 +8387,11 @@
       "members": {
         "CrawlerName": {
           "shape": "NameString",
-          "documentation": "<p>Name of the crawler whose schedule to update.</p>"
+          "documentation": "<p>The name of the crawler whose schedule to update.</p>"
         },
         "Schedule": {
           "shape": "CronExpression",
-          "documentation": "<p>The updated <code>cron</code> expression used to specify the schedule (see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, you would specify: <code>cron(15 12 * * ? *)</code>.</p>"
+          "documentation": "<p>The updated <code>cron</code> expression used to specify the schedule. For more information, see <a href=\"http://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html\">Time-Based Schedules for Jobs and Crawlers</a>. For example, to run something every day at 12:15 UTC, specify <code>cron(15 12 * * ? *)</code>.</p>"
         }
       }
     },
@@ -8381,7 +8415,7 @@
         },
         "QuoteSymbol": {
           "shape": "CsvQuoteSymbol",
-          "documentation": "<p>A custom symbol to denote what combines content into a single column value. Must be different from the column delimiter.</p>"
+          "documentation": "<p>A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.</p>"
         },
         "ContainsHeader": {
           "shape": "CsvHeaderOption",
@@ -8534,7 +8568,7 @@
         },
         "JsonPath": {
           "shape": "JsonPath",
-          "documentation": "<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>"
+          "documentation": "<p>A <code>JsonPath</code> string defining the JSON data for the classifier to classify. AWS Glue supports a subset of <code>JsonPath</code>, as described in <a href=\"https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json\">Writing JsonPath Custom Classifiers</a>.</p>"
         }
       },
       "documentation": "<p>Specifies a JSON classifier to be updated.</p>"
@@ -8675,7 +8709,7 @@
         },
         "RowTag": {
           "shape": "RowTag",
-          "documentation": "<p>The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by <code>/&gt;</code>). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <code>&lt;row item_a=\"A\" item_b=\"B\"&gt;&lt;/row&gt;</code> is okay, but <code>&lt;row item_a=\"A\" item_b=\"B\" /&gt;</code> is not).</p>"
+          "documentation": "<p>The XML tag designating the element that contains each record in an XML document being parsed. This cannot identify a self-closing element (closed by <code>/&gt;</code>). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <code>&lt;row item_a=\"A\" item_b=\"B\"&gt;&lt;/row&gt;</code> is okay, but <code>&lt;row item_a=\"A\" item_b=\"B\" /&gt;</code> is not).</p>"
         }
       },
       "documentation": "<p>Specifies an XML classifier to be updated.</p>"
@@ -8793,11 +8827,11 @@
         },
         "CreationTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The time this classifier was registered.</p>"
+          "documentation": "<p>The time that this classifier was registered.</p>"
         },
         "LastUpdated": {
           "shape": "Timestamp",
-          "documentation": "<p>The time this classifier was last updated.</p>"
+          "documentation": "<p>The time that this classifier was last updated.</p>"
         },
         "Version": {
           "shape": "VersionId",
@@ -8805,7 +8839,7 @@
         },
         "RowTag": {
           "shape": "RowTag",
-          "documentation": "<p>The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by <code>/&gt;</code>). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <code>&lt;row item_a=\"A\" item_b=\"B\"&gt;&lt;/row&gt;</code> is okay, but <code>&lt;row item_a=\"A\" item_b=\"B\" /&gt;</code> is not).</p>"
+          "documentation": "<p>The XML tag designating the element that contains each record in an XML document being parsed. This can't identify a self-closing element (closed by <code>/&gt;</code>). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, <code>&lt;row item_a=\"A\" item_b=\"B\"&gt;&lt;/row&gt;</code> is okay, but <code>&lt;row item_a=\"A\" item_b=\"B\" /&gt;</code> is not).</p>"
         }
       },
       "documentation": "<p>A classifier for <code>XML</code> content.</p>"

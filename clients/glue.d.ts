@@ -100,11 +100,11 @@ declare class Glue extends Service {
    */
   batchStopJobRun(callback?: (err: AWSError, data: Glue.Types.BatchStopJobRunResponse) => void): Request<Glue.Types.BatchStopJobRunResponse, AWSError>;
   /**
-   * Creates a classifier in the user's account. This may be a GrokClassifier, an XMLClassifier, a JsonClassifier, or a CsvClassifier, depending on which field of the request is present.
+   * Creates a classifier in the user's account. This can be a GrokClassifier, an XMLClassifier, a JsonClassifier, or a CsvClassifier, depending on which field of the request is present.
    */
   createClassifier(params: Glue.Types.CreateClassifierRequest, callback?: (err: AWSError, data: Glue.Types.CreateClassifierResponse) => void): Request<Glue.Types.CreateClassifierResponse, AWSError>;
   /**
-   * Creates a classifier in the user's account. This may be a GrokClassifier, an XMLClassifier, a JsonClassifier, or a CsvClassifier, depending on which field of the request is present.
+   * Creates a classifier in the user's account. This can be a GrokClassifier, an XMLClassifier, a JsonClassifier, or a CsvClassifier, depending on which field of the request is present.
    */
   createClassifier(callback?: (err: AWSError, data: Glue.Types.CreateClassifierResponse) => void): Request<Glue.Types.CreateClassifierResponse, AWSError>;
   /**
@@ -212,11 +212,11 @@ declare class Glue extends Service {
    */
   deleteConnection(callback?: (err: AWSError, data: Glue.Types.DeleteConnectionResponse) => void): Request<Glue.Types.DeleteConnectionResponse, AWSError>;
   /**
-   * Removes a specified crawler from the Data Catalog, unless the crawler state is RUNNING.
+   * Removes a specified crawler from the AWS Glue Data Catalog, unless the crawler state is RUNNING.
    */
   deleteCrawler(params: Glue.Types.DeleteCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.DeleteCrawlerResponse) => void): Request<Glue.Types.DeleteCrawlerResponse, AWSError>;
   /**
-   * Removes a specified crawler from the Data Catalog, unless the crawler state is RUNNING.
+   * Removes a specified crawler from the AWS Glue Data Catalog, unless the crawler state is RUNNING.
    */
   deleteCrawler(callback?: (err: AWSError, data: Glue.Types.DeleteCrawlerResponse) => void): Request<Glue.Types.DeleteCrawlerResponse, AWSError>;
   /**
@@ -938,7 +938,7 @@ declare namespace Glue {
   }
   export interface BatchGetCrawlersRequest {
     /**
-     * A list of crawler names, which may be the names returned from the ListCrawlers operation.
+     * A list of crawler names, which might be the names returned from the ListCrawlers operation.
      */
     CrawlerNames: CrawlerNameList;
   }
@@ -948,7 +948,7 @@ declare namespace Glue {
      */
     Crawlers?: CrawlerList;
     /**
-     * A list of names of crawlers not found.
+     * A list of names of crawlers that were not found.
      */
     CrawlersNotFound?: CrawlerNameList;
   }
@@ -1107,22 +1107,34 @@ declare namespace Glue {
      */
     ImportedBy?: NameString;
   }
+  export type CatalogTablesList = NameString[];
+  export interface CatalogTarget {
+    /**
+     * The name of the database to be synchronized.
+     */
+    DatabaseName: NameString;
+    /**
+     * A list of the tables to be synchronized.
+     */
+    Tables: CatalogTablesList;
+  }
+  export type CatalogTargetList = CatalogTarget[];
   export type Classification = string;
   export interface Classifier {
     /**
-     * A GrokClassifier object.
+     * A classifier that uses grok.
      */
     GrokClassifier?: GrokClassifier;
     /**
-     * An XMLClassifier object.
+     * A classifier for XML content.
      */
     XMLClassifier?: XMLClassifier;
     /**
-     * A JsonClassifier object.
+     * A classifier for JSON content.
      */
     JsonClassifier?: JsonClassifier;
     /**
-     * A CSVClassifier object.
+     * A classifier for comma-separated values (CSV).
      */
     CsvClassifier?: CsvClassifier;
   }
@@ -1162,7 +1174,7 @@ declare namespace Glue {
      */
     Id: CodeGenIdentifier;
     /**
-     * The type of node this is.
+     * The type of node that this is.
      */
     NodeType: CodeGenNodeType;
     /**
@@ -1311,11 +1323,11 @@ declare namespace Glue {
   }
   export interface Crawler {
     /**
-     * The crawler name.
+     * The name of the crawler.
      */
     Name?: NameString;
     /**
-     * The IAM role (or ARN of an IAM role) used to access customer resources, such as data in Amazon S3.
+     * The Amazon Resource Name (ARN) of an IAM role that's used to access customer resources, such as Amazon Simple Storage Service (Amazon S3) data.
      */
     Role?: Role;
     /**
@@ -1323,7 +1335,7 @@ declare namespace Glue {
      */
     Targets?: CrawlerTargets;
     /**
-     * The database where metadata is written by this crawler.
+     * The name of the database in which the crawler's output is stored.
      */
     DatabaseName?: DatabaseName;
     /**
@@ -1331,11 +1343,11 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * A list of custom classifiers associated with the crawler.
+     * A list of UTF-8 strings that specify the custom classifiers that are associated with the crawler.
      */
     Classifiers?: ClassifierNameList;
     /**
-     * Sets the behavior when the crawler finds a changed or deleted object.
+     * The policy that specifies update and delete behaviors for the crawler.
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
@@ -1355,11 +1367,11 @@ declare namespace Glue {
      */
     CrawlElapsedTime?: MillisecondsCount;
     /**
-     * The time when the crawler was created.
+     * The time that the crawler was created.
      */
     CreationTime?: Timestamp;
     /**
-     * The time the crawler was last updated.
+     * The time that the crawler was last updated.
      */
     LastUpdated?: Timestamp;
     /**
@@ -1375,7 +1387,7 @@ declare namespace Glue {
      */
     Configuration?: CrawlerConfiguration;
     /**
-     * The name of the SecurityConfiguration structure to be used by this Crawler.
+     * The name of the SecurityConfiguration structure to be used by this crawler.
      */
     CrawlerSecurityConfiguration?: CrawlerSecurityConfiguration;
   }
@@ -1421,7 +1433,7 @@ declare namespace Glue {
   export type CrawlerState = "READY"|"RUNNING"|"STOPPING"|string;
   export interface CrawlerTargets {
     /**
-     * Specifies Amazon S3 targets.
+     * Specifies Amazon Simple Storage Service (Amazon S3) targets.
      */
     S3Targets?: S3TargetList;
     /**
@@ -1429,9 +1441,13 @@ declare namespace Glue {
      */
     JdbcTargets?: JdbcTargetList;
     /**
-     * Specifies DynamoDB targets.
+     * Specifies Amazon DynamoDB targets.
      */
     DynamoDBTargets?: DynamoDBTargetList;
+    /**
+     * Specifies AWS Glue Data Catalog targets.
+     */
+    CatalogTargets?: CatalogTargetList;
   }
   export interface CreateClassifierRequest {
     /**
@@ -1471,13 +1487,13 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * The IAM role (or ARN of an IAM role) used by the new crawler to access customer resources.
+     * The IAM role or Amazon Resource Name (ARN) of an IAM role used by the new crawler to access customer resources.
      */
     Role: Role;
     /**
      * The AWS Glue database where results are written, such as: arn:aws:daylight:us-east-1::database/sometable/*.
      */
-    DatabaseName: DatabaseName;
+    DatabaseName?: DatabaseName;
     /**
      * A description of the new crawler.
      */
@@ -1487,7 +1503,7 @@ declare namespace Glue {
      */
     Targets: CrawlerTargets;
     /**
-     * A cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
+     * A cron expression used to specify the schedule. For more information, see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, specify cron(15 12 * * ? *).
      */
     Schedule?: CronExpression;
     /**
@@ -1499,19 +1515,19 @@ declare namespace Glue {
      */
     TablePrefix?: TablePrefix;
     /**
-     * Policy for the crawler's update and deletion behavior.
+     * The policy for the crawler's update and deletion behavior.
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
+     * The crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
     Configuration?: CrawlerConfiguration;
     /**
-     * The name of the SecurityConfiguration structure to be used by this Crawler.
+     * The name of the SecurityConfiguration structure to be used by this crawler.
      */
     CrawlerSecurityConfiguration?: CrawlerSecurityConfiguration;
     /**
-     * The tags to use with this crawler request. You may use tags to limit access to the crawler. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.
+     * The tags to use with this crawler request. You can use tags to limit access to the crawler. For more information, see AWS Tags in AWS Glue.
      */
     Tags?: TagsMap;
   }
@@ -1925,7 +1941,7 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by /&gt;). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, &lt;row item_a="A" item_b="B"&gt;&lt;/row&gt; is okay, but &lt;row item_a="A" item_b="B" /&gt; is not).
+     * The XML tag designating the element that contains each record in an XML document being parsed. This can't identify a self-closing element (closed by /&gt;). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, &lt;row item_a="A" item_b="B"&gt;&lt;/row&gt; is okay, but &lt;row item_a="A" item_b="B" /&gt; is not).
      */
     RowTag?: RowTag;
   }
@@ -1936,11 +1952,11 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * The time this classifier was registered.
+     * The time that this classifier was registered.
      */
     CreationTime?: Timestamp;
     /**
-     * The time this classifier was last updated.
+     * The time that this classifier was last updated.
      */
     LastUpdated?: Timestamp;
     /**
@@ -1952,7 +1968,7 @@ declare namespace Glue {
      */
     Delimiter?: CsvColumnDelimiter;
     /**
-     * A custom symbol to denote what combines content into a single column value. Must be different from the column delimiter.
+     * A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.
      */
     QuoteSymbol?: CsvQuoteSymbol;
     /**
@@ -2055,7 +2071,7 @@ declare namespace Glue {
   }
   export interface DeleteCrawlerRequest {
     /**
-     * Name of the crawler to remove.
+     * The name of the crawler to remove.
      */
     Name: NameString;
   }
@@ -2380,7 +2396,7 @@ declare namespace Glue {
   }
   export interface GetClassifiersRequest {
     /**
-     * Size of the list to return (optional).
+     * The size of the list to return (optional).
      */
     MaxResults?: PageSize;
     /**
@@ -2486,7 +2502,7 @@ declare namespace Glue {
   }
   export interface GetCrawlerRequest {
     /**
-     * Name of the crawler to retrieve metadata for.
+     * The name of the crawler to retrieve metadata for.
      */
     Name: NameString;
   }
@@ -2790,7 +2806,7 @@ declare namespace Glue {
      */
     Sinks?: CatalogEntries;
     /**
-     * Parameters for the mapping.
+     * The parameters for the mapping.
      */
     Location?: Location;
     /**
@@ -2804,7 +2820,7 @@ declare namespace Glue {
      */
     PythonScript?: PythonScript;
     /**
-     * Scala code to perform the mapping.
+     * The Scala code to perform the mapping.
      */
     ScalaCode?: ScalaCode;
   }
@@ -3080,11 +3096,11 @@ declare namespace Glue {
      */
     Classification: Classification;
     /**
-     * The time this classifier was registered.
+     * The time that this classifier was registered.
      */
     CreationTime?: Timestamp;
     /**
-     * The time this classifier was last updated.
+     * The time that this classifier was last updated.
      */
     LastUpdated?: Timestamp;
     /**
@@ -3092,11 +3108,11 @@ declare namespace Glue {
      */
     Version?: VersionId;
     /**
-     * The grok pattern applied to a data store by this classifier. For more information, see built-in patterns in Writing Custom Classifers.
+     * The grok pattern applied to a data store by this classifier. For more information, see built-in patterns in Writing Custom Classifiers.
      */
     GrokPattern: GrokPattern;
     /**
-     * Optional custom grok patterns defined by this classifier. For more information, see custom patterns in Writing Custom Classifers.
+     * Optional custom grok patterns defined by this classifier. For more information, see custom patterns in Writing Custom Classifiers.
      */
     CustomPatterns?: CustomPatterns;
   }
@@ -3405,11 +3421,11 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * The time this classifier was registered.
+     * The time that this classifier was registered.
      */
     CreationTime?: Timestamp;
     /**
-     * The time this classifier was last updated.
+     * The time that this classifier was last updated.
      */
     LastUpdated?: Timestamp;
     /**
@@ -3559,11 +3575,11 @@ declare namespace Glue {
      */
     Jdbc?: CodeGenNodeArgs;
     /**
-     * An Amazon S3 location.
+     * An Amazon Simple Storage Service (Amazon S3) location.
      */
     S3?: CodeGenNodeArgs;
     /**
-     * A DynamoDB Table location.
+     * An Amazon DynamoDB table location.
      */
     DynamoDB?: CodeGenNodeArgs;
   }
@@ -3837,7 +3853,7 @@ declare namespace Glue {
   export type ScalaCode = string;
   export interface Schedule {
     /**
-     * A cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
+     * A cron expression used to specify the schedule. For more information, see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, specify cron(15 12 * * ? *).
      */
     ScheduleExpression?: CronExpression;
     /**
@@ -4360,7 +4376,7 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * The IAM role (or ARN of an IAM role) used by the new crawler to access customer resources.
+     * The IAM role or Amazon Resource Name (ARN) of an IAM role that is used by the new crawler to access customer resources.
      */
     Role?: Role;
     /**
@@ -4376,7 +4392,7 @@ declare namespace Glue {
      */
     Targets?: CrawlerTargets;
     /**
-     * A cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
+     * A cron expression used to specify the schedule. For more information, see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, specify cron(15 12 * * ? *).
      */
     Schedule?: CronExpression;
     /**
@@ -4388,15 +4404,15 @@ declare namespace Glue {
      */
     TablePrefix?: TablePrefix;
     /**
-     * Policy for the crawler's update and deletion behavior.
+     * The policy for the crawler's update and deletion behavior.
      */
     SchemaChangePolicy?: SchemaChangePolicy;
     /**
-     * Crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
+     * The crawler configuration information. This versioned JSON string allows users to specify aspects of a crawler's behavior. For more information, see Configuring a Crawler.
      */
     Configuration?: CrawlerConfiguration;
     /**
-     * The name of the SecurityConfiguration structure to be used by this Crawler.
+     * The name of the SecurityConfiguration structure to be used by this crawler.
      */
     CrawlerSecurityConfiguration?: CrawlerSecurityConfiguration;
   }
@@ -4404,11 +4420,11 @@ declare namespace Glue {
   }
   export interface UpdateCrawlerScheduleRequest {
     /**
-     * Name of the crawler whose schedule to update.
+     * The name of the crawler whose schedule to update.
      */
     CrawlerName: NameString;
     /**
-     * The updated cron expression used to specify the schedule (see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *).
+     * The updated cron expression used to specify the schedule. For more information, see Time-Based Schedules for Jobs and Crawlers. For example, to run something every day at 12:15 UTC, specify cron(15 12 * * ? *).
      */
     Schedule?: CronExpression;
   }
@@ -4424,7 +4440,7 @@ declare namespace Glue {
      */
     Delimiter?: CsvColumnDelimiter;
     /**
-     * A custom symbol to denote what combines content into a single column value. Must be different from the column delimiter.
+     * A custom symbol to denote what combines content into a single column value. It must be different from the column delimiter.
      */
     QuoteSymbol?: CsvQuoteSymbol;
     /**
@@ -4630,7 +4646,7 @@ declare namespace Glue {
      */
     Classification?: Classification;
     /**
-     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by /&gt;). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, &lt;row item_a="A" item_b="B"&gt;&lt;/row&gt; is okay, but &lt;row item_a="A" item_b="B" /&gt; is not).
+     * The XML tag designating the element that contains each record in an XML document being parsed. This cannot identify a self-closing element (closed by /&gt;). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, &lt;row item_a="A" item_b="B"&gt;&lt;/row&gt; is okay, but &lt;row item_a="A" item_b="B" /&gt; is not).
      */
     RowTag?: RowTag;
   }
@@ -4700,11 +4716,11 @@ declare namespace Glue {
      */
     Classification: Classification;
     /**
-     * The time this classifier was registered.
+     * The time that this classifier was registered.
      */
     CreationTime?: Timestamp;
     /**
-     * The time this classifier was last updated.
+     * The time that this classifier was last updated.
      */
     LastUpdated?: Timestamp;
     /**
@@ -4712,7 +4728,7 @@ declare namespace Glue {
      */
     Version?: VersionId;
     /**
-     * The XML tag designating the element that contains each record in an XML document being parsed. Note that this cannot identify a self-closing element (closed by /&gt;). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, &lt;row item_a="A" item_b="B"&gt;&lt;/row&gt; is okay, but &lt;row item_a="A" item_b="B" /&gt; is not).
+     * The XML tag designating the element that contains each record in an XML document being parsed. This can't identify a self-closing element (closed by /&gt;). An empty row element that contains only attributes can be parsed as long as it ends with a closing tag (for example, &lt;row item_a="A" item_b="B"&gt;&lt;/row&gt; is okay, but &lt;row item_a="A" item_b="B" /&gt; is not).
      */
     RowTag?: RowTag;
   }
