@@ -76,6 +76,10 @@ You can find a getting started guide at:
 
 http://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide
 
+API reference at:
+
+https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/
+
 ## Usage with TypeScript
 The AWS SDK for JavaScript bundles TypeScript definition files for use in TypeScript projects and to support tools that can read `.d.ts` files.
 Our goal is to keep these TypeScript definition files updated with each release for any public api.
