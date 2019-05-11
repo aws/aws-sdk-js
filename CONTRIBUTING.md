@@ -98,7 +98,7 @@ AWS_REGION=[set region] node node_modules/cucumber/bin/cucumber.js --tag @s3
 
 ### Testing the documentation changes:
 
-To test the documentation changes, please ensure you have the following requirements installed:
+To test the documentation changes, please ensure you have the following requirements installed (Please make sure you have the latest version of Ruby):
 
 * `gem install bundler`
 
