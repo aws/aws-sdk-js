@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.453.0-->
+<!--LATEST=2.454.0-->
 <!--ENTRYINSERT-->
+
+## 2.454.0
+* feature: DataSync: AWS DataSync now enables exclude and include filters to control what files and directories will be copied as part of a task execution.
+* feature: IoTAnalytics: ContentDeliveryRule to support sending dataset to S3 and glue
+* feature: Lambda: AWS Lambda now supports Node.js v10
+* feature: core: Add support for requiresLength trait for streaming payload and send chunked transfer encode when allowed
 
 ## 2.453.0
 * feature: Glue: AWS Glue now supports specifying existing catalog tables for a crawler to examine as a data source. A new parameter CatalogTargets is added to the CrawlerTargets data type. 

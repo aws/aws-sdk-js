@@ -335,6 +335,8 @@ declare namespace IoTAnalytics {
      */
     batchPutMessageErrorEntries?: BatchPutMessageErrorEntries;
   }
+  export type BucketKeyExpression = string;
+  export type BucketName = string;
   export interface CancelPipelineReprocessingRequest {
     /**
      * The name of pipeline for which data reprocessing is canceled.
@@ -646,6 +648,10 @@ declare namespace IoTAnalytics {
      * Configuration information for delivery of data set contents to AWS IoT Events.
      */
     iotEventsDestinationConfiguration?: IotEventsDestinationConfiguration;
+    /**
+     * Configuration information for delivery of data set contents to Amazon S3.
+     */
+    s3DestinationConfiguration?: S3DestinationConfiguration;
   }
   export interface DatasetContentDeliveryRule {
     /**
@@ -1024,6 +1030,18 @@ declare namespace IoTAnalytics {
      */
     status?: DatasetContentStatus;
   }
+  export interface GlueConfiguration {
+    /**
+     * The name of the table in your AWS Glue Data Catalog which is used to perform the ETL (extract, transform and load) operations. (An AWS Glue Data Catalog table contains partitioned data and descriptions of data sources and targets.)
+     */
+    tableName: GlueTableName;
+    /**
+     * The name of the database in your AWS Glue Data Catalog in which the table is located. (An AWS Glue Data Catalog database contains Glue Data tables.)
+     */
+    databaseName: GlueDatabaseName;
+  }
+  export type GlueDatabaseName = string;
+  export type GlueTableName = string;
   export type Image = string;
   export type IncludeStatisticsFlag = boolean;
   export interface IotEventsDestinationConfiguration {
@@ -1420,6 +1438,24 @@ declare namespace IoTAnalytics {
      * In case the pipeline activity fails, the log message that is generated.
      */
     logResult?: LogResult;
+  }
+  export interface S3DestinationConfiguration {
+    /**
+     * The name of the Amazon S3 bucket to which data set contents are delivered.
+     */
+    bucket: BucketName;
+    /**
+     * The key of the data set contents object. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).
+     */
+    key: BucketKeyExpression;
+    /**
+     * Configuration information for coordination with the AWS Glue ETL (extract, transform and load) service.
+     */
+    glueConfiguration?: GlueConfiguration;
+    /**
+     * The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 and AWS Glue resources.
+     */
+    roleArn: RoleArn;
   }
   export interface SampleChannelDataRequest {
     /**

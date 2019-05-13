@@ -29,9 +29,12 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Cancels execution of a task. </p> <p>When you cancel a task execution, the transfer of some files are abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, AWS DataSync successfully complete the transfer when you start the next task execution. </p>"
+      "documentation": "<p>Cancels execution of a task. </p> <p>When you cancel a task execution, the transfer of some files are abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, AWS DataSync successfully complete the transfer when you start the next task execution.</p>"
     },
     "CreateAgent": {
       "name": "CreateAgent",
@@ -48,9 +51,12 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region. </p> <p>You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run. For more information, see <a href=\"https://docs.aws.amazon.com/sync-service/latest/userguide/working-with-sync-agents.html#activating-sync-agent\">Activating a Sync Agent</a> in the <i>AWS DataSync User Guide.</i> </p> <p>Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks.</p> <p/>"
+      "documentation": "<p>Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region. </p> <p>You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run. </p> <p>For more information, see \"https://docs.aws.amazon.com/datasync/latest/userguide/working-with-agents.html#activating-agent\" (Activating an Agent) in the <i>AWS DataSync User Guide.</i> </p> <p>Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks.</p> <p/>"
     },
     "CreateLocationEfs": {
       "name": "CreateLocationEfs",
@@ -67,6 +73,9 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
       "documentation": "<p>Creates an endpoint for an Amazon EFS file system.</p>"
@@ -86,6 +95,9 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
       "documentation": "<p>Creates an endpoint for a Network File System (NFS) file system.</p>"
@@ -105,9 +117,12 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Creates an endpoint for an Amazon S3 bucket.</p> <p>For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section. For more information, see <a href=\"https://docs.aws.amazon.com/sync-service/latest/userguide/configuring-s3-locations.html\">Configuring Amazon S3 Location Settings</a> in the <i>AWS DataSync User Guide</i>.</p>"
+      "documentation": "<p>Creates an endpoint for an Amazon S3 bucket.</p> <p>For AWS DataSync to access a destination S3 bucket, it needs an AWS Identity and Access Management (IAM) role that has the required permissions. You can set up the required permissions by creating an IAM policy that grants the required permissions and attaching the policy to the role. An example of such a policy is shown in the examples section.</p> <p>For more information, see \"https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location\" (Configuring Amazon S3 Location Settings) in the <i>AWS DataSync User Guide</i>.</p>"
     },
     "CreateTask": {
       "name": "CreateTask",
@@ -124,9 +139,12 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Creates a task. A task is a set of two locations (source and destination) and a set of default <code>OverrideOptions</code> that you use to control the behavior of a task. If you don't specify default values for <code>Options</code> when you create a task, AWS DataSync populates them with safe service defaults.</p> <p>When you initially create a task, it enters the INITIALIZING status and then the CREATING status. In CREATING status, AWS DataSync attempts to mount the source Network File System (NFS) location. The task transitions to the AVAILABLE status without waiting for the destination location to mount. Instead, AWS DataSync mounts a destination before every task execution and then unmounts it after every task execution. </p> <p>If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task's <code>ErrorCode</code> and <code>ErrorDetail</code>. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server host name.</p>"
+      "documentation": "<p>Creates a task. A task is a set of two locations (source and destination) and a set of Options that you use to control the behavior of a task. If you don't specify Options when you create a task, AWS DataSync populates them with service defaults.</p> <p>When you create a task, it first enters the CREATING state. During CREATING AWS DataSync attempts to mount the on-premises Network File System (NFS) location. The task transitions to the AVAILABLE state without waiting for the AWS location to become mounted. If required, AWS DataSync mounts the AWS location before each task execution.</p> <p>If an agent that is associated with a source (NFS) location goes offline, the task transitions to the UNAVAILABLE status. If the status of the task remains in the CREATING status for more than a few minutes, it means that your agent might be having trouble mounting the source NFS file system. Check the task's ErrorCode and ErrorDetail. Mount issues are often caused by either a misconfigured firewall or a mistyped NFS server host name.</p>"
     },
     "DeleteAgent": {
       "name": "DeleteAgent",
@@ -143,9 +161,12 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Deletes an agent. To specify which agent to delete, use the Amazon Resource Name (ARN) of the agent in your request. The operation disassociates the agent from your AWS account. However, it doesn't delete the agent virtual machine (VM) from your on-premises environment.</p> <note> <p>After you delete an agent, you can't reactivate it and you longer pay software charges for it.</p> </note>"
+      "documentation": "<p>Deletes an agent. To specify which agent to delete, use the Amazon Resource Name (ARN) of the agent in your request. The operation disassociates the agent from your AWS account. However, it doesn't delete the agent virtual machine (VM) from your on-premises environment.</p>"
     },
     "DeleteLocation": {
       "name": "DeleteLocation",
@@ -162,6 +183,9 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
       "documentation": "<p>Deletes the configuration of a location used by AWS DataSync. </p>"
@@ -181,6 +205,9 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
       "documentation": "<p>Deletes a task.</p>"
@@ -200,6 +227,9 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
       "documentation": "<p>Returns metadata such as the name, the network interfaces, and the status (that is, whether the agent is running or not) for an agent. To specify which agent to describe, use the Amazon Resource Name (ARN) of the agent in your request. </p>"
@@ -219,6 +249,9 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
       "documentation": "<p>Returns metadata, such as the path information about an Amazon EFS location.</p>"
@@ -238,6 +271,9 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
       "documentation": "<p>Returns metadata, such as the path information, about a NFS location.</p>"
@@ -257,6 +293,9 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
       "documentation": "<p>Returns metadata, such as bucket name, about an Amazon S3 bucket location.</p>"
@@ -276,6 +315,9 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
       "documentation": "<p>Returns metadata about a task.</p>"
@@ -295,6 +337,9 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
       "documentation": "<p>Returns detailed metadata about a task that is being executed.</p>"
@@ -314,6 +359,9 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
       "documentation": "<p>Returns a list of agents owned by an AWS account in the AWS Region specified in the request. The returned list is ordered by agent Amazon Resource Name (ARN).</p> <p>By default, this operation returns a maximum of 100 agents. This operation supports pagination that enables you to optionally reduce the number of agents returned in a response.</p> <p>If you have more agents than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a marker that you can specify in your next request to fetch the next page of agents.</p>"
@@ -333,6 +381,9 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
       "documentation": "<p>Returns a lists of source and destination locations.</p> <p>If you have more locations than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a token that you can specify in your next request to fetch the next page of locations.</p>"
@@ -352,6 +403,9 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
       "documentation": "<p>Returns all the tags associated with a specified resources. </p>"
@@ -371,6 +425,9 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
       "documentation": "<p>Returns a list of executed tasks.</p>"
@@ -390,6 +447,9 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
       "documentation": "<p>Returns a list of all the tasks.</p>"
@@ -409,9 +469,12 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Starts a specific invocation of a task. A <code>TaskExecution</code> value represents an individual run of a task. Each task can have at most one <code>TaskExecution</code> at a time.</p> <p> <code>TaskExecution</code> has the following transition phases: INITIALIZING | PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE. </p> <p>For detailed information, see <i>Task Execution</i> in <a href=\"https://docs.aws.amazon.com/sync-service/latest/userguide/how-awssync-works.html#terminology\">Components and Terminology</a> in the <i>AWS DataSync User Guide</i>.</p>"
+      "documentation": "<p>Starts a specific invocation of a task. A <code>TaskExecution</code> value represents an individual run of a task. Each task can have at most one <code>TaskExecution</code> at a time.</p> <p> <code>TaskExecution</code> has the following transition phases: INITIALIZING | PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE. </p> <p>For detailed information, see <i>Task Execution</i> in \"https://docs.aws.amazon.com/datasync/latest/userguide/how-datasync-works.html#terminology\" (Components and Terminology) in the <i>AWS DataSync User Guide</i>.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -428,6 +491,9 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
       "documentation": "<p>Applies a key-value pair to an AWS resource.</p>"
@@ -447,6 +513,9 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
       "documentation": "<p>Removes a tag from an AWS resource.</p>"
@@ -466,6 +535,9 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
       "documentation": "<p>Updates the name of an agent.</p>"
@@ -485,6 +557,9 @@
       "errors": [
         {
           "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalException"
         }
       ],
       "documentation": "<p>Updates the metadata associated with a task.</p>"
@@ -576,7 +651,7 @@
       "members": {
         "ActivationKey": {
           "shape": "ActivationKey",
-          "documentation": "<p>Your agent activation key. You can get the activation key either by sending an HTTP GET request with redirects that enable you to get the agent IP address (port 80). Alternatively, you can get it from the AWS DataSync console. </p> <p>The redirect URL returned in the response provides you the activation key for your agent in the query string parameter <code>activationKey</code>. It might also include other activation-related parameters; however, these are merely defaults. The arguments you pass to this API call determine the actual configuration of your agent. For more information, see <a href=\"https://docs.aws.amazon.com/sync-service/latest/userguide/working-with-sync-agents.html#activating-sync-agent\">Activating a Sync Agent</a> in the <i>AWS DataSync User Guide.</i> </p>"
+          "documentation": "<p>Your agent activation key. You can get the activation key either by sending an HTTP GET request with redirects that enable you to get the agent IP address (port 80). Alternatively, you can get it from the AWS DataSync console. </p> <p>The redirect URL returned in the response provides you the activation key for your agent in the query string parameter <code>activationKey</code>. It might also include other activation-related parameters; however, these are merely defaults. The arguments you pass to this API call determine the actual configuration of your agent.</p> <p>For more information, see \"https://docs.aws.amazon.com/datasync/latest/userguide/working-with-agents.html#activating-agent\" (Activating a Agent) in the <i>AWS DataSync User Guide.</i> </p>"
         },
         "AgentName": {
           "shape": "TagValue",
@@ -584,7 +659,7 @@
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>The key-value pair that represents the tag you want to associate with the agent. The value can be an empty string. This value helps you manage, filter, and search for your agents.</p> <note> <p>Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. </p> </note>"
+          "documentation": "<p>The key-value pair that represents the tag that you want to associate with the agent. The value can be an empty string. This value helps you manage, filter, and search for your agents.</p> <note> <p>Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. </p> </note>"
         }
       },
       "documentation": "<p>CreateAgentRequest</p>"
@@ -602,7 +677,6 @@
     "CreateLocationEfsRequest": {
       "type": "structure",
       "required": [
-        "Subdirectory",
         "EfsFilesystemArn",
         "Ec2Config"
       ],
@@ -617,7 +691,7 @@
         },
         "Ec2Config": {
           "shape": "Ec2Config",
-          "documentation": "<p>The subnet and security group that the Amazon EFS file system uses.</p>"
+          "documentation": "<p>The subnet and security group that the Amazon EFS file system uses. The security group that you provide needs to be able to communicate with the security group on the mount target in the subnet specified.</p> <p>The exact relationship between security group M (of the mount target) and security group S (which you provide for DataSync to use at this stage) is as follows: </p> <ul> <li> <p> Security group M (which you associate with the mount target) must allow inbound access for the Transmission Control Protocol (TCP) on the NFS port (2049) from security group S. You can enable inbound connections either by IP address (CIDR range) or security group. </p> </li> <li> <p>Security group S (provided to DataSync to access EFS) should have a rule that enables outbound connections to the NFS port on one of the file system’s mount targets. You can enable outbound connections either by IP address (CIDR range) or security group.</p> <p>For information about security groups and mount targets, see \"https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access\" (Security Groups for Amazon EC2 Instances and Mount Targets) in the <i>Amazon EFS User Guide</i>.</p> </li> </ul>"
         },
         "Tags": {
           "shape": "TagList",
@@ -645,8 +719,8 @@
       ],
       "members": {
         "Subdirectory": {
-          "shape": "Subdirectory",
-          "documentation": "<p>The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that's exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network. </p> <p>To see all the paths exported by your NFS server. run \"<code>showmount -e nfs-server-name</code>\" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication. </p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with <code>no_root_squash,</code> or ensure that the permissions for all of the files that you want sync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access. For information about NFS export configuration, see <a href=\"https://www.centos.org/docs/5/html/Deployment_Guide-en-US/s1-nfs-server-config-exports.html\">18.7. The /etc/exports Configuration File</a> in the Centos documentation. </p>"
+          "shape": "NonEmptySubdirectory",
+          "documentation": "<p>The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that's exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network. </p> <p>To see all the paths exported by your NFS server. run \"<code>showmount -e nfs-server-name</code>\" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication. </p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with <code>no_root_squash,</code> or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access.</p> <p>For information about NFS export configuration, see \"http://web.mit.edu/rhel-doc/5/RHEL-5-manual/Deployment_Guide-en-US/s1-nfs-server-config-exports.html\" (18.7. The /etc/exports Configuration File).</p>"
         },
         "ServerHostname": {
           "shape": "ServerHostname",
@@ -655,6 +729,10 @@
         "OnPremConfig": {
           "shape": "OnPremConfig",
           "documentation": "<p>Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect to an NFS server.</p>"
+        },
+        "MountOptions": {
+          "shape": "NfsMountOptions",
+          "documentation": "<p>The NFS mount options that DataSync can use to mount your NFS share.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -676,7 +754,6 @@
     "CreateLocationS3Request": {
       "type": "structure",
       "required": [
-        "Subdirectory",
         "S3BucketArn",
         "S3Config"
       ],
@@ -726,7 +803,7 @@
         },
         "CloudWatchLogGroupArn": {
           "shape": "LogGroupArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used to monitor and log events in the task. For more information on these groups, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html\">Working with Log Groups and Log Streams</a> in the <i>Amazon CloudWatch User Guide. </i> </p> <p>For more information about how to useCloudWatchLogs with DataSync, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/monitor-datasync.html\">Monitoring Your Task</a>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used to monitor and log events in the task. </p> <p>For more information on these groups, see \"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html\" (Working with Log Groups and Log Streams) in the <i>Amazon CloudWatch User Guide</i>.</p> <p>For more information about how to useCloudWatchLogs with DataSync, see \"https://docs.aws.amazon.com/datasync/latest/userguide/monitor-datasync.html\" (Monitoring Your Task)</p>"
         },
         "Name": {
           "shape": "TagValue",
@@ -735,6 +812,10 @@
         "Options": {
           "shape": "Options",
           "documentation": "<p>The set of configuration options that control the behavior of a single execution of the task that occurs when you call <code>StartTaskExecution</code>. You can configure these options to preserve metadata such as user ID (UID) and group ID (GID), file permissions, data integrity verification, and so on.</p> <p>For each individual task execution, you can override these options by specifying the <code>OverrideOptions</code> before starting a the task execution. For more information, see the operation. </p>"
+        },
+        "Excludes": {
+          "shape": "FilterList",
+          "documentation": "<p/> <p>A filter that determines which files to exclude from a task based on the specified pattern. Transfers all files in the task’s subdirectory, except files that match the filter that is set. </p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -834,7 +915,7 @@
         },
         "LastConnectionTime": {
           "shape": "Time",
-          "documentation": "<p>The time that the agent was last connected.</p>"
+          "documentation": "<p>The time that the agent last connected to DataSyc.</p>"
         },
         "CreationTime": {
           "shape": "Time",
@@ -904,6 +985,10 @@
         "OnPremConfig": {
           "shape": "OnPremConfig"
         },
+        "MountOptions": {
+          "shape": "NfsMountOptions",
+          "documentation": "<p>The NFS mount options that DataSync used to mount your NFS share.</p>"
+        },
         "CreationTime": {
           "shape": "Time",
           "documentation": "<p>The time that the NFS location was created.</p>"
@@ -963,14 +1048,22 @@
       "members": {
         "TaskExecutionArn": {
           "shape": "TaskExecutionArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the task execution that was described. <code>TaskExecutionArn</code> is hierarchical and includes <code>TaskArn</code> for the task that was executed. </p> <p>For example, a <code>TaskExecution</code> value with the ARN <code>arn:aws:sync:us-east-1:209870788375:task/task-0208075f79cedf4a2/execution/exec-08ef1e88ec491019b</code> executed the task with the ARN <code>arn:aws:sync:us-east-1:209870788375:task/task-0208075f79cedf4a2</code>. </p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the task execution that was described. <code>TaskExecutionArn</code> is hierarchical and includes <code>TaskArn</code> for the task that was executed. </p> <p>For example, a <code>TaskExecution</code> value with the ARN <code>arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2/execution/exec-08ef1e88ec491019b</code> executed the task with the ARN <code>arn:aws:datasync:us-east-1:111222333444:task/task-0208075f79cedf4a2</code>. </p>"
         },
         "Status": {
           "shape": "TaskExecutionStatus",
-          "documentation": "<p>The status of the task. For detailed information about sync statuses, see <a href=\"https://docs.aws.amazon.com/sync-service/latest/userguide/understand-sync-task-statuses.html\">Understanding Sync Task Statuses</a>.</p>"
+          "documentation": "<p>The status of the task execution. </p> <p>For detailed information about task execution statuses, see \"https://docs.aws.amazon.com/datasync/latest/userguide/working-with-tasks.html#understand-task-creation-statuses\" (Understanding Task Statuses).</p>"
         },
         "Options": {
           "shape": "Options"
+        },
+        "Excludes": {
+          "shape": "FilterList",
+          "documentation": "<p/> <p>Specifies that the task execution excludes files from the transfer based on the specified pattern in the filter. Transfers all files in the task’s subdirectory, except files that match the filter that is set. </p>"
+        },
+        "Includes": {
+          "shape": "FilterList",
+          "documentation": "<p/> <p>Specifies that the task execution excludes files in the transfer based on the specified pattern in the filter. When multiple include filters are set, they are interpreted as an OR. </p>"
         },
         "StartTime": {
           "shape": "Time",
@@ -1025,7 +1118,7 @@
         },
         "Status": {
           "shape": "TaskStatus",
-          "documentation": "<p>The status of the task that was described. For detailed information about sync statuses, see <a href=\"https://docs.aws.amazon.com/sync-service/latest/userguide/understand-sync-task-statuses.html\">Understanding Sync Task Statuses</a>.</p>"
+          "documentation": "<p>The status of the task that was described.</p> <p>For detailed information about task execution statuses, see \"https://docs.aws.amazon.com/datasync/latest/userguide/working-with-tasks.html#understand-task-creation-statuses\" (Understanding Task Statuses).</p>"
         },
         "Name": {
           "shape": "TagValue",
@@ -1045,11 +1138,15 @@
         },
         "CloudWatchLogGroupArn": {
           "shape": "LogGroupArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was used to monitor and log events in the task. For more information on these groups, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html\">Working with Log Groups and Log Streams</a> in the <i>Amazon CloudWatch User Guide.</i> </p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was used to monitor and log events in the task.</p> <p>For more information on these groups, see \"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html\" (Working with Log Groups and Log Streams) in the <i>Amazon CloudWatch UserGuide</i>.</p>"
         },
         "Options": {
           "shape": "Options",
           "documentation": "<p>The set of configuration options that control the behavior of a single execution of the task that occurs when you call <code>StartTaskExecution</code>. You can configure these options to preserve metadata such as user ID (UID) and group (GID), file permissions, data integrity verification, and so on.</p> <p>For each individual task execution, you can override these options by specifying the overriding <code>OverrideOptions</code> value to operation. </p>"
+        },
+        "Excludes": {
+          "shape": "FilterList",
+          "documentation": "<p/> <p>Specifies that the task excludes files in the transfer based on the specified pattern in the filter. Transfers all files in the task’s subdirectory, except files that match the filter that is set. </p>"
         },
         "ErrorCode": {
           "shape": "string",
@@ -1079,14 +1176,14 @@
       "members": {
         "SubnetArn": {
           "shape": "Ec2SubnetArn",
-          "documentation": "<p>The ARN of the subnet that the Amazon EC2 resource belongs in. </p>"
+          "documentation": "<p>The ARN of the subnet and the security group that DataSync uses to access the target EFS file system.</p>"
         },
         "SecurityGroupArns": {
           "shape": "Ec2SecurityGroupArnList",
           "documentation": "<p>The Amazon Resource Names (ARNs) of the security groups that are configured for the Amazon EC2 resource.</p>"
         }
       },
-      "documentation": "<p>The subnet and the security group that the target Amazon EFS file system uses. The subnet must have at least one mount target for that file system. The security group that you provide needs to be able to communicate with the security group on the mount target in the subnet specified. </p> <p>The exact relationship between security group M (of the mount target) and security group S (which you provide for DataSync to use at this stage) is as follows: </p> <ul> <li> <p> Security group M (which you associate with the mount target) must allow inbound access for the Transmission Control Protocol (TCP) on the NFS port (2049) from security group S. You can enable inbound connections either by IP address (CIDR range) or security group. </p> </li> <li> <p>Security group S (provided to DataSync to access EFS) should have a rule that enables outbound connections to the NFS port on one of the file system’s mount targets. You can enable outbound connections either by IP address (CIDR range) or security group. For information about security groups and mount targets, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/security-considerations.html#network-access\">Security Groups for Amazon EC2 Instances and Mount Targets</a> in the <i>Amazon EFS User Guide.</i> </p> </li> </ul>"
+      "documentation": "<p>The subnet and the security group that DataSync uses to access target EFS file system. The subnet must have at least one mount target for that file system. The security group that you provide needs to be able to communicate with the security group on the mount target in the subnet specified. </p>"
     },
     "Ec2SecurityGroupArn": {
       "type": "string",
@@ -1110,6 +1207,41 @@
       "type": "string",
       "max": 128,
       "pattern": "^arn:(aws|aws-cn):elasticfilesystem:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$"
+    },
+    "FilterList": {
+      "type": "list",
+      "member": {
+        "shape": "FilterRule"
+      },
+      "max": 1,
+      "min": 0
+    },
+    "FilterRule": {
+      "type": "structure",
+      "members": {
+        "FilterType": {
+          "shape": "FilterType",
+          "documentation": "<p/> <p>Specifies the type of filter rule pattern to apply. DataSync only supports the SIMPLE_PATTERN rule type.</p>"
+        },
+        "Value": {
+          "shape": "FilterValue",
+          "documentation": "<p/> <p>A pattern that defines the filter. The filter might include or exclude files is a transfer.</p>"
+        }
+      },
+      "documentation": "<p/> <p>A pattern that determines which files to include in the transfer or which files to exclude. </p>"
+    },
+    "FilterType": {
+      "type": "string",
+      "enum": [
+        "SIMPLE_PATTERN"
+      ],
+      "max": 128,
+      "pattern": "^[A-Z0-9_]+$"
+    },
+    "FilterValue": {
+      "type": "string",
+      "max": 409600,
+      "pattern": "^.+$"
     },
     "Gid": {
       "type": "string",
@@ -1327,6 +1459,30 @@
       "max": 93,
       "pattern": "[a-zA-Z0-9=_-]+"
     },
+    "NfsMountOptions": {
+      "type": "structure",
+      "members": {
+        "Version": {
+          "shape": "NfsVersion",
+          "documentation": "<p>The specific NFS version that you want DataSync to use to mount your NFS share. If you don't specify a version, DataSync defaults to <code>AUTOMATIC</code>. That is, DataSync automatically selects a version based on negotiation with the NFS server.</p>"
+        }
+      },
+      "documentation": "<p>Represents the mount options that are available for DataSync to access an NFS location.</p>"
+    },
+    "NfsVersion": {
+      "type": "string",
+      "enum": [
+        "AUTOMATIC",
+        "NFS3",
+        "NFS4_0",
+        "NFS4_1"
+      ]
+    },
+    "NonEmptySubdirectory": {
+      "type": "string",
+      "max": 4096,
+      "pattern": "^[a-zA-Z0-9_\\-\\./]+$"
+    },
     "OnPremConfig": {
       "type": "structure",
       "required": [
@@ -1428,7 +1584,7 @@
           "documentation": "<p>The Amazon S3 bucket to access. This bucket is used as a parameter in the <a>CreateLocationS3</a> operation. </p>"
         }
       },
-      "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that is used to access an Amazon S3 bucket. For detailed information about using such a role, see <a href=\"https://alpha-aws-docs.aws.amazon.com/sync-service/latest/userguide/create-locations-cli.html#create-location-s3-cli\">Components and Terminology</a> in the <i>AWS DataSync User Guide</i>.</p>"
+      "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that is used to access an Amazon S3 bucket.</p> <p>For detailed information about using such a role, see \"https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html#create-s3-location\" (Creating a Location for Amazon S3) in the <i>AWS DataSync User Guide</i>.</p>"
     },
     "ServerHostname": {
       "type": "string",
@@ -1447,6 +1603,10 @@
         },
         "OverrideOptions": {
           "shape": "Options"
+        },
+        "Includes": {
+          "shape": "FilterList",
+          "documentation": "<p/> <p>A filter that determines which files to include in the transfer during a task execution based on the specified pattern in the filter. When multiple include filters are set, they are interpreted as an OR.</p>"
         }
       },
       "documentation": "<p>StartTaskExecutionRequest</p>"
@@ -1464,13 +1624,13 @@
     "Subdirectory": {
       "type": "string",
       "max": 4096,
-      "pattern": "^[a-zA-Z0-9_\\-\\./]+$"
+      "pattern": "^[a-zA-Z0-9_\\-\\./]*$"
     },
     "TagKey": {
       "type": "string",
       "max": 256,
       "min": 1,
-      "pattern": "^[a-zA-Z0-9\\s+=._:/-]{1,128}$"
+      "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$"
     },
     "TagKeyList": {
       "type": "list",
@@ -1490,6 +1650,9 @@
     },
     "TagListEntry": {
       "type": "structure",
+      "required": [
+        "Key"
+      ],
       "members": {
         "Key": {
           "shape": "TagKey",
@@ -1528,7 +1691,7 @@
       "type": "string",
       "max": 256,
       "min": 1,
-      "pattern": "^[a-zA-Z0-9\\s+=._:/-]{1,256}$"
+      "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$"
     },
     "TaggableResourceArn": {
       "type": "string",
@@ -1715,9 +1878,17 @@
         "Options": {
           "shape": "Options"
         },
+        "Excludes": {
+          "shape": "FilterList",
+          "documentation": "<p/> <p>A filter that determines which files to exclude from a task based on the specified pattern in the filter. Transfers all files in the task’s subdirectory, except files that match the filter that is set. </p>"
+        },
         "Name": {
           "shape": "TagValue",
           "documentation": "<p>The name of the task to update.</p>"
+        },
+        "CloudWatchLogGroupArn": {
+          "shape": "LogGroupArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource name of the CloudWatch LogGroup.</p>"
         }
       },
       "documentation": "<p>UpdateTaskResponse</p>"

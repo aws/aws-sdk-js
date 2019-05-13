@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.453.0',
+	  VERSION: '2.454.0',
 
 	  /**
 	   * @api private
@@ -1085,6 +1085,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    } else {
 	      setTimeout(callback, 0);
 	    }
+	  },
+
+	  /**
+	   * @api private
+	   */
+	  getRequestPayloadShape: function getRequestPayloadShape(req) {
+	    var operations = req.service.api.operations;
+	    if (!operations) return undefined;
+	    var operation = (operations || {})[req.operation];
+	    if (!operation || !operation.input || !operation.input.payload) return undefined;
+	    return operation.input.members[operation.input.payload];
 	  },
 
 	  /**
@@ -2371,6 +2382,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  property(this, 'name', this.name || shape.xmlName || shape.queryName ||
 	    shape.locationName || memberName);
 	  property(this, 'isStreaming', shape.streaming || this.isStreaming || false);
+	  property(this, 'requiresLength', shape.requiresLength, false);
 	  property(this, 'isComposite', shape.isComposite || false);
 	  property(this, 'isShape', true, false);
 	  property(this, 'isQueryName', Boolean(shape.queryName), false);
@@ -6413,17 +6425,25 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    add('SET_CONTENT_LENGTH', 'afterBuild', function SET_CONTENT_LENGTH(req) {
 	      var authtype = getOperationAuthtype(req);
+	      var payloadMember = AWS.util.getRequestPayloadShape(req);
 	      if (req.httpRequest.headers['Content-Length'] === undefined) {
 	        try {
 	          var length = AWS.util.string.byteLength(req.httpRequest.body);
 	          req.httpRequest.headers['Content-Length'] = length;
 	        } catch (err) {
-	          if (authtype.indexOf('unsigned-body') === -1) {
-	            throw err;
-	          } else {
-	            // Body isn't signed and may not need content length (lex)
-	            return;
+	          if (payloadMember && payloadMember.isStreaming) {
+	            if (payloadMember.requiresLength) {
+	              //streaming payload requires length(s3, glacier)
+	              throw err;
+	            } else if (authtype.indexOf('unsigned-body') >= 0) {
+	              //unbounded streaming payload(lex, mediastore)
+	              req.httpRequest.headers['Transfer-Encoding'] = 'chunked';
+	              return;
+	            } else {
+	              throw err;
+	            }
 	          }
+	          throw err;
 	        }
 	      }
 	    });

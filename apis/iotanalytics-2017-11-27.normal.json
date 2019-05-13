@@ -1164,6 +1164,18 @@
         }
       }
     },
+    "BucketKeyExpression": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9!_.*'()/{}:-]*$"
+    },
+    "BucketName": {
+      "type": "string",
+      "max": 255,
+      "min": 3,
+      "pattern": "^[a-zA-Z0-9.\\-_]*$"
+    },
     "CancelPipelineReprocessingRequest": {
       "type": "structure",
       "required": [
@@ -1605,7 +1617,7 @@
           "documentation": "<p>The type of action by which the data set's contents are automatically created.</p>"
         }
       },
-      "documentation": "<p/>"
+      "documentation": "<p>Information about the action which automatically creates the data set's contents.</p>"
     },
     "DatasetActionType": {
       "type": "string",
@@ -1631,6 +1643,10 @@
         "iotEventsDestinationConfiguration": {
           "shape": "IotEventsDestinationConfiguration",
           "documentation": "<p>Configuration information for delivery of data set contents to AWS IoT Events.</p>"
+        },
+        "s3DestinationConfiguration": {
+          "shape": "S3DestinationConfiguration",
+          "documentation": "<p>Configuration information for delivery of data set contents to Amazon S3.</p>"
         }
       },
       "documentation": "<p>The destination to which data set contents are delivered.</p>"
@@ -2298,6 +2314,36 @@
           "documentation": "<p>The status of the data set content.</p>"
         }
       }
+    },
+    "GlueConfiguration": {
+      "type": "structure",
+      "required": [
+        "tableName",
+        "databaseName"
+      ],
+      "members": {
+        "tableName": {
+          "shape": "GlueTableName",
+          "documentation": "<p>The name of the table in your AWS Glue Data Catalog which is used to perform the ETL (extract, transform and load) operations. (An AWS Glue Data Catalog table contains partitioned data and descriptions of data sources and targets.)</p>"
+        },
+        "databaseName": {
+          "shape": "GlueDatabaseName",
+          "documentation": "<p>The name of the database in your AWS Glue Data Catalog in which the table is located. (An AWS Glue Data Catalog database contains Glue Data tables.)</p>"
+        }
+      },
+      "documentation": "<p>Configuration information for coordination with the AWS Glue ETL (extract, transform and load) service.</p>"
+    },
+    "GlueDatabaseName": {
+      "type": "string",
+      "max": 150,
+      "min": 1,
+      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
+    },
+    "GlueTableName": {
+      "type": "string",
+      "max": 150,
+      "min": 1,
+      "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
     },
     "Image": {
       "type": "string",
@@ -2993,6 +3039,33 @@
         }
       }
     },
+    "S3DestinationConfiguration": {
+      "type": "structure",
+      "required": [
+        "bucket",
+        "key",
+        "roleArn"
+      ],
+      "members": {
+        "bucket": {
+          "shape": "BucketName",
+          "documentation": "<p>The name of the Amazon S3 bucket to which data set contents are delivered.</p>"
+        },
+        "key": {
+          "shape": "BucketKeyExpression",
+          "documentation": "<p>The key of the data set contents object. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).</p>"
+        },
+        "glueConfiguration": {
+          "shape": "GlueConfiguration",
+          "documentation": "<p>Configuration information for coordination with the AWS Glue ETL (extract, transform and load) service.</p>"
+        },
+        "roleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 and AWS Glue resources.</p>"
+        }
+      },
+      "documentation": "<p>Configuration information for delivery of data set contents to Amazon S3.</p>"
+    },
     "SampleChannelDataRequest": {
       "type": "structure",
       "required": [
@@ -3392,7 +3465,8 @@
           "shape": "MaxVersions",
           "documentation": "<p>How many versions of data set contents will be kept. The \"unlimited\" parameter must be false.</p>"
         }
-      }
+      },
+      "documentation": "<p>Information about the versioning of data set contents.</p>"
     },
     "VolumeSizeInGB": {
       "type": "integer",
