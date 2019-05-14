@@ -36,11 +36,11 @@ declare class Chime extends Service {
    */
   batchDeletePhoneNumber(callback?: (err: AWSError, data: Chime.Types.BatchDeletePhoneNumberResponse) => void): Request<Chime.Types.BatchDeletePhoneNumberResponse, AWSError>;
   /**
-   * Suspends up to 50 users from a Team or EnterpriseLWA Amazon Chime account. For more information about different account types, see Managing Your Amazon Chime Accounts in the Amazon Chime Administration Guide. Users suspended from a Team account are dissociated from the account, but they can continue to use Amazon Chime as free users. To remove the suspension from suspended Team account users, invite them to the Team account again. You can use the InviteUsers action to do so. Users suspended from an EnterpriseLWA account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended EnterpriseLWA account users, use the BatchUnsuspendUser action.  To sign out users without suspending them, use the LogoutUser action.
+   * Suspends up to 50 users from a Team or EnterpriseLWA Amazon Chime account. For more information about different account types, see Managing Your Amazon Chime Accounts in the Amazon Chime Administration Guide. Users suspended from a Team account are dissasociated from the account, but they can continue to use Amazon Chime as free users. To remove the suspension from suspended Team account users, invite them to the Team account again. You can use the InviteUsers action to do so. Users suspended from an EnterpriseLWA account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended EnterpriseLWA account users, use the BatchUnsuspendUser action.  To sign out users without suspending them, use the LogoutUser action.
    */
   batchSuspendUser(params: Chime.Types.BatchSuspendUserRequest, callback?: (err: AWSError, data: Chime.Types.BatchSuspendUserResponse) => void): Request<Chime.Types.BatchSuspendUserResponse, AWSError>;
   /**
-   * Suspends up to 50 users from a Team or EnterpriseLWA Amazon Chime account. For more information about different account types, see Managing Your Amazon Chime Accounts in the Amazon Chime Administration Guide. Users suspended from a Team account are dissociated from the account, but they can continue to use Amazon Chime as free users. To remove the suspension from suspended Team account users, invite them to the Team account again. You can use the InviteUsers action to do so. Users suspended from an EnterpriseLWA account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended EnterpriseLWA account users, use the BatchUnsuspendUser action.  To sign out users without suspending them, use the LogoutUser action.
+   * Suspends up to 50 users from a Team or EnterpriseLWA Amazon Chime account. For more information about different account types, see Managing Your Amazon Chime Accounts in the Amazon Chime Administration Guide. Users suspended from a Team account are dissasociated from the account, but they can continue to use Amazon Chime as free users. To remove the suspension from suspended Team account users, invite them to the Team account again. You can use the InviteUsers action to do so. Users suspended from an EnterpriseLWA account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended EnterpriseLWA account users, use the BatchUnsuspendUser action.  To sign out users without suspending them, use the LogoutUser action.
    */
   batchSuspendUser(callback?: (err: AWSError, data: Chime.Types.BatchSuspendUserResponse) => void): Request<Chime.Types.BatchSuspendUserResponse, AWSError>;
   /**
@@ -76,6 +76,14 @@ declare class Chime extends Service {
    */
   createAccount(callback?: (err: AWSError, data: Chime.Types.CreateAccountResponse) => void): Request<Chime.Types.CreateAccountResponse, AWSError>;
   /**
+   * Creates a bot for an Amazon Chime Enterprise account.
+   */
+  createBot(params: Chime.Types.CreateBotRequest, callback?: (err: AWSError, data: Chime.Types.CreateBotResponse) => void): Request<Chime.Types.CreateBotResponse, AWSError>;
+  /**
+   * Creates a bot for an Amazon Chime Enterprise account.
+   */
+  createBot(callback?: (err: AWSError, data: Chime.Types.CreateBotResponse) => void): Request<Chime.Types.CreateBotResponse, AWSError>;
+  /**
    * Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types.
    */
   createPhoneNumberOrder(params: Chime.Types.CreatePhoneNumberOrderRequest, callback?: (err: AWSError, data: Chime.Types.CreatePhoneNumberOrderResponse) => void): Request<Chime.Types.CreatePhoneNumberOrderResponse, AWSError>;
@@ -99,6 +107,14 @@ declare class Chime extends Service {
    * Deletes the specified Amazon Chime account. You must suspend all users before deleting a Team account. You can use the BatchSuspendUser action to do so. For EnterpriseLWA and EnterpriseAD accounts, you must release the claimed domains for your Amazon Chime account before deletion. As soon as you release the domain, all users under that account are suspended. Deleted accounts appear in your Disabled accounts list for 90 days. To restore a deleted account from your Disabled accounts list, you must contact AWS Support. After 90 days, deleted accounts are permanently removed from your Disabled accounts list.
    */
   deleteAccount(callback?: (err: AWSError, data: Chime.Types.DeleteAccountResponse) => void): Request<Chime.Types.DeleteAccountResponse, AWSError>;
+  /**
+   * Deletes the events configuration that allows a bot to receive outgoing events.
+   */
+  deleteEventsConfiguration(params: Chime.Types.DeleteEventsConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the events configuration that allows a bot to receive outgoing events.
+   */
+  deleteEventsConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Moves the specified phone number into the Deletion queue. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted. Deleted phone numbers remain in the Deletion queue for 7 days before they are deleted permanently.
    */
@@ -171,6 +187,22 @@ declare class Chime extends Service {
    * Retrieves account settings for the specified Amazon Chime account ID, such as remote control and dial out settings. For more information about these settings, see Use the Policies Page in the Amazon Chime Administration Guide.
    */
   getAccountSettings(callback?: (err: AWSError, data: Chime.Types.GetAccountSettingsResponse) => void): Request<Chime.Types.GetAccountSettingsResponse, AWSError>;
+  /**
+   * Retrieves details for the specified bot, such as bot email address, bot type, status, and display name.
+   */
+  getBot(params: Chime.Types.GetBotRequest, callback?: (err: AWSError, data: Chime.Types.GetBotResponse) => void): Request<Chime.Types.GetBotResponse, AWSError>;
+  /**
+   * Retrieves details for the specified bot, such as bot email address, bot type, status, and display name.
+   */
+  getBot(callback?: (err: AWSError, data: Chime.Types.GetBotResponse) => void): Request<Chime.Types.GetBotResponse, AWSError>;
+  /**
+   * Gets details for an events configuration that allows a bot to receive outgoing events, such as an HTTPS endpoint or Lambda function ARN. 
+   */
+  getEventsConfiguration(params: Chime.Types.GetEventsConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.GetEventsConfigurationResponse) => void): Request<Chime.Types.GetEventsConfigurationResponse, AWSError>;
+  /**
+   * Gets details for an events configuration that allows a bot to receive outgoing events, such as an HTTPS endpoint or Lambda function ARN. 
+   */
+  getEventsConfiguration(callback?: (err: AWSError, data: Chime.Types.GetEventsConfigurationResponse) => void): Request<Chime.Types.GetEventsConfigurationResponse, AWSError>;
   /**
    * Retrieves global settings for the administrator's AWS account, such as Amazon Chime Business Calling and Amazon Chime Voice Connector settings.
    */
@@ -256,6 +288,14 @@ declare class Chime extends Service {
    */
   listAccounts(callback?: (err: AWSError, data: Chime.Types.ListAccountsResponse) => void): Request<Chime.Types.ListAccountsResponse, AWSError>;
   /**
+   * Lists the bots associated with the administrator's Amazon Chime Enterprise account ID.
+   */
+  listBots(params: Chime.Types.ListBotsRequest, callback?: (err: AWSError, data: Chime.Types.ListBotsResponse) => void): Request<Chime.Types.ListBotsResponse, AWSError>;
+  /**
+   * Lists the bots associated with the administrator's Amazon Chime Enterprise account ID.
+   */
+  listBots(callback?: (err: AWSError, data: Chime.Types.ListBotsResponse) => void): Request<Chime.Types.ListBotsResponse, AWSError>;
+  /**
    * Lists the phone number orders for the administrator's Amazon Chime account.
    */
   listPhoneNumberOrders(params: Chime.Types.ListPhoneNumberOrdersRequest, callback?: (err: AWSError, data: Chime.Types.ListPhoneNumberOrdersResponse) => void): Request<Chime.Types.ListPhoneNumberOrdersResponse, AWSError>;
@@ -304,6 +344,14 @@ declare class Chime extends Service {
    */
   logoutUser(callback?: (err: AWSError, data: Chime.Types.LogoutUserResponse) => void): Request<Chime.Types.LogoutUserResponse, AWSError>;
   /**
+   * Creates an events configuration that allows a bot to receive outgoing events sent by Amazon Chime. Choose either an HTTPS endpoint or a Lambda function ARN. For more information, see Bot.
+   */
+  putEventsConfiguration(params: Chime.Types.PutEventsConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.PutEventsConfigurationResponse) => void): Request<Chime.Types.PutEventsConfigurationResponse, AWSError>;
+  /**
+   * Creates an events configuration that allows a bot to receive outgoing events sent by Amazon Chime. Choose either an HTTPS endpoint or a Lambda function ARN. For more information, see Bot.
+   */
+  putEventsConfiguration(callback?: (err: AWSError, data: Chime.Types.PutEventsConfigurationResponse) => void): Request<Chime.Types.PutEventsConfigurationResponse, AWSError>;
+  /**
    * Adds origination settings for the specified Amazon Chime Voice Connector.
    */
   putVoiceConnectorOrigination(params: Chime.Types.PutVoiceConnectorOriginationRequest, callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorOriginationResponse) => void): Request<Chime.Types.PutVoiceConnectorOriginationResponse, AWSError>;
@@ -327,6 +375,14 @@ declare class Chime extends Service {
    * Adds termination SIP credentials for the specified Amazon Chime Voice Connector.
    */
   putVoiceConnectorTerminationCredentials(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Regenerates the security token for a bot.
+   */
+  regenerateSecurityToken(params: Chime.Types.RegenerateSecurityTokenRequest, callback?: (err: AWSError, data: Chime.Types.RegenerateSecurityTokenResponse) => void): Request<Chime.Types.RegenerateSecurityTokenResponse, AWSError>;
+  /**
+   * Regenerates the security token for a bot.
+   */
+  regenerateSecurityToken(callback?: (err: AWSError, data: Chime.Types.RegenerateSecurityTokenResponse) => void): Request<Chime.Types.RegenerateSecurityTokenResponse, AWSError>;
   /**
    * Resets the personal meeting PIN for the specified user on an Amazon Chime account. Returns the User object with the updated personal meeting PIN.
    */
@@ -367,6 +423,14 @@ declare class Chime extends Service {
    * Updates the settings for the specified Amazon Chime account. You can update settings for remote control of shared screens, or for the dial-out option. For more information about these settings, see Use the Policies Page in the Amazon Chime Administration Guide.
    */
   updateAccountSettings(callback?: (err: AWSError, data: Chime.Types.UpdateAccountSettingsResponse) => void): Request<Chime.Types.UpdateAccountSettingsResponse, AWSError>;
+  /**
+   * Updates the status of the specified bot, such as starting or stopping the bot from running in your Amazon Chime Enterprise account.
+   */
+  updateBot(params: Chime.Types.UpdateBotRequest, callback?: (err: AWSError, data: Chime.Types.UpdateBotResponse) => void): Request<Chime.Types.UpdateBotResponse, AWSError>;
+  /**
+   * Updates the status of the specified bot, such as starting or stopping the bot from running in your Amazon Chime Enterprise account.
+   */
+  updateBot(callback?: (err: AWSError, data: Chime.Types.UpdateBotResponse) => void): Request<Chime.Types.UpdateBotResponse, AWSError>;
   /**
    * Updates global settings for the administrator's AWS account, such as Amazon Chime Business Calling and Amazon Chime Voice Connector settings.
    */
@@ -557,6 +621,46 @@ declare namespace Chime {
     UserErrors?: UserErrorList;
   }
   export type Boolean = boolean;
+  export interface Bot {
+    /**
+     * The bot ID.
+     */
+    BotId?: String;
+    /**
+     * The unique ID for the bot user.
+     */
+    UserId?: String;
+    /**
+     * The bot display name.
+     */
+    DisplayName?: SensitiveString;
+    /**
+     * The bot type.
+     */
+    BotType?: BotType;
+    /**
+     * When true, the bot is stopped from running in your account.
+     */
+    Disabled?: NullableBoolean;
+    /**
+     * The bot creation timestamp, in ISO 8601 format.
+     */
+    CreatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The updated bot timestamp, in ISO 8601 format.
+     */
+    UpdatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The bot email address.
+     */
+    BotEmail?: SensitiveString;
+    /**
+     * The security token used to authenticate Amazon Chime with the outgoing event endpoint.
+     */
+    SecurityToken?: SensitiveString;
+  }
+  export type BotList = Bot[];
+  export type BotType = "ChatBot"|string;
   export interface BusinessCallingSettings {
     /**
      * The Amazon S3 bucket designated for call detail record storage.
@@ -577,6 +681,26 @@ declare namespace Chime {
      * The Amazon Chime account details.
      */
     Account?: Account;
+  }
+  export interface CreateBotRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The bot display name.
+     */
+    DisplayName: SensitiveString;
+    /**
+     * The domain of the Amazon Chime Enterprise account.
+     */
+    Domain?: NonEmptyString;
+  }
+  export interface CreateBotResponse {
+    /**
+     * The bot details.
+     */
+    Bot?: Bot;
   }
   export interface CreatePhoneNumberOrderRequest {
     /**
@@ -628,6 +752,16 @@ declare namespace Chime {
     AccountId: NonEmptyString;
   }
   export interface DeleteAccountResponse {
+  }
+  export interface DeleteEventsConfigurationRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The bot ID.
+     */
+    BotId: NonEmptyString;
   }
   export interface DeletePhoneNumberRequest {
     /**
@@ -696,6 +830,20 @@ declare namespace Chime {
   export type EmailAddress = string;
   export type EmailStatus = "NotSent"|"Sent"|"Failed"|string;
   export type ErrorCode = "Unauthorized"|"Forbidden"|"NotFound"|"BadRequest"|"Conflict"|"ServiceFailure"|"ServiceUnavailable"|"Unprocessable"|"Throttled"|"PreconditionFailed"|string;
+  export interface EventsConfiguration {
+    /**
+     * The bot ID.
+     */
+    BotId?: String;
+    /**
+     * HTTPS endpoint that allows a bot to receive outgoing events.
+     */
+    OutboundEventsHTTPSEndpoint?: SensitiveString;
+    /**
+     * Lambda function ARN that allows a bot to receive outgoing events.
+     */
+    LambdaFunctionArn?: SensitiveString;
+  }
   export interface GetAccountRequest {
     /**
      * The Amazon Chime account ID.
@@ -719,6 +867,38 @@ declare namespace Chime {
      * The Amazon Chime account settings.
      */
     AccountSettings?: AccountSettings;
+  }
+  export interface GetBotRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The bot ID.
+     */
+    BotId: NonEmptyString;
+  }
+  export interface GetBotResponse {
+    /**
+     * The chat bot details.
+     */
+    Bot?: Bot;
+  }
+  export interface GetEventsConfigurationRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The bot ID.
+     */
+    BotId: NonEmptyString;
+  }
+  export interface GetEventsConfigurationResponse {
+    /**
+     * The events configuration details.
+     */
+    EventsConfiguration?: EventsConfiguration;
   }
   export interface GetGlobalSettingsResponse {
     /**
@@ -897,6 +1077,30 @@ declare namespace Chime {
      * List of Amazon Chime accounts and account details.
      */
     Accounts?: AccountList;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface ListBotsRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The maximum number of results to return in a single call. Default is 10.
+     */
+    MaxResults?: ResultMax;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface ListBotsResponse {
+    /**
+     * List of bots and bot details.
+     */
+    Bots?: BotList;
     /**
      * The token to use to retrieve the next page of results.
      */
@@ -1210,6 +1414,27 @@ declare namespace Chime {
   export type PhoneNumberStatus = "AcquireInProgress"|"AcquireFailed"|"Unassigned"|"Assigned"|"ReleaseInProgress"|"DeleteInProgress"|"ReleaseFailed"|"DeleteFailed"|string;
   export type Port = number;
   export type ProfileServiceMaxResults = number;
+  export interface PutEventsConfigurationRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The bot ID.
+     */
+    BotId: NonEmptyString;
+    /**
+     * HTTPS endpoint that allows the bot to receive outgoing events.
+     */
+    OutboundEventsHTTPSEndpoint?: SensitiveString;
+    /**
+     * Lambda function ARN that allows the bot to receive outgoing events.
+     */
+    LambdaFunctionArn?: SensitiveString;
+  }
+  export interface PutEventsConfigurationResponse {
+    EventsConfiguration?: EventsConfiguration;
+  }
   export interface PutVoiceConnectorOriginationRequest {
     /**
      * The Amazon Chime Voice Connector ID.
@@ -1251,6 +1476,19 @@ declare namespace Chime {
      * The updated termination setting details.
      */
     Termination?: Termination;
+  }
+  export interface RegenerateSecurityTokenRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The bot ID.
+     */
+    BotId: NonEmptyString;
+  }
+  export interface RegenerateSecurityTokenResponse {
+    Bot?: Bot;
   }
   export type RegistrationStatus = "Unregistered"|"Registered"|"Suspended"|string;
   export interface ResetPersonalPINRequest {
@@ -1391,6 +1629,26 @@ declare namespace Chime {
     AccountSettings: AccountSettings;
   }
   export interface UpdateAccountSettingsResponse {
+  }
+  export interface UpdateBotRequest {
+    /**
+     * The Amazon Chime account ID.
+     */
+    AccountId: NonEmptyString;
+    /**
+     * The bot ID.
+     */
+    BotId: NonEmptyString;
+    /**
+     * When true, stops the specified bot from running in your account.
+     */
+    Disabled?: NullableBoolean;
+  }
+  export interface UpdateBotResponse {
+    /**
+     * The updated bot details.
+     */
+    Bot?: Bot;
   }
   export interface UpdateGlobalSettingsRequest {
     /**

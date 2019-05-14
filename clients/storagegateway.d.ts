@@ -964,7 +964,7 @@ declare namespace StorageGateway {
      */
     RequesterPays?: Boolean;
     /**
-     * Set this value to "true to enable ACL (access control list) on the SMB file share. Set it to "false" to map file and directory permissions to the POSIX permissions.
+     * Set this value to "true to enable ACL (access control list) on the SMB file share. Set it to "false" to map file and directory permissions to the POSIX permissions. For more information, see https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html in the Storage Gateway User Guide.
      */
     SMBACLEnabled?: Boolean;
     /**
@@ -1027,6 +1027,10 @@ declare namespace StorageGateway {
      * Textual description of the snapshot that appears in the Amazon EC2 console, Elastic Block Store snapshots panel in the Description field, and in the AWS Storage Gateway snapshot Details pane, Description field
      */
     SnapshotDescription: SnapshotDescription;
+    /**
+     * A list of up to 50 tags that can be assigned to a snapshot. Each tag is a key-value pair.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256. 
+     */
+    Tags?: Tags;
   }
   export interface CreateSnapshotOutput {
     /**
@@ -2161,7 +2165,7 @@ declare namespace StorageGateway {
      */
     RequesterPays?: Boolean;
     /**
-     * If this value is set to "true", indicates that ACL (access control list) is enabled on the SMB file share. If it is set to "false", it indicates that file and directory permissions are mapped to the POSIX permission.
+     * If this value is set to "true", indicates that ACL (access control list) is enabled on the SMB file share. If it is set to "false", it indicates that file and directory permissions are mapped to the POSIX permission. For more information, see https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html in the Storage Gateway User Guide.
      */
     SMBACLEnabled?: Boolean;
     /**
@@ -2607,7 +2611,7 @@ declare namespace StorageGateway {
      */
     RequesterPays?: Boolean;
     /**
-     * Set this value to "true to enable ACL (access control list) on the SMB file share. Set it to "false" to map file and directory permissions to the POSIX permissions.
+     * Set this value to "true to enable ACL (access control list) on the SMB file share. Set it to "false" to map file and directory permissions to the POSIX permissions. For more information, see https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.htmlin the Storage Gateway User Guide.
      */
     SMBACLEnabled?: Boolean;
     /**
@@ -2646,6 +2650,10 @@ declare namespace StorageGateway {
      * Optional description of the snapshot that overwrites the existing description.
      */
     Description?: Description;
+    /**
+     * A list of up to 50 tags that can be assigned to a snapshot. Each tag is a key-value pair.  Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256. 
+     */
+    Tags?: Tags;
   }
   export interface UpdateSnapshotScheduleOutput {
     /**

@@ -2165,7 +2165,7 @@
         },
         "SMBACLEnabled": {
           "shape": "Boolean",
-          "documentation": "<p>Set this value to \"true to enable ACL (access control list) on the SMB file share. Set it to \"false\" to map file and directory permissions to the POSIX permissions.</p>"
+          "documentation": "<p>Set this value to \"true to enable ACL (access control list) on the SMB file share. Set it to \"false\" to map file and directory permissions to the POSIX permissions.</p> <p>For more information, see https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html in the Storage Gateway User Guide.</p>"
         },
         "AdminUserList": {
           "shape": "FileShareUserList",
@@ -2248,6 +2248,10 @@
         "SnapshotDescription": {
           "shape": "SnapshotDescription",
           "documentation": "<p>Textual description of the snapshot that appears in the Amazon EC2 console, Elastic Block Store snapshots panel in the <b>Description</b> field, and in the AWS Storage Gateway snapshot <b>Details</b> pane, <b>Description</b> field</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>A list of up to 50 tags that can be assigned to a snapshot. Each tag is a key-value pair.</p> <note> <p>Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256.</p> </note>"
         }
       },
       "documentation": "<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>CreateSnapshotInput$SnapshotDescription</a> </p> </li> <li> <p> <a>CreateSnapshotInput$VolumeARN</a> </p> </li> </ul>"
@@ -4346,7 +4350,7 @@
         },
         "SMBACLEnabled": {
           "shape": "Boolean",
-          "documentation": "<p>If this value is set to \"true\", indicates that ACL (access control list) is enabled on the SMB file share. If it is set to \"false\", it indicates that file and directory permissions are mapped to the POSIX permission.</p>"
+          "documentation": "<p>If this value is set to \"true\", indicates that ACL (access control list) is enabled on the SMB file share. If it is set to \"false\", it indicates that file and directory permissions are mapped to the POSIX permission.</p> <p>For more information, see https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html in the Storage Gateway User Guide.</p>"
         },
         "AdminUserList": {
           "shape": "FileShareUserList",
@@ -5098,7 +5102,7 @@
         },
         "SMBACLEnabled": {
           "shape": "Boolean",
-          "documentation": "<p>Set this value to \"true to enable ACL (access control list) on the SMB file share. Set it to \"false\" to map file and directory permissions to the POSIX permissions.</p>"
+          "documentation": "<p>Set this value to \"true to enable ACL (access control list) on the SMB file share. Set it to \"false\" to map file and directory permissions to the POSIX permissions.</p> <p>For more information, see https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.htmlin the Storage Gateway User Guide.</p>"
         },
         "AdminUserList": {
           "shape": "FileShareUserList",
@@ -5148,6 +5152,10 @@
         "Description": {
           "shape": "Description",
           "documentation": "<p>Optional description of the snapshot that overwrites the existing description.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>A list of up to 50 tags that can be assigned to a snapshot. Each tag is a key-value pair.</p> <note> <p>Valid characters for key and value are letters, spaces, and numbers representable in UTF-8 format, and the following special characters: + - = . _ : / @. The maximum length of a tag's key is 128 characters, and the maximum length for a tag's value is 256.</p> </note>"
         }
       },
       "documentation": "<p>A JSON object containing one or more of the following fields:</p> <ul> <li> <p> <a>UpdateSnapshotScheduleInput$Description</a> </p> </li> <li> <p> <a>UpdateSnapshotScheduleInput$RecurrenceInHours</a> </p> </li> <li> <p> <a>UpdateSnapshotScheduleInput$StartAt</a> </p> </li> <li> <p> <a>UpdateSnapshotScheduleInput$VolumeARN</a> </p> </li> </ul>"

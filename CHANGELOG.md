@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.454.0-->
+<!--LATEST=2.455.0-->
 <!--ENTRYINSERT-->
+
+## 2.455.0
+* feature: Chime: Amazon Chime private bots GA release.
+* feature: Comprehend: With this release AWS Comprehend now supports Virtual Private Cloud for Asynchronous Batch Processing jobs
+* feature: EC2: Pagination support for ec2.DescribeSubnets, ec2.DescribeDhcpOptions 
+* feature: StorageGateway: Add Tags parameter to CreateSnapshot and UpdateSnapshotSchedule APIs, used for creating tags on create for one off snapshots and scheduled snapshots.
 
 ## 2.454.0
 * feature: DataSync: AWS DataSync now enables exclude and include filters to control what files and directories will be copied as part of a task execution.
