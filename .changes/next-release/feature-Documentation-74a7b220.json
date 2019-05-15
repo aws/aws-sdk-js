@@ -1,5 +1,5 @@
 {
   "type": "feature",
   "category": "Documentation",
-  "description": "Added an example for the documentation of image_id filters for 'imageExists' waiter and also added steps to generate documentation changes in CONTRIBUTION.md"
+  "description": "Added steps to generate documentation changes in CONTRIBUTION.md"
 }
