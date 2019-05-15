@@ -164,6 +164,14 @@ declare class CodePipeline extends Service {
    */
   listPipelines(callback?: (err: AWSError, data: CodePipeline.Types.ListPipelinesOutput) => void): Request<CodePipeline.Types.ListPipelinesOutput, AWSError>;
   /**
+   * Gets the set of key/value pairs (metadata) that are used to manage the resource.
+   */
+  listTagsForResource(params: CodePipeline.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: CodePipeline.Types.ListTagsForResourceOutput) => void): Request<CodePipeline.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   * Gets the set of key/value pairs (metadata) that are used to manage the resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: CodePipeline.Types.ListTagsForResourceOutput) => void): Request<CodePipeline.Types.ListTagsForResourceOutput, AWSError>;
+  /**
    * Gets a listing of all the webhooks in this region for this account. The output lists all webhooks and includes the webhook URL and ARN, as well the configuration for each webhook.
    */
   listWebhooks(params: CodePipeline.Types.ListWebhooksInput, callback?: (err: AWSError, data: CodePipeline.Types.ListWebhooksOutput) => void): Request<CodePipeline.Types.ListWebhooksOutput, AWSError>;
@@ -267,6 +275,22 @@ declare class CodePipeline extends Service {
    * Starts the specified pipeline. Specifically, it begins processing the latest commit to the source location specified as part of the pipeline.
    */
   startPipelineExecution(callback?: (err: AWSError, data: CodePipeline.Types.StartPipelineExecutionOutput) => void): Request<CodePipeline.Types.StartPipelineExecutionOutput, AWSError>;
+  /**
+   * Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource. 
+   */
+  tagResource(params: CodePipeline.Types.TagResourceInput, callback?: (err: AWSError, data: CodePipeline.Types.TagResourceOutput) => void): Request<CodePipeline.Types.TagResourceOutput, AWSError>;
+  /**
+   * Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource. 
+   */
+  tagResource(callback?: (err: AWSError, data: CodePipeline.Types.TagResourceOutput) => void): Request<CodePipeline.Types.TagResourceOutput, AWSError>;
+  /**
+   * Removes tags from an AWS resource.
+   */
+  untagResource(params: CodePipeline.Types.UntagResourceInput, callback?: (err: AWSError, data: CodePipeline.Types.UntagResourceOutput) => void): Request<CodePipeline.Types.UntagResourceOutput, AWSError>;
+  /**
+   * Removes tags from an AWS resource.
+   */
+  untagResource(callback?: (err: AWSError, data: CodePipeline.Types.UntagResourceOutput) => void): Request<CodePipeline.Types.UntagResourceOutput, AWSError>;
   /**
    * Updates a specified pipeline with edits or changes to its structure. Use a JSON file with the pipeline structure in conjunction with UpdatePipeline to provide the full structure of the pipeline. Updating the pipeline increases the version number of the pipeline by 1.
    */
@@ -802,24 +826,40 @@ declare namespace CodePipeline {
      * The details of the output artifact of the action, such as its commit ID.
      */
     outputArtifactDetails: ArtifactDetails;
+    /**
+     * The tags for the custom action.
+     */
+    tags?: TagList;
   }
   export interface CreateCustomActionTypeOutput {
     /**
      * Returns information about the details of an action type.
      */
     actionType: ActionType;
+    /**
+     * Specifies the tags applied to the custom action.
+     */
+    tags?: TagList;
   }
   export interface CreatePipelineInput {
     /**
      * Represents the structure of actions and stages to be performed in the pipeline. 
      */
     pipeline: PipelineDeclaration;
+    /**
+     * The tags for the pipeline.
+     */
+    tags?: TagList;
   }
   export interface CreatePipelineOutput {
     /**
      * Represents the structure of actions and stages to be performed in the pipeline. 
      */
     pipeline?: PipelineDeclaration;
+    /**
+     * Specifies the tags applied to the pipeline.
+     */
+    tags?: TagList;
   }
   export interface CurrentRevision {
     /**
@@ -1225,6 +1265,30 @@ declare namespace CodePipeline {
      */
     nextToken?: NextToken;
   }
+  export interface ListTagsForResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource to get tags for.
+     */
+    resourceArn: ResourceArn;
+    /**
+     * The token that was returned from the previous API call, which would be used to return the next page of the list. However, the ListTagsforResource call lists all available tags in one call and does not use pagination.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return in a single call.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListTagsForResourceOutput {
+    /**
+     * The tags for the resource.
+     */
+    tags?: TagList;
+    /**
+     * If the amount of returned information is significantly large, an identifier is also returned and can be used in a subsequent API call to return the next page of the list. However, the ListTagsforResource call lists all available tags in one call and does not use pagination.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListWebhookItem {
     /**
      * The detail returned for each webhook, such as the webhook authentication type and filter rules.
@@ -1250,6 +1314,10 @@ declare namespace CodePipeline {
      * The Amazon Resource Name (ARN) of the webhook.
      */
     arn?: WebhookArn;
+    /**
+     * Specifies the tags applied to the webhook.
+     */
+    tags?: TagList;
   }
   export interface ListWebhooksInput {
     /**
@@ -1580,6 +1648,10 @@ declare namespace CodePipeline {
      * The detail provided in an input file to create the webhook, such as the webhook name, the pipeline name, and the action name. Give the webhook a unique name which identifies the webhook being defined. You may choose to name the webhook after the pipeline and action it targets so that you can easily recognize what it's used for later.
      */
     webhook: WebhookDefinition;
+    /**
+     * The tags for the webhook.
+     */
+    tags?: TagList;
   }
   export interface PutWebhookOutput {
     /**
@@ -1596,6 +1668,7 @@ declare namespace CodePipeline {
   }
   export interface RegisterWebhookWithThirdPartyOutput {
   }
+  export type ResourceArn = string;
   export interface RetryStageExecutionInput {
     /**
      * The name of the pipeline that contains the failed stage.
@@ -1740,6 +1813,32 @@ declare namespace CodePipeline {
      */
     pipelineExecutionId?: PipelineExecutionId;
   }
+  export interface Tag {
+    /**
+     * The tag's key.
+     */
+    key: TagKey;
+    /**
+     * The tag's value.
+     */
+    value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource you want to add tags to.
+     */
+    resourceArn: ResourceArn;
+    /**
+     * The tags you want to modify or add to the resource.
+     */
+    tags: TagList;
+  }
+  export interface TagResourceOutput {
+  }
+  export type TagValue = string;
   export interface ThirdPartyJob {
     /**
      * The clientToken portion of the clientId and clientToken pair used to verify that the calling entity is allowed access to the job and its details.
@@ -1819,6 +1918,18 @@ declare namespace CodePipeline {
      * The user-specified reason why the transition between two stages of a pipeline was disabled.
      */
     disabledReason?: DisabledReason;
+  }
+  export interface UntagResourceInput {
+    /**
+     *  The Amazon Resource Name (ARN) of the resource to remove tags from.
+     */
+    resourceArn: ResourceArn;
+    /**
+     * The list of keys for the tags to be removed from the resource.
+     */
+    tagKeys: TagKeyList;
+  }
+  export interface UntagResourceOutput {
   }
   export interface UpdatePipelineInput {
     /**

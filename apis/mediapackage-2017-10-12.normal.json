@@ -849,7 +849,7 @@
           "shape": "__integer"
         },
         "SegmentTemplateFormat": {
-          "documentation": "Determines the type of SegmentTimeline included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs.",
+          "documentation": "Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.",
           "locationName": "segmentTemplateFormat",
           "shape": "SegmentTemplateFormat"
         },
@@ -1569,7 +1569,8 @@
     "SegmentTemplateFormat": {
       "enum": [
         "NUMBER_WITH_TIMELINE",
-        "TIME_WITH_TIMELINE"
+        "TIME_WITH_TIMELINE",
+        "NUMBER_WITH_DURATION"
       ],
       "type": "string"
     },

@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "CodePipeline",
+        "description": "This feature includes new APIs to add, edit, remove and view tags for pipeline, custom action type and webhook resources. You can also add tags while creating these resources."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Adding tagging support for VPC Endpoints and VPC Endpoint Services."
+    },
+    {
+        "type": "feature",
+        "category": "MediaPackage",
+        "description": "Adds optional configuration for DASH SegmentTemplateFormat to refer to segments by Number with Duration, rather than Number or Time with SegmentTimeline."
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "Amazon Transcribe - support transcriptions from audio sources in Indian English (en-IN) and Hindi (hi-IN)."
+    }
+]

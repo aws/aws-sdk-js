@@ -6873,6 +6873,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export type DescribeCapacityReservationsMaxResults = number;
   export interface DescribeCapacityReservationsRequest {
     /**
      * The ID of the Capacity Reservation.
@@ -6885,7 +6886,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value.
      */
-    MaxResults?: Integer;
+    MaxResults?: DescribeCapacityReservationsMaxResults;
     /**
      * One or more filters.
      */
@@ -7199,6 +7200,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export type DescribeElasticGpusMaxResults = number;
   export interface DescribeElasticGpusRequest {
     /**
      * The Elastic Graphics accelerator IDs.
@@ -7215,7 +7217,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. This value can be between 5 and 1000.
      */
-    MaxResults?: Integer;
+    MaxResults?: DescribeElasticGpusMaxResults;
     /**
      * The token to request the next page of results.
      */
@@ -7964,6 +7966,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export type DescribeLaunchTemplatesMaxResults = number;
   export interface DescribeLaunchTemplatesRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -7988,7 +7991,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. This value can be between 1 and 200.
      */
-    MaxResults?: Integer;
+    MaxResults?: DescribeLaunchTemplatesMaxResults;
   }
   export interface DescribeLaunchTemplatesResult {
     /**
@@ -8129,6 +8132,7 @@ declare namespace EC2 {
      */
     SourceDestCheck?: AttributeBooleanValue;
   }
+  export type DescribeNetworkInterfacePermissionsMaxResults = number;
   export interface DescribeNetworkInterfacePermissionsRequest {
     /**
      * One or more network interface permission IDs.
@@ -8145,7 +8149,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. If this parameter is not specified, up to 50 results are returned by default.
      */
-    MaxResults?: Integer;
+    MaxResults?: DescribeNetworkInterfacePermissionsMaxResults;
   }
   export interface DescribeNetworkInterfacePermissionsResult {
     /**
@@ -8157,6 +8161,7 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export type DescribeNetworkInterfacesMaxResults = number;
   export interface DescribeNetworkInterfacesRequest {
     /**
      * One or more filters.    addresses.private-ip-address - The private IPv4 addresses associated with the network interface.    addresses.primary - Whether the private IPv4 address is the primary IP address associated with the network interface.     addresses.association.public-ip - The association ID returned when the network interface was associated with the Elastic IP address (IPv4).    addresses.association.owner-id - The owner ID of the addresses associated with the network interface.    association.association-id - The association ID returned when the network interface was associated with an IPv4 address.    association.allocation-id - The allocation ID returned when you allocated the Elastic IP address (IPv4) for your network interface.    association.ip-owner-id - The owner of the Elastic IP address (IPv4) associated with the network interface.    association.public-ip - The address of the Elastic IP address (IPv4) bound to the network interface.    association.public-dns-name - The public DNS name for the network interface (IPv4).    attachment.attachment-id - The ID of the interface attachment.    attachment.attach.time - The time that the network interface was attached to an instance.    attachment.delete-on-termination - Indicates whether the attachment is deleted when an instance is terminated.    attachment.device-index - The device index to which the network interface is attached.    attachment.instance-id - The ID of the instance to which the network interface is attached.    attachment.instance-owner-id - The owner ID of the instance to which the network interface is attached.    attachment.nat-gateway-id - The ID of the NAT gateway to which the network interface is attached.    attachment.status - The status of the attachment (attaching | attached | detaching | detached).    availability-zone - The Availability Zone of the network interface.    description - The description of the network interface.    group-id - The ID of a security group associated with the network interface.    group-name - The name of a security group associated with the network interface.    ipv6-addresses.ipv6-address - An IPv6 address associated with the network interface.    mac-address - The MAC address of the network interface.    network-interface-id - The ID of the network interface.    owner-id - The AWS account ID of the network interface owner.    private-ip-address - The private IPv4 address or addresses of the network interface.    private-dns-name - The private DNS name of the network interface (IPv4).    requester-id - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).    requester-managed - Indicates whether the network interface is being managed by an AWS service (for example, AWS Management Console, Auto Scaling, and so on).    source-dest-check - Indicates whether the network interface performs source/destination checking. A value of true means checking is enabled, and false means checking is disabled. The value must be false for the network interface to perform network address translation (NAT) in your VPC.     status - The status of the network interface. If the network interface is not attached to an instance, the status is available; if a network interface is attached to an instance the status is in-use.    subnet-id - The ID of the subnet for the network interface.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC for the network interface.  
@@ -8177,7 +8182,7 @@ declare namespace EC2 {
     /**
      * The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.
      */
-    MaxResults?: Integer;
+    MaxResults?: DescribeNetworkInterfacesMaxResults;
   }
   export interface DescribeNetworkInterfacesResult {
     /**
@@ -8457,6 +8462,7 @@ declare namespace EC2 {
      */
     ReservedInstances?: ReservedInstancesList;
   }
+  export type DescribeRouteTablesMaxResults = number;
   export interface DescribeRouteTablesRequest {
     /**
      * One or more filters.    association.route-table-association-id - The ID of an association ID for the route table.    association.route-table-id - The ID of the route table involved in the association.    association.subnet-id - The ID of the subnet involved in the association.    association.main - Indicates whether the route table is the main route table for the VPC (true | false). Route tables that do not have an association ID are not returned in the response.    owner-id - The ID of the AWS account that owns the route table.    route-table-id - The ID of the route table.    route.destination-cidr-block - The IPv4 CIDR range specified in a route in the table.    route.destination-ipv6-cidr-block - The IPv6 CIDR range specified in a route in the route table.    route.destination-prefix-list-id - The ID (prefix) of the AWS service specified in a route in the table.    route.egress-only-internet-gateway-id - The ID of an egress-only Internet gateway specified in a route in the route table.    route.gateway-id - The ID of a gateway specified in a route in the table.    route.instance-id - The ID of an instance specified in a route in the table.    route.nat-gateway-id - The ID of a NAT gateway.    route.transit-gateway-id - The ID of a transit gateway.    route.origin - Describes how the route was created. CreateRouteTable indicates that the route was automatically created when the route table was created; CreateRoute indicates that the route was manually added to the route table; EnableVgwRoutePropagation indicates that the route was propagated by route propagation.    route.state - The state of a route in the route table (active | blackhole). The blackhole state indicates that the route's target isn't available (for example, the specified gateway isn't attached to the VPC, the specified NAT instance has been terminated, and so on).    route.vpc-peering-connection-id - The ID of a VPC peering connection specified in a route in the table.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    transit-gateway-id - The ID of a transit gateway.    vpc-id - The ID of the VPC for the route table.  
@@ -8477,7 +8483,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
      */
-    MaxResults?: Integer;
+    MaxResults?: DescribeRouteTablesMaxResults;
   }
   export interface DescribeRouteTablesResult {
     /**
@@ -8585,6 +8591,7 @@ declare namespace EC2 {
      */
     SecurityGroupReferenceSet?: SecurityGroupReferences;
   }
+  export type DescribeSecurityGroupsMaxResults = number;
   export interface DescribeSecurityGroupsRequest {
     /**
      * The filters. If using multiple filters for rules, the results include security groups for which any combination of rules - not necessarily a single rule - match all filters.    description - The description of the security group.    egress.ip-permission.cidr - An IPv4 CIDR block for an outbound security group rule.    egress.ip-permission.from-port - For an outbound rule, the start of port range for the TCP and UDP protocols, or an ICMP type number.    egress.ip-permission.group-id - The ID of a security group that has been referenced in an outbound security group rule.    egress.ip-permission.group-name - The name of a security group that has been referenced in an outbound security group rule.    egress.ip-permission.ipv6-cidr - An IPv6 CIDR block for an outbound security group rule.    egress.ip-permission.prefix-list-id - The ID (prefix) of the AWS service to which a security group rule allows outbound access.    egress.ip-permission.protocol - The IP protocol for an outbound security group rule (tcp | udp | icmp or a protocol number).    egress.ip-permission.to-port - For an outbound rule, the end of port range for the TCP and UDP protocols, or an ICMP code.    egress.ip-permission.user-id - The ID of an AWS account that has been referenced in an outbound security group rule.    group-id - The ID of the security group.     group-name - The name of the security group.    ip-permission.cidr - An IPv4 CIDR block for an inbound security group rule.    ip-permission.from-port - For an inbound rule, the start of port range for the TCP and UDP protocols, or an ICMP type number.    ip-permission.group-id - The ID of a security group that has been referenced in an inbound security group rule.    ip-permission.group-name - The name of a security group that has been referenced in an inbound security group rule.    ip-permission.ipv6-cidr - An IPv6 CIDR block for an inbound security group rule.    ip-permission.prefix-list-id - The ID (prefix) of the AWS service from which a security group rule allows inbound access.    ip-permission.protocol - The IP protocol for an inbound security group rule (tcp | udp | icmp or a protocol number).    ip-permission.to-port - For an inbound rule, the end of port range for the TCP and UDP protocols, or an ICMP code.    ip-permission.user-id - The ID of an AWS account that has been referenced in an inbound security group rule.    owner-id - The AWS account ID of the owner of the security group.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    vpc-id - The ID of the VPC specified when the security group was created.  
@@ -8609,7 +8616,7 @@ declare namespace EC2 {
     /**
      * The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned NextToken value. This value can be between 5 and 1000. If this parameter is not specified, then all results are returned.
      */
-    MaxResults?: Integer;
+    MaxResults?: DescribeSecurityGroupsMaxResults;
   }
   export interface DescribeSecurityGroupsResult {
     /**
@@ -8889,6 +8896,8 @@ declare namespace EC2 {
      */
     SpotPriceHistory?: SpotPriceHistoryList;
   }
+  export type DescribeStaleSecurityGroupsMaxResults = number;
+  export type DescribeStaleSecurityGroupsNextToken = string;
   export interface DescribeStaleSecurityGroupsRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -8897,11 +8906,11 @@ declare namespace EC2 {
     /**
      * The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.
      */
-    MaxResults?: MaxResults;
+    MaxResults?: DescribeStaleSecurityGroupsMaxResults;
     /**
      * The token for the next set of items to return. (You received this token from a prior call.)
      */
-    NextToken?: NextToken;
+    NextToken?: DescribeStaleSecurityGroupsNextToken;
     /**
      * The ID of the VPC.
      */
@@ -9372,7 +9381,7 @@ declare namespace EC2 {
      */
     ServiceIds?: ValueStringList;
     /**
-     * One or more filters.    service-name - The name of the service.    service-id - The ID of the service.    service-state - The state of the service (Pending | Available | Deleting | Deleted | Failed).   
+     * One or more filters.    service-name - The name of the service.    service-id - The ID of the service.    service-state - The state of the service (Pending | Available | Deleting | Deleted | Failed).     tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -9436,7 +9445,7 @@ declare namespace EC2 {
      */
     ServiceNames?: ValueStringList;
     /**
-     * One or more filters.    service-name: The name of the service.  
+     * One or more filters.    service-name: The name of the service.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -9472,7 +9481,7 @@ declare namespace EC2 {
      */
     VpcEndpointIds?: ValueStringList;
     /**
-     * One or more filters.    service-name: The name of the service.    vpc-id: The ID of the VPC in which the endpoint resides.    vpc-endpoint-id: The ID of the endpoint.    vpc-endpoint-state: The state of the endpoint. (pending | available | deleting | deleted)  
+     * One or more filters.    service-name: The name of the service.    vpc-id: The ID of the VPC in which the endpoint resides.    vpc-endpoint-id: The ID of the endpoint.    vpc-endpoint-state: The state of the endpoint. (pending | available | deleting | deleted)    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.  
      */
     Filters?: FilterList;
     /**
@@ -17224,6 +17233,10 @@ declare namespace EC2 {
      * The private DNS name for the service.
      */
     PrivateDnsName?: String;
+    /**
+     * Any tags assigned to the service.
+     */
+    Tags?: TagList;
   }
   export type ServiceConfigurationSet = ServiceConfiguration[];
   export interface ServiceDetail {
@@ -17231,6 +17244,10 @@ declare namespace EC2 {
      * The Amazon Resource Name (ARN) of the service.
      */
     ServiceName?: String;
+    /**
+     * The ID of the endpoint service.
+     */
+    ServiceId?: String;
     /**
      * The type of service.
      */
@@ -17263,6 +17280,10 @@ declare namespace EC2 {
      * Indicates whether the service manages it's VPC endpoints. Management of the service VPC endpoints using the VPC endpoint API is restricted.
      */
     ManagesVpcEndpoints?: Boolean;
+    /**
+     * Any tags assigned to the service.
+     */
+    Tags?: TagList;
   }
   export type ServiceDetailSet = ServiceDetail[];
   export type ServiceState = "Pending"|"Available"|"Deleting"|"Deleted"|"Failed"|string;
@@ -19316,6 +19337,10 @@ declare namespace EC2 {
      * The date and time the VPC endpoint was created.
      */
     CreationTimestamp?: MillisecondDateTime;
+    /**
+     * Any tags assigned to the VPC endpoint.
+     */
+    Tags?: TagList;
   }
   export interface VpcEndpointConnection {
     /**

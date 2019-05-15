@@ -10904,6 +10904,11 @@
         }
       }
     },
+    "DescribeCapacityReservationsMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 1
+    },
     "DescribeCapacityReservationsRequest": {
       "type": "structure",
       "members": {
@@ -10917,7 +10922,7 @@
           "documentation": "<p>The token to retrieve the next page of results.</p>"
         },
         "MaxResults": {
-          "shape": "Integer",
+          "shape": "DescribeCapacityReservationsMaxResults",
           "documentation": "<p>The maximum number of results to return for the request in a single page. The remaining results can be seen by sending another request with the returned nextToken value.</p>"
         },
         "Filters": {
@@ -11364,6 +11369,11 @@
         }
       }
     },
+    "DescribeElasticGpusMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 10
+    },
     "DescribeElasticGpusRequest": {
       "type": "structure",
       "members": {
@@ -11382,7 +11392,7 @@
           "locationName": "Filter"
         },
         "MaxResults": {
-          "shape": "Integer",
+          "shape": "DescribeElasticGpusMaxResults",
           "documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 5 and 1000.</p>"
         },
         "NextToken": {
@@ -12436,6 +12446,11 @@
         }
       }
     },
+    "DescribeLaunchTemplatesMaxResults": {
+      "type": "integer",
+      "max": 200,
+      "min": 1
+    },
     "DescribeLaunchTemplatesRequest": {
       "type": "structure",
       "members": {
@@ -12463,7 +12478,7 @@
           "documentation": "<p>The token to request the next page of results.</p>"
         },
         "MaxResults": {
-          "shape": "Integer",
+          "shape": "DescribeLaunchTemplatesMaxResults",
           "documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 1 and 200.</p>"
         }
       }
@@ -12668,6 +12683,11 @@
       },
       "documentation": "<p>Contains the output of DescribeNetworkInterfaceAttribute.</p>"
     },
+    "DescribeNetworkInterfacePermissionsMaxResults": {
+      "type": "integer",
+      "max": 255,
+      "min": 5
+    },
     "DescribeNetworkInterfacePermissionsRequest": {
       "type": "structure",
       "members": {
@@ -12686,7 +12706,7 @@
           "documentation": "<p>The token to request the next page of results.</p>"
         },
         "MaxResults": {
-          "shape": "Integer",
+          "shape": "DescribeNetworkInterfacePermissionsMaxResults",
           "documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. If this parameter is not specified, up to 50 results are returned by default.</p>"
         }
       },
@@ -12707,6 +12727,11 @@
         }
       },
       "documentation": "<p>Contains the output for DescribeNetworkInterfacePermissions.</p>"
+    },
+    "DescribeNetworkInterfacesMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 5
     },
     "DescribeNetworkInterfacesRequest": {
       "type": "structure",
@@ -12731,7 +12756,7 @@
           "documentation": "<p>The token to retrieve the next page of results.</p>"
         },
         "MaxResults": {
-          "shape": "Integer",
+          "shape": "DescribeNetworkInterfacesMaxResults",
           "documentation": "<p>The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.</p>"
         }
       },
@@ -13124,6 +13149,11 @@
       },
       "documentation": "<p>Contains the output for DescribeReservedInstances.</p>"
     },
+    "DescribeRouteTablesMaxResults": {
+      "type": "integer",
+      "max": 100,
+      "min": 5
+    },
     "DescribeRouteTablesRequest": {
       "type": "structure",
       "members": {
@@ -13147,7 +13177,7 @@
           "documentation": "<p>The token for the next page of results.</p>"
         },
         "MaxResults": {
-          "shape": "Integer",
+          "shape": "DescribeRouteTablesMaxResults",
           "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
         }
       }
@@ -13301,6 +13331,11 @@
         }
       }
     },
+    "DescribeSecurityGroupsMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 5
+    },
     "DescribeSecurityGroupsRequest": {
       "type": "structure",
       "members": {
@@ -13329,7 +13364,7 @@
           "documentation": "<p>The token to request the next page of results.</p>"
         },
         "MaxResults": {
-          "shape": "Integer",
+          "shape": "DescribeSecurityGroupsMaxResults",
           "documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another request with the returned <code>NextToken</code> value. This value can be between 5 and 1000. If this parameter is not specified, then all results are returned.</p>"
         }
       }
@@ -13743,6 +13778,16 @@
       },
       "documentation": "<p>Contains the output of DescribeSpotPriceHistory.</p>"
     },
+    "DescribeStaleSecurityGroupsMaxResults": {
+      "type": "integer",
+      "max": 255,
+      "min": 5
+    },
+    "DescribeStaleSecurityGroupsNextToken": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
+    },
     "DescribeStaleSecurityGroupsRequest": {
       "type": "structure",
       "required": [
@@ -13754,11 +13799,11 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
         },
         "MaxResults": {
-          "shape": "MaxResults",
+          "shape": "DescribeStaleSecurityGroupsMaxResults",
           "documentation": "<p>The maximum number of items to return for this request. The request returns a token that you can specify in a subsequent call to get the next set of results.</p>"
         },
         "NextToken": {
-          "shape": "NextToken",
+          "shape": "DescribeStaleSecurityGroupsNextToken",
           "documentation": "<p>The token for the next set of items to return. (You received this token from a prior call.)</p>"
         },
         "VpcId": {
@@ -14406,7 +14451,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code> - The name of the service.</p> </li> <li> <p> <code>service-id</code> - The ID of the service.</p> </li> <li> <p> <code>service-state</code> - The state of the service (<code>Pending</code> | <code>Available</code> | <code>Deleting</code> | <code>Deleted</code> | <code>Failed</code>). </p> </li> </ul>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code> - The name of the service.</p> </li> <li> <p> <code>service-id</code> - The ID of the service.</p> </li> <li> <p> <code>service-state</code> - The state of the service (<code>Pending</code> | <code>Available</code> | <code>Deleting</code> | <code>Deleted</code> | <code>Failed</code>). </p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -14492,7 +14537,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code>: The name of the service.</p> </li> </ul>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code>: The name of the service.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -14541,7 +14586,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code>: The name of the service.</p> </li> <li> <p> <code>vpc-id</code>: The ID of the VPC in which the endpoint resides.</p> </li> <li> <p> <code>vpc-endpoint-id</code>: The ID of the endpoint.</p> </li> <li> <p> <code>vpc-endpoint-state</code>: The state of the endpoint. (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>)</p> </li> </ul>",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>service-name</code>: The name of the service.</p> </li> <li> <p> <code>vpc-id</code>: The ID of the VPC in which the endpoint resides.</p> </li> <li> <p> <code>vpc-endpoint-id</code>: The ID of the endpoint.</p> </li> <li> <p> <code>vpc-endpoint-state</code>: The state of the endpoint. (<code>pending</code> | <code>available</code> | <code>deleting</code> | <code>deleted</code>)</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -27233,6 +27278,11 @@
           "shape": "String",
           "documentation": "<p>The private DNS name for the service.</p>",
           "locationName": "privateDnsName"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Any tags assigned to the service.</p>",
+          "locationName": "tagSet"
         }
       },
       "documentation": "<p>Describes a service configuration for a VPC endpoint service.</p>"
@@ -27251,6 +27301,11 @@
           "shape": "String",
           "documentation": "<p>The Amazon Resource Name (ARN) of the service.</p>",
           "locationName": "serviceName"
+        },
+        "ServiceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the endpoint service.</p>",
+          "locationName": "serviceId"
         },
         "ServiceType": {
           "shape": "ServiceTypeDetailSet",
@@ -27291,6 +27346,11 @@
           "shape": "Boolean",
           "documentation": "<p>Indicates whether the service manages it's VPC endpoints. Management of the service VPC endpoints using the VPC endpoint API is restricted.</p>",
           "locationName": "managesVpcEndpoints"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Any tags assigned to the service.</p>",
+          "locationName": "tagSet"
         }
       },
       "documentation": "<p>Describes a VPC endpoint service.</p>"
@@ -30819,6 +30879,11 @@
           "shape": "MillisecondDateTime",
           "documentation": "<p>The date and time the VPC endpoint was created.</p>",
           "locationName": "creationTimestamp"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Any tags assigned to the VPC endpoint.</p>",
+          "locationName": "tagSet"
         }
       },
       "documentation": "<p>Describes a VPC endpoint.</p>"

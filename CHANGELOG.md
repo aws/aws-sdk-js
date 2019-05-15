@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.455.0-->
+<!--LATEST=2.456.0-->
 <!--ENTRYINSERT-->
+
+## 2.456.0
+* feature: CodePipeline: This feature includes new APIs to add, edit, remove and view tags for pipeline, custom action type and webhook resources. You can also add tags while creating these resources.
+* feature: EC2: Adding tagging support for VPC Endpoints and VPC Endpoint Services.
+* feature: MediaPackage: Adds optional configuration for DASH SegmentTemplateFormat to refer to segments by Number with Duration, rather than Number or Time with SegmentTimeline.
+* feature: TranscribeService: Amazon Transcribe - support transcriptions from audio sources in Indian English (en-IN) and Hindi (hi-IN).
 
 ## 2.455.0
 * feature: Chime: Amazon Chime private bots GA release.

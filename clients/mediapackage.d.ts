@@ -356,7 +356,7 @@ rounded to the nearest multiple of the source segment duration.
      */
     SegmentDurationSeconds?: __integer;
     /**
-     * Determines the type of SegmentTimeline included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs.
+     * Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.
      */
     SegmentTemplateFormat?: SegmentTemplateFormat;
     StreamSelection?: StreamSelection;
@@ -818,7 +818,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
     Id?: __string;
     Tags?: Tags;
   }
-  export type SegmentTemplateFormat = "NUMBER_WITH_TIMELINE"|"TIME_WITH_TIMELINE"|string;
+  export type SegmentTemplateFormat = "NUMBER_WITH_TIMELINE"|"TIME_WITH_TIMELINE"|"NUMBER_WITH_DURATION"|string;
   export interface SpekeKeyProvider {
     /**
      * An Amazon Resource Name (ARN) of a Certificate Manager certificate
