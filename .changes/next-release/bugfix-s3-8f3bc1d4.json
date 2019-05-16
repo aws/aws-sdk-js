@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "s3",
+  "description": "Respect the NODE_TLS_REJECT_UNAUTHORIZED environment under node when instantiating an http client sslAgent"
+}
