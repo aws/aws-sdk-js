@@ -1,0 +1,17 @@
+[
+    {
+        "type": "enhancement",
+        "category": "Documentation",
+        "description": "Added steps to generate documentation changes in CONTRIBUTION.md"
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "Added channel state waiters to MediaLive."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "This release updates the Amazon S3 PUT Bucket replication API to include a new optional field named token, which allows you to add a replication configuration to an S3 bucket that has Object Lock enabled."
+    }
+]

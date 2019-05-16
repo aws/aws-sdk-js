@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.456.0-->
+<!--LATEST=2.457.0-->
 <!--ENTRYINSERT-->
+
+## 2.457.0
+* enhancement: Documentation: Added steps to generate documentation changes in CONTRIBUTION.md
+* feature: MediaLive: Added channel state waiters to MediaLive.
+* feature: S3: This release updates the Amazon S3 PUT Bucket replication API to include a new optional field named token, which allows you to add a replication configuration to an S3 bucket that has Object Lock enabled.
 
 ## 2.456.0
 * feature: CodePipeline: This feature includes new APIs to add, edit, remove and view tags for pipeline, custom action type and webhook resources. You can also add tags while creating these resources.

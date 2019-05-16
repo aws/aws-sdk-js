@@ -3950,6 +3950,10 @@ declare namespace S3 {
      */
     ContentMD5?: ContentMD5;
     ReplicationConfiguration: ReplicationConfiguration;
+    /**
+     * 
+     */
+    Token?: ObjectLockToken;
   }
   export interface PutBucketRequestPaymentRequest {
     /**
