@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.457.0-->
+<!--LATEST=2.458.0-->
 <!--ENTRYINSERT-->
+
+## 2.458.0
+* feature: AppStream: Includes APIs for managing subscriptions to AppStream 2.0 usage reports and configuring idle disconnect timeouts on AppStream 2.0 fleets.
 
 ## 2.457.0
 * enhancement: Documentation: Added steps to generate documentation changes in CONTRIBUTION.md

@@ -45,11 +45,11 @@ declare class AppStream extends Service {
    */
   copyImage(callback?: (err: AWSError, data: AppStream.Types.CopyImageResponse) => void): Request<AppStream.Types.CopyImageResponse, AWSError>;
   /**
-   * Creates a Directory Config object in AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
+   * Creates a Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
    */
   createDirectoryConfig(params: AppStream.Types.CreateDirectoryConfigRequest, callback?: (err: AWSError, data: AppStream.Types.CreateDirectoryConfigResult) => void): Request<AppStream.Types.CreateDirectoryConfigResult, AWSError>;
   /**
-   * Creates a Directory Config object in AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
+   * Creates a Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
    */
   createDirectoryConfig(callback?: (err: AWSError, data: AppStream.Types.CreateDirectoryConfigResult) => void): Request<AppStream.Types.CreateDirectoryConfigResult, AWSError>;
   /**
@@ -92,6 +92,14 @@ declare class AppStream extends Service {
    * Creates a temporary URL to start an AppStream 2.0 streaming session for the specified user. A streaming URL enables application streaming to be tested without user setup. 
    */
   createStreamingURL(callback?: (err: AWSError, data: AppStream.Types.CreateStreamingURLResult) => void): Request<AppStream.Types.CreateStreamingURLResult, AWSError>;
+  /**
+   * Creates a usage report subscription. Usage reports are generated daily.
+   */
+  createUsageReportSubscription(params: AppStream.Types.CreateUsageReportSubscriptionRequest, callback?: (err: AWSError, data: AppStream.Types.CreateUsageReportSubscriptionResult) => void): Request<AppStream.Types.CreateUsageReportSubscriptionResult, AWSError>;
+  /**
+   * Creates a usage report subscription. Usage reports are generated daily.
+   */
+  createUsageReportSubscription(callback?: (err: AWSError, data: AppStream.Types.CreateUsageReportSubscriptionResult) => void): Request<AppStream.Types.CreateUsageReportSubscriptionResult, AWSError>;
   /**
    * Creates a new user in the user pool.
    */
@@ -149,6 +157,14 @@ declare class AppStream extends Service {
    */
   deleteStack(callback?: (err: AWSError, data: AppStream.Types.DeleteStackResult) => void): Request<AppStream.Types.DeleteStackResult, AWSError>;
   /**
+   * Disables usage report generation.
+   */
+  deleteUsageReportSubscription(params: AppStream.Types.DeleteUsageReportSubscriptionRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteUsageReportSubscriptionResult) => void): Request<AppStream.Types.DeleteUsageReportSubscriptionResult, AWSError>;
+  /**
+   * Disables usage report generation.
+   */
+  deleteUsageReportSubscription(callback?: (err: AWSError, data: AppStream.Types.DeleteUsageReportSubscriptionResult) => void): Request<AppStream.Types.DeleteUsageReportSubscriptionResult, AWSError>;
+  /**
    * Deletes a user from the user pool.
    */
   deleteUser(params: AppStream.Types.DeleteUserRequest, callback?: (err: AWSError, data: AppStream.Types.DeleteUserResult) => void): Request<AppStream.Types.DeleteUserResult, AWSError>;
@@ -157,11 +173,11 @@ declare class AppStream extends Service {
    */
   deleteUser(callback?: (err: AWSError, data: AppStream.Types.DeleteUserResult) => void): Request<AppStream.Types.DeleteUserResult, AWSError>;
   /**
-   * Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the information required to join streaming instances to an Active Directory domain.  Although the response syntax in this topic includes the account password, this password is not returned in the actual response.
+   * Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the configuration information required to join fleets and image builders to Microsoft Active Directory domains.  Although the response syntax in this topic includes the account password, this password is not returned in the actual response.
    */
   describeDirectoryConfigs(params: AppStream.Types.DescribeDirectoryConfigsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeDirectoryConfigsResult) => void): Request<AppStream.Types.DescribeDirectoryConfigsResult, AWSError>;
   /**
-   * Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the information required to join streaming instances to an Active Directory domain.  Although the response syntax in this topic includes the account password, this password is not returned in the actual response.
+   * Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the configuration information required to join fleets and image builders to Microsoft Active Directory domains.  Although the response syntax in this topic includes the account password, this password is not returned in the actual response.
    */
   describeDirectoryConfigs(callback?: (err: AWSError, data: AppStream.Types.DescribeDirectoryConfigsResult) => void): Request<AppStream.Types.DescribeDirectoryConfigsResult, AWSError>;
   /**
@@ -197,11 +213,11 @@ declare class AppStream extends Service {
    */
   describeImages(callback?: (err: AWSError, data: AppStream.Types.DescribeImagesResult) => void): Request<AppStream.Types.DescribeImagesResult, AWSError>;
   /**
-   * Retrieves a list that describes the active streaming sessions for a specified stack and fleet. If a value for UserId is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.
+   * Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a UserId is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.
    */
   describeSessions(params: AppStream.Types.DescribeSessionsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeSessionsResult) => void): Request<AppStream.Types.DescribeSessionsResult, AWSError>;
   /**
-   * Retrieves a list that describes the active streaming sessions for a specified stack and fleet. If a value for UserId is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.
+   * Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a UserId is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.
    */
   describeSessions(callback?: (err: AWSError, data: AppStream.Types.DescribeSessionsResult) => void): Request<AppStream.Types.DescribeSessionsResult, AWSError>;
   /**
@@ -212,6 +228,14 @@ declare class AppStream extends Service {
    * Retrieves a list that describes one or more specified stacks, if the stack names are provided. Otherwise, all stacks in the account are described.
    */
   describeStacks(callback?: (err: AWSError, data: AppStream.Types.DescribeStacksResult) => void): Request<AppStream.Types.DescribeStacksResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more usage report subscriptions.
+   */
+  describeUsageReportSubscriptions(params: AppStream.Types.DescribeUsageReportSubscriptionsRequest, callback?: (err: AWSError, data: AppStream.Types.DescribeUsageReportSubscriptionsResult) => void): Request<AppStream.Types.DescribeUsageReportSubscriptionsResult, AWSError>;
+  /**
+   * Retrieves a list that describes one or more usage report subscriptions.
+   */
+  describeUsageReportSubscriptions(callback?: (err: AWSError, data: AppStream.Types.DescribeUsageReportSubscriptionsResult) => void): Request<AppStream.Types.DescribeUsageReportSubscriptionsResult, AWSError>;
   /**
    * Retrieves a list that describes the UserStackAssociation objects. You must specify either or both of the following:   The stack name   The user name (email address of the user associated with the stack) and the authentication type for the user  
    */
@@ -333,19 +357,19 @@ declare class AppStream extends Service {
    */
   untagResource(callback?: (err: AWSError, data: AppStream.Types.UntagResourceResponse) => void): Request<AppStream.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the specified Directory Config object in AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
+   * Updates the specified Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
    */
   updateDirectoryConfig(params: AppStream.Types.UpdateDirectoryConfigRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateDirectoryConfigResult) => void): Request<AppStream.Types.UpdateDirectoryConfigResult, AWSError>;
   /**
-   * Updates the specified Directory Config object in AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.
+   * Updates the specified Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.
    */
   updateDirectoryConfig(callback?: (err: AWSError, data: AppStream.Types.UpdateDirectoryConfigResult) => void): Request<AppStream.Types.UpdateDirectoryConfigResult, AWSError>;
   /**
-   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the DisplayName and ComputeCapacity attributes. If the fleet is in the STARTING or STOPPING state, you can't update it.
+   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the DisplayName, ComputeCapacity, ImageARN, ImageName, and DisconnectTimeoutInSeconds attributes. If the fleet is in the STARTING or STOPPING state, you can't update it.
    */
   updateFleet(params: AppStream.Types.UpdateFleetRequest, callback?: (err: AWSError, data: AppStream.Types.UpdateFleetResult) => void): Request<AppStream.Types.UpdateFleetResult, AWSError>;
   /**
-   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the DisplayName and ComputeCapacity attributes. If the fleet is in the STARTING or STOPPING state, you can't update it.
+   * Updates the specified fleet. If the fleet is in the STOPPED state, you can update any attribute except the fleet name. If the fleet is in the RUNNING state, you can update the DisplayName, ComputeCapacity, ImageARN, ImageName, and DisconnectTimeoutInSeconds attributes. If the fleet is in the STARTING or STOPPING state, you can't update it.
    */
   updateFleet(callback?: (err: AWSError, data: AppStream.Types.UpdateFleetResult) => void): Request<AppStream.Types.UpdateFleetResult, AWSError>;
   /**
@@ -542,7 +566,7 @@ declare namespace AppStream {
      */
     OrganizationalUnitDistinguishedNames: OrganizationalUnitDistinguishedNamesList;
     /**
-     * The credentials for the service account used by the streaming instance to connect to the directory.
+     * The credentials for the service account used by the fleet or image builder to connect to the directory.
      */
     ServiceAccountCredentials: ServiceAccountCredentials;
   }
@@ -582,11 +606,11 @@ declare namespace AppStream {
      */
     VpcConfig?: VpcConfig;
     /**
-     * The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 360000.
+     * The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance. Specify a value between 600 and 360000.
      */
     MaxUserDurationInSeconds?: Integer;
     /**
-     * The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 360000.
+     * The amount of time that a streaming session remains active after users disconnect. If users try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance.  Specify a value between 60 and 360000.
      */
     DisconnectTimeoutInSeconds?: Integer;
     /**
@@ -606,9 +630,13 @@ declare namespace AppStream {
      */
     DomainJoinInfo?: DomainJoinInfo;
     /**
-     * The tags to associate with the fleet. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=.  If you do not specify a value, the value is set to an empty string. For more information, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+     * The tags to associate with the fleet. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=.  If you do not specify a value, the value is set to an empty string. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters:  _ . : / = + \ - @ For more information, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
      */
     Tags?: Tags;
+    /**
+     * The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the DisconnectTimeoutInSeconds time interval begins. Users are notified before they are disconnected due to inactivity. If they try to reconnect to the streaming session before the time interval specified in DisconnectTimeoutInSeconds elapses, they are connected to their previous session. Users are considered idle when they stop providing keyboard or mouse input during their streaming session. File uploads and downloads, audio in, audio out, and pixels changing do not qualify as user activity. If users continue to be idle after the time interval in IdleDisconnectTimeoutInSeconds elapses, they are disconnected. To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 900.  If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity.  
+     */
+    IdleDisconnectTimeoutInSeconds?: Integer;
   }
   export interface CreateFleetResult {
     /**
@@ -658,7 +686,7 @@ declare namespace AppStream {
      */
     AppstreamAgentVersion?: AppstreamAgentVersion;
     /**
-     * The tags to associate with the image builder. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=.  If you do not specify a value, the value is set to an empty string. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+     * The tags to associate with the image builder. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=.  Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters:  _ . : / = + \ - @ If you do not specify a value, the value is set to an empty string. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
      */
     Tags?: Tags;
   }
@@ -722,7 +750,7 @@ declare namespace AppStream {
      */
     ApplicationSettings?: ApplicationSettings;
     /**
-     * The tags to associate with the stack. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=.  If you do not specify a value, the value is set to an empty string. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
+     * The tags to associate with the stack. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=.  If you do not specify a value, the value is set to an empty string. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters:  _ . : / = + \ - @ For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Developer Guide.
      */
     Tags?: Tags;
   }
@@ -768,9 +796,21 @@ declare namespace AppStream {
      */
     Expires?: Timestamp;
   }
+  export interface CreateUsageReportSubscriptionRequest {
+  }
+  export interface CreateUsageReportSubscriptionResult {
+    /**
+     * The Amazon S3 bucket where generated reports are stored. When a usage report subscription is enabled for the first time for an account in an AWS Region, an S3 bucket is created. The bucket is unique to the AWS account and the Region. 
+     */
+    S3BucketName?: String;
+    /**
+     * The schedule for generating usage reports.
+     */
+    Schedule?: UsageReportSchedule;
+  }
   export interface CreateUserRequest {
     /**
-     * The email address of the user.
+     * The email address of the user.  Users' email addresses are case-sensitive. During login, if they specify an email address that doesn't use the same capitalization as the email address specified when their user pool account was created, a "user does not exist" error message displays. 
      */
     UserName: Username;
     /**
@@ -852,9 +892,13 @@ declare namespace AppStream {
   }
   export interface DeleteStackResult {
   }
+  export interface DeleteUsageReportSubscriptionRequest {
+  }
+  export interface DeleteUsageReportSubscriptionResult {
+  }
   export interface DeleteUserRequest {
     /**
-     * The email address of the user.
+     * The email address of the user.  Users' email addresses are case-sensitive. 
      */
     UserName: Username;
     /**
@@ -1019,7 +1063,7 @@ declare namespace AppStream {
      */
     Limit?: Integer;
     /**
-     * The authentication method. Specify API for a user authenticated using a streaming URL, SAML for a SAML 2.0-federated user, or USERPOOL for a user in the AppStream 2.0 user pool. The default is to authenticate users using a streaming URL.
+     * The authentication method. Specify API for a user authenticated using a streaming URL or SAML for a SAML federated user. The default is to authenticate users using a streaming URL.
      */
     AuthenticationType?: AuthenticationType;
   }
@@ -1053,13 +1097,33 @@ declare namespace AppStream {
      */
     NextToken?: String;
   }
+  export interface DescribeUsageReportSubscriptionsRequest {
+    /**
+     * The maximum size of each page of results.
+     */
+    MaxResults?: Integer;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeUsageReportSubscriptionsResult {
+    /**
+     * Information about the usage report subscription.
+     */
+    UsageReportSubscriptions?: UsageReportSubscriptionList;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextToken?: String;
+  }
   export interface DescribeUserStackAssociationsRequest {
     /**
      * The name of the stack that is associated with the user.
      */
     StackName?: String;
     /**
-     * The email address of the user who is associated with the stack.
+     * The email address of the user who is associated with the stack.  Users' email addresses are case-sensitive. 
      */
     UserName?: Username;
     /**
@@ -1120,7 +1184,7 @@ declare namespace AppStream {
      */
     OrganizationalUnitDistinguishedNames?: OrganizationalUnitDistinguishedNamesList;
     /**
-     * The credentials for the service account used by the streaming instance to connect to the directory.
+     * The credentials for the service account used by the fleet or image builder to connect to the directory.
      */
     ServiceAccountCredentials?: ServiceAccountCredentials;
     /**
@@ -1133,7 +1197,7 @@ declare namespace AppStream {
   export type DirectoryNameList = DirectoryName[];
   export interface DisableUserRequest {
     /**
-     * The email address of the user.
+     * The email address of the user.  Users' email addresses are case-sensitive. 
      */
     UserName: Username;
     /**
@@ -1170,7 +1234,7 @@ declare namespace AppStream {
   export type DomainList = Domain[];
   export interface EnableUserRequest {
     /**
-     * The email address of the user.
+     * The email address of the user.  Users' email addresses are case-sensitive. During login, if they specify an email address that doesn't use the same capitalization as the email address specified when their user pool account was created, a "user does not exist" error message displays.  
      */
     UserName: Username;
     /**
@@ -1227,11 +1291,11 @@ declare namespace AppStream {
      */
     ComputeCapacityStatus: ComputeCapacityStatus;
     /**
-     * The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 360000.
+     * The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance.  Specify a value between 600 and 360000.
      */
     MaxUserDurationInSeconds?: Integer;
     /**
-     * The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 360000. By default, this value is 900 seconds (15 minutes).
+     * The amount of time that a streaming session remains active after users disconnect. If they try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance. Specify a value between 60 and 360000.
      */
     DisconnectTimeoutInSeconds?: Integer;
     /**
@@ -1258,6 +1322,10 @@ declare namespace AppStream {
      * The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. 
      */
     DomainJoinInfo?: DomainJoinInfo;
+    /**
+     * The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the DisconnectTimeoutInSeconds time interval begins. Users are notified before they are disconnected due to inactivity. If users try to reconnect to the streaming session before the time interval specified in DisconnectTimeoutInSeconds elapses, they are connected to their previous session. Users are considered idle when they stop providing keyboard or mouse input during their streaming session. File uploads and downloads, audio in, audio out, and pixels changing do not qualify as user activity. If users continue to be idle after the time interval in IdleDisconnectTimeoutInSeconds elapses, they are disconnected. To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 900.  If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity.  
+     */
+    IdleDisconnectTimeoutInSeconds?: Integer;
   }
   export type FleetAttribute = "VPC_CONFIGURATION"|"VPC_CONFIGURATION_SECURITY_GROUP_IDS"|"DOMAIN_JOIN_INFO"|string;
   export type FleetAttributes = FleetAttribute[];
@@ -1437,6 +1505,17 @@ declare namespace AppStream {
   }
   export type ImageStateChangeReasonCode = "INTERNAL_ERROR"|"IMAGE_BUILDER_NOT_AVAILABLE"|"IMAGE_COPY_FAILURE"|string;
   export type Integer = number;
+  export interface LastReportGenerationExecutionError {
+    /**
+     * The error code for the error that is returned when a usage report can't be generated.
+     */
+    ErrorCode?: UsageReportExecutionErrorCode;
+    /**
+     * The error message for the error that is returned when a usage report can't be generated.
+     */
+    ErrorMessage?: String;
+  }
+  export type LastReportGenerationExecutionErrors = LastReportGenerationExecutionError[];
   export interface ListAssociatedFleetsRequest {
     /**
      * The name of the stack.
@@ -1559,11 +1638,11 @@ declare namespace AppStream {
      */
     State: SessionState;
     /**
-     * Specifies whether a user is connected to the streaming session. 
+     * Specifies whether a user is connected to the streaming session.
      */
     ConnectionState?: SessionConnectionState;
     /**
-     * The time when a streaming instance is dedicated for the user. 
+     * The time when a streaming instance is dedicated for the user.
      */
     StartTime?: Timestamp;
     /**
@@ -1571,7 +1650,7 @@ declare namespace AppStream {
      */
     MaxExpirationTime?: Timestamp;
     /**
-     * The authentication method. The user is authenticated using a streaming URL (API), SAML 2.0 federation (SAML), or the AppStream 2.0 user pool (USERPOOL). The default is to authenticate users using a streaming URL. 
+     * The authentication method. The user is authenticated using a streaming URL (API) or SAML 2.0 federation (SAML).
      */
     AuthenticationType?: AuthenticationType;
     /**
@@ -1727,7 +1806,7 @@ declare namespace AppStream {
      */
     ResourceArn: Arn;
     /**
-     * The tags to associate. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=.  If you do not specify a value, the value is set to an empty string.
+     * The tags to associate. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=.  If you do not specify a value, the value is set to an empty string. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters:  _ . : / = + \ - @
      */
     Tags: Tags;
   }
@@ -1758,7 +1837,7 @@ declare namespace AppStream {
      */
     OrganizationalUnitDistinguishedNames?: OrganizationalUnitDistinguishedNamesList;
     /**
-     * The credentials for the service account used by the streaming instance to connect to the directory.
+     * The credentials for the service account used by the fleet or image builder to connect to the directory.
      */
     ServiceAccountCredentials?: ServiceAccountCredentials;
   }
@@ -1794,11 +1873,11 @@ declare namespace AppStream {
      */
     VpcConfig?: VpcConfig;
     /**
-     * The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 360000. By default, the value is 900 seconds (15 minutes).
+     * The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance. Specify a value between 600 and 360000.
      */
     MaxUserDurationInSeconds?: Integer;
     /**
-     * The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 360000. By default, the value is 900 seconds (15 minutes).
+     * The amount of time that a streaming session remains active after users disconnect. If users try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance.  Specify a value between 60 and 360000.
      */
     DisconnectTimeoutInSeconds?: Integer;
     /**
@@ -1821,6 +1900,10 @@ declare namespace AppStream {
      * The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. 
      */
     DomainJoinInfo?: DomainJoinInfo;
+    /**
+     * The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the DisconnectTimeoutInSeconds time interval begins. Users are notified before they are disconnected due to inactivity. If users try to reconnect to the streaming session before the time interval specified in DisconnectTimeoutInSeconds elapses, they are connected to their previous session. Users are considered idle when they stop providing keyboard or mouse input during their streaming session. File uploads and downloads, audio in, audio out, and pixels changing do not qualify as user activity. If users continue to be idle after the time interval in IdleDisconnectTimeoutInSeconds elapses, they are disconnected.  To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 900.  If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity.  
+     */
+    IdleDisconnectTimeoutInSeconds?: Integer;
     /**
      * The fleet attributes to delete.
      */
@@ -1896,13 +1979,34 @@ declare namespace AppStream {
      */
     Stack?: Stack;
   }
+  export type UsageReportExecutionErrorCode = "RESOURCE_NOT_FOUND"|"ACCESS_DENIED"|"INTERNAL_SERVICE_ERROR"|string;
+  export type UsageReportSchedule = "DAILY"|string;
+  export interface UsageReportSubscription {
+    /**
+     * The Amazon S3 bucket where generated reports are stored. When a usage report subscription is enabled for the first time for an account in an AWS Region, an S3 bucket is created. The bucket is unique to the AWS account and the Region.
+     */
+    S3BucketName?: String;
+    /**
+     * The schedule for generating usage reports.
+     */
+    Schedule?: UsageReportSchedule;
+    /**
+     * The time when the last usage report was generated.
+     */
+    LastGeneratedReportDate?: Timestamp;
+    /**
+     * The errors that are returned when usage reports can't be generated.
+     */
+    SubscriptionErrors?: LastReportGenerationExecutionErrors;
+  }
+  export type UsageReportSubscriptionList = UsageReportSubscription[];
   export interface User {
     /**
      * The ARN of the user.
      */
     Arn?: Arn;
     /**
-     * The email address of the user.
+     * The email address of the user.  Users' email addresses are case-sensitive. 
      */
     UserName?: Username;
     /**
@@ -1950,7 +2054,7 @@ declare namespace AppStream {
      */
     StackName: String;
     /**
-     * The email address of the user who is associated with the stack.
+     * The email address of the user who is associated with the stack.  Users' email addresses are case-sensitive. 
      */
     UserName: Username;
     /**

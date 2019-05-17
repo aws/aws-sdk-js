@@ -137,7 +137,7 @@
           "shape": "InvalidAccountStatusException"
         }
       ],
-      "documentation": "<p>Creates a Directory Config object in AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.</p>"
+      "documentation": "<p>Creates a Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.</p>"
     },
     "CreateFleet": {
       "name": "CreateFleet",
@@ -318,6 +318,25 @@
       ],
       "documentation": "<p>Creates a temporary URL to start an AppStream 2.0 streaming session for the specified user. A streaming URL enables application streaming to be tested without user setup. </p>"
     },
+    "CreateUsageReportSubscription": {
+      "name": "CreateUsageReportSubscription",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateUsageReportSubscriptionRequest"
+      },
+      "output": {
+        "shape": "CreateUsageReportSubscriptionResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidAccountStatusException"
+        }
+      ],
+      "documentation": "<p>Creates a usage report subscription. Usage reports are generated daily.</p>"
+    },
     "CreateUser": {
       "name": "CreateUser",
       "http": {
@@ -496,6 +515,28 @@
       ],
       "documentation": "<p>Deletes the specified stack. After the stack is deleted, the application streaming environment provided by the stack is no longer available to users. Also, any reservations made for application streaming sessions for the stack are released.</p>"
     },
+    "DeleteUsageReportSubscription": {
+      "name": "DeleteUsageReportSubscription",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteUsageReportSubscriptionRequest"
+      },
+      "output": {
+        "shape": "DeleteUsageReportSubscriptionResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidAccountStatusException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Disables usage report generation.</p>"
+    },
     "DeleteUser": {
       "name": "DeleteUser",
       "http": {
@@ -532,7 +573,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the information required to join streaming instances to an Active Directory domain. </p> <p>Although the response syntax in this topic includes the account password, this password is not returned in the actual response.</p>"
+      "documentation": "<p>Retrieves a list that describes one or more specified Directory Config objects for AppStream 2.0, if the names for these objects are provided. Otherwise, all Directory Config objects in the account are described. These objects include the configuration information required to join fleets and image builders to Microsoft Active Directory domains. </p> <p>Although the response syntax in this topic includes the account password, this password is not returned in the actual response.</p>"
     },
     "DescribeFleets": {
       "name": "DescribeFleets",
@@ -630,7 +671,7 @@
           "shape": "InvalidParameterCombinationException"
         }
       ],
-      "documentation": "<p>Retrieves a list that describes the active streaming sessions for a specified stack and fleet. If a value for <code>UserId</code> is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.</p>"
+      "documentation": "<p>Retrieves a list that describes the streaming sessions for a specified stack and fleet. If a UserId is provided for the stack and fleet, only streaming sessions for that user are described. If an authentication type is not provided, the default is to authenticate users using a streaming URL.</p>"
     },
     "DescribeStacks": {
       "name": "DescribeStacks",
@@ -650,6 +691,28 @@
         }
       ],
       "documentation": "<p>Retrieves a list that describes one or more specified stacks, if the stack names are provided. Otherwise, all stacks in the account are described.</p>"
+    },
+    "DescribeUsageReportSubscriptions": {
+      "name": "DescribeUsageReportSubscriptions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeUsageReportSubscriptionsRequest"
+      },
+      "output": {
+        "shape": "DescribeUsageReportSubscriptionsResult"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidAccountStatusException"
+        }
+      ],
+      "documentation": "<p>Retrieves a list that describes one or more usage report subscriptions.</p>"
     },
     "DescribeUserStackAssociations": {
       "name": "DescribeUserStackAssociations",
@@ -995,7 +1058,7 @@
           "shape": "ConcurrentModificationException"
         }
       ],
-      "documentation": "<p>Updates the specified Directory Config object in AppStream 2.0. This object includes the information required to join streaming instances to an Active Directory domain.</p>"
+      "documentation": "<p>Updates the specified Directory Config object in AppStream 2.0. This object includes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.</p>"
     },
     "UpdateFleet": {
       "name": "UpdateFleet",
@@ -1041,7 +1104,7 @@
           "shape": "OperationNotPermittedException"
         }
       ],
-      "documentation": "<p>Updates the specified fleet.</p> <p>If the fleet is in the <code>STOPPED</code> state, you can update any attribute except the fleet name. If the fleet is in the <code>RUNNING</code> state, you can update the <code>DisplayName</code> and <code>ComputeCapacity</code> attributes. If the fleet is in the <code>STARTING</code> or <code>STOPPING</code> state, you can't update it.</p>"
+      "documentation": "<p>Updates the specified fleet.</p> <p>If the fleet is in the <code>STOPPED</code> state, you can update any attribute except the fleet name. If the fleet is in the <code>RUNNING</code> state, you can update the <code>DisplayName</code>, <code>ComputeCapacity</code>, <code>ImageARN</code>, <code>ImageName</code>, and <code>DisconnectTimeoutInSeconds</code> attributes. If the fleet is in the <code>STARTING</code> or <code>STOPPING</code> state, you can't update it.</p>"
     },
     "UpdateImagePermissions": {
       "name": "UpdateImagePermissions",
@@ -1104,6 +1167,9 @@
         },
         {
           "shape": "OperationNotPermittedException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
         }
       ],
       "documentation": "<p>Updates the specified fields for the specified stack.</p>"
@@ -1401,7 +1467,7 @@
         },
         "ServiceAccountCredentials": {
           "shape": "ServiceAccountCredentials",
-          "documentation": "<p>The credentials for the service account used by the streaming instance to connect to the directory.</p>"
+          "documentation": "<p>The credentials for the service account used by the fleet or image builder to connect to the directory.</p>"
         }
       }
     },
@@ -1452,11 +1518,11 @@
         },
         "MaxUserDurationInSeconds": {
           "shape": "Integer",
-          "documentation": "<p>The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 360000.</p>"
+          "documentation": "<p>The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance.</p> <p>Specify a value between 600 and 360000.</p>"
         },
         "DisconnectTimeoutInSeconds": {
           "shape": "Integer",
-          "documentation": "<p>The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 360000.</p>"
+          "documentation": "<p>The amount of time that a streaming session remains active after users disconnect. If users try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance. </p> <p>Specify a value between 60 and 360000.</p>"
         },
         "Description": {
           "shape": "Description",
@@ -1476,7 +1542,11 @@
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p>The tags to associate with the fleet. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
+          "documentation": "<p>The tags to associate with the fleet. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p> <p>_ . : / = + \\ - @</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
+        },
+        "IdleDisconnectTimeoutInSeconds": {
+          "shape": "Integer",
+          "documentation": "<p>The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the <code>DisconnectTimeoutInSeconds</code> time interval begins. Users are notified before they are disconnected due to inactivity. If they try to reconnect to the streaming session before the time interval specified in <code>DisconnectTimeoutInSeconds</code> elapses, they are connected to their previous session. Users are considered idle when they stop providing keyboard or mouse input during their streaming session. File uploads and downloads, audio in, audio out, and pixels changing do not qualify as user activity. If users continue to be idle after the time interval in <code>IdleDisconnectTimeoutInSeconds</code> elapses, they are disconnected.</p> <p>To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 900.</p> <note> <p>If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity. </p> </note>"
         }
       }
     },
@@ -1538,7 +1608,7 @@
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p>The tags to associate with the image builder. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
+          "documentation": "<p>The tags to associate with the image builder. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p> <p>_ . : / = + \\ - @</p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
         }
       }
     },
@@ -1620,7 +1690,7 @@
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p>The tags to associate with the stack. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
+          "documentation": "<p>The tags to associate with the stack. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p> <p>_ . : / = + \\ - @</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Developer Guide</i>.</p>"
         }
       }
     },
@@ -1680,6 +1750,23 @@
         }
       }
     },
+    "CreateUsageReportSubscriptionRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "CreateUsageReportSubscriptionResult": {
+      "type": "structure",
+      "members": {
+        "S3BucketName": {
+          "shape": "String",
+          "documentation": "<p>The Amazon S3 bucket where generated reports are stored. When a usage report subscription is enabled for the first time for an account in an AWS Region, an S3 bucket is created. The bucket is unique to the AWS account and the Region. </p>"
+        },
+        "Schedule": {
+          "shape": "UsageReportSchedule",
+          "documentation": "<p>The schedule for generating usage reports.</p>"
+        }
+      }
+    },
     "CreateUserRequest": {
       "type": "structure",
       "required": [
@@ -1689,7 +1776,7 @@
       "members": {
         "UserName": {
           "shape": "Username",
-          "documentation": "<p>The email address of the user.</p>"
+          "documentation": "<p>The email address of the user.</p> <note> <p>Users' email addresses are case-sensitive. During login, if they specify an email address that doesn't use the same capitalization as the email address specified when their user pool account was created, a \"user does not exist\" error message displays.</p> </note>"
         },
         "MessageAction": {
           "shape": "MessageAction",
@@ -1824,6 +1911,14 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteUsageReportSubscriptionRequest": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteUsageReportSubscriptionResult": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteUserRequest": {
       "type": "structure",
       "required": [
@@ -1833,7 +1928,7 @@
       "members": {
         "UserName": {
           "shape": "Username",
-          "documentation": "<p>The email address of the user.</p>"
+          "documentation": "<p>The email address of the user.</p> <note> <p>Users' email addresses are case-sensitive.</p> </note>"
         },
         "AuthenticationType": {
           "shape": "AuthenticationType",
@@ -2045,7 +2140,7 @@
         },
         "AuthenticationType": {
           "shape": "AuthenticationType",
-          "documentation": "<p>The authentication method. Specify <code>API</code> for a user authenticated using a streaming URL, <code>SAML</code> for a SAML 2.0-federated user, or <code>USERPOOL</code> for a user in the AppStream 2.0 user pool. The default is to authenticate users using a streaming URL.</p>"
+          "documentation": "<p>The authentication method. Specify <code>API</code> for a user authenticated using a streaming URL or <code>SAML</code> for a SAML federated user. The default is to authenticate users using a streaming URL.</p>"
         }
       }
     },
@@ -2088,6 +2183,32 @@
         }
       }
     },
+    "DescribeUsageReportSubscriptionsRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "shape": "Integer",
+          "documentation": "<p>The maximum size of each page of results.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
+        }
+      }
+    },
+    "DescribeUsageReportSubscriptionsResult": {
+      "type": "structure",
+      "members": {
+        "UsageReportSubscriptions": {
+          "shape": "UsageReportSubscriptionList",
+          "documentation": "<p>Information about the usage report subscription.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+        }
+      }
+    },
     "DescribeUserStackAssociationsRequest": {
       "type": "structure",
       "members": {
@@ -2097,7 +2218,7 @@
         },
         "UserName": {
           "shape": "Username",
-          "documentation": "<p>The email address of the user who is associated with the stack.</p>"
+          "documentation": "<p>The email address of the user who is associated with the stack.</p> <note> <p>Users' email addresses are case-sensitive.</p> </note>"
         },
         "AuthenticationType": {
           "shape": "AuthenticationType",
@@ -2179,14 +2300,14 @@
         },
         "ServiceAccountCredentials": {
           "shape": "ServiceAccountCredentials",
-          "documentation": "<p>The credentials for the service account used by the streaming instance to connect to the directory.</p>"
+          "documentation": "<p>The credentials for the service account used by the fleet or image builder to connect to the directory.</p>"
         },
         "CreatedTime": {
           "shape": "Timestamp",
           "documentation": "<p>The time the directory configuration was created.</p>"
         }
       },
-      "documentation": "<p>Describes the configuration information for the directory used to join a streaming instance to a Microsoft Active Directory domain.</p>"
+      "documentation": "<p>Describes the configuration information required to join fleets and image builders to Microsoft Active Directory domains.</p>"
     },
     "DirectoryConfigList": {
       "type": "list",
@@ -2212,7 +2333,7 @@
       "members": {
         "UserName": {
           "shape": "Username",
-          "documentation": "<p>The email address of the user.</p>"
+          "documentation": "<p>The email address of the user.</p> <note> <p>Users' email addresses are case-sensitive.</p> </note>"
         },
         "AuthenticationType": {
           "shape": "AuthenticationType",
@@ -2284,7 +2405,7 @@
       "members": {
         "UserName": {
           "shape": "Username",
-          "documentation": "<p>The email address of the user.</p>"
+          "documentation": "<p>The email address of the user.</p> <note> <p>Users' email addresses are case-sensitive. During login, if they specify an email address that doesn't use the same capitalization as the email address specified when their user pool account was created, a \"user does not exist\" error message displays. </p> </note>"
         },
         "AuthenticationType": {
           "shape": "AuthenticationType",
@@ -2364,11 +2485,11 @@
         },
         "MaxUserDurationInSeconds": {
           "shape": "Integer",
-          "documentation": "<p>The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 360000.</p>"
+          "documentation": "<p>The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance. </p> <p>Specify a value between 600 and 360000.</p>"
         },
         "DisconnectTimeoutInSeconds": {
           "shape": "Integer",
-          "documentation": "<p>The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 360000. By default, this value is 900 seconds (15 minutes).</p>"
+          "documentation": "<p>The amount of time that a streaming session remains active after users disconnect. If they try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance.</p> <p>Specify a value between 60 and 360000.</p>"
         },
         "State": {
           "shape": "FleetState",
@@ -2393,6 +2514,10 @@
         "DomainJoinInfo": {
           "shape": "DomainJoinInfo",
           "documentation": "<p>The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. </p>"
+        },
+        "IdleDisconnectTimeoutInSeconds": {
+          "shape": "Integer",
+          "documentation": "<p>The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the <code>DisconnectTimeoutInSeconds</code> time interval begins. Users are notified before they are disconnected due to inactivity. If users try to reconnect to the streaming session before the time interval specified in <code>DisconnectTimeoutInSeconds</code> elapses, they are connected to their previous session. Users are considered idle when they stop providing keyboard or mouse input during their streaming session. File uploads and downloads, audio in, audio out, and pixels changing do not qualify as user activity. If users continue to be idle after the time interval in <code>IdleDisconnectTimeoutInSeconds</code> elapses, they are disconnected.</p> <p>To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 900.</p> <note> <p>If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity. </p> </note>"
         }
       },
       "documentation": "<p>Describes the parameters for a fleet.</p>"
@@ -2721,6 +2846,26 @@
     "Integer": {
       "type": "integer"
     },
+    "LastReportGenerationExecutionError": {
+      "type": "structure",
+      "members": {
+        "ErrorCode": {
+          "shape": "UsageReportExecutionErrorCode",
+          "documentation": "<p>The error code for the error that is returned when a usage report can't be generated.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "String",
+          "documentation": "<p>The error message for the error that is returned when a usage report can't be generated.</p>"
+        }
+      },
+      "documentation": "<p>Describes the error that is returned when a usage report can't be generated.</p>"
+    },
+    "LastReportGenerationExecutionErrors": {
+      "type": "list",
+      "member": {
+        "shape": "LastReportGenerationExecutionError"
+      }
+    },
     "ListAssociatedFleetsRequest": {
       "type": "structure",
       "required": [
@@ -2928,7 +3073,7 @@
           "documentation": "<p>The password for the account.</p>"
         }
       },
-      "documentation": "<p>Describes the credentials for the service account used by the streaming instance to connect to the directory.</p>"
+      "documentation": "<p>Describes the credentials for the service account used by the fleet or image builder to connect to the directory.</p>"
     },
     "Session": {
       "type": "structure",
@@ -2962,11 +3107,11 @@
         },
         "ConnectionState": {
           "shape": "SessionConnectionState",
-          "documentation": "<p>Specifies whether a user is connected to the streaming session. </p>"
+          "documentation": "<p>Specifies whether a user is connected to the streaming session.</p>"
         },
         "StartTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The time when a streaming instance is dedicated for the user. </p>"
+          "documentation": "<p>The time when a streaming instance is dedicated for the user.</p>"
         },
         "MaxExpirationTime": {
           "shape": "Timestamp",
@@ -2974,7 +3119,7 @@
         },
         "AuthenticationType": {
           "shape": "AuthenticationType",
-          "documentation": "<p>The authentication method. The user is authenticated using a streaming URL (<code>API</code>), SAML 2.0 federation (<code>SAML</code>), or the AppStream 2.0 user pool (<code>USERPOOL</code>). The default is to authenticate users using a streaming URL. </p>"
+          "documentation": "<p>The authentication method. The user is authenticated using a streaming URL (<code>API</code>) or SAML 2.0 federation (<code>SAML</code>).</p>"
         },
         "NetworkAccessConfiguration": {
           "shape": "NetworkAccessConfiguration",
@@ -2999,6 +3144,7 @@
     },
     "SessionState": {
       "type": "string",
+      "documentation": "<p>Possible values for the state of a streaming session.</p>",
       "enum": [
         "ACTIVE",
         "PENDING",
@@ -3237,7 +3383,7 @@
           "documentation": "<p>The names of the domains for the account.</p>"
         }
       },
-      "documentation": "<p>Describes a connector to enable persistent storage for users.</p>"
+      "documentation": "<p>Describes a connector that enables persistent storage for users.</p>"
     },
     "StorageConnectorList": {
       "type": "list",
@@ -3305,7 +3451,7 @@
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p>The tags to associate. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>If you do not specify a value, the value is set to an empty string.</p>"
+          "documentation": "<p>The tags to associate. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p> <p>If you do not specify a value, the value is set to an empty string.</p> <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p> <p>_ . : / = + \\ - @</p>"
         }
       }
     },
@@ -3370,7 +3516,7 @@
         },
         "ServiceAccountCredentials": {
           "shape": "ServiceAccountCredentials",
-          "documentation": "<p>The credentials for the service account used by the streaming instance to connect to the directory.</p>"
+          "documentation": "<p>The credentials for the service account used by the fleet or image builder to connect to the directory.</p>"
         }
       }
     },
@@ -3412,11 +3558,11 @@
         },
         "MaxUserDurationInSeconds": {
           "shape": "Integer",
-          "documentation": "<p>The maximum time that a streaming session can run, in seconds. Specify a value between 600 and 360000. By default, the value is 900 seconds (15 minutes).</p>"
+          "documentation": "<p>The maximum amount of time that a streaming session can remain active, in seconds. If users are still connected to a streaming instance five minutes before this limit is reached, they are prompted to save any open documents before being disconnected. After this time elapses, the instance is terminated and replaced by a new instance.</p> <p>Specify a value between 600 and 360000.</p>"
         },
         "DisconnectTimeoutInSeconds": {
           "shape": "Integer",
-          "documentation": "<p>The time after disconnection when a session is considered to have ended, in seconds. If a user who was disconnected reconnects within this time interval, the user is connected to their previous session. Specify a value between 60 and 360000. By default, the value is 900 seconds (15 minutes).</p>"
+          "documentation": "<p>The amount of time that a streaming session remains active after users disconnect. If users try to reconnect to the streaming session after a disconnection or network interruption within this time interval, they are connected to their previous session. Otherwise, they are connected to a new session with a new streaming instance. </p> <p>Specify a value between 60 and 360000.</p>"
         },
         "DeleteVpcConfig": {
           "shape": "Boolean",
@@ -3438,6 +3584,10 @@
         "DomainJoinInfo": {
           "shape": "DomainJoinInfo",
           "documentation": "<p>The name of the directory and organizational unit (OU) to use to join the fleet to a Microsoft Active Directory domain. </p>"
+        },
+        "IdleDisconnectTimeoutInSeconds": {
+          "shape": "Integer",
+          "documentation": "<p>The amount of time that users can be idle (inactive) before they are disconnected from their streaming session and the <code>DisconnectTimeoutInSeconds</code> time interval begins. Users are notified before they are disconnected due to inactivity. If users try to reconnect to the streaming session before the time interval specified in <code>DisconnectTimeoutInSeconds</code> elapses, they are connected to their previous session. Users are considered idle when they stop providing keyboard or mouse input during their streaming session. File uploads and downloads, audio in, audio out, and pixels changing do not qualify as user activity. If users continue to be idle after the time interval in <code>IdleDisconnectTimeoutInSeconds</code> elapses, they are disconnected. </p> <p>To prevent users from being disconnected due to inactivity, specify a value of 0. Otherwise, specify a value between 60 and 3600. The default value is 900.</p> <note> <p>If you enable this feature, we recommend that you specify a value that corresponds exactly to a whole number of minutes (for example, 60, 120, and 180). If you don't do this, the value is rounded to the nearest minute. For example, if you specify a value of 70, users are disconnected after 1 minute of inactivity. If you specify a value that is at the midpoint between two different minutes, the value is rounded up. For example, if you specify a value of 90, users are disconnected after 2 minutes of inactivity. </p> </note>"
         },
         "AttributesToDelete": {
           "shape": "FleetAttributes",
@@ -3538,6 +3688,48 @@
         }
       }
     },
+    "UsageReportExecutionErrorCode": {
+      "type": "string",
+      "enum": [
+        "RESOURCE_NOT_FOUND",
+        "ACCESS_DENIED",
+        "INTERNAL_SERVICE_ERROR"
+      ]
+    },
+    "UsageReportSchedule": {
+      "type": "string",
+      "enum": [
+        "DAILY"
+      ]
+    },
+    "UsageReportSubscription": {
+      "type": "structure",
+      "members": {
+        "S3BucketName": {
+          "shape": "String",
+          "documentation": "<p>The Amazon S3 bucket where generated reports are stored. When a usage report subscription is enabled for the first time for an account in an AWS Region, an S3 bucket is created. The bucket is unique to the AWS account and the Region.</p>"
+        },
+        "Schedule": {
+          "shape": "UsageReportSchedule",
+          "documentation": "<p>The schedule for generating usage reports.</p>"
+        },
+        "LastGeneratedReportDate": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time when the last usage report was generated.</p>"
+        },
+        "SubscriptionErrors": {
+          "shape": "LastReportGenerationExecutionErrors",
+          "documentation": "<p>The errors that are returned when usage reports can't be generated.</p>"
+        }
+      },
+      "documentation": "<p>Describes information about the usage report subscription.</p>"
+    },
+    "UsageReportSubscriptionList": {
+      "type": "list",
+      "member": {
+        "shape": "UsageReportSubscription"
+      }
+    },
     "User": {
       "type": "structure",
       "required": [
@@ -3550,7 +3742,7 @@
         },
         "UserName": {
           "shape": "Username",
-          "documentation": "<p>The email address of the user.</p>"
+          "documentation": "<p>The email address of the user.</p> <note> <p>Users' email addresses are case-sensitive.</p> </note>"
         },
         "Enabled": {
           "shape": "Boolean",
@@ -3635,7 +3827,7 @@
         },
         "UserName": {
           "shape": "Username",
-          "documentation": "<p>The email address of the user who is associated with the stack.</p>"
+          "documentation": "<p>The email address of the user who is associated with the stack.</p> <note> <p>Users' email addresses are case-sensitive.</p> </note>"
         },
         "AuthenticationType": {
           "shape": "AuthenticationType",
@@ -3684,7 +3876,9 @@
       "type": "list",
       "member": {
         "shape": "UserStackAssociation"
-      }
+      },
+      "max": 25,
+      "min": 1
     },
     "Username": {
       "type": "string",
@@ -3716,5 +3910,5 @@
       "documentation": "<p>Describes VPC configuration information for fleets and image builders.</p>"
     }
   },
-  "documentation": "<fullname>Amazon AppStream 2.0</fullname> <p>This is the <i>Amazon AppStream 2.0 API Reference</i>. This reference provides descriptions and syntax for each of the actions and data types in AppStream 2.0. AppStream 2.0 is a fully managed application streaming service. You centrally manage your desktop applications on AppStream 2.0 and securely deliver them to any computer. AppStream 2.0 manages the AWS resources required to host and run your applications, scales automatically, and provides access to your users on demand.</p> <p>To learn more about AppStream 2.0, see the following resources:</p> <ul> <li> <p> <a href=\"http://aws.amazon.com/appstream2\">Amazon AppStream 2.0 product page</a> </p> </li> <li> <p> <a href=\"http://aws.amazon.com/documentation/appstream2\">Amazon AppStream 2.0 documentation</a> </p> </li> </ul>"
+  "documentation": "<fullname>Amazon AppStream 2.0</fullname> <p>This is the <i>Amazon AppStream 2.0 API Reference</i>. It provides descriptions and syntax for each of the actions and data types in AppStream 2.0. AppStream 2.0 is a fully managed application streaming service. You centrally manage your desktop applications on AppStream 2.0 and securely deliver them to any computer. AppStream 2.0 manages the AWS resources required to host and run your applications, scales automatically, and provides access to your users on demand.</p> <p>To learn more about AppStream 2.0, see the following resources:</p> <ul> <li> <p> <a href=\"http://aws.amazon.com/appstream2\">Amazon AppStream 2.0 product page</a> </p> </li> <li> <p> <a href=\"http://aws.amazon.com/documentation/appstream2\">Amazon AppStream 2.0 documentation</a> </p> </li> </ul>"
 }
