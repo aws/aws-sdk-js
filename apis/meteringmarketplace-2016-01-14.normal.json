@@ -214,7 +214,7 @@
         },
         "Timestamp": {
           "shape": "Timestamp",
-          "documentation": "<p>Timestamp of the hour, recorded in UTC. The seconds and milliseconds portions of the timestamp will be ignored.</p>"
+          "documentation": "<p>Timestamp, in UTC, for which the usage is being reported. Your application can meter usage for up to one hour in the past. Make sure the timestamp value is not before the start of the software usage.</p>"
         },
         "UsageDimension": {
           "shape": "UsageDimension",
@@ -339,7 +339,7 @@
       "members": {
         "Timestamp": {
           "shape": "Timestamp",
-          "documentation": "<p>Timestamp of the hour, recorded in UTC. The seconds and milliseconds portions of the timestamp will be ignored.</p> <p>Your application can meter usage for up to one hour in the past.</p>"
+          "documentation": "<p>Timestamp, in UTC, for which the usage is being reported.</p> <p>Your application can meter usage for up to one hour in the past. Make sure the timestamp value is not before the start of the software usage.</p>"
         },
         "CustomerIdentifier": {
           "shape": "CustomerIdentifier",

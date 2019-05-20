@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "Kafka",
+        "description": "Updated APIs for the Managed Streaming for Kafka service that let customers create clusters with custom Kafka configuration. "
+    },
+    {
+        "type": "feature",
+        "category": "MediaPackageVod",
+        "description": "AWS Elemental MediaPackage now supports Video-on-Demand (VOD) workflows.  These new features allow you to easily deliver a vast library of source video Assets stored in your own S3 buckets using a small set of simple to set up Packaging Configurations and Packaging Groups."
+    }
+]

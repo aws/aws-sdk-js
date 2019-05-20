@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.458.0-->
+<!--LATEST=2.459.0-->
 <!--ENTRYINSERT-->
+
+## 2.459.0
+* feature: Kafka: Updated APIs for the Managed Streaming for Kafka service that let customers create clusters with custom Kafka configuration. 
+* feature: MediaPackageVod: AWS Elemental MediaPackage now supports Video-on-Demand (VOD) workflows.  These new features allow you to easily deliver a vast library of source video Assets stored in your own S3 buckets using a small set of simple to set up Packaging Configurations and Packaging Groups.
 
 ## 2.458.0
 * feature: AppStream: Includes APIs for managing subscriptions to AppStream 2.0 usage reports and configuring idle disconnect timeouts on AppStream 2.0 fleets.

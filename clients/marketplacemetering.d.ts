@@ -73,7 +73,7 @@ declare namespace MarketplaceMetering {
      */
     ProductCode: ProductCode;
     /**
-     * Timestamp of the hour, recorded in UTC. The seconds and milliseconds portions of the timestamp will be ignored.
+     * Timestamp, in UTC, for which the usage is being reported. Your application can meter usage for up to one hour in the past. Make sure the timestamp value is not before the start of the software usage.
      */
     Timestamp: Timestamp;
     /**
@@ -144,7 +144,7 @@ declare namespace MarketplaceMetering {
   export type UsageQuantity = number;
   export interface UsageRecord {
     /**
-     * Timestamp of the hour, recorded in UTC. The seconds and milliseconds portions of the timestamp will be ignored. Your application can meter usage for up to one hour in the past.
+     * Timestamp, in UTC, for which the usage is being reported. Your application can meter usage for up to one hour in the past. Make sure the timestamp value is not before the start of the software usage.
      */
     Timestamp: Timestamp;
     /**
