@@ -247,6 +247,10 @@ export abstract class ConfigurationOptions {
      */
     s3DisableBodySigning?: boolean
     /**
+     * Whether to add "Expect: 100-Continue" HTTP headers when sending large payloads.
+     */
+    s3AddExpect100ContinueHeaders?: boolean
+    /**
      * Whether to force path style URLs for S3 objects.
      */
     s3ForcePathStyle?: boolean
