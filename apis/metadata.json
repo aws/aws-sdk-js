@@ -696,5 +696,9 @@
   },
   "managedblockchain": {
     "name": "ManagedBlockchain"
+  },
+  "mediapackagevod": {
+    "prefix": "mediapackage-vod",
+    "name": "MediaPackageVod"
   }
 }

@@ -173,5 +173,6 @@ module.exports = {
   Backup: require('./backup'),
   WorkLink: require('./worklink'),
   Textract: require('./textract'),
-  ManagedBlockchain: require('./managedblockchain')
+  ManagedBlockchain: require('./managedblockchain'),
+  MediaPackageVod: require('./mediapackagevod')
 };
