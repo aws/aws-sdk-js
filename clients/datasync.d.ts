@@ -422,6 +422,8 @@ declare namespace DataSync {
      * The time that the agent was activated (that is, created in your account).
      */
     CreationTime?: Time;
+    EndpointOptions?: EndpointOptions;
+    PrivateLinkConfig?: PrivateLinkConfig;
   }
   export interface DescribeLocationEfsRequest {
     /**
@@ -614,6 +616,10 @@ declare namespace DataSync {
   export type Ec2SecurityGroupArnList = Ec2SecurityGroupArn[];
   export type Ec2SubnetArn = string;
   export type EfsFilesystemArn = string;
+  export interface EndpointOptions {
+    Fips?: boolean;
+    PrivateLink?: boolean;
+  }
   export type FilterList = FilterRule[];
   export interface FilterRule {
     /**
@@ -806,10 +812,17 @@ declare namespace DataSync {
      */
     BytesPerSecond?: BytesPerSecond;
   }
+  export type PLSecurityGroupArnList = Ec2SecurityGroupArn[];
+  export type PLSubnetArnList = Ec2SubnetArn[];
   export type PhaseStatus = "PENDING"|"SUCCESS"|"ERROR"|string;
   export type PosixPermissions = "NONE"|"BEST_EFFORT"|"PRESERVE"|string;
   export type PreserveDeletedFiles = "PRESERVE"|"REMOVE"|string;
   export type PreserveDevices = "NONE"|"PRESERVE"|string;
+  export interface PrivateLinkConfig {
+    PrivateLinkEndpoint?: string;
+    SubnetArns?: PLSubnetArnList;
+    SecurityGroupArns?: PLSecurityGroupArnList;
+  }
   export type S3BucketArn = string;
   export interface S3Config {
     /**
