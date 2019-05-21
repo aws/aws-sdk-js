@@ -574,7 +574,7 @@
     "AgentArn": {
       "type": "string",
       "max": 128,
-      "pattern": "^arn:(aws|aws-cn):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$"
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:agent/agent-[0-9a-z]{17}$"
     },
     "AgentArnList": {
       "type": "list",
@@ -920,6 +920,12 @@
         "CreationTime": {
           "shape": "Time",
           "documentation": "<p>The time that the agent was activated (that is, created in your account).</p>"
+        },
+        "EndpointOptions": {
+          "shape": "EndpointOptions"
+        },
+        "PrivateLinkConfig": {
+          "shape": "PrivateLinkConfig"
         }
       },
       "documentation": "<p>DescribeAgentResponse</p>"
@@ -1188,7 +1194,7 @@
     "Ec2SecurityGroupArn": {
       "type": "string",
       "max": 128,
-      "pattern": "^arn:(aws|aws-cn):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$"
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:security-group/.*$"
     },
     "Ec2SecurityGroupArnList": {
       "type": "list",
@@ -1201,12 +1207,23 @@
     "Ec2SubnetArn": {
       "type": "string",
       "max": 128,
-      "pattern": "^arn:(aws|aws-cn):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$"
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):ec2:[a-z\\-0-9]*:[0-9]{12}:subnet/.*$"
     },
     "EfsFilesystemArn": {
       "type": "string",
       "max": 128,
-      "pattern": "^arn:(aws|aws-cn):elasticfilesystem:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$"
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):elasticfilesystem:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$"
+    },
+    "EndpointOptions": {
+      "type": "structure",
+      "members": {
+        "Fips": {
+          "shape": "boolean"
+        },
+        "PrivateLink": {
+          "shape": "boolean"
+        }
+      }
     },
     "FilterList": {
       "type": "list",
@@ -1241,7 +1258,7 @@
     "FilterValue": {
       "type": "string",
       "max": 409600,
-      "pattern": "^.+$"
+      "pattern": "^[^\\x00]+$"
     },
     "Gid": {
       "type": "string",
@@ -1255,7 +1272,7 @@
     "IamRoleArn": {
       "type": "string",
       "max": 2048,
-      "pattern": "^arn:(aws|aws-cn):iam::[0-9]{12}:role/.*$"
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$"
     },
     "ListAgentsRequest": {
       "type": "structure",
@@ -1411,7 +1428,7 @@
     "LocationArn": {
       "type": "string",
       "max": 128,
-      "pattern": "^arn:(aws|aws-cn):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$"
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$"
     },
     "LocationList": {
       "type": "list",
@@ -1440,7 +1457,7 @@
     "LogGroupArn": {
       "type": "string",
       "max": 562,
-      "pattern": "^arn:(aws|aws-cn):logs:[a-z\\-0-9]*:[0-9]{12}:log-group:([^:\\*]*)$"
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\\-0-9]*:[0-9]{12}:log-group:([^:\\*]*)$"
     },
     "MaxResults": {
       "type": "integer",
@@ -1456,7 +1473,7 @@
     },
     "NextToken": {
       "type": "string",
-      "max": 93,
+      "max": 65535,
       "pattern": "[a-zA-Z0-9=_-]+"
     },
     "NfsMountOptions": {
@@ -1538,6 +1555,22 @@
       },
       "documentation": "<p>Represents the options that are available to control the behavior of a <a>StartTaskExecution</a> operation. Behavior includes preserving metadata such as user ID (UID), group ID (GID), and file permissions, and also overwriting files in the destination, data integrity verification, and so on.</p> <p>A task has a set of default options associated with it. If you don't specify an option in <a>StartTaskExecution</a>, the default value is used. You can override the defaults options on each task execution by specifying an overriding <code>Options</code> value to <a>StartTaskExecution</a>.</p>"
     },
+    "PLSecurityGroupArnList": {
+      "type": "list",
+      "member": {
+        "shape": "Ec2SecurityGroupArn"
+      },
+      "max": 1,
+      "min": 1
+    },
+    "PLSubnetArnList": {
+      "type": "list",
+      "member": {
+        "shape": "Ec2SubnetArn"
+      },
+      "max": 1,
+      "min": 1
+    },
     "PhaseStatus": {
       "type": "string",
       "enum": [
@@ -1568,10 +1601,24 @@
         "PRESERVE"
       ]
     },
+    "PrivateLinkConfig": {
+      "type": "structure",
+      "members": {
+        "PrivateLinkEndpoint": {
+          "shape": "string"
+        },
+        "SubnetArns": {
+          "shape": "PLSubnetArnList"
+        },
+        "SecurityGroupArns": {
+          "shape": "PLSecurityGroupArnList"
+        }
+      }
+    },
     "S3BucketArn": {
       "type": "string",
       "max": 76,
-      "pattern": "^arn:(aws|aws-cn):s3:::([^/]*)$"
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):s3:::([^/]*)$"
     },
     "S3Config": {
       "type": "structure",
@@ -1696,17 +1743,17 @@
     "TaggableResourceArn": {
       "type": "string",
       "max": 128,
-      "pattern": "^arn:(aws|aws-cn):datasync:[a-z\\-0-9]+:[0-9]{12}:(agent|task|location)/(agent|task|loc)-[0-9a-z]{17}$"
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:(agent|task|location)/(agent|task|loc)-[0-9a-z]{17}$"
     },
     "TaskArn": {
       "type": "string",
       "max": 128,
-      "pattern": "^arn:(aws|aws-cn):datasync:[a-z\\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}$"
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}$"
     },
     "TaskExecutionArn": {
       "type": "string",
       "max": 128,
-      "pattern": "^arn:(aws|aws-cn):datasync:[a-z\\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}/execution/exec-[0-9a-f]{17}$"
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}/execution/exec-[0-9a-f]{17}$"
     },
     "TaskExecutionList": {
       "type": "list",
@@ -1903,6 +1950,9 @@
         "POINT_IN_TIME_CONSISTENT",
         "NONE"
       ]
+    },
+    "boolean": {
+      "type": "boolean"
     },
     "long": {
       "type": "long"

@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.459.0-->
+<!--LATEST=2.460.0-->
 <!--ENTRYINSERT-->
+
+## 2.460.0
+* feature: AlexaForBusiness: This release contains API changes to allow customers to create and manage Network Profiles for their Shared devices
+* feature: DataSync: Documentation update and refine pagination token on Datasync List API's
 
 ## 2.459.0
 * feature: Kafka: Updated APIs for the Managed Streaming for Kafka service that let customers create clusters with custom Kafka configuration. 

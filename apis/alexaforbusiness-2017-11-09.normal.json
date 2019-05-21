@@ -56,6 +56,31 @@
       ],
       "documentation": "<p>Associates a contact with a given address book.</p>"
     },
+    "AssociateDeviceWithNetworkProfile": {
+      "name": "AssociateDeviceWithNetworkProfile",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AssociateDeviceWithNetworkProfileRequest"
+      },
+      "output": {
+        "shape": "AssociateDeviceWithNetworkProfileResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "DeviceNotRegisteredException"
+        }
+      ],
+      "documentation": "<p>Associates a device with the specified network profile.</p>"
+    },
     "AssociateDeviceWithRoom": {
       "name": "AssociateDeviceWithRoom",
       "http": {
@@ -250,6 +275,37 @@
         }
       ],
       "documentation": "<p>Creates a gateway group with the specified details.</p>"
+    },
+    "CreateNetworkProfile": {
+      "name": "CreateNetworkProfile",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateNetworkProfileRequest"
+      },
+      "output": {
+        "shape": "CreateNetworkProfileResponse"
+      },
+      "errors": [
+        {
+          "shape": "AlreadyExistsException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "InvalidCertificateAuthorityException"
+        },
+        {
+          "shape": "InvalidServiceLinkedRoleStateException"
+        }
+      ],
+      "documentation": "<p>Creates a network profile with the specified details.</p>"
     },
     "CreateProfile": {
       "name": "CreateProfile",
@@ -481,7 +537,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device.</p>"
+      "documentation": "<p>When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data. This action can be called once every 24 hours for a specific shared device. </p>"
     },
     "DeleteGatewayGroup": {
       "name": "DeleteGatewayGroup",
@@ -501,6 +557,31 @@
         }
       ],
       "documentation": "<p>Deletes a gateway group.</p>"
+    },
+    "DeleteNetworkProfile": {
+      "name": "DeleteNetworkProfile",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteNetworkProfileRequest"
+      },
+      "output": {
+        "shape": "DeleteNetworkProfileResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "NotFoundException"
+        }
+      ],
+      "documentation": "<p>Deletes a network profile by the network profile ARN.</p>"
     },
     "DeleteProfile": {
       "name": "DeleteProfile",
@@ -900,6 +981,28 @@
         }
       ],
       "documentation": "<p>Retrieves the configured values for the user enrollment invitation email template.</p>"
+    },
+    "GetNetworkProfile": {
+      "name": "GetNetworkProfile",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetNetworkProfileRequest"
+      },
+      "output": {
+        "shape": "GetNetworkProfileResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "InvalidSecretsManagerResourceException"
+        }
+      ],
+      "documentation": "<p>Gets the network profile details by the network profile ARN.</p>"
     },
     "GetProfile": {
       "name": "GetProfile",
@@ -1344,6 +1447,20 @@
       },
       "documentation": "<p>Searches devices and lists the ones that meet a set of filter criteria.</p>"
     },
+    "SearchNetworkProfiles": {
+      "name": "SearchNetworkProfiles",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "SearchNetworkProfilesRequest"
+      },
+      "output": {
+        "shape": "SearchNetworkProfilesResponse"
+      },
+      "documentation": "<p>Searches network profiles and lists the ones that meet a set of filter and sort criteria.</p>"
+    },
     "SearchProfiles": {
       "name": "SearchProfiles",
       "http": {
@@ -1464,7 +1581,7 @@
           "shape": "DeviceNotRegisteredException"
         }
       ],
-      "documentation": "<p>Resets a device and its account to the known default settings, by clearing all information and settings set by previous users.</p>"
+      "documentation": "<p>Resets a device and its account to the known default settings. This clears all information and settings set by previous users in the following ways:</p> <ul> <li> <p>Bluetooth - This unpairs all bluetooth devices paired with your echo device.</p> </li> <li> <p>Volume - This resets the echo device's volume to the default value.</p> </li> <li> <p>Notifications - This clears all notifications from your echo device.</p> </li> <li> <p>Lists - This clears all to-do items from your echo device.</p> </li> <li> <p>Settings - This internally syncs the room's profile (if the device is assigned to a room), contacts, address books, delegation access for account linking, and communications (if enabled on the room profile).</p> </li> </ul>"
     },
     "StartSmartHomeApplianceDiscovery": {
       "name": "StartSmartHomeApplianceDiscovery",
@@ -1680,6 +1797,37 @@
       ],
       "documentation": "<p>Updates the details of a gateway group. If any optional field is not provided, the existing corresponding value is left unmodified.</p>"
     },
+    "UpdateNetworkProfile": {
+      "name": "UpdateNetworkProfile",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateNetworkProfileRequest"
+      },
+      "output": {
+        "shape": "UpdateNetworkProfileResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "NameInUseException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "InvalidCertificateAuthorityException"
+        },
+        {
+          "shape": "InvalidSecretsManagerResourceException"
+        }
+      ],
+      "documentation": "<p>Updates a network profile by the network profile ARN.</p>"
+    },
     "UpdateProfile": {
       "name": "UpdateProfile",
       "http": {
@@ -1864,6 +2012,27 @@
       }
     },
     "AssociateContactWithAddressBookResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "AssociateDeviceWithNetworkProfileRequest": {
+      "type": "structure",
+      "required": [
+        "DeviceArn",
+        "NetworkProfileArn"
+      ],
+      "members": {
+        "DeviceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The device ARN.</p>"
+        },
+        "NetworkProfileArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the network profile to associate with a device.</p>"
+        }
+      }
+    },
+    "AssociateDeviceWithNetworkProfileResponse": {
       "type": "structure",
       "members": {}
     },
@@ -2165,6 +2334,9 @@
     },
     "CategoryName": {
       "type": "string"
+    },
+    "CertificateTime": {
+      "type": "timestamp"
     },
     "ClientId": {
       "type": "string",
@@ -2535,6 +2707,66 @@
         }
       }
     },
+    "CreateNetworkProfileRequest": {
+      "type": "structure",
+      "required": [
+        "NetworkProfileName",
+        "Ssid",
+        "SecurityType",
+        "ClientRequestToken"
+      ],
+      "members": {
+        "NetworkProfileName": {
+          "shape": "NetworkProfileName",
+          "documentation": "<p>The name of the network profile associated with a device.</p>"
+        },
+        "Description": {
+          "shape": "NetworkProfileDescription",
+          "documentation": "<p>Detailed information about a device's network profile.</p>"
+        },
+        "Ssid": {
+          "shape": "NetworkSsid",
+          "documentation": "<p>The SSID of the Wi-Fi network.</p>"
+        },
+        "SecurityType": {
+          "shape": "NetworkSecurityType",
+          "documentation": "<p>The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK, WPA_PSK, WEP, or OPEN.</p>"
+        },
+        "EapMethod": {
+          "shape": "NetworkEapMethod",
+          "documentation": "<p>The authentication standard that is used in the EAP framework. Currently, EAP_TLS is supported.</p>"
+        },
+        "CurrentPassword": {
+          "shape": "CurrentWiFiPassword",
+          "documentation": "<p>The current password of the Wi-Fi network.</p>"
+        },
+        "NextPassword": {
+          "shape": "NextWiFiPassword",
+          "documentation": "<p>The next, or subsequent, password of the Wi-Fi network. This password is asynchronously transmitted to the device and is used when the password of the network changes to NextPassword. </p>"
+        },
+        "CertificateAuthorityArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the Private Certificate Authority (PCA) created in AWS Certificate Manager (ACM). This is used to issue certificates to the devices. </p>"
+        },
+        "TrustAnchors": {
+          "shape": "TrustAnchorList",
+          "documentation": "<p>The root certificates of your authentication server that is installed on your devices and used to trust your authentication server during EAP negotiation. </p>"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "CreateNetworkProfileResponse": {
+      "type": "structure",
+      "members": {
+        "NetworkProfileArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the network profile associated with a device.</p>"
+        }
+      }
+    },
     "CreateProfileRequest": {
       "type": "structure",
       "required": [
@@ -2712,6 +2944,13 @@
         }
       }
     },
+    "CurrentWiFiPassword": {
+      "type": "string",
+      "max": 128,
+      "min": 5,
+      "pattern": "[\\x00-\\x7F]*",
+      "sensitive": true
+    },
     "CustomerS3BucketName": {
       "type": "string",
       "pattern": "[a-z0-9-\\.]{3,63}"
@@ -2834,6 +3073,22 @@
       }
     },
     "DeleteGatewayGroupResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteNetworkProfileRequest": {
+      "type": "structure",
+      "required": [
+        "NetworkProfileArn"
+      ],
+      "members": {
+        "NetworkProfileArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the network profile associated with a device.</p>"
+        }
+      }
+    },
+    "DeleteNetworkProfileResponse": {
       "type": "structure",
       "members": {}
     },
@@ -3004,6 +3259,10 @@
         "DeviceStatusInfo": {
           "shape": "DeviceStatusInfo",
           "documentation": "<p>Detailed information about a device's status.</p>"
+        },
+        "NetworkProfileInfo": {
+          "shape": "DeviceNetworkProfileInfo",
+          "documentation": "<p>Detailed information about a device's network profile.</p>"
         }
       },
       "documentation": "<p>A device with attributes.</p>"
@@ -3038,6 +3297,14 @@
         "DeviceStatus": {
           "shape": "DeviceStatus",
           "documentation": "<p>The status of a device.</p>"
+        },
+        "NetworkProfileArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the network profile associated with a device.</p>"
+        },
+        "NetworkProfileName": {
+          "shape": "NetworkProfileName",
+          "documentation": "<p>The name of the network profile associated with a device.</p>"
         },
         "RoomArn": {
           "shape": "Arn",
@@ -3103,6 +3370,24 @@
       "min": 2,
       "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
     },
+    "DeviceNetworkProfileInfo": {
+      "type": "structure",
+      "members": {
+        "NetworkProfileArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the network profile associated with a device.</p>"
+        },
+        "CertificateArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the certificate associated with a device.</p>"
+        },
+        "CertificateExpirationTime": {
+          "shape": "CertificateTime",
+          "documentation": "<p>The time (in epoch) when the certificate expires.</p>"
+        }
+      },
+      "documentation": "<p>Detailed information about a device's network profile.</p>"
+    },
     "DeviceSerialNumber": {
       "type": "string",
       "pattern": "[a-zA-Z0-9]{1,200}"
@@ -3117,12 +3402,17 @@
         "READY",
         "PENDING",
         "WAS_OFFLINE",
-        "DEREGISTERED"
+        "DEREGISTERED",
+        "FAILED"
       ]
     },
     "DeviceStatusDetail": {
       "type": "structure",
       "members": {
+        "Feature": {
+          "shape": "Feature",
+          "documentation": "<p>The list of available features on the device.</p>"
+        },
         "Code": {
           "shape": "DeviceStatusDetailCode",
           "documentation": "<p>The device status detail code.</p>"
@@ -3330,6 +3620,8 @@
         "NOTIFICATIONS",
         "LISTS",
         "SKILLS",
+        "NETWORK_PROFILE",
+        "SETTINGS",
         "ALL"
       ]
     },
@@ -3687,6 +3979,27 @@
         "PrivateSkillIds": {
           "shape": "ShortSkillIdList",
           "documentation": "<p>The list of private skill IDs that you want to recommend to the user to enable in the invitation.</p>"
+        }
+      }
+    },
+    "GetNetworkProfileRequest": {
+      "type": "structure",
+      "required": [
+        "NetworkProfileArn"
+      ],
+      "members": {
+        "NetworkProfileArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the network profile associated with a device.</p>"
+        }
+      }
+    },
+    "GetNetworkProfileResponse": {
+      "type": "structure",
+      "members": {
+        "NetworkProfile": {
+          "shape": "NetworkProfile",
+          "documentation": "<p>The network profile associated with a device.</p>"
         }
       }
     },
@@ -4140,6 +4453,126 @@
       },
       "documentation": "<p>The values that indicate whether a pin is always required (YES), never required (NO), or OPTIONAL.</p> <ul> <li> <p>If YES, Alexa will always ask for a meeting pin.</p> </li> <li> <p>If NO, Alexa will never ask for a meeting pin.</p> </li> <li> <p>If OPTIONAL, Alexa will ask if you have a meeting pin and if the customer responds with yes, it will ask for the meeting pin.</p> </li> </ul>"
     },
+    "NetworkEapMethod": {
+      "type": "string",
+      "enum": [
+        "EAP_TLS"
+      ]
+    },
+    "NetworkProfile": {
+      "type": "structure",
+      "members": {
+        "NetworkProfileArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the network profile associated with a device.</p>"
+        },
+        "NetworkProfileName": {
+          "shape": "NetworkProfileName",
+          "documentation": "<p>The name of the network profile associated with a device.</p>"
+        },
+        "Description": {
+          "shape": "NetworkProfileDescription",
+          "documentation": "<p>Detailed information about a device's network profile.</p>"
+        },
+        "Ssid": {
+          "shape": "NetworkSsid",
+          "documentation": "<p>The SSID of the Wi-Fi network.</p>"
+        },
+        "SecurityType": {
+          "shape": "NetworkSecurityType",
+          "documentation": "<p>The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK, WPA_PSK, WEP, or OPEN.</p>"
+        },
+        "EapMethod": {
+          "shape": "NetworkEapMethod",
+          "documentation": "<p>The authentication standard that is used in the EAP framework. Currently, EAP_TLS is supported. </p>"
+        },
+        "CurrentPassword": {
+          "shape": "CurrentWiFiPassword",
+          "documentation": "<p>The current password of the Wi-Fi network.</p>"
+        },
+        "NextPassword": {
+          "shape": "NextWiFiPassword",
+          "documentation": "<p>The next, or subsequent, password of the Wi-Fi network. This password is asynchronously transmitted to the device and is used when the password of the network changes to NextPassword. </p>"
+        },
+        "CertificateAuthorityArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the Private Certificate Authority (PCA) created in AWS Certificate Manager (ACM). This is used to issue certificates to the devices. </p>"
+        },
+        "TrustAnchors": {
+          "shape": "TrustAnchorList",
+          "documentation": "<p>The root certificates of your authentication server, which is installed on your devices and used to trust your authentication server during EAP negotiation.</p>"
+        }
+      },
+      "documentation": "<p>The network profile associated with a device.</p>"
+    },
+    "NetworkProfileData": {
+      "type": "structure",
+      "members": {
+        "NetworkProfileArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the network profile associated with a device.</p>"
+        },
+        "NetworkProfileName": {
+          "shape": "NetworkProfileName",
+          "documentation": "<p>The name of the network profile associated with a device.</p>"
+        },
+        "Description": {
+          "shape": "NetworkProfileDescription",
+          "documentation": "<p>Detailed information about a device's network profile.</p>"
+        },
+        "Ssid": {
+          "shape": "NetworkSsid",
+          "documentation": "<p>The SSID of the Wi-Fi network.</p>"
+        },
+        "SecurityType": {
+          "shape": "NetworkSecurityType",
+          "documentation": "<p>The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK, WPA_PSK, WEP, or OPEN.</p>"
+        },
+        "EapMethod": {
+          "shape": "NetworkEapMethod",
+          "documentation": "<p>The authentication standard that is used in the EAP framework. Currently, EAP_TLS is supported.</p>"
+        },
+        "CertificateAuthorityArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the Private Certificate Authority (PCA) created in AWS Certificate Manager (ACM). This is used to issue certificates to the devices.</p>"
+        }
+      },
+      "documentation": "<p>The data associated with a network profile.</p>"
+    },
+    "NetworkProfileDataList": {
+      "type": "list",
+      "member": {
+        "shape": "NetworkProfileData"
+      }
+    },
+    "NetworkProfileDescription": {
+      "type": "string",
+      "max": 200,
+      "min": 0,
+      "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+    },
+    "NetworkProfileName": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+    },
+    "NetworkSecurityType": {
+      "type": "string",
+      "enum": [
+        "OPEN",
+        "WEP",
+        "WPA_PSK",
+        "WPA2_PSK",
+        "WPA2_ENTERPRISE"
+      ]
+    },
+    "NetworkSsid": {
+      "type": "string",
+      "max": 32,
+      "min": 1,
+      "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
+    },
     "NewInThisVersionBulletPoints": {
       "type": "list",
       "member": {
@@ -4148,8 +4581,15 @@
     },
     "NextToken": {
       "type": "string",
-      "max": 1000,
+      "max": 1100,
       "min": 1
+    },
+    "NextWiFiPassword": {
+      "type": "string",
+      "max": 128,
+      "min": 0,
+      "pattern": "(^$)|([\\x00-\\x7F]{5,})",
+      "sensitive": true
     },
     "OneClickIdDelay": {
       "type": "string",
@@ -4165,7 +4605,7 @@
       "type": "string",
       "max": 100,
       "min": 1,
-      "pattern": "([A-Za-z\\-' 0-9._]|\\p{IsLetter})*"
+      "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*"
     },
     "OutboundPhoneNumber": {
       "type": "string",
@@ -4751,11 +5191,11 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly, and ConnectionStatus (ONLINE and OFFLINE).</p>"
+          "documentation": "<p>The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly, ConnectionStatus (ONLINE and OFFLINE), NetworkProfileName, NetworkProfileArn, Feature, and FailureCode.</p>"
         },
         "SortCriteria": {
           "shape": "SortList",
-          "documentation": "<p>The sort order to use in listing the specified set of devices. Supported sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber, and ConnectionStatus.</p>"
+          "documentation": "<p>The sort order to use in listing the specified set of devices. Supported sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber, ConnectionStatus, NetworkProfileName, NetworkProfileArn, Feature, and FailureCode.</p>"
         }
       }
     },
@@ -4773,6 +5213,44 @@
         "TotalCount": {
           "shape": "TotalCount",
           "documentation": "<p>The total number of devices returned.</p>"
+        }
+      }
+    },
+    "SearchNetworkProfilesRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults. </p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved. </p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>The filters to use to list a specified set of network profiles. Valid filters are NetworkProfileName, Ssid, and SecurityType.</p>"
+        },
+        "SortCriteria": {
+          "shape": "SortList",
+          "documentation": "<p>The sort order to use to list the specified set of network profiles. Valid sort criteria includes NetworkProfileName, Ssid, and SecurityType.</p>"
+        }
+      }
+    },
+    "SearchNetworkProfilesResponse": {
+      "type": "structure",
+      "members": {
+        "NetworkProfiles": {
+          "shape": "NetworkProfileDataList",
+          "documentation": "<p>The network profiles that meet the specified set of filter criteria, in sort order. It is a list of NetworkProfileData objects. </p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.</p>"
+        },
+        "TotalCount": {
+          "shape": "TotalCount",
+          "documentation": "<p>The total number of network profiles returned.</p>"
         }
       }
     },
@@ -5451,6 +5929,18 @@
     "TotalCount": {
       "type": "integer"
     },
+    "TrustAnchor": {
+      "type": "string",
+      "pattern": "-{5}BEGIN CERTIFICATE-{5}\\u000D?\\u000A([A-Za-z0-9/+]{64}\\u000D?\\u000A)*[A-Za-z0-9/+]{1,64}={0,2}\\u000D?\\u000A-{5}END CERTIFICATE-{5}(\\u000D?\\u000A)?"
+    },
+    "TrustAnchorList": {
+      "type": "list",
+      "member": {
+        "shape": "TrustAnchor"
+      },
+      "max": 5,
+      "min": 1
+    },
     "UntagResourceRequest": {
       "type": "structure",
       "required": [
@@ -5664,6 +6154,46 @@
       }
     },
     "UpdateGatewayResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateNetworkProfileRequest": {
+      "type": "structure",
+      "required": [
+        "NetworkProfileArn"
+      ],
+      "members": {
+        "NetworkProfileArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the network profile associated with a device.</p>"
+        },
+        "NetworkProfileName": {
+          "shape": "NetworkProfileName",
+          "documentation": "<p>The name of the network profile associated with a device.</p>"
+        },
+        "Description": {
+          "shape": "NetworkProfileDescription",
+          "documentation": "<p>Detailed information about a device's network profile.</p>"
+        },
+        "CurrentPassword": {
+          "shape": "CurrentWiFiPassword",
+          "documentation": "<p>The current password of the Wi-Fi network.</p>"
+        },
+        "NextPassword": {
+          "shape": "NextWiFiPassword",
+          "documentation": "<p>The next, or subsequent, password of the Wi-Fi network. This password is asynchronously transmitted to the device and is used when the password of the network changes to NextPassword. </p>"
+        },
+        "CertificateAuthorityArn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN of the Private Certificate Authority (PCA) created in AWS Certificate Manager (ACM). This is used to issue certificates to the devices. </p>"
+        },
+        "TrustAnchors": {
+          "shape": "TrustAnchorList",
+          "documentation": "<p>The root certificate(s) of your authentication server that will be installed on your devices and used to trust your authentication server during EAP negotiation. </p>"
+        }
+      }
+    },
+    "UpdateNetworkProfileResponse": {
       "type": "structure",
       "members": {}
     },
