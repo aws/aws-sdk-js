@@ -1,10 +1,11 @@
 # AWS SDK for JavaScript
 
-[![NPM](https://nodei.co/npm/aws-sdk.svg?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/aws-sdk/)
+[![NPM version](https://img.shields.io/npm/v/aws-sdk.svg)](https://www.npmjs.com/package/aws-sdk)
+[![NPM downloads](https://img.shields.io/npm/dm/aws-sdk.svg)](https://www.npmjs.com/package/aws-sdk)
 
+[![Build Status](https://travis-ci.org/aws/aws-sdk-js.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-js)
+[![Coverage Status](https://codecov.io/gh/aws/aws-sdk-js/branch/master/graph/badge.svg)](https://codecov.io/gh/aws/aws-sdk-js)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/aws/aws-sdk-js)
-
-[![Version](https://badge.fury.io/js/aws-sdk.svg)](http://badge.fury.io/js/aws-sdk) [![Build Status](https://travis-ci.org/aws/aws-sdk-js.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-js) [![Coverage Status](https://coveralls.io/repos/aws/aws-sdk-js/badge.svg?branch=master)](https://coveralls.io/r/aws/aws-sdk-js?branch=master)
 
 The official AWS SDK for JavaScript, available for browsers and mobile devices,
 or Node.js backends
