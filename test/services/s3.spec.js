@@ -2686,6 +2686,21 @@ describe('AWS.S3', function() {
       done();
     });
 
+    it('throws error when supplying a non-number value', function(done) {
+      var expiresString = '60';
+      try {
+        s3.getSignedUrl('getObject', {
+          Bucket: 'bucket',
+          Key: 'key',
+          Expires: expiresString
+        });
+      } catch (e) {
+        expect(e.code).to.eql('InvalidParameterException');
+        expect(e.message).to.eql('The expiration must be a number, received ' + typeof expiresString);
+        done();
+      }
+    });
+
     it('gets a signed URL for getObject', function() {
       var url = s3.getSignedUrl('getObject', {
         Bucket: 'bucket',
