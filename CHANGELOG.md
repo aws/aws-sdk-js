@@ -1,6 +1,16 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.460.0-->
+<!--LATEST=2.461.0-->
 <!--ENTRYINSERT-->
+
+## 2.461.0
+* feature: APIGateway: This release adds support for tagging of Amazon API Gateway resources.
+* feature: Budgets: Added new datatype PlannedBudgetLimits to Budget model, and updated examples for AWS Budgets API for UpdateBudget, CreateBudget, DescribeBudget, and DescribeBudgets
+* feature: DeviceFarm: This release introduces support for tagging, tag-based access control, and resource-based access control.
+* feature: EC2: This release adds idempotency support for associate, create route and authorization APIs for AWS Client VPN Endpoints.
+* feature: EFS: AWS EFS documentation updated to reflect the minimum required value for ProvisionedThroughputInMibps is 1 from the previously documented 0. The service has always required a minimum value of 1, therefor service behavior is not changed. 
+* feature: ServiceCatalog: Service Catalog UpdateProvisionedProductProperties API enables customers to manage provisioned product ownership. Administrators can now update the user associated to a provisioned product to another user within the same account allowing the new user to describe, update, terminate and execute service actions in that Service Catalog resource. New owner will also be able to list and describe all past records executed for that provisioned product.
+* feature: WorkLink: Amazon WorkLink is a fully managed, cloud-based service that enables secure, one-click access to internal websites and web apps from mobile phones. This release introduces new APIs to associate and manage website authorization providers with Amazon WorkLink fleets.
+* feature: s3: Validate the `Expiration` parameter for `s3.getSignedUrl()` is number
 
 ## 2.460.0
 * feature: AlexaForBusiness: This release contains API changes to allow customers to create and manage Network Profiles for their Shared devices
