@@ -3527,6 +3527,10 @@
         "stageKeys": {
           "shape": "ListOfString",
           "documentation": "<p>A list of <a>Stage</a> resources that are associated with the <a>ApiKey</a> resource.</p>"
+        },
+        "tags": {
+          "shape": "MapOfStringToString",
+          "documentation": "<p>The collection of tags. Each tag element is associated with a given resource.</p>"
         }
       },
       "documentation": "<p>A resource that can be distributed to callers for executing <a>Method</a> resources that require an API key. API keys can be mapped to any <a>Stage</a> on any <a>RestApi</a>, which indicates that the callers with the API key can make requests to that stage.</p> <div class=\"seeAlso\"> <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-api-keys.html\">Use API Keys</a> </div>"
@@ -3770,6 +3774,10 @@
         "expirationDate": {
           "shape": "Timestamp",
           "documentation": "<p>The timestamp when the client certificate will expire.</p>"
+        },
+        "tags": {
+          "shape": "MapOfStringToString",
+          "documentation": "<p>The collection of tags. Each tag element is associated with a given resource.</p>"
         }
       },
       "documentation": "<p>Represents a client certificate used to configure client-side SSL authentication while sending requests to the integration endpoint.</p> <div class=\"remarks\">Client certificates are used to authenticate an API by the backend server. To authenticate an API client (or user), use IAM roles and policies, a custom <a>Authorizer</a> or an Amazon Cognito user pool.</div> <div class=\"seeAlso\"> <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started-client-side-ssl-authentication.html\">Use Client-Side Certificate</a> </div>"
@@ -3832,6 +3840,10 @@
         "customerId": {
           "shape": "String",
           "documentation": "<p>An AWS Marketplace customer identifier , when integrating with the AWS SaaS Marketplace.</p>"
+        },
+        "tags": {
+          "shape": "MapOfStringToString",
+          "documentation": "<p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.</p>"
         }
       },
       "documentation": "<p>Request to create an <a>ApiKey</a> resource.</p>"
@@ -4058,6 +4070,10 @@
         "endpointConfiguration": {
           "shape": "EndpointConfiguration",
           "documentation": "<p>The endpoint configuration of this <a>DomainName</a> showing the endpoint types of the domain name. </p>"
+        },
+        "tags": {
+          "shape": "MapOfStringToString",
+          "documentation": "<p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.</p>"
         }
       },
       "documentation": "<p>A request to create a new domain name.</p>"
@@ -4190,6 +4206,10 @@
         "policy": {
           "shape": "String",
           "documentation": "A stringified JSON policy document that applies to this RestApi regardless of the caller and <a>Method</a> configuration."
+        },
+        "tags": {
+          "shape": "MapOfStringToString",
+          "documentation": "<p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.</p>"
         }
       },
       "documentation": "<p>The POST Request to add a new <a>RestApi</a> resource to your collection.</p>"
@@ -4301,6 +4321,10 @@
         "quota": {
           "shape": "QuotaSettings",
           "documentation": "<p>The quota of the usage plan.</p>"
+        },
+        "tags": {
+          "shape": "MapOfStringToString",
+          "documentation": "<p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.</p>"
         }
       },
       "documentation": "<p>The POST request to create a usage plan with the name, description, throttle limits and quota limits, as well as the associated API stages, specified in the payload.</p>"
@@ -4323,6 +4347,10 @@
         "targetArns": {
           "shape": "ListOfString",
           "documentation": "<p>[Required] The ARNs of network load balancers of the VPC targeted by the VPC link. The network load balancers must be owned by the same AWS account of the API owner.</p>"
+        },
+        "tags": {
+          "shape": "MapOfStringToString",
+          "documentation": "<p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.</p>"
         }
       },
       "documentation": "<p>Creates a VPC link, under the caller's account in a selected region, in an asynchronous operation that typically takes 2-4 minutes to complete and become operational. The caller must have permissions to create and update VPC Endpoint services.</p>"
@@ -5017,6 +5045,10 @@
         "endpointConfiguration": {
           "shape": "EndpointConfiguration",
           "documentation": "<p>The endpoint configuration of this <a>DomainName</a> showing the endpoint types of the domain name. </p>"
+        },
+        "tags": {
+          "shape": "MapOfStringToString",
+          "documentation": "<p>The collection of tags. Each tag element is associated with a given resource.</p>"
         }
       },
       "documentation": "<p>Represents a custom domain name as a user-friendly host name of an API (<a>RestApi</a>).</p> <div class=\"Remarks\"> <p>When you deploy an API, API Gateway creates a default host name for the API. This default API host name is of the <code>{restapi-id}.execute-api.{region}.amazonaws.com</code> format. With the default host name, you can access the API's root resource with the URL of <code>https://{restapi-id}.execute-api.{region}.amazonaws.com/{stage}/</code>. When you set up a custom domain name of <code>apis.example.com</code> for this API, you can then access the same resource using the URL of the <code>https://apis.examples.com/myApi</code>, where <code>myApi</code> is the base path mapping (<a>BasePathMapping</a>) of your API under the custom domain name. </p> </div> <div class=\"seeAlso\"> <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html\">Set a Custom Host Name for an API</a> </div>"
@@ -5195,6 +5227,10 @@
         "description": {
           "shape": "String",
           "documentation": "<p>The description of the <a>ClientCertificate</a>.</p>"
+        },
+        "tags": {
+          "shape": "MapOfStringToString",
+          "documentation": "<p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with <code>aws:</code>. The tag value can be up to 256 characters.</p>"
         }
       },
       "documentation": "<p>A request to generate a <a>ClientCertificate</a> resource.</p>"
@@ -7489,6 +7525,10 @@
         "policy": {
           "shape": "String",
           "documentation": "A stringified JSON policy document that applies to this RestApi regardless of the caller and <a>Method</a> configuration."
+        },
+        "tags": {
+          "shape": "MapOfStringToString",
+          "documentation": "<p>The collection of tags. Each tag element is associated with a given resource.</p>"
         }
       },
       "documentation": "<p>Represents a REST API.</p> <div class=\"seeAlso\"> <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html\">Create an API</a> </div>"
@@ -8559,6 +8599,10 @@
         "productCode": {
           "shape": "String",
           "documentation": "<p>The AWS Markeplace product identifier to associate with the usage plan as a SaaS product on AWS Marketplace.</p>"
+        },
+        "tags": {
+          "shape": "MapOfStringToString",
+          "documentation": "<p>The collection of tags. Each tag element is associated with a given resource.</p>"
         }
       },
       "documentation": "<p>Represents a usage plan than can specify who can assess associated API stages with specified request limits and quotas.</p> <div class=\"remarks\"> <p>In a usage plan, you associate an API by specifying the API's Id and a stage name of the specified API. You add plan customers by adding API keys to the plan. </p> </div> <div class=\"seeAlso\"> <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-api-usage-plans.html\">Create and Use Usage Plans</a> </div>"
@@ -8639,6 +8683,10 @@
         "statusMessage": {
           "shape": "String",
           "documentation": "<p>A description about the VPC link status.</p>"
+        },
+        "tags": {
+          "shape": "MapOfStringToString",
+          "documentation": "<p>The collection of tags. Each tag element is associated with a given resource.</p>"
         }
       },
       "documentation": "<p>A API Gateway VPC link for a <a>RestApi</a> to access resources in an Amazon Virtual Private Cloud (VPC).</p> <div class=\"remarks\"> <p><p>To enable access to a resource in an Amazon Virtual Private Cloud through Amazon API Gateway, you, as an API developer, create a <a>VpcLink</a> resource targeted for one or more network load balancers of the VPC and then integrate an API method with a private integration that uses the <a>VpcLink</a>. The private integration has an integration type of <code>HTTP</code> or <code>HTTP_PROXY</code> and has a connection type of <code>VPC_LINK</code>. The integration uses the <code>connectionId</code> property to identify the <a>VpcLink</a> used.</p> </p> </div>"

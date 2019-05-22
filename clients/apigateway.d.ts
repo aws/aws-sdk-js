@@ -1038,6 +1038,10 @@ declare namespace APIGateway {
      * A list of Stage resources that are associated with the ApiKey resource.
      */
     stageKeys?: ListOfString;
+    /**
+     * The collection of tags. Each tag element is associated with a given resource.
+     */
+    tags?: MapOfStringToString;
   }
   export interface ApiKeyIds {
     /**
@@ -1190,6 +1194,10 @@ declare namespace APIGateway {
      * The timestamp when the client certificate will expire.
      */
     expirationDate?: Timestamp;
+    /**
+     * The collection of tags. Each tag element is associated with a given resource.
+     */
+    tags?: MapOfStringToString;
   }
   export interface ClientCertificates {
     position?: String;
@@ -1229,6 +1237,10 @@ declare namespace APIGateway {
      * An AWS Marketplace customer identifier , when integrating with the AWS SaaS Marketplace.
      */
     customerId?: String;
+    /**
+     * The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters.
+     */
+    tags?: MapOfStringToString;
   }
   export interface CreateAuthorizerRequest {
     /**
@@ -1397,6 +1409,10 @@ declare namespace APIGateway {
      * The endpoint configuration of this DomainName showing the endpoint types of the domain name. 
      */
     endpointConfiguration?: EndpointConfiguration;
+    /**
+     * The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters.
+     */
+    tags?: MapOfStringToString;
   }
   export interface CreateModelRequest {
     /**
@@ -1489,6 +1505,10 @@ declare namespace APIGateway {
      * A stringified JSON policy document that applies to this RestApi regardless of the caller and Method configuration.
      */
     policy?: String;
+    /**
+     * The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters.
+     */
+    tags?: MapOfStringToString;
   }
   export interface CreateStageRequest {
     /**
@@ -1571,6 +1591,10 @@ declare namespace APIGateway {
      * The quota of the usage plan.
      */
     quota?: QuotaSettings;
+    /**
+     * The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters.
+     */
+    tags?: MapOfStringToString;
   }
   export interface CreateVpcLinkRequest {
     /**
@@ -1585,6 +1609,10 @@ declare namespace APIGateway {
      * [Required] The ARNs of network load balancers of the VPC targeted by the VPC link. The network load balancers must be owned by the same AWS account of the API owner.
      */
     targetArns: ListOfString;
+    /**
+     * The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters.
+     */
+    tags?: MapOfStringToString;
   }
   export interface DeleteApiKeyRequest {
     /**
@@ -1956,6 +1984,10 @@ declare namespace APIGateway {
      * The endpoint configuration of this DomainName showing the endpoint types of the domain name. 
      */
     endpointConfiguration?: EndpointConfiguration;
+    /**
+     * The collection of tags. Each tag element is associated with a given resource.
+     */
+    tags?: MapOfStringToString;
   }
   export interface DomainNames {
     position?: String;
@@ -2041,6 +2073,10 @@ declare namespace APIGateway {
      * The description of the ClientCertificate.
      */
     description?: String;
+    /**
+     * The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters.
+     */
+    tags?: MapOfStringToString;
   }
   export interface GetAccountRequest {
   }
@@ -3288,6 +3324,10 @@ declare namespace APIGateway {
      * A stringified JSON policy document that applies to this RestApi regardless of the caller and Method configuration.
      */
     policy?: String;
+    /**
+     * The collection of tags. Each tag element is associated with a given resource.
+     */
+    tags?: MapOfStringToString;
   }
   export interface RestApis {
     position?: String;
@@ -3962,6 +4002,10 @@ declare namespace APIGateway {
      * The AWS Markeplace product identifier to associate with the usage plan as a SaaS product on AWS Marketplace.
      */
     productCode?: String;
+    /**
+     * The collection of tags. Each tag element is associated with a given resource.
+     */
+    tags?: MapOfStringToString;
   }
   export interface UsagePlanKey {
     /**
@@ -4020,6 +4064,10 @@ declare namespace APIGateway {
      * A description about the VPC link status.
      */
     statusMessage?: String;
+    /**
+     * The collection of tags. Each tag element is associated with a given resource.
+     */
+    tags?: MapOfStringToString;
   }
   export type VpcLinkStatus = "AVAILABLE"|"PENDING"|"DELETING"|"FAILED"|string;
   export interface VpcLinks {

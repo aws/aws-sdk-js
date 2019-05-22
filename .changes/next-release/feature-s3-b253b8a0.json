@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "s3",
-  "description": "Validate the `Expiration` parameter for `s3.getSignedUrl()` is number"
-}
