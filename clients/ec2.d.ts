@@ -653,11 +653,11 @@ declare class EC2 extends Service {
    */
   createVpcPeeringConnection(callback?: (err: AWSError, data: EC2.Types.CreateVpcPeeringConnectionResult) => void): Request<EC2.Types.CreateVpcPeeringConnectionResult, AWSError>;
   /**
-   * Creates a VPN connection between an existing virtual private gateway and a VPN customer gateway. The only supported connection type is ipsec.1. The response includes information that you need to give to your network administrator to configure your customer gateway.  We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway.  If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call. This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
+   * Creates a VPN connection between an existing virtual private gateway and a VPN customer gateway. The supported connection types are ipsec.1 and ipsec.2. The response includes information that you need to give to your network administrator to configure your customer gateway.  We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway.  If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call. This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
    */
   createVpnConnection(params: EC2.Types.CreateVpnConnectionRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpnConnectionResult) => void): Request<EC2.Types.CreateVpnConnectionResult, AWSError>;
   /**
-   * Creates a VPN connection between an existing virtual private gateway and a VPN customer gateway. The only supported connection type is ipsec.1. The response includes information that you need to give to your network administrator to configure your customer gateway.  We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway.  If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call. This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
+   * Creates a VPN connection between an existing virtual private gateway and a VPN customer gateway. The supported connection types are ipsec.1 and ipsec.2. The response includes information that you need to give to your network administrator to configure your customer gateway.  We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway.  If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call. This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
    */
   createVpnConnection(callback?: (err: AWSError, data: EC2.Types.CreateVpnConnectionResult) => void): Request<EC2.Types.CreateVpnConnectionResult, AWSError>;
   /**
@@ -1797,6 +1797,14 @@ declare class EC2 extends Service {
    */
   detachVpnGateway(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Disables default encryption for EBS volumes that are created in your account in the current region. Call this API if you have enabled default encryption using EnableEbsEncryptionByDefault and want to disable default EBS encryption. Once default EBS encryption is disabled, you can still create an encrypted volume by setting encrypted to true in the API call that creates the volume.  Disabling default EBS encryption will not change the encryption status of any of your existing volumes.
+   */
+  disableEbsEncryptionByDefault(params: EC2.Types.DisableEbsEncryptionByDefaultRequest, callback?: (err: AWSError, data: EC2.Types.DisableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.DisableEbsEncryptionByDefaultResult, AWSError>;
+  /**
+   * Disables default encryption for EBS volumes that are created in your account in the current region. Call this API if you have enabled default encryption using EnableEbsEncryptionByDefault and want to disable default EBS encryption. Once default EBS encryption is disabled, you can still create an encrypted volume by setting encrypted to true in the API call that creates the volume.  Disabling default EBS encryption will not change the encryption status of any of your existing volumes.
+   */
+  disableEbsEncryptionByDefault(callback?: (err: AWSError, data: EC2.Types.DisableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.DisableEbsEncryptionByDefaultResult, AWSError>;
+  /**
    * Disables the specified resource attachment from propagating routes to the specified propagation route table.
    */
   disableTransitGatewayRouteTablePropagation(params: EC2.Types.DisableTransitGatewayRouteTablePropagationRequest, callback?: (err: AWSError, data: EC2.Types.DisableTransitGatewayRouteTablePropagationResult) => void): Request<EC2.Types.DisableTransitGatewayRouteTablePropagationResult, AWSError>;
@@ -1885,6 +1893,14 @@ declare class EC2 extends Service {
    */
   disassociateVpcCidrBlock(callback?: (err: AWSError, data: EC2.Types.DisassociateVpcCidrBlockResult) => void): Request<EC2.Types.DisassociateVpcCidrBlockResult, AWSError>;
   /**
+   * Enables default encryption for EBS volumes that are created in your account in the current region. Once encryption is enabled with this action, EBS volumes that are created in your account will always be encrypted even if encryption is not specified at launch. This setting overrides the encrypted setting to true in all API calls that create EBS volumes in your account. A volume will be encrypted even if you specify encryption to be false in the API call that creates the volume. If you do not specify a customer master key (CMK) in the API call that creates the EBS volume, then the volume is encrypted to your AWS account's default CMK. You can specify a default CMK of your choice using ModifyEbsDefaultKmsKeyId. Enabling default encryption for EBS volumes has no effect on existing unencrypted volumes in your account. Encrypting the data in these requires manual action. You can either create an encrypted snapshot of an unencrypted volume, or encrypt a copy of an unencrypted snapshot. Any volume restored from an encrypted snapshot is also encrypted. For more information, see Amazon EBS Snapshots. Once EBS encryption by default is enabled, you can no longer launch older-generation instance types that do not support encryption. For more information, see Supported Instance Types.
+   */
+  enableEbsEncryptionByDefault(params: EC2.Types.EnableEbsEncryptionByDefaultRequest, callback?: (err: AWSError, data: EC2.Types.EnableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.EnableEbsEncryptionByDefaultResult, AWSError>;
+  /**
+   * Enables default encryption for EBS volumes that are created in your account in the current region. Once encryption is enabled with this action, EBS volumes that are created in your account will always be encrypted even if encryption is not specified at launch. This setting overrides the encrypted setting to true in all API calls that create EBS volumes in your account. A volume will be encrypted even if you specify encryption to be false in the API call that creates the volume. If you do not specify a customer master key (CMK) in the API call that creates the EBS volume, then the volume is encrypted to your AWS account's default CMK. You can specify a default CMK of your choice using ModifyEbsDefaultKmsKeyId. Enabling default encryption for EBS volumes has no effect on existing unencrypted volumes in your account. Encrypting the data in these requires manual action. You can either create an encrypted snapshot of an unencrypted volume, or encrypt a copy of an unencrypted snapshot. Any volume restored from an encrypted snapshot is also encrypted. For more information, see Amazon EBS Snapshots. Once EBS encryption by default is enabled, you can no longer launch older-generation instance types that do not support encryption. For more information, see Supported Instance Types.
+   */
+  enableEbsEncryptionByDefault(callback?: (err: AWSError, data: EC2.Types.EnableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.EnableEbsEncryptionByDefaultResult, AWSError>;
+  /**
    * Enables the specified attachment to propagate routes to the specified propagation route table.
    */
   enableTransitGatewayRouteTablePropagation(params: EC2.Types.EnableTransitGatewayRouteTablePropagationRequest, callback?: (err: AWSError, data: EC2.Types.EnableTransitGatewayRouteTablePropagationResult) => void): Request<EC2.Types.EnableTransitGatewayRouteTablePropagationResult, AWSError>;
@@ -1964,6 +1980,22 @@ declare class EC2 extends Service {
    * Retrieve a JPG-format screenshot of a running instance to help with troubleshooting. The returned content is Base64-encoded.
    */
   getConsoleScreenshot(callback?: (err: AWSError, data: EC2.Types.GetConsoleScreenshotResult) => void): Request<EC2.Types.GetConsoleScreenshotResult, AWSError>;
+  /**
+   * Describes the default customer master key (CMK) that your account uses to encrypt EBS volumes if you don’t specify a CMK in the API call. You can change this default using ModifyEbsDefaultKmsKeyId.
+   */
+  getEbsDefaultKmsKeyId(params: EC2.Types.GetEbsDefaultKmsKeyIdRequest, callback?: (err: AWSError, data: EC2.Types.GetEbsDefaultKmsKeyIdResult) => void): Request<EC2.Types.GetEbsDefaultKmsKeyIdResult, AWSError>;
+  /**
+   * Describes the default customer master key (CMK) that your account uses to encrypt EBS volumes if you don’t specify a CMK in the API call. You can change this default using ModifyEbsDefaultKmsKeyId.
+   */
+  getEbsDefaultKmsKeyId(callback?: (err: AWSError, data: EC2.Types.GetEbsDefaultKmsKeyIdResult) => void): Request<EC2.Types.GetEbsDefaultKmsKeyIdResult, AWSError>;
+  /**
+   * Describes whether default EBS encryption is enabled for your account in the current region.
+   */
+  getEbsEncryptionByDefault(params: EC2.Types.GetEbsEncryptionByDefaultRequest, callback?: (err: AWSError, data: EC2.Types.GetEbsEncryptionByDefaultResult) => void): Request<EC2.Types.GetEbsEncryptionByDefaultResult, AWSError>;
+  /**
+   * Describes whether default EBS encryption is enabled for your account in the current region.
+   */
+  getEbsEncryptionByDefault(callback?: (err: AWSError, data: EC2.Types.GetEbsEncryptionByDefaultResult) => void): Request<EC2.Types.GetEbsEncryptionByDefaultResult, AWSError>;
   /**
    * Preview a reservation purchase with configurations that match those of your Dedicated Host. You must have active Dedicated Hosts in your account before you purchase a reservation. This is a preview of the PurchaseHostReservation action and does not result in the offering being purchased.
    */
@@ -2085,6 +2117,14 @@ declare class EC2 extends Service {
    */
   modifyClientVpnEndpoint(callback?: (err: AWSError, data: EC2.Types.ModifyClientVpnEndpointResult) => void): Request<EC2.Types.ModifyClientVpnEndpointResult, AWSError>;
   /**
+   * Changes the default customer master key (CMK) that your account uses to encrypt EBS volumes if you don’t specify a CMK in the API call. Your account has an AWS-managed default CMK that is used for encrypting an EBS volume when no CMK is specified in the API call that creates the volume. By calling this API, you can specify a customer-managed CMK to use in place of the AWS-managed default CMK. Note: Deleting or disabling the custom CMK that you have specified to act as your default CMK will result in instance-launch failures.
+   */
+  modifyEbsDefaultKmsKeyId(params: EC2.Types.ModifyEbsDefaultKmsKeyIdRequest, callback?: (err: AWSError, data: EC2.Types.ModifyEbsDefaultKmsKeyIdResult) => void): Request<EC2.Types.ModifyEbsDefaultKmsKeyIdResult, AWSError>;
+  /**
+   * Changes the default customer master key (CMK) that your account uses to encrypt EBS volumes if you don’t specify a CMK in the API call. Your account has an AWS-managed default CMK that is used for encrypting an EBS volume when no CMK is specified in the API call that creates the volume. By calling this API, you can specify a customer-managed CMK to use in place of the AWS-managed default CMK. Note: Deleting or disabling the custom CMK that you have specified to act as your default CMK will result in instance-launch failures.
+   */
+  modifyEbsDefaultKmsKeyId(callback?: (err: AWSError, data: EC2.Types.ModifyEbsDefaultKmsKeyIdResult) => void): Request<EC2.Types.ModifyEbsDefaultKmsKeyIdResult, AWSError>;
+  /**
    * Modifies the specified EC2 Fleet. While the EC2 Fleet is being modified, it is in the modifying state.
    */
   modifyFleet(params: EC2.Types.ModifyFleetRequest, callback?: (err: AWSError, data: EC2.Types.ModifyFleetResult) => void): Request<EC2.Types.ModifyFleetResult, AWSError>;
@@ -2205,11 +2245,11 @@ declare class EC2 extends Service {
    */
   modifySnapshotAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies the specified Spot Fleet request. While the Spot Fleet request is being modified, it is in the modifying state. To scale up your Spot Fleet, increase its target capacity. The Spot Fleet launches the additional Spot Instances according to the allocation strategy for the Spot Fleet request. If the allocation strategy is lowestPrice, the Spot Fleet launches instances using the Spot pool with the lowest price. If the allocation strategy is diversified, the Spot Fleet distributes the instances across the Spot pools. To scale down your Spot Fleet, decrease its target capacity. First, the Spot Fleet cancels any open requests that exceed the new target capacity. You can request that the Spot Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowestPrice, the Spot Fleet terminates the instances with the highest price per unit. If the allocation strategy is diversified, the Spot Fleet terminates instances across the Spot pools. Alternatively, you can request that the Spot Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually. If you are finished with your Spot Fleet for now, but will use it again later, you can set the target capacity to 0.
+   * Modifies the specified Spot Fleet request. You can only modify a Spot Fleet request of type maintain. While the Spot Fleet request is being modified, it is in the modifying state. To scale up your Spot Fleet, increase its target capacity. The Spot Fleet launches the additional Spot Instances according to the allocation strategy for the Spot Fleet request. If the allocation strategy is lowestPrice, the Spot Fleet launches instances using the Spot pool with the lowest price. If the allocation strategy is diversified, the Spot Fleet distributes the instances across the Spot pools. To scale down your Spot Fleet, decrease its target capacity. First, the Spot Fleet cancels any open requests that exceed the new target capacity. You can request that the Spot Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowestPrice, the Spot Fleet terminates the instances with the highest price per unit. If the allocation strategy is diversified, the Spot Fleet terminates instances across the Spot pools. Alternatively, you can request that the Spot Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually. If you are finished with your Spot Fleet for now, but will use it again later, you can set the target capacity to 0.
    */
   modifySpotFleetRequest(params: EC2.Types.ModifySpotFleetRequestRequest, callback?: (err: AWSError, data: EC2.Types.ModifySpotFleetRequestResponse) => void): Request<EC2.Types.ModifySpotFleetRequestResponse, AWSError>;
   /**
-   * Modifies the specified Spot Fleet request. While the Spot Fleet request is being modified, it is in the modifying state. To scale up your Spot Fleet, increase its target capacity. The Spot Fleet launches the additional Spot Instances according to the allocation strategy for the Spot Fleet request. If the allocation strategy is lowestPrice, the Spot Fleet launches instances using the Spot pool with the lowest price. If the allocation strategy is diversified, the Spot Fleet distributes the instances across the Spot pools. To scale down your Spot Fleet, decrease its target capacity. First, the Spot Fleet cancels any open requests that exceed the new target capacity. You can request that the Spot Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowestPrice, the Spot Fleet terminates the instances with the highest price per unit. If the allocation strategy is diversified, the Spot Fleet terminates instances across the Spot pools. Alternatively, you can request that the Spot Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually. If you are finished with your Spot Fleet for now, but will use it again later, you can set the target capacity to 0.
+   * Modifies the specified Spot Fleet request. You can only modify a Spot Fleet request of type maintain. While the Spot Fleet request is being modified, it is in the modifying state. To scale up your Spot Fleet, increase its target capacity. The Spot Fleet launches the additional Spot Instances according to the allocation strategy for the Spot Fleet request. If the allocation strategy is lowestPrice, the Spot Fleet launches instances using the Spot pool with the lowest price. If the allocation strategy is diversified, the Spot Fleet distributes the instances across the Spot pools. To scale down your Spot Fleet, decrease its target capacity. First, the Spot Fleet cancels any open requests that exceed the new target capacity. You can request that the Spot Fleet terminate Spot Instances until the size of the fleet no longer exceeds the new target capacity. If the allocation strategy is lowestPrice, the Spot Fleet terminates the instances with the highest price per unit. If the allocation strategy is diversified, the Spot Fleet terminates instances across the Spot pools. Alternatively, you can request that the Spot Fleet keep the fleet at its current size, but not replace any Spot Instances that are interrupted or that you terminate manually. If you are finished with your Spot Fleet for now, but will use it again later, you can set the target capacity to 0.
    */
   modifySpotFleetRequest(callback?: (err: AWSError, data: EC2.Types.ModifySpotFleetRequestResponse) => void): Request<EC2.Types.ModifySpotFleetRequestResponse, AWSError>;
   /**
@@ -2484,6 +2524,14 @@ declare class EC2 extends Service {
    * Creates a Spot Instance request. For more information, see Spot Instance Requests in the Amazon EC2 User Guide for Linux Instances.
    */
   requestSpotInstances(callback?: (err: AWSError, data: EC2.Types.RequestSpotInstancesResult) => void): Request<EC2.Types.RequestSpotInstancesResult, AWSError>;
+  /**
+   * Resets the account's default customer master key (CMK) to the account's AWS-managed default CMK. This default CMK is used to encrypt EBS volumes when you have enabled EBS encryption by default without specifying a CMK in the API call. If you have not enabled encryption by default, then this CMK is used when you set the Encrypted parameter to true without specifying a custom CMK in the API call. Call this API if you have modified the default CMK that is used for encrypting your EBS volume using ModifyEbsDefaultKmsKeyId and you want to reset it to the AWS-managed default CMK. After resetting, you can continue to provide a CMK of your choice in the API call that creates the volume. However, if no CMK is specified, your account will encrypt the volume to the AWS-managed default CMK.
+   */
+  resetEbsDefaultKmsKeyId(params: EC2.Types.ResetEbsDefaultKmsKeyIdRequest, callback?: (err: AWSError, data: EC2.Types.ResetEbsDefaultKmsKeyIdResult) => void): Request<EC2.Types.ResetEbsDefaultKmsKeyIdResult, AWSError>;
+  /**
+   * Resets the account's default customer master key (CMK) to the account's AWS-managed default CMK. This default CMK is used to encrypt EBS volumes when you have enabled EBS encryption by default without specifying a CMK in the API call. If you have not enabled encryption by default, then this CMK is used when you set the Encrypted parameter to true without specifying a custom CMK in the API call. Call this API if you have modified the default CMK that is used for encrypting your EBS volume using ModifyEbsDefaultKmsKeyId and you want to reset it to the AWS-managed default CMK. After resetting, you can continue to provide a CMK of your choice in the API call that creates the volume. However, if no CMK is specified, your account will encrypt the volume to the AWS-managed default CMK.
+   */
+  resetEbsDefaultKmsKeyId(callback?: (err: AWSError, data: EC2.Types.ResetEbsDefaultKmsKeyIdResult) => void): Request<EC2.Types.ResetEbsDefaultKmsKeyIdResult, AWSError>;
   /**
    * Resets the specified attribute of the specified Amazon FPGA Image (AFI) to its default value. You can only reset the load permission attribute.
    */
@@ -5804,11 +5852,11 @@ declare namespace EC2 {
   }
   export interface CreateVolumeRequest {
     /**
-     * The Availability Zone in which to create the volume. Use DescribeAvailabilityZones to list the Availability Zones that are currently available to you.
+     * The Availability Zone in which to create the volume.
      */
     AvailabilityZone: String;
     /**
-     * Specifies the encryption state of the volume. The default effect of setting this parameter depends on the volume's source and ownership. Each default case can be overridden by specifying a customer master key (CMK) with the KeyKeyId parameter. For a complete list of possible encryption cases, see Amazon EBS Encryption.  Encrypted Amazon EBS volumes may only be attached to instances that support Amazon EBS encryption. For more information, see Supported Instance Types.
+     * Specifies the encryption state of the volume. The default effect of setting the Encrypted parameter to true through the console, API, or CLI depends on the volume's origin (new or from a snapshot), starting encryption state, ownership, and whether account-level encryption is enabled. Each default case can be overridden by specifying a customer master key (CMK) with the KmsKeyId parameter in addition to setting Encrypted to true. For a complete list of possible encryption cases, see Amazon EBS Encryption.  Encrypted Amazon EBS volumes may only be attached to instances that support Amazon EBS encryption. For more information, see Supported Instance Types.
      */
     Encrypted?: Boolean;
     /**
@@ -5816,11 +5864,11 @@ declare namespace EC2 {
      */
     Iops?: Integer;
     /**
-     * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID   Key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.    ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. The action will eventually fail. 
+     * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use to encrypt the volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID   Key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.    ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. The action will eventually fail. 
      */
     KmsKeyId?: String;
     /**
-     * The size of the volume, in GiBs. Constraints: 1-16,384 for gp2, 4-16,384 for io1, 500-16,384 for st1, 500-16,384 for sc1, and 1-1,024 for standard. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size. Default: If you're creating the volume from a snapshot and don't specify a volume size, the default is the snapshot size.  At least one of Size or SnapshotId are required. 
+     * The size of the volume, in GiBs. Constraints: 1-16,384 for gp2, 4-16,384 for io1, 500-16,384 for st1, 500-16,384 for sc1, and 1-1,024 for standard. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size. Default: If you're creating the volume from a snapshot and don't specify a volume size, the default is the snapshot size.  At least one of Size or SnapshotId is required. 
      */
     Size?: Integer;
     /**
@@ -5914,7 +5962,7 @@ declare namespace EC2 {
      */
     ClientToken?: String;
     /**
-     * (Interface endpoint) Indicate whether to associate a private hosted zone with the specified VPC. The private hosted zone contains a record set for the default public DNS name for the service for the Region (for example, kinesis.us-east-1.amazonaws.com) which resolves to the private IP addresses of the endpoint network interfaces in the VPC. This enables you to make requests to the default public DNS name for the service instead of the public DNS names that are automatically generated by the VPC endpoint service. To use a private hosted zone, you must set the following VPC attributes to true: enableDnsHostnames and enableDnsSupport. Use ModifyVpcAttribute to set the VPC attributes. Default: false 
+     * (Interface endpoint) Indicate whether to associate a private hosted zone with the specified VPC. The private hosted zone contains a record set for the default public DNS name for the service for the Region (for example, kinesis.us-east-1.amazonaws.com) which resolves to the private IP addresses of the endpoint network interfaces in the VPC. This enables you to make requests to the default public DNS name for the service instead of the public DNS names that are automatically generated by the VPC endpoint service. To use a private hosted zone, you must set the following VPC attributes to true: enableDnsHostnames and enableDnsSupport. Use ModifyVpcAttribute to set the VPC attributes. Default: true 
      */
     PrivateDnsEnabled?: Boolean;
   }
@@ -6014,7 +6062,7 @@ declare namespace EC2 {
      */
     CustomerGatewayId: String;
     /**
-     * The type of VPN connection (ipsec.1).
+     * The type of VPN connection (ipsec.1 | ipsec.2).
      */
     Type: String;
     /**
@@ -9750,6 +9798,18 @@ declare namespace EC2 {
      */
     DirectoryId?: String;
   }
+  export interface DisableEbsEncryptionByDefaultRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation. 
+     */
+    DryRun?: Boolean;
+  }
+  export interface DisableEbsEncryptionByDefaultResult {
+    /**
+     * Account-level encryption status after performing the action.
+     */
+    EbsEncryptionByDefault?: Boolean;
+  }
   export interface DisableTransitGatewayRouteTablePropagationRequest {
     /**
      * The ID of the propagation route table.
@@ -10012,7 +10072,7 @@ declare namespace EC2 {
      */
     DeleteOnTermination?: Boolean;
     /**
-     * The number of I/O operations per second (IOPS) that the volume supports. For io1 volumes, this represents the number of IOPS that are provisioned for the volume. For gp2 volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-16,000 IOPS for gp2 volumes and 100 to 64,000IOPS for io1 volumes in most Regions. Maximum io1IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Condition: This parameter is required for requests to create io1 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
+     * The number of I/O operations per second (IOPS) that the volume supports. For io1 volumes, this represents the number of IOPS that are provisioned for the volume. For gp2 volumes, this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits for bursting. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Constraints: Range is 100-16,000 IOPS for gp2 volumes and 100 to 64,000IOPS for io1 volumes in most Regions. Maximum io1 IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS Volume Types in the Amazon Elastic Compute Cloud User Guide. Condition: This parameter is required for requests to create io1 volumes; it is not used in requests to create gp2, st1, sc1, or standard volumes.
      */
     Iops?: Integer;
     /**
@@ -10028,7 +10088,7 @@ declare namespace EC2 {
      */
     VolumeType?: VolumeType;
     /**
-     * Indicates whether the encryption state of an EBS volume is to be changed while being restored from a backing snapshot. The default effect of setting this parameter to true or leaving it unset depends on the origin, starting encryption state, and ownership of the volume. Each default case can be overridden by specifying a customer master key (CMK) as argument to the KmsKeyId parameter in addition to setting Encrypted = true. For a complete list of possible encryption cases, see Amazon EBS Encryption.  In no case can you remove encryption from an encrypted volume. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For more information, see Supported Instance Types.
+     * Indicates whether the encryption state of an EBS volume is changed while being restored from a backing snapshot. The default effect of setting the Encrypted parameter to true through the console, API, or CLI depends on the volume's origin (new or from a snapshot), starting encryption state, ownership, and whether account-level encryption is enabled. Each default case can be overridden by specifying a customer master key (CMK) with the KmsKeyId parameter in addition to setting Encrypted to true. For a complete list of possible encryption cases, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide. In no case can you remove encryption from an encrypted volume. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For more information, see Supported Instance Types.
      */
     Encrypted?: Boolean;
     /**
@@ -10173,6 +10233,18 @@ declare namespace EC2 {
   }
   export type ElasticInferenceAcceleratorAssociationList = ElasticInferenceAcceleratorAssociation[];
   export type ElasticInferenceAccelerators = ElasticInferenceAccelerator[];
+  export interface EnableEbsEncryptionByDefaultRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation. 
+     */
+    DryRun?: Boolean;
+  }
+  export interface EnableEbsEncryptionByDefaultResult {
+    /**
+     * Account-level encryption status after performing the action.
+     */
+    EbsEncryptionByDefault?: Boolean;
+  }
   export interface EnableTransitGatewayRouteTablePropagationRequest {
     /**
      * The ID of the propagation route table.
@@ -10800,6 +10872,30 @@ declare namespace EC2 {
      * The ID of the instance.
      */
     InstanceId?: String;
+  }
+  export interface GetEbsDefaultKmsKeyIdRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetEbsDefaultKmsKeyIdResult {
+    /**
+     * The full ARN of the default CMK that your account uses to encrypt an EBS volume when no CMK is specified in the API call that creates the volume.
+     */
+    KmsKeyId?: String;
+  }
+  export interface GetEbsEncryptionByDefaultRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetEbsEncryptionByDefaultResult {
+    /**
+     * Indicates whether default encryption for EBS volumes is enabled or disabled.
+     */
+    EbsEncryptionByDefault?: Boolean;
   }
   export interface GetHostReservationPurchasePreviewRequest {
     /**
@@ -13497,6 +13593,22 @@ declare namespace EC2 {
      */
     Return?: Boolean;
   }
+  export interface ModifyEbsDefaultKmsKeyIdRequest {
+    /**
+     * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use to encrypt the volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID   Key alias   ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.    ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   
+     */
+    KmsKeyId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyEbsDefaultKmsKeyIdResult {
+    /**
+     * The full ARN of the default CMK that your account uses to encrypt an EBS volume when no CMK is specified in the API call that creates the volume.
+     */
+    KmsKeyId?: String;
+  }
   export interface ModifyFleetRequest {
     /**
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
@@ -13948,7 +14060,7 @@ declare namespace EC2 {
      */
     AssignIpv6AddressOnCreation?: AttributeBooleanValue;
     /**
-     * Specify true to indicate that network interfaces created in the specified subnet should be assigned a public IPv4 address. This includes a network interface that's created when launching an instance into the subnet (the instance therefore receives a public IPv4 address).
+     * Specify true to indicate that ENIs attached to instances created in the specified subnet should be assigned a public IPv4 address.
      */
     MapPublicIpOnLaunch?: AttributeBooleanValue;
     /**
@@ -15580,7 +15692,7 @@ declare namespace EC2 {
      */
     NetworkInterfaces?: LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList;
     /**
-     * The ID of the AMI, which you can get by using DescribeImages.
+     * The ID of the AMI.
      */
     ImageId?: String;
     /**
@@ -15604,7 +15716,7 @@ declare namespace EC2 {
      */
     RamDiskId?: String;
     /**
-     * If set to true, you can't terminate the instance using the Amazon EC2 console, CLI, or API. To change this attribute to false after launch, use  ModifyInstanceAttribute.
+     * If you set this parameter to true, you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can. To change this attribute after launch, use ModifyInstanceAttribute. Alternatively, if you set InstanceInitiatedShutdownBehavior to terminate, you can terminate the instance by running the shutdown command from the instance.
      */
     DisableApiTermination?: Boolean;
     /**
@@ -16123,6 +16235,18 @@ declare namespace EC2 {
   export type ReservedInstancesOfferingIdStringList = String[];
   export type ReservedInstancesOfferingList = ReservedInstancesOffering[];
   export type ReservedIntancesIds = ReservedInstancesId[];
+  export interface ResetEbsDefaultKmsKeyIdRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ResetEbsDefaultKmsKeyIdResult {
+    /**
+     * The full ARN of the default CMK that your account uses to encrypt an EBS volume when no CMK is specified in the API call that creates the volume.
+     */
+    KmsKeyId?: String;
+  }
   export type ResetFpgaImageAttributeName = "loadPermission"|string;
   export interface ResetFpgaImageAttributeRequest {
     /**
@@ -16567,7 +16691,7 @@ declare namespace EC2 {
      */
     BlockDeviceMappings?: BlockDeviceMappingRequestList;
     /**
-     * The ID of the AMI, which you can get by calling DescribeImages. An AMI ID is required to launch an instance and must be specified here or in a launch template.
+     * The ID of the AMI. An AMI ID is required to launch an instance and must be specified here or in a launch template.
      */
     ImageId?: String;
     /**
@@ -16635,7 +16759,7 @@ declare namespace EC2 {
      */
     ClientToken?: String;
     /**
-     * If you set this parameter to true, you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can. To change this attribute to false after launch, use ModifyInstanceAttribute. Alternatively, if you set InstanceInitiatedShutdownBehavior to terminate, you can terminate the instance by running the shutdown command from the instance. Default: false 
+     * If you set this parameter to true, you can't terminate the instance using the Amazon EC2 console, CLI, or API; otherwise, you can. To change this attribute after launch, use ModifyInstanceAttribute. Alternatively, if you set InstanceInitiatedShutdownBehavior to terminate, you can terminate the instance by running the shutdown command from the instance. Default: false 
      */
     DisableApiTermination?: Boolean;
     /**

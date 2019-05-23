@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.461.0-->
+<!--LATEST=2.462.0-->
 <!--ENTRYINSERT-->
+
+## 2.462.0
+* bugfix: Documentation: Update badges in README.md
+* feature: EC2: New APIs to enable EBS encryption by default feature. Once EBS encryption by default is enabled in a region within the account, all new EBS volumes and snapshot copies are always encrypted
 
 ## 2.461.0
 * feature: APIGateway: This release adds support for tagging of Amazon API Gateway resources.
