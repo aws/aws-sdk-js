@@ -20,7 +20,7 @@ Browser/Node.js
 Paste output of `npx envinfo --browsers` or `node -v`
 
 **To Reproduce (observed behavior)**
-Steps to reproduce the behavior:
+Steps to reproduce the behavior (please share code or minimal repo)
 
 **Expected behavior**
 A clear and concise description of what you expected to happen.
