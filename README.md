@@ -2,10 +2,11 @@
 
 [![NPM version](https://img.shields.io/npm/v/aws-sdk.svg)](https://www.npmjs.com/package/aws-sdk)
 [![NPM downloads](https://img.shields.io/npm/dm/aws-sdk.svg)](https://www.npmjs.com/package/aws-sdk)
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/aws/aws-sdk-js)
 
 [![Build Status](https://travis-ci.org/aws/aws-sdk-js.svg?branch=master)](https://travis-ci.org/aws/aws-sdk-js)
 [![Coverage Status](https://codecov.io/gh/aws/aws-sdk-js/branch/master/graph/badge.svg)](https://codecov.io/gh/aws/aws-sdk-js)
-[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.svg)](https://gitter.im/aws/aws-sdk-js)
+[![Known Vulnerabilities](https://snyk.io/test/github/aws/aws-sdk-js/badge.svg)](https://snyk.io/test/github/aws/aws-sdk-js)
 
 The official AWS SDK for JavaScript, available for browsers and mobile devices,
 or Node.js backends
