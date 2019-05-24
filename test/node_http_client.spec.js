@@ -18,7 +18,7 @@
         it('delegates maxSockets from agent to globalAgent', function() {
           var agent, https;
           https = require('https');
-          agent = http.sslAgent();
+          agent = http.getAgent(true);
           https.globalAgent.maxSockets = 5;
           expect(https.globalAgent.maxSockets).to.equal(agent.maxSockets);
           https.globalAgent.maxSockets += 1;
@@ -27,7 +27,7 @@
         it('overrides globalAgent value if global is set to Infinity', function() {
           var agent, https;
           https = require('https');
-          agent = http.sslAgent();
+          agent = http.getAgent(true);
           https.globalAgent.maxSockets = 2e308;
           return expect(agent.maxSockets).to.equal(50);
         });
@@ -36,11 +36,50 @@
           https = require('https');
           oldGlobal = https.globalAgent;
           https.globalAgent = false;
-          agent = http.sslAgent();
+          agent = http.getAgent(true);
           expect(agent.maxSockets).to.equal(50);
           return https.globalAgent = oldGlobal;
         });
       });
+
+      describe('default agent', function() {
+        beforeEach(function() {
+          AWS.NodeHttpClient.agent = undefined;
+          AWS.NodeHttpClient.sslAgent = undefined;
+        });
+        it('should conform connection reuse opt-in environment variable', function(done) {
+          process.env.AWS_NODEJS_CONNECTION_REUSE_ENABLED = '1';
+          var req;
+          req = new AWS.HttpRequest('http://invalid');
+          return http.handleRequest(req, {timeout: 1}, null, function(err) {
+            expect(AWS.NodeHttpClient.agent).not.to.be.undefined;
+            expect(AWS.NodeHttpClient.sslAgent).to.be.undefined;
+            if (httpModule.globalAgent && httpModule.globalAgent.keepAlive !== undefined) {
+              //keepAlive is introduced only after v0.12
+              expect(AWS.NodeHttpClient.agent.keepAlive).to.equal(true);
+            }
+            delete process.env.AWS_NODEJS_CONNECTION_REUSE_ENABLED;
+            return done();
+          });
+        });
+
+        it('should conform connection reuse opt-in environment variable when using https', function(done) {
+          process.env.AWS_NODEJS_CONNECTION_REUSE_ENABLED = 1;
+          var req;
+          req = new AWS.HttpRequest('https://invalid');
+          return http.handleRequest(req, {timeout: 1}, null, function(err) {
+            expect(AWS.NodeHttpClient.agent).to.be.undefined;
+            expect(AWS.NodeHttpClient.sslAgent).not.to.be.undefined;
+            if (httpModule.globalAgent && httpModule.globalAgent.keepAlive !== undefined) {
+              //keepAlive is introduced only after v0.12
+              expect(AWS.NodeHttpClient.sslAgent.keepAlive).to.equal(true);
+            }
+            delete process.env.AWS_NODEJS_CONNECTION_REUSE_ENABLED;
+            return done();
+          });
+        });
+      });
+
       return describe('handleRequest', function() {
         it('emits error event', function(done) {
           var req;

@@ -2,7 +2,7 @@ var whitelist = {
     '/config.js': [
         24,
         25,
-        180
+        179
     ],
     '/credentials/cognito_identity_credentials.js': [
         78,
