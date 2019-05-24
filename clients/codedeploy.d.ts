@@ -21,19 +21,19 @@ declare class CodeDeploy extends Service {
    */
   addTagsToOnPremisesInstances(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Gets information about one or more application revisions.
+   * Gets information about one or more application revisions. The maximum number of application revisions that can be returned is 25.
    */
   batchGetApplicationRevisions(params: CodeDeploy.Types.BatchGetApplicationRevisionsInput, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetApplicationRevisionsOutput) => void): Request<CodeDeploy.Types.BatchGetApplicationRevisionsOutput, AWSError>;
   /**
-   * Gets information about one or more application revisions.
+   * Gets information about one or more application revisions. The maximum number of application revisions that can be returned is 25.
    */
   batchGetApplicationRevisions(callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetApplicationRevisionsOutput) => void): Request<CodeDeploy.Types.BatchGetApplicationRevisionsOutput, AWSError>;
   /**
-   * Gets information about one or more applications.
+   * Gets information about one or more applications. The maximum number of applications that can be returned is 25.
    */
   batchGetApplications(params: CodeDeploy.Types.BatchGetApplicationsInput, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetApplicationsOutput) => void): Request<CodeDeploy.Types.BatchGetApplicationsOutput, AWSError>;
   /**
-   * Gets information about one or more applications.
+   * Gets information about one or more applications. The maximum number of applications that can be returned is 25.
    */
   batchGetApplications(callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetApplicationsOutput) => void): Request<CodeDeploy.Types.BatchGetApplicationsOutput, AWSError>;
   /**
@@ -45,35 +45,35 @@ declare class CodeDeploy extends Service {
    */
   batchGetDeploymentGroups(callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentGroupsOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentGroupsOutput, AWSError>;
   /**
-   *   This method works, but is deprecated. Use BatchGetDeploymentTargets instead.    Returns an array of instances associated with a deployment. This method works with EC2/On-premises and AWS Lambda compute platforms. The newer BatchGetDeploymentTargets works with all compute platforms. 
+   *   This method works, but is deprecated. Use BatchGetDeploymentTargets instead.    Returns an array of one or more instances associated with a deployment. This method works with EC2/On-premises and AWS Lambda compute platforms. The newer BatchGetDeploymentTargets works with all compute platforms. The maximum number of instances that can be returned is 25.
    */
   batchGetDeploymentInstances(params: CodeDeploy.Types.BatchGetDeploymentInstancesInput, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentInstancesOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentInstancesOutput, AWSError>;
   /**
-   *   This method works, but is deprecated. Use BatchGetDeploymentTargets instead.    Returns an array of instances associated with a deployment. This method works with EC2/On-premises and AWS Lambda compute platforms. The newer BatchGetDeploymentTargets works with all compute platforms. 
+   *   This method works, but is deprecated. Use BatchGetDeploymentTargets instead.    Returns an array of one or more instances associated with a deployment. This method works with EC2/On-premises and AWS Lambda compute platforms. The newer BatchGetDeploymentTargets works with all compute platforms. The maximum number of instances that can be returned is 25.
    */
   batchGetDeploymentInstances(callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentInstancesOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentInstancesOutput, AWSError>;
   /**
-   *  Returns an array of targets associated with a deployment. This method works with all compute types and should be used instead of the deprecated BatchGetDeploymentInstances.   The type of targets returned depends on the deployment's compute platform:     EC2/On-premises: Information about EC2 instance targets.     AWS Lambda: Information about Lambda functions targets.     Amazon ECS: Information about Amazon ECS service targets.   
+   *  Returns an array of one or more targets associated with a deployment. This method works with all compute types and should be used instead of the deprecated BatchGetDeploymentInstances. The maximum number of targets that can be returned is 25.  The type of targets returned depends on the deployment's compute platform:     EC2/On-premises: Information about EC2 instance targets.     AWS Lambda: Information about Lambda functions targets.     Amazon ECS: Information about Amazon ECS service targets.   
    */
   batchGetDeploymentTargets(params: CodeDeploy.Types.BatchGetDeploymentTargetsInput, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentTargetsOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentTargetsOutput, AWSError>;
   /**
-   *  Returns an array of targets associated with a deployment. This method works with all compute types and should be used instead of the deprecated BatchGetDeploymentInstances.   The type of targets returned depends on the deployment's compute platform:     EC2/On-premises: Information about EC2 instance targets.     AWS Lambda: Information about Lambda functions targets.     Amazon ECS: Information about Amazon ECS service targets.   
+   *  Returns an array of one or more targets associated with a deployment. This method works with all compute types and should be used instead of the deprecated BatchGetDeploymentInstances. The maximum number of targets that can be returned is 25.  The type of targets returned depends on the deployment's compute platform:     EC2/On-premises: Information about EC2 instance targets.     AWS Lambda: Information about Lambda functions targets.     Amazon ECS: Information about Amazon ECS service targets.   
    */
   batchGetDeploymentTargets(callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentTargetsOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentTargetsOutput, AWSError>;
   /**
-   * Gets information about one or more deployments.
+   * Gets information about one or more deployments. The maximum number of deployments that can be returned is 25.
    */
   batchGetDeployments(params: CodeDeploy.Types.BatchGetDeploymentsInput, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentsOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentsOutput, AWSError>;
   /**
-   * Gets information about one or more deployments.
+   * Gets information about one or more deployments. The maximum number of deployments that can be returned is 25.
    */
   batchGetDeployments(callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetDeploymentsOutput) => void): Request<CodeDeploy.Types.BatchGetDeploymentsOutput, AWSError>;
   /**
-   * Gets information about one or more on-premises instances.
+   * Gets information about one or more on-premises instances. The maximum number of on-premises instances that can be returned is 25.
    */
   batchGetOnPremisesInstances(params: CodeDeploy.Types.BatchGetOnPremisesInstancesInput, callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetOnPremisesInstancesOutput) => void): Request<CodeDeploy.Types.BatchGetOnPremisesInstancesOutput, AWSError>;
   /**
-   * Gets information about one or more on-premises instances.
+   * Gets information about one or more on-premises instances. The maximum number of on-premises instances that can be returned is 25.
    */
   batchGetOnPremisesInstances(callback?: (err: AWSError, data: CodeDeploy.Types.BatchGetOnPremisesInstancesOutput) => void): Request<CodeDeploy.Types.BatchGetOnPremisesInstancesOutput, AWSError>;
   /**
@@ -293,6 +293,14 @@ declare class CodeDeploy extends Service {
    */
   listOnPremisesInstances(callback?: (err: AWSError, data: CodeDeploy.Types.ListOnPremisesInstancesOutput) => void): Request<CodeDeploy.Types.ListOnPremisesInstancesOutput, AWSError>;
   /**
+   *  Returns a list of tags for the resource identified by a specified ARN. Tags are used to organize and categorize your CodeDeploy resources. 
+   */
+  listTagsForResource(params: CodeDeploy.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: CodeDeploy.Types.ListTagsForResourceOutput) => void): Request<CodeDeploy.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   *  Returns a list of tags for the resource identified by a specified ARN. Tags are used to organize and categorize your CodeDeploy resources. 
+   */
+  listTagsForResource(callback?: (err: AWSError, data: CodeDeploy.Types.ListTagsForResourceOutput) => void): Request<CodeDeploy.Types.ListTagsForResourceOutput, AWSError>;
+  /**
    *  Sets the result of a Lambda validation function. The function validates one or both lifecycle events (BeforeAllowTraffic and AfterAllowTraffic) and returns Succeeded or Failed. 
    */
   putLifecycleEventHookExecutionStatus(params: CodeDeploy.Types.PutLifecycleEventHookExecutionStatusInput, callback?: (err: AWSError, data: CodeDeploy.Types.PutLifecycleEventHookExecutionStatusOutput) => void): Request<CodeDeploy.Types.PutLifecycleEventHookExecutionStatusOutput, AWSError>;
@@ -340,6 +348,22 @@ declare class CodeDeploy extends Service {
    * Attempts to stop an ongoing deployment.
    */
   stopDeployment(callback?: (err: AWSError, data: CodeDeploy.Types.StopDeploymentOutput) => void): Request<CodeDeploy.Types.StopDeploymentOutput, AWSError>;
+  /**
+   *  Associates the list of tags in the input Tags parameter with the resource identified by the ResourceArn input parameter. 
+   */
+  tagResource(params: CodeDeploy.Types.TagResourceInput, callback?: (err: AWSError, data: CodeDeploy.Types.TagResourceOutput) => void): Request<CodeDeploy.Types.TagResourceOutput, AWSError>;
+  /**
+   *  Associates the list of tags in the input Tags parameter with the resource identified by the ResourceArn input parameter. 
+   */
+  tagResource(callback?: (err: AWSError, data: CodeDeploy.Types.TagResourceOutput) => void): Request<CodeDeploy.Types.TagResourceOutput, AWSError>;
+  /**
+   *  Disassociates a resource from a list of tags. The resource is identified by the ResourceArn input parameter. The tags are identfied by the list of keys in the TagKeys input parameter. 
+   */
+  untagResource(params: CodeDeploy.Types.UntagResourceInput, callback?: (err: AWSError, data: CodeDeploy.Types.UntagResourceOutput) => void): Request<CodeDeploy.Types.UntagResourceOutput, AWSError>;
+  /**
+   *  Disassociates a resource from a list of tags. The resource is identified by the ResourceArn input parameter. The tags are identfied by the list of keys in the TagKeys input parameter. 
+   */
+  untagResource(callback?: (err: AWSError, data: CodeDeploy.Types.UntagResourceOutput) => void): Request<CodeDeploy.Types.UntagResourceOutput, AWSError>;
   /**
    * Changes the name of an application.
    */
@@ -440,6 +464,7 @@ declare namespace CodeDeploy {
   export type ApplicationRevisionSortBy = "registerTime"|"firstUsedTime"|"lastUsedTime"|string;
   export type ApplicationsInfoList = ApplicationInfo[];
   export type ApplicationsList = ApplicationName[];
+  export type Arn = string;
   export interface AutoRollbackConfiguration {
     /**
      * Indicates whether a defined automatic rollback configuration is currently enabled.
@@ -472,7 +497,7 @@ declare namespace CodeDeploy {
      */
     applicationName: ApplicationName;
     /**
-     * Information to get about the application revisions, including type and location.
+     * An array of RevisionLocation objects that specify information to get about the application revisions, including type and location. The maximum number of RevisionLocation objects you can specify is 25.
      */
     revisions: RevisionLocationList;
   }
@@ -492,7 +517,7 @@ declare namespace CodeDeploy {
   }
   export interface BatchGetApplicationsInput {
     /**
-     * A list of application names separated by spaces.
+     * A list of application names separated by spaces. The maximum number of application names you can specify is 25.
      */
     applicationNames: ApplicationsList;
   }
@@ -528,7 +553,7 @@ declare namespace CodeDeploy {
      */
     deploymentId: DeploymentId;
     /**
-     * The unique IDs of instances used in the deployment.
+     * The unique IDs of instances used in the deployment. The maximum number of instance IDs you can specify is 25.
      */
     instanceIds: InstancesList;
   }
@@ -548,7 +573,7 @@ declare namespace CodeDeploy {
      */
     deploymentId?: DeploymentId;
     /**
-     *  The unique IDs of the deployment targets. The compute platform of the deployment determines the type of the targets and their formats.     For deployments that use the EC2/On-premises compute platform, the target IDs are EC2 or on-premises instances IDs, and their target type is instanceTarget.     For deployments that use the AWS Lambda compute platform, the target IDs are the names of Lambda functions, and their target type is instanceTarget.     For deployments that use the Amazon ECS compute platform, the target IDs are pairs of Amazon ECS clusters and services specified using the format &lt;clustername&gt;:&lt;servicename&gt;. Their target type is ecsTarget.   
+     *  The unique IDs of the deployment targets. The compute platform of the deployment determines the type of the targets and their formats. The maximum number of deployment target IDs you can specify is 25.    For deployments that use the EC2/On-premises compute platform, the target IDs are EC2 or on-premises instances IDs, and their target type is instanceTarget.     For deployments that use the AWS Lambda compute platform, the target IDs are the names of Lambda functions, and their target type is instanceTarget.     For deployments that use the Amazon ECS compute platform, the target IDs are pairs of Amazon ECS clusters and services specified using the format &lt;clustername&gt;:&lt;servicename&gt;. Their target type is ecsTarget.   
      */
     targetIds?: TargetIdList;
   }
@@ -560,7 +585,7 @@ declare namespace CodeDeploy {
   }
   export interface BatchGetDeploymentsInput {
     /**
-     *  A list of deployment IDs, separated by spaces. 
+     *  A list of deployment IDs, separated by spaces. The maximum number of deployment IDs you can specify is 25.
      */
     deploymentIds: DeploymentsList;
   }
@@ -572,7 +597,7 @@ declare namespace CodeDeploy {
   }
   export interface BatchGetOnPremisesInstancesInput {
     /**
-     * The names of the on-premises instances about which to get information.
+     * The names of the on-premises instances about which to get information. The maximum number of instance names you can specify is 25.
      */
     instanceNames: InstanceNameList;
   }
@@ -626,9 +651,13 @@ declare namespace CodeDeploy {
      */
     applicationName: ApplicationName;
     /**
-     *  The destination platform type for the deployment (Lambda or Server).
+     *  The destination platform type for the deployment (Lambda, Server, or ECS).
      */
     computePlatform?: ComputePlatform;
+    /**
+     *  The metadata that you apply to CodeDeploy applications to help you organize and categorize them. Each tag consists of a key and an optional value, both of which you define. 
+     */
+    tags?: TagList;
   }
   export interface CreateApplicationOutput {
     /**
@@ -650,7 +679,7 @@ declare namespace CodeDeploy {
      */
     trafficRoutingConfig?: TrafficRoutingConfig;
     /**
-     * The destination platform type for the deployment (Lambda or Server&gt;).
+     * The destination platform type for the deployment (Lambda, Server, or ECS).
      */
     computePlatform?: ComputePlatform;
   }
@@ -725,6 +754,10 @@ declare namespace CodeDeploy {
      * Information about groups of tags applied to on-premises instances. The deployment group includes only on-premises instances identified by all of the tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
      */
     onPremisesTagSet?: OnPremisesTagSet;
+    /**
+     *  The metadata that you apply to CodeDeploy deployment groups to help you organize and categorize them. Each tag consists of a key and an optional value, both of which you define. 
+     */
+    tags?: TagList;
   }
   export interface CreateDeploymentGroupOutput {
     /**
@@ -839,7 +872,7 @@ declare namespace CodeDeploy {
      */
     createTime?: Timestamp;
     /**
-     * The destination platform type for the deployment (Lambda or Server).
+     * The destination platform type for the deployment (Lambda, Server, or ECS).
      */
     computePlatform?: ComputePlatform;
     /**
@@ -881,7 +914,7 @@ declare namespace CodeDeploy {
      */
     autoScalingGroups?: AutoScalingGroupList;
     /**
-     * A service role ARN.
+     * A service role Amazon Resource Name (ARN) that grants CodeDeploy permission to make calls to AWS services on your behalf. For more information, see Create a Service Role for AWS CodeDeploy in the AWS CodeDeploy User Guide.
      */
     serviceRoleArn?: Role;
     /**
@@ -929,7 +962,7 @@ declare namespace CodeDeploy {
      */
     onPremisesTagSet?: OnPremisesTagSet;
     /**
-     * The destination platform type for the deployment group (Lambda or Server).
+     * The destination platform type for the deployment (Lambda, Server, or ECS).
      */
     computePlatform?: ComputePlatform;
     /**
@@ -1047,7 +1080,7 @@ declare namespace CodeDeploy {
      */
     deploymentStatusMessages?: DeploymentStatusMessageList;
     /**
-     *  The destination platform type for the deployment (Lambda or Server). 
+     * The destination platform type for the deployment (Lambda, Server, or ECS).
      */
     computePlatform?: ComputePlatform;
   }
@@ -1265,7 +1298,7 @@ declare namespace CodeDeploy {
   export type ELBInfoList = ELBInfo[];
   export type ELBName = string;
   export type ETag = string;
-  export type ErrorCode = "DEPLOYMENT_GROUP_MISSING"|"APPLICATION_MISSING"|"REVISION_MISSING"|"IAM_ROLE_MISSING"|"IAM_ROLE_PERMISSIONS"|"NO_EC2_SUBSCRIPTION"|"OVER_MAX_INSTANCES"|"NO_INSTANCES"|"TIMEOUT"|"HEALTH_CONSTRAINTS_INVALID"|"HEALTH_CONSTRAINTS"|"INTERNAL_ERROR"|"THROTTLED"|"ALARM_ACTIVE"|"AGENT_ISSUE"|"AUTO_SCALING_IAM_ROLE_PERMISSIONS"|"AUTO_SCALING_CONFIGURATION"|"MANUAL_STOP"|"MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION"|"MISSING_ELB_INFORMATION"|"MISSING_GITHUB_TOKEN"|"ELASTIC_LOAD_BALANCING_INVALID"|"ELB_INVALID_INSTANCE"|"INVALID_LAMBDA_CONFIGURATION"|"INVALID_LAMBDA_FUNCTION"|"HOOK_EXECUTION_FAILURE"|"AUTOSCALING_VALIDATION_ERROR"|"INVALID_ECS_SERVICE"|"ECS_UPDATE_ERROR"|"INVALID_REVISION"|string;
+  export type ErrorCode = "AGENT_ISSUE"|"ALARM_ACTIVE"|"APPLICATION_MISSING"|"AUTOSCALING_VALIDATION_ERROR"|"AUTO_SCALING_CONFIGURATION"|"AUTO_SCALING_IAM_ROLE_PERMISSIONS"|"CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND"|"CUSTOMER_APPLICATION_UNHEALTHY"|"DEPLOYMENT_GROUP_MISSING"|"ECS_UPDATE_ERROR"|"ELASTIC_LOAD_BALANCING_INVALID"|"ELB_INVALID_INSTANCE"|"HEALTH_CONSTRAINTS"|"HEALTH_CONSTRAINTS_INVALID"|"HOOK_EXECUTION_FAILURE"|"IAM_ROLE_MISSING"|"IAM_ROLE_PERMISSIONS"|"INTERNAL_ERROR"|"INVALID_ECS_SERVICE"|"INVALID_LAMBDA_CONFIGURATION"|"INVALID_LAMBDA_FUNCTION"|"INVALID_REVISION"|"MANUAL_STOP"|"MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION"|"MISSING_ELB_INFORMATION"|"MISSING_GITHUB_TOKEN"|"NO_EC2_SUBSCRIPTION"|"NO_INSTANCES"|"OVER_MAX_INSTANCES"|"RESOURCE_LIMIT_EXCEEDED"|"REVISION_MISSING"|"THROTTLED"|"TIMEOUT"|string;
   export interface ErrorInformation {
     /**
      * For more information, see Error Codes for AWS CodeDeploy in the AWS CodeDeploy User Guide. The error code:   APPLICATION_MISSING: The application was missing. This error code is most likely raised if the application is deleted after the deployment is created, but before it is started.   DEPLOYMENT_GROUP_MISSING: The deployment group was missing. This error code is most likely raised if the deployment group is deleted after the deployment is created, but before it is started.   HEALTH_CONSTRAINTS: The deployment failed on too many instances to be successfully deployed within the instance health constraints specified.   HEALTH_CONSTRAINTS_INVALID: The revision cannot be successfully deployed within the instance health constraints specified.   IAM_ROLE_MISSING: The service role cannot be accessed.   IAM_ROLE_PERMISSIONS: The service role does not have the correct permissions.   INTERNAL_ERROR: There was an internal error.   NO_EC2_SUBSCRIPTION: The calling account is not subscribed to Amazon EC2.   NO_INSTANCES: No instances were specified, or no instances can be found.   OVER_MAX_INSTANCES: The maximum number of instances was exceeded.   THROTTLED: The operation was throttled because the calling account exceeded the throttling limits of one or more AWS services.   TIMEOUT: The deployment has timed out.   REVISION_MISSING: The revision ID was missing. This error code is most likely raised if the revision is deleted after the deployment is created, but before it is started.  
@@ -1543,6 +1576,30 @@ declare namespace CodeDeploy {
   export type InstanceTypeList = InstanceType[];
   export type InstancesList = InstanceId[];
   export type Key = string;
+  export type LambdaFunctionAlias = string;
+  export interface LambdaFunctionInfo {
+    /**
+     *  The name of a Lambda function. 
+     */
+    functionName?: LambdaFunctionName;
+    /**
+     *  The alias of a Lambda function. For more information, see Introduction to AWS Lambda Aliases. 
+     */
+    functionAlias?: LambdaFunctionAlias;
+    /**
+     *  The version of a Lambda function that production traffic points to. 
+     */
+    currentVersion?: Version;
+    /**
+     *  The version of a Lambda function that production traffic points to after the Lambda function is deployed. 
+     */
+    targetVersion?: Version;
+    /**
+     *  The percentage of production traffic that the target version of a Lambda function receives. 
+     */
+    targetVersionWeight?: TrafficWeight;
+  }
+  export type LambdaFunctionName = string;
   export interface LambdaTarget {
     /**
      *  The unique ID of a deployment. 
@@ -1568,6 +1625,10 @@ declare namespace CodeDeploy {
      *  The lifecycle events of the deployment to this target Lambda function. 
      */
     lifecycleEvents?: LifecycleEventList;
+    /**
+     *  A LambdaFunctionInfo object that describes a target Lambda function. 
+     */
+    lambdaFunctionInfo?: LambdaFunctionInfo;
   }
   export interface LastDeploymentInfo {
     /**
@@ -1765,11 +1826,11 @@ declare namespace CodeDeploy {
   }
   export interface ListDeploymentsInput {
     /**
-     * The name of an AWS CodeDeploy application associated with the IAM user or AWS account.
+     * The name of an AWS CodeDeploy application associated with the IAM user or AWS account.  If applicationName is specified, then deploymentGroupName must be specified. If it is not specified, then deploymentGroupName must not be specified.  
      */
     applicationName?: ApplicationName;
     /**
-     * The name of a deployment group for the specified application.
+     * The name of a deployment group for the specified application.  If deploymentGroupName is specified, then applicationName must be specified. If it is not specified, then applicationName must not be specified.  
      */
     deploymentGroupName?: DeploymentGroupName;
     /**
@@ -1836,6 +1897,26 @@ declare namespace CodeDeploy {
     nextToken?: NextToken;
   }
   export type ListStateFilterAction = "include"|"exclude"|"ignore"|string;
+  export interface ListTagsForResourceInput {
+    /**
+     *  The ARN of a CodeDeploy resource. ListTagsForResource returns all the tags associated with the resource that is identified by the ResourceArn. 
+     */
+    ResourceArn: Arn;
+    /**
+     * An identifier returned from the previous ListTagsForResource call. It can be used to return the next set of applications in the list.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListTagsForResourceOutput {
+    /**
+     *  A list of tags returned by ListTagsForResource. The tags are associated with the resource identified by the input ResourceArn parameter. 
+     */
+    Tags?: TagList;
+    /**
+     * If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list application revisions call to return the next set of application revisions in the list.
+     */
+    NextToken?: NextToken;
+  }
   export type ListenerArn = string;
   export type ListenerArnList = ListenerArn[];
   export interface LoadBalancerInfo {
@@ -1860,7 +1941,7 @@ declare namespace CodeDeploy {
      */
     value?: MinimumHealthyHostsValue;
     /**
-     * The minimum healthy instance type:   HOST_COUNT: The minimum number of healthy instance as an absolute value.   FLEET_PERCENT: The minimum number of healthy instance as a percentage of the total number of instance in the deployment.   In an example of nine instance, if a HOST_COUNT of six is specified, deploy to up to three instances at a time. The deployment is successful if six or more instances are deployed to successfully. Otherwise, the deployment fails. If a FLEET_PERCENT of 40 is specified, deploy to up to five instance at a time. The deployment is successful if four or more instance are deployed to successfully. Otherwise, the deployment fails.  In a call to the get deployment configuration operation, CodeDeployDefault.OneAtATime returns a minimum healthy instance type of MOST_CONCURRENCY and a value of 1. This means a deployment to only one instance at a time. (You cannot set the type to MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.) In addition, with CodeDeployDefault.OneAtATime, AWS CodeDeploy attempts to ensure that all instances but one are kept in a healthy state during the deployment. Although this allows one instance at a time to be taken offline for a new deployment, it also means that if the deployment to the last instance fails, the overall deployment is still successful.  For more information, see AWS CodeDeploy Instance Health in the AWS CodeDeploy User Guide.
+     * The minimum healthy instance type:   HOST_COUNT: The minimum number of healthy instance as an absolute value.   FLEET_PERCENT: The minimum number of healthy instance as a percentage of the total number of instance in the deployment.   In an example of nine instance, if a HOST_COUNT of six is specified, deploy to up to three instances at a time. The deployment is successful if six or more instances are deployed to successfully. Otherwise, the deployment fails. If a FLEET_PERCENT of 40 is specified, deploy to up to five instance at a time. The deployment is successful if four or more instance are deployed to successfully. Otherwise, the deployment fails.  In a call to the GetDeploymentConfig, CodeDeployDefault.OneAtATime returns a minimum healthy instance type of MOST_CONCURRENCY and a value of 1. This means a deployment to only one instance at a time. (You cannot set the type to MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.) In addition, with CodeDeployDefault.OneAtATime, AWS CodeDeploy attempts to ensure that all instances but one are kept in a healthy state during the deployment. Although this allows one instance at a time to be taken offline for a new deployment, it also means that if the deployment to the last instance fails, the overall deployment is still successful.  For more information, see AWS CodeDeploy Instance Health in the AWS CodeDeploy User Guide.
      */
     type?: MinimumHealthyHostsType;
   }
@@ -2077,7 +2158,20 @@ declare namespace CodeDeploy {
   }
   export type TagFilterList = TagFilter[];
   export type TagFilterType = "KEY_ONLY"|"VALUE_ONLY"|"KEY_AND_VALUE"|string;
+  export type TagKeyList = Key[];
   export type TagList = Tag[];
+  export interface TagResourceInput {
+    /**
+     *  The ARN of a resource, such as a CodeDeploy application or deployment group. 
+     */
+    ResourceArn: Arn;
+    /**
+     *  A list of tags that TagResource associates with a resource. The resource is identified by the ResourceArn input parameter. 
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceOutput {
+  }
   export type TargetArn = string;
   export type TargetFilterName = "TargetStatus"|"ServerInstanceLabel"|string;
   export type TargetFilters = {[key: string]: FilterValueList};
@@ -2195,6 +2289,18 @@ declare namespace CodeDeploy {
   export type TriggerEventTypeList = TriggerEventType[];
   export type TriggerName = string;
   export type TriggerTargetArn = string;
+  export interface UntagResourceInput {
+    /**
+     *  The ARN that specifies from which resource to disassociate the tags with the keys in the TagKeys input paramter. 
+     */
+    ResourceArn: Arn;
+    /**
+     *  A list of keys of Tag objects. The Tag objects identified by the keys are disassociated from the resource specified by the ResourceArn input parameter. 
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceOutput {
+  }
   export interface UpdateApplicationInput {
     /**
      * The current name of the application you want to change.
@@ -2282,6 +2388,7 @@ declare namespace CodeDeploy {
     hooksNotCleanedUp?: AutoScalingGroupList;
   }
   export type Value = string;
+  export type Version = string;
   export type VersionId = string;
   export type WaitTimeInMins = number;
   /**

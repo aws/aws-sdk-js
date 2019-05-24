@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "Core",
-  "description": "set environmental variable AWS_NODEJS_CONNECTION_REUSE_ENABLED to 1 to make SDK reuse connections by default if users don't supply custom agents."
-}

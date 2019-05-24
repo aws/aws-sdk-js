@@ -53,11 +53,11 @@ declare class OpsWorksCM extends Service {
    */
   deleteServer(callback?: (err: AWSError, data: OpsWorksCM.Types.DeleteServerResponse) => void): Request<OpsWorksCM.Types.DeleteServerResponse, AWSError>;
   /**
-   *  Describes your account attributes, and creates requests to increase limits before they are reached or exceeded.   This operation is synchronous. 
+   *  Describes your OpsWorks-CM account attributes.   This operation is synchronous. 
    */
   describeAccountAttributes(params: OpsWorksCM.Types.DescribeAccountAttributesRequest, callback?: (err: AWSError, data: OpsWorksCM.Types.DescribeAccountAttributesResponse) => void): Request<OpsWorksCM.Types.DescribeAccountAttributesResponse, AWSError>;
   /**
-   *  Describes your account attributes, and creates requests to increase limits before they are reached or exceeded.   This operation is synchronous. 
+   *  Describes your OpsWorks-CM account attributes.   This operation is synchronous. 
    */
   describeAccountAttributes(callback?: (err: AWSError, data: OpsWorksCM.Types.DescribeAccountAttributesResponse) => void): Request<OpsWorksCM.Types.DescribeAccountAttributesResponse, AWSError>;
   /**
@@ -317,7 +317,7 @@ declare namespace OpsWorksCM {
      */
     DisableAutomatedBackup?: Boolean;
     /**
-     *  The configuration management engine to use. Valid values include Chef and Puppet. 
+     *  The configuration management engine to use. Valid values include ChefAutomate and Puppet. 
      */
     Engine?: String;
     /**
@@ -329,7 +329,7 @@ declare namespace OpsWorksCM {
      */
     EngineVersion?: String;
     /**
-     * Optional engine attributes on a specified server.   Attributes accepted in a Chef createServer request:     CHEF_PIVOTAL_KEY: A base64-encoded RSA public key. The corresponding private key is required to access the Chef API. When no CHEF_PIVOTAL_KEY is set, a private key is generated and returned in the response.     CHEF_DELIVERY_ADMIN_PASSWORD: The password for the administrative user in the Chef Automate GUI. The password length is a minimum of eight characters, and a maximum of 32. The password can contain letters, numbers, and special characters (!/@#$%^&amp;+=_). The password must contain at least one lower case letter, one upper case letter, one number, and one special character. When no CHEF_DELIVERY_ADMIN_PASSWORD is set, one is generated and returned in the response.    Attributes accepted in a Puppet createServer request:     PUPPET_ADMIN_PASSWORD: To work with the Puppet Enterprise console, a password must use ASCII characters.    PUPPET_R10K_REMOTE: The r10k remote is the URL of your control repository (for example, ssh://git@your.git-repo.com:user/control-repo.git). Specifying an r10k remote opens TCP port 8170.    PUPPET_R10K_PRIVATE_KEY: If you are using a private Git repository, add PUPPET_R10K_PRIVATE_KEY to specify an SSH URL and a PEM-encoded private SSH key.  
+     * Optional engine attributes on a specified server.   Attributes accepted in a Chef createServer request:     CHEF_AUTOMATE_PIVOTAL_KEY: A base64-encoded RSA public key. The corresponding private key is required to access the Chef API. When no CHEF_AUTOMATE_PIVOTAL_KEY is set, a private key is generated and returned in the response.     CHEF_AUTOMATE_ADMIN_PASSWORD: The password for the administrative user in the Chef Automate web-based dashboard. The password length is a minimum of eight characters, and a maximum of 32. The password can contain letters, numbers, and special characters (!/@#$%^&amp;+=_). The password must contain at least one lower case letter, one upper case letter, one number, and one special character. When no CHEF_AUTOMATE_ADMIN_PASSWORD is set, one is generated and returned in the response.    Attributes accepted in a Puppet createServer request:     PUPPET_ADMIN_PASSWORD: To work with the Puppet Enterprise console, a password must use ASCII characters.    PUPPET_R10K_REMOTE: The r10k remote is the URL of your control repository (for example, ssh://git@your.git-repo.com:user/control-repo.git). Specifying an r10k remote opens TCP port 8170.    PUPPET_R10K_PRIVATE_KEY: If you are using a private Git repository, add PUPPET_R10K_PRIVATE_KEY to specify a PEM-encoded private SSH key.  
      */
     EngineAttributes?: EngineAttributes;
     /**
@@ -345,7 +345,7 @@ declare namespace OpsWorksCM {
      */
     InstanceProfileArn: InstanceProfileArn;
     /**
-     *  The Amazon EC2 instance type to use. For example, m4.large. Recommended instance types include t2.medium and greater, m4.*, or c4.xlarge and greater. 
+     *  The Amazon EC2 instance type to use. For example, m5.large. 
      */
     InstanceType: String;
     /**
@@ -579,7 +579,7 @@ declare namespace OpsWorksCM {
      */
     ServerName: ServerName;
     /**
-     *  The type of the instance to create. Valid values must be specified in the following format: ^([cm][34]|t2).* For example, m4.large. Valid values are t2.medium, m4.large, and m4.2xlarge. If you do not specify this parameter, RestoreServer uses the instance type from the specified backup. 
+     *  The type of the instance to create. Valid values must be specified in the following format: ^([cm][34]|t2).* For example, m5.large. Valid values are m5.large, r5.xlarge, and r5.2xlarge. If you do not specify this parameter, RestoreServer uses the instance type from the specified backup. 
      */
     InstanceType?: String;
     /**
@@ -619,7 +619,7 @@ declare namespace OpsWorksCM {
      */
     Endpoint?: String;
     /**
-     * The engine type of the server. Valid values in this release include Chef and Puppet. 
+     * The engine type of the server. Valid values in this release include ChefAutomate and Puppet. 
      */
     Engine?: String;
     /**
@@ -627,7 +627,7 @@ declare namespace OpsWorksCM {
      */
     EngineModel?: String;
     /**
-     * The response of a createServer() request returns the master credential to access the server in EngineAttributes. These credentials are not stored by AWS OpsWorks CM; they are returned only as part of the result of createServer().   Attributes returned in a createServer response for Chef     CHEF_PIVOTAL_KEY: A base64-encoded RSA private key that is generated by AWS OpsWorks for Chef Automate. This private key is required to access the Chef API.    CHEF_STARTER_KIT: A base64-encoded ZIP file. The ZIP file contains a Chef starter kit, which includes a README, a configuration file, and the required RSA private key. Save this file, unzip it, and then change to the directory where you've unzipped the file contents. From this directory, you can run Knife commands.    Attributes returned in a createServer response for Puppet     PUPPET_STARTER_KIT: A base64-encoded ZIP file. The ZIP file contains a Puppet starter kit, including a README and a required private key. Save this file, unzip it, and then change to the directory where you've unzipped the file contents.    PUPPET_ADMIN_PASSWORD: An administrator password that you can use to sign in to the Puppet Enterprise console after the server is online.  
+     * The response of a createServer() request returns the master credential to access the server in EngineAttributes. These credentials are not stored by AWS OpsWorks CM; they are returned only as part of the result of createServer().   Attributes returned in a createServer response for Chef     CHEF_AUTOMATE_PIVOTAL_KEY: A base64-encoded RSA private key that is generated by AWS OpsWorks for Chef Automate. This private key is required to access the Chef API.    CHEF_STARTER_KIT: A base64-encoded ZIP file. The ZIP file contains a Chef starter kit, which includes a README, a configuration file, and the required RSA private key. Save this file, unzip it, and then change to the directory where you've unzipped the file contents. From this directory, you can run Knife commands.    Attributes returned in a createServer response for Puppet     PUPPET_STARTER_KIT: A base64-encoded ZIP file. The ZIP file contains a Puppet starter kit, including a README and a required private key. Save this file, unzip it, and then change to the directory where you've unzipped the file contents.    PUPPET_ADMIN_PASSWORD: An administrator password that you can use to sign in to the Puppet Enterprise console after the server is online.  
      */
     EngineAttributes?: EngineAttributes;
     /**

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.462.0-->
+<!--LATEST=2.463.0-->
 <!--ENTRYINSERT-->
+
+## 2.463.0
+* feature: CodeDeploy: AWS CodeDeploy now supports tagging for the application and deployment group resources.
+* feature: Core: set environmental variable AWS_NODEJS_CONNECTION_REUSE_ENABLED to 1 to make SDK reuse connections by default if users don't supply custom agents.
+* feature: MediaStoreData: MediaStore - This release adds support for chunked transfer of objects, which reduces latency by making an object available for downloading while it is still being uploaded.
 
 ## 2.462.0
 * bugfix: Documentation: Update badges in README.md
