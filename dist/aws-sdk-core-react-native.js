@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.462.0',
+	  VERSION: '2.463.0',
 
 	  /**
 	   * @api private
@@ -5124,8 +5124,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 *     * **proxy** [String] &mdash; the URL to proxy requests through
 	 *     * **agent** [http.Agent, https.Agent] &mdash; the Agent object to perform
-	 *       HTTP requests with. Used for connection pooling. Defaults to the global
-	 *       agent (`http.globalAgent`) for non-SSL connections. Note that for
+	 *       HTTP requests with. Used for connection pooling. Note that for
 	 *       SSL connections, a special Agent object is used in order to enable
 	 *       peer certificate verification. This feature is only supported in the
 	 *       Node.js environment.

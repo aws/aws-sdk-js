@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "CodeDeploy",
+        "description": "AWS CodeDeploy now supports tagging for the application and deployment group resources."
+    },
+    {
+        "type": "feature",
+        "category": "Core",
+        "description": "set environmental variable AWS_NODEJS_CONNECTION_REUSE_ENABLED to 1 to make SDK reuse connections by default if users don't supply custom agents."
+    },
+    {
+        "type": "feature",
+        "category": "MediaStoreData",
+        "description": "MediaStore - This release adds support for chunked transfer of objects, which reduces latency by making an object available for downloading while it is still being uploaded."
+    }
+]
