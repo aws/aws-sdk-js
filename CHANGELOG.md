@@ -1,6 +1,36 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.457.0-->
+<!--LATEST=2.463.0-->
 <!--ENTRYINSERT-->
+
+## 2.463.0
+* feature: CodeDeploy: AWS CodeDeploy now supports tagging for the application and deployment group resources.
+* feature: Core: set environmental variable AWS_NODEJS_CONNECTION_REUSE_ENABLED to 1 to make SDK reuse connections by default if users don't supply custom agents.
+* feature: MediaStoreData: MediaStore - This release adds support for chunked transfer of objects, which reduces latency by making an object available for downloading while it is still being uploaded.
+
+## 2.462.0
+* bugfix: Documentation: Update badges in README.md
+* feature: EC2: New APIs to enable EBS encryption by default feature. Once EBS encryption by default is enabled in a region within the account, all new EBS volumes and snapshot copies are always encrypted
+
+## 2.461.0
+* feature: APIGateway: This release adds support for tagging of Amazon API Gateway resources.
+* feature: Budgets: Added new datatype PlannedBudgetLimits to Budget model, and updated examples for AWS Budgets API for UpdateBudget, CreateBudget, DescribeBudget, and DescribeBudgets
+* feature: DeviceFarm: This release introduces support for tagging, tag-based access control, and resource-based access control.
+* feature: EC2: This release adds idempotency support for associate, create route and authorization APIs for AWS Client VPN Endpoints.
+* feature: EFS: AWS EFS documentation updated to reflect the minimum required value for ProvisionedThroughputInMibps is 1 from the previously documented 0. The service has always required a minimum value of 1, therefor service behavior is not changed. 
+* feature: ServiceCatalog: Service Catalog UpdateProvisionedProductProperties API enables customers to manage provisioned product ownership. Administrators can now update the user associated to a provisioned product to another user within the same account allowing the new user to describe, update, terminate and execute service actions in that Service Catalog resource. New owner will also be able to list and describe all past records executed for that provisioned product.
+* feature: WorkLink: Amazon WorkLink is a fully managed, cloud-based service that enables secure, one-click access to internal websites and web apps from mobile phones. This release introduces new APIs to associate and manage website authorization providers with Amazon WorkLink fleets.
+* feature: s3: Validate the `Expiration` parameter for `s3.getSignedUrl()` is number
+
+## 2.460.0
+* feature: AlexaForBusiness: This release contains API changes to allow customers to create and manage Network Profiles for their Shared devices
+* feature: DataSync: Documentation update and refine pagination token on Datasync List API's
+
+## 2.459.0
+* feature: Kafka: Updated APIs for the Managed Streaming for Kafka service that let customers create clusters with custom Kafka configuration. 
+* feature: MediaPackageVod: AWS Elemental MediaPackage now supports Video-on-Demand (VOD) workflows.  These new features allow you to easily deliver a vast library of source video Assets stored in your own S3 buckets using a small set of simple to set up Packaging Configurations and Packaging Groups.
+
+## 2.458.0
+* feature: AppStream: Includes APIs for managing subscriptions to AppStream 2.0 usage reports and configuring idle disconnect timeouts on AppStream 2.0 fleets.
 
 ## 2.457.0
 * enhancement: Documentation: Added steps to generate documentation changes in CONTRIBUTION.md

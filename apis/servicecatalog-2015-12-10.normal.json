@@ -878,7 +878,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Gets information about the specified request operation.</p> <p>Use this operation after calling a request operation (for example, <a>ProvisionProduct</a>, <a>TerminateProvisionedProduct</a>, or <a>UpdateProvisionedProduct</a>). </p>"
+      "documentation": "<p>Gets information about the specified request operation.</p> <p>Use this operation after calling a request operation (for example, <a>ProvisionProduct</a>, <a>TerminateProvisionedProduct</a>, or <a>UpdateProvisionedProduct</a>). </p> <note> <p>If a provisioned product was transferred to a new owner using <a>UpdateProvisionedProductProperties</a>, the new owner will be able to describe all past records for that product. The previous owner will no longer be able to describe the records, but will be able to use <a>ListRecordHistory</a> to see the product's history from when he was the owner.</p> </note>"
     },
     "DescribeServiceAction": {
       "name": "DescribeServiceAction",
@@ -1756,6 +1756,31 @@
         }
       ],
       "documentation": "<p>Requests updates to the configuration of the specified provisioned product.</p> <p>If there are tags associated with the object, they cannot be updated or added. Depending on the specific updates requested, this operation can update with no interruption, with some interruption, or replace the provisioned product entirely.</p> <p>You can check the status of this request using <a>DescribeRecord</a>.</p>"
+    },
+    "UpdateProvisionedProductProperties": {
+      "name": "UpdateProvisionedProductProperties",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateProvisionedProductPropertiesInput"
+      },
+      "output": {
+        "shape": "UpdateProvisionedProductPropertiesOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParametersException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidStateException"
+        }
+      ],
+      "documentation": "<p>Requests updates to the properties of the specified provisioned product.</p>"
     },
     "UpdateProvisioningArtifact": {
       "name": "UpdateProvisioningArtifact",
@@ -4724,8 +4749,21 @@
       },
       "documentation": "<p>Summary information about a product view.</p>"
     },
+    "PropertyKey": {
+      "type": "string",
+      "enum": [
+        "OWNER"
+      ],
+      "max": 128,
+      "min": 1
+    },
     "PropertyName": {
       "type": "string"
+    },
+    "PropertyValue": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
     },
     "ProviderName": {
       "type": "string",
@@ -5066,6 +5104,17 @@
       "member": {
         "shape": "ProvisionedProductPlanSummary"
       }
+    },
+    "ProvisionedProductProperties": {
+      "type": "map",
+      "key": {
+        "shape": "PropertyKey"
+      },
+      "value": {
+        "shape": "PropertyValue"
+      },
+      "max": 100,
+      "min": 1
     },
     "ProvisionedProductStatus": {
       "type": "string",
@@ -6532,7 +6581,7 @@
         },
         "ProvisionedProductName": {
           "shape": "ProvisionedProductNameOrArn",
-          "documentation": "<p>The updated name of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.</p>"
+          "documentation": "<p>The name of the provisioned product. You cannot specify both <code>ProvisionedProductName</code> and <code>ProvisionedProductId</code>.</p>"
         },
         "ProvisionedProductId": {
           "shape": "Id",
@@ -6575,6 +6624,54 @@
         "RecordDetail": {
           "shape": "RecordDetail",
           "documentation": "<p>Information about the result of the request.</p>"
+        }
+      }
+    },
+    "UpdateProvisionedProductPropertiesInput": {
+      "type": "structure",
+      "required": [
+        "ProvisionedProductId",
+        "ProvisionedProductProperties",
+        "IdempotencyToken"
+      ],
+      "members": {
+        "AcceptLanguage": {
+          "shape": "AcceptLanguage",
+          "documentation": "<p>The language code.</p> <ul> <li> <p> <code>en</code> - English (default)</p> </li> <li> <p> <code>jp</code> - Japanese</p> </li> <li> <p> <code>zh</code> - Chinese</p> </li> </ul>"
+        },
+        "ProvisionedProductId": {
+          "shape": "Id",
+          "documentation": "<p>The identifier of the provisioned product.</p>"
+        },
+        "ProvisionedProductProperties": {
+          "shape": "ProvisionedProductProperties",
+          "documentation": "<p>A map that contains the provisioned product properties to be updated.</p> <p>The <code>OWNER</code> key only accepts user ARNs. The owner is the user that is allowed to see, update, terminate, and execute service actions in the provisioned product.</p> <p>The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the <code>ListRecordHistory</code> API. The new owner can describe all past records for the provisioned product using the <code>DescribeRecord</code> API. The previous owner can no longer use <code>DescribeRecord</code>, but can still see the product's history from when he was an owner using <code>ListRecordHistory</code>.</p> <p>If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.</p>"
+        },
+        "IdempotencyToken": {
+          "shape": "IdempotencyToken",
+          "documentation": "<p>The idempotency token that uniquely identifies the provisioning product update request.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "UpdateProvisionedProductPropertiesOutput": {
+      "type": "structure",
+      "members": {
+        "ProvisionedProductId": {
+          "shape": "Id",
+          "documentation": "<p>The provisioned product identifier.</p>"
+        },
+        "ProvisionedProductProperties": {
+          "shape": "ProvisionedProductProperties",
+          "documentation": "<p>A map that contains the properties updated.</p>"
+        },
+        "RecordId": {
+          "shape": "Id",
+          "documentation": "<p>The identifier of the record.</p>"
+        },
+        "Status": {
+          "shape": "RecordStatus",
+          "documentation": "<p>The status of the request.</p>"
         }
       }
     },

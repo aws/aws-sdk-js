@@ -28,6 +28,14 @@ declare class AlexaForBusiness extends Service {
    */
   associateContactWithAddressBook(callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateContactWithAddressBookResponse) => void): Request<AlexaForBusiness.Types.AssociateContactWithAddressBookResponse, AWSError>;
   /**
+   * Associates a device with the specified network profile.
+   */
+  associateDeviceWithNetworkProfile(params: AlexaForBusiness.Types.AssociateDeviceWithNetworkProfileRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateDeviceWithNetworkProfileResponse) => void): Request<AlexaForBusiness.Types.AssociateDeviceWithNetworkProfileResponse, AWSError>;
+  /**
+   * Associates a device with the specified network profile.
+   */
+  associateDeviceWithNetworkProfile(callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateDeviceWithNetworkProfileResponse) => void): Request<AlexaForBusiness.Types.AssociateDeviceWithNetworkProfileResponse, AWSError>;
+  /**
    * Associates a device with a given room. This applies all the settings from the room profile to the device, and all the skills in any skill groups added to that room. This operation requires the device to be online, or else a manual sync is required. 
    */
   associateDeviceWithRoom(params: AlexaForBusiness.Types.AssociateDeviceWithRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.AssociateDeviceWithRoomResponse) => void): Request<AlexaForBusiness.Types.AssociateDeviceWithRoomResponse, AWSError>;
@@ -99,6 +107,14 @@ declare class AlexaForBusiness extends Service {
    * Creates a gateway group with the specified details.
    */
   createGatewayGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateGatewayGroupResponse) => void): Request<AlexaForBusiness.Types.CreateGatewayGroupResponse, AWSError>;
+  /**
+   * Creates a network profile with the specified details.
+   */
+  createNetworkProfile(params: AlexaForBusiness.Types.CreateNetworkProfileRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateNetworkProfileResponse) => void): Request<AlexaForBusiness.Types.CreateNetworkProfileResponse, AWSError>;
+  /**
+   * Creates a network profile with the specified details.
+   */
+  createNetworkProfile(callback?: (err: AWSError, data: AlexaForBusiness.Types.CreateNetworkProfileResponse) => void): Request<AlexaForBusiness.Types.CreateNetworkProfileResponse, AWSError>;
   /**
    * Creates a new room profile with the specified details.
    */
@@ -172,11 +188,11 @@ declare class AlexaForBusiness extends Service {
    */
   deleteDevice(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteDeviceResponse) => void): Request<AlexaForBusiness.Types.DeleteDeviceResponse, AWSError>;
   /**
-   * When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device.
+   * When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data. This action can be called once every 24 hours for a specific shared device. 
    */
   deleteDeviceUsageData(params: AlexaForBusiness.Types.DeleteDeviceUsageDataRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteDeviceUsageDataResponse) => void): Request<AlexaForBusiness.Types.DeleteDeviceUsageDataResponse, AWSError>;
   /**
-   * When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data and associated response data. This action can be called once every 24 hours for a specific shared device.
+   * When this action is called for a specified shared device, it allows authorized users to delete the device's entire previous history of voice input data. This action can be called once every 24 hours for a specific shared device. 
    */
   deleteDeviceUsageData(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteDeviceUsageDataResponse) => void): Request<AlexaForBusiness.Types.DeleteDeviceUsageDataResponse, AWSError>;
   /**
@@ -187,6 +203,14 @@ declare class AlexaForBusiness extends Service {
    * Deletes a gateway group.
    */
   deleteGatewayGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteGatewayGroupResponse) => void): Request<AlexaForBusiness.Types.DeleteGatewayGroupResponse, AWSError>;
+  /**
+   * Deletes a network profile by the network profile ARN.
+   */
+  deleteNetworkProfile(params: AlexaForBusiness.Types.DeleteNetworkProfileRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteNetworkProfileResponse) => void): Request<AlexaForBusiness.Types.DeleteNetworkProfileResponse, AWSError>;
+  /**
+   * Deletes a network profile by the network profile ARN.
+   */
+  deleteNetworkProfile(callback?: (err: AWSError, data: AlexaForBusiness.Types.DeleteNetworkProfileResponse) => void): Request<AlexaForBusiness.Types.DeleteNetworkProfileResponse, AWSError>;
   /**
    * Deletes a room profile by the profile ARN.
    */
@@ -347,6 +371,14 @@ declare class AlexaForBusiness extends Service {
    * Retrieves the configured values for the user enrollment invitation email template.
    */
   getInvitationConfiguration(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetInvitationConfigurationResponse) => void): Request<AlexaForBusiness.Types.GetInvitationConfigurationResponse, AWSError>;
+  /**
+   * Gets the network profile details by the network profile ARN.
+   */
+  getNetworkProfile(params: AlexaForBusiness.Types.GetNetworkProfileRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.GetNetworkProfileResponse) => void): Request<AlexaForBusiness.Types.GetNetworkProfileResponse, AWSError>;
+  /**
+   * Gets the network profile details by the network profile ARN.
+   */
+  getNetworkProfile(callback?: (err: AWSError, data: AlexaForBusiness.Types.GetNetworkProfileResponse) => void): Request<AlexaForBusiness.Types.GetNetworkProfileResponse, AWSError>;
   /**
    * Gets the details of a room profile by profile ARN.
    */
@@ -548,6 +580,14 @@ declare class AlexaForBusiness extends Service {
    */
   searchDevices(callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchDevicesResponse) => void): Request<AlexaForBusiness.Types.SearchDevicesResponse, AWSError>;
   /**
+   * Searches network profiles and lists the ones that meet a set of filter and sort criteria.
+   */
+  searchNetworkProfiles(params: AlexaForBusiness.Types.SearchNetworkProfilesRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchNetworkProfilesResponse) => void): Request<AlexaForBusiness.Types.SearchNetworkProfilesResponse, AWSError>;
+  /**
+   * Searches network profiles and lists the ones that meet a set of filter and sort criteria.
+   */
+  searchNetworkProfiles(callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchNetworkProfilesResponse) => void): Request<AlexaForBusiness.Types.SearchNetworkProfilesResponse, AWSError>;
+  /**
    * Searches room profiles and lists the ones that meet a set of filter criteria.
    */
   searchProfiles(params: AlexaForBusiness.Types.SearchProfilesRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.SearchProfilesResponse) => void): Request<AlexaForBusiness.Types.SearchProfilesResponse, AWSError>;
@@ -596,11 +636,11 @@ declare class AlexaForBusiness extends Service {
    */
   sendInvitation(callback?: (err: AWSError, data: AlexaForBusiness.Types.SendInvitationResponse) => void): Request<AlexaForBusiness.Types.SendInvitationResponse, AWSError>;
   /**
-   * Resets a device and its account to the known default settings, by clearing all information and settings set by previous users.
+   * Resets a device and its account to the known default settings. This clears all information and settings set by previous users in the following ways:   Bluetooth - This unpairs all bluetooth devices paired with your echo device.   Volume - This resets the echo device's volume to the default value.   Notifications - This clears all notifications from your echo device.   Lists - This clears all to-do items from your echo device.   Settings - This internally syncs the room's profile (if the device is assigned to a room), contacts, address books, delegation access for account linking, and communications (if enabled on the room profile).  
    */
   startDeviceSync(params: AlexaForBusiness.Types.StartDeviceSyncRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.StartDeviceSyncResponse) => void): Request<AlexaForBusiness.Types.StartDeviceSyncResponse, AWSError>;
   /**
-   * Resets a device and its account to the known default settings, by clearing all information and settings set by previous users.
+   * Resets a device and its account to the known default settings. This clears all information and settings set by previous users in the following ways:   Bluetooth - This unpairs all bluetooth devices paired with your echo device.   Volume - This resets the echo device's volume to the default value.   Notifications - This clears all notifications from your echo device.   Lists - This clears all to-do items from your echo device.   Settings - This internally syncs the room's profile (if the device is assigned to a room), contacts, address books, delegation access for account linking, and communications (if enabled on the room profile).  
    */
   startDeviceSync(callback?: (err: AWSError, data: AlexaForBusiness.Types.StartDeviceSyncResponse) => void): Request<AlexaForBusiness.Types.StartDeviceSyncResponse, AWSError>;
   /**
@@ -684,6 +724,14 @@ declare class AlexaForBusiness extends Service {
    */
   updateGatewayGroup(callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateGatewayGroupResponse) => void): Request<AlexaForBusiness.Types.UpdateGatewayGroupResponse, AWSError>;
   /**
+   * Updates a network profile by the network profile ARN.
+   */
+  updateNetworkProfile(params: AlexaForBusiness.Types.UpdateNetworkProfileRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateNetworkProfileResponse) => void): Request<AlexaForBusiness.Types.UpdateNetworkProfileResponse, AWSError>;
+  /**
+   * Updates a network profile by the network profile ARN.
+   */
+  updateNetworkProfile(callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateNetworkProfileResponse) => void): Request<AlexaForBusiness.Types.UpdateNetworkProfileResponse, AWSError>;
+  /**
    * Updates an existing room profile by room profile ARN.
    */
   updateProfile(params: AlexaForBusiness.Types.UpdateProfileRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.UpdateProfileResponse) => void): Request<AlexaForBusiness.Types.UpdateProfileResponse, AWSError>;
@@ -765,6 +813,18 @@ declare namespace AlexaForBusiness {
     AddressBookArn: Arn;
   }
   export interface AssociateContactWithAddressBookResponse {
+  }
+  export interface AssociateDeviceWithNetworkProfileRequest {
+    /**
+     * The device ARN.
+     */
+    DeviceArn: Arn;
+    /**
+     * The ARN of the network profile to associate with a device.
+     */
+    NetworkProfileArn: Arn;
+  }
+  export interface AssociateDeviceWithNetworkProfileResponse {
   }
   export interface AssociateDeviceWithRoomRequest {
     /**
@@ -926,6 +986,7 @@ declare namespace AlexaForBusiness {
   export type CategoryId = number;
   export type CategoryList = Category[];
   export type CategoryName = string;
+  export type CertificateTime = Date;
   export type ClientId = string;
   export type ClientRequestToken = string;
   export type CommsProtocol = "SIP"|"SIPS"|"H323"|string;
@@ -1162,6 +1223,51 @@ declare namespace AlexaForBusiness {
      */
     GatewayGroupArn?: Arn;
   }
+  export interface CreateNetworkProfileRequest {
+    /**
+     * The name of the network profile associated with a device.
+     */
+    NetworkProfileName: NetworkProfileName;
+    /**
+     * Detailed information about a device's network profile.
+     */
+    Description?: NetworkProfileDescription;
+    /**
+     * The SSID of the Wi-Fi network.
+     */
+    Ssid: NetworkSsid;
+    /**
+     * The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK, WPA_PSK, WEP, or OPEN.
+     */
+    SecurityType: NetworkSecurityType;
+    /**
+     * The authentication standard that is used in the EAP framework. Currently, EAP_TLS is supported.
+     */
+    EapMethod?: NetworkEapMethod;
+    /**
+     * The current password of the Wi-Fi network.
+     */
+    CurrentPassword?: CurrentWiFiPassword;
+    /**
+     * The next, or subsequent, password of the Wi-Fi network. This password is asynchronously transmitted to the device and is used when the password of the network changes to NextPassword. 
+     */
+    NextPassword?: NextWiFiPassword;
+    /**
+     * The ARN of the Private Certificate Authority (PCA) created in AWS Certificate Manager (ACM). This is used to issue certificates to the devices. 
+     */
+    CertificateAuthorityArn?: Arn;
+    /**
+     * The root certificates of your authentication server that is installed on your devices and used to trust your authentication server during EAP negotiation. 
+     */
+    TrustAnchors?: TrustAnchorList;
+    ClientRequestToken: ClientRequestToken;
+  }
+  export interface CreateNetworkProfileResponse {
+    /**
+     * The ARN of the network profile associated with a device.
+     */
+    NetworkProfileArn?: Arn;
+  }
   export interface CreateProfileRequest {
     /**
      * The name of a room profile.
@@ -1294,6 +1400,7 @@ declare namespace AlexaForBusiness {
      */
     UserArn?: Arn;
   }
+  export type CurrentWiFiPassword = string;
   export type CustomerS3BucketName = string;
   export type _Date = string;
   export interface DeleteAddressBookRequest {
@@ -1355,6 +1462,14 @@ declare namespace AlexaForBusiness {
     GatewayGroupArn: Arn;
   }
   export interface DeleteGatewayGroupResponse {
+  }
+  export interface DeleteNetworkProfileRequest {
+    /**
+     * The ARN of the network profile associated with a device.
+     */
+    NetworkProfileArn: Arn;
+  }
+  export interface DeleteNetworkProfileResponse {
   }
   export interface DeleteProfileRequest {
     /**
@@ -1476,6 +1591,10 @@ declare namespace AlexaForBusiness {
      * Detailed information about a device's status.
      */
     DeviceStatusInfo?: DeviceStatusInfo;
+    /**
+     * Detailed information about a device's network profile.
+     */
+    NetworkProfileInfo?: DeviceNetworkProfileInfo;
   }
   export interface DeviceData {
     /**
@@ -1506,6 +1625,14 @@ declare namespace AlexaForBusiness {
      * The status of a device.
      */
     DeviceStatus?: DeviceStatus;
+    /**
+     * The ARN of the network profile associated with a device.
+     */
+    NetworkProfileArn?: Arn;
+    /**
+     * The name of the network profile associated with a device.
+     */
+    NetworkProfileName?: NetworkProfileName;
     /**
      * The room ARN associated with a device.
      */
@@ -1539,10 +1666,28 @@ declare namespace AlexaForBusiness {
   export type DeviceEventType = "CONNECTION_STATUS"|"DEVICE_STATUS"|string;
   export type DeviceEventValue = string;
   export type DeviceName = string;
+  export interface DeviceNetworkProfileInfo {
+    /**
+     * The ARN of the network profile associated with a device.
+     */
+    NetworkProfileArn?: Arn;
+    /**
+     * The ARN of the certificate associated with a device.
+     */
+    CertificateArn?: Arn;
+    /**
+     * The time (in epoch) when the certificate expires.
+     */
+    CertificateExpirationTime?: CertificateTime;
+  }
   export type DeviceSerialNumber = string;
   export type DeviceSerialNumberForAVS = string;
-  export type DeviceStatus = "READY"|"PENDING"|"WAS_OFFLINE"|"DEREGISTERED"|string;
+  export type DeviceStatus = "READY"|"PENDING"|"WAS_OFFLINE"|"DEREGISTERED"|"FAILED"|string;
   export interface DeviceStatusDetail {
+    /**
+     * The list of available features on the device.
+     */
+    Feature?: Feature;
     /**
      * The device status detail code.
      */
@@ -1623,7 +1768,7 @@ declare namespace AlexaForBusiness {
   export type Endpoint = string;
   export type EnrollmentId = string;
   export type EnrollmentStatus = "INITIALIZED"|"PENDING"|"REGISTERED"|"DISASSOCIATING"|"DEREGISTERING"|string;
-  export type Feature = "BLUETOOTH"|"VOLUME"|"NOTIFICATIONS"|"LISTS"|"SKILLS"|"ALL"|string;
+  export type Feature = "BLUETOOTH"|"VOLUME"|"NOTIFICATIONS"|"LISTS"|"SKILLS"|"NETWORK_PROFILE"|"SETTINGS"|"ALL"|string;
   export type Features = Feature[];
   export interface Filter {
     /**
@@ -1820,6 +1965,18 @@ declare namespace AlexaForBusiness {
      * The list of private skill IDs that you want to recommend to the user to enable in the invitation.
      */
     PrivateSkillIds?: ShortSkillIdList;
+  }
+  export interface GetNetworkProfileRequest {
+    /**
+     * The ARN of the network profile associated with a device.
+     */
+    NetworkProfileArn: Arn;
+  }
+  export interface GetNetworkProfileResponse {
+    /**
+     * The network profile associated with a device.
+     */
+    NetworkProfile?: NetworkProfile;
   }
   export interface GetProfileRequest {
     /**
@@ -2136,8 +2293,87 @@ declare namespace AlexaForBusiness {
      */
     RequirePin: RequirePin;
   }
+  export type NetworkEapMethod = "EAP_TLS"|string;
+  export interface NetworkProfile {
+    /**
+     * The ARN of the network profile associated with a device.
+     */
+    NetworkProfileArn?: Arn;
+    /**
+     * The name of the network profile associated with a device.
+     */
+    NetworkProfileName?: NetworkProfileName;
+    /**
+     * Detailed information about a device's network profile.
+     */
+    Description?: NetworkProfileDescription;
+    /**
+     * The SSID of the Wi-Fi network.
+     */
+    Ssid?: NetworkSsid;
+    /**
+     * The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK, WPA_PSK, WEP, or OPEN.
+     */
+    SecurityType?: NetworkSecurityType;
+    /**
+     * The authentication standard that is used in the EAP framework. Currently, EAP_TLS is supported. 
+     */
+    EapMethod?: NetworkEapMethod;
+    /**
+     * The current password of the Wi-Fi network.
+     */
+    CurrentPassword?: CurrentWiFiPassword;
+    /**
+     * The next, or subsequent, password of the Wi-Fi network. This password is asynchronously transmitted to the device and is used when the password of the network changes to NextPassword. 
+     */
+    NextPassword?: NextWiFiPassword;
+    /**
+     * The ARN of the Private Certificate Authority (PCA) created in AWS Certificate Manager (ACM). This is used to issue certificates to the devices. 
+     */
+    CertificateAuthorityArn?: Arn;
+    /**
+     * The root certificates of your authentication server, which is installed on your devices and used to trust your authentication server during EAP negotiation.
+     */
+    TrustAnchors?: TrustAnchorList;
+  }
+  export interface NetworkProfileData {
+    /**
+     * The ARN of the network profile associated with a device.
+     */
+    NetworkProfileArn?: Arn;
+    /**
+     * The name of the network profile associated with a device.
+     */
+    NetworkProfileName?: NetworkProfileName;
+    /**
+     * Detailed information about a device's network profile.
+     */
+    Description?: NetworkProfileDescription;
+    /**
+     * The SSID of the Wi-Fi network.
+     */
+    Ssid?: NetworkSsid;
+    /**
+     * The security type of the Wi-Fi network. This can be WPA2_ENTERPRISE, WPA2_PSK, WPA_PSK, WEP, or OPEN.
+     */
+    SecurityType?: NetworkSecurityType;
+    /**
+     * The authentication standard that is used in the EAP framework. Currently, EAP_TLS is supported.
+     */
+    EapMethod?: NetworkEapMethod;
+    /**
+     * The ARN of the Private Certificate Authority (PCA) created in AWS Certificate Manager (ACM). This is used to issue certificates to the devices.
+     */
+    CertificateAuthorityArn?: Arn;
+  }
+  export type NetworkProfileDataList = NetworkProfileData[];
+  export type NetworkProfileDescription = string;
+  export type NetworkProfileName = string;
+  export type NetworkSecurityType = "OPEN"|"WEP"|"WPA_PSK"|"WPA2_PSK"|"WPA2_ENTERPRISE"|string;
+  export type NetworkSsid = string;
   export type NewInThisVersionBulletPoints = BulletPoint[];
   export type NextToken = string;
+  export type NextWiFiPassword = string;
   export type OneClickIdDelay = string;
   export type OneClickPinDelay = string;
   export type OrganizationName = string;
@@ -2523,11 +2759,11 @@ declare namespace AlexaForBusiness {
      */
     MaxResults?: MaxResults;
     /**
-     * The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly, and ConnectionStatus (ONLINE and OFFLINE).
+     * The filters to use to list a specified set of devices. Supported filter keys are DeviceName, DeviceStatus, DeviceStatusDetailCode, RoomName, DeviceType, DeviceSerialNumber, UnassociatedOnly, ConnectionStatus (ONLINE and OFFLINE), NetworkProfileName, NetworkProfileArn, Feature, and FailureCode.
      */
     Filters?: FilterList;
     /**
-     * The sort order to use in listing the specified set of devices. Supported sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber, and ConnectionStatus.
+     * The sort order to use in listing the specified set of devices. Supported sort keys are DeviceName, DeviceStatus, RoomName, DeviceType, DeviceSerialNumber, ConnectionStatus, NetworkProfileName, NetworkProfileArn, Feature, and FailureCode.
      */
     SortCriteria?: SortList;
   }
@@ -2542,6 +2778,38 @@ declare namespace AlexaForBusiness {
     NextToken?: NextToken;
     /**
      * The total number of devices returned.
+     */
+    TotalCount?: TotalCount;
+  }
+  export interface SearchNetworkProfilesRequest {
+    /**
+     * An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults. 
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved. 
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The filters to use to list a specified set of network profiles. Valid filters are NetworkProfileName, Ssid, and SecurityType.
+     */
+    Filters?: FilterList;
+    /**
+     * The sort order to use to list the specified set of network profiles. Valid sort criteria includes NetworkProfileName, Ssid, and SecurityType.
+     */
+    SortCriteria?: SortList;
+  }
+  export interface SearchNetworkProfilesResponse {
+    /**
+     * The network profiles that meet the specified set of filter criteria, in sort order. It is a list of NetworkProfileData objects. 
+     */
+    NetworkProfiles?: NetworkProfileDataList;
+    /**
+     * An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults.
+     */
+    NextToken?: NextToken;
+    /**
+     * The total number of network profiles returned.
      */
     TotalCount?: TotalCount;
   }
@@ -2948,6 +3216,8 @@ declare namespace AlexaForBusiness {
   export type TimeToLiveInSeconds = number;
   export type Timezone = string;
   export type TotalCount = number;
+  export type TrustAnchor = string;
+  export type TrustAnchorList = TrustAnchor[];
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource from which to remove metadata tags. Required. 
@@ -3099,6 +3369,38 @@ declare namespace AlexaForBusiness {
     SoftwareVersion?: GatewayVersion;
   }
   export interface UpdateGatewayResponse {
+  }
+  export interface UpdateNetworkProfileRequest {
+    /**
+     * The ARN of the network profile associated with a device.
+     */
+    NetworkProfileArn: Arn;
+    /**
+     * The name of the network profile associated with a device.
+     */
+    NetworkProfileName?: NetworkProfileName;
+    /**
+     * Detailed information about a device's network profile.
+     */
+    Description?: NetworkProfileDescription;
+    /**
+     * The current password of the Wi-Fi network.
+     */
+    CurrentPassword?: CurrentWiFiPassword;
+    /**
+     * The next, or subsequent, password of the Wi-Fi network. This password is asynchronously transmitted to the device and is used when the password of the network changes to NextPassword. 
+     */
+    NextPassword?: NextWiFiPassword;
+    /**
+     * The ARN of the Private Certificate Authority (PCA) created in AWS Certificate Manager (ACM). This is used to issue certificates to the devices. 
+     */
+    CertificateAuthorityArn?: Arn;
+    /**
+     * The root certificate(s) of your authentication server that will be installed on your devices and used to trust your authentication server during EAP negotiation. 
+     */
+    TrustAnchors?: TrustAnchorList;
+  }
+  export interface UpdateNetworkProfileResponse {
   }
   export interface UpdateProfileRequest {
     /**

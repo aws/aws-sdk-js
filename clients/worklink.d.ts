@@ -20,6 +20,14 @@ declare class WorkLink extends Service {
    */
   associateDomain(callback?: (err: AWSError, data: WorkLink.Types.AssociateDomainResponse) => void): Request<WorkLink.Types.AssociateDomainResponse, AWSError>;
   /**
+   * Associates a website authorization provider with a specified fleet. This is used to authorize users against associated websites in the company network.
+   */
+  associateWebsiteAuthorizationProvider(params: WorkLink.Types.AssociateWebsiteAuthorizationProviderRequest, callback?: (err: AWSError, data: WorkLink.Types.AssociateWebsiteAuthorizationProviderResponse) => void): Request<WorkLink.Types.AssociateWebsiteAuthorizationProviderResponse, AWSError>;
+  /**
+   * Associates a website authorization provider with a specified fleet. This is used to authorize users against associated websites in the company network.
+   */
+  associateWebsiteAuthorizationProvider(callback?: (err: AWSError, data: WorkLink.Types.AssociateWebsiteAuthorizationProviderResponse) => void): Request<WorkLink.Types.AssociateWebsiteAuthorizationProviderResponse, AWSError>;
+  /**
    * Imports the root certificate of a certificate authority (CA) used to obtain TLS certificates used by associated websites within the company network.
    */
   associateWebsiteCertificateAuthority(params: WorkLink.Types.AssociateWebsiteCertificateAuthorityRequest, callback?: (err: AWSError, data: WorkLink.Types.AssociateWebsiteCertificateAuthorityResponse) => void): Request<WorkLink.Types.AssociateWebsiteCertificateAuthorityResponse, AWSError>;
@@ -116,6 +124,14 @@ declare class WorkLink extends Service {
    */
   disassociateDomain(callback?: (err: AWSError, data: WorkLink.Types.DisassociateDomainResponse) => void): Request<WorkLink.Types.DisassociateDomainResponse, AWSError>;
   /**
+   * Disassociates a website authorization provider from a specified fleet. After the disassociation, users can't load any associated websites that require this authorization provider.
+   */
+  disassociateWebsiteAuthorizationProvider(params: WorkLink.Types.DisassociateWebsiteAuthorizationProviderRequest, callback?: (err: AWSError, data: WorkLink.Types.DisassociateWebsiteAuthorizationProviderResponse) => void): Request<WorkLink.Types.DisassociateWebsiteAuthorizationProviderResponse, AWSError>;
+  /**
+   * Disassociates a website authorization provider from a specified fleet. After the disassociation, users can't load any associated websites that require this authorization provider.
+   */
+  disassociateWebsiteAuthorizationProvider(callback?: (err: AWSError, data: WorkLink.Types.DisassociateWebsiteAuthorizationProviderResponse) => void): Request<WorkLink.Types.DisassociateWebsiteAuthorizationProviderResponse, AWSError>;
+  /**
    * Removes a certificate authority (CA).
    */
   disassociateWebsiteCertificateAuthority(params: WorkLink.Types.DisassociateWebsiteCertificateAuthorityRequest, callback?: (err: AWSError, data: WorkLink.Types.DisassociateWebsiteCertificateAuthorityResponse) => void): Request<WorkLink.Types.DisassociateWebsiteCertificateAuthorityResponse, AWSError>;
@@ -147,6 +163,14 @@ declare class WorkLink extends Service {
    * Retrieves a list of fleets for the current account and Region.
    */
   listFleets(callback?: (err: AWSError, data: WorkLink.Types.ListFleetsResponse) => void): Request<WorkLink.Types.ListFleetsResponse, AWSError>;
+  /**
+   * Retrieves a list of website authorization providers associated with a specified fleet.
+   */
+  listWebsiteAuthorizationProviders(params: WorkLink.Types.ListWebsiteAuthorizationProvidersRequest, callback?: (err: AWSError, data: WorkLink.Types.ListWebsiteAuthorizationProvidersResponse) => void): Request<WorkLink.Types.ListWebsiteAuthorizationProvidersResponse, AWSError>;
+  /**
+   * Retrieves a list of website authorization providers associated with a specified fleet.
+   */
+  listWebsiteAuthorizationProviders(callback?: (err: AWSError, data: WorkLink.Types.ListWebsiteAuthorizationProvidersResponse) => void): Request<WorkLink.Types.ListWebsiteAuthorizationProvidersResponse, AWSError>;
   /**
    * Retrieves a list of certificate authorities added for the current account and Region.
    */
@@ -240,15 +264,35 @@ declare namespace WorkLink {
      */
     DomainName: DomainName;
     /**
-     * The ARN of an issued ACM certificate that is valid for the domain being associated. 
-     */
-    AcmCertificateArn: AcmCertificateArn;
-    /**
      * The name to display.
      */
     DisplayName?: DisplayName;
+    /**
+     * The ARN of an issued ACM certificate that is valid for the domain being associated.
+     */
+    AcmCertificateArn: AcmCertificateArn;
   }
   export interface AssociateDomainResponse {
+  }
+  export interface AssociateWebsiteAuthorizationProviderRequest {
+    /**
+     * The ARN of the fleet.
+     */
+    FleetArn: FleetArn;
+    /**
+     * The authorization provider type.
+     */
+    AuthorizationProviderType: AuthorizationProviderType;
+    /**
+     * The domain name of the authorization provider. This applies only to SAML-based authorization providers.
+     */
+    DomainName?: DomainName;
+  }
+  export interface AssociateWebsiteAuthorizationProviderResponse {
+    /**
+     * A unique identifier for the authorization provider.
+     */
+    AuthorizationProviderId?: Id;
   }
   export interface AssociateWebsiteCertificateAuthorityRequest {
     /**
@@ -271,6 +315,7 @@ declare namespace WorkLink {
     WebsiteCaId?: Id;
   }
   export type AuditStreamArn = string;
+  export type AuthorizationProviderType = "SAML"|string;
   export type Boolean = boolean;
   export type Certificate = string;
   export type CertificateChain = string;
@@ -408,6 +453,10 @@ declare namespace WorkLink {
   }
   export interface DescribeDomainResponse {
     /**
+     * The name of the domain.
+     */
+    DomainName?: DomainName;
+    /**
      * The name to display.
      */
     DisplayName?: DisplayName;
@@ -419,6 +468,10 @@ declare namespace WorkLink {
      * The current state for the domain.
      */
     DomainStatus?: DomainStatus;
+    /**
+     * The ARN of an issued ACM certificate that is valid for the domain being associated.
+     */
+    AcmCertificateArn?: AcmCertificateArn;
   }
   export interface DescribeFleetMetadataRequest {
     /**
@@ -529,6 +582,18 @@ declare namespace WorkLink {
   }
   export interface DisassociateDomainResponse {
   }
+  export interface DisassociateWebsiteAuthorizationProviderRequest {
+    /**
+     * The ARN of the fleet.
+     */
+    FleetArn: FleetArn;
+    /**
+     * A unique identifier for the authorization provider.
+     */
+    AuthorizationProviderId: Id;
+  }
+  export interface DisassociateWebsiteAuthorizationProviderResponse {
+  }
   export interface DisassociateWebsiteCertificateAuthorityRequest {
     /**
      * The ARN of the fleet.
@@ -550,6 +615,10 @@ declare namespace WorkLink {
      */
     DomainName: DomainName;
     /**
+     * The name to display.
+     */
+    DisplayName?: DisplayName;
+    /**
      * The time that the domain was created.
      */
     CreatedTime: DateTime;
@@ -557,10 +626,6 @@ declare namespace WorkLink {
      * The status of the domain.
      */
     DomainStatus: DomainStatus;
-    /**
-     * The name to display.
-     */
-    DisplayName?: DisplayName;
   }
   export type DomainSummaryList = DomainSummary[];
   export type FleetArn = string;
@@ -664,6 +729,30 @@ declare namespace WorkLink {
     FleetSummaryList?: FleetSummaryList;
     /**
      * The pagination token used to retrieve the next page of results for this operation. If there are no more pages, this value is null.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListWebsiteAuthorizationProvidersRequest {
+    /**
+     * The ARN of the fleet.
+     */
+    FleetArn: FleetArn;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to be included in the next page.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListWebsiteAuthorizationProvidersResponse {
+    /**
+     * The website authorization providers.
+     */
+    WebsiteAuthorizationProviders?: WebsiteAuthorizationProvidersSummaryList;
+    /**
+     * The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.
      */
     NextToken?: NextToken;
   }
@@ -828,6 +917,25 @@ declare namespace WorkLink {
   }
   export type Username = string;
   export type VpcId = string;
+  export interface WebsiteAuthorizationProviderSummary {
+    /**
+     * A unique identifier for the authorization provider.
+     */
+    AuthorizationProviderId?: Id;
+    /**
+     * The authorization provider type.
+     */
+    AuthorizationProviderType: AuthorizationProviderType;
+    /**
+     * The domain name of the authorization provider. This applies only to SAML-based authorization providers.
+     */
+    DomainName?: DomainName;
+    /**
+     * The time of creation.
+     */
+    CreatedTime?: DateTime;
+  }
+  export type WebsiteAuthorizationProvidersSummaryList = WebsiteAuthorizationProviderSummary[];
   export interface WebsiteCaSummary {
     /**
      * A unique identifier for the CA.

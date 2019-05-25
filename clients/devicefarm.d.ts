@@ -388,6 +388,14 @@ declare class DeviceFarm extends Service {
    */
   listSuites(callback?: (err: AWSError, data: DeviceFarm.Types.ListSuitesResult) => void): Request<DeviceFarm.Types.ListSuitesResult, AWSError>;
   /**
+   * List the tags for an AWS Device Farm resource.
+   */
+  listTagsForResource(params: DeviceFarm.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListTagsForResourceResponse) => void): Request<DeviceFarm.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * List the tags for an AWS Device Farm resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: DeviceFarm.Types.ListTagsForResourceResponse) => void): Request<DeviceFarm.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Gets information about tests in a given test suite.
    */
   listTests(params: DeviceFarm.Types.ListTestsRequest, callback?: (err: AWSError, data: DeviceFarm.Types.ListTestsResult) => void): Request<DeviceFarm.Types.ListTestsResult, AWSError>;
@@ -467,6 +475,22 @@ declare class DeviceFarm extends Service {
    * Initiates a stop request for the current test run. AWS Device Farm will immediately stop the run on devices where tests have not started executing, and you will not be billed for these devices. On devices where tests have started executing, Setup Suite and Teardown Suite tests will run to completion before stopping execution on those devices. You will be billed for Setup, Teardown, and any tests that were in progress or already completed.
    */
   stopRun(callback?: (err: AWSError, data: DeviceFarm.Types.StopRunResult) => void): Request<DeviceFarm.Types.StopRunResult, AWSError>;
+  /**
+   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.
+   */
+  tagResource(params: DeviceFarm.Types.TagResourceRequest, callback?: (err: AWSError, data: DeviceFarm.Types.TagResourceResponse) => void): Request<DeviceFarm.Types.TagResourceResponse, AWSError>;
+  /**
+   * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well.
+   */
+  tagResource(callback?: (err: AWSError, data: DeviceFarm.Types.TagResourceResponse) => void): Request<DeviceFarm.Types.TagResourceResponse, AWSError>;
+  /**
+   * Deletes the specified tags from a resource.
+   */
+  untagResource(params: DeviceFarm.Types.UntagResourceRequest, callback?: (err: AWSError, data: DeviceFarm.Types.UntagResourceResponse) => void): Request<DeviceFarm.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Deletes the specified tags from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: DeviceFarm.Types.UntagResourceResponse) => void): Request<DeviceFarm.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates information about an existing private device instance.
    */
@@ -1848,6 +1872,18 @@ declare namespace DeviceFarm {
      */
     nextToken?: PaginationToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource(s) for which to list tags. You can associate tags with the following Device Farm resources: PROJECT, RUN, NETWORK_PROFILE, INSTANCE_PROFILE, DEVICE_INSTANCE, SESSION, DEVICE_POOL, DEVICE, and VPCE_CONFIGURATION.
+     */
+    ResourceARN: AmazonResourceName;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tags to add to the resource. A tag is an array of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
+     */
+    Tags?: TagList;
+  }
   export interface ListTestsRequest {
     /**
      * The test suite's Amazon Resource Name (ARN).
@@ -2662,6 +2698,32 @@ declare namespace DeviceFarm {
     deviceMinutes?: DeviceMinutes;
   }
   export type Suites = Suite[];
+  export interface Tag {
+    /**
+     * One part of a key-value pair that make up a tag. A key is a general label that acts like a category for more specific tag values.
+     */
+    Key: TagKey;
+    /**
+     * The optional part of a key-value pair that make up a tag. A value acts as a descriptor within a tag category (key).
+     */
+    Value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource(s) to which to add tags. You can associate tags with the following Device Farm resources: PROJECT, RUN, NETWORK_PROFILE, INSTANCE_PROFILE, DEVICE_INSTANCE, SESSION, DEVICE_POOL, DEVICE, and VPCE_CONFIGURATION.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * The tags to add to the resource. A tag is an array of key-value pairs. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export interface Test {
     /**
      * The test's ARN.
@@ -2735,6 +2797,18 @@ declare namespace DeviceFarm {
   }
   export type UniqueProblems = UniqueProblem[];
   export type UniqueProblemsByExecutionResultMap = {[key: string]: UniqueProblems};
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource(s) from which to delete tags. You can associate tags with the following Device Farm resources: PROJECT, RUN, NETWORK_PROFILE, INSTANCE_PROFILE, DEVICE_INSTANCE, SESSION, DEVICE_POOL, DEVICE, and VPCE_CONFIGURATION.
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     * The keys of the tags to be removed.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateDeviceInstanceRequest {
     /**
      * The Amazon Resource Name (ARN) of the device instance.

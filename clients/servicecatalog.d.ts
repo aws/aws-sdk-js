@@ -300,11 +300,11 @@ declare class ServiceCatalog extends Service {
    */
   describeProvisioningParameters(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeProvisioningParametersOutput) => void): Request<ServiceCatalog.Types.DescribeProvisioningParametersOutput, AWSError>;
   /**
-   * Gets information about the specified request operation. Use this operation after calling a request operation (for example, ProvisionProduct, TerminateProvisionedProduct, or UpdateProvisionedProduct). 
+   * Gets information about the specified request operation. Use this operation after calling a request operation (for example, ProvisionProduct, TerminateProvisionedProduct, or UpdateProvisionedProduct).   If a provisioned product was transferred to a new owner using UpdateProvisionedProductProperties, the new owner will be able to describe all past records for that product. The previous owner will no longer be able to describe the records, but will be able to use ListRecordHistory to see the product's history from when he was the owner. 
    */
   describeRecord(params: ServiceCatalog.Types.DescribeRecordInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeRecordOutput) => void): Request<ServiceCatalog.Types.DescribeRecordOutput, AWSError>;
   /**
-   * Gets information about the specified request operation. Use this operation after calling a request operation (for example, ProvisionProduct, TerminateProvisionedProduct, or UpdateProvisionedProduct). 
+   * Gets information about the specified request operation. Use this operation after calling a request operation (for example, ProvisionProduct, TerminateProvisionedProduct, or UpdateProvisionedProduct).   If a provisioned product was transferred to a new owner using UpdateProvisionedProductProperties, the new owner will be able to describe all past records for that product. The previous owner will no longer be able to describe the records, but will be able to use ListRecordHistory to see the product's history from when he was the owner. 
    */
   describeRecord(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeRecordOutput) => void): Request<ServiceCatalog.Types.DescribeRecordOutput, AWSError>;
   /**
@@ -627,6 +627,14 @@ declare class ServiceCatalog extends Service {
    * Requests updates to the configuration of the specified provisioned product. If there are tags associated with the object, they cannot be updated or added. Depending on the specific updates requested, this operation can update with no interruption, with some interruption, or replace the provisioned product entirely. You can check the status of this request using DescribeRecord.
    */
   updateProvisionedProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProvisionedProductOutput) => void): Request<ServiceCatalog.Types.UpdateProvisionedProductOutput, AWSError>;
+  /**
+   * Requests updates to the properties of the specified provisioned product.
+   */
+  updateProvisionedProductProperties(params: ServiceCatalog.Types.UpdateProvisionedProductPropertiesInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProvisionedProductPropertiesOutput) => void): Request<ServiceCatalog.Types.UpdateProvisionedProductPropertiesOutput, AWSError>;
+  /**
+   * Requests updates to the properties of the specified provisioned product.
+   */
+  updateProvisionedProductProperties(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProvisionedProductPropertiesOutput) => void): Request<ServiceCatalog.Types.UpdateProvisionedProductPropertiesOutput, AWSError>;
   /**
    * Updates the specified provisioning artifact (also known as a version) for the specified product. You cannot update a provisioning artifact for a product that was shared with you.
    */
@@ -2544,7 +2552,9 @@ declare namespace ServiceCatalog {
      */
     SupportUrl?: SupportUrl;
   }
+  export type PropertyKey = "OWNER"|string;
   export type PropertyName = string;
+  export type PropertyValue = string;
   export type ProviderName = string;
   export interface ProvisionProductInput {
     /**
@@ -2800,6 +2810,7 @@ declare namespace ServiceCatalog {
   }
   export type ProvisionedProductPlanType = "CLOUDFORMATION"|string;
   export type ProvisionedProductPlans = ProvisionedProductPlanSummary[];
+  export type ProvisionedProductProperties = {[key: string]: PropertyValue};
   export type ProvisionedProductStatus = "AVAILABLE"|"UNDER_CHANGE"|"TAINTED"|"ERROR"|"PLAN_IN_PROGRESS"|string;
   export type ProvisionedProductStatusMessage = string;
   export type ProvisionedProductType = string;
@@ -3667,7 +3678,7 @@ declare namespace ServiceCatalog {
      */
     AcceptLanguage?: AcceptLanguage;
     /**
-     * The updated name of the provisioned product. You cannot specify both ProvisionedProductName and ProvisionedProductId.
+     * The name of the provisioned product. You cannot specify both ProvisionedProductName and ProvisionedProductId.
      */
     ProvisionedProductName?: ProvisionedProductNameOrArn;
     /**
@@ -3708,6 +3719,42 @@ declare namespace ServiceCatalog {
      * Information about the result of the request.
      */
     RecordDetail?: RecordDetail;
+  }
+  export interface UpdateProvisionedProductPropertiesInput {
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The identifier of the provisioned product.
+     */
+    ProvisionedProductId: Id;
+    /**
+     * A map that contains the provisioned product properties to be updated. The OWNER key only accepts user ARNs. The owner is the user that is allowed to see, update, terminate, and execute service actions in the provisioned product. The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the ListRecordHistory API. The new owner can describe all past records for the provisioned product using the DescribeRecord API. The previous owner can no longer use DescribeRecord, but can still see the product's history from when he was an owner using ListRecordHistory. If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.
+     */
+    ProvisionedProductProperties: ProvisionedProductProperties;
+    /**
+     * The idempotency token that uniquely identifies the provisioning product update request.
+     */
+    IdempotencyToken: IdempotencyToken;
+  }
+  export interface UpdateProvisionedProductPropertiesOutput {
+    /**
+     * The provisioned product identifier.
+     */
+    ProvisionedProductId?: Id;
+    /**
+     * A map that contains the properties updated.
+     */
+    ProvisionedProductProperties?: ProvisionedProductProperties;
+    /**
+     * The identifier of the record.
+     */
+    RecordId?: Id;
+    /**
+     * The status of the request.
+     */
+    Status?: RecordStatus;
   }
   export interface UpdateProvisioningArtifactInput {
     /**

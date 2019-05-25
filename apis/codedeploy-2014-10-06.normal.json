@@ -79,7 +79,7 @@
           "shape": "BatchLimitExceededException"
         }
       ],
-      "documentation": "<p>Gets information about one or more application revisions.</p>"
+      "documentation": "<p>Gets information about one or more application revisions. The maximum number of application revisions that can be returned is 25.</p>"
     },
     "BatchGetApplications": {
       "name": "BatchGetApplications",
@@ -107,7 +107,7 @@
           "shape": "BatchLimitExceededException"
         }
       ],
-      "documentation": "<p>Gets information about one or more applications.</p>"
+      "documentation": "<p>Gets information about one or more applications. The maximum number of applications that can be returned is 25.</p>"
     },
     "BatchGetDeploymentGroups": {
       "name": "BatchGetDeploymentGroups",
@@ -181,7 +181,7 @@
           "shape": "InvalidComputePlatformException"
         }
       ],
-      "documentation": "<note> <p> This method works, but is deprecated. Use <code>BatchGetDeploymentTargets</code> instead. </p> </note> <p> Returns an array of instances associated with a deployment. This method works with EC2/On-premises and AWS Lambda compute platforms. The newer <code>BatchGetDeploymentTargets</code> works with all compute platforms. </p>",
+      "documentation": "<note> <p> This method works, but is deprecated. Use <code>BatchGetDeploymentTargets</code> instead. </p> </note> <p> Returns an array of one or more instances associated with a deployment. This method works with EC2/On-premises and AWS Lambda compute platforms. The newer <code>BatchGetDeploymentTargets</code> works with all compute platforms. The maximum number of instances that can be returned is 25.</p>",
       "deprecated": true,
       "deprecatedMessage": "This operation is deprecated, use BatchGetDeploymentTargets instead."
     },
@@ -208,6 +208,9 @@
           "shape": "DeploymentDoesNotExistException"
         },
         {
+          "shape": "DeploymentNotStartedException"
+        },
+        {
           "shape": "DeploymentTargetIdRequiredException"
         },
         {
@@ -220,7 +223,7 @@
           "shape": "DeploymentTargetListSizeExceededException"
         }
       ],
-      "documentation": "<p> Returns an array of targets associated with a deployment. This method works with all compute types and should be used instead of the deprecated <code>BatchGetDeploymentInstances</code>. </p> <p> The type of targets returned depends on the deployment's compute platform: </p> <ul> <li> <p> <b>EC2/On-premises</b>: Information about EC2 instance targets. </p> </li> <li> <p> <b>AWS Lambda</b>: Information about Lambda functions targets. </p> </li> <li> <p> <b>Amazon ECS</b>: Information about Amazon ECS service targets. </p> </li> </ul>"
+      "documentation": "<p> Returns an array of one or more targets associated with a deployment. This method works with all compute types and should be used instead of the deprecated <code>BatchGetDeploymentInstances</code>. The maximum number of targets that can be returned is 25.</p> <p> The type of targets returned depends on the deployment's compute platform: </p> <ul> <li> <p> <b>EC2/On-premises</b>: Information about EC2 instance targets. </p> </li> <li> <p> <b>AWS Lambda</b>: Information about Lambda functions targets. </p> </li> <li> <p> <b>Amazon ECS</b>: Information about Amazon ECS service targets. </p> </li> </ul>"
     },
     "BatchGetDeployments": {
       "name": "BatchGetDeployments",
@@ -245,7 +248,7 @@
           "shape": "BatchLimitExceededException"
         }
       ],
-      "documentation": "<p>Gets information about one or more deployments.</p>"
+      "documentation": "<p>Gets information about one or more deployments. The maximum number of deployments that can be returned is 25.</p>"
     },
     "BatchGetOnPremisesInstances": {
       "name": "BatchGetOnPremisesInstances",
@@ -270,7 +273,7 @@
           "shape": "BatchLimitExceededException"
         }
       ],
-      "documentation": "<p>Gets information about one or more on-premises instances.</p>"
+      "documentation": "<p>Gets information about one or more on-premises instances. The maximum number of on-premises instances that can be returned is 25.</p>"
     },
     "ContinueDeployment": {
       "name": "ContinueDeployment",
@@ -336,6 +339,9 @@
         },
         {
           "shape": "InvalidComputePlatformException"
+        },
+        {
+          "shape": "InvalidTagsToAddException"
         }
       ],
       "documentation": "<p>Creates an application.</p>"
@@ -567,6 +573,9 @@
         },
         {
           "shape": "ECSServiceMappingLimitExceededException"
+        },
+        {
+          "shape": "InvalidTagsToAddException"
         }
       ],
       "documentation": "<p>Creates a deployment group to which application revisions are deployed.</p>"
@@ -586,6 +595,9 @@
         },
         {
           "shape": "InvalidApplicationNameException"
+        },
+        {
+          "shape": "InvalidRoleException"
         }
       ],
       "documentation": "<p>Deletes an application.</p>"
@@ -905,6 +917,9 @@
         },
         {
           "shape": "DeploymentDoesNotExistException"
+        },
+        {
+          "shape": "DeploymentNotStartedException"
         },
         {
           "shape": "DeploymentTargetIdRequiredException"
@@ -1239,6 +1254,31 @@
       ],
       "documentation": "<p>Gets a list of names for one or more on-premises instances.</p> <p>Unless otherwise specified, both registered and deregistered on-premises instance names are listed. To list only registered or deregistered on-premises instance names, use the registration status parameter.</p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTagsForResourceInput"
+      },
+      "output": {
+        "shape": "ListTagsForResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "ArnNotSupportedException"
+        },
+        {
+          "shape": "InvalidArnException"
+        },
+        {
+          "shape": "ResourceArnRequiredException"
+        }
+      ],
+      "documentation": "<p> Returns a list of tags for the resource identified by a specified ARN. Tags are used to organize and categorize your CodeDeploy resources. </p>"
+    },
     "PutLifecycleEventHookExecutionStatus": {
       "name": "PutLifecycleEventHookExecutionStatus",
       "http": {
@@ -1447,6 +1487,86 @@
         }
       ],
       "documentation": "<p>Attempts to stop an ongoing deployment.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TagResourceInput"
+      },
+      "output": {
+        "shape": "TagResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceArnRequiredException"
+        },
+        {
+          "shape": "ApplicationDoesNotExistException"
+        },
+        {
+          "shape": "DeploymentGroupDoesNotExistException"
+        },
+        {
+          "shape": "DeploymentConfigDoesNotExistException"
+        },
+        {
+          "shape": "TagRequiredException"
+        },
+        {
+          "shape": "InvalidTagsToAddException"
+        },
+        {
+          "shape": "ArnNotSupportedException"
+        },
+        {
+          "shape": "InvalidArnException"
+        }
+      ],
+      "documentation": "<p> Associates the list of tags in the input <code>Tags</code> parameter with the resource identified by the <code>ResourceArn</code> input parameter. </p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UntagResourceInput"
+      },
+      "output": {
+        "shape": "UntagResourceOutput"
+      },
+      "errors": [
+        {
+          "shape": "ResourceArnRequiredException"
+        },
+        {
+          "shape": "ApplicationDoesNotExistException"
+        },
+        {
+          "shape": "DeploymentGroupDoesNotExistException"
+        },
+        {
+          "shape": "DeploymentConfigDoesNotExistException"
+        },
+        {
+          "shape": "TagRequiredException"
+        },
+        {
+          "shape": "InvalidTagsToAddException"
+        },
+        {
+          "shape": "ArnNotSupportedException"
+        },
+        {
+          "shape": "InvalidArnException"
+        }
+      ],
+      "documentation": "<p> Disassociates a resource from a list of tags. The resource is identified by the <code>ResourceArn</code> input parameter. The tags are identfied by the list of keys in the <code>TagKeys</code> input parameter. </p>"
     },
     "UpdateApplication": {
       "name": "UpdateApplication",
@@ -1713,6 +1833,11 @@
         "shape": "ApplicationName"
       }
     },
+    "Arn": {
+      "type": "string",
+      "max": 1011,
+      "min": 1
+    },
     "AutoRollbackConfiguration": {
       "type": "structure",
       "members": {
@@ -1786,7 +1911,7 @@
         },
         "revisions": {
           "shape": "RevisionLocationList",
-          "documentation": "<p>Information to get about the application revisions, including type and location.</p>"
+          "documentation": "<p>An array of <code>RevisionLocation</code> objects that specify information to get about the application revisions, including type and location. The maximum number of <code>RevisionLocation</code> objects you can specify is 25.</p>"
         }
       },
       "documentation": "<p>Represents the input of a BatchGetApplicationRevisions operation.</p>"
@@ -1817,7 +1942,7 @@
       "members": {
         "applicationNames": {
           "shape": "ApplicationsList",
-          "documentation": "<p>A list of application names separated by spaces.</p>"
+          "documentation": "<p>A list of application names separated by spaces. The maximum number of application names you can specify is 25.</p>"
         }
       },
       "documentation": "<p>Represents the input of a BatchGetApplications operation.</p>"
@@ -1877,7 +2002,7 @@
         },
         "instanceIds": {
           "shape": "InstancesList",
-          "documentation": "<p>The unique IDs of instances used in the deployment.</p>"
+          "documentation": "<p>The unique IDs of instances used in the deployment. The maximum number of instance IDs you can specify is 25.</p>"
         }
       },
       "documentation": "<p> Represents the input of a BatchGetDeploymentInstances operation. </p>"
@@ -1905,7 +2030,7 @@
         },
         "targetIds": {
           "shape": "TargetIdList",
-          "documentation": "<p> The unique IDs of the deployment targets. The compute platform of the deployment determines the type of the targets and their formats. </p> <ul> <li> <p> For deployments that use the EC2/On-premises compute platform, the target IDs are EC2 or on-premises instances IDs, and their target type is <code>instanceTarget</code>. </p> </li> <li> <p> For deployments that use the AWS Lambda compute platform, the target IDs are the names of Lambda functions, and their target type is <code>instanceTarget</code>. </p> </li> <li> <p> For deployments that use the Amazon ECS compute platform, the target IDs are pairs of Amazon ECS clusters and services specified using the format <code>&lt;clustername&gt;:&lt;servicename&gt;</code>. Their target type is <code>ecsTarget</code>. </p> </li> </ul>"
+          "documentation": "<p> The unique IDs of the deployment targets. The compute platform of the deployment determines the type of the targets and their formats. The maximum number of deployment target IDs you can specify is 25.</p> <ul> <li> <p> For deployments that use the EC2/On-premises compute platform, the target IDs are EC2 or on-premises instances IDs, and their target type is <code>instanceTarget</code>. </p> </li> <li> <p> For deployments that use the AWS Lambda compute platform, the target IDs are the names of Lambda functions, and their target type is <code>instanceTarget</code>. </p> </li> <li> <p> For deployments that use the Amazon ECS compute platform, the target IDs are pairs of Amazon ECS clusters and services specified using the format <code>&lt;clustername&gt;:&lt;servicename&gt;</code>. Their target type is <code>ecsTarget</code>. </p> </li> </ul>"
         }
       }
     },
@@ -1926,7 +2051,7 @@
       "members": {
         "deploymentIds": {
           "shape": "DeploymentsList",
-          "documentation": "<p> A list of deployment IDs, separated by spaces. </p>"
+          "documentation": "<p> A list of deployment IDs, separated by spaces. The maximum number of deployment IDs you can specify is 25.</p>"
         }
       },
       "documentation": "<p> Represents the input of a BatchGetDeployments operation. </p>"
@@ -1949,7 +2074,7 @@
       "members": {
         "instanceNames": {
           "shape": "InstanceNameList",
-          "documentation": "<p>The names of the on-premises instances about which to get information.</p>"
+          "documentation": "<p>The names of the on-premises instances about which to get information. The maximum number of instance names you can specify is 25.</p>"
         }
       },
       "documentation": "<p>Represents the input of a BatchGetOnPremisesInstances operation.</p>"
@@ -2045,7 +2170,11 @@
         },
         "computePlatform": {
           "shape": "ComputePlatform",
-          "documentation": "<p> The destination platform type for the deployment (<code>Lambda</code> or <code>Server</code>).</p>"
+          "documentation": "<p> The destination platform type for the deployment (<code>Lambda</code>, <code>Server</code>, or <code>ECS</code>).</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p> The metadata that you apply to CodeDeploy applications to help you organize and categorize them. Each tag consists of a key and an optional value, both of which you define. </p>"
         }
       },
       "documentation": "<p>Represents the input of a CreateApplication operation.</p>"
@@ -2080,7 +2209,7 @@
         },
         "computePlatform": {
           "shape": "ComputePlatform",
-          "documentation": "<p>The destination platform type for the deployment (<code>Lambda</code> or <code>Server</code>&gt;).</p>"
+          "documentation": "<p>The destination platform type for the deployment (<code>Lambda</code>, <code>Server</code>, or <code>ECS</code>).</p>"
         }
       },
       "documentation": "<p>Represents the input of a CreateDeploymentConfig operation.</p>"
@@ -2166,6 +2295,10 @@
         "onPremisesTagSet": {
           "shape": "OnPremisesTagSet",
           "documentation": "<p>Information about groups of tags applied to on-premises instances. The deployment group includes only on-premises instances identified by all of the tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p> The metadata that you apply to CodeDeploy deployment groups to help you organize and categorize them. Each tag consists of a key and an optional value, both of which you define. </p>"
         }
       },
       "documentation": "<p>Represents the input of a CreateDeploymentGroup operation.</p>"
@@ -2337,7 +2470,7 @@
         },
         "computePlatform": {
           "shape": "ComputePlatform",
-          "documentation": "<p>The destination platform type for the deployment (<code>Lambda</code> or <code>Server</code>).</p>"
+          "documentation": "<p>The destination platform type for the deployment (<code>Lambda</code>, <code>Server</code>, or <code>ECS</code>).</p>"
         },
         "trafficRoutingConfig": {
           "shape": "TrafficRoutingConfig",
@@ -2401,7 +2534,7 @@
         },
         "serviceRoleArn": {
           "shape": "Role",
-          "documentation": "<p>A service role ARN.</p>"
+          "documentation": "<p>A service role Amazon Resource Name (ARN) that grants CodeDeploy permission to make calls to AWS services on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-create-service-role.html\">Create a Service Role for AWS CodeDeploy</a> in the <i>AWS CodeDeploy User Guide</i>.</p>"
         },
         "targetRevision": {
           "shape": "RevisionLocation",
@@ -2449,7 +2582,7 @@
         },
         "computePlatform": {
           "shape": "ComputePlatform",
-          "documentation": "<p>The destination platform type for the deployment group (<code>Lambda</code> or <code>Server</code>).</p>"
+          "documentation": "<p>The destination platform type for the deployment (<code>Lambda</code>, <code>Server</code>, or <code>ECS</code>).</p>"
         },
         "ecsServices": {
           "shape": "ECSServiceList",
@@ -2539,7 +2672,7 @@
         },
         "ignoreApplicationStopFailures": {
           "shape": "Boolean",
-          "documentation": "<p> If true, then if an ApplicationStop, BeforeBlockTraffic, or AfterBlockTraffic deployment lifecycle event to an instance fails, then the deployment continues to the next deployment lifecycle event. For example, if ApplicationStop fails, the deployment continues with DownloadBundle. If BeforeBlockTraffic fails, the deployment continues with BlockTraffic. If AfterBlockTraffic fails, the deployment continues with ApplicationStop. </p> <p> If false or not specified, then if a lifecycle event fails during a deployment to an instance, that deployment fails. If deployment to that instance is part of an overall deployment and the number of healthy hosts is not less than the minimum number of healthy hosts, then a deployment to the next instance is attempted. </p> <p> During a deployment, the AWS CodeDeploy agent runs the scripts specified for ApplicationStop, BeforeBlockTraffic, and AfterBlockTraffic in the AppSpec file from the previous successful deployment. (All other scripts are run from the AppSpec file in the current deployment.) If one of these scripts contains an error and does not run successfully, the deployment can fail. </p> <p> If the cause of the failure is a script from the last successful deployment that will never run successfully, create a new deployment and use <code>ignoreApplicationStopFailures</code> to specify that the ApplicationStop, BeforeBlockTraffic, and AfterBlockTraffic failures should be ignored. </p>"
+          "documentation": "<p> If true, then if an <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, or <code>AfterBlockTraffic</code> deployment lifecycle event to an instance fails, then the deployment continues to the next deployment lifecycle event. For example, if <code>ApplicationStop</code> fails, the deployment continues with DownloadBundle. If <code>BeforeBlockTraffic</code> fails, the deployment continues with <code>BlockTraffic</code>. If <code>AfterBlockTraffic</code> fails, the deployment continues with <code>ApplicationStop</code>. </p> <p> If false or not specified, then if a lifecycle event fails during a deployment to an instance, that deployment fails. If deployment to that instance is part of an overall deployment and the number of healthy hosts is not less than the minimum number of healthy hosts, then a deployment to the next instance is attempted. </p> <p> During a deployment, the AWS CodeDeploy agent runs the scripts specified for <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, and <code>AfterBlockTraffic</code> in the AppSpec file from the previous successful deployment. (All other scripts are run from the AppSpec file in the current deployment.) If one of these scripts contains an error and does not run successfully, the deployment can fail. </p> <p> If the cause of the failure is a script from the last successful deployment that will never run successfully, create a new deployment and use <code>ignoreApplicationStopFailures</code> to specify that the <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, and <code>AfterBlockTraffic</code> failures should be ignored. </p>"
         },
         "autoRollbackConfiguration": {
           "shape": "AutoRollbackConfiguration",
@@ -2587,7 +2720,7 @@
         },
         "computePlatform": {
           "shape": "ComputePlatform",
-          "documentation": "<p> The destination platform type for the deployment (<code>Lambda</code> or <code>Server</code>). </p>"
+          "documentation": "<p>The destination platform type for the deployment (<code>Lambda</code>, <code>Server</code>, or <code>ECS</code>).</p>"
         }
       },
       "documentation": "<p>Information about a deployment.</p>"
@@ -2977,36 +3110,39 @@
     "ErrorCode": {
       "type": "string",
       "enum": [
-        "DEPLOYMENT_GROUP_MISSING",
+        "AGENT_ISSUE",
+        "ALARM_ACTIVE",
         "APPLICATION_MISSING",
-        "REVISION_MISSING",
+        "AUTOSCALING_VALIDATION_ERROR",
+        "AUTO_SCALING_CONFIGURATION",
+        "AUTO_SCALING_IAM_ROLE_PERMISSIONS",
+        "CODEDEPLOY_RESOURCE_CANNOT_BE_FOUND",
+        "CUSTOMER_APPLICATION_UNHEALTHY",
+        "DEPLOYMENT_GROUP_MISSING",
+        "ECS_UPDATE_ERROR",
+        "ELASTIC_LOAD_BALANCING_INVALID",
+        "ELB_INVALID_INSTANCE",
+        "HEALTH_CONSTRAINTS",
+        "HEALTH_CONSTRAINTS_INVALID",
+        "HOOK_EXECUTION_FAILURE",
         "IAM_ROLE_MISSING",
         "IAM_ROLE_PERMISSIONS",
-        "NO_EC2_SUBSCRIPTION",
-        "OVER_MAX_INSTANCES",
-        "NO_INSTANCES",
-        "TIMEOUT",
-        "HEALTH_CONSTRAINTS_INVALID",
-        "HEALTH_CONSTRAINTS",
         "INTERNAL_ERROR",
-        "THROTTLED",
-        "ALARM_ACTIVE",
-        "AGENT_ISSUE",
-        "AUTO_SCALING_IAM_ROLE_PERMISSIONS",
-        "AUTO_SCALING_CONFIGURATION",
+        "INVALID_ECS_SERVICE",
+        "INVALID_LAMBDA_CONFIGURATION",
+        "INVALID_LAMBDA_FUNCTION",
+        "INVALID_REVISION",
         "MANUAL_STOP",
         "MISSING_BLUE_GREEN_DEPLOYMENT_CONFIGURATION",
         "MISSING_ELB_INFORMATION",
         "MISSING_GITHUB_TOKEN",
-        "ELASTIC_LOAD_BALANCING_INVALID",
-        "ELB_INVALID_INSTANCE",
-        "INVALID_LAMBDA_CONFIGURATION",
-        "INVALID_LAMBDA_FUNCTION",
-        "HOOK_EXECUTION_FAILURE",
-        "AUTOSCALING_VALIDATION_ERROR",
-        "INVALID_ECS_SERVICE",
-        "ECS_UPDATE_ERROR",
-        "INVALID_REVISION"
+        "NO_EC2_SUBSCRIPTION",
+        "NO_INSTANCES",
+        "OVER_MAX_INSTANCES",
+        "RESOURCE_LIMIT_EXCEEDED",
+        "REVISION_MISSING",
+        "THROTTLED",
+        "TIMEOUT"
       ]
     },
     "ErrorInformation": {
@@ -3500,6 +3636,38 @@
     "Key": {
       "type": "string"
     },
+    "LambdaFunctionAlias": {
+      "type": "string"
+    },
+    "LambdaFunctionInfo": {
+      "type": "structure",
+      "members": {
+        "functionName": {
+          "shape": "LambdaFunctionName",
+          "documentation": "<p> The name of a Lambda function. </p>"
+        },
+        "functionAlias": {
+          "shape": "LambdaFunctionAlias",
+          "documentation": "<p> The alias of a Lambda function. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html\">Introduction to AWS Lambda Aliases</a>. </p>"
+        },
+        "currentVersion": {
+          "shape": "Version",
+          "documentation": "<p> The version of a Lambda function that production traffic points to. </p>"
+        },
+        "targetVersion": {
+          "shape": "Version",
+          "documentation": "<p> The version of a Lambda function that production traffic points to after the Lambda function is deployed. </p>"
+        },
+        "targetVersionWeight": {
+          "shape": "TrafficWeight",
+          "documentation": "<p> The percentage of production traffic that the target version of a Lambda function receives. </p>"
+        }
+      },
+      "documentation": "<p> Information about a Lambda function specified in a deployment. </p>"
+    },
+    "LambdaFunctionName": {
+      "type": "string"
+    },
     "LambdaTarget": {
       "type": "structure",
       "members": {
@@ -3526,6 +3694,10 @@
         "lifecycleEvents": {
           "shape": "LifecycleEventList",
           "documentation": "<p> The lifecycle events of the deployment to this target Lambda function. </p>"
+        },
+        "lambdaFunctionInfo": {
+          "shape": "LambdaFunctionInfo",
+          "documentation": "<p> A <code>LambdaFunctionInfo</code> object that describes a target Lambda function. </p>"
         }
       },
       "documentation": "<p> Information about the target AWS Lambda function during an AWS Lambda deployment. </p>"
@@ -3823,11 +3995,11 @@
       "members": {
         "applicationName": {
           "shape": "ApplicationName",
-          "documentation": "<p>The name of an AWS CodeDeploy application associated with the IAM user or AWS account.</p>"
+          "documentation": "<p>The name of an AWS CodeDeploy application associated with the IAM user or AWS account.</p> <note> <p>If <code>applicationName</code> is specified, then <code>deploymentGroupName</code> must be specified. If it is not specified, then <code>deploymentGroupName</code> must not be specified. </p> </note>"
         },
         "deploymentGroupName": {
           "shape": "DeploymentGroupName",
-          "documentation": "<p>The name of a deployment group for the specified application.</p>"
+          "documentation": "<p>The name of a deployment group for the specified application.</p> <note> <p>If <code>deploymentGroupName</code> is specified, then <code>applicationName</code> must be specified. If it is not specified, then <code>applicationName</code> must not be specified. </p> </note>"
         },
         "includeOnlyStatuses": {
           "shape": "DeploymentStatusList",
@@ -3922,6 +4094,35 @@
         "ignore"
       ]
     },
+    "ListTagsForResourceInput": {
+      "type": "structure",
+      "required": [
+        "ResourceArn"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "Arn",
+          "documentation": "<p> The ARN of a CodeDeploy resource. <code>ListTagsForResource</code> returns all the tags associated with the resource that is identified by the <code>ResourceArn</code>. </p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>An identifier returned from the previous <code>ListTagsForResource</code> call. It can be used to return the next set of applications in the list.</p>"
+        }
+      }
+    },
+    "ListTagsForResourceOutput": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p> A list of tags returned by <code>ListTagsForResource</code>. The tags are associated with the resource identified by the input <code>ResourceArn</code> parameter. </p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If a large amount of information is returned, an identifier is also returned. It can be used in a subsequent list application revisions call to return the next set of application revisions in the list.</p>"
+        }
+      }
+    },
     "ListenerArn": {
       "type": "string"
     },
@@ -3964,7 +4165,7 @@
         },
         "type": {
           "shape": "MinimumHealthyHostsType",
-          "documentation": "<p>The minimum healthy instance type:</p> <ul> <li> <p>HOST_COUNT: The minimum number of healthy instance as an absolute value.</p> </li> <li> <p>FLEET_PERCENT: The minimum number of healthy instance as a percentage of the total number of instance in the deployment.</p> </li> </ul> <p>In an example of nine instance, if a HOST_COUNT of six is specified, deploy to up to three instances at a time. The deployment is successful if six or more instances are deployed to successfully. Otherwise, the deployment fails. If a FLEET_PERCENT of 40 is specified, deploy to up to five instance at a time. The deployment is successful if four or more instance are deployed to successfully. Otherwise, the deployment fails.</p> <note> <p>In a call to the get deployment configuration operation, CodeDeployDefault.OneAtATime returns a minimum healthy instance type of MOST_CONCURRENCY and a value of 1. This means a deployment to only one instance at a time. (You cannot set the type to MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.) In addition, with CodeDeployDefault.OneAtATime, AWS CodeDeploy attempts to ensure that all instances but one are kept in a healthy state during the deployment. Although this allows one instance at a time to be taken offline for a new deployment, it also means that if the deployment to the last instance fails, the overall deployment is still successful.</p> </note> <p>For more information, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html\">AWS CodeDeploy Instance Health</a> in the <i>AWS CodeDeploy User Guide</i>.</p>"
+          "documentation": "<p>The minimum healthy instance type:</p> <ul> <li> <p>HOST_COUNT: The minimum number of healthy instance as an absolute value.</p> </li> <li> <p>FLEET_PERCENT: The minimum number of healthy instance as a percentage of the total number of instance in the deployment.</p> </li> </ul> <p>In an example of nine instance, if a HOST_COUNT of six is specified, deploy to up to three instances at a time. The deployment is successful if six or more instances are deployed to successfully. Otherwise, the deployment fails. If a FLEET_PERCENT of 40 is specified, deploy to up to five instance at a time. The deployment is successful if four or more instance are deployed to successfully. Otherwise, the deployment fails.</p> <note> <p>In a call to the <code>GetDeploymentConfig</code>, CodeDeployDefault.OneAtATime returns a minimum healthy instance type of MOST_CONCURRENCY and a value of 1. This means a deployment to only one instance at a time. (You cannot set the type to MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.) In addition, with CodeDeployDefault.OneAtATime, AWS CodeDeploy attempts to ensure that all instances but one are kept in a healthy state during the deployment. Although this allows one instance at a time to be taken offline for a new deployment, it also means that if the deployment to the last instance fails, the overall deployment is still successful.</p> </note> <p>For more information, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html\">AWS CodeDeploy Instance Health</a> in the <i>AWS CodeDeploy User Guide</i>.</p>"
         }
       },
       "documentation": "<p>Information about minimum healthy instance.</p>"
@@ -4340,11 +4541,38 @@
         "KEY_AND_VALUE"
       ]
     },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "Key"
+      }
+    },
     "TagList": {
       "type": "list",
       "member": {
         "shape": "Tag"
       }
+    },
+    "TagResourceInput": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "Tags"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "Arn",
+          "documentation": "<p> The ARN of a resource, such as a CodeDeploy application or deployment group. </p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p> A list of tags that <code>TagResource</code> associates with a resource. The resource is identified by the <code>ResourceArn</code> input parameter. </p>"
+        }
+      }
+    },
+    "TagResourceOutput": {
+      "type": "structure",
+      "members": {}
     },
     "TargetArn": {
       "type": "string"
@@ -4592,6 +4820,27 @@
     "TriggerTargetArn": {
       "type": "string"
     },
+    "UntagResourceInput": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "TagKeys"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "Arn",
+          "documentation": "<p> The ARN that specifies from which resource to disassociate the tags with the keys in the <code>TagKeys</code> input paramter. </p>"
+        },
+        "TagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p> A list of keys of <code>Tag</code> objects. The <code>Tag</code> objects identified by the keys are disassociated from the resource specified by the <code>ResourceArn</code> input parameter. </p>"
+        }
+      }
+    },
+    "UntagResourceOutput": {
+      "type": "structure",
+      "members": {}
+    },
     "UpdateApplicationInput": {
       "type": "structure",
       "members": {
@@ -4695,6 +4944,9 @@
       "documentation": "<p>Represents the output of an UpdateDeploymentGroup operation.</p>"
     },
     "Value": {
+      "type": "string"
+    },
+    "Version": {
       "type": "string"
     },
     "VersionId": {

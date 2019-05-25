@@ -20,6 +20,14 @@ declare class Kafka extends Service {
    */
   createCluster(callback?: (err: AWSError, data: Kafka.Types.CreateClusterResponse) => void): Request<Kafka.Types.CreateClusterResponse, AWSError>;
   /**
+   * Creates a new MSK configuration.
+   */
+  createConfiguration(params: Kafka.Types.CreateConfigurationRequest, callback?: (err: AWSError, data: Kafka.Types.CreateConfigurationResponse) => void): Request<Kafka.Types.CreateConfigurationResponse, AWSError>;
+  /**
+   * Creates a new MSK configuration.
+   */
+  createConfiguration(callback?: (err: AWSError, data: Kafka.Types.CreateConfigurationResponse) => void): Request<Kafka.Types.CreateConfigurationResponse, AWSError>;
+  /**
    * Deletes the MSK cluster specified by the Amazon Resource Name (ARN) in the request.
    */
   deleteCluster(params: Kafka.Types.DeleteClusterRequest, callback?: (err: AWSError, data: Kafka.Types.DeleteClusterResponse) => void): Request<Kafka.Types.DeleteClusterResponse, AWSError>;
@@ -36,6 +44,22 @@ declare class Kafka extends Service {
    */
   describeCluster(callback?: (err: AWSError, data: Kafka.Types.DescribeClusterResponse) => void): Request<Kafka.Types.DescribeClusterResponse, AWSError>;
   /**
+   * Returns a description of this MSK configuration.
+   */
+  describeConfiguration(params: Kafka.Types.DescribeConfigurationRequest, callback?: (err: AWSError, data: Kafka.Types.DescribeConfigurationResponse) => void): Request<Kafka.Types.DescribeConfigurationResponse, AWSError>;
+  /**
+   * Returns a description of this MSK configuration.
+   */
+  describeConfiguration(callback?: (err: AWSError, data: Kafka.Types.DescribeConfigurationResponse) => void): Request<Kafka.Types.DescribeConfigurationResponse, AWSError>;
+  /**
+   * Returns a description of this revision of the configuration.
+   */
+  describeConfigurationRevision(params: Kafka.Types.DescribeConfigurationRevisionRequest, callback?: (err: AWSError, data: Kafka.Types.DescribeConfigurationRevisionResponse) => void): Request<Kafka.Types.DescribeConfigurationRevisionResponse, AWSError>;
+  /**
+   * Returns a description of this revision of the configuration.
+   */
+  describeConfigurationRevision(callback?: (err: AWSError, data: Kafka.Types.DescribeConfigurationRevisionResponse) => void): Request<Kafka.Types.DescribeConfigurationRevisionResponse, AWSError>;
+  /**
    * A list of brokers that a client application can use to bootstrap.
    */
   getBootstrapBrokers(params: Kafka.Types.GetBootstrapBrokersRequest, callback?: (err: AWSError, data: Kafka.Types.GetBootstrapBrokersResponse) => void): Request<Kafka.Types.GetBootstrapBrokersResponse, AWSError>;
@@ -51,6 +75,14 @@ declare class Kafka extends Service {
    * Returns a list of clusters in an account.
    */
   listClusters(callback?: (err: AWSError, data: Kafka.Types.ListClustersResponse) => void): Request<Kafka.Types.ListClustersResponse, AWSError>;
+  /**
+   * Returns a list of all the MSK configurations in this Region for this account.
+   */
+  listConfigurations(params: Kafka.Types.ListConfigurationsRequest, callback?: (err: AWSError, data: Kafka.Types.ListConfigurationsResponse) => void): Request<Kafka.Types.ListConfigurationsResponse, AWSError>;
+  /**
+   * Returns a list of all the MSK configurations in this Region for this account.
+   */
+  listConfigurations(callback?: (err: AWSError, data: Kafka.Types.ListConfigurationsResponse) => void): Request<Kafka.Types.ListConfigurationsResponse, AWSError>;
   /**
    * Returns a list of the broker nodes in the cluster.
    */
@@ -139,7 +171,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     /**
      * The revision of the configuration to use.
      */
-    ConfigurationRevision?: __string;
+    ConfigurationRevision?: __long;
     /**
      * The version of Apache Kafka.
      */
@@ -192,6 +224,56 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     ZookeeperConnectString?: __string;
   }
   export type ClusterState = "ACTIVE"|"CREATING"|"DELETING"|"FAILED"|string;
+  export interface Configuration {
+    /**
+     * The Amazon Resource Name (ARN) of the configuration.
+     */
+    Arn: __string;
+    /**
+     * The time when the configuration was created.
+     */
+    CreationTime: __timestampIso8601;
+    /**
+     * The description of the configuration.
+     */
+    Description: __string;
+    /**
+     * An array of the versions of Apache Kafka with which you can use this MSK configuration. You can use this configuration for an MSK cluster only if the Apache Kafka version specified for the cluster appears in this array.
+     */
+    KafkaVersions: __listOf__string;
+    /**
+     * Latest revision of the configuration.
+     */
+    LatestRevision: ConfigurationRevision;
+    /**
+     * The name of the configuration.
+     */
+    Name: __string;
+  }
+  export interface ConfigurationInfo {
+    /**
+     * ARN of the configuration to use.
+     */
+    Arn: __string;
+    /**
+     * The revision of the configuration to use.
+     */
+    Revision: __long;
+  }
+  export interface ConfigurationRevision {
+    /**
+     * The time when the configuration revision was created.
+     */
+    CreationTime: __timestampIso8601;
+    /**
+     * The description of the configuration revision.
+     */
+    Description?: __string;
+    /**
+     * The revision number.
+     */
+    Revision: __long;
+  }
   export interface CreateClusterRequest {
     /**
      * Information about the broker nodes in the cluster.
@@ -201,6 +283,10 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      * The name of the cluster.
      */
     ClusterName: __stringMin1Max64;
+    /**
+     * Comprises of the Configuration to be used on Kafka brokers in a cluster.
+     */
+    ConfigurationInfo?: ConfigurationInfo;
     /**
      * Includes all encryption-related information.
      */
@@ -231,6 +317,43 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      * The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.
      */
     State?: ClusterState;
+  }
+  export interface CreateConfigurationRequest {
+    /**
+     * The description of the configuration.
+     */
+    Description?: __string;
+    /**
+     * The versions of Apache Kafka with which you can use this MSK configuration.
+     */
+    KafkaVersions: __listOf__string;
+    /**
+     * The name of the configuration.
+     */
+    Name: __string;
+    /**
+     * Contents of the server.properties file. When using the API, you must ensure that the contents of the file are base64 encoded. 
+ When using the AWS Management Console, the SDK, or the AWS CLI, the contents of server.properties can be in plaintext.
+     */
+    ServerProperties: __blob;
+  }
+  export interface CreateConfigurationResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the configuration.
+     */
+    Arn?: __string;
+    /**
+     * The time when the configuration was created.
+     */
+    CreationTime?: __timestampIso8601;
+    /**
+     * Latest revision of the configuration.
+     */
+    LatestRevision?: ConfigurationRevision;
+    /**
+     * The name of the configuration.
+     */
+    Name?: __string;
   }
   export interface DeleteClusterRequest {
     /**
@@ -263,6 +386,71 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      * The cluster information.
      */
     ClusterInfo?: ClusterInfo;
+  }
+  export interface DescribeConfigurationRequest {
+    /**
+     * The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.
+     */
+    Arn: __string;
+  }
+  export interface DescribeConfigurationResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the configuration.
+     */
+    Arn?: __string;
+    /**
+     * The time when the configuration was created.
+     */
+    CreationTime?: __timestampIso8601;
+    /**
+     * The description of the configuration.
+     */
+    Description?: __string;
+    /**
+     * The versions of Apache Kafka with which you can use this MSK configuration.
+     */
+    KafkaVersions?: __listOf__string;
+    /**
+     * Latest revision of the configuration.
+     */
+    LatestRevision?: ConfigurationRevision;
+    /**
+     * The name of the configuration.
+     */
+    Name?: __string;
+  }
+  export interface DescribeConfigurationRevisionRequest {
+    /**
+     * The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration and all of its revisions.
+     */
+    Arn: __string;
+    /**
+     * A string that uniquely identifies a revision of an MSK configuration.
+     */
+    Revision: __long;
+  }
+  export interface DescribeConfigurationRevisionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the configuration.
+     */
+    Arn?: __string;
+    /**
+     * The time when the configuration was created.
+     */
+    CreationTime?: __timestampIso8601;
+    /**
+     * The description of the configuration.
+     */
+    Description?: __string;
+    /**
+     * The revision number.
+     */
+    Revision?: __long;
+    /**
+     * Contents of the server.properties file. When using the API, you must ensure that the contents of the file are base64 encoded. 
+ When using the AWS Management Console, the SDK, or the AWS CLI, the contents of server.properties can be in plaintext.
+     */
+    ServerProperties?: __blob;
   }
   export interface EBSStorageInfo {
     /**
@@ -318,6 +506,28 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     /**
      * The paginated results marker. When the result of a ListClusters operation is truncated, the call returns NextToken in the response. 
  To get another batch of clusters, provide this token in your next request.
+     */
+    NextToken?: __string;
+  }
+  export interface ListConfigurationsRequest {
+    /**
+     * The maximum number of results to return in the response. If there are more results, the response includes a NextToken parameter.
+     */
+    MaxResults?: __string;
+    /**
+     * The paginated results marker. When the result of the operation is truncated, the call returns NextToken in the response. 
+ To get the next batch, provide this token in your next request.
+     */
+    NextToken?: __string;
+  }
+  export interface ListConfigurationsResponse {
+    /**
+     * An array of MSK configurations.
+     */
+    Configurations?: __listOfConfiguration;
+    /**
+     * The paginated results marker. When the result of a ListConfigurations operation is truncated, the call returns NextToken in the response. 
+ To get another batch of configurations, provide this token in your next request.
      */
     NextToken?: __string;
   }
@@ -431,13 +641,16 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     ZookeeperVersion?: __string;
   }
+  export type __blob = Buffer|Uint8Array|Blob|string;
   export type __double = number;
   export type __integer = number;
   export type __integerMin1Max15 = number;
   export type __integerMin1Max16384 = number;
   export type __listOfClusterInfo = ClusterInfo[];
+  export type __listOfConfiguration = Configuration[];
   export type __listOfNodeInfo = NodeInfo[];
   export type __listOf__string = __string[];
+  export type __long = number;
   export type __mapOf__string = {[key: string]: __string};
   export type __string = string;
   export type __stringMin1Max128 = string;

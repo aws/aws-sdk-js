@@ -47,6 +47,40 @@
       ],
       "documentation": "<p>Specifies a domain to be associated to Amazon WorkLink.</p>"
     },
+    "AssociateWebsiteAuthorizationProvider": {
+      "name": "AssociateWebsiteAuthorizationProvider",
+      "http": {
+        "method": "POST",
+        "requestUri": "/associateWebsiteAuthorizationProvider"
+      },
+      "input": {
+        "shape": "AssociateWebsiteAuthorizationProviderRequest"
+      },
+      "output": {
+        "shape": "AssociateWebsiteAuthorizationProviderResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Associates a website authorization provider with a specified fleet. This is used to authorize users against associated websites in the company network.</p>"
+    },
     "AssociateWebsiteCertificateAuthority": {
       "name": "AssociateWebsiteCertificateAuthority",
       "http": {
@@ -425,6 +459,40 @@
       ],
       "documentation": "<p>Disassociates a domain from Amazon WorkLink. End users lose the ability to access the domain with Amazon WorkLink. </p>"
     },
+    "DisassociateWebsiteAuthorizationProvider": {
+      "name": "DisassociateWebsiteAuthorizationProvider",
+      "http": {
+        "method": "POST",
+        "requestUri": "/disassociateWebsiteAuthorizationProvider"
+      },
+      "input": {
+        "shape": "DisassociateWebsiteAuthorizationProviderRequest"
+      },
+      "output": {
+        "shape": "DisassociateWebsiteAuthorizationProviderResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Disassociates a website authorization provider from a specified fleet. After the disassociation, users can't load any associated websites that require this authorization provider.</p>"
+    },
     "DisassociateWebsiteCertificateAuthority": {
       "name": "DisassociateWebsiteCertificateAuthority",
       "http": {
@@ -542,6 +610,37 @@
         }
       ],
       "documentation": "<p>Retrieves a list of fleets for the current account and Region.</p>"
+    },
+    "ListWebsiteAuthorizationProviders": {
+      "name": "ListWebsiteAuthorizationProviders",
+      "http": {
+        "method": "POST",
+        "requestUri": "/listWebsiteAuthorizationProviders"
+      },
+      "input": {
+        "shape": "ListWebsiteAuthorizationProvidersRequest"
+      },
+      "output": {
+        "shape": "ListWebsiteAuthorizationProvidersResponse"
+      },
+      "errors": [
+        {
+          "shape": "UnauthorizedException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        }
+      ],
+      "documentation": "<p>Retrieves a list of website authorization providers associated with a specified fleet.</p>"
     },
     "ListWebsiteCertificateAuthorities": {
       "name": "ListWebsiteCertificateAuthorities",
@@ -872,19 +971,49 @@
           "shape": "DomainName",
           "documentation": "<p>The fully qualified domain name (FQDN).</p>"
         },
-        "AcmCertificateArn": {
-          "shape": "AcmCertificateArn",
-          "documentation": "<p>The ARN of an issued ACM certificate that is valid for the domain being associated. </p>"
-        },
         "DisplayName": {
           "shape": "DisplayName",
           "documentation": "<p>The name to display.</p>"
+        },
+        "AcmCertificateArn": {
+          "shape": "AcmCertificateArn",
+          "documentation": "<p>The ARN of an issued ACM certificate that is valid for the domain being associated.</p>"
         }
       }
     },
     "AssociateDomainResponse": {
       "type": "structure",
       "members": {}
+    },
+    "AssociateWebsiteAuthorizationProviderRequest": {
+      "type": "structure",
+      "required": [
+        "FleetArn",
+        "AuthorizationProviderType"
+      ],
+      "members": {
+        "FleetArn": {
+          "shape": "FleetArn",
+          "documentation": "<p>The ARN of the fleet.</p>"
+        },
+        "AuthorizationProviderType": {
+          "shape": "AuthorizationProviderType",
+          "documentation": "<p>The authorization provider type.</p>"
+        },
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The domain name of the authorization provider. This applies only to SAML-based authorization providers.</p>"
+        }
+      }
+    },
+    "AssociateWebsiteAuthorizationProviderResponse": {
+      "type": "structure",
+      "members": {
+        "AuthorizationProviderId": {
+          "shape": "Id",
+          "documentation": "<p>A unique identifier for the authorization provider.</p>"
+        }
+      }
     },
     "AssociateWebsiteCertificateAuthorityRequest": {
       "type": "structure",
@@ -918,6 +1047,12 @@
     },
     "AuditStreamArn": {
       "type": "string"
+    },
+    "AuthorizationProviderType": {
+      "type": "string",
+      "enum": [
+        "SAML"
+      ]
     },
     "Boolean": {
       "type": "boolean"
@@ -1136,6 +1271,10 @@
     "DescribeDomainResponse": {
       "type": "structure",
       "members": {
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The name of the domain.</p>"
+        },
         "DisplayName": {
           "shape": "DisplayName",
           "documentation": "<p>The name to display.</p>"
@@ -1147,6 +1286,10 @@
         "DomainStatus": {
           "shape": "DomainStatus",
           "documentation": "<p>The current state for the domain.</p>"
+        },
+        "AcmCertificateArn": {
+          "shape": "AcmCertificateArn",
+          "documentation": "<p>The ARN of an issued ACM certificate that is valid for the domain being associated.</p>"
         }
       }
     },
@@ -1331,6 +1474,27 @@
       "type": "structure",
       "members": {}
     },
+    "DisassociateWebsiteAuthorizationProviderRequest": {
+      "type": "structure",
+      "required": [
+        "FleetArn",
+        "AuthorizationProviderId"
+      ],
+      "members": {
+        "FleetArn": {
+          "shape": "FleetArn",
+          "documentation": "<p>The ARN of the fleet.</p>"
+        },
+        "AuthorizationProviderId": {
+          "shape": "Id",
+          "documentation": "<p>A unique identifier for the authorization provider.</p>"
+        }
+      }
+    },
+    "DisassociateWebsiteAuthorizationProviderResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DisassociateWebsiteCertificateAuthorityRequest": {
       "type": "structure",
       "required": [
@@ -1358,7 +1522,7 @@
     },
     "DomainName": {
       "type": "string",
-      "max": 64,
+      "max": 253,
       "min": 1,
       "pattern": "^[a-zA-Z0-9]?((?!-)([A-Za-z0-9-]*[A-Za-z0-9])\\.)+[a-zA-Z0-9]+$"
     },
@@ -1387,6 +1551,10 @@
           "shape": "DomainName",
           "documentation": "<p>The name of the domain.</p>"
         },
+        "DisplayName": {
+          "shape": "DisplayName",
+          "documentation": "<p>The name to display.</p>"
+        },
         "CreatedTime": {
           "shape": "DateTime",
           "documentation": "<p>The time that the domain was created.</p>"
@@ -1394,10 +1562,6 @@
         "DomainStatus": {
           "shape": "DomainStatus",
           "documentation": "<p>The status of the domain.</p>"
-        },
-        "DisplayName": {
-          "shape": "DisplayName",
-          "documentation": "<p>The name to display.</p>"
         }
       },
       "documentation": "<p>The summary of the domain.</p>"
@@ -1573,6 +1737,39 @@
         }
       }
     },
+    "ListWebsiteAuthorizationProvidersRequest": {
+      "type": "structure",
+      "required": [
+        "FleetArn"
+      ],
+      "members": {
+        "FleetArn": {
+          "shape": "FleetArn",
+          "documentation": "<p>The ARN of the fleet.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to be included in the next page.</p>"
+        }
+      }
+    },
+    "ListWebsiteAuthorizationProvidersResponse": {
+      "type": "structure",
+      "members": {
+        "WebsiteAuthorizationProviders": {
+          "shape": "WebsiteAuthorizationProvidersSummaryList",
+          "documentation": "<p>The website authorization providers.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
+        }
+      }
+    },
     "ListWebsiteCertificateAuthoritiesRequest": {
       "type": "structure",
       "required": [
@@ -1671,7 +1868,8 @@
       "type": "list",
       "member": {
         "shape": "SecurityGroupId"
-      }
+      },
+      "max": 5
     },
     "SignOutUserRequest": {
       "type": "structure",
@@ -1857,6 +2055,37 @@
     "VpcId": {
       "type": "string",
       "pattern": "^vpc-([0-9a-f]{8}|[0-9a-f]{17})$"
+    },
+    "WebsiteAuthorizationProviderSummary": {
+      "type": "structure",
+      "required": [
+        "AuthorizationProviderType"
+      ],
+      "members": {
+        "AuthorizationProviderId": {
+          "shape": "Id",
+          "documentation": "<p>A unique identifier for the authorization provider.</p>"
+        },
+        "AuthorizationProviderType": {
+          "shape": "AuthorizationProviderType",
+          "documentation": "<p>The authorization provider type.</p>"
+        },
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The domain name of the authorization provider. This applies only to SAML-based authorization providers.</p>"
+        },
+        "CreatedTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The time of creation.</p>"
+        }
+      },
+      "documentation": "<p>The summary of the website authorization provider.</p>"
+    },
+    "WebsiteAuthorizationProvidersSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "WebsiteAuthorizationProviderSummary"
+      }
     },
     "WebsiteCaSummary": {
       "type": "structure",

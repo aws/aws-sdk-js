@@ -88,7 +88,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Downloads the object at the specified path.</p>"
+      "documentation": "<p>Downloads the object at the specified path. If the object’s upload availability is set to <code>streaming</code>, AWS Elemental MediaStore downloads the object even if it’s still uploading the object.</p>"
     },
     "ListItems": {
       "name": "ListItems",
@@ -132,7 +132,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Uploads an object to the specified path. Object sizes are limited to 25 MB.</p>",
+      "documentation": "<p>Uploads an object to the specified path. Object sizes are limited to 25 MB for standard upload availability and 10 MB for streaming upload availability.</p>",
       "authtype": "v4-unsigned-body"
     }
   },
@@ -232,7 +232,7 @@
         },
         "Range": {
           "shape": "RangePattern",
-          "documentation": "<p>The range bytes of an object to retrieve. For more information about the <code>Range</code> header, go to <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35\">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35</a>.</p>",
+          "documentation": "<p>The range bytes of an object to retrieve. For more information about the <code>Range</code> header, see <a href=\"http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35\">http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35</a>. AWS Elemental MediaStore ignores this header for partially uploaded objects that have streaming upload availability.</p>",
           "location": "header",
           "locationName": "Range"
         }
@@ -437,6 +437,12 @@
           "documentation": "<p>Indicates the storage class of a <code>Put</code> request. Defaults to high-performance temporal storage class, and objects are persisted into durable storage shortly after being received.</p>",
           "location": "header",
           "locationName": "x-amz-storage-class"
+        },
+        "UploadAvailability": {
+          "shape": "UploadAvailability",
+          "documentation": "<p>Indicates the availability of an object while it is still uploading. If the value is set to <code>streaming</code>, the object is available for downloading after some initial buffering but before the object is uploaded completely. If the value is set to <code>standard</code>, the object is available for downloading only when it is uploaded completely. The default value for this header is <code>standard</code>.</p> <p>To use this header, you must also set the HTTP <code>Transfer-Encoding</code> header to <code>chunked</code>.</p>",
+          "location": "header",
+          "locationName": "x-amz-upload-availability"
         }
       },
       "payload": "Body"
@@ -481,6 +487,15 @@
     },
     "TimeStamp": {
       "type": "timestamp"
+    },
+    "UploadAvailability": {
+      "type": "string",
+      "enum": [
+        "STANDARD",
+        "STREAMING"
+      ],
+      "max": 16,
+      "min": 1
     },
     "statusCode": {
       "type": "integer"
