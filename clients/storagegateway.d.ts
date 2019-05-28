@@ -52,6 +52,14 @@ declare class StorageGateway extends Service {
    */
   addWorkingStorage(callback?: (err: AWSError, data: StorageGateway.Types.AddWorkingStorageOutput) => void): Request<StorageGateway.Types.AddWorkingStorageOutput, AWSError>;
   /**
+   * Assigns a tape to a tape pool for archiving. The tape assigned to a pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the S3 storage class (Glacier or Deep Archive) that corresponds to the pool. Valid values: "GLACIER", "DEEP_ARCHIVE"
+   */
+  assignTapePool(params: StorageGateway.Types.AssignTapePoolInput, callback?: (err: AWSError, data: StorageGateway.Types.AssignTapePoolOutput) => void): Request<StorageGateway.Types.AssignTapePoolOutput, AWSError>;
+  /**
+   * Assigns a tape to a tape pool for archiving. The tape assigned to a pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the S3 storage class (Glacier or Deep Archive) that corresponds to the pool. Valid values: "GLACIER", "DEEP_ARCHIVE"
+   */
+  assignTapePool(callback?: (err: AWSError, data: StorageGateway.Types.AssignTapePoolOutput) => void): Request<StorageGateway.Types.AssignTapePoolOutput, AWSError>;
+  /**
    * Connects a volume to an iSCSI connection and then attaches the volume to the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance.
    */
   attachVolume(params: StorageGateway.Types.AttachVolumeInput, callback?: (err: AWSError, data: StorageGateway.Types.AttachVolumeOutput) => void): Request<StorageGateway.Types.AttachVolumeOutput, AWSError>;
@@ -664,6 +672,22 @@ declare namespace StorageGateway {
   }
   export interface AddWorkingStorageOutput {
     GatewayARN?: GatewayARN;
+  }
+  export interface AssignTapePoolInput {
+    /**
+     * The unique Amazon Resource Name (ARN) of the virtual tape that you want to add to the tape pool.
+     */
+    TapeARN: TapeARN;
+    /**
+     * The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (Glacier or Deep Archive) that corresponds to the pool. Valid values: "GLACIER", "DEEP_ARCHIVE"
+     */
+    PoolId: PoolId;
+  }
+  export interface AssignTapePoolOutput {
+    /**
+     * The unique Amazon Resource Names (ARN) of the virtual tape that was added to the tape pool.
+     */
+    TapeARN?: TapeARN;
   }
   export interface AttachVolumeInput {
     /**

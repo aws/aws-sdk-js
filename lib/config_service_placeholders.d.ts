@@ -175,6 +175,7 @@ export abstract class ConfigurationServicePlaceholders {
   textract?: AWS.Textract.Types.ClientConfiguration;
   managedblockchain?: AWS.ManagedBlockchain.Types.ClientConfiguration;
   mediapackagevod?: AWS.MediaPackageVod.Types.ClientConfiguration;
+  groundstation?: AWS.GroundStation.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -352,4 +353,5 @@ export interface ConfigurationServiceApiVersions {
   textract?: AWS.Textract.Types.apiVersion;
   managedblockchain?: AWS.ManagedBlockchain.Types.apiVersion;
   mediapackagevod?: AWS.MediaPackageVod.Types.apiVersion;
+  groundstation?: AWS.GroundStation.Types.apiVersion;
 }

@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.463.0-->
+<!--LATEST=2.464.0-->
 <!--ENTRYINSERT-->
+
+## 2.464.0
+* feature: Chime: This release adds the ability to search and order toll free phone numbers for Voice Connectors.
+* feature: GroundStation: AWS Ground Station is a fully managed service that enables you to control satellite communications, downlink and process satellite data, and scale your satellite operations efficiently and cost-effectively without having to build or manage your own ground station infrastructure.
+* feature: PinpointEmail: This release adds support for programmatic access to Deliverability dashboard subscriptions and the deliverability data provided by the Deliverability dashboard for domains and IP addresses. The data includes placement metrics for campaigns that use subscribed domains to send email.
+* feature: RDS: Add a new output field Status to DBEngineVersion which shows the status of the engine version (either available or deprecated). Add a new parameter IncludeAll to DescribeDBEngineVersions to make it possible to return both available and deprecated engine versions. These changes enable a user to create a Read Replica of an DB instance on a deprecated engine version.
+* feature: RoboMaker: Added support for an additional robot software suite (Gazebo 9) and for cancelling deployment jobs.
+* feature: StorageGateway: Introduce AssignTapePool operation to allow customers to migrate tapes between pools.
+* feature: TranscribeService: Amazon Transcribe - support transcriptions from audio sources in Modern Standard Arabic (ar-SA).
 
 ## 2.463.0
 * feature: CodeDeploy: AWS CodeDeploy now supports tagging for the application and deployment group resources.

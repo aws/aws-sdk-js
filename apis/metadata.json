@@ -700,5 +700,8 @@
   "mediapackagevod": {
     "prefix": "mediapackage-vod",
     "name": "MediaPackageVod"
+  },
+  "groundstation": {
+    "name": "GroundStation"
   }
 }
