@@ -132,11 +132,11 @@ declare class PinpointEmail extends Service {
    */
   getDedicatedIps(callback?: (err: AWSError, data: PinpointEmail.Types.GetDedicatedIpsResponse) => void): Request<PinpointEmail.Types.GetDedicatedIpsResponse, AWSError>;
   /**
-   * Show the status of the Deliverability dashboard. When the Deliverability dashboard is enabled, you gain access to reputation metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00, in addition to any other fees that you accrue by using Amazon Pinpoint. If you enable the Deliverability dashboard after the first day of a calendar month, AWS prorates the monthly charge based on how many days have elapsed in the current calendar month.
+   * Retrieve information about the status of the Deliverability dashboard for your Amazon Pinpoint account. When the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon Pinpoint. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon Pinpoint Pricing.
    */
   getDeliverabilityDashboardOptions(params: PinpointEmail.Types.GetDeliverabilityDashboardOptionsRequest, callback?: (err: AWSError, data: PinpointEmail.Types.GetDeliverabilityDashboardOptionsResponse) => void): Request<PinpointEmail.Types.GetDeliverabilityDashboardOptionsResponse, AWSError>;
   /**
-   * Show the status of the Deliverability dashboard. When the Deliverability dashboard is enabled, you gain access to reputation metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00, in addition to any other fees that you accrue by using Amazon Pinpoint. If you enable the Deliverability dashboard after the first day of a calendar month, AWS prorates the monthly charge based on how many days have elapsed in the current calendar month.
+   * Retrieve information about the status of the Deliverability dashboard for your Amazon Pinpoint account. When the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon Pinpoint. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon Pinpoint Pricing.
    */
   getDeliverabilityDashboardOptions(callback?: (err: AWSError, data: PinpointEmail.Types.GetDeliverabilityDashboardOptionsResponse) => void): Request<PinpointEmail.Types.GetDeliverabilityDashboardOptionsResponse, AWSError>;
   /**
@@ -147,6 +147,14 @@ declare class PinpointEmail extends Service {
    * Retrieve the results of a predictive inbox placement test.
    */
   getDeliverabilityTestReport(callback?: (err: AWSError, data: PinpointEmail.Types.GetDeliverabilityTestReportResponse) => void): Request<PinpointEmail.Types.GetDeliverabilityTestReportResponse, AWSError>;
+  /**
+   * Retrieve all the deliverability data for a specific campaign. This data is available for a campaign only if the campaign sent email by using a domain that the Deliverability dashboard is enabled for (PutDeliverabilityDashboardOption operation).
+   */
+  getDomainDeliverabilityCampaign(params: PinpointEmail.Types.GetDomainDeliverabilityCampaignRequest, callback?: (err: AWSError, data: PinpointEmail.Types.GetDomainDeliverabilityCampaignResponse) => void): Request<PinpointEmail.Types.GetDomainDeliverabilityCampaignResponse, AWSError>;
+  /**
+   * Retrieve all the deliverability data for a specific campaign. This data is available for a campaign only if the campaign sent email by using a domain that the Deliverability dashboard is enabled for (PutDeliverabilityDashboardOption operation).
+   */
+  getDomainDeliverabilityCampaign(callback?: (err: AWSError, data: PinpointEmail.Types.GetDomainDeliverabilityCampaignResponse) => void): Request<PinpointEmail.Types.GetDomainDeliverabilityCampaignResponse, AWSError>;
   /**
    * Retrieve inbox placement and engagement rates for the domains that you use to send email.
    */
@@ -188,6 +196,14 @@ declare class PinpointEmail extends Service {
    */
   listDeliverabilityTestReports(callback?: (err: AWSError, data: PinpointEmail.Types.ListDeliverabilityTestReportsResponse) => void): Request<PinpointEmail.Types.ListDeliverabilityTestReportsResponse, AWSError>;
   /**
+   * Retrieve deliverability data for all the campaigns that used a specific domain to send email during a specified time range. This data is available for a domain only if you enabled the Deliverability dashboard (PutDeliverabilityDashboardOption operation) for the domain.
+   */
+  listDomainDeliverabilityCampaigns(params: PinpointEmail.Types.ListDomainDeliverabilityCampaignsRequest, callback?: (err: AWSError, data: PinpointEmail.Types.ListDomainDeliverabilityCampaignsResponse) => void): Request<PinpointEmail.Types.ListDomainDeliverabilityCampaignsResponse, AWSError>;
+  /**
+   * Retrieve deliverability data for all the campaigns that used a specific domain to send email during a specified time range. This data is available for a domain only if you enabled the Deliverability dashboard (PutDeliverabilityDashboardOption operation) for the domain.
+   */
+  listDomainDeliverabilityCampaigns(callback?: (err: AWSError, data: PinpointEmail.Types.ListDomainDeliverabilityCampaignsResponse) => void): Request<PinpointEmail.Types.ListDomainDeliverabilityCampaignsResponse, AWSError>;
+  /**
    * Returns a list of all of the email identities that are associated with your Amazon Pinpoint account. An identity can be either an email address or a domain. This operation returns identities that are verified as well as those that aren't.
    */
   listEmailIdentities(params: PinpointEmail.Types.ListEmailIdentitiesRequest, callback?: (err: AWSError, data: PinpointEmail.Types.ListEmailIdentitiesResponse) => void): Request<PinpointEmail.Types.ListEmailIdentitiesResponse, AWSError>;
@@ -196,11 +212,11 @@ declare class PinpointEmail extends Service {
    */
   listEmailIdentities(callback?: (err: AWSError, data: PinpointEmail.Types.ListEmailIdentitiesResponse) => void): Request<PinpointEmail.Types.ListEmailIdentitiesResponse, AWSError>;
   /**
-   * Retrieve a list of the tags (keys and values) that are associated with a specific resource. A tag is a label that you optionally define and associate with a resource in Amazon Pinpoint. Each tag consists of a required tag key and an optional associated tag value. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.
+   * Retrieve a list of the tags (keys and values) that are associated with a specified resource. A tag is a label that you optionally define and associate with a resource in Amazon Pinpoint. Each tag consists of a required tag key and an optional associated tag value. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.
    */
   listTagsForResource(params: PinpointEmail.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: PinpointEmail.Types.ListTagsForResourceResponse) => void): Request<PinpointEmail.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Retrieve a list of the tags (keys and values) that are associated with a specific resource. A tag is a label that you optionally define and associate with a resource in Amazon Pinpoint. Each tag consists of a required tag key and an optional associated tag value. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.
+   * Retrieve a list of the tags (keys and values) that are associated with a specified resource. A tag is a label that you optionally define and associate with a resource in Amazon Pinpoint. Each tag consists of a required tag key and an optional associated tag value. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.
    */
   listTagsForResource(callback?: (err: AWSError, data: PinpointEmail.Types.ListTagsForResourceResponse) => void): Request<PinpointEmail.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -268,11 +284,11 @@ declare class PinpointEmail extends Service {
    */
   putDedicatedIpWarmupAttributes(callback?: (err: AWSError, data: PinpointEmail.Types.PutDedicatedIpWarmupAttributesResponse) => void): Request<PinpointEmail.Types.PutDedicatedIpWarmupAttributesResponse, AWSError>;
   /**
-   * Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00, in addition to any other fees that you accrue by using Amazon Pinpoint. If you enable the Deliverability dashboard after the first day of a calendar month, we prorate the monthly charge based on how many days have elapsed in the current calendar month.
+   * Enable or disable the Deliverability dashboard for your Amazon Pinpoint account. When you enable the Deliverability dashboard, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon Pinpoint. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon Pinpoint Pricing.
    */
   putDeliverabilityDashboardOption(params: PinpointEmail.Types.PutDeliverabilityDashboardOptionRequest, callback?: (err: AWSError, data: PinpointEmail.Types.PutDeliverabilityDashboardOptionResponse) => void): Request<PinpointEmail.Types.PutDeliverabilityDashboardOptionResponse, AWSError>;
   /**
-   * Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00, in addition to any other fees that you accrue by using Amazon Pinpoint. If you enable the Deliverability dashboard after the first day of a calendar month, we prorate the monthly charge based on how many days have elapsed in the current calendar month.
+   * Enable or disable the Deliverability dashboard for your Amazon Pinpoint account. When you enable the Deliverability dashboard, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests. When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon Pinpoint. For more information about the features and cost of a Deliverability dashboard subscription, see Amazon Pinpoint Pricing.
    */
   putDeliverabilityDashboardOption(callback?: (err: AWSError, data: PinpointEmail.Types.PutDeliverabilityDashboardOptionResponse) => void): Request<PinpointEmail.Types.PutDeliverabilityDashboardOptionResponse, AWSError>;
   /**
@@ -308,11 +324,11 @@ declare class PinpointEmail extends Service {
    */
   sendEmail(callback?: (err: AWSError, data: PinpointEmail.Types.SendEmailResponse) => void): Request<PinpointEmail.Types.SendEmailResponse, AWSError>;
   /**
-   * Add one or more tags (keys and values) to one or more specified resources. A tag is a label that you optionally define and associate with a resource in Amazon Pinpoint. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria. A resource can have as many as 50 tags. Each tag consists of a required tag key and an associated tag value, both of which you define. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.
+   * Add one or more tags (keys and values) to a specified resource. A tag is a label that you optionally define and associate with a resource in Amazon Pinpoint. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria. A resource can have as many as 50 tags. Each tag consists of a required tag key and an associated tag value, both of which you define. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.
    */
   tagResource(params: PinpointEmail.Types.TagResourceRequest, callback?: (err: AWSError, data: PinpointEmail.Types.TagResourceResponse) => void): Request<PinpointEmail.Types.TagResourceResponse, AWSError>;
   /**
-   * Add one or more tags (keys and values) to one or more specified resources. A tag is a label that you optionally define and associate with a resource in Amazon Pinpoint. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria. A resource can have as many as 50 tags. Each tag consists of a required tag key and an associated tag value, both of which you define. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.
+   * Add one or more tags (keys and values) to a specified resource. A tag is a label that you optionally define and associate with a resource in Amazon Pinpoint. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria. A resource can have as many as 50 tags. Each tag consists of a required tag key and an associated tag value, both of which you define. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.
    */
   tagResource(callback?: (err: AWSError, data: PinpointEmail.Types.TagResourceResponse) => void): Request<PinpointEmail.Types.TagResourceResponse, AWSError>;
   /**
@@ -364,6 +380,7 @@ declare namespace PinpointEmail {
      */
     Html?: Content;
   }
+  export type CampaignId = string;
   export type Charset = string;
   export interface CloudWatchDestination {
     /**
@@ -418,7 +435,7 @@ declare namespace PinpointEmail {
     /**
      * The name of the configuration set.
      */
-    ConfigurationSetName?: ConfigurationSetName;
+    ConfigurationSetName: ConfigurationSetName;
     /**
      * An object that defines the open and click tracking options for emails that you send using the configuration set.
      */
@@ -436,7 +453,7 @@ declare namespace PinpointEmail {
      */
     SendingOptions?: SendingOptions;
     /**
-     * An object that defines the tags (keys and values) that you want to associate with the configuration set.
+     * An array of objects that define the tags (keys and values) that you want to associate with the configuration set.
      */
     Tags?: TagList;
   }
@@ -468,7 +485,7 @@ declare namespace PinpointEmail {
      */
     Content: EmailContent;
     /**
-     * An object that defines the tags (keys and values) that you want to associate with the predictive inbox placement test.
+     * An array of objects that define the tags (keys and values) that you want to associate with the predictive inbox placement test.
      */
     Tags?: TagList;
   }
@@ -488,7 +505,7 @@ declare namespace PinpointEmail {
      */
     EmailIdentity: Identity;
     /**
-     * An object that defines the tags (keys and values) that you want to associate with the email identity.
+     * An array of objects that define the tags (keys and values) that you want to associate with the email identity.
      */
     Tags?: TagList;
   }
@@ -517,7 +534,7 @@ declare namespace PinpointEmail {
      */
     VolumeStatistics?: VolumeStatistics;
     /**
-     * An object that contains inbox placement metrics for a specifid day in the analysis period, broken out by the recipient's email provider.
+     * An object that contains inbox placement metrics for a specified day in the analysis period, broken out by the recipient's email provider.
      */
     DomainIspPlacements?: DomainIspPlacements;
   }
@@ -578,6 +595,7 @@ declare namespace PinpointEmail {
   }
   export interface DeleteEmailIdentityResponse {
   }
+  export type DeliverabilityDashboardAccountStatus = "ACTIVE"|"PENDING_EXPIRATION"|"DISABLED"|string;
   export interface DeliverabilityTestReport {
     /**
      * A unique string that identifies the predictive inbox placement test.
@@ -646,6 +664,81 @@ declare namespace PinpointEmail {
   export type DkimStatus = "PENDING"|"SUCCESS"|"FAILED"|"TEMPORARY_FAILURE"|"NOT_STARTED"|string;
   export type DnsToken = string;
   export type DnsTokenList = DnsToken[];
+  export type Domain = string;
+  export interface DomainDeliverabilityCampaign {
+    /**
+     * The unique identifier for the campaign. Amazon Pinpoint automatically generates and assigns this identifier to a campaign. This value is not the same as the campaign identifier that Amazon Pinpoint assigns to campaigns that you create and manage by using the Amazon Pinpoint API or the Amazon Pinpoint console.
+     */
+    CampaignId?: CampaignId;
+    /**
+     * The URL of an image that contains a snapshot of the email message that was sent.
+     */
+    ImageUrl?: ImageUrl;
+    /**
+     * The subject line, or title, of the email message.
+     */
+    Subject?: Subject;
+    /**
+     * The verified email address that the email message was sent from.
+     */
+    FromAddress?: Identity;
+    /**
+     * The IP addresses that were used to send the email message.
+     */
+    SendingIps?: IpList;
+    /**
+     * The first time, in Unix time format, when the email message was delivered to any recipient's inbox. This value can help you determine how long it took for a campaign to deliver an email message.
+     */
+    FirstSeenDateTime?: Timestamp;
+    /**
+     * The last time, in Unix time format, when the email message was delivered to any recipient's inbox. This value can help you determine how long it took for a campaign to deliver an email message.
+     */
+    LastSeenDateTime?: Timestamp;
+    /**
+     * The number of email messages that were delivered to recipients’ inboxes.
+     */
+    InboxCount?: Volume;
+    /**
+     * The number of email messages that were delivered to recipients' spam or junk mail folders.
+     */
+    SpamCount?: Volume;
+    /**
+     * The percentage of email messages that were opened by recipients. Due to technical limitations, this value only includes recipients who opened the message by using an email client that supports images.
+     */
+    ReadRate?: Percentage;
+    /**
+     * The percentage of email messages that were deleted by recipients, without being opened first. Due to technical limitations, this value only includes recipients who opened the message by using an email client that supports images.
+     */
+    DeleteRate?: Percentage;
+    /**
+     * The percentage of email messages that were opened and then deleted by recipients. Due to technical limitations, this value only includes recipients who opened the message by using an email client that supports images.
+     */
+    ReadDeleteRate?: Percentage;
+    /**
+     * The projected number of recipients that the email message was sent to.
+     */
+    ProjectedVolume?: Volume;
+    /**
+     * The major email providers who handled the email message.
+     */
+    Esps?: Esps;
+  }
+  export type DomainDeliverabilityCampaignList = DomainDeliverabilityCampaign[];
+  export interface DomainDeliverabilityTrackingOption {
+    /**
+     * A verified domain that’s associated with your AWS account and currently has an active Deliverability dashboard subscription.
+     */
+    Domain?: Domain;
+    /**
+     * The date, in Unix time format, when you enabled the Deliverability dashboard for the domain.
+     */
+    SubscriptionStartDate?: Timestamp;
+    /**
+     * An object that contains information about the inbox placement data settings for the domain.
+     */
+    InboxPlacementTrackingOption?: InboxPlacementTrackingOption;
+  }
+  export type DomainDeliverabilityTrackingOptions = DomainDeliverabilityTrackingOption[];
   export interface DomainIspPlacement {
     /**
      * The name of the email provider that the inbox placement data applies to.
@@ -682,6 +775,8 @@ declare namespace PinpointEmail {
     Raw?: RawMessage;
   }
   export type Enabled = boolean;
+  export type Esp = string;
+  export type Esps = Esp[];
   export interface EventDestination {
     /**
      * A name that identifies the event destination.
@@ -818,6 +913,10 @@ declare namespace PinpointEmail {
      * An object that defines whether or not Amazon Pinpoint can send email that you send using the configuration set.
      */
     SendingOptions?: SendingOptions;
+    /**
+     * An array of objects that define the tags (keys and values) that are associated with the configuration set.
+     */
+    Tags?: TagList;
   }
   export interface GetDedicatedIpRequest {
     /**
@@ -859,9 +958,25 @@ declare namespace PinpointEmail {
   }
   export interface GetDeliverabilityDashboardOptionsResponse {
     /**
-     * Indicates whether the Deliverability dashboard is enabled. If the value is true, then the dashboard is enabled.
+     * Specifies whether the Deliverability dashboard is enabled for your Amazon Pinpoint account. If this value is true, the dashboard is enabled.
      */
     DashboardEnabled: Enabled;
+    /**
+     * The date, in Unix time format, when your current subscription to the Deliverability dashboard is scheduled to expire, if your subscription is scheduled to expire at the end of the current calendar month. This value is null if you have an active subscription that isn’t due to expire at the end of the month.
+     */
+    SubscriptionExpiryDate?: Timestamp;
+    /**
+     * The current status of your Deliverability dashboard subscription. If this value is PENDING_EXPIRATION, your subscription is scheduled to expire at the end of the current calendar month.
+     */
+    AccountStatus?: DeliverabilityDashboardAccountStatus;
+    /**
+     * An array of objects, one for each verified domain that you use to send email and currently has an active Deliverability dashboard subscription that isn’t scheduled to expire at the end of the current calendar month.
+     */
+    ActiveSubscribedDomains?: DomainDeliverabilityTrackingOptions;
+    /**
+     * An array of objects, one for each verified domain that you use to send email and currently has an active Deliverability dashboard subscription that's scheduled to expire at the end of the current calendar month.
+     */
+    PendingExpirationSubscribedDomains?: DomainDeliverabilityTrackingOptions;
   }
   export interface GetDeliverabilityTestReportRequest {
     /**
@@ -886,6 +1001,22 @@ declare namespace PinpointEmail {
      * An object that contains the message that you sent when you performed this predictive inbox placement test.
      */
     Message?: MessageContent;
+    /**
+     * An array of objects that define the tags (keys and values) that are associated with the predictive inbox placement test.
+     */
+    Tags?: TagList;
+  }
+  export interface GetDomainDeliverabilityCampaignRequest {
+    /**
+     * The unique identifier for the campaign. Amazon Pinpoint automatically generates and assigns this identifier to a campaign. This value is not the same as the campaign identifier that Amazon Pinpoint assigns to campaigns that you create and manage by using the Amazon Pinpoint API or the Amazon Pinpoint console.
+     */
+    CampaignId: CampaignId;
+  }
+  export interface GetDomainDeliverabilityCampaignResponse {
+    /**
+     * An object that contains the deliverability data for the campaign.
+     */
+    DomainDeliverabilityCampaign: DomainDeliverabilityCampaign;
   }
   export interface GetDomainStatisticsReportRequest {
     /**
@@ -938,6 +1069,10 @@ declare namespace PinpointEmail {
      * An object that contains information about the Mail-From attributes for the email identity.
      */
     MailFromAttributes?: MailFromAttributes;
+    /**
+     * An array of objects that define the tags (keys and values) that are associated with the email identity.
+     */
+    Tags?: TagList;
   }
   export type Identity = string;
   export interface IdentityInfo {
@@ -956,8 +1091,21 @@ declare namespace PinpointEmail {
   }
   export type IdentityInfoList = IdentityInfo[];
   export type IdentityType = "EMAIL_ADDRESS"|"DOMAIN"|"MANAGED_DOMAIN"|string;
+  export type ImageUrl = string;
+  export interface InboxPlacementTrackingOption {
+    /**
+     * Specifies whether inbox placement data is being tracked for the domain.
+     */
+    Global?: Enabled;
+    /**
+     * An array of strings, one for each major email provider that the inbox placement data applies to.
+     */
+    TrackedIsps?: IspNameList;
+  }
   export type Ip = string;
+  export type IpList = Ip[];
   export type IspName = string;
+  export type IspNameList = IspName[];
   export interface IspPlacement {
     /**
      * The name of the email provider that the inbox placement data applies to.
@@ -1037,6 +1185,38 @@ declare namespace PinpointEmail {
     DeliverabilityTestReports: DeliverabilityTestReports;
     /**
      * A token that indicates that there are additional predictive inbox placement tests to list. To view additional predictive inbox placement tests, issue another request to ListDeliverabilityTestReports, and pass this token in the NextToken parameter.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListDomainDeliverabilityCampaignsRequest {
+    /**
+     * The first day, in Unix time format, that you want to obtain deliverability data for.
+     */
+    StartDate: Timestamp;
+    /**
+     * The last day, in Unix time format, that you want to obtain deliverability data for. This value has to be less than or equal to 30 days after the value of the StartDate parameter.
+     */
+    EndDate: Timestamp;
+    /**
+     * The domain to obtain deliverability data for.
+     */
+    SubscribedDomain: Domain;
+    /**
+     * A token that’s returned from a previous call to the ListDomainDeliverabilityCampaigns operation. This token indicates the position of a campaign in the list of campaigns.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to include in response to a single call to the ListDomainDeliverabilityCampaigns operation. If the number of results is larger than the number that you specify in this parameter, the response includes a NextToken element, which you can use to obtain additional results.
+     */
+    PageSize?: MaxItems;
+  }
+  export interface ListDomainDeliverabilityCampaignsResponse {
+    /**
+     * An array of responses, one for each campaign that used the domain to send email during the specified time range.
+     */
+    DomainDeliverabilityCampaigns: DomainDeliverabilityCampaignList;
+    /**
+     * A token that’s returned from a previous call to the ListDomainDeliverabilityCampaigns operation. This token indicates the position of the campaign in the list of campaigns.
      */
     NextToken?: NextToken;
   }
@@ -1254,9 +1434,13 @@ declare namespace PinpointEmail {
   }
   export interface PutDeliverabilityDashboardOptionRequest {
     /**
-     * Indicates whether the Deliverability dashboard is enabled. If the value is true, then the dashboard is enabled.
+     * Specifies whether to enable the Deliverability dashboard for your Amazon Pinpoint account. To enable the dashboard, set this value to true.
      */
     DashboardEnabled: Enabled;
+    /**
+     * An array of objects, one for each verified domain that you use to send email and enabled the Deliverability dashboard for.
+     */
+    SubscribedDomains?: DomainDeliverabilityTrackingOptions;
   }
   export interface PutDeliverabilityDashboardOptionResponse {
   }
@@ -1384,6 +1568,7 @@ declare namespace PinpointEmail {
      */
     TopicArn: AmazonResourceName;
   }
+  export type Subject = string;
   export interface Tag {
     /**
      * One part of a key-value pair that defines a tag. The maximum length of a tag key is 128 characters. The minimum length is 1 character.

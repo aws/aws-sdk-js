@@ -52,11 +52,11 @@ declare class Chime extends Service {
    */
   batchUnsuspendUser(callback?: (err: AWSError, data: Chime.Types.BatchUnsuspendUserResponse) => void): Request<Chime.Types.BatchUnsuspendUserResponse, AWSError>;
   /**
-   * Updates phone number product types. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types.
+   * Updates phone number product types. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you can use only the Amazon Chime Voice Connector product type.
    */
   batchUpdatePhoneNumber(params: Chime.Types.BatchUpdatePhoneNumberRequest, callback?: (err: AWSError, data: Chime.Types.BatchUpdatePhoneNumberResponse) => void): Request<Chime.Types.BatchUpdatePhoneNumberResponse, AWSError>;
   /**
-   * Updates phone number product types. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types.
+   * Updates phone number product types. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you can use only the Amazon Chime Voice Connector product type.
    */
   batchUpdatePhoneNumber(callback?: (err: AWSError, data: Chime.Types.BatchUpdatePhoneNumberResponse) => void): Request<Chime.Types.BatchUpdatePhoneNumberResponse, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class Chime extends Service {
    */
   createBot(callback?: (err: AWSError, data: Chime.Types.CreateBotResponse) => void): Request<Chime.Types.CreateBotResponse, AWSError>;
   /**
-   * Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types.
+   * Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you can use only the Amazon Chime Voice Connector product type.
    */
   createPhoneNumberOrder(params: Chime.Types.CreatePhoneNumberOrderRequest, callback?: (err: AWSError, data: Chime.Types.CreatePhoneNumberOrderResponse) => void): Request<Chime.Types.CreatePhoneNumberOrderResponse, AWSError>;
   /**
-   * Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types.
+   * Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you can use only the Amazon Chime Voice Connector product type.
    */
   createPhoneNumberOrder(callback?: (err: AWSError, data: Chime.Types.CreatePhoneNumberOrderResponse) => void): Request<Chime.Types.CreatePhoneNumberOrderResponse, AWSError>;
   /**
@@ -440,11 +440,11 @@ declare class Chime extends Service {
    */
   updateGlobalSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates phone number details, such as product type, for the specified phone number ID.
+   * Updates phone number details, such as product type, for the specified phone number ID. For toll-free numbers, you can use only the Amazon Chime Voice Connector product type.
    */
   updatePhoneNumber(params: Chime.Types.UpdatePhoneNumberRequest, callback?: (err: AWSError, data: Chime.Types.UpdatePhoneNumberResponse) => void): Request<Chime.Types.UpdatePhoneNumberResponse, AWSError>;
   /**
-   * Updates phone number details, such as product type, for the specified phone number ID.
+   * Updates phone number details, such as product type, for the specified phone number ID. For toll-free numbers, you can use only the Amazon Chime Voice Connector product type.
    */
   updatePhoneNumber(callback?: (err: AWSError, data: Chime.Types.UpdatePhoneNumberResponse) => void): Request<Chime.Types.UpdatePhoneNumberResponse, AWSError>;
   /**
@@ -1295,6 +1295,10 @@ declare namespace Chime {
      */
     E164PhoneNumber?: E164PhoneNumber;
     /**
+     * The phone number type.
+     */
+    Type?: PhoneNumberType;
+    /**
      * The phone number product type.
      */
     ProductType?: PhoneNumberProductType;
@@ -1412,6 +1416,7 @@ declare namespace Chime {
   export type PhoneNumberOrderStatus = "Processing"|"Successful"|"Failed"|"Partial"|string;
   export type PhoneNumberProductType = "BusinessCalling"|"VoiceConnector"|string;
   export type PhoneNumberStatus = "AcquireInProgress"|"AcquireFailed"|"Unassigned"|"Assigned"|"ReleaseInProgress"|"DeleteInProgress"|"ReleaseFailed"|"DeleteFailed"|string;
+  export type PhoneNumberType = "Local"|"TollFree"|string;
   export type Port = number;
   export type ProfileServiceMaxResults = number;
   export interface PutEventsConfigurationRequest {
@@ -1538,6 +1543,10 @@ declare namespace Chime {
      */
     State?: String;
     /**
+     * The toll-free prefix that you use to filter results.
+     */
+    TollFreePrefix?: TollFreePrefix;
+    /**
      * The maximum number of results to return in a single call.
      */
     MaxResults?: PhoneNumberMaxResults;
@@ -1602,6 +1611,7 @@ declare namespace Chime {
      */
     Source?: String;
   }
+  export type TollFreePrefix = string;
   export interface UpdateAccountRequest {
     /**
      * The Amazon Chime account ID.

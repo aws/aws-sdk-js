@@ -174,5 +174,6 @@ module.exports = {
   WorkLink: require('./worklink'),
   Textract: require('./textract'),
   ManagedBlockchain: require('./managedblockchain'),
-  MediaPackageVod: require('./mediapackagevod')
+  MediaPackageVod: require('./mediapackagevod'),
+  GroundStation: require('./groundstation')
 };

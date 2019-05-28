@@ -122,6 +122,28 @@
       ],
       "documentation": "<p>Configures one or more gateway local disks as working storage for a gateway. This operation is only supported in the stored volume gateway type. This operation is deprecated in cached volume API version 20120630. Use <a>AddUploadBuffer</a> instead.</p> <note> <p>Working storage is also referred to as upload buffer. You can also use the <a>AddUploadBuffer</a> operation to add upload buffer to a stored volume gateway.</p> </note> <p>In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add working storage, and one or more disk IDs that you want to configure as working storage.</p>"
     },
+    "AssignTapePool": {
+      "name": "AssignTapePool",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AssignTapePoolInput"
+      },
+      "output": {
+        "shape": "AssignTapePoolOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidGatewayRequestException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Assigns a tape to a tape pool for archiving. The tape assigned to a pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the S3 storage class (Glacier or Deep Archive) that corresponds to the pool.</p> <p>Valid values: \"GLACIER\", \"DEEP_ARCHIVE\"</p>"
+    },
     "AttachVolume": {
       "name": "AttachVolume",
       "http": {
@@ -1742,6 +1764,32 @@
       },
       "documentation": "<p>A JSON object containing the of the gateway for which working storage was configured.</p>"
     },
+    "AssignTapePoolInput": {
+      "type": "structure",
+      "required": [
+        "TapeARN",
+        "PoolId"
+      ],
+      "members": {
+        "TapeARN": {
+          "shape": "TapeARN",
+          "documentation": "<p>The unique Amazon Resource Name (ARN) of the virtual tape that you want to add to the tape pool.</p>"
+        },
+        "PoolId": {
+          "shape": "PoolId",
+          "documentation": "<p>The ID of the pool that you want to add your tape to for archiving. The tape in this pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the storage class (Glacier or Deep Archive) that corresponds to the pool.</p> <p>Valid values: \"GLACIER\", \"DEEP_ARCHIVE\"</p>"
+        }
+      }
+    },
+    "AssignTapePoolOutput": {
+      "type": "structure",
+      "members": {
+        "TapeARN": {
+          "shape": "TapeARN",
+          "documentation": "<p>The unique Amazon Resource Names (ARN) of the virtual tape that was added to the tape pool.</p>"
+        }
+      }
+    },
     "AttachVolumeInput": {
       "type": "structure",
       "required": [
@@ -1957,7 +2005,8 @@
     "ChapSecret": {
       "type": "string",
       "max": 100,
-      "min": 1
+      "min": 1,
+      "sensitive": true
     },
     "ClientToken": {
       "type": "string",

@@ -173,3 +173,4 @@ export import WorkLink = require('./worklink');
 export import Textract = require('./textract');
 export import ManagedBlockchain = require('./managedblockchain');
 export import MediaPackageVod = require('./mediapackagevod');
+export import GroundStation = require('./groundstation');

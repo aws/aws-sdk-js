@@ -460,7 +460,7 @@
           "shape": "BadRequestException"
         }
       ],
-      "documentation": "<p>Show the status of the Deliverability dashboard. When the Deliverability dashboard is enabled, you gain access to reputation metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00, in addition to any other fees that you accrue by using Amazon Pinpoint. If you enable the Deliverability dashboard after the first day of a calendar month, AWS prorates the monthly charge based on how many days have elapsed in the current calendar month.</p>"
+      "documentation": "<p>Retrieve information about the status of the Deliverability dashboard for your Amazon Pinpoint account. When the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon Pinpoint. For more information about the features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/pinpoint/pricing/\">Amazon Pinpoint Pricing</a>.</p>"
     },
     "GetDeliverabilityTestReport": {
       "name": "GetDeliverabilityTestReport",
@@ -486,6 +486,31 @@
         }
       ],
       "documentation": "<p>Retrieve the results of a predictive inbox placement test.</p>"
+    },
+    "GetDomainDeliverabilityCampaign": {
+      "name": "GetDomainDeliverabilityCampaign",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/email/deliverability-dashboard/campaigns/{CampaignId}"
+      },
+      "input": {
+        "shape": "GetDomainDeliverabilityCampaignRequest"
+      },
+      "output": {
+        "shape": "GetDomainDeliverabilityCampaignResponse"
+      },
+      "errors": [
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "NotFoundException"
+        }
+      ],
+      "documentation": "<p>Retrieve all the deliverability data for a specific campaign. This data is available for a campaign only if the campaign sent email by using a domain that the Deliverability dashboard is enabled for (<code>PutDeliverabilityDashboardOption</code> operation).</p>"
     },
     "GetDomainStatisticsReport": {
       "name": "GetDomainStatisticsReport",
@@ -606,6 +631,31 @@
       ],
       "documentation": "<p>Show a list of the predictive inbox placement tests that you've performed, regardless of their statuses. For predictive inbox placement tests that are complete, you can use the <code>GetDeliverabilityTestReport</code> operation to view the results.</p>"
     },
+    "ListDomainDeliverabilityCampaigns": {
+      "name": "ListDomainDeliverabilityCampaigns",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/email/deliverability-dashboard/domains/{SubscribedDomain}/campaigns"
+      },
+      "input": {
+        "shape": "ListDomainDeliverabilityCampaignsRequest"
+      },
+      "output": {
+        "shape": "ListDomainDeliverabilityCampaignsResponse"
+      },
+      "errors": [
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "NotFoundException"
+        }
+      ],
+      "documentation": "<p>Retrieve deliverability data for all the campaigns that used a specific domain to send email during a specified time range. This data is available for a domain only if you enabled the Deliverability dashboard (<code>PutDeliverabilityDashboardOption</code> operation) for the domain.</p>"
+    },
     "ListEmailIdentities": {
       "name": "ListEmailIdentities",
       "http": {
@@ -651,7 +701,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Retrieve a list of the tags (keys and values) that are associated with a specific resource. A <i>tag</i> is a label that you optionally define and associate with a resource in Amazon Pinpoint. Each tag consists of a required <i>tag key</i> and an optional associated <i>tag value</i>. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.</p>"
+      "documentation": "<p>Retrieve a list of the tags (keys and values) that are associated with a specified resource. A <i>tag</i> is a label that you optionally define and associate with a resource in Amazon Pinpoint. Each tag consists of a required <i>tag key</i> and an optional associated <i>tag value</i>. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.</p>"
     },
     "PutAccountDedicatedIpWarmupAttributes": {
       "name": "PutAccountDedicatedIpWarmupAttributes",
@@ -876,7 +926,7 @@
           "shape": "BadRequestException"
         }
       ],
-      "documentation": "<p>Enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00, in addition to any other fees that you accrue by using Amazon Pinpoint. If you enable the Deliverability dashboard after the first day of a calendar month, we prorate the monthly charge based on how many days have elapsed in the current calendar month.</p>"
+      "documentation": "<p>Enable or disable the Deliverability dashboard for your Amazon Pinpoint account. When you enable the Deliverability dashboard, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon Pinpoint. For more information about the features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/pinpoint/pricing/\">Amazon Pinpoint Pricing</a>.</p>"
     },
     "PutEmailIdentityDkimAttributes": {
       "name": "PutEmailIdentityDkimAttributes",
@@ -1019,7 +1069,7 @@
           "shape": "TooManyRequestsException"
         }
       ],
-      "documentation": "<p>Add one or more tags (keys and values) to one or more specified resources. A <i>tag</i> is a label that you optionally define and associate with a resource in Amazon Pinpoint. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria. A resource can have as many as 50 tags.</p> <p>Each tag consists of a required <i>tag key</i> and an associated <i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.</p>"
+      "documentation": "<p>Add one or more tags (keys and values) to a specified resource. A <i>tag</i> is a label that you optionally define and associate with a resource in Amazon Pinpoint. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria. A resource can have as many as 50 tags.</p> <p>Each tag consists of a required <i>tag key</i> and an associated <i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for more specific tag values. A tag value acts as a descriptor within a tag key.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -1148,6 +1198,9 @@
       },
       "documentation": "<p>Represents the body of the email message.</p>"
     },
+    "CampaignId": {
+      "type": "string"
+    },
     "Charset": {
       "type": "string"
     },
@@ -1252,6 +1305,9 @@
     },
     "CreateConfigurationSetRequest": {
       "type": "structure",
+      "required": [
+        "ConfigurationSetName"
+      ],
       "members": {
         "ConfigurationSetName": {
           "shape": "ConfigurationSetName",
@@ -1275,7 +1331,7 @@
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>An object that defines the tags (keys and values) that you want to associate with the configuration set.</p>"
+          "documentation": "<p>An array of objects that define the tags (keys and values) that you want to associate with the configuration set.</p>"
         }
       },
       "documentation": "<p>A request to create a configuration set.</p>"
@@ -1328,7 +1384,7 @@
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>An object that defines the tags (keys and values) that you want to associate with the predictive inbox placement test.</p>"
+          "documentation": "<p>An array of objects that define the tags (keys and values) that you want to associate with the predictive inbox placement test.</p>"
         }
       },
       "documentation": "<p>A request to perform a predictive inbox placement test. Predictive inbox placement tests can help you predict how your messages will be handled by various email providers around the world. When you perform a predictive inbox placement test, you provide a sample message that contains the content that you plan to send to your customers. Amazon Pinpoint then sends that message to special email addresses spread across several major email providers. After about 24 hours, the test is complete, and you can use the <code>GetDeliverabilityTestReport</code> operation to view the results of the test.</p>"
@@ -1363,7 +1419,7 @@
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>An object that defines the tags (keys and values) that you want to associate with the email identity.</p>"
+          "documentation": "<p>An array of objects that define the tags (keys and values) that you want to associate with the email identity.</p>"
         }
       },
       "documentation": "<p>A request to begin the verification process for an email identity (an email address or domain).</p>"
@@ -1403,7 +1459,7 @@
         },
         "DomainIspPlacements": {
           "shape": "DomainIspPlacements",
-          "documentation": "<p>An object that contains inbox placement metrics for a specifid day in the analysis period, broken out by the recipient's email provider.</p>"
+          "documentation": "<p>An object that contains inbox placement metrics for a specified day in the analysis period, broken out by the recipient's email provider.</p>"
         }
       },
       "documentation": "<p>An object that contains information about the volume of email sent on each day of the analysis period.</p>"
@@ -1539,6 +1595,15 @@
       "members": {},
       "documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request fails.</p>"
     },
+    "DeliverabilityDashboardAccountStatus": {
+      "type": "string",
+      "documentation": "<p>The current status of your Deliverability dashboard subscription. If this value is <code>PENDING_EXPIRATION</code>, your subscription is scheduled to expire at the end of the current calendar month.</p>",
+      "enum": [
+        "ACTIVE",
+        "PENDING_EXPIRATION",
+        "DISABLED"
+      ]
+    },
     "DeliverabilityTestReport": {
       "type": "structure",
       "members": {
@@ -1666,6 +1731,103 @@
         "shape": "DnsToken"
       }
     },
+    "Domain": {
+      "type": "string"
+    },
+    "DomainDeliverabilityCampaign": {
+      "type": "structure",
+      "members": {
+        "CampaignId": {
+          "shape": "CampaignId",
+          "documentation": "<p>The unique identifier for the campaign. Amazon Pinpoint automatically generates and assigns this identifier to a campaign. This value is not the same as the campaign identifier that Amazon Pinpoint assigns to campaigns that you create and manage by using the Amazon Pinpoint API or the Amazon Pinpoint console.</p>"
+        },
+        "ImageUrl": {
+          "shape": "ImageUrl",
+          "documentation": "<p>The URL of an image that contains a snapshot of the email message that was sent.</p>"
+        },
+        "Subject": {
+          "shape": "Subject",
+          "documentation": "<p>The subject line, or title, of the email message.</p>"
+        },
+        "FromAddress": {
+          "shape": "Identity",
+          "documentation": "<p>The verified email address that the email message was sent from.</p>"
+        },
+        "SendingIps": {
+          "shape": "IpList",
+          "documentation": "<p>The IP addresses that were used to send the email message.</p>"
+        },
+        "FirstSeenDateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The first time, in Unix time format, when the email message was delivered to any recipient's inbox. This value can help you determine how long it took for a campaign to deliver an email message.</p>"
+        },
+        "LastSeenDateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The last time, in Unix time format, when the email message was delivered to any recipient's inbox. This value can help you determine how long it took for a campaign to deliver an email message.</p>"
+        },
+        "InboxCount": {
+          "shape": "Volume",
+          "documentation": "<p>The number of email messages that were delivered to recipients’ inboxes.</p>"
+        },
+        "SpamCount": {
+          "shape": "Volume",
+          "documentation": "<p>The number of email messages that were delivered to recipients' spam or junk mail folders.</p>"
+        },
+        "ReadRate": {
+          "shape": "Percentage",
+          "documentation": "<p>The percentage of email messages that were opened by recipients. Due to technical limitations, this value only includes recipients who opened the message by using an email client that supports images.</p>"
+        },
+        "DeleteRate": {
+          "shape": "Percentage",
+          "documentation": "<p>The percentage of email messages that were deleted by recipients, without being opened first. Due to technical limitations, this value only includes recipients who opened the message by using an email client that supports images.</p>"
+        },
+        "ReadDeleteRate": {
+          "shape": "Percentage",
+          "documentation": "<p>The percentage of email messages that were opened and then deleted by recipients. Due to technical limitations, this value only includes recipients who opened the message by using an email client that supports images.</p>"
+        },
+        "ProjectedVolume": {
+          "shape": "Volume",
+          "documentation": "<p>The projected number of recipients that the email message was sent to.</p>"
+        },
+        "Esps": {
+          "shape": "Esps",
+          "documentation": "<p>The major email providers who handled the email message.</p>"
+        }
+      },
+      "documentation": "<p>An object that contains the deliverability data for a specific campaign. This data is available for a campaign only if the campaign sent email by using a domain that the Deliverability dashboard is enabled for (<code>PutDeliverabilityDashboardOption</code> operation).</p>"
+    },
+    "DomainDeliverabilityCampaignList": {
+      "type": "list",
+      "member": {
+        "shape": "DomainDeliverabilityCampaign"
+      },
+      "documentation": "<p/>"
+    },
+    "DomainDeliverabilityTrackingOption": {
+      "type": "structure",
+      "members": {
+        "Domain": {
+          "shape": "Domain",
+          "documentation": "<p>A verified domain that’s associated with your AWS account and currently has an active Deliverability dashboard subscription.</p>"
+        },
+        "SubscriptionStartDate": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date, in Unix time format, when you enabled the Deliverability dashboard for the domain.</p>"
+        },
+        "InboxPlacementTrackingOption": {
+          "shape": "InboxPlacementTrackingOption",
+          "documentation": "<p>An object that contains information about the inbox placement data settings for the domain.</p>"
+        }
+      },
+      "documentation": "<p>An object that contains information about the Deliverability dashboard subscription for a verified domain that you use to send email and currently has an active Deliverability dashboard subscription. If a Deliverability dashboard subscription is active for a domain, you gain access to reputation, inbox placement, and other metrics for the domain.</p>"
+    },
+    "DomainDeliverabilityTrackingOptions": {
+      "type": "list",
+      "member": {
+        "shape": "DomainDeliverabilityTrackingOption"
+      },
+      "documentation": "<p>An object that contains information about the Deliverability dashboard subscription for a verified domain that you use to send email and currently has an active Deliverability dashboard subscription. If a Deliverability dashboard subscription is active for a domain, you gain access to reputation, inbox placement, and other metrics for the domain.</p>"
+    },
     "DomainIspPlacement": {
       "type": "structure",
       "members": {
@@ -1723,6 +1885,15 @@
     },
     "Enabled": {
       "type": "boolean"
+    },
+    "Esp": {
+      "type": "string"
+    },
+    "Esps": {
+      "type": "list",
+      "member": {
+        "shape": "Esp"
+      }
     },
     "EventDestination": {
       "type": "structure",
@@ -1864,7 +2035,9 @@
       "members": {
         "BlacklistItemNames": {
           "shape": "BlacklistItemNames",
-          "documentation": "<p>A list of IP addresses that you want to retrieve blacklist information about. You can only specify the dedicated IP addresses that you use to send email using Amazon Pinpoint or Amazon SES.</p>"
+          "documentation": "<p>A list of IP addresses that you want to retrieve blacklist information about. You can only specify the dedicated IP addresses that you use to send email using Amazon Pinpoint or Amazon SES.</p>",
+          "location": "querystring",
+          "locationName": "BlacklistItemNames"
         }
       },
       "documentation": "<p>A request to retrieve a list of the blacklists that your dedicated IP addresses appear on.</p>"
@@ -1944,6 +2117,10 @@
         "SendingOptions": {
           "shape": "SendingOptions",
           "documentation": "<p>An object that defines whether or not Amazon Pinpoint can send email that you send using the configuration set.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>An array of objects that define the tags (keys and values) that are associated with the configuration set.</p>"
         }
       },
       "documentation": "<p>Information about a configuration set.</p>"
@@ -1978,15 +2155,21 @@
       "members": {
         "PoolName": {
           "shape": "PoolName",
-          "documentation": "<p>The name of the IP pool that the dedicated IP address is associated with.</p>"
+          "documentation": "<p>The name of the IP pool that the dedicated IP address is associated with.</p>",
+          "location": "querystring",
+          "locationName": "PoolName"
         },
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>A token returned from a previous call to <code>GetDedicatedIps</code> to indicate the position of the dedicated IP pool in the list of IP pools.</p>"
+          "documentation": "<p>A token returned from a previous call to <code>GetDedicatedIps</code> to indicate the position of the dedicated IP pool in the list of IP pools.</p>",
+          "location": "querystring",
+          "locationName": "NextToken"
         },
         "PageSize": {
           "shape": "MaxItems",
-          "documentation": "<p>The number of results to show in a single call to <code>GetDedicatedIpsRequest</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p>"
+          "documentation": "<p>The number of results to show in a single call to <code>GetDedicatedIpsRequest</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p>",
+          "location": "querystring",
+          "locationName": "PageSize"
         }
       },
       "documentation": "<p>A request to obtain more information about dedicated IP pools.</p>"
@@ -2008,7 +2191,7 @@
     "GetDeliverabilityDashboardOptionsRequest": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>A request to retrieve the status of the Deliverability dashboard for your account. When the Deliverability dashboard is enabled, you gain access to reputation metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00, in addition to any other fees that you accrue by using Amazon Pinpoint. If you enable the Deliverability dashboard after the first day of a calendar month, AWS prorates the monthly charge based on how many days have elapsed in the current calendar month.</p>"
+      "documentation": "<p>Retrieve information about the status of the Deliverability dashboard for your Amazon Pinpoint account. When the Deliverability dashboard is enabled, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon Pinpoint. For more information about the features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/pinpoint/pricing/\">Amazon Pinpoint Pricing</a>.</p>"
     },
     "GetDeliverabilityDashboardOptionsResponse": {
       "type": "structure",
@@ -2018,7 +2201,23 @@
       "members": {
         "DashboardEnabled": {
           "shape": "Enabled",
-          "documentation": "<p>Indicates whether the Deliverability dashboard is enabled. If the value is <code>true</code>, then the dashboard is enabled.</p>"
+          "documentation": "<p>Specifies whether the Deliverability dashboard is enabled for your Amazon Pinpoint account. If this value is <code>true</code>, the dashboard is enabled.</p>"
+        },
+        "SubscriptionExpiryDate": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date, in Unix time format, when your current subscription to the Deliverability dashboard is scheduled to expire, if your subscription is scheduled to expire at the end of the current calendar month. This value is null if you have an active subscription that isn’t due to expire at the end of the month.</p>"
+        },
+        "AccountStatus": {
+          "shape": "DeliverabilityDashboardAccountStatus",
+          "documentation": "<p>The current status of your Deliverability dashboard subscription. If this value is <code>PENDING_EXPIRATION</code>, your subscription is scheduled to expire at the end of the current calendar month.</p>"
+        },
+        "ActiveSubscribedDomains": {
+          "shape": "DomainDeliverabilityTrackingOptions",
+          "documentation": "<p>An array of objects, one for each verified domain that you use to send email and currently has an active Deliverability dashboard subscription that isn’t scheduled to expire at the end of the current calendar month.</p>"
+        },
+        "PendingExpirationSubscribedDomains": {
+          "shape": "DomainDeliverabilityTrackingOptions",
+          "documentation": "<p>An array of objects, one for each verified domain that you use to send email and currently has an active Deliverability dashboard subscription that's scheduled to expire at the end of the current calendar month.</p>"
         }
       },
       "documentation": "<p>An object that shows the status of the Deliverability dashboard for your Amazon Pinpoint account.</p>"
@@ -2061,9 +2260,41 @@
         "Message": {
           "shape": "MessageContent",
           "documentation": "<p>An object that contains the message that you sent when you performed this predictive inbox placement test.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>An array of objects that define the tags (keys and values) that are associated with the predictive inbox placement test.</p>"
         }
       },
       "documentation": "<p>The results of the predictive inbox placement test.</p>"
+    },
+    "GetDomainDeliverabilityCampaignRequest": {
+      "type": "structure",
+      "required": [
+        "CampaignId"
+      ],
+      "members": {
+        "CampaignId": {
+          "shape": "CampaignId",
+          "documentation": "<p>The unique identifier for the campaign. Amazon Pinpoint automatically generates and assigns this identifier to a campaign. This value is not the same as the campaign identifier that Amazon Pinpoint assigns to campaigns that you create and manage by using the Amazon Pinpoint API or the Amazon Pinpoint console.</p>",
+          "location": "uri",
+          "locationName": "CampaignId"
+        }
+      },
+      "documentation": "<p>Retrieve all the deliverability data for a specific campaign. This data is available for a campaign only if the campaign sent email by using a domain that the Deliverability dashboard is enabled for (<code>PutDeliverabilityDashboardOption</code> operation).</p>"
+    },
+    "GetDomainDeliverabilityCampaignResponse": {
+      "type": "structure",
+      "required": [
+        "DomainDeliverabilityCampaign"
+      ],
+      "members": {
+        "DomainDeliverabilityCampaign": {
+          "shape": "DomainDeliverabilityCampaign",
+          "documentation": "<p>An object that contains the deliverability data for the campaign.</p>"
+        }
+      },
+      "documentation": "<p>An object that contains all the deliverability data for a specific campaign. This data is available for a campaign only if the campaign sent email by using a domain that the Deliverability dashboard is enabled for (<code>PutDeliverabilityDashboardOption</code> operation).</p>"
     },
     "GetDomainStatisticsReportRequest": {
       "type": "structure",
@@ -2081,11 +2312,15 @@
         },
         "StartDate": {
           "shape": "Timestamp",
-          "documentation": "<p>The first day (in Unix time) that you want to obtain domain deliverability metrics for.</p>"
+          "documentation": "<p>The first day (in Unix time) that you want to obtain domain deliverability metrics for.</p>",
+          "location": "querystring",
+          "locationName": "StartDate"
         },
         "EndDate": {
           "shape": "Timestamp",
-          "documentation": "<p>The last day (in Unix time) that you want to obtain domain deliverability metrics for. The <code>EndDate</code> that you specify has to be less than or equal to 30 days after the <code>StartDate</code>.</p>"
+          "documentation": "<p>The last day (in Unix time) that you want to obtain domain deliverability metrics for. The <code>EndDate</code> that you specify has to be less than or equal to 30 days after the <code>StartDate</code>.</p>",
+          "location": "querystring",
+          "locationName": "EndDate"
         }
       },
       "documentation": "<p>A request to obtain deliverability metrics for a domain.</p>"
@@ -2145,6 +2380,10 @@
         "MailFromAttributes": {
           "shape": "MailFromAttributes",
           "documentation": "<p>An object that contains information about the Mail-From attributes for the email identity.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>An array of objects that define the tags (keys and values) that are associated with the email identity.</p>"
         }
       },
       "documentation": "<p>Details about an email identity.</p>"
@@ -2185,13 +2424,42 @@
         "MANAGED_DOMAIN"
       ]
     },
+    "ImageUrl": {
+      "type": "string"
+    },
+    "InboxPlacementTrackingOption": {
+      "type": "structure",
+      "members": {
+        "Global": {
+          "shape": "Enabled",
+          "documentation": "<p>Specifies whether inbox placement data is being tracked for the domain.</p>"
+        },
+        "TrackedIsps": {
+          "shape": "IspNameList",
+          "documentation": "<p>An array of strings, one for each major email provider that the inbox placement data applies to.</p>"
+        }
+      },
+      "documentation": "<p>An object that contains information about the inbox placement data settings for a verified domain that’s associated with your AWS account. This data is available only if you enabled the Deliverability dashboard for the domain (<code>PutDeliverabilityDashboardOption</code> operation).</p>"
+    },
     "Ip": {
       "type": "string",
       "documentation": "<p>A dedicated IP address that is associated with your Amazon Pinpoint account.</p>"
     },
+    "IpList": {
+      "type": "list",
+      "member": {
+        "shape": "Ip"
+      }
+    },
     "IspName": {
       "type": "string",
       "documentation": "<p>The name of an email provider.</p>"
+    },
+    "IspNameList": {
+      "type": "list",
+      "member": {
+        "shape": "IspName"
+      }
     },
     "IspPlacement": {
       "type": "structure",
@@ -2240,11 +2508,15 @@
       "members": {
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>A token returned from a previous call to <code>ListConfigurationSets</code> to indicate the position in the list of configuration sets.</p>"
+          "documentation": "<p>A token returned from a previous call to <code>ListConfigurationSets</code> to indicate the position in the list of configuration sets.</p>",
+          "location": "querystring",
+          "locationName": "NextToken"
         },
         "PageSize": {
           "shape": "MaxItems",
-          "documentation": "<p>The number of results to show in a single call to <code>ListConfigurationSets</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p>"
+          "documentation": "<p>The number of results to show in a single call to <code>ListConfigurationSets</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p>",
+          "location": "querystring",
+          "locationName": "PageSize"
         }
       },
       "documentation": "<p>A request to obtain a list of configuration sets for your Amazon Pinpoint account in the current AWS Region.</p>"
@@ -2268,11 +2540,15 @@
       "members": {
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>A token returned from a previous call to <code>ListDedicatedIpPools</code> to indicate the position in the list of dedicated IP pools.</p>"
+          "documentation": "<p>A token returned from a previous call to <code>ListDedicatedIpPools</code> to indicate the position in the list of dedicated IP pools.</p>",
+          "location": "querystring",
+          "locationName": "NextToken"
         },
         "PageSize": {
           "shape": "MaxItems",
-          "documentation": "<p>The number of results to show in a single call to <code>ListDedicatedIpPools</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p>"
+          "documentation": "<p>The number of results to show in a single call to <code>ListDedicatedIpPools</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p>",
+          "location": "querystring",
+          "locationName": "PageSize"
         }
       },
       "documentation": "<p>A request to obtain a list of dedicated IP pools.</p>"
@@ -2296,11 +2572,15 @@
       "members": {
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>A token returned from a previous call to <code>ListDeliverabilityTestReports</code> to indicate the position in the list of predictive inbox placement tests.</p>"
+          "documentation": "<p>A token returned from a previous call to <code>ListDeliverabilityTestReports</code> to indicate the position in the list of predictive inbox placement tests.</p>",
+          "location": "querystring",
+          "locationName": "NextToken"
         },
         "PageSize": {
           "shape": "MaxItems",
-          "documentation": "<p>The number of results to show in a single call to <code>ListDeliverabilityTestReports</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 0, and can be no more than 1000.</p>"
+          "documentation": "<p>The number of results to show in a single call to <code>ListDeliverabilityTestReports</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 0, and can be no more than 1000.</p>",
+          "location": "querystring",
+          "locationName": "PageSize"
         }
       },
       "documentation": "<p>A request to list all of the predictive inbox placement tests that you've performed.</p>"
@@ -2322,16 +2602,78 @@
       },
       "documentation": "<p>A list of the predictive inbox placement test reports that are available for your account, regardless of whether or not those tests are complete.</p>"
     },
+    "ListDomainDeliverabilityCampaignsRequest": {
+      "type": "structure",
+      "required": [
+        "StartDate",
+        "EndDate",
+        "SubscribedDomain"
+      ],
+      "members": {
+        "StartDate": {
+          "shape": "Timestamp",
+          "documentation": "<p>The first day, in Unix time format, that you want to obtain deliverability data for.</p>",
+          "location": "querystring",
+          "locationName": "StartDate"
+        },
+        "EndDate": {
+          "shape": "Timestamp",
+          "documentation": "<p>The last day, in Unix time format, that you want to obtain deliverability data for. This value has to be less than or equal to 30 days after the value of the <code>StartDate</code> parameter.</p>",
+          "location": "querystring",
+          "locationName": "EndDate"
+        },
+        "SubscribedDomain": {
+          "shape": "Domain",
+          "documentation": "<p>The domain to obtain deliverability data for.</p>",
+          "location": "uri",
+          "locationName": "SubscribedDomain"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token that’s returned from a previous call to the <code>ListDomainDeliverabilityCampaigns</code> operation. This token indicates the position of a campaign in the list of campaigns.</p>",
+          "location": "querystring",
+          "locationName": "NextToken"
+        },
+        "PageSize": {
+          "shape": "MaxItems",
+          "documentation": "<p>The maximum number of results to include in response to a single call to the <code>ListDomainDeliverabilityCampaigns</code> operation. If the number of results is larger than the number that you specify in this parameter, the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p>",
+          "location": "querystring",
+          "locationName": "PageSize"
+        }
+      },
+      "documentation": "<p>Retrieve deliverability data for all the campaigns that used a specific domain to send email during a specified time range. This data is available for a domain only if you enabled the Deliverability dashboard (<code>PutDeliverabilityDashboardOption</code> operation) for the domain.</p>"
+    },
+    "ListDomainDeliverabilityCampaignsResponse": {
+      "type": "structure",
+      "required": [
+        "DomainDeliverabilityCampaigns"
+      ],
+      "members": {
+        "DomainDeliverabilityCampaigns": {
+          "shape": "DomainDeliverabilityCampaignList",
+          "documentation": "<p>An array of responses, one for each campaign that used the domain to send email during the specified time range.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token that’s returned from a previous call to the <code>ListDomainDeliverabilityCampaigns</code> operation. This token indicates the position of the campaign in the list of campaigns.</p>"
+        }
+      },
+      "documentation": "<p>An array of objects that provide deliverability data for all the campaigns that used a specific domain to send email during a specified time range. This data is available for a domain only if you enabled the Deliverability dashboard (<code>PutDeliverabilityDashboardOption</code> operation) for the domain.</p>"
+    },
     "ListEmailIdentitiesRequest": {
       "type": "structure",
       "members": {
         "NextToken": {
           "shape": "NextToken",
-          "documentation": "<p>A token returned from a previous call to <code>ListEmailIdentities</code> to indicate the position in the list of identities.</p>"
+          "documentation": "<p>A token returned from a previous call to <code>ListEmailIdentities</code> to indicate the position in the list of identities.</p>",
+          "location": "querystring",
+          "locationName": "NextToken"
         },
         "PageSize": {
           "shape": "MaxItems",
-          "documentation": "<p>The number of results to show in a single call to <code>ListEmailIdentities</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 0, and can be no more than 1000.</p>"
+          "documentation": "<p>The number of results to show in a single call to <code>ListEmailIdentities</code>. If the number of results is larger than the number you specified in this parameter, then the response includes a <code>NextToken</code> element, which you can use to obtain additional results.</p> <p>The value you specify has to be at least 0, and can be no more than 1000.</p>",
+          "location": "querystring",
+          "locationName": "PageSize"
         }
       },
       "documentation": "<p>A request to list all of the email identities associated with your Amazon Pinpoint account. This list includes identities that you've already verified, identities that are unverified, and identities that were verified in the past, but are no longer verified.</p>"
@@ -2365,7 +2707,9 @@
       "members": {
         "ResourceArn": {
           "shape": "AmazonResourceName",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to retrieve tag information for.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to retrieve tag information for.</p>",
+          "location": "querystring",
+          "locationName": "ResourceArn"
         }
       }
     },
@@ -2740,10 +3084,14 @@
       "members": {
         "DashboardEnabled": {
           "shape": "Enabled",
-          "documentation": "<p>Indicates whether the Deliverability dashboard is enabled. If the value is <code>true</code>, then the dashboard is enabled.</p>"
+          "documentation": "<p>Specifies whether to enable the Deliverability dashboard for your Amazon Pinpoint account. To enable the dashboard, set this value to <code>true</code>.</p>"
+        },
+        "SubscribedDomains": {
+          "shape": "DomainDeliverabilityTrackingOptions",
+          "documentation": "<p>An array of objects, one for each verified domain that you use to send email and enabled the Deliverability dashboard for.</p>"
         }
       },
-      "documentation": "<p>A request to enable or disable the Deliverability dashboard. When you enable the Deliverability dashboard, you gain access to reputation metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly charge of USD$1,250.00, in addition to any other fees that you accrue by using Amazon Pinpoint. If you enable the Deliverability dashboard after the first day of a calendar month, we prorate the monthly charge based on how many days have elapsed in the current calendar month.</p>"
+      "documentation": "<p>Enable or disable the Deliverability dashboard for your Amazon Pinpoint account. When you enable the Deliverability dashboard, you gain access to reputation, deliverability, and other metrics for the domains that you use to send email using Amazon Pinpoint. You also gain the ability to perform predictive inbox placement tests.</p> <p>When you use the Deliverability dashboard, you pay a monthly subscription charge, in addition to any other fees that you accrue by using Amazon Pinpoint. For more information about the features and cost of a Deliverability dashboard subscription, see <a href=\"http://aws.amazon.com/pinpoint/pricing/\">Amazon Pinpoint Pricing</a>.</p>"
     },
     "PutDeliverabilityDashboardOptionResponse": {
       "type": "structure",
@@ -2965,6 +3313,9 @@
       },
       "documentation": "<p>An object that defines an Amazon SNS destination for email events. You can use Amazon SNS to send notification when certain email events occur.</p>"
     },
+    "Subject": {
+      "type": "string"
+    },
     "Tag": {
       "type": "structure",
       "required": [
@@ -2981,7 +3332,7 @@
           "documentation": "<p>The optional part of a key-value pair that defines a tag. The maximum length of a tag value is 256 characters. The minimum length is 0 characters. If you don’t want a resource to have a specific tag value, don’t specify a value for this parameter. Amazon Pinpoint will set the value to an empty string.</p>"
         }
       },
-      "documentation": "<p>An object that defines the tags that are associated with a resource. A <i>tag</i> is a label that you optionally define and associate with a resource in Amazon Pinpoint. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria. A resource can have as many as 50 tags.</p> <p>Each tag consists of a required <i>tag key</i> and an associated <i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for a more specific tag value. A tag value acts as a descriptor within a tag key. For example, if you have two versions of an Amazon Pinpoint project, one for internal testing and another for external use, you might assign a <code>Stack</code> tag key to both projects. The value of the <code>Stack</code> tag key might be <code>Test</code> for one project and <code>Production</code> for the other project.</p> <p>A tag key can contain as many as 128 characters. A tag value can contain as many as 256 characters. The characters can be Unicode letters, digits, white space, or one of the following symbols: _ . : / = + -. The following additional restrictions apply to tags:</p> <ul> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>For each associated resource, each tag key must be unique and it can have only one value.</p> </li> <li> <p>The <code>aws:</code> prefix is reserved for use by AWS; you can’t use it in any tag keys or values that you define. In addition, you can't edit or remove tag keys or values that use this prefix. Tags that use this prefix don’t count against the limit of 50 tags per resource.</p> </li> <li> <p>You can associate tags with public or shared resources, but the tags are available only for your AWS account, not any other accounts that share the resource. In addition, the tags are available only for resources that are located in the specified AWS Region for your AWS account.</p> </li> </ul>"
+      "documentation": "<p>An object that defines the tags that are associated with a resource. A <i>tag</i> is a label that you optionally define and associate with a resource in Amazon Pinpoint. Tags can help you categorize and manage resources in different ways, such as by purpose, owner, environment, or other criteria. A resource can have as many as 50 tags.</p> <p>Each tag consists of a required <i>tag key</i> and an associated <i>tag value</i>, both of which you define. A tag key is a general label that acts as a category for a more specific tag value. A tag value acts as a descriptor within a tag key. A tag key can contain as many as 128 characters. A tag value can contain as many as 256 characters. The characters can be Unicode letters, digits, white space, or one of the following symbols: _ . : / = + -. The following additional restrictions apply to tags:</p> <ul> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>For each associated resource, each tag key must be unique and it can have only one value.</p> </li> <li> <p>The <code>aws:</code> prefix is reserved for use by AWS; you can’t use it in any tag keys or values that you define. In addition, you can't edit or remove tag keys or values that use this prefix. Tags that use this prefix don’t count against the limit of 50 tags per resource.</p> </li> <li> <p>You can associate tags with public or shared resources, but the tags are available only for your AWS account, not any other accounts that share the resource. In addition, the tags are available only for resources that are located in the specified AWS Region for your AWS account.</p> </li> </ul>"
     },
     "TagKey": {
       "type": "string"
@@ -3130,5 +3481,5 @@
       ]
     }
   },
-  "documentation": "<fullname>Amazon Pinpoint Email Service</fullname> <p> This document contains reference information for the <a href=\"https://aws.amazon.com/pinpoint\">Amazon Pinpoint</a> Email API, version 1.0. This document is best used in conjunction with the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html\">Amazon Pinpoint Developer Guide</a>.</p> <p>The Amazon Pinpoint Email API is available in the US East (N. Virginia), US West (Oregon), EU (Frankfurt), and EU (Ireland) Regions at the following endpoints:</p> <ul> <li> <p> <b>US East (N. Virginia)</b>: <code>email.us-east-1.amazonaws.com</code> </p> </li> <li> <p> <b>US West (Oregon)</b>: <code>email.us-west-2.amazonaws.com</code> </p> </li> <li> <p> <b>EU (Frankfurt)</b>: <code>email.eu-central-1.amazonaws.com</code> </p> </li> <li> <p> <b>EU (Ireland)</b>: <code>email.eu-west-1.amazonaws.com</code> </p> </li> </ul>"
+  "documentation": "<fullname>Amazon Pinpoint Email Service</fullname> <p>This document contains reference information for the <a href=\"https://aws.amazon.com/pinpoint\">Amazon Pinpoint</a> Email API, version 1.0. This document is best used in conjunction with the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html\">Amazon Pinpoint Developer Guide</a>.</p> <p>The Amazon Pinpoint Email API is available in several AWS Regions and it provides an endpoint for each of these Regions. For a list of all the Regions and endpoints where the API is currently available, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#pinpoint_region\">AWS Regions and Endpoints</a> in the <i>Amazon Web Services General Reference</i>.</p> <p>In each Region, AWS maintains multiple Availability Zones. These Availability Zones are physically isolated from each other, but are united by private, low-latency, high-throughput, and highly redundant network connections. These Availability Zones enable us to provide very high levels of availability and redundancy, while also minimizing latency. To learn more about the number of Availability Zones that are available in each Region, see <a href=\"http://aws.amazon.com/about-aws/global-infrastructure/\">AWS Global Infrastructure</a>.</p>"
 }
