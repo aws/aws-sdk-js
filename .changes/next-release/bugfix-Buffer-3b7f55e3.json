@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Buffer",
+  "description": "remove deprecated new Buffer() constructor in NodeJS"
+}
