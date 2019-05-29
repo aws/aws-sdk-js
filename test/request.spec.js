@@ -1018,10 +1018,10 @@ describe('AWS.Request', function() {
               AWS.util.arrayEach(['FOO', 'BAR', 'BAZ'], function(str) {
                 if (AWS.HttpClient.streamsApiVersion < 2) {
                   return process.nextTick(function() {
-                    return req.emit('data', new Buffer(str));
+                    return req.emit('data', Buffer.from(str));
                   });
                 } else {
-                  req.push(new Buffer(str));
+                  req.push(Buffer.from(str));
                   return process.nextTick(function() {
                     return req.emit('readable');
                   });
@@ -1083,13 +1083,13 @@ describe('AWS.Request', function() {
                   return AWS.util.abort;
                 } else {
                   if (AWS.HttpClient.streamsApiVersion === 2) {
-                    req.push(new Buffer(str));
+                    req.push(Buffer.from(str));
                     return process.nextTick(function() {
                       return req.emit('readable');
                     });
                   } else {
                     return process.nextTick(function() {
-                      return req.emit('data', new Buffer(str));
+                      return req.emit('data', Buffer.from(str));
                     });
                   }
                 }
@@ -1154,7 +1154,7 @@ describe('AWS.Request', function() {
           resp.writeHead(200, {
             'content-length': 512 * 1024
           });
-          resp.write(new Buffer(512 * 1024));
+          resp.write(Buffer.alloc(512 * 1024));
           resp.end();
         };
         service.config.httpOptions.timeout = 5;

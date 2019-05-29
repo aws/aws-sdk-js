@@ -718,13 +718,13 @@
         delete service.config.signatureVersion;
         req = service.makeRequest('updateFunctionCode', {
           FunctionName: 'fake',
-          ZipFile: new Buffer('fake')
+          ZipFile: AWS.util.buffer.toBuffer('fake')
         });
         expect(getVersion(service.getSignerClass(req))).to.equal('v2');
         service.api.operations.updateFunctionCode.authtype = 'v4';
         req = service.makeRequest('updateFunctionCode', {
           FunctionName: 'fake',
-          ZipFile: new Buffer('fake')
+          ZipFile: AWS.util.buffer.toBuffer('fake')
         });
         expect(getVersion(service.getSignerClass(req))).to.equal('v4');
         return done();
@@ -738,7 +738,7 @@
         service.api.operations.updateFunctionCode.authtype = 'v4';
         req = service.makeRequest('updateFunctionCode', {
           FunctionName: 'fake',
-          ZipFile: new Buffer('fake')
+          ZipFile: AWS.util.buffer.toBuffer('fake')
         });
         expect(getVersion(service.getSignerClass())).to.equal('v2');
         expect(getVersion(service.getSignerClass(req))).to.equal('v2');
@@ -752,7 +752,7 @@
         service.api.operations.updateFunctionCode.authtype = 'v4-unsigned-body';
         req = service.makeRequest('updateFunctionCode', {
           FunctionName: 'fake',
-          ZipFile: new Buffer('fake')
+          ZipFile: AWS.util.buffer.toBuffer('fake')
         });
         expect(getVersion(service.getSignerClass())).to.equal('v2');
         expect(getVersion(service.getSignerClass(req))).to.equal('v4');

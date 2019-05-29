@@ -29,7 +29,7 @@ describe('DynamoDb document client typeOf (internal)', function() {
     });
 
     it('should return "Binary" for buffers', function() {
-        expect(typeOf(new Buffer('foo'))).to.equal('Binary');
+        expect(typeOf(AWS.util.buffer.toBuffer('foo'))).to.equal('Binary');
     });
 
     it('should return "Binary" for TypedArray objects', function() {

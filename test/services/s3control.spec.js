@@ -91,7 +91,7 @@ describe('AWS.S3Control', function() {
 
   it('validate accountId type', function() {
     var client = new AWS.S3Control();
-    var possibleValues = [123, null, undefined, NaN, {}, ['a'], new AWS.util.Buffer('111')];
+    var possibleValues = [123, null, undefined, NaN, {}, ['a'], AWS.util.buffer.toBuffer('111')];
     for (var i = 0; i < possibleValues.length; i++) {
       var accountId = possibleValues[i];
       var request = client.getPublicAccessBlock({AccountId: accountId}).build();
