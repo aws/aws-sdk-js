@@ -1,5 +1,6 @@
+helpers = require('../helpers');
+var toBuffer = helpers.AWS.util.buffer.toBuffer;
 var Int64 = require('../../lib/event-stream/int64').Int64;
-var toBuffer = require('../../lib/event-stream/to-buffer').toBuffer;
 
 module.exports = {
     vectors: {

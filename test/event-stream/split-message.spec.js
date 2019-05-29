@@ -1,7 +1,6 @@
 var util = require('../../lib/util');
 var splitMessage = require('../../lib/event-stream/split-message').splitMessage;
-var allocBuffer = require('../../lib/event-stream/alloc-buffer').allocBuffer;
-var Buffer = util.Buffer;
+var allocBuffer = util.buffer.alloc;
 
 
 describe('splitMessage', function() {

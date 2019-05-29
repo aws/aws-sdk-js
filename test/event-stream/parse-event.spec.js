@@ -1,10 +1,11 @@
-var createSpy = require('../helpers').createSpy;
+var helpers = require('../helpers');
+var createSpy = helpers.createSpy;
 var parseEvent = require('../../lib/event-stream/parse-event').parseEvent;
 var testEventMessages = require('./test-event-messages.fixture');
 var mockEventStreamShape = require('./test-event-stream-model.fixture').mockEventStreamShape;
 var parseMessage = require('../../lib/event-stream/parse-message').parseMessage;
 var buildMessage = require('../../lib/event-stream/build-message').buildMessage;
-var toBuffer = require('../../lib/event-stream/to-buffer').toBuffer;
+var toBuffer = helpers.AWS.util.buffer.toBuffer;
 var Int64 = require('../../lib/event-stream/int64').Int64;
 
 describe('parseEvent', function() {
