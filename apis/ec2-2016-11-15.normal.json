@@ -348,7 +348,7 @@
       "input": {
         "shape": "AuthorizeSecurityGroupEgressRequest"
       },
-      "documentation": "<p>[VPC only] Adds the specified egress rules to a security group for use with a VPC.</p> <p>An outbound rule permits instances to send traffic to the specified destination IPv4 or IPv6 CIDR address ranges, or to the specified destination security groups for the same VPC.</p> <p>You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes.</p> <p>Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.</p> <p>For more information about VPC security group limits, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html\">Amazon VPC Limits</a>.</p>"
+      "documentation": "<p>[VPC only] Adds the specified egress rules to a security group for use with a VPC.</p> <p>An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances associated with the specified destination security groups.</p> <p>You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes.</p> <p>Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur.</p> <p>For more information about VPC security group limits, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html\">Amazon VPC Limits</a>.</p>"
     },
     "AuthorizeSecurityGroupIngress": {
       "name": "AuthorizeSecurityGroupIngress",
@@ -359,7 +359,7 @@
       "input": {
         "shape": "AuthorizeSecurityGroupIngressRequest"
       },
-      "documentation": "<p>Adds the specified ingress rules to a security group.</p> <p>An inbound rule permits instances to receive traffic from the specified destination IPv4 or IPv6 CIDR address ranges, or from the specified destination security groups.</p> <p>You specify a protocol for each rule (for example, TCP). For TCP and UDP, you must also specify the destination port or port range. For ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. You can use -1 to mean all types or all codes.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p> <p>For more information about VPC security group limits, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html\">Amazon VPC Limits</a>.</p>"
+      "documentation": "<p>Adds the specified ingress rules to a security group.</p> <p>An inbound rule permits instances to receive traffic from the specified IPv4 or IPv6 CIDR address ranges, or from the instances associated with the specified destination security groups.</p> <p>You specify a protocol for each rule (for example, TCP). For TCP and UDP, you must also specify the destination port or port range. For ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. You can use -1 to mean all types or all codes.</p> <p>Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur.</p> <p>For more information about VPC security group limits, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html\">Amazon VPC Limits</a>.</p>"
     },
     "BundleInstance": {
       "name": "BundleInstance",
@@ -922,6 +922,20 @@
         "shape": "Snapshot"
       },
       "documentation": "<p>Creates a snapshot of an EBS volume and stores it in Amazon S3. You can use snapshots for backups, to make copies of EBS volumes, and to save data before shutting down an instance.</p> <p>When a snapshot is created, any AWS Marketplace product codes that are associated with the source volume are propagated to the snapshot.</p> <p>You can take a snapshot of an attached volume that is in use. However, snapshots only capture data that has been written to your EBS volume at the time the snapshot command is issued; this may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the volume long enough to take a snapshot, your snapshot should be complete. However, if you cannot pause all file writes to the volume, you should unmount the volume from within the instance, issue the snapshot command, and then remount the volume to ensure a consistent and complete snapshot. You may remount and use your volume while the snapshot status is <code>pending</code>.</p> <p>To create a snapshot for EBS volumes that serve as root devices, you should stop the instance before taking the snapshot.</p> <p>Snapshots that are taken from encrypted volumes are automatically encrypted. Volumes that are created from encrypted snapshots are also automatically encrypted. Your encrypted volumes and any associated snapshots always remain protected.</p> <p>You can tag your snapshots during creation. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging Your Amazon EC2 Resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html\">Amazon Elastic Block Store</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
+    "CreateSnapshots": {
+      "name": "CreateSnapshots",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateSnapshotsRequest"
+      },
+      "output": {
+        "shape": "CreateSnapshotsResult"
+      },
+      "documentation": "<p>Creates crash-consistent snapshots of multiple EBS volumes and stores the data in S3. Volumes are chosen by specifying an instance. Any attached volumes will produce one snapshot each that is crash-consistent across the instance. Boot volumes can be excluded by changing the paramaters. </p>"
     },
     "CreateSpotDatafeedSubscription": {
       "name": "CreateSpotDatafeedSubscription",
@@ -3200,7 +3214,7 @@
       "output": {
         "shape": "EnableEbsEncryptionByDefaultResult"
       },
-      "documentation": "<p>Enables default encryption for EBS volumes that are created in your account in the current region.</p> <p>Once encryption is enabled with this action, EBS volumes that are created in your account will always be encrypted even if encryption is not specified at launch. This setting overrides the <i>encrypted</i> setting to <i>true</i> in all API calls that create EBS volumes in your account. A volume will be encrypted even if you specify <i>encryption</i> to be <i>false</i> in the API call that creates the volume.</p> <p>If you do not specify a customer master key (CMK) in the API call that creates the EBS volume, then the volume is encrypted to your AWS account's default CMK.</p> <p>You can specify a default CMK of your choice using <a>ModifyEbsDefaultKmsKeyId</a>.</p> <p>Enabling default encryption for EBS volumes has no effect on existing unencrypted volumes in your account. Encrypting the data in these requires manual action. You can either create an encrypted snapshot of an unencrypted volume, or encrypt a copy of an unencrypted snapshot. Any volume restored from an encrypted snapshot is also encrypted. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html\">Amazon EBS Snapshots</a>.</p> <p>Once EBS encryption by default is enabled, you can no longer launch older-generation instance types that do not support encryption. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances\">Supported Instance Types</a>.</p>"
+      "documentation": "<p>Enables default encryption for EBS volumes that are created in your account in the current region.</p> <p>Once encryption is enabled with this action, EBS volumes that are created in your account will always be encrypted even if encryption is not specified at launch. This setting overrides the <i>encrypted</i> setting to <i>true</i> in all API calls that create EBS volumes in your account. A volume will be encrypted even if you specify <i>encryption</i> to be <i>false</i> in the API call that creates the volume.</p> <p>If you do not specify a customer master key (CMK) in the API call that creates the EBS volume, then the volume is encrypted to your AWS account's default CMK.</p> <p>You can specify a default CMK of your choice using <a>ModifyEbsDefaultKmsKeyId</a>.</p> <p>Enabling default encryption for EBS volumes has no effect on existing unencrypted volumes in your account. Encrypting the data in these requires manual action. You can either create an encrypted snapshot of an unencrypted volume, or encrypt a copy of an unencrypted snapshot. Any volume restored from an encrypted snapshot is also encrypted. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSSnapshots.html\">Amazon EBS Snapshots</a>.</p> <p>After EBS encryption by default is enabled, you can no longer launch older-generation instance types that do not support encryption. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances\">Supported Instance Types</a>.</p>"
     },
     "EnableTransitGatewayRouteTablePropagation": {
       "name": "EnableTransitGatewayRouteTablePropagation",
@@ -3586,7 +3600,7 @@
       "output": {
         "shape": "ModifyEbsDefaultKmsKeyIdResult"
       },
-      "documentation": "<p>Changes the default customer master key (CMK) that your account uses to encrypt EBS volumes if you don’t specify a CMK in the API call.</p> <p>Your account has an AWS-managed default CMK that is used for encrypting an EBS volume when no CMK is specified in the API call that creates the volume. By calling this API, you can specify a customer-managed CMK to use in place of the AWS-managed default CMK.</p> <p>Note: Deleting or disabling the custom CMK that you have specified to act as your default CMK will result in instance-launch failures.</p>"
+      "documentation": "<p>Changes the default customer master key (CMK) that your account uses to encrypt EBS volumes if you don't specify a CMK in the API call.</p> <p>Your account has an AWS-managed default CMK that is used for encrypting an EBS volume when no CMK is specified in the API call that creates the volume. By calling this API, you can specify a customer-managed CMK to use in place of the AWS-managed default CMK.</p> <p>Note: Deleting or disabling the custom CMK that you have specified to act as your default CMK will result in instance-launch failures.</p>"
     },
     "ModifyFleet": {
       "name": "ModifyFleet",
@@ -7543,7 +7557,7 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a <code>KmsKeyId</code> is specified, the <code>Encrypted</code> flag must also be set. </p> <p>The CMK identifier may be provided in any of the following formats: </p> <ul> <li> <p>Key ID</p> </li> <li> <p>ARN using key ID. The ID ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the <code>key</code> namespace, and then the CMK ID. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>. </p> </li> <li> <p>ARN using key alias. The alias ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the <code>alias</code> namespace, and then the CMK alias. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>. </p> </li> </ul> <p>AWS parses <code>KmsKeyId</code> asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure. </p> <p>The specified CMK must exist in the Region that the snapshot is being copied to. </p>",
+          "documentation": "<p>An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a <code>KmsKeyId</code> is specified, the <code>Encrypted</code> flag must also be set. </p> <p>To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with \"alias/\". For example:</p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li> <p>Alias ARN: <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code> </p> </li> </ul> <p>AWS parses <code>KmsKeyId</code> asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure. </p> <p>The specified CMK must exist in the Region that the snapshot is being copied to. </p>",
           "locationName": "kmsKeyId"
         },
         "Name": {
@@ -7634,6 +7648,12 @@
         }
       },
       "documentation": "<p>Contains the output of CopySnapshot.</p>"
+    },
+    "CopyTagsFromSource": {
+      "type": "string",
+      "enum": [
+        "volume"
+      ]
     },
     "CpuOptions": {
       "type": "structure",
@@ -8950,6 +8970,45 @@
       },
       "documentation": "<p>Contains the parameters for CreateSnapshot.</p>"
     },
+    "CreateSnapshotsRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceSpecification"
+      ],
+      "members": {
+        "Description": {
+          "shape": "String",
+          "documentation": "<p> A description propagated to every snapshot specified by the instance.</p>"
+        },
+        "InstanceSpecification": {
+          "shape": "InstanceSpecification",
+          "documentation": "<p>The instance to specify which volumes should be included in the snapshots.</p>"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>Tags to apply to every snapshot specified by the instance.</p>",
+          "locationName": "TagSpecification"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action without actually making the request. Provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.</p>"
+        },
+        "CopyTagsFromSource": {
+          "shape": "CopyTagsFromSource",
+          "documentation": "<p>Copies the tags from the specified instance to all snapshots.</p>"
+        }
+      }
+    },
+    "CreateSnapshotsResult": {
+      "type": "structure",
+      "members": {
+        "Snapshots": {
+          "shape": "SnapshotSet",
+          "documentation": "<p>List of snapshots.</p>",
+          "locationName": "snapshotSet"
+        }
+      }
+    },
     "CreateSpotDatafeedSubscriptionRequest": {
       "type": "structure",
       "required": [
@@ -9261,7 +9320,7 @@
         },
         "Encrypted": {
           "shape": "Boolean",
-          "documentation": "<p>Specifies the encryption state of the volume. The default effect of setting the <code>Encrypted</code> parameter to <code>true</code> through the console, API, or CLI depends on the volume's origin (new or from a snapshot), starting encryption state, ownership, and whether <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/account-level-encryption.html\">account-level encryption</a> is enabled. Each default case can be overridden by specifying a customer master key (CMK) with the <code>KmsKeyId</code> parameter in addition to setting <code>Encrypted</code> to <code>true</code>. For a complete list of possible encryption cases, see <a href=\"AWSEC2/latest/UserGuide/EBSEncryption.htm\">Amazon EBS Encryption</a>. </p> <p>Encrypted Amazon EBS volumes may only be attached to instances that support Amazon EBS encryption. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances\">Supported Instance Types</a>.</p>",
+          "documentation": "<p>Specifies the encryption state of the volume. The default effect of setting the <code>Encrypted</code> parameter to <code>true</code> depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/account-level-encryption.html\">account-level encryption</a> is enabled. Each default case can be overridden by specifying a customer master key (CMK) using the <code>KmsKeyId</code> parameter, in addition to setting <code>Encrypted</code> to <code>true</code>. For a complete list of possible encryption cases, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a>.</p> <p>Encrypted Amazon EBS volumes may only be attached to instances that support Amazon EBS encryption. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances\">Supported Instance Types</a>.</p>",
           "locationName": "encrypted"
         },
         "Iops": {
@@ -9990,7 +10049,7 @@
         },
         "FlowLogIds": {
           "shape": "ValueStringList",
-          "documentation": "<p>One or more flow log IDs.</p>",
+          "documentation": "<p>One or more flow log IDs.</p> <p>Constraint: Maximum of 1000 flow log IDs.</p>",
           "locationName": "FlowLogId"
         }
       }
@@ -11780,7 +11839,7 @@
         },
         "FlowLogIds": {
           "shape": "ValueStringList",
-          "documentation": "<p>One or more flow log IDs.</p>",
+          "documentation": "<p>One or more flow log IDs.</p> <p>Constraint: Maximum of 1000 flow log IDs.</p>",
           "locationName": "FlowLogId"
         },
         "MaxResults": {
@@ -19586,7 +19645,7 @@
         },
         "InterfaceType": {
           "shape": "String",
-          "documentation": "<p>The type of network interface. To create an Elastic Fabric Adapter (EFA), specify <code>efa</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html\">Elastic Fabric Adapter</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>If you are not creating an EFA, specify <code>interface</code> or omit this parameter.</p> <p>Valide values: <code>interface</code> | <code>efa</code> </p>"
+          "documentation": "<p>The type of network interface. To create an Elastic Fabric Adapter (EFA), specify <code>efa</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html\">Elastic Fabric Adapter</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>If you are not creating an EFA, specify <code>interface</code> or omit this parameter.</p> <p>Valid values: <code>interface</code> | <code>efa</code> </p>"
         }
       },
       "documentation": "<p>Describes a network interface.</p>"
@@ -19630,6 +19689,20 @@
         "shape": "InstancePrivateIpAddress",
         "locationName": "item"
       }
+    },
+    "InstanceSpecification": {
+      "type": "structure",
+      "members": {
+        "InstanceId": {
+          "shape": "String",
+          "documentation": "<p>The instance to specify which volumes should be snapshotted.</p>"
+        },
+        "ExcludeBootVolume": {
+          "shape": "Boolean",
+          "documentation": "<p>Excludes the root volume from being snapshotted.</p>"
+        }
+      },
+      "documentation": "<p>The instance details to specify which volumes should be snapshotted.</p>"
     },
     "InstanceState": {
       "type": "structure",
@@ -20915,7 +20988,7 @@
         },
         "InterfaceType": {
           "shape": "String",
-          "documentation": "<p>The type of networking interface.</p>"
+          "documentation": "<p>The type of network interface. To create an Elastic Fabric Adapter (EFA), specify <code>efa</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/efa.html\">Elastic Fabric Adapter</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>If you are not creating an EFA, specify <code>interface</code> or omit this parameter.</p> <p>Valid values: <code>interface</code> | <code>efa</code> </p>"
         },
         "Ipv6AddressCount": {
           "shape": "Integer",
@@ -24439,7 +24512,7 @@
       "members": {
         "ImageLocation": {
           "shape": "String",
-          "documentation": "<p>The full path to your AMI manifest in Amazon S3 storage.</p>"
+          "documentation": "<p>The full path to your AMI manifest in Amazon S3 storage. The specified bucket must have the <code>aws-exec-read</code> canned access control list (ACL) to ensure that it can be accessed by Amazon EC2. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl\">Canned ACLs</a> in the <i>Amazon S3 Service Developer Guide</i>.</p>"
         },
         "Architecture": {
           "shape": "ArchitectureValues",
@@ -27831,10 +27904,73 @@
         "locationName": "SnapshotId"
       }
     },
+    "SnapshotInfo": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>Description specified by the CreateSnapshotRequest that has been applied to all snapshots.</p>",
+          "locationName": "description"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Tags associated with this snapshot.</p>",
+          "locationName": "tagSet"
+        },
+        "Encrypted": {
+          "shape": "Boolean",
+          "documentation": "<p>Boolean that specifies whether or not this snapshot is encrypted.</p>",
+          "locationName": "encrypted"
+        },
+        "VolumeId": {
+          "shape": "String",
+          "documentation": "<p>Source volume from which this snapshot was created.</p>",
+          "locationName": "volumeId"
+        },
+        "State": {
+          "shape": "SnapshotState",
+          "documentation": "<p>Current state of the snapshot.</p>",
+          "locationName": "state"
+        },
+        "VolumeSize": {
+          "shape": "Integer",
+          "documentation": "<p>Size of the volume from which this snapshot was created.</p>",
+          "locationName": "volumeSize"
+        },
+        "StartTime": {
+          "shape": "MillisecondDateTime",
+          "documentation": "<p>Time this snapshot was started. This is the same for all snapshots initiated by the same request.</p>",
+          "locationName": "startTime"
+        },
+        "Progress": {
+          "shape": "String",
+          "documentation": "<p>Progress this snapshot has made towards completing.</p>",
+          "locationName": "progress"
+        },
+        "OwnerId": {
+          "shape": "String",
+          "documentation": "<p>Account id used when creating this snapshot.</p>",
+          "locationName": "ownerId"
+        },
+        "SnapshotId": {
+          "shape": "String",
+          "documentation": "<p>Snapshot id that can be used to describe this snapshot.</p>",
+          "locationName": "snapshotId"
+        }
+      },
+      "documentation": "<p>Object that contains information about a snapshot.</p>"
+    },
     "SnapshotList": {
       "type": "list",
       "member": {
         "shape": "Snapshot",
+        "locationName": "item"
+      }
+    },
+    "SnapshotSet": {
+      "type": "list",
+      "member": {
+        "shape": "SnapshotInfo",
         "locationName": "item"
       }
     },

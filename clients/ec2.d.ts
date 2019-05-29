@@ -205,19 +205,19 @@ declare class EC2 extends Service {
    */
   authorizeClientVpnIngress(callback?: (err: AWSError, data: EC2.Types.AuthorizeClientVpnIngressResult) => void): Request<EC2.Types.AuthorizeClientVpnIngressResult, AWSError>;
   /**
-   * [VPC only] Adds the specified egress rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified destination IPv4 or IPv6 CIDR address ranges, or to the specified destination security groups for the same VPC. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For more information about VPC security group limits, see Amazon VPC Limits.
+   * [VPC only] Adds the specified egress rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances associated with the specified destination security groups. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For more information about VPC security group limits, see Amazon VPC Limits.
    */
   authorizeSecurityGroupEgress(params: EC2.Types.AuthorizeSecurityGroupEgressRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * [VPC only] Adds the specified egress rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified destination IPv4 or IPv6 CIDR address ranges, or to the specified destination security groups for the same VPC. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For more information about VPC security group limits, see Amazon VPC Limits.
+   * [VPC only] Adds the specified egress rules to a security group for use with a VPC. An outbound rule permits instances to send traffic to the specified IPv4 or IPv6 CIDR address ranges, or to the instances associated with the specified destination security groups. You specify a protocol for each rule (for example, TCP). For the TCP and UDP protocols, you must also specify the destination port or port range. For the ICMP protocol, you must also specify the ICMP type and code. You can use -1 for the type or code to mean all types or all codes. Rule changes are propagated to affected instances as quickly as possible. However, a small delay might occur. For more information about VPC security group limits, see Amazon VPC Limits.
    */
   authorizeSecurityGroupEgress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds the specified ingress rules to a security group. An inbound rule permits instances to receive traffic from the specified destination IPv4 or IPv6 CIDR address ranges, or from the specified destination security groups. You specify a protocol for each rule (for example, TCP). For TCP and UDP, you must also specify the destination port or port range. For ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. You can use -1 to mean all types or all codes. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. For more information about VPC security group limits, see Amazon VPC Limits.
+   * Adds the specified ingress rules to a security group. An inbound rule permits instances to receive traffic from the specified IPv4 or IPv6 CIDR address ranges, or from the instances associated with the specified destination security groups. You specify a protocol for each rule (for example, TCP). For TCP and UDP, you must also specify the destination port or port range. For ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. You can use -1 to mean all types or all codes. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. For more information about VPC security group limits, see Amazon VPC Limits.
    */
   authorizeSecurityGroupIngress(params: EC2.Types.AuthorizeSecurityGroupIngressRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds the specified ingress rules to a security group. An inbound rule permits instances to receive traffic from the specified destination IPv4 or IPv6 CIDR address ranges, or from the specified destination security groups. You specify a protocol for each rule (for example, TCP). For TCP and UDP, you must also specify the destination port or port range. For ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. You can use -1 to mean all types or all codes. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. For more information about VPC security group limits, see Amazon VPC Limits.
+   * Adds the specified ingress rules to a security group. An inbound rule permits instances to receive traffic from the specified IPv4 or IPv6 CIDR address ranges, or from the instances associated with the specified destination security groups. You specify a protocol for each rule (for example, TCP). For TCP and UDP, you must also specify the destination port or port range. For ICMP/ICMPv6, you must also specify the ICMP/ICMPv6 type and code. You can use -1 to mean all types or all codes. Rule changes are propagated to instances within the security group as quickly as possible. However, a small delay might occur. For more information about VPC security group limits, see Amazon VPC Limits.
    */
   authorizeSecurityGroupIngress(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -548,6 +548,14 @@ declare class EC2 extends Service {
    * Creates a snapshot of an EBS volume and stores it in Amazon S3. You can use snapshots for backups, to make copies of EBS volumes, and to save data before shutting down an instance. When a snapshot is created, any AWS Marketplace product codes that are associated with the source volume are propagated to the snapshot. You can take a snapshot of an attached volume that is in use. However, snapshots only capture data that has been written to your EBS volume at the time the snapshot command is issued; this may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the volume long enough to take a snapshot, your snapshot should be complete. However, if you cannot pause all file writes to the volume, you should unmount the volume from within the instance, issue the snapshot command, and then remount the volume to ensure a consistent and complete snapshot. You may remount and use your volume while the snapshot status is pending. To create a snapshot for EBS volumes that serve as root devices, you should stop the instance before taking the snapshot. Snapshots that are taken from encrypted volumes are automatically encrypted. Volumes that are created from encrypted snapshots are also automatically encrypted. Your encrypted volumes and any associated snapshots always remain protected. You can tag your snapshots during creation. For more information, see Tagging Your Amazon EC2 Resources in the Amazon Elastic Compute Cloud User Guide. For more information, see Amazon Elastic Block Store and Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
    */
   createSnapshot(callback?: (err: AWSError, data: EC2.Types.Snapshot) => void): Request<EC2.Types.Snapshot, AWSError>;
+  /**
+   * Creates crash-consistent snapshots of multiple EBS volumes and stores the data in S3. Volumes are chosen by specifying an instance. Any attached volumes will produce one snapshot each that is crash-consistent across the instance. Boot volumes can be excluded by changing the paramaters. 
+   */
+  createSnapshots(params: EC2.Types.CreateSnapshotsRequest, callback?: (err: AWSError, data: EC2.Types.CreateSnapshotsResult) => void): Request<EC2.Types.CreateSnapshotsResult, AWSError>;
+  /**
+   * Creates crash-consistent snapshots of multiple EBS volumes and stores the data in S3. Volumes are chosen by specifying an instance. Any attached volumes will produce one snapshot each that is crash-consistent across the instance. Boot volumes can be excluded by changing the paramaters. 
+   */
+  createSnapshots(callback?: (err: AWSError, data: EC2.Types.CreateSnapshotsResult) => void): Request<EC2.Types.CreateSnapshotsResult, AWSError>;
   /**
    * Creates a data feed for Spot Instances, enabling you to view Spot Instance usage logs. You can create one data feed per AWS account. For more information, see Spot Instance Data Feed in the Amazon EC2 User Guide for Linux Instances.
    */
@@ -1893,11 +1901,11 @@ declare class EC2 extends Service {
    */
   disassociateVpcCidrBlock(callback?: (err: AWSError, data: EC2.Types.DisassociateVpcCidrBlockResult) => void): Request<EC2.Types.DisassociateVpcCidrBlockResult, AWSError>;
   /**
-   * Enables default encryption for EBS volumes that are created in your account in the current region. Once encryption is enabled with this action, EBS volumes that are created in your account will always be encrypted even if encryption is not specified at launch. This setting overrides the encrypted setting to true in all API calls that create EBS volumes in your account. A volume will be encrypted even if you specify encryption to be false in the API call that creates the volume. If you do not specify a customer master key (CMK) in the API call that creates the EBS volume, then the volume is encrypted to your AWS account's default CMK. You can specify a default CMK of your choice using ModifyEbsDefaultKmsKeyId. Enabling default encryption for EBS volumes has no effect on existing unencrypted volumes in your account. Encrypting the data in these requires manual action. You can either create an encrypted snapshot of an unencrypted volume, or encrypt a copy of an unencrypted snapshot. Any volume restored from an encrypted snapshot is also encrypted. For more information, see Amazon EBS Snapshots. Once EBS encryption by default is enabled, you can no longer launch older-generation instance types that do not support encryption. For more information, see Supported Instance Types.
+   * Enables default encryption for EBS volumes that are created in your account in the current region. Once encryption is enabled with this action, EBS volumes that are created in your account will always be encrypted even if encryption is not specified at launch. This setting overrides the encrypted setting to true in all API calls that create EBS volumes in your account. A volume will be encrypted even if you specify encryption to be false in the API call that creates the volume. If you do not specify a customer master key (CMK) in the API call that creates the EBS volume, then the volume is encrypted to your AWS account's default CMK. You can specify a default CMK of your choice using ModifyEbsDefaultKmsKeyId. Enabling default encryption for EBS volumes has no effect on existing unencrypted volumes in your account. Encrypting the data in these requires manual action. You can either create an encrypted snapshot of an unencrypted volume, or encrypt a copy of an unencrypted snapshot. Any volume restored from an encrypted snapshot is also encrypted. For more information, see Amazon EBS Snapshots. After EBS encryption by default is enabled, you can no longer launch older-generation instance types that do not support encryption. For more information, see Supported Instance Types.
    */
   enableEbsEncryptionByDefault(params: EC2.Types.EnableEbsEncryptionByDefaultRequest, callback?: (err: AWSError, data: EC2.Types.EnableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.EnableEbsEncryptionByDefaultResult, AWSError>;
   /**
-   * Enables default encryption for EBS volumes that are created in your account in the current region. Once encryption is enabled with this action, EBS volumes that are created in your account will always be encrypted even if encryption is not specified at launch. This setting overrides the encrypted setting to true in all API calls that create EBS volumes in your account. A volume will be encrypted even if you specify encryption to be false in the API call that creates the volume. If you do not specify a customer master key (CMK) in the API call that creates the EBS volume, then the volume is encrypted to your AWS account's default CMK. You can specify a default CMK of your choice using ModifyEbsDefaultKmsKeyId. Enabling default encryption for EBS volumes has no effect on existing unencrypted volumes in your account. Encrypting the data in these requires manual action. You can either create an encrypted snapshot of an unencrypted volume, or encrypt a copy of an unencrypted snapshot. Any volume restored from an encrypted snapshot is also encrypted. For more information, see Amazon EBS Snapshots. Once EBS encryption by default is enabled, you can no longer launch older-generation instance types that do not support encryption. For more information, see Supported Instance Types.
+   * Enables default encryption for EBS volumes that are created in your account in the current region. Once encryption is enabled with this action, EBS volumes that are created in your account will always be encrypted even if encryption is not specified at launch. This setting overrides the encrypted setting to true in all API calls that create EBS volumes in your account. A volume will be encrypted even if you specify encryption to be false in the API call that creates the volume. If you do not specify a customer master key (CMK) in the API call that creates the EBS volume, then the volume is encrypted to your AWS account's default CMK. You can specify a default CMK of your choice using ModifyEbsDefaultKmsKeyId. Enabling default encryption for EBS volumes has no effect on existing unencrypted volumes in your account. Encrypting the data in these requires manual action. You can either create an encrypted snapshot of an unencrypted volume, or encrypt a copy of an unencrypted snapshot. Any volume restored from an encrypted snapshot is also encrypted. For more information, see Amazon EBS Snapshots. After EBS encryption by default is enabled, you can no longer launch older-generation instance types that do not support encryption. For more information, see Supported Instance Types.
    */
   enableEbsEncryptionByDefault(callback?: (err: AWSError, data: EC2.Types.EnableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.EnableEbsEncryptionByDefaultResult, AWSError>;
   /**
@@ -2117,11 +2125,11 @@ declare class EC2 extends Service {
    */
   modifyClientVpnEndpoint(callback?: (err: AWSError, data: EC2.Types.ModifyClientVpnEndpointResult) => void): Request<EC2.Types.ModifyClientVpnEndpointResult, AWSError>;
   /**
-   * Changes the default customer master key (CMK) that your account uses to encrypt EBS volumes if you don’t specify a CMK in the API call. Your account has an AWS-managed default CMK that is used for encrypting an EBS volume when no CMK is specified in the API call that creates the volume. By calling this API, you can specify a customer-managed CMK to use in place of the AWS-managed default CMK. Note: Deleting or disabling the custom CMK that you have specified to act as your default CMK will result in instance-launch failures.
+   * Changes the default customer master key (CMK) that your account uses to encrypt EBS volumes if you don't specify a CMK in the API call. Your account has an AWS-managed default CMK that is used for encrypting an EBS volume when no CMK is specified in the API call that creates the volume. By calling this API, you can specify a customer-managed CMK to use in place of the AWS-managed default CMK. Note: Deleting or disabling the custom CMK that you have specified to act as your default CMK will result in instance-launch failures.
    */
   modifyEbsDefaultKmsKeyId(params: EC2.Types.ModifyEbsDefaultKmsKeyIdRequest, callback?: (err: AWSError, data: EC2.Types.ModifyEbsDefaultKmsKeyIdResult) => void): Request<EC2.Types.ModifyEbsDefaultKmsKeyIdResult, AWSError>;
   /**
-   * Changes the default customer master key (CMK) that your account uses to encrypt EBS volumes if you don’t specify a CMK in the API call. Your account has an AWS-managed default CMK that is used for encrypting an EBS volume when no CMK is specified in the API call that creates the volume. By calling this API, you can specify a customer-managed CMK to use in place of the AWS-managed default CMK. Note: Deleting or disabling the custom CMK that you have specified to act as your default CMK will result in instance-launch failures.
+   * Changes the default customer master key (CMK) that your account uses to encrypt EBS volumes if you don't specify a CMK in the API call. Your account has an AWS-managed default CMK that is used for encrypting an EBS volume when no CMK is specified in the API call that creates the volume. By calling this API, you can specify a customer-managed CMK to use in place of the AWS-managed default CMK. Note: Deleting or disabling the custom CMK that you have specified to act as your default CMK will result in instance-launch failures.
    */
   modifyEbsDefaultKmsKeyId(callback?: (err: AWSError, data: EC2.Types.ModifyEbsDefaultKmsKeyIdResult) => void): Request<EC2.Types.ModifyEbsDefaultKmsKeyIdResult, AWSError>;
   /**
@@ -4673,7 +4681,7 @@ declare namespace EC2 {
      */
     Encrypted?: Boolean;
     /**
-     * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID   ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.    ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified CMK must exist in the Region that the snapshot is being copied to. 
+     * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. When using an alias name, prefix it with "alias/". For example:   Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab    Key ARN: arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab    Alias name: alias/ExampleAlias    Alias ARN: arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified CMK must exist in the Region that the snapshot is being copied to. 
      */
     KmsKeyId?: String;
     /**
@@ -4739,6 +4747,7 @@ declare namespace EC2 {
      */
     SnapshotId?: String;
   }
+  export type CopyTagsFromSource = "volume"|string;
   export interface CpuOptions {
     /**
      * The number of CPU cores for the instance.
@@ -5649,6 +5658,34 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
   }
+  export interface CreateSnapshotsRequest {
+    /**
+     *  A description propagated to every snapshot specified by the instance.
+     */
+    Description?: String;
+    /**
+     * The instance to specify which volumes should be included in the snapshots.
+     */
+    InstanceSpecification: InstanceSpecification;
+    /**
+     * Tags to apply to every snapshot specified by the instance.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action without actually making the request. Provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Copies the tags from the specified instance to all snapshots.
+     */
+    CopyTagsFromSource?: CopyTagsFromSource;
+  }
+  export interface CreateSnapshotsResult {
+    /**
+     * List of snapshots.
+     */
+    Snapshots?: SnapshotSet;
+  }
   export interface CreateSpotDatafeedSubscriptionRequest {
     /**
      * The Amazon S3 bucket in which to store the Spot Instance data feed.
@@ -5856,7 +5893,7 @@ declare namespace EC2 {
      */
     AvailabilityZone: String;
     /**
-     * Specifies the encryption state of the volume. The default effect of setting the Encrypted parameter to true through the console, API, or CLI depends on the volume's origin (new or from a snapshot), starting encryption state, ownership, and whether account-level encryption is enabled. Each default case can be overridden by specifying a customer master key (CMK) with the KmsKeyId parameter in addition to setting Encrypted to true. For a complete list of possible encryption cases, see Amazon EBS Encryption.  Encrypted Amazon EBS volumes may only be attached to instances that support Amazon EBS encryption. For more information, see Supported Instance Types.
+     * Specifies the encryption state of the volume. The default effect of setting the Encrypted parameter to true depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether account-level encryption is enabled. Each default case can be overridden by specifying a customer master key (CMK) using the KmsKeyId parameter, in addition to setting Encrypted to true. For a complete list of possible encryption cases, see Amazon EBS Encryption. Encrypted Amazon EBS volumes may only be attached to instances that support Amazon EBS encryption. For more information, see Supported Instance Types.
      */
     Encrypted?: Boolean;
     /**
@@ -6311,7 +6348,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * One or more flow log IDs.
+     * One or more flow log IDs. Constraint: Maximum of 1000 flow log IDs.
      */
     FlowLogIds: ValueStringList;
   }
@@ -7477,7 +7514,7 @@ declare namespace EC2 {
      */
     Filter?: FilterList;
     /**
-     * One or more flow log IDs.
+     * One or more flow log IDs. Constraint: Maximum of 1000 flow log IDs.
      */
     FlowLogIds?: ValueStringList;
     /**
@@ -12547,7 +12584,7 @@ declare namespace EC2 {
      */
     SubnetId?: String;
     /**
-     * The type of network interface. To create an Elastic Fabric Adapter (EFA), specify efa. For more information, see Elastic Fabric Adapter in the Amazon Elastic Compute Cloud User Guide. If you are not creating an EFA, specify interface or omit this parameter. Valide values: interface | efa 
+     * The type of network interface. To create an Elastic Fabric Adapter (EFA), specify efa. For more information, see Elastic Fabric Adapter in the Amazon Elastic Compute Cloud User Guide. If you are not creating an EFA, specify interface or omit this parameter. Valid values: interface | efa 
      */
     InterfaceType?: String;
   }
@@ -12571,6 +12608,16 @@ declare namespace EC2 {
     PrivateIpAddress?: String;
   }
   export type InstancePrivateIpAddressList = InstancePrivateIpAddress[];
+  export interface InstanceSpecification {
+    /**
+     * The instance to specify which volumes should be snapshotted.
+     */
+    InstanceId?: String;
+    /**
+     * Excludes the root volume from being snapshotted.
+     */
+    ExcludeBootVolume?: Boolean;
+  }
   export interface InstanceState {
     /**
      * The state of the instance as a 16-bit unsigned integer.  The high byte is all of the bits between 2^8 and (2^16)-1, which equals decimal values between 256 and 65,535. These numerical values are used for internal purposes and should be ignored. The low byte is all of the bits between 2^0 and (2^8)-1, which equals decimal values between 0 and 255.  The valid values for instance-state-code will all be in the range of the low byte and they are:    0 : pending     16 : running     32 : shutting-down     48 : terminated     64 : stopping     80 : stopped    You can ignore the high byte value by zeroing out all of the bits above 2^8 or 256 in decimal.
@@ -13214,7 +13261,7 @@ declare namespace EC2 {
      */
     Groups?: SecurityGroupIdStringList;
     /**
-     * The type of networking interface.
+     * The type of network interface. To create an Elastic Fabric Adapter (EFA), specify efa. For more information, see Elastic Fabric Adapter in the Amazon Elastic Compute Cloud User Guide. If you are not creating an EFA, specify interface or omit this parameter. Valid values: interface | efa 
      */
     InterfaceType?: String;
     /**
@@ -15324,7 +15371,7 @@ declare namespace EC2 {
   export type RegionNameStringList = String[];
   export interface RegisterImageRequest {
     /**
-     * The full path to your AMI manifest in Amazon S3 storage.
+     * The full path to your AMI manifest in Amazon S3 storage. The specified bucket must have the aws-exec-read canned access control list (ACL) to ensure that it can be accessed by Amazon EC2. For more information, see Canned ACLs in the Amazon S3 Service Developer Guide.
      */
     ImageLocation?: String;
     /**
@@ -17573,7 +17620,50 @@ declare namespace EC2 {
     UserBucket?: UserBucket;
   }
   export type SnapshotIdStringList = String[];
+  export interface SnapshotInfo {
+    /**
+     * Description specified by the CreateSnapshotRequest that has been applied to all snapshots.
+     */
+    Description?: String;
+    /**
+     * Tags associated with this snapshot.
+     */
+    Tags?: TagList;
+    /**
+     * Boolean that specifies whether or not this snapshot is encrypted.
+     */
+    Encrypted?: Boolean;
+    /**
+     * Source volume from which this snapshot was created.
+     */
+    VolumeId?: String;
+    /**
+     * Current state of the snapshot.
+     */
+    State?: SnapshotState;
+    /**
+     * Size of the volume from which this snapshot was created.
+     */
+    VolumeSize?: Integer;
+    /**
+     * Time this snapshot was started. This is the same for all snapshots initiated by the same request.
+     */
+    StartTime?: MillisecondDateTime;
+    /**
+     * Progress this snapshot has made towards completing.
+     */
+    Progress?: String;
+    /**
+     * Account id used when creating this snapshot.
+     */
+    OwnerId?: String;
+    /**
+     * Snapshot id that can be used to describe this snapshot.
+     */
+    SnapshotId?: String;
+  }
   export type SnapshotList = Snapshot[];
+  export type SnapshotSet = SnapshotInfo[];
   export type SnapshotState = "pending"|"completed"|"error"|string;
   export interface SnapshotTaskDetail {
     /**

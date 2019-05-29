@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "DLM",
+        "description": "Customers can now simultaneously take snapshots of multiple EBS volumes attached to an EC2 instance. With this new capability, snapshots guarantee crash-consistency across multiple volumes by preserving the order of IO operations. This new feature is fully integrated with Amazon Data Lifecycle Manager (DLM) allowing customers to automatically manage snapshots by creating lifecycle policies. "
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Customers can now simultaneously take snapshots of multiple EBS volumes attached to an EC2 instance. With this new capability, snapshots guarantee crash-consistency across multiple volumes by preserving the order of IO operations. This new feature is fully integrated with Amazon Data Lifecycle Manager (DLM) allowing customers to automatically manage snapshots by creating lifecycle policies. "
+    },
+    {
+        "type": "feature",
+        "category": "IoTThingsGraph",
+        "description": "Initial release."
+    },
+    {
+        "type": "feature",
+        "category": "SecurityHub",
+        "description": "This update adds the ListProductSubscribers API, DescribeProducts API, removes CONTAINS as a comparison value for the StringFilter, and only allows use of EQUALS instead of CONTAINS in MapFilter.  "
+    }
+]

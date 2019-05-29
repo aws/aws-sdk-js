@@ -176,6 +176,7 @@ export abstract class ConfigurationServicePlaceholders {
   managedblockchain?: AWS.ManagedBlockchain.Types.ClientConfiguration;
   mediapackagevod?: AWS.MediaPackageVod.Types.ClientConfiguration;
   groundstation?: AWS.GroundStation.Types.ClientConfiguration;
+  iotthingsgraph?: AWS.IoTThingsGraph.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -354,4 +355,5 @@ export interface ConfigurationServiceApiVersions {
   managedblockchain?: AWS.ManagedBlockchain.Types.apiVersion;
   mediapackagevod?: AWS.MediaPackageVod.Types.apiVersion;
   groundstation?: AWS.GroundStation.Types.apiVersion;
+  iotthingsgraph?: AWS.IoTThingsGraph.Types.apiVersion;
 }
