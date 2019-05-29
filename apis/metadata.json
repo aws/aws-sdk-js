@@ -703,5 +703,8 @@
   },
   "groundstation": {
     "name": "GroundStation"
+  },
+  "iotthingsgraph": {
+    "name": "IoTThingsGraph"
   }
 }

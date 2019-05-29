@@ -175,5 +175,6 @@ module.exports = {
   Textract: require('./textract'),
   ManagedBlockchain: require('./managedblockchain'),
   MediaPackageVod: require('./mediapackagevod'),
-  GroundStation: require('./groundstation')
+  GroundStation: require('./groundstation'),
+  IoTThingsGraph: require('./iotthingsgraph')
 };

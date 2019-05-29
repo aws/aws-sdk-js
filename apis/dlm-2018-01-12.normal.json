@@ -199,7 +199,7 @@
       "members": {
         "Interval": {
           "shape": "Interval",
-          "documentation": "<p>The interval. The supported values are 12 and 24.</p>"
+          "documentation": "<p>The interval between snapshots. The supported values are 2, 3, 4, 6, 8, 12, and 24.</p>"
         },
         "IntervalUnit": {
           "shape": "IntervalUnitValues",
@@ -207,7 +207,7 @@
         },
         "Times": {
           "shape": "TimesList",
-          "documentation": "<p>The time, in UTC, to start the operation.</p> <p>The operation occurs within a one-hour window following the specified time.</p>"
+          "documentation": "<p>The time, in UTC, to start the operation. The supported format is hh:mm.</p> <p>The operation occurs within a one-hour window following the specified time.</p>"
         }
       },
       "documentation": "<p>Specifies when to create snapshots of EBS volumes.</p>"
@@ -229,6 +229,9 @@
     "DeleteLifecyclePolicyResponse": {
       "type": "structure",
       "members": {}
+    },
+    "ExcludeBootVolume": {
+      "type": "boolean"
     },
     "ExecutionRoleArn": {
       "type": "string"
@@ -376,6 +379,16 @@
         "shape": "LifecyclePolicySummary"
       }
     },
+    "Parameters": {
+      "type": "structure",
+      "members": {
+        "ExcludeBootVolume": {
+          "shape": "ExcludeBootVolume",
+          "documentation": "<p>When executing an EBS Snapshot Management – Instance policy, execute all CreateSnapshots calls with the <code>excludeBootVolume</code> set to the supplied field. Defaults to false. Only valid for EBS Snapshot Management – Instance policies.</p>"
+        }
+      },
+      "documentation": "<p>Optional parameters that can be added to the policy. The set of valid parameters depends on the combination of <code>policyType</code> and <code>resourceType</code> values.</p>"
+    },
     "PolicyDescription": {
       "type": "string",
       "max": 500,
@@ -384,6 +397,10 @@
     "PolicyDetails": {
       "type": "structure",
       "members": {
+        "PolicyType": {
+          "shape": "PolicyTypeValues",
+          "documentation": "<p>This field determines the valid target resource types and actions a policy can manage. This field defaults to EBS_SNAPSHOT_MANAGEMENT if not present.</p>"
+        },
         "ResourceTypes": {
           "shape": "ResourceTypeValuesList",
           "documentation": "<p>The resource type.</p>"
@@ -395,6 +412,10 @@
         "Schedules": {
           "shape": "ScheduleList",
           "documentation": "<p>The schedule of policy-defined actions.</p>"
+        },
+        "Parameters": {
+          "shape": "Parameters",
+          "documentation": "<p>A set of optional parameters that can be provided by the policy. </p>"
         }
       },
       "documentation": "<p>Specifies the configuration of a lifecycle policy.</p>"
@@ -408,10 +429,17 @@
         "shape": "PolicyId"
       }
     },
+    "PolicyTypeValues": {
+      "type": "string",
+      "enum": [
+        "EBS_SNAPSHOT_MANAGEMENT"
+      ]
+    },
     "ResourceTypeValues": {
       "type": "string",
       "enum": [
-        "VOLUME"
+        "VOLUME",
+        "INSTANCE"
       ]
     },
     "ResourceTypeValuesList": {
@@ -443,11 +471,16 @@
           "documentation": "<p>The name of the schedule.</p>"
         },
         "CopyTags": {
-          "shape": "CopyTags"
+          "shape": "CopyTags",
+          "documentation": "<p>Copy all user-defined tags on a source volume to snapshots of the volume created by this policy.</p>"
         },
         "TagsToAdd": {
           "shape": "TagsToAddList",
           "documentation": "<p>The tags to apply to policy-created resources. These user-defined tags are in addition to the AWS-added lifecycle tags.</p>"
+        },
+        "VariableTags": {
+          "shape": "VariableTagsList",
+          "documentation": "<p>A collection of key/value pairs with values determined dynamically when the policy is executed. Keys may be any valid Amazon EC2 tag key. Values must be in one of the two following formats: <code>$(instance-id)</code> or <code>$(timestamp)</code>. Variable tags are only valid for EBS Snapshot Management – Instance policies.</p>"
         },
         "CreateRule": {
           "shape": "CreateRule",
@@ -584,6 +617,14 @@
     "UpdateLifecyclePolicyResponse": {
       "type": "structure",
       "members": {}
+    },
+    "VariableTagsList": {
+      "type": "list",
+      "member": {
+        "shape": "Tag"
+      },
+      "max": 50,
+      "min": 0
     }
   },
   "documentation": "<fullname>Amazon Data Lifecycle Manager</fullname> <p>With Amazon Data Lifecycle Manager, you can manage the lifecycle of your AWS resources. You create lifecycle policies, which are used to automate operations on the specified resources.</p> <p>Amazon DLM supports Amazon EBS volumes and snapshots. For information about using Amazon DLM with Amazon EBS, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html\">Automating the Amazon EBS Snapshot Lifecycle</a> in the <i>Amazon EC2 User Guide</i>.</p>"

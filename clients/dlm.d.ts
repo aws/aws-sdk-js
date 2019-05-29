@@ -81,7 +81,7 @@ declare namespace DLM {
   }
   export interface CreateRule {
     /**
-     * The interval. The supported values are 12 and 24.
+     * The interval between snapshots. The supported values are 2, 3, 4, 6, 8, 12, and 24.
      */
     Interval: Interval;
     /**
@@ -89,7 +89,7 @@ declare namespace DLM {
      */
     IntervalUnit: IntervalUnitValues;
     /**
-     * The time, in UTC, to start the operation. The operation occurs within a one-hour window following the specified time.
+     * The time, in UTC, to start the operation. The supported format is hh:mm. The operation occurs within a one-hour window following the specified time.
      */
     Times?: TimesList;
   }
@@ -101,6 +101,7 @@ declare namespace DLM {
   }
   export interface DeleteLifecyclePolicyResponse {
   }
+  export type ExcludeBootVolume = boolean;
   export type ExecutionRoleArn = string;
   export interface GetLifecyclePoliciesRequest {
     /**
@@ -190,8 +191,18 @@ declare namespace DLM {
     State?: GettablePolicyStateValues;
   }
   export type LifecyclePolicySummaryList = LifecyclePolicySummary[];
+  export interface Parameters {
+    /**
+     * When executing an EBS Snapshot Management – Instance policy, execute all CreateSnapshots calls with the excludeBootVolume set to the supplied field. Defaults to false. Only valid for EBS Snapshot Management – Instance policies.
+     */
+    ExcludeBootVolume?: ExcludeBootVolume;
+  }
   export type PolicyDescription = string;
   export interface PolicyDetails {
+    /**
+     * This field determines the valid target resource types and actions a policy can manage. This field defaults to EBS_SNAPSHOT_MANAGEMENT if not present.
+     */
+    PolicyType?: PolicyTypeValues;
     /**
      * The resource type.
      */
@@ -204,10 +215,15 @@ declare namespace DLM {
      * The schedule of policy-defined actions.
      */
     Schedules?: ScheduleList;
+    /**
+     * A set of optional parameters that can be provided by the policy. 
+     */
+    Parameters?: Parameters;
   }
   export type PolicyId = string;
   export type PolicyIdList = PolicyId[];
-  export type ResourceTypeValues = "VOLUME"|string;
+  export type PolicyTypeValues = "EBS_SNAPSHOT_MANAGEMENT"|string;
+  export type ResourceTypeValues = "VOLUME"|"INSTANCE"|string;
   export type ResourceTypeValuesList = ResourceTypeValues[];
   export interface RetainRule {
     /**
@@ -220,11 +236,18 @@ declare namespace DLM {
      * The name of the schedule.
      */
     Name?: ScheduleName;
+    /**
+     * Copy all user-defined tags on a source volume to snapshots of the volume created by this policy.
+     */
     CopyTags?: CopyTags;
     /**
      * The tags to apply to policy-created resources. These user-defined tags are in addition to the AWS-added lifecycle tags.
      */
     TagsToAdd?: TagsToAddList;
+    /**
+     * A collection of key/value pairs with values determined dynamically when the policy is executed. Keys may be any valid Amazon EC2 tag key. Values must be in one of the two following formats: $(instance-id) or $(timestamp). Variable tags are only valid for EBS Snapshot Management – Instance policies.
+     */
+    VariableTags?: VariableTagsList;
     /**
      * The create rule.
      */
@@ -280,6 +303,7 @@ declare namespace DLM {
   }
   export interface UpdateLifecyclePolicyResponse {
   }
+  export type VariableTagsList = Tag[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
