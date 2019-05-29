@@ -332,6 +332,16 @@
   });
 
   describe('AWS.util.buffer', function() {
+    describe ('alloc', function () {
+      it('should throw if first parameter is not number', function(done) {
+        try {
+          AWS.util.buffer.alloc('foo');
+        } catch (e) {
+          expect(e.message).to.eql('size passed to alloc must be a number.');
+          done();
+        }
+      });
+    });
     return describe('concat', function() {
       return it('concatenates a list of buffers', function() {
         var buffer1, buffer2, buffer3;

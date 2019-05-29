@@ -16,7 +16,7 @@ describe('splitMessage', function() {
     it(
         'should throw if the specified length does not match the length of the received message',
         function() {
-            var message = allocBuffer(17);
+            var message = allocBuffer(17, 0);
             message.writeInt32BE(16, 0);
 
             expect(function() {
@@ -28,7 +28,7 @@ describe('splitMessage', function() {
     it(
         'should throw if the prelude checksum does not match the calculated prelude checksum',
         function() {
-            var message = allocBuffer(16);
+            var message = allocBuffer(16, 0);
             message.writeInt32BE(16, 0);
             message.writeInt32BE(0x05c248ec, 8);
 

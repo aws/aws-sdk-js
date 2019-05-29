@@ -1,7 +1,7 @@
 var helpers = require('../helpers'),
   AWS = helpers.AWS,
   Stream = AWS.util.stream,
-  buffer = AWS.util.buffer
+  buffer = AWS.util.buffer;
 
 describe('AWS.S3', function() {
   var s3 = null;
