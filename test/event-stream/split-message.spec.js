@@ -41,7 +41,7 @@ describe('splitMessage', function() {
     it(
         'should throw if the message checksum does not match the calculated message checksum',
         function() {
-            var message = allocBuffer(16);
+            var message = allocBuffer(16, 0);
             message.writeInt32BE(16, 0);
             message.writeInt32BE(0x05c248eb, 8);
             message.writeInt32BE(0x7d98c8fe, 12);
@@ -55,8 +55,8 @@ describe('splitMessage', function() {
     it(
         'should return header and body buffers for messages with well-formed metadata',
         function() {
-            var emptyBuffer = allocBuffer(0);
-            var message = allocBuffer(16);
+            var emptyBuffer = allocBuffer(0, 0);
+            var message = allocBuffer(16, 0);
             message.writeInt32BE(16, 0);
             message.writeInt32BE(0x05c248eb, 8);
             message.writeInt32BE(0x7d98c8ff, 12);

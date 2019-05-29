@@ -335,8 +335,8 @@
     return describe('concat', function() {
       return it('concatenates a list of buffers', function() {
         var buffer1, buffer2, buffer3;
-        buffer1 = Buffer.from('abcdefg');
-        buffer2 = Buffer.from('hijklmn');
+        buffer1 = AWS.util.buffer.toBuffer('abcdefg');
+        buffer2 =  AWS.util.buffer.toBuffer('hijklmn');
         buffer3 = AWS.util.buffer.concat([buffer1, buffer2]);
         expect(buffer3.length).to.equal(14);
         return expect(buffer3.toString()).to.equal('abcdefghijklmn');
@@ -425,7 +425,7 @@
           tr._transform = function(data, encoding, callback) {
             return callback(null, data);
           };
-          tr.push(Buffer.from(input));
+          tr.push(AWS.util.buffer.toBuffer(input));
           tr.end();
           return util.sha256(tr, 'hex', function(e, d) {
             expect(d).to.equal(result);
@@ -484,7 +484,7 @@
           tr._transform = function(data, enc, callback) {
             return callback(null, data);
           };
-          tr.push(Buffer.from(input));
+          tr.push(AWS.util.buffer.toBuffer(input));
           tr.end();
           return util.md5(tr, 'hex', function(e, d) {
             expect(d).to.equal(result);

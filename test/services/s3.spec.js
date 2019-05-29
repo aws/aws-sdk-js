@@ -1,7 +1,7 @@
 var helpers = require('../helpers'),
   AWS = helpers.AWS,
   Stream = AWS.util.stream,
-  Buffer = AWS.util.Buffer;
+  buffer = AWS.util.buffer
 
 describe('AWS.S3', function() {
   var s3 = null;
@@ -764,7 +764,7 @@ describe('AWS.S3', function() {
           var req = build('putObject', {
             Bucket: 'bucket',
             Key: 'key',
-            Body: Buffer.alloc(1024 * 1024 - 1)
+            Body: buffer.alloc(1024 * 1024 - 1)
           });
           expect(req.headers['Expect']).not.to.exist;
         });
@@ -773,7 +773,7 @@ describe('AWS.S3', function() {
           var req = build('putObject', {
             Bucket: 'bucket',
             Key: 'key',
-            Body: Buffer.alloc(1024 * 1024 + 1)
+            Body: buffer.alloc(1024 * 1024 + 1)
           });
           expect(req.headers['Expect']).to.equal('100-continue');
         });
@@ -2591,7 +2591,7 @@ describe('AWS.S3', function() {
           };
           tr.length = 0;
           tr.path = 'path/to/file';
-          tr.push(Buffer.from(''));
+          tr.push(buffer.toBuffer(''));
           tr.end();
           return tr;
         });
@@ -2635,7 +2635,7 @@ describe('AWS.S3', function() {
               return tr.push(null);
             } else {
               didRead = true;
-              return tr.push(Buffer.from('test'));
+              return tr.push(buffer.toBuffer('test'));
             }
           };
           return tr;
