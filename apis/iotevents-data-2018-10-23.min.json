@@ -1,0 +1,293 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2018-10-23",
+    "endpointPrefix": "data.iotevents",
+    "protocol": "rest-json",
+    "serviceFullName": "AWS IoT Events Data",
+    "serviceId": "IoT Events Data",
+    "signatureVersion": "v4",
+    "signingName": "ioteventsdata",
+    "uid": "iotevents-data-2018-10-23"
+  },
+  "operations": {
+    "BatchPutMessage": {
+      "http": {
+        "requestUri": "/inputs/messages",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "messages"
+        ],
+        "members": {
+          "messages": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "messageId",
+                "inputName",
+                "payload"
+              ],
+              "members": {
+                "messageId": {},
+                "inputName": {},
+                "payload": {
+                  "type": "blob"
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "BatchPutMessageErrorEntries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "messageId": {},
+                "errorCode": {},
+                "errorMessage": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "BatchUpdateDetector": {
+      "http": {
+        "requestUri": "/detectors",
+        "responseCode": 200
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "detectors"
+        ],
+        "members": {
+          "detectors": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "messageId",
+                "detectorModelName",
+                "state"
+              ],
+              "members": {
+                "messageId": {},
+                "detectorModelName": {},
+                "keyValue": {},
+                "state": {
+                  "type": "structure",
+                  "required": [
+                    "stateName",
+                    "variables",
+                    "timers"
+                  ],
+                  "members": {
+                    "stateName": {},
+                    "variables": {
+                      "type": "list",
+                      "member": {
+                        "type": "structure",
+                        "required": [
+                          "name",
+                          "value"
+                        ],
+                        "members": {
+                          "name": {},
+                          "value": {}
+                        }
+                      }
+                    },
+                    "timers": {
+                      "type": "list",
+                      "member": {
+                        "type": "structure",
+                        "required": [
+                          "name",
+                          "seconds"
+                        ],
+                        "members": {
+                          "name": {},
+                          "seconds": {
+                            "type": "integer"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "batchUpdateDetectorErrorEntries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "messageId": {},
+                "errorCode": {},
+                "errorMessage": {}
+              }
+            }
+          }
+        }
+      }
+    },
+    "DescribeDetector": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/detectors/{detectorModelName}/keyValues/"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "detectorModelName"
+        ],
+        "members": {
+          "detectorModelName": {
+            "location": "uri",
+            "locationName": "detectorModelName"
+          },
+          "keyValue": {
+            "location": "querystring",
+            "locationName": "keyValue"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "detector": {
+            "type": "structure",
+            "members": {
+              "detectorModelName": {},
+              "keyValue": {},
+              "detectorModelVersion": {},
+              "state": {
+                "type": "structure",
+                "required": [
+                  "stateName",
+                  "variables",
+                  "timers"
+                ],
+                "members": {
+                  "stateName": {},
+                  "variables": {
+                    "type": "list",
+                    "member": {
+                      "type": "structure",
+                      "required": [
+                        "name",
+                        "value"
+                      ],
+                      "members": {
+                        "name": {},
+                        "value": {}
+                      }
+                    }
+                  },
+                  "timers": {
+                    "type": "list",
+                    "member": {
+                      "type": "structure",
+                      "required": [
+                        "name",
+                        "timestamp"
+                      ],
+                      "members": {
+                        "name": {},
+                        "timestamp": {
+                          "type": "timestamp"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "creationTime": {
+                "type": "timestamp"
+              },
+              "lastUpdateTime": {
+                "type": "timestamp"
+              }
+            }
+          }
+        }
+      }
+    },
+    "ListDetectors": {
+      "http": {
+        "method": "GET",
+        "requestUri": "/detectors/{detectorModelName}"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "detectorModelName"
+        ],
+        "members": {
+          "detectorModelName": {
+            "location": "uri",
+            "locationName": "detectorModelName"
+          },
+          "stateName": {
+            "location": "querystring",
+            "locationName": "stateName"
+          },
+          "nextToken": {
+            "location": "querystring",
+            "locationName": "nextToken"
+          },
+          "maxResults": {
+            "location": "querystring",
+            "locationName": "maxResults",
+            "type": "integer"
+          }
+        }
+      },
+      "output": {
+        "type": "structure",
+        "members": {
+          "detectorSummaries": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "members": {
+                "detectorModelName": {},
+                "keyValue": {},
+                "detectorModelVersion": {},
+                "state": {
+                  "type": "structure",
+                  "members": {
+                    "stateName": {}
+                  }
+                },
+                "creationTime": {
+                  "type": "timestamp"
+                },
+                "lastUpdateTime": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          },
+          "nextToken": {}
+        }
+      }
+    }
+  },
+  "shapes": {}
+}

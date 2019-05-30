@@ -177,6 +177,8 @@ export abstract class ConfigurationServicePlaceholders {
   mediapackagevod?: AWS.MediaPackageVod.Types.ClientConfiguration;
   groundstation?: AWS.GroundStation.Types.ClientConfiguration;
   iotthingsgraph?: AWS.IoTThingsGraph.Types.ClientConfiguration;
+  iotevents?: AWS.IoTEvents.Types.ClientConfiguration;
+  ioteventsdata?: AWS.IoTEventsData.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -356,4 +358,6 @@ export interface ConfigurationServiceApiVersions {
   mediapackagevod?: AWS.MediaPackageVod.Types.apiVersion;
   groundstation?: AWS.GroundStation.Types.apiVersion;
   iotthingsgraph?: AWS.IoTThingsGraph.Types.apiVersion;
+  iotevents?: AWS.IoTEvents.Types.apiVersion;
+  ioteventsdata?: AWS.IoTEventsData.Types.apiVersion;
 }

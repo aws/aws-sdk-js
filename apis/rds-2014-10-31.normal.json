@@ -2947,6 +2947,41 @@
       ],
       "documentation": "<p>Revokes ingress from a DBSecurityGroup for previously authorized IP ranges or EC2 or VPC Security Groups. Required parameters for this API are one of CIDRIP, EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either EC2SecurityGroupName or EC2SecurityGroupId).</p>"
     },
+    "StartActivityStream": {
+      "name": "StartActivityStream",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartActivityStreamRequest"
+      },
+      "output": {
+        "shape": "StartActivityStreamResponse",
+        "resultWrapper": "StartActivityStreamResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidDBInstanceStateFault"
+        },
+        {
+          "shape": "InvalidDBClusterStateFault"
+        },
+        {
+          "shape": "ResourceNotFoundFault"
+        },
+        {
+          "shape": "DBClusterNotFoundFault"
+        },
+        {
+          "shape": "DBInstanceNotFoundFault"
+        },
+        {
+          "shape": "KMSKeyNotAccessibleFault"
+        }
+      ],
+      "documentation": "<p>Starts a database activity stream to monitor activity on the database. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html\">Database Activity Streams</a> in the <i>Amazon Aurora User Guide</i>.</p>"
+    },
     "StartDBCluster": {
       "name": "StartDBCluster",
       "http": {
@@ -3022,6 +3057,38 @@
         }
       ],
       "documentation": "<p> Starts an Amazon RDS DB instance that was stopped using the AWS console, the stop-db-instance AWS CLI command, or the StopDBInstance action. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StartInstance.html\"> Starting an Amazon RDS DB instance That Was Previously Stopped</a> in the <i>Amazon RDS User Guide.</i> </p> <note> <p> This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora DB clusters, use <code>StartDBCluster</code> instead. </p> </note>"
+    },
+    "StopActivityStream": {
+      "name": "StopActivityStream",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StopActivityStreamRequest"
+      },
+      "output": {
+        "shape": "StopActivityStreamResponse",
+        "resultWrapper": "StopActivityStreamResult"
+      },
+      "errors": [
+        {
+          "shape": "InvalidDBInstanceStateFault"
+        },
+        {
+          "shape": "InvalidDBClusterStateFault"
+        },
+        {
+          "shape": "ResourceNotFoundFault"
+        },
+        {
+          "shape": "DBClusterNotFoundFault"
+        },
+        {
+          "shape": "DBInstanceNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Stops a database activity stream that was started using the AWS console, the <code>start-activity-stream</code> AWS CLI command, or the <code>StartActivityStream</code> action.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html\">Database Activity Streams</a> in the <i>Amazon Aurora User Guide</i>.</p>"
     },
     "StopDBCluster": {
       "name": "StopDBCluster",
@@ -3118,6 +3185,22 @@
         "shape": "AccountQuota",
         "locationName": "AccountQuota"
       }
+    },
+    "ActivityStreamMode": {
+      "type": "string",
+      "enum": [
+        "sync",
+        "async"
+      ]
+    },
+    "ActivityStreamStatus": {
+      "type": "string",
+      "enum": [
+        "stopped",
+        "starting",
+        "started",
+        "stopping"
+      ]
     },
     "AddRoleToDBClusterMessage": {
       "type": "structure",
@@ -4641,6 +4724,22 @@
         "HttpEndpointEnabled": {
           "shape": "Boolean",
           "documentation": "<note> <p>HTTP endpoint functionality is in beta for Aurora Serverless and is subject to change.</p> </note> <p>A value that indicates whether the HTTP endpoint for an Aurora Serverless DB cluster is enabled.</p> <p>When enabled, the HTTP endpoint provides a connectionless web service API for running SQL queries on the Aurora Serverless DB cluster. You can also query your database from inside the RDS console with the query editor.</p> <p>For more information about Aurora Serverless, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html\">Using Amazon Aurora Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>"
+        },
+        "ActivityStreamMode": {
+          "shape": "ActivityStreamMode",
+          "documentation": "<p>The mode of the database activity stream. Database events such as a change or access generate an activity stream event. The database session can handle these events either synchronously or asynchronously. </p>"
+        },
+        "ActivityStreamStatus": {
+          "shape": "ActivityStreamStatus",
+          "documentation": "<p>The status of the database activity stream.</p>"
+        },
+        "ActivityStreamKmsKeyId": {
+          "shape": "String",
+          "documentation": "<p>The AWS KMS key identifier used for encrypting messages in the database activity stream.</p>"
+        },
+        "ActivityStreamKinesisStreamName": {
+          "shape": "String",
+          "documentation": "<p>The name of the Amazon Kinesis data stream used for the database activity stream.</p>"
         },
         "CopyTagsToSnapshot": {
           "shape": "Boolean",
@@ -10546,6 +10645,57 @@
         "db-cluster-snapshot"
       ]
     },
+    "StartActivityStreamRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "Mode",
+        "KmsKeyId"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the DB cluster, for example <code>arn:aws:rds:us-east-1:12345667890:cluster:das-cluster</code>.</p>"
+        },
+        "Mode": {
+          "shape": "ActivityStreamMode",
+          "documentation": "<p>Specifies the mode of the database activity stream. Database events such as a change or access generate an activity stream event. The database session can handle these events either synchronously or asynchronously. </p>"
+        },
+        "KmsKeyId": {
+          "shape": "String",
+          "documentation": "<p>The AWS KMS key identifier for encrypting messages in the database activity stream. The key identifier can be either a key ID, a key ARN, or a key alias.</p>"
+        },
+        "ApplyImmediately": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Specifies whether or not the database activity stream is to start as soon as possible, regardless of the maintenance window for the database.</p>"
+        }
+      }
+    },
+    "StartActivityStreamResponse": {
+      "type": "structure",
+      "members": {
+        "KmsKeyId": {
+          "shape": "String",
+          "documentation": "<p>The AWS KMS key identifier for encryption of messages in the database activity stream.</p>"
+        },
+        "KinesisStreamName": {
+          "shape": "String",
+          "documentation": "<p>The name of the Amazon Kinesis data stream to be used for the database activity stream.</p>"
+        },
+        "Status": {
+          "shape": "ActivityStreamStatus",
+          "documentation": "<p>The status of the database activity stream.</p>"
+        },
+        "Mode": {
+          "shape": "ActivityStreamMode",
+          "documentation": "<p>The mode of the database activity stream.</p>"
+        },
+        "ApplyImmediately": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether or not the database activity stream will start as soon as possible, regardless of the maintenance window for the database.</p>"
+        }
+      }
+    },
     "StartDBClusterMessage": {
       "type": "structure",
       "required": [
@@ -10583,6 +10733,39 @@
       "members": {
         "DBInstance": {
           "shape": "DBInstance"
+        }
+      }
+    },
+    "StopActivityStreamRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the DB cluster for the database activity stream. For example, <code>arn:aws:rds:us-east-1:12345667890:cluster:das-cluster</code>. </p>"
+        },
+        "ApplyImmediately": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Specifies whether or not the database activity stream is to stop as soon as possible, regardless of the maintenance window for the database.</p>"
+        }
+      }
+    },
+    "StopActivityStreamResponse": {
+      "type": "structure",
+      "members": {
+        "KmsKeyId": {
+          "shape": "String",
+          "documentation": "<p>The AWS KMS key identifier used for encrypting messages in the database activity stream.</p>"
+        },
+        "KinesisStreamName": {
+          "shape": "String",
+          "documentation": "<p>The name of the Amazon Kinesis data stream used for the database activity stream.</p>"
+        },
+        "Status": {
+          "shape": "ActivityStreamStatus",
+          "documentation": "<p>The status of the database activity stream.</p>"
         }
       }
     },

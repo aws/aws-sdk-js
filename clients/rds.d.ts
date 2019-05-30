@@ -854,6 +854,14 @@ declare class RDS extends Service {
    */
   revokeDBSecurityGroupIngress(callback?: (err: AWSError, data: RDS.Types.RevokeDBSecurityGroupIngressResult) => void): Request<RDS.Types.RevokeDBSecurityGroupIngressResult, AWSError>;
   /**
+   * Starts a database activity stream to monitor activity on the database. For more information, see Database Activity Streams in the Amazon Aurora User Guide.
+   */
+  startActivityStream(params: RDS.Types.StartActivityStreamRequest, callback?: (err: AWSError, data: RDS.Types.StartActivityStreamResponse) => void): Request<RDS.Types.StartActivityStreamResponse, AWSError>;
+  /**
+   * Starts a database activity stream to monitor activity on the database. For more information, see Database Activity Streams in the Amazon Aurora User Guide.
+   */
+  startActivityStream(callback?: (err: AWSError, data: RDS.Types.StartActivityStreamResponse) => void): Request<RDS.Types.StartActivityStreamResponse, AWSError>;
+  /**
    * Starts an Amazon Aurora DB cluster that was stopped using the AWS console, the stop-db-cluster AWS CLI command, or the StopDBCluster action. For more information, see  Stopping and Starting an Aurora Cluster in the Amazon Aurora User Guide.   This action only applies to Aurora DB clusters. 
    */
   startDBCluster(params: RDS.Types.StartDBClusterMessage, callback?: (err: AWSError, data: RDS.Types.StartDBClusterResult) => void): Request<RDS.Types.StartDBClusterResult, AWSError>;
@@ -869,6 +877,14 @@ declare class RDS extends Service {
    *  Starts an Amazon RDS DB instance that was stopped using the AWS console, the stop-db-instance AWS CLI command, or the StopDBInstance action.  For more information, see  Starting an Amazon RDS DB instance That Was Previously Stopped in the Amazon RDS User Guide.    This command doesn't apply to Aurora MySQL and Aurora PostgreSQL. For Aurora DB clusters, use StartDBCluster instead.  
    */
   startDBInstance(callback?: (err: AWSError, data: RDS.Types.StartDBInstanceResult) => void): Request<RDS.Types.StartDBInstanceResult, AWSError>;
+  /**
+   * Stops a database activity stream that was started using the AWS console, the start-activity-stream AWS CLI command, or the StartActivityStream action. For more information, see Database Activity Streams in the Amazon Aurora User Guide.
+   */
+  stopActivityStream(params: RDS.Types.StopActivityStreamRequest, callback?: (err: AWSError, data: RDS.Types.StopActivityStreamResponse) => void): Request<RDS.Types.StopActivityStreamResponse, AWSError>;
+  /**
+   * Stops a database activity stream that was started using the AWS console, the start-activity-stream AWS CLI command, or the StartActivityStream action. For more information, see Database Activity Streams in the Amazon Aurora User Guide.
+   */
+  stopActivityStream(callback?: (err: AWSError, data: RDS.Types.StopActivityStreamResponse) => void): Request<RDS.Types.StopActivityStreamResponse, AWSError>;
   /**
    *  Stops an Amazon Aurora DB cluster. When you stop a DB cluster, Aurora retains the DB cluster's metadata, including its endpoints and DB parameter groups. Aurora also retains the transaction logs so you can do a point-in-time restore if necessary.  For more information, see  Stopping and Starting an Aurora Cluster in the Amazon Aurora User Guide.   This action only applies to Aurora DB clusters. 
    */
@@ -943,6 +959,8 @@ declare namespace RDS {
     Max?: Long;
   }
   export type AccountQuotaList = AccountQuota[];
+  export type ActivityStreamMode = "sync"|"async"|string;
+  export type ActivityStreamStatus = "stopped"|"starting"|"started"|"stopping"|string;
   export interface AddRoleToDBClusterMessage {
     /**
      * The name of the DB cluster to associate the IAM role with.
@@ -2079,6 +2097,22 @@ declare namespace RDS {
      *  HTTP endpoint functionality is in beta for Aurora Serverless and is subject to change.  A value that indicates whether the HTTP endpoint for an Aurora Serverless DB cluster is enabled. When enabled, the HTTP endpoint provides a connectionless web service API for running SQL queries on the Aurora Serverless DB cluster. You can also query your database from inside the RDS console with the query editor. For more information about Aurora Serverless, see Using Amazon Aurora Serverless in the Amazon Aurora User Guide.
      */
     HttpEndpointEnabled?: Boolean;
+    /**
+     * The mode of the database activity stream. Database events such as a change or access generate an activity stream event. The database session can handle these events either synchronously or asynchronously. 
+     */
+    ActivityStreamMode?: ActivityStreamMode;
+    /**
+     * The status of the database activity stream.
+     */
+    ActivityStreamStatus?: ActivityStreamStatus;
+    /**
+     * The AWS KMS key identifier used for encrypting messages in the database activity stream.
+     */
+    ActivityStreamKmsKeyId?: String;
+    /**
+     * The name of the Amazon Kinesis data stream used for the database activity stream.
+     */
+    ActivityStreamKinesisStreamName?: String;
     /**
      * Specifies whether tags are copied from the DB cluster to snapshots of the DB cluster.
      */
@@ -6488,6 +6522,46 @@ declare namespace RDS {
     SourceRegions?: SourceRegionList;
   }
   export type SourceType = "db-instance"|"db-parameter-group"|"db-security-group"|"db-snapshot"|"db-cluster"|"db-cluster-snapshot"|string;
+  export interface StartActivityStreamRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the DB cluster, for example arn:aws:rds:us-east-1:12345667890:cluster:das-cluster.
+     */
+    ResourceArn: String;
+    /**
+     * Specifies the mode of the database activity stream. Database events such as a change or access generate an activity stream event. The database session can handle these events either synchronously or asynchronously. 
+     */
+    Mode: ActivityStreamMode;
+    /**
+     * The AWS KMS key identifier for encrypting messages in the database activity stream. The key identifier can be either a key ID, a key ARN, or a key alias.
+     */
+    KmsKeyId: String;
+    /**
+     * Specifies whether or not the database activity stream is to start as soon as possible, regardless of the maintenance window for the database.
+     */
+    ApplyImmediately?: BooleanOptional;
+  }
+  export interface StartActivityStreamResponse {
+    /**
+     * The AWS KMS key identifier for encryption of messages in the database activity stream.
+     */
+    KmsKeyId?: String;
+    /**
+     * The name of the Amazon Kinesis data stream to be used for the database activity stream.
+     */
+    KinesisStreamName?: String;
+    /**
+     * The status of the database activity stream.
+     */
+    Status?: ActivityStreamStatus;
+    /**
+     * The mode of the database activity stream.
+     */
+    Mode?: ActivityStreamMode;
+    /**
+     * Indicates whether or not the database activity stream will start as soon as possible, regardless of the maintenance window for the database.
+     */
+    ApplyImmediately?: Boolean;
+  }
   export interface StartDBClusterMessage {
     /**
      * The DB cluster identifier of the Amazon Aurora DB cluster to be started. This parameter is stored as a lowercase string.
@@ -6505,6 +6579,30 @@ declare namespace RDS {
   }
   export interface StartDBInstanceResult {
     DBInstance?: DBInstance;
+  }
+  export interface StopActivityStreamRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the DB cluster for the database activity stream. For example, arn:aws:rds:us-east-1:12345667890:cluster:das-cluster. 
+     */
+    ResourceArn: String;
+    /**
+     * Specifies whether or not the database activity stream is to stop as soon as possible, regardless of the maintenance window for the database.
+     */
+    ApplyImmediately?: BooleanOptional;
+  }
+  export interface StopActivityStreamResponse {
+    /**
+     * The AWS KMS key identifier used for encrypting messages in the database activity stream.
+     */
+    KmsKeyId?: String;
+    /**
+     * The name of the Amazon Kinesis data stream used for the database activity stream.
+     */
+    KinesisStreamName?: String;
+    /**
+     * The status of the database activity stream.
+     */
+    Status?: ActivityStreamStatus;
   }
   export interface StopDBClusterMessage {
     /**

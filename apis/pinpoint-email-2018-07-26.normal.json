@@ -10,7 +10,6 @@
     "serviceId": "Pinpoint Email",
     "signatureVersion": "v4",
     "signingName": "ses",
-    "targetPrefix": "com.amazonaws.services.pinpoint.email",
     "uid": "pinpoint-email-2018-07-26"
   },
   "operations": {
@@ -1655,6 +1654,10 @@
     "DeliveryOptions": {
       "type": "structure",
       "members": {
+        "TlsPolicy": {
+          "shape": "TlsPolicy",
+          "documentation": "<p>Specifies whether Amazon Pinpoint should require that incoming email is delivered over a connection that’s encrypted by using Transport Layer Security (TLS). If this value is set to <code>Require</code>, Amazon Pinpoint will bounce email messages that cannot be delivered over TLS. The default value is <code>Optional</code>.</p>"
+        },
         "SendingPoolName": {
           "shape": "PoolName",
           "documentation": "<p>The name of the dedicated IP pool that you want to associate with the configuration set.</p>"
@@ -2942,6 +2945,10 @@
           "location": "uri",
           "locationName": "ConfigurationSetName"
         },
+        "TlsPolicy": {
+          "shape": "TlsPolicy",
+          "documentation": "<p>Whether Amazon Pinpoint should require that incoming email is delivered over a connection encrypted with Transport Layer Security (TLS).</p>"
+        },
         "SendingPoolName": {
           "shape": "SendingPoolName",
           "documentation": "<p>The name of the dedicated IP pool that you want to associate with the configuration set.</p>"
@@ -3375,6 +3382,14 @@
     },
     "Timestamp": {
       "type": "timestamp"
+    },
+    "TlsPolicy": {
+      "type": "string",
+      "documentation": "<p>Specifies whether Amazon Pinpoint should require that incoming email is delivered over a connection encrypted with Transport Layer Security (TLS). If this parameter is set to <code>Require</code>, Amazon Pinpoint rejects emails that weren't received over TLS. If the parameter is set to <code>Optional</code>, then Amazon Pinpoint accepts emails that weren't received over TLS. The default value is <code>Optional</code>.</p>",
+      "enum": [
+        "REQUIRE",
+        "OPTIONAL"
+      ]
     },
     "TrackingOptions": {
       "type": "structure",

@@ -355,6 +355,10 @@ declare namespace IoTAnalytics {
      */
     name?: ChannelName;
     /**
+     * Where channel data is stored.
+     */
+    storage?: ChannelStorage;
+    /**
      * The ARN of the channel.
      */
     arn?: ChannelArn;
@@ -398,12 +402,36 @@ declare namespace IoTAnalytics {
     size?: EstimatedResourceSize;
   }
   export type ChannelStatus = "CREATING"|"ACTIVE"|"DELETING"|string;
+  export interface ChannelStorage {
+    /**
+     * Use this to store channel data in an S3 bucket managed by the AWS IoT Analytics service.
+     */
+    serviceManagedS3?: ServiceManagedChannelS3Storage;
+    /**
+     * Use this to store channel data in an S3 bucket that you manage.
+     */
+    customerManagedS3?: CustomerManagedChannelS3Storage;
+  }
+  export interface ChannelStorageSummary {
+    /**
+     * Used to store channel data in an S3 bucket managed by the AWS IoT Analytics service.
+     */
+    serviceManagedS3?: ServiceManagedChannelS3StorageSummary;
+    /**
+     * Used to store channel data in an S3 bucket that you manage.
+     */
+    customerManagedS3?: CustomerManagedChannelS3StorageSummary;
+  }
   export type ChannelSummaries = ChannelSummary[];
   export interface ChannelSummary {
     /**
      * The name of the channel.
      */
     channelName?: ChannelName;
+    /**
+     * Where channel data is stored.
+     */
+    channelStorage?: ChannelStorageSummary;
     /**
      * The status of the channel.
      */
@@ -441,6 +469,10 @@ declare namespace IoTAnalytics {
      * The name of the channel.
      */
     channelName: ChannelName;
+    /**
+     * Where channel data is stored.
+     */
+    channelStorage?: ChannelStorage;
     /**
      * How long, in days, message data is kept for the channel.
      */
@@ -526,6 +558,10 @@ declare namespace IoTAnalytics {
      */
     datastoreName: DatastoreName;
     /**
+     * Where data store data is stored.
+     */
+    datastoreStorage?: DatastoreStorage;
+    /**
      * How long, in days, message data is kept for the data store.
      */
     retentionPeriod?: RetentionPeriod;
@@ -571,6 +607,62 @@ declare namespace IoTAnalytics {
      * The ARN of the pipeline.
      */
     pipelineArn?: PipelineArn;
+  }
+  export interface CustomerManagedChannelS3Storage {
+    /**
+     * The name of the Amazon S3 bucket in which channel data is stored.
+     */
+    bucket: BucketName;
+    /**
+     * The prefix used to create the keys of the channel data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).
+     */
+    keyPrefix?: S3KeyPrefix;
+    /**
+     * The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
+     */
+    roleArn: RoleArn;
+  }
+  export interface CustomerManagedChannelS3StorageSummary {
+    /**
+     * The name of the Amazon S3 bucket in which channel data is stored.
+     */
+    bucket?: BucketName;
+    /**
+     * The prefix used to create the keys of the channel data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).
+     */
+    keyPrefix?: S3KeyPrefix;
+    /**
+     * The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
+     */
+    roleArn?: RoleArn;
+  }
+  export interface CustomerManagedDatastoreS3Storage {
+    /**
+     * The name of the Amazon S3 bucket in which data store data is stored.
+     */
+    bucket: BucketName;
+    /**
+     * The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).
+     */
+    keyPrefix?: S3KeyPrefix;
+    /**
+     * The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
+     */
+    roleArn: RoleArn;
+  }
+  export interface CustomerManagedDatastoreS3StorageSummary {
+    /**
+     * The name of the Amazon S3 bucket in which data store data is stored.
+     */
+    bucket?: BucketName;
+    /**
+     * The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key).
+     */
+    keyPrefix?: S3KeyPrefix;
+    /**
+     * The ARN of the role which grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
+     */
+    roleArn?: RoleArn;
   }
   export interface Dataset {
     /**
@@ -758,6 +850,10 @@ declare namespace IoTAnalytics {
      */
     name?: DatastoreName;
     /**
+     * Where data store data is stored.
+     */
+    storage?: DatastoreStorage;
+    /**
      * The ARN of the data store.
      */
     arn?: DatastoreArn;
@@ -797,12 +893,36 @@ declare namespace IoTAnalytics {
     size?: EstimatedResourceSize;
   }
   export type DatastoreStatus = "CREATING"|"ACTIVE"|"DELETING"|string;
+  export interface DatastoreStorage {
+    /**
+     * Use this to store data store data in an S3 bucket managed by the AWS IoT Analytics service.
+     */
+    serviceManagedS3?: ServiceManagedDatastoreS3Storage;
+    /**
+     * Use this to store data store data in an S3 bucket that you manage.
+     */
+    customerManagedS3?: CustomerManagedDatastoreS3Storage;
+  }
+  export interface DatastoreStorageSummary {
+    /**
+     * Used to store data store data in an S3 bucket managed by the AWS IoT Analytics service.
+     */
+    serviceManagedS3?: ServiceManagedDatastoreS3StorageSummary;
+    /**
+     * Used to store data store data in an S3 bucket that you manage.
+     */
+    customerManagedS3?: CustomerManagedDatastoreS3StorageSummary;
+  }
   export type DatastoreSummaries = DatastoreSummary[];
   export interface DatastoreSummary {
     /**
      * The name of the data store.
      */
     datastoreName?: DatastoreName;
+    /**
+     * Where data store data is stored.
+     */
+    datastoreStorage?: DatastoreStorageSummary;
     /**
      * The status of the data store.
      */
@@ -1457,6 +1577,7 @@ declare namespace IoTAnalytics {
      */
     roleArn: RoleArn;
   }
+  export type S3KeyPrefix = string;
   export interface SampleChannelDataRequest {
     /**
      * The name of the channel whose message samples are retrieved.
@@ -1501,6 +1622,14 @@ declare namespace IoTAnalytics {
      * The next activity in the pipeline.
      */
     next?: ActivityName;
+  }
+  export interface ServiceManagedChannelS3Storage {
+  }
+  export interface ServiceManagedChannelS3StorageSummary {
+  }
+  export interface ServiceManagedDatastoreS3Storage {
+  }
+  export interface ServiceManagedDatastoreS3StorageSummary {
   }
   export type SizeInBytes = number;
   export type SqlQuery = string;
@@ -1590,6 +1719,10 @@ declare namespace IoTAnalytics {
      */
     channelName: ChannelName;
     /**
+     * Where channel data is stored.
+     */
+    channelStorage?: ChannelStorage;
+    /**
      * How long, in days, message data is kept for the channel.
      */
     retentionPeriod?: RetentionPeriod;
@@ -1629,6 +1762,10 @@ declare namespace IoTAnalytics {
      * How long, in days, message data is kept for the data store.
      */
     retentionPeriod?: RetentionPeriod;
+    /**
+     * Where data store data is stored.
+     */
+    datastoreStorage?: DatastoreStorage;
   }
   export interface UpdatePipelineRequest {
     /**

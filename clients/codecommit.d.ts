@@ -220,6 +220,14 @@ declare class CodeCommit extends Service {
    */
   listRepositories(callback?: (err: AWSError, data: CodeCommit.Types.ListRepositoriesOutput) => void): Request<CodeCommit.Types.ListRepositoriesOutput, AWSError>;
   /**
+   * Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see CodeCommit Resources and Operations in the AWS CodeCommit User Guide.
+   */
+  listTagsForResource(params: CodeCommit.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: CodeCommit.Types.ListTagsForResourceOutput) => void): Request<CodeCommit.Types.ListTagsForResourceOutput, AWSError>;
+  /**
+   * Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see CodeCommit Resources and Operations in the AWS CodeCommit User Guide.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: CodeCommit.Types.ListTagsForResourceOutput) => void): Request<CodeCommit.Types.ListTagsForResourceOutput, AWSError>;
+  /**
    * Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge option.
    */
   mergePullRequestByFastForward(params: CodeCommit.Types.MergePullRequestByFastForwardInput, callback?: (err: AWSError, data: CodeCommit.Types.MergePullRequestByFastForwardOutput) => void): Request<CodeCommit.Types.MergePullRequestByFastForwardOutput, AWSError>;
@@ -268,6 +276,14 @@ declare class CodeCommit extends Service {
    */
   putRepositoryTriggers(callback?: (err: AWSError, data: CodeCommit.Types.PutRepositoryTriggersOutput) => void): Request<CodeCommit.Types.PutRepositoryTriggersOutput, AWSError>;
   /**
+   * Adds or updates tags for a resource in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see CodeCommit Resources and Operations in the AWS CodeCommit User Guide.
+   */
+  tagResource(params: CodeCommit.Types.TagResourceInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Adds or updates tags for a resource in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see CodeCommit Resources and Operations in the AWS CodeCommit User Guide.
+   */
+  tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Tests the functionality of repository triggers by sending information to the trigger target. If real data is available in the repository, the test will send data from the last commit. If no data is available, sample data will be generated.
    */
   testRepositoryTriggers(params: CodeCommit.Types.TestRepositoryTriggersInput, callback?: (err: AWSError, data: CodeCommit.Types.TestRepositoryTriggersOutput) => void): Request<CodeCommit.Types.TestRepositoryTriggersOutput, AWSError>;
@@ -275,6 +291,14 @@ declare class CodeCommit extends Service {
    * Tests the functionality of repository triggers by sending information to the trigger target. If real data is available in the repository, the test will send data from the last commit. If no data is available, sample data will be generated.
    */
   testRepositoryTriggers(callback?: (err: AWSError, data: CodeCommit.Types.TestRepositoryTriggersOutput) => void): Request<CodeCommit.Types.TestRepositoryTriggersOutput, AWSError>;
+  /**
+   * Removes tags for a resource in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see CodeCommit Resources and Operations in the AWS CodeCommit User Guide.
+   */
+  untagResource(params: CodeCommit.Types.UntagResourceInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes tags for a resource in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see CodeCommit Resources and Operations in the AWS CodeCommit User Guide.
+   */
+  untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Replaces the contents of a comment.
    */
@@ -628,6 +652,10 @@ declare namespace CodeCommit {
      * A comment or description about the new repository.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
      */
     repositoryDescription?: RepositoryDescription;
+    /**
+     * One or more tag key-value pairs to use when tagging this repository.
+     */
+    tags?: TagsMap;
   }
   export interface CreateRepositoryOutput {
     /**
@@ -1244,6 +1272,26 @@ declare namespace CodeCommit {
      */
     nextToken?: NextToken;
   }
+  export interface ListTagsForResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource for which you want to get information about tags, if any.
+     */
+    resourceArn: ResourceArn;
+    /**
+     * An enumeration token that when provided in a request, returns the next batch of the results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListTagsForResourceOutput {
+    /**
+     * A list of tag key and value pairs associated with the specified resource.
+     */
+    tags?: TagsMap;
+    /**
+     * An enumeration token that allows the operation to batch the next results of the operation.
+     */
+    nextToken?: NextToken;
+  }
   export interface Location {
     /**
      * The name of the file being compared, including its extension and subdirectory, if any.
@@ -1793,6 +1841,7 @@ declare namespace CodeCommit {
   export type RepositoryTriggerNameList = RepositoryTriggerName[];
   export type RepositoryTriggersConfigurationId = string;
   export type RepositoryTriggersList = RepositoryTrigger[];
+  export type ResourceArn = string;
   export type SetFileModeEntries = SetFileModeEntry[];
   export interface SetFileModeEntry {
     /**
@@ -1849,6 +1898,20 @@ declare namespace CodeCommit {
     fileMode?: FileModeTypeEnum;
   }
   export type SymbolicLinkList = SymbolicLink[];
+  export type TagKey = string;
+  export type TagKeysList = TagKey[];
+  export interface TagResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource to which you want to add or update tags.
+     */
+    resourceArn: ResourceArn;
+    /**
+     * The key-value pair to use when tagging this repository.
+     */
+    tags: TagsMap;
+  }
+  export type TagValue = string;
+  export type TagsMap = {[key: string]: TagValue};
   export interface Target {
     /**
      * The name of the repository that contains the pull request.
@@ -1885,6 +1948,16 @@ declare namespace CodeCommit {
     failedExecutions?: RepositoryTriggerExecutionFailureList;
   }
   export type Title = string;
+  export interface UntagResourceInput {
+    /**
+     * The Amazon Resource Name (ARN) of the resource to which you want to remove tags.
+     */
+    resourceArn: ResourceArn;
+    /**
+     * The tag key for each tag that you want to remove from the resource.
+     */
+    tagKeys: TagKeysList;
+  }
   export interface UpdateCommentInput {
     /**
      * The system-generated ID of the comment you want to update. To get this ID, use GetCommentsForComparedCommit or GetCommentsForPullRequest.
