@@ -2,7 +2,7 @@ var stream = require('stream');
 var AWS = require('../helpers').AWS;
 var testEventMessages = require('./test-event-messages.fixture');
 var mockEventStreamShape = require('./test-event-stream-model.fixture').mockEventStreamShape;
-var toBuffer = require('../../lib/event-stream/to-buffer').toBuffer;
+var toBuffer = AWS.util.buffer.toBuffer;
 var EventUnmarshallerStream = require('../../lib/event-stream/event-message-unmarshaller-stream').EventUnmarshallerStream;
 
 if (stream.Transform) {

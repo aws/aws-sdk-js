@@ -263,7 +263,7 @@
         return expect(len(null)).to.equal(0);
       });
       it('handles buffer input', function() {
-        return expect(len(new Buffer('∂ƒ©∆'))).to.equal(10);
+        return expect(len(new AWS.util.buffer.toBuffer('∂ƒ©∆'))).to.equal(10);
       });
       it('handles string input', function() {
         expect(len('')).to.equal(0);
@@ -332,11 +332,21 @@
   });
 
   describe('AWS.util.buffer', function() {
+    describe ('alloc', function () {
+      it('should throw if first parameter is not number', function(done) {
+        try {
+          AWS.util.buffer.alloc('foo');
+        } catch (e) {
+          expect(e.message).to.eql('size passed to alloc must be a number.');
+          done();
+        }
+      });
+    });
     return describe('concat', function() {
       return it('concatenates a list of buffers', function() {
         var buffer1, buffer2, buffer3;
-        buffer1 = new Buffer('abcdefg');
-        buffer2 = new Buffer('hijklmn');
+        buffer1 = AWS.util.buffer.toBuffer('abcdefg');
+        buffer2 =  AWS.util.buffer.toBuffer('hijklmn');
         buffer3 = AWS.util.buffer.concat([buffer1, buffer2]);
         expect(buffer3.length).to.equal(14);
         return expect(buffer3.toString()).to.equal('abcdefghijklmn');
@@ -350,7 +360,7 @@
     describe('crc32', function() {
       it('returns the correct CRC32 value for binary data', function() {
         var buffer, i, j, ref;
-        buffer = new Buffer(4433);
+        buffer = AWS.util.buffer.alloc(4433);
         for (i = j = 0, ref = buffer.length; 0 <= ref ? j < ref : j > ref; i = 0 <= ref ? ++j : --j) {
           buffer.writeUInt8(i % 256, i);
         }
@@ -425,7 +435,7 @@
           tr._transform = function(data, encoding, callback) {
             return callback(null, data);
           };
-          tr.push(new AWS.util.Buffer(input));
+          tr.push(AWS.util.buffer.toBuffer(input));
           tr.end();
           return util.sha256(tr, 'hex', function(e, d) {
             expect(d).to.equal(result);
@@ -484,7 +494,7 @@
           tr._transform = function(data, enc, callback) {
             return callback(null, data);
           };
-          tr.push(new AWS.util.Buffer(input));
+          tr.push(AWS.util.buffer.toBuffer(input));
           tr.end();
           return util.md5(tr, 'hex', function(e, d) {
             expect(d).to.equal(result);
@@ -870,8 +880,8 @@
         return expect(base64.encode('ёŝ')).to.equal('0ZHFnQ==');
       });
       it('encodes the given buffer', function() {
-        expect(base64.encode(new AWS.util.Buffer('foo'))).to.equal('Zm9v');
-        return expect(base64.encode(new AWS.util.Buffer('ёŝ'))).to.equal('0ZHFnQ==');
+        expect(base64.encode(AWS.util.buffer.toBuffer('foo'))).to.equal('Zm9v');
+        return expect(base64.encode(AWS.util.buffer.toBuffer('ёŝ'))).to.equal('0ZHFnQ==');
       });
       it('throws if a number is supplied', function() {
         var e, err;
@@ -897,8 +907,8 @@
         return expect(base64.decode('0ZHFnQ==').toString()).to.equal('ёŝ');
       });
       it('decodes the given buffer', function() {
-        expect(base64.decode(new AWS.util.Buffer('Zm9v', 'base64')).toString()).to.equal('foo');
-        return expect(base64.decode(new AWS.util.Buffer('0ZHFnQ==', 'base64')).toString()).to.equal('ёŝ');
+        expect(base64.decode(AWS.util.buffer.toBuffer('Zm9v', 'base64')).toString()).to.equal('foo');
+        return expect(base64.decode(AWS.util.buffer.toBuffer('0ZHFnQ==', 'base64')).toString()).to.equal('ёŝ');
       });
       it('throws if a number is supplied', function() {
         var e, err;

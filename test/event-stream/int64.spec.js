@@ -1,4 +1,5 @@
-var toBuffer = require('../../lib/event-stream/to-buffer').toBuffer;
+var AWS = require('../helpers').AWS;
+var toBuffer = AWS.util.buffer.toBuffer;
 var Int64 = require('../../lib/event-stream/int64').Int64;
 
 describe('Int64', function() {

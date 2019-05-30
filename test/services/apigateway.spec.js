@@ -54,7 +54,7 @@
       describe('getSdk', function() {
         return it('returns the raw payload as the body', function(done) {
           var body;
-          body = new Buffer('∂ƒ©∆');
+          body = AWS.util.buffer.toBuffer('∂ƒ©∆');
           helpers.mockHttpResponse(200, {}, body);
           return apigateway.getSdk(function(err, data) {
             expect(data.body).to.eql(body);
@@ -69,7 +69,7 @@
             swagger: '2.0',
             host: 'foo.amazonaws.com'
           });
-          body = new Buffer(swaggerDoc);
+          body = AWS.util.buffer.toBuffer(swaggerDoc);
           helpers.mockHttpResponse(200, {}, body);
           return apigateway.getExport({
             exportType: 'swagger'
@@ -85,7 +85,7 @@
             notSwagger: '2.0',
             host: 'foo.amazonaws.com'
           });
-          body = new Buffer(swaggerDoc);
+          body = AWS.util.buffer.toBuffer(swaggerDoc);
           helpers.mockHttpResponse(200, {}, body);
           return apigateway.getExport({
             exportType: 'notSwagger'

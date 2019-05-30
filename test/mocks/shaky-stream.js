@@ -1,5 +1,6 @@
 var stream = require('stream');
 var util = require('util');
+var toBuffer = require('../helpers').AWS.util.buffer.toBuffer;
 
 var Readable = stream.Readable;
 
@@ -28,7 +29,7 @@ util.inherits(ShakyStream, Readable);
 ShakyStream.prototype._read = function _read(size) {
     if (!this._didStart) {
         this._didStart = true;
-        this.push(new Buffer('{"Count":1,"Items":[{"id":{"S":"2016-12-11"},"dateUTC":{"N":"1481494545591"},'));
+        this.push(toBuffer('{"Count":1,"Items":[{"id":{"S":"2016-12-11"},"dateUTC":{"N":"1481494545591"},'));
     }
     if (this._didStart && this._isPaused) {
         return;
@@ -36,7 +37,7 @@ ShakyStream.prototype._read = function _read(size) {
         this._isPaused = true;
         var self = this;
         timeoutFn(function() {
-            self.push(new Buffer('"javascript":{"M":{"foo":{"S":"bar"},"baz":{"S":"buz"}}}}],"ScannedCount":1}'));
+            self.push(toBuffer('"javascript":{"M":{"foo":{"S":"bar"},"baz":{"S":"buz"}}}}],"ScannedCount":1}'));
             self.push(null);
         }, this._shakyTime);
     }

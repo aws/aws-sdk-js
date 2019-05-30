@@ -218,7 +218,7 @@
           if (chunk === null) {
             return null;
           } else {
-            return new Buffer(chunk);
+            return AWS.util.buffer.toBuffer(chunk);
           }
         } else {
           return null;
@@ -229,7 +229,7 @@
       if (AWS.util.isNode() && httpResp._events.readable) {
         return httpResp.emit('readable');
       } else {
-        return httpResp.emit('data', new Buffer(str));
+        return httpResp.emit('data', AWS.util.buffer.toBuffer(str));
       }
     });
     if (httpResp._events['readable'] || httpResp._events['data']) {
