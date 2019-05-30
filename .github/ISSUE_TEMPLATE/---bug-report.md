@@ -10,14 +10,16 @@ assignees: ''
 **Describe the bug**
 A clear and concise description of what the bug is.
 
-**SDK version number**
-For example, v2.461.0
-
 **Is the issue in the browser/Node.js?**
 Browser/Node.js
 
 **Details of the browser/Node.js version**
 Paste output of `npx envinfo --browsers` or `node -v`
+
+**SDK version number**
+Example: v2.466.0
+* For browsers, the SDK version number is in the script tag <pre>src=".../aws-sdk-<b>2.466.0</b>.min.js"</pre>
+* For Node.js, get SDK version by running command `npm list aws-sdk` from your root directory
 
 **To Reproduce (observed behavior)**
 Steps to reproduce the behavior (please share code or minimal repo)
