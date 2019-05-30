@@ -96,7 +96,7 @@ module.exports = function() {
     req.removeAllListeners('httpData');
     req.on('httpData', function(chunk, resp) {
       if (resp.retryCount == 0) {
-        resp.httpResponse.body = new Buffer('{"invalid":"response"}');
+        resp.httpResponse.body = Buffer.from('{"invalid":"response"}');
       } else {
         world.AWS.EventListeners.Core.HTTP_DATA.call(this, chunk, resp);
       }
@@ -121,7 +121,7 @@ module.exports = function() {
     var req = this.service.listTables();
     req.removeAllListeners('httpData');
     req.on('httpData', function(chunk, resp) {
-      resp.httpResponse.body = new Buffer('{"invalid":"response"}');
+      resp.httpResponse.body = Buffer.from('{"invalid":"response"}');
     });
     req.on('complete', function(resp) {
       world.error = resp.error;

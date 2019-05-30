@@ -25,7 +25,7 @@ module.exports = function(file) {
         });
 
         code = lines.join('\n');
-        data = new Buffer(code);
+        data = Buffer.from(code);
         callback(null, data);
       };
 

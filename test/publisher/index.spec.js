@@ -185,7 +185,7 @@ if (AWS.util.isNode()) {
       });
 
       it('ignores the event if it is > 8 KB', function () {
-        var mockEvent = { foo: new Buffer(1024 * 8) };
+        var mockEvent = { foo: AWS.util.buffer.alloc(1024 * 8) };
         var publisher = new Publisher({
           enabled: true,
           clientId: 'Foo'
@@ -253,7 +253,7 @@ if (AWS.util.isNode()) {
             clientId: 'Foo',
             port: server.address().port
           });
-          publisher.publishDatagram(new Buffer(1024));
+          publisher.publishDatagram(AWS.util.buffer.alloc(1024));
         }, function () {
           // the message was received by the mock server
           expect(true).to.equal(true);
@@ -270,7 +270,7 @@ if (AWS.util.isNode()) {
             clientId: 'Foo',
             port: mockServer.address().port
           });
-          publisher.publishDatagram(new Buffer(1024));
+          publisher.publishDatagram(AWS.util.buffer.alloc(1024));
           expect(typeof publisher.client).not.to.equal('undefined');
         }, function () {
           // the message was received by the mock server

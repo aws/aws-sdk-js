@@ -72,7 +72,7 @@
       describe('computeChecksums', function() {
         return it('returns correct linear and tree hash for buffer data', function() {
           var data, expected;
-          data = new Buffer(1024 * 1024 * 5.5);
+          data = AWS.util.buffer.alloc(1024 * 1024 * 5.5);
           data.fill('0');
           expected = {
             linearHash: '68aff0c5a91aa0491752bfb96e3fef33eb74953804f6a2f7b708d5bcefa8ff6b',

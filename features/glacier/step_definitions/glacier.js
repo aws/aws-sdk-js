@@ -11,7 +11,7 @@ module.exports = function() {
   });
 
   this.Given(/^I upload a (\d+(?:\.\d+)?)MB Glacier archive to the vault( with (?:invalid|incorrect) checksum)?$/, function(size, invalid, callback) {
-    var data = new Buffer(parseFloat(size) * 1024 * 1024);
+    var data = Buffer.alloc(parseFloat(size) * 1024 * 1024);
     data.fill('0');
     var params = {vaultName: this.vaultName, body: data};
     if (invalid) {
@@ -51,7 +51,7 @@ module.exports = function() {
 
   this.When(/^I initiate a Glacier multi-part upload on a (\d+(?:\.\d+)?)MB archive in (\d+)MB chunks$/, function(totalSize, partSize, callback) {
     // setup multi-part upload
-    this.uploadData = new Buffer(totalSize * 1024 * 1024);
+    this.uploadData = Buffer.alloc(totalSize * 1024 * 1024);
     this.uploadData.fill('0');
     this.checksums = this.service.computeChecksums(this.uploadData);
     this.partCounter = 0;

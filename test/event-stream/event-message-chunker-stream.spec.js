@@ -1,6 +1,5 @@
 var Transform = require('stream').Transform;
 var EventMessageChunkerStream = require('../../lib/event-stream/event-message-chunker-stream').EventMessageChunkerStream;
-var allocBuffer = require('../../lib/event-stream/alloc-buffer').allocBuffer;
 var testEventMessages = require('./test-event-messages.fixture');
 var MockEventMessageSource = require('./mock-event-message-source-stream.fixture').MockEventMessageSource;
 

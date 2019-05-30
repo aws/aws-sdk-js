@@ -609,7 +609,7 @@ class ExampleShapeVisitor
   end
 
   def visit_binary(node, required = false)
-    value = "new Buffer('...') || 'STRING_VALUE'"
+    value = "Buffer.from('...') || 'STRING_VALUE'"
     if node['streaming']
       value += " || streamObject"
     else
