@@ -627,6 +627,10 @@ declare namespace PinpointEmail {
   export type DeliverabilityTestSubject = string;
   export interface DeliveryOptions {
     /**
+     * Specifies whether Amazon Pinpoint should require that incoming email is delivered over a connection that’s encrypted by using Transport Layer Security (TLS). If this value is set to Require, Amazon Pinpoint will bounce email messages that cannot be delivered over TLS. The default value is Optional.
+     */
+    TlsPolicy?: TlsPolicy;
+    /**
      * The name of the dedicated IP pool that you want to associate with the configuration set.
      */
     SendingPoolName?: PoolName;
@@ -1366,6 +1370,10 @@ declare namespace PinpointEmail {
      */
     ConfigurationSetName: ConfigurationSetName;
     /**
+     * Whether Amazon Pinpoint should require that incoming email is delivered over a connection encrypted with Transport Layer Security (TLS).
+     */
+    TlsPolicy?: TlsPolicy;
+    /**
      * The name of the dedicated IP pool that you want to associate with the configuration set.
      */
     SendingPoolName?: SendingPoolName;
@@ -1596,6 +1604,7 @@ declare namespace PinpointEmail {
   }
   export type TagValue = string;
   export type Timestamp = Date;
+  export type TlsPolicy = "REQUIRE"|"OPTIONAL"|string;
   export interface TrackingOptions {
     /**
      * The domain that you want to use for tracking open and click events.

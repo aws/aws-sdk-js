@@ -176,5 +176,7 @@ module.exports = {
   ManagedBlockchain: require('./managedblockchain'),
   MediaPackageVod: require('./mediapackagevod'),
   GroundStation: require('./groundstation'),
-  IoTThingsGraph: require('./iotthingsgraph')
+  IoTThingsGraph: require('./iotthingsgraph'),
+  IoTEvents: require('./iotevents'),
+  IoTEventsData: require('./ioteventsdata')
 };

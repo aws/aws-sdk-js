@@ -175,3 +175,5 @@ export import ManagedBlockchain = require('./managedblockchain');
 export import MediaPackageVod = require('./mediapackagevod');
 export import GroundStation = require('./groundstation');
 export import IoTThingsGraph = require('./iotthingsgraph');
+export import IoTEvents = require('./iotevents');
+export import IoTEventsData = require('./ioteventsdata');

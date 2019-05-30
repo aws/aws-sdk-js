@@ -706,5 +706,12 @@
   },
   "iotthingsgraph": {
     "name": "IoTThingsGraph"
+  },
+  "iotevents": {
+    "name": "IoTEvents"
+  },
+  "ioteventsdata": {
+    "prefix": "iotevents-data",
+    "name": "IoTEventsData"
   }
 }

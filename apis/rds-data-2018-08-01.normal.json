@@ -11,8 +11,104 @@
     "signingName": "rds-data",
     "uid": "rds-data-2018-08-01"
   },
-  "documentation": "AWS RDS DataService provides Http Endpoint to query RDS databases.",
+  "documentation": "<fullname>Amazon RDS Data Service</fullname>\n        <p>Amazon RDS provides an HTTP endpoint to run SQL statements on an Amazon Aurora\n            Serverless DB cluster. To run these statements, you work with the Data Service\n            API.</p>\n        <p>For more information about the Data Service API, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html\">Using the Data API for Aurora\n                Serverless</a> in the <i>Amazon Aurora User Guide</i>.</p>",
   "operations": {
+    "BatchExecuteStatement": {
+      "name": "BatchExecuteStatement",
+      "http": {
+        "method": "POST",
+        "requestUri": "/BatchExecute",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "BatchExecuteStatementRequest"
+      },
+      "output": {
+        "shape": "BatchExecuteStatementResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ServiceUnavailableError"
+        },
+        {
+          "shape": "StatementTimeoutException"
+        }
+      ],
+      "documentation": "<p>Runs a batch SQL statement over an array of data.</p>\n        <p>You can run bulk update and insert operations for multiple records using a DML \n            statement with different parameter sets. Bulk operations can provide a significant \n            performance improvement over individual insert and update operations.</p>\n        <important>    \n            <p>If a call isn't part of a transaction because it doesn't include the\n                    <code>transactionID</code> parameter, changes that result from the call are\n                committed automatically.</p>    \n        </important>"
+    },
+    "BeginTransaction": {
+      "name": "BeginTransaction",
+      "http": {
+        "method": "POST",
+        "requestUri": "/BeginTransaction",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "BeginTransactionRequest"
+      },
+      "output": {
+        "shape": "BeginTransactionResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ServiceUnavailableError"
+        },
+        {
+          "shape": "StatementTimeoutException"
+        }
+      ],
+      "documentation": "<p>Starts a SQL transaction.</p>\n        \n        <important>\n            <p>A transaction can run for a maximum of 24 hours. A transaction is terminated and \n                rolled back automatically after 24 hours.</p>\n            <p>A transaction times out if no calls use its transaction ID in three minutes. \n                If a transaction times out before it's committed, it's rolled back\n                automatically.</p>\n            <p>DDL statements inside a transaction cause an implicit commit. We recommend \n                that you run each DDL statement in a separate <code>ExecuteStatement</code> call with \n                <code>continueAfterTimeout</code> enabled.</p>\n        </important>"
+    },
+    "CommitTransaction": {
+      "name": "CommitTransaction",
+      "http": {
+        "method": "POST",
+        "requestUri": "/CommitTransaction",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "CommitTransactionRequest"
+      },
+      "output": {
+        "shape": "CommitTransactionResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableError"
+        }
+      ],
+      "documentation": "<p>Ends a SQL transaction started with the <code>BeginTransaction</code> operation and\n            commits the changes.</p>"
+    },
     "ExecuteSql": {
       "name": "ExecuteSql",
       "http": {
@@ -40,160 +136,231 @@
           "shape": "ServiceUnavailableError"
         }
       ],
-      "documentation": "Executes any SQL statement on the target database synchronously"
+      "deprecated": true,
+      "documentation": "<p>Runs one or more SQL statements.</p>\n        <important>\n            <p>This operation is deprecated. Use the <code>BatchExecuteStatement</code> or\n                    <code>ExecuteStatement</code> operation.</p>\n        </important>"
+    },
+    "ExecuteStatement": {
+      "name": "ExecuteStatement",
+      "http": {
+        "method": "POST",
+        "requestUri": "/Execute",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ExecuteStatementRequest"
+      },
+      "output": {
+        "shape": "ExecuteStatementResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "ServiceUnavailableError"
+        },
+        {
+          "shape": "StatementTimeoutException"
+        }
+      ],
+      "documentation": "<p>Runs a SQL statement against a database.</p>\n        <important>    \n            <p>If a call isn't part of a transaction because it doesn't include the\n                    <code>transactionID</code> parameter, changes that result from the call are\n                committed automatically.</p>    \n        </important>\n        <p>The response size limit is 1 MB or 1,000 records. If the call returns more than 1 MB of response data or over 1,000 records, the call is terminated.</p>"
+    },
+    "RollbackTransaction": {
+      "name": "RollbackTransaction",
+      "http": {
+        "method": "POST",
+        "requestUri": "/RollbackTransaction",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "RollbackTransactionRequest"
+      },
+      "output": {
+        "shape": "RollbackTransactionResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceUnavailableError"
+        }
+      ],
+      "documentation": "<p>Performs a rollback of a transaction. Rolling back a transaction cancels its changes.</p>"
     }
   },
   "shapes": {
-    "Boolean": {
-      "type": "boolean",
-      "box": true
-    },
-    "Value": {
-      "type": "structure",
-      "members": {
-        "arrayValues": {
-          "shape": "ArrayValues",
-          "documentation": "Arbitrarily nested arrays"
-        },
-        "bigIntValue": {
-          "shape": "Long",
-          "documentation": "Long value"
-        },
-        "bitValue": {
-          "shape": "Boolean",
-          "documentation": "Bit value"
-        },
-        "blobValue": {
-          "shape": "Blob",
-          "documentation": "Blob value"
-        },
-        "doubleValue": {
-          "shape": "Double",
-          "documentation": "Double value"
-        },
-        "intValue": {
-          "shape": "Integer",
-          "documentation": "Integer value"
-        },
-        "isNull": {
-          "shape": "Boolean",
-          "documentation": "Is column null"
-        },
-        "realValue": {
-          "shape": "Float",
-          "documentation": "Float value"
-        },
-        "stringValue": {
-          "shape": "String",
-          "documentation": "String value"
-        },
-        "structValue": {
-          "shape": "StructValue",
-          "documentation": "Struct or UDT"
-        }
-      },
-      "documentation": "Column value"
-    },
     "SqlStatementResults": {
       "type": "list",
       "member": {
         "shape": "SqlStatementResult"
-      },
-      "documentation": "SQL statement execution results"
-    },
-    "ColumnMetadataList": {
-      "type": "list",
-      "member": {
-        "shape": "ColumnMetadata"
-      },
-      "documentation": "List of Column metadata"
+      }
     },
     "ResultFrame": {
       "type": "structure",
       "members": {
         "records": {
           "shape": "Records",
-          "documentation": "ResultSet Metadata."
+          "documentation": "<p>The records in the result set.</p>"
         },
         "resultSetMetadata": {
           "shape": "ResultSetMetadata",
-          "documentation": "ResultSet Metadata."
+          "documentation": "<p>The result-set metadata in the result set.</p>"
         }
       },
-      "documentation": "Result Frame"
+      "documentation": "<p>The result set returned by a SQL statement.</p>"
     },
-    "Long": {
-      "type": "long",
-      "box": true
+    "SqlParameterSets": {
+      "type": "list",
+      "member": {
+        "shape": "SqlParametersList"
+      }
+    },
+    "BatchExecuteStatementRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "secretArn",
+        "sql"
+      ],
+      "members": {
+        "database": {
+          "shape": "DbName",
+          "documentation": "<p>The name of the database.</p>"
+        },
+        "parameterSets": {
+          "shape": "SqlParameterSets",
+          "documentation": "<p>The parameter set for the batch operation.</p>"
+        },
+        "resourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.</p>"
+        },
+        "schema": {
+          "shape": "DbName",
+          "documentation": "<p>The name of the database schema.</p>"
+        },
+        "secretArn": {
+          "shape": "Arn",
+          "documentation": "<p>The name or ARN of the secret that enables access to the DB cluster.</p>"
+        },
+        "sql": {
+          "shape": "SqlStatement",
+          "documentation": "<p>The SQL statement to run.</p>"
+        },
+        "transactionId": {
+          "shape": "Id",
+          "documentation": "<p>The identifier of a transaction that was started by using the\n                <code>BeginTransaction</code> operation. Specify the transaction ID of the\n            transaction that you want to include the SQL statement in.</p>\n        <p>If the SQL statement is not part of a transaction, don't set this\n            parameter.</p>"
+        }
+      },
+      "documentation": "<p>The request parameters represent the input of a SQL statement over an array of\n            data.</p>"
+    },
+    "ArrayValueList": {
+      "type": "list",
+      "member": {
+        "shape": "Value"
+      }
+    },
+    "UpdateResults": {
+      "type": "list",
+      "member": {
+        "shape": "UpdateResult"
+      }
     },
     "Row": {
       "type": "list",
       "member": {
         "shape": "Value"
-      },
-      "documentation": "List of column values"
+      }
     },
-    "String": {
-      "type": "string"
-    },
-    "ArrayValues": {
+    "SqlRecords": {
       "type": "list",
       "member": {
-        "shape": "Value"
-      },
-      "documentation": "Array value"
+        "shape": "FieldList"
+      }
     },
-    "Float": {
-      "type": "float",
+    "Long": {
+      "type": "long"
+    },
+    "BoxedInteger": {
+      "type": "integer",
       "box": true
     },
-    "ExecuteSqlResponse": {
+    "CommitTransactionResponse": {
       "type": "structure",
-      "required": [
-        "sqlStatementResults"
-      ],
       "members": {
-        "sqlStatementResults": {
-          "shape": "SqlStatementResults",
-          "documentation": "Results returned by executing the sql statement(s)"
+        "transactionStatus": {
+          "shape": "TransactionStatus",
+          "documentation": "<p>The status of the commit operation.</p>"
         }
       },
-      "documentation": "Execute SQL response"
+      "documentation": "<p>The response elements represent the output of a commit transaction request.</p>"
     },
-    "SqlStatementResult": {
+    "Integer": {
+      "type": "integer"
+    },
+    "BoxedLong": {
+      "type": "long",
+      "box": true
+    },
+    "SqlParameter": {
       "type": "structure",
       "members": {
-        "numberOfRecordsUpdated": {
-          "shape": "Long",
-          "documentation": "Number of rows updated."
+        "name": {
+          "shape": "ParameterName",
+          "documentation": "<p>The name of the parameter.</p>"
         },
-        "resultFrame": {
-          "shape": "ResultFrame",
-          "documentation": "ResultFrame returned by executing the sql statement"
+        "value": {
+          "shape": "Field",
+          "documentation": "<p>The value of the parameter.</p>"
         }
       },
-      "documentation": "SQL statement execution result"
+      "documentation": "<p>A parameter used in a SQL statement.</p>"
     },
-    "ResultSetMetadata": {
+    "Field": {
       "type": "structure",
       "members": {
-        "columnCount": {
-          "shape": "Long",
-          "documentation": "Number of columns"
+        "blobValue": {
+          "shape": "Blob",
+          "documentation": "<p>A value of BLOB data type.</p>"
         },
-        "columnMetadata": {
-          "shape": "ColumnMetadataList",
-          "documentation": "List of columns and their types"
+        "booleanValue": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>A value of Boolean data type.</p>"
+        },
+        "doubleValue": {
+          "shape": "BoxedDouble",
+          "documentation": "<p>A value of double data type.</p>"
+        },
+        "isNull": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>A NULL value.</p>"
+        },
+        "longValue": {
+          "shape": "BoxedLong",
+          "documentation": "<p>A value of long data type.</p>"
+        },
+        "stringValue": {
+          "shape": "String",
+          "documentation": "<p>A value of string data type.</p>"
         }
       },
-      "documentation": "List of columns and their types."
-    },
-    "Records": {
-      "type": "list",
-      "member": {
-        "shape": "Record"
-      },
-      "documentation": "List of records"
+      "documentation": "<p>Contains a value.</p>"
     },
     "ExecuteSqlRequest": {
       "type": "structure",
@@ -205,131 +372,444 @@
       "members": {
         "awsSecretStoreArn": {
           "shape": "Arn",
-          "documentation": "ARN of the db credentials in AWS Secret Store or the friendly secret name"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the secret that enables access to the DB cluster.</p>"
         },
         "database": {
           "shape": "DbName",
-          "documentation": "Target DB name"
+          "documentation": "<p>The name of the database.</p>"
         },
         "dbClusterOrInstanceArn": {
           "shape": "Arn",
-          "documentation": "ARN of the target db cluster or instance"
+          "documentation": "<p>The ARN of the Aurora Serverless DB cluster.</p>"
         },
         "schema": {
           "shape": "DbName",
-          "documentation": "Target Schema name"
+          "documentation": "<p>The name of the database schema.</p>"
         },
         "sqlStatements": {
           "shape": "SqlStatement",
-          "documentation": "SQL statement(s) to be executed. Statements can be chained by using semicolons"
+          "documentation": "<p>One or more SQL statements to run on the DB cluster.</p>\n        <p>You can separate SQL statements from each other with a semicolon (;). Any valid SQL\n            statement is permitted, including data definition, data manipulation, and commit\n            statements. </p>"
         }
       },
-      "documentation": "Execute SQL Request"
+      "documentation": "<p>The request parameters represent the input of a request to run one or more SQL\n            statements.</p>"
     },
     "Arn": {
       "type": "string",
-      "max": 1024
+      "max": 100
     },
     "StructValue": {
       "type": "structure",
       "members": {
         "attributes": {
-          "shape": "ArrayValues",
-          "documentation": "Struct or UDT"
+          "shape": "ArrayValueList",
+          "documentation": "<p>The attributes returned in the record.</p>"
         }
       },
-      "documentation": "User Defined Type"
+      "documentation": "<p>A structure value returned by a call.</p>"
     },
-    "Blob": {
-      "type": "blob"
+    "Boolean": {
+      "type": "boolean"
+    },
+    "TransactionStatus": {
+      "type": "string",
+      "max": 128
     },
     "SqlStatement": {
       "type": "string",
       "max": 65536
     },
-    "Double": {
-      "type": "double",
-      "box": true
-    },
-    "ColumnMetadata": {
+    "RollbackTransactionRequest": {
       "type": "structure",
+      "required": [
+        "resourceArn",
+        "secretArn",
+        "transactionId"
+      ],
       "members": {
-        "arrayBaseColumnType": {
-          "shape": "Integer",
-          "documentation": "Homogenous array base SQL type from java.sql.Types."
+        "resourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.</p>"
         },
-        "isAutoIncrement": {
-          "shape": "Boolean",
-          "documentation": "Whether the designated column is automatically numbered"
+        "secretArn": {
+          "shape": "Arn",
+          "documentation": "<p>The name or ARN of the secret that enables access to the DB cluster.</p>"
         },
-        "isCaseSensitive": {
-          "shape": "Boolean",
-          "documentation": "Whether values in the designated column's case matters"
-        },
-        "isCurrency": {
-          "shape": "Boolean",
-          "documentation": "Whether values in the designated column is a cash value"
-        },
-        "isSigned": {
-          "shape": "Boolean",
-          "documentation": "Whether values in the designated column are signed numbers"
-        },
-        "label": {
-          "shape": "String",
-          "documentation": "Usually specified by the SQL AS. If not specified, return column name."
-        },
-        "name": {
-          "shape": "String",
-          "documentation": "Name of the column."
-        },
-        "nullable": {
-          "shape": "Integer",
-          "documentation": "Indicates the nullability of values in the designated column. One of columnNoNulls (0), columnNullable (1), columnNullableUnknown (2)"
-        },
-        "precision": {
-          "shape": "Integer",
-          "documentation": "Get the designated column's specified column size.For numeric data, this is the maximum precision.  For character data, this is the length in characters. For datetime datatypes, this is the length in characters of the String representation (assuming the maximum allowed precision of the fractional seconds component). For binary data, this is the length in bytes.  For the ROWID datatype, this is the length in bytes. 0 is returned for data types where the column size is not applicable."
-        },
-        "scale": {
-          "shape": "Integer",
-          "documentation": "Designated column's number of digits to right of the decimal point. 0 is returned for data types where the scale is not applicable."
-        },
-        "schemaName": {
-          "shape": "String",
-          "documentation": "Designated column's table's schema"
-        },
-        "tableName": {
-          "shape": "String",
-          "documentation": "Designated column's table name"
-        },
-        "type": {
-          "shape": "Integer",
-          "documentation": "SQL type from java.sql.Types."
-        },
-        "typeName": {
-          "shape": "String",
-          "documentation": "Database-specific type name."
+        "transactionId": {
+          "shape": "Id",
+          "documentation": "<p>The identifier of the transaction to roll back.</p>"
         }
       },
-      "documentation": "Column Metadata"
-    },
-    "Integer": {
-      "type": "integer",
-      "box": true
-    },
-    "DbName": {
-      "type": "string",
-      "max": 64
+      "documentation": "<p>The request parameters represent the input of a request to perform a rollback of a\n            transaction.</p>"
     },
     "Record": {
       "type": "structure",
       "members": {
         "values": {
           "shape": "Row",
-          "documentation": "Record"
+          "documentation": "<p>The values returned in the record.</p>"
         }
       },
-      "documentation": "Row or Record"
+      "documentation": "<p>A record returned by a call.</p>"
+    },
+    "BoxedFloat": {
+      "type": "float",
+      "box": true
+    },
+    "BoxedDouble": {
+      "type": "double",
+      "box": true
+    },
+    "Value": {
+      "type": "structure",
+      "members": {
+        "arrayValues": {
+          "shape": "ArrayValueList",
+          "documentation": "<p>An array of column values.</p>"
+        },
+        "bigIntValue": {
+          "shape": "BoxedLong",
+          "documentation": "<p>A value for a column of big integer data type.</p>"
+        },
+        "bitValue": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>A value for a column of BIT data type.</p>"
+        },
+        "blobValue": {
+          "shape": "Blob",
+          "documentation": "<p>A value for a column of BLOB data type.</p>"
+        },
+        "doubleValue": {
+          "shape": "BoxedDouble",
+          "documentation": "<p>A value for a column of double data type.</p>"
+        },
+        "intValue": {
+          "shape": "BoxedInteger",
+          "documentation": "<p>A value for a column of integer data type.</p>"
+        },
+        "isNull": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>A NULL value.</p>"
+        },
+        "realValue": {
+          "shape": "BoxedFloat",
+          "documentation": "<p>A value for a column of real data type.</p>"
+        },
+        "stringValue": {
+          "shape": "String",
+          "documentation": "<p>A value for a column of string data type.</p>"
+        },
+        "structValue": {
+          "shape": "StructValue",
+          "documentation": "<p>A value for a column of STRUCT data type.</p>"
+        }
+      },
+      "documentation": "<p>Contains the value of a column.</p>"
+    },
+    "FieldList": {
+      "type": "list",
+      "member": {
+        "shape": "Field"
+      }
+    },
+    "ExecuteStatementResponse": {
+      "type": "structure",
+      "members": {
+        "columnMetadata": {
+          "shape": "Metadata",
+          "documentation": "<p>Metadata for the columns included in the results.</p>"
+        },
+        "generatedFields": {
+          "shape": "FieldList",
+          "documentation": "<p>Values for fields generated during the request.</p>"
+        },
+        "numberOfRecordsUpdated": {
+          "shape": "RecordsUpdated",
+          "documentation": "<p>The number of records updated by the request.</p>"
+        },
+        "records": {
+          "shape": "SqlRecords",
+          "documentation": "<p>The records returned by the SQL statement.</p>"
+        }
+      },
+      "documentation": "<p>The response elements represent the output of a request to run a SQL statement against\n            a database.</p>"
+    },
+    "BoxedBoolean": {
+      "type": "boolean",
+      "box": true
+    },
+    "RecordsUpdated": {
+      "type": "long"
+    },
+    "UpdateResult": {
+      "type": "structure",
+      "members": {
+        "generatedFields": {
+          "shape": "FieldList",
+          "documentation": "<p>Values for fields generated during the request.</p>"
+        }
+      },
+      "documentation": "<p>The response elements represent the results of an update.</p>"
+    },
+    "SqlParametersList": {
+      "type": "list",
+      "member": {
+        "shape": "SqlParameter"
+      }
+    },
+    "ParameterName": {
+      "type": "string"
+    },
+    "Metadata": {
+      "type": "list",
+      "member": {
+        "shape": "ColumnMetadata"
+      }
+    },
+    "ExecuteSqlResponse": {
+      "type": "structure",
+      "members": {
+        "sqlStatementResults": {
+          "shape": "SqlStatementResults",
+          "documentation": "<p>The results of the SQL statement or statements.</p>"
+        }
+      },
+      "documentation": "<p>The response elements represent the output of a request to run one or more SQL\n            statements.</p>"
+    },
+    "SqlStatementResult": {
+      "type": "structure",
+      "members": {
+        "numberOfRecordsUpdated": {
+          "shape": "RecordsUpdated",
+          "documentation": "<p>The number of records updated by a SQL statement.</p>"
+        },
+        "resultFrame": {
+          "shape": "ResultFrame",
+          "documentation": "<p>The result set of the SQL statement.</p>"
+        }
+      },
+      "documentation": "<p>The result of a SQL statement.</p>"
+    },
+    "BeginTransactionRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "secretArn"
+      ],
+      "members": {
+        "database": {
+          "shape": "DbName",
+          "documentation": "<p>The name of the database.</p>"
+        },
+        "resourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.</p>"
+        },
+        "schema": {
+          "shape": "DbName",
+          "documentation": "<p>The name of the database schema.</p>"
+        },
+        "secretArn": {
+          "shape": "Arn",
+          "documentation": "<p>The name or ARN of the secret that enables access to the DB cluster.</p>"
+        }
+      },
+      "documentation": "<p>The request parameters represent the input of a request to start a SQL\n            transaction.</p>"
+    },
+    "RollbackTransactionResponse": {
+      "type": "structure",
+      "members": {
+        "transactionStatus": {
+          "shape": "TransactionStatus",
+          "documentation": "<p>The status of the rollback operation.</p>"
+        }
+      },
+      "documentation": "<p>The response elements represent the output of a request to perform a rollback of a\n            transaction.</p>"
+    },
+    "BatchExecuteStatementResponse": {
+      "type": "structure",
+      "members": {
+        "updateResults": {
+          "shape": "UpdateResults",
+          "documentation": "<p>The execution results of each batch entry.</p>"
+        }
+      },
+      "documentation": "<p>The response elements represent the output of a SQL statement over an array of\n            data.</p>"
+    },
+    "ResultSetMetadata": {
+      "type": "structure",
+      "members": {
+        "columnCount": {
+          "shape": "Long",
+          "documentation": "<p>The number of columns in the result set.</p>"
+        },
+        "columnMetadata": {
+          "shape": "Metadata",
+          "documentation": "<p>The metadata of the columns in the result set.</p>"
+        }
+      },
+      "documentation": "<p>The metadata of the result set returned by a SQL statement.</p>"
+    },
+    "Records": {
+      "type": "list",
+      "member": {
+        "shape": "Record"
+      }
+    },
+    "ExecuteStatementRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "secretArn",
+        "sql"
+      ],
+      "members": {
+        "continueAfterTimeout": {
+          "shape": "Boolean",
+          "documentation": "<p>A value that indicates whether to continue running the statement after \n            the call times out. By default, the statement stops running when the call \n            times out.</p>\n        <important>\n            <p>For DDL statements, we recommend continuing to run the statement after \n               the call times out. When a DDL statement terminates before it is finished \n               running, it can result in errors and possibly corrupted data structures.</p>\n        </important>"
+        },
+        "database": {
+          "shape": "DbName",
+          "documentation": "<p>The name of the database.</p>"
+        },
+        "includeResultMetadata": {
+          "shape": "Boolean",
+          "documentation": "<p>A value that indicates whether to include metadata in the results.</p>"
+        },
+        "parameters": {
+          "shape": "SqlParametersList",
+          "documentation": "<p>The parameters for the SQL statement.</p>"
+        },
+        "resourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.</p>"
+        },
+        "schema": {
+          "shape": "DbName",
+          "documentation": "<p>The name of the database schema.</p>"
+        },
+        "secretArn": {
+          "shape": "Arn",
+          "documentation": "<p>The name or ARN of the secret that enables access to the DB cluster.</p>"
+        },
+        "sql": {
+          "shape": "SqlStatement",
+          "documentation": "<p>The SQL statement to run.</p>"
+        },
+        "transactionId": {
+          "shape": "Id",
+          "documentation": "<p>The identifier of a transaction that was started by using the\n                <code>BeginTransaction</code> operation. Specify the transaction ID of the\n            transaction that you want to include the SQL statement in.</p>\n        <p>If the SQL statement is not part of a transaction, don't set this parameter.</p>"
+        }
+      },
+      "documentation": "<p>The request parameters represent the input of a request to run a SQL statement against\n            a database.</p>"
+    },
+    "Blob": {
+      "type": "blob"
+    },
+    "String": {
+      "type": "string"
+    },
+    "BeginTransactionResponse": {
+      "type": "structure",
+      "members": {
+        "transactionId": {
+          "shape": "Id",
+          "documentation": "<p>The transaction ID of the transaction started by the call.</p>"
+        }
+      },
+      "documentation": "<p>The response elements represent the output of a request to start a SQL\n            transaction.</p>"
+    },
+    "Id": {
+      "type": "string",
+      "max": 192
+    },
+    "CommitTransactionRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "secretArn",
+        "transactionId"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Aurora Serverless DB cluster.</p>"
+        },
+        "secretArn": {
+          "shape": "Arn",
+          "documentation": "<p>The name or ARN of the secret that enables access to the DB cluster.</p>"
+        },
+        "transactionId": {
+          "shape": "Id",
+          "documentation": "<p>The identifier of the transaction to end and commit.</p>"
+        }
+      },
+      "documentation": "<p>The request parameters represent the input of a commit transaction request.</p>"
+    },
+    "ColumnMetadata": {
+      "type": "structure",
+      "members": {
+        "arrayBaseColumnType": {
+          "shape": "Integer",
+          "documentation": "<p>The type of the column.</p>"
+        },
+        "isAutoIncrement": {
+          "shape": "Boolean",
+          "documentation": "<p>A value that indicates whether the column increments automatically.</p>"
+        },
+        "isCaseSensitive": {
+          "shape": "Boolean",
+          "documentation": "<p>A value that indicates whether the column is case-sensitive.</p>"
+        },
+        "isCurrency": {
+          "shape": "Boolean",
+          "documentation": "<p>A value that indicates whether the column contains currency values.</p>"
+        },
+        "isSigned": {
+          "shape": "Boolean",
+          "documentation": "<p>A value that indicates whether an integer column is signed.</p>"
+        },
+        "label": {
+          "shape": "String",
+          "documentation": "<p>The label for the column.</p>"
+        },
+        "name": {
+          "shape": "String",
+          "documentation": "<p>The name of the column.</p>"
+        },
+        "nullable": {
+          "shape": "Integer",
+          "documentation": "<p>A value that indicates whether the column is nullable.</p>"
+        },
+        "precision": {
+          "shape": "Integer",
+          "documentation": "<p>The precision value of a decimal number column.</p>"
+        },
+        "scale": {
+          "shape": "Integer",
+          "documentation": "<p>The scale value of a decimal number column.</p>"
+        },
+        "schemaName": {
+          "shape": "String",
+          "documentation": "<p>The name of the schema that owns the table that includes the column.</p>"
+        },
+        "tableName": {
+          "shape": "String",
+          "documentation": "<p>The name of the table that includes the column.</p>"
+        },
+        "type": {
+          "shape": "Integer",
+          "documentation": "<p>The type of the column.</p>"
+        },
+        "typeName": {
+          "shape": "String",
+          "documentation": "<p>The database-specific data type of the column.</p>"
+        }
+      },
+      "documentation": "<p>Contains the metadata for a column.</p>"
+    },
+    "DbName": {
+      "type": "string",
+      "max": 64
     }
   }
 }
