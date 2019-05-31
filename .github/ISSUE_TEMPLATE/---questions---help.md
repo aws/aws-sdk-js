@@ -7,7 +7,7 @@ assignees: ''
 
 ---
 
-Confirm by changing [ ] to [x]
+Confirm by changing [ ] to [x] below:
 - [ ] I've gone though [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/welcome.html) and [API reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/)
 - [ ] I've checked [AWS Forums](https://forums.aws.amazon.com) and [StackOverflow](https://stackoverflow.com/questions/tagged/aws-sdk-js) for answers
 
