@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.466.0-->
+<!--LATEST=2.467.0-->
 <!--ENTRYINSERT-->
+
+## 2.467.0
+* bugfix: Buffer: remove deprecated new Buffer() constructor in Node.js
+* feature: EC2: Amazon EC2 I3en instances are the new storage-optimized instances offering up to 60 TB NVMe SSD instance storage and up to 100 Gbps of network bandwidth.
 
 ## 2.466.0
 * feature: CodeCommit: This release adds APIs that allow adding and removing tags to a repository, and viewing tags for a repository. It also enables adding tags when creating a repository.
