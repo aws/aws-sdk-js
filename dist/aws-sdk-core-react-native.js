@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.466.0',
+	  VERSION: '2.467.0',
 
 	  /**
 	   * @api private
@@ -281,7 +281,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (string === null || typeof string === 'undefined') {
 	        return string;
 	      }
-	      var buf = (typeof util.Buffer.from === 'function' && util.Buffer.from !== Uint8Array.from) ? util.Buffer.from(string) : new util.Buffer(string);
+	      var buf = util.buffer.toBuffer(string);
 	      return buf.toString('base64');
 	    },
 
@@ -292,14 +292,37 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (string === null || typeof string === 'undefined') {
 	        return string;
 	      }
-	      return (typeof util.Buffer.from === 'function' && util.Buffer.from !== Uint8Array.from) ? util.Buffer.from(string, 'base64') : new util.Buffer(string, 'base64');
+	      return util.buffer.toBuffer(string, 'base64');
 	    }
 
 	  },
 
 	  buffer: {
+	    /**
+	     * Buffer constructor for Node buffer and buffer pollyfill
+	     */
+	    toBuffer: function(data, encoding) {
+	      return (typeof util.Buffer.from === 'function' && util.Buffer.from !== Uint8Array.from) ?
+	        util.Buffer.from(data, encoding) : new util.Buffer(data, encoding);
+	    },
+
+	    alloc: function(size, fill, encoding) {
+	      if (typeof size !== 'number') {
+	        throw new Error('size passed to alloc must be a number.');
+	      }
+	      if (typeof util.Buffer.alloc === 'function') {
+	        return util.Buffer.alloc(size, fill, encoding);
+	      } else {
+	        var buf = new util.Buffer(size);
+	        if (fill !== undefined && typeof buf.fill === 'function') {
+	          buf.fill(fill, undefined, undefined, encoding);
+	        }
+	        return buf;
+	      }
+	    },
+
 	    toStream: function toStream(buffer) {
-	      if (!util.Buffer.isBuffer(buffer)) buffer = new util.Buffer(buffer);
+	      if (!util.Buffer.isBuffer(buffer)) buffer =  util.buffer.toBuffer(buffer);
 
 	      var readable = new (util.stream.Readable)();
 	      var pos = 0;
@@ -327,7 +350,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        length += buffers[i].length;
 	      }
 
-	      buffer = new util.Buffer(length);
+	      buffer = util.buffer.alloc(length);
 
 	      for (i = 0; i < buffers.length; i++) {
 	        buffers[i].copy(buffer, offset);
@@ -341,7 +364,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  string: {
 	    byteLength: function byteLength(string) {
 	      if (string === null || string === undefined) return 0;
-	      if (typeof string === 'string') string = new util.Buffer(string);
+	      if (typeof string === 'string') string = util.buffer.toBuffer(string);
 
 	      if (typeof string.byteLength === 'number') {
 	        return string.byteLength;
@@ -560,7 +583,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var crc = 0 ^ -1;
 
 	      if (typeof data === 'string') {
-	        data = new util.Buffer(data);
+	        data = util.buffer.toBuffer(data);
 	      }
 
 	      for (var i = 0; i < data.length; i++) {
@@ -574,7 +597,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      if (!digest) digest = 'binary';
 	      if (digest === 'buffer') { digest = undefined; }
 	      if (!fn) fn = 'sha256';
-	      if (typeof string === 'string') string = new util.Buffer(string);
+	      if (typeof string === 'string') string = util.buffer.toBuffer(string);
 	      return util.crypto.lib.createHmac(fn, key).update(string).digest(digest);
 	    },
 
@@ -590,7 +613,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var hash = util.crypto.createHash(algorithm);
 	      if (!digest) { digest = 'binary'; }
 	      if (digest === 'buffer') { digest = undefined; }
-	      if (typeof data === 'string') data = new util.Buffer(data);
+	      if (typeof data === 'string') data = util.buffer.toBuffer(data);
 	      var sliceFn = util.arraySliceFn(data);
 	      var isBuffer = util.Buffer.isBuffer(data);
 	      //Identifying objects with an ArrayBuffer as buffers
@@ -6630,7 +6653,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      resp.httpResponse.statusCode = statusCode;
 	      resp.httpResponse.statusMessage = statusMessage;
 	      resp.httpResponse.headers = headers;
-	      resp.httpResponse.body = new AWS.util.Buffer('');
+	      resp.httpResponse.body = AWS.util.buffer.toBuffer('');
 	      resp.httpResponse.buffers = [];
 	      resp.httpResponse.numBytes = 0;
 	      var dateHeader = headers.date || headers.Date;
@@ -6654,7 +6677,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          resp.request.emit('httpDownloadProgress', [progress, resp]);
 	        }
 
-	        resp.httpResponse.buffers.push(new AWS.util.Buffer(chunk));
+	        resp.httpResponse.buffers.push(AWS.util.buffer.toBuffer(chunk));
 	      }
 	    });
 
@@ -8001,7 +8024,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *   on('success', function(response) {
 	 *     console.log("Success!");
 	 *   }).
-	 *   on('error', function(response) {
+	 *   on('error', function(error, response) {
 	 *     console.log("Error!");
 	 *   }).
 	 *   on('complete', function(response) {
@@ -8299,7 +8322,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @example Aborting a request after sending
 	   *   var params = {
 	   *     Bucket: 'bucket', Key: 'key',
-	   *     Body: new Buffer(1024 * 1024 * 5) // 5MB payload
+	   *     Body: Buffer.alloc(1024 * 1024 * 5) // 5MB payload
 	   *   };
 	   *   var request = s3.putObject(params);
 	   *   request.send(function (err, data) {
