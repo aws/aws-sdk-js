@@ -1901,11 +1901,11 @@ declare class EC2 extends Service {
    */
   disassociateVpcCidrBlock(callback?: (err: AWSError, data: EC2.Types.DisassociateVpcCidrBlockResult) => void): Request<EC2.Types.DisassociateVpcCidrBlockResult, AWSError>;
   /**
-   * Enables default encryption for EBS volumes that are created in your account in the current region. Once encryption is enabled with this action, EBS volumes that are created in your account will always be encrypted even if encryption is not specified at launch. This setting overrides the encrypted setting to true in all API calls that create EBS volumes in your account. A volume will be encrypted even if you specify encryption to be false in the API call that creates the volume. If you do not specify a customer master key (CMK) in the API call that creates the EBS volume, then the volume is encrypted to your AWS account's default CMK. You can specify a default CMK of your choice using ModifyEbsDefaultKmsKeyId. Enabling default encryption for EBS volumes has no effect on existing unencrypted volumes in your account. Encrypting the data in these requires manual action. You can either create an encrypted snapshot of an unencrypted volume, or encrypt a copy of an unencrypted snapshot. Any volume restored from an encrypted snapshot is also encrypted. For more information, see Amazon EBS Snapshots. After EBS encryption by default is enabled, you can no longer launch older-generation instance types that do not support encryption. For more information, see Supported Instance Types.
+   * Enables default encryption for EBS volumes that are created in your account in the current region. Once encryption is enabled with this action, EBS volumes that are created in your account will always be encrypted even if encryption is not specified at launch. This setting overrides the encrypted setting to true in all API calls that create EBS volumes in your account. A volume will be encrypted even if you specify encryption to be false in the API call that creates the volume. If you do not specify a customer master key (CMK) in the API call that creates the EBS volume, then the volume is encrypted to your AWS account's managed CMK. You can specify a CMK of your choice using ModifyEbsDefaultKmsKeyId. Enabling encryption-by-default for EBS volumes has no effect on existing unencrypted volumes in your account. Encrypting the data in these requires manual action. You can either create an encrypted snapshot of an unencrypted volume, or encrypt a copy of an unencrypted snapshot. Any volume restored from an encrypted snapshot is also encrypted. For more information, see Amazon EBS Snapshots. After EBS encryption-by-default is enabled, you can no longer launch older-generation instance types that do not support encryption. For more information, see Supported Instance Types.
    */
   enableEbsEncryptionByDefault(params: EC2.Types.EnableEbsEncryptionByDefaultRequest, callback?: (err: AWSError, data: EC2.Types.EnableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.EnableEbsEncryptionByDefaultResult, AWSError>;
   /**
-   * Enables default encryption for EBS volumes that are created in your account in the current region. Once encryption is enabled with this action, EBS volumes that are created in your account will always be encrypted even if encryption is not specified at launch. This setting overrides the encrypted setting to true in all API calls that create EBS volumes in your account. A volume will be encrypted even if you specify encryption to be false in the API call that creates the volume. If you do not specify a customer master key (CMK) in the API call that creates the EBS volume, then the volume is encrypted to your AWS account's default CMK. You can specify a default CMK of your choice using ModifyEbsDefaultKmsKeyId. Enabling default encryption for EBS volumes has no effect on existing unencrypted volumes in your account. Encrypting the data in these requires manual action. You can either create an encrypted snapshot of an unencrypted volume, or encrypt a copy of an unencrypted snapshot. Any volume restored from an encrypted snapshot is also encrypted. For more information, see Amazon EBS Snapshots. After EBS encryption by default is enabled, you can no longer launch older-generation instance types that do not support encryption. For more information, see Supported Instance Types.
+   * Enables default encryption for EBS volumes that are created in your account in the current region. Once encryption is enabled with this action, EBS volumes that are created in your account will always be encrypted even if encryption is not specified at launch. This setting overrides the encrypted setting to true in all API calls that create EBS volumes in your account. A volume will be encrypted even if you specify encryption to be false in the API call that creates the volume. If you do not specify a customer master key (CMK) in the API call that creates the EBS volume, then the volume is encrypted to your AWS account's managed CMK. You can specify a CMK of your choice using ModifyEbsDefaultKmsKeyId. Enabling encryption-by-default for EBS volumes has no effect on existing unencrypted volumes in your account. Encrypting the data in these requires manual action. You can either create an encrypted snapshot of an unencrypted volume, or encrypt a copy of an unencrypted snapshot. Any volume restored from an encrypted snapshot is also encrypted. For more information, see Amazon EBS Snapshots. After EBS encryption-by-default is enabled, you can no longer launch older-generation instance types that do not support encryption. For more information, see Supported Instance Types.
    */
   enableEbsEncryptionByDefault(callback?: (err: AWSError, data: EC2.Types.EnableEbsEncryptionByDefaultResult) => void): Request<EC2.Types.EnableEbsEncryptionByDefaultResult, AWSError>;
   /**
@@ -2125,11 +2125,11 @@ declare class EC2 extends Service {
    */
   modifyClientVpnEndpoint(callback?: (err: AWSError, data: EC2.Types.ModifyClientVpnEndpointResult) => void): Request<EC2.Types.ModifyClientVpnEndpointResult, AWSError>;
   /**
-   * Changes the default customer master key (CMK) that your account uses to encrypt EBS volumes if you don't specify a CMK in the API call. Your account has an AWS-managed default CMK that is used for encrypting an EBS volume when no CMK is specified in the API call that creates the volume. By calling this API, you can specify a customer-managed CMK to use in place of the AWS-managed default CMK. Note: Deleting or disabling the custom CMK that you have specified to act as your default CMK will result in instance-launch failures.
+   * Changes the customer master key (CMK) that your account uses to encrypt EBS volumes if you don't specify a CMK in the API call. By default, your account has an AWS-managed CMK that is used for encrypting an EBS volume when no CMK is specified in the API call that creates the volume. By calling this API, you can specify a customer-managed CMK to use in place of the AWS-managed CMK. Note: Deleting or disabling the CMK that you have specified to act as your default CMK will result in instance-launch failures.
    */
   modifyEbsDefaultKmsKeyId(params: EC2.Types.ModifyEbsDefaultKmsKeyIdRequest, callback?: (err: AWSError, data: EC2.Types.ModifyEbsDefaultKmsKeyIdResult) => void): Request<EC2.Types.ModifyEbsDefaultKmsKeyIdResult, AWSError>;
   /**
-   * Changes the default customer master key (CMK) that your account uses to encrypt EBS volumes if you don't specify a CMK in the API call. Your account has an AWS-managed default CMK that is used for encrypting an EBS volume when no CMK is specified in the API call that creates the volume. By calling this API, you can specify a customer-managed CMK to use in place of the AWS-managed default CMK. Note: Deleting or disabling the custom CMK that you have specified to act as your default CMK will result in instance-launch failures.
+   * Changes the customer master key (CMK) that your account uses to encrypt EBS volumes if you don't specify a CMK in the API call. By default, your account has an AWS-managed CMK that is used for encrypting an EBS volume when no CMK is specified in the API call that creates the volume. By calling this API, you can specify a customer-managed CMK to use in place of the AWS-managed CMK. Note: Deleting or disabling the CMK that you have specified to act as your default CMK will result in instance-launch failures.
    */
   modifyEbsDefaultKmsKeyId(callback?: (err: AWSError, data: EC2.Types.ModifyEbsDefaultKmsKeyIdResult) => void): Request<EC2.Types.ModifyEbsDefaultKmsKeyIdResult, AWSError>;
   /**
@@ -3184,7 +3184,7 @@ declare namespace EC2 {
      */
     AvailabilityZone: String;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency in the Amazon Elastic Compute Cloud User Guide. 
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
      */
     ClientToken?: String;
     /**
@@ -3199,6 +3199,10 @@ declare namespace EC2 {
      * The tags to apply to the Dedicated Host during creation.
      */
     TagSpecifications?: TagSpecificationList;
+    /**
+     * Indicates whether to enable or disable host recovery for the Dedicated Host. Host recovery is disabled by default. For more information, see  Host Recovery in the Amazon Elastic Compute Cloud User Guide. Default: off 
+     */
+    HostRecovery?: HostRecovery;
   }
   export interface AllocateHostsResult {
     /**
@@ -3207,7 +3211,7 @@ declare namespace EC2 {
     HostIds?: ResponseHostIdList;
   }
   export type AllocationIdList = String[];
-  export type AllocationState = "available"|"under-assessment"|"permanent-failure"|"released"|"released-permanent-failure"|string;
+  export type AllocationState = "available"|"under-assessment"|"permanent-failure"|"released"|"released-permanent-failure"|"pending"|string;
   export type AllocationStrategy = "lowestPrice"|"diversified"|string;
   export interface AllowedPrincipal {
     /**
@@ -4721,7 +4725,7 @@ declare namespace EC2 {
      */
     Encrypted?: Boolean;
     /**
-     * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID   Key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.    ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. The action will eventually fail. 
+     * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use to encrypt the volume. This parameter is only required if you want to use a customer-managed CMK; if this parameter is not specified, your AWS-managed CMK for the account is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID: For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.   Key alias: For example, alias/ExampleAlias.    Key ARN: The key ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.    Alias ARN: The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    AWS authenticates KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. The action will eventually fail. 
      */
     KmsKeyId?: String;
     /**
@@ -5208,7 +5212,7 @@ declare namespace EC2 {
   }
   export interface CreateImageRequest {
     /**
-     * Tthe block device mappings. This parameter cannot be used to modify the encryption status of existing volumes or snapshots. To create an AMI with encrypted snapshots, use the CopyImage action.
+     * The block device mappings. This parameter cannot be used to modify the encryption status of existing volumes or snapshots. To create an AMI with encrypted snapshots, use the CopyImage action.
      */
     BlockDeviceMappings?: BlockDeviceMappingRequestList;
     /**
@@ -5901,7 +5905,7 @@ declare namespace EC2 {
      */
     Iops?: Integer;
     /**
-     * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use to encrypt the volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID   Key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.    ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. The action will eventually fail. 
+     * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use to encrypt the volume. This parameter is only required if you want to use a customer-managed CMK; if this parameter is not specified, your AWS-managed CMK for the account is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID: For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.   Key alias: For example, alias/ExampleAlias.    Key ARN: The key ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.    Alias ARN: The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    AWS authenticates KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. The action will eventually fail. 
      */
     KmsKeyId?: String;
     /**
@@ -7671,7 +7675,7 @@ declare namespace EC2 {
      */
     MaxResults?: Integer;
     /**
-     * The token to retrieve the next page of results.
+     * The token to use to retrieve the next page of results.
      */
     NextToken?: String;
   }
@@ -11221,7 +11225,7 @@ declare namespace EC2 {
      */
     AvailableCapacity?: AvailableCapacity;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure idempotency of the request. For more information, see How to Ensure Idempotency in the Amazon Elastic Compute Cloud User Guide. 
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
      */
     ClientToken?: String;
     /**
@@ -11256,6 +11260,10 @@ declare namespace EC2 {
      * Any tags assigned to the Dedicated Host.
      */
     Tags?: TagList;
+    /**
+     * Indicates whether host recovery is enabled or disabled for the Dedicated Host.
+     */
+    HostRecovery?: HostRecovery;
   }
   export interface HostInstance {
     /**
@@ -11318,6 +11326,7 @@ declare namespace EC2 {
      */
     TotalVCpus?: Integer;
   }
+  export type HostRecovery = "on"|"off"|string;
   export interface HostReservation {
     /**
      * The number of Dedicated Hosts the reservation is associated with.
@@ -13642,7 +13651,7 @@ declare namespace EC2 {
   }
   export interface ModifyEbsDefaultKmsKeyIdRequest {
     /**
-     * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use to encrypt the volume. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID   Key alias   ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.    ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   
+     * An identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) to use to encrypt the volume. This parameter is only required if you want to use a customer-managed CMK; if this parameter is not specified, your AWS-managed CMK for the account is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID: For example, key/1234abcd-12ab-34cd-56ef-1234567890ab.   Key alias: For example, alias/ExampleAlias.    Key ARN: The key ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.    Alias ARN: The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    AWS authenticates KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. The action will eventually fail. 
      */
     KmsKeyId: String;
     /**
@@ -13732,11 +13741,15 @@ declare namespace EC2 {
     /**
      * Specify whether to enable or disable auto-placement.
      */
-    AutoPlacement: AutoPlacement;
+    AutoPlacement?: AutoPlacement;
     /**
      * The IDs of the Dedicated Hosts to modify.
      */
     HostIds: RequestHostIdList;
+    /**
+     * Indicates whether to enable or disable host recovery for the Dedicated Host. For more information, see  Host Recovery in the Amazon Elastic Compute Cloud User Guide.
+     */
+    HostRecovery?: HostRecovery;
   }
   export interface ModifyHostsResult {
     /**
@@ -15234,7 +15247,7 @@ declare namespace EC2 {
   }
   export interface PurchaseHostReservationRequest {
     /**
-     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see How to Ensure Idempotency in the Amazon Elastic Compute Cloud User Guide.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
      */
     ClientToken?: String;
     /**
@@ -15256,7 +15269,7 @@ declare namespace EC2 {
   }
   export interface PurchaseHostReservationResult {
     /**
-     * Unique, case-sensitive identifier you provide to ensure idempotency of the request. For more information, see How to Ensure Idempotency in the Amazon Elastic Compute Cloud User Guide.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
      */
     ClientToken?: String;
     /**
@@ -16734,7 +16747,7 @@ declare namespace EC2 {
   }
   export interface RunInstancesRequest {
     /**
-     * The block device mapping entries. You can't specify both a snapshot ID and an encryption value. This is because only blank volumes can be encrypted on creation. If a snapshot is the basis for a volume, it is not blank and its encryption status is used for the volume encryption status.
+     * The block device mapping entries.
      */
     BlockDeviceMappings?: BlockDeviceMappingRequestList;
     /**
