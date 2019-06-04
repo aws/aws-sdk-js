@@ -1558,6 +1558,28 @@
       ],
       "documentation": "<p>Updates a Server Message Block (SMB) file share.</p> <note> <p>To leave a file share field unchanged, set the corresponding input field to null. This operation is only supported for file gateways.</p> </note> <important> <p>File gateways require AWS Security Token Service (AWS STS) to be activated to enable you to create a file share. Make sure that AWS STS is activated in the AWS Region you are creating your file gateway in. If AWS STS is not activated in this AWS Region, activate it. For information about how to activate AWS STS, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and Deactivating AWS STS in an AWS Region</a> in the <i>AWS Identity and Access Management User Guide.</i> </p> <p>File gateways don't support creating hard or symbolic links on a file share.</p> </important>"
     },
+    "UpdateSMBSecurityStrategy": {
+      "name": "UpdateSMBSecurityStrategy",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateSMBSecurityStrategyInput"
+      },
+      "output": {
+        "shape": "UpdateSMBSecurityStrategyOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidGatewayRequestException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Updates the SMB security strategy on a file gateway. This action is only supported in file gateways.</p>"
+    },
     "UpdateSnapshotSchedule": {
       "name": "UpdateSnapshotSchedule",
       "http": {
@@ -2885,6 +2907,10 @@
         "Tags": {
           "shape": "Tags",
           "documentation": "<p>A list of up to 50 tags assigned to the gateway, sorted alphabetically by key name. Each tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the <code>ListTagsForResource</code> API operation.</p>"
+        },
+        "VPCEndpoint": {
+          "shape": "string",
+          "documentation": "<p>The configuration settings for the virtual private cloud (VPC) endpoint for your gateway. </p>"
         }
       },
       "documentation": "<p>A JSON object containing the following fields:</p>"
@@ -3000,6 +3026,10 @@
         "SMBGuestPasswordSet": {
           "shape": "Boolean",
           "documentation": "<p>This value is true if a password for the guest user “smbguest” is set, and otherwise false.</p>"
+        },
+        "SMBSecurityStrategy": {
+          "shape": "SMBSecurityStrategy",
+          "documentation": "<p>The type of security strategy that was specified for file gateway.</p> <p>ClientSpecified: SMBv1 is enabled, SMB signing is offered but not required, SMB encryption is offered but not required.</p> <p>MandatorySigning: SMBv1 is disabled, SMB signing is required, SMB encryption is offered but not required.</p> <p>MandatoryEncryption: SMBv1 is disabled, SMB signing is offered but not required, SMB encryption is required.</p>"
         }
       }
     },
@@ -4436,6 +4466,14 @@
       "pattern": "^[ -~]+$",
       "sensitive": true
     },
+    "SMBSecurityStrategy": {
+      "type": "string",
+      "enum": [
+        "ClientSpecified",
+        "MandatorySigning",
+        "MandatoryEncryption"
+      ]
+    },
     "SetLocalConsolePasswordInput": {
       "type": "structure",
       "required": [
@@ -5177,6 +5215,30 @@
         }
       },
       "documentation": "<p>UpdateSMBFileShareOutput</p>"
+    },
+    "UpdateSMBSecurityStrategyInput": {
+      "type": "structure",
+      "required": [
+        "GatewayARN",
+        "SMBSecurityStrategy"
+      ],
+      "members": {
+        "GatewayARN": {
+          "shape": "GatewayARN"
+        },
+        "SMBSecurityStrategy": {
+          "shape": "SMBSecurityStrategy",
+          "documentation": "<p>Specifies the type of security strategy.</p> <p>ClientSpecified: SMBv1 is enabled, SMB signing is offered but not required, SMB encryption is offered but not required.</p> <p>MandatorySigning: SMBv1 is disabled, SMB signing is required, SMB encryption is offered but not required.</p> <p>MandatoryEncryption: SMBv1 is disabled, SMB signing is offered but not required, SMB encryption is required.</p>"
+        }
+      }
+    },
+    "UpdateSMBSecurityStrategyOutput": {
+      "type": "structure",
+      "members": {
+        "GatewayARN": {
+          "shape": "GatewayARN"
+        }
+      }
     },
     "UpdateSnapshotScheduleInput": {
       "type": "structure",

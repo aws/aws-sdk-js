@@ -66,11 +66,11 @@ declare class S3 extends S3Customizations {
    */
   deleteBucket(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an analytics configuration for the bucket (specified by the analytics configuration ID).
+   * Deletes an analytics configuration for the bucket (specified by the analytics configuration ID). To use this operation, you must have permissions to perform the s3:PutAnalyticsConfiguration action. The bucket owner has this permission by default. The bucket owner can grant this permission to others. 
    */
   deleteBucketAnalyticsConfiguration(params: S3.Types.DeleteBucketAnalyticsConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an analytics configuration for the bucket (specified by the analytics configuration ID).
+   * Deletes an analytics configuration for the bucket (specified by the analytics configuration ID). To use this operation, you must have permissions to perform the s3:PutAnalyticsConfiguration action. The bucket owner has this permission by default. The bucket owner can grant this permission to others. 
    */
   deleteBucketAnalyticsConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -362,11 +362,11 @@ declare class S3 extends S3Customizations {
    */
   getObjectLegalHold(callback?: (err: AWSError, data: S3.Types.GetObjectLegalHoldOutput) => void): Request<S3.Types.GetObjectLegalHoldOutput, AWSError>;
   /**
-   * Gets the Object Lock configuration for a bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket.
+   * Gets the object lock configuration for a bucket. The rule specified in the object lock configuration will be applied by default to every new object placed in the specified bucket.
    */
   getObjectLockConfiguration(params: S3.Types.GetObjectLockConfigurationRequest, callback?: (err: AWSError, data: S3.Types.GetObjectLockConfigurationOutput) => void): Request<S3.Types.GetObjectLockConfigurationOutput, AWSError>;
   /**
-   * Gets the Object Lock configuration for a bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket.
+   * Gets the object lock configuration for a bucket. The rule specified in the object lock configuration will be applied by default to every new object placed in the specified bucket.
    */
   getObjectLockConfiguration(callback?: (err: AWSError, data: S3.Types.GetObjectLockConfigurationOutput) => void): Request<S3.Types.GetObjectLockConfigurationOutput, AWSError>;
   /**
@@ -582,11 +582,11 @@ declare class S3 extends S3Customizations {
    */
   putBucketNotificationConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Replaces a policy on a bucket. If the bucket already has a policy, the one in this request completely replaces it.
+   * Applies an Amazon S3 bucket policy to an Amazon S3 bucket.
    */
   putBucketPolicy(params: S3.Types.PutBucketPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Replaces a policy on a bucket. If the bucket already has a policy, the one in this request completely replaces it.
+   * Applies an Amazon S3 bucket policy to an Amazon S3 bucket.
    */
   putBucketPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -654,11 +654,11 @@ declare class S3 extends S3Customizations {
    */
   putObjectLegalHold(callback?: (err: AWSError, data: S3.Types.PutObjectLegalHoldOutput) => void): Request<S3.Types.PutObjectLegalHoldOutput, AWSError>;
   /**
-   * Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket.
+   * Places an object lock configuration on the specified bucket. The rule specified in the object lock configuration will be applied by default to every new object placed in the specified bucket.
    */
   putObjectLockConfiguration(params: S3.Types.PutObjectLockConfigurationRequest, callback?: (err: AWSError, data: S3.Types.PutObjectLockConfigurationOutput) => void): Request<S3.Types.PutObjectLockConfigurationOutput, AWSError>;
   /**
-   * Places an Object Lock configuration on the specified bucket. The rule specified in the Object Lock configuration will be applied by default to every new object placed in the specified bucket.
+   * Places an object lock configuration on the specified bucket. The rule specified in the object lock configuration will be applied by default to every new object placed in the specified bucket.
    */
   putObjectLockConfiguration(callback?: (err: AWSError, data: S3.Types.PutObjectLockConfigurationOutput) => void): Request<S3.Types.PutObjectLockConfigurationOutput, AWSError>;
   /**
@@ -758,7 +758,7 @@ declare namespace S3 {
   export type AbortDate = Date;
   export interface AbortIncompleteMultipartUpload {
     /**
-     * Indicates the number of days that must pass since initiation for Lifecycle to abort an Incomplete Multipart Upload.
+     * Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload.
      */
     DaysAfterInitiation?: DaysAfterInitiation;
   }
@@ -767,15 +767,15 @@ declare namespace S3 {
   }
   export interface AbortMultipartUploadRequest {
     /**
-     * 
+     * Name of the bucket to which the multipart upload was initiated.
      */
     Bucket: BucketName;
     /**
-     * 
+     * Key of the object for which the multipart upload was initiated.
      */
     Key: ObjectKey;
     /**
-     * 
+     * Upload ID that identifies the multipart upload.
      */
     UploadId: MultipartUploadId;
     RequestPayer?: RequestPayer;
@@ -783,7 +783,7 @@ declare namespace S3 {
   export type AbortRuleId = string;
   export interface AccelerateConfiguration {
     /**
-     * The accelerate configuration of the bucket.
+     * Specifies the transfer acceleration status of the bucket.
      */
     Status?: BucketAccelerateStatus;
   }
@@ -794,13 +794,13 @@ declare namespace S3 {
      */
     Grants?: Grants;
     /**
-     * 
+     * Container for the bucket owner's display name and ID.
      */
     Owner?: Owner;
   }
   export interface AccessControlTranslation {
     /**
-     * The override value for the owner of the replica object.
+     * Specifies the replica ownership. For default and valid values, see PUT bucket replication in the Amazon Simple Storage Service API Reference.
      */
     Owner: OwnerOverride;
   }
@@ -814,7 +814,7 @@ declare namespace S3 {
   export type AllowedOrigins = AllowedOrigin[];
   export interface AnalyticsAndOperator {
     /**
-     * The prefix to use when evaluating an AND predicate.
+     * The prefix to use when evaluating an AND predicate: The prefix that an object must have to be included in the metrics results.
      */
     Prefix?: Prefix;
     /**
@@ -824,7 +824,7 @@ declare namespace S3 {
   }
   export interface AnalyticsConfiguration {
     /**
-     * The identifier used to represent an analytics configuration.
+     * The ID that identifies the analytics configuration.
      */
     Id: AnalyticsId;
     /**
@@ -832,7 +832,7 @@ declare namespace S3 {
      */
     Filter?: AnalyticsFilter;
     /**
-     * If present, it indicates that data related to access patterns will be collected and made available to analyze the tradeoffs between different storage classes.
+     *  Contains data related to access patterns to be collected and made available to analyze the tradeoffs between different storage classes. 
      */
     StorageClassAnalysis: StorageClassAnalysis;
   }
@@ -860,7 +860,7 @@ declare namespace S3 {
   export type AnalyticsId = string;
   export interface AnalyticsS3BucketDestination {
     /**
-     * The file format used when exporting data to Amazon S3.
+     * Specifies the file format used when exporting data to Amazon S3.
      */
     Format: AnalyticsS3ExportFileFormat;
     /**
@@ -868,11 +868,11 @@ declare namespace S3 {
      */
     BucketAccountId?: AccountId;
     /**
-     * The Amazon resource name (ARN) of the bucket to which data is exported.
+     * The Amazon Resource Name (ARN) of the bucket to which data is exported.
      */
     Bucket: BucketName;
     /**
-     * The prefix to use when exporting data. The exported data begins with this prefix.
+     * The prefix to use when exporting data. The prefix is prepended to all results.
      */
     Prefix?: Prefix;
   }
@@ -892,12 +892,15 @@ declare namespace S3 {
   export type BucketCannedACL = "private"|"public-read"|"public-read-write"|"authenticated-read"|string;
   export interface BucketLifecycleConfiguration {
     /**
-     * 
+     * A lifecycle rule for individual objects in an Amazon S3 bucket.
      */
     Rules: LifecycleRules;
   }
   export type BucketLocationConstraint = "EU"|"eu-west-1"|"us-west-1"|"us-west-2"|"ap-south-1"|"ap-southeast-1"|"ap-southeast-2"|"ap-northeast-1"|"sa-east-1"|"cn-north-1"|"eu-central-1"|string;
   export interface BucketLoggingStatus {
+    /**
+     * 
+     */
     LoggingEnabled?: LoggingEnabled;
   }
   export type BucketLogsPermission = "FULL_CONTROL"|"READ"|"WRITE"|string;
@@ -910,17 +913,17 @@ declare namespace S3 {
   export type BytesScanned = number;
   export interface CORSConfiguration {
     /**
-     * 
+     * A set of allowed origins and methods.
      */
     CORSRules: CORSRules;
   }
   export interface CORSRule {
     /**
-     * Specifies which headers are allowed in a pre-flight OPTIONS request.
+     * Headers that are specified in the Access-Control-Request-Headers header. These headers are allowed in a preflight OPTIONS request. In response to any preflight OPTIONS request, Amazon S3 returns any requested headers that are allowed.
      */
     AllowedHeaders?: AllowedHeaders;
     /**
-     * Identifies HTTP methods that the domain/origin specified in the rule is allowed to execute.
+     * An HTTP method that you allow the origin to execute. Valid values are GET, PUT, HEAD, POST, and DELETE.
      */
     AllowedMethods: AllowedMethods;
     /**
@@ -1275,11 +1278,11 @@ declare namespace S3 {
      */
     Tagging?: TaggingHeader;
     /**
-     * The Object Lock mode that you want to apply to the copied object.
+     * The object lock mode that you want to apply to the copied object.
      */
     ObjectLockMode?: ObjectLockMode;
     /**
-     * The date and time when you want the copied object's Object Lock to expire.
+     * The date and time when you want the copied object's object lock to expire.
      */
     ObjectLockRetainUntilDate?: ObjectLockRetainUntilDate;
     /**
@@ -1363,7 +1366,7 @@ declare namespace S3 {
      */
     GrantWriteACP?: GrantWriteACP;
     /**
-     * Specifies whether you want S3 Object Lock to be enabled for the new bucket.
+     * Specifies whether you want Amazon S3 object lock to be enabled for the new bucket.
      */
     ObjectLockEnabledForBucket?: ObjectLockEnabledForBucket;
   }
@@ -1497,11 +1500,11 @@ declare namespace S3 {
      */
     Tagging?: TaggingHeader;
     /**
-     * Specifies the Object Lock mode that you want to apply to the uploaded object.
+     * Specifies the object lock mode that you want to apply to the uploaded object.
      */
     ObjectLockMode?: ObjectLockMode;
     /**
-     * Specifies the date and time when you want the Object Lock to expire.
+     * Specifies the date and time when you want the object lock to expire.
      */
     ObjectLockRetainUntilDate?: ObjectLockRetainUntilDate;
     /**
@@ -1515,7 +1518,7 @@ declare namespace S3 {
   export type DaysAfterInitiation = number;
   export interface DefaultRetention {
     /**
-     * The default Object Lock retention mode you want to apply to new objects placed in the specified bucket.
+     * The default object lock retention mode you want to apply to new objects placed in the specified bucket.
      */
     Mode?: ObjectLockRetentionMode;
     /**
@@ -1543,7 +1546,7 @@ declare namespace S3 {
      */
     Bucket: BucketName;
     /**
-     * The identifier used to represent an analytics configuration.
+     * The ID that identifies the analytics configuration.
      */
     Id: AnalyticsId;
   }
@@ -1677,7 +1680,7 @@ declare namespace S3 {
     VersionId?: ObjectVersionId;
     RequestPayer?: RequestPayer;
     /**
-     * Indicates whether S3 Object Lock should bypass Governance-mode restrictions to process this operation.
+     * Indicates whether Amazon S3 object lock should bypass governance-mode restrictions to process this operation.
      */
     BypassGovernanceRetention?: BypassGovernanceRetention;
   }
@@ -1727,7 +1730,7 @@ declare namespace S3 {
     MFA?: MFA;
     RequestPayer?: RequestPayer;
     /**
-     * Specifies whether you want to delete this object even if it has a Governance-type Object Lock in place. You must have sufficient permissions to perform this operation.
+     * Specifies whether you want to delete this object even if it has a Governance-type object lock in place. You must have sufficient permissions to perform this operation.
      */
     BypassGovernanceRetention?: BypassGovernanceRetention;
   }
@@ -1760,23 +1763,23 @@ declare namespace S3 {
   export type Description = string;
   export interface Destination {
     /**
-     *  The Amazon Resource Name (ARN) of the bucket where you want Amazon S3 to store replicas of the object identified by the rule.   If there are multiple rules in your replication configuration, all rules must specify the same bucket as the destination. A replication configuration can replicate objects to only one destination bucket. 
+     *  The Amazon Resource Name (ARN) of the bucket where you want Amazon S3 to store replicas of the object identified by the rule. A replication configuration can replicate objects to only one destination bucket. If there are multiple rules in your replication configuration, all rules must specify the same destination bucket.
      */
     Bucket: BucketName;
     /**
-     * The account ID of the destination bucket. Currently, Amazon S3 verifies this value only if Access Control Translation is enabled.  In a cross-account scenario, if you change replica ownership to the AWS account that owns the destination bucket by adding the AccessControlTranslation element, this is the account ID of the owner of the destination bucket. 
+     * Destination bucket owner account ID. In a cross-account scenario, if you direct Amazon S3 to change replica ownership to the AWS account that owns the destination bucket by specifying the AccessControlTranslation property, this is the account ID of the destination bucket owner. For more information, see Cross-Region Replication Additional Configuration: Change Replica Owner in the Amazon Simple Storage Service Developer Guide.
      */
     Account?: AccountId;
     /**
-     *  The class of storage used to store the object. By default Amazon S3 uses storage class of the source object when creating a replica. 
+     *  The storage class to use when replicating objects, such as standard or reduced redundancy. By default, Amazon S3 uses the storage class of the source object to create the object replica.  For valid values, see the StorageClass element of the PUT Bucket replication action in the Amazon Simple Storage Service API Reference.
      */
     StorageClass?: StorageClass;
     /**
-     * A container for information about access control for replicas.  Use this element only in a cross-account scenario where source and destination bucket owners are not the same to change replica ownership to the AWS account that owns the destination bucket. If you don't add this element to the replication configuration, the replicas are owned by same AWS account that owns the source object. 
+     * Specify this only in a cross-account scenario (where source and destination bucket owners are not the same), and you want to change replica ownership to the AWS account that owns the destination bucket. If this is not specified in the replication configuration, the replicas are owned by same AWS account that owns the source object.
      */
     AccessControlTranslation?: AccessControlTranslation;
     /**
-     * A container that provides information about encryption. If SourceSelectionCriteria is specified, you must specify this element. 
+     * A container that provides information about encryption. If SourceSelectionCriteria is specified, you must specify this element.
      */
     EncryptionConfiguration?: EncryptionConfiguration;
   }
@@ -1801,7 +1804,7 @@ declare namespace S3 {
   }
   export interface EncryptionConfiguration {
     /**
-     * The ID of the AWS KMS key for the AWS Region where the destination bucket resides. Amazon S3 uses this key to encrypt the replica object. 
+     * Specifies the AWS KMS Key ID (Key ARN or Alias ARN) for the destination bucket. Amazon S3 uses this key to encrypt replica objects.
      */
     ReplicaKmsKeyID?: ReplicaKmsKeyID;
   }
@@ -1847,11 +1850,11 @@ declare namespace S3 {
   export type FileHeaderInfo = "USE"|"IGNORE"|"NONE"|string;
   export interface FilterRule {
     /**
-     * The object key name prefix or suffix identifying one or more objects to which the filtering rule applies. The maximum prefix length is 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, see Configuring Event Notifications in the Amazon Simple Storage Service Developer Guide.
+     * The object key name prefix or suffix identifying one or more objects to which the filtering rule applies. The maximum length is 1,024 characters. Overlapping prefixes and suffixes are not supported. For more information, see Configuring Event Notifications in the Amazon Simple Storage Service Developer Guide.
      */
     Name?: FilterRuleName;
     /**
-     * 
+     * The value that the filter searches for in object key names.
      */
     Value?: FilterRuleValue;
   }
@@ -1898,7 +1901,7 @@ declare namespace S3 {
      */
     Bucket: BucketName;
     /**
-     * The identifier used to represent an analytics configuration.
+     * The ID that identifies the analytics configuration.
      */
     Id: AnalyticsId;
   }
@@ -1915,6 +1918,9 @@ declare namespace S3 {
     Bucket: BucketName;
   }
   export interface GetBucketEncryptionOutput {
+    /**
+     * 
+     */
     ServerSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
   }
   export interface GetBucketEncryptionRequest {
@@ -1976,6 +1982,9 @@ declare namespace S3 {
     Bucket: BucketName;
   }
   export interface GetBucketLoggingOutput {
+    /**
+     * 
+     */
     LoggingEnabled?: LoggingEnabled;
   }
   export interface GetBucketLoggingRequest {
@@ -2031,6 +2040,9 @@ declare namespace S3 {
     Bucket: BucketName;
   }
   export interface GetBucketReplicationOutput {
+    /**
+     * 
+     */
     ReplicationConfiguration?: ReplicationConfiguration;
   }
   export interface GetBucketReplicationRequest {
@@ -2152,13 +2164,13 @@ declare namespace S3 {
   }
   export interface GetObjectLockConfigurationOutput {
     /**
-     * The specified bucket's Object Lock configuration.
+     * The specified bucket's object lock configuration.
      */
     ObjectLockConfiguration?: ObjectLockConfiguration;
   }
   export interface GetObjectLockConfigurationRequest {
     /**
-     * The bucket whose Object Lock configuration you want to retrieve.
+     * The bucket whose object lock configuration you want to retrieve.
      */
     Bucket: BucketName;
   }
@@ -2273,11 +2285,11 @@ declare namespace S3 {
      */
     TagCount?: TagCount;
     /**
-     * The Object Lock mode currently in place for this object.
+     * The object lock mode currently in place for this object.
      */
     ObjectLockMode?: ObjectLockMode;
     /**
-     * The date and time when this object's Object Lock will expire.
+     * The date and time when this object's object lock will expire.
      */
     ObjectLockRetainUntilDate?: ObjectLockRetainUntilDate;
     /**
@@ -2584,11 +2596,11 @@ declare namespace S3 {
      */
     PartsCount?: PartsCount;
     /**
-     * The Object Lock mode currently in place for this object.
+     * The object lock mode currently in place for this object.
      */
     ObjectLockMode?: ObjectLockMode;
     /**
-     * The date and time when this object's Object Lock will expire.
+     * The date and time when this object's object lock expires.
      */
     ObjectLockRetainUntilDate?: ObjectLockRetainUntilDate;
     /**
@@ -2696,7 +2708,7 @@ declare namespace S3 {
      */
     Destination: InventoryDestination;
     /**
-     * Specifies whether the inventory is enabled or disabled.
+     * Specifies whether the inventory is enabled or disabled. If set to True, an inventory list is generated. If set to False, no inventory list is generated.
      */
     IsEnabled: IsEnabled;
     /**
@@ -2708,7 +2720,7 @@ declare namespace S3 {
      */
     Id: InventoryId;
     /**
-     * Specifies which object version(s) to included in the inventory results.
+     * Object versions to include in the inventory list. If set to All, the list includes all the object versions, which adds the version-related fields VersionId, IsLatest, and DeleteMarker to the list. If set to Current, the list does not contain these version-related fields.
      */
     IncludedObjectVersions: InventoryIncludedObjectVersions;
     /**
@@ -2802,13 +2814,16 @@ declare namespace S3 {
   export interface LambdaFunctionConfiguration {
     Id?: NotificationId;
     /**
-     * The Amazon Resource Name (ARN) of the Lambda cloud function that Amazon S3 can invoke when it detects events of the specified type.
+     * The Amazon Resource Name (ARN) of the AWS Lambda function that Amazon S3 invokes when the specified event type occurs.
      */
     LambdaFunctionArn: LambdaFunctionArn;
     /**
-     * 
+     * The Amazon S3 bucket event for which to invoke the AWS Lambda function. For more information, see Supported Event Types in the Amazon Simple Storage Service Developer Guide.
      */
     Events: EventList;
+    /**
+     * 
+     */
     Filter?: NotificationConfigurationFilter;
   }
   export type LambdaFunctionConfigurationList = LambdaFunctionConfiguration[];
@@ -2846,6 +2861,9 @@ declare namespace S3 {
      * Prefix identifying one or more objects to which the rule applies. This is No longer used; use Filter instead.
      */
     Prefix?: Prefix;
+    /**
+     * 
+     */
     Filter?: LifecycleRuleFilter;
     /**
      * If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied.
@@ -2859,7 +2877,13 @@ declare namespace S3 {
      * 
      */
     NoncurrentVersionTransitions?: NoncurrentVersionTransitionList;
+    /**
+     * 
+     */
     NoncurrentVersionExpiration?: NoncurrentVersionExpiration;
+    /**
+     * 
+     */
     AbortIncompleteMultipartUpload?: AbortIncompleteMultipartUpload;
   }
   export interface LifecycleRuleAndOperator {
@@ -2881,6 +2905,9 @@ declare namespace S3 {
      * This tag must exist in the object's tag set in order for the rule to apply.
      */
     Tag?: Tag;
+    /**
+     * 
+     */
     And?: LifecycleRuleAndOperator;
   }
   export type LifecycleRules = LifecycleRule[];
@@ -3383,7 +3410,7 @@ declare namespace S3 {
      */
     TargetGrants?: TargetGrants;
     /**
-     * This element lets you specify a prefix for the keys that the log files will be stored under.
+     * A prefix for all log object keys. If you store log files from multiple Amazon S3 buckets in a single bucket, you can use a prefix to distinguish which log files came from which bucket.
      */
     TargetPrefix: TargetPrefix;
   }
@@ -3500,15 +3527,15 @@ declare namespace S3 {
   export type NoncurrentVersionTransitionList = NoncurrentVersionTransition[];
   export interface NotificationConfiguration {
     /**
-     * 
+     * The topic to which notifications are sent and the events for which notifications are generated.
      */
     TopicConfigurations?: TopicConfigurationList;
     /**
-     * 
+     * The Amazon Simple Queue Service queues to publish messages to and the events for which to publish messages.
      */
     QueueConfigurations?: QueueConfigurationList;
     /**
-     * 
+     * Describes the AWS Lambda functions to invoke and the events for which to invoke them.
      */
     LambdaFunctionConfigurations?: LambdaFunctionConfigurationList;
   }
@@ -3527,6 +3554,9 @@ declare namespace S3 {
     CloudFunctionConfiguration?: CloudFunctionConfiguration;
   }
   export interface NotificationConfigurationFilter {
+    /**
+     * 
+     */
     Key?: S3KeyFilter;
   }
   export type NotificationId = string;
@@ -3572,11 +3602,11 @@ declare namespace S3 {
   export type ObjectList = Object[];
   export interface ObjectLockConfiguration {
     /**
-     * Indicates whether this bucket has an Object Lock configuration enabled.
+     * Indicates whether this bucket has an object lock configuration enabled.
      */
     ObjectLockEnabled?: ObjectLockEnabled;
     /**
-     * The Object Lock rule in place for the specified object.
+     * The object lock rule in place for the specified object.
      */
     Rule?: ObjectLockRule;
   }
@@ -3597,7 +3627,7 @@ declare namespace S3 {
      */
     Mode?: ObjectLockRetentionMode;
     /**
-     * The date on which this Object Lock Retention will expire.
+     * The date on which this object lock retention expires.
      */
     RetainUntilDate?: _Date;
   }
@@ -3764,7 +3794,7 @@ declare namespace S3 {
      */
     ACL?: BucketCannedACL;
     /**
-     * 
+     * Contains the elements that set the ACL permissions for an object per grantee.
      */
     AccessControlPolicy?: AccessControlPolicy;
     /**
@@ -3802,7 +3832,7 @@ declare namespace S3 {
      */
     Bucket: BucketName;
     /**
-     * The identifier used to represent an analytics configuration.
+     * The ID that identifies the analytics configuration.
      */
     Id: AnalyticsId;
     /**
@@ -3826,13 +3856,16 @@ declare namespace S3 {
   }
   export interface PutBucketEncryptionRequest {
     /**
-     * The name of the bucket for which the server-side encryption configuration is set.
+     * Specifies default encryption for a bucket using server-side encryption with Amazon S3-managed keys (SSE-S3) or AWS KMS-managed keys (SSE-KMS). For information about the Amazon S3 default encryption feature, see Amazon S3 Default Bucket Encryption in the Amazon Simple Storage Service Developer Guide.
      */
     Bucket: BucketName;
     /**
-     * The base64-encoded 128-bit MD5 digest of the server-side encryption configuration. This parameter is auto-populated when using the command from the CLI
+     * The base64-encoded 128-bit MD5 digest of the server-side encryption configuration. This parameter is auto-populated when using the command from the CLI.
      */
     ContentMD5?: ContentMD5;
+    /**
+     * 
+     */
     ServerSideEncryptionConfiguration: ServerSideEncryptionConfiguration;
   }
   export interface PutBucketInventoryConfigurationRequest {
@@ -3906,6 +3939,9 @@ declare namespace S3 {
      * 
      */
     Bucket: BucketName;
+    /**
+     * 
+     */
     NotificationConfiguration: NotificationConfiguration;
   }
   export interface PutBucketNotificationRequest {
@@ -3946,12 +3982,15 @@ declare namespace S3 {
      */
     Bucket: BucketName;
     /**
-     * 
+     * The base64-encoded 128-bit MD5 digest of the data. You must use this header as a message integrity check to verify that the request body was not corrupted in transit.
      */
     ContentMD5?: ContentMD5;
-    ReplicationConfiguration: ReplicationConfiguration;
     /**
      * 
+     */
+    ReplicationConfiguration: ReplicationConfiguration;
+    /**
+     * A token that allows Amazon S3 object lock to be enabled for an existing bucket.
      */
     Token?: ObjectLockToken;
   }
@@ -4024,7 +4063,7 @@ declare namespace S3 {
      */
     ACL?: ObjectCannedACL;
     /**
-     * 
+     * Contains the elements that set the ACL permissions for an object per grantee.
      */
     AccessControlPolicy?: AccessControlPolicy;
     /**
@@ -4096,16 +4135,16 @@ declare namespace S3 {
   }
   export interface PutObjectLockConfigurationRequest {
     /**
-     * The bucket whose Object Lock configuration you want to create or replace.
+     * The bucket whose object lock configuration you want to create or replace.
      */
     Bucket: BucketName;
     /**
-     * The Object Lock configuration that you want to apply to the specified bucket.
+     * The object lock configuration that you want to apply to the specified bucket.
      */
     ObjectLockConfiguration?: ObjectLockConfiguration;
     RequestPayer?: RequestPayer;
     /**
-     * A token to allow Object Lock to be enabled for an existing bucket.
+     * A token to allow Amazon S3 object lock to be enabled for an existing bucket.
      */
     Token?: ObjectLockToken;
     /**
@@ -4178,7 +4217,7 @@ declare namespace S3 {
      */
     ContentLength?: ContentLength;
     /**
-     * The base64-encoded 128-bit MD5 digest of the part data. This parameter is auto-populated when using the command from the CLI
+     * The base64-encoded 128-bit MD5 digest of the part data. This parameter is auto-populated when using the command from the CLI. This parameted is required if object lock parameters are specified.
      */
     ContentMD5?: ContentMD5;
     /**
@@ -4247,11 +4286,11 @@ declare namespace S3 {
      */
     Tagging?: TaggingHeader;
     /**
-     * The Object Lock mode that you want to apply to this object.
+     * The object lock mode that you want to apply to this object.
      */
     ObjectLockMode?: ObjectLockMode;
     /**
-     * The date and time when you want this object's Object Lock to expire.
+     * The date and time when you want this object's object lock to expire.
      */
     ObjectLockRetainUntilDate?: ObjectLockRetainUntilDate;
     /**
@@ -4335,13 +4374,16 @@ declare namespace S3 {
   export interface QueueConfiguration {
     Id?: NotificationId;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3 will publish a message when it detects events of the specified type.
+     * The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3 publishes a message when it detects events of the specified type.
      */
     QueueArn: QueueArn;
     /**
      * 
      */
     Events: EventList;
+    /**
+     * 
+     */
     Filter?: NotificationConfigurationFilter;
   }
   export interface QueueConfigurationDeprecated {
@@ -4379,7 +4421,7 @@ declare namespace S3 {
      */
     HttpRedirectCode?: HttpRedirectCode;
     /**
-     * Protocol to use (http, https) when redirecting requests. The default is the protocol that is used in the original request.
+     * Protocol to use when redirecting requests. The default is the protocol that is used in the original request.
      */
     Protocol?: Protocol;
     /**
@@ -4387,17 +4429,17 @@ declare namespace S3 {
      */
     ReplaceKeyPrefixWith?: ReplaceKeyPrefixWith;
     /**
-     * The specific object key to use in the redirect request. For example, redirect request to error.html. Not required if one of the sibling is present. Can be present only if ReplaceKeyPrefixWith is not provided.
+     * The specific object key to use in the redirect request. For example, redirect request to error.html. Not required if one of the siblings is present. Can be present only if ReplaceKeyPrefixWith is not provided.
      */
     ReplaceKeyWith?: ReplaceKeyWith;
   }
   export interface RedirectAllRequestsTo {
     /**
-     * Name of the host where requests will be redirected.
+     * Name of the host where requests are redirected.
      */
     HostName: HostName;
     /**
-     * Protocol to use (http, https) when redirecting requests. The default is the protocol that is used in the original request.
+     * Protocol to use when redirecting requests. The default is the protocol that is used in the original request.
      */
     Protocol?: Protocol;
   }
@@ -4406,7 +4448,7 @@ declare namespace S3 {
   export type ReplicaKmsKeyID = string;
   export interface ReplicationConfiguration {
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that Amazon S3 can assume when replicating the objects.
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that Amazon S3 assumes when replicating objects. For more information, see How to Set Up Cross-Region Replication in the Amazon Simple Storage Service Developer Guide.
      */
     Role: Role;
     /**
@@ -4424,22 +4466,28 @@ declare namespace S3 {
      */
     Priority?: Priority;
     /**
-     * An object keyname prefix that identifies the object or objects to which the rule applies. The maximum prefix length is 1,024 characters. 
+     * An object keyname prefix that identifies the object or objects to which the rule applies. The maximum prefix length is 1,024 characters. To include all objects in a bucket, specify an empty string. 
      */
     Prefix?: Prefix;
+    /**
+     * 
+     */
     Filter?: ReplicationRuleFilter;
     /**
-     * If status isn't enabled, the rule is ignored.
+     * Specifies whether the rule is enabled.
      */
     Status: ReplicationRuleStatus;
     /**
-     * A container that describes additional filters for identifying the source objects that you want to replicate. You can choose to enable or disable the replication of these objects. Currently, Amazon S3 supports only the filter that you can specify for objects created with server-side encryption using an AWS KMS-Managed Key (SSE-KMS).   If you want Amazon S3 to replicate objects created with server-side encryption using AWS KMS-Managed Keys. 
+     * A container that describes additional filters for identifying the source objects that you want to replicate. You can choose to enable or disable the replication of these objects. Currently, Amazon S3 supports only the filter that you can specify for objects created with server-side encryption using an AWS KMS-Managed Key (SSE-KMS).
      */
     SourceSelectionCriteria?: SourceSelectionCriteria;
     /**
      * A container for information about the replication destination.
      */
     Destination: Destination;
+    /**
+     * 
+     */
     DeleteMarkerReplication?: DeleteMarkerReplication;
   }
   export interface ReplicationRuleAndOperator {
@@ -4510,6 +4558,9 @@ declare namespace S3 {
      * 
      */
     VersionId?: ObjectVersionId;
+    /**
+     * 
+     */
     RestoreRequest?: RestoreRequest;
     RequestPayer?: RequestPayer;
   }
@@ -4563,27 +4614,39 @@ declare namespace S3 {
      */
     Expiration?: LifecycleExpiration;
     /**
-     * Unique identifier for the rule. The value cannot be longer than 255 characters.
+     * Unique identifier for the rule. The value can't be longer than 255 characters.
      */
     ID?: ID;
     /**
-     * Prefix identifying one or more objects to which the rule applies.
+     * Object key prefix that identifies one or more objects to which this rule applies.
      */
     Prefix: Prefix;
     /**
-     * If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied.
+     * If Enabled, the rule is currently being applied. If Disabled, the rule is not currently being applied.
      */
     Status: ExpirationStatus;
     /**
      * 
      */
     Transition?: Transition;
+    /**
+     * 
+     */
     NoncurrentVersionTransition?: NoncurrentVersionTransition;
+    /**
+     * 
+     */
     NoncurrentVersionExpiration?: NoncurrentVersionExpiration;
+    /**
+     * 
+     */
     AbortIncompleteMultipartUpload?: AbortIncompleteMultipartUpload;
   }
   export type Rules = Rule[];
   export interface S3KeyFilter {
+    /**
+     * 
+     */
     FilterRules?: FilterRuleList;
   }
   export interface S3Location {
@@ -4595,6 +4658,9 @@ declare namespace S3 {
      * The prefix that is prepended to the restore results for this request.
      */
     Prefix: LocationPrefix;
+    /**
+     * 
+     */
     Encryption?: Encryption;
     /**
      * The canned ACL to apply to the restore results.
@@ -4703,7 +4769,7 @@ declare namespace S3 {
      */
     SSEAlgorithm: ServerSideEncryption;
     /**
-     * KMS master key ID to use for the default encryption. This parameter is allowed if SSEAlgorithm is aws:kms.
+     * KMS master key ID to use for the default encryption. This parameter is allowed if and only if SSEAlgorithm is set to aws:kms.
      */
     KMSMasterKeyID?: SSEKMSKeyId;
   }
@@ -4715,7 +4781,7 @@ declare namespace S3 {
   }
   export interface ServerSideEncryptionRule {
     /**
-     * Describes the default server-side encryption to apply to new objects in the bucket. If Put Object request does not specify any server-side encryption, this default encryption will be applied.
+     * Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied.
      */
     ApplyServerSideEncryptionByDefault?: ServerSideEncryptionByDefault;
   }
@@ -4724,13 +4790,13 @@ declare namespace S3 {
   export type Size = number;
   export interface SourceSelectionCriteria {
     /**
-     *  A container for filter information for the selection of S3 objects encrypted with AWS KMS. If you include SourceSelectionCriteria in the replication configuration, this element is required. 
+     *  A container for filter information for the selection of Amazon S3 objects encrypted with AWS KMS. If you include SourceSelectionCriteria in the replication configuration, this element is required. 
      */
     SseKmsEncryptedObjects?: SseKmsEncryptedObjects;
   }
   export interface SseKmsEncryptedObjects {
     /**
-     *  If the status is not Enabled, replication for S3 objects encrypted with AWS KMS is disabled.
+     * Specifies whether Amazon S3 replicates objects created with server-side encryption using an AWS KMS-managed key.
      */
     Status: SseKmsEncryptedObjectsStatus;
   }
@@ -4759,7 +4825,7 @@ declare namespace S3 {
   export type StorageClass = "STANDARD"|"REDUCED_REDUNDANCY"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"GLACIER"|"DEEP_ARCHIVE"|string;
   export interface StorageClassAnalysis {
     /**
-     * A container used to describe how data related to the storage class analysis should be exported.
+     * Specifies how data related to the storage class analysis for an Amazon S3 bucket should be exported.
      */
     DataExport?: StorageClassAnalysisDataExport;
   }
@@ -4814,13 +4880,16 @@ declare namespace S3 {
   export interface TopicConfiguration {
     Id?: NotificationId;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3 will publish a message when it detects events of the specified type.
+     * The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3 publishes a message when it detects events of the specified type.
      */
     TopicArn: TopicArn;
     /**
-     * 
+     * The Amazon S3 bucket event about which to send notifications. For more information, see Supported Event Types in the Amazon Simple Storage Service Developer Guide.
      */
     Events: EventList;
+    /**
+     * 
+     */
     Filter?: NotificationConfigurationFilter;
   }
   export interface TopicConfigurationDeprecated {
@@ -4841,15 +4910,15 @@ declare namespace S3 {
   export type TopicConfigurationList = TopicConfiguration[];
   export interface Transition {
     /**
-     * Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format.
+     * Indicates when objects are transitioned to the specified storage class. The date value must be in ISO 8601 format. The time is always midnight UTC.
      */
     Date?: _Date;
     /**
-     * Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer.
+     * Indicates the number of days after creation when objects are transitioned to the specified storage class. The value must be a positive integer.
      */
     Days?: Days;
     /**
-     * The class of storage used to store the object.
+     * The storage class to which you want the object to transition.
      */
     StorageClass?: TransitionStorageClass;
   }
@@ -4989,7 +5058,7 @@ declare namespace S3 {
      */
     ContentLength?: ContentLength;
     /**
-     * The base64-encoded 128-bit MD5 digest of the part data.
+     * The base64-encoded 128-bit MD5 digest of the part data. This parameter is auto-populated when using the command from the CLI. This parameted is required if object lock parameters are specified.
      */
     ContentMD5?: ContentMD5;
     /**
@@ -5033,19 +5102,19 @@ declare namespace S3 {
   }
   export interface WebsiteConfiguration {
     /**
-     * 
+     * The name of the error document for the website.
      */
     ErrorDocument?: ErrorDocument;
     /**
-     * 
+     * The name of the index document for the website.
      */
     IndexDocument?: IndexDocument;
     /**
-     * 
+     * The redirect behavior for every request to this bucket's website endpoint.  If you specify this property, you can't specify any other property. 
      */
     RedirectAllRequestsTo?: RedirectAllRequestsTo;
     /**
-     * 
+     * Rules that define when a redirect is applied and the redirect behavior.
      */
     RoutingRules?: RoutingRules;
   }

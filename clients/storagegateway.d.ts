@@ -572,6 +572,14 @@ declare class StorageGateway extends Service {
    */
   updateSMBFileShare(callback?: (err: AWSError, data: StorageGateway.Types.UpdateSMBFileShareOutput) => void): Request<StorageGateway.Types.UpdateSMBFileShareOutput, AWSError>;
   /**
+   * Updates the SMB security strategy on a file gateway. This action is only supported in file gateways.
+   */
+  updateSMBSecurityStrategy(params: StorageGateway.Types.UpdateSMBSecurityStrategyInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateSMBSecurityStrategyOutput) => void): Request<StorageGateway.Types.UpdateSMBSecurityStrategyOutput, AWSError>;
+  /**
+   * Updates the SMB security strategy on a file gateway. This action is only supported in file gateways.
+   */
+  updateSMBSecurityStrategy(callback?: (err: AWSError, data: StorageGateway.Types.UpdateSMBSecurityStrategyOutput) => void): Request<StorageGateway.Types.UpdateSMBSecurityStrategyOutput, AWSError>;
+  /**
    * Updates a snapshot schedule configured for a gateway volume. This operation is only supported in the cached volume and stored volume gateway types. The default snapshot schedule for volume is once every 24 hours, starting at the creation time of the volume. You can use this API to change the snapshot schedule configured for the volume. In the request you must identify the gateway volume whose snapshot schedule you want to update, and the schedule information, including when you want the snapshot to begin on a day and the frequency (in hours) of snapshots.
    */
   updateSnapshotSchedule(params: StorageGateway.Types.UpdateSnapshotScheduleInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateSnapshotScheduleOutput) => void): Request<StorageGateway.Types.UpdateSnapshotScheduleOutput, AWSError>;
@@ -1419,6 +1427,10 @@ declare namespace StorageGateway {
      * A list of up to 50 tags assigned to the gateway, sorted alphabetically by key name. Each tag is a key-value pair. For a gateway with more than 10 tags assigned, you can view all tags using the ListTagsForResource API operation.
      */
     Tags?: Tags;
+    /**
+     * The configuration settings for the virtual private cloud (VPC) endpoint for your gateway. 
+     */
+    VPCEndpoint?: string;
   }
   export interface DescribeMaintenanceStartTimeInput {
     GatewayARN: GatewayARN;
@@ -1483,6 +1495,10 @@ declare namespace StorageGateway {
      * This value is true if a password for the guest user “smbguest” is set, and otherwise false.
      */
     SMBGuestPasswordSet?: Boolean;
+    /**
+     * The type of security strategy that was specified for file gateway. ClientSpecified: SMBv1 is enabled, SMB signing is offered but not required, SMB encryption is offered but not required. MandatorySigning: SMBv1 is disabled, SMB signing is required, SMB encryption is offered but not required. MandatoryEncryption: SMBv1 is disabled, SMB signing is offered but not required, SMB encryption is required.
+     */
+    SMBSecurityStrategy?: SMBSecurityStrategy;
   }
   export interface DescribeSnapshotScheduleInput {
     /**
@@ -2212,6 +2228,7 @@ declare namespace StorageGateway {
   }
   export type SMBFileShareInfoList = SMBFileShareInfo[];
   export type SMBGuestPassword = string;
+  export type SMBSecurityStrategy = "ClientSpecified"|"MandatorySigning"|"MandatoryEncryption"|string;
   export interface SetLocalConsolePasswordInput {
     GatewayARN: GatewayARN;
     /**
@@ -2656,6 +2673,16 @@ declare namespace StorageGateway {
      * The Amazon Resource Name (ARN) of the updated SMB file share. 
      */
     FileShareARN?: FileShareARN;
+  }
+  export interface UpdateSMBSecurityStrategyInput {
+    GatewayARN: GatewayARN;
+    /**
+     * Specifies the type of security strategy. ClientSpecified: SMBv1 is enabled, SMB signing is offered but not required, SMB encryption is offered but not required. MandatorySigning: SMBv1 is disabled, SMB signing is required, SMB encryption is offered but not required. MandatoryEncryption: SMBv1 is disabled, SMB signing is offered but not required, SMB encryption is required.
+     */
+    SMBSecurityStrategy: SMBSecurityStrategy;
+  }
+  export interface UpdateSMBSecurityStrategyOutput {
+    GatewayARN?: GatewayARN;
   }
   export interface UpdateSnapshotScheduleInput {
     /**
