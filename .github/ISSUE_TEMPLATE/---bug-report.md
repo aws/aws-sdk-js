@@ -19,7 +19,9 @@ Paste output of `npx envinfo --browsers` or `node -v`
 **SDK version number**
 Example: v2.466.0
 * For browsers, the SDK version number is in the script tag <pre>src=".../aws-sdk-<b>2.466.0</b>.min.js"</pre>
-* For Node.js, get SDK version by running command `npm list aws-sdk` from your root directory
+* For Node.js, get SDK version by
+  * running command `npm list aws-sdk` from your root directory
+  * printing the output of `AWS.VERSION` in your code where `AWS = require("aws-sdk");`
 
 **To Reproduce (observed behavior)**
 Steps to reproduce the behavior (please share code or minimal repo)
