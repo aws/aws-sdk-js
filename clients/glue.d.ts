@@ -580,35 +580,35 @@ declare class Glue extends Service {
    */
   importCatalogToGlue(callback?: (err: AWSError, data: Glue.Types.ImportCatalogToGlueResponse) => void): Request<Glue.Types.ImportCatalogToGlueResponse, AWSError>;
   /**
-   * Retrieves the names of all crawler resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   * Retrieves the names of all crawler resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listCrawlers(params: Glue.Types.ListCrawlersRequest, callback?: (err: AWSError, data: Glue.Types.ListCrawlersResponse) => void): Request<Glue.Types.ListCrawlersResponse, AWSError>;
   /**
-   * Retrieves the names of all crawler resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   * Retrieves the names of all crawler resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listCrawlers(callback?: (err: AWSError, data: Glue.Types.ListCrawlersResponse) => void): Request<Glue.Types.ListCrawlersResponse, AWSError>;
   /**
-   * Retrieves the names of all DevEndpoint resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   * Retrieves the names of all DevEndpoint resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listDevEndpoints(params: Glue.Types.ListDevEndpointsRequest, callback?: (err: AWSError, data: Glue.Types.ListDevEndpointsResponse) => void): Request<Glue.Types.ListDevEndpointsResponse, AWSError>;
   /**
-   * Retrieves the names of all DevEndpoint resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   * Retrieves the names of all DevEndpoint resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listDevEndpoints(callback?: (err: AWSError, data: Glue.Types.ListDevEndpointsResponse) => void): Request<Glue.Types.ListDevEndpointsResponse, AWSError>;
   /**
-   * Retrieves the names of all job resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   * Retrieves the names of all job resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listJobs(params: Glue.Types.ListJobsRequest, callback?: (err: AWSError, data: Glue.Types.ListJobsResponse) => void): Request<Glue.Types.ListJobsResponse, AWSError>;
   /**
-   * Retrieves the names of all job resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   * Retrieves the names of all job resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listJobs(callback?: (err: AWSError, data: Glue.Types.ListJobsResponse) => void): Request<Glue.Types.ListJobsResponse, AWSError>;
   /**
-   * Retrieves the names of all trigger resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   * Retrieves the names of all trigger resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listTriggers(params: Glue.Types.ListTriggersRequest, callback?: (err: AWSError, data: Glue.Types.ListTriggersResponse) => void): Request<Glue.Types.ListTriggersResponse, AWSError>;
   /**
-   * Retrieves the names of all trigger resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag will be retrieved.
+   * Retrieves the names of all trigger resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listTriggers(callback?: (err: AWSError, data: Glue.Types.ListTriggersResponse) => void): Request<Glue.Types.ListTriggersResponse, AWSError>;
   /**
@@ -970,7 +970,7 @@ declare namespace Glue {
   }
   export interface BatchGetJobsRequest {
     /**
-     * A list of job names, which may be the names returned from the ListJobs operation.
+     * A list of job names, which might be the names returned from the ListJobs operation.
      */
     JobNames: JobNameList;
   }
@@ -1031,7 +1031,7 @@ declare namespace Glue {
   }
   export interface BatchStopJobRunError {
     /**
-     * The name of the job definition used in the job run in question.
+     * The name of the job definition that is used in the job run in question.
      */
     JobName?: NameString;
     /**
@@ -1061,7 +1061,7 @@ declare namespace Glue {
      */
     SuccessfulSubmissions?: BatchStopJobRunSuccessfulSubmissionList;
     /**
-     * A list of the errors that were encountered in tryng to stop JobRuns, including the JobRunId for which each error was encountered and details about the error.
+     * A list of the errors that were encountered in trying to stop JobRuns, including the JobRunId for which each error was encountered and details about the error.
      */
     Errors?: BatchStopJobRunErrorList;
   }
@@ -1227,11 +1227,11 @@ declare namespace Glue {
      */
     LogicalOperator?: LogicalOperator;
     /**
-     * The name of the Job to whose JobRuns this condition applies and on which this trigger waits.
+     * The name of the job whose JobRuns this condition applies to, and on which this trigger waits.
      */
     JobName?: NameString;
     /**
-     * The condition state. Currently, the values supported are SUCCEEDED, STOPPED, TIMEOUT and FAILED.
+     * The condition state. Currently, the values supported are SUCCEEDED, STOPPED, TIMEOUT, and FAILED.
      */
     State?: JobRunState;
   }
@@ -1723,7 +1723,7 @@ declare namespace Glue {
      */
     LogUri?: UriString;
     /**
-     * The name or ARN of the IAM role associated with this job.
+     * The name or Amazon Resource Name (ARN) of the IAM role associated with this job.
      */
     Role: RoleString;
     /**
@@ -1747,7 +1747,7 @@ declare namespace Glue {
      */
     MaxRetries?: MaxRetries;
     /**
-     * This parameter is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This parameter is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) to allocate to this Job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
     /**
@@ -1755,7 +1755,7 @@ declare namespace Glue {
      */
     Timeout?: Timeout;
     /**
-     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a python shell job, or an Apache Spark ETL job:   When you specify a python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -1763,7 +1763,7 @@ declare namespace Glue {
      */
     NotificationProperty?: NotificationProperty;
     /**
-     * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.   For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.  
+     * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.   For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.  
      */
     WorkerType?: WorkerType;
     /**
@@ -1901,7 +1901,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * Set to true to start SCHEDULED and CONDITIONAL triggers when created. True not supported for ON_DEMAND triggers.
+     * Set to true to start SCHEDULED and CONDITIONAL triggers when created. True is not supported for ON_DEMAND triggers.
      */
     StartOnCreation?: BooleanValue;
     /**
@@ -2680,11 +2680,11 @@ declare namespace Glue {
   }
   export interface GetJobRunsResponse {
     /**
-     * A list of job-run metatdata objects.
+     * A list of job-run metadata objects.
      */
     JobRuns?: JobRunList;
     /**
-     * A continuation token, if not all reequested job runs have been returned.
+     * A continuation token, if not all requested job runs have been returned.
      */
     NextToken?: GenericString;
   }
@@ -2987,7 +2987,7 @@ declare namespace Glue {
   }
   export interface GetTagsRequest {
     /**
-     * The Amazon ARN of the resource for which to retrieve tags.
+     * The Amazon Resource Name (ARN) of the resource for which to retrieve tags.
      */
     ResourceArn: GlueResourceArn;
   }
@@ -3015,7 +3015,7 @@ declare namespace Glue {
      */
     NextToken?: GenericString;
     /**
-     * The name of the job for which to retrieve triggers. The trigger that can start this job will be returned, and if there is no such trigger, all triggers will be returned.
+     * The name of the job to retrieve triggers for. The trigger that can start this job is returned, and if there is no such trigger, all triggers are returned.
      */
     DependentJobName?: NameString;
     /**
@@ -3151,7 +3151,7 @@ declare namespace Glue {
      */
     Name?: NameString;
     /**
-     * Description of the job being defined.
+     * A description of the job.
      */
     Description?: DescriptionString;
     /**
@@ -3159,7 +3159,7 @@ declare namespace Glue {
      */
     LogUri?: UriString;
     /**
-     * The name or ARN of the IAM role associated with this job.
+     * The name or Amazon Resource Name (ARN) of the IAM role associated with this job.
      */
     Role?: RoleString;
     /**
@@ -3191,7 +3191,7 @@ declare namespace Glue {
      */
     MaxRetries?: MaxRetries;
     /**
-     * This field is deprecated, use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) allocated to runs of this job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. 
+     * This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) allocated to runs of this job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. 
      */
     AllocatedCapacity?: IntegerValue;
     /**
@@ -3199,11 +3199,11 @@ declare namespace Glue {
      */
     Timeout?: Timeout;
     /**
-     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a python shell job, or an Apache Spark ETL job:   When you specify a python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
      */
     MaxCapacity?: NullableDouble;
     /**
-     * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.   For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.  
+     * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.   For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.  
      */
     WorkerType?: WorkerType;
     /**
@@ -3254,13 +3254,17 @@ declare namespace Glue {
   export type JobBookmarksEncryptionMode = "DISABLED"|"CSE-KMS"|string;
   export interface JobCommand {
     /**
-     * The name of the job command: this must be glueetl, for an Apache Spark ETL job, or pythonshell, for a Python shell job.
+     * The name of the job command. For an Apache Spark ETL job, this must be glueetl. For a Python shell job, it must be pythonshell.
      */
     Name?: GenericString;
     /**
-     * Specifies the S3 path to a script that executes a job (required).
+     * Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that executes a job (required).
      */
     ScriptLocation?: ScriptLocationString;
+    /**
+     * The Python version being used to execute a Python shell job. Allowed values are 2 or 3.
+     */
+    PythonVersion?: PythonVersionString;
   }
   export type JobList = Job[];
   export type JobName = string;
@@ -3291,11 +3295,11 @@ declare namespace Glue {
      */
     StartedOn?: TimestampValue;
     /**
-     * The last time this job run was modified.
+     * The last time that this job run was modified.
      */
     LastModifiedOn?: TimestampValue;
     /**
-     * The date and time this job run completed.
+     * The date and time that this job run completed.
      */
     CompletedOn?: TimestampValue;
     /**
@@ -3315,7 +3319,7 @@ declare namespace Glue {
      */
     PredecessorRuns?: PredecessorList;
     /**
-     * This field is deprecated, use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
     /**
@@ -3327,7 +3331,7 @@ declare namespace Glue {
      */
     Timeout?: Timeout;
     /**
-     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a python shell job, or an Apache Spark ETL job:   When you specify a python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -3347,7 +3351,7 @@ declare namespace Glue {
      */
     SecurityConfiguration?: NameString;
     /**
-     * The name of the log group for secure logging, that can be server-side encrypted in CloudWatch using KMS. This name can be /aws-glue/jobs/, in which case the default encryption is NONE. If you add a role name and SecurityConfiguration name (in other words, /aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/), then that security configuration will be used to encrypt the log group.
+     * The name of the log group for secure logging that can be server-side encrypted in Amazon CloudWatch using AWS KMS. This name can be /aws-glue/jobs/, in which case the default encryption is NONE. If you add a role name and SecurityConfiguration name (in other words, /aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/), then that security configuration is used to encrypt the log group.
      */
     LogGroupName?: GenericString;
   }
@@ -3363,7 +3367,7 @@ declare namespace Glue {
      */
     LogUri?: UriString;
     /**
-     * The name or ARN of the IAM role associated with this job (required).
+     * The name or Amazon Resource Name (ARN) of the IAM role associated with this job (required).
      */
     Role?: RoleString;
     /**
@@ -3387,7 +3391,7 @@ declare namespace Glue {
      */
     MaxRetries?: MaxRetries;
     /**
-     * This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) to allocate to this Job. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) to allocate to this job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
     /**
@@ -3395,11 +3399,11 @@ declare namespace Glue {
      */
     Timeout?: Timeout;
     /**
-     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a python shell job, or an Apache Spark ETL job:   When you specify a python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
      */
     MaxCapacity?: NullableDouble;
     /**
-     * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.   For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.  
+     * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.   For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.  
      */
     WorkerType?: WorkerType;
     /**
@@ -3411,7 +3415,7 @@ declare namespace Glue {
      */
     SecurityConfiguration?: NameString;
     /**
-     * Specifies configuration properties of a job notification.
+     * Specifies the configuration properties of a job notification.
      */
     NotificationProperty?: NotificationProperty;
   }
@@ -3509,7 +3513,7 @@ declare namespace Glue {
   }
   export interface ListDevEndpointsResponse {
     /**
-     * The names of all DevEndpoints in the account, or the DevEndpoints with the specified tags.
+     * The names of all the DevEndpoints in the account, or the DevEndpoints with the specified tags.
      */
     DevEndpointNames?: DevEndpointNameList;
     /**
@@ -3547,7 +3551,7 @@ declare namespace Glue {
      */
     NextToken?: GenericString;
     /**
-     *  The name of the job for which to retrieve triggers. The trigger that can start this job will be returned, and if there is no such trigger, all triggers will be returned.
+     *  The name of the job for which to retrieve triggers. The trigger that can start this job is returned. If there is no such trigger, all triggers are returned.
      */
     DependentJobName?: NameString;
     /**
@@ -3755,7 +3759,7 @@ declare namespace Glue {
   export type PredecessorList = Predecessor[];
   export interface Predicate {
     /**
-     * Optional field if only one condition is listed. If multiple conditions are listed, then this field is required.
+     * An optional field if only one condition is listed. If multiple conditions are listed, then this field is required.
      */
     Logical?: Logical;
     /**
@@ -3799,6 +3803,7 @@ declare namespace Glue {
     PolicyHash?: HashString;
   }
   export type PythonScript = string;
+  export type PythonVersionString = string;
   export interface ResetJobBookmarkRequest {
     /**
      * The name of the job in question.
@@ -3958,7 +3963,7 @@ declare namespace Glue {
      */
     Arguments?: GenericMap;
     /**
-     * This field is deprecated, use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
     /**
@@ -3966,7 +3971,7 @@ declare namespace Glue {
      */
     Timeout?: Timeout;
     /**
-     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a python shell job, or an Apache Spark ETL job:   When you specify a python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job, or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -4262,7 +4267,7 @@ declare namespace Glue {
   export type TotalSegmentsInteger = number;
   export interface Trigger {
     /**
-     * Name of the trigger.
+     * The name of the trigger.
      */
     Name?: NameString;
     /**
@@ -4323,7 +4328,7 @@ declare namespace Glue {
   export type URI = string;
   export interface UntagResourceRequest {
     /**
-     * The ARN of the resource from which to remove the tags.
+     * The Amazon Resource Name (ARN) of the resource from which to remove the tags.
      */
     ResourceArn: GlueResourceArn;
     /**
@@ -4532,7 +4537,7 @@ declare namespace Glue {
   }
   export interface UpdateJobRequest {
     /**
-     * Name of the job definition to update.
+     * The name of the job definition to update.
      */
     JobName: NameString;
     /**
