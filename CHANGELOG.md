@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.468.0-->
+<!--LATEST=2.469.0-->
 <!--ENTRYINSERT-->
+
+## 2.469.0
+* feature: Glue: Support specifying python version for Python shell jobs. A new parameter PythonVersion is added to the JobCommand data type.
 
 ## 2.468.0
 * feature: EC2: This release adds support for Host Recovery feature which automatically restarts instances on to a new replacement host if failures are detected on Dedicated Host.
