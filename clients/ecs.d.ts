@@ -37,11 +37,11 @@ declare class ECS extends Service {
    */
   createTaskSet(callback?: (err: AWSError, data: ECS.Types.CreateTaskSetResponse) => void): Request<ECS.Types.CreateTaskSetResponse, AWSError>;
   /**
-   * Modifies the ARN and resource ID format of a resource for a specified IAM user, IAM role, or the root user for an account. You can specify whether the new ARN and resource ID format are disabled for new resources that are created.
+   * Disables an account setting for a specified IAM user, IAM role, or the root user for an account.
    */
   deleteAccountSetting(params: ECS.Types.DeleteAccountSettingRequest, callback?: (err: AWSError, data: ECS.Types.DeleteAccountSettingResponse) => void): Request<ECS.Types.DeleteAccountSettingResponse, AWSError>;
   /**
-   * Modifies the ARN and resource ID format of a resource for a specified IAM user, IAM role, or the root user for an account. You can specify whether the new ARN and resource ID format are disabled for new resources that are created.
+   * Disables an account setting for a specified IAM user, IAM role, or the root user for an account.
    */
   deleteAccountSetting(callback?: (err: AWSError, data: ECS.Types.DeleteAccountSettingResponse) => void): Request<ECS.Types.DeleteAccountSettingResponse, AWSError>;
   /**
@@ -149,11 +149,11 @@ declare class ECS extends Service {
    */
   discoverPollEndpoint(callback?: (err: AWSError, data: ECS.Types.DiscoverPollEndpointResponse) => void): Request<ECS.Types.DiscoverPollEndpointResponse, AWSError>;
   /**
-   * Lists the account settings for an Amazon ECS resource for a specified principal.
+   * Lists the account settings for a specified principal.
    */
   listAccountSettings(params: ECS.Types.ListAccountSettingsRequest, callback?: (err: AWSError, data: ECS.Types.ListAccountSettingsResponse) => void): Request<ECS.Types.ListAccountSettingsResponse, AWSError>;
   /**
-   * Lists the account settings for an Amazon ECS resource for a specified principal.
+   * Lists the account settings for a specified principal.
    */
   listAccountSettings(callback?: (err: AWSError, data: ECS.Types.ListAccountSettingsResponse) => void): Request<ECS.Types.ListAccountSettingsResponse, AWSError>;
   /**
@@ -221,19 +221,19 @@ declare class ECS extends Service {
    */
   listTasks(callback?: (err: AWSError, data: ECS.Types.ListTasksResponse) => void): Request<ECS.Types.ListTasksResponse, AWSError>;
   /**
-   * Modifies the ARN and resource ID format of a resource type for a specified IAM user, IAM role, or the root user for an account. If the account setting for the root user is changed, it sets the default setting for all of the IAM users and roles for which no individual account setting has been set. The opt-in and opt-out account setting can be set for each Amazon ECS resource separately. The ARN and resource ID format of a resource will be defined by the opt-in status of the IAM user or role that created the resource. Enabling this setting is required to use new Amazon ECS features such as resource tagging. For more information, see Amazon Resource Names (ARNs) and IDs in the Amazon Elastic Container Service Developer Guide.
+   * Modifies an account setting. For more information, see Account Settings in the Amazon Elastic Container Service Developer Guide. When serviceLongArnFormat, taskLongArnFormat, or containerInstanceLongArnFormat are specified, the ARN and resource ID format of the resource type for a specified IAM user, IAM role, or the root user for an account is changed. If you change the account setting for the root user, the default settings for all of the IAM users and roles for which no individual account setting has been specified are reset. The opt-in and opt-out account setting can be specified for each Amazon ECS resource separately. The ARN and resource ID format of a resource will be defined by the opt-in status of the IAM user or role that created the resource. You must enable this setting to use Amazon ECS features such as resource tagging. When awsvpcTrunking is specified, the elastic network interface (ENI) limit for any new container instances that support the feature is changed. If awsvpcTrunking is enabled, any new container instances that support the feature are launched have the increased ENI limits available to them. For more information, see Elastic Network Interface Trunking in the Amazon Elastic Container Service Developer Guide.
    */
   putAccountSetting(params: ECS.Types.PutAccountSettingRequest, callback?: (err: AWSError, data: ECS.Types.PutAccountSettingResponse) => void): Request<ECS.Types.PutAccountSettingResponse, AWSError>;
   /**
-   * Modifies the ARN and resource ID format of a resource type for a specified IAM user, IAM role, or the root user for an account. If the account setting for the root user is changed, it sets the default setting for all of the IAM users and roles for which no individual account setting has been set. The opt-in and opt-out account setting can be set for each Amazon ECS resource separately. The ARN and resource ID format of a resource will be defined by the opt-in status of the IAM user or role that created the resource. Enabling this setting is required to use new Amazon ECS features such as resource tagging. For more information, see Amazon Resource Names (ARNs) and IDs in the Amazon Elastic Container Service Developer Guide.
+   * Modifies an account setting. For more information, see Account Settings in the Amazon Elastic Container Service Developer Guide. When serviceLongArnFormat, taskLongArnFormat, or containerInstanceLongArnFormat are specified, the ARN and resource ID format of the resource type for a specified IAM user, IAM role, or the root user for an account is changed. If you change the account setting for the root user, the default settings for all of the IAM users and roles for which no individual account setting has been specified are reset. The opt-in and opt-out account setting can be specified for each Amazon ECS resource separately. The ARN and resource ID format of a resource will be defined by the opt-in status of the IAM user or role that created the resource. You must enable this setting to use Amazon ECS features such as resource tagging. When awsvpcTrunking is specified, the elastic network interface (ENI) limit for any new container instances that support the feature is changed. If awsvpcTrunking is enabled, any new container instances that support the feature are launched have the increased ENI limits available to them. For more information, see Elastic Network Interface Trunking in the Amazon Elastic Container Service Developer Guide.
    */
   putAccountSetting(callback?: (err: AWSError, data: ECS.Types.PutAccountSettingResponse) => void): Request<ECS.Types.PutAccountSettingResponse, AWSError>;
   /**
-   * Modifies the ARN and resource ID format of a resource type for all IAM users on an account for which no individual account setting has been set. Enabling this setting is required to use new Amazon ECS features such as resource tagging.
+   * Modifies an account setting for all IAM users on an account for whom no individual account setting has been specified.
    */
   putAccountSettingDefault(params: ECS.Types.PutAccountSettingDefaultRequest, callback?: (err: AWSError, data: ECS.Types.PutAccountSettingDefaultResponse) => void): Request<ECS.Types.PutAccountSettingDefaultResponse, AWSError>;
   /**
-   * Modifies the ARN and resource ID format of a resource type for all IAM users on an account for which no individual account setting has been set. Enabling this setting is required to use new Amazon ECS features such as resource tagging.
+   * Modifies an account setting for all IAM users on an account for whom no individual account setting has been specified.
    */
   putAccountSettingDefault(callback?: (err: AWSError, data: ECS.Types.PutAccountSettingDefaultResponse) => void): Request<ECS.Types.PutAccountSettingDefaultResponse, AWSError>;
   /**
@@ -285,6 +285,14 @@ declare class ECS extends Service {
    */
   stopTask(callback?: (err: AWSError, data: ECS.Types.StopTaskResponse) => void): Request<ECS.Types.StopTaskResponse, AWSError>;
   /**
+   *  This action is only used by the Amazon ECS agent, and it is not intended for use outside of the agent.  Sent to acknowledge that an attachment changed states.
+   */
+  submitAttachmentStateChanges(params: ECS.Types.SubmitAttachmentStateChangesRequest, callback?: (err: AWSError, data: ECS.Types.SubmitAttachmentStateChangesResponse) => void): Request<ECS.Types.SubmitAttachmentStateChangesResponse, AWSError>;
+  /**
+   *  This action is only used by the Amazon ECS agent, and it is not intended for use outside of the agent.  Sent to acknowledge that an attachment changed states.
+   */
+  submitAttachmentStateChanges(callback?: (err: AWSError, data: ECS.Types.SubmitAttachmentStateChangesResponse) => void): Request<ECS.Types.SubmitAttachmentStateChangesResponse, AWSError>;
+  /**
    *  This action is only used by the Amazon ECS agent, and it is not intended for use outside of the agent.  Sent to acknowledge that a container changed states.
    */
   submitContainerStateChange(params: ECS.Types.SubmitContainerStateChangeRequest, callback?: (err: AWSError, data: ECS.Types.SubmitContainerStateChangeResponse) => void): Request<ECS.Types.SubmitContainerStateChangeResponse, AWSError>;
@@ -325,11 +333,11 @@ declare class ECS extends Service {
    */
   updateContainerAgent(callback?: (err: AWSError, data: ECS.Types.UpdateContainerAgentResponse) => void): Request<ECS.Types.UpdateContainerAgentResponse, AWSError>;
   /**
-   * Modifies the status of an Amazon ECS container instance. You can change the status of a container instance to DRAINING to manually remove an instance from a cluster, for example to perform system updates, update the Docker daemon, or scale down the cluster size.  When you set a container instance to DRAINING, Amazon ECS prevents new tasks from being scheduled for placement on the container instance and replacement service tasks are started on other container instances in the cluster if the resources are available. Service tasks on the container instance that are in the PENDING state are stopped immediately. Service tasks on the container instance that are in the RUNNING state are stopped and replaced according to the service's deployment configuration parameters, minimumHealthyPercent and maximumPercent. You can change the deployment configuration of your service using UpdateService.   If minimumHealthyPercent is below 100%, the scheduler can ignore desiredCount temporarily during task replacement. For example, desiredCount is four tasks, a minimum of 50% allows the scheduler to stop two existing tasks before starting two new tasks. If the minimum is 100%, the service scheduler can't remove existing tasks until the replacement tasks are considered healthy. Tasks for services that do not use a load balancer are considered healthy if they are in the RUNNING state. Tasks for services that use a load balancer are considered healthy if they are in the RUNNING state and the container instance they are hosted on is reported as healthy by the load balancer.   The maximumPercent parameter represents an upper limit on the number of running tasks during task replacement, which enables you to define the replacement batch size. For example, if desiredCount is four tasks, a maximum of 200% starts four new tasks before stopping the four tasks to be drained, provided that the cluster resources required to do this are available. If the maximum is 100%, then replacement tasks can't start until the draining tasks have stopped.   Any PENDING or RUNNING tasks that do not belong to a service are not affected. You must wait for them to finish or stop them manually. A container instance has completed draining when it has no more RUNNING tasks. You can verify this using ListTasks. When you set a container instance to ACTIVE, the Amazon ECS scheduler can begin scheduling tasks on the instance again.
+   * Modifies the status of an Amazon ECS container instance. Once a container instance has reached an ACTIVE state, you can change the status of a container instance to DRAINING to manually remove an instance from a cluster, for example to perform system updates, update the Docker daemon, or scale down the cluster size.  A container instance cannot be changed to DRAINING until it has reached an ACTIVE status. If the instance is in any other status, an error will be received.  When you set a container instance to DRAINING, Amazon ECS prevents new tasks from being scheduled for placement on the container instance and replacement service tasks are started on other container instances in the cluster if the resources are available. Service tasks on the container instance that are in the PENDING state are stopped immediately. Service tasks on the container instance that are in the RUNNING state are stopped and replaced according to the service's deployment configuration parameters, minimumHealthyPercent and maximumPercent. You can change the deployment configuration of your service using UpdateService.   If minimumHealthyPercent is below 100%, the scheduler can ignore desiredCount temporarily during task replacement. For example, desiredCount is four tasks, a minimum of 50% allows the scheduler to stop two existing tasks before starting two new tasks. If the minimum is 100%, the service scheduler can't remove existing tasks until the replacement tasks are considered healthy. Tasks for services that do not use a load balancer are considered healthy if they are in the RUNNING state. Tasks for services that use a load balancer are considered healthy if they are in the RUNNING state and the container instance they are hosted on is reported as healthy by the load balancer.   The maximumPercent parameter represents an upper limit on the number of running tasks during task replacement, which enables you to define the replacement batch size. For example, if desiredCount is four tasks, a maximum of 200% starts four new tasks before stopping the four tasks to be drained, provided that the cluster resources required to do this are available. If the maximum is 100%, then replacement tasks can't start until the draining tasks have stopped.   Any PENDING or RUNNING tasks that do not belong to a service are not affected. You must wait for them to finish or stop them manually. A container instance has completed draining when it has no more RUNNING tasks. You can verify this using ListTasks. When a container instance has been drained, you can set a container instance to ACTIVE status and once it has reached that status the Amazon ECS scheduler can begin scheduling tasks on the instance again.
    */
   updateContainerInstancesState(params: ECS.Types.UpdateContainerInstancesStateRequest, callback?: (err: AWSError, data: ECS.Types.UpdateContainerInstancesStateResponse) => void): Request<ECS.Types.UpdateContainerInstancesStateResponse, AWSError>;
   /**
-   * Modifies the status of an Amazon ECS container instance. You can change the status of a container instance to DRAINING to manually remove an instance from a cluster, for example to perform system updates, update the Docker daemon, or scale down the cluster size.  When you set a container instance to DRAINING, Amazon ECS prevents new tasks from being scheduled for placement on the container instance and replacement service tasks are started on other container instances in the cluster if the resources are available. Service tasks on the container instance that are in the PENDING state are stopped immediately. Service tasks on the container instance that are in the RUNNING state are stopped and replaced according to the service's deployment configuration parameters, minimumHealthyPercent and maximumPercent. You can change the deployment configuration of your service using UpdateService.   If minimumHealthyPercent is below 100%, the scheduler can ignore desiredCount temporarily during task replacement. For example, desiredCount is four tasks, a minimum of 50% allows the scheduler to stop two existing tasks before starting two new tasks. If the minimum is 100%, the service scheduler can't remove existing tasks until the replacement tasks are considered healthy. Tasks for services that do not use a load balancer are considered healthy if they are in the RUNNING state. Tasks for services that use a load balancer are considered healthy if they are in the RUNNING state and the container instance they are hosted on is reported as healthy by the load balancer.   The maximumPercent parameter represents an upper limit on the number of running tasks during task replacement, which enables you to define the replacement batch size. For example, if desiredCount is four tasks, a maximum of 200% starts four new tasks before stopping the four tasks to be drained, provided that the cluster resources required to do this are available. If the maximum is 100%, then replacement tasks can't start until the draining tasks have stopped.   Any PENDING or RUNNING tasks that do not belong to a service are not affected. You must wait for them to finish or stop them manually. A container instance has completed draining when it has no more RUNNING tasks. You can verify this using ListTasks. When you set a container instance to ACTIVE, the Amazon ECS scheduler can begin scheduling tasks on the instance again.
+   * Modifies the status of an Amazon ECS container instance. Once a container instance has reached an ACTIVE state, you can change the status of a container instance to DRAINING to manually remove an instance from a cluster, for example to perform system updates, update the Docker daemon, or scale down the cluster size.  A container instance cannot be changed to DRAINING until it has reached an ACTIVE status. If the instance is in any other status, an error will be received.  When you set a container instance to DRAINING, Amazon ECS prevents new tasks from being scheduled for placement on the container instance and replacement service tasks are started on other container instances in the cluster if the resources are available. Service tasks on the container instance that are in the PENDING state are stopped immediately. Service tasks on the container instance that are in the RUNNING state are stopped and replaced according to the service's deployment configuration parameters, minimumHealthyPercent and maximumPercent. You can change the deployment configuration of your service using UpdateService.   If minimumHealthyPercent is below 100%, the scheduler can ignore desiredCount temporarily during task replacement. For example, desiredCount is four tasks, a minimum of 50% allows the scheduler to stop two existing tasks before starting two new tasks. If the minimum is 100%, the service scheduler can't remove existing tasks until the replacement tasks are considered healthy. Tasks for services that do not use a load balancer are considered healthy if they are in the RUNNING state. Tasks for services that use a load balancer are considered healthy if they are in the RUNNING state and the container instance they are hosted on is reported as healthy by the load balancer.   The maximumPercent parameter represents an upper limit on the number of running tasks during task replacement, which enables you to define the replacement batch size. For example, if desiredCount is four tasks, a maximum of 200% starts four new tasks before stopping the four tasks to be drained, provided that the cluster resources required to do this are available. If the maximum is 100%, then replacement tasks can't start until the draining tasks have stopped.   Any PENDING or RUNNING tasks that do not belong to a service are not affected. You must wait for them to finish or stop them manually. A container instance has completed draining when it has no more RUNNING tasks. You can verify this using ListTasks. When a container instance has been drained, you can set a container instance to ACTIVE status and once it has reached that status the Amazon ECS scheduler can begin scheduling tasks on the instance again.
    */
   updateContainerInstancesState(callback?: (err: AWSError, data: ECS.Types.UpdateContainerInstancesStateResponse) => void): Request<ECS.Types.UpdateContainerInstancesStateResponse, AWSError>;
   /**
@@ -461,7 +469,7 @@ declare namespace ECS {
   export type BoxedInteger = number;
   export interface Cluster {
     /**
-     * The Amazon Resource Name (ARN) that identifies the cluster. The ARN contains the arn:aws:ecs namespace, followed by the Region of the cluster, the AWS account ID of the cluster owner, the cluster namespace, and then the cluster name. For example, arn:aws:ecs:region:012345678910:cluster/test ..
+     * The Amazon Resource Name (ARN) that identifies the cluster. The ARN contains the arn:aws:ecs namespace, followed by the Region of the cluster, the AWS account ID of the cluster owner, the cluster namespace, and then the cluster name. For example, arn:aws:ecs:region:012345678910:cluster/test.
      */
     clusterArn?: String;
     /**
@@ -560,7 +568,7 @@ declare namespace ECS {
   export type ContainerCondition = "START"|"COMPLETE"|"SUCCESS"|"HEALTHY"|string;
   export interface ContainerDefinition {
     /**
-     * The name of a container. If you are linking multiple containers together in a task definition, the name of one container can be entered in the links of another container to connect the containers. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. This parameter maps to name in the Create a container section of the Docker Remote API and the --name option to docker run. 
+     * The name of a container. If you are linking multiple containers together in a task definition, the name of one container can be entered in the links of another container to connect the containers. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. This parameter maps to name in the Create a container section of the Docker Remote API and the --name option to docker run. 
      */
     name?: String;
     /**
@@ -576,7 +584,7 @@ declare namespace ECS {
      */
     cpu?: Integer;
     /**
-     * The hard limit (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed. This parameter maps to Memory in the Create a container section of the Docker Remote API and the --memory option to docker run. If your containers are part of a task using the Fargate launch type, this field is optional and the only requirement is that the total amount of memory reserved for all containers within a task be lower than the task memory value. For containers that are part of a task using the EC2 launch type, you must specify a non-zero integer for one or both of memory or memoryReservation in container definitions. If you specify both, memory must be greater than memoryReservation. If you specify memoryReservation, then that value is subtracted from the available memory resources for the container instance on which the container is placed. Otherwise, the value of memory is used. The Docker daemon reserves a minimum of 4 MiB of memory for a container, so you should not specify fewer than 4 MiB of memory for your containers. 
+     * The amount (in MiB) of memory to present to the container. If your container attempts to exceed the memory specified here, the container is killed. The total amount of memory reserved for all containers within a task must be lower than the task memory value, if one is specified. This parameter maps to Memory in the Create a container section of the Docker Remote API and the --memory option to docker run. If your containers are part of a task using the Fargate launch type, this field is optional. For containers that are part of a task using the EC2 launch type, you must specify a non-zero integer for one or both of memory or memoryReservation in container definitions. If you specify both, memory must be greater than memoryReservation. If you specify memoryReservation, then that value is subtracted from the available memory resources for the container instance on which the container is placed. Otherwise, the value of memory is used. The Docker daemon reserves a minimum of 4 MiB of memory for a container, so you should not specify fewer than 4 MiB of memory for your containers.
      */
     memory?: BoxedInteger;
     /**
@@ -584,7 +592,7 @@ declare namespace ECS {
      */
     memoryReservation?: BoxedInteger;
     /**
-     * The link parameter allows containers to communicate with each other without the need for port mappings. Only supported if the network mode of a task definition is set to bridge. The name:internalName construct is analogous to name:alias in Docker links. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. For more information about linking Docker containers, go to https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/. This parameter maps to Links in the Create a container section of the Docker Remote API and the --link option to  docker run .  This parameter is not supported for Windows containers.   Containers that are collocated on a single container instance may be able to communicate with each other without requiring links or host port mappings. Network isolation is achieved on the container instance using security groups and VPC settings. 
+     * The links parameter allows containers to communicate with each other without the need for port mappings. This parameter is only supported if the network mode of a task definition is bridge. The name:internalName construct is analogous to name:alias in Docker links. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. For more information about linking Docker containers, go to Legacy container links in the Docker documentation. This parameter maps to Links in the Create a container section of the Docker Remote API and the --link option to docker run.  This parameter is not supported for Windows containers.   Containers that are collocated on a single container instance may be able to communicate with each other without requiring links or host port mappings. Network isolation is achieved on the container instance using security groups and VPC settings. 
      */
     links?: StringList;
     /**
@@ -616,7 +624,7 @@ declare namespace ECS {
      */
     volumesFrom?: VolumeFromList;
     /**
-     * Linux-specific modifications that are applied to the container, such as Linux KernelCapabilities.  This parameter is not supported for Windows containers. 
+     * Linux-specific modifications that are applied to the container, such as Linux kernel capabilities. For more information see KernelCapabilities.  This parameter is not supported for Windows containers. 
      */
     linuxParameters?: LinuxParameters;
     /**
@@ -672,7 +680,7 @@ declare namespace ECS {
      */
     extraHosts?: HostEntryList;
     /**
-     * A list of strings to provide custom labels for SELinux and AppArmor multi-level security systems. This field is not valid for containers in tasks using the Fargate launch type. This parameter maps to SecurityOpt in the Create a container section of the Docker Remote API and the --security-opt option to docker run.  The Amazon ECS container agent running on a container instance must register with the ECS_SELINUX_CAPABLE=true or ECS_APPARMOR_CAPABLE=true environment variables before containers placed on that instance can use these security options. For more information, see Amazon ECS Container Agent Configuration in the Amazon Elastic Container Service Developer Guide. This parameter is not supported for Windows containers. 
+     * A list of strings to provide custom labels for SELinux and AppArmor multi-level security systems. This field is not valid for containers in tasks using the Fargate launch type. This parameter maps to SecurityOpt in the Create a container section of the Docker Remote API and the --security-opt option to docker run.  The Amazon ECS container agent running on a container instance must register with the ECS_SELINUX_CAPABLE=true or ECS_APPARMOR_CAPABLE=true environment variables before containers placed on that instance can use these security options. For more information, see Amazon ECS Container Agent Configuration in the Amazon Elastic Container Service Developer Guide.   This parameter is not supported for Windows containers. 
      */
     dockerSecurityOptions?: StringList;
     /**
@@ -722,7 +730,7 @@ declare namespace ECS {
   }
   export interface ContainerInstance {
     /**
-     * The Amazon Resource Name (ARN) of the container instance. The ARN contains the arn:aws:ecs namespace, followed by the Region of the container instance, the AWS account ID of the container instance owner, the container-instance namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID .
+     * The Amazon Resource Name (ARN) of the container instance. The ARN contains the arn:aws:ecs namespace, followed by the Region of the container instance, the AWS account ID of the container instance owner, the container-instance namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID.
      */
     containerInstanceArn?: String;
     /**
@@ -746,9 +754,13 @@ declare namespace ECS {
      */
     registeredResources?: Resources;
     /**
-     * The status of the container instance. The valid values are ACTIVE, INACTIVE, or DRAINING. ACTIVE indicates that the container instance can accept tasks. DRAINING indicates that new tasks are not placed on the container instance and any service tasks running on the container instance are removed if possible. For more information, see Container Instance Draining in the Amazon Elastic Container Service Developer Guide.
+     * The status of the container instance. The valid values are REGISTERING, REGISTRATION_FAILED, ACTIVE, INACTIVE, DEREGISTERING, or DRAINING. If your account has opted in to the awsvpcTrunking account setting, then any newly registered container instance will transition to a REGISTERING status while the trunk elastic network interface is provisioned for the instance. If the registration fails, the instance will transition to a REGISTRATION_FAILED status. You can describe the container instance and see the reason for failure in the statusReason parameter. Once the container instance is terminated, the instance transitions to a DEREGISTERING status while the trunk elastic network interface is deprovisioned. The instance then transitions to an INACTIVE status. The ACTIVE status indicates that the container instance can accept tasks. The DRAINING indicates that new tasks are not placed on the container instance and any service tasks running on the container instance are removed if possible. For more information, see Container Instance Draining in the Amazon Elastic Container Service Developer Guide.
      */
     status?: String;
+    /**
+     * The reason that the container instance reached its current status.
+     */
+    statusReason?: String;
     /**
      * This parameter returns true if the agent is connected to Amazon ECS. Registered instances with an agent that may be unhealthy or stopped return false. Only instances connected to an agent can accept placement requests.
      */
@@ -774,7 +786,7 @@ declare namespace ECS {
      */
     registeredAt?: Timestamp;
     /**
-     * The elastic network interfaces associated with the container instance.
+     * The resources attached to a container instance, such as elastic network interfaces.
      */
     attachments?: Attachments;
     /**
@@ -784,7 +796,7 @@ declare namespace ECS {
   }
   export type ContainerInstanceField = "TAGS"|string;
   export type ContainerInstanceFieldList = ContainerInstanceField[];
-  export type ContainerInstanceStatus = "ACTIVE"|"DRAINING"|string;
+  export type ContainerInstanceStatus = "ACTIVE"|"DRAINING"|"REGISTERING"|"DEREGISTERING"|"REGISTRATION_FAILED"|string;
   export type ContainerInstances = ContainerInstance[];
   export interface ContainerOverride {
     /**
@@ -843,7 +855,7 @@ declare namespace ECS {
   export type Containers = Container[];
   export interface CreateClusterRequest {
     /**
-     * The name of your cluster. If you do not specify a name for your cluster, you create a cluster named default. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.
+     * The name of your cluster. If you do not specify a name for your cluster, you create a cluster named default. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. 
      */
     clusterName?: String;
     /**
@@ -863,7 +875,7 @@ declare namespace ECS {
      */
     cluster?: String;
     /**
-     * The name of your service. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. Service names must be unique within a cluster, but you can have similarly named services in multiple clusters within a Region or across multiple Regions.
+     * The name of your service. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. Service names must be unique within a cluster, but you can have similarly named services in multiple clusters within a Region or across multiple Regions.
      */
     serviceName: String;
     /**
@@ -990,11 +1002,11 @@ declare namespace ECS {
   }
   export interface DeleteAccountSettingRequest {
     /**
-     * The resource name for which to disable the new format. If serviceLongArnFormat is specified, the ARN for your Amazon ECS services is affected. If taskLongArnFormat is specified, the ARN and resource ID for your Amazon ECS tasks is affected. If containerInstanceLongArnFormat is specified, the ARN and resource ID for your Amazon ECS container instances is affected.
+     * The resource name for which to disable the account setting. If serviceLongArnFormat is specified, the ARN for your Amazon ECS services is affected. If taskLongArnFormat is specified, the ARN and resource ID for your Amazon ECS tasks is affected. If containerInstanceLongArnFormat is specified, the ARN and resource ID for your Amazon ECS container instances is affected. If awsvpcTrunking is specified, the ENI limit for your Amazon ECS container instances is affected.
      */
     name: SettingName;
     /**
-     * The ARN of the principal, which can be an IAM user, IAM role, or the root user. If you specify the root user, it modifies the ARN and resource ID format for all IAM users, IAM roles, and the root user of the account unless an IAM user or role explicitly overrides these settings for themselves. If this field is omitted, the setting are changed only for the authenticated user.
+     * The ARN of the principal, which can be an IAM user, IAM role, or the root user. If you specify the root user, it disables the account setting for all IAM users, IAM roles, and the root user of the account unless an IAM user or role explicitly overrides these settings. If this field is omitted, the setting is changed only for the authenticated user.
      */
     principalArn?: String;
   }
@@ -1143,7 +1155,7 @@ declare namespace ECS {
      */
     cluster?: String;
     /**
-     * The container instance ID or full ARN of the container instance to deregister. The ARN contains the arn:aws:ecs namespace, followed by the Region of the container instance, the AWS account ID of the container instance owner, the container-instance namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID .
+     * The container instance ID or full ARN of the container instance to deregister. The ARN contains the arn:aws:ecs namespace, followed by the Region of the container instance, the AWS account ID of the container instance owner, the container-instance namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID.
      */
     containerInstance: String;
     /**
@@ -1191,7 +1203,7 @@ declare namespace ECS {
   }
   export interface DescribeContainerInstancesRequest {
     /**
-     * The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instances to describe. If you do not specify a cluster, the default cluster is assumed.
+     * The short name or full Amazon Resource Name (ARN) of the cluster that hosts the container instances to describe. If you do not specify a cluster, the default cluster is assumed. This parameter is required if the container instance or container instances you are describing were launched in any cluster other than the default cluster.
      */
     cluster?: String;
     /**
@@ -1215,7 +1227,7 @@ declare namespace ECS {
   }
   export interface DescribeServicesRequest {
     /**
-     * The short name or full Amazon Resource Name (ARN)the cluster that hosts the service to describe. If you do not specify a cluster, the default cluster is assumed.
+     * The short name or full Amazon Resource Name (ARN)the cluster that hosts the service to describe. If you do not specify a cluster, the default cluster is assumed. This parameter is required if the service or services you are describing were launched in any cluster other than the default cluster.
      */
     cluster?: String;
     /**
@@ -1283,7 +1295,7 @@ declare namespace ECS {
   }
   export interface DescribeTasksRequest {
     /**
-     * The short name or full Amazon Resource Name (ARN) of the cluster that hosts the task to describe. If you do not specify a cluster, the default cluster is assumed.
+     * The short name or full Amazon Resource Name (ARN) of the cluster that hosts the task or tasks to describe. If you do not specify a cluster, the default cluster is assumed. This parameter is required if the task or tasks you are describing were launched in any cluster other than the default cluster.
      */
     cluster?: String;
     /**
@@ -1325,7 +1337,7 @@ declare namespace ECS {
   export type DevicesList = Device[];
   export interface DiscoverPollEndpointRequest {
     /**
-     * The container instance ID or full ARN of the container instance. The ARN contains the arn:aws:ecs namespace, followed by the Region of the container instance, the AWS account ID of the container instance owner, the container-instance namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID .
+     * The container instance ID or full ARN of the container instance. The ARN contains the arn:aws:ecs namespace, followed by the Region of the container instance, the AWS account ID of the container instance owner, the container-instance namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID.
      */
     containerInstance?: String;
     /**
@@ -1354,15 +1366,15 @@ declare namespace ECS {
      */
     autoprovision?: BoxedBoolean;
     /**
-     * The Docker volume driver to use. The driver value must match the driver name provided by Docker because it is used for task placement. If the driver was installed using the Docker plugin CLI, use docker plugin ls to retrieve the driver name from your container instance. If the driver was installed using another method, use Docker plugin discovery to retrieve the driver name. For more information, see Docker plugin discovery. This parameter maps to Driver in the Create a volume section of the Docker Remote API and the xxdriver option to  docker volume create .
+     * The Docker volume driver to use. The driver value must match the driver name provided by Docker because it is used for task placement. If the driver was installed using the Docker plugin CLI, use docker plugin ls to retrieve the driver name from your container instance. If the driver was installed using another method, use Docker plugin discovery to retrieve the driver name. For more information, see Docker plugin discovery. This parameter maps to Driver in the Create a volume section of the Docker Remote API and the xxdriver option to docker volume create.
      */
     driver?: String;
     /**
-     * A map of Docker driver-specific options passed through. This parameter maps to DriverOpts in the Create a volume section of the Docker Remote API and the xxopt option to  docker volume create .
+     * A map of Docker driver-specific options passed through. This parameter maps to DriverOpts in the Create a volume section of the Docker Remote API and the xxopt option to docker volume create.
      */
     driverOpts?: StringMap;
     /**
-     * Custom metadata to add to your Docker volume. This parameter maps to Labels in the Create a volume section of the Docker Remote API and the xxlabel option to  docker volume create .
+     * Custom metadata to add to your Docker volume. This parameter maps to Labels in the Create a volume section of the Docker Remote API and the xxlabel option to docker volume create.
      */
     labels?: StringMap;
   }
@@ -1479,7 +1491,7 @@ declare namespace ECS {
      */
     principalArn?: String;
     /**
-     * Specifies whether to return the effective settings. If true, the account settings for the root user or the default setting for the principalArn. If false, the account settings for the principalArn are returned if they are set. Otherwise, no account settings are returned.
+     * Specifies whether to return the effective settings. If true, the account settings for the root user or the default setting for the principalArn are returned. If false, the account settings for the principalArn are returned if they are set. Otherwise, no account settings are returned.
      */
     effectiveSettings?: Boolean;
     /**
@@ -1575,7 +1587,7 @@ declare namespace ECS {
      */
     maxResults?: BoxedInteger;
     /**
-     * Filters the container instances by status. For example, if you specify the DRAINING status, the results include only container instances that have been set to DRAINING using UpdateContainerInstancesState. If you do not specify this parameter, the default is to include container instances set to ACTIVE and DRAINING.
+     * Filters the container instances by status. For example, if you specify the DRAINING status, the results include only container instances that have been set to DRAINING using UpdateContainerInstancesState. If you do not specify this parameter, the default is to include container instances set to all states other than INACTIVE.
      */
     status?: ContainerInstanceStatus;
   }
@@ -1743,11 +1755,11 @@ declare namespace ECS {
   }
   export interface LoadBalancer {
     /**
-     * The full Amazon Resource Name (ARN) of the Elastic Load Balancing target group or groups associated with a service. For services using the ECS deployment controller, you are limited to one target group. For services using the CODE_DEPLOY deployment controller, you are required to define two target groups for the load balancer.  If your service's task definition uses the awsvpc network mode (which is required for the Fargate launch type), you must choose ip as the target type, not instance, because tasks that use the awsvpc network mode are associated with an elastic network interface, not an Amazon EC2 instance. 
+     * The full Amazon Resource Name (ARN) of the Elastic Load Balancing target group or groups associated with a service or task set. A target group ARN is only specified when using an application load balancer or a network load balancer. If you are using a classic load balancer this should be omitted. For services using the ECS deployment controller, you are limited to one target group. For services using the CODE_DEPLOY deployment controller, you are required to define two target groups for the load balancer.  If your service's task definition uses the awsvpc network mode (which is required for the Fargate launch type), you must choose ip as the target type, not instance, because tasks that use the awsvpc network mode are associated with an elastic network interface, not an Amazon EC2 instance. 
      */
     targetGroupArn?: String;
     /**
-     * The name of a load balancer.
+     * The name of the load balancer to associate with the Amazon ECS service or task set. A load balancer name is only specified when using a classic load balancer. If you are using an application load balancer or a network load balancer this should be omitted.
      */
     loadBalancerName?: String;
     /**
@@ -1872,7 +1884,7 @@ declare namespace ECS {
   export type PlatformDevices = PlatformDevice[];
   export interface PortMapping {
     /**
-     * The port number on the container that is bound to the user-specified or automatically assigned host port. If you are using containers in a task with the awsvpc or host network mode, exposed ports should be specified using containerPort. If you are using containers in a task with the bridge network mode and you specify a container port and not a host port, your container automatically receives a host port in the ephemeral port range. For more information, see hostPort. Port mappings that are automatically assigned in this way do not count toward the 100 reserved ports limit of a container instance.
+     * The port number on the container that is bound to the user-specified or automatically assigned host port. If you are using containers in a task with the awsvpc or host network mode, exposed ports should be specified using containerPort. If you are using containers in a task with the bridge network mode and you specify a container port and not a host port, your container automatically receives a host port in the ephemeral port range. For more information, see hostPort. Port mappings that are automatically assigned in this way do not count toward the 100 reserved ports limit of a container instance.  You cannot expose the same container port for multiple protocols. An error will be returned if this is attempted. 
      */
     containerPort?: BoxedInteger;
     /**
@@ -1896,7 +1908,7 @@ declare namespace ECS {
      */
     containerName: String;
     /**
-     * The set of network configuration parameters to provide the Container Network Interface (CNI) plugin, specified as key-value pairs.    IgnoredUID - (Required) The user ID (UID) of the proxy container as defined by the user parameter in a container definition. This is used to ensure the proxy ignores its own traffic. If IgnoredGID is specified, this field can be empty.    IgnoredGID - (Required) The group ID (GID) of the proxy container as defined by the user parameter in a container definition. This is used to ensure the proxy ignores its own traffic. If IgnoredGID is specified, this field can be empty.    AppPorts - (Required) The list of ports that the application uses. Network traffic to these ports is forwarded to the ProxyIngressPort and ProxyEgressPort.    ProxyIngressPort - (Required) Specifies the port that incoming traffic to the AppPorts is directed to.    ProxyEgressPort - (Required) Specifies the port that outgoing traffic from the AppPorts is directed to.    EgressIgnoredPorts - (Required) The egress traffic going to the specified ports is ignored and not redirected to the ProxyEgressPort. It can be an empty list.    EgressIgnoredIPs - (Required) The egress traffic going to the specified IP addresses is ignored and not redirected to the ProxyEgressPort. It can be an empty list.  
+     * The set of network configuration parameters to provide the Container Network Interface (CNI) plugin, specified as key-value pairs.    IgnoredUID - (Required) The user ID (UID) of the proxy container as defined by the user parameter in a container definition. This is used to ensure the proxy ignores its own traffic. If IgnoredGID is specified, this field can be empty.    IgnoredGID - (Required) The group ID (GID) of the proxy container as defined by the user parameter in a container definition. This is used to ensure the proxy ignores its own traffic. If IgnoredUID is specified, this field can be empty.    AppPorts - (Required) The list of ports that the application uses. Network traffic to these ports is forwarded to the ProxyIngressPort and ProxyEgressPort.    ProxyIngressPort - (Required) Specifies the port that incoming traffic to the AppPorts is directed to.    ProxyEgressPort - (Required) Specifies the port that outgoing traffic from the AppPorts is directed to.    EgressIgnoredPorts - (Required) The egress traffic going to the specified ports is ignored and not redirected to the ProxyEgressPort. It can be an empty list.    EgressIgnoredIPs - (Required) The egress traffic going to the specified IP addresses is ignored and not redirected to the ProxyEgressPort. It can be an empty list.  
      */
     properties?: ProxyConfigurationProperties;
   }
@@ -1904,7 +1916,7 @@ declare namespace ECS {
   export type ProxyConfigurationType = "APPMESH"|string;
   export interface PutAccountSettingDefaultRequest {
     /**
-     * The resource type to enable the new format for. If serviceLongArnFormat is specified, the ARN for your Amazon ECS services is affected. If taskLongArnFormat is specified, the ARN and resource ID for your Amazon ECS tasks are affected. If containerInstanceLongArnFormat is specified, the ARN and resource ID for your Amazon ECS container instances are affected.
+     * The resource name for which to modify the account setting. If serviceLongArnFormat is specified, the ARN for your Amazon ECS services is affected. If taskLongArnFormat is specified, the ARN and resource ID for your Amazon ECS tasks is affected. If containerInstanceLongArnFormat is specified, the ARN and resource ID for your Amazon ECS container instances is affected. If awsvpcTrunking is specified, the ENI limit for your Amazon ECS container instances is affected.
      */
     name: SettingName;
     /**
@@ -1917,7 +1929,7 @@ declare namespace ECS {
   }
   export interface PutAccountSettingRequest {
     /**
-     * The resource name for which to enable the new format. If serviceLongArnFormat is specified, the ARN for your Amazon ECS services is affected. If taskLongArnFormat is specified, the ARN and resource ID for your Amazon ECS tasks is affected. If containerInstanceLongArnFormat is specified, the ARN and resource ID for your Amazon ECS container instances is affected.
+     * The resource name for which to modify the account setting. If serviceLongArnFormat is specified, the ARN for your Amazon ECS services is affected. If taskLongArnFormat is specified, the ARN and resource ID for your Amazon ECS tasks is affected. If containerInstanceLongArnFormat is specified, the ARN and resource ID for your Amazon ECS container instances is affected. If awsvpcTrunking is specified, the ENI limit for your Amazon ECS container instances is affected.
      */
     name: SettingName;
     /**
@@ -1925,7 +1937,7 @@ declare namespace ECS {
      */
     value: String;
     /**
-     * The ARN of the principal, which can be an IAM user, IAM role, or the root user. If you specify the root user, it modifies the ARN and resource ID format for all IAM users, IAM roles, and the root user of the account unless an IAM user or role explicitly overrides these settings for themselves. If this field is omitted, the settings are changed only for the authenticated user.
+     * The ARN of the principal, which can be an IAM user, IAM role, or the root user. If you specify the root user, it modifies the account setting for all IAM users, IAM roles, and the root user of the account unless an IAM user or role explicitly overrides these settings. If this field is omitted, the setting is changed only for the authenticated user.
      */
     principalArn?: String;
   }
@@ -1997,7 +2009,7 @@ declare namespace ECS {
   }
   export interface RegisterTaskDefinitionRequest {
     /**
-     * You must specify a family for a task definition, which allows you to track multiple versions of the same task definition. The family is used as a name for your task definition. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed.
+     * You must specify a family for a task definition, which allows you to track multiple versions of the same task definition. The family is used as a name for your task definition. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed.
      */
     family: String;
     /**
@@ -2200,11 +2212,11 @@ declare namespace ECS {
   export type SecretList = Secret[];
   export interface Service {
     /**
-     * The ARN that identifies the service. The ARN contains the arn:aws:ecs namespace, followed by the Region of the service, the AWS account ID of the service owner, the service namespace, and then the service name. For example, arn:aws:ecs:region:012345678910:service/my-service .
+     * The ARN that identifies the service. The ARN contains the arn:aws:ecs namespace, followed by the Region of the service, the AWS account ID of the service owner, the service namespace, and then the service name. For example, arn:aws:ecs:region:012345678910:service/my-service.
      */
     serviceArn?: String;
     /**
-     * The name of your service. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. Service names must be unique within a cluster, but you can have similarly named services in multiple clusters within a Region or across multiple Regions.
+     * The name of your service. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. Service names must be unique within a cluster, but you can have similarly named services in multiple clusters within a Region or across multiple Regions.
      */
     serviceName?: String;
     /**
@@ -2236,11 +2248,11 @@ declare namespace ECS {
      */
     pendingCount?: Integer;
     /**
-     * The launch type on which your service is running. For more information, see Amazon ECS Launch Types in the Amazon Elastic Container Service Developer Guide.
+     * The launch type on which your service is running. If no value is specified, it will default to EC2. Valid values include EC2 and FARGATE. For more information, see Amazon ECS Launch Types in the Amazon Elastic Container Service Developer Guide.
      */
     launchType?: LaunchType;
     /**
-     * The platform version on which your tasks in the service are running. A platform version is only specified for tasks using the Fargate launch type. If one is not specified, the LATEST platform version is used by default. For more information, see AWS Fargate Platform Versions in the Amazon Elastic Container Service Developer Guide.
+     * The platform version on which to run your service. A platform version is only specified for tasks using the Fargate launch type. If one is not specified, the LATEST platform version is used by default. For more information, see AWS Fargate Platform Versions in the Amazon Elastic Container Service Developer Guide.
      */
     platformVersion?: String;
     /**
@@ -2363,7 +2375,7 @@ declare namespace ECS {
      */
     principalArn?: String;
   }
-  export type SettingName = "serviceLongArnFormat"|"taskLongArnFormat"|"containerInstanceLongArnFormat"|string;
+  export type SettingName = "serviceLongArnFormat"|"taskLongArnFormat"|"containerInstanceLongArnFormat"|"awsvpcTrunking"|string;
   export type Settings = Setting[];
   export type SortOrder = "ASC"|"DESC"|string;
   export type StabilityStatus = "STEADY_STATE"|"STABILIZING"|string;
@@ -2443,6 +2455,22 @@ declare namespace ECS {
   export type String = string;
   export type StringList = String[];
   export type StringMap = {[key: string]: String};
+  export interface SubmitAttachmentStateChangesRequest {
+    /**
+     * The short name or full ARN of the cluster that hosts the container instance the attachment belongs to.
+     */
+    cluster?: String;
+    /**
+     * Any attachments associated with the state change request.
+     */
+    attachments: AttachmentStateChanges;
+  }
+  export interface SubmitAttachmentStateChangesResponse {
+    /**
+     * Acknowledgement of the state change.
+     */
+    acknowledgment?: String;
+  }
   export interface SubmitContainerStateChangeRequest {
     /**
      * The short name or full ARN of the cluster that hosts the container.
@@ -2689,15 +2717,15 @@ declare namespace ECS {
      */
     containerDefinitions?: ContainerDefinitions;
     /**
-     * The family of your task definition, used as the definition name.
+     * The name of a family that this task definition is registered to. A family groups multiple versions of a task definition. Amazon ECS gives the first task definition that you registered to a family a revision number of 1. Amazon ECS gives sequential revision numbers to each task definition that you add.
      */
     family?: String;
     /**
-     * The ARN of the IAM role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role. IAM roles for tasks on Windows require that the -EnableTaskIAMRole option is set when you launch the Amazon ECS-optimized Windows AMI. Your containers must also run some configuration code in order to take advantage of the feature. For more information, see Windows IAM Roles for Tasks in the Amazon Elastic Container Service Developer Guide.
+     * The Amazon Resource Name (ARN) of an AWS Identity and Access Management (IAM) role that grants containers in the task permission to call AWS APIs on your behalf. For more information, see Amazon ECS Task Role in the Amazon Elastic Container Service Developer Guide. IAM roles for tasks on Windows require that the -EnableTaskIAMRole option is set when you launch the Amazon ECS-optimized Windows AMI. Your containers must also run some configuration code in order to take advantage of the feature. For more information, see Windows IAM Roles for Tasks in the Amazon Elastic Container Service Developer Guide.
      */
     taskRoleArn?: String;
     /**
-     * The Amazon Resource Name (ARN) of the task execution role that the Amazon ECS container agent and the Docker daemon can assume.
+     * The Amazon Resource Name (ARN) of the task execution role that containers in this task can assume. All containers in this task are granted the permissions that are specified in this role.
      */
     executionRoleArn?: String;
     /**
@@ -2709,7 +2737,7 @@ declare namespace ECS {
      */
     revision?: Integer;
     /**
-     * The list of volumes in a task. If you are using the Fargate launch type, the host and sourcePath parameters are not supported. For more information about volume definition parameters and defaults, see Amazon ECS Task Definitions in the Amazon Elastic Container Service Developer Guide.
+     * The list of volume definitions for the task. If your tasks are using the Fargate launch type, the host and sourcePath parameters are not supported. For more information about volume definition parameters and defaults, see Amazon ECS Task Definitions in the Amazon Elastic Container Service Developer Guide.
      */
     volumes?: VolumeList;
     /**
@@ -2729,7 +2757,7 @@ declare namespace ECS {
      */
     compatibilities?: CompatibilityList;
     /**
-     * The launch type that the task is using.
+     * The launch type the task requires. If no value is specified, it will default to EC2. Valid values include EC2 and FARGATE.
      */
     requiresCompatibilities?: CompatibilityList;
     /**
@@ -2863,7 +2891,7 @@ declare namespace ECS {
      */
     scale?: Scale;
     /**
-     * The stability status, which indicates whether the task set has reached a steady state. If the following conditions are met, the task set will be in STEADY_STATE:   The task runningCount is equal to the computedDesiredCount.   The pendingCount is 0.   There are no tasks running on container instances in the DRAINING status.   All tasks are reporting a healthy status from the load balancers, service discovery, and container health checks.   If any of those conditions are not met, the stability status returns STABILIZING.
+     * The stability status, which indicates whether the task set has reached a steady state. If the following conditions are met, the task set will be in STEADY_STATE:   The task runningCount is equal to the computedDesiredCount.   The pendingCount is 0.   There are no tasks running on container instances in the DRAINING status.   All tasks are reporting a healthy status from the load balancers, service discovery, and container health checks.  If a healthCheckGracePeriodSeconds value was set when the service was created, you may see a STEADY_STATE reached since unhealthy Elastic Load Balancing target health checks will be ignored until it expires.    If any of those conditions are not met, the stability status returns STABILIZING.
      */
     stabilityStatus?: StabilityStatus;
     /**
@@ -2945,7 +2973,7 @@ declare namespace ECS {
      */
     containerInstances: StringList;
     /**
-     * The container instance state with which to update the container instance.
+     * The container instance state with which to update the container instance. The only valid values for this action are ACTIVE and DRAINING. A container instance can only be updated to DRAINING status once it has reached an ACTIVE state. If a container instance is in REGISTERING, DEREGISTERING, or REGISTRATION_FAILED state you can describe the container instance but will be unable to update the container instance state.
      */
     status: ContainerInstanceStatus;
   }
@@ -3054,7 +3082,7 @@ declare namespace ECS {
   }
   export interface Volume {
     /**
-     * The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. This name is referenced in the sourceVolume parameter of container definition mountPoints.
+     * The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. This name is referenced in the sourceVolume parameter of container definition mountPoints.
      */
     name?: String;
     /**

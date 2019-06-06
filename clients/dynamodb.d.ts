@@ -1985,30 +1985,30 @@ declare namespace DynamoDB {
   export type ReturnValuesOnConditionCheckFailure = "ALL_OLD"|"NONE"|string;
   export interface SSEDescription {
     /**
-     * The current state of server-side encryption:    ENABLING - Server-side encryption is being enabled.    ENABLED - Server-side encryption is enabled.    DISABLING - Server-side encryption is being disabled.    DISABLED - Server-side encryption is disabled.    UPDATING - Server-side encryption is being updated.  
+     * Represents the current state of server-side encryption. The only supported values are:    ENABLED - Server-side encryption is enabled.    UPDATING - Server-side encryption is being updated.  
      */
     Status?: SSEStatus;
     /**
-     * Server-side encryption type:    AES256 - Server-side encryption which uses the AES256 algorithm (not applicable).    KMS - Server-side encryption which uses AWS Key Management Service. Key is stored in your account and is managed by AWS KMS (KMS charges apply).  
+     * Server-side encryption type. The only supported value is:    KMS - Server-side encryption which uses AWS Key Management Service. Key is stored in your account and is managed by AWS KMS (KMS charges apply).  
      */
     SSEType?: SSEType;
     /**
-     * The KMS master key ARN used for the KMS encryption.
+     * The KMS customer master key (CMK) ARN used for the KMS encryption.
      */
     KMSMasterKeyArn?: KMSMasterKeyArn;
   }
   export type SSEEnabled = boolean;
   export interface SSESpecification {
     /**
-     * Indicates whether server-side encryption is enabled (true) or disabled (false) on the table. If enabled (true), server-side encryption type is set to KMS. If disabled (false) or not specified, server-side encryption is set to AWS owned CMK.
+     * Indicates whether server-side encryption is done using an AWS managed CMK or an AWS owned CMK. If enabled (true), server-side encryption type is set to KMS and an AWS managed CMK is used (AWS KMS charges apply). If disabled (false) or not specified, server-side encryption is set to AWS owned CMK.
      */
     Enabled?: SSEEnabled;
     /**
-     * Server-side encryption type:    AES256 - Server-side encryption which uses the AES256 algorithm (not applicable).    KMS - Server-side encryption which uses AWS Key Management Service. Key is stored in your account and is managed by AWS KMS (KMS charges apply).  
+     * Server-side encryption type. The only supported value is:    KMS - Server-side encryption which uses AWS Key Management Service. Key is stored in your account and is managed by AWS KMS (KMS charges apply).  
      */
     SSEType?: SSEType;
     /**
-     * The KMS Master Key (CMK) which should be used for the KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB KMS Master Key alias/aws/dynamodb.
+     * The KMS Customer Master Key (CMK) which should be used for the KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. Note that you should only provide this parameter if the key is different from the default DynamoDB Customer Master Key alias/aws/dynamodb.
      */
     KMSMasterKeyId?: KMSMasterKeyId;
   }

@@ -353,15 +353,15 @@ declare namespace GuardDuty {
     /**
      * The unique ID of the detector of the GuardDuty member account.
      */
-    DetectorId: __string;
-    /**
-     * This value is used to validate the master account to the member account.
-     */
-    InvitationId: InvitationId;
+    DetectorId: DetectorId;
     /**
      * The account ID of the master GuardDuty account whose invitation you're accepting.
      */
-    MasterId: MasterId;
+    MasterId: String;
+    /**
+     * This value is used to validate the master account to the member account.
+     */
+    InvitationId: String;
   }
   export interface AcceptInvitationResponse {
   }
@@ -369,19 +369,19 @@ declare namespace GuardDuty {
     /**
      * Access key ID of the user.
      */
-    AccessKeyId?: __string;
+    AccessKeyId?: String;
     /**
      * The principal ID of the user.
      */
-    PrincipalId?: __string;
+    PrincipalId?: String;
     /**
      * The name of the user.
      */
-    UserName?: __string;
+    UserName?: String;
     /**
      * The type of the user.
      */
-    UserType?: __string;
+    UserType?: String;
   }
   export interface AccountDetail {
     /**
@@ -395,12 +395,12 @@ declare namespace GuardDuty {
   }
   export type AccountDetails = AccountDetail[];
   export type AccountId = string;
-  export type AccountIds = __string[];
+  export type AccountIds = AccountId[];
   export interface Action {
     /**
      * GuardDuty Finding activity type.
      */
-    ActionType?: __string;
+    ActionType?: String;
     /**
      * Information about the AWS_API_CALL action described in this finding.
      */
@@ -418,12 +418,11 @@ declare namespace GuardDuty {
      */
     PortProbeAction?: PortProbeAction;
   }
-  export type Activate = boolean;
   export interface ArchiveFindingsRequest {
     /**
      * The ID of the detector that specifies the GuardDuty service whose findings you want to archive.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
     /**
      * IDs of the findings that you want to archive.
      */
@@ -435,11 +434,11 @@ declare namespace GuardDuty {
     /**
      * AWS API name.
      */
-    Api?: __string;
+    Api?: String;
     /**
      * AWS API caller type.
      */
-    CallerType?: __string;
+    CallerType?: String;
     /**
      * Domain information for the AWS API call.
      */
@@ -451,61 +450,80 @@ declare namespace GuardDuty {
     /**
      * AWS service name whose API was invoked.
      */
-    ServiceName?: __string;
+    ServiceName?: String;
   }
+  export type Boolean = boolean;
   export interface City {
     /**
      * City name of the remote IP address.
      */
-    CityName?: __string;
+    CityName?: String;
   }
-  export type Comments = string;
+  export type ClientToken = string;
   export interface Condition {
     /**
      * Represents the equal condition to be applied to a single field when querying for findings.
      */
     Eq?: Eq;
     /**
-     * Represents the greater than condition to be applied to a single field when querying for findings.
-     */
-    Gt?: __integer;
-    /**
-     * Represents the greater than equal condition to be applied to a single field when querying for findings.
-     */
-    Gte?: __integer;
-    /**
-     * Represents the less than condition to be applied to a single field when querying for findings.
-     */
-    Lt?: __integer;
-    /**
-     * Represents the less than equal condition to be applied to a single field when querying for findings.
-     */
-    Lte?: __integer;
-    /**
      * Represents the not equal condition to be applied to a single field when querying for findings.
      */
     Neq?: Neq;
+    /**
+     * Represents a greater than condition to be applied to a single field when querying for findings.
+     */
+    Gt?: Integer;
+    /**
+     * Represents a greater than equal condition to be applied to a single field when querying for findings.
+     */
+    Gte?: Integer;
+    /**
+     * Represents a less than condition to be applied to a single field when querying for findings.
+     */
+    Lt?: Integer;
+    /**
+     * Represents a less than equal condition to be applied to a single field when querying for findings.
+     */
+    Lte?: Integer;
+    Equals?: Equals;
+    NotEquals?: NotEquals;
+    /**
+     * Represents a greater than condition to be applied to a single field when querying for findings.
+     */
+    GreaterThan?: Long;
+    /**
+     * Represents a greater than equal condition to be applied to a single field when querying for findings.
+     */
+    GreaterThanOrEqual?: Long;
+    /**
+     * Represents a less than condition to be applied to a single field when querying for findings.
+     */
+    LessThan?: Long;
+    /**
+     * Represents a less than equal condition to be applied to a single field when querying for findings.
+     */
+    LessThanOrEqual?: Long;
   }
-  export type CountBySeverityFindingStatistic = number;
+  export type CountBySeverity = {[key: string]: Integer};
   export interface Country {
     /**
      * Country code of the remote IP address.
      */
-    CountryCode?: __string;
+    CountryCode?: String;
     /**
      * Country name of the remote IP address.
      */
-    CountryName?: __string;
+    CountryName?: String;
   }
   export interface CreateDetectorRequest {
     /**
-     * The idempotency token for the create request.
-     */
-    ClientToken?: __stringMin0Max64;
-    /**
      * A boolean value that specifies whether the detector is to be enabled.
      */
-    Enable: Enable;
+    Enable: Boolean;
+    /**
+     * The idempotency token for the create request.
+     */
+    ClientToken?: ClientToken;
     /**
      * A enum value that specifies how frequently customer got Finding updates published.
      */
@@ -519,53 +537,49 @@ declare namespace GuardDuty {
   }
   export interface CreateFilterRequest {
     /**
-     * Specifies the action that is to be applied to the findings that match the filter.
+     * The unique ID of the detector of the GuardDuty account for which you want to create a filter.
      */
-    Action?: FilterAction;
-    /**
-     * The idempotency token for the create request.
-     */
-    ClientToken?: __stringMin0Max64;
-    /**
-     * The description of the filter.
-     */
-    Description?: FilterDescription;
-    /**
-     * The unique ID of the detector that you want to update.
-     */
-    DetectorId: __string;
-    /**
-     * Represents the criteria to be used in the filter for querying findings.
-     */
-    FindingCriteria: FindingCriteria;
+    DetectorId: DetectorId;
     /**
      * The name of the filter.
      */
     Name: FilterName;
     /**
+     * The description of the filter.
+     */
+    Description?: FilterDescription;
+    /**
+     * Specifies the action that is to be applied to the findings that match the filter.
+     */
+    Action?: FilterAction;
+    /**
      * Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
      */
     Rank?: FilterRank;
+    /**
+     * Represents the criteria to be used in the filter for querying findings.
+     */
+    FindingCriteria: FindingCriteria;
+    /**
+     * The idempotency token for the create request.
+     */
+    ClientToken?: ClientToken;
   }
   export interface CreateFilterResponse {
     /**
      * The name of the successfully created filter.
      */
-    Name?: FilterName;
+    Name: FilterName;
   }
   export interface CreateIPSetRequest {
     /**
-     * A boolean value that indicates whether GuardDuty is to start using the uploaded IPSet.
+     * The unique ID of the detector of the GuardDuty account for which you want to create an IPSet.
      */
-    Activate: Activate;
+    DetectorId: DetectorId;
     /**
-     * The idempotency token for the create request.
+     * The user friendly name to identify the IPSet. This name is displayed in all findings that are triggered by activity that involves IP addresses included in this IPSet.
      */
-    ClientToken?: __stringMin0Max64;
-    /**
-     * The unique ID of the detector that you want to update.
-     */
-    DetectorId: __string;
+    Name: Name;
     /**
      * The format of the file that contains the IPSet.
      */
@@ -575,34 +589,41 @@ declare namespace GuardDuty {
      */
     Location: Location;
     /**
-     * The user friendly name to identify the IPSet. This name is displayed in all findings that are triggered by activity that involves IP addresses included in this IPSet.
+     * A boolean value that indicates whether GuardDuty is to start using the uploaded IPSet.
      */
-    Name: Name;
+    Activate: Boolean;
+    /**
+     * The idempotency token for the create request.
+     */
+    ClientToken?: ClientToken;
   }
   export interface CreateIPSetResponse {
-    IpSetId?: IpSetId;
+    /**
+     * The ID of the IPSet resource.
+     */
+    IpSetId: String;
   }
   export interface CreateMembersRequest {
+    /**
+     * The unique ID of the detector of the GuardDuty account with which you want to associate member accounts.
+     */
+    DetectorId: DetectorId;
     /**
      * A list of account ID and email address pairs of the accounts that you want to associate with the master GuardDuty account.
      */
     AccountDetails: AccountDetails;
-    /**
-     * The unique ID of the detector of the GuardDuty account with which you want to associate member accounts.
-     */
-    DetectorId: __string;
   }
   export interface CreateMembersResponse {
     /**
      * A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
      */
-    UnprocessedAccounts?: UnprocessedAccounts;
+    UnprocessedAccounts: UnprocessedAccounts;
   }
   export interface CreateSampleFindingsRequest {
     /**
      * The ID of the detector to create sample findings for.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
     /**
      * Types of sample findings that you want to generate.
      */
@@ -612,17 +633,13 @@ declare namespace GuardDuty {
   }
   export interface CreateThreatIntelSetRequest {
     /**
-     * A boolean value that indicates whether GuardDuty is to start using the uploaded ThreatIntelSet.
+     * The unique ID of the detector of the GuardDuty account for which you want to create a threatIntelSet.
      */
-    Activate: Activate;
+    DetectorId: DetectorId;
     /**
-     * The idempotency token for the create request.
+     * A user-friendly ThreatIntelSet name that is displayed in all finding generated by activity that involves IP addresses included in this ThreatIntelSet.
      */
-    ClientToken?: __stringMin0Max64;
-    /**
-     * The unique ID of the detector that you want to update.
-     */
-    DetectorId: __string;
+    Name: Name;
     /**
      * The format of the file that contains the ThreatIntelSet.
      */
@@ -632,14 +649,21 @@ declare namespace GuardDuty {
      */
     Location: Location;
     /**
-     * A user-friendly ThreatIntelSet name that is displayed in all finding generated by activity that involves IP addresses included in this ThreatIntelSet.
+     * A boolean value that indicates whether GuardDuty is to start using the uploaded ThreatIntelSet.
      */
-    Name: Name;
+    Activate: Boolean;
+    /**
+     * The idempotency token for the create request.
+     */
+    ClientToken?: ClientToken;
   }
   export interface CreateThreatIntelSetResponse {
-    ThreatIntelSetId?: ThreatIntelSetId;
+    /**
+     * The ID of the ThreatIntelSet resource.
+     */
+    ThreatIntelSetId: String;
   }
-  export type CreatedAt = string;
+  export type Criterion = {[key: string]: Condition};
   export interface DeclineInvitationsRequest {
     /**
      * A list of account IDs of the AWS accounts that sent invitations to the current member account that you want to decline invitations from.
@@ -650,37 +674,37 @@ declare namespace GuardDuty {
     /**
      * A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
      */
-    UnprocessedAccounts?: UnprocessedAccounts;
+    UnprocessedAccounts: UnprocessedAccounts;
   }
   export interface DeleteDetectorRequest {
     /**
-     * The unique ID that specifies the detector that you want to delete.
+     * The unique ID of the detector that you want to delete.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
   }
   export interface DeleteDetectorResponse {
   }
   export interface DeleteFilterRequest {
     /**
-     * The unique ID that specifies the detector where you want to delete a filter.
+     * The unique ID of the detector the filter is associated with.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
     /**
-     * The name of the filter.
+     * The name of the filter you want to delete.
      */
-    FilterName: __string;
+    FilterName: String;
   }
   export interface DeleteFilterResponse {
   }
   export interface DeleteIPSetRequest {
     /**
-     * The detectorID that specifies the GuardDuty service whose IPSet you want to delete.
+     * The unique ID of the detector the ipSet is associated with.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
     /**
-     * The unique ID that specifies the IPSet that you want to delete.
+     * The unique ID of the ipSet you want to delete.
      */
-    IpSetId: __string;
+    IpSetId: String;
   }
   export interface DeleteIPSetResponse {
   }
@@ -694,33 +718,33 @@ declare namespace GuardDuty {
     /**
      * A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
      */
-    UnprocessedAccounts?: UnprocessedAccounts;
+    UnprocessedAccounts: UnprocessedAccounts;
   }
   export interface DeleteMembersRequest {
+    /**
+     * The unique ID of the detector of the GuardDuty account whose members you want to delete.
+     */
+    DetectorId: DetectorId;
     /**
      * A list of account IDs of the GuardDuty member accounts that you want to delete.
      */
     AccountIds: AccountIds;
-    /**
-     * The unique ID of the detector of the GuardDuty account whose members you want to delete.
-     */
-    DetectorId: __string;
   }
   export interface DeleteMembersResponse {
     /**
      * A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
      */
-    UnprocessedAccounts?: UnprocessedAccounts;
+    UnprocessedAccounts: UnprocessedAccounts;
   }
   export interface DeleteThreatIntelSetRequest {
     /**
-     * The detectorID that specifies the GuardDuty service whose ThreatIntelSet you want to delete.
+     * The unique ID of the detector the threatIntelSet is associated with.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
     /**
-     * The unique ID that specifies the ThreatIntelSet that you want to delete.
+     * The unique ID of the threatIntelSet you want to delete.
      */
-    ThreatIntelSetId: __string;
+    ThreatIntelSetId: String;
   }
   export interface DeleteThreatIntelSetResponse {
   }
@@ -731,38 +755,42 @@ declare namespace GuardDuty {
     /**
      * The unique ID of the detector of the GuardDuty member account.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
   }
   export interface DisassociateFromMasterAccountResponse {
   }
   export interface DisassociateMembersRequest {
     /**
+     * The unique ID of the detector of the GuardDuty account whose members you want to disassociate from master.
+     */
+    DetectorId: DetectorId;
+    /**
      * A list of account IDs of the GuardDuty member accounts that you want to disassociate from master.
      */
     AccountIds: AccountIds;
-    /**
-     * The unique ID of the detector of the GuardDuty account whose members you want to disassociate from master.
-     */
-    DetectorId: __string;
   }
   export interface DisassociateMembersResponse {
     /**
      * A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
      */
-    UnprocessedAccounts?: UnprocessedAccounts;
+    UnprocessedAccounts: UnprocessedAccounts;
   }
   export interface DnsRequestAction {
     /**
      * Domain information for the DNS request.
      */
-    Domain?: Domain;
+    Domain?: String;
   }
-  export type Domain = string;
   export interface DomainDetails {
+    /**
+     * Domain information for the AWS API call.
+     */
+    Domain?: String;
   }
+  export type Double = number;
   export type Email = string;
-  export type Enable = boolean;
-  export type Eq = __string[];
+  export type Eq = String[];
+  export type Equals = String[];
   export type Feedback = "USEFUL"|"NOT_USEFUL"|string;
   export type FilterAction = "NOOP"|"ARCHIVE"|string;
   export type FilterDescription = string;
@@ -773,35 +801,35 @@ declare namespace GuardDuty {
     /**
      * AWS account ID where the activity occurred that prompted GuardDuty to generate a finding.
      */
-    AccountId: __string;
+    AccountId: String;
     /**
      * The ARN of a finding described by the action.
      */
-    Arn: __string;
+    Arn: String;
     /**
      * The confidence level of a finding.
      */
-    Confidence?: __double;
+    Confidence?: Double;
     /**
      * The time stamp at which a finding was generated.
      */
-    CreatedAt: CreatedAt;
+    CreatedAt: String;
     /**
      * The description of a finding.
      */
-    Description?: __string;
+    Description?: String;
     /**
      * The identifier that corresponds to a finding described by the action.
      */
-    Id: __string;
+    Id: String;
     /**
      * The AWS resource partition.
      */
-    Partition?: __string;
+    Partition?: String;
     /**
      * The AWS region where the activity occurred that prompted GuardDuty to generate a finding.
      */
-    Region: __string;
+    Region: String;
     /**
      * The AWS resource associated with the activity that prompted GuardDuty to generate a finding.
      */
@@ -809,7 +837,7 @@ declare namespace GuardDuty {
     /**
      * Findings' schema version.
      */
-    SchemaVersion: __string;
+    SchemaVersion: String;
     /**
      * Additional information assigned to the generated finding by GuardDuty.
      */
@@ -817,25 +845,25 @@ declare namespace GuardDuty {
     /**
      * The severity of a finding.
      */
-    Severity: __double;
+    Severity: Double;
     /**
      * The title of a finding.
      */
-    Title?: __string;
+    Title?: String;
     /**
      * The type of a finding described by the action.
      */
-    Type: __string;
+    Type: FindingType;
     /**
      * The time stamp at which a finding was last updated.
      */
-    UpdatedAt: UpdatedAt;
+    UpdatedAt: String;
   }
   export interface FindingCriteria {
     /**
      * Represents a map of finding properties that match specified conditions and values when querying findings.
      */
-    Criterion?: __mapOfCondition;
+    Criterion?: Criterion;
   }
   export type FindingId = string;
   export type FindingIds = FindingId[];
@@ -846,7 +874,7 @@ declare namespace GuardDuty {
     /**
      * Represents a map of severity to count statistic for a set of findings
      */
-    CountBySeverity?: __mapOfCountBySeverityFindingStatistic;
+    CountBySeverity?: CountBySeverity;
   }
   export type FindingType = string;
   export type FindingTypes = FindingType[];
@@ -855,62 +883,77 @@ declare namespace GuardDuty {
     /**
      * Latitude information of remote IP address.
      */
-    Lat?: __double;
+    Lat?: Double;
     /**
      * Longitude information of remote IP address.
      */
-    Lon?: __double;
+    Lon?: Double;
   }
   export interface GetDetectorRequest {
     /**
-     * The unique ID of the detector that you want to retrieve.
+     * The unique ID of the detector that you want to get.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
   }
   export interface GetDetectorResponse {
-    CreatedAt?: CreatedAt;
+    /**
+     * Detector creation timestamp.
+     */
+    CreatedAt?: String;
+    /**
+     * Finding publishing frequency.
+     */
     FindingPublishingFrequency?: FindingPublishingFrequency;
-    ServiceRole?: ServiceRole;
-    Status?: DetectorStatus;
-    UpdatedAt?: UpdatedAt;
+    /**
+     * The GuardDuty service role.
+     */
+    ServiceRole: String;
+    /**
+     * The detector status.
+     */
+    Status: DetectorStatus;
+    /**
+     * Detector last update timestamp.
+     */
+    UpdatedAt?: String;
   }
   export interface GetFilterRequest {
     /**
-     * The detector ID that specifies the GuardDuty service where you want to list the details of the specified filter.
+     * The unique ID of the detector the filter is associated with.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
     /**
-     * The name of the filter whose details you want to get.
+     * The name of the filter you want to get.
      */
-    FilterName: __string;
+    FilterName: String;
   }
   export interface GetFilterResponse {
     /**
-     * Specifies the action that is to be applied to the findings that match the filter.
+     * The name of the filter.
      */
-    Action?: FilterAction;
+    Name: FilterName;
     /**
      * The description of the filter.
      */
     Description?: FilterDescription;
     /**
-     * Represents the criteria to be used in the filter for querying findings.
+     * Specifies the action that is to be applied to the findings that match the filter.
      */
-    FindingCriteria?: FindingCriteria;
-    /**
-     * The name of the filter.
-     */
-    Name?: FilterName;
+    Action: FilterAction;
     /**
      * Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
      */
     Rank?: FilterRank;
+    /**
+     * Represents the criteria to be used in the filter for querying findings.
+     */
+    FindingCriteria: FindingCriteria;
   }
   export interface GetFindingsRequest {
     /**
      * The ID of the detector that specifies the GuardDuty service whose findings you want to retrieve.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
     /**
      * IDs of the findings that you want to retrieve.
      */
@@ -921,55 +964,58 @@ declare namespace GuardDuty {
     SortCriteria?: SortCriteria;
   }
   export interface GetFindingsResponse {
-    Findings?: Findings;
+    /**
+     * A list of findings.
+     */
+    Findings: Findings;
   }
   export interface GetFindingsStatisticsRequest {
     /**
      * The ID of the detector that specifies the GuardDuty service whose findings' statistics you want to retrieve.
      */
-    DetectorId: __string;
-    /**
-     * Represents the criteria used for querying findings.
-     */
-    FindingCriteria?: FindingCriteria;
+    DetectorId: DetectorId;
     /**
      * Types of finding statistics to retrieve.
      */
     FindingStatisticTypes: FindingStatisticTypes;
+    /**
+     * Represents the criteria used for querying findings.
+     */
+    FindingCriteria?: FindingCriteria;
   }
   export interface GetFindingsStatisticsResponse {
     /**
      * Finding statistics object.
      */
-    FindingStatistics?: FindingStatistics;
+    FindingStatistics: FindingStatistics;
   }
   export interface GetIPSetRequest {
     /**
-     * The detectorID that specifies the GuardDuty service whose IPSet you want to retrieve.
+     * The unique ID of the detector the ipSet is associated with.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
     /**
-     * The unique ID that specifies the IPSet that you want to describe.
+     * The unique ID of the ipSet you want to get.
      */
-    IpSetId: __string;
+    IpSetId: String;
   }
   export interface GetIPSetResponse {
     /**
+     * The user friendly name to identify the IPSet. This name is displayed in all findings that are triggered by activity that involves IP addresses included in this IPSet.
+     */
+    Name: Name;
+    /**
      * The format of the file that contains the IPSet.
      */
-    Format?: IpSetFormat;
+    Format: IpSetFormat;
     /**
      * The URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
      */
-    Location?: Location;
-    /**
-     * The user friendly name to identify the IPSet. This name is displayed in all findings that are triggered by activity that involves IP addresses included in this IPSet.
-     */
-    Name?: Name;
+    Location: Location;
     /**
      * The status of ipSet file uploaded.
      */
-    Status?: IpSetStatus;
+    Status: IpSetStatus;
   }
   export interface GetInvitationsCountRequest {
   }
@@ -977,102 +1023,111 @@ declare namespace GuardDuty {
     /**
      * The number of received invitations.
      */
-    InvitationsCount?: __integer;
+    InvitationsCount?: Integer;
   }
   export interface GetMasterAccountRequest {
     /**
      * The unique ID of the detector of the GuardDuty member account.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
   }
   export interface GetMasterAccountResponse {
-    Master?: Master;
+    /**
+     * Master account details.
+     */
+    Master: Master;
   }
   export interface GetMembersRequest {
+    /**
+     * The unique ID of the detector of the GuardDuty account whose members you want to retrieve.
+     */
+    DetectorId: DetectorId;
     /**
      * A list of account IDs of the GuardDuty member accounts that you want to describe.
      */
     AccountIds: AccountIds;
-    /**
-     * The unique ID of the detector of the GuardDuty account whose members you want to retrieve.
-     */
-    DetectorId: __string;
   }
   export interface GetMembersResponse {
-    Members?: Members;
+    /**
+     * A list of members.
+     */
+    Members: Members;
     /**
      * A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
      */
-    UnprocessedAccounts?: UnprocessedAccounts;
+    UnprocessedAccounts: UnprocessedAccounts;
   }
   export interface GetThreatIntelSetRequest {
     /**
-     * The detectorID that specifies the GuardDuty service whose ThreatIntelSet you want to describe.
+     * The unique ID of the detector the threatIntelSet is associated with.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
     /**
-     * The unique ID that specifies the ThreatIntelSet that you want to describe.
+     * The unique ID of the threatIntelSet you want to get.
      */
-    ThreatIntelSetId: __string;
+    ThreatIntelSetId: String;
   }
   export interface GetThreatIntelSetResponse {
     /**
+     * A user-friendly ThreatIntelSet name that is displayed in all finding generated by activity that involves IP addresses included in this ThreatIntelSet.
+     */
+    Name: Name;
+    /**
      * The format of the threatIntelSet.
      */
-    Format?: ThreatIntelSetFormat;
+    Format: ThreatIntelSetFormat;
     /**
      * The URI of the file that contains the ThreatIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
      */
-    Location?: Location;
-    /**
-     * A user-friendly ThreatIntelSet name that is displayed in all finding generated by activity that involves IP addresses included in this ThreatIntelSet.
-     */
-    Name?: Name;
+    Location: Location;
     /**
      * The status of threatIntelSet file uploaded.
      */
-    Status?: ThreatIntelSetStatus;
+    Status: ThreatIntelSetStatus;
   }
   export interface IamInstanceProfile {
     /**
      * AWS EC2 instance profile ARN.
      */
-    Arn?: __string;
+    Arn?: String;
     /**
      * AWS EC2 instance profile ID.
      */
-    Id?: __string;
+    Id?: String;
   }
   export interface InstanceDetails {
     /**
      * The availability zone of the EC2 instance.
      */
-    AvailabilityZone?: __string;
+    AvailabilityZone?: String;
+    /**
+     * The profile information of the EC2 instance.
+     */
     IamInstanceProfile?: IamInstanceProfile;
     /**
      * The image description of the EC2 instance.
      */
-    ImageDescription?: __string;
+    ImageDescription?: String;
     /**
      * The image ID of the EC2 instance.
      */
-    ImageId?: __string;
+    ImageId?: String;
     /**
      * The ID of the EC2 instance.
      */
-    InstanceId?: __string;
+    InstanceId?: String;
     /**
      * The state of the EC2 instance.
      */
-    InstanceState?: __string;
+    InstanceState?: String;
     /**
      * The type of the EC2 instance.
      */
-    InstanceType?: __string;
+    InstanceType?: String;
     /**
      * The launch time of the EC2 instance.
      */
-    LaunchTime?: __string;
+    LaunchTime?: String;
     /**
      * The network interface information of the EC2 instance.
      */
@@ -1080,7 +1135,7 @@ declare namespace GuardDuty {
     /**
      * The platform of the EC2 instance.
      */
-    Platform?: __string;
+    Platform?: String;
     /**
      * The product code of the EC2 instance.
      */
@@ -1090,249 +1145,299 @@ declare namespace GuardDuty {
      */
     Tags?: Tags;
   }
+  export type Integer = number;
   export interface Invitation {
     /**
      * Inviter account ID
      */
-    AccountId?: __string;
+    AccountId?: AccountId;
     /**
      * This value is used to validate the inviter account to the member account.
      */
-    InvitationId?: InvitationId;
-    /**
-     * Timestamp at which the invitation was sent
-     */
-    InvitedAt?: InvitedAt;
+    InvitationId?: String;
     /**
      * The status of the relationship between the inviter and invitee accounts.
      */
-    RelationshipStatus?: __string;
+    RelationshipStatus?: String;
+    /**
+     * Timestamp at which the invitation was sent
+     */
+    InvitedAt?: String;
   }
-  export type InvitationId = string;
   export type Invitations = Invitation[];
   export interface InviteMembersRequest {
+    /**
+     * The unique ID of the detector of the GuardDuty account with which you want to invite members.
+     */
+    DetectorId: DetectorId;
     /**
      * A list of account IDs of the accounts that you want to invite to GuardDuty as members.
      */
     AccountIds: AccountIds;
     /**
-     * The unique ID of the detector of the GuardDuty account with which you want to invite members.
-     */
-    DetectorId: __string;
-    /**
      * A boolean value that specifies whether you want to disable email notification to the accounts that you’re inviting to GuardDuty as members.
      */
-    DisableEmailNotification?: __boolean;
+    DisableEmailNotification?: Boolean;
     /**
      * The invitation message that you want to send to the accounts that you’re inviting to GuardDuty as members.
      */
-    Message?: Message;
+    Message?: String;
   }
   export interface InviteMembersResponse {
     /**
      * A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
      */
-    UnprocessedAccounts?: UnprocessedAccounts;
+    UnprocessedAccounts: UnprocessedAccounts;
   }
-  export type InvitedAt = string;
   export type IpSetFormat = "TXT"|"STIX"|"OTX_CSV"|"ALIEN_VAULT"|"PROOF_POINT"|"FIRE_EYE"|string;
-  export type IpSetId = string;
-  export type IpSetIds = IpSetId[];
+  export type IpSetIds = String[];
   export type IpSetStatus = "INACTIVE"|"ACTIVATING"|"ACTIVE"|"DEACTIVATING"|"ERROR"|"DELETE_PENDING"|"DELETED"|string;
-  export type Ipv6Address = string;
-  export type Ipv6Addresses = Ipv6Address[];
+  export type Ipv6Addresses = String[];
   export interface ListDetectorsRequest {
-    /**
-     * You can use this parameter to indicate the maximum number of detectors that you want in the response.
-     */
-    MaxResults?: MaxResults;
-    /**
-     * You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListDetectors action. For subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data.
-     */
-    NextToken?: __string;
-  }
-  export interface ListDetectorsResponse {
-    DetectorIds?: DetectorIds;
-    NextToken?: NextToken;
-  }
-  export interface ListFiltersRequest {
-    /**
-     * The ID of the detector that specifies the GuardDuty service where you want to list filters.
-     */
-    DetectorId: __string;
-    /**
-     * Indicates the maximum number of items that you want in the response. The maximum value is 50.
-     */
-    MaxResults?: MaxResults;
-    /**
-     * Paginates results. Set the value of this parameter to NULL on your first call to the ListFilters operation.For subsequent calls to the operation, fill nextToken in the request with the value of nextToken from the previous response to continue listing data.
-     */
-    NextToken?: __string;
-  }
-  export interface ListFiltersResponse {
-    FilterNames?: FilterNames;
-    NextToken?: NextToken;
-  }
-  export interface ListFindingsRequest {
-    /**
-     * The ID of the detector that specifies the GuardDuty service whose findings you want to list.
-     */
-    DetectorId: __string;
-    /**
-     * Represents the criteria used for querying findings.
-     */
-    FindingCriteria?: FindingCriteria;
     /**
      * You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.
      */
     MaxResults?: MaxResults;
     /**
-     * You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListFindings action. For subsequent calls to the action fill nextToken in the request with the value of nextToken from the previous response to continue listing data.
+     * You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
      */
-    NextToken?: NextToken;
+    NextToken?: String;
+  }
+  export interface ListDetectorsResponse {
+    /**
+     * A list of detector Ids.
+     */
+    DetectorIds: DetectorIds;
+    /**
+     * Pagination parameter to be used on the next list operation to retrieve more items.
+     */
+    NextToken?: String;
+  }
+  export interface ListFiltersRequest {
+    /**
+     * The unique ID of the detector the filter is associated with.
+     */
+    DetectorId: DetectorId;
+    /**
+     * You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+     */
+    NextToken?: String;
+  }
+  export interface ListFiltersResponse {
+    /**
+     * A list of filter names
+     */
+    FilterNames: FilterNames;
+    /**
+     * Pagination parameter to be used on the next list operation to retrieve more items.
+     */
+    NextToken?: String;
+  }
+  export interface ListFindingsRequest {
+    /**
+     * The ID of the detector that specifies the GuardDuty service whose findings you want to list.
+     */
+    DetectorId: DetectorId;
+    /**
+     * Represents the criteria used for querying findings.
+     */
+    FindingCriteria?: FindingCriteria;
     /**
      * Represents the criteria used for sorting findings.
      */
     SortCriteria?: SortCriteria;
+    /**
+     * You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+     */
+    NextToken?: String;
   }
   export interface ListFindingsResponse {
-    FindingIds?: FindingIds;
-    NextToken?: NextToken;
+    /**
+     * The IDs of the findings you are listing.
+     */
+    FindingIds: FindingIds;
+    /**
+     * Pagination parameter to be used on the next list operation to retrieve more items.
+     */
+    NextToken?: String;
   }
   export interface ListIPSetsRequest {
     /**
-     * The unique ID of the detector that you want to retrieve.
+     * The unique ID of the detector the ipSet is associated with.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
     /**
-     * You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 7. The maximum value is 7.
+     * You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.
      */
     MaxResults?: MaxResults;
     /**
-     * You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListIPSet action. For subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+     * You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
      */
-    NextToken?: __string;
+    NextToken?: String;
   }
   export interface ListIPSetsResponse {
-    IpSetIds?: IpSetIds;
-    NextToken?: NextToken;
+    /**
+     * The IDs of the IPSet resources.
+     */
+    IpSetIds: IpSetIds;
+    /**
+     * Pagination parameter to be used on the next list operation to retrieve more items.
+     */
+    NextToken?: String;
   }
   export interface ListInvitationsRequest {
     /**
-     * You can use this parameter to indicate the maximum number of invitations you want in the response. The default value is 50. The maximum value is 50.
+     * You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.
      */
     MaxResults?: MaxResults;
     /**
-     * You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListInvitations action. Subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+     * You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
      */
-    NextToken?: __string;
+    NextToken?: String;
   }
   export interface ListInvitationsResponse {
+    /**
+     * A list of invitation descriptions.
+     */
     Invitations?: Invitations;
-    NextToken?: NextToken;
+    /**
+     * Pagination parameter to be used on the next list operation to retrieve more items.
+     */
+    NextToken?: String;
   }
   export interface ListMembersRequest {
     /**
-     * The unique ID of the detector of the GuardDuty account whose members you want to list.
+     * The unique ID of the detector the member is associated with.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
     /**
-     * You can use this parameter to indicate the maximum number of items you want in the response. The default value is 1. The maximum value is 50.
+     * You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.
      */
     MaxResults?: MaxResults;
     /**
-     * You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the ListMembers action. Subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
+     * You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
      */
-    NextToken?: __string;
+    NextToken?: String;
     /**
-     * Specifies what member accounts the response is to include based on their relationship status with the master account. The default value is TRUE. If onlyAssociated is set to TRUE, the response will include member accounts whose relationship status with the master is set to Enabled, Disabled. If onlyAssociated is set to FALSE, the response will include all existing member accounts.
+     * Specifies whether to only return associated members or to return all members (including members which haven't been invited yet or have been disassociated).
      */
-    OnlyAssociated?: __string;
+    OnlyAssociated?: String;
   }
   export interface ListMembersResponse {
+    /**
+     * A list of members.
+     */
     Members?: Members;
-    NextToken?: NextToken;
+    /**
+     * Pagination parameter to be used on the next list operation to retrieve more items.
+     */
+    NextToken?: String;
   }
   export interface ListThreatIntelSetsRequest {
     /**
-     * The detectorID that specifies the GuardDuty service whose ThreatIntelSets you want to list.
+     * The unique ID of the detector the threatIntelSet is associated with.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
     /**
-     * You can use this parameter to indicate the maximum number of items that you want in the response. The default value is 7. The maximum value is 7.
+     * You can use this parameter to indicate the maximum number of items you want in the response. The default value is 50. The maximum value is 50.
      */
     MaxResults?: MaxResults;
     /**
-     * Pagination token to start retrieving threat intel sets from.
+     * You can use this parameter when paginating results. Set the value of this parameter to null on your first call to the list action. For subsequent calls to the action fill nextToken in the request with the value of NextToken from the previous response to continue listing data.
      */
-    NextToken?: __string;
+    NextToken?: String;
   }
   export interface ListThreatIntelSetsResponse {
-    NextToken?: NextToken;
-    ThreatIntelSetIds?: ThreatIntelSetIds;
+    /**
+     * The IDs of the ThreatIntelSet resources.
+     */
+    ThreatIntelSetIds: ThreatIntelSetIds;
+    /**
+     * Pagination parameter to be used on the next list operation to retrieve more items.
+     */
+    NextToken?: String;
   }
   export interface LocalPortDetails {
     /**
      * Port number of the local connection.
      */
-    Port?: __integer;
+    Port?: Integer;
     /**
      * Port name of the local connection.
      */
-    PortName?: __string;
+    PortName?: String;
   }
   export type Location = string;
+  export type Long = number;
   export interface Master {
     /**
      * Master account ID
      */
-    AccountId?: __string;
+    AccountId?: AccountId;
     /**
      * This value is used to validate the master account to the member account.
      */
-    InvitationId?: InvitationId;
-    /**
-     * Timestamp at which the invitation was sent
-     */
-    InvitedAt?: InvitedAt;
+    InvitationId?: String;
     /**
      * The status of the relationship between the master and member accounts.
      */
-    RelationshipStatus?: __string;
+    RelationshipStatus?: String;
+    /**
+     * Timestamp at which the invitation was sent
+     */
+    InvitedAt?: String;
   }
-  export type MasterId = string;
   export type MaxResults = number;
   export interface Member {
+    /**
+     * Member account ID.
+     */
     AccountId: AccountId;
+    /**
+     * Member account's detector ID.
+     */
     DetectorId?: DetectorId;
+    /**
+     * Master account ID.
+     */
+    MasterId: String;
     /**
      * Member account's email address.
      */
     Email: Email;
     /**
-     * Timestamp at which the invitation was sent
-     */
-    InvitedAt?: InvitedAt;
-    MasterId: MasterId;
-    /**
      * The status of the relationship between the member and the master.
      */
-    RelationshipStatus: __string;
-    UpdatedAt: UpdatedAt;
+    RelationshipStatus: String;
+    /**
+     * Timestamp at which the invitation was sent
+     */
+    InvitedAt?: String;
+    /**
+     * Member last updated timestamp.
+     */
+    UpdatedAt: String;
   }
   export type Members = Member[];
-  export type Message = string;
   export type Name = string;
-  export type Neq = __string[];
+  export type Neq = String[];
   export interface NetworkConnectionAction {
     /**
      * Network connection blocked information.
      */
-    Blocked?: __boolean;
+    Blocked?: Boolean;
     /**
      * Network connection direction.
      */
-    ConnectionDirection?: __string;
+    ConnectionDirection?: String;
     /**
      * Local port information of the connection.
      */
@@ -1340,7 +1445,7 @@ declare namespace GuardDuty {
     /**
      * Network connection protocol.
      */
-    Protocol?: __string;
+    Protocol?: String;
     /**
      * Remote IP information of the connection.
      */
@@ -1358,15 +1463,15 @@ declare namespace GuardDuty {
     /**
      * The ID of the network interface
      */
-    NetworkInterfaceId?: NetworkInterfaceId;
+    NetworkInterfaceId?: String;
     /**
      * Private DNS name of the EC2 instance.
      */
-    PrivateDnsName?: PrivateDnsName;
+    PrivateDnsName?: String;
     /**
      * Private IP address of the EC2 instance.
      */
-    PrivateIpAddress?: PrivateIpAddress;
+    PrivateIpAddress?: String;
     /**
      * Other private IP address information of the EC2 instance.
      */
@@ -1374,11 +1479,11 @@ declare namespace GuardDuty {
     /**
      * Public DNS name of the EC2 instance.
      */
-    PublicDnsName?: __string;
+    PublicDnsName?: String;
     /**
      * Public IP address of the EC2 instance.
      */
-    PublicIp?: __string;
+    PublicIp?: String;
     /**
      * Security groups associated with the EC2 instance.
      */
@@ -1386,43 +1491,42 @@ declare namespace GuardDuty {
     /**
      * The subnet ID of the EC2 instance.
      */
-    SubnetId?: __string;
+    SubnetId?: String;
     /**
      * The VPC ID of the EC2 instance.
      */
-    VpcId?: __string;
+    VpcId?: String;
   }
-  export type NetworkInterfaceId = string;
   export type NetworkInterfaces = NetworkInterface[];
-  export type NextToken = string;
+  export type NotEquals = String[];
   export type OrderBy = "ASC"|"DESC"|string;
   export interface Organization {
     /**
      * Autonomous system number of the internet provider of the remote IP address.
      */
-    Asn?: __string;
+    Asn?: String;
     /**
      * Organization that registered this ASN.
      */
-    AsnOrg?: __string;
+    AsnOrg?: String;
     /**
      * ISP information for the internet provider.
      */
-    Isp?: __string;
+    Isp?: String;
     /**
      * Name of the internet provider.
      */
-    Org?: __string;
+    Org?: String;
   }
   export interface PortProbeAction {
     /**
      * Port probe blocked information.
      */
-    Blocked?: __boolean;
+    Blocked?: Boolean;
     /**
      * A list of port probe details objects.
      */
-    PortProbeDetails?: __listOfPortProbeDetail;
+    PortProbeDetails?: PortProbeDetails;
   }
   export interface PortProbeDetail {
     /**
@@ -1434,28 +1538,27 @@ declare namespace GuardDuty {
      */
     RemoteIpDetails?: RemoteIpDetails;
   }
-  export type PrivateDnsName = string;
-  export type PrivateIpAddress = string;
+  export type PortProbeDetails = PortProbeDetail[];
   export interface PrivateIpAddressDetails {
     /**
      * Private DNS name of the EC2 instance.
      */
-    PrivateDnsName?: PrivateDnsName;
+    PrivateDnsName?: String;
     /**
      * Private IP address of the EC2 instance.
      */
-    PrivateIpAddress?: PrivateIpAddress;
+    PrivateIpAddress?: String;
   }
   export type PrivateIpAddresses = PrivateIpAddressDetails[];
   export interface ProductCode {
     /**
      * Product code information.
      */
-    Code?: __string;
+    Code?: String;
     /**
      * Product code type.
      */
-    ProductType?: __string;
+    ProductType?: String;
   }
   export type ProductCodes = ProductCode[];
   export interface RemoteIpDetails {
@@ -1474,7 +1577,7 @@ declare namespace GuardDuty {
     /**
      * IPV4 remote address of the connection.
      */
-    IpAddressV4?: __string;
+    IpAddressV4?: String;
     /**
      * ISP Organization information of the remote IP address.
      */
@@ -1484,29 +1587,35 @@ declare namespace GuardDuty {
     /**
      * Port number of the remote connection.
      */
-    Port?: __integer;
+    Port?: Integer;
     /**
      * Port name of the remote connection.
      */
-    PortName?: __string;
+    PortName?: String;
   }
   export interface Resource {
+    /**
+     * The IAM access key details (IAM user information) of a user that engaged in the activity that prompted GuardDuty to generate a finding.
+     */
     AccessKeyDetails?: AccessKeyDetails;
+    /**
+     * The information about the EC2 instance associated with the activity that prompted GuardDuty to generate a finding.
+     */
     InstanceDetails?: InstanceDetails;
     /**
      * The type of the AWS resource.
      */
-    ResourceType?: __string;
+    ResourceType?: String;
   }
   export interface SecurityGroup {
     /**
      * EC2 instance's security group ID.
      */
-    GroupId?: __string;
+    GroupId?: String;
     /**
      * EC2 instance's security group name.
      */
-    GroupName?: __string;
+    GroupName?: String;
   }
   export type SecurityGroups = SecurityGroup[];
   export interface Service {
@@ -1517,11 +1626,11 @@ declare namespace GuardDuty {
     /**
      * Indicates whether this finding is archived.
      */
-    Archived?: __boolean;
+    Archived?: Boolean;
     /**
      * Total count of the occurrences of this finding type.
      */
-    Count?: __integer;
+    Count?: Integer;
     /**
      * Detector ID for the GuardDuty service.
      */
@@ -1529,30 +1638,29 @@ declare namespace GuardDuty {
     /**
      * First seen timestamp of the activity that prompted GuardDuty to generate this finding.
      */
-    EventFirstSeen?: __string;
+    EventFirstSeen?: String;
     /**
      * Last seen timestamp of the activity that prompted GuardDuty to generate this finding.
      */
-    EventLastSeen?: __string;
+    EventLastSeen?: String;
     /**
      * Resource role information for this finding.
      */
-    ResourceRole?: __string;
+    ResourceRole?: String;
     /**
      * The name of the AWS service (GuardDuty) that generated a finding.
      */
-    ServiceName?: __string;
+    ServiceName?: String;
     /**
      * Feedback left about the finding.
      */
-    UserFeedback?: __string;
+    UserFeedback?: String;
   }
-  export type ServiceRole = string;
   export interface SortCriteria {
     /**
      * Represents the finding attribute (for example, accountId) by which to sort findings.
      */
-    AttributeName?: __string;
+    AttributeName?: String;
     /**
      * Order by which the sorted findings are to be displayed.
      */
@@ -1560,56 +1668,56 @@ declare namespace GuardDuty {
   }
   export interface StartMonitoringMembersRequest {
     /**
+     * The unique ID of the detector of the GuardDuty account whom you want to re-enable to monitor members' findings.
+     */
+    DetectorId: DetectorId;
+    /**
      * A list of account IDs of the GuardDuty member accounts whose findings you want the master account to monitor.
      */
     AccountIds: AccountIds;
-    /**
-     * The unique ID of the detector of the GuardDuty account whom you want to re-enable to monitor members' findings.
-     */
-    DetectorId: __string;
   }
   export interface StartMonitoringMembersResponse {
     /**
      * A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
      */
-    UnprocessedAccounts?: UnprocessedAccounts;
+    UnprocessedAccounts: UnprocessedAccounts;
   }
   export interface StopMonitoringMembersRequest {
+    /**
+     * The unique ID of the detector of the GuardDuty account that you want to stop from monitor members' findings.
+     */
+    DetectorId: DetectorId;
     /**
      * A list of account IDs of the GuardDuty member accounts whose findings you want the master account to stop monitoring.
      */
     AccountIds: AccountIds;
-    /**
-     * The unique ID of the detector of the GuardDuty account that you want to stop from monitor members' findings.
-     */
-    DetectorId: __string;
   }
   export interface StopMonitoringMembersResponse {
     /**
      * A list of objects containing the unprocessed account and a result string explaining why it was unprocessed.
      */
-    UnprocessedAccounts?: UnprocessedAccounts;
+    UnprocessedAccounts: UnprocessedAccounts;
   }
+  export type String = string;
   export interface Tag {
     /**
      * EC2 instance tag key.
      */
-    Key?: __string;
+    Key?: String;
     /**
      * EC2 instance tag value.
      */
-    Value?: __string;
+    Value?: String;
   }
   export type Tags = Tag[];
   export type ThreatIntelSetFormat = "TXT"|"STIX"|"OTX_CSV"|"ALIEN_VAULT"|"PROOF_POINT"|"FIRE_EYE"|string;
-  export type ThreatIntelSetId = string;
-  export type ThreatIntelSetIds = ThreatIntelSetId[];
+  export type ThreatIntelSetIds = String[];
   export type ThreatIntelSetStatus = "INACTIVE"|"ACTIVATING"|"ACTIVE"|"DEACTIVATING"|"ERROR"|"DELETE_PENDING"|"DELETED"|string;
   export interface UnarchiveFindingsRequest {
     /**
      * The ID of the detector that specifies the GuardDuty service whose findings you want to unarchive.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
     /**
      * IDs of the findings that you want to unarchive.
      */
@@ -1621,22 +1729,22 @@ declare namespace GuardDuty {
     /**
      * AWS Account ID.
      */
-    AccountId: __string;
+    AccountId: AccountId;
     /**
      * A reason why the account hasn't been processed.
      */
-    Result: __string;
+    Result: String;
   }
   export type UnprocessedAccounts = UnprocessedAccount[];
   export interface UpdateDetectorRequest {
     /**
      * The unique ID of the detector that you want to update.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
     /**
      * Updated boolean value for the detector that specifies whether the detector is enabled.
      */
-    Enable?: Enable;
+    Enable?: Boolean;
     /**
      * A enum value that specifies how frequently customer got Finding updates published.
      */
@@ -1646,113 +1754,104 @@ declare namespace GuardDuty {
   }
   export interface UpdateFilterRequest {
     /**
-     * Specifies the action that is to be applied to the findings that match the filter.
+     * The unique ID of the detector that specifies the GuardDuty service where you want to update a filter.
      */
-    Action?: FilterAction;
+    DetectorId: DetectorId;
+    /**
+     * The name of the filter.
+     */
+    FilterName: String;
     /**
      * The description of the filter.
      */
     Description?: FilterDescription;
     /**
-     * The unique ID of the detector that specifies the GuardDuty service where you want to update a filter.
+     * Specifies the action that is to be applied to the findings that match the filter.
      */
-    DetectorId: __string;
-    /**
-     * The name of the filter.
-     */
-    FilterName: __string;
-    /**
-     * Represents the criteria to be used in the filter for querying findings.
-     */
-    FindingCriteria?: FindingCriteria;
+    Action?: FilterAction;
     /**
      * Specifies the position of the filter in the list of current filters. Also specifies the order in which this filter is applied to the findings.
      */
     Rank?: FilterRank;
+    /**
+     * Represents the criteria to be used in the filter for querying findings.
+     */
+    FindingCriteria?: FindingCriteria;
   }
   export interface UpdateFilterResponse {
     /**
      * The name of the filter.
      */
-    Name?: FilterName;
+    Name: FilterName;
   }
   export interface UpdateFindingsFeedbackRequest {
     /**
-     * Additional feedback about the GuardDuty findings.
-     */
-    Comments?: Comments;
-    /**
      * The ID of the detector that specifies the GuardDuty service whose findings you want to mark as useful or not useful.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
+    /**
+     * IDs of the findings that you want to mark as useful or not useful.
+     */
+    FindingIds: FindingIds;
     /**
      * Valid values: USEFUL | NOT_USEFUL
      */
     Feedback: Feedback;
     /**
-     * IDs of the findings that you want to mark as useful or not useful.
+     * Additional feedback about the GuardDuty findings.
      */
-    FindingIds: FindingIds;
+    Comments?: String;
   }
   export interface UpdateFindingsFeedbackResponse {
   }
   export interface UpdateIPSetRequest {
     /**
-     * The updated boolean value that specifies whether the IPSet is active or not.
-     */
-    Activate?: Activate;
-    /**
      * The detectorID that specifies the GuardDuty service whose IPSet you want to update.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
     /**
      * The unique ID that specifies the IPSet that you want to update.
      */
-    IpSetId: __string;
+    IpSetId: String;
+    /**
+     * The unique ID that specifies the IPSet that you want to update.
+     */
+    Name?: Name;
     /**
      * The updated URI of the file that contains the IPSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key).
      */
     Location?: Location;
     /**
-     * The unique ID that specifies the IPSet that you want to update.
+     * The updated boolean value that specifies whether the IPSet is active or not.
      */
-    Name?: Name;
+    Activate?: Boolean;
   }
   export interface UpdateIPSetResponse {
   }
   export interface UpdateThreatIntelSetRequest {
     /**
-     * The updated boolean value that specifies whether the ThreateIntelSet is active or not.
-     */
-    Activate?: Activate;
-    /**
      * The detectorID that specifies the GuardDuty service whose ThreatIntelSet you want to update.
      */
-    DetectorId: __string;
+    DetectorId: DetectorId;
     /**
-     * The updated URI of the file that contains the ThreateIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
+     * The unique ID that specifies the ThreatIntelSet that you want to update.
      */
-    Location?: Location;
+    ThreatIntelSetId: String;
     /**
      * The unique ID that specifies the ThreatIntelSet that you want to update.
      */
     Name?: Name;
     /**
-     * The unique ID that specifies the ThreatIntelSet that you want to update.
+     * The updated URI of the file that contains the ThreateIntelSet. For example (https://s3.us-west-2.amazonaws.com/my-bucket/my-object-key)
      */
-    ThreatIntelSetId: __string;
+    Location?: Location;
+    /**
+     * The updated boolean value that specifies whether the ThreateIntelSet is active or not.
+     */
+    Activate?: Boolean;
   }
   export interface UpdateThreatIntelSetResponse {
   }
-  export type UpdatedAt = string;
-  export type __boolean = boolean;
-  export type __double = number;
-  export type __integer = number;
-  export type __listOfPortProbeDetail = PortProbeDetail[];
-  export type __mapOfCondition = {[key: string]: Condition};
-  export type __mapOfCountBySeverityFindingStatistic = {[key: string]: CountBySeverityFindingStatistic};
-  export type __string = string;
-  export type __stringMin0Max64 = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */
