@@ -270,6 +270,34 @@
       ],
       "documentation": "<p>Creates a new maintenance window.</p>"
     },
+    "CreateOpsItem": {
+      "name": "CreateOpsItem",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateOpsItemRequest"
+      },
+      "output": {
+        "shape": "CreateOpsItemResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "OpsItemAlreadyExistsException"
+        },
+        {
+          "shape": "OpsItemLimitExceededException"
+        },
+        {
+          "shape": "OpsItemInvalidParameterException"
+        }
+      ],
+      "documentation": "<p>Creates a new OpsItem. You must have permission in AWS Identity and Access Management (IAM) to create a new OpsItem. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-getting-started.html\">Getting Started with OpsItems</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html\">AWS Systems Manager OpsItems</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
+    },
     "CreatePatchBaseline": {
       "name": "CreatePatchBaseline",
       "http": {
@@ -1249,6 +1277,25 @@
       ],
       "documentation": "<p>Retrieves information about the maintenance window targets or tasks that an instance is associated with.</p>"
     },
+    "DescribeOpsItems": {
+      "name": "DescribeOpsItems",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeOpsItemsRequest"
+      },
+      "output": {
+        "shape": "DescribeOpsItemsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Query a set of OpsItems. You must have permission in AWS Identity and Access Management (IAM) to query a list of OpsItems. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-getting-started.html\">Getting Started with OpsItems</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html\">AWS Systems Manager OpsItems</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
+    },
     "DescribeParameters": {
       "name": "DescribeParameters",
       "http": {
@@ -1696,6 +1743,59 @@
         }
       ],
       "documentation": "<p>Lists the tasks in a maintenance window.</p>"
+    },
+    "GetOpsItem": {
+      "name": "GetOpsItem",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetOpsItemRequest"
+      },
+      "output": {
+        "shape": "GetOpsItemResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "OpsItemNotFoundException"
+        }
+      ],
+      "documentation": "<p>Get information about an OpsItem by using the ID. You must have permission in AWS Identity and Access Management (IAM) to view information about an OpsItem. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-getting-started.html\">Getting Started with OpsItems</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html\">AWS Systems Manager OpsItems</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
+    },
+    "GetOpsSummary": {
+      "name": "GetOpsSummary",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetOpsSummaryRequest"
+      },
+      "output": {
+        "shape": "GetOpsSummaryResult"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "InvalidFilter"
+        },
+        {
+          "shape": "InvalidNextToken"
+        },
+        {
+          "shape": "InvalidTypeNameException"
+        },
+        {
+          "shape": "InvalidAggregatorException"
+        }
+      ],
+      "documentation": "<p>View a summary of OpsItems based on specified filters and aggregators.</p>"
     },
     "GetParameter": {
       "name": "GetParameter",
@@ -3051,6 +3151,37 @@
       ],
       "documentation": "<p>Assigns or changes an Amazon Identity and Access Management (IAM) role to the managed instance.</p>"
     },
+    "UpdateOpsItem": {
+      "name": "UpdateOpsItem",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateOpsItemRequest"
+      },
+      "output": {
+        "shape": "UpdateOpsItemResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "OpsItemNotFoundException"
+        },
+        {
+          "shape": "OpsItemAlreadyExistsException"
+        },
+        {
+          "shape": "OpsItemLimitExceededException"
+        },
+        {
+          "shape": "OpsItemInvalidParameterException"
+        }
+      ],
+      "documentation": "<p>Edit or change an OpsItem. You must have permission in AWS Identity and Access Management (IAM) to update an OpsItem. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-getting-started.html\">Getting Started with OpsItems</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html\">AWS Systems Manager OpsItems</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
+    },
     "UpdatePatchBaseline": {
       "name": "UpdatePatchBaseline",
       "http": {
@@ -4165,7 +4296,7 @@
     },
     "AutomationParameterKey": {
       "type": "string",
-      "max": 30,
+      "max": 50,
       "min": 1
     },
     "AutomationParameterMap": {
@@ -5243,6 +5374,57 @@
         "WindowId": {
           "shape": "MaintenanceWindowId",
           "documentation": "<p>The ID of the created maintenance window.</p>"
+        }
+      }
+    },
+    "CreateOpsItemRequest": {
+      "type": "structure",
+      "required": [
+        "Description",
+        "Source",
+        "Title"
+      ],
+      "members": {
+        "Description": {
+          "shape": "OpsItemDescription",
+          "documentation": "<p>Information about the OpsItem. </p>"
+        },
+        "OperationalData": {
+          "shape": "OpsItemOperationalData",
+          "documentation": "<p>Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.</p> <p>This custom data is searchable, but with restrictions. For the <code>Searchable operational data</code> feature, all users with access to the OpsItem Overview page (as provided by the <a>DescribeOpsItems</a> API action) can view and search on the specified data. For the <code>Private operational data</code> feature, the data is only viewable by users who have access to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>"
+        },
+        "Notifications": {
+          "shape": "OpsItemNotifications",
+          "documentation": "<p>The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when this OpsItem is edited or changed.</p>"
+        },
+        "Priority": {
+          "shape": "OpsItemPriority",
+          "documentation": "<p>The importance of this OpsItem in relation to other OpsItems in the system.</p>"
+        },
+        "RelatedOpsItems": {
+          "shape": "RelatedOpsItems",
+          "documentation": "<p>One or more OpsItems that share something in common with the current OpsItems. For example, related OpsItems can include OpsItems with similar error messages, impacted resources, or statuses for the impacted resource.</p>"
+        },
+        "Source": {
+          "shape": "OpsItemSource",
+          "documentation": "<p>The origin of the OpsItem, such as Amazon EC2 or AWS Systems Manager.</p>"
+        },
+        "Title": {
+          "shape": "OpsItemTitle",
+          "documentation": "<p>A short heading that describes the nature of the OpsItem and the impacted resource.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an OpsItem to identify the AWS resource or the type of issue. In this case, you could specify the following key name/value pairs:</p> <ul> <li> <p> <code>Key=source,Value=EC2-instance</code> </p> </li> <li> <p> <code>Key=status,Value=stopped</code> </p> </li> </ul> <note> <p>To add tags to an existing OpsItem, use the <a>AddTagsToResource</a> action.</p> </note>"
+        }
+      }
+    },
+    "CreateOpsItemResponse": {
+      "type": "structure",
+      "members": {
+        "OpsItemId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the OpsItem.</p>"
         }
       }
     },
@@ -6574,6 +6756,36 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.</p>"
+        }
+      }
+    },
+    "DescribeOpsItemsRequest": {
+      "type": "structure",
+      "members": {
+        "OpsItemFilters": {
+          "shape": "OpsItemFilters",
+          "documentation": "<p>One or more filters to limit the reponse.</p> <ul> <li> <p>Key: CreatedTime</p> <p>Operations: GreaterThan, LessThan</p> </li> <li> <p>Key: LastModifiedBy</p> <p>Operations: Contains, Equals</p> </li> <li> <p>Key: LastModifiedTime</p> <p>Operations: GreaterThan, LessThan</p> </li> <li> <p>Key: Priority</p> <p>Operations: Equals</p> </li> <li> <p>Key: Source</p> <p>Operations: Contains, Equals</p> </li> <li> <p>Key: Status</p> <p>Operations: Equals</p> </li> <li> <p>Key: Title</p> <p>Operations: Contains</p> </li> <li> <p>Key: OperationalData</p> <p>Operations: Equals</p> </li> <li> <p>Key: OperationalDataKey</p> <p>Operations: Equals</p> </li> <li> <p>Key: OperationalDataValue</p> <p>Operations: Equals, Contains</p> </li> <li> <p>Key: OpsItemId</p> <p>Operations: Equals</p> </li> <li> <p>Key: ResourceId</p> <p>Operations: Contains</p> </li> <li> <p>Key: AutomationId</p> <p>Operations: Equals</p> </li> </ul>"
+        },
+        "MaxResults": {
+          "shape": "OpsItemMaxResults",
+          "documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>A token to start the list. Use this token to get the next set of results.</p>"
+        }
+      }
+    },
+    "DescribeOpsItemsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next set of items to return. Use this token to get the next set of results.</p>"
+        },
+        "OpsItemSummaries": {
+          "shape": "OpsItemSummaries",
+          "documentation": "<p>A list of OpsItems.</p>"
         }
       }
     },
@@ -7999,6 +8211,65 @@
         "Description": {
           "shape": "MaintenanceWindowDescription",
           "documentation": "<p>The retrieved task description.</p>"
+        }
+      }
+    },
+    "GetOpsItemRequest": {
+      "type": "structure",
+      "required": [
+        "OpsItemId"
+      ],
+      "members": {
+        "OpsItemId": {
+          "shape": "OpsItemId",
+          "documentation": "<p>The ID of the OpsItem that you want to get.</p>"
+        }
+      }
+    },
+    "GetOpsItemResponse": {
+      "type": "structure",
+      "members": {
+        "OpsItem": {
+          "shape": "OpsItem",
+          "documentation": "<p>The OpsItem.</p>"
+        }
+      }
+    },
+    "GetOpsSummaryRequest": {
+      "type": "structure",
+      "required": [
+        "Aggregators"
+      ],
+      "members": {
+        "Filters": {
+          "shape": "OpsFilterList",
+          "documentation": "<p>Optional filters used to scope down the returned OpsItems. </p>"
+        },
+        "Aggregators": {
+          "shape": "OpsAggregatorList",
+          "documentation": "<p>Optional aggregators that return counts of OpsItems based on one or more expressions.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token to start the list. Use this token to get the next set of results. </p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>",
+          "box": true
+        }
+      }
+    },
+    "GetOpsSummaryResult": {
+      "type": "structure",
+      "members": {
+        "Entities": {
+          "shape": "OpsEntityList",
+          "documentation": "<p>The list of aggregated and filtered OpsItems.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of items to return. Use this token to get the next set of results.</p>"
         }
       }
     },
@@ -10582,6 +10853,477 @@
         "CENTOS"
       ]
     },
+    "OpsAggregator": {
+      "type": "structure",
+      "members": {
+        "AggregatorType": {
+          "shape": "OpsAggregatorType",
+          "documentation": "<p>Either a Range or Count aggregator for limiting an OpsItem summary.</p>"
+        },
+        "TypeName": {
+          "shape": "OpsDataTypeName",
+          "documentation": "<p>The data type name to use for viewing counts of OpsItems.</p>"
+        },
+        "AttributeName": {
+          "shape": "OpsDataAttributeName",
+          "documentation": "<p>The name of an OpsItem attribute on which to limit the count of OpsItems.</p>"
+        },
+        "Values": {
+          "shape": "OpsAggregatorValueMap",
+          "documentation": "<p>The aggregator value.</p>"
+        },
+        "Filters": {
+          "shape": "OpsFilterList",
+          "documentation": "<p>The aggregator filters.</p>"
+        },
+        "Aggregators": {
+          "shape": "OpsAggregatorList",
+          "documentation": "<p>A nested aggregator for viewing counts of OpsItems.</p>"
+        }
+      },
+      "documentation": "<p>One or more aggregators for viewing counts of OpsItems using different dimensions such as <code>Source</code>, <code>CreatedTime</code>, or <code>Source and CreatedTime</code>, to name a few.</p>"
+    },
+    "OpsAggregatorList": {
+      "type": "list",
+      "member": {
+        "shape": "OpsAggregator"
+      },
+      "max": 12,
+      "min": 1
+    },
+    "OpsAggregatorType": {
+      "type": "string",
+      "max": 20,
+      "min": 1,
+      "pattern": "^(range|count)"
+    },
+    "OpsAggregatorValue": {
+      "type": "string",
+      "max": 512,
+      "min": 0
+    },
+    "OpsAggregatorValueKey": {
+      "type": "string",
+      "max": 32,
+      "min": 1
+    },
+    "OpsAggregatorValueMap": {
+      "type": "map",
+      "key": {
+        "shape": "OpsAggregatorValueKey"
+      },
+      "value": {
+        "shape": "OpsAggregatorValue"
+      },
+      "max": 5,
+      "min": 0
+    },
+    "OpsDataAttributeName": {
+      "type": "string"
+    },
+    "OpsDataTypeName": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "^(AWS|Custom):.*$"
+    },
+    "OpsEntity": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "OpsEntityId",
+          "documentation": "<p>The query ID.</p>"
+        },
+        "Data": {
+          "shape": "OpsEntityItemMap",
+          "documentation": "<p>The data returned by the query.</p>"
+        }
+      },
+      "documentation": "<p>The result of the query.</p>"
+    },
+    "OpsEntityId": {
+      "type": "string"
+    },
+    "OpsEntityItem": {
+      "type": "structure",
+      "members": {
+        "Content": {
+          "shape": "OpsEntityItemEntryList",
+          "documentation": "<p>The detailed data content for an OpsItem summaries result item.</p>"
+        }
+      },
+      "documentation": "<p>The OpsItem summaries result item.</p>"
+    },
+    "OpsEntityItemEntry": {
+      "type": "map",
+      "key": {
+        "shape": "AttributeName"
+      },
+      "value": {
+        "shape": "AttributeValue"
+      },
+      "max": 50,
+      "min": 0
+    },
+    "OpsEntityItemEntryList": {
+      "type": "list",
+      "member": {
+        "shape": "OpsEntityItemEntry"
+      },
+      "max": 10000,
+      "min": 0
+    },
+    "OpsEntityItemKey": {
+      "type": "string"
+    },
+    "OpsEntityItemMap": {
+      "type": "map",
+      "key": {
+        "shape": "OpsEntityItemKey"
+      },
+      "value": {
+        "shape": "OpsEntityItem"
+      }
+    },
+    "OpsEntityList": {
+      "type": "list",
+      "member": {
+        "shape": "OpsEntity"
+      }
+    },
+    "OpsFilter": {
+      "type": "structure",
+      "required": [
+        "Key",
+        "Values"
+      ],
+      "members": {
+        "Key": {
+          "shape": "OpsFilterKey",
+          "documentation": "<p>The name of the filter.</p>"
+        },
+        "Values": {
+          "shape": "OpsFilterValueList",
+          "documentation": "<p>The filter value.</p>"
+        },
+        "Type": {
+          "shape": "OpsFilterOperatorType",
+          "documentation": "<p>The type of filter.</p>"
+        }
+      },
+      "documentation": "<p>A filter for viewing OpsItem summaries.</p>"
+    },
+    "OpsFilterKey": {
+      "type": "string",
+      "max": 200,
+      "min": 1
+    },
+    "OpsFilterList": {
+      "type": "list",
+      "member": {
+        "shape": "OpsFilter"
+      },
+      "max": 5,
+      "min": 1
+    },
+    "OpsFilterOperatorType": {
+      "type": "string",
+      "enum": [
+        "Equal",
+        "NotEqual",
+        "BeginWith",
+        "LessThan",
+        "GreaterThan",
+        "Exists"
+      ]
+    },
+    "OpsFilterValue": {
+      "type": "string"
+    },
+    "OpsFilterValueList": {
+      "type": "list",
+      "member": {
+        "shape": "OpsFilterValue"
+      },
+      "max": 40,
+      "min": 1
+    },
+    "OpsItem": {
+      "type": "structure",
+      "members": {
+        "CreatedBy": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the AWS account that created the OpsItem.</p>"
+        },
+        "CreatedTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The date and time the OpsItem was created.</p>"
+        },
+        "Description": {
+          "shape": "OpsItemDescription",
+          "documentation": "<p>The OpsItem description.</p>"
+        },
+        "LastModifiedBy": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the AWS account that last updated the OpsItem.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The date and time the OpsItem was last updated.</p>"
+        },
+        "Notifications": {
+          "shape": "OpsItemNotifications",
+          "documentation": "<p>The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when this OpsItem is edited or changed.</p>"
+        },
+        "Priority": {
+          "shape": "OpsItemPriority",
+          "documentation": "<p>The importance of this OpsItem in relation to other OpsItems in the system.</p>"
+        },
+        "RelatedOpsItems": {
+          "shape": "RelatedOpsItems",
+          "documentation": "<p>One or more OpsItems that share something in common with the current OpsItems. For example, related OpsItems can include OpsItems with similar error messages, impacted resources, or statuses for the impacted resource.</p>"
+        },
+        "Status": {
+          "shape": "OpsItemStatus",
+          "documentation": "<p>The OpsItem status. Status can be <code>Open</code>, <code>In Progress</code>, or <code>Resolved</code>. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-working-with-OpsItems-editing-details.html\">Editing OpsItem Details</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+        },
+        "OpsItemId": {
+          "shape": "OpsItemId",
+          "documentation": "<p>The ID of the OpsItem.</p>"
+        },
+        "Version": {
+          "shape": "String",
+          "documentation": "<p>The version of this OpsItem. Each time the OpsItem is edited the version number increments by one.</p>"
+        },
+        "Title": {
+          "shape": "OpsItemTitle",
+          "documentation": "<p>A short heading that describes the nature of the OpsItem and the impacted resource.</p>"
+        },
+        "Source": {
+          "shape": "OpsItemSource",
+          "documentation": "<p>The origin of the OpsItem, such as Amazon EC2 or AWS Systems Manager. The impacted resource is a subset of source.</p>"
+        },
+        "OperationalData": {
+          "shape": "OpsItemOperationalData",
+          "documentation": "<p>Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.</p> <p>This custom data is searchable, but with restrictions. For the <code>Searchable operational data</code> feature, all users with access to the OpsItem Overview page (as provided by the <a>DescribeOpsItems</a> API action) can view and search on the specified data. For the <code>Private operational data</code> feature, the data is only viewable by users who have access to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>"
+        }
+      },
+      "documentation": "<p>Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html\">AWS Systems Manager OpsItems</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
+    },
+    "OpsItemDataKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "OpsItemDataType": {
+      "type": "string",
+      "enum": [
+        "SearchableString",
+        "String"
+      ]
+    },
+    "OpsItemDataValue": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "OpsItemDataValueString",
+          "documentation": "<p>The value of the OperationalData key.</p>"
+        },
+        "Type": {
+          "shape": "OpsItemDataType",
+          "documentation": "<p>The type of key-value pair. Valid types include <code>SearchableString</code> and <code>String</code>.</p>"
+        }
+      },
+      "documentation": "<p>An object that defines the value of the key and its type in the OperationalData map.</p>"
+    },
+    "OpsItemDataValueString": {
+      "type": "string"
+    },
+    "OpsItemDescription": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
+    },
+    "OpsItemFilter": {
+      "type": "structure",
+      "required": [
+        "Key",
+        "Values",
+        "Operator"
+      ],
+      "members": {
+        "Key": {
+          "shape": "OpsItemFilterKey",
+          "documentation": "<p>The name of the filter.</p>"
+        },
+        "Values": {
+          "shape": "OpsItemFilterValues",
+          "documentation": "<p>The filter value.</p>"
+        },
+        "Operator": {
+          "shape": "OpsItemFilterOperator",
+          "documentation": "<p>The operator used by the filter call.</p>"
+        }
+      },
+      "documentation": "<p>Describes an OpsCenter filter.</p>"
+    },
+    "OpsItemFilterKey": {
+      "type": "string",
+      "enum": [
+        "Status",
+        "CreatedBy",
+        "Source",
+        "Priority",
+        "Title",
+        "OpsItemId",
+        "CreatedTime",
+        "LastModifiedTime",
+        "OperationalData",
+        "OperationalDataKey",
+        "OperationalDataValue",
+        "ResourceId",
+        "AutomationId"
+      ]
+    },
+    "OpsItemFilterOperator": {
+      "type": "string",
+      "enum": [
+        "Equal",
+        "Contains",
+        "GreaterThan",
+        "LessThan"
+      ]
+    },
+    "OpsItemFilterValue": {
+      "type": "string"
+    },
+    "OpsItemFilterValues": {
+      "type": "list",
+      "member": {
+        "shape": "OpsItemFilterValue"
+      }
+    },
+    "OpsItemFilters": {
+      "type": "list",
+      "member": {
+        "shape": "OpsItemFilter"
+      }
+    },
+    "OpsItemId": {
+      "type": "string",
+      "pattern": "^(oi)-[0-9a-f]{12}$"
+    },
+    "OpsItemMaxResults": {
+      "type": "integer",
+      "max": 50,
+      "min": 1
+    },
+    "OpsItemNotification": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when this OpsItem is edited or changed.</p>"
+        }
+      },
+      "documentation": "<p>A notification about the OpsItem.</p>"
+    },
+    "OpsItemNotifications": {
+      "type": "list",
+      "member": {
+        "shape": "OpsItemNotification"
+      }
+    },
+    "OpsItemOperationalData": {
+      "type": "map",
+      "key": {
+        "shape": "OpsItemDataKey"
+      },
+      "value": {
+        "shape": "OpsItemDataValue"
+      }
+    },
+    "OpsItemOpsDataKeysList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
+    "OpsItemPriority": {
+      "type": "integer",
+      "max": 5,
+      "min": 1
+    },
+    "OpsItemSource": {
+      "type": "string",
+      "max": 64,
+      "min": 1
+    },
+    "OpsItemStatus": {
+      "type": "string",
+      "enum": [
+        "Open",
+        "InProgress",
+        "Resolved"
+      ]
+    },
+    "OpsItemSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "OpsItemSummary"
+      }
+    },
+    "OpsItemSummary": {
+      "type": "structure",
+      "members": {
+        "CreatedBy": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem.</p>"
+        },
+        "CreatedTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The date and time the OpsItem was created.</p>"
+        },
+        "LastModifiedBy": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The date and time the OpsItem was last updated.</p>"
+        },
+        "Priority": {
+          "shape": "OpsItemPriority",
+          "documentation": "<p>The importance of this OpsItem in relation to other OpsItems in the system.</p>"
+        },
+        "Source": {
+          "shape": "OpsItemSource",
+          "documentation": "<p>The impacted AWS resource.</p>"
+        },
+        "Status": {
+          "shape": "OpsItemStatus",
+          "documentation": "<p>The OpsItem status. Status can be <code>Open</code>, <code>In Progress</code>, or <code>Resolved</code>.</p>"
+        },
+        "OpsItemId": {
+          "shape": "OpsItemId",
+          "documentation": "<p>The ID of the OpsItem.</p>"
+        },
+        "Title": {
+          "shape": "OpsItemTitle",
+          "documentation": "<p>A short heading that describes the nature of the OpsItem and the impacted resource.</p>"
+        },
+        "OperationalData": {
+          "shape": "OpsItemOperationalData",
+          "documentation": "<p>Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.</p> <p>This custom data is searchable, but with restrictions. For the <code>Searchable operational data</code> feature, all users with access to the OpsItem Overview page (as provided by the <a>DescribeOpsItems</a> API action) can view and search on the specified data. For the <code>Private operational data</code> feature, the data is only viewable by users who have access to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>"
+        }
+      },
+      "documentation": "<p>A count of OpsItems.</p>"
+    },
+    "OpsItemTitle": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
+    },
     "OutputSource": {
       "type": "structure",
       "members": {
@@ -11909,6 +12651,25 @@
       "max": 1000,
       "min": 1
     },
+    "RelatedOpsItem": {
+      "type": "structure",
+      "required": [
+        "OpsItemId"
+      ],
+      "members": {
+        "OpsItemId": {
+          "shape": "String",
+          "documentation": "<p>The ID of an OpsItem related to the current OpsItem.</p>"
+        }
+      },
+      "documentation": "<p>An OpsItems that shares something in common with the current OpsItems. For example, related OpsItems can include OpsItems with similar error messages, impacted resources, or statuses for the impacted resource.</p>"
+    },
+    "RelatedOpsItems": {
+      "type": "list",
+      "member": {
+        "shape": "RelatedOpsItem"
+      }
+    },
     "RemainingCount": {
       "type": "integer"
     },
@@ -12149,7 +12910,8 @@
         "ManagedInstance",
         "MaintenanceWindow",
         "Parameter",
-        "PatchBaseline"
+        "PatchBaseline",
+        "OpsItem"
       ]
     },
     "ResponseCode": {
@@ -13690,6 +14452,54 @@
       }
     },
     "UpdateManagedInstanceRoleResult": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateOpsItemRequest": {
+      "type": "structure",
+      "required": [
+        "OpsItemId"
+      ],
+      "members": {
+        "Description": {
+          "shape": "OpsItemDescription",
+          "documentation": "<p>Update the information about the OpsItem. Provide enough information so that users reading this OpsItem for the first time understand the issue. </p>"
+        },
+        "OperationalData": {
+          "shape": "OpsItemOperationalData",
+          "documentation": "<p>Add new keys or edit existing key-value pairs of the OperationalData map in the OpsItem object.</p> <p>Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.</p> <p>This custom data is searchable, but with restrictions. For the <code>Searchable operational data</code> feature, all users with access to the OpsItem Overview page (as provided by the <a>DescribeOpsItems</a> API action) can view and search on the specified data. For the <code>Private operational data</code> feature, the data is only viewable by users who have access to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>"
+        },
+        "OperationalDataToDelete": {
+          "shape": "OpsItemOpsDataKeysList",
+          "documentation": "<p>Keys that you want to remove from the OperationalData map.</p>"
+        },
+        "Notifications": {
+          "shape": "OpsItemNotifications",
+          "documentation": "<p>The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when this OpsItem is edited or changed.</p>"
+        },
+        "Priority": {
+          "shape": "OpsItemPriority",
+          "documentation": "<p>The importance of this OpsItem in relation to other OpsItems in the system.</p>"
+        },
+        "RelatedOpsItems": {
+          "shape": "RelatedOpsItems",
+          "documentation": "<p>One or more OpsItems that share something in common with the current OpsItems. For example, related OpsItems can include OpsItems with similar error messages, impacted resources, or statuses for the impacted resource.</p>"
+        },
+        "Status": {
+          "shape": "OpsItemStatus",
+          "documentation": "<p>The OpsItem status. Status can be <code>Open</code>, <code>In Progress</code>, or <code>Resolved</code>. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-working-with-OpsItems-editing-details.html\">Editing OpsItem Details</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+        },
+        "OpsItemId": {
+          "shape": "OpsItemId",
+          "documentation": "<p>The ID of the OpsItem.</p>"
+        },
+        "Title": {
+          "shape": "OpsItemTitle",
+          "documentation": "<p>A short heading that describes the nature of the OpsItem and the impacted resource.</p>"
+        }
+      }
+    },
+    "UpdateOpsItemResponse": {
       "type": "structure",
       "members": {}
     },

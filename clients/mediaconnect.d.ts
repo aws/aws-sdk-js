@@ -262,17 +262,37 @@ declare namespace MediaConnect {
      */
     Algorithm: Algorithm;
     /**
+     * A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.
+     */
+    ConstantInitializationVector?: __string;
+    /**
+     * The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+     */
+    DeviceId?: __string;
+    /**
      * The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).
      */
     KeyType?: KeyType;
+    /**
+     * The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+     */
+    Region?: __string;
+    /**
+     * An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+     */
+    ResourceId?: __string;
     /**
      * The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
      */
     RoleArn: __string;
     /**
-     * The ARN that was assigned to the secret that you created in AWS Secrets Manager to store the encryption key.
+     * The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
      */
-    SecretArn: __string;
+    SecretArn?: __string;
+    /**
+     * The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+     */
+    Url?: __string;
   }
   export interface Entitlement {
     /**
@@ -369,7 +389,7 @@ declare namespace MediaConnect {
      */
     FlowArn?: __string;
   }
-  export type KeyType = "static-key"|string;
+  export type KeyType = "speke"|"static-key"|string;
   export interface ListEntitlementsRequest {
     /**
      * The maximum number of results to return per API request. For example, you submit a ListEntitlements request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 20 results per page.
@@ -706,17 +726,37 @@ declare namespace MediaConnect {
      */
     Algorithm?: Algorithm;
     /**
+     * A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.
+     */
+    ConstantInitializationVector?: __string;
+    /**
+     * The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+     */
+    DeviceId?: __string;
+    /**
      * The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).
      */
     KeyType?: KeyType;
+    /**
+     * The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+     */
+    Region?: __string;
+    /**
+     * An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+     */
+    ResourceId?: __string;
     /**
      * The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
      */
     RoleArn?: __string;
     /**
-     * The ARN that was assigned to the secret that you created in AWS Secrets Manager to store the encryption key.
+     * The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
      */
     SecretArn?: __string;
+    /**
+     * The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+     */
+    Url?: __string;
   }
   export interface UpdateFlowEntitlementRequest {
     /**

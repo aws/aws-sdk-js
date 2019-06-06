@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.469.0-->
+<!--LATEST=2.470.0-->
 <!--ENTRYINSERT-->
+
+## 2.470.0
+* feature: ECS: This release of Amazon Elastic Container Service (Amazon ECS) introduces support for launching container instances using supported Amazon EC2 instance types that have increased elastic network interface density. Using these instance types and opting in to the awsvpcTrunking account setting provides increased elastic network interface (ENI) density on newly launched container instances which allows you to place more tasks on each container instance.
+* feature: GuardDuty: Improve FindingCriteria Condition field names, support long-typed conditions and deprecate old Condition field names.
+* feature: MediaConnect: This release adds support for encrypting entitlements using Secure Packager and Encoder Key Exchange (SPEKE).
+* feature: Organizations: You can tag and untag accounts in your organization and view tags on an account in your organization.
+* feature: SES: You can now specify whether the Amazon Simple Email Service must deliver email over a connection that is encrypted using Transport Layer Security (TLS).
+* feature: SSM: OpsCenter is a new Systems Manager capability that allows you to view, diagnose, and remediate, operational issues, aka OpsItems, related to various AWS resources by bringing together contextually relevant investigation information. New APIs to create, update, describe, and get OpsItems as well as OpsItems summary API. 
 
 ## 2.469.0
 * feature: Glue: Support specifying python version for Python shell jobs. A new parameter PythonVersion is added to the JobCommand data type.

@@ -76,6 +76,14 @@ declare class SSM extends Service {
    */
   createMaintenanceWindow(callback?: (err: AWSError, data: SSM.Types.CreateMaintenanceWindowResult) => void): Request<SSM.Types.CreateMaintenanceWindowResult, AWSError>;
   /**
+   * Creates a new OpsItem. You must have permission in AWS Identity and Access Management (IAM) to create a new OpsItem. For more information, see Getting Started with OpsItems in the AWS Systems Manager User Guide. Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see AWS Systems Manager OpsItems in the AWS Systems Manager User Guide. 
+   */
+  createOpsItem(params: SSM.Types.CreateOpsItemRequest, callback?: (err: AWSError, data: SSM.Types.CreateOpsItemResponse) => void): Request<SSM.Types.CreateOpsItemResponse, AWSError>;
+  /**
+   * Creates a new OpsItem. You must have permission in AWS Identity and Access Management (IAM) to create a new OpsItem. For more information, see Getting Started with OpsItems in the AWS Systems Manager User Guide. Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see AWS Systems Manager OpsItems in the AWS Systems Manager User Guide. 
+   */
+  createOpsItem(callback?: (err: AWSError, data: SSM.Types.CreateOpsItemResponse) => void): Request<SSM.Types.CreateOpsItemResponse, AWSError>;
+  /**
    * Creates a patch baseline.  For information about valid key and value pairs in PatchFilters for each supported operating system type, see PatchFilter. 
    */
   createPatchBaseline(params: SSM.Types.CreatePatchBaselineRequest, callback?: (err: AWSError, data: SSM.Types.CreatePatchBaselineResult) => void): Request<SSM.Types.CreatePatchBaselineResult, AWSError>;
@@ -396,6 +404,14 @@ declare class SSM extends Service {
    */
   describeMaintenanceWindowsForTarget(callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowsForTargetResult) => void): Request<SSM.Types.DescribeMaintenanceWindowsForTargetResult, AWSError>;
   /**
+   * Query a set of OpsItems. You must have permission in AWS Identity and Access Management (IAM) to query a list of OpsItems. For more information, see Getting Started with OpsItems in the AWS Systems Manager User Guide. Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see AWS Systems Manager OpsItems in the AWS Systems Manager User Guide. 
+   */
+  describeOpsItems(params: SSM.Types.DescribeOpsItemsRequest, callback?: (err: AWSError, data: SSM.Types.DescribeOpsItemsResponse) => void): Request<SSM.Types.DescribeOpsItemsResponse, AWSError>;
+  /**
+   * Query a set of OpsItems. You must have permission in AWS Identity and Access Management (IAM) to query a list of OpsItems. For more information, see Getting Started with OpsItems in the AWS Systems Manager User Guide. Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see AWS Systems Manager OpsItems in the AWS Systems Manager User Guide. 
+   */
+  describeOpsItems(callback?: (err: AWSError, data: SSM.Types.DescribeOpsItemsResponse) => void): Request<SSM.Types.DescribeOpsItemsResponse, AWSError>;
+  /**
    * Get information about a parameter. Request results are returned on a best-effort basis. If you specify MaxResults in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of MaxResults. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a NextToken. You can specify the NextToken in a subsequent call to get the next set of results.
    */
   describeParameters(params: SSM.Types.DescribeParametersRequest, callback?: (err: AWSError, data: SSM.Types.DescribeParametersResult) => void): Request<SSM.Types.DescribeParametersResult, AWSError>;
@@ -547,6 +563,22 @@ declare class SSM extends Service {
    * Lists the tasks in a maintenance window.
    */
   getMaintenanceWindowTask(callback?: (err: AWSError, data: SSM.Types.GetMaintenanceWindowTaskResult) => void): Request<SSM.Types.GetMaintenanceWindowTaskResult, AWSError>;
+  /**
+   * Get information about an OpsItem by using the ID. You must have permission in AWS Identity and Access Management (IAM) to view information about an OpsItem. For more information, see Getting Started with OpsItems in the AWS Systems Manager User Guide. Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see AWS Systems Manager OpsItems in the AWS Systems Manager User Guide. 
+   */
+  getOpsItem(params: SSM.Types.GetOpsItemRequest, callback?: (err: AWSError, data: SSM.Types.GetOpsItemResponse) => void): Request<SSM.Types.GetOpsItemResponse, AWSError>;
+  /**
+   * Get information about an OpsItem by using the ID. You must have permission in AWS Identity and Access Management (IAM) to view information about an OpsItem. For more information, see Getting Started with OpsItems in the AWS Systems Manager User Guide. Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see AWS Systems Manager OpsItems in the AWS Systems Manager User Guide. 
+   */
+  getOpsItem(callback?: (err: AWSError, data: SSM.Types.GetOpsItemResponse) => void): Request<SSM.Types.GetOpsItemResponse, AWSError>;
+  /**
+   * View a summary of OpsItems based on specified filters and aggregators.
+   */
+  getOpsSummary(params: SSM.Types.GetOpsSummaryRequest, callback?: (err: AWSError, data: SSM.Types.GetOpsSummaryResult) => void): Request<SSM.Types.GetOpsSummaryResult, AWSError>;
+  /**
+   * View a summary of OpsItems based on specified filters and aggregators.
+   */
+  getOpsSummary(callback?: (err: AWSError, data: SSM.Types.GetOpsSummaryResult) => void): Request<SSM.Types.GetOpsSummaryResult, AWSError>;
   /**
    * Get information about a parameter by using the parameter name. Don't confuse this API action with the GetParameters API action.
    */
@@ -915,6 +947,14 @@ declare class SSM extends Service {
    * Assigns or changes an Amazon Identity and Access Management (IAM) role to the managed instance.
    */
   updateManagedInstanceRole(callback?: (err: AWSError, data: SSM.Types.UpdateManagedInstanceRoleResult) => void): Request<SSM.Types.UpdateManagedInstanceRoleResult, AWSError>;
+  /**
+   * Edit or change an OpsItem. You must have permission in AWS Identity and Access Management (IAM) to update an OpsItem. For more information, see Getting Started with OpsItems in the AWS Systems Manager User Guide. Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see AWS Systems Manager OpsItems in the AWS Systems Manager User Guide. 
+   */
+  updateOpsItem(params: SSM.Types.UpdateOpsItemRequest, callback?: (err: AWSError, data: SSM.Types.UpdateOpsItemResponse) => void): Request<SSM.Types.UpdateOpsItemResponse, AWSError>;
+  /**
+   * Edit or change an OpsItem. You must have permission in AWS Identity and Access Management (IAM) to update an OpsItem. For more information, see Getting Started with OpsItems in the AWS Systems Manager User Guide. Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see AWS Systems Manager OpsItems in the AWS Systems Manager User Guide. 
+   */
+  updateOpsItem(callback?: (err: AWSError, data: SSM.Types.UpdateOpsItemResponse) => void): Request<SSM.Types.UpdateOpsItemResponse, AWSError>;
   /**
    * Modifies an existing patch baseline. Fields not specified in the request are left unchanged.  For information about valid key and value pairs in PatchFilters for each supported operating system type, see PatchFilter. 
    */
@@ -2272,6 +2312,46 @@ declare namespace SSM {
      */
     WindowId?: MaintenanceWindowId;
   }
+  export interface CreateOpsItemRequest {
+    /**
+     * Information about the OpsItem. 
+     */
+    Description: OpsItemDescription;
+    /**
+     * Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB. This custom data is searchable, but with restrictions. For the Searchable operational data feature, all users with access to the OpsItem Overview page (as provided by the DescribeOpsItems API action) can view and search on the specified data. For the Private operational data feature, the data is only viewable by users who have access to the OpsItem (as provided by the GetOpsItem API action).
+     */
+    OperationalData?: OpsItemOperationalData;
+    /**
+     * The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when this OpsItem is edited or changed.
+     */
+    Notifications?: OpsItemNotifications;
+    /**
+     * The importance of this OpsItem in relation to other OpsItems in the system.
+     */
+    Priority?: OpsItemPriority;
+    /**
+     * One or more OpsItems that share something in common with the current OpsItems. For example, related OpsItems can include OpsItems with similar error messages, impacted resources, or statuses for the impacted resource.
+     */
+    RelatedOpsItems?: RelatedOpsItems;
+    /**
+     * The origin of the OpsItem, such as Amazon EC2 or AWS Systems Manager.
+     */
+    Source: OpsItemSource;
+    /**
+     * A short heading that describes the nature of the OpsItem and the impacted resource.
+     */
+    Title: OpsItemTitle;
+    /**
+     * Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an OpsItem to identify the AWS resource or the type of issue. In this case, you could specify the following key name/value pairs:    Key=source,Value=EC2-instance     Key=status,Value=stopped     To add tags to an existing OpsItem, use the AddTagsToResource action. 
+     */
+    Tags?: TagList;
+  }
+  export interface CreateOpsItemResponse {
+    /**
+     * The ID of the OpsItem.
+     */
+    OpsItemId?: String;
+  }
   export interface CreatePatchBaselineRequest {
     /**
      * Defines the operating system the patch baseline applies to. The Default value is WINDOWS.
@@ -3212,6 +3292,30 @@ declare namespace SSM {
      * The token to use when requesting the next set of items. If there are no additional items to return, the string is empty.
      */
     NextToken?: NextToken;
+  }
+  export interface DescribeOpsItemsRequest {
+    /**
+     * One or more filters to limit the reponse.   Key: CreatedTime Operations: GreaterThan, LessThan   Key: LastModifiedBy Operations: Contains, Equals   Key: LastModifiedTime Operations: GreaterThan, LessThan   Key: Priority Operations: Equals   Key: Source Operations: Contains, Equals   Key: Status Operations: Equals   Key: Title Operations: Contains   Key: OperationalData Operations: Equals   Key: OperationalDataKey Operations: Equals   Key: OperationalDataValue Operations: Equals, Contains   Key: OpsItemId Operations: Equals   Key: ResourceId Operations: Contains   Key: AutomationId Operations: Equals  
+     */
+    OpsItemFilters?: OpsItemFilters;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: OpsItemMaxResults;
+    /**
+     * A token to start the list. Use this token to get the next set of results.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeOpsItemsResponse {
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * A list of OpsItems.
+     */
+    OpsItemSummaries?: OpsItemSummaries;
   }
   export interface DescribeParametersRequest {
     /**
@@ -4249,6 +4353,46 @@ declare namespace SSM {
      * The retrieved task description.
      */
     Description?: MaintenanceWindowDescription;
+  }
+  export interface GetOpsItemRequest {
+    /**
+     * The ID of the OpsItem that you want to get.
+     */
+    OpsItemId: OpsItemId;
+  }
+  export interface GetOpsItemResponse {
+    /**
+     * The OpsItem.
+     */
+    OpsItem?: OpsItem;
+  }
+  export interface GetOpsSummaryRequest {
+    /**
+     * Optional filters used to scope down the returned OpsItems. 
+     */
+    Filters?: OpsFilterList;
+    /**
+     * Optional aggregators that return counts of OpsItems based on one or more expressions.
+     */
+    Aggregators: OpsAggregatorList;
+    /**
+     * A token to start the list. Use this token to get the next set of results. 
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface GetOpsSummaryResult {
+    /**
+     * The list of aggregated and filtered OpsItems.
+     */
+    Entities?: OpsEntityList;
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
+     */
+    NextToken?: NextToken;
   }
   export interface GetParameterHistoryRequest {
     /**
@@ -5802,6 +5946,229 @@ declare namespace SSM {
   export type NotificationEventList = NotificationEvent[];
   export type NotificationType = "Command"|"Invocation"|string;
   export type OperatingSystem = "WINDOWS"|"AMAZON_LINUX"|"AMAZON_LINUX_2"|"UBUNTU"|"REDHAT_ENTERPRISE_LINUX"|"SUSE"|"CENTOS"|string;
+  export interface OpsAggregator {
+    /**
+     * Either a Range or Count aggregator for limiting an OpsItem summary.
+     */
+    AggregatorType?: OpsAggregatorType;
+    /**
+     * The data type name to use for viewing counts of OpsItems.
+     */
+    TypeName?: OpsDataTypeName;
+    /**
+     * The name of an OpsItem attribute on which to limit the count of OpsItems.
+     */
+    AttributeName?: OpsDataAttributeName;
+    /**
+     * The aggregator value.
+     */
+    Values?: OpsAggregatorValueMap;
+    /**
+     * The aggregator filters.
+     */
+    Filters?: OpsFilterList;
+    /**
+     * A nested aggregator for viewing counts of OpsItems.
+     */
+    Aggregators?: OpsAggregatorList;
+  }
+  export type OpsAggregatorList = OpsAggregator[];
+  export type OpsAggregatorType = string;
+  export type OpsAggregatorValue = string;
+  export type OpsAggregatorValueKey = string;
+  export type OpsAggregatorValueMap = {[key: string]: OpsAggregatorValue};
+  export type OpsDataAttributeName = string;
+  export type OpsDataTypeName = string;
+  export interface OpsEntity {
+    /**
+     * The query ID.
+     */
+    Id?: OpsEntityId;
+    /**
+     * The data returned by the query.
+     */
+    Data?: OpsEntityItemMap;
+  }
+  export type OpsEntityId = string;
+  export interface OpsEntityItem {
+    /**
+     * The detailed data content for an OpsItem summaries result item.
+     */
+    Content?: OpsEntityItemEntryList;
+  }
+  export type OpsEntityItemEntry = {[key: string]: AttributeValue};
+  export type OpsEntityItemEntryList = OpsEntityItemEntry[];
+  export type OpsEntityItemKey = string;
+  export type OpsEntityItemMap = {[key: string]: OpsEntityItem};
+  export type OpsEntityList = OpsEntity[];
+  export interface OpsFilter {
+    /**
+     * The name of the filter.
+     */
+    Key: OpsFilterKey;
+    /**
+     * The filter value.
+     */
+    Values: OpsFilterValueList;
+    /**
+     * The type of filter.
+     */
+    Type?: OpsFilterOperatorType;
+  }
+  export type OpsFilterKey = string;
+  export type OpsFilterList = OpsFilter[];
+  export type OpsFilterOperatorType = "Equal"|"NotEqual"|"BeginWith"|"LessThan"|"GreaterThan"|"Exists"|string;
+  export type OpsFilterValue = string;
+  export type OpsFilterValueList = OpsFilterValue[];
+  export interface OpsItem {
+    /**
+     * The ARN of the AWS account that created the OpsItem.
+     */
+    CreatedBy?: String;
+    /**
+     * The date and time the OpsItem was created.
+     */
+    CreatedTime?: DateTime;
+    /**
+     * The OpsItem description.
+     */
+    Description?: OpsItemDescription;
+    /**
+     * The ARN of the AWS account that last updated the OpsItem.
+     */
+    LastModifiedBy?: String;
+    /**
+     * The date and time the OpsItem was last updated.
+     */
+    LastModifiedTime?: DateTime;
+    /**
+     * The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when this OpsItem is edited or changed.
+     */
+    Notifications?: OpsItemNotifications;
+    /**
+     * The importance of this OpsItem in relation to other OpsItems in the system.
+     */
+    Priority?: OpsItemPriority;
+    /**
+     * One or more OpsItems that share something in common with the current OpsItems. For example, related OpsItems can include OpsItems with similar error messages, impacted resources, or statuses for the impacted resource.
+     */
+    RelatedOpsItems?: RelatedOpsItems;
+    /**
+     * The OpsItem status. Status can be Open, In Progress, or Resolved. For more information, see Editing OpsItem Details in the AWS Systems Manager User Guide.
+     */
+    Status?: OpsItemStatus;
+    /**
+     * The ID of the OpsItem.
+     */
+    OpsItemId?: OpsItemId;
+    /**
+     * The version of this OpsItem. Each time the OpsItem is edited the version number increments by one.
+     */
+    Version?: String;
+    /**
+     * A short heading that describes the nature of the OpsItem and the impacted resource.
+     */
+    Title?: OpsItemTitle;
+    /**
+     * The origin of the OpsItem, such as Amazon EC2 or AWS Systems Manager. The impacted resource is a subset of source.
+     */
+    Source?: OpsItemSource;
+    /**
+     * Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB. This custom data is searchable, but with restrictions. For the Searchable operational data feature, all users with access to the OpsItem Overview page (as provided by the DescribeOpsItems API action) can view and search on the specified data. For the Private operational data feature, the data is only viewable by users who have access to the OpsItem (as provided by the GetOpsItem API action).
+     */
+    OperationalData?: OpsItemOperationalData;
+  }
+  export type OpsItemDataKey = string;
+  export type OpsItemDataType = "SearchableString"|"String"|string;
+  export interface OpsItemDataValue {
+    /**
+     * The value of the OperationalData key.
+     */
+    Value?: OpsItemDataValueString;
+    /**
+     * The type of key-value pair. Valid types include SearchableString and String.
+     */
+    Type?: OpsItemDataType;
+  }
+  export type OpsItemDataValueString = string;
+  export type OpsItemDescription = string;
+  export interface OpsItemFilter {
+    /**
+     * The name of the filter.
+     */
+    Key: OpsItemFilterKey;
+    /**
+     * The filter value.
+     */
+    Values: OpsItemFilterValues;
+    /**
+     * The operator used by the filter call.
+     */
+    Operator: OpsItemFilterOperator;
+  }
+  export type OpsItemFilterKey = "Status"|"CreatedBy"|"Source"|"Priority"|"Title"|"OpsItemId"|"CreatedTime"|"LastModifiedTime"|"OperationalData"|"OperationalDataKey"|"OperationalDataValue"|"ResourceId"|"AutomationId"|string;
+  export type OpsItemFilterOperator = "Equal"|"Contains"|"GreaterThan"|"LessThan"|string;
+  export type OpsItemFilterValue = string;
+  export type OpsItemFilterValues = OpsItemFilterValue[];
+  export type OpsItemFilters = OpsItemFilter[];
+  export type OpsItemId = string;
+  export type OpsItemMaxResults = number;
+  export interface OpsItemNotification {
+    /**
+     * The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when this OpsItem is edited or changed.
+     */
+    Arn?: String;
+  }
+  export type OpsItemNotifications = OpsItemNotification[];
+  export type OpsItemOperationalData = {[key: string]: OpsItemDataValue};
+  export type OpsItemOpsDataKeysList = String[];
+  export type OpsItemPriority = number;
+  export type OpsItemSource = string;
+  export type OpsItemStatus = "Open"|"InProgress"|"Resolved"|string;
+  export type OpsItemSummaries = OpsItemSummary[];
+  export interface OpsItemSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem.
+     */
+    CreatedBy?: String;
+    /**
+     * The date and time the OpsItem was created.
+     */
+    CreatedTime?: DateTime;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM entity that created the OpsItem.
+     */
+    LastModifiedBy?: String;
+    /**
+     * The date and time the OpsItem was last updated.
+     */
+    LastModifiedTime?: DateTime;
+    /**
+     * The importance of this OpsItem in relation to other OpsItems in the system.
+     */
+    Priority?: OpsItemPriority;
+    /**
+     * The impacted AWS resource.
+     */
+    Source?: OpsItemSource;
+    /**
+     * The OpsItem status. Status can be Open, In Progress, or Resolved.
+     */
+    Status?: OpsItemStatus;
+    /**
+     * The ID of the OpsItem.
+     */
+    OpsItemId?: OpsItemId;
+    /**
+     * A short heading that describes the nature of the OpsItem and the impacted resource.
+     */
+    Title?: OpsItemTitle;
+    /**
+     * Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB. This custom data is searchable, but with restrictions. For the Searchable operational data feature, all users with access to the OpsItem Overview page (as provided by the DescribeOpsItems API action) can view and search on the specified data. For the Private operational data feature, the data is only viewable by users who have access to the OpsItem (as provided by the GetOpsItem API action).
+     */
+    OperationalData?: OpsItemOperationalData;
+  }
+  export type OpsItemTitle = string;
   export interface OutputSource {
     /**
      * The ID of the output source, for example the URL of an Amazon S3 bucket.
@@ -6505,6 +6872,13 @@ declare namespace SSM {
   }
   export type RegistrationLimit = number;
   export type RegistrationsCount = number;
+  export interface RelatedOpsItem {
+    /**
+     * The ID of an OpsItem related to the current OpsItem.
+     */
+    OpsItemId: String;
+  }
+  export type RelatedOpsItems = RelatedOpsItem[];
   export type RemainingCount = number;
   export interface RemoveTagsFromResourceRequest {
     /**
@@ -6643,7 +7017,7 @@ declare namespace SSM {
   export type ResourceDataSyncS3Region = string;
   export type ResourceId = string;
   export type ResourceType = "ManagedInstance"|"Document"|"EC2Instance"|string;
-  export type ResourceTypeForTagging = "Document"|"ManagedInstance"|"MaintenanceWindow"|"Parameter"|"PatchBaseline"|string;
+  export type ResourceTypeForTagging = "Document"|"ManagedInstance"|"MaintenanceWindow"|"Parameter"|"PatchBaseline"|"OpsItem"|string;
   export type ResponseCode = number;
   export interface ResultAttribute {
     /**
@@ -7632,6 +8006,46 @@ declare namespace SSM {
     IamRole: IamRole;
   }
   export interface UpdateManagedInstanceRoleResult {
+  }
+  export interface UpdateOpsItemRequest {
+    /**
+     * Update the information about the OpsItem. Provide enough information so that users reading this OpsItem for the first time understand the issue. 
+     */
+    Description?: OpsItemDescription;
+    /**
+     * Add new keys or edit existing key-value pairs of the OperationalData map in the OpsItem object. Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB. This custom data is searchable, but with restrictions. For the Searchable operational data feature, all users with access to the OpsItem Overview page (as provided by the DescribeOpsItems API action) can view and search on the specified data. For the Private operational data feature, the data is only viewable by users who have access to the OpsItem (as provided by the GetOpsItem API action).
+     */
+    OperationalData?: OpsItemOperationalData;
+    /**
+     * Keys that you want to remove from the OperationalData map.
+     */
+    OperationalDataToDelete?: OpsItemOpsDataKeysList;
+    /**
+     * The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when this OpsItem is edited or changed.
+     */
+    Notifications?: OpsItemNotifications;
+    /**
+     * The importance of this OpsItem in relation to other OpsItems in the system.
+     */
+    Priority?: OpsItemPriority;
+    /**
+     * One or more OpsItems that share something in common with the current OpsItems. For example, related OpsItems can include OpsItems with similar error messages, impacted resources, or statuses for the impacted resource.
+     */
+    RelatedOpsItems?: RelatedOpsItems;
+    /**
+     * The OpsItem status. Status can be Open, In Progress, or Resolved. For more information, see Editing OpsItem Details in the AWS Systems Manager User Guide.
+     */
+    Status?: OpsItemStatus;
+    /**
+     * The ID of the OpsItem.
+     */
+    OpsItemId: OpsItemId;
+    /**
+     * A short heading that describes the nature of the OpsItem and the impacted resource.
+     */
+    Title?: OpsItemTitle;
+  }
+  export interface UpdateOpsItemResponse {
   }
   export interface UpdatePatchBaselineRequest {
     /**
