@@ -13,6 +13,82 @@
     "uid": "codecommit-2015-04-13"
   },
   "operations": {
+    "BatchDescribeMergeConflicts": {
+      "name": "BatchDescribeMergeConflicts",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "BatchDescribeMergeConflictsInput"
+      },
+      "output": {
+        "shape": "BatchDescribeMergeConflictsOutput"
+      },
+      "errors": [
+        {
+          "shape": "RepositoryNameRequiredException"
+        },
+        {
+          "shape": "InvalidRepositoryNameException"
+        },
+        {
+          "shape": "RepositoryDoesNotExistException"
+        },
+        {
+          "shape": "MergeOptionRequiredException"
+        },
+        {
+          "shape": "InvalidMergeOptionException"
+        },
+        {
+          "shape": "InvalidContinuationTokenException"
+        },
+        {
+          "shape": "CommitRequiredException"
+        },
+        {
+          "shape": "CommitDoesNotExistException"
+        },
+        {
+          "shape": "InvalidCommitException"
+        },
+        {
+          "shape": "TipsDivergenceExceededException"
+        },
+        {
+          "shape": "InvalidMaxConflictFilesException"
+        },
+        {
+          "shape": "InvalidMaxMergeHunksException"
+        },
+        {
+          "shape": "InvalidConflictDetailLevelException"
+        },
+        {
+          "shape": "InvalidConflictResolutionStrategyException"
+        },
+        {
+          "shape": "MaximumFileContentToLoadExceededException"
+        },
+        {
+          "shape": "EncryptionIntegrityChecksFailedException"
+        },
+        {
+          "shape": "EncryptionKeyAccessDeniedException"
+        },
+        {
+          "shape": "EncryptionKeyDisabledException"
+        },
+        {
+          "shape": "EncryptionKeyNotFoundException"
+        },
+        {
+          "shape": "EncryptionKeyUnavailableException"
+        }
+      ],
+      "documentation": "<p>Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy.</p>"
+    },
     "BatchGetRepositories": {
       "name": "BatchGetRepositories",
       "http": {
@@ -387,6 +463,124 @@
       ],
       "documentation": "<p>Creates a new, empty repository.</p>"
     },
+    "CreateUnreferencedMergeCommit": {
+      "name": "CreateUnreferencedMergeCommit",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateUnreferencedMergeCommitInput"
+      },
+      "output": {
+        "shape": "CreateUnreferencedMergeCommitOutput"
+      },
+      "errors": [
+        {
+          "shape": "RepositoryNameRequiredException"
+        },
+        {
+          "shape": "InvalidRepositoryNameException"
+        },
+        {
+          "shape": "RepositoryDoesNotExistException"
+        },
+        {
+          "shape": "TipsDivergenceExceededException"
+        },
+        {
+          "shape": "CommitRequiredException"
+        },
+        {
+          "shape": "InvalidCommitException"
+        },
+        {
+          "shape": "CommitDoesNotExistException"
+        },
+        {
+          "shape": "MergeOptionRequiredException"
+        },
+        {
+          "shape": "InvalidMergeOptionException"
+        },
+        {
+          "shape": "InvalidConflictDetailLevelException"
+        },
+        {
+          "shape": "InvalidConflictResolutionStrategyException"
+        },
+        {
+          "shape": "InvalidConflictResolutionException"
+        },
+        {
+          "shape": "ManualMergeRequiredException"
+        },
+        {
+          "shape": "MaximumConflictResolutionEntriesExceededException"
+        },
+        {
+          "shape": "MultipleConflictResolutionEntriesException"
+        },
+        {
+          "shape": "ReplacementTypeRequiredException"
+        },
+        {
+          "shape": "InvalidReplacementTypeException"
+        },
+        {
+          "shape": "ReplacementContentRequiredException"
+        },
+        {
+          "shape": "InvalidReplacementContentException"
+        },
+        {
+          "shape": "PathRequiredException"
+        },
+        {
+          "shape": "InvalidPathException"
+        },
+        {
+          "shape": "FileContentSizeLimitExceededException"
+        },
+        {
+          "shape": "FolderContentSizeLimitExceededException"
+        },
+        {
+          "shape": "MaximumFileContentToLoadExceededException"
+        },
+        {
+          "shape": "FileModeRequiredException"
+        },
+        {
+          "shape": "InvalidFileModeException"
+        },
+        {
+          "shape": "NameLengthExceededException"
+        },
+        {
+          "shape": "InvalidEmailException"
+        },
+        {
+          "shape": "CommitMessageLengthExceededException"
+        },
+        {
+          "shape": "EncryptionIntegrityChecksFailedException"
+        },
+        {
+          "shape": "EncryptionKeyAccessDeniedException"
+        },
+        {
+          "shape": "EncryptionKeyDisabledException"
+        },
+        {
+          "shape": "EncryptionKeyNotFoundException"
+        },
+        {
+          "shape": "EncryptionKeyUnavailableException"
+        }
+      ],
+      "documentation": "<p>Creates an unerferenced commit that represents the result of merging two branches using a specified merge strategy. This can help you determine the outcome of a potential merge. </p> <note> <p>This unreferenced merge commit can only be accessed using the GetCommit API or through git commands such as git fetch. To retrieve this commit, you must specify its commit ID or otherwise reference it.</p> </note>"
+    },
     "DeleteBranch": {
       "name": "DeleteBranch",
       "http": {
@@ -582,6 +776,88 @@
         }
       ],
       "documentation": "<p>Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned.</p> <important> <p>Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail.</p> </important>"
+    },
+    "DescribeMergeConflicts": {
+      "name": "DescribeMergeConflicts",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeMergeConflictsInput"
+      },
+      "output": {
+        "shape": "DescribeMergeConflictsOutput"
+      },
+      "errors": [
+        {
+          "shape": "RepositoryNameRequiredException"
+        },
+        {
+          "shape": "InvalidRepositoryNameException"
+        },
+        {
+          "shape": "RepositoryDoesNotExistException"
+        },
+        {
+          "shape": "MergeOptionRequiredException"
+        },
+        {
+          "shape": "InvalidMergeOptionException"
+        },
+        {
+          "shape": "InvalidContinuationTokenException"
+        },
+        {
+          "shape": "CommitRequiredException"
+        },
+        {
+          "shape": "CommitDoesNotExistException"
+        },
+        {
+          "shape": "InvalidCommitException"
+        },
+        {
+          "shape": "TipsDivergenceExceededException"
+        },
+        {
+          "shape": "PathRequiredException"
+        },
+        {
+          "shape": "InvalidPathException"
+        },
+        {
+          "shape": "FileDoesNotExistException"
+        },
+        {
+          "shape": "InvalidMaxMergeHunksException"
+        },
+        {
+          "shape": "InvalidConflictDetailLevelException"
+        },
+        {
+          "shape": "InvalidConflictResolutionStrategyException"
+        },
+        {
+          "shape": "MaximumFileContentToLoadExceededException"
+        },
+        {
+          "shape": "EncryptionIntegrityChecksFailedException"
+        },
+        {
+          "shape": "EncryptionKeyAccessDeniedException"
+        },
+        {
+          "shape": "EncryptionKeyDisabledException"
+        },
+        {
+          "shape": "EncryptionKeyNotFoundException"
+        },
+        {
+          "shape": "EncryptionKeyUnavailableException"
+        }
+      ],
+      "documentation": "<p>Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy. If the merge option for the attempted merge is specified as FAST_FORWARD_MERGE, an exception will be thrown.</p>"
     },
     "DescribePullRequestEvents": {
       "name": "DescribePullRequestEvents",
@@ -1115,6 +1391,61 @@
       ],
       "documentation": "<p>Returns the contents of a specified folder in a repository.</p>"
     },
+    "GetMergeCommit": {
+      "name": "GetMergeCommit",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetMergeCommitInput"
+      },
+      "output": {
+        "shape": "GetMergeCommitOutput"
+      },
+      "errors": [
+        {
+          "shape": "RepositoryNameRequiredException"
+        },
+        {
+          "shape": "InvalidRepositoryNameException"
+        },
+        {
+          "shape": "RepositoryDoesNotExistException"
+        },
+        {
+          "shape": "CommitRequiredException"
+        },
+        {
+          "shape": "InvalidCommitException"
+        },
+        {
+          "shape": "CommitDoesNotExistException"
+        },
+        {
+          "shape": "InvalidConflictDetailLevelException"
+        },
+        {
+          "shape": "InvalidConflictResolutionStrategyException"
+        },
+        {
+          "shape": "EncryptionIntegrityChecksFailedException"
+        },
+        {
+          "shape": "EncryptionKeyAccessDeniedException"
+        },
+        {
+          "shape": "EncryptionKeyDisabledException"
+        },
+        {
+          "shape": "EncryptionKeyNotFoundException"
+        },
+        {
+          "shape": "EncryptionKeyUnavailableException"
+        }
+      ],
+      "documentation": "<p>Returns information about a specified merge commit.</p>"
+    },
     "GetMergeConflicts": {
       "name": "GetMergeConflicts",
       "http": {
@@ -1144,10 +1475,7 @@
           "shape": "InvalidMergeOptionException"
         },
         {
-          "shape": "InvalidDestinationCommitSpecifierException"
-        },
-        {
-          "shape": "InvalidSourceCommitSpecifierException"
+          "shape": "InvalidContinuationTokenException"
         },
         {
           "shape": "CommitRequiredException"
@@ -1160,6 +1488,24 @@
         },
         {
           "shape": "TipsDivergenceExceededException"
+        },
+        {
+          "shape": "InvalidMaxConflictFilesException"
+        },
+        {
+          "shape": "InvalidConflictDetailLevelException"
+        },
+        {
+          "shape": "InvalidDestinationCommitSpecifierException"
+        },
+        {
+          "shape": "InvalidSourceCommitSpecifierException"
+        },
+        {
+          "shape": "InvalidConflictResolutionStrategyException"
+        },
+        {
+          "shape": "MaximumFileContentToLoadExceededException"
         },
         {
           "shape": "EncryptionIntegrityChecksFailedException"
@@ -1178,6 +1524,67 @@
         }
       ],
       "documentation": "<p>Returns information about merge conflicts between the before and after commit IDs for a pull request in a repository.</p>"
+    },
+    "GetMergeOptions": {
+      "name": "GetMergeOptions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetMergeOptionsInput"
+      },
+      "output": {
+        "shape": "GetMergeOptionsOutput"
+      },
+      "errors": [
+        {
+          "shape": "RepositoryNameRequiredException"
+        },
+        {
+          "shape": "InvalidRepositoryNameException"
+        },
+        {
+          "shape": "RepositoryDoesNotExistException"
+        },
+        {
+          "shape": "CommitRequiredException"
+        },
+        {
+          "shape": "CommitDoesNotExistException"
+        },
+        {
+          "shape": "InvalidCommitException"
+        },
+        {
+          "shape": "TipsDivergenceExceededException"
+        },
+        {
+          "shape": "InvalidConflictDetailLevelException"
+        },
+        {
+          "shape": "InvalidConflictResolutionStrategyException"
+        },
+        {
+          "shape": "MaximumFileContentToLoadExceededException"
+        },
+        {
+          "shape": "EncryptionIntegrityChecksFailedException"
+        },
+        {
+          "shape": "EncryptionKeyAccessDeniedException"
+        },
+        {
+          "shape": "EncryptionKeyDisabledException"
+        },
+        {
+          "shape": "EncryptionKeyNotFoundException"
+        },
+        {
+          "shape": "EncryptionKeyUnavailableException"
+        }
+      ],
+      "documentation": "<p>Returns information about the merge options available for merging two specified branches. For details about why a particular merge option is not available, use GetMergeConflicts or DescribeMergeConflicts.</p>"
     },
     "GetPullRequest": {
       "name": "GetPullRequest",
@@ -1450,6 +1857,330 @@
       ],
       "documentation": "<p>Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeCommit. For a list of valid resources in AWS CodeCommit, see <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats\">CodeCommit Resources and Operations</a> in the AWS CodeCommit User Guide.</p>"
     },
+    "MergeBranchesByFastForward": {
+      "name": "MergeBranchesByFastForward",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "MergeBranchesByFastForwardInput"
+      },
+      "output": {
+        "shape": "MergeBranchesByFastForwardOutput"
+      },
+      "errors": [
+        {
+          "shape": "RepositoryNameRequiredException"
+        },
+        {
+          "shape": "InvalidRepositoryNameException"
+        },
+        {
+          "shape": "RepositoryDoesNotExistException"
+        },
+        {
+          "shape": "TipsDivergenceExceededException"
+        },
+        {
+          "shape": "CommitRequiredException"
+        },
+        {
+          "shape": "InvalidCommitException"
+        },
+        {
+          "shape": "CommitDoesNotExistException"
+        },
+        {
+          "shape": "InvalidTargetBranchException"
+        },
+        {
+          "shape": "InvalidBranchNameException"
+        },
+        {
+          "shape": "BranchNameRequiredException"
+        },
+        {
+          "shape": "BranchNameIsTagNameException"
+        },
+        {
+          "shape": "BranchDoesNotExistException"
+        },
+        {
+          "shape": "ManualMergeRequiredException"
+        },
+        {
+          "shape": "EncryptionIntegrityChecksFailedException"
+        },
+        {
+          "shape": "EncryptionKeyAccessDeniedException"
+        },
+        {
+          "shape": "EncryptionKeyDisabledException"
+        },
+        {
+          "shape": "EncryptionKeyNotFoundException"
+        },
+        {
+          "shape": "EncryptionKeyUnavailableException"
+        }
+      ],
+      "documentation": "<p>Merges two branches using the fast-forward merge strategy.</p>"
+    },
+    "MergeBranchesBySquash": {
+      "name": "MergeBranchesBySquash",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "MergeBranchesBySquashInput"
+      },
+      "output": {
+        "shape": "MergeBranchesBySquashOutput"
+      },
+      "errors": [
+        {
+          "shape": "RepositoryNameRequiredException"
+        },
+        {
+          "shape": "InvalidRepositoryNameException"
+        },
+        {
+          "shape": "RepositoryDoesNotExistException"
+        },
+        {
+          "shape": "TipsDivergenceExceededException"
+        },
+        {
+          "shape": "CommitRequiredException"
+        },
+        {
+          "shape": "InvalidCommitException"
+        },
+        {
+          "shape": "CommitDoesNotExistException"
+        },
+        {
+          "shape": "InvalidTargetBranchException"
+        },
+        {
+          "shape": "InvalidBranchNameException"
+        },
+        {
+          "shape": "BranchNameRequiredException"
+        },
+        {
+          "shape": "BranchNameIsTagNameException"
+        },
+        {
+          "shape": "BranchDoesNotExistException"
+        },
+        {
+          "shape": "ManualMergeRequiredException"
+        },
+        {
+          "shape": "InvalidConflictDetailLevelException"
+        },
+        {
+          "shape": "InvalidConflictResolutionStrategyException"
+        },
+        {
+          "shape": "InvalidConflictResolutionException"
+        },
+        {
+          "shape": "MaximumConflictResolutionEntriesExceededException"
+        },
+        {
+          "shape": "MultipleConflictResolutionEntriesException"
+        },
+        {
+          "shape": "ReplacementTypeRequiredException"
+        },
+        {
+          "shape": "InvalidReplacementTypeException"
+        },
+        {
+          "shape": "ReplacementContentRequiredException"
+        },
+        {
+          "shape": "InvalidReplacementContentException"
+        },
+        {
+          "shape": "PathRequiredException"
+        },
+        {
+          "shape": "InvalidPathException"
+        },
+        {
+          "shape": "FileContentSizeLimitExceededException"
+        },
+        {
+          "shape": "FolderContentSizeLimitExceededException"
+        },
+        {
+          "shape": "MaximumFileContentToLoadExceededException"
+        },
+        {
+          "shape": "FileModeRequiredException"
+        },
+        {
+          "shape": "InvalidFileModeException"
+        },
+        {
+          "shape": "NameLengthExceededException"
+        },
+        {
+          "shape": "InvalidEmailException"
+        },
+        {
+          "shape": "CommitMessageLengthExceededException"
+        },
+        {
+          "shape": "EncryptionIntegrityChecksFailedException"
+        },
+        {
+          "shape": "EncryptionKeyAccessDeniedException"
+        },
+        {
+          "shape": "EncryptionKeyDisabledException"
+        },
+        {
+          "shape": "EncryptionKeyNotFoundException"
+        },
+        {
+          "shape": "EncryptionKeyUnavailableException"
+        }
+      ],
+      "documentation": "<p>Merges two branches using the squash merge strategy.</p>"
+    },
+    "MergeBranchesByThreeWay": {
+      "name": "MergeBranchesByThreeWay",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "MergeBranchesByThreeWayInput"
+      },
+      "output": {
+        "shape": "MergeBranchesByThreeWayOutput"
+      },
+      "errors": [
+        {
+          "shape": "RepositoryNameRequiredException"
+        },
+        {
+          "shape": "InvalidRepositoryNameException"
+        },
+        {
+          "shape": "RepositoryDoesNotExistException"
+        },
+        {
+          "shape": "TipsDivergenceExceededException"
+        },
+        {
+          "shape": "CommitRequiredException"
+        },
+        {
+          "shape": "InvalidCommitException"
+        },
+        {
+          "shape": "CommitDoesNotExistException"
+        },
+        {
+          "shape": "InvalidTargetBranchException"
+        },
+        {
+          "shape": "InvalidBranchNameException"
+        },
+        {
+          "shape": "BranchNameRequiredException"
+        },
+        {
+          "shape": "BranchNameIsTagNameException"
+        },
+        {
+          "shape": "BranchDoesNotExistException"
+        },
+        {
+          "shape": "ManualMergeRequiredException"
+        },
+        {
+          "shape": "InvalidConflictDetailLevelException"
+        },
+        {
+          "shape": "InvalidConflictResolutionStrategyException"
+        },
+        {
+          "shape": "InvalidConflictResolutionException"
+        },
+        {
+          "shape": "MaximumConflictResolutionEntriesExceededException"
+        },
+        {
+          "shape": "MultipleConflictResolutionEntriesException"
+        },
+        {
+          "shape": "ReplacementTypeRequiredException"
+        },
+        {
+          "shape": "InvalidReplacementTypeException"
+        },
+        {
+          "shape": "ReplacementContentRequiredException"
+        },
+        {
+          "shape": "InvalidReplacementContentException"
+        },
+        {
+          "shape": "PathRequiredException"
+        },
+        {
+          "shape": "InvalidPathException"
+        },
+        {
+          "shape": "FileContentSizeLimitExceededException"
+        },
+        {
+          "shape": "FolderContentSizeLimitExceededException"
+        },
+        {
+          "shape": "MaximumFileContentToLoadExceededException"
+        },
+        {
+          "shape": "FileModeRequiredException"
+        },
+        {
+          "shape": "InvalidFileModeException"
+        },
+        {
+          "shape": "NameLengthExceededException"
+        },
+        {
+          "shape": "InvalidEmailException"
+        },
+        {
+          "shape": "CommitMessageLengthExceededException"
+        },
+        {
+          "shape": "EncryptionIntegrityChecksFailedException"
+        },
+        {
+          "shape": "EncryptionKeyAccessDeniedException"
+        },
+        {
+          "shape": "EncryptionKeyDisabledException"
+        },
+        {
+          "shape": "EncryptionKeyNotFoundException"
+        },
+        {
+          "shape": "EncryptionKeyUnavailableException"
+        }
+      ],
+      "documentation": "<p>Merges two specified branches using the three-way merge strategy.</p>"
+    },
     "MergePullRequestByFastForward": {
       "name": "MergePullRequestByFastForward",
       "http": {
@@ -1488,6 +2219,9 @@
           "shape": "InvalidCommitIdException"
         },
         {
+          "shape": "RepositoryNotAssociatedWithPullRequestException"
+        },
+        {
           "shape": "RepositoryNameRequiredException"
         },
         {
@@ -1512,7 +2246,249 @@
           "shape": "EncryptionKeyUnavailableException"
         }
       ],
-      "documentation": "<p>Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge option.</p>"
+      "documentation": "<p>Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge strategy.</p>"
+    },
+    "MergePullRequestBySquash": {
+      "name": "MergePullRequestBySquash",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "MergePullRequestBySquashInput"
+      },
+      "output": {
+        "shape": "MergePullRequestBySquashOutput"
+      },
+      "errors": [
+        {
+          "shape": "PullRequestAlreadyClosedException"
+        },
+        {
+          "shape": "PullRequestDoesNotExistException"
+        },
+        {
+          "shape": "PullRequestIdRequiredException"
+        },
+        {
+          "shape": "InvalidPullRequestIdException"
+        },
+        {
+          "shape": "InvalidCommitIdException"
+        },
+        {
+          "shape": "ManualMergeRequiredException"
+        },
+        {
+          "shape": "TipOfSourceReferenceIsDifferentException"
+        },
+        {
+          "shape": "TipsDivergenceExceededException"
+        },
+        {
+          "shape": "NameLengthExceededException"
+        },
+        {
+          "shape": "InvalidEmailException"
+        },
+        {
+          "shape": "CommitMessageLengthExceededException"
+        },
+        {
+          "shape": "InvalidConflictDetailLevelException"
+        },
+        {
+          "shape": "InvalidConflictResolutionStrategyException"
+        },
+        {
+          "shape": "InvalidConflictResolutionException"
+        },
+        {
+          "shape": "ReplacementTypeRequiredException"
+        },
+        {
+          "shape": "InvalidReplacementTypeException"
+        },
+        {
+          "shape": "MultipleConflictResolutionEntriesException"
+        },
+        {
+          "shape": "ReplacementContentRequiredException"
+        },
+        {
+          "shape": "MaximumConflictResolutionEntriesExceededException"
+        },
+        {
+          "shape": "PathRequiredException"
+        },
+        {
+          "shape": "InvalidPathException"
+        },
+        {
+          "shape": "InvalidFileModeException"
+        },
+        {
+          "shape": "InvalidReplacementContentException"
+        },
+        {
+          "shape": "FileContentSizeLimitExceededException"
+        },
+        {
+          "shape": "FolderContentSizeLimitExceededException"
+        },
+        {
+          "shape": "MaximumFileContentToLoadExceededException"
+        },
+        {
+          "shape": "RepositoryNameRequiredException"
+        },
+        {
+          "shape": "InvalidRepositoryNameException"
+        },
+        {
+          "shape": "RepositoryDoesNotExistException"
+        },
+        {
+          "shape": "RepositoryNotAssociatedWithPullRequestException"
+        },
+        {
+          "shape": "EncryptionIntegrityChecksFailedException"
+        },
+        {
+          "shape": "EncryptionKeyAccessDeniedException"
+        },
+        {
+          "shape": "EncryptionKeyDisabledException"
+        },
+        {
+          "shape": "EncryptionKeyNotFoundException"
+        },
+        {
+          "shape": "EncryptionKeyUnavailableException"
+        }
+      ],
+      "documentation": "<p>Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the squash merge strategy.</p>"
+    },
+    "MergePullRequestByThreeWay": {
+      "name": "MergePullRequestByThreeWay",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "MergePullRequestByThreeWayInput"
+      },
+      "output": {
+        "shape": "MergePullRequestByThreeWayOutput"
+      },
+      "errors": [
+        {
+          "shape": "PullRequestAlreadyClosedException"
+        },
+        {
+          "shape": "PullRequestDoesNotExistException"
+        },
+        {
+          "shape": "PullRequestIdRequiredException"
+        },
+        {
+          "shape": "InvalidPullRequestIdException"
+        },
+        {
+          "shape": "InvalidCommitIdException"
+        },
+        {
+          "shape": "ManualMergeRequiredException"
+        },
+        {
+          "shape": "TipOfSourceReferenceIsDifferentException"
+        },
+        {
+          "shape": "TipsDivergenceExceededException"
+        },
+        {
+          "shape": "NameLengthExceededException"
+        },
+        {
+          "shape": "InvalidEmailException"
+        },
+        {
+          "shape": "CommitMessageLengthExceededException"
+        },
+        {
+          "shape": "InvalidConflictDetailLevelException"
+        },
+        {
+          "shape": "InvalidConflictResolutionStrategyException"
+        },
+        {
+          "shape": "InvalidConflictResolutionException"
+        },
+        {
+          "shape": "ReplacementTypeRequiredException"
+        },
+        {
+          "shape": "InvalidReplacementTypeException"
+        },
+        {
+          "shape": "MultipleConflictResolutionEntriesException"
+        },
+        {
+          "shape": "ReplacementContentRequiredException"
+        },
+        {
+          "shape": "MaximumConflictResolutionEntriesExceededException"
+        },
+        {
+          "shape": "PathRequiredException"
+        },
+        {
+          "shape": "InvalidPathException"
+        },
+        {
+          "shape": "InvalidFileModeException"
+        },
+        {
+          "shape": "InvalidReplacementContentException"
+        },
+        {
+          "shape": "FileContentSizeLimitExceededException"
+        },
+        {
+          "shape": "FolderContentSizeLimitExceededException"
+        },
+        {
+          "shape": "MaximumFileContentToLoadExceededException"
+        },
+        {
+          "shape": "RepositoryNameRequiredException"
+        },
+        {
+          "shape": "InvalidRepositoryNameException"
+        },
+        {
+          "shape": "RepositoryDoesNotExistException"
+        },
+        {
+          "shape": "RepositoryNotAssociatedWithPullRequestException"
+        },
+        {
+          "shape": "EncryptionIntegrityChecksFailedException"
+        },
+        {
+          "shape": "EncryptionKeyAccessDeniedException"
+        },
+        {
+          "shape": "EncryptionKeyDisabledException"
+        },
+        {
+          "shape": "EncryptionKeyNotFoundException"
+        },
+        {
+          "shape": "EncryptionKeyUnavailableException"
+        }
+      ],
+      "documentation": "<p>Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the three-way merge strategy.</p>"
     },
     "PostCommentForComparedCommit": {
       "name": "PostCommentForComparedCommit",
@@ -2359,6 +3335,120 @@
     "Arn": {
       "type": "string"
     },
+    "BatchDescribeMergeConflictsError": {
+      "type": "structure",
+      "required": [
+        "filePath",
+        "exceptionName",
+        "message"
+      ],
+      "members": {
+        "filePath": {
+          "shape": "Path",
+          "documentation": "<p>The path to the file.</p>"
+        },
+        "exceptionName": {
+          "shape": "ExceptionName",
+          "documentation": "<p>The name of the exception.</p>"
+        },
+        "message": {
+          "shape": "Message",
+          "documentation": "<p>The message provided by the exception.</p>"
+        }
+      },
+      "documentation": "<p>Information about errors in a BatchDescribeMergeConflicts operation.</p>"
+    },
+    "BatchDescribeMergeConflictsErrors": {
+      "type": "list",
+      "member": {
+        "shape": "BatchDescribeMergeConflictsError"
+      }
+    },
+    "BatchDescribeMergeConflictsInput": {
+      "type": "structure",
+      "required": [
+        "repositoryName",
+        "destinationCommitSpecifier",
+        "sourceCommitSpecifier",
+        "mergeOption"
+      ],
+      "members": {
+        "repositoryName": {
+          "shape": "RepositoryName",
+          "documentation": "<p>The name of the repository that contains the merge conflicts you want to review.</p>"
+        },
+        "destinationCommitSpecifier": {
+          "shape": "CommitName",
+          "documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.</p>"
+        },
+        "sourceCommitSpecifier": {
+          "shape": "CommitName",
+          "documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.</p>"
+        },
+        "mergeOption": {
+          "shape": "MergeOptionTypeEnum",
+          "documentation": "<p>The merge option or strategy you want to use to merge the code.</p>"
+        },
+        "maxMergeHunks": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of merge hunks to include in the output.</p>"
+        },
+        "maxConflictFiles": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of files to include in the output.</p>"
+        },
+        "filePaths": {
+          "shape": "FilePaths",
+          "documentation": "<p>The path of the target files used to describe the conflicts. If not specified, the default is all conflict files.</p>"
+        },
+        "conflictDetailLevel": {
+          "shape": "ConflictDetailLevelTypeEnum",
+          "documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.</p>"
+        },
+        "conflictResolutionStrategy": {
+          "shape": "ConflictResolutionStrategyTypeEnum",
+          "documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>An enumeration token that when provided in a request, returns the next batch of the results.</p>"
+        }
+      }
+    },
+    "BatchDescribeMergeConflictsOutput": {
+      "type": "structure",
+      "required": [
+        "conflicts",
+        "destinationCommitId",
+        "sourceCommitId"
+      ],
+      "members": {
+        "conflicts": {
+          "shape": "Conflicts",
+          "documentation": "<p>A list of conflicts for each file, including the conflict metadata and the hunks of the differences between the files.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>An enumeration token that can be used in a request to return the next batch of the results.</p>"
+        },
+        "errors": {
+          "shape": "BatchDescribeMergeConflictsErrors",
+          "documentation": "<p>A list of any errors returned while describing the merge conflicts for each file.</p>"
+        },
+        "destinationCommitId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The commit ID of the destination commit specifier that was used in the merge evaluation.</p>"
+        },
+        "sourceCommitId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The commit ID of the source commit specifier that was used in the merge evaluation.</p>"
+        },
+        "baseCommitId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The commit ID of the merge base.</p>"
+        }
+      }
+    },
     "BatchGetRepositoriesInput": {
       "type": "structure",
       "required": [
@@ -2428,6 +3518,9 @@
       "member": {
         "shape": "BranchName"
       }
+    },
+    "CapitalBoolean": {
+      "type": "boolean"
     },
     "ChangeTypeEnum": {
       "type": "string",
@@ -2617,6 +3710,112 @@
     "CommitName": {
       "type": "string"
     },
+    "Conflict": {
+      "type": "structure",
+      "members": {
+        "conflictMetadata": {
+          "shape": "ConflictMetadata",
+          "documentation": "<p>Metadata about a conflict in a merge operation.</p>"
+        },
+        "mergeHunks": {
+          "shape": "MergeHunks",
+          "documentation": "<p>A list of hunks that contain the differences between files or lines causing the conflict.</p>"
+        }
+      },
+      "documentation": "<p>Information about conflicts in a merge operation.</p>"
+    },
+    "ConflictDetailLevelTypeEnum": {
+      "type": "string",
+      "enum": [
+        "FILE_LEVEL",
+        "LINE_LEVEL"
+      ]
+    },
+    "ConflictMetadata": {
+      "type": "structure",
+      "members": {
+        "filePath": {
+          "shape": "Path",
+          "documentation": "<p>The path of the file that contains conflicts.</p>"
+        },
+        "fileSizes": {
+          "shape": "FileSizes",
+          "documentation": "<p>The file sizes of the file in the source, destination, and base of the merge.</p>"
+        },
+        "fileModes": {
+          "shape": "FileModes",
+          "documentation": "<p>The file modes of the file in the source, destination, and base of the merge.</p>"
+        },
+        "objectTypes": {
+          "shape": "ObjectTypes",
+          "documentation": "<p>Information about any object type conflicts in a merge operation.</p>"
+        },
+        "numberOfConflicts": {
+          "shape": "NumberOfConflicts",
+          "documentation": "<p>The number of conflicts, including both hunk conflicts and metadata conflicts.</p>"
+        },
+        "isBinaryFile": {
+          "shape": "IsBinaryFile",
+          "documentation": "<p>A boolean value (true or false) indicating whether the file is binary or textual in the source, destination, and base of the merge.</p>"
+        },
+        "contentConflict": {
+          "shape": "IsContentConflict",
+          "documentation": "<p>A boolean value indicating whether there are conflicts in the content of a file.</p>"
+        },
+        "fileModeConflict": {
+          "shape": "IsFileModeConflict",
+          "documentation": "<p>A boolean value indicating whether there are conflicts in the file mode of a file.</p>"
+        },
+        "objectTypeConflict": {
+          "shape": "IsObjectTypeConflict",
+          "documentation": "<p>A boolean value (true or false) indicating whether there are conflicts in the object type of a file.</p>"
+        },
+        "mergeOperations": {
+          "shape": "MergeOperations",
+          "documentation": "<p>Whether an add, modify, or delete operation caused the conflict between the source and destination of the merge.</p>"
+        }
+      },
+      "documentation": "<p>Information about the metadata for a conflict in a merge operation.</p>"
+    },
+    "ConflictMetadataList": {
+      "type": "list",
+      "member": {
+        "shape": "ConflictMetadata"
+      }
+    },
+    "ConflictResolution": {
+      "type": "structure",
+      "members": {
+        "replaceContents": {
+          "shape": "ReplaceContentEntries",
+          "documentation": "<p>Information about how a conflict in a merge will be resolved.</p>"
+        },
+        "deleteFiles": {
+          "shape": "DeleteFileEntries",
+          "documentation": "<p>Files that will be deleted as part of the merge conflict resolution.</p>"
+        },
+        "setFileModes": {
+          "shape": "SetFileModeEntries",
+          "documentation": "<p>File modes that will be set as part of the merge conflict resolution.</p>"
+        }
+      },
+      "documentation": "<p>A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.</p>"
+    },
+    "ConflictResolutionStrategyTypeEnum": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "ACCEPT_SOURCE",
+        "ACCEPT_DESTINATION",
+        "AUTOMERGE"
+      ]
+    },
+    "Conflicts": {
+      "type": "list",
+      "member": {
+        "shape": "Conflict"
+      }
+    },
     "Content": {
       "type": "string"
     },
@@ -2676,7 +3875,7 @@
         },
         "keepEmptyFolders": {
           "shape": "KeepEmptyFolders",
-          "documentation": "<p>If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders.</p>"
+          "documentation": "<p>If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.</p>"
         },
         "putFiles": {
           "shape": "PutFileEntries",
@@ -2785,6 +3984,74 @@
         }
       },
       "documentation": "<p>Represents the output of a create repository operation.</p>"
+    },
+    "CreateUnreferencedMergeCommitInput": {
+      "type": "structure",
+      "required": [
+        "repositoryName",
+        "sourceCommitSpecifier",
+        "destinationCommitSpecifier",
+        "mergeOption"
+      ],
+      "members": {
+        "repositoryName": {
+          "shape": "RepositoryName",
+          "documentation": "<p>The name of the repository where you want to create the unreferenced merge commit.</p>"
+        },
+        "sourceCommitSpecifier": {
+          "shape": "CommitName",
+          "documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.</p>"
+        },
+        "destinationCommitSpecifier": {
+          "shape": "CommitName",
+          "documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.</p>"
+        },
+        "mergeOption": {
+          "shape": "MergeOptionTypeEnum",
+          "documentation": "<p>The merge option or strategy you want to use to merge the code.</p>"
+        },
+        "conflictDetailLevel": {
+          "shape": "ConflictDetailLevelTypeEnum",
+          "documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.</p>"
+        },
+        "conflictResolutionStrategy": {
+          "shape": "ConflictResolutionStrategyTypeEnum",
+          "documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.</p>"
+        },
+        "authorName": {
+          "shape": "Name",
+          "documentation": "<p>The name of the author who created the unreferenced commit. This information will be used as both the author and committer for the commit.</p>"
+        },
+        "email": {
+          "shape": "Email",
+          "documentation": "<p>The email address for the person who created the unreferenced commit.</p>"
+        },
+        "commitMessage": {
+          "shape": "Message",
+          "documentation": "<p>The commit message for the unreferenced commit.</p>"
+        },
+        "keepEmptyFolders": {
+          "shape": "KeepEmptyFolders",
+          "documentation": "<p>If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.</p>"
+        },
+        "conflictResolution": {
+          "shape": "ConflictResolution",
+          "documentation": "<p>A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.</p>"
+        }
+      }
+    },
+    "CreateUnreferencedMergeCommitOutput": {
+      "type": "structure",
+      "members": {
+        "commitId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The full commit ID of the commit that contains your merge results.</p>"
+        },
+        "treeId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The full SHA-1 pointer of the tree information for the commit that contains the merge results.</p>"
+        }
+      }
     },
     "CreationDate": {
       "type": "timestamp"
@@ -2953,6 +4220,89 @@
       },
       "documentation": "<p>Represents the output of a delete repository operation.</p>"
     },
+    "DescribeMergeConflictsInput": {
+      "type": "structure",
+      "required": [
+        "repositoryName",
+        "destinationCommitSpecifier",
+        "sourceCommitSpecifier",
+        "mergeOption",
+        "filePath"
+      ],
+      "members": {
+        "repositoryName": {
+          "shape": "RepositoryName",
+          "documentation": "<p>The name of the repository where you want to get information about a merge conflict.</p>"
+        },
+        "destinationCommitSpecifier": {
+          "shape": "CommitName",
+          "documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.</p>"
+        },
+        "sourceCommitSpecifier": {
+          "shape": "CommitName",
+          "documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.</p>"
+        },
+        "mergeOption": {
+          "shape": "MergeOptionTypeEnum",
+          "documentation": "<p>The merge option or strategy you want to use to merge the code.</p>"
+        },
+        "maxMergeHunks": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of merge hunks to include in the output.</p>"
+        },
+        "filePath": {
+          "shape": "Path",
+          "documentation": "<p>The path of the target files used to describe the conflicts. </p>"
+        },
+        "conflictDetailLevel": {
+          "shape": "ConflictDetailLevelTypeEnum",
+          "documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.</p>"
+        },
+        "conflictResolutionStrategy": {
+          "shape": "ConflictResolutionStrategyTypeEnum",
+          "documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>An enumeration token that when provided in a request, returns the next batch of the results.</p>"
+        }
+      }
+    },
+    "DescribeMergeConflictsOutput": {
+      "type": "structure",
+      "required": [
+        "conflictMetadata",
+        "mergeHunks",
+        "destinationCommitId",
+        "sourceCommitId"
+      ],
+      "members": {
+        "conflictMetadata": {
+          "shape": "ConflictMetadata",
+          "documentation": "<p>Contains metadata about the conflicts found in the merge.</p>"
+        },
+        "mergeHunks": {
+          "shape": "MergeHunks",
+          "documentation": "<p>A list of merge hunks of the differences between the files or lines.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>An enumeration token that can be used in a request to return the next batch of the results.</p>"
+        },
+        "destinationCommitId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The commit ID of the destination commit specifier that was used in the merge evaluation.</p>"
+        },
+        "sourceCommitId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The commit ID of the source commit specifier that was used in the merge evaluation.</p>"
+        },
+        "baseCommitId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The commit ID of the merge base.</p>"
+        }
+      }
+    },
     "DescribePullRequestEventsInput": {
       "type": "structure",
       "required": [
@@ -3031,6 +4381,9 @@
     "EventDate": {
       "type": "timestamp"
     },
+    "ExceptionName": {
+      "type": "string"
+    },
     "File": {
       "type": "structure",
       "members": {
@@ -3088,6 +4441,51 @@
         "NORMAL",
         "SYMLINK"
       ]
+    },
+    "FileModes": {
+      "type": "structure",
+      "members": {
+        "source": {
+          "shape": "FileModeTypeEnum",
+          "documentation": "<p>The file mode of a file in the source of a merge or pull request.</p>"
+        },
+        "destination": {
+          "shape": "FileModeTypeEnum",
+          "documentation": "<p>The file mode of a file in the destination of a merge or pull request.</p>"
+        },
+        "base": {
+          "shape": "FileModeTypeEnum",
+          "documentation": "<p>The file mode of a file in the base of a merge or pull request.</p>"
+        }
+      },
+      "documentation": "<p>Information about file modes in a merge or pull request.</p>"
+    },
+    "FilePaths": {
+      "type": "list",
+      "member": {
+        "shape": "Path"
+      }
+    },
+    "FileSize": {
+      "type": "long"
+    },
+    "FileSizes": {
+      "type": "structure",
+      "members": {
+        "source": {
+          "shape": "FileSize",
+          "documentation": "<p>The size of a file in the source of a merge or pull request.</p>"
+        },
+        "destination": {
+          "shape": "FileSize",
+          "documentation": "<p>The size of a file in the destination of a merge or pull request.</p>"
+        },
+        "base": {
+          "shape": "FileSize",
+          "documentation": "<p>The size of a file in the base of a merge or pull request.</p>"
+        }
+      },
+      "documentation": "<p>Information about the size of files in a merge or pull request.</p>"
     },
     "FilesMetadata": {
       "type": "list",
@@ -3479,6 +4877,57 @@
         }
       }
     },
+    "GetMergeCommitInput": {
+      "type": "structure",
+      "required": [
+        "repositoryName",
+        "sourceCommitSpecifier",
+        "destinationCommitSpecifier"
+      ],
+      "members": {
+        "repositoryName": {
+          "shape": "RepositoryName",
+          "documentation": "<p>The name of the repository that contains the merge commit about which you want to get information.</p>"
+        },
+        "sourceCommitSpecifier": {
+          "shape": "CommitName",
+          "documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.</p>"
+        },
+        "destinationCommitSpecifier": {
+          "shape": "CommitName",
+          "documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.</p>"
+        },
+        "conflictDetailLevel": {
+          "shape": "ConflictDetailLevelTypeEnum",
+          "documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.</p>"
+        },
+        "conflictResolutionStrategy": {
+          "shape": "ConflictResolutionStrategyTypeEnum",
+          "documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.</p>"
+        }
+      }
+    },
+    "GetMergeCommitOutput": {
+      "type": "structure",
+      "members": {
+        "sourceCommitId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The commit ID of the source commit specifier that was used in the merge evaluation.</p>"
+        },
+        "destinationCommitId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The commit ID of the destination commit specifier that was used in the merge evaluation.</p>"
+        },
+        "baseCommitId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The commit ID of the merge base.</p>"
+        },
+        "mergedCommitId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The commit ID for the merge commit created when the source branch was merged into the destination branch. If the fast-forward merge strategy was used, no merge commit exists.</p>"
+        }
+      }
+    },
     "GetMergeConflictsInput": {
       "type": "structure",
       "required": [
@@ -3502,7 +4951,23 @@
         },
         "mergeOption": {
           "shape": "MergeOptionTypeEnum",
-          "documentation": "<p>The merge option or strategy you want to use to merge the code. The only valid value is FAST_FORWARD_MERGE.</p>"
+          "documentation": "<p>The merge option or strategy you want to use to merge the code. </p>"
+        },
+        "conflictDetailLevel": {
+          "shape": "ConflictDetailLevelTypeEnum",
+          "documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.</p>"
+        },
+        "maxConflictFiles": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of files to include in the output.</p>"
+        },
+        "conflictResolutionStrategy": {
+          "shape": "ConflictResolutionStrategyTypeEnum",
+          "documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>An enumeration token that when provided in a request, returns the next batch of the results.</p>"
         }
       }
     },
@@ -3511,20 +4976,90 @@
       "required": [
         "mergeable",
         "destinationCommitId",
-        "sourceCommitId"
+        "sourceCommitId",
+        "conflictMetadataList"
       ],
       "members": {
         "mergeable": {
           "shape": "IsMergeable",
-          "documentation": "<p>A Boolean value that indicates whether the code is mergable by the specified merge option.</p>"
+          "documentation": "<p>A Boolean value that indicates whether the code is mergeable by the specified merge option.</p>"
         },
         "destinationCommitId": {
-          "shape": "CommitId",
+          "shape": "ObjectId",
           "documentation": "<p>The commit ID of the destination commit specifier that was used in the merge evaluation.</p>"
         },
         "sourceCommitId": {
-          "shape": "CommitId",
+          "shape": "ObjectId",
           "documentation": "<p>The commit ID of the source commit specifier that was used in the merge evaluation.</p>"
+        },
+        "baseCommitId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The commit ID of the merge base.</p>"
+        },
+        "conflictMetadataList": {
+          "shape": "ConflictMetadataList",
+          "documentation": "<p>A list of metadata for any conflicts found.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>An enumeration token that can be used in a request to return the next batch of the results.</p>"
+        }
+      }
+    },
+    "GetMergeOptionsInput": {
+      "type": "structure",
+      "required": [
+        "repositoryName",
+        "sourceCommitSpecifier",
+        "destinationCommitSpecifier"
+      ],
+      "members": {
+        "repositoryName": {
+          "shape": "RepositoryName",
+          "documentation": "<p>The name of the repository that contains the commits about which you want to get merge options.</p>"
+        },
+        "sourceCommitSpecifier": {
+          "shape": "CommitName",
+          "documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.</p>"
+        },
+        "destinationCommitSpecifier": {
+          "shape": "CommitName",
+          "documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.</p>"
+        },
+        "conflictDetailLevel": {
+          "shape": "ConflictDetailLevelTypeEnum",
+          "documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.</p>"
+        },
+        "conflictResolutionStrategy": {
+          "shape": "ConflictResolutionStrategyTypeEnum",
+          "documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.</p>"
+        }
+      }
+    },
+    "GetMergeOptionsOutput": {
+      "type": "structure",
+      "required": [
+        "mergeOptions",
+        "sourceCommitId",
+        "destinationCommitId",
+        "baseCommitId"
+      ],
+      "members": {
+        "mergeOptions": {
+          "shape": "MergeOptions",
+          "documentation": "<p>The merge option or strategy used to merge the code.</p>"
+        },
+        "sourceCommitId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The commit ID of the source commit specifier that was used in the merge evaluation.</p>"
+        },
+        "destinationCommitId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The commit ID of the destination commit specifier that was used in the merge evaluation.</p>"
+        },
+        "baseCommitId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The commit ID of the merge base.</p>"
         }
       }
     },
@@ -3602,7 +5137,37 @@
       },
       "documentation": "<p>Represents the output of a get repository triggers operation.</p>"
     },
+    "HunkContent": {
+      "type": "string"
+    },
+    "IsBinaryFile": {
+      "type": "structure",
+      "members": {
+        "source": {
+          "shape": "CapitalBoolean",
+          "documentation": "<p>The binary or non-binary status of file in the source of a merge or pull request.</p>"
+        },
+        "destination": {
+          "shape": "CapitalBoolean",
+          "documentation": "<p>The binary or non-binary status of a file in the destination of a merge or pull request.</p>"
+        },
+        "base": {
+          "shape": "CapitalBoolean",
+          "documentation": "<p>The binary or non-binary status of a file in the base of a merge or pull request.</p>"
+        }
+      },
+      "documentation": "<p>Information about whether a file is binary or textual in a merge or pull request operation.</p>"
+    },
     "IsCommentDeleted": {
+      "type": "boolean"
+    },
+    "IsContentConflict": {
+      "type": "boolean"
+    },
+    "IsFileModeConflict": {
+      "type": "boolean"
+    },
+    "IsHunkConflict": {
       "type": "boolean"
     },
     "IsMergeable": {
@@ -3614,6 +5179,9 @@
     "IsMove": {
       "type": "boolean"
     },
+    "IsObjectTypeConflict": {
+      "type": "boolean"
+    },
     "KeepEmptyFolders": {
       "type": "boolean"
     },
@@ -3623,6 +5191,9 @@
     "Limit": {
       "type": "integer",
       "box": true
+    },
+    "LineNumber": {
+      "type": "integer"
     },
     "ListBranchesInput": {
       "type": "structure",
@@ -3781,6 +5352,225 @@
     "MaxResults": {
       "type": "integer"
     },
+    "MergeBranchesByFastForwardInput": {
+      "type": "structure",
+      "required": [
+        "repositoryName",
+        "sourceCommitSpecifier",
+        "destinationCommitSpecifier"
+      ],
+      "members": {
+        "repositoryName": {
+          "shape": "RepositoryName",
+          "documentation": "<p>The name of the repository where you want to merge two branches.</p>"
+        },
+        "sourceCommitSpecifier": {
+          "shape": "CommitName",
+          "documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.</p>"
+        },
+        "destinationCommitSpecifier": {
+          "shape": "CommitName",
+          "documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.</p>"
+        },
+        "targetBranch": {
+          "shape": "BranchName",
+          "documentation": "<p>The branch where the merge will be applied.</p>"
+        }
+      }
+    },
+    "MergeBranchesByFastForwardOutput": {
+      "type": "structure",
+      "members": {
+        "commitId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The commit ID of the merge in the destination or target branch.</p>"
+        },
+        "treeId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The tree ID of the merge in the destination or target branch.</p>"
+        }
+      }
+    },
+    "MergeBranchesBySquashInput": {
+      "type": "structure",
+      "required": [
+        "repositoryName",
+        "sourceCommitSpecifier",
+        "destinationCommitSpecifier"
+      ],
+      "members": {
+        "repositoryName": {
+          "shape": "RepositoryName",
+          "documentation": "<p>The name of the repository where you want to merge two branches.</p>"
+        },
+        "sourceCommitSpecifier": {
+          "shape": "CommitName",
+          "documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.</p>"
+        },
+        "destinationCommitSpecifier": {
+          "shape": "CommitName",
+          "documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.</p>"
+        },
+        "targetBranch": {
+          "shape": "BranchName",
+          "documentation": "<p>The branch where the merge will be applied. </p>"
+        },
+        "conflictDetailLevel": {
+          "shape": "ConflictDetailLevelTypeEnum",
+          "documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.</p>"
+        },
+        "conflictResolutionStrategy": {
+          "shape": "ConflictResolutionStrategyTypeEnum",
+          "documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.</p>"
+        },
+        "authorName": {
+          "shape": "Name",
+          "documentation": "<p>The name of the author who created the commit. This information will be used as both the author and committer for the commit.</p>"
+        },
+        "email": {
+          "shape": "Email",
+          "documentation": "<p>The email address of the person merging the branches. This information will be used in the commit information for the merge.</p>"
+        },
+        "commitMessage": {
+          "shape": "Message",
+          "documentation": "<p>The commit message for the merge.</p>"
+        },
+        "keepEmptyFolders": {
+          "shape": "KeepEmptyFolders",
+          "documentation": "<p>If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.</p>"
+        },
+        "conflictResolution": {
+          "shape": "ConflictResolution",
+          "documentation": "<p>A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.</p>"
+        }
+      }
+    },
+    "MergeBranchesBySquashOutput": {
+      "type": "structure",
+      "members": {
+        "commitId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The commit ID of the merge in the destination or target branch.</p>"
+        },
+        "treeId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The tree ID of the merge in the destination or target branch.</p>"
+        }
+      }
+    },
+    "MergeBranchesByThreeWayInput": {
+      "type": "structure",
+      "required": [
+        "repositoryName",
+        "sourceCommitSpecifier",
+        "destinationCommitSpecifier"
+      ],
+      "members": {
+        "repositoryName": {
+          "shape": "RepositoryName",
+          "documentation": "<p>The name of the repository where you want to merge two branches.</p>"
+        },
+        "sourceCommitSpecifier": {
+          "shape": "CommitName",
+          "documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.</p>"
+        },
+        "destinationCommitSpecifier": {
+          "shape": "CommitName",
+          "documentation": "<p>The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.</p>"
+        },
+        "targetBranch": {
+          "shape": "BranchName",
+          "documentation": "<p>The branch where the merge will be applied. </p>"
+        },
+        "conflictDetailLevel": {
+          "shape": "ConflictDetailLevelTypeEnum",
+          "documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.</p>"
+        },
+        "conflictResolutionStrategy": {
+          "shape": "ConflictResolutionStrategyTypeEnum",
+          "documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.</p>"
+        },
+        "authorName": {
+          "shape": "Name",
+          "documentation": "<p>The name of the author who created the commit. This information will be used as both the author and committer for the commit.</p>"
+        },
+        "email": {
+          "shape": "Email",
+          "documentation": "<p>The email address of the person merging the branches. This information will be used in the commit information for the merge.</p>"
+        },
+        "commitMessage": {
+          "shape": "Message",
+          "documentation": "<p>The commit message to include in the commit information for the merge.</p>"
+        },
+        "keepEmptyFolders": {
+          "shape": "KeepEmptyFolders",
+          "documentation": "<p>If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.</p>"
+        },
+        "conflictResolution": {
+          "shape": "ConflictResolution",
+          "documentation": "<p>A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.</p>"
+        }
+      }
+    },
+    "MergeBranchesByThreeWayOutput": {
+      "type": "structure",
+      "members": {
+        "commitId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The commit ID of the merge in the destination or target branch.</p>"
+        },
+        "treeId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The tree ID of the merge in the destination or target branch.</p>"
+        }
+      }
+    },
+    "MergeHunk": {
+      "type": "structure",
+      "members": {
+        "isConflict": {
+          "shape": "IsHunkConflict",
+          "documentation": "<p>A Boolean value indicating whether a combination of hunks contains a conflict. Conflicts occur when the same file or the same lines in a file were modified in both the source and destination of a merge or pull request. Valid values include true, false, and null.</p>"
+        },
+        "source": {
+          "shape": "MergeHunkDetail",
+          "documentation": "<p>Information about the merge hunk in the source of a merge or pull request.</p>"
+        },
+        "destination": {
+          "shape": "MergeHunkDetail",
+          "documentation": "<p>Information about the merge hunk in the destination of a merge or pull request.</p>"
+        },
+        "base": {
+          "shape": "MergeHunkDetail",
+          "documentation": "<p>Information about the merge hunk in the base of a merge or pull request.</p>"
+        }
+      },
+      "documentation": "<p>Information about merge hunks in a merge or pull request operation.</p>"
+    },
+    "MergeHunkDetail": {
+      "type": "structure",
+      "members": {
+        "startLine": {
+          "shape": "LineNumber",
+          "documentation": "<p>The line number where a merge conflict begins.</p>"
+        },
+        "endLine": {
+          "shape": "LineNumber",
+          "documentation": "<p>The line number where a merge conflict ends.</p>"
+        },
+        "hunkContent": {
+          "shape": "HunkContent",
+          "documentation": "<p>The base-64 encoded content of the hunk that contains the conflict.</p>"
+        }
+      },
+      "documentation": "<p>Information about the details of a merge hunk that contains a conflict in a merge or pull request operation.</p>"
+    },
+    "MergeHunks": {
+      "type": "list",
+      "member": {
+        "shape": "MergeHunk"
+      }
+    },
     "MergeMetadata": {
       "type": "structure",
       "members": {
@@ -3791,15 +5581,45 @@
         "mergedBy": {
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the user who merged the branches.</p>"
+        },
+        "mergeCommitId": {
+          "shape": "CommitId",
+          "documentation": "<p>The commit ID for the merge commit, if any.</p>"
+        },
+        "mergeOption": {
+          "shape": "MergeOptionTypeEnum",
+          "documentation": "<p>The merge strategy used in the merge.</p>"
         }
       },
       "documentation": "<p>Returns information about a merge or potential merge between a source reference and a destination reference in a pull request.</p>"
     },
+    "MergeOperations": {
+      "type": "structure",
+      "members": {
+        "source": {
+          "shape": "ChangeTypeEnum",
+          "documentation": "<p>The operation on a file (add, modify, or delete) of a file in the source of a merge or pull request.</p>"
+        },
+        "destination": {
+          "shape": "ChangeTypeEnum",
+          "documentation": "<p>The operation on a file in the destination of a merge or pull request.</p>"
+        }
+      },
+      "documentation": "<p>Information about the file operation conflicts in a merge operation.</p>"
+    },
     "MergeOptionTypeEnum": {
       "type": "string",
       "enum": [
-        "FAST_FORWARD_MERGE"
+        "FAST_FORWARD_MERGE",
+        "SQUASH_MERGE",
+        "THREE_WAY_MERGE"
       ]
+    },
+    "MergeOptions": {
+      "type": "list",
+      "member": {
+        "shape": "MergeOptionTypeEnum"
+      }
     },
     "MergePullRequestByFastForwardInput": {
       "type": "structure",
@@ -3817,7 +5637,7 @@
           "documentation": "<p>The name of the repository where the pull request was created.</p>"
         },
         "sourceCommitId": {
-          "shape": "CommitId",
+          "shape": "ObjectId",
           "documentation": "<p>The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.</p>"
         }
       }
@@ -3828,6 +5648,120 @@
         "pullRequest": {
           "shape": "PullRequest",
           "documentation": "<p>Information about the specified pull request, including information about the merge.</p>"
+        }
+      }
+    },
+    "MergePullRequestBySquashInput": {
+      "type": "structure",
+      "required": [
+        "pullRequestId",
+        "repositoryName"
+      ],
+      "members": {
+        "pullRequestId": {
+          "shape": "PullRequestId",
+          "documentation": "<p>The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.</p>"
+        },
+        "repositoryName": {
+          "shape": "RepositoryName",
+          "documentation": "<p>The name of the repository where the pull request was created.</p>"
+        },
+        "sourceCommitId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.</p>"
+        },
+        "conflictDetailLevel": {
+          "shape": "ConflictDetailLevelTypeEnum",
+          "documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.</p>"
+        },
+        "conflictResolutionStrategy": {
+          "shape": "ConflictResolutionStrategyTypeEnum",
+          "documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.</p>"
+        },
+        "commitMessage": {
+          "shape": "Message",
+          "documentation": "<p>The commit message to include in the commit information for the merge.</p>"
+        },
+        "authorName": {
+          "shape": "Name",
+          "documentation": "<p>The name of the author who created the commit. This information will be used as both the author and committer for the commit.</p>"
+        },
+        "email": {
+          "shape": "Email",
+          "documentation": "<p>The email address of the person merging the branches. This information will be used in the commit information for the merge.</p>"
+        },
+        "keepEmptyFolders": {
+          "shape": "KeepEmptyFolders",
+          "documentation": "<p>If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.</p>"
+        },
+        "conflictResolution": {
+          "shape": "ConflictResolution",
+          "documentation": "<p>A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.</p>"
+        }
+      }
+    },
+    "MergePullRequestBySquashOutput": {
+      "type": "structure",
+      "members": {
+        "pullRequest": {
+          "shape": "PullRequest"
+        }
+      }
+    },
+    "MergePullRequestByThreeWayInput": {
+      "type": "structure",
+      "required": [
+        "pullRequestId",
+        "repositoryName"
+      ],
+      "members": {
+        "pullRequestId": {
+          "shape": "PullRequestId",
+          "documentation": "<p>The system-generated ID of the pull request. To get this ID, use <a>ListPullRequests</a>.</p>"
+        },
+        "repositoryName": {
+          "shape": "RepositoryName",
+          "documentation": "<p>The name of the repository where the pull request was created.</p>"
+        },
+        "sourceCommitId": {
+          "shape": "ObjectId",
+          "documentation": "<p>The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.</p>"
+        },
+        "conflictDetailLevel": {
+          "shape": "ConflictDetailLevelTypeEnum",
+          "documentation": "<p>The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.</p>"
+        },
+        "conflictResolutionStrategy": {
+          "shape": "ConflictResolutionStrategyTypeEnum",
+          "documentation": "<p>Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.</p>"
+        },
+        "commitMessage": {
+          "shape": "Message",
+          "documentation": "<p>The commit message to include in the commit information for the merge.</p>"
+        },
+        "authorName": {
+          "shape": "Name",
+          "documentation": "<p>The name of the author who created the commit. This information will be used as both the author and committer for the commit.</p>"
+        },
+        "email": {
+          "shape": "Email",
+          "documentation": "<p>The email address of the person merging the branches. This information will be used in the commit information for the merge.</p>"
+        },
+        "keepEmptyFolders": {
+          "shape": "KeepEmptyFolders",
+          "documentation": "<p>If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.</p>"
+        },
+        "conflictResolution": {
+          "shape": "ConflictResolution",
+          "documentation": "<p>A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.</p>"
+        }
+      }
+    },
+    "MergePullRequestByThreeWayOutput": {
+      "type": "structure",
+      "members": {
+        "pullRequest": {
+          "shape": "PullRequest"
         }
       }
     },
@@ -3843,11 +5777,41 @@
     "NextToken": {
       "type": "string"
     },
+    "NumberOfConflicts": {
+      "type": "integer"
+    },
     "ObjectId": {
       "type": "string"
     },
     "ObjectSize": {
       "type": "long"
+    },
+    "ObjectTypeEnum": {
+      "type": "string",
+      "enum": [
+        "FILE",
+        "DIRECTORY",
+        "GIT_LINK",
+        "SYMBOLIC_LINK"
+      ]
+    },
+    "ObjectTypes": {
+      "type": "structure",
+      "members": {
+        "source": {
+          "shape": "ObjectTypeEnum",
+          "documentation": "<p>The type of the object in the source branch.</p>"
+        },
+        "destination": {
+          "shape": "ObjectTypeEnum",
+          "documentation": "<p>The type of the object in the destination branch.</p>"
+        },
+        "base": {
+          "shape": "ObjectTypeEnum",
+          "documentation": "<p>The type of the object in the base commit of the merge.</p>"
+        }
+      },
+      "documentation": "<p>Information about the type of an object in a merge operation.</p>"
     },
     "OrderEnum": {
       "type": "string",
@@ -4404,6 +6368,47 @@
       "enum": [
         "BEFORE",
         "AFTER"
+      ]
+    },
+    "ReplaceContentEntries": {
+      "type": "list",
+      "member": {
+        "shape": "ReplaceContentEntry"
+      }
+    },
+    "ReplaceContentEntry": {
+      "type": "structure",
+      "required": [
+        "filePath",
+        "replacementType"
+      ],
+      "members": {
+        "filePath": {
+          "shape": "Path",
+          "documentation": "<p>The path of the conflicting file.</p>"
+        },
+        "replacementType": {
+          "shape": "ReplacementTypeEnum",
+          "documentation": "<p>The replacement type to use when determining how to resolve the conflict.</p>"
+        },
+        "content": {
+          "shape": "FileContent",
+          "documentation": "<p>The base-64 encoded content to use when the replacement type is USE_NEW_CONTENT.</p>"
+        },
+        "fileMode": {
+          "shape": "FileModeTypeEnum",
+          "documentation": "<p>The file mode to apply during conflict resoltion.</p>"
+        }
+      },
+      "documentation": "<p>Information about a replacement content entry in the conflict of a merge or pull request operation.</p>"
+    },
+    "ReplacementTypeEnum": {
+      "type": "string",
+      "enum": [
+        "KEEP_BASE",
+        "KEEP_SOURCE",
+        "KEEP_DESTINATION",
+        "USE_NEW_CONTENT"
       ]
     },
     "RepositoryDescription": {
@@ -5007,5 +7012,5 @@
       "type": "blob"
     }
   },
-  "documentation": "<fullname>AWS CodeCommit</fullname> <p>This is the <i>AWS CodeCommit API Reference</i>. This reference provides descriptions of the operations and data types for AWS CodeCommit API along with usage examples.</p> <p>You can use the AWS CodeCommit API to work with the following objects:</p> <p>Repositories, by calling the following:</p> <ul> <li> <p> <a>BatchGetRepositories</a>, which returns information about one or more repositories associated with your AWS account.</p> </li> <li> <p> <a>CreateRepository</a>, which creates an AWS CodeCommit repository.</p> </li> <li> <p> <a>DeleteRepository</a>, which deletes an AWS CodeCommit repository.</p> </li> <li> <p> <a>GetRepository</a>, which returns information about a specified repository.</p> </li> <li> <p> <a>ListRepositories</a>, which lists all AWS CodeCommit repositories associated with your AWS account.</p> </li> <li> <p> <a>UpdateRepositoryDescription</a>, which sets or updates the description of the repository.</p> </li> <li> <p> <a>UpdateRepositoryName</a>, which changes the name of the repository. If you change the name of a repository, no other users of that repository will be able to access it until you send them the new HTTPS or SSH URL to use.</p> </li> </ul> <p>Branches, by calling the following:</p> <ul> <li> <p> <a>CreateBranch</a>, which creates a new branch in a specified repository.</p> </li> <li> <p> <a>DeleteBranch</a>, which deletes the specified branch in a repository unless it is the default branch.</p> </li> <li> <p> <a>GetBranch</a>, which returns information about a specified branch.</p> </li> <li> <p> <a>ListBranches</a>, which lists all branches for a specified repository.</p> </li> <li> <p> <a>UpdateDefaultBranch</a>, which changes the default branch for a repository.</p> </li> </ul> <p>Files, by calling the following:</p> <ul> <li> <p> <a>DeleteFile</a>, which deletes the content of a specified file from a specified branch.</p> </li> <li> <p> <a>GetFile</a>, which returns the base-64 encoded content of a specified file.</p> </li> <li> <p> <a>GetFolder</a>, which returns the contents of a specified folder or directory.</p> </li> <li> <p> <a>PutFile</a>, which adds or modifies a file in a specified repository and branch.</p> </li> </ul> <p>Information about committed code in a repository, by calling the following:</p> <ul> <li> <p> <a>CreateCommit</a>, which creates a commit for changes to a repository.</p> </li> <li> <p> <a>GetBlob</a>, which returns the base-64 encoded content of an individual Git blob object within a repository.</p> </li> <li> <p> <a>GetCommit</a>, which returns information about a commit, including commit messages and author and committer information.</p> </li> <li> <p> <a>GetDifferences</a>, which returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference).</p> </li> </ul> <p>Pull requests, by calling the following:</p> <ul> <li> <p> <a>CreatePullRequest</a>, which creates a pull request in a specified repository.</p> </li> <li> <p> <a>DescribePullRequestEvents</a>, which returns information about one or more pull request events.</p> </li> <li> <p> <a>GetCommentsForPullRequest</a>, which returns information about comments on a specified pull request.</p> </li> <li> <p> <a>GetMergeConflicts</a>, which returns information about merge conflicts between the source and destination branch in a pull request.</p> </li> <li> <p> <a>GetPullRequest</a>, which returns information about a specified pull request.</p> </li> <li> <p> <a>ListPullRequests</a>, which lists all pull requests for a repository.</p> </li> <li> <p> <a>MergePullRequestByFastForward</a>, which merges the source destination branch of a pull request into the specified destination branch for that pull request using the fast-forward merge option.</p> </li> <li> <p> <a>PostCommentForPullRequest</a>, which posts a comment to a pull request at the specified line, file, or request.</p> </li> <li> <p> <a>UpdatePullRequestDescription</a>, which updates the description of a pull request.</p> </li> <li> <p> <a>UpdatePullRequestStatus</a>, which updates the status of a pull request.</p> </li> <li> <p> <a>UpdatePullRequestTitle</a>, which updates the title of a pull request.</p> </li> </ul> <p>Information about comments in a repository, by calling the following:</p> <ul> <li> <p> <a>DeleteCommentContent</a>, which deletes the content of a comment on a commit in a repository.</p> </li> <li> <p> <a>GetComment</a>, which returns information about a comment on a commit.</p> </li> <li> <p> <a>GetCommentsForComparedCommit</a>, which returns information about comments on the comparison between two commit specifiers in a repository.</p> </li> <li> <p> <a>PostCommentForComparedCommit</a>, which creates a comment on the comparison between two commit specifiers in a repository.</p> </li> <li> <p> <a>PostCommentReply</a>, which creates a reply to a comment.</p> </li> <li> <p> <a>UpdateComment</a>, which updates the content of a comment on a commit in a repository.</p> </li> </ul> <p>Tags used to tag resources in AWS CodeCommit (not Git tags), by calling the following:</p> <ul> <li> <p> <a>ListTagsForResource</a>, which gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeCommit.</p> </li> <li> <p> <a>TagResource</a>, which adds or updates tags for a resource in AWS CodeCommit.</p> </li> <li> <p> <a>UntagResource</a>, which removes tags for a resource in AWS CodeCommit.</p> </li> </ul> <p>Triggers, by calling the following:</p> <ul> <li> <p> <a>GetRepositoryTriggers</a>, which returns information about triggers configured for a repository.</p> </li> <li> <p> <a>PutRepositoryTriggers</a>, which replaces all triggers for a repository and can be used to create or delete triggers.</p> </li> <li> <p> <a>TestRepositoryTriggers</a>, which tests the functionality of a repository trigger by sending data to the trigger target.</p> </li> </ul> <p>For information about how to use AWS CodeCommit, see the <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">AWS CodeCommit User Guide</a>.</p>"
+  "documentation": "<fullname>AWS CodeCommit</fullname> <p>This is the <i>AWS CodeCommit API Reference</i>. This reference provides descriptions of the operations and data types for AWS CodeCommit API along with usage examples.</p> <p>You can use the AWS CodeCommit API to work with the following objects:</p> <p>Repositories, by calling the following:</p> <ul> <li> <p> <a>BatchGetRepositories</a>, which returns information about one or more repositories associated with your AWS account.</p> </li> <li> <p> <a>CreateRepository</a>, which creates an AWS CodeCommit repository.</p> </li> <li> <p> <a>DeleteRepository</a>, which deletes an AWS CodeCommit repository.</p> </li> <li> <p> <a>GetRepository</a>, which returns information about a specified repository.</p> </li> <li> <p> <a>ListRepositories</a>, which lists all AWS CodeCommit repositories associated with your AWS account.</p> </li> <li> <p> <a>UpdateRepositoryDescription</a>, which sets or updates the description of the repository.</p> </li> <li> <p> <a>UpdateRepositoryName</a>, which changes the name of the repository. If you change the name of a repository, no other users of that repository will be able to access it until you send them the new HTTPS or SSH URL to use.</p> </li> </ul> <p>Branches, by calling the following:</p> <ul> <li> <p> <a>CreateBranch</a>, which creates a new branch in a specified repository.</p> </li> <li> <p> <a>DeleteBranch</a>, which deletes the specified branch in a repository unless it is the default branch.</p> </li> <li> <p> <a>GetBranch</a>, which returns information about a specified branch.</p> </li> <li> <p> <a>ListBranches</a>, which lists all branches for a specified repository.</p> </li> <li> <p> <a>UpdateDefaultBranch</a>, which changes the default branch for a repository.</p> </li> </ul> <p>Files, by calling the following:</p> <ul> <li> <p> <a>DeleteFile</a>, which deletes the content of a specified file from a specified branch.</p> </li> <li> <p> <a>GetFile</a>, which returns the base-64 encoded content of a specified file.</p> </li> <li> <p> <a>GetFolder</a>, which returns the contents of a specified folder or directory.</p> </li> <li> <p> <a>PutFile</a>, which adds or modifies a file in a specified repository and branch.</p> </li> </ul> <p>Information about committed code in a repository, by calling the following:</p> <ul> <li> <p> <a>CreateCommit</a>, which creates a commit for changes to a repository.</p> </li> <li> <p> <a>GetBlob</a>, which returns the base-64 encoded content of an individual Git blob object within a repository.</p> </li> <li> <p> <a>GetCommit</a>, which returns information about a commit, including commit messages and author and committer information.</p> </li> <li> <p> <a>GetDifferences</a>, which returns information about the differences in a valid commit specifier (such as a branch, tag, HEAD, commit ID or other fully qualified reference).</p> </li> </ul> <p>Merges, by calling the following:</p> <ul> <li> <p> <a>BatchDescribeMergeConflicts</a>, which returns information about conflicts in a merge between commits in a repository.</p> </li> <li> <p> <a>CreateUnreferencedMergeCommit</a>, which creates an unreferenced commit between two branches or commits for the purpose of comparing them and identifying any potential conflicts.</p> </li> <li> <p> <a>DescribeMergeConflicts</a>, which returns information about merge conflicts between the base, source, and destination versions of a file in a potential merge.</p> </li> <li> <p> <a>GetMergeCommit</a>, which returns information about the merge between a source and destination commit. </p> </li> <li> <p> <a>GetMergeConflicts</a>, which returns information about merge conflicts between the source and destination branch in a pull request.</p> </li> <li> <p> <a>GetMergeOptions</a>, which returns information about the available merge options between two branches or commit specifiers.</p> </li> <li> <p> <a>MergeBranchesByFastForward</a>, which merges two branches using the fast-forward merge option.</p> </li> <li> <p> <a>MergeBranchesBySquash</a>, which merges two branches using the squash merge option.</p> </li> <li> <p> <a>MergeBranchesByThreeWay</a>, which merges two branches using the three-way merge option.</p> </li> </ul> <p>Pull requests, by calling the following:</p> <ul> <li> <p> <a>CreatePullRequest</a>, which creates a pull request in a specified repository.</p> </li> <li> <p> <a>DescribePullRequestEvents</a>, which returns information about one or more pull request events.</p> </li> <li> <p> <a>GetCommentsForPullRequest</a>, which returns information about comments on a specified pull request.</p> </li> <li> <p> <a>GetPullRequest</a>, which returns information about a specified pull request.</p> </li> <li> <p> <a>ListPullRequests</a>, which lists all pull requests for a repository.</p> </li> <li> <p> <a>MergePullRequestByFastForward</a>, which merges the source destination branch of a pull request into the specified destination branch for that pull request using the fast-forward merge option.</p> </li> <li> <p> <a>MergePullRequestBySquash</a>, which merges the source destination branch of a pull request into the specified destination branch for that pull request using the squash merge option.</p> </li> <li> <p> <a>MergePullRequestByThreeWay</a>. which merges the source destination branch of a pull request into the specified destination branch for that pull request using the three-way merge option.</p> </li> <li> <p> <a>PostCommentForPullRequest</a>, which posts a comment to a pull request at the specified line, file, or request.</p> </li> <li> <p> <a>UpdatePullRequestDescription</a>, which updates the description of a pull request.</p> </li> <li> <p> <a>UpdatePullRequestStatus</a>, which updates the status of a pull request.</p> </li> <li> <p> <a>UpdatePullRequestTitle</a>, which updates the title of a pull request.</p> </li> </ul> <p>Information about comments in a repository, by calling the following:</p> <ul> <li> <p> <a>DeleteCommentContent</a>, which deletes the content of a comment on a commit in a repository.</p> </li> <li> <p> <a>GetComment</a>, which returns information about a comment on a commit.</p> </li> <li> <p> <a>GetCommentsForComparedCommit</a>, which returns information about comments on the comparison between two commit specifiers in a repository.</p> </li> <li> <p> <a>PostCommentForComparedCommit</a>, which creates a comment on the comparison between two commit specifiers in a repository.</p> </li> <li> <p> <a>PostCommentReply</a>, which creates a reply to a comment.</p> </li> <li> <p> <a>UpdateComment</a>, which updates the content of a comment on a commit in a repository.</p> </li> </ul> <p>Tags used to tag resources in AWS CodeCommit (not Git tags), by calling the following:</p> <ul> <li> <p> <a>ListTagsForResource</a>, which gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS CodeCommit.</p> </li> <li> <p> <a>TagResource</a>, which adds or updates tags for a resource in AWS CodeCommit.</p> </li> <li> <p> <a>UntagResource</a>, which removes tags for a resource in AWS CodeCommit.</p> </li> </ul> <p>Triggers, by calling the following:</p> <ul> <li> <p> <a>GetRepositoryTriggers</a>, which returns information about triggers configured for a repository.</p> </li> <li> <p> <a>PutRepositoryTriggers</a>, which replaces all triggers for a repository and can be used to create or delete triggers.</p> </li> <li> <p> <a>TestRepositoryTriggers</a>, which tests the functionality of a repository trigger by sending data to the trigger target.</p> </li> </ul> <p>For information about how to use AWS CodeCommit, see the <a href=\"https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html\">AWS CodeCommit User Guide</a>.</p>"
 }

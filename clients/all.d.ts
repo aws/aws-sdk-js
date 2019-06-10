@@ -177,3 +177,6 @@ export import GroundStation = require('./groundstation');
 export import IoTThingsGraph = require('./iotthingsgraph');
 export import IoTEvents = require('./iotevents');
 export import IoTEventsData = require('./ioteventsdata');
+export import Personalize = require('./personalize');
+export import PersonalizeEvents = require('./personalizeevents');
+export import PersonalizeRuntime = require('./personalizeruntime');

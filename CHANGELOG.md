@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.471.0-->
+<!--LATEST=2.472.0-->
 <!--ENTRYINSERT-->
+
+## 2.472.0
+* feature: CodeBuild: AWS CodeBuild adds support for source version on project level.
+* feature: CodeCommit: This release adds two merge strategies for merging pull requests: squash and three-way. It also adds functionality for resolving merge conflicts, testing merge outcomes, and for merging branches using one of the three supported merge strategies.
+* feature: Personalize: Amazon Personalize is a machine learning service that makes it easy for developers to create individualized recommendations for customers using their applications.
+* feature: PersonalizeEvents: Introducing Amazon Personalize  - a machine learning service that makes it easy for developers to create individualized recommendations for customers using their applications.
+* feature: PersonalizeRuntime: Amazon Personalize is a machine learning service that makes it easy for developers to create individualized recommendations for customers using their applications.
 
 ## 2.471.0
 * feature: EC2: Adds DNS entries and NLB ARNs to describe-vpc-endpoint-connections API response. Adds owner ID to describe-vpc-endpoints and create-vpc-endpoint API responses.
