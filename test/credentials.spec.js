@@ -523,7 +523,7 @@
           process.env.HOMEPATH = 'homepath';
           creds = new AWS.ProcessCredentials();
           creds.get();
-          expect(AWS.util.readFileSync.calls.length).to.equal(1);
+          expect(AWS.util.readFileSync.calls.length).to.equal(2);
           return expect(AWS.util.readFileSync.calls[0]['arguments'][0]).to.match(/d:[\/\\]homepath[\/\\].aws[\/\\]credentials/);
         });
         it('uses default HOMEDRIVE of C:/', function() {
@@ -531,7 +531,7 @@
           process.env.HOMEPATH = 'homepath';
           creds = new AWS.ProcessCredentials();
           creds.get();
-          expect(AWS.util.readFileSync.calls.length).to.equal(1);
+          expect(AWS.util.readFileSync.calls.length).to.equal(2);
           return expect(AWS.util.readFileSync.calls[0]['arguments'][0]).to.match(/C:[\/\\]homepath[\/\\].aws[\/\\]credentials/);
         });
         it('uses USERPROFILE if HOME is not set', function() {
@@ -539,7 +539,7 @@
           process.env.USERPROFILE = '/userprofile';
           creds = new AWS.ProcessCredentials();
           creds.get();
-          expect(AWS.util.readFileSync.calls.length).to.equal(1);
+          expect(AWS.util.readFileSync.calls.length).to.equal(2);
           return expect(AWS.util.readFileSync.calls[0]['arguments'][0]).to.match(/[\/\\]userprofile[\/\\].aws[\/\\]credentials/);
         });
         return it('can override filename as a constructor argument', function() {
@@ -548,7 +548,7 @@
             filename: '/etc/creds'
           });
           creds.get();
-          expect(AWS.util.readFileSync.calls.length).to.equal(1);
+          expect(AWS.util.readFileSync.calls.length).to.equal(2);
           return expect(AWS.util.readFileSync.calls[0]['arguments'][0]).to.equal('/etc/creds');
         });
       });
