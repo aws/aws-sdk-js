@@ -4,11 +4,9 @@ Feature: Elastic Load Balancing
 
   I want to use Elastic Load Balancing
 
-  Scenario: Creating load balancers
-    Given I create a load balancer with name prefix "aws-sdk-js"
-    And I describe load balancers with the load balancer name
-    Then the load balancer should be in the list
-    And I delete the load balancer
+  Scenario:  Making a request
+    Given I run the "describeLoadBalancers" operation
+    Then the request should be successful
 
   Scenario: Error handling
     Given I create a load balancer with name prefix "verylongelasticloadbalancername"
