@@ -1,0 +1,56 @@
+{
+  "version": "2.0",
+  "metadata": {
+    "apiVersion": "2018-03-22",
+    "endpointPrefix": "personalize-events",
+    "jsonVersion": "1.1",
+    "protocol": "rest-json",
+    "serviceFullName": "Amazon Personalize Events",
+    "serviceId": "Personalize Events",
+    "signatureVersion": "v4",
+    "signingName": "personalize",
+    "uid": "personalize-events-2018-03-22"
+  },
+  "operations": {
+    "PutEvents": {
+      "http": {
+        "requestUri": "/events"
+      },
+      "input": {
+        "type": "structure",
+        "required": [
+          "trackingId",
+          "sessionId",
+          "eventList"
+        ],
+        "members": {
+          "trackingId": {},
+          "userId": {},
+          "sessionId": {},
+          "eventList": {
+            "type": "list",
+            "member": {
+              "type": "structure",
+              "required": [
+                "eventType",
+                "properties",
+                "sentAt"
+              ],
+              "members": {
+                "eventId": {},
+                "eventType": {},
+                "properties": {
+                  "jsonvalue": true
+                },
+                "sentAt": {
+                  "type": "timestamp"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "shapes": {}
+}

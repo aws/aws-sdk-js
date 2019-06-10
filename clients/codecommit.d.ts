@@ -12,6 +12,14 @@ declare class CodeCommit extends Service {
   constructor(options?: CodeCommit.Types.ClientConfiguration)
   config: Config & CodeCommit.Types.ClientConfiguration;
   /**
+   * Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy.
+   */
+  batchDescribeMergeConflicts(params: CodeCommit.Types.BatchDescribeMergeConflictsInput, callback?: (err: AWSError, data: CodeCommit.Types.BatchDescribeMergeConflictsOutput) => void): Request<CodeCommit.Types.BatchDescribeMergeConflictsOutput, AWSError>;
+  /**
+   * Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy.
+   */
+  batchDescribeMergeConflicts(callback?: (err: AWSError, data: CodeCommit.Types.BatchDescribeMergeConflictsOutput) => void): Request<CodeCommit.Types.BatchDescribeMergeConflictsOutput, AWSError>;
+  /**
    * Returns information about one or more repositories.  The description field for a repository accepts all HTML characters and all valid Unicode characters. Applications that do not HTML-encode the description and display it in a web page could expose users to potentially malicious code. Make sure that you HTML-encode the description field in any application that uses this API to display the repository description on a web page. 
    */
   batchGetRepositories(params: CodeCommit.Types.BatchGetRepositoriesInput, callback?: (err: AWSError, data: CodeCommit.Types.BatchGetRepositoriesOutput) => void): Request<CodeCommit.Types.BatchGetRepositoriesOutput, AWSError>;
@@ -52,6 +60,14 @@ declare class CodeCommit extends Service {
    */
   createRepository(callback?: (err: AWSError, data: CodeCommit.Types.CreateRepositoryOutput) => void): Request<CodeCommit.Types.CreateRepositoryOutput, AWSError>;
   /**
+   * Creates an unerferenced commit that represents the result of merging two branches using a specified merge strategy. This can help you determine the outcome of a potential merge.   This unreferenced merge commit can only be accessed using the GetCommit API or through git commands such as git fetch. To retrieve this commit, you must specify its commit ID or otherwise reference it. 
+   */
+  createUnreferencedMergeCommit(params: CodeCommit.Types.CreateUnreferencedMergeCommitInput, callback?: (err: AWSError, data: CodeCommit.Types.CreateUnreferencedMergeCommitOutput) => void): Request<CodeCommit.Types.CreateUnreferencedMergeCommitOutput, AWSError>;
+  /**
+   * Creates an unerferenced commit that represents the result of merging two branches using a specified merge strategy. This can help you determine the outcome of a potential merge.   This unreferenced merge commit can only be accessed using the GetCommit API or through git commands such as git fetch. To retrieve this commit, you must specify its commit ID or otherwise reference it. 
+   */
+  createUnreferencedMergeCommit(callback?: (err: AWSError, data: CodeCommit.Types.CreateUnreferencedMergeCommitOutput) => void): Request<CodeCommit.Types.CreateUnreferencedMergeCommitOutput, AWSError>;
+  /**
    * Deletes a branch from a repository, unless that branch is the default branch for the repository. 
    */
   deleteBranch(params: CodeCommit.Types.DeleteBranchInput, callback?: (err: AWSError, data: CodeCommit.Types.DeleteBranchOutput) => void): Request<CodeCommit.Types.DeleteBranchOutput, AWSError>;
@@ -83,6 +99,14 @@ declare class CodeCommit extends Service {
    * Deletes a repository. If a specified repository was already deleted, a null repository ID will be returned.  Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail. 
    */
   deleteRepository(callback?: (err: AWSError, data: CodeCommit.Types.DeleteRepositoryOutput) => void): Request<CodeCommit.Types.DeleteRepositoryOutput, AWSError>;
+  /**
+   * Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy. If the merge option for the attempted merge is specified as FAST_FORWARD_MERGE, an exception will be thrown.
+   */
+  describeMergeConflicts(params: CodeCommit.Types.DescribeMergeConflictsInput, callback?: (err: AWSError, data: CodeCommit.Types.DescribeMergeConflictsOutput) => void): Request<CodeCommit.Types.DescribeMergeConflictsOutput, AWSError>;
+  /**
+   * Returns information about one or more merge conflicts in the attempted merge of two commit specifiers using the squash or three-way merge strategy. If the merge option for the attempted merge is specified as FAST_FORWARD_MERGE, an exception will be thrown.
+   */
+  describeMergeConflicts(callback?: (err: AWSError, data: CodeCommit.Types.DescribeMergeConflictsOutput) => void): Request<CodeCommit.Types.DescribeMergeConflictsOutput, AWSError>;
   /**
    * Returns information about one or more pull request events.
    */
@@ -164,6 +188,14 @@ declare class CodeCommit extends Service {
    */
   getFolder(callback?: (err: AWSError, data: CodeCommit.Types.GetFolderOutput) => void): Request<CodeCommit.Types.GetFolderOutput, AWSError>;
   /**
+   * Returns information about a specified merge commit.
+   */
+  getMergeCommit(params: CodeCommit.Types.GetMergeCommitInput, callback?: (err: AWSError, data: CodeCommit.Types.GetMergeCommitOutput) => void): Request<CodeCommit.Types.GetMergeCommitOutput, AWSError>;
+  /**
+   * Returns information about a specified merge commit.
+   */
+  getMergeCommit(callback?: (err: AWSError, data: CodeCommit.Types.GetMergeCommitOutput) => void): Request<CodeCommit.Types.GetMergeCommitOutput, AWSError>;
+  /**
    * Returns information about merge conflicts between the before and after commit IDs for a pull request in a repository.
    */
   getMergeConflicts(params: CodeCommit.Types.GetMergeConflictsInput, callback?: (err: AWSError, data: CodeCommit.Types.GetMergeConflictsOutput) => void): Request<CodeCommit.Types.GetMergeConflictsOutput, AWSError>;
@@ -171,6 +203,14 @@ declare class CodeCommit extends Service {
    * Returns information about merge conflicts between the before and after commit IDs for a pull request in a repository.
    */
   getMergeConflicts(callback?: (err: AWSError, data: CodeCommit.Types.GetMergeConflictsOutput) => void): Request<CodeCommit.Types.GetMergeConflictsOutput, AWSError>;
+  /**
+   * Returns information about the merge options available for merging two specified branches. For details about why a particular merge option is not available, use GetMergeConflicts or DescribeMergeConflicts.
+   */
+  getMergeOptions(params: CodeCommit.Types.GetMergeOptionsInput, callback?: (err: AWSError, data: CodeCommit.Types.GetMergeOptionsOutput) => void): Request<CodeCommit.Types.GetMergeOptionsOutput, AWSError>;
+  /**
+   * Returns information about the merge options available for merging two specified branches. For details about why a particular merge option is not available, use GetMergeConflicts or DescribeMergeConflicts.
+   */
+  getMergeOptions(callback?: (err: AWSError, data: CodeCommit.Types.GetMergeOptionsOutput) => void): Request<CodeCommit.Types.GetMergeOptionsOutput, AWSError>;
   /**
    * Gets information about a pull request in a specified repository.
    */
@@ -228,13 +268,53 @@ declare class CodeCommit extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: CodeCommit.Types.ListTagsForResourceOutput) => void): Request<CodeCommit.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge option.
+   * Merges two branches using the fast-forward merge strategy.
+   */
+  mergeBranchesByFastForward(params: CodeCommit.Types.MergeBranchesByFastForwardInput, callback?: (err: AWSError, data: CodeCommit.Types.MergeBranchesByFastForwardOutput) => void): Request<CodeCommit.Types.MergeBranchesByFastForwardOutput, AWSError>;
+  /**
+   * Merges two branches using the fast-forward merge strategy.
+   */
+  mergeBranchesByFastForward(callback?: (err: AWSError, data: CodeCommit.Types.MergeBranchesByFastForwardOutput) => void): Request<CodeCommit.Types.MergeBranchesByFastForwardOutput, AWSError>;
+  /**
+   * Merges two branches using the squash merge strategy.
+   */
+  mergeBranchesBySquash(params: CodeCommit.Types.MergeBranchesBySquashInput, callback?: (err: AWSError, data: CodeCommit.Types.MergeBranchesBySquashOutput) => void): Request<CodeCommit.Types.MergeBranchesBySquashOutput, AWSError>;
+  /**
+   * Merges two branches using the squash merge strategy.
+   */
+  mergeBranchesBySquash(callback?: (err: AWSError, data: CodeCommit.Types.MergeBranchesBySquashOutput) => void): Request<CodeCommit.Types.MergeBranchesBySquashOutput, AWSError>;
+  /**
+   * Merges two specified branches using the three-way merge strategy.
+   */
+  mergeBranchesByThreeWay(params: CodeCommit.Types.MergeBranchesByThreeWayInput, callback?: (err: AWSError, data: CodeCommit.Types.MergeBranchesByThreeWayOutput) => void): Request<CodeCommit.Types.MergeBranchesByThreeWayOutput, AWSError>;
+  /**
+   * Merges two specified branches using the three-way merge strategy.
+   */
+  mergeBranchesByThreeWay(callback?: (err: AWSError, data: CodeCommit.Types.MergeBranchesByThreeWayOutput) => void): Request<CodeCommit.Types.MergeBranchesByThreeWayOutput, AWSError>;
+  /**
+   * Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge strategy.
    */
   mergePullRequestByFastForward(params: CodeCommit.Types.MergePullRequestByFastForwardInput, callback?: (err: AWSError, data: CodeCommit.Types.MergePullRequestByFastForwardOutput) => void): Request<CodeCommit.Types.MergePullRequestByFastForwardOutput, AWSError>;
   /**
-   * Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge option.
+   * Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge strategy.
    */
   mergePullRequestByFastForward(callback?: (err: AWSError, data: CodeCommit.Types.MergePullRequestByFastForwardOutput) => void): Request<CodeCommit.Types.MergePullRequestByFastForwardOutput, AWSError>;
+  /**
+   * Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the squash merge strategy.
+   */
+  mergePullRequestBySquash(params: CodeCommit.Types.MergePullRequestBySquashInput, callback?: (err: AWSError, data: CodeCommit.Types.MergePullRequestBySquashOutput) => void): Request<CodeCommit.Types.MergePullRequestBySquashOutput, AWSError>;
+  /**
+   * Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the squash merge strategy.
+   */
+  mergePullRequestBySquash(callback?: (err: AWSError, data: CodeCommit.Types.MergePullRequestBySquashOutput) => void): Request<CodeCommit.Types.MergePullRequestBySquashOutput, AWSError>;
+  /**
+   * Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the three-way merge strategy.
+   */
+  mergePullRequestByThreeWay(params: CodeCommit.Types.MergePullRequestByThreeWayInput, callback?: (err: AWSError, data: CodeCommit.Types.MergePullRequestByThreeWayOutput) => void): Request<CodeCommit.Types.MergePullRequestByThreeWayOutput, AWSError>;
+  /**
+   * Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the three-way merge strategy.
+   */
+  mergePullRequestByThreeWay(callback?: (err: AWSError, data: CodeCommit.Types.MergePullRequestByThreeWayOutput) => void): Request<CodeCommit.Types.MergePullRequestByThreeWayOutput, AWSError>;
   /**
    * Posts a comment on the comparison between two commits.
    */
@@ -360,6 +440,89 @@ declare namespace CodeCommit {
   export type AccountId = string;
   export type AdditionalData = string;
   export type Arn = string;
+  export interface BatchDescribeMergeConflictsError {
+    /**
+     * The path to the file.
+     */
+    filePath: Path;
+    /**
+     * The name of the exception.
+     */
+    exceptionName: ExceptionName;
+    /**
+     * The message provided by the exception.
+     */
+    message: Message;
+  }
+  export type BatchDescribeMergeConflictsErrors = BatchDescribeMergeConflictsError[];
+  export interface BatchDescribeMergeConflictsInput {
+    /**
+     * The name of the repository that contains the merge conflicts you want to review.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     */
+    destinationCommitSpecifier: CommitName;
+    /**
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     */
+    sourceCommitSpecifier: CommitName;
+    /**
+     * The merge option or strategy you want to use to merge the code.
+     */
+    mergeOption: MergeOptionTypeEnum;
+    /**
+     * The maximum number of merge hunks to include in the output.
+     */
+    maxMergeHunks?: MaxResults;
+    /**
+     * The maximum number of files to include in the output.
+     */
+    maxConflictFiles?: MaxResults;
+    /**
+     * The path of the target files used to describe the conflicts. If not specified, the default is all conflict files.
+     */
+    filePaths?: FilePaths;
+    /**
+     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.
+     */
+    conflictDetailLevel?: ConflictDetailLevelTypeEnum;
+    /**
+     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.
+     */
+    conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnum;
+    /**
+     * An enumeration token that when provided in a request, returns the next batch of the results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface BatchDescribeMergeConflictsOutput {
+    /**
+     * A list of conflicts for each file, including the conflict metadata and the hunks of the differences between the files.
+     */
+    conflicts: Conflicts;
+    /**
+     * An enumeration token that can be used in a request to return the next batch of the results.
+     */
+    nextToken?: NextToken;
+    /**
+     * A list of any errors returned while describing the merge conflicts for each file.
+     */
+    errors?: BatchDescribeMergeConflictsErrors;
+    /**
+     * The commit ID of the destination commit specifier that was used in the merge evaluation.
+     */
+    destinationCommitId: ObjectId;
+    /**
+     * The commit ID of the source commit specifier that was used in the merge evaluation.
+     */
+    sourceCommitId: ObjectId;
+    /**
+     * The commit ID of the merge base.
+     */
+    baseCommitId?: ObjectId;
+  }
   export interface BatchGetRepositoriesInput {
     /**
      * The names of the repositories to get information about.
@@ -402,6 +565,7 @@ declare namespace CodeCommit {
   }
   export type BranchName = string;
   export type BranchNameList = BranchName[];
+  export type CapitalBoolean = boolean;
   export type ChangeTypeEnum = "A"|"M"|"D"|string;
   export type ClientRequestToken = string;
   export type CloneUrlHttp = string;
@@ -540,6 +704,76 @@ declare namespace CodeCommit {
   }
   export type CommitId = string;
   export type CommitName = string;
+  export interface Conflict {
+    /**
+     * Metadata about a conflict in a merge operation.
+     */
+    conflictMetadata?: ConflictMetadata;
+    /**
+     * A list of hunks that contain the differences between files or lines causing the conflict.
+     */
+    mergeHunks?: MergeHunks;
+  }
+  export type ConflictDetailLevelTypeEnum = "FILE_LEVEL"|"LINE_LEVEL"|string;
+  export interface ConflictMetadata {
+    /**
+     * The path of the file that contains conflicts.
+     */
+    filePath?: Path;
+    /**
+     * The file sizes of the file in the source, destination, and base of the merge.
+     */
+    fileSizes?: FileSizes;
+    /**
+     * The file modes of the file in the source, destination, and base of the merge.
+     */
+    fileModes?: FileModes;
+    /**
+     * Information about any object type conflicts in a merge operation.
+     */
+    objectTypes?: ObjectTypes;
+    /**
+     * The number of conflicts, including both hunk conflicts and metadata conflicts.
+     */
+    numberOfConflicts?: NumberOfConflicts;
+    /**
+     * A boolean value (true or false) indicating whether the file is binary or textual in the source, destination, and base of the merge.
+     */
+    isBinaryFile?: IsBinaryFile;
+    /**
+     * A boolean value indicating whether there are conflicts in the content of a file.
+     */
+    contentConflict?: IsContentConflict;
+    /**
+     * A boolean value indicating whether there are conflicts in the file mode of a file.
+     */
+    fileModeConflict?: IsFileModeConflict;
+    /**
+     * A boolean value (true or false) indicating whether there are conflicts in the object type of a file.
+     */
+    objectTypeConflict?: IsObjectTypeConflict;
+    /**
+     * Whether an add, modify, or delete operation caused the conflict between the source and destination of the merge.
+     */
+    mergeOperations?: MergeOperations;
+  }
+  export type ConflictMetadataList = ConflictMetadata[];
+  export interface ConflictResolution {
+    /**
+     * Information about how a conflict in a merge will be resolved.
+     */
+    replaceContents?: ReplaceContentEntries;
+    /**
+     * Files that will be deleted as part of the merge conflict resolution.
+     */
+    deleteFiles?: DeleteFileEntries;
+    /**
+     * File modes that will be set as part of the merge conflict resolution.
+     */
+    setFileModes?: SetFileModeEntries;
+  }
+  export type ConflictResolutionStrategyTypeEnum = "NONE"|"ACCEPT_SOURCE"|"ACCEPT_DESTINATION"|"AUTOMERGE"|string;
+  export type Conflicts = Conflict[];
   export type Content = string;
   export interface CreateBranchInput {
     /**
@@ -581,7 +815,7 @@ declare namespace CodeCommit {
      */
     commitMessage?: Message;
     /**
-     * If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders.
+     * If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.
      */
     keepEmptyFolders?: KeepEmptyFolders;
     /**
@@ -662,6 +896,62 @@ declare namespace CodeCommit {
      * Information about the newly created repository.
      */
     repositoryMetadata?: RepositoryMetadata;
+  }
+  export interface CreateUnreferencedMergeCommitInput {
+    /**
+     * The name of the repository where you want to create the unreferenced merge commit.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     */
+    sourceCommitSpecifier: CommitName;
+    /**
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     */
+    destinationCommitSpecifier: CommitName;
+    /**
+     * The merge option or strategy you want to use to merge the code.
+     */
+    mergeOption: MergeOptionTypeEnum;
+    /**
+     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.
+     */
+    conflictDetailLevel?: ConflictDetailLevelTypeEnum;
+    /**
+     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.
+     */
+    conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnum;
+    /**
+     * The name of the author who created the unreferenced commit. This information will be used as both the author and committer for the commit.
+     */
+    authorName?: Name;
+    /**
+     * The email address for the person who created the unreferenced commit.
+     */
+    email?: Email;
+    /**
+     * The commit message for the unreferenced commit.
+     */
+    commitMessage?: Message;
+    /**
+     * If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.
+     */
+    keepEmptyFolders?: KeepEmptyFolders;
+    /**
+     * A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.
+     */
+    conflictResolution?: ConflictResolution;
+  }
+  export interface CreateUnreferencedMergeCommitOutput {
+    /**
+     * The full commit ID of the commit that contains your merge results.
+     */
+    commitId?: ObjectId;
+    /**
+     * The full SHA-1 pointer of the tree information for the commit that contains the merge results.
+     */
+    treeId?: ObjectId;
   }
   export type CreationDate = Date;
   export type _Date = string;
@@ -764,6 +1054,70 @@ declare namespace CodeCommit {
      */
     repositoryId?: RepositoryId;
   }
+  export interface DescribeMergeConflictsInput {
+    /**
+     * The name of the repository where you want to get information about a merge conflict.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     */
+    destinationCommitSpecifier: CommitName;
+    /**
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     */
+    sourceCommitSpecifier: CommitName;
+    /**
+     * The merge option or strategy you want to use to merge the code.
+     */
+    mergeOption: MergeOptionTypeEnum;
+    /**
+     * The maximum number of merge hunks to include in the output.
+     */
+    maxMergeHunks?: MaxResults;
+    /**
+     * The path of the target files used to describe the conflicts. 
+     */
+    filePath: Path;
+    /**
+     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.
+     */
+    conflictDetailLevel?: ConflictDetailLevelTypeEnum;
+    /**
+     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.
+     */
+    conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnum;
+    /**
+     * An enumeration token that when provided in a request, returns the next batch of the results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface DescribeMergeConflictsOutput {
+    /**
+     * Contains metadata about the conflicts found in the merge.
+     */
+    conflictMetadata: ConflictMetadata;
+    /**
+     * A list of merge hunks of the differences between the files or lines.
+     */
+    mergeHunks: MergeHunks;
+    /**
+     * An enumeration token that can be used in a request to return the next batch of the results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The commit ID of the destination commit specifier that was used in the merge evaluation.
+     */
+    destinationCommitId: ObjectId;
+    /**
+     * The commit ID of the source commit specifier that was used in the merge evaluation.
+     */
+    sourceCommitId: ObjectId;
+    /**
+     * The commit ID of the merge base.
+     */
+    baseCommitId?: ObjectId;
+  }
   export interface DescribePullRequestEventsInput {
     /**
      * The system-generated ID of the pull request. To get this ID, use ListPullRequests.
@@ -814,6 +1168,7 @@ declare namespace CodeCommit {
   export type DifferenceList = Difference[];
   export type Email = string;
   export type EventDate = Date;
+  export type ExceptionName = string;
   export interface File {
     /**
      * The blob ID that contains the file information.
@@ -849,6 +1204,36 @@ declare namespace CodeCommit {
     fileMode?: FileModeTypeEnum;
   }
   export type FileModeTypeEnum = "EXECUTABLE"|"NORMAL"|"SYMLINK"|string;
+  export interface FileModes {
+    /**
+     * The file mode of a file in the source of a merge or pull request.
+     */
+    source?: FileModeTypeEnum;
+    /**
+     * The file mode of a file in the destination of a merge or pull request.
+     */
+    destination?: FileModeTypeEnum;
+    /**
+     * The file mode of a file in the base of a merge or pull request.
+     */
+    base?: FileModeTypeEnum;
+  }
+  export type FilePaths = Path[];
+  export type FileSize = number;
+  export interface FileSizes {
+    /**
+     * The size of a file in the source of a merge or pull request.
+     */
+    source?: FileSize;
+    /**
+     * The size of a file in the destination of a merge or pull request.
+     */
+    destination?: FileSize;
+    /**
+     * The size of a file in the base of a merge or pull request.
+     */
+    base?: FileSize;
+  }
   export type FilesMetadata = FileMetadata[];
   export interface Folder {
     /**
@@ -1117,6 +1502,46 @@ declare namespace CodeCommit {
      */
     subModules?: SubModuleList;
   }
+  export interface GetMergeCommitInput {
+    /**
+     * The name of the repository that contains the merge commit about which you want to get information.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     */
+    sourceCommitSpecifier: CommitName;
+    /**
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     */
+    destinationCommitSpecifier: CommitName;
+    /**
+     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.
+     */
+    conflictDetailLevel?: ConflictDetailLevelTypeEnum;
+    /**
+     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.
+     */
+    conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnum;
+  }
+  export interface GetMergeCommitOutput {
+    /**
+     * The commit ID of the source commit specifier that was used in the merge evaluation.
+     */
+    sourceCommitId?: ObjectId;
+    /**
+     * The commit ID of the destination commit specifier that was used in the merge evaluation.
+     */
+    destinationCommitId?: ObjectId;
+    /**
+     * The commit ID of the merge base.
+     */
+    baseCommitId?: ObjectId;
+    /**
+     * The commit ID for the merge commit created when the source branch was merged into the destination branch. If the fast-forward merge strategy was used, no merge commit exists.
+     */
+    mergedCommitId?: ObjectId;
+  }
   export interface GetMergeConflictsInput {
     /**
      * The name of the repository where the pull request was created.
@@ -1131,23 +1556,91 @@ declare namespace CodeCommit {
      */
     sourceCommitSpecifier: CommitName;
     /**
-     * The merge option or strategy you want to use to merge the code. The only valid value is FAST_FORWARD_MERGE.
+     * The merge option or strategy you want to use to merge the code. 
      */
     mergeOption: MergeOptionTypeEnum;
+    /**
+     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.
+     */
+    conflictDetailLevel?: ConflictDetailLevelTypeEnum;
+    /**
+     * The maximum number of files to include in the output.
+     */
+    maxConflictFiles?: MaxResults;
+    /**
+     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.
+     */
+    conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnum;
+    /**
+     * An enumeration token that when provided in a request, returns the next batch of the results.
+     */
+    nextToken?: NextToken;
   }
   export interface GetMergeConflictsOutput {
     /**
-     * A Boolean value that indicates whether the code is mergable by the specified merge option.
+     * A Boolean value that indicates whether the code is mergeable by the specified merge option.
      */
     mergeable: IsMergeable;
     /**
      * The commit ID of the destination commit specifier that was used in the merge evaluation.
      */
-    destinationCommitId: CommitId;
+    destinationCommitId: ObjectId;
     /**
      * The commit ID of the source commit specifier that was used in the merge evaluation.
      */
-    sourceCommitId: CommitId;
+    sourceCommitId: ObjectId;
+    /**
+     * The commit ID of the merge base.
+     */
+    baseCommitId?: ObjectId;
+    /**
+     * A list of metadata for any conflicts found.
+     */
+    conflictMetadataList: ConflictMetadataList;
+    /**
+     * An enumeration token that can be used in a request to return the next batch of the results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface GetMergeOptionsInput {
+    /**
+     * The name of the repository that contains the commits about which you want to get merge options.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     */
+    sourceCommitSpecifier: CommitName;
+    /**
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     */
+    destinationCommitSpecifier: CommitName;
+    /**
+     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.
+     */
+    conflictDetailLevel?: ConflictDetailLevelTypeEnum;
+    /**
+     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.
+     */
+    conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnum;
+  }
+  export interface GetMergeOptionsOutput {
+    /**
+     * The merge option or strategy used to merge the code.
+     */
+    mergeOptions: MergeOptions;
+    /**
+     * The commit ID of the source commit specifier that was used in the merge evaluation.
+     */
+    sourceCommitId: ObjectId;
+    /**
+     * The commit ID of the destination commit specifier that was used in the merge evaluation.
+     */
+    destinationCommitId: ObjectId;
+    /**
+     * The commit ID of the merge base.
+     */
+    baseCommitId: ObjectId;
   }
   export interface GetPullRequestInput {
     /**
@@ -1189,13 +1682,33 @@ declare namespace CodeCommit {
      */
     triggers?: RepositoryTriggersList;
   }
+  export type HunkContent = string;
+  export interface IsBinaryFile {
+    /**
+     * The binary or non-binary status of file in the source of a merge or pull request.
+     */
+    source?: CapitalBoolean;
+    /**
+     * The binary or non-binary status of a file in the destination of a merge or pull request.
+     */
+    destination?: CapitalBoolean;
+    /**
+     * The binary or non-binary status of a file in the base of a merge or pull request.
+     */
+    base?: CapitalBoolean;
+  }
   export type IsCommentDeleted = boolean;
+  export type IsContentConflict = boolean;
+  export type IsFileModeConflict = boolean;
+  export type IsHunkConflict = boolean;
   export type IsMergeable = boolean;
   export type IsMerged = boolean;
   export type IsMove = boolean;
+  export type IsObjectTypeConflict = boolean;
   export type KeepEmptyFolders = boolean;
   export type LastModifiedDate = Date;
   export type Limit = number;
+  export type LineNumber = number;
   export interface ListBranchesInput {
     /**
      * The name of the repository that contains the branches.
@@ -1307,6 +1820,179 @@ declare namespace CodeCommit {
     relativeFileVersion?: RelativeFileVersionEnum;
   }
   export type MaxResults = number;
+  export interface MergeBranchesByFastForwardInput {
+    /**
+     * The name of the repository where you want to merge two branches.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     */
+    sourceCommitSpecifier: CommitName;
+    /**
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     */
+    destinationCommitSpecifier: CommitName;
+    /**
+     * The branch where the merge will be applied.
+     */
+    targetBranch?: BranchName;
+  }
+  export interface MergeBranchesByFastForwardOutput {
+    /**
+     * The commit ID of the merge in the destination or target branch.
+     */
+    commitId?: ObjectId;
+    /**
+     * The tree ID of the merge in the destination or target branch.
+     */
+    treeId?: ObjectId;
+  }
+  export interface MergeBranchesBySquashInput {
+    /**
+     * The name of the repository where you want to merge two branches.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     */
+    sourceCommitSpecifier: CommitName;
+    /**
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     */
+    destinationCommitSpecifier: CommitName;
+    /**
+     * The branch where the merge will be applied. 
+     */
+    targetBranch?: BranchName;
+    /**
+     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.
+     */
+    conflictDetailLevel?: ConflictDetailLevelTypeEnum;
+    /**
+     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.
+     */
+    conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnum;
+    /**
+     * The name of the author who created the commit. This information will be used as both the author and committer for the commit.
+     */
+    authorName?: Name;
+    /**
+     * The email address of the person merging the branches. This information will be used in the commit information for the merge.
+     */
+    email?: Email;
+    /**
+     * The commit message for the merge.
+     */
+    commitMessage?: Message;
+    /**
+     * If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.
+     */
+    keepEmptyFolders?: KeepEmptyFolders;
+    /**
+     * A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.
+     */
+    conflictResolution?: ConflictResolution;
+  }
+  export interface MergeBranchesBySquashOutput {
+    /**
+     * The commit ID of the merge in the destination or target branch.
+     */
+    commitId?: ObjectId;
+    /**
+     * The tree ID of the merge in the destination or target branch.
+     */
+    treeId?: ObjectId;
+  }
+  export interface MergeBranchesByThreeWayInput {
+    /**
+     * The name of the repository where you want to merge two branches.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     */
+    sourceCommitSpecifier: CommitName;
+    /**
+     * The branch, tag, HEAD, or other fully qualified reference used to identify a commit. For example, a branch name or a full commit ID.
+     */
+    destinationCommitSpecifier: CommitName;
+    /**
+     * The branch where the merge will be applied. 
+     */
+    targetBranch?: BranchName;
+    /**
+     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.
+     */
+    conflictDetailLevel?: ConflictDetailLevelTypeEnum;
+    /**
+     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.
+     */
+    conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnum;
+    /**
+     * The name of the author who created the commit. This information will be used as both the author and committer for the commit.
+     */
+    authorName?: Name;
+    /**
+     * The email address of the person merging the branches. This information will be used in the commit information for the merge.
+     */
+    email?: Email;
+    /**
+     * The commit message to include in the commit information for the merge.
+     */
+    commitMessage?: Message;
+    /**
+     * If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.
+     */
+    keepEmptyFolders?: KeepEmptyFolders;
+    /**
+     * A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.
+     */
+    conflictResolution?: ConflictResolution;
+  }
+  export interface MergeBranchesByThreeWayOutput {
+    /**
+     * The commit ID of the merge in the destination or target branch.
+     */
+    commitId?: ObjectId;
+    /**
+     * The tree ID of the merge in the destination or target branch.
+     */
+    treeId?: ObjectId;
+  }
+  export interface MergeHunk {
+    /**
+     * A Boolean value indicating whether a combination of hunks contains a conflict. Conflicts occur when the same file or the same lines in a file were modified in both the source and destination of a merge or pull request. Valid values include true, false, and null.
+     */
+    isConflict?: IsHunkConflict;
+    /**
+     * Information about the merge hunk in the source of a merge or pull request.
+     */
+    source?: MergeHunkDetail;
+    /**
+     * Information about the merge hunk in the destination of a merge or pull request.
+     */
+    destination?: MergeHunkDetail;
+    /**
+     * Information about the merge hunk in the base of a merge or pull request.
+     */
+    base?: MergeHunkDetail;
+  }
+  export interface MergeHunkDetail {
+    /**
+     * The line number where a merge conflict begins.
+     */
+    startLine?: LineNumber;
+    /**
+     * The line number where a merge conflict ends.
+     */
+    endLine?: LineNumber;
+    /**
+     * The base-64 encoded content of the hunk that contains the conflict.
+     */
+    hunkContent?: HunkContent;
+  }
+  export type MergeHunks = MergeHunk[];
   export interface MergeMetadata {
     /**
      * A Boolean value indicating whether the merge has been made.
@@ -1316,8 +2002,27 @@ declare namespace CodeCommit {
      * The Amazon Resource Name (ARN) of the user who merged the branches.
      */
     mergedBy?: Arn;
+    /**
+     * The commit ID for the merge commit, if any.
+     */
+    mergeCommitId?: CommitId;
+    /**
+     * The merge strategy used in the merge.
+     */
+    mergeOption?: MergeOptionTypeEnum;
   }
-  export type MergeOptionTypeEnum = "FAST_FORWARD_MERGE"|string;
+  export interface MergeOperations {
+    /**
+     * The operation on a file (add, modify, or delete) of a file in the source of a merge or pull request.
+     */
+    source?: ChangeTypeEnum;
+    /**
+     * The operation on a file in the destination of a merge or pull request.
+     */
+    destination?: ChangeTypeEnum;
+  }
+  export type MergeOptionTypeEnum = "FAST_FORWARD_MERGE"|"SQUASH_MERGE"|"THREE_WAY_MERGE"|string;
+  export type MergeOptions = MergeOptionTypeEnum[];
   export interface MergePullRequestByFastForwardInput {
     /**
      * The system-generated ID of the pull request. To get this ID, use ListPullRequests.
@@ -1330,7 +2035,7 @@ declare namespace CodeCommit {
     /**
      * The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.
      */
-    sourceCommitId?: CommitId;
+    sourceCommitId?: ObjectId;
   }
   export interface MergePullRequestByFastForwardOutput {
     /**
@@ -1338,12 +2043,118 @@ declare namespace CodeCommit {
      */
     pullRequest?: PullRequest;
   }
+  export interface MergePullRequestBySquashInput {
+    /**
+     * The system-generated ID of the pull request. To get this ID, use ListPullRequests.
+     */
+    pullRequestId: PullRequestId;
+    /**
+     * The name of the repository where the pull request was created.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.
+     */
+    sourceCommitId?: ObjectId;
+    /**
+     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.
+     */
+    conflictDetailLevel?: ConflictDetailLevelTypeEnum;
+    /**
+     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.
+     */
+    conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnum;
+    /**
+     * The commit message to include in the commit information for the merge.
+     */
+    commitMessage?: Message;
+    /**
+     * The name of the author who created the commit. This information will be used as both the author and committer for the commit.
+     */
+    authorName?: Name;
+    /**
+     * The email address of the person merging the branches. This information will be used in the commit information for the merge.
+     */
+    email?: Email;
+    /**
+     * If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.
+     */
+    keepEmptyFolders?: KeepEmptyFolders;
+    /**
+     * A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.
+     */
+    conflictResolution?: ConflictResolution;
+  }
+  export interface MergePullRequestBySquashOutput {
+    pullRequest?: PullRequest;
+  }
+  export interface MergePullRequestByThreeWayInput {
+    /**
+     * The system-generated ID of the pull request. To get this ID, use ListPullRequests.
+     */
+    pullRequestId: PullRequestId;
+    /**
+     * The name of the repository where the pull request was created.
+     */
+    repositoryName: RepositoryName;
+    /**
+     * The full commit ID of the original or updated commit in the pull request source branch. Pass this value if you want an exception thrown if the current commit ID of the tip of the source branch does not match this commit ID.
+     */
+    sourceCommitId?: ObjectId;
+    /**
+     * The level of conflict detail to use. If unspecified, the default FILE_LEVEL is used, which will return a not mergeable result if the same file has differences in both branches. If LINE_LEVEL is specified, a conflict will be considered not mergeable if the same file in both branches has differences on the same line.
+     */
+    conflictDetailLevel?: ConflictDetailLevelTypeEnum;
+    /**
+     * Specifies which branch to use when resolving conflicts, or whether to attempt automatically merging two versions of a file. The default is NONE, which requires any conflicts to be resolved manually before the merge operation will be successful.
+     */
+    conflictResolutionStrategy?: ConflictResolutionStrategyTypeEnum;
+    /**
+     * The commit message to include in the commit information for the merge.
+     */
+    commitMessage?: Message;
+    /**
+     * The name of the author who created the commit. This information will be used as both the author and committer for the commit.
+     */
+    authorName?: Name;
+    /**
+     * The email address of the person merging the branches. This information will be used in the commit information for the merge.
+     */
+    email?: Email;
+    /**
+     * If the commit contains deletions, whether to keep a folder or folder structure if the changes leave the folders empty. If this is specified as true, a .gitkeep file will be created for empty folders. The default is false.
+     */
+    keepEmptyFolders?: KeepEmptyFolders;
+    /**
+     * A list of inputs to use when resolving conflicts during a merge if AUTOMERGE is chosen as the conflict resolution strategy.
+     */
+    conflictResolution?: ConflictResolution;
+  }
+  export interface MergePullRequestByThreeWayOutput {
+    pullRequest?: PullRequest;
+  }
   export type Message = string;
   export type Mode = string;
   export type Name = string;
   export type NextToken = string;
+  export type NumberOfConflicts = number;
   export type ObjectId = string;
   export type ObjectSize = number;
+  export type ObjectTypeEnum = "FILE"|"DIRECTORY"|"GIT_LINK"|"SYMBOLIC_LINK"|string;
+  export interface ObjectTypes {
+    /**
+     * The type of the object in the source branch.
+     */
+    source?: ObjectTypeEnum;
+    /**
+     * The type of the object in the destination branch.
+     */
+    destination?: ObjectTypeEnum;
+    /**
+     * The type of the object in the base commit of the merge.
+     */
+    base?: ObjectTypeEnum;
+  }
   export type OrderEnum = "ascending"|"descending"|string;
   export type ParentList = ObjectId[];
   export type Path = string;
@@ -1741,6 +2552,26 @@ declare namespace CodeCommit {
   }
   export type ReferenceName = string;
   export type RelativeFileVersionEnum = "BEFORE"|"AFTER"|string;
+  export type ReplaceContentEntries = ReplaceContentEntry[];
+  export interface ReplaceContentEntry {
+    /**
+     * The path of the conflicting file.
+     */
+    filePath: Path;
+    /**
+     * The replacement type to use when determining how to resolve the conflict.
+     */
+    replacementType: ReplacementTypeEnum;
+    /**
+     * The base-64 encoded content to use when the replacement type is USE_NEW_CONTENT.
+     */
+    content?: FileContent;
+    /**
+     * The file mode to apply during conflict resoltion.
+     */
+    fileMode?: FileModeTypeEnum;
+  }
+  export type ReplacementTypeEnum = "KEEP_BASE"|"KEEP_SOURCE"|"KEEP_DESTINATION"|"USE_NEW_CONTENT"|string;
   export type RepositoryDescription = string;
   export type RepositoryId = string;
   export interface RepositoryMetadata {

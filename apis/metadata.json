@@ -713,5 +713,16 @@
   "ioteventsdata": {
     "prefix": "iotevents-data",
     "name": "IoTEventsData"
+  },
+  "personalize": {
+    "name": "Personalize"
+  },
+  "personalizeevents": {
+    "prefix": "personalize-events",
+    "name": "PersonalizeEvents"
+  },
+  "personalizeruntime": {
+    "prefix": "personalize-runtime",
+    "name": "PersonalizeRuntime"
   }
 }

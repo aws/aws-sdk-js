@@ -178,5 +178,8 @@ module.exports = {
   GroundStation: require('./groundstation'),
   IoTThingsGraph: require('./iotthingsgraph'),
   IoTEvents: require('./iotevents'),
-  IoTEventsData: require('./ioteventsdata')
+  IoTEventsData: require('./ioteventsdata'),
+  Personalize: require('./personalize'),
+  PersonalizeEvents: require('./personalizeevents'),
+  PersonalizeRuntime: require('./personalizeruntime')
 };

@@ -179,6 +179,9 @@ export abstract class ConfigurationServicePlaceholders {
   iotthingsgraph?: AWS.IoTThingsGraph.Types.ClientConfiguration;
   iotevents?: AWS.IoTEvents.Types.ClientConfiguration;
   ioteventsdata?: AWS.IoTEventsData.Types.ClientConfiguration;
+  personalize?: AWS.Personalize.Types.ClientConfiguration;
+  personalizeevents?: AWS.PersonalizeEvents.Types.ClientConfiguration;
+  personalizeruntime?: AWS.PersonalizeRuntime.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -360,4 +363,7 @@ export interface ConfigurationServiceApiVersions {
   iotthingsgraph?: AWS.IoTThingsGraph.Types.apiVersion;
   iotevents?: AWS.IoTEvents.Types.apiVersion;
   ioteventsdata?: AWS.IoTEventsData.Types.apiVersion;
+  personalize?: AWS.Personalize.Types.apiVersion;
+  personalizeevents?: AWS.PersonalizeEvents.Types.apiVersion;
+  personalizeruntime?: AWS.PersonalizeRuntime.Types.apiVersion;
 }
