@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.472.0-->
+<!--LATEST=2.473.0-->
 <!--ENTRYINSERT-->
+
+## 2.473.0
+* bugfix: Credentials: Refresh cached ini credentials from disk
+* feature: SageMaker: The default TaskTimeLimitInSeconds of labeling job is increased to 8 hours. Batch Transform introduces a new DataProcessing field which supports input and output filtering and data joining. Training job increases the max allowed input channels from 8 to 20.
 
 ## 2.472.0
 * feature: CodeBuild: AWS CodeBuild adds support for source version on project level.
