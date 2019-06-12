@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.473.0-->
+<!--LATEST=2.474.0-->
 <!--ENTRYINSERT-->
+
+## 2.474.0
+* feature: ServiceCatalog: This release adds a new field named Guidance to update provisioning artifact, this field can be set by the administrator to provide guidance to end users about which provisioning artifacts to use.
 
 ## 2.473.0
 * bugfix: Credentials: Refresh cached ini credentials from disk
