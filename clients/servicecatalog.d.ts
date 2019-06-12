@@ -1122,7 +1122,7 @@ declare namespace ServiceCatalog {
      */
     IdempotencyToken: IdempotencyToken;
     /**
-     * One or more tags.
+     * One or more tags. If the plan is for an existing provisioned product, the product must have a RESOURCE_UPDATE constraint with TagUpdatesOnProvisionedProduct set to ALLOWED to allow tag updates.
      */
     Tags?: Tags;
   }
@@ -2870,6 +2870,10 @@ declare namespace ServiceCatalog {
      * The UTC time stamp of the creation time.
      */
     CreatedTime?: ProvisioningArtifactCreatedTime;
+    /**
+     * Information set by the administrator to provide guidance to end users about which provisioning artifacts to use.
+     */
+    Guidance?: ProvisioningArtifactGuidance;
   }
   export type ProvisioningArtifactActive = boolean;
   export type ProvisioningArtifactCreatedTime = Date;
@@ -2899,8 +2903,13 @@ declare namespace ServiceCatalog {
      * Indicates whether the product version is active.
      */
     Active?: ProvisioningArtifactActive;
+    /**
+     * Information set by the administrator to provide guidance to end users about which provisioning artifacts to use.
+     */
+    Guidance?: ProvisioningArtifactGuidance;
   }
   export type ProvisioningArtifactDetails = ProvisioningArtifactDetail[];
+  export type ProvisioningArtifactGuidance = "DEFAULT"|"DEPRECATED"|string;
   export type ProvisioningArtifactInfo = {[key: string]: ProvisioningArtifactInfoValue};
   export type ProvisioningArtifactInfoKey = string;
   export type ProvisioningArtifactInfoValue = string;
@@ -3833,6 +3842,10 @@ declare namespace ServiceCatalog {
      * Indicates whether the product version is active.
      */
     Active?: ProvisioningArtifactActive;
+    /**
+     * Information set by the administrator to provide guidance to end users about which provisioning artifacts to use. The DEFAULT value indicates that the product version is active. The administrator can set the guidance to DEPRECATED to inform users that the product version is deprecated. Users are able to make updates to a provisioned product of a deprecated version but cannot launch new provisioned products using a deprecated version.
+     */
+    Guidance?: ProvisioningArtifactGuidance;
   }
   export interface UpdateProvisioningArtifactOutput {
     /**
