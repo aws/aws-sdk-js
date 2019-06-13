@@ -70,7 +70,7 @@ Please be aware of the following notes prior to opening a pull request:
 To run the tests locally, install `phantomjs`. You can do so using [Homebrew][homebrew]:
 
 ```
-brew install phantomjs
+brew cask install phantomjs
 ```
 
 Then, to run all tests:
