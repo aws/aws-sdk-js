@@ -93,7 +93,7 @@
           "shape": "InvalidParameterValueException"
         }
       ],
-      "documentation": "<p>Apply the service update. For more information on service updates and applying them, see <a href=\"https://docs.aws.amazon.com/http:/docs.aws.amazon.com/Amazon/red-ug/applying-updates.html\">Applying Service Updates</a>.</p>"
+      "documentation": "<p>Apply the service update. For more information on service updates and applying them, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/applying-updates.html\">Applying Service Updates</a>.</p>"
     },
     "BatchStopUpdateAction": {
       "name": "BatchStopUpdateAction",
@@ -3536,6 +3536,10 @@
         "PrimaryEndpoint": {
           "shape": "Endpoint",
           "documentation": "<p>The endpoint of the primary node in this node group (shard).</p>"
+        },
+        "ReaderEndpoint": {
+          "shape": "Endpoint",
+          "documentation": "<p>The endpoint of the replica nodes in this node group (shard).</p>"
         },
         "Slots": {
           "shape": "String",

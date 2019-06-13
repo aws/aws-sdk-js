@@ -276,6 +276,14 @@ declare class GuardDuty extends Service {
    */
   listMembers(callback?: (err: AWSError, data: GuardDuty.Types.ListMembersResponse) => void): Request<GuardDuty.Types.ListMembersResponse, AWSError>;
   /**
+   * Lists tags for a resource. Tagging is currently supported for detectors, finding filters, IP sets, and Threat Intel sets, with a limit of 50 tags per resource. When invoked, this operation returns all assigned tags for a given resource..
+   */
+  listTagsForResource(params: GuardDuty.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListTagsForResourceResponse) => void): Request<GuardDuty.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists tags for a resource. Tagging is currently supported for detectors, finding filters, IP sets, and Threat Intel sets, with a limit of 50 tags per resource. When invoked, this operation returns all assigned tags for a given resource..
+   */
+  listTagsForResource(callback?: (err: AWSError, data: GuardDuty.Types.ListTagsForResourceResponse) => void): Request<GuardDuty.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Lists the ThreatIntelSets of the GuardDuty service specified by the detector ID.
    */
   listThreatIntelSets(params: GuardDuty.Types.ListThreatIntelSetsRequest, callback?: (err: AWSError, data: GuardDuty.Types.ListThreatIntelSetsResponse) => void): Request<GuardDuty.Types.ListThreatIntelSetsResponse, AWSError>;
@@ -300,6 +308,14 @@ declare class GuardDuty extends Service {
    */
   stopMonitoringMembers(callback?: (err: AWSError, data: GuardDuty.Types.StopMonitoringMembersResponse) => void): Request<GuardDuty.Types.StopMonitoringMembersResponse, AWSError>;
   /**
+   * Adds tags to a resource.
+   */
+  tagResource(params: GuardDuty.Types.TagResourceRequest, callback?: (err: AWSError, data: GuardDuty.Types.TagResourceResponse) => void): Request<GuardDuty.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds tags to a resource.
+   */
+  tagResource(callback?: (err: AWSError, data: GuardDuty.Types.TagResourceResponse) => void): Request<GuardDuty.Types.TagResourceResponse, AWSError>;
+  /**
    * Unarchives Amazon GuardDuty findings specified by the list of finding IDs.
    */
   unarchiveFindings(params: GuardDuty.Types.UnarchiveFindingsRequest, callback?: (err: AWSError, data: GuardDuty.Types.UnarchiveFindingsResponse) => void): Request<GuardDuty.Types.UnarchiveFindingsResponse, AWSError>;
@@ -307,6 +323,14 @@ declare class GuardDuty extends Service {
    * Unarchives Amazon GuardDuty findings specified by the list of finding IDs.
    */
   unarchiveFindings(callback?: (err: AWSError, data: GuardDuty.Types.UnarchiveFindingsResponse) => void): Request<GuardDuty.Types.UnarchiveFindingsResponse, AWSError>;
+  /**
+   * Removes tags from a resource.
+   */
+  untagResource(params: GuardDuty.Types.UntagResourceRequest, callback?: (err: AWSError, data: GuardDuty.Types.UntagResourceResponse) => void): Request<GuardDuty.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes tags from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: GuardDuty.Types.UntagResourceResponse) => void): Request<GuardDuty.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates an Amazon GuardDuty detector specified by the detectorId.
    */
@@ -528,6 +552,10 @@ declare namespace GuardDuty {
      * A enum value that specifies how frequently customer got Finding updates published.
      */
     FindingPublishingFrequency?: FindingPublishingFrequency;
+    /**
+     * The tags to be added to a new detector resource.
+     */
+    Tags?: TagMap;
   }
   export interface CreateDetectorResponse {
     /**
@@ -564,6 +592,10 @@ declare namespace GuardDuty {
      * The idempotency token for the create request.
      */
     ClientToken?: ClientToken;
+    /**
+     * The tags to be added to a new filter resource.
+     */
+    Tags?: TagMap;
   }
   export interface CreateFilterResponse {
     /**
@@ -596,6 +628,10 @@ declare namespace GuardDuty {
      * The idempotency token for the create request.
      */
     ClientToken?: ClientToken;
+    /**
+     * The tags to be added to a new IP set resource.
+     */
+    Tags?: TagMap;
   }
   export interface CreateIPSetResponse {
     /**
@@ -656,6 +692,10 @@ declare namespace GuardDuty {
      * The idempotency token for the create request.
      */
     ClientToken?: ClientToken;
+    /**
+     * The tags to be added to a new Threat List resource.
+     */
+    Tags?: TagMap;
   }
   export interface CreateThreatIntelSetResponse {
     /**
@@ -916,6 +956,10 @@ declare namespace GuardDuty {
      * Detector last update timestamp.
      */
     UpdatedAt?: String;
+    /**
+     * The tags of the detector resource.
+     */
+    Tags?: TagMap;
   }
   export interface GetFilterRequest {
     /**
@@ -948,6 +992,10 @@ declare namespace GuardDuty {
      * Represents the criteria to be used in the filter for querying findings.
      */
     FindingCriteria: FindingCriteria;
+    /**
+     * The tags of the filter resource.
+     */
+    Tags?: TagMap;
   }
   export interface GetFindingsRequest {
     /**
@@ -1016,6 +1064,10 @@ declare namespace GuardDuty {
      * The status of ipSet file uploaded.
      */
     Status: IpSetStatus;
+    /**
+     * The tags of the IP set resource.
+     */
+    Tags?: TagMap;
   }
   export interface GetInvitationsCountRequest {
   }
@@ -1084,7 +1136,12 @@ declare namespace GuardDuty {
      * The status of threatIntelSet file uploaded.
      */
     Status: ThreatIntelSetStatus;
+    /**
+     * The tags of the Threat List resource.
+     */
+    Tags?: TagMap;
   }
+  export type GuardDutyArn = string;
   export interface IamInstanceProfile {
     /**
      * AWS EC2 instance profile ARN.
@@ -1340,6 +1397,15 @@ declare namespace GuardDuty {
      * Pagination parameter to be used on the next list operation to retrieve more items.
      */
     NextToken?: String;
+  }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) for the given GuardDuty resource 
+     */
+    ResourceArn: GuardDutyArn;
+  }
+  export interface ListTagsForResourceResponse {
+    Tags?: TagMap;
   }
   export interface ListThreatIntelSetsRequest {
     /**
@@ -1709,6 +1775,22 @@ declare namespace GuardDuty {
      */
     Value?: String;
   }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) for the given GuardDuty resource 
+     */
+    ResourceArn: GuardDutyArn;
+    /**
+     * The tags to be added to a resource.
+     */
+    Tags: TagMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type Tags = Tag[];
   export type ThreatIntelSetFormat = "TXT"|"STIX"|"OTX_CSV"|"ALIEN_VAULT"|"PROOF_POINT"|"FIRE_EYE"|string;
   export type ThreatIntelSetIds = String[];
@@ -1736,6 +1818,18 @@ declare namespace GuardDuty {
     Result: String;
   }
   export type UnprocessedAccounts = UnprocessedAccount[];
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) for the given GuardDuty resource 
+     */
+    ResourceArn: GuardDutyArn;
+    /**
+     * The tag keys to remove from a resource.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateDetectorRequest {
     /**
      * The unique ID of the detector that you want to update.
