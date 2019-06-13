@@ -1884,6 +1884,10 @@ declare namespace ElastiCache {
      */
     PrimaryEndpoint?: Endpoint;
     /**
+     * The endpoint of the replica nodes in this node group (shard).
+     */
+    ReaderEndpoint?: Endpoint;
+    /**
      * The keyspace for this node group (shard).
      */
     Slots?: String;

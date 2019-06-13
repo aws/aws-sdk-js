@@ -771,6 +771,29 @@
       ],
       "documentation": "<p>Lists details about all member accounts for the current GuardDuty master account.</p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        }
+      ],
+      "documentation": "<p>Lists tags for a resource. Tagging is currently supported for detectors, finding filters, IP sets, and Threat Intel sets, with a limit of 50 tags per resource. When invoked, this operation returns all assigned tags for a given resource..</p>"
+    },
     "ListThreatIntelSets": {
       "name": "ListThreatIntelSets",
       "http": {
@@ -840,6 +863,29 @@
       ],
       "documentation": "<p>Disables GuardDuty from monitoring findings of the member accounts specified by the account IDs. After running this command, a master GuardDuty account can run StartMonitoringMembers to re-enable GuardDuty to monitor these members’ findings.</p>"
     },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        }
+      ],
+      "documentation": "<p>Adds tags to a resource.</p>"
+    },
     "UnarchiveFindings": {
       "name": "UnarchiveFindings",
       "http": {
@@ -862,6 +908,29 @@
         }
       ],
       "documentation": "<p>Unarchives Amazon GuardDuty findings specified by the list of finding IDs.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "InternalServerErrorException"
+        }
+      ],
+      "documentation": "<p>Removes tags from a resource.</p>"
     },
     "UpdateDetector": {
       "name": "UpdateDetector",
@@ -1291,6 +1360,11 @@
           "shape": "FindingPublishingFrequency",
           "documentation": "<p>A enum value that specifies how frequently customer got Finding updates published.</p>",
           "locationName": "findingPublishingFrequency"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags to be added to a new detector resource.</p>",
+          "locationName": "tags"
         }
       }
     },
@@ -1348,6 +1422,11 @@
           "documentation": "<p>The idempotency token for the create request.</p>",
           "idempotencyToken": true,
           "locationName": "clientToken"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags to be added to a new filter resource.</p>",
+          "locationName": "tags"
         }
       }
     },
@@ -1405,6 +1484,11 @@
           "documentation": "<p>The idempotency token for the create request.</p>",
           "idempotencyToken": true,
           "locationName": "clientToken"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags to be added to a new IP set resource.</p>",
+          "locationName": "tags"
         }
       }
     },
@@ -1518,6 +1602,11 @@
           "documentation": "<p>The idempotency token for the create request.</p>",
           "idempotencyToken": true,
           "locationName": "clientToken"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags to be added to a new Threat List resource.</p>",
+          "locationName": "tags"
         }
       }
     },
@@ -2101,6 +2190,11 @@
           "shape": "String",
           "documentation": "<p>Detector last update timestamp.</p>",
           "locationName": "updatedAt"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags of the detector resource.</p>",
+          "locationName": "tags"
         }
       }
     },
@@ -2157,6 +2251,11 @@
           "shape": "FindingCriteria",
           "documentation": "<p>Represents the criteria to be used in the filter for querying findings.</p>",
           "locationName": "findingCriteria"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags of the filter resource.</p>",
+          "locationName": "tags"
         }
       }
     },
@@ -2285,6 +2384,11 @@
           "shape": "IpSetStatus",
           "documentation": "<p>The status of ipSet file uploaded.</p>",
           "locationName": "status"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags of the IP set resource.</p>",
+          "locationName": "tags"
         }
       }
     },
@@ -2417,8 +2521,17 @@
           "shape": "ThreatIntelSetStatus",
           "documentation": "<p>The status of threatIntelSet file uploaded.</p>",
           "locationName": "status"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags of the Threat List resource.</p>",
+          "locationName": "tags"
         }
       }
+    },
+    "GuardDutyArn": {
+      "type": "string",
+      "pattern": "^arn:[A-Za-z_.-]{1,20}:guardduty:[A-Za-z0-9_/.-]{0,63}:\\d+:detector/[A-Za-z0-9_/.-]{32,264}$"
     },
     "IamInstanceProfile": {
       "type": "structure",
@@ -2871,6 +2984,29 @@
           "shape": "String",
           "documentation": "<p>Pagination parameter to be used on the next list operation to retrieve more items.</p>",
           "locationName": "nextToken"
+        }
+      }
+    },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "GuardDutyArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the given GuardDuty resource </p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "TagMap",
+          "locationName": "tags"
         }
       }
     },
@@ -3484,6 +3620,59 @@
         }
       }
     },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "max": 200,
+      "min": 1
+    },
+    "TagMap": {
+      "type": "map",
+      "key": {
+        "shape": "TagKey"
+      },
+      "value": {
+        "shape": "TagValue"
+      },
+      "max": 200,
+      "min": 1
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "Tags"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "GuardDutyArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the given GuardDuty resource </p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags to be added to a resource.</p>",
+          "locationName": "tags"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256
+    },
     "Tags": {
       "type": "list",
       "member": {
@@ -3575,6 +3764,31 @@
       },
       "max": 50,
       "min": 0
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "TagKeys"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "GuardDutyArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the given GuardDuty resource </p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "TagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>The tag keys to remove from a resource.</p>",
+          "location": "querystring",
+          "locationName": "tagKeys"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateDetectorRequest": {
       "type": "structure",
