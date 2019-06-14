@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.475.0-->
+<!--LATEST=2.476.0-->
 <!--ENTRYINSERT-->
+
+## 2.476.0
+* feature: AppStream: Added 2 new values(WINDOWS_SERVER_2016, WINDOWS_SERVER_2019) for PlatformType enum.
+* feature: CloudFront: A new datatype in the CloudFront API, AliasICPRecordal, provides the ICP recordal status for CNAMEs associated with distributions. AWS services in China customers must file for an Internet Content Provider (ICP) recordal if they want to serve content publicly on an alternate domain name, also known as a CNAME, that they have added to CloudFront. The status value is returned in the CloudFront response; you cannot configure it yourself. The status is set to APPROVED for all CNAMEs (aliases) in regions outside of China.
+* feature: EC2: Correction to enumerations in EC2 client.
 
 ## 2.475.0
 * feature: AppMesh: This release adds support for AWS Cloud Map as a service discovery method for virtual nodes.

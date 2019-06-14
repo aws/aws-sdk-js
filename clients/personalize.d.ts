@@ -1561,7 +1561,7 @@ declare namespace Personalize {
      */
     creationDateTime?: _Date;
     /**
-     * One of the following values:   SEARCH_PERSONALIZATION   RELATED_ITEMS   USER_PERSONALIZATION  
+     * One of the following values:   PERSONALIZED_RANKING   RELATED_ITEMS   USER_PERSONALIZATION  
      */
     recipeType?: RecipeType;
     /**
