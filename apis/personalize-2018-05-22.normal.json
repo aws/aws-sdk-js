@@ -2750,7 +2750,7 @@
         },
         "recipeType": {
           "shape": "RecipeType",
-          "documentation": "<p>One of the following values:</p> <ul> <li> <p>SEARCH_PERSONALIZATION</p> </li> <li> <p>RELATED_ITEMS</p> </li> <li> <p>USER_PERSONALIZATION</p> </li> </ul>"
+          "documentation": "<p>One of the following values:</p> <ul> <li> <p>PERSONALIZED_RANKING</p> </li> <li> <p>RELATED_ITEMS</p> </li> <li> <p>USER_PERSONALIZATION</p> </li> </ul>"
         },
         "lastUpdatedDateTime": {
           "shape": "Date",

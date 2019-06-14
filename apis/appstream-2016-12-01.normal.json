@@ -332,6 +332,9 @@
       },
       "errors": [
         {
+          "shape": "InvalidRoleException"
+        },
+        {
           "shape": "InvalidAccountStatusException"
         }
       ],
@@ -3008,7 +3011,9 @@
     "PlatformType": {
       "type": "string",
       "enum": [
-        "WINDOWS"
+        "WINDOWS",
+        "WINDOWS_SERVER_2016",
+        "WINDOWS_SERVER_2019"
       ]
     },
     "RedirectURL": {
