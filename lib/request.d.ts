@@ -29,7 +29,7 @@ export class Request<D, E> {
      *
      * @param {eachPage} callback - The callback that handles the response.
      */
-    eachPage(callback: (err: E, data: D, doneCallback?: () => void) => boolean): void;
+    eachPage(callback: (err: E, data: D, doneCallback: () => void) => boolean): void;
     /**
      * Returns whether the operation can return multiple pages of response data.
      */
