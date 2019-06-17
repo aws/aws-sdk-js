@@ -311,6 +311,9 @@
         },
         {
           "shape": "OperationNotSupportedException"
+        },
+        {
+          "shape": "InvalidStateException"
         }
       ],
       "documentation": "<p>Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the master account of an Organization. AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node.</p>"
@@ -508,6 +511,9 @@
         },
         {
           "shape": "OperationNotSupportedException"
+        },
+        {
+          "shape": "InvalidStateException"
         }
       ],
       "documentation": "<p>Stops sharing the specified portfolio with the specified account or organization node. Shares to an organization node can only be deleted by the master account of an Organization.</p>"

@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.476.0-->
+<!--LATEST=2.477.0-->
 <!--ENTRYINSERT-->
+
+## 2.477.0
+* feature: Neptune: This release adds a feature to configure Amazon Neptune to publish audit logs to Amazon CloudWatch Logs.
+* feature: RoboMaker: Add the ServiceUnavailableException (503) into CreateSimulationJob API.
+* feature: ServiceCatalog: Restrict concurrent calls by a single customer account for CreatePortfolioShare and DeletePortfolioShare when sharing/unsharing to an Organization.
 
 ## 2.476.0
 * feature: AppStream: Added 2 new values(WINDOWS_SERVER_2016, WINDOWS_SERVER_2019) for PlatformType enum.

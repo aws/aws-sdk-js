@@ -575,7 +575,7 @@
           "shape": "InvalidDBClusterStateFault"
         }
       ],
-      "documentation": "<p>The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can't be recovered. Manual DB snapshots of the DB instance to be deleted by <code>DeleteDBInstance</code> are not deleted.</p> <p> If you request a final DB snapshot the status of the Amazon Neptune DB instance is <code>deleting</code> until the DB snapshot is created. The API action <code>DescribeDBInstance</code> is used to monitor the status of this operation. The action can't be canceled or reverted once submitted.</p> <p>Note that when a DB instance is in a failure state and has a status of <code>failed</code>, <code>incompatible-restore</code>, or <code>incompatible-network</code>, you can only delete it when the <code>SkipFinalSnapshot</code> parameter is set to <code>true</code>.</p> <p>If the specified DB instance is part of a DB cluster, you can't delete the DB instance if both of the following conditions are true:</p> <ul> <li> <p>The DB instance is the only instance in the DB cluster.</p> </li> </ul>"
+      "documentation": "<p>The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can't be recovered. Manual DB snapshots of the DB instance to be deleted by <code>DeleteDBInstance</code> are not deleted.</p> <p> If you request a final DB snapshot the status of the Amazon Neptune DB instance is <code>deleting</code> until the DB snapshot is created. The API action <code>DescribeDBInstance</code> is used to monitor the status of this operation. The action can't be canceled or reverted once submitted.</p> <p>Note that when a DB instance is in a failure state and has a status of <code>failed</code>, <code>incompatible-restore</code>, or <code>incompatible-network</code>, you can only delete it when the <code>SkipFinalSnapshot</code> parameter is set to <code>true</code>.</p> <p>You can't delete a DB instance if it is the only instance in the DB cluster.</p>"
     },
     "DeleteDBParameterGroup": {
       "name": "DeleteDBParameterGroup",
@@ -1740,7 +1740,7 @@
           "documentation": "<p>The list of log types to disable.</p>"
         }
       },
-      "documentation": "<p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.</p>"
+      "documentation": "<p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB instance or DB cluster.</p> <p>The <code>EnableLogTypes</code> and <code>DisableLogTypes</code> arrays determine which logs will be exported (or not exported) to CloudWatch Logs.</p>"
     },
     "CopyDBClusterParameterGroupMessage": {
       "type": "structure",
@@ -1945,6 +1945,10 @@
         "EnableIAMDatabaseAuthentication": {
           "shape": "BooleanOptional",
           "documentation": "<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>Default: <code>false</code> </p>"
+        },
+        "EnableCloudwatchLogsExports": {
+          "shape": "LogTypeList",
+          "documentation": "<p>The list of log types that need to be enabled for exporting to CloudWatch Logs.</p>"
         }
       }
     },
@@ -2461,6 +2465,10 @@
         "ClusterCreateTime": {
           "shape": "TStamp",
           "documentation": "<p>Specifies the time when the DB cluster was created, in Universal Coordinated Time (UTC).</p>"
+        },
+        "EnabledCloudwatchLogsExports": {
+          "shape": "LogTypeList",
+          "documentation": "<p>A list of log types that this DB cluster is configured to export to CloudWatch Logs.</p>"
         }
       },
       "documentation": "<p>Contains the details of an Amazon Neptune DB cluster.</p> <p>This data type is used as a response element in the <a>DescribeDBClusters</a> action.</p>",
@@ -4270,6 +4278,10 @@
           "shape": "BooleanOptional",
           "documentation": "<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>Default: <code>false</code> </p>"
         },
+        "CloudwatchLogsExportConfiguration": {
+          "shape": "CloudwatchLogsExportConfiguration",
+          "documentation": "<p>The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB cluster.</p>"
+        },
         "EngineVersion": {
           "shape": "String",
           "documentation": "<p>The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true.</p> <p>For a list of valid engine versions, see <a>CreateDBInstance</a>, or call <a>DescribeDBEngineVersions</a>.</p>"
@@ -5155,6 +5167,10 @@
           "shape": "BooleanOptional",
           "documentation": "<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>Default: <code>false</code> </p>"
         },
+        "EnableCloudwatchLogsExports": {
+          "shape": "LogTypeList",
+          "documentation": "<p>The list of logs that the restored DB cluster is to export to Amazon CloudWatch Logs.</p>"
+        },
         "DBClusterParameterGroupName": {
           "shape": "String",
           "documentation": "<p>The name of the DB cluster parameter group to associate with the new DB cluster.</p> <p>Constraints:</p> <ul> <li> <p>If supplied, must match the name of an existing DBClusterParameterGroup.</p> </li> </ul>"
@@ -5182,7 +5198,7 @@
         },
         "RestoreType": {
           "shape": "String",
-          "documentation": "<p>The type of restore to be performed. The only type of restore currently supported is <code>full-copy</code> (the default).</p>"
+          "documentation": "<p>The type of restore to be performed. You can specify one of the following values:</p> <ul> <li> <p> <code>full-copy</code> - The new DB cluster is restored as a full copy of the source DB cluster.</p> </li> <li> <p> <code>copy-on-write</code> - The new DB cluster is restored as a clone of the source DB cluster.</p> </li> </ul> <p>If you don't specify a <code>RestoreType</code> value, then the new DB cluster is restored as a full copy of the source DB cluster.</p>"
         },
         "SourceDBClusterIdentifier": {
           "shape": "String",
@@ -5223,6 +5239,10 @@
         "EnableIAMDatabaseAuthentication": {
           "shape": "BooleanOptional",
           "documentation": "<p>True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false.</p> <p>Default: <code>false</code> </p>"
+        },
+        "EnableCloudwatchLogsExports": {
+          "shape": "LogTypeList",
+          "documentation": "<p>The list of logs that the restored DB cluster is to export to CloudWatch Logs.</p>"
         },
         "DBClusterParameterGroupName": {
           "shape": "String",

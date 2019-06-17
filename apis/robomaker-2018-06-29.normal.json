@@ -353,6 +353,9 @@
         },
         {
           "shape": "IdempotentParameterMismatchException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
         }
       ],
       "documentation": "<p>Creates a simulation job.</p> <note> <p>After 90 days, simulation jobs expire and will be deleted. They will no longer be accessible. </p> </note>"
@@ -511,7 +514,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Describes a deployment job. [Does it work regardless of deployment status, e.g. Failed?]</p>"
+      "documentation": "<p>Describes a deployment job.</p>"
     },
     "DescribeFleet": {
       "name": "DescribeFleet",
@@ -1843,6 +1846,7 @@
         "EnvironmentSetupError",
         "EtagMismatch",
         "FailureThresholdBreached",
+        "RobotDeploymentAborted",
         "RobotDeploymentNoResponse",
         "RobotAgentConnectionTimeout",
         "GreengrassDeploymentFailed",

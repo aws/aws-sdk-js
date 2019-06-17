@@ -140,11 +140,11 @@ declare class RoboMaker extends Service {
    */
   deregisterRobot(callback?: (err: AWSError, data: RoboMaker.Types.DeregisterRobotResponse) => void): Request<RoboMaker.Types.DeregisterRobotResponse, AWSError>;
   /**
-   * Describes a deployment job. [Does it work regardless of deployment status, e.g. Failed?]
+   * Describes a deployment job.
    */
   describeDeploymentJob(params: RoboMaker.Types.DescribeDeploymentJobRequest, callback?: (err: AWSError, data: RoboMaker.Types.DescribeDeploymentJobResponse) => void): Request<RoboMaker.Types.DescribeDeploymentJobResponse, AWSError>;
   /**
-   * Describes a deployment job. [Does it work regardless of deployment status, e.g. Failed?]
+   * Describes a deployment job.
    */
   describeDeploymentJob(callback?: (err: AWSError, data: RoboMaker.Types.DescribeDeploymentJobResponse) => void): Request<RoboMaker.Types.DescribeDeploymentJobResponse, AWSError>;
   /**
@@ -879,7 +879,7 @@ declare namespace RoboMaker {
      */
     createdAt?: CreatedAt;
   }
-  export type DeploymentJobErrorCode = "ResourceNotFound"|"EnvironmentSetupError"|"EtagMismatch"|"FailureThresholdBreached"|"RobotDeploymentNoResponse"|"RobotAgentConnectionTimeout"|"GreengrassDeploymentFailed"|"MissingRobotArchitecture"|"MissingRobotApplicationArchitecture"|"MissingRobotDeploymentResource"|"GreengrassGroupVersionDoesNotExist"|"ExtractingBundleFailure"|"PreLaunchFileFailure"|"PostLaunchFileFailure"|"BadPermissionError"|"InternalServerError"|string;
+  export type DeploymentJobErrorCode = "ResourceNotFound"|"EnvironmentSetupError"|"EtagMismatch"|"FailureThresholdBreached"|"RobotDeploymentAborted"|"RobotDeploymentNoResponse"|"RobotAgentConnectionTimeout"|"GreengrassDeploymentFailed"|"MissingRobotArchitecture"|"MissingRobotApplicationArchitecture"|"MissingRobotDeploymentResource"|"GreengrassGroupVersionDoesNotExist"|"ExtractingBundleFailure"|"PreLaunchFileFailure"|"PostLaunchFileFailure"|"BadPermissionError"|"InternalServerError"|string;
   export type DeploymentJobs = DeploymentJob[];
   export interface DeploymentLaunchConfig {
     /**
