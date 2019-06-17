@@ -13,6 +13,9 @@ A clear and concise description of what the bug is.
 **Is the issue in the browser/Node.js?**
 Browser/Node.js
 
+**If on Node.js, are you running this on AWS Lambda?**
+AWS Lambda uses previous versions of SDK as documented in their [runtimes documentation](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
+
 **Details of the browser/Node.js version**
 Paste output of `npx envinfo --browsers` or `node -v`
 
