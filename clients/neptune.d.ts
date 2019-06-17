@@ -149,11 +149,11 @@ declare class Neptune extends Service {
    */
   deleteDBClusterSnapshot(callback?: (err: AWSError, data: Neptune.Types.DeleteDBClusterSnapshotResult) => void): Request<Neptune.Types.DeleteDBClusterSnapshotResult, AWSError>;
   /**
-   * The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can't be recovered. Manual DB snapshots of the DB instance to be deleted by DeleteDBInstance are not deleted.  If you request a final DB snapshot the status of the Amazon Neptune DB instance is deleting until the DB snapshot is created. The API action DescribeDBInstance is used to monitor the status of this operation. The action can't be canceled or reverted once submitted. Note that when a DB instance is in a failure state and has a status of failed, incompatible-restore, or incompatible-network, you can only delete it when the SkipFinalSnapshot parameter is set to true. If the specified DB instance is part of a DB cluster, you can't delete the DB instance if both of the following conditions are true:   The DB instance is the only instance in the DB cluster.  
+   * The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can't be recovered. Manual DB snapshots of the DB instance to be deleted by DeleteDBInstance are not deleted.  If you request a final DB snapshot the status of the Amazon Neptune DB instance is deleting until the DB snapshot is created. The API action DescribeDBInstance is used to monitor the status of this operation. The action can't be canceled or reverted once submitted. Note that when a DB instance is in a failure state and has a status of failed, incompatible-restore, or incompatible-network, you can only delete it when the SkipFinalSnapshot parameter is set to true. You can't delete a DB instance if it is the only instance in the DB cluster.
    */
   deleteDBInstance(params: Neptune.Types.DeleteDBInstanceMessage, callback?: (err: AWSError, data: Neptune.Types.DeleteDBInstanceResult) => void): Request<Neptune.Types.DeleteDBInstanceResult, AWSError>;
   /**
-   * The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can't be recovered. Manual DB snapshots of the DB instance to be deleted by DeleteDBInstance are not deleted.  If you request a final DB snapshot the status of the Amazon Neptune DB instance is deleting until the DB snapshot is created. The API action DescribeDBInstance is used to monitor the status of this operation. The action can't be canceled or reverted once submitted. Note that when a DB instance is in a failure state and has a status of failed, incompatible-restore, or incompatible-network, you can only delete it when the SkipFinalSnapshot parameter is set to true. If the specified DB instance is part of a DB cluster, you can't delete the DB instance if both of the following conditions are true:   The DB instance is the only instance in the DB cluster.  
+   * The DeleteDBInstance action deletes a previously provisioned DB instance. When you delete a DB instance, all automated backups for that instance are deleted and can't be recovered. Manual DB snapshots of the DB instance to be deleted by DeleteDBInstance are not deleted.  If you request a final DB snapshot the status of the Amazon Neptune DB instance is deleting until the DB snapshot is created. The API action DescribeDBInstance is used to monitor the status of this operation. The action can't be canceled or reverted once submitted. Note that when a DB instance is in a failure state and has a status of failed, incompatible-restore, or incompatible-network, you can only delete it when the SkipFinalSnapshot parameter is set to true. You can't delete a DB instance if it is the only instance in the DB cluster.
    */
   deleteDBInstance(callback?: (err: AWSError, data: Neptune.Types.DeleteDBInstanceResult) => void): Request<Neptune.Types.DeleteDBInstanceResult, AWSError>;
   /**
@@ -728,6 +728,10 @@ declare namespace Neptune {
      * True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false. Default: false 
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
+    /**
+     * The list of log types that need to be enabled for exporting to CloudWatch Logs.
+     */
+    EnableCloudwatchLogsExports?: LogTypeList;
   }
   export interface CreateDBClusterParameterGroupMessage {
     /**
@@ -1159,6 +1163,10 @@ declare namespace Neptune {
      * Specifies the time when the DB cluster was created, in Universal Coordinated Time (UTC).
      */
     ClusterCreateTime?: TStamp;
+    /**
+     * A list of log types that this DB cluster is configured to export to CloudWatch Logs.
+     */
+    EnabledCloudwatchLogsExports?: LogTypeList;
   }
   export type DBClusterList = DBCluster[];
   export interface DBClusterMember {
@@ -2488,6 +2496,10 @@ declare namespace Neptune {
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
+     * The configuration setting for the log types to be enabled for export to CloudWatch Logs for a specific DB cluster.
+     */
+    CloudwatchLogsExportConfiguration?: CloudwatchLogsExportConfiguration;
+    /**
      * The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true. For a list of valid engine versions, see CreateDBInstance, or call DescribeDBEngineVersions.
      */
     EngineVersion?: String;
@@ -3145,6 +3157,10 @@ declare namespace Neptune {
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
     /**
+     * The list of logs that the restored DB cluster is to export to Amazon CloudWatch Logs.
+     */
+    EnableCloudwatchLogsExports?: LogTypeList;
+    /**
      * The name of the DB cluster parameter group to associate with the new DB cluster. Constraints:   If supplied, must match the name of an existing DBClusterParameterGroup.  
      */
     DBClusterParameterGroupName?: String;
@@ -3158,7 +3174,7 @@ declare namespace Neptune {
      */
     DBClusterIdentifier: String;
     /**
-     * The type of restore to be performed. The only type of restore currently supported is full-copy (the default).
+     * The type of restore to be performed. You can specify one of the following values:    full-copy - The new DB cluster is restored as a full copy of the source DB cluster.    copy-on-write - The new DB cluster is restored as a clone of the source DB cluster.   If you don't specify a RestoreType value, then the new DB cluster is restored as a full copy of the source DB cluster.
      */
     RestoreType?: String;
     /**
@@ -3201,6 +3217,10 @@ declare namespace Neptune {
      * True to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts, and otherwise false. Default: false 
      */
     EnableIAMDatabaseAuthentication?: BooleanOptional;
+    /**
+     * The list of logs that the restored DB cluster is to export to CloudWatch Logs.
+     */
+    EnableCloudwatchLogsExports?: LogTypeList;
     /**
      * The name of the DB cluster parameter group to associate with the new DB cluster. Constraints:   If supplied, must match the name of an existing DBClusterParameterGroup.  
      */
