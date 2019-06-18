@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.477.0-->
+<!--LATEST=2.478.0-->
 <!--ENTRYINSERT-->
+
+## 2.478.0
+* feature: EC2: You can now launch new 12xlarge, 24xlarge, and metal instance sizes on the Amazon EC2 compute optimized C5 instance types featuring 2nd Gen Intel Xeon Scalable Processors.
+* feature: ResourceGroupsTaggingAPI: You can use tag policies to help standardize on tags across your organization's resources.
 
 ## 2.477.0
 * feature: Neptune: This release adds a feature to configure Amazon Neptune to publish audit logs to Amazon CloudWatch Logs.

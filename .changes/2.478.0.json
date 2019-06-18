@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "You can now launch new 12xlarge, 24xlarge, and metal instance sizes on the Amazon EC2 compute optimized C5 instance types featuring 2nd Gen Intel Xeon Scalable Processors."
+    },
+    {
+        "type": "feature",
+        "category": "ResourceGroupsTaggingAPI",
+        "description": "You can use tag policies to help standardize on tags across your organization's resources."
+    }
+]
