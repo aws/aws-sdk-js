@@ -30,7 +30,8 @@ if (AWS.util.isNode()) {
           expect(monitoringConfig()).to.eql({
             enabled: true,
             port: undefined,
-            clientId: undefined
+            clientId: undefined,
+            host: undefined
           });
         }
       });
@@ -43,7 +44,8 @@ if (AWS.util.isNode()) {
           expect(monitoringConfig()).to.eql({
             enabled: false,
             port: undefined,
-            clientId: undefined
+            clientId: undefined,
+            host: undefined
           });
         }
       });
@@ -55,6 +57,7 @@ if (AWS.util.isNode()) {
           enabled: false,
           port: 31001,
           clientId: undefined,
+          host: undefined
         });
       });
 
@@ -65,8 +68,20 @@ if (AWS.util.isNode()) {
           enabled: false,
           port: undefined,
           clientId: 'client_id',
+          host: undefined
         });
       });
+
+      it('should get host', function() {
+        process.env.AWS_CSM_HOST = '127.0.0.2';
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn('');
+        expect(monitoringConfig()).to.eql({
+          enabled: false,
+          port: undefined,
+          clientId: undefined,
+          host: '127.0.0.2'
+        });
+      })
     });
 
     describe('get configuration from config file', function () {
@@ -79,7 +94,8 @@ if (AWS.util.isNode()) {
           expect(monitoringConfig()).to.eql({
             enabled: true,
             port: undefined,
-            clientId: undefined
+            clientId: undefined,
+            host: undefined
           });
         }
       });
@@ -91,7 +107,8 @@ if (AWS.util.isNode()) {
           expect(monitoringConfig()).to.eql({
             enabled: false,
             port: undefined,
-            clientId: undefined
+            clientId: undefined,
+            host: undefined
           });
         }
       });
@@ -103,7 +120,8 @@ if (AWS.util.isNode()) {
         expect(monitoringConfig()).to.eql({
           enabled: false,
           port: undefined,
-          clientId: undefined
+          clientId: undefined,
+          host: undefined
         });
       });
 
@@ -113,6 +131,7 @@ if (AWS.util.isNode()) {
           enabled: false,
           port: 31001,
           clientId: undefined,
+          host: undefined
         });
       });
 
@@ -122,8 +141,19 @@ if (AWS.util.isNode()) {
           enabled: false,
           port: undefined,
           clientId: 'id',
+          host: undefined
         });
       });
+
+      it('should get host', function () {
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn('[default]\ncsm_host=::1');
+        expect(monitoringConfig()).to.eql({
+          enabled: false,
+          port: undefined,
+          clientId: undefined,
+          host: '::1'
+        });
+      })
     });
 
     describe('get configurations according to resolving chain', function () {
@@ -138,6 +168,7 @@ if (AWS.util.isNode()) {
           enabled: true,
           port: 54321,
           clientId: 'clientid',
+          host: undefined
         });
       });
 

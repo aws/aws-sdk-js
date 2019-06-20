@@ -12,6 +12,7 @@ if (AWS.util.isNode()) {
         });
 
         expect(publisher.port).to.equal(1111);
+        expect(publisher.address).to.equal('127.0.0.1');
       });
 
       it('uses default port of 31000 if none was passed in', function () {
@@ -19,6 +20,20 @@ if (AWS.util.isNode()) {
 
         expect(publisher.port).to.equal(31000);
       });
+
+      it('uses "127.0.0.1" as default address', function() {
+        var publisher = new Publisher();
+
+        expect(publisher.address).to.equal('127.0.0.1')
+      });
+
+      it('setting "host" of the passed-in option will set the address', function() {
+        var publisher = new Publisher({
+          host: 'dnshost'
+        });
+
+        expect(publisher.address).to.equal('dnshost');
+      })
 
       it('sets "clientId" to the passed in option', function () {
         var publisher = new Publisher({
@@ -55,7 +70,7 @@ if (AWS.util.isNode()) {
         expect(publisher.enabled).to.equal(true);
       });
 
-      it('uses default port of 31000 if none was passed in', function () {
+      it('uses set enabled as false if none was passed in', function () {
         var publisher = new Publisher();
 
         expect(publisher.enabled).to.equal(false);
