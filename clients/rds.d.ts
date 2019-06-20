@@ -1640,6 +1640,10 @@ declare namespace RDS {
      * A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. For more information, see  Deleting a DB Instance. 
      */
     DeletionProtection?: BooleanOptional;
+    /**
+     * The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
+     */
+    MaxAllocatedStorage?: IntegerOptional;
   }
   export interface CreateDBInstanceReadReplicaMessage {
     /**
@@ -2747,6 +2751,10 @@ declare namespace RDS {
      * Specifies the listener connection endpoint for SQL Server Always On.
      */
     ListenerEndpoint?: Endpoint;
+    /**
+     * The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
+     */
+    MaxAllocatedStorage?: IntegerOptional;
   }
   export interface DBInstanceAutomatedBackup {
     /**
@@ -4728,6 +4736,10 @@ declare namespace RDS {
      * A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. For more information, see  Deleting a DB Instance. 
      */
     DeletionProtection?: BooleanOptional;
+    /**
+     * The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
+     */
+    MaxAllocatedStorage?: IntegerOptional;
   }
   export interface ModifyDBInstanceResult {
     DBInstance?: DBInstance;
@@ -5234,6 +5246,10 @@ declare namespace RDS {
      * A list of the supported DB engine modes.
      */
     SupportedEngineModes?: EngineModeList;
+    /**
+     * Whether or not Amazon RDS can automatically scale storage for DB instances that use the specified instance class.
+     */
+    SupportsStorageAutoscaling?: BooleanOptional;
   }
   export type OrderableDBInstanceOptionsList = OrderableDBInstanceOption[];
   export interface OrderableDBInstanceOptionsMessage {
@@ -6716,6 +6732,10 @@ declare namespace RDS {
      * The valid range of Provisioned IOPS to gibibytes of storage multiplier. For example, 3-10, which means that provisioned IOPS can be between 3 and 10 times storage. 
      */
     IopsToStorageRatio?: DoubleRangeList;
+    /**
+     * Whether or not Amazon RDS can automatically scale storage for DB instances that use the new instance class.
+     */
+    SupportsStorageAutoscaling?: Boolean;
   }
   export type ValidStorageOptionsList = ValidStorageOptions[];
   export type ValidUpgradeTargetList = UpgradeTarget[];

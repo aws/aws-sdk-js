@@ -481,7 +481,7 @@ declare namespace Health {
   export type eventStatusCode = "open"|"closed"|"upcoming"|string;
   export type eventStatusCodeList = eventStatusCode[];
   export type eventType = string;
-  export type eventTypeCategory = "issue"|"accountNotification"|"scheduledChange"|string;
+  export type eventTypeCategory = "issue"|"accountNotification"|"scheduledChange"|"investigation"|string;
   export type eventTypeCategoryList = eventTypeCategory[];
   export type eventTypeCode = string;
   export type eventTypeList = eventType[];

@@ -38,7 +38,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Sends a set of messages to the AWS IoT Events system. Each message payload will be transformed into the input you specify (<code>inputName</code>) and ingested into any detectors that monitor that input. If multiple messages are sent, the order in which the messages are processed is not guaranteed--you must send messages one at a time and wait for a successful response to guarantee ordering. </p>"
+      "documentation": "<p>Sends a set of messages to the AWS IoT Events system. Each message payload is transformed into the input you specify (<code>\"inputName\"</code>) and ingested into any detectors that monitor that input. If multiple messages are sent, the order in which the messages are processed isn't guaranteed. To guarantee ordering, you must send messages one at a time and wait for a successful response.</p>"
     },
     "BatchUpdateDetector": {
       "name": "BatchUpdateDetector",
@@ -144,7 +144,7 @@
       "members": {
         "messageId": {
           "shape": "MessageId",
-          "documentation": "<p>The ID of the message that caused the error. (See the value corresponding to the <code>messageId</code> key in the <code>message</code> object.)</p>"
+          "documentation": "<p>The ID of the message that caused the error. (See the value corresponding to the <code>\"messageId\"</code> key in the <code>\"message\"</code> object.)</p>"
         },
         "errorCode": {
           "shape": "ErrorCode",
@@ -155,7 +155,7 @@
           "documentation": "<p>More information about the error.</p>"
         }
       },
-      "documentation": "<p>Contains informations about the errors encountered.</p>"
+      "documentation": "<p>Contains information about the errors encountered.</p>"
     },
     "BatchPutMessageRequest": {
       "type": "structure",
@@ -165,7 +165,7 @@
       "members": {
         "messages": {
           "shape": "Messages",
-          "documentation": "<p>The list of messages to send. Each message has format: <code>'{ \"messageId\": \"string\", \"inputName\": \"string\", \"payload\": \"string\"}'</code>.</p>"
+          "documentation": "<p>The list of messages to send. Each message has the following format: <code>'{ \"messageId\": \"string\", \"inputName\": \"string\", \"payload\": \"string\"}'</code> </p>"
         }
       }
     },
@@ -189,7 +189,7 @@
       "members": {
         "messageId": {
           "shape": "MessageId",
-          "documentation": "<p>The \"messageId\" of the update request that caused the error. (The value of the <code>messageId</code> in the update request <code>Detector</code> object.)</p>"
+          "documentation": "<p>The <code>\"messageId\"</code> of the update request that caused the error. (The value of the <code>\"messageId\"</code> in the update request <code>\"Detector\"</code> object.)</p>"
         },
         "errorCode": {
           "shape": "ErrorCode",
@@ -200,7 +200,7 @@
           "documentation": "<p>A message describing the error.</p>"
         }
       },
-      "documentation": "<p>Information about the error which occured when attempting to update a detector.</p>"
+      "documentation": "<p>Information about the error that occured when attempting to update a detector.</p>"
     },
     "BatchUpdateDetectorRequest": {
       "type": "structure",
@@ -210,7 +210,7 @@
       "members": {
         "detectors": {
           "shape": "UpdateDetectorRequests",
-          "documentation": "<p>The list of detectors (instances) to be updated, along with the values to be updated.</p>"
+          "documentation": "<p>The list of detectors (instances) to update, along with the values to update.</p>"
         }
       }
     },
@@ -219,7 +219,7 @@
       "members": {
         "batchUpdateDetectorErrorEntries": {
           "shape": "BatchUpdateDetectorErrorEntries",
-          "documentation": "<p>A list of those detector updates which resulted in errors. (The specific update did not occur if an error is listed here.)</p>"
+          "documentation": "<p>A list of those detector updates that resulted in errors. (If an error is listed here, the specific update did not occur.)</p>"
         }
       }
     },
@@ -307,7 +307,7 @@
         },
         "variables": {
           "shape": "Variables",
-          "documentation": "<p>The current state of the detector's variables.</p>"
+          "documentation": "<p>The current values of the detector's variables.</p>"
         },
         "timers": {
           "shape": "Timers",
@@ -330,14 +330,14 @@
         },
         "variables": {
           "shape": "VariableDefinitions",
-          "documentation": "<p>The new values of the detector's variables. Any variable whose value is not specified will be cleared.</p>"
+          "documentation": "<p>The new values of the detector's variables. Any variable whose value isn't specified is cleared.</p>"
         },
         "timers": {
           "shape": "TimerDefinitions",
-          "documentation": "<p>The new values of the detector's timers. Any timer whose value is not specified will be cleared and its timeout event will not occur.</p>"
+          "documentation": "<p>The new values of the detector's timers. Any timer whose value isn't specified is cleared, and its timeout event won't occur.</p>"
         }
       },
-      "documentation": "<p>The new state, variable values and timer settings of the detector (instance).</p>"
+      "documentation": "<p>The new state, variable values, and timer settings of the detector (instance).</p>"
     },
     "DetectorStateSummary": {
       "type": "structure",
@@ -408,7 +408,7 @@
       "type": "string",
       "max": 128,
       "min": 1,
-      "pattern": "^[a-zA-Z0-9\\-_]+$"
+      "pattern": "^[a-zA-Z0-9\\-_:]+$"
     },
     "ListDetectorsRequest": {
       "type": "structure",
@@ -418,7 +418,7 @@
       "members": {
         "detectorModelName": {
           "shape": "DetectorModelName",
-          "documentation": "<p>The name of the detector model whose instances you want to list.</p>",
+          "documentation": "<p>The name of the detector model whose detectors (instances) are listed.</p>",
           "location": "uri",
           "locationName": "detectorModelName"
         },
@@ -470,11 +470,11 @@
       "members": {
         "messageId": {
           "shape": "MessageId",
-          "documentation": "<p>The ID you wish to assign to the message. Each \"messageId\" must be unique within each batch sent.</p>"
+          "documentation": "<p>The ID to assign to the message. Within each batch sent, each <code>\"messageId\"</code> must be unique.</p>"
         },
         "inputName": {
           "shape": "InputName",
-          "documentation": "<p>The name of the input into which the message payload will be transformed.</p>"
+          "documentation": "<p>The name of the input into which the message payload is transformed.</p>"
         },
         "payload": {
           "shape": "Payload",
@@ -576,7 +576,7 @@
       "members": {
         "messageId": {
           "shape": "MessageId",
-          "documentation": "<p>The ID you wish to assign to the detector update \"message\". Each \"messageId\" must be unique within each batch sent.</p>"
+          "documentation": "<p>The ID to assign to the detector update <code>\"message\"</code>. Each <code>\"messageId\"</code> must be unique within each batch sent.</p>"
         },
         "detectorModelName": {
           "shape": "DetectorModelName",
@@ -660,5 +660,5 @@
       }
     }
   },
-  "documentation": "<p>AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur.</p>"
+  "documentation": "<p>AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur. AWS IoT Events Data API commands enable you to send inputs to detectors, list detectors, and view or update a detector's status.</p>"
 }
