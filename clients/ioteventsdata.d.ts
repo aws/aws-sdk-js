@@ -12,11 +12,11 @@ declare class IoTEventsData extends Service {
   constructor(options?: IoTEventsData.Types.ClientConfiguration)
   config: Config & IoTEventsData.Types.ClientConfiguration;
   /**
-   * Sends a set of messages to the AWS IoT Events system. Each message payload will be transformed into the input you specify (inputName) and ingested into any detectors that monitor that input. If multiple messages are sent, the order in which the messages are processed is not guaranteed--you must send messages one at a time and wait for a successful response to guarantee ordering. 
+   * Sends a set of messages to the AWS IoT Events system. Each message payload is transformed into the input you specify ("inputName") and ingested into any detectors that monitor that input. If multiple messages are sent, the order in which the messages are processed isn't guaranteed. To guarantee ordering, you must send messages one at a time and wait for a successful response.
    */
   batchPutMessage(params: IoTEventsData.Types.BatchPutMessageRequest, callback?: (err: AWSError, data: IoTEventsData.Types.BatchPutMessageResponse) => void): Request<IoTEventsData.Types.BatchPutMessageResponse, AWSError>;
   /**
-   * Sends a set of messages to the AWS IoT Events system. Each message payload will be transformed into the input you specify (inputName) and ingested into any detectors that monitor that input. If multiple messages are sent, the order in which the messages are processed is not guaranteed--you must send messages one at a time and wait for a successful response to guarantee ordering. 
+   * Sends a set of messages to the AWS IoT Events system. Each message payload is transformed into the input you specify ("inputName") and ingested into any detectors that monitor that input. If multiple messages are sent, the order in which the messages are processed isn't guaranteed. To guarantee ordering, you must send messages one at a time and wait for a successful response.
    */
   batchPutMessage(callback?: (err: AWSError, data: IoTEventsData.Types.BatchPutMessageResponse) => void): Request<IoTEventsData.Types.BatchPutMessageResponse, AWSError>;
   /**
@@ -48,7 +48,7 @@ declare namespace IoTEventsData {
   export type BatchPutMessageErrorEntries = BatchPutMessageErrorEntry[];
   export interface BatchPutMessageErrorEntry {
     /**
-     * The ID of the message that caused the error. (See the value corresponding to the messageId key in the message object.)
+     * The ID of the message that caused the error. (See the value corresponding to the "messageId" key in the "message" object.)
      */
     messageId?: MessageId;
     /**
@@ -62,7 +62,7 @@ declare namespace IoTEventsData {
   }
   export interface BatchPutMessageRequest {
     /**
-     * The list of messages to send. Each message has format: '{ "messageId": "string", "inputName": "string", "payload": "string"}'.
+     * The list of messages to send. Each message has the following format: '{ "messageId": "string", "inputName": "string", "payload": "string"}' 
      */
     messages: Messages;
   }
@@ -75,7 +75,7 @@ declare namespace IoTEventsData {
   export type BatchUpdateDetectorErrorEntries = BatchUpdateDetectorErrorEntry[];
   export interface BatchUpdateDetectorErrorEntry {
     /**
-     * The "messageId" of the update request that caused the error. (The value of the messageId in the update request Detector object.)
+     * The "messageId" of the update request that caused the error. (The value of the "messageId" in the update request "Detector" object.)
      */
     messageId?: MessageId;
     /**
@@ -89,13 +89,13 @@ declare namespace IoTEventsData {
   }
   export interface BatchUpdateDetectorRequest {
     /**
-     * The list of detectors (instances) to be updated, along with the values to be updated.
+     * The list of detectors (instances) to update, along with the values to update.
      */
     detectors: UpdateDetectorRequests;
   }
   export interface BatchUpdateDetectorResponse {
     /**
-     * A list of those detector updates which resulted in errors. (The specific update did not occur if an error is listed here.)
+     * A list of those detector updates that resulted in errors. (If an error is listed here, the specific update did not occur.)
      */
     batchUpdateDetectorErrorEntries?: BatchUpdateDetectorErrorEntries;
   }
@@ -149,7 +149,7 @@ declare namespace IoTEventsData {
      */
     stateName: StateName;
     /**
-     * The current state of the detector's variables.
+     * The current values of the detector's variables.
      */
     variables: Variables;
     /**
@@ -163,11 +163,11 @@ declare namespace IoTEventsData {
      */
     stateName: StateName;
     /**
-     * The new values of the detector's variables. Any variable whose value is not specified will be cleared.
+     * The new values of the detector's variables. Any variable whose value isn't specified is cleared.
      */
     variables: VariableDefinitions;
     /**
-     * The new values of the detector's timers. Any timer whose value is not specified will be cleared and its timeout event will not occur.
+     * The new values of the detector's timers. Any timer whose value isn't specified is cleared, and its timeout event won't occur.
      */
     timers: TimerDefinitions;
   }
@@ -210,7 +210,7 @@ declare namespace IoTEventsData {
   export type KeyValue = string;
   export interface ListDetectorsRequest {
     /**
-     * The name of the detector model whose instances you want to list.
+     * The name of the detector model whose detectors (instances) are listed.
      */
     detectorModelName: DetectorModelName;
     /**
@@ -239,11 +239,11 @@ declare namespace IoTEventsData {
   export type MaxResults = number;
   export interface Message {
     /**
-     * The ID you wish to assign to the message. Each "messageId" must be unique within each batch sent.
+     * The ID to assign to the message. Within each batch sent, each "messageId" must be unique.
      */
     messageId: MessageId;
     /**
-     * The name of the input into which the message payload will be transformed.
+     * The name of the input into which the message payload is transformed.
      */
     inputName: InputName;
     /**
@@ -283,7 +283,7 @@ declare namespace IoTEventsData {
   export type Timestamp = Date;
   export interface UpdateDetectorRequest {
     /**
-     * The ID you wish to assign to the detector update "message". Each "messageId" must be unique within each batch sent.
+     * The ID to assign to the detector update "message". Each "messageId" must be unique within each batch sent.
      */
     messageId: MessageId;
     /**

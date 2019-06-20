@@ -286,6 +286,31 @@
       ],
       "documentation": "<p>Returns a list of resource metadata for a given list of trigger names. After calling the <code>ListTriggers</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.</p>"
     },
+    "BatchGetWorkflows": {
+      "name": "BatchGetWorkflows",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "BatchGetWorkflowsRequest"
+      },
+      "output": {
+        "shape": "BatchGetWorkflowsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InvalidInputException"
+        }
+      ],
+      "documentation": "<p>Returns a list of resource metadata for a given list of workflow names. After calling the <code>ListWorkflows</code> operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.</p>"
+    },
     "BatchStopJobRun": {
       "name": "BatchStopJobRun",
       "http": {
@@ -653,6 +678,9 @@
           "shape": "AlreadyExistsException"
         },
         {
+          "shape": "EntityNotFoundException"
+        },
+        {
           "shape": "InvalidInputException"
         },
         {
@@ -709,6 +737,40 @@
         }
       ],
       "documentation": "<p>Creates a new function definition in the Data Catalog.</p>"
+    },
+    "CreateWorkflow": {
+      "name": "CreateWorkflow",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateWorkflowRequest"
+      },
+      "output": {
+        "shape": "CreateWorkflowResponse"
+      },
+      "errors": [
+        {
+          "shape": "AlreadyExistsException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "ResourceNumberLimitExceededException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        }
+      ],
+      "documentation": "<p>Creates a new workflow.</p>"
     },
     "DeleteClassifier": {
       "name": "DeleteClassifier",
@@ -1061,6 +1123,34 @@
         }
       ],
       "documentation": "<p>Deletes an existing function definition from the Data Catalog.</p>"
+    },
+    "DeleteWorkflow": {
+      "name": "DeleteWorkflow",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteWorkflowRequest"
+      },
+      "output": {
+        "shape": "DeleteWorkflowResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        }
+      ],
+      "documentation": "<p>Deletes a workflow.</p>"
     },
     "GetCatalogImportStatus": {
       "name": "GetCatalogImportStatus",
@@ -1987,6 +2077,118 @@
       ],
       "documentation": "<p>Retrieves a multiple function definitions from the Data Catalog.</p>"
     },
+    "GetWorkflow": {
+      "name": "GetWorkflow",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetWorkflowRequest"
+      },
+      "output": {
+        "shape": "GetWorkflowResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        }
+      ],
+      "documentation": "<p>Retrieves resource metadata for a workflow.</p>"
+    },
+    "GetWorkflowRun": {
+      "name": "GetWorkflowRun",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetWorkflowRunRequest"
+      },
+      "output": {
+        "shape": "GetWorkflowRunResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        }
+      ],
+      "documentation": "<p>Retrieves the metadata for a given workflow run. </p>"
+    },
+    "GetWorkflowRunProperties": {
+      "name": "GetWorkflowRunProperties",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetWorkflowRunPropertiesRequest"
+      },
+      "output": {
+        "shape": "GetWorkflowRunPropertiesResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        }
+      ],
+      "documentation": "<p>Retrieves the workflow run properties which were set during the run.</p>"
+    },
+    "GetWorkflowRuns": {
+      "name": "GetWorkflowRuns",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetWorkflowRunsRequest"
+      },
+      "output": {
+        "shape": "GetWorkflowRunsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        }
+      ],
+      "documentation": "<p>Retrieves metadata for all runs of a given workflow.</p>"
+    },
     "ImportCatalogToGlue": {
       "name": "ImportCatalogToGlue",
       "http": {
@@ -2112,6 +2314,31 @@
       ],
       "documentation": "<p>Retrieves the names of all trigger resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names.</p> <p>This operation takes the optional <code>Tags</code> field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.</p>"
     },
+    "ListWorkflows": {
+      "name": "ListWorkflows",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListWorkflowsRequest"
+      },
+      "output": {
+        "shape": "ListWorkflowsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        }
+      ],
+      "documentation": "<p>Lists names of workflows created in the account.</p>"
+    },
     "PutDataCatalogEncryptionSettings": {
       "name": "PutDataCatalogEncryptionSettings",
       "http": {
@@ -2167,6 +2394,43 @@
         }
       ],
       "documentation": "<p>Sets the Data Catalog resource policy for access control.</p>"
+    },
+    "PutWorkflowRunProperties": {
+      "name": "PutWorkflowRunProperties",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutWorkflowRunPropertiesRequest"
+      },
+      "output": {
+        "shape": "PutWorkflowRunPropertiesResponse"
+      },
+      "errors": [
+        {
+          "shape": "AlreadyExistsException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "ResourceNumberLimitExceededException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        }
+      ],
+      "documentation": "<p>Puts the specified workflow run properties for the given workflow run. If a property already exists for the specified run, then it overrides the value otherwise adds the property to existing properties.</p>"
     },
     "ResetJobBookmark": {
       "name": "ResetJobBookmark",
@@ -2319,6 +2583,40 @@
         }
       ],
       "documentation": "<p>Starts an existing trigger. See <a href=\"https://docs.aws.amazon.com/glue/latest/dg/trigger-job.html\">Triggering Jobs</a> for information about how different types of trigger are started.</p>"
+    },
+    "StartWorkflowRun": {
+      "name": "StartWorkflowRun",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartWorkflowRunRequest"
+      },
+      "output": {
+        "shape": "StartWorkflowRunResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "ResourceNumberLimitExceededException"
+        },
+        {
+          "shape": "ConcurrentRunsExceededException"
+        }
+      ],
+      "documentation": "<p>Starts a new run of the specified workflow.</p>"
     },
     "StopCrawler": {
       "name": "StopCrawler",
@@ -2806,6 +3104,37 @@
         }
       ],
       "documentation": "<p>Updates an existing function definition in the Data Catalog.</p>"
+    },
+    "UpdateWorkflow": {
+      "name": "UpdateWorkflow",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateWorkflowRequest"
+      },
+      "output": {
+        "shape": "UpdateWorkflowResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        }
+      ],
+      "documentation": "<p>Updates an existing workflow.</p>"
     }
   },
   "shapes": {
@@ -2824,13 +3153,17 @@
           "shape": "Timeout",
           "documentation": "<p>The <code>JobRun</code> timeout in minutes. This is the maximum time that a job run can consume resources before it is terminated and enters <code>TIMEOUT</code> status. The default is 2,880 minutes (48 hours). This overrides the timeout value set in the parent job.</p>"
         },
+        "SecurityConfiguration": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the <code>SecurityConfiguration</code> structure to be used with this action.</p>"
+        },
         "NotificationProperty": {
           "shape": "NotificationProperty",
           "documentation": "<p>Specifies configuration properties of a job run notification.</p>"
         },
-        "SecurityConfiguration": {
+        "CrawlerName": {
           "shape": "NameString",
-          "documentation": "<p>The name of the <code>SecurityConfiguration</code> structure to be used with this action.</p>"
+          "documentation": "<p>The name of the crawler to be used with this action.</p>"
         }
       },
       "documentation": "<p>Defines an action to be initiated by a trigger.</p>"
@@ -3176,6 +3509,35 @@
         "TriggersNotFound": {
           "shape": "TriggerNameList",
           "documentation": "<p>A list of names of triggers not found.</p>"
+        }
+      }
+    },
+    "BatchGetWorkflowsRequest": {
+      "type": "structure",
+      "required": [
+        "Names"
+      ],
+      "members": {
+        "Names": {
+          "shape": "WorkflowNames",
+          "documentation": "<p>A list of workflow names, which may be the names returned from the <code>ListWorkflows</code> operation.</p>"
+        },
+        "IncludeGraph": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Specifies whether to include a graph when returning the workflow resource metadata.</p>"
+        }
+      }
+    },
+    "BatchGetWorkflowsResponse": {
+      "type": "structure",
+      "members": {
+        "Workflows": {
+          "shape": "Workflows",
+          "documentation": "<p>A list of workflow resource metadata.</p>"
+        },
+        "MissingWorkflows": {
+          "shape": "WorkflowNames",
+          "documentation": "<p>A list of names of workflows not found.</p>"
         }
       }
     },
@@ -3578,6 +3940,14 @@
         "State": {
           "shape": "JobRunState",
           "documentation": "<p>The condition state. Currently, the values supported are <code>SUCCEEDED</code>, <code>STOPPED</code>, <code>TIMEOUT</code>, and <code>FAILED</code>.</p>"
+        },
+        "CrawlerName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the crawler to which this condition applies.</p>"
+        },
+        "CrawlState": {
+          "shape": "CrawlState",
+          "documentation": "<p>The state of the crawler to which this condition applies.</p>"
         }
       },
       "documentation": "<p>Defines a condition under which a trigger fires.</p>"
@@ -3731,11 +4101,56 @@
       "type": "structure",
       "members": {
         "Connections": {
-          "shape": "StringList",
+          "shape": "OrchestrationStringList",
           "documentation": "<p>A list of connections used by the job.</p>"
         }
       },
       "documentation": "<p>Specifies the connections used by a job.</p>"
+    },
+    "Crawl": {
+      "type": "structure",
+      "members": {
+        "State": {
+          "shape": "CrawlState",
+          "documentation": "<p>The state of the crawler.</p>"
+        },
+        "StartedOn": {
+          "shape": "TimestampValue",
+          "documentation": "<p>The date and time on which the crawl started.</p>"
+        },
+        "CompletedOn": {
+          "shape": "TimestampValue",
+          "documentation": "<p>The date and time on which the crawl completed.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "DescriptionString",
+          "documentation": "<p>The error message associated with the crawl.</p>"
+        },
+        "LogGroup": {
+          "shape": "LogGroup",
+          "documentation": "<p>The log group associated with the crawl.</p>"
+        },
+        "LogStream": {
+          "shape": "LogStream",
+          "documentation": "<p>The log stream associated with the crawl.</p>"
+        }
+      },
+      "documentation": "<p>The details of a crawl in the workflow.</p>"
+    },
+    "CrawlList": {
+      "type": "list",
+      "member": {
+        "shape": "Crawl"
+      }
+    },
+    "CrawlState": {
+      "type": "string",
+      "enum": [
+        "RUNNING",
+        "SUCCEEDED",
+        "CANCELLED",
+        "FAILED"
+      ]
     },
     "Crawler": {
       "type": "structure",
@@ -3871,6 +4286,16 @@
       },
       "max": 100,
       "min": 0
+    },
+    "CrawlerNodeDetails": {
+      "type": "structure",
+      "members": {
+        "Crawls": {
+          "shape": "CrawlList",
+          "documentation": "<p>A list of crawls represented by the crawl node.</p>"
+        }
+      },
+      "documentation": "<p>The details of a Crawler node present in the workflow.</p>"
     },
     "CrawlerSecurityConfiguration": {
       "type": "string",
@@ -4282,18 +4707,6 @@
           "shape": "NullableDouble",
           "documentation": "<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>=\"pythonshell\"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>=\"glueetl\"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>"
         },
-        "NotificationProperty": {
-          "shape": "NotificationProperty",
-          "documentation": "<p>Specifies configuration properties of a job notification.</p>"
-        },
-        "WorkerType": {
-          "shape": "WorkerType",
-          "documentation": "<p>The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> </ul>"
-        },
-        "NumberOfWorkers": {
-          "shape": "NullableInteger",
-          "documentation": "<p>The number of workers of a defined <code>workerType</code> that are allocated when a job runs.</p> <p>The maximum number of workers you can define are 299 for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>"
-        },
         "SecurityConfiguration": {
           "shape": "NameString",
           "documentation": "<p>The name of the <code>SecurityConfiguration</code> structure to be used with this job.</p>"
@@ -4301,6 +4714,18 @@
         "Tags": {
           "shape": "TagsMap",
           "documentation": "<p>The tags to use with this job. You may use tags to limit access to the job. For more information about tags in AWS Glue, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">AWS Tags in AWS Glue</a> in the developer guide.</p>"
+        },
+        "NotificationProperty": {
+          "shape": "NotificationProperty",
+          "documentation": "<p>Specifies configuration properties of a job notification.</p>"
+        },
+        "NumberOfWorkers": {
+          "shape": "NullableInteger",
+          "documentation": "<p>The number of workers of a defined <code>workerType</code> that are allocated when a job runs.</p> <p>The maximum number of workers you can define are 299 for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>"
+        },
+        "WorkerType": {
+          "shape": "NameString",
+          "documentation": "<p>The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.</p> </li> </ul>"
         }
       }
     },
@@ -4458,6 +4883,10 @@
           "shape": "NameString",
           "documentation": "<p>The name of the trigger.</p>"
         },
+        "WorkflowName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the workflow associated with the trigger.</p>"
+        },
         "Type": {
           "shape": "TriggerType",
           "documentation": "<p>The type of the new trigger.</p>"
@@ -4521,6 +4950,39 @@
     "CreateUserDefinedFunctionResponse": {
       "type": "structure",
       "members": {}
+    },
+    "CreateWorkflowRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name to be assigned to the workflow. It should be unique within your account.</p>"
+        },
+        "Description": {
+          "shape": "GenericString",
+          "documentation": "<p>A description of the workflow.</p>"
+        },
+        "DefaultRunProperties": {
+          "shape": "WorkflowRunProperties",
+          "documentation": "<p>A collection of properties to be used as part of each execution of the workflow.</p>"
+        },
+        "Tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>The tags to be used with this workflow.</p>"
+        }
+      }
+    },
+    "CreateWorkflowResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the workflow which was provided as part of the request.</p>"
+        }
+      }
     },
     "CreateXMLClassifierRequest": {
       "type": "structure",
@@ -5002,6 +5464,27 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteWorkflowRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>Name of the workflow to be deleted.</p>"
+        }
+      }
+    },
+    "DeleteWorkflowResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>Name of the workflow specified in input.</p>"
+        }
+      }
+    },
     "DescriptionString": {
       "type": "string",
       "max": 2048,
@@ -5156,6 +5639,26 @@
       "type": "list",
       "member": {
         "shape": "DynamoDBTarget"
+      }
+    },
+    "Edge": {
+      "type": "structure",
+      "members": {
+        "SourceId": {
+          "shape": "NameString",
+          "documentation": "<p>The unique of the node within the workflow where the edge starts.</p>"
+        },
+        "DestinationId": {
+          "shape": "NameString",
+          "documentation": "<p>The unique of the node within the workflow where the edge ends.</p>"
+        }
+      },
+      "documentation": "<p>An edge represents a directed connection between two AWS Glue components which are part of the workflow the edge belongs to.</p>"
+    },
+    "EdgeList": {
+      "type": "list",
+      "member": {
+        "shape": "Edge"
       }
     },
     "EncryptionAtRest": {
@@ -6272,6 +6775,124 @@
         }
       }
     },
+    "GetWorkflowRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the workflow to retrieve.</p>"
+        },
+        "IncludeGraph": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Specifies whether to include a graph when returning the workflow resource metadata.</p>"
+        }
+      }
+    },
+    "GetWorkflowResponse": {
+      "type": "structure",
+      "members": {
+        "Workflow": {
+          "shape": "Workflow",
+          "documentation": "<p>The resource metadata for the workflow.</p>"
+        }
+      }
+    },
+    "GetWorkflowRunPropertiesRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "RunId"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>Name of the workflow which was run.</p>"
+        },
+        "RunId": {
+          "shape": "IdString",
+          "documentation": "<p>The ID of the workflow run whose run properties should be returned.</p>"
+        }
+      }
+    },
+    "GetWorkflowRunPropertiesResponse": {
+      "type": "structure",
+      "members": {
+        "RunProperties": {
+          "shape": "WorkflowRunProperties",
+          "documentation": "<p>The workflow run properties which were set during the specified run.</p>"
+        }
+      }
+    },
+    "GetWorkflowRunRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "RunId"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>Name of the workflow being run.</p>"
+        },
+        "RunId": {
+          "shape": "IdString",
+          "documentation": "<p>The ID of the workflow run.</p>"
+        },
+        "IncludeGraph": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Specifies whether to include the workflow graph in response or not.</p>"
+        }
+      }
+    },
+    "GetWorkflowRunResponse": {
+      "type": "structure",
+      "members": {
+        "Run": {
+          "shape": "WorkflowRun",
+          "documentation": "<p>The requested workflow run metadata.</p>"
+        }
+      }
+    },
+    "GetWorkflowRunsRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>Name of the workflow whose metadata of runs should be returned.</p>"
+        },
+        "IncludeGraph": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Specifies whether to include the workflow graph in response or not.</p>"
+        },
+        "NextToken": {
+          "shape": "GenericString",
+          "documentation": "<p>The maximum size of the response.</p>"
+        },
+        "MaxResults": {
+          "shape": "PageSize",
+          "documentation": "<p>The maximum number of workflow runs to be included in the response.</p>"
+        }
+      }
+    },
+    "GetWorkflowRunsResponse": {
+      "type": "structure",
+      "members": {
+        "Runs": {
+          "shape": "WorkflowRuns",
+          "documentation": "<p>A list of workflow run metadata objects.</p>"
+        },
+        "NextToken": {
+          "shape": "GenericString",
+          "documentation": "<p>A continuation token, if not all requested workflow runs have been returned.</p>"
+        }
+      }
+    },
     "GlueResourceArn": {
       "type": "string",
       "max": 10240,
@@ -6519,7 +7140,7 @@
         },
         "ScriptLocation": {
           "shape": "ScriptLocationString",
-          "documentation": "<p>Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that executes a job (required).</p>"
+          "documentation": "<p>Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that executes a job.</p>"
         },
         "PythonVersion": {
           "shape": "PythonVersionString",
@@ -6542,6 +7163,16 @@
       "member": {
         "shape": "NameString"
       }
+    },
+    "JobNodeDetails": {
+      "type": "structure",
+      "members": {
+        "JobRuns": {
+          "shape": "JobRunList",
+          "documentation": "<p>The information for the job runs represented by the job node.</p>"
+        }
+      },
+      "documentation": "<p>The details of a Job node present in the workflow.</p>"
     },
     "JobRun": {
       "type": "structure",
@@ -6612,10 +7243,6 @@
           "shape": "NullableDouble",
           "documentation": "<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>=\"pythonshell\"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>=\"glueetl\"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>"
         },
-        "NotificationProperty": {
-          "shape": "NotificationProperty",
-          "documentation": "<p>Specifies configuration properties of a job run notification.</p>"
-        },
         "WorkerType": {
           "shape": "WorkerType",
           "documentation": "<p>The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.</p> </li> </ul>"
@@ -6631,6 +7258,10 @@
         "LogGroupName": {
           "shape": "GenericString",
           "documentation": "<p>The name of the log group for secure logging that can be server-side encrypted in Amazon CloudWatch using AWS KMS. This name can be <code>/aws-glue/jobs/</code>, in which case the default encryption is <code>NONE</code>. If you add a role name and <code>SecurityConfiguration</code> name (in other words, <code>/aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/</code>), then that security configuration is used to encrypt the log group.</p>"
+        },
+        "NotificationProperty": {
+          "shape": "NotificationProperty",
+          "documentation": "<p>Specifies configuration properties of a job run notification.</p>"
         }
       },
       "documentation": "<p>Contains information about a job run.</p>"
@@ -6936,6 +7567,32 @@
         }
       }
     },
+    "ListWorkflowsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "GenericString",
+          "documentation": "<p>A continuation token, if this is a continuation request.</p>"
+        },
+        "MaxResults": {
+          "shape": "PageSize",
+          "documentation": "<p>The maximum size of a list to return.</p>"
+        }
+      }
+    },
+    "ListWorkflowsResponse": {
+      "type": "structure",
+      "members": {
+        "Workflows": {
+          "shape": "WorkflowNames",
+          "documentation": "<p>List of names of workflows in the account.</p>"
+        },
+        "NextToken": {
+          "shape": "GenericString",
+          "documentation": "<p>A continuation token, if not all workflow names have been returned.</p>"
+        }
+      }
+    },
     "Location": {
       "type": "structure",
       "members": {
@@ -7075,6 +7732,50 @@
         "shape": "NameString"
       }
     },
+    "Node": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "NodeType",
+          "documentation": "<p>The type of AWS Glue component represented by the node.</p>"
+        },
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the AWS Glue component represented by the node.</p>"
+        },
+        "UniqueId": {
+          "shape": "NameString",
+          "documentation": "<p>The unique Id assigned to the node within the workflow.</p>"
+        },
+        "TriggerDetails": {
+          "shape": "TriggerNodeDetails",
+          "documentation": "<p>Details of the Trigger when the node represents a Trigger.</p>"
+        },
+        "JobDetails": {
+          "shape": "JobNodeDetails",
+          "documentation": "<p>Details of the Job when the node represents a Job.</p>"
+        },
+        "CrawlerDetails": {
+          "shape": "CrawlerNodeDetails",
+          "documentation": "<p>Details of the crawler when the node represents a crawler.</p>"
+        }
+      },
+      "documentation": "<p>A node represents an AWS Glue component like Trigger, Job etc. which is part of a workflow.</p>"
+    },
+    "NodeList": {
+      "type": "list",
+      "member": {
+        "shape": "Node"
+      }
+    },
+    "NodeType": {
+      "type": "string",
+      "enum": [
+        "CRAWLER",
+        "JOB",
+        "TRIGGER"
+      ]
+    },
     "NonNegativeDouble": {
       "type": "double",
       "min": 0
@@ -7109,6 +7810,12 @@
     "NullableInteger": {
       "type": "integer",
       "box": true
+    },
+    "OrchestrationStringList": {
+      "type": "list",
+      "member": {
+        "shape": "GenericString"
+      }
     },
     "Order": {
       "type": "structure",
@@ -7399,6 +8106,32 @@
           "documentation": "<p>A hash of the policy that has just been set. This must be included in a subsequent call that overwrites or updates this policy.</p>"
         }
       }
+    },
+    "PutWorkflowRunPropertiesRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "RunId",
+        "RunProperties"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>Name of the workflow which was run.</p>"
+        },
+        "RunId": {
+          "shape": "IdString",
+          "documentation": "<p>The ID of the workflow run for which the run properties should be updated.</p>"
+        },
+        "RunProperties": {
+          "shape": "WorkflowRunProperties",
+          "documentation": "<p>The properties to put for the specified run.</p>"
+        }
+      }
+    },
+    "PutWorkflowRunPropertiesResponse": {
+      "type": "structure",
+      "members": {}
     },
     "PythonScript": {
       "type": "string"
@@ -7714,14 +8447,6 @@
           "shape": "NullableDouble",
           "documentation": "<p>The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the <a href=\"https://docs.aws.amazon.com/https:/aws.amazon.com/glue/pricing/\">AWS Glue pricing page</a>.</p> <p>Do not set <code>Max Capacity</code> if using <code>WorkerType</code> and <code>NumberOfWorkers</code>.</p> <p>The value that can be allocated for <code>MaxCapacity</code> depends on whether you are running a Python shell job, or an Apache Spark ETL job:</p> <ul> <li> <p>When you specify a Python shell job (<code>JobCommand.Name</code>=\"pythonshell\"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.</p> </li> <li> <p>When you specify an Apache Spark ETL job (<code>JobCommand.Name</code>=\"glueetl\"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.</p> </li> </ul>"
         },
-        "WorkerType": {
-          "shape": "WorkerType",
-          "documentation": "<p>The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.</p> </li> </ul>"
-        },
-        "NumberOfWorkers": {
-          "shape": "NullableInteger",
-          "documentation": "<p>The number of workers of a defined <code>workerType</code> that are allocated when a job runs.</p> <p>The maximum number of workers you can define are 299 for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>"
-        },
         "SecurityConfiguration": {
           "shape": "NameString",
           "documentation": "<p>The name of the <code>SecurityConfiguration</code> structure to be used with this job run.</p>"
@@ -7729,6 +8454,14 @@
         "NotificationProperty": {
           "shape": "NotificationProperty",
           "documentation": "<p>Specifies configuration properties of a job run notification.</p>"
+        },
+        "WorkerType": {
+          "shape": "NameString",
+          "documentation": "<p>The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.</p> <ul> <li> <p>For the <code>Standard</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.</p> </li> <li> <p>For the <code>G.1X</code> worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.</p> </li> <li> <p>For the <code>G.2X</code> worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.</p> </li> </ul>"
+        },
+        "NumberOfWorkers": {
+          "shape": "NullableInteger",
+          "documentation": "<p>The number of workers of a defined <code>workerType</code> that are allocated when a job runs.</p> <p>The maximum number of workers you can define are 299 for <code>G.1X</code>, and 149 for <code>G.2X</code>. </p>"
         }
       }
     },
@@ -7759,6 +8492,27 @@
         "Name": {
           "shape": "NameString",
           "documentation": "<p>The name of the trigger that was started.</p>"
+        }
+      }
+    },
+    "StartWorkflowRunRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the workflow to start.</p>"
+        }
+      }
+    },
+    "StartWorkflowRunResponse": {
+      "type": "structure",
+      "members": {
+        "RunId": {
+          "shape": "IdString",
+          "documentation": "<p>An Id for the new run.</p>"
         }
       }
     },
@@ -8157,6 +8911,10 @@
           "shape": "NameString",
           "documentation": "<p>The name of the trigger.</p>"
         },
+        "WorkflowName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the workflow associated with the trigger.</p>"
+        },
         "Id": {
           "shape": "IdString",
           "documentation": "<p>Reserved for future use.</p>"
@@ -8199,6 +8957,16 @@
       "member": {
         "shape": "NameString"
       }
+    },
+    "TriggerNodeDetails": {
+      "type": "structure",
+      "members": {
+        "Trigger": {
+          "shape": "Trigger",
+          "documentation": "<p>The information of the trigger represented by the trigger node.</p>"
+        }
+      },
+      "documentation": "<p>The details of a Trigger node present in the workflow.</p>"
     },
     "TriggerState": {
       "type": "string",
@@ -8701,6 +9469,35 @@
       "type": "structure",
       "members": {}
     },
+    "UpdateWorkflowRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>Name of the workflow to be updated.</p>"
+        },
+        "Description": {
+          "shape": "GenericString",
+          "documentation": "<p>The description of the workflow.</p>"
+        },
+        "DefaultRunProperties": {
+          "shape": "WorkflowRunProperties",
+          "documentation": "<p>A collection of properties to be used as part of each execution of the workflow.</p>"
+        }
+      }
+    },
+    "UpdateWorkflowResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the workflow which was specified in input.</p>"
+        }
+      }
+    },
     "UpdateXMLClassifierRequest": {
       "type": "structure",
       "required": [
@@ -8817,6 +9614,162 @@
         "G.1X",
         "G.2X"
       ]
+    },
+    "Workflow": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the workflow representing the flow.</p>"
+        },
+        "Description": {
+          "shape": "GenericString",
+          "documentation": "<p>A description of the workflow.</p>"
+        },
+        "DefaultRunProperties": {
+          "shape": "WorkflowRunProperties",
+          "documentation": "<p>A collection of properties to be used as part of each execution of the workflow.</p>"
+        },
+        "CreatedOn": {
+          "shape": "TimestampValue",
+          "documentation": "<p>The date and time when the workflow was created.</p>"
+        },
+        "LastModifiedOn": {
+          "shape": "TimestampValue",
+          "documentation": "<p>The date and time when the workflow was last modified.</p>"
+        },
+        "LastRun": {
+          "shape": "WorkflowRun",
+          "documentation": "<p>The information about the last execution of the workflow.</p>"
+        },
+        "Graph": {
+          "shape": "WorkflowGraph",
+          "documentation": "<p>The graph representing all the AWS Glue components that belong to the workflow as nodes and directed connections between them as edges.</p>"
+        }
+      },
+      "documentation": "<p>A workflow represents a flow in which AWS Glue components should be executed to complete a logical task.</p>"
+    },
+    "WorkflowGraph": {
+      "type": "structure",
+      "members": {
+        "Nodes": {
+          "shape": "NodeList",
+          "documentation": "<p>A list of the the AWS Glue components belong to the workflow represented as nodes.</p>"
+        },
+        "Edges": {
+          "shape": "EdgeList",
+          "documentation": "<p>A list of all the directed connections between the nodes belonging to the workflow.</p>"
+        }
+      },
+      "documentation": "<p>A workflow graph represents the complete workflow containing all the AWS Glue components present in the workflow and all the directed connections between them.</p>"
+    },
+    "WorkflowNames": {
+      "type": "list",
+      "member": {
+        "shape": "NameString"
+      },
+      "max": 25,
+      "min": 1
+    },
+    "WorkflowRun": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>Name of the workflow which was executed.</p>"
+        },
+        "WorkflowRunId": {
+          "shape": "IdString",
+          "documentation": "<p>The ID of this workflow run.</p>"
+        },
+        "WorkflowRunProperties": {
+          "shape": "WorkflowRunProperties",
+          "documentation": "<p>The workflow run properties which were set during the run.</p>"
+        },
+        "StartedOn": {
+          "shape": "TimestampValue",
+          "documentation": "<p>The date and time when the workflow run was started.</p>"
+        },
+        "CompletedOn": {
+          "shape": "TimestampValue",
+          "documentation": "<p>The date and time when the workflow run completed.</p>"
+        },
+        "Status": {
+          "shape": "WorkflowRunStatus",
+          "documentation": "<p>The status of the workflow run.</p>"
+        },
+        "Statistics": {
+          "shape": "WorkflowRunStatistics",
+          "documentation": "<p>The statistics of the run.</p>"
+        },
+        "Graph": {
+          "shape": "WorkflowGraph",
+          "documentation": "<p>The graph representing all the AWS Glue components that belong to the workflow as nodes and directed connections between them as edges.</p>"
+        }
+      },
+      "documentation": "<p>A workflow run is an execution of a workflow providing all the runtime information.</p>"
+    },
+    "WorkflowRunProperties": {
+      "type": "map",
+      "key": {
+        "shape": "IdString"
+      },
+      "value": {
+        "shape": "GenericString"
+      }
+    },
+    "WorkflowRunStatistics": {
+      "type": "structure",
+      "members": {
+        "TotalActions": {
+          "shape": "IntegerValue",
+          "documentation": "<p>Total number of Actions in the workflow run.</p>"
+        },
+        "TimeoutActions": {
+          "shape": "IntegerValue",
+          "documentation": "<p>Total number of Actions which timed out.</p>"
+        },
+        "FailedActions": {
+          "shape": "IntegerValue",
+          "documentation": "<p>Total number of Actions which have failed.</p>"
+        },
+        "StoppedActions": {
+          "shape": "IntegerValue",
+          "documentation": "<p>Total number of Actions which have stopped.</p>"
+        },
+        "SucceededActions": {
+          "shape": "IntegerValue",
+          "documentation": "<p>Total number of Actions which have succeeded.</p>"
+        },
+        "RunningActions": {
+          "shape": "IntegerValue",
+          "documentation": "<p>Total number Actions in running state.</p>"
+        }
+      },
+      "documentation": "<p>Workflow run statistics provides statistics about the workflow run.</p>"
+    },
+    "WorkflowRunStatus": {
+      "type": "string",
+      "enum": [
+        "RUNNING",
+        "COMPLETED"
+      ]
+    },
+    "WorkflowRuns": {
+      "type": "list",
+      "member": {
+        "shape": "WorkflowRun"
+      },
+      "max": 1000,
+      "min": 1
+    },
+    "Workflows": {
+      "type": "list",
+      "member": {
+        "shape": "Workflow"
+      },
+      "max": 25,
+      "min": 1
     },
     "XMLClassifier": {
       "type": "structure",

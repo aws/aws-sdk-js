@@ -4148,6 +4148,10 @@
         "DeletionProtection": {
           "shape": "BooleanOptional",
           "documentation": "<p>A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html\"> Deleting a DB Instance</a>. </p>"
+        },
+        "MaxAllocatedStorage": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.</p>"
         }
       },
       "documentation": "<p/>"
@@ -5517,6 +5521,10 @@
         "ListenerEndpoint": {
           "shape": "Endpoint",
           "documentation": "<p>Specifies the listener connection endpoint for SQL Server Always On.</p>"
+        },
+        "MaxAllocatedStorage": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.</p>"
         }
       },
       "documentation": "<p>Contains the details of an Amazon RDS DB instance. </p> <p>This data type is used as a response element in the <code>DescribeDBInstances</code> action. </p>",
@@ -8247,6 +8255,10 @@
         "DeletionProtection": {
           "shape": "BooleanOptional",
           "documentation": "<p>A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html\"> Deleting a DB Instance</a>. </p>"
+        },
+        "MaxAllocatedStorage": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.</p>"
         }
       },
       "documentation": "<p/>"
@@ -8957,6 +8969,10 @@
         "SupportedEngineModes": {
           "shape": "EngineModeList",
           "documentation": "<p>A list of the supported DB engine modes.</p>"
+        },
+        "SupportsStorageAutoscaling": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Whether or not Amazon RDS can automatically scale storage for DB instances that use the specified instance class.</p>"
         }
       },
       "documentation": "<p>Contains a list of available options for a DB instance.</p> <p> This data type is used as a response element in the <code>DescribeOrderableDBInstanceOptions</code> action. </p>",
@@ -10971,6 +10987,10 @@
         "IopsToStorageRatio": {
           "shape": "DoubleRangeList",
           "documentation": "<p>The valid range of Provisioned IOPS to gibibytes of storage multiplier. For example, 3-10, which means that provisioned IOPS can be between 3 and 10 times storage. </p>"
+        },
+        "SupportsStorageAutoscaling": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether or not Amazon RDS can automatically scale storage for DB instances that use the new instance class.</p>"
         }
       },
       "documentation": "<p>Information about valid modifications that you can make to your DB instance. Contains the result of a successful call to the <code>DescribeValidDBInstanceModifications</code> action. </p>"

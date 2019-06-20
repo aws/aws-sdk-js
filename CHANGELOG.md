@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.478.0-->
+<!--LATEST=2.479.0-->
 <!--ENTRYINSERT-->
+
+## 2.479.0
+* feature: ACMPCA: ACM Private CA is launching Root CAs and hierarchy management, a new feature that expands the scope of ACM Private CA from supporting only subordinate issuing CAs, to now include a full CA hierarchy that includes root CAs - the cryptographic root of trust for an organization.
+* feature: Glue: Starting today, you can now use workflows in AWS Glue to author directed acyclic graphs (DAGs) of Glue triggers, crawlers and jobs. Workflows enable orchestration of your ETL workloads by building dependencies between Glue entities (triggers, crawlers and jobs).  You can visually track status of the different nodes in the workflows on the console making it easier to monitor progress and troubleshoot issues. Also, you can share parameters across entities in the workflow.
+* feature: Health: API improvements for the AWS Health service.
+* feature: IoTEventsData: "The colon character ':' is now permitted in Detector Model 'key' parameter values.
+* feature: RDS: This release adds support for RDS storage autoscaling
 
 ## 2.478.0
 * feature: EC2: You can now launch new 12xlarge, 24xlarge, and metal instance sizes on the Amazon EC2 compute optimized C5 instance types featuring 2nd Gen Intel Xeon Scalable Processors.

@@ -92,6 +92,14 @@ declare class Glue extends Service {
    */
   batchGetTriggers(callback?: (err: AWSError, data: Glue.Types.BatchGetTriggersResponse) => void): Request<Glue.Types.BatchGetTriggersResponse, AWSError>;
   /**
+   * Returns a list of resource metadata for a given list of workflow names. After calling the ListWorkflows operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+   */
+  batchGetWorkflows(params: Glue.Types.BatchGetWorkflowsRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetWorkflowsResponse) => void): Request<Glue.Types.BatchGetWorkflowsResponse, AWSError>;
+  /**
+   * Returns a list of resource metadata for a given list of workflow names. After calling the ListWorkflows operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
+   */
+  batchGetWorkflows(callback?: (err: AWSError, data: Glue.Types.BatchGetWorkflowsResponse) => void): Request<Glue.Types.BatchGetWorkflowsResponse, AWSError>;
+  /**
    * Stops one or more job runs for a specified job definition.
    */
   batchStopJobRun(params: Glue.Types.BatchStopJobRunRequest, callback?: (err: AWSError, data: Glue.Types.BatchStopJobRunResponse) => void): Request<Glue.Types.BatchStopJobRunResponse, AWSError>;
@@ -196,6 +204,14 @@ declare class Glue extends Service {
    */
   createUserDefinedFunction(callback?: (err: AWSError, data: Glue.Types.CreateUserDefinedFunctionResponse) => void): Request<Glue.Types.CreateUserDefinedFunctionResponse, AWSError>;
   /**
+   * Creates a new workflow.
+   */
+  createWorkflow(params: Glue.Types.CreateWorkflowRequest, callback?: (err: AWSError, data: Glue.Types.CreateWorkflowResponse) => void): Request<Glue.Types.CreateWorkflowResponse, AWSError>;
+  /**
+   * Creates a new workflow.
+   */
+  createWorkflow(callback?: (err: AWSError, data: Glue.Types.CreateWorkflowResponse) => void): Request<Glue.Types.CreateWorkflowResponse, AWSError>;
+  /**
    * Removes a classifier from the Data Catalog.
    */
   deleteClassifier(params: Glue.Types.DeleteClassifierRequest, callback?: (err: AWSError, data: Glue.Types.DeleteClassifierResponse) => void): Request<Glue.Types.DeleteClassifierResponse, AWSError>;
@@ -299,6 +315,14 @@ declare class Glue extends Service {
    * Deletes an existing function definition from the Data Catalog.
    */
   deleteUserDefinedFunction(callback?: (err: AWSError, data: Glue.Types.DeleteUserDefinedFunctionResponse) => void): Request<Glue.Types.DeleteUserDefinedFunctionResponse, AWSError>;
+  /**
+   * Deletes a workflow.
+   */
+  deleteWorkflow(params: Glue.Types.DeleteWorkflowRequest, callback?: (err: AWSError, data: Glue.Types.DeleteWorkflowResponse) => void): Request<Glue.Types.DeleteWorkflowResponse, AWSError>;
+  /**
+   * Deletes a workflow.
+   */
+  deleteWorkflow(callback?: (err: AWSError, data: Glue.Types.DeleteWorkflowResponse) => void): Request<Glue.Types.DeleteWorkflowResponse, AWSError>;
   /**
    * Retrieves the status of a migration operation.
    */
@@ -572,6 +596,38 @@ declare class Glue extends Service {
    */
   getUserDefinedFunctions(callback?: (err: AWSError, data: Glue.Types.GetUserDefinedFunctionsResponse) => void): Request<Glue.Types.GetUserDefinedFunctionsResponse, AWSError>;
   /**
+   * Retrieves resource metadata for a workflow.
+   */
+  getWorkflow(params: Glue.Types.GetWorkflowRequest, callback?: (err: AWSError, data: Glue.Types.GetWorkflowResponse) => void): Request<Glue.Types.GetWorkflowResponse, AWSError>;
+  /**
+   * Retrieves resource metadata for a workflow.
+   */
+  getWorkflow(callback?: (err: AWSError, data: Glue.Types.GetWorkflowResponse) => void): Request<Glue.Types.GetWorkflowResponse, AWSError>;
+  /**
+   * Retrieves the metadata for a given workflow run. 
+   */
+  getWorkflowRun(params: Glue.Types.GetWorkflowRunRequest, callback?: (err: AWSError, data: Glue.Types.GetWorkflowRunResponse) => void): Request<Glue.Types.GetWorkflowRunResponse, AWSError>;
+  /**
+   * Retrieves the metadata for a given workflow run. 
+   */
+  getWorkflowRun(callback?: (err: AWSError, data: Glue.Types.GetWorkflowRunResponse) => void): Request<Glue.Types.GetWorkflowRunResponse, AWSError>;
+  /**
+   * Retrieves the workflow run properties which were set during the run.
+   */
+  getWorkflowRunProperties(params: Glue.Types.GetWorkflowRunPropertiesRequest, callback?: (err: AWSError, data: Glue.Types.GetWorkflowRunPropertiesResponse) => void): Request<Glue.Types.GetWorkflowRunPropertiesResponse, AWSError>;
+  /**
+   * Retrieves the workflow run properties which were set during the run.
+   */
+  getWorkflowRunProperties(callback?: (err: AWSError, data: Glue.Types.GetWorkflowRunPropertiesResponse) => void): Request<Glue.Types.GetWorkflowRunPropertiesResponse, AWSError>;
+  /**
+   * Retrieves metadata for all runs of a given workflow.
+   */
+  getWorkflowRuns(params: Glue.Types.GetWorkflowRunsRequest, callback?: (err: AWSError, data: Glue.Types.GetWorkflowRunsResponse) => void): Request<Glue.Types.GetWorkflowRunsResponse, AWSError>;
+  /**
+   * Retrieves metadata for all runs of a given workflow.
+   */
+  getWorkflowRuns(callback?: (err: AWSError, data: Glue.Types.GetWorkflowRunsResponse) => void): Request<Glue.Types.GetWorkflowRunsResponse, AWSError>;
+  /**
    * Imports an existing Athena Data Catalog to AWS Glue
    */
   importCatalogToGlue(params: Glue.Types.ImportCatalogToGlueRequest, callback?: (err: AWSError, data: Glue.Types.ImportCatalogToGlueResponse) => void): Request<Glue.Types.ImportCatalogToGlueResponse, AWSError>;
@@ -612,6 +668,14 @@ declare class Glue extends Service {
    */
   listTriggers(callback?: (err: AWSError, data: Glue.Types.ListTriggersResponse) => void): Request<Glue.Types.ListTriggersResponse, AWSError>;
   /**
+   * Lists names of workflows created in the account.
+   */
+  listWorkflows(params: Glue.Types.ListWorkflowsRequest, callback?: (err: AWSError, data: Glue.Types.ListWorkflowsResponse) => void): Request<Glue.Types.ListWorkflowsResponse, AWSError>;
+  /**
+   * Lists names of workflows created in the account.
+   */
+  listWorkflows(callback?: (err: AWSError, data: Glue.Types.ListWorkflowsResponse) => void): Request<Glue.Types.ListWorkflowsResponse, AWSError>;
+  /**
    * Sets the security configuration for a specified catalog. After the configuration has been set, the specified encryption is applied to every catalog write thereafter.
    */
   putDataCatalogEncryptionSettings(params: Glue.Types.PutDataCatalogEncryptionSettingsRequest, callback?: (err: AWSError, data: Glue.Types.PutDataCatalogEncryptionSettingsResponse) => void): Request<Glue.Types.PutDataCatalogEncryptionSettingsResponse, AWSError>;
@@ -627,6 +691,14 @@ declare class Glue extends Service {
    * Sets the Data Catalog resource policy for access control.
    */
   putResourcePolicy(callback?: (err: AWSError, data: Glue.Types.PutResourcePolicyResponse) => void): Request<Glue.Types.PutResourcePolicyResponse, AWSError>;
+  /**
+   * Puts the specified workflow run properties for the given workflow run. If a property already exists for the specified run, then it overrides the value otherwise adds the property to existing properties.
+   */
+  putWorkflowRunProperties(params: Glue.Types.PutWorkflowRunPropertiesRequest, callback?: (err: AWSError, data: Glue.Types.PutWorkflowRunPropertiesResponse) => void): Request<Glue.Types.PutWorkflowRunPropertiesResponse, AWSError>;
+  /**
+   * Puts the specified workflow run properties for the given workflow run. If a property already exists for the specified run, then it overrides the value otherwise adds the property to existing properties.
+   */
+  putWorkflowRunProperties(callback?: (err: AWSError, data: Glue.Types.PutWorkflowRunPropertiesResponse) => void): Request<Glue.Types.PutWorkflowRunPropertiesResponse, AWSError>;
   /**
    * Resets a bookmark entry.
    */
@@ -667,6 +739,14 @@ declare class Glue extends Service {
    * Starts an existing trigger. See Triggering Jobs for information about how different types of trigger are started.
    */
   startTrigger(callback?: (err: AWSError, data: Glue.Types.StartTriggerResponse) => void): Request<Glue.Types.StartTriggerResponse, AWSError>;
+  /**
+   * Starts a new run of the specified workflow.
+   */
+  startWorkflowRun(params: Glue.Types.StartWorkflowRunRequest, callback?: (err: AWSError, data: Glue.Types.StartWorkflowRunResponse) => void): Request<Glue.Types.StartWorkflowRunResponse, AWSError>;
+  /**
+   * Starts a new run of the specified workflow.
+   */
+  startWorkflowRun(callback?: (err: AWSError, data: Glue.Types.StartWorkflowRunResponse) => void): Request<Glue.Types.StartWorkflowRunResponse, AWSError>;
   /**
    * If the specified crawler is running, stops the crawl.
    */
@@ -795,6 +875,14 @@ declare class Glue extends Service {
    * Updates an existing function definition in the Data Catalog.
    */
   updateUserDefinedFunction(callback?: (err: AWSError, data: Glue.Types.UpdateUserDefinedFunctionResponse) => void): Request<Glue.Types.UpdateUserDefinedFunctionResponse, AWSError>;
+  /**
+   * Updates an existing workflow.
+   */
+  updateWorkflow(params: Glue.Types.UpdateWorkflowRequest, callback?: (err: AWSError, data: Glue.Types.UpdateWorkflowResponse) => void): Request<Glue.Types.UpdateWorkflowResponse, AWSError>;
+  /**
+   * Updates an existing workflow.
+   */
+  updateWorkflow(callback?: (err: AWSError, data: Glue.Types.UpdateWorkflowResponse) => void): Request<Glue.Types.UpdateWorkflowResponse, AWSError>;
 }
 declare namespace Glue {
   export interface Action {
@@ -811,13 +899,17 @@ declare namespace Glue {
      */
     Timeout?: Timeout;
     /**
+     * The name of the SecurityConfiguration structure to be used with this action.
+     */
+    SecurityConfiguration?: NameString;
+    /**
      * Specifies configuration properties of a job run notification.
      */
     NotificationProperty?: NotificationProperty;
     /**
-     * The name of the SecurityConfiguration structure to be used with this action.
+     * The name of the crawler to be used with this action.
      */
-    SecurityConfiguration?: NameString;
+    CrawlerName?: NameString;
   }
   export type ActionList = Action[];
   export type AttemptCount = number;
@@ -1029,6 +1121,26 @@ declare namespace Glue {
      */
     TriggersNotFound?: TriggerNameList;
   }
+  export interface BatchGetWorkflowsRequest {
+    /**
+     * A list of workflow names, which may be the names returned from the ListWorkflows operation.
+     */
+    Names: WorkflowNames;
+    /**
+     * Specifies whether to include a graph when returning the workflow resource metadata.
+     */
+    IncludeGraph?: NullableBoolean;
+  }
+  export interface BatchGetWorkflowsResponse {
+    /**
+     * A list of workflow resource metadata.
+     */
+    Workflows?: Workflows;
+    /**
+     * A list of names of workflows not found.
+     */
+    MissingWorkflows?: WorkflowNames;
+  }
   export interface BatchStopJobRunError {
     /**
      * The name of the job definition that is used in the job run in question.
@@ -1234,6 +1346,14 @@ declare namespace Glue {
      * The condition state. Currently, the values supported are SUCCEEDED, STOPPED, TIMEOUT, and FAILED.
      */
     State?: JobRunState;
+    /**
+     * The name of the crawler to which this condition applies.
+     */
+    CrawlerName?: NameString;
+    /**
+     * The state of the crawler to which this condition applies.
+     */
+    CrawlState?: CrawlState;
   }
   export type ConditionList = Condition[];
   export interface Connection {
@@ -1319,8 +1439,36 @@ declare namespace Glue {
     /**
      * A list of connections used by the job.
      */
-    Connections?: StringList;
+    Connections?: OrchestrationStringList;
   }
+  export interface Crawl {
+    /**
+     * The state of the crawler.
+     */
+    State?: CrawlState;
+    /**
+     * The date and time on which the crawl started.
+     */
+    StartedOn?: TimestampValue;
+    /**
+     * The date and time on which the crawl completed.
+     */
+    CompletedOn?: TimestampValue;
+    /**
+     * The error message associated with the crawl.
+     */
+    ErrorMessage?: DescriptionString;
+    /**
+     * The log group associated with the crawl.
+     */
+    LogGroup?: LogGroup;
+    /**
+     * The log stream associated with the crawl.
+     */
+    LogStream?: LogStream;
+  }
+  export type CrawlList = Crawl[];
+  export type CrawlState = "RUNNING"|"SUCCEEDED"|"CANCELLED"|"FAILED"|string;
   export interface Crawler {
     /**
      * The name of the crawler.
@@ -1429,6 +1577,12 @@ declare namespace Glue {
   }
   export type CrawlerMetricsList = CrawlerMetrics[];
   export type CrawlerNameList = NameString[];
+  export interface CrawlerNodeDetails {
+    /**
+     * A list of crawls represented by the crawl node.
+     */
+    Crawls?: CrawlList;
+  }
   export type CrawlerSecurityConfiguration = string;
   export type CrawlerState = "READY"|"RUNNING"|"STOPPING"|string;
   export interface CrawlerTargets {
@@ -1759,18 +1913,6 @@ declare namespace Glue {
      */
     MaxCapacity?: NullableDouble;
     /**
-     * Specifies configuration properties of a job notification.
-     */
-    NotificationProperty?: NotificationProperty;
-    /**
-     * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.   For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.  
-     */
-    WorkerType?: WorkerType;
-    /**
-     * The number of workers of a defined workerType that are allocated when a job runs. The maximum number of workers you can define are 299 for G.1X, and 149 for G.2X. 
-     */
-    NumberOfWorkers?: NullableInteger;
-    /**
      * The name of the SecurityConfiguration structure to be used with this job.
      */
     SecurityConfiguration?: NameString;
@@ -1778,6 +1920,18 @@ declare namespace Glue {
      * The tags to use with this job. You may use tags to limit access to the job. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.
      */
     Tags?: TagsMap;
+    /**
+     * Specifies configuration properties of a job notification.
+     */
+    NotificationProperty?: NotificationProperty;
+    /**
+     * The number of workers of a defined workerType that are allocated when a job runs. The maximum number of workers you can define are 299 for G.1X, and 149 for G.2X. 
+     */
+    NumberOfWorkers?: NullableInteger;
+    /**
+     * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of memory, 64 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.   For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We recommend this worker type for memory-intensive jobs.  
+     */
+    WorkerType?: NameString;
   }
   export interface CreateJobResponse {
     /**
@@ -1881,6 +2035,10 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
+     * The name of the workflow associated with the trigger.
+     */
+    WorkflowName?: NameString;
+    /**
      * The type of the new trigger.
      */
     Type: TriggerType;
@@ -1930,6 +2088,30 @@ declare namespace Glue {
     FunctionInput: UserDefinedFunctionInput;
   }
   export interface CreateUserDefinedFunctionResponse {
+  }
+  export interface CreateWorkflowRequest {
+    /**
+     * The name to be assigned to the workflow. It should be unique within your account.
+     */
+    Name: NameString;
+    /**
+     * A description of the workflow.
+     */
+    Description?: GenericString;
+    /**
+     * A collection of properties to be used as part of each execution of the workflow.
+     */
+    DefaultRunProperties?: WorkflowRunProperties;
+    /**
+     * The tags to be used with this workflow.
+     */
+    Tags?: TagsMap;
+  }
+  export interface CreateWorkflowResponse {
+    /**
+     * The name of the workflow which was provided as part of the request.
+     */
+    Name?: NameString;
   }
   export interface CreateXMLClassifierRequest {
     /**
@@ -2209,6 +2391,18 @@ declare namespace Glue {
   }
   export interface DeleteUserDefinedFunctionResponse {
   }
+  export interface DeleteWorkflowRequest {
+    /**
+     * Name of the workflow to be deleted.
+     */
+    Name: NameString;
+  }
+  export interface DeleteWorkflowResponse {
+    /**
+     * Name of the workflow specified in input.
+     */
+    Name?: NameString;
+  }
   export type DescriptionString = string;
   export type DescriptionStringRemovable = string;
   export interface DevEndpoint {
@@ -2321,6 +2515,17 @@ declare namespace Glue {
     Path?: Path;
   }
   export type DynamoDBTargetList = DynamoDBTarget[];
+  export interface Edge {
+    /**
+     * The unique of the node within the workflow where the edge starts.
+     */
+    SourceId?: NameString;
+    /**
+     * The unique of the node within the workflow where the edge ends.
+     */
+    DestinationId?: NameString;
+  }
+  export type EdgeList = Edge[];
   export interface EncryptionAtRest {
     /**
      * The encryption-at-rest mode for encrypting Data Catalog data.
@@ -3085,6 +3290,86 @@ declare namespace Glue {
      */
     NextToken?: Token;
   }
+  export interface GetWorkflowRequest {
+    /**
+     * The name of the workflow to retrieve.
+     */
+    Name: NameString;
+    /**
+     * Specifies whether to include a graph when returning the workflow resource metadata.
+     */
+    IncludeGraph?: NullableBoolean;
+  }
+  export interface GetWorkflowResponse {
+    /**
+     * The resource metadata for the workflow.
+     */
+    Workflow?: Workflow;
+  }
+  export interface GetWorkflowRunPropertiesRequest {
+    /**
+     * Name of the workflow which was run.
+     */
+    Name: NameString;
+    /**
+     * The ID of the workflow run whose run properties should be returned.
+     */
+    RunId: IdString;
+  }
+  export interface GetWorkflowRunPropertiesResponse {
+    /**
+     * The workflow run properties which were set during the specified run.
+     */
+    RunProperties?: WorkflowRunProperties;
+  }
+  export interface GetWorkflowRunRequest {
+    /**
+     * Name of the workflow being run.
+     */
+    Name: NameString;
+    /**
+     * The ID of the workflow run.
+     */
+    RunId: IdString;
+    /**
+     * Specifies whether to include the workflow graph in response or not.
+     */
+    IncludeGraph?: NullableBoolean;
+  }
+  export interface GetWorkflowRunResponse {
+    /**
+     * The requested workflow run metadata.
+     */
+    Run?: WorkflowRun;
+  }
+  export interface GetWorkflowRunsRequest {
+    /**
+     * Name of the workflow whose metadata of runs should be returned.
+     */
+    Name: NameString;
+    /**
+     * Specifies whether to include the workflow graph in response or not.
+     */
+    IncludeGraph?: NullableBoolean;
+    /**
+     * The maximum size of the response.
+     */
+    NextToken?: GenericString;
+    /**
+     * The maximum number of workflow runs to be included in the response.
+     */
+    MaxResults?: PageSize;
+  }
+  export interface GetWorkflowRunsResponse {
+    /**
+     * A list of workflow run metadata objects.
+     */
+    Runs?: WorkflowRuns;
+    /**
+     * A continuation token, if not all requested workflow runs have been returned.
+     */
+    NextToken?: GenericString;
+  }
   export type GlueResourceArn = string;
   export interface GrokClassifier {
     /**
@@ -3258,7 +3543,7 @@ declare namespace Glue {
      */
     Name?: GenericString;
     /**
-     * Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that executes a job (required).
+     * Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that executes a job.
      */
     ScriptLocation?: ScriptLocationString;
     /**
@@ -3269,6 +3554,12 @@ declare namespace Glue {
   export type JobList = Job[];
   export type JobName = string;
   export type JobNameList = NameString[];
+  export interface JobNodeDetails {
+    /**
+     * The information for the job runs represented by the job node.
+     */
+    JobRuns?: JobRunList;
+  }
   export interface JobRun {
     /**
      * The ID of this job run.
@@ -3335,10 +3626,6 @@ declare namespace Glue {
      */
     MaxCapacity?: NullableDouble;
     /**
-     * Specifies configuration properties of a job run notification.
-     */
-    NotificationProperty?: NotificationProperty;
-    /**
      * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.   For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.  
      */
     WorkerType?: WorkerType;
@@ -3354,6 +3641,10 @@ declare namespace Glue {
      * The name of the log group for secure logging that can be server-side encrypted in Amazon CloudWatch using AWS KMS. This name can be /aws-glue/jobs/, in which case the default encryption is NONE. If you add a role name and SecurityConfiguration name (in other words, /aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/), then that security configuration is used to encrypt the log group.
      */
     LogGroupName?: GenericString;
+    /**
+     * Specifies configuration properties of a job run notification.
+     */
+    NotificationProperty?: NotificationProperty;
   }
   export type JobRunList = JobRun[];
   export type JobRunState = "STARTING"|"RUNNING"|"STOPPING"|"STOPPED"|"SUCCEEDED"|"FAILED"|"TIMEOUT"|string;
@@ -3573,6 +3864,26 @@ declare namespace Glue {
      */
     NextToken?: GenericString;
   }
+  export interface ListWorkflowsRequest {
+    /**
+     * A continuation token, if this is a continuation request.
+     */
+    NextToken?: GenericString;
+    /**
+     * The maximum size of a list to return.
+     */
+    MaxResults?: PageSize;
+  }
+  export interface ListWorkflowsResponse {
+    /**
+     * List of names of workflows in the account.
+     */
+    Workflows?: WorkflowNames;
+    /**
+     * A continuation token, if not all workflow names have been returned.
+     */
+    NextToken?: GenericString;
+  }
   export interface Location {
     /**
      * A JDBC location.
@@ -3628,6 +3939,34 @@ declare namespace Glue {
   export type MillisecondsCount = number;
   export type NameString = string;
   export type NameStringList = NameString[];
+  export interface Node {
+    /**
+     * The type of AWS Glue component represented by the node.
+     */
+    Type?: NodeType;
+    /**
+     * The name of the AWS Glue component represented by the node.
+     */
+    Name?: NameString;
+    /**
+     * The unique Id assigned to the node within the workflow.
+     */
+    UniqueId?: NameString;
+    /**
+     * Details of the Trigger when the node represents a Trigger.
+     */
+    TriggerDetails?: TriggerNodeDetails;
+    /**
+     * Details of the Job when the node represents a Job.
+     */
+    JobDetails?: JobNodeDetails;
+    /**
+     * Details of the crawler when the node represents a crawler.
+     */
+    CrawlerDetails?: CrawlerNodeDetails;
+  }
+  export type NodeList = Node[];
+  export type NodeType = "CRAWLER"|"JOB"|"TRIGGER"|string;
   export type NonNegativeDouble = number;
   export type NonNegativeInteger = number;
   export interface NotificationProperty {
@@ -3640,6 +3979,7 @@ declare namespace Glue {
   export type NullableBoolean = boolean;
   export type NullableDouble = number;
   export type NullableInteger = number;
+  export type OrchestrationStringList = GenericString[];
   export interface Order {
     /**
      * The name of the column.
@@ -3801,6 +4141,22 @@ declare namespace Glue {
      * A hash of the policy that has just been set. This must be included in a subsequent call that overwrites or updates this policy.
      */
     PolicyHash?: HashString;
+  }
+  export interface PutWorkflowRunPropertiesRequest {
+    /**
+     * Name of the workflow which was run.
+     */
+    Name: NameString;
+    /**
+     * The ID of the workflow run for which the run properties should be updated.
+     */
+    RunId: IdString;
+    /**
+     * The properties to put for the specified run.
+     */
+    RunProperties: WorkflowRunProperties;
+  }
+  export interface PutWorkflowRunPropertiesResponse {
   }
   export type PythonScript = string;
   export type PythonVersionString = string;
@@ -3975,14 +4331,6 @@ declare namespace Glue {
      */
     MaxCapacity?: NullableDouble;
     /**
-     * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.   For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.  
-     */
-    WorkerType?: WorkerType;
-    /**
-     * The number of workers of a defined workerType that are allocated when a job runs. The maximum number of workers you can define are 299 for G.1X, and 149 for G.2X. 
-     */
-    NumberOfWorkers?: NullableInteger;
-    /**
      * The name of the SecurityConfiguration structure to be used with this job run.
      */
     SecurityConfiguration?: NameString;
@@ -3990,6 +4338,14 @@ declare namespace Glue {
      * Specifies configuration properties of a job run notification.
      */
     NotificationProperty?: NotificationProperty;
+    /**
+     * The type of predefined worker that is allocated when a job runs. Accepts a value of Standard, G.1X, or G.2X.   For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory and a 50GB disk, and 2 executors per worker.   For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a 64GB disk, and 1 executor per worker.   For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.  
+     */
+    WorkerType?: NameString;
+    /**
+     * The number of workers of a defined workerType that are allocated when a job runs. The maximum number of workers you can define are 299 for G.1X, and 149 for G.2X. 
+     */
+    NumberOfWorkers?: NullableInteger;
   }
   export interface StartJobRunResponse {
     /**
@@ -4008,6 +4364,18 @@ declare namespace Glue {
      * The name of the trigger that was started.
      */
     Name?: NameString;
+  }
+  export interface StartWorkflowRunRequest {
+    /**
+     * The name of the workflow to start.
+     */
+    Name: NameString;
+  }
+  export interface StartWorkflowRunResponse {
+    /**
+     * An Id for the new run.
+     */
+    RunId?: IdString;
   }
   export interface StopCrawlerRequest {
     /**
@@ -4271,6 +4639,10 @@ declare namespace Glue {
      */
     Name?: NameString;
     /**
+     * The name of the workflow associated with the trigger.
+     */
+    WorkflowName?: NameString;
+    /**
      * Reserved for future use.
      */
     Id?: IdString;
@@ -4301,6 +4673,12 @@ declare namespace Glue {
   }
   export type TriggerList = Trigger[];
   export type TriggerNameList = NameString[];
+  export interface TriggerNodeDetails {
+    /**
+     * The information of the trigger represented by the trigger node.
+     */
+    Trigger?: Trigger;
+  }
   export type TriggerState = "CREATING"|"CREATED"|"ACTIVATING"|"ACTIVATED"|"DEACTIVATING"|"DEACTIVATED"|"DELETING"|"UPDATING"|string;
   export type TriggerType = "SCHEDULED"|"CONDITIONAL"|"ON_DEMAND"|string;
   export interface TriggerUpdate {
@@ -4641,6 +5019,26 @@ declare namespace Glue {
   }
   export interface UpdateUserDefinedFunctionResponse {
   }
+  export interface UpdateWorkflowRequest {
+    /**
+     * Name of the workflow to be updated.
+     */
+    Name: NameString;
+    /**
+     * The description of the workflow.
+     */
+    Description?: GenericString;
+    /**
+     * A collection of properties to be used as part of each execution of the workflow.
+     */
+    DefaultRunProperties?: WorkflowRunProperties;
+  }
+  export interface UpdateWorkflowResponse {
+    /**
+     * The name of the workflow which was specified in input.
+     */
+    Name?: NameString;
+  }
   export interface UpdateXMLClassifierRequest {
     /**
      * The name of the classifier.
@@ -4711,6 +5109,111 @@ declare namespace Glue {
   export type VersionString = string;
   export type ViewTextString = string;
   export type WorkerType = "Standard"|"G.1X"|"G.2X"|string;
+  export interface Workflow {
+    /**
+     * The name of the workflow representing the flow.
+     */
+    Name?: NameString;
+    /**
+     * A description of the workflow.
+     */
+    Description?: GenericString;
+    /**
+     * A collection of properties to be used as part of each execution of the workflow.
+     */
+    DefaultRunProperties?: WorkflowRunProperties;
+    /**
+     * The date and time when the workflow was created.
+     */
+    CreatedOn?: TimestampValue;
+    /**
+     * The date and time when the workflow was last modified.
+     */
+    LastModifiedOn?: TimestampValue;
+    /**
+     * The information about the last execution of the workflow.
+     */
+    LastRun?: WorkflowRun;
+    /**
+     * The graph representing all the AWS Glue components that belong to the workflow as nodes and directed connections between them as edges.
+     */
+    Graph?: WorkflowGraph;
+  }
+  export interface WorkflowGraph {
+    /**
+     * A list of the the AWS Glue components belong to the workflow represented as nodes.
+     */
+    Nodes?: NodeList;
+    /**
+     * A list of all the directed connections between the nodes belonging to the workflow.
+     */
+    Edges?: EdgeList;
+  }
+  export type WorkflowNames = NameString[];
+  export interface WorkflowRun {
+    /**
+     * Name of the workflow which was executed.
+     */
+    Name?: NameString;
+    /**
+     * The ID of this workflow run.
+     */
+    WorkflowRunId?: IdString;
+    /**
+     * The workflow run properties which were set during the run.
+     */
+    WorkflowRunProperties?: WorkflowRunProperties;
+    /**
+     * The date and time when the workflow run was started.
+     */
+    StartedOn?: TimestampValue;
+    /**
+     * The date and time when the workflow run completed.
+     */
+    CompletedOn?: TimestampValue;
+    /**
+     * The status of the workflow run.
+     */
+    Status?: WorkflowRunStatus;
+    /**
+     * The statistics of the run.
+     */
+    Statistics?: WorkflowRunStatistics;
+    /**
+     * The graph representing all the AWS Glue components that belong to the workflow as nodes and directed connections between them as edges.
+     */
+    Graph?: WorkflowGraph;
+  }
+  export type WorkflowRunProperties = {[key: string]: GenericString};
+  export interface WorkflowRunStatistics {
+    /**
+     * Total number of Actions in the workflow run.
+     */
+    TotalActions?: IntegerValue;
+    /**
+     * Total number of Actions which timed out.
+     */
+    TimeoutActions?: IntegerValue;
+    /**
+     * Total number of Actions which have failed.
+     */
+    FailedActions?: IntegerValue;
+    /**
+     * Total number of Actions which have stopped.
+     */
+    StoppedActions?: IntegerValue;
+    /**
+     * Total number of Actions which have succeeded.
+     */
+    SucceededActions?: IntegerValue;
+    /**
+     * Total number Actions in running state.
+     */
+    RunningActions?: IntegerValue;
+  }
+  export type WorkflowRunStatus = "RUNNING"|"COMPLETED"|string;
+  export type WorkflowRuns = WorkflowRun[];
+  export type Workflows = Workflow[];
   export interface XMLClassifier {
     /**
      * The name of the classifier.
