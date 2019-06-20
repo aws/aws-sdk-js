@@ -1899,6 +1899,28 @@
     });
   });
 
+  describe('AWS.AssumeRoleWithWebIdentityCredentials', function() {
+    var origEnv;
+    var fs = require('fs');
+    beforeEach(function() {
+      origEnv = process.env;
+      process.env = {
+        AWS_WEB_IDENTITY_TOKEN_FILE: 'envTokenFile',
+        AWS_IAM_ROLE_ARN: 'envRoleArn',
+        ENV_ROLE_SESSION_NAME: 'envSessionName'
+      };
+      helpers.spyOn(fs, 'readFileSync').andReturn('oidcToken');
+    });
+    afterEach(function() {
+      process.env = origEnv;
+    });
+
+    return it('reads params from environment variables when available', function() {
+      new AWS.AssumeRoleWithWebIdentityCredentials();
+      return expect(fs.readFileSync.calls[0]['arguments'][0]).to.equal('envTokenFile');
+    });
+  });
+
   describe('AWS.SAMLCredentials', function() {
     var creds, mockSTS, setupClients, setupCreds;
     creds = null;
