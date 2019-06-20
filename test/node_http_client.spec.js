@@ -78,6 +78,46 @@
             return done();
           });
         });
+        
+        it('should respect tls reject unauthorized environment variable off', function(done) {
+          process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+          var req;
+          req = new AWS.HttpRequest('https://invalid');
+          return http.handleRequest(req, {timeout: 1}, null, function(err) {
+            expect(AWS.NodeHttpClient.agent).to.be.undefined;
+            expect(AWS.NodeHttpClient.sslAgent).not.to.be.undefined;
+            expect(AWS.NodeHttpClient.sslAgent.options.rejectUnauthorized).to.equal(false);
+            delete process.env.NODE_TLS_REJECT_UNAUTHORIZED;
+            return done();
+          });
+        });
+        
+        it('should respect tls reject unauthorized environment variable on', function(done) {
+          process.env.NODE_TLS_REJECT_UNAUTHORIZED = '1';
+          var req;
+          req = new AWS.HttpRequest('https://invalid');
+          return http.handleRequest(req, {timeout: 1}, null, function(err) {
+            expect(AWS.NodeHttpClient.agent).to.be.undefined;
+            expect(AWS.NodeHttpClient.sslAgent).not.to.be.undefined;
+            expect(AWS.NodeHttpClient.sslAgent.options.rejectUnauthorized).to.equal(true);
+            delete process.env.NODE_TLS_REJECT_UNAUTHORIZED;
+            return done();
+          });
+        });
+        
+        it('should default to reject unauthorized if environment variable not present', function(done) {
+          var tempUnauthorized = process.env.NODE_TLS_REJECT_UNAUTHORIZED;
+          delete process.env.NODE_TLS_REJECT_UNAUTHORIZED;
+          var req;
+          req = new AWS.HttpRequest('https://invalid');
+          return http.handleRequest(req, {timeout: 1}, null, function(err) {
+            expect(AWS.NodeHttpClient.agent).to.be.undefined;
+            expect(AWS.NodeHttpClient.sslAgent).not.to.be.undefined;
+            expect(AWS.NodeHttpClient.sslAgent.options.rejectUnauthorized).to.equal(true);
+            process.env.NODE_TLS_REJECT_UNAUTHORIZED = tempUnauthorized;
+            return done();
+          });
+        });
       });
 
       return describe('handleRequest', function() {
