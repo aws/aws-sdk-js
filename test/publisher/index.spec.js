@@ -24,7 +24,7 @@ if (AWS.util.isNode()) {
       it('uses "127.0.0.1" as default address', function() {
         var publisher = new Publisher();
 
-        expect(publisher.address).to.equal('127.0.0.1')
+        expect(publisher.address).to.equal('127.0.0.1');
       });
 
       it('setting "host" of the passed-in option will set the address', function() {
@@ -33,7 +33,7 @@ if (AWS.util.isNode()) {
         });
 
         expect(publisher.address).to.equal('dnshost');
-      })
+      });
 
       it('sets "clientId" to the passed in option', function () {
         var publisher = new Publisher({

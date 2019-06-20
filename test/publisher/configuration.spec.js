@@ -81,7 +81,7 @@ if (AWS.util.isNode()) {
           clientId: undefined,
           host: '127.0.0.2'
         });
-      })
+      });
     });
 
     describe('get configuration from config file', function () {
@@ -153,7 +153,7 @@ if (AWS.util.isNode()) {
           clientId: undefined,
           host: '::1'
         });
-      })
+      });
     });
 
     describe('get configurations according to resolving chain', function () {
