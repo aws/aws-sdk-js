@@ -134,6 +134,8 @@ declare class MediaPackage extends Service {
 }
 declare namespace MediaPackage {
   export type AdMarkers = "NONE"|"SCTE35_ENHANCED"|"PASSTHROUGH"|string;
+  export type AdTriggers = __AdTriggersElement[];
+  export type AdsOnDeliveryRestrictions = "NONE"|"RESTRICTED"|"UNRESTRICTED"|"BOTH"|string;
   export interface Channel {
     /**
      * The Amazon Resource Name (ARN) assigned to the Channel.
@@ -320,6 +322,8 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
     SpekeKeyProvider: SpekeKeyProvider;
   }
   export interface DashPackage {
+    AdTriggers?: AdTriggers;
+    AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions;
     Encryption?: DashEncryption;
     /**
      * Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.
@@ -547,6 +551,8 @@ messages in the input source.
 
      */
     AdMarkers?: AdMarkers;
+    AdTriggers?: AdTriggers;
+    AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions;
     /**
      * The ID of the manifest. The ID must be unique within the OriginEndpoint and it cannot be changed after it is created.
      */
@@ -595,6 +601,8 @@ messages in the input source.
 
      */
     AdMarkers?: AdMarkers;
+    AdTriggers?: AdTriggers;
+    AdsOnDeliveryRestrictions?: AdsOnDeliveryRestrictions;
     Encryption?: HlsEncryption;
     /**
      * When enabled, an I-Frame only stream will be included in the output.
@@ -980,6 +988,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     Whitelist?: __listOf__string;
   }
+  export type __AdTriggersElement = "SPLICE_INSERT"|"BREAK"|"PROVIDER_ADVERTISEMENT"|"DISTRIBUTOR_ADVERTISEMENT"|"PROVIDER_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_PLACEMENT_OPPORTUNITY"|"PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"|string;
   export type __PeriodTriggersElement = "ADS"|string;
   export type __boolean = boolean;
   export type __integer = number;
