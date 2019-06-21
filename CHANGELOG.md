@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.479.0-->
+<!--LATEST=2.480.0-->
 <!--ENTRYINSERT-->
+
+## 2.480.0
+* feature: IAM: We are making it easier for you to manage your permission guardrails i.e. service control policies by enabling you to retrieve the last timestamp when an AWS service was accessed within an account or AWS Organizations entity.
+* feature: MediaPackage: Added two new origin endpoint fields for configuring which SCTE-35 messages are treated as advertisements.
 
 ## 2.479.0
 * feature: ACMPCA: ACM Private CA is launching Root CAs and hierarchy management, a new feature that expands the scope of ACM Private CA from supporting only subordinate issuing CAs, to now include a full CA hierarchy that includes root CAs - the cryptographic root of trust for an organization.

@@ -497,6 +497,23 @@
       ],
       "type": "string"
     },
+    "AdTriggers": {
+      "documentation": "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no\nad markers are output.  Specify multiple items to create ad markers for all of the included\nmessage types.\n",
+      "member": {
+        "shape": "__AdTriggersElement"
+      },
+      "type": "list"
+    },
+    "AdsOnDeliveryRestrictions": {
+      "documentation": "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to\ndetermine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become\nads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that\ncontain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35\nmessages of the types specified in AdTriggers that do not contain delivery restrictions will\nbe treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in\nAdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags\nand are always treated as ads if specified in AdTriggers.\n",
+      "enum": [
+        "NONE",
+        "RESTRICTED",
+        "UNRESTRICTED",
+        "BOTH"
+      ],
+      "type": "string"
+    },
     "Channel": {
       "documentation": "A Channel resource configuration.",
       "members": {
@@ -809,6 +826,14 @@
     "DashPackage": {
       "documentation": "A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.",
       "members": {
+        "AdTriggers": {
+          "locationName": "adTriggers",
+          "shape": "AdTriggers"
+        },
+        "AdsOnDeliveryRestrictions": {
+          "locationName": "adsOnDeliveryRestrictions",
+          "shape": "AdsOnDeliveryRestrictions"
+        },
         "Encryption": {
           "locationName": "encryption",
           "shape": "DashEncryption"
@@ -1135,6 +1160,14 @@
           "locationName": "adMarkers",
           "shape": "AdMarkers"
         },
+        "AdTriggers": {
+          "locationName": "adTriggers",
+          "shape": "AdTriggers"
+        },
+        "AdsOnDeliveryRestrictions": {
+          "locationName": "adsOnDeliveryRestrictions",
+          "shape": "AdsOnDeliveryRestrictions"
+        },
         "Id": {
           "documentation": "The ID of the manifest. The ID must be unique within the OriginEndpoint and it cannot be changed after it is created.",
           "locationName": "id",
@@ -1178,6 +1211,14 @@
           "documentation": "This setting controls how ad markers are included in the packaged OriginEndpoint.\n\"NONE\" will omit all SCTE-35 ad markers from the output.\n\"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad\nmarkers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest.\n\"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35\nmessages in the input source.\n",
           "locationName": "adMarkers",
           "shape": "AdMarkers"
+        },
+        "AdTriggers": {
+          "locationName": "adTriggers",
+          "shape": "AdTriggers"
+        },
+        "AdsOnDeliveryRestrictions": {
+          "locationName": "adsOnDeliveryRestrictions",
+          "shape": "AdsOnDeliveryRestrictions"
         },
         "Encryption": {
           "locationName": "encryption",
@@ -1861,6 +1902,19 @@
         }
       },
       "type": "structure"
+    },
+    "__AdTriggersElement": {
+      "enum": [
+        "SPLICE_INSERT",
+        "BREAK",
+        "PROVIDER_ADVERTISEMENT",
+        "DISTRIBUTOR_ADVERTISEMENT",
+        "PROVIDER_PLACEMENT_OPPORTUNITY",
+        "DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
+        "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
+        "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
+      ],
+      "type": "string"
     },
     "__PeriodTriggersElement": {
       "enum": [
