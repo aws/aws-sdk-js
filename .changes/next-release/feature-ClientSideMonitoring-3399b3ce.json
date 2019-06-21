@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "ClientSideMonitoring",
+  "description": "add a host config to client-side monitoring configuration, defaults to be '127.0.0.1'"
+}
