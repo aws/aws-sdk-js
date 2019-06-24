@@ -12,61 +12,77 @@ declare class SecurityHub extends Service {
   constructor(options?: SecurityHub.Types.ClientConfiguration)
   config: Config & SecurityHub.Types.ClientConfiguration;
   /**
-   * Accepts the invitation to be monitored by a Security Hub master account.
+   * Accepts the invitation to be a member account and be monitored by the Security Hub master account that the invitation was sent from. When the member account accepts the invitation, permission is granted to the master account to view findings generated in the member account.
    */
   acceptInvitation(params: SecurityHub.Types.AcceptInvitationRequest, callback?: (err: AWSError, data: SecurityHub.Types.AcceptInvitationResponse) => void): Request<SecurityHub.Types.AcceptInvitationResponse, AWSError>;
   /**
-   * Accepts the invitation to be monitored by a Security Hub master account.
+   * Accepts the invitation to be a member account and be monitored by the Security Hub master account that the invitation was sent from. When the member account accepts the invitation, permission is granted to the master account to view findings generated in the member account.
    */
   acceptInvitation(callback?: (err: AWSError, data: SecurityHub.Types.AcceptInvitationResponse) => void): Request<SecurityHub.Types.AcceptInvitationResponse, AWSError>;
   /**
-   * Disables the standards specified by the standards subscription ARNs. In the context of Security Hub, supported standards (for example, CIS AWS Foundations) are automated and continuous checks that help determine your compliance status against security industry (including AWS) best practices.
+   * Disables the standards specified by the provided StandardsSubscriptionArns. For more information, see Standards Supported in AWS Security Hub.
    */
   batchDisableStandards(params: SecurityHub.Types.BatchDisableStandardsRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchDisableStandardsResponse) => void): Request<SecurityHub.Types.BatchDisableStandardsResponse, AWSError>;
   /**
-   * Disables the standards specified by the standards subscription ARNs. In the context of Security Hub, supported standards (for example, CIS AWS Foundations) are automated and continuous checks that help determine your compliance status against security industry (including AWS) best practices.
+   * Disables the standards specified by the provided StandardsSubscriptionArns. For more information, see Standards Supported in AWS Security Hub.
    */
   batchDisableStandards(callback?: (err: AWSError, data: SecurityHub.Types.BatchDisableStandardsResponse) => void): Request<SecurityHub.Types.BatchDisableStandardsResponse, AWSError>;
   /**
-   * Enables the standards specified by the standards ARNs. In the context of Security Hub, supported standards (for example, CIS AWS Foundations) are automated and continuous checks that help determine your compliance status against security industry (including AWS) best practices. 
+   * Enables the standards specified by the provided standardsArn. In this release, only CIS AWS Foundations standards are supported. For more information, see Standards Supported in AWS Security Hub.
    */
   batchEnableStandards(params: SecurityHub.Types.BatchEnableStandardsRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchEnableStandardsResponse) => void): Request<SecurityHub.Types.BatchEnableStandardsResponse, AWSError>;
   /**
-   * Enables the standards specified by the standards ARNs. In the context of Security Hub, supported standards (for example, CIS AWS Foundations) are automated and continuous checks that help determine your compliance status against security industry (including AWS) best practices. 
+   * Enables the standards specified by the provided standardsArn. In this release, only CIS AWS Foundations standards are supported. For more information, see Standards Supported in AWS Security Hub.
    */
   batchEnableStandards(callback?: (err: AWSError, data: SecurityHub.Types.BatchEnableStandardsResponse) => void): Request<SecurityHub.Types.BatchEnableStandardsResponse, AWSError>;
   /**
-   * Imports security findings generated from an integrated third-party product into Security Hub.
+   * Imports security findings generated from an integrated third-party product into Security Hub. This action is requested by the integrated product to import its findings into Security Hub. The maximum allowed size for a finding is 240 Kb. An error is returned for any finding larger than 240 Kb.
    */
   batchImportFindings(params: SecurityHub.Types.BatchImportFindingsRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchImportFindingsResponse) => void): Request<SecurityHub.Types.BatchImportFindingsResponse, AWSError>;
   /**
-   * Imports security findings generated from an integrated third-party product into Security Hub.
+   * Imports security findings generated from an integrated third-party product into Security Hub. This action is requested by the integrated product to import its findings into Security Hub. The maximum allowed size for a finding is 240 Kb. An error is returned for any finding larger than 240 Kb.
    */
   batchImportFindings(callback?: (err: AWSError, data: SecurityHub.Types.BatchImportFindingsResponse) => void): Request<SecurityHub.Types.BatchImportFindingsResponse, AWSError>;
   /**
-   * Creates an insight, which is a consolidation of findings that identifies a security area that requires attention or intervention.
+   * Creates a custom action target in Security Hub. You can use custom actions on findings and insights in Security Hub to trigger target actions in Amazon CloudWatch Events.
+   */
+  createActionTarget(params: SecurityHub.Types.CreateActionTargetRequest, callback?: (err: AWSError, data: SecurityHub.Types.CreateActionTargetResponse) => void): Request<SecurityHub.Types.CreateActionTargetResponse, AWSError>;
+  /**
+   * Creates a custom action target in Security Hub. You can use custom actions on findings and insights in Security Hub to trigger target actions in Amazon CloudWatch Events.
+   */
+  createActionTarget(callback?: (err: AWSError, data: SecurityHub.Types.CreateActionTargetResponse) => void): Request<SecurityHub.Types.CreateActionTargetResponse, AWSError>;
+  /**
+   * Creates a custom insight in Security Hub. An insight is a consolidation of findings that relate to a security issue that requires attention or remediation. Use the GroupByAttribute to group the related findings in the insight.
    */
   createInsight(params: SecurityHub.Types.CreateInsightRequest, callback?: (err: AWSError, data: SecurityHub.Types.CreateInsightResponse) => void): Request<SecurityHub.Types.CreateInsightResponse, AWSError>;
   /**
-   * Creates an insight, which is a consolidation of findings that identifies a security area that requires attention or intervention.
+   * Creates a custom insight in Security Hub. An insight is a consolidation of findings that relate to a security issue that requires attention or remediation. Use the GroupByAttribute to group the related findings in the insight.
    */
   createInsight(callback?: (err: AWSError, data: SecurityHub.Types.CreateInsightResponse) => void): Request<SecurityHub.Types.CreateInsightResponse, AWSError>;
   /**
-   * Creates Security Hub member accounts associated with the account used for this action, which becomes the Security Hub Master account. Security Hub must be enabled in the account used to make this request.
+   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. You can use the EnableSecurityHub to enable Security Hub. After you use CreateMembers to create member account associations in Security Hub, you need to use the InviteMembers action, which invites the accounts to enable Security Hub and become member accounts in Security Hub. If the invitation is accepted by the account owner, the account becomes a member account in Security Hub, and a permission policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start being sent to both the member and master accounts. You can remove the association between the master and member accounts by using the DisassociateFromMasterAccount or DisassociateMembers operation.
    */
   createMembers(params: SecurityHub.Types.CreateMembersRequest, callback?: (err: AWSError, data: SecurityHub.Types.CreateMembersResponse) => void): Request<SecurityHub.Types.CreateMembersResponse, AWSError>;
   /**
-   * Creates Security Hub member accounts associated with the account used for this action, which becomes the Security Hub Master account. Security Hub must be enabled in the account used to make this request.
+   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the master account. To successfully create a member, you must use this action from an account that already has Security Hub enabled. You can use the EnableSecurityHub to enable Security Hub. After you use CreateMembers to create member account associations in Security Hub, you need to use the InviteMembers action, which invites the accounts to enable Security Hub and become member accounts in Security Hub. If the invitation is accepted by the account owner, the account becomes a member account in Security Hub, and a permission policy is added that permits the master account to view the findings generated in the member account. When Security Hub is enabled in the invited account, findings start being sent to both the member and master accounts. You can remove the association between the master and member accounts by using the DisassociateFromMasterAccount or DisassociateMembers operation.
    */
   createMembers(callback?: (err: AWSError, data: SecurityHub.Types.CreateMembersResponse) => void): Request<SecurityHub.Types.CreateMembersResponse, AWSError>;
   /**
-   * Declines invitations that are sent to this AWS account (invitee) from the AWS accounts (inviters) that are specified by the provided AccountIds.
+   * Declines invitations to become a member account.
    */
   declineInvitations(params: SecurityHub.Types.DeclineInvitationsRequest, callback?: (err: AWSError, data: SecurityHub.Types.DeclineInvitationsResponse) => void): Request<SecurityHub.Types.DeclineInvitationsResponse, AWSError>;
   /**
-   * Declines invitations that are sent to this AWS account (invitee) from the AWS accounts (inviters) that are specified by the provided AccountIds.
+   * Declines invitations to become a member account.
    */
   declineInvitations(callback?: (err: AWSError, data: SecurityHub.Types.DeclineInvitationsResponse) => void): Request<SecurityHub.Types.DeclineInvitationsResponse, AWSError>;
+  /**
+   * Deletes a custom action target from Security Hub. Deleting a custom action target doesn't affect any findings or insights that were already sent to Amazon CloudWatch Events using the custom action.
+   */
+  deleteActionTarget(params: SecurityHub.Types.DeleteActionTargetRequest, callback?: (err: AWSError, data: SecurityHub.Types.DeleteActionTargetResponse) => void): Request<SecurityHub.Types.DeleteActionTargetResponse, AWSError>;
+  /**
+   * Deletes a custom action target from Security Hub. Deleting a custom action target doesn't affect any findings or insights that were already sent to Amazon CloudWatch Events using the custom action.
+   */
+  deleteActionTarget(callback?: (err: AWSError, data: SecurityHub.Types.DeleteActionTargetResponse) => void): Request<SecurityHub.Types.DeleteActionTargetResponse, AWSError>;
   /**
    * Deletes the insight specified by the InsightArn.
    */
@@ -76,91 +92,107 @@ declare class SecurityHub extends Service {
    */
   deleteInsight(callback?: (err: AWSError, data: SecurityHub.Types.DeleteInsightResponse) => void): Request<SecurityHub.Types.DeleteInsightResponse, AWSError>;
   /**
-   * Deletes invitations that were sent to theis AWS account (invitee) by the AWS accounts (inviters) that are specified by their account IDs. 
+   * Deletes invitations received by the AWS account to become a member account.
    */
   deleteInvitations(params: SecurityHub.Types.DeleteInvitationsRequest, callback?: (err: AWSError, data: SecurityHub.Types.DeleteInvitationsResponse) => void): Request<SecurityHub.Types.DeleteInvitationsResponse, AWSError>;
   /**
-   * Deletes invitations that were sent to theis AWS account (invitee) by the AWS accounts (inviters) that are specified by their account IDs. 
+   * Deletes invitations received by the AWS account to become a member account.
    */
   deleteInvitations(callback?: (err: AWSError, data: SecurityHub.Types.DeleteInvitationsResponse) => void): Request<SecurityHub.Types.DeleteInvitationsResponse, AWSError>;
   /**
-   * Deletes the Security Hub member accounts that the account IDs specify.
+   * Deletes the specified member accounts from Security Hub.
    */
   deleteMembers(params: SecurityHub.Types.DeleteMembersRequest, callback?: (err: AWSError, data: SecurityHub.Types.DeleteMembersResponse) => void): Request<SecurityHub.Types.DeleteMembersResponse, AWSError>;
   /**
-   * Deletes the Security Hub member accounts that the account IDs specify.
+   * Deletes the specified member accounts from Security Hub.
    */
   deleteMembers(callback?: (err: AWSError, data: SecurityHub.Types.DeleteMembersResponse) => void): Request<SecurityHub.Types.DeleteMembersResponse, AWSError>;
   /**
-   * Returns information about the products available that you can subscribe to.
+   * Returns a list of the custom action targets in Security Hub in your account.
+   */
+  describeActionTargets(params: SecurityHub.Types.DescribeActionTargetsRequest, callback?: (err: AWSError, data: SecurityHub.Types.DescribeActionTargetsResponse) => void): Request<SecurityHub.Types.DescribeActionTargetsResponse, AWSError>;
+  /**
+   * Returns a list of the custom action targets in Security Hub in your account.
+   */
+  describeActionTargets(callback?: (err: AWSError, data: SecurityHub.Types.DescribeActionTargetsResponse) => void): Request<SecurityHub.Types.DescribeActionTargetsResponse, AWSError>;
+  /**
+   * Returns details about the Hub resource in your account, including the HubArn and the time when you enabled Security Hub.
+   */
+  describeHub(params: SecurityHub.Types.DescribeHubRequest, callback?: (err: AWSError, data: SecurityHub.Types.DescribeHubResponse) => void): Request<SecurityHub.Types.DescribeHubResponse, AWSError>;
+  /**
+   * Returns details about the Hub resource in your account, including the HubArn and the time when you enabled Security Hub.
+   */
+  describeHub(callback?: (err: AWSError, data: SecurityHub.Types.DescribeHubResponse) => void): Request<SecurityHub.Types.DescribeHubResponse, AWSError>;
+  /**
+   * Returns information about the products available that you can subscribe to and integrate with Security Hub to consolidate findings.
    */
   describeProducts(params: SecurityHub.Types.DescribeProductsRequest, callback?: (err: AWSError, data: SecurityHub.Types.DescribeProductsResponse) => void): Request<SecurityHub.Types.DescribeProductsResponse, AWSError>;
   /**
-   * Returns information about the products available that you can subscribe to.
+   * Returns information about the products available that you can subscribe to and integrate with Security Hub to consolidate findings.
    */
   describeProducts(callback?: (err: AWSError, data: SecurityHub.Types.DescribeProductsResponse) => void): Request<SecurityHub.Types.DescribeProductsResponse, AWSError>;
   /**
-   * Cancels the subscription that allows a findings-generating solution (product) to import its findings into Security Hub.
+   * Disables the integration of the specified product with Security Hub. Findings from that product are no longer sent to Security Hub after the integration is disabled.
    */
   disableImportFindingsForProduct(params: SecurityHub.Types.DisableImportFindingsForProductRequest, callback?: (err: AWSError, data: SecurityHub.Types.DisableImportFindingsForProductResponse) => void): Request<SecurityHub.Types.DisableImportFindingsForProductResponse, AWSError>;
   /**
-   * Cancels the subscription that allows a findings-generating solution (product) to import its findings into Security Hub.
+   * Disables the integration of the specified product with Security Hub. Findings from that product are no longer sent to Security Hub after the integration is disabled.
    */
   disableImportFindingsForProduct(callback?: (err: AWSError, data: SecurityHub.Types.DisableImportFindingsForProductResponse) => void): Request<SecurityHub.Types.DisableImportFindingsForProductResponse, AWSError>;
   /**
-   * Disables the Security Hub service.
+   * Disables Security Hub in your account only in the current Region. To disable Security Hub in all Regions, you must submit one request per Region where you have enabled Security Hub. When you disable Security Hub for a master account, it doesn't disable Security Hub for any associated member accounts. When you disable Security Hub, your existing findings and insights and any Security Hub configuration settings are deleted after 90 days and can't be recovered. Any standards that were enabled are disabled, and your master and member account associations are removed. If you want to save your existing findings, you must export them before you disable Security Hub.
    */
   disableSecurityHub(params: SecurityHub.Types.DisableSecurityHubRequest, callback?: (err: AWSError, data: SecurityHub.Types.DisableSecurityHubResponse) => void): Request<SecurityHub.Types.DisableSecurityHubResponse, AWSError>;
   /**
-   * Disables the Security Hub service.
+   * Disables Security Hub in your account only in the current Region. To disable Security Hub in all Regions, you must submit one request per Region where you have enabled Security Hub. When you disable Security Hub for a master account, it doesn't disable Security Hub for any associated member accounts. When you disable Security Hub, your existing findings and insights and any Security Hub configuration settings are deleted after 90 days and can't be recovered. Any standards that were enabled are disabled, and your master and member account associations are removed. If you want to save your existing findings, you must export them before you disable Security Hub.
    */
   disableSecurityHub(callback?: (err: AWSError, data: SecurityHub.Types.DisableSecurityHubResponse) => void): Request<SecurityHub.Types.DisableSecurityHubResponse, AWSError>;
   /**
-   * Disassociates the current Security Hub member account from its master account.
+   * Disassociates the current Security Hub member account from the associated master account.
    */
   disassociateFromMasterAccount(params: SecurityHub.Types.DisassociateFromMasterAccountRequest, callback?: (err: AWSError, data: SecurityHub.Types.DisassociateFromMasterAccountResponse) => void): Request<SecurityHub.Types.DisassociateFromMasterAccountResponse, AWSError>;
   /**
-   * Disassociates the current Security Hub member account from its master account.
+   * Disassociates the current Security Hub member account from the associated master account.
    */
   disassociateFromMasterAccount(callback?: (err: AWSError, data: SecurityHub.Types.DisassociateFromMasterAccountResponse) => void): Request<SecurityHub.Types.DisassociateFromMasterAccountResponse, AWSError>;
   /**
-   * Disassociates the Security Hub member accounts that are specified by the account IDs from their master account. 
+   * Disassociates the specified member accounts from the associated master account.
    */
   disassociateMembers(params: SecurityHub.Types.DisassociateMembersRequest, callback?: (err: AWSError, data: SecurityHub.Types.DisassociateMembersResponse) => void): Request<SecurityHub.Types.DisassociateMembersResponse, AWSError>;
   /**
-   * Disassociates the Security Hub member accounts that are specified by the account IDs from their master account. 
+   * Disassociates the specified member accounts from the associated master account.
    */
   disassociateMembers(callback?: (err: AWSError, data: SecurityHub.Types.DisassociateMembersResponse) => void): Request<SecurityHub.Types.DisassociateMembersResponse, AWSError>;
   /**
-   * Sets up the subscription that enables a findings-generating solution (product) to import its findings into Security Hub.
+   * Enables the integration of a partner product with Security Hub. Integrated products send findings to Security Hub. When you enable a product integration, a permission policy that grants permission for the product to send findings to Security Hub is applied.
    */
   enableImportFindingsForProduct(params: SecurityHub.Types.EnableImportFindingsForProductRequest, callback?: (err: AWSError, data: SecurityHub.Types.EnableImportFindingsForProductResponse) => void): Request<SecurityHub.Types.EnableImportFindingsForProductResponse, AWSError>;
   /**
-   * Sets up the subscription that enables a findings-generating solution (product) to import its findings into Security Hub.
+   * Enables the integration of a partner product with Security Hub. Integrated products send findings to Security Hub. When you enable a product integration, a permission policy that grants permission for the product to send findings to Security Hub is applied.
    */
   enableImportFindingsForProduct(callback?: (err: AWSError, data: SecurityHub.Types.EnableImportFindingsForProductResponse) => void): Request<SecurityHub.Types.EnableImportFindingsForProductResponse, AWSError>;
   /**
-   * Enables the Security Hub service.
+   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie. To learn more, see Setting Up AWS Security Hub.
    */
   enableSecurityHub(params: SecurityHub.Types.EnableSecurityHubRequest, callback?: (err: AWSError, data: SecurityHub.Types.EnableSecurityHubResponse) => void): Request<SecurityHub.Types.EnableSecurityHubResponse, AWSError>;
   /**
-   * Enables the Security Hub service.
+   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from AWS Config, Amazon GuardDuty, Amazon Inspector, and Amazon Macie. To learn more, see Setting Up AWS Security Hub.
    */
   enableSecurityHub(callback?: (err: AWSError, data: SecurityHub.Types.EnableSecurityHubResponse) => void): Request<SecurityHub.Types.EnableSecurityHubResponse, AWSError>;
   /**
-   * Lists and describes enabled standards.
+   * Returns a list of the standards that are currently enabled.
    */
   getEnabledStandards(params: SecurityHub.Types.GetEnabledStandardsRequest, callback?: (err: AWSError, data: SecurityHub.Types.GetEnabledStandardsResponse) => void): Request<SecurityHub.Types.GetEnabledStandardsResponse, AWSError>;
   /**
-   * Lists and describes enabled standards.
+   * Returns a list of the standards that are currently enabled.
    */
   getEnabledStandards(callback?: (err: AWSError, data: SecurityHub.Types.GetEnabledStandardsResponse) => void): Request<SecurityHub.Types.GetEnabledStandardsResponse, AWSError>;
   /**
-   * Lists and describes Security Hub-aggregated findings that filter attributes specify.
+   * Returns a list of findings that match the specified criteria.
    */
   getFindings(params: SecurityHub.Types.GetFindingsRequest, callback?: (err: AWSError, data: SecurityHub.Types.GetFindingsResponse) => void): Request<SecurityHub.Types.GetFindingsResponse, AWSError>;
   /**
-   * Lists and describes Security Hub-aggregated findings that filter attributes specify.
+   * Returns a list of findings that match the specified criteria.
    */
   getFindings(callback?: (err: AWSError, data: SecurityHub.Types.GetFindingsResponse) => void): Request<SecurityHub.Types.GetFindingsResponse, AWSError>;
   /**
@@ -204,11 +236,11 @@ declare class SecurityHub extends Service {
    */
   getMembers(callback?: (err: AWSError, data: SecurityHub.Types.GetMembersResponse) => void): Request<SecurityHub.Types.GetMembersResponse, AWSError>;
   /**
-   * Invites other AWS accounts to enable Security Hub and become Security Hub member accounts. When an account accepts the invitation and becomes a member account, the master account can view Security Hub findings of the member account. 
+   * Invites other AWS accounts to become member accounts for the Security Hub master account that the invitation is sent from. Before you can use this action to invite a member, you must first create the member account in Security Hub by using the CreateMembers action. When the account owner accepts the invitation to become a member account and enables Security Hub, the master account can view the findings generated from member account.
    */
   inviteMembers(params: SecurityHub.Types.InviteMembersRequest, callback?: (err: AWSError, data: SecurityHub.Types.InviteMembersResponse) => void): Request<SecurityHub.Types.InviteMembersResponse, AWSError>;
   /**
-   * Invites other AWS accounts to enable Security Hub and become Security Hub member accounts. When an account accepts the invitation and becomes a member account, the master account can view Security Hub findings of the member account. 
+   * Invites other AWS accounts to become member accounts for the Security Hub master account that the invitation is sent from. Before you can use this action to invite a member, you must first create the member account in Security Hub by using the CreateMembers action. When the account owner accepts the invitation to become a member account and enables Security Hub, the master account can view the findings generated from member account.
    */
   inviteMembers(callback?: (err: AWSError, data: SecurityHub.Types.InviteMembersResponse) => void): Request<SecurityHub.Types.InviteMembersResponse, AWSError>;
   /**
@@ -236,13 +268,37 @@ declare class SecurityHub extends Service {
    */
   listMembers(callback?: (err: AWSError, data: SecurityHub.Types.ListMembersResponse) => void): Request<SecurityHub.Types.ListMembersResponse, AWSError>;
   /**
-   * Returns a list of account IDs that are subscribed to the product.
+   * Returns a list of tags associated with a resource.
    */
-  listProductSubscribers(params: SecurityHub.Types.ListProductSubscribersRequest, callback?: (err: AWSError, data: SecurityHub.Types.ListProductSubscribersResponse) => void): Request<SecurityHub.Types.ListProductSubscribersResponse, AWSError>;
+  listTagsForResource(params: SecurityHub.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: SecurityHub.Types.ListTagsForResourceResponse) => void): Request<SecurityHub.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Returns a list of account IDs that are subscribed to the product.
+   * Returns a list of tags associated with a resource.
    */
-  listProductSubscribers(callback?: (err: AWSError, data: SecurityHub.Types.ListProductSubscribersResponse) => void): Request<SecurityHub.Types.ListProductSubscribersResponse, AWSError>;
+  listTagsForResource(callback?: (err: AWSError, data: SecurityHub.Types.ListTagsForResourceResponse) => void): Request<SecurityHub.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Adds one or more tags to a resource.
+   */
+  tagResource(params: SecurityHub.Types.TagResourceRequest, callback?: (err: AWSError, data: SecurityHub.Types.TagResourceResponse) => void): Request<SecurityHub.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds one or more tags to a resource.
+   */
+  tagResource(callback?: (err: AWSError, data: SecurityHub.Types.TagResourceResponse) => void): Request<SecurityHub.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes one or more tags from a resource.
+   */
+  untagResource(params: SecurityHub.Types.UntagResourceRequest, callback?: (err: AWSError, data: SecurityHub.Types.UntagResourceResponse) => void): Request<SecurityHub.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes one or more tags from a resource.
+   */
+  untagResource(callback?: (err: AWSError, data: SecurityHub.Types.UntagResourceResponse) => void): Request<SecurityHub.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates the name and description of a custom action target in Security Hub.
+   */
+  updateActionTarget(params: SecurityHub.Types.UpdateActionTargetRequest, callback?: (err: AWSError, data: SecurityHub.Types.UpdateActionTargetResponse) => void): Request<SecurityHub.Types.UpdateActionTargetResponse, AWSError>;
+  /**
+   * Updates the name and description of a custom action target in Security Hub.
+   */
+  updateActionTarget(callback?: (err: AWSError, data: SecurityHub.Types.UpdateActionTargetResponse) => void): Request<SecurityHub.Types.UpdateActionTargetResponse, AWSError>;
   /**
    * Updates the Note and RecordState of the Security Hub-aggregated findings that the filter attributes specify. Any member account that can view the finding also sees the update to the finding.
    */
@@ -263,11 +319,11 @@ declare class SecurityHub extends Service {
 declare namespace SecurityHub {
   export interface AcceptInvitationRequest {
     /**
-     * The account ID of the Security Hub master account whose invitation you're accepting.
+     * The account ID of the Security Hub master account that sent the invitation.
      */
     MasterId?: NonEmptyString;
     /**
-     * The ID of the invitation that the Security Hub master account sends to the AWS account.
+     * The ID of the invitation sent from the Security Hub master account.
      */
     InvitationId?: NonEmptyString;
   }
@@ -286,6 +342,21 @@ declare namespace SecurityHub {
   export type AccountDetailsList = AccountDetails[];
   export type AccountId = string;
   export type AccountIdList = NonEmptyString[];
+  export interface ActionTarget {
+    /**
+     * The ARN for the target action.
+     */
+    ActionTargetArn: NonEmptyString;
+    /**
+     * The name of the action target.
+     */
+    Name: NonEmptyString;
+    /**
+     * The description of the target action.
+     */
+    Description: NonEmptyString;
+  }
+  export type ActionTargetList = ActionTarget[];
   export type ArnList = NonEmptyString[];
   export interface AwsEc2InstanceDetails {
     /**
@@ -400,19 +471,19 @@ declare namespace SecurityHub {
      */
     Confidence?: Integer;
     /**
-     * The level of importance assigned to the resources associated with the finding. A score of 0 means the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources.
+     * The level of importance assigned to the resources associated with the finding. A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources.
      */
     Criticality?: Integer;
     /**
      * A finding's title.  In this release, Title is a required property. 
      */
-    Title?: NonEmptyString;
+    Title: NonEmptyString;
     /**
      * A finding's description.  In this release, Description is a required property. 
      */
-    Description?: NonEmptyString;
+    Description: NonEmptyString;
     /**
-     * An data type that describes the remediation options for a finding.
+     * A data type that describes the remediation options for a finding.
      */
     Remediation?: Remediation;
     /**
@@ -526,7 +597,7 @@ declare namespace SecurityHub {
      */
     Confidence?: NumberFilterList;
     /**
-     * The level of importance assigned to the resources associated with the finding. A score of 0 means the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources.
+     * The level of importance assigned to the resources associated with the finding. A score of 0 means that the underlying resources have no criticality, and a score of 100 is reserved for the most critical resources.
      */
     Criticality?: NumberFilterList;
     /**
@@ -770,7 +841,7 @@ declare namespace SecurityHub {
      */
     ComplianceStatus?: StringFilterList;
     /**
-     * The veracity of a finding. 
+     * The veracity of a finding.
      */
     VerificationState?: StringFilterList;
     /**
@@ -809,7 +880,7 @@ declare namespace SecurityHub {
   export type AwsSecurityFindingList = AwsSecurityFinding[];
   export interface BatchDisableStandardsRequest {
     /**
-     * The ARNs of the standards subscriptions that you want to disable.
+     * The ARNs of the standards subscriptions to disable.
      */
     StandardsSubscriptionArns: StandardsSubscriptionArns;
   }
@@ -821,7 +892,7 @@ declare namespace SecurityHub {
   }
   export interface BatchEnableStandardsRequest {
     /**
-     * The list of standards that you want to enable.  In this release, Security Hub supports only the CIS AWS Foundations standard. Its ARN is arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0. 
+     * The list of standards compliance checks to enable.  In this release, Security Hub supports only the CIS AWS Foundations standard. The ARN for the standard is arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0. 
      */
     StandardsSubscriptionRequests: StandardsSubscriptionRequests;
   }
@@ -833,7 +904,7 @@ declare namespace SecurityHub {
   }
   export interface BatchImportFindingsRequest {
     /**
-     * A list of findings to import. You must submit them in the AwsSecurityFinding format.
+     * A list of findings to import. To successfully import a finding, it must follow the AWS Security Finding Format.
      */
     Findings: AwsSecurityFindingList;
   }
@@ -843,7 +914,7 @@ declare namespace SecurityHub {
      */
     FailedCount: Integer;
     /**
-     * The number of findings that were successfully imported
+     * The number of findings that were successfully imported.
      */
     SuccessCount: Integer;
     /**
@@ -874,21 +945,41 @@ declare namespace SecurityHub {
      */
     ImageName?: NonEmptyString;
     /**
-     * The date/time that the container was started.
+     * The date and time when the container started.
      */
     LaunchedAt?: NonEmptyString;
   }
-  export interface CreateInsightRequest {
+  export interface CreateActionTargetRequest {
     /**
-     * The user-defined name that identifies the insight to create.
+     * The name of the custom action target.
      */
     Name: NonEmptyString;
     /**
-     * A collection of attributes that are applied to all of the active findings aggregated by Security Hub, and that result in a subset of findings that are included in this insight.
+     * The description for the custom action target.
+     */
+    Description: NonEmptyString;
+    /**
+     * The ID for the custom action target.
+     */
+    Id: NonEmptyString;
+  }
+  export interface CreateActionTargetResponse {
+    /**
+     * The ARN for the custom action target.
+     */
+    ActionTargetArn: NonEmptyString;
+  }
+  export interface CreateInsightRequest {
+    /**
+     * The name of the custom insight to create.
+     */
+    Name: NonEmptyString;
+    /**
+     * One or more attributes used to filter the findings included in the insight. Only findings that match the criteria defined in the filters are included in the insight.
      */
     Filters: AwsSecurityFindingFilters;
     /**
-     * The attribute by which the insight's findings are grouped. This attribute is used as a findings aggregator for the purposes of viewing and managing multiple related findings under a single operand.
+     * The attribute used as the aggregator to group related findings for the insight.
      */
     GroupByAttribute: NonEmptyString;
   }
@@ -906,7 +997,7 @@ declare namespace SecurityHub {
   }
   export interface CreateMembersResponse {
     /**
-     * A list of account ID and email address pairs of the AWS accounts that couldn't be processed.
+     * A list of account ID and email address pairs of the AWS accounts that weren't processed.
      */
     UnprocessedAccounts?: ResultList;
   }
@@ -938,15 +1029,27 @@ declare namespace SecurityHub {
   export type DateRangeUnit = "DAYS"|string;
   export interface DeclineInvitationsRequest {
     /**
-     * A list of account IDs that specify the accounts from which invitations to Security Hub are declined.
+     * A list of account IDs that specify the accounts that invitations to Security Hub are declined from.
      */
     AccountIds?: AccountIdList;
   }
   export interface DeclineInvitationsResponse {
     /**
-     * A list of account ID and email address pairs of the AWS accounts that couldn't be processed. 
+     * A list of account ID and email address pairs of the AWS accounts that weren't processed.
      */
     UnprocessedAccounts?: ResultList;
+  }
+  export interface DeleteActionTargetRequest {
+    /**
+     * The ARN of the custom action target to delete.
+     */
+    ActionTargetArn: NonEmptyString;
+  }
+  export interface DeleteActionTargetResponse {
+    /**
+     * The ARN of the custom action target that was deleted.
+     */
+    ActionTargetArn: NonEmptyString;
   }
   export interface DeleteInsightRequest {
     /**
@@ -962,27 +1065,67 @@ declare namespace SecurityHub {
   }
   export interface DeleteInvitationsRequest {
     /**
-     * A list of account IDs that specify accounts whose invitations to Security Hub you want to delete. 
+     * A list of the account IDs that sent the invitations to delete.
      */
     AccountIds?: AccountIdList;
   }
   export interface DeleteInvitationsResponse {
     /**
-     * A list of account ID and email address pairs of the AWS accounts that couldn't be processed. 
+     * A list of account ID and email address pairs of the AWS accounts that invitations weren't deleted for.
      */
     UnprocessedAccounts?: ResultList;
   }
   export interface DeleteMembersRequest {
     /**
-     * A list of account IDs of the Security Hub member accounts that you want to delete. 
+     * A list of account IDs of the member accounts to delete.
      */
     AccountIds?: AccountIdList;
   }
   export interface DeleteMembersResponse {
     /**
-     * A list of account ID and email address pairs of the AWS accounts that couldn't be processed. 
+     * A list of account ID and email address pairs of the AWS accounts that weren't deleted.
      */
     UnprocessedAccounts?: ResultList;
+  }
+  export interface DescribeActionTargetsRequest {
+    /**
+     * A list of custom action target ARNs for the custom action targets to retrieve.
+     */
+    ActionTargetArns?: ArnList;
+    /**
+     * The token that is required for pagination.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface DescribeActionTargetsResponse {
+    /**
+     * A list of ActionTarget objects. Each object includes the ActionTargetArn, Description, and Name of a custom action target available in Security Hub.
+     */
+    ActionTargets: ActionTargetList;
+    /**
+     * The token that is required for pagination.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeHubRequest {
+    /**
+     * The ARN of the Hub resource to retrieve.
+     */
+    HubArn?: NonEmptyString;
+  }
+  export interface DescribeHubResponse {
+    /**
+     * The ARN of the Hub resource retrieved.
+     */
+    HubArn?: NonEmptyString;
+    /**
+     * The date and time when Security Hub was enabled in the account.
+     */
+    SubscribedAt?: NonEmptyString;
   }
   export interface DescribeProductsRequest {
     /**
@@ -996,7 +1139,7 @@ declare namespace SecurityHub {
   }
   export interface DescribeProductsResponse {
     /**
-     * A list of products.
+     * A list of products, including details for each product.
      */
     Products: ProductsList;
     /**
@@ -1006,7 +1149,7 @@ declare namespace SecurityHub {
   }
   export interface DisableImportFindingsForProductRequest {
     /**
-     * The ARN of a resource that represents your subscription to a supported product.
+     * The ARN of the integrated product to disable the integration for.
      */
     ProductSubscriptionArn: NonEmptyString;
   }
@@ -1022,7 +1165,7 @@ declare namespace SecurityHub {
   }
   export interface DisassociateMembersRequest {
     /**
-     * The account IDs of the member accounts that you want to disassociate from the master account.
+     * The account IDs of the member accounts to disassociate from the master account.
      */
     AccountIds?: AccountIdList;
   }
@@ -1031,24 +1174,28 @@ declare namespace SecurityHub {
   export type Double = number;
   export interface EnableImportFindingsForProductRequest {
     /**
-     * The ARN of the product that generates findings that you want to import into Security Hub.
+     * The ARN of the product to enable the integration for.
      */
     ProductArn: NonEmptyString;
   }
   export interface EnableImportFindingsForProductResponse {
     /**
-     * The ARN of a resource that represents your subscription to the product that generates the findings that you want to import into Security Hub.
+     * The ARN of your subscription to the product to enable integrations for.
      */
     ProductSubscriptionArn?: NonEmptyString;
   }
   export interface EnableSecurityHubRequest {
+    /**
+     * The tags to add to the Hub resource when you enable Security Hub.
+     */
+    Tags?: TagMap;
   }
   export interface EnableSecurityHubResponse {
   }
   export type FieldMap = {[key: string]: NonEmptyString};
   export interface GetEnabledStandardsRequest {
     /**
-     * The list of standards subscription ARNS that you want to list and describe.
+     * A list of the standards subscription ARNs for the standards to retrieve.
      */
     StandardsSubscriptionArns?: StandardsSubscriptionArns;
     /**
@@ -1056,13 +1203,13 @@ declare namespace SecurityHub {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of items that you want in the response.
+     * The maximum number of results to return in the response.
      */
     MaxResults?: MaxResults;
   }
   export interface GetEnabledStandardsResponse {
     /**
-     * The standards subscription details returned by the operation.
+     * A list of StandardsSubscriptions objects that include information about the enabled standards.
      */
     StandardsSubscriptions?: StandardsSubscriptions;
     /**
@@ -1072,11 +1219,11 @@ declare namespace SecurityHub {
   }
   export interface GetFindingsRequest {
     /**
-     * A collection of attributes that is used for querying findings.
+     * The findings attributes used to define a condition to filter the findings returned.
      */
     Filters?: AwsSecurityFindingFilters;
     /**
-     * A collection of attributes used for sorting findings.
+     * Findings attributes used to sort the list of findings returned.
      */
     SortCriteria?: SortCriteria;
     /**
@@ -1084,13 +1231,13 @@ declare namespace SecurityHub {
      */
     NextToken?: NextToken;
     /**
-     * Indicates the maximum number of items that you want in the response.
+     * The maximum number of findings to return.
      */
     MaxResults?: MaxResults;
   }
   export interface GetFindingsResponse {
     /**
-     * Findings details returned by the operation.
+     * The findings that matched the filters specified in the request.
      */
     Findings: AwsSecurityFindingList;
     /**
@@ -1172,11 +1319,11 @@ declare namespace SecurityHub {
      */
     Id: NonEmptyString;
     /**
-     * The code of the error made during the BatchImportFindings operation. 
+     * The code of the error made during the BatchImportFindings operation.
      */
     ErrorCode: NonEmptyString;
     /**
-     * The message of the error made during the BatchImportFindings operation. 
+     * The message of the error made during the BatchImportFindings operation.
      */
     ErrorMessage: NonEmptyString;
   }
@@ -1191,7 +1338,7 @@ declare namespace SecurityHub {
      */
     Name: NonEmptyString;
     /**
-     * A collection of attributes that are applied to all active Security Hub-aggregated findings and that result in a subset of findings that are included in this insight. 
+     * One or more attributes used to filter the findings included in the insight. Only findings that match the criteria defined in the filters are included in the insight.
      */
     Filters: AwsSecurityFindingFilters;
     /**
@@ -1228,11 +1375,11 @@ declare namespace SecurityHub {
   export type Integer = number;
   export interface Invitation {
     /**
-     * The account ID of the Security Hub master account that sent the invitation. 
+     * The account ID of the Security Hub master account that the invitation was sent from.
      */
     AccountId?: AccountId;
     /**
-     * The ID of the invitation that the Security Hub master account sent.
+     * The ID of the invitation sent to the member account.
      */
     InvitationId?: NonEmptyString;
     /**
@@ -1240,7 +1387,7 @@ declare namespace SecurityHub {
      */
     InvitedAt?: Timestamp;
     /**
-     * The current relationship status between the inviter and invitee accounts.
+     * The current status of the association between member and master accounts.
      */
     MemberStatus?: NonEmptyString;
   }
@@ -1335,29 +1482,17 @@ declare namespace SecurityHub {
      */
     NextToken?: NonEmptyString;
   }
-  export interface ListProductSubscribersRequest {
+  export interface ListTagsForResourceRequest {
     /**
-     * The ARN of the product.
+     * The ARN of the resource to retrieve tags for.
      */
-    ProductArn?: NonEmptyString;
-    /**
-     * The token that is required for pagination.
-     */
-    NextToken?: NextToken;
-    /**
-     * The maximum number of results to return.
-     */
-    MaxResults?: MaxResults;
+    ResourceArn: ResourceArn;
   }
-  export interface ListProductSubscribersResponse {
+  export interface ListTagsForResourceResponse {
     /**
-     * A list of account IDs that are subscribed to the product.
+     * The tags associated with a resource.
      */
-    ProductSubscribers?: ProductSubscribersList;
-    /**
-     * The token that is required for pagination.
-     */
-    NextToken?: NextToken;
+    Tags?: TagMap;
   }
   export interface Malware {
     /**
@@ -1390,7 +1525,7 @@ declare namespace SecurityHub {
      */
     Value?: NonEmptyString;
     /**
-     * The condition to be applied to a key value when querying for findings with a map filter.
+     * The condition to apply to a key value when querying for findings with a map filter.
      */
     Comparison?: MapFilterComparison;
   }
@@ -1399,15 +1534,15 @@ declare namespace SecurityHub {
   export type MaxResults = number;
   export interface Member {
     /**
-     * The AWS account ID of a Security Hub member account.
+     * The AWS account ID of the member account.
      */
     AccountId?: AccountId;
     /**
-     * The email of a Security Hub member account.
+     * The email address of the member account.
      */
     Email?: NonEmptyString;
     /**
-     * The AWS account ID of the Security Hub master account to this member account.
+     * The AWS account ID of the Security Hub master account associated with this member account.
      */
     MasterId?: NonEmptyString;
     /**
@@ -1415,11 +1550,11 @@ declare namespace SecurityHub {
      */
     MemberStatus?: NonEmptyString;
     /**
-     * The timestamp of when the member account was invited to Security Hub.
+     * A timestamp for the date and time when the invitation was sent to the member account.
      */
     InvitedAt?: Timestamp;
     /**
-     * The timestamp of when this member account was updated.
+     * The timestamp for the date and time when the member account was updated.
      */
     UpdatedAt?: Timestamp;
   }
@@ -1535,7 +1670,7 @@ declare namespace SecurityHub {
      */
     LaunchedAt?: NonEmptyString;
     /**
-     * The date/time that the process was terminated.
+     * The date and time when the process was terminated.
      */
     TerminatedAt?: NonEmptyString;
   }
@@ -1569,38 +1704,37 @@ declare namespace SecurityHub {
      */
     ActivationUrl?: NonEmptyString;
     /**
-     * The resource policy asasociated with the product.
+     * The resource policy associated with the product.
      */
     ProductSubscriptionResourcePolicy?: NonEmptyString;
   }
-  export type ProductSubscribersList = NonEmptyString[];
   export type ProductSubscriptionArnList = NonEmptyString[];
   export type ProductsList = Product[];
   export interface Recommendation {
     /**
-     * The recommendation of what to do about the issue described in a finding. 
+     * Describes the recommended steps to take to remediate an issue identified in a finding.
      */
     Text?: NonEmptyString;
     /**
-     * A URL to link to general remediation information for the finding type of a finding. 
+     * A URL to a page or site that contains information about how to remediate a finding.
      */
     Url?: NonEmptyString;
   }
   export type RecordState = "ACTIVE"|"ARCHIVED"|string;
   export interface RelatedFinding {
     /**
-     * The ARN of the solution that generated a related finding.
+     * The ARN of the product that generated a related finding.
      */
     ProductArn: NonEmptyString;
     /**
-     * The solution-generated identifier for a related finding.
+     * The product-generated identifier for a related finding.
      */
     Id: NonEmptyString;
   }
   export type RelatedFindingList = RelatedFinding[];
   export interface Remediation {
     /**
-     * A recommendation on how to remediate the issue identified within a finding.
+     * A recommendation on the steps to take to remediate the issue identified by a finding.
      */
     Recommendation?: Recommendation;
   }
@@ -1626,47 +1760,48 @@ declare namespace SecurityHub {
      */
     Tags?: FieldMap;
     /**
-     * Additional details about the resource.
+     * Additional details about the resource related to a finding.
      */
     Details?: ResourceDetails;
   }
+  export type ResourceArn = string;
   export interface ResourceDetails {
     /**
-     * The details of an Amazon EC2 instance.
+     * Details about an Amazon EC2 instance related to a finding.
      */
     AwsEc2Instance?: AwsEc2InstanceDetails;
     /**
-     * The details of an Amazon S3 Bucket.
+     * Details about an Amazon S3 Bucket related to a finding.
      */
     AwsS3Bucket?: AwsS3BucketDetails;
     /**
-     * IAM access key details related to a finding.
+     * Details about an IAM access key related to a finding.
      */
     AwsIamAccessKey?: AwsIamAccessKeyDetails;
     /**
-     * Container details related to a finding.
+     * Details about a container resource related to a finding.
      */
     Container?: ContainerDetails;
     /**
-     * The details of a resource that doesn't have a specific subfield for the resource type defined.
+     * Details about a resource that doesn't have a specific type defined.
      */
     Other?: FieldMap;
   }
   export type ResourceList = Resource[];
   export interface Result {
     /**
-     * An ID of the AWS account that couldn't be processed. 
+     * An AWS account ID of the account that wasn't be processed.
      */
     AccountId?: AccountId;
     /**
-     * The reason for why an account couldn't be processed.
+     * The reason that the account wasn't be processed.
      */
     ProcessingResult?: NonEmptyString;
   }
   export type ResultList = Result[];
   export interface Severity {
     /**
-     * The native severity as defined by the security-findings provider's solution that generated the finding.
+     * The native severity as defined by the AWS service or integrated partner product that generated the finding.
      */
     Product?: Double;
     /**
@@ -1677,11 +1812,11 @@ declare namespace SecurityHub {
   export type SortCriteria = SortCriterion[];
   export interface SortCriterion {
     /**
-     * The finding attribute used for sorting findings.
+     * The finding attribute used to sort findings.
      */
     Field?: NonEmptyString;
     /**
-     * The order used for sorting findings.
+     * The order used to sort findings.
      */
     SortOrder?: SortOrder;
   }
@@ -1694,15 +1829,15 @@ declare namespace SecurityHub {
      */
     StandardsSubscriptionArn: NonEmptyString;
     /**
-     * The ARN of a standard.  In this release, Security Hub supports only the CIS AWS Foundations standard.  Its ARN is arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0. 
+     * The ARN of a standard. In this release, Security Hub supports only the CIS AWS Foundations standard, which uses the following ARN: arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0. 
      */
     StandardsArn: NonEmptyString;
     /**
-     * 
+     * A key-value pair of input for the standard.
      */
     StandardsInput: StandardsInputParameterMap;
     /**
-     * The standard's status.
+     * The status of the standards subscription.
      */
     StandardsStatus: StandardsStatus;
   }
@@ -1713,7 +1848,7 @@ declare namespace SecurityHub {
      */
     StandardsArn: NonEmptyString;
     /**
-     * 
+     * A key-value pair of input for the standard.
      */
     StandardsInput?: StandardsInputParameterMap;
   }
@@ -1732,6 +1867,22 @@ declare namespace SecurityHub {
   export type StringFilterComparison = "EQUALS"|"PREFIX"|string;
   export type StringFilterList = StringFilter[];
   export type StringList = NonEmptyString[];
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceRequest {
+    /**
+     * The ARN of the resource to apply the tags to.
+     */
+    ResourceArn: ResourceArn;
+    /**
+     * The tags to add to the resource.
+     */
+    Tags: TagMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export interface ThreatIntelIndicator {
     /**
      * The type of a threat intel indicator.
@@ -1746,15 +1897,15 @@ declare namespace SecurityHub {
      */
     Category?: ThreatIntelIndicatorCategory;
     /**
-     * The date/time of the last observation of a threat intel indicator.
+     * The date and time when the most recent instance of a threat intel indicator was observed.
      */
     LastObservedAt?: NonEmptyString;
     /**
-     * The source of the threat intel.
+     * The source of the threat intel indicator.
      */
     Source?: NonEmptyString;
     /**
-     * The URL for more details from the source of the threat intel.
+     * The URL to the page or site where you can get more information about the threat intel indicator.
      */
     SourceUrl?: NonEmptyString;
   }
@@ -1763,6 +1914,34 @@ declare namespace SecurityHub {
   export type ThreatIntelIndicatorType = "DOMAIN"|"EMAIL_ADDRESS"|"HASH_MD5"|"HASH_SHA1"|"HASH_SHA256"|"HASH_SHA512"|"IPV4_ADDRESS"|"IPV6_ADDRESS"|"MUTEX"|"PROCESS"|"URL"|string;
   export type Timestamp = Date;
   export type TypeList = NonEmptyString[];
+  export interface UntagResourceRequest {
+    /**
+     * The ARN of the resource to remove the tags from.
+     */
+    ResourceArn: ResourceArn;
+    /**
+     * The tag keys associated with the tags to remove from the resource.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
+  export interface UpdateActionTargetRequest {
+    /**
+     * The ARN of the custom action target to update.
+     */
+    ActionTargetArn: NonEmptyString;
+    /**
+     * The updated name of the custom action target.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The updated description for the custom action target.
+     */
+    Description?: NonEmptyString;
+  }
+  export interface UpdateActionTargetResponse {
+  }
   export interface UpdateFindingsRequest {
     /**
      * A collection of attributes that specify which findings you want to update.

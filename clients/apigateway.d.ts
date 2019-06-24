@@ -772,11 +772,11 @@ declare class APIGateway extends Service {
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Simulate the execution of an Authorizer in your RestApi with headers, parameters, and an incoming request body.  Enable custom authorizers 
+   * Simulate the execution of an Authorizer in your RestApi with headers, parameters, and an incoming request body.  Use Lambda Function as Authorizer Use Cognito User Pool as Authorizer 
    */
   testInvokeAuthorizer(params: APIGateway.Types.TestInvokeAuthorizerRequest, callback?: (err: AWSError, data: APIGateway.Types.TestInvokeAuthorizerResponse) => void): Request<APIGateway.Types.TestInvokeAuthorizerResponse, AWSError>;
   /**
-   * Simulate the execution of an Authorizer in your RestApi with headers, parameters, and an incoming request body.  Enable custom authorizers 
+   * Simulate the execution of an Authorizer in your RestApi with headers, parameters, and an incoming request body.  Use Lambda Function as Authorizer Use Cognito User Pool as Authorizer 
    */
   testInvokeAuthorizer(callback?: (err: AWSError, data: APIGateway.Types.TestInvokeAuthorizerResponse) => void): Request<APIGateway.Types.TestInvokeAuthorizerResponse, AWSError>;
   /**
@@ -1114,7 +1114,7 @@ declare namespace APIGateway {
      */
     identitySource?: String;
     /**
-     * A validation expression for the incoming identity token. For TOKEN authorizers, this value is a regular expression. API Gateway will match the aud field of the incoming token from the client against the specified regular expression. It will invoke the authorizer's Lambda function when there is a match. Otherwise, it will return a 401 Unauthorized response without calling the Lambda function. The validation expression does not apply to the REQUEST authorizer.
+     * A validation expression for the incoming identity token. For TOKEN authorizers, this value is a regular expression. For COGNITO_USER_POOLS authorizers, API Gateway will match the aud field of the incoming token from the client against the specified regular expression. It will invoke the authorizer's Lambda function when there is a match. Otherwise, it will return a 401 Unauthorized response without calling the Lambda function. The validation expression does not apply to the REQUEST authorizer.
      */
     identityValidationExpression?: String;
     /**
@@ -1276,7 +1276,7 @@ declare namespace APIGateway {
      */
     identitySource?: String;
     /**
-     * A validation expression for the incoming identity token. For TOKEN authorizers, this value is a regular expression. API Gateway will match the aud field of the incoming token from the client against the specified regular expression. It will invoke the authorizer's Lambda function when there is a match. Otherwise, it will return a 401 Unauthorized response without calling the Lambda function. The validation expression does not apply to the REQUEST authorizer.
+     * A validation expression for the incoming identity token. For TOKEN authorizers, this value is a regular expression. For COGNITO_USER_POOLS authorizers, API Gateway will match the aud field of the incoming token from the client against the specified regular expression. It will invoke the authorizer's Lambda function when there is a match. Otherwise, it will return a 401 Unauthorized response without calling the Lambda function. The validation expression does not apply to the REQUEST authorizer.
      */
     identityValidationExpression?: String;
     /**
@@ -1290,7 +1290,7 @@ declare namespace APIGateway {
      */
     domainName: String;
     /**
-     * The base path name that callers of the API must provide as part of the URL after the domain name. This value must be unique for all of the mappings across a single API. Leave this blank if you do not want callers to specify a base path name after the domain name.
+     * The base path name that callers of the API must provide as part of the URL after the domain name. This value must be unique for all of the mappings across a single API. Specify '(none)' if you do not want callers to specify a base path name after the domain name.
      */
     basePath?: String;
     /**
@@ -1298,7 +1298,7 @@ declare namespace APIGateway {
      */
     restApiId: String;
     /**
-     * The name of the API's stage that you want to use for this mapping. Leave this blank if you do not want callers to explicitly specify the stage name after any base path name.
+     * The name of the API's stage that you want to use for this mapping. Specify '(none)' if you do not want callers to explicitly specify the stage name after any base path name.
      */
     stage?: String;
   }
@@ -1413,6 +1413,10 @@ declare namespace APIGateway {
      * The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters.
      */
     tags?: MapOfStringToString;
+    /**
+     * The Transport Layer Security (TLS) version + cipher suite for this DomainName. The valid values are TLS_1_0 and TLS_1_2.
+     */
+    securityPolicy?: SecurityPolicy;
   }
   export interface CreateModelRequest {
     /**
@@ -1516,7 +1520,7 @@ declare namespace APIGateway {
      */
     restApiId: String;
     /**
-     * [Required] The name for the Stage resource.
+     * [Required] The name for the Stage resource. Stage names can only contain alphanumeric characters, hyphens, and underscores. Maximum length is 128 characters.
      */
     stageName: String;
     /**
@@ -1636,7 +1640,7 @@ declare namespace APIGateway {
      */
     domainName: String;
     /**
-     * [Required] The base path name of the BasePathMapping resource to delete.
+     * [Required] The base path name of the BasePathMapping resource to delete. To specify an empty base path, set this parameter to '(none)'.
      */
     basePath: String;
   }
@@ -1985,10 +1989,23 @@ declare namespace APIGateway {
      */
     endpointConfiguration?: EndpointConfiguration;
     /**
+     * The status of the DomainName migration. The valid values are AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.
+     */
+    domainNameStatus?: DomainNameStatus;
+    /**
+     * An optional text message containing detailed information about status of the DomainName migration.
+     */
+    domainNameStatusMessage?: String;
+    /**
+     * The Transport Layer Security (TLS) version + cipher suite for this DomainName. The valid values are TLS_1_0 and TLS_1_2.
+     */
+    securityPolicy?: SecurityPolicy;
+    /**
      * The collection of tags. Each tag element is associated with a given resource.
      */
     tags?: MapOfStringToString;
   }
+  export type DomainNameStatus = "AVAILABLE"|"UPDATING"|"PENDING"|string;
   export interface DomainNames {
     position?: String;
     /**
@@ -2142,7 +2159,7 @@ declare namespace APIGateway {
      */
     domainName: String;
     /**
-     * [Required] The base path name that callers of the API must provide as part of the URL after the domain name. This value must be unique for all of the mappings across a single API. Leave this blank if you do not want callers to specify any base path name after the domain name.
+     * [Required] The base path name that callers of the API must provide as part of the URL after the domain name. This value must be unique for all of the mappings across a single API. Specify '(none)' if you do not want callers to specify any base path name after the domain name.
      */
     basePath: String;
   }
@@ -2560,7 +2577,7 @@ declare namespace APIGateway {
   }
   export interface GetTagsRequest {
     /**
-     * [Required] The ARN of a resource that can be tagged. The resource ARN must be URL-encoded. At present, Stage is the only taggable resource.
+     * [Required] The ARN of a resource that can be tagged. The resource ARN must be URL-encoded.
      */
     resourceArn: String;
     /**
@@ -2700,7 +2717,7 @@ declare namespace APIGateway {
      */
     failOnWarnings?: Boolean;
     /**
-     * A key-value map of context-specific query string parameters specifying the behavior of different API importing operations. The following shows operation-specific parameters and their supported values.  To exclude DocumentationParts from the import, set parameters as ignore=documentation.  To configure the endpoint type, set parameters as endpointConfigurationTypes=EDGE, endpointConfigurationTypes=REGIONAL, or endpointConfigurationTypes=PRIVATE. The default endpoint type is EDGE.  To handle imported basePath, set parameters as basePath=ignore, basePath=prepend or basePath=split. For example, the AWS CLI command to exclude documentation from the imported API is: aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json' The AWS CLI command to set the regional endpoint on the imported API is: aws apigateway import-rest-api --parameters endpointConfigurationTypes=REGIONAL --body 'file:///path/to/imported-api-body.json'
+     * A key-value map of context-specific query string parameters specifying the behavior of different API importing operations. The following shows operation-specific parameters and their supported values.  To exclude DocumentationParts from the import, set parameters as ignore=documentation.  To configure the endpoint type, set parameters as endpointConfigurationTypes=EDGE, endpointConfigurationTypes=REGIONAL, or endpointConfigurationTypes=PRIVATE. The default endpoint type is EDGE.  To handle imported basepath, set parameters as basepath=ignore, basepath=prepend or basepath=split. For example, the AWS CLI command to exclude documentation from the imported API is: aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json' The AWS CLI command to set the regional endpoint on the imported API is: aws apigateway import-rest-api --parameters endpointConfigurationTypes=REGIONAL --body 'file:///path/to/imported-api-body.json'
      */
     parameters?: MapOfStringToString;
     /**
@@ -2747,7 +2764,7 @@ declare namespace APIGateway {
      */
     passthroughBehavior?: String;
     /**
-     * Specifies how to handle request payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:  CONVERT_TO_BINARY: Converts a request payload from a Base64-encoded string to the corresponding binary blob. CONVERT_TO_TEXT: Converts a request payload from a binary blob to a Base64-encoded string.  If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the passthroughBehaviors is configured to support payload pass-through.
+     * Specifies how to handle request payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:  CONVERT_TO_BINARY: Converts a request payload from a Base64-encoded string to the corresponding binary blob. CONVERT_TO_TEXT: Converts a request payload from a binary blob to a Base64-encoded string.  If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the passthroughBehavior is configured to support payload pass-through.
      */
     contentHandling?: ContentHandlingStrategy;
     /**
@@ -2755,11 +2772,11 @@ declare namespace APIGateway {
      */
     timeoutInMillis?: Integer;
     /**
-     * Specifies the integration's cache namespace.
+     * An API-specific tag group of related cached parameters. To be valid values for cacheKeyParameters, these parameters must also be specified for Method requestParameters.
      */
     cacheNamespace?: String;
     /**
-     * Specifies the integration's cache key parameters.
+     * A list of request parameters whose values API Gateway caches. To be valid values for cacheKeyParameters, these parameters must also be specified for Method requestParameters.
      */
     cacheKeyParameters?: ListOfString;
     /**
@@ -2851,7 +2868,7 @@ declare namespace APIGateway {
      */
     requestValidatorId?: String;
     /**
-     * A human-friendly operation identifier for the method. For example, you can assign the operationName of ListPets for the GET /pets method in PetStore example.
+     * A human-friendly operation identifier for the method. For example, you can assign the operationName of ListPets for the GET /pets method in the PetStore example.
      */
     operationName?: String;
     /**
@@ -3065,15 +3082,15 @@ declare namespace APIGateway {
      */
     passthroughBehavior?: String;
     /**
-     * Specifies a put integration input's cache namespace.
+     * A list of request parameters whose values are to be cached.
      */
     cacheNamespace?: String;
     /**
-     * Specifies a put integration input's cache key parameters.
+     * An API-specific tag group of related cached parameters.
      */
     cacheKeyParameters?: ListOfString;
     /**
-     * Specifies how to handle request payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:  CONVERT_TO_BINARY: Converts a request payload from a Base64-encoded string to the corresponding binary blob. CONVERT_TO_TEXT: Converts a request payload from a binary blob to a Base64-encoded string.  If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the passthroughBehaviors is configured to support payload pass-through.
+     * Specifies how to handle request payload content type conversions. Supported values are CONVERT_TO_BINARY and CONVERT_TO_TEXT, with the following behaviors:  CONVERT_TO_BINARY: Converts a request payload from a Base64-encoded string to the corresponding binary blob. CONVERT_TO_TEXT: Converts a request payload from a binary blob to a Base64-encoded string.  If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the passthroughBehavior is configured to support payload pass-through.
      */
     contentHandling?: ContentHandlingStrategy;
     /**
@@ -3141,7 +3158,7 @@ declare namespace APIGateway {
      */
     apiKeyRequired?: Boolean;
     /**
-     * A human-friendly operation identifier for the method. For example, you can assign the operationName of ListPets for the GET /pets method in PetStore example.
+     * A human-friendly operation identifier for the method. For example, you can assign the operationName of ListPets for the GET /pets method in the PetStore example.
      */
     operationName?: String;
     /**
@@ -3397,6 +3414,7 @@ declare namespace APIGateway {
      */
     items?: ListOfSdkType;
   }
+  export type SecurityPolicy = "TLS_1_0"|"TLS_1_2"|string;
   export interface Stage {
     /**
      * The identifier of the Deployment that the stage points to.
@@ -3407,7 +3425,7 @@ declare namespace APIGateway {
      */
     clientCertificateId?: String;
     /**
-     * The name of the stage is the first path segment in the Uniform Resource Identifier (URI) of a call to API Gateway.
+     * The name of the stage is the first path segment in the Uniform Resource Identifier (URI) of a call to API Gateway. Stage names can only contain alphanumeric characters, hyphens, and underscores. Maximum length is 128 characters.
      */
     stageName?: String;
     /**
@@ -3487,7 +3505,7 @@ declare namespace APIGateway {
   export type String = string;
   export interface TagResourceRequest {
     /**
-     * [Required] The ARN of a resource that can be tagged. The resource ARN must be URL-encoded. At present, Stage is the only taggable resource.
+     * [Required] The ARN of a resource that can be tagged. The resource ARN must be URL-encoded.
      */
     resourceArn: String;
     /**
@@ -3646,7 +3664,7 @@ declare namespace APIGateway {
   export type UnauthorizedCacheControlHeaderStrategy = "FAIL_WITH_403"|"SUCCEED_WITH_RESPONSE_HEADER"|"SUCCEED_WITHOUT_RESPONSE_HEADER"|string;
   export interface UntagResourceRequest {
     /**
-     * [Required] The ARN of a resource that can be tagged. The resource ARN must be URL-encoded. At present, Stage is the only taggable resource.
+     * [Required] The ARN of a resource that can be tagged. The resource ARN must be URL-encoded.
      */
     resourceArn: String;
     /**
@@ -3690,7 +3708,7 @@ declare namespace APIGateway {
      */
     domainName: String;
     /**
-     * [Required] The base path of the BasePathMapping resource to change.
+     * [Required] The base path of the BasePathMapping resource to change. To specify an empty base path, set this parameter to '(none)'.
      */
     basePath: String;
     /**

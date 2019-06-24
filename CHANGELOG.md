@@ -1,6 +1,18 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.480.0-->
+<!--LATEST=2.481.0-->
 <!--ENTRYINSERT-->
+
+## 2.481.0
+* feature: APIGateway: Customers can pick different security policies (TLS version + cipher suite) for custom domains in API Gateway
+* feature: ApiGatewayV2: Customers can get information about security policies set on custom domain resources in API Gateway
+* feature: ApplicationInsights: CloudWatch Application Insights detects errors and exceptions from logs, including .NET custom application logs, SQL Server logs, IIS logs, and more, and uses a combination of built-in rules and machine learning, such as dynamic baselining, to identify common problems. You can then easily drill into specific issues with CloudWatch Automatic Dashboards that are dynamically generated. These dashboards contain the most recent alarms, a summary of relevant metrics, and log snippets to help you identify root cause.
+* feature: ClientSideMonitoring: add a host config to client-side monitoring configuration, defaults to be '127.0.0.1'
+* feature: ELBv2: This release adds support for UDP on Network Load Balancers
+* feature: FSx: Starting today, you can join your Amazon FSx for Windows File Server file systems to your organization's self-managed Microsoft Active Directory while creating the file system. You can also perform in-place updates of file systems to keep your Active Directory configuration up to date.
+* feature: ResourceGroupsTaggingAPI: Updated service APIs and documentation.
+* feature: SSM: AWS Systems Manager now supports deleting a specific version of a SSM Document.
+* feature: SecurityHub: This release includes a new Tags parameter for the EnableSecurityHub operation, and the following new operations: DescribeHub, CreateActionTarget, DeleteActionTarget, DescribeActionTargets, UpdateActionTarget, TagResource, UntagResource, and ListTagsforResource. It removes the operation ListProductSubscribers, and makes Title and Description required attributes of AwsSecurityFinding.
+* feature: ServiceQuotas: Service Quotas enables you to view and manage your quotas for AWS services from a central location.
 
 ## 2.480.0
 * feature: IAM: We are making it easier for you to manage your permission guardrails i.e. service control policies by enabling you to retrieve the last timestamp when an AWS service was accessed within an account or AWS Organizations entity.

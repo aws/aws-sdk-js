@@ -181,5 +181,7 @@ module.exports = {
   IoTEventsData: require('./ioteventsdata'),
   Personalize: require('./personalize'),
   PersonalizeEvents: require('./personalizeevents'),
-  PersonalizeRuntime: require('./personalizeruntime')
+  PersonalizeRuntime: require('./personalizeruntime'),
+  ApplicationInsights: require('./applicationinsights'),
+  ServiceQuotas: require('./servicequotas')
 };

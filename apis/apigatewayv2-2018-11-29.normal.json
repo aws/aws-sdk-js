@@ -3175,6 +3175,21 @@
           "shape": "__string",
           "locationName": "hostedZoneId",
           "documentation": "<p>The Amazon Route 53 Hosted Zone ID of the endpoint.</p>"
+        },
+        "SecurityPolicy": {
+          "shape": "SecurityPolicy",
+          "locationName": "securityPolicy",
+          "documentation": "<p>The Transport Layer Security (TLS) version of the security policy for this domain name. The valid values are TLS_1_0 and TLS_1_2.</p>"
+        },
+        "DomainNameStatus": {
+          "shape": "DomainNameStatus",
+          "locationName": "domainNameStatus",
+          "documentation": "<p>The status of the domain name migration. The valid values are AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.</p>"
+        },
+        "DomainNameStatusMessage": {
+          "shape": "__string",
+          "locationName": "domainNameStatusMessage",
+          "documentation": "<p>An optional text message containing detailed information about status of the domain name migration.</p>"
         }
       },
       "documentation": "<p>The domain name configuration.</p>"
@@ -3192,6 +3207,22 @@
       "enum": [
         "REGIONAL",
         "EDGE"
+      ]
+    },
+    "SecurityPolicy": {
+      "type": "string",
+      "documentation": "<p>The Transport Layer Security (TLS) version of the security policy for this domain name. The valid values are TLS_1_0 and TLS_1_2.</p>",
+      "enum": [
+        "TLS_1_0",
+        "TLS_1_2"
+      ]
+    },
+    "DomainNameStatus": {
+      "type": "string",
+      "documentation": "<p>The status of the domain name migration. The valid values are AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.</p>",
+      "enum": [
+        "AVAILABLE",
+        "UPDATING"
       ]
     },
     "GetApiMappingRequest": {

@@ -296,7 +296,7 @@
           "shape": "OpsItemInvalidParameterException"
         }
       ],
-      "documentation": "<p>Creates a new OpsItem. You must have permission in AWS Identity and Access Management (IAM) to create a new OpsItem. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-getting-started.html\">Getting Started with OpsItems</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html\">AWS Systems Manager OpsItems</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
+      "documentation": "<p>Creates a new OpsItem. You must have permission in AWS Identity and Access Management (IAM) to create a new OpsItem. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html\">Getting Started with OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">AWS Systems Manager OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
     },
     "CreatePatchBaseline": {
       "name": "CreatePatchBaseline",
@@ -1294,7 +1294,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Query a set of OpsItems. You must have permission in AWS Identity and Access Management (IAM) to query a list of OpsItems. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-getting-started.html\">Getting Started with OpsItems</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html\">AWS Systems Manager OpsItems</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
+      "documentation": "<p>Query a set of OpsItems. You must have permission in AWS Identity and Access Management (IAM) to query a list of OpsItems. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html\">Getting Started with OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">AWS Systems Manager OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
     },
     "DescribeParameters": {
       "name": "DescribeParameters",
@@ -1764,7 +1764,7 @@
           "shape": "OpsItemNotFoundException"
         }
       ],
-      "documentation": "<p>Get information about an OpsItem by using the ID. You must have permission in AWS Identity and Access Management (IAM) to view information about an OpsItem. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-getting-started.html\">Getting Started with OpsItems</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html\">AWS Systems Manager OpsItems</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
+      "documentation": "<p>Get information about an OpsItem by using the ID. You must have permission in AWS Identity and Access Management (IAM) to view information about an OpsItem. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html\">Getting Started with OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">AWS Systems Manager OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
     },
     "GetOpsSummary": {
       "name": "GetOpsSummary",
@@ -3180,7 +3180,7 @@
           "shape": "OpsItemInvalidParameterException"
         }
       ],
-      "documentation": "<p>Edit or change an OpsItem. You must have permission in AWS Identity and Access Management (IAM) to update an OpsItem. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-getting-started.html\">Getting Started with OpsItems</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html\">AWS Systems Manager OpsItems</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
+      "documentation": "<p>Edit or change an OpsItem. You must have permission in AWS Identity and Access Management (IAM) to update an OpsItem. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html\">Getting Started with OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">AWS Systems Manager OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
     },
     "UpdatePatchBaseline": {
       "name": "UpdatePatchBaseline",
@@ -5391,7 +5391,7 @@
         },
         "OperationalData": {
           "shape": "OpsItemOperationalData",
-          "documentation": "<p>Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.</p> <p>This custom data is searchable, but with restrictions. For the <code>Searchable operational data</code> feature, all users with access to the OpsItem Overview page (as provided by the <a>DescribeOpsItems</a> API action) can view and search on the specified data. For the <code>Private operational data</code> feature, the data is only viewable by users who have access to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>"
+          "documentation": "<p>Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.</p> <important> <p>Operational data keys <i>can't</i> begin with the following: amazon, aws, amzn, ssm, /amazon, /aws, /amzn, /ssm.</p> </important> <p>You can choose to make the data searchable by other users in the account or you can restrict search access. Searchable data means that all users with access to the OpsItem Overview page (as provided by the <a>DescribeOpsItems</a> API action) can view and search on the specified data. Operational data that is not searchable is only viewable by users who have access to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p> <p>Use the <code>/aws/resources</code> key in OperationalData to specify a related resource in the request. Use the <code>/aws/automations</code> key in OperationalData to associate an Automation runbook with the OpsItem. To view AWS CLI example commands that use these keys, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems\">Creating OpsItems Manually</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         },
         "Notifications": {
           "shape": "OpsItemNotifications",
@@ -5415,7 +5415,7 @@
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an OpsItem to identify the AWS resource or the type of issue. In this case, you could specify the following key name/value pairs:</p> <ul> <li> <p> <code>Key=source,Value=EC2-instance</code> </p> </li> <li> <p> <code>Key=status,Value=stopped</code> </p> </li> </ul> <note> <p>To add tags to an existing OpsItem, use the <a>AddTagsToResource</a> action.</p> </note>"
+          "documentation": "<p>Optional metadata that you assign to a resource. You can restrict access to OpsItems by using an inline IAM policy that specifies tags. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions\">Getting Started with OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>Tags use a key-value pair. For example:</p> <p> <code>Key=Department,Value=Finance</code> </p> <note> <p>To add tags to an existing OpsItem, use the <a>AddTagsToResource</a> action.</p> </note>"
         }
       }
     },
@@ -5581,6 +5581,14 @@
         "Name": {
           "shape": "DocumentName",
           "documentation": "<p>The name of the document.</p>"
+        },
+        "DocumentVersion": {
+          "shape": "DocumentVersion",
+          "documentation": "<p>(Optional) The version of the document that you want to delete. If not provided, all versions of the document are deleted.</p>"
+        },
+        "VersionName": {
+          "shape": "DocumentVersionName",
+          "documentation": "<p>(Optional) The version name of the document that you want to delete. If not provided, all versions of the document are deleted.</p>"
         }
       }
     },
@@ -6764,7 +6772,7 @@
       "members": {
         "OpsItemFilters": {
           "shape": "OpsItemFilters",
-          "documentation": "<p>One or more filters to limit the reponse.</p> <ul> <li> <p>Key: CreatedTime</p> <p>Operations: GreaterThan, LessThan</p> </li> <li> <p>Key: LastModifiedBy</p> <p>Operations: Contains, Equals</p> </li> <li> <p>Key: LastModifiedTime</p> <p>Operations: GreaterThan, LessThan</p> </li> <li> <p>Key: Priority</p> <p>Operations: Equals</p> </li> <li> <p>Key: Source</p> <p>Operations: Contains, Equals</p> </li> <li> <p>Key: Status</p> <p>Operations: Equals</p> </li> <li> <p>Key: Title</p> <p>Operations: Contains</p> </li> <li> <p>Key: OperationalData</p> <p>Operations: Equals</p> </li> <li> <p>Key: OperationalDataKey</p> <p>Operations: Equals</p> </li> <li> <p>Key: OperationalDataValue</p> <p>Operations: Equals, Contains</p> </li> <li> <p>Key: OpsItemId</p> <p>Operations: Equals</p> </li> <li> <p>Key: ResourceId</p> <p>Operations: Contains</p> </li> <li> <p>Key: AutomationId</p> <p>Operations: Equals</p> </li> </ul>"
+          "documentation": "<p>One or more filters to limit the reponse.</p> <ul> <li> <p>Key: CreatedTime</p> <p>Operations: GreaterThan, LessThan</p> </li> <li> <p>Key: LastModifiedBy</p> <p>Operations: Contains, Equals</p> </li> <li> <p>Key: LastModifiedTime</p> <p>Operations: GreaterThan, LessThan</p> </li> <li> <p>Key: Priority</p> <p>Operations: Equals</p> </li> <li> <p>Key: Source</p> <p>Operations: Contains, Equals</p> </li> <li> <p>Key: Status</p> <p>Operations: Equals</p> </li> <li> <p>Key: Title</p> <p>Operations: Contains</p> </li> <li> <p>Key: OperationalData*</p> <p>Operations: Equals</p> </li> <li> <p>Key: OperationalDataKey</p> <p>Operations: Equals</p> </li> <li> <p>Key: OperationalDataValue</p> <p>Operations: Equals, Contains</p> </li> <li> <p>Key: OpsItemId</p> <p>Operations: Equals</p> </li> <li> <p>Key: ResourceId</p> <p>Operations: Contains</p> </li> <li> <p>Key: AutomationId</p> <p>Operations: Equals</p> </li> </ul> <p>*If you filter the response by using the OperationalData operator, specify a key-value pair by using the following JSON format: {\"key\":\"key_name\",\"value\":\"a_value\"}</p>"
         },
         "MaxResults": {
           "shape": "OpsItemMaxResults",
@@ -11081,11 +11089,11 @@
         },
         "RelatedOpsItems": {
           "shape": "RelatedOpsItems",
-          "documentation": "<p>One or more OpsItems that share something in common with the current OpsItems. For example, related OpsItems can include OpsItems with similar error messages, impacted resources, or statuses for the impacted resource.</p>"
+          "documentation": "<p>One or more OpsItems that share something in common with the current OpsItem. For example, related OpsItems can include OpsItems with similar error messages, impacted resources, or statuses for the impacted resource.</p>"
         },
         "Status": {
           "shape": "OpsItemStatus",
-          "documentation": "<p>The OpsItem status. Status can be <code>Open</code>, <code>In Progress</code>, or <code>Resolved</code>. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-working-with-OpsItems-editing-details.html\">Editing OpsItem Details</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+          "documentation": "<p>The OpsItem status. Status can be <code>Open</code>, <code>In Progress</code>, or <code>Resolved</code>. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html\">Editing OpsItem Details</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         },
         "OpsItemId": {
           "shape": "OpsItemId",
@@ -11105,10 +11113,10 @@
         },
         "OperationalData": {
           "shape": "OpsItemOperationalData",
-          "documentation": "<p>Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.</p> <p>This custom data is searchable, but with restrictions. For the <code>Searchable operational data</code> feature, all users with access to the OpsItem Overview page (as provided by the <a>DescribeOpsItems</a> API action) can view and search on the specified data. For the <code>Private operational data</code> feature, the data is only viewable by users who have access to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>"
+          "documentation": "<p>Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.</p> <important> <p>Operational data keys <i>can't</i> begin with the following: amazon, aws, amzn, ssm, /amazon, /aws, /amzn, /ssm.</p> </important> <p>You can choose to make the data searchable by other users in the account or you can restrict search access. Searchable data means that all users with access to the OpsItem Overview page (as provided by the <a>DescribeOpsItems</a> API action) can view and search on the specified data. Operational data that is not searchable is only viewable by users who have access to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p> <p>Use the <code>/aws/resources</code> key in OperationalData to specify a related resource in the request. Use the <code>/aws/automations</code> key in OperationalData to associate an Automation runbook with the OpsItem. To view AWS CLI example commands that use these keys, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems\">Creating OpsItems Manually</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         }
       },
-      "documentation": "<p>Operations engineers and IT professionals use the Systems Manager OpsItems capability to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems.html\">AWS Systems Manager OpsItems</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
+      "documentation": "<p>Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate operational issues impacting the performance and health of their AWS resources. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">AWS Systems Manager OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>. </p>"
     },
     "OpsItemDataKey": {
       "type": "string",
@@ -11165,7 +11173,7 @@
           "documentation": "<p>The operator used by the filter call.</p>"
         }
       },
-      "documentation": "<p>Describes an OpsCenter filter.</p>"
+      "documentation": "<p>Describes an OpsItem filter.</p>"
     },
     "OpsItemFilterKey": {
       "type": "string",
@@ -11314,7 +11322,7 @@
         },
         "OperationalData": {
           "shape": "OpsItemOperationalData",
-          "documentation": "<p>Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.</p> <p>This custom data is searchable, but with restrictions. For the <code>Searchable operational data</code> feature, all users with access to the OpsItem Overview page (as provided by the <a>DescribeOpsItems</a> API action) can view and search on the specified data. For the <code>Private operational data</code> feature, the data is only viewable by users who have access to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>"
+          "documentation": "<p>Operational data is custom data that provides useful reference details about the OpsItem. </p>"
         }
       },
       "documentation": "<p>A count of OpsItems.</p>"
@@ -12662,7 +12670,7 @@
           "documentation": "<p>The ID of an OpsItem related to the current OpsItem.</p>"
         }
       },
-      "documentation": "<p>An OpsItems that shares something in common with the current OpsItems. For example, related OpsItems can include OpsItems with similar error messages, impacted resources, or statuses for the impacted resource.</p>"
+      "documentation": "<p>An OpsItems that shares something in common with the current OpsItem. For example, related OpsItems can include OpsItems with similar error messages, impacted resources, or statuses for the impacted resource.</p>"
     },
     "RelatedOpsItems": {
       "type": "list",
@@ -14467,7 +14475,7 @@
         },
         "OperationalData": {
           "shape": "OpsItemOperationalData",
-          "documentation": "<p>Add new keys or edit existing key-value pairs of the OperationalData map in the OpsItem object.</p> <p>Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.</p> <p>This custom data is searchable, but with restrictions. For the <code>Searchable operational data</code> feature, all users with access to the OpsItem Overview page (as provided by the <a>DescribeOpsItems</a> API action) can view and search on the specified data. For the <code>Private operational data</code> feature, the data is only viewable by users who have access to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>"
+          "documentation": "<p>Add new keys or edit existing key-value pairs of the OperationalData map in the OpsItem object.</p> <p>Operational data is custom data that provides useful reference details about the OpsItem. For example, you can specify log files, error strings, license keys, troubleshooting tips, or other relevant data. You enter operational data as key-value pairs. The key has a maximum length of 128 characters. The value has a maximum size of 20 KB.</p> <important> <p>Operational data keys <i>can't</i> begin with the following: amazon, aws, amzn, ssm, /amazon, /aws, /amzn, /ssm.</p> </important> <p>You can choose to make the data searchable by other users in the account or you can restrict search access. Searchable data means that all users with access to the OpsItem Overview page (as provided by the <a>DescribeOpsItems</a> API action) can view and search on the specified data. Operational data that is not searchable is only viewable by users who have access to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p> <p>Use the <code>/aws/resources</code> key in OperationalData to specify a related resource in the request. Use the <code>/aws/automations</code> key in OperationalData to associate an Automation runbook with the OpsItem. To view AWS CLI example commands that use these keys, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems\">Creating OpsItems Manually</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         },
         "OperationalDataToDelete": {
           "shape": "OpsItemOpsDataKeysList",
@@ -14487,7 +14495,7 @@
         },
         "Status": {
           "shape": "OpsItemStatus",
-          "documentation": "<p>The OpsItem status. Status can be <code>Open</code>, <code>In Progress</code>, or <code>Resolved</code>. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsItems-working-with-OpsItems-editing-details.html\">Editing OpsItem Details</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+          "documentation": "<p>The OpsItem status. Status can be <code>Open</code>, <code>In Progress</code>, or <code>Resolved</code>. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-working-with-OpsItems-editing-details.html\">Editing OpsItem Details</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         },
         "OpsItemId": {
           "shape": "OpsItemId",
