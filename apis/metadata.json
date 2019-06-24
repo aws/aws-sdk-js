@@ -725,5 +725,13 @@
   "personalizeruntime": {
     "prefix": "personalize-runtime",
     "name": "PersonalizeRuntime"
+  },
+  "applicationinsights": {
+    "prefix": "application-insights",
+    "name": "ApplicationInsights"
+  },
+  "servicequotas": {
+    "prefix": "service-quotas",
+    "name": "ServiceQuotas"
   }
 }

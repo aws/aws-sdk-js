@@ -28,11 +28,11 @@ declare class FSx extends Service {
    */
   createFileSystem(callback?: (err: AWSError, data: FSx.Types.CreateFileSystemResponse) => void): Request<FSx.Types.CreateFileSystemResponse, AWSError>;
   /**
-   * Creates a new Amazon FSx file system from an existing Amazon FSx for Windows File Server backup. If a file system with the specified client request token exists and the parameters match, this call returns the description of the existing file system. If a client request token specified by the file system exists and the parameters don't match, this call returns IncompatibleParameterError. If a file system with the specified client request token doesn't exist, this operation does the following:   Creates a new Amazon FSx file system from backup with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the file system.   Parameters like Active Directory, default share name, automatic backup, and backup settings default to the parameters of the file system that was backed up, unless overridden. You can explicitly supply other settings. By using the idempotent operation, you can retry a CreateFileSystemFromBackup call without the risk of creating an extra file system. This approach can be useful when an initial call fails in a way that makes it unclear whether a file system was created. Examples are if a transport level timeout occurred, or your connection was reset. If you use the same client request token and the initial call created a file system, the client receives success as long as the parameters are the same.  The CreateFileSystemFromBackup call returns while the file system's lifecycle state is still CREATING. You can check the file-system creation status by calling the DescribeFileSystems operation, which returns the file system state along with other information. 
+   * Creates a new Amazon FSx file system from an existing Amazon FSx for Windows File Server backup. If a file system with the specified client request token exists and the parameters match, this operation returns the description of the file system. If a client request token specified by the file system exists and the parameters don't match, this call returns IncompatibleParameterError. If a file system with the specified client request token doesn't exist, this operation does the following:   Creates a new Amazon FSx file system from backup with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the file system.   Parameters like Active Directory, default share name, automatic backup, and backup settings default to the parameters of the file system that was backed up, unless overridden. You can explicitly supply other settings. By using the idempotent operation, you can retry a CreateFileSystemFromBackup call without the risk of creating an extra file system. This approach can be useful when an initial call fails in a way that makes it unclear whether a file system was created. Examples are if a transport level timeout occurred, or your connection was reset. If you use the same client request token and the initial call created a file system, the client receives success as long as the parameters are the same.  The CreateFileSystemFromBackup call returns while the file system's lifecycle state is still CREATING. You can check the file-system creation status by calling the DescribeFileSystems operation, which returns the file system state along with other information. 
    */
   createFileSystemFromBackup(params: FSx.Types.CreateFileSystemFromBackupRequest, callback?: (err: AWSError, data: FSx.Types.CreateFileSystemFromBackupResponse) => void): Request<FSx.Types.CreateFileSystemFromBackupResponse, AWSError>;
   /**
-   * Creates a new Amazon FSx file system from an existing Amazon FSx for Windows File Server backup. If a file system with the specified client request token exists and the parameters match, this call returns the description of the existing file system. If a client request token specified by the file system exists and the parameters don't match, this call returns IncompatibleParameterError. If a file system with the specified client request token doesn't exist, this operation does the following:   Creates a new Amazon FSx file system from backup with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the file system.   Parameters like Active Directory, default share name, automatic backup, and backup settings default to the parameters of the file system that was backed up, unless overridden. You can explicitly supply other settings. By using the idempotent operation, you can retry a CreateFileSystemFromBackup call without the risk of creating an extra file system. This approach can be useful when an initial call fails in a way that makes it unclear whether a file system was created. Examples are if a transport level timeout occurred, or your connection was reset. If you use the same client request token and the initial call created a file system, the client receives success as long as the parameters are the same.  The CreateFileSystemFromBackup call returns while the file system's lifecycle state is still CREATING. You can check the file-system creation status by calling the DescribeFileSystems operation, which returns the file system state along with other information. 
+   * Creates a new Amazon FSx file system from an existing Amazon FSx for Windows File Server backup. If a file system with the specified client request token exists and the parameters match, this operation returns the description of the file system. If a client request token specified by the file system exists and the parameters don't match, this call returns IncompatibleParameterError. If a file system with the specified client request token doesn't exist, this operation does the following:   Creates a new Amazon FSx file system from backup with an assigned ID, and an initial lifecycle state of CREATING.   Returns the description of the file system.   Parameters like Active Directory, default share name, automatic backup, and backup settings default to the parameters of the file system that was backed up, unless overridden. You can explicitly supply other settings. By using the idempotent operation, you can retry a CreateFileSystemFromBackup call without the risk of creating an extra file system. This approach can be useful when an initial call fails in a way that makes it unclear whether a file system was created. Examples are if a transport level timeout occurred, or your connection was reset. If you use the same client request token and the initial call created a file system, the client receives success as long as the parameters are the same.  The CreateFileSystemFromBackup call returns while the file system's lifecycle state is still CREATING. You can check the file-system creation status by calling the DescribeFileSystems operation, which returns the file system state along with other information. 
    */
   createFileSystemFromBackup(callback?: (err: AWSError, data: FSx.Types.CreateFileSystemFromBackupResponse) => void): Request<FSx.Types.CreateFileSystemFromBackupResponse, AWSError>;
   /**
@@ -102,6 +102,17 @@ declare class FSx extends Service {
 }
 declare namespace FSx {
   export type AWSAccountId = string;
+  export interface ActiveDirectoryBackupAttributes {
+    /**
+     * The fully qualified domain name of the self-managed AD directory.
+     */
+    DomainName?: ActiveDirectoryFullyQualifiedName;
+    /**
+     * The ID of the AWS Managed Microsoft Active Directory instance to which the file system is joined.
+     */
+    ActiveDirectoryId?: DirectoryId;
+  }
+  export type ActiveDirectoryFullyQualifiedName = string;
   export type ArchivePath = string;
   export type AutomaticBackupRetentionDays = number;
   export interface Backup {
@@ -142,6 +153,10 @@ declare namespace FSx {
      * Metadata of the file system associated with the backup. This metadata is persisted even if the file system is deleted.
      */
     FileSystem: FileSystem;
+    /**
+     * The configuration of the self-managed Microsoft Active Directory (AD) to which the Windows File Server instance is joined.
+     */
+    DirectoryInformation?: ActiveDirectoryBackupAttributes;
   }
   export interface BackupFailureDetails {
     /**
@@ -228,53 +243,54 @@ declare namespace FSx {
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * The type of file system.
+     * The type of Amazon FSx file system to create.
      */
     FileSystemType: FileSystemType;
     /**
-     * The storage capacity of the file system. For Windows file systems, the storage capacity has a minimum of 300 GiB, and a maximum of 65,536 GiB. For Lustre file systems, the storage capacity has a minimum of 3,600 GiB. Storage capacity is provisioned in increments of 3,600 GiB.
+     * The storage capacity of the file system being created. For Windows file systems, the storage capacity has a minimum of 300 GiB, and a maximum of 65,536 GiB. For Lustre file systems, the storage capacity has a minimum of 3,600 GiB. Storage capacity is provisioned in increments of 3,600 GiB.
      */
     StorageCapacity: StorageCapacity;
     /**
-     * A list of IDs for the subnets that the file system will be accessible from. File systems support only one subnet. The file server is also launched in that subnet's Availability Zone.
+     * The IDs of the subnets that the file system will be accessible from. File systems support only one subnet. The file server is also launched in that subnet's Availability Zone.
      */
     SubnetIds: SubnetIds;
     /**
-     * A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces. This list isn't returned in later describe requests.
+     * A list of IDs specifying the security groups to apply to all network interfaces created for file system access. This list isn't returned in later requests to describe the file system.
      */
     SecurityGroupIds?: SecurityGroupIds;
     /**
-     * The tags to be applied to the file system at file system creation. The key value of the Name tag appears in the console as the file system name.
+     * The tags to apply to the file system being created. The key value of the Name tag appears in the console as the file system name.
      */
     Tags?: Tags;
     KmsKeyId?: KmsKeyId;
     /**
-     * The configuration for this Microsoft Windows file system.
+     * The Microsoft Windows configuration for the file system being created. This value is required if FileSystemType is set to WINDOWS.
      */
     WindowsConfiguration?: CreateFileSystemWindowsConfiguration;
     LustreConfiguration?: CreateFileSystemLustreConfiguration;
   }
   export interface CreateFileSystemResponse {
     /**
-     * A description of the file system.
+     * The configuration of the file system that was created.
      */
     FileSystem?: FileSystem;
   }
   export interface CreateFileSystemWindowsConfiguration {
     /**
-     * The ID for an existing Microsoft Active Directory instance that the file system should join when it's created.
+     * The ID for an existing AWS Managed Microsoft Active Directory (AD) instance that the file system should join when it's created.
      */
     ActiveDirectoryId?: DirectoryId;
+    SelfManagedActiveDirectoryConfiguration?: SelfManagedActiveDirectoryConfiguration;
     /**
-     * The throughput of an Amazon FSx file system, measured in megabytes per second.
+     * The throughput of an Amazon FSx file system, measured in megabytes per second, in 2 to the nth increments, between 2^3 (8) and 2^11 (2048).
      */
     ThroughputCapacity: MegabytesPerSecond;
     /**
-     * The preferred start time to perform weekly maintenance, in the UTC time zone.
+     * The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone.
      */
     WeeklyMaintenanceStartTime?: WeeklyTime;
     /**
-     * The preferred time to take daily automatic backups, in the UTC time zone.
+     * The preferred time to take daily automatic backups, formatted HH:MM in the UTC time zone.
      */
     DailyAutomaticBackupStartTime?: DailyTime;
     /**
@@ -282,7 +298,7 @@ declare namespace FSx {
      */
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
     /**
-     * A boolean flag indicating whether tags on the file system should be copied to backups. This value defaults to false. If it's set to true, all tags on the file system are copied to all automatic backups and any user-initiated backups where the user doesn't specify any tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups.
+     * A boolean flag indicating whether tags for the file system should be copied to backups. This value defaults to false. If it's set to true, all tags for the file system are copied to all automatic and user-initiated backups where the user doesn't specify tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups.
      */
     CopyTagsToBackups?: Flag;
   }
@@ -418,10 +434,13 @@ declare namespace FSx {
     NextToken?: NextToken;
   }
   export type DirectoryId = string;
+  export type DirectoryPassword = string;
+  export type DirectoryUserName = string;
+  export type DnsIps = IpAddress[];
   export type ErrorMessage = string;
   export interface FileSystem {
     /**
-     * The AWS account that created the file system. If the file system was created by an IAM user, the AWS account to which the IAM user belongs is the owner.
+     * The AWS account that created the file system. If the file system was created by an AWS Identity and Access Management (IAM) user, the AWS account to which the IAM user belongs is the owner.
      */
     OwnerId?: AWSAccountId;
     /**
@@ -429,20 +448,20 @@ declare namespace FSx {
      */
     CreationTime?: CreationTime;
     /**
-     * The eight-digit ID of the file system that was automatically assigned by Amazon FSx.
+     * The system-generated, unique 17-digit ID of the file system.
      */
     FileSystemId?: FileSystemId;
     /**
-     * Type of file system. Currently the only supported type is WINDOWS.
+     * The type of Amazon FSx file system, either LUSTRE or WINDOWS.
      */
     FileSystemType?: FileSystemType;
     /**
-     * The lifecycle status of the file system.
+     * The lifecycle status of the file system:    AVAILABLE indicates that the file system is reachable and available for use.    CREATING indicates that Amazon FSx is in the process of creating the new file system.    DELETING indicates that Amazon FSx is in the process of deleting the file system.    FAILED indicates that Amazon FSx was not able to create the file system.    MISCONFIGURED indicates that the file system is in a failed but recoverable state.    UPDATING indicates that the file system is undergoing a customer initiated update.  
      */
     Lifecycle?: FileSystemLifecycle;
     FailureDetails?: FileSystemFailureDetails;
     /**
-     * The storage capacity of the file system in gigabytes.
+     * The storage capacity of the file system in gigabytes (GB).
      */
     StorageCapacity?: StorageCapacity;
     /**
@@ -450,11 +469,11 @@ declare namespace FSx {
      */
     VpcId?: VpcId;
     /**
-     * The IDs of the subnets to contain the endpoint for the file system. One and only one is supported. The file system is launched in the Availability Zone associated with this subnet.
+     * The ID of the subnet to contain the endpoint for the file system. One and only one is supported. The file system is launched in the Availability Zone associated with this subnet.
      */
     SubnetIds?: SubnetIds;
     /**
-     * The IDs of the elastic network interface from which a specific file system is accessible. The elastic network interface is automatically created in the same VPC that the Amazon FSx file system was created in. For more information, see Elastic Network Interfaces in the Amazon EC2 User Guide.  For an Amazon FSx for Windows File Server file system, you can have one network interface Id. For an Amazon FSx for Lustre file system, you can have more than one.
+     * The IDs of the elastic network interface from which a specific file system is accessible. The elastic network interface is automatically created in the same VPC that the Amazon FSx file system was created in. For more information, see Elastic Network Interfaces in the Amazon EC2 User Guide.  For an Amazon FSx for Windows File Server file system, you can have one network interface ID. For an Amazon FSx for Lustre file system, you can have more than one.
      */
     NetworkInterfaceIds?: NetworkInterfaceIds;
     /**
@@ -466,7 +485,7 @@ declare namespace FSx {
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * The resource ARN of the file system.
+     * The Amazon Resource Name (ARN) for the file system resource.
      */
     ResourceARN?: ResourceARN;
     /**
@@ -479,15 +498,16 @@ declare namespace FSx {
     WindowsConfiguration?: WindowsFileSystemConfiguration;
     LustreConfiguration?: LustreFileSystemConfiguration;
   }
+  export type FileSystemAdministratorsGroupName = string;
   export interface FileSystemFailureDetails {
     /**
-     * Message describing the failures that occurred during file system creation.
+     * A message describing any failures that occurred during file system creation.
      */
     Message?: ErrorMessage;
   }
   export type FileSystemId = string;
   export type FileSystemIds = FileSystemId[];
-  export type FileSystemLifecycle = "AVAILABLE"|"CREATING"|"FAILED"|"DELETING"|string;
+  export type FileSystemLifecycle = "AVAILABLE"|"CREATING"|"FAILED"|"DELETING"|"MISCONFIGURED"|"UPDATING"|string;
   export type FileSystemMaintenanceOperation = "PATCHING"|"BACKING_UP"|string;
   export type FileSystemMaintenanceOperations = FileSystemMaintenanceOperation[];
   export type FileSystemType = "WINDOWS"|"LUSTRE"|string;
@@ -507,6 +527,7 @@ declare namespace FSx {
   export type FilterValues = FilterValue[];
   export type Filters = Filter[];
   export type Flag = boolean;
+  export type IpAddress = string;
   export type KmsKeyId = string;
   export interface ListTagsForResourceRequest {
     /**
@@ -545,10 +566,73 @@ declare namespace FSx {
   export type NetworkInterfaceId = string;
   export type NetworkInterfaceIds = NetworkInterfaceId[];
   export type NextToken = string;
+  export type OrganizationalUnitDistinguishedName = string;
   export type ProgressPercent = number;
   export type ResourceARN = string;
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
+  export interface SelfManagedActiveDirectoryAttributes {
+    /**
+     * The fully qualified domain name of the self-managed AD directory.
+     */
+    DomainName?: ActiveDirectoryFullyQualifiedName;
+    /**
+     * The fully qualified distinguished name of the organizational unit within the self-managed AD directory to which the Windows File Server instance is joined.
+     */
+    OrganizationalUnitDistinguishedName?: OrganizationalUnitDistinguishedName;
+    /**
+     * The name of the domain group whose members have administrative privileges for the FSx file system.
+     */
+    FileSystemAdministratorsGroup?: FileSystemAdministratorsGroupName;
+    /**
+     * The user name for the service account on your self-managed AD domain that FSx uses to join to your AD domain.
+     */
+    UserName?: DirectoryUserName;
+    /**
+     * A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory.
+     */
+    DnsIps?: DnsIps;
+  }
+  export interface SelfManagedActiveDirectoryConfiguration {
+    /**
+     * The fully qualified domain name of the self-managed AD directory, such as corp.example.com.
+     */
+    DomainName: ActiveDirectoryFullyQualifiedName;
+    /**
+     * (Optional) The fully qualified distinguished name of the organizational unit within your self-managed AD directory that the Windows File Server instance will join. Amazon FSx only accepts OU as the direct parent of the file system. An example is OU=FSx,DC=yourdomain,DC=corp,DC=com. To learn more, see RFC 2253. If none is provided, the FSx file system is created in the default location of your self-managed AD directory.   Only Organizational Unit (OU) objects can be the direct parent of the file system that you're creating. 
+     */
+    OrganizationalUnitDistinguishedName?: OrganizationalUnitDistinguishedName;
+    /**
+     * (Optional) The name of the domain group whose members are granted administrative privileges for the file system. Administrative privileges include taking ownership of files and folders, and setting audit controls (audit ACLs) on files and folders. The group that you specify must already exist in your domain. If you don't provide one, your AD domain's Domain Admins group is used.
+     */
+    FileSystemAdministratorsGroup?: FileSystemAdministratorsGroupName;
+    /**
+     * The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. This account must have the permission to join computers to the domain in the organizational unit provided in OrganizationalUnitDistinguishedName, or in the default location of your AD domain.
+     */
+    UserName: DirectoryUserName;
+    /**
+     * The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
+     */
+    Password: DirectoryPassword;
+    /**
+     * A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the one in which your Amazon FSx file system is being created, or in the private IP version 4 (Iv4) address ranges, as specified in RFC 1918:   10.0.0.0 - 10.255.255.255 (10/8 prefix)   172.16.0.0 - 172.31.255.255 (172.16/12 prefix)   192.168.0.0 - 192.168.255.255 (192.168/16 prefix)  
+     */
+    DnsIps: DnsIps;
+  }
+  export interface SelfManagedActiveDirectoryConfigurationUpdates {
+    /**
+     * The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. This account must have the permission to join computers to the domain in the organizational unit provided in OrganizationalUnitDistinguishedName.
+     */
+    UserName?: DirectoryUserName;
+    /**
+     * The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.
+     */
+    Password?: DirectoryPassword;
+    /**
+     * A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory.
+     */
+    DnsIps?: DnsIps;
+  }
   export type StorageCapacity = number;
   export type SubnetId = string;
   export type SubnetIds = SubnetId[];
@@ -603,14 +687,14 @@ declare namespace FSx {
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * The configuration for this Microsoft Windows file system. The only supported options are for backup and maintenance.
+     * The configuration update for this Microsoft Windows file system. The only supported options are for backup and maintenance and for self-managed Active Directory configuration.
      */
     WindowsConfiguration?: UpdateFileSystemWindowsConfiguration;
     LustreConfiguration?: UpdateFileSystemLustreConfiguration;
   }
   export interface UpdateFileSystemResponse {
     /**
-     * A description of the file system.
+     * A description of the file system that was updated.
      */
     FileSystem?: FileSystem;
   }
@@ -627,6 +711,10 @@ declare namespace FSx {
      * The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 35 days.
      */
     AutomaticBackupRetentionDays?: AutomaticBackupRetentionDays;
+    /**
+     * The configuration Amazon FSx uses to join the Windows File Server instance to the self-managed Microsoft AD directory.
+     */
+    SelfManagedActiveDirectoryConfiguration?: SelfManagedActiveDirectoryConfigurationUpdates;
   }
   export type VpcId = string;
   export type WeeklyTime = string;
@@ -635,6 +723,7 @@ declare namespace FSx {
      * The ID for an existing Microsoft Active Directory instance that the file system should join when it's created.
      */
     ActiveDirectoryId?: DirectoryId;
+    SelfManagedActiveDirectoryConfiguration?: SelfManagedActiveDirectoryAttributes;
     /**
      * The throughput of an Amazon FSx file system, measured in megabytes per second.
      */

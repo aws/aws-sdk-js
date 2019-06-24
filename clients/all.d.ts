@@ -180,3 +180,5 @@ export import IoTEventsData = require('./ioteventsdata');
 export import Personalize = require('./personalize');
 export import PersonalizeEvents = require('./personalizeevents');
 export import PersonalizeRuntime = require('./personalizeruntime');
+export import ApplicationInsights = require('./applicationinsights');
+export import ServiceQuotas = require('./servicequotas');

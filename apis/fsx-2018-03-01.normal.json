@@ -29,6 +29,9 @@
           "shape": "BadRequest"
         },
         {
+          "shape": "UnsupportedOperation"
+        },
+        {
           "shape": "FileSystemNotFound"
         },
         {
@@ -128,7 +131,7 @@
           "shape": "MissingFileSystemConfiguration"
         }
       ],
-      "documentation": "<p>Creates a new Amazon FSx file system from an existing Amazon FSx for Windows File Server backup.</p> <p>If a file system with the specified client request token exists and the parameters match, this call returns the description of the existing file system. If a client request token specified by the file system exists and the parameters don't match, this call returns <code>IncompatibleParameterError</code>. If a file system with the specified client request token doesn't exist, this operation does the following:</p> <ul> <li> <p>Creates a new Amazon FSx file system from backup with an assigned ID, and an initial lifecycle state of <code>CREATING</code>.</p> </li> <li> <p>Returns the description of the file system.</p> </li> </ul> <p>Parameters like Active Directory, default share name, automatic backup, and backup settings default to the parameters of the file system that was backed up, unless overridden. You can explicitly supply other settings.</p> <p>By using the idempotent operation, you can retry a <code>CreateFileSystemFromBackup</code> call without the risk of creating an extra file system. This approach can be useful when an initial call fails in a way that makes it unclear whether a file system was created. Examples are if a transport level timeout occurred, or your connection was reset. If you use the same client request token and the initial call created a file system, the client receives success as long as the parameters are the same.</p> <note> <p>The <code>CreateFileSystemFromBackup</code> call returns while the file system's lifecycle state is still <code>CREATING</code>. You can check the file-system creation status by calling the <a>DescribeFileSystems</a> operation, which returns the file system state along with other information.</p> </note>"
+      "documentation": "<p>Creates a new Amazon FSx file system from an existing Amazon FSx for Windows File Server backup.</p> <p>If a file system with the specified client request token exists and the parameters match, this operation returns the description of the file system. If a client request token specified by the file system exists and the parameters don't match, this call returns <code>IncompatibleParameterError</code>. If a file system with the specified client request token doesn't exist, this operation does the following:</p> <ul> <li> <p>Creates a new Amazon FSx file system from backup with an assigned ID, and an initial lifecycle state of <code>CREATING</code>.</p> </li> <li> <p>Returns the description of the file system.</p> </li> </ul> <p>Parameters like Active Directory, default share name, automatic backup, and backup settings default to the parameters of the file system that was backed up, unless overridden. You can explicitly supply other settings.</p> <p>By using the idempotent operation, you can retry a <code>CreateFileSystemFromBackup</code> call without the risk of creating an extra file system. This approach can be useful when an initial call fails in a way that makes it unclear whether a file system was created. Examples are if a transport level timeout occurred, or your connection was reset. If you use the same client request token and the initial call created a file system, the client receives success as long as the parameters are the same.</p> <note> <p>The <code>CreateFileSystemFromBackup</code> call returns while the file system's lifecycle state is still <code>CREATING</code>. You can check the file-system creation status by calling the <a>DescribeFileSystems</a> operation, which returns the file system state along with other information.</p> </note>"
     },
     "DeleteBackup": {
       "name": "DeleteBackup",
@@ -362,6 +365,9 @@
           "shape": "BadRequest"
         },
         {
+          "shape": "UnsupportedOperation"
+        },
+        {
           "shape": "IncompatibleParameterError"
         },
         {
@@ -384,6 +390,23 @@
       "max": 12,
       "min": 12,
       "pattern": "^\\d{12}$"
+    },
+    "ActiveDirectoryBackupAttributes": {
+      "type": "structure",
+      "members": {
+        "DomainName": {
+          "shape": "ActiveDirectoryFullyQualifiedName",
+          "documentation": "<p>The fully qualified domain name of the self-managed AD directory.</p>"
+        },
+        "ActiveDirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>The ID of the AWS Managed Microsoft Active Directory instance to which the file system is joined.</p>"
+        }
+      },
+      "documentation": "<p>The Microsoft AD attributes of the Amazon FSx for Windows File Server file system.</p>"
+    },
+    "ActiveDirectoryFullyQualifiedName": {
+      "type": "string"
     },
     "ArchivePath": {
       "type": "string",
@@ -444,6 +467,10 @@
         "FileSystem": {
           "shape": "FileSystem",
           "documentation": "<p>Metadata of the file system associated with the backup. This metadata is persisted even if the file system is deleted.</p>"
+        },
+        "DirectoryInformation": {
+          "shape": "ActiveDirectoryBackupAttributes",
+          "documentation": "<p>The configuration of the self-managed Microsoft Active Directory (AD) to which the Windows File Server instance is joined.</p>"
         }
       },
       "documentation": "<p>A backup of an Amazon FSx for Windows File Server file system. You can create a new file system from a backup to protect against data loss.</p>"
@@ -460,7 +487,7 @@
     },
     "BackupId": {
       "type": "string",
-      "documentation": "<p>The ID of the backup.</p>",
+      "documentation": "<p>The ID of the backup. Specifies the backup to use if you're creating a file system from an existing backup.</p>",
       "max": 128,
       "min": 12,
       "pattern": "^(backup-[0-9a-f]{8,})$"
@@ -504,7 +531,7 @@
       "documentation": "<p>(Optional) An idempotency token for resource creation, in a string of up to 64 ASCII characters. This token is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.</p>",
       "max": 255,
       "min": 1,
-      "pattern": "[A-za-z0-9_/.-]{0,255}$"
+      "pattern": "[A-za-z0-9_.-]{0,255}$"
     },
     "CreateBackupRequest": {
       "type": "structure",
@@ -602,7 +629,7 @@
           "documentation": "<p>(Optional) For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk. The maximum number of disks that a single file can be striped across is limited by the total number of disks that make up the file system.</p> <p>The chunk size default is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB). Amazon S3 objects have a maximum size of 5 TB.</p>"
         }
       },
-      "documentation": "<p>The configuration object for Lustre file systems used in the <code>CreateFileSystem</code> operation.</p>"
+      "documentation": "<p>The Lustre configuration for the file system being created. This value is required if <code>FileSystemType</code> is set to <code>LUSTRE</code>.</p>"
     },
     "CreateFileSystemRequest": {
       "type": "structure",
@@ -619,46 +646,46 @@
         },
         "FileSystemType": {
           "shape": "FileSystemType",
-          "documentation": "<p>The type of file system.</p>"
+          "documentation": "<p>The type of Amazon FSx file system to create.</p>"
         },
         "StorageCapacity": {
           "shape": "StorageCapacity",
-          "documentation": "<p>The storage capacity of the file system.</p> <p>For Windows file systems, the storage capacity has a minimum of 300 GiB, and a maximum of 65,536 GiB.</p> <p>For Lustre file systems, the storage capacity has a minimum of 3,600 GiB. Storage capacity is provisioned in increments of 3,600 GiB.</p>"
+          "documentation": "<p>The storage capacity of the file system being created.</p> <p>For Windows file systems, the storage capacity has a minimum of 300 GiB, and a maximum of 65,536 GiB.</p> <p>For Lustre file systems, the storage capacity has a minimum of 3,600 GiB. Storage capacity is provisioned in increments of 3,600 GiB.</p>"
         },
         "SubnetIds": {
           "shape": "SubnetIds",
-          "documentation": "<p>A list of IDs for the subnets that the file system will be accessible from. File systems support only one subnet. The file server is also launched in that subnet's Availability Zone.</p>"
+          "documentation": "<p>The IDs of the subnets that the file system will be accessible from. File systems support only one subnet. The file server is also launched in that subnet's Availability Zone.</p>"
         },
         "SecurityGroupIds": {
           "shape": "SecurityGroupIds",
-          "documentation": "<p>A list of IDs for the security groups that apply to the specified network interfaces created for file system access. These security groups will apply to all network interfaces. This list isn't returned in later describe requests.</p>"
+          "documentation": "<p>A list of IDs specifying the security groups to apply to all network interfaces created for file system access. This list isn't returned in later requests to describe the file system.</p>"
         },
         "Tags": {
           "shape": "Tags",
-          "documentation": "<p>The tags to be applied to the file system at file system creation. The key value of the <code>Name</code> tag appears in the console as the file system name.</p>"
+          "documentation": "<p>The tags to apply to the file system being created. The key value of the <code>Name</code> tag appears in the console as the file system name.</p>"
         },
         "KmsKeyId": {
           "shape": "KmsKeyId"
         },
         "WindowsConfiguration": {
           "shape": "CreateFileSystemWindowsConfiguration",
-          "documentation": "<p>The configuration for this Microsoft Windows file system.</p>"
+          "documentation": "<p>The Microsoft Windows configuration for the file system being created. This value is required if <code>FileSystemType</code> is set to <code>WINDOWS</code>.</p>"
         },
         "LustreConfiguration": {
           "shape": "CreateFileSystemLustreConfiguration"
         }
       },
-      "documentation": "<p>The request object for the <code>CreateFileSystem</code> operation.</p>"
+      "documentation": "<p>The request object used to create a new Amazon FSx file system.</p>"
     },
     "CreateFileSystemResponse": {
       "type": "structure",
       "members": {
         "FileSystem": {
           "shape": "FileSystem",
-          "documentation": "<p>A description of the file system.</p>"
+          "documentation": "<p>The configuration of the file system that was created.</p>"
         }
       },
-      "documentation": "<p>The response object for the <code>CreateFileSystem</code> operation.</p>"
+      "documentation": "<p>The response object returned after the file system is created.</p>"
     },
     "CreateFileSystemWindowsConfiguration": {
       "type": "structure",
@@ -668,19 +695,22 @@
       "members": {
         "ActiveDirectoryId": {
           "shape": "DirectoryId",
-          "documentation": "<p>The ID for an existing Microsoft Active Directory instance that the file system should join when it's created.</p>"
+          "documentation": "<p>The ID for an existing AWS Managed Microsoft Active Directory (AD) instance that the file system should join when it's created.</p>"
+        },
+        "SelfManagedActiveDirectoryConfiguration": {
+          "shape": "SelfManagedActiveDirectoryConfiguration"
         },
         "ThroughputCapacity": {
           "shape": "MegabytesPerSecond",
-          "documentation": "<p>The throughput of an Amazon FSx file system, measured in megabytes per second.</p>"
+          "documentation": "<p>The throughput of an Amazon FSx file system, measured in megabytes per second, in 2 to the <i>n</i>th increments, between 2^3 (8) and 2^11 (2048).</p>"
         },
         "WeeklyMaintenanceStartTime": {
           "shape": "WeeklyTime",
-          "documentation": "<p>The preferred start time to perform weekly maintenance, in the UTC time zone.</p>"
+          "documentation": "<p>The preferred start time to perform weekly maintenance, formatted d:HH:MM in the UTC time zone.</p>"
         },
         "DailyAutomaticBackupStartTime": {
           "shape": "DailyTime",
-          "documentation": "<p>The preferred time to take daily automatic backups, in the UTC time zone.</p>"
+          "documentation": "<p>The preferred time to take daily automatic backups, formatted HH:MM in the UTC time zone.</p>"
         },
         "AutomaticBackupRetentionDays": {
           "shape": "AutomaticBackupRetentionDays",
@@ -688,7 +718,7 @@
         },
         "CopyTagsToBackups": {
           "shape": "Flag",
-          "documentation": "<p>A boolean flag indicating whether tags on the file system should be copied to backups. This value defaults to false. If it's set to true, all tags on the file system are copied to all automatic backups and any user-initiated backups where the user doesn't specify any tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups.</p>"
+          "documentation": "<p>A boolean flag indicating whether tags for the file system should be copied to backups. This value defaults to false. If it's set to true, all tags for the file system are copied to all automatic and user-initiated backups where the user doesn't specify tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups.</p>"
         }
       },
       "documentation": "<p>The configuration object for the Microsoft Windows file system used in <code>CreateFileSystem</code> and <code>CreateFileSystemFromBackup</code> operations.</p>"
@@ -901,6 +931,25 @@
       "min": 12,
       "pattern": "^d-[0-9a-f]{10}$"
     },
+    "DirectoryPassword": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "sensitive": true
+    },
+    "DirectoryUserName": {
+      "type": "string",
+      "max": 256,
+      "min": 1
+    },
+    "DnsIps": {
+      "type": "list",
+      "member": {
+        "shape": "IpAddress"
+      },
+      "max": 2,
+      "min": 1
+    },
     "ErrorMessage": {
       "type": "string",
       "documentation": "<p>A detailed error message.</p>",
@@ -912,7 +961,7 @@
       "members": {
         "OwnerId": {
           "shape": "AWSAccountId",
-          "documentation": "<p>The AWS account that created the file system. If the file system was created by an IAM user, the AWS account to which the IAM user belongs is the owner.</p>"
+          "documentation": "<p>The AWS account that created the file system. If the file system was created by an AWS Identity and Access Management (IAM) user, the AWS account to which the IAM user belongs is the owner.</p>"
         },
         "CreationTime": {
           "shape": "CreationTime",
@@ -920,22 +969,22 @@
         },
         "FileSystemId": {
           "shape": "FileSystemId",
-          "documentation": "<p>The eight-digit ID of the file system that was automatically assigned by Amazon FSx.</p>"
+          "documentation": "<p>The system-generated, unique 17-digit ID of the file system.</p>"
         },
         "FileSystemType": {
           "shape": "FileSystemType",
-          "documentation": "<p>Type of file system. Currently the only supported type is WINDOWS.</p>"
+          "documentation": "<p>The type of Amazon FSx file system, either <code>LUSTRE</code> or <code>WINDOWS</code>.</p>"
         },
         "Lifecycle": {
           "shape": "FileSystemLifecycle",
-          "documentation": "<p>The lifecycle status of the file system.</p>"
+          "documentation": "<p>The lifecycle status of the file system:</p> <ul> <li> <p> <code>AVAILABLE</code> indicates that the file system is reachable and available for use.</p> </li> <li> <p> <code>CREATING</code> indicates that Amazon FSx is in the process of creating the new file system.</p> </li> <li> <p> <code>DELETING</code> indicates that Amazon FSx is in the process of deleting the file system.</p> </li> <li> <p> <code>FAILED</code> indicates that Amazon FSx was not able to create the file system.</p> </li> <li> <p> <code>MISCONFIGURED</code> indicates that the file system is in a failed but recoverable state.</p> </li> <li> <p> <code>UPDATING</code> indicates that the file system is undergoing a customer initiated update.</p> </li> </ul>"
         },
         "FailureDetails": {
           "shape": "FileSystemFailureDetails"
         },
         "StorageCapacity": {
           "shape": "StorageCapacity",
-          "documentation": "<p>The storage capacity of the file system in gigabytes.</p>"
+          "documentation": "<p>The storage capacity of the file system in gigabytes (GB).</p>"
         },
         "VpcId": {
           "shape": "VpcId",
@@ -943,11 +992,11 @@
         },
         "SubnetIds": {
           "shape": "SubnetIds",
-          "documentation": "<p>The IDs of the subnets to contain the endpoint for the file system. One and only one is supported. The file system is launched in the Availability Zone associated with this subnet.</p>"
+          "documentation": "<p>The ID of the subnet to contain the endpoint for the file system. One and only one is supported. The file system is launched in the Availability Zone associated with this subnet.</p>"
         },
         "NetworkInterfaceIds": {
           "shape": "NetworkInterfaceIds",
-          "documentation": "<p>The IDs of the elastic network interface from which a specific file system is accessible. The elastic network interface is automatically created in the same VPC that the Amazon FSx file system was created in. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html\">Elastic Network Interfaces</a> in the <i>Amazon EC2 User Guide.</i> </p> <p>For an Amazon FSx for Windows File Server file system, you can have one network interface Id. For an Amazon FSx for Lustre file system, you can have more than one.</p>"
+          "documentation": "<p>The IDs of the elastic network interface from which a specific file system is accessible. The elastic network interface is automatically created in the same VPC that the Amazon FSx file system was created in. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html\">Elastic Network Interfaces</a> in the <i>Amazon EC2 User Guide.</i> </p> <p>For an Amazon FSx for Windows File Server file system, you can have one network interface ID. For an Amazon FSx for Lustre file system, you can have more than one.</p>"
         },
         "DNSName": {
           "shape": "DNSName",
@@ -959,7 +1008,7 @@
         },
         "ResourceARN": {
           "shape": "ResourceARN",
-          "documentation": "<p>The resource ARN of the file system.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) for the file system resource.</p>"
         },
         "Tags": {
           "shape": "Tags",
@@ -975,15 +1024,20 @@
       },
       "documentation": "<p>A description of a specific Amazon FSx file system.</p>"
     },
+    "FileSystemAdministratorsGroupName": {
+      "type": "string",
+      "max": 256,
+      "min": 1
+    },
     "FileSystemFailureDetails": {
       "type": "structure",
       "members": {
         "Message": {
           "shape": "ErrorMessage",
-          "documentation": "<p>Message describing the failures that occurred during file system creation.</p>"
+          "documentation": "<p>A message describing any failures that occurred during file system creation.</p>"
         }
       },
-      "documentation": "<p>Structure providing details of any failures that occur when creating the file system has failed.</p>"
+      "documentation": "<p>A structure providing details of any failures that occur when creating the file system has failed.</p>"
     },
     "FileSystemId": {
       "type": "string",
@@ -1007,7 +1061,9 @@
         "AVAILABLE",
         "CREATING",
         "FAILED",
-        "DELETING"
+        "DELETING",
+        "MISCONFIGURED",
+        "UPDATING"
       ]
     },
     "FileSystemMaintenanceOperation": {
@@ -1090,6 +1146,10 @@
     "Flag": {
       "type": "boolean"
     },
+    "IpAddress": {
+      "type": "string",
+      "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+    },
     "KmsKeyId": {
       "type": "string",
       "documentation": "<p>The ID of your AWS Key Management Service (AWS KMS) key. This ID is used to encrypt the data in your file system at rest. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html\">Encrypt</a> in the <i>AWS Key Management Service API Reference</i>.</p>",
@@ -1157,7 +1217,7 @@
     },
     "MegabytesPerSecond": {
       "type": "integer",
-      "documentation": "<p>MBps sustained throughput of an Amazon FSx file system.</p>",
+      "documentation": "<p>Sustained throughput of an Amazon FSx file system in MBps.</p>",
       "max": 2048,
       "min": 8
     },
@@ -1182,6 +1242,11 @@
       "max": 255,
       "min": 1,
       "pattern": "^(?:[A-Za-z0-9+\\/]{4})*(?:[A-Za-z0-9+\\/]{2}==|[A-Za-z0-9+\\/]{3}=)?$"
+    },
+    "OrganizationalUnitDistinguishedName": {
+      "type": "string",
+      "max": 2000,
+      "min": 1
     },
     "ProgressPercent": {
       "type": "integer",
@@ -1210,6 +1275,86 @@
       },
       "documentation": "<p>A list of security group IDs.</p>",
       "max": 50
+    },
+    "SelfManagedActiveDirectoryAttributes": {
+      "type": "structure",
+      "members": {
+        "DomainName": {
+          "shape": "ActiveDirectoryFullyQualifiedName",
+          "documentation": "<p>The fully qualified domain name of the self-managed AD directory.</p>"
+        },
+        "OrganizationalUnitDistinguishedName": {
+          "shape": "OrganizationalUnitDistinguishedName",
+          "documentation": "<p>The fully qualified distinguished name of the organizational unit within the self-managed AD directory to which the Windows File Server instance is joined.</p>"
+        },
+        "FileSystemAdministratorsGroup": {
+          "shape": "FileSystemAdministratorsGroupName",
+          "documentation": "<p>The name of the domain group whose members have administrative privileges for the FSx file system.</p>"
+        },
+        "UserName": {
+          "shape": "DirectoryUserName",
+          "documentation": "<p>The user name for the service account on your self-managed AD domain that FSx uses to join to your AD domain.</p>"
+        },
+        "DnsIps": {
+          "shape": "DnsIps",
+          "documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory.</p>"
+        }
+      },
+      "documentation": "<p>The configuration of the self-managed Microsoft Active Directory (AD) directory to which the Windows File Server instance is joined.</p>"
+    },
+    "SelfManagedActiveDirectoryConfiguration": {
+      "type": "structure",
+      "required": [
+        "DomainName",
+        "UserName",
+        "Password",
+        "DnsIps"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "ActiveDirectoryFullyQualifiedName",
+          "documentation": "<p>The fully qualified domain name of the self-managed AD directory, such as <code>corp.example.com</code>.</p>"
+        },
+        "OrganizationalUnitDistinguishedName": {
+          "shape": "OrganizationalUnitDistinguishedName",
+          "documentation": "<p>(Optional) The fully qualified distinguished name of the organizational unit within your self-managed AD directory that the Windows File Server instance will join. Amazon FSx only accepts OU as the direct parent of the file system. An example is <code>OU=FSx,DC=yourdomain,DC=corp,DC=com</code>. To learn more, see <a href=\"https://tools.ietf.org/html/rfc2253\">RFC 2253</a>. If none is provided, the FSx file system is created in the default location of your self-managed AD directory. </p> <important> <p>Only Organizational Unit (OU) objects can be the direct parent of the file system that you're creating.</p> </important>"
+        },
+        "FileSystemAdministratorsGroup": {
+          "shape": "FileSystemAdministratorsGroupName",
+          "documentation": "<p>(Optional) The name of the domain group whose members are granted administrative privileges for the file system. Administrative privileges include taking ownership of files and folders, and setting audit controls (audit ACLs) on files and folders. The group that you specify must already exist in your domain. If you don't provide one, your AD domain's Domain Admins group is used.</p>"
+        },
+        "UserName": {
+          "shape": "DirectoryUserName",
+          "documentation": "<p>The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. This account must have the permission to join computers to the domain in the organizational unit provided in <code>OrganizationalUnitDistinguishedName</code>, or in the default location of your AD domain.</p>"
+        },
+        "Password": {
+          "shape": "DirectoryPassword",
+          "documentation": "<p>The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.</p>"
+        },
+        "DnsIps": {
+          "shape": "DnsIps",
+          "documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the one in which your Amazon FSx file system is being created, or in the private IP version 4 (Iv4) address ranges, as specified in <a href=\"http://www.faqs.org/rfcs/rfc1918.html\">RFC 1918</a>:</p> <ul> <li> <p>10.0.0.0 - 10.255.255.255 (10/8 prefix)</p> </li> <li> <p>172.16.0.0 - 172.31.255.255 (172.16/12 prefix)</p> </li> <li> <p>192.168.0.0 - 192.168.255.255 (192.168/16 prefix)</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>The configuration that Amazon FSx uses to join the Windows File Server instance to your self-managed (including on-premises) Microsoft Active Directory (AD) directory.</p>"
+    },
+    "SelfManagedActiveDirectoryConfigurationUpdates": {
+      "type": "structure",
+      "members": {
+        "UserName": {
+          "shape": "DirectoryUserName",
+          "documentation": "<p>The user name for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain. This account must have the permission to join computers to the domain in the organizational unit provided in <code>OrganizationalUnitDistinguishedName</code>.</p>"
+        },
+        "Password": {
+          "shape": "DirectoryPassword",
+          "documentation": "<p>The password for the service account on your self-managed AD domain that Amazon FSx will use to join to your AD domain.</p>"
+        },
+        "DnsIps": {
+          "shape": "DnsIps",
+          "documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory.</p>"
+        }
+      },
+      "documentation": "<p>The configuration that Amazon FSx uses to join the Windows File Server instance to the self-managed Microsoft Active Directory (AD) directory.</p>"
     },
     "StorageCapacity": {
       "type": "integer",
@@ -1347,7 +1492,7 @@
         },
         "WindowsConfiguration": {
           "shape": "UpdateFileSystemWindowsConfiguration",
-          "documentation": "<p>The configuration for this Microsoft Windows file system. The only supported options are for backup and maintenance.</p>"
+          "documentation": "<p>The configuration update for this Microsoft Windows file system. The only supported options are for backup and maintenance and for self-managed Active Directory configuration.</p>"
         },
         "LustreConfiguration": {
           "shape": "UpdateFileSystemLustreConfiguration"
@@ -1360,7 +1505,7 @@
       "members": {
         "FileSystem": {
           "shape": "FileSystem",
-          "documentation": "<p>A description of the file system.</p>"
+          "documentation": "<p>A description of the file system that was updated.</p>"
         }
       },
       "documentation": "<p>The response object for the <code>UpdateFileSystem</code> operation.</p>"
@@ -1379,9 +1524,13 @@
         "AutomaticBackupRetentionDays": {
           "shape": "AutomaticBackupRetentionDays",
           "documentation": "<p>The number of days to retain automatic backups. Setting this to 0 disables automatic backups. You can retain automatic backups for a maximum of 35 days.</p>"
+        },
+        "SelfManagedActiveDirectoryConfiguration": {
+          "shape": "SelfManagedActiveDirectoryConfigurationUpdates",
+          "documentation": "<p>The configuration Amazon FSx uses to join the Windows File Server instance to the self-managed Microsoft AD directory.</p>"
         }
       },
-      "documentation": "<p>The configuration object for the Microsoft Windows file system used in the <code>UpdateFileSystem</code> operation.</p>"
+      "documentation": "<p>Updates the Microsoft Windows configuration for an existing Amazon FSx for Windows File Server file system. Amazon FSx overwrites existing properties with non-null values provided in the request. If you don't specify a non-null value for a property, that property is not updated.</p>"
     },
     "VpcId": {
       "type": "string",
@@ -1403,6 +1552,9 @@
         "ActiveDirectoryId": {
           "shape": "DirectoryId",
           "documentation": "<p>The ID for an existing Microsoft Active Directory instance that the file system should join when it's created.</p>"
+        },
+        "SelfManagedActiveDirectoryConfiguration": {
+          "shape": "SelfManagedActiveDirectoryAttributes"
         },
         "ThroughputCapacity": {
           "shape": "MegabytesPerSecond",

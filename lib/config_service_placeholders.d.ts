@@ -182,6 +182,8 @@ export abstract class ConfigurationServicePlaceholders {
   personalize?: AWS.Personalize.Types.ClientConfiguration;
   personalizeevents?: AWS.PersonalizeEvents.Types.ClientConfiguration;
   personalizeruntime?: AWS.PersonalizeRuntime.Types.ClientConfiguration;
+  applicationinsights?: AWS.ApplicationInsights.Types.ClientConfiguration;
+  servicequotas?: AWS.ServiceQuotas.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -366,4 +368,6 @@ export interface ConfigurationServiceApiVersions {
   personalize?: AWS.Personalize.Types.apiVersion;
   personalizeevents?: AWS.PersonalizeEvents.Types.apiVersion;
   personalizeruntime?: AWS.PersonalizeRuntime.Types.apiVersion;
+  applicationinsights?: AWS.ApplicationInsights.Types.apiVersion;
+  servicequotas?: AWS.ServiceQuotas.Types.apiVersion;
 }

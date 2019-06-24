@@ -1734,9 +1734,23 @@ declare namespace ApiGatewayV2 {
      * The Amazon Route 53 Hosted Zone ID of the endpoint.
      */
     HostedZoneId?: __string;
+    /**
+     * The Transport Layer Security (TLS) version of the security policy for this domain name. The valid values are TLS_1_0 and TLS_1_2.
+     */
+    SecurityPolicy?: SecurityPolicy;
+    /**
+     * The status of the domain name migration. The valid values are AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.
+     */
+    DomainNameStatus?: DomainNameStatus;
+    /**
+     * An optional text message containing detailed information about status of the domain name migration.
+     */
+    DomainNameStatusMessage?: __string;
   }
   export type DomainNameConfigurations = DomainNameConfiguration[];
   export type EndpointType = "REGIONAL"|"EDGE"|string;
+  export type SecurityPolicy = "TLS_1_0"|"TLS_1_2"|string;
+  export type DomainNameStatus = "AVAILABLE"|"UPDATING"|string;
   export interface GetApiMappingRequest {
     /**
      * The API mapping identifier.
