@@ -581,6 +581,38 @@ declare class EC2 extends Service {
    */
   createTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Creates a Traffic Mirror filter. A Traffic Mirror filter is a set of rules that defines the traffic to mirror. By default, no traffic is mirrored. To mirror traffic, use CreateTrafficMirrorFilterRule to add Traffic Mirror rules to the filter. The rules you add define what traffic gets mirrored. You can also use ModifyTrafficMirrorFilterNetworkServices to mirror supported network services.
+   */
+  createTrafficMirrorFilter(params: EC2.Types.CreateTrafficMirrorFilterRequest, callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorFilterResult) => void): Request<EC2.Types.CreateTrafficMirrorFilterResult, AWSError>;
+  /**
+   * Creates a Traffic Mirror filter. A Traffic Mirror filter is a set of rules that defines the traffic to mirror. By default, no traffic is mirrored. To mirror traffic, use CreateTrafficMirrorFilterRule to add Traffic Mirror rules to the filter. The rules you add define what traffic gets mirrored. You can also use ModifyTrafficMirrorFilterNetworkServices to mirror supported network services.
+   */
+  createTrafficMirrorFilter(callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorFilterResult) => void): Request<EC2.Types.CreateTrafficMirrorFilterResult, AWSError>;
+  /**
+   * Creates a Traffic Mirror rule.  A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror. You need the Traffic Mirror filter ID when you create the rule.
+   */
+  createTrafficMirrorFilterRule(params: EC2.Types.CreateTrafficMirrorFilterRuleRequest, callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorFilterRuleResult) => void): Request<EC2.Types.CreateTrafficMirrorFilterRuleResult, AWSError>;
+  /**
+   * Creates a Traffic Mirror rule.  A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror. You need the Traffic Mirror filter ID when you create the rule.
+   */
+  createTrafficMirrorFilterRule(callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorFilterRuleResult) => void): Request<EC2.Types.CreateTrafficMirrorFilterRuleResult, AWSError>;
+  /**
+   * Creates a Traffic Mirror session. A Traffic Mirror session actively copies packets from a Traffic Mirror source to a Traffic Mirror target. Create a filter, and then assign it to the session to define a subset of the traffic to mirror, for example all TCP traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in a different VPC connected via VPC peering or a transit gateway.  By default, no traffic is mirrored. Use CreateTrafficMirrorFilter to create filter rules that specify the traffic to mirror.
+   */
+  createTrafficMirrorSession(params: EC2.Types.CreateTrafficMirrorSessionRequest, callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorSessionResult) => void): Request<EC2.Types.CreateTrafficMirrorSessionResult, AWSError>;
+  /**
+   * Creates a Traffic Mirror session. A Traffic Mirror session actively copies packets from a Traffic Mirror source to a Traffic Mirror target. Create a filter, and then assign it to the session to define a subset of the traffic to mirror, for example all TCP traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in a different VPC connected via VPC peering or a transit gateway.  By default, no traffic is mirrored. Use CreateTrafficMirrorFilter to create filter rules that specify the traffic to mirror.
+   */
+  createTrafficMirrorSession(callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorSessionResult) => void): Request<EC2.Types.CreateTrafficMirrorSessionResult, AWSError>;
+  /**
+   * Creates a target for your Traffic Mirror session. A Traffic Mirror target is the destination for mirrored traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in different VPCs connected via VPC peering or a transit gateway. A Traffic Mirror target can be a network interface, or a Network Load Balancer. To use the target in a Traffic Mirror session, use CreateTrafficMirrorSession.
+   */
+  createTrafficMirrorTarget(params: EC2.Types.CreateTrafficMirrorTargetRequest, callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorTargetResult) => void): Request<EC2.Types.CreateTrafficMirrorTargetResult, AWSError>;
+  /**
+   * Creates a target for your Traffic Mirror session. A Traffic Mirror target is the destination for mirrored traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in different VPCs connected via VPC peering or a transit gateway. A Traffic Mirror target can be a network interface, or a Network Load Balancer. To use the target in a Traffic Mirror session, use CreateTrafficMirrorSession.
+   */
+  createTrafficMirrorTarget(callback?: (err: AWSError, data: EC2.Types.CreateTrafficMirrorTargetResult) => void): Request<EC2.Types.CreateTrafficMirrorTargetResult, AWSError>;
+  /**
    * Creates a transit gateway. You can use a transit gateway to interconnect your virtual private clouds (VPC) and on-premises networks. After the transit gateway enters the available state, you can attach your VPCs and VPN connections to the transit gateway. To attach your VPCs, use CreateTransitGatewayVpcAttachment. To attach a VPN connection, use CreateCustomerGateway to create a customer gateway and specify the ID of the customer gateway and the ID of the transit gateway in a call to CreateVpnConnection. When you create a transit gateway, we create a default transit gateway route table and use it as the default association route table and the default propagation route table. You can use CreateTransitGatewayRouteTable to create additional transit gateway route tables. If you disable automatic route propagation, we do not create a default transit gateway route table. You can use EnableTransitGatewayRouteTablePropagation to propagate routes from a resource attachment to a transit gateway route table. If you disable automatic associations, you can use AssociateTransitGatewayRouteTable to associate a resource attachment with a transit gateway route table.
    */
   createTransitGateway(params: EC2.Types.CreateTransitGatewayRequest, callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayResult) => void): Request<EC2.Types.CreateTransitGatewayResult, AWSError>;
@@ -661,11 +693,11 @@ declare class EC2 extends Service {
    */
   createVpcPeeringConnection(callback?: (err: AWSError, data: EC2.Types.CreateVpcPeeringConnectionResult) => void): Request<EC2.Types.CreateVpcPeeringConnectionResult, AWSError>;
   /**
-   * Creates a VPN connection between an existing virtual private gateway and a VPN customer gateway. The supported connection types are ipsec.1 and ipsec.2. The response includes information that you need to give to your network administrator to configure your customer gateway.  We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway.  If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call. This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
+   * Creates a VPN connection between an existing virtual private gateway and a VPN customer gateway. The supported connection types is ipsec.1. The response includes information that you need to give to your network administrator to configure your customer gateway.  We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway.  If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call. This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
    */
   createVpnConnection(params: EC2.Types.CreateVpnConnectionRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpnConnectionResult) => void): Request<EC2.Types.CreateVpnConnectionResult, AWSError>;
   /**
-   * Creates a VPN connection between an existing virtual private gateway and a VPN customer gateway. The supported connection types are ipsec.1 and ipsec.2. The response includes information that you need to give to your network administrator to configure your customer gateway.  We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway.  If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call. This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
+   * Creates a VPN connection between an existing virtual private gateway and a VPN customer gateway. The supported connection types is ipsec.1. The response includes information that you need to give to your network administrator to configure your customer gateway.  We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway.  If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call. This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
    */
   createVpnConnection(callback?: (err: AWSError, data: EC2.Types.CreateVpnConnectionResult) => void): Request<EC2.Types.CreateVpnConnectionResult, AWSError>;
   /**
@@ -884,6 +916,38 @@ declare class EC2 extends Service {
    * Deletes the specified set of tags from the specified set of resources. To list the current tags, use DescribeTags. For more information about tags, see Tagging Your Resources in the Amazon Elastic Compute Cloud User Guide.
    */
   deleteTags(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified Traffic Mirror filter. You cannot delete a Traffic Mirror filter that is in use by a Traffic Mirror session.
+   */
+  deleteTrafficMirrorFilter(params: EC2.Types.DeleteTrafficMirrorFilterRequest, callback?: (err: AWSError, data: EC2.Types.DeleteTrafficMirrorFilterResult) => void): Request<EC2.Types.DeleteTrafficMirrorFilterResult, AWSError>;
+  /**
+   * Deletes the specified Traffic Mirror filter. You cannot delete a Traffic Mirror filter that is in use by a Traffic Mirror session.
+   */
+  deleteTrafficMirrorFilter(callback?: (err: AWSError, data: EC2.Types.DeleteTrafficMirrorFilterResult) => void): Request<EC2.Types.DeleteTrafficMirrorFilterResult, AWSError>;
+  /**
+   * Deletes the specified Traffic Mirror rule.
+   */
+  deleteTrafficMirrorFilterRule(params: EC2.Types.DeleteTrafficMirrorFilterRuleRequest, callback?: (err: AWSError, data: EC2.Types.DeleteTrafficMirrorFilterRuleResult) => void): Request<EC2.Types.DeleteTrafficMirrorFilterRuleResult, AWSError>;
+  /**
+   * Deletes the specified Traffic Mirror rule.
+   */
+  deleteTrafficMirrorFilterRule(callback?: (err: AWSError, data: EC2.Types.DeleteTrafficMirrorFilterRuleResult) => void): Request<EC2.Types.DeleteTrafficMirrorFilterRuleResult, AWSError>;
+  /**
+   * Deletes the specified Traffic Mirror session.
+   */
+  deleteTrafficMirrorSession(params: EC2.Types.DeleteTrafficMirrorSessionRequest, callback?: (err: AWSError, data: EC2.Types.DeleteTrafficMirrorSessionResult) => void): Request<EC2.Types.DeleteTrafficMirrorSessionResult, AWSError>;
+  /**
+   * Deletes the specified Traffic Mirror session.
+   */
+  deleteTrafficMirrorSession(callback?: (err: AWSError, data: EC2.Types.DeleteTrafficMirrorSessionResult) => void): Request<EC2.Types.DeleteTrafficMirrorSessionResult, AWSError>;
+  /**
+   * Deletes the specified Traffic Mirror target. You cannot delete a Traffic Mirror target that is in use by a Traffic Mirror session.
+   */
+  deleteTrafficMirrorTarget(params: EC2.Types.DeleteTrafficMirrorTargetRequest, callback?: (err: AWSError, data: EC2.Types.DeleteTrafficMirrorTargetResult) => void): Request<EC2.Types.DeleteTrafficMirrorTargetResult, AWSError>;
+  /**
+   * Deletes the specified Traffic Mirror target. You cannot delete a Traffic Mirror target that is in use by a Traffic Mirror session.
+   */
+  deleteTrafficMirrorTarget(callback?: (err: AWSError, data: EC2.Types.DeleteTrafficMirrorTargetResult) => void): Request<EC2.Types.DeleteTrafficMirrorTargetResult, AWSError>;
   /**
    * Deletes the specified transit gateway.
    */
@@ -1597,6 +1661,30 @@ declare class EC2 extends Service {
    */
   describeTags(callback?: (err: AWSError, data: EC2.Types.DescribeTagsResult) => void): Request<EC2.Types.DescribeTagsResult, AWSError>;
   /**
+   * Describes one or more Traffic Mirror filters.
+   */
+  describeTrafficMirrorFilters(params: EC2.Types.DescribeTrafficMirrorFiltersRequest, callback?: (err: AWSError, data: EC2.Types.DescribeTrafficMirrorFiltersResult) => void): Request<EC2.Types.DescribeTrafficMirrorFiltersResult, AWSError>;
+  /**
+   * Describes one or more Traffic Mirror filters.
+   */
+  describeTrafficMirrorFilters(callback?: (err: AWSError, data: EC2.Types.DescribeTrafficMirrorFiltersResult) => void): Request<EC2.Types.DescribeTrafficMirrorFiltersResult, AWSError>;
+  /**
+   * Describes one or more Traffic Mirror sessions. By default, all Traffic Mirror sessions are described. Alternatively, you can filter the results.
+   */
+  describeTrafficMirrorSessions(params: EC2.Types.DescribeTrafficMirrorSessionsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeTrafficMirrorSessionsResult) => void): Request<EC2.Types.DescribeTrafficMirrorSessionsResult, AWSError>;
+  /**
+   * Describes one or more Traffic Mirror sessions. By default, all Traffic Mirror sessions are described. Alternatively, you can filter the results.
+   */
+  describeTrafficMirrorSessions(callback?: (err: AWSError, data: EC2.Types.DescribeTrafficMirrorSessionsResult) => void): Request<EC2.Types.DescribeTrafficMirrorSessionsResult, AWSError>;
+  /**
+   * Information about one or more Traffic Mirror targets.
+   */
+  describeTrafficMirrorTargets(params: EC2.Types.DescribeTrafficMirrorTargetsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeTrafficMirrorTargetsResult) => void): Request<EC2.Types.DescribeTrafficMirrorTargetsResult, AWSError>;
+  /**
+   * Information about one or more Traffic Mirror targets.
+   */
+  describeTrafficMirrorTargets(callback?: (err: AWSError, data: EC2.Types.DescribeTrafficMirrorTargetsResult) => void): Request<EC2.Types.DescribeTrafficMirrorTargetsResult, AWSError>;
+  /**
    * Describes one or more attachments between resources and transit gateways. By default, all attachments are described. Alternatively, you can filter the results by attachment ID, attachment state, resource ID, or resource owner.
    */
   describeTransitGatewayAttachments(params: EC2.Types.DescribeTransitGatewayAttachmentsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewayAttachmentsResult) => void): Request<EC2.Types.DescribeTransitGatewayAttachmentsResult, AWSError>;
@@ -2268,6 +2356,30 @@ declare class EC2 extends Service {
    * Modifies a subnet attribute. You can only modify one attribute at a time.
    */
   modifySubnetAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Allows or restricts mirroring network services.  By default, Amazon DNS network services are not eligible for Traffic Mirror. Use AddNetworkServices to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored. When you no longer want to mirror network services, use RemoveNetworkServices to remove the network services from the Traffic Mirror filter.  FFor information about filter rule properties, see Network Services in the Traffic Mirroring User Guide .
+   */
+  modifyTrafficMirrorFilterNetworkServices(params: EC2.Types.ModifyTrafficMirrorFilterNetworkServicesRequest, callback?: (err: AWSError, data: EC2.Types.ModifyTrafficMirrorFilterNetworkServicesResult) => void): Request<EC2.Types.ModifyTrafficMirrorFilterNetworkServicesResult, AWSError>;
+  /**
+   * Allows or restricts mirroring network services.  By default, Amazon DNS network services are not eligible for Traffic Mirror. Use AddNetworkServices to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored. When you no longer want to mirror network services, use RemoveNetworkServices to remove the network services from the Traffic Mirror filter.  FFor information about filter rule properties, see Network Services in the Traffic Mirroring User Guide .
+   */
+  modifyTrafficMirrorFilterNetworkServices(callback?: (err: AWSError, data: EC2.Types.ModifyTrafficMirrorFilterNetworkServicesResult) => void): Request<EC2.Types.ModifyTrafficMirrorFilterNetworkServicesResult, AWSError>;
+  /**
+   * Modifies the specified Traffic Mirror rule.  DestinationCidrBlock and SourceCidrBlock must both be an IPv4 range or an IPv6 range.
+   */
+  modifyTrafficMirrorFilterRule(params: EC2.Types.ModifyTrafficMirrorFilterRuleRequest, callback?: (err: AWSError, data: EC2.Types.ModifyTrafficMirrorFilterRuleResult) => void): Request<EC2.Types.ModifyTrafficMirrorFilterRuleResult, AWSError>;
+  /**
+   * Modifies the specified Traffic Mirror rule.  DestinationCidrBlock and SourceCidrBlock must both be an IPv4 range or an IPv6 range.
+   */
+  modifyTrafficMirrorFilterRule(callback?: (err: AWSError, data: EC2.Types.ModifyTrafficMirrorFilterRuleResult) => void): Request<EC2.Types.ModifyTrafficMirrorFilterRuleResult, AWSError>;
+  /**
+   * Modifies a Traffic Mirror session.
+   */
+  modifyTrafficMirrorSession(params: EC2.Types.ModifyTrafficMirrorSessionRequest, callback?: (err: AWSError, data: EC2.Types.ModifyTrafficMirrorSessionResult) => void): Request<EC2.Types.ModifyTrafficMirrorSessionResult, AWSError>;
+  /**
+   * Modifies a Traffic Mirror session.
+   */
+  modifyTrafficMirrorSession(callback?: (err: AWSError, data: EC2.Types.ModifyTrafficMirrorSessionResult) => void): Request<EC2.Types.ModifyTrafficMirrorSessionResult, AWSError>;
   /**
    * Modifies the specified VPC attachment.
    */
@@ -5756,6 +5868,182 @@ declare namespace EC2 {
      */
     Tags: TagList;
   }
+  export interface CreateTrafficMirrorFilterRequest {
+    /**
+     * The description of the Traffic Mirror filter.
+     */
+    Description?: String;
+    /**
+     * The tags to assign to a Traffic Mirror filter.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface CreateTrafficMirrorFilterResult {
+    /**
+     * Information about the Traffic Mirror filter.
+     */
+    TrafficMirrorFilter?: TrafficMirrorFilter;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface CreateTrafficMirrorFilterRuleRequest {
+    /**
+     * The ID of the filter that this rule is associated with.
+     */
+    TrafficMirrorFilterId: String;
+    /**
+     * The type of traffic (ingress | egress).
+     */
+    TrafficDirection: TrafficDirection;
+    /**
+     * The number of the Traffic Mirror rule. This number must be unique for each Traffic Mirror rule in a given direction. The rules are processed in ascending order by rule number.
+     */
+    RuleNumber: Integer;
+    /**
+     * The action to take (accept | reject) on the filtered traffic.
+     */
+    RuleAction: TrafficMirrorRuleAction;
+    /**
+     * The destination port range.
+     */
+    DestinationPortRange?: TrafficMirrorPortRangeRequest;
+    /**
+     * The source port range.
+     */
+    SourcePortRange?: TrafficMirrorPortRangeRequest;
+    /**
+     * The protocol, for example UDP, to assign to the Traffic Mirror rule. For information about the protocol value, see Protocol Numbers on the Internet Assigned Numbers Authority (IANA) website.
+     */
+    Protocol?: Integer;
+    /**
+     * The destination CIDR block to assign to the Traffic Mirror rule.
+     */
+    DestinationCidrBlock: String;
+    /**
+     * The source CIDR block to assign to the Traffic Mirror rule.
+     */
+    SourceCidrBlock: String;
+    /**
+     * The description of the Traffic Mirror rule.
+     */
+    Description?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface CreateTrafficMirrorFilterRuleResult {
+    /**
+     * The Traffic Mirror rule.
+     */
+    TrafficMirrorFilterRule?: TrafficMirrorFilterRule;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface CreateTrafficMirrorSessionRequest {
+    /**
+     * The ID of the source network interface.
+     */
+    NetworkInterfaceId: String;
+    /**
+     * The ID of the Traffic Mirror target.
+     */
+    TrafficMirrorTargetId: String;
+    /**
+     * The ID of the Traffic Mirror filter.
+     */
+    TrafficMirrorFilterId: String;
+    /**
+     * The number of bytes in each packet to mirror. These are bytes after the VXLAN header. Do not specify this parameter when you want to mirror the entire packet. To mirror a subset of the packet, set this to the length (in bytes) that you want to mirror. For example, if you set this value to 1network0, then the first 100 bytes that meet the filter criteria are copied to the target. If you do not want to mirror the entire packet, use the PacketLength parameter to specify the number of bytes in each packet to mirror.
+     */
+    PacketLength?: Integer;
+    /**
+     * The session number determines the order in which sessions are evaluated when an interface is used by multiple sessions. The first session with a matching filter is the one that mirrors the packets. Valid values are 1-32766.
+     */
+    SessionNumber: Integer;
+    /**
+     * The VXLAN ID for the Traffic Mirror session. For more information about the VXLAN protocol, see RFC 7348. If you do not specify a VirtualNetworkId, an account-wide unique id is chosen at random.
+     */
+    VirtualNetworkId?: Integer;
+    /**
+     * The description of the Traffic Mirror session.
+     */
+    Description?: String;
+    /**
+     * The tags to assign to a Traffic Mirror session.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface CreateTrafficMirrorSessionResult {
+    /**
+     * Information about the Traffic Mirror session.
+     */
+    TrafficMirrorSession?: TrafficMirrorSession;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface CreateTrafficMirrorTargetRequest {
+    /**
+     * The network interface ID that is associated with the target.
+     */
+    NetworkInterfaceId?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the Network Load Balancer that is associated with the target.
+     */
+    NetworkLoadBalancerArn?: String;
+    /**
+     * The description of the Traffic Mirror target.
+     */
+    Description?: String;
+    /**
+     * The tags to assign to the Traffic Mirror target.
+     */
+    TagSpecifications?: TagSpecificationList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     */
+    ClientToken?: String;
+  }
+  export interface CreateTrafficMirrorTargetResult {
+    /**
+     * Information about the Traffic Mirror target.
+     */
+    TrafficMirrorTarget?: TrafficMirrorTarget;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     */
+    ClientToken?: String;
+  }
   export interface CreateTransitGatewayRequest {
     /**
      * A description of the transit gateway.
@@ -6103,7 +6391,7 @@ declare namespace EC2 {
      */
     CustomerGatewayId: String;
     /**
-     * The type of VPN connection (ipsec.1 | ipsec.2).
+     * The type of VPN connection (ipsec.1).
      */
     Type: String;
     /**
@@ -6641,6 +6929,70 @@ declare namespace EC2 {
      * The tags to delete. Specify a tag key and an optional tag value to delete specific tags. If you specify a tag key without a tag value, we delete any tag with this key regardless of its value. If you specify a tag key with an empty string as the tag value, we delete the tag only if its value is an empty string. If you omit this parameter, we delete all user-defined tags for the specified resources. We do not delete AWS-generated tags (tags that have the aws: prefix).
      */
     Tags?: TagList;
+  }
+  export interface DeleteTrafficMirrorFilterRequest {
+    /**
+     * The ID of the Traffic Mirror filter.
+     */
+    TrafficMirrorFilterId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteTrafficMirrorFilterResult {
+    /**
+     * The ID of the Traffic Mirror filter.
+     */
+    TrafficMirrorFilterId?: String;
+  }
+  export interface DeleteTrafficMirrorFilterRuleRequest {
+    /**
+     * The ID of the Traffic Mirror rule.
+     */
+    TrafficMirrorFilterRuleId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteTrafficMirrorFilterRuleResult {
+    /**
+     * The ID of the deleted Traffic Mirror rule.
+     */
+    TrafficMirrorFilterRuleId?: String;
+  }
+  export interface DeleteTrafficMirrorSessionRequest {
+    /**
+     * The ID of the Traffic Mirror session.
+     */
+    TrafficMirrorSessionId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteTrafficMirrorSessionResult {
+    /**
+     * The ID of the deleted Traffic Mirror session.
+     */
+    TrafficMirrorSessionId?: String;
+  }
+  export interface DeleteTrafficMirrorTargetRequest {
+    /**
+     * The ID of the Traffic Mirror target.
+     */
+    TrafficMirrorTargetId: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface DeleteTrafficMirrorTargetResult {
+    /**
+     * The ID of the deleted Traffic Mirror target.
+     */
+    TrafficMirrorTargetId?: String;
   }
   export interface DeleteTransitGatewayRequest {
     /**
@@ -9088,6 +9440,102 @@ declare namespace EC2 {
      */
     Tags?: TagDescriptionList;
   }
+  export interface DescribeTrafficMirrorFiltersRequest {
+    /**
+     * The ID of the Traffic Mirror filter.
+     */
+    TrafficMirrorFilterIds?: ValueStringList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more filters. The possible values are:    description: The Traffic Mirror filter description.    traffic-mirror-filter-id: The ID of the Traffic Mirror filter.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: TrafficMirroringMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeTrafficMirrorFiltersResult {
+    /**
+     * Information about one or more Traffic Mirror filters.
+     */
+    TrafficMirrorFilters?: TrafficMirrorFilterSet;
+    /**
+     * The token to use to retrieve the next page of results. The value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeTrafficMirrorSessionsRequest {
+    /**
+     * The ID of the Traffic Mirror session.
+     */
+    TrafficMirrorSessionIds?: ValueStringList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more filters. The possible values are:    description: The Traffic Mirror session description.    network-interface-id: The ID of the Traffic Mirror session network interface.    owner-id: The ID of the account that owns the Traffic Mirror session.    packet-length: The assigned number of packets to mirror.     session-number: The assigned session number.     traffic-mirror-filter-id: The ID of the Traffic Mirror filter.    traffic-mirror-session-id: The ID of the Traffic Mirror session.    traffic-mirror-target-id: The ID of the Traffic Mirror target.    virtual-network-id: The virtual network ID of the Traffic Mirror session.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: TrafficMirroringMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeTrafficMirrorSessionsResult {
+    /**
+     * Describes one or more Traffic Mirror sessions. By default, all Traffic Mirror sessions are described. Alternatively, you can filter the results.
+     */
+    TrafficMirrorSessions?: TrafficMirrorSessionSet;
+    /**
+     * The token to use to retrieve the next page of results. The value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeTrafficMirrorTargetsRequest {
+    /**
+     * The ID of the Traffic Mirror targets.
+     */
+    TrafficMirrorTargetIds?: ValueStringList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * One or more filters. The possible values are:    description: The Traffic Mirror target description.    network-interface-id: The ID of the Traffic Mirror session network interface.    network-load-balancer-arn: The Amazon Resource Name (ARN) of the Network Load Balancer that is associated with the session.    owner-id: The ID of the account that owns the Traffic Mirror session.    traffic-mirror-target-id: The ID of the Traffic Mirror target.  
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
+     */
+    MaxResults?: TrafficMirroringMaxResults;
+    /**
+     * The token for the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface DescribeTrafficMirrorTargetsResult {
+    /**
+     * Information about one or more Traffic Mirror targets.
+     */
+    TrafficMirrorTargets?: TrafficMirrorTargetSet;
+    /**
+     * The token to use to retrieve the next page of results. The value is null when there are no more results to return.
+     */
+    NextToken?: String;
+  }
   export interface DescribeTransitGatewayAttachmentsRequest {
     /**
      * The IDs of the attachments.
@@ -10129,11 +10577,11 @@ declare namespace EC2 {
      */
     VolumeType?: VolumeType;
     /**
-     * Indicates whether the encryption state of an EBS volume is changed while being restored from a backing snapshot. The default effect of setting the Encrypted parameter to true through the console, API, or CLI depends on the volume's origin (new or from a snapshot), starting encryption state, ownership, and whether account-level encryption is enabled. Each default case can be overridden by specifying a customer master key (CMK) with the KmsKeyId parameter in addition to setting Encrypted to true. For a complete list of possible encryption cases, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide. In no case can you remove encryption from an encrypted volume. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For more information, see Supported Instance Types.
+     * Indicates whether the encryption state of an EBS volume is changed while being restored from a backing snapshot. The effect of setting the encryption state to true depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide. In no case can you remove encryption from an encrypted volume. Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For more information, see Supported Instance Types.
      */
     Encrypted?: Boolean;
     /**
-     * Identifier (key ID, key alias, ID ARN, or alias ARN) for a user-managed CMK under which the EBS volume is encrypted. This parameter is only supported on BlockDeviceMapping objects called by RunInstances, RequestSpotFleet, and RequestSpotInstances.
+     * Identifier (key ID, key alias, ID ARN, or alias ARN) for a customer managed CMK under which the EBS volume is encrypted. This parameter is only supported on BlockDeviceMapping objects called by RunInstances, RequestSpotFleet, and RequestSpotInstances.
      */
     KmsKeyId?: String;
   }
@@ -11492,7 +11940,7 @@ declare namespace EC2 {
      */
     OwnerId?: String;
     /**
-     * The value is Windows for Windows AMIs; otherwise blank.
+     * This value is set for Windows AMIs; otherwise, it is blank.
      */
     Platform?: PlatformValues;
     /**
@@ -11680,7 +12128,7 @@ declare namespace EC2 {
      */
     KmsKeyId?: String;
     /**
-     * The license type to be used for the Amazon Machine Image (AMI) after importing.  Note: You may only use BYOL if you have existing licenses with rights to use these licenses in a third party cloud like AWS. For more information, see Prerequisites in the VM Import/Export User Guide. Valid values include:    Auto - Detects the source-system operating system (OS) and applies the appropriate license.    AWS - Replaces the source-system license with an AWS license, if appropriate.    BYOL - Retains the source-system license, if appropriate.   Default value: Auto 
+     * The license type to be used for the Amazon Machine Image (AMI) after importing. By default, we detect the source-system operating system (OS) and apply the appropriate license. Specify AWS to replace the source-system license with an AWS license, if appropriate. Specify BYOL to retain the source-system license, if appropriate. To use BYOL, you must have existing licenses with rights to use these licenses in a third party cloud, such as AWS. For more information, see Prerequisites in the VM Import/Export User Guide.
      */
     LicenseType?: String;
     /**
@@ -14128,6 +14576,130 @@ declare namespace EC2 {
      */
     SubnetId: String;
   }
+  export interface ModifyTrafficMirrorFilterNetworkServicesRequest {
+    /**
+     * The ID of the Traffic Mirror filter.
+     */
+    TrafficMirrorFilterId: String;
+    /**
+     * The network service, for example Amazon DNS, that you want to mirror.
+     */
+    AddNetworkServices?: TrafficMirrorNetworkServiceList;
+    /**
+     * The network service, for example Amazon DNS, that you no longer want to mirror.
+     */
+    RemoveNetworkServices?: TrafficMirrorNetworkServiceList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyTrafficMirrorFilterNetworkServicesResult {
+    /**
+     * The Traffic Mirror filter that the network service is associated with.
+     */
+    TrafficMirrorFilter?: TrafficMirrorFilter;
+  }
+  export interface ModifyTrafficMirrorFilterRuleRequest {
+    /**
+     * The ID of the Traffic Mirror rule.
+     */
+    TrafficMirrorFilterRuleId: String;
+    /**
+     * The type of traffic (ingress | egress) to assign to the rule.
+     */
+    TrafficDirection?: TrafficDirection;
+    /**
+     * The number of the Traffic Mirror rule. This number must be unique for each Traffic Mirror rule in a given direction. The rules are processed in ascending order by rule number.
+     */
+    RuleNumber?: Integer;
+    /**
+     * The action to assign to the rule.
+     */
+    RuleAction?: TrafficMirrorRuleAction;
+    /**
+     * The destination ports that are associated with the Traffic Mirror rule.
+     */
+    DestinationPortRange?: TrafficMirrorPortRangeRequest;
+    /**
+     * The port range to assign to the Traffic Mirror rule.
+     */
+    SourcePortRange?: TrafficMirrorPortRangeRequest;
+    /**
+     * The protocol, for example TCP, to assign to the Traffic Mirror rule.
+     */
+    Protocol?: Integer;
+    /**
+     * The destination CIDR block to assign to the Traffic Mirror rule.
+     */
+    DestinationCidrBlock?: String;
+    /**
+     * The source CIDR block to assign to the Traffic Mirror rule.
+     */
+    SourceCidrBlock?: String;
+    /**
+     * The description to assign to the Traffic Mirror rule.
+     */
+    Description?: String;
+    /**
+     * The properties that you want to remove from the Traffic Mirror filter rule. When you remove a property from a Traffic Mirror filter rule, the property is set to the default.
+     */
+    RemoveFields?: TrafficMirrorFilterRuleFieldList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyTrafficMirrorFilterRuleResult {
+    /**
+     * Modifies a Traffic Mirror rule.
+     */
+    TrafficMirrorFilterRule?: TrafficMirrorFilterRule;
+  }
+  export interface ModifyTrafficMirrorSessionRequest {
+    /**
+     * The ID of the Traffic Mirror session.
+     */
+    TrafficMirrorSessionId: String;
+    /**
+     * The Traffic Mirror target. The target must be in the same VPC as the source, or have a VPC peering connection with the source.
+     */
+    TrafficMirrorTargetId?: String;
+    /**
+     * The ID of the Traffic Mirror filter.
+     */
+    TrafficMirrorFilterId?: String;
+    /**
+     * The number of bytes in each packet to mirror. These are bytes after the VXLAN header. To mirror a subset, set this to the length (in bytes) to mirror. For example, if you set this value to 100, then the first 100 bytes that meet the filter criteria are copied to the target. Do not specify this parameter when you want to mirror the entire packet.
+     */
+    PacketLength?: Integer;
+    /**
+     * The session number determines the order in which sessions are evaluated when an interface is used by multiple sessions. The first session with a matching filter is the one that mirrors the packets. Valid values are 1-32766.
+     */
+    SessionNumber?: Integer;
+    /**
+     * The virtual network ID of the Traffic Mirror session.
+     */
+    VirtualNetworkId?: Integer;
+    /**
+     * The description to assign to the Traffic Mirror session.
+     */
+    Description?: String;
+    /**
+     * The properties that you want to remove from the Traffic Mirror session. When you remove a property from a Traffic Mirror session, the property is set to the default.
+     */
+    RemoveFields?: TrafficMirrorSessionFieldList;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface ModifyTrafficMirrorSessionResult {
+    /**
+     * Information about the Traffic Mirror session.
+     */
+    TrafficMirrorSession?: TrafficMirrorSession;
+  }
   export interface ModifyTransitGatewayVpcAttachmentRequest {
     /**
      * The ID of the attachment.
@@ -15748,7 +16320,7 @@ declare namespace EC2 {
      */
     BlockDeviceMappings?: LaunchTemplateBlockDeviceMappingRequestList;
     /**
-     * One or more network interfaces. If you specify a network interface, you must specify any security groups as part of the network interface.
+     * One or more network interfaces. If you specify a network interface, you must specify any security groups and subnets as part of the network interface.
      */
     NetworkInterfaces?: LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList;
     /**
@@ -16387,7 +16959,7 @@ declare namespace EC2 {
   }
   export type ResourceIdList = String[];
   export type ResourceList = String[];
-  export type ResourceType = "client-vpn-endpoint"|"customer-gateway"|"dedicated-host"|"dhcp-options"|"elastic-ip"|"fleet"|"fpga-image"|"host-reservation"|"image"|"instance"|"internet-gateway"|"launch-template"|"natgateway"|"network-acl"|"network-interface"|"reserved-instances"|"route-table"|"security-group"|"snapshot"|"spot-instances-request"|"subnet"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|string;
+  export type ResourceType = "client-vpn-endpoint"|"customer-gateway"|"dedicated-host"|"dhcp-options"|"elastic-ip"|"fleet"|"fpga-image"|"host-reservation"|"image"|"instance"|"internet-gateway"|"launch-template"|"natgateway"|"network-acl"|"network-interface"|"reserved-instances"|"route-table"|"security-group"|"snapshot"|"spot-instances-request"|"subnet"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|string;
   export interface ResponseError {
     /**
      * The error code.
@@ -16803,7 +17375,7 @@ declare namespace EC2 {
      */
     SecurityGroups?: SecurityGroupStringList;
     /**
-     * [EC2-VPC] The ID of the subnet to launch the instance into. You cannot specify this option and the network interfaces option in the same request.
+     * [EC2-VPC] The ID of the subnet to launch the instance into. If you specify a network interface, you must specify any subnets as part of the network interface.
      */
     SubnetId?: String;
     /**
@@ -16839,7 +17411,7 @@ declare namespace EC2 {
      */
     InstanceInitiatedShutdownBehavior?: ShutdownBehavior;
     /**
-     * The network interfaces to associate with the instance. If you specify a network interface, you must specify any security groups as part of the network interface.
+     * The network interfaces to associate with the instance. If you specify a network interface, you must specify any security groups and subnets as part of the network interface.
      */
     NetworkInterfaces?: InstanceNetworkInterfaceSpecificationList;
     /**
@@ -18599,6 +19171,184 @@ declare namespace EC2 {
      */
     TerminatingInstances?: InstanceStateChangeList;
   }
+  export type TrafficDirection = "ingress"|"egress"|string;
+  export interface TrafficMirrorFilter {
+    /**
+     * The ID of the Traffic Mirror filter.
+     */
+    TrafficMirrorFilterId?: String;
+    /**
+     * Information about the ingress rules that are associated with the Traffic Mirror filter.
+     */
+    IngressFilterRules?: TrafficMirrorFilterRuleList;
+    /**
+     * Information about the egress rules that are associated with the Traffic Mirror filter.
+     */
+    EgressFilterRules?: TrafficMirrorFilterRuleList;
+    /**
+     * The network service traffic that is associated with the Traffic Mirror filter.
+     */
+    NetworkServices?: TrafficMirrorNetworkServiceList;
+    /**
+     * The description of the Traffic Mirror filter.
+     */
+    Description?: String;
+    /**
+     * The tags assigned to the Traffic Mirror filter.
+     */
+    Tags?: TagList;
+  }
+  export interface TrafficMirrorFilterRule {
+    /**
+     * The ID of the Traffic Mirror rule.
+     */
+    TrafficMirrorFilterRuleId?: String;
+    /**
+     * The ID of the Traffic Mirror filter that the rule is associated with.
+     */
+    TrafficMirrorFilterId?: String;
+    /**
+     * The traffic direction assigned to the Traffic Mirror rule.
+     */
+    TrafficDirection?: TrafficDirection;
+    /**
+     * The rule number of the Traffic Mirror rule.
+     */
+    RuleNumber?: Integer;
+    /**
+     * The action assigned to the Traffic Mirror rule.
+     */
+    RuleAction?: TrafficMirrorRuleAction;
+    /**
+     * The protocol assigned to the Traffic Mirror rule.
+     */
+    Protocol?: Integer;
+    /**
+     * The destination port range assigned to the Traffic Mirror rule.
+     */
+    DestinationPortRange?: TrafficMirrorPortRange;
+    /**
+     * The source port range assigned to the Traffic Mirror rule.
+     */
+    SourcePortRange?: TrafficMirrorPortRange;
+    /**
+     * The destination CIDR block assigned to the Traffic Mirror rule.
+     */
+    DestinationCidrBlock?: String;
+    /**
+     * The source CIDR block assigned to the Traffic Mirror rule.
+     */
+    SourceCidrBlock?: String;
+    /**
+     * The description of the Traffic Mirror rule.
+     */
+    Description?: String;
+  }
+  export type TrafficMirrorFilterRuleField = "destination-port-range"|"source-port-range"|"protocol"|"description"|string;
+  export type TrafficMirrorFilterRuleFieldList = TrafficMirrorFilterRuleField[];
+  export type TrafficMirrorFilterRuleList = TrafficMirrorFilterRule[];
+  export type TrafficMirrorFilterSet = TrafficMirrorFilter[];
+  export type TrafficMirrorNetworkService = "amazon-dns"|string;
+  export type TrafficMirrorNetworkServiceList = TrafficMirrorNetworkService[];
+  export interface TrafficMirrorPortRange {
+    /**
+     * The start of the Traffic Mirror port range. This applies to the TCP and UDP protocols.
+     */
+    FromPort?: Integer;
+    /**
+     * The end of the Traffic Mirror port range. This applies to the TCP and UDP protocols.
+     */
+    ToPort?: Integer;
+  }
+  export interface TrafficMirrorPortRangeRequest {
+    /**
+     * The first port in the Traffic Mirror port range. This applies to the TCP and UDP protocols.
+     */
+    FromPort?: Integer;
+    /**
+     * The last port in the Traffic Mirror port range. This applies to the TCP and UDP protocols.
+     */
+    ToPort?: Integer;
+  }
+  export type TrafficMirrorRuleAction = "accept"|"reject"|string;
+  export interface TrafficMirrorSession {
+    /**
+     * The ID for the Traffic Mirror session.
+     */
+    TrafficMirrorSessionId?: String;
+    /**
+     * The ID of the Traffic Mirror target.
+     */
+    TrafficMirrorTargetId?: String;
+    /**
+     * The ID of the Traffic Mirror filter.
+     */
+    TrafficMirrorFilterId?: String;
+    /**
+     * The ID of the Traffic Mirror session's network interface.
+     */
+    NetworkInterfaceId?: String;
+    /**
+     * The ID of the account that owns the Traffic Mirror session.
+     */
+    OwnerId?: String;
+    /**
+     * The number of bytes in each packet to mirror. These are the bytes after the VXLAN header. To mirror a subset, set this to the length (in bytes) to mirror. For example, if you set this value to 100, then the first 100 bytes that meet the filter criteria are copied to the target. Do not specify this parameter when you want to mirror the entire packet
+     */
+    PacketLength?: Integer;
+    /**
+     * The session number determines the order in which sessions are evaluated when an interface is used by multiple sessions. The first session with a matching filter is the one that mirrors the packets. Valid values are 1-32766.
+     */
+    SessionNumber?: Integer;
+    /**
+     * The virtual network ID associated with the Traffic Mirror session.
+     */
+    VirtualNetworkId?: Integer;
+    /**
+     * The description of the Traffic Mirror session.
+     */
+    Description?: String;
+    /**
+     * The tags assigned to the Traffic Mirror session.
+     */
+    Tags?: TagList;
+  }
+  export type TrafficMirrorSessionField = "packet-length"|"description"|"virtual-network-id"|string;
+  export type TrafficMirrorSessionFieldList = TrafficMirrorSessionField[];
+  export type TrafficMirrorSessionSet = TrafficMirrorSession[];
+  export interface TrafficMirrorTarget {
+    /**
+     * The ID of the Traffic Mirror target.
+     */
+    TrafficMirrorTargetId?: String;
+    /**
+     * The network interface ID that is attached to the target.
+     */
+    NetworkInterfaceId?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the Network Load Balancer.
+     */
+    NetworkLoadBalancerArn?: String;
+    /**
+     * The type of Traffic Mirror target.
+     */
+    Type?: TrafficMirrorTargetType;
+    /**
+     * Information about the Traffic Mirror target.
+     */
+    Description?: String;
+    /**
+     * The ID of the account that owns the Traffic Mirror target.
+     */
+    OwnerId?: String;
+    /**
+     * The tags assigned to the Traffic Mirror target.
+     */
+    Tags?: TagList;
+  }
+  export type TrafficMirrorTargetSet = TrafficMirrorTarget[];
+  export type TrafficMirrorTargetType = "network-interface"|"network-load-balancer"|string;
+  export type TrafficMirroringMaxResults = number;
   export type TrafficType = "ACCEPT"|"REJECT"|"ALL"|string;
   export interface TransitGateway {
     /**

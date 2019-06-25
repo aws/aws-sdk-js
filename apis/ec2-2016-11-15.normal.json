@@ -186,7 +186,7 @@
       "input": {
         "shape": "AssociateDhcpOptionsRequest"
       },
-      "documentation": "<p>Associates a set of DHCP options (that you've previously created) with the specified VPC, or associates no DHCP options with the VPC.</p> <p>After you associate the options with the VPC, any existing instances and all new instances that you launch in that VPC use the options. You don't need to restart or relaunch the instances. They automatically pick up the changes within a few hours, depending on how frequently the instance renews its DHCP lease. You can explicitly renew the lease using the operating system on the instance.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html\">DHCP Options Sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Associates a set of DHCP options (that you've previously created) with the specified VPC, or associates no DHCP options with the VPC.</p> <p>After you associate the options with the VPC, any existing instances and all new instances that you launch in that VPC use the options. You don't need to restart or relaunch the instances. They automatically pick up the changes within a few hours, depending on how frequently the instance renews its DHCP lease. You can explicitly renew the lease using the operating system on the instance.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html\">DHCP Options Sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "AssociateIamInstanceProfile": {
       "name": "AssociateIamInstanceProfile",
@@ -214,7 +214,7 @@
       "output": {
         "shape": "AssociateRouteTableResult"
       },
-      "documentation": "<p>Associates a subnet with a route table. The subnet and route table must be in the same VPC. This association causes traffic originating from the subnet to be routed according to the routes in the route table. The action returns an association ID, which you need in order to disassociate the route table from the subnet later. A route table can be associated with multiple subnets.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Associates a subnet with a route table. The subnet and route table must be in the same VPC. This association causes traffic originating from the subnet to be routed according to the routes in the route table. The action returns an association ID, which you need in order to disassociate the route table from the subnet later. A route table can be associated with multiple subnets.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html\">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "AssociateSubnetCidrBlock": {
       "name": "AssociateSubnetCidrBlock",
@@ -256,7 +256,7 @@
       "output": {
         "shape": "AssociateVpcCidrBlockResult"
       },
-      "documentation": "<p>Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, or you can associate an Amazon-provided IPv6 CIDR block. The IPv6 CIDR block size is fixed at /56.</p> <p>For more information about associating CIDR blocks with your VPC and applicable restrictions, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html#VPC_Sizing\">VPC and Subnet Sizing</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Associates a CIDR block with your VPC. You can associate a secondary IPv4 CIDR block, or you can associate an Amazon-provided IPv6 CIDR block. The IPv6 CIDR block size is fixed at /56.</p> <p>For more information about associating CIDR blocks with your VPC and applicable restrictions, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html#VPC_Sizing\">VPC and Subnet Sizing</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "AttachClassicLinkVpc": {
       "name": "AttachClassicLinkVpc",
@@ -281,7 +281,7 @@
       "input": {
         "shape": "AttachInternetGatewayRequest"
       },
-      "documentation": "<p>Attaches an internet gateway to a VPC, enabling connectivity between the internet and the VPC. For more information about your VPC and internet gateway, see the <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/\">Amazon Virtual Private Cloud User Guide</a>.</p>"
+      "documentation": "<p>Attaches an internet gateway to a VPC, enabling connectivity between the internet and the VPC. For more information about your VPC and internet gateway, see the <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/\">Amazon Virtual Private Cloud User Guide</a>.</p>"
     },
     "AttachNetworkInterface": {
       "name": "AttachNetworkInterface",
@@ -605,7 +605,7 @@
       "output": {
         "shape": "CreateDefaultSubnetResult"
       },
-      "documentation": "<p>Creates a default subnet with a size <code>/20</code> IPv4 CIDR block in the specified Availability Zone in your default VPC. You can have only one default subnet per Availability Zone. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html#create-default-subnet\">Creating a Default Subnet</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Creates a default subnet with a size <code>/20</code> IPv4 CIDR block in the specified Availability Zone in your default VPC. You can have only one default subnet per Availability Zone. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#create-default-subnet\">Creating a Default Subnet</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "CreateDefaultVpc": {
       "name": "CreateDefaultVpc",
@@ -619,7 +619,7 @@
       "output": {
         "shape": "CreateDefaultVpcResult"
       },
-      "documentation": "<p>Creates a default VPC with a size <code>/16</code> IPv4 CIDR block and a default subnet in each Availability Zone. For more information about the components of a default VPC, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/default-vpc.html\">Default VPC and Default Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. You cannot specify the components of the default VPC yourself.</p> <p>If you deleted your previous default VPC, you can create a default VPC. You cannot have more than one default VPC per Region.</p> <p>If your account supports EC2-Classic, you cannot use this action to create a default VPC in a Region that supports EC2-Classic. If you want a default VPC in a Region that supports EC2-Classic, see \"I really want a default VPC for my existing EC2 account. Is that possible?\" in the <a href=\"http://aws.amazon.com/vpc/faqs/#Default_VPCs\">Default VPCs FAQ</a>.</p>"
+      "documentation": "<p>Creates a default VPC with a size <code>/16</code> IPv4 CIDR block and a default subnet in each Availability Zone. For more information about the components of a default VPC, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html\">Default VPC and Default Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. You cannot specify the components of the default VPC yourself.</p> <p>If you deleted your previous default VPC, you can create a default VPC. You cannot have more than one default VPC per Region.</p> <p>If your account supports EC2-Classic, you cannot use this action to create a default VPC in a Region that supports EC2-Classic. If you want a default VPC in a Region that supports EC2-Classic, see \"I really want a default VPC for my existing EC2 account. Is that possible?\" in the <a href=\"http://aws.amazon.com/vpc/faqs/#Default_VPCs\">Default VPCs FAQ</a>.</p>"
     },
     "CreateDhcpOptions": {
       "name": "CreateDhcpOptions",
@@ -633,7 +633,7 @@
       "output": {
         "shape": "CreateDhcpOptionsResult"
       },
-      "documentation": "<p>Creates a set of DHCP options for your VPC. After creating the set, you must associate it with the VPC, causing all existing and new instances that you launch in the VPC to use this set of DHCP options. The following are the individual DHCP options you can specify. For more information about the options, see <a href=\"http://www.ietf.org/rfc/rfc2132.txt\">RFC 2132</a>.</p> <ul> <li> <p> <code>domain-name-servers</code> - The IP addresses of up to four domain name servers, or AmazonProvidedDNS. The default DHCP option set specifies AmazonProvidedDNS. If specifying more than one domain name server, specify the IP addresses in a single parameter, separated by commas. ITo have your instance to receive a custom DNS hostname as specified in <code>domain-name</code>, you must set <code>domain-name-servers</code> to a custom DNS server.</p> </li> <li> <p> <code>domain-name</code> - If you're using AmazonProvidedDNS in <code>us-east-1</code>, specify <code>ec2.internal</code>. If you're using AmazonProvidedDNS in another Region, specify <code>region.compute.internal</code> (for example, <code>ap-northeast-1.compute.internal</code>). Otherwise, specify a domain name (for example, <code>MyCompany.com</code>). This value is used to complete unqualified DNS hostnames. <b>Important</b>: Some Linux operating systems accept multiple domain names separated by spaces. However, Windows and other Linux operating systems treat the value as a single domain, which results in unexpected behavior. If your DHCP options set is associated with a VPC that has instances with multiple operating systems, specify only one domain name.</p> </li> <li> <p> <code>ntp-servers</code> - The IP addresses of up to four Network Time Protocol (NTP) servers.</p> </li> <li> <p> <code>netbios-name-servers</code> - The IP addresses of up to four NetBIOS name servers.</p> </li> <li> <p> <code>netbios-node-type</code> - The NetBIOS node type (1, 2, 4, or 8). We recommend that you specify 2 (broadcast and multicast are not currently supported). For more information about these node types, see <a href=\"http://www.ietf.org/rfc/rfc2132.txt\">RFC 2132</a>.</p> </li> </ul> <p>Your VPC automatically starts out with a set of DHCP options that includes only a DNS server that we provide (AmazonProvidedDNS). If you create a set of options, and if your VPC has an internet gateway, make sure to set the <code>domain-name-servers</code> option either to <code>AmazonProvidedDNS</code> or to a domain name server of your choice. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html\">DHCP Options Sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Creates a set of DHCP options for your VPC. After creating the set, you must associate it with the VPC, causing all existing and new instances that you launch in the VPC to use this set of DHCP options. The following are the individual DHCP options you can specify. For more information about the options, see <a href=\"http://www.ietf.org/rfc/rfc2132.txt\">RFC 2132</a>.</p> <ul> <li> <p> <code>domain-name-servers</code> - The IP addresses of up to four domain name servers, or AmazonProvidedDNS. The default DHCP option set specifies AmazonProvidedDNS. If specifying more than one domain name server, specify the IP addresses in a single parameter, separated by commas. ITo have your instance to receive a custom DNS hostname as specified in <code>domain-name</code>, you must set <code>domain-name-servers</code> to a custom DNS server.</p> </li> <li> <p> <code>domain-name</code> - If you're using AmazonProvidedDNS in <code>us-east-1</code>, specify <code>ec2.internal</code>. If you're using AmazonProvidedDNS in another Region, specify <code>region.compute.internal</code> (for example, <code>ap-northeast-1.compute.internal</code>). Otherwise, specify a domain name (for example, <code>MyCompany.com</code>). This value is used to complete unqualified DNS hostnames. <b>Important</b>: Some Linux operating systems accept multiple domain names separated by spaces. However, Windows and other Linux operating systems treat the value as a single domain, which results in unexpected behavior. If your DHCP options set is associated with a VPC that has instances with multiple operating systems, specify only one domain name.</p> </li> <li> <p> <code>ntp-servers</code> - The IP addresses of up to four Network Time Protocol (NTP) servers.</p> </li> <li> <p> <code>netbios-name-servers</code> - The IP addresses of up to four NetBIOS name servers.</p> </li> <li> <p> <code>netbios-node-type</code> - The NetBIOS node type (1, 2, 4, or 8). We recommend that you specify 2 (broadcast and multicast are not currently supported). For more information about these node types, see <a href=\"http://www.ietf.org/rfc/rfc2132.txt\">RFC 2132</a>.</p> </li> </ul> <p>Your VPC automatically starts out with a set of DHCP options that includes only a DNS server that we provide (AmazonProvidedDNS). If you create a set of options, and if your VPC has an internet gateway, make sure to set the <code>domain-name-servers</code> option either to <code>AmazonProvidedDNS</code> or to a domain name server of your choice. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html\">DHCP Options Sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "CreateEgressOnlyInternetGateway": {
       "name": "CreateEgressOnlyInternetGateway",
@@ -675,7 +675,7 @@
       "output": {
         "shape": "CreateFlowLogsResult"
       },
-      "documentation": "<p>Creates one or more flow logs to capture information about IP traffic for a specific network interface, subnet, or VPC. </p> <p>Flow log data for a monitored network interface is recorded as flow log records, which are log events consisting of fields that describe the traffic flow. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/flow-logs.html#flow-log-records\">Flow Log Records</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>When publishing to CloudWatch Logs, flow log records are published to a log group, and each network interface has a unique log stream in the log group. When publishing to Amazon S3, flow log records for all of the monitored network interfaces are published to a single log file object that is stored in the specified bucket.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/flow-logs.html\">VPC Flow Logs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Creates one or more flow logs to capture information about IP traffic for a specific network interface, subnet, or VPC. </p> <p>Flow log data for a monitored network interface is recorded as flow log records, which are log events consisting of fields that describe the traffic flow. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records\">Flow Log Records</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>When publishing to CloudWatch Logs, flow log records are published to a log group, and each network interface has a unique log stream in the log group. When publishing to Amazon S3, flow log records for all of the monitored network interfaces are published to a single log file object that is stored in the specified bucket.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html\">VPC Flow Logs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "CreateFpgaImage": {
       "name": "CreateFpgaImage",
@@ -731,7 +731,7 @@
       "output": {
         "shape": "CreateInternetGatewayResult"
       },
-      "documentation": "<p>Creates an internet gateway for use with a VPC. After creating the internet gateway, you attach it to a VPC using <a>AttachInternetGateway</a>.</p> <p>For more information about your VPC and internet gateway, see the <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/\">Amazon Virtual Private Cloud User Guide</a>.</p>"
+      "documentation": "<p>Creates an internet gateway for use with a VPC. After creating the internet gateway, you attach it to a VPC using <a>AttachInternetGateway</a>.</p> <p>For more information about your VPC and internet gateway, see the <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/\">Amazon Virtual Private Cloud User Guide</a>.</p>"
     },
     "CreateKeyPair": {
       "name": "CreateKeyPair",
@@ -787,7 +787,7 @@
       "output": {
         "shape": "CreateNatGatewayResult"
       },
-      "documentation": "<p>Creates a NAT gateway in the specified public subnet. This action creates a network interface in the specified subnet with a private IP address from the IP address range of the subnet. Internet-bound traffic from a private subnet can be routed to the NAT gateway, therefore enabling instances in the private subnet to connect to the internet. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html\">NAT Gateways</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Creates a NAT gateway in the specified public subnet. This action creates a network interface in the specified subnet with a private IP address from the IP address range of the subnet. Internet-bound traffic from a private subnet can be routed to the NAT gateway, therefore enabling instances in the private subnet to connect to the internet. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html\">NAT Gateways</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "CreateNetworkAcl": {
       "name": "CreateNetworkAcl",
@@ -801,7 +801,7 @@
       "output": {
         "shape": "CreateNetworkAclResult"
       },
-      "documentation": "<p>Creates a network ACL in a VPC. Network ACLs provide an optional layer of security (in addition to security groups) for the instances in your VPC.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html\">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Creates a network ACL in a VPC. Network ACLs provide an optional layer of security (in addition to security groups) for the instances in your VPC.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html\">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "CreateNetworkAclEntry": {
       "name": "CreateNetworkAclEntry",
@@ -812,7 +812,7 @@
       "input": {
         "shape": "CreateNetworkAclEntryRequest"
       },
-      "documentation": "<p>Creates an entry (a rule) in a network ACL with the specified rule number. Each network ACL has a set of numbered ingress rules and a separate set of numbered egress rules. When determining whether a packet should be allowed in or out of a subnet associated with the ACL, we process the entries in the ACL according to the rule numbers, in ascending order. Each network ACL has a set of ingress rules and a separate set of egress rules.</p> <p>We recommend that you leave room between the rule numbers (for example, 100, 110, 120, ...), and not number them one right after the other (for example, 101, 102, 103, ...). This makes it easier to add a rule between existing ones without having to renumber the rules.</p> <p>After you add an entry, you can't modify it; you must either replace it, or create an entry and delete the old one.</p> <p>For more information about network ACLs, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html\">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Creates an entry (a rule) in a network ACL with the specified rule number. Each network ACL has a set of numbered ingress rules and a separate set of numbered egress rules. When determining whether a packet should be allowed in or out of a subnet associated with the ACL, we process the entries in the ACL according to the rule numbers, in ascending order. Each network ACL has a set of ingress rules and a separate set of egress rules.</p> <p>We recommend that you leave room between the rule numbers (for example, 100, 110, 120, ...), and not number them one right after the other (for example, 101, 102, 103, ...). This makes it easier to add a rule between existing ones without having to renumber the rules.</p> <p>After you add an entry, you can't modify it; you must either replace it, or create an entry and delete the old one.</p> <p>For more information about network ACLs, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html\">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "CreateNetworkInterface": {
       "name": "CreateNetworkInterface",
@@ -879,7 +879,7 @@
       "output": {
         "shape": "CreateRouteResult"
       },
-      "documentation": "<p>Creates a route in a route table within a VPC.</p> <p>You must specify one of the following targets: internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, or egress-only internet gateway.</p> <p>When determining how to route traffic, we use the route with the most specific match. For example, traffic is destined for the IPv4 address <code>192.0.2.3</code>, and the route table includes the following two IPv4 routes:</p> <ul> <li> <p> <code>192.0.2.0/24</code> (goes to some target A)</p> </li> <li> <p> <code>192.0.2.0/28</code> (goes to some target B)</p> </li> </ul> <p>Both routes apply to the traffic destined for <code>192.0.2.3</code>. However, the second route in the list covers a smaller number of IP addresses and is therefore more specific, so we use that route to determine where to target the traffic.</p> <p>For more information about route tables, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Creates a route in a route table within a VPC.</p> <p>You must specify one of the following targets: internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, or egress-only internet gateway.</p> <p>When determining how to route traffic, we use the route with the most specific match. For example, traffic is destined for the IPv4 address <code>192.0.2.3</code>, and the route table includes the following two IPv4 routes:</p> <ul> <li> <p> <code>192.0.2.0/24</code> (goes to some target A)</p> </li> <li> <p> <code>192.0.2.0/28</code> (goes to some target B)</p> </li> </ul> <p>Both routes apply to the traffic destined for <code>192.0.2.3</code>. However, the second route in the list covers a smaller number of IP addresses and is therefore more specific, so we use that route to determine where to target the traffic.</p> <p>For more information about route tables, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html\">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "CreateRouteTable": {
       "name": "CreateRouteTable",
@@ -893,7 +893,7 @@
       "output": {
         "shape": "CreateRouteTableResult"
       },
-      "documentation": "<p>Creates a route table for the specified VPC. After you create a route table, you can add routes and associate the table with a subnet.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Creates a route table for the specified VPC. After you create a route table, you can add routes and associate the table with a subnet.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html\">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "CreateSecurityGroup": {
       "name": "CreateSecurityGroup",
@@ -963,7 +963,7 @@
       "output": {
         "shape": "CreateSubnetResult"
       },
-      "documentation": "<p>Creates a subnet in an existing VPC.</p> <p>When you create each subnet, you provide the VPC ID and IPv4 CIDR block for the subnet. After you create a subnet, you can't change its CIDR block. The size of the subnet's IPv4 CIDR block can be the same as a VPC's IPv4 CIDR block, or a subset of a VPC's IPv4 CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The smallest IPv4 subnet (and VPC) you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses).</p> <p>If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length. </p> <important> <p>AWS reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for use.</p> </important> <p>If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle.</p> <p>If you launch an instance in a VPC using an Amazon EBS-backed AMI, the IP address doesn't change if you stop and restart the instance (unlike a similar instance launched outside a VPC, which gets a new IP address when restarted). It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available.</p> <p>For more information about subnets, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html\">Your VPC and Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Creates a subnet in an existing VPC.</p> <p>When you create each subnet, you provide the VPC ID and IPv4 CIDR block for the subnet. After you create a subnet, you can't change its CIDR block. The size of the subnet's IPv4 CIDR block can be the same as a VPC's IPv4 CIDR block, or a subset of a VPC's IPv4 CIDR block. If you create more than one subnet in a VPC, the subnets' CIDR blocks must not overlap. The smallest IPv4 subnet (and VPC) you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses).</p> <p>If you've associated an IPv6 CIDR block with your VPC, you can create a subnet with an IPv6 CIDR block that uses a /64 prefix length. </p> <important> <p>AWS reserves both the first four and the last IPv4 address in each subnet's CIDR block. They're not available for use.</p> </important> <p>If you add more than one subnet to a VPC, they're set up in a star topology with a logical router in the middle.</p> <p>If you launch an instance in a VPC using an Amazon EBS-backed AMI, the IP address doesn't change if you stop and restart the instance (unlike a similar instance launched outside a VPC, which gets a new IP address when restarted). It's therefore possible to have a subnet with no running instances (they're all stopped), but no remaining IP addresses available.</p> <p>For more information about subnets, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">Your VPC and Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "CreateTags": {
       "name": "CreateTags",
@@ -975,6 +975,62 @@
         "shape": "CreateTagsRequest"
       },
       "documentation": "<p>Adds or overwrites the specified tags for the specified Amazon EC2 resource or resources. Each resource can have a maximum of 50 tags. Each tag consists of a key and optional value. Tag keys must be unique per resource.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging Your Resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about creating IAM policies that control users' access to resources based on tags, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-iam-actions-resources.html\">Supported Resource-Level Permissions for Amazon EC2 API Actions</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
+    "CreateTrafficMirrorFilter": {
+      "name": "CreateTrafficMirrorFilter",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateTrafficMirrorFilterRequest"
+      },
+      "output": {
+        "shape": "CreateTrafficMirrorFilterResult"
+      },
+      "documentation": "<p>Creates a Traffic Mirror filter.</p> <p>A Traffic Mirror filter is a set of rules that defines the traffic to mirror.</p> <p>By default, no traffic is mirrored. To mirror traffic, use <a>CreateTrafficMirrorFilterRule</a> to add Traffic Mirror rules to the filter. The rules you add define what traffic gets mirrored. You can also use <a>ModifyTrafficMirrorFilterNetworkServices</a> to mirror supported network services.</p>"
+    },
+    "CreateTrafficMirrorFilterRule": {
+      "name": "CreateTrafficMirrorFilterRule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateTrafficMirrorFilterRuleRequest"
+      },
+      "output": {
+        "shape": "CreateTrafficMirrorFilterRuleResult"
+      },
+      "documentation": "<p>Creates a Traffic Mirror rule. </p> <p>A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror.</p> <p>You need the Traffic Mirror filter ID when you create the rule.</p>"
+    },
+    "CreateTrafficMirrorSession": {
+      "name": "CreateTrafficMirrorSession",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateTrafficMirrorSessionRequest"
+      },
+      "output": {
+        "shape": "CreateTrafficMirrorSessionResult"
+      },
+      "documentation": "<p>Creates a Traffic Mirror session.</p> <p>A Traffic Mirror session actively copies packets from a Traffic Mirror source to a Traffic Mirror target. Create a filter, and then assign it to the session to define a subset of the traffic to mirror, for example all TCP traffic.</p> <p>The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in a different VPC connected via VPC peering or a transit gateway. </p> <p>By default, no traffic is mirrored. Use <a>CreateTrafficMirrorFilter</a> to create filter rules that specify the traffic to mirror.</p>"
+    },
+    "CreateTrafficMirrorTarget": {
+      "name": "CreateTrafficMirrorTarget",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateTrafficMirrorTargetRequest"
+      },
+      "output": {
+        "shape": "CreateTrafficMirrorTargetResult"
+      },
+      "documentation": "<p>Creates a target for your Traffic Mirror session.</p> <p>A Traffic Mirror target is the destination for mirrored traffic. The Traffic Mirror source and the Traffic Mirror target (monitoring appliances) can be in the same VPC, or in different VPCs connected via VPC peering or a transit gateway.</p> <p>A Traffic Mirror target can be a network interface, or a Network Load Balancer.</p> <p>To use the target in a Traffic Mirror session, use <a>CreateTrafficMirrorSession</a>.</p>"
     },
     "CreateTransitGateway": {
       "name": "CreateTransitGateway",
@@ -1058,7 +1114,7 @@
       "output": {
         "shape": "CreateVpcResult"
       },
-      "documentation": "<p>Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). For more information about how large to make your VPC, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html\">Your VPC and Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can optionally request an Amazon-provided IPv6 CIDR block for the VPC. The IPv6 CIDR block uses a /56 prefix length, and is allocated from Amazon's pool of IPv6 addresses. You cannot choose the IPv6 range for your VPC.</p> <p>By default, each instance you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html\">DHCP Options Sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html\">Dedicated Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you can create uses a /28 netmask (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4 addresses). For more information about how large to make your VPC, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">Your VPC and Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can optionally request an Amazon-provided IPv6 CIDR block for the VPC. The IPv6 CIDR block uses a /56 prefix length, and is allocated from Amazon's pool of IPv6 addresses. You cannot choose the IPv6 range for your VPC.</p> <p>By default, each instance you launch in the VPC has the default DHCP options, which include only a default DNS server that we provide (AmazonProvidedDNS). For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html\">DHCP Options Sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can specify the instance tenancy value for the VPC when you create it. You can't change this value for the VPC after you create it. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html\">Dedicated Instances</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "CreateVpcEndpoint": {
       "name": "CreateVpcEndpoint",
@@ -1072,7 +1128,7 @@
       "output": {
         "shape": "CreateVpcEndpointResult"
       },
-      "documentation": "<p>Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace partner, or another AWS account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-endpoints.html\">VPC Endpoints</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>A <code>gateway</code> endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint that will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint.</p> <p>An <code>interface</code> endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface.</p> <p>Use <a>DescribeVpcEndpointServices</a> to get a list of supported services.</p>"
+      "documentation": "<p>Creates a VPC endpoint for a specified service. An endpoint enables you to create a private connection between your VPC and the service. The service may be provided by AWS, an AWS Marketplace partner, or another AWS account. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html\">VPC Endpoints</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>A <code>gateway</code> endpoint serves as a target for a route in your route table for traffic destined for the AWS service. You can specify an endpoint policy to attach to the endpoint that will control access to the service from your VPC. You can also specify the VPC route tables that use the endpoint.</p> <p>An <code>interface</code> endpoint is a network interface in your subnet that serves as an endpoint for communicating with the specified service. You can specify the subnets in which to create an endpoint, and the security groups to associate with the endpoint network interface.</p> <p>Use <a>DescribeVpcEndpointServices</a> to get a list of supported services.</p>"
     },
     "CreateVpcEndpointConnectionNotification": {
       "name": "CreateVpcEndpointConnectionNotification",
@@ -1100,7 +1156,7 @@
       "output": {
         "shape": "CreateVpcEndpointServiceConfigurationResult"
       },
-      "documentation": "<p>Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect. Service consumers can create an interface VPC endpoint to connect to your service.</p> <p>To create an endpoint service configuration, you must first create a Network Load Balancer for your service. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/endpoint-service.html\">VPC Endpoint Services</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. </p>"
+      "documentation": "<p>Creates a VPC endpoint service configuration to which service consumers (AWS accounts, IAM users, and IAM roles) can connect. Service consumers can create an interface VPC endpoint to connect to your service.</p> <p>To create an endpoint service configuration, you must first create a Network Load Balancer for your service. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html\">VPC Endpoint Services</a> in the <i>Amazon Virtual Private Cloud User Guide</i>. </p>"
     },
     "CreateVpcPeeringConnection": {
       "name": "CreateVpcPeeringConnection",
@@ -1114,7 +1170,7 @@
       "output": {
         "shape": "CreateVpcPeeringConnectionResult"
       },
-      "documentation": "<p>Requests a VPC peering connection between two VPCs: a requester VPC that you own and an accepter VPC with which to create the connection. The accepter VPC can belong to another AWS account and can be in a different Region to the requester VPC. The requester VPC and accepter VPC cannot have overlapping CIDR blocks.</p> <note> <p>Limitations and rules apply to a VPC peering connection. For more information, see the <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/PeeringGuide/vpc-peering-basics.html#vpc-peering-limitations\">limitations</a> section in the <i>VPC Peering Guide</i>.</p> </note> <p>The owner of the accepter VPC must accept the peering request to activate the peering connection. The VPC peering connection request expires after 7 days, after which it cannot be accepted or rejected.</p> <p>If you create a VPC peering connection request between VPCs with overlapping CIDR blocks, the VPC peering connection has a status of <code>failed</code>.</p>"
+      "documentation": "<p>Requests a VPC peering connection between two VPCs: a requester VPC that you own and an accepter VPC with which to create the connection. The accepter VPC can belong to another AWS account and can be in a different Region to the requester VPC. The requester VPC and accepter VPC cannot have overlapping CIDR blocks.</p> <note> <p>Limitations and rules apply to a VPC peering connection. For more information, see the <a href=\"https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-basics.html#vpc-peering-limitations\">limitations</a> section in the <i>VPC Peering Guide</i>.</p> </note> <p>The owner of the accepter VPC must accept the peering request to activate the peering connection. The VPC peering connection request expires after 7 days, after which it cannot be accepted or rejected.</p> <p>If you create a VPC peering connection request between VPCs with overlapping CIDR blocks, the VPC peering connection has a status of <code>failed</code>.</p>"
     },
     "CreateVpnConnection": {
       "name": "CreateVpnConnection",
@@ -1128,7 +1184,7 @@
       "output": {
         "shape": "CreateVpnConnectionResult"
       },
-      "documentation": "<p>Creates a VPN connection between an existing virtual private gateway and a VPN customer gateway. The supported connection types are <code>ipsec.1</code> and <code>ipsec.2</code>.</p> <p>The response includes information that you need to give to your network administrator to configure your customer gateway.</p> <important> <p>We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway.</p> </important> <p>If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call.</p> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
+      "documentation": "<p>Creates a VPN connection between an existing virtual private gateway and a VPN customer gateway. The supported connection types is <code>ipsec.1</code>.</p> <p>The response includes information that you need to give to your network administrator to configure your customer gateway.</p> <important> <p>We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway.</p> </important> <p>If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call.</p> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
     },
     "CreateVpnConnectionRoute": {
       "name": "CreateVpnConnectionRoute",
@@ -1459,6 +1515,62 @@
         "shape": "DeleteTagsRequest"
       },
       "documentation": "<p>Deletes the specified set of tags from the specified set of resources.</p> <p>To list the current tags, use <a>DescribeTags</a>. For more information about tags, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging Your Resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
+    "DeleteTrafficMirrorFilter": {
+      "name": "DeleteTrafficMirrorFilter",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteTrafficMirrorFilterRequest"
+      },
+      "output": {
+        "shape": "DeleteTrafficMirrorFilterResult"
+      },
+      "documentation": "<p>Deletes the specified Traffic Mirror filter.</p> <p>You cannot delete a Traffic Mirror filter that is in use by a Traffic Mirror session.</p>"
+    },
+    "DeleteTrafficMirrorFilterRule": {
+      "name": "DeleteTrafficMirrorFilterRule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteTrafficMirrorFilterRuleRequest"
+      },
+      "output": {
+        "shape": "DeleteTrafficMirrorFilterRuleResult"
+      },
+      "documentation": "<p>Deletes the specified Traffic Mirror rule.</p>"
+    },
+    "DeleteTrafficMirrorSession": {
+      "name": "DeleteTrafficMirrorSession",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteTrafficMirrorSessionRequest"
+      },
+      "output": {
+        "shape": "DeleteTrafficMirrorSessionResult"
+      },
+      "documentation": "<p>Deletes the specified Traffic Mirror session.</p>"
+    },
+    "DeleteTrafficMirrorTarget": {
+      "name": "DeleteTrafficMirrorTarget",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteTrafficMirrorTargetRequest"
+      },
+      "output": {
+        "shape": "DeleteTrafficMirrorTargetResult"
+      },
+      "documentation": "<p>Deletes the specified Traffic Mirror target.</p> <p>You cannot delete a Traffic Mirror target that is in use by a Traffic Mirror session.</p>"
     },
     "DeleteTransitGateway": {
       "name": "DeleteTransitGateway",
@@ -1874,7 +1986,7 @@
       "output": {
         "shape": "DescribeDhcpOptionsResult"
       },
-      "documentation": "<p>Describes one or more of your DHCP options sets.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_DHCP_Options.html\">DHCP Options Sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Describes one or more of your DHCP options sets.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html\">DHCP Options Sets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "DescribeEgressOnlyInternetGateways": {
       "name": "DescribeEgressOnlyInternetGateways",
@@ -2294,7 +2406,7 @@
       "output": {
         "shape": "DescribeNetworkAclsResult"
       },
-      "documentation": "<p>Describes one or more of your network ACLs.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html\">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Describes one or more of your network ACLs.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html\">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "DescribeNetworkInterfaceAttribute": {
       "name": "DescribeNetworkInterfaceAttribute",
@@ -2476,7 +2588,7 @@
       "output": {
         "shape": "DescribeRouteTablesResult"
       },
-      "documentation": "<p>Describes one or more of your route tables.</p> <p>Each subnet in your VPC must be associated with a route table. If a subnet is not explicitly associated with any route table, it is implicitly associated with the main route table. This command does not return the subnet ID for implicit associations.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Describes one or more of your route tables.</p> <p>Each subnet in your VPC must be associated with a route table. If a subnet is not explicitly associated with any route table, it is implicitly associated with the main route table. This command does not return the subnet ID for implicit associations.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html\">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "DescribeScheduledInstanceAvailability": {
       "name": "DescribeScheduledInstanceAvailability",
@@ -2672,7 +2784,7 @@
       "output": {
         "shape": "DescribeSubnetsResult"
       },
-      "documentation": "<p>Describes one or more of your subnets.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html\">Your VPC and Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Describes one or more of your subnets.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html\">Your VPC and Subnets</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "DescribeTags": {
       "name": "DescribeTags",
@@ -2687,6 +2799,48 @@
         "shape": "DescribeTagsResult"
       },
       "documentation": "<p>Describes the specified tags for your EC2 resources.</p> <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging Your Resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
+    "DescribeTrafficMirrorFilters": {
+      "name": "DescribeTrafficMirrorFilters",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeTrafficMirrorFiltersRequest"
+      },
+      "output": {
+        "shape": "DescribeTrafficMirrorFiltersResult"
+      },
+      "documentation": "<p>Describes one or more Traffic Mirror filters.</p>"
+    },
+    "DescribeTrafficMirrorSessions": {
+      "name": "DescribeTrafficMirrorSessions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeTrafficMirrorSessionsRequest"
+      },
+      "output": {
+        "shape": "DescribeTrafficMirrorSessionsResult"
+      },
+      "documentation": "<p>Describes one or more Traffic Mirror sessions. By default, all Traffic Mirror sessions are described. Alternatively, you can filter the results.</p>"
+    },
+    "DescribeTrafficMirrorTargets": {
+      "name": "DescribeTrafficMirrorTargets",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeTrafficMirrorTargetsRequest"
+      },
+      "output": {
+        "shape": "DescribeTrafficMirrorTargetsResult"
+      },
+      "documentation": "<p>Information about one or more Traffic Mirror targets.</p>"
     },
     "DescribeTransitGatewayAttachments": {
       "name": "DescribeTransitGatewayAttachments",
@@ -3158,7 +3312,7 @@
       "input": {
         "shape": "DisassociateRouteTableRequest"
       },
-      "documentation": "<p>Disassociates a subnet from a route table.</p> <p>After you perform this action, the subnet no longer uses the routes in the route table. Instead, it uses the routes in the VPC's main route table. For more information about route tables, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Disassociates a subnet from a route table.</p> <p>After you perform this action, the subnet no longer uses the routes in the route table. Instead, it uses the routes in the VPC's main route table. For more information about route tables, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html\">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "DisassociateSubnetCidrBlock": {
       "name": "DisassociateSubnetCidrBlock",
@@ -3819,6 +3973,48 @@
       },
       "documentation": "<p>Modifies a subnet attribute. You can only modify one attribute at a time.</p>"
     },
+    "ModifyTrafficMirrorFilterNetworkServices": {
+      "name": "ModifyTrafficMirrorFilterNetworkServices",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyTrafficMirrorFilterNetworkServicesRequest"
+      },
+      "output": {
+        "shape": "ModifyTrafficMirrorFilterNetworkServicesResult"
+      },
+      "documentation": "<p>Allows or restricts mirroring network services.</p> <p> By default, Amazon DNS network services are not eligible for Traffic Mirror. Use <code>AddNetworkServices</code> to add network services to a Traffic Mirror filter. When a network service is added to the Traffic Mirror filter, all traffic related to that network service will be mirrored. When you no longer want to mirror network services, use <code>RemoveNetworkServices</code> to remove the network services from the Traffic Mirror filter. </p> <p>FFor information about filter rule properties, see <a href=\"https://docs.aws.amazon.com/vpc/latest/mirroring/traffic-mirroring-considerations.html#traffic-mirroring-network-services\">Network Services</a> in the <i>Traffic Mirroring User Guide </i>.</p>"
+    },
+    "ModifyTrafficMirrorFilterRule": {
+      "name": "ModifyTrafficMirrorFilterRule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyTrafficMirrorFilterRuleRequest"
+      },
+      "output": {
+        "shape": "ModifyTrafficMirrorFilterRuleResult"
+      },
+      "documentation": "<p>Modifies the specified Traffic Mirror rule.</p> <p> <code>DestinationCidrBlock</code> and <code>SourceCidrBlock</code> must both be an IPv4 range or an IPv6 range.</p>"
+    },
+    "ModifyTrafficMirrorSession": {
+      "name": "ModifyTrafficMirrorSession",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyTrafficMirrorSessionRequest"
+      },
+      "output": {
+        "shape": "ModifyTrafficMirrorSessionResult"
+      },
+      "documentation": "<p>Modifies a Traffic Mirror session.</p>"
+    },
     "ModifyTransitGatewayVpcAttachment": {
       "name": "ModifyTransitGatewayVpcAttachment",
       "http": {
@@ -3881,7 +4077,7 @@
       "output": {
         "shape": "ModifyVpcEndpointResult"
       },
-      "documentation": "<p>Modifies attributes of a specified VPC endpoint. The attributes that you can modify depend on the type of VPC endpoint (interface or gateway). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-endpoints.html\">VPC Endpoints</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Modifies attributes of a specified VPC endpoint. The attributes that you can modify depend on the type of VPC endpoint (interface or gateway). For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-endpoints.html\">VPC Endpoints</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "ModifyVpcEndpointConnectionNotification": {
       "name": "ModifyVpcEndpointConnectionNotification",
@@ -3923,7 +4119,7 @@
       "output": {
         "shape": "ModifyVpcEndpointServicePermissionsResult"
       },
-      "documentation": "<p>Modifies the permissions for your <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/endpoint-service.html\">VPC endpoint service</a>. You can add or remove permissions for service consumers (IAM users, IAM roles, and AWS accounts) to connect to your endpoint service.</p> <p>If you grant permissions to all principals, the service is public. Any users who know the name of a public service can send a request to attach an endpoint. If the service does not require manual approval, attachments are automatically approved.</p>"
+      "documentation": "<p>Modifies the permissions for your <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/endpoint-service.html\">VPC endpoint service</a>. You can add or remove permissions for service consumers (IAM users, IAM roles, and AWS accounts) to connect to your endpoint service.</p> <p>If you grant permissions to all principals, the service is public. Any users who know the name of a public service can send a request to attach an endpoint. If the service does not require manual approval, attachments are automatically approved.</p>"
     },
     "ModifyVpcPeeringConnectionOptions": {
       "name": "ModifyVpcPeeringConnectionOptions",
@@ -4169,7 +4365,7 @@
       "output": {
         "shape": "ReplaceNetworkAclAssociationResult"
       },
-      "documentation": "<p>Changes which network ACL a subnet is associated with. By default when you create a subnet, it's automatically associated with the default network ACL. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html\">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>This is an idempotent operation.</p>"
+      "documentation": "<p>Changes which network ACL a subnet is associated with. By default when you create a subnet, it's automatically associated with the default network ACL. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html\">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>This is an idempotent operation.</p>"
     },
     "ReplaceNetworkAclEntry": {
       "name": "ReplaceNetworkAclEntry",
@@ -4180,7 +4376,7 @@
       "input": {
         "shape": "ReplaceNetworkAclEntryRequest"
       },
-      "documentation": "<p>Replaces an entry (rule) in a network ACL. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_ACLs.html\">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Replaces an entry (rule) in a network ACL. For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_ACLs.html\">Network ACLs</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "ReplaceRoute": {
       "name": "ReplaceRoute",
@@ -4191,7 +4387,7 @@
       "input": {
         "shape": "ReplaceRouteRequest"
       },
-      "documentation": "<p>Replaces an existing route within a route table in a VPC. You must provide only one of the following: internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, or egress-only internet gateway.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+      "documentation": "<p>Replaces an existing route within a route table in a VPC. You must provide only one of the following: internet gateway or virtual private gateway, NAT instance, NAT gateway, VPC peering connection, network interface, or egress-only internet gateway.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html\">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
     },
     "ReplaceRouteTableAssociation": {
       "name": "ReplaceRouteTableAssociation",
@@ -4205,7 +4401,7 @@
       "output": {
         "shape": "ReplaceRouteTableAssociationResult"
       },
-      "documentation": "<p>Changes the route table associated with a given subnet in a VPC. After the operation completes, the subnet uses the routes in the new route table it's associated with. For more information about route tables, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Route_Tables.html\">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can also use ReplaceRouteTableAssociation to change which table is the main route table in the VPC. You just specify the main route table's association ID and the route table to be the new main route table.</p>"
+      "documentation": "<p>Changes the route table associated with a given subnet in a VPC. After the operation completes, the subnet uses the routes in the new route table it's associated with. For more information about route tables, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html\">Route Tables</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p> <p>You can also use ReplaceRouteTableAssociation to change which table is the main route table in the VPC. You just specify the main route table's association ID and the route table to be the new main route table.</p>"
     },
     "ReplaceTransitGatewayRoute": {
       "name": "ReplaceTransitGatewayRoute",
@@ -6292,8 +6488,7 @@
           "documentation": "<p>The reason for canceling the conversion task.</p>",
           "locationName": "reasonMessage"
         }
-      },
-      "documentation": "<p>Contains the parameters for CancelConversionTask.</p>"
+      }
     },
     "CancelExportTaskRequest": {
       "type": "structure",
@@ -6306,8 +6501,7 @@
           "documentation": "<p>The ID of the export task. This is the ID returned by <code>CreateInstanceExportTask</code>.</p>",
           "locationName": "exportTaskId"
         }
-      },
-      "documentation": "<p>Contains the parameters for CancelExportTask.</p>"
+      }
     },
     "CancelImportTaskRequest": {
       "type": "structure",
@@ -6324,8 +6518,7 @@
           "shape": "String",
           "documentation": "<p>The ID of the import image or import snapshot task to be canceled.</p>"
         }
-      },
-      "documentation": "<p>Contains the parameters for CancelImportTask.</p>"
+      }
     },
     "CancelImportTaskResult": {
       "type": "structure",
@@ -6345,8 +6538,7 @@
           "documentation": "<p>The current state of the task being canceled.</p>",
           "locationName": "state"
         }
-      },
-      "documentation": "<p>Contains the output for CancelImportTask.</p>"
+      }
     },
     "CancelReservedInstancesListingRequest": {
       "type": "structure",
@@ -8372,8 +8564,7 @@
           "documentation": "<p>The target virtualization environment.</p>",
           "locationName": "targetEnvironment"
         }
-      },
-      "documentation": "<p>Contains the parameters for CreateInstanceExportTask.</p>"
+      }
     },
     "CreateInstanceExportTaskResult": {
       "type": "structure",
@@ -8383,8 +8574,7 @@
           "documentation": "<p>Information about the instance export task.</p>",
           "locationName": "exportTask"
         }
-      },
-      "documentation": "<p>Contains the output for CreateInstanceExportTask.</p>"
+      }
     },
     "CreateInternetGatewayRequest": {
       "type": "structure",
@@ -9117,6 +9307,235 @@
         }
       }
     },
+    "CreateTrafficMirrorFilterRequest": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>The description of the Traffic Mirror filter.</p>"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to assign to a Traffic Mirror filter.</p>",
+          "locationName": "TagSpecification"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "ClientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "CreateTrafficMirrorFilterResult": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorFilter": {
+          "shape": "TrafficMirrorFilter",
+          "documentation": "<p>Information about the Traffic Mirror filter.</p>",
+          "locationName": "trafficMirrorFilter"
+        },
+        "ClientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "locationName": "clientToken"
+        }
+      }
+    },
+    "CreateTrafficMirrorFilterRuleRequest": {
+      "type": "structure",
+      "required": [
+        "TrafficMirrorFilterId",
+        "TrafficDirection",
+        "RuleNumber",
+        "RuleAction",
+        "DestinationCidrBlock",
+        "SourceCidrBlock"
+      ],
+      "members": {
+        "TrafficMirrorFilterId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the filter that this rule is associated with.</p>"
+        },
+        "TrafficDirection": {
+          "shape": "TrafficDirection",
+          "documentation": "<p>The type of traffic (<code>ingress</code> | <code>egress</code>).</p>"
+        },
+        "RuleNumber": {
+          "shape": "Integer",
+          "documentation": "<p>The number of the Traffic Mirror rule. This number must be unique for each Traffic Mirror rule in a given direction. The rules are processed in ascending order by rule number.</p>"
+        },
+        "RuleAction": {
+          "shape": "TrafficMirrorRuleAction",
+          "documentation": "<p>The action to take (<code>accept</code> | <code>reject</code>) on the filtered traffic.</p>"
+        },
+        "DestinationPortRange": {
+          "shape": "TrafficMirrorPortRangeRequest",
+          "documentation": "<p>The destination port range.</p>"
+        },
+        "SourcePortRange": {
+          "shape": "TrafficMirrorPortRangeRequest",
+          "documentation": "<p>The source port range.</p>"
+        },
+        "Protocol": {
+          "shape": "Integer",
+          "documentation": "<p>The protocol, for example UDP, to assign to the Traffic Mirror rule.</p> <p>For information about the protocol value, see <a href=\"https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml\">Protocol Numbers</a> on the Internet Assigned Numbers Authority (IANA) website.</p>"
+        },
+        "DestinationCidrBlock": {
+          "shape": "String",
+          "documentation": "<p>The destination CIDR block to assign to the Traffic Mirror rule.</p>"
+        },
+        "SourceCidrBlock": {
+          "shape": "String",
+          "documentation": "<p>The source CIDR block to assign to the Traffic Mirror rule.</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>The description of the Traffic Mirror rule.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "ClientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "CreateTrafficMirrorFilterRuleResult": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorFilterRule": {
+          "shape": "TrafficMirrorFilterRule",
+          "documentation": "<p>The Traffic Mirror rule.</p>",
+          "locationName": "trafficMirrorFilterRule"
+        },
+        "ClientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "locationName": "clientToken"
+        }
+      }
+    },
+    "CreateTrafficMirrorSessionRequest": {
+      "type": "structure",
+      "required": [
+        "NetworkInterfaceId",
+        "TrafficMirrorTargetId",
+        "TrafficMirrorFilterId",
+        "SessionNumber"
+      ],
+      "members": {
+        "NetworkInterfaceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the source network interface.</p>"
+        },
+        "TrafficMirrorTargetId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Traffic Mirror target.</p>"
+        },
+        "TrafficMirrorFilterId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Traffic Mirror filter.</p>"
+        },
+        "PacketLength": {
+          "shape": "Integer",
+          "documentation": "<p>The number of bytes in each packet to mirror. These are bytes after the VXLAN header. Do not specify this parameter when you want to mirror the entire packet. To mirror a subset of the packet, set this to the length (in bytes) that you want to mirror. For example, if you set this value to 1network0, then the first 100 bytes that meet the filter criteria are copied to the target.</p> <p>If you do not want to mirror the entire packet, use the <code>PacketLength</code> parameter to specify the number of bytes in each packet to mirror.</p>"
+        },
+        "SessionNumber": {
+          "shape": "Integer",
+          "documentation": "<p>The session number determines the order in which sessions are evaluated when an interface is used by multiple sessions. The first session with a matching filter is the one that mirrors the packets.</p> <p>Valid values are 1-32766.</p>"
+        },
+        "VirtualNetworkId": {
+          "shape": "Integer",
+          "documentation": "<p>The VXLAN ID for the Traffic Mirror session. For more information about the VXLAN protocol, see <a href=\"https://tools.ietf.org/html/rfc7348\">RFC 7348</a>. If you do not specify a <code>VirtualNetworkId</code>, an account-wide unique id is chosen at random.</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>The description of the Traffic Mirror session.</p>"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to assign to a Traffic Mirror session.</p>",
+          "locationName": "TagSpecification"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "ClientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "CreateTrafficMirrorSessionResult": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorSession": {
+          "shape": "TrafficMirrorSession",
+          "documentation": "<p>Information about the Traffic Mirror session.</p>",
+          "locationName": "trafficMirrorSession"
+        },
+        "ClientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "locationName": "clientToken"
+        }
+      }
+    },
+    "CreateTrafficMirrorTargetRequest": {
+      "type": "structure",
+      "members": {
+        "NetworkInterfaceId": {
+          "shape": "String",
+          "documentation": "<p>The network interface ID that is associated with the target.</p>"
+        },
+        "NetworkLoadBalancerArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Network Load Balancer that is associated with the target.</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>The description of the Traffic Mirror target.</p>"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to assign to the Traffic Mirror target.</p>",
+          "locationName": "TagSpecification"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "ClientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "CreateTrafficMirrorTargetResult": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorTarget": {
+          "shape": "TrafficMirrorTarget",
+          "documentation": "<p>Information about the Traffic Mirror target.</p>",
+          "locationName": "trafficMirrorTarget"
+        },
+        "ClientToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "locationName": "clientToken"
+        }
+      }
+    },
     "CreateTransitGatewayRequest": {
       "type": "structure",
       "members": {
@@ -9607,7 +10026,7 @@
         },
         "Type": {
           "shape": "String",
-          "documentation": "<p>The type of VPN connection (<code>ipsec.1</code> | <code>ipsec.2</code>).</p>"
+          "documentation": "<p>The type of VPN connection (<code>ipsec.1</code>).</p>"
         },
         "VpnGatewayId": {
           "shape": "String",
@@ -10530,6 +10949,110 @@
         }
       }
     },
+    "DeleteTrafficMirrorFilterRequest": {
+      "type": "structure",
+      "required": [
+        "TrafficMirrorFilterId"
+      ],
+      "members": {
+        "TrafficMirrorFilterId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Traffic Mirror filter.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DeleteTrafficMirrorFilterResult": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorFilterId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Traffic Mirror filter.</p>",
+          "locationName": "trafficMirrorFilterId"
+        }
+      }
+    },
+    "DeleteTrafficMirrorFilterRuleRequest": {
+      "type": "structure",
+      "required": [
+        "TrafficMirrorFilterRuleId"
+      ],
+      "members": {
+        "TrafficMirrorFilterRuleId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Traffic Mirror rule.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DeleteTrafficMirrorFilterRuleResult": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorFilterRuleId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the deleted Traffic Mirror rule.</p>",
+          "locationName": "trafficMirrorFilterRuleId"
+        }
+      }
+    },
+    "DeleteTrafficMirrorSessionRequest": {
+      "type": "structure",
+      "required": [
+        "TrafficMirrorSessionId"
+      ],
+      "members": {
+        "TrafficMirrorSessionId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Traffic Mirror session.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DeleteTrafficMirrorSessionResult": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorSessionId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the deleted Traffic Mirror session.</p>",
+          "locationName": "trafficMirrorSessionId"
+        }
+      }
+    },
+    "DeleteTrafficMirrorTargetRequest": {
+      "type": "structure",
+      "required": [
+        "TrafficMirrorTargetId"
+      ],
+      "members": {
+        "TrafficMirrorTargetId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Traffic Mirror target.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "DeleteTrafficMirrorTargetResult": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorTargetId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the deleted Traffic Mirror target.</p>",
+          "locationName": "trafficMirrorTargetId"
+        }
+      }
+    },
     "DeleteTransitGatewayRequest": {
       "type": "structure",
       "required": [
@@ -11401,8 +11924,7 @@
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
           "locationName": "dryRun"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeConversionTasks.</p>"
+      }
     },
     "DescribeConversionTasksResult": {
       "type": "structure",
@@ -11412,8 +11934,7 @@
           "documentation": "<p>Information about the conversion tasks.</p>",
           "locationName": "conversionTasks"
         }
-      },
-      "documentation": "<p>Contains the output for DescribeConversionTasks.</p>"
+      }
     },
     "DescribeCustomerGatewaysRequest": {
       "type": "structure",
@@ -11592,8 +12113,7 @@
           "documentation": "<p>The export task IDs.</p>",
           "locationName": "exportTaskId"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeExportTasks.</p>"
+      }
     },
     "DescribeExportTasksResult": {
       "type": "structure",
@@ -11603,8 +12123,7 @@
           "documentation": "<p>Information about the export tasks.</p>",
           "locationName": "exportTaskSet"
         }
-      },
-      "documentation": "<p>Contains the output for DescribeExportTasks.</p>"
+      }
     },
     "DescribeFleetError": {
       "type": "structure",
@@ -12247,8 +12766,7 @@
           "shape": "String",
           "documentation": "<p>A token that indicates the next page of results.</p>"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeImportImageTasks.</p>"
+      }
     },
     "DescribeImportImageTasksResult": {
       "type": "structure",
@@ -12263,8 +12781,7 @@
           "documentation": "<p>The token to use to get the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
           "locationName": "nextToken"
         }
-      },
-      "documentation": "<p>Contains the output for DescribeImportImageTasks.</p>"
+      }
     },
     "DescribeImportSnapshotTasksRequest": {
       "type": "structure",
@@ -12290,8 +12807,7 @@
           "shape": "String",
           "documentation": "<p>A token that indicates the next page of results.</p>"
         }
-      },
-      "documentation": "<p>Contains the parameters for DescribeImportSnapshotTasks.</p>"
+      }
     },
     "DescribeImportSnapshotTasksResult": {
       "type": "structure",
@@ -12306,8 +12822,7 @@
           "documentation": "<p>The token to use to get the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
           "locationName": "nextToken"
         }
-      },
-      "documentation": "<p>Contains the output for DescribeImportSnapshotTasks.</p>"
+      }
     },
     "DescribeInstanceAttributeRequest": {
       "type": "structure",
@@ -14078,6 +14593,132 @@
         }
       }
     },
+    "DescribeTrafficMirrorFiltersRequest": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorFilterIds": {
+          "shape": "ValueStringList",
+          "documentation": "<p>The ID of the Traffic Mirror filter.</p>",
+          "locationName": "TrafficMirrorFilterId"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>description</code>: The Traffic Mirror filter description.</p> </li> <li> <p> <code>traffic-mirror-filter-id</code>: The ID of the Traffic Mirror filter.</p> </li> </ul>",
+          "locationName": "Filter"
+        },
+        "MaxResults": {
+          "shape": "TrafficMirroringMaxResults",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next page of results.</p>"
+        }
+      }
+    },
+    "DescribeTrafficMirrorFiltersResult": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorFilters": {
+          "shape": "TrafficMirrorFilterSet",
+          "documentation": "<p>Information about one or more Traffic Mirror filters.</p>",
+          "locationName": "trafficMirrorFilterSet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. The value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "DescribeTrafficMirrorSessionsRequest": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorSessionIds": {
+          "shape": "ValueStringList",
+          "documentation": "<p>The ID of the Traffic Mirror session.</p>",
+          "locationName": "TrafficMirrorSessionId"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>description</code>: The Traffic Mirror session description.</p> </li> <li> <p> <code>network-interface-id</code>: The ID of the Traffic Mirror session network interface.</p> </li> <li> <p> <code>owner-id</code>: The ID of the account that owns the Traffic Mirror session.</p> </li> <li> <p> <code>packet-length</code>: The assigned number of packets to mirror. </p> </li> <li> <p> <code>session-number</code>: The assigned session number. </p> </li> <li> <p> <code>traffic-mirror-filter-id</code>: The ID of the Traffic Mirror filter.</p> </li> <li> <p> <code>traffic-mirror-session-id</code>: The ID of the Traffic Mirror session.</p> </li> <li> <p> <code>traffic-mirror-target-id</code>: The ID of the Traffic Mirror target.</p> </li> <li> <p> <code>virtual-network-id</code>: The virtual network ID of the Traffic Mirror session.</p> </li> </ul>",
+          "locationName": "Filter"
+        },
+        "MaxResults": {
+          "shape": "TrafficMirroringMaxResults",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next page of results.</p>"
+        }
+      }
+    },
+    "DescribeTrafficMirrorSessionsResult": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorSessions": {
+          "shape": "TrafficMirrorSessionSet",
+          "documentation": "<p>Describes one or more Traffic Mirror sessions. By default, all Traffic Mirror sessions are described. Alternatively, you can filter the results.</p>",
+          "locationName": "trafficMirrorSessionSet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. The value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
+    "DescribeTrafficMirrorTargetsRequest": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorTargetIds": {
+          "shape": "ValueStringList",
+          "documentation": "<p>The ID of the Traffic Mirror targets.</p>",
+          "locationName": "TrafficMirrorTargetId"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>description</code>: The Traffic Mirror target description.</p> </li> <li> <p> <code>network-interface-id</code>: The ID of the Traffic Mirror session network interface.</p> </li> <li> <p> <code>network-load-balancer-arn</code>: The Amazon Resource Name (ARN) of the Network Load Balancer that is associated with the session.</p> </li> <li> <p> <code>owner-id</code>: The ID of the account that owns the Traffic Mirror session.</p> </li> <li> <p> <code>traffic-mirror-target-id</code>: The ID of the Traffic Mirror target.</p> </li> </ul>",
+          "locationName": "Filter"
+        },
+        "MaxResults": {
+          "shape": "TrafficMirroringMaxResults",
+          "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next page of results.</p>"
+        }
+      }
+    },
+    "DescribeTrafficMirrorTargetsResult": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorTargets": {
+          "shape": "TrafficMirrorTargetSet",
+          "documentation": "<p>Information about one or more Traffic Mirror targets.</p>",
+          "locationName": "trafficMirrorTargetSet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. The value is <code>null</code> when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
     "DescribeTransitGatewayAttachmentsRequest": {
       "type": "structure",
       "members": {
@@ -15657,12 +16298,12 @@
         },
         "Encrypted": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether the encryption state of an EBS volume is changed while being restored from a backing snapshot. The default effect of setting the <code>Encrypted</code> parameter to <code>true</code> through the console, API, or CLI depends on the volume's origin (new or from a snapshot), starting encryption state, ownership, and whether <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/account-level-encryption.html\">account-level encryption</a> is enabled. Each default case can be overridden by specifying a customer master key (CMK) with the <code>KmsKeyId</code> parameter in addition to setting <code>Encrypted</code> to <code>true</code>. For a complete list of possible encryption cases, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-parameters\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>In no case can you remove encryption from an encrypted volume.</p> <p>Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances\">Supported Instance Types</a>.</p>",
+          "documentation": "<p>Indicates whether the encryption state of an EBS volume is changed while being restored from a backing snapshot. The effect of setting the encryption state to <code>true</code> depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#encryption-parameters\">Amazon EBS Encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>In no case can you remove encryption from an encrypted volume.</p> <p>Encrypted volumes can only be attached to instances that support Amazon EBS encryption. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances\">Supported Instance Types</a>.</p>",
           "locationName": "encrypted"
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>Identifier (key ID, key alias, ID ARN, or alias ARN) for a user-managed CMK under which the EBS volume is encrypted.</p> <p>This parameter is only supported on <code>BlockDeviceMapping</code> objects called by <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html\">RunInstances</a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html\">RequestSpotFleet</a>, and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html\">RequestSpotInstances</a>.</p>"
+          "documentation": "<p>Identifier (key ID, key alias, ID ARN, or alias ARN) for a customer managed CMK under which the EBS volume is encrypted.</p> <p>This parameter is only supported on <code>BlockDeviceMapping</code> objects called by <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html\">RunInstances</a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotFleet.html\">RequestSpotFleet</a>, and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html\">RequestSpotInstances</a>.</p>"
         }
       },
       "documentation": "<p>Describes a block device for an EBS volume.</p>"
@@ -17981,7 +18622,7 @@
         },
         "Platform": {
           "shape": "PlatformValues",
-          "documentation": "<p>The value is <code>Windows</code> for Windows AMIs; otherwise blank.</p>",
+          "documentation": "<p>This value is set for Windows AMIs; otherwise, it is blank.</p>",
           "locationName": "platform"
         },
         "ProductCodes": {
@@ -18264,7 +18905,7 @@
         },
         "LicenseType": {
           "shape": "String",
-          "documentation": "<p>The license type to be used for the Amazon Machine Image (AMI) after importing.</p> <p> <b>Note:</b> You may only use BYOL if you have existing licenses with rights to use these licenses in a third party cloud like AWS. For more information, see <a href=\"https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#prerequisites-image\">Prerequisites</a> in the VM Import/Export User Guide.</p> <p>Valid values include:</p> <ul> <li> <p> <code>Auto</code> - Detects the source-system operating system (OS) and applies the appropriate license.</p> </li> <li> <p> <code>AWS</code> - Replaces the source-system license with an AWS license, if appropriate.</p> </li> <li> <p> <code>BYOL</code> - Retains the source-system license, if appropriate.</p> </li> </ul> <p>Default value: <code>Auto</code> </p>"
+          "documentation": "<p>The license type to be used for the Amazon Machine Image (AMI) after importing.</p> <p>By default, we detect the source-system operating system (OS) and apply the appropriate license. Specify <code>AWS</code> to replace the source-system license with an AWS license, if appropriate. Specify <code>BYOL</code> to retain the source-system license, if appropriate.</p> <p>To use <code>BYOL</code>, you must have existing licenses with rights to use these licenses in a third party cloud, such as AWS. For more information, see <a href=\"https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#prerequisites-image\">Prerequisites</a> in the VM Import/Export User Guide.</p>"
         },
         "Platform": {
           "shape": "String",
@@ -18274,8 +18915,7 @@
           "shape": "String",
           "documentation": "<p>The name of the role to use when not using the default role, 'vmimport'.</p>"
         }
-      },
-      "documentation": "<p>Contains the parameters for ImportImage.</p>"
+      }
     },
     "ImportImageResult": {
       "type": "structure",
@@ -18345,8 +18985,7 @@
           "documentation": "<p>A detailed status message of the import task.</p>",
           "locationName": "statusMessage"
         }
-      },
-      "documentation": "<p>Contains the output for ImportImage.</p>"
+      }
     },
     "ImportImageTask": {
       "type": "structure",
@@ -18518,8 +19157,7 @@
           "documentation": "<p>The instance operating system.</p>",
           "locationName": "platform"
         }
-      },
-      "documentation": "<p>Contains the parameters for ImportInstance.</p>"
+      }
     },
     "ImportInstanceResult": {
       "type": "structure",
@@ -18529,8 +19167,7 @@
           "documentation": "<p>Information about the conversion task.</p>",
           "locationName": "conversionTask"
         }
-      },
-      "documentation": "<p>Contains the output for ImportInstance.</p>"
+      }
     },
     "ImportInstanceTaskDetails": {
       "type": "structure",
@@ -18680,8 +19317,7 @@
           "shape": "String",
           "documentation": "<p>The name of the role to use when not using the default role, 'vmimport'.</p>"
         }
-      },
-      "documentation": "<p>Contains the parameters for ImportSnapshot.</p>"
+      }
     },
     "ImportSnapshotResult": {
       "type": "structure",
@@ -18701,8 +19337,7 @@
           "documentation": "<p>Information about the import snapshot task.</p>",
           "locationName": "snapshotTaskDetail"
         }
-      },
-      "documentation": "<p>Contains the output for ImportSnapshot.</p>"
+      }
     },
     "ImportSnapshotTask": {
       "type": "structure",
@@ -18772,8 +19407,7 @@
           "documentation": "<p>The volume size.</p>",
           "locationName": "volume"
         }
-      },
-      "documentation": "<p>Contains the parameters for ImportVolume.</p>"
+      }
     },
     "ImportVolumeResult": {
       "type": "structure",
@@ -18783,8 +19417,7 @@
           "documentation": "<p>Information about the conversion task.</p>",
           "locationName": "conversionTask"
         }
-      },
-      "documentation": "<p>Contains the output for ImportVolume.</p>"
+      }
     },
     "ImportVolumeTaskDetails": {
       "type": "structure",
@@ -22339,6 +22972,164 @@
         }
       }
     },
+    "ModifyTrafficMirrorFilterNetworkServicesRequest": {
+      "type": "structure",
+      "required": [
+        "TrafficMirrorFilterId"
+      ],
+      "members": {
+        "TrafficMirrorFilterId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Traffic Mirror filter.</p>"
+        },
+        "AddNetworkServices": {
+          "shape": "TrafficMirrorNetworkServiceList",
+          "documentation": "<p>The network service, for example Amazon DNS, that you want to mirror.</p>",
+          "locationName": "AddNetworkService"
+        },
+        "RemoveNetworkServices": {
+          "shape": "TrafficMirrorNetworkServiceList",
+          "documentation": "<p>The network service, for example Amazon DNS, that you no longer want to mirror.</p>",
+          "locationName": "RemoveNetworkService"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "ModifyTrafficMirrorFilterNetworkServicesResult": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorFilter": {
+          "shape": "TrafficMirrorFilter",
+          "documentation": "<p>The Traffic Mirror filter that the network service is associated with.</p>",
+          "locationName": "trafficMirrorFilter"
+        }
+      }
+    },
+    "ModifyTrafficMirrorFilterRuleRequest": {
+      "type": "structure",
+      "required": [
+        "TrafficMirrorFilterRuleId"
+      ],
+      "members": {
+        "TrafficMirrorFilterRuleId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Traffic Mirror rule.</p>"
+        },
+        "TrafficDirection": {
+          "shape": "TrafficDirection",
+          "documentation": "<p>The type of traffic (<code>ingress</code> | <code>egress</code>) to assign to the rule.</p>"
+        },
+        "RuleNumber": {
+          "shape": "Integer",
+          "documentation": "<p>The number of the Traffic Mirror rule. This number must be unique for each Traffic Mirror rule in a given direction. The rules are processed in ascending order by rule number.</p>"
+        },
+        "RuleAction": {
+          "shape": "TrafficMirrorRuleAction",
+          "documentation": "<p>The action to assign to the rule.</p>"
+        },
+        "DestinationPortRange": {
+          "shape": "TrafficMirrorPortRangeRequest",
+          "documentation": "<p>The destination ports that are associated with the Traffic Mirror rule.</p>"
+        },
+        "SourcePortRange": {
+          "shape": "TrafficMirrorPortRangeRequest",
+          "documentation": "<p>The port range to assign to the Traffic Mirror rule.</p>"
+        },
+        "Protocol": {
+          "shape": "Integer",
+          "documentation": "<p>The protocol, for example TCP, to assign to the Traffic Mirror rule.</p>"
+        },
+        "DestinationCidrBlock": {
+          "shape": "String",
+          "documentation": "<p>The destination CIDR block to assign to the Traffic Mirror rule.</p>"
+        },
+        "SourceCidrBlock": {
+          "shape": "String",
+          "documentation": "<p>The source CIDR block to assign to the Traffic Mirror rule.</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>The description to assign to the Traffic Mirror rule.</p>"
+        },
+        "RemoveFields": {
+          "shape": "TrafficMirrorFilterRuleFieldList",
+          "documentation": "<p>The properties that you want to remove from the Traffic Mirror filter rule.</p> <p>When you remove a property from a Traffic Mirror filter rule, the property is set to the default.</p>",
+          "locationName": "RemoveField"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "ModifyTrafficMirrorFilterRuleResult": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorFilterRule": {
+          "shape": "TrafficMirrorFilterRule",
+          "documentation": "<p>Modifies a Traffic Mirror rule.</p>",
+          "locationName": "trafficMirrorFilterRule"
+        }
+      }
+    },
+    "ModifyTrafficMirrorSessionRequest": {
+      "type": "structure",
+      "required": [
+        "TrafficMirrorSessionId"
+      ],
+      "members": {
+        "TrafficMirrorSessionId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Traffic Mirror session.</p>"
+        },
+        "TrafficMirrorTargetId": {
+          "shape": "String",
+          "documentation": "<p>The Traffic Mirror target. The target must be in the same VPC as the source, or have a VPC peering connection with the source.</p>"
+        },
+        "TrafficMirrorFilterId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Traffic Mirror filter.</p>"
+        },
+        "PacketLength": {
+          "shape": "Integer",
+          "documentation": "<p>The number of bytes in each packet to mirror. These are bytes after the VXLAN header. To mirror a subset, set this to the length (in bytes) to mirror. For example, if you set this value to 100, then the first 100 bytes that meet the filter criteria are copied to the target. Do not specify this parameter when you want to mirror the entire packet.</p>"
+        },
+        "SessionNumber": {
+          "shape": "Integer",
+          "documentation": "<p>The session number determines the order in which sessions are evaluated when an interface is used by multiple sessions. The first session with a matching filter is the one that mirrors the packets.</p> <p>Valid values are 1-32766.</p>"
+        },
+        "VirtualNetworkId": {
+          "shape": "Integer",
+          "documentation": "<p>The virtual network ID of the Traffic Mirror session.</p>"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>The description to assign to the Traffic Mirror session.</p>"
+        },
+        "RemoveFields": {
+          "shape": "TrafficMirrorSessionFieldList",
+          "documentation": "<p>The properties that you want to remove from the Traffic Mirror session.</p> <p>When you remove a property from a Traffic Mirror session, the property is set to the default.</p>",
+          "locationName": "RemoveField"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "ModifyTrafficMirrorSessionResult": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorSession": {
+          "shape": "TrafficMirrorSession",
+          "documentation": "<p>Information about the Traffic Mirror session.</p>",
+          "locationName": "trafficMirrorSession"
+        }
+      }
+    },
     "ModifyTransitGatewayVpcAttachmentRequest": {
       "type": "structure",
       "required": [
@@ -22898,7 +23689,7 @@
         },
         "ProvisionedBandwidth": {
           "shape": "ProvisionedBandwidth",
-          "documentation": "<p>Reserved. If you need to sustain traffic greater than the <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>",
+          "documentation": "<p>Reserved. If you need to sustain traffic greater than the <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>",
           "locationName": "provisionedBandwidth"
         },
         "State": {
@@ -24118,31 +24909,31 @@
       "members": {
         "ProvisionTime": {
           "shape": "DateTime",
-          "documentation": "<p>Reserved. If you need to sustain traffic greater than the <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>",
+          "documentation": "<p>Reserved. If you need to sustain traffic greater than the <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>",
           "locationName": "provisionTime"
         },
         "Provisioned": {
           "shape": "String",
-          "documentation": "<p>Reserved. If you need to sustain traffic greater than the <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>",
+          "documentation": "<p>Reserved. If you need to sustain traffic greater than the <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>",
           "locationName": "provisioned"
         },
         "RequestTime": {
           "shape": "DateTime",
-          "documentation": "<p>Reserved. If you need to sustain traffic greater than the <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>",
+          "documentation": "<p>Reserved. If you need to sustain traffic greater than the <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>",
           "locationName": "requestTime"
         },
         "Requested": {
           "shape": "String",
-          "documentation": "<p>Reserved. If you need to sustain traffic greater than the <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>",
+          "documentation": "<p>Reserved. If you need to sustain traffic greater than the <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>",
           "locationName": "requested"
         },
         "Status": {
           "shape": "String",
-          "documentation": "<p>Reserved. If you need to sustain traffic greater than the <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>",
+          "documentation": "<p>Reserved. If you need to sustain traffic greater than the <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>",
           "locationName": "status"
         }
       },
-      "documentation": "<p>Reserved. If you need to sustain traffic greater than the <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>"
+      "documentation": "<p>Reserved. If you need to sustain traffic greater than the <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>"
     },
     "PublicIpStringList": {
       "type": "list",
@@ -25109,7 +25900,7 @@
         },
         "NetworkInterfaces": {
           "shape": "LaunchTemplateInstanceNetworkInterfaceSpecificationRequestList",
-          "documentation": "<p>One or more network interfaces. If you specify a network interface, you must specify any security groups as part of the network interface.</p>",
+          "documentation": "<p>One or more network interfaces. If you specify a network interface, you must specify any security groups and subnets as part of the network interface.</p>",
           "locationName": "NetworkInterface"
         },
         "ImageId": {
@@ -26118,6 +26909,9 @@
         "snapshot",
         "spot-instances-request",
         "subnet",
+        "traffic-mirror-filter",
+        "traffic-mirror-session",
+        "traffic-mirror-target",
         "transit-gateway",
         "transit-gateway-attachment",
         "transit-gateway-route-table",
@@ -26730,7 +27524,7 @@
         },
         "SubnetId": {
           "shape": "String",
-          "documentation": "<p>[EC2-VPC] The ID of the subnet to launch the instance into.</p> <p>You cannot specify this option and the network interfaces option in the same request.</p>"
+          "documentation": "<p>[EC2-VPC] The ID of the subnet to launch the instance into.</p> <p>If you specify a network interface, you must specify any subnets as part of the network interface.</p>"
         },
         "UserData": {
           "shape": "String",
@@ -26773,7 +27567,7 @@
         },
         "NetworkInterfaces": {
           "shape": "InstanceNetworkInterfaceSpecificationList",
-          "documentation": "<p>The network interfaces to associate with the instance. If you specify a network interface, you must specify any security groups as part of the network interface.</p>",
+          "documentation": "<p>The network interfaces to associate with the instance. If you specify a network interface, you must specify any security groups and subnets as part of the network interface.</p>",
           "locationName": "networkInterface"
         },
         "PrivateIpAddress": {
@@ -29513,6 +30307,326 @@
         }
       }
     },
+    "TrafficDirection": {
+      "type": "string",
+      "enum": [
+        "ingress",
+        "egress"
+      ]
+    },
+    "TrafficMirrorFilter": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorFilterId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Traffic Mirror filter.</p>",
+          "locationName": "trafficMirrorFilterId"
+        },
+        "IngressFilterRules": {
+          "shape": "TrafficMirrorFilterRuleList",
+          "documentation": "<p>Information about the ingress rules that are associated with the Traffic Mirror filter.</p>",
+          "locationName": "ingressFilterRuleSet"
+        },
+        "EgressFilterRules": {
+          "shape": "TrafficMirrorFilterRuleList",
+          "documentation": "<p>Information about the egress rules that are associated with the Traffic Mirror filter.</p>",
+          "locationName": "egressFilterRuleSet"
+        },
+        "NetworkServices": {
+          "shape": "TrafficMirrorNetworkServiceList",
+          "documentation": "<p>The network service traffic that is associated with the Traffic Mirror filter.</p>",
+          "locationName": "networkServiceSet"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>The description of the Traffic Mirror filter.</p>",
+          "locationName": "description"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags assigned to the Traffic Mirror filter.</p>",
+          "locationName": "tagSet"
+        }
+      },
+      "documentation": "<p>Describes the Traffic Mirror filter.</p>"
+    },
+    "TrafficMirrorFilterRule": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorFilterRuleId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Traffic Mirror rule.</p>",
+          "locationName": "trafficMirrorFilterRuleId"
+        },
+        "TrafficMirrorFilterId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Traffic Mirror filter that the rule is associated with.</p>",
+          "locationName": "trafficMirrorFilterId"
+        },
+        "TrafficDirection": {
+          "shape": "TrafficDirection",
+          "documentation": "<p>The traffic direction assigned to the Traffic Mirror rule.</p>",
+          "locationName": "trafficDirection"
+        },
+        "RuleNumber": {
+          "shape": "Integer",
+          "documentation": "<p>The rule number of the Traffic Mirror rule.</p>",
+          "locationName": "ruleNumber"
+        },
+        "RuleAction": {
+          "shape": "TrafficMirrorRuleAction",
+          "documentation": "<p>The action assigned to the Traffic Mirror rule.</p>",
+          "locationName": "ruleAction"
+        },
+        "Protocol": {
+          "shape": "Integer",
+          "documentation": "<p>The protocol assigned to the Traffic Mirror rule.</p>",
+          "locationName": "protocol"
+        },
+        "DestinationPortRange": {
+          "shape": "TrafficMirrorPortRange",
+          "documentation": "<p>The destination port range assigned to the Traffic Mirror rule.</p>",
+          "locationName": "destinationPortRange"
+        },
+        "SourcePortRange": {
+          "shape": "TrafficMirrorPortRange",
+          "documentation": "<p>The source port range assigned to the Traffic Mirror rule.</p>",
+          "locationName": "sourcePortRange"
+        },
+        "DestinationCidrBlock": {
+          "shape": "String",
+          "documentation": "<p>The destination CIDR block assigned to the Traffic Mirror rule.</p>",
+          "locationName": "destinationCidrBlock"
+        },
+        "SourceCidrBlock": {
+          "shape": "String",
+          "documentation": "<p>The source CIDR block assigned to the Traffic Mirror rule.</p>",
+          "locationName": "sourceCidrBlock"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>The description of the Traffic Mirror rule.</p>",
+          "locationName": "description"
+        }
+      },
+      "documentation": "<p>Describes the Traffic Mirror rule.</p>"
+    },
+    "TrafficMirrorFilterRuleField": {
+      "type": "string",
+      "enum": [
+        "destination-port-range",
+        "source-port-range",
+        "protocol",
+        "description"
+      ]
+    },
+    "TrafficMirrorFilterRuleFieldList": {
+      "type": "list",
+      "member": {
+        "shape": "TrafficMirrorFilterRuleField"
+      }
+    },
+    "TrafficMirrorFilterRuleList": {
+      "type": "list",
+      "member": {
+        "shape": "TrafficMirrorFilterRule",
+        "locationName": "item"
+      }
+    },
+    "TrafficMirrorFilterSet": {
+      "type": "list",
+      "member": {
+        "shape": "TrafficMirrorFilter",
+        "locationName": "item"
+      }
+    },
+    "TrafficMirrorNetworkService": {
+      "type": "string",
+      "enum": [
+        "amazon-dns"
+      ]
+    },
+    "TrafficMirrorNetworkServiceList": {
+      "type": "list",
+      "member": {
+        "shape": "TrafficMirrorNetworkService",
+        "locationName": "item"
+      }
+    },
+    "TrafficMirrorPortRange": {
+      "type": "structure",
+      "members": {
+        "FromPort": {
+          "shape": "Integer",
+          "documentation": "<p>The start of the Traffic Mirror port range. This applies to the TCP and UDP protocols.</p>",
+          "locationName": "fromPort"
+        },
+        "ToPort": {
+          "shape": "Integer",
+          "documentation": "<p>The end of the Traffic Mirror port range. This applies to the TCP and UDP protocols.</p>",
+          "locationName": "toPort"
+        }
+      },
+      "documentation": "<p>Describes the Traffic Mirror port range.</p>"
+    },
+    "TrafficMirrorPortRangeRequest": {
+      "type": "structure",
+      "members": {
+        "FromPort": {
+          "shape": "Integer",
+          "documentation": "<p>The first port in the Traffic Mirror port range. This applies to the TCP and UDP protocols.</p>"
+        },
+        "ToPort": {
+          "shape": "Integer",
+          "documentation": "<p>The last port in the Traffic Mirror port range. This applies to the TCP and UDP protocols.</p>"
+        }
+      },
+      "documentation": "<p>Information about the Traffic Mirror filter rule port range.</p>"
+    },
+    "TrafficMirrorRuleAction": {
+      "type": "string",
+      "enum": [
+        "accept",
+        "reject"
+      ]
+    },
+    "TrafficMirrorSession": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorSessionId": {
+          "shape": "String",
+          "documentation": "<p>The ID for the Traffic Mirror session.</p>",
+          "locationName": "trafficMirrorSessionId"
+        },
+        "TrafficMirrorTargetId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Traffic Mirror target.</p>",
+          "locationName": "trafficMirrorTargetId"
+        },
+        "TrafficMirrorFilterId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Traffic Mirror filter.</p>",
+          "locationName": "trafficMirrorFilterId"
+        },
+        "NetworkInterfaceId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Traffic Mirror session's network interface.</p>",
+          "locationName": "networkInterfaceId"
+        },
+        "OwnerId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the account that owns the Traffic Mirror session.</p>",
+          "locationName": "ownerId"
+        },
+        "PacketLength": {
+          "shape": "Integer",
+          "documentation": "<p>The number of bytes in each packet to mirror. These are the bytes after the VXLAN header. To mirror a subset, set this to the length (in bytes) to mirror. For example, if you set this value to 100, then the first 100 bytes that meet the filter criteria are copied to the target. Do not specify this parameter when you want to mirror the entire packet</p>",
+          "locationName": "packetLength"
+        },
+        "SessionNumber": {
+          "shape": "Integer",
+          "documentation": "<p>The session number determines the order in which sessions are evaluated when an interface is used by multiple sessions. The first session with a matching filter is the one that mirrors the packets.</p> <p>Valid values are 1-32766.</p>",
+          "locationName": "sessionNumber"
+        },
+        "VirtualNetworkId": {
+          "shape": "Integer",
+          "documentation": "<p>The virtual network ID associated with the Traffic Mirror session.</p>",
+          "locationName": "virtualNetworkId"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>The description of the Traffic Mirror session.</p>",
+          "locationName": "description"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags assigned to the Traffic Mirror session.</p>",
+          "locationName": "tagSet"
+        }
+      },
+      "documentation": "<p>Describes a Traffic Mirror session.</p>"
+    },
+    "TrafficMirrorSessionField": {
+      "type": "string",
+      "enum": [
+        "packet-length",
+        "description",
+        "virtual-network-id"
+      ]
+    },
+    "TrafficMirrorSessionFieldList": {
+      "type": "list",
+      "member": {
+        "shape": "TrafficMirrorSessionField"
+      }
+    },
+    "TrafficMirrorSessionSet": {
+      "type": "list",
+      "member": {
+        "shape": "TrafficMirrorSession",
+        "locationName": "item"
+      }
+    },
+    "TrafficMirrorTarget": {
+      "type": "structure",
+      "members": {
+        "TrafficMirrorTargetId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the Traffic Mirror target.</p>",
+          "locationName": "trafficMirrorTargetId"
+        },
+        "NetworkInterfaceId": {
+          "shape": "String",
+          "documentation": "<p>The network interface ID that is attached to the target.</p>",
+          "locationName": "networkInterfaceId"
+        },
+        "NetworkLoadBalancerArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Network Load Balancer.</p>",
+          "locationName": "networkLoadBalancerArn"
+        },
+        "Type": {
+          "shape": "TrafficMirrorTargetType",
+          "documentation": "<p>The type of Traffic Mirror target.</p>",
+          "locationName": "type"
+        },
+        "Description": {
+          "shape": "String",
+          "documentation": "<p>Information about the Traffic Mirror target.</p>",
+          "locationName": "description"
+        },
+        "OwnerId": {
+          "shape": "String",
+          "documentation": "<p>The ID of the account that owns the Traffic Mirror target.</p>",
+          "locationName": "ownerId"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags assigned to the Traffic Mirror target.</p>",
+          "locationName": "tagSet"
+        }
+      },
+      "documentation": "<p>Describes a Traffic Mirror target.</p>"
+    },
+    "TrafficMirrorTargetSet": {
+      "type": "list",
+      "member": {
+        "shape": "TrafficMirrorTarget",
+        "locationName": "item"
+      }
+    },
+    "TrafficMirrorTargetType": {
+      "type": "string",
+      "enum": [
+        "network-interface",
+        "network-load-balancer"
+      ]
+    },
+    "TrafficMirroringMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 5
+    },
     "TrafficType": {
       "type": "string",
       "enum": [
@@ -31810,5 +32924,5 @@
       ]
     }
   },
-  "documentation": "<fullname>Amazon Elastic Compute Cloud</fullname> <p>Amazon Elastic Compute Cloud (Amazon EC2) provides secure and resizable computing capacity in the AWS cloud. Using Amazon EC2 eliminates the need to invest in hardware up front, so you can develop and deploy applications faster.</p> <p>To learn more about Amazon EC2, Amazon EBS, and Amazon VPC, see the following resources:</p> <ul> <li> <p> <a href=\"http://aws.amazon.com/ec2\">Amazon EC2 product page</a> </p> </li> <li> <p> <a href=\"http://aws.amazon.com/documentation/ec2\">Amazon EC2 documentation</a> </p> </li> <li> <p> <a href=\"http://aws.amazon.com/ebs\">Amazon EBS product page</a> </p> </li> <li> <p> <a href=\"http://aws.amazon.com/vpc\">Amazon VPC product page</a> </p> </li> <li> <p> <a href=\"http://aws.amazon.com/documentation/vpc\">Amazon VPC documentation</a> </p> </li> </ul>"
+  "documentation": "<fullname>Amazon Elastic Compute Cloud</fullname> <p>Amazon Elastic Compute Cloud (Amazon EC2) provides secure and resizable computing capacity in the AWS cloud. Using Amazon EC2 eliminates the need to invest in hardware up front, so you can develop and deploy applications faster.</p> <p>To learn more, see the following resources:</p> <ul> <li> <p>Amazon EC2: <a href=\"http://aws.amazon.com/ec2\">Amazon EC2 product page</a>, <a href=\"http://aws.amazon.com/documentation/ec2\">Amazon EC2 documentation</a> </p> </li> <li> <p>Amazon EBS: <a href=\"http://aws.amazon.com/ebs\">Amazon EBS product page</a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html\">Amazon EBS documentation</a> </p> </li> <li> <p>Amazon VPC: <a href=\"http://aws.amazon.com/vpc\">Amazon VPC product page</a>, <a href=\"http://aws.amazon.com/documentation/vpc\">Amazon VPC documentation</a> </p> </li> <li> <p>AWS VPN: <a href=\"http://aws.amazon.com/vpn\">AWS VPN product page</a>, <a href=\"http://aws.amazon.com/documentation/vpn\">AWS VPN documentation</a> </p> </li> </ul>"
 }
