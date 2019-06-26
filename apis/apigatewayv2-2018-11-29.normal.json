@@ -1277,6 +1277,102 @@
       ],
       "documentation": "<p>Gets the Stages for an API.</p>"
     },
+    "GetTags": {
+      "name": "GetTags",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v2/tags/{resource-arn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetTagsRequest"
+      },
+      "output": {
+        "shape": "GetTagsResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The resource specified in the request was not found.</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The client is sending more than the allowed number of requests per unit of\n time.</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>One of the parameters in the request is invalid.</p>"
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "<p>The resource already exists.</p>"
+        }
+      ],
+      "documentation": "<p>Gets the Tags for an API.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v2/tags/{resource-arn}",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The resource specified in the request was not found.</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The client is sending more than the allowed number of requests per unit of\n time.</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>One of the parameters in the request is invalid.</p>"
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "<p>The resource already exists.</p>"
+        }
+      ],
+      "documentation": "<p>Tag an APIGW resource</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v2/tags/{resource-arn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The resource specified in the request was not found.</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The client is sending more than the allowed number of requests per unit of\n time.</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>One of the parameters in the request is invalid.</p>"
+        },
+        {
+          "shape": "ConflictException",
+          "documentation": "<p>The resource already exists.</p>"
+        }
+      ],
+      "documentation": "<p>Untag an APIGW resource</p>"
+    },
     "UpdateApi": {
       "name": "UpdateApi",
       "http": {
@@ -1726,6 +1822,11 @@
           "shape": "__listOf__string",
           "locationName": "warnings",
           "documentation": "<p>The warning messages reported when failonwarnings is turned on during\n API import.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..</p>"
         }
       },
       "documentation": "<p>Represents an API.</p>",
@@ -1955,6 +2056,11 @@
           "shape": "StringWithLengthBetween1And64",
           "locationName": "version",
           "documentation": "<p>A version identifier for the API.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..</p>"
         }
       },
       "required": [
@@ -2020,6 +2126,11 @@
           "shape": "__listOf__string",
           "locationName": "warnings",
           "documentation": "<p>The warning messages reported when failonwarnings is turned on during\n API import.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..</p>"
         }
       }
     },
@@ -2197,6 +2308,11 @@
           "shape": "DomainNameConfigurations",
           "locationName": "domainNameConfigurations",
           "documentation": "<p>The domain name configurations.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..</p>"
         }
       },
       "required": [
@@ -2220,6 +2336,11 @@
           "shape": "DomainNameConfigurations",
           "locationName": "domainNameConfigurations",
           "documentation": "<p>The domain name configurations.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..</p>"
         }
       }
     },
@@ -2786,6 +2907,11 @@
           "shape": "StageVariablesMap",
           "locationName": "stageVariables",
           "documentation": "<p>A map that defines the stage variables for a Stage. Variable names\n can have alphanumeric and underscore characters, and the values must match\n [A-Za-z0-9-._~:/?#&=,]+.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..</p>"
         }
       },
       "required": [
@@ -2845,6 +2971,11 @@
           "shape": "StageVariablesMap",
           "locationName": "stageVariables",
           "documentation": "<p>A map that defines the stage variables for a stage resource. Variable names can\n have alphanumeric and underscore characters, and the values must match\n [A-Za-z0-9-._~:/?#&=,]+.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..</p>"
         }
       }
     },
@@ -3136,6 +3267,11 @@
           "shape": "DomainNameConfigurations",
           "locationName": "domainNameConfigurations",
           "documentation": "<p>The domain name configurations.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..</p>"
         }
       },
       "documentation": "<p>Represents a domain name.</p>",
@@ -3383,6 +3519,11 @@
           "shape": "__listOf__string",
           "locationName": "warnings",
           "documentation": "<p>The warning messages reported when failonwarnings is turned on during\n API import.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..</p>"
         }
       }
     },
@@ -3653,6 +3794,11 @@
           "shape": "DomainNameConfigurations",
           "locationName": "domainNameConfigurations",
           "documentation": "<p>The domain name configurations.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..</p>"
         }
       }
     },
@@ -4370,6 +4516,11 @@
           "shape": "StageVariablesMap",
           "locationName": "stageVariables",
           "documentation": "<p>A map that defines the stage variables for a stage resource. Variable names can\n have alphanumeric and underscore characters, and the values must match\n [A-Za-z0-9-._~:/?#&=,]+.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..</p>"
         }
       }
     },
@@ -4577,6 +4728,28 @@
         "HTTP_PROXY",
         "AWS_PROXY"
       ]
+    },
+    "GetTagsRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "resource-arn"
+        }
+      },
+      "required": [
+        "ResourceArn"
+      ]
+    },
+    "GetTagsResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "__mapOf__string",
+          "locationName": "tags"
+        }
+      }
     },
     "LoggingLevel": {
       "type": "string",
@@ -4883,6 +5056,11 @@
           "shape": "StageVariablesMap",
           "locationName": "stageVariables",
           "documentation": "<p>A map that defines the stage variables for a stage resource. Variable names can\n have alphanumeric and underscore characters, and the values must match\n [A-Za-z0-9-._~:/?#&=,]+.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..</p>"
         }
       },
       "documentation": "<p>Represents an API stage.</p>",
@@ -4931,6 +5109,63 @@
     "StringWithLengthBetween1And64": {
       "type": "string",
       "documentation": "<p>A string with a length between [1-64].</p>"
+    },
+    "StringWithLengthBetween1And1600": {
+      "type": "string",
+      "documentation": "<p>A string with a length between [1-1600].</p>"
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "resource-arn",
+          "documentation": "<p>AWS resource arn </p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "locationName": "tags",
+          "documentation": "<p>The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters..</p>"
+        }
+      },
+      "required": [
+        "ResourceArn"
+      ]
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "Tags": {
+      "type": "map",
+      "key": {
+        "shape": "__string"
+      },
+      "value": {
+        "shape": "StringWithLengthBetween1And1600"
+      }
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "members": {
+        "ResourceArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "resource-arn",
+          "documentation": "<p>AWS resource arn </p>"
+        },
+        "TagKeys": {
+          "shape": "__listOf__string",
+          "location": "querystring",
+          "locationName": "tagKeys",
+          "documentation": "<p>The Tag keys to delete</p>"
+        }
+      },
+      "required": [
+        "TagKeys",
+        "ResourceArn"
+      ]
     },
     "TemplateMap": {
       "type": "map",
@@ -6056,6 +6291,15 @@
     },
     "__string": {
       "type": "string"
+    },
+    "__mapOf__string": {
+      "type": "map",
+      "key": {
+        "shape": "__string"
+      },
+      "value": {
+        "shape": "__string"
+      }
     },
     "__timestampIso8601": {
       "type": "timestamp",
