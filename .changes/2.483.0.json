@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "ApiGatewayV2",
+        "description": "You can now perform tag operations on ApiGatewayV2 Resources (typically associated with WebSocket APIs)"
+    },
+    {
+        "type": "feature",
+        "category": "CodeCommit",
+        "description": "This release supports better exception handling for merges."
+    }
+]

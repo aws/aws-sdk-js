@@ -60,11 +60,11 @@ declare class CodeCommit extends Service {
    */
   createRepository(callback?: (err: AWSError, data: CodeCommit.Types.CreateRepositoryOutput) => void): Request<CodeCommit.Types.CreateRepositoryOutput, AWSError>;
   /**
-   * Creates an unerferenced commit that represents the result of merging two branches using a specified merge strategy. This can help you determine the outcome of a potential merge.   This unreferenced merge commit can only be accessed using the GetCommit API or through git commands such as git fetch. To retrieve this commit, you must specify its commit ID or otherwise reference it. 
+   * Creates an unreferenced commit that represents the result of merging two branches using a specified merge strategy. This can help you determine the outcome of a potential merge. This API cannot be used with the fast-forward merge strategy, as that strategy does not create a merge commit.  This unreferenced merge commit can only be accessed using the GetCommit API or through git commands such as git fetch. To retrieve this commit, you must specify its commit ID or otherwise reference it. 
    */
   createUnreferencedMergeCommit(params: CodeCommit.Types.CreateUnreferencedMergeCommitInput, callback?: (err: AWSError, data: CodeCommit.Types.CreateUnreferencedMergeCommitOutput) => void): Request<CodeCommit.Types.CreateUnreferencedMergeCommitOutput, AWSError>;
   /**
-   * Creates an unerferenced commit that represents the result of merging two branches using a specified merge strategy. This can help you determine the outcome of a potential merge.   This unreferenced merge commit can only be accessed using the GetCommit API or through git commands such as git fetch. To retrieve this commit, you must specify its commit ID or otherwise reference it. 
+   * Creates an unreferenced commit that represents the result of merging two branches using a specified merge strategy. This can help you determine the outcome of a potential merge. This API cannot be used with the fast-forward merge strategy, as that strategy does not create a merge commit.  This unreferenced merge commit can only be accessed using the GetCommit API or through git commands such as git fetch. To retrieve this commit, you must specify its commit ID or otherwise reference it. 
    */
   createUnreferencedMergeCommit(callback?: (err: AWSError, data: CodeCommit.Types.CreateUnreferencedMergeCommitOutput) => void): Request<CodeCommit.Types.CreateUnreferencedMergeCommitOutput, AWSError>;
   /**
@@ -292,27 +292,27 @@ declare class CodeCommit extends Service {
    */
   mergeBranchesByThreeWay(callback?: (err: AWSError, data: CodeCommit.Types.MergeBranchesByThreeWayOutput) => void): Request<CodeCommit.Types.MergeBranchesByThreeWayOutput, AWSError>;
   /**
-   * Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge strategy.
+   * Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge strategy. If the merge is successful, it closes the pull request.
    */
   mergePullRequestByFastForward(params: CodeCommit.Types.MergePullRequestByFastForwardInput, callback?: (err: AWSError, data: CodeCommit.Types.MergePullRequestByFastForwardOutput) => void): Request<CodeCommit.Types.MergePullRequestByFastForwardOutput, AWSError>;
   /**
-   * Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge strategy.
+   * Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the fast-forward merge strategy. If the merge is successful, it closes the pull request.
    */
   mergePullRequestByFastForward(callback?: (err: AWSError, data: CodeCommit.Types.MergePullRequestByFastForwardOutput) => void): Request<CodeCommit.Types.MergePullRequestByFastForwardOutput, AWSError>;
   /**
-   * Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the squash merge strategy.
+   * Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the squash merge strategy. If the merge is successful, it closes the pull request.
    */
   mergePullRequestBySquash(params: CodeCommit.Types.MergePullRequestBySquashInput, callback?: (err: AWSError, data: CodeCommit.Types.MergePullRequestBySquashOutput) => void): Request<CodeCommit.Types.MergePullRequestBySquashOutput, AWSError>;
   /**
-   * Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the squash merge strategy.
+   * Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the squash merge strategy. If the merge is successful, it closes the pull request.
    */
   mergePullRequestBySquash(callback?: (err: AWSError, data: CodeCommit.Types.MergePullRequestBySquashOutput) => void): Request<CodeCommit.Types.MergePullRequestBySquashOutput, AWSError>;
   /**
-   * Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the three-way merge strategy.
+   * Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the three-way merge strategy. If the merge is successful, it closes the pull request.
    */
   mergePullRequestByThreeWay(params: CodeCommit.Types.MergePullRequestByThreeWayInput, callback?: (err: AWSError, data: CodeCommit.Types.MergePullRequestByThreeWayOutput) => void): Request<CodeCommit.Types.MergePullRequestByThreeWayOutput, AWSError>;
   /**
-   * Closes a pull request and attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the three-way merge strategy.
+   * Attempts to merge the source commit of a pull request into the specified destination branch for that pull request at the specified commit using the three-way merge strategy. If the merge is successful, it closes the pull request.
    */
   mergePullRequestByThreeWay(callback?: (err: AWSError, data: CodeCommit.Types.MergePullRequestByThreeWayOutput) => void): Request<CodeCommit.Types.MergePullRequestByThreeWayOutput, AWSError>;
   /**
@@ -749,7 +749,7 @@ declare namespace CodeCommit {
      */
     fileModeConflict?: IsFileModeConflict;
     /**
-     * A boolean value (true or false) indicating whether there are conflicts in the object type of a file.
+     * A boolean value (true or false) indicating whether there are conflicts between the branches in the object type of a file, folder, or submodule.
      */
     objectTypeConflict?: IsObjectTypeConflict;
     /**
@@ -760,7 +760,7 @@ declare namespace CodeCommit {
   export type ConflictMetadataList = ConflictMetadata[];
   export interface ConflictResolution {
     /**
-     * Information about how a conflict in a merge will be resolved.
+     * Files that will have content replaced as part of the merge conflict resolution.
      */
     replaceContents?: ReplaceContentEntries;
     /**
@@ -1594,7 +1594,7 @@ declare namespace CodeCommit {
      */
     baseCommitId?: ObjectId;
     /**
-     * A list of metadata for any conflicts found.
+     * A list of metadata for any conflicting files. If the specified merge strategy is FAST_FORWARD_MERGE, this list will always be empty.
      */
     conflictMetadataList: ConflictMetadataList;
     /**
@@ -1962,7 +1962,7 @@ declare namespace CodeCommit {
   }
   export interface MergeHunk {
     /**
-     * A Boolean value indicating whether a combination of hunks contains a conflict. Conflicts occur when the same file or the same lines in a file were modified in both the source and destination of a merge or pull request. Valid values include true, false, and null.
+     * A Boolean value indicating whether a combination of hunks contains a conflict. Conflicts occur when the same file or the same lines in a file were modified in both the source and destination of a merge or pull request. Valid values include true, false, and null. This will be true when the hunk represents a conflict and one or more files contains a line conflict. File mode conflicts in a merge will not set this to be true.
      */
     isConflict?: IsHunkConflict;
     /**
@@ -1980,15 +1980,15 @@ declare namespace CodeCommit {
   }
   export interface MergeHunkDetail {
     /**
-     * The line number where a merge conflict begins.
+     * The start position of the hunk in the merge result.
      */
     startLine?: LineNumber;
     /**
-     * The line number where a merge conflict ends.
+     * The end position of the hunk in the merge result.
      */
     endLine?: LineNumber;
     /**
-     * The base-64 encoded content of the hunk that contains the conflict.
+     * The base-64 encoded content of the hunk merged region that might or might not contain a conflict.
      */
     hunkContent?: HunkContent;
   }
@@ -2165,7 +2165,7 @@ declare namespace CodeCommit {
      */
     repositoryName: RepositoryName;
     /**
-     * To establish the directionality of the comparison, the full commit ID of the 'before' commit.
+     * To establish the directionality of the comparison, the full commit ID of the 'before' commit.  This is required for commenting on any commit unless that commit is the initial commit. 
      */
     beforeCommitId?: CommitId;
     /**
