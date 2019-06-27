@@ -1382,6 +1382,7 @@
     });
     describe('AWS.TokenFileWebIdentityCredentials', function() {
       var origEnv;
+      var os = require('os');
       var fs = require('fs');
       beforeEach(function() {
         origEnv = process.env;
@@ -1394,6 +1395,7 @@
           '[default]\nweb_identity_token_file = cfgTokenFile\nrole_arn = cfgRoleArn\nrole_session_name = cfgSessionName'
         );
         helpers.spyOn(fs, 'readFileSync').andReturn('oidcToken');
+        helpers.spyOn(os, 'homedir').andReturn('/home/user');
       });
       afterEach(function() {
         iniLoader.clearCachedFiles();
